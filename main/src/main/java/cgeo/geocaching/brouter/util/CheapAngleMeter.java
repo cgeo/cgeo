@@ -46,4 +46,31 @@ public final class CheapAngleMeter {
         }
         return offset + sinp * (57.4539 + s2 * (9.57565 + s2 * (4.30904 + s2 * 2.56491)));
     }
+
+    public static double getAngle(int lon1, int lat1, int lon2, int lat2) {
+        final double xdiff = lat2 - lat1;
+        final double ydiff = lon2 - lon1;
+        return Math.toDegrees(Math.atan2(ydiff, xdiff));
+    }
+
+    public static double getDirection(int lon1, int lat1, int lon2, int lat2) {
+        return normalize(getAngle(lon1, lat1, lon2, lat2));
+    }
+
+    public static double normalize(double a) {
+        return a >= 360 ? a - (360 * (int) (a / 360))
+                : a < 0 ? a - (360 * ((int) (a / 360) - 1)) : a;
+    }
+
+    public static double getDifferenceFromDirection(double b1, double b2) {
+        double r = (b2 - b1) % 360.0;
+        if (r < -180.0) {
+            r += 360.0;
+        }
+        if (r >= 180.0) {
+            r -= 360.0;
+        }
+        return Math.abs(r);
+    }
+
 }

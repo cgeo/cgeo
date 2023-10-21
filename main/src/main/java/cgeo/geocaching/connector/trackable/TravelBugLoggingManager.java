@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.gc.GCWebAPI;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
@@ -22,6 +23,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
@@ -51,7 +54,8 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
             hasLoaderError = true;
         } else {
             viewstates = GCLogin.getViewstates(page);
-            possibleLogTypesTrackable = GCParser.parseLogTypesTrackables(page);
+            possibleLogTypesTrackable = Settings.enableFeatureNewGCLogApi() ?
+                    GCParser.parseLogTypesTrackablesNew(page) : GCParser.parseLogTypesTrackables(page);
             hasLoaderError = possibleLogTypesTrackable.isEmpty();
         }
         return possibleLogTypesTrackable;
@@ -65,9 +69,19 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
+        LastTrackableAction.setAction(trackableLog);
+
+        if (Settings.enableFeatureNewGCLogApi()) {
+            final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackableNew(trackableLog, date.getTime(), log);
+            //if result is null then old log flow shall be used. If result is non-null then new log flow was used
+            if (result != null) {
+                return new LogResult(result.left, result.right);
+            }
+        }
+
         try {
-            LastTrackableAction.setAction(trackableLog);
-            final StatusCode status = GCParser.postLogTrackable(
+
+            return GCParser.postLogTrackable(
                     guid,
                     trackableLog.trackCode,
                     viewstates,
@@ -76,8 +90,6 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
                     date.get(Calendar.MONTH) + 1,
                     date.get(Calendar.DATE),
                     log);
-
-            return new LogResult(status, "");
         } catch (final Exception e) {
             Log.e("TrackableLoggingManager.postLog", e);
         }

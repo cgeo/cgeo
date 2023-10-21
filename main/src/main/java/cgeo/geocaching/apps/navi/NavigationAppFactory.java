@@ -108,7 +108,9 @@ public final class NavigationAppFactory {
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
-        MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme);
+        MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme),
+        ORGANICMAP(new OrganicMapsApp(), 29, R.string.pref_navigation_menu_organicmaps),
+        CRUISER(new CruiserNavigationApp(), 28, R.string.pref_navigation_menu_cruiser);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {
             this.app = app;
@@ -200,7 +202,7 @@ public final class NavigationAppFactory {
          * Using an ArrayAdapter with list of NavigationAppsEnum items avoids
          * handling between mapping list positions allows us to do dynamic filtering of the list based on use case.
          */
-        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, items);
+        final ArrayAdapter<NavigationAppsEnum> adapter = new ArrayAdapter<>(activity, R.layout.select_dialog_item, items);
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.cache_menu_navigate);

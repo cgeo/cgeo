@@ -12,6 +12,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
@@ -202,6 +203,7 @@ public class ImageGalleryView extends LinearLayout {
         if (!img.isImageOrUnknownUri()) {
             binding.imageTitle.setText(TextUtils.concat(binding.imageTitle.getText(), " (" + UriUtils.getMimeFileExtension(img.getUri()) + ")"));
             binding.imageImage.setImageResource(UriUtils.getMimeTypeIcon(img.getMimeType()));
+            binding.imageImage.setRotation(0);
             binding.imageImage.setVisibility(View.VISIBLE);
             binding.imageGeoOverlay.setVisibility(View.GONE);
             binding.imageProgressBar.setVisibility(View.GONE);
@@ -215,7 +217,13 @@ public class ImageGalleryView extends LinearLayout {
                     return;
                 }
 
-                binding.imageImage.setImageDrawable(p.first);
+                if (p.first == null) {
+                    binding.imageImage.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
+                    binding.imageImage.setRotation(0);
+                } else {
+                    binding.imageImage.setImageDrawable(p.first);
+                    ImageUtils.getImageOrientation(currentEntry.image.getUri()).applyToView(binding.imageImage);
+                }
                 binding.imageImage.setVisibility(View.VISIBLE);
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
@@ -230,7 +238,7 @@ public class ImageGalleryView extends LinearLayout {
             }, () -> {
                 binding.imageProgressBar.setVisibility(View.VISIBLE);
                 binding.imageImage.setImageResource(R.drawable.mark_transparent);
-                //binding.imageImage.setVisibility(View.GONE);
+                binding.imageImage.setRotation(0);
                 binding.imageGeoOverlay.setVisibility(View.GONE);
             });
         }

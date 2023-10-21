@@ -2,10 +2,12 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.DialogCustomTitleContentBinding;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -20,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -30,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -218,6 +223,21 @@ public class SimpleDialog {
         }
     }
 
+    private void applyCommonsForSelectionDialogs(final AlertDialog.Builder builder) {
+        // By default message is not supported if a listview is shown, therefore we need to build the dialog ourselves and set it as header
+        if (message != null) {
+            final DialogCustomTitleContentBinding header = DialogCustomTitleContentBinding.inflate(LayoutInflater.from(getContext()));
+            if (title != null) {
+                title.applyTo(header.dialogTitle);
+            }
+            message.applyTo(header.dialogMessage);
+
+            builder.setCustomTitle(header.getRoot());
+        } else {
+            applyCommons(builder);
+        }
+    }
+
     /**
      * adjusts common dialog settings for the created dialog (e.g. title and message). Call this method after calling dialog.show()!
      */
@@ -315,7 +335,7 @@ public class SimpleDialog {
     public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
-        applyCommons(builder);
+        applyCommonsForSelectionDialogs(builder);
         builder.setCancelable(true);
 
         final int preselectPos = preselect < 0 || preselect >= items.size() ? -1 : preselect;
@@ -372,90 +392,155 @@ public class SimpleDialog {
      * Use this method to create and display a 'select multi' dialog using the data defined before using this classes' setters
      * <p>
      * A 'select multi' dialog allows the user to select multiple (or no) value out of a given list of choices
-     *
+     * <p>
      * The method will auto-generate an entry "Select All" to select all/none item
      *
-     * @param items            the list of items to select from
-     * @param displayMapper    mapper to get the display value for each of the items
-     * @param preselect        mapper defining for each of the given items whether it is preselected or not
-     * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
+     * @param items             the list of items to select from
+     * @param displayMapper     mapper to get the display value for each of the items
+     * @param preselect         mapper defining for each of the given items whether it is preselected or not
+     * @param lastselect        mapper defining for each of the given items whether it was part of last selection; onNeutralListener gets ignored in this case
+     * @param onSelectListener  provide the select listener called when user made a selection (called when user clicks on positive button)
      */
     @SafeVarargs
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>>... onNeutralListener) {
-
+    public final <T> void selectMultiple(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, Boolean> preselect, @Nullable final Func2<T, Integer, Boolean> lastselect, final boolean nonEmptyResultRequired, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>>... onNeutralListener) {
         final boolean addSelectAll = items.size() > 1;
         final int offset = addSelectAll ? 1 : 0;
 
         final CharSequence[] itemTexts = new CharSequence[addSelectAll ? items.size() + 1 : items.size()];
         final boolean[] itemSelects = new boolean[addSelectAll ? items.size() + 1 : items.size()];
         final Set<T> result = new HashSet<>();
-        if (addSelectAll) {
-            itemTexts[0] = TextParam.text("<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + items.size() + ")>")
-                    .setMarkdown(true).getText(null);
-        }
+        final ArrayList<Integer> filteredPositions = new ArrayList<>(itemTexts.length);
         int idx = offset;
-        boolean allSelected = true;
         for (T item : items) {
             final TextParam tp = displayMapper.call(item, idx);
             itemTexts[idx] = tp == null ? String.valueOf(item) : tp.getText(getContext());
             itemSelects[idx] = preselect != null && TRUE.equals(preselect.call(item, idx - offset));
             if (itemSelects[idx]) {
                 result.add(item);
-            } else {
-                allSelected = false;
             }
             idx++;
         }
-        if (addSelectAll && allSelected) {
+        if (addSelectAll && result.size() == items.size()) {
             itemSelects[0] = true;
         }
 
-        final AlertDialog.Builder builder = Dialogs.newBuilder(getContext(), R.style.cgeo_compactDialogs);
-        applyCommons(builder);
-
-        //final ListView[] listViewHolder = new ListView[]{null};
-        builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
-            final ListView lv = ((AlertDialog) d).getListView();
-
-            if (addSelectAll && i == 0) {
-                //set the AlertDialog's data model and the view model
-                for (int j = 1; j < itemSelects.length; j++) {
-                    itemSelects[j] = c;
-                    lv.setItemChecked(j, c);
+        final Action1<CharSequence> applyFilter = filter -> {
+            filteredPositions.clear();
+            int idx1 = 0;
+            for (CharSequence item : itemTexts) {
+                if ((idx1 == 0 && addSelectAll) || StringUtils.indexOfIgnoreCase(item, filter) != -1) {
+                    filteredPositions.add(idx1);
                 }
-                //set our own "data model"
-                if (c) {
-                    result.addAll(items);
-                } else {
-                    result.clear();
-                }
-            } else if (c) {
-                result.add(items.get(i - offset));
-                if (addSelectAll && result.size() == items.size() && !lv.isItemChecked(0)) {
-                    lv.setItemChecked(0, true);
-                    itemSelects[0] = true;
-                }
-            } else {
-                result.remove(items.get(i - offset));
-                if (addSelectAll && result.size() < items.size() && lv.isItemChecked(0)) {
-                    lv.setItemChecked(0, false);
-                    itemSelects[0] = false;
-                }
+                idx1++;
             }
+            if (addSelectAll) {
+                itemTexts[0] = "<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + (filteredPositions.size() - 1) + ")>";
+            }
+        };
+        applyFilter.call("");
 
-        });
+        final AlertDialog.Builder builder = Dialogs.newBuilder(getContext(), R.style.cgeo_compactDialogs);
+        applyCommonsForSelectionDialogs(builder);
+
+        final View dv = LayoutInflater.from(context).inflate(R.layout.simpledialog_filtered_selection, null);
+        builder.setView(dv);
+        final ListView lv = dv.findViewById(R.id.selection);
 
         builder.setPositiveButton(getPositiveButton(), (d, w) -> onSelectListener.accept(result));
-        builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
-        if (onNeutralListener.length > 0) {
-            builder.setNeutralButton(getNeutralButton(), (d, w) -> onNeutralListener[0].accept(result));
+        if (lastselect != null) {
+            // listener needs to be set to null to prevent closing the dialog
+            builder.setNeutralButton(R.string.cache_list_select_last, null);
+            // actual listener will be set below
+        } else {
+            if (onNeutralListener.length > 0) {
+                builder.setNeutralButton(getNeutralButton(), (d, w) -> onNeutralListener[0].accept(result));
+            }
+            builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
         }
 
         final AlertDialog dialog = builder.create();
         dialog.show();
+
+        final ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(getContext(), 0, 0, filteredPositions) {
+            @NonNull
+            @Override
+            public View getView(final int position, final @Nullable View convertView, final @NonNull ViewGroup parent) {
+                final int originalPos = getItem(position);
+                final View v = convertView != null ? convertView : LayoutInflater.from(new ContextThemeWrapper(getContext(), R.style.checkboxStyleNoParent)).inflate(R.layout.select_dialog_multichoice_material, parent, false);
+                final CheckedTextView tv = v.findViewById(android.R.id.text1);
+                tv.setText(itemTexts[originalPos]);
+                tv.setChecked(itemSelects[originalPos]);
+
+                tv.setOnClickListener(v1 -> {
+                    final CheckedTextView ctv = (CheckedTextView) v1;
+                    final boolean newStateIsChecked = !ctv.isChecked();
+                    if (addSelectAll && originalPos == 0) {
+                        for (int pos : filteredPositions) {
+                            if (pos != 0) {
+                                if (newStateIsChecked) {
+                                    result.add(items.get(pos - offset));
+                                } else {
+                                    result.remove(items.get(pos - offset));
+                                }
+                            }
+                            itemSelects[pos] = newStateIsChecked;
+                        }
+                        notifyDataSetChanged();
+                    } else {
+                        if (newStateIsChecked) {
+                            result.add(items.get(originalPos - offset));
+                        } else {
+                            result.remove(items.get(originalPos - offset));
+                        }
+                    }
+                    ctv.setChecked(newStateIsChecked);
+                    itemSelects[originalPos] = ctv.isChecked();
+                    checkOkButton(dialog, nonEmptyResultRequired, result.size());
+                });
+                return v;
+            }
+        };
+        lv.setAdapter(adapter);
+
+        final EditText filterField = dv.findViewById(R.id.filter);
+        if (itemTexts.length > 10) {
+            filterField.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                applyFilter.call(s.toString());
+                adapter.notifyDataSetChanged();
+            }));
+        } else {
+            filterField.setVisibility(View.GONE);
+        }
+
+        if (lastselect != null) {
+            // set actual listener to neutral button to retrieve last selection (without dismissing dialog)
+            dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v -> {
+                // set given selection
+                result.clear();
+                int i = offset;
+                for (T item : items) {
+                    itemSelects[i] = TRUE.equals(lastselect.call(item, i - offset));
+                    if (itemSelects[i]) {
+                        result.add(item);
+                    }
+                    i++;
+                }
+                adapter.notifyDataSetChanged();
+                checkOkButton(dialog, nonEmptyResultRequired, result.size());
+            });
+        }
+
+        checkOkButton(dialog, nonEmptyResultRequired, result.size());
         adjustCommons(dialog);
+    }
+
+    private void checkOkButton(@NonNull final AlertDialog dialog, final boolean nonEmptyResultRequired, final int resultSize) {
+        final Button okButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        if (okButton != null) {
+            okButton.setEnabled(!nonEmptyResultRequired || resultSize > 0);
+        }
     }
 
     /**
@@ -553,7 +638,7 @@ public class SimpleDialog {
     @NotNull
     private ListAdapter createListAdapterSingle(@NotNull final List<TextParam> items, final SingleChoiceMode showMode, final Func1<Integer, Integer> groupMapper) {
 
-        final LayoutInflater inflater = LayoutInflater.from(getContext());
+        final LayoutInflater inflater = LayoutInflater.from(new ContextThemeWrapper(getContext(), R.style.text_default)); // fixes text size
 
         return new ArrayAdapter<TextParam>(
                 getContext(),

@@ -418,6 +418,11 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public float getRatingStep() {
+        return 1f; // Only integer votes are possible
+    }
+
+    @Override
     public boolean isValidRating(final float rating) {
         // Only integer votes are accepted
         return ((int) rating) == rating;

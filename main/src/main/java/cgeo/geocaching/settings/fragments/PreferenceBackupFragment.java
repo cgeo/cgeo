@@ -15,7 +15,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_backup, rootKey);
+        initPreferences(R.xml.preferences_backup, rootKey);
 
         final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
@@ -25,7 +25,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         });
 
         findPreference(getString(R.string.pref_fakekey_startrestore)).setOnPreferenceClickListener(preference -> {
-            backupUtils.restore(BackupUtils.newestBackupFolder());
+            backupUtils.restore(BackupUtils.newestBackupFolder(false));
             return true;
         });
 
@@ -60,8 +60,8 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
     private void updateSummary() {
         final String textRestore;
-        if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder())) {
-            textRestore = getString(R.string.init_backup_last) + " " + BackupUtils.getNewestBackupDateTime();
+        if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
+            textRestore = getString(R.string.init_backup_last) + " " + BackupUtils.getNewestBackupDateTime(false);
         } else {
             textRestore = getString(R.string.init_backup_last_no);
         }

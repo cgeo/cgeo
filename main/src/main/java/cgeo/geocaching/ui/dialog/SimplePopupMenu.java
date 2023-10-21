@@ -4,22 +4,30 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.IdRes;
 import androidx.annotation.MenuRes;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.PopupMenu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.tuple.Triple;
 
 public class SimplePopupMenu {
     private final Context context;
 
     private final Map<Integer, OnItemClickListener> itemListeners = new HashMap<>();
+    private final List<Triple<Integer, CharSequence, Drawable>> additionalMenuItems = new ArrayList<>();
 
     private Activity activity;
     private Point point;
@@ -63,6 +71,21 @@ public class SimplePopupMenu {
         return this;
     }
 
+    public SimplePopupMenu addMenuItem(final int uniqueId, final CharSequence title) {
+        this.additionalMenuItems.add(Triple.of(uniqueId, title, null));
+        return this;
+    }
+
+    public SimplePopupMenu addMenuItem(final int uniqueId, final CharSequence title, final Drawable icon) {
+        this.additionalMenuItems.add(Triple.of(uniqueId, title, icon));
+        return this;
+    }
+
+    public SimplePopupMenu addMenuItem(final int uniqueId, final CharSequence title, final @DrawableRes int icon) {
+        this.additionalMenuItems.add(Triple.of(uniqueId, title, AppCompatResources.getDrawable(context, icon)));
+        return this;
+    }
+
     public SimplePopupMenu setMenuContent(final @MenuRes int menuRes) {
         this.menuRes = menuRes;
         return this;
@@ -83,6 +106,7 @@ public class SimplePopupMenu {
         return this;
     }
 
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public void show() {
         final ViewGroup root = activity.getWindow().getDecorView().findViewById(android.R.id.content);
 
@@ -110,6 +134,12 @@ public class SimplePopupMenu {
             onCreateListener.onCreatePopupMenu(popupMenu.getMenu());
         }
 
+        for (Triple<Integer, CharSequence, Drawable> item : additionalMenuItems) {
+            final MenuItem menuItem = popupMenu.getMenu().add(Menu.NONE, item.getLeft(), Menu.NONE, item.getMiddle());
+            if (item.getRight() != null) {
+                menuItem.setIcon(item.getRight());
+            }
+        }
 
         popupMenu.setOnDismissListener(menu -> {
             if (view == null) {
@@ -129,6 +159,8 @@ public class SimplePopupMenu {
             }
             return true;
         });
+
+        popupMenu.setForceShowIcon(true);
 
         popupMenu.show();
     }

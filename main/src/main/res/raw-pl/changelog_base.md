@@ -1,25 +1,31 @@
 ### Mapa
-- Nowość: źródło mapy OSM osm.paws.cz
-- Nowość: Włączenie czytania plików GPX z serwisu flopp.net jako śladów
-- Poprawka: Brak symbolu prowadzenia po 'dołącz do trasy'
-- Poprawka: Brakujące obliczenie trasy dla poprzednich punktów
-- Nowość: Dodano wsparcie dla motywu „Voluntary MF5” OpenAndroMaps
+- Zaktualizowano bliblioteki Mapsforge i VTM do v0.20
+- Zaktualizowano renderer Google Maps
+- Nowość: Pokaż ikonę typu skrytki jako znacznik, jeśli ustawiono ikonę skrytki (emoji) lub włączone są duże ikony
+- Nowość: Pokaż ikonę skrytki jako znacznik dla powiązanych punktów nawigacji
+- Nowość: Zezwalaj na skalowanie ikon skrytek/punktów nawigacji (patrz Ustawienia => Wygląd)
+- Nowość: Liniowe laby wykorzystują liczby jako znaczniki punktów nawigacji
+- Nowość: Punkty nawigacji skrytki wyświetlają ikonę typu skrzynki jako znacznik
+- Nowość: Pokaż informacje o wysokości dla bieżącej pozycji na mapie (patrz Ustawienia => Zawartość mapy & Zachowanie)
+- Nowe: Profil nawigowania zdefiniowany przez użytkownika (tylko nawigowanie wewnętrzne)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Szczegóły skrytki
-- Nowość: Nowa bardziej zaawansowana galeria zdjęć
-- Poprawka: Przywróć pozycję na liście punktów nawigacji po aktualizacji lub usunięciu punktu nawigacji
-- Poprawka: Przenieś na dół podczas tworzenia nowego punktu nawigacji
-- Nowość: Rozpoznawanie zmiennych wpisanych w notatkach punktów nawigacji
-- New: Display lab adventure button in mystery cache details if link to lab adventure detected
-- Poprawka: Usunięcie opisu punktu nawigacji nie synchronizowało się z punktami nawigacyjnymi po stronie serwera
+- Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
+- Nowość: Zapewnij minimalny rozmiar obrazu do wyświetlenia
+- Zmiana: Przeprojektowane opcje edycji dla własnych obrazów dziennika
+- Nowość: Integracja z Bettercacher
+- Nowość: Synchronizacja stanu odwiedzin podczas synchronizacji punktów nawigacji z notatką osobistą
+- Nowość: Pobierz datę znalezienia skrytek Opencaching
+- Nowość: Dołącz wszystkie punkty nawigacji do indywidualnej trasy
 
 ### Ogólne
-- Zmiana poziomu API (kompilacja SDK 32)
-- Zaktualizowano niektóre zależne biblioteki
-- Zmiana: Użyj innego mechanizmu Androida do otrzymywania plików do pobrania (aby uzyskać lepszą kompatybilność z Androidem 12+)
-- Nowość: Wstępnie ustawiona nazwa listy z nazwą pliku GPX przy imporcie
-- Poprawka (wersja nocna): Awaria przy imporcie GPX
-- Nowość: Zezwalaj na import plików GPX, które nie zawierają znacznika przestrzeni nazw xmlns
-- Nowość: Dodaj monochromatyczną ikonę launchera dla Androida 13
-- Nowość: Wyświetlaj status członka geocaching.com na ekranie głównym
-- Zmiana: GPX-Import: Użyj nazwy jako geokodu dla konektora 'unknown'
+- Nowość: Zwiększony docelowy SDK do 33
+- Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
+- Zmiana: Domyślnie będą wyświetlane tylko podstawowe ustawienia. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
+- Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
+- Nowość: Filtr, który pozwala na dołączenie innych nazwanych (zapisanych) filtrów
+- Zmiana: Usunięto AndroidBeam, który nie jest już obsługiwany przez platformę Android
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

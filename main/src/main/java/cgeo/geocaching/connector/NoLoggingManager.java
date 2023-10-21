@@ -22,7 +22,7 @@ class NoLoggingManager extends AbstractLoggingManager {
 
     @Override
     @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
         return new LogResult(StatusCode.LOG_POST_ERROR, "", "");
     }
 

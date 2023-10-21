@@ -30,7 +30,7 @@ public class SortedHeapTest {
             Assert.assertTrue("sorting test", val >= lastval);
             lastval = val;
         }
-        Assert.assertTrue("total count test", cnt == 100000);
+        Assert.assertEquals("total count test", 100000, cnt);
 
     }
 
@@ -50,10 +50,10 @@ public class SortedHeapTest {
             }
             cnt++;
             final int val = Integer.parseInt(s);
-            Assert.assertTrue("sequence test", val == expected);
+            Assert.assertEquals("sequence test", val, expected);
             expected++;
         }
-        Assert.assertTrue("total count test", cnt == 100000);
+        Assert.assertEquals("total count test", 100000, cnt);
 
     }
 }

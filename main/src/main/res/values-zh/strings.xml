@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">确定</string>
     <!-- basics -->
     <string name="cache">藏点</string>
     <string name="detail">详细资料</string>
@@ -60,6 +57,8 @@
     <string name="wpnew_pkg">停车场</string>
     <string name="wpnew_waypoint">标记</string>
     <string name="wpnew_original">原始坐标</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">已发现</string>
     <string name="log_dnf">未发现</string>
@@ -98,7 +97,6 @@
     <string name="log_saving">正在发送日志…</string>
     <string name="log_saving_and_uploading">正在发布日志并上传图片…</string>
     <string name="log_posting_log">正在发布日志…</string>
-    <string name="log_posting_twitter">正在发布推文…</string>
     <string name="log_posting_vote">正在发布藏点评分…</string>
     <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">正在发布 %1$s %2$d/%3$d</string>
@@ -126,10 +124,6 @@
     <string name="log_smilies">微笑</string>
     <string name="log_image">图片</string>
     <string name="log_images">图片</string>
-    <string name="log_image_attach">附加图片</string>
-    <string name="log_image_stored">现有</string>
-    <string name="log_image_camera">新建</string>
-    <string name="log_image_delete">删除</string>
     <string name="log_image_caption">说明</string>
     <string name="log_image_description">描述</string>
     <string name="log_image_scale">缩放</string>
@@ -154,6 +148,7 @@
     <string name="log_problem_archive_text">这个寻宝者报告此藏点应该被存档。已经通知了一个社区志愿审核人。</string>
     <string name="log_image_scale_option_noscaling">无缩放</string>
     <string name="log_image_titleprefix">图片</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">翻译为 %s</string>
     <string name="translate_to_english">翻译为英语</string>
@@ -161,7 +156,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
-    <string name="err_server">无法连接 Geocaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_ec">无法连接 Extremcaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_su">无法连接 Geocaching.su。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_gk">无法连接 GeoKrety.org。网站可能已经关闭，或者是你的网络连接有问题。</string>
@@ -184,7 +178,6 @@
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
-    <string name="err_watchlist_still_managing">仍然在管理你的watchlist。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
@@ -234,10 +227,8 @@
     <string name="warn_search_help_user">输入 Geocaching.com 网站的用户名。</string>
     <string name="warn_search_help_tb">输入可追踪物的代码。例如 \"TB29QMZ\"。</string>
     <string name="warn_log_text_fill">请为您的日志添加一些文字。</string>
-    <string name="warn_load_images">c:geo 读取图片失败。</string>
     <string name="warn_pocket_query_select">没有选中口袋查询。</string>
     <string name="warn_no_pocket_query_found">未在线找到口袋查询。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">离线模式</string>
     <string name="warn_notloggedin_short">未登录。实时地图只会显示本地存储的藏点。点击此处获取更多信息。</string>
     <string name="warn_notloggedin_long">尚未登录。实时地图只会显示本地存储的藏点，在线功能将无法正常工作。\n\n要么没有网络连接，服务器出现问题，要么您需要重新配置您的地理藏宝服务。\n\n您想现在配置服务吗？</string>
@@ -293,11 +284,6 @@
     <string name="caches_more_caches_no">没有更多藏点</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下载藏点…\nETA: </string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -388,7 +374,6 @@
     <string name="about_system_write_logcat_type_extended">扩展的</string>
     <string name="about_system_write_logcat_success">日志文件\"%1$s\"已写入文件夹 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">写入日志文件出错</string>
-    <string name="changelog_github">全部标签列表</string>
     <string name="about_nutshellmanual">在线手册</string>
     <string name="about_contributors_carnerodetails">作为 c:geo 的创始人</string>
     <string name="about_contributors_recent">最近贡献者</string>
@@ -417,12 +402,9 @@
     <string name="settings_summary_offlinedata">配置需要保存以供离线使用的数据，存储位置以及 GPX 文件的目录。</string>
     <string name="settings_title_logging">登陆</string>
     <string name="settings_summary_logging">配置您的签名并设置日志选项。</string>
-    <string name="settings_title_map">地图</string>
-    <string name="settings_summary_map">设置地图来源、离线地图设置和地图详细信息。</string>
     <string name="settings_title_map_data">地图数据</string>
     <string name="settings_title_offline_routing">离线路线规划</string>
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
-    <string name="settings_title_map_rotation">地图旋转 (谷歌地图)</string>
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地图行为</string>
@@ -437,10 +419,8 @@
     <string name="settings_title_system">系统</string>
     <string name="settings_summary_system">系统特定设置和调试选项。</string>
     <string name="settings_title_navigation_menu">导航菜单</string>
-    <string name="settings_category_browser">浏览器</string>
     <string name="settings_category_geocaching_platform">地理藏宝平台</string>
     <string name="settings_category_geocaching_additionals">更多服务和插件</string>
-    <string name="settings_category_social">社交媒体</string>
     <string name="settings_category_logging_other">其他记录日志选项</string>
     <string name="settings_goto_url_button">更多 …</string>
     <string name="settings_service_activate">激活</string>
@@ -524,11 +504,11 @@
     <string name="init_summary_log_offline">启用离线日志记录 (记录时将不会显示在线日志，将不会上传日志)</string>
     <string name="init_choose_list">询问列表</string>
     <string name="init_summary_choose_list">询问哪个列表来存储藏点</string>
-    <string name="init_listdisplay">附加列表</string>
-    <string name="init_summary_listdisplay">在藏点列表中显示藏点所属的其他列表</string>
     <string name="init_livelist">显示导航</string>
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
     <string name="init_backup_summary">请注意，此功能可以备份藏点，航点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>
@@ -587,21 +567,6 @@
     <string name="init_maptrail_length">历史轨迹最大长度</string>
     <string name="init_maptrail_length_summary">设置历史轨迹最大长度 (c:geo 每次启动时强制执行)。默认值为 700点 - 根据可用内存进行调整。</string>
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
-    <string name="init_trailcolor">历史轨迹线颜色</string>
-    <string name="init_trailcolor_summary">选择历史轨迹的颜色和不透明度</string>
-    <string name="init_trailwidth">历史轨迹线宽度</string>
-    <string name="init_trailwidth_summary">选择历史轨迹线宽度</string>
-    <string name="init_directioncolor">指引线颜色</string>
-    <string name="init_directioncolor_summary">选择指引线的颜色和不透明度。指引线显示为一条到您选定的导航目标的直线，或者如果已安装 BRouter 应用程序并启用了路线规划，则为指定的导航路径。</string>
-    <string name="init_directionwidth">指引线宽度</string>
-    <string name="init_directionwidth_summary">为指引线选择宽度</string>
-    <string name="init_routecolor">单个路线线条颜色</string>
-    <string name="init_routewidth">单个路线线条宽度</string>
-    <string name="init_routewidth_summary">选择单个路线的宽度</string>
-    <string name="init_trackcolor">GPX 航迹/航线线条颜色</string>
-    <string name="init_trackcolor_summary">选择航迹/航线的颜色和不透明度。航线/航线由一些航点组成，可以通过加载 GPX 航迹/航线文件得到。</string>
-    <string name="init_trackwidth">GPX 航迹/航线的线条宽度</string>
-    <string name="init_trackwidth_summary">选择 GPX 航迹/航线线条的宽度</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
     <string name="init_circlefillcolor">圆环填充颜色</string>
@@ -634,8 +599,6 @@
     <string name="init_dbmove_failed">移动数据库失败</string>
     <string name="init_plain_logs">普通日志</string>
     <string name="init_summary_plain_logs">显示不带颜色的日志条目</string>
-    <string name="init_use_native_ua">安卓浏览器</string>
-    <string name="init_summary_use_native_ua">识别为安卓浏览器。在使用某些网络提供商时解决登录问题。</string>
     <string name="init_maintenance">维护</string>
     <string name="init_maintenance_directories">删除孤立的文件</string>
     <string name="init_location">地理位置</string>
@@ -655,9 +618,6 @@
     <string name="settings_open_geokretymap_website">打开 GeoKretyMap.org 网站</string>
     <string name="settings_settings">设置</string>
     <string name="settings_information">信息</string>
-    <string name="settings_advanced">高级设置</string>
-    <string name="settings_twitter_cache_message">已找到藏点的消息</string>
-    <string name="settings_twitter_trackable_message">已找到可追踪物的消息</string>
     <string name="init_ec_icons">地图图标</string>
     <string name="settings_features">支持的功能</string>
     <string name="feature_personal_notes">个人笔记</string>
@@ -687,7 +647,6 @@
     <string name="auth_unconnected">尚未连接</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -702,7 +661,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <!-- search -->
     <!-- trackable -->
@@ -742,6 +700,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -762,4 +721,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

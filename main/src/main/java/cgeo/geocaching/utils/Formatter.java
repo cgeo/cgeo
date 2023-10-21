@@ -2,15 +2,23 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
 import android.content.Context;
+import android.os.Build;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
+import android.text.style.ImageSpan;
 import static android.text.format.DateUtils.MINUTE_IN_MILLIS;
 
 import androidx.annotation.NonNull;
@@ -22,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -109,6 +118,17 @@ public final class Formatter {
     }
 
     /**
+     * Generate a numeric date string with date format "yyyy-MM"
+     *
+     * @param date milliseconds since the epoch
+     * @return the formatted string
+     */
+    @NonNull
+    public static String formatDateYYYYMM(final long date) {
+        return new SimpleDateFormat("yyyy-MM", Locale.getDefault()).format(date);
+    }
+
+    /**
      * Generate a numeric date string with date format "yyyy-MM-dd HH-mm"
      *
      * @param date milliseconds since the epoch
@@ -189,18 +209,99 @@ public final class Formatter {
     }
 
     @NonNull
-    public static String formatCacheInfoLong(final Geocache cache) {
-        final List<String> infos = new ArrayList<>();
-        if (StringUtils.isNotBlank(cache.getGeocode())) {
-            infos.add(cache.getShortGeocode());
-        }
+    public static SpannableStringBuilder formatCacheInfoLong(final Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList) {
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
 
-        addShortInfos(cache, infos);
-
-        if (cache.isPremiumMembersOnly()) {
-            infos.add(CgeoApplication.getInstance().getString(R.string.cache_premium));
+        final ArrayList<SpannableString> infos = new ArrayList<>();
+        addConfiguredInfoItems(cache, Settings.getInfoItems(R.string.pref_cacheListInfo, 2), storedLists, excludeList, infos);
+        boolean newlineRequested = false;
+        for (SpannableString s : infos) {
+            if (s.length() > 0) {
+                if (StringUtils.equals(s, "\n")) {
+                    if (sb.length() > 0) {
+                        newlineRequested = true;
+                    }
+                } else {
+                    sb.append(sb.length() > 0 ? newlineRequested ? "\n" : SEPARATOR : "").append(s);
+                    newlineRequested = false;
+                }
+            }
         }
-        return StringUtils.join(infos, SEPARATOR);
+        return sb;
+    }
+
+    private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
+        for (int item : configuredItems) {
+            if (item == CacheListInfoItem.VALUES.GCCODE.id) {
+                if (StringUtils.isNotBlank(cache.getGeocode())) {
+                    infos.add(new SpannableString(cache.getShortGeocode()));
+                }
+            } else if (item == CacheListInfoItem.VALUES.DIFFICULTY.id) {
+                if (cache.hasDifficulty()) {
+                    infos.add(new SpannableString("D " + formatDT(cache.getDifficulty())));
+                }
+            } else if (item == CacheListInfoItem.VALUES.TERRAIN.id) {
+                if (cache.hasTerrain()) {
+                    infos.add(new SpannableString("T " + formatDT(cache.getTerrain())));
+                }
+            } else if (item == CacheListInfoItem.VALUES.MEMBERSTATE.id) {
+                if (cache.isPremiumMembersOnly()) {
+                    infos.add(new SpannableString(CgeoApplication.getInstance().getString(R.string.cache_premium)));
+                }
+            } else if (item == CacheListInfoItem.VALUES.SIZE.id) {
+                if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
+                    infos.add(new SpannableString(cache.getSize().getL10n()));
+                }
+            } else if (item == CacheListInfoItem.VALUES.LISTS.id) {
+                formatCacheLists(cache, storedLists, excludeList, infos);
+            } else if (item == CacheListInfoItem.VALUES.EVENTDATE.id) {
+                if (cache.isEventCache()) {
+                    final Date hiddenDate = cache.getHiddenDate();
+                    if (hiddenDate != null) {
+                        infos.add(new SpannableString(formatShortDateIncludingWeekday(hiddenDate.getTime())));
+                    }
+                }
+            } else if (item == CacheListInfoItem.VALUES.HIDDEN_MONTH.id) {
+                final Date hiddenDate = cache.getHiddenDate();
+                if (hiddenDate != null) {
+                    infos.add(new SpannableString(formatDateYYYYMM(hiddenDate.getTime())));
+                }
+            } else if (item == CacheListInfoItem.VALUES.RECENT_LOGS.id) {
+                final List<LogEntry> logs = cache.getLogs();
+                if (logs.size() > 0) {
+                    int count = 0;
+                    // mitigation to make displaying ImageSpans work even in wrapping lines, see #14163
+                    // ImageSpans are separated by a zero-width space character (\u200b)
+                    final SpannableString s = new SpannableString(" \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b");
+                    for (int i = 0; i < Math.min(logs.size(), 8); i++) {
+                        final ImageSpan is;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay(), ImageSpan.ALIGN_CENTER);
+                        } else {
+                            is = new ImageSpan(getContext(), logs.get(i).logType.getLogOverlay());
+                        }
+                        s.setSpan(is, i * 2, i * 2 + 1, 0);
+                        count++;
+                    }
+                    infos.add(new SpannableString(s.subSequence(0, 2 * count)));
+                }
+
+            // newline items should be last in list
+            } else if (item == CacheListInfoItem.VALUES.NEWLINE1.id || item == CacheListInfoItem.VALUES.NEWLINE2.id || item == CacheListInfoItem.VALUES.NEWLINE3.id || item == CacheListInfoItem.VALUES.NEWLINE4.id) {
+                infos.add(new SpannableString("\n"));
+            }
+        }
+    }
+
+    public static void formatCacheLists(final @NonNull Geocache cache, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
+        if (null != storedLists) {
+            final Set<Integer> lists = cache.getLists();
+            for (final AbstractList temp : storedLists) {
+                if (lists.contains(temp.id) && !temp.title.equals(excludeList)) {
+                    infos.add(new SpannableString(temp.title));
+                }
+            }
+        }
     }
 
     @NonNull
@@ -217,7 +318,6 @@ public final class Formatter {
         if (cache.hasTerrain()) {
             infos.add("T " + formatDT(cache.getTerrain()));
         }
-
         // don't show "not chosen" for events and virtuals, that should be the normal case
         if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
             infos.add(cache.getSize().getL10n());

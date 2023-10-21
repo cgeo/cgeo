@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
@@ -85,7 +86,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
      */
     private String getUpdatedPath(final String oldPath) {
         final int lastSegmentStart = oldPath.lastIndexOf('/');
-        return oldPath.substring(0, lastSegmentStart).replace("mapsV4", "mapsV5") + oldPath.substring(lastSegmentStart).toLowerCase();
+        return oldPath.substring(0, lastSegmentStart).replace("mapsV4", "mapsV5") + oldPath.substring(lastSegmentStart).toLowerCase(Locale.US);
     }
 
     @NonNull

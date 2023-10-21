@@ -257,7 +257,7 @@ public class CgeoApplicationTest {
             final SearchResult search = GCParser.searchByOwner(GCConnector.getInstance(), "Lineflyer");
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
-            assertThat(search.getGeocodes()).contains("GC7J99X");
+            assertThat(search.getGeocodes()).contains("GC8TGJ6");
         });
     }
 

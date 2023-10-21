@@ -22,6 +22,7 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
 
     private final String cK;
     private final ApiSupport apiSupport;
+    private final ApiBranch apiBranch;
     private final String licenseString;
     private OkapiClient.InstallationInformation installationInformation;
 
@@ -41,6 +42,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         current
     }
 
+    // See https://opencaching.pl/okapi/introduction.html#oc-branch-differences
+    public enum ApiBranch {
+        ocde,
+        ocpl
+    }
+
     // Levels of OAuth-Authentication we support
     public enum OAuthLevel {
         Level0,
@@ -48,11 +55,12 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
         Level3
     }
 
-    public OCApiConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport, @NonNull final String abbreviation) {
+    public OCApiConnector(@NonNull final String name, @NonNull final String host, final boolean https, final String prefix, final String cK, final String licenseString, final ApiSupport apiSupport, @NonNull final String abbreviation, final ApiBranch apiBranch) {
         super(name, host, https, prefix, abbreviation);
         this.cK = cK;
         this.apiSupport = apiSupport;
         this.licenseString = licenseString;
+        this.apiBranch = apiBranch;
     }
 
     public void addAuthentication(final Parameters params) {
@@ -103,6 +111,10 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
 
     public ApiSupport getApiSupport() {
         return apiSupport;
+    }
+
+    public ApiBranch getApiBranch() {
+        return apiBranch;
     }
 
     @Override

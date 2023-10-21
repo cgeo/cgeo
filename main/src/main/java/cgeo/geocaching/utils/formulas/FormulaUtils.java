@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class FormulaUtils {
 
-    private static final String F_OPS = "+/!^:*x-";
+    private static final String F_OPS = "\\+/!\\^:\\*x-";
     private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()\\[\\]]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
@@ -36,8 +36,8 @@ public class FormulaUtils {
     };
 
 
-    private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9°'\".,\\s()\\[\\]" + F_OPS + "]";
-    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "(([a-zA-Z]{0,3})?" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+";
+    private static final String COORDINATE_SCAN_DIGIT_NONLETTER = "[0-9\\s°'\".,()\\[\\]" + F_OPS + "]";
+    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "([a-zA-Z]{0,3}" + COORDINATE_SCAN_DIGIT_NONLETTER + ")+";
     private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
             "(?<lat>[nNsS](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\s*([a-zA-Z,()-]{2,}\\s+){0,3}(?<lon>[eEwWoO](\\h*[0-9]|\\h+[A-Za-z])" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
@@ -201,7 +201,7 @@ public class FormulaUtils {
         int start = 0;
         while (m.find(start)) {
             final String lat = m.group(1); // group("lat") needs SDk level >= 26
-            final String lon = m.group(6); // group("lon") needs SDk level >= 26
+            final String lon = m.group(5); // group("lon") needs SDk level >= 26
             final String latProcessed = processFoundDegree(lat);
             final String lonProcessed = processFoundDegree(lon);
             final String key = pairToKey(latProcessed, lonProcessed);

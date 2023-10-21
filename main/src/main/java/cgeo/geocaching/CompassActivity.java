@@ -65,7 +65,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private CompassActivityBinding binding;
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> {
-        binding.locationStatus.updatePermissions();
+        binding.hint.locationStatus.updatePermissions();
     });
 
 
@@ -129,7 +129,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         // make sure we can control the TTS volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        binding.locationStatus.setPermissionRequestCallback(() -> {
+        binding.hint.locationStatus.setPermissionRequestCallback(() -> {
             askLocationPermissionAction.launch();
         });
     }
@@ -235,7 +235,16 @@ public class CompassActivity extends AbstractActionBarActivity {
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);
         } else if (id == R.id.menu_hint) {
-            cache.showHintToast(this);
+            if (binding.hint.offlineHintText.getVisibility() == View.VISIBLE) {
+                binding.hint.offlineHintSeparator1.setVisibility(View.GONE);
+                binding.hint.offlineHintSeparator2.setVisibility(View.GONE);
+                binding.hint.offlineHintText.setVisibility(View.GONE);
+            } else {
+                binding.hint.offlineHintSeparator1.setVisibility(View.VISIBLE);
+                binding.hint.offlineHintSeparator2.setVisibility(View.VISIBLE);
+                binding.hint.offlineHintText.setVisibility(View.VISIBLE);
+                binding.hint.offlineHintText.setText(cache.getHint());
+            }
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             return true; // to satisfy static code analysis
         } else {
@@ -301,7 +310,11 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final Consumer<Status> gpsStatusHandler = new Consumer<Status>() {
         @Override
         public void accept(final Status gpsStatus) {
-            binding.locationStatus.updateSatelliteStatus(gpsStatus);
+            if (binding == null || binding.hint.locationStatus == null) {
+                //activity is not initialized yet, ignore update
+                return;
+            }
+            binding.hint.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
 
@@ -309,8 +322,12 @@ public class CompassActivity extends AbstractActionBarActivity {
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
         @Override
         public void updateGeoDirData(@NonNull final GeoData geo, final DirectionData dir) {
+            if (binding == null || binding.hint.locationStatus == null) {
+                //activity is not initialized yet, ignore update
+                return;
+            }
             try {
-                binding.locationStatus.updateGeoData(geo);
+                binding.hint.locationStatus.updateGeoData(geo);
 
                 updateDistanceInfo(geo);
 

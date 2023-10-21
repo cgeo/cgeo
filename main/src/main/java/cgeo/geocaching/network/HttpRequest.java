@@ -1,16 +1,16 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.network.Network.MEDIA_TYPE_APPLICATION_JSON;
 import static cgeo.geocaching.network.Network.MEDIA_TYPE_TEXT_PLAIN;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,9 +30,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
  */
 public class HttpRequest {
 
-    public enum Method { GET, POST, PATCH }
+    public enum Method { GET, POST, PATCH, PUT }
 
-    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    private static final ObjectMapper JSON_MAPPER = JsonUtils.mapper;
+
+    private static final String LOGPRAEFIX = "HTTP-";
 
     private Method method = null;
     private String uriBase;
@@ -85,51 +87,62 @@ public class HttpRequest {
     }
 
     public Single<HttpResponse> request() {
-        return requestInternal(r -> new HttpResponse());
+        return requestInternal(r -> r);
     }
 
     public <T> Single<T> requestJson(final Class<T> clazz) {
         headers("Accept", "application/json, text/javascript, */*; q=0.01");
         return requestInternal(r -> {
+            T result;
+            final String bodyString = r.getBodyString();
             try {
-                final String bodyString = HttpResponse.getBodyString(r);
-                final T result = JSON_MAPPER.readValue(bodyString, clazz);
-                if (result instanceof HttpResponse) {
-                    ((HttpResponse) result).setBodyString(bodyString);
+                result = JSON_MAPPER.readValue(bodyString, clazz);
+            } catch (JsonProcessingException jpe) {
+                final String errorMsg = LOGPRAEFIX + "ERR: could not parse json String to '" + clazz.getName() + "': " + bodyString;
+                if (HttpResponse.class.isAssignableFrom(clazz)) {
+                    Log.w(errorMsg, jpe);
+                    try {
+                        result = clazz.newInstance();
+                        ((HttpResponse) result).setFailed(jpe);
+                    } catch (ReflectiveOperationException roe) {
+                        //should never happen, but in case it does...
+                        throw new IllegalStateException(LOGPRAEFIX + "ERR: Couldn't create class instance: '" + clazz.getName() + "'", roe);
+                    }
+                } else {
+                    throw new IllegalArgumentException(errorMsg, jpe);
                 }
-                return result;
-            } catch (IOException e) {
-                throw new IllegalArgumentException("Could not JSONize to " + clazz, e);
-            }
-        });
-    }
-
-    private <T> Single<T> requestInternal(final Function<Response, T> mapper) {
-        final Request.Builder reqBuilder = prepareRequest();
-
-        //execute, prepare if necessary
-        final Single<Response> response;
-        if (requestPreparer != null) {
-            response = requestPreparer.call(reqBuilder).flatMap(this::executeRequest);
-        } else {
-            response = executeRequest(reqBuilder);
-        }
-
-        //map response
-        return response.map(r -> {
-            final T result = mapper.apply(r);
-            if (result instanceof HttpResponse) {
-                ((HttpResponse) result).setResponse(r);
             }
             return result;
         });
     }
 
+    private <T> Single<T> requestInternal(final Function<HttpResponse, T> mapper) {
+        final Request.Builder reqBuilder = prepareRequest();
+
+        //execute, prepare if necessary
+        final Single<Response> rawResponse;
+        if (requestPreparer != null) {
+            rawResponse = requestPreparer.call(reqBuilder).flatMap(this::executeRequest);
+        } else {
+            rawResponse = executeRequest(reqBuilder);
+        }
+
+        //map response
+        final Single<T> result = rawResponse.map(r -> {
+            final HttpResponse response = new HttpResponse();
+            response.setResponse(r);
+            final T mappedResponse = mapper.apply(response);
+            if (mappedResponse instanceof HttpResponse && response != mappedResponse) {
+                ((HttpResponse) mappedResponse).setFromHttpResponse(response);
+            }
+            return mappedResponse;
+        });
+
+        return result;
+    }
+
     private Single<Response> executeRequest(final Request.Builder reqBuilder) {
         final Request req = reqBuilder.build();
-        if (Log.isDebug()) {
-            Log.d("HTTP-" + req.method() + ": " + req.url());
-        }
         return RxOkHttpUtils.request(Network.OK_HTTP_CLIENT, req);
     }
 
@@ -138,8 +151,12 @@ public class HttpRequest {
         final Request.Builder builder = new Request.Builder();
 
         //Uri
-        final String finalUri = uriBase == null ? uri : uriBase + uri;
-        final HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse(finalUri)).newBuilder();
+        final String finalUri = getFinalUri();
+        final HttpUrl httpUrl = HttpUrl.parse(finalUri);
+        if (httpUrl == null) {
+            throw new IllegalStateException(LOGPRAEFIX + "ERRNon-parseable uri: " + finalUri);
+        }
+        final HttpUrl.Builder urlBuilder = httpUrl.newBuilder();
         if (!uriParams.isEmpty()) {
             urlBuilder.encodedQuery(uriParams.toString());
         }
@@ -155,6 +172,9 @@ public class HttpRequest {
             case PATCH:
                 builder.patch(rbs.get());
                 break;
+            case PUT:
+                builder.put(rbs.get());
+                break;
             case GET:
             default:
                 builder.get();
@@ -169,6 +189,12 @@ public class HttpRequest {
         return builder;
     }
 
+    private String getFinalUri() {
+        return uriBase == null ? uri : uriBase + uri;
+    }
+
+
+    /** sets body to a simple key-value-pair list */
     public HttpRequest body(final Parameters params) {
         this.requestBodySupplier = () -> {
             final FormBody.Builder body = new FormBody.Builder();
@@ -182,33 +208,46 @@ public class HttpRequest {
         return this;
     }
 
-    public HttpRequest body(final Parameters params, final String fileFieldName, final String fileContentType, final File file) {
+    /**
+     * Sets body to Multipart-FORM, including one optional File body part.
+     * Set "file" to null to not pass a file. If "file" is not null, then "fileMediaType" must be set as well
+     */
+    public HttpRequest bodyForm(@Nullable final Parameters formParams, @Nullable final String fileFormFieldName, @Nullable final String fileMediaType, @Nullable final File file) {
         this.requestBodySupplier = () -> {
             final MultipartBody.Builder entity = new MultipartBody.Builder().setType(MultipartBody.FORM);
-            if (params != null) {
-                for (final ImmutablePair<String, String> param : params) {
+            if (formParams != null) {
+                for (final ImmutablePair<String, String> param : formParams) {
                     entity.addFormDataPart(param.left, param.right);
                 }
             }
-            entity.addFormDataPart(fileFieldName, file.getName(),
-                    RequestBody.create(file, MediaType.parse(fileContentType)));
+            if (file != null) {
+                final MediaType mediaType = MediaType.parse(fileMediaType);
+                if (mediaType == null) {
+                    throw new IllegalStateException(LOGPRAEFIX + "ERR: Invalid mediaType for file " + file + ": " + fileMediaType);
+                }
+                entity.addFormDataPart(fileFormFieldName == null ? "file" : fileFormFieldName, file.getName(),
+                        RequestBody.create(file, mediaType));
+            }
             return entity.build();
         };
         return this;
     }
 
+    /** Sets body to plain text */
     public HttpRequest body(final String text) {
         this.requestBodySupplier = () -> RequestBody.create(text, MEDIA_TYPE_TEXT_PLAIN);
         return this;
     }
 
-    public HttpRequest body(final Object jsonObject) {
+    /** Sets body to Json parsed from given object */
+    public HttpRequest bodyJson(final Object jsonObject) {
         try {
             final String jsonString = JSON_MAPPER.writeValueAsString(jsonObject);
+            Log.d("HTTP-JSON: attempt to send: " + jsonString);
             this.requestBodySupplier = () -> RequestBody.create(jsonString, MEDIA_TYPE_APPLICATION_JSON);
             return this;
         } catch (JsonProcessingException jpe) {
-            throw new IllegalArgumentException("Could not parse as Json: " + jsonObject, jpe);
+            throw new IllegalArgumentException(LOGPRAEFIX + "ERR: Could not parse as Json: " + jsonObject, jpe);
         }
     }
 

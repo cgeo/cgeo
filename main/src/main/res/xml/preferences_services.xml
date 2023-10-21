@@ -124,17 +124,14 @@
             app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment"
             app:title="@string/init_sendToCgeo"
             app:iconSpaceReserved="false" />
-    </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="@string/settings_category_social"
-        app:iconSpaceReserved="false" >
-
-        <!-- Twitter -->
+        <!-- BetterCacher.org -->
         <Preference
-            android:key="@string/pref_fakekey_twitter_authorization"
-            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceTwitterFragment"
-            app:title="@string/init_twitter"
+            android:key="@string/pref_fakekey_bettercacher_settings"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceBetterCacherFragment"
+            app:title="@string/init_bettercacher"
             app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
+
 </PreferenceScreen>

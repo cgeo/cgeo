@@ -27,7 +27,7 @@
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.CapabilitiesPreference
             android:title="@string/settings_features"
-            app:connector="LC"
+            app:connector="AL"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

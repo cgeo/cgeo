@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -29,7 +29,7 @@ import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-public abstract class AbstractListActivity extends AbstractActionBarActivity {
+public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     @NonNull private final List<GCList> allPocketQueries = new ArrayList<>();
     @NonNull private final List<GCList> pocketQueries = new ArrayList<>();
@@ -146,7 +146,7 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
 
     public void returnResult(final GCList pocketQuery) {
         setResult(RESULT_OK, new Intent()
-                .setDataAndType(pocketQuery.getUri(), "application/zip"));
+                .setDataAndType(pocketQuery.getUri(), pocketQuery.isBookmarkList() ? "application/xml" : "application/zip"));
         finish();
     }
 

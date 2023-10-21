@@ -1,6 +1,7 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -24,8 +25,10 @@ public abstract class LiveFilterGeocacheListLoader extends AbstractSearchLoader 
     public SearchResult runSearch() {
         final GeocacheFilter useFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
 
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(getFilterType()),
+        final SearchResult result = nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(getFilterType()),
                 connector -> connector.searchByFilter(useFilter));
+        AmendmentUtils.amendCachesForFilter(result, useFilter);
+        return result;
     }
 
 }

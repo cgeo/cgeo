@@ -2,16 +2,22 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.SmileyImage;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.annotation.SuppressLint;
@@ -96,6 +102,17 @@ public final class CacheDetailsCreator {
         final TextView valueView = layout.findViewById(R.id.value);
         parentView.addView(layout);
         return new NameValueLine(layout, valueView);
+    }
+
+    @NonNull
+    private LinearLayout createNameLinearLayoutLine(final int nameId) {
+        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+        parentView.addView(layout);
+        final TextView nameView = layout.findViewById(R.id.name);
+        nameView.setText(res.getString(nameId));
+        layout.findViewById(R.id.value).setVisibility(GONE);
+        layout.findViewById(R.id.addition).setVisibility(GONE);
+        return layout.findViewById(R.id.linearlayout);
     }
 
     public View addStars(final int nameId, final float value) {
@@ -204,6 +221,53 @@ public final class CacheDetailsCreator {
         }
     }
 
+    public void addBetterCacher(final Geocache cache) {
+        if (Settings.isBetterCacherConnectorActive() && Tier.isValid(cache.getTier())) {
+            final Context context = parentView.getContext();
+
+            final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
+            layout.findViewById(R.id.addition).setVisibility(GONE);
+            parentView.addView(layout);
+
+            final TextView nameView = layout.findViewById(R.id.name);
+            nameView.setText(R.string.cache_bettercacher);
+
+            final TextView valueView = layout.findViewById(R.id.value);
+            valueView.setText(cache.getTier().getI18nText());
+
+            final LinearLayout linearLayout = layout.findViewById(R.id.linearlayout);
+
+            final int iconHeight = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
+
+            if (!cache.getCategories().isEmpty()) {
+                final LinearLayout.LayoutParams lpCategory = new LinearLayout.LayoutParams(iconHeight, iconHeight);
+                lpCategory.setMargins(8, 0, 0, 0);
+                for (Category category : cache.getCategories()) {
+                    final ImageView catIcon = new ImageView(context);
+                    catIcon.setLayoutParams(lpCategory);
+                    catIcon.setBackgroundResource(category.getIconId());
+                    catIcon.setOnClickListener(v -> openBetterCacherMenu(v, cache));
+                    linearLayout.addView(catIcon);
+                }
+            }
+            valueView.setOnClickListener(v -> openBetterCacherMenu(v, cache));
+        }
+    }
+
+    private static void openBetterCacherMenu(final View v, final Geocache cache) {
+        final Context context = v.getContext();
+        final Resources res = v.getResources();
+
+        final ContextMenuDialog dialog = new ContextMenuDialog((Activity) context);
+        dialog.setTitle(res.getString(R.string.cache_bettercacher));
+        dialog.addItem(cache.getTier().getI18nText() + ": " + cache.getTier().getI18nDescription(), cache.getTier().getIconId());
+        for (Category category : cache.getCategories()) {
+            dialog.addItem(category.getI18nText() + ": " + category.getI18nDescription(), category.getIconId());
+        }
+        dialog.addItem(R.string.cache_bettercacher_open, R.drawable.bettercacher_icon, e -> ShareUtils.openUrl(context, BetterCacherConnector.INSTANCE.getCacheUrl(cache)));
+        dialog.show();
+    }
+
     public TextView addDistance(final Geocache cache, final TextView cacheDistanceView) {
         Float distance = distanceNonBlocking(cache);
         if (distance == null && cache.getDistance() != null) {
@@ -251,18 +315,18 @@ public final class CacheDetailsCreator {
     }
 
     public void addLatestLogs(final Geocache cache) {
-        final Context context = parentView.getContext();
+        final List<LogEntry> logs = cache.getLogs();
+        if (logs.size() < 1) {
+            return;
+        }
 
-        final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
-        final TextView nameView = layout.findViewById(R.id.name);
-        nameView.setText(res.getString(R.string.cache_latest_logs));
-        final LinearLayout markers = layout.findViewById(R.id.linearlayout);
+        final Context context = parentView.getContext();
+        final LinearLayout markers = createNameLinearLayoutLine(R.string.cache_latest_logs);
 
         final int smileySize = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
         lp.setMargins(0, 0, 5, 0);
 
-        final List<LogEntry> logs = cache.getLogs();
         int i = 0;
         while (i < logs.size() && markers.getChildCount() < 8) {
             final int marker = logs.get(i++).logType.getLogOverlay();
@@ -270,11 +334,6 @@ public final class CacheDetailsCreator {
             logIcon.setLayoutParams(lp);
             logIcon.setBackgroundResource(marker);
             markers.addView(logIcon);
-        }
-        if (markers.getChildCount() > 0) {
-            parentView.addView(layout);
-            layout.findViewById(R.id.value).setVisibility(GONE);
-            layout.findViewById(R.id.addition).setVisibility(GONE);
         }
     }
 }

@@ -64,7 +64,7 @@ class AbstractListAdapter extends RecyclerView.Adapter<AbstractListAdapter.ViewH
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final GCList pocketQuery = activity.getQueries().get(position);
         holder.binding.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
-        holder.binding.cachelist.setVisibility(activity.onlyDownloadable() || pocketQuery.isBookmarkList() ? View.GONE : View.VISIBLE); // Currently, we aren't able to parse bookmark lists without download
+        holder.binding.cachelist.setVisibility(pocketQuery.isBookmarkList() ? View.GONE : View.VISIBLE); // Currently, we aren't able to parse bookmark lists without download
         holder.binding.label.setText(pocketQuery.getName());
         final String info = Formatter.formatPocketQueryInfo(pocketQuery);
         holder.binding.info.setVisibility(StringUtils.isNotBlank(info) ? View.VISIBLE : View.GONE);

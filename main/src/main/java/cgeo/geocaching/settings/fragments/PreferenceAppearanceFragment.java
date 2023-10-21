@@ -1,16 +1,22 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.BuildConfig;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
+import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.MapMarkerUtils;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
+import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_PLACEHOLDER;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
-import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 
 import java.util.Locale;
@@ -21,7 +27,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_appearence, rootKey);
+        initPreferences(R.xml.preferences_appearence, rootKey);
 
         final Preference themePref = findPreference(getString(R.string.pref_theme_setting));
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
@@ -49,22 +55,28 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
             Settings.putUserLanguage(newValue.toString());
             setLanguageSummary(languagePref, newValue.toString());
+            CgeoApplication.getInstance().initApplicationLocale();
             return true;
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
 
-        final MultiSelectListPreference quickLaunchItemsPref = findPreference(getString(R.string.pref_quicklaunchitems));
-        final String[] qlEntries = new String[QuickLaunchItem.values().length];
-        final String[] qlValues = new String[QuickLaunchItem.values().length];
-        int i = 0;
-        for (QuickLaunchItem qlItem : QuickLaunchItem.values()) {
-            qlEntries[i] = getString(qlItem.info);
-            qlValues[i] = qlItem.name();
-            i++;
-        }
-        quickLaunchItemsPref.setEntries(qlEntries);
-        quickLaunchItemsPref.setEntryValues(qlValues);
+        setPrefClick(this, R.string.pref_quicklaunchitems, () -> {
+            QuickLaunchItem.startActivity(getActivity(), R.string.init_quicklaunchitems, R.string.pref_quicklaunchitems);
+        });
 
+        setPrefClick(this, R.string.pref_cacheListInfo, () -> {
+            CacheListInfoItem.startActivity(getActivity(), R.string.init_title_cacheListInfo1, R.string.pref_cacheListInfo, 2);
+        });
+
+        final Preference.OnPreferenceChangeListener pScaling = (preference, newValue) -> {
+            Settings.putIntDirect(preference.getKey(), (int) newValue);
+            MapMarkerUtils.resetAllCaches();
+            return true;
+        };
+        findPreference(getString(R.string.pref_mapCacheScaling)).setOnPreferenceChangeListener(pScaling);
+        findPreference(getString(R.string.pref_mapWpScaling)).setOnPreferenceChangeListener(pScaling);
+
+        configCustomBNitemPreference();
     }
 
     @Override
@@ -78,6 +90,35 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             }
         });
 
+    }
+
+    private void configCustomBNitemPreference() {
+        final ListPreference customBNitem = findPreference(getString(R.string.pref_custombnitem));
+        final String[] cbniEntries = new String[QuickLaunchItem.ITEMS.size() + 3];
+        final String[] cbniValues = new String[QuickLaunchItem.ITEMS.size() + 3];
+        int i = addCustomBNSelectionItem(0, getString(R.string.init_custombnitem_default), String.valueOf(CUSTOMBNITEM_NEARBY), cbniEntries, cbniValues);
+        for (InfoItem item : QuickLaunchItem.ITEMS) {
+            i = addCustomBNSelectionItem(i, getString(item.getTitleResId()), String.valueOf(item.getId()), cbniEntries, cbniValues);
+        }
+        i = addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_none), String.valueOf(CUSTOMBNITEM_NONE), cbniEntries, cbniValues);
+        addCustomBNSelectionItem(i, getString(R.string.init_custombnitem_empty_placeholder), String.valueOf(CUSTOMBNITEM_PLACEHOLDER), cbniEntries, cbniValues);
+        customBNitem.setEntries(cbniEntries);
+        customBNitem.setEntryValues(cbniValues);
+        setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(String.valueOf(Settings.getCustomBNitem()))]);
+        customBNitem.setOnPreferenceChangeListener((preference, newValue) -> {
+            setCustomBNItemSummary(customBNitem, cbniEntries[customBNitem.findIndexOfValue(newValue.toString())]);
+            return true;
+        });
+    }
+
+    private int addCustomBNSelectionItem(final int nextFreeItem, final String entry, final String value, final String[] cbniEntries, final String[] cbniValues) {
+        cbniEntries[nextFreeItem] = entry;
+        cbniValues[nextFreeItem] = value;
+        return nextFreeItem + 1;
+    }
+
+    private void setCustomBNItemSummary(final ListPreference customBNitem, final String newValue) {
+        customBNitem.setSummary(String.format(getString(R.string.init_custombnitem_description), newValue));
     }
 
     private void setLanguageSummary(final ListPreference languagePref, final String newValue) {

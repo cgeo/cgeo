@@ -30,7 +30,7 @@ public class DownloaderTest {
     private static int count(final List<Download> list, final boolean isDir) {
         int i = 0;
         for (Download d : list) {
-            if (d.getIsDir() == isDir) {
+            if (d.isDir() == isDir) {
                 i++;
             }
         }
@@ -55,7 +55,7 @@ public class DownloaderTest {
         assertThat(list.size()).isBetween(53, 57);
 
         // first entry has to be the "up" entry
-        assertThat(list.get(0).getIsDir()).isTrue();
+        assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(5);
@@ -66,9 +66,9 @@ public class DownloaderTest {
         // check one named entry
         final Download d = findByName(list, "Portugal");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 297M
+        final String sizeInfoString = d.getSizeInfo(); // 261M as of 2023-03-15
         final int sizeInfoInt = Integer.parseInt(sizeInfoString.substring(0, sizeInfoString.length() - 1));
-        assertThat(sizeInfoInt).isBetween(275, 350);
+        assertThat(sizeInfoInt).isBetween(250, 350);
     }
 
     @Test
@@ -79,7 +79,7 @@ public void testOpenAndroMaps() {
         assertThat(list.size()).isBetween(55, 65);
 
         // first entry has to be the "up" entry
-        assertThat(list.get(0).getIsDir()).isTrue();
+        assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(1);
@@ -140,13 +140,13 @@ public void testOpenAndroMaps() {
         final List<Download> list = getList(MapDownloaderFreizeitkarteThemes.getInstance(), CgeoApplication.getInstance().getString(R.string.mapserver_freizeitkarte_downloadurl));
 
         // number of themes
-        assertThat(list.size()).isEqualTo(3);
+        assertThat(list.size()).isGreaterThan(2);
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(0);
 
         // number of non-dirs found
-        assertThat(count(list, false)).isEqualTo(3);
+        assertThat(count(list, false)).isGreaterThan(2);
 
         // check one named entry
         final Download d = findByName(list, "Outdoor design contrast v5");
@@ -172,8 +172,8 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "E5_N50.rd5");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 130.5 MB as of 2022-02-13
+        final String sizeInfoString = d.getSizeInfo(); // 154.8 MB as of 2023-06-05
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(120.0F, 150.0F);
+        assertThat(sizeInfoFloat).isBetween(120.0F, 170.0F);
     }
 }

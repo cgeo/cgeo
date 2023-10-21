@@ -11,7 +11,7 @@
     android:headerDividersEnabled="false"
     android:nestedScrollingEnabled="true"
     android:scrollbarStyle="outsideOverlay"
-    android:paddingRight="@dimen/paddingRight_fastscroll"
+    android:paddingHorizontal="@dimen/paddingRight_fastscroll"
     tools:context=".CacheDetailActivity$WaypointsViewCreator">
 
 </ListView>

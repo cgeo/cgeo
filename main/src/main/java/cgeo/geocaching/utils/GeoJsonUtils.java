@@ -1,8 +1,12 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointConverter;
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 
 import android.graphics.Color;
 
@@ -11,7 +15,6 @@ import androidx.annotation.ColorInt;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.cocoahero.android.geojson.Feature;
@@ -27,7 +30,6 @@ import com.cocoahero.android.geojson.MultiPolygon;
 import com.cocoahero.android.geojson.Point;
 import com.cocoahero.android.geojson.Polygon;
 import com.cocoahero.android.geojson.Position;
-import com.cocoahero.android.geojson.Ring;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +37,10 @@ import org.json.JSONObject;
 public class GeoJsonUtils {
 
     private static final boolean UNIT_TEST_MODE = CgeoApplication.getInstance() == null;
+
+    private static final GeopointConverter<Position> GP_CONVERTER = new GeopointConverter<>(
+            gp -> new Position(gp.getLatitude(), gp.getLongitude()),
+            p -> new Geopoint(p.getLatitude(), p.getLongitude()));
 
     //for storage of intermediate values
     private static class GeoJsonProperties {
@@ -47,19 +53,29 @@ public class GeoJsonUtils {
         //no instance
     }
 
-    public static List<GeoObject> parseGeoJson(final InputStream is) throws JSONException, IOException {
-        final List<GeoObject> result = new ArrayList<>();
+    public static GeoItem parseGeoJson(final InputStream is) throws JSONException, IOException {
+        final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(is), null, result);
-        return result;
+        return listToItem(result);
     }
 
-    public static List<GeoObject> parseGeoJson(final String string) throws JSONException {
-        final List<GeoObject> result = new ArrayList<>();
+    public static GeoItem parseGeoJson(final String string) throws JSONException {
+        final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(string), null, result);
-        return result;
+        return listToItem(result);
     }
 
-    private static void parseGeoJson(final GeoJSONObject geoJson, final GeoJsonProperties props, final List<GeoObject> list) throws JSONException {
+    private static GeoItem listToItem(final List<GeoPrimitive> items) {
+        if (items == null) {
+            return GeoGroup.create();
+        }
+        if (items.size() == 1) {
+            return items.get(0);
+        }
+        return GeoGroup.create(items);
+    }
+
+    private static void parseGeoJson(final GeoJSONObject geoJson, final GeoJsonProperties props, final List<GeoPrimitive> list) throws JSONException {
         if (geoJson instanceof Feature) {
             parseGeoJsonFeature((Feature) geoJson, list);
         } else if (geoJson instanceof FeatureCollection) {
@@ -84,62 +100,68 @@ public class GeoJsonUtils {
 
     }
 
-    private static void parseGeoJsonFeature(final Feature feature, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonFeature(final Feature feature, final List<GeoPrimitive> list) throws JSONException {
         final GeoJsonProperties p = parseProperties(feature.getProperties());
         parseGeoJson(feature.getGeometry(), p, list);
     }
 
-    private static void parseGeoJsonFeatureCollection(final FeatureCollection featureCollection, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonFeatureCollection(final FeatureCollection featureCollection, final List<GeoPrimitive> list) throws JSONException {
         for (Feature feature : featureCollection.getFeatures()) {
             parseGeoJsonFeature(feature, list);
         }
     }
 
-    private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPoint(posToGeopoint(point.getPosition()), props.strokeColor, props.strokeWidth));
+    private static void parseGeoJsonPoint(final Point point, final GeoJsonProperties props, final List<GeoPrimitive> list) {
+        list.add(GeoPrimitive.createPoint(GP_CONVERTER.from(point.getPosition()), toGeoStyle(props)));
     }
 
-    private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiPoint(final MultiPoint multiPoint, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (Position p : multiPoint.getPositions()) {
-            list.add(GeoObject.createPoint(posToGeopoint(p), props.strokeColor, props.strokeWidth));
+            list.add(GeoPrimitive.createPoint(GP_CONVERTER.from(p), toGeoStyle(props)));
         }
     }
 
-    private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoObject> list) {
-        list.add(GeoObject.createPolyline(CollectionStream.of(lineString.getPositions()).map(GeoJsonUtils::posToGeopoint).toList(), props.strokeColor, props.strokeWidth));
+    private static void parseGeoJsonLineString(final LineString lineString, final GeoJsonProperties props, final List<GeoPrimitive> list) {
+        list.add(GeoPrimitive.createPolyline(GP_CONVERTER.fromList(lineString.getPositions()), toGeoStyle(props)));
     }
 
-    private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiLineString(final MultiLineString multiLineString, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (LineString ls : multiLineString.getLineStrings()) {
             parseGeoJsonLineString(ls, props, list);
         }
     }
 
-    private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoObject> list) {
-        //as of now, polygon rings are parsed as separate polygons
-        for (Ring r : polygon.getRings()) {
-            list.add(GeoObject.createPolygon(posToGeopoints(r.getPositions()), props.strokeColor, props.strokeWidth, props.fillColor));
+    private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
+        final GeoPrimitive.Builder b = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON).setStyle(toGeoStyle(props));
+        if (polygon.getRings() != null && !polygon.getRings().isEmpty()) {
+            //first ring is polygon
+            b.addPoints(GP_CONVERTER.fromList(polygon.getRings().get(0).getPositions()));
+            //other rings are holes in this polygon
+            for (int i = 1; i < polygon.getRings().size(); i++) {
+                b.addHole(GP_CONVERTER.fromList(polygon.getRings().get(i).getPositions()));
+            }
         }
+        list.add(b.build());
     }
 
-    private static void parseGeoJsonMultiPolygon(final MultiPolygon multiPolygon, final GeoJsonProperties props, final List<GeoObject> list) {
+    private static void parseGeoJsonMultiPolygon(final MultiPolygon multiPolygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
         for (Polygon polygon : multiPolygon.getPolygons()) {
             parseGeoJsonPolygon(polygon, props, list);
         }
     }
 
-    private static void parseGeoJsonGeometryCollection(final GeometryCollection geometryCollection, final GeoJsonProperties props, final List<GeoObject> list) throws JSONException {
+    private static void parseGeoJsonGeometryCollection(final GeometryCollection geometryCollection, final GeoJsonProperties props, final List<GeoPrimitive> list) throws JSONException {
         for (Geometry g : geometryCollection.getGeometries()) {
             parseGeoJson(g, props, list);
         }
     }
 
-    private static Geopoint posToGeopoint(final Position pos) {
-        return new Geopoint(pos.getLatitude(), pos.getLongitude());
-    }
-
-    private static List<Geopoint> posToGeopoints(final Collection<Position> pos) {
-        return CollectionStream.of(pos).map(GeoJsonUtils::posToGeopoint).toList();
+    private static GeoStyle toGeoStyle(final GeoJsonProperties props) {
+        return GeoStyle.builder()
+                .setStrokeColor(props.strokeColor)
+                .setStrokeWidth(props.strokeWidth)
+                .setFillColor(props.fillColor)
+                .build();
     }
 
     private static GeoJsonProperties parseProperties(final JSONObject json) {

@@ -5,7 +5,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -14,6 +13,7 @@ import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.DataStore;
 
 import android.content.res.Resources;
@@ -43,6 +43,7 @@ public abstract class AbstractMap {
     public String targetGeocode = null;
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
+    protected volatile boolean latestRenderer = false; // GM specific
 
     protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;
@@ -103,7 +104,7 @@ public abstract class AbstractMap {
 
     public abstract void onLowMemory();
 
-    public void setTrack(final String key, final IGeoDataProvider track) {
+    public void setTrack(final String key, final IGeoItemSupplier track, final int color, final int width) {
         //
     }
 
@@ -123,7 +124,7 @@ public abstract class AbstractMap {
     public abstract void refreshMapData(boolean circlesSwitched);
 
     public boolean isTargetSet() {
-        return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;
+        return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;
     }
 
     @Nullable
@@ -158,4 +159,7 @@ public abstract class AbstractMap {
 
     public abstract MapOptions getMapOptions();
 
+    public void setLatestRenderer(final boolean latestRenderer) {
+        this.latestRenderer = latestRenderer;
+    }
 }

@@ -18,6 +18,7 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -30,6 +31,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
@@ -48,9 +50,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class MapUtils {
 
@@ -121,7 +126,7 @@ public class MapUtils {
     // check whether routing tile data is available for the whole viewport given
     // and offer to download missing routing data
     public static void checkRoutingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
-        ActivityMixin.showToast(activity, "Checking available routing data...");
+        ActivityMixin.showToast(activity, R.string.downloadmap_checking);
 
         final HashMap<String, String> missingTiles = new HashMap<>();
         final ArrayList<Download> missingDownloads = new ArrayList<>();
@@ -183,12 +188,12 @@ public class MapUtils {
     /**
      * @return the complete popup builder without dismiss listener specified
      */
-    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions) {
+    public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
-                .setPosition(new Point(tapX, tapY - offset), (int) (offset * 1.25))
+                .setPosition(new Point(tapXY.x, tapXY.y - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
@@ -211,12 +216,86 @@ public class MapUtils {
                 })
                 .addItemClickListener(R.id.menu_add_to_route, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false);
-                    updateRouteTrackButtonVisibility.run();
+                    updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
                 })
                 .addItemClickListener(R.id.menu_add_to_route_start, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, true);
+                    updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
+                })
+                .addItemClickListener(R.id.menu_target, item -> {
+                    setTarget.call(longClickGeopoint, null);
                     updateRouteTrackButtonVisibility.run();
                 })
                 .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
     }
+
+    private static void updateRouteTrackButtonVisibility(final Runnable updateRouteTrackButtonVisibility) {
+        if (updateRouteTrackButtonVisibility != null) {
+            updateRouteTrackButtonVisibility.run();
+        }
+    }
+
+    public static boolean isPartOfRoute(final RouteItem routeItem, final IndividualRoute individualRoute) {
+        final RouteSegment[] segments = (individualRoute != null ? individualRoute.getSegments() : null);
+        if (segments == null || segments.length == 0) {
+            return false;
+        }
+        final String routeItemIdentifier = routeItem.getIdentifier();
+        for (RouteSegment segment : segments) {
+            if (StringUtils.equals(routeItemIdentifier, segment.getItem().getIdentifier())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
+    public static SimplePopupMenu createCacheWaypointLongClickPopupMenu(final Activity activity, final RouteItem routeItem, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
+        final RouteSegment[] segments = (individualRoute != null ? individualRoute.getSegments() : null);
+        final boolean routeIsNotEmpty = segments != null && segments.length > 0;
+        final int baseId = (segments != null ? segments.length : 0) + 100;
+
+        boolean isEnd = false;
+        final SimplePopupMenu menu = SimplePopupMenu.of(activity).setPosition(new Point(tapX, tapY), 0);
+        if (routeIsNotEmpty) {
+            final String routeItemIdentifier = routeItem.getIdentifier();
+            final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
+            if (isStart) {
+                addMenuHelper(activity, menu, 0, activity.getString(R.string.context_map_remove_from_route_start), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            }
+            for (int i = 1; i < segments.length - 1; i++) {
+                if (StringUtils.equals(routeItemIdentifier, segments[i].getItem().getIdentifier())) {
+                    addMenuHelper(activity, menu, i, String.format(Locale.getDefault(), activity.getString(R.string.context_map_remove_from_route_pos), i + 1), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+                }
+            }
+            isEnd = (segments.length > 1) && StringUtils.equals(routeItemIdentifier, segments[segments.length - 1].getItem().getIdentifier());
+            if (isEnd) {
+                addMenuHelper(activity, menu, segments.length - 1, activity.getString(R.string.context_map_remove_from_route_end), individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            }
+            if (!isStart) {
+                addMenuHelper(activity, menu, baseId, activity.getString(R.string.context_map_add_to_route_start), routeItem, true, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+            }
+        }
+        if (!isEnd) {
+            addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+        }
+        return menu;
+    }
+
+    private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_delete);
+        menu.addItemClickListener(uniqueId, item -> {
+            individualRoute.removeItem(activity, uniqueId, routeUpdater);
+            updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
+        });
+    }
+
+    private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final RouteItem routeItem, final boolean addToRouteStart, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
+        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_add);
+        menu.addItemClickListener(uniqueId, item -> {
+            individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
+            updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
+        });
+    }
+
 }

@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -39,6 +40,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.core.util.Supplier;
 import androidx.exifinterface.media.ExifInterface;
 
 import java.io.BufferedOutputStream;
@@ -61,6 +63,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.caverock.androidsvg.SVG;
 import com.igreenwood.loupe.Loupe;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -74,13 +77,6 @@ public final class ImageUtils {
 
     private static final String OFFLINE_LOG_IMAGE_PRAEFIX = "cgeo-image-";
 
-    private static final int[] ORIENTATIONS = {
-            ExifInterface.ORIENTATION_ROTATE_90,
-            ExifInterface.ORIENTATION_ROTATE_180,
-            ExifInterface.ORIENTATION_ROTATE_270
-    };
-
-    private static final int[] ROTATION = {90, 180, 270};
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
@@ -172,17 +168,23 @@ public final class ImageUtils {
     }
 
     /**
-     * Scales a bitmap to the device display size.
+     * Scales a bitmap to the device display size. Also ensures a minimum image size
      *
      * @param image The image Bitmap representation to scale
      * @return BitmapDrawable The scaled image
      */
     @NonNull
-    public static BitmapDrawable scaleBitmapToFitDisplay(@NonNull final Bitmap image) {
+    public static BitmapDrawable scaleBitmapToDisplay(@NonNull final Bitmap image) {
+
+        //special case: 1x1 images used for layouting
+        final boolean isOneToOne = image.getHeight() == 1 && image.getWidth() == 1;
+
         final Point displaySize = DisplayUtils.getDisplaySize();
         final int maxWidth = displaySize.x - 25;
         final int maxHeight = displaySize.y - 25;
-        return scaleBitmapTo(image, maxWidth, maxHeight);
+        final int minWidth = isOneToOne ? 1 : ViewUtils.spToPixel(20);
+        final int minHeight = isOneToOne ? 1 : ViewUtils.spToPixel(20);
+        return scaleBitmapTo(image, maxWidth, maxHeight, minWidth, minHeight);
     }
 
     /**
@@ -192,13 +194,13 @@ public final class ImageUtils {
      * @return Bitmap The scaled image or Null if source image can't be read
      */
     @Nullable
-    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData) {
+    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData, final boolean adjustOrientation) {
         final Point displaySize = DisplayUtils.getDisplaySize();
         // Restrict image size to 800 x 800 to prevent OOM on tablets
         final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
         final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
 
-        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight);
+        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight, adjustOrientation);
         if (image == null) {
             return null;
         }
@@ -214,9 +216,14 @@ public final class ImageUtils {
      */
     @NonNull
     private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight) {
+        return scaleBitmapTo(image, maxWidth, maxHeight, -1, -1);
+    }
+
+    @NonNull
+    private static BitmapDrawable scaleBitmapTo(@NonNull final Bitmap image, final int maxWidth, final int maxHeight, final int minWidth, final int minHeight) {
         final Application app = CgeoApplication.getInstance();
         Bitmap result = image;
-        final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight);
+        final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight, minWidth, minHeight);
 
         if (scaledSize.right) {
             result = Bitmap.createScaledBitmap(image, scaledSize.left, scaledSize.middle, true);
@@ -229,17 +236,28 @@ public final class ImageUtils {
     }
 
     public static ImmutableTriple<Integer, Integer, Boolean> calculateScaledImageSizes(final int originalWidth, final int originalHeight, final int maxWidth, final int maxHeight) {
+        return calculateScaledImageSizes(originalWidth, originalHeight, maxWidth, maxHeight, -1, -1);
+    }
+
+    public static ImmutableTriple<Integer, Integer, Boolean> calculateScaledImageSizes(final int originalWidth, final int originalHeight, final int maxWidth, final int maxHeight, final int minWidth, final int minHeight) {
+
         int width = originalWidth;
         int height = originalHeight;
         final int realMaxWidth = maxWidth <= 0 ? width : maxWidth;
         final int realMaxHeight = maxHeight <= 0 ? height : maxHeight;
+        final int realMinWidth = minWidth <= 0 ? width : minWidth;
+        final int realMinHeight = minHeight <= 0 ? height : minHeight;
         final boolean imageTooLarge = width > realMaxWidth || height > realMaxHeight;
+        final boolean imageTooSmall = width < realMinWidth || height < realMinHeight;
 
-        if (!imageTooLarge) {
+        if (!imageTooLarge && !imageTooSmall) {
             return new ImmutableTriple<>(width, height, false);
         }
 
-        final double ratio = Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width);
+        final double ratio = imageTooLarge ?
+                Math.min((double) realMaxHeight / (double) height, (double) realMaxWidth / (double) width) :
+                Math.max((double) realMinHeight / (double) height, (double) realMinWidth / (double) width) ;
+
         width = (int) Math.ceil(width * ratio);
         height = (int) Math.ceil(height * ratio);
         return new ImmutableTriple<>(width, height, true);
@@ -272,7 +290,7 @@ public final class ImageUtils {
     @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
-        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY);
+        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY, true);
         if (image == null) {
             return null;
         }
@@ -299,9 +317,9 @@ public final class ImageUtils {
      * @return Bitmap the image or null if image can't be read
      */
     @Nullable
-    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY) {
+    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY, final boolean adjustOrientation) {
 
-        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStream(imageUri));
+        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStreamIfLocal(imageUri));
         if (sizeOnlyOptions == null) {
             return null;
         }
@@ -313,24 +331,20 @@ public final class ImageUtils {
             sampleOptions.inSampleSize = sampleSize;
         }
 
-        return readDownsampledImageInternal(imageUri, sampleOptions);
+        return readDownsampledImageInternal(imageUri, sampleOptions, adjustOrientation);
     }
 
-    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions) {
-        final int orientation = getImageOrientation(imageUri);
+    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions, final boolean adjustOrientation) {
+        final ViewOrientation orientation = adjustOrientation ? getImageOrientation(imageUri) : null;
 
-        try (InputStream imageStream = openImageStream(imageUri)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
             }
             final Bitmap decodedImage = BitmapFactory.decodeStream(imageStream, null, sampleOptions);
             if (decodedImage != null) {
-                for (int i = 0; i < ORIENTATIONS.length; i++) {
-                    if (orientation == ORIENTATIONS[i]) {
-                        final Matrix matrix = new Matrix();
-                        matrix.postRotate(ROTATION[i]);
-                        return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), matrix, true);
-                    }
+                if (orientation != null && !orientation.isNormal()) {
+                    return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), orientation.createOrientationCalculationMatrix(), true);
                 }
             }
             return decodedImage;
@@ -340,17 +354,19 @@ public final class ImageUtils {
         return null;
     }
 
-    private static int getImageOrientation(@NonNull final Uri imageUri) {
-        int orientation = ExifInterface.ORIENTATION_NORMAL;
-        try (InputStream imageStream = openImageStream(imageUri)) {
+    public static ViewOrientation getImageOrientation(@NonNull final Uri imageUri) {
+        return ViewOrientation.ofExif(getExif(imageUri));
+    }
+
+    public static ExifInterface getExif(@NonNull final Uri imageUri) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream != null) {
-                final ExifInterface exif = new ExifInterface(imageStream);
-                orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                return new ExifInterface(imageStream);
             }
         } catch (final IOException e) {
             Log.e("ImageUtils.getImageOrientation(ExifIf)", e);
         }
-        return orientation;
+        return null;
     }
 
     /**
@@ -378,12 +394,17 @@ public final class ImageUtils {
         if (imageData == null) {
             return null;
         }
-        try (InputStream imageStream = openImageStream(imageData)) {
+        try (InputStream imageStream = openImageStreamIfLocal(imageData)) {
             if (imageStream == null) {
                 return null;
             }
-            final Bitmap bm = BitmapFactory.decodeStream(imageStream);
-            return bm == null ? null : new ImmutablePair<>(bm.getWidth(), bm.getHeight());
+            final BitmapFactory.Options bounds = new BitmapFactory.Options();
+            bounds.inJustDecodeBounds = true;
+            BitmapFactory.decodeStream(imageStream, null, bounds);
+            if (bounds.outWidth == -1 || bounds.outHeight < 0) {
+                return null;
+            }
+            return new ImmutablePair<>(bounds.outWidth, bounds.outHeight);
         } catch (IOException e) {
             Log.e("ImageUtils.getImageSize", e);
         }
@@ -469,7 +490,7 @@ public final class ImageUtils {
         forEachImageUrlInHtml(source -> {
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
-                            .setUrl(source)
+                            .setUrl(source, "https")
                             .setTitle(StringUtils.defaultString(geocode))
                             .setCategory(Image.ImageCategory.LISTING)
                             .build());
@@ -647,8 +668,11 @@ public final class ImageUtils {
     }
 
     @Nullable
-    private static InputStream openImageStream(final Uri imageUri) {
-        return ContentStorage.get().openForRead(imageUri);
+    private static InputStream openImageStreamIfLocal(final Uri imageUri) {
+        if (UriUtils.isFileUri(imageUri) || UriUtils.isContentUri(imageUri)) {
+            return ContentStorage.get().openForRead(imageUri, true);
+        }
+        return null;
     }
 
     public static boolean deleteImage(final Uri uri) {
@@ -711,6 +735,12 @@ public final class ImageUtils {
         final Uri targetUri = ContentStorage.get().copy(imageUri, folder, FileNameCreator.forName(imageFileName), false);
 
         return new Image.Builder().setUrl(targetUri).build();
+    }
+
+    public static Uri createLocalLogImageUri(final String geocode) {
+        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
+        final Folder folder = Folder.fromFile(getFileForOfflineLogImage(imageFileName).getParentFile());
+        return ContentStorage.get().create(folder, imageFileName);
     }
 
     public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
@@ -898,6 +928,83 @@ public final class ImageUtils {
             });
         }
         //Workaround END
+    }
+
+    @Nullable
+    public static Bitmap rotateBitmap(@Nullable final Bitmap bm, final float angleInDegree) {
+        if (bm == null || angleInDegree == 0f || angleInDegree % 360 == 0f) {
+            return bm;
+        }
+        final int h = bm.getHeight();
+        final int w = bm.getWidth();
+        final Matrix matrix = new Matrix();
+        matrix.postRotate(angleInDegree); //, w / 2f, h / 2f);
+        return Bitmap.createBitmap(bm, 0, 0, w, h, matrix, true);
+    }
+
+    public static Intent createExternalEditImageIntent(final Context ctx, final Uri imageUri) {
+        final Intent intent = new Intent(Intent.ACTION_EDIT);
+        //final Uri uri = ContentStorage.get().copy(image.uri, PersistableFolder.GPX.getFolder(), FileNameCreator.forName("test.jpg"), false);
+        final Uri uri = UriUtils.toContentUri(ctx, imageUri);
+        intent.setDataAndType(uri, "image/*");
+        intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        return Intent.createChooser(intent, null);
+    }
+
+    /** tries to read an image from a stream supplier. Returns null if this fails. Supports normal Android bitmaps and SVG. */
+    @Nullable
+    public static Bitmap readImageFromStream(@NonNull final Supplier<InputStream> streamSupplier, @Nullable final BitmapFactory.Options bfOptions, @Nullable final Object logId) {
+        Bitmap image = null;
+        //try reading as normal bitmap first
+        try (InputStream is = streamSupplier.get()) {
+            if (is == null) {
+                Log.w("Can't open '" + logId + "' for image reading, maybe is doesn't exist?");
+                return null;
+            }
+            image = BitmapFactory.decodeStream(is, null, bfOptions);
+        } catch (Exception ex) {
+            Log.w("Error processing '" + logId + "'", ex);
+        }
+
+        if (image == null) {
+            //try to read as SVG
+            try (InputStream is = streamSupplier.get()) {
+                if (is == null) {
+                    Log.w("Can't open '" + logId + "' for image reading, maybe is doesn't exist?");
+                    return null;
+                }
+                image = ImageUtils.readSVGImageFromStream(is, logId);
+            } catch (Exception ex) {
+                Log.w("Error processing '" + logId + "'", ex);
+            }
+        }
+        return image;
+    }
+
+    /** Reads an Inputstream as SVG image. Stream is NOT CLOSED! If an error happens on read, null is returned */
+    @Nullable
+    private static Bitmap readSVGImageFromStream(@NonNull final InputStream is, @Nullable final Object logId) {
+        //For documentation of SVG lib see https://bigbadaboom.github.io/androidsvg/
+        try {
+            final SVG svg = SVG.getFromInputStream(is);
+
+            // Create a canvas to draw onto
+            final int width = svg.getDocumentWidth() == -1 ? 200 : (int) Math.ceil(svg.getDocumentWidth());
+            final int height = svg.getDocumentHeight() == -1 ? 200 : (int) Math.ceil(svg.getDocumentHeight());
+            final Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            final Canvas bmcanvas = new Canvas(image);
+
+            // Clear background to white
+            bmcanvas.drawRGB(255, 255, 255);
+
+            // Render our document onto our canvas
+            svg.renderToCanvas(bmcanvas);
+            return image;
+        } catch (Exception es) {
+            Log.w("Problem parsing '" + logId + "' as SVG", es);
+        }
+        return null;
     }
 
 }

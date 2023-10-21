@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Láda</string>
     <string name="detail">Adatok</string>
@@ -87,6 +84,8 @@
     <string name="wpnew_trailhead">Keresztül</string>
     <string name="wpnew_waypoint">Kijelölő</string>
     <string name="wpnew_original">Eredeti</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Megtaláltam</string>
     <string name="log_dnf">Nem találtam meg</string>
@@ -125,7 +124,6 @@
     <string name="log_saving">Log mentése…</string>
     <string name="log_saving_and_uploading">Log küldése és képek feltöltése…</string>
     <string name="log_posting_log">Log küldése…</string>
-    <string name="log_posting_twitter">Twittelés…</string>
     <string name="log_posting_vote">Ládaszavazat küldése…</string>
     <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
@@ -153,10 +151,6 @@
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
     <string name="log_images">Képek</string>
-    <string name="log_image_attach">Kép csatolása</string>
-    <string name="log_image_stored">Meglévő</string>
-    <string name="log_image_camera">Új</string>
-    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
@@ -185,6 +179,7 @@
     <string name="log_image_info_notscaled">nem átméretezett</string>
     <string name="log_image_titleprefix">Kép</string>
     <string name="datetime_nodateset_display">Nincs dátum beállítva</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">Fordítás</string>
     <string name="translate_to_sys_lang">Fordítás erre: %s</string>
@@ -193,7 +188,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
-    <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_lc">Nem sikerült kapcsolatba lépni a labs.geocaching.com oldallal. A webhely leállt vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_su">A geocaching.su. nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
@@ -217,7 +211,6 @@
     <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
     <string name="err_detail_still_working">Egy másik feladat még folyamatban van.</string>
     <string name="err_detail_premium_log_found">Ez a láda csak a geocaching.com prémium tagjai számára érhető el. Ezért a láda információi nem jeleníthetők meg.\n\nHa azonban már megtaláltad ezt a ládát, itt logolhatod.</string>
-    <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
     <string name="err_watchlist_failed">A figyelőlista módosítása sikertelen.</string>
     <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
     <string name="err_auth_initialize">A c:geo nem tudta elindítani a hitelesítést.</string>
@@ -266,10 +259,8 @@
     <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalról!</string>
     <string name="warn_search_help_tb">Írd be az utazó kódját! Például \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez!</string>
-    <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
     <string name="warn_pocket_query_select">Nincs pocket lekérdezés kiválasztva.</string>
     <string name="warn_no_pocket_query_found">Online pocket lekérdezés nem található.</string>
-    <string name="warn_invalid_character">A karakter BETŰ vagy SZÁMJEGY lehet</string>
     <string name="warn_notloggedin_title">Offline mód</string>
     <string name="warn_notloggedin_long">Nem vagy (még) bejelentkezve. Az Élő térképen csak a letöltött ládák láthatóak és nem működnek az online funkciók.\n\nNincs hálózati kapcsolat, vagy probléma van a szerverrel, vagy be kell állítanod (újra) a szolgáltatásokat.\n\nBeállítod most a szolgáltatásokat?</string>
     <string name="err_read_pocket_query_list">Hiba a pocket lekérdezések listájának olvasásakor.</string>
@@ -320,12 +311,6 @@
     <string name="caches_more_caches_no">Ez az összes. Nincs több láda.</string>
     <string name="caches_more_caches_loading">Ládák betöltése…</string>
     <string name="caches_more_caches_currently">jelenleg</string>
-    <string name="caches_downloading">Ládák letöltése…\n</string>
-    <string name="caches_eta_ltm">Kevesebb, mint egy perc</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d perc</item>
-        <item quantity="other">%d perc</item>
-    </plurals>
     <string name="caches_history">Előzmények</string>
     <string name="caches_on_map">Mutasd meg térképen</string>
     <string name="caches_sort">Rendezés</string>
@@ -453,12 +438,10 @@
     <string name="about_license">Licenc</string>
     <string name="about_apache_license"><a href="">Apache licenc, 2.0 verzió</a></string>
     <string name="about_help">Segítség</string>
-    <string name="about_system_collecting">A rendszeradatok összegyűjtése megtörtént, kérjük, várjon…</string>
     <string name="about_system_include">Kérlek, csatold az alábbi rendszeradatokat, ha hibajelentést küldesz, vagy további információt kérsz a c:geo-ról:</string>
     <string name="about_system_info_send_button">Küldés e-mailben…</string>
     <string name="about_system_info">c:geo rendszeradatok</string>
     <string name="about_system_info_send_chooser">Rendszeradatok küldése</string>
-    <string name="changelog_github">Összes változtatás listázása</string>
     <string name="about_nutshellmanual">Online kézikönyv</string>
     <string name="about_contributors_carnerodetails">mint a c:geo szülőatyja</string>
     <string name="about_contributors_recent">2018/2019-es közreműködők</string>
@@ -486,8 +469,6 @@
     <string name="settings_title_offlinedata">Offline adatok</string>
     <string name="settings_title_logging">Logolás</string>
     <string name="settings_summary_logging">Aláírásod és egyéb logolási opciók beállítása</string>
-    <string name="settings_title_map">Térkép</string>
-    <string name="settings_summary_map">Térképválasztás, offline térképek opcióinak beállítása</string>
     <string name="settings_title_map_data">Térképek beállításai</string>
     <string name="settings_title_waypoints">Útpontok</string>
     <string name="settings_title_map_content">Térképek részletessége</string>
@@ -498,10 +479,8 @@
     <string name="settings_title_basicmembers">Normál tagok beállításai</string>
     <string name="settings_title_system">Rendszer</string>
     <string name="settings_title_navigation_menu">Navigációs menü</string>
-    <string name="settings_category_browser">Böngésző</string>
     <string name="settings_category_geocaching_platform">Geocaching platformok</string>
     <string name="settings_category_geocaching_additionals">További szolgáltatások és addonok</string>
-    <string name="settings_category_social">Közösségi média</string>
     <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
     <string name="settings_goto_url_button">Tovább…</string>
     <string name="settings_service_activate">Aktiválás</string>
@@ -576,7 +555,9 @@
     <string name="init_choose_list">Listaválasztás</string>
     <string name="init_summary_choose_list">Listaválasztás ládamentéséhez</string>
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
@@ -626,8 +607,6 @@
     <string name="init_dbmove_failed">Az adatbázis mozgatása sikertelen</string>
     <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
-    <string name="init_use_native_ua">Azonosítás Android böngészőként.</string>
-    <string name="init_summary_use_native_ua">Azonosítás Android böngészőként. Ez megoldja a bejelentkezési problémákat bizonyos szolgáltatóknál.</string>
     <string name="init_maintenance">Karbantartás</string>
     <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
     <string name="init_location">Helymeghatározás</string>
@@ -646,9 +625,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
     <string name="settings_settings">Beállítások</string>
     <string name="settings_information">További információk</string>
-    <string name="settings_advanced">Haladó beállítások</string>
-    <string name="settings_twitter_cache_message">Twitter üzenet megtalált ládához</string>
-    <string name="settings_twitter_trackable_message">Twitter üzenet megtalált utazóhoz</string>
     <string name="init_ec_icons">Térkép ikonok</string>
     <string name="settings_ec_icons_other">Saját stílus</string>
     <string name="settings_ec_icons_oc">OC stílusú ládajelölők</string>
@@ -701,8 +677,6 @@
     <string name="auth_credentials_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">Twitter: A c:geo engedélyt kapott bejegyzések küldésére.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <!-- auth geokrety -->
@@ -744,16 +718,13 @@
     <string name="cache_offline_about_time_year">több mint egy évvel ezelőtt</string>
     <string name="cache_premium">Prémium</string>
     <string name="cache_inventory">Utazók</string>
-    <string name="cache_log_images_title">Logfotók</string>
     <string name="cache_log_image_default_title">Fotó</string>
     <string name="cache_personal_note">Személyes megjegyzés</string>
     <string name="cache_personal_note_edit">Szerkesztés</string>
     <string name="cache_personal_note_limit">Személyes megjegyzés max. hossza</string>
     <string name="cache_personal_note_upload">Feltöltés</string>
-    <string name="cache_personal_note_uploading">Személyes megjegyzés feltöltése</string>
     <string name="cache_personal_note_upload_done">Személyes megjegyzés feltöltve</string>
     <string name="cache_personal_note_upload_error">A személyes megjegyzés feltöltése sikertelen</string>
-    <string name="cache_personal_note_upload_cancelled">Személyes megjegyzés feltöltése megszakítva</string>
     <string name="cache_description">Leírás</string>
     <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
     <string name="cache_area_description">Terület leírása</string>
@@ -788,14 +759,6 @@
     <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
     <string name="cache_dialog_refresh_title">Frissítés</string>
     <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
-    <string name="cache_dialog_watchlist_add_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_add_message">Láda hozzáadása a figyelőlistádhoz…</string>
-    <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_remove_message">Láda törlése a figyelőlistádról…</string>
-    <string name="cache_dialog_favorite_add_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_add_message">Láda hozzáadása a kedvencekhez…</string>
-    <string name="cache_dialog_favorite_remove_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -847,7 +810,6 @@
     <string name="cache_location">Helyszín</string>
     <string name="cache_coordinates">Koordináták</string>
     <string name="cache_coordinates_original">Eredeti koordináták</string>
-    <string name="cache_spoiler_images_title">Spoiler képek</string>
     <string name="cache_log_types">Bejegyzéstípusok</string>
     <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
     <string name="cache_clear_history">Előzmények törlése</string>
@@ -908,8 +870,6 @@
     <string name="waypoint_save_and_modify_on_website">A láda új koordinátái a c:geo-ban és a weboldalon</string>
     <string name="waypoint_reset_cache_coords">Ládakoordináták visszaállítása</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">A ládakoordináták visszaállítása megtörtént a weboldalon.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ládakoordináták visszaállítása a weboldalon…</string>
-    <string name="waypoint_reset">Visszaállítás</string>
     <string name="waypoint_localy_reset_cache_coords">Visszaállítás a c:geo-ban</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Visszaállítás a c:geo-ban és a weboldalon</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">A weboldal nem támogatja a ládakoordináták módosítását.</string>
@@ -926,8 +886,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
     <!-- map -->
     <string name="map_map">Térkép</string>
     <string name="map_live">Élő térkép</string>
@@ -1278,7 +1236,6 @@
     <string name="website_title">Weboldal</string>
     <string name="facebook_link"><a href="">c:geo honlap</a></string>
     <string name="market_link"><a href="">c:geo a Google Play-en</a></string>
-    <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
     <string name="faq_title">GYIK</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1361,9 +1318,6 @@
     <string name="init_confirm_debug">A c:geo hibakeresési módban fut!</string>
     <string name="list_confirm_debug_message">A hibakeresési mód stabilitási problémákat okoz. Kikapcsolod a hibakeresési módot?</string>
     <!-- permission handling -->
-    <string name="close_app">App bezárása</string>
-    <string name="ask_again">Újrakérdezés</string>
-    <string name="storage_permission_request_explanation">A c:geo adatokat tárol készülékeden vagy SD kártyádon, ha ládákat mentesz el offline használatra. Továbbá használja készüléked tárhelyét fájlok importálásakor/exportálásakor, valamint offline térképek olvasásakor. Ez az engedély nélkül nem lehetséges.</string>
     <string name="storage_permission_needed">Ezt a műveletet nem lehet végre hajtani tárhely engedély nélkül.</string>
     <!-- colors -->
     <!-- number input -->
@@ -1372,6 +1326,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1396,4 +1351,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

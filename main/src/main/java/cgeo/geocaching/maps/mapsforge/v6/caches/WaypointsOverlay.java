@@ -57,11 +57,15 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             if (waypoint == null || waypoint.getCoords() == null || !waypoint.getCoords().isValid()) {
                 continue;
             }
-            if (removeCodes.contains(waypoint.getGpxId())) {
-                removeCodes.remove(waypoint.getGpxId());
+            final Geocache cache = waypoint.getParentGeocache();
+            if (waypoint.getNote().isEmpty() && cache != null && cache.getCoords() != null && cache.getCoords().isValid() && waypoint.getCoords().equals(cache.getCoords())) {
+                continue;
+            }
+            if (removeCodes.contains(waypoint.getFullGpxId())) {
+                removeCodes.remove(waypoint.getFullGpxId());
             } else {
                 if (addItem(waypoint, forceCompactIconMode)) {
-                    newCodes.add(waypoint.getGpxId());
+                    newCodes.add(waypoint.getFullGpxId());
                 }
             }
         }
@@ -80,7 +84,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
         for (final Geocache cache : baseCaches) {
             final List<Waypoint> wl = cache.getWaypoints();
             for (final Waypoint w : wl) {
-                invalidWpCodes.add(w.getGpxId());
+                invalidWpCodes.add(w.getFullGpxId());
             }
         }
         invalidate(invalidWpCodes);

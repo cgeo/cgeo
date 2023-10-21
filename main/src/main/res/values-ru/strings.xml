@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">ОК</string>
     <!-- basics -->
     <string name="cache">Тайник</string>
     <string name="detail">Детали</string>
@@ -89,6 +86,8 @@
     <string name="wpnew_waypoint">Точка</string>
     <string name="wpnew_original">Оригинал</string>
     <string name="wpnew_generated">Создано</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Найден</string>
     <string name="log_dnf">Не найден</string>
@@ -123,11 +122,10 @@
     <string name="log_tb_note">Запись</string>
     <string name="log_tb_discovered">Обнаружен</string>
     <string name="log_tb_archived">Архивирован</string>
-    <string name="log_save">Сохранить оффлайн</string>
+    <string name="log_save">Сохранить офлайн</string>
     <string name="log_saving">Отправка записи…</string>
     <string name="log_saving_and_uploading">Отправка записи и загрузка фотографий…</string>
     <string name="log_posting_log">Отправка записи…</string>
-    <string name="log_posting_twitter">Отправка твита…</string>
     <string name="log_posting_vote">Отправка оценки тайника…</string>
     <string name="log_posting_image">Отправка фотографий…</string>
     <string name="log_posting_generic_trackable">Отправка %1$s %2$d/%3$d</string>
@@ -156,10 +154,6 @@
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Добавить фото</string>
     <string name="log_images">Фотографии</string>
-    <string name="log_image_attach">Прикрепить изображение</string>
-    <string name="log_image_stored">Выбрать</string>
-    <string name="log_image_camera">Камера</string>
-    <string name="log_image_delete">Удалить</string>
     <string name="log_image_caption">Заголовок</string>
     <string name="log_image_description">Описание</string>
     <string name="log_image_scale">Масштабирование</string>
@@ -200,7 +194,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
     <string name="err_captcha">Сервис требует капчу. Пожалуйста, откройте в браузере сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
-    <string name="err_server">Не удалось соединиться с Geocaching.co , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
@@ -225,7 +218,6 @@
     <string name="err_detail_no_spoiler">c:geo не нашёл картинок-подсказок для этого тайника.</string>
     <string name="err_detail_still_working">Выполняется другое задание.</string>
     <string name="err_detail_premium_log_found">Этот тайник доступен только для премиум-пользователей geocaching.com. Поэтому информация о тайнике не отображается.\n\nОднако, если вы уже нашли этот тайник, вы можете отметить его здесь.</string>
-    <string name="err_watchlist_still_managing">Список Отслеживаемых еще обновляется.</string>
     <string name="err_watchlist_failed">Изменить ваш список отслеживаемых не удалось.</string>
     <string name="err_application_no">c:geo не может найти подходящее приложение.</string>
     <string name="err_auth_initialize">Не удалось начать авторизацию.</string>
@@ -239,6 +231,7 @@
     <string name="err_favorite_failed">Изменение рекомендации не удалось.</string>
     <string name="err_select_logimage_failed">Выбор изображения для записи не удался.</string>
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
+    <string name="err_acquire_image_unsupported_format">Формат изображения должен быть JPEG/JPG, PNG или GIF</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
@@ -275,11 +268,9 @@
     <string name="warn_search_help_user">Введите имя пользователя Geocaching.com.</string>
     <string name="warn_search_help_tb">Введите код трекабла. Например, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Пожалуйста, введите текст записи.</string>
-    <string name="warn_load_images">c:geo не удалось загрузить изображения.</string>
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
-    <string name="warn_invalid_character">Символ должен быть буквой или цифрой</string>
-    <string name="warn_notloggedin_title">Оффлайн-режим</string>
+    <string name="warn_notloggedin_title">Офлайн-режим</string>
     <string name="warn_notloggedin_short">Вы не вошли. Карта будет показывать только сохраненные тайники. Нажмите здесь для детальной информации.</string>
     <string name="warn_notloggedin_long">Пользователь пока не авторизован. Карта покажет только тайники, сохраненные локально и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокешинга.\n\nХотите настроить сервисы сейчас?</string>
     <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
@@ -289,7 +280,7 @@
     <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
     <string name="info_log_post_failed_reason">Причина: %s</string>
     <string name="info_log_post_retry">Повторить</string>
-    <string name="info_log_post_save">Сохранить оффлайн</string>
+    <string name="info_log_post_save">Сохранить офлайн</string>
     <string name="info_log_cleared">Запись очищена.</string>
     <string name="info_waypoint_coordinates_cleared">Координаты очищены.</string>
     <string name="info_log_type_changed">Тип записи был изменен!</string>
@@ -360,22 +351,15 @@
         <item quantity="other">Загрузить следующие %1$d тайников</item>
     </plurals>
     <string name="caches_more_caches_remaining">Загрузить оставшиеся тайники (%1$d / %2$d)</string>
-    <string name="caches_downloading">Загружаю тайники…\nETA: </string>
-    <string name="caches_eta_ltm">меньше минуты</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d минута</item>
-        <item quantity="few">%d минуты</item>
-        <item quantity="many">%d минут</item>
-        <item quantity="other">%d минут</item>
-    </plurals>
-    <string name="caches_store_offline">Сохранить оффлайн</string>
-    <string name="caches_store_offline_map">Сохранить тайники оффлайн</string>
+    <string name="caches_store_offline">Сохранить офлайн</string>
+    <string name="caches_store_offline_map">Сохранить тайники офлайн</string>
     <string name="caches_store_selected">Сохранить выбранное</string>
     <string name="caches_store_background_title">Загрузить тайники</string>
     <string name="caches_store_background_already_stored">Некоторые тайники уже сохранены. Что с ними должно случиться?</string>
     <string name="caches_store_background_option_nothing">Ничего не делать</string>
     <string name="caches_store_background_option_add_to_list">Добавить в список</string>
-    <string name="caches_store_background_option_refresh">Обновить и добавить в список</string>
+    <string name="caches_store_background_option_refresh_and_add">Обновить и добавить в список</string>
+    <string name="caches_store_background_option_refresh_and_keep">Обновить и сохранить текущий список заданий</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Не удалось загрузить, скачано %1$d/%2$d тайников</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Загрузка отменена, скачано %1$d/%2$d тайников</string>
     <plurals name="caches_store_background_result">
@@ -416,6 +400,9 @@
     <string name="caches_remove_selected">Удалить выбранные из списка</string>
     <string name="caches_remove_all_completely">Удалить все с устройства</string>
     <string name="caches_remove_selected_completely">Удалить выбранное с устройства</string>
+    <string name="caches_append_to_route_selected">Добавить выбранное в индивидуальный маршрут</string>
+    <string name="caches_append_to_route_all">Добавить все в индивидуальный маршрут</string>
+    <string name="caches_appended_to_route">Тайники добавленные в маршрут</string>
     <string name="caches_delete_events">Удалить прошедшие события</string>
     <string name="caches_upload_bookmarklist">Добавить в закладки</string>
     <string name="caches_upload_modifiedcoords">Загрузить измененные координаты</string>
@@ -470,6 +457,7 @@
     <string name="list_menu_import">Импортировать</string>
     <string name="list_title">Выбрать список</string>
     <string name="lists_title">Выбрать списки</string>
+    <string name="lists_title_new_caches">Выберите список (новые тайники)</string>
     <string name="list_inbox">Сохраненные</string>
     <string name="list_all_lists">Все тайники</string>
     <string name="list_dialog_create_title">Новый список</string>
@@ -498,7 +486,7 @@
     <string name="cache_filter_size">Размер тайника</string>
     <string name="cache_filter_personalnote">Личные заметки</string>
     <string name="cache_filter_description">Описание тайника</string>
-    <string name="cache_filter_offlinelog">Оффлайн записи</string>
+    <string name="cache_filter_offlinelog">Офлайн-записи</string>
     <string name="cache_filter_owner">Автор тайника</string>
     <string name="cache_filter_difficulty">Сложность</string>
     <string name="cache_filter_terrain">Местность</string>
@@ -581,8 +569,8 @@
     <string name="cache_filter_status_select_label_premium">Премиум</string>
     <string name="cache_filter_status_select_label_has_trackable">С трекаблами</string>
     <string name="cache_filter_status_select_label_has_own_vote">Оценен вами</string>
-    <string name="cache_filter_status_select_label_has_offline_log">Есть оффлайн запись</string>
-    <string name="cache_filter_status_select_label_has_offline_found_log">Есть оффлайн запись \"Найден\"</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Есть записи офлайн</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Есть офлайн-запись «Найден»</string>
     <string name="cache_filter_status_select_label_solved_mystery">Загадка разгадана</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Путевые точки пользователя</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Этот параметр фильтра повлияет только на логические тайники. Если вы хотите исключить другие типы тайников, пожалуйста, укажите подходящий фильтр по типу тайника.\n\nЗагадка считается \'решенной\', если изменились координаты или есть корректная конечная точка, заполненная координатами.</string>
@@ -597,24 +585,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Подфильтр в настоящее время пуст</string>
     <string name="cache_filter_log_entry_foundby">Найден</string>
     <string name="cache_filter_log_entry_logtext">Текст записи</string>
-    <string name="cache_filter_stored_since_notstored">Не сохранен</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 часов</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0ч</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 часов</item>
-        <item>24 часа</item>
-        <item>7 дней</item>
-        <item>30 дней</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8ч</item>
-        <item>24ч</item>
-        <item>7дн</item>
-        <item>30дн</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">с незапамятных времен</string>
-    <string name="cache_filter_stored_since_stored_max_short">макс</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>более года назад</item>
         <item>год назад</item>
@@ -661,9 +631,8 @@
     <string name="about_system_write_logcat_type_extended">Расширенный</string>
     <string name="about_system_write_logcat_success">Лог файл \"%1$s\" записан в папку \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Ошибка при записи лога</string>
-    <string name="about_system_write_infos_downloadmanager">Просмотреть загрузки</string>
-    <string name="changelog_github">Список всех изменений</string>
-    <string name="about_nutshellmanual">Оффлайн руководство</string>
+    <string name="about_changelog_full">Список всех изменений</string>
+    <string name="about_nutshellmanual">Описание на сайте</string>
     <string name="about_contributors_carnerodetails">\"папа\" c:geo</string>
     <string name="about_contributors_recent">Недавние участники</string>
     <string name="about_contributors_specialthanks">Особая благодарность</string>
@@ -721,15 +690,16 @@
     <string name="settings_summary_offlinedata">Настройка информации, сохраняемой при загрузке тайников, используемых носителей и папок для GPX файлов.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
-    <string name="settings_title_map">Карта</string>
-    <string name="settings_summary_map">Выберите источник карт, настройки оффлайновых карт и детали карты.</string>
+    <string name="settings_title_map_sources">Источники карт</string>
+    <string name="settings_summary_map_sources">Источник карты, настройки офлайн-карты</string>
+    <string name="settings_title_map_content_behavior">Содержимое карты &amp; Действие</string>
+    <string name="settings_summary_map_content_behavior">Настройте какую информацию отображать на картах и опции взаимодействия.</string>
     <string name="settings_title_map_data">Данные карты</string>
-    <string name="settings_title_offline_maps">Оффлайновые карты</string>
+    <string name="settings_title_offline_maps">Карты офлайн</string>
     <string name="settings_title_map_themes">Темы офлайновых карт</string>
     <string name="settings_title_map_hillshading">Затенение высот офлайн-карт</string>
     <string name="settings_title_offline_routing">Маршрутизация офлайн</string>
     <string name="settings_summary_offline_routing">Офлайн-маршрутизация доступна, если установлено и настроено вспомогательное приложение BRouter или включена внутренняя маршрутизация.</string>
-    <string name="settings_title_map_rotation">Вращение карты (Google Maps)</string>
     <string name="settings_title_waypoints">Точки</string>
     <string name="settings_title_map_content">Содержания карты</string>
     <string name="settings_title_map_behavior">Поведение карты</string>
@@ -749,14 +719,12 @@
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
-    <string name="settings_category_browser">Браузер</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
     <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
     <string name="settings_category_geocaching_additionals">Дополнительные плагины и приложения</string>
-    <string name="settings_category_social">Социальные сети</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
     <string name="settings_goto_url_button">Подробнее…</string>
     <string name="settings_service_activate">Активировать</string>
@@ -817,7 +785,7 @@
     <string name="init_signature_template_datetime">Дата и время</string>
     <string name="init_signature_template_user">Пользователь</string>
     <string name="init_signature_template_number">Число</string>
-    <string name="init_signature_template_number_legacy">Число (без оффлайновых записей)</string>
+    <string name="init_signature_template_number_legacy">Число (не считая офлайн-записи)</string>
     <string name="init_signature_template_owner">Создатель</string>
     <string name="init_signature_template_name">Название тайника</string>
     <string name="init_signature_template_difficulty">Сложность</string>
@@ -870,18 +838,31 @@
     <string name="init_summary_save_log_img">Сохранять фотографии из блокнотов</string>
     <string name="init_units">Английские единицы</string>
     <string name="init_summary_units">Использовать английскую систему (мили) вместо метрической (км)</string>
-    <string name="init_log_offline">Оффлайн записи</string>
+    <string name="init_cachelists">Списки тайников</string>
+    <string name="init_log_offline">Записи офлайн</string>
     <string name="init_summary_log_offline">Не показывать экран онлайн записи и не отправлять записи по умолчанию</string>
     <string name="init_choose_list">Спрашивать про список</string>
     <string name="init_summary_choose_list">Спрашивать, в какой список вы хотите сохранить тайники</string>
-    <string name="init_listdisplay">Дополнительные списки</string>
     <string name="init_list_initial_load_limit">Ограничения загрузки из списков</string>
     <string name="init_summary_list_initial_load_limit">Максимальное число тайников для загрузки из базы данных изначально при отображении сохраненных списков. Выберите 0 для \'неограниченного\'</string>
-    <string name="init_summary_listdisplay">Показать принадлежность тайников к другим спискам в списке тайников</string>
+    <string name="init_title_cacheListInfo1">Настройка строк информационных списков</string>
+    <string name="init_summary_cacheListInfo">Выберите дополнительную информацию для отображения для каждого тайника в списках тайников</string>
     <string name="init_livelist">Показывать направление</string>
     <string name="init_summary_livelist">Показывать стрелку с направлением компаса для тайников в списке</string>
     <string name="init_quicklaunchitems">Кнопки быстрого запуска</string>
     <string name="init_summary_quicklaunchitems">Выберите пункты для быстрого запуска на главном экране</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Геокод</string>
+    <string name="cacheListInfoItem_Difficulty">Сложность</string>
+    <string name="cacheListInfoItem_Terrain">Местность</string>
+    <string name="cacheListInfoItem_MemberState">Премиум-статус</string>
+    <string name="cacheListInfoItem_Size">Размер</string>
+    <string name="cacheListInfoItem_Lists">Другие списки</string>
+    <string name="cacheListInfoItem_HiddenMonth">Скрытый месяц</string>
+    <string name="cacheListInfoItem_EventDate">Дата события</string>
+    <string name="newline">Новая строка</string>
+    <string name="active_elements">Активные Элементы</string>
+    <string name="disabled_elements">Отключенные элементы</string>
     <!-- app theme -->
     <string name="settings_theme_title">Тема</string>
     <string-array name="settings_theme_entries">
@@ -889,6 +870,8 @@
         <item>Светлая</item>
         <item>Темная</item>
     </string-array>
+    <!-- app startscreen -->
+    <string name="settings_startscreen_title">Экран по умолчанию</string>
     <string name="init_wallpaper">Обои</string>
     <string name="init_summary_wallpaper">Использовать обои устройства в качестве фона на главном экране</string>
     <!-- backup / restore -->
@@ -918,7 +901,6 @@
     <string name="init_backup_history_delete_warning">У вас больше резервных копий, нежели установленное максимальное значение. Вы точно хотите удалить все \"лишние\" резервные копии?</string>
     <string name="init_backup_automatic">Автоматическое резервное копирование</string>
     <string name="init_backup_automatic_summary">Автоматически создавать резервные копии каждые X дней (0 — выключить). Это работает дополнительно к копиям, созданным вручную</string>
-    <string name="init_backup_automatic_performing">Создание резервной копии…</string>
     <string name="init_user_confirmation">Я точно уверен в том, что делаю</string>
     <string name="init_backup_success">База данных c:geo была успешно скопирована в:</string>
     <string name="init_backup_failed">Резервное копирование не удалось.</string>
@@ -940,7 +922,7 @@
     <string name="init_backup_last_no">Отсутствует файл с резервной копией.</string>
     <string name="init_restore_version_error">Неожиданный формат - невозможно восстановить базу данных.\n\nОжидаемая версия %1$d,\nрезервная копия имеет версию %2$d</string>
     <string name="settings_title_backup">Резервная копия / восстановление</string>
-    <string name="settings_summary_backup">Выполняет резервное копирование и восстановление тайников\точек и настроек приложения.</string>
+    <string name="settings_summary_backup">Резервное копирование и восстановление тайников, путевых точек, настроек приложения</string>
     <string name="init_backup_settings_logins">Сохранять учетные записи</string>
     <string name="init_backup_settings_backup_full_confirm">Вы точно хотите сохранить персональные данные аккаунтов? Они могут быть прочитаны другими приложениями.</string>
     <string name="settings_savingerror">Ошибка сохранения настроек</string>
@@ -950,17 +932,17 @@
     <string name="settings_readingerror">Ошибка чтения настроек</string>
     <string name="settings_restart">c:geo необходим перезапуск, чтобы восстановленные настройки активировались</string>
     <string name="settings_folder_changed">Во время восстановления папка \"%1$s\" будет изменена на \"%2$s\".\n\nДля продолжения нажмите \"%4$s\", Вам будет предложено предоставить доступ к этой папке c:geo.\n\nЧтобы оставить текущую настройку папок нажмите \"%3$s\".</string>
-    <string name="settings_info_offline_maps_title">Информация про оффлайновые карты</string>
+    <string name="settings_info_offline_maps_title">Информация на сайте про офлайн-карты</string>
     <string name="settings_info_offline_maps">c:geo может работать с картами в автономном режиме. Вы можете получить карты от разных провайдеров или создать свои собственные карты из данных OSM. Для начала выберите папку, в которой будут храниться офлайн-карты.</string>
     <string name="settings_info_themes_title">Информация по темам карт</string>
-    <string name="settings_info_themes">c:geo поддерживает пользовательские темы для оффлайн карт. Они могут быть использованы для изменения цветового стиля карты (например, темный режим) или для выделения определенных объектов, такие как велодорожки или линии уровня.\n\nРабота с не-архивированными темами карт может снизить производительность открытия карты. В этом случае папка темы может быть синхронизирована с локальной папкой для ускорения доступа (в обмен на занятое место на диске).</string>
+    <string name="settings_info_themes">c:geo поддерживает пользовательские темы для офлайн-карт. Они могут быть использованы для изменения цветового стиля карты (например, тёмный режим) или для выделения некоторых объектов, таких как велодорожки или линии уровней высот.\n\nРабота с несжатыми темами карт может снизить производительность открытия карты. В этом случае пользовательская папка темы может быть синхронизирована с локальной папкой приложения для ускорения доступа (ценой некоторого увеличения расхода внутренней памяти).</string>
     <string name="settings_info_hillshading_title">Информация о затенении высот</string>
-    <string name="settings_info_hillshading">Затенение высот - это техника создания топографических карт рельефа, добавляющая на карту световой эффект для обозначения изменений рельефа. Уклоны будут затемнены/освещены, чтобы получить 3D-эффект.\nИсходные файлы, содержащие информацию о высотах, должны быть получены вручную - нажмите на этот элемент - и поместите в папку, указанную ниже.</string>
-    <string name="settings_hillshading_enable">Включить Затенение Высот</string>
+    <string name="settings_info_hillshading">Затенение высот — это техника создания топографических карт рельефа, добавляющая на карту световой эффект для обозначения изменений рельефа. Уклоны будут затемнены/освещены, чтобы получить 3D-эффект.\nИсходные файлы, содержащие информацию о высотах, должны быть получены вручную: нажмите на этот элемент и поместите в папку, указанную ниже.</string>
+    <string name="settings_hillshading_enable">Включить затенение высот</string>
     <string name="init_mapsource_select">Выберите источник карт</string>
     <string name="init_local_file_system">Локальная файловая система</string>
     <string name="init_base_directory_description">\"Основная\" папка для публичных данных</string>
-    <string name="init_map_directory_description">Папка с оффлайновыми картами</string>
+    <string name="init_map_directory_description">Папка с офлайн-картами</string>
     <string name="init_brouter_directory_description">Папка с данными маршрутизации BRouter</string>
     <string name="init_updateinterval_title">Частота обновления</string>
     <string name="init_updateinterval_description">Напоминать каждые x дней о проверке обновлений (работает только для файлов, скачанных с c:geo), 0=отключить</string>
@@ -971,22 +953,14 @@
     <string name="init_maptrail_length">Максимальная длина истории трека</string>
     <string name="init_maptrail_length_summary">Установите максимальную длину трека (требуется при каждом запуске c:geo). По умолчанию значение 700 точек - вы можете это изменить в зависимости от доступной памяти.</string>
     <string name="init_summary_maptrail">Когда активирован (и GPS включен) c:geo сохраняет историю Ваших движений в виде трека и отображает его на карте.</string>
-    <string name="init_trailcolor">Цвет линии истории трека</string>
-    <string name="init_trailcolor_summary">Выберите цвет и степень прозрачности для линии истории трека</string>
-    <string name="init_trailwidth">Ширина линии истории трека</string>
-    <string name="init_trailwidth_summary">Выберите ширину строки истории трека</string>
-    <string name="init_directioncolor">Цвет линии направления</string>
-    <string name="init_directioncolor_summary">Выберите цвет и прозрачность для линии направления. Линия направления показывает прямую линию к выбранной цели навигации или определенный маршрутизированный путь навигации, если маршрутизация включена путем установки приложения BRouter.</string>
-    <string name="init_directionwidth">Ширина линии направления</string>
-    <string name="init_directionwidth_summary">Выберите ширину линии направления</string>
-    <string name="init_routecolor">Цвет личных линий маршрута</string>
-    <string name="init_routecolor_summary">Выберите цвет и прозрачность для линии своего маршрута. «Свой маршрут» — это набор путевых точек и тайников, выбранных долгим нажатием на путевой точке/тайнике. (Для этого нужно включить функцию долгого нажатия в настройках карт)</string>
-    <string name="init_routewidth">Ширина личной линии маршрута</string>
-    <string name="init_routewidth_summary">Выберите ширину личной линии маршрута</string>
-    <string name="init_trackcolor">Цвет линии трека/маршрута</string>
-    <string name="init_trackcolor_summary">Выберите цвет и прозрачность линии трека/маршрута. Трек/маршрут состоит из нескольких путевых точек и может быть загружен из GPX-файла.</string>
-    <string name="init_trackwidth">Толщина линии трека/маршрута</string>
-    <string name="init_trackwidth_summary">Выберите толщину линии GPX трека/маршрута</string>
+    <string name="init_trailappearance">Внешний вид истории трека</string>
+    <string name="init_trailappearance_summary">Выберите цвет, непрозрачность и ширину линии для истории трека</string>
+    <string name="init_directionappearance">Внешний вид направления</string>
+    <string name="init_directionappearance_summary">Выберите цвет, непрозрачность и ширину линии для линии направления. Линия направления показывает прямую линию к выбранной цели навигации, или определенный маршрут навигации, если маршрутизация включена путем установки BRouter.</string>
+    <string name="init_routeappearance">Внешний вид индивидуального маршрута</string>
+    <string name="init_routeappearance_summary">Выберите цвет, непрозрачность и ширину линии для индивидуальных маршрутов. Индивидуальный маршрут - это набор путевых точек и/или тайников, выбранных длительным нажатием на путевую точку/тайник. (Функция долгого нажатия сначала должна быть включена, см. настройки карты.)</string>
+    <string name="init_trackappearance">Внешний вид GPX трека/маршрута</string>
+    <string name="init_trackappearance_summary">Выберите цвет, степень прозрачность и толщину линии для трека/муршрута. Трек/маршрут состоит из нескольких путевых точек и может быть загружен через файл GPX.</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
     <string name="init_circlefillcolor">Цвет заливки круга</string>
@@ -1000,7 +974,7 @@
     <string name="init_summary_trackautovisit">Выставлять \"Посетил\" для трекаблов по умолчанию</string>
     <string name="init_sigautoinsert">Вставлять автоматически</string>
     <string name="init_offlinelogs_homescreen">Показать оффлайн-записи</string>
-    <string name="init_summary_offlinelogs_homescreen">Счетчик оффлайн-записей (напр. \"+ 1\") будет показан рядом с вашим числом найденных на главном экране, если у вас есть сохраненные, но не отправленные записи.</string>
+    <string name="init_summary_offlinelogs_homescreen">Счётчик офлайн-записей (например, «+1») будет показан на главном экране рядом с числом найденных вами тайников, если у вас есть сохранённые, но не отправленные записи</string>
     <string name="init_loaddirectionimg">Изображение направления</string>
     <string name="init_summary_loaddirectionimg">Загрузить изображения направления, если необходимо (только для Базовых участников)</string>
     <string name="init_default_navigation_tool">Навигация по умолчанию</string>
@@ -1025,12 +999,9 @@
     <string name="init_datadirmove_failed">Перемещение папки с данными тайников частично или полностью не удалось. Проверьте старые и новые папки и переместите недостающие данные вручную.</string>
     <string name="init_plain_logs">Простые записи</string>
     <string name="init_summary_plain_logs">Отображать записи в блокноте без цветов</string>
-    <string name="init_use_native_ua">Android браузер</string>
-    <string name="init_summary_use_native_ua">Представляться как браузер. Может решить проблемы входа для некоторых интернет провайдеров.</string>
     <string name="init_rendertheme_folder">Папка с темами карт</string>
-    <string name="init_mapshading_folder">Папка для затененных файлов карты</string>
-    <string name="init_mapshading_folder_text">Офлайн-карты могут быть дополнены информацией о высоте. Эта информация содержится в файлах hgt/dem, которые могут быть помещены в эту папку.</string>
-    <string name="init_mapShadingLinearity_title">Линейность Затенения</string>
+    <string name="init_mapshading_folder">Папка для файлов затенения высот</string>
+    <string name="init_mapShadingLinearity_title">Линейность затенения</string>
     <string name="init_mapShadingLinearity_description">Маленькие значения подчеркивают контрастность крутых склонов, но скрывают изменения в плоскостях, большие значения делают его более линейным</string>
     <string name="init_mapShadingScale_title">Прозрачность затенения</string>
     <string name="init_mapShadingScale_description">Непрозрачность слоя затенения, от невидимого до более высоких значений, усиливает затенение, но может приводить к появлению артефактов</string>
@@ -1057,9 +1028,6 @@
     <string name="settings_open_geokretymap_website">Открыть GeoKretyMap.org</string>
     <string name="settings_settings">Настройки</string>
     <string name="settings_information">Информация</string>
-    <string name="settings_advanced">Расширенные настройки</string>
-    <string name="settings_twitter_cache_message">Сообщения для найденного тайника</string>
-    <string name="settings_twitter_trackable_message">Сообщение для найденных трекаблов</string>
     <string name="init_ec_icons">Иконки карты</string>
     <string name="settings_ec_icons_other">Собственный стиль</string>
     <string name="settings_ec_icons_oc">Как в Opencaching</string>
@@ -1077,7 +1045,8 @@
     <string name="feature_search_finder">Поиск по посетителям</string>
     <string name="feature_favorite">Рекомендации тайников</string>
     <string name="feature_voting">Оценка тайников</string>
-    <string name="init_maplines_title">Настройка линий карты</string>
+    <string name="init_appearance_general">Общий вид</string>
+    <string name="init_maplines_title">Настройка цветов карты</string>
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
@@ -1102,8 +1071,9 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: карта</string>
     <string name="map_source_google_satellite">Google: спутник</string>
-    <string name="map_source_osm_offline">Оффлайн</string>
-    <string name="map_source_osm_offline_combined">Совмещенные (оффлайн)</string>
+    <string name="map_source_google_terrain">Google: ландшафт</string>
+    <string name="map_source_osm_offline">Офлайн</string>
+    <string name="map_source_osm_offline_combined">Совмещённые (офлайн)</string>
     <string name="map_source_attribution_dialog_title">Источник</string>
     <string name="init_sendToCgeo">Отправить в c:geo</string>
     <string name="settings_info_send2cgeo_title">Подробная информация о send2cgeo</string>
@@ -1141,7 +1111,7 @@
     <string name="persistablefolder_pickfolder">Выбрать папку</string>
     <string name="persistablefolder_usedefault">Использовать папку по умолчанию</string>
     <string name="persistablefolder_base">Основная</string>
-    <string name="persistablefolder_offline_maps">Оффлайн карты</string>
+    <string name="persistablefolder_offline_maps">Офлайн-карты</string>
     <string name="persistablefolder_offline_maps_themes">Темы карты</string>
     <string name="persistablefolder_offline_maps_shading">Файлы затенения карты</string>
     <string name="persistablefolder_backup">Резервное копирование</string>
@@ -1150,7 +1120,6 @@
     <string name="persistablefolder_spoilerimages">Фото в спойлере</string>
     <string name="persistablefolder_routingbase">Навигация</string>
     <string name="persistablefolder_routingtiles">Данные маршрутизации</string>
-    <string name="persistableuri_track">Файл трека</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s выполнено</string>
     <string name="folder_process_status_currentfile">Обработка %1$s</string>
@@ -1197,8 +1166,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_token_explain_long">Заполните учётные данные и нажмите «Начать авторизацию». Приложение подключится к %s и получит токен аутентификации.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo теперь может размещать записи в Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo теперь может взаимодействовать с %s.</string>
     <!-- auth geokrety -->
@@ -1231,7 +1198,7 @@
     <string name="cache_delete_generated_waypoints_success">Созданные путевые точки удалены</string>
     <string name="cache_offline_store">Сохранить</string>
     <string name="cache_offline_stored">Сохранено на устройстве</string>
-    <string name="cache_offline_not_ready">Недоступно оффлайн</string>
+    <string name="cache_offline_not_ready">Недоступно офлайн</string>
     <string name="cache_offline_time_mins_few">несколько минут назад</string>
     <plurals name="cache_offline_about_time_mins">
         <item quantity="one">примерно %d минуту назад</item>
@@ -1260,7 +1227,6 @@
     <string name="cache_offline_about_time_year">больше года назад</string>
     <string name="cache_premium">Премиум</string>
     <string name="cache_inventory">Инвентарь</string>
-    <string name="cache_log_images_title">Фотографии в блокноте</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_personal_note">Персональные заметки</string>
     <string name="cache_menu_preventWaypointsFromNote">Не создавать точки из текста</string>
@@ -1276,11 +1242,10 @@
     <string name="cache_personal_note_limit">Лимит персональных заметок</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Персональная заметка будет обрезана примерно на %1$d символов до %3$s (макс. размер %2$d).</string>
     <string name="cache_personal_note_upload">Загрузить</string>
-    <string name="cache_personal_note_uploading">Загрузка личной заметки</string>
     <string name="cache_personal_note_upload_done">Личная заметка загружена</string>
     <string name="cache_personal_note_upload_error">Ошибка отправки персональной заметки</string>
-    <string name="cache_personal_note_upload_cancelled">Загрузка личной заметки отменена</string>
     <string name="cache_personal_note_vars_out_of_sync">Переменные в заметках не синхронизированы (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Синхронизация переменных</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Проверьте переменные, значения которых должны быть перезаписаны из заметок</string>
     <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Описание</string>
@@ -1325,19 +1290,11 @@
     <string name="cache_dialog_loading_details_status_cache">Кэширование данных</string>
     <string name="cache_dialog_loading_details_status_render">Отрисовка</string>
     <string name="cache_dialog_offline_save_title">Сохранение</string>
-    <string name="cache_dialog_offline_save_message">Сохранение тайника для оффлайнового использования…</string>
+    <string name="cache_dialog_offline_save_message">Сохранение тайника для использования офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Удаление</string>
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
     <string name="cache_dialog_refresh_title">Обновление</string>
     <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
-    <string name="cache_dialog_watchlist_add_title">Список Отслеживаемых</string>
-    <string name="cache_dialog_watchlist_add_message">Добавление тайника в список Отслеживаемых…</string>
-    <string name="cache_dialog_watchlist_remove_title">Список Отслеживаемых</string>
-    <string name="cache_dialog_watchlist_remove_message">Удаление тайника из списка Отслеживаемых…</string>
-    <string name="cache_dialog_favorite_add_title">Рекомендации</string>
-    <string name="cache_dialog_favorite_add_message">Рекомендация тайника…</string>
-    <string name="cache_dialog_favorite_remove_title">Рекомендации</string>
-    <string name="cache_dialog_favorite_remove_message">Удаляем рекомендацию…</string>
     <string name="cache_menu_navigate">Навигация</string>
     <string name="cache_menu_target">Установить как цель</string>
     <string name="cache_menu_navigation_drive">Навигация (за рулем)</string>
@@ -1347,6 +1304,7 @@
     <string name="cache_menu_navigation_bike">Навигация (велосипед)</string>
     <string name="cache_menu_maps_directions">Построить маршрут на картах Google</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (пешком)</string>
     <string name="cache_menu_sygic_drive">Sygic (за рулем)</string>
     <string name="cache_menu_radar">Радар</string>
@@ -1359,7 +1317,8 @@
     <string name="cache_menu_open_with">Открыть с помощью…</string>
     <string name="cache_menu_visit">Записаться</string>
     <string name="cache_log_too_long">c:geo не смог отправить вашу запись, так как она слишком длинная. Но спасибо за то, что вы пытались написать такой объемный комментарий ;-)</string>
-    <string name="cache_menu_visit_offline">Быстрая оффлайн запись</string>
+    <string name="cache_empty_log">c:geo не удалось отправить вашу запись, потому что она пуста.</string>
+    <string name="cache_menu_visit_offline">Быстрая офлайн-запись</string>
     <string name="cache_menu_spoilers">Фото в спойлере</string>
     <string name="cache_menu_around">Тайники неподалеку</string>
     <string name="around">Около %s</string>
@@ -1379,7 +1338,7 @@
     <string name="cache_menu_move_list">Переместить в другой список</string>
     <string name="cache_menu_copy_list">Скопировать в другой список</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Онлайн)</string>
-    <string name="cache_menu_oruxmaps_offline">OruxMaps (Оффлайн)</string>
+    <string name="cache_menu_oruxmaps_offline">OruxMaps (офлайн)</string>
     <string name="cache_menu_vote">Оценить</string>
     <string name="cache_menu_challenge_checker">Поиск проверки испытания</string>
     <string name="cache_menu_log_in_browser">Войдите в браузере</string>
@@ -1415,12 +1374,11 @@
     <string name="cache_rating_of_new">%1$.1f из %2$d</string>
     <string name="cache_favorite">Рекомендуют</string>
     <string name="cache_owner">Создатель</string>
-    <string name="cache_hidden">Спрятано</string>
+    <string name="cache_hidden">Создан</string>
     <string name="cache_event">Дата</string>
     <string name="cache_location">Место</string>
     <string name="cache_coordinates">Координаты</string>
     <string name="cache_coordinates_original">Оригинальные координаты</string>
-    <string name="cache_spoiler_images_title">Фото в спойлере</string>
     <string name="cache_log_types">Типы записей</string>
     <string name="cache_coordinates_no">Этот тайник не содержит координат.</string>
     <string name="cache_clear_history">Очистить историю</string>
@@ -1442,6 +1400,8 @@
     <string name="cache_time_full_hours">часов</string>
     <string name="cache_listed_on">Упомянут на %s</string>
     <string name="cache_recently_viewed">Недавно просмотренные</string>
+    <string name="cache_recently_viewed_empty">Нет недавно просмотренных тайников</string>
+    <string name="cache_clear_recently_viewed">очистить</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_chirpwolf_start">Этот тайник может использовать либо chirp передатчик, либо другой беспроводной радиобуй. Для чтения данных с chirp можно открыть Chirp Wolf.</string>
@@ -1457,6 +1417,9 @@
     <string name="image_category_log">Запись</string>
     <string name="context_map_add_to_route">Добавить в маршрут</string>
     <string name="context_map_add_to_route_start">Добавить в начале маршрута</string>
+    <string name="context_map_remove_from_route_start">Удалить из начала маршрута</string>
+    <string name="context_map_remove_from_route_pos">Удалить из позиции %d</string>
+    <string name="context_map_remove_from_route_end">Удалить из конца маршрута</string>
     <string name="context_map_show_coords">Показывать координаты</string>
     <string name="create_internal_cache">Создать пользовательский тайник</string>
     <string name="create_internal_cache_short">Новый тайник</string>
@@ -1468,6 +1431,10 @@
     <string name="internal_goto_targets_description">Этот тайник сохраняет ваши последние цели «Перейти к». Он автоматически создается после использования функции «Перейти к» в главном меню. Введенные координаты будут сохранены в путевых точках этого тайника. Если Вам больше не нужны эти координаты, Вы можете удалить этот тайник или любую из его путевых точек. Также Вы можете переместить тайник в любой другой список по Вашему выбору.</string>
     <string name="init_longtap_map">Долгое нажатие на карте</string>
     <string name="init_summary_longtap_map">Активировать долгое нажатие на иконке карты (создание личного маршрута) или на пустом месте на карте (создание пользовательского тайника или путевой точки)</string>
+    <string name="init_show_routing_menu">Показать меню маршрутизации</string>
+    <string name="init_summary_show_routing_menu">Длительное нажатие на тайник показывает меню с расширенными параметрами для добавления/удаления тайника в/из маршрута. Если отключено, то тайник только добавляется/удаляется в/из маршрута.</string>
+    <string name="init_ActionbarAutohide">Скрыть панель инструментов при нажатии</string>
+    <string name="init_summary_ActionbarAutohide">Нажмите на свободное место на карте, чтобы скрыть/показать панель инструментов</string>
     <string name="onetime_info_longtap_disabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте в настоящее время отключено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="onetime_info_longtap_enabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте сейчас включено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="goto_targets_list">Внутренние тайники</string>
@@ -1534,8 +1501,6 @@
     <string name="waypoint_save_and_modify_on_website">Установить как координаты тайника в c:geo и на сайте</string>
     <string name="waypoint_reset_cache_coords">Сбросить координаты тайника</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Координаты тайника были сброшены на сайте.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Сброс координат тайника на сайте…</string>
-    <string name="waypoint_reset">Сброс</string>
     <string name="waypoint_localy_reset_cache_coords">Сбросить в c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Сбросить в c:geo и на сайте</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Сайт не поддерживает изменение координат тайника.</string>
@@ -1617,10 +1582,9 @@
     <string name="imageview_notitle">Без названия</string>
     <string name="imageview_mimetype">Mime-тип</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Не удалось загрузить изображение</string>
     <string name="imageview_metadata_geopoint">Геоточка</string>
     <string name="imageview_metadata_comment">Комментарий</string>
-    <!-- visit -->
-    <string name="visit_tweet">Отправить в Twitter</string>
     <!-- map -->
     <string name="map_map">Карта</string>
     <string name="map_live">Онлайн карта</string>
@@ -1633,7 +1597,7 @@
     <string name="map_showc_found">Найден</string>
     <string name="map_showc_disabled">Вне игры</string>
     <string name="map_showc_archived">В архиве</string>
-    <string name="map_showc_found_offline">Найденные (оффлайн)</string>
+    <string name="map_showc_found_offline">Найденные (офлайн)</string>
     <string name="map_showwp_original">Изначальные</string>
     <string name="map_showwp_parking">Парковки</string>
     <string name="map_showwp_visited">Посещённые</string>
@@ -1643,10 +1607,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Это будет постоянно синхронизировать содержимое папки Map Theme в приватную папку приложения для ускорения доступа к файлам. Убедитесь, что папка темы содержит только ваши темы, но без дополнительных (больших) данных перед включением этой функции.\n\nПапка с картой \'%1$s\' имеет в настоящее время %2$s, %3$s и размер %4$s.\n\nВключить синхронизацию папок?</string>
     <string name="onetime_mapthemefixslow_title">Исправить медленную отрисовку карт</string>
     <string name="onetime_mapthemefixslow_message">Работа с не заархивированными картами может снизить производительность просмотра карт. Вы можете заархивировать или синхронизировать их, чтобы повысить производительность и уменьшить задержку при запуске карты.</string>
-    <string name="init_hidewp">Скрыть точки</string>
-    <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
-    <string name="init_summary_hidewp_parking">Скрыть точки парковки на карте</string>
-    <string name="init_summary_hidewp_visited">Скрыть посещенные точки на карте</string>
     <string name="map_theme_select">Выбрать тему карты</string>
     <string name="map_theme_options">Опции темы</string>
     <string name="map_language">Язык карты</string>
@@ -1791,7 +1751,7 @@
     <string name="helper_bluetoothgps_description">Позволяет использовать внешний GPS приемник, чтобы получить более точную информацию о местоположении и сэкономить заряд батареи вашего устройства.</string>
     <string name="helper_gps_locker_description">GPS Locker сохраняет GPS активным при переключении между приложениями и при выключении экрана устройства.</string>
     <string name="helper_google_translate_title">Переводчик Google</string>
-    <string name="helper_google_translate_description">Если вы загрузите переводческие пакеты в Переводчике Google, тогда вы сможете переводить описания тайников в c:geo длинным касанием описания тайника (работает оффлайн).</string>
+    <string name="helper_google_translate_description">Если вы загрузите языковые пакеты в используемом вами приложении для перевода (например, Переводчик Google или Яндекс.Переводчик), тогда вы сможете переводить описания тайников в c:geo офлайн. Для этого сделайте длинный тап на тексте описания и выберите Перевести.</string>
     <string name="helper_where_you_go_description">WhereYouGo позволяет играть и искать тайники типа Wherigo. c:geo будет автоматически загружать картриджи с помощью этого приложения.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf позволяет вам читать данные из ANT+/Garmin chirp тегов, что необходимо для ANT+/chirp тайников.</string>
     <string name="helper_alc_description">Приложение \"Adventure Lab\" для вашего телефона или планшета.</string>
@@ -2095,7 +2055,6 @@
     <string name="fangroup_link"><a href="">Немецкая группа пользователей</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo на Google Play</a></string>
-    <string name="about_twitter">Публиковать новый твит каждый раз, когда вы записываетесь в блокнот?</string>
     <string name="github_title">Сообщения об ошибках</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
@@ -2198,6 +2157,12 @@
     <string name="command_rename_list_result">Список переименован</string>
     <string name="command_delete_list_result">Список удален</string>
     <string name="command_unique_list_result">Удаленные тайники из других списков</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Рекомендовать этот тайник (%d осталось)</item>
+        <item quantity="few">Рекомендовать эти тайники (%d осталось)</item>
+        <item quantity="many">Рекомендовать эти тайники (%d осталось)</item>
+        <item quantity="other">Рекомендовать эти тайники (%d осталось)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Рекомендовать тайник (%d осталось)</item>
         <item quantity="few">Рекомендовать тайники (%d осталось)</item>
@@ -2236,11 +2201,15 @@
     <string name="permission_location_explanation">c:geo оптимизирован для использования данных GPS (точное местоположение) для определения местоположения, а также расчета расстояния и направления на тайник. Без этого разрешения функции на основе определения местоположения работать не будут.</string>
     <string name="permission_read_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="permission_read_external_storage_explanation">c:geo может использовать ваши системные обои в качестве фона для приложения. Для этого c:geo требуется разрешение на чтение ваших медиа данных на внешнем накопителе.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo запишет данные на ваше устройство или SD-карту, например когда вы сохраняете тайники для использования в автономном режиме, импортируйте или экспортируйте файлы, а также для других функций. В некоторых версиях Android вам нужно предоставить дополнительные разрешения для этих действий.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="storage_permission_needed">Эта функция невозможна без разрешения на хранение.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Выберите цветовую схему</string>
     <string name="preference_colorpicker_select_color">Выберите цвет</string>
     <string name="preference_colorpicker_select_opaqueness">Выберите прозрачность</string>
+    <string name="preference_colorpicker_select_width">Выберите ширину линии</string>
+    <string name="preference_colorpicker_show_width">ширина: %d</string>
     <string name="reset_to_default">По умолчанию</string>
     <!-- number input -->
     <string name="number_input_title">Введите значение между %1$s и %2$s</string>
@@ -2256,7 +2225,6 @@
     <string name="notification_channel_downloader_description">уведомления о загрузках (например, офлайн-карт)</string>
     <string name="notification_channel_cache_download_name">загрузчик тайника</string>
     <string name="notification_channel_cache_download_description">уведомления о фоновых загрузках тайников</string>
-    <string name="notification_proximity_title">уведомление о приближении c:geo</string>
     <string name="notification_download_receiver_title">Импорт загрузки</string>
     <!-- individual routes -->
     <string name="individual_route">Личный маршрут</string>
@@ -2265,6 +2233,7 @@
     <string name="individual_route_error_toggling_waypoint">ошибка включения точки</string>
     <string name="individual_route_error_single_waypoint_mode">Недоступно в режиме одной точки</string>
     <string name="map_sort_individual_route">Сортировать личный маршрут</string>
+    <string name="map_refresh_individual_route">Обновить</string>
     <string name="map_export_individual_route">Экспорт индивидуального маршрута</string>
     <string name="map_load_individual_route">Загрузить персональный маршрут</string>
     <string name="map_load_individual_route_confirm">Перезаписать текущий маршрут?</string>
@@ -2286,6 +2255,15 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Установить, как начало маршрута</string>
     <string name="individual_route_set_as_start_message">Установить этот пункт в качестве начала маршрута и переместить все последующие пункты наверх текущего маршрута?</string>
+    <string name="route_optimization">Оптимизация маршрута</string>
+    <string name="route_optimization_info">Оптимизация маршрута - это экспериментальная возможность оптимизации маршрута для получения кратчайших расстояний. Маршрут будет рассчитан от первой точки вашего списка до последней точки с посещением других точек вдоль этого маршрута в оптимизированном порядке.\n\nПоскольку невозможно оценить все возможные решения с учетом времени и ограничений мощности на мобильном устройстве, используются аппроксимационные алгоритмы для расчета возможной оптимизации.\n\nРасчет выполняется в два этапа: расчет расстояний между двумя парами маршрута, затем попытка найти приемлемый маршрут. Это может быть не самый короткий из возможных маршрутов, поэтому вы можете повторять второй шаг так часто, как вы хотите.</string>
+    <string name="initial_route_length">Начальная длина маршрута: %d</string>
+    <string name="optimized_route_length">Оптимизированная длина маршрута: %d</string>
+    <string name="route_optimization_out_of_bounds">Оптимизация маршрутов работает для маршрутов имеющих от 3 до 100 точек</string>
+    <string name="generating_distance_matrix">Создание матрицы расстояния</string>
+    <string name="running_route_optimizations">Выполняется оптимизация маршрута</string>
+    <string name="route_optimization_finished">Оптимизация маршрута завершена</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>
@@ -2294,6 +2272,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Параметры маршрутов / треков</string>
     <string name="routes_tracks_menu">Маршруты / Треки</string>
+    <string name="routes_tracks_color">Выберите цвет</string>
     <string name="center_on_route_track">Центр на маршрут/трек</string>
     <string name="unload_route_track">Выгрузить маршрут/трек</string>
     <string name="route">Маршрут</string>
@@ -2347,8 +2326,8 @@
     <string name="receivedownload_amount_copied">%s скопирован</string>
     <string name="receivedownload_cancelled">Передача файла отменена</string>
     <!-- Download map preference and menu entry -->
-    <string name="downloadmap_title">Скачать оффлайн-карту</string>
-    <string name="delete_offlinemap_title">Удалить оффлайн-карту</string>
+    <string name="downloadmap_title">Скачать офлайн-карту</string>
+    <string name="delete_offlinemap_title">Удалить офлайн-карту</string>
     <string name="no_deletable_offlinemaps">Нет офлайн-карт, которые можно удалить</string>
     <string name="delete_file_confirmation">Удалить %s?</string>
     <string name="file_deleted_info">%s удален</string>
@@ -2374,6 +2353,7 @@
     <string name="downloadmap_mapfile">файл карты</string>
     <string name="downloadmap_themefile">файл темы</string>
     <string name="downloadmap_tilefile">файл данных маршрутизации</string>
+    <string name="downloadmap_checking">Проверка доступных данных маршрутизации…</string>
     <string name="downloadmap_othermapdownload">загрузка другой карты</string>
     <string name="downloadmap_otherthemedownload">скачать другую тему</string>
     <string name="downloadmap_download">скачать</string>
@@ -2385,8 +2365,8 @@
     <string name="check_tiles_found">Данные маршрутизации уже присутствуют</string>
     <string name="check_tiles_missing">Найдены недостающие данные маршрутизации:</string>
     <string name="check_tiles_unsupported">Предупреждение: Данные маршрутизации по крайней мере частично недоступны для выбранного региона</string>
-    <string name="tileupdate_info">Проверить наличие обновлений ранее загруженных файлов маршрутизации. Долгое нажатие — отложить.</string>
-    <string name="mapupdate_info">Нажмите, чтобы проверить наличие обновлений для карт и тем. Долгое нажатие — отложить.</string>
+    <string name="tileupdate_info">Проверить наличие обновлений для ранее загруженных файлов маршрутизации. Долгое нажатие — напомнить позже.</string>
+    <string name="mapupdate_info">Проверить наличие обновлений для карт и тем. Долгое нажатие — напомнить позже.</string>
     <string name="no_updates_found">Обновления не найдены</string>
     <string name="updates_check">Проверка обновлений</string>
     <string name="mapserver_mapsforge_info">Основные карты, темы карт не требуются</string>
@@ -2406,6 +2386,7 @@
     <string name="maptheme_scale_text_summary">Дополнительно масштабирует текстовые метки на карте; 100% = без дополнительного масштабирования</string>
     <string name="maptheme_scale_symbol_title">Масштаб символов</string>
     <string name="maptheme_scale_symbol_summary">Дополнительно масштабирует размер символа на карте; 100% = без дополнительного масштабирования</string>
+    <string name="vtm_theme_variant">Вариация темы оформления</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистить историю трека</string>
     <string name="map_trailhistory_cleared">История трека очищена</string>
@@ -2441,11 +2422,6 @@
     <string name="wizard_platforms_intro">Для поиска тайников с c:geo необходим аккаунт на одном из сервисов геокешинга, поддерживаемых c:geo.\nВыберите нужный сервис ниже, чтобы войти с существующей учетной записью или создать новую учетную запись.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching и др.</string>
-    <string name="wizard_welcome_advanced">Дополнительные настройки</string>
-    <string name="wizard_advanced_offlinemaps_label">Оффлайновые карты</string>
-    <string name="wizard_advanced_offlinemaps_info">Эта страница содержит некоторые расширенные функции, которые не обязательны для использования.\n\nc:geo может скачивать файлы карт для использования в оффлайн.</string>
-    <string name="wizard_advanced_routing_label">Включить оффлайн-навигацию</string>
-    <string name="wizard_advanced_routing_info">c:geo имеет внутренний механизм навигации, который работает в оффлайн и может автоматически загружать отсутствующие данные.</string>
     <string name="wizard_advanced_restore_label">Восстановить</string>
     <string name="wizard_advanced_restore_info">Если у вас есть резервная копия от предыдущей установки, вы можете восстановить настройки и/или тексты тайников.</string>
     <string name="status_not_ok">ОШИБКА</string>
@@ -2453,7 +2429,7 @@
     <string name="wizard_status_basefolder">\"Основная\" папка</string>
     <string name="wizard_status_platform">Геокешинг-сервисы</string>
     <string name="wizard_not_now">Не сейчас</string>
-    <string name="wizard_skip_wizard_warning">c:geo может не работать как надо до завершения настройки. В зависимости от недостающей конфигурации c:geo может не иметь возможности считывать/хранить данные, такие как оффлайн карты, тайники, записи и т.д.\n\nКогда вы будете готовы завершить установку, либо выберите \"Мастер настройки\" в главном меню, либо перезапустите c:geo.</string>
+    <string name="wizard_skip_wizard_warning">Пока настройка не будет завершена, c:geo может работать не так, как ожидается. В зависимости от недостающих настроек c:geo, например, не сможет сохранять данные, такие как офлайн-карты, тайники, записи и тому подобное.\n\nКогда вы будете готовы завершить установку, выберите «Мастер настройки» в меню на главном экране либо просто перезапустите c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Синхронизация папок %1$s завершена после %2$s, %3$d из %4$s необходимо синхронизировать</string>
     <!-- default actions in dialogs -->
@@ -2463,12 +2439,13 @@
     <string name="done">Готово</string>
     <string name="finish">Завершить</string>
     <string name="back">Назад</string>
-    <string name="later">Позже</string>
     <string name="cancel">Отмена</string>
+    <string name="use">Применить</string>
+    <string name="redo">Повторить</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
+    <string name="optimize">Оптимизация</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Выбрать всё</string>
-    <string name="touch_again_to_exit">Нажмите еще раз для выхода</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>
@@ -2826,4 +2803,5 @@
     <string name="smiley_approve">Одобрено</string>
     <string name="smiley_disapprove">Отклонено</string>
     <string name="smiley_question">Вопрос</string>
+    <!-- message center notifications -->
 </resources>

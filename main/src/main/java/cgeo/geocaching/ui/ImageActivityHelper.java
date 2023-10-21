@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
@@ -267,12 +268,20 @@ public class ImageActivityHelper {
      * Helper function to load and scale an image asynchronously into a view
      */
     public static void displayImageAsync(final Image image, final ImageView imageView) {
+        displayImageAsync(image, imageView, true, null);
+    }
+
+    public static void displayImageAsync(final Image image, final ImageView imageView, final boolean adjustOrientation, final Action1<ImageView> action) {
+
         if (image.isEmpty()) {
             return;
         }
         imageView.setVisibility(View.INVISIBLE);
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri()), bitmap -> {
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri(), adjustOrientation), bitmap -> {
             imageView.setImageBitmap(bitmap);
+            if (action != null) {
+                action.call(imageView);
+            }
             imageView.setVisibility(View.VISIBLE);
         });
     }
@@ -310,7 +319,7 @@ public class ImageActivityHelper {
 
         final String mimeType = context.getContentResolver().getType(imageUri);
         if (checkMimeType && (!("image/jpeg".equals(mimeType) || "image/png".equals(mimeType) || "image/gif".equals(mimeType)))) {
-            ActivityMixin.showToast(context, R.string.err_acquire_image_failed);
+            ActivityMixin.showToast(context, R.string.err_acquire_image_unsupported_format);
             return false;
         }
         return true;

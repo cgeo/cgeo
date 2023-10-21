@@ -246,11 +246,21 @@ public interface IConnector {
     @NonNull
     String getWaypointGpxId(@NonNull String prefix, @NonNull String geocode);
 
+    /** similar to getWaypointGpxId, but includes geocode to be distinct across different caches */
+    @NonNull
+    String getFullWaypointGpxId(@NonNull String prefix, @NonNull String geocode);
+
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file
      */
     @NonNull
     String getWaypointPrefix(String name);
+
+    /**
+     * Get info whether connector supports D/T ratings
+     */
+    @NonNull
+    boolean supportsDifficultyTerrain();
 
     /**
      * Get the maximum value for Terrain

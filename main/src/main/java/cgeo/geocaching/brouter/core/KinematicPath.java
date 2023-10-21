@@ -5,9 +5,6 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import cgeo.geocaching.brouter.util.FastMathUtils;
-
-
 final class KinematicPath extends OsmPath {
     private double ekin; // kinetic energy (Joule)
     private double totalTime;  // travel time (seconds)
@@ -23,7 +20,6 @@ final class KinematicPath extends OsmPath {
         totalEnergy = origin.totalEnergy;
         floatingAngleLeft = origin.floatingAngleLeft;
         floatingAngleRight = origin.floatingAngleRight;
-        priorityclassifier = origin.priorityclassifier;
     }
 
     @Override
@@ -60,7 +56,7 @@ final class KinematicPath extends OsmPath {
 
                 final double curveSpeed = aa > 10. ? 200. / aa : 20.;
                 final double distanceTime = dist / curveSpeed;
-                final double decayFactor = FastMathUtils.exp(-distanceTime / km.turnAngleDecayTime);
+                final double decayFactor = Math.exp(-distanceTime / km.turnAngleDecayTime);
                 floatingAngleLeft = (float) (floatingAngleLeft * decayFactor);
                 floatingAngleRight = (float) (floatingAngleRight * decayFactor);
 
@@ -259,12 +255,12 @@ final class KinematicPath extends OsmPath {
 
 
     @Override
-    public int elevationCorrection(final RoutingContext rc) {
+    public int elevationCorrection() {
         return 0;
     }
 
     @Override
-    public boolean definitlyWorseThan(final OsmPath path, final RoutingContext rc) {
+    public boolean definitlyWorseThan(final OsmPath path) {
         final KinematicPath p = (KinematicPath) path;
 
         final int c = p.cost;

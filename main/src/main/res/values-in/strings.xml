@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="detail">Rincian</string>
     <string name="search">Pencarian</string>
@@ -44,6 +42,8 @@
     <string name="wp_waypoint">Titik Acuan</string>
     <string name="wp_original">Koordinat Asli</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Menemukannya</string>
     <string name="log_dnf">Tidak dapat menemukannya</string>
@@ -81,7 +81,6 @@
     <string name="log_save">Simpan offline</string>
     <string name="log_saving">Mengirim catatan&#8230;</string>
     <string name="log_posting_log">Memposting log&#8230;</string>
-    <string name="log_posting_twitter">Posting tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Mencatat %1$s %2$d/%3$d</string>
     <string name="log_clear">Bersihkan</string>
     <string name="log_post_not_possible">Data yang diunduh sedang berlangsung&#8230;\nsilahkan coba lagi dalam beberapa detik atau periksa koneksi internet anda.</string>
@@ -106,9 +105,6 @@
     <string name="log_yesterday">Kemarin</string>
     <string name="log_smilies">Smile</string>
     <string name="log_image">Gambar</string>
-    <string name="log_image_attach">Lampirkan Gambar</string>
-    <string name="log_image_stored">Telah ada</string>
-    <string name="log_image_camera">Baru</string>
     <string name="log_image_caption">Keterangan</string>
     <string name="log_image_description">Penjelasan</string>
     <string name="log_image_scale">Penskalaan</string>
@@ -117,13 +113,13 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
     <string name="translate_length_warning">Terjemahan mungkin gagal dengan sejumlah besar teks.</string>
     <!-- errors, warnings, info toasts -->
     <string name="err_parse">Gagal Login ke halaman parsing</string>
-    <string name="err_server">Tidak dapat menghubungi Geocaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_server_ec">Tidak dapat menghubungi Extremcaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_server_gk">Tidak dapat menghubungi GeoKrety.org. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_login">Tidak ada informasi login yang tersimpan</string>
@@ -142,7 +138,6 @@
     <string name="err_detail_cache_find_any">c: geo tidak dapat menemukan geocaches.</string>
     <string name="err_detail_no_spoiler">c: geo tidak menemukan gambar spoiler untuk cache ini.</string>
     <string name="err_detail_still_working">Masih mengerjakan tugas lain.</string>
-    <string name="err_watchlist_still_managing">Masih mengelola daftar pantauan Anda.</string>
     <string name="err_watchlist_failed">Mengubah daftar tontonan anda telah gagal.</string>
     <string name="err_application_no">c:geo tidak dapat menemukan aplikasi yang cocok.</string>
     <string name="err_auth_initialize">c:geo telah gagal untuk menginisialisasi proses otorisasi.</string>
@@ -190,10 +185,8 @@
     <string name="warn_search_help_user">Masukkan nama pengguna dari Geocaching.com.</string>
     <string name="warn_search_help_tb">Masukkan kode yang bisa dilacak. Misalnya \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Tolong masukan beberapa teks untuk log anda.</string>
-    <string name="warn_load_images">c: geo gagal memuat gambar.</string>
     <string name="warn_pocket_query_select">Tidak ada permintaan Pocket yang dipilih.</string>
     <string name="warn_no_pocket_query_found">Tidak ada kantong pertanyaan yang ditemukan secara online.</string>
-    <string name="warn_invalid_character">Karakter wajib berupa surat atau angka</string>
     <string name="err_read_pocket_query_list">Kesalahan membaca daftar permintaan pocket.</string>
     <string name="info_log_posted">c: geo berhasil mengirimkan log.</string>
     <string name="info_log_saved">c: geo berhasil menyimpan log.</string>
@@ -238,11 +231,6 @@
     <string name="caches_more_caches_no">Tidak ada lagi cache</string>
     <string name="caches_more_caches_loading">Memuat cache&#8230;</string>
     <string name="caches_more_caches_currently">saat ini</string>
-    <string name="caches_downloading">Mengunduh cache&#8230;\nEta: </string>
-    <string name="caches_eta_ltm">Kurang dari satu menit</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d menit</item>
-    </plurals>
     <string name="caches_history">Riwayat</string>
     <string name="caches_on_map">Menampilkan pada peta</string>
     <string name="caches_sort">Urutkan</string>
@@ -313,7 +301,6 @@
     <string name="about_system_info_send_button">Kirim melalui surel&#8230;</string>
     <string name="about_system_info">c:geo sistem informasi</string>
     <string name="about_system_info_send_chooser">Mengirimkan sistem informasi</string>
-    <string name="changelog_github">Daftar semua perubahan</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
@@ -327,8 +314,6 @@
     <string name="settings_title_offlinedata">Data Offline</string>
     <string name="settings_title_logging">Log</string>
     <string name="settings_summary_logging">Mengkonfigurasi tanda tangan anda dan mengatur pembukuan pilihan.</string>
-    <string name="settings_title_map">Peta</string>
-    <string name="settings_summary_map">Menetapkan sumber peta, pengaturan peta offline dan rincian peta.</string>
     <string name="settings_title_map_data">Data Peta</string>
     <string name="settings_title_map_content">Konten Peta</string>
     <string name="calculate_dataDir_title">Pemakaian data Geocache</string>
@@ -338,8 +323,6 @@
     <string name="settings_title_basicmembers">Pilihan untuk Anggota Dasar</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Menu Navigasi</string>
-    <string name="settings_category_browser">Peramban</string>
-    <string name="settings_category_social">Media sosial</string>
     <string name="settings_category_logging_other">Pilihan login lainnya</string>
     <string name="settings_goto_url_button">lebih banyak &#8230;</string>
     <string name="settings_service_activate">Aktifkan</string>
@@ -400,7 +383,9 @@
     <string name="init_choose_list">Meminta Daftar</string>
     <string name="init_summary_choose_list">Tanyakan daftar mana yang menyimpan cache di dalamnya</string>
     <string name="init_livelist">Menunjukkan Arah</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Cadangan</string>
     <string name="init_backup_running">Membuat cadangan dari basis data cache&#8230;</string>
@@ -440,8 +425,6 @@
     <string name="init_dbmove_failed">Gagal memindahkan database</string>
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
-    <string name="init_use_native_ua">Peramban Android</string>
-    <string name="init_summary_use_native_ua">Identifikasi sebagai browser Android. Mengatasi masalah login saat menggunakan penyedia jaringan tertentu.</string>
     <string name="init_maintenance">Pemeliharaan</string>
     <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
@@ -460,9 +443,6 @@
     <string name="settings_open_geokretymap_website">Buka situs web GeoKretyMap.org</string>
     <string name="settings_settings">Pengaturan</string>
     <string name="settings_information">Informasi</string>
-    <string name="settings_advanced">Pengaturan lanjutan</string>
-    <string name="settings_twitter_cache_message">Pesan untuk menemukan cache</string>
-    <string name="settings_twitter_trackable_message">Pesan ditemukan untuk dilacak</string>
     <string name="init_ec_icons">Ikon Peta</string>
     <string name="settings_ec_icons_other">Gaya sendiri</string>
     <string name="settings_ec_icons_oc">Seperti OC</string>
@@ -512,8 +492,6 @@
     <string name="auth_credentials_explain_short">Proses berikut akan mengizinkan <b>c:geo</b> untuk mengakses %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Proses berikut akan memungkinkan <b>c:geo</b> untuk mengakses %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo sekarang resmi untuk posting di twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
     <!-- auth geokrety -->
@@ -545,16 +523,13 @@
     </plurals>
     <string name="cache_premium">Meningkatkan</string>
     <string name="cache_inventory">Persediaan</string>
-    <string name="cache_log_images_title">Gambar log</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Catatan pribadi</string>
     <string name="cache_personal_note_edit">Sunting</string>
     <string name="cache_personal_note_limit">Batas catatan pribadi</string>
     <string name="cache_personal_note_upload">Unggah</string>
-    <string name="cache_personal_note_uploading">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_done">Mengunggah catatan pribadi</string>
     <string name="cache_personal_note_upload_error">Gagal mengunggah catatan pribadi</string>
-    <string name="cache_personal_note_upload_cancelled">Batalkan pengunggahan catatan pribadi</string>
     <string name="cache_description">Deskripsi</string>
     <string name="cache_description_table_note">Format tabel berisi deskripsi yang mungkin perlu dilihat pada %s harus dilihat dengan benar.</string>
     <string name="cache_watchlist_on">Cache ini ada pada daftar pantauan anda.</string>
@@ -583,14 +558,6 @@
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
     <string name="cache_dialog_refresh_title">Menyegarkan</string>
     <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">Daftar Pantauan</string>
-    <string name="cache_dialog_watchlist_add_message">Menambahkan cache ke daftar pantauan anda&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">Daftar tontonan</string>
-    <string name="cache_dialog_watchlist_remove_message">Menghapus cache dari daftar pantauan anda&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">Favorit</string>
-    <string name="cache_dialog_favorite_add_message">Menambahkan cache ke favorit anda&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">Favorit</string>
-    <string name="cache_dialog_favorite_remove_message">Menghapus cache dari favorit anda&#8230;</string>
     <string name="cache_menu_navigate">Navigasi</string>
     <string name="cache_menu_navigation_drive">Navigasi (Mengemudi)</string>
     <string name="cache_menu_navigation_walk">Navigasi (Berjalan)</string>
@@ -642,7 +609,6 @@
     <string name="cache_location">Lokasi</string>
     <string name="cache_coordinates">Koordinat</string>
     <string name="cache_coordinates_original">Koordinat Asli</string>
-    <string name="cache_spoiler_images_title">Gambar spoiler</string>
     <string name="cache_log_types">Tipe log</string>
     <string name="cache_coordinates_no">Cache ini tidak memiliki koordinat.</string>
     <string name="cache_clear_history">Hapus riwayat</string>
@@ -702,8 +668,6 @@
     <string name="waypoint_save_and_modify_on_website">Tetapkan sebagai koordinat cache di c:geo dan di situs web</string>
     <string name="waypoint_reset_cache_coords">Memasang kembali catatan koordinat</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Koordinat cache telah dipasang kembali pada situs.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Memasang kembali koordinat cache pada situs&#8230;</string>
-    <string name="waypoint_reset">Setel ulang</string>
     <string name="waypoint_localy_reset_cache_coords">Setel ulang di c: geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Setel ulang di c:geo dan di situs</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Situs web tidak mendukung perubahan koordinat cache.</string>
@@ -720,8 +684,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Poskan ini ke kericau</string>
     <!-- map -->
     <string name="map_map">Peta</string>
     <string name="map_live">Peta hidup</string>
@@ -1062,7 +1024,6 @@
     <string name="website_title">Situs web</string>
     <string name="facebook_link"><a href="">c: halaman geo </a></string>
     <string name="market_link"><a href="">c: geo di Google Play</a></string>
-    <string name="about_twitter">Harus <b>c:geo</b> mempublikasikan sebuah status baru di Twitter setiap kali anda log cache?</string>
     <string name="faq_title">Tanya jawab</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1134,6 +1095,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1156,4 +1118,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

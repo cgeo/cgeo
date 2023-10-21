@@ -94,13 +94,6 @@
 # Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
 -dontwarn org.codehaus.mojo.animal_sniffer.*
 -dontwarn okhttp3.OkHttpClient$Builder
-# OkHttp platform used only on JVM and when Conscrypt dependency is available.
--dontnote okhttp3.internal.platform.**
-# R8 missing, probaly fixed in next OkHttp release,
-# see https://github.com/square/okhttp/pull/6792
--dontwarn org.bouncycastle.jsse.**
--dontwarn org.conscrypt.*
--dontwarn org.openjsse.**
 
 # Play Services -----------------------------------------------------------------------------------
 

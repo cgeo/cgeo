@@ -54,6 +54,13 @@ public interface IVotingCapability extends IConnector {
     boolean supportsVoting(@NonNull Geocache cache);
 
     /**
+     * Returns float rating step value for given rating implementation
+     *
+     * @return rating step value (i.e. 1 when 1:1 stars rating should be used, 0.5 for half ratting support etc)
+     */
+    float getRatingStep();
+
+    /**
      * Indicates whether the given rating is acceptable (i.e. one might accept only integer values or restrict some other values)
      *
      * @param rating rating given

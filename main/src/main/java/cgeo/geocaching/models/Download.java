@@ -33,6 +33,7 @@ public class Download {
     private final String name;
     private final Uri uri;
     private final boolean isDir;
+    private final boolean isBackDir; // virtual folder type for back navigation
     private final long dateInfo;
     private final String sizeInfo;
     private String addInfo;
@@ -44,6 +45,7 @@ public class Download {
         this.name = CompanionFileUtils.getDisplayName(name);
         this.uri = uri;
         this.isDir = isDir;
+        this.isBackDir = false;
         this.sizeInfo = sizeInfo;
         this.addInfo = "";
         this.dateInfo = CalendarUtils.parseYearMonthDay(dateISO);
@@ -57,11 +59,24 @@ public class Download {
         this.name = CompanionFileUtils.getDisplayName(pendingDownload.getFilename());
         this.uri = Uri.parse(pendingDownload.getRemoteUrl());
         this.isDir = false;
+        this.isBackDir = false;
         this.sizeInfo = "";
         this.addInfo = "";
         this.dateInfo = pendingDownload.getDate();
         this.type = desc == null ? DownloadType.DOWNLOADTYPE_ALL_MAPRELATED : desc.type;
         this.iconRes = R.drawable.ic_menu_file;
+    }
+
+    public Download(final Uri navigateUpUri, final DownloadType type) {
+        this.name = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
+        this.uri = navigateUpUri;
+        this.isDir = true;
+        this.isBackDir = true;
+        this.sizeInfo = "";
+        this.addInfo = "";
+        this.dateInfo = 0;
+        this.type = type;
+        this.iconRes = 0;
     }
 
     public String getName() {
@@ -72,8 +87,12 @@ public class Download {
         return uri;
     }
 
-    public boolean getIsDir() {
+    public boolean isDir() {
         return isDir;
+    }
+
+    public boolean isBackDir() {
+        return isBackDir;
     }
 
     public String getDateInfoAsString() {

@@ -64,11 +64,11 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             return;
         }
         if (isOffline) {
-            downloadCachesInternal(context, geocodes, null, defaultForceRedownload, onStartCallback);
+            downloadCachesInternal(context, geocodes, null, false, defaultForceRedownload, onStartCallback);
             return;
         }
         if (DataStore.getUnsavedGeocodes(geocodes).size() == geocodes.size()) {
-            askForListsIfNecessaryAndDownload(context, geocodes, false, false, onStartCallback);
+            askForListsIfNecessaryAndDownload(context, geocodes, false, false, false, onStartCallback);
             return;
         }
 
@@ -82,12 +82,15 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 .setTitle(R.string.caches_store_background_title)
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
                     final int id = radioGroup.getCheckedRadioButtonId();
-                    if (id == R.id.radio_button_refresh) {
-                        askForListsIfNecessaryAndDownload(context, geocodes, true, false, onStartCallback);
+                    if (id == R.id.radio_button_refresh_and_add) {
+                        askForListsIfNecessaryAndDownload(context, geocodes, false, true, false, onStartCallback);
+                    } else if (id == R.id.radio_button_refresh_and_keep) {
+                        // downloadCachesInternal(context, geocodes, null, true, onStartCallback);
+                        askForListsIfNecessaryAndDownload(context, geocodes, true, true, false, onStartCallback);
                     } else if (id == R.id.radio_button_add_to_list) {
-                        askForListsIfNecessaryAndDownload(context, geocodes, false, false, onStartCallback);
+                        askForListsIfNecessaryAndDownload(context, geocodes, false, false, false, onStartCallback);
                     } else {
-                        askForListsIfNecessaryAndDownload(context, DataStore.getUnsavedGeocodes(geocodes), false, false, onStartCallback);
+                        askForListsIfNecessaryAndDownload(context, DataStore.getUnsavedGeocodes(geocodes), false, false, false, onStartCallback);
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, null)
@@ -96,26 +99,26 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     }
 
     public static void refreshCache(final Activity context, final String geocode, final boolean isOffline, @Nullable final Runnable onStartCallback) {
-        askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), true, isOffline, onStartCallback);
+        askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), isOffline, true, isOffline, onStartCallback);
     }
 
-    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean keepExistingLists, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
         if (isOffline) {
-            downloadCachesInternal(context, geocodes, null, forceRedownload, onStartCallback);
+            downloadCachesInternal(context, geocodes, null, keepExistingLists, forceRedownload, onStartCallback);
         } else if (Settings.getChooseList()) {
             // let user select list to store cache in
-            new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds, forceRedownload, onStartCallback), true, Collections.emptySet(), false);
+            new StoredList.UserInterface(context).promptForMultiListSelection(keepExistingLists ? R.string.lists_title_new_caches : R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds, keepExistingLists, forceRedownload, onStartCallback), true, Collections.emptySet(), false);
         } else {
-            downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID), forceRedownload, onStartCallback);
+            downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID), keepExistingLists, forceRedownload, onStartCallback);
         }
     }
 
-    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
+    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
 
         final ArrayList<String> newGeocodes = new ArrayList<>();
 
         for (String geocode : geocodes) {
-            final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, forceRedownload);
+            final DownloadTaskProperties properties = new DownloadTaskProperties(listIds, keepExistingLists, forceRedownload);
             final boolean isNewGeocode;
             synchronized (downloadQuery) {
                 isNewGeocode = downloadQuery.get(geocode) == null;
@@ -208,6 +211,9 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             final Set<Integer> combinedListIds = new HashSet<>(properties.listIds);
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null && !cache.getLists().isEmpty()) {
+                if (properties.keepExistingLists) {
+                    combinedListIds.clear();
+                }
                 combinedListIds.addAll(cache.getLists());
             }
 
@@ -253,17 +259,20 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     private static class DownloadTaskProperties {
         final Set<Integer> listIds = new HashSet<>();
         boolean forceDownload;
+        boolean keepExistingLists;
 
-        private DownloadTaskProperties(@Nullable final Set<Integer> listIds, final boolean forceDownload) {
+        private DownloadTaskProperties(@Nullable final Set<Integer> listIds, final boolean keepExistingLists, final boolean forceDownload) {
             if (listIds != null) {
                 this.listIds.addAll(listIds);
             }
+            this.keepExistingLists = keepExistingLists;
             this.forceDownload = forceDownload;
         }
 
         public DownloadTaskProperties merge(@Nullable final DownloadTaskProperties additionalProperties) {
             if (additionalProperties != null) {
                 this.listIds.addAll(additionalProperties.listIds);
+                this.keepExistingLists |= additionalProperties.keepExistingLists;
                 this.forceDownload |= additionalProperties.forceDownload;
             }
             return this;

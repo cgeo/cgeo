@@ -10,7 +10,6 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GnssStatusProvider;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -48,6 +47,8 @@ public class LocationStatusView extends LinearLayout {
     private Geopoint currentAddressCoords = null;
 
     private Runnable permissionRequestCallback;
+
+    private boolean showAddress = false;
 
     @Override
     protected void onConfigurationChanged(final Configuration newConfig) {
@@ -95,6 +96,10 @@ public class LocationStatusView extends LinearLayout {
         updateGeoData(null);
     }
 
+    public void setShowAddress(final boolean showAddress) {
+        this.showAddress = showAddress;
+    }
+
     @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public void updateGeoData(@Nullable final GeoData geo) {
@@ -111,7 +116,7 @@ public class LocationStatusView extends LinearLayout {
         }
 
         final String averageHeight = geo == null ? "" : GeoHeightUtils.getAverageHeight(geo, true);
-        if (currentCoords != null && Settings.isShowAddress() && activity != null) {
+        if (currentCoords != null && showAddress && activity != null) {
             if (currentAddressCoords == null) {
                 binding.locationText.setText(R.string.loc_no_addr);
             }

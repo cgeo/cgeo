@@ -6,6 +6,8 @@ import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
@@ -24,6 +26,7 @@ import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.text.util.Linkify;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -36,6 +39,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -47,6 +51,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.text.util.LinkifyCompat;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
@@ -74,6 +79,10 @@ public class ViewUtils {
 
     public static int dpToPixel(final float dp) {
         return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
+    }
+
+    public static int spToPixel(final float sp) {
+        return (int) (sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity));
     }
 
     public static int pixelToDp(final float px) {
@@ -223,6 +232,12 @@ public class ViewUtils {
         return tv;
     }
 
+    public static ImageView createIconView(final Context ctx, final int iconId) {
+        final ImageView iv = new ImageView(wrap(ctx));
+        iv.setImageResource(iconId);
+        return iv;
+    }
+
     public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
         final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
         text.applyTo(button);
@@ -296,6 +311,13 @@ public class ViewUtils {
         rp.setMargins(0, ViewUtils.dpToPixel(10), 0, ViewUtils.dpToPixel(10));
         llSep.addView(separatorView, rp);
         return llSep;
+    }
+
+    public static View createExpandableSeparatorPixelView(final Context context) {
+        final TextView view = new TextView(context, null, 0, R.style.separator_pixel);
+        view.setText("");
+        view.setTextSize(1);
+        return view;
     }
 
     /**
@@ -457,7 +479,7 @@ public class ViewUtils {
         return new BitmapDrawable(APP_RESOURCES, bitmap);
     }
 
-    public static TextWatcher createSimpleWatcher(final Consumer<Editable> callback) {
+    public static TextWatcher createSimpleWatcher(@NonNull final Consumer<Editable> callback) {
         return new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
@@ -534,5 +556,32 @@ public class ViewUtils {
 
         return nextView[0];
 
+    }
+
+    /** null-safe call to view */
+    public static void applyToView(@Nullable final View view, final Action1<View> applyMethod) {
+        if (view != null) {
+            applyMethod.call(view);
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static boolean safeAddLinks(@NonNull final TextView textView, @LinkifyCompat.LinkifyMask final int mask) {
+        try {
+            return Linkify.addLinks(textView, mask);
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re);
+            return false;
+        }
+    }
+
+    /** safe Linkify.addLinks version, prevents crash on older Android versions, see #14202 */
+    public static boolean safeAddLinks(@NonNull final Spannable sp, @LinkifyCompat.LinkifyMask final int mask) {
+        try {
+            return Linkify.addLinks(sp, mask);
+        } catch (RuntimeException re) {
+            Log.d("Caught Error on Linkify.addLinks", re);
+            return false;
+        }
     }
 }

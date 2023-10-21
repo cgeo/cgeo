@@ -25,6 +25,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.UriPermission;
 import android.content.pm.PackageManager;
@@ -79,6 +80,7 @@ public final class SystemInformation {
         appendScreenResolution(context, body);
         body.append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
+        appendMemoryInfo(context, body);
         body.append("\n")
                 .append("\nSensor and location:")
                 .append("\n-------")
@@ -98,7 +100,9 @@ public final class SystemInformation {
                 .append("\n- System date format: ").append(Formatter.getShortDateFormat())
                 .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
-                .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
+                .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
+                .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
+                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never")
                 .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
                 .append("\n- Live map mode: ").append(Settings.isLiveMap())
                 .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
@@ -139,14 +143,27 @@ public final class SystemInformation {
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
         appendDirectory(body, "\n- Geocache data: ", LocalStorage.getGeocacheDataDirectory());
         appendDirectory(body, "\n- Internal theme sync (is turned " + (RenderThemeHelper.isThemeSynchronizationActive() ? "ON" : "off") + "): ", LocalStorage.getMapThemeInternalSyncDir());
-        appendPublicFolders(body);
         body.append("\n- Map render theme path: ").append(Settings.getSelectedMapRenderTheme());
+        appendPublicFolders(body);
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
         appendDatabase(body);
 
         body.append("\n\n--- End of system information ---\n");
         return body.toString();
+    }
+
+    private static void appendMemoryInfo(@NonNull final Context context, @NonNull final StringBuilder body) {
+        body.append("\n- Memory: ");
+        final ActivityManager.MemoryInfo memoryInfo = EnvironmentUtils.getMemoryInfo(context);
+        if (memoryInfo == null) {
+            body.append("null");
+        } else {
+            body.append(" Available:" + Formatter.formatBytes(memoryInfo.availMem) +
+                    ", Total:" + Formatter.formatBytes(memoryInfo.totalMem) +
+                    ", Threshold: " + Formatter.formatBytes(memoryInfo.threshold) +
+                    ", low:" + memoryInfo.lowMemory);
+        }
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
@@ -218,7 +235,7 @@ public final class SystemInformation {
     private static void appendPersistedDocumentUris(@NonNull final StringBuilder body) {
         body.append("\n- PersistedDocumentUris: #").append(PersistableUri.values().length);
         for (PersistableUri persDocUri : PersistableUri.values()) {
-            body.append("\n- ").append(persDocUri);
+            body.append("\n  - ").append(persDocUri);
         }
     }
 
@@ -251,7 +268,7 @@ public final class SystemInformation {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
             if (connector.isActive()) {
                 connectorCount++;
-                connectors.append("\n   ").append(connector.getName());
+                connectors.append("\n   - ").append(connector.getName());
                 if (connector instanceof ILogin) {
                     final ILogin login = (ILogin) connector;
                     connectors.append(": ").append(login.isLoggedIn() ? "Logged in" : "Not logged in")
@@ -279,7 +296,7 @@ public final class SystemInformation {
     }
 
     private static void appendPermission(final Context context, final StringBuilder body, final String permission) {
-        body.append("\n-").append(permission).append(":: ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
+        body.append("\n- ").append(StringUtils.remove(permission, "android.permission.")).append(": ").append(ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED ? "granted" : "DENIED");
     }
 
     private static void appendPermissions(final Context context, final StringBuilder body) {

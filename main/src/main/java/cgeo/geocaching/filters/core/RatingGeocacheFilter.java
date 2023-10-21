@@ -5,7 +5,7 @@ import cgeo.geocaching.models.Geocache;
 public class RatingGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     public RatingGeocacheFilter() {
-        super(Float::valueOf);
+        super(Float::valueOf, f -> f);
     }
 
     @Override

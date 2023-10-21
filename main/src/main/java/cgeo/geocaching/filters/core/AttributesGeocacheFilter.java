@@ -5,19 +5,26 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.BooleanUtils;
 
 public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
+    private static final String CONFIG_KEY_ATTLIST = "attributes";
     private static final String CONFIG_KEY_INVERSE = "inverse";
     private static final String CONFIG_KEY_SOURCES = "attributesources";
 
@@ -121,7 +128,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         this.inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
         this.sources = config.getFirstValue(CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources(), Integer::parseInt);
         attributes.clear();
@@ -139,8 +146,8 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = new ExpressionConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
         config.putList(CONFIG_KEY_SOURCES, Integer.toString(sources));
         config.putDefaultList(new ArrayList<>(attributes.keySet()));
@@ -157,5 +164,34 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
         }
 
         return attributes.keySet().iterator().next();
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setBoolean(node, CONFIG_KEY_INVERSE, inverse);
+        JsonUtils.setInt(node, CONFIG_KEY_SOURCES, sources);
+        JsonUtils.setTextCollection(node, CONFIG_KEY_ATTLIST, attributes.keySet());
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        this.inverse = JsonUtils.getBoolean(node, CONFIG_KEY_INVERSE, false);
+        this.sources = JsonUtils.getInt(node, CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources());
+        attributes.clear();
+        attributesRaw.clear();
+        final List<String> attList = JsonUtils.getTextList(node, CONFIG_KEY_ATTLIST);
+        for (String value : attList) {
+            final CacheAttribute ca = CacheAttribute.getByName(value);
+            if (ca != null) {
+                final boolean isYesValue = CacheAttribute.isEnabled(value);
+                attributes.put(value, isYesValue ? ca.rawName : null);
+                if (isYesValue) {
+                    attributesRaw.add(ca.rawName);
+                }
+            }
+        }
     }
 }

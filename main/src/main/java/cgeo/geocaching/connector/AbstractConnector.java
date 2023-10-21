@@ -280,9 +280,20 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
+    public String getFullWaypointGpxId(@NonNull final String prefix, @NonNull final String geocode) {
+        return geocode + getWaypointGpxId(prefix, geocode);
+    }
+
+    @Override
+    @NonNull
     public String getWaypointPrefix(final String name) {
         // Default: just return the name
         return name;
+    }
+
+    @Override
+    public boolean supportsDifficultyTerrain() {
+        return true;
     }
 
     @Override

@@ -16,13 +16,6 @@
         <menu /> <!-- filled dynamically -->
     </item>
     <item
-        android:id="@+id/menu_image"
-        android:icon="@drawable/ic_menu_attachment"
-        android:title="@string/log_image_attach"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
         android:id="@+id/menu_smileys"
         android:icon="@drawable/ic_menu_emoticons"
         android:title="@string/log_smilies"

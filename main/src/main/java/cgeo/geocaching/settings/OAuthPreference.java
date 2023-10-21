@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.oc.OCAuthParams;
 import cgeo.geocaching.connector.oc.OCAuthorizationActivity;
 import cgeo.geocaching.connector.su.SuAuthorizationActivity;
 import cgeo.geocaching.connector.su.SuConnector;
-import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +24,7 @@ public class OAuthPreference extends AbstractClickablePreference {
         OCUS(R.string.pref_fakekey_ocus_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_US_AUTH_PARAMS, -1, -1),
         OCRO(R.string.pref_fakekey_ocro_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_RO_AUTH_PARAMS, -1, -1),
         OCUK(R.string.pref_fakekey_ocuk_authorization, OCAuthorizationActivity.class, OCAuthParams.OC_UK_AUTH_PARAMS, -1, -1),
-        SU(R.string.pref_fakekey_su_authorization, SuAuthorizationActivity.class, SuAuthorizationActivity.SU_OAUTH_PARAMS, SuConnector.getInstance().getTokenPublicPrefKeyId(), SuConnector.getInstance().getTokenPublicPrefKeyId()),
-        TWITTER(R.string.pref_fakekey_twitter_authorization, TwitterAuthorizationActivity.class, TwitterAuthorizationActivity.TWITTER_OAUTH_PARAMS, R.string.pref_twitter_token_public, R.string.pref_twitter_token_secret);
+        SU(R.string.pref_fakekey_su_authorization, SuAuthorizationActivity.class, SuAuthorizationActivity.SU_OAUTH_PARAMS, SuConnector.getInstance().getTokenPublicPrefKeyId(), SuConnector.getInstance().getTokenPublicPrefKeyId());
 
         public final int prefKeyId;
         public final int publicKeyId;

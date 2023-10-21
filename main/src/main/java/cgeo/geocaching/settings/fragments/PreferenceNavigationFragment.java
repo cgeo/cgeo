@@ -25,7 +25,7 @@ import java.util.List;
 public class PreferenceNavigationFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_navigation, rootKey);
+        initPreferences(R.xml.preferences_navigation, rootKey);
 
         initDefaultNavigationPreferences();
         initOfflineRoutingPreferences();
@@ -109,6 +109,8 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
         updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values);
         updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values);
         updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, entries, values);
     }
 
     private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values) {
@@ -133,10 +135,8 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
+        findPreference(getString(R.string.pref_fakekey_brouterDistanceThresholdTitle)).setEnabled(anyRoutingAvailable);
         findPreference(getString(R.string.pref_brouterDistanceThreshold)).setEnabled(anyRoutingAvailable);
         findPreference(getString(R.string.pref_brouterShowBothDistances)).setEnabled(anyRoutingAvailable);
-        findPreference(getString(R.string.pref_brouterProfileWalk)).setEnabled(useInternalRouting);
-        findPreference(getString(R.string.pref_brouterProfileBike)).setEnabled(useInternalRouting);
-        findPreference(getString(R.string.pref_brouterProfileCar)).setEnabled(useInternalRouting);
     }
 }

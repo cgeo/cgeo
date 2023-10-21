@@ -23,14 +23,6 @@ public final class TestSettings extends Settings {
         putBoolean(R.string.pref_units_imperial, imperial);
     }
 
-    public static void setCacheTwitterMessage(final String template) {
-        putString(R.string.pref_twitter_cache_message, template);
-    }
-
-    public static void setTrackableTwitterMessage(final String template) {
-        putString(R.string.pref_twitter_trackable_message, template);
-    }
-
     public static void setSignature(final String signature) {
         putString(R.string.pref_signature, signature);
     }

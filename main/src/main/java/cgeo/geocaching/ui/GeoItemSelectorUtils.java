@@ -9,20 +9,19 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.text.Html;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,10 +34,9 @@ public class GeoItemSelectorUtils {
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        setTitleTextStyle(context, tv, cache);
-        tv.setText(cache.getName());
+        tv.setText(TextUtils.coloredCacheText(context, cache, cache.getName()));
 
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP).getDrawable(), null, null, null);
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
         if (cache.getDifficulty() > 0.1f) {
@@ -56,16 +54,16 @@ public class GeoItemSelectorUtils {
 
     public static View createWaypointItemView(final Context context, final Waypoint waypoint, final View view) {
 
-        final TextView tv = (TextView) view.findViewById(R.id.text);
-        tv.setText(waypoint.getName());
-
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false).getDrawable(), null, null, null);
-
-        final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
         final Geocache parentCache = waypoint.getParentGeocache();
 
+        final TextView tv = (TextView) view.findViewById(R.id.text);
+        tv.setText(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName());
+
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
+
+        final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
+
         if (parentCache != null) {
-            setTitleTextStyle(context, tv, parentCache);
             text.append(Formatter.SEPARATOR).append(parentCache.getName());
         }
 
@@ -146,21 +144,8 @@ public class GeoItemSelectorUtils {
 
     public static View getOrCreateView(final Context context, final View convertView, final ViewGroup parent) {
         final View view = convertView == null ? LayoutInflater.from(context).inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-        setTitleTextStyle(context, view.findViewById(R.id.text), null); // reset title style
+        ((TextView) view.findViewById(R.id.text)).setText(new SpannableString(""));
         return view;
-    }
-
-    private static void setTitleTextStyle(final Context context, final TextView tv, final Geocache cache) {
-        if (cache != null && (cache.isDisabled() || cache.isArchived() || CalendarUtils.isPastEvent(cache))) { // strike
-            tv.setPaintFlags(tv.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else {
-            tv.setPaintFlags(tv.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        if (cache != null && cache.isArchived()) { // red color
-            tv.setTextColor(ContextCompat.getColor(context, R.color.archived_cache_color));
-        } else {
-            tv.setTextColor(ContextCompat.getColor(context, R.color.colorText));
-        }
     }
 
 }

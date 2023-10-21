@@ -467,7 +467,7 @@ public class ContentStorageActivityHelper {
                     .create()
                     .show();
         } else {
-            continuePersistableFolderSelectionCopyMove(folder, targetUri, runningIntentData.copyChoice == CopyChoice.ASK_IF_DIFFERENT ? CopyChoice.DO_NOTHING : runningIntentData.copyChoice, action);
+            continuePersistableFolderSelectionCopyMove(folder, targetUri, copyChoice == CopyChoice.ASK_IF_DIFFERENT ? CopyChoice.DO_NOTHING : copyChoice, action);
         }
     }
 

@@ -21,7 +21,6 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         setTheme();
 
         final Intent intent = getIntent();
-        final String action = intent.getAction();
         final Uri uri = intent.getData();
         boolean finished = false;
 

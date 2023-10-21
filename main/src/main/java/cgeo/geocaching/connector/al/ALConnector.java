@@ -13,6 +13,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private ALConnector() {
         // singleton
-        name = CgeoApplication.getInstance().getString(R.string.settings_title_lc);
+        name = LocalizationUtils.getString(R.string.settings_title_lc);
     }
 
     /**
@@ -107,6 +108,11 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsSettingFoundState() {
         return true;
+    }
+
+    @Override
+    public boolean supportsDifficultyTerrain() {
+        return false;
     }
 
     @Override

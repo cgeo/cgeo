@@ -2,32 +2,33 @@ package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
+import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
-import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
-import android.graphics.Bitmap;
 import android.location.Location;
 
 import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -56,6 +57,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
      */
     private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
 
+    private static final GeopointConverter<LatLng> GP_CONVERTER = new GeopointConverter<>(
+            gc -> new LatLng(gc.getLatitude(), gc.getLongitude()),
+            ll -> new Geopoint(ll.latitude, ll.longitude)
+    );
+
     private Location coordinates;
     private float heading;
     private final PositionHistory history = new PositionHistory();
@@ -74,19 +80,23 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     private final GoogleMapObjects historyObjs;
     private final GoogleMapObjects routeObjs;
     private final GoogleMapObjects trackObjs;
+
+    private final GeoItemTestLayer testLayer = new GeoItemTestLayer();
     private final GoogleMapView mapView;
     private GoogleMapView.PostRealDistance postRealDistance = null;
     private GoogleMapView.PostRealDistance postRouteDistance = null;
 
-    private static Bitmap locationIcon;
-
     private Viewport lastViewport = null;
+
+    public final ArrayList<RouteItem> individualRoutePoints = new ArrayList<>();
 
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
 
     private static class CachedRoute {
         private boolean isHidden = false;
-        private ArrayList<ArrayList<LatLng>> track = null;
+        private List<List<LatLng>> track = null;
+        private int color;
+        private int width;
     }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
@@ -96,6 +106,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         historyObjs = new GoogleMapObjects(googleMap);
         routeObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
+        testLayer.init(new GoogleV2GeoItemLayer(googleMap));
         this.mapView = mapView;
         this.postRealDistance = postRealDistance;
         this.postRouteDistance = postRouteDistance;
@@ -137,6 +148,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 }
             }
         }
+    }
+
+    @Override
+    public void setElevation(final float elevationFromRouting, final float elevationFromGNSS) {
+        mapView.setElevation(elevationFromRouting, elevationFromGNSS);
     }
 
     public void updateMapRotation() {
@@ -194,15 +210,21 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     }
 
     @Override
-    public void updateIndividualRoute(final Route route) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route);
+    public void updateIndividualRoute(final IndividualRoute route) {
+        individualRoutePoints.clear();
+        for (RouteItem item : route.getRouteItems()) {
+            if (item.getType() == RouteItem.RouteItemType.COORDS) {
+                individualRoutePoints.add(item);
+            }
+        }
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, MapLineUtils.getRouteColor(), MapLineUtils.getRawRouteLineWidth());
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
         }
     }
 
     @Override
-    public void updateRoute(final String key, final IGeoDataProvider track) {
+    public void updateRoute(final String key, final IGeoItemSupplier track, final int color, final int width) {
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -214,23 +236,15 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 c.track = toLatLng(track);
                 c.isHidden = track.isHidden();
             }
+            c.color = color;
+            c.width = width;
         }
         repaintRequired();
     }
 
-    private static ArrayList<ArrayList<LatLng>> toLatLng(final IGeoDataProvider gg) {
-        final ArrayList<ArrayList<LatLng>> list = new ArrayList<>();
-        for (GeoObject go : gg.getGeoData()) {
-            list.add(toLatLng(go.getPoints()));
-        }
-        return list;
-    }
-
-    private static ArrayList<LatLng> toLatLng(final Collection<Geopoint> gcs) {
-        final ArrayList<LatLng> list = new ArrayList<>();
-        for (Geopoint gc : gcs) {
-            list.add(new LatLng(gc.getLatitude(), gc.getLongitude()));
-        }
+    private static ArrayList<List<LatLng>> toLatLng(final IGeoItemSupplier gg) {
+        final ArrayList<List<LatLng>> list = new ArrayList<>();
+        GeoGroup.forAllPrimitives(gg.getItem(), go -> list.add(GP_CONVERTER.toList(go.getPoints())));
         return list;
     }
 
@@ -398,13 +412,19 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         routeObjs.removeAll();
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
         if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
-            for (ArrayList<LatLng> segment : individualRoute.track) {
+            for (List<LatLng> segment : individualRoute.track) {
                 routeObjs.addPolyline(new PolylineOptions()
                         .addAll(segment)
                         .color(MapLineUtils.getRouteColor())
                         .width(MapLineUtils.getRouteLineWidth(false))
                         .zIndex(ZINDEX_ROUTE)
                 );
+            }
+            for (RouteItem item : individualRoutePoints) {
+                routeObjs.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.marker_routepoint, null)))
+                        .position(GP_CONVERTER.to(item.getPoint()))
+                        .anchor(0.5f, 0.5f));
             }
         }
         // draw tracks
@@ -413,11 +433,11 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
                 if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
-                    for (ArrayList<LatLng> segment : c.track) {
+                    for (List<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)
-                                .color(MapLineUtils.getTrackColor())
-                                .width(MapLineUtils.getTrackLineWidth(false))
+                                .color(c.color)
+                                .width(MapLineUtils.getWidthFromRaw(c.width, false))
                                 .zIndex(ZINDEX_TRACK)
                         );
                     }

@@ -8,6 +8,7 @@ import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DifficultyAndTerrainGeocacheFilter;
 import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
+import cgeo.geocaching.filters.core.DifficultyTerrainMatrixGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -128,13 +129,23 @@ public class GCMap {
             return null;
         }
 
-        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
+        final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
+        for (BaseGeocacheFilter baseFilter : filterAndChain) {
             //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
             if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
                 return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
             }
             fillForBasicFilter(baseFilter, search);
         }
+
+        //special case (see #13891): if we search for owner AND archived caches are not excluded
+        // -> then remove status from filter (otherwise archived caches are not returned from gc.com on Owner search)
+        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filterAndChain, StatusGeocacheFilter.class);
+        final OwnerGeocacheFilter ownerFilter = GeocacheFilter.findInChain(filterAndChain, OwnerGeocacheFilter.class);
+        if (ownerFilter != null && ownerFilter.isFiltering() && statusFilter != null && !statusFilter.isExcludeArchived()) {
+            search.setStatusEnabled(null);
+        }
+
         return new Pair<>(search, null);
 
     }
@@ -184,6 +195,12 @@ public class GCMap {
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, search);
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, search);
                 break;
+            case DIFFICULTY_TERRAIN_MATRIX:
+                final DifficultyTerrainMatrixGeocacheFilter matrixFilter = (DifficultyTerrainMatrixGeocacheFilter) basicFilter;
+                if (matrixFilter.isFilteringMatrix()) {
+                    search.setDifficultyTerrainCombis(((DifficultyTerrainMatrixGeocacheFilter) basicFilter).getDtCombis());
+                }
+                break;
             case RATING:
                 // not supported for online searches for this connector
                 break;
@@ -203,6 +220,7 @@ public class GCMap {
                 search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? FALSE : null));
                 break;
             case HIDDEN:
+            case EVENT_DATE:
                 final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;
                 search.setPlacementDate(hiddenFilter.getMinDate(), hiddenFilter.getMaxDate());
                 break;

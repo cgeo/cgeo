@@ -14,6 +14,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> Activate when SDKmin=23, see #13777 -->
 
     <uses-feature
@@ -217,25 +219,6 @@
             android:exported="true">
         </activity>
         <activity
-            android:name=".twitter.TwitterAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/auth_twitter"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.cgeo.org"
-                    android:pathPrefix="/twitter/"
-                    android:scheme="callback" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".EditWaypointActivity"
             android:label="@string/waypoint_edit_title"
             android:windowSoftInputMode="stateHidden" >
@@ -272,7 +255,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/settings_titlebar"
             android:parentActivityName="cgeo.geocaching.MainActivity"
-            android:theme="@style/settings"
+            android:theme="@style/cgeo"
             android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -459,16 +442,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ImagesActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize">
-        </activity>
-        <activity
             android:name=".ImageGalleryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize">
         </activity>
         <activity
             android:name=".CacheDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:configChanges="keyboardHidden|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="wikitudeapi.arcallback" />
@@ -723,11 +702,29 @@
 
         </activity>
         <activity
+            android:name="cgeo.geocaching.connector.gc.ImportBookmarkLinks"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="geocaching.com" />
+                <data android:host="www.geocaching.com" />
+                <data android:pathPrefix="/plan/lists/" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".CompassActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/compass_title" >
         </activity>
         <activity android:name=".maps.routing.RouteSortActivity" />
+        <activity android:name=".ui.CheckableItemSelectActivity" />
         <activity
             android:name="WaypointPopup"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -736,7 +733,7 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".ImageSelectActivity"
+            android:name=".ImageEditActivity"
             android:label="@string/log_image" >
         </activity>
 
@@ -957,6 +954,7 @@
         <package android:name="com.groundspeak.react.adventures" />
         <package android:name="com.mapswithme.maps.app" />
         <package android:name="com.mapswithme.maps.pro" />
+        <package android:name="app.organicmaps" />
         <package android:name="com.orux.oruxmapsDonate" />
         <package android:name="com.silentlexx.gpslock" />
         <package android:name="com.sygic.aura" />
@@ -964,6 +962,7 @@
         <package android:name="com.webmajstr.pebble_gc" />
         <package android:name="de.wolffire.chirpwolf" />
         <package android:name="googoo.android.btgps" />
+        <package android:name="gr.talent.cruiser" />
         <package android:name="menion.android.locus" />
         <package android:name="menion.android.locus.free.amazon" />
         <package android:name="menion.android.locus.free.samsung" />

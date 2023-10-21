@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">Кеш</string>
     <string name="detail">Деталі</string>
@@ -55,6 +53,8 @@
     <string name="wp_waypoint">Орієнтир</string>
     <string name="wp_original">Оригінальні координати</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Знайдено</string>
     <string name="log_dnf">Не знайдено</string>
@@ -93,7 +93,6 @@
     <string name="log_saving">Надсилання журналу…</string>
     <string name="log_saving_and_uploading">Розміщення журналу та завантаження зображень…</string>
     <string name="log_posting_log">Журнал відправлення…</string>
-    <string name="log_posting_twitter">Розміщення твіту…</string>
     <string name="log_posting_vote">Розміщення кешу голосування…</string>
     <string name="log_posting_image">Розміщення зображень…</string>
     <string name="log_posting_generic_trackable">Постинг %1$s %2$d/%3$d</string>
@@ -121,10 +120,6 @@
     <string name="log_smilies">Смайлики</string>
     <string name="log_image">Імідж</string>
     <string name="log_images">Зображення</string>
-    <string name="log_image_attach">Прикріпити зображення</string>
-    <string name="log_image_stored">Існуючий</string>
-    <string name="log_image_camera">Новий</string>
-    <string name="log_image_delete">Видалити</string>
     <string name="log_image_caption">Підпис</string>
     <string name="log_image_description">Опис</string>
     <string name="log_image_scale">Масштабування</string>
@@ -149,6 +144,7 @@
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
     <string name="log_image_titleprefix">Імідж</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
     <string name="translate_to_english">Переклад англійською мовою</string>
@@ -156,7 +152,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Добре</string>
     <string name="err_parse">Не вдалося проаналізувати сторінку входу</string>
-    <string name="err_server">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_ec">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_su">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_gk">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
@@ -179,7 +174,6 @@
     <string name="err_detail_no_spoiler">c:geo не знайдено зображень спойлера для цього кешу.</string>
     <string name="err_detail_still_working">Продовжуйте працювати над іншим завданням.</string>
     <string name="err_detail_premium_log_found">Цей кеш доступний лише для преміум членів geocaching.com. Таким чином, інформація з кешу не може бути відображена.\n\n, Однак, якщо ви вже знайшли цей кеш, увійдіть сюди.</string>
-    <string name="err_watchlist_still_managing">Все ще керуй своїм списком спостереження.</string>
     <string name="err_watchlist_failed">Не вдалося змінити твій списку перегляду.</string>
     <string name="err_application_no">c:geo не може знайти відповідну програму.</string>
     <string name="err_auth_initialize">c:geo не вдалося ініціалізувати процес авторизації.</string>
@@ -228,10 +222,8 @@
     <string name="warn_search_help_user">Введіть ім\'я користувача з Geocaching.com.</string>
     <string name="warn_search_help_tb">Введіть код для відстеження. Наприклад, \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Будь ласка, введіть текст для вашого журналу.</string>
-    <string name="warn_load_images">Не вдалося завантажити зображення.</string>
     <string name="warn_pocket_query_select">Кишеньковий запит не вибрано.</string>
     <string name="warn_no_pocket_query_found">Немає Pocket-запиту онлайн.</string>
-    <string name="warn_invalid_character">Символ повинен бути LETTER або DIGIT</string>
     <string name="warn_notloggedin_title">Офлайн режим</string>
     <string name="warn_notloggedin_long">Вхід в систему (поки що). Жива карта покаже лише збережені локальні та онлайн-функції не працюватимуть.\n\nАбо немає підключення до мережі, або проблема з сервером, або ви повинні (з пере)налаштувати свої сервіси геокешингу.\n\nВи хочете налаштувати сервіси зараз?</string>
     <string name="err_read_pocket_query_list">Помилка читання списку Pocket запитів.</string>
@@ -287,14 +279,6 @@
     <string name="caches_more_caches_no">Немає більше сторінок</string>
     <string name="caches_more_caches_loading">Завантаження кешу…</string>
     <string name="caches_more_caches_currently">зараз</string>
-    <string name="caches_downloading">Завантаження кеш-пам’яті \ \nETA: </string>
-    <string name="caches_eta_ltm">Менше хвилини</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d хвилина</item>
-        <item quantity="few">%d хвилини</item>
-        <item quantity="many">%d хвилин</item>
-        <item quantity="other">%d хвилини</item>
-    </plurals>
     <string name="caches_history">Історія</string>
     <string name="caches_on_map">Показати на мапі</string>
     <string name="caches_sort">Сортувати</string>
@@ -378,7 +362,6 @@
     <string name="about_system_write_logcat_type_standard">Стандарт</string>
     <string name="about_system_write_logcat_type_extended">розширений</string>
     <string name="about_system_write_logcat_error">Помилка записування вмісту</string>
-    <string name="changelog_github">Список всіх змін</string>
     <string name="about_nutshellmanual">Онлайн допомога</string>
     <string name="about_contributors_carnerodetails">як батько c:geo</string>
     <string name="about_contributors_recent">Останні учасники</string>
@@ -404,10 +387,7 @@
     <string name="settings_title_offlinedata">офлайн-дані</string>
     <string name="settings_title_logging">вихід із системи</string>
     <string name="settings_summary_logging">Налаштуйте ваш підпис і встановіть параметри логування.</string>
-    <string name="settings_title_map">Карта</string>
-    <string name="settings_summary_map">Налаштув. джерела карти, автономно параметрів карти та відомості про неї.</string>
     <string name="settings_title_map_data">Дані карти</string>
-    <string name="settings_title_map_rotation">Поворот карти (Карти Google)</string>
     <string name="settings_title_waypoints">шляхові точки</string>
     <string name="settings_title_map_content">Зміст мапи</string>
     <string name="settings_title_map_behavior">Поведінка карти</string>
@@ -419,10 +399,8 @@
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Параметри особливих налаштувань і відлагодження.</string>
     <string name="settings_title_navigation_menu">Навігаційне меню</string>
-    <string name="settings_category_browser">Браузер</string>
     <string name="settings_category_geocaching_platform">Платформа геокешингу</string>
     <string name="settings_category_geocaching_additionals">Додаткові послуги та аддон</string>
-    <string name="settings_category_social">Соціальні медіа</string>
     <string name="settings_category_logging_other">Інші параметри ведення журналу</string>
     <string name="settings_goto_url_button">більше …</string>
     <string name="settings_service_activate">Активувати</string>
@@ -503,10 +481,10 @@
     <string name="init_summary_log_offline">Увімкнути автономні журнали (Не показувати екран журналу онлайн під час входу, журнали не завантажувати)</string>
     <string name="init_choose_list">Запитати про список</string>
     <string name="init_summary_choose_list">Запитувати, який список зберігати кеші в</string>
-    <string name="init_listdisplay">Додаткові списки</string>
-    <string name="init_summary_listdisplay">Показати членство в кеші в додаткових списках зі схованки</string>
     <string name="init_livelist">Показати напрямок</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">Створити резервну копію</string>
     <string name="init_backup_summary">Зверніть увагу, що ця функція може створювати резервні копії кешів, шляхових точок &amp; налаштувань, але немає схованок. \nДля того, щоб мати можливість відновити дані навіть після втрати телефону, резервні копії файлів слід скопіювати у незалежне місце.</string>
@@ -565,17 +543,6 @@
     <string name="init_maptrail_length">Максимальна довжина історії тексту</string>
     <string name="init_maptrail_length_summary">Максимальна довжина історії маршрутів (примусово при кожному запуску c:geo). Значення за замовчуванням 700 балів - налаштувати відповідно до доступної пам\'яті.</string>
     <string name="init_summary_maptrail">При активації (а GPS увімкнено) c: geo зберігає історію ваших рухів як доріжку та відображає її на карті.</string>
-    <string name="init_trailcolor">Колір рядка доріжки історії</string>
-    <string name="init_trailcolor_summary">Вибрати колір і непрозорість для лінії треку історії</string>
-    <string name="init_trailwidth">Ширина рядка доріжки історії</string>
-    <string name="init_trailwidth_summary">Виберіть ширину для лінії відстеження історії</string>
-    <string name="init_directioncolor">напрямок кольору лінії</string>
-    <string name="init_directioncolor_summary">Виберіть колір і непрозорість для лінії напрямку. Лінія напрямку показує пряму лінію до вибраної цілі навігації або конкретного маршруту навігаційного шляху, якщо маршрутизацію ввімкнено шляхом встановлення програми BRouter.</string>
-    <string name="init_directionwidth">Ширина лінії напрямку</string>
-    <string name="init_directionwidth_summary">Обрати ширину для напрямку</string>
-    <string name="init_routecolor">Колір окремої лінії маршруту</string>
-    <string name="init_routewidth">Ширина окремої лінії маршруту</string>
-    <string name="init_routewidth_summary">Виберіть ширину для окремої лінії маршруту</string>
     <string name="init_circlecolor">коло лінії кола</string>
     <string name="init_circlecolor_summary">Вибирати колір і непрозорість для лінії круга. Кола використовуються як візуальне представлення мінімального радіусу навколо кешу або фізичної точки пошуку, де немає іншого кешу чи фізичної шляхової точки. (Застосовується до geocaching.com)</string>
     <string name="init_circlefillcolor">коло заливки кольору</string>
@@ -604,8 +571,6 @@
     <string name="init_dbmove_failed">Не вдалося перемістити базу даних</string>
     <string name="init_plain_logs">Звичайні журнали</string>
     <string name="init_summary_plain_logs">Відображати записи журналу без кольорів</string>
-    <string name="init_use_native_ua">Браузер для Android</string>
-    <string name="init_summary_use_native_ua">Ідентифікувати як браузер Android. Вирікає проблеми авторизації при використанні певних мережевих провайдерів.</string>
     <string name="init_maintenance">Технічне обслуговування</string>
     <string name="init_maintenance_directories">осиротіли файли</string>
     <string name="init_location">геолокація</string>
@@ -625,9 +590,6 @@
     <string name="settings_open_geokretymap_website">Відкрити сайт GeoKretyMap.org</string>
     <string name="settings_settings">Налаштування</string>
     <string name="settings_information">Інформація</string>
-    <string name="settings_advanced">розширені налаштування</string>
-    <string name="settings_twitter_cache_message">Повідомлення для пошуку кешу</string>
-    <string name="settings_twitter_trackable_message">Повідомлення для пошуку кешу</string>
     <string name="init_ec_icons">іконки на карті</string>
     <string name="settings_ec_icons_other">Власний стиль</string>
     <string name="settings_ec_icons_oc">Вподобати OC</string>
@@ -645,7 +607,6 @@
     <string name="feature_search_finder">пошук за допомогою шукача</string>
     <string name="feature_favorite">Додавання кешу до вибраного</string>
     <string name="feature_voting">голосування за кеші</string>
-    <string name="init_maplines_title">налаштування ліній карт</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">повідомлення про близькість</string>
     <string name="init_proximityNotificationGeneral">Загальне сповіщення про близькість на карті</string>
@@ -695,8 +656,6 @@
     <string name="auth_credentials_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Наступний процес дозволить <b> c: geo </b> отримати доступ до %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo тепер авторизований для публікації у Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo тепер авторизований для публікації у Twitter %s.</string>
     <!-- auth geokrety -->
@@ -718,7 +677,6 @@
     <string name="cache_offline_about_time_year">більше року тому</string>
     <string name="cache_premium">Преміум</string>
     <string name="cache_inventory">Інвентар</string>
-    <string name="cache_log_images_title">журнальні зображення</string>
     <string name="cache_log_image_default_title">Фото</string>
     <string name="cache_personal_note">Особиста нотатка</string>
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
@@ -729,10 +687,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">запобігання вилученню шляхових точок</string>
     <string name="cache_personal_note_limit">обмеження особистих записок</string>
     <string name="cache_personal_note_upload">завантажити</string>
-    <string name="cache_personal_note_uploading">Завантаження особистої нотатки</string>
     <string name="cache_personal_note_upload_done">завантажено особисту нотатку</string>
     <string name="cache_personal_note_upload_error">Помилка завантаження особистої нотатки</string>
-    <string name="cache_personal_note_upload_cancelled">Завантаження персональних нотаток скасовано</string>
     <string name="cache_description">опис</string>
     <string name="cache_description_table_note">Опис містить форматування таблиці, яке, можливо, необхідно переглянути на %s щоб побачити правильно.</string>
     <string name="cache_area_description">опис району</string>
@@ -771,14 +727,6 @@
     <string name="cache_dialog_offline_drop_message">Видалення кеш-пам\'яті з пам\'яті пристрою…</string>
     <string name="cache_dialog_refresh_title">освіжити</string>
     <string name="cache_dialog_refresh_message">перезавантаження деталей кешу…</string>
-    <string name="cache_dialog_watchlist_add_title">список спостереження</string>
-    <string name="cache_dialog_watchlist_add_message">Додавання кешу до списку перегляду…</string>
-    <string name="cache_dialog_watchlist_remove_title">список спостереження</string>
-    <string name="cache_dialog_watchlist_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
-    <string name="cache_dialog_favorite_add_title">улюблений</string>
-    <string name="cache_dialog_favorite_add_message">Додавання кешу до вибраного…</string>
-    <string name="cache_dialog_favorite_remove_title">улюблений</string>
-    <string name="cache_dialog_favorite_remove_message">Видалення кеш-пам\'яті зі списку спостереження…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
     <string name="cache_menu_navigation_walk">Навігація (ходьба)</string>
@@ -840,7 +788,6 @@
     <string name="cache_location">Розташування</string>
     <string name="cache_coordinates">Координати</string>
     <string name="cache_coordinates_original">Оригінальні координати</string>
-    <string name="cache_spoiler_images_title">Зображення спойлера</string>
     <string name="cache_log_types">Типи журналiв</string>
     <string name="cache_coordinates_no">Цей кеш не має координат.</string>
     <string name="cache_clear_history">Очистити історію</string>
@@ -922,8 +869,6 @@
     <string name="waypoint_save_and_modify_on_website">Встановити як кеш-координати в c:geo і на сайті</string>
     <string name="waypoint_reset_cache_coords">Скинути координати кешу</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Координати кешу було скинуто на веб-сайті.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Скидання координат кешу на веб-сайті…</string>
-    <string name="waypoint_reset">Скинути</string>
     <string name="waypoint_localy_reset_cache_coords">Скинути за:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Скинути на c:geo та на сайт</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Сайт не підтримує зміну координат кешу.</string>
@@ -941,18 +886,12 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Опублікувати це на Твіттері</string>
     <!-- map -->
     <string name="map_map">Карта</string>
     <string name="map_live">Жива карта</string>
     <string name="map_view_map">Перегляд карти</string>
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>
-    <string name="init_hidewp">сховати шляхові точки</string>
-    <string name="init_summary_hidewp_original">Сховати оригінальні маршрутні точки на карті</string>
-    <string name="init_summary_hidewp_parking">Сховати на карті маршрутні точки паркування</string>
-    <string name="init_summary_hidewp_visited">Сховати відвідані точки на карті</string>
     <string name="map_theme_select">виберіть тему карти</string>
     <string name="map_theme_options">Параметри тем</string>
     <string name="map_language">Мова карти</string>
@@ -1341,7 +1280,6 @@
     <string name="facebook_link"><a href="">сторінка:geo</a></string>
     <string name="market_title">Google Ігри</string>
     <string name="market_link"><a href="">c:geo у Google Play</a></string>
-    <string name="about_twitter">Чи має <b>c:geo</b> публікувати новий статус в Twitter кожен раз, коли ви будете записувати кеш?</string>
     <string name="github_title">вишукувач</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
@@ -1392,9 +1330,6 @@
     <string name="init_confirm_debug">c:geo запущено у режимі налагодження!</string>
     <string name="list_confirm_debug_message">Режим налагодження викликає нестабільності! Ви хочете вимкнути режим налагодження?</string>
     <!-- permission handling -->
-    <string name="close_app">Закрити додаток</string>
-    <string name="ask_again">Запитайте ще раз</string>
-    <string name="storage_permission_request_explanation">c:geo випише дані на накопичувачі телефону або SD-карту, як тільки Ви збережете геокеші для використання в автономному режимі. Додатково:geo буде використовувати ваш телефон для імпорту та експорту файлів та читання автономних карт. Не можна використовувати без цього дозволу.</string>
     <string name="storage_permission_needed">Ця функція неможлива без дозволу на зберігання.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Виберіть колірну схему</string>
@@ -1407,7 +1342,6 @@
     <string name="number_input_err_boundarymax">Введене значення занадто мале - скинути до мінімального значення</string>
     <string name="number_input_err_format">Неприпустимий час формат</string>
     <!-- notification / channel texts -->
-    <string name="notification_proximity_title">повідомлення про близькість</string>
     <!-- individual routes -->
     <string name="individual_route">Індивідуальний маршрут</string>
     <string name="individual_route_added">Додати до маршруту</string>
@@ -1425,6 +1359,7 @@
     <string name="sorted_route_saved">Окремий маршрут збережено</string>
     <string name="load_individual_route_error">Помилка при завантаженні окремого маршруту</string>
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Завантажувати маршрут/маршрут від GPX</string>
     <string name="load_track_error">Помилка при завантаженні маршруту/маршруту</string>
@@ -1485,13 +1420,9 @@
     <string name="wizard_outro_error">Неповна конфігурація\nНе всі частини c:geo будуть працювати належним чином!</string>
     <string name="wizard_permissions_title">Налаштування дозволів</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
-    <string name="wizard_welcome_advanced">Розширена конфігурація</string>
-    <string name="wizard_advanced_offlinemaps_label">офлайн-карти</string>
     <string name="wizard_advanced_restore_label">Відновити</string>
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>
-    <string name="wizard_status_storage_permission">Дозвіл на зберігання</string>
-    <string name="wizard_status_location_permission">Дозвіл на доступ до геоданих</string>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Попередній</string>
@@ -1505,4 +1436,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

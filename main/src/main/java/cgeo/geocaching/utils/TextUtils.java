@@ -5,11 +5,13 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
@@ -52,6 +54,8 @@ public final class TextUtils {
 
     private static final Pattern PATTERN_REMOVE_SPECIAL = Pattern.compile("[^a-z0-9]");
 
+    private static final Pattern PATTERN_CONTAINS_HTML = Pattern.compile(
+            "<(/\\s*)?[a-zA-Z]+\\s*([a-zA-Z]+\\s*=\\s*['\"][^'\"]*['\"]\\s*)*(/\\s*)?>|&#?[a-zA-Z0-9]{1,10};");
 
     /**
      * Internal cache for created Patterns (avoids parsing them unnecessarily often)
@@ -223,7 +227,7 @@ public final class TextUtils {
         if (StringUtils.isBlank(str)) {
             return false;
         }
-        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
+        return PATTERN_CONTAINS_HTML.matcher(str).find();
     }
 
     /**
@@ -293,6 +297,9 @@ public final class TextUtils {
 
     public static SpannableString coloredCacheText(final Context context, @NonNull final Geocache cache, @NonNull final String text) {
         final SpannableString span = new SpannableString(text);
+        if (CalendarUtils.isPastEvent(cache)) { // italics
+            span.setSpan(new StyleSpan(Typeface.ITALIC), 0, span.length(), 0);
+        }
         if (cache.isDisabled() || cache.isArchived()) { // strike
             span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }

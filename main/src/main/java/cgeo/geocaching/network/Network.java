@@ -2,6 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -45,6 +46,7 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.ConnectionSpec;
 import okhttp3.FormBody;
+import okhttp3.Headers;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -278,6 +280,22 @@ public final class Network {
     }
 
     /**
+     * PUT HTTP request with Json POST DATA
+     *
+     * @param uri  the URI to request
+     * @param headers    http headers
+     * @param json the json object to add to the POST request
+     * @return a single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> putJsonRequest(final String uri, final Parameters headers, final BaseJsonNode json) {
+        final Builder request = new Request.Builder().url(uri).put(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                json.toString()));
+        addHeaders(request, headers, null);
+        return RxOkHttpUtils.request(OK_HTTP_CLIENT, request.build());
+    }
+
+    /**
      * Multipart POST HTTP request
      *
      * @param uri             the URI to request
@@ -383,7 +401,7 @@ public final class Network {
             final Request request = chain.request();
             final String reqLogStr = request.method() + " " + hidePassword(request.url().toString());
 
-            Log.d(reqLogStr);
+            Log.d("HTTP-REQ:" + reqLogStr + ", headers=[" + headerToString(request.headers()) + "]");
 
             final long before = System.currentTimeMillis();
             try {
@@ -391,15 +409,30 @@ public final class Network {
                 final String protocol = " (" + response.protocol() + ')';
                 final String redirect = request.url().equals(response.request().url()) ? "" : " (=> " + response.request().url() + ")";
                 if (response.isSuccessful()) {
-                    Log.d(response.code() + formatTimeSpan(before) + reqLogStr + protocol + redirect);
+                    Log.d("HTTP-RESP:" + response.code() + formatTimeSpan(before) + reqLogStr + protocol + redirect + ", headers=[" + headerToString(response.headers()) + "]");
                 } else {
-                    Log.d(response.code() + " [" + response.message() + "]" + formatTimeSpan(before) + reqLogStr + protocol);
+                    Log.d("HTTP-RESP:" + response.code() + " [" + response.message() + "]" + formatTimeSpan(before) + reqLogStr + protocol + ", headers=[" + headerToString(response.headers()) + "]");
                 }
                 return response;
             } catch (final IOException e) {
-                Log.w("Failure" + formatTimeSpan(before) + reqLogStr + " (" + e + ")");
+                Log.w("HTTP-ERROR:" +  formatTimeSpan(before) + reqLogStr + " (" + e + ")", e);
                 throw e;
             }
+        }
+
+        private static String headerToString(final Headers headers) {
+            if (headers == null) {
+                return "";
+            }
+            return CollectionStream.of(headers.names()).map(n -> n + ":" + prepareHeaderValueForLog(n, headers.get(n))).toJoinedString(";");
+        }
+
+        private static String prepareHeaderValueForLog(final String key, final String value) {
+            if (StringUtils.isBlank(value) || value.length() < 10) {
+                return value;
+            }
+            final boolean shorten = value.length() > 150 || key.contains("uthorization") || key.contains("assword");
+            return shorten ? value.substring(0, 10) + "#" + value.length() + "#" + value.substring(value.length() - 3) : value;
         }
 
         private static String hidePassword(final String message) {
@@ -654,8 +687,9 @@ public final class Network {
      *
      * @param response the response to check
      */
-    public static void completeWithSuccess(final Single<Response> response) {
-        Completable.fromSingle(response.flatMap(withSuccess)).blockingAwait();
+    @NonNull
+    public static Completable completeWithSuccess(final Single<Response> response) {
+        return Completable.fromSingle(response.flatMap(withSuccess));
     }
 
     public static final Function<Response, Single<String>> getResponseDataReplaceWhitespace = response -> getResponseData.apply(response).map(TextUtils::replaceWhitespace);

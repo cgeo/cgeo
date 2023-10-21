@@ -7,7 +7,7 @@ import android.os.Bundle;
 public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_cachedetails, rootKey);
+        initPreferences(R.xml.preferences_cachedetails, rootKey);
     }
 
     @Override

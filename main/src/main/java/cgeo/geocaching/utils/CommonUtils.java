@@ -1,9 +1,17 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.utils.functions.Func1;
+
+import android.os.Build;
 import android.util.Pair;
 
+import androidx.core.util.Supplier;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -38,4 +46,43 @@ public class CommonUtils {
         }
         return result;
     }
+
+    /** Returns a ThreadLocal with initial value given by passed Supplier.
+     * Use this method instead of ThreadLocal.withInitial() for SDK<26;
+     */
+    public static <T> ThreadLocal<T> threadLocalWithInitial(final Supplier<T> supplier) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return ThreadLocal.withInitial(supplier::get);
+        }
+
+        return new ThreadLocal<T>() {
+
+            @Override
+            protected T initialValue() {
+                return supplier.get();
+            }
+        };
+    }
+
+    /** executes a given action on each 'partitionSize' numer of elements of the given collection. If false is returned, action is abandoned */
+    public static <T> void executeOnPartitions(final Collection<T> coll, final int partitionSize, final Func1<List<T>, Boolean> action) {
+        final List<T> sublist = new ArrayList<>(partitionSize);
+        int cnt = 0;
+        for (T element : coll) {
+            sublist.add(element);
+            cnt++;
+            if (cnt == partitionSize) {
+                final Boolean cont = action.call(sublist);
+                if (!Boolean.TRUE.equals(cont)) {
+                    return;
+                }
+                sublist.clear();
+            }
+        }
+        if (!sublist.isEmpty()) {
+            action.call(sublist);
+        }
+    }
+
 }

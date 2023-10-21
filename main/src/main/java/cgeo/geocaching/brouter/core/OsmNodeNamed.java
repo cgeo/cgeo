@@ -13,6 +13,7 @@ public class OsmNodeNamed extends OsmNode {
     public double radius; // radius of nogopoint (in meters)
     public double nogoWeight;  // weight for nogopoint
     public boolean isNogo = false;
+    public boolean direct = false; // mark direct routing
 
     public OsmNodeNamed() {
     }

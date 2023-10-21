@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="detail">Mga Detalye</string>
     <string name="search">Hanapin</string>
@@ -43,6 +41,8 @@
     <string name="wp_waypoint">Puntong Pangreperensiya</string>
     <string name="wp_original">Mga Orihinal na mga Koordina</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Natagpuan ito</string>
     <string name="log_dnf">Hindi ito nakita</string>
@@ -80,7 +80,6 @@
     <string name="log_save">I-save ang offline</string>
     <string name="log_saving">Pagpapadala ng mga log&#8230;</string>
     <string name="log_posting_log">Pagpapaskil ng log&#8230;</string>
-    <string name="log_posting_twitter">Pagpapaskil ng tweet&#8230;</string>
     <string name="log_posting_generic_trackable">Nakapaskil na %1$s %2$d/%3$d</string>
     <string name="log_clear">Malinaw</string>
     <string name="log_post_not_possible">Ang download ng datos ay naka progreso&#8230;\nPakiusap muling subukan sa ilang mga segundo o ribesahin ang koneksyon ng internet.</string>
@@ -103,9 +102,6 @@
     <string name="log_today">Ngayong araw</string>
     <string name="log_yesterday">Kahapon</string>
     <string name="log_image">Imahe</string>
-    <string name="log_image_attach">Maglakip ng mga Imahe</string>
-    <string name="log_image_stored">Umiiral</string>
-    <string name="log_image_camera">Bago</string>
     <string name="log_image_caption">Kapsyon</string>
     <string name="log_image_description">Paglalarawan</string>
     <string name="log_image_scale">Pag-iiskala</string>
@@ -114,6 +110,7 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -121,7 +118,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Okay</string>
     <string name="err_parse">Nabigong pag-login sa isang pahina ng parsing</string>
-    <string name="err_server">Hindi nakakontak ang Geocaching.com. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_server_ec">Hindi makontak ang Extremcaching.com. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_server_gk">Hindi makontak ang GeoKrety.org. Maaaring nag-down ang website o ang iyong koneksyon sa internet ay hindi na gumagana.</string>
     <string name="err_login">Walang naka-imbak na Impormasyon sa Login</string>
@@ -140,7 +136,6 @@
     <string name="err_detail_cache_find_any">ang anumang mga geocache ay hindi nakita ng c:geo.</string>
     <string name="err_detail_no_spoiler">c:geo nakita ang walang taga salita ng larawan para sa cache.</string>
     <string name="err_detail_still_working">Gumagawa pa ng trabaho sa ibang gawain.</string>
-    <string name="err_watchlist_still_managing">Nangangasiwa parin sa iyong watchlist.</string>
     <string name="err_watchlist_failed">Binago ang watchlist na nabigo.</string>
     <string name="err_application_no">c:geo hindi nahanap ang saktong aplikasyon.</string>
     <string name="err_auth_initialize">c:geo ay nabigo upang magpasimula ng proseso ng pahintulot.</string>
@@ -188,10 +183,8 @@
     <string name="warn_search_help_user">Ilagay ang username mula sa Geocaching.com.</string>
     <string name="warn_search_help_tb">Ilagay ang code para sa pagsusubaybay. Halimbawa \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Mangyaring maglagay ng ilang teskto para sa iyong log.</string>
-    <string name="warn_load_images">ang c:geo ay nabigo sa pagload ng mga imahe.</string>
     <string name="warn_pocket_query_select">Walang piniling query Pocket.</string>
     <string name="warn_no_pocket_query_found">Walang natagpuang query sa Pocket online.</string>
-    <string name="warn_invalid_character">Ang karakter ay dapat letra o numero</string>
     <string name="err_read_pocket_query_list">Hindi nabasa ng maayus ang listahan ng Pocket query.</string>
     <string name="info_log_posted">ang c:geo ay matagumpay ang pagsusumite ng log.</string>
     <string name="info_log_saved">ang c:geo ay matagumpay na nai-seyb ang log.</string>
@@ -235,16 +228,6 @@
     <string name="caches_more_caches_no">Wala ng mga cache</string>
     <string name="caches_more_caches_loading">Nagloload ang mga cache&#8230;</string>
     <string name="caches_more_caches_currently">kasalukuyan</string>
-    <string name="caches_downloading">Dina-download ang mga cache&#8230;\nETA: </string>
-    <string name="caches_eta_ltm">Mas mababa sa isang minuto</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuto
-
-%d ang mga minuto</item>
-        <item quantity="other">%d minuto
-
-%d ang mga minuto</item>
-    </plurals>
     <string name="caches_history">Historya</string>
     <string name="caches_on_map">Ipakita sa mapa</string>
     <string name="caches_sort">Pagkaka-ayos</string>
@@ -315,7 +298,6 @@
     <string name="about_system_info_send_button">Ipadala gamit ang mail&#8230;</string>
     <string name="about_system_info">c:geo sistema ng impormasyon</string>
     <string name="about_system_info_send_chooser">Magpasa ng mga sistemang impormasyon</string>
-    <string name="changelog_github">Ang Listahan sa lahat ng mga pagbabago</string>
     <!-- download manager -->
     <!-- Android system download manager status messages -->
     <!-- settings -->
@@ -329,8 +311,6 @@
     <string name="settings_title_offlinedata">Ang Datos na Offline</string>
     <string name="settings_title_logging">Pagla-log</string>
     <string name="settings_summary_logging">Magkumpigura ng iyong pirma at itakda ang mga opsyon sa pagla-log.</string>
-    <string name="settings_title_map">Ang Mapa</string>
-    <string name="settings_summary_map">Ang pagtakda ng pinagmumulan ng mapa, mga setting sa mapang naka-offline at mga detalye ng mapa.</string>
     <string name="settings_title_map_data">Ang Datos ng Mapa</string>
     <string name="settings_title_map_content">Nilalaman ng Mapa</string>
     <string name="calculate_dataDir_title">Ang paggamit ng mga datos sa Geocache</string>
@@ -340,8 +320,6 @@
     <string name="settings_title_basicmembers">Pagpipilian sa mga Pangunahin na Miyembro</string>
     <string name="settings_title_system">Ang Sistema</string>
     <string name="settings_title_navigation_menu">Ang Menu ng Nabigasyon</string>
-    <string name="settings_category_browser">Ang Browser</string>
-    <string name="settings_category_social">Ang panlipunan na media</string>
     <string name="settings_category_logging_other">Ang iba pang mga pag pipilian sa pag-login</string>
     <string name="settings_goto_url_button">ang marami&#8230;</string>
     <string name="settings_service_activate">Ang Isaaktibo</string>
@@ -403,7 +381,9 @@
     <string name="init_choose_list">Magtanong para sa listahan</string>
     <string name="init_summary_choose_list">Magtanong kung alin sa listahan inimbak ang mga cache sa</string>
     <string name="init_livelist">Ang pagpapakita ng direksyon</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Mag-Backup</string>
     <string name="init_backup_running">Gumawa ng backup para sa cache database&#8230;</string>
@@ -442,8 +422,6 @@
     <string name="init_dbmove_failed">Ang paglipat ng database ay bigo</string>
     <string name="init_plain_logs">Ang maliwanag na mga logs</string>
     <string name="init_summary_plain_logs">Iladlad ang log ng mga entry na walang mga kulay</string>
-    <string name="init_use_native_ua">Ang browser ng Android</string>
-    <string name="init_summary_use_native_ua">Kilalanin bilang browser ng android. resulbahin ang mga problema sa pag-login kapag gumagamit ng siguradong mga probayder ng network.</string>
     <string name="init_maintenance">Ang sustento</string>
     <string name="init_maintenance_directories">Ang mga luma payl ay alisin</string>
     <string name="init_location">Ang Heyolokasyon</string>
@@ -462,9 +440,6 @@
     <string name="settings_open_geokretymap_website">Ang websyt ng GeoKrety ay buksan</string>
     <string name="settings_settings">Ang mga settings</string>
     <string name="settings_information">Ang Impormasyon</string>
-    <string name="settings_advanced">Mga advance na setting</string>
-    <string name="settings_twitter_cache_message">Ang Mensahe para sa nakitang mga cache</string>
-    <string name="settings_twitter_trackable_message">Ang Mensahe para sa nakitang mga pagsusubaybay</string>
     <string name="init_ec_icons">Mga imahe ng mapa</string>
     <string name="settings_ec_icons_other">Ang Sariling estilo</string>
     <string name="settings_ec_icons_oc">Ang Kagaya ng OC</string>
@@ -515,8 +490,6 @@
     <string name="auth_credentials_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Ang sumusunod na proseso ay pumapayag sa <b>c:geo</b> na makapag-akses sa %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">inawtorisahan maka pag post sa twitter ang c:geo.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">inawtorisahang makipagsalamuha ang c;geo sa ngayon sa %s.</string>
     <!-- auth geokrety -->
@@ -549,16 +522,13 @@
     </plurals>
     <string name="cache_premium">Ang Premyum</string>
     <string name="cache_inventory">Ang Imbentaryo</string>
-    <string name="cache_log_images_title">Ang mga imahe sa log</string>
     <string name="cache_log_image_default_title">Ang Larawan</string>
     <string name="cache_personal_note">Pansariling tala</string>
     <string name="cache_personal_note_edit">I-edit</string>
     <string name="cache_personal_note_limit">Ang limitadong pansariling tala</string>
     <string name="cache_personal_note_upload">Nag-upload</string>
-    <string name="cache_personal_note_uploading">I-upload ang pansariling tala</string>
     <string name="cache_personal_note_upload_done">Ang pansariling tala ay nai-upload na</string>
     <string name="cache_personal_note_upload_error">Ang pag-aupload sa pansariling tala ay mali</string>
-    <string name="cache_personal_note_upload_cancelled">Ang pag-aupload ng pansariling tala ay kinansela</string>
     <string name="cache_description">Ang Paglalarawan</string>
     <string name="cache_description_table_note">Sa paglalarawan sa nilalaman ng pagpo-pormat sa talahanayan ay maaaring kailanganin para %s makita ng tama.</string>
     <string name="cache_watchlist_on">Nasa iyong watchlist ang cache na ito.</string>
@@ -589,14 +559,6 @@
     <string name="cache_dialog_offline_drop_message">Ang pagtatanggal ng cache mula sa memorya ng aparto&#8230;</string>
     <string name="cache_dialog_refresh_title">Mag-refresh</string>
     <string name="cache_dialog_refresh_message">I-reload ang mga detalye ng cache&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">Ang nasa Watchlist</string>
-    <string name="cache_dialog_watchlist_add_message">Ang pagdadagdag ng cache sa iyong watchlist&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">Ang nasa Watchlist</string>
-    <string name="cache_dialog_watchlist_remove_message">Ang pagtatanggal ng cache mula sa iyong watchlist&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">Ang paborito</string>
-    <string name="cache_dialog_favorite_add_message">Ang pagdadagdag ng cache sa iyong mga paborito&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">Ang paborito</string>
-    <string name="cache_dialog_favorite_remove_message">Ang pagtatanggal ng cache mula sa iyong mga paborito&#8230;</string>
     <string name="cache_menu_navigate">Ang nabigasyon</string>
     <string name="cache_menu_navigation_drive">Nabigasyon habang (Nagmamaneho)</string>
     <string name="cache_menu_navigation_walk">Ang Nabigasyon (Naglalakad)</string>
@@ -651,7 +613,6 @@
     <string name="cache_location">Ang lokasyon</string>
     <string name="cache_coordinates">Ang mga Koordineyt</string>
     <string name="cache_coordinates_original">Ang orihinal na mga Koordineyt</string>
-    <string name="cache_spoiler_images_title">Ang mga imaheng spoiler</string>
     <string name="cache_log_types">Klase ng mga log</string>
     <string name="cache_coordinates_no">Walang koordineyt ang mga cathe na ito.</string>
     <string name="cache_clear_history">Ang kasaysayan ay linisin</string>
@@ -711,8 +672,6 @@
     <string name="waypoint_save_and_modify_on_website">I-set ang cache ng mga koordinado sa c:geo at sa websayt</string>
     <string name="waypoint_reset_cache_coords">Ang cache ng mga koordinado ay i-reset</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Nireset sa websayt ang cache ng mga koordinado.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ang pag-reset ng cache ng mga koordinado sa websayt&#8230;</string>
-    <string name="waypoint_reset">I-reset</string>
     <string name="waypoint_localy_reset_cache_coords">I-reset sa c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">I-reset sa c:geo at sa websayt</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Ang Websayt ay hindi suportado ng mga pagbabago sa cache coordinate.</string>
@@ -729,8 +688,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Ipaskil ito upang mahanap ang Twitter</string>
     <!-- map -->
     <string name="map_map">Ang Mapa</string>
     <string name="map_live">Ang Live na mapa</string>
@@ -1064,7 +1021,6 @@
     <string name="support_title">Suporta</string>
     <string name="facebook_link"><a href=""> pahina ng c:Geo</a></string>
     <string name="market_link"><a href=""> c:Geo sa Google Play</a></string>
-    <string name="about_twitter">Dapat &lt;b&gt; c: geo &lt;/ b&gt; mag-publish ng isang bagong katayuan sa Twitter tuwing mag-log ka ng cache?</string>
     <string name="faq_title">Mga madalas itanong</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1150,6 +1106,7 @@
     <!-- individual routes -->
     <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1171,4 +1128,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

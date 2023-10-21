@@ -55,7 +55,7 @@
     <PreferenceCategory
         android:title="@string/init_debug_title"
         app:iconSpaceReserved="false">
-        <Preference android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_debug"
@@ -70,11 +70,6 @@
             android:key="@string/pref_fakekey_memory_dump"
             android:layout="@layout/preference_button"
             android:title="@string/init_create_memory_dump"
-            app:iconSpaceReserved="false" />
-        <Preference
-            android:key="@string/pref_fakekey_generate_infos_downloadmanager"
-            android:layout="@layout/preference_button"
-            android:title="@string/about_system_write_infos_downloadmanager"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_view_settings"

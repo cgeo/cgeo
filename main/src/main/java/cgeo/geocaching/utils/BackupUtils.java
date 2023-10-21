@@ -127,23 +127,23 @@ public class BackupUtils {
                                 regrantAccessFolders.remove(0);
                                 triggerNextRegrantStep(null, null);
                             });
-/* reactivate this if there will ever be PersistableUri again stored in our preferences
         } else if (!regrantAccessUris.isEmpty()) {
-            final Uri uriToBeRestored = Uri.parse(regrantAccessUris.get(0).right);
-            final String temp = uriToBeRestored.getPath();
-            final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
+            for (ImmutableTriple<PersistableUri, String, String> data : regrantAccessUris) {
+                final Uri uriToBeRestored = Uri.parse(data.right);
+                final String temp = uriToBeRestored.getPath();
+                final String displayName = temp.substring(temp.lastIndexOf('/') + 1);
 
-            SimpleDialog.of(activityContext)
-                .setTitle(R.string.init_backup_settings_restore)
-                .setMessage(R.string.settings_file_changed, activityContext.getString(regrantAccessUris.get(0).left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                .confirm((d, v) -> {
-                    fileSelector.restorePersistableUri(PersistableUri.TRACK, uriToBeRestored);
-                },
-                (d2, v2) -> {
-                    regrantAccessUris.remove(0);
-                    triggerNextRegrantStep(null, null);
-                });
-*/
+                SimpleDialog.of(activityContext)
+                    .setTitle(R.string.init_backup_settings_restore)
+                    .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
+                    .confirm((d, v) -> {
+                        fileSelector.restorePersistableUri(data.left, uriToBeRestored);
+                    },
+                    (d2, v2) -> {
+                        regrantAccessUris.remove(0);
+                        triggerNextRegrantStep(null, null);
+                    });
+            }
         } else {
             finishRestoreInternal(activityContext, regrantAccessRestartNeeded, regrantAccessResultString);
         }
@@ -698,8 +698,8 @@ public class BackupUtils {
     }
 
     @NonNull
-    public static String getNewestBackupDateTime() {
-        return getBackupDateTime(newestBackupFolder());
+    public static String getNewestBackupDateTime(final boolean autobackup) {
+        return getBackupDateTime(newestBackupFolder(autobackup));
     }
 
     @NonNull
@@ -712,8 +712,8 @@ public class BackupUtils {
     }
 
     @Nullable
-    public static Folder newestBackupFolder() {
-        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(false);
+    public static Folder newestBackupFolder(final boolean autoback) {
+        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(autoback);
         return dirs == null ? null : dirs.get(dirs.size() - 1).dirLocation;
     }
 
@@ -752,7 +752,10 @@ public class BackupUtils {
             return null; // We don't want to overwrite an existing backup
         }
         final Folder subfolder = Folder.fromFolder(folder, subfoldername);
-        ContentStorage.get().ensureFolder(subfolder, true);
+        if (!ContentStorage.get().ensureFolder(subfolder, true)) {
+            Log.w("Could not create/find new folder " + subfolder);
+            return null;
+        }
         return subfolder;
     }
 

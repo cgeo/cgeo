@@ -35,14 +35,6 @@ public class SimpleDisposableHandler extends DisposableHandler {
         }
     }
 
-    public Message cancelMessage(final String text) {
-        final Message msg = obtainMessage(DISPOSE_WITH_MESSAGE);
-        final Bundle bundle = new Bundle();
-        bundle.putString(MESSAGE_TEXT, text);
-        msg.setData(bundle);
-        return msg;
-    }
-
     @Override
     protected void handleDispose() {
         dismissProgress();
@@ -63,7 +55,7 @@ public class SimpleDisposableHandler extends DisposableHandler {
         }
     }
 
-    protected final void dismissProgress() {
+    protected void dismissProgress() {
         final Progress progressDialog = progressDialogRef.get();
         if (progressDialog != null) {
             progressDialog.dismiss();
@@ -83,15 +75,6 @@ public class SimpleDisposableHandler extends DisposableHandler {
             activity.finish();
         }
 
-    }
-
-    protected void updateStatusMsg(@StringRes final int resId, final String msg) {
-        final CacheDetailActivity activity = (CacheDetailActivity) activityRef.get();
-        if (activity != null) {
-            setProgressMessage(activity.getString(resId)
-                    + "\n\n"
-                    + msg);
-        }
     }
 
     public void sendTextMessage(final int what, @StringRes final int resId) {

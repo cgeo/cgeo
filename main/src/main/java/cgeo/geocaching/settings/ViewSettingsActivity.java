@@ -1,9 +1,10 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -31,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,7 +48,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-public class ViewSettingsActivity extends AbstractActivity {
+public class ViewSettingsActivity extends CustomMenuEntryActivity {
 
     private ArrayAdapter<KeyValue> debugAdapter;
     private ArrayList<KeyValue> filteredItems;
@@ -147,7 +149,7 @@ public class ViewSettingsActivity extends AbstractActivity {
                     if (StringUtils.isBlank(constraint)) {
                         filtered = allItems;
                     } else {
-                        final String check = constraint.toString().toLowerCase().trim();
+                        final String check = constraint.toString().toLowerCase(Locale.getDefault()).trim();
                         final int max = allItems.size();
                         for (int i = 0; i < max; i++) {
                             final KeyValue data = allItems.get(i);
@@ -231,35 +233,46 @@ public class ViewSettingsActivity extends AbstractActivity {
 
     private void editItem(final int position) {
         final KeyValue keyValue = filteredItems.get(position);
-        final String key = keyValue.key;
-        final SettingsUtils.SettingsType type = keyValue.type;
-
-        int inputType = 0;
-        switch (type) {
-            case TYPE_INTEGER:
-            case TYPE_LONG:
-                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
-                break;
-            case TYPE_FLOAT:
-                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                break;
-            default:
-                inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
-                break;
-        }
-        Dialogs.input(this, String.format(getString(R.string.edit_setting), key), keyValue.value, null, inputType, 1, 1, newValue -> {
-            final SharedPreferences.Editor editor = prefs.edit();
-            try {
-                SettingsUtils.putValue(editor, type, key, newValue);
-                editor.apply();
-                debugAdapter.remove(keyValue);
-                debugAdapter.insert(new KeyValue(key, newValue, type), position);
-            } catch (XmlPullParserException e) {
-                showToast(R.string.edit_setting_error_unknown_type);
-            } catch (NumberFormatException e) {
-                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+        if (keyValue.type == SettingsUtils.SettingsType.TYPE_BOOLEAN) {
+            final ArrayList<Boolean> items = new ArrayList<>(Arrays.asList(false, true));
+            SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key)).selectSingle(
+                    items,
+                    (l, pos) -> TextParam.text(items.get(pos) ? "true" : "false"),
+                    StringUtils.equals(keyValue.value, "true") ? 1 : 0,
+                    SimpleDialog.SingleChoiceMode.SHOW_RADIO_AND_OK,
+                    (l, pos) -> editItemHelper(position, keyValue, String.valueOf(items.get(pos))),
+                    (l, pos) -> { } /* do nothing on cancel */
+                    );
+        } else {
+            int inputType = 0;
+            switch (keyValue.type) {
+                case TYPE_INTEGER:
+                case TYPE_LONG:
+                    inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
+                    break;
+                case TYPE_FLOAT:
+                    inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                    break;
+                default:
+                    inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
+                    break;
             }
-        });
+            Dialogs.input(this, String.format(getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
+        }
+    }
+
+    private void editItemHelper(final int position, final KeyValue keyValue, final String newValue) {
+        final SharedPreferences.Editor editor = prefs.edit();
+        try {
+            SettingsUtils.putValue(editor, keyValue.type, keyValue.key, newValue);
+            editor.apply();
+            debugAdapter.remove(keyValue);
+            debugAdapter.insert(new KeyValue(keyValue.key, newValue, keyValue.type), position);
+        } catch (XmlPullParserException e) {
+            showToast(R.string.edit_setting_error_unknown_type);
+        } catch (NumberFormatException e) {
+            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+        }
     }
 
     private void addItem() {

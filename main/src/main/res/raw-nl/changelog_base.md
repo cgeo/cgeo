@@ -1,13 +1,31 @@
 ### Kaart
-- Nieuw: OSM kaart bron osm.paws.cz
+- Mapsforge en VTM libs bijgewerkt naar v0.20
+- Google Maps renderer bijgewerkt
+- Nieuw: Toon cache type icoon als marker als een eigen cache icoon is ingesteld (emoji) of grote iconen zijn ingeschakeld
+- Nieuw: Toon eigen cache icoon als markering voor gerelateerde waypoints
+- Nieuw: Sta het schalen van cache/waypoint iconen toe (Zie Instellingen => uiterlijk)
+- Nieuw: Lineaire labs gebruiken getallen als markeerpunten
+- Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
+- Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
+- Nieuw: Gebruikersgedefinieerde routeringsprofielen (alleen interne routering)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Cache details
-- Nieuw: Nieuwe meer geavanceerde afbeeldingen galerij
-- Oplossing: Herstel de positie in de lijst van waypoints na het bijwerken of verwijderen van waypoint
-- Oplossing: Naar beneden verplaatsen bij het maken van nieuw waypoint
+- Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
+- Nieuw: Zorg voor minimale afbeeldingsgrootte voor weergave
+- Wijziging: Opties voor eigen log-afbeeldingen herontworpen
+- Nieuw: Bettercacher integratie
+- Nieuw: Synchroniseer bezocht status bij het synchroniseren van waypoints met persoonlijke notitie
+- Nieuw: Haal datum gevonden op voor Opencaching-gebaseerde caches
+- Nieuw: Voeg alle waypoints toe aan de afzonderlijke route
 
 ### Algemeen
-- API niveau wijzigen (compileSDK 32)
-- Enkele afhankelijke bibliotheken bijwerken
-- Gebruik de Android ingebouwde splash screen functie bij opstarten
-- Wijziging: Gebruik een verschillend Android mechanisme voor het ontvangen van downloads (voor een betere compatibiliteit met Android 12+)
+- Nieuw: Doel SDK opgehoogd naar 33
+- Wijziging: Afhandeling van databasetoegang om crashes met "database niet beschikbaar" te voorkomen
+- Wijziging: Alleen basisinstellingen worden standaard weergegeven. Ga naar Instellingen => Uitgebreide instellingen om uitgebreide instellingen in te schakelen
+- Nieuw: Filteren in multiselect lijsten toestaan
+- Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
+- Wijziging: AndroidBeam verwijderd, die niet langer wordt ondersteund door het Android-platform
+- Wijziging: Configuratiewizard: "herstel" functionaliteit in het "services configureren" scherm geïntegreerd en het geavanceerde configuratiescherm verwijderd.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

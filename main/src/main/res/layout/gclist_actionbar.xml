@@ -18,7 +18,8 @@
         android:ellipsize="end"
         android:textSize="@dimen/textSize_toolbarPrimary"
         android:textColor="@color/colorTextActionBar"
-        android:text="@string/menu_lists_pocket_queries" />
+        android:text="@string/menu_lists_pocket_queries"
+        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchAB"
@@ -30,5 +31,5 @@
         android:textSize="@dimen/textSize_toolbarSecondary"
         android:textColor="@color/colorTextActionBar"
         android:text="@string/show_all"
-        tools:ignore="SpUsage" />
+        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 </RelativeLayout>

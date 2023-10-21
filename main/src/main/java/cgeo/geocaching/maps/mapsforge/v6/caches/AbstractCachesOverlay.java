@@ -207,7 +207,7 @@ public abstract class AbstractCachesOverlay {
     }
 
     protected final boolean addItem(final Waypoint waypoint, final boolean isDotMode) {
-        final GeoEntry entry = new GeoEntry(waypoint.getGpxId(), overlayId);
+        final GeoEntry entry = new GeoEntry(waypoint.getFullGpxId(), overlayId);
         final GeoitemLayer waypointItem = getWaypointItem(waypoint, this.mapHandlers.getTapHandler(), isDotMode);
         if (waypointItem != null && geoEntries.add(entry)) {
             layerList.add(waypointItem);
@@ -388,7 +388,7 @@ public abstract class AbstractCachesOverlay {
         if (isDotMode) {
             marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheDotMarker(CgeoApplication.getInstance().getResources(), cache).getDrawable());
         } else {
-            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null).getDrawable());
+            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null, true).getDrawable());
         }
         return new GeoitemLayer(cache.getGeoitemRef(), cache.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
     }
@@ -400,7 +400,7 @@ public abstract class AbstractCachesOverlay {
             if (isDotMode) {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
             } else {
-                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint, true).getDrawable());
+                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint, true, true).getDrawable());
             }
             return new GeoitemLayer(waypoint.getGeoitemRef(), waypoint.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
         }

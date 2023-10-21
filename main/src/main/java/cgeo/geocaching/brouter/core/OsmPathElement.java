@@ -65,6 +65,10 @@ public class OsmPathElement implements OsmPos {
         return selev;
     }
 
+    public final void setSElev(short s) {
+        selev = s;
+    }
+
     public final double getElev() {
         return selev / 4.;
     }
@@ -89,12 +93,18 @@ public class OsmPathElement implements OsmPos {
         }
     }
 
+    public final void setAngle(float e) {
+        if (message != null) {
+            message.turnangle = e;
+        }
+    }
+
     public final long getIdFromPos() {
         return ((long) ilon) << 32 | ilat;
     }
 
     public final int calcDistance(final OsmPos p) {
-        return (int) (CheapRulerHelper.distance(ilon, ilat, p.getILon(), p.getILat()) + 1.0);
+        return (int) Math.max(1.0, Math.round(CheapRulerHelper.distance(ilon, ilat, p.getILon(), p.getILat())));
     }
 
     public void addTraffic(final float traffic) {
@@ -103,6 +113,10 @@ public class OsmPathElement implements OsmPos {
 
     public String toString() {
         return ilon + "_" + ilat;
+    }
+
+    public boolean positionEquals(OsmPathElement e) {
+        return this.ilat == e.ilat && this.ilon == e.ilon;
     }
 
     public void writeToStream(final DataOutput dos) throws IOException {

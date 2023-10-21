@@ -5,7 +5,6 @@ import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.FileUtils;
-import cgeo.geocaching.utils.UriUtils;
 
 import android.net.Uri;
 
@@ -25,8 +24,6 @@ abstract class AbstractThemeDownloader extends AbstractDownloader {
     protected void onSuccessfulReceive(final Uri result) {
         //resync
         RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-        //set map theme
-        RenderThemeHelper.setSelectedMapThemeDirect(UriUtils.getLastPathSegment(result));
     }
 
 }

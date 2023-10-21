@@ -14,7 +14,6 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.util.Consumer;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -22,9 +21,25 @@ import java.util.Locale;
 
 public class SeekbarPreference extends Preference {
 
+    /**
+     * Naming conventions:
+     * - progress     - the internal value of the android widget (0 to max) - always int
+     * - value        - actual value (may differ from "progress" if non linear or other boundaries) - always int
+     * - shownValue   - displayed value (may differ from "value", if conversions are involved) - in:float out:float or int converted to string
+     * This applies to derived values (like minProgress etc.) as well.
+     *
+     * Parameters for using in XML preferences:
+     * - min          - minimum allowed value
+     * - max          - maximum allowed value
+     * - stepSize     - value will be rounded down to nearest stepSize
+     * - logScaling   - use logarithmic scaling for seekbar display
+      */
+
     private TextView valueView;
-    protected int minProgress = 0;
-    protected int maxProgress = 100;
+    protected int minValue = 0;
+    protected int maxValue = 100;
+    protected int minProgress = minValue;
+    protected int maxProgress = minProgress;
     protected String minValueDescription;
     protected String maxValueDescription;
     protected int stepSize = 0;
@@ -41,7 +56,6 @@ public class SeekbarPreference extends Preference {
         int valueToProgress(int value);
 
         int progressToValue(int progress);
-
     }
 
     public static class FactorizeValueMapper implements ValueProgressMapper {
@@ -50,7 +64,6 @@ public class SeekbarPreference extends Preference {
         public FactorizeValueMapper(final int factor) {
             this.factor = factor;
         }
-
 
         @Override
         public int valueToProgress(final int value) {
@@ -83,8 +96,8 @@ public class SeekbarPreference extends Preference {
     public SeekbarPreference(final Context context, final int min, final int max, final String label, final String unitValue, final ValueProgressMapper valueProgressMapper) {
         super(context, null, android.R.attr.preferenceStyle);
         this.context = context;
-        this.minProgress = min;
-        this.maxProgress = max;
+        this.minValue = min;
+        this.maxValue = max;
         this.label = label == null ? "" : label;
         this.unitValue = unitValue == null ? "" : unitValue;
         this.valueProgressMapper = valueProgressMapper;
@@ -97,37 +110,42 @@ public class SeekbarPreference extends Preference {
 
         // analyze given parameters
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekbarPreference);
-        minProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_min, minProgress));
-        maxProgress = valueToProgress(a.getInt(R.styleable.SeekbarPreference_max, maxProgress));
+        useLogScaling = a.getBoolean(R.styleable.SeekbarPreference_logScaling, useLogScaling);
+        minValue = a.getInt(R.styleable.SeekbarPreference_min, minValue);
+        maxValue = a.getInt(R.styleable.SeekbarPreference_max, maxValue);
+        minProgress = valueToProgress(minValue);
+        maxProgress = valueToProgress(maxValue);
         minValueDescription = a.getString(R.styleable.SeekbarPreference_minValueDescription);
         maxValueDescription = a.getString(R.styleable.SeekbarPreference_maxValueDescription);
-        stepSize = valueToProgress(a.getInt(R.styleable.SeekbarPreference_stepSize, stepSize));
+        stepSize = a.getInt(R.styleable.SeekbarPreference_stepSize, stepSize);
         final String temp = a.getString(R.styleable.SeekbarPreference_label);
         if (null != temp) {
             label = temp;
         }
         hasDecimals = a.getBoolean(R.styleable.SeekbarPreference_hasDecimals, useDecimals());
-        useLogScaling = a.getBoolean(R.styleable.SeekbarPreference_logScaling, useLogScaling);
         a.recycle();
 
         init();
     }
 
-    // naming convention:
-    // progress     - the internal value of the android widget (0 to max) - always int
-    // value        - actual value (may differ from "progress" if non linear or other boundaries) - always int
-    // shownValue   - displayed value (may differ from "value", if conversions are involved) - in:float out:float or int converted to string
-
     protected int valueToProgressHelper(final int value) {
-        return value;
+        return useLogScaling
+                ? (int) Math.sqrt((long) (value - minValue) * (maxValue - minValue))
+                : value - minValue;
     }
 
     protected int valueToProgress(final int value) {
-        return valueProgressMapper == null ? valueToProgressHelper(value) : valueProgressMapper.valueToProgress(value);
+        return valueProgressMapper != null ? valueProgressMapper.valueToProgress(value) : valueToProgressHelper(value);
     }
 
     protected int progressToValue(final int progress) {
-        return valueProgressMapper == null ? progress : valueProgressMapper.progressToValue(progress);
+        if (valueProgressMapper != null) {
+            return valueProgressMapper.progressToValue(progress);
+        }
+        final int value = useLogScaling
+                ? (int) Math.round((minValue + (double) Math.pow(progress, 2) / (maxValue - minValue)))
+                : progress + minValue;
+        return stepSize > 0 ? progress == maxProgress ? maxValue : ((int) Math.round((double) value / stepSize)) * stepSize : value;
     }
 
     protected String valueToShownValue(final int value) {
@@ -180,14 +198,6 @@ public class SeekbarPreference extends Preference {
         return true;
     }
 
-    private int applyStepSizeAndLogScaling(final int rawValue) {
-        final int scaledValue = useLogScaling ? (int) (((long) rawValue * rawValue) / maxProgress) : rawValue; // Approximate an exponential curve with x^2 or use linear curve x
-        if (stepSize > 0) {
-            return scaledValue / stepSize * stepSize;
-        }
-        return scaledValue;
-    }
-
     protected void saveSetting(final int progress) {
         if (callChangeListener(progress)) {
             persistInt(progressToValue(progress));
@@ -217,14 +227,12 @@ public class SeekbarPreference extends Preference {
         // get views
         final SeekBar seekBar = (SeekBar) holder.findViewById(R.id.preference_seekbar);
         valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);
+        holder.setDividerAllowedAbove(false);
 
         // init seekbar
         seekBar.setMax(maxProgress);
-
-        // set initial value
-        final int threshold = startProgress;
-        valueView.setText(getValueString(threshold));
-        seekBar.setProgress(useLogScaling ? (int) Math.sqrt((long) threshold * maxProgress) : threshold); // apply scaling as chosen
+        seekBar.setProgress(startProgress);
+        valueView.setText(getValueString(startProgress));
 
         // set label (if given)
         if (null != label && !label.isEmpty()) {
@@ -236,8 +244,8 @@ public class SeekbarPreference extends Preference {
         seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
-                if (fromUser && atLeastMin(seekBar, applyStepSizeAndLogScaling(progress))) {
-                    valueView.setText(getValueString(applyStepSizeAndLogScaling(progress)));
+                if (fromUser && atLeastMin(seekBar, progress)) {
+                    valueView.setText(getValueString(progress));
                 }
             }
 
@@ -248,29 +256,37 @@ public class SeekbarPreference extends Preference {
 
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
-                if (atLeastMin(seekBar, applyStepSizeAndLogScaling(seekBar.getProgress()))) {
-                    saveSetting(applyStepSizeAndLogScaling(seekBar.getProgress()));
+                if (atLeastMin(seekBar, seekBar.getProgress())) {
+                    saveSetting(seekBar.getProgress());
                 }
             }
         });
 
         valueView.setOnClickListener(v2 -> {
-            final String defaultValue = valueToShownValue(progressToValue(seekBar.getProgress()));
+            final String currentValue = valueToShownValue(progressToValue(seekBar.getProgress()));
             int inputType = InputType.TYPE_CLASS_NUMBER;
             if (useDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
-            final Consumer<String> listener = input -> {
+            SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue))).input(inputType, currentValue, null, getUnitString(), input -> {
                 try {
-                    final int newValue = (int) SimpleDialog.checkInputRange(getContext(), valueToProgress(shownValueToValue(Float.parseFloat(input))), minProgress, maxProgress);
-                    seekBar.setProgress(newValue);
+                    final int newValue = (int) SimpleDialog.checkInputRange(getContext(), shownValueToValue(Float.parseFloat(input)), minValue, maxValue);
+                    final int newProgress = valueToProgress(newValue);
+                    seekBar.setProgress(newProgress);
                     saveSetting(seekBar.getProgress());
-                    valueView.setText(getValueString(newValue));
+                    valueView.setText(getValueString(newProgress));
                 } catch (NumberFormatException e) {
                     Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                 }
-            };
-            SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(progressToValue(minProgress)), valueToShownValue(progressToValue(maxProgress)))).input(inputType, defaultValue, null, getUnitString(), listener);
+            });
         });
     }
+
+    /** apply mapping to change notifications */
+    @Override
+    public boolean callChangeListener(final Object newValue) {
+        final OnPreferenceChangeListener opcl = getOnPreferenceChangeListener();
+        return opcl == null || opcl.onPreferenceChange(this, progressToValue((int) newValue));
+    }
+
 }

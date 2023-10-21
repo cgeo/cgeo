@@ -10,10 +10,11 @@
 package cgeo.geocaching.brouter.expressions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 final class BExpressionLookupValue {
     public String value;
-    public ArrayList<String> aliases;
+    public List<String> aliases;
 
     BExpressionLookupValue(final String value) {
         this.value = value;

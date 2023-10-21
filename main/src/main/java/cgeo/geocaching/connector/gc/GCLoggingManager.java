@@ -94,7 +94,8 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
                     Log.w("GCLoggingManager.onLoadFinished: getTrackableInventory", e);
                 }
 
-                final List<LogType> possibleLogTypes = GCParser.parseTypes(page);
+                final List<LogType> possibleLogTypes = Settings.enableFeatureNewGCLogApi() ?
+                        GCParser.parseTypesNew(page) : GCParser.parseTypes(page);
 
                 // TODO: also parse ProblemLogTypes: logSettings.problemLogTypes.push(45);
 
@@ -129,6 +130,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     public void onLoadFinished(@NonNull final Loader<GCLoggingManager.Result> loader, final GCLoggingManager.Result result) {
         if (result == null) {
             hasLoaderError = true;
+            Log.w("GCLoggingManager loaderError: empty result");
         } else {
             if (result.trackables != null) {
                 trackables = result.trackables;
@@ -139,6 +141,9 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
             possibleLogTypes = result.possibleLogTypes;
             hasLoaderError = possibleLogTypes.isEmpty();
+            if (possibleLogTypes.isEmpty()) {
+                Log.w("GCLoggingManager loaderError: empty log types");
+            }
 
             if (result.premFavcount != null) {
                 premFavcount = result.premFavcount;
@@ -163,13 +168,13 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
     @NonNull
     @Override
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
+        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false, rating);
     }
 
     @Override
     @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
+    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
 
         try {
             final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(cache, logType,
@@ -234,6 +239,11 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
     @Override
     public boolean hasFavPointLoadError() {
         return hasFavPointLoadError;
+    }
+
+    @Override
+    public int getFavoriteCheckboxText() {
+        return R.plurals.fav_points_remaining;
     }
 
     @Override

@@ -1,9 +1,11 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.location.IGeoDataProvider;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Action4;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -13,22 +15,32 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Tracks {
 
     private final ArrayList<Track> data = new ArrayList<>();
 
-    private static class Track {
+    public static class Track {
         private final Trackfiles trackfile;
-        private IGeoDataProvider route;
+        private IGeoItemSupplier route;
 
         Track(final Trackfiles trackfile) {
             this.trackfile = trackfile;
             this.route = null;
         }
+
+        public IGeoItemSupplier getRoute() {
+            return route;
+        }
+
+        public Trackfiles getTrackfile() {
+            return trackfile;
+        }
     }
 
     public interface UpdateTrack {
-        void updateRoute(String key, IGeoDataProvider route);
+        void updateRoute(String key, IGeoItemSupplier route, int color, int width);
     }
 
     public Tracks() {
@@ -55,7 +67,7 @@ public class Tracks {
         });
     }
 
-    public void setRoute(@NonNull final String key, final IGeoDataProvider route) {
+    public void setRoute(@NonNull final String key, final IGeoItemSupplier route) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 track.route = route;
@@ -69,7 +81,13 @@ public class Tracks {
         }
     }
 
-    public void traverse(final Action2<String, IGeoDataProvider> action) {
+    public void traverse(final Action4<String, IGeoItemSupplier, Integer, Integer> action) {
+        for (Track track : data) {
+            action.call(track.trackfile.getKey(), track.route, track.trackfile.getColor(), track.trackfile.getWidth());
+        }
+    }
+
+    public void traverse(final Action2<String, IGeoItemSupplier> action) {
         for (Track track : data) {
             action.call(track.trackfile.getKey(), track.route);
         }
@@ -96,6 +114,15 @@ public class Tracks {
         }
     }
 
+    public Track getTrack(@NonNull final String key) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                return track;
+            }
+        }
+        return null;
+    }
+
     public String getDisplayname(@NonNull final String key) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
@@ -113,7 +140,41 @@ public class Tracks {
         }
     }
 
-    public IGeoDataProvider getRoute(@NonNull final String key) {
+    public int getColor(@NonNull final String key) {
+        for (Track track : data) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
+                return track.trackfile.getColor();
+            }
+        }
+        return MapLineUtils.getTrackColor();
+    }
+
+    public void setColor(@NonNull final String key, final int newColor) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setColor(newColor);
+            }
+        }
+    }
+
+    public int getWidth(@NonNull final String key) {
+        for (Track track : data) {
+            if (StringUtils.equals(track.trackfile.getKey(), key)) {
+                return track.trackfile.getWidth();
+            }
+        }
+        return MapLineUtils.getRawTrackLineWidth();
+    }
+
+    public void setWidth(@NonNull final String key, final int newWidth) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setWidth(newWidth);
+            }
+        }
+    }
+
+    public IGeoItemSupplier getRoute(@NonNull final String key) {
         for (Track track : data) {
             if (track.trackfile.getKey().equals(key)) {
                 return track.route;
@@ -123,7 +184,11 @@ public class Tracks {
     }
 
     public void hide(@NonNull final String key, final boolean hide) {
-        Trackfiles.hide(key, hide);
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                track.trackfile.setHidden(hide);
+            }
+        }
     }
 
     @Nullable

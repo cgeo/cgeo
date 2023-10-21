@@ -5,9 +5,7 @@ import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
-import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
-import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
@@ -15,15 +13,12 @@ import cgeo.geocaching.log.LogTrackableActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.TrackableLogsViewCreator;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -50,7 +45,6 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
@@ -60,19 +54,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class TrackableActivity extends TabbedViewPagerActivity implements AndroidBeam.ActivitySharingInterface {
+public class TrackableActivity extends TabbedViewPagerActivity {
 
     public enum Page {
         DETAILS(R.string.detail),
         LOGS(R.string.cache_logs),
-        IMAGES(R.string.cache_images),
         IMAGEGALLERY(R.string.cache_images);
 
         @StringRes
@@ -104,7 +96,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     private TrackableBrand brand = null;
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
-    private ImagesList imagesList = null;
     private ImageGalleryView imageGallery = null;
     private String fallbackKeywordSearch = null;
     private final CompositeDisposable createDisposables = new CompositeDisposable();
@@ -133,7 +124,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         // get parameters
         final Bundle extras = getIntent().getExtras();
 
-        final Uri uri = AndroidBeam.getUri(getIntent());
         if (extras != null) {
             // try to get data from extras
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -144,50 +134,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
             trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
             fallbackKeywordSearch = extras.getString(Intents.EXTRA_KEYWORD);
-        }
-
-        // try to get data from URI
-        if (geocode == null && guid == null && id == null && uri != null) {
-            // check if port part needs to be removed
-            String address = uri.toString();
-            if (uri.getPort() > 0) {
-                address = StringUtils.remove(address, ":" + uri.getPort());
-            }
-            geocode = ConnectorFactory.getTrackableFromURL(address);
-            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(address);
-
-            final String uriHost = uri.getHost().toLowerCase(Locale.US);
-            if (uriHost.endsWith("geocaching.com")) {
-                geocode = uri.getQueryParameter("tracker");
-                guid = uri.getQueryParameter("guid");
-                id = uri.getQueryParameter("id");
-
-                if (StringUtils.isNotBlank(geocode)) {
-                    geocode = geocode.toUpperCase(Locale.US);
-                    guid = null;
-                    id = null;
-                } else if (StringUtils.isNotBlank(guid)) {
-                    geocode = null;
-                    guid = guid.toLowerCase(Locale.US);
-                    id = null;
-                } else if (StringUtils.isNotBlank(id)) {
-                    geocode = null;
-                    guid = null;
-                    id = id.toLowerCase(Locale.US);
-                } else {
-                    showToast(res.getString(R.string.err_tb_details_open));
-                    finish();
-                    return;
-                }
-            } else if (uriHost.endsWith("geokrety.org")) {
-                brand = TrackableBrand.GEOKRETY;
-
-                // If geocode isn't found, try to find by Tracking Code
-                if (geocode == null && !tbTrackingCode.isEmpty()) {
-                    trackingCode = tbTrackingCode.trackingCode;
-                    geocode = tbTrackingCode.trackingCode;
-                }
-            }
         }
 
         // no given data
@@ -205,9 +151,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         } else {
             message = res.getString(R.string.trackable);
         }
-
-        // If we have a newer Android device setup Android Beam for easy cache sharing
-        AndroidBeam.enable(this, this);
 
         createViewPager(Page.DETAILS.id, getOrderedPages(), null, true);
 
@@ -232,7 +175,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         trackable = newTrackable;
         displayTrackable();
         // reset imagelist // @todo mb: more to do?
-        imagesList = null;
         imageGallery = null;
     }
 
@@ -249,12 +191,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                     showToast(res.getString(R.string.err_tb_find_that));
                     finish();
                 }, () -> act(null)));
-    }
-
-    @Nullable
-    @Override
-    public String getAndroidBeamUri() {
-        return trackable != null ? trackable.getUrl() : null;
     }
 
     @Override
@@ -365,44 +301,10 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             return new DetailsViewCreator();
         } else if (pageId == Page.LOGS.id) {
             return new TrackableLogsViewCreator();
-        } else if (pageId == Page.IMAGES.id) {
-            return new ImagesViewCreator();
         } else if (pageId == Page.IMAGEGALLERY.id) {
             return new ImageGalleryViewCreator();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
-    }
-
-    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
-
-        @Override
-        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return CachedetailImagesPageBinding.inflate(inflater, container, false);
-        }
-
-        @Override
-        public long getPageId() {
-            return Page.IMAGES.id;
-        }
-
-        @Override
-        public void setContent() {
-            final TrackableActivity activity = (TrackableActivity) getActivity();
-            if (activity == null) {
-                return;
-            }
-            final Trackable trackable = activity.getTrackable();
-            if (trackable == null) {
-                return;
-            }
-            binding.getRoot().setVisibility(View.VISIBLE);
-
-            if (activity.imagesList == null) {
-                activity.imagesList = new ImagesList(activity, trackable.getGeocode(), null);
-                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), trackable.getImages()));
-            }
-        }
-
     }
 
     public static class ImageGalleryViewCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
@@ -458,12 +360,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (CollectionUtils.isNotEmpty(trackable.getLogs())) {
                 pages.add(Page.LOGS.id);
             }
-            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(trackable.getImages())) {
-                pages.add(Page.IMAGES.id);
-            }
-            if (Settings.enableFeatureNewImageGallery()) {
-                pages.add(Page.IMAGEGALLERY.id);
-            }
+            pages.add(Page.IMAGEGALLERY.id);
         }
         final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
@@ -652,12 +549,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
 
-                if (Settings.enableFeatureNewImageGallery()) {
-                    trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
-                } else {
-                    trackableImage.setOnClickListener(view -> ShareUtils.openUrl(activity, trackable.getImage()));
-                }
-
+                trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
 
                 AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 

@@ -10,8 +10,6 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsView;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -44,8 +42,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class TileProviderFactory {
     public static final int MAP_LANGUAGE_DEFAULT_ID = 432198765;
 
-    public static final GoogleMapsView MAP_GOOGLE = new GoogleMapsView();
-    public static final MapsforgeVtmView MAP_MAPSFORGE = new MapsforgeVtmView();
     private static final HashMap<String, AbstractTileProvider> tileProviders = new LinkedHashMap<>();
     private static String[] languages;
 
@@ -138,12 +134,14 @@ public class TileProviderFactory {
         if (isGoogleMapsInstalled()) {
             registerTileProvider(new GoogleMapSource());
             registerTileProvider(new GoogleSatelliteSource());
+            registerTileProvider(new GoogleTerrainSource());
         }
 
         // OSM online tile providers
         registerTileProvider(new OsmOrgSource());
         registerTileProvider(new OsmDeSource());
         registerTileProvider(new CyclosmSource());
+        registerTileProvider(new OpenTopoMapSource());
 
         // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =

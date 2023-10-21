@@ -74,7 +74,7 @@ public final class Dialogs {
      */
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards, final boolean disableCancelOnDAMA) {
         final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
 
         content.message.setText(message);
@@ -108,7 +108,12 @@ public final class Dialogs {
         }
 
         if (cancellable) {
-            builder.setNegativeButton(android.R.string.cancel, null);
+            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                // reachable only when disableCancelOnDAMA is set to false
+                if (content.checkBox.isChecked()) {
+                    OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                }
+            });
         }
 
         builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
@@ -120,7 +125,8 @@ public final class Dialogs {
         }
         dialog.show();
 
-        if (cancellable) {
+        // disable cancel on "don't ask me again"?
+        if (cancellable && disableCancelOnDAMA) {
             content.checkBox.setOnClickListener(result -> {
                 final Button button = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                 button.setEnabled(!content.checkBox.isChecked());
@@ -141,7 +147,22 @@ public final class Dialogs {
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
             internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
-                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
+                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null, true);
+        }
+    }
+
+    /**
+     * Message dialog which is shown max one time each c:geo session, until "don't shown again" is checked.
+     * Please define your dialog name/message strings at OneTimeDialogs.DialogType.
+     * @param runOnOk gets started on closing the dialog with "ok".
+     * Dialog can be cancelled even when "don't ask me again" checkbox is set
+     */
+    public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType, @NonNull final Runnable runOnOk) {
+
+        if (OneTimeDialogs.showDialog(dialogType)) {
+            OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
+                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), true, runOnOk, false);
         }
     }
 
@@ -154,7 +175,7 @@ public final class Dialogs {
      */
     public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
-            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards);
+            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards, true);
         } else if (runAfterwards != null) {
             runAfterwards.run();
         }

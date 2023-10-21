@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.builders;
 
 import cgeo.geocaching.utils.DisplayUtils;
+import cgeo.geocaching.utils.ScalableDrawable;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.res.Resources;
@@ -15,20 +16,29 @@ import java.util.List;
 public class InsetBuilder {
     private static final int[] FULLSIZE = {0, 0, 0, 0};
 
-    private static int markerSizeUnscaled = 0;
-
     private Drawable drawable = null;
     private int id;
     private int pos;
     private boolean doubleSize = false;
+    private float scalingFactor = 1.0f;
 
     public InsetBuilder(final int id, final int pos) {
         this.id = id;
         this.pos = pos;
     }
 
+    public InsetBuilder(final int id, final int pos, final float scalingFactor) {
+        this(id, pos);
+        this.scalingFactor = scalingFactor;
+    }
+
     public InsetBuilder(final int id) {
         this.id = id;
+    }
+
+    public InsetBuilder(final int id, final float scalingFactor) {
+        this(id);
+        this.scalingFactor = scalingFactor;
     }
 
     public InsetBuilder(final Drawable drawable) {
@@ -40,24 +50,27 @@ public class InsetBuilder {
         this.pos = pos;
     }
 
-    public InsetBuilder(final int id, final int pos, final boolean doubleSize) {
-        this.id = id;
+    public InsetBuilder(final Drawable drawable, final int pos, final float scalingFactor) {
+        this.drawable = drawable;
         this.pos = pos;
+        this.scalingFactor = scalingFactor;
+    }
+
+    public InsetBuilder(final int id, final int pos, final boolean doubleSize, final float scalingFactor) {
+        this(id, pos);
         this.doubleSize = doubleSize;
+        this.scalingFactor = scalingFactor;
     }
 
     public int[] build(final Resources res, final List<Drawable> layers, final int width, final int height) {
         if (drawable == null) {
-            drawable = ResourcesCompat.getDrawable(res, id, null);
+            drawable = scalingFactor == 1.0f ? ResourcesCompat.getDrawable(res, id, null) : new ScalableDrawable(ResourcesCompat.getDrawable(res, id, null), scalingFactor);
         }
         layers.add(drawable);
 
         if (Build.VERSION.SDK_INT > 22) {
             // solution for API 23+, returns parameters for setLayerGravity and a flag for doubleSize
-            if (markerSizeUnscaled == 0) {
-                markerSizeUnscaled = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 1.0f);
-            }
-            return new int[]{doubleSize ? markerSizeUnscaled : 0, pos == 0 ? Gravity.CENTER : pos};
+            return new int[]{doubleSize ? DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, scalingFactor) : 0, pos == 0 ? Gravity.CENTER : pos};
         } else {
             // solution for API < 23, returns parameters for LayerDrawable.setLayerInset
             final int[] insetPadding = {0, 0, 0, 0}; // left, top, right, bottom padding for inset

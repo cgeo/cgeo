@@ -15,6 +15,7 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.al.ALConnector;
+import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.IVotingCapability;
@@ -29,7 +30,6 @@ import cgeo.geocaching.contacts.IContactCardProvider;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
-import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
@@ -58,7 +58,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
@@ -76,12 +76,11 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
-import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
@@ -102,9 +101,10 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ProgressBarDisposableHandler;
+import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
-import cgeo.geocaching.utils.SimpleHandler;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 import cgeo.geocaching.utils.functions.Action1;
@@ -113,7 +113,6 @@ import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -178,6 +177,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -194,7 +194,7 @@ import org.apache.commons.text.StringEscapeUtils;
  * e.g. details, description, logs, waypoints, inventory, variables...
  */
 public class CacheDetailActivity extends TabbedViewPagerActivity
-        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
+        implements IContactCardProvider, CacheMenuHandler.ActivityInterface, INavigationSource, EditNoteDialogListener {
 
     private static final int MESSAGE_FAILED = -1;
     private static final int MESSAGE_SUCCEEDED = 1;
@@ -235,8 +235,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
 
-    protected ImagesList imagesList;
-
     private ImageGalleryView imageGallery;
     private int imageGalleryPos = -1;
 
@@ -262,7 +260,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = AndroidBeam.getUri(getIntent());
+        final Uri uri = getIntent().getData();
 
         // try to get data from extras
         String name = null;
@@ -391,9 +389,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
 
-        // If we have a newer Android device setup Android Beam for easy cache sharing
-        AndroidBeam.enable(this, this);
-
         // get notified on async cache changes (e.g.: waypoint creation from map or background refresh)
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
@@ -403,13 +398,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             }
         });
-    }
-
-
-    @Override
-    @Nullable
-    public String getAndroidBeamUri() {
-        return cache != null ? cache.getUrl() : null;
     }
 
     @Override
@@ -482,10 +470,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
             menu.findItem(R.id.menu_waypoint_open_geochecker).setVisible(CheckerUtils.getCheckerUrl(cache) != null);
-        } else {
-            if (imagesList != null) {
-                imagesList.onCreateContextMenu(menu, view);
-            }
         }
     }
 
@@ -592,14 +576,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (ConnectorFactory.getConnector(cache).supportsOwnCoordinates()) {
                 createResetCacheCoordinatesDialog(selectedWaypoint).show();
             } else {
-                final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-                final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
-                resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
+                final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, false);
+                handler.showProgress();
+                resetCoords(cache, handler, selectedWaypoint, true, false);
             }
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
-        } else if (imagesList == null || !imagesList.onContextItemSelected(item)) {
-            return onOptionsItemSelected(item);
         }
         return true;
     }
@@ -748,6 +730,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 cache = DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_ALL_DB_ONLY);
                 notifyDataSetChanged();
             }));
+        } else if (menuItem == R.id.menu_add_to_route) {
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.appendToIndividualRoute(cache.getWaypoints()), () -> ActivityMixin.showShortToast(this, R.string.waypoints_appended_to_route));
         } else if (menuItem == R.id.menu_export_gpx) {
             new GpxExport().export(Collections.singletonList(cache), this, cache.getName());
         } else if (menuItem == R.id.menu_export_fieldnotes) {
@@ -909,13 +893,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         // allow cache to notify CacheDetailActivity when it changes so it can be reloaded
-        cache.setChangeNotificationHandler(new ChangeNotificationHandler(this, progress));
+        cache.setChangeNotificationHandler(new ChangeNotificationHandler(this));
 
         setCacheTitleBar(cache);
         setIsContentRefreshable(cache.supportsRefresh());
 
         // reset imagesList so Images view page will be redrawn
-        imagesList = null;
         imageGallery = null;
         setOrderedPages(getOrderedPages());
         reinitializeViewPager();
@@ -978,7 +961,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images),
         IMAGEGALLERY(R.string.cache_images),
         VARIABLES(R.string.cache_variables),
         ;
@@ -1007,31 +989,30 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void refreshCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
 
         if (!Network.isConnected()) {
-            showToast(getString(R.string.err_server));
+            showToast(getString(R.string.err_server_general));
             return;
         }
 
-        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this, progress);
-
-        progress.show(this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
+        final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler(this);
+        refreshCacheHandler.showProgress();
 
         cache.refresh(refreshCacheHandler, AndroidRxUtils.refreshScheduler);
     }
 
     private void dropCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
-
-        progress.show(this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
-        cache.drop(new ChangeNotificationHandler(this, progress));
+        final ChangeNotificationHandler handler = new ChangeNotificationHandler(this);
+        handler.showProgress();
+        cache.drop(handler);
     }
 
     private void dropUserdefinedWaypoints() {
@@ -1073,7 +1054,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void storeCache(final boolean fastStoreOnLastSelection) {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
@@ -1088,7 +1069,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void moveCache() {
-        if (progress.isShowing()) {
+        if (ProgressBarDisposableHandler.isInProgress(this) || progress.isShowing()) {
             showToast(res.getString(R.string.err_detail_still_working));
             return;
         }
@@ -1106,19 +1087,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache.isOffline()) {
             // cache already offline, just add to another list
             DataStore.saveLists(Collections.singletonList(cache), selectedListIds);
-            new StoreCacheHandler(CacheDetailActivity.this, progress).sendEmptyMessage(DisposableHandler.DONE);
+            new StoreCacheHandler(CacheDetailActivity.this).sendEmptyMessage(DisposableHandler.DONE);
         } else {
             storeCache(selectedListIds);
         }
     }
 
-    private static final class CheckboxHandler extends SimpleDisposableHandler {
+    private static final class CheckboxHandler extends ProgressButtonDisposableHandler {
         private final WeakReference<DetailsViewCreator> creatorRef;
         private final WeakReference<CacheDetailActivity> activityWeakReference;
 
-        CheckboxHandler(final DetailsViewCreator creator, final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
-
+        CheckboxHandler(final DetailsViewCreator creator, final CacheDetailActivity activity) {
+            super(activity);
             creatorRef = new WeakReference<>(creator);
             activityWeakReference = new WeakReference<>(activity);
         }
@@ -1129,7 +1109,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (creator != null) {
                 super.handleRegularMessage(message);
                 creator.updateWatchlistBox(activityWeakReference.get());
-                creator.updateFavPointBox();
+                creator.updateFavPointBox(activityWeakReference.get());
             }
         }
     }
@@ -1201,6 +1181,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // favorite count
             favoriteLine = details.add(R.string.cache_favorite, "");
 
+            details.addBetterCacher(cache);
+
             // own rating
             if (cache.getMyVote() > 0) {
                 details.addStars(R.string.cache_own_rating, cache.getMyVote());
@@ -1257,15 +1239,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.removeFromWatchlist.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox(activity);
 
-            // WhereYouGo, ChirpWolf and Adventure Lab
+            // WhereYouGo, ChirpWolf, Adventure Lab, BetterCacher
             updateWhereYouGoBox(activity);
             updateChirpWolfBox(activity);
             updateALCBox(activity);
+            updateBettercacherBox(activity);
 
             // favorite points
             binding.addToFavpoint.setOnClickListener(new FavoriteAddClickListener());
             binding.removeFromFavpoint.setOnClickListener(new FavoriteRemoveClickListener());
-            updateFavPointBox();
+            updateFavPointBox(activity);
 
             // data license
             final IConnector connector = ConnectorFactory.getConnector(cache);
@@ -1286,7 +1269,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
-            final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
             final ArrayList<String> orderedAttributeNames = new ArrayList<>();
             final StringBuilder attributesText = new StringBuilder();
@@ -1379,21 +1361,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * Abstract Listener for add / remove buttons for watchlist
          */
         private abstract class AbstractPropertyListener implements View.OnClickListener {
-            private final SimpleDisposableHandler handler;
+            private final ProgressButtonDisposableHandler handler;
+            protected MaterialButton button;
 
             AbstractPropertyListener() {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-                handler = new CheckboxHandler(DetailsViewCreator.this, activity, activity.progress);
+                handler = new CheckboxHandler(DetailsViewCreator.this, activity);
             }
 
-            public void doExecute(final int titleId, final int messageId, final Action1<SimpleDisposableHandler> action) {
+            public void doExecute(final Action1<ProgressButtonDisposableHandler> action) {
                 final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
-                    if (activity.progress.isShowing()) {
-                        activity.showToast(activity.res.getString(R.string.err_watchlist_still_managing));
+                    if (ProgressBarDisposableHandler.isInProgress(activity) || activity.progress.isShowing()) {
+                        activity.showToast(activity.res.getString(R.string.err_detail_still_working));
                         return;
                     }
-                    activity.progress.show(activity, activity.res.getString(titleId), activity.res.getString(messageId), true, null);
+                    handler.showProgress(button);
                 }
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> action.call(handler));
             }
@@ -1403,11 +1386,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * Listener for "add to watchlist" button
          */
         private class AddToWatchlistClickListener extends AbstractPropertyListener {
+
             @Override
             public void onClick(final View arg0) {
-                doExecute(R.string.cache_dialog_watchlist_add_title,
-                        R.string.cache_dialog_watchlist_add_message,
-                        DetailsViewCreator.this::watchListAdd);
+                button = (MaterialButton) arg0;
+                doExecute(handler -> DetailsViewCreator.this.watchListAdd(handler));
             }
         }
 
@@ -1417,19 +1400,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class RemoveFromWatchlistClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
-                doExecute(R.string.cache_dialog_watchlist_remove_title,
-                        R.string.cache_dialog_watchlist_remove_message,
-                        DetailsViewCreator.this::watchListRemove);
+                button = (MaterialButton) arg0;
+                doExecute(handler -> DetailsViewCreator.this.watchListRemove(handler));
             }
         }
 
         /**
          * Add this cache to the watchlist of the user
          */
-        private void watchListAdd(final SimpleDisposableHandler handler) {
+        private void watchListAdd(final ProgressButtonDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToWatchlist(cache)) {
-                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+                handler.sendTextMessage(MESSAGE_SUCCEEDED, R.string.cachedetails_progress_watch);
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
@@ -1438,10 +1420,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache from the watchlist of the user
          */
-        private void watchListRemove(final SimpleDisposableHandler handler) {
+        private void watchListRemove(final ProgressButtonDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromWatchlist(cache)) {
-                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+                handler.sendTextMessage(MESSAGE_SUCCEEDED, R.string.cachedetails_progress_unwatch);
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_watchlist_failed);
             }
@@ -1450,10 +1432,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Add this cache to the favorite list of the user
          */
-        private void favoriteAdd(final SimpleDisposableHandler handler) {
+        private void favoriteAdd(final ProgressButtonDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToFavorites(cache)) {
-                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+                handler.sendTextMessage(MESSAGE_SUCCEEDED, R.string.cachedetails_progress_favorite);
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
@@ -1462,10 +1444,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Remove this cache to the favorite list of the user
          */
-        private void favoriteRemove(final SimpleDisposableHandler handler) {
+        private void favoriteRemove(final ProgressButtonDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromFavorites(cache)) {
-                handler.obtainMessage(MESSAGE_SUCCEEDED).sendToTarget();
+                handler.sendTextMessage(MESSAGE_SUCCEEDED, R.string.cachedetails_progress_unfavorite);
             } else {
                 handler.sendTextMessage(MESSAGE_FAILED, R.string.err_favorite_failed);
             }
@@ -1477,9 +1459,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class FavoriteAddClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
-                doExecute(R.string.cache_dialog_favorite_add_title,
-                        R.string.cache_dialog_favorite_add_message,
-                        DetailsViewCreator.this::favoriteAdd);
+                button = (MaterialButton) arg0;
+                doExecute(handler -> DetailsViewCreator.this.favoriteAdd(handler));
             }
         }
 
@@ -1489,9 +1470,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class FavoriteRemoveClickListener extends AbstractPropertyListener {
             @Override
             public void onClick(final View arg0) {
-                doExecute(R.string.cache_dialog_favorite_remove_title,
-                        R.string.cache_dialog_favorite_remove_message,
-                        DetailsViewCreator.this::favoriteRemove);
+                button = (MaterialButton) arg0;
+                doExecute(handler -> DetailsViewCreator.this.favoriteRemove(handler));
             }
         }
 
@@ -1537,7 +1517,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Show/hide buttons, set text in favorite line and box
          */
-        private void updateFavPointBox() {
+        private void updateFavPointBox(final CacheDetailActivity activity) {
             // Favorite counts
             final int favCount = cache.getFavoritePoints();
             if (favCount >= 0 && !cache.isEventCache()) {
@@ -1545,9 +1525,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                 final int findsCount = cache.getFindsCount();
                 if (findsCount > 0) {
-                    favoriteLine.valueView.setText(getString(R.string.favorite_count_percent, favCount, (float) (favCount * 100) / findsCount));
+                    favoriteLine.valueView.setText(activity.res.getString(R.string.favorite_count_percent, favCount, Math.min((float) (favCount * 100) / findsCount, 100.0f)));
                 } else {
-                    favoriteLine.valueView.setText(getString(R.string.favorite_count, favCount));
+                    favoriteLine.valueView.setText(activity.res.getString(R.string.favorite_count, favCount));
                 }
             } else {
                 favoriteLine.layout.setVisibility(View.GONE);
@@ -1640,6 +1620,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
+        private void updateBettercacherBox(final CacheDetailActivity activity) {
+            final boolean isEnabled = Settings.isBetterCacherConnectorActive() && cache.getTier() != null && cache.getTier() != Tier.NONE;
+            binding.bettercacherBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            if (isEnabled) {
+                binding.bettercacherSend.setOnClickListener(v -> {
+                    ShareUtils.openUrl(activity, BetterCacherConnector.INSTANCE.getCacheUrl(cache));
+                });
+            }
+
+        }
+
         @Nullable
         /**
          * Find links to Adventure Labs in Listing of a cache. Returns URL if exactly 1 link target is found, else null.
@@ -1697,7 +1688,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.getRoot().setVisibility(View.VISIBLE);
 
             // load description
-            reloadDescription(this.getActivity(), cache, binding.description, binding.descriptionRenderFully, true);
+            reloadDescription(this.getActivity(), cache, true, 0);
 
             //check for geochecker
             final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
@@ -1747,19 +1738,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.personalnoteVarsOutOfSync.setOnClickListener(v -> {
                 handleVariableOutOfSync();
             });
-            activity.adjustPersonalNoteVarsOutOfSyncButton();
+            activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
-                final int maxPersonalNotesChars = connector.getPersonalNoteMaxChars();
                 binding.uploadPersonalnote.setVisibility(View.VISIBLE);
                 TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
                 binding.uploadPersonalnote.setOnClickListener(v -> {
-                    final int personalNoteLength = StringUtils.length(cache.getPersonalNote());
-                    if (personalNoteLength > maxPersonalNotesChars) {
-                        warnPersonalNoteExceedsLimit(activity, personalNoteLength, maxPersonalNotesChars, connector.getName());
-                    } else {
-                        uploadPersonalNote(activity);
-                    }
+                    activity.checkAndUploadPersonalNote(connector);
                 });
             } else {
                 binding.uploadPersonalnote.setVisibility(View.GONE);
@@ -1824,7 +1809,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             //register for changes of variableslist -> state of variable sync may change
-            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton());
+            cache.getVariables().addChangeListener(this, s -> activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync));
 
         }
 
@@ -1845,58 +1830,35 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final List<ImmutableTriple<String, String, String>> items = CollectionStream.of(diff.entrySet())
                     .map(e -> new ImmutableTriple<>(e.getKey(), e.getValue().first, e.getValue().second)).toList();
             TextUtils.sortListLocaleAware(items, i -> i.left);
-            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
-                    .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, sel -> {
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_dialog_title))
+                    .setMessage(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
+                    .selectMultiple(items, (i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right), null, null, false, sel -> {
                            final Map<String, String> toChange = new HashMap<>();
                            for (ImmutableTriple<String, String, String> e : sel) {
                                toChange.put(e.left, e.middle);
                            }
                            cache.changeVariables(toChange);
-                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton();
-                    });
-        }
-
-        private void uploadPersonalNote(final CacheDetailActivity activity) {
-            final SimpleDisposableHandler myHandler = new SimpleDisposableHandler(activity, activity.progress);
-
-            final Message cancelMessage = myHandler.cancelMessage(getString(R.string.cache_personal_note_upload_cancelled));
-            activity.progress.show(activity, getString(R.string.cache_personal_note_uploading), getString(R.string.cache_personal_note_uploading), true, cancelMessage);
-
-            myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
-                final boolean success = connector.uploadPersonalNote(cache);
-                final Message msg = Message.obtain();
-                final Bundle bundle = new Bundle();
-                bundle.putString(SimpleDisposableHandler.MESSAGE_TEXT,
-                        CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
-                msg.setData(bundle);
-                myHandler.sendMessage(msg);
-            }));
-        }
-
-        private void warnPersonalNoteExceedsLimit(final CacheDetailActivity activity, final int personalNoteLength, final int maxPersonalNotesChars, final String connectorName) {
-            final int reduceLength = personalNoteLength - maxPersonalNotesChars;
-            SimpleDialog.of(activity).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, maxPersonalNotesChars, connectorName).confirm(
-                    (dialog, which) -> {
-                        dialog.dismiss();
-                        uploadPersonalNote(activity);
+                        ((CacheDetailActivity) getActivity()).adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
                     });
         }
 
         /** re-renders the caches Listing (=description) in background and fills in the result. Includes handling of too long listings */
-        private static void reloadDescription(final Activity activity, final Geocache cache, final TextView descriptionView, final View descriptionFullLoadButton, final boolean restrictLength) {
-            descriptionFullLoadButton.setVisibility(View.GONE);
-            descriptionView.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
-            descriptionView.setVisibility(View.VISIBLE);
+        private void reloadDescription(final Activity activity, final Geocache cache, final boolean restrictLength, final int initialScroll) {
+            binding.descriptionRenderFully.setVisibility(View.GONE);
+            binding.description.setText(TextUtils.setSpan(activity.getString(R.string.cache_description_rendering), new StyleSpan(Typeface.ITALIC)));
+            binding.description.setVisibility(View.VISIBLE);
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
-                createDescriptionContent(activity, cache, restrictLength, descriptionView), p -> {
-                    displayDescription(activity, cache, p.first, descriptionView);
-                    if (p.second) {
-                        descriptionFullLoadButton.setVisibility(View.VISIBLE);
-                        descriptionFullLoadButton.setOnClickListener(v ->
-                                reloadDescription(activity, cache, descriptionView, descriptionFullLoadButton, false));
+                createDescriptionContent(activity, cache, restrictLength, binding.description), p -> {
+                    displayDescription(activity, cache, p.first, binding.description);
+                    // we need to use post, so that the textview is layouted before scrolling gets called
+                    if (initialScroll != 0) {
+                        binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                     }
-                }
+                    if (p.second) {
+                            binding.descriptionRenderFully.setVisibility(View.VISIBLE);
+                            binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY()));
+                        }
+                    }
             );
         }
 
@@ -1978,14 +1940,28 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             .append(TextParam.id(R.string.cache_description_render_restricted_warning, descriptionFullLength, DESCRIPTION_MAX_SAFE_LENGTH * 100 / descriptionFullLength).getText(null), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
 
-                return new Pair<>(description, textTooLong);
+                return new Pair<>(description, textTooLong && restrictLength);
             } catch (final RuntimeException re) {
                 return new Pair<>(activity.getString(R.string.err_load_descr_failed) + ": " + re.getMessage(), false);
             }
         }
 
         private static void handleImageClick(final Activity activity, final Geocache cache, final Spannable spannable) {
-            final ImageSpan[] spans = spannable.getSpans(0, spannable.length(), ImageSpan.class);
+            //don't make images clickable which are surrounded by a clickable span, this would suppress the "original" click
+            //(most prominent example: <a href> links with an <img> tag inside, e.g. for challenge checkers)
+            final List<URLSpan> links = new ArrayList<>(Arrays.asList(spannable.getSpans(0, spannable.length(), URLSpan.class)));
+            Collections.sort(links, (l1, l2) -> Integer.compare(spannable.getSpanStart(l1), spannable.getSpanStart(l2)));
+            int start = 0;
+            for (URLSpan link : links) {
+                final int end = spannable.getSpanStart(link);
+                registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, end, ImageSpan.class));
+                start = spannable.getSpanEnd(link);
+            }
+            registerImageClickListener(activity, cache, spannable, spannable.getSpans(start, spannable.length(), ImageSpan.class));
+        }
+
+        private static void registerImageClickListener(final Activity activity, final Geocache cache, final Spannable spannable, final ImageSpan[] spans) {
+
             for (final ImageSpan span : spans) {
                 final ClickableSpan clickableSpan = new ClickableSpan() {
                     @Override
@@ -1995,10 +1971,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         CollectionUtils.filter(listingImages, i -> i.category == Image.ImageCategory.LISTING);
 
                         final int pos = IterableUtils.indexOf(listingImages, i -> ImageUtils.imageUrlForSpoilerCompare(imageUrl).equals(ImageUtils.imageUrlForSpoilerCompare(i.getUrl())));
-
-                        if (Settings.enableFeatureNewImageGallery()) {
-                            ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
-                        }
+                        ImageViewActivity.openImageView(activity, cache.getGeocode(), listingImages, pos, null);
                     }
 
                     @Override
@@ -2013,13 +1986,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
             final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+            String baseScheme = Uri.parse(baseUrl).getScheme();
+            if (StringUtils.isBlank(baseScheme)) {
+                baseScheme = "https";
+            }
             for (final URLSpan span : spans) {
                 final Uri uri = Uri.parse(span.getURL());
-                if (uri.getScheme() == null && uri.getHost() == null) {
+                if (uri.getScheme() == null) {
                     final int start = spannable.getSpanStart(span);
                     final int end = spannable.getSpanEnd(span);
                     final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = Uri.parse(baseUrl + uri);
+                    final Uri absoluteUri = uri.getHost() == null ? Uri.parse(baseUrl + uri) :
+                            uri.buildUpon().scheme(baseScheme).build();
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
                 }
@@ -2278,7 +2256,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // title
             holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
-            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false).getDrawable());
+            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false, Settings.getIconScaleEverywhere()).getDrawable());
 
             // visited
             /* @todo
@@ -2374,38 +2352,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
-
-        @Override
-        public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-            return CachedetailImagesPageBinding.inflate(inflater, container, false);
-        }
-
-        @Override
-        public long getPageId() {
-            return Page.IMAGES.id;
-        }
-
-        @Override
-        public void setContent() {
-            // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
-            if (activity == null) {
-                return;
-            }
-            final Geocache cache = activity.getCache();
-            if (cache == null) {
-                return;
-            }
-            binding.getRoot().setVisibility(View.VISIBLE);
-
-            if (activity.imagesList == null) {
-                activity.imagesList = new ImagesList(activity, cache.getGeocode(), cache);
-                activity.createDisposables.add(activity.imagesList.loadImages(binding.getRoot(), cache.getNonStaticImages()));
-            }
-        }
-    }
-
     public static class ImageGalleryCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
 
         @Override
@@ -2458,9 +2404,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         @Override
         public boolean onMenuItemClick(final MenuItem menuItem) {
+            if (selectedTextView == null || selectedTextView.getText() == null) {
+                return false;
+            }
+            final CharSequence text = selectedTextView.getText();
             final int startSelection = selectedTextView.getSelectionStart();
             final int endSelection = selectedTextView.getSelectionEnd();
-            clickedItemText = selectedTextView.getText().subSequence(startSelection, endSelection);
+            clickedItemText = startSelection >= 0 && endSelection >= startSelection && endSelection <= text.length() ?
+                    text.subSequence(startSelection, endSelection) : text;
             return onClipboardItemSelected(mActionMode, menuItem, clickedItemText, cache);
         }
     }
@@ -2614,30 +2565,27 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final String[] items = {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
         builder.setSingleChoiceItems(items, 0, (dialog, which) -> {
             dialog.dismiss();
-            final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
-            final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, progressDialog, which == 1);
-            resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1, progressDialog);
+            final HandlerResetCoordinates handler = new HandlerResetCoordinates(CacheDetailActivity.this, which == 1);
+            handler.showProgress();
+            resetCoords(cache, handler, wpt, which == 0 || which == 1, which == 1);
         });
         return builder.create();
     }
 
-    private static class HandlerResetCoordinates extends WeakReferenceHandler<CacheDetailActivity> {
+    private static class HandlerResetCoordinates extends ProgressBarDisposableHandler {
         public static final int LOCAL = 0;
         public static final int ON_WEBSITE = 1;
-
         private boolean remoteFinished = false;
         private boolean localFinished = false;
-        private final ProgressDialog progressDialog;
         private final boolean resetRemote;
 
-        protected HandlerResetCoordinates(final CacheDetailActivity activity, final ProgressDialog progressDialog, final boolean resetRemote) {
+        protected HandlerResetCoordinates(final CacheDetailActivity activity, final boolean resetRemote) {
             super(activity);
-            this.progressDialog = progressDialog;
             this.resetRemote = resetRemote;
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (msg.what == LOCAL) {
                 localFinished = true;
             } else {
@@ -2645,19 +2593,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
 
             if (localFinished && (remoteFinished || !resetRemote)) {
-                progressDialog.dismiss();
-                final CacheDetailActivity activity = getReference();
-                if (activity != null) {
-                    activity.notifyDataSetChanged();
+                final CacheDetailActivity cacheDetailActivity = (CacheDetailActivity) activityRef.get();
+                if (cacheDetailActivity != null) {
+                    cacheDetailActivity.notifyDataSetChanged();
                 }
+                dismissProgress();
             }
         }
     }
 
-    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote, final ProgressDialog progress) {
+    private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote) {
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             if (local) {
-                runOnUiThread(() -> progress.setMessage(res.getString(R.string.waypoint_reset_cache_coords)));
                 cache.setCoords(wpt.getCoords());
                 cache.setUserModifiedCoords(false);
                 cache.deleteWaypointForce(wpt);
@@ -2667,8 +2614,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             final IConnector con = ConnectorFactory.getConnector(cache);
             if (remote && con.supportsOwnCoordinates()) {
-                runOnUiThread(() -> progress.setMessage(res.getString(R.string.waypoint_coordinates_being_reset_on_website)));
-
                 final boolean result = con.deleteModifiedCoordinates(cache);
 
                 runOnUiThread(() -> {
@@ -2724,12 +2669,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
                 pages.add(Page.INVENTORY.id);
             }
-            if (Settings.enableFeatureNewImageGallery()) {
-                pages.add(Page.IMAGEGALLERY.id);
-            }
-            if (!Settings.enableFeatureNewImageGallery() && CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
-                pages.add(Page.IMAGES.id);
-            }
+            pages.add(Page.IMAGEGALLERY.id);
         }
 
         final long[] result = new long[pages.size()];
@@ -2754,8 +2694,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {
             return new InventoryViewCreator();
-        } else if (pageId == Page.IMAGES.id) {
-            return new ImagesViewCreator();
         } else if (pageId == Page.IMAGEGALLERY.id) {
             return new ImageGalleryCreator();
         } else if (pageId == Page.VARIABLES.id) {
@@ -2868,49 +2806,49 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         return cache;
     }
 
-    private static class StoreCacheHandler extends SimpleDisposableHandler {
+    private static class StoreCacheHandler extends ProgressButtonDisposableHandler {
 
-        StoreCacheHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        StoreCacheHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
-                updateStatusMsg(R.string.cache_dialog_offline_save_message, (String) msg.obj);
-            } else {
+            if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
+                super.handleRegularMessage(msg);
                 notifyDataSetChanged(activityRef);
             }
         }
     }
 
-    private static final class RefreshCacheHandler extends SimpleDisposableHandler {
+    private static final class RefreshCacheHandler extends ProgressBarDisposableHandler {
 
-        RefreshCacheHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        RefreshCacheHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleRegularMessage(final Message msg) {
-            if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
-                updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
-            } else if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
+            final CacheDetailActivity cacheDetailActivity = (CacheDetailActivity) activityRef.get();
+            if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
                 showToast((String) msg.obj);
-            } else {
+            } else if (msg.what != UPDATE_LOAD_PROGRESS_DETAIL) {
+                dismissProgress(cacheDetailActivity.getString(R.string.cachedetails_progress_refresh, cacheDetailActivity.geocode));
                 notifyDataSetChanged(activityRef);
             }
         }
     }
 
-    private static final class ChangeNotificationHandler extends SimpleHandler {
+    private static final class ChangeNotificationHandler extends ProgressBarDisposableHandler {
 
-        ChangeNotificationHandler(final CacheDetailActivity activity, final Progress progress) {
-            super(activity, progress);
+        ChangeNotificationHandler(final CacheDetailActivity activity) {
+            super(activity);
         }
 
         @Override
         public void handleMessage(final Message msg) {
             notifyDataSetChanged(activityRef);
+            dismissProgress();
         }
     }
 
@@ -2922,21 +2860,54 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     protected void storeCache(final Set<Integer> listIds) {
-        final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this, progress);
-        progress.show(this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
+        final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CacheDetailActivity.this);
+        storeCacheHandler.showProgress(findViewById(R.id.offline_store));
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> cache.store(listIds, storeCacheHandler));
     }
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
         final FragmentManager fm = activity.getSupportFragmentManager();
-        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote());
+        final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
+        final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote(), (connector != null && connector.canAddPersonalNote(cache)));
         dialog.show(fm, "fragment_edit_note");
     }
 
     @Override
-    public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote) {
+    public void onFinishEditNoteDialog(final String note, final boolean preventWaypointsFromNote, final boolean uploadNote) {
         setNewPersonalNote(note, preventWaypointsFromNote);
+        if (uploadNote) {
+            checkAndUploadPersonalNote(ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class));
+        }
+    }
 
+    private void uploadPersonalNote() {
+        final ProgressButtonDisposableHandler myHandler = new ProgressButtonDisposableHandler(this);
+        myHandler.showProgress(findViewById(R.id.upload_personalnote));
+
+        myHandler.add(AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
+            final PersonalNoteCapability connector = (PersonalNoteCapability) ConnectorFactory.getConnector(cache);
+            final boolean success = connector.uploadPersonalNote(cache);
+            final Message msg = Message.obtain();
+            final Bundle bundle = new Bundle();
+            bundle.putString(SimpleDisposableHandler.MESSAGE_TEXT,
+                    CgeoApplication.getInstance().getString(success ? R.string.cache_personal_note_upload_done : R.string.cache_personal_note_upload_error));
+            msg.setData(bundle);
+            myHandler.sendMessage(msg);
+        }));
+    }
+
+    private void checkAndUploadPersonalNote(final PersonalNoteCapability connector) {
+        final int personalNoteLength = StringUtils.length(cache.getPersonalNote());
+        if (personalNoteLength > connector.getPersonalNoteMaxChars()) {
+            final int reduceLength = personalNoteLength - connector.getPersonalNoteMaxChars();
+            SimpleDialog.of(this).setTitle(R.string.cache_personal_note_limit).setMessage(R.string.cache_personal_note_truncated_by, reduceLength, connector.getPersonalNoteMaxChars(), connector.getName()).confirm(
+                    (dialog, which) -> {
+                        dialog.dismiss();
+                        uploadPersonalNote();
+                    });
+        } else {
+            uploadPersonalNote();
+        }
     }
 
     public void removeWaypointsFromPersonalNote(final Geocache cache) {
@@ -3011,8 +2982,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void adjustPersonalNoteVarsOutOfSyncButton() {
+        adjustPersonalNoteVarsOutOfSyncButton(findViewById(R.id.personalnote_vars_out_of_sync));
+    }
+
+    private void adjustPersonalNoteVarsOutOfSyncButton(@Nullable final TextView personalNotOutOfSync) {
+        if (personalNotOutOfSync == null) {
+            return;
+        }
         final Map<String, Pair<String, String>> varsOutOfSync = cache.getVariableDifferencesFromUserNotes();
-        final TextView personalNotOutOfSync = findViewById(R.id.personalnote_vars_out_of_sync);
         personalNotOutOfSync.setVisibility(varsOutOfSync.isEmpty() ? View.GONE : View.VISIBLE);
         personalNotOutOfSync.setText(LocalizationUtils.getString(R.string.cache_personal_note_vars_out_of_sync, varsOutOfSync.size()));
     }
@@ -3022,7 +2999,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (StringUtils.isNotBlank(personalNote)) {
             personalNoteView.setVisibility(View.VISIBLE);
             separator.setVisibility(View.VISIBLE);
-            Linkify.addLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
+            ViewUtils.safeAddLinks(personalNoteView, Linkify.MAP_ADDRESSES | Linkify.WEB_URLS);
         } else {
             personalNoteView.setVisibility(View.GONE);
             separator.setVisibility(View.GONE);

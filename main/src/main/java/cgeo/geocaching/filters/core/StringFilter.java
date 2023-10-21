@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -90,6 +93,23 @@ public class StringFilter {
             config.add(FLAG_MATCHCASE);
         }
         return config;
+    }
+
+    public void setJsonConfig(final JsonNode node) {
+        if (node != null) {
+            setTextValue(JsonUtils.getText(node, "text", null));
+            final String filterType = JsonUtils.getText(node, "type", null);
+            setFilterType(TextUtils.getEnumIgnoreCaseAndSpecialChars(StringFilterType.class, filterType, StringFilterType.CONTAINS));
+            setMatchCase(JsonUtils.getBoolean(node, "matchCase", false));
+        }
+    }
+
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setText(node, "text", getTextValue());
+        JsonUtils.setText(node, "type", filterType.name().toLowerCase());
+        JsonUtils.setBoolean(node, "matchCase", matchCase);
+        return node;
     }
 
     public boolean matches(final String value) {

@@ -71,7 +71,7 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
             String date = matchDateVoluntary.group(3) + "-" + matchDateVoluntary.group(2) + "-" + matchDateVoluntary.group(1);
             try {
                 // convert date returned by server into ISO format
-                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd", Locale.GERMANY);
+                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd", Locale.ENGLISH);
                 date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Objects.requireNonNull(formatter.parse(date)));
             } catch (Exception ignore) {
                 // ignore

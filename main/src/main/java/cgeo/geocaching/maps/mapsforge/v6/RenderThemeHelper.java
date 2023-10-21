@@ -95,7 +95,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     //current Theme style menu settings
     private XmlRenderThemeStyleMenu themeStyleMenu;
-    private String prefThemeOptionMapStyle = "";
     private String prefThemeStyleKey = "";
 
     //the last used Zip Resource Provider is cached.
@@ -127,7 +126,8 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         RTT_FZK_BASE("freizeitkarte-v5", new String[]{"freizeitkarte"}),
         RTT_FZK_OUTDOOR_CONTRAST("fzk-outdoor-contrast-v5", new String[]{"fzk-outdoor-contrast"}),
         RTT_FZK_OUTDOOR_SOFT("fzk-outdoor-soft-v5", new String[]{"fzk-outdoor-soft"}),
-        RTT_PAWS("paws_4", new String[]{"paws_4"});
+        RTT_PAWS("paws_4", new String[]{"paws_4"}),
+        RTT_VOLUNTARY("", new String[]{"voluntary v5", "velocity v5"});
 
         public final String relPath;
         public final String[] searchPaths;
@@ -157,7 +157,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         final TileRendererLayer rendererLayer = (TileRendererLayer) tileLayer.getTileLayer();
 
         //try to apply stored value
-        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
+        ThemeData selectedTheme = setSelectedMapTheme(Settings.getSelectedMapRenderTheme());
 
 
         if (selectedTheme == null) {
@@ -315,7 +315,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     @Override
     public Set<String> getCategories(final XmlRenderThemeStyleMenu menu) {
         themeStyleMenu = menu;
-        prefThemeOptionMapStyle = menu.getId();
         final String id = this.sharedPreferences.getString(themeStyleMenu.getId(), themeStyleMenu.getDefaultValue());
         prefThemeStyleKey = menu.getId() + "-" + id;
         final XmlRenderThemeStyleLayer baseLayer = themeStyleMenu.getLayer(id);
@@ -339,11 +338,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
      */
-    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
-        return setSelectedMapThemeInternal(themeIdCandidate) != null;
-    }
-
-    private static ThemeData setSelectedMapThemeInternal(final String themeIdCandidate) {
+    private static ThemeData setSelectedMapTheme(final String themeIdCandidate) {
 
         //try to apply stored value
         ThemeData selectedTheme = null;

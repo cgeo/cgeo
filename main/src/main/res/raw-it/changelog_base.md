@@ -1,13 +1,31 @@
 ### Mappa
-- New: OSM map source osm.paws.cz
+- Aggiornato Mapsforge e VTM libs a v0.20
+- Rendering di Google Maps Aggiornato
+- Nuovo: Mostra l'icona del tipo di cache come marker se è stata impostata l'icona personalizzata del cache (emoji) o se sono abitate le icone grandi
+- Nuovo: Mostra l'icona personalizzata del cache come marker per i waypoint correlati
+- Nuovo: Abilita il ridimensionamento delle icone dei cache/waypoint (vedere Impostazioni => Aspetto)
+- Nuovo: I Lab lineari usano i numeri come segnalatori di waypoint
+- Nuovo: I waypoint di un cache usano l'icona del tipo di cache come marker
+- Nuovo: Mostra l'altitudine per la posizione corrente sulla mappa (vedere Impostazioni => Contenuto della mappa & Comportamento)
+- New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Dettagli del cache
-- New: New more sophisticated image gallery
-- Fix: Restore position in waypoint list after updating or deleting waypoint
-- Fix: Move to bottom when creating new waypoint
+- Nuovo: modifica il valore predefinito per il prefisso della didascalia delle immagini nel log
+- Nuovo: verifica della dimensione minima dell'immagine per la visualizzazione
+- Modifica: Opzioni di modifica riprogettate per le proprie immagini di log
+- Nuovo: Integrazione con Bettercacher
+- Nuovo: Sincronizza lo stato visitato con la sincronizzazione dei waypoint nella nota personale
+- Nuovo: Recupera la data del ritrovamento dei cache basati su Opencaching
+- New: Append all waypoints to individual route
 
 ### Generale
-- API level change (compileSDK 32)
-- Update some dependant libraries
-- Use Android built-in splash screen feature on startup
-- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- Nuovo: Obiettivo SDK aumentato a 33
+- Modifica: Gestione dell'accesso al database per evitare i crash "database non disponibile"
+- Modifica: Per impostazione predefinita, verranno visualizzate solo le impostazioni di base. Vai a Impostazioni => Impostazioni avanzate per abilitare le impostazioni avanzate
+- New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

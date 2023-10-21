@@ -1,6 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +62,8 @@ public abstract class AbstractTileProvider {
         return numericId;
     }
 
-    public abstract AbstractUnifiedMapView getMap();
+    public abstract AbstractMapFragment createMapFragment();
+
 
     public int getZoomMin() {
         return zoomMin;

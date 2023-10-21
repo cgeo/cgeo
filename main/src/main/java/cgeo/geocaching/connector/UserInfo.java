@@ -40,12 +40,21 @@ public class UserInfo {
 
     @NonNull private final String name;
     private final int finds;
+    private final int remainingFavoritePoints;
     @NonNull private final UserInfoStatus status;
 
     public UserInfo(@NonNull final String name, final int finds, @NonNull final UserInfoStatus status) {
         this.name = name;
         this.finds = finds;
         this.status = status;
+        this.remainingFavoritePoints = -1;
+    }
+
+    public UserInfo(@NonNull final String name, final int finds, @NonNull final UserInfoStatus status, final int remainingFavoritePoints) {
+        this.name = name;
+        this.finds = finds;
+        this.status = status;
+        this.remainingFavoritePoints = remainingFavoritePoints;
     }
 
     @NonNull
@@ -60,5 +69,9 @@ public class UserInfo {
     @NonNull
     public UserInfoStatus getStatus() {
         return status;
+    }
+
+    public int getRemainingFavoritePoints() {
+        return remainingFavoritePoints;
     }
 }

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">Zaklad</string>
     <string name="detail">Podrobnosti</string>
     <string name="search">Iskanje</string>
     <string name="helpers">Uporabne aplikacije</string>
     <string name="about">O c:geo</string>
-    <string name="latitude">Geog. širina</string>
-    <string name="longitude">Geog. dolžina</string>
+    <string name="latitude">Zemlj. širina</string>
+    <string name="longitude">Zemlj. dolžina</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo nastavitve</string>
     <!-- caches -->
@@ -51,6 +49,8 @@
     <string name="wp_waypoint">Referenčna točka</string>
     <string name="wp_original">Originalne koordinate</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Najden</string>
     <string name="log_dnf">Ni najden</string>
@@ -88,7 +88,6 @@
     <string name="log_save">Shrani za delo brez povezave</string>
     <string name="log_saving">Pošiljam…</string>
     <string name="log_posting_log">Pošiljam zapis…</string>
-    <string name="log_posting_twitter">Pošiljam na Twitter…</string>
     <string name="log_clear">Počisti</string>
     <string name="log_post_not_possible">Prenos podatkov je v teku…\nPoskusite znova čez nekaj sekund ali preverite vašo povezavo z internetom.</string>
     <string name="log_date_future_not_allowed">Vnaprejšnji datumi niso dovoljeni.</string>
@@ -112,9 +111,6 @@
     <string name="log_yesterday">Včeraj</string>
     <string name="log_smilies">Smeškoti</string>
     <string name="log_image">Slika</string>
-    <string name="log_image_attach">Dodaj sliko</string>
-    <string name="log_image_stored">Obstoječa</string>
-    <string name="log_image_camera">Nova</string>
     <string name="log_image_caption">Naslov</string>
     <string name="log_image_description">Opis</string>
     <string name="log_image_scale">Skaliranje</string>
@@ -132,6 +128,7 @@
     <string name="log_problem_other_label">Drugo</string>
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -139,7 +136,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">V redu</string>
     <string name="err_parse">Razčlenjevanje prijavne strani ni uspelo</string>
-    <string name="err_server">Ni bilo mogoče vzpostaviti povezave z Geocaching.com. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_ec">Povezava z Extremcaching.com ni uspela. Lahko vam povezava ne deluje ali pa je stran nedosegljiva.</string>
     <string name="err_server_su">Ni bilo mogoče vzpostaviti povezave z Geocaching.su. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
@@ -159,7 +155,6 @@
     <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
     <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
     <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
-    <string name="err_watchlist_still_managing">Še vedno upravljam vaš spisek nadzorov.</string>
     <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
     <string name="err_application_no">c:geo ne najde primerne aplikacije.</string>
     <string name="err_auth_initialize">c:geo ni uspel začeti z avtorizacijskim postopkom.</string>
@@ -204,10 +199,8 @@
     <string name="warn_search_help_user">Vnesite uporabniško ime iz Geocaching.com.</string>
     <string name="warn_search_help_tb">Vnesite kodo sledljivčka, na primer: \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vnesite besedilo zapisa.</string>
-    <string name="warn_load_images">c:geo ni uspel naložiti slik.</string>
     <string name="warn_pocket_query_select">Noben Pocket Query ni bil izbran.</string>
     <string name="warn_no_pocket_query_found">Noben Pocket Query ni bil najden online.</string>
-    <string name="warn_invalid_character">Znak mora biti ČRKA ali ŠTEVILO</string>
     <string name="err_read_pocket_query_list">Napaka pri branju Pocket query seznama.</string>
     <string name="info_log_posted">c:geo je uspešno objavil zapis obiska.</string>
     <string name="info_log_saved">c:geo je shranil zapis.</string>
@@ -251,14 +244,6 @@
     <string name="caches_more_caches_no">Ni več zakladov</string>
     <string name="caches_more_caches_loading">Nalagam zaklade…</string>
     <string name="caches_more_caches_currently">trenutno</string>
-    <string name="caches_downloading">Nalagam zaklade…\nČas do konca: </string>
-    <string name="caches_eta_ltm">manj kot minuta</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minuta</item>
-        <item quantity="two">%d minuti</item>
-        <item quantity="few">%d minute</item>
-        <item quantity="other">%d minut</item>
-    </plurals>
     <string name="caches_history">Zgodovina</string>
     <string name="caches_on_map">Pokaži na zemljevidu</string>
     <string name="caches_sort">Razvrsti</string>
@@ -330,7 +315,6 @@
     <string name="about_system_info_send_button">Pošlji sporočilo…</string>
     <string name="about_system_write_logcat">Ustvari dnevnik napak</string>
     <string name="about_system_write_logcat_error">Napaka pri pisanju zapisa</string>
-    <string name="changelog_github">Seznam vseh sprememb</string>
     <string name="about_nutshellmanual">Spletni priročnik</string>
     <string name="about_contributors_specialthanks">Posebne zahvale</string>
     <string name="contribution_code">Koda</string>
@@ -349,16 +333,12 @@
     <string name="settings_title_cachedetails">Podrobnosti zaklada</string>
     <string name="settings_title_offlinedata">Podatki brez povezave</string>
     <string name="settings_title_logging">Zapisovanje</string>
-    <string name="settings_title_map">Zemljevid</string>
-    <string name="settings_summary_map">Nastavi izvorno mapo za zemljevide brez povezave.</string>
     <string name="settings_title_map_data">Podatki zemljevida</string>
     <string name="settings_title_map_content">Vsebina zemljevida</string>
     <string name="settings_title_map_behavior">Nastavitve zemljevida</string>
     <string name="settings_title_basicmembers">Možnosti za Basic Member</string>
     <string name="settings_title_system">Sistem</string>
     <string name="settings_title_navigation_menu">Navigacijski menu</string>
-    <string name="settings_category_browser">Brskalnik</string>
-    <string name="settings_category_social">Socialni vtičniki</string>
     <string name="settings_category_logging_other">Druge možnosti zapisa</string>
     <string name="settings_goto_url_button">več …</string>
     <string name="settings_service_activate">Aktiviraj</string>
@@ -412,7 +392,9 @@
     <string name="init_choose_list">Vprašaj za seznam</string>
     <string name="init_summary_choose_list">Pri shranjevanju zaklada za delo brez povezave vprašaj za seznam</string>
     <string name="init_livelist">Pokaži smeri</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Ustvari varnostno kopijo</string>
     <string name="init_backup_running">Ustvarjanje varnostne kopije baze…</string>
@@ -447,8 +429,6 @@
     <string name="init_dbmove_failed">Premikanje baze ni uspelo</string>
     <string name="init_plain_logs">Osnovni zapisih</string>
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
-    <string name="init_use_native_ua">Android brskalnik</string>
-    <string name="init_summary_use_native_ua">c:geo naj se strežniku predstavi kot Android brskalnik. Ta možnost reši problem prijave pri nekaterih ponudnikih omrežja.</string>
     <string name="init_maintenance">Vzdrževanje</string>
     <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
     <string name="init_location">Geolokacija</string>
@@ -462,9 +442,6 @@
     <string name="settings_open_website">Odpri spletno stran</string>
     <string name="settings_settings">Nastavitve</string>
     <string name="settings_information">Informacije</string>
-    <string name="settings_advanced">Napredne nastavitve</string>
-    <string name="settings_twitter_cache_message">Sporočilo za najden zaklad</string>
-    <string name="settings_twitter_trackable_message">Sporočilo za najden sledljivček</string>
     <string name="init_ec_icons">Ikone zemljevida</string>
     <string name="settings_ec_icons_other">Svoj stil</string>
     <string name="settings_ec_icons_oc">Kot OC</string>
@@ -507,8 +484,6 @@
     <string name="auth_explain_short">Naslednji postopek bo omogočil <b>c:geo</b>tu dostop do %s.</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo je sedaj povezan s Twitterjem za objavo sporočil.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo je sedaj povezan z %s.</string>
     <!-- auth geokrety -->
@@ -526,21 +501,18 @@
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
     <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Slike</string>
     <string name="cache_log_image_default_title">Slika</string>
     <string name="cache_personal_note">Lastna opomba</string>
     <string name="cache_personal_note_edit">Uredi</string>
     <string name="cache_personal_note_limit">Omejitev osebnega zapisa</string>
     <string name="cache_personal_note_upload">Naloži</string>
-    <string name="cache_personal_note_uploading">Nalagam lastno opombo na spletno stran</string>
     <string name="cache_personal_note_upload_done">Lastna opomba je bila uspešno naložena na spletno stran</string>
     <string name="cache_personal_note_upload_error">Napaka pri nalaganju osebnega zapisa</string>
-    <string name="cache_personal_note_upload_cancelled">Nalaganje lastne opombe je bilo preklicano</string>
     <string name="cache_description">Opis</string>
     <string name="cache_description_table_note">Opis vsebuje oblikovanje s tabelami. Za pravilen prikaz opisa bo mogoče potrebno obiskati %s.</string>
-    <string name="cache_watchlist_on">Zaklad je na vašem spisku nadzorov.</string>
-    <string name="cache_watchlist_not_on">Zaklad ni na vašem spisku nadzorov.</string>
-    <string name="cache_favpoint_on">Zaklad je na vašem spisku priljubljenih.</string>
+    <string name="cache_watchlist_on">Zaklad je na vašem opazovalnem seznamu.</string>
+    <string name="cache_watchlist_not_on">Zaklad ni na vašem opazovalnem seznamu.</string>
+    <string name="cache_favpoint_on">Zaklad je na vašem seznamu priljubljenih.</string>
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
@@ -562,14 +534,6 @@
     <string name="cache_dialog_offline_drop_message">Brisanje zaklada iz naprave…</string>
     <string name="cache_dialog_refresh_title">Osveži</string>
     <string name="cache_dialog_refresh_message">Ponovno nalaganje podatkov zaklada…</string>
-    <string name="cache_dialog_watchlist_add_title">Spisek nadzorov</string>
-    <string name="cache_dialog_watchlist_add_message">Dodajanje zaklada na spisek nadzorov…</string>
-    <string name="cache_dialog_watchlist_remove_title">Spisek nadzorov</string>
-    <string name="cache_dialog_watchlist_remove_message">Odstranjevanje zaklada s spiska nadzorov…</string>
-    <string name="cache_dialog_favorite_add_title">Priljubljeni</string>
-    <string name="cache_dialog_favorite_add_message">Dodajanje zaklada na spisek priljubljenih…</string>
-    <string name="cache_dialog_favorite_remove_title">Priljubljeni</string>
-    <string name="cache_dialog_favorite_remove_message">Odstranjevanje zaklada s spiska priljubljenih…</string>
     <string name="cache_menu_navigate">Navigiraj</string>
     <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
     <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
@@ -607,12 +571,11 @@
     <string name="cache_own_rating">Moja ocena</string>
     <string name="cache_favorite">Priljubljeni</string>
     <string name="cache_owner">Lastnik</string>
-    <string name="cache_hidden">Skritih</string>
+    <string name="cache_hidden">Skrit</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Lokacija</string>
     <string name="cache_coordinates">Koordinate</string>
     <string name="cache_coordinates_original">Originalne koordiante</string>
-    <string name="cache_spoiler_images_title">Spoiler slike</string>
     <string name="cache_log_types">Tipi zapisov</string>
     <string name="cache_coordinates_no">Zaklad nima koordinat.</string>
     <string name="cache_clear_history">Počisti zgodovino</string>
@@ -669,8 +632,6 @@
     <string name="waypoint_save_and_modify_on_website">Nastavi kot koordinate zaklada v c:geo in na spletni strani</string>
     <string name="waypoint_reset_cache_coords">Ponastavi koordinate zaklada</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Koordinate zaklada so bile nastavljene na spletni strani.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ponastavljanje koordinat zaklada na spletni strani…</string>
-    <string name="waypoint_reset">Ponastavi</string>
     <string name="waypoint_localy_reset_cache_coords">Ponastavi v c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Ponastavi v c:geo in na spletni strani</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Spletna stran ne omogoča spreminjanja koordinat zaklada.</string>
@@ -686,8 +647,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Objavi na Twitter</string>
     <!-- map -->
     <string name="map_map">Zemljevid</string>
     <string name="map_live">Zemljevid</string>
@@ -742,7 +701,7 @@
     <string name="geokret_type_post">Pošta</string>
     <!-- user -->
     <string name="user_menu_title">Uporabnik</string>
-    <string name="user_menu_view_hidden">Skritih zakladov</string>
+    <string name="user_menu_view_hidden">Skriti zakladi</string>
     <string name="user_menu_open_browser">Odpri profil v brskalniku</string>
     <string name="user_menu_send_message">Pošlji sporočilo</string>
     <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
@@ -1017,7 +976,6 @@
     <string name="website_title">Spletna stran</string>
     <string name="facebook_link"><a href="">spletna stran c:geo</a></string>
     <string name="market_link"><a href="">c:geo na Google Play</a></string>
-    <string name="about_twitter">Naj <b>c:geo</b> objavi nov status na Twitter, ko objavite nov zapis pri zakladu?</string>
     <string name="faq_title">Pogosta vprašanja</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1062,6 +1020,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1084,4 +1043,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

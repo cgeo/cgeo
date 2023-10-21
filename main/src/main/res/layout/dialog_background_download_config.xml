@@ -28,9 +28,14 @@
             android:layout_height="match_parent"
             android:text="@string/caches_store_background_option_add_to_list"/>
         <RadioButton
-            android:id="@+id/radio_button_refresh"
+            android:id="@+id/radio_button_refresh_and_add"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/caches_store_background_option_refresh"/>
+            android:text="@string/caches_store_background_option_refresh_and_add"/>
+        <RadioButton
+            android:id="@+id/radio_button_refresh_and_keep"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/caches_store_background_option_refresh_and_keep"/>
     </RadioGroup>
 </LinearLayout>

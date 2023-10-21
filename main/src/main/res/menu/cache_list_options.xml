@@ -40,12 +40,6 @@
         android:title="@string/caches_select_next100"
         app:showAsAction="ifRoom|withText"/>
     <item
-        android:id="@+id/menu_cache_list_app"
-        android:icon="@drawable/ic_menu_navigate"
-        android:title="@null"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText"/>
-    <item
         android:id="@+id/menu_cache_list_app_provider"
         android:icon="@drawable/ic_menu_navigate"
         android:title="@string/caches_on_map"
@@ -73,6 +67,10 @@
             <item
                 android:id="@+id/menu_drop_caches"
                 android:title="@string/caches_remove_all"
+                app:showAsAction="ifRoom|withText"/>
+            <item
+                android:id="@+id/menu_add_to_route"
+                android:title="@string/caches_append_to_route_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
                 android:id="@+id/menu_delete_events"

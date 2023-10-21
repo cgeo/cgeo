@@ -9,7 +9,7 @@
     <PreferenceCategory
         android:title="@string/settings_title_offline_routing"
         app:iconSpaceReserved="false">
-        <Preference android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
 
         <Preference
             android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
@@ -70,17 +70,39 @@
             android:dialogTitle="@string/init_brouterProfileWalk"
             android:key="@string/pref_brouterProfileWalk"
             android:title="@string/init_brouterProfileWalk"
+            android:dependency="@string/pref_useInternalRouting"
             app:iconSpaceReserved="false" />
         <ListPreference
             android:dialogTitle="@string/init_brouterProfileBike"
             android:key="@string/pref_brouterProfileBike"
             android:title="@string/init_brouterProfileBike"
+            android:dependency="@string/pref_useInternalRouting"
             app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="car-eco.brf"
             android:dialogTitle="@string/init_brouterProfileCar"
             android:key="@string/pref_brouterProfileCar"
             android:title="@string/init_brouterProfileCar"
+            android:dependency="@string/pref_useInternalRouting"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:dialogTitle="@string/init_brouterProfileUser"
+            android:key="@string/pref_brouterProfileUser1"
+            android:title="@string/init_brouterProfileUser"
+            android:dependency="@string/pref_useInternalRouting"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:dialogTitle="@string/init_brouterProfileUser"
+            android:key="@string/pref_brouterProfileUser2"
+            android:title="@string/init_brouterProfileUser"
+            android:dependency="@string/pref_useInternalRouting"
+            app:iconSpaceReserved="false" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_removeFromRouteOnLog"
+            android:summary="@string/init_summary_removeFromRouteOnLog"
+            android:title="@string/init_removeFromRouteOnLog"
             app:iconSpaceReserved="false" />
 
     </PreferenceCategory>
@@ -88,7 +110,7 @@
     <PreferenceCategory
         android:title="@string/init_default_navigation_tool"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_default_navigation_tool_description"
             app:iconSpaceReserved="false" />
         <ListPreference
@@ -103,7 +125,7 @@
     <PreferenceCategory
         android:title="@string/init_secondary_navigation_tool"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_default_navigation_tool_2_description"
             app:iconSpaceReserved="false" />
         <ListPreference
@@ -118,12 +140,13 @@
     <PreferenceCategory
         android:title="@string/settings_title_navigation_menu"
         app:iconSpaceReserved="false">
-        <Preference
+        <cgeo.geocaching.settings.PreferenceTextAlwaysShow
             app:summary="@string/init_navigation_menu_description"
             app:iconSpaceReserved="false" />
 
         <!-- Navigation Navigation -->
         <Preference
+            android:key="@string/pref_fakekey_navigationMenu"
             app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationNavigationFragment"
             app:title="@string/settings_title_navigation_menu"
             app:iconSpaceReserved="false" />

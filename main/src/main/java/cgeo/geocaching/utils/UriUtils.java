@@ -15,6 +15,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.util.HashMap;
@@ -248,6 +249,16 @@ public final class UriUtils {
             return false;
         }
         return SCHEME_FILE.equals(uri.getScheme());
+    }
+
+    public static Uri toContentUri(final Context ctx, final Uri uri) {
+        if (isContentUri(uri)) {
+            return uri;
+        }
+        if (isFileUri(uri)) {
+            return FileProvider.getUriForFile(ctx, ctx.getString(R.string.file_provider_authority), toFile(uri));
+        }
+        return null;
     }
 
     /**

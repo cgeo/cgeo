@@ -30,6 +30,13 @@ abstract class AbstractTrackOrRouteParser {
     protected Element points;
     protected Element point;
 
+    // when using this constructor, you should call result.setRoutable() manually
+    protected AbstractTrackOrRouteParser(final String namespaceIn, final String versionIn) {
+        namespace = namespaceIn;
+        version = versionIn;
+        result = new Route();
+    }
+
     protected AbstractTrackOrRouteParser(final String namespaceIn, final String versionIn, final boolean routeable) {
         namespace = namespaceIn;
         version = versionIn;
@@ -42,7 +49,13 @@ abstract class AbstractTrackOrRouteParser {
 
     @NonNull
     public Route parse(@NonNull final InputStream stream, final RootElement root) throws IOException, ParserException {
+        // if you do not call this method, you need to call the following steps individually or implement a replacement
         points.setStartElementListener(attrs -> temp = new ArrayList<>());
+        setNameAndLatLonParsers();
+        return doParsing(stream, root);
+    }
+
+    protected void setNameAndLatLonParsers() {
         points.getChild(namespace, "name").setEndTextElementListener(result::setName);
 
         point.setStartElementListener(attrs -> {
@@ -54,7 +67,9 @@ abstract class AbstractTrackOrRouteParser {
                 }
             }
         });
+    }
 
+    protected Route doParsing(@NonNull final InputStream stream, final RootElement root) throws IOException, ParserException {
         try {
             final ProgressInputStream progressStream = new ProgressInputStream(stream);
             final BufferedReader reader = new BufferedReader(new InputStreamReader(progressStream, StandardCharsets.UTF_8));
@@ -64,4 +79,5 @@ abstract class AbstractTrackOrRouteParser {
             throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
     }
+
 }

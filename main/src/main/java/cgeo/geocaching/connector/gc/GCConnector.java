@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.IDifficultyTerrainMatrixNeededCapability;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -48,18 +49,21 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -117,6 +121,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsVoting(@NonNull final Geocache cache) {
         return true;
+    }
+
+    @Override
+    public float getRatingStep() {
+        return 0.5f;
     }
 
     @Override
@@ -182,6 +191,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
+        if (Settings.enableFeatureNewGCLogApi()) {
+            return GC_BASE_URL + "live/geocache/" + cache.getGeocode() + "/log";
+        }
         return GC_BASE_URL + "play/geocache/" + cache.getGeocode() + "/log";
     }
 
@@ -306,8 +318,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
                 GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
                 GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
-                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
-                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
+                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN_MATRIX,
+                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.EVENT_DATE, GeocacheFilterType.LOG_ENTRY);
     }
 
 
@@ -328,18 +340,20 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerUserId(), user);
     }
 
+    @WorkerThread
     @Override
     public boolean addToWatchlist(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToWatchlist(cache);
+        final boolean added = GCParser.addToWatchlist(cache).blockingGet();
         if (added) {
             DataStore.saveChangedCache(cache);
         }
         return added;
     }
 
+    @WorkerThread
     @Override
     public boolean removeFromWatchlist(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromWatchlist(cache);
+        final boolean removed = GCParser.removeFromWatchlist(cache).blockingGet();
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
@@ -354,9 +368,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * @param cache the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
+    @WorkerThread
     @Override
     public boolean addToFavorites(@NonNull final Geocache cache) {
-        final boolean added = GCParser.addToFavorites(cache);
+        final boolean added = GCParser.addToFavorites(cache).blockingGet();
         if (added) {
             DataStore.saveChangedCache(cache);
         }
@@ -373,34 +388,37 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      */
     @Override
     public boolean removeFromFavorites(@NonNull final Geocache cache) {
-        final boolean removed = GCParser.removeFromFavorites(cache);
+        final boolean removed = GCParser.removeFromFavorites(cache).blockingGet();
         if (removed) {
             DataStore.saveChangedCache(cache);
         }
         return removed;
     }
 
+    @WorkerThread
     @Override
     public boolean uploadModifiedCoordinates(@NonNull final Geocache cache, @NonNull final Geopoint wpt) {
-        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt);
+        final boolean uploaded = GCParser.uploadModifiedCoordinates(cache, wpt).blockingGet();
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }
         return uploaded;
     }
 
+    @WorkerThread
     @Override
     public boolean deleteModifiedCoordinates(@NonNull final Geocache cache) {
-        final boolean deleted = GCParser.deleteModifiedCoordinates(cache);
+        final boolean deleted = GCParser.deleteModifiedCoordinates(cache).blockingGet();
         if (deleted) {
             DataStore.saveChangedCache(cache);
         }
         return deleted;
     }
 
+    @WorkerThread
     @Override
     public boolean uploadPersonalNote(@NonNull final Geocache cache) {
-        final boolean uploaded = GCParser.uploadPersonalNote(cache);
+        final boolean uploaded = GCParser.uploadPersonalNote(cache).blockingGet();
         if (uploaded) {
             DataStore.saveChangedCache(cache);
         }
@@ -647,6 +665,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
         result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
         return result;
+    }
+
+    @Override
+    @NonNull
+    public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
+        return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
     }
 
     /**

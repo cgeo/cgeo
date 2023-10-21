@@ -46,7 +46,7 @@ final class KinematicPrePath extends OsmPrePath {
             lat2 = transferNode.ilat;
         }
 
-        final int dist = rc.calcDistance(lon1, lat1, lon2, lat2);
+        rc.calcDistance(lon1, lat1, lon2, lat2);
 
         angle = rc.anglemeter.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2);
         priorityclassifier = (int) rc.expctxWay.getPriorityClassifier();

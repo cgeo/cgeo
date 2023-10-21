@@ -1,6 +1,7 @@
 package cgeo.geocaching.sensors;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
@@ -24,12 +25,20 @@ public class GeoData extends Location {
 
     // Some devices will not have the last position available (for example the emulator). In this case,
     // rather than waiting forever for a position update which might never come, we emulate it by placing
-    // the user arbitrarily at Paris Notre-Dame, one of the most visited free tourist attractions in the world.
+    // the user to either
+    // - last known map position (if "follow my location" is disabled), or
+    // - arbitrarily at Paris Notre-Dame (one of the most visited free tourist attractions in the world) otherwise.
     public static final GeoData DUMMY_LOCATION = new GeoData(new Location(INITIAL_PROVIDER));
 
     static {
-        DUMMY_LOCATION.setLatitude(48.85308);
-        DUMMY_LOCATION.setLongitude(2.34962);
+        if (Settings.getFollowMyLocation()) {
+            DUMMY_LOCATION.setLatitude(48.85308);
+            DUMMY_LOCATION.setLongitude(2.34962);
+        } else {
+            final GeoPointImpl lastMapPosition = Settings.getMapCenter();
+            DUMMY_LOCATION.setLatitude(lastMapPosition.getLatitudeE6() / 1E6);
+            DUMMY_LOCATION.setLongitude(lastMapPosition.getLongitudeE6() / 1E6);
+        }
     }
 
     public GeoData(final Location location) {

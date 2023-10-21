@@ -10,6 +10,7 @@ import cgeo.geocaching.brouter.expressions.BExpressionContext;
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 import cgeo.geocaching.brouter.mapaccess.GeometryDecoder;
+import cgeo.geocaching.brouter.mapaccess.MatchedWaypoint;
 import cgeo.geocaching.brouter.mapaccess.OsmLink;
 import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.util.CheapAngleMeter;
@@ -30,10 +31,6 @@ public final class RoutingContext {
     public BExpressionContextNode expctxNode;
     public GeometryDecoder geometryDecoder = new GeometryDecoder();
     public int memoryclass = 64;
-    public int downhillcostdiv;
-    public int downhillcutoff;
-    public int uphillcostdiv;
-    public int uphillcutoff;
     public boolean carMode;
     public boolean bikeMode;
     public boolean footMode;
@@ -53,6 +50,8 @@ public final class RoutingContext {
     public double starttimeoffset;
     public boolean transitonly;
     public double waypointCatchingRange;
+    public boolean correctMisplacedViaPoints;
+    public double correctMisplacedViaPointsDistance;
     public List<OsmNodeNamed> poipoints;
     public List<OsmNodeNamed> nogopoints = null;
     private List<OsmNodeNamed> nogopointsAll = null; // full list not filtered for wayoints-in-nogos
@@ -79,6 +78,7 @@ public final class RoutingContext {
     public boolean showspeed;
     public boolean showSpeedProfile;
     public boolean inverseRouting;
+    public boolean showTime;
     public OsmPrePath firstPrePath;
     public int turnInstructionMode; // 0=none, 1=auto, 2=locus, 3=osmand, 4=comment-style, 5=gpsies-style
     public double turnInstructionCatchingRange;
@@ -151,6 +151,70 @@ public final class RoutingContext {
         nogopoints = nogos.isEmpty() ? null : nogos;
     }
 
+    @SuppressWarnings("PMD.NPathComplexity") // external code, do not split
+    public void checkMatchedWaypointAgainstNogos(List<MatchedWaypoint> matchedWaypoints) {
+        if (nogopoints == null) {
+            return;
+        }
+        final int theSize = matchedWaypoints.size();
+        if (theSize < 2) {
+            return;
+        }
+        int removed = 0;
+        final List<MatchedWaypoint> newMatchedWaypoints = new ArrayList<>();
+        MatchedWaypoint prevMwp = null;
+        boolean prevMwpIsInside = false;
+        for (int i = 0; i < theSize; i++) {
+            final MatchedWaypoint mwp = matchedWaypoints.get(i);
+            boolean isInsideNogo = false;
+            final OsmNode wp = mwp.crosspoint;
+            for (OsmNodeNamed nogo : nogopoints) {
+                if (Double.isNaN(nogo.nogoWeight)
+                        && wp.calcDistance(nogo) < nogo.radius
+                        && (!(nogo instanceof OsmNogoPolygon)
+                        || (((OsmNogoPolygon) nogo).isClosed
+                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                    isInsideNogo = true;
+                    break;
+                }
+            }
+            if (isInsideNogo) {
+                boolean useAnyway = false;
+                if (prevMwp == null) {
+                    useAnyway = true;
+                } else if (mwp.direct) {
+                    useAnyway = true;
+                } else if (prevMwp.direct) {
+                    useAnyway = true;
+                } else if (prevMwpIsInside) {
+                    useAnyway = true;
+                } else if (i == theSize - 1) {
+                    throw new IllegalArgumentException("last wpt in restricted area ");
+                }
+                if (useAnyway) {
+                    prevMwpIsInside = true;
+                    newMatchedWaypoints.add(mwp);
+                } else {
+                    removed++;
+                    prevMwpIsInside = false;
+                }
+
+            } else {
+                prevMwpIsInside = false;
+                newMatchedWaypoints.add(mwp);
+            }
+            prevMwp = mwp;
+        }
+        if (newMatchedWaypoints.size() < 2) {
+            throw new IllegalArgumentException("a wpt in restricted area ");
+        }
+        if (removed > 0) {
+            matchedWaypoints.clear();
+            matchedWaypoints.addAll(newMatchedWaypoints);
+        }
+    }
+
     public boolean allInOneNogo(List<OsmNode> waypoints) {
         if (nogopoints == null) {
             return false;
@@ -216,35 +280,19 @@ public final class RoutingContext {
     public void readGlobalConfig() {
         final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
-        if (keyValues != null) {
-            // add parameter to context
-            for (Map.Entry<String, String> e : keyValues.entrySet()) {
-                final float f = Float.parseFloat(e.getValue());
-                expctxWay.setVariableValue(e.getKey(), f, false);
-                expctxNode.setVariableValue(e.getKey(), f, false);
-            }
-        }
-
         setModel(expctxGlobal.useKinematicModel);
 
-        downhillcostdiv = (int) expctxGlobal.getVariableValue("downhillcost", 0.f);
-        downhillcutoff = (int) (expctxGlobal.getVariableValue("downhillcutoff", 0.f) * 10000);
-        uphillcostdiv = (int) expctxGlobal.getVariableValue("uphillcost", 0.f);
-        uphillcutoff = (int) (expctxGlobal.getVariableValue("uphillcutoff", 0.f) * 10000);
-        if (downhillcostdiv != 0) {
-            downhillcostdiv = 1000000 / downhillcostdiv;
-        }
-        if (uphillcostdiv != 0) {
-            uphillcostdiv = 1000000 / uphillcostdiv;
-        }
         carMode = 0.f != expctxGlobal.getVariableValue("validForCars", 0.f);
         bikeMode = 0.f != expctxGlobal.getVariableValue("validForBikes", 0.f);
         footMode = 0.f != expctxGlobal.getVariableValue("validForFoot", 0.f);
 
         waypointCatchingRange = expctxGlobal.getVariableValue("waypointCatchingRange", 250.f);
 
-        // turn-restrictions used per default for car profiles
-        considerTurnRestrictions = 0.f != expctxGlobal.getVariableValue("considerTurnRestrictions", 1.f);
+        // turn-restrictions not used per default for foot profiles
+        considerTurnRestrictions = 0.f != expctxGlobal.getVariableValue("considerTurnRestrictions", footMode ? 0.f : 1.f);
+
+        correctMisplacedViaPoints = 0.f != expctxGlobal.getVariableValue("correctMisplacedViaPoints", 1.f);
+        correctMisplacedViaPointsDistance = expctxGlobal.getVariableValue("correctMisplacedViaPointsDistance", 40.f);
 
         // process tags not used in the profile (to have them in the data-tab)
         processUnusedTags = 0.f != expctxGlobal.getVariableValue("processUnusedTags", 0.f);
@@ -276,6 +324,7 @@ public final class RoutingContext {
         showspeed = 0.f != expctxGlobal.getVariableValue("showspeed", 0.f);
         showSpeedProfile = 0.f != expctxGlobal.getVariableValue("showSpeedProfile", 0.f);
         inverseRouting = 0.f != expctxGlobal.getVariableValue("inverseRouting", 0.f);
+        showTime = 0.f != expctxGlobal.getVariableValue("showtime", 0.f);
 
         final int tiMode = (int) expctxGlobal.getVariableValue("turnInstructionMode", 0.f);
         if (tiMode != 1) { // automatic selection from coordinate source
@@ -470,7 +519,7 @@ public final class RoutingContext {
                 }
             }
         }
-        return (int) (d + 1.0);
+        return (int) Math.max(1.0, Math.round(d));
     }
 
     public OsmPrePath createPrePath(final OsmPath origin, final OsmLink link) {

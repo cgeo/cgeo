@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -18,6 +18,9 @@ import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -26,17 +29,19 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapsSdkInitializedCallback;
 import org.apache.commons.lang3.StringUtils;
 
 // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...)
@@ -44,7 +49,7 @@ import org.apache.commons.lang3.StringUtils;
 //       Either merge GoogleMapActivity with CGeoMap
 //       or generify our map handling so that we only have one map activity at all to avoid code duplication
 @SuppressLint("MissingSuperCall")
-public class GoogleMapActivity extends AbstractBottomNavigationActivity implements MapActivityImpl, FilteredActivity {
+public class GoogleMapActivity extends AbstractNavigationBarActivity implements MapActivityImpl, FilteredActivity, OnMapsSdkInitializedCallback {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
@@ -78,10 +83,38 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
 
     @Override
     public void onCreate(final Bundle icicle) {
+        MapsInitializer.initialize(getApplicationContext(), MapsInitializer.Renderer.LATEST, this);
         mapBase.onCreate(icicle);
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
                 mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
         tracks = new Tracks(routeTrackUtils, mapBase::setTrack);
+
+        this.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INVALIDATE_MAPLIST) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                invalidateOptionsMenu();
+            }
+        });
+    }
+
+    @Override
+    public void onMapsSdkInitialized(final MapsInitializer.Renderer renderer) {
+        Log.e("onMapsSdkInitialized");
+        switch (renderer) {
+            case LATEST:
+                Log.d("GMv2: The latest version of the renderer is used.");
+                mapBase.setLatestRenderer(true);
+                break;
+            case LEGACY:
+                Log.d("GMv2: The legacy version of the renderer is used.");
+                mapBase.setLatestRenderer(false);
+                break;
+            default:
+                // to make Codacy happy...
+                Log.w("GMv2: Unknown renderer version used, neither LATEST nor LEGACY.");
+                mapBase.setLatestRenderer(false);
+                break;
+        }
     }
 
     @Override
@@ -140,7 +173,7 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     @Override
     protected void onStart() {
         //Target view
-        mapBase.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
+        mapBase.targetView = new TargetView(findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = mapBase.getCurrentTargetCache();
         if (target != null) {
             mapBase.targetView.setTarget(target.getGeocode(), target.getName());
@@ -270,6 +303,6 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapBase.getMapOptions().mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_BOTTOM_NAVIGATION;
+        return mapBase.getMapOptions().mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 }

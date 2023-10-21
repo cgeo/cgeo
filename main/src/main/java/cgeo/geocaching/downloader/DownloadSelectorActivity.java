@@ -5,29 +5,22 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.databinding.DownloaderActivityBinding;
 import cgeo.geocaching.databinding.DownloaderItemBinding;
 import cgeo.geocaching.models.Download;
-import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
-import cgeo.geocaching.utils.AsyncTaskWithProgressText;
-import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -35,7 +28,6 @@ import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -43,7 +35,6 @@ import java.util.Collections;
 import java.util.List;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
-import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
 public class DownloadSelectorActivity extends AbstractActionBarActivity {
@@ -93,10 +84,10 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             final Download offlineMap = activity.getQueries().get(position);
             holder.binding.label.setText(offlineMap.getName());
             holder.binding.progressHorizontal.setVisibility(View.GONE);
-            if (offlineMap.getIsDir()) {
+            if (offlineMap.isDir()) {
                 holder.binding.info.setText(R.string.downloadmap_directory);
-                holder.binding.action.setImageResource(R.drawable.downloader_folder);
-                holder.binding.getRoot().setOnClickListener(v -> new MapListTask(activity, offlineMap.getUri(), offlineMap.getName()).execute());
+                holder.binding.action.setImageResource(offlineMap.isBackDir() ? R.drawable.downloader_folder_back : R.drawable.downloader_folder);
+                holder.binding.getRoot().setOnClickListener(v -> new DownloadSelectorMapListTask(activity, offlineMap.getUri(), offlineMap.getName(), current, lastCompanionType, lastCompanionList, activity::setLastCompanions, activity::onMapListTaskPostExecuteInternal).execute());
             } else {
                 final int typeResId = offlineMap.getType().getTypeNameResId();
                 final String addInfo = offlineMap.getAddInfo();
@@ -187,134 +178,14 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         }
     }
 
-    private class MapListTask extends AsyncTaskWithProgressText<Void, List<Download>> {
-        private final Uri uri;
-        private final String newSelectionTitle;
-
-        MapListTask(final Activity activity, final Uri uri, final String newSelectionTitle) {
-            super(activity, newSelectionTitle, getString(R.string.downloadmap_retrieving_directory_data));
-            this.uri = uri;
-            this.newSelectionTitle = newSelectionTitle;
-            Log.i("starting MapDownloaderTask: " + uri.toString());
-        }
-
-        @Override
-        protected List<Download> doInBackgroundInternal(final Void[] none) {
-            final List<Download> list = new ArrayList<>();
-
-            // check for companion type (e. g.: themes for maps)
-            if (current.companionType != null) {
-                if (lastCompanionType == null || !lastCompanionType.equals(current.companionType) || lastCompanionList.isEmpty()) {
-                    final AbstractDownloader companion = Download.DownloadType.getInstance(current.companionType.id);
-                    if (companion != null) {
-                        lastCompanionList = doInBackgroundHelper(companion.mapBase, companion);
-                        lastCompanionType = current.companionType;
-                    }
-                }
-                if (lastCompanionList != null) {
-                    list.addAll(lastCompanionList);
-                }
-            }
-
-            // query current type
-            list.addAll(doInBackgroundHelper(uri, current));
-            return list;
-        }
-
-        private List<Download> doInBackgroundHelper(final Uri uri, final AbstractDownloader downloader) {
-            final Parameters params = new Parameters();
-
-            String page = "";
-            try {
-                final Response response = Network.getRequest(uri.toString(), params).blockingGet();
-                page = Network.getResponseData(response, true);
-            } catch (final Exception e) {
-                return Collections.emptyList();
-            }
-
-            if (StringUtils.isBlank(page)) {
-                Log.e("getMap: No data from server");
-                return Collections.emptyList();
-            }
-            final List<Download> list = new ArrayList<>();
-
-            try {
-                downloader.analyzePage(uri, list, page);
-                Collections.sort(list, (left, right) -> TextUtils.COLLATOR.compare(left.getName(), right.getName()));
-                return list;
-            } catch (final Exception e) {
-                Log.e("Map downloader: error parsing parsing html page", e);
-                return Collections.emptyList();
-            }
-        }
-
-        @Override
-        protected void onPostExecuteInternal(final List<Download> result) {
-            setUpdateButtonVisibility();
-            setMaps(result, newSelectionTitle, false);
-        }
+    private void setLastCompanions(final Download.DownloadType lastCompanionType, final List<Download> lastCompanionList) {
+        this.lastCompanionType = lastCompanionType;
+        this.lastCompanionList = lastCompanionList;
     }
 
-    private class MapUpdateCheckTask extends AsyncTaskWithProgressText<Void, List<Download>> {
-        private final ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps;
-        private final String newSelectionTitle;
-
-        MapUpdateCheckTask(final Activity activity, final ArrayList<CompanionFileUtils.DownloadedFileData> installedOfflineMaps, final String newSelectionTitle) {
-            super(activity, newSelectionTitle, activity.getString(R.string.downloadmap_checking_for_updates));
-            this.installedOfflineMaps = installedOfflineMaps;
-            this.newSelectionTitle = newSelectionTitle;
-            Log.i("starting MapUpdateCheckTask");
-        }
-
-        @Override
-        protected List<Download> doInBackgroundInternal(final Void[] none) {
-            final List<Download> result = new ArrayList<>();
-            result.add(new Download(getString(R.string.downloadmap_title), current.mapBase, true, "", "", current.offlineMapType, AbstractDownloader.ICONRES_FOLDER));
-            for (CompanionFileUtils.DownloadedFileData installedOfflineMap : installedOfflineMaps) {
-                final Download offlineMap = checkForUpdate(installedOfflineMap);
-                if (offlineMap != null && offlineMap.getDateInfo() > installedOfflineMap.remoteDate) {
-                    offlineMap.setAddInfo(CalendarUtils.yearMonthDay(installedOfflineMap.remoteDate));
-                    result.add(offlineMap);
-                }
-            }
-            return result;
-        }
-
-        @Nullable
-        @WorkerThread
-        private Download checkForUpdate(final CompanionFileUtils.DownloadedFileData offlineMapData) {
-            final AbstractDownloader downloader = Download.DownloadType.getInstance(offlineMapData.remoteParsetype);
-            if (downloader == null) {
-                Log.e("Map update checker: Cannot find map downloader of type " + offlineMapData.remoteParsetype + " for file " + offlineMapData.localFile);
-                return null;
-            }
-
-            final Parameters params = new Parameters();
-            String page = "";
-            try {
-                final Response response = Network.getRequest(downloader.getUpdatePageUrl(offlineMapData.remotePage), params).blockingGet();
-                page = Network.getResponseData(response, true);
-            } catch (final Exception e) {
-                return null;
-            }
-
-            if (StringUtils.isBlank(page)) {
-                Log.e("getMap: No data from server");
-                return null;
-            }
-
-            try {
-                return downloader.checkUpdateFor(page, offlineMapData.remotePage, offlineMapData.remoteFile);
-            } catch (final Exception e) {
-                Log.e("Map update checker: error parsing parsing html page", e);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecuteInternal(final List<Download> result) {
-            setMaps(result, newSelectionTitle, result.size() < 2);
-        }
+    private void onMapListTaskPostExecuteInternal(final String newSelectionTitle, final List<Download> result) {
+        setUpdateButtonVisibility();
+        setMaps(result, newSelectionTitle, false);
     }
 
     @Override
@@ -353,6 +224,27 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // navigate one level back instead of leaving the activity if possible
+        for (Download offlineMap : maps) {
+            if (offlineMap.isBackDir()) {
+                new DownloadSelectorMapListTask(this, offlineMap.getUri(), offlineMap.getName(), current, lastCompanionType, lastCompanionList, this::setLastCompanions, this::onMapListTaskPostExecuteInternal).execute();
+                return;
+            }
+        }
+        super.onBackPressed();
+    }
+
     private void changeSource(final int position) {
         this.setTitle(R.string.downloadmap_title);
         maps.clear();
@@ -367,14 +259,14 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         setUpdateButtonVisibility();
         binding.checkForUpdates.setOnClickListener(v -> {
             binding.checkForUpdates.setVisibility(View.GONE);
-            new MapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates)).execute();
+            new DownloadSelectorMapUpdateCheckTask(this, installedOfflineMaps, getString(R.string.downloadmap_available_updates), current, this::setMaps).execute();
         });
 
         DownloaderUtils.checkTargetDirectory(this, current.targetFolder, true, (path, isWritable) -> {
             if (isWritable) {
                 final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.mapdownloader_list, true, true);
                 view.setAdapter(adapter);
-                new MapListTask(this, current.mapBase, "").execute();
+                new DownloadSelectorMapListTask(this, current.mapBase, "", current, lastCompanionType, lastCompanionList, this::setLastCompanions, this::onMapListTaskPostExecuteInternal).execute();
             } else {
                 finish();
             }
@@ -403,7 +295,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
 
         if (noUpdatesFound) {
             SimpleDialog.of(this).setMessage(R.string.downloadmap_no_updates_found).show();
-            new MapListTask(this, current.mapBase, "").execute();
+            new DownloadSelectorMapListTask(this, current.mapBase, "", current, lastCompanionType, lastCompanionList, this::setLastCompanions, this::onMapListTaskPostExecuteInternal).execute();
         }
     }
 }

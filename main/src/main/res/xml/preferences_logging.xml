@@ -48,5 +48,10 @@
             android:summary="@string/init_summary_offlinelogs_homescreen"
             android:title="@string/init_offlinelogs_homescreen"
             app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.TextPreference
+            android:defaultValue=""
+            android:key="@string/pref_log_image_default_prefix"
+            android:title="@string/init_log_image_default_prefix_title"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

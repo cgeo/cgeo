@@ -1,0 +1,13 @@
+---context:global   # following code refers to global config
+
+# this prevents suppression of unused tags, so they are visibly in the data tab
+assign processUnusedTags = true
+assign validForFoot = true
+
+---context:way   # following code refers to way-tags
+
+assign costfactor
+  switch and highway= not route=ferry  100000 1
+
+---context:node  # following code refers to node tags
+assign initialcost = 0

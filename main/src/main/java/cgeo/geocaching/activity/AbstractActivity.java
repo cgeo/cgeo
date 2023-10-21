@@ -8,8 +8,8 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -179,7 +179,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         } catch (final AndroidRuntimeException ex) {
             Log.e("Error requesting indeterminate progress", ex);
         }
-        AndroidBeam.disable(this);
         initializeCommonFields();
     }
 
@@ -275,7 +274,12 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
             } else {
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix)));
+                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, null, false, set -> {
+                            final int added = cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
+                            if (added > 0) {
+                                GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
+                            }
+                        });
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
@@ -298,7 +302,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         if (actionBar != null) {
             if (type != null) {
                 actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.markerId, null));
+                actionBar.setIcon(ResourcesCompat.getDrawable(getResources(), type.iconId, null));
             } else {
                 actionBar.setIcon(android.R.color.transparent);
             }
@@ -313,7 +317,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayShowHomeEnabled(true);
-            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE).getDrawable());
+            actionBar.setIcon(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
         }
     }
 

@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.databinding.MapSettingsDialogBinding;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -17,6 +18,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.LayoutInflater;
@@ -38,6 +40,7 @@ import java.util.Objects;
 import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
@@ -51,11 +54,13 @@ public class MapSettingsUtils {
     }
 
     // splitting up that method would not help improve readability
+    @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
+        final boolean showPNMastertoggle = Settings.showProximityNotificationMasterToggle();
 
         final GeocacheFilter filter = filterContext.get();
         final Map<GeocacheFilter.QuickFilter, Boolean> quickFilter = filter.getQuickFilter();
@@ -104,9 +109,30 @@ public class MapSettingsUtils {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
 
-        if (showAutotargetIndividualRoute) {
-            dialogView.mapSettingsAutotargetContainer.setVisibility(View.VISIBLE);
+        // routing profile legend for user-defined entries
+        final boolean useInternalRouting = Settings.useInternalRouting();
+        if (useInternalRouting) {
+            final StringBuilder sb = new StringBuilder();
+            final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
+            if (StringUtils.isNotBlank(temp1)) {
+                sb.append("1: ").append(temp1);
+            }
+            final String temp2 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER2), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
+            if (StringUtils.isNotBlank(temp2)) {
+                sb.append(StringUtils.isNotBlank(sb) ? " - " : "").append("2: ").append(temp2);
+            }
+            if (StringUtils.isNotBlank(sb)) {
+                dialogView.routingProfileinfo.setVisibility(View.VISIBLE);
+                dialogView.routingProfileinfo.setText("(" + sb + ")");
+            }
+        }
+
+        if (showAutotargetIndividualRoute || showPNMastertoggle) {
+            dialogView.mapSettingsOtherContainer.setVisibility(View.VISIBLE);
+            dialogView.mapSettingsAutotarget.setVisibility(showAutotargetIndividualRoute ? View.VISIBLE : View.GONE);
             dialogView.mapSettingsAutotarget.setChecked(isAutotargetIndividualRoute);
+            dialogView.mapSettingsProximitynotificationMastertoggle.setVisibility(showPNMastertoggle ? View.VISIBLE : View.GONE);
+            dialogView.mapSettingsProximitynotificationMastertoggle.setChecked(Settings.isProximityNotificationMasterToggleOn());
         }
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
@@ -131,11 +157,20 @@ public class MapSettingsUtils {
                     RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
                 }
             }
+
+            if (showPNMastertoggle && Settings.isProximityNotificationMasterToggleOn() != dialogView.mapSettingsProximitynotificationMastertoggle.isChecked()) {
+                Settings.enableProximityNotifications(dialogView.mapSettingsProximitynotificationMastertoggle.isChecked());
+                if (configureProximityNotifications != null) {
+                    configureProximityNotifications.run();
+                }
+            }
         });
         dialog.show();
 
         compactIconWrapper.init();
         routingChoiceWrapper.init();
+        routingChoiceWrapper.getByResId(R.id.routing_user1).button.setVisibility(useInternalRouting ? View.VISIBLE : View.GONE);
+        routingChoiceWrapper.getByResId(R.id.routing_user2).button.setVisibility(useInternalRouting ? View.VISIBLE : View.GONE);
 
         if (!Routing.isAvailable()) {
             configureRoutingButtons(false, routingChoiceWrapper);
@@ -147,6 +182,7 @@ public class MapSettingsUtils {
                 dialogView.routingInfo.setVisibility(View.GONE);
             }));
         }
+
     }
 
     private static void configureRoutingButtons(final boolean enabled, final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper) {

@@ -95,7 +95,7 @@ public class DenseLongMapTest {
         }
 
         // need to use the map again for valid memory measure
-        Assert.assertTrue("out of range test", dmap.getInt(-1) == -1);
+        Assert.assertEquals("out of range test", -1, dmap.getInt(-1));
     }
 
 }

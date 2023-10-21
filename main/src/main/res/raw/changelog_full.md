@@ -7,6 +7,185 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.09.26 Bugfix Release
+
+- New: Increased target SDK to 33 (due to Play Store requirements)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
+- Fix: GPX import with multiple tracks in same file
+- Fix: Favorite ratio > 100% under certain conditions
+- Fix: Navigation line lost on screen rotation with Google Maps
+- Fix: Individual route not deleted from Google Maps on deletion
+- Fix: Last log text discarded when adding image first on new log
+- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.08.24 Bugfix Release
+
+- Fix: Individual route actions not working when using Google Maps
+- Fix: Crash on adding to favorites (under certain conditions)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.08.16 Feature Release
+
+### Map
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
+
+### Cache details
+- New: 'Save and upload' button when editing personal note
+- Change: Replace most update progress dialogs by background actions
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
+- New: Allow selecting, copying etc. of image description (EXIF info)
+
+### General
+- New: Add more number emojis (separate category)
+- Change: Use different source for preview of pocket queries
+- New: Make startscreen selectable
+- New: Support target selector for additional navi apps
+- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
+- New: Option to vote on opencaching (OCPL) caches during logging
+- New: Event Date filter for upcoming events
+- Change: Make 'relative' the default for date filters
+- New: Display info on home screen for unread messages (optional)
+- New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- Fix: HTML-encoded chars in 'trackable last spotted" name
+- Change: Removed outdated Twitter support
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.06.18 Bugfix Release
+
+### General
+- Fix: Crash in Google Maps on certain map source changes
+- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
+- Fix: Some seekbar issues
+- Fix: SVG geochecker images not being displayed
+- New: Display geocaching.com login error messages on home screen
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.05.15 Feature Release
+
+### Map
+- Change: Use last known map position as fallback (when no GPS available and "follow my location" inactive)
+- New: Refresh caches in route
+- New: Individual coloring of tracks
+- New: Update map list on receiving map file
+- Change: Do not install downloaded map/theme automatically
+- New: Individual route optimization (experimental)
+- New: Support for "Google: Terrain" maps
+- New: Setting line-width per track
+- New: Hide map's action bar on demand (tap on empty space on map)
+- Change: Move quick settings buttons to the left in landscape mode to gain more vertical space
+- New: Visualize coords-only-points of individual route
+- Fix: Preserve target geocode on mapsource change
+- Change: Long tap on cache/waypoint, which is part of individual route, will open context menu
+- New: Add online attribute filtering for opencaching services
+- Fix: Waypoints of Adventure Labs sometimes not being displayed
+
+### Cache details
+- Change: Force redownload of cache when importing via send2cgeo
+- Change: Differentiate between size "not chosen" and "other" for geocaching.com caches (might give different filtering for some caches older than 2013)
+- Fix: Preserve scroll position when using "render complete description" button
+
+### General
+- Fix: Preview button displayed only with filter setting "show all" in PQ list
+- New: Add Cruiser as navigation app (requires Cruiser 3.0.9 or newer)
+- New: Import geocaching.com bookmark lists from links
+- New: Allow opening recently viewed caches as list
+- New: Make quicklaunch buttons sortable
+- New: Workaround for trackable namespace conflict (works for disabled GeoKrety connector)
+- New: Make cache list info items configurable
+- New: Clear recently viewed caches
+- New: Add 'recently viewed caches' to quicklaunch options
+- New: Add last logs smiley row to configurable info items
+- New: Added "add to individual route" to cache list menu
+- New: Updated integrated BRouter to v1.7.0
+- Fix: Alignment of compass status view in landscape mode
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.04.11 Bugfix Release
+
+### General
+- Fix: Error on downloading bookmark lists
+- Fix: Error on adding caches to / removing caches from bookmark lists
+- Fix: Google Maps: cache/waypoint popup opens when tapping zoom control/compass rose with cache/waypoint beneath it
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.03.25 Bugfix Release
+
+### General
+- Fix: Multiple navigation lines on Google Maps map
+- Fix: User-created waypoints not being displayed on OSM map
+- Fix: Widen log description column in landscape mode
+- Fix: Make image format error message clearer
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.02.25 Bugfix Release
+
+### General
+- Fix: Skipping some user-created waypoints on GPX import
+- Fix: List of extended filters not translated when language is set to non-default within c:geo
+- Fix: Downloading/updating routing tiles or maps no longer possible on older devices
+- Fix: Location name shown in compass instead of coordinates
+- Fix: c:geo hangs on adding waypoint when certain formulas have been copied to clipboard
+- Fix: Wrong image orientation for own images in portrait mode
+- Fix: Listing images having urls without protocol not being handled correctly
+- Fix: Crash on drawing position marker
+- Fix: Loading GPX tracks/routes may lead to unconnected segments
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.02.12 Feature Release
+
+### Map
+- New: OSM map source osm.paws.cz
+- New: Enable reading flopp.net GPX files as tracks
+- Fix: Missing routing symbol after 'append to route'
+- Fix: Missing route calculation for prepended points
+- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- New: Add support for GeoJSON data
+
+### Cache details
+- New: New more sophisticated image gallery
+- Fix: Restore position in waypoint list after updating or deleting waypoint
+- Fix: Move to bottom when creating new waypoint
+- New: Recognize variables entered in waypoint user notes
+- New: Display lab adventure button in mystery cache details if link to lab adventure detected
+- Fix: Removal of waypoint description not synced for server-side waypoints
+- Fix: Waypoint list not updated after scan
+
+### General
+- API level change (compileSDK 32)
+- Update some dependant libraries
+- Change: Use different Android mechanism to receive downloads (for better compatibility with Android 12+)
+- New: Preset list name with GPX filename on import
+- New: Allow import of GPX track files that do not provide a xmlns namespace tag
+- New: Add monochrome launcher icon for Android 13
+- New: Display geocaching.com member status on home screen
+- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- Fix: Allow filtering for archived caches in owner search
+- Fix: Line breaks sometimes missing in logbook view directly after posting a log
+- Fix: Several crashes
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2022.12.21 Bugfix Release
 
 ### General

@@ -2,14 +2,14 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.expressions.IExpression;
+import cgeo.geocaching.utils.config.IJsonConfigurable;
 
 import androidx.annotation.Nullable;
 
 /**
  * Base interface to be implemented by all Geocache-Filters
  */
-public interface IGeocacheFilter extends IExpression<IGeocacheFilter> {
+public interface IGeocacheFilter extends IJsonConfigurable<IGeocacheFilter> {
 
     /**
      * Decides whether a geocache passes this filter (returns true) or not (returns false).

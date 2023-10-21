@@ -146,7 +146,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             ActivityMixin.showShortToast(activity, R.string.variables_scanlisting_nopatternfound);
         } else {
             SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                    .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
+                    .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, null, false, set -> {
                         for (String s : set) {
                             adapter.addVariable(null, s);
                         }

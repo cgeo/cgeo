@@ -113,7 +113,8 @@
                 android:visibility="gone"
                 android:text="(x)"
                 android:textStyle="italic"
-                tools:visiblity="visible" />
+                tools:visiblity="visible"
+                tools:ignore="HardcodedText"/>
 
             <TextView
                 android:id="@+id/note"

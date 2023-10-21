@@ -1,25 +1,31 @@
 ### Карта
-- Новое: источник OSM карт osm.paws.cz
-- Новое: Включено чтение flopp.net GPX-файлов как треков
-- Исправлено: Отсутствовал символ маршрутизации после 'добавить в маршрут'
-- Исправлено: Отсутствовал расчет маршрута для добавленных точек
-- Новое: Добавлена поддержка темы 'Voluntary MF5' OpenAndroMaps
+- Updated Mapsforge and VTM libs to v0.20
+- Updated Google Maps renderer
+- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- New: Show custom cache icon as marker for related waypoints
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
+- New: Linear labs use numbers as waypoint markers
+- New: Waypoints of a cache show cache type icon as marker
+- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Детали тайника
-- Новое: Новая более проработанная галерея изображений
-- Исправлено: Восстановление позиции в списке путевых точек после обновления или удаления путевой точки
-- Исправлено: Перемещение вниз при создании новой путевой точки
-- Новое: Распознавание переменных, введенных в заметки пользователя
-- Новое: Отображение кнопки Лаборатории Приключений в логических тайниках, если необходимо
-- Исправлено: Удаление описания точки, не синхронизировалось для заметок на сервере
+- New: Edit default value for log image caption prefix
+- New: Ensure minimum image size for display
+- Change: Redesigned edit options for own log images
+- New: Bettercacher integration
+- New: Sync visited state on synchronizing waypoints to personal note
+- New: Retrieve found date for Opencaching-based caches
+- New: Append all waypoints to individual route
 
 ### Общее
-- Изменение уровня API (compileSDK 32)
-- Обновление некоторых зависимых библиотек
-- Изменение: Использован другой механизм Android для получения загрузок (для лучшей совместимости с Android 12+)
-- Новое: Имя списка пресетов с именем файла GPX при импорте
-- Исправлено (ночная версия): Сбой при импорте GPX
-- Новое: Разрешен импорт файлов GPX, без тэга xmlns
-- Новое: Добавлена монохромная иконка лаунчера для Android 13
-- Новое: Отображение статуса участника geocaching.com на домашнем экране
-- Изменение: GPX-импорт: Использовано имя как геокод для коннектора 'неизвестно'
+- New: Increased target SDK to 33
+- Change: Handling of database access to avoid "database not available" crashes
+- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Collection;
 
+import javax.annotation.Nullable;
+
 /**
  * Defines common functions of the provider-specific
  * MapView implementations
@@ -90,6 +92,8 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     void setListId(int listId);
 
+    void setCoordsMarker(@Nullable Geopoint coords);
+
     /* From Google MapView documentation:
      * Users of this class must forward all the life cycle methods from the Activity or Fragment
      * containing this view to the corresponding ones in this class. In particular, you must
@@ -108,4 +112,5 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     void onLowMemory();
 
     void selectMapTheme(AppCompatActivity activity);
+
 }

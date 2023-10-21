@@ -2,7 +2,7 @@
  * Enterprise plugin replaces Build scan plugin from gradle 6, see https://docs.gradle.com/enterprise/gradle-plugin/
  */
 plugins {
-    id 'com.gradle.enterprise' version '3.11.4'
+    id 'com.gradle.enterprise' version '3.14.1'
 }
 
 // Make the root project name independent of the directory name where we checked out the repository.
@@ -11,6 +11,7 @@ rootProject.name = "cgeo"
 
 // included sub projects
 include ':mapswithme-api'
+include ':organicmaps-api'
 include ':main'
 include ':cgeo-contacts'
 

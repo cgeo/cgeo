@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/menu_optimize"
+        android:icon="@drawable/ic_menu_auto_fix_high"
+        android:title="@string/optimize"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
+    </item>
+    <item
         android:id="@+id/menu_invert_order"
         android:icon="@drawable/ic_menu_swap_vert"
         android:title="@string/menu_invert_order"
@@ -15,6 +23,14 @@
         android:id="@+id/menu_item_delete"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_filter_storage_delete_button"
+        android:visible="false"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction">
+    </item>
+    <item
+        android:id="@+id/menu_item_save_and_upload"
+        android:icon="@drawable/ic_menu_upload"
+        android:title="@string/cache_personal_note_save_and_upload"
         android:visible="false"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction">

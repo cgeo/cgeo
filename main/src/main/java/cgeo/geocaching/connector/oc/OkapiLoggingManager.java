@@ -1,6 +1,8 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
+import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.Loaders;
@@ -23,7 +25,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class OkapiLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<OkapiClient.InstallationInformation> {
+public class OkapiLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<OkapiClient.InstallationInformation>, ILoggingWithFavorites {
 
     @NonNull
     private final OCApiLiveConnector connector;
@@ -82,8 +84,16 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
 
     @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem);
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, false, rating);
+        connector.login();
+        return result;
+    }
+
+    @Override
+    @NonNull
+    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
+        final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem, addToFavorites, rating);
         connector.login();
         return result;
     }
@@ -128,4 +138,19 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
         return Collections.singletonList(ReportProblemType.NEEDS_MAINTENANCE);
     }
 
+    @Override
+    public int getFavoritePoints() {
+        return hasLoaderError ? 0 : connector.getRemainingFavoritePoints();
+    }
+
+    @Override
+    public boolean hasFavPointLoadError() {
+        // FavPoints count for OC are taken during getting user info, so checking hasLoaderError is enough
+        return hasLoaderError;
+    }
+
+    @Override
+    public int getFavoriteCheckboxText() {
+        return R.plurals.fav_points_remaining_oc;
+    }
 }

@@ -47,6 +47,10 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
         longitudeE6 = (int) Math.round(lon * 1e6);
     }
 
+    public static Geopoint forE6(final int latE6, final int lonE6) {
+        return new Geopoint(latE6, lonE6, null);
+    }
+
     /**
      * Creates new Geopoint with given latitude and longitude in microdegrees.
      * The <tt>dummy</tt> parameter is ignored and is only used to prevent the wrong

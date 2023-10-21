@@ -7,7 +7,6 @@ public class BitCoderContext {
     private static final int[] vc_values = new int[4096];
     private static final int[] vc_length = new int[4096];
     private static final int[] reverse_byte = new int[256];
-    private static final int[] bm2bits = new int[256];
 
     static {
         // fill varbits lookup table
@@ -46,9 +45,6 @@ public class BitCoderContext {
                 }
             }
             reverse_byte[b] = r;
-        }
-        for (int b = 0; b < 8; b++) {
-            bm2bits[1 << b] = b;
         }
     }
 

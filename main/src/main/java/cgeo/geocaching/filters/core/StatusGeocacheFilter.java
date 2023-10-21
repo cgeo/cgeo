@@ -10,13 +10,20 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.util.Consumer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
@@ -248,7 +255,11 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
+        setConfigInternal(config.getDefaultList());
+    }
+
+    private void setConfigInternal(final List<String> configValues) {
         statusOwned = null;
         statusFound = null;
         statusDnf = null;
@@ -265,7 +276,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         excludeActive = false;
         excludeDisabled = false;
         excludeArchived = false;
-        for (String value : config.getDefaultList()) {
+        for (String value : configValues) {
             checkAndSetBooleanFlag(value, StatusType.OWNED, b -> statusOwned = b);
             checkAndSetBooleanFlag(value, StatusType.FOUND, b -> statusFound = b);
             checkAndSetBooleanFlag(value, StatusType.DNF, b -> statusDnf = b);
@@ -300,8 +311,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig result = new ExpressionConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig result = new LegacyFilterConfig();
+        result.putDefaultList(getConfigInternal());
+        return result;
+    }
+
+    private List<String> getConfigInternal() {
+        final List<String> result = new ArrayList<>();
         checkAndAddFlagToDefaultList(statusOwned, StatusType.OWNED, result);
         checkAndAddFlagToDefaultList(statusFound, StatusType.FOUND, result);
         checkAndAddFlagToDefaultList(statusDnf, StatusType.DNF, result);
@@ -316,21 +333,21 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusHasUserDefinedWaypoints, StatusType.HAS_USER_DEFINED_WAYPOINTS, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
         if (excludeActive) {
-            result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
+            result.add(FLAG_EXCLUDE_ACTIVE);
         }
         if (excludeDisabled) {
-            result.addToDefaultList(FLAG_EXCLUDE_DISABLED);
+            result.add(FLAG_EXCLUDE_DISABLED);
         }
         if (excludeArchived) {
-            result.addToDefaultList(FLAG_EXCLUDE_ARCHIVED);
+            result.add(FLAG_EXCLUDE_ARCHIVED);
         }
         return result;
 
     }
 
-    private static void checkAndAddFlagToDefaultList(final Boolean statusValue, final StatusType status, final ExpressionConfig config) {
+    private static void checkAndAddFlagToDefaultList(final Boolean statusValue, final StatusType status, final List<String> configValues) {
         if (statusValue != null) {
-            config.addToDefaultList(statusValue ? status.yesFlag : status.noFlag);
+            configValues.add(statusValue ? status.yesFlag : status.noFlag);
         }
 
     }
@@ -500,5 +517,18 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             return cache.getOfflineLog().logType.isFoundLog();
         }
         return false;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setTextCollection(node, "values", getConfigInternal());
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        setConfigInternal(JsonUtils.getTextList(node, "values"));
     }
 }

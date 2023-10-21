@@ -13,8 +13,8 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'cgeo.geocaching'
+    compileSdk 33
 
-    compileSdk 32
 
     compileOptions {
         // use the diamond operator and some other goodies in Android
@@ -25,7 +25,7 @@ android {
     defaultConfig {
         minSdk 21
         //noinspection OldTargetApi
-        targetSdk 31
+        targetSdk 33
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
@@ -120,7 +120,7 @@ android {
         }
     }
 
-    buildTypes.all { buildType ->
+    buildTypes.configureEach { buildType ->
         // as it affects the build speed, do skip some steps for debug builds
         if (buildType.name != 'debug') {
             // enable proguard and remove unused code
@@ -231,7 +231,7 @@ android {
         }
     }
 
-    flavorDimensions "javaCompilerTime" // all flavours must be assigned a dimension
+    flavorDimensions.add("javaCompilerTime") // all flavours must be assigned a dimension
     productFlavors {
         // make sure to not have any flavour lexicographically smaller than "basic". Android Studio takes the first alphabetical flavor in new installations.
         basic {
@@ -246,21 +246,21 @@ android {
     }
 
     // remove the "-basic" flavour name from the generated APK, have the flavor remain only for special builds
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
             outputFileName = outputFileName.replace('-basic-', '-')
         }
     }
 
     // special version code for nightly and rc builds
-    applicationVariants.all { variant ->
+    applicationVariants.configureEach { variant ->
         if (variant.buildType.name == 'nightly') {
-            variant.outputs.all {
+            variant.outputs.configureEach {
                 setVersionCodeOverride(versionCodeFromDate(10000000))
             }
         }
         if (variant.buildType.name == 'rc') {
-            variant.outputs.all {
+            variant.outputs.configureEach {
                 setVersionCodeOverride(versionCodeFromDate(-1))
             }
         }
@@ -268,7 +268,7 @@ android {
             String legacyName = System.getenv('LEGACY_VERSION_NAME')
             Integer legacyVersion = System.getenv('LEGACY_VERSION_CODE') as Integer
             if (legacyName != null && legacyVersion != null) {
-                variant.outputs.all {
+                variant.outputs.configureEach {
                     setVersionNameOverride(legacyName)
                     setVersionCodeOverride(legacyVersion)
                 }
@@ -307,7 +307,7 @@ dependencies {
 
     // License: Apache-2.0. https://github.com/k3b/k3b-geoHelper/
     // decode geo-uris and web-map-service-urls
-    implementation('com.github.k3b:k3b-geoHelper:v1.1.11') {
+    implementation('com.github.k3b:k3b-geoHelper:1.1.12') {
         // do not get transitive 'commons-io:commons-io:2.6' as c:geo uses 2.5 to be compatible with older android versions
         exclude group: 'commons-io', module: 'commons-io'
     }
@@ -340,24 +340,24 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
-    String leakCanaryVersion = '2.10'
+    String leakCanaryVersion = '2.12'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
     // Locus Maps integration
-    implementation "com.asamm:locus-api-android:0.9.32"
+    implementation "com.asamm:locus-api-android:0.9.50"
 
     // Mapsforge official version
-    //String mapsforgeSource = 'org.mapsforge'
-    //String mapsforgeVersion = '0.18.0'
+    String mapsforgeSource = 'org.mapsforge'
+    String mapsforgeVersion = '0.20.0'
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
     //String mapsforgeSource = 'com.github.mapsforge.mapsforge'
     //String mapsforgeVersion = 'fbc75a4' // master as of 18.07.22
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
-    String mapsforgeSource = 'com.github.cgeo.mapsforge'
-    String mapsforgeVersion = 'fbc75a4' // fix for #12210
+    // String mapsforgeSource = 'com.github.cgeo.mapsforge'
+    // String mapsforgeVersion = 'fbc75a4' // fix for #12210
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
@@ -367,7 +367,7 @@ dependencies {
 
     // Mapsforge VTM implementation
     String mapsforgeVTMSource = 'org.mapsforge'
-    String mapsforgeVTMVersion = '0.18.0'
+    String mapsforgeVTMVersion = '0.20.0'
 
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
@@ -392,32 +392,42 @@ dependencies {
     // Maps.ME integration
     implementation project(":mapswithme-api")
 
+    // Organic Maps integration
+    implementation project(":organicmaps-api")
+
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.18.0'
 
-    String okhttpVersion = '4.10.0'
+    String okhttpVersion = '4.11.0'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     // For local unit tests
     testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:19.0.1'
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
     // somehow there is a transitive play service dependency which we don't want
     configurations.all*.exclude module: "play-services-measurement"
 
     // Support Library Design
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
 
     // ProcessPhoenix, reliable process restart
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.2"
 
+    // avoid duplicate class, see e.g. https://stackoverflow.com/questions/75712899/duplicate-class-kotlin-random-jdk8-found-in-modules-jetified-kotlin-stdlib-1-8-1
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10") {
+            because 'align all versions of kotlin transitive dependencies'
+        }
+    }
+
     // Support Library Lifecycle Helpers
-    String lifecycleVersion = '2.5.1'
+    String lifecycleVersion = '2.6.2'
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycleVersion"
@@ -425,10 +435,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycleVersion"
 
     // workmanager (to replace foreground services for downloader)
-    implementation "androidx.work:work-runtime:2.7.1"
+    implementation "androidx.work:work-runtime:2.8.1"
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Support Library core (used for eg. HtmlCompat)
     implementation 'androidx.core:core:1.8.0'
@@ -437,32 +447,29 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Support Library ExifInterface
-    implementation 'androidx.exifinterface:exifinterface:1.3.5'
+    implementation 'androidx.exifinterface:exifinterface:1.3.6'
 
     // Support Library GridLayout used by the coordinate calculator
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // Support Library RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
 
     // Settings Library
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
 
     // Support Annotations. use same version for the main app and the test app
-    String annotationVersion = '1.5.0'
+    String annotationVersion = '1.7.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
     androidTestImplementation 'androidx.test:core:1.5.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     // needed for chrome custom tabs
     implementation 'androidx.browser:browser:1.4.0'
-
-    // Zxing barcode reader integration
-    implementation 'com.google.zxing:android-integration:3.3.0'
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
@@ -470,6 +477,10 @@ dependencies {
     // Loupe for ImageGallery and zoomable ImageViews
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
+
+    //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
+    //See https://github.com/guardian/toolargetool
+    implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
@@ -539,7 +550,7 @@ class GitCommit {
 }
 
 // have a run task for our builds to launch the app directly from gradle
-android.applicationVariants.all { variant ->
+android.applicationVariants.configureEach { variant ->
     if (variant.installProvider) {
         tasks.register("run${variant.name.capitalize()}") {
             group 'cgeo'
@@ -569,7 +580,7 @@ android.applicationVariants.all { variant ->
 
 // run device and non device tests together with one task. also fixes the bug that gradle optimizes tests away in repeated runs
 // This uses eager task creation API.
-tasks.create('testDebug') {
+tasks.register('testDebug') {
     group 'verification'
     description "Tests the debug build both with device-dependent and device-independent tests."
 
@@ -617,7 +628,7 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 }
                 project.exec {
                     executable = project.android.getAdbExe().toString()
-                    args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
                 project.exec {
                     executable = project.android.getAdbExe().toString()
@@ -640,7 +651,7 @@ tasks.register('copyDefaultPreferencesToAndroid') {
     }
 }
 
-tasks.whenTaskAdded { theTask ->
+tasks.configureEach { theTask ->
     // only verify the existence of private.properties, when the file is really needed
     if (theTask.name == "packageRelease") {
         theTask.dependsOn "verifyPrivateProperties"
@@ -683,7 +694,7 @@ checkstyle {
     // assign the checkstyle version explicitly here
     // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
     // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.3.4'
+    toolVersion = '10.12.2'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
@@ -699,6 +710,9 @@ tasks.register('checkstyle', Checkstyle) {
     include '**/*.java'
 
     classpath = files()
+
+    // see https://docs.gradle.org/7.5.1/userguide/upgrading_version_7.html#declare_unreadable_input_output
+    doNotTrackState("unreadable input property 'configDirectory'")
 }
 
 tasks.named('check') {

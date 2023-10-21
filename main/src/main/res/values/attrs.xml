@@ -15,10 +15,17 @@
     <attr name="urlButton" format="string" />
     <attr name="connector" format="string" />
 
+    <!-- attributes for ButtonPreference -->
+    <declare-styleable name="ButtonPreference">
+        <attr name="src" format="integer" />
+    </declare-styleable>
+
     <!-- attributes for ColorpickerPreference -->
     <declare-styleable name="ColorpickerPreference">
         <attr name="showOpaquenessSlider" format="boolean" />
         <attr name="defaultColor" format="color" />
+        <attr name="lineWidthKey" format="string" />
+        <attr name="defaultLineWidth" format="integer" />
     </declare-styleable>
 
     <!-- attributes for SeekbarPreference -->

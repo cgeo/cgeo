@@ -1,17 +1,20 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 /**
- * Convenience class used to ensapculate the building and usage of a HtmlRequest
- *
- * Can be used directly or as base class for own (JSON) reqponse classes
+ * Convenience class used to encapsulate the building and usage of a HtmlRequest
+ * Can be used directly or as base class for own (JSON) response classes
  */
 public class HttpResponse {
 
@@ -22,6 +25,11 @@ public class HttpResponse {
     private boolean bodyConsumed = false;
     @JsonIgnore
     private String bodyString;
+    @JsonIgnore
+    private boolean failed;
+    @JsonIgnore
+    private Exception failedException;
+
 
     /**
      * to be used by HtmlRequest only
@@ -32,7 +40,7 @@ public class HttpResponse {
 
     @JsonIgnore
     public boolean isSuccessful() {
-        return response.isSuccessful();
+        return response != null && response.isSuccessful() && !failed;
     }
 
     /**
@@ -42,12 +50,30 @@ public class HttpResponse {
         this.response = response;
     }
 
-    /**
-     * to be used by HtmlRequest only
-     */
-    protected void setBodyString(final String bodyString) {
-        this.bodyConsumed = true;
-        this.bodyString = bodyString;
+    protected void setFromHttpResponse(final HttpResponse other) {
+        this.response = other.response;
+        this.bodyString = other.bodyString;
+        this.bodyConsumed = other.bodyConsumed;
+        this.failed = failed;
+        this.failedException = failedException;
+    }
+
+    protected void setFailed(final Exception exception) {
+        this.failed = true;
+        this.failedException = exception;
+    }
+
+    public <T> T parseJson(final Class<T> clazz, final T defaultValue) {
+        try {
+            return JsonUtils.mapper.readValue(getBodyString(), clazz);
+        } catch (JsonProcessingException jpe) {
+            return defaultValue;
+        }
+    }
+
+    @JsonIgnore
+    public int getStatusCode() {
+        return response == null ? -1 : response.code();
     }
 
 
@@ -66,7 +92,7 @@ public class HttpResponse {
     /**
      * to be used by HtmlRequest only
      */
-    protected static String getBodyString(final Response response) {
+    private static String getBodyString(final Response response) {
         final ResponseBody body = response.body();
         if (body != null) {
             try {
@@ -76,6 +102,12 @@ public class HttpResponse {
             }
         }
         return null;
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        return this.getClass().getName() + ", status=" + getStatusCode() + ", isSuccessful=" + isSuccessful() + ", response = " + response + ", body = " + getBodyString();
     }
 
 }

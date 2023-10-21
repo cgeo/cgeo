@@ -1,6 +1,6 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.ImageSelectActivity;
+import cgeo.geocaching.ImageEditActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -76,10 +76,11 @@ public class ImageListFragment extends Fragment {
         if (StringUtils.isNotBlank(image.getTitle())) {
             return image.getTitle();
         }
+        final String imageTitlePrafix = Settings.getLogImageCaptionDefaultPraefix();
         if (imageList.getItemCount() == 1) {
-            return getString(R.string.log_image_titleprefix); // number is unnecessary if only one image is posted
+            return imageTitlePrafix; // number is unnecessary if only one image is posted
         }
-        return getString(R.string.log_image_titleprefix) + " " + (position + 1);
+        return imageTitlePrafix + " " + (position + 1);
     }
 
     private void rebuildImageTitles() {
@@ -104,11 +105,8 @@ public class ImageListFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 final int imageIndex = data.getIntExtra(Intents.EXTRA_INDEX, -1);
                 final boolean indexIsValid = imageIndex >= 0 && imageIndex < imageList.getItemCount();
-                final boolean deleteFlag = data.getBooleanExtra(Intents.EXTRA_DELETE_FLAG, false);
                 final Image image = data.getParcelableExtra(Intents.EXTRA_IMAGE);
-                if (deleteFlag && indexIsValid) {
-                    imageList.removeItem(imageIndex);
-                } else if (image != null && indexIsValid) {
+                if (image != null && indexIsValid) {
                     imageList.updateItem(image, imageIndex);
                 } else if (image != null) {
                     imageList.addItem(image);
@@ -281,24 +279,16 @@ public class ImageListFragment extends Fragment {
     }
 
     /**
-     * trigger the start of the detailed "add image" dialog
-     */
-    public void startAddImageDialog() {
-        addOrEditImage(-1);
-    }
-
-    /**
      * internally start the detail image edit dialog
      */
     private void addOrEditImage(final int imageIndex) {
-        final Intent selectImageIntent = new Intent(this.getActivity(), ImageSelectActivity.class);
+        final Intent selectImageIntent = new Intent(this.getActivity(), ImageEditActivity.class);
         if (imageIndex >= 0 && imageIndex < imageList.getItemCount()) {
             selectImageIntent.putExtra(Intents.EXTRA_IMAGE, imageList.getItem(imageIndex));
         }
         selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
-        selectImageIntent.putExtra(Intents.EXTRA_IMAGE_CAPTION_MANDATORY, captionMandatory);
 
         getActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }

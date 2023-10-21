@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
@@ -19,10 +20,11 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
         this.mapUri = uri;
     }
 
-    public abstract void addTileLayer(Map map);
+    public abstract void addTileLayer(MapsforgeVtmFragment fragment, Map map);
 
-    public AbstractUnifiedMapView getMap() {
-        return TileProviderFactory.MAP_MAPSFORGE;
+    @Override
+    public AbstractMapFragment createMapFragment() {
+        return new MapsforgeVtmFragment();
     }
 
     protected void parseZoomLevel(@Nullable final int[] zoomLevel) {

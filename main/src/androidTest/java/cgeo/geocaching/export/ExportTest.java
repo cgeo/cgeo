@@ -103,8 +103,8 @@ public class ExportTest {
             for (final Geocache cache : caches) {
                 geocodes.add(cache.getGeocode());
             }
-            final ExportTask task = new ExportTask(null);
-            task.execute(geocodes.toArray(new String[geocodes.size()]));
+            final GpxExportTask task = new GpxExportTask(null, getProgressTitle(), "geocache.gpx", getName());
+            task.execute(geocodes.toArray(new String[0]));
             return task.get();
         }
 

@@ -777,7 +777,7 @@ public class ContentStorageTest {
     }
 
     private void createTree(final Folder folder, final String structure, final String content) {
-        final JsonNode json = JsonUtils.toNode(structure);
+        final JsonNode json = JsonUtils.stringToNode(structure);
         if (json == null) {
             throw new IllegalArgumentException("Invalid Json structure: " + structure);
         }

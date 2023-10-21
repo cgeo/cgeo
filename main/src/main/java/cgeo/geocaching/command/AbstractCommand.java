@@ -126,7 +126,7 @@ public abstract class AbstractCommand implements Command {
             if (StringUtils.isNotEmpty(resultMessage)) {
                 Snackbar.make(context.findViewById(android.R.id.content), resultMessage, UNDO_DURATION_MILLISEC)
                         .setAction(context.getString(R.string.undo), this)
-                        .setAnchorView(context.findViewById(R.id.activity_bottom_navigation))
+                        .setAnchorView(context.findViewById(R.id.activity_navigationBar))
                         .show();
             }
         }

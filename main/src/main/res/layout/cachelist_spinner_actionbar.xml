@@ -18,7 +18,7 @@
         android:textColor="@color/colorTextActionBar"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        tools:ignore="SpUsage" />
+        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 
 
     <TextView
@@ -31,6 +31,6 @@
         tools:text="This is the subtitle"
         android:id="@android:id/text2"
         android:maxLines="1"
-        tools:ignore="SpUsage" />
+        tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
 
 </LinearLayout>

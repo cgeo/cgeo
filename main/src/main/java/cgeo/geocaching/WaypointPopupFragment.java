@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
@@ -79,7 +80,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         try {
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
             binding.toolbar.toolbar.setTitle(wpCode);
-            binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false).getDrawable());
+            binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);

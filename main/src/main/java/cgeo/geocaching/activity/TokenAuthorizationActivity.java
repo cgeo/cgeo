@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.AuthorizationTokenActivityBinding;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -20,7 +21,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -88,6 +88,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme();
+        setUpNavigationEnabled(true);
         binding = AuthorizationTokenActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -118,7 +119,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
 
         binding.start.setText(StringUtils.isBlank(getToken()) ? getAuthStart() : getAuthAgain());
 
-        final EnableStartButtonWatcher enableStartButtonWatcher = new EnableStartButtonWatcher();
+        final TextWatcher enableStartButtonWatcher = ViewUtils.createSimpleWatcher(s -> enableStartButtonIfReady());
         binding.username.addTextChangedListener(enableStartButtonWatcher);
         binding.password.addTextChangedListener(enableStartButtonWatcher);
     }
@@ -297,27 +298,6 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     protected void enableStartButtonIfReady() {
         binding.start.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
                 StringUtils.isNotEmpty(binding.password.getText()));
-    }
-
-    /**
-     * A TextWatcher to monitor changes on usernameEditText and passwordEditText for enabling start button
-     * dynamically.
-     */
-    private class EnableStartButtonWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-            // empty
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-            // empty
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            enableStartButtonIfReady();
-        }
     }
 
     public static class TokenAuthParameters {

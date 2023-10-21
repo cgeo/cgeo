@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">確定</string>
     <!-- basics -->
     <string name="cache">高速缓存</string>
     <string name="detail">详细资料</string>
@@ -82,6 +79,8 @@
     <string name="wpnew_trailhead">透過</string>
     <string name="wpnew_waypoint">標記</string>
     <string name="wpnew_original">原始的</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">发现它</string>
     <string name="log_dnf">没有发现</string>
@@ -120,7 +119,6 @@
     <string name="log_saving">傳送日誌</string>
     <string name="log_saving_and_uploading">發佈日誌和上傳照片中</string>
     <string name="log_posting_log">張貼日誌中</string>
-    <string name="log_posting_twitter">張貼到推特中</string>
     <string name="log_posting_vote">投票中</string>
     <string name="log_posting_image">張貼照片中</string>
     <string name="log_posting_generic_trackable">张贴 %1$s %2$d/%3$d</string>
@@ -148,10 +146,6 @@
     <string name="log_smilies">表情符号 按钮</string>
     <string name="log_image">圖片</string>
     <string name="log_images">照片</string>
-    <string name="log_image_attach">附加圖片</string>
-    <string name="log_image_stored">已存在</string>
-    <string name="log_image_camera">新的</string>
-    <string name="log_image_delete">刪除</string>
     <string name="log_image_caption">标题</string>
     <string name="log_image_description">描述信心</string>
     <string name="log_image_scale">缩放比例</string>
@@ -177,6 +171,7 @@
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate">翻譯</string>
     <string name="translate_to_sys_lang">翻译为 %s</string>
@@ -185,7 +180,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">解析登入頁失敗</string>
-    <string name="err_server">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_ec">無法連線到Extremcaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_lc">無法連線到Geocaching.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
@@ -209,7 +203,6 @@
     <string name="err_detail_no_spoiler">c:geo未找到相關的spoiler照片</string>
     <string name="err_detail_still_working">仍然在處理另一個工作</string>
     <string name="err_detail_premium_log_found">這個是geocaching.com付費會員專屬的地理藏寶。雖然無法顯示這個地理藏寶的詳細資訊，但您仍可以發佈您的日誌。</string>
-    <string name="err_watchlist_still_managing">繼續管理您的觀察名單</string>
     <string name="err_watchlist_failed">無法更改您的觀察名單</string>
     <string name="err_application_no">c:geo無法找到合適的app</string>
     <string name="err_auth_initialize">無法驗證初始身份</string>
@@ -258,10 +251,8 @@
     <string name="warn_search_help_user">輸入Geocaching.com的使用者名稱</string>
     <string name="warn_search_help_tb">輸入旅行蟲/地理錢幣的追蹤號碼。例如GCVCAZ。</string>
     <string name="warn_log_text_fill">請對日誌輸入一些文字</string>
-    <string name="warn_load_images">读取图片失败。</string>
     <string name="warn_pocket_query_select">沒有選擇攜帶需求</string>
     <string name="warn_no_pocket_query_found">在線上找不到Pocket query。</string>
-    <string name="warn_invalid_character">字符必须是字母或数字</string>
     <string name="warn_notloggedin_title">離線模式</string>
     <string name="warn_notloggedin_short">尚未登錄，即時地圖只能顯示儲存在裝置上的寶藏，點選此處以便獲得更多資訊</string>
     <string name="warn_notloggedin_long">您沒有登入。即時地圖只顯示您存在本地裝置的cache。</string>
@@ -323,11 +314,6 @@
     <string name="caches_more_caches_no">载入更多答案</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_downloading">正在下載藏寶資訊中</string>
-    <string name="caches_eta_ltm">不到一分钟</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="other">%d 分钟</item>
-    </plurals>
     <string name="caches_history">查看历史</string>
     <string name="caches_on_map">在地图上显示</string>
     <string name="caches_sort">排序</string>
@@ -485,23 +471,6 @@
     <string name="cache_filter_status_exclude_archived">排除歸檔的</string>
     <string name="cache_filter_log_entry_foundby">由發現</string>
     <string name="cache_filter_log_entry_logtext">日誌文字</string>
-    <string name="cache_filter_stored_since_notstored">未儲存</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 小时</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0小時</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8小時</item>
-        <item>24 小時</item>
-        <item>7 天</item>
-        <item>30天</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8小時</item>
-        <item>24小時</item>
-        <item>7天</item>
-        <item>30天</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max_short">最大的</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日誌</string>
@@ -513,7 +482,6 @@
     <string name="about_license">许可</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">帮助</string>
-    <string name="about_system_collecting">已收集系統資訊，請稍待。</string>
     <string name="about_system_include">當回報bug或要求更多c:geo的資訊時，請同時回報下列系統資訊。</string>
     <string name="about_system_info_send_button">通过邮件发送…</string>
     <string name="about_system_info">c:geo 系统信息</string>
@@ -524,8 +492,6 @@
     <string name="about_system_write_logcat_type_extended">附加的</string>
     <string name="about_system_write_logcat_success">日誌檔案 \"%1$s\" 已寫入資料夾 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">檔案寫入錯誤</string>
-    <string name="about_system_write_infos_downloadmanager">查看下載的東西</string>
-    <string name="changelog_github">所有改變的列表</string>
     <string name="about_nutshellmanual">線上手冊</string>
     <string name="about_contributors_carnerodetails">當成是c:geo的爸爸XD</string>
     <string name="about_contributors_recent">當前的貢獻者</string>
@@ -554,11 +520,8 @@
     <string name="settings_summary_offlinedata">設定GPX檔案離線使用的資料、儲存的位置和資料夾。</string>
     <string name="settings_title_logging">登陆</string>
     <string name="settings_summary_logging">設定你的簽名和日誌選項。</string>
-    <string name="settings_title_map">地圖</string>
-    <string name="settings_summary_map">設定地圖來源，離線地圖設定，地圖的詳細設定。</string>
     <string name="settings_title_map_data">地圖資料</string>
     <string name="settings_title_offline_routing">離線導航</string>
-    <string name="settings_title_map_rotation">旋轉地圖方向(Google地圖)</string>
     <string name="settings_title_waypoints">航點</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地圖特性</string>
@@ -574,10 +537,8 @@
     <string name="settings_title_system">系統</string>
     <string name="settings_summary_system">系統的特殊設定和除錯選擇。</string>
     <string name="settings_title_navigation_menu">導航功能表 (Automatic Translation)</string>
-    <string name="settings_category_browser">瀏覽器</string>
     <string name="settings_category_geocaching_platform">地理藏寶平台</string>
     <string name="settings_category_geocaching_additionals">未來的服務與軟體plug-in</string>
-    <string name="settings_category_social">社群媒體</string>
     <string name="settings_category_logging_other">其他的登入選項</string>
     <string name="settings_goto_url_button">更多…</string>
     <string name="settings_service_activate">啟動</string>
@@ -664,10 +625,9 @@
     <string name="init_summary_log_offline">開啟離線輸入日誌</string>
     <string name="init_choose_list">要求列表</string>
     <string name="init_summary_choose_list">要求列表去儲存地理藏寶</string>
-    <string name="init_listdisplay">附加的列表</string>
-    <string name="init_summary_listdisplay">在附加列表裡顯示地理藏寶的會員資訊</string>
     <string name="init_livelist">顯示方向</string>
     <string name="init_summary_livelist">顯示羅盤箭頭</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
     <string name="settings_theme_title">佈景主題</string>
     <string-array name="settings_theme_entries">
@@ -675,6 +635,7 @@
         <item>亮色</item>
         <item>深色</item>
     </string-array>
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">建立備份</string>
     <string name="init_restore_title">還原備份</string>
@@ -744,21 +705,6 @@
     <string name="init_maptrail_length">歷史軌跡的最大長度</string>
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
-    <string name="init_trailcolor">歷史軌跡的顏色</string>
-    <string name="init_trailcolor_summary">選擇歷史軌跡的顏色(不透明)</string>
-    <string name="init_trailwidth">歷史軌跡的寬度</string>
-    <string name="init_trailwidth_summary">選擇歷史軌跡寬度</string>
-    <string name="init_directioncolor">方向線顏色</string>
-    <string name="init_directioncolor_summary">選擇方向線的顏色(不透明)。方向線將會是直接指向你的目標的直線或是特殊的導航路徑(如果您有安裝BRouter app)。</string>
-    <string name="init_directionwidth">方向線寬度</string>
-    <string name="init_directionwidth_summary">選擇方向線寬度</string>
-    <string name="init_routecolor">各自的繞線顏色</string>
-    <string name="init_routecolor_summary">為各別的航線選擇顏色和不透明度。各別航線是您通過長按航點或是cache。 （您需要先啟用長按功能，請參考地圖設定。）</string>
-    <string name="init_routewidth">各自的繞線線寬</string>
-    <string name="init_routewidth_summary">選擇各自的繞線線寬</string>
-    <string name="init_trackcolor">GPX航跡顏色</string>
-    <string name="init_trackwidth">GPX航跡線寬</string>
-    <string name="init_trackwidth_summary">選擇GPX軌跡的線寬</string>
     <string name="init_circlecolor">圓邊框顏色</string>
     <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
@@ -787,7 +733,6 @@
     <string name="init_datadirmove_success">成功移動地理藏寶資料夾</string>
     <string name="init_plain_logs">圖像日誌</string>
     <string name="init_summary_plain_logs">顯示輸入的日誌(無顏色)</string>
-    <string name="init_use_native_ua">Android 瀏覽器</string>
     <string name="init_rendertheme_folder">地圖主題資料夾</string>
     <string name="init_maintenance">維護</string>
     <string name="init_location">地理位置</string>
@@ -805,9 +750,6 @@
     <string name="settings_open_geokretymap_website">開啟GeoKretyMap.org網站</string>
     <string name="settings_settings">設定</string>
     <string name="settings_information">資訊</string>
-    <string name="settings_advanced">進階設定</string>
-    <string name="settings_twitter_cache_message">找到的cache訊息</string>
-    <string name="settings_twitter_trackable_message">找到的 trackable的訊息</string>
     <string name="init_ec_icons">地圖圖示</string>
     <string name="settings_ec_icons_other">擁有的格式</string>
     <string name="settings_features">支援的功能</string>
@@ -824,7 +766,6 @@
     <string name="feature_search_finder">打寶者搜尋</string>
     <string name="feature_favorite">把寶加入我的最愛</string>
     <string name="feature_voting">對cache來投票</string>
-    <string name="init_maplines_title">客製化地圖的線條。</string>
     <string name="init_map_other">其它</string>
     <string name="init_map_osm_multithreaded">多執行緒 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">使用多執行緒來渲染OSM</string>
@@ -881,7 +822,6 @@
     <string name="persistablefolder_spoilerimages">提示圖片</string>
     <string name="persistablefolder_routingbase">路徑</string>
     <string name="persistablefolder_routingtiles">路線規劃資料</string>
-    <string name="persistableuri_track">軌跡檔案</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s，%3$s/%4$s已完成</string>
     <string name="folder_process_status_currentfile">進度：%1$s</string>
@@ -913,8 +853,6 @@
     <!-- auth credentials -->
     <!-- auth token -->
     <string name="auth_token_explain_long">輸入您的憑證並按“授權c：geo”按鈕將開始該過程。此過程將連接到%s並驗證您的身份。</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo正被授權在推特發表。</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo正被授權與%s互動。</string>
     <!-- auth geokrety -->
@@ -953,7 +891,6 @@
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
     <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
-    <string name="cache_log_images_title">日誌圖片</string>
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_personal_note">個人筆記</string>
     <string name="cache_menu_preventWaypointsFromNote">不允許註解裡加上航點</string>
@@ -965,10 +902,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">關閉輸出航點</string>
     <string name="cache_personal_note_limit">個人註解的限制</string>
     <string name="cache_personal_note_upload">上傳</string>
-    <string name="cache_personal_note_uploading">上傳個人筆記</string>
     <string name="cache_personal_note_upload_done">個人筆記已經上傳</string>
     <string name="cache_personal_note_upload_error">上傳個人筆記錯誤</string>
-    <string name="cache_personal_note_upload_cancelled">個人筆記上傳取消</string>
     <string name="cache_description">描述</string>
     <string name="cache_area_description">地區描述</string>
     <string name="cache_cache_description">藏寶描述</string>
@@ -1006,12 +941,6 @@
     <string name="cache_dialog_offline_drop_title">離線</string>
     <string name="cache_dialog_refresh_title">重新整理</string>
     <string name="cache_dialog_refresh_message">重新載入詳細的cache資訊</string>
-    <string name="cache_dialog_watchlist_add_title">追蹤清單</string>
-    <string name="cache_dialog_watchlist_remove_title">觀察名單</string>
-    <string name="cache_dialog_favorite_add_title">我的最愛</string>
-    <string name="cache_dialog_favorite_add_message">把寶加入我的最愛</string>
-    <string name="cache_dialog_favorite_remove_title">我的最愛</string>
-    <string name="cache_dialog_favorite_remove_message">從你的最愛裡移除cache</string>
     <string name="cache_menu_navigate">瀏覽</string>
     <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
@@ -1080,7 +1009,6 @@
     <string name="cache_location">地點</string>
     <string name="cache_coordinates">坐標</string>
     <string name="cache_coordinates_original">原始座標</string>
-    <string name="cache_spoiler_images_title">提示圖片</string>
     <string name="cache_log_types">藏寶類型</string>
     <string name="cache_coordinates_no">這個地理藏寶沒有座標。</string>
     <string name="cache_clear_history">清除瀏覽歷史紀錄</string>
@@ -1162,8 +1090,6 @@
     <string name="waypoint_save_and_modify_on_website">在c:geo和網站設定成cache座標</string>
     <string name="waypoint_reset_cache_coords">重置cache座標</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">在網站上完成重置cache座標</string>
-    <string name="waypoint_coordinates_being_reset_on_website">正在網站上重置cache座標</string>
-    <string name="waypoint_reset">重設</string>
     <string name="waypoint_localy_reset_cache_coords">在c:geo重置</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">在c:geo和網站重置</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">網站上不支援更改座標</string>
@@ -1179,8 +1105,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">發佈這個found到推特</string>
     <!-- map -->
     <string name="map_map">地圖</string>
     <string name="map_live">即時地圖</string>
@@ -1197,10 +1121,6 @@
     <string name="map_showwp_visited">已訪問</string>
     <string name="onetime_mapthemefixslow_title">修正過慢的地圖渲染。</string>
     <string name="onetime_mapthemefixslow_message">使用位解壓縮過的地圖主題將會使減弱地圖瀏覽的效能。你可以解壓縮地圖主題來得到較佳的瀏覽品質、速度。</string>
-    <string name="init_hidewp">隱藏航點</string>
-    <string name="init_summary_hidewp_original">在地圖上隱藏初始航點</string>
-    <string name="init_summary_hidewp_parking">在地圖上隱藏停車航點</string>
-    <string name="init_summary_hidewp_visited">在地圖上隱藏已拜訪航點</string>
     <string name="map_theme_select">選擇地圖樣式</string>
     <string name="map_theme_options">主題選項</string>
     <string name="map_language">地圖語系</string>
@@ -1589,8 +1509,6 @@
     <string name="init_low_disk_space">磁盘空间过低</string>
     <string name="init_confirm_debug">c:geo正在除錯模式中</string>
     <!-- permission handling -->
-    <string name="close_app">關閉app</string>
-    <string name="ask_again">下次詢問我</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">選擇顏色圖案</string>
     <string name="preference_colorpicker_select_color">選擇顏色</string>
@@ -1609,6 +1527,7 @@
     <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">從GPX載入航線</string>
     <!-- route/track commons -->
@@ -1689,14 +1608,9 @@
     <string name="wizard_permissions_folder_title">設定資料夾：%s</string>
     <string name="wizard_platforms_title">安裝服務</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
-    <string name="wizard_welcome_advanced">進階設定</string>
-    <string name="wizard_advanced_offlinemaps_label">離線地圖</string>
-    <string name="wizard_advanced_routing_label">開啟離線導航</string>
     <string name="wizard_advanced_restore_label">還原</string>
     <string name="status_not_ok">錯誤</string>
     <string name="wizard_status_title">配置狀態:</string>
-    <string name="wizard_status_storage_permission">儲存空間權限</string>
-    <string name="wizard_status_location_permission">位置資訊權限</string>
     <string name="wizard_status_basefolder">基礎資料夾</string>
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>
@@ -1716,4 +1630,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

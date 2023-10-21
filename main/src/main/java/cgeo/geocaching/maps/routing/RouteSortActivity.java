@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -21,6 +22,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.GeopointFormatter.Format.LAT_LON_DECMINUTE;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -63,6 +65,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     .setSupportDragDrop(true));
         }
 
+        @SuppressLint("SetTextI18n")
         private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem) {
             final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
             final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
@@ -75,14 +78,14 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                 switch (routeItem.getType()) {
                     case GEOCACHE:
                         assert data instanceof Geocache;
-                        holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data));
-                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                        holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data, null, null));
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
                         break;
                     case WAYPOINT:
                         assert data instanceof Waypoint;
                         final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        holder.binding.detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
+                        holder.binding.detail.setText(((Waypoint) data).getShortGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
                         break;
                     case COORDS:
                         // title.setText("Coordinates");
@@ -148,6 +151,15 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         routeItemAdapter.setItems(newRouteItems);
     }
 
+    /** experimental function for optimizing a route by using tsp-specific algorithm */
+    private void optimizeRoute() {
+        final RouteOptimizationHelper roh = new RouteOptimizationHelper(new ArrayList<>(routeItemAdapter.getItems()));
+        roh.start(this, (newRouteItems) -> {
+            routeItemAdapter.setItems(newRouteItems);
+            routeItemAdapter.notifyDataSetChanged();
+        });
+    }
+
     private boolean setAsStart(final int position) {
         if (position < 1 || position >= routeItemAdapter.getItems().size()) {
             return false;
@@ -168,6 +180,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        menu.findItem(R.id.menu_optimize).setVisible(true);
         menu.findItem(R.id.menu_invert_order).setVisible(true);
         return true;
     }
@@ -188,6 +201,9 @@ public class RouteSortActivity extends AbstractActionBarActivity {
             return true;
         } else if (itemId == R.id.menu_invert_order) {
             invertOrder();
+            return true;
+        } else if (itemId == R.id.menu_optimize) {
+            optimizeRoute();
             return true;
         } else if (itemId == android.R.id.home) {
             onBackPressed();

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cutie</string>
     <string name="detail">Detalii</string>
@@ -68,6 +65,8 @@
     <string name="wp_waypoint">Punct de referinţă</string>
     <string name="wp_original">Coordonatele originale</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Am gasit-o</string>
     <string name="log_dnf">Nu am găsit-o</string>
@@ -106,7 +105,6 @@
     <string name="log_saving">Trimitere jurnal…</string>
     <string name="log_saving_and_uploading">Publicare jurnal și încărcare imagini…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
-    <string name="log_posting_twitter">Se publică tweet…</string>
     <string name="log_posting_vote">Publicarea votului…</string>
     <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
@@ -134,10 +132,6 @@
     <string name="log_smilies">Emoticoane</string>
     <string name="log_image">Imagine</string>
     <string name="log_images">Imagini</string>
-    <string name="log_image_attach">Ataşează imagine</string>
-    <string name="log_image_stored">Existentă</string>
-    <string name="log_image_camera">Nouă</string>
-    <string name="log_image_delete">Ștergeți</string>
     <string name="log_image_caption">Titlu</string>
     <string name="log_image_description">Descriere</string>
     <string name="log_image_scale">Mărire</string>
@@ -162,6 +156,7 @@
     <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
     <string name="log_image_titleprefix">Imagine</string>
+    <!-- Contacts -->
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -169,7 +164,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">OK</string>
     <string name="err_parse">Pagina de autentificare nu a putut fi parcursă</string>
-    <string name="err_server">Geocaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_ec">Extremcaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_gk">GeoKrety.org nu poate fi contactat. Conexiunea la internet nu funcţionează sau site-ul s-ar putea să fie indisponibil momentan.</string>
     <string name="err_login">Nu există informaţii de autorizare</string>
@@ -191,7 +185,6 @@
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
     <string name="err_detail_premium_log_found">Acest cache este disponibil doar membrilor premium ai geocaching.com. Prin urmare, informațiile despre cache nu pot fi afișate.\n\nCu toate acestea, dacă ați găsit deja acest cache, puteți scrie un jurnal aici.</string>
-    <string name="err_watchlist_still_managing">Încă lucrez la lista obiectelor urmărite.</string>
     <string name="err_watchlist_failed">Modificarea listei de cutii urmărite a eşuat.</string>
     <string name="err_application_no">c:geo nu a găsit nici o aplicaţie adecvată.</string>
     <string name="err_auth_initialize">c:geo nu a putut iniţia procesul de autentificare.</string>
@@ -240,10 +233,8 @@
     <string name="warn_search_help_user">Introdu numele de utilizator al unui membru Geocaching.com.</string>
     <string name="warn_search_help_tb">Introdu codul pentru obiectul călător. De exemplu \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Te rog introdu ceva text pentru această însemnare.</string>
-    <string name="warn_load_images">c:geo nu a putut încărca imaginile.</string>
     <string name="warn_pocket_query_select">Nu a fost selectat nici un \"Pocket Query\".</string>
     <string name="warn_no_pocket_query_found">Nu a fost găsit nici un \"Pocket Query\".</string>
-    <string name="warn_invalid_character">Trebuie să tastezi numai LITERE sau CIFRE</string>
     <string name="warn_notloggedin_title">Mod Neconectat (Offline)</string>
     <string name="err_read_pocket_query_list">Eroare la citirea listei \"Pocket query\".</string>
     <string name="info_log_posted">c:geo a trimis însemnarea.</string>
@@ -289,13 +280,6 @@
     <string name="caches_more_caches_no">Nu mai sunt alte cutii</string>
     <string name="caches_more_caches_loading">Încarcare cutii…</string>
     <string name="caches_more_caches_currently">până acum</string>
-    <string name="caches_downloading">Descărcare cutii…\nMai durează: </string>
-    <string name="caches_eta_ltm">Mai puţin de un minut</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minut</item>
-        <item quantity="few">%d minute</item>
-        <item quantity="other">%d minute</item>
-    </plurals>
     <string name="caches_history">Istoric</string>
     <string name="caches_on_map">Arată pe hartă</string>
     <string name="caches_sort">Sortare</string>
@@ -366,12 +350,10 @@
     <string name="about_contributors">Contribuitori</string>
     <string name="about_license">Licenţă</string>
     <string name="about_help">Ajutor</string>
-    <string name="about_system_collecting">Informațiile de sistem sunt colectate, vă rugăm să așteptați…</string>
     <string name="about_system_include">Te rog include urmatoarele informaţii despre sistem atunci când trimiţi o sesizare sau întrebi despre c:geo:</string>
     <string name="about_system_info_send_button">Trimite prin E-Mail…</string>
     <string name="about_system_info">c:geo - informaţii despre sistem</string>
     <string name="about_system_info_send_chooser">Trimite informaţiile despre sistem</string>
-    <string name="changelog_github">Afişează toate modificările</string>
     <string name="debug_user_error_report_title">Raportează o problemă</string>
     <string name="debug_user_error_errortext">A apărut o problemă neașteptată pe care v-am ruga să ne-o raportați:</string>
     <!-- download manager -->
@@ -387,8 +369,6 @@
     <string name="settings_title_offlinedata">Informaţii păstrate locale</string>
     <string name="settings_title_logging">Jurnal</string>
     <string name="settings_summary_logging">Configurează semnătura şi opţiunile pentru însemnări.</string>
-    <string name="settings_title_map">Hartă</string>
-    <string name="settings_summary_map">Alege sursele pentru hărţi, setări pentru hărţile salvate local şi alte detalii.</string>
     <string name="settings_title_map_data">Configurare hărţi</string>
     <string name="settings_title_map_content">Informaţii afişate pe hartă</string>
     <string name="calculate_dataDir_title">Spaţiu utilizat de geocutii</string>
@@ -459,7 +439,9 @@
     <string name="init_choose_list">Cere listă</string>
     <string name="init_summary_choose_list">Întreabă în care listă vor fi salvate cutiile</string>
     <string name="init_livelist">Arată direcţia</string>
+    <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creare salvare de siguranţă a bazei de date cu cutii…</string>
     <string name="init_backup_restore">Restaurează</string>
@@ -499,8 +481,6 @@
     <string name="init_dbmove_failed">Mutarea bazei de date a eşuat</string>
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
-    <string name="init_use_native_ua">Browser Android</string>
-    <string name="init_summary_use_native_ua">Identifică c:geo ca fiind browser-ul integrat în sistemul Android. Rezolvă unele probleme de autentificare atunci când sunt folosite anumiţi furnizori de internet.</string>
     <string name="init_maintenance">Întreţinere</string>
     <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
@@ -519,9 +499,6 @@
     <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
     <string name="settings_settings">Opţiuni</string>
     <string name="settings_information">Informaţii</string>
-    <string name="settings_advanced">Setări avansate</string>
-    <string name="settings_twitter_cache_message">Mesaj pentru cutie găsită</string>
-    <string name="settings_twitter_trackable_message">Mesaj pentru obiect călător găsit</string>
     <string name="init_ec_icons">Iconiţe hartă</string>
     <string name="settings_ec_icons_other">Stil propriu</string>
     <string name="settings_ec_icons_oc">La fel ca OC</string>
@@ -570,8 +547,6 @@
     <string name="auth_credentials_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Această procedură va permite <b>c:geo</b> să aibe acces la %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo este acum autorizat să posteze pe Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo este acum autorizat să comunice cu %s.</string>
     <!-- auth geokrety -->
@@ -607,16 +582,13 @@
         <item quantity="other">acum %d zile</item>
     </plurals>
     <string name="cache_inventory">Inventar</string>
-    <string name="cache_log_images_title">Imagini însemnare</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_personal_note">Notă personală</string>
     <string name="cache_personal_note_edit">Modifică</string>
     <string name="cache_personal_note_limit">Limită pentru note personale</string>
     <string name="cache_personal_note_upload">Încarcă</string>
-    <string name="cache_personal_note_uploading">Încărcare notă personală</string>
     <string name="cache_personal_note_upload_done">Nota personală a fost încărcată</string>
     <string name="cache_personal_note_upload_error">Eroare la încărcarea notei personale</string>
-    <string name="cache_personal_note_upload_cancelled">Încărcarea notei personale a fost anulată</string>
     <string name="cache_description">Descriere</string>
     <string name="cache_description_table_note">Descrierea conţine tabele sau formatări care ar trebui vizualizate aici %s pentru a fi afişate corect.</string>
     <string name="cache_watchlist_on">Aceasta cutie se află în lista ta de cutii urmărite.</string>
@@ -648,14 +620,6 @@
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
     <string name="cache_dialog_refresh_title">Reîncarcă</string>
     <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
-    <string name="cache_dialog_watchlist_add_title">Listă cutii urmărite</string>
-    <string name="cache_dialog_watchlist_add_message">Adăugare cutie în lista de cutii urmărite…</string>
-    <string name="cache_dialog_watchlist_remove_title">Listă cutii urmărite</string>
-    <string name="cache_dialog_watchlist_remove_message">Ştergere geocutie din lista celor urmărite…</string>
-    <string name="cache_dialog_favorite_add_title">Favorită</string>
-    <string name="cache_dialog_favorite_add_message">Adăugare la favorite…</string>
-    <string name="cache_dialog_favorite_remove_title">Favorită</string>
-    <string name="cache_dialog_favorite_remove_message">Ştergere geocutie din lista celor favorite…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
@@ -706,7 +670,6 @@
     <string name="cache_location">Locaţie</string>
     <string name="cache_coordinates">Coordonate</string>
     <string name="cache_coordinates_original">Coordonatele iniţiale</string>
-    <string name="cache_spoiler_images_title">Imagini (indicii?)</string>
     <string name="cache_log_types">Tipuri de însemnări</string>
     <string name="cache_coordinates_no">Această cutie nu are coordonate.</string>
     <string name="cache_clear_history">Goleşte istoric</string>
@@ -766,7 +729,6 @@
     <string name="waypoint_save_and_modify_on_website">Salvează ca coordonatele geocutiei în c:geo cât şi pe site</string>
     <string name="waypoint_reset_cache_coords">Revin-o la coordonatele iniţiale</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Coordonatele geocutiei pe site au fost readuse la valoarea iniţială.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Revenire la coordonatele iniţiale site…</string>
     <string name="waypoint_localy_reset_cache_coords">Resetează în c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Resetează în c:geo şi pe site</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Site-ul nu suportă modificarea coordonatelor geocutiei.</string>
@@ -783,8 +745,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Publică pe Twitter</string>
     <!-- map -->
     <string name="map_map">Hartă</string>
     <string name="map_live">Hartă</string>
@@ -1125,7 +1085,6 @@
     <string name="website_title">Pagină Web</string>
     <string name="facebook_link"><a href="">pagina c:geo</a></string>
     <string name="market_link"><a href="">c:geo pe Google Play</a></string>
-    <string name="about_twitter">Ar trebui ca <b>c:geo</b> să publice un statut nou pe Twitter de fiecare dată când scrii o însemnare pentru o geocutie?</string>
     <string name="faq_title">Întrebari frecvente</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1219,6 +1178,7 @@
     <string name="number_input_title">Introduceți o valoare între %1$s și %2$s</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1242,4 +1202,5 @@
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

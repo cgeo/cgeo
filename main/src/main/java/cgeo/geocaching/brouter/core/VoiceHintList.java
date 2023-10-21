@@ -7,10 +7,11 @@
 package cgeo.geocaching.brouter.core;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class VoiceHintList {
     public int turnInstructionMode;
-    public ArrayList<VoiceHint> list = new ArrayList<>();
+    public List<VoiceHint> list = new ArrayList<>();
     private String transportMode;
 
     public void setTransportMode(final boolean isCar, final boolean isBike) {

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">Gerai</string>
     <!-- basics -->
     <string name="cache">Slėptuvė</string>
     <string name="detail">Informacija</string>
@@ -89,6 +86,8 @@
     <string name="wpnew_waypoint">Žymeklis</string>
     <string name="wpnew_original">Originalus</string>
     <string name="wpnew_generated">Sugeneruotas</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
@@ -127,13 +126,12 @@
     <string name="log_saving">Siunčiamas įrašas…</string>
     <string name="log_saving_and_uploading">Skelbiamas įrašas ir įkeliami vaizdai…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
-    <string name="log_posting_twitter">Skelbiamas Tweet…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
     <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
-    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto jungtį.</string>
+    <string name="log_post_not_possible">Duomenys atsiunčiami…\nPrašome bandyti dar kartą po keletos sekundžių arba patikrinti interneto ryšį.</string>
     <string name="log_date_future_not_allowed">Būsimos datos įrašai negalimi.</string>
     <string name="log_add">Pridėti</string>
     <string name="log_repeat">Pakartoti paskutinį įrašą</string>
@@ -156,10 +154,6 @@
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Vaizdas</string>
     <string name="log_images">Vaizdai</string>
-    <string name="log_image_attach">Pridėti vaizdą</string>
-    <string name="log_image_stored">Esamą</string>
-    <string name="log_image_camera">Naują</string>
-    <string name="log_image_delete">Ištrinti</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -188,6 +182,9 @@
     <string name="log_image_info_notscaled">nesumažintas</string>
     <string name="log_image_titleprefix">Vaizdas</string>
     <string name="datetime_nodateset_display">Nenustatyta data</string>
+    <!-- Contacts -->
+    <string name="contact_not_found">Kontaktas vardu/pravarde %s nerastas. Pirmiausia įtraukite jį į savo kontaktų programėlę.</string>
+    <string name="contact_multiple_matches">Kontaktai: Keletas atitikimų</string>
     <!-- translation -->
     <string name="translate">Išversti</string>
     <string name="translate_to_sys_lang">Išversti į %s</string>
@@ -197,7 +194,6 @@
     <string name="err_none">Gerai</string>
     <string name="err_parse">Nepavyko išanalizuoti prisijungimo puslapio</string>
     <string name="err_captcha">Paslaugai reikalinga Captcha. Atidarykite geocaching.com svetainę naudodami savo naršyklę ir išspręskite Captcha, rodomą prisijungiant. Tada bandykite dar kartą prisijungti naudodami c:geo.</string>
-    <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
@@ -222,7 +218,6 @@
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
     <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei suradote šią slėptuvę, galite registruoti ją čia.</string>
-    <string name="err_watchlist_still_managing">Dar tvarkomas stebimų slėptuvių sąrašas.</string>
     <string name="err_watchlist_failed">Nepavyko pakeisti stebimų slėptuvių sąrašo.</string>
     <string name="err_application_no">c:geo neranda tinkamos programos.</string>
     <string name="err_auth_initialize">c:geo nepavyko inicijuoti registracijos proceso.</string>
@@ -236,6 +231,7 @@
     <string name="err_favorite_failed">Nepavyko pakeisti mėgstamos slėptuvės statuso.</string>
     <string name="err_select_logimage_failed">Nepavyko pasirinkti vaizdo slėptuvės įrašui.</string>
     <string name="err_acquire_image_failed">Vaizdo gauti nepavyko.</string>
+    <string name="err_acquire_image_unsupported_format">Vaizdo formatas turi būti JPEG/JPG, PNG arba GIF</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
     <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
@@ -272,10 +268,8 @@
     <string name="warn_search_help_user">Įrašykite Geocaching.com vartotojo vardą.</string>
     <string name="warn_search_help_tb">Įveskite keliauninko kodą. Pvz. \"TB5303E\".</string>
     <string name="warn_log_text_fill">Prašome įrašyti įrašo tekstą.</string>
-    <string name="warn_load_images">c:geo nepavyko įkelti vaizdo.</string>
     <string name="warn_pocket_query_select">Nepasirinktas joks Pocket query.</string>
     <string name="warn_no_pocket_query_found">Nerastas Pocket query internete.</string>
-    <string name="warn_invalid_character">Simbolis turi būti raidė arba skaitmuo</string>
     <string name="warn_notloggedin_title">Darbas neprisijungus</string>
     <string name="warn_notloggedin_short">Neprisijungta. Gyvame žemėlapyje bus rodomos tik išsaugotos slėptuvės. Norėdami gauti daugiau informacijos, bakstelėkite čia.</string>
     <string name="warn_notloggedin_long">(Dar) neprisijungta. Gyvame žemėlapyje bus rodomos tik išsaugotos slėptuvės bei internetinės funkcijos neveiks.\n\nGali būti bėda su ryšiu, bėda su serveriu ar su paslaugų konfigūracija.\n\nAr norite konfigūruoti paslaugas?</string>
@@ -307,6 +301,8 @@
     <string name="warn_gm_not_available">Google Maps neprieinami.</string>
     <string name="switch_to_mf">Jūsų Google Play Service pasenusi. Ar perjungti į Mapsforge žemėlapių tiekėją?</string>
     <string name="switched_to_mf">Numatytasis žemėlapis perjungtas į Mapsforge žemėlapių teikėją. Iš naujo paleiskite žemėlapį dabar.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Pagrindinis</string>
     <!-- location service -->
     <string name="loc_last">Paskutinė žinoma vieta</string>
     <string name="loc_net">Tinklas</string>
@@ -319,6 +315,8 @@
     <string name="loc_gps_disabled">GPS išjungtas</string>
     <string name="loc_copied_clipboard">Dabartinė vieta nukopijuota į iškarpinę</string>
     <string name="menu_centerposition">Centruoti mano vietoje</string>
+    <string name="location_no_permission">Įspėjimas: nėra leidimo nustatyti vietą</string>
+    <string name="location_only_coarse_permission">Įspėjimas: tik apytikslės vietos leidimas</string>
     <!-- standard menu -->
     <string name="menu_about">Apie c:geo</string>
     <string name="menu_helpers">Naudingos programos</string>
@@ -353,14 +351,6 @@
         <item quantity="other">Įkelti kitas %1$d slėptuvių</item>
     </plurals>
     <string name="caches_more_caches_remaining">Įkelti likusias slėptuves (%1$d / %2$d)</string>
-    <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks: </string>
-    <string name="caches_eta_ltm">mažiau nei minutę</string>
-    <plurals name="caches_eta_mins">
-        <item quantity="one">%d minutė</item>
-        <item quantity="few">%d minutės</item>
-        <item quantity="many">%d minučių</item>
-        <item quantity="other">%d minučių</item>
-    </plurals>
     <string name="caches_store_offline">Saugoti naudojimui neprisijungus</string>
     <string name="caches_store_offline_map">Saugoti slėptuves naudojimui neprisijungus</string>
     <string name="caches_store_selected">Saugoti pasirinktas</string>
@@ -368,7 +358,8 @@
     <string name="caches_store_background_already_stored">Kai kurios slėptuvės jau saugomos. Kas su jomis turėtų nutikti?</string>
     <string name="caches_store_background_option_nothing">Nieko nedaryti</string>
     <string name="caches_store_background_option_add_to_list">Pridėti prie sąrašo</string>
-    <string name="caches_store_background_option_refresh">Atnaujinti ir pridėti prie sąrašo</string>
+    <string name="caches_store_background_option_refresh_and_add">Atnaujinti ir pridėti prie sąrašo</string>
+    <string name="caches_store_background_option_refresh_and_keep">Atnaujinti ir palikti dabartines sąrašo užduotis</string>
     <string name="caches_store_background_result_failed" tools:ignore="PluralsCandidate">Atsisiuntimas nepavyko, atsisiųsta %1$d/%2$d slėptuvių</string>
     <string name="caches_store_background_result_canceled" tools:ignore="PluralsCandidate">Atsisiuntimas atšauktas, atsisiųsta %1$d/%2$d slėptuvių</string>
     <plurals name="caches_store_background_result">
@@ -409,6 +400,9 @@
     <string name="caches_remove_selected">Pašalinti pasirinktą iš sąrašo</string>
     <string name="caches_remove_all_completely">Pašalinti viską iš įrenginio</string>
     <string name="caches_remove_selected_completely">Pašalinti pasirinktus iš įrenginio</string>
+    <string name="caches_append_to_route_selected">Pridėti pasirinktą prie individualaus maršruto</string>
+    <string name="caches_append_to_route_all">Pridėkite viską prie individualaus maršruto</string>
+    <string name="caches_appended_to_route">Prie maršruto pridėtos talpyklos</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
     <string name="caches_upload_bookmarklist">Pridėti į žymių sąrašą</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
@@ -590,24 +584,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Papildomas filtras šiuo metu tuščias</string>
     <string name="cache_filter_log_entry_foundby">Surado</string>
     <string name="cache_filter_log_entry_logtext">Įrašo tekstas</string>
-    <string name="cache_filter_stored_since_notstored">Neišsaugota</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 valandų</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0val.</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 valandos</item>
-        <item>24 valandos</item>
-        <item>7 dienos</item>
-        <item>30 dienų</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8val.</item>
-        <item>24val.</item>
-        <item>7d.</item>
-        <item>30d.</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">laiko pradžia</string>
-    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>daugiau nei prieš metus</item>
         <item>prieš metus</item>
@@ -616,7 +592,7 @@
         <item>prieš 30 dienų</item>
         <item>prieš 2 savaites</item>
         <item>prieš savaitę</item>
-        <item>prieš 3 dienas</item>
+        <item>Prieš 3 dienas</item>
         <item>mažiau nei prieš 3 dienas</item>
     </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label_short">
@@ -643,7 +619,7 @@
     <string name="about_license">Licencija</string>
     <string name="about_apache_license"><a href=""> Apache licencija, versija 2.0</a></string>
     <string name="about_help">Pagalba</string>
-    <string name="about_system_collecting">Sistemos informacija renkama, palaukite…</string>
+    <string name="about_system_collecting">Renkama sistemos informacija, palaukite…</string>
     <string name="about_system_include">Pridėkite papildomą sisteminę informaciją, kai siunčiate klaidos pranešimą arba norite gauti daugiau informacijos apie c:geo:</string>
     <string name="about_system_info_send_button">Siųsti paštu…</string>
     <string name="about_system_info">c:geo sistemos informacija</string>
@@ -654,8 +630,6 @@
     <string name="about_system_write_logcat_type_extended">Išplėstas</string>
     <string name="about_system_write_logcat_success">Žurnalo failas \'%1$s\' įrašytas į aplanką \'%2$s\'</string>
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
-    <string name="about_system_write_infos_downloadmanager">Rodyti siuntinius</string>
-    <string name="changelog_github">Pakeitimų sąrašas</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
     <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
@@ -714,15 +688,16 @@
     <string name="settings_summary_offlinedata">Sukonfigūruokite duomenis, kurie bus išsaugoti naudoti neprisijungę, saugojimo vietą ir GPX failų aplankus.</string>
     <string name="settings_title_logging">Registravimas</string>
     <string name="settings_summary_logging">Nustatyti Jūsų parašą ir registravimosi parinktis.</string>
-    <string name="settings_title_map">Žemėlapis</string>
-    <string name="settings_summary_map">Nustatykite žemėlapio šaltinį, neprisijungus naudojamo žemėlapio nustatymus ir žemėlapio detales.</string>
+    <string name="settings_title_map_sources">Žemėlapio šaltiniai</string>
+    <string name="settings_summary_map_sources">Nustatykite žemėlapio šaltinio ir neprisijungus pasiekiamo žemėlapio nustatymus.</string>
+    <string name="settings_title_map_content_behavior">Žemėlapio turinys &amp; Elgsena</string>
+    <string name="settings_summary_map_content_behavior">Konfigūruokite, kokią informaciją rodyti žemėlapių ir sąveikos parinktyse.</string>
     <string name="settings_title_map_data">Žemėlapio duomenys</string>
     <string name="settings_title_offline_maps">Žemėlapiai neprisijungus</string>
     <string name="settings_title_map_themes">Žemėlapio naudojamo neprisijungus temos</string>
     <string name="settings_title_map_hillshading">Žemėlapio naudojamo neprisijungus kalvų šešėliai</string>
     <string name="settings_title_offline_routing">Maršrutizavimas neprisijungus</string>
     <string name="settings_summary_offline_routing">Maršrutizavimas neprisijungus galimas, jei įdiegta ir sukonfigūruota pagalbinė programa \"BRouter\" arba įjungtas vidinis maršruto parinkimas.</string>
-    <string name="settings_title_map_rotation">Žemėlapio pasukimas (Google Maps)</string>
     <string name="settings_title_waypoints">Kelio taškai</string>
     <string name="settings_title_map_content">Žemėlapio turinys</string>
     <string name="settings_title_map_behavior">Žemėlapio elgsena</string>
@@ -742,13 +717,12 @@
     <string name="settings_title_system">Sistema</string>
     <string name="settings_summary_system">Specifiniai sistemos nustatymai ir derinimo parinktys.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
-    <string name="settings_category_browser">Naršyklė</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
     <string name="settings_category_nearbysearch">Paieška netoliase</string>
     <string name="init_nearbysearchlimit_title">Paieškos netoliase limitas</string>
     <string name="init_nearbysearchlimit_description">Apriboja atstumą, iki kurio slėptuvės rodomos atliekant paiešką netoliese (0= neribotas)</string>
+    <string name="init_settings_description_unlimited">neribotas</string>
     <string name="settings_category_geocaching_additionals">Kitos paslaugos ir priedai</string>
-    <string name="settings_category_social">Socialiniai tinklai</string>
     <string name="settings_category_logging_other">Kitos registravimo parinktys</string>
     <string name="settings_goto_url_button">Plačiau</string>
     <string name="settings_service_activate">Aktyvuoti</string>
@@ -851,7 +825,7 @@
     <string name="init_dtMarkerOnCacheIcon">S/V įvertinimas slėptuvės piktogramose</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Rodo sunkumo (kairėje) ir vietovės (dešinėje) įvertinimų žymeklį slėptuvės piktogramos viršutiniame dešiniajame kampe („išsaugota“ žymeklis perkeltas į vidurį).</string>
     <string name="init_global_wp_extraction_disable">Išjungti kelio taškų išskleidimą</string>
-    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų.</string>
+    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti kelio taškų išskleidimą iš asmeninių slėptuvių pastabų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių pastabų.</string>
     <string name="init_prevent_cache_note_merge">Perrašyti asmeninės slėptuvės pastabą</string>
     <string name="init_summary_prevent_cache_note_merge">Jei šis nustatymas įjungtas, c:geo visam laikui ištrins vietoje saugomą pastabą ir pakeis ją asmenine pastaba serveryje. Joks suliejimas nebus atliktas.</string>
     <string name="init_customtabs_as_browser">Naudokite Chrome WebView</string>
@@ -862,18 +836,31 @@
     <string name="init_summary_save_log_img">Išsaugoti vaizdus iš įrašų</string>
     <string name="init_units">Imperiniai vienetai</string>
     <string name="init_summary_units">Vietoje metrinių vienetų naudoti imperinius vienetus</string>
+    <string name="init_cachelists">Slėptuvių sąrašai</string>
     <string name="init_log_offline">Registravimas neprisijungus</string>
     <string name="init_summary_log_offline">Įjungti registravimą neprisijungus (nebus rodomas registravimo langas, nebus įkeltas įrašas)</string>
     <string name="init_choose_list">Klausti sąrašo</string>
     <string name="init_summary_choose_list">Klausti kuriame sąraše išsaugoti slėptuvę</string>
-    <string name="init_listdisplay">Papildomi sąrašai</string>
     <string name="init_list_initial_load_limit">Sąrašo įkėlimo apribojimas</string>
     <string name="init_summary_list_initial_load_limit">Maksimalus slėptuvių skaičius, kurias iš pradžių reikia įkelti iš duomenų bazės, rodant saugomus sąrašus. Pasirinkite 0, jei norite „neribotai“</string>
-    <string name="init_summary_listdisplay">Rodyti slėptuvių narių papildomus sąrašus slėptuvės sąraše</string>
+    <string name="init_title_cacheListInfo1">Konfigūruoti sąrašo informacijos eilutes</string>
+    <string name="init_summary_cacheListInfo">Pasirinkite papildomą informaciją, kuri bus rodoma kiekvienai slėptuvei slėptuvių sąrašuose</string>
     <string name="init_livelist">Rodyti kryptį</string>
     <string name="init_summary_livelist">Rodyti rodyklę su kompaso kryptimi slėptuvių sąraše</string>
     <string name="init_quicklaunchitems">Greito paleidimo mygtukai</string>
     <string name="init_summary_quicklaunchitems">Pasirinkite vieną ar daugiau elementų kaip greito paleidimo mygtukus pagrindiniame ekrane</string>
+    <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geocodas</string>
+    <string name="cacheListInfoItem_Difficulty">Sudėtingumas</string>
+    <string name="cacheListInfoItem_Terrain">Reljefas</string>
+    <string name="cacheListInfoItem_MemberState">Premium statusas</string>
+    <string name="cacheListInfoItem_Size">Dydis</string>
+    <string name="cacheListInfoItem_Lists">Kiti sąrašai</string>
+    <string name="cacheListInfoItem_HiddenMonth">Paslėptas mėnuo</string>
+    <string name="cacheListInfoItem_EventDate">Renginio data</string>
+    <string name="newline">Nauja eilutė</string>
+    <string name="active_elements">Aktyvūs elementai</string>
+    <string name="disabled_elements">Išjungti elementai</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -881,6 +868,7 @@
         <item>Šviesi</item>
         <item>Tamsi</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Ekrano fonas</string>
     <string name="init_summary_wallpaper">Pradžios ekrano foną rodyti kaip įrengino ekrano fonas</string>
     <!-- backup / restore -->
@@ -910,7 +898,6 @@
     <string name="init_backup_history_delete_warning">Išsaugojote daugiau atsarginių kopijų, nei leidžia jūsų sukonfigūruota didžiausia vertė. Ar tikrai norite pašalinti visas perteklines atsargines kopijas?</string>
     <string name="init_backup_automatic">Automatinė atsarginė kopija</string>
     <string name="init_backup_automatic_summary">Atlieka automatinę atsarginę kopiją kas x dienų (be rankiniu būdu sukurtų atsarginių kopijų), 0= išjungta</string>
-    <string name="init_backup_automatic_performing">Kuriama atsarginė kopija…</string>
     <string name="init_user_confirmation">Aš žinau, ką darau</string>
     <string name="init_backup_success">c:geo duomenų bazė sėkmingai nukopijuota į:</string>
     <string name="init_backup_failed">Nepavyko sukurti atsarginės c:geo duomenų bazės kopijos.</string>
@@ -963,22 +950,14 @@
     <string name="init_maptrail_length">Maksimalus pėdsako ilgis</string>
     <string name="init_maptrail_length_summary">Nustatykite maksimalų pėdsako ilgį (nustatomą kiekvieną kartą paleidus c:geo). Numatytoji vertė - 700 taškų - reguliuotina pagal pasiekiamą atmintį.</string>
     <string name="init_summary_maptrail">Kai GPS įjungta c:geo išsaugo jūsų judėjimą kaip pėdsaką ir atvaizduoja jį žemėlapyje.</string>
-    <string name="init_trailcolor">Pėdsako linijos spalva</string>
-    <string name="init_trailcolor_summary">Pasirinkite pėdsako linijos spalvą ir skaidrumą</string>
-    <string name="init_trailwidth">Pėdsako linijos plotis</string>
-    <string name="init_trailwidth_summary">Pasirinkite pėdsako linijos plotį</string>
-    <string name="init_directioncolor">Krypties linijos spalva</string>
-    <string name="init_directioncolor_summary">Pasirinkite krypties linijos spalvą ir skaidrumą. Ji rodo tiesiai į pasirinktą tašką; jei įdiegta BRouter programėlė, ji rodys kelią į jį.</string>
-    <string name="init_directionwidth">Krypties linijos plotis</string>
-    <string name="init_directionwidth_summary">Pasirinkite krypties linijos plotį</string>
-    <string name="init_routecolor">Asmeninio maršruto linijos spalva</string>
-    <string name="init_routecolor_summary">Pasirinkite asmeninio maršruto linijos spalvą ir skaidrumą. Asmeninis maršrutas yra kelio taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai paliete kelio tašką/slėptuvę. (Pirmiausia turite įjungti ilgo palietimo funkciją, žr. Žemėlapio nustatymus.)</string>
-    <string name="init_routewidth">Asmeninio maršruto linijos plotis</string>
-    <string name="init_routewidth_summary">Pasirinkite asmeninio maršruto linijos plotį</string>
-    <string name="init_trackcolor">GPX pėdsako/maršruto linijos spalva</string>
-    <string name="init_trackcolor_summary">Pasirinkite pėdsako/maršruto linijos spalvą ir skaidrumą. Pėdsaką/maršrutą sudaro keli kelio taškai ir jį galima įkelti naudojant GPX pėdsako/maršruto failą.</string>
-    <string name="init_trackwidth">GPX pėdsako/maršruto linijos plotis</string>
-    <string name="init_trackwidth_summary">Pasirinkite GPX pėdsako/maršruto linijos plotį</string>
+    <string name="init_trailappearance">Istorijos pėdsako išvaizda</string>
+    <string name="init_trailappearance_summary">Pasirinkite istorijos pėdsako linijos spalvą, skaidrumą ir linijos plotį</string>
+    <string name="init_directionappearance">Krypties išvaizda</string>
+    <string name="init_directionappearance_summary">Pasirinkite krypties linijos spalvą, skaidrumą ir linijos plotį. Krypties linija rodo tiesią liniją į pasirinktą navigacijos tikslą arba konkretų nukreiptą navigacijos kelią, jei maršrutas įgalintas įdiegus programą BRuter.</string>
+    <string name="init_routeappearance">Asmeninio maršruto išvaizda</string>
+    <string name="init_routeappearance_summary">Pasirinkite atskiros maršruto linijos spalvą, skaidrumą ir linijos plotį. Individualus maršrutas yra kelio taškų ir (arba) slėptuvių rinkinys, kurį pasirinkote ilgai bakstelėdami maršruto tašką/slėptuvę. (Pirmiausia turite įjungti ilgo bakstelėjimo funkciją, žr. žemėlapio nustatymus.)</string>
+    <string name="init_trackappearance">GPX pėdsako/maršruto išvaizda</string>
+    <string name="init_trackappearance_summary">Pasirinkite pėdsako/maršruto linijos spalvą, skaidrumą ir linijos plotį. Pėdsakas/maršrutas susideda iš kelių tarpinių taškų ir gali būti įkeliamas naudojant GPX pėdsako/maršruto failą.</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo linijos spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis minimalaus spindulio aplink slėptuvę arba kelio tarpinį tašką atvaizdavimas, kai neleidžiama jokia kita slėptuvė arba fizinis kelio taškas. (Galioja geocaching.com)</string>
     <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
@@ -1017,11 +996,8 @@
     <string name="init_datadirmove_failed">Slėptuvių duomenų katalogo perkėlimas dalinai/visiškai nepavyko. Patikrinkite senus bei naujus aplankus ir perkelkite trūkstamus duomenis rankiniu būdu.</string>
     <string name="init_plain_logs">Nespalvoti įrašai</string>
     <string name="init_summary_plain_logs">Rodyti žurnalo įrašus be spalvų</string>
-    <string name="init_use_native_ua">\"Android\" naršyklė</string>
-    <string name="init_summary_use_native_ua">Prisistatyti Android naršykle. Tai išsprendžia prisijungimo problemas naudojant tam tikrus ryšio paslaugų teikėjus.</string>
     <string name="init_rendertheme_folder">Žemėlapio temų aplankas</string>
     <string name="init_mapshading_folder">Žemėlapio šešėliavimo failų aplankas</string>
-    <string name="init_mapshading_folder_text">Neprisijungus naudojami žemėlapiai gali būti padengti aukščio informacija. Ši informacija pateikiama kaip hgt/dem failai, kuriuos reikia įdėti į šį aplanką.</string>
     <string name="init_mapShadingLinearity_title">Šešėlių tiesiškumas</string>
     <string name="init_mapShadingLinearity_description">Mažos vertės paryškina kontrastą stačiuose šlaituose, bet paslepia pokyčius lygumose, o didelės vertės daro jį tiesiškesnį</string>
     <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
@@ -1049,9 +1025,6 @@
     <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
     <string name="settings_settings">Nustatymai</string>
     <string name="settings_information">Informacija</string>
-    <string name="settings_advanced">Išplėstiniai parametrai</string>
-    <string name="settings_twitter_cache_message">Surastos slėptuvės žinutė</string>
-    <string name="settings_twitter_trackable_message">Surasto keliauninko žinutė</string>
     <string name="init_ec_icons">Žemėlapio piktogramos</string>
     <string name="settings_ec_icons_other">Savas stilius</string>
     <string name="settings_ec_icons_oc">Kaip OC</string>
@@ -1061,7 +1034,7 @@
     <string name="feature_log_images">Pridėti vaizdus prie įrašų</string>
     <string name="feature_watch_list">Peržiūrėti įrašus</string>
     <string name="feature_own_coordinates">Pakeistų koordinačių išsaugojimas</string>
-    <string name="feature_search_keyword">Paieška pagal raktinį žodžį</string>
+    <string name="feature_search_keyword">Paieška pagal raktinį žodį</string>
     <string name="feature_search_live_map">Žemėlapis gyvai</string>
     <string name="feature_search_center">Paieška pagal poziciją</string>
     <string name="feature_search_geocode">Paieška pagal geo kodą</string>
@@ -1069,7 +1042,8 @@
     <string name="feature_search_finder">Paieška pagal radėją</string>
     <string name="feature_favorite">Pridėti slėptuvę prie mėgstamų</string>
     <string name="feature_voting">Balsuojama už slėptuves</string>
-    <string name="init_maplines_title">Žemėlapio linijų konfigūracija</string>
+    <string name="init_appearance_general">Bendra išvaizda</string>
+    <string name="init_maplines_title">Žemėlapio spalvų konfigūracija</string>
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
@@ -1094,6 +1068,7 @@
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
+    <string name="map_source_google_terrain">Google: Reljefas</string>
     <string name="map_source_osm_offline">Neprisijungus</string>
     <string name="map_source_osm_offline_combined">Sujungtas (Neprisijungus)</string>
     <string name="map_source_attribution_dialog_title">Žemėlapio savybės</string>
@@ -1138,11 +1113,10 @@
     <string name="persistablefolder_offline_maps_shading">Žemėlapio šešėliavimo failai</string>
     <string name="persistablefolder_backup">Atsarginė kopija</string>
     <string name="persistablefolder_logfiles">Įrašai</string>
-    <string name="persistablefolder_fieldnotes">Lauko užrašai</string>
+    <string name="persistablefolder_fieldnotes">Lauko pastabos</string>
     <string name="persistablefolder_spoilerimages">Užuominos vaizdai</string>
     <string name="persistablefolder_routingbase">Maršrutizavimas</string>
     <string name="persistablefolder_routingtiles">Maršruto duomenys</string>
-    <string name="persistableuri_track">Kelio failas</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s baigta</string>
     <string name="folder_process_status_currentfile">Apdorota %1$s</string>
@@ -1189,8 +1163,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Šie veiksmai <b>c:geo</b> programai leis naudotis %s.</string>
     <string name="auth_token_explain_long">Užpildžius jūsų asmeninę informaciją ir paspaudus mygtuką \"Leisti c:geo\" bus pradėtas procesas. Šis procesas prisijungs prie %s ir patvirtins jūsų kredencialus. Tai viskas.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo priregistruota ir jai leidžiama rašyti Twitter paskyroje.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo dabar registruota ir leidžiama naudotis %s.</string>
     <!-- auth geokrety -->
@@ -1252,7 +1224,6 @@
     <string name="cache_offline_about_time_year">daugiau nei prieš metus</string>
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventorius</string>
-    <string name="cache_log_images_title">Įrašo vaizdai</string>
     <string name="cache_log_image_default_title">Nuotrauka</string>
     <string name="cache_personal_note">Asmeninė pastaba</string>
     <string name="cache_menu_preventWaypointsFromNote">Neleisti kelio taškų iš pastabų</string>
@@ -1268,10 +1239,12 @@
     <string name="cache_personal_note_limit">Asmeninės pastabos limitas</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">Ši asmeninė pastaba bus sutrumpinta apytiksliai. %1$d simbolių iki %3$s (maks. dydis %2$d).</string>
     <string name="cache_personal_note_upload">Įkelti</string>
-    <string name="cache_personal_note_uploading">Įkeliama asmeninė pastaba</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
-    <string name="cache_personal_note_upload_cancelled">Asmeninės pastabos įkėlimas atšauktas</string>
+    <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
+    <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sinchronizuoti kintamuosius</string>
+    <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
+    <string name="cache_personal_note_vars_out_of_sync_line">%1$s = %2$s (≠ %3$s)</string>
     <string name="cache_description">Aprašymas</string>
     <string name="cache_description_table_note">Aprašymas turi lentelės formatavimą ir norint pamatyti jį atvaizduotą teisingai gali tekti apsilankyti %s.</string>
     <string name="cache_description_rendering">Pateikiamas aprašymas, palaukite…</string>
@@ -1319,14 +1292,6 @@
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
     <string name="cache_dialog_refresh_title">Atnaujinama</string>
     <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
-    <string name="cache_dialog_watchlist_add_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_add_message">Slėptuvė įtraukiama į stebimų slėptuvių sąrašą…</string>
-    <string name="cache_dialog_watchlist_remove_title">Stebėjimo sąrašas</string>
-    <string name="cache_dialog_watchlist_remove_message">Slėptuvė šalinama iš stebimų slėptuvių sąrašo…</string>
-    <string name="cache_dialog_favorite_add_title">Įtraukti į mėgstamų slėptuvių sąrašą</string>
-    <string name="cache_dialog_favorite_add_message">Slėptuvė įtraukiama į Jūsų mėgstamų sąrašą…</string>
-    <string name="cache_dialog_favorite_remove_title">Pašalinti iš mėgstamų sąrašo</string>
-    <string name="cache_dialog_favorite_remove_message">Slėptuvė šalinama iš Jūsų mėgstamų slėptuvių sąrašo…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
@@ -1336,6 +1301,7 @@
     <string name="cache_menu_navigation_bike">Navigacija (dviračiu)</string>
     <string name="cache_menu_maps_directions">Google Maps nuorodos</string>
     <string name="cache_menu_osmand">OsmAnd</string>
+    <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (pėsčiomis)</string>
     <string name="cache_menu_sygic_drive">Sygic (vairavimas)</string>
     <string name="cache_menu_radar">Radaras</string>
@@ -1409,7 +1375,6 @@
     <string name="cache_location">Vieta</string>
     <string name="cache_coordinates">Koordinatės</string>
     <string name="cache_coordinates_original">Originaliosios koordinatės</string>
-    <string name="cache_spoiler_images_title">Užuominų vaizdai</string>
     <string name="cache_log_types">Įrašų tipai</string>
     <string name="cache_coordinates_no">Ši slėptuvė neturi koordinačių.</string>
     <string name="cache_clear_history">Išvalyti istoriją</string>
@@ -1431,11 +1396,14 @@
     <string name="cache_time_full_hours">valanda (-os)</string>
     <string name="cache_listed_on">Publikuota %s</string>
     <string name="cache_recently_viewed">Neseniai peržiūrėta</string>
+    <string name="cache_recently_viewed_empty">Nėra neseniai peržiūrėtų slėptuvių</string>
+    <string name="cache_clear_recently_viewed">išvalyti</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
     <string name="cache_chirpwolf_install">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite įdiegti Chirp Wolf.</string>
     <string name="cache_alc_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti šį nuotykį</string>
+    <string name="cache_alc_related_start">Atidarykite Adventure Lab, kad pradėtumėte žaisti susijusius nuotykius</string>
     <string name="cache_alc_install">Įdiekite Adventure Lab grotuvą, kad galėtumėte žaisti šį nuotykį</string>
     <string name="context_share_as_text">Bendrinti tekstą</string>
     <string name="context_share_as_link">Bendrinti nuorodą</string>
@@ -1445,6 +1413,9 @@
     <string name="image_category_log">Įrašas</string>
     <string name="context_map_add_to_route">Pridėti prie maršruto</string>
     <string name="context_map_add_to_route_start">Įterpti į maršrutą</string>
+    <string name="context_map_remove_from_route_start">Pašalinti iš pradžios</string>
+    <string name="context_map_remove_from_route_pos">Pašalinti iš pozicijos %d</string>
+    <string name="context_map_remove_from_route_end">Pašalinti iš pabaigos</string>
     <string name="context_map_show_coords">Rodyti koordinates</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="create_internal_cache_short">Nauja slėptuvė</string>
@@ -1456,6 +1427,8 @@
     <string name="internal_goto_targets_description">Šioje slėptuvėje saugomi naujausi \'\'Eiti į\'\' tikslai. Jis sukuriamas automatiškai, kai pagrindiniame meniu naudojate funkciją \'\'Eiti į\'\'. Ten įvestos koordinatės bus saugomos šios slėptuvės kelio taškuose. Jei jums nebereikia šių koordinačių, galite saugiai ištrinti šią slėptuvę arba bet kurį iš jos kelio taškų. Taip pat galite perkelti slėptuvę į bet kurį kitą pasirinktą sąrašą.</string>
     <string name="init_longtap_map">Ilgas žemėlapio palietimas</string>
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
+    <string name="init_ActionbarAutohide">Slėpti įrankių juostą bakstelėjus</string>
+    <string name="init_summary_ActionbarAutohide">Bakstelėkite laisvą vietą žemėlapyje norėdami slėpti/rodyti įrankių juostą</string>
     <string name="onetime_info_longtap_disabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu išjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
@@ -1522,8 +1495,6 @@
     <string name="waypoint_save_and_modify_on_website">Nustatyti kaip slėptuvės koordinatės c:geo programoje ir svetainėje</string>
     <string name="waypoint_reset_cache_coords">Atstatyti originalias slėptuvės koordinates</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Originalios slėptuvės koordinatės svetainėje buvo atstatytos.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Atstatomos originalios slėptuvės koordinatės svetainėje…</string>
-    <string name="waypoint_reset">Atstatyti</string>
     <string name="waypoint_localy_reset_cache_coords">Atstatyti c:geo programoje</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Atstatyti c:geo programoje ir svetainėje</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Svetainė nepalaiko pakeistų slėptuvės koordinačių.</string>
@@ -1605,10 +1576,9 @@
     <string name="imageview_notitle">Be pavadinimo</string>
     <string name="imageview_mimetype">Mime tipas</string>
     <string name="imageview_width_height">%1$d x %2$d px</string>
+    <string name="imageview_error">Nepavyko įkelti vaizdo</string>
     <string name="imageview_metadata_geopoint">Geo taškas</string>
     <string name="imageview_metadata_comment">Komentaras</string>
-    <!-- visit -->
-    <string name="visit_tweet">Paskelbti šį radinį Twitter paskyroje</string>
     <!-- map -->
     <string name="map_map">Žemėlapis</string>
     <string name="map_live">Žemėlapis gyvai</string>
@@ -1631,10 +1601,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
     <string name="onetime_mapthemefixslow_title">Pataisykite lėtą žemėlapio temos atvaizdavimą</string>
     <string name="onetime_mapthemefixslow_message">Dirbant su nesupakuotomis žemėlapių temomis, gali sumažėti žemėlapių peržiūros priemonės atidarymo našumas. Galite supakuoti arba sinchronizuoti savo temas, kad padidintumėte našumą ir sumažintumėte žemėlapio paleidimo delsą.</string>
-    <string name="init_hidewp">Slėpti kelio taškus</string>
-    <string name="init_summary_hidewp_original">Slėpti originalius kelio taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
-    <string name="init_summary_hidewp_visited">Slėpti aplankytus kelio taškus žemėlapyje</string>
     <string name="map_theme_select">Pasirinkite žemėlapio temą</string>
     <string name="map_theme_options">Temos parinktys</string>
     <string name="map_language">Žemėlapio kalba</string>
@@ -1676,7 +1642,7 @@
     <string name="search_geocode_from_clipboard">Geokodas buvo įklijuotas iš iškarpinės.</string>
     <string name="search_kw">Raktinis žodis</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
-    <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
+    <string name="search_kw_button">Paieška pagal raktinį žodį</string>
     <string name="search_hbu">Slėpėjas</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
@@ -1790,13 +1756,13 @@
     <string name="export_progress">Eksportuojama: %1$s</string>
     <string name="export_exportedto">eksportuota į</string>
     <string name="export_failed">Eksportuoti nepavyko</string>
-    <string name="export_fieldnotes">Lauko užrašai</string>
-    <string name="export_fieldnotes_info">Lauko užrašai bus eksportuojami į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
+    <string name="export_fieldnotes">Lauko pastabos</string>
+    <string name="export_fieldnotes_info">Lauko pastabos bus eksportuojamos į /sdcard/field-notes su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_fieldnotes_upload">Įkelti į geocaching.com</string>
     <string name="export_fieldnotes_uploading">Įkeliama…</string>
     <string name="export_fieldnotes_upload_success">Įkėlimas į geocaching.com sėkmingas</string>
     <string name="export_fieldnotes_onlynew">Tik nuo paskutinio eksportavimo</string>
-    <string name="export_fieldnotes_creating">Kuriami Lauko užrašai…</string>
+    <string name="export_fieldnotes_creating">Kuriamos Lauko pastabos…</string>
     <string name="export_gpx_info">GPX failas bus eksportuotas į %1$s su dabartine data ir laiku failo pavadinime.</string>
     <string name="export_confirm_title">Eksportuojama %1$s</string>
     <string name="export_confirm_message">Maršrutas: %1$s\nFailo vardas: %2$s</string>
@@ -2083,7 +2049,6 @@
     <string name="fangroup_link"><a href="">Vokietijos vartotojų grupė</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo Google Play</a></string>
-    <string name="about_twitter">Kaskart registruojant slėptuvę <b>c:geo</b> paskelbs nauja statusą Twitter paskyroje.</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">DUK</string>
     <!-- status (used via string based resource loading) -->
@@ -2216,18 +2181,26 @@
     <string name="init_confirm_debug">c:geo veikia derinimo režimu!</string>
     <string name="list_confirm_debug_message">Derinimo režimas sukelia nestabilumų! Ar norite jį išjungti?</string>
     <!-- permission handling -->
-    <string name="close_app">Uždaryti programėlę</string>
-    <string name="ask_again">Paklausti dar kartą</string>
-    <string name="location_permission_request_explanation">c:geo reikia prieigos prie GPS (tikslios vietos) jūsų įrenginyje, kad nustatytų jūsų padėtį ir apskaičiuotų atstumą bei kryptį iki geoslėptuvių. Ji negali būti naudojamas be šio leidimo.</string>
-    <string name="storage_permission_request_explanation">c:geo įrašys duomenis į jūsų telefono atmintį ar SD kortelę, kai tik išsaugosite geoslėptuves naudojimui neprisijungus. Be to, c:geo naudos jūsų telefono saugyklą failų importui ir eksportui bei žemėlapių naudojimui neprisijungus skaitymui. Ji negali būti naudojama be šio leidimo.</string>
+    <string name="permission_ask_again">Paklausti dar kartą</string>
+    <string name="permission_goto_app_details">Atidaryti programos informaciją</string>
+    <string name="permission_contacts_read_explanation_title">Kontaktų nuskaitymo leidimas</string>
+    <string name="permission_contacts_read_explanation">c:geo gali ieškoti kontaktų jūsų adresų knygoje naudodamas slėpėjų vardus. Norėdami tai padaryti, turite leisti c:geo nuskaityti jūsų adresų knygą. Priešingu atveju šia funkcija naudotis negalėsite.</string>
+    <string name="permission_location_explanation_title">Vietos leidimas</string>
+    <string name="permission_location_explanation">c:geo yra optimizuotas veikti su GPS duomenimis (tiksli vieta), kad būtų galima nustatyti jūsų padėtį ir apskaičiuoti atstumą bei kryptį iki geoslėptuvių. Be šio leidimo vieta pagrįstos funkcijos neveiks taip, kaip tikėtasi.</string>
+    <string name="permission_read_external_storage_explanation_title">Leidimas skaityti išorinę saugyklą</string>
+    <string name="permission_read_external_storage_explanation">c:geo gali naudoti jūsų sistemos foną kaip programos foną. Kad tai padarytų, c:geo reikia leidimo nuskaityti medijos duomenis išorinėje saugykloje.</string>
+    <string name="permission_legacy_write_external_storage_explanation">c:geo įrašys duomenis į jūsų telefono atmintį arba SD kortelę, pvz. kai išsaugote slėptuves naudojimui neprisijungus, importuojate ar eksportuojate failus ir kitas funkcijas. Kai kuriose „Android“ versijose šiems veiksmams turite suteikti papildomą leidimą.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Pasenęs išorinės saugyklos rašymo leidimas</string>
     <string name="storage_permission_needed">Ši funkcija neįmanoma be saugyklos leidimo.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Rinktis spalvų schemą</string>
     <string name="preference_colorpicker_select_color">Pasirinkite spalvą</string>
     <string name="preference_colorpicker_select_opaqueness">Pasirinkite skaidrumą</string>
+    <string name="preference_colorpicker_select_width">Pasirinkite linijos plotį</string>
+    <string name="preference_colorpicker_show_width">plotis: %d</string>
     <string name="reset_to_default">Numatyta</string>
     <!-- number input -->
-    <string name="number_input_title">Įveskite vertę nuo %1$s iki %2$s</string>
+    <string name="number_input_title">Įveskite vertę tarp %1$s ir %2$s</string>
     <string name="number_input_err_boundarymin">Įvesta vertė per maža - atstatykite į minimalią vertę</string>
     <string name="number_input_err_boundarymax">Įvesta vertė per didelė - atstatykite į maksimalią vertę</string>
     <string name="number_input_err_format">Neteisingas skaičiaus formatas</string>
@@ -2240,7 +2213,6 @@
     <string name="notification_channel_downloader_description">atsisiuntimų rezultatų pranešimai (pvz., žemėlapiai neprisijungus)</string>
     <string name="notification_channel_cache_download_name">sleptuvės parsisiuntimo programa</string>
     <string name="notification_channel_cache_download_description">slėptuvių atsisiuntimų rezultatų fono pranešimai</string>
-    <string name="notification_proximity_title">c:geo priartėjimo pranešimas</string>
     <string name="notification_download_receiver_title">Importuojamas atsisiuntimas</string>
     <!-- individual routes -->
     <string name="individual_route">Asmeninis maršrutas</string>
@@ -2249,6 +2221,7 @@
     <string name="individual_route_error_toggling_waypoint">klaida perjungiant kelio tašką</string>
     <string name="individual_route_error_single_waypoint_mode">Negalima naudoti vieno kelio taško režimu</string>
     <string name="map_sort_individual_route">Redaguoti asmeninį maršrutą</string>
+    <string name="map_refresh_individual_route">Atnaujinti</string>
     <string name="map_export_individual_route">Eksportuoti asmeninį maršrutą</string>
     <string name="map_load_individual_route">Įkelti asmeninį maršrutą</string>
     <string name="map_load_individual_route_confirm">Perrašyti esamą maršrutą?</string>
@@ -2270,6 +2243,15 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
+    <string name="route_optimization">Maršruto optimizavimas</string>
+    <string name="route_optimization_info">Maršruto optimizavimas yra eksperimentinė funkcija, skirta optimizuoti maršrutą trumpesniam atstumui. Maršrutas bus skaičiuojamas nuo pirmo sąrašo taško iki paskutinio sąrašo taško, lankant kitus šio maršruto taškus optimizuota tvarka.\n\nKadangi visų galimų sprendimų įvertinti neįmanoma dėl laiko ir skaičiavimo galios apribojimų mobiliajame įrenginyje, jis naudoja apytikslius algoritmus, kad apskaičiuotų galimus optimizavimus.\n\nSkaičiavimas atliekamas dviem etapais: Apskaičiuojamas atstumus tarp dviejų maršruto porų, tada pabandoma rasti priimtiną maršrutą. Tai gali būti ne trumpiausias įmanomas maršrutas, todėl antrą veiksmą galite kartoti tiek kartų, kiek norite.</string>
+    <string name="initial_route_length">Pradinis maršruto ilgis: %d</string>
+    <string name="optimized_route_length">Optimizuotas maršruto ilgis: %d</string>
+    <string name="route_optimization_out_of_bounds">Maršruto optimizavimas veikia maršrutams nuo 3 iki 100 taškų</string>
+    <string name="generating_distance_matrix">Generavima atstumo matrica</string>
+    <string name="running_route_optimizations">Atliekamas maršruto optimizavimas</string>
+    <string name="route_optimization_finished">Maršruto optimizavimas baigtas</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">Įkelti pėdsaką/maršrutą iš GPX</string>
     <string name="load_track_error">Klaida įkeliant pėdsaką/maršrutą</string>
@@ -2278,6 +2260,7 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
+    <string name="routes_tracks_color">Pasirinkite spalvą</string>
     <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
@@ -2285,6 +2268,8 @@
     <string name="make_visible">padaryti matomą</string>
     <string name="hide">slėpti</string>
     <!-- distance units -->
+    <string name="unit_m">m</string>
+    <string name="unit_km">km</string>
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
     <string name="unit_mi">mylios</string>
@@ -2356,6 +2341,7 @@
     <string name="downloadmap_mapfile">žemėlapio failas</string>
     <string name="downloadmap_themefile">temos failas</string>
     <string name="downloadmap_tilefile">maršrutizavimo duomenų failas</string>
+    <string name="downloadmap_checking">Tikrinami galimi maršruto duomenys…</string>
     <string name="downloadmap_othermapdownload">kitas žemėlapio atsisiuntimas</string>
     <string name="downloadmap_otherthemedownload">kitas temos atsisiuntimas</string>
     <string name="downloadmap_download">atsisiųsti</string>
@@ -2388,6 +2374,7 @@
     <string name="maptheme_scale_text_summary">Papildomai keičia teksto etiketes žemėlapyje; 100% = nepakeistas dydis</string>
     <string name="maptheme_scale_symbol_title">Simbolių dydžio koeficientas</string>
     <string name="maptheme_scale_symbol_summary">Papildomai sumažina simbolių dydžius žemėlapyje; 100% = nepakeistas dydis</string>
+    <string name="vtm_theme_variant">Temos variantai</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Išvalyti pėdsaką</string>
     <string name="map_trailhistory_cleared">Pėdsakas išvalytas</string>
@@ -2423,17 +2410,10 @@
     <string name="wizard_platforms_intro">Norėdami rasti geoslėptuves su c:geo, jums reikia paskyros, skirtos geoslėptuvių ieškojimo paslaugai, kurią palaiko c:geo.\nToliau pasirinkite norimą paslaugą, kad prisijungtumėte naudodami esamą paskyrą arba sukurtumėte naują paskyrą.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching ir kiti</string>
-    <string name="wizard_welcome_advanced">Išplėstinė konfigūracija</string>
-    <string name="wizard_advanced_offlinemaps_label">Žemėlapiai naudojimui neprisijungus</string>
-    <string name="wizard_advanced_offlinemaps_info">Šiame puslapyje pateikiamos kai kurios išplėstinės funkcijos, kurių naudojimas yra neprivalomas.\n\nc:geo gali atsisiųsti žemėlapio failus, skirtus naudoti neprisijungus.</string>
-    <string name="wizard_advanced_routing_label">Suaktyvinkite maršruto parinkimą neprisijungus</string>
-    <string name="wizard_advanced_routing_info">c:geo turi vidinį maršruto parinkimo variklį, skirtą maršrutizavimui neprisijungus, ir gali automatiškai atsisiųsti trūkstamus maršruto duomenis.</string>
     <string name="wizard_advanced_restore_label">Atkurti</string>
     <string name="wizard_advanced_restore_info">Jei turite ankstesnio diegimo atsarginę kopiją, galite atkurti nustatymus ir (arba) geoslėptuvių duomenis.</string>
     <string name="status_not_ok">KLAIDA</string>
     <string name="wizard_status_title">Konfigūracijos būsena</string>
-    <string name="wizard_status_storage_permission">Saugyklos leidimas</string>
-    <string name="wizard_status_location_permission">Vietos leidimas</string>
     <string name="wizard_status_basefolder">Pagrindinis aplankas</string>
     <string name="wizard_status_platform">Geocaching paslaugos</string>
     <string name="wizard_not_now">Ne dabar</string>
@@ -2447,12 +2427,13 @@
     <string name="done">Atlikta</string>
     <string name="finish">Baigta</string>
     <string name="back">Atgal</string>
-    <string name="later">Vėliau</string>
     <string name="cancel">Atšaukti</string>
+    <string name="use">Naudoti</string>
+    <string name="redo">Grąžinti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
+    <string name="optimize">Optimizuoti</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Pažymėti viską</string>
-    <string name="touch_again_to_exit">Palieskite dar kartą, kad išeitumėte</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Plotai</string>
     <string name="rtl_fell_meadow">kirtimas / pieva</string>
@@ -2810,4 +2791,5 @@
     <string name="smiley_approve">Patvirtinta</string>
     <string name="smiley_disapprove">Nepatvirtinta</string>
     <string name="smiley_question">Klausimas</string>
+    <!-- message center notifications -->
 </resources>

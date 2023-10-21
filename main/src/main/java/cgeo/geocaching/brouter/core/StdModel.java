@@ -5,7 +5,6 @@
  */
 package cgeo.geocaching.brouter.core;
 
-import cgeo.geocaching.brouter.expressions.BExpressionContext;
 import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 
@@ -27,8 +26,5 @@ final class StdModel extends OsmPathModel {
     public void init(final BExpressionContextWay expctxWay, final BExpressionContextNode expctxNode, final Map<String, String> keyValues) {
         ctxWay = expctxWay;
         ctxNode = expctxNode;
-
-        final BExpressionContext expctxGlobal = expctxWay; // just one of them...
-
     }
 }

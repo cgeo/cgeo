@@ -1,25 +1,31 @@
 ### Mapa
-- Novo: Fonte de mapa OSM osm.paws.cz
-- Novo: Activar a leitura de ficheiros GPX flopp.net como percursos
-- Fix: Missing routing symbol after 'append to route'
-- Fix: Missing route calculation for prepended points
-- New: Add support for 'Voluntary MF5' OpenAndroMaps theme
+- Updated Mapsforge and VTM libs to v0.20
+- Updated Google Maps renderer
+- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- New: Show custom cache icon as marker for related waypoints
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
+- New: Linear labs use numbers as waypoint markers
+- New: Waypoints of a cache show cache type icon as marker
+- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
 
 ### Detalhes da cache
-- Novo: Nova galeria de imagens mais sofisticada
-- Correcção: Restaurar posição na lista de pontos adicionais, após actualizar ou excluir um deles
-- Correcção: Mover para baixo ao criar um novo ponto adicional
-- Novo: Reconhecer variáveis inseridas em notas do utilizador, nos pontos adicionais
-- New: Display lab adventure button in mystery cache details if link to lab adventure detected
-- Fix: Removal of waypoint description not synced for server-side waypoints
+- New: Edit default value for log image caption prefix
+- New: Ensure minimum image size for display
+- Change: Redesigned edit options for own log images
+- New: Bettercacher integration
+- New: Sync visited state on synchronizing waypoints to personal note
+- New: Retrieve found date for Opencaching-based caches
+- New: Append all waypoints to individual route
 
 ### Geral
-- Alteração do nível da API (compileSDK 32)
-- Actualização de algumas bibliotecas dependentes
-- Alteração: Usa outro mecanismo do Android para receber transferências (para melhor compatibilidade com o Android 12+)
-- Novo: Predefinir o nome das listas com o nome do ficheiro GPX ao importar
-- Correcção (versão diária): Falha do sistema na importação de GPX
-- Novo: Permitir a importação de ficheiros de rotas GPX que não fornecem dados de xmlns
-- Novo: Adiciona um ícone monocromático da aplicação para Android 13
-- New: Display geocaching.com member status on home screen
-- Change: GPX-Import: Use name as geocode for 'unknown' connector
+- New: Increased target SDK to 33
+- Change: Handling of database access to avoid "database not available" crashes
+- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems

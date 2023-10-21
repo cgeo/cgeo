@@ -37,6 +37,7 @@
         <item name="android:minHeight">@dimen/radioButtonCheckboxPreferredItemHeight</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
         <item name="android:textColor">@color/colorText</item>
+        <item name="listPreferredItemHeightSmall">@dimen/radioButtonCheckboxPreferredItemHeight</item>
     </style>
 
     <style name="checkbox_full">
@@ -85,6 +86,7 @@
 
     <style name="actionBarActionOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:src">@drawable/three_dot_vertical</item>
+        <item name="tint">@color/colorTextActionBar</item>
     </style>
 
     <style name="tool_bar" parent="actionBarStyle">
@@ -157,17 +159,6 @@
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
-    <style name="button_digit" parent="button">
-        <item name="android:padding">0dp</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginLeft">1dip</item>
-        <item name="android:layout_marginRight">1dip</item>
-        <item name="android:layout_marginTop">2dip</item>
-        <item name="android:layout_marginBottom">2dip</item>
-        <item name="layout_columnWeight">1</item>
-    </style>
-
     <style name="button_small" parent="button">
         <item name="android:layout_width">125dip</item>
         <item name="android:layout_height">wrap_content</item>
@@ -226,17 +217,12 @@
         <item name="colorPrimary">@color/colorText</item>
     </style>
 
-    <style name="shapeCircle" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">50%</item>
-    </style>
-
     <style name="shapeRoundedCorner" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
     </style>
 
-  <!-- Chips -->
+    <!-- Chips -->
 
     <style name="chip_choice" parent="@style/Widget.MaterialComponents.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_background_selector</item>
@@ -397,6 +383,14 @@
         <item name="android:layout_centerInParent">true</item>
         <item name="android:background">@color/colorSeparator</item>
     </style>
+
+    <style name="separator_pixel">
+        <item name="android:minWidth">1dp</item>
+        <item name="android:minHeight">1dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@color/colorSeparator</item>
+    </style>
+
 
     <style name="separator_horizontal_layout">
         <item name="android:layout_width">fill_parent</item>

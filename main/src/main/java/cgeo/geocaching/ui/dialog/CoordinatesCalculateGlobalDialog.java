@@ -388,7 +388,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         SimpleDialog.of(this.getActivity()).setTitle(TextParam.id(R.string.calccoord_generate_title))
                 .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))
-                .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second), null, s -> {
+                .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second), null, null, false, s -> {
                     if (s.isEmpty()) {
                         ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
                         return;

@@ -2,7 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Matrix;
@@ -73,20 +73,56 @@ public class PositionLayer extends Layer {
         final int centerY = (int) (pixelY - topLeftPoint.y);
 
         if (arrow == null) {
-            arrowNative = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
+            // temporarily call local copy of convertToBitmap instead of ImageUtils.convertToBitmap
+            // trying to catch the cause for #14295
+            arrowNative = convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
             rotateArrow();
         }
-
-        final int left = centerX - widthArrowHalf;
-        final int top = centerY - heightArrowHalf;
-        final int right = left + this.arrow.getWidth();
-        final int bottom = top + this.arrow.getHeight();
-        final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);
-        final Rectangle canvasRectangle = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-        if (!canvasRectangle.intersects(bitmapRectangle)) {
-            return;
+        final Bitmap localArrow = arrow;
+        if (localArrow != null && !localArrow.isDestroyed()) {
+            final int left = centerX - widthArrowHalf;
+            final int top = centerY - heightArrowHalf;
+            final int right = left + localArrow.getWidth();
+            final int bottom = top + localArrow.getHeight();
+            final Rectangle bitmapRectangle = new Rectangle(left, top, right, bottom);
+            final Rectangle canvasRectangle = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
+            if (!canvasRectangle.intersects(bitmapRectangle)) {
+                return;
+            }
+            canvas.drawBitmap(localArrow, left, top);
+        } else {
+            Log.e("PositionLayer.draw: localArrow=null or destroyed, arrowNative=" + arrowNative);
         }
-        canvas.drawBitmap(arrow, left, top);
+    }
+
+    // temporary copy of ImageUtils.convertToBitmap for documentation purposes
+    // trying to catch the cause for #14295
+    private static android.graphics.Bitmap convertToBitmap(final Drawable drawable) {
+        if (drawable == null) {
+            Log.e("PositionLayer.convertToBitmap: got null drawable");
+        }
+        if (drawable instanceof BitmapDrawable) {
+            if (((BitmapDrawable) drawable).getBitmap() == null) {
+                Log.e("PositionLayer.convertToBitmap: drawable.getBitmap() returned null");
+            }
+            return ((BitmapDrawable) drawable).getBitmap();
+        }
+
+        // handle solid colors, which have no width
+        int width = drawable.getIntrinsicWidth();
+        width = width > 0 ? width : 1;
+        int height = drawable.getIntrinsicHeight();
+        height = height > 0 ? height : 1;
+
+        final android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(width, height, android.graphics.Bitmap.Config.ARGB_8888);
+        if (bitmap == null) {
+            Log.e("PositionLayer.convertToBitmap: createBitmap returned null");
+        }
+        final android.graphics.Canvas canvas = new android.graphics.Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
     }
 
     private void rotateArrow() {
@@ -97,9 +133,15 @@ public class PositionLayer extends Layer {
         final Matrix matrix = new Matrix();
         matrix.setRotate(heading, widthArrowHalf, heightArrowHalf);
         final android.graphics.Bitmap arrowRotNative = android.graphics.Bitmap.createBitmap(arrowNative, 0, 0, arrowNative.getWidth(), arrowNative.getHeight(), matrix, true);
+        if (arrowRotNative == null) {
+            Log.e("PositionLayer.rotateArrow: arrowRotNative is null");
+        }
 
         final Drawable tmpArrow = new BitmapDrawable(CgeoApplication.getInstance().getResources(), arrowRotNative);
         arrow = AndroidGraphicFactory.convertToBitmap(tmpArrow);
+        if (arrow.isDestroyed()) {
+            Log.e("PositionLayer.rotateArrow: arrow.isDestroyed is true");
+        }
 
         widthArrowHalf = arrow.getWidth() / 2;
         heightArrowHalf = arrow.getHeight() / 2;

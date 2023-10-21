@@ -58,8 +58,8 @@ public class EmojiUtils {
     private static final int CUSTOM_SET_SIZE = CUSTOM_SET_SIZE_PER_OPACITY * OPACITY_VALUES;
 
     // internal consts for plain numbers
-    private static final int NUMBER_START = 0x30;
-    private static final int NUMBER_END = 0x39;
+    public static final int NUMBER_START = 0x30;
+    public static final int NUMBER_END = 0x39;
 
     // Unicode custom glyph area needed/supported by this class
     private static final int CUSTOM_ICONS_START = 0xe000;
@@ -88,14 +88,14 @@ public class EmojiUtils {
                     /* hearts */        0x2764, 0x1f9e1, 0x1f49b, 0x1f49a, 0x1f499, 0x1f49c, 0x1f90e, 0x1f5a4, 0x1f90d,
                     /* geometric */     0x1f7e5, 0x1f7e7, 0x1f7e8, 0x1f7e9, 0x1f7e6, 0x1f7ea, 0x1f7eb, 0x2b1b, 0x2b1c,
                     /* geometric */     0x1f536, 0x1f537,
-                    /* events */        0x1f383, 0x1f380, 0x1f384, 0x1f389,
+                    /* events */        0x1f383, 0x2620, 0x1f380, 0x1f384, 0x1f389,
                     /* award-medal */   0x1f947, 0x1f948, 0x1f949, 0x1f3c6,
-                    /* office */        0x1f4c6,
+                    /* office */        0x1f4c6, 0x1f4ca, 0x1f4c8,
                     /* warning */       0x26a0, 0x26d4, 0x1f6ab, 0x1f6b3, 0x1f6d1, 0x2622,
                     /* av-symbol */     0x1f505, 0x1f506,
-                    /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757,
+                    /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757, 0x1f522, 0x1f520,
                     /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3,
-                    /* numbers */       NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
+
             }),
             // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
             new EmojiSet(CUSTOM_ICONS_START_CIRCLES + 18 + CUSTOM_SET_SIZE_PER_OPACITY, new int[CUSTOM_SET_SIZE_PER_OPACITY]),    // "18" to pick red circle instead of black
@@ -134,6 +134,12 @@ public class EmojiUtils {
                     /* silhouettes */   0x1f47b, 0x1f464, 0x1f465, 0x1f5e3,
                     /* people */        0x1f466, 0x1f467, 0x1f468, 0x1f469, 0x1f474, 0x1f475, 0x1f46a,
                     /* hands */         0x1f44d, 0x1f44e, 0x1f4aa, 0x270d
+            }),
+            // numbers
+            new EmojiSet(0x2460, new int[]{
+                    /* numbers */       NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
+                    /* circled n. */    0x24ea, 0x245e, 0x245f, 0x2460, 0x2461, 0x2462, 0x2463, 0x2464, 0x2465, 0x2466, 0x2467, 0x2468, 0x2469, 0x246a, 0x246b, 0x246c, 0x246d, 0x246e, 0x246f, 0x2470, 0x2471, 0x2472, 0x2473,
+                    /* parenthesized n. */ 0x2474, 0x2475, 0x2476, 0x2477, 0x2478, 0x2479, 0x247a, 0x247b, 0x247c,
             }),
     };
     private static final int CUSTOM_GLYPHS_ID = 1;
@@ -254,7 +260,7 @@ public class EmojiUtils {
         } else if (cache != null) {
             dialogButtonRight.setVisibility(View.VISIBLE);
             // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-            dialogButtonRight.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheTypeMarker(context.getResources(), cache))));
+            dialogButtonRight.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getTypeMarker(context.getResources(), cache))));
             dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
@@ -266,7 +272,7 @@ public class EmojiUtils {
                 dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
             } else {
                 // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-                dialogButtonLeft.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheTypeMarker(context.getResources(), cache))));
+                dialogButtonLeft.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getTypeMarker(context.getResources(), cache))));
                 dialogButtonLeft.setIconTint(null);
             }
             dialogButtonLeft.setVisibility(View.VISIBLE);

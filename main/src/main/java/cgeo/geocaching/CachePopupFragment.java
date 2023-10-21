@@ -123,13 +123,13 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(geocode);
-            toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
+            toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
             toolbar.setLongClickable(true);
             toolbar.setOnLongClickListener(v -> {
                 if (cache.isOffline()) {
                     EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
-                        toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
+                        toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                     });
                     return true;
@@ -240,7 +240,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             }
 
             if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server));
+                showToast(getString(R.string.err_server_general));
                 return;
             }
 

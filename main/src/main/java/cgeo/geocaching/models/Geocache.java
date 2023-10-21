@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -33,6 +34,8 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -41,11 +44,13 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
+import cgeo.geocaching.utils.LazyInitializedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.ShareUtils;
@@ -121,6 +126,7 @@ public class Geocache implements IWaypoint {
     private String ownerUserId = "";
     private int assignedEmoji = 0;
     private int alcMode = 0;
+    private Tier tier;
 
     @Nullable
     private Date hidden = null;
@@ -175,6 +181,8 @@ public class Geocache implements IWaypoint {
             return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
         }
     };
+    private final LazyInitializedSet<Category> categories = new LazyInitializedSet<>(() ->
+            inDatabase() ? DataStore.loadCategories(geocode) : null);
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
@@ -350,13 +358,15 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
-        if (waypoints.isEmpty()) {
-            this.setWaypoints(other.waypoints, false);
-        } else {
-            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
-            Waypoint.mergeWayPoints(newPoints, other.waypoints, false);
-            this.setWaypoints(newPoints, false);
+        if (tier == null || Tier.NONE == tier) {
+            tier = other.tier;
         }
+        if (categories.isEmpty()) {
+            setCategories(other.getCategories());
+        }
+
+        mergeWaypoints(other.waypoints, false);
+
         if (spoilers == null) {
             spoilers = other.spoilers;
         }
@@ -406,6 +416,16 @@ public class Geocache implements IWaypoint {
 
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
         return isEqualTo(other);
+    }
+
+    public void mergeWaypoints(final List<Waypoint> otherWaypoints, final boolean forceMerge) {
+        if (waypoints.isEmpty()) {
+            this.setWaypoints(otherWaypoints, false);
+        } else {
+            final List<Waypoint> newPoints = new ArrayList<>(waypoints);
+            Waypoint.mergeWayPoints(newPoints, otherWaypoints, forceMerge);
+            this.setWaypoints(newPoints, false);
+        }
     }
 
     /**
@@ -577,6 +597,9 @@ public class Geocache implements IWaypoint {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
+            if (Settings.removeFromRouteOnLog()) {
+                DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
+            }
             offlineLog = logEntry;
             notifyChange();
         } else {
@@ -680,7 +703,7 @@ public class Geocache implements IWaypoint {
     }
 
     public float getDifficulty() {
-        return difficulty;
+        return getConnector().supportsDifficultyTerrain() ? difficulty : -1;
     }
 
     @Override
@@ -711,7 +734,7 @@ public class Geocache implements IWaypoint {
     }
 
     public float getTerrain() {
-        return terrain;
+        return getConnector().supportsDifficultyTerrain() ? terrain : -1;
     }
 
     public boolean isArchived() {
@@ -966,6 +989,10 @@ public class Geocache implements IWaypoint {
     @NonNull
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
+    }
+
+    public Set<Category> getCategories() {
+        return categories.getUnderlyingSet();
     }
 
     @NonNull
@@ -1284,6 +1311,14 @@ public class Geocache implements IWaypoint {
         return alcMode;
     }
 
+    public void setTier(final Tier tier) {
+        this.tier = tier;
+    }
+
+    public Tier getTier() {
+        return this.tier;
+    }
+
     /**
      * Set the number of users watching this geocache
      *
@@ -1464,6 +1499,13 @@ public class Geocache implements IWaypoint {
         }
     }
 
+    public void setCategories(final Collection<Category> categories) {
+        this.categories.clear();
+        if (categories != null) {
+            this.categories.addAll(CollectionStream.of(categories).filter(Category::isValid).toList());
+        }
+    }
+
     public void setSpoilers(final List<Image> spoilers) {
         this.spoilers = spoilers;
     }
@@ -1535,7 +1577,7 @@ public class Geocache implements IWaypoint {
     public boolean addOrChangeWaypoint(final Waypoint waypoint, final boolean saveToDatabase) {
         waypoint.setGeocode(geocode);
 
-        if (waypoint.getId() < 0) { // this is a new waypoint
+        if (waypoint.isNewWaypoint()) {
             if (StringUtils.isBlank(waypoint.getPrefix())) {
                 assignUniquePrefix(waypoint);
             }
@@ -1664,7 +1706,7 @@ public class Geocache implements IWaypoint {
         if (waypoint == null) {
             return false;
         }
-        if (waypoint.getId() < 0) {
+        if (waypoint.isNewWaypoint()) {
             return false;
         }
         if (waypoint.getWaypointType() != WaypointType.ORIGINAL || waypoint.belongsToUserDefinedCache()) {
@@ -2142,16 +2184,19 @@ public class Geocache implements IWaypoint {
             return search;
         }
 
+
+        SearchResult result = null;
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, handler);
+            result = GCConnector.getInstance().searchByGeocode(null, guid, handler);
+        } else {
+            final IConnector connector = ConnectorFactory.getConnector(geocode);
+            if (connector instanceof ISearchByGeocode) {
+                result = ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
+            }
         }
-
-        final IConnector connector = ConnectorFactory.getConnector(geocode);
-        if (connector instanceof ISearchByGeocode) {
-            return ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
-        }
-        return null;
+        AmendmentUtils.amendCaches(result);
+        return result;
     }
 
     public boolean isOffline() {
@@ -2303,6 +2348,11 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
+    public String getFullWaypointGpxId(@NonNull final String prefix) {
+        return getConnector().getFullWaypointGpxId(prefix, geocode);
+    }
+
+    @NonNull
     public String getWaypointPrefix(final String name) {
         return getConnector().getWaypointPrefix(name);
     }
@@ -2382,7 +2432,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
+        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().iconId);
     }
 
     @NonNull

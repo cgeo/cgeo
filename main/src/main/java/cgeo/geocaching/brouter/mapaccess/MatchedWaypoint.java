@@ -8,6 +8,8 @@ package cgeo.geocaching.brouter.mapaccess;
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class MatchedWaypoint {
     public OsmNode node1;
@@ -16,7 +18,12 @@ public final class MatchedWaypoint {
     public OsmNode waypoint;
     public String name;  // waypoint name used in error messages
     public double radius;  // distance in meter between waypoint and crosspoint
+    public boolean direct;  // from this point go direct to next = beeline routing
+    public int indexInTrack = 0;
+    public double directionToNext = -1;
+    public double directionDiff = 361;
 
+    public List<MatchedWaypoint> wayNearest = new ArrayList<>();
     public boolean hasUpdate;
 
     public static MatchedWaypoint readFromStream(final DataInput dis) throws IOException {

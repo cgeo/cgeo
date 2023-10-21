@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.al;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -61,7 +62,6 @@ final class ALApi {
     private static final String LATITUDE = "Latitude";
     private static final String TITLE = "Title";
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
-
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
 
     private ALApi() {
@@ -147,6 +147,13 @@ final class ALApi {
         }
     }
 
+    // To understand the logic of this function some details about the API is in order.
+    // The API method being used does return the detailed properties of the
+    // object in question, however it does not return the true found state of the object so
+    // we have to do an additional search, a search which will give us much less details about
+    // the object but does indeed give us the true found state of the object. Once we got
+    // that information, we merge it into the object we wanted to lookup initially.
+
     @Nullable
     @WorkerThread
     protected static Geocache searchByGeocode(final String geocode) {
@@ -156,7 +163,14 @@ final class ALApi {
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         try {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
-            return importCacheFromJSON(response);
+            final Geocache gc = importCacheFromJSON(response);
+            final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
+            for (Geocache matchedLabCache : matchedLabCaches) {
+                if (matchedLabCache.getGeocode().equals(geocode)) {
+                    gc.setFound(matchedLabCache.isFound());
+                }
+            }
+            return gc;
         } catch (final Exception ignored) {
             return null;
         }
@@ -185,11 +199,6 @@ final class ALApi {
     }
 
     @NonNull
-    protected static Collection<Geocache> searchByCenter(final Geopoint center) {
-        return search(center, DEFAULT_RADIUS, null);
-    }
-
-    @NonNull
     @WorkerThread
     private static Collection<Geocache> search(final Geopoint center, final int distanceInMeters, final Integer daysSincePublish) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
@@ -201,6 +210,7 @@ final class ALApi {
         query.setTake(100);
         query.setRadiusInMeters(distanceInMeters);
         query.setRecentlyPublishedDays(daysSincePublish);
+        query.setCallingUserPublicGuid(GCLogin.getInstance().getPublicGuid());
         try {
             final Response response = apiPostRequest("SearchV4", headers, query, false).blockingGet();
             return importCachesFromJSON(response);
@@ -247,11 +257,6 @@ final class ALApi {
         }
 
         return search(searchCoords, radius, daysSincePublish);
-    }
-
-    @NonNull
-    private static Single<Response> apiRequest(final String uri) {
-        return Network.getRequest(API_HOST + uri);
     }
 
     @NonNull
@@ -350,7 +355,7 @@ final class ALApi {
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            // cache.setFound(parseCompletionStatus(response.get("CompletionStatus").asInt())); as soon as we're using active mode
+            cache.setFound(response.get("IsComplete").asBoolean());
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {

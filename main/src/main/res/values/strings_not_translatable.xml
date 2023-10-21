@@ -43,6 +43,7 @@
     <string translatable="false" name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
+    <string translatable="false" name="map_source_osm_opentopomap">OpenTopoMap</string>
 
     <!-- edit waypoint -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
@@ -58,6 +59,7 @@
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_cyclosm_html"><![CDATA[© <a href="https://www.cyclosm.org/">CyclOSM</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
+    <string translatable="false" name="map_attribution_opentopomap_html"><![CDATA[© <a href="https://www.opentopomap.org/">OpenTopoMap</a> (CC-BY-SA), map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>, SRTM]]></string>
 
     <!-- links to manual pages -->
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
@@ -72,26 +74,22 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2021-09 to 2022-09 -->
+    <!-- currently listed: contributions 2022-10 to 2023-09 -->
     <string translatable="false" name="contributors_recent">
+    baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
-    jakedot||c|
-    k3b||c|
+    kumy|https://github.com/kumy|c|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
-    MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
+    liroP|https://github.com/liroP|c|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    nmrsmn||c|
+    mzylowski|https://github.com/mzylowski|c|
     NotWoods|https://github.com/NotWoods|c|
-    pet0etie||c|
-    Rainer S.||c|
-    SammysHP|https://www.sammyshp.de/|i|
-    SchoolGuy|https://github.com/SchoolGuy|c|
-    Surfoo||c|
-    Volthai7us||c
+    osmpaws|https://github.com/osmpaws|c|
+    UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -100,7 +98,6 @@
     <string translatable="false" name="contributors_other">
     avogadogc|||
     Arne Schwabe||c|
-    baiti|https://github.com/baiti|c|
     Bananeweizen||c|
     BeckyDTP|https://github.com/BeckyDTP|c|
     bjdupuis||c|
@@ -117,34 +114,43 @@
     geocachermgo|https://github.com/geocachermgo|t|
     HolgerJeromin|||
     Iiro Jäppinen||g|
+    jakedot||c|
     Jan Žatecký|https://www.jaytech.cz/|g|
     jgoestl|https://github.com/jgoestl|c|
     jirkavrba|https://github.com/jirkavrba|c|
     jonas-koeritz|https://github.com/jonas-koeritz|c|
     JoWi24|https://joachim-wilke.de/|c|
+    k3b||c|
     Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
     lazydays79||c|
     Lomanic|https://github.com/Lomanic|c|
+    MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     marco-dev||c|
     Mathieu Alorent||c|
     Matze2||c|
     MichielK||c|
+    nmrsmn||c|
     msperkowski|||
     ncorreia||c|
     okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     Pavol Babinčák||c|
+    pet0etie||c|
     Peter Storch|https://github.com/pstorch|c|
     Portree Kid|https://github.com/Portree-Kid|c|
+    Rainer S.||c|
     Ray||c|
     RoadRunner-||c|
+    SammysHP|https://www.sammyshp.de/|i|
     Samuel Tardieu|https://www.rfc1149.net/sam.html||
     S-Bartfast|https://github.com/S-Bartfast|c|
+    SchoolGuy|https://github.com/SchoolGuy|c|
     stephanme/Geoteufel||c|
-    UniQP|https://github.com/UniQP|c|
+    Surfoo||c|
     TakoTheDank|https://github.com/TacoTheDank|c|
     thiasB||c|
+    Volthai7us||c
     YraFyra||c|
     zenobios||c|
     </string>
@@ -158,8 +164,8 @@
     - [Community Material Design Icons](https://materialdesignicons.com/) ([Apache License version 2.0](https://www.apache.org/licenses/LICENSE-2.0.html))\n
     - [Geocoding courtesy of MapQuest](https://www.mapquest.com/)\n
     - [Geocoding data from OpenStreetMap](https://www.openstreetmap.org/)\n
-    - OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data [licensed](http://www.openstreetmap.org/copyright/en) under Creative Commons 2.0 BY-SA.\n
-    - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/) and © [cyclosm.org](https://www.cyclosm.org/).\n
+    - OpenStreetMap cartography (OSM:Mapnik) © OpenStreetMap contributors. Map tile data [licensed](https://www.openstreetmap.org/copyright/en) under Creative Commons 2.0 BY-SA.\n
+    - More maps based on OpenStreetMap cartography: © [openstreetmap.de](https://www.openstreetmap.de/), © [cyclosm.org](https://www.cyclosm.org/) and  © [opentopomap.org](https://www.opentopomap.org/).\n
     - Map Downloader supports maps from [Mapsforge](https://github.com/mapsforge), [OpenAndroMaps](https://www.openandromaps.org), [Freizeitkarte](https://www.freizeitkarte-osm.de/) and [Hylly](https://kartat.hylly.org/).\n
     - Routing © 2019 BRouter contributors ([MIT license](https://github.com/abrensch/brouter/blob/master/LICENSE))\n
 	</string>
@@ -184,6 +190,7 @@
     <!-- cache menu -->
     <string translatable="false" name="caches_map_mapswithme">Maps.me</string>
     <string translatable="false" name="cache_menu_mapswithme">Maps.me</string>
+    <string translatable="false" name="caches_menu_organicmaps">Organic Maps</string>
     <string translatable="false" name="faq_link"><a href="">faq.cgeo.org</a></string>
     <string translatable="false" name="website_link"><a href="">cgeo.org</a></string>
     <string translatable="false" name="twitter_link"><a href="">@android_GC</a></string>
@@ -192,14 +199,19 @@
     <string translatable="false" name="github_link"><a href="">github.com/cgeo/cgeo/issues</a></string>
     <string translatable="false" name="faq_link_full">https://faq.cgeo.org</string>
     <string translatable="false" name="manual_link_full">https://manual.cgeo.org</string>
+    <string translatable="false" name="changelog_full">https://github.com/cgeo/cgeo/blob/master/main/src/main/res/raw/changelog_full.md</string>
 
     <string translatable="false" name="ellipsis">…</string>
     <string translatable="false" name="triple_dash_vertical">┆</string>
 
-    <string translatable="false" name="equation_hint">a + b</string>
-    <string translatable="false" name="free_variable_hint">2 + 2</string>
-    <string translatable="false" name="empty_equation_result">_</string>
-    <string translatable="false" name="equation_error_result">*</string>
+    <!-- app startscreen config item names -->
+    <string-array translatable="false" name="settings_startscreen">
+        <item>@string/home_button</item>
+        <item>@string/stored_caches_button</item>
+        <item>@string/map_map</item>
+        <item>@string/advanced_search_button</item>
+        <item>@string/caches_nearby_button</item>
+    </string-array>
 
     <!-- websites and product names -->
     <string translatable="false" name="caches_map_locus">Locus</string>
@@ -221,10 +233,9 @@
     <string translatable="false" name="init_su">Geocaching.su</string>
     <string translatable="false" name="auth_su">geocaching.su</string>
     <string translatable="false" name="init_gcvote">GCvote.com</string>
+    <string translatable="false" name="init_bettercacher">BetterCacher.org</string>
     <string translatable="false" name="facebook_title">Facebook</string>
     <string translatable="false" name="twitter_title">Twitter</string>
-    <string translatable="false" name="init_twitter">Twitter</string>
-    <string translatable="false" name="auth_twitter">Twitter</string>
     <string translatable="false" name="cache_menu_whereyougo">WhereYouGo</string>
     <string translatable="false" name="cache_menu_pebble">Pebble</string>
     <string translatable="false" name="init_geokrety">GeoKrety.org</string>
@@ -262,6 +273,7 @@
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
     <string translatable="false" name="package_gcwizward">de.sman42.gc_wizard</string>
+    <string translatable="false" name="package_cruiser">gr.talent.cruiser</string>
 
 
     <!-- map server & other download urls -->
@@ -281,12 +293,12 @@
     <string translatable="false" name="mapserver_openandromaps_themes_voluntary_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/themes/voluntary/downloads/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_name">Freizeitkarte</string>
-    <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string>
+    <string translatable="false" name="mapserver_freizeitkarte_downloadurl">http://repository.freizeitkarte-osm.de/repository_freizeitkarte_android.xml</string><!-- cannot use https: here due to certificate not valid for subdomain -->
     <string translatable="false" name="mapserver_freizeitkarte_likeiturl">https://www.freizeitkarte-osm.de/android/de/impressum.html</string>
     <string translatable="false" name="mapserver_freizeitkarte_projecturl">https://www.freizeitkarte-osm.de/android/en/</string>
 
     <string translatable="false" name="mapserver_freizeitkarte_themes_name">Freizeitkarte Themes</string>
-    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/latest/</string>
+    <string translatable="false" name="mapserver_freizeitkarte_themes_downloadurl">http://download.freizeitkarte-osm.de/android/latest/</string><!-- cannot use https: here due to certificate not valid for subdomain -->
 
     <string translatable="false" name="mapserver_hylly_name">Hylly</string>
     <string translatable="false" name="mapserver_hylly_updatecheckurl">https://kartat.hylly.org/</string>
@@ -298,7 +310,7 @@
     <string translatable="false" name="mapserver_hylly_themes_downloadurl">https://kartat-dl.hylly.org/</string>
 
     <string translatable="false" name="brouter_name">BRouter</string>
-    <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
+    <string translatable="false" name="brouter_downloadurl">https://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
     <string translatable="false" name="mapserver_osmpaws_name">Paws</string>
@@ -313,10 +325,14 @@
     <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
     <string translatable="false" name="maptheme_legend_osmpaws">https://osm.paws.cz/legend_paws.php</string>
+    <string translatable="false" name="maptheme_legend_voluntary">https://voluntary.nichesite.org/key.html</string>
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>
 
     <!-- Help Ressources -->
     <string translatable="false" name="formula_syntax_url">https://manual.cgeo.org/en/cachevariables</string>
+
+    <!-- default marker -->
+    <string translatable="false" name="hyphen">-</string>
 </resources>

@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
-import cgeo.geocaching.location.GeoObject;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.IGeoDataProvider;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import java.util.ArrayList;
@@ -22,9 +22,6 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 
 abstract class AbstractRouteLayer extends Layer {
-    protected float width;
-    private Paint paint = null;
-    protected int lineColor = 0xD00000A0;
 
     // used for caching
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
@@ -32,21 +29,20 @@ abstract class AbstractRouteLayer extends Layer {
 
     private static class CachedRoute {
         private boolean isHidden = false;
-        private ArrayList<ArrayList<Geopoint>> track = null;
+        private List<List<Geopoint>> track = null;
         private Path path = null;
         private Point topLeftPoint = null;
+        private Paint paint = null;
+        protected int lineColor = 0xD00000A0;
     }
 
-    protected AbstractRouteLayer() {
-        width = MapLineUtils.getDefaultThinLineWidth();
-    }
+    protected AbstractRouteLayer() { }
 
-    public void updateRoute(final String key, final IGeoDataProvider r) {
+    public void updateRoute(final String key, final IGeoItemSupplier r, final int color, final int width) {
         if (!(r instanceof Route)) {
             return;
         }
         final Route route = (Route) r;
-        resetColor();
         synchronized (cache) {
             CachedRoute c = cache.get(key);
             if (c == null) {
@@ -55,6 +51,8 @@ abstract class AbstractRouteLayer extends Layer {
             }
             c.track = null;
             c.path = null;
+            c.paint = resetPaint(color, MapLineUtils.getWidthFromRaw(width, false));
+            c.lineColor = color;
             if (route != null) {
                 c.track = getAllPoints(route);
                 c.isHidden = route.isHidden();
@@ -62,12 +60,9 @@ abstract class AbstractRouteLayer extends Layer {
         }
     }
 
-    private static ArrayList<ArrayList<Geopoint>> getAllPoints(final Route route) {
-        final List<GeoObject> gos = route.getGeoData();
-        final ArrayList<ArrayList<Geopoint>> result = new ArrayList<>();
-        for (GeoObject go : gos) {
-            result.add(new ArrayList<>(go.getPoints()));
-        }
+    private static List<List<Geopoint>> getAllPoints(final Route route) {
+        final List<List<Geopoint>> result = new ArrayList<>();
+        GeoGroup.forAllPrimitives(route.getItem(), p -> result.add(new ArrayList<>(p.getPoints())));
         return result;
     }
 
@@ -77,12 +72,13 @@ abstract class AbstractRouteLayer extends Layer {
         }
     }
 
-    public void resetColor() {
-        paint = AndroidGraphicFactory.INSTANCE.createPaint();
+    public Paint resetPaint(final int lineColor, final float width) {
+        final Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
         paint.setStrokeWidth(width);
         paint.setStyle(Style.STROKE);
         paint.setColor(lineColor);
         paint.setTextSize(20);
+        return paint;
     }
 
     public void setHidden(final String key, final boolean isHidden) {
@@ -105,7 +101,7 @@ abstract class AbstractRouteLayer extends Layer {
                         translateRouteToPath(mapSize, topLeftPoint, c);
                     }
                     if (null != c.path) {
-                        canvas.drawPath(c.path, paint);
+                        canvas.drawPath(c.path, c.paint);
                     }
                 }
             }
@@ -117,13 +113,13 @@ abstract class AbstractRouteLayer extends Layer {
         c.topLeftPoint = topLeftPoint;
         c.path = null;
 
-        final Iterator<ArrayList<Geopoint>> segmentIterator = c.track.iterator();
+        final Iterator<List<Geopoint>> segmentIterator = c.track.iterator();
         if (!segmentIterator.hasNext()) {
             return;
         }
 
         c.path = AndroidGraphicFactory.INSTANCE.createPath();
-        ArrayList<Geopoint> segment = segmentIterator.next();
+        List<Geopoint> segment = segmentIterator.next();
         while (segment != null) {
             final Iterator<Geopoint> geopointIterator = segment.iterator();
             Geopoint geopoint = geopointIterator.next();

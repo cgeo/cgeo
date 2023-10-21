@@ -16,10 +16,12 @@ import cgeo.geocaching.utils.Log;
 
 import java.io.Closeable;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
@@ -31,12 +33,12 @@ public final class NodesCache implements Closeable {
     private final BExpressionContextWay expCtxWay;
     private final int lookupVersion;
     private String currentFileName;
-    private final HashMap<String, PhysicalFile> fileCache;
+    private final Map<String, PhysicalFile> fileCache;
     private final DataBuffers dataBuffers;
     private final OsmFile[][] fileRows;
     private long cacheSum = 0;
     private long maxmemtiles;
-    private final boolean detailed;
+    private final boolean detailed; // NOPMD used in constructor
 
     private boolean garbageCollectionEnabled = false;
     private boolean ghostCleaningDone = false;
@@ -190,6 +192,8 @@ public final class NodesCache implements Closeable {
                 ghostWakeup += segment.getDataSize();
             }
             return segment;
+        } catch (IOException re) {
+            throw new RuntimeException(re.getMessage(), re); // NOPMD
         } catch (RuntimeException re) {
             throw re;
         } catch (Exception e) {
@@ -287,21 +291,37 @@ public final class NodesCache implements Closeable {
     public void matchWaypointsToNodes(final List<MatchedWaypoint> unmatchedWaypoints, final double maxDistance, final OsmNodePairSet islandNodePairs) {
         waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, maxDistance, islandNodePairs);
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
-            preloadPosition(mwp.waypoint);
+            int cellsize = 12500;
+            preloadPosition(mwp.waypoint, cellsize);
+            // get a second chance
+            if (mwp.crosspoint == null) {
+                cellsize = 1000000 / 32;
+                preloadPosition(mwp.waypoint, cellsize);
+            }
         }
 
         if (firstFileAccessFailed) {
             throw new IllegalArgumentException("datafile " + firstFileAccessName + " not found");
         }
-        for (MatchedWaypoint mwp : unmatchedWaypoints) {
+        final int len = unmatchedWaypoints.size();
+        for (int i = 0; i < len; i++) {
+            final MatchedWaypoint mwp = unmatchedWaypoints.get(i);
             if (mwp.crosspoint == null) {
-                throw new IllegalArgumentException(mwp.name + "-position not mapped in existing datafile");
+                if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).direct) {
+                    mwp.crosspoint = new OsmNode(mwp.waypoint.ilon, mwp.waypoint.ilat);
+                    mwp.direct = true;
+                } else {
+                    throw new IllegalArgumentException(mwp.name + "-position not mapped in existing datafile");
+                }
+            }
+            if (unmatchedWaypoints.size() > 1 && i == unmatchedWaypoints.size() - 1 && unmatchedWaypoints.get(i - 1).direct) {
+                mwp.crosspoint = new OsmNode(mwp.waypoint.ilon, mwp.waypoint.ilat);
+                mwp.direct = true;
             }
         }
     }
 
-    private void preloadPosition(final OsmNode n) {
-        final int d = 12500;
+    private void preloadPosition(final OsmNode n, final int d) {
         firstFileAccessFailed = false;
         firstFileAccessName = null;
         loadSegmentFor(n.ilon, n.ilat);

@@ -8,26 +8,20 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ILoggingWithFavorites;
-import cgeo.geocaching.connector.ImageResult;
-import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
-import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
 import cgeo.geocaching.databinding.LogcacheTrackableItemBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
-import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
@@ -38,18 +32,15 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
-import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,7 +52,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -332,7 +322,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(logEntry.reportProblem);
         cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
         binding.favoriteCheck.setChecked(logEntry.favorite);
-        binding.tweet.setChecked(logEntry.tweet);
+        //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
+        if (logEntry.favorite) {
+            binding.favoriteCheck.setVisibility(View.VISIBLE);
+        }
         binding.logPassword.setText(logEntry.password);
 
         imageListFragment.setImages(logEntry.logImages);
@@ -349,7 +342,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(binding.favoriteCheck.isChecked())
-                .setTweet(binding.tweet.isChecked())
                 .setPassword(binding.logPassword.getText().toString());
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
@@ -366,9 +358,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
             final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
+            binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
             if (favoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
-                binding.favoriteCheck.setText(res.getQuantityString(R.plurals.fav_points_remaining, favoritePoints, favoritePoints));
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
@@ -387,7 +379,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(ReportProblemType.NO_PROBLEM);
         cacheVotingBar.setRating(cache.getMyVote());
         imageListFragment.clearImages();
-        binding.tweet.setChecked(true);
         binding.favoriteCheck.setChecked(false);
         binding.logPassword.setText(StringUtils.EMPTY);
 
@@ -411,6 +402,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     public void finish(final SaveMode saveMode) {
         saveLog(saveMode);
+        if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
+            Settings.setLastCacheLog(lastSavedState.log);
+        }
         super.finish();
     }
 
@@ -432,7 +426,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     public void refreshGui() {
-        updateTweetBox(logType.get());
         updateLogPasswordBox(logType.get());
         cacheVotingBar.validateVisibility(cache, logType.get());
         initializeFavoriteCheck();
@@ -443,14 +436,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void showProgress(final boolean loading) {
         readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-    }
-
-    private void updateTweetBox(final LogType type) {
-        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            binding.tweet.setVisibility(View.VISIBLE);
-        } else {
-            binding.tweet.setVisibility(View.GONE);
-        }
     }
 
     private void updateLogPasswordBox(final LogType type) {
@@ -480,7 +465,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.logOffline(LogCacheActivity.this, logEntry);
-                        Settings.setLastCacheLog(logEntry.log);
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                     }
@@ -513,13 +497,16 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            if (TextUtils.getNormalizedStringLength(binding.log.getText().toString()) <= LOG_MAX_LENGTH) {
-                sendLogAndConfirm();
+            final int logLength = TextUtils.getNormalizedStringLength(binding.log.getText().toString());
+            if (logLength > 0) {
+                if (logLength <= LOG_MAX_LENGTH) {
+                    sendLogAndConfirm();
+                } else {
+                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                }
             } else {
-                Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
             }
-        } else if (itemId == R.id.menu_image) {
-            imageListFragment.startAddImageDialog();
         } else if (itemId == R.id.save) {
             finish(SaveMode.FORCE);
         } else if (itemId == R.id.clear) {
@@ -554,14 +541,64 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     private void sendLogInternal() {
         lastSavedState = getEntryFromView();
-        new Poster(this, res.getString(R.string.log_saving)).execute(currentLogText(), currentLogPassword());
+        final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
+        taskInterface.loggingManager = loggingManager;
+        taskInterface.geocache = cache;
+        taskInterface.trackables = trackables;
+        taskInterface.binding = binding;
+        taskInterface.logType = logType.get();
+        taskInterface.reportProblemType = reportProblem.get();
+        taskInterface.imageListFragment = imageListFragment;
+        taskInterface.cacheVotingBar = cacheVotingBar;
+        taskInterface.date = date;
+        new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
+        if (Settings.removeFromRouteOnLog()) {
+            DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
+        }
+    }
+
+    protected static class LogCacheTaskInterface {
+        public ILoggingManager loggingManager;
+        public Geocache geocache;
+        public Set<TrackableLog> trackables;
+        public LogcacheActivityBinding binding;
+        public LogType logType;
+        public ReportProblemType reportProblemType;
+        public ImageListFragment imageListFragment;
+        public CacheVotingBar cacheVotingBar;
+        public DateTimeEditor date;
+    }
+
+    private void onPostExecuteInternal(final StatusResult statusResult) {
+        if (statusResult.getStatusCode() == StatusCode.NO_ERROR) {
+            //reset Gui and all values
+            resetValues();
+            refreshGui();
+            lastSavedState = getEntryFromView();
+
+            imageListFragment.clearImages();
+            imageListFragment.adjustImagePersistentState();
+
+            showToast(res.getString(R.string.info_log_posted));
+            // Prevent from saving log after it was sent successfully.
+            finish(LogCacheActivity.SaveMode.SKIP);
+        } else if (statusResult.getStatusCode() == StatusCode.LOG_SAVED) {
+            showToast(res.getString(R.string.info_log_saved));
+            finish(LogCacheActivity.SaveMode.SKIP);
+        } else if (!LogCacheActivity.this.isFinishing()) {
+            SimpleDialog.of(LogCacheActivity.this)
+                    .setTitle(R.string.info_log_post_failed)
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
+                    .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
+                    .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(LogCacheActivity.SaveMode.FORCE));
+
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
@@ -685,202 +722,4 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
     }
 
-    private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
-
-        Poster(final Activity activity, final String progressMessage) {
-            super(activity, res.getString(imageListFragment.getImages().isEmpty() ?
-                    R.string.log_posting_log :
-                    R.string.log_saving_and_uploading), progressMessage);
-        }
-
-        @Override
-        protected StatusCode doInBackgroundInternal(final String[] logTexts) {
-
-            final String log = logTexts[0];
-            final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
-
-            final ContextLogger cLog = new ContextLogger("LCA.Poster.doInBackgroundInternal(%s)", log);
-            try {
-                final LogResult logResult;
-                if (loggingManager instanceof ILoggingWithFavorites) {
-                    logResult = ((ILoggingWithFavorites) loggingManager).postLog(logType.get(), date.getCalendar(),
-                            log, logPwd, new ArrayList<>(trackables), reportProblem.get(), binding.favoriteCheck.isChecked());
-                } else {
-                    logResult = loggingManager.postLog(logType.get(), date.getCalendar(),
-                            log, logPwd, new ArrayList<>(trackables), reportProblem.get());
-                }
-                ImageResult imageResult = null;
-
-                if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
-                    // update geocache in DB
-                    if (logType.get().isFoundLog()) {
-                        cache.setFound(true);
-                        cache.setVisitedDate(date.getDate().getTime());
-                    } else if (logType.get() == LogType.DIDNT_FIND_IT) {
-                        cache.setDNF(true);
-                        cache.setVisitedDate(date.getDate().getTime());
-                    }
-                    DataStore.saveChangedCache(cache);
-
-                    final LogEntry.Builder logBuilder = new LogEntry.Builder()
-                            .setServiceLogId(logResult.getServiceLogId())
-                            .setDate(date.getDate().getTime())
-                            .setLogType(logType.get())
-                            .setLog(log)
-                            .setFriend(true);
-
-                    // login credentials may vary from actual username
-                    // Get correct author name from connector (if applicable)
-                    final IConnector cacheConnector = ConnectorFactory.getConnector(cache);
-                    if (cacheConnector instanceof ILogin) {
-                        final String username = ((ILogin) cacheConnector).getUserName();
-                        if (StringUtils.isNotBlank(username)) {
-                            logBuilder.setAuthor(username);
-                        }
-                    }
-
-                    // Posting image
-                    if (!imageListFragment.getImages().isEmpty()) {
-                        publishProgress(res.getString(R.string.log_posting_image));
-                        int pos = 0;
-                        for (Image img : imageListFragment.getImages()) {
-
-                            //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
-                            final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale, 75);
-                            final Image imgToSend;
-                            if (imageFileForUpload == null) {
-                                imgToSend = null;
-                                imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
-                            } else {
-                                imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
-                                imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
-                            }
-                            if (!isOkResult(imageResult)) {
-                                break;
-                            }
-
-                            final String uploadedImageUrl = imageResult.getImageUri();
-                            if (StringUtils.isNotEmpty(uploadedImageUrl)) {
-                                logBuilder.addLogImage(imgToSend.buildUpon()
-                                        .setUrl(uploadedImageUrl)
-                                        .build());
-                            }
-                            //delete temp file for upload
-                            if (!imageFileForUpload.delete()) {
-                                Log.i("Temporary image not deleted: " + imageFileForUpload);
-                            }
-                        }
-
-                        if (isOkResult(imageResult)) {
-                            //delete all images in list (this will work for legacy images)
-                            for (Image img : imageListFragment.getImages()) {
-                                ImageUtils.deleteImage(img.getUri());
-                            }
-                        }
-                    }
-
-                    // update logs in DB
-                    final List<LogEntry> newLogs = new ArrayList<>(cache.getLogs());
-                    final LogEntry logNow = logBuilder.build();
-                    newLogs.add(0, logNow);
-                    if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
-                        final LogEntry logProblem = logBuilder.setLog(getString(reportProblem.get().textId)).setLogImages(Collections.emptyList()).setLogType(reportProblem.get().logType).build();
-                        newLogs.add(0, logProblem);
-                    }
-                    DataStore.saveLogs(cache.getGeocode(), newLogs, true);
-
-                    // update offline log in DB
-                    cache.clearOfflineLog();
-
-                    if (logType.get() == LogType.FOUND_IT && binding.tweet.isChecked() && binding.tweet.getVisibility() == View.VISIBLE) {
-                        publishProgress(res.getString(R.string.log_posting_twitter));
-                        Twitter.postTweetCache(geocode, logNow);
-                    }
-
-                    // Post cache rating
-                    if (cacheConnector instanceof IVotingCapability) {
-                        final IVotingCapability votingConnector = (IVotingCapability) cacheConnector;
-                        if (votingConnector.supportsVoting(cache) && votingConnector.isValidRating(cacheVotingBar.getRating())) {
-                            publishProgress(res.getString(R.string.log_posting_vote));
-                            if (votingConnector.postVote(cache, cacheVotingBar.getRating())) {
-                                cache.setMyVote(cacheVotingBar.getRating());
-                                DataStore.saveChangedCache(cache);
-                            } else {
-                                showToast(res.getString(R.string.err_vote_send_rating));
-                            }
-                        }
-                    }
-
-
-                    // Posting Generic Trackables
-                    for (final TrackableConnector connector : ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
-                        final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
-                        if (manager != null) {
-                            // Filter trackables logs by action and brand
-                            final Set<TrackableLog> trackablesMoved = new HashSet<>();
-                            for (final TrackableLog trackableLog : trackables) {
-                                if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
-                                    trackablesMoved.add(trackableLog);
-                                }
-                            }
-
-                            // Posting trackables logs
-                            int trackableLogcounter = 1;
-                            for (final TrackableLog trackableLog : trackablesMoved) {
-                                publishProgress(res.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
-                                manager.postLog(cache, trackableLog, date.getCalendar(), log);
-                                trackableLogcounter++;
-                            }
-                        }
-                    }
-                }
-
-                // if an image could not be uploaded, use its error as final state
-                if (!isOkResult(imageResult)) {
-                    return imageResult.getPostResult();
-                }
-                return logResult.getPostLogResult();
-            } catch (final RuntimeException e) {
-                cLog.setException(e);
-                Log.e("LogCacheActivity.Poster.doInBackgroundInternal", e);
-            } finally {
-                cLog.endLog();
-            }
-
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        private boolean isOkResult(final ImageResult imageResult) {
-            return imageResult == null || imageResult.getPostResult() == StatusCode.NO_ERROR || imageResult.getPostResult() == StatusCode.LOG_SAVED;
-        }
-
-        @Override
-        protected void onPostExecuteInternal(final StatusCode status) {
-            if (status == StatusCode.NO_ERROR) {
-
-                //reset Gui and all values
-                resetValues();
-                refreshGui();
-                lastSavedState = getEntryFromView();
-
-                imageListFragment.clearImages();
-                imageListFragment.adjustImagePersistentState();
-
-                showToast(res.getString(R.string.info_log_posted));
-                // Prevent from saving log after it was sent successfully.
-                finish(SaveMode.SKIP);
-            } else if (status == StatusCode.LOG_SAVED) {
-                showToast(res.getString(R.string.info_log_saved));
-                finish(SaveMode.SKIP);
-            } else {
-                SimpleDialog.of(activity)
-                        .setTitle(R.string.info_log_post_failed)
-                        .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
-                                TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
-                        .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
-                        .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(SaveMode.FORCE));
-
-            }
-        }
-    }
 }

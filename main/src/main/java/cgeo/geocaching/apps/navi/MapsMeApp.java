@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps.navi;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -72,8 +73,7 @@ class MapsMeApp extends AbstractPointNavigationApp {
 
     @Override
     public boolean isInstalled() {
-        // the library can handle the app not being installed
-        return true;
+        return MapsWithMeApi.isMapsWithMeInstalled(CgeoApplication.getInstance());
     }
 
     private static Activity getActivity(final Context context) {

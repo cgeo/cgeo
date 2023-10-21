@@ -30,6 +30,6 @@ public class AboutActivityTest {
     public void displayChangeLog() {
         CgeoTestUtils.executeForActivity(AboutActivity.class,
                 intent -> intent.putExtra(AboutActivity.EXTRA_ABOUT_STARTPAGE, AboutActivity.Page.CHANGELOG.id),
-                scenario -> onView(withId(R.id.changelog_github)).check(matches(withText(LocalizationUtils.getString(R.string.changelog_github)))));
+                scenario -> onView(withId(R.id.changelog_github)).check(matches(withText(LocalizationUtils.getString(R.string.about_changelog_full)))));
     }
 }

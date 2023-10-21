@@ -4,6 +4,7 @@ import cgeo.geocaching.brouter.util.BitCoderContext;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
@@ -16,7 +17,7 @@ import java.util.PriorityQueue;
  * but doesn't do anything at pass1
  */
 public final class TagValueCoder {
-    private HashMap<TagValueSet, TagValueSet> identityMap;
+    private Map<TagValueSet, TagValueSet> identityMap;
     private Object tree;
     private BitCoderContext bc;
     private int pass;

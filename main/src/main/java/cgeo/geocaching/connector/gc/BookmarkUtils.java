@@ -34,7 +34,7 @@ public class BookmarkUtils {
         final List<GCList> lists = new ArrayList<>();
 
         // add "<create new list>" PseudoList
-        lists.add(0, new GCList(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false));
+        lists.add(0, new GCList(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false, null, null));
 
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
 
@@ -62,16 +62,16 @@ public class BookmarkUtils {
         if (selection.getGuid().equals(NEW_LIST_GUID)) {
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(-1, null, null, null,
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                        final String guid = GCParser.createBookmarkList(name);
+                        final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
                         if (guid == null) {
                             ActivityMixin.showToast(context, context.getString(R.string.search_bookmark_create_new_failed));
                             return;
                         }
-                        showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches));
+                        showResult(context, GCParser.addCachesToBookmarkList(guid, geocaches).blockingGet());
                     }));
         } else {
             AndroidRxUtils.networkScheduler.scheduleDirect(
-                    () -> showResult(context, GCParser.addCachesToBookmarkList(selection.getGuid(), geocaches)));
+                    () -> showResult(context, GCParser.addCachesToBookmarkList(selection.getGuid(), geocaches).blockingGet()));
         }
     }
 

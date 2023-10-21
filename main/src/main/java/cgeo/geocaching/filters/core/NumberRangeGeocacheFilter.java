@@ -2,19 +2,22 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collection;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>> extends BaseGeocacheFilter {
 
     private final NumberRangeFilter<T> numberRangeFilter;
 
-    public NumberRangeGeocacheFilter(final Func1<String, T> numberParser) {
-        numberRangeFilter = new NumberRangeFilter<>(numberParser);
+    public NumberRangeGeocacheFilter(final Func1<String, T> numberParser, final Func1<Float, T> numberConverter) {
+        numberRangeFilter = new NumberRangeFilter<>(numberParser, numberConverter);
     }
 
     public void setSpecialNumber(final T specialNumber, final Boolean include) {
@@ -90,13 +93,13 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         numberRangeFilter.setConfig(config.getDefaultList());
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = new ExpressionConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putDefaultList(numberRangeFilter.getConfig());
         return config;
     }
@@ -125,4 +128,14 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         return numberRangeFilter.getUserDisplayableConfig();
     }
 
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        return numberRangeFilter.getJsonConfig();
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode config) {
+        numberRangeFilter.setJsonConfig(config);
+    }
 }

@@ -28,7 +28,7 @@ final class OsmFile {
     private int cellsize;
     private int indexsize;
 
-    OsmFile(final PhysicalFile rafile, final int lonDegree, final int latDegree, final DataBuffers dataBuffers) throws Exception {
+    OsmFile(final PhysicalFile rafile, final int lonDegree, final int latDegree, final DataBuffers dataBuffers) throws IOException {
         this.lonDegree = lonDegree;
         this.latDegree = latDegree;
         final int lonMod5 = lonDegree % 5;
@@ -95,7 +95,7 @@ final class OsmFile {
         return idx == -1 ? indexsize : posIdx[idx];
     }
 
-    public int getDataInputForSubIdx(final int subIdx, final byte[] iobuffer) throws Exception {
+    public int getDataInputForSubIdx(final int subIdx, final byte[] iobuffer) throws IOException {
         final int startPos = getPosIdx(subIdx - 1);
         final int endPos = getPosIdx(subIdx);
         final int size = endPos - startPos;
@@ -106,7 +106,7 @@ final class OsmFile {
     }
 
     public MicroCache createMicroCache(final int lonIdx, final int latIdx, final DataBuffers dataBuffers, final TagValueValidator wayValidator,
-                                       final WaypointMatcher waypointMatcher, final boolean reallyDecode, final OsmNodesMap hollowNodes) throws Exception {
+                                       final WaypointMatcher waypointMatcher, final boolean reallyDecode, final OsmNodesMap hollowNodes) throws IOException {
         final int subIdx = (latIdx - divisor * latDegree) * divisor + (lonIdx - divisor * lonDegree);
 
         byte[] ab = dataBuffers.iobuffer;

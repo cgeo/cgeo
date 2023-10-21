@@ -5,10 +5,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class LogResult {
+public class LogResult extends StatusResult {
 
-    @NonNull
-    private final StatusCode postLogResult;
     @NonNull
     private final String logId;
     @Nullable
@@ -19,14 +17,9 @@ public class LogResult {
     }
 
     public LogResult(@NonNull final StatusCode postLogResult, @NonNull final String logId, @Nullable final String serviceLogId) {
-        this.postLogResult = postLogResult;
+        super(postLogResult);
         this.logId = logId;
         this.serviceLogId = serviceLogId;
-    }
-
-    @NonNull
-    public StatusCode getPostLogResult() {
-        return postLogResult;
     }
 
     @NonNull
