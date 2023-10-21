@@ -25,10 +25,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MapDistanceDrawerCommons {
-    private static final String STRAIGHT_LINE_SYMBOL = Character.toString((char) 0x007C);
-    private static final String WAVY_LINE_SYMBOL = Character.toString((char) 0x2307);
+import androidx.core.util.Pair;
 
+public class MapDistanceDrawerCommons {
     private final LinearLayout distances1;
     private final LinearLayout distances2;
     private final TextView distanceSupersizeView;
@@ -40,10 +39,11 @@ public class MapDistanceDrawerCommons {
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
 
-    private String realDistanceInfo = "";
-    private String distanceInfo = "";
-    private String routingInfo = "";
-    private String elevationInfo = "";
+    private final Pair<Integer, String> emptyInfo = new Pair<>(0, "");
+    private Pair<Integer, String> realDistanceInfo = emptyInfo;
+    private Pair<Integer, String> distanceInfo = emptyInfo;
+    private Pair<Integer, String> routingInfo = emptyInfo;
+    private Pair<Integer, String> elevationInfo = emptyInfo;
 
     public MapDistanceDrawerCommons(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -64,9 +64,10 @@ public class MapDistanceDrawerCommons {
         final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && !routingModeStraight;
         bothViewsNeeded = showBothDistances && showRealDistance;
 
-        realDistanceInfo = showRealDistance ? (showBothDistances ? WAVY_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(realDistance) : "";
-        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? (showBothDistances ? STRAIGHT_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(distance) : "";
-        routingInfo = routeDistance > 0.0f ? Units.getDistanceFromKilometers(routeDistance) : "";
+        realDistanceInfo = showRealDistance ? new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance)) : emptyInfo;
+        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance)) : emptyInfo;
+        routingInfo = routeDistance > 0.0f ? new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)) : emptyInfo;
+
         updateDistanceViews();
     }
 
