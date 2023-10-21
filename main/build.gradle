@@ -485,9 +485,6 @@ dependencies {
     implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
-// un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
-apply plugin: 'de.mobilej.unmock'
-
 // define objects for files/folders outside tasks
 File privatePropertiesFile = rootProject.file('private.properties')
 String tempatesDirectory = "templates"
