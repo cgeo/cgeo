@@ -23,10 +23,14 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
 
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.core.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -39,10 +43,6 @@ public class UnifiedTargetAndDistancesHandler {
     protected String targetGeocode = null;
     protected Geopoint lastNavTarget = null;
 
-    private static final String STRAIGHT_LINE_SYMBOL = Character.toString((char) 0x007C);
-    private static final String WAVY_LINE_SYMBOL = Character.toString((char) 0x2307);
-    private static final String ELEVATION_SYMBOL = Character.toString((char) 0x25e2);
-
     private final LinearLayout distances1;
     private final LinearLayout distances2;
     private final TextView distanceSupersizeView;
@@ -54,10 +54,11 @@ public class UnifiedTargetAndDistancesHandler {
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
 
-    private String realDistanceInfo = "";
-    private String distanceInfo = "";
-    private String routingInfo = "";
-    private String elevationInfo = "";
+    private final Pair<Integer, String> emptyInfo = new Pair<>(0, "");
+    private Pair<Integer, String> realDistanceInfo = emptyInfo;
+    private Pair<Integer, String>  distanceInfo = emptyInfo;
+    private Pair<Integer, String>  routingInfo = emptyInfo;
+    private Pair<Integer, String>  elevationInfo = emptyInfo;
 
     UnifiedTargetAndDistancesHandler(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -80,9 +81,9 @@ public class UnifiedTargetAndDistancesHandler {
         final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && !routingModeStraight;
         bothViewsNeeded = showBothDistances && showRealDistance;
 
-        realDistanceInfo = showRealDistance ? (showBothDistances ? WAVY_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(realDistance) : "";
-        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? (showBothDistances ? STRAIGHT_LINE_SYMBOL + " " : "") + Units.getDistanceFromKilometers(distance) : "";
-        routingInfo = routeDistance > 0.0f ? Units.getDistanceFromKilometers(routeDistance) : "";
+        realDistanceInfo = showRealDistance ? new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance)) : emptyInfo;
+        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance)) : emptyInfo;
+        routingInfo = routeDistance > 0.0f ? new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)) : emptyInfo;
         updateDistanceViews();
     }
 
@@ -103,17 +104,17 @@ public class UnifiedTargetAndDistancesHandler {
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
-            final String distanceInfo, final String realDistanceInfo, final String routingInfo, final String elevationInfo,
+            final Pair<Integer, String> distanceInfo, final Pair<Integer, String>  realDistanceInfo, final Pair<Integer, String> routingInfo, final Pair<Integer, String> elevationInfo,
             final LinearLayout distances1, final LinearLayout distances2,
             final TextView distanceSupersizeView, final TextView targetView
     ) {
         final int supersize = Settings.getSupersizeDistance();
-        String supersizeInfo = "";
-        final ArrayList<String>[] data = new ArrayList[2];
+        Pair<Integer, String> supersizeInfo = new Pair<>(0, "");
+        final ArrayList<Pair<Integer, String>>[] data = new ArrayList[2];
         data[0] = new ArrayList<>();
         data[1] = new ArrayList<>();
 
-        if (!distanceInfo.isEmpty()) {
+        if (!distanceInfo.second.isEmpty()) {
             if (supersize == 2) {
                 supersizeInfo = distanceInfo;
             } else {
@@ -121,7 +122,7 @@ public class UnifiedTargetAndDistancesHandler {
             }
         }
 
-        if (!realDistanceInfo.isEmpty()) {
+        if (!realDistanceInfo.second.isEmpty()) {
             if (supersize == 1) {
                 supersizeInfo = realDistanceInfo;
             } else {
@@ -129,12 +130,12 @@ public class UnifiedTargetAndDistancesHandler {
             }
         }
 
-        if (!routingInfo.isEmpty()) {
-            data[data[0].size() > 0 && !supersizeInfo.isEmpty() ? 1 : 0].add(routingInfo);
+        if (!routingInfo.second.isEmpty()) {
+            data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(routingInfo);
         }
 
-        if (!elevationInfo.isEmpty()) {
-            data[data[0].size() > 0 && !supersizeInfo.isEmpty() ? 1 : 0].add(elevationInfo);
+        if (!elevationInfo.second.isEmpty()) {
+            data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(elevationInfo);
         }
 
         syncViews(distances1, data[0]);
@@ -142,7 +143,7 @@ public class UnifiedTargetAndDistancesHandler {
         syncViews(distances2, data[1]);
         distances2.setVisibility(data[1].size() > 0 ? View.VISIBLE : View.GONE);
 
-        if (supersizeInfo.isEmpty()) {
+        if (supersizeInfo.second.isEmpty()) {
             distanceSupersizeView.setVisibility(View.GONE);
             targetView.setBackgroundResource(R.drawable.icon_bcg);
             distances1.setBackgroundResource(R.drawable.icon_bcg);
@@ -150,23 +151,24 @@ public class UnifiedTargetAndDistancesHandler {
             distanceSupersizeView.setVisibility(View.VISIBLE);
             targetView.setBackground(null);
             distances1.setBackgroundResource(0);
-            distanceSupersizeView.setText(supersizeInfo);
+            TextParam.text(supersizeInfo.second).setImage(ImageParam.id(supersizeInfo.first)).setImageTint(-1).applyTo(distanceSupersizeView);
         }
     }
 
     /** syncs actual children of LinearLayots with current data, removes/creates views "on the fly" */
-    private static void syncViews(final LinearLayout ll, final ArrayList<String> data) {
+    private static void syncViews(final LinearLayout ll, final ArrayList<Pair<Integer, String>> data) {
         final int existing = ll.getChildCount();
         int count = 0;
-        for (String info : data) {
+        for (Pair<Integer, String> info : data) {
+            final TextView tv;
             if (count < existing) {
-                ((TextView) ll.getChildAt(count)).setText(info);
+                tv = (TextView) ll.getChildAt(count);
             } else {
-                final TextView tv = new TextView(ll.getContext(), null, 0, R.style.map_distanceinfo_no_background);
-                tv.setText(info);
+                tv = new TextView(ll.getContext(), null, 0, R.style.map_distanceinfo_no_background);
                 tv.setVisibility(View.VISIBLE);
                 ll.addView(tv);
             }
+            TextParam.text(info.second).setImage(ImageParam.id(info.first)).setImageTint(-1).applyTo(tv);
             count++;
         }
         for (int i = count; i < existing; i++) {
@@ -181,10 +183,10 @@ public class UnifiedTargetAndDistancesHandler {
         updateDistanceViews();
     }
 
-    public static String buildElevationInfo(final float elevationFromRouting, final float elevationFromGNSS) {
+    public static Pair<Integer, String> buildElevationInfo(final float elevationFromRouting, final float elevationFromGNSS) {
         // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
         final String temp = !Float.isNaN(elevationFromRouting) ? String.format(Locale.getDefault(), "%.1f", elevationFromRouting) : !Float.isNaN(elevationFromGNSS) ? String.format(Locale.getDefault(), "%.1f", elevationFromGNSS) : "";
-        return StringUtils.isBlank(temp) ? "" : ELEVATION_SYMBOL + " " + temp + "m";
+        return new Pair<>(R.drawable.elevation, !StringUtils.isBlank(temp) ? temp + "m" : "");
     }
 
     // target handling ----------------------------------------------------------------------------------------------

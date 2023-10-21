@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -45,6 +46,7 @@ public class TextParam {
 
     private ImageParam image;
     private int imageSizeInDp = -1;
+    @ColorInt private int imageTintColor = 1;
 
 
     /**
@@ -118,6 +120,14 @@ public class TextParam {
         return this;
     }
 
+    /**
+     * set tint color for compound image
+     */
+    public TextParam setImageTint(@ColorInt final int imageTintColor) {
+        this.imageTintColor = imageTintColor;
+        return this;
+    }
+
     private TextParam(@StringRes final int textId, final CharSequence text, final TextParam[] concatTexts, final Object... params) {
         this.textId = textId;
         this.text = text;
@@ -138,7 +148,7 @@ public class TextParam {
      * Applies the current settings of this TextParam to a textview.
      * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
      * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
-     * * Sets text returned by {@link #getText(Co ntext)}
+     * * Sets text returned by {@link #getText(Context)}
      * * Calls {@link #adjust(TextView, boolean)} on the textview
      */
     public void applyTo(@Nullable final TextView view, final boolean forceNoMovement) {
@@ -227,6 +237,13 @@ public class TextParam {
                 view.setCompoundDrawables(imageDrawable, null, null, null);
             }
 
+            // set image tint (if given)
+            if (imageTintColor != 1) {
+                final Drawable[] d = view.getCompoundDrawables();
+                if (d.length > 0) {
+                    d[0].setTint(imageTintColor);
+                }
+            }
             //Add margin between image and text (support various screen densities)
             view.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
         }
