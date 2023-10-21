@@ -493,7 +493,7 @@ String keysName = "keys.xml"
 File templatesFile = project.file(tempatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
 File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
-String adb = project.android.getAdbExecutable().absolutePath
+String adb = android.getAdbExecutable().absolutePath
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
