@@ -493,6 +493,15 @@ dependencies {
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
 apply plugin: 'de.mobilej.unmock'
 
+// define strings for files/folders outside tasks
+File privatePropertiesFile = rootProject.file('private.properties')
+String tempatesDirectory = "templates"
+String keysDirectory = "src/main/res/values"
+String keysName = "keys.xml"
+File templatesFile = project.file(tempatesDirectory + "/" + keysName)
+File keysFile = project.file(keysDirectory + "/" + keysName)
+File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
+
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
     preBuild.dependsOn("verifyCgeoKeys")
@@ -502,16 +511,14 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        File keysFile = project.file("src/main/res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
-            File propertiesFile = rootProject.file("private.properties")
-            if (propertiesFile.exists()) {
+            if (privatePropertiesFile.exists()) {
                 copy {
-                    from "templates/keys.xml"
-                    into ("src/main/res/values")
+                    from templatesFile
+                    into keysDirectory
                     Properties properties = new Properties()
-                    propertiesFile.withInputStream {
+                    privatePropertiesFile.withInputStream {
                         properties.load(it)
                     }
                     filter(ReplaceTokens, tokens: properties)
@@ -606,7 +613,6 @@ tasks.register('testDebug') {
  * signing of release APK, use a properties file like in templates/private.properties
  */
 // dynamically load the signing values from private.properties
-File privatePropertiesFile = rootProject.file('private.properties')
 if (privatePropertiesFile.exists()) {
     Properties properties = new Properties()
     properties.load(new FileInputStream(privatePropertiesFile))
@@ -624,7 +630,7 @@ if (privatePropertiesFile.exists()) {
 // check existence of private properties, show an error message
 tasks.register('verifyPrivateProperties') {
     doLast {
-        if (!rootProject.file('private.properties').exists()) {
+        if (!privatePropertiesFile.exists()) {
             throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
         }
     }
@@ -634,8 +640,7 @@ tasks.register('verifyPrivateProperties') {
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
     doFirst {
-        File preferences = file('cgeo.geocaching_preferences.xml')
-        if (preferences.exists()) {
+        if (preferencesFile.exists()) {
             try {
                 project.exec {
                     executable = project.android.getAdbExe().toString()
