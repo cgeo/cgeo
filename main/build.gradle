@@ -480,17 +480,17 @@ dependencies {
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
-    //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
+    //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
     //See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 }
 
 // define objects for files/folders outside tasks
 File privatePropertiesFile = rootProject.file('private.properties')
-String tempatesDirectory = "templates"
+String templatesDirectory = "templates"
 String keysDirectory = "src/main/res/values"
 String keysName = "keys.xml"
-File templatesFile = project.file(tempatesDirectory + "/" + keysName)
+File templatesFile = project.file(templatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
 File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
 String adb = android.getAdbExecutable().absolutePath
@@ -589,7 +589,6 @@ android.applicationVariants.configureEach { variant ->
                 }
             }
         }
-
     }
 }
 
