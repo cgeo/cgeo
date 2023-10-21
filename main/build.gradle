@@ -488,7 +488,7 @@ dependencies {
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
 apply plugin: 'de.mobilej.unmock'
 
-// define strings for files/folders outside tasks
+// define objects for files/folders outside tasks
 File privatePropertiesFile = rootProject.file('private.properties')
 String tempatesDirectory = "templates"
 String keysDirectory = "src/main/res/values"
@@ -496,6 +496,7 @@ String keysName = "keys.xml"
 File templatesFile = project.file(tempatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
 File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
+String adb = project.android.getAdbExecutable().absolutePath
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -582,7 +583,7 @@ android.applicationVariants.configureEach { variant ->
                 GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
                     project.exec {
-                        executable = project.android.getAdbExe().toString()
+                        executable = adb
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
                 }
@@ -638,27 +639,28 @@ interface Injected {
 // copy preferences containing user and password to the device
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
+    Injected injected = project.objects.newInstance(Injected)
     doFirst {
         if (preferencesFile.exists()) {
             try {
-                execOperations.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
                 }
-                execOperations.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                execOperations.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
                 }
-                execOperations.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                execOperations.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'getprop', 'ro.build.version.release']
                 }
             }
