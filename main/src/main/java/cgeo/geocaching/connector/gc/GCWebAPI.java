@@ -22,6 +22,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -1292,18 +1293,20 @@ public class GCWebAPI {
         return result;
     }
 
-    //Format Request:
+    //Generic Format of a "log entry" Request towards GC.com (for cache or trackable) is as follows:
+    // (note request to edit existing log is very similar, but this is not supported by c:geo as of now)
     // {
-    //   'images': [], // an array of image GUIDs  (String)
+    //   'geocacheReferenceCode': "GCxyz", // Used only for trackable Logs of type RETRIEVED. Contains GCcode of geocache where tb was retrieved from. mandatory!
+    //   'images': [], // an array of image GUIDs  (String). Can be used to assign images uploaded previously with log entry
     //   'logDate': logdate, // timestamp, e.g. "2023-09-08T22:31:54.004Z"
     //   'logText': logtext, //string (logtext)
-    //   'logType': logtype, //integer
-    //   'trackables': [], //array of object. Example: [{"trackableCode":"TBxyz","trackableLogTypeId":75}]
-    //   'updatedCoordinates': null, //unknown, most likely only used for Owner log
-    //   'usedFavoritePoint': false //boolean. Not yet verified
+    //   'logType': logtype, //integer. Available types depend on whether log is for cache or tb, and on state of that cache/tb
+    //   'trackables': [], //Only used on cache logs to incidate for own inventory what to do with it. Array of object. Example: [{"trackableCode":"TBxyz","trackableLogTypeId":75}]
+    //   'updatedCoordinates': null, //unknown, most likely only used for Owner log when setting new header coords
+    //   'usedFavoritePoint': false //boolean. Used on cache logs to add a fav point to the cache
     //  }
     //
-    //Format Reply:
+    //Generic Format of a log entry Reply from gc.com:
     // {"guid":"xyz","logReferenceCode":"GLxyz","dateTimeCreatedUtc":"2023-09-17T14:03:26","dateTimeLastUpdatedUtc":"2023-09-17T14:03:26","logDate":"2023-09-08T12:00:00","logType":4,"images":[],"trackables":[],"cannotDelete":false,"usedFavoritePoint":false}
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -1332,6 +1335,12 @@ public class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class GCWebTrackableLogRequest extends GCWebLogBase {
+
+        //only used for Logs of type RETRIEVED. In this case, field is mandatory
+        @JsonProperty("geocacheReferenceCode")
+        @JsonInclude(JsonInclude.Include.NON_NULL)
+        String geocacheReferenceCode;
+
         @JsonProperty("logType")
         Integer logType;
     }
@@ -1405,11 +1414,25 @@ public class GCWebAPI {
 
     }
 
+    //Helper JSOn subtypes
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class GCWebLogTrackableResponseLogType {
         @JsonProperty("id")
         Integer id;
     }
+
+    //matches a JSOn snippet like: {"id":123,"referenceCode":"GCxyz","name":"somename"}
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static final class GCGeocacheReference {
+        @JsonProperty("id")
+        Integer id;
+        @JsonProperty("referenceCode")
+        String referenceCode;
+        @JsonProperty("name")
+        String name;
+    }
+
 
     //New Log API
     @NonNull
@@ -1508,12 +1531,24 @@ public class GCWebAPI {
         final String tbCode = trackableLog.geocode;
 
         //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
+        final ImmutablePair<String, String> htmlAndCsrfToken = getHtmlAndCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
+        final String csrfToken = htmlAndCsrfToken == null ? null : htmlAndCsrfToken.right;
         if (csrfToken == null) {
             //try old log flow
             Log.w("Log Trackable Post: unable to extract CSRF Token in new Log Flow Page");
             return null; // this will trigger trying old log flow
         }
+
+        //1.5) see if we find a geocache reference in the HTML
+        final String geocacheReferenceJson = TextUtils.getMatch(htmlAndCsrfToken.left, GCConstants.PATTERN_TB_CURRENT_GEOCACHE_JSON, null);
+        String geocacheReferenceCode = null;
+        if (geocacheReferenceJson != null) {
+            final GCGeocacheReference gcRef = JsonUtils.readValueFailSilently("{" + geocacheReferenceJson + "}", GCGeocacheReference.class, null);
+            if (gcRef != null) {
+                geocacheReferenceCode = gcRef.referenceCode;
+            }
+        }
+
 
         //2,) Fill Trackable Log Entry object and post it
         //  Exemplary JSOn to send: {"images":[],"logDate":"2023-09-08T23:13:36.414Z","logText":"Write a note for a trackable","logType":4,"trackingCode":null}
@@ -1523,6 +1558,11 @@ public class GCWebAPI {
         logEntry.logType = trackableLog.action.gcApiId;
         logEntry.logText = log;
         logEntry.trackingCode = trackableLog.trackCode;
+
+        //special case: if type is RETRIEVED, we need to fill reference code
+        if (trackableLog.action == LogTypeTrackable.RETRIEVED_IT) {
+            logEntry.geocacheReferenceCode = geocacheReferenceCode;
+        }
 
         //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
         final GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
@@ -1545,7 +1585,13 @@ public class GCWebAPI {
     }
 
     private static String getCsrfTokenFromUrl(final String url) {
-        final HttpResponse htmlResp =
+        final ImmutablePair<String, String> htmlAndUrl = getHtmlAndCsrfTokenFromUrl(url);
+        return htmlAndUrl == null ? null : htmlAndUrl.right;
+    }
+
+    private static ImmutablePair<String, String> getHtmlAndCsrfTokenFromUrl(final String url) {
+
+    final HttpResponse htmlResp =
                 httpReq().uri(url).request().blockingGet();
         final String html = htmlResp.getBodyString();
         final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
@@ -1553,7 +1599,7 @@ public class GCWebAPI {
             Log.w("Log Post: unable to find a CSRF Token in Log Page '" + url + "':" + htmlResp);
             return null;
         }
-        return csrfToken;
+        return new ImmutablePair<>(html, csrfToken);
     }
 
     private static HttpRequest httpReq() {

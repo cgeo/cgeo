@@ -69,6 +69,8 @@ public final class GCConstants {
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
     static final Pattern PATTERN_CSRF_TOKEN = Pattern.compile("\"csrfToken\":\"([^\"]+)\"");
+    // matches: the inner JSON Code (w/o {}) of "currentGeocache":{"id":123,"referenceCode":"GCxyz","name":"somename"}
+    static final Pattern PATTERN_TB_CURRENT_GEOCACHE_JSON = Pattern.compile("\"currentGeocache\":\\{([^}]+)\\}");
 
     /**
      * Two groups !
