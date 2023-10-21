@@ -49,6 +49,18 @@ public class JsonUtils {
         return stringToNode(jsonString, true);
     }
 
+    public static <T> T readValueFailSilently(final String json, @NonNull final Class<T> clazz, final T defaultValue) {
+        if (json == null) {
+            return null;
+        }
+        try {
+            return mapper.readValue(json, clazz);
+        } catch (IOException ie) {
+            Log.w("JsonUtils: failed to read value as class " + clazz.getName() + ":'" + json + "'");
+            return defaultValue;
+        }
+    }
+
     public static JsonNode stringToNode(final String jsonString, final boolean failQuietly) {
         if (jsonString == null) {
             return null;
