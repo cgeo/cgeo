@@ -751,16 +751,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-
-
-            // maybe move all this to refreshMapData() ???
-            MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
-            viewModel.caches.notifyDataChanged();
-            if (loadInBackgroundHandler != null) {
-                loadInBackgroundHandler.onDestroy();
-            }
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-//            refreshMapData(false);
+            refreshMapData(false);
         }
     }
 
@@ -769,14 +760,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     @Override
     public void showFilterMenu() {
-        // create list of caches for FilterActivity, ignore other geoItems
-//        final ArrayList<Geocache> caches = new ArrayList<>();
-//        final Map<String, Geocache> map = viewModel.geoItems.getMap();
-//        for (Geocache item : map.values()) {
-//            if (item != null) {
-//                caches.add((Geocache) item);
-//            }
-//        }
         FilterUtils.openFilterActivity(this, mapType.filterContext, viewModel.caches.getValue());
     }
 
@@ -788,15 +771,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapType.filterContext.set(filter);
-
-        // maybe move all this to refreshMapData() ???
-        MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
-        viewModel.caches.notifyDataChanged();
-        if (loadInBackgroundHandler != null) {
-            loadInBackgroundHandler.onDestroy();
-        }
-        loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-//        refreshMapData(false);
+        refreshMapData(false);
     }
 
     protected GeocacheFilterContext getFilterContext() {
@@ -804,10 +779,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     }
 
     private void refreshMapData(final boolean circlesSwitched) {
-        // @todo
+        MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
+        viewModel.caches.notifyDataChanged();
+        if (loadInBackgroundHandler != null) {
+            loadInBackgroundHandler.onDestroy();
+        }
+        loadInBackgroundHandler = new LoadInBackgroundHandler(this);
     }
 
-        // ========================================================================
+    // ========================================================================
     // Map tap handling
 
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {

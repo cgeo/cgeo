@@ -38,7 +38,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
-//    public final HashMapLiveData<String, Geocache> geoItems = new HashMapLiveData<>();
     public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
 
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
