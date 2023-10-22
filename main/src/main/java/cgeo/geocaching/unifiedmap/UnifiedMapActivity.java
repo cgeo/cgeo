@@ -808,7 +808,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                 }
             }
 
-            if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX)) {
+            if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX) && isLongTap) { // only consider when tap was a longTap
                 final String identifier = key.substring(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX.length());
 
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
