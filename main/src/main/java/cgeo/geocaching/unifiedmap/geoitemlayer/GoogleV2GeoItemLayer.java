@@ -139,6 +139,10 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
 
     @Override
     public void remove(final GeoPrimitive item, final Pair<Object, Object> context) {
+        if (context == null) {
+            Log.e("GoogleV2GeoItemLayer.remove: can't remove <null> item"); // todo why does this happen at all? Especially as items still get removed correctly even if this is triggered...
+            return;
+        }
         removeSingle(context.first);
         removeSingle(context.second);
     }

@@ -798,18 +798,28 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
 
-            //todo make caches/WPs clickable
-            /*final IWaypoint wp = viewModel.geoItems.getMap().get(key);
-            if (wp != null) {
-                result.add(new RouteItem(wp));
-            } else if (isLongTap) {
+            if (key.startsWith(UnifiedMapViewModel.CACHE_KEY_PREFIX)) {
+                final String geocode = key.substring(UnifiedMapViewModel.CACHE_KEY_PREFIX.length());
+
+                final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                if (temp != null && temp.getCoords() != null) {
+                    result.add(new RouteItem(temp));
+                }
+            }
+
+            if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX)) {
+                final String identifier = key.substring(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX.length());
+
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
-                    if (key.equals(item.getIdentifier())) {
+                    if (identifier.equals(item.getIdentifier())) {
                         result.add(item);
                         break;
                     }
                 }
-            }*/
+            }
+
+            // todo waypoints
+
         }
         Log.e("touched elements (" + result.size() + "): " + result);
 

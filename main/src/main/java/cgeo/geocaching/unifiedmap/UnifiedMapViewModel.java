@@ -24,6 +24,10 @@ import androidx.lifecycle.ViewModel;
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
     public static final int MAX_CACHES = 500;
 
+    public static final String CACHE_KEY_PREFIX = "CACHE_";
+    public static final String WAYPOINT_KEY_PREFIX = "WP_";
+    public static final String COORDSPOINT_KEY_PREFIX = "COORDS_";
+
     // ViewModels will survive config changes, no savedInstanceState is needed
     // Don't hold an activity references inside the ViewModel!
 
