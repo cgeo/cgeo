@@ -81,6 +81,10 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         individualRoute.getValue().reloadRoute(route -> individualRoute.notifyDataChanged());
     }
 
+    public void reloadTracks(final RouteTrackUtils routeTrackUtils) {
+        tracks = new Tracks(routeTrackUtils, this::setTrack);
+    }
+
     public void clearIndividualRoute() {
         individualRoute.getValue().clearRoute(route -> individualRoute.notifyDataChanged());
     }
@@ -99,7 +103,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     }
 
     public void init(final RouteTrackUtils routeTrackUtils) {
-        tracks = new Tracks(routeTrackUtils, this::setTrack);
+        reloadTracks(routeTrackUtils);
     }
 
     // ========================================================================
