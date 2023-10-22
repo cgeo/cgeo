@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
@@ -131,14 +132,15 @@ public class GeoItemSelectorUtils {
             }
         }
 
-        // Fallback - neither a cache nor waypoint. should never happen...
+        // Fallback - coords only points
+
         final TextView tv = view.findViewById(R.id.text);
-        tv.setText(routeItem.getIdentifier());
+        tv.setText(R.string.route_item_point);
 
         final TextView infoView = view.findViewById(R.id.info);
-        infoView.setText(routeItem.getGeocode());
+        infoView.setText(routeItem.getPoint().format(GeopointFormatter.Format.LAT_LON_DECMINUTE));
 
-        // tv.setCompoundDrawablesWithIntrinsicBounds(routeItem.getMarkerId(), 0, 0, 0);
+         tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.marker_routepoint_large, 0, 0, 0);
         return view;
     }
 

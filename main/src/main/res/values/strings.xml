@@ -2591,6 +2591,7 @@
     <string name="map_individual_route_cleared">Individual route cleared</string>
     <string name="sorted_route_saved">Individual route saved</string>
     <string name="load_individual_route_error">Error loading individual route</string>
+    <string name="route_item_point">Route point</string>
     <string name="route_item_not_yet_loaded">Route item not yet loaded</string>
     <plurals name="individual_route_loaded">
         <item quantity="zero">Route loaded with %d route points</item>
