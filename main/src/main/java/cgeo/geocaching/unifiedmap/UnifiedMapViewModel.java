@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -20,6 +21,8 @@ import android.location.Location;
 import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import java.util.HashSet;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
     public static final int MAX_CACHES = 500;
@@ -43,6 +46,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
     public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
 
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden

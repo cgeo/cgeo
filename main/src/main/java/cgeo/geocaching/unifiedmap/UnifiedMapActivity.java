@@ -24,6 +24,7 @@ import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -818,7 +819,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                 }
             }
 
-            // todo waypoints
+            if (key.startsWith(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX)) {
+                final String fullGpxId = key.substring(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX.length());
+
+                for (Waypoint waypoint : viewModel.waypoints.getValue()) {
+                    if (fullGpxId.equals(waypoint.getFullGpxId())) {
+                        result.add(new RouteItem(waypoint));
+                        break;
+                    }
+                }
+            }
 
         }
         Log.e("touched elements (" + result.size() + "): " + result);
