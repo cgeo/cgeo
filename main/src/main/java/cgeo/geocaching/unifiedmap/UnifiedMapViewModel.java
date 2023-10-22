@@ -4,14 +4,15 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.livedata.ConstantLiveData;
 import cgeo.geocaching.utils.livedata.Event;
-import cgeo.geocaching.utils.livedata.HashMapLiveData;
 
 import android.content.Context;
 import android.location.Location;
@@ -21,6 +22,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
+    public static final int MAX_CACHES = 500;
 
     // ViewModels will survive config changes, no savedInstanceState is needed
     // Don't hold an activity references inside the ViewModel!
@@ -36,7 +38,8 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
-    public final HashMapLiveData<String, IWaypoint> geoItems = new HashMapLiveData<>();
+    public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden
     public final MutableLiveData<Float> elevation = new MutableLiveData<>();

@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -16,6 +17,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -88,16 +90,14 @@ class LoadInBackgroundHandler {
                     // retrieving live caches (if enabled)
                     final boolean useLastSearchResult = null != lastSearchResult && null != previousViewport && previousViewport.includes(viewport);
                     final Viewport newViewport = viewport.resize(3.0);
-                    final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport, null /* filter */);
+                    final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport, activity.getFilterContext().get());
 
                     final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-/* @todo: filtering
-                    MapUtils.filter(result, getFilterContext());
+                    MapUtils.filter(result, activity.getFilterContext());
                     final Set<String> filteredCodes = searchResult.getFilteredGeocodes();
                     Log.d("Filtering out " + filteredCodes.size() + " caches: " + filteredCodes);
                     DataStore.removeCaches(filteredCodes, EnumSet.of(LoadFlags.RemoveFlag.CACHE));
-                    activity.addSearchResultByGeocodes(filteredCodes);
-*/                  activity.addSearchResultByGeocaches(searchResult);
+                    activity.addSearchResultByGeocaches(searchResult);
 
                     lastSearchResult = searchResult;
                     if (null == previousViewport || !useLastSearchResult || (!result.isEmpty() && lastSearchResult.getCount() > 400)) {
@@ -110,7 +110,7 @@ class LoadInBackgroundHandler {
                     Log.e("load.searchResult: " + searchResult.getGeocodes());
                     final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
                     Log.e("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
-//                  MapUtils.filter(cachesFromSearchResult, getFilterContext());
+                    MapUtils.filter(cachesFromSearchResult, activity.getFilterContext());
                     activity.addSearchResultByGeocaches(cachesFromSearchResult);
                 }
             } catch (Exception e) {

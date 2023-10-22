@@ -1970,8 +1970,8 @@ public class Geocache implements IWaypoint {
 
     @Override
     public boolean equals(final Object obj) {
-        // TODO: explain the following line or remove this non-standard equality method
-        // just compare the geocode even if that is not what "equals" normally does
+        // just compare the geocode even if that is not what "equals" normally does.
+        // Reason: geocaches should be treated as equal even if two geocache objects have different amount of data cause they come from different sources.
         return this == obj || (obj instanceof Geocache && StringUtils.isNotEmpty(geocode) && geocode.equals(((Geocache) obj).geocode));
     }
 
