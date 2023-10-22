@@ -8,7 +8,7 @@
 - Nowość: Punkty nawigacji skrytki wyświetlają ikonę typu skrzynki jako znacznik
 - Nowość: Pokaż informacje o wysokości dla bieżącej pozycji na mapie (patrz Ustawienia => Zawartość mapy & Zachowanie)
 - Nowe: Profil nawigowania zdefiniowany przez użytkownika (tylko nawigowanie wewnętrzne)
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Poprawka: Zbyt długi tytuł powiadomień zbliżeniowych, rzeczywiste powiadomienia były obcięte na małych ekranach
 
 ### Szczegóły skrytki
 - Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
@@ -26,6 +26,6 @@
 - Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
 - Nowość: Filtr, który pozwala na dołączenie innych nazwanych (zapisanych) filtrów
 - Zmiana: Usunięto AndroidBeam, który nie jest już obsługiwany przez platformę Android
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
-- Fix: Hide outdated connection error message
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- Zmiana: Kreator konfiguracji: zintegrowano funkcjonalność „Przywróć” na ekranie „Konfigurowanie usług” i usunięto zaawansowany ekran konfiguracyjny.
+- Poprawka: Ukryj nieaktualny komunikat o błędzie połączenia
+- Poprawka: Nie można utworzyć skrótów dla widgetów c:geo na nowszych systemach Android
