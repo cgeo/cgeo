@@ -18,10 +18,12 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
+import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
@@ -375,7 +377,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         if (mapChanged) {
 
             // map settings popup
-//        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapType.filterContext));
+            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, null /* @todo proximity notification */, mapType.filterContext));
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
@@ -433,6 +435,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
 //        onResume();
+    }
+
+    private void compactIconModeChanged(final int newValue) {
+        Settings.setCompactIconMode(newValue);
+        // @todo: does not yet trigger switching icon modes
+        viewModel.caches.postNotifyDataChanged();
     }
 
     public void showProgressSpinner() {
@@ -530,6 +538,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     // ========================================================================
     // Routes, tracks and targets handling
+
+    private void routingModeChanged(final RoutingMode newValue) {
+        Settings.setRoutingMode(newValue);
+        if ((null != viewModel.individualRoute && viewModel.individualRoute.getValue().getNumSegments() > 0) || null != viewModel.getTracks()) {
+            Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+        }
+        viewModel.reloadIndividualRoute();
+        viewModel.reloadTracks(routeTrackUtils);
+    }
 
     @Nullable
     public Geocache getCurrentTargetCache() {
