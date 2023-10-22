@@ -35,7 +35,7 @@ public class IndividualRouteLayer {
         viewModel.individualRoute.observe(activity, individualRoute -> {
 
             for (String key : layer.keySet()) {
-                if (key.startsWith("COORDS!")) {
+                if (key.startsWith(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX)) {
                     layer.remove(key);
                 }
             }
@@ -50,7 +50,7 @@ public class IndividualRouteLayer {
 
                 for (RouteItem item : individualRoute.getRouteItems()) {
                     if (item.getType() == RouteItem.RouteItemType.COORDS) {
-                        layer.put(item.getIdentifier(), GeoPrimitive.createMarker(item.getPoint(), GeoIcon.builder().setBitmap(marker).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_COORD_POINT).build());
+                        layer.put(UnifiedMapViewModel.COORDSPOINT_KEY_PREFIX + item.getIdentifier(), GeoPrimitive.createMarker(item.getPoint(), GeoIcon.builder().setBitmap(marker).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_COORD_POINT).build());
                     }
                 }
             }

@@ -18,9 +18,6 @@ import java.util.Map;
 
 public class GeoItemsLayer {
 
-    private static final String CACHE_PREFIX = "CACHE_";
-    private static final String WAYPOINT_PREFIX = "WP_";
-
     private Map<String, Integer> lastDisplayedGeocaches = new HashMap<>();
 
 
@@ -38,7 +35,7 @@ public class GeoItemsLayer {
 
                 if (!lastDisplayedGeocaches.containsKey(cache.getGeocode()) || !lastDisplayedGeocaches.get(cache.getGeocode()).equals(cm.hashCode())) {
 
-                    layer.put(CACHE_PREFIX + cache.getGeocode(), GeoPrimitive.createMarker(cache.getCoords(),
+                    layer.put(UnifiedMapViewModel.CACHE_KEY_PREFIX + cache.getGeocode(), GeoPrimitive.createMarker(cache.getCoords(),
                             GeoIcon.builder()
                                     .setBitmap(cm.getBitmap())
                                     .setYAnchor(cm.getBitmap().getHeight() / 2f)
@@ -52,7 +49,7 @@ public class GeoItemsLayer {
             }
 
             for (String geocode : lastDisplayedGeocaches.keySet()) {
-                layer.remove(CACHE_PREFIX + geocode);
+                layer.remove(UnifiedMapViewModel.CACHE_KEY_PREFIX + geocode);
             }
 
             lastDisplayedGeocaches = currentlyDisplayedGeocaches;
