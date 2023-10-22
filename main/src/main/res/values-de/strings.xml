@@ -2295,6 +2295,7 @@
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
     <string name="load_individual_route_error">Fehler beim Laden der individuellen Route</string>
+    <string name="route_item_point">Routenpunkt</string>
     <string name="route_item_not_yet_loaded">Element noch nicht geladen</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Route geladen mit %d Punkt</item>
