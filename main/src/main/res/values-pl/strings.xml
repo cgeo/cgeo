@@ -1014,6 +1014,7 @@
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_folder_changed">Folder \"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu c:geo do tego folderu.\n\nDotknij \"%3$s\", aby zachować ustawienia bieżącego folderu.</string>
+    <string name="settings_file_changed">\"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne udzielenie dostępu do tego pliku.\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
