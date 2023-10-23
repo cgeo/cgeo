@@ -2295,6 +2295,7 @@
     <string name="map_individual_route_cleared">Individuele route gewist</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
     <string name="load_individual_route_error">Fout bij laden individuele route</string>
+    <string name="route_item_point">Route punt</string>
     <string name="route_item_not_yet_loaded">Route item nog niet geladen</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Route geladen met %d routepunt</item>
