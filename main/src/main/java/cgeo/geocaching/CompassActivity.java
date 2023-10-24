@@ -218,6 +218,10 @@ public class CompassActivity extends AbstractActionBarActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_hint).setVisible(cache != null && StringUtils.isNotEmpty(cache.getHint()));
+
+        final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
+        ttsMenuItem.setVisible(cache != null);
+        setMenuToggleSpeech(ttsMenuItem, SpeechService.isRunning());
         return true;
     }
 
@@ -234,6 +238,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);
+            setMenuToggleSpeech(item, SpeechService.isRunning());
         } else if (id == R.id.menu_hint) {
             if (binding.hint.offlineHintText.getVisibility() == View.VISIBLE) {
                 binding.hint.offlineHintSeparator1.setVisibility(View.GONE);
@@ -317,6 +322,13 @@ public class CompassActivity extends AbstractActionBarActivity {
             binding.hint.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
+
+    private void setMenuToggleSpeech(final MenuItem menuItem, final boolean speechActive) {
+        if (null != menuItem) {
+            menuItem.setTitle(speechActive ? R.string.cache_menu_speechDeactivate : R.string.cache_menu_speechActivate);
+            menuItem.setIcon(speechActive ? R.drawable.ic_menu_text_to_speech_on : R.drawable.ic_menu_text_to_speech_off);
+        }
+    }
 
     @SuppressLint("SetTextI18n")
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
