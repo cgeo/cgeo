@@ -111,15 +111,19 @@ public class MapSettingsUtils {
 
         // routing profile legend for user-defined entries
         final boolean useInternalRouting = Settings.useInternalRouting();
+        boolean useUser1 = false;
+        boolean useUser2 = false;
         if (useInternalRouting) {
             final StringBuilder sb = new StringBuilder();
             final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
             if (StringUtils.isNotBlank(temp1)) {
                 sb.append("1: ").append(temp1);
+                useUser1 = true;
             }
             final String temp2 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER2), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
             if (StringUtils.isNotBlank(temp2)) {
                 sb.append(StringUtils.isNotBlank(sb) ? " - " : "").append("2: ").append(temp2);
+                useUser2 = true;
             }
             if (StringUtils.isNotBlank(sb)) {
                 dialogView.routingProfileinfo.setVisibility(View.VISIBLE);
@@ -169,8 +173,8 @@ public class MapSettingsUtils {
 
         compactIconWrapper.init();
         routingChoiceWrapper.init();
-        routingChoiceWrapper.getByResId(R.id.routing_user1).button.setVisibility(useInternalRouting ? View.VISIBLE : View.GONE);
-        routingChoiceWrapper.getByResId(R.id.routing_user2).button.setVisibility(useInternalRouting ? View.VISIBLE : View.GONE);
+        routingChoiceWrapper.getByResId(R.id.routing_user1).button.setVisibility(useUser1 ? View.VISIBLE : View.GONE);
+        routingChoiceWrapper.getByResId(R.id.routing_user2).button.setVisibility(useUser2 ? View.VISIBLE : View.GONE);
 
         if (!Routing.isAvailable()) {
             configureRoutingButtons(false, routingChoiceWrapper);
