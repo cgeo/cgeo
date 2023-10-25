@@ -87,7 +87,29 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Gerado</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Desconhecida</string>
+    <string name="cache_cat_bc_nature">Natureza</string>
+    <string name="cache_cat_bc_location">Localização</string>
+    <string name="cache_cat_bc_recommended">Recomendada</string>
+    <string name="cache_cat_bc_gadget">Dispositivo</string>
+    <string name="cache_cat_bc_mystery">Mistério</string>
+    <string name="cache_cat_bc_hiking">Caminhada</string>
+    <string name="cache_cat_bc_other">Outra</string>
+    <string name="cache_cat_desc_bc_nature">Rodeada por natureza especial</string>
+    <string name="cache_cat_desc_bc_location">Mostra um óptimo local</string>
+    <string name="cache_cat_desc_bc_recommended">Recomendada pela equipa BetterCacher</string>
+    <string name="cache_cat_desc_bc_gadget">Trabalho manual especial, dispositivo interessante, etc</string>
+    <string name="cache_cat_desc_bc_mystery">Um enigma extraordinário e desafiador</string>
+    <string name="cache_cat_desc_bc_hiking">Proporciona uma excelente caminhada</string>
+    <string name="cache_cat_desc_bc_other">Outras funcionalidades — consultar o registo de recomendações</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Nenhum(a)</string>
+    <string name="cache_tier_bc_blue">Azul</string>
+    <string name="cache_tier_bc_silver">Prata</string>
+    <string name="cache_tier_bc_gold">Ouro</string>
+    <string name="cache_tier_desc_bc_blue">Nível padrão para as caches listadas</string>
+    <string name="cache_tier_desc_bc_silver">Visitada pela equipa BetterCacher, atribuído automaticamente</string>
+    <string name="cache_tier_desc_bc_gold">Cache fora do comum, recomendada pela equipa BetterCacher</string>
     <!-- logs -->
     <string name="log_found">Encontrada</string>
     <string name="log_dnf">Não encontrada</string>
@@ -154,6 +176,7 @@
     <string name="log_smilies">Sorrisos</string>
     <string name="log_image">Imagem</string>
     <string name="log_images">Imagens</string>
+    <string name="log_edit_image">Editar imagem</string>
     <string name="log_image_caption">Legenda</string>
     <string name="log_image_description">Descrição</string>
     <string name="log_image_scale">Redimensionar</string>
@@ -353,7 +376,7 @@
     </plurals>
     <string name="caches_more_caches_remaining">Carregar as caches restantes (%1$d / %2$d)</string>
     <string name="caches_store_offline">Armazenar para uso offline</string>
-    <string name="caches_store_offline_map">Armazenar as caches para utilização offline</string>
+    <string name="caches_store_offline_map">Armazenar caches p/ utilização offline</string>
     <string name="caches_store_selected">Armazenar seleccionada(s)</string>
     <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_store_background_already_stored">Algumas caches já estão armazenadas. O que deve acontecer com elas?</string>
@@ -402,6 +425,7 @@
     <string name="caches_append_to_route_selected">Incluir seleccionadas à rota individual</string>
     <string name="caches_append_to_route_all">Incluir todas à rota individual</string>
     <string name="caches_appended_to_route">Caches incluídas na rota</string>
+    <string name="waypoints_appended_to_route">Pontos adicionais adicionados à rota</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
     <string name="caches_upload_bookmarklist">Adicionar aos marcadores</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
@@ -484,6 +508,7 @@
     <string name="cache_filter_difficulty">Dificuldade</string>
     <string name="cache_filter_terrain">Terreno</string>
     <string name="cache_filter_difficulty_terrain">Dificuldade / Terreno</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matriz Dificuldade / Terreno</string>
     <string name="cache_filter_rating">Avaliação</string>
     <string name="cache_filter_status">Estado</string>
     <string name="cache_filter_attributes">Atributos da cache</string>
@@ -498,6 +523,9 @@
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
     <string name="cache_filter_stored_since">Última actualização de detalhes</string>
+    <string name="cache_filter_category">Categoria BC</string>
+    <string name="cache_filter_tier">Nível BC</string>
+    <string name="cache_filter_named_filter">Filtro Nomeado</string>
     <string name="cache_filter_logical_filter_group">Filtro agrupado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
@@ -573,6 +601,7 @@
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluir caches sem D/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Preencher com gc.com</string>
     <string name="cache_filter_nested_filter_modify">modificar</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
@@ -723,7 +752,7 @@
     <string name="settings_title_map_sources">Provedores de mapas</string>
     <string name="settings_summary_map_sources">Definir o provedor de mapa e configurações do mapa em modo offline.</string>
     <string name="settings_title_map_content_behavior">Conteúdo &amp; Comportamento do mapa</string>
-    <string name="settings_summary_map_content_behavior">Configure que informações sejam mostradas nos mapas e as opções de interacção.</string>
+    <string name="settings_summary_map_content_behavior">Configurar quais informações são mostradas nos mapas e as opções de interacção.</string>
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_maps">Mapas offline</string>
     <string name="settings_title_map_themes">Temas de mapas offline</string>
@@ -827,6 +856,7 @@
     <string name="init_signature_template_geocode">Geo-código</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
+    <string name="init_summary_bettercacher">Carregar nível e categorias das caches de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
     <string name="init_summary_friends_and_own_logs_wanted">Mostra um livro de registos adicional num novo separador, contendo os registos feitos por si e por amigos</string>
     <string name="init_openlastdetailspage">Mem. último separador visto</string>
@@ -847,6 +877,9 @@
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
+    <string name="init_brouterProfileUser">Perfil definido pelo utilizador</string>
+    <string name="init_removeFromRouteOnLog">Remover da rota ao registar</string>
+    <string name="init_summary_removeFromRouteOnLog">Ao enviar ou armazenar um registo, remover a cache da rota actual.</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
     <string name="brouter_missing_data">Abrir o BRouter para transferir os dados de encaminhamento em falta (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
@@ -856,6 +889,8 @@
     <string name="init_summary_bigSmileysOnMap">Se activado, os símbolos como o \'sorriso encontrado\' ou o marcador \'coordenadas corrigidas\' aparecerão ampliados no mapa em vez do ícone do tipo de cache.</string>
     <string name="init_dtMarkerOnCacheIcon">Classificação D/T nos ícones de cache</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Mostrar um marcador para as classificações Dificuldade (esquerda) e Terreno (direita) nos marcadores das caches no canto superior direito (marcador \"armazenado\" é movido para o meio).</string>
+    <string name="init_showElevation">Mostrar Relevo</string>
+    <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
@@ -881,6 +916,8 @@
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
     <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
+    <string name="init_custombnitem">Item de Menu Personalizado</string>
+    <string name="init_custombnitem_description">Item inferior à direita do menu de navegação:\n%s</string>
     <string name="init_custombnitem_default">Pesquisa nas proximidades (padrão)</string>
     <string name="init_custombnitem_none">(vazio)</string>
     <string name="init_custombnitem_empty_placeholder">(espaço reservado vazio)</string>
@@ -909,7 +946,7 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados, mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
+    <string name="init_backup_summary">- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n- Para poder restaurar os dados, mesmo após perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -965,6 +1002,7 @@
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_folder_changed">A pasta \"%1$s\" será alterada para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a essa pasta.\n\nToque em \"%3$s\" para manter a pasta actual na configuração.</string>
+    <string name="settings_file_changed">\"%1$s\" será alterado para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a esse ficheiro.\n\nToque em \"%3$s\" para manter a actual configuração.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
@@ -1007,6 +1045,7 @@
     <string name="init_summary_trackautovisit">Predefine a acção \"Visitar\" a todos os seus trackables</string>
     <string name="init_sigautoinsert">Inserir automaticamente</string>
     <string name="init_offlinelogs_homescreen">Mostrar registos offline</string>
+    <string name="init_log_image_default_prefix_title">Legenda padrão para imagens de registo</string>
     <string name="init_summary_offlinelogs_homescreen">Um contador de registos offline (ex: \"+ 1\") será mostrado, no ecrã principal, ao lado do contador online das caches encontradas, caso haja registos que ainda não tenham sido submetidos.</string>
     <string name="init_loaddirectionimg">Imagem de direcção</string>
     <string name="init_summary_loaddirectionimg">Se necessário transfere a imagem da seta direccional (apenas necessário para membros básicos)</string>
@@ -1038,6 +1077,11 @@
     <string name="init_mapShadingLinearity_description">Valores pequenos acentuam o contraste nas encostas íngremes, mas escondem mudanças em sítios planos; valores grandes tornam o contraste mais linear</string>
     <string name="init_mapShadingScale_title">Opacidade do sombreado</string>
     <string name="init_mapShadingScale_description">A opacidade da camada de sombreado, do invisível para valores mais altos que se intensificam, mas pode produzir artefactos</string>
+    <string name="init_iconsizes">Tamanhos do ícone</string>
+    <string name="init_mapCacheScaling_title">Dimensionamento dos ícones das caches</string>
+    <string name="init_mapCacheScaling_description">Factor de dimensionamento para ícones das caches (em %)</string>
+    <string name="init_mapWpScaling_title">Dimensionamento do ícone de Pontos Adicionais</string>
+    <string name="init_mapWpScaling_description">Factor de dimensionamento para ícones de pontos adicionais (em %)</string>
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
@@ -1053,6 +1097,8 @@
     <string name="init_force_orientation_sensor_title">Sensor de orientação</string>
     <string name="init_force_orientation_sensor_note">Em alguns dispositivos, o sensor normal de rotação vectorial tem um comportamento errático, dando a direcção errada. Neste caso, um sensor alternativo (o sensor de orientação) pode proporcionar melhores resultados.</string>
     <string name="init_force_orientation_sensor">Forçar uso do sensor de orientação</string>
+    <string name="init_title_extended_settings">Definições adicionais</string>
+    <string name="init_summary_extended_settings">Mostrar configurações para os utilizadores mais experientes</string>
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
@@ -1397,6 +1443,7 @@
     <string name="cache_favorite">Favoritos</string>
     <string name="cache_owner">Dono</string>
     <string name="cache_hidden">Escondida</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Localização</string>
     <string name="cache_coordinates">Coordenadas</string>
@@ -1436,6 +1483,7 @@
     <string name="cache_alc_start">Abrir a aplicação Adventure Lab para iniciar a aventura</string>
     <string name="cache_alc_related_start">Abrir a aplicação \"Adventure Lab\" para iniciar a aventura</string>
     <string name="cache_alc_install">Instale a aplicação Adventure Lab para dar início a esta aventura</string>
+    <string name="cache_bettercacher_open">Abrir Cache no BetterCacher.org</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
     <string name="image_category_uncategorized">Sem categoria</string>
@@ -2132,6 +2180,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
+    <string name="failed_creating_shortcut">Falha ao criar o atalho</string>
     <string name="send">Enviar</string>
     <string name="confirm_log_title">Tipo de registo especial</string>
     <string name="confirm_log_message">Quer fazer o registo \'%s\'. Tem a certeza?</string>
@@ -2201,6 +2250,8 @@
     <string name="permission_read_external_storage_explanation">O c:geo pode usar o papel de parede do seu sistema como fundo para a aplicação. Para fazer isso, o c:geo precisa de permissão para ler os seus dados de fotos no armazenamento externo.</string>
     <string name="permission_legacy_write_external_storage_explanation">O c:geo escreverá dados no armazenamento do seu telefone ou cartão SD, por exemplo, quando guardar geocaches para utilização off-line, importar ou exportar ficheiros e outras funções. Em algumas versões do Android, terá de conceder uma permissão adicional para essas acções.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permissão de escrita em armazenamento externo antiga</string>
+    <string name="permission_post_notifications_explanation">O c:geo usa notificações para informá-lo sobre transferências de dados e aproximação a caches (se activado)</string>
+    <string name="permission_post_notifications_explanation_title">Permissão de notificações</string>
     <string name="storage_permission_needed">Esta função não é possível sem permissão de armazenamento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccione o esquema de cores</string>
@@ -2260,6 +2311,8 @@
     <string name="running_route_optimizations">Optimização de rota em curso</string>
     <string name="route_optimization_finished">Optimização de rota concluída</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Permissões alteradas</string>
+    <string name="changed_permissions_info">O Android introduziu uma nova permissão requerida por c:geo. Execute o assistente de configuração c:geo para verificar esta permissão e obter informações mais detalhadas. Pode executar o assistente agora ou executá-lo mais tarde, através da respectiva opção de menu no ecrã inicial c:geo. U\n\nDeseja executar o assistente de configuração agora?</string>
     <!-- individual track -->
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
@@ -2294,6 +2347,8 @@
     <string name="routingmode_walk">Caminhar</string>
     <string name="routingmode_bike">Bicicleta</string>
     <string name="routingmode_car">Viatura</string>
+    <string name="routingmode_user1">Utilizador 1</string>
+    <string name="routingmode_user2">Utilizador 2</string>
     <!-- view settings -->
     <string name="view_settings">Ver definições</string>
     <string name="delete_setting">Excluir configuração</string>

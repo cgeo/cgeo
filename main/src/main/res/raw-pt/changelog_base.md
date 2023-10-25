@@ -1,31 +1,31 @@
 ### Mapa
-- Updated Mapsforge and VTM libs to v0.20
-- Updated Google Maps renderer
-- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
-- New: Show custom cache icon as marker for related waypoints
-- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
-- New: Linear labs use numbers as waypoint markers
-- New: Waypoints of a cache show cache type icon as marker
-- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
-- New: User-defined routing profiles (internal routing only)
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- Mapsforge e VTM libs actualizados para v0.20
+- Renderizador do Google Maps actualizado
+- Novo: Mostrar o ícone do tipo de cache como marcador, se o ícone de cache personalizado foi definido (emoji) ou os ícones grandes estão activados
+- Novo: Mostrar o ícone de cache personalizado como marcador para pontos adicionais relacionados
+- Novo: Permitir dimensionamento de ícones de cache/ponto adicional (ver Configurações => Aparência)
+- Novo: Labs sequenciais usam números como marcadores de ponto de passagem
+- Novo: Pontos adicionais de uma cache mostram o tipo de cache como marcador
+- Novo: Mostrar informações de elevação para a posição actual no mapa (ver Configurações => Conteúdo do Mapa & Comportamento)
+- Novo: Perfis de encaminhamento definidos pelo utilizador (apenas encaminhamento interno)
+- Correcção: Título da notificação de proximidade muito longo, notificação actual era cortada em ecrãs pequenos
 
 ### Detalhes da cache
-- New: Edit default value for log image caption prefix
-- New: Ensure minimum image size for display
-- Change: Redesigned edit options for own log images
-- New: Bettercacher integration
-- New: Sync visited state on synchronizing waypoints to personal note
-- New: Retrieve found date for Opencaching-based caches
-- New: Append all waypoints to individual route
+- Novo: Editar o valor padrão para a legenda da imagem de registo
+- Novo: Garantir um tamanho mínimo de imagem para o ecrã
+- Alteração: Opções de edição redesenhadas, para as suas imagens de registo
+- Novo: Integração Bettercacher
+- Novo: Sincronize o estado "visitado" ao sincronizar pontos adicionais para notas pessoais
+- Novo: Recuperar data encontrada para caches baseados em Opencaching
+- Novo: Acrescentar todos os pontos adicionais à rota individual
 
 ### Geral
-- New: Increased target SDK to 33
-- Change: Handling of database access to avoid "database not available" crashes
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
-- New: Allow filtering in multi selection lists
-- New: Filter to include other named (stored) filters
-- Change: Removed AndroidBeam which is no longer supported by Android platform
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
-- Fix: Hide outdated connection error message
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- Novo: SDK alvo aumentado para 33
+- Alteração: Manipulação do acesso à base de dados para evitar falhas de "base de dados não disponível"
+- Alteração: Apenas as configurações básicas serão exibidas por padrão. Vá a Definições => Definições Adicionais para activar as definições adicionais
+- Novo: Permitir filtragem em listas de selecção múltipla
+- Novo: Filtro para incluir outros filtros nomeados (armazenados)
+- Alteração: Android Beam removido, pois já não é suportado pela plataforma Android
+- Alteração: Assistente de configuração: funcionalidade "restauro" integrada na página "configurar serviços" e removida a página de configuração avançada.
+- Correcção: Ocultar mensagem desactualizada de erro de ligação
+- Correcção: Não era possível criar atalhos para widgets c:geo em sistemas Android mais recentes
