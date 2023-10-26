@@ -7,8 +7,8 @@
 - 신규: 선형 연구소는 숫자를 지점 마커로 사용합니다.
 - 신규: 캐시의 지점은 캐시 유형 아이콘을 마커로 표시합니다.
 - 신규: 지도의 현재 위치에 대한 고도 정보 표시 (설정 => 지도 콘텐츠 및 동작 참조)
-- New: User-defined routing profiles (internal routing only)
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- 신규: 사용자 정의 경로 프로필(내부 경로에만 해당)
+- 수정: 근접 알림 제목이 너무 길어서 작은 화면에서 실제 알림이 잘립니다.
 
 ### 캐시 상세정보
 - 신규: 로그 이미지 캡션 접두사의 기본값 편집
@@ -17,15 +17,15 @@
 - 신규: Bettercacher 통합
 - 신규: 지점을 개인 메모에 동기화할 때 방문 상태를 동기화합니다.
 - 신규: Opencaching 기반 캐시의 찾음 날짜 검색
-- New: Append all waypoints to individual route
+- 신규: 모든 지점을 개별 경로에 추가
 
 ### 일반
 - 신규: 대상 SDK를 33으로 증가
 - 변경: "데이터베이스를 사용할 수 없음" 충돌을 방지하기 위한 데이터베이스 액세스 처리
 - 변경: 기본적으로 기본 설정만 표시됩니다. 설정으로 이동 => 확장 설정을 활성화하는 확장 설정
 - 신규: 다중 선택 목록에서 필터 허용
-- New: Filter to include other named (stored) filters
-- Change: Removed AndroidBeam which is no longer supported by Android platform
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
-- Fix: Hide outdated connection error message
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- 신규: 다른 명명된(저장된) 필터를 포함하는 필터
+- 변경: Android 플랫폼에서 더 이상 지원되지 않는 AndroidBeam을 제거했습니다.
+- 변경: 구성 마법사: "서비스 구성" 화면에 "복원" 기능이 통합되고 고급 구성 화면이 제거되었습니다.
+- 수정: 오래된 연결 오류 메시지 숨기기
+- 수정: 최신 Android 시스템에서 c:geo 위젯에 대한 바로가기를 만들 수 없습니다.
