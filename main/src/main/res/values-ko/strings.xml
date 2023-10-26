@@ -423,6 +423,7 @@
     <string name="caches_append_to_route_selected">선택한 것을 개별 경로에 추가</string>
     <string name="caches_append_to_route_all">모든 것을 개별 경로에 추가</string>
     <string name="caches_appended_to_route">경로에 추가된 캐시</string>
+    <string name="waypoints_appended_to_route">경로에 지점이 앞 추가됨</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
@@ -519,6 +520,7 @@
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
     <string name="cache_filter_category">BC 분류</string>
     <string name="cache_filter_tier">BC 계층</string>
+    <string name="cache_filter_named_filter">명명된 필터</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
@@ -869,6 +871,9 @@
     <string name="init_brouterProfileWalk">\"걷기\" 프로필</string>
     <string name="init_brouterProfileBike">\"자전거\" 프로필</string>
     <string name="init_brouterProfileCar">\"자동차\" 프로필</string>
+    <string name="init_brouterProfileUser">사용자 정의 프로필</string>
+    <string name="init_removeFromRouteOnLog">로그되면 경로에서 제거</string>
+    <string name="init_summary_removeFromRouteOnLog">로그를 보내거나 저장할 때 현재 경로에서 캐시를 제거</string>
     <string name="brouter_recalculating">백그라운드에서 경로를 다시 계산하는 중…</string>
     <string name="brouter_missing_data">BRouter를 열어 누락된 라우팅 데이터 (%s)를 다운로드합니다.</string>
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
@@ -905,6 +910,8 @@
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
+    <string name="init_custombnitem">사용자 정의 메뉴 항목</string>
+    <string name="init_custombnitem_description">가장 오른쪽 하단 탐색 메뉴 항목:\n%s</string>
     <string name="init_custombnitem_default">주변 검색 (기본값)</string>
     <string name="init_custombnitem_none">(없음)</string>
     <string name="init_custombnitem_empty_placeholder">(빈 자리 표시자)</string>
@@ -989,6 +996,7 @@
     <string name="settings_readingerror">설정 읽기 오류</string>
     <string name="settings_restart">로드 된 설정을 적용하려면 c:geo를 다시 시작해야합니다.</string>
     <string name="settings_folder_changed">복원 중에 \"%1$s\"폴더가 \"%2$s\"로 변경됩니다.\n\n계속하려면 \"%4$s\"를 누르십시오. 이 경우 해당 폴더에 대한 c:geo 액세스 권한을 다시 부여하라는 메시지가 표시됩니다.\n\n대신 현재 폴더 설정을 유지하려면 \"%3$s\"를 누르십시오.</string>
+    <string name="settings_file_changed">복원 중에 \"%1$s\"이 \"%2$s\"로 변경하게 됩니다.\n\n계속하려면 \"%4$s\". 이 경우 해당 파일에 대한 c:geo 액세스 권한을 다시 부여하라는 메시지가 표시됩니다.\n\n대신 현재 설정을 유지하려면 \"%3$s\"를 누르십시오.</string>
     <string name="settings_info_offline_maps_title">오프라인 지도에 대한 정보</string>
     <string name="settings_info_offline_maps">c:geo는 오프라인 지도를 지원합니다. 다른 공급자로부터 지도를 얻거나 OSM 데이터에서 자신 만의 지도를 만들 수도 있습니다. 먼저 오프라인지도를 저장할 폴더를 선택해야합니다.</string>
     <string name="settings_info_themes_title">지도 테마에 대한 정보</string>
@@ -2150,6 +2158,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>
+    <string name="failed_creating_shortcut">바로가기를 생성하지 못했습니다.</string>
     <string name="send">보내기</string>
     <string name="confirm_log_title">특별 로그 유형</string>
     <string name="confirm_log_message">정말 \'%s\'를 로그하시겠습니까?</string>
@@ -2257,6 +2266,7 @@
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
     <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
     <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
+    <string name="route_item_point">경로 지점</string>
     <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>
     <plurals name="individual_route_loaded">
         <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
@@ -2308,6 +2318,8 @@
     <string name="routingmode_walk">걷기</string>
     <string name="routingmode_bike">자전거</string>
     <string name="routingmode_car">자동차</string>
+    <string name="routingmode_user1">사용자 1</string>
+    <string name="routingmode_user2">사용자 2</string>
     <!-- view settings -->
     <string name="view_settings">설정 보기</string>
     <string name="delete_setting">설정 삭제</string>
