@@ -946,7 +946,9 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n- Para poder restaurar os dados, mesmo após perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
+    <string name="init_backup_summary">— A cópia de seg. inclui caches, pontos adicionais e configurações.\n
+— Não são guardadas imagens em caches!\n
+— Tenha o ficheiro do backup noutro armazenamento, para poder restaurar os dados mesmo que perca o seu telemóvel.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
