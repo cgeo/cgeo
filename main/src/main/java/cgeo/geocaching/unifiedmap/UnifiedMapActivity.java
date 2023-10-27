@@ -37,6 +37,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
+import cgeo.geocaching.unifiedmap.layers.CacheCirclesLayer;
 import cgeo.geocaching.unifiedmap.layers.CoordsIndicatorLayer;
 import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
@@ -278,7 +279,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         layers.clear();
 
         clickableItemsLayer = new GeoItemLayer<>("clickableItems");
-        final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems");
+        final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems"); // default layer for all map items not worth an own layer
 
         layers.add(clickableItemsLayer);
         layers.add(nonClickableItemsLayer);
@@ -294,6 +295,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
 
+        final GeoItemLayer<String> circlesLayer = new GeoItemLayer<>("circles");
+        layers.add(circlesLayer);
+        new CacheCirclesLayer(this, circlesLayer);
 
         viewModel.init(routeTrackUtils);
 
