@@ -14,6 +14,7 @@ import java.util.Objects;
 public class CompactIconModeUtils {
 
     private static int compactIconModeThreshold = -1;
+    private static boolean forceCompactIconMode = Settings.getCompactIconMode() == Settings.COMPACTICON_ON;
 
     private CompactIconModeUtils() {
         // utility class
@@ -31,6 +32,15 @@ public class CompactIconModeUtils {
             setCompactIconModeThreshold(Resources.getSystem());
         }
         final int compactIconMode = Settings.getCompactIconMode();
-        return compactIconMode == Settings.COMPACTICON_ON || (compactIconMode == Settings.COMPACTICON_AUTO && size >= compactIconModeThreshold);
+        forceCompactIconMode = compactIconMode == Settings.COMPACTICON_ON || (compactIconMode == Settings.COMPACTICON_AUTO && size >= compactIconModeThreshold);
+        return forceCompactIconMode;
+    }
+
+    /**
+     *
+     * @return return whether compact icons should be used based on the last received cache count
+     */
+    public static boolean forceCompactIconMode() {
+        return forceCompactIconMode;
     }
 }

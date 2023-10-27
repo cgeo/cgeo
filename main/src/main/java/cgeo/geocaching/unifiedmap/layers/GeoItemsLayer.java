@@ -34,7 +34,7 @@ public class GeoItemsLayer {
 
             final Map<String, Integer> currentlyDisplayedGeocaches = new HashMap<>();
 
-            final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode(caches.size()); // todo: only use caches in viewport and update while moving the map
+            final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode();
             if (lastForceCompactIconMode != forceCompactIconMode) {
                 lastForceCompactIconMode = forceCompactIconMode;
                 viewModel.waypoints.notifyDataChanged();
