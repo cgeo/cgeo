@@ -439,7 +439,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     private void compactIconModeChanged(final int newValue) {
         Settings.setCompactIconMode(newValue);
-        // @todo: does not yet trigger switching icon modes
         viewModel.caches.postNotifyDataChanged();
     }
 
