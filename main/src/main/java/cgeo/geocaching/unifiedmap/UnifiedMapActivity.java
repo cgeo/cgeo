@@ -311,6 +311,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
+        viewModel.mapCenter.observe(this, center -> updateCacheCount());
+        viewModel.caches.observe(this, caches -> updateCacheCount());
+
 //        MapUtils.showMapOneTimeMessages(this, mapMode);
 
         /*
@@ -454,6 +457,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     public void hideProgressSpinner() {
         final View spinner = findViewById(R.id.map_progressbar);
         spinner.setVisibility(View.GONE);
+    }
+
+    private void updateCacheCount() {
+        final int cacheCount = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+        CompactIconModeUtils.forceCompactIconMode(cacheCount);
+        final ActionBar actionbar = getSupportActionBar();
+        if (actionbar != null) {
+            actionbar.setSubtitle(res.getQuantityString(R.plurals.cache_counts, cacheCount, cacheCount));
+        }
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {

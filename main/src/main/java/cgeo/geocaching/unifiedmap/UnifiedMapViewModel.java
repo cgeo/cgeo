@@ -57,6 +57,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
      */
     public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
+    public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
 
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {

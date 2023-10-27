@@ -114,6 +114,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         });
         mMap.setOnCameraIdleListener(() -> {
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+            viewModel.mapCenter.setValue(getCenter());
 //            if (activityMapChangeListener != null) {
 //                final CameraPosition pos = mMap.getCameraPosition();
 //                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
@@ -169,6 +170,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public BoundingBox getBoundingBox() {
+        if (lastBounds == null) {
+            return new BoundingBox(0, 0, 0, 0);
+        }
         // mMap.getProjection() needs to be called on UI thread
         return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
