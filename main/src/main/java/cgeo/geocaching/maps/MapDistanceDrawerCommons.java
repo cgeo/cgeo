@@ -16,8 +16,6 @@ package cgeo.geocaching.maps;
  */
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.layers.UnifiedTargetAndDistancesHandler;
 
@@ -39,11 +37,7 @@ public class MapDistanceDrawerCommons {
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
 
-    private final Pair<Integer, String> emptyInfo = new Pair<>(0, "");
-    private Pair<Integer, String> realDistanceInfo = emptyInfo;
-    private Pair<Integer, String> distanceInfo = emptyInfo;
-    private Pair<Integer, String> routingInfo = emptyInfo;
-    private Pair<Integer, String> elevationInfo = emptyInfo;
+    private Pair<Integer, String> elevationInfo = new Pair<>(0, "");
 
     public MapDistanceDrawerCommons(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -57,17 +51,9 @@ public class MapDistanceDrawerCommons {
     }
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
-        final boolean routingModeStraight = Settings.getRoutingMode() == RoutingMode.STRAIGHT;
         this.showBothDistances = showBothDistances;
         this.distance = distance;
         this.realDistance = realDistance;
-        final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && !routingModeStraight;
-        bothViewsNeeded = showBothDistances && showRealDistance;
-
-        realDistanceInfo = showRealDistance ? new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance)) : emptyInfo;
-        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance)) : emptyInfo;
-        routingInfo = routeDistance > 0.0f ? new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)) : emptyInfo;
-
         updateDistanceViews();
     }
 
@@ -89,7 +75,7 @@ public class MapDistanceDrawerCommons {
 
     private void updateDistanceViews() {
         // glue code to UnifiedMap
-        UnifiedTargetAndDistancesHandler.updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, elevationInfo, distances1, distances2, distanceSupersizeView, targetView);
+        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
 }
