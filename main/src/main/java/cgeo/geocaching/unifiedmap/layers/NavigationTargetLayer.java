@@ -70,8 +70,6 @@ public class NavigationTargetLayer {
         });
 
         viewModel.individualRoute.observe(activity, individualRoute -> mapDistanceDrawer.drawRouteDistance(individualRoute.getDistance()));
-
-        viewModel.elevation.observe(activity, elevation -> mapDistanceDrawer.drawElevation(elevation));
     }
 
 

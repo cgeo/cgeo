@@ -29,10 +29,6 @@ public class DistanceView {
         }
     }
 
-    public void setElevation(final float elevationFromRouting, final float elevationFromGNSS) {
-        mapDistanceDrawer.drawElevation(elevationFromRouting, elevationFromGNSS);
-    }
-
     public void setRealDistance(final float realDistance) {
         this.realDistance = realDistance;
     }

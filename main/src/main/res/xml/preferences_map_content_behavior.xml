@@ -40,12 +40,6 @@
             android:summary="@string/init_summary_dtMarkerOnCacheIcon"
             android:title="@string/init_dtMarkerOnCacheIcon"
             app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_showElevation"
-            android:title="@string/init_showElevation"
-            android:summary="@string/init_summary_showElevation"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

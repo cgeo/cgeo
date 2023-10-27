@@ -236,7 +236,6 @@
     <string translatable="false" name="pref_maptrail_length">maptrail_length</string>
     <string translatable="false" name="pref_bigSmileysOnMap">pref_bigSmileysOnMap</string>
     <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
-    <string translatable="false" name="pref_showElevation">showElevation</string>
 
     <!-- category waypoints -->
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>

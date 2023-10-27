@@ -30,10 +30,6 @@ public class DistanceDrawer {
         }
     }
 
-    public void setElevation(final float elevationFromRouting, final float elevationFromGNSS) {
-        mapDistanceDrawer.drawElevation(elevationFromRouting, elevationFromGNSS);
-    }
-
     public Geopoint getDestinationCoords() {
         return destinationCoords;
     }

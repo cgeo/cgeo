@@ -3,7 +3,6 @@ package cgeo.geocaching.maps.routing;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.brouter.core.RoutingEngine;
 import cgeo.geocaching.downloader.DownloadConfirmationActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -33,8 +32,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public final class Routing {
-    public static final float NO_ELEVATION_AVAILABLE = Float.NaN; // check with Float.isNaN(...)
-
     private static final double UPDATE_MIN_DISTANCE_KILOMETERS = 0.005;
     private static final double MIN_ROUTING_DISTANCE_KILOMETERS = 0.04;
     private static final int UPDATE_MIN_DELAY_SECONDS = 3;
@@ -179,48 +176,6 @@ public final class Routing {
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return ensureTrack(lastRoutingPoints, start, destination);
-    }
-
-    public static float getElevation(final Geopoint current) {
-        if (routingServiceConnection == null) {
-            return NO_ELEVATION_AVAILABLE;
-        }
-        final Bundle params = new Bundle();
-        params.putInt("engineMode", RoutingEngine.BROUTER_ENGINEMODE_GETELEV);
-        params.putDoubleArray("lats", new double[]{current.getLatitude(), current.getLatitude()});
-        params.putDoubleArray("lons", new double[]{current.getLongitude(), current.getLongitude()});
-        params.putString("v", RoutingMode.STRAIGHT.parameterValue);
-        final String gpx = routingServiceConnection.getTrackFromParams(params);
-
-        // parse result
-        final boolean[] inElevationElement = new boolean[1];
-        final float[] result = new float[1];
-        result[0] = NO_ELEVATION_AVAILABLE;
-        try {
-            Xml.parse(gpx, new DefaultHandler() {
-                @Override
-                public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
-                    if (qName.equalsIgnoreCase("ele")) {
-                        inElevationElement[0] = true;
-                    }
-                }
-
-                @Override
-                public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-                    inElevationElement[0] = false;
-                }
-
-                @Override
-                public void characters(final char[] ch, final int start, final int length) throws SAXException {
-                    if (inElevationElement[0]) {
-                        result[0] = Float.parseFloat(String.valueOf(ch));
-                    }
-                }
-            });
-        } catch (SAXException ignore) {
-            return NO_ELEVATION_AVAILABLE;
-        }
-        return result[0];
     }
 
     /**

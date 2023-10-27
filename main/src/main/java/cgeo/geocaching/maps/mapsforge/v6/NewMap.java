@@ -881,10 +881,10 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(findViewById(R.id.distances1).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
+        this.distanceView = new DistanceView(findViewById(R.id.distance1).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
 
         //Target view
-        this.targetView = new TargetView(findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
+        this.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = getCurrentTargetCache();
         if (target != null) {
             targetView.setTarget(target.getShortGeocode(), target.getName());
@@ -1257,11 +1257,6 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
                             if (null != map.proximityNotification && (timeLastDistanceCheck == 0 || currentTimeMillis > (timeLastDistanceCheck + MIN_UPDATE_INTERVAL))) {
                                 map.proximityNotification.checkDistance(map.caches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
                                 timeLastDistanceCheck = System.currentTimeMillis();
-                            }
-
-                            if (Settings.showElevation()) {
-                                final float elevation = Routing.getElevation(new Geopoint(currentLocation));
-                                map.distanceView.setElevation(elevation, currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
                             }
                         }
                     }

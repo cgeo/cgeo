@@ -1424,10 +1424,6 @@ public class Settings {
         return getBoolean(R.string.pref_bigSmileysOnMap, false);
     }
 
-    public static boolean showElevation() {
-        return getBoolean(R.string.pref_showElevation, false);
-    }
-
     /**
      * Proximity notification settings
      */

@@ -39,7 +39,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final HashMapLiveData<String, IWaypoint> geoItems = new HashMapLiveData<>();
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden
-    public final MutableLiveData<Float> elevation = new MutableLiveData<>();
 
     /**
      * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden

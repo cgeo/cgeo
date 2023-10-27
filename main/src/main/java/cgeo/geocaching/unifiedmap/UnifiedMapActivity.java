@@ -178,14 +178,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity {
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
                             // @todo: check if proximity notification needs an update
-
-                            if (Settings.showElevation()) {
-                                float elevation = Routing.getElevation(new Geopoint(currentLocation));
-                                if (Float.isNaN(elevation) && currentLocation.hasAltitude()) {
-                                    elevation = (float) currentLocation.getAltitude();
-                                }
-                                mapActivity.viewModel.elevation.setValue(elevation);
-                            }
                         }
                     }
                 } catch (final RuntimeException e) {

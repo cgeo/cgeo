@@ -35,6 +35,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -173,7 +174,7 @@ public class GoogleMapActivity extends AbstractNavigationBarActivity implements 
     @Override
     protected void onStart() {
         //Target view
-        mapBase.targetView = new TargetView(findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
+        mapBase.targetView = new TargetView((TextView) findViewById(R.id.target), (TextView) findViewById(R.id.targetSupersize), StringUtils.EMPTY, StringUtils.EMPTY);
         final Geocache target = mapBase.getCurrentTargetCache();
         if (target != null) {
             mapBase.targetView.setTarget(target.getGeocode(), target.getName());
