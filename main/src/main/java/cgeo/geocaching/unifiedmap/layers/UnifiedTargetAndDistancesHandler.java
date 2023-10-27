@@ -25,6 +25,7 @@ import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.view.View;
 import android.widget.LinearLayout;
@@ -54,11 +55,7 @@ public class UnifiedTargetAndDistancesHandler {
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
 
-    private final Pair<Integer, String> emptyInfo = new Pair<>(0, "");
-    private Pair<Integer, String> realDistanceInfo = emptyInfo;
-    private Pair<Integer, String>  distanceInfo = emptyInfo;
-    private Pair<Integer, String>  routingInfo = emptyInfo;
-    private Pair<Integer, String>  elevationInfo = emptyInfo;
+    private Pair<Integer, String>  elevationInfo = new Pair<>(0, "");
 
     UnifiedTargetAndDistancesHandler(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -74,16 +71,9 @@ public class UnifiedTargetAndDistancesHandler {
     // distances handling -------------------------------------------------------------------------------------------
 
     public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
-        final boolean routingModeStraight = Settings.getRoutingMode() == RoutingMode.STRAIGHT;
         this.showBothDistances = showBothDistances;
         this.distance = distance;
         this.realDistance = realDistance;
-        final boolean showRealDistance = realDistance > 0.0f && distance != realDistance && !routingModeStraight;
-        bothViewsNeeded = showBothDistances && showRealDistance;
-
-        realDistanceInfo = showRealDistance ? new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance)) : emptyInfo;
-        distanceInfo = (showBothDistances || routingModeStraight) && distance > 0.0f ? new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance)) : emptyInfo;
-        routingInfo = routeDistance > 0.0f ? new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)) : emptyInfo;
         updateDistanceViews();
     }
 
@@ -99,45 +89,57 @@ public class UnifiedTargetAndDistancesHandler {
     }
 
     private void updateDistanceViews() {
-        updateDistanceViews(distanceInfo, realDistanceInfo, routingInfo, elevationInfo, distances1, distances2, distanceSupersizeView, targetView);
+        updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
-            final Pair<Integer, String> distanceInfo, final Pair<Integer, String>  realDistanceInfo, final Pair<Integer, String> routingInfo, final Pair<Integer, String> elevationInfo,
+            final float distance, final float realDistance, final float routeDistance, final Pair<Integer, String> elevationInfo, final boolean showBothDistances,
             final LinearLayout distances1, final LinearLayout distances2,
-            final TextView distanceSupersizeView, final TextView targetView
+            final TextView distanceSupersizeView, final TextView targetView,
+            final Action1<Boolean> updateBothViewNeeded
     ) {
-        final int supersize = Settings.getSupersizeDistance();
         Pair<Integer, String> supersizeInfo = new Pair<>(0, "");
         final ArrayList<Pair<Integer, String>>[] data = new ArrayList[2];
         data[0] = new ArrayList<>();
         data[1] = new ArrayList<>();
 
-        if (!distanceInfo.second.isEmpty()) {
-            if (supersize == 2) {
+        final boolean showRealDistance = realDistance != 0.0f && distance != realDistance && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
+        final boolean bothViewsNeeded = showBothDistances && showRealDistance;
+        updateBothViewNeeded.call(bothViewsNeeded);
+        final int supersize = distance == 0 ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
+
+        final Pair<Integer, String> distanceInfo = new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance));
+        final Pair<Integer, String> realDistanceInfo = new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance));
+
+        // collect data to be displayed
+        if (bothViewsNeeded) {
+            if (supersize == 1) {
                 supersizeInfo = distanceInfo;
+                data[0].add(realDistanceInfo);
+            } else if (supersize == 2) {
+                supersizeInfo = realDistanceInfo;
+                data[0].add(distanceInfo);
             } else {
                 data[0].add(distanceInfo);
-            }
-        }
-
-        if (!realDistanceInfo.second.isEmpty()) {
-            if (supersize == 1) {
-                supersizeInfo = realDistanceInfo;
-            } else {
                 data[0].add(realDistanceInfo);
             }
+        } else if (distance != 0.0f) {
+            if (supersize > 0) {
+                supersizeInfo = showRealDistance ? realDistanceInfo : distanceInfo;
+            } else {
+                data[0].add(showRealDistance ? realDistanceInfo : distanceInfo);
+            }
         }
-
-        if (!routingInfo.second.isEmpty()) {
-            data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(routingInfo);
+        if (routeDistance != 0.0f) {
+            data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)));
         }
 
         if (!elevationInfo.second.isEmpty()) {
             data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(elevationInfo);
         }
 
+        // update views
         syncViews(distances1, data[0]);
         distances1.setVisibility(data[0].size() > 0 ? View.VISIBLE : View.GONE);
         syncViews(distances2, data[1]);
