@@ -5,5 +5,5 @@
 -
 
 ### Algemeen
-- Tapping on downloader notification opens "pending downloads" view
+- Tik op downloader melding opent "Openstaande downloads" weergave
 
