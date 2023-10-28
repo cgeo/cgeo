@@ -288,7 +288,12 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         if (cache.isLinearAlc()) {
-            int stageCounter = Integer.parseInt(waypoint.getPrefix());
+            int stageCounter = 0;
+            try {
+                stageCounter = Integer.parseInt(waypoint.getPrefix());
+            } catch (NumberFormatException ignore) {
+                // ignored, value defaults to 0
+            }
             while (stageCounter > 9) {
                 stageCounter = stageCounter - 10;
             }
