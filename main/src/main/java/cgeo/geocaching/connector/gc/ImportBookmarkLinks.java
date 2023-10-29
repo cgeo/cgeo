@@ -21,24 +21,11 @@ public class ImportBookmarkLinks extends AppCompatActivity {
 
     private final UrlToIdParser intentUrlParser = defaultBookmarkListUrlToIdParser();
 
-    static UrlToIdParser defaultBookmarkListUrlToIdParser() {
-        return new AggregatedUrlToIdParser(
-                new SingleUrlToIdParser(
-                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/([A-Z0-9]+)",
-                        1
-                ),
-                new SingleUrlToIdParser(
-                        "^https?://(?:www\\.)?coord\\.info/([A-Z0-9]+)",
-                        1
-                )
-        );
-    }
-
     public static final String BOOKMARK_LIST_API_PREFIX =
             "https://www.geocaching.com/plan/api/gpx/list/";
 
     interface UrlToIdParser {
-        @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
+        @Nullable String tryExtractFromIntentUrl(@Nullable final String intentUrl);
     }
 
     static class SingleUrlToIdParser implements UrlToIdParser {
@@ -47,16 +34,16 @@ public class ImportBookmarkLinks extends AppCompatActivity {
         // which has introduced in java 1.7...
         private final int groupToExtract;
 
-        public SingleUrlToIdParser(
-                @RegEx @NonNull String regex,
-                int groupToExtract
+        SingleUrlToIdParser(
+                @RegEx @NonNull final String regex,
+                final int groupToExtract
         ) {
             this.matcherPattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
             this.groupToExtract = groupToExtract;
         }
 
         @Override
-        public String tryExtractFromIntentUrl(String intentUrl) {
+        public String tryExtractFromIntentUrl(final String intentUrl) {
             if (intentUrl == null) {
                 return null;
             }
@@ -74,23 +61,36 @@ public class ImportBookmarkLinks extends AppCompatActivity {
     static class AggregatedUrlToIdParser implements UrlToIdParser {
         private final UrlToIdParser[] parsers;
 
-        public AggregatedUrlToIdParser(UrlToIdParser... parsers) {
+        AggregatedUrlToIdParser(final UrlToIdParser... parsers) {
             this.parsers = parsers;
         }
 
         @Override
-        public String tryExtractFromIntentUrl(String intentUrl) {
+        public String tryExtractFromIntentUrl(final String intentUrl) {
             if (intentUrl == null) {
                 return null;
             }
-            for (UrlToIdParser parser : parsers) {
-                String id = parser.tryExtractFromIntentUrl(intentUrl);
+            for (final UrlToIdParser parser : parsers) {
+                final String id = parser.tryExtractFromIntentUrl(intentUrl);
                 if (id != null) {
                     return id;
                 }
             }
             return null;
         }
+    }
+
+    static UrlToIdParser defaultBookmarkListUrlToIdParser() {
+        return new AggregatedUrlToIdParser(
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/([A-Z0-9]+)",
+                        1
+                ),
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?coord\\.info/([A-Z0-9]+)",
+                        1
+                )
+        );
     }
 
     @Override
@@ -103,7 +103,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
         }
         final String url = intent.getDataString();
 
-        String id = this.intentUrlParser.tryExtractFromIntentUrl(url);
+        final String id = this.intentUrlParser.tryExtractFromIntentUrl(url);
 
         if (id != null) {
             final Intent bookmarkListIntent = makeIntentFromId(BOOKMARK_LIST_API_PREFIX, id);
