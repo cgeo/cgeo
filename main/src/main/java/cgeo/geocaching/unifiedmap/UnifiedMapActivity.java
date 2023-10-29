@@ -473,7 +473,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         for (String geocode : searchResult.getGeocodes()) {
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                // todo - LeastRecentlyUsedSet - remove before adding?
+                viewModel.caches.getValue().remove(temp);
                 viewModel.caches.getValue().add(temp);
                 viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
             }
@@ -482,7 +482,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
         Log.e("addSearchResult: " + searchResult.size());
-        // todo - LeastRecentlyUsedSet - remove before adding?
+        viewModel.caches.getValue().removeAll(searchResult);
         viewModel.caches.getValue().addAll(searchResult);
         viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
 
@@ -494,7 +494,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             s.append(" ").append(geocode);
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
-                // todo - LeastRecentlyUsedSet - remove before adding?
+                viewModel.caches.getValue().remove(temp);
                 viewModel.caches.getValue().add(temp);
                 viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
             }
