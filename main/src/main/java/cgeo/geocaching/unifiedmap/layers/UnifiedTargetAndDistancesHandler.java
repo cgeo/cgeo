@@ -157,7 +157,10 @@ public class UnifiedTargetAndDistancesHandler {
         }
     }
 
-    /** syncs actual children of LinearLayots with current data, removes/creates views "on the fly" */
+    /**
+     * syncs actual children of LinearLayouts with current data, removes/creates views "on the fly"
+     * updates views only if changes need to be applied
+     */
     private static void syncViews(final LinearLayout ll, final ArrayList<Pair<Integer, String>> data) {
         final int existing = ll.getChildCount();
         int count = 0;
@@ -167,10 +170,13 @@ public class UnifiedTargetAndDistancesHandler {
                 tv = (TextView) ll.getChildAt(count);
             } else {
                 tv = new TextView(ll.getContext(), null, 0, R.style.map_distanceinfo_no_background);
-                tv.setVisibility(View.VISIBLE);
                 ll.addView(tv);
             }
-            TextParam.text(info.second).setImage(ImageParam.id(info.first)).setImageTint(-1).applyTo(tv);
+            tv.setVisibility(View.VISIBLE);
+            if (!StringUtils.equals(tv.getHint(), String.valueOf(info.first)) || !StringUtils.equals(tv.getText(), info.second)) {
+                TextParam.text(info.second).setImage(ImageParam.id(info.first)).setImageTint(-1).applyTo(tv);
+            }
+            tv.setHint(String.valueOf(info.first));
             count++;
         }
         for (int i = count; i < existing; i++) {
