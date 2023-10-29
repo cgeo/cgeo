@@ -1360,7 +1360,7 @@ public class GCWebAPI {
         @JsonProperty("images")
         String[] images; //image GUIDs
         @JsonProperty("logDate")
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonUtils.JSON_LOCAL_TIMESTAMP_PATTERN)
         Date logDate;
         @JsonProperty("logText")
         String logText;
@@ -1379,11 +1379,11 @@ public class GCWebAPI {
         String logReferenceCode;
         @JsonProperty("dateTimeCreatedUtc")
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonUtils.JSON_LOCAL_TIMESTAMP_PATTERN)
         Date dateTimeCreatedUtc;
         @JsonProperty("dateTimeLastUpdatedUtc")
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonUtils.JSON_LOCAL_TIMESTAMP_PATTERN)
         Date dateTimeLastUpdatedUtc;
         @JsonProperty("cannotDelete")
         @JsonInclude(JsonInclude.Include.NON_NULL)
