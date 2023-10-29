@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +38,13 @@ public class JsonUtils {
 
     public static final JsonNodeFactory factory = new JsonNodeFactory(true);
 
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+    public static final String JSON_LOCAL_TIMESTAMP_PATTERN = "yyyy-MM-dd'T'HH:mm:ss";
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat(JSON_LOCAL_TIMESTAMP_PATTERN, Locale.US);
+
+    static {
+        //default timezone of Jackson is UTC, but in c:geo we use default (local) timezone. See e.g. #14746
+        mapper.setTimeZone(TimeZone.getDefault());
+    }
 
 
     private JsonUtils() {

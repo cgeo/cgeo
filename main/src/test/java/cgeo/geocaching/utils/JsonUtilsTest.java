@@ -1,13 +1,27 @@
 package cgeo.geocaching.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class JsonUtilsTest {
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class JsonDateTestClass {
+        @JsonProperty("logDate")
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = JsonUtils.JSON_LOCAL_TIMESTAMP_PATTERN)
+        Date logDate;
+    }
 
     private static final String TEST_JSON = "{\n" +
             "   \"color\": \"green\",\n" +
@@ -70,5 +84,20 @@ public class JsonUtilsTest {
 
         final String json = JsonUtils.nodeToString(node);
         assertThat(json).isEqualToIgnoringWhitespace("{\"text\":\"green\",\"float\":1.0,\"boolean\":true,\"array\":[\"red\",null,\"blue\"]}");
+    }
+
+    @Test
+    public void dateWithTimezones() throws JsonProcessingException {
+        final Date now = new Date();
+        final SimpleDateFormat sdf = new SimpleDateFormat(JsonUtils.JSON_LOCAL_TIMESTAMP_PATTERN, Locale.ENGLISH);
+        final String sdfDateString = sdf.format(now);
+
+        final JsonDateTestClass jsonDate = new JsonDateTestClass();
+        jsonDate.logDate = now;
+        final String json = JsonUtils.mapper.writeValueAsString(jsonDate);
+        final String jsonDateString = JsonUtils.stringToNode(json).get("logDate").textValue();
+
+        assertThat(jsonDateString).isEqualTo(sdfDateString);
+
     }
 }
