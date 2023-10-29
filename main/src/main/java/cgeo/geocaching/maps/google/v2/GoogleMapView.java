@@ -293,13 +293,13 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
-            SimpleDialog.of((Activity) context).setTitle(R.string.warn_gm_not_available).setMessage(R.string.switch_to_mf).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> {
+            SimpleDialog.of((Activity) context).setTitle(R.string.warn_gm_not_available).setMessage(R.string.switch_to_mf).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
                 // switch to first Mapsforge mapsource found
                 final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
                 for (final MapSource mapSource : mapSources) {
                     if (mapSource instanceof AbstractMapsforgeMapSource) {
                         Settings.setMapSource(mapSource);
-                        SimpleDialog.of((Activity) context).setTitle(R.string.warn_gm_not_available).setMessage(R.string.switched_to_mf).show((dialog2, whichButton2) -> ((Activity) context).finish());
+                        SimpleDialog.of((Activity) context).setTitle(R.string.warn_gm_not_available).setMessage(R.string.switched_to_mf).show(() -> ((Activity) context).finish());
                         break;
                     }
                 }

@@ -37,7 +37,7 @@ public class NamedFilterFilterViewHolder extends BaseFilterViewHolder<NamedFilte
         selectSpinner
                 .setValues(namedFilters)
                 .set(null)
-                .setDisplayMapper(f ->
+                .setDisplayMapperPure(f ->
                         f == null ? LocalizationUtils.getString(R.string.cache_filter_userdisplay_none) : f.getName());
         final LinearLayout.LayoutParams llParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llParams.bottomMargin = ViewUtils.dpToPixel(10);

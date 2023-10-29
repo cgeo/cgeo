@@ -43,12 +43,12 @@ import java.util.Objects;
  */
 public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
-    public static final String DISPLAY_VALUE_NULL = "--";
+    public static final TextParam DISPLAY_VALUE_NULL = TextParam.text("--");
 
     private final List<T> values = new ArrayList<>();
-    private final List<String> displayValues = new ArrayList<>();
+    private final List<TextParam> displayValues = new ArrayList<>();
     private final Map<T, Integer> valuesToPosition = new HashMap<>();
-    private Func1<T, String> displayMapper;
+    private Func1<T, TextParam> displayMapper;
     private Action1<T> changeListener;
     private boolean fireOnChangeOnly;
 
@@ -58,8 +58,8 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     private Spinner spinner;
 
     private View spinnerView;
-    private Action2<View, String> spinnerViewSetter;
-    private Func1<T, String> textDisplayMapper;
+    private Action2<View, TextParam> spinnerViewSetter;
+    private Func1<T, TextParam> textDisplayMapper;
     private String textDialogTitle;
     private Func1<T, Boolean> setCheckedMapper;
     private boolean textViewClickThroughMode = false;
@@ -120,15 +120,19 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     /**
      * returns current list of DISPLAY values (note: used for unit testing)
      */
-    public List<String> getDisplayValues() {
+    public List<TextParam> getDisplayValues() {
         return Collections.unmodifiableList(this.displayValues);
     }
 
     /**
      * for textview: returns display value currently used for showing (note: used for unit testing)
      */
-    public String getTextDisplayValue() {
+    public TextParam getTextDisplayValue() {
         return itemToString(get(), true);
+    }
+
+    public TextSpinner<T> setDisplayMapperPure(@Nullable final Func1<T, String> displayMapper) {
+        return setDisplayMapper(displayMapper == null ? null : v -> TextParam.text(displayMapper.call(v)));
     }
 
     /**
@@ -136,7 +140,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
      * If not set, values are displayed using {@link String#valueOf(Object)}.
      * Mapper will never be called for null values.
      */
-    public TextSpinner<T> setDisplayMapper(@Nullable final Func1<T, String> displayMapper) {
+    public TextSpinner<T> setDisplayMapper(@Nullable final Func1<T, TextParam> displayMapper) {
         this.displayMapper = displayMapper;
         recalculateDisplayValues();
         return this;
@@ -163,13 +167,15 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
      * if spinner should be represented as a textview, use this method to set the view
      */
     public TextSpinner<T> setTextView(@NonNull final TextView textView) {
-        return setView(textView, (view, text) -> ((TextView) view).setText(text));
+        return setView(textView, (view, text) -> {
+            text.applyTo((TextView) view);
+        });
     }
 
     /**
      * if spinner should be represented as a generic view, use this method to set the view
      */
-    public TextSpinner<T> setView(@NonNull final View view, @Nullable final Action2<View, String> viewSetter) {
+    public TextSpinner<T> setView(@NonNull final View view, @Nullable final Action2<View, TextParam> viewSetter) {
         this.spinnerView = view;
         this.spinnerViewSetter = viewSetter;
         this.spinnerView.setOnClickListener(l -> selectTextViewItem());
@@ -186,9 +192,13 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
     /**
      * if spinner is be represented as a textview, set how currently selected value is displayed
-     * If not set, then mapper set with {@link #setDisplayMapper(Func1)} is used
+     * If not set, then mapper set with {@link #setDisplayMapperPure(Func1)} is used
      */
-    public TextSpinner<T> setTextDisplayMapper(@Nullable final Func1<T, String> textDisplayMapper) {
+    public TextSpinner<T> setTextDisplayMapperPure(@Nullable final Func1<T, String> textDisplayMapper) {
+        return setTextDisplayMapper(textDisplayMapper == null ? null : v -> TextParam.text(textDisplayMapper.call(v)));
+    }
+
+    public TextSpinner<T> setTextDisplayMapper(@Nullable final Func1<T, TextParam> textDisplayMapper) {
         this.textDisplayMapper = textDisplayMapper;
         repaintDisplay();
         return this;
@@ -242,7 +252,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     private SpinnerAdapter createSpinnerAdapter() {
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
+        final ArrayAdapter<TextParam> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return adapter;
     }
@@ -316,12 +326,12 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
         }
     }
 
-    private String itemToString(final T item, final boolean useTextDisplayMapper) {
+    private TextParam itemToString(final T item, final boolean useTextDisplayMapper) {
         if (item == null) {
             return DISPLAY_VALUE_NULL;
         }
-        final Func1<T, String> mapper = (useTextDisplayMapper && this.textDisplayMapper != null) ? this.textDisplayMapper : this.displayMapper;
-        return mapper == null ? String.valueOf(item) : mapper.call(item);
+        final Func1<T, TextParam> mapper = (useTextDisplayMapper && this.textDisplayMapper != null) ? this.textDisplayMapper : this.displayMapper;
+        return mapper == null ? TextParam.text(String.valueOf(item)) : mapper.call(item);
     }
 
     //for Spinner-view: called when element changes
@@ -359,11 +369,22 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
             //use a COPY of values for display, in case value list changes while dialog is open. See #13578
             final List<T> valuesCopy = new ArrayList<>(values);
-            sd.selectSingleGrouped(valuesCopy,
-                    (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + displayMapper.call(v)),
-                    getPositionFor(selectedItem, -1), this.textHideSelectionMarker ? SimpleDialog.SingleChoiceMode.NONE : SimpleDialog.SingleChoiceMode.SHOW_RADIO,
-                    (v, i) -> this.textGroupMapper == null ? null : this.textGroupMapper.call(v),
-                    s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(valuesCopy.get(pos)));
+
+            final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(valuesCopy)
+                .setDisplayMapper((v, i) -> itemToString(v, false))
+                .setSelectedItems(Collections.singleton(selectedItem))
+                .setChoiceMode(this.textHideSelectionMarker ? SimpleItemListModel.ChoiceMode.SINGLE_PLAIN : SimpleItemListModel.ChoiceMode.SINGLE_RADIO)
+                .setMinimumItemCountForFilterDisplay(Integer.MAX_VALUE);
+
+            if (this.textGroupMapper != null) {
+                model.setGrouping(go -> {
+                    go.setGroupMapper((v, i) -> this.textGroupMapper.call(v))
+                            .setGroupDisplayMapper(s -> TextParam.text("**" + s + "**").setMarkdown(true));
+                });
+            }
+            sd.selectSingle(model, this::set);
         }
     }
 

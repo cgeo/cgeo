@@ -38,7 +38,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         loginData.setOnPreferenceClickListener(preference -> {
             if (loginData.isChecked()) {
                 loginData.setChecked(false);
-                SimpleDialog.of(getActivity()).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm((dialog, which) -> loginData.setChecked(true));
+                SimpleDialog.of(getActivity()).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm(() -> loginData.setChecked(true));
             }
             return true;
         });

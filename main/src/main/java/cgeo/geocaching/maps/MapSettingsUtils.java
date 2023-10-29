@@ -179,7 +179,7 @@ public class MapSettingsUtils {
         if (!Routing.isAvailable()) {
             configureRoutingButtons(false, routingChoiceWrapper);
             dialogView.routingInfo.setVisibility(View.VISIBLE);
-            dialogView.routingInfo.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.map_routing_activate_title).setMessage(R.string.map_routing_activate).confirm((dialog1, which) -> {
+            dialogView.routingInfo.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.map_routing_activate_title).setMessage(R.string.map_routing_activate).confirm(() -> {
                 Settings.setUseInternalRouting(true);
                 Settings.setBrouterAutoTileDownloads(true);
                 configureRoutingButtons(true, routingChoiceWrapper);

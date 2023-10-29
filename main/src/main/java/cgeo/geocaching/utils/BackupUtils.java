@@ -122,8 +122,8 @@ public class BackupUtils {
             SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
                     .setMessage(R.string.settings_folder_changed, activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                    .confirm((d, v) -> fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored)),
-                            (d2, v2) -> {
+                    .confirm(() -> fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored)),
+                            () -> {
                                 regrantAccessFolders.remove(0);
                                 triggerNextRegrantStep(null, null);
                             });
@@ -136,10 +136,10 @@ public class BackupUtils {
                 SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
                     .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                    .confirm((d, v) -> {
+                    .confirm(() -> {
                         fileSelector.restorePersistableUri(data.left, uriToBeRestored);
                     },
-                    (d2, v2) -> {
+                    () -> {
                         regrantAccessUris.remove(0);
                         triggerNextRegrantStep(null, null);
                     });
@@ -315,7 +315,7 @@ public class BackupUtils {
         // finish restore with restore if settings where changed
         if (settingsChanged && !(activityContext instanceof InstallWizardActivity)) {
             SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString + activityContext.getString(R.string.settings_restart)))
-                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog2, which2) -> ProcessUtils.restartApplication(activityContext));
+                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> ProcessUtils.restartApplication(activityContext));
         } else {
             SimpleDialog.of(activityContext).setTitle(R.string.init_restore_restored).setMessage(TextParam.text(resultString)).show();
         }
@@ -656,7 +656,8 @@ public class BackupUtils {
         } else {
             SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
                     .setButtons(0, 0, R.string.cache_share_field)
-                    .show(SimpleDialog.DO_NOTHING, null, (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
+                    .setNeutralAction(() -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup))
+                    .show();
         }
     }
 

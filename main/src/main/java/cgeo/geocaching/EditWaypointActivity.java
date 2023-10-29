@@ -507,7 +507,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final ActivityData currentState = getActivityData();
 
         if (currentState != null && isWaypointChanged(currentState)) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_wp_changes).confirm((dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_wp_changes).confirm(this::finish);
         } else {
             finish();
         }

@@ -123,7 +123,14 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
 
             final List<T> items = new ArrayList<>(filterAccessor.getSelectableValues());
             items.removeAll(visibleValues);
-            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title)).selectMultiple(items, (s, i) -> TextParam.text(filterAccessor.getDisplayText(s)), null, null, false, s -> {
+
+            final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(items)
+                .setDisplayMapper((s, i) -> TextParam.text(filterAccessor.getDisplayText(s)));
+
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
+                .selectMultiple(model, s -> {
                 visibleValues.addAll(s);
                 for (T value : s) {
                     getValueCheckbox(value).right.setChecked(true);

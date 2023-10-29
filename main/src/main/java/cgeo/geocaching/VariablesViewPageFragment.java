@@ -66,7 +66,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             binding.variables.clearFocus();
             if (!adapter.getVariables().isEmpty()) {
                 SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_deleteall))
-                        .setMessage(TextParam.id(R.string.variables_deleteall_confirm_text)).confirm((dd, i) -> adapter.clearAllVariables());
+                        .setMessage(TextParam.id(R.string.variables_deleteall_confirm_text)).confirm(() -> adapter.clearAllVariables());
             }
         });
 
@@ -145,8 +145,11 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         if (patterns.isEmpty()) {
             ActivityMixin.showShortToast(activity, R.string.variables_scanlisting_nopatternfound);
         } else {
+            final SimpleDialog.ItemSelectModel<String> model = new SimpleDialog.ItemSelectModel<>();
+            model.setItems(patterns).setDisplayMapper((s, i) -> TextParam.text("`" + s + "`").setMarkdown(true));
+
             SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                    .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, null, false, set -> {
+                    .selectMultiple(model, set -> {
                         for (String s : set) {
                             adapter.addVariable(null, s);
                         }

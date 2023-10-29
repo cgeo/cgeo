@@ -549,7 +549,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
     private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
-            SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
+            SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> Settings.setDebug(false));
         }
     }
 

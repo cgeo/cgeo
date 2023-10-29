@@ -4,7 +4,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.content.Context;
-import android.text.InputType;
 import android.util.AttributeSet;
 
 import androidx.preference.Preference;
@@ -40,8 +39,7 @@ public class TextPreference extends Preference {
     public void launchTextDialog(final String title) {
 
         SimpleDialog.ofContext(getContext()).setTitle(TextParam.text(title))
-                .input(InputType.TYPE_CLASS_TEXT, getPersistedString(null),
-                        null, null, null, null, s -> {
+                .input(new SimpleDialog.InputOptions().setInitialValue(getPersistedString(null)), s -> {
                     persistString(s);
                     callChangeListener(s);
                 });

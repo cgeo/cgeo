@@ -41,7 +41,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 break;
         }
         if (!finished) {
-            SimpleDialog.of(this).setTitle(R.string.localfile_title).setMessage(R.string.localfile_cannot_handle).show((dialog, button) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.localfile_title).setMessage(R.string.localfile_cannot_handle).show(this::finish);
         }
     }
 

@@ -242,7 +242,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     }
 
     private void init() {
-        logType.setTextView(binding.type).setDisplayMapper(LogTypeTrackable::getLabel);
+        logType.setTextView(binding.type).setDisplayMapperPure(LogTypeTrackable::getLabel);
         logType.setValues(possibleLogTypesTrackable);
         logType.setChangeListener(lt -> setType(lt, true));
 
@@ -373,7 +373,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             } else {
                 // Redirect user to concerned connector settings
                 //Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
-                SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> {
+                SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                     } else {

@@ -3,6 +3,7 @@ package cgeo.geocaching.contacts;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.permission.PermissionContext;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -102,9 +103,14 @@ public class ContactsHelper {
     }
 
     private void selectContact(@NonNull final List<Pair<Integer, String>> contacts) {
+        final SimpleDialog.ItemSelectModel<Pair<Integer, String>> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(contacts)
+            .setDisplayMapper((i, p) -> TextParam.text(i.second))
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
         SimpleDialog.of(activity)
                 .setTitle(R.string.contact_multiple_matches)
-                .selectSingle(contacts, (i, p) -> TextParam.text(i.second), -1, SimpleDialog.SingleChoiceMode.NONE, (i, p) -> {
+                .selectSingle(model, i -> {
                     final int contactId = i.first;
                     openContact(contactId);
                 });

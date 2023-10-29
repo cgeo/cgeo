@@ -30,7 +30,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         activity.setTitle(R.string.settings_title_system);
 
         setPrefClick(this, R.string.pref_fakekey_memory_dump, () -> DebugUtils.createMemoryDump(activity));
-        setPrefClick(this, R.string.pref_fakekey_reset_otm, () -> SimpleDialog.of(getActivity()).setMessage(TextParam.id(R.string.init_reset_otm_confirm)).confirm((d, w) -> {
+        setPrefClick(this, R.string.pref_fakekey_reset_otm, () -> SimpleDialog.of(getActivity()).setMessage(TextParam.id(R.string.init_reset_otm_confirm)).confirm(() -> {
             OneTimeDialogs.resetAll();
             Toast.makeText(activity, R.string.init_reset_otm_done, Toast.LENGTH_SHORT).show();
         }));

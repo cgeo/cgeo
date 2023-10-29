@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_box"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
+
+    <!-- We need an anchor on left side for layout to work correctly when item's visibility is set to GONE-->
+    <Space
+        android:id="@+id/item_leftAnchor"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"/>
+
+    <!-- icons at beginning: radiobutton, checkbox, group-reduced, group-expanded -->
+    <RelativeLayout
+        android:id="@+id/item_checker"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/item_leftAnchor">
+        <CheckBox
+            android:id="@+id/item_checkbox"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <RadioButton
+            android:id="@+id/item_radiobutton"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:id="@+id/group_expanded"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/expand_more"/>
+        <ImageView
+            android:id="@+id/group_reduced"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/expand_less"/>
+    </RelativeLayout>
+
+    <!-- Item Icon (optional) -->
+    <ImageView
+        android:id="@+id/item_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:scaleType="fitCenter"
+        android:layout_toRightOf="@id/item_checker"
+        android:src="@drawable/settings_info"
+        android:layout_centerVertical="true" />
+
+    <!-- Item Text -->
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_toRightOf="@id/item_icon"
+        android:minHeight="30dp"
+        android:gravity="left|center_vertical"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:layout_marginLeft="6dp"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_action"
+        android:textSize="@dimen/textSize_detailsPrimary"
+        android:textColor="@color/colorText"
+        tools:text="Info Item"/>
+
+    <!-- Item Action Button (optional) -->
+    <Button
+        android:id="@+id/item_action"
+        style="@style/button_icon"
+        android:layout_toLeftOf="@id/item_rightAnchor"
+        android:layout_gravity="center"
+        android:scaleType="centerInside"
+        android:icon="@drawable/ic_menu_delete"
+        tools:src="@drawable/ic_menu_delete" />
+
+    <!-- We need an anchor on right side for layout to work correctly when item's visibility is set to GONE-->
+    <Space
+        android:id="@+id/item_rightAnchor"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

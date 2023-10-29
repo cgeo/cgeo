@@ -1,15 +1,16 @@
 package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Action2;
 
 import android.app.Activity;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,21 +66,27 @@ public class ContextMenuDialog {
 
         final boolean atLeastOneElementHasIcon = CollectionStream.of(items).filter(i -> i.icon > 0).count() > 0;
 
-        final Action2<Item, Integer> clickListener = (dialog, pos) -> {
-            //dialog.dismiss();
-            final Item it = this.items.get(pos);
+        final Consumer<Item> clickListener = (it) -> {
             if (it.selectAction != null) {
                 it.selectAction.call(it);
             }
             if (dialogClickAction != null) {
-                dialogClickAction.call(pos);
+                final int pos = this.items.indexOf(it);
+                if (pos >= 0) {
+                    dialogClickAction.call(pos);
+                }
             }
         };
 
-        SimpleDialog.of(this.activity).setTitle(this.title == null ? null : TextParam.text(this.title)).selectSingle(
-                items,
-                (it, pos) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0),
-                -1, SimpleDialog.SingleChoiceMode.NONE, clickListener);
+        final SimpleDialog.ItemSelectModel<ContextMenuDialog.Item> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(items)
+            .setDisplayMapper((it, pos) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0))
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setMinimumItemCountForFilterDisplay(Integer.MAX_VALUE);
+
+        SimpleDialog.of(this.activity).setTitle(this.title == null ? null : TextParam.text(this.title))
+                .selectSingle(model, clickListener);
     }
 
 

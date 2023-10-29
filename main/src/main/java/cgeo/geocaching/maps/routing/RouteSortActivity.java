@@ -164,7 +164,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         if (position < 1 || position >= routeItemAdapter.getItems().size()) {
             return false;
         }
-        SimpleDialog.ofContext(this).setTitle(TextParam.id(R.string.individual_route_set_as_start_title)).setMessage(TextParam.id(R.string.individual_route_set_as_start_message)).confirm((d, v) -> {
+        SimpleDialog.ofContext(this).setTitle(TextParam.id(R.string.individual_route_set_as_start_title)).setMessage(TextParam.id(R.string.individual_route_set_as_start_message)).confirm(() -> {
             final ArrayList<RouteItem> newRouteItems = new ArrayList<>();
             for (int i = position; i < routeItemAdapter.getItems().size(); i++) {
                 newRouteItems.add(routeItemAdapter.getItems().get(i));
@@ -215,7 +215,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     @Override
     public void onBackPressed() {
         if (!originalRouteItems.equals(routeItemAdapter.getItems())) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
         } else {
             finish();
         }

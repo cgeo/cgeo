@@ -159,8 +159,8 @@ public class TextParam {
         final CharSequence tcs = getText(view.getContext());
         if (tcs != null) {
             view.setText(tcs);
-            adjust(view, forceNoMovement);
         }
+        adjust(view, forceNoMovement);
     }
 
     /**

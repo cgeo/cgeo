@@ -263,7 +263,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             cLog.add("init");
 
             binding.infoNotloggedin.setOnClickListener(v ->
-                    SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+                    SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
             // automated update check
             DownloaderUtils.checkForRoutingTileUpdates(this);
@@ -419,7 +419,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             if (colStatus >= 0) {
                                 final int status = c.getInt(colStatus);
                                 if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
-                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm(() -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
                                     Settings.setPendingDownloadsLastCheck(false);
                                     break;
                                 }

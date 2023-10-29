@@ -284,7 +284,7 @@ public class ViewUtils {
         final CheckboxItemBinding itemBinding = CheckboxItemBinding.bind(itemView);
         text.applyTo(itemBinding.itemText);
         if (icon != null) {
-            icon.apply(itemBinding.itemIcon);
+            icon.applyTo(itemBinding.itemIcon);
         }
         if (infoText != null) {
             itemBinding.itemInfo.setVisibility(View.VISIBLE);
@@ -428,11 +428,21 @@ public class ViewUtils {
     }
 
     public static Context wrap(final Context ctx) {
+        return wrap(ctx, R.style.cgeo);
+    }
+
+    public static Context wrap(final Context ctx, @StyleRes final int themeResId) {
         //Avoid wrapping already wrapped context's
-        if (ctx instanceof ContextThemeWrapperWrapper && ((ContextThemeWrapperWrapper) ctx).getThemeResId() == R.style.cgeo) {
-            return ctx;
+        if (ctx instanceof ContextThemeWrapperWrapper) {
+            final ContextThemeWrapperWrapper wrapperCtx = (ContextThemeWrapperWrapper) ctx;
+            if (wrapperCtx.getThemeResId() == themeResId) {
+                //ctx is already wrapped with correct themeResId -> just return
+                return ctx;
+            }
+            //re-wrap with new themeResId
+            return new ContextThemeWrapperWrapper(wrapperCtx.base, themeResId);
         }
-        return new ContextThemeWrapperWrapper(ctx, R.style.cgeo);
+        return new ContextThemeWrapperWrapper(ctx, themeResId);
     }
 
     /**
@@ -441,14 +451,20 @@ public class ViewUtils {
     private static class ContextThemeWrapperWrapper extends ContextThemeWrapper {
 
         private final int themeResId;
+        private final Context base;
 
         ContextThemeWrapperWrapper(final Context base, @StyleRes final int themeResId) {
             super(base, themeResId);
             this.themeResId = themeResId;
+            this.base = base;
         }
 
         public int getThemeResId() {
             return themeResId;
+        }
+
+        public Context getBaseContext() {
+            return base;
         }
     }
 

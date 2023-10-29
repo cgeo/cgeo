@@ -61,8 +61,7 @@ public class DebugUtils {
                 .setMessage(TextParam.text(message.toString()))
                 .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
                 .confirm(
-                        (dialog, which) -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
-                        SimpleDialog.DO_NOTHING
+                        () -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg)
                 );
     }
 
@@ -75,11 +74,8 @@ public class DebugUtils {
                     .setTitle(R.string.about_system_write_logcat)
                     .setMessage(R.string.about_system_write_logcat_type)
                     .setButtons(R.string.about_system_write_logcat_type_standard, 0, R.string.about_system_write_logcat_type_extended)
-                    .confirm(
-                            (dialog, which) -> createLogcatHelper(activity, false, false, null),
-                            SimpleDialog.DO_NOTHING,
-                            (dialog, which) -> createLogcatHelper(activity, true, false, null)
-                    );
+                    .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
+                    .confirm(() -> createLogcatHelper(activity, false, false, null));
         }
     }
 
@@ -122,11 +118,8 @@ public class DebugUtils {
                             .setTitle(R.string.about_system_write_logcat)
                             .setMessage(R.string.about_system_write_logcat_success, UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString())
                             .setButtons(0, 0, R.string.about_system_info_send_button)
-                            .confirm(
-                                    SimpleDialog.DO_NOTHING,
-                                    null,
-                                    (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get())
-                            );
+                            .setNeutralAction(() -> shareLogfileAsEmail(activity, additionalMessage, result.get()))
+                            .show();
 
                 }
             } else {

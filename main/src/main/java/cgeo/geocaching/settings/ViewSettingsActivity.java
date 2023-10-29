@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -40,6 +41,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 import javax.annotation.Nullable;
 
@@ -223,7 +226,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
     private void deleteItem(final int position) {
         final KeyValue keyValue = filteredItems.get(position);
         final String key = keyValue.key;
-        SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm((dialog, which) -> {
+        SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm(() -> {
             final SharedPreferences.Editor editor = prefs.edit();
             editor.remove(key);
             editor.apply();
@@ -235,14 +238,14 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
         final KeyValue keyValue = filteredItems.get(position);
         if (keyValue.type == SettingsUtils.SettingsType.TYPE_BOOLEAN) {
             final ArrayList<Boolean> items = new ArrayList<>(Arrays.asList(false, true));
-            SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key)).selectSingle(
-                    items,
-                    (l, pos) -> TextParam.text(items.get(pos) ? "true" : "false"),
-                    StringUtils.equals(keyValue.value, "true") ? 1 : 0,
-                    SimpleDialog.SingleChoiceMode.SHOW_RADIO_AND_OK,
-                    (l, pos) -> editItemHelper(position, keyValue, String.valueOf(items.get(pos))),
-                    (l, pos) -> { } /* do nothing on cancel */
-                    );
+            final SimpleDialog.ItemSelectModel<Boolean> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO, true)
+                .setItems(items).setDisplayMapper((l, pos) -> TextParam.text(items.get(pos) ? "true" : "false"))
+                .setSelectedItems(Collections.singleton(StringUtils.equals(keyValue.value, "true") ? TRUE : FALSE));
+
+            SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key))
+                    .selectSingle(model, (l) -> editItemHelper(position, keyValue, String.valueOf(l)));
         } else {
             int inputType = 0;
             switch (keyValue.type) {
@@ -378,7 +381,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.view_settings_edit && !editMode) {
-            SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
+            SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm(() -> {
                 editMode = true;
                 updateMenuButtons();
                 debugAdapter.notifyDataSetChanged();

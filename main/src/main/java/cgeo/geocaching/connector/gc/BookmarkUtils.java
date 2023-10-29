@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -52,15 +53,21 @@ public class BookmarkUtils {
 
             waitDialog.dismiss();
 
+            final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(lists)
+                .setDisplayMapper((l, pos) -> TextParam.text(l.getName()))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
-                    .selectSingle(lists, (l, pos) -> TextParam.text(l.getName()), -1, SimpleDialog.SingleChoiceMode.NONE, (l, pos) -> processSelection(context, geocaches, l));
+                    .selectSingle(model, l -> processSelection(context, geocaches, l));
 
         });
     }
 
     private static void processSelection(final Context context, final List<Geocache> geocaches, final GCList selection) {
         if (selection.getGuid().equals(NEW_LIST_GUID)) {
-            SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(-1, null, null, null,
+            SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(null,
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
                         final String guid = GCParser.createBookmarkList(name, geocaches.get(0));
                         if (guid == null) {

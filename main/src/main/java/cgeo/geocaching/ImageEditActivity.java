@@ -269,7 +269,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     }
 
     private void updateScaleValueDisplayIntern(final int width, final int height) {
-        imageScale.setDisplayMapper(scaleSize -> {
+        imageScale.setDisplayMapperPure(scaleSize -> {
             if (width < 0 || height < 0) {
                 return scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) :
                         getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);

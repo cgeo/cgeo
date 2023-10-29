@@ -51,7 +51,7 @@ public class StringFilterViewHolder<F extends StringGeocacheFilter> extends Base
         selectSpinner.setTextView(this.binding.select);
         selectSpinner
                 .setValues(Arrays.asList(StringFilter.StringFilterType.values()))
-                .setDisplayMapper(StringFilter.StringFilterType::toUserDisplayableString)
+                .setDisplayMapperPure(StringFilter.StringFilterType::toUserDisplayableString)
                 .setChangeListener(sft -> {
                     final boolean textEnabled = sft != StringFilter.StringFilterType.IS_NOT_PRESENT && sft != StringFilter.StringFilterType.IS_PRESENT;
                     binding.searchtext.setVisibility(textEnabled ? VISIBLE : GONE);

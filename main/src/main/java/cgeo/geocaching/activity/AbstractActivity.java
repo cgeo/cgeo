@@ -273,8 +273,11 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             if (patterns.isEmpty()) {
                 ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
             } else {
+                final SimpleDialog.ItemSelectModel<Pair<String, String>> model = new SimpleDialog.ItemSelectModel<>();
+                model.setItems(patterns).setDisplayMapper((s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true));
+
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                        .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, null, false, set -> {
+                        .selectMultiple(model, set -> {
                             final int added = cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
                             if (added > 0) {
                                 GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
