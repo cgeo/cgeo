@@ -7,59 +7,58 @@ public class ImportBookmarkLinksTest {
 
     final ImportBookmarkLinks.UrlToIdParser intentUrlParser = ImportBookmarkLinks.defaultBookmarkListUrlToIdParser();
 
+    enum CaseTransform {
+        NONE,
+        TO_LOWER,
+        TO_UPPER
+    }
+
+    private String composeUsing(
+            final String protocol,
+            final String hostAndPath,
+            final String bookmarkListId,
+            final String suffix,
+            final CaseTransform caseTransform
+    ) {
+        final String rawResult = protocol + "://" + hostAndPath + bookmarkListId + suffix;
+        switch (caseTransform) {
+            case TO_LOWER:
+                return rawResult.toLowerCase();
+            case TO_UPPER:
+                return rawResult.toUpperCase();
+            default:
+                return rawResult;
+        }
+    }
+
     @Test
     public void testParseValidUrls() {
-        //// HTTPS
+        final String[] validProtocols = {"http", "https"};
+        final String[] validHostsAndPath = {
+                "coord.info/",
+                "geocaching.com/plan/lists/",
+                "www.coord.info/",
+                "www.geocaching.com/plan/lists/"
+        };
+        final String[] validSuffixes = { "", "?someoption=foo"};
+        final String bookmarkListId = "BM2MKFM";
 
-        // Normal case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://www.geocaching.com/plan/lists/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://coord.info/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-
-        // All UPPER case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("HTTPS://WWW.GEOCACHING.COM/PLAN/LISTS/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("HTTPS://COORD.INFO/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-
-        // All lower case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://www.geocaching.com/plan/lists/bm2mkfm"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://coord.info/bm2mkfm"))
-                .isEqualTo("BM2MKFM");
-
-        // Trailing characters
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://www.geocaching.com/plan/lists/BM2MKFM?someoption=foo"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("https://coord.info/BM2MKFM?someoption=foo"))
-                .isEqualTo("BM2MKFM");
-
-
-        //// HTTP
-
-        // Normal case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://www.geocaching.com/plan/lists/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://coord.info/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-
-        // All UPPER case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("HTTP://WWW.GEOCACHING.COM/PLAN/LISTS/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("HTTP://COORD.INFO/BM2MKFM"))
-                .isEqualTo("BM2MKFM");
-
-        // All lower case
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://www.geocaching.com/plan/lists/bm2mkfm"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://coord.info/bm2mkfm"))
-                .isEqualTo("BM2MKFM");
-
-        // Trailing characters
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://www.geocaching.com/plan/lists/BM2MKFM?someoption=foo"))
-                .isEqualTo("BM2MKFM");
-        assertThat(intentUrlParser.tryExtractFromIntentUrl("http://coord.info/BM2MKFM?someoption=foo"))
-                .isEqualTo("BM2MKFM");
+        for (final String protocol : validProtocols) {
+            for (final String hostAndPath : validHostsAndPath) {
+                for (final String validSuffix : validSuffixes) {
+                    for (final CaseTransform caseTransform : CaseTransform.values()) {
+                        final String testUrl = composeUsing(
+                                protocol,
+                                hostAndPath,
+                                bookmarkListId,
+                                validSuffix,
+                                caseTransform
+                        );
+                        assertThat(intentUrlParser.tryExtractFromIntentUrl(testUrl))
+                                .isEqualTo(bookmarkListId);
+                    }
+                }
+            }
+        }
     }
 }
