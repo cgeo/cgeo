@@ -38,7 +38,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
             "https://www.geocaching.com/plan/api/gpx/list/";
 
     interface UrlToIdParser {
-        public String tryExtractFromIntentUrl(@Nullable String intentUrl);
+        @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
     }
 
     static class SingleUrlToIdParser implements UrlToIdParser {
@@ -62,7 +62,10 @@ public class ImportBookmarkLinks extends AppCompatActivity {
             }
             final MatcherWrapper matcher = new MatcherWrapper(this.matcherPattern, intentUrl);
             if (matcher.find()) {
-                return matcher.group(groupToExtract);
+                final String maybeId = matcher.group(groupToExtract);
+                if (maybeId != null) {
+                    return maybeId.toUpperCase();
+                }
             }
             return null;
         }
