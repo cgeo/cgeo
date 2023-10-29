@@ -275,7 +275,7 @@ public final class MapMarkerUtils {
     @NonNull
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final Geocache cache, final boolean forMap, final boolean applyScaling) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, @Nullable final Geocache cache, final boolean forMap, final boolean applyScaling) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null), getWaypointScalingFactor(applyScaling));
@@ -287,8 +287,13 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        if (cache.isLinearAlc()) {
-            int stageCounter = Integer.parseInt(waypoint.getPrefix());
+        if (cache != null && cache.isLinearAlc()) {
+            int stageCounter = 0;
+            try {
+                stageCounter = Integer.parseInt(waypoint.getPrefix());
+            } catch (NumberFormatException ignore) {
+                // ignored, value defaults to 0
+            }
             while (stageCounter > 9) {
                 stageCounter = stageCounter - 10;
             }
@@ -296,13 +301,13 @@ public final class MapMarkerUtils {
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
             final Drawable waypointTypeIcon = getMutatedDrawable(res, waypointType.markerId);
-            if (cache.isDisabled() || cache.isArchived()) {
+            if (cache != null && (cache.isDisabled() || cache.isArchived())) {
                 DrawableCompat.setTint(waypointTypeIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
             insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(waypointTypeIcon, getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
         }
 
-        if (cache.isArchived()) {
+        if (cache != null && cache.isArchived()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, getWaypointScalingFactor(applyScaling)));
         }
         // bottom-right: visited
@@ -311,13 +316,14 @@ public final class MapMarkerUtils {
         }
 
         // top-left: emoji
-        if (forMap && cache.getAssignedEmoji() != 0) {
-            insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, cache.getAssignedEmoji(), applyScaling), Gravity.TOP | Gravity.LEFT));
-        } else if (forMap) {
-            insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, false), Gravity.TOP | Gravity.LEFT));
+        if (cache != null) {
+            if (forMap && cache.getAssignedEmoji() != 0) {
+                insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, cache.getAssignedEmoji(), applyScaling), Gravity.TOP | Gravity.LEFT));
+            } else if (forMap) {
+                insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, false), Gravity.TOP | Gravity.LEFT));
+            }
+            addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
         }
-
-        addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
 
         return buildLayerDrawable(insetsBuilder, 8, 8);
     }
@@ -802,7 +808,7 @@ public final class MapMarkerUtils {
      * @param applyScaling  S
      * @return Layered Drawable
      */
-    public static Drawable getTypeMarker(final Resources res, final Geocache cache, final boolean withBorder, final boolean applyScaling, final boolean forCache) {
+    public static Drawable getTypeMarker(final Resources res, @NonNull final Geocache cache, final boolean withBorder, final boolean applyScaling, final boolean forCache) {
         final int hashcode = new HashCodeBuilder()
                 .append("typeMarker")
                 .append(cache.getType().id)
