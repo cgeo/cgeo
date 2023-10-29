@@ -11,6 +11,8 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import androidx.annotation.DimenRes;
+
 public class DisplayUtils {
 
     public static final float SIZE_LIST_MARKER_DP = 12f;  // size of a list marker in dp
@@ -48,6 +50,10 @@ public class DisplayUtils {
     public static int getPxFromDp(final Resources res, final float size, final float scaleFactor) {
         final float conversionFactor = (float) res.getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         return (int) (size * conversionFactor * scaleFactor);
+    }
+
+    public static int getDimensionInDp(final Resources res, final @DimenRes int resId) {
+        return (int) (res.getDimension(resId) / res.getDisplayMetrics().density);
     }
 
     /**

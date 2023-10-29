@@ -481,6 +481,11 @@ dependencies {
     //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
     //See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
+
+    // charting, based on com.github.PhilJay:MPAndroidChart
+    // for detailed docs for the base library see https://weeklycoding.com/mpandroidchart/
+    // stay with 3.1.0.16 for now to avoid problems with CI
+    implementation 'com.github.AppDevNext:AndroidChart:3.1.0.16'
 }
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error

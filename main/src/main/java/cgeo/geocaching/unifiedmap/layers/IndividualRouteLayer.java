@@ -20,7 +20,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 public class IndividualRouteLayer {
-    private static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
+    public static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
 
     private final Bitmap marker = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.marker_routepoint, null));
 

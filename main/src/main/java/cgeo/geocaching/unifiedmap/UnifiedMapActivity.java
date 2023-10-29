@@ -63,6 +63,7 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
+import static cgeo.geocaching.unifiedmap.layers.ElevationChartUtils.toggleElevationChart;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -113,6 +114,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     private AbstractMapFragment mapFragment = null;
     private final List<GeoItemLayer<?>> layers = new ArrayList<>();
     GeoItemLayer<String> clickableItemsLayer;
+    GeoItemLayer<String> nonClickableItemsLayer;
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -279,7 +281,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         layers.clear();
 
         clickableItemsLayer = new GeoItemLayer<>("clickableItems");
-        final GeoItemLayer<String> nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems"); // default layer for all map items not worth an own layer
+        nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems"); // default layer for all map items not worth an own layer
 
         layers.add(clickableItemsLayer);
         layers.add(nonClickableItemsLayer);
@@ -860,6 +862,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                         break;
                     }
                 }
+            }
+
+            if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && !isLongTap) {
+                toggleElevationChart(this, viewModel.individualRoute.getValue(), nonClickableItemsLayer, getString(R.string.individual_route));
+                return;
             }
 
         }

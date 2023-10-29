@@ -187,7 +187,8 @@ public class RouteOptimizationHelper {
                         if (col != j) {
                             final Geopoint[] track = Routing.getTrackNoCaching(
                                     new Geopoint(initialRoute.get(col).getPoint().getLatitude(), initialRoute.get(col).getPoint().getLongitude()),
-                                    new Geopoint(initialRoute.get(j).getPoint().getLatitude(), initialRoute.get(j).getPoint().getLongitude()));
+                                    new Geopoint(initialRoute.get(j).getPoint().getLatitude(), initialRoute.get(j).getPoint().getLongitude()),
+                                    null);
                             float distance = 0.0f;
                             if (track.length > 0) {
                                 Geopoint last = track[0];
