@@ -25,7 +25,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
             "https://www.geocaching.com/plan/api/gpx/list/";
 
     interface UrlToIdParser {
-        @Nullable String tryExtractFromIntentUrl(@Nullable final String intentUrl);
+        @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
     }
 
     static class SingleUrlToIdParser implements UrlToIdParser {
@@ -113,7 +113,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
         finish();
     }
 
-    Intent makeIntentFromId(String prefix, String id) {
+    Intent makeIntentFromId(final String prefix, final String id) {
         final Uri uri = Uri.parse(prefix + id);
         final Intent bookmarkListIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
         bookmarkListIntent.setDataAndType(uri, "application/xml");
