@@ -483,7 +483,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
         Log.e("addSearchResult: " + searchResult.size());
         viewModel.caches.getValue().removeAll(searchResult);
-        viewModel.caches.getValue().addAll(searchResult);
+        for (Geocache geocache : searchResult) {
+            if (geocache.getCoords() != null) {
+                viewModel.caches.getValue().add(geocache);
+            }
+        }
         viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
 
     }
