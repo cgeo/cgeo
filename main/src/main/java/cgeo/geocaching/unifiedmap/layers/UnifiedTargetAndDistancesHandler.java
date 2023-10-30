@@ -107,7 +107,7 @@ public class UnifiedTargetAndDistancesHandler {
         data[0] = new ArrayList<>();
         data[1] = new ArrayList<>();
 
-        final boolean showRealDistance = realDistance > MIN_DISTANCE && Math.abs(distance - realDistance) < MIN_DIFF && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
+        final boolean showRealDistance = realDistance > MIN_DISTANCE && Math.abs(distance - realDistance) > MIN_DIFF && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
         final boolean bothViewsNeeded = showBothDistances && showRealDistance;
         updateBothViewNeeded.call(bothViewsNeeded);
         final int supersize = distance < MIN_DISTANCE ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
