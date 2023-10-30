@@ -1,4 +1,6 @@
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
+- Correcção: problemas com visualizações de distância
+- Correcção: Nem todas as variantes de ícones de arranque são adaptáveis
+- Correcção: Mensagem de erro desactualizada se não houver ligação de rede
+- Fix: Crashes when creating waypoint markers
+- Fix: Timezone issues when logging
