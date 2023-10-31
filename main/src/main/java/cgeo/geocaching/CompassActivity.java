@@ -21,6 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ToggleItem;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -221,7 +222,8 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
         ttsMenuItem.setVisible(cache != null);
-        setMenuToggleSpeech(ttsMenuItem, SpeechService.isRunning());
+        ToggleItem.toggleSpeech.toggleMenuItem(ttsMenuItem, SpeechService.isRunning());
+
         return true;
     }
 
@@ -238,7 +240,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);
-            setMenuToggleSpeech(item, SpeechService.isRunning());
+            ToggleItem.toggleSpeech.toggleMenuItem(item, SpeechService.isRunning());
         } else if (id == R.id.menu_hint) {
             if (binding.hint.offlineHintText.getVisibility() == View.VISIBLE) {
                 binding.hint.offlineHintSeparator1.setVisibility(View.GONE);
@@ -322,13 +324,6 @@ public class CompassActivity extends AbstractActionBarActivity {
             binding.hint.locationStatus.updateSatelliteStatus(gpsStatus);
         }
     };
-
-    private void setMenuToggleSpeech(final MenuItem menuItem, final boolean speechActive) {
-        if (null != menuItem) {
-            menuItem.setTitle(speechActive ? R.string.cache_menu_speechDeactivate : R.string.cache_menu_speechActivate);
-            menuItem.setIcon(speechActive ? R.drawable.ic_menu_text_to_speech_on : R.drawable.ic_menu_text_to_speech_off);
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
