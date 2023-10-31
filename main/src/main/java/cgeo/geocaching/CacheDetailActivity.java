@@ -648,9 +648,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void setMenuPreventWaypointsFromNote(final boolean preventWaypointsFromNote) {
-        if (null != menuItemToggleWaypointsFromNote) {
-            menuItemToggleWaypointsFromNote.setTitle(preventWaypointsFromNote ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
-        }
+        ToggleItem.waypointsFromNote.toggleMenuItem(menuItemToggleWaypointsFromNote, preventWaypointsFromNote);
     }
 
     @Override

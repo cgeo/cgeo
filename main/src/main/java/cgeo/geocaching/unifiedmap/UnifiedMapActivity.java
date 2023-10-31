@@ -33,6 +33,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.ToggleItem;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -537,9 +538,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     private void initFollowMyLocation(final boolean followMyLocation) {
         Settings.setFollowMyLocation(followMyLocation);
-        if (followMyLocationItem != null) {
-            followMyLocationItem.setIcon(followMyLocation ? R.drawable.ic_menu_mylocation : R.drawable.ic_menu_mylocation_off);
-        }
+        ToggleItem.followMyLocation.toggleMenuItem(followMyLocationItem, followMyLocation);
+
         if (followMyLocation) {
             final Location currentLocation = geoDirUpdate.getCurrentLocation();
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
@@ -610,13 +610,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
-        if (Settings.isLiveMap()) {
-            itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
-            itemMapLive.setTitle(res.getString(R.string.map_live_disable));
-        } else {
-            itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
-            itemMapLive.setTitle(res.getString(R.string.map_live_enable));
-        }
+        ToggleItem.liveMode.toggleMenuItem(itemMapLive, Settings.isLiveMap());
+
         /* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */
         itemMapLive.setVisible(true);
 
