@@ -55,6 +55,9 @@ public class UnifiedTargetAndDistancesHandler {
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
 
+    private static final float MIN_DISTANCE = 0.0005f;
+    private static final float MIN_DIFF = 0.015f;
+
     private Pair<Integer, String>  elevationInfo = new Pair<>(0, "");
 
     UnifiedTargetAndDistancesHandler(final View root) {
@@ -104,10 +107,10 @@ public class UnifiedTargetAndDistancesHandler {
         data[0] = new ArrayList<>();
         data[1] = new ArrayList<>();
 
-        final boolean showRealDistance = realDistance != 0.0f && distance != realDistance && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
+        final boolean showRealDistance = realDistance > MIN_DISTANCE && Math.abs(distance - realDistance) > MIN_DIFF && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
         final boolean bothViewsNeeded = showBothDistances && showRealDistance;
         updateBothViewNeeded.call(bothViewsNeeded);
-        final int supersize = distance == 0 ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
+        final int supersize = distance < MIN_DISTANCE ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
 
         final Pair<Integer, String> distanceInfo = new Pair<>(RoutingMode.STRAIGHT.drawableId, Units.getDistanceFromKilometers(distance));
         final Pair<Integer, String> realDistanceInfo = new Pair<>(Settings.getRoutingMode().drawableId, Units.getDistanceFromKilometers(realDistance));
@@ -124,14 +127,14 @@ public class UnifiedTargetAndDistancesHandler {
                 data[0].add(distanceInfo);
                 data[0].add(realDistanceInfo);
             }
-        } else if (distance != 0.0f) {
+        } else if (distance > MIN_DISTANCE) {
             if (supersize > 0) {
                 supersizeInfo = showRealDistance ? realDistanceInfo : distanceInfo;
             } else {
                 data[0].add(showRealDistance ? realDistanceInfo : distanceInfo);
             }
         }
-        if (routeDistance != 0.0f) {
+        if (routeDistance > MIN_DISTANCE) {
             data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)));
         }
 
@@ -157,7 +160,10 @@ public class UnifiedTargetAndDistancesHandler {
         }
     }
 
-    /** syncs actual children of LinearLayots with current data, removes/creates views "on the fly" */
+    /**
+     * syncs actual children of LinearLayouts with current data, removes/creates views "on the fly"
+     * updates views only if changes need to be applied
+     */
     private static void syncViews(final LinearLayout ll, final ArrayList<Pair<Integer, String>> data) {
         final int existing = ll.getChildCount();
         int count = 0;
@@ -167,10 +173,13 @@ public class UnifiedTargetAndDistancesHandler {
                 tv = (TextView) ll.getChildAt(count);
             } else {
                 tv = new TextView(ll.getContext(), null, 0, R.style.map_distanceinfo_no_background);
-                tv.setVisibility(View.VISIBLE);
                 ll.addView(tv);
             }
-            TextParam.text(info.second).setImage(ImageParam.id(info.first)).setImageTint(-1).applyTo(tv);
+            tv.setVisibility(View.VISIBLE);
+            if (!StringUtils.equals(tv.getHint(), String.valueOf(info.first)) || !StringUtils.equals(tv.getText(), info.second)) {
+                TextParam.text(info.second).setImage(ImageParam.id(info.first)).setImageTint(-1).applyTo(tv);
+            }
+            tv.setHint(String.valueOf(info.first));
             count++;
         }
         for (int i = count; i < existing; i++) {
