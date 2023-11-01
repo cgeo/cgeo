@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import javax.annotation.RegEx;
@@ -51,7 +52,7 @@ public class ImportBookmarkLinks extends AppCompatActivity {
             if (matcher.find()) {
                 final String maybeId = matcher.group(groupToExtract);
                 if (maybeId != null) {
-                    return maybeId.toUpperCase();
+                    return maybeId.toUpperCase(Locale.getDefault());
                 }
             }
             return null;
