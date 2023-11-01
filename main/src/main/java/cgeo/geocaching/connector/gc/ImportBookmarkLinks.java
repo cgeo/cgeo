@@ -84,11 +84,11 @@ public class ImportBookmarkLinks extends AppCompatActivity {
     static UrlToIdParser defaultBookmarkListUrlToIdParser() {
         return new AggregatedUrlToIdParser(
                 new SingleUrlToIdParser(
-                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/([A-Z0-9]+)",
+                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/(?<identifier>[A-Z0-9]+)",
                         1
                 ),
                 new SingleUrlToIdParser(
-                        "^https?://(?:www\\.)?coord\\.info/([A-Z0-9]+)",
+                        "^https?://(?:www\\.)?coord\\.info/(?<identifier>[A-Z0-9]+)",
                         1
                 )
         );
