@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Intent;
@@ -50,17 +51,19 @@ public class ImportBookmarkLinks extends AppCompatActivity {
 
         @Override
         public String tryExtractFromIntentUrl(final String intentUrl) {
-            if (intentUrl == null) {
+            final String maybeMatch = TextUtils.getMatch(
+                    intentUrl,
+                    this.matcherPattern,
+                    true,
+                    this.groupToExtract,
+                    null,
+                    false
+            );
+            if (maybeMatch != null) {
+                return maybeMatch.toUpperCase(Locale.getDefault());
+            } else {
                 return null;
             }
-            final MatcherWrapper matcher = new MatcherWrapper(this.matcherPattern, intentUrl);
-            if (matcher.find()) {
-                final String maybeId = matcher.group(groupToExtract);
-                if (maybeId != null) {
-                    return maybeId.toUpperCase(Locale.getDefault());
-                }
-            }
-            return null;
         }
     }
 
