@@ -5,5 +5,5 @@
 -
 
 ### Allgemein
-- Tapping on downloader notification opens "pending downloads" view
+- Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
 
