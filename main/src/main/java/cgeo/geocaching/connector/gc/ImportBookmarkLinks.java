@@ -3,7 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -25,8 +25,13 @@ public class ImportBookmarkLinks extends AppCompatActivity {
     public static final String BOOKMARK_LIST_API_PREFIX =
             "https://www.geocaching.com/plan/api/gpx/list/";
 
-    interface UrlToIdParser {
+    interface UrlToIdParser extends Func1<String, String> {
         @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
+
+        @Override
+        default String call(String intentUrl) {
+            return tryExtractFromIntentUrl(intentUrl);
+        }
     }
 
     static class SingleUrlToIdParser implements UrlToIdParser {
