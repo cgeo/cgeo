@@ -54,7 +54,7 @@ import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.ToggleItem;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -732,7 +732,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-            ToggleItem.liveMode.toggleMenuItem(itemMapLive, mapOptions.isLiveEnabled);
+            ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, mapOptions.isLiveEnabled);
 
             itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 

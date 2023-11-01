@@ -33,7 +33,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
-import cgeo.geocaching.ui.ToggleItem;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -538,7 +538,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     private void initFollowMyLocation(final boolean followMyLocation) {
         Settings.setFollowMyLocation(followMyLocation);
-        ToggleItem.followMyLocation.toggleMenuItem(followMyLocationItem, followMyLocation);
+        ToggleItemType.FOLLOW_MY_LOCATION.toggleMenuItem(followMyLocationItem, followMyLocation);
 
         if (followMyLocation) {
             final Location currentLocation = geoDirUpdate.getCurrentLocation();
@@ -610,7 +610,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
-        ToggleItem.liveMode.toggleMenuItem(itemMapLive, Settings.isLiveMap());
+        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Settings.isLiveMap());
 
         /* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */
         itemMapLive.setVisible(true);

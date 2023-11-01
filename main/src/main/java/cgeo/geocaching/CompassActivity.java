@@ -21,7 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextSpinner;
-import cgeo.geocaching.ui.ToggleItem;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -222,7 +222,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
         ttsMenuItem.setVisible(cache != null);
-        ToggleItem.toggleSpeech.toggleMenuItem(ttsMenuItem, SpeechService.isRunning());
+        ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(ttsMenuItem, SpeechService.isRunning());
 
         return true;
     }
@@ -240,7 +240,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);
-            ToggleItem.toggleSpeech.toggleMenuItem(item, SpeechService.isRunning());
+            ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(item, SpeechService.isRunning());
         } else if (id == R.id.menu_hint) {
             if (binding.hint.offlineHintText.getVisibility() == View.VISIBLE) {
                 binding.hint.offlineHintSeparator1.setVisibility(View.GONE);
