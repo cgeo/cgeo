@@ -1,6 +1,6 @@
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Fix: Probleme mit Distanzansichten
+- Korrektur: Nicht alle Launcher-Icon-Varianten sind adaptiv
+- Korrektur: Veraltete Fehlermeldung, wenn keine Netzwerkverbindung verfügbar ist
+- Korrektur: Abstürze beim Erstellen von Wegpunkt-Markierungen
+- Korrektur: Zeitzonenprobleme beim Loggen
