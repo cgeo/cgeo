@@ -1,6 +1,6 @@
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- 수정: 거리 보기 관련 문제
+- 수정: 모든 런처 아이콘 변형이 적응형이지는 않습니다.
+- 수정: 네트워크 연결을 사용할 수 없는 경우 오래된 오류 메시지가 표시됩니다.
+- 수정: 지점 마커 생성 시 충돌이 발생함
+- 수정: 로그할 때 시간대 문제
