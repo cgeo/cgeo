@@ -712,6 +712,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <data android:scheme="http" />
+                <data android:scheme="https" />
                 <data android:host="coord.info" />
                 <data android:host="www.coord.info" />
                 <data android:pathPrefix="/BM" />
