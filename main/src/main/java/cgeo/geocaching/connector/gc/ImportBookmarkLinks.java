@@ -3,18 +3,104 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
+import javax.annotation.RegEx;
+
 public class ImportBookmarkLinks extends AppCompatActivity {
+
+    private final UrlToIdParser intentUrlParser = defaultBookmarkListUrlToIdParser();
+
+    public static final String BOOKMARK_LIST_API_PREFIX =
+            "https://www.geocaching.com/plan/api/gpx/list/";
+
+    interface UrlToIdParser extends Func1<String, String> {
+        @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
+
+        @Override
+        default String call(String intentUrl) {
+            return tryExtractFromIntentUrl(intentUrl);
+        }
+    }
+
+    static class SingleUrlToIdParser implements UrlToIdParser {
+        private final Pattern matcherPattern;
+        // Android API 21 apparently does not support named capturing groups in Pattern
+        // which has introduced in java 1.7...
+        private final int groupToExtract;
+
+        SingleUrlToIdParser(
+                @RegEx @NonNull final String regex,
+                final int groupToExtract
+        ) {
+            this.matcherPattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+            this.groupToExtract = groupToExtract;
+        }
+
+        @Override
+        public String tryExtractFromIntentUrl(final String intentUrl) {
+            final String maybeMatch = TextUtils.getMatch(
+                    intentUrl,
+                    this.matcherPattern,
+                    true,
+                    this.groupToExtract,
+                    null,
+                    false
+            );
+            if (maybeMatch != null) {
+                return maybeMatch.toUpperCase(Locale.getDefault());
+            } else {
+                return null;
+            }
+        }
+    }
+
+    static class AggregatedUrlToIdParser implements UrlToIdParser {
+        private final UrlToIdParser[] parsers;
+
+        AggregatedUrlToIdParser(final UrlToIdParser... parsers) {
+            this.parsers = parsers;
+        }
+
+        @Override
+        public String tryExtractFromIntentUrl(final String intentUrl) {
+            if (intentUrl == null) {
+                return null;
+            }
+            for (final UrlToIdParser parser : parsers) {
+                final String id = parser.tryExtractFromIntentUrl(intentUrl);
+                if (id != null) {
+                    return id;
+                }
+            }
+            return null;
+        }
+    }
+
+    static UrlToIdParser defaultBookmarkListUrlToIdParser() {
+        return new AggregatedUrlToIdParser(
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/(?<identifier>[A-Z0-9]+)",
+                        1
+                ),
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?coord\\.info/(?<identifier>[A-Z0-9]+)",
+                        1
+                )
+        );
+    }
 
     @Override
     protected void onCreate(final @Nullable Bundle savedInstanceState) {
@@ -25,20 +111,23 @@ public class ImportBookmarkLinks extends AppCompatActivity {
             return;
         }
         final String url = intent.getDataString();
-        // check url
-        final Pattern p = Pattern.compile("http[s]:\\/\\/(www\\.)?geocaching\\.com\\/plan\\/lists\\/([A-Z0-9]+)(\\?)");
-        final MatcherWrapper matcher = new MatcherWrapper(p, url);
-        while (matcher.find()) {
-            // list id given?
-            if (matcher.groupCount() >= 2) {
-                final Uri uri = Uri.parse("https://www.geocaching.com/plan/api/gpx/list/" + matcher.group(2));
-                Log.i("starting import of bookmark list with id=" + matcher.group(2));
-                final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
-                cachesIntent.setDataAndType(uri, "application/xml");
-                cachesIntent.putExtra(Intents.EXTRA_NAME, matcher.group(2));
-                startActivity(cachesIntent);
-            }
+
+        final String id = this.intentUrlParser.tryExtractFromIntentUrl(url);
+
+        if (id != null) {
+            final Intent bookmarkListIntent = makeIntentFromId(BOOKMARK_LIST_API_PREFIX, id);
+            Log.i("starting import of bookmark list with id=" + id);
+            startActivity(bookmarkListIntent);
         }
         finish();
     }
+
+    Intent makeIntentFromId(final String prefix, final String id) {
+        final Uri uri = Uri.parse(prefix + id);
+        final Intent bookmarkListIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
+        bookmarkListIntent.setDataAndType(uri, "application/xml");
+        bookmarkListIntent.putExtra(Intents.EXTRA_NAME, id);
+        return bookmarkListIntent;
+    }
+
 }
