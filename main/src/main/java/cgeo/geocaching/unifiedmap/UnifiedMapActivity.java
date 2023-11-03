@@ -26,6 +26,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -829,7 +830,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
 
         // lookup elements touched by this
-        final LinkedList<RouteItem> result = new LinkedList<>();
+        final LinkedList<RouteOrRouteItem> result = new LinkedList<>();
 
         for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
 
@@ -838,7 +839,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
                 final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (temp != null && temp.getCoords() != null) {
-                    result.add(new RouteItem(temp));
+                    result.add(new RouteOrRouteItem(new RouteItem(temp)));
                 }
             }
 
@@ -847,7 +848,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
                     if (identifier.equals(item.getIdentifier())) {
-                        result.add(item);
+                        result.add(new RouteOrRouteItem(item));
                         break;
                     }
                 }
@@ -858,15 +859,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
                 for (Waypoint waypoint : viewModel.waypoints.getValue()) {
                     if (fullGpxId.equals(waypoint.getFullGpxId())) {
-                        result.add(new RouteItem(waypoint));
+                        result.add(new RouteOrRouteItem(new RouteItem(waypoint)));
                         break;
                     }
                 }
             }
 
             if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && !isLongTap) {
-                toggleElevationChart(this, viewModel.individualRoute.getValue(), nonClickableItemsLayer, getString(R.string.individual_route));
-                return;
+                result.add(new RouteOrRouteItem(viewModel.individualRoute.getValue()));
             }
 
         }
@@ -887,14 +887,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             handleTap(result.get(0), isLongTap, x, y);
         } else {
             try {
-                final ArrayList<RouteItem> sorted = new ArrayList<>(result);
-                Collections.sort(sorted, RouteItem.NAME_COMPARATOR);
+                final ArrayList<RouteOrRouteItem> sorted = new ArrayList<>(result);
+                Collections.sort(sorted, RouteOrRouteItem.NAME_COMPARATOR);
 
-                final ArrayAdapter<RouteItem> adapter = new ArrayAdapter<RouteItem>(this, R.layout.cacheslist_item_select, sorted) {
+                final ArrayAdapter<RouteOrRouteItem> adapter = new ArrayAdapter<RouteOrRouteItem>(this, R.layout.cacheslist_item_select, sorted) {
                     @NonNull
                     @Override
                     public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                        return GeoItemSelectorUtils.createRouteItemView(UnifiedMapActivity.this, getItem(position),
+                        return GeoItemSelectorUtils.createRouteOrRouteItemView(UnifiedMapActivity.this, getItem(position),
                                 GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, convertView, parent));
                     }
                 };
@@ -916,27 +916,30 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     }
 
-    private void handleTap(final RouteItem item, final boolean isLongTap, final int tapX, final int tapY) {
+    private void handleTap(final RouteOrRouteItem item, final boolean isLongTap, final int tapX, final int tapY) {
+        final RouteItem routeItem = item.isRouteItem() ? item.getRouteItem() : null;
         if (isLongTap) {
             // toggle route item
-            if (Settings.isLongTapOnMapActivated()) {
+            if (routeItem != null && Settings.isLongTapOnMapActivated()) {
                 if (Settings.isShowRouteMenu()) {
-                    MapUtils.createCacheWaypointLongClickPopupMenu(this, item, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null)
+                    MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null)
 //                            .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                             .show();
                 } else {
-                    viewModel.toggleRouteItem(this, item);
+                    viewModel.toggleRouteItem(this, routeItem);
                 }
             }
-        } else {
+        } else if (routeItem != null) {
             // open popup for element
-            if (item.getType() == RouteItem.RouteItemType.GEOCACHE) {
+            if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                 // @todo: do we need a DataStore.loadCache() before?
-                CachePopup.startActivityAllowTarget(this, item.getGeocode());
-            } else if (item.getType() == RouteItem.RouteItemType.WAYPOINT && item.getWaypointId() != 0) {
+                CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
+            } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT && routeItem.getWaypointId() != 0) {
                 // @todo: do we need a DataStore.loadWaypoint() before?
-                WaypointPopup.startActivityAllowTarget(this, item.getWaypointId(), item.getGeocode());
+                WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
             }
+        } else {
+            toggleElevationChart(this, item.getRoute(), nonClickableItemsLayer, getString(R.string.individual_route));
         }
     }
 
