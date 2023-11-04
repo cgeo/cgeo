@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
@@ -38,6 +39,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     private Tracks tracks = null;
     public final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
+    public MutableLiveData<ProximityNotification> proximityNotification = new MutableLiveData<>(null);
     /**
      * Event based LiveData notifying about track updates
      */
@@ -105,6 +107,10 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     public void init(final RouteTrackUtils routeTrackUtils) {
         reloadTracks(routeTrackUtils);
+    }
+
+    public void configureProximityNotification() {
+        proximityNotification = new MutableLiveData<>(Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null);
     }
 
     // ========================================================================

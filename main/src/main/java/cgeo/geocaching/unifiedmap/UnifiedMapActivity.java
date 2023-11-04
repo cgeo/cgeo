@@ -16,6 +16,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapSettingsUtils;
@@ -25,6 +26,7 @@ import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteOrRouteItem;
@@ -58,6 +60,7 @@ import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -143,6 +146,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         // minimum time in milliseconds between position overlay updates
         private static final long MIN_UPDATE_INTERVAL = 500;
         private long timeLastPositionOverlayCalculation = 0;
+        // last check for proximity notifications
+        private long timeLastDistanceCheck = 0;
         // minimum change of heading in grad for position overlay update
         private static final float MIN_HEADING_DELTA = 15f;
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
@@ -195,7 +200,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
-                            // @todo: check if proximity notification needs an update
+
+                            if (mapActivity.viewModel.proximityNotification.getValue() != null && (timeLastDistanceCheck == 0 || currentTimeMillis > (timeLastDistanceCheck + MIN_UPDATE_INTERVAL))) {
+                                mapActivity.viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()), mapActivity.viewModel));
+                                timeLastDistanceCheck = System.currentTimeMillis();
+                            }
 
                             if (Settings.showElevation()) {
                                 float elevation = Routing.getElevation(new Geopoint(currentLocation));
@@ -260,7 +269,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             }
             mapType.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
-//            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
 //            if (mapOptions.mapState != null) {
@@ -268,10 +276,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 //            } else {
 //                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
 //            }
-//            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
         routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
+        viewModel.configureProximityNotification();
+        if (viewModel.proximityNotification.getValue() != null) {
+            viewModel.proximityNotification.getValue().setTextNotifications(this);
+        }
 
         viewModel.trackUpdater.observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue()));
         viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
@@ -391,7 +402,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         if (mapChanged) {
 
             // map settings popup
-            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, null /* @todo proximity notification */, mapType.filterContext));
+            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
@@ -972,6 +983,32 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     }
 
     // ========================================================================
+    // distance checks for proximity notifications
+    private static WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord, final UnifiedMapViewModel viewModel) {
+        WaypointDistanceInfo result;
+        // work on a copy to avoid race conditions
+        result = getClosestDistanceInM(coord, new ArrayList<>(viewModel.caches.getValue()), Integer.MAX_VALUE, item -> ((Geocache) item).getShortGeocode() + " " + ((Geocache) item).getName());
+        result = getClosestDistanceInM(coord, new ArrayList<>(viewModel.waypoints.getValue()), result.meters, item -> ((Waypoint) item).getName() + " (" + ((Waypoint) item).getWaypointType().gpx + ")");
+        return result;
+    }
+
+    private static WaypointDistanceInfo getClosestDistanceInM(final Geopoint center, final ArrayList<IWaypoint> items, final int minDistanceOld, final Func1<IWaypoint, String> getName) {
+        int minDistance = minDistanceOld;
+        String name = "";
+        for (IWaypoint item : items) {
+            final Geopoint coords = item.getCoords();
+            if (coords != null) {
+                final int distance = (int) (1000f * coords.distanceTo(center));
+                if (distance > 0 && distance < minDistance) {
+                    minDistance = distance;
+                    name = getName.call(item);
+                }
+            }
+        }
+        return new WaypointDistanceInfo(name, minDistance);
+    }
+
+    // ========================================================================
     // Lifecycle methods
 
     @Override
@@ -981,9 +1018,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
 //        final MapState state = prepareMapState();
         outState.putParcelable(BUNDLE_MAPTYPE, mapType);
-//        if (proximityNotification != null) {
-//            outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
-//        }
         if (mapType.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapType.filterContext);
         }
