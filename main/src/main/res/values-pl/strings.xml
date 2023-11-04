@@ -2353,6 +2353,7 @@
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <string name="sorted_route_saved">Indywidualna trasa zapisana</string>
     <string name="load_individual_route_error">Błąd ładowania indywidualnej trasy</string>
+    <string name="route_item_point">Punkt trasy</string>
     <string name="route_item_not_yet_loaded">Nie załadowano jeszcze elementu trasy</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Trasa załadowana z %d punktem trasy</item>
