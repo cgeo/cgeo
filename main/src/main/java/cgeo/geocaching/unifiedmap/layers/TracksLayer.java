@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 public class TracksLayer {
 
+    public static final String TRACK_KEY_PREFIX = "TRACK-";
+
     final UnifiedMapViewModel viewModel;
 
     public TracksLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
@@ -20,7 +22,7 @@ public class TracksLayer {
         viewModel.trackUpdater.observe(activity, event -> event.ifNotHandled((key -> {
             final Tracks.Track track = viewModel.getTracks().getTrack(key);
             if (track == null || track.getRoute().isHidden()) {
-                layer.remove(key);
+                layer.remove(TRACK_KEY_PREFIX + key);
             } else {
 
                 //Apply current chosen default color to all elements and display
@@ -34,7 +36,7 @@ public class TracksLayer {
                         .setStrokeColor(defaultStrokeColor)
                         .setStrokeWidth(defaultWidth).build();
 
-                layer.put(key, track.getRoute().getItem().applyDefaultStyle(defaultStyle));
+                layer.put(TRACK_KEY_PREFIX + key, track.getRoute().getItem().applyDefaultStyle(defaultStyle));
              }
         })));
 

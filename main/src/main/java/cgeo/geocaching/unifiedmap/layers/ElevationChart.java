@@ -54,13 +54,22 @@ public class ElevationChart {
         res = activity.getResources();
     }
 
-    public void toggleElevationChart(final Route route) {
+    public void removeElevationChart() {
         if (chart == null) {
             return;
         }
-        if (chartBlock.getVisibility() == View.VISIBLE || route == null) {
+        if (chartBlock.getVisibility() == View.VISIBLE) {
             closeChart(geoItemLayer);
-        } else {
+        }
+    }
+
+    public void showElevationChart(final Route route) {
+        if (chart == null) {
+            return;
+        }
+
+        // initialize chart
+        if (chartBlock.getVisibility() != View.VISIBLE) {
             chartBlock.setVisibility(View.VISIBLE);
 
             // follow tap on elevation chart in route on map
@@ -83,12 +92,9 @@ public class ElevationChart {
 
             toolbar.setNavigationIcon(R.drawable.expand_more);
             toolbar.setNavigationOnClickListener(v -> closeChart(geoItemLayer));
-
-            notifyDatasetChanged(route);
         }
-    }
 
-    public void notifyDatasetChanged(final Route route) {
+        // set/update data
         synchronized (entries) {
             collectData(route);
             formatChart(res);
@@ -105,6 +111,10 @@ public class ElevationChart {
         entries.clear();
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
+            if (elevation == null) {
+                chart.setNoDataText("No elevation data available");
+                return;
+            }
             final Iterator<Float> it = elevation.iterator();
             for (Geopoint point : segment.getPoints()) {
                 if (lastPoint != null) {
@@ -121,20 +131,23 @@ public class ElevationChart {
 
     /** format line chart (lines, axes etc.) */
     private void formatChart(final Resources res) {
-        final LineDataSet dataSet = new LineDataSet(entries, "Individual Route");
-        dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        dataSet.setLineWidth(2f);
-        final int color = res.getColor(R.color.colorAccent);
-        dataSet.setColor(color);
-        dataSet.setHighLightColor(color);
-        dataSet.setValueTextColor(res.getColor(R.color.colorText));
-        dataSet.setDrawValues(false);
-        dataSet.setDrawFilled(true);
-        dataSet.setFillColor(color);
-        dataSet.setDrawCircles(false);
+        chart.setData(null);
+        if (entries.size() > 0) {
+            final LineDataSet dataSet = new LineDataSet(entries, null);
+            dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+            dataSet.setLineWidth(2f);
+            final int color = res.getColor(R.color.colorAccent);
+            dataSet.setColor(color);
+            dataSet.setHighLightColor(color);
+            dataSet.setValueTextColor(res.getColor(R.color.colorText));
+            dataSet.setDrawValues(false);
+            dataSet.setDrawFilled(true);
+            dataSet.setFillColor(color);
+            dataSet.setDrawCircles(false);
 
-        final LineData lineData = new LineData(dataSet);
-        chart.setData(lineData);
+            final LineData lineData = new LineData(dataSet);
+            chart.setData(lineData);
+        }
 
         chart.setExtraOffsets(0, -30, 0, 10);
         chart.setBackgroundColor(res.getColor(R.color.colorBackground));
