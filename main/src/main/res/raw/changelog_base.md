@@ -2,8 +2,7 @@
 -
 
 ### Cache details
--
+- Change: Make "Toggle talking" an actual toggle
 
 ### General
-- Tapping on downloader notification opens "pending downloads" view
-
+- New: Tapping on downloader notification opens "pending downloads" view
