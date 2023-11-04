@@ -2266,6 +2266,7 @@
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
     <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
     <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
+    <string name="route_item_point">경로 지점</string>
     <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>
     <plurals name="individual_route_loaded">
         <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
