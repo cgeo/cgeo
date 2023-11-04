@@ -178,10 +178,12 @@ public class Route implements IGeoItemSupplier, Parcelable {
                 segment.resetPoints();
                 // calculate route for segment between current point and its predecessor
                 if (pos > 0) {
-                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint());
+                    final ArrayList<Float> elevation = new ArrayList<>();
+                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
                     for (Geopoint geopoint : temp) {
                         segment.addPoint(geopoint);
                     }
+                    segment.setElevation(elevation);
                 }
             }
             distance += segment.calculateDistance();

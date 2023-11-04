@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.os.Bundle;
+import android.sax.Element;
+import android.sax.RootElement;
 import android.util.Xml;
 
 import androidx.annotation.NonNull;
@@ -175,7 +177,7 @@ public final class Routing {
 
         // now really calculate a new route
         lastDestination = destination;
-        lastRoutingPoints = calculateRouting(start, destination);
+        lastRoutingPoints = calculateRouting(start, destination, null);
         lastDirectionUpdatePoint = start;
         timeLastUpdate = timeNow;
         return ensureTrack(lastRoutingPoints, start, destination);
@@ -229,10 +231,11 @@ public final class Routing {
      *
      * @param start       the starting point
      * @param destination the destination point
+     * @param elevation   the variable to write elevation info to (null, if no elevation info to be returned)
      * @return a track with at least two points including the start and destination points
      */
     @NonNull
-    public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination) {
+    public static Geopoint[] getTrackNoCaching(final Geopoint start, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
         if (routingServiceConnection == null || Settings.getRoutingMode() == RoutingMode.STRAIGHT) {
             return defaultTrack(start, destination);
         }
@@ -250,7 +253,7 @@ public final class Routing {
         }
 
         // now calculate a new route
-        final Geopoint[] track = calculateRouting(start, destination);
+        final Geopoint[] track = calculateRouting(start, destination, elevation);
         return ensureTrack(track, start, destination);
     }
 
@@ -265,7 +268,8 @@ public final class Routing {
     }
 
     @Nullable
-    private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest) {
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up would not improve readability
+    private static Geopoint[] calculateRouting(final Geopoint start, final Geopoint dest, @Nullable final ArrayList<Float> elevation) {
         final Bundle params = new Bundle();
         params.putString("trackFormat", "gpx");
         params.putDoubleArray("lats", new double[]{start.getLatitude(), dest.getLatitude()});
@@ -318,36 +322,49 @@ public final class Routing {
             return null;
         }
 
-        return parseGpxTrack(gpx, dest);
+        return parseGpxTrack(gpx, dest, elevation);
     }
 
     @Nullable
-    private static Geopoint[] parseGpxTrack(@NonNull final String gpx, final Geopoint destination) {
+    private static Geopoint[] parseGpxTrack(@NonNull final String gpx, final Geopoint destination, @Nullable final ArrayList<Float> elevation) {
         try {
             final LinkedList<Geopoint> result = new LinkedList<>();
-            Xml.parse(gpx, new DefaultHandler() {
-                @Override
-                public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
-                    if (qName.equalsIgnoreCase("trkpt")) {
-                        final String lat = atts.getValue("lat");
-                        if (lat != null) {
-                            final String lon = atts.getValue("lon");
-                            if (lon != null) {
-                                result.add(new Geopoint(lat, lon));
-                            }
-                        }
+
+            final String namespace = "http://www.topografix.com/GPX/1/1";
+            final RootElement root = new RootElement(namespace, "gpx");
+            final Element trk = root.getChild(namespace, "trk");
+            final Element trkseg = trk.getChild(namespace, "trkseg");
+            final Element trkpt = trkseg.getChild(namespace, "trkpt");
+            final Element ele = trkpt.getChild(namespace, "ele");
+
+            trkpt.setStartElementListener(attributes -> {
+                final String lat = attributes.getValue("lat");
+                if (lat != null) {
+                    final String lon = attributes.getValue("lon");
+                    if (lon != null) {
+                        result.add(new Geopoint(lat, lon));
                     }
                 }
             });
 
+            ele.setEndTextElementListener(body -> {
+                if (elevation != null) {
+                    elevation.add(Float.parseFloat(body));
+                }
+            });
+
+            Xml.parse(gpx, root.getContentHandler());
+
             // artificial straight line from track to target
             if (destination != null) {
                 result.add(destination);
+                if (elevation != null) {
+                    elevation.add(Float.NaN);
+                }
             }
-
             return result.toArray(new Geopoint[result.size()]);
 
-        } catch (final SAXException e) {
+        } catch (SAXException e) {
             Log.w("cannot parse brouter output of length " + gpx.length() + ", gpx=" + gpx, e);
         }
         return null;

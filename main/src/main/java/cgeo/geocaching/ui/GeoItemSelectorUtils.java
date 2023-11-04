@@ -8,7 +8,9 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -23,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -113,8 +117,29 @@ public class GeoItemSelectorUtils {
 
         tv.setCompoundDrawablesWithIntrinsicBounds(geoitemRef.getMarkerId(), 0, 0, 0);
 
-
         return view;
+    }
+
+    public static View createRouteView(final Context context, final Route route, final View view) {
+        final TextView tv = (TextView) view.findViewById(R.id.text);
+        final TextView infoView = (TextView) view.findViewById(R.id.info);
+        if (route.getName().isEmpty()) {
+            tv.setText(R.string.individual_route);
+            infoView.setText("");
+        } else {
+            tv.setText(route.getName());
+            infoView.setText(R.string.track);
+        }
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.map_quick_route, 0, 0, 0);
+        return view;
+    }
+
+    public static View createRouteOrRouteItemView(final Context context, final RouteOrRouteItem item, final View view) {
+        if (item.isRoute()) {
+            return createRouteView(context, Objects.requireNonNull(item.getRoute()), view);
+
+        }
+        return createRouteItemView(context, Objects.requireNonNull(item.getRouteItem()), view);
     }
 
     public static View createRouteItemView(final Context context, final RouteItem routeItem, final View view) {

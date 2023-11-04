@@ -5,6 +5,7 @@ public class LayerHelper {
     // constants for layer ordering (higher = more visible)
     // layer index numbers must be consecutive, starting with 1 for ZINDEX_BASEMAP
 
+    public static final int ZINDEX_ELEVATIONCHARTMARKERPOSITION = 15;
     public static final int ZINDEX_POSITION = 14;
 
     public static final int ZINDEX_SEARCHCENTER = 13;
