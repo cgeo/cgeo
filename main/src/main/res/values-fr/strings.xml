@@ -87,7 +87,28 @@
     <string name="wpnew_original">Originale</string>
     <string name="wpnew_generated">Généré</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Inconnue</string>
+    <string name="cache_cat_bc_nature">Nature</string>
+    <string name="cache_cat_bc_location">Emplacement</string>
+    <string name="cache_cat_bc_recommended">Recommandée</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mystère</string>
+    <string name="cache_cat_bc_hiking">Randonnée</string>
+    <string name="cache_cat_bc_other">Autres</string>
+    <string name="cache_cat_desc_bc_nature">Entouré par une nature particulière</string>
+    <string name="cache_cat_desc_bc_recommended">Recommandé par l\'équipe de BetterCacher</string>
+    <string name="cache_cat_desc_bc_gadget">Fabrication spéciale, gadget cool, etc</string>
+    <string name="cache_cat_desc_bc_mystery">Une énigme extraordinaire et stimulante</string>
+    <string name="cache_cat_desc_bc_hiking">Offre une excellente randonnée</string>
+    <string name="cache_cat_desc_bc_other">Autres fonctionnalités - consulter le journal des recommandations</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Aucun</string>
+    <string name="cache_tier_bc_blue">Bleu</string>
+    <string name="cache_tier_bc_silver">Argent</string>
+    <string name="cache_tier_bc_gold">Or</string>
+    <string name="cache_tier_desc_bc_blue">Palier par défaut pour les caches listées</string>
+    <string name="cache_tier_desc_bc_silver">Visité par l\'équipe de BetterCacher, automatiquement attribuée</string>
+    <string name="cache_tier_desc_bc_gold">Cache remarquable, recommandée par l\'équipe de BetterCacher</string>
     <!-- logs -->
     <string name="log_found">Trouvée</string>
     <string name="log_dnf">Non trouvée</string>
@@ -195,6 +216,7 @@
     <string name="err_none">ok</string>
     <string name="err_parse">Échec login lecture page</string>
     <string name="err_captcha">Le service utilise un Captcha. Veuillez vous connecter au site geocaching.com avec votre navigateur web et résoudre le Captcha puis essayez de vous connecter à nouveau à c:geo.</string>
+    <string name="err_server_general">Échec de la connexion au serveur géocaching. Le site web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -245,6 +267,7 @@
     <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
     <string name="err_log_post_missing_tracking_code">Le code de suivi est absent.</string>
     <string name="err_log_post_missing_coordinates">Les coordonnées sont absentes.</string>
+    <string name="err_website_message">Le site web a répondu avec le message suivant : </string>
     <string name="err_log_post_failed">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site web d\'origine de la cache.</string>
     <string name="err_log_post_failed_ec">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site Extremcaching.com.</string>
     <string name="err_log_post_failed_gk">Il semble que votre visite n\'ait pas été enregistrée. Veuillez vérifier sur le site GeoKrety.org.</string>
@@ -400,6 +423,7 @@
     <string name="caches_append_to_route_selected">Ajouter la sélection à une route individuelle</string>
     <string name="caches_append_to_route_all">Tout ajouter à un itinéraire individuel</string>
     <string name="caches_appended_to_route">Caches ajoutées à la route</string>
+    <string name="waypoints_appended_to_route">Waypoints ajoutés à la route</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
     <string name="caches_upload_bookmarklist">Ajouter aux favoris</string>
     <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
@@ -448,6 +472,7 @@
     <string name="list_menu_import">Importer</string>
     <string name="list_title">Choisir une liste</string>
     <string name="lists_title">Choisir les listes</string>
+    <string name="lists_title_new_caches">Choisir la liste (nouvelles caches)</string>
     <string name="list_inbox">Enregistrées</string>
     <string name="list_all_lists">Toutes les caches</string>
     <string name="list_dialog_create_title">Nouvelle liste</string>
@@ -487,6 +512,7 @@
     <string name="cache_filter_favorites">Favoris</string>
     <string name="cache_filter_distance">Distance</string>
     <string name="cache_filter_hidden">Date de création</string>
+    <string name="cache_filter_eventdate">Date de l\'événement</string>
     <string name="cache_filter_logs_count">Nombre de journaux</string>
     <string name="cache_filter_last_found">Date du dernier found</string>
     <string name="cache_filter_log_entry">Entrée du journal</string>
@@ -494,6 +520,9 @@
     <string name="cache_filter_stored_lists">Listes stockées</string>
     <string name="cache_filter_origin">Origine</string>
     <string name="cache_filter_stored_since">Détails de la dernière mise à jour</string>
+    <string name="cache_filter_category">Catégorie BC</string>
+    <string name="cache_filter_tier">Palier BC</string>
+    <string name="cache_filter_named_filter">Filtre nommé</string>
     <string name="cache_filter_logical_filter_group">Filtre imbriqué</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
@@ -569,10 +598,27 @@
     <string name="cache_filter_status_exclude_disabled">Exclure les caches désactivées</string>
     <string name="cache_filter_status_exclude_archived">Exclure les caches archivées</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclure les caches sans D/T</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Remplir avec gc.com</string>
     <string name="cache_filter_nested_filter_modify">modifier</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">Actuellement, le sous-filtre est vide</string>
     <string name="cache_filter_log_entry_foundby">Trouvée par</string>
     <string name="cache_filter_log_entry_logtext">Texte du journal</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>il y a plus d\'un an</item>
+        <item>il y a un an</item>
+        <item>il y a 30 jours</item>
+        <item>il y a une semaine</item>
+        <item>il y a 1 jour</item>
+        <item>il y a moins d\'un jour</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1 an</item>
+        <item>1 an</item>
+        <item>30 j</item>
+        <item>1 sem</item>
+        <item>1 j</item>
+        <item>&lt;1 j</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>il y a plus d\'un an</item>
         <item>il y a un an</item>
@@ -594,6 +640,28 @@
         <item>1 sem</item>
         <item>3 j</item>
         <item>&lt;3 j</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>passé</item>
+        <item>today</item>
+        <item>tomorrow</item>
+        <item>2 days from now</item>
+        <item>3 days from now</item>
+        <item>1 week from now</item>
+        <item>2 weeks from now</item>
+        <item>1 month from now</item>
+        <item>all future</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>past</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1w</item>
+        <item>2w</item>
+        <item>1m</item>
+        <item>&gt;1mois</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Version</string>
@@ -619,6 +687,7 @@
     <string name="about_system_write_logcat_type_extended">Étendu</string>
     <string name="about_system_write_logcat_success">Fichier journal \"%1$s\" écrit dans le dossier \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Erreur lors de l\'écriture du fichier journal</string>
+    <string name="about_changelog_full">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
     <string name="about_contributors_recent">Contributeurs récents</string>
@@ -784,6 +853,7 @@
     <string name="init_signature_template_geocode">Géocode</string>
     <string name="init_ratingwanted">Vote GCvote.com</string>
     <string name="init_summary_ratingwanted">Charger l\'évaluation de la cache depuis GCvote.com</string>
+    <string name="init_summary_bettercacher">Charger le niveau de cache et les catégories de BetterCacher.org</string>
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
     <string name="init_openlastdetailspage">Afficher les détails à la dernière page ouverte</string>
@@ -804,6 +874,8 @@
     <string name="init_brouterProfileWalk">Profil \"Marche\"</string>
     <string name="init_brouterProfileBike">Profil \"Vélo\"</string>
     <string name="init_brouterProfileCar">Profil \"Voiture\"</string>
+    <string name="init_brouterProfileUser">Profil défini par l\'utilisateur</string>
+    <string name="init_removeFromRouteOnLog">Retirer de la route</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="brouter_missing_data">Ouvrir BRouter pour télécharger les données de routage manquantes (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
@@ -813,6 +885,7 @@
     <string name="init_summary_bigSmileysOnMap">Lorsqu\'actif, des icônes de grande taille comme « smiley trouvé » ou « coordonnées modifiées » sont affichés à la place de l\'icône « type de cache ».</string>
     <string name="init_dtMarkerOnCacheIcon">Notation D/T sur les icônes de cache</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Afficher des icônes pour la Difficulté (à gauche) et pour le Terrain (à droite) dans le coin supérieur droit de la cache (l\'indicateur \"Enregistré\" est alors placé au milieu).</string>
+    <string name="init_showElevation">Afficher l\'altitude</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction des points de passage des notes personnelles. Elle peut encore être activée pour des caches individuellement en désactivant la case à cocher sous la note personnelle.</string>
     <string name="init_prevent_cache_note_merge">Remplacer la note personnelle de la cache</string>
@@ -838,6 +911,8 @@
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
     <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
     <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
+    <string name="init_custombnitem_default">Recherche à proximité (par défaut)</string>
+    <string name="init_custombnitem_none">(aucun)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Géocode</string>
     <string name="cacheListInfoItem_Difficulty">Difficulté</string>
@@ -1285,6 +1360,7 @@
     <string name="cache_menu_open_with">Ouvrir avec…</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
     <string name="cache_log_too_long">c:geo n\'a pas pu envoyer votre log car il est trop long. Merci d\'avoir essayé d\'écrire un log aussi complet ;-).</string>
+    <string name="cache_empty_log">c:geo n\'a pas pu soumettre votre log car il est vide.</string>
     <string name="cache_menu_visit_offline">Visite rapide hors-ligne</string>
     <string name="cache_menu_spoilers">Images indices</string>
     <string name="cache_menu_around">Alentours</string>
@@ -1342,6 +1418,7 @@
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Propriétaire</string>
     <string name="cache_hidden">Cachée le</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Date</string>
     <string name="cache_location">Localisation</string>
     <string name="cache_coordinates">Coordonnées</string>
@@ -1369,6 +1446,11 @@
     <string name="cache_recently_viewed">Vu récemment</string>
     <string name="cache_recently_viewed_empty">Aucune cache consultée récemment</string>
     <string name="cache_clear_recently_viewed">effacer</string>
+    <string name="cachedetails_progress_refresh">%s mis à jour</string>
+    <string name="cachedetails_progress_watch">Ajouté à la liste de suivi</string>
+    <string name="cachedetails_progress_unwatch">Supprimé de la liste de suivi</string>
+    <string name="cachedetails_progress_favorite">Ajouté aux favoris</string>
+    <string name="cachedetails_progress_unfavorite">Supprimé des favoris</string>
     <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_chirpwolf_start">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez utiliser l\'application Chirp Wolf.</string>
@@ -1376,6 +1458,7 @@
     <string name="cache_alc_start">Ouvrez l\'application Adventure Lab pour jouer à cette aventure</string>
     <string name="cache_alc_related_start">Ouvrez l\'application Adventure Lab pour commencer à jouer l\'avdenture lab associée</string>
     <string name="cache_alc_install">Installez l\'application Adventure Lab pour jouer à cette aventure</string>
+    <string name="cache_bettercacher_open">Ouvrir la cache sur BetterCacher.org</string>
     <string name="context_share_as_text">Partager comme texte</string>
     <string name="context_share_as_link">Partager le lien</string>
     <string name="image_category_uncategorized">Sans catégorie</string>
@@ -1398,6 +1481,8 @@
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points de passage de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points de passage. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
     <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache ou une étape définie par l\'utilisateur)</string>
+    <string name="init_show_routing_menu">Afficher le menu de routage</string>
+    <string name="init_summary_show_routing_menu">Un appui long sur une cache affiche un menu avec des options avancées pour ajouter/supprimer la cache vers/depuis une route. Si désactivé, la cache est juste ajouté/supprimé à/de la route.</string>
     <string name="init_ActionbarAutohide">Masquer la barre d\'outils par appui</string>
     <string name="init_summary_ActionbarAutohide">Appuyez sur un espace libre de la carte pour masquer / afficher la barre d\'outils</string>
     <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
@@ -2070,6 +2155,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
     <string name="create_shortcut">Créer un raccourci</string>
+    <string name="failed_creating_shortcut">Impossible de créer le raccourci</string>
     <string name="send">Envoyer</string>
     <string name="confirm_log_title">Type de visite spécial</string>
     <string name="confirm_log_message">Vous allez envoyer \'%s\'. Êtes-vous sûr(e) ?</string>
@@ -2135,6 +2221,8 @@
     <string name="permission_read_external_storage_explanation">c:geo peut utiliser le fond d\'écran de votre système comme arrière-plan d\'application. A cette fin, vous devez autoriser c:geo à lire vos fichiers multimédia présents sur le stockage externe.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo enregistrera les données sur le stockage interne de votre appareil ou sur la carte SD par exemple lorsque vous enregistrez des éléments pour une utilisation hors ligne. Pour réaliser ces opérations, certaines versions d\'Android requièrent que vous accordiez une autorisation supplémentaire.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Ancienne uutorisation d\'écriture externe</string>
+    <string name="permission_post_notifications_explanation">c:geo utilise des notifications pour vous informer des téléchargements et des caches dont vous vous approchez (si activé)</string>
+    <string name="permission_post_notifications_explanation_title">Autorisation des notifications</string>
     <string name="storage_permission_needed">Cette fonction n\'est disponible qu\'après avoir autorisé l\'accès au stockage.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Sélectionner le thème des couleurs</string>
@@ -2178,6 +2266,7 @@
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="sorted_route_saved">Itinéraire individuel sauvegardé</string>
     <string name="load_individual_route_error">Erreur lors du chargement de l\'itinéraire individuel</string>
+    <string name="route_item_point">Point d\'itinéraire</string>
     <string name="route_item_not_yet_loaded">Élément de l\'itinéraire pas encore chargé</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Itinéraire chargé avec %d points de passage</item>
@@ -2194,6 +2283,8 @@
     <string name="running_route_optimizations">Optimisations de la route en cours</string>
     <string name="route_optimization_finished">Optimisation de la route terminée</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">Permissions modifiées</string>
+    <string name="changed_permissions_info">Android a introduit une nouvelle autorisation requise par c:geo. Exécutez l\'assistant de configuration c:geo pour vérifier cette autorisation et obtenir des informations plus détaillées. Vous pouvez soit exécuter l\'assistant maintenant, soit l\'exécuter plus tard en utilisant l\'entrée de menu sur l\'écran d\'accueil de c:geo.\n\nVoulez-vous exécuter l\'assistant de configuration maintenant ?</string>
     <!-- individual track -->
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
     <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>
@@ -2228,6 +2319,8 @@
     <string name="routingmode_walk">À pied</string>
     <string name="routingmode_bike">À vélo</string>
     <string name="routingmode_car">En voiture</string>
+    <string name="routingmode_user1">Utilisateur 1</string>
+    <string name="routingmode_user2">Utilisateur 2</string>
     <!-- view settings -->
     <string name="view_settings">Paramètres d\'affichage</string>
     <string name="delete_setting">Supprimer le paramètre</string>
@@ -2255,6 +2348,7 @@
     <string name="receivedownload_error_filenotfound_exception">Fichier introuvable lors de la réception de ce fichier.</string>
     <string name="receivedownload_amount_copied">%s a été copié</string>
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
+    <string name="receivedownload_integritycheck_failed">Échec lors de la vérification d\'intégrité</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
     <string name="delete_offlinemap_title">Supprimer la carte hors ligne</string>
@@ -2732,4 +2826,6 @@
     <string name="smiley_disapprove">Désapprouvé</string>
     <string name="smiley_question">Interrogatif(ve)</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centre des messages</string>
+    <string name="mcpolling_summary">Vérifier le centre des messages pour les messages entrants à intervalles réguliers</string>
 </resources>
