@@ -16,11 +16,11 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 
 import android.content.res.Resources;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
@@ -55,7 +55,6 @@ public class ElevationChartUtils {
             closeChart(chartBlock, geoItemLayer);
         } else {
             chartBlock.setVisibility(View.VISIBLE);
-            ((TextView) activity.findViewById(R.id.elevation_title)).setText(title);
 
             final List<Entry> entries = new ArrayList<>();
             collectData(route, entries);
@@ -81,7 +80,10 @@ public class ElevationChartUtils {
                 }
             });
 
-            activity.findViewById(R.id.elevation_close).setOnClickListener(v -> closeChart(chartBlock, geoItemLayer));
+            final Toolbar toolbar = activity.findViewById(R.id.toolbar);
+            toolbar.setTitle(title);
+            toolbar.setNavigationIcon(R.drawable.expand_more);
+            toolbar.setNavigationOnClickListener(v -> closeChart(chartBlock, geoItemLayer));
 
             chart.invalidate(); // draw chart
         }
