@@ -52,7 +52,7 @@ public class ElevationChartUtils {
             return;
         }
         if (chartBlock.getVisibility() == View.VISIBLE || route == null) {
-            chartBlock.setVisibility(View.GONE);
+            closeChart(chartBlock, geoItemLayer);
         } else {
             chartBlock.setVisibility(View.VISIBLE);
             ((TextView) activity.findViewById(R.id.elevation_title)).setText(title);
@@ -81,7 +81,7 @@ public class ElevationChartUtils {
                 }
             });
 
-            activity.findViewById(R.id.elevation_close).setOnClickListener(v -> chartBlock.setVisibility(View.GONE));
+            activity.findViewById(R.id.elevation_close).setOnClickListener(v -> closeChart(chartBlock, geoItemLayer));
 
             chart.invalidate(); // draw chart
         }
@@ -146,6 +146,12 @@ public class ElevationChartUtils {
 
         final YAxis yAxis2 = chart.getAxisRight();
         yAxis2.setEnabled(false);
+    }
+
+    /** hides chart and map marker */
+    private static void closeChart(final View chartBlock, final GeoItemLayer<String> geoItemLayer) {
+        chartBlock.setVisibility(View.GONE);
+        geoItemLayer.remove(ELEVATIONCHART_MARKER);
     }
 
     /** find position in route corresponding to distance from start */
