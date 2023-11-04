@@ -111,7 +111,7 @@ public class GeoIcon implements Parcelable {
         @Override
         @NonNull
         public String toString() {
-            return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px");
+            return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px, hash:" + bitmap.hashCode());
         }
     }
 

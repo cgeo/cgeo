@@ -1,6 +1,5 @@
 package cgeo.geocaching.unifiedmap.geoitemlayer;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.geoitem.GeoGroup;
@@ -9,11 +8,12 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
@@ -21,7 +21,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 
 import androidx.annotation.DrawableRes;
-import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,15 @@ public class GeoItemTestLayer {
 
     private GeoItemLayer<String> testLayer = new GeoItemLayer<>("test");
     private Disposable stopper;
+
+    private static final GeoIcon ICON_SMILEY = GeoIcon.builder().setBitmap(ImageParam.emoji(EmojiUtils.SMILEY_LIKE).getAsBitmap()).build();
+    private static final GeoIcon ICON_SPARKLES = GeoIcon.builder().setBitmap(ImageParam.emoji(EmojiUtils.SPARKLES).getAsBitmap()).build();
+
+    private static final GeoIcon ICON_CAMERA = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.ic_menu_camera).getAsBitmap()).build();
+    private static final GeoIcon ICON_TYPE_GIGA = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.type_giga).getAsBitmap()).build();
+    private static final GeoIcon ICON_CGEO_LOGO = GeoIcon.builder().setBitmap(ImageParam.id(R.drawable.cgeo_borderless).getAsBitmap()).build();
+
+    private static final GeoIcon[] ICON_ALL = new GeoIcon[] { ICON_SMILEY, ICON_SPARKLES, ICON_CAMERA, ICON_TYPE_GIGA, ICON_CGEO_LOGO };
 
     public void initforUnifiedMap(final GeoItemLayer<String> layer) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer()) {
@@ -95,12 +103,13 @@ public class GeoItemTestLayer {
         //static test data
         createStaticElements(CENTER.project(90, 50), testLayer);
 
-        final int[] angleStore = { 0 };
+        final int[] indexStore = { 0 };
+        final int indexLength = 360;
         return AndroidRxUtils.runPeriodically(AndroidRxUtils.computationScheduler, () -> {
-            final int angle = angleStore[0];
-            angleStore[0] = (angleStore[0] + 20) % 360;
+            final int index = indexStore[0];
+            indexStore[0] = (indexStore[0] + 1) % indexLength;
 
-            createDynamicElements(CENTER, testLayer, angle);
+            createDynamicElements(CENTER, testLayer, index);
 
             }, 0, 1000);
     }
@@ -192,7 +201,11 @@ public class GeoItemTestLayer {
     }
 
 
-    private static void createDynamicElements(final Geopoint center, final GeoItemLayer<String> layer, final int angle) {
+    private static void createDynamicElements(final Geopoint center, final GeoItemLayer<String> layer, final int index) {
+        //index runs from 0 to 359, then back to 0
+
+        final int angle = (index * 20) % 360;
+
         final double distance = 20; //km
 
         //dynamic test data
@@ -212,11 +225,19 @@ public class GeoItemTestLayer {
                 .setRotation(angle).build());
         layer.put("test-FlowMarker", flowMarker);
 
+        //a series of markers with changing icons
+        final Geopoint startDynamicMarkers = center.project(180, 80);
+        for (int i = 0; i < 20; i++) {
+            final GeoPrimitive iconI = GeoPrimitive.createMarker(startDynamicMarkers.project(90, 4 * i), ICON_ALL[(index + i) % ICON_ALL.length]);
+            layer.put("test-dynamicIconMarker-" + i, iconI);
+        }
+
+
+
     }
 
     private static Bitmap createBitmap(@DrawableRes final int drawableId) {
-        return ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), drawableId, null));
-
+        return ImageParam.id(drawableId).getAsBitmap();
     }
 
 }

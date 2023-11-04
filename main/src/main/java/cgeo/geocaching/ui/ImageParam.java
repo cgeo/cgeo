@@ -1,8 +1,11 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.widget.ImageView;
@@ -26,34 +29,42 @@ public class ImageParam {
     @DrawableRes
     private final int drawableId;
     private final int emojiSymbol;
+    private final int emojiSizeInDp;
     private final Drawable drawable;
     //if needed, then this can be extended e.g. with Icon or Bitmap
+
+    public static final int DEFAULT_EMOJI_SIZE_DP = 30;
 
 
     /**
      * create from drawable resource id
      */
     public static ImageParam id(@DrawableRes final int drawableId) {
-        return new ImageParam(drawableId, -1, null);
+        return new ImageParam(drawableId, -1, -1, null);
     }
 
     /**
      * create from emoji code
      */
     public static ImageParam emoji(final int emojiSymbol) {
-        return new ImageParam(-1, emojiSymbol, null);
+        return emoji(emojiSymbol, DEFAULT_EMOJI_SIZE_DP);
+    }
+
+    public static ImageParam emoji(final int emojiSymbol, final int emojiSizeInDp) {
+        return new ImageParam(-1, emojiSymbol, emojiSizeInDp, null);
     }
 
     /**
      * create from emoji code
      */
     public static ImageParam drawable(final Drawable drawable) {
-        return new ImageParam(-1, -1, drawable);
+        return new ImageParam(-1, -1, -1,  drawable);
     }
 
-    private ImageParam(@DrawableRes final int drawableId, final int emojiSymbol, @Nullable final Drawable drawable) {
+    private ImageParam(@DrawableRes final int drawableId, final int emojiSymbol, final int emojiSizeInDp, @Nullable final Drawable drawable) {
         this.drawableId = drawableId;
         this.emojiSymbol = emojiSymbol;
+        this.emojiSizeInDp = emojiSizeInDp;
         this.drawable = drawable;
     }
 
@@ -64,13 +75,16 @@ public class ImageParam {
             view.setImageResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
             final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(view);
-            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(100) : Math.max(viewSize.first, viewSize.second);
+            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
             view.setImageDrawable(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
         }
     }
 
+    /**
+     * Gets the drawable associated with this image param. A size < 0 means: use default size
+     */
     @NonNull
-    public Drawable getAsDrawable(final Context context, final int sizeInDp) {
+    public Drawable getAsDrawable(final Context context) {
         if (this.drawable != null) {
             return this.drawable;
         }
@@ -79,12 +93,27 @@ public class ImageParam {
             result = ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme());
 
         } else if (this.emojiSymbol > 0) {
-            result = EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(sizeInDp), this.emojiSymbol);
+            result = EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(emojiSizeInDp), this.emojiSymbol);
         }
         if (result != null) {
             return result;
         }
         return Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), android.R.color.transparent, context.getTheme()));
+    }
+
+    @NonNull
+    public Drawable getAsDrawable() {
+        return getAsDrawable(CgeoApplication.getInstance().getApplicationContext());
+    }
+
+    @NonNull
+    public Bitmap getAsBitmap(final Context context) {
+        return ImageUtils.convertToBitmap(getAsDrawable(context));
+    }
+
+    @NonNull
+    public Bitmap getAsBitmap() {
+        return getAsBitmap(CgeoApplication.getInstance().getApplicationContext());
     }
 
 }

@@ -228,14 +228,13 @@ public class TextParam {
             view.setMovementMethod(LinkMovementMethod.getInstance());
         }
         if (image != null || imageSizeInDp > 0) {
-            final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image)
-                    .getAsDrawable(view.getContext(), imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp);
-            if (imageSizeInDp < 0) {
-                view.setCompoundDrawablesWithIntrinsicBounds(imageDrawable, null, null, null);
-            } else {
-                imageDrawable.setBounds(new Rect(0, 0, ViewUtils.dpToPixel(imageSizeInDp), ViewUtils.dpToPixel(imageSizeInDp)));
-                view.setCompoundDrawables(imageDrawable, null, null, null);
-            }
+            final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image).getAsDrawable(view.getContext());
+
+            //if wanted imageSize is set explicitely -> use it. Otherwise deduct a sensible default from text size
+            final int imageSizeInDpToUse = imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp;
+            imageDrawable.setBounds(new Rect(0, 0, ViewUtils.dpToPixel(imageSizeInDpToUse), ViewUtils.dpToPixel(imageSizeInDpToUse)));
+            view.setCompoundDrawables(imageDrawable, null, null, null);
+
 
             // set image tint (if given)
             if (imageTintColor != 1) {
