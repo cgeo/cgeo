@@ -32,6 +32,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeoItemSelectorUtils {
 
+    private static final int ICONSIZE_IN_DP = 30;
+
     private GeoItemSelectorUtils() {
         //no instance
     }
@@ -39,9 +41,7 @@ public class GeoItemSelectorUtils {
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        tv.setText(TextUtils.coloredCacheText(context, cache, cache.getName()));
-
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
+        TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName())).setImage(ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable()), ICONSIZE_IN_DP).applyTo(tv);
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
         if (cache.getDifficulty() > 0.1f) {
@@ -50,7 +50,6 @@ public class GeoItemSelectorUtils {
         if (cache.getTerrain() > 0.1f) {
             text.append(Formatter.SEPARATOR).append("T ").append(cache.getTerrain());
         }
-
         final TextView infoView = (TextView) view.findViewById(R.id.info);
         infoView.setText(text);
 
@@ -62,20 +61,15 @@ public class GeoItemSelectorUtils {
         final Geocache parentCache = waypoint.getParentGeocache();
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        tv.setText(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName());
-
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
+        TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName()).setImage(ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable()), ICONSIZE_IN_DP).applyTo(tv);
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
-
         if (parentCache != null) {
             text.append(Formatter.SEPARATOR).append(parentCache.getName());
         }
-
         if (StringUtils.isNotBlank(Html.fromHtml(waypoint.getNote()))) {
             text.append(Formatter.SEPARATOR).append(Html.fromHtml(waypoint.getNote()));
         }
-
         final TextView infoView = (TextView) view.findViewById(R.id.info);
         infoView.setText(text);
 
@@ -110,12 +104,10 @@ public class GeoItemSelectorUtils {
         // Fallback - neither a cache nor waypoint. should never happen...
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        tv.setText(geoitemRef.getName());
+        TextParam.text(geoitemRef.getName()).setImage(ImageParam.id(geoitemRef.getMarkerId()), ICONSIZE_IN_DP).applyTo(tv);
 
         final TextView infoView = (TextView) view.findViewById(R.id.info);
         infoView.setText(geoitemRef.getGeocode());
-
-        tv.setCompoundDrawablesWithIntrinsicBounds(geoitemRef.getMarkerId(), 0, 0, 0);
 
         return view;
     }
@@ -124,13 +116,12 @@ public class GeoItemSelectorUtils {
         final TextView tv = (TextView) view.findViewById(R.id.text);
         final TextView infoView = (TextView) view.findViewById(R.id.info);
         if (route.getName().isEmpty()) {
-            tv.setText(R.string.individual_route);
+            TextParam.id(R.string.individual_route).setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).applyTo(tv);
             infoView.setText("");
         } else {
-            tv.setText(route.getName());
+            TextParam.text(route.getName()).setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).applyTo(tv);
             infoView.setText(R.string.track);
         }
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.map_quick_route, 0, 0, 0);
         return view;
     }
 
