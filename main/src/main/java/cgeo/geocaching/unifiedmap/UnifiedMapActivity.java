@@ -40,6 +40,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.layers.CacheCirclesLayer;
 import cgeo.geocaching.unifiedmap.layers.CoordsIndicatorLayer;
+import cgeo.geocaching.unifiedmap.layers.ElevationChart;
 import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
@@ -64,7 +65,6 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
-import static cgeo.geocaching.unifiedmap.layers.ElevationChartUtils.toggleElevationChart;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -123,6 +123,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     private MenuItem followMyLocationItem = null;
 
     private RouteTrackUtils routeTrackUtils = null;
+    private ElevationChart elevationChartUtils = null;
 
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
@@ -939,7 +940,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                 WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
             }
         } else {
-            toggleElevationChart(this, item.getRoute(), nonClickableItemsLayer, getString(R.string.individual_route));
+            // individual route
+            if (elevationChartUtils == null) {
+                elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
+            }
+            elevationChartUtils.toggleElevationChart(item.getRoute());
+            viewModel.individualRoute.observe(this, individualRoute -> elevationChartUtils.notifyDatasetChanged(individualRoute));
         }
     }
 

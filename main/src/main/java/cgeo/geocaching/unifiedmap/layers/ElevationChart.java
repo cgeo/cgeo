@@ -17,7 +17,6 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 import android.content.res.Resources;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -37,30 +36,32 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
-public class ElevationChartUtils {
+public class ElevationChart {
 
     private static final String ELEVATIONCHART_MARKER = "ELEVATIONCHARTMARKER";
+    private final View chartBlock;
+    private final LineChart chart;
+    private final Resources res;
+    private final GeoItemLayer<String> geoItemLayer;
+    final Toolbar toolbar;
+    private final List<Entry> entries = new ArrayList<>();
 
-    private ElevationChartUtils() {
-        // utility class
+    public ElevationChart(final AppCompatActivity activity, final GeoItemLayer<String> geoItemLayer) {
+        chartBlock = activity.findViewById(R.id.elevation_block);
+        chart = activity.findViewById(R.id.elevation_chart);
+        this.geoItemLayer = geoItemLayer;
+        toolbar = activity.findViewById(R.id.toolbar);
+        res = activity.getResources();
     }
 
-    public static void toggleElevationChart(@NonNull final AppCompatActivity activity, final Route route, final GeoItemLayer<String> geoItemLayer, final String title) {
-        final View chartBlock = activity.findViewById(R.id.elevation_block);
-        final LineChart chart = activity.findViewById(R.id.elevation_chart);
+    public void toggleElevationChart(final Route route) {
         if (chart == null) {
             return;
         }
         if (chartBlock.getVisibility() == View.VISIBLE || route == null) {
-            closeChart(chartBlock, geoItemLayer);
+            closeChart(geoItemLayer);
         } else {
             chartBlock.setVisibility(View.VISIBLE);
-
-            final List<Entry> entries = new ArrayList<>();
-            collectData(route, entries);
-
-            final Resources res = activity.getResources();
-            formatChart (res, chart, entries);
 
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
@@ -80,19 +81,28 @@ public class ElevationChartUtils {
                 }
             });
 
-            final Toolbar toolbar = activity.findViewById(R.id.toolbar);
-            toolbar.setTitle(title);
             toolbar.setNavigationIcon(R.drawable.expand_more);
-            toolbar.setNavigationOnClickListener(v -> closeChart(chartBlock, geoItemLayer));
+            toolbar.setNavigationOnClickListener(v -> closeChart(geoItemLayer));
 
-            chart.invalidate(); // draw chart
+            notifyDatasetChanged(route);
+        }
+    }
+
+    public void notifyDatasetChanged(final Route route) {
+        synchronized (entries) {
+            collectData(route);
+            formatChart(res);
+            chart.invalidate();
+            toolbar.setTitle(route.getName().isEmpty() ? CgeoApplication.getInstance().getString(R.string.individual_route) : route.getName());
+            geoItemLayer.remove(ELEVATIONCHART_MARKER);
         }
     }
 
     /** collect entries for line chart from route */
-    private static void collectData(final Route route, final List<Entry> entries) {
+    private void collectData(final Route route) {
         float distance = 0.0f;
         Geopoint lastPoint = null;
+        entries.clear();
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
             final Iterator<Float> it = elevation.iterator();
@@ -110,7 +120,7 @@ public class ElevationChartUtils {
     }
 
     /** format line chart (lines, axes etc.) */
-    private static void formatChart(final Resources res, final LineChart chart, final List<Entry> entries) {
+    private void formatChart(final Resources res) {
         final LineDataSet dataSet = new LineDataSet(entries, "Individual Route");
         dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
         dataSet.setLineWidth(2f);
@@ -151,7 +161,7 @@ public class ElevationChartUtils {
     }
 
     /** hides chart and map marker */
-    private static void closeChart(final View chartBlock, final GeoItemLayer<String> geoItemLayer) {
+    private void closeChart(final GeoItemLayer<String> geoItemLayer) {
         chartBlock.setVisibility(View.GONE);
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
     }
