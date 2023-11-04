@@ -17,7 +17,10 @@ android {
 
 
     compileOptions {
-        // use the diamond operator and some other goodies in Android
+        // https://developer.android.com/studio/write/java8-support
+        // enable Java 8 APIs like Streams on older Android versions
+        coreLibraryDesugaringEnabled true
+        // use the diamond operator, lambdas and some other Java 8 language features in Android
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -283,6 +286,9 @@ android {
 }
 
 dependencies {
+    // desugaring of Java 8 APIs
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
+
     // Apache Commons
     implementation 'org.apache.commons:commons-collections4:4.4'
 
