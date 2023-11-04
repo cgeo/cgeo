@@ -74,6 +74,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -661,13 +662,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     public void updateSelectSwitchMenuItem(final MenuItem item) {
-        if (adapter.isSelectMode()) {
-            item.setIcon(R.drawable.ic_menu_select_end);
-            item.setTitle(R.string.caches_select_mode_exit);
-        } else {
-            item.setIcon(R.drawable.ic_menu_select_start);
-            item.setTitle(R.string.caches_select_mode);
-        }
+        ToggleItemType.SELECT_MODE.toggleMenuItem(item, adapter.isSelectMode());
     }
 
 

@@ -66,6 +66,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -416,13 +417,8 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
 
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-            if (mapOptions.isLiveEnabled) {
-                itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
-                itemMapLive.setTitle(res.getString(R.string.map_live_disable));
-            } else {
-                itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
-                itemMapLive.setTitle(res.getString(R.string.map_live_enable));
-            }
+            ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, mapOptions.isLiveEnabled);
+
             itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 
             menu.findItem(R.id.menu_store_caches).setVisible(!caches.isDownloading() && !caches.getVisibleCacheGeocodes().isEmpty());

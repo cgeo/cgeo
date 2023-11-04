@@ -76,6 +76,7 @@ import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.TrackableListAdapter;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.ViewUtils;
@@ -645,9 +646,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     private void setMenuPreventWaypointsFromNote(final boolean preventWaypointsFromNote) {
-        if (null != menuItemToggleWaypointsFromNote) {
-            menuItemToggleWaypointsFromNote.setTitle(preventWaypointsFromNote ? R.string.cache_menu_allowWaypointExtraction : R.string.cache_menu_preventWaypointsFromNote);
-        }
+        ToggleItemType.WAYPOINTS_FROM_NOTE.toggleMenuItem(menuItemToggleWaypointsFromNote, preventWaypointsFromNote);
     }
 
     @Override
@@ -657,9 +656,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         CacheMenuHandler.onPrepareOptionsMenu(menu, cache, false);
         LoggingUI.onPrepareOptionsMenu(menu, cache);
+
         if (cache != null) {
             // top level menu items
-            menu.findItem(R.id.menu_tts_toggle).setVisible(!cache.isGotoHistoryUDC());
+
+            final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
+            ttsMenuItem.setVisible(!cache.isGotoHistoryUDC());
+            ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(ttsMenuItem, SpeechService.isRunning());
+
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
@@ -743,6 +747,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
         } else if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, cache.getCoords());
+            ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(item, SpeechService.isRunning());
         } else if (menuItem == R.id.menu_set_cache_icon) {
             EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache, this::setCacheIcon);
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
