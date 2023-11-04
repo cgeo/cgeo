@@ -25,6 +25,7 @@ import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
@@ -125,6 +126,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
+    private String lastElevationChartRoute = null;
 
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
@@ -294,7 +296,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         new PositionLayer(this, nonClickableItemsLayer);
         new CoordsIndicatorLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
-        new TracksLayer(this, nonClickableItemsLayer);
+        new TracksLayer(this, clickableItemsLayer);
         new NavigationTargetLayer(this, nonClickableItemsLayer);
 
         new IndividualRouteLayer(this, clickableItemsLayer);
@@ -868,6 +870,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && !isLongTap) {
                 result.add(new RouteOrRouteItem(viewModel.individualRoute.getValue()));
             }
+            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && !isLongTap) {
+                result.add(new RouteOrRouteItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
+            }
 
         }
         Log.e("touched elements (" + result.size() + "): " + result);
@@ -938,13 +943,31 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                 // @todo: do we need a DataStore.loadWaypoint() before?
                 WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
             }
-        } else {
-            // individual route
+        } else if (item.getRoute() != null) {
+            // elevation charts for individual route and/or routes/tracks
             if (elevationChartUtils == null) {
                 elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
             }
-            elevationChartUtils.toggleElevationChart(item.getRoute());
-            viewModel.individualRoute.observe(this, individualRoute -> elevationChartUtils.notifyDatasetChanged(individualRoute));
+            if (lastElevationChartRoute != null && StringUtils.equals(item.getRoute().getName(), lastElevationChartRoute)) {
+                elevationChartUtils.removeElevationChart();
+            } else {
+                elevationChartUtils.showElevationChart(item.getRoute());
+                lastElevationChartRoute = item.getRoute().getName();
+                if (item.getRoute().getName().isEmpty()) {
+                    viewModel.individualRoute.observe(this, individualRoute -> {
+                        if (lastElevationChartRoute.isEmpty()) { // still individual route being shown?
+                            elevationChartUtils.showElevationChart(individualRoute);
+                        }
+                    });
+                } else {
+                    viewModel.trackUpdater.observe(this, event -> {
+                        final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
+                        if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
+                            elevationChartUtils.showElevationChart(route);
+                        }
+                    });
+                }
+            }
         }
     }
 
