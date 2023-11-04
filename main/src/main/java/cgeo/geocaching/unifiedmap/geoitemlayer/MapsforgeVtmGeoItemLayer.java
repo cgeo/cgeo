@@ -171,6 +171,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItem(marker);
             markerLayer.update();
+            markerLayer.update();
         }
 
         return new Pair<>(drawable, marker);
@@ -186,6 +187,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
     @Override
     public void remove(final GeoPrimitive item, final Pair<Drawable, MarkerInterface> context) {
+
         if (context == null) {
             return;
         }
@@ -202,7 +204,16 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             final ItemizedLayer markerLayer = getMarkerLayer(zLevel, false);
             if (markerLayer != null) {
                 markerLayer.removeItem(context.second);
+                markerLayer.update();
             }
+        }
+    }
+
+    @Override
+    public void onMapChangeBatchEnd(final long processedCount) {
+        //make sure map is redrawn. See e.g. #14787
+        if (map != null && processedCount > 0) {
+            map.updateMap(true);
         }
     }
 

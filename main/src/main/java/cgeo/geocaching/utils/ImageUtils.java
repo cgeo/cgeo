@@ -647,8 +647,9 @@ public final class ImageUtils {
         return new Rect(0, 0, width, lineHeight);
     }
 
-    @Nullable
-    public static Bitmap convertToBitmap(final Drawable drawable) {
+    @NonNull
+    public static Bitmap convertToBitmap(@NonNull final Drawable drawable) {
+
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
         }
