@@ -7,6 +7,8 @@ import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
+import androidx.core.util.Pair;
+
 import java.io.FileInputStream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +24,7 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
     MapFileTileSource tileSource;
 
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
-        super(name, uri, zoomMin, zoomMax);
+        super(name, uri, zoomMin, zoomMax, new Pair<>("", false));
         supportsThemes = true;
         supportsThemeOptions = true; // rule of thumb, not all themes support options
     }
@@ -46,6 +48,12 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
             parseZoomLevel(info.zoomLevel);
             if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
                 fragment.zoomToBounds(info.boundingBox);
+            }
+            // map attribution
+            if (StringUtils.isNotBlank(info.comment)) {
+                setMapAttribution(new Pair<>(info.comment, true));
+            } else if (StringUtils.isNotBlank(info.createdBy)) {
+                setMapAttribution(new Pair<>(info.createdBy, true));
             }
         }
     }

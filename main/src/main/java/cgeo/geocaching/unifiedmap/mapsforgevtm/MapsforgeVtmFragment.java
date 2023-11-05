@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
@@ -21,17 +22,25 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.text.HtmlCompat;
+import androidx.core.util.Pair;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
@@ -61,6 +70,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     protected final ArrayList<Layer> layers = new ArrayList<>();
     protected MapsforgeThemeHelper themeHelper;
     protected Map.UpdateListener mapUpdateListener;
+    private View mapAttribution;
 
     private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
     private final int rotationWidth = rotationIndicator.getWidth();
@@ -81,6 +91,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         setMapRotation(Settings.getMapRotation());
         requireView().findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         requireView().findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
+        mapAttribution = requireView().findViewById(R.id.map_attribution);
         themeHelper = new MapsforgeThemeHelper(requireActivity());
         if (position != null) {
             setCenter(position);
@@ -145,8 +156,39 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         final MapScaleBarLayer mapScaleBarLayer = new MapScaleBarLayer(mMap, mapScaleBar);
         final BitmapRenderer renderer = mapScaleBarLayer.getRenderer();
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
-        renderer.setOffset(5 * CanvasAdapter.getScale(), 0);
+        renderer.setOffset(30 * CanvasAdapter.getScale(), 0); // make room for attribution
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
+
+        if (this.mapAttribution != null) {
+            this.mapAttribution.setOnClickListener(v -> displayMapAttribution());
+        }
+    }
+
+    private void displayMapAttribution() {
+        final Pair<String, Boolean> mapAttribution = currentTileProvider.getMapAttribution();
+        if (mapAttribution == null || StringUtils.isBlank(mapAttribution.first)) {
+            return;
+        }
+
+        //create text message
+        CharSequence message = HtmlCompat.fromHtml(mapAttribution.first, HtmlCompat.FROM_HTML_MODE_LEGACY);
+        if (mapAttribution.second) {
+            final SpannableString s = new SpannableString(message);
+            ViewUtils.safeAddLinks(s, Linkify.ALL);
+            message = s;
+        }
+
+        final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
+                .setTitle(getContext().getString(R.string.map_source_attribution_dialog_title))
+                .setCancelable(true)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
+                .create();
+        alertDialog.show();
+
+        // Make the URLs in TextView clickable. Must be called after show()
+        // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
+        ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     protected void repaintRotationIndicator(final float bearing) {

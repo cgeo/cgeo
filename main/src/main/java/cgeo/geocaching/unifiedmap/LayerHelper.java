@@ -25,9 +25,9 @@ public class LayerHelper {
     public static final int ZINDEX_CIRCLE = 5;
 
     // some OSM-only layers
-    public static final int ZINDEX_LABELS = 4;
-    public static final int ZINDEX_BUILDINGS = 3;
-    public static final int ZINDEX_SCALEBAR = 2;
+    public static final int ZINDEX_SCALEBAR = 4;
+    public static final int ZINDEX_LABELS = 3;
+    public static final int ZINDEX_BUILDINGS = 2;
     public static final int ZINDEX_BASEMAP = 1;     // this is hard-coded in VTM:Map.java
 
     private LayerHelper() {

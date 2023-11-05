@@ -6,6 +6,8 @@ import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
 
+import androidx.core.util.Pair;
+
 import java.io.File;
 import java.util.Collections;
 
@@ -20,8 +22,8 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
 
     private final String tilePath;
 
-    AbstractMapsforgeOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax) {
-        super(name, uri, zoomMin, zoomMax);
+    AbstractMapsforgeOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
+        super(name, uri, zoomMin, zoomMax, mapAttribution);
         this.tilePath = tilePath;
     }
 
