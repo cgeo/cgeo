@@ -1,5 +1,6 @@
 ##
 - Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
+- Change: Reduce timeout for calls to bettercacher.org
 
 ##
 - Fix: Issues with distance views
