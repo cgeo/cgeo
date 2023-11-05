@@ -5,6 +5,7 @@ import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 
+import java.io.Closeable;
 import java.io.IOException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,8 +16,10 @@ import okhttp3.ResponseBody;
 /**
  * Convenience class used to encapsulate the building and usage of a HtmlRequest
  * Can be used directly or as base class for own (JSON) response classes
+ *
+ * Note that raw usage of this class requires the user to close it afterwards in order not to leak any connection
  */
-public class HttpResponse {
+public class HttpResponse implements Closeable {
 
     @JsonIgnore
     private Response response;
@@ -110,4 +113,10 @@ public class HttpResponse {
         return this.getClass().getName() + ", status=" + getStatusCode() + ", isSuccessful=" + isSuccessful() + ", response = " + response + ", body = " + getBodyString();
     }
 
+    @Override
+    public void close() {
+        if (response != null && response.body() != null) {
+            response.body().close();
+        }
+    }
 }
