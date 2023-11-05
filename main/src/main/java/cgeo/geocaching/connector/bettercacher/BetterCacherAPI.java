@@ -319,7 +319,8 @@ public final class BetterCacherAPI {
     private static Map<String, BetterCacherCache> callAPI(final String uri, final boolean fullData) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "BetterCacherAPI.callAPI, uri=%1$s, fullData=%2$b", uri, fullData)) {
             final BetterCacherCache[] caches = new HttpRequest().uri(uri)
-                        .requestJson(BetterCacherCache[].class).blockingGet();
+                    .callTimeout(10000)
+                    .requestJson(BetterCacherCache[].class).blockingGet();
             if (caches == null || caches.length == 0) {
                 cLog.add("empty");
                 return Collections.emptyMap();
