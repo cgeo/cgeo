@@ -53,19 +53,19 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
         }
 
         // now prepare combined map
-        final MultiMapFileTileSource tileSource = new MultiMapFileTileSource();
+        tileSource = new MultiMapFileTileSource();
         tileSource.setPreferredLanguage(Settings.getMapLanguage());
         for (ImmutablePair<String, Uri> data : maps) {
             final MapFileTileSource mapFileTileSource = new MapFileTileSource();
             mapFileTileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
-            tileSource.add(mapFileTileSource);
+            ((MultiMapFileTileSource) tileSource).add(mapFileTileSource);
         }
         supportsLanguages = languages.size() > 0;
         if (supportsLanguages) {
             TileProviderFactory.setLanguages(languages.toArray(new String[]{}));
         }
 
-        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap(tileSource);
+        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MultiMapFileTileSource) tileSource);
         fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
         fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         fragment.applyTheme();
