@@ -90,9 +90,9 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "Scandinavia-SouthWest");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB
+        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB / 2.1GB as of 5.11.23
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(1.6F, 2.0F);
+        assertThat(sizeInfoFloat).isBetween(1.6F, 2.5F);
     }
 
     @Test

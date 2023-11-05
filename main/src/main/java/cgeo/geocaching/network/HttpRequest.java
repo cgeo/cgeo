@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,6 +21,7 @@ import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -41,6 +43,8 @@ public class HttpRequest {
     private String uri;
     private final Parameters uriParams = new Parameters();
     private final Parameters headers = new Parameters();
+
+    private long callTimeoutInMs = 0;
 
     private Func1<Request.Builder, Single<Request.Builder>> requestPreparer;
 
@@ -81,6 +85,11 @@ public class HttpRequest {
         return this;
     }
 
+    public HttpRequest callTimeout(final long callTimeoutInMs) {
+        this.callTimeoutInMs = callTimeoutInMs;
+        return this;
+    }
+
     public HttpRequest requestPreparer(final Func1<Request.Builder, Single<Request.Builder>> requestPreparer) {
         this.requestPreparer = requestPreparer;
         return this;
@@ -95,6 +104,7 @@ public class HttpRequest {
         return requestInternal(r -> {
             T result;
             final String bodyString = r.getBodyString();
+            r.close();
             try {
                 result = JSON_MAPPER.readValue(bodyString, clazz);
             } catch (JsonProcessingException jpe) {
@@ -143,7 +153,13 @@ public class HttpRequest {
 
     private Single<Response> executeRequest(final Request.Builder reqBuilder) {
         final Request req = reqBuilder.build();
-        return RxOkHttpUtils.request(Network.OK_HTTP_CLIENT, req);
+
+        OkHttpClient httpClient = Network.OK_HTTP_CLIENT;
+        if (this.callTimeoutInMs > 0) {
+            httpClient = httpClient.newBuilder().callTimeout(this.callTimeoutInMs, TimeUnit.MILLISECONDS).build();
+        }
+
+        return RxOkHttpUtils.request(httpClient, req);
     }
 
 
