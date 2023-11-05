@@ -2,7 +2,7 @@
 -
 
 ### Szczegóły skrytki
-- Change: Make "Toggle talking" an actual toggle
+- Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
 
 ### Ogólne
-- New: Tapping on downloader notification opens "pending downloads" view
+- Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
