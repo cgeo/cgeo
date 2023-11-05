@@ -1,9 +1,10 @@
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
+- Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
+- Zmiana: Zmniejszono limit czasu dla połączeń z bettercacher.org
 
 ##
-- Fix: Issues with distance views
+- Poprawka: Problemy z widokiem odległości
 - Poprawka: Nie wszystkie warianty ikony launchera są adaptacyjne
 - Poprawka: Nieaktualny komunikat o błędzie, gdy nie jest dostępne połączenie sieciowe
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Poprawka: Awaria podczas tworzenia znaczników punktu nawigacji
+- Poprawka: Problemy z strefą czasową podczas logowania
