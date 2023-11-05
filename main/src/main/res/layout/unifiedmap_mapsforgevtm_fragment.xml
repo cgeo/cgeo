@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/unifiedmap_vtm"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -10,6 +11,19 @@
         android:layout_height="fill_parent" />
 
     <include layout="@layout/map_bearingindicator" />
+
+    <ImageView
+        android:id="@+id/map_attribution"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginBottom="11dp"
+        android:scaleType="centerInside"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left"
+        android:src="@drawable/copyright"
+        tools:src="@drawable/copyright"/>
 
     <LinearLayout
         android:id="@+id/container_zoomin"

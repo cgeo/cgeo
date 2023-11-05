@@ -6,6 +6,7 @@ import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsFragment;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.StringRes;
+import androidx.core.util.Pair;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapsInitializer;
@@ -16,7 +17,7 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider implements 
     final int mapType;
 
     AbstractGoogleTileProvider(final int mapType, final @StringRes int nameRes) {
-        super(2, 21);
+        super(2, 21, new Pair<>("", false));
         this.mapType = mapType;
         this.tileProviderName = CgeoApplication.getInstance().getString(nameRes);
     }
