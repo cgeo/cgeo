@@ -113,22 +113,17 @@ public class GeoItemSelectorUtils {
     }
 
     public static View createRouteView(final Context context, final Route route, final View view) {
-        final TextView tv = (TextView) view.findViewById(R.id.text);
-        final TextView infoView = (TextView) view.findViewById(R.id.info);
-        if (route.getName().isEmpty()) {
-            TextParam.id(R.string.individual_route).setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).applyTo(tv);
-            infoView.setText("");
-        } else {
-            TextParam.text(route.getName()).setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).applyTo(tv);
-            infoView.setText(R.string.track);
-        }
+        final boolean isIndividualRoute = route.getName().isEmpty();
+        final TextParam tp1 = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
+        tp1.setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).setImageTint(context.getResources().getColor(R.color.colorText)).applyTo(view.findViewById(R.id.text));
+        final TextParam tp2 = isIndividualRoute ? TextParam.text("") : TextParam.id(R.string.track);
+        tp2.applyTo(view.findViewById(R.id.info));
         return view;
     }
 
     public static View createRouteOrRouteItemView(final Context context, final RouteOrRouteItem item, final View view) {
         if (item.isRoute()) {
             return createRouteView(context, Objects.requireNonNull(item.getRoute()), view);
-
         }
         return createRouteItemView(context, Objects.requireNonNull(item.getRouteItem()), view);
     }

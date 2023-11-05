@@ -90,8 +90,7 @@ public class ImageParam {
         }
         Drawable result = null;
         if (this.drawableId > 0) {
-            result = ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme());
-
+            result = Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme())).mutate();
         } else if (this.emojiSymbol > 0) {
             result = EmojiUtils.getEmojiDrawable(ViewUtils.dpToPixel(emojiSizeInDp), this.emojiSymbol);
         }
