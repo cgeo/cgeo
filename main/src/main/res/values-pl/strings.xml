@@ -1391,6 +1391,8 @@
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
     <string name="cache_dialog_refresh_title">Odśwież</string>
     <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrytki…</string>
+    <string name="cache_menu_speechDeactivate">Przestań mówić</string>
+    <string name="cache_menu_speechActivate">Zacznij mówić</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
