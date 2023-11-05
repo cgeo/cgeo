@@ -36,4 +36,8 @@ public interface GeoItem extends Parcelable {
 
     boolean touches(@NonNull Geopoint tapped, @Nullable ToScreenProjector toScreenCoordFunc);
 
+    static boolean isValid(final GeoItem item) {
+        return item != null && item.isValid();
+    }
+
 }

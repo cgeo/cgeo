@@ -132,6 +132,11 @@ public class GeoItemLayer<K> {
             Log.d(this.logPraefix + "ADD '" + key + "'");
             addProcessed++;
             addProcessedInBatch++;
+
+            //don't add invalid values
+            if (!GeoItem.isValid(value)) {
+                return null;
+            }
             return providerLayer.add(value);
         }
 
@@ -140,6 +145,11 @@ public class GeoItemLayer<K> {
             Log.d(this.logPraefix + "REMOVE '" + key + "'");
             removeProcessed++;
             removeProcessedInBatch++;
+
+            //don't remove invalid values (because they were not added in the first place)
+            if (!GeoItem.isValid(value)) {
+                return;
+            }
             providerLayer.remove(value, context);
         }
 
@@ -148,7 +158,22 @@ public class GeoItemLayer<K> {
             Log.d(this.logPraefix + "REPLACE '" + key + "'");
             replaceProcessed++;
             replaceProcessedInBatch++;
-            return providerLayer.replace(oldValue, oldContext, newValue);
+
+            //check validity of old and new value.
+            //If one of them is invalid, replacement has to handled as add or remove instead
+            final boolean oldIsValid = GeoItem.isValid(oldValue);
+            final boolean newIsValid = GeoItem.isValid(newValue);
+            if (oldIsValid && newIsValid) {
+                return providerLayer.replace(oldValue, oldContext, newValue);
+            }
+            if (oldIsValid) {
+                providerLayer.remove(oldValue, oldContext);
+                return null;
+            }
+            if (newIsValid) {
+                return providerLayer.add(newValue);
+            }
+            return null;
         }
 
         @Override
@@ -252,8 +277,8 @@ public class GeoItemLayer<K> {
      */
     public synchronized void put(final K key, final GeoItem item, final boolean show) {
 
-        if (item == null || !item.isValid()) {
-            throw new IllegalArgumentException("Illegal item: " + item);
+        if (!GeoItem.isValid(item)) {
+            Log.d("GeoItemLayer: adding invalid item: " + key + ": " + item);
         }
 
         final Pair<GeoItem, Boolean> previousItem = itemMap.get(key);
