@@ -1,5 +1,6 @@
 ##
 - Wijziging: Aparte BetterCacher box verwijderd, tik op de BetterCacher info lijn
+- Wijziging: time-out verminderd voor oproepen naar bettercacher.org
 
 ##
 - Oplossing: Problemen met afstandsweergaven
