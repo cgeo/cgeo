@@ -2,9 +2,10 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.connector.gc.util.AggregatedUrlToIdParser;
+import cgeo.geocaching.connector.gc.util.SingleUrlToIdParser;
+import cgeo.geocaching.connector.gc.util.UrlToIdParser;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,80 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Locale;
-import java.util.regex.Pattern;
-
-import javax.annotation.RegEx;
+import java.util.Optional;
 
 public class ImportBookmarkLinks extends AppCompatActivity {
 
-    private final UrlToIdParser intentUrlParser = defaultBookmarkListUrlToIdParser();
+    ImportBookmarkLinks(@NonNull UrlToIdParser urlToIdParser) {
+        this.intentUrlParser = urlToIdParser;
+    }
+
+    public ImportBookmarkLinks() {
+        this(defaultBookmarkListUrlToIdParser());
+    }
+
+    private final UrlToIdParser intentUrlParser;
 
     public static final String BOOKMARK_LIST_API_PREFIX =
             "https://www.geocaching.com/plan/api/gpx/list/";
-
-    interface UrlToIdParser extends Func1<String, String> {
-        @Nullable String tryExtractFromIntentUrl(@Nullable String intentUrl);
-
-        @Override
-        default String call(String intentUrl) {
-            return tryExtractFromIntentUrl(intentUrl);
-        }
-    }
-
-    static class SingleUrlToIdParser implements UrlToIdParser {
-        private final Pattern matcherPattern;
-        // Android API 21 apparently does not support named capturing groups in Pattern
-        // which has introduced in java 1.7...
-        private final int groupToExtract;
-
-        SingleUrlToIdParser(
-                @RegEx @NonNull final String regex,
-                final int groupToExtract
-        ) {
-            this.matcherPattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-            this.groupToExtract = groupToExtract;
-        }
-
-        @Override
-        public String tryExtractFromIntentUrl(final String intentUrl) {
-            final String maybeMatch = TextUtils.getMatch(
-                    intentUrl,
-                    this.matcherPattern,
-                    true,
-                    this.groupToExtract,
-                    null,
-                    false
-            );
-            if (maybeMatch != null) {
-                return maybeMatch.toUpperCase(Locale.getDefault());
-            } else {
-                return null;
-            }
-        }
-    }
-
-    static class AggregatedUrlToIdParser implements UrlToIdParser {
-        private final UrlToIdParser[] parsers;
-
-        AggregatedUrlToIdParser(final UrlToIdParser... parsers) {
-            this.parsers = parsers;
-        }
-
-        @Override
-        public String tryExtractFromIntentUrl(final String intentUrl) {
-            if (intentUrl == null) {
-                return null;
-            }
-            for (final UrlToIdParser parser : parsers) {
-                final String id = parser.tryExtractFromIntentUrl(intentUrl);
-                if (id != null) {
-                    return id;
-                }
-            }
-            return null;
-        }
-    }
 
     static UrlToIdParser defaultBookmarkListUrlToIdParser() {
         return new AggregatedUrlToIdParser(
@@ -105,29 +48,27 @@ public class ImportBookmarkLinks extends AppCompatActivity {
     @Override
     protected void onCreate(final @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent intent = getIntent();
-        if (intent == null) {
-            finish();
-            return;
-        }
-        final String url = intent.getDataString();
-
-        final String id = this.intentUrlParser.tryExtractFromIntentUrl(url);
-
-        if (id != null) {
-            final Intent bookmarkListIntent = makeIntentFromId(BOOKMARK_LIST_API_PREFIX, id);
-            Log.i("starting import of bookmark list with id=" + id);
-            startActivity(bookmarkListIntent);
-        }
+        Optional.ofNullable(getIntent())
+                .map(Intent::getDataString)
+                .map(this.intentUrlParser::tryExtractFromIntentUrl)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(bookmarkListId -> makeIntentFromId(BOOKMARK_LIST_API_PREFIX, bookmarkListId))
+                .ifPresent(this::startActivity);
         finish();
     }
 
-    Intent makeIntentFromId(final String prefix, final String id) {
-        final Uri uri = Uri.parse(prefix + id);
-        final Intent bookmarkListIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
+    Intent makeIntentFromId(final String apiUrlPrefix, final String bookmarkListId) {
+        final Uri uri = Uri.parse(apiUrlPrefix + bookmarkListId);
+        final Intent bookmarkListIntent = new Intent(
+                Intent.ACTION_VIEW,
+                uri,
+                this,
+                CacheListActivity.class
+        );
         bookmarkListIntent.setDataAndType(uri, "application/xml");
-        bookmarkListIntent.putExtra(Intents.EXTRA_NAME, id);
+        bookmarkListIntent.putExtra(Intents.EXTRA_NAME, bookmarkListId);
+        Log.i("starting import of bookmark list with id=" + bookmarkListId);
         return bookmarkListIntent;
     }
-
 }

@@ -1,11 +1,15 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.connector.gc.util.UrlToIdParser;
+
+import java.util.Optional;
+
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ImportBookmarkLinksTest {
 
-    final ImportBookmarkLinks.UrlToIdParser intentUrlParser = ImportBookmarkLinks.defaultBookmarkListUrlToIdParser();
+    final UrlToIdParser intentUrlParser = ImportBookmarkLinks.defaultBookmarkListUrlToIdParser();
 
     enum CaseTransform {
         NONE,
@@ -47,18 +51,29 @@ public class ImportBookmarkLinksTest {
             for (final String hostAndPath : validHostsAndPath) {
                 for (final String validSuffix : validSuffixes) {
                     for (final CaseTransform caseTransform : CaseTransform.values()) {
-                        final String testUrl = composeUsing(
-                                protocol,
-                                hostAndPath,
-                                bookmarkListId,
-                                validSuffix,
-                                caseTransform
-                        );
-                        assertThat(intentUrlParser.tryExtractFromIntentUrl(testUrl))
-                                .isEqualTo(bookmarkListId);
+                        composeAndTest(bookmarkListId, protocol, hostAndPath, validSuffix, caseTransform);
                     }
                 }
             }
         }
+    }
+
+    private void composeAndTest(
+            String bookmarkListId,
+            String protocol,
+            String hostAndPath,
+            String validSuffix,
+            CaseTransform caseTransform
+    ) {
+        final String testUrl = composeUsing(
+                protocol,
+                hostAndPath,
+                bookmarkListId,
+                validSuffix,
+                caseTransform
+        );
+        Optional<String> fromIntentUrl = intentUrlParser.tryExtractFromIntentUrl(testUrl);
+        assertThat(fromIntentUrl.isPresent()).isTrue();
+        assertThat(fromIntentUrl.orElse(null)).isEqualTo(bookmarkListId);
     }
 }
