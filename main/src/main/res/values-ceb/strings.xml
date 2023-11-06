@@ -146,7 +146,6 @@
     <string name="err_select_logimage_failed">Pagpili og imahe para sa log kay napakyas.</string>
     <string name="err_acquire_image_failed">Ang pagbaton og imahe kay napakyas.</string>
     <string name="err_tb_display">ang c:geo dili maka pakita sa trackable na imong gusto. Kani ba trackable gyud?</string>
-    <string name="err_tb_details_open">ang c:geo dili maka abli sa mga detalye sa trackable.</string>
     <string name="err_tb_not_loggable">Kani nga geocache trackable kay dili pwede gamiton.</string>
     <string name="err_tb_find_that">ang c:geo dili maka kita ni anang trackable.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
