@@ -228,7 +228,6 @@
     <string name="err_select_logimage_failed">Kayıt için görsel seçimi başarısız oldu.</string>
     <string name="err_acquire_image_failed">Görsel alımı başarısız oldu.</string>
     <string name="err_tb_display">c:geo istediğin Trackable\'ı görüntüleyemez. Bu gerçekten bir trackable mi?</string>
-    <string name="err_tb_details_open">c:geo Trackable\'ın ayrıntılarını açamıyor.</string>
     <string name="err_tb_not_loggable">Bu trackable kaydedilebilir değil.</string>
     <string name="err_tb_not_found">c:geo %s trackable\'ını bulamıyor.</string>
     <string name="err_tb_find_that">c:geo bu Trackable\'ı bulamıyor.</string>
