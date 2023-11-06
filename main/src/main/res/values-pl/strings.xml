@@ -258,7 +258,6 @@
     <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
     <string name="err_acquire_image_unsupported_format">Dopuszczalne formaty obrazu to JPEG/JPG, PNG lub GIF</string>
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
-    <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
     <string name="err_tb_not_found">c:geo nie może znaleźć przedmiotu podróżnego %s.</string>
     <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
@@ -1391,6 +1390,8 @@
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
     <string name="cache_dialog_refresh_title">Odśwież</string>
     <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrytki…</string>
+    <string name="cache_menu_speechDeactivate">Przestań mówić</string>
+    <string name="cache_menu_speechActivate">Zacznij mówić</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
@@ -2353,6 +2354,7 @@
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <string name="sorted_route_saved">Indywidualna trasa zapisana</string>
     <string name="load_individual_route_error">Błąd ładowania indywidualnej trasy</string>
+    <string name="route_item_point">Punkt trasy</string>
     <string name="route_item_not_yet_loaded">Nie załadowano jeszcze elementu trasy</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Trasa załadowana z %d punktem trasy</item>

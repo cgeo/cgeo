@@ -256,7 +256,6 @@
     <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
     <string name="err_acquire_image_unsupported_format">L\'image doit être un format JPEG/JPG, PNG ou GIF</string>
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
-    <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
     <string name="err_tb_not_found">c:geo n\'a pas trouvé l\'objet voyageur %s.</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
@@ -2266,6 +2265,7 @@
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="sorted_route_saved">Itinéraire individuel sauvegardé</string>
     <string name="load_individual_route_error">Erreur lors du chargement de l\'itinéraire individuel</string>
+    <string name="route_item_point">Point d\'itinéraire</string>
     <string name="route_item_not_yet_loaded">Élément de l\'itinéraire pas encore chargé</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Itinéraire chargé avec %d points de passage</item>

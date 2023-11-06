@@ -236,7 +236,6 @@
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
     <string name="err_acquire_image_unsupported_format">Kuvamuodon on oltava JPEG/JPG, PNG tai GIF</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
-    <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
     <string name="err_tb_not_found">c:geo ei löydä reissaajaa %s.</string>
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>

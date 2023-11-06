@@ -188,7 +188,6 @@
     <string name="err_select_logimage_failed">D\'Eraussichen vun engem Bild fir de Log ass feelgeschloen.</string>
     <string name="err_acquire_image_failed">Erstellen vun engem Bild feelgeschloen.</string>
     <string name="err_tb_display">c:geo kann den Trackable net uweisen deen dir wëllt. Ass et wierklech ee Trackable?</string>
-    <string name="err_tb_details_open">c:geo kann d\'Detailer vum Trackable net lueden.</string>
     <string name="err_tb_not_loggable">Dësen Trackable ka net geloggt ginn.</string>
     <string name="err_tb_find_that">c:geo kann dësen Trackable net fannen.</string>
     <string name="err_waypoint_cache_unknown">c:geo weess net zu wéi engem Cache\'s du e Weepunkt bäisetze wëlls.</string>

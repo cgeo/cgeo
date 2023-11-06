@@ -258,7 +258,6 @@
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázku musí být JPEG/JPG, PNG nebo GIF</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
-    <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
     <string name="err_tb_not_found">c:geo nemůže najít sledovatelný %s.</string>
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
@@ -2353,6 +2352,7 @@
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
     <string name="load_individual_route_error">Chyba při načítání individuální trasy</string>
+    <string name="route_item_point">Bod trasy</string>
     <string name="route_item_not_yet_loaded">Soubor s trasou nebyl dosud načten</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Trasa načtena s %d bodem trasy</item>

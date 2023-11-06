@@ -158,7 +158,6 @@
     <string name="err_select_logimage_failed">فشل في اختيار صورة لتسجيل الزيارة.</string>
     <string name="err_acquire_image_failed">فشل في الحصول على صورة.</string>
     <string name="err_tb_display">c:geo لا يمكنه عرض أمتعة السفر التي تريدها. هل هي حقا أمتعة سفر؟</string>
-    <string name="err_tb_details_open">c:geo لا يمكنه فتح تفاصيل أمتعة السفر.</string>
     <string name="err_tb_not_loggable">أمتعة السفر هذه غير قابل للتسجيل.</string>
     <string name="err_tb_find_that">c:geo لا يستطيع العثور على أمتعة السفر تلك.</string>
     <string name="err_waypoint_cache_unknown">c:geo لا يعرف ماهو المخبئ الذي تريد أن تضيف له إحداثية طريق.</string>
