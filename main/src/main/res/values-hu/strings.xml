@@ -225,7 +225,6 @@
     <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
     <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
     <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
-    <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó adatait.</string>
     <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
     <string name="err_tb_not_found">Sajnáljuk, a c:geo nem találja az utazót %s.</string>
     <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt az utazót.</string>

@@ -258,7 +258,6 @@
     <string name="err_acquire_image_failed">A obtenção da imagem falhou.</string>
     <string name="err_acquire_image_unsupported_format">O formato de imagem deve ser JPEG/JPG, PNG ou GIF</string>
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
-    <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
     <string name="err_tb_not_found">O c:geo não encontra o trackable %s.</string>
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
@@ -946,9 +945,8 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">— A cópia de seg. inclui caches, pontos adicionais e configurações.\n
-— Não são guardadas imagens em caches!\n
-— Tenha o ficheiro do backup noutro armazenamento, para poder restaurar os dados mesmo que perca o seu telemóvel.</string>
+    <string name="init_backup_summary">Faz a salvaguarda das caches (as imagens não são guardadas), pontos adicionais e configurações do c:geo.\n
+Nota: Copie para outro armazenamento este ficheiro, para poder restaurar os dados mesmo que perca o seu telemóvel.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -2297,6 +2295,7 @@
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
+    <string name="route_item_point">Ponto da rota</string>
     <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Rota carregada com %d ponto de rota</item>

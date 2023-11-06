@@ -258,7 +258,6 @@
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
     <string name="err_acquire_image_unsupported_format">Il formato immagine deve essere uno dei file JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
-    <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
     <string name="err_tb_not_found">c:geo non riesce a trovare trackable %s.</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
