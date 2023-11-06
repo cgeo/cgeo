@@ -217,7 +217,6 @@
     <string name="err_select_logimage_failed">在日誌選擇照片失敗</string>
     <string name="err_acquire_image_failed">讀取圖片失敗</string>
     <string name="err_tb_display">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
-    <string name="err_tb_details_open">c:geo 無法讀取旅行從的詳細資訊</string>
     <string name="err_tb_not_loggable">這個旅行蟲或地理錢幣無法登錄到系統</string>
     <string name="err_tb_find_that">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_waypoint_cache_unknown">哪個地理藏寶要加入航點</string>
