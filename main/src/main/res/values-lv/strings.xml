@@ -188,7 +188,6 @@
     <string name="err_select_logimage_failed">Attēlu atlasīšana priekš pierakstīšanās neizdevās.</string>
     <string name="err_acquire_image_failed">Attēla iegūšana neizdevās.</string>
     <string name="err_tb_display">c:geo nevar parādīt ceļotājus, kurus izvēlējāties. Vai tie patiešām ir ceļotāji?</string>
-    <string name="err_tb_details_open">c:geo nevar atvērt ceļotāja datus.</string>
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
     <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
