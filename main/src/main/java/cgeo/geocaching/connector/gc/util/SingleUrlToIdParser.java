@@ -33,7 +33,7 @@ public class SingleUrlToIdParser implements UrlToIdParser {
     public SingleUrlToIdParser(
             @RegEx @NonNull final String regex,
             final int groupToExtract,
-            @NonNull Func1<String, String> matchTransformer
+            @NonNull final Func1<String, String> matchTransformer
     ) {
         this.matcherPattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         this.groupToExtract = groupToExtract;

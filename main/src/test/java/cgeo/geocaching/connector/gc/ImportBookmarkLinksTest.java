@@ -42,7 +42,7 @@ public class ImportBookmarkLinksTest {
         TO_LOWER,
         TO_UPPER;
 
-        public String transform(String input) {
+        public String transform(final String input) {
             switch (this) {
                 case TO_LOWER:
                     return input.toLowerCase();
@@ -73,7 +73,7 @@ public class ImportBookmarkLinksTest {
                 "www.geocaching.com/plan/lists/"
         };
         final String[] validSuffixes = { "", "?someoption=foo"};
-        ArrayList<Object[]> testData = new ArrayList<>();
+        final ArrayList<Object[]> testData = new ArrayList<>();
 
         for (final String protocol : validProtocols) {
             for (final String hostAndPath : validHostsAndPath) {
@@ -111,7 +111,7 @@ public class ImportBookmarkLinksTest {
                 bookmarkListId,
                 suffix
         );
-        Optional<String> fromIntentUrl = intentUrlParser.tryExtractFromIntentUrl(testUrl);
+        final Optional<String> fromIntentUrl = intentUrlParser.tryExtractFromIntentUrl(testUrl);
         assertThat(fromIntentUrl.isPresent()).isTrue();
         assertThat(fromIntentUrl.orElse(null)).isEqualTo(expectedOutcome);
     }

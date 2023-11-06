@@ -19,18 +19,17 @@ import java.util.Optional;
 
 public class ImportBookmarkLinks extends AppCompatActivity {
 
-    ImportBookmarkLinks(@NonNull UrlToIdParser urlToIdParser) {
+    public static final String BOOKMARK_LIST_API_PREFIX =
+            "https://www.geocaching.com/plan/api/gpx/list/";
+    private final UrlToIdParser intentUrlParser;
+
+    ImportBookmarkLinks(@NonNull final UrlToIdParser urlToIdParser) {
         this.intentUrlParser = urlToIdParser;
     }
 
     public ImportBookmarkLinks() {
         this(defaultBookmarkListUrlToIdParser());
     }
-
-    private final UrlToIdParser intentUrlParser;
-
-    public static final String BOOKMARK_LIST_API_PREFIX =
-            "https://www.geocaching.com/plan/api/gpx/list/";
 
     static UrlToIdParser defaultBookmarkListUrlToIdParser() {
         return new AggregatedUrlToIdParser(
