@@ -192,7 +192,6 @@
     <string name="err_select_logimage_failed">选择日志的图像失败。</string>
     <string name="err_acquire_image_failed">获取图片失败。</string>
     <string name="err_tb_display">c:geo无法展示你想要的可跟踪物。它真是一个可跟踪物吗？</string>
-    <string name="err_tb_details_open">c:geo 无法打开可追踪物详情。</string>
     <string name="err_tb_not_loggable">该可追踪物的日志功能不可用。</string>
     <string name="err_tb_not_found">c:geo 找不到可追踪物 %s.</string>
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
