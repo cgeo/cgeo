@@ -1,10 +1,10 @@
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
-- Change: Reduce timeout for calls to bettercacher.org
+- Änderung: Die separate BetterCacher-Box wurde entfernt - tippe stattdessen auf BetterCacher Infozeile
+- Änderung: Timeout für Anrufe auf bettercacher.org verkürzt
 
 ##
-- Fix: Issues with distance views
+- Korrektur: Probleme mit Distanzansichten
 - Korrektur: Nicht alle Launcher-Icon-Varianten sind adaptiv
 - Korrektur: Veraltete Fehlermeldung, wenn keine Netzwerkverbindung verfügbar ist
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Korrektur: Abstürze beim Erstellen von Wegpunkt-Markierungen
+- Korrektur: Zeitzonenprobleme beim Loggen
