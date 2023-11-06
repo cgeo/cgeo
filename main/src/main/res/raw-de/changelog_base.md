@@ -5,4 +5,4 @@
 - Change: Make "Toggle talking" an actual toggle
 
 ### Allgemein
-- New: Tapping on downloader notification opens "pending downloads" view
+- Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
