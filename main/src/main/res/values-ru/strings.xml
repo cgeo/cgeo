@@ -233,7 +233,6 @@
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
     <string name="err_acquire_image_unsupported_format">Формат изображения должен быть JPEG/JPG, PNG или GIF</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
-    <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
     <string name="err_tb_not_found">Не удается найти трекабл %s.</string>
     <string name="err_tb_find_that">Не удается найти данный трекабл.</string>
