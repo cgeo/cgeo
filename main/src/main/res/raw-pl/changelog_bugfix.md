@@ -1,4 +1,8 @@
 ##
+- Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
+- Zmiana: Zmniejszono limit czasu dla połączeń z bettercacher.org
+
+##
 - Poprawka: Problemy z widokiem odległości
 - Poprawka: Nie wszystkie warianty ikony launchera są adaptacyjne
 - Poprawka: Nieaktualny komunikat o błędzie, gdy nie jest dostępne połączenie sieciowe
