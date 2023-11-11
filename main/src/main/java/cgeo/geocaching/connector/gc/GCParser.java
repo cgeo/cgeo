@@ -33,6 +33,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -486,6 +487,10 @@ public final class GCParser {
         if (matcher.find()) {
             personalNoteWithLineBreaks = matcher.group(1).trim();
         }
+        //handle linebreaks
+        personalNoteWithLineBreaks = personalNoteWithLineBreaks.replaceAll("\\&\\#10;", "<br>");
+        //handle other HTML encoded chars
+        personalNoteWithLineBreaks = HtmlUtils.extractText(personalNoteWithLineBreaks);
 
         final String page = TextUtils.replaceWhitespace(pageIn);
 
