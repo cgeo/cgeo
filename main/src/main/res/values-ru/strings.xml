@@ -116,7 +116,7 @@
     <string name="log_tb_nothing">Ничего</string>
     <string name="log_tb_visit">Посещён</string>
     <string name="log_tb_drop">Оставлен</string>
-    <string name="log_tb_sortby">Отсортировать трэкаблы</string>
+    <string name="log_tb_sortby">Отсортировать трекаблы</string>
     <string name="log_tb_changeall">Изменить все</string>
     <string name="log_tb_grabbed">Где-то найден</string>
     <string name="log_tb_note">Запись</string>
@@ -204,7 +204,7 @@
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_missing_auth">Имя пользователя и/или пароль не установлены</string>
     <string name="err_wrong">Неверное имя пользователя и/или пароль.</string>
-    <string name="err_maintenance">Geocaching.com отключен для обслуживания. c:geo работает в автономном режиме с сохранёнными тайниками.</string>
+    <string name="err_maintenance">Geocaching.com отключён для обслуживания. c:geo работает с сохранёнными тайниками в автономном режиме.</string>
     <string name="err_license">Вы не согласились с правилами Geocaching.com, поэтому c:geo не может загрузить координаты тайников.</string>
     <string name="err_unvalidated_account">Сначала вы должны активировать свой аккаунт на Geocaching.com.</string>
     <string name="err_unpublished">Запрашиваемый тайник не опубликован.</string>
@@ -235,8 +235,8 @@
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
     <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
-    <string name="err_tb_not_found">Не удается найти трекабл %s.</string>
-    <string name="err_tb_find_that">Не удается найти данный трекабл.</string>
+    <string name="err_tb_not_found">Не удалось найти трекабл %s.</string>
+    <string name="err_tb_find_that">c:geo не удаётся найти данный трекабл.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знает, к какому тайнику вы хотите добавить точку.</string>
     <string name="err_waypoint_add_failed">c:geo не удалось добавить вашу точку.</string>
     <string name="err_point_bear_and_dist_title">Нужна помощь?</string>
@@ -288,11 +288,11 @@
     <string name="info_cache_saved">Тайник был сохранен локально</string>
     <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
     <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
-    <string name="err_trackable_no_preference_activity">Извините, не удается найти подходящую страницу настроек.</string>
+    <string name="err_trackable_no_preference_activity">Не удаётся найти подходящую страницу настроек.</string>
     <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
     <string name="confirm_discard_changes">Отменить несохранённые изменения?</string>
     <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
-    <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы/рекомендации) для заметки.</string>
+    <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы / избранные точки) для заметки.</string>
     <string name="more_information">Больше информации</string>
     <string name="undo">Отменить</string>
     <string name="dont_show_again">Не показывать снова</string>
@@ -444,9 +444,9 @@
         <item quantity="other">Офлайн-записей: %d</item>
     </plurals>
     <plurals name="caches_stored_offline">
-        <item quantity="one">Тайников сохранёно: %d</item>
-        <item quantity="few">Тайников сохранёно: %d</item>
-        <item quantity="many">Тайников сохранёно: %d</item>
+        <item quantity="one">%d тайник сохранён</item>
+        <item quantity="few">Тайников сохранено: %d</item>
+        <item quantity="many">Тайников сохранено: %d</item>
         <item quantity="other">Тайников сохранено: %d</item>
     </plurals>
     <!-- caches lists -->
@@ -1660,7 +1660,7 @@
     <string name="search_filter_info_message" formatted="false">**Поиск по фильтру** производится по всем активным онлайн-сервисам по заданным условиям. Однако, поисковые возможности этих сервисов обычно более ограничены, чем возможности фильтра c:geo.\n\n- Все службы поддерживают только И фильтры (нет ИЛИ, нет инверсии).\n- Такие базовые фильтры, как **тип тайника** или **размер тайника**, есть во всех сервисах. Но более сложные фильтры зачастую не поддерживаются или имеют некоторые ограничения, например **избранное**.\n- Подробный список условий фильтрации, которые поддерживают разные сервисы, можно найти [здесь](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nФильтры, не поддерживаемые онлайн-сервисом, будут применяться c:geo для полученных результатов.</string>
     <string name="search_tb">Трекабл</string>
     <string name="search_tb_hint">Код трекабла</string>
-    <string name="search_tb_button">Искать по трекаблу</string>
+    <string name="search_tb_button">Поиск трекабла</string>
     <string name="search_destination">Открыть место назначения в c:geo</string>
     <string name="add_target_to">Добавить цель в</string>
     <string name="search_address_started">Поиск мест</string>
@@ -2126,7 +2126,7 @@
     <string name="confirm_report_problem_title">Сообщить о проблеме</string>
     <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
-    <string name="init_summary_geokrety">Активировать ГеоКротов</string>
+    <string name="init_summary_geokrety">Включить трекаблы с GeoKrety.org</string>
     <string name="init_geokrety_description">Авторизуйте c:geo на GeoKrety.org, чтобы отмечать ГеоКротов.</string>
     <string name="init_geokrety_userid">Пользователь: %s</string>
     <string name="trackable_title_log_without_geocode">Код трекабла не установлен</string>
