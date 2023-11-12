@@ -161,7 +161,7 @@
     <string name="log_report_problem">Сообщить о проблеме:</string>
     <string name="log_hint_log_password">Введите ваш пароль журнала</string>
     <string name="log_oc_team_comment">Комментарий команды OC</string>
-    <string name="log_your_saved_log">Ваша сохраненная запись</string>
+    <string name="log_your_saved_log">Ваш сохранённый журнал</string>
     <string name="log_empty_logbook">Блокнот этого тайника пуст.</string>
     <string name="log_problem_none">Нет проблем</string>
     <string name="log_problem_needs_maintenance_label">Необходимо восстановление</string>
@@ -194,11 +194,12 @@
     <string name="err_none">OK</string>
     <string name="err_parse">Не удалось разобрать страницу входа</string>
     <string name="err_captcha">Сервис требует капчу. Пожалуйста, откройте в браузере сайт geocaching.com и пройдите капчу, показанную при входе в систему. Затем попробуйте снова войти с помощью c:geo.</string>
+    <string name="err_server_general">Не удалось подключиться к серверу геокэшинга. Возможно, веб-сайт недоступен или ваше подключение к Интернет не работает.</string>
     <string name="err_server_ec">Не удалось соединиться с Extremcaching.com , возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_lc">Не удалось подключиться к labs.geocaching.com, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_gk">Не удается связаться с GeoKrety.org. Веб-сайт может быть недоступен или нет подключения к Интернету.</string>
-    <string name="err_login">Нет сохраненной информации о пользователе</string>
+    <string name="err_login">Нет сохранённой информации о пользователе</string>
     <string name="err_unknown">Неизвестная ошибка. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
@@ -260,7 +261,7 @@
     <string name="warn_no_coordinates">Не введены координаты.</string>
     <string name="warn_no_keyword">Не введены ключевые слова.</string>
     <string name="warn_no_username">Не введено имя пользователя.</string>
-    <string name="warn_no_connector">Нет активированных сервисов геокешинга, предоставляющих этот тип поиска.</string>
+    <string name="warn_no_connector">Нет активированных сервисов геокэшинга, предоставляющих этот тип поиска.</string>
     <string name="warn_search_help_title">Нужна помощь?</string>
     <string name="warn_search_help_address">Введите адрес или название места. Например, адрес \"Москва, ул. Пришвина, д. 22\", город \"Берлин\" или название \"Красная площадь\".</string>
     <string name="warn_search_help_gccode">Введите код тайника. Например, \"GC1VCAZ\".</string>
@@ -271,8 +272,8 @@
     <string name="warn_pocket_query_select">Не выбрана выборка.</string>
     <string name="warn_no_pocket_query_found">Не найдено выборок.</string>
     <string name="warn_notloggedin_title">Офлайн-режим</string>
-    <string name="warn_notloggedin_short">Вы не вошли. Карта будет показывать только сохраненные тайники. Нажмите здесь для детальной информации.</string>
-    <string name="warn_notloggedin_long">Пользователь пока не авторизован. Карта покажет только тайники, сохраненные локально и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокешинга.\n\nХотите настроить сервисы сейчас?</string>
+    <string name="warn_notloggedin_short">Вы не зарегистрированы. Будут показаны только те тайники, которые были ранее сохранены на устройстве. Нажмите здесь для более подробной информации.</string>
+    <string name="warn_notloggedin_long">Пользователь ещё не авторизован. Карта покажет только тайники, сохранённые локально, и онлайн функции не будут работать.\n\nЛибо нет сетевого соединения, либо вам нужно (пере)настроить сервисы геокэшинга.\n\nХотите настроить сервисы сейчас?</string>
     <string name="err_read_pocket_query_list">Ошибка чтения списка Выборок.</string>
     <string name="err_read_bookmark_list">Не удалось прочитать списки закладок.</string>
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
@@ -289,9 +290,9 @@
     <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
     <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
     <string name="err_trackable_no_preference_activity">Не удаётся найти подходящую страницу настроек.</string>
-    <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
+    <string name="confirm_unsaved_changes_title">Несохранённые изменения</string>
     <string name="confirm_discard_changes">Отменить несохранённые изменения?</string>
-    <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
+    <string name="confirm_discard_wp_changes">Отменить несохранённые изменения путевых точек?</string>
     <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы / избранные точки) для заметки.</string>
     <string name="more_information">Больше информации</string>
     <string name="undo">Отменить</string>
@@ -335,7 +336,7 @@
     <string name="home_button">Главная</string>
     <string name="caches_nearby_button">Рядом</string>
     <string name="advanced_search_button">Поиск</string>
-    <string name="stored_caches_button">Сохраненные</string>
+    <string name="stored_caches_button">Сохранённые</string>
     <string name="any_button">Навигация</string>
     <string name="unknown_scan">Не найдено геокодов в процессе сканирования.</string>
     <!-- caches -->
@@ -420,9 +421,9 @@
     <string name="caches_filter_menuitem">Фильтр</string>
     <string name="caches_filter_title">Фильтровать по</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
-    <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
-    <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
-    <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
+    <string name="caches_clear_offlinelogs">Очистить офлайн журнал</string>
+    <string name="caches_clear_offlinelogs_message">Очистить офлайн журнал?</string>
+    <string name="caches_clear_offlinelogs_progress">Очистка офлайн журнала</string>
     <string name="caches_show_attributes">Показать атрибуты</string>
     <string name="caches_set_cache_icon">Установить иконку тайника</string>
     <string name="caches_reset_cache_icons_title">Сбросить иконку тайника</string>
@@ -458,13 +459,13 @@
     <string name="list_title">Выбрать список</string>
     <string name="lists_title">Выбрать списки</string>
     <string name="lists_title_new_caches">Выберите список (новые тайники)</string>
-    <string name="list_inbox">Сохраненные</string>
+    <string name="list_inbox">Сохранённые</string>
     <string name="list_all_lists">Все тайники</string>
     <string name="list_dialog_create_title">Новый список</string>
     <string name="list_dialog_create">Создать</string>
     <string name="list_dialog_create_err">c:geo не удалось создать новый список</string>
     <string name="list_dialog_remove_title">Удалить список</string>
-    <string name="list_dialog_remove_description">Вы действительно хотите удалить текущий список? Все тайники из этого списка будут перемещены в \"Сохраненные\".</string>
+    <string name="list_dialog_remove_description">Удалить текущий список? Все тайники из этого списка будут перемещены в «Сохранённые».</string>
     <string name="list_dialog_remove_nowempty">Список пуст. Вы хотите удалить текущий список?</string>
     <string name="list_dialog_do_not_ask_me_again">Больше не спрашивать для этого списка</string>
     <string name="list_dialog_remove">Удалить</string>
@@ -563,7 +564,7 @@
     <string name="cache_filter_status_select_label_found">Найден</string>
     <string name="cache_filter_status_select_label_dnf">Не найдено</string>
     <string name="cache_filter_status_select_label_owned">Свои</string>
-    <string name="cache_filter_status_select_label_stored">Сохраненные</string>
+    <string name="cache_filter_status_select_label_stored">Сохранённые</string>
     <string name="cache_filter_status_select_label_favorite">Рекомендован вами</string>
     <string name="cache_filter_status_select_label_watchlist">В списке Отслеживаемых</string>
     <string name="cache_filter_status_select_label_premium">Премиум</string>
@@ -686,7 +687,7 @@
     <string name="settings_summary_appearance">Настройки единиц измерения, языка и цветовой темы.</string>
     <string name="settings_title_cachedetails">Настройки тайников</string>
     <string name="settings_summary_cachedetails">Настройка отображения тайников.</string>
-    <string name="settings_title_offlinedata">Сохраненные данные</string>
+    <string name="settings_title_offlinedata">Сохранённые данные</string>
     <string name="settings_summary_offlinedata">Настройка информации, сохраняемой при загрузке тайников, используемых носителей и папок для GPX файлов.</string>
     <string name="settings_title_logging">Запись в блокнот</string>
     <string name="settings_summary_logging">Настройка подписи и записей в блокнот.</string>
@@ -719,7 +720,7 @@
     <string name="settings_title_system">Система</string>
     <string name="settings_summary_system">Системные настройки и отладочные опции.</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
-    <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
+    <string name="settings_category_geocaching_platform">Сервис геокэшинга</string>
     <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
@@ -1158,7 +1159,7 @@
     <string name="auth_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_explain_long">При нажатии на «начать авторизацию» откроется браузер на странице %s. Введите свои данные и позвольте <b>c:geo</b> получить доступ к вашей учётной записи.</string>
     <string name="auth_forget_title">Забыли авторизацию?</string>
-    <string name="auth_forget_message">Вы будете отключены от сервиса. Ваши сохраненные логин и пароль будут потеряны.</string>
+    <string name="auth_forget_message">Вы будете отключены от сервиса. Ваши сохранённые логин и пароль будут стёрты.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">Следующая процедура позволит <b>c:geo</b> иметь доступ к %s.</string>
     <string name="auth_credentials_explain_long">Если у вас уже есть учетная запись, пожалуйста, введите учетные данные для %s ниже:</string>
