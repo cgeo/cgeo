@@ -1,6 +1,7 @@
 ##
 - 변경: 별도의 BetterCacher 상자를 제거하고 대신 BetterCacher 정보 줄을 누르세요.
 - 변경: bettercacher.org 호출 시간 제한 줄이기
+- Fix: Personal note from server contained incorrect chars
 
 ##
 - 수정: 거리 보기 관련 문제
