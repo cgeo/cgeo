@@ -1,6 +1,7 @@
 ##
 - Änderung: Die separate BetterCacher-Box wurde entfernt - tippe stattdessen auf BetterCacher Infozeile
 - Änderung: Timeout für Anrufe auf bettercacher.org verkürzt
+- Fix: Personal note from server contained incorrect chars
 
 ##
 - Korrektur: Probleme mit Distanzansichten
