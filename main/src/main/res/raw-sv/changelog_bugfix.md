@@ -1,6 +1,7 @@
 ##
 - Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
 - Change: Reduce timeout for calls to bettercacher.org
+- Fix: Personal note from server contained incorrect chars
 
 ##
 - Fix: Issues with distance views

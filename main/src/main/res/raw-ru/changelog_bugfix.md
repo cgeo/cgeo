@@ -1,10 +1,11 @@
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
-- Change: Reduce timeout for calls to bettercacher.org
+- Изменение: Удалено отдельное поле Better Catcher, заменено на информационную страницу Better Catcher
+- Изменение: Уменьшено время ожидания для звонков на bettercacher.org
+- Исправлено: Личная заметка от сервера, содержала неправильные символы
 
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Исправлено: Проблемы с отображением расстояний
+- Исправлено: Не все варианты значков запуска адаптивны
+- Исправлено: Устаревшее сообщение об ошибке, если сетевое подключение недоступно
+- Исправлено: Сбой при создании метки путевой точки
+- Исправлено: проблемы с часовым поясом при записи в журнал

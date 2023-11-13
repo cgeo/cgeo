@@ -1,6 +1,7 @@
 ##
 - Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
 - Zmiana: Zmniejszono limit czasu dla połączeń z bettercacher.org
+- Poprawka: Osobista notatka z serwera zawiera nieprawidłowe znaki
 
 ##
 - Poprawka: Problemy z widokiem odległości
