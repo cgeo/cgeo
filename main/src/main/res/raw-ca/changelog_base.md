@@ -2,7 +2,7 @@
 -
 
 ### Detalls del catxé
-- Change: Make "Toggle talking" an actual toggle
+- Canvi: feu que "Canviar parlant" sigui una activació real
 
 ### General
-- New: Tapping on downloader notification opens "pending downloads" view
+- Nou: en tocar la notificació del descarregador, s'obre la vista de "descàrregues pendents"
