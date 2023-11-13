@@ -1362,6 +1362,8 @@
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
     <string name="cache_dialog_refresh_title">Aktualisieren</string>
     <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
+    <string name="cache_menu_speechDeactivate">Beende Sprachausgabe</string>
+    <string name="cache_menu_speechActivate">Starte Sprachausgabe</string>
     <string name="cache_menu_navigate">Navigieren</string>
     <string name="cache_menu_target">Als Ziel festlegen</string>
     <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
