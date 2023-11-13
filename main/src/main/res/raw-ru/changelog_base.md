@@ -2,7 +2,7 @@
 -
 
 ### Детали тайника
-- Change: Make "Toggle talking" an actual toggle
+- Изменение: Создано "Переключение разговора" фактическим переключением
 
 ### Общее
-- New: Tapping on downloader notification opens "pending downloads" view
+- Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
