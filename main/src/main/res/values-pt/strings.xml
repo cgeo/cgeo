@@ -946,8 +946,8 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Faz a salvaguarda das caches (as imagens não são guardadas), pontos adicionais e configurações do c:geo.\n
-Nota: Copie para outro armazenamento este ficheiro, para poder restaurar os dados mesmo que perca o seu telemóvel.</string>
+    <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\n
+Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(s) backup(s) para um armazenamento externo.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
