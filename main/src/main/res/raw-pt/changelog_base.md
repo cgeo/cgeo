@@ -2,7 +2,7 @@
 -
 
 ### Detalhes da cache
-- Change: Make "Toggle talking" an actual toggle
+- Alteração: Torne "Ligar/desligar a fala" num verdadeiro comutador
 
 ### Geral
-- New: Tapping on downloader notification opens "pending downloads" view
+- Novo: Ao tocar na notificação do gestor de transferências abre a visualização "transferências pendentes"

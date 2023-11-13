@@ -1,10 +1,11 @@
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
-- Change: Reduce timeout for calls to bettercacher.org
+- Alteração: Removida caixa separada BetterCacher, em vez disso, toque na linha de informação do BetterCacher
+- Alteração: Reduzir o tempo limite para chamadas para bettercacher.org
+- Correção: Nota pessoal vinda do servidor continha caracteres incorrectos
 
 ##
-- Fix: Issues with distance views
+- Correcção: problemas com visualizações de distância
 - Correcção: Nem todas as variantes de ícones de arranque são adaptáveis
 - Correcção: Mensagem de erro desactualizada se não houver ligação de rede
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Correcção: Falhas ao criar marcadores de pontos adicionais
+- Correcção: Problemas com o fuso horário ao iniciar sessão

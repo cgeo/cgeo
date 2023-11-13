@@ -1,10 +1,11 @@
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
-- Change: Reduce timeout for calls to bettercacher.org
+- Canvi: s'ha eliminat el quadre BetterCacher separat, toqueu la línia d'informació de BetterCacher
+- Canvi: redueix el temps d'espera per a les trucades a bettercacher.org
+- Fix: Personal note from server contained incorrect chars
 
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Solució: problemes amb les visualitzacions a distància
+- Solució: no totes les variants d'icones del llançador són adaptatives
+- Correcció: missatge d'error obsolet si no hi ha connexió de xarxa disponible
+- Correcció: es bloqueja en crear marcadors de waypoint
+- Solució: problemes de zona horària en iniciar sessió

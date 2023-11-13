@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">c:geo - контакты (дополнение)</string>
+    <string name="app_name">c:geo — контакты (дополнение)</string>
     <string name="contact_not_found">Контакт с псевдонимом/прозвищем %s не найден. Сначала добавьте его в вашем приложении Контакты.</string>
     <string name="multiple_matches">Несколько совпадений</string>
     <!-- permission handling -->

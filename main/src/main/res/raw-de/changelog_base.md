@@ -2,7 +2,7 @@
 -
 
 ### Cache-Details
-- Change: Make "Toggle talking" an actual toggle
+- Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"

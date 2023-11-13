@@ -1,6 +1,7 @@
 ##
 - Wijziging: Aparte BetterCacher box verwijderd, tik op de BetterCacher info lijn
 - Wijziging: time-out verminderd voor oproepen naar bettercacher.org
+- Oplossing: Persoonlijke notitie van de server bevat onjuiste tekens
 
 ##
 - Oplossing: Problemen met afstandsweergaven
