@@ -1,0 +1,275 @@
+name: Test code
+
+on:
+  push:
+    branches: [ "master" , "release", "androidci" ]
+  pull_request:
+    branches: [ "master" , "release" ]
+
+jobs:
+  dex-count:
+    name: DEX count
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+
+      - name: Setup cgeo preferences and keystore
+        uses: ./.github/actions/cgeo-preferences
+        with:
+          KEY_STORE: ${{ secrets.KEY_STORE }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
+          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
+          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
+          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
+          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
+          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
+          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
+          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
+          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
+          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
+          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
+          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
+          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
+          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
+          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
+          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
+          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
+          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
+          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
+          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
+          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        # with:
+        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
+
+      - name: Run countBasicDebugDexMethods
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: --no-daemon --scan :main:countBasicDebugDexMethods
+
+
+
+
+  checkstyle:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+
+      - name: Setup cgeo preferences and keystore
+        uses: ./.github/actions/cgeo-preferences
+        with:
+          KEY_STORE: ${{ secrets.KEY_STORE }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
+          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
+          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
+          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
+          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
+          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
+          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
+          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
+          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
+          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
+          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
+          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
+          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
+          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
+          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
+          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
+          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
+          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
+          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
+          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
+          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        # with:
+        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
+
+      - name: Run checkstyle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: --no-daemon --scan :main:checkstyle
+
+      - uses: lcollins/checkstyle-github-action@v2.0.0
+        with:
+          path: 'main/build/reports/checkstyle/checkstyle.xml'
+
+
+
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+
+      - name: Setup cgeo preferences and keystore
+        uses: ./.github/actions/cgeo-preferences
+        with:
+          KEY_STORE: ${{ secrets.KEY_STORE }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
+          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
+          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
+          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
+          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
+          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
+          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
+          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
+          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
+          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
+          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
+          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
+          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
+          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
+          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
+          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
+          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
+          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
+          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
+          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
+          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        # with:
+        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
+
+      - name: Run lintBasicDebug
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: --no-daemon --scan :main:lintBasicDebug
+
+      - name: Check and report lint results
+        uses: hidakatsuya/action-report-android-lint@v1
+        with:
+          result-path: 'main/build/reports/lint-results-basicDebug.xml'
+
+
+
+
+  integration-tests:
+    # Using MacOs as it's better for running the emulator
+    # https://github.com/marketplace/actions/android-emulator-runner#can-i-use-this-action-on-github-hosted-linux-vms
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+
+      - name: Setup cgeo preferences and keystore
+        uses: ./.github/actions/cgeo-preferences
+        with:
+          KEY_STORE: ${{ secrets.KEY_STORE }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
+          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
+          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
+          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
+          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
+          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
+          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
+          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
+          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
+          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
+          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
+          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
+          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
+          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
+          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
+          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
+          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
+          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
+          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
+          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
+          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        # with:
+        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+          path: |
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-26
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 26
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
+
+      - name: Run Unit Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 26
+          arch: x86_64
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/test-results/**/*.xml'
+
+      - name: Upload resulting APK
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: apk
+          path: '*/build/outputs/apk/**/cgeo*.apk'
