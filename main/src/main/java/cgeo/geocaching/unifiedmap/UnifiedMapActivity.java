@@ -34,6 +34,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
@@ -73,6 +74,7 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -334,14 +336,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
 
         MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
-        /*
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
-                caches.invalidate(Collections.singleton(geocode));
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                if (cache != null && cache.getCoords() != null) {
+                    viewModel.caches.getValue().add(cache);
+                    viewModel.caches.notifyDataChanged();
+                }
             }
         });
-        */
 
     }
 
