@@ -111,7 +111,6 @@ public class MapUtils {
     // one-time messages to be shown for maps
     public static void showMapOneTimeMessages(final Activity activity, final MapMode mapMode) {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
-        Dialogs.basicOneTimeMessage(activity, Settings.isLongTapOnMapActivated() ? OneTimeDialogs.DialogType.MAP_LONG_TAP_ENABLED : OneTimeDialogs.DialogType.MAP_LONG_TAP_DISABLED);
         if (mapMode == MapMode.LIVE && !Settings.isLiveMap()) {
             Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_LIVE_DISABLED);
         }
