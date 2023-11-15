@@ -72,6 +72,11 @@
             android:title="@string/init_create_memory_dump"
             app:iconSpaceReserved="false" />
         <Preference
+            android:key="@string/pref_fakekey_reset_otm"
+            android:layout="@layout/preference_button"
+            android:title="@string/init_reset_otm"
+            app:iconSpaceReserved="false" />
+        <Preference
             android:key="@string/pref_fakekey_view_settings"
             android:layout="@layout/preference_button"
             android:title="@string/view_settings"

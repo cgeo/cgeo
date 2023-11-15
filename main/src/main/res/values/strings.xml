@@ -1228,6 +1228,9 @@
     <string name="init_create_memory_dump">Create memory dump</string>
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>
+    <string name="init_reset_otm">Reset one-time messages</string>
+    <string name="init_reset_otm_confirm">Do you want to reset all one-time messages?</string>
+    <string name="init_reset_otm_done">One-time messages have been reset</string>
     <string name="init_please_wait">Please wait…</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>

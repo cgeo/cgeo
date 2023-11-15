@@ -147,4 +147,11 @@ public class OneTimeDialogs extends DataStore.DBExtension {
             }
         }
     }
+
+    public static void resetAll() {
+        for (DialogType key : DialogType.values()) {
+            removeAll(type, key.name());
+        }
+        initializeOnFreshInstall();
+    }
 }
