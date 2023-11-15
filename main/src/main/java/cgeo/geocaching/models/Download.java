@@ -129,6 +129,12 @@ public class Download {
         return iconRes;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "{ n=" + name + ", t=" + type + ", u=" + uri + ", isDir=" + isDir + ", di=" + dateInfo + " }";
+    }
+
     public enum DownloadType {
         // id values must not be changed as they are referenced in the database & download companion files
         DOWNLOADTYPE_ALL_MAPRELATED(0, 0),         // virtual entry

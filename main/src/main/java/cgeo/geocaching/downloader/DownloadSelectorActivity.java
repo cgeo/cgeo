@@ -48,6 +48,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     private ArrayList<Download.DownloadTypeDescriptor> spinnerData = new ArrayList<>();
     private List<Download> lastCompanionList = Collections.emptyList();
     private Download.DownloadType lastCompanionType = null;
+    private ArrayList<CompanionFileUtils.DownloadedFileData> existingFiles = null;
 
     protected class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHolder> {
         @NonNull private final DownloadSelectorActivity activity;
@@ -89,6 +90,17 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                 holder.binding.action.setImageResource(offlineMap.isBackDir() ? R.drawable.downloader_folder_back : R.drawable.downloader_folder);
                 holder.binding.getRoot().setOnClickListener(v -> new DownloadSelectorMapListTask(activity, offlineMap.getUri(), offlineMap.getName(), current, lastCompanionType, lastCompanionList, activity::setLastCompanions, activity::onMapListTaskPostExecuteInternal).execute());
             } else {
+                // prepare badge (check for existing file)
+                boolean isInstalled = false;
+                boolean needsUpdate = false;
+                for (CompanionFileUtils.DownloadedFileData existing : existingFiles) {
+                    if (offlineMap.getType().id == existing.remoteParsetype && StringUtils.equals(offlineMap.getUri().toString(), existing.remotePage + "/" + existing.remoteFile)) {
+                        isInstalled = true;
+                        needsUpdate = offlineMap.getDateInfo() > existing.remoteDate;
+                    }
+                }
+                holder.binding.badge.setImageResource(isInstalled ? needsUpdate ? R.drawable.downloader_needsupdate : R.drawable.downloader_ok : 0);
+
                 final int typeResId = offlineMap.getType().getTypeNameResId();
                 final String addInfo = offlineMap.getAddInfo();
                 final String sizeInfo = offlineMap.getSizeInfo();
@@ -198,6 +210,8 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         final ArrayAdapter<Download.DownloadTypeDescriptor> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerData);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.downloaderType.setAdapter(spinnerAdapter);
+
+        existingFiles = CompanionFileUtils.availableOfflineMapRelatedFiles();
 
         final Download.DownloadTypeDescriptor descriptor = Download.DownloadType.fromTypeId(Settings.getMapDownloaderSource());
         if (descriptor != null) {
