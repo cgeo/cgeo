@@ -19,6 +19,15 @@
         android:text="@null"
         android:layout_alignParentLeft="true" />
 
+    <ImageView
+        android:id="@+id/badge"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:gravity="right|bottom"
+        android:text="@null"
+        android:layout_alignBottom="@id/action"
+        android:layout_alignRight="@id/action" />
+
     <TextView
         android:id="@+id/label"
         android:layout_width="fill_parent"
