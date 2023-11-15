@@ -332,7 +332,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         viewModel.mapCenter.observe(this, center -> updateCacheCount());
         viewModel.caches.observe(this, caches -> updateCacheCount());
 
-//        MapUtils.showMapOneTimeMessages(this, mapMode);
+        MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
         /*
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
