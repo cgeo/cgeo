@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
+import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
 import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
@@ -54,6 +55,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
@@ -134,6 +136,51 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             brand = TrackableBrand.getById(extras.getInt(Intents.EXTRA_BRAND));
             trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
             fallbackKeywordSearch = extras.getString(Intents.EXTRA_KEYWORD);
+        }
+
+        // try to get data from URI
+        final Uri uri = getIntent().getData();
+        if (geocode == null && guid == null && id == null && uri != null) {
+            // check if port part needs to be removed
+            String address = uri.toString();
+            if (uri.getPort() > 0) {
+                address = StringUtils.remove(address, ":" + uri.getPort());
+            }
+            geocode = ConnectorFactory.getTrackableFromURL(address);
+            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(address);
+
+            final String uriHost = uri.getHost().toLowerCase(Locale.US);
+            if (uriHost.endsWith("geocaching.com")) {
+                geocode = uri.getQueryParameter("tracker");
+                guid = uri.getQueryParameter("guid");
+                id = uri.getQueryParameter("id");
+
+                if (StringUtils.isNotBlank(geocode)) {
+                    geocode = geocode.toUpperCase(Locale.US);
+                    guid = null;
+                    id = null;
+                } else if (StringUtils.isNotBlank(guid)) {
+                    geocode = null;
+                    guid = guid.toLowerCase(Locale.US);
+                    id = null;
+                } else if (StringUtils.isNotBlank(id)) {
+                    geocode = null;
+                    guid = null;
+                    id = id.toLowerCase(Locale.US);
+                } else {
+                    showToast(res.getString(R.string.err_tb_details_open));
+                    finish();
+                    return;
+                }
+            } else if (uriHost.endsWith("geokrety.org")) {
+                brand = TrackableBrand.GEOKRETY;
+
+                // If geocode isn't found, try to find by Tracking Code
+                if (geocode == null && !tbTrackingCode.isEmpty()) {
+                    trackingCode = tbTrackingCode.trackingCode;
+                    geocode = tbTrackingCode.trackingCode;
+                }
+            }
         }
 
         // no given data

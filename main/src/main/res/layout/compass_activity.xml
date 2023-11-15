@@ -118,8 +118,6 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <include layout="@layout/compass_hint_and_status" android:id="@+id/hint" />
-
     <view
         android:id="@+id/rose"
         android:layout_width="fill_parent"
@@ -139,5 +137,7 @@
         android:minWidth="289dip"
         android:padding="4dip"
         tools:ignore="NotSibling" />
+
+    <include layout="@layout/compass_hint_and_status" android:id="@+id/hint" />
 
 </RelativeLayout>
