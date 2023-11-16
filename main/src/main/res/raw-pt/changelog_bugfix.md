@@ -1,4 +1,8 @@
 ##
+- Fix: Hint hidden behind compass when using large fonts
+- Fix: coord.info trackable links cannot be opened any more
+
+##
 - Alteração: Removida caixa separada BetterCacher, em vez disso, toque na linha de informação do BetterCacher
 - Alteração: Reduzir o tempo limite para chamadas para bettercacher.org
 - Correção: Nota pessoal vinda do servidor continha caracteres incorrectos
