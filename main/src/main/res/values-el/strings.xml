@@ -228,6 +228,7 @@
     <string name="err_select_logimage_failed">Η επιλογή μιας εικόνας για το αρχείο καταγραφής απέτυχε.</string>
     <string name="err_acquire_image_failed">Απέτυχε η λήψη εικόνας.</string>
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
+    <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
     <string name="err_tb_not_found">Δεν βρέθηκε το ανιχνεύσιμο %s.</string>
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
