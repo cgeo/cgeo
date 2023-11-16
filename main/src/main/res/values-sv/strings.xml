@@ -233,6 +233,7 @@
     <string name="err_acquire_image_failed">Hämtning av bilden misslyckades.</string>
     <string name="err_acquire_image_unsupported_format">Bildformatet måste vara en av JPEG/JPG, PNG eller GIF</string>
     <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
+    <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
     <string name="err_tb_not_loggable">Detta spårbara objekt är inte loggbart.</string>
     <string name="err_tb_not_found">c:geo kan inte hitta trackable %s.</string>
     <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
