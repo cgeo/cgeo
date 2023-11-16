@@ -135,6 +135,7 @@
     <string name="err_load_descr_failed">c:geo getur ekki náð í lýsingu.</string>
     <string name="err_location_unknown">c:geo veit ekki staðsetningu kassans.</string>
     <string name="err_acquire_image_failed">Gat ekki náð í mynd.</string>
+    <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
     <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
     <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
     <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
