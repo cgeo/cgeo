@@ -157,6 +157,7 @@
     <string name="err_select_logimage_failed">Ang pagpili ng imahe para sa sulat ay nabigo.</string>
     <string name="err_acquire_image_failed">Ang pagkuha sa imahe ay nabigo.</string>
     <string name="err_tb_display">ang c:geo hindi maaaring ipakita ang trackable na gusto mo. Ito nga ba ay nahahanap?</string>
+    <string name="err_tb_details_open">ang c:geo ay hindi makapag-bukas ng nahahanap ng mga detalye.</string>
     <string name="err_tb_not_loggable">Ang masusubaybayan na ito ay hindi naka-log-in.</string>
     <string name="err_tb_find_that">hindi mahanap ng c:geo ang trackable na iyon.</string>
     <string name="err_waypoint_cache_unknown">hindi alam ng c:geo kung aling cache ang gusto mong dagdagan ng waypoint.</string>
