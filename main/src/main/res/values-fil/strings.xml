@@ -150,6 +150,7 @@
     <string name="err_select_logimage_failed">Ang pagpili sa larawan para sa log na nabigo.</string>
     <string name="err_acquire_image_failed">Pagkuha ng larawan ay nabigo.</string>
     <string name="err_tb_display">c:geo ay hindi sya maka display ng gusto mong subaybayan. Kailangan ba talagang subaybayan?</string>
+    <string name="err_tb_details_open">c:geo ay hindi makabukas sa mga detalye na subaybayan.</string>
     <string name="err_tb_not_loggable">Ito ay maaring subaybayan pero hindi naka-login.</string>
     <string name="err_tb_find_that">ang c:geo ay hindi nakakita sa nasusubaybayang iyon.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo ay walang alam sa kung anong cache ang iyong gusto na dagdagan ng parang isang waypoint.</string>
