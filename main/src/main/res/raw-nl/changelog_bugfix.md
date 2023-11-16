@@ -1,4 +1,8 @@
 ##
+- Oplossing: Hint was verborgen achter het kompas bij gebruik van grote lettertypen
+- Oplossing: coord.info trackable links kunnen niet meer worden geopend
+
+##
 - Wijziging: Aparte BetterCacher box verwijderd, tik op de BetterCacher info lijn
 - Wijziging: time-out verminderd voor oproepen naar bettercacher.org
 - Oplossing: Persoonlijke notitie van de server bevat onjuiste tekens
