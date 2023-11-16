@@ -259,6 +259,7 @@
     <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
     <string name="err_acquire_image_unsupported_format">El format d\'imatge ha de ser JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
+    <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
     <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
     <string name="err_tb_not_found">El c:geo no pot trobar el traçable %s.</string>
     <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
