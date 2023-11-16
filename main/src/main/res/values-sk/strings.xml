@@ -233,6 +233,7 @@
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázka musí byť JPEG/JPG, PNG alebo GIF</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
+    <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
     <string name="err_tb_not_found">c:geo nemôže nájsť trasovateľný predmet %s.</string>
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
