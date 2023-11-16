@@ -1,4 +1,8 @@
 ##
+- Fix: Hint hidden behind compass when using large fonts
+- Fix: coord.info trackable links cannot be opened any more
+
+##
 - Изменение: Удалено отдельное поле Better Catcher, заменено на информационную страницу Better Catcher
 - Изменение: Уменьшено время ожидания для звонков на bettercacher.org
 - Исправлено: Личная заметка от сервера, содержала неправильные символы
