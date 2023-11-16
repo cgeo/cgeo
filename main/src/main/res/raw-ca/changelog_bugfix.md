@@ -1,4 +1,8 @@
 ##
+- Fix: Hint hidden behind compass when using large fonts
+- Fix: coord.info trackable links cannot be opened any more
+
+##
 - Canvi: s'ha eliminat el quadre BetterCacher separat, toqueu la línia d'informació de BetterCacher
 - Canvi: redueix el temps d'espera per a les trucades a bettercacher.org
 - Fix: Personal note from server contained incorrect chars
