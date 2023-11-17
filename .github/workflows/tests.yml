@@ -2,9 +2,9 @@ name: Test code
 
 on:
   push:
-    branches: [ "master" , "release", "androidci" ]
+    branches: [ "master", "androidci" ]
   pull_request:
-    branches: [ "master" , "release" ]
+    branches: [ "master" ]
 
 jobs:
   dex-count:
@@ -49,11 +49,6 @@ jobs:
         with:
           java-version: 11
           distribution: temurin
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        # with:
-        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
 
       - name: Run countBasicDebugDexMethods
         uses: gradle/gradle-build-action@v2
@@ -104,11 +99,6 @@ jobs:
         with:
           java-version: 11
           distribution: temurin
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        # with:
-        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
 
       - name: Run checkstyle
         uses: gradle/gradle-build-action@v2
@@ -163,11 +153,6 @@ jobs:
         with:
           java-version: 11
           distribution: temurin
-
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-        # with:
-        #   cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/release' && github.ref != 'refs/heads/androidci' }}
 
       - name: Run lintBasicDebug
         uses: gradle/gradle-build-action@v2

@@ -1,0 +1,60 @@
+name: Run watchdog tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 */4 * * *'
+
+
+jobs:
+  watchdog-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [ "main", "release" ]
+    steps:
+      - name: Checkout the latest code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+
+      - name: Setup cgeo preferences and keystore
+        uses: ./.github/actions/cgeo-preferences
+        with:
+          KEY_STORE: ${{ secrets.KEY_STORE }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_ALIAS_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
+          MAPS_API_KEY: ${{ secrets.MAPS_API_KEY }}
+          MAPS_API_KEY_MARKET: ${{ secrets.MAPS_API_KEY_MARKET }}
+          MAPS_API2_KEY: ${{ secrets.MAPS_API2_KEY }}
+          OCDE_OKAPI_CONSUMER_KEY: ${{ secrets.OCDE_OKAPI_CONSUMER_KEY }}
+          OCDE_OKAPI_CONSUMER_SECRET: ${{ secrets.OCDE_OKAPI_CONSUMER_SECRET }}
+          OCPL_OKAPI_CONSUMER_KEY: ${{ secrets.OCPL_OKAPI_CONSUMER_KEY }}
+          OCPL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCPL_OKAPI_CONSUMER_SECRET }}
+          OCUS_OKAPI_CONSUMER_KEY: ${{ secrets.OCUS_OKAPI_CONSUMER_KEY }}
+          OCUS_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUS_OKAPI_CONSUMER_SECRET }}
+          OCNL_OKAPI_CONSUMER_KEY: ${{ secrets.OCNL_OKAPI_CONSUMER_KEY }}
+          OCNL_OKAPI_CONSUMER_SECRET: ${{ secrets.OCNL_OKAPI_CONSUMER_SECRET }}
+          OCRO_OKAPI_CONSUMER_KEY: ${{ secrets.OCRO_OKAPI_CONSUMER_KEY }}
+          OCRO_OKAPI_CONSUMER_SECRET: ${{ secrets.OCRO_OKAPI_CONSUMER_SECRET }}
+          OCUK_OKAPI_CONSUMER_KEY: ${{ secrets.OCUK_OKAPI_CONSUMER_KEY }}
+          OCUK_OKAPI_CONSUMER_SECRET: ${{ secrets.OCUK_OKAPI_CONSUMER_SECRET }}
+          SU_CONSUMER_KEY: ${{ secrets.SU_CONSUMER_KEY }}
+          SU_CONSUMER_SECRET: ${{ secrets.SU_CONSUMER_SECRET }}
+          THUNDERFOREST_API_KEY: ${{ secrets.THUNDERFOREST_API_KEY }}
+          ALC_CONSUMER_KEY: ${{ secrets.ALC_CONSUMER_KEY }}
+          PREF_COOKIESTORE: ${{ secrets.PREF_COOKIESTORE }}
+          PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
+          PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: temurin
+
+      - name: Run WatchdogTest
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: --no-daemon --continue main:connectedBasicDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest
