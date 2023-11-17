@@ -2,7 +2,7 @@
 -
 
 ### Detaily kešky
-- Change: Make "Toggle talking" an actual toggle
+- Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
 
 ### Obecné
-- New: Tapping on downloader notification opens "pending downloads" view
+- Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
