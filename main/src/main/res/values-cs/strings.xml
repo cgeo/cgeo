@@ -1114,6 +1114,9 @@
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
+    <string name="init_reset_otm">Resetovat jednorázové zprávy</string>
+    <string name="init_reset_otm_confirm">Chcete resetovat všechny jednorázové zprávy?</string>
+    <string name="init_reset_otm_done">Jednorázové zprávy byly resetovány</string>
     <string name="init_please_wait">Čekejte prosím…</string>
     <string name="settings_open_website">Otevřít webovou stránku</string>
     <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
@@ -1391,6 +1394,8 @@
     <string name="cache_dialog_offline_drop_message">Odstraňování kešky z paměti zařízení…</string>
     <string name="cache_dialog_refresh_title">Aktualizovat</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů kešky…</string>
+    <string name="cache_menu_speechDeactivate">Přestat mluvit</string>
+    <string name="cache_menu_speechActivate">Začít mluvit</string>
     <string name="cache_menu_navigate">Navigovat</string>
     <string name="cache_menu_target">Nastavit jako cíl</string>
     <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
