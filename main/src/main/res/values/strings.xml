@@ -1684,6 +1684,7 @@
     <string name="context_map_remove_from_route_pos">Remove from position %d</string>
     <string name="context_map_remove_from_route_end">Remove from end</string>
     <string name="context_map_show_coords">Show coordinates</string>
+    <string name="edit">Edit</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="create_internal_cache_short">New cache</string>
@@ -2632,12 +2633,12 @@
     <string name="routes_tracks_dialog_title">Routes / tracks options</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Select color</string>
-    <string name="center_on_route_track">Center on route/track</string>
+    <string name="center">Center</string>
     <string name="unload_route_track">Unload route/track</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
-    <string name="make_visible">make visible</string>
-    <string name="hide">hide</string>
+    <string name="make_visible">Make visible</string>
+    <string name="hide">Hide</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
