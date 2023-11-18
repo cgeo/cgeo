@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_edit"
+        android:title="@string/edit"
+        android:icon="@drawable/ic_menu_edit"
+        app:iconTint="@color/colorText"/>
+    <item
+        android:id="@+id/menu_optimize"
+        android:icon="@drawable/ic_menu_auto_fix_high"
+        android:title="@string/optimize"
+        app:iconTint="@color/colorText"
+        android:visible="false"/>
+    <item
+        android:id="@+id/menu_invert_order"
+        android:icon="@drawable/ic_menu_swap_vert"
+        android:title="@string/menu_invert_order"
+        app:iconTint="@color/colorText"
+        android:visible="false" />
+    <item
+        android:id="@+id/menu_color"
+        android:icon="@drawable/downloader_theme"
+        android:title="@string/routes_tracks_color"
+        app:iconTint="@color/colorText"
+        android:visible="false"/>
+    <item
+        android:id="@+id/item_visibility"
+        android:icon="@drawable/visibility"
+        android:title="@string/hide"
+        app:iconTint="@color/colorText" />
+    <item
+        android:id="@+id/item_center"
+        android:icon="@drawable/center"
+        android:title="@string/center"
+        app:iconTint="@color/colorText" />
+    <item
+        android:id="@+id/menu_item_delete"
+        android:icon="@drawable/ic_menu_delete"
+        android:title="@string/cache_filter_storage_delete_button"
+        app:iconTint="@color/colorText" />
+</menu>
