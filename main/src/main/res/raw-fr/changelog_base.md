@@ -1,5 +1,5 @@
 ### Carte
--
+- New: Highlight existing downloads in download manager
 
 ### Détails de la cache
 - Change: Make "Toggle talking" an actual toggle
