@@ -701,12 +701,6 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
-    public static boolean enableFeatureNewGCLogApi() {
-        if (contains(R.string.pref_feature_new_gc_log_api)) {
-            return getBoolean(R.string.pref_feature_new_gc_log_api, false);
-        }
-        return true;
-    }
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
