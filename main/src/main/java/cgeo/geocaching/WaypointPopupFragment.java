@@ -83,6 +83,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
+            // Cache name and type
+            final String cacheType = cache.getType().getL10n();
+            final String cacheSize = cache.showSize() ? " (" + cache.getSize().getL10n() + ")" : "";
+            details.add(R.string.cache_type, cacheType + cacheSize + " (" + cache.getShortGeocode() + ")");
+
             //Waypoint name
             if (StringUtils.isNotBlank(waypoint.getName())) {
                 details.add(R.string.cache_name, waypoint.getName());
@@ -96,6 +101,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             if (StringUtils.isNotBlank(userNote)) {
                 details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getShortGeocode());
             }
+            details.addLatestLogs(cache);
 
             binding.toggleVisited.setChecked(waypoint.isVisited());
             binding.toggleVisited.setOnClickListener(arg1 -> {
@@ -106,11 +112,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
             binding.edit.setOnClickListener(arg0 -> {
                 EditWaypointActivity.startActivityEditWaypoint(getActivity(), cache, waypoint.getId());
-                getActivity().finish();
             });
 
-            details = new CacheDetailsCreator(getActivity(), binding.detailsList);
-            addCacheDetails(true);
+            binding.moreDetails.setOnClickListener(arg0 -> {
+                CacheDetailActivity.startActivity(getActivity(), geocode);
+            });
 
             final View view = getView();
             assert view != null;
