@@ -1,5 +1,5 @@
 ### Mappa
--
+- New: Highlight existing downloads in download manager
 
 ### Dettagli del cache
 - Change: Make "Toggle talking" an actual toggle
