@@ -1,5 +1,5 @@
 ### Karte
--
+- New: Highlight existing downloads in download manager
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
