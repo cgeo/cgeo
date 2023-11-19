@@ -1,5 +1,5 @@
 ### Žemėlapis
--
+- New: Highlight existing downloads in download manager
 
 ### Slėptuvės detalės
 - Change: Make "Toggle talking" an actual toggle
