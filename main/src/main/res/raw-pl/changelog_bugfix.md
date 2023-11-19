@@ -1,6 +1,6 @@
 ##
-- Fix: Hint hidden behind compass when using large fonts
-- Fix: coord.info trackable links cannot be opened any more
+- Poprawka: Wskazówka ukryta za kompasem podczas używania dużych czcionek
+- Poprawka: Nie można już otwierać łączy do przedmiotów podróżnych w domenie coord.info
 
 ##
 - Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
