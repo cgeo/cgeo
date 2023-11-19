@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -49,7 +49,7 @@ import org.apache.commons.lang3.StringUtils;
 //       Either merge GoogleMapActivity with CGeoMap
 //       or generify our map handling so that we only have one map activity at all to avoid code duplication
 @SuppressLint("MissingSuperCall")
-public class GoogleMapActivity extends AbstractNavigationBarActivity implements MapActivityImpl, FilteredActivity, OnMapsSdkInitializedCallback {
+public class GoogleMapActivity extends AbstractNavigationBarMapActivity implements MapActivityImpl, FilteredActivity, OnMapsSdkInitializedCallback {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 

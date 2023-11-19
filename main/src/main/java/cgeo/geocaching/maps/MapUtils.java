@@ -45,12 +45,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
@@ -64,8 +66,11 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import org.apache.commons.lang3.StringUtils;
+import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN;
 
 public class MapUtils {
+
+    private static final String TAG_MAPDETAILS_FRAGMENT = "mapdetails_fragment";
 
     private MapUtils() {
         // should not be instantiated
@@ -316,7 +321,7 @@ public class MapUtils {
 
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity) {
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.detailsfragment, fragment);
+        ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
         ft.commit();
 
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
@@ -326,6 +331,36 @@ public class MapUtils {
         b.setState(BottomSheetBehavior.STATE_EXPANDED);
         b.setSkipCollapsed(true);
         b.setHideable(true);
+
+        // remove fragment and view on swipe down
+        b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
+                if (newState == STATE_HIDDEN) {
+                    removeDetailsFragment(activity);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                // nothing
+            }
+        });
+    }
+
+    /** removes fragment and view for mapdetails view; returns true, if view got removed */
+    public static boolean removeDetailsFragment(final AppCompatActivity activity) {
+        final FragmentManager fm = activity.getSupportFragmentManager();
+        final Fragment f = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
+        if (f != null) {
+            fm.beginTransaction().remove(f).commit();
+        }
+        final View v = activity.findViewById(R.id.detailsfragment);
+        if (v != null && v.getVisibility() != View.GONE) {
+            v.setVisibility(View.GONE);
+            return true;
+        }
+        return false;
     }
 
 }

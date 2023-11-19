@@ -7,7 +7,7 @@ import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
@@ -150,7 +150,7 @@ import org.mapsforge.map.model.common.Observer;
 @SuppressLint("ClickableViewAccessibility")
 // This is definitely a valid issue, but can't be refactored in one step
 @SuppressWarnings("PMD.ExcessiveClassLength")
-public class NewMap extends AbstractNavigationBarActivity implements Observer, FilteredActivity {
+public class NewMap extends AbstractNavigationBarMapActivity implements Observer, FilteredActivity {
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
     private static final String ROUTING_SERVICE_KEY = "NewMap";

@@ -4,7 +4,7 @@ import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -100,7 +100,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 
-public class UnifiedMapActivity extends AbstractNavigationBarActivity implements FilteredActivity {
+public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity {
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 
