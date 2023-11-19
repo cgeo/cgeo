@@ -1,5 +1,5 @@
 ### 지도
--
+- New: Highlight existing downloads in download manager
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
