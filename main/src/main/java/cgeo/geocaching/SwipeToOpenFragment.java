@@ -11,10 +11,6 @@ import androidx.fragment.app.Fragment;
 
 public class SwipeToOpenFragment extends Fragment {
 
-    public SwipeToOpenFragment() {
-        // nothing to de
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
