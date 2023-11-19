@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -15,7 +16,6 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
@@ -27,6 +27,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -168,56 +170,36 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
      * Set the current popup coordinates as new navigation target on map
      */
     private void setAsTarget() {
-        final Activity activity = getActivity();
-        final Intent result = new Intent();
-        result.putExtra(Intents.EXTRA_TARGET_INFO, getTargetInfo());
-        activity.setResult(RESULT_CODE_SET_TARGET, result);
-        activity.finish();
+        final TargetUpdateReceiver activity = (TargetUpdateReceiver) requireActivity();
+        activity.onReceiveTargetUpdate(getTargetInfo());
+        MapUtils.removeDetailsFragment((AppCompatActivity) requireActivity());
     }
 
-/*
-    @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        CacheMenuHandler.addMenuItems(inflater, menu, cache, true);
-        CacheMenuHandler.initDefaultNavigationMenuItem(menu, this);
-
-        if (requireActivity().getCallingActivity() != null) {
-            menu.findItem(R.id.menu_target).setVisible(true);
-        }
+    public static void onCreatePopupOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {
+        final Menu menu = toolbar.getMenu();
+        menu.clear();
+        toolbar.inflateMenu(R.menu.cache_options);
+        CacheMenuHandler.onPrepareOptionsMenu(menu, geocache, true);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, navigationSource);
+        menu.findItem(R.id.menu_target).setVisible(true);
+        LoggingUI.onPrepareOptionsMenu(menu, geocache);
     }
-*/
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+    public boolean onPopupOptionsItemSelected(@NonNull final MenuItem item) {
         if (item.getItemId() == R.id.menu_target) {
             setAsTarget();
             return true;
         }
-/*
+
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init, true)) {
             return true;
         }
- */
+
         if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
-
-    @Override
-    public void onPrepareOptionsMenu(@NonNull final Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        try {
-//            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, true);
-            LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (final RuntimeException ignored) {
-            // nothing
-        }
-    }
-
 
     protected abstract TargetInfo getTargetInfo();
 
@@ -235,6 +217,10 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         }
         CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);
         getActivity().finish();
+    }
+
+    public interface TargetUpdateReceiver {
+        void onReceiveTargetUpdate(TargetInfo targetInfo);
     }
 
     public static class TargetInfo implements Parcelable {

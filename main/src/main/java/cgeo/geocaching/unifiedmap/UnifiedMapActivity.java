@@ -1,7 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.AbstractDialogFragment;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
@@ -100,7 +99,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 
-public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity {
+public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 
@@ -774,21 +773,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onActivityResult(requestCode, resultCode, data);
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
-            final AbstractDialogFragment.TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
-            if (targetInfo != null) {
-                if (Settings.isAutotargetIndividualRoute()) {
-                    Settings.setAutotargetIndividualRoute(false);
-                    Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
-                }
-                viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
-            }
-        }
-
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
             refreshMapData(false);
         }
+    }
+
+    @Override
+    public void onReceiveTargetUpdate(final AbstractDialogFragment.TargetInfo targetInfo) {
+        if (Settings.isAutotargetIndividualRoute()) {
+            Settings.setAutotargetIndividualRoute(false);
+            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+        }
+        viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
     }
 
     // ========================================================================

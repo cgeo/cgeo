@@ -6,7 +6,6 @@ import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
@@ -135,8 +134,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 }
                 return false;
             });
-            MapUtils.initDetailsFragmentOptionsMenu(toolbar, this, cache);
-            toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
+            onCreatePopupOptionsMenu(toolbar, this, cache);
+            toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
@@ -157,8 +156,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
+    public boolean onPopupOptionsItemSelected(@NonNull final MenuItem item) {
+        if (super.onPopupOptionsItemSelected(item)) {
             return true;
         }
 

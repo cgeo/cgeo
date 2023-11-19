@@ -150,7 +150,7 @@ import org.mapsforge.map.model.common.Observer;
 @SuppressLint("ClickableViewAccessibility")
 // This is definitely a valid issue, but can't be refactored in one step
 @SuppressWarnings("PMD.ExcessiveClassLength")
-public class NewMap extends AbstractNavigationBarMapActivity implements Observer, FilteredActivity {
+public class NewMap extends AbstractNavigationBarMapActivity implements Observer, FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
     private static final String ROUTING_SERVICE_KEY = "NewMap";
@@ -1011,6 +1011,15 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                     .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
                     .show();
         }
+    }
+
+    @Override
+    public void onReceiveTargetUpdate(final TargetInfo targetInfo) {
+        if (Settings.isAutotargetIndividualRoute()) {
+            Settings.setAutotargetIndividualRoute(false);
+            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+        }
+        setTarget(targetInfo.coords, targetInfo.geocode);
     }
 
     // set my location listener
