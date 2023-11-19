@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import java.lang.ref.WeakReference;
@@ -44,13 +44,13 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     private final Progress progress = new Progress();
     private PopupBinding binding;
 
-    public static DialogFragment newInstance(final String geocode) {
+    public static Fragment newInstance(final String geocode) {
 
         final Bundle args = new Bundle();
         args.putString(GEOCODE_ARG, geocode);
 
-        final DialogFragment f = new CachePopupFragment();
-        f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        final Fragment f = new CachePopupFragment();
+        //f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         f.setArguments(args);
 
         return f;
@@ -107,9 +107,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = PopupBinding.inflate(getLayoutInflater(), container, false);
-        final View v = binding.getRoot();
-        initCustomActionBar(v);
-        return v;
+        return binding.getRoot();
     }
 
     @Override
@@ -136,6 +134,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 }
                 return false;
             });
+            onCreatePopupOptionsMenu(toolbar, this, cache);
+            toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
@@ -156,8 +156,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
+    public boolean onPopupOptionsItemSelected(@NonNull final MenuItem item) {
+        if (super.onPopupOptionsItemSelected(item)) {
             return true;
         }
 

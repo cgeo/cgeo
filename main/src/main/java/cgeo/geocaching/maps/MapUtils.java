@@ -1,8 +1,12 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SwipeToOpenFragment;
+import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -35,16 +39,26 @@ import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,9 +69,15 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.sidesheet.SideSheetBehavior;
+import com.google.android.material.sidesheet.SideSheetCallback;
 import org.apache.commons.lang3.StringUtils;
 
 public class MapUtils {
+
+    private static final String TAG_MAPDETAILS_FRAGMENT = "mapdetails_fragment";
+    private static final String TAG_SWIPE_FRAGMENT = "swipetoopen_fragment";
 
     private MapUtils() {
         // should not be instantiated
@@ -295,6 +315,107 @@ public class MapUtils {
             individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
         });
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // Handling of cache/waypoint details fragments
+
+    public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
+        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
+    }
+
+    public static void showWaypointDetails(final AppCompatActivity activity, final String geocode, final int waypointId) {
+        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
+    }
+
+    private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
+        final Runnable[] unexecutedUpSwipeAction = {onUpSwipeAction};
+
+        final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
+
+        final SwipeToOpenFragment swipeToOpenFragment = new SwipeToOpenFragment();
+        ft.add(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+
+        ft.commit();
+
+        final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
+        fl.setVisibility(View.VISIBLE);
+
+        final ViewGroup.LayoutParams params = fl.getLayoutParams();
+        final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
+        final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
+
+        if (isBottomSheet) { // portrait mode uses BottomSheet
+            final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
+            b.setHideable(true);
+            b.setSkipCollapsed(false);
+            b.setPeekHeight(0); // temporary set to 0 to avoid bumping. Gets updated once view is loaded.
+            b.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            ft.runOnCommit(() -> {
+                final View view = fragment.requireView();
+                view.post(() -> {
+                    b.setPeekHeight(view.getHeight()); // the original height of the cache details
+                    view.setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels); // make view fill whole screen
+                });
+            });
+
+
+            b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        removeDetailsFragment(activity);
+                    }
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED && unexecutedUpSwipeAction[0] != null) {
+                        unexecutedUpSwipeAction[0].run();
+                        unexecutedUpSwipeAction[0] = null; // reset action to prevent open cache details multiple times
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                    swipeToOpenFragment.setExpansion(slideOffset);
+                }
+            });
+        } else { // landscape mode uses SideSheet
+            final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
+            b.setState(SideSheetBehavior.STATE_EXPANDED);
+
+            b.addCallback(new SideSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull final View sheet, final int newState) {
+                    if (newState == SideSheetBehavior.STATE_HIDDEN) {
+                        removeDetailsFragment(activity);
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull final View sheet, final float slideOffset) {
+                    // nothing
+                }
+            });
+        }
+    }
+
+    /** removes fragment and view for mapdetails view; returns true, if view got removed */
+    public static boolean removeDetailsFragment(final AppCompatActivity activity) {
+        final FragmentManager fm = activity.getSupportFragmentManager();
+        final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
+        if (f1 != null) {
+            fm.beginTransaction().remove(f1).commit();
+        }
+        final Fragment f2 = fm.findFragmentByTag(TAG_SWIPE_FRAGMENT);
+        if (f2 != null) {
+            fm.beginTransaction().remove(f2).commit();
+        }
+        final View v = activity.findViewById(R.id.detailsfragment);
+        if (v != null && v.getVisibility() != View.GONE) {
+            v.setVisibility(View.GONE);
+            return true;
+        }
+        return false;
     }
 
 }

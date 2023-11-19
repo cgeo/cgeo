@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <view
         android:id="@+id/mfmapv5"
@@ -31,5 +31,6 @@
     <include layout="@layout/map_distanceinfo" />
     <include layout="@layout/map_settings_button" />
     <include layout="@layout/map_progressbar" />
+    <include layout="@layout/map_detailsfragment" />
 
 </RelativeLayout>

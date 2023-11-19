@@ -1,12 +1,9 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.AbstractDialogFragment;
-import cgeo.geocaching.CachePopup;
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -107,7 +104,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 
-public class UnifiedMapActivity extends AbstractNavigationBarActivity implements FilteredActivity {
+public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
     // Activity should only contain display logic, everything else goes into the ViewModel
 
@@ -791,21 +788,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == AbstractDialogFragment.REQUEST_CODE_TARGET_INFO && resultCode == AbstractDialogFragment.RESULT_CODE_SET_TARGET) {
-            final AbstractDialogFragment.TargetInfo targetInfo = data.getExtras().getParcelable(Intents.EXTRA_TARGET_INFO);
-            if (targetInfo != null) {
-                if (Settings.isAutotargetIndividualRoute()) {
-                    Settings.setAutotargetIndividualRoute(false);
-                    Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
-                }
-                viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
-            }
-        }
-
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
             refreshMapData(false);
         }
+    }
+
+    @Override
+    public void onReceiveTargetUpdate(final AbstractDialogFragment.TargetInfo targetInfo) {
+        if (Settings.isAutotargetIndividualRoute()) {
+            Settings.setAutotargetIndividualRoute(false);
+            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+        }
+        viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
     }
 
     // ========================================================================
@@ -900,6 +895,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
+                if (MapUtils.removeDetailsFragment(this)) {
+                    return;
+                }
                 mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
                 GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap);
             }
@@ -953,10 +951,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             // open popup for element
             if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                 // @todo: do we need a DataStore.loadCache() before?
-                CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
+                // CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
+                MapUtils.showCacheDetails(this, routeItem.getGeocode());
             } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT && routeItem.getWaypointId() != 0) {
                 // @todo: do we need a DataStore.loadWaypoint() before?
-                WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
+                // WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
+                MapUtils.showWaypointDetails(this, routeItem.getGeocode(), routeItem.getWaypointId());
             }
         } else if (item.getRoute() != null) {
             // elevation charts for individual route and/or routes/tracks
@@ -1031,6 +1031,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
     @Override
     protected void onStart() {
         super.onStart();
+
+        // close outdated details popups
+        MapUtils.removeDetailsFragment(this);
 
         // resume location access
         resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
