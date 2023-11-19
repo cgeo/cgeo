@@ -1,10 +1,12 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheMenuHandler;
 import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.INavigationSource;
@@ -39,6 +41,7 @@ import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
@@ -78,6 +81,7 @@ import org.apache.commons.lang3.StringUtils;
 public class MapUtils {
 
     private static final String TAG_MAPDETAILS_FRAGMENT = "mapdetails_fragment";
+    private static final String TAG_SWIPE_FRAGMENT = "swipetoopen_fragment";
 
     private MapUtils() {
         // should not be instantiated
@@ -322,16 +326,20 @@ public class MapUtils {
     // Handling of cache/waypoint details fragments
 
     public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
-        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity);
+        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
     }
 
     public static void showWaypointDetails(final AppCompatActivity activity, final String geocode, final int waypointId) {
-        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity);
+        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity, () -> {});
     }
 
-    private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity) {
+    private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
+
+        final SwipeToOpenFragment swipeToOpenFragment = new SwipeToOpenFragment();
+        ft.add(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+
         ft.commit();
 
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
@@ -343,9 +351,18 @@ public class MapUtils {
 
         if (isBottomSheet) { // portrait mode uses BottomSheet
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
-            b.setState(BottomSheetBehavior.STATE_EXPANDED);
-            b.setSkipCollapsed(true);
             b.setHideable(true);
+            b.setSkipCollapsed(false);
+            b.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            ft.runOnCommit(() -> {
+                final View view = fragment.requireView();
+                view.post(() -> {
+                    b.setPeekHeight(view.getHeight()); // the original height of the cache details
+                    view.setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels); // make view fill whole screen
+                });
+            });
+
 
             b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
@@ -353,11 +370,14 @@ public class MapUtils {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         removeDetailsFragment(activity);
                     }
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                        onUpSwipeAction.run();
+                    }
                 }
 
                 @Override
                 public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                    // nothing
+                    swipeToOpenFragment.setExpansion(slideOffset);
                 }
             });
         } else { // landscape mode uses SideSheet
@@ -391,9 +411,13 @@ public class MapUtils {
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
     public static boolean removeDetailsFragment(final AppCompatActivity activity) {
         final FragmentManager fm = activity.getSupportFragmentManager();
-        final Fragment f = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
-        if (f != null) {
-            fm.beginTransaction().remove(f).commit();
+        final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
+        if (f1 != null) {
+            fm.beginTransaction().remove(f1).commit();
+        }
+        final Fragment f2 = fm.findFragmentByTag(TAG_SWIPE_FRAGMENT);
+        if (f2 != null) {
+            fm.beginTransaction().remove(f2).commit();
         }
         final View v = activity.findViewById(R.id.detailsfragment);
         if (v != null && v.getVisibility() != View.GONE) {
