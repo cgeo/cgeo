@@ -41,6 +41,7 @@ import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -65,8 +67,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.sidesheet.SideSheetBehavior;
+import com.google.android.material.sidesheet.SideSheetCallback;
 import org.apache.commons.lang3.StringUtils;
-import static com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN;
 
 public class MapUtils {
 
@@ -327,25 +330,47 @@ public class MapUtils {
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
         fl.setVisibility(View.VISIBLE);
 
-        final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
-        b.setState(BottomSheetBehavior.STATE_EXPANDED);
-        b.setSkipCollapsed(true);
-        b.setHideable(true);
+        final ViewGroup.LayoutParams params = fl.getLayoutParams();
+        final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
+        final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
 
-        // remove fragment and view on swipe down
-        b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-            @Override
-            public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
-                if (newState == STATE_HIDDEN) {
-                    removeDetailsFragment(activity);
+        if (isBottomSheet) { // portrait mode uses BottomSheet
+            final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
+            b.setState(BottomSheetBehavior.STATE_EXPANDED);
+            b.setSkipCollapsed(true);
+            b.setHideable(true);
+
+            b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
+                    if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        removeDetailsFragment(activity);
+                    }
                 }
-            }
 
-            @Override
-            public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                // nothing
-            }
-        });
+                @Override
+                public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
+                    // nothing
+                }
+            });
+        } else { // landscape mode uses SideSheet
+            final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
+            b.setState(SideSheetBehavior.STATE_EXPANDED);
+
+            b.addCallback(new SideSheetCallback() {
+                @Override
+                public void onStateChanged(@NonNull final View sheet, final int newState) {
+                    if (newState == SideSheetBehavior.STATE_HIDDEN) {
+                        removeDetailsFragment(activity);
+                    }
+                }
+
+                @Override
+                public void onSlide(@NonNull final View sheet, final float slideOffset) {
+                    // nothing
+                }
+            });
+        }
     }
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
