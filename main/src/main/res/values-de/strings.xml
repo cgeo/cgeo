@@ -1512,8 +1512,6 @@
     <string name="init_summary_show_routing_menu">Langes Tippen auf einen Cache zeigt ein Menü mit erweiterten Optionen, um den Cache zu einer Route hinzuzufügen/von ihr zu entfernen. Wenn deaktiviert, wird der Cache direkt zur Route hinzugefügt/von ihr entfernt.</string>
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
-    <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches /Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
-    <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches / Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert.\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
