@@ -1,5 +1,5 @@
 ### Map
--
+- New: Highlight existing downloads in download manager
 
 ### Cache details
 - Change: Make "Toggle talking" an actual toggle
