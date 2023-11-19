@@ -8,6 +8,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.DistanceDrawer;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.ScaleDrawer;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -138,6 +139,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
         googleMap.setOnMapClickListener(latLng -> {
             if (activityRef.get() != null) {
+                if (MapUtils.removeDetailsFragment(activityRef.get())) {
+                    return;
+                }
                 adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(activityRef.get()));
             }
         });

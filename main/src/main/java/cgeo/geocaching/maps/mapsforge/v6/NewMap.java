@@ -1322,6 +1322,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty() && !longPressMode) {
+            if (MapUtils.removeDetailsFragment(this)) {
+                return;
+            }
             HideActionBarUtils.toggleActionBar(this);
         }
         if (items.isEmpty()) {

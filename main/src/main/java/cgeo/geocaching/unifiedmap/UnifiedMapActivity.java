@@ -883,6 +883,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
+                if (MapUtils.removeDetailsFragment(this)) {
+                    return;
+                }
                 mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
                 GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap);
             }
