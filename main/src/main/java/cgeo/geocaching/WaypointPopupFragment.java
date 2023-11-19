@@ -24,7 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,9 +38,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = WaypointPopupBinding.inflate(getLayoutInflater(), container, false);
-        final View v = binding.getRoot();
-        initCustomActionBar(v);
-        return v;
+        return binding.getRoot();
     }
 
     @Override
@@ -170,15 +168,15 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         return new TargetInfo(waypoint.getCoords(), cache.getGeocode());
     }
 
-    public static DialogFragment newInstance(final String geocode, final int waypointId) {
+    public static Fragment newInstance(final String geocode, final int waypointId) {
 
         final Bundle args = new Bundle();
         args.putInt(WAYPOINT_ARG, waypointId);
         args.putString(GEOCODE_ARG, geocode);
 
-        final DialogFragment f = new WaypointPopupFragment();
+        final Fragment f = new WaypointPopupFragment();
         f.setArguments(args);
-        f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        // f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 
         return f;
     }

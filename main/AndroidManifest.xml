@@ -189,12 +189,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".CachePopup"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/about"
@@ -741,13 +735,6 @@
         </activity>
         <activity android:name=".maps.routing.RouteSortActivity" />
         <activity android:name=".ui.CheckableItemSelectActivity" />
-        <activity
-            android:name="WaypointPopup"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/waypoint"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
         <activity
             android:name=".ImageEditActivity"
             android:label="@string/log_image" >

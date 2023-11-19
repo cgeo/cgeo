@@ -15,8 +15,6 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -30,16 +28,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
-public abstract class AbstractDialogFragment extends BottomSheetDialogFragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
+public abstract class AbstractDialogFragment extends Fragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
     public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
     public static final int REQUEST_CODE_TARGET_INFO = 1;
     protected static final String GEOCODE_ARG = "GEOCODE";
@@ -71,21 +64,6 @@ public abstract class AbstractDialogFragment extends BottomSheetDialogFragment i
         super.onCreate(savedInstanceState);
         res = getResources();
         setHasOptionsMenu(true);
-    }
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(final @Nullable Bundle savedInstanceState) {
-        final BottomSheetDialog dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        dialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
-        dialog.getBehavior().setSkipCollapsed(true);
-        return dialog;
-
-    }
-
-    protected void initCustomActionBar(final View v) {
-        final Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
     }
 
     @Override
@@ -253,12 +231,6 @@ public abstract class AbstractDialogFragment extends BottomSheetDialogFragment i
             return;
         }
         CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);
-        getActivity().finish();
-    }
-
-    @Override
-    public void onCancel(@NonNull final DialogInterface dialog) {
-        super.onCancel(dialog);
         getActivity().finish();
     }
 

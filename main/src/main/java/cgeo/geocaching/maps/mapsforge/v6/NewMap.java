@@ -3,12 +3,10 @@ package cgeo.geocaching.maps.mapsforge.v6;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.AbstractDialogFragment.TargetInfo;
 import cgeo.geocaching.CacheListActivity;
-import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
@@ -1432,7 +1430,8 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     popupGeocodes.add(cache.getGeocode());
-                    CachePopup.startActivityAllowTarget(this, cache.getGeocode());
+                    // CachePopup.startActivityAllowTarget(this, cache.getGeocode());
+                    MapUtils.showCacheDetails(this, cache.getGeocode());
                     return;
                 }
                 return;
@@ -1440,7 +1439,8 @@ public class NewMap extends AbstractNavigationBarActivity implements Observer, F
 
             if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
                 popupGeocodes.add(item.getGeocode());
-                WaypointPopup.startActivityAllowTarget(this, item.getId(), item.getGeocode());
+                // WaypointPopup.startActivityAllowTarget(this, item.getId(), item.getGeocode());
+                MapUtils.showWaypointDetails(this, item.getGeocode(), item.getId());
             }
 
         } catch (final NotFoundException e) {

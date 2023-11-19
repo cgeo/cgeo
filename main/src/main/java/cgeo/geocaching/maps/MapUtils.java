@@ -1,8 +1,10 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -38,13 +40,18 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,6 +62,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import org.apache.commons.lang3.StringUtils;
 
 public class MapUtils {
@@ -296,6 +304,28 @@ public class MapUtils {
             individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
         });
+    }
+
+    public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
+        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity);
+    }
+
+    public static void showWaypointDetails(final AppCompatActivity activity, final String geocode, final int waypointId) {
+        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity);
+    }
+
+    private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity) {
+        final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.detailsfragment, fragment);
+        ft.commit();
+
+        final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
+        fl.setVisibility(View.VISIBLE);
+
+        final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
+        b.setState(BottomSheetBehavior.STATE_EXPANDED);
+        b.setSkipCollapsed(true);
+        b.setHideable(true);
     }
 
 }

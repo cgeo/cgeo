@@ -1,11 +1,9 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.AbstractDialogFragment;
-import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
@@ -938,10 +936,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarActivity implements
             // open popup for element
             if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                 // @todo: do we need a DataStore.loadCache() before?
-                CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
+                // CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
+                MapUtils.showCacheDetails(this, routeItem.getGeocode());
             } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT && routeItem.getWaypointId() != 0) {
                 // @todo: do we need a DataStore.loadWaypoint() before?
-                WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
+                // WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
+                MapUtils.showWaypointDetails(this, routeItem.getGeocode(), routeItem.getWaypointId());
             }
         } else if (item.getRoute() != null) {
             // elevation charts for individual route and/or routes/tracks
