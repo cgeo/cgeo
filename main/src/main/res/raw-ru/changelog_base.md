@@ -1,5 +1,5 @@
 ### Карта
--
+- New: Highlight existing downloads in download manager
 
 ### Детали тайника
 - Изменение: Создано "Переключение разговора" фактическим переключением
