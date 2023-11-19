@@ -373,11 +373,9 @@ public class MapUtils {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         removeDetailsFragment(activity);
                     }
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        if (unexecutedUpSwipeAction[0] != null) {
-                            unexecutedUpSwipeAction[0].run();
-                            unexecutedUpSwipeAction[0] = null; // reset action to prevent open cache details multiple times
-                        }
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED && unexecutedUpSwipeAction[0] != null) {
+                        unexecutedUpSwipeAction[0].run();
+                        unexecutedUpSwipeAction[0] = null; // reset action to prevent open cache details multiple times
                     }
                 }
 
