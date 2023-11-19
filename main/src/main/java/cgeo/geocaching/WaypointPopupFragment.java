@@ -4,6 +4,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.WaypointPopupBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
@@ -79,6 +80,8 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
             binding.toolbar.toolbar.setTitle(wpCode);
             binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
+            MapUtils.initDetailsFragmentOptionsMenu(binding.toolbar.toolbar, this, cache);
+            binding.toolbar.toolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);

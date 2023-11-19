@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -176,6 +175,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         activity.finish();
     }
 
+/*
     @Override
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -186,6 +186,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             menu.findItem(R.id.menu_target).setVisible(true);
         }
     }
+*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
@@ -193,9 +194,11 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             setAsTarget();
             return true;
         }
+/*
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init, true)) {
             return true;
         }
+ */
         if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
             return true;
         }
@@ -208,7 +211,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         super.onPrepareOptionsMenu(menu);
 
         try {
-            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, true);
+//            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, true);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
         } catch (final RuntimeException ignored) {
             // nothing

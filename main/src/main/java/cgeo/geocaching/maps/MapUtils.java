@@ -1,11 +1,13 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheMenuHandler;
 import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
@@ -40,6 +42,7 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -51,6 +54,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
@@ -314,6 +318,9 @@ public class MapUtils {
         });
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // Handling of cache/waypoint details fragments
+
     public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
         configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity);
     }
@@ -371,6 +378,14 @@ public class MapUtils {
                 }
             });
         }
+    }
+
+    public static void initDetailsFragmentOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {
+        final Menu menu = toolbar.getMenu();
+        menu.clear();
+        toolbar.inflateMenu(R.menu.cache_options);
+        CacheMenuHandler.onPrepareOptionsMenu(menu, geocache, true);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, navigationSource);
     }
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
