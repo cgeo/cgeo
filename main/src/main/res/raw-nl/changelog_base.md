@@ -1,5 +1,5 @@
 ### Kaart
--
+- Nieuw: Markeer bestaande downloads in downloadbeheer
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
