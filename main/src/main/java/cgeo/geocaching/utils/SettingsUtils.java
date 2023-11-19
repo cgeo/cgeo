@@ -225,7 +225,7 @@ public class SettingsUtils {
                 return usedBytes < freeSpaces.get(position);
             }
         }, selectedDirIndex, (dialog, itemId) -> {
-            SimpleDialog.of(activity).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm((dialog1, which) -> {
+            SimpleDialog.of(activity).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm(() -> {
                 final File dir = extDirs.get(itemId);
                 if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
                     LocalStorage.changeExternalPrivateCgeoDir(activity, dir.getAbsolutePath());

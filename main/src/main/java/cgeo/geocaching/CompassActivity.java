@@ -78,7 +78,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
-                .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -387,9 +387,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
         }
     }
 

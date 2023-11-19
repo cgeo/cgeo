@@ -32,7 +32,7 @@
 
                     <Button
                         android:id="@+id/type"
-                        style="@style/button_full_spinner"
+                        style="@style/button_full"
                         android:layout_width="0dip"
                         android:layout_weight="1"
                         tools:text="log type"/>

@@ -7,6 +7,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ImageUtils;
@@ -98,8 +99,14 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class), ID_FRAGMENT_GO_TO));
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this), ID_FRAGMENT_HISTORY));
 
+        final SimpleDialog.ItemSelectModel<Shortcut> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(shortcuts)
+            .setDisplayMapper((s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30))
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
-                .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, SimpleDialog.SingleChoiceMode.NONE, (shortcut, pos) -> {
+                .selectSingle(model, (shortcut) -> {
 
                     //Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
                     if (offlineShortcut.equals(shortcut)) {

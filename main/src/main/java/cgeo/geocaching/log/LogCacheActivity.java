@@ -26,6 +26,7 @@ import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.ImageListFragment;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
@@ -206,18 +207,19 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
-        logType.setTextView(binding.type).setDisplayMapper(LogType::getL10n);
+        logType.setTextView(binding.type)
+                .setDisplayMapper(lt -> TextParam.text(lt.getL10n()).setImage(ImageParam.id(lt.getLogOverlay())));
         reportProblem.setTextView(binding.reportProblem)
-                .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
-                .setDisplayMapper(ReportProblemType::getL10n);
+                .setTextDisplayMapperPure(rp -> rp.getL10n() + " ▼")
+                .setDisplayMapperPure(ReportProblemType::getL10n);
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(binding.changebutton)
                 .setTextDialogTitle(getString(R.string.log_tb_changeall))
-                .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
-                .setDisplayMapper(LogTypeTrackable::getLabel)
+                .setTextDisplayMapperPure(lt -> getString(R.string.log_tb_changeall))
+                .setDisplayMapperPure(LogTypeTrackable::getLabel)
                 .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                 .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
                 .setChangeListener(lt -> {
@@ -531,9 +533,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             return;
         }
         if (logType.get().mustConfirmLog()) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm((dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm(this::sendLogInternal);
         } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
-            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_report_problem_title)).setMessage(TextParam.id(R.string.confirm_report_problem_message, reportProblem.get().getL10n())).confirm((dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_report_problem_title)).setMessage(TextParam.id(R.string.confirm_report_problem_message, reportProblem.get().getL10n())).confirm(this::sendLogInternal);
         } else {
             sendLogInternal();
         }
@@ -591,7 +593,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                     .setTitle(R.string.info_log_post_failed)
                     .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
-                    .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(LogCacheActivity.SaveMode.FORCE));
+                    .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
+                    .confirm(this::sendLogInternal);
 
         }
     }
@@ -662,8 +665,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             holder.trackableAction.setTextView(action)
                     .setTextDialogTitle(trackable.name)
-                    .setTextDisplayMapper(lt -> lt.getLabel() + " ▼")
-                    .setDisplayMapper(LogTypeTrackable::getLabel)
+                    .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
+                    .setDisplayMapperPure(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                     .set(trackable.action)
                     .setChangeListener(lt -> {

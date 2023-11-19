@@ -6,10 +6,12 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
@@ -42,23 +44,26 @@ public class FilterUtils {
             return false;
         } else {
             final boolean isFilterActive = filterContext.get().isFiltering();
+            final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+                .setItems(filters)
+                .setDisplayMapper((f, pos) -> TextParam.text(f.getName()));
+
             if (isFilterActive) {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
                         .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
-                        .setSelectionForNeutral(false)
-                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
-                                (f, pos) -> filteredActivity.refreshWithFilter(f),
-                                (f, pos) -> {
-                                },
-                                (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
-                        );
+                        .setButtonClickAction(which -> {
+                            if (which == DialogInterface.BUTTON_NEUTRAL) {
+                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()));
+                                return true;
+                            }
+                            return false;
+                        })
+                        .selectSingle(model, filteredActivity::refreshWithFilter);
             } else {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
-                                (f, pos) -> filteredActivity.refreshWithFilter(f),
-                                (f, pos) -> {
-                                }
-                        );
+                        .selectSingle(model, filteredActivity::refreshWithFilter);
             }
         }
         return true;

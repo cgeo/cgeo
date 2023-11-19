@@ -2,6 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.ContinuousrangesliderViewBinding;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -105,7 +106,7 @@ public class ContinuousRangeSlider extends LinearLayout {
                     }
                     final Consumer<String> listener = input -> {
                         try {
-                            final float newValue = SimpleDialog.checkInputRange(getContext(), Float.parseFloat(input), slider.getValueFrom() * factor, slider.getValueTo() * factor) / factor;
+                            final float newValue = Dialogs.checkInputRange(getContext(), Float.parseFloat(input), slider.getValueFrom() * factor, slider.getValueTo() * factor) / factor;
                             if (lastThumb == 0) {
                                 // we want to set lower bound, but new value is larger than current upper bound, so swap
                                 if (newValue > values.get(1)) {
@@ -125,7 +126,8 @@ public class ContinuousRangeSlider extends LinearLayout {
                             Toast.makeText(getContext(), R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                         }
                     };
-                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor))).input(inputType, defaultValue, null, "", listener);
+                    SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, Math.round(slider.getValueFrom() * factor), Math.round(slider.getValueTo() * factor)))
+                            .input(new SimpleDialog.InputOptions().setInputType(inputType).setInitialValue(defaultValue).setSuffix(""), listener);
                 }
             }
         });

@@ -232,7 +232,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             viewHolder.title.setText(download == null ? "" : download.filename + " (# " + download.id + ")");
             if (download != null) {
                 markwon.setMarkdown(viewHolder.detail, download.info);
-                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm((dialog, which) -> activity.cancelDownload(download.id, false)));
+                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
                 if (download.isFailedDownload) {
                     viewHolder.buttonResume.setVisibility(View.VISIBLE);
                     viewHolder.buttonResume.setOnClickListener(v -> {

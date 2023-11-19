@@ -92,7 +92,7 @@ public class PermissionAction<T> {
         if (!forceSkipPreExplanation && this.permissionContext.shouldShowRequestPermissionRationale(activity)) {
             SimpleDialog.of(activity).setTitle(TextParam.text(permissionContext.getExplanationTitle()))
                     .setMessage(permissionContext.getExplanation())
-                    .confirm((d, c) -> launchPermissionRequest(parameter));
+                    .confirm(() -> launchPermissionRequest(parameter));
         } else {
             launchPermissionRequest(parameter);
         }
@@ -120,9 +120,8 @@ public class PermissionAction<T> {
                     .setPositiveButton(TextParam.id(R.string.permission_ask_again))
                     .setNegativeButton(TextParam.id(R.string.cancel))
                     .setNeutralButton(TextParam.id(R.string.permission_goto_app_details))
-                    .show((d, c) -> launchPermissionRequest(parameter),
-                            (d, c) -> d.dismiss(),
-                            (d, c) -> openApplicationSettings());
+                    .setNeutralAction(this::openApplicationSettings)
+                    .show(() -> launchPermissionRequest(parameter));
         }
 
     }

@@ -30,7 +30,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -136,7 +135,7 @@ public class RouteTrackUtils {
                 startFileSelectorIndividualRoute();
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
-                        (d, w) -> startFileSelectorIndividualRoute());
+                        this::startFileSelectorIndividualRoute);
             }
         });
 
@@ -180,7 +179,7 @@ public class RouteTrackUtils {
                 reloadIndividualRoute.run();
             });
 
-            dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm((d, w) -> {
+            dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm(() -> {
                 clearIndividualRoute.run();
                 updateDialogIndividualRoute(dialog, individualRoute, setTarget);
             }));
@@ -211,7 +210,8 @@ public class RouteTrackUtils {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
             final TextView displayName = vt.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
-            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name")).input(InputType.TYPE_CLASS_TEXT, displayName.getText().toString(), null, null, newName -> {
+            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name"))
+                    .input(new SimpleDialog.InputOptions().setInitialValue(displayName.getText().toString()), newName -> {
                 if (StringUtils.isNotBlank(newName)) {
                     tracks.setDisplayname(key, newName);
                     displayName.setText(newName);
@@ -250,7 +250,7 @@ public class RouteTrackUtils {
                 });
             }
 
-            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm((d, w) -> {
+            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
                 tracks.remove(key);
                 updateDialogTracks(dialog, tracks);
                 updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));

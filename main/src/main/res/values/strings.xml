@@ -2818,8 +2818,9 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimize</string>
 
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Select All</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Select All</string>
+    <string name="multiselect_selectvisible">Select Visible</string>
 
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Areas</string>

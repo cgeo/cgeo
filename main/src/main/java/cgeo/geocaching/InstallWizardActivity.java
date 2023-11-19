@@ -368,7 +368,7 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void skipWizard() {
-        SimpleDialog.of(this).setTitle(R.string.wizard).setMessage(R.string.wizard_skip_wizard_warning).setButtons(0, R.string.back).confirm((dialog, which) -> finishWizard(), (dialog, which) -> updateDialog());
+        SimpleDialog.of(this).setTitle(R.string.wizard).setMessage(R.string.wizard_skip_wizard_warning).setButtons(0, R.string.back).confirm(this::finishWizard, this::updateDialog);
     }
 
     private void finishWizard() {
@@ -537,10 +537,9 @@ public class InstallWizardActivity extends AppCompatActivity {
             if (!hasValidGCCredentials()) {
                 Toast.makeText(this, R.string.err_auth_process, Toast.LENGTH_SHORT).show();
             } else {
-                SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm((dialog, which) -> {
+                SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm(() -> {
                     Settings.setGCConnectorActive(true);
                     gotoNext();
-                }, (dialog, i) -> {
                 });
             }
             return;

@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.ImageUtils;
 
@@ -17,6 +18,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Objects;
 
+import com.google.android.material.button.MaterialButton;
+
 /**
  * Encapsulates an image object to be set to an ImageView.
  *
@@ -25,6 +28,8 @@ import java.util.Objects;
  * Class is supposed to be used in parameters for View/Dialog helper methods dealing with images
  */
 public class ImageParam {
+
+    public static final ImageParam TRANSPARENT = ImageParam.id(R.drawable.mark_transparent);
 
     @DrawableRes
     private final int drawableId;
@@ -68,7 +73,7 @@ public class ImageParam {
         this.drawable = drawable;
     }
 
-    public void apply(final ImageView view) {
+    public void applyTo(final ImageView view) {
         if (this.drawable != null) {
             view.setImageDrawable(this.drawable);
         } else if (this.drawableId > 0) {
@@ -77,6 +82,18 @@ public class ImageParam {
             final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(view);
             final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
             view.setImageDrawable(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
+        }
+    }
+
+    public void applyToIcon(final MaterialButton button) {
+        if (this.drawable != null) {
+            button.setIcon(this.drawable);
+        } else if (this.drawableId > 0) {
+            button.setIconResource(this.drawableId);
+        } else if (this.emojiSymbol > 0) {
+            final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(button);
+            final int wantedSize = viewSize == null ? ViewUtils.dpToPixel(DEFAULT_EMOJI_SIZE_DP) : Math.max(viewSize.first, viewSize.second);
+            button.setIcon(EmojiUtils.getEmojiDrawable(wantedSize, this.emojiSymbol));
         }
     }
 

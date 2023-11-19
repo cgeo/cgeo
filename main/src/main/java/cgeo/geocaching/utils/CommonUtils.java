@@ -1,15 +1,20 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.utils.functions.Action3;
+import cgeo.geocaching.utils.functions.Action4;
 import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.functions.Func2;
 
 import android.os.Build;
 import android.util.Pair;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +25,35 @@ public class CommonUtils {
 
     private CommonUtils() {
         //no instance
+    }
+
+    /** retrieves the idx's element of the given iterable, or null if iterable doesn't have enough elements */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public static <T> T get(@Nullable final Iterable<T> iterable, final int idx) {
+        if (iterable == null || idx < 0) {
+            return null;
+        }
+        if (iterable instanceof Collection) {
+            final int size = ((Collection) iterable).size();
+            if (idx >= size) {
+                return null;
+            }
+            if (iterable instanceof List) {
+                return (T) ((List) iterable).get(idx);
+            }
+        }
+        int i = 0;
+        for (T element : iterable) {
+            if (i == idx) {
+                return element;
+            }
+            i++;
+        }
+        return null;
+    }
+
+    public static <T> T first(final Iterable<T> iterable) {
+        return get(iterable, 0);
     }
 
     /**
@@ -45,6 +79,21 @@ public class CommonUtils {
             }
         }
         return result;
+    }
+
+    public static <T> Comparator<T> getNullHandlingComparator(@Nullable final Comparator<T> source, final boolean sortNullTop) {
+        return (g1, g2) -> {
+            if (g1 == g2) {
+                return 0;
+            }
+            if (g1 == null) {
+                return sortNullTop ? -1 : 1;
+            }
+            if (g2 == null) {
+                return sortNullTop ? 1 : -1;
+            }
+            return source == null ? g1.toString().compareTo(g2.toString()) : source.compare(g1, g2);
+        };
     }
 
     /** Returns a ThreadLocal with initial value given by passed Supplier.
@@ -84,5 +133,48 @@ public class CommonUtils {
             action.call(sublist);
         }
     }
+
+    @SuppressWarnings({"PMD.NPathComplexity"})
+    public static <T, G> void groupList(final List<T> items, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Comparator<G> groupOrder,
+                                        final Action3<G, Integer, Integer> groupAdder, final Action4<T, Integer, G, Integer> itemAdder) {
+
+        //create lists per group
+        final Map<G, List<Pair<Integer, T>>> groupedListMap = new HashMap<>();
+        int pos = 0;
+        for (T value : items) {
+            final G group = groupMapper == null ? null : groupMapper.call(value, pos);
+            List<Pair<Integer, T>> groupList = groupedListMap.get(group);
+            if (groupList == null) {
+                groupList = new ArrayList<>();
+                groupedListMap.put(group, groupList);
+            }
+            groupList.add(new Pair<>(pos, value));
+            pos++;
+        }
+
+        //sort groups
+        final List<G> sortedGroupList = new ArrayList<>(groupedListMap.keySet());
+        Collections.sort(sortedGroupList, getNullHandlingComparator(groupOrder, true));
+
+        //construct result
+        int listIdx = 0;
+        int groupIdx = -1;
+        for (G group : sortedGroupList) {
+
+            //group item, if not null
+            if (group != null) {
+                groupAdder.call(group, listIdx + 1, Objects.requireNonNull(groupedListMap.get(group)).size());
+                groupIdx = listIdx;
+                listIdx++;
+            }
+
+            //items in group
+            for (Pair<Integer, T> valuePair : Objects.requireNonNull(groupedListMap.get(group))) {
+                itemAdder.call(valuePair.second, valuePair.first, group, groupIdx);
+                listIdx++;
+            }
+        }
+    }
+
 
 }

@@ -53,11 +53,11 @@ public class ShareUtils {
     public static void shareOrDismissDialog(final Activity context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         SimpleDialog.of(context).setTitle(title).setMessage(TextParam.text(msg))
                 .setButtons(0, 0, R.string.cache_share_field)
-                .show(SimpleDialog.DO_NOTHING, null,
-                        (dialog, which) -> {
-                            final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
-                            shareInternal(context, intent, title);
-                        });
+                .setNeutralAction(() -> {
+                    final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
+                    shareInternal(context, intent, title);
+                })
+                .show();
     }
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId) {

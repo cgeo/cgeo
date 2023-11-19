@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.content.Context;
@@ -268,9 +269,13 @@ public class SeekbarPreference extends Preference {
             if (useDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
-            SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue))).input(inputType, currentValue, null, getUnitString(), input -> {
+            SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue)))
+                    .input(new SimpleDialog.InputOptions()
+                            .setInputType(inputType)
+                            .setInitialValue(currentValue)
+                            .setSuffix(getUnitString()), input -> {
                 try {
-                    final int newValue = (int) SimpleDialog.checkInputRange(getContext(), shownValueToValue(Float.parseFloat(input)), minValue, maxValue);
+                    final int newValue = (int) Dialogs.checkInputRange(getContext(), shownValueToValue(Float.parseFloat(input)), minValue, maxValue);
                     final int newProgress = valueToProgress(newValue);
                     seekBar.setProgress(newProgress);
                     saveSetting(seekBar.getProgress());

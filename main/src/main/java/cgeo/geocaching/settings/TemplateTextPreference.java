@@ -59,7 +59,7 @@ public class TemplateTextPreference extends Preference {
         final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
         if (!isSignature) {
             holder.itemView.setOnLongClickListener(v -> {
-                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm((dialog, which) -> {
+                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm(() -> {
                     Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
                     callChangeListener(null);
                 });

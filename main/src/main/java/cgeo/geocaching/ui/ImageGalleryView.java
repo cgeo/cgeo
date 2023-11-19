@@ -617,7 +617,7 @@ public class ImageGalleryView extends LinearLayout {
 
             final Image oldImg = adapter.getItem(intentPos).image;
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_rename), R.drawable.ic_menu_edit, v -> SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.cache_image_rename))
-                .input(-1, oldImg.getTitle(), null, null, newTitle -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(oldImg.getTitle()), newTitle -> {
                     if (!StringUtils.isBlank(newTitle)) {
                         final Image newImg = editHandler.setTitle(oldImg, newTitle);
                         if (newImg != null) {

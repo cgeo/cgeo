@@ -34,7 +34,7 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
 
         selectSpinner.setTextView(spinnerView);
         selectSpinner
-                .setDisplayMapper(v -> v == UNKNOWN ? getActivity().getString(R.string.all_types_short) : v.getL10n())
+                .setDisplayMapperPure(v -> v == UNKNOWN ? getActivity().getString(R.string.all_types_short) : v.getL10n())
                 .setValues(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, UNKNOWN))
                 .set(LogType.FOUND_IT);
 

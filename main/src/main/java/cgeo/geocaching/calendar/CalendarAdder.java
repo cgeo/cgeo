@@ -29,7 +29,7 @@ public class CalendarAdder {
         if (cache.isPastEvent()) {
             // Event is in the past, only add to calendar after confirmation
             SimpleDialog.of(activity).setTitle(R.string.helper_calendar_pastevent_title).setMessage(R.string.helper_calendar_pastevent_question).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(
-                    (dialog, id) -> entry.addEntryToCalendar(activity));
+                    () -> entry.addEntryToCalendar(activity));
         } else {
             entry.addEntryToCalendar(activity);
         }

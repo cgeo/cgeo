@@ -805,7 +805,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void setCacheIcons(final int newCacheIcon) {
         if (newCacheIcon == 0) {
-            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm((d, v) -> setCacheIconsHelper(0));
+            SimpleDialog.of(this).setTitle(R.string.caches_reset_cache_icons_title).setMessage(R.string.caches_reset_cache_icons_title).confirm(() -> setCacheIconsHelper(0));
         } else {
             setCacheIconsHelper(newCacheIcon);
         }
@@ -876,10 +876,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_upload_modifiedcoords) {
             final Activity that = this;
-            SimpleDialog.of(this).setTitle(R.string.caches_upload_modifiedcoords).setMessage(R.string.caches_upload_modifiedcoords_warning).confirm((dialog, which) -> new BatchUploadModifiedCoordinates(true).export(adapter.getCheckedOrAllCaches(), that));
+            SimpleDialog.of(this).setTitle(R.string.caches_upload_modifiedcoords).setMessage(R.string.caches_upload_modifiedcoords_warning).confirm(() -> new BatchUploadModifiedCoordinates(true).export(adapter.getCheckedOrAllCaches(), that));
         } else if (menuItem == R.id.menu_upload_allcoords) {
             final Activity that2 = this;
-            SimpleDialog.of(this).setTitle(R.string.caches_upload_allcoords_dialogtitle).setMessage(R.string.caches_upload_allcoords_warning).confirm((dialog, which) -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
+            SimpleDialog.of(this).setTitle(R.string.caches_upload_allcoords_dialogtitle).setMessage(R.string.caches_upload_allcoords_warning).confirm(() -> new BatchUploadModifiedCoordinates(false).export(adapter.getCheckedOrAllCaches(), that2));
         } else if (menuItem == R.id.menu_remove_from_history) {
             removeFromHistoryCheck();
             invalidateOptionsMenuCompatible();
@@ -971,7 +971,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void clearOfflineLogs() {
-        SimpleDialog.of(this).setTitle(R.string.caches_clear_offlinelogs).setMessage(R.string.caches_clear_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> {
+        SimpleDialog.of(this).setTitle(R.string.caches_clear_offlinelogs).setMessage(R.string.caches_clear_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
             progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
             clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
         });
@@ -1350,10 +1350,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshInBackground(final List<Geocache> caches) {
         if (type.isStoredInDatabase && caches.size() > REFRESH_WARNING_THRESHOLD) {
-            SimpleDialog.of(this).setTitle(R.string.caches_refresh_all).setMessage(R.string.caches_refresh_all_warning).confirm((dialog, id) -> {
-                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList);
-                dialog.cancel();
-            });
+            SimpleDialog.of(this).setTitle(R.string.caches_refresh_all).setMessage(R.string.caches_refresh_all_warning).confirm(() ->
+                    CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList));
         } else {
             CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, this::refreshCurrentList);
         }
@@ -1367,10 +1365,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void removeFromHistoryCheck() {
         final int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
                 : R.string.cache_clear_history;
-        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, id) -> {
-            removeFromHistory();
-            dialog.cancel();
-        });
+        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> removeFromHistory());
     }
 
     private void removeFromHistory() {
@@ -1387,7 +1382,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void importWeb() {
         // menu is also shown with no device connected
         if (!Settings.isRegisteredForSend2cgeo()) {
-            SimpleDialog.of(this).setTitle(R.string.web_import_title).setMessage(R.string.init_sendToCgeo_description).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this));
+            SimpleDialog.of(this).setTitle(R.string.web_import_title).setMessage(R.string.init_sendToCgeo_description).confirm(() -> SettingsActivity.openForScreen(R.string.preference_screen_sendtocgeo, CacheListActivity.this));
             return;
         }
 
@@ -1628,7 +1623,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // ask him, if there are caches on the list
         SimpleDialog.of(this).setTitle(R.string.list_dialog_remove_title).setMessage(R.string.list_dialog_remove_description)
-                .setPositiveButton(TextParam.id(R.string.list_dialog_remove)).confirm((dialog, whichButton) -> removeListInternal());
+                .setPositiveButton(TextParam.id(R.string.list_dialog_remove)).confirm(this::removeListInternal);
     }
 
     public void goMap() {

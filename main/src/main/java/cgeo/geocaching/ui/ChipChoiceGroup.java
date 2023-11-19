@@ -47,7 +47,7 @@ public class ChipChoiceGroup extends ChipGroup {
 
     private void init() {
         //create the selectAllChip
-        selectAllNoneButton = createChip(LayoutInflater.from(getContext()), TextParam.id(R.string.chipchoicegroup_selectall));
+        selectAllNoneButton = createChip(LayoutInflater.from(getContext()), TextParam.id(R.string.multiselect_selectall));
         selectAllNoneButton.setOnClickListener(v -> {
             final boolean c = selectAllNoneButton.isChecked();
             for (CompoundButton tb : valueButtons) {

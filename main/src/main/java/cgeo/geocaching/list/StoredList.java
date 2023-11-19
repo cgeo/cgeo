@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -22,6 +24,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -88,7 +91,13 @@ public final class StoredList extends AbstractList {
         public void promptForMultiListSelection(final int titleId, @NonNull final Action1<Set<Integer>> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> currentListIds, @NonNull final ListNameMemento listNameMemento, final boolean fastStoreOnLastSelection) {
             final Set<Integer> selectedListIds = new HashSet<>(fastStoreOnLastSelection ? Settings.getLastSelectedLists() : currentListIds);
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, selectedListIds);
+            final Set<AbstractList> selectedListSet =
+                    lists.stream().filter(s -> selectedListIds.contains(s.id)).collect(Collectors.toSet());
+
             final Set<Integer> lastSelectedLists = Settings.getLastSelectedLists();
+            //Testing Java 8 Streaming Feature
+            final Set<AbstractList> lastSelectedListSet =
+                    lists.stream().filter(s -> lastSelectedLists.contains(s.id)).collect(Collectors.toSet());
 
             // remove from selected which are not available anymore
             final Set<Integer> allListIds = new HashSet<>(lists.size());
@@ -102,35 +111,47 @@ public final class StoredList extends AbstractList {
                 return;
             }
 
-            SimpleDialog.of(activityRef.get()).setTitle(TextParam.id(titleId)).selectMultiple(lists,
-                    (item, p) -> TextParam.text(item.getTitleAndCount()),
-                    (item, p) -> selectedListIds.contains(item.id),
-                    (item, p) -> lastSelectedLists.contains(item.id),
-                    true,
-                    sel -> {
-                        selectedListIds.clear();
-                        for (AbstractList list : sel) {
-                            selectedListIds.add(list.id);
+            final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
+            model.setButtonSelectionIsMandatory(true)
+                    .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> lastSelectedListSet)
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
+                    .setItems(lists)
+                    .setDisplayMapper((item, p) -> TextParam.text(item.getTitleAndCount()))
+                    .setDisplayIconMapper((item, p) -> {
+                        if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
+                            return ImageParam.emoji(((StoredList) item).markerId);
                         }
-                        if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
-                            // create new list on the fly
-                            promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
-                        } else {
-                            Settings.setLastSelectedLists(selectedListIds);
-                            runAfterwards.call(selectedListIds);
-                        }
+                        return ImageParam.id(R.drawable.ic_menu_manage_list);
+                    })
+                    .setSelectedItems(selectedListSet);
+
+            SimpleDialog.of(activityRef.get()).setTitle(TextParam.id(titleId))
+                .setNegativeButton(null)
+                .selectMultiple(model, (selected) -> {
+                    selectedListIds.clear();
+                    for (AbstractList list : selected) {
+                        selectedListIds.add(list.id);
                     }
+                    if (selectedListIds.contains(PseudoList.NEW_LIST.id)) {
+                        // create new list on the fly
+                        promptForListCreation(runAfterwards, selectedListIds, listNameMemento.getTerm());
+                    } else {
+                        Settings.setLastSelectedLists(selectedListIds);
+                        runAfterwards.call(selectedListIds);
+                    }
+                }
             );
         }
 
         public void promptForListSelection(final int titleId, @NonNull final Action1<Integer> runAfterwards, final boolean onlyConcreteLists, final Set<Integer> exceptListIds, @NonNull final ListNameMemento listNameMemento) {
             final List<AbstractList> lists = getMenuLists(onlyConcreteLists, exceptListIds, Collections.emptySet());
+            final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(lists)
+                .setDisplayMapper((item, p) -> TextParam.text(item.getTitleAndCount()))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-            SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(lists,
-                    (item, p) -> TextParam.text(item.getTitleAndCount()),
-                    -1,
-                    SimpleDialog.SingleChoiceMode.NONE,
-                    (item, p) -> {
+            SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(model, item -> {
                         if (item == PseudoList.NEW_LIST) {
                             // create new list on the fly
                             promptForListCreation(runAfterwards, listNameMemento.getTerm());
@@ -241,7 +262,7 @@ public final class StoredList extends AbstractList {
                 return;
             }
             SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
-                    .input(-1, defaultValue, null, null, input -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(defaultValue), input -> {
                         if (StringUtils.isNotBlank(input)) {
                             runnable.call(input);
                         }
