@@ -1,5 +1,5 @@
 ### Mapa
--
+- New: Highlight existing downloads in download manager
 
 ### Detalls del catxé
 - Canvi: feu que "Canviar parlant" sigui una activació real
