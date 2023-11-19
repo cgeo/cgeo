@@ -997,6 +997,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     protected void onStart() {
         super.onStart();
 
+        // close outdated details popups
+        MapUtils.removeDetailsFragment(this);
+
         // resume location access
         resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
     }

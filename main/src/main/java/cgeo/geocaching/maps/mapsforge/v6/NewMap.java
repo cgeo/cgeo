@@ -792,6 +792,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         super.onStart();
         Log.d("NewMap: onStart");
 
+        MapUtils.removeDetailsFragment(this);
         initializeLayers();
     }
 

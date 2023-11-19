@@ -334,6 +334,8 @@ public class MapUtils {
     }
 
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
+        final Runnable[] unexecutedUpSwipeAction = {onUpSwipeAction};
+
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
 
@@ -353,6 +355,7 @@ public class MapUtils {
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
             b.setHideable(true);
             b.setSkipCollapsed(false);
+            b.setPeekHeight(0); // temporary set to 0 to avoid bumping. Gets updated once view is loaded.
             b.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
             ft.runOnCommit(() -> {
@@ -371,7 +374,10 @@ public class MapUtils {
                         removeDetailsFragment(activity);
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        onUpSwipeAction.run();
+                        if (unexecutedUpSwipeAction[0] != null) {
+                            unexecutedUpSwipeAction[0].run();
+                            unexecutedUpSwipeAction[0] = null; // reset action to prevent open cache details multiple times
+                        }
                     }
                 }
 

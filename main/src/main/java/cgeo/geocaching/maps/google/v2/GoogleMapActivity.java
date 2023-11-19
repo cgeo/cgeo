@@ -179,6 +179,8 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
             mapBase.targetView.setTarget(target.getGeocode(), target.getName());
         }
         mapBase.onStart();
+
+        MapUtils.removeDetailsFragment(this);
     }
 
     @Override
