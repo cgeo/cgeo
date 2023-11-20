@@ -1620,6 +1620,7 @@
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulty</string>
     <string name="cache_terrain">Terrain</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Rating</string>
     <string name="cache_own_rating">Your Rating</string>
     <string name="cache_rating_of_new">%1$.1f of %2$d</string>

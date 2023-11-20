@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
+import static cgeo.geocaching.utils.Formatter.SEPARATOR;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -219,6 +220,17 @@ public final class CacheDetailsCreator {
         if (cache.getTerrain() > 0) {
             addStars(R.string.cache_terrain, cache.getTerrain(), ConnectorFactory.getConnector(cache).getMaxTerrain());
         }
+    }
+
+    public void addDifficultyTerrain(final Geocache cache) {
+        final StringBuilder sb = new StringBuilder();
+        if (cache.getDifficulty() > 0) {
+            sb.append("D ").append(cache.getDifficulty());
+        }
+        if (cache.getTerrain() > 0) {
+            sb.append(sb.length() > 0 ? SEPARATOR : "").append("T ").append(cache.getTerrain());
+        }
+        add(R.string.cache_difficulty_terrain, sb);
     }
 
     public void addBetterCacher(final Geocache cache) {
