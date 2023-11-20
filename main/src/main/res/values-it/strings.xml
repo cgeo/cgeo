@@ -1502,8 +1502,6 @@
     <string name="init_summary_show_routing_menu">Un tocco prolungato su di un cache mostra un menu con opzioni avanzate per aggiungere/rimuovere il cache in un percorso. Se disabilitato, il cache viene direttamente aggiunto/rimosso dal percorso (configurabile).</string>
     <string name="init_ActionbarAutohide">Nascondi barra degli strumenti al tocco</string>
     <string name="init_summary_ActionbarAutohide">Tocca lo spazio libero della mappa per nascondere/mostrare la barra degli strumenti</string>
-    <string name="onetime_info_longtap_disabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
-    <string name="onetime_info_longtap_enabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
@@ -2485,8 +2483,7 @@
     <string name="redo">Ripeti</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>
