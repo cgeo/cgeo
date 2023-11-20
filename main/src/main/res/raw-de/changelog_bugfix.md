@@ -1,6 +1,7 @@
 ##
 - Fix: Hint hidden behind compass when using large fonts
-- Fix: coord.info trackable links cannot be opened any more
+- Korrektur: Trackable-Links konnten nicht mehr geöffnet werden
+- Fix: Wrong default when manually logging a trackable
 
 ##
 - Änderung: Die separate BetterCacher-Box wurde entfernt - tippe stattdessen auf BetterCacher Infozeile
