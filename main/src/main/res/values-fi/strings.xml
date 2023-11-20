@@ -2270,12 +2270,9 @@
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
     <string name="routes_tracks_color">Valitse väri</string>
-    <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
     <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
     <string name="track">Jälki</string>
-    <string name="make_visible">näytä</string>
-    <string name="hide">piilota</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
