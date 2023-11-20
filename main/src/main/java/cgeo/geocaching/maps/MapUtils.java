@@ -330,7 +330,6 @@ public class MapUtils {
     }
 
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
-        final Runnable[] unexecutedUpSwipeAction = {onUpSwipeAction};
 
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
@@ -341,8 +340,6 @@ public class MapUtils {
         ft.commit();
 
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
-        fl.setVisibility(View.VISIBLE);
-
         final ViewGroup.LayoutParams params = fl.getLayoutParams();
         final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
@@ -364,14 +361,16 @@ public class MapUtils {
 
 
             b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+                Runnable unexecutedUpSwipeAction = onUpSwipeAction;
+
                 @Override
                 public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         removeDetailsFragment(activity);
                     }
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED && unexecutedUpSwipeAction[0] != null) {
-                        unexecutedUpSwipeAction[0].run();
-                        unexecutedUpSwipeAction[0] = null; // reset action to prevent open cache details multiple times
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED && unexecutedUpSwipeAction != null) {
+                        unexecutedUpSwipeAction.run();
+                        unexecutedUpSwipeAction = null; // reset action to prevent open cache details multiple times
                     }
                 }
 
@@ -398,6 +397,8 @@ public class MapUtils {
                 }
             });
         }
+
+        fl.setVisibility(View.VISIBLE);
     }
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
