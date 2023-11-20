@@ -1543,8 +1543,6 @@
     <string name="init_summary_show_routing_menu">Dlouhým klepnutím na kešku se zobrazí nabídka s pokročilými možnostmi přidání/odebrání kešky do/z trasy. Pokud je vypnuto, kešla se pouze přidá/odebere do/z trasy.</string>
     <string name="init_ActionbarAutohide">Klepnutím skrýt panel nástrojů</string>
     <string name="init_summary_ActionbarAutohide">Klepnutím na volné místo na mapě skryjete/zobrazíte panel nástrojů</string>
-    <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
-    <string name="onetime_info_longtap_enabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky / trasové body.\n\nDlouhé klepnutí na mapu je aktuálně povoleno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
@@ -2562,8 +2560,9 @@
     <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimalizovat</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Vybrat vše</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Vybrat vše</string>
+    <string name="multiselect_selectvisible">Vybrat viditelné</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina / louka</string>
