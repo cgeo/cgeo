@@ -1577,6 +1577,7 @@
     <string name="web_downloaded">Staženo</string>
     <!-- popup -->
     <string name="popup_more">Více detailů</string>
+    <string name="map_fragment_swipe_hint_text">Přejeďte pro zobrazení podrobností</string>
     <!-- waypoint -->
     <string name="waypoint">Trasový bod</string>
     <string name="waypoint_coordinates">Souřadnice</string>
@@ -2386,12 +2387,9 @@
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte barvu</string>
-    <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
     <string name="track">Stopa</string>
-    <string name="make_visible">zviditelnit</string>
-    <string name="hide">skrýt</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
