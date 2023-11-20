@@ -353,12 +353,11 @@ public class MapUtils {
 
             ft.runOnCommit(() -> {
                 final View view = fragment.requireView();
-                view.post(() -> {
-                    b.setPeekHeight(view.getHeight()); // the original height of the cache details
-                    view.setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels); // make view fill whole screen
-                });
+                // make bottom sheet fill whole screen
+                swipeToOpenFragment.requireView().setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+                // set the height of collapsed state to height of the details fragment
+                view.getViewTreeObserver().addOnGlobalLayoutListener(() -> b.setPeekHeight(view.getHeight()));
             });
-
 
             b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
                 Runnable unexecutedUpSwipeAction = onUpSwipeAction;
