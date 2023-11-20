@@ -1513,8 +1513,6 @@
     <string name="init_summary_show_routing_menu">Un toc llarg sobre un catxé mostra un menú amb opcions avançades per afegir/eliminar el catxé a/des d\'una ruta. Si està desactivat, el catxé només s\'afegeix/elimina a/des de la ruta.</string>
     <string name="init_ActionbarAutohide">Amaga la barra d\'eines al toc</string>
     <string name="init_summary_ActionbarAutohide">Toqueu l\'espai lliure del mapa per ocultar/mostrar la barra d\'eines</string>
-    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
-    <string name="onetime_info_longtap_enabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -2501,8 +2499,7 @@
     <string name="redo">Refer</string>
     <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <string name="optimize">Optimitzar</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleccionar tot</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Àrees</string>
     <string name="rtl_fell_meadow">prat</string>
