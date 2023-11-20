@@ -1037,8 +1037,6 @@
     <string name="internal_goto_targets_title">\'Gå til\' mål</string>
     <string name="internal_goto_targets_description">Denne cache gemmer dine seneste \"Gå til\" mål. Den oprettes automatisk, når du har brugt funktionen \"Gå til\" i hovedmenuen. Den indtastede position vil blive gemt i rutepunkter for denne cache. Hvis du ikke længere har brug for disse positioner, kan du sikkert slette denne cache eller nogen af dens rutepunkter. Du kan også flytte cachen til enhver anden liste efter eget valg.</string>
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
-    <string name="onetime_info_longtap_disabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået fra.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
-    <string name="onetime_info_longtap_enabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået til.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
     <!-- coordinate calculator hints -->
@@ -1719,7 +1717,7 @@
     <string name="done">Færdig</string>
     <string name="finish">Afslut</string>
     <string name="cancel">Annullér</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
