@@ -1964,12 +1964,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
     <string name="routes_tracks_menu">ルート/トラック</string>
-    <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
     <string name="track">トラック</string>
-    <string name="make_visible">表示</string>
-    <string name="hide">非表示</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
