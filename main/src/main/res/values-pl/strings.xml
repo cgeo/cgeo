@@ -1577,6 +1577,7 @@
     <string name="web_downloaded">Pobrano</string>
     <!-- popup -->
     <string name="popup_more">Więcej szczegółów</string>
+    <string name="map_fragment_swipe_hint_text">Przesuń, aby otworzyć widok szczegółów</string>
     <!-- waypoint -->
     <string name="waypoint">Punkt nawigacji</string>
     <string name="waypoint_coordinates">Współrzędne</string>
@@ -2560,8 +2561,9 @@
     <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optymalizuj</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Zaznacz wszystko</string>
+    <string name="multiselect_selectvisible">Zaznacz widoczne</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Obszar</string>
     <string name="rtl_fell_meadow">łąka</string>
