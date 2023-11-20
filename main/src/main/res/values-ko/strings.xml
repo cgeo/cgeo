@@ -1498,8 +1498,6 @@
     <string name="init_summary_show_routing_menu">캐시를 길게 누르면 캐시를 경로에 추가/제거하는 고급 옵션이 있는 메뉴가 표시됩니다. 비활성화된 경우 캐시는 경로에서 추가/제거됩니다.</string>
     <string name="init_ActionbarAutohide">누를 때 툴바 숨기기</string>
     <string name="init_summary_ActionbarAutohide">툴바를 숨기거나 표시하려면 빈 지도 공간을 누르세요.</string>
-    <string name="onetime_info_longtap_disabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 비활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
-    <string name="onetime_info_longtap_enabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
@@ -2469,8 +2467,7 @@
     <string name="redo">다시 실행</string>
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <string name="optimize">최적화</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">모두 선택</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>
