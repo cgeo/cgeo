@@ -1328,7 +1328,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
