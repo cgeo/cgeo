@@ -2387,12 +2387,9 @@
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="routes_tracks_color">Wybierz kolor</string>
-    <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
     <string name="track">Ślad</string>
-    <string name="make_visible">ustaw jako widoczne</string>
-    <string name="hide">ukryj</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
