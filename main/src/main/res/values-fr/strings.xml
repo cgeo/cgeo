@@ -1485,8 +1485,6 @@
     <string name="init_summary_show_routing_menu">Un appui long sur une cache affiche un menu avec des options avancées pour ajouter/supprimer la cache vers/depuis une route. Si désactivé, la cache est juste ajouté/supprimé à/de la route.</string>
     <string name="init_ActionbarAutohide">Masquer la barre d\'outils par appui</string>
     <string name="init_summary_ActionbarAutohide">Appuyez sur un espace libre de la carte pour masquer / afficher la barre d\'outils</string>
-    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
-    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
@@ -2466,8 +2464,7 @@
     <string name="redo">Recommencer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimiser</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Tout sélectionner</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>
