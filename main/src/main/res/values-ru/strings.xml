@@ -361,7 +361,7 @@
     <string name="home_button">Главная</string>
     <string name="caches_nearby_button">Рядом</string>
     <string name="advanced_search_button">Поиск</string>
-    <string name="stored_caches_button">Сохранённые</string>
+    <string name="stored_caches_button">Сохранено</string>
     <string name="any_button">Навигация</string>
     <string name="unknown_scan">Не найдено геокодов в процессе сканирования.</string>
     <!-- caches -->
@@ -686,13 +686,13 @@
     <string name="about_changelog_bugfix_release">Исправление ошибок</string>
     <string name="about_system">Система</string>
     <string name="about_donate">Поддержите нас</string>
-    <string name="about_donation_more">Посетите сайт, чтобы узнать больше</string>
+    <string name="about_donation_more">Подробности на сайте</string>
     <string name="about_contributors">Участники</string>
     <string name="about_license">Лицензия</string>
     <string name="about_apache_license"><a href="">Лицензия Apache, Version 2.0</a></string>
     <string name="about_help">Помощь</string>
     <string name="about_system_collecting">Сбор информации о системе, подождите…</string>
-    <string name="about_system_include">Пожалуйста, включите следующую информацию об устройстве, когда отправляете отчет об ошибке или запрашиваете больше информации про c:geo:</string>
+    <string name="about_system_include">Когда отправляете отчёт об ошибке или запрашиваете дополнительные сведения, включите в своё обращение следующую информацию об устройстве:</string>
     <string name="about_system_info_send_button">Отправить по email…</string>
     <string name="about_system_info">Служебная информация c:geo</string>
     <string name="about_system_info_send_chooser">Отправить служебную информацию</string>
@@ -1355,15 +1355,15 @@
     <string name="cache_virtual_description">\"Виртуальный\" вопрос</string>
     <string name="cache_traditional_description">Традиционная часть тайника</string>
     <string name="cache_box_description">Содержимое тайника</string>
-    <string name="cache_watchlist_on">Этот тайник в вашем списке Отслеживаемых.</string>
-    <string name="cache_watchlist_on_extra">Этот тайник в вашем списке Отслеживаемых (Наблюдателей: %1d).</string>
-    <string name="cache_watchlist_not_on">Этот тайник не в Отслеживаемых.</string>
-    <string name="cache_watchlist_not_on_extra">Этот тайник не в Отслеживаемых. (Наблюдателей: %1d).</string>
+    <string name="cache_watchlist_on">Этот тайник в вашем списке Отслеживаемых</string>
+    <string name="cache_watchlist_on_extra">Этот тайник в вашем списке Отслеживаемых (наблюдают: %1d)</string>
+    <string name="cache_watchlist_not_on">Этот тайник не в Отслеживаемых</string>
+    <string name="cache_watchlist_not_on_extra">Этот тайник не в Отслеживаемых. (наблюдают: %1d)</string>
     <string name="cache_favpoint_on">Вы уже рекомендовали этот тайник.</string>
     <string name="cache_favpoint_not_on">Вы не оставляли своей рекомендации.</string>
     <string name="cache_list_select_last">Посл. выбор</string>
     <string name="cache_images">Фото</string>
-    <string name="cache_advanced">Продвинутые</string>
+    <string name="cache_advanced">Прочее</string>
     <string name="cache_waypoints">Путевые точки</string>
     <string name="cache_variables">Переменные</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Точки (%d)</string>
@@ -1375,7 +1375,7 @@
     <string name="cache_hint">Подсказка</string>
     <string name="cache_hint_not_available">Нет подсказок</string>
     <string name="cache_logs">Блокнот</string>
-    <string name="cache_latest_logs">Записи</string>
+    <string name="cache_latest_logs">Блокнот</string>
     <string name="cache_logs_friends_and_own">Свои записи и записи друзей</string>
     <string name="cache_dialog_loading_details">Загрузка детальной информации о тайнике…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Загрузка страницы</string>
@@ -1412,7 +1412,7 @@
     <string name="cache_menu_browser">Открыть в браузере</string>
     <string name="no_browser_found">Браузер не найден</string>
     <string name="cache_menu_open_with">Открыть с помощью…</string>
-    <string name="cache_menu_visit">Записаться</string>
+    <string name="cache_menu_visit">Запись в блокнот</string>
     <string name="cache_log_too_long">c:geo не смог отправить вашу запись, так как она слишком длинная. Но спасибо за то, что вы пытались написать такой объемный комментарий ;-)</string>
     <string name="cache_empty_log">c:geo не удалось отправить вашу запись, потому что она пуста.</string>
     <string name="cache_menu_visit_offline">Быстрая офлайн-запись</string>
@@ -1620,7 +1620,7 @@
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
     <!-- Variables -->
-    <string name="variables_titletext">Используйте эту страницу, чтобы запомнить значения и сделать вычисления, необходимые для этого тайника.</string>
+    <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_scanlisting">Сканирование</string>
     <string name="variables_scanlisting_choosepattern_title">Выберите найденный шаблон</string>
     <string name="variables_scanlisting_nopatternfound">Шаблон не найден</string>
@@ -2233,7 +2233,7 @@
     <string name="confirm_report_problem_message">Вы хотите записать \"%s\". Вы уверены?</string>
     <!-- Geokrety -->
     <string name="init_summary_geokrety">Включить трекаблы с GeoKrety.org</string>
-    <string name="init_geokrety_description">Авторизуйте c:geo на GeoKrety.org, чтобы отмечать ГеоКротов.</string>
+    <string name="init_geokrety_description">Авторизуйте c:geo на GeoKrety.org, чтобы отмечать геокротов.</string>
     <string name="init_geokrety_userid">Пользователь: %s</string>
     <string name="trackable_title_log_without_geocode">Код трекабла не установлен</string>
     <string name="trackable_log_without_geocode">Вы собираетесь отправить запись без геокода. Необходимо указать геокод. Добавить его сейчас?</string>
@@ -2558,7 +2558,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Оптимизация</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Выбрать всё</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>

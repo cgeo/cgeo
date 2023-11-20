@@ -2499,7 +2499,6 @@
     <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <string name="optimize">Optimitzar</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Àrees</string>
     <string name="rtl_fell_meadow">prat</string>

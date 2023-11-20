@@ -2262,7 +2262,6 @@
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Περιοχές</string>
     <string name="rtl_fell_meadow">Λιβάδι</string>

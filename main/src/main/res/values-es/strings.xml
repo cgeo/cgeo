@@ -2126,7 +2126,6 @@ Nombre de archivo:%2$s</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleccionar todo</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>
