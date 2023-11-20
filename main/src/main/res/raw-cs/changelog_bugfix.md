@@ -1,6 +1,7 @@
 ##
 - Oprava: Nápověda skrytá za kompasem při použití velkých písmen
 - Oprava: Sledovatelné odkazy na coord.info již nelze otevřít
+- Oprava: Výchozí chyba při ručním logování sledovatelného objektu
 
 ##
 - Změna: Odstraněno samostatné pole BetterCacher, místo toho klepněte na informační řádek BetterCacher
