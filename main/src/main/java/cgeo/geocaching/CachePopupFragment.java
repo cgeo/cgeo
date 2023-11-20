@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
@@ -100,7 +101,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (popup == null) {
                 return;
             }
-            popup.getActivity().finish();
+            MapUtils.removeDetailsFragment(popup.requireActivity());
         }
     }
 
@@ -309,7 +310,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), cache);
-        getActivity().finish();
     }
 
     @Override

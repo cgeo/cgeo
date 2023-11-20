@@ -57,6 +57,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -400,7 +401,7 @@ public class MapUtils {
     }
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
-    public static boolean removeDetailsFragment(final AppCompatActivity activity) {
+    public static boolean removeDetailsFragment(final FragmentActivity activity) {
         final FragmentManager fm = activity.getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
         if (f1 != null) {
