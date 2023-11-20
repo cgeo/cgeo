@@ -4,6 +4,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.WaypointPopupBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
@@ -71,7 +72,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
-            getActivity().finish();
+            MapUtils.removeDetailsFragment(requireActivity());
             return;
         }
 
@@ -159,7 +160,6 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), waypoint);
-        getActivity().finish();
     }
 
 

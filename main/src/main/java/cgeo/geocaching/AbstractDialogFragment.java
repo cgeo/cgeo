@@ -27,7 +27,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -77,9 +76,9 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
-            ((AbstractActivity) getActivity()).showToast(res.getString(R.string.err_detail_cache_find));
+            ((AbstractActivity) requireActivity()).showToast(res.getString(R.string.err_detail_cache_find));
 
-            getActivity().finish();
+            MapUtils.removeDetailsFragment(requireActivity());
             return;
         }
 
@@ -148,7 +147,6 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
 
         buttonMore.setOnClickListener(arg0 -> {
             CacheDetailActivity.startActivity(getActivity(), geocode);
-            getActivity().finish();
         });
 
         /* Only working combination as it seems */
@@ -172,7 +170,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     private void setAsTarget() {
         final TargetUpdateReceiver activity = (TargetUpdateReceiver) requireActivity();
         activity.onReceiveTargetUpdate(getTargetInfo());
-        MapUtils.removeDetailsFragment((AppCompatActivity) requireActivity());
+        MapUtils.removeDetailsFragment(requireActivity());
     }
 
     public static void onCreatePopupOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {
@@ -216,7 +214,6 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
             return;
         }
         CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);
-        getActivity().finish();
     }
 
     public interface TargetUpdateReceiver {
