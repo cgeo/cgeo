@@ -2558,7 +2558,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Оптимизация</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Выбрать всё</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>
