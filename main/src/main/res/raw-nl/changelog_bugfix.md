@@ -1,6 +1,7 @@
 ##
 - Oplossing: Hint was verborgen achter het kompas bij gebruik van grote lettertypen
 - Oplossing: coord.info trackable links kunnen niet meer worden geopend
+- Fix: Wrong default when manually logging a trackable
 
 ##
 - Wijziging: Aparte BetterCacher box verwijderd, tik op de BetterCacher info lijn
