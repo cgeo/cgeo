@@ -1102,6 +1102,9 @@
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
+    <string name="init_reset_otm">Einmalige Nachrichten zurücksetzen</string>
+    <string name="init_reset_otm_confirm">Möchtest du alle einmaligen Nachrichten zurücksetzen?</string>
+    <string name="init_reset_otm_done">Einmalige Nachrichten wurden zurückgesetzt</string>
     <string name="init_please_wait">Bitte warten…</string>
     <string name="settings_open_website">Webseite öffnen</string>
     <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
@@ -2323,12 +2326,9 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
-    <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
-    <string name="make_visible">Sichtbar machen</string>
-    <string name="hide">verbergen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
