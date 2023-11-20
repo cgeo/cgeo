@@ -1429,8 +1429,6 @@
     <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku/bod trasy)</string>
     <string name="init_ActionbarAutohide">Ťuknutím skryť panel nástrojov</string>
     <string name="init_summary_ActionbarAutohide">Ťuknutím na voľné miesto na mape skryť/zobraziť panel nástrojov</string>
-    <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
@@ -2432,8 +2430,7 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Vybrať všetko</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>
