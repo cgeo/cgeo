@@ -1465,8 +1465,6 @@
     <string name="init_summary_show_routing_menu">Kätkön pitkä painallus näyttää valikon, jossa on lisäasetuksia kätkön lisäämiseksi reittiin/poistamiseksi reitiltä. Jos tämä kytketään pois päältä, kätkö yksinkertaisesti lisätään reittiin/poistetaan reitiltä.</string>
     <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
     <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
-    <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
-    <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
@@ -2444,8 +2442,7 @@
     <string name="redo">Toista</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimoi</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Valitse kaikki</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alueet</string>
     <string name="rtl_fell_meadow">tunturi / niitty</string>
