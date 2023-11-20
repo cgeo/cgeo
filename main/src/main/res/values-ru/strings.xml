@@ -1541,8 +1541,6 @@
     <string name="init_summary_show_routing_menu">Длительное нажатие на тайник показывает меню с расширенными параметрами для добавления/удаления тайника в/из маршрута. Если отключено, то тайник только добавляется/удаляется в/из маршрута.</string>
     <string name="init_ActionbarAutohide">Скрыть панель инструментов при нажатии</string>
     <string name="init_summary_ActionbarAutohide">Нажмите на свободное место на карте, чтобы скрыть/показать панель инструментов</string>
-    <string name="onetime_info_longtap_disabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте в настоящее время отключено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
-    <string name="onetime_info_longtap_enabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте сейчас включено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
@@ -2560,8 +2558,7 @@
     <string name="redo">Повторить</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Оптимизация</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Выбрать всё</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>
