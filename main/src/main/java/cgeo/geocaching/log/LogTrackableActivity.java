@@ -54,6 +54,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+
+    private static final LogTypeTrackable[] PREFERRED_DEFAULTS = new LogTypeTrackable[] { LogTypeTrackable.DISCOVERED_IT, LogTypeTrackable.NOTE, LogTypeTrackable.RETRIEVED_IT };
     private LogtrackableActivityBinding binding;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
@@ -104,7 +106,18 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             logType.setValues(possibleLogTypesTrackable);
 
             if (!logTypesTrackable.contains(typeSelected)) {
-                setType(logTypesTrackable.get(0), false);
+                //currently selected is not possible -> select the most preferred default
+                boolean found = false;
+                for (LogTypeTrackable candidate : PREFERRED_DEFAULTS) {
+                    if (logTypesTrackable.contains(candidate)) {
+                        setType(candidate, false);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    setType(logTypesTrackable.get(0), false);
+                }
                 showToast(res.getString(R.string.info_log_type_changed));
             }
         }
