@@ -2112,7 +2112,6 @@
     <string name="cancel">İptal</string>
     <string name="ok" tools:ignore="ButtonCase">Tamam</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Tümünü Seç</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alanlar</string>
     <string name="rtl_fell_meadow">otlak / çayırlık</string>

@@ -2469,7 +2469,6 @@
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <string name="optimize">최적화</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">모두 선택</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>

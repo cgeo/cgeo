@@ -1,4 +1,9 @@
 ##
+- Poprawka: Wskazówka ukryta za kompasem podczas używania dużych czcionek
+- Poprawka: Nie można już otwierać łączy do przedmiotów podróżnych w domenie coord.info
+- Poprawka: Niepoprawna wartość domyślna podczas ręcznego logowania przedmiotu podróżnego
+
+##
 - Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
 - Zmiana: Zmniejszono limit czasu dla połączeń z bettercacher.org
 - Poprawka: Osobista notatka z serwera zawiera nieprawidłowe znaki

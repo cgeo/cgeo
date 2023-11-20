@@ -2115,7 +2115,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">すべて選択</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->

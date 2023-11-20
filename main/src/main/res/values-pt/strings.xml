@@ -2500,7 +2500,6 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleccionar todas</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>

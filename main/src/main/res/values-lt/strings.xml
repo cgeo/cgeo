@@ -2432,7 +2432,6 @@
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
     <string name="optimize">Optimizuoti</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Pažymėti viską</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Plotai</string>
     <string name="rtl_fell_meadow">kirtimas / pieva</string>

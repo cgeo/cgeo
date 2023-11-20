@@ -2485,7 +2485,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>

@@ -2365,7 +2365,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimera</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Markera alla</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områden</string>
     <string name="rtl_fell_meadow">kalhygge / äng</string>

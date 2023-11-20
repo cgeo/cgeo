@@ -2432,7 +2432,6 @@
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Vybrať všetko</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>
