@@ -1249,8 +1249,6 @@
     <string name="internal_goto_targets_description">Este caché almacena tus últimos objetivos \"Ir a\" y se crea automáticamente una vez que has usado la función \"Ir a\" en el menú principal. Las coordenadas introducidas se almacenarán en los waypoints de este caché. Si ya no necesitas estas coordenadas, puedes borrar este caché o cualquiera de sus waypoints. También puedes mover el caché a cualquier otra lista de tu elección.</string>
     <string name="init_longtap_map">Toque largo en el mapa</string>
     <string name="init_summary_longtap_map">Activar el toque largo en el icono del mapa (para crear una ruta individual) o en el espacio libre del mapa (para crear un caché definido por el usuario)</string>
-    <string name="onetime_info_longtap_disabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está deshabilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
-    <string name="onetime_info_longtap_enabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está habilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
@@ -2125,8 +2123,7 @@ Nombre de archivo:%2$s</string>
     <string name="back">Atrás</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleccionar todo</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>
