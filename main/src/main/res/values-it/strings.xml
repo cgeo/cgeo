@@ -2311,12 +2311,9 @@
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
     <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="routes_tracks_color">Seleziona il colore</string>
-    <string name="center_on_route_track">Centra sul percorso/traccia</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
     <string name="track">Traccia</string>
-    <string name="make_visible">Rendi visibile</string>
-    <string name="hide">Nascondi</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
