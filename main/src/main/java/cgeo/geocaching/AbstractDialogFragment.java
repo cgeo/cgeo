@@ -116,8 +116,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
 
         cacheDistance = details.addDistance(cache, cacheDistance);
 
-        details.addDifficulty(cache);
-        details.addTerrain(cache);
+        details.addDifficultyTerrain(cache);
         details.addEventDate(cache);
 
         // rating
