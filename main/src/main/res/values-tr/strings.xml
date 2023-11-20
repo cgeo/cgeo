@@ -1969,8 +1969,6 @@
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="route">Rota</string>
     <string name="track">İz</string>
-    <string name="make_visible">görünür yap</string>
-    <string name="hide">gizle</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
