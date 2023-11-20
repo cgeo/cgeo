@@ -19,6 +19,7 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
@@ -571,6 +572,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
+        GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.getStatusCode() == StatusCode.NO_ERROR) {
             //reset Gui and all values
             resetValues();
