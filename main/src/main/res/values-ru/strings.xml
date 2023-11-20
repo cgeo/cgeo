@@ -2384,12 +2384,9 @@
     <string name="routes_tracks_dialog_title">Параметры маршрутов / треков</string>
     <string name="routes_tracks_menu">Маршруты / Треки</string>
     <string name="routes_tracks_color">Выберите цвет</string>
-    <string name="center_on_route_track">Центр на маршрут/трек</string>
     <string name="unload_route_track">Выгрузить маршрут/трек</string>
     <string name="route">Маршрут</string>
     <string name="track">Трек</string>
-    <string name="make_visible">сделать видимым</string>
-    <string name="hide">скрыть</string>
     <!-- distance units -->
     <string name="unit_m">м</string>
     <string name="unit_km">км</string>
