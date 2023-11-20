@@ -1,6 +1,7 @@
 ##
 - Fix: Hint hidden behind compass when using large fonts
 - Fix: coord.info trackable links cannot be opened any more
+- Fix: Wrong default when manually logging a trackable
 
 ##
 - Изменение: Удалено отдельное поле Better Catcher, заменено на информационную страницу Better Catcher
