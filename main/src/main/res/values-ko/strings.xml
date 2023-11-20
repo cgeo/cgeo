@@ -2293,12 +2293,9 @@
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="routes_tracks_color">색상 선택</string>
-    <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
     <string name="track">트랙</string>
-    <string name="make_visible">숨김 비활성화</string>
-    <string name="hide">숨기기</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
