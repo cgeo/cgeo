@@ -2327,12 +2327,9 @@
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Kleur selecteren</string>
-    <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
-    <string name="make_visible">Zichtbaar maken</string>
-    <string name="hide">verbergen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
