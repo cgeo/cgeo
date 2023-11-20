@@ -1925,12 +1925,9 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
     <string name="routes_tracks_menu">Ruter / Spor</string>
-    <string name="center_on_route_track">Midtstill på rute/spor</string>
     <string name="unload_route_track">Slett rute/spor</string>
     <string name="route">Rute</string>
     <string name="track">Spor</string>
-    <string name="make_visible">Gjør synlig</string>
-    <string name="hide">Skjul</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
