@@ -2445,7 +2445,6 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimoi</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Valitse kaikki</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alueet</string>
     <string name="rtl_fell_meadow">tunturi / niitty</string>
