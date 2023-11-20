@@ -2192,12 +2192,9 @@
     <string name="routes_tracks_dialog_title">Rutter / spåralternativ</string>
     <string name="routes_tracks_menu">Rutter / spår</string>
     <string name="routes_tracks_color">Välj färg</string>
-    <string name="center_on_route_track">Centrera på rutt/spår</string>
     <string name="unload_route_track">Rensa rutt/spår</string>
     <string name="route">Rutt</string>
     <string name="track">Spår</string>
-    <string name="make_visible">Gör synlig</string>
-    <string name="hide">dölj</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
