@@ -2101,10 +2101,7 @@
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
-    <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
-    <string name="make_visible">Να γίνει ορατό</string>
-    <string name="hide">απόκρυψη</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
