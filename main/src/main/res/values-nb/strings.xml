@@ -2046,7 +2046,6 @@
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Velg alle</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områder</string>
     <string name="rtl_heath">varme</string>
