@@ -166,6 +166,7 @@
     <string name="err_select_logimage_failed">בחירת תמונה עבור הלוג כשלה.</string>
     <string name="err_acquire_image_failed">השגת תמונה כשלה.</string>
     <string name="err_tb_display">c:geo לא יכול להציג את הTrackable שרצית. האם הוא באמת Trackable?</string>
+    <string name="err_tb_details_open">c:geo לא יכול לפתוח את פרטי הTrackable.</string>
     <string name="err_tb_not_loggable">Trackable זה אינו ניתן לרישום.</string>
     <string name="err_tb_find_that">c:geo לא מצליח למצוא את הTrackable הזה.</string>
     <string name="err_waypoint_cache_unknown">c:geo לא יודע לאיזה מטמון ניסית להוסיף נקודת דרך.</string>
@@ -469,7 +470,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
