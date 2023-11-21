@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">A obtenção da imagem falhou.</string>
     <string name="err_acquire_image_unsupported_format">O formato de imagem deve ser JPEG/JPG, PNG ou GIF</string>
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
+    <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
     <string name="err_tb_not_found">O c:geo não encontra o trackable %s.</string>
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
@@ -1512,8 +1513,6 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="init_summary_show_routing_menu">Toque longo numa cache mostra um menu com opções avançadas para adicionar/remover a cache a/de uma rota. Se desabilitado, a cache é apenas adicionada/removida à/da rota.</string>
     <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
     <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
-    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está activada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
@@ -2325,12 +2324,9 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
-    <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
     <string name="track">Percurso</string>
-    <string name="make_visible">tornar visível</string>
-    <string name="hide">ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2499,7 +2495,7 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="redo">Refazer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
