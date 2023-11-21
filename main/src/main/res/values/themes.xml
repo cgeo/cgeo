@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- theme for (nearly) all activities -->
 
@@ -44,14 +44,8 @@
         <item name="android:colorBackground">@color/colorBackgroundDialog</item>
     </style>
 
-    <!-- theme for dialogs with compact lists (e. g.: "pick a list" dialogs -->
-
-    <style name="cgeo.compactDialogs" parent="materialAlertDialogTheme">
-        <item name="android:listPreferredItemHeightSmall">40dp</item>
-        <item name="android:checkedTextViewStyle">@style/checkboxStyleNoParent</item>
-    </style>
-
     <!-- Full-screen dialogs -->
+
     <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
         <item name="android:windowIsFloating">false</item>

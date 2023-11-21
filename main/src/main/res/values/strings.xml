@@ -2373,7 +2373,6 @@
 
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talking compass</string>
-    <string name="tts_toggle">Toggle talking</string>
     <string name="tts_started">Started speech</string>
     <string name="tts_stopped">Stopped speech</string>
     <string name="tts_running">Speech service is running…</string>
