@@ -169,6 +169,7 @@
     <string name="err_select_logimage_failed">Ni uspelo izbrati slike za zapis.</string>
     <string name="err_acquire_image_failed">Pridobivanje slike ni uspelo.</string>
     <string name="err_tb_display">c:geo ne more prikazati željenega sledljivčka. Ali je res sledljivček?</string>
+    <string name="err_tb_details_open">c:geo ne more pokazati podatke sledljivčka.</string>
     <string name="err_tb_not_loggable">Tega sledljivčka ni mogoče logirati.</string>
     <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
@@ -1036,7 +1037,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Razveljavi</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
