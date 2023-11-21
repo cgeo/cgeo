@@ -236,6 +236,7 @@
     <string name="err_acquire_image_failed">Kuvan hankkiminen epäonnistui.</string>
     <string name="err_acquire_image_unsupported_format">Kuvamuodon on oltava JPEG/JPG, PNG tai GIF</string>
     <string name="err_tb_display">c:geo ei voi näyttää haluttua reissaajaa. Onko se varmasti reissaaja?</string>
+    <string name="err_tb_details_open">c:geo ei voi avata reissaajan tietoja.</string>
     <string name="err_tb_not_loggable">Reissaajaa ei voi kirjata.</string>
     <string name="err_tb_not_found">c:geo ei löydä reissaajaa %s.</string>
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
@@ -1464,8 +1465,6 @@
     <string name="init_summary_show_routing_menu">Kätkön pitkä painallus näyttää valikon, jossa on lisäasetuksia kätkön lisäämiseksi reittiin/poistamiseksi reitiltä. Jos tämä kytketään pois päältä, kätkö yksinkertaisesti lisätään reittiin/poistetaan reitiltä.</string>
     <string name="init_ActionbarAutohide">Piilota työkalupalkki napauttamalla</string>
     <string name="init_summary_ActionbarAutohide">Napauta vapaata karttatilaa piilottaaksesi tai näyttääksesi työkalupalkin</string>
-    <string name="onetime_info_longtap_disabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä pois päältä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
-    <string name="onetime_info_longtap_enabled">Voit luoda yksittäisiä reittejä ja käyttäjän määrittämiä kätköjä/reittipisteitä painamalla karttaa pitkään.\n\nKartan pitkä painallus on tällä hetkellä päällä.\n\nVoit vaihtaa tätä asetusta kohdassa Asetukset → Kartta → Kartan käyttäytyminen</string>
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
@@ -2271,12 +2270,9 @@
     <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
     <string name="routes_tracks_color">Valitse väri</string>
-    <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
     <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
     <string name="track">Jälki</string>
-    <string name="make_visible">näytä</string>
-    <string name="hide">piilota</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2443,7 +2439,7 @@
     <string name="redo">Toista</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimoi</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alueet</string>
     <string name="rtl_fell_meadow">tunturi / niitty</string>
