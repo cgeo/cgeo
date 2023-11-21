@@ -233,6 +233,7 @@
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázka musí byť JPEG/JPG, PNG alebo GIF</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
+    <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
     <string name="err_tb_not_found">c:geo nemôže nájsť trasovateľný predmet %s.</string>
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
@@ -1428,8 +1429,6 @@
     <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku/bod trasy)</string>
     <string name="init_ActionbarAutohide">Ťuknutím skryť panel nástrojov</string>
     <string name="init_summary_ActionbarAutohide">Ťuknutím na voľné miesto na mape skryť/zobraziť panel nástrojov</string>
-    <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
@@ -2260,12 +2259,9 @@
     <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte farbu</string>
-    <string name="center_on_route_track">Vycentrovať na trasu/stopu</string>
     <string name="unload_route_track">Zrušiť trasu/stopu</string>
     <string name="route">Trasa</string>
     <string name="track">Stopa</string>
-    <string name="make_visible">zviditeľniť</string>
-    <string name="hide">skryť</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2431,7 +2427,7 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>
