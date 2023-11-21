@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázku musí být JPEG/JPG, PNG nebo GIF</string>
     <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
+    <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
     <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
     <string name="err_tb_not_found">c:geo nemůže najít sledovatelný %s.</string>
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
@@ -1113,6 +1114,9 @@
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
+    <string name="init_reset_otm">Resetovat jednorázové zprávy</string>
+    <string name="init_reset_otm_confirm">Chcete resetovat všechny jednorázové zprávy?</string>
+    <string name="init_reset_otm_done">Jednorázové zprávy byly resetovány</string>
     <string name="init_please_wait">Čekejte prosím…</string>
     <string name="settings_open_website">Otevřít webovou stránku</string>
     <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
@@ -1390,6 +1394,8 @@
     <string name="cache_dialog_offline_drop_message">Odstraňování kešky z paměti zařízení…</string>
     <string name="cache_dialog_refresh_title">Aktualizovat</string>
     <string name="cache_dialog_refresh_message">Aktualizace detailů kešky…</string>
+    <string name="cache_menu_speechDeactivate">Přestat mluvit</string>
+    <string name="cache_menu_speechActivate">Začít mluvit</string>
     <string name="cache_menu_navigate">Navigovat</string>
     <string name="cache_menu_target">Nastavit jako cíl</string>
     <string name="cache_menu_navigation_drive">Navigace (řízení)</string>
@@ -1523,6 +1529,7 @@
     <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
     <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
     <string name="context_map_show_coords">Zobrazit souřadnice</string>
+    <string name="edit">Upravit</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
@@ -1537,8 +1544,6 @@
     <string name="init_summary_show_routing_menu">Dlouhým klepnutím na kešku se zobrazí nabídka s pokročilými možnostmi přidání/odebrání kešky do/z trasy. Pokud je vypnuto, kešla se pouze přidá/odebere do/z trasy.</string>
     <string name="init_ActionbarAutohide">Klepnutím skrýt panel nástrojů</string>
     <string name="init_summary_ActionbarAutohide">Klepnutím na volné místo na mapě skryjete/zobrazíte panel nástrojů</string>
-    <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
-    <string name="onetime_info_longtap_enabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky / trasové body.\n\nDlouhé klepnutí na mapu je aktuálně povoleno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
@@ -1573,6 +1578,7 @@
     <string name="web_downloaded">Staženo</string>
     <!-- popup -->
     <string name="popup_more">Více detailů</string>
+    <string name="map_fragment_swipe_hint_text">Přejeďte pro zobrazení podrobností</string>
     <!-- waypoint -->
     <string name="waypoint">Trasový bod</string>
     <string name="waypoint_coordinates">Souřadnice</string>
@@ -2382,12 +2388,12 @@
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte barvu</string>
-    <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
+    <string name="center">Vycentrovat</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
     <string name="track">Stopa</string>
-    <string name="make_visible">zviditelnit</string>
-    <string name="hide">skrýt</string>
+    <string name="make_visible">Zviditelnit</string>
+    <string name="hide">Skrýt</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2556,8 +2562,9 @@
     <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimalizovat</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Vybrat vše</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Vybrat vše</string>
+    <string name="multiselect_selectvisible">Vybrat viditelné</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina / louka</string>
