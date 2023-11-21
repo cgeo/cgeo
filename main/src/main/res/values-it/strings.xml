@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
     <string name="err_acquire_image_unsupported_format">Il formato immagine deve essere uno dei file JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
+    <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
     <string name="err_tb_not_found">c:geo non riesce a trovare trackable %s.</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
@@ -1501,8 +1502,6 @@
     <string name="init_summary_show_routing_menu">Un tocco prolungato su di un cache mostra un menu con opzioni avanzate per aggiungere/rimuovere il cache in un percorso. Se disabilitato, il cache viene direttamente aggiunto/rimosso dal percorso (configurabile).</string>
     <string name="init_ActionbarAutohide">Nascondi barra degli strumenti al tocco</string>
     <string name="init_summary_ActionbarAutohide">Tocca lo spazio libero della mappa per nascondere/mostrare la barra degli strumenti</string>
-    <string name="onetime_info_longtap_disabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
-    <string name="onetime_info_longtap_enabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
@@ -2312,12 +2311,9 @@
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
     <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="routes_tracks_color">Seleziona il colore</string>
-    <string name="center_on_route_track">Centra sul percorso/traccia</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
     <string name="track">Traccia</string>
-    <string name="make_visible">Rendi visibile</string>
-    <string name="hide">Nascondi</string>
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -2484,7 +2480,7 @@
     <string name="redo">Ripeti</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>
