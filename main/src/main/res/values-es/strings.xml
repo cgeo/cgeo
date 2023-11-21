@@ -228,6 +228,7 @@
     <string name="err_select_logimage_failed">No se pudo seleccionar una imagen para el registro.</string>
     <string name="err_acquire_image_failed">No se pudo obtener una imagen.</string>
     <string name="err_tb_display">c:geo no puede mostrar el rastreable que buscas. ¿Es realmente un rastreable?</string>
+    <string name="err_tb_details_open">c:geo no puede abrir los detalles del rastreable.</string>
     <string name="err_tb_not_loggable">Este rastreable no se puede registrar.</string>
     <string name="err_tb_not_found">c:geo no puede encontrar el rastreable %s.</string>
     <string name="err_tb_find_that">c:geo no encuentra ese rastreable.</string>
@@ -1248,8 +1249,6 @@
     <string name="internal_goto_targets_description">Este caché almacena tus últimos objetivos \"Ir a\" y se crea automáticamente una vez que has usado la función \"Ir a\" en el menú principal. Las coordenadas introducidas se almacenarán en los waypoints de este caché. Si ya no necesitas estas coordenadas, puedes borrar este caché o cualquiera de sus waypoints. También puedes mover el caché a cualquier otra lista de tu elección.</string>
     <string name="init_longtap_map">Toque largo en el mapa</string>
     <string name="init_summary_longtap_map">Activar el toque largo en el icono del mapa (para crear una ruta individual) o en el espacio libre del mapa (para crear un caché definido por el usuario)</string>
-    <string name="onetime_info_longtap_disabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está deshabilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
-    <string name="onetime_info_longtap_enabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está habilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
@@ -2124,7 +2123,7 @@ Nombre de archivo:%2$s</string>
     <string name="back">Atrás</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>
