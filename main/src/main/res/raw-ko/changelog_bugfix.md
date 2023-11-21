@@ -2,6 +2,7 @@
 - Fix: Hint hidden behind compass when using large fonts
 - Fix: coord.info trackable links cannot be opened any more
 - Fix: Wrong default when manually logging a trackable
+- Fix: Cache icon on map not updated after logging from popup
 
 ##
 - 변경: 별도의 BetterCacher 상자를 제거하고 대신 BetterCacher 정보 줄을 누르세요.
