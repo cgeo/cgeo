@@ -2,6 +2,7 @@
 - Fix: Hint hidden behind compass when using large fonts
 - Fix: coord.info trackable links cannot be opened any more
 - Fix: Wrong default when manually logging a trackable
+- Fix: Cache icon on map not updated after logging from popup
 
 ##
 - Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
