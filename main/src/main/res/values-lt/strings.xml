@@ -233,6 +233,7 @@
     <string name="err_acquire_image_failed">Vaizdo gauti nepavyko.</string>
     <string name="err_acquire_image_unsupported_format">Vaizdo formatas turi būti JPEG/JPG, PNG arba GIF</string>
     <string name="err_tb_display">c:geo negali parodyti norimo keliauninko. Ar tai tikrai keliauninkas?</string>
+    <string name="err_tb_details_open">c:geo negali atidaryti keliauninko informacijos.</string>
     <string name="err_tb_not_loggable">Šis keliauninkas neregistruojamas.</string>
     <string name="err_tb_not_found">c:geo neranda %s keliauninko.</string>
     <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
@@ -1428,8 +1429,6 @@
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
     <string name="init_ActionbarAutohide">Slėpti įrankių juostą bakstelėjus</string>
     <string name="init_summary_ActionbarAutohide">Bakstelėkite laisvą vietą žemėlapyje norėdami slėpti/rodyti įrankių juostą</string>
-    <string name="onetime_info_longtap_disabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu išjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
-    <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
@@ -2260,12 +2259,9 @@
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="routes_tracks_color">Pasirinkite spalvą</string>
-    <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
     <string name="track">Pėdsakas</string>
-    <string name="make_visible">padaryti matomą</string>
-    <string name="hide">slėpti</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2431,7 +2427,7 @@
     <string name="redo">Grąžinti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
     <string name="optimize">Optimizuoti</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Plotai</string>
     <string name="rtl_fell_meadow">kirtimas / pieva</string>
