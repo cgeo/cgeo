@@ -1,6 +1,8 @@
 import com.getkeepsafe.dexcount.OutputFormat
 import org.apache.tools.ant.filters.ReplaceTokens
 
+import javax.inject.Inject
+
 /*
  * Run "gradlew" or "gradlew cgeoHelp" in the parent directory for a help of how to use this build file.
  */
@@ -484,7 +486,7 @@ dependencies {
     implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
     //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 
-    //TooLargeTool is used for logging transaction sizes and thus helpng find transactionTooLargeExceptions
+    //TooLargeTool is used for logging transaction sizes and thus helping find transactionTooLargeExceptions
     //See https://github.com/guardian/toolargetool
     implementation 'com.gu.android:toolargetool:0.3.0'
 
@@ -493,6 +495,16 @@ dependencies {
     // stay with 3.1.0.16 for now to avoid problems with CI
     implementation 'com.github.AppDevNext:AndroidChart:3.1.0.16'
 }
+
+// define objects for files/folders outside tasks
+File privatePropertiesFile = rootProject.file('private.properties')
+String templatesDirectory = "templates"
+String keysDirectory = "src/main/res/values"
+String keysName = "keys.xml"
+File templatesFile = project.file(templatesDirectory + "/" + keysName)
+File keysFile = project.file(keysDirectory + "/" + keysName)
+File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
+String adb = android.getAdbExecutable().absolutePath
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -503,16 +515,14 @@ tasks.register('verifyCgeoKeys') {
     group = 'verification'
     description = 'Checks for the existence of keys.xml to successfully compile cgeo.'
     doFirst {
-        File keysFile = project.file("src/main/res/values/keys.xml")
         if (!keysFile.exists()) {
             // copy keys from private.properties to keys.xml. used by the CI server at least
-            File propertiesFile = rootProject.file("private.properties")
-            if (propertiesFile.exists()) {
+            if (privatePropertiesFile.exists()) {
                 copy {
-                    from "templates/keys.xml"
-                    into ("src/main/res/values")
+                    from templatesFile
+                    into keysDirectory
                     Properties properties = new Properties()
-                    propertiesFile.withInputStream {
+                    privatePropertiesFile.withInputStream {
                         properties.load(it)
                     }
                     filter(ReplaceTokens, tokens: properties)
@@ -560,6 +570,11 @@ class GitCommit {
     }
 }
 
+// check whether this is a local build or a CI server build
+static boolean isContinuousIntegrationServer() {
+    return System.getenv('BUILD_NUMBER') != null
+}
+
 // have a run task for our builds to launch the app directly from gradle
 android.applicationVariants.configureEach { variant ->
     if (variant.installProvider) {
@@ -576,7 +591,7 @@ android.applicationVariants.configureEach { variant ->
                 GString launchClass = "${variant.applicationId}/${classpath}.MainActivity"
                 try {
                     project.exec {
-                        executable = project.android.getAdbExe().toString()
+                        executable = adb
                         args = ['shell', 'am', 'start', '-n', launchClass]
                     }
                 }
@@ -585,7 +600,6 @@ android.applicationVariants.configureEach { variant ->
                 }
             }
         }
-
     }
 }
 
@@ -602,7 +616,6 @@ tasks.register('testDebug') {
  * signing of release APK, use a properties file like in templates/private.properties
  */
 // dynamically load the signing values from private.properties
-File privatePropertiesFile = rootProject.file('private.properties')
 if (privatePropertiesFile.exists()) {
     Properties properties = new Properties()
     properties.load(new FileInputStream(privatePropertiesFile))
@@ -620,37 +633,41 @@ if (privatePropertiesFile.exists()) {
 // check existence of private properties, show an error message
 tasks.register('verifyPrivateProperties') {
     doLast {
-        if (!rootProject.file('private.properties').exists()) {
+        if (!privatePropertiesFile.exists()) {
             throw new InvalidUserDataException("For signing the release build you must provide a file private.properties in the root directory. Copy templates/private.properties and change the values.")
         }
     }
 }
 
+interface Injected {
+    @Inject ExecOperations getExecOperations()
+}
+
 // copy preferences containing user and password to the device
 tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
+    Injected injected = project.objects.newInstance(Injected)
     doFirst {
-        File preferences = file('cgeo.geocaching_preferences.xml')
-        if (preferences.exists()) {
+        if (preferencesFile.exists()) {
             try {
-                project.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
                 }
-                project.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                project.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
                 }
-                project.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'run-as', 'cgeo.geocaching', 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
-                project.exec {
-                    executable = project.android.getAdbExe().toString()
+                injected.execOperations.exec {
+                    executable = adb
                     args = ['shell', 'getprop', 'ro.build.version.release']
                 }
             }
@@ -683,11 +700,6 @@ dexcount {
     format = OutputFormat.LIST
     includeClassCount = true
     includeTotalMethodCount = true
-}
-
-// check whether this is a local build or a CI server build
-static boolean isContinuousIntegrationServer() {
-    return System.getenv('BUILD_NUMBER') != null
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
