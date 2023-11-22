@@ -13,6 +13,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -179,6 +180,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         toolbar.inflateMenu(R.menu.cache_options);
         CacheMenuHandler.onPrepareOptionsMenu(menu, geocache, true);
         CacheMenuHandler.initDefaultNavigationMenuItem(menu, navigationSource);
+        ViewUtils.extendMenuActionBarDisplayItemCount(toolbar.getContext(), menu);
         menu.findItem(R.id.menu_target).setVisible(true);
         LoggingUI.onPrepareOptionsMenu(menu, geocache);
     }
