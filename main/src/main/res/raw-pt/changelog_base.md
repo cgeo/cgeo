@@ -1,5 +1,5 @@
 ### Mapa
--
+- Novo: Destacar transferências existentes no gestor de transferências
 
 ### Detalhes da cache
 - Alteração: Torne "Ligar/desligar a fala" num verdadeiro comutador
