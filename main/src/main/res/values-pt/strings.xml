@@ -946,8 +946,7 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\n
-Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(s) backup(s) para um armazenamento externo.</string>
+    <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\nDica: Copie os ficheiros de backup p/ outro armazenamento, podendo assim restaura-los mesmo que perca o telemóvel.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -1103,6 +1102,9 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
+    <string name="init_reset_otm">Repor mensagens únicas</string>
+    <string name="init_reset_otm_confirm">Deseja repor todas as mensagens únicas?</string>
+    <string name="init_reset_otm_done">As mensagens únicas foram repostas</string>
     <string name="init_please_wait">Por favor, aguarde…</string>
     <string name="settings_open_website">Abrir o sítio web do serviço</string>
     <string name="settings_open_geokretymap_website">Abrir o sítio web \"GeoKretyMap.org\"</string>
@@ -1499,6 +1501,7 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
+    <string name="edit">Editar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
@@ -1545,6 +1548,7 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="web_downloaded">Transferido</string>
     <!-- popup -->
     <string name="popup_more">Mais detalhes</string>
+    <string name="map_fragment_swipe_hint_text">Deslize para abrir a visualização de detalhes</string>
     <!-- waypoint -->
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
@@ -2324,9 +2328,12 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
+    <string name="center">Centrar</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
     <string name="track">Percurso</string>
+    <string name="make_visible">Tornar visível</string>
+    <string name="hide">Ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2496,6 +2503,8 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Selecionar Tudo</string>
+    <string name="multiselect_selectvisible">Selecionar Visíveis</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
