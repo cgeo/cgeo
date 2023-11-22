@@ -1,8 +1,8 @@
 ##
-- Fix: Hint hidden behind compass when using large fonts
-- Fix: coord.info trackable links cannot be opened any more
-- Fix: Wrong default when manually logging a trackable
-- Fix: Cache icon on map not updated after logging from popup
+- Correcção: Dica ficava escondida atrás da bússola ao usar fontes grandes
+- Correcção: ligações de TB a coord.info não podiam mais ser abertos
+- Correcção: Padrão errado ao registar manualmente um TB
+- Correcção: Ícone de cache no mapa não actualizado após o registo a partir de popup
 
 ##
 - Alteração: Removida caixa separada BetterCacher, em vez disso, toque na linha de informação do BetterCacher
