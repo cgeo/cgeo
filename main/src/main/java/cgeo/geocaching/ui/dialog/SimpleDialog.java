@@ -245,7 +245,6 @@ public class SimpleDialog {
         setPositiveButton(buttons == null || buttons.length < 1 ? null : buttons[0]);
         setNegativeButton(buttons == null || buttons.length < 2 ? null : buttons[1]);
         setNeutralButton(buttons == null || buttons.length < 3 ? null : buttons[2]);
-
         return this;
     }
 
@@ -453,7 +452,8 @@ public class SimpleDialog {
         }
         if (!selectionConfirmedViaButton) {
             //remove "negative/positive" buttons
-            setButtons(0, 0);
+            setPositiveButton(null);
+            setNegativeButton(null);
         }
 
         final Pair<AlertDialog, DialogSimpleBinding> dialogBinding = constructCommons();

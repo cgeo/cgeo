@@ -56,7 +56,6 @@ public class FilterUtils {
                         .setButtonClickAction(which -> {
                             if (which == DialogInterface.BUTTON_NEUTRAL) {
                                 filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()));
-                                return true;
                             }
                             return false;
                         })
