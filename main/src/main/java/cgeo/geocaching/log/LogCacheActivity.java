@@ -699,8 +699,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         @Override
         protected void doCommand() {
             previousState = getEntryFromView();
-            cache.clearOfflineLog();
-
+            cache.clearOfflineLog(this.getContext());
         }
 
         @Override
