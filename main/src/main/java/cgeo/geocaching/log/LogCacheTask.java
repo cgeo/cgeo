@@ -178,7 +178,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
         DataStore.saveLogs(taskInterface.geocache.getGeocode(), newLogs, true);
 
         // update offline log in DB
-        taskInterface.geocache.clearOfflineLog();
+        taskInterface.geocache.clearOfflineLog(null);
 
     }
 

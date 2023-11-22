@@ -37,6 +37,7 @@ import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -220,9 +221,12 @@ public class Geocache implements IWaypoint {
     /**
      * Sends a change notification to interested parties
      */
-    private void notifyChange() {
+    private void notifyChange(@Nullable final Context context) {
         if (changeNotificationHandler != null) {
             changeNotificationHandler.sendEmptyMessage(0);
+        }
+        if (context != null) {
+            GeocacheChangedBroadcastReceiver.sendBroadcast(context, geocode);
         }
     }
 
@@ -601,7 +605,7 @@ public class Geocache implements IWaypoint {
                 DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
             }
             offlineLog = logEntry;
-            notifyChange();
+            notifyChange(fromActivity);
         } else {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
         }
@@ -638,10 +642,10 @@ public class Geocache implements IWaypoint {
     /**
      * Drop offline log for a given geocode.
      */
-    public void clearOfflineLog() {
+    public void clearOfflineLog(@Nullable final Context context) {
         DataStore.clearLogOffline(geocode);
         setHasLogOffline(false);
-        notifyChange();
+        notifyChange(context);
     }
 
     @NonNull
