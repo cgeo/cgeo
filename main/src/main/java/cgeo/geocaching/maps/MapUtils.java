@@ -321,11 +321,11 @@ public class MapUtils {
     // Handling of cache/waypoint details fragments
 
     public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
-        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
+        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity, () -> CacheDetailActivity.startActivityClearTop(activity, geocode));
     }
 
     public static void showWaypointDetails(final AppCompatActivity activity, final String geocode, final int waypointId) {
-        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
+        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity, () -> CacheDetailActivity.startActivityClearTop(activity, geocode));
     }
 
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {

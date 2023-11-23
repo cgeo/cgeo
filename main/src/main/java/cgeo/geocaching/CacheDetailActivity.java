@@ -943,15 +943,26 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true);
     }
 
-    public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage) {
+    public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage, final boolean clearTop) {
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
+        if (clearTop) {
+            detailIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         detailIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         detailIntent.putExtra(EXTRA_FORCE_WAYPOINTSPAGE, forceWaypointsPage);
         context.startActivity(detailIntent);
     }
 
+    public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage) {
+        startActivity(context, geocode, forceWaypointsPage, false);
+    }
+
     public static void startActivity(final Context context, final String geocode) {
-        startActivity(context, geocode, false);
+        startActivity(context, geocode, false, false);
+    }
+
+    public static void startActivityClearTop(final Context context, final String geocode) {
+        startActivity(context, geocode, false, true);
     }
 
     /**
