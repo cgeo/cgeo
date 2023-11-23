@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 
 public class SwipeToOpenFragment extends Fragment {
 
+    private Runnable onStopCallback = null;
+
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,5 +43,18 @@ public class SwipeToOpenFragment extends Fragment {
             imageview.setImageResource(alpha == 1 ? R.drawable.ic_menu_done : R.drawable.expand_less);
         }
 
+    }
+
+    public void setOnStopCallback(final Runnable onStopCallback) {
+        this.onStopCallback = onStopCallback;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (onStopCallback != null) {
+            onStopCallback.run();
+        }
     }
 }
