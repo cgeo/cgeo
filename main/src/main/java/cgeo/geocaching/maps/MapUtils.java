@@ -359,17 +359,14 @@ public class MapUtils {
                 view.getViewTreeObserver().addOnGlobalLayoutListener(() -> b.setPeekHeight(view.getHeight()));
             });
 
-            b.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-                Runnable unexecutedUpSwipeAction = onUpSwipeAction;
-
+            final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         removeDetailsFragment(activity);
                     }
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED && unexecutedUpSwipeAction != null) {
-                        unexecutedUpSwipeAction.run();
-                        unexecutedUpSwipeAction = null; // reset action to prevent open cache details multiple times
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
+                        onUpSwipeAction.run();
                     }
                 }
 
@@ -377,12 +374,16 @@ public class MapUtils {
                 public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
                     swipeToOpenFragment.setExpansion(slideOffset);
                 }
-            });
+            };
+
+            b.addBottomSheetCallback(callback);
+            swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
+
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
             b.setState(SideSheetBehavior.STATE_EXPANDED);
 
-            b.addCallback(new SideSheetCallback() {
+            final SideSheetCallback callback = new SideSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull final View sheet, final int newState) {
                     if (newState == SideSheetBehavior.STATE_HIDDEN) {
@@ -394,7 +395,11 @@ public class MapUtils {
                 public void onSlide(@NonNull final View sheet, final float slideOffset) {
                     // nothing
                 }
-            });
+            };
+
+            b.addCallback(callback);
+            swipeToOpenFragment.setOnStopCallback(() -> b.removeCallback(callback));
+
         }
 
         fl.setVisibility(View.VISIBLE);
