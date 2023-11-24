@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.AbstractDialogFragment;
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
@@ -31,6 +32,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -95,10 +97,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
@@ -338,6 +342,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             protected void onReceive(final Context context, final String geocode) {
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null && cache.getCoords() != null) {
+                    viewModel.caches.getValue().remove(cache);
                     viewModel.caches.getValue().add(cache);
                     viewModel.caches.notifyDataChanged();
                 }
@@ -655,6 +660,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
         menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
 
+        menu.findItem(R.id.menu_as_list).setVisible(true);
+
         return result;
     }
 
@@ -731,10 +738,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_filter) {
             showFilterMenu();
         } else if (id == R.id.menu_store_caches) {
-            /* @todo
-            final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
-            CacheDownloaderService.downloadCaches(this, visibleCacheGeocodes, false, false, () -> caches.invalidate(visibleCacheGeocodes));
-            */
+            final Set<String> geocodes = mapFragment.getViewport()
+                    .filter(viewModel.caches.getValue().getAsList())
+                    .stream()
+                    .map(Geocache::getGeocode)
+                    .collect(Collectors.toSet());
+            CacheDownloaderService.downloadCaches(this, geocodes, false, false, () -> viewModel.caches.notifyDataChanged());
         } else if (id == R.id.menu_theme_mode) {
             mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
@@ -751,6 +760,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
                 menu.show();
             }
+        } else if (id == R.id.menu_as_list) {
+            final Collection<Geocache> caches = mapFragment.getViewport().filter(viewModel.caches.getValue().getAsList());
+            CacheListActivity.startActivityMap(this, new SearchResult(caches));
         } else {
             final String language = TileProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
