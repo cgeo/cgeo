@@ -61,12 +61,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
                 onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), false);
                 return true;
             }
-
-            @Override
-            public void onLongPress(final @NonNull MotionEvent event) {
-                final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
-            }
         });
 
         // add map fragment
@@ -134,6 +128,11 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //                final CameraPosition pos = mMap.getCameraPosition();
 //                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
 //            }
+        });
+
+        mMap.setOnMapLongClickListener(latLng -> {
+            final Point point = mMap.getProjection().toScreenLocation(latLng);
+            onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), point.x, point.y, true);
         });
 
         adaptLayoutForActionbar(true);
