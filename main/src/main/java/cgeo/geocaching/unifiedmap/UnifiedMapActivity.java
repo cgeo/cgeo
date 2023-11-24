@@ -451,10 +451,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             setTitle();
 
-            if (loadInBackgroundHandler != null) {
-                loadInBackgroundHandler.onDestroy();
+            // only initialize loadInBackgroundHandler if caches should actually be loaded
+            if (mapType.type == UMTT_PlainMap) {
+                if (loadInBackgroundHandler != null) {
+                    loadInBackgroundHandler.onDestroy();
+                }
+                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
             }
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
         hideProgressSpinner();
 
@@ -832,8 +835,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.notifyDataChanged();
         if (loadInBackgroundHandler != null) {
             loadInBackgroundHandler.onDestroy();
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
-        loadInBackgroundHandler = new LoadInBackgroundHandler(this);
     }
 
     // ========================================================================
