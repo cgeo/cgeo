@@ -32,6 +32,8 @@ import io.noties.markwon.Markwon;
  */
 public class TextParam {
 
+    public static final int IMAGE_SIZE_INTRINSIC_BOUND = 0;
+
     @StringRes
     private final int textId;
     private final Object[] textParams;
@@ -113,6 +115,7 @@ public class TextParam {
 
     /**
      * sets whether text shall be accompanied by an image/icon
+     * Use this method to use a draw size for the image. Use IMAGE_SIZE_INTRINSIC_BOUND for intrinsic bounds
      */
     public TextParam setImage(final ImageParam image, final int imageSizeInDp) {
         this.image = image;
@@ -231,10 +234,16 @@ public class TextParam {
             final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image).getAsDrawable(view.getContext());
 
             //if wanted imageSize is set explicitely -> use it. Otherwise deduct a sensible default from text size
-            final int imageSizeInDpToUse = imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp;
-            imageDrawable.setBounds(new Rect(0, 0, ViewUtils.dpToPixel(imageSizeInDpToUse), ViewUtils.dpToPixel(imageSizeInDpToUse)));
+            final int imageSizeInPixel;
+            if (imageSizeInDp < 0) {
+                imageSizeInPixel = (int) (view.getTextSize() * 1.5f);
+            } else if (imageSizeInDp == IMAGE_SIZE_INTRINSIC_BOUND) {
+                imageSizeInPixel = imageDrawable.getIntrinsicHeight();
+            } else {
+                imageSizeInPixel = ViewUtils.dpToPixel(imageSizeInDp);
+            }
+            imageDrawable.setBounds(new Rect(0, 0, imageSizeInPixel, imageSizeInPixel));
             view.setCompoundDrawables(imageDrawable, null, null, null);
-
 
             // set image tint (if given)
             if (imageTintColor != 1) {
