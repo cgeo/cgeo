@@ -32,8 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeoItemSelectorUtils {
 
-    private static final int ICONSIZE_IN_DP = 30;
-
     private GeoItemSelectorUtils() {
         //no instance
     }
@@ -41,7 +39,7 @@ public class GeoItemSelectorUtils {
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName())).setImage(ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable()), ICONSIZE_IN_DP).applyTo(tv);
+        TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName())).setImage(ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
         if (cache.getDifficulty() > 0.1f) {
@@ -61,7 +59,7 @@ public class GeoItemSelectorUtils {
         final Geocache parentCache = waypoint.getParentGeocache();
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName()).setImage(ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable()), ICONSIZE_IN_DP).applyTo(tv);
+        TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName()).setImage(ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
         if (parentCache != null) {
@@ -104,7 +102,7 @@ public class GeoItemSelectorUtils {
         // Fallback - neither a cache nor waypoint. should never happen...
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(geoitemRef.getName()).setImage(ImageParam.id(geoitemRef.getMarkerId()), ICONSIZE_IN_DP).applyTo(tv);
+        TextParam.text(geoitemRef.getName()).setImage(ImageParam.id(geoitemRef.getMarkerId()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
 
         final TextView infoView = (TextView) view.findViewById(R.id.info);
         infoView.setText(geoitemRef.getGeocode());
@@ -115,7 +113,7 @@ public class GeoItemSelectorUtils {
     public static View createRouteView(final Context context, final Route route, final View view) {
         final boolean isIndividualRoute = route.getName().isEmpty();
         final TextParam tp1 = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
-        tp1.setImage(ImageParam.id(R.drawable.map_quick_route), ICONSIZE_IN_DP).setImageTint(context.getResources().getColor(R.color.colorText)).applyTo(view.findViewById(R.id.text));
+        tp1.setImage(ImageParam.id(R.drawable.map_quick_route), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).setImageTint(context.getResources().getColor(R.color.colorText)).applyTo(view.findViewById(R.id.text));
         final TextParam tp2 = isIndividualRoute ? TextParam.text("") : TextParam.id(R.string.track);
         tp2.applyTo(view.findViewById(R.id.info));
         return view;
