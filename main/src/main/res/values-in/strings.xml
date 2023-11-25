@@ -152,6 +152,7 @@
     <string name="err_select_logimage_failed">Memilih gambar untuk log gagal.</string>
     <string name="err_acquire_image_failed">Memperoleh sebuah gambar gagal.</string>
     <string name="err_tb_display">c:geo tidak dapat menampilkan pelacak yang anda inginkan. Apakah itu benar-benar dapat dilacak?</string>
+    <string name="err_tb_details_open">c: geo tidak bisa membuka rincian yang dapat dilacak.</string>
     <string name="err_tb_not_loggable">Ini hanya bisa dilacak tidak bisa ditukar.</string>
     <string name="err_tb_find_that">c: geo tidak dapat menemukan yang bisa dilacak.</string>
     <string name="err_waypoint_cache_unknown">c:geo tidak tahu ke cache mana titik arah ingin anda tambahkan.</string>
@@ -1111,7 +1112,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Batal</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
