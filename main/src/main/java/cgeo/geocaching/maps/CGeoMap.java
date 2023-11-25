@@ -748,6 +748,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
             // TrackUtils.onPrepareOptionsMenu is in maps/google/v2/GoogleMapActivity only
+            MapUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("CGeoMap.onPrepareOptionsMenu", e);
         }

@@ -664,6 +664,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
+        MapUtils.onPrepareOptionsMenu(menu);
 
         return result;
     }

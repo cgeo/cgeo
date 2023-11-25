@@ -35,14 +35,20 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -146,38 +152,58 @@ public class MapUtils {
     // check whether routing tile data is available for the whole viewport given
     // and offer to download missing routing data
     public static void checkRoutingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
-        ActivityMixin.showToast(activity, R.string.downloadmap_checking);
+        if (Settings.useInternalRouting()) {
+            ActivityMixin.showToast(activity, R.string.downloadmap_checking);
 
-        final HashMap<String, String> missingTiles = new HashMap<>();
-        final ArrayList<Download> missingDownloads = new ArrayList<>();
-        final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
+            final HashMap<String, String> missingTiles = new HashMap<>();
+            final ArrayList<Download> missingDownloads = new ArrayList<>();
+            final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
 
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
-            // calculate affected routing tiles
-            int curLat = (int) Math.floor(minLatitude / 5) * 5;
-            final int maxLat = (int) Math.floor(maxLatitude / 5) * 5;
-            final int maxLon = (int) Math.floor(maxLongitude / 5) * 5;
-            while (curLat <= maxLat) {
-                int curLon = (int) Math.floor(minLongitude / 5) * 5;
-                while (curLon <= maxLon) {
-                    final String filenameBase = (curLon < 0 ? "W" + (-curLon) : "E" + curLon) + "_" + (curLat < 0 ? "S" + (-curLat) : "N" + curLat) + BROUTER_TILE_FILEEXTENSION;
-                    missingTiles.put(filenameBase, filenameBase);
-                    curLon += 5;
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+                // calculate affected routing tiles
+                int curLat = (int) Math.floor(minLatitude / 5) * 5;
+                final int maxLat = (int) Math.floor(maxLatitude / 5) * 5;
+                final int maxLon = (int) Math.floor(maxLongitude / 5) * 5;
+                while (curLat <= maxLat) {
+                    int curLon = (int) Math.floor(minLongitude / 5) * 5;
+                    while (curLon <= maxLon) {
+                        final String filenameBase = (curLon < 0 ? "W" + (-curLon) : "E" + curLon) + "_" + (curLat < 0 ? "S" + (-curLat) : "N" + curLat) + BROUTER_TILE_FILEEXTENSION;
+                        missingTiles.put(filenameBase, filenameBase);
+                        curLon += 5;
+                    }
+                    curLat += 5;
                 }
-                curLat += 5;
-            }
-            checkTiles(missingTiles, missingDownloads, hasUnsupportedTiles);
-        }, () -> {
-            // give feedback to the user + offer to download missing tiles (if available)
-            if (missingDownloads.isEmpty()) {
-                ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_tiles_unsupported : R.string.check_tiles_found);
-            } else {
-                if (hasUnsupportedTiles.get()) {
-                    ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
+                checkTiles(missingTiles, missingDownloads, hasUnsupportedTiles);
+            }, () -> {
+                // give feedback to the user + offer to download missing tiles (if available)
+                if (missingDownloads.isEmpty()) {
+                    ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_tiles_unsupported : R.string.check_tiles_found);
+                } else {
+                    if (hasUnsupportedTiles.get()) {
+                        ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
+                    }
+                    DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads, null);
                 }
-                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads, null);
+            });
+        } else {
+            // if external routing configured: try to open BRouter downloader
+            try {
+                final String bRouterPackage = activity.getString(R.string.package_brouter);
+                final Intent intent = new Intent();
+                intent.setComponent(new ComponentName(bRouterPackage, bRouterPackage + ".BInstallerActivity"));
+                activity.startActivity(intent);
+            } catch (ActivityNotFoundException ignore) {
+                ActivityMixin.showShortToast(activity, R.string.cache_not_status_found);
             }
-        });
+        }
+    }
+
+    public static void onPrepareOptionsMenu(final Menu menu) {
+        final MenuItem item = menu.findItem(R.id.menu_check_routingdata);
+        if (item != null) {
+            // use same condition as in checkRoutingData() above
+            item.setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
+        }
     }
 
     @WorkerThread
