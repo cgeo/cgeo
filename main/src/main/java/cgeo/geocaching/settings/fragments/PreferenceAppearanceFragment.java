@@ -7,7 +7,6 @@ import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
@@ -83,13 +82,6 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_appearance);
-
-        setPrefClick(this, R.string.pref_wallpaper, () -> {
-            if (Settings.isWallpaper()) {
-                ((SettingsActivity) this.getActivity()).askShowWallpaperPermission();
-            }
-        });
-
     }
 
     private void configCustomBNitemPreference() {

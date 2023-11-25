@@ -54,12 +54,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.SearchManager;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -111,7 +109,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.locationStatus.updatePermissions());
-    private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, b -> setWallpaper());
 
     private Long lastMCTime = 0L;
 
@@ -238,6 +235,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
             // don't call the super implementation with the layout argument, as that would set the wrong theme
+            setTheme(R.style.cgeo_withWallpaper);
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
@@ -267,10 +265,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
             binding.locationStatus.setPermissionRequestCallback(() -> {
                 this.askLocationPermissionAction.launch(null);
             });
-
-            if (Settings.isWallpaper()) {
-                askShowWallpaperPermissionAction.launch();
-            }
 
             configureMessageCenterPolling();
 
@@ -402,20 +396,12 @@ public class MainActivity extends AbstractNavigationBarActivity {
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
 
-            setWallpaper();
-
             init();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
             binding.getRoot().post(() -> Log.d("Post after MainActivity.onResume"));
         }
-    }
-
-    private void setWallpaper() {
-        final Drawable wallpaper =  (Settings.isWallpaper() && PermissionContext.SHOW_WALLPAPER.hasAllPermissions()) ?
-                WallpaperManager.getInstance(this).getDrawable() : null;
-            ((ImageView) findViewById(R.id.background)).setImageDrawable(wallpaper);
     }
 
     @Override
