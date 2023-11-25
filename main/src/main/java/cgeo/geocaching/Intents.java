@@ -36,6 +36,7 @@ public class Intents {
     public static final String EXTRA_COORD_DESCRIPTION = PREFIX + "coord_description";
     public static final String EXTRA_WPT_PAGE_UPDATE = PREFIX + "wpt_page_update";
     public static final String EXTRA_FILTER_CONTEXT = "filter_context";
+    public static final String EXTRA_MESSAGE_CENTER_COUNTER = "mccounter";
 
     public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";
     public static final String EXTRA_MAPSTATE = PREFIX + "mapstate";
@@ -65,6 +66,7 @@ public class Intents {
     public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
     public static final String ACTION_GEOCACHE_CHANGED = PREFIX_ACTION + "GEOCACHE_CHANGED";
     public static final String ACTION_INVALIDATE_MAPLIST = PREFIX_ACTION + "INVALIDATE_MAPLIST";
+    public static final String ACTION_MESSAGE_CENTER_UPDATE = PREFIX_ACTION + "MCUPDATE";
 
     private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
     public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";
