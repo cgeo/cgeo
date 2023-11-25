@@ -337,7 +337,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
-        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this) {
+        getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
