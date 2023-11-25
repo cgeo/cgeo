@@ -887,10 +887,6 @@ public class Settings {
                 GCConstants.DEFAULT_GC_DATE);
     }
 
-    public static boolean isWallpaper() {
-        return getBoolean(R.string.pref_wallpaper, false);
-    }
-
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
     }
