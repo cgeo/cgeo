@@ -228,6 +228,7 @@
     <string name="err_select_logimage_failed">Valg av bilde til loggen mislyktes.</string>
     <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
+    <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
     <string name="err_tb_not_found">c:geo finner ikke sporbar %s.</string>
     <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
@@ -1924,12 +1925,9 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
     <string name="routes_tracks_menu">Ruter / Spor</string>
-    <string name="center_on_route_track">Midtstill på rute/spor</string>
     <string name="unload_route_track">Slett rute/spor</string>
     <string name="route">Rute</string>
     <string name="track">Spor</string>
-    <string name="make_visible">Gjør synlig</string>
-    <string name="hide">Skjul</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2044,7 +2042,7 @@
     <string name="back">Tilbake</string>
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områder</string>
     <string name="rtl_heath">varme</string>
