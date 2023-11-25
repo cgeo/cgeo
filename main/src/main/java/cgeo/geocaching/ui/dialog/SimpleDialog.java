@@ -2,7 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
-import cgeo.geocaching.databinding.DialogSimpleBinding;
+import cgeo.geocaching.databinding.SimpleDialogViewBinding;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
@@ -280,7 +280,7 @@ public class SimpleDialog {
     }
 
 
-    private Pair<AlertDialog, DialogSimpleBinding> constructCommons() {
+    private Pair<AlertDialog, SimpleDialogViewBinding> constructCommons() {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         if (title != null) {
@@ -302,7 +302,7 @@ public class SimpleDialog {
 
         final AlertDialog dialog = builder.create();
 
-        final DialogSimpleBinding binding = DialogSimpleBinding.inflate(LayoutInflater.from(context));
+        final SimpleDialogViewBinding binding = SimpleDialogViewBinding.inflate(LayoutInflater.from(context));
         dialog.setView(binding.getRoot());
 
         if (this.title != null) {
@@ -456,9 +456,9 @@ public class SimpleDialog {
             setNegativeButton(null);
         }
 
-        final Pair<AlertDialog, DialogSimpleBinding> dialogBinding = constructCommons();
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
         final AlertDialog dialog = dialogBinding.first;
-        final DialogSimpleBinding binding = dialogBinding.second;
+        final SimpleDialogViewBinding binding = dialogBinding.second;
 
         model.setDialog(dialog);
 
@@ -535,7 +535,7 @@ public class SimpleDialog {
 
         final InputOptions io = options == null ? new InputOptions() : options;
 
-        final Pair<AlertDialog, DialogSimpleBinding> dialogBinding = constructCommons();
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
         final EditText textField = dialogBinding.second.dialogInputEdittext;
         final TextInputLayout textLayout = dialogBinding.second.dialogInputLayout;
         final AlertDialog dialog = dialogBinding.first;

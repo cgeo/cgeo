@@ -241,7 +241,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
             final SimpleDialog.ItemSelectModel<Boolean> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO, true)
-                .setItems(items).setDisplayMapper((l, pos) -> TextParam.text(items.get(pos) ? "true" : "false"))
+                .setItems(items).setDisplayMapper((l) -> TextParam.text(l ? "true" : "false"))
                 .setSelectedItems(Collections.singleton(StringUtils.equals(keyValue.value, "true") ? TRUE : FALSE));
 
             SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key))

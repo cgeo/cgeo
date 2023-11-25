@@ -327,13 +327,10 @@ public class VariableListView extends LinearLayout {
                     final SimpleDialog.ItemSelectModel<FormulaFunction> model = new SimpleDialog.ItemSelectModel<>();
                     model
                         .setItems(functions)
-                        .setDisplayMapper((f, i) -> getFunctionDisplayString(f))
-                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-                        .setGrouping(go -> {
-                            go
-                                .setGroupMapper((f, i) -> f.getGroup())
-                                .setGroupDisplayMapper(g -> VariablesListAdapter.getFunctionGroupDisplayString((FormulaFunction.FunctionGroup) g));
-                        });
+                        .setDisplayMapper(VariablesListAdapter::getFunctionDisplayString)
+                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+                    model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper(VariablesListAdapter::getFunctionGroupDisplayString);
 
                     SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.id(R.string.formula_choose_function))
                             .selectSingle(model, f -> {

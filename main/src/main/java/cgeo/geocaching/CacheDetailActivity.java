@@ -1823,7 +1823,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             TextUtils.sortListLocaleAware(items, i -> i.left);
 
             final SimpleDialog.ItemSelectModel<ImmutableTriple<String, String, String>> model = new SimpleDialog.ItemSelectModel<>();
-            model.setItems(items).setDisplayMapper((i, p) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right));
+            model.setItems(items).setDisplayMapper((i) -> TextParam.id(R.string.cache_personal_note_vars_out_of_sync_line, i.left, i.middle, i.right));
             SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_dialog_title))
                     .setMessage(TextParam.id(R.string.cache_personal_note_vars_out_of_sync_title))
                     .selectMultiple(model, sel -> {

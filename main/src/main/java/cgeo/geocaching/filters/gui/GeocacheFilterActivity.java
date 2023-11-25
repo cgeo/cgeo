@@ -189,8 +189,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
                 model
                     .setItems(filters)
-                    .setDisplayMapper((f, i) -> TextParam.text(f.getName()))
-                    .setItemActionIconMapper((f, i) -> ImageParam.id(R.drawable.ic_menu_delete))
+                    .setDisplayMapper((f) -> TextParam.text(f.getName()))
+                    .setItemActionIconMapper((f) -> ImageParam.id(R.drawable.ic_menu_delete))
                     .setItemActionListener((f) -> {
                         //DELETE action was tapped for a filter
                         model.getDialog().dismiss();
@@ -330,7 +330,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));
         addFilter.setValues(filterTypes)
-                .setDisplayMapperPure(GeocacheFilterType::getUserDisplayableName)
+                .setDisplayMapperPure(f -> {
+                    return f.getUserDisplayableName();
+                })
                 .setTextHideSelectionMarker(true)
                 .setView(binding.filterAdditem, (v, t) -> {
                 })

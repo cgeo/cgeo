@@ -274,7 +274,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
             } else {
                 final SimpleDialog.ItemSelectModel<Pair<String, String>> model = new SimpleDialog.ItemSelectModel<>();
-                model.setItems(patterns).setDisplayMapper((s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true));
+                model.setItems(patterns).setDisplayMapper((s) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true));
 
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
                         .selectMultiple(model, set -> {
