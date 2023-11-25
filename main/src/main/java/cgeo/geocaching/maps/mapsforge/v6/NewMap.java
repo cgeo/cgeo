@@ -434,6 +434,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 LoggingUI.onPrepareOptionsMenu(menu, getSingleModeCache());
             }
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
+            MapUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
