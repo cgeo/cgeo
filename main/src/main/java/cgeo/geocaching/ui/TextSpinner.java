@@ -360,7 +360,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             //use a COPY of values for display, in case value list changes while dialog is open. See #13578
             final List<T> valuesCopy = new ArrayList<>(values);
             sd.selectSingleGrouped(valuesCopy,
-                    (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + displayMapper.call(v)),
+                    (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + (v == null ? DISPLAY_VALUE_NULL : displayMapper.call(v))),
                     getPositionFor(selectedItem, -1), this.textHideSelectionMarker ? SimpleDialog.SingleChoiceMode.NONE : SimpleDialog.SingleChoiceMode.SHOW_RADIO,
                     (v, i) -> this.textGroupMapper == null ? null : this.textGroupMapper.call(v),
                     s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(valuesCopy.get(pos)));
