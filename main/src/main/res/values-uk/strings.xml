@@ -188,6 +188,7 @@
     <string name="err_select_logimage_failed">Не вдалося вибрати зображення для журналу.</string>
     <string name="err_acquire_image_failed">Не вдалося виконати зображення.</string>
     <string name="err_tb_display">c:geo не може відобразити те, що ви хочете. Ви дійсно хочете відстежувати?</string>
+    <string name="err_tb_details_open">c:geo не вдалося відкрити подробиці, що відстежуються.</string>
     <string name="err_tb_not_loggable">Це відстежуване неможливо увійти.</string>
     <string name="err_tb_find_that">c:geo не може знайти цей геокеш.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знає, який кеш ви хочете додати точку.</string>
@@ -1429,7 +1430,7 @@
     <string name="next">Наступний</string>
     <string name="finish">Закінчити</string>
     <string name="cancel">Скасувати</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
