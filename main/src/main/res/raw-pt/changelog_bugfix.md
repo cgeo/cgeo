@@ -3,6 +3,7 @@
 - Correcção: ligações de TB a coord.info não podiam mais ser abertos
 - Correcção: Padrão errado ao registar manualmente um TB
 - Correcção: Ícone de cache no mapa não actualizado após o registo a partir de popup
+- Fix: Crash on displaying logging options
 
 ##
 - Alteração: Removida caixa separada BetterCacher, em vez disso, toque na linha de informação do BetterCacher
