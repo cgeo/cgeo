@@ -57,11 +57,16 @@ public class UnifiedMapType implements Parcelable {
         this.fromList = fromList;
     }
 
-    /** launch fresh map with current settings */
-    public void launchMap(final Context fromActivity) {
+    /** get launch intent */
+    public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
         intent.putExtra(BUNDLE_MAPTYPE, this);
-        fromActivity.startActivity(intent);
+        return intent;
+    }
+
+    /** launch fresh map with current settings */
+    public void launchMap(final Context fromActivity) {
+        fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
 
     // ========================================================================
