@@ -1719,7 +1719,6 @@
     <string name="search_finder">Trovato da</string>
     <string name="search_finder_prefill">Cercatore</string>
     <string name="search_finder_button">Cerca per nome utente</string>
-    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Cerca con filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_tb">Oggetto Trackable</string>
@@ -2130,7 +2129,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
-    <string name="tts_toggle">Attiva/disattiva il parlato</string>
     <string name="tts_started">Sintesi vocale on</string>
     <string name="tts_stopped">Sintesi vocale off</string>
     <string name="tts_running">Il servizio vocale è attivo…</string>
@@ -2235,8 +2233,6 @@
     <string name="permission_contacts_read_explanation">c:geo può cercare i contatti nella rubrica usando il nome da cacher. Per fare questo, devi autorizzare c:geo a leggere la tua rubrica. Altrimenti, non sarà possibile utilizzare questa funzione.</string>
     <string name="permission_location_explanation_title">Permesso geolocalizzazione</string>
     <string name="permission_location_explanation">c:geo è ottimizzato per l\'utilizzo con i dati GPS (posizione fine) per individuare la posizione e calcolare la distanza e la direzione per i geocache. Senza questo permesso, le funzioni basate sulla posizione non funzioneranno come previsto.</string>
-    <string name="permission_read_external_storage_explanation_title">Permessi di lettura memoria esterna</string>
-    <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo scriverà dati sulla memoria del telefono o sulla scheda SD, ad es. quando si salvano geocache per l\'uso offline, importare o esportare file e altre funzioni. Su alcune versioni di Android, è necessario concedere un permesso aggiuntivo per queste azioni.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permessi di lettura memoria esterna (legacy)</string>
     <string name="permission_post_notifications_explanation">c:geo utilizza le notifiche per informarti dei download e dell\'avvicinamento a cache (se attivato)</string>
