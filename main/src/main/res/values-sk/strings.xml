@@ -1647,7 +1647,6 @@
     <string name="search_finder">Nájdené kým</string>
     <string name="search_finder_prefill">Nálezca</string>
     <string name="search_finder_button">Hľadať podľa mena nálezcu</string>
-    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>
@@ -2060,7 +2059,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
-    <string name="tts_toggle">Prepnúť hlasové pokyny</string>
     <string name="tts_started">Rozprávanie zapnuté</string>
     <string name="tts_stopped">Rozprávanie vypnuté</string>
     <string name="tts_running">Služba prevodu na reč je spustená…</string>
@@ -2185,8 +2183,6 @@
     <string name="permission_contacts_read_explanation">c:geo dokáže vyhľadávať kontakty vo vašom adresári pomocou mien kešerov. Ak to chcete urobiť, je potrebné povoliť aplikácii c:geo čítanie vášho adresára. V opačnom prípade nie je možné túto funkciu použiť.</string>
     <string name="permission_location_explanation_title">Povolenie k polohe</string>
     <string name="permission_location_explanation">Aplikácia c:geo je optimalizovaná na použitie s údajmi GPS (presná poloha) na určenie polohy a výpočet vzdialenosti a smeru ku keške. Bez tohto povolenia nebudú funkcie založené na polohe fungovať podľa očakávania.</string>
-    <string name="permission_read_external_storage_explanation_title">Povolenie na čítanie externého úložiska</string>
-    <string name="permission_read_external_storage_explanation">Aplikácia c:geo môžeš použiť vašu systémovú tapetu ako pozadie v aplikácii. Na to potrebuje aplikácia c:geo povolenie na čítanie mediálnych údajov na externom úložisku.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo zapísuje údaje do pamäte telefónu alebo na SD kartu, napr. keď ukladáte kešky na použitie offline, importujete alebo exportujete súbory a pri ďalších funkciách. V niektorých verziách systému Androidu je potrebné na tieto úkony udeliť dodatočné povolenie.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Staršie povolenie na zápis do externého úložiska</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
