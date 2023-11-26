@@ -6,3 +6,4 @@
 
 ### Geral
 - Novo: Ao tocar na notificação do gestor de transferências abre a visualização "transferências pendentes"
+- Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
