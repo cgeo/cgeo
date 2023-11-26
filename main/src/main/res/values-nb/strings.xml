@@ -1381,7 +1381,6 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
@@ -1786,7 +1785,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Du bruker en versjon av c:geo som ser ut til å være eldre enn ett år. Enkelte funksjoner fungerer kanskje ikke lenger på grunn av nettstedets eller andre tekniske endringer. Vennligst les vår FAQ om hvordan du oppgraderer.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompass</string>
-    <string name="tts_toggle">Skru av/på taleinstruksjoner</string>
     <string name="tts_started">Startet tale</string>
     <string name="tts_stopped">Stoppet tale</string>
     <string name="err_tts_lang_not_supported">Dette språket er ikke støttet av text-to-speech.</string>
