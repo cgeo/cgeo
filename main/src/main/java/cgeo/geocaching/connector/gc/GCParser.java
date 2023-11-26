@@ -1813,13 +1813,17 @@ public final class GCParser {
 
                     final ArrayNode images = (ArrayNode) entry.get("Images");
                     for (final JsonNode image : images) {
+                        final String imageGuid = image.path("ImageGuid").asText();
+                        final String imageId = image.path("ImageID").asText();
                         final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                         final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                         String description = image.path("Descr").asText();
                         if (StringUtils.contains(description, "Geocaching®") && description.length() < 60) {
                             description = null;
                         }
-                        final Image logImage = new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build();
+                        final Image logImage = new Image.Builder()
+                            .setServiceImageId(imageGuid + "::" + imageId)
+                            .setUrl(url).setTitle(title).setDescription(description).build();
                         logDoneBuilder.addLogImage(logImage);
                     }
 

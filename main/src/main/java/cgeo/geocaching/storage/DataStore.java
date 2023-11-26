@@ -237,7 +237,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 100;
+    private static final int dbVersion = 101;
     public static final int customListIdOffset = 10;
 
     /**
@@ -273,7 +273,8 @@ public class DataStore {
             97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
             98, // add table cg_variables to store cache variables
             99,  // add alcMode to differentiate Linear vs Random
-            100 // add column "tier" and table for cache categories. Initially used for bettercacher.org data
+            100, // add column "tier" and table for cache categories. Initially used for bettercacher.org data
+            101  //add service_image_id to saved log images
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -445,7 +446,8 @@ public class DataStore {
             + "log_id INTEGER NOT NULL, "
             + "title TEXT NOT NULL, "
             + "url TEXT NOT NULL, "
-            + "description TEXT "
+            + "description TEXT, "
+            + "service_image_id TEXT"
             + "); ";
     private static final String dbCreateLogsOffline = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLogsOffline + " ("
@@ -1787,6 +1789,15 @@ public class DataStore {
                         }
                     }
 
+                    //create new column
+                    if (oldVersion < 101) {
+                        try {
+                            createColumnIfNotExists(db, dbTableLogImages, "service_image_id TEXT");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 101);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2754,6 +2765,11 @@ public class DataStore {
                         insertImage.bindString(2, StringUtils.defaultIfBlank(img.title, ""));
                         insertImage.bindString(3, img.getUrl());
                         insertImage.bindString(4, StringUtils.defaultIfBlank(img.getDescription(), ""));
+                        if (img.serviceImageId == null) {
+                            insertImage.bindNull(5);
+                        } else {
+                            insertImage.bindString(5, img.serviceImageId);
+                        }
                         insertImage.executeInsert();
                     }
                 }
@@ -3647,8 +3663,8 @@ public class DataStore {
                 init();
 
                 final Cursor cursor = database.rawQuery(
-                        //                           0          1               2     3       4            5    6     7      8                                       9                10      11     12   13
-                        "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description"
+                        //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
+                        "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"
                                 + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                                 + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
 
@@ -3672,11 +3688,11 @@ public class DataStore {
                                 .setFound(cursor.getInt(7))
                                 .setFriend(cursor.getInt(8) == 1);
                         if (!cursor.isNull(9)) {
-                            log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
+                            log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).setServiceImageId(cursor.getString(14)).build());
                         }
                     } else {
                         // We cannot get several lines for the same log entry if it does not contain an image.
-                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
+                        log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).setServiceImageId(cursor.getString(14)).build());
                     }
                 }
                 if (log != null) {
@@ -5045,7 +5061,7 @@ public class DataStore {
         REMOVE_FROM_ALL_LISTS("DELETE FROM " + dbTableCachesLists + " WHERE geocode = ?"),
         REMOVE_ALL_FROM_LIST("DELETE FROM " + dbTableCachesLists + " WHERE list_id = ?"),
         UPDATE_VISIT_DATE("UPDATE " + dbTableCaches + " SET visiteddate = ? WHERE geocode = ?"),
-        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url, description) VALUES (?, ?, ?, ?)"),
+        INSERT_LOG_IMAGE("INSERT INTO " + dbTableLogImages + " (log_id, title, url, description, service_image_id) VALUES (?, ?, ?, ?, ?)"),
         INSERT_LOG_COUNTS("INSERT INTO " + dbTableLogCount + " (geocode, updated, type, count) VALUES (?, ?, ?, ?)"),
         INSERT_SPOILER("INSERT INTO " + dbTableSpoilers + " (geocode, updated, url, title, description) VALUES (?, ?, ?, ?, ?)"),
         REMOVE_SPOILERS("DELETE FROM " + dbTableSpoilers + " WHERE geocode = ?"),
