@@ -1682,7 +1682,6 @@
     <string name="search_finder">Löytänyt</string>
     <string name="search_finder_prefill">Löytäjä</string>
     <string name="search_finder_button">Etsi löytäjän mukaan</string>
-    <string name="search_filter">Suodata</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
@@ -2093,7 +2092,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Käytät c:geon versiota joka näyttää olevan vanhempi kuin yksi vuosi. Voi olla, että jotkut ominaisuudet eivät enää toimi johtuen verkkosivujen tai muiden teknisten seikkojen muutosten vuoksi. Ole hyvä ja päivitä ohjelmasi.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Puhuva kompassi</string>
-    <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
     <string name="tts_started">Puhuminen aloitettu</string>
     <string name="tts_stopped">Puhuminen lopetettu</string>
     <string name="tts_running">Puhepalvelu on käynnissä…</string>
@@ -2198,8 +2196,6 @@
     <string name="permission_contacts_read_explanation">c:geo voi etsiä yhteystietoja osoitekirjassasi käyttäen kätköilijän nimikerkkiä. Tehdäksesi tämän, sinun tulee valtuuttaa c:geo lukemaan osoitekirjaasi. Muuten tämän toiminnon käyttö ei ole mahdollista.</string>
     <string name="permission_location_explanation_title">Sijainnin käyttöoikeus</string>
     <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
-    <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
-    <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
