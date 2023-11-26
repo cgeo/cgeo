@@ -1730,7 +1730,6 @@
     <string name="search_finder">Trobat per</string>
     <string name="search_finder_prefill">Cercador</string>
     <string name="search_finder_button">Cerca pel nom del cercador</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
@@ -2142,7 +2141,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
-    <string name="tts_toggle">Activa/Desact. la veu</string>
     <string name="tts_started">S\'ha iniciat el mode parlat</string>
     <string name="tts_stopped">S\'ha aturat el mode parlat</string>
     <string name="tts_running">El servei de veu està en funcionament…</string>
@@ -2248,8 +2246,6 @@
     <string name="permission_contacts_read_explanation">C:geo pot cercar contactes a la vostra llibreta d\'adreces mitjançant els noms del catxé. Per fer-ho, heu d\'autoritzar c:geo a llegir la vostra llibreta d\'adreces. En cas contrari, l\'ús d\'aquesta funció no és possible.</string>
     <string name="permission_location_explanation_title">Permís d\'ubicació</string>
     <string name="permission_location_explanation">C:geo està optimitzat per utilitzar-lo amb dades GPS (ubicació fina) per localitzar la vostra posició i calcular la distància i la direcció cap als geocatxés. Sense aquest permís, les funcions basades en la ubicació no funcionaran com s\'esperava.</string>
-    <string name="permission_read_external_storage_explanation_title">Llegir el permís d\'emmagatzematge extern</string>
-    <string name="permission_read_external_storage_explanation">C:geo pot utilitzar el fons de pantalla del vostre sistema com a fons de l\'aplicació. Per fer-ho, c:geo necessita permís per llegir les vostres dades multimèdia a l\'emmagatzematge extern.</string>
     <string name="permission_legacy_write_external_storage_explanation">C:geo escriurà dades a l\'emmagatzematge del telèfon o a la targeta SD, ex. Quan deseu catxés per utilitzar-los fora de línia, importeu o exporteu fitxers i altres funcions. En algunes versions d\'Android, heu de concedir un permís addicional per a aquestes accions.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permís d\'emmagatzematge extern d\'escriptura</string>
     <string name="permission_post_notifications_explanation">C:geo utilitza notificacions per informar-vos sobre les descàrregues i els catxés (si està activat)</string>
