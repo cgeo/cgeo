@@ -191,10 +191,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
-        if (Settings.enableFeatureNewGCLogApi()) {
-            return GC_BASE_URL + "live/geocache/" + cache.getGeocode() + "/log";
-        }
-        return GC_BASE_URL + "play/geocache/" + cache.getGeocode() + "/log";
+        return GC_BASE_URL + "live/geocache/" + cache.getGeocode() + "/log";
     }
 
     @Override

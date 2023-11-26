@@ -19,7 +19,6 @@ import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
@@ -41,7 +40,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.UUID;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -1041,52 +1039,8 @@ public class GCWebAPI {
                 + "; date: " + date + ", log: " + logInfo
                 + "; trackables: " + trackables.size());
 
-        if (Settings.enableFeatureNewGCLogApi()) {
-            return postLogNew(geocache, logType, date, log, trackables, addToFavorites);
-        }
 
-        try {
-            // coordinates are only used for LogType.UPDATE_COORDINATES, which c:geo doesn't support at the moment
-            final double latitude = 0.0;
-            final double longitude = 0.0;
-
-            final String logDate = formatGCDate(date);
-
-            // Make the post body
-            final Parameters params = new Parameters();
-            params.put("geocache[id]", geocache.getCacheId()).
-                    put("geocache[referenceCode]", geocache.getGeocode()).
-                    put("geocache[postedCoordinates][latitude]", formatDouble(latitude)).
-                    put("geocache[postedCoordinates][longitude]", formatDouble(longitude)).
-                    put("geocache[callerSpecific][favorited]", formatBoolean(addToFavorites)).
-                    put("logType", String.valueOf(logType.id)).
-                    put("ownerIsViewing", formatBoolean(geocache.isOwner())).
-                    put("logDate", logDate).
-                    put("logText", logInfo).
-                    put("usedFavoritePoint", formatBoolean(addToFavorites));
-
-            final GeocacheLog geocacheLog = new GeocacheLog(geocache.getCacheId(), geocache.getGeocode(),
-                    latitude, longitude, addToFavorites, String.valueOf(logType.id),
-                    geocache.isOwner(), logDate, logInfo, addToFavorites);
-
-            final PostLogResponse response =
-                    postAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocache.getGeocode())
-                            + "/GeocacheLog", geocacheLog, PostLogResponse.class).blockingGet();
-
-            if (response.referenceCode == null) {
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
-            }
-
-            if (!postLogTrackable(geocache.getGeocode(), logDate, trackables)) {
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
-            }
-
-            Log.i("Log successfully posted to cache #" + geocache.getCacheId());
-            return new ImmutablePair<>(StatusCode.NO_ERROR, response.referenceCode);
-        } catch (final Exception e) {
-            Log.e("Error posting log", e);
-        }
-        return new ImmutablePair<>(StatusCode.LOG_POST_ERROR, "");
+        return postLogInternal(geocache, logType, date, log, trackables, addToFavorites);
     }
 
     private static String formatDouble(final double dbl) {
@@ -1162,111 +1116,6 @@ public class GCWebAPI {
      */
     static Single<Integer> getAvailableFavoritePoints(final String profile) {
         return getAPI("/web/v1/users/" + profile + "/availablefavoritepoints", Integer.class);
-    }
-
-    /**
-     * Post an image and attach it to the log.
-     *
-     * The following sequence of http requests have to be performed:
-     *
-     * 0) GET to https://www.geocaching.com/play/geocache/(geocode)/log
-     * Grab value of input field "__RequestVerificationToken" from HTML, is needed for request 3) below
-     *
-     * 1)
-     * Post image to: https://www.geocaching.com/api/proxy/web/v1/LogDrafts/images
-     * Request:
-     * Content-Type: multipart/form-data; boundary=----WebKitFormBoundary75K6f...
-     * <pre>
-     * ------WebKitFormBoundary75K6f...
-     * Content-Disposition: form-data; name="guid"
-     *
-     * 14242d4d-...
-     * ------WebKitFormBoundary75K6f...
-     * Content-Disposition: form-data; name="qqfilename"
-     *
-     * ic_launcher.png
-     * ------WebKitFormBoundary75K6f...
-     * Content-Disposition: form-data; name="qqtotalfilesize"
-     *
-     * 13959
-     * ------WebKitFormBoundary75K6f...
-     * Content-Disposition: form-data; name="qqfile"; filename="filename.png"
-     * Content-Type: image/png
-     *
-     *
-     * ------WebKitFormBoundary75K6f...--
-     * </pre>
-     * Response:
-     * {"guid":"14242d4d-...","url":"https://img.geocaching.com/14242d4d-...jpg","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","success":true}
-     *
-     *
-     * 2)
-     * PATCH: https://www.geocaching.com/api/proxy/web/v1/LogDrafts/images/14242d4d-...?geocacheLogReferenceCode=GL...
-     * Response (not used):
-     * {"guid":"2dc54b26-...","name":" "}
-     *
-     *
-     * 3)
-     * POST: https://www.geocaching.com/api/proxy/web/v1/geocaches/logs/GL.../images/14242d4d-...
-     * Request:
-     * Header: X-Verification-Token: (verificationToken)
-     * Body:
-     * <pre>
-     *     {"name":"","uuid":"","guid":"14242d4d-ca1f-425e-9496-aa830d769350","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","dateTaken":"2017-09-07","description":"","qqDropTarget":{},"id":3,"filename":"filename.png","lastModified":1494143750916,"lastModifiedDate":"2017-05-07T07:55:50.916Z","webkitRelativePath":"","size":13959,"type":"image/png"}
-     * </pre>
-     * Response not used
-     */
-    @WorkerThread
-    @NonNull
-    static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
-
-        if (Settings.enableFeatureNewGCLogApi()) {
-            return postLogImageNew(geocode, logId, image);
-        }
-
-        // 0) open log page to get a Request Token
-        final String html = httpReq().uri(WEBSITE_URL + "/play/geocache/" + geocode + "/log").request().blockingGet().getBodyString();
-        if (html == null) {
-            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
-        }
-        final String requestVerificationToken = TextUtils.getMatch(html, PATTERN_REQUEST_VERIFICATION_TOKEN, null);
-        if (requestVerificationToken == null) {
-            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
-        }
-
-        // 1) upload image to drafts
-        final Parameters params = new Parameters();
-        params.put("guid", UUID.randomUUID().toString());
-
-        final PostLogImageResponse postImageResponse = apiReq().uri("/web/v1/LogDrafts/images").bodyForm(params, "qqfilename", "image/jpeg", image.getFile()).requestJson(PostLogImageResponse.class).blockingGet();
-        if (!postImageResponse.success) {
-            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
-        }
-
-        // 2) patch draft image with logId
-        final HttpResponse patchResponse = apiReq().uri("/web/v1/LogDrafts/images/" + postImageResponse.guid + "?geocacheLogReferenceCode=" + logId).method(HttpRequest.Method.PATCH).request().blockingGet();
-        if (!patchResponse.isSuccessful()) {
-            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
-        }
-
-        // 3) attach image to log
-        final AttachLogImageRequest attachImageRequest = new AttachLogImageRequest();
-        attachImageRequest.guid = postImageResponse.guid;
-        attachImageRequest.type = "image/jpeg";
-        attachImageRequest.thumbnailUrl = postImageResponse.thumbnailUrl;
-        attachImageRequest.name = StringUtils.defaultString(image.getTitle());
-        attachImageRequest.description = StringUtils.defaultString(image.getDescription());
-
-        final HttpResponse attachResponse = apiReq()
-                .uri("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid)
-                .bodyJson(attachImageRequest)
-                .headers("X-Verification-Token", requestVerificationToken)
-                .request().blockingGet();
-        if (!attachResponse.isSuccessful()) {
-            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
-        }
-
-        return new ImmutablePair<>(StatusCode.NO_ERROR, postImageResponse.url);
     }
 
     @NonNull
@@ -1437,10 +1286,10 @@ public class GCWebAPI {
     //New Log API
     @NonNull
     @WorkerThread
-    public static ImmutablePair<StatusCode, String> postLogNew (final Geocache geocache,
-                                                     final LogType logType, final Date date,
-                                                     final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
-                                                     final boolean addToFavorites) {
+    public static ImmutablePair<StatusCode, String> postLogInternal(final Geocache geocache,
+                                                                    final LogType logType, final Date date,
+                                                                    final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
+                                                                    final boolean addToFavorites) {
 
         final String geocode = geocache.getGeocode();
         //1.) Call log page and get a valid CSRF Token
@@ -1480,13 +1329,12 @@ public class GCWebAPI {
 
     @WorkerThread
     @NonNull
-    static ImmutablePair<StatusCode, String> postLogImageNew(final String geocode, final String logId, final Image image) {
+    static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
         //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
         if (csrfToken == null) {
-            //try old log flow
             Log.w("Log Image Post: unable to extract CSRF Token in new Log Flow Page");
-            return postLogImage(geocode, logId, image);
+            return generateLogError(true, "No CSRFToken found");
         }
 
         //2) Create a new "image" attached to the log, uploading only image data
@@ -1527,7 +1375,7 @@ public class GCWebAPI {
         return new ImmutablePair<>(StatusCode.NO_ERROR, imgResponse.url);
     }
 
-    public static ImmutablePair<StatusCode, String> postLogTrackableNew(final cgeo.geocaching.log.TrackableLog trackableLog, final Date date, final String log) {
+    public static ImmutablePair<StatusCode, String> postLogTrackable(final cgeo.geocaching.log.TrackableLog trackableLog, final Date date, final String log) {
         final String tbCode = trackableLog.geocode;
 
         //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log

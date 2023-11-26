@@ -15,7 +15,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
-import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -54,8 +53,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
             hasLoaderError = true;
         } else {
             viewstates = GCLogin.getViewstates(page);
-            possibleLogTypesTrackable = Settings.enableFeatureNewGCLogApi() ?
-                    GCParser.parseLogTypesTrackablesNew(page) : GCParser.parseLogTypesTrackables(page);
+            possibleLogTypesTrackable = GCParser.parseLogTypesTrackables(page);
             hasLoaderError = possibleLogTypesTrackable.isEmpty();
         }
         return possibleLogTypesTrackable;
@@ -71,30 +69,13 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
         LastTrackableAction.setAction(trackableLog);
 
-        if (Settings.enableFeatureNewGCLogApi()) {
-            final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackableNew(trackableLog, date.getTime(), log);
-            //if result is null then old log flow shall be used. If result is non-null then new log flow was used
-            if (result != null) {
-                return new LogResult(result.left, result.right);
-            }
+        final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackable(trackableLog, date.getTime(), log);
+        if (result == null) {
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
-        try {
+        return new LogResult(result.left, result.right);
 
-            return GCParser.postLogTrackable(
-                    guid,
-                    trackableLog.trackCode,
-                    viewstates,
-                    trackableLog.action,
-                    date.get(Calendar.YEAR),
-                    date.get(Calendar.MONTH) + 1,
-                    date.get(Calendar.DATE),
-                    log);
-        } catch (final Exception e) {
-            Log.e("TrackableLoggingManager.postLog", e);
-        }
-
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     @Override

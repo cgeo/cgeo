@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -1313,64 +1312,6 @@ public final class GCParser {
     }
 
     /**
-     * Post a log to GC.com.
-     *
-     * @return status code of the upload and ID of the log
-     */
-    @NonNull
-    @WorkerThread
-    public static LogResult postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
-                                             final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
-        if (GCLogin.isEmpty(viewstates)) {
-            Log.e("GCParser.postLogTrackable: No viewstate given");
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
-        }
-
-        if (StringUtils.isBlank(log)) {
-            Log.w("GCParser.postLogTrackable: No log text given");
-            return new LogResult(StatusCode.NO_LOG_TEXT, "");
-        }
-
-        Log.i("Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
-
-        final String logInfo = log.replace("\n", "\r\n"); // windows' eol
-
-        final Parameters params = new Parameters(
-                "__EVENTTARGET", "",
-                "__EVENTARGUMENT", "",
-                "__LASTFOCUS", "",
-                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
-                "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode,
-                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", month + "/" + day + "/" + year,
-                "ctl00$ContentBody$LogBookPanel1$uxDateVisited", GCLogin.formatGcCustomDate(year, month, day),
-                "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
-                "ctl00$ContentBody$LogBookPanel1$btnSubmitLog", "Submit Log Entry",
-                "ctl00$ContentBody$uxVistOtherTrackableTB", "");
-        GCLogin.putViewstates(params, viewstates);
-
-        final String uri = new Uri.Builder().scheme("https").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
-        final String page = GCLogin.getInstance().postRequestLogged(uri, params);
-        if (!GCLogin.getInstance().getLoginStatus(page)) {
-            Log.e("GCParser.postLogTrackable: Cannot log in geocaching");
-            return new LogResult(StatusCode.NOT_LOGGED_IN, "");
-        }
-
-        try {
-
-            final MatcherWrapper matcherOk = new MatcherWrapper(GCConstants.PATTERN_OK2, page);
-            if (matcherOk.find()) {
-                Log.i("Log successfully posted to trackable #" + trackingCode);
-                return new LogResult(StatusCode.NO_ERROR, "");
-            }
-        } catch (final Exception e) {
-            Log.e("GCParser.postLogTrackable.check", e);
-        }
-
-        Log.e("GCParser.postLogTrackable: Failed to post log because of unknown error");
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
-    }
-
-    /**
      * Adds the cache to the watchlist of the user.
      *
      * @param cache the cache to add
@@ -1896,63 +1837,20 @@ public final class GCParser {
     /**
      * Javascript Object from the new Logpage: https://www.geocaching.com/play/geocache/gc.../log
      * <pre>
-     *     {"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false}
-     * </pre>
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    private static final class AvailableLogType {
-        @JsonProperty("Value")
-        int value;
-        @JsonProperty("Description")
-        String description;
-        @JsonProperty("IsRealtimeOnly")
-        boolean isRealtimeOnly;
-    }
-
-    /**
-     * Javascript Object from the new Logpage: https://www.geocaching.com/play/geocache/gc.../log
-     * <pre>
      *     {"value":46}
      * </pre>
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    private static final class AvailableLogTypeNew {
+    private static final class AvailableLogType {
         @JsonProperty("value")
         int value;
     }
 
     @NonNull
-    static List<LogType> parseTypes(final String page) {
-        if (StringUtils.isEmpty(page)) {
-            return Collections.emptyList();
-        }
-
-        final List<LogType> types = new ArrayList<>();
-        final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE3, page);
-        while (typeMatcher.find()) {
-            try {
-                final AvailableLogType availableLogType = MAPPER.readValue(typeMatcher.group(1), AvailableLogType.class);
-                if (availableLogType.value > 0) {
-                    types.add(LogType.getById(availableLogType.value));
-                }
-            } catch (final Exception e) {
-                Log.e("Error parsing log types", e);
-            }
-        }
-
-        // we don't support this log type
-        types.remove(LogType.UPDATE_COORDINATES);
-
-        return types;
-    }
-
-    @NonNull
-    public static List<LogTypeTrackable> parseLogTypesTrackablesNew(final String page) {
-        final AvailableLogTypeNew[] availableTypes = parseLogTypesNew(page);
+    public static List<LogTypeTrackable> parseLogTypesTrackables(final String page) {
+        final AvailableLogType[] availableTypes = parseLogTypes(page);
         if (availableTypes == null) {
-            //September 2023: same note as in method "parseTypesNew" also applies here
-            return parseLogTypesTrackables(page);
-            //return Collections.emptyList();
+            return Collections.emptyList();
         }
         return CollectionStream.of(availableTypes)
                 .filter(a -> a.value > 0)
@@ -1961,16 +1859,10 @@ public final class GCParser {
     }
 
     @NonNull
-    static List<LogType> parseTypesNew(final String page) {
-            final AvailableLogTypeNew[] availableTypes = parseLogTypesNew(page);
+    static List<LogType> parseTypes(final String page) {
+            final AvailableLogType[] availableTypes = parseLogTypes(page);
             if (availableTypes == null) {
-                //September 2023:
-                // During migration time of gc.com to new log page there is still the old page returned for non-migrated members.
-                //--> call old parser in this case.
-                //-- > when migration is completed on gc.com side, replace with: return Collections.emptyList();
-                //see https://github.com/orgs/cgeo/discussions/77 for complete discussion
-                return parseTypes(page);
-                //return Collections.emptyList();
+                return Collections.emptyList();
             }
             return CollectionStream.of(availableTypes)
                     .filter(a -> a.value > 0)
@@ -1979,10 +1871,10 @@ public final class GCParser {
                     .toList();
         }
 
-    private static AvailableLogTypeNew[] parseLogTypesNew(final String page) {
+    private static AvailableLogType[] parseLogTypes(final String page) {
         //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
         if (StringUtils.isBlank(page)) {
-            return new AvailableLogTypeNew[0];
+            return new AvailableLogType[0];
         }
 
         final String match = TextUtils.getMatch(page, GCConstants.PATTERN_TYPE4, null);
@@ -1990,37 +1882,11 @@ public final class GCParser {
             return null;
         }
         try {
-            return MAPPER.readValue("[" + match + "]", AvailableLogTypeNew[].class);
+            return MAPPER.readValue("[" + match + "]", AvailableLogType[].class);
         } catch (final Exception e) {
             Log.e("Error parsing log types from [" + match + "]", e);
-            return new AvailableLogTypeNew[0];
+            return new AvailableLogType[0];
         }
-    }
-
-    @NonNull
-    public static List<LogTypeTrackable> parseLogTypesTrackables(final String page) {
-        if (StringUtils.isEmpty(page)) {
-            return new ArrayList<>();
-        }
-
-        final List<LogTypeTrackable> types = new ArrayList<>();
-
-        final MatcherWrapper typeBoxMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPEBOX, page);
-        if (typeBoxMatcher.find()) {
-            final String typesText = typeBoxMatcher.group(1);
-            final MatcherWrapper typeMatcher = new MatcherWrapper(GCConstants.PATTERN_TYPE2, typesText);
-            while (typeMatcher.find()) {
-                try {
-                    final int type = Integer.parseInt(typeMatcher.group(2));
-                    if (type > 0) {
-                        types.add(LogTypeTrackable.getById(type));
-                    }
-                } catch (final NumberFormatException e) {
-                    Log.e("Error parsing trackable log types", e);
-                }
-            }
-        }
-        return types;
     }
 
     @WorkerThread
