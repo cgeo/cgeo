@@ -3,6 +3,7 @@
 - Fix: coord.info trackable links cannot be opened any more
 - Fix: Wrong default when manually logging a trackable
 - Fix: Cache icon on map not updated after logging from popup
+- Fix: Crash on displaying logging options
 
 ##
 - Изменение: Удалено отдельное поле Better Catcher, заменено на информационную страницу Better Catcher
