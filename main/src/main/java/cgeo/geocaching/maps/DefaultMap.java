@@ -24,7 +24,12 @@ public final class DefaultMap {
     }
 
     public static Intent getLiveMapIntent(final Activity fromActivity, final Class<?> cls) {
-        return new MapOptions().newIntent(fromActivity, cls);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in live mode");
+            return new UnifiedMapType().getLaunchMapIntent(fromActivity);
+        } else {
+            return new MapOptions().newIntent(fromActivity, cls);
+        }
     }
 
     public static Intent getLiveMapIntent(final Activity fromActivity) {
