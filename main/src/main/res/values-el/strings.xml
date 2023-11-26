@@ -1545,7 +1545,6 @@
     <string name="search_finder">Βρέθηκε από</string>
     <string name="search_finder_prefill">Το βρήκε</string>
     <string name="search_finder_button">Αναζήτηση με το όνομα του παίκτη</string>
-    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
@@ -1956,7 +1955,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
-    <string name="tts_toggle">Φωνητική καθοδήγηση</string>
     <string name="tts_started">Η ομιλία άρχισε</string>
     <string name="tts_stopped">Η ομιλία σταμάτησε</string>
     <string name="tts_running">Η υπηρεσία ομιλίας εκτελείται…</string>
