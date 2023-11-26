@@ -1515,7 +1515,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Din enhed bruger en version af c:geo, som er ældre end et år. Tekniske ændringer på benyttede tjenester kan bevirke at nogle funktioner ikke længere fungerer. Læs venligst vores OSS om hvordan du opgraderer.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompas</string>
-    <string name="tts_toggle">Skift tekst-til-tale-tilstand</string>
     <string name="tts_started">Tale startet</string>
     <string name="tts_stopped">Tale stoppet</string>
     <string name="err_tts_lang_not_supported">Det aktuelle sprog understøttes ikke af tekst-til-tale.</string>
