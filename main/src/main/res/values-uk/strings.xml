@@ -1287,7 +1287,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Ви використовуєте версію c:geo, яка, здається, старша за один рік. Деякі функції можуть не працювати більше через веб-сайт або інші технічні зміни. Будь ласка, прочитайте наші FAQ про те, як оновити їх.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Компас для розмови</string>
-    <string name="tts_toggle">перемикати розмову</string>
     <string name="tts_started">початок мовлення</string>
     <string name="tts_stopped">Припинено мовлення</string>
     <string name="err_tts_lang_not_supported">Поточна мова не підтримується синтезом мовлення.</string>
