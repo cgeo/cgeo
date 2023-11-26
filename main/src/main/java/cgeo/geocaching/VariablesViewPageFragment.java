@@ -146,7 +146,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             ActivityMixin.showShortToast(activity, R.string.variables_scanlisting_nopatternfound);
         } else {
             final SimpleDialog.ItemSelectModel<String> model = new SimpleDialog.ItemSelectModel<>();
-            model.setItems(patterns).setDisplayMapper((s, i) -> TextParam.text("`" + s + "`").setMarkdown(true));
+            model.setItems(patterns).setDisplayMapper((s) -> TextParam.text("`" + s + "`").setMarkdown(true));
 
             SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
                     .selectMultiple(model, set -> {

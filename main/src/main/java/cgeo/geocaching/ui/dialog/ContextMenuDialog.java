@@ -81,7 +81,7 @@ public class ContextMenuDialog {
         final SimpleDialog.ItemSelectModel<ContextMenuDialog.Item> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(items)
-            .setDisplayMapper((it, pos) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0))
+            .setDisplayMapper((it) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
             .setMinimumItemCountForFilterDisplay(Integer.MAX_VALUE);
 

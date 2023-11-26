@@ -5,8 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="0dp">
+    android:orientation="vertical">
 
     <!-- Message field -->
     <TextView
@@ -33,7 +32,6 @@
 
     <!-- Item List -->
     <cgeo.geocaching.ui.SimpleItemListView
-        android:paddingHorizontal="10dp"
         android:id="@+id/dialog_itemlistview"
         android:visibility="gone"
         android:layout_width="match_parent"

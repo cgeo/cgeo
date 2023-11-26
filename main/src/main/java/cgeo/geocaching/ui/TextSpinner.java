@@ -132,7 +132,9 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     public TextSpinner<T> setDisplayMapperPure(@Nullable final Func1<T, String> displayMapper) {
-        return setDisplayMapper(displayMapper == null ? null : v -> TextParam.text(displayMapper.call(v)));
+        return setDisplayMapper(displayMapper == null ? null : v -> {
+            return TextParam.text(displayMapper.call(v));
+        });
     }
 
     /**
@@ -373,16 +375,14 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(valuesCopy)
-                .setDisplayMapper((v, i) -> itemToString(v, false))
+                .setDisplayMapper((v) -> itemToString(v, false))
                 .setSelectedItems(Collections.singleton(selectedItem))
                 .setChoiceMode(this.textHideSelectionMarker ? SimpleItemListModel.ChoiceMode.SINGLE_PLAIN : SimpleItemListModel.ChoiceMode.SINGLE_RADIO)
-                .setMinimumItemCountForFilterDisplay(Integer.MAX_VALUE);
+                .setMinimumItemCountForFilterDisplay(20);
 
             if (this.textGroupMapper != null) {
-                model.setGrouping(go -> {
-                    go.setGroupMapper((v, i) -> this.textGroupMapper.call(v))
-                            .setGroupDisplayMapper(s -> TextParam.text("**" + s + "**").setMarkdown(true));
-                });
+                model.activateGrouping((v) -> this.textGroupMapper.call(v))
+                        .setGroupDisplayMapper(s -> TextParam.text("**" + s + "**").setMarkdown(true));
             }
             sd.selectSingle(model, this::set);
         }

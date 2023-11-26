@@ -2,6 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.utils.TextUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Comparator;
@@ -42,5 +43,17 @@ public class RouteOrRouteItem {
     @Nullable
     public Route getRoute() {
         return isRoute() ? (Route) data : null;
+    }
+
+    @NonNull
+    public String getName() {
+        String name = null;
+        if (isRoute()) {
+            name = getRoute().getName();
+        }
+        if (isRouteItem()) {
+            name = getRouteItem().getName();
+        }
+        return name == null ? "" : name;
     }
 }

@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.SimpleitemlistViewBinding;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.functions.Func4;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -36,6 +37,8 @@ public class SimpleItemListView extends LinearLayout {
 
     private enum ListItemType { ITEM, GROUPHEADER, SELECT_ALL, SELECTED_VISIBLE }
 
+    private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()));
+
     private SimpleitemlistViewBinding binding;
     private ItemListAdapter listAdapter;
 
@@ -51,7 +54,7 @@ public class SimpleItemListView extends LinearLayout {
 
         public final Object value;
 
-        public final TextParam text;
+        //public final TextParam text;
         public final ImageParam icon;
         public final ImageParam actionIcon;
 
@@ -63,10 +66,9 @@ public class SimpleItemListView extends LinearLayout {
         public final int groupFirstItemIndex; // only filled if isGroupHeader = true
         public final int groupCount; // only filled if isGroupHeader = true
 
-        private ListItem(final Object value, final TextParam text, final ImageParam icon, final ImageParam actionIcon, final ListItemType type,
+        private ListItem(final Object value, final ImageParam icon, final ImageParam actionIcon, final ListItemType type,
                         final int originalIndex, final Object group, final int groupFirstItemIndex, final int groupCount) {
             this.value = value;
-            this.text = text;
             this.icon = icon;
             this.actionIcon = actionIcon;
             this.type = type;
@@ -80,19 +82,18 @@ public class SimpleItemListView extends LinearLayout {
 
     private ListItem createForItem(final Object value, final int originalIndex, final Object group) {
         return new ListItem(value,
-                model.getDisplayMapper().call(value, originalIndex),
-                model.getDisplayIconMapper().call(value, originalIndex),
-                model.getActionIconMapper().call(value, originalIndex),
-                ListItemType.ITEM, originalIndex, group, -1, -1);
+            model.getDisplayIconMapper().call(value),
+            model.getActionIconMapper().call(value),
+            ListItemType.ITEM, originalIndex, group, -1, -1);
     }
 
     private ListItem createForGroup(final Object group, final int groupFirstItemIndex, final int groupSize) {
-        return new ListItem(group, model.getGroupDisplayMapper().call(group),
-                model.getGroupDisplayIconMapper().call(group), null, ListItemType.GROUPHEADER,  -1, -1, groupFirstItemIndex, groupSize);
+        return new ListItem(group, model.getGroupingOptions().getGroupDisplayIconMapper().call(group),
+    null, ListItemType.GROUPHEADER,  -1, -1, groupFirstItemIndex, groupSize);
     }
 
     private ListItem createForType(final ListItemType type) {
-        return new ListItem(null, TextParam.id(R.string.cache_filter_status_select_all), null, null, type,  -1, -1, -1, -1);
+        return new ListItem(null, null, null, type,  -1, -1, -1, -1);
     }
 
 
@@ -114,23 +115,20 @@ public class SimpleItemListView extends LinearLayout {
             switch (data.type) {
                 case SELECT_ALL:
                     final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + model.getItems().size() + ")>";
-                    binding.itemText.setText(selectAllText);
+                    applyItemView(binding, selectAllText, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(model.getSelectedItems().size() == model.getItems().size());
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 case SELECTED_VISIBLE:
                     final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + currentlyVisible + ")>";
-                    binding.itemText.setText(selectVisibleText);
+                    applyItemView(binding, selectVisibleText, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(currentlyVisibleSelected == currentlyVisible);
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 default:
-                    //handling of groups and items is identical
-                    if (data.text == null) {
-                        binding.itemText.setText("--");
-                    } else {
-                        data.text.applyTo(binding.itemText);
-                    }
+                    //handling of groups and items
+                    applyItemView(binding, data.value, data.type == ListItemType.GROUPHEADER ? model.getGroupingOptions().getGroupDisplayViewMapper() : model.getDisplayViewMapper());
+
                     final boolean showIcon = data.icon != null || (data.type == ListItemType.GROUPHEADER ? groupsHaveIcons : itemsHaveIcons);
                     if (showIcon) {
                         (data.icon == null ? ImageParam.TRANSPARENT : data.icon).applyTo(binding.itemIcon);
@@ -153,8 +151,22 @@ public class SimpleItemListView extends LinearLayout {
             binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
+
+            final int leftPaddingInDp = data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_PLAIN ? model.getPlainItemPaddingLeftInDp() : 0;
+            binding.itemViewAnchor.setPadding(ViewUtils.dpToPixel(leftPaddingInDp), 0, 0, 0);
+        }
+
+        private void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final Object value, final Func4<Object, Context, View, ViewGroup, View> viewMapper) {
+            final View currentView = itemBinding.itemViewAnchor.getChildAt(0);
+            final View newView = viewMapper.call(value, getContext(), currentView, itemBinding.itemViewAnchor);
+
+            if (currentView != newView) {
+                itemBinding.itemViewAnchor.removeAllViews();
+                itemBinding.itemViewAnchor.addView(newView);
+            }
         }
     }
+
 
     private class ItemListAdapter extends ManagedListAdapter<ListItem, ItemListViewHolder> {
 
@@ -166,11 +178,13 @@ public class SimpleItemListView extends LinearLayout {
         @Override
         public ItemListViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.simpleitemlist_item_view, parent, false);
+
+            ViewUtils.applyPadding(view, model.getItemPaddingInDp());
             final SimpleitemlistItemViewBinding itemBinding = SimpleitemlistItemViewBinding.bind(view);
 
             final ItemListViewHolder vh = new ItemListViewHolder(itemBinding);
             itemBinding.itemRadiobutton.setClickable(false);
-            itemBinding.itemText.setClickable(false);
+            itemBinding.itemViewAnchor.setClickable(false);
             itemBinding.itemCheckbox.setClickable(false);
             itemBinding.groupReduced.setClickable(false);
             itemBinding.groupExpanded.setClickable(false);
@@ -242,11 +256,25 @@ public class SimpleItemListView extends LinearLayout {
 
         @Override
         public void onBindViewHolder(@NonNull final ItemListViewHolder holder, final int position) {
+            holder.fillData(getItem(position));
+
+            holder.binding.getRoot().setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
             holder.binding.itemChecker.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
-            holder.binding.itemText.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
+            ViewUtils.walkViewTree(holder.binding.itemViewAnchor, view -> {
+                view.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
+                return true;
+            }, null);
             holder.binding.itemIcon.setOnClickListener(v -> handleClick(holder.getBindingAdapterPosition()));
             holder.binding.itemAction.setOnClickListener(v -> handleActionClick(holder.getBindingAdapterPosition()));
-            holder.fillData(getItem(position));
+        }
+
+        @Override
+        public int getItemViewType(final int position) {
+            //For all types the same item is created.
+            //However we have to make sure that items are reused only within their type
+            //--> this is what this function takes care of by assigning unique view types to them
+            final ListItem itemData = getItems().get(position);
+            return itemData.type.ordinal();
         }
 
         private boolean isDisplayed(final ListItem item) {
@@ -273,27 +301,31 @@ public class SimpleItemListView extends LinearLayout {
     }
 
     public SimpleItemListView(final Context context) {
-        super(context);
+        super(wrap(context));
         init();
     }
 
     public SimpleItemListView(final Context context, @Nullable final AttributeSet attrs) {
-        super(context, attrs);
+        super(wrap(context), attrs);
         init();
     }
 
     public SimpleItemListView(final Context context, @Nullable final AttributeSet attrs, final int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(wrap(context), attrs, defStyleAttr);
         init();
     }
 
     public SimpleItemListView(final Context context, final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
+        super(wrap(context), attrs, defStyleAttr, defStyleRes);
         init();
     }
 
+    private static Context wrap(final Context context) {
+        return ViewUtils.wrap(context, R.style.cgeo);
+    }
+
     private void init() {
-        final Context ctw = ViewUtils.wrap(getContext(), R.style.cgeo);
+        final Context ctw = getContext();
         inflate(ctw, R.layout.simpleitemlist_view, this);
         binding = SimpleitemlistViewBinding.bind(this);
         setOrientation(VERTICAL);
@@ -377,7 +409,7 @@ public class SimpleItemListView extends LinearLayout {
     }
 
     private boolean isDisplayedSimpleItem(final ListItem simpleItem, final boolean checkGroupExpanded) {
-        if (simpleItem == null || simpleItem.text == null) {
+        if (simpleItem == null) {
             return true;
         }
         if (checkGroupExpanded && !isGroupExpanded(simpleItem.group)) {
@@ -387,8 +419,9 @@ public class SimpleItemListView extends LinearLayout {
         if (StringUtils.isBlank(filter)) {
             return true;
         }
-        final String rawText = simpleItem.text.toString().toLowerCase(Locale.US);
-        return rawText.contains(filter.trim().toLowerCase(Locale.US));
+        final String rawText = model.getTextFilterMapper() == null ? null : model.getTextFilterMapper().call(simpleItem.value);
+
+        return rawText != null && rawText.toLowerCase(Locale.US).contains(filter.trim().toLowerCase(Locale.US));
     }
 
     private void recreateList() {
@@ -397,7 +430,9 @@ public class SimpleItemListView extends LinearLayout {
         list.add(createForType(ListItemType.SELECT_ALL));
         list.add(createForType(ListItemType.SELECTED_VISIBLE));
 
-        CommonUtils.groupList(model.getItems(), model.getGroupMapper(), model.getGroupComparator(),
+        CommonUtils.groupList(model.getItems(),
+                model.getGroupingOptions().getGroupMapper(), model.getGroupingOptions().getGroupComparator(),
+                model.getGroupingOptions().getMinActivationGroupCount(),
                 (group, firstItemIdx, size) -> list.add(createForGroup(group, firstItemIdx + 2, size)),
                 (value, originalIdx, group, groupIdx) -> list.add(createForItem(value, originalIdx, group)));
 

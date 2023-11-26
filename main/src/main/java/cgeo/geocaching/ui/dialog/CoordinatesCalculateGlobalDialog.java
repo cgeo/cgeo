@@ -267,7 +267,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             final SimpleDialog.ItemSelectModel<Integer> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(options)
-                .setDisplayMapper((i, i2) -> TextParam.id(i))
+                .setDisplayMapper((i) -> TextParam.id(i))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
@@ -396,7 +396,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         final SimpleDialog.ItemSelectModel<Pair<String, Geopoint>> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(gps)
-            .setDisplayMapper((p, i) -> TextParam.text(p.first + ":\n" + p.second));
+            .setDisplayMapper((p) -> TextParam.text(p.first + ":\n" + p.second));
 
         SimpleDialog.of(this.getActivity()).setTitle(TextParam.id(R.string.calccoord_generate_title))
                 .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))

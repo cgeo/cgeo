@@ -39,7 +39,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.layers.CacheCirclesLayer;
@@ -83,14 +83,11 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
@@ -924,25 +921,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 final ArrayList<RouteOrRouteItem> sorted = new ArrayList<>(result);
                 Collections.sort(sorted, RouteOrRouteItem.NAME_COMPARATOR);
 
-                final ArrayAdapter<RouteOrRouteItem> adapter = new ArrayAdapter<RouteOrRouteItem>(this, R.layout.cacheslist_item_select, sorted) {
-                    @NonNull
-                    @Override
-                    public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                        return GeoItemSelectorUtils.createRouteOrRouteItemView(UnifiedMapActivity.this, getItem(position),
-                                GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, convertView, parent));
-                    }
-                };
+                final SimpleDialog.ItemSelectModel<RouteOrRouteItem> model = new SimpleDialog.ItemSelectModel<>();
+                model
+                    .setItems(sorted)
+                    .setDisplayViewMapper((item, ctx, view, parent) ->
+                        GeoItemSelectorUtils.createRouteOrRouteItemView(UnifiedMapActivity.this, item, GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, view, parent)),
+                        (item) -> item == null ? "" : item.getName())
+                    .setItemPadding(0)
+                    .setPlainItemPaddingLeftInDp(0);
 
-                final AlertDialog dialog = Dialogs.newBuilder(this)
-                        .setTitle(res.getString(R.string.map_select_multiple_items))
-                        .setAdapter(adapter, (dialog1, which) -> {
-                            if (which >= 0 && which < sorted.size()) {
-                                handleTap(sorted.get(which), isLongTap, x, y);
-                            }
-                        })
-                        .create();
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
+                SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
+                    handleTap(item, isLongTap, x, y);
+                });
+
             } catch (final Resources.NotFoundException e) {
                 Log.e("UnifiedMapActivity.showSelection", e);
             }

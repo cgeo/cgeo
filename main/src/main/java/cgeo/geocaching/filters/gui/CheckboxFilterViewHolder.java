@@ -127,7 +127,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(items)
-                .setDisplayMapper((s, i) -> TextParam.text(filterAccessor.getDisplayText(s)));
+                .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
 
             SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
                 .selectMultiple(model, s -> {

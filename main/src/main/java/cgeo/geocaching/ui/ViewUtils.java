@@ -600,4 +600,23 @@ public class ViewUtils {
             return false;
         }
     }
+
+    /** Sets padding (in DP) to apply to each list item.
+     *  If 4 numbers are given, they are applied to left, top, right, bottom in that order
+     *  If 2 numbers are given, they are applied to horizontal (left+right), vertical (top+bottom)
+     *  If 1 number is given it is applied to all 4 sides
+     *  Otherwise nothing is done and false is returned
+     */
+    public static boolean applyPadding(final View view, final int[] paddingsInDp) {
+        if (view == null || paddingsInDp == null || paddingsInDp.length < 1 || paddingsInDp.length > 4 || paddingsInDp.length == 3) {
+            return false;
+        }
+        if (paddingsInDp.length == 4) {
+            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]), dpToPixel(paddingsInDp[2]), dpToPixel(paddingsInDp[3]));
+        } else if (paddingsInDp.length == 2) {
+            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]));
+        } else { //paddingsInDp-length is 1
+            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]));        }
+        return true;
+    }
 }

@@ -106,7 +106,7 @@ public class ContactsHelper {
         final SimpleDialog.ItemSelectModel<Pair<Integer, String>> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(contacts)
-            .setDisplayMapper((i, p) -> TextParam.text(i.second))
+            .setDisplayMapper((i) -> TextParam.text(i.second))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
         SimpleDialog.of(activity)
                 .setTitle(R.string.contact_multiple_matches)

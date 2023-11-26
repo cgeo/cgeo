@@ -116,10 +116,10 @@ public final class StoredList extends AbstractList {
                     .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> lastSelectedListSet)
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                     .setItems(lists)
-                    .setDisplayMapper((item, p) -> TextParam.text(item.getTitleAndCount()))
-                    .setDisplayIconMapper((item, p) -> {
+                    .setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
+                    .setDisplayIconMapper((item) -> {
                         if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
-                            return ImageParam.emoji(((StoredList) item).markerId);
+                            return ImageParam.emoji(((StoredList) item).markerId, 30);
                         }
                         return ImageParam.id(R.drawable.ic_menu_manage_list);
                     })
@@ -148,7 +148,7 @@ public final class StoredList extends AbstractList {
             final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((item, p) -> TextParam.text(item.getTitleAndCount()))
+                .setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(model, item -> {

@@ -125,7 +125,7 @@ public class MapProviderFactory {
         final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = new SimpleDialog.ItemSelectModel<>();
         model
                 .setItems(list)
-                        .setDisplayMapper((l, pos) -> TextParam.text(l.first))
+                        .setDisplayMapper((l) -> TextParam.text(l.first))
                                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title))

@@ -56,7 +56,7 @@ public class BookmarkUtils {
             final SimpleDialog.ItemSelectModel<GCList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((l, pos) -> TextParam.text(l.getName()))
+                .setDisplayMapper((l) -> TextParam.text(l.getName()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)

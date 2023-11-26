@@ -48,7 +48,7 @@ public class FilterUtils {
             model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
                 .setItems(filters)
-                .setDisplayMapper((f, pos) -> TextParam.text(f.getName()));
+                .setDisplayMapper((f) -> TextParam.text(f.getName()));
 
             if (isFilterActive) {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)

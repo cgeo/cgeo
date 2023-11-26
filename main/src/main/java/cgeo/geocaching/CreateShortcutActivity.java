@@ -102,7 +102,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         final SimpleDialog.ItemSelectModel<Shortcut> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(shortcuts)
-            .setDisplayMapper((s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30))
+            .setDisplayMapper((s) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)

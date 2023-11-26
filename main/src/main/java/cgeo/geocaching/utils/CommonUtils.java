@@ -3,7 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.utils.functions.Action3;
 import cgeo.geocaching.utils.functions.Action4;
 import cgeo.geocaching.utils.functions.Func1;
-import cgeo.geocaching.utils.functions.Func2;
 
 import android.os.Build;
 import android.util.Pair;
@@ -135,14 +134,14 @@ public class CommonUtils {
     }
 
     @SuppressWarnings({"PMD.NPathComplexity"})
-    public static <T, G> void groupList(final List<T> items, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Comparator<G> groupOrder,
+    public static <T, G> void groupList(final List<T> items, @Nullable final Func1<T, G> groupMapper, @Nullable final Comparator<G> groupOrder, final int minGroupCount,
                                         final Action3<G, Integer, Integer> groupAdder, final Action4<T, Integer, G, Integer> itemAdder) {
 
         //create lists per group
         final Map<G, List<Pair<Integer, T>>> groupedListMap = new HashMap<>();
         int pos = 0;
         for (T value : items) {
-            final G group = groupMapper == null ? null : groupMapper.call(value, pos);
+            final G group = groupMapper == null ? null : groupMapper.call(value);
             List<Pair<Integer, T>> groupList = groupedListMap.get(group);
             if (groupList == null) {
                 groupList = new ArrayList<>();
@@ -150,6 +149,16 @@ public class CommonUtils {
             }
             groupList.add(new Pair<>(pos, value));
             pos++;
+        }
+
+        //check whether to abandom
+        if (groupedListMap.size() < minGroupCount) {
+            //no grouping shall take place
+            int idx = 0;
+            for (T item : items) {
+                itemAdder.call(item, idx++, null, -1);
+            }
+            return;
         }
 
         //sort groups

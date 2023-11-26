@@ -23,7 +23,7 @@ public class CommonUtilsTest {
         final List<String> data = Arrays.asList("blue", "red", "green", "x-red", "yellow", "gray", "brown", "x-pink");
         //for test, group list after first letter with standard group order. "x" is not part of a group
         final List<List<Object>> groupedList = new ArrayList<>();
-        CommonUtils.groupList(data, (s, idx) -> s.startsWith("x-") ? null : s.substring(0, 1), null,
+        CommonUtils.groupList(data, (s) -> s.startsWith("x-") ? null : s.substring(0, 1), null, 1,
                 (group, firstIdx, size) -> groupedList.add(Arrays.asList(group, true, firstIdx, size)),
                 (item, originalIdx, group, groupIndex) -> groupedList.add(Arrays.asList(item, false, originalIdx, group, groupIndex)));
 
@@ -44,4 +44,23 @@ public class CommonUtilsTest {
                 Arrays.asList("yellow", false, 4, "y", 10)
                 );
     }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void groupListMinGroup() {
+        //Original Index of test data:          0       1      2
+        final List<String> data = Arrays.asList("blue", "red", "green");
+        //for test, group list after first letter with standard group order. "x" is not part of a group
+        final List<List<Object>> groupedList = new ArrayList<>();
+        CommonUtils.groupList(data, (s) -> s.substring(0, 1), null, 100,
+                (group, firstIdx, size) -> groupedList.add(Arrays.asList(group, true, firstIdx, size)),
+                (item, originalIdx, group, groupIndex) -> groupedList.add(Arrays.asList(item, false, originalIdx, group, groupIndex)));
+
+        assertThat(groupedList).containsExactly(
+                //no grouping shall be done -> original order
+                Arrays.asList("blue", false, 0, null, -1),
+                Arrays.asList("red", false, 1, null, -1),
+                Arrays.asList("green", false, 2, null, -1));
+    }
+
 }

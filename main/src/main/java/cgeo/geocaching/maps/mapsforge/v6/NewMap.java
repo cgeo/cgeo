@@ -67,6 +67,7 @@ import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -88,7 +89,6 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
@@ -104,10 +104,7 @@ import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ListAdapter;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -1356,21 +1353,24 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
-                @NonNull
-                @Override
-                public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                    return GeoItemSelectorUtils.createGeoItemView(NewMap.this, getItem(position),
-                            GeoItemSelectorUtils.getOrCreateView(NewMap.this, convertView, parent));
-                }
-            };
+            final SimpleDialog.ItemSelectModel<GeoitemRef> model = new SimpleDialog.ItemSelectModel<GeoitemRef>();
+            model
+                .setItems(sorted)
+                .setDisplayViewMapper((item, ctx, view, parent) ->
+                        GeoItemSelectorUtils.createGeoItemView(NewMap.this, item, GeoItemSelectorUtils.getOrCreateView(NewMap.this, view, parent)),
+                        (item) -> item.getName() + "::" + item.getGeocode())
+                .setItemPadding(0)
+                .setPlainItemPaddingLeftInDp(0);
 
-            final AlertDialog dialog = Dialogs.newBuilder(this)
-                    .setTitle(res.getString(R.string.map_select_multiple_items))
-                    .setAdapter(adapter, new SelectionClickListener(sorted, longPressMode))
-                    .create();
-            dialog.setCanceledOnTouchOutside(true);
-            dialog.show();
+            SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
+                if (longPressMode) {
+                    if (Settings.isLongTapOnMapActivated()) {
+                        triggerCacheWaypointLongTapContextMenu(item);
+                    }
+                } else {
+                    showPopup(item);
+                }
+            });
 
         } catch (final NotFoundException e) {
             Log.e("NewMap.showSelection", e);
@@ -1405,33 +1405,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         } else {
             toggleRouteItem(item);
         }
-    }
-
-    private class SelectionClickListener implements DialogInterface.OnClickListener {
-
-        @NonNull
-        private final List<GeoitemRef> items;
-        private final boolean longPressMode;
-
-        SelectionClickListener(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
-            this.items = items;
-            this.longPressMode = longPressMode;
-        }
-
-        @Override
-        public void onClick(final DialogInterface dialog, final int which) {
-            if (which >= 0 && which < items.size()) {
-                final GeoitemRef item = items.get(which);
-                if (longPressMode) {
-                    if (Settings.isLongTapOnMapActivated()) {
-                        triggerCacheWaypointLongTapContextMenu(item);
-                    }
-                } else {
-                    showPopup(item);
-                }
-            }
-        }
-
     }
 
     private void showPopup(final GeoitemRef item) {
