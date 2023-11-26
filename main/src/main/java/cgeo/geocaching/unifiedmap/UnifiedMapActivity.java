@@ -269,13 +269,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             mapType.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
-//            followMyLocation = mapOptions.mapState.followsMyLocation();
+            viewModel.followMyLocation.setValue(mapType.followMyLocation);
         } else {
-//            if (mapOptions.mapState != null) {
-//                followMyLocation = mapOptions.mapState.followsMyLocation();
-//            } else {
-//                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
-//            }
+            if (mapType != null) {
+                viewModel.followMyLocation.setValue(mapType.followMyLocation);
+            } else {
+                viewModel.followMyLocation.setValue(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && mapType.type == UMTT_PlainMap);
+            }
         }
 
         routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
@@ -426,6 +426,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     if (cache != null && cache.getCoords() != null) {
                         viewModel.caches.getValue().add(cache);
                         viewModel.caches.notifyDataChanged();
+                        mapFragment.setCenter(cache.getCoords());
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         viewModel.setTarget(cache.getCoords(), cache.getName());
                     }
