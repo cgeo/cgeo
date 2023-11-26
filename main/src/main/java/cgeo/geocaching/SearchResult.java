@@ -46,7 +46,7 @@ public class SearchResult implements Parcelable {
     private final Set<String> geocodes = Collections.synchronizedSet(new HashSet<>());
     private final Set<String> filteredGeocodes = Collections.synchronizedSet(new HashSet<>());
 
-    private String finder = null;
+    private SearchCacheData searchCacheData = null;
 
     //A bundle of bundles where connectors can store specific context values
     private final Bundle connectorContext = new Bundle();
@@ -89,7 +89,7 @@ public class SearchResult implements Parcelable {
         geocodes.addAll(searchResult.geocodes);
         filteredGeocodes.clear();
         filteredGeocodes.addAll(searchResult.filteredGeocodes);
-        finder = searchResult.finder;
+        searchCacheData = searchResult.searchCacheData;
         connectorContext.putAll(searchResult.connectorContext);
     }
 
@@ -124,7 +124,7 @@ public class SearchResult implements Parcelable {
         final ArrayList<String> filteredList = new ArrayList<>();
         in.readStringList(filteredList);
         filteredGeocodes.addAll(filteredList);
-        finder = in.readString();
+        searchCacheData = in.readParcelable(getClass().getClassLoader());
         connectorContext.putAll(in.readBundle(getClass().getClassLoader()));
     }
 
@@ -152,7 +152,7 @@ public class SearchResult implements Parcelable {
     public void writeToParcel(final Parcel out, final int flags) {
         out.writeStringArray(geocodes.toArray(new String[0]));
         out.writeStringArray(filteredGeocodes.toArray(new String[0]));
-        out.writeString(finder);
+        out.writeParcelable(searchCacheData, flags);
         out.writeBundle(connectorContext);
     }
 
@@ -255,12 +255,19 @@ public class SearchResult implements Parcelable {
 
     @VisibleForTesting
     @Nullable
-    String getFinder() {
-        return this.finder;
+    SearchCacheData getCacheData() {
+        return this.searchCacheData;
     }
 
-    public void setFinder(@NonNull final String finder) {
-        this.finder = finder;
+    public SearchCacheData getOrCreateCacheData() {
+        if (this.searchCacheData == null) {
+            this.searchCacheData = new SearchCacheData();
+        }
+        return this.searchCacheData;
+    }
+
+    public void setCacheData(@NonNull final SearchCacheData searchCacheData) {
+        this.searchCacheData = searchCacheData;
     }
 
     @WorkerThread
@@ -312,7 +319,7 @@ public class SearchResult implements Parcelable {
     public void addAndPutInCache(@NonNull final Collection<Geocache> caches) {
         for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
-            geocache.setSearchFinder(finder);
+            geocache.setSearchData(searchCacheData);
         }
         DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
     }
@@ -344,9 +351,9 @@ public class SearchResult implements Parcelable {
         }
         addGeocodes(other.geocodes);
         addFilteredGeocodes(other.filteredGeocodes);
-        finder = other.finder;
+        searchCacheData = other.searchCacheData;
         for (Geocache cache : DataStore.loadCaches(other.geocodes, LoadFlags.LOAD_CACHE_ONLY)) {
-            cache.setSearchFinder(this.finder);
+            cache.setSearchData(this.searchCacheData);
         }
 
 

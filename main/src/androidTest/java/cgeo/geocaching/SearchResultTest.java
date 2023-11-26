@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.CommonUtils;
+
 import android.os.Parcel;
 
 import java.util.HashSet;
@@ -32,7 +34,8 @@ public class SearchResultTest  {
         geocodes.add("GC45678");
         geocodes.add("GC56789");
         search.addFilteredGeocodes(geocodes);
-        search.setFinder("test");
+        search.getOrCreateCacheData().addFoundBy("user");
+        search.getOrCreateCacheData().addNotFoundBy("notuser");
 
         final Parcel parcel = Parcel.obtain();
         search.writeToParcel(parcel, 0);
@@ -50,7 +53,8 @@ public class SearchResultTest  {
 
         assertThat(receive.getFilteredGeocodes()).contains("GC45678").doesNotContain("GC12345");
 
-        assertThat(receive.getFinder()).isEqualTo("test");
+        assertThat(CommonUtils.first(receive.getCacheData().getFoundBy())).isEqualTo("user");
+        assertThat(CommonUtils.first(receive.getCacheData().getNotFoundBy())).isEqualTo("notuser");
     }
 
     @Test

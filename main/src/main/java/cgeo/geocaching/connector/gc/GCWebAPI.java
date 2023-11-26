@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -109,7 +110,8 @@ public class GCWebAPI {
         private final Set<CacheAttribute> cacheAttributes = new HashSet<>();
 
         private String hiddenBy = null;
-        private String notFoundBy = null;
+        private final List<String> notFoundBy = new ArrayList<>();
+        private final List<String> foundBy = new ArrayList<>();
         private String difficulty = null;
         private String terrain = null;
         private String difficultyTerrainCombis = null;
@@ -236,8 +238,16 @@ public class GCWebAPI {
         /**
          * Works only if 'notFoundBy' is the exact name of a geocache user. case does not need to match though. Works with V1
          */
-        public WebApiSearch setNotFoundBy(final String notFoundBy) {
-            this.notFoundBy = notFoundBy;
+        public WebApiSearch addNotFoundBy(final String notFoundBy) {
+            this.notFoundBy.add(notFoundBy);
+            return this;
+        }
+
+        /**
+         * Works only if 'notFoundBy' is the exact name of a geocache user. case does not need to match though. Works with V1
+         */
+        public WebApiSearch addFoundBy(final String foundBy) {
+            this.foundBy.add(foundBy);
             return this;
         }
 
@@ -424,8 +434,12 @@ public class GCWebAPI {
                 params.put("hb", this.hiddenBy);
             }
 
-            if (this.notFoundBy != null) {
-                params.put("nfb", this.notFoundBy);
+            for (String notFoundBy : this.notFoundBy) {
+                params.put("nfb", notFoundBy);
+            }
+
+            for (String foundBy : this.foundBy) {
+                params.put("fb", foundBy);
             }
 
             if (this.minFavoritePoints > 0) {
@@ -475,6 +489,11 @@ public class GCWebAPI {
             params.put("app", "cgeo"); //identify us towards Groundspeak due to gentlemens agreement
 
             return getAPI("/web/search/v2", params, MapSearchResultSet.class).blockingGet();
+        }
+
+        public void fillSearchCacheData(final SearchCacheData searchCacheData) {
+            searchCacheData.addFoundBy(foundBy);
+            searchCacheData.addNotFoundBy(notFoundBy);
         }
 
     }

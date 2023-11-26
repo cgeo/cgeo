@@ -8,11 +8,9 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.location.DistanceParser;
@@ -39,7 +37,6 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.net.Uri;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -59,7 +56,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.TimeZone;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -71,7 +67,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import okhttp3.Response;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
@@ -88,8 +83,6 @@ import static org.apache.commons.lang3.StringUtils.substring;
 public final class GCParser {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    private static final String SEARCH_CONTEXT_VIEWSTATE = "sc_gc_viewstate";
 
     @NonNull
     private static final SynchronizedDateFormat DATE_TB_IN_1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
@@ -146,244 +139,6 @@ public final class GCParser {
         searchResult.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, alreadyTaken + caches.size()));
 
         return searchResult;
-    }
-
-    @Nullable
-    @WorkerThread
-    // splitting up that method would not help improve readability
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent, final int alreadyTaken) {
-        if (StringUtils.isBlank(pageContent)) {
-            Log.e("GCParser.parseSearch: No page given");
-            return null;
-        }
-
-        String page = pageContent;
-
-        final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(con, url);
-        searchResult.setToContext(con, b -> b.putStringArray(SEARCH_CONTEXT_VIEWSTATE, GCLogin.getViewstates(pageContent)));
-        searchResult.setToContext(con, b -> b.putBoolean(GCConnector.SEARCH_CONTEXT_LEGACY_PAGING, true));
-
-        if (!page.contains("SearchResultsTable")) {
-            // there are no results. aborting here avoids a wrong error log in the next parsing step
-            return searchResult;
-        }
-
-        int startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
-        if (startPos == -1) {
-            Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
-            return null;
-        }
-
-        page = page.substring(startPos); // cut on <table
-
-        startPos = page.indexOf('>');
-        final int endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
-        if (startPos == -1 || endPos == -1) {
-            Log.e("GCParser.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
-            return null;
-        }
-
-        page = page.substring(startPos + 1, endPos - startPos + 1); // cut between <table> and </table>
-
-        final List<String> cids = new ArrayList<>();
-        final String[] rows = StringUtils.splitByWholeSeparator(page, "<tr class=");
-        final int rowsCount = rows.length;
-
-        final List<Geocache> caches = new ArrayList<>();
-        for (int z = 1; z < rowsCount; z++) {
-            final Geocache cache = new Geocache();
-            final String row = rows[z];
-
-            // check for cache type presence
-            if (!GCConstants.PATTERN_SEARCH_TYPE.matcher(row).find()) {
-                continue;
-            }
-
-            try {
-                final MatcherWrapper matcherGuidAndDisabled = new MatcherWrapper(GCConstants.PATTERN_SEARCH_GUIDANDDISABLED, row);
-
-                while (matcherGuidAndDisabled.find()) {
-                    if (matcherGuidAndDisabled.group(2) != null) {
-                        cache.setName(TextUtils.stripHtml(matcherGuidAndDisabled.group(2).trim()));
-                    }
-                    if (matcherGuidAndDisabled.group(3) != null) {
-                        cache.setLocation(TextUtils.stripHtml(matcherGuidAndDisabled.group(3).trim()));
-                    }
-
-                    final String attr = matcherGuidAndDisabled.group(1);
-                    if (attr != null) {
-                        cache.setDisabled(attr.contains("Strike"));
-
-                        cache.setArchived(attr.contains("OldWarning"));
-                    }
-                }
-            } catch (final RuntimeException e) {
-                // failed to parse GUID and/or Disabled
-                Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data", e);
-            }
-
-            cache.setGeocode(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
-
-            // cache type
-            cache.setType(CacheType.getByWaypointType(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, null)));
-
-            // cache direction - image
-            if (Settings.getLoadDirImg()) {
-                final String direction = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, false, null);
-                if (direction != null) {
-                    cache.setDirectionImg(direction);
-                }
-            }
-
-            // cache distance - estimated distance for basic members
-            final MatcherWrapper cacheDistanceMatcher = new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIRECTION_DISTANCE, row);
-            if (cacheDistanceMatcher.find()) {
-                final DistanceParser.DistanceUnit unit = DistanceParser.DistanceUnit.parseUnit(cacheDistanceMatcher.group(3),
-                        Settings.useImperialUnits() ? DistanceParser.DistanceUnit.FT : DistanceParser.DistanceUnit.M);
-                try {
-                    cache.setDistance(DistanceParser.parseDistance(cacheDistanceMatcher.group(2), unit));
-                } catch (final NumberFormatException e) {
-                    Log.e("GCParser.parseDistance: Failed to parse distance", e);
-                }
-            }
-
-            // difficulty/terrain
-            final MatcherWrapper matcherDT = new MatcherWrapper(GCConstants.PATTERN_SEARCH_DIFFICULTY_TERRAIN, row);
-            if (matcherDT.find()) {
-                final Float difficulty = parseStars(matcherDT.group(1));
-                if (difficulty != null) {
-                    cache.setDifficulty(difficulty);
-                }
-                final Float terrain = parseStars(matcherDT.group(3));
-                if (terrain != null) {
-                    cache.setTerrain(terrain);
-                }
-            }
-
-            // size
-            final String container = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_CONTAINER, false, null);
-            cache.setSize(CacheSize.getById(container));
-
-            // date hidden, makes sorting event caches easier
-            final String dateHidden = TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_HIDDEN_DATE, false, null);
-            if (StringUtils.isNotBlank(dateHidden)) {
-                try {
-                    final Date date = GCLogin.parseGcCustomDate(dateHidden);
-                    if (date != null) {
-                        cache.setHidden(date);
-                    }
-                } catch (final ParseException e) {
-                    Log.e("Error parsing event date from search", e);
-                }
-            }
-
-            // cache inventory
-            final MatcherWrapper matcherTbs = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLES, row);
-            String inventoryPre = null;
-            while (matcherTbs.find()) {
-                try {
-                    cache.setInventoryItems(Integer.parseInt(matcherTbs.group(1)));
-                } catch (final NumberFormatException e) {
-                    Log.e("Error parsing trackables count", e);
-                }
-                inventoryPre = matcherTbs.group(2);
-            }
-
-            if (StringUtils.isNotBlank(inventoryPre)) {
-                final MatcherWrapper matcherTbsInside = new MatcherWrapper(GCConstants.PATTERN_SEARCH_TRACKABLESINSIDE, inventoryPre);
-                while (matcherTbsInside.find()) {
-                    if (matcherTbsInside.group(1) != null &&
-                            !matcherTbsInside.group(1).equalsIgnoreCase("premium member only cache") &&
-                            cache.getInventoryItems() <= 0) {
-                        cache.setInventoryItems(1);
-                    }
-                }
-            }
-
-            // premium cache
-            cache.setPremiumMembersOnly(row.contains("/images/icons/16/premium_only.png"));
-
-            // found it
-            cache.setFound(row.contains("/images/icons/16/found.png") || row.contains("uxUserLogDate\" class=\"Success\""));
-
-            // infer cache id from geocode
-            cache.setCacheId(String.valueOf(GCUtils.gcLikeCodeToGcLikeId(cache.getGeocode())));
-            cids.add(cache.getCacheId());
-
-            // favorite count
-            try {
-                final String result = getNumberString(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true));
-                if (result != null) {
-                    cache.setFavoritePoints(Integer.parseInt(result));
-                }
-            } catch (final NumberFormatException e) {
-                Log.w("GCParser.parseSearch: Failed to parse favorite count", e);
-            }
-
-            caches.add(cache);
-        }
-        searchResult.addAndPutInCache(caches);
-        searchResult.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, alreadyTaken + caches.size()));
-
-        // total caches found
-        try {
-            final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
-            if (result != null) {
-                searchResult.setLeftToFetch(con, Integer.parseInt(result) - caches.size() - alreadyTaken);
-            }
-        } catch (final NumberFormatException e) {
-            Log.w("GCParser.parseSearch: Failed to parse cache count", e);
-        }
-
-        if (!cids.isEmpty() && Settings.isGCPremiumMember()) {
-            Log.i("Trying to get .loc for " + cids.size() + " caches");
-            final Observable<Set<Geocache>> storedCaches = Observable.defer(() -> Observable.just(DataStore.loadCaches(Geocache.getGeocodes(caches), LoadFlags.LOAD_CACHE_OR_DB))).subscribeOn(Schedulers.io()).cache();
-            storedCaches.subscribe();  // Force asynchronous start of database loading
-
-            try {
-                // get coordinates for parsed caches
-                final Parameters params = new Parameters(
-                        "__EVENTTARGET", "",
-                        "__EVENTARGUMENT", "");
-                GCLogin.putViewstates(params, searchResult.getFromContext(con, b -> b.getStringArray(SEARCH_CONTEXT_VIEWSTATE)));
-                for (final String cid : cids) {
-                    params.put("CID", cid);
-                }
-
-                params.put("Download", "Download Waypoints");
-
-                // retrieve target url
-                final String queryUrl = TextUtils.getMatch(pageContent, GCConstants.PATTERN_SEARCH_POST_ACTION, "");
-
-                if (StringUtils.isEmpty(queryUrl)) {
-                    Log.w("Loc download url not found");
-                } else {
-
-                    final String coordinates = Network.getResponseData(Network.postRequest("https://www.geocaching.com/seek/" + queryUrl, params), false);
-
-                    if (StringUtils.contains(coordinates, GCConstants.STRING_UNAPPROVED_LICENSE)) {
-                        Log.i("User has not agreed to the license agreement. Can't download .loc file.");
-                        searchResult.setError(con, StatusCode.UNAPPROVED_LICENSE);
-                        return searchResult;
-                    }
-
-                    LocParser.parseLoc(coordinates, storedCaches.blockingSingle());
-                }
-
-            } catch (final RuntimeException e) {
-                Log.e("GCParser.parseSearch.CIDs", e);
-            }
-        }
-
-        return searchResult;
-    }
-
-    @Nullable
-    private static Float parseStars(final String value) {
-        final float floatValue = Float.parseFloat(StringUtils.replaceChars(value, ',', '.'));
-        return floatValue >= 0.5 && floatValue <= 5.0 ? floatValue : null;
     }
 
     @Nullable
@@ -882,59 +637,6 @@ public final class GCParser {
         return GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find() ? imageUrl.replace("/display", "") : imageUrl;
     }
 
-    @Nullable
-    @WorkerThread
-    public static SearchResult searchByNextPage(final IConnector con, final Bundle context) {
-        if (context == null) {
-            return null;
-        }
-
-        final String url = context.getString(SearchResult.CON_URL);
-        if (StringUtils.isBlank(url)) {
-            Log.e("GCParser.searchByNextPage: No url found");
-            return new SearchResult(con, StatusCode.UNKNOWN_ERROR);
-        }
-
-        final String[] viewstates = context.getStringArray(SEARCH_CONTEXT_VIEWSTATE);
-        if (GCLogin.isEmpty(viewstates)) {
-            Log.e("GCParser.searchByNextPage: No viewstate given");
-            return new SearchResult(con, StatusCode.NO_LOGIN_INFO_STORED);
-        }
-
-        final Parameters params = new Parameters(
-                "__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08",
-                "__EVENTARGUMENT", "");
-        GCLogin.putViewstates(params, viewstates);
-
-        final String page = GCLogin.getInstance().postRequestLogged(url, params);
-        if (!GCLogin.getInstance().getLoginStatus(page)) {
-            Log.e("GCParser.postLogTrackable: Can not log in geocaching");
-            return new SearchResult(con, StatusCode.WRONG_LOGIN_DATA);
-        }
-
-        if (StringUtils.isBlank(page)) {
-            Log.e("GCParser.searchByNextPage: No data from server");
-            return new SearchResult(con, StatusCode.CONNECTION_FAILED_GC);
-        }
-
-        final SearchResult searchResult = parseSearch(con, url, page, context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0));
-        if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.w("GCParser.searchByNextPage: No cache parsed");
-            return new SearchResult(con, StatusCode.CONNECTION_FAILED_GC);
-        }
-
-        // search results don't need to be filtered so load GCVote ratings here
-        GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
-
-        return searchResult;
-    }
-
-    @Nullable
-    @WorkerThread
-    private static SearchResult searchByAny(final IConnector con, final Parameters params) {
-        return searchByAny(con, params, null, false);
-    }
-
     private static SearchResult searchByMap(final IConnector con, final Parameters params) {
         final String page = GCLogin.getInstance().getRequestLogged(GCConstants.URL_LIVE_MAP, params);
 
@@ -971,71 +673,6 @@ public final class GCParser {
         return search;
     }
 
-    @WorkerThread
-    private static SearchResult searchByAny(final IConnector con, final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
-        final String uri = "https://www.geocaching.com/seek/nearest.aspx";
-
-        if (ct != null) {
-            //this will limit results to specific cache type
-            params.put("cFilter", ct.guid);
-        }
-        if (noOwnFound) {
-            //this will lead to skip own and found caches in result
-            params.put("ex", "1");
-        }
-
-        final String page = GCLogin.getInstance().getRequestLogged(uri, params);
-
-        if (StringUtils.isBlank(page)) {
-            Log.w("GCParser.searchByAny: No data from server");
-            return null;
-        }
-
-        final String fullUri = uri + "?" + params;
-        final SearchResult searchResult = parseSearch(con, fullUri, page, 0);
-        if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.w("GCParser.searchByAny: No cache parsed");
-            return searchResult;
-        }
-
-        final SearchResult search = searchResult.putInCacheAndLoadRating();
-
-        GCLogin.getInstance().getLoginStatus(page);
-
-        return search;
-    }
-
-    public static SearchResult searchByCoords(final IConnector con, @NonNull final Geopoint coords) {
-        final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(con, params);
-    }
-
-    static SearchResult searchByKeyword(final IConnector con, @NonNull final String keyword) {
-        if (StringUtils.isBlank(keyword)) {
-            Log.e("GCParser.searchByKeyword: No keyword given");
-            return null;
-        }
-
-        final Parameters params = new Parameters("key", keyword);
-        return searchByAny(con, params);
-    }
-
-    @WorkerThread
-    public static SearchResult searchByUsername(final IConnector con, final String userName, @Nullable final CacheType ct, final boolean noOwnFound) {
-        if (StringUtils.isBlank(userName)) {
-            Log.e("GCParser.searchByUsername: No user name given");
-            return null;
-        }
-
-        final Parameters params = new Parameters("ul", escapePlus(userName));
-
-        final SearchResult sr = searchByAny(con, params, ct, noOwnFound);
-        if (sr != null) {
-            sr.setFinder(userName);
-        }
-        return sr;
-    }
-
     public static SearchResult searchByPocketQuery(final IConnector con, final String shortGuid, final String pqHash) {
         if (StringUtils.isBlank(pqHash)) {
             Log.e("GCParser.searchByPocket: No guid name given");
@@ -1044,23 +681,6 @@ public final class GCParser {
 
         final Parameters params = new Parameters("pq", shortGuid, "hash", pqHash);
         return searchByMap(con, params);
-    }
-
-    public static SearchResult searchByOwner(final IConnector con, final String userName) {
-        if (StringUtils.isBlank(userName)) {
-            Log.e("GCParser.searchByOwner: No user name given");
-            return null;
-        }
-
-        final Parameters params = new Parameters("u", escapePlus(userName));
-        return searchByAny(con, params);
-    }
-
-    /**
-     * GC needs a double escaping of the + sign.
-     */
-    private static String escapePlus(@NonNull final String name) {
-        return name.replace("+", "%2b");
     }
 
     @Nullable
