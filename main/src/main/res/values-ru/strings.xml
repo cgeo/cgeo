@@ -1760,7 +1760,6 @@
     <string name="search_finder">Найден</string>
     <string name="search_finder_prefill">Нашедший</string>
     <string name="search_finder_button">Поиск по имени нашедшего</string>
-    <string name="search_filter">Фильтр</string>
     <string name="search_filter_button">Поиск по фильтру</string>
     <string name="search_filter_info_message" formatted="false">**Поиск по фильтру** производится по всем активным онлайн-сервисам по заданным условиям. Однако, поисковые возможности этих сервисов обычно более ограничены, чем возможности фильтра c:geo.\n\n- Все службы поддерживают только И фильтры (нет ИЛИ, нет инверсии).\n- Такие базовые фильтры, как **тип тайника** или **размер тайника**, есть во всех сервисах. Но более сложные фильтры зачастую не поддерживаются или имеют некоторые ограничения, например **избранное**.\n- Подробный список условий фильтрации, которые поддерживают разные сервисы, можно найти [здесь](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nФильтры, не поддерживаемые онлайн-сервисом, будут применяться c:geo для полученных результатов.</string>
     <string name="search_tb">Трекабл</string>
@@ -2173,7 +2172,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
-    <string name="tts_toggle">Включить говорилку</string>
     <string name="tts_started">Речь началась</string>
     <string name="tts_stopped">Речь закончилась</string>
     <string name="tts_running">Голосовая служба запущена…</string>
@@ -2305,8 +2303,6 @@
     <string name="permission_contacts_read_explanation">c:geo может искать контакты в адресной книге используя имена геокэшеров. Для этого необходимо разрешить c:geo читать вашу адресную книгу. В противном случае использование этой функции невозможно.</string>
     <string name="permission_location_explanation_title">Разрешение на доступ к определению местоположения</string>
     <string name="permission_location_explanation">c:geo оптимизирован для использования данных GPS (точное местоположение) для определения местоположения, а также расчета расстояния и направления на тайник. Без этого разрешения функции на основе определения местоположения работать не будут.</string>
-    <string name="permission_read_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
-    <string name="permission_read_external_storage_explanation">c:geo может использовать ваши системные обои в качестве фона для приложения. Для этого c:geo требуется разрешение на чтение ваших медиа данных на внешнем накопителе.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo запишет данные на ваше устройство или SD-карту, например когда вы сохраняете тайники для использования в автономном режиме, импортируйте или экспортируйте файлы, а также для других функций. В некоторых версиях Android вам нужно предоставить дополнительные разрешения для этих действий.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="permission_post_notifications_explanation">c:geo использует уведомления, чтобы сообщить вам о загрузках и приближении к тайникам (если активировано)</string>
