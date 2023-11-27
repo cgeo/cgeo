@@ -2,6 +2,9 @@
 - Poprawka: Wskazówka ukryta za kompasem podczas używania dużych czcionek
 - Poprawka: Nie można już otwierać łączy do przedmiotów podróżnych w domenie coord.info
 - Poprawka: Niepoprawna wartość domyślna podczas ręcznego logowania przedmiotu podróżnego
+- Poprawka: Ikona skrytki na mapie nie była aktualizowana po zalogowaniu z wyskakującego okienka
+- Poprawka: Awaria przy wyświetlaniu opcji logowania
+- Fix: Crash on retrieving message center status
 
 ##
 - Zmiana: Usunięto oddzielne okienko BetterCacher, zamiast tego możesz dotknąć linię z informacją BetterCacher
