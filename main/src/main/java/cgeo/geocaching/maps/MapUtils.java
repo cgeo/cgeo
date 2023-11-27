@@ -358,10 +358,9 @@ public class MapUtils {
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
 
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
-
         final SwipeToOpenFragment swipeToOpenFragment = new SwipeToOpenFragment();
-        ft.add(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+        ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+        ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
 
         ft.commit();
 
@@ -398,7 +397,7 @@ public class MapUtils {
 
                 @Override
                 public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                    swipeToOpenFragment.setExpansion(slideOffset);
+                    swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
                 }
             };
 
