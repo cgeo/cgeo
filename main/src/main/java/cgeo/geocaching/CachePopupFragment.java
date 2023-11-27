@@ -101,6 +101,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (popup == null) {
                 return;
             }
+            popup.progress.dismiss();
             MapUtils.removeDetailsFragment(popup.requireActivity());
         }
     }
