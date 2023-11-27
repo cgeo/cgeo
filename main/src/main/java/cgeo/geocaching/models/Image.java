@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.io.File;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -52,8 +53,9 @@ public class Image implements Parcelable {
     /**
      * Static empty image, linked to nothing.
      */
-    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1, null, null);
+    public static final Image NONE = new Image(null, Uri.EMPTY, null, null, -1, null, null);
 
+    public final String serviceImageId;
     @NonNull public final Uri uri;
     @Nullable public final String title;
     public final int targetScale; //for offline log images
@@ -69,6 +71,8 @@ public class Image implements Parcelable {
      * Use #buildUpon() to obtain a builder representing an existing Image.
      */
     public static class Builder {
+
+        private String serviceImageId;
         @NonNull private Uri uri;
         @Nullable private String title;
         @Nullable private String description;
@@ -80,6 +84,7 @@ public class Image implements Parcelable {
          * Create a new Image.
          */
         public Builder() {
+            serviceImageId = null;
             uri = Uri.EMPTY;
             title = null;
             description = null;
@@ -93,7 +98,12 @@ public class Image implements Parcelable {
          */
         @NonNull
         public Image build() {
-            return new Image(uri, title, description, targetScale, category, contextInformation);
+            return new Image(serviceImageId, uri, title, description, targetScale, category, contextInformation);
+        }
+
+        public Builder setServiceImageId(final String serviceImageId) {
+            this.serviceImageId = serviceImageId;
+            return this;
         }
 
         /**
@@ -201,7 +211,8 @@ public class Image implements Parcelable {
      * @param title       The image title
      * @param description The image description
      */
-    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, @Nullable final String contextInformation) {
+    private Image(@Nullable final String serviceImageId, @NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, @Nullable final String contextInformation) {
+        this.serviceImageId = serviceImageId;
         this.uri = uri;
         this.title = title;
         this.description = description;
@@ -211,6 +222,7 @@ public class Image implements Parcelable {
     }
 
     private Image(@NonNull final Parcel in) {
+        serviceImageId = in.readString();
         uri = in.readParcelable(Uri.class.getClassLoader());
         title = in.readString();
         description = in.readString();
@@ -227,6 +239,7 @@ public class Image implements Parcelable {
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
+        dest.writeString(serviceImageId);
         dest.writeParcelable(uri, 0);
         dest.writeString(title);
         dest.writeString(description);
@@ -254,6 +267,7 @@ public class Image implements Parcelable {
      */
     public Builder buildUpon() {
         return new Builder()
+            .setServiceImageId(serviceImageId)
                 .setUrl(uri)
                 .setTitle(title)
                 .setDescription(description)
@@ -438,7 +452,8 @@ public class Image implements Parcelable {
 
         final Image image = (Image) o;
 
-        return uri.equals(image.uri)
+        return Objects.equals(serviceImageId, image.serviceImageId)
+                && uri.equals(image.uri)
                 && StringUtils.equals(title, image.title)
                 && StringUtils.equals(description, image.description)
                 && targetScale == image.targetScale
@@ -453,6 +468,6 @@ public class Image implements Parcelable {
     @NonNull
     @Override
     public String toString() {
-        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "/cat:" + category + "/targetScale:" + targetScale + "]";
+        return "[serviceid:" + serviceImageId + "/Uri:" + uri + "/Title:" + title + "/Desc:" + description + "/cat:" + category + "/targetScale:" + targetScale + "]";
     }
 }
