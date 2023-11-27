@@ -3,6 +3,7 @@
 - Oplossing: coord.info trackable links kunnen niet meer worden geopend
 - Oplossing: Verkeerde standaard bij handmatig loggen van een trackable
 - Oplossing: Cache icoon op kaart niet bijgewerkt na het loggen van popup
+- Oplossing: Crash bij het weergeven van log-opties
 
 ##
 - Wijziging: Aparte BetterCacher box verwijderd, tik op de BetterCacher info lijn
