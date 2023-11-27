@@ -1442,6 +1442,7 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
@@ -1501,6 +1502,7 @@
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
+    <string name="edit">Bearbeiten</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
@@ -1547,6 +1549,7 @@
     <string name="web_downloaded">Heruntergeladen</string>
     <!-- popup -->
     <string name="popup_more">Mehr Details</string>
+    <string name="map_fragment_swipe_hint_text">Zum Öffnen der Detailansicht wischen</string>
     <!-- waypoint -->
     <string name="waypoint">Wegpunkt</string>
     <string name="waypoint_coordinates">Koordinaten</string>
@@ -1732,6 +1735,7 @@
     <string name="search_finder">Gefunden von</string>
     <string name="search_finder_prefill">Finder</string>
     <string name="search_finder_button">Suche nach Finder</string>
+    <string name="search_filter">Suche</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
@@ -2322,9 +2326,12 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
+    <string name="center">Zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
+    <string name="make_visible">Sichtbar machen</string>
+    <string name="hide">Ausblenden</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2494,6 +2501,8 @@
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimieren</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Alle auswählen</string>
+    <string name="multiselect_selectvisible">Sichtbare auswählen</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebiet</string>
     <string name="rtl_fell_meadow">Wiese</string>
