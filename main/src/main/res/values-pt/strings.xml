@@ -945,8 +945,7 @@
     <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\n
-Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(s) backup(s) para um armazenamento externo.</string>
+    <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\nDica: Copie os ficheiros de backup p/ outro armazenamento, podendo assim restaura-los mesmo que perca o telemóvel.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -2500,6 +2499,7 @@ Nota: De modo a poder restaurar os dados, mesmo que perca o telemóvel, copie o(
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Selecionar Tudo</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
