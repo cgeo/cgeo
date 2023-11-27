@@ -4,6 +4,7 @@
 - Oprava: Výchozí chyba při ručním logování sledovatelného objektu
 - Oprava: Ikona kešky na mapě se po zalogování z vyskakovacího okna neaktualizuje
 - Fix: Crash on displaying logging options
+- Fix: Crash on retrieving message center status
 
 ##
 - Změna: Odstraněno samostatné pole BetterCacher, místo toho klepněte na informační řádek BetterCacher
