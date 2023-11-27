@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
@@ -18,7 +17,6 @@ import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
@@ -44,14 +42,16 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
+import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.SearchManager;
 import android.content.Context;
@@ -80,21 +80,13 @@ import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.util.Pair;
 import androidx.core.view.MenuCompat;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
-import io.reactivex.rxjava3.schedulers.Schedulers;
-import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
 public class MainActivity extends AbstractNavigationBarActivity {
@@ -286,60 +278,21 @@ public class MainActivity extends AbstractNavigationBarActivity {
     }
 
     private void configureMessageCenterPolling() {
-        final Observable<JsonNode> pollingObservable = Observable.interval(10, 300, TimeUnit.SECONDS)
-                .flatMap(tick -> {
-                    if (Settings.getBoolean(R.string.pref_pollMessageCenter, false)) {
-                        final JsonNode temp = getMessageCenterStatus();
-                        return temp != null ? Observable.just(temp) : Observable.empty();
-                    } else {
-                        return Observable.empty();
+        final Activity that = this;
+        MessageCenterUtils.setReceiver(this, intent -> {
+            if (Looper.myLooper() == null) {
+                Looper.prepare();
+            }
+            final int count = intent.getIntExtra(EXTRA_MESSAGE_CENTER_COUNTER, 0);
+            new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
+                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
+                    updateHomeBadge(-1);
+                    if (actionRequested) {
+                        ShareUtils.openUrl(that, GCConstants.URL_MESSAGECENTER);
                     }
                 });
-
-        resumeDisposables.add(pollingObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.single())
-                .subscribe(data -> {
-                    @SuppressLint("SimpleDateFormat")
-                    final DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                    final long time = Objects.requireNonNull(df.parse(data.at("/lastConversationActivityDateUtc").textValue())).getTime();
-                    final int count = Integer.parseInt(data.at("/unreadConversationCount").toString());
-                    if (time != lastMCTime) {
-                        lastMCTime = time;
-                        if (count > 0) {
-                            Looper.prepare();
-                            new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
-                                updateHomeBadge(1);
-                                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
-                                    updateHomeBadge(-1);
-                                    if (actionRequested) {
-                                        ShareUtils.openUrl(this, GCConstants.URL_MESSAGECENTER);
-                                    }
-                                });
-                            });
-                        }
-                    }
-                }, throwable -> {
-                    Log.e("Error occurred while polling message center: " + throwable.getMessage());
-                }));
-    }
-
-
-    @Nullable
-    private static JsonNode getMessageCenterStatus() {
-        if (!GCConnector.getInstance().isLoggedIn()) {
-            return null;
-        }
-        final Response response = Network.getRequest("https://www.geocaching.com/api/communication-service/participant/" + GCLogin.getInstance().getPublicGuid() + "/summary/", new Parameters()).blockingGet();
-        if (!response.isSuccessful()) {
-            return null;
-        }
-        final String jsonString = Network.getResponseData(response);
-        try {
-            return JsonUtils.reader.readTree(jsonString);
-        } catch (Exception ignore) {
-            return null;
-        }
+            });
+        });
     }
 
     private void prepareQuickLaunchItems() {

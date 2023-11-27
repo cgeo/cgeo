@@ -34,6 +34,7 @@ import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.Version;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NEARBY;
 import static cgeo.geocaching.settings.Settings.CUSTOMBNITEM_NONE;
@@ -194,6 +195,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+        MessageCenterUtils.setReceiver(this, intent -> updateHomeBadge(1));
     }
 
     @Override
