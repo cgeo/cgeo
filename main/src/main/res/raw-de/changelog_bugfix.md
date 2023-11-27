@@ -3,6 +3,7 @@
 - Korrektur: Trackable-Links konnten nicht mehr geöffnet werden
 - Fix: Wrong default when manually logging a trackable
 - Fix: Cache icon on map not updated after logging from popup
+- Fix: Crash on displaying logging options
 
 ##
 - Änderung: Die separate BetterCacher-Box wurde entfernt - tippe stattdessen auf BetterCacher Infozeile
