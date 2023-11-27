@@ -1,9 +1,10 @@
 ##
-- Fix: Hint hidden behind compass when using large fonts
+- Korrektur: Hinweis bei Nutzung großer Schriftarten durch Kompass verdeckt
 - Korrektur: Trackable-Links konnten nicht mehr geöffnet werden
-- Fix: Wrong default when manually logging a trackable
-- Fix: Cache icon on map not updated after logging from popup
-- Fix: Crash on displaying logging options
+- Korrektur: Falscher Standardwert beim manuellen Loggen eines Trackables
+- Korrektur: Cache Icon auf der Karte nach Loggen vom Popup nicht aktualisiert
+- Korrektur: Absturz bei Anzeige der Log-Optionen
+- Korrektur: Absturz beim Abrufen des Status des Nachrichten-Centers
 
 ##
 - Änderung: Die separate BetterCacher-Box wurde entfernt - tippe stattdessen auf BetterCacher Infozeile
