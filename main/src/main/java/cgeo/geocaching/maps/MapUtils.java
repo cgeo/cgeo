@@ -442,8 +442,15 @@ public class MapUtils {
         if (f2 != null) {
             fm.beginTransaction().remove(f2).commit();
         }
-        final View v = activity.findViewById(R.id.detailsfragment);
+        final FrameLayout v = activity.findViewById(R.id.detailsfragment);
         if (v != null && v.getVisibility() != View.GONE) {
+
+            final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) v.getLayoutParams()).getBehavior();
+            if (behavior instanceof BottomSheetBehavior) {
+                final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(v);
+                b.setState(BottomSheetBehavior.STATE_HIDDEN); // close correctly as it will otherwise conflict with up-swipe behaviour implementation
+            }
+
             v.setVisibility(View.GONE);
             return true;
         }
