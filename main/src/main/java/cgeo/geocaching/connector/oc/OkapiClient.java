@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -391,7 +392,9 @@ final class OkapiClient {
         result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
 
         if (finder != null) {
-            result.setFinder(finder);
+            final SearchCacheData scd = new SearchCacheData();
+            scd.addFoundBy(finder);
+            result.setCacheData(scd);
         }
         return result;
 

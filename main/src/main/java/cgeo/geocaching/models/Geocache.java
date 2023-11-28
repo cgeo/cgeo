@@ -2,6 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.AmendmentUtils;
@@ -211,8 +212,8 @@ public class Geocache implements IWaypoint {
 
     private CacheVariableList variables;
 
-    //transient field, used for online search by finder only
-    private String finder = null;
+    //transient field, used for online searches only
+    private SearchCacheData searchCacheData = null;
 
     public void setChangeNotificationHandler(@Nullable final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -414,8 +415,8 @@ public class Geocache implements IWaypoint {
         if (assignedEmoji == 0) {
             assignedEmoji = other.assignedEmoji;
         }
-        if (finder == null) {
-            finder = other.finder;
+        if (searchCacheData == null) {
+            searchCacheData = other.searchCacheData;
         }
 
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
@@ -502,7 +503,7 @@ public class Geocache implements IWaypoint {
                 Objects.equals(logCounts, other.logCounts) &&
                 Objects.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined &&
-                Objects.equals(finder, other.finder);
+                Objects.equals(searchCacheData, other.searchCacheData);
     }
 
     public boolean hasTrackables() {
@@ -2475,15 +2476,15 @@ public class Geocache implements IWaypoint {
      * used for online search metainfos (e.g. finder)
      */
     @Nullable
-    public String getSearchFinder() {
-        return finder;
+    public SearchCacheData getSearchData() {
+        return searchCacheData;
     }
 
     /**
      * used for online search metainfos (e.g. finder)
      */
-    public void setSearchFinder(@Nullable final String finder) {
-        this.finder = finder;
+    public void setSearchData(@Nullable final SearchCacheData searchCacheData) {
+        this.searchCacheData = searchCacheData;
     }
 
     private class EventTimesInMin {

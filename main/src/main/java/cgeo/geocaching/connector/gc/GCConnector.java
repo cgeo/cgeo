@@ -68,7 +68,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
 
-    public static final String SEARCH_CONTEXT_LEGACY_PAGING = "sc_gc_legacy_paging";
     public static final String SEARCH_CONTEXT_FILTER = "sc_gc_filter";
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
 
@@ -291,12 +290,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }
 
-        if (context.getBoolean(SEARCH_CONTEXT_LEGACY_PAGING)) {
-            return GCParser.searchByNextPage(this, context);
-        }
 
         if (filter == null) {
-            //non-legacy-nextpage needs a filter to proceed. If none is there then return empty result
+            //we need a filter to proceed. If none is there then return empty result
             return new SearchResult();
         }
 

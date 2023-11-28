@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheAttribute;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DifficultyAndTerrainGeocacheFilter;
@@ -30,10 +29,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
-import static cgeo.geocaching.filters.core.GeocacheFilterType.LOG_ENTRY;
 
 import android.os.Bundle;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -63,11 +60,11 @@ public class GCMap {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(con, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
-            if (searchPair == null || searchPair.first == null) {
+            final GCWebAPI.WebApiSearch search = createSearchForFilter(con, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
+            if (search == null) {
                 return new SearchResult();
             }
-            final GCWebAPI.WebApiSearch search = searchPair.first;
+
             search.setBox(viewport);
 
             final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
@@ -96,28 +93,24 @@ public class GCMap {
     @WorkerThread
     private static SearchResult searchByFilter(final IConnector con, @NonNull final GeocacheFilter filter, final int take, final int alreadyTook) {
 
-        final Pair<GCWebAPI.WebApiSearch, SearchResult> search = createSearchForFilter(con, filter, take, alreadyTook);
+        final GCWebAPI.WebApiSearch search = createSearchForFilter(con, filter, take, alreadyTook);
         if (search == null) {
             return new SearchResult();
         }
-        if (search.first == null) {
-            //this happens for legacy searches (e.g. by finder). Make sure filter is set there too for origin filtering
-            search.second.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
-            return search.second;
-        }
 
-        final SearchResult sr = GCWebAPI.searchCaches(con, search.first, true);
+        final SearchResult sr = GCWebAPI.searchCaches(con, search, true);
+        search.fillSearchCacheData(sr.getOrCreateCacheData());
         sr.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
         sr.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, take + alreadyTook));
         return sr;
     }
 
 
-    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
         return createSearchForFilter(connector, filter, 200, 0);
     }
 
-    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
 
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(LocationDataProvider.getInstance().currentGeo().getCoords());
@@ -131,10 +124,6 @@ public class GCMap {
 
         final List<BaseGeocacheFilter> filterAndChain = filter.getAndChainIfPossible();
         for (BaseGeocacheFilter baseFilter : filterAndChain) {
-            //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
-            if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
-                return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
-            }
             fillForBasicFilter(baseFilter, search);
         }
 
@@ -146,18 +135,8 @@ public class GCMap {
             search.setStatusEnabled(null);
         }
 
-        return new Pair<>(search, null);
+        return search;
 
-    }
-
-    private static SearchResult searchByFinder(final IConnector con, final String userName, final GeocacheFilter filter) {
-        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filters, StatusGeocacheFilter.class);
-        final boolean noFoundOwn = statusFilter != null && FALSE.equals(statusFilter.getStatusFound()) && FALSE.equals(statusFilter.getStatusOwned());
-
-        final TypeGeocacheFilter typeFilter = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
-        final CacheType ct = typeFilter != null && typeFilter.getValues().size() == 1 ? typeFilter.getValues().iterator().next() : null;
-        return GCParser.searchByUsername(con, userName, ct, noFoundOwn);
     }
 
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
@@ -227,7 +206,9 @@ public class GCMap {
             case LOG_ENTRY:
                 final LogEntryGeocacheFilter foundByFilter = (LogEntryGeocacheFilter) basicFilter;
                 if (foundByFilter.isInverse()) {
-                    search.setNotFoundBy(foundByFilter.getFoundByUser());
+                    search.addNotFoundBy(foundByFilter.getFoundByUser());
+                } else {
+                    search.addFoundBy(foundByFilter.getFoundByUser());
                 }
                 break;
             default:
