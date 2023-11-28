@@ -40,7 +40,7 @@ public class PositionLayer extends Layer {
     @Override
     public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
 
-        if (coordinates == null) {
+        if (coordinates == null || location == null) {
             return;
         }
 
@@ -60,15 +60,15 @@ public class PositionLayer extends Layer {
 
         if (accuracy >= 0) {
             final Circle circle = new Circle(location, accuracy, accuracyCircleFill, accuracyCircle);
-            circle.setDisplayModel(this.getDisplayModel());
+            circle.setDisplayModel(getDisplayModel());
             circle.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
         }
 
         // prepare heading indicator
 
-        final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-        final double pixelX = MercatorProjection.longitudeToPixelX(this.location.longitude, mapSize);
-        final double pixelY = MercatorProjection.latitudeToPixelY(this.location.latitude, mapSize);
+        final long mapSize = MercatorProjection.getMapSize(zoomLevel, displayModel.getTileSize());
+        final double pixelX = MercatorProjection.longitudeToPixelX(location.longitude, mapSize);
+        final double pixelY = MercatorProjection.latitudeToPixelY(location.latitude, mapSize);
         final int centerX = (int) (pixelX - topLeftPoint.x);
         final int centerY = (int) (pixelY - topLeftPoint.y);
 
