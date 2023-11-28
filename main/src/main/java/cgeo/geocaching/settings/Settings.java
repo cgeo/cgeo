@@ -45,6 +45,7 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -1195,7 +1196,7 @@ public class Settings {
 
     /** use UnifiedMap as default map in certain places */
     public static boolean useUnifiedMap() {
-        return getBoolean(R.string.pref_useUnifiedMap, false);
+        return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
     }
 
     public static void setMapDownloaderSource(final int source) {

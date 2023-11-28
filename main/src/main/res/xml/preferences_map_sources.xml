@@ -120,7 +120,6 @@
             android:summary="@string/settings_hide_tileproviders_summary"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_useUnifiedMap"
             android:summary="@string/init_summary_useUnifiedMap"
             android:title="@string/init_title_useUnifiedMap"
