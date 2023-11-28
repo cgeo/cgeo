@@ -1,13 +1,12 @@
-<!-- based on https://fonts.google.com/icons: done -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960">
+    android:width="13dp"
+    android:height="13dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
   <path
-      android:fillColor="#4CAF50"
-      android:pathData="M440,950a460,460 0,1 1,100 0Z" />
+      android:pathData="M12,12m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0"
+      android:fillColor="#43A047"/>
   <path
-      android:fillColor="#FF000000"
-      android:pathData="M382,720L154,492L211,435L382,606L749,239L806,296L382,720Z"/>
+      android:pathData="M10.1,17.794L5.753,13.447L7.734,11.466L10.1,13.839L17.016,6.916L18.997,8.897L10.1,17.794Z"
+      android:fillColor="#fff"/>
 </vector>
