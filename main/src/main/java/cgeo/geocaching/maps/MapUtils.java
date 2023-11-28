@@ -392,6 +392,7 @@ public class MapUtils {
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
+                        ActivityMixin.overrideTransitionToFade(activity);
                     }
                 }
 
