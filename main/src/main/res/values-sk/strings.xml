@@ -233,6 +233,7 @@
     <string name="err_acquire_image_failed">Získavanie obrázku zlyhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázka musí byť JPEG/JPG, PNG alebo GIF</string>
     <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný predmet?</string>
+    <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
     <string name="err_tb_not_loggable">Tento TB sa nedá zalogovať.</string>
     <string name="err_tb_not_found">c:geo nemôže nájsť trasovateľný predmet %s.</string>
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
@@ -1428,8 +1429,6 @@
     <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku/bod trasy)</string>
     <string name="init_ActionbarAutohide">Ťuknutím skryť panel nástrojov</string>
     <string name="init_summary_ActionbarAutohide">Ťuknutím na voľné miesto na mape skryť/zobraziť panel nástrojov</string>
-    <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky/body trasy.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
@@ -1648,7 +1647,6 @@
     <string name="search_finder">Nájdené kým</string>
     <string name="search_finder_prefill">Nálezca</string>
     <string name="search_finder_button">Hľadať podľa mena nálezcu</string>
-    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>
@@ -2061,7 +2059,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používate verziu c:geo, ktorá vyzerá byť staršia ako jeden rok. Niektoré funkcie už nemusia fungovať z dôvodu zmien webstránky alebo technických zmien. Prečítajte si náš FAQ na tému možnosti aktualizácie.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Hovoriaci kompas</string>
-    <string name="tts_toggle">Prepnúť hlasové pokyny</string>
     <string name="tts_started">Rozprávanie zapnuté</string>
     <string name="tts_stopped">Rozprávanie vypnuté</string>
     <string name="tts_running">Služba prevodu na reč je spustená…</string>
@@ -2186,8 +2183,6 @@
     <string name="permission_contacts_read_explanation">c:geo dokáže vyhľadávať kontakty vo vašom adresári pomocou mien kešerov. Ak to chcete urobiť, je potrebné povoliť aplikácii c:geo čítanie vášho adresára. V opačnom prípade nie je možné túto funkciu použiť.</string>
     <string name="permission_location_explanation_title">Povolenie k polohe</string>
     <string name="permission_location_explanation">Aplikácia c:geo je optimalizovaná na použitie s údajmi GPS (presná poloha) na určenie polohy a výpočet vzdialenosti a smeru ku keške. Bez tohto povolenia nebudú funkcie založené na polohe fungovať podľa očakávania.</string>
-    <string name="permission_read_external_storage_explanation_title">Povolenie na čítanie externého úložiska</string>
-    <string name="permission_read_external_storage_explanation">Aplikácia c:geo môžeš použiť vašu systémovú tapetu ako pozadie v aplikácii. Na to potrebuje aplikácia c:geo povolenie na čítanie mediálnych údajov na externom úložisku.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo zapísuje údaje do pamäte telefónu alebo na SD kartu, napr. keď ukladáte kešky na použitie offline, importujete alebo exportujete súbory a pri ďalších funkciách. V niektorých verziách systému Androidu je potrebné na tieto úkony udeliť dodatočné povolenie.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Staršie povolenie na zápis do externého úložiska</string>
     <string name="storage_permission_needed">Táto funkcia nie je možná bez povolenia k ukladaciemu priestoru.</string>
@@ -2260,12 +2255,9 @@
     <string name="routes_tracks_dialog_title">Možnosti trasy/stopy</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte farbu</string>
-    <string name="center_on_route_track">Vycentrovať na trasu/stopu</string>
     <string name="unload_route_track">Zrušiť trasu/stopu</string>
     <string name="route">Trasa</string>
     <string name="track">Stopa</string>
-    <string name="make_visible">zviditeľniť</string>
-    <string name="hide">skryť</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2431,7 +2423,7 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Oblasti</string>
     <string name="rtl_fell_meadow">holina/lúka</string>
