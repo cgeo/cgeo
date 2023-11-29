@@ -188,6 +188,7 @@
     <string name="err_select_logimage_failed">Не вдалося вибрати зображення для журналу.</string>
     <string name="err_acquire_image_failed">Не вдалося виконати зображення.</string>
     <string name="err_tb_display">c:geo не може відобразити те, що ви хочете. Ви дійсно хочете відстежувати?</string>
+    <string name="err_tb_details_open">c:geo не вдалося відкрити подробиці, що відстежуються.</string>
     <string name="err_tb_not_loggable">Це відстежуване неможливо увійти.</string>
     <string name="err_tb_find_that">c:geo не може знайти цей геокеш.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знає, який кеш ви хочете додати точку.</string>
@@ -1286,7 +1287,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Ви використовуєте версію c:geo, яка, здається, старша за один рік. Деякі функції можуть не працювати більше через веб-сайт або інші технічні зміни. Будь ласка, прочитайте наші FAQ про те, як оновити їх.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Компас для розмови</string>
-    <string name="tts_toggle">перемикати розмову</string>
     <string name="tts_started">початок мовлення</string>
     <string name="tts_stopped">Припинено мовлення</string>
     <string name="err_tts_lang_not_supported">Поточна мова не підтримується синтезом мовлення.</string>
@@ -1429,7 +1429,7 @@
     <string name="next">Наступний</string>
     <string name="finish">Закінчити</string>
     <string name="cancel">Скасувати</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
