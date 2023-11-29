@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Ошибка при загрузке изображения.</string>
     <string name="err_acquire_image_unsupported_format">Формат изображения должен быть JPEG/JPG, PNG или GIF</string>
     <string name="err_tb_display">Не удалось отобразить искомый трекабл. Это точно трекабл?</string>
+    <string name="err_tb_details_open">Не удалось получить информацию о трекабле.</string>
     <string name="err_tb_not_loggable">Этот трекабл не поддерживает записи.</string>
     <string name="err_tb_not_found">Не удалось найти трекабл %s.</string>
     <string name="err_tb_find_that">c:geo не удаётся найти данный трекабл.</string>
@@ -1540,8 +1541,6 @@
     <string name="init_summary_show_routing_menu">Длительное нажатие на тайник показывает меню с расширенными параметрами для добавления/удаления тайника в/из маршрута. Если отключено, то тайник только добавляется/удаляется в/из маршрута.</string>
     <string name="init_ActionbarAutohide">Скрыть панель инструментов при нажатии</string>
     <string name="init_summary_ActionbarAutohide">Нажмите на свободное место на карте, чтобы скрыть/показать панель инструментов</string>
-    <string name="onetime_info_longtap_disabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте в настоящее время отключено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
-    <string name="onetime_info_longtap_enabled">Долгое нажатие на карте позволяет создавать индивидуальные маршруты и заданные пользователем тайники / путевые точки.\n\nДолгое нажатие на карте сейчас включено.\n\nВы можете изменить это в Настройки → Карта → Поведение карты</string>
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
@@ -1761,7 +1760,6 @@
     <string name="search_finder">Найден</string>
     <string name="search_finder_prefill">Нашедший</string>
     <string name="search_finder_button">Поиск по имени нашедшего</string>
-    <string name="search_filter">Фильтр</string>
     <string name="search_filter_button">Поиск по фильтру</string>
     <string name="search_filter_info_message" formatted="false">**Поиск по фильтру** производится по всем активным онлайн-сервисам по заданным условиям. Однако, поисковые возможности этих сервисов обычно более ограничены, чем возможности фильтра c:geo.\n\n- Все службы поддерживают только И фильтры (нет ИЛИ, нет инверсии).\n- Такие базовые фильтры, как **тип тайника** или **размер тайника**, есть во всех сервисах. Но более сложные фильтры зачастую не поддерживаются или имеют некоторые ограничения, например **избранное**.\n- Подробный список условий фильтрации, которые поддерживают разные сервисы, можно найти [здесь](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nФильтры, не поддерживаемые онлайн-сервисом, будут применяться c:geo для полученных результатов.</string>
     <string name="search_tb">Трекабл</string>
@@ -2174,7 +2172,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Вы используете версию c:geo, которая, скорее всего, устарела больше, чем на год. Некоторые функции больше не работают из-за технических изменений или веб-сайта. Пожалуйста, прочтите FAQ о том, как обновить.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Говорящий компас</string>
-    <string name="tts_toggle">Включить говорилку</string>
     <string name="tts_started">Речь началась</string>
     <string name="tts_stopped">Речь закончилась</string>
     <string name="tts_running">Голосовая служба запущена…</string>
@@ -2306,8 +2303,6 @@
     <string name="permission_contacts_read_explanation">c:geo может искать контакты в адресной книге используя имена геокэшеров. Для этого необходимо разрешить c:geo читать вашу адресную книгу. В противном случае использование этой функции невозможно.</string>
     <string name="permission_location_explanation_title">Разрешение на доступ к определению местоположения</string>
     <string name="permission_location_explanation">c:geo оптимизирован для использования данных GPS (точное местоположение) для определения местоположения, а также расчета расстояния и направления на тайник. Без этого разрешения функции на основе определения местоположения работать не будут.</string>
-    <string name="permission_read_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
-    <string name="permission_read_external_storage_explanation">c:geo может использовать ваши системные обои в качестве фона для приложения. Для этого c:geo требуется разрешение на чтение ваших медиа данных на внешнем накопителе.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo запишет данные на ваше устройство или SD-карту, например когда вы сохраняете тайники для использования в автономном режиме, импортируйте или экспортируйте файлы, а также для других функций. В некоторых версиях Android вам нужно предоставить дополнительные разрешения для этих действий.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Разрешение на чтение внешнего накопителя</string>
     <string name="permission_post_notifications_explanation">c:geo использует уведомления, чтобы сообщить вам о загрузках и приближении к тайникам (если активировано)</string>
@@ -2385,12 +2380,9 @@
     <string name="routes_tracks_dialog_title">Параметры маршрутов / треков</string>
     <string name="routes_tracks_menu">Маршруты / Треки</string>
     <string name="routes_tracks_color">Выберите цвет</string>
-    <string name="center_on_route_track">Центр на маршрут/трек</string>
     <string name="unload_route_track">Выгрузить маршрут/трек</string>
     <string name="route">Маршрут</string>
     <string name="track">Трек</string>
-    <string name="make_visible">сделать видимым</string>
-    <string name="hide">скрыть</string>
     <!-- distance units -->
     <string name="unit_m">м</string>
     <string name="unit_km">км</string>
@@ -2559,7 +2551,7 @@
     <string name="redo">Повторить</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Оптимизация</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Области</string>
     <string name="rtl_fell_meadow">вырубка / луг</string>
