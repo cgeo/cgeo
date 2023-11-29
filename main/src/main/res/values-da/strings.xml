@@ -224,6 +224,7 @@
     <string name="err_select_logimage_failed">Valg af billede til logbeskeden mislykkedes.</string>
     <string name="err_acquire_image_failed">Optagelse af et billede mislykkedes.</string>
     <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
+    <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
     <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
     <string name="err_tb_not_found">c:geo kan ikke finde trackable %s.</string>
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
@@ -1036,8 +1037,6 @@
     <string name="internal_goto_targets_title">\'Gå til\' mål</string>
     <string name="internal_goto_targets_description">Denne cache gemmer dine seneste \"Gå til\" mål. Den oprettes automatisk, når du har brugt funktionen \"Gå til\" i hovedmenuen. Den indtastede position vil blive gemt i rutepunkter for denne cache. Hvis du ikke længere har brug for disse positioner, kan du sikkert slette denne cache eller nogen af dens rutepunkter. Du kan også flytte cachen til enhver anden liste efter eget valg.</string>
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
-    <string name="onetime_info_longtap_disabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået fra.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
-    <string name="onetime_info_longtap_enabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået til.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
     <!-- coordinate calculator hints -->
@@ -1147,7 +1146,6 @@
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
@@ -1517,7 +1515,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Din enhed bruger en version af c:geo, som er ældre end et år. Tekniske ændringer på benyttede tjenester kan bevirke at nogle funktioner ikke længere fungerer. Læs venligst vores OSS om hvordan du opgraderer.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompas</string>
-    <string name="tts_toggle">Skift tekst-til-tale-tilstand</string>
     <string name="tts_started">Tale startet</string>
     <string name="tts_stopped">Tale stoppet</string>
     <string name="err_tts_lang_not_supported">Det aktuelle sprog understøttes ikke af tekst-til-tale.</string>
@@ -1719,7 +1716,7 @@
     <string name="done">Færdig</string>
     <string name="finish">Afslut</string>
     <string name="cancel">Annullér</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
