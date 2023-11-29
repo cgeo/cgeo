@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Erstellen eines Fotos ist fehlgeschlagen.</string>
     <string name="err_acquire_image_unsupported_format">Bildformat muss eines von JPEG/JPG, PNG oder GIF sein</string>
     <string name="err_tb_display">c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
+    <string name="err_tb_details_open">c:geo konnte die Details des Trackables nicht öffnen.</string>
     <string name="err_tb_not_loggable">Dieser Trackable ist nicht logbar.</string>
     <string name="err_tb_not_found">c:geo konnte keine Trackable %s finden.</string>
     <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
@@ -1101,6 +1102,9 @@
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
+    <string name="init_reset_otm">Einmalige Nachrichten zurücksetzen</string>
+    <string name="init_reset_otm_confirm">Möchtest du alle einmaligen Nachrichten zurücksetzen?</string>
+    <string name="init_reset_otm_done">Einmalige Nachrichten wurden zurückgesetzt</string>
     <string name="init_please_wait">Bitte warten…</string>
     <string name="settings_open_website">Webseite öffnen</string>
     <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
@@ -1438,6 +1442,7 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
@@ -1497,6 +1502,7 @@
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
+    <string name="edit">Bearbeiten</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
@@ -1511,8 +1517,6 @@
     <string name="init_summary_show_routing_menu">Langes Tippen auf einen Cache zeigt ein Menü mit erweiterten Optionen, um den Cache zu einer Route hinzuzufügen/von ihr zu entfernen. Wenn deaktiviert, wird der Cache direkt zur Route hinzugefügt/von ihr entfernt.</string>
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
-    <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches /Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
-    <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches / Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert.\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
@@ -1545,6 +1549,7 @@
     <string name="web_downloaded">Heruntergeladen</string>
     <!-- popup -->
     <string name="popup_more">Mehr Details</string>
+    <string name="map_fragment_swipe_hint_text">Zum Öffnen der Detailansicht wischen</string>
     <!-- waypoint -->
     <string name="waypoint">Wegpunkt</string>
     <string name="waypoint_coordinates">Koordinaten</string>
@@ -1730,7 +1735,6 @@
     <string name="search_finder">Gefunden von</string>
     <string name="search_finder_prefill">Finder</string>
     <string name="search_finder_button">Suche nach Finder</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
@@ -2141,7 +2145,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
-    <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
     <string name="tts_started">Sprachausgabe gestartet</string>
     <string name="tts_stopped">Sprachausgabe gestoppt</string>
     <string name="tts_running">Sprachdienst läuft…</string>
@@ -2247,8 +2250,6 @@
     <string name="permission_contacts_read_explanation">c:geo kann Kontakte in deinem Adressbuch mit Cacher-Namen suchen. Um dies zu tun, musst du c:geo erlauben, dein Adressbuch zu lesen. Andernfalls ist die Nutzung dieser Funktion nicht möglich.</string>
     <string name="permission_location_explanation_title">Standortberechtigung</string>
     <string name="permission_location_explanation">c:geo ist optimiert für die Nutzung mit GPS-Daten (genauer Standort) um deine Position zu lokalisieren und Distanz und Richtung zu Geocaches zu berechnen. Ohne diese Berechtigung funktionieren ortungsbasierte Funktionen nicht wie erwartet.</string>
-    <string name="permission_read_external_storage_explanation_title">Leseberechtigung für externen Speicher</string>
-    <string name="permission_read_external_storage_explanation">c:geo kann dein System-Hintergrund als Hintergrund für die App verwenden. Um dies zu tun, benötigt c:geo die Erlaubnis, deine Mediendaten auf externem Speicher zu lesen.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo schreibt Daten auf den Telefonspeicher oder die SD-Karte, beispielsweise beim Speichern von Geocaches zur Offline-Nutzung, beim Import oder Export und weiteren Funktionen. Manche Android-Versionen benötigen hierfür eine zusätzliche Berechtigung.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Schreibberechtigung für externen Speicher</string>
     <string name="permission_post_notifications_explanation">c:geo verwendet Benachrichtigungen, um dich über laufende Downloads und Annäherung an Caches zu informieren (falls aktiviert)</string>
@@ -2324,12 +2325,12 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
-    <string name="center_on_route_track">Auf Route/Track zentrieren</string>
+    <string name="center">Zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
     <string name="make_visible">Sichtbar machen</string>
-    <string name="hide">verbergen</string>
+    <string name="hide">Ausblenden</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2498,8 +2499,9 @@
     <string name="redo">Wiederholen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimieren</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Alle auswählen</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Alle auswählen</string>
+    <string name="multiselect_selectvisible">Sichtbare auswählen</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebiet</string>
     <string name="rtl_fell_meadow">Wiese</string>
