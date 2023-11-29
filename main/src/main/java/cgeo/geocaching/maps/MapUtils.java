@@ -358,10 +358,9 @@ public class MapUtils {
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
 
         final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
-
         final SwipeToOpenFragment swipeToOpenFragment = new SwipeToOpenFragment();
-        ft.add(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+        ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+        ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
 
         ft.commit();
 
@@ -393,12 +392,13 @@ public class MapUtils {
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
+                        ActivityMixin.overrideTransitionToFade(activity);
                     }
                 }
 
                 @Override
                 public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                    swipeToOpenFragment.setExpansion(slideOffset);
+                    swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
                 }
             };
 
@@ -442,8 +442,15 @@ public class MapUtils {
         if (f2 != null) {
             fm.beginTransaction().remove(f2).commit();
         }
-        final View v = activity.findViewById(R.id.detailsfragment);
+        final FrameLayout v = activity.findViewById(R.id.detailsfragment);
         if (v != null && v.getVisibility() != View.GONE) {
+
+            final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) v.getLayoutParams()).getBehavior();
+            if (behavior instanceof BottomSheetBehavior) {
+                final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(v);
+                b.setState(BottomSheetBehavior.STATE_HIDDEN); // close correctly as it will otherwise conflict with up-swipe behaviour implementation
+            }
+
             v.setVisibility(View.GONE);
             return true;
         }
