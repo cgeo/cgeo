@@ -247,6 +247,7 @@ public final class MapMarkerUtils {
         final Geocache cache = waypoint.getParentGeocache();
         if (null != cache) {
             hcb.append(getAssignedMarkers(cache))
+                    .append(getMarkerIdIfLogged(cache))
                     .append(cache.isDisabled())
                     .append(cache.isArchived())
                     .append(cache.isLinearAlc() ? waypoint.getPrefix() : false)
@@ -317,7 +318,10 @@ public final class MapMarkerUtils {
 
         // top-left: emoji
         if (cache != null) {
-            if (forMap && cache.getAssignedEmoji() != 0) {
+            final Integer logMarker = getMarkerIdIfLogged(cache);
+            if (forMap && logMarker != null) {
+                insetsBuilder.withInset(new InsetBuilder(logMarker, Gravity.TOP | Gravity.LEFT));
+            } else if (forMap && cache.getAssignedEmoji() != 0) {
                 insetsBuilder.withInset(new InsetBuilder(getEmojiMarker(res, cache.getAssignedEmoji(), applyScaling), Gravity.TOP | Gravity.LEFT));
             } else if (forMap) {
                 insetsBuilder.withInset(new InsetBuilder(getTypeMarker(res, cache, true, applyScaling, false), Gravity.TOP | Gravity.LEFT));
