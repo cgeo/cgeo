@@ -256,6 +256,7 @@
     <string name="err_acquire_image_failed">L\'acquisition d\'une nouvelle image pour la note a échoué.</string>
     <string name="err_acquire_image_unsupported_format">L\'image doit être un format JPEG/JPG, PNG ou GIF</string>
     <string name="err_tb_display">c:geo ne peut pas afficher l\'objet voyageur demandé. S\'agit-il vraiment d\'un objet voyageur ?</string>
+    <string name="err_tb_details_open">c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
     <string name="err_tb_not_loggable">Cet objet voyageur n\'a pas de carnet.</string>
     <string name="err_tb_not_found">c:geo n\'a pas trouvé l\'objet voyageur %s.</string>
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
@@ -1484,8 +1485,6 @@
     <string name="init_summary_show_routing_menu">Un appui long sur une cache affiche un menu avec des options avancées pour ajouter/supprimer la cache vers/depuis une route. Si désactivé, la cache est juste ajouté/supprimé à/de la route.</string>
     <string name="init_ActionbarAutohide">Masquer la barre d\'outils par appui</string>
     <string name="init_summary_ActionbarAutohide">Appuyez sur un espace libre de la carte pour masquer / afficher la barre d\'outils</string>
-    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
-    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
@@ -1703,7 +1702,6 @@
     <string name="search_finder">Trouvée par</string>
     <string name="search_finder_prefill">Découvreur</string>
     <string name="search_finder_button">Rechercher par nom du découvreur</string>
-    <string name="search_filter">Filtrer</string>
     <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
     <string name="search_tb">Objet voyageur</string>
@@ -2114,7 +2112,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
-    <string name="tts_toggle">Basculer la synthèse vocale</string>
     <string name="tts_started">Boussole parlante démarrée</string>
     <string name="tts_stopped">Boussole parlante arrêtée</string>
     <string name="tts_running">Le service vocal écoute…</string>
@@ -2216,8 +2213,6 @@
     <string name="permission_contacts_read_explanation">c:geo peut rechercher des contacts dans votre carnet d\'adresses en utilisant les noms des géocacheurs. Pour ce faire, vous devez autoriser c:geo à accéder à votre carnet d\'adresses. Sinon, l\'utilisation de cette fonctionnalité ne sera pas possible.</string>
     <string name="permission_location_explanation_title">Autorisation d\'accès à la position</string>
     <string name="permission_location_explanation">c:geo est optimisé pour utiliser les données GPS (localisation précise) afin de déterminer votre position et de calculer la distance et la direction des géocaches. Sans cette autorisation, les fonctionnalités basées sur la localisation ne fonctionneront pas correctement.</string>
-    <string name="permission_read_external_storage_explanation_title">Autorisation de lecture du stockage externe</string>
-    <string name="permission_read_external_storage_explanation">c:geo peut utiliser le fond d\'écran de votre système comme arrière-plan d\'application. A cette fin, vous devez autoriser c:geo à lire vos fichiers multimédia présents sur le stockage externe.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo enregistrera les données sur le stockage interne de votre appareil ou sur la carte SD par exemple lorsque vous enregistrez des éléments pour une utilisation hors ligne. Pour réaliser ces opérations, certaines versions d\'Android requièrent que vous accordiez une autorisation supplémentaire.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Ancienne uutorisation d\'écriture externe</string>
     <string name="permission_post_notifications_explanation">c:geo utilise des notifications pour vous informer des téléchargements et des caches dont vous vous approchez (si activé)</string>
@@ -2293,12 +2288,9 @@
     <string name="routes_tracks_dialog_title">Options des itinéraires / traces</string>
     <string name="routes_tracks_menu">Itinéraires / Traces</string>
     <string name="routes_tracks_color">Sélectionner la couleur</string>
-    <string name="center_on_route_track">Centrer sur l\'itinéraire</string>
     <string name="unload_route_track">Décharger la trace</string>
     <string name="route">Itinéraire</string>
     <string name="track">Trace</string>
-    <string name="make_visible">afficher</string>
-    <string name="hide">masquer</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2465,7 +2457,7 @@
     <string name="redo">Recommencer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimiser</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>
