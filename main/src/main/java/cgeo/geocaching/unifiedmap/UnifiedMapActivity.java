@@ -57,6 +57,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
@@ -329,8 +330,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        viewModel.mapCenter.observe(this, center -> updateCacheCount());
-        viewModel.caches.observe(this, caches -> updateCacheCount());
+        viewModel.mapCenter.observe(this, center -> updateCacheCountSubtitle());
+        viewModel.caches.observe(this, caches -> updateCacheCountSubtitle());
 
         MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
@@ -428,7 +429,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         viewModel.caches.notifyDataChanged();
                         mapFragment.setCenter(cache.getCoords());
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
-                        viewModel.setTarget(cache.getCoords(), cache.getName());
+                        viewModel.setTarget(cache.getCoords(), cache.getGeocode());
                     }
                     break;
                 case UMTT_TargetCoords:
@@ -484,12 +485,22 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         spinner.setVisibility(View.GONE);
     }
 
-    private void updateCacheCount() {
+    private void updateCacheCountSubtitle() {
         final int cacheCount = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+        String subtitle = res.getQuantityString(R.plurals.cache_counts, cacheCount, cacheCount);
+
+        // for single cache map show cache details instead
+        if (mapType.type == UMTT_TargetGeocode) {
+            final Geocache targetCache = getCurrentTargetCache();
+            if (targetCache != null) {
+                subtitle = Formatter.formatMapSubtitle(targetCache);
+            }
+        }
+
         CompactIconModeUtils.forceCompactIconMode(cacheCount);
         final ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
-            actionbar.setSubtitle(res.getQuantityString(R.plurals.cache_counts, cacheCount, cacheCount));
+            actionbar.setSubtitle(subtitle);
         }
     }
 
@@ -616,7 +627,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_MAP;
+        return mapType == null || mapType.type == UMTT_PlainMap ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
@@ -633,10 +644,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         initFollowMyLocation(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()));
 
         // live map mode
-        final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live); // @todo: take it from mapMode
-        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Settings.isLiveMap());
-
-        /* @todo        itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE); */
+        final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
+        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Settings.isLiveMap() && mapType.type == UMTT_PlainMap);
         itemMapLive.setVisible(true);
 
         // map rotation state
@@ -692,6 +701,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 ActivityMixin.invalidateOptionsMenu(this);
                 setTitle();
                 setMapModeFromMapType();
+            } else {
+                mapType.type = UMTT_PlainMap;
+                updateSelectedBottomNavItemId();
+                onMapReadyTasks(tileProvider, true);
             }
 
             /*
