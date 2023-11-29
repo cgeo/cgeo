@@ -34,7 +34,7 @@ public class SimpleItemListModel<T> {
 
     private ChoiceMode choiceMode = ChoiceMode.SINGLE_PLAIN;
 
-    private int minimumItemCountForFilterDisplay = 5;
+    private int minimumItemCountForFilterDisplay = 10;
 
     private int[] itemPaddingInDp = new int[]{10, 4, 10, 4};
 
