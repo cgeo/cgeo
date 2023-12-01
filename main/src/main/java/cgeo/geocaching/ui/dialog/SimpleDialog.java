@@ -543,6 +543,9 @@ public class SimpleDialog {
         textLayout.setVisibility(View.VISIBLE);
 
         textField.setInputType(io.inputType);
+         if (io.initialValue != null) {
+             textField.setText(io.initialValue);
+         }    
          if (io.label != null) {
              textLayout.setHint(io.label);
          }
