@@ -88,7 +88,9 @@ public final class DefaultMap {
     public static void startActivityGeoCode(final Context fromActivity, final Class<?> cls, final String geocode) {
         if (Settings.useUnifiedMap()) {
             Log.e("Launching UnifiedMap in geocode mode (1)");
-            new UnifiedMapType(geocode).launchMap(fromActivity);
+            final UnifiedMapType mapType = new UnifiedMapType(geocode);
+            mapType.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+            mapType.launchMap(fromActivity);
         } else {
             final MapOptions mo = new MapOptions(geocode);
             mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
@@ -117,14 +119,14 @@ public final class DefaultMap {
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
         if (Settings.useUnifiedMap()) {
             Log.e("Launching UnifiedMap in searchResult mode (2) (item count: " + search.getGeocodes().size() + ", title='" + title + "', fromList=" + fromList + ")");
-            // @todo: filter
-            new UnifiedMapType(search, title, fromList).launchMap(fromActivity);
+            final UnifiedMapType mapType = new UnifiedMapType(search, title, fromList);
+            mapType.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+            mapType.launchMap(fromActivity);
         } else {
             final MapOptions mo = new MapOptions(search, title, fromList);
             mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
             mo.startIntent(fromActivity, getDefaultMapClass());
         }
     }
-
 
 }
