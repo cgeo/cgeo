@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
@@ -20,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -122,26 +120,7 @@ class LoadInBackgroundHandler {
                     Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + previousViewport);
                 }
 
-                // WPs
-
-                viewModel.waypoints.getValue().clear();
-                if (viewport.count(viewModel.caches.getValue().getAsList()) < Settings.getWayPointsThreshold()) {
-                    final Set<Waypoint> waypoints;
-                    if (Settings.isLiveMap()) {
-                        //All visible waypoints
-                        waypoints = DataStore.loadWaypoints(viewport);
-                    } else {
-                        waypoints = new HashSet<>();
-                        //All waypoints from the viewed caches
-                        for (final Geocache c : viewModel.caches.getValue().getAsList()) {
-                            waypoints.addAll(c.getWaypoints());
-                        }
-                    }
-                    Log.e("load.waypoints: " + waypoints.size());
-                    MapUtils.filter(waypoints, activity.getFilterContext());
-                    viewModel.waypoints.getValue().addAll(waypoints);
-                    viewModel.waypoints.postNotifyDataChanged();
-                }
+                UnifiedMapActivity.loadWaypoints(activity, viewModel, viewport);
 
             } catch (Exception e) {
                 Log.e("load exception: " + e.getMessage());
