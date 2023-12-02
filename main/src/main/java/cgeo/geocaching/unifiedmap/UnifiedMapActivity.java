@@ -97,6 +97,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -427,6 +428,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     if (cache != null && cache.getCoords() != null) {
                         viewModel.caches.getValue().add(cache);
                         viewModel.caches.notifyDataChanged();
+                        loadWaypoints(this, viewModel, mapFragment.getViewport());
                         mapFragment.setCenter(cache.getCoords());
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         viewModel.setTarget(cache.getCoords(), cache.getGeocode());
@@ -441,6 +443,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     // load list of caches and scale map to see them all
                     final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes());
                     addSearchResultByGeocaches(mapType.searchResult);
+                    loadWaypoints(this, viewModel, viewport2);
                     // tileProvider.getMap().zoomToBounds(Viewport.containing(tempCaches));
                     mapFragment.zoomToBounds(viewport2);
                     break;
@@ -483,6 +486,27 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public void hideProgressSpinner() {
         final View spinner = findViewById(R.id.map_progressbar);
         spinner.setVisibility(View.GONE);
+    }
+
+    public static void loadWaypoints(final UnifiedMapActivity activity, final UnifiedMapViewModel viewModel, final Viewport viewport) {
+        viewModel.waypoints.getValue().clear();
+        if (viewport.count(viewModel.caches.getValue().getAsList()) < Settings.getWayPointsThreshold()) {
+            final Set<Waypoint> waypoints;
+            if (Settings.isLiveMap()) {
+                //All visible waypoints
+                waypoints = DataStore.loadWaypoints(viewport);
+            } else {
+                waypoints = new HashSet<>();
+                //All waypoints from the viewed caches
+                for (final Geocache c : viewModel.caches.getValue().getAsList()) {
+                    waypoints.addAll(c.getWaypoints());
+                }
+            }
+            Log.e("load.waypoints: " + waypoints.size());
+            MapUtils.filter(waypoints, activity.getFilterContext());
+            viewModel.waypoints.getValue().addAll(waypoints);
+            viewModel.waypoints.postNotifyDataChanged();
+        }
     }
 
     private void updateCacheCountSubtitle() {
