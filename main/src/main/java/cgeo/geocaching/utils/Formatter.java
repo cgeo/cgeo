@@ -401,7 +401,7 @@ public final class Formatter {
             ago = CgeoApplication.getInstance().getString(R.string.cache_offline_about_time_year);
         }
 
-        return CgeoApplication.getInstance().getString(R.string.cache_offline_stored) + "\n" + ago;
+        return String.format(CgeoApplication.getInstance().getString(R.string.cache_offline_stored_ago), ago);
     }
 
     /**

@@ -1437,7 +1437,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Remove all generated waypoints from this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
     <string name="cache_delete_generated_waypoints_success">Generated waypoints deleted</string>
     <string name="cache_offline_store">Store</string>
-    <string name="cache_offline_stored">Stored in device</string>
+    <string name="cache_offline_stored_ago">Stored %s</string>
     <string name="cache_offline_not_ready">Not available offline</string>
     <string name="cache_offline_time_mins_few">a few minutes ago</string>
     <plurals name="cache_offline_about_time_mins">
