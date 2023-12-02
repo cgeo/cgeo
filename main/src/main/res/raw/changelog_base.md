@@ -1,5 +1,6 @@
 ### Map
 - New: Highlight existing downloads in download manager
+- New: Show cache's found state on waypoint icons
 
 ### Cache details
 - Change: Make "Toggle talking" an actual toggle
