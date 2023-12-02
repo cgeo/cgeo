@@ -907,7 +907,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE)) {
                 result.add(new RouteOrRouteItem(viewModel.individualRoute.getValue()));
             }
-            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX)) {
+            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route) {
                 result.add(new RouteOrRouteItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             }
 
@@ -1000,9 +1000,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     });
                 } else {
                     viewModel.trackUpdater.observe(this, event -> {
-                        final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
-                        if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
-                            elevationChartUtils.showElevationChart(route, routeTrackUtils);
+                        if (viewModel.getTracks().getRoute(event.peek()) instanceof Route) {
+                            final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
+                            if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
+                                elevationChartUtils.showElevationChart(route, routeTrackUtils);
+                            }
                         }
                     });
                 }
