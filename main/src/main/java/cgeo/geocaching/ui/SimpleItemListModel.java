@@ -38,7 +38,7 @@ public class SimpleItemListModel<T> {
 
     private int[] itemPaddingInDp = new int[]{10, 4, 10, 4};
 
-    private int plainItemPaddingLeftInDp = 10;
+    private int plainItemPaddingLeftInDp = 15;
 
     private final GroupingOptions<Object> groupingOptions = new GroupingOptions<>();
 

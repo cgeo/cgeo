@@ -19,12 +19,16 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.text.Html;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.ImageViewCompat;
 
 import java.util.Objects;
 
@@ -38,8 +42,8 @@ public class GeoItemSelectorUtils {
 
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
 
-        final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName())).setImage(ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
+        final TextParam cacheName = TextParam.text(TextUtils.coloredCacheText(context, cache, cache.getName()));
+        final ImageParam cacheIcon = ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
 
         final StringBuilder text = new StringBuilder(cache.getShortGeocode());
         if (cache.getDifficulty() > 0.1f) {
@@ -48,8 +52,8 @@ public class GeoItemSelectorUtils {
         if (cache.getTerrain() > 0.1f) {
             text.append(Formatter.SEPARATOR).append("T ").append(cache.getTerrain());
         }
-        final TextView infoView = (TextView) view.findViewById(R.id.info);
-        infoView.setText(text);
+
+        setViewValues(view, cacheName, TextParam.text(text), cacheIcon);
 
         return view;
     }
@@ -57,9 +61,8 @@ public class GeoItemSelectorUtils {
     public static View createWaypointItemView(final Context context, final Waypoint waypoint, final View view) {
 
         final Geocache parentCache = waypoint.getParentGeocache();
-
-        final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName()).setImage(ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
+        final TextParam waypointName = TextParam.text(parentCache != null ? TextUtils.coloredCacheText(context, parentCache, waypoint.getName()) : waypoint.getName());
+        final ImageParam waypointIcon = ImageParam.drawable(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false, Settings.getIconScaleEverywhere()).getDrawable());
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
         if (parentCache != null) {
@@ -68,8 +71,7 @@ public class GeoItemSelectorUtils {
         if (StringUtils.isNotBlank(Html.fromHtml(waypoint.getNote()))) {
             text.append(Formatter.SEPARATOR).append(Html.fromHtml(waypoint.getNote()));
         }
-        final TextView infoView = (TextView) view.findViewById(R.id.info);
-        infoView.setText(text);
+        setViewValues(view, waypointName, TextParam.text(text), waypointIcon);
 
         return view;
     }
@@ -100,22 +102,18 @@ public class GeoItemSelectorUtils {
         }
 
         // Fallback - neither a cache nor waypoint. should never happen...
-
-        final TextView tv = (TextView) view.findViewById(R.id.text);
-        TextParam.text(geoitemRef.getName()).setImage(ImageParam.id(geoitemRef.getMarkerId()), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).applyTo(tv);
-
-        final TextView infoView = (TextView) view.findViewById(R.id.info);
-        infoView.setText(geoitemRef.getGeocode());
+        setViewValues(view, TextParam.text(geoitemRef.getName()), TextParam.text(geoitemRef.getGeocode()), ImageParam.id(geoitemRef.getMarkerId()));
 
         return view;
     }
 
     public static View createRouteView(final Context context, final Route route, final View view) {
         final boolean isIndividualRoute = route.getName().isEmpty();
-        final TextParam tp1 = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
-        tp1.setImage(ImageParam.id(R.drawable.map_quick_route), TextParam.IMAGE_SIZE_INTRINSIC_BOUND).setImageTint(context.getResources().getColor(R.color.colorText)).applyTo(view.findViewById(R.id.text));
-        final TextParam tp2 = isIndividualRoute ? TextParam.text("") : TextParam.id(R.string.track);
-        tp2.applyTo(view.findViewById(R.id.info));
+        final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
+        final ImageParam routeIcon = ImageParam.id(R.drawable.map_quick_route);
+        final TextParam routeInfo = isIndividualRoute ? TextParam.text("") : TextParam.id(R.string.track);
+        setViewValues(view, routeName, routeInfo, routeIcon);
+        ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorText)));
         return view;
     }
 
@@ -157,6 +155,20 @@ public class GeoItemSelectorUtils {
         final View view = convertView == null ? LayoutInflater.from(context).inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
         ((TextView) view.findViewById(R.id.text)).setText(new SpannableString(""));
         return view;
+    }
+
+    private static void setViewValues(final View view, final TextParam name, final TextParam info, final ImageParam icon) {
+        if (name != null) {
+            name.applyTo(view.findViewById(R.id.text));
+        }
+        if (info != null) {
+            info.applyTo(view.findViewById(R.id.info));
+        }
+        if (icon != null) {
+            icon.applyTo(view.findViewById(R.id.icon));
+        }
+        ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), null);
+
     }
 
 }
