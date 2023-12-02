@@ -1470,6 +1470,7 @@
     <string name="cache_distance">Vzdálenost</string>
     <string name="cache_difficulty">Obtížnost</string>
     <string name="cache_terrain">Terén</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1764,6 +1765,7 @@
     <string name="search_finder">Nalezené kým</string>
     <string name="search_finder_prefill">Nálezce</string>
     <string name="search_finder_button">Hledat podle jména nálezce</string>
+    <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_tb">Sledovatelný předmět</string>
