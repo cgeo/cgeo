@@ -8,6 +8,7 @@ import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -187,5 +188,11 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         // f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
 
         return f;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GeocacheChangedBroadcastReceiver.sendBroadcast(getContext(), geocode);
     }
 }
