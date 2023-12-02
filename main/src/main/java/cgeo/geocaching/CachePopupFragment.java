@@ -9,6 +9,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -321,5 +322,9 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         return new TargetInfo(cache.getCoords(), cache.getGeocode());
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GeocacheChangedBroadcastReceiver.sendBroadcast(getContext(), geocode);
+    }
 }
