@@ -1058,7 +1058,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tiene habilitados \"waypoints de la nota\". Si tiene coordenadas en su nota personal reconocida por c:geo, los waypoints serán recreados para ellos automáticamente. Puede desactivar esto en el cuadro de diálogo de edición de notas personales.</string>
     <string name="cache_delete_userdefined_waypoints_success">Waypoints definidos por el usuario eliminados</string>
     <string name="cache_offline_store">Guardar</string>
-    <string name="cache_offline_stored">Guardado en el dispositivo</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
     <string name="cache_offline_time_mins_few">hace unos minutos</string>
     <plurals name="cache_offline_about_time_mins">
