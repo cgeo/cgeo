@@ -876,7 +876,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Bemærk: Du har aktiveret \"waypoints fra note\". Hvis du har koordinater i din personlige note som c:geo kan genkende, vil waypoints automatisk blive genskabt for dem. Du kan deaktivere dette i dialogen til redigering af personlige noter.</string>
     <string name="cache_delete_userdefined_waypoints_success">Brugerdefinerede waypoints er slettet</string>
     <string name="cache_offline_store">Gem</string>
-    <string name="cache_offline_stored">Gemt i telefon</string>
     <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
     <string name="cache_offline_time_mins_few">få minutter siden</string>
     <plurals name="cache_offline_about_time_mins">
