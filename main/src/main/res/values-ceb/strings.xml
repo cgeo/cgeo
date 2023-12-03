@@ -486,7 +486,6 @@
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
     <string name="cache_offline_refresh">I-refresh</string>
     <string name="cache_offline_store">Gitipigan</string>
-    <string name="cache_offline_stored">Gitipigan sa usa ka aparato</string>
     <string name="cache_offline_not_ready">Dili anaa basta offline</string>
     <string name="cache_offline_time_mins_few">pipila ka mga minuto ang milabay</string>
     <plurals name="cache_offline_about_time_mins">
