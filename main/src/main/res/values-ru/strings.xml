@@ -1293,7 +1293,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Удалить все пользовательские точки из этого тайника?\n\nТочки будут удалены немедленно и безвозвратно.</string>
     <string name="cache_delete_generated_waypoints_success">Созданные путевые точки удалены</string>
     <string name="cache_offline_store">Сохранить</string>
-    <string name="cache_offline_stored">Сохранено на устройстве</string>
     <string name="cache_offline_not_ready">Недоступно офлайн</string>
     <string name="cache_offline_time_mins_few">несколько минут назад</string>
     <plurals name="cache_offline_about_time_mins">
