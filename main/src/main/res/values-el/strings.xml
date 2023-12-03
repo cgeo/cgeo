@@ -1117,7 +1117,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_generated_waypoints_success">Τα δημιουργημένα σημεία διαγράφηκαν</string>
     <string name="cache_offline_store">Αποθήκευση</string>
-    <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
     <string name="cache_offline_time_mins_few">μερικά λεπτά πριν</string>
     <plurals name="cache_offline_about_time_mins">
