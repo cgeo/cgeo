@@ -45,6 +45,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     private LatLngBounds lastBounds;
 
+    private boolean mapIsCurrentlyMoving;
+
     public GoogleMapsFragment() {
         super(R.layout.unifiedmap_googlemaps_fragment);
     }
@@ -64,8 +66,10 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
             @Override
             public void onLongPress(final @NonNull MotionEvent event) {
-                final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
-                onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
+                if (!mapIsCurrentlyMoving) {
+                    final LatLng latLng = mMap.getProjection().fromScreenLocation(new Point((int) event.getX(), (int) event.getY()));
+                    onTapCallback((int) (latLng.latitude * 1E6), (int) (latLng.longitude * 1E6), (int) event.getX(), (int) event.getY(), true);
+                }
             }
         });
 
@@ -121,6 +125,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 
         mMap.setOnCameraMoveStartedListener(reason -> {
+            mapIsCurrentlyMoving = true;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
@@ -128,6 +133,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             }
         });
         mMap.setOnCameraIdleListener(() -> {
+            mapIsCurrentlyMoving = false;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             viewModel.mapCenter.setValue(getCenter());
 //            if (activityMapChangeListener != null) {
