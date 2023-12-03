@@ -1194,7 +1194,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Pašalinti visus sugeneruotus kelio taškus iš šios slėptuvės?\n\nKelio taškai bus nedelsiant ištrinti, anuliuoti negalima.</string>
     <string name="cache_delete_generated_waypoints_success">Sugeneruoti kelio taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
-    <string name="cache_offline_stored">Išsaugota įrenginyje</string>
     <string name="cache_offline_not_ready">Nepasiekiama neprisijungus</string>
     <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
     <plurals name="cache_offline_about_time_mins">
