@@ -497,7 +497,6 @@
     <!-- days remaining -->
     <string name="cache_offline_refresh">Osveži</string>
     <string name="cache_offline_store">Shrani</string>
-    <string name="cache_offline_stored">Shranjeno na napravi</string>
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
     <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
     <string name="cache_inventory">Inventar</string>
