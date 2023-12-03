@@ -1295,7 +1295,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Odstranit všechny vygenerované trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_generated_waypoints_success">Vygenerované trasové body smazány</string>
     <string name="cache_offline_store">Uložit</string>
-    <string name="cache_offline_stored">Uloženo v zařízení</string>
+    <string name="cache_offline_stored_ago">Uloženo %s</string>
     <string name="cache_offline_not_ready">Nedostupné offline</string>
     <string name="cache_offline_time_mins_few">několika minutami</string>
     <plurals name="cache_offline_about_time_mins">
