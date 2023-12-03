@@ -1262,7 +1262,6 @@
     <string name="cache_delete_generated_waypoints_confirm">이 캐시에서 생성된 모든 지점을 제거하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_generated_waypoints_success">생성된 지점이 삭제되었습니다</string>
     <string name="cache_offline_store">저장</string>
-    <string name="cache_offline_stored">기기에 저장됨</string>
     <string name="cache_offline_not_ready">오프라인 사용 불가능</string>
     <string name="cache_offline_time_mins_few">몇분 전</string>
     <plurals name="cache_offline_about_time_mins">
