@@ -1275,7 +1275,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle gegenereerde waypoints uit deze cache verwijderen?\n\nWaypoints worden onmiddellijk verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_generated_waypoints_success">Gegenereerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
-    <string name="cache_offline_stored">Opgeslagen in apparaat</string>
+    <string name="cache_offline_stored_ago">Opgeslagen: %s</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
     <string name="cache_offline_time_mins_few">paar minuten geleden</string>
     <plurals name="cache_offline_about_time_mins">
