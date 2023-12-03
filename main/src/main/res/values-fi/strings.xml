@@ -1228,7 +1228,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Poistetaanko kaikki kätkölle luodut reittipisteet?\n\nReittipisteet poistetaan välittömästi, eikä sitä voi perua.</string>
     <string name="cache_delete_generated_waypoints_success">Luodut reittipisteet poistettu</string>
     <string name="cache_offline_store">Tallenna</string>
-    <string name="cache_offline_stored">Tallennettu laitteeseen</string>
     <string name="cache_offline_not_ready">Ei käytettävissä offline-tilassa</string>
     <string name="cache_offline_time_mins_few">muutama minuutti sitten</string>
     <plurals name="cache_offline_about_time_mins">
