@@ -1006,7 +1006,6 @@
     <string name="cache_delete_userdefined_waypoints_success">Brukerdefinerte veipunkter slettet</string>
     <string name="cache_delete_generated_waypoints">Fjern genererte veipunkter</string>
     <string name="cache_offline_store">Lagre</string>
-    <string name="cache_offline_stored">Lagret på enheten for</string>
     <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
     <string name="cache_offline_time_mins_few">en liten stund siden</string>
     <plurals name="cache_offline_about_time_mins">
