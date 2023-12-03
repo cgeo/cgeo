@@ -1273,7 +1273,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Eliminar tots els punts de ruta generats d\'aquest catxé?\n\nEls Punts de ruta s\'eliminaran immediatament, no es pot desfer.</string>
     <string name="cache_delete_generated_waypoints_success">Els punts de ruta generats s\'han suprimit</string>
     <string name="cache_offline_store">Desa</string>
-    <string name="cache_offline_stored">Desat al dispositiu</string>
     <string name="cache_offline_not_ready">No disponible fora de línia</string>
     <string name="cache_offline_time_mins_few">ara fa uns minuts</string>
     <plurals name="cache_offline_about_time_mins">
