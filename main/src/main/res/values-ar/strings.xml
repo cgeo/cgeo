@@ -513,7 +513,6 @@
     <string name="last_day_available">آخر يوم متاح</string>
     <string name="cache_offline_refresh">تحديث</string>
     <string name="cache_offline_store">تخزين</string>
-    <string name="cache_offline_stored">مخزن في الجهاز</string>
     <string name="cache_offline_not_ready">غير متاح في وضع عدم الاتصال</string>
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
