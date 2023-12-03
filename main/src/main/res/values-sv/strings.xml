@@ -1170,7 +1170,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Ta bort alla genererade waypoints från denna cache?\n\nWaypoints kommer att tas bort omedelbart, det går inte att ångra.</string>
     <string name="cache_delete_generated_waypoints_success">Genererade waypoints raderade</string>
     <string name="cache_offline_store">Spara</string>
-    <string name="cache_offline_stored">Sparad i enheten</string>
     <string name="cache_offline_not_ready">Inte redo\nför användning offline</string>
     <string name="cache_offline_time_mins_few">för några minuter sedan</string>
     <plurals name="cache_offline_about_time_mins">
