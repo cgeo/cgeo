@@ -505,7 +505,6 @@
     <string name="last_day_available">magagamit sa huling araw</string>
     <string name="cache_offline_refresh">Mag-refresh</string>
     <string name="cache_offline_store">Ang imbakan</string>
-    <string name="cache_offline_stored">Iniimbak sa aparato</string>
     <string name="cache_offline_not_ready">Hindi pwedeng makuha sa offline</string>
     <string name="cache_offline_time_mins_few">ang ilang mga lumipas na minuto</string>
     <plurals name="cache_offline_about_time_mins">
