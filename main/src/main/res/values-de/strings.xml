@@ -1275,7 +1275,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle generierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, keine Wiederherstellung möglich.</string>
     <string name="cache_delete_generated_waypoints_success">Generierte Wegpunkte gelöscht</string>
     <string name="cache_offline_store">Speichern</string>
-    <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
     <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
     <string name="cache_offline_time_mins_few">vor ein paar Minuten</string>
     <plurals name="cache_offline_about_time_mins">
