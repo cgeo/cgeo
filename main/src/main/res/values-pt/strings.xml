@@ -1275,7 +1275,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
-    <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
     <string name="cache_offline_time_mins_few">há alguns minutos</string>
     <plurals name="cache_offline_about_time_mins">
