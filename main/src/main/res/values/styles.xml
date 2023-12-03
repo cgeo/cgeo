@@ -138,6 +138,13 @@
         <item name="android:textSize">@dimen/textSize_buttonsDouble</item>
     </style>
 
+    <style name="button_full_popups" parent="button_full">
+        <item name="android:layout_height">@dimen/buttonSize_iconButton</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
     <style name="button_full_spinner" parent="button_full">
         <item name="icon">@drawable/outline_arrow_drop_down_24</item>
         <item name="iconGravity">textEnd</item>
@@ -161,6 +168,13 @@
         <item name="android:layout_marginTop">3dip</item>
         <item name="android:layout_marginBottom">3dip</item>
         <item name="android:padding">3dip</item>
+    </style>
+
+    <style name="button_small_popups" parent="button_small">
+        <item name="android:layout_height">@dimen/buttonSize_iconButton</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="button_icon_accent" parent="button">

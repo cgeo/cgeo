@@ -144,12 +144,7 @@
 
                 <Button
                     android:id="@+id/more_details"
-                    style="@style/button_full"
-                    android:layout_height="@dimen/buttonSize_iconButton"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="3dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
+                    style="@style/button_full_popups"
                     android:layout_toLeftOf="@id/offline_hint"
                     android:text="@string/popup_more" />
 
