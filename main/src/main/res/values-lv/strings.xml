@@ -629,7 +629,6 @@
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline_refresh">Atjaunot</string>
     <string name="cache_offline_store">Saglabāt</string>
-    <string name="cache_offline_stored">Saglabāts bezsaistē tavā ierīcē</string>
     <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>
     <string name="cache_offline_time_mins_few">dažas minūtes atpakaļ</string>
     <plurals name="cache_offline_about_time_mins">
