@@ -563,7 +563,6 @@
     <string name="last_day_available">ultima zi disponibilă</string>
     <string name="cache_offline_refresh">Împrospătează</string>
     <string name="cache_offline_store">Salvează</string>
-    <string name="cache_offline_stored">Salvată pe dispozitiv</string>
     <string name="cache_offline_not_ready">Indisponibilă fără internet</string>
     <string name="cache_offline_time_mins_few">câteva minute în urmă</string>
     <plurals name="cache_offline_about_time_mins">
