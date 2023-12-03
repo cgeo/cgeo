@@ -39,7 +39,6 @@ public class SimpleItemListView extends LinearLayout {
 
     private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()));
 
-    private SimpleitemlistViewBinding binding;
     private ItemListAdapter listAdapter;
 
     private SimpleItemListModel<Object> model = new SimpleItemListModel<>();
@@ -250,7 +249,7 @@ public class SimpleItemListView extends LinearLayout {
                     selectionChanged = true;
             }
             if (selectionChanged) {
-                model.setSelectedItems(newSelection, true);
+                model.setSelectedItems(newSelection);
             }
         }
 
@@ -327,13 +326,11 @@ public class SimpleItemListView extends LinearLayout {
     private void init() {
         final Context ctw = getContext();
         inflate(ctw, R.layout.simpleitemlist_view, this);
-        binding = SimpleitemlistViewBinding.bind(this);
+        final SimpleitemlistViewBinding binding = SimpleitemlistViewBinding.bind(this);
         setOrientation(VERTICAL);
 
         listAdapter = new ItemListAdapter(binding.list);
         binding.list.setAdapter(listAdapter);
-
-        binding.listFilter.addTextChangedListener(ViewUtils.createSimpleWatcher(e -> triggerRefreshList()));
     }
 
     @SuppressWarnings("unchecked")
@@ -351,7 +348,7 @@ public class SimpleItemListView extends LinearLayout {
                 recreateList();
                 break;
             case SELECTION:
-            case SELECTION_BY_USER:
+            case FILTER:
             default:
                 triggerRefreshList();
                 break;
@@ -415,7 +412,7 @@ public class SimpleItemListView extends LinearLayout {
         if (checkGroupExpanded && !isGroupExpanded(simpleItem.group)) {
             return false;
         }
-        final String filter = binding.listFilter.getText().toString();
+        final String filter = model.getFilterTerm();
         if (StringUtils.isBlank(filter)) {
             return true;
         }
@@ -435,15 +432,6 @@ public class SimpleItemListView extends LinearLayout {
                 model.getGroupingOptions().getMinActivationGroupCount(),
                 (group, firstItemIdx, size) -> list.add(createForGroup(group, firstItemIdx + 2, size)),
                 (value, originalIdx, group, groupIdx) -> list.add(createForItem(value, originalIdx, group)));
-
-        if (model.getItems().size() >= model.getMinimumItemCountForFilterDisplay()) {
-            //show
-            binding.listFilterContainer.setVisibility(VISIBLE);
-        } else {
-            //hide
-            binding.listFilter.setText("");
-            binding.listFilterContainer.setVisibility(GONE);
-        }
 
         listAdapter.setItems(list);
 

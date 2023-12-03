@@ -82,8 +82,7 @@ public class ContextMenuDialog {
         model
             .setItems(items)
             .setDisplayMapper((it) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0))
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-            .setMinimumItemCountForFilterDisplay(Integer.MAX_VALUE);
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this.activity).setTitle(this.title == null ? null : TextParam.text(this.title))
                 .selectSingle(model, clickListener);

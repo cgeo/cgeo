@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="12dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        style="?android:attr/windowTitleStyle"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/dialog_search_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="12dp"/>
+    <ImageView
+        android:id="@+id/dialog_search_icon"
+        android:visibility="gone"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="12dp"
+        android:src="@drawable/ic_menu_search"
+    />
+
+    <EditText
+        android:id="@+id/dialog_search"
+        style="@style/textinput_embedded_singleline"
+        android:inputType="text"
+        android:hint="@string/search"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/dialog_search_icon"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="24dp"
+        />
+
+</RelativeLayout>

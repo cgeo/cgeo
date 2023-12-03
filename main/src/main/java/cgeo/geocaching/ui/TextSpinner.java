@@ -377,8 +377,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
                 .setItems(valuesCopy)
                 .setDisplayMapper((v) -> itemToString(v, false))
                 .setSelectedItems(Collections.singleton(selectedItem))
-                .setChoiceMode(this.textHideSelectionMarker ? SimpleItemListModel.ChoiceMode.SINGLE_PLAIN : SimpleItemListModel.ChoiceMode.SINGLE_RADIO)
-                .setMinimumItemCountForFilterDisplay(20);
+                .setChoiceMode(this.textHideSelectionMarker ? SimpleItemListModel.ChoiceMode.SINGLE_PLAIN : SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
 
             if (this.textGroupMapper != null) {
                 model.activateGrouping((v) -> this.textGroupMapper.call(v))
