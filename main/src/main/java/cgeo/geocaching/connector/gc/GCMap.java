@@ -24,8 +24,8 @@ import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter.Format;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
@@ -79,21 +79,21 @@ public class GCMap {
 
     @NonNull
     @WorkerThread
-    public static SearchResult searchByFilter(@NonNull final IConnector con, @NonNull final GeocacheFilter filter) {
-        return searchByFilter(con, filter, SEARCH_LOAD_INITIAL, 0);
+    public static SearchResult searchByFilter(@NonNull final IConnector con, @NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
+        return searchByFilter(con, filter, sort, SEARCH_LOAD_INITIAL, 0);
     }
 
     @Nullable
     @WorkerThread
-    public static SearchResult searchByNextPage(final IConnector con, final Bundle context, final GeocacheFilter filter) {
+    public static SearchResult searchByNextPage(final IConnector con, final Bundle context, final GeocacheFilter filter, final GeocacheSort sort) {
         final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
-        return searchByFilter(con, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook);
+        return searchByFilter(con, filter, sort, SEARCH_LOAD_NEXTPAGE, alreadyTook);
     }
 
     @WorkerThread
-    private static SearchResult searchByFilter(final IConnector con, @NonNull final GeocacheFilter filter, final int take, final int alreadyTook) {
+    private static SearchResult searchByFilter(final IConnector con, @NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort, final int take, final int alreadyTook) {
 
-        final GCWebAPI.WebApiSearch search = createSearchForFilter(con, filter, take, alreadyTook);
+        final GCWebAPI.WebApiSearch search = createSearchForFilter(con, filter, sort, take, alreadyTook);
         if (search == null) {
             return new SearchResult();
         }
@@ -101,19 +101,19 @@ public class GCMap {
         final SearchResult sr = GCWebAPI.searchCaches(con, search, true);
         search.fillSearchCacheData(sr.getOrCreateCacheData());
         sr.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
+        sr.setToContext(con, b -> b.putParcelable(GCConnector.SEARCH_CONTEXT_SORT, sort));
         sr.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, take + alreadyTook));
         return sr;
     }
 
 
     private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
-        return createSearchForFilter(connector, filter, 200, 0);
+        return createSearchForFilter(connector, filter, new GeocacheSort(), 200, 0);
     }
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
+    private static GCWebAPI.WebApiSearch createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort, final int take, final int skip) {
 
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
-        search.setOrigin(LocationDataProvider.getInstance().currentGeo().getCoords());
         search.setPage(take, skip);
 
         //special case: if origin filter is present and excludes GCConnector, then skip search
@@ -134,6 +134,8 @@ public class GCMap {
         if (ownerFilter != null && ownerFilter.isFiltering() && statusFilter != null && !statusFilter.isExcludeArchived()) {
             search.setStatusEnabled(null);
         }
+
+        search.setSort(GCWebAPI.WebApiSearch.SortType.getByCGeoSortType(sort.getEffectiveType()), sort.isEffectiveAscending());
 
         return search;
 

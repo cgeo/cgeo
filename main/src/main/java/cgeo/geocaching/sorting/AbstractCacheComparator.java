@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 abstract class AbstractCacheComparator implements CacheComparator {
 
+
     @Override
     public final int compare(final Geocache cache1, final Geocache cache2) {
         final boolean canCompare1 = canCompare(cache1);

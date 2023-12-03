@@ -23,6 +23,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.mock.GC2JVEH;
@@ -253,7 +254,7 @@ public class CgeoApplicationTest {
         distanceFilter.setCoordinate(new Geopoint("N 50° 06.654 E 008° 39.777"));
 
         final GeocacheFilter filter = GeocacheFilter.createEmpty().and(distanceFilter);
-        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
 
         assertThat(search).isNotNull();
         assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
@@ -269,7 +270,7 @@ public class CgeoApplicationTest {
         ownerFilter.getStringFilter().setTextValue("Lineflyer");
 
         final GeocacheFilter filter = GeocacheFilter.createEmpty().and(ownerFilter);
-        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
 
         assertThat(search).isNotNull();
         assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
@@ -285,7 +286,7 @@ public class CgeoApplicationTest {
         foundByFilter.setFoundByUser("blafoo");
 
         final GeocacheFilter filter = GeocacheFilter.createEmpty().and(foundByFilter);
-        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
 
         assertThat(search).isNotNull();
         // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.

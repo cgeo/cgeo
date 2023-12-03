@@ -38,6 +38,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -69,6 +70,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     private static final float MAX_RATING = 5;
 
     public static final String SEARCH_CONTEXT_FILTER = "sc_gc_filter";
+    public static final String SEARCH_CONTEXT_SORT = "sc_gc_sort";
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
 
     @NonNull
@@ -290,13 +292,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }
 
-
         if (filter == null) {
             //we need a filter to proceed. If none is there then return empty result
             return new SearchResult();
         }
 
-        return GCMap.searchByNextPage(this, context, filter);
+        final GeocacheSort sort = context.getParcelable(SEARCH_CONTEXT_SORT);
+
+        return GCMap.searchByNextPage(this, context, filter, sort == null ? new GeocacheSort() : sort);
     }
 
     @Override
@@ -318,8 +321,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return GCMap.searchByFilter(this, filter);
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
+        return GCMap.searchByFilter(this, filter, sort);
     }
 
     @Override

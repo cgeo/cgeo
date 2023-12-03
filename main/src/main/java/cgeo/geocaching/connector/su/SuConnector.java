@@ -27,6 +27,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
@@ -252,7 +253,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
         try {
             return new SearchResult(SuApi.searchByFilter(filter, this));
         } catch (final SuApi.NotAuthorizedException e) {
