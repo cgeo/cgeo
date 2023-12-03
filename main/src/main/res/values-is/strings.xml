@@ -376,7 +376,6 @@
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
-    <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
     <string name="cache_offline_time_mins_few">Fyrir nokkrum mínútum</string>
     <plurals name="cache_offline_about_time_mins">
