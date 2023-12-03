@@ -1030,7 +1030,6 @@
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
     <string name="cache_delete_userdefined_waypoints_success">ユーザー定義のウェイポイントを削除しました</string>
     <string name="cache_offline_store">保存</string>
-    <string name="cache_offline_stored">デバイスに保存済み</string>
     <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
     <string name="cache_offline_time_mins_few">数分前</string>
     <plurals name="cache_offline_about_time_mins">
