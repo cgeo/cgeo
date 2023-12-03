@@ -509,7 +509,6 @@
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline_refresh">Segarkan</string>
     <string name="cache_offline_store">Toko</string>
-    <string name="cache_offline_stored">Disimpan dalam perangkat</string>
     <string name="cache_offline_not_ready">Tidak tersedia secara offline</string>
     <string name="cache_offline_time_mins_few">beberapa menit yang lalu</string>
     <plurals name="cache_offline_about_time_mins">
