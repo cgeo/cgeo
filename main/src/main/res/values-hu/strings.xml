@@ -696,7 +696,6 @@
     <string name="last_day_available">utolsó nap</string>
     <string name="cache_offline_refresh">Frissítés</string>
     <string name="cache_offline_store">Mentés</string>
-    <string name="cache_offline_stored">Elmentve az eszközre</string>
     <string name="cache_offline_not_ready">Nem érhető el offline</string>
     <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
     <plurals name="cache_offline_about_time_mins">
