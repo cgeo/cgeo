@@ -671,7 +671,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Примітка: у вас ввімкнено \"маршрутні точки\" з нотатки. Якщо ви маєте координати для своєї особистої ноти, що розпізнає c:ge, шляхові точки будуть створені для них автоматично. Ви можете відключити це в особистому діалозі редагування.</string>
     <string name="cache_delete_userdefined_waypoints_success">Визначені користувачем маршрутні точки видалено</string>
     <string name="cache_offline_store">магазин</string>
-    <string name="cache_offline_stored">зберігати в пристрої</string>
     <string name="cache_offline_not_ready">недоступний офлайн</string>
     <string name="cache_offline_time_mins_few">кілька хвилин тому</string>
     <string name="cache_offline_about_time_year">більше року тому</string>
