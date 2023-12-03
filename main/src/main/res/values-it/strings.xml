@@ -1264,7 +1264,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Rimuovere tutti i waypoint generati da questo cache?\n\nWaypoints verranno eliminati immediatamente, non è possibile annullare.</string>
     <string name="cache_delete_generated_waypoints_success">waypoint cancellati</string>
     <string name="cache_offline_store">Salva</string>
-    <string name="cache_offline_stored">Salvato nel dispositivo</string>
     <string name="cache_offline_not_ready">Non disponibile offline</string>
     <string name="cache_offline_time_mins_few">qualche minuto fa</string>
     <plurals name="cache_offline_about_time_mins">
