@@ -1295,7 +1295,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
     <string name="cache_delete_generated_waypoints_success">Usunięto wygenerowane punkty nawigacji</string>
     <string name="cache_offline_store">Zapisz</string>
-    <string name="cache_offline_stored">Zapisano na urządzeniu</string>
+    <string name="cache_offline_stored_ago">Zapisano: %s</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
     <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
     <plurals name="cache_offline_about_time_mins">
