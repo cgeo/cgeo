@@ -873,7 +873,6 @@
     <string name="cache_delete_userdefined_waypoints_confirm">要移除這個cache裡的使用者定義航點(全部)?\n\n航點會被馬上移除並無法回復。</string>
     <string name="cache_delete_userdefined_waypoints_success">使用者定義的航點已刪除。</string>
     <string name="cache_offline_store">儲存</string>
-    <string name="cache_offline_stored">存儲在裝置</string>
     <string name="cache_offline_not_ready">不可以離線使用</string>
     <string name="cache_offline_time_mins_few">幾分鐘前</string>
     <plurals name="cache_offline_about_time_mins">
