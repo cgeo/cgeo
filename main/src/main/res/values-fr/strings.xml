@@ -1248,7 +1248,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Supprimer tous les points de passage générés pour cette cache ?\n\nCette action est définitive.</string>
     <string name="cache_delete_generated_waypoints_success">Les points de passage générés ont été supprimés</string>
     <string name="cache_offline_store">Enregistrer</string>
-    <string name="cache_offline_stored">Enregistrée</string>
     <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
     <string name="cache_offline_time_mins_few">il y a quelques minutes</string>
     <plurals name="cache_offline_about_time_mins">
