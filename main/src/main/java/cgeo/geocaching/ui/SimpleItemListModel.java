@@ -34,13 +34,13 @@ public class SimpleItemListModel<T> {
 
     private ChoiceMode choiceMode = ChoiceMode.SINGLE_PLAIN;
 
-    private int minimumItemCountForFilterDisplay = 10;
-
     private int[] itemPaddingInDp = new int[]{10, 4, 10, 4};
 
     private int plainItemPaddingLeftInDp = 15;
 
     private final GroupingOptions<Object> groupingOptions = new GroupingOptions<>();
+
+    private String filterTerm = null;
 
 
     private final Set<T> selectedItems = new HashSet<>();
@@ -54,7 +54,7 @@ public class SimpleItemListModel<T> {
     public enum ChoiceMode { SINGLE_PLAIN, SINGLE_RADIO, MULTI_CHECKBOX }
 
     /** Types of model changes for which events are fired */
-    public enum ChangeType { COMPLETE, SELECTION, SELECTION_BY_USER }
+    public enum ChangeType { COMPLETE, SELECTION, FILTER }
 
     /** Specifies options for grouping items */
     public class GroupingOptions<G> {
@@ -171,6 +171,16 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
+    public String getFilterTerm() {
+        return filterTerm;
+    }
+
+    public SimpleItemListModel<T> setFilterTerm(final String filterTerm) {
+        this.filterTerm = filterTerm;
+        triggerChange(ChangeType.FILTER);
+        return this;
+    }
+
     public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Func1<TT, TextParam> displayTextMapper) {
         return (item, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
@@ -256,19 +266,6 @@ public class SimpleItemListModel<T> {
         }
     }
 
-    public int getMinimumItemCountForFilterDisplay() {
-        return minimumItemCountForFilterDisplay;
-    }
-
-    /** Sets the minumum count of items to display a textual filter */
-    public SimpleItemListModel<T> setMinimumItemCountForFilterDisplay(final int minimumItemCountForFilterDisplay) {
-        if (minimumItemCountForFilterDisplay != this.minimumItemCountForFilterDisplay) {
-            this.minimumItemCountForFilterDisplay = minimumItemCountForFilterDisplay;
-            triggerChange(ChangeType.COMPLETE);
-        }
-        return this;
-    }
-
     /** Sets padding (in DP) to apply to each list item. Usage is described in {@link ViewUtils#applyPadding(View, int[])}*/
     public SimpleItemListModel<T> setItemPadding(final int ... itemPaddingsInDp) {
         this.itemPaddingInDp = itemPaddingsInDp;
@@ -304,17 +301,13 @@ public class SimpleItemListModel<T> {
 
     /** Sets the currently selected items */
     public SimpleItemListModel<T> setSelectedItems(final Iterable<T> selected) {
-        return setSelectedItems(selected, false);
-    }
-
-    public SimpleItemListModel<T> setSelectedItems(final Iterable<T> selected, final boolean byUser) {
         if (selected != null) {
             selectedItems.clear();
             for (T sel : selected) {
                 selectedItems.add(sel);
             }
             pruneSelected();
-            triggerChange(byUser ? ChangeType.SELECTION_BY_USER : ChangeType.SELECTION);
+            triggerChange(ChangeType.SELECTION);
         }
         return this;
     }

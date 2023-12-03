@@ -2,6 +2,7 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.databinding.SimpleDialogTitleViewBinding;
 import cgeo.geocaching.databinding.SimpleDialogViewBinding;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -14,6 +15,7 @@ import cgeo.geocaching.utils.functions.Func1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.util.Pair;
@@ -281,6 +283,11 @@ public class SimpleDialog {
 
 
     private Pair<AlertDialog, SimpleDialogViewBinding> constructCommons() {
+        return constructCommons(null);
+    }
+
+    private Pair<AlertDialog, SimpleDialogViewBinding> constructCommons(final Consumer<Editable> searchListener) {
+
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         if (title != null) {
@@ -305,8 +312,15 @@ public class SimpleDialog {
         final SimpleDialogViewBinding binding = SimpleDialogViewBinding.inflate(LayoutInflater.from(context));
         dialog.setView(binding.getRoot());
 
-        if (this.title != null) {
-            this.title.applyTo(dialog.findViewById(android.R.id.title));
+        if (this.title != null || searchListener != null) {
+            final TextParam usedTitle = this.title == null ? TextParam.text("") : this.title;
+            final SimpleDialogTitleViewBinding titleView = SimpleDialogTitleViewBinding.inflate(LayoutInflater.from(context));
+            dialog.setCustomTitle(titleView.getRoot());
+            usedTitle.applyTo(titleView.dialogTitle);
+
+            if (searchListener != null) {
+                setupSearchTitle(titleView, searchListener);
+            }
         }
         if (this.message != null) {
             binding.dialogMessage.setVisibility(View.VISIBLE);
@@ -318,10 +332,35 @@ public class SimpleDialog {
         return new Pair<>(dialog, binding);
     }
 
+    private void setupSearchTitle(final SimpleDialogTitleViewBinding titleView, final Consumer<Editable> searchListener) {
+        //Activate search
+        titleView.dialogSearchIcon.setVisibility(View.VISIBLE);
+        titleView.dialogSearch.addTextChangedListener(ViewUtils.createSimpleWatcher(searchListener));
+        //set up search logic
+        titleView.dialogSearchIcon.setOnClickListener(l -> executeSearchTitleClick(titleView));
+        titleView.dialogTitle.setOnClickListener(l -> executeSearchTitleClick(titleView));
+    }
+
+    private void executeSearchTitleClick(final SimpleDialogTitleViewBinding titleView) {
+        if (titleView.dialogTitle.getVisibility() == View.VISIBLE) {
+            titleView.dialogTitle.setVisibility(View.GONE);
+            titleView.dialogSearchIcon.setImageResource(R.drawable.ic_menu_cancel);
+            titleView.dialogSearch.setVisibility(View.VISIBLE);
+            // force keyboard
+            Keyboard.show(getContext(), titleView.dialogSearch);
+        } else {
+            titleView.dialogTitle.setVisibility(View.VISIBLE);
+            titleView.dialogSearchIcon.setImageResource(R.drawable.ic_menu_search);
+            titleView.dialogSearch.setVisibility(View.GONE);
+            titleView.dialogSearch.setText("");
+        }
+    }
+
     private void finalizeCommons(final AlertDialog dialog, final Func1<Integer, Boolean> buttonListener) {
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_POSITIVE, positiveButton, buttonListener);
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_NEGATIVE, negativeButton, buttonListener);
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_NEUTRAL, neutralButton, buttonListener);
+
     }
 
     private void finalizeButtonCommons(final AlertDialog dialog, final int which, final TextParam buttonText, final Func1<Integer, Boolean> specialButtonListener) {
@@ -456,7 +495,13 @@ public class SimpleDialog {
             setNegativeButton(null);
         }
 
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
+        if (this.title == null) {
+            this.title = TextParam.id(R.string.map_select_multiple_items);
+        }
+
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons(r -> {
+            model.setFilterTerm(r == null ? null : r.toString());
+        });
         final AlertDialog dialog = dialogBinding.first;
         final SimpleDialogViewBinding binding = dialogBinding.second;
 
@@ -511,10 +556,10 @@ public class SimpleDialog {
                     dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(somethingSelected);
                 }
             }
-            if (model.selectionChangedListener != null) {
+            if (model.selectionChangedListener != null && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 model.selectionChangedListener.call(model);
             }
-            if (!selectionConfirmedViaButton) {
+            if (!selectionConfirmedViaButton  && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 //special handling of "single immediate select" (on click)
                 dialog.dismiss();
                 if (selectionListener != null) {

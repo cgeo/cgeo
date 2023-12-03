@@ -5,15 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- Search/Filter text-->
-    <com.google.android.material.textfield.TextInputLayout android:id="@+id/listFilterContainer" style="@style/textinput_edittext_singleline">
-        <EditText
-            android:id="@+id/listFilter"
-            style="@style/textinput_embedded_singleline"
-            android:inputType="text"
-            android:hint="@string/search" />
-    </com.google.android.material.textfield.TextInputLayout>
-
     <!-- Item List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
