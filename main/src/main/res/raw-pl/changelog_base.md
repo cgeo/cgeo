@@ -1,6 +1,6 @@
 ### Mapa
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
-- New: Show cache's found state on waypoint icons
+- Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
