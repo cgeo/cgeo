@@ -1194,7 +1194,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Odstrániť všetky vygnerované body trasy z tejto kešky?\n\nBody trasy sa odstránia ihneď, nie je možné vrátiť to späť.</string>
     <string name="cache_delete_generated_waypoints_success">Vygenerované body trasy odstránené</string>
     <string name="cache_offline_store">Uložiť</string>
-    <string name="cache_offline_stored">Uložená v zariadení</string>
     <string name="cache_offline_not_ready">Nie je pripravená\nna použitie offline</string>
     <string name="cache_offline_time_mins_few">niekoľkými minútami</string>
     <plurals name="cache_offline_about_time_mins">
