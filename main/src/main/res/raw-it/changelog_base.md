@@ -1,10 +1,10 @@
 ### Mappa
-- New: Highlight existing downloads in download manager
-- New: Show cache's found state on waypoint icons
+- Nuovo: Evidenzia i download in corso nel gestore download
+- Nuovo: Mostra lo stato trovato sulle icone dei cache
 
 ### Dettagli del cache
-- Change: Make "Toggle talking" an actual toggle
+- Cambio: "Attiva/disattiva parlato" è diventato un interruttore
 
 ### Generale
-- New: Tapping on downloader notification opens "pending downloads" view
-- Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
+- Toccando la notifica sul download apre "download in attesa"
+- Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
