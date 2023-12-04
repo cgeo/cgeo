@@ -1,19 +1,19 @@
 ##
-- Fix: Hint hidden behind compass when using large fonts
-- Fix: coord.info trackable links cannot be opened any more
-- Fix: Wrong default when manually logging a trackable
-- Fix: Cache icon on map not updated after logging from popup
-- Fix: Crash on displaying logging options
-- Fix: Crash on retrieving message center status
+- Corretto: Suggerimento nascosto dietro la bussola quando si usano caratteri di grandi dimensioni
+- Corretto: i collegamenti tracciabili coord.info non possono più essere aperti
+- Corretto: predefinito errato con log manuale di un trackable
+- Corretto: icona del cache sulla mappa non aggiornata dopo il log dal popup
+- Corretto: Crash alla visualizzazione delle opzioni di registrazione
+- Corretto: crash recuperando lo stato del centro messaggi
 
 ##
-- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
-- Change: Reduce timeout for calls to bettercacher.org
-- Fix: Personal note from server contained incorrect chars
+- Cambio: Rimossa la casella BetterCacher separata. Toccare invece la linea di informazioni BetterCacher
+- Cambio: riduce il timeout per le chiamate a bettercacher.org
+- Corretto: la nota personale dal server conteneva caratteri non corretti
 
 ##
-- Fix: Issues with distance views
-- Fix: Not all launcher icon variants are adaptive
-- Fix: Outdated error message if not network connection is available
-- Fix: Crashes when creating waypoint markers
-- Fix: Timezone issues when logging
+- Corretto: problemi con le viste a distanza
+- Corretto: Non tutte le varianti delle icone del launcher sono adattabili
+- Corretto: messaggio di errore obsoleto se non è disponibile la connessione di rete
+- Corretto: si blocca quando si creano indicatori waypoint
+- Corretto: problemi di fuso orario durante la registrazione
