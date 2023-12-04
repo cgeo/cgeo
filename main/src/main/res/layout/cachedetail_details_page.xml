@@ -64,97 +64,12 @@
 
         <!-- Offline box -->
 
-        <LinearLayout
-            android:id="@+id/offline_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+        <View
+            style="@style/separator_horizontal"
+            android:layout_marginBottom="9dp"
+            android:layout_marginTop="9dp" />
 
-            <View
-                style="@style/separator_horizontal"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="9dp" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/offline_text"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/offline_buttons"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="6dip"
-                    android:layout_marginRight="6dip"
-                    android:paddingRight="3dip"
-                    android:textSize="@dimen/textSize_detailsSecondary"
-                    android:textColor="@color/colorText"
-                    tools:text="This cache has not been stored. Or has it? Maybe an hour ago?"
-                    android:textIsSelectable="false" />
-
-                <LinearLayout
-                    android:id="@+id/offline_buttons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true" >
-
-                    <Button
-                        android:id="@+id/offline_refresh"
-                        style="@style/button_icon"
-                        app:icon="@drawable/ic_menu_refresh"
-                        android:layout_marginLeft="2dip"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/offline_lists"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@+id/offline_edit"
-                    android:layout_marginLeft="6dip"
-                    android:layout_marginRight="6dip"
-                    android:paddingRight="3dip"
-                    android:textSize="@dimen/textSize_detailsSecondary"
-                    android:textColor="@color/colorText"
-                    tools:text="list 1, list 2, list 3, and many, many, many, many, many more lists"
-                    android:textIsSelectable="false" />
-
-                <Button
-                    android:id="@+id/offline_edit"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_edit"
-                    android:layout_toLeftOf="@+id/offline_drop" />
-
-                <Button
-                    android:id="@+id/offline_drop"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_delete"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="2dip"
-                    android:layout_gravity="right"/>
-
-                <Button
-                    android:id="@+id/offline_store"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_save"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="2dip"
-                    android:layout_gravity="right"/>
-
-            </RelativeLayout>
-
-        </LinearLayout>
+        <include layout="@layout/cache_offlinebox" />
 
         <!-- Watchlist box -->
 
