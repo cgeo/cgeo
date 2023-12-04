@@ -64,6 +64,8 @@ import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.tiling.TileSource;
 
 public class MapsforgeVtmFragment extends AbstractMapFragment {
+
+    private MapView mMapView;
     private Map mMap;
     private GroupedList<Layer> mMapLayers;
     protected TileLayer baseMap;
@@ -85,7 +87,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final MapView mMapView = requireView().findViewById(R.id.mapViewVTM);
+        mMapView = requireView().findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
         mMapLayers = new GroupedList<>(mMap.layers(), 4);
         setMapRotation(Settings.getMapRotation());
@@ -123,15 +125,27 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         super.onStart();
         initLayers();
         applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
-//        mMapView.onResume(); needed? probably not, as the view receives the normal lifecycle
         mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
     }
 
     @Override
-    public void onDestroy() {
-//        mMapView.onDestroy(); needed? probably not, as the view receives the normal lifecycle
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        mMapView.onDestroy();
         themeHelper.disposeTheme();
-        super.onDestroy();
+        super.onDestroyView();
     }
 
     @Override
