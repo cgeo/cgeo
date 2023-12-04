@@ -425,6 +425,7 @@
     <string name="caches_append_to_route_selected">Aggiungi quanto selezionato al percorso individuale</string>
     <string name="caches_append_to_route_all">Aggiungi tutto al percorso individuale</string>
     <string name="caches_appended_to_route">Cache allegate al percorso</string>
+    <string name="waypoints_appended_to_route">Waypoint aggiunti al percorso</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
@@ -524,6 +525,7 @@
     <string name="cache_filter_stored_since">Ultimo aggiornamento dei dettagli</string>
     <string name="cache_filter_category">Categoria BC</string>
     <string name="cache_filter_tier">BC Tier</string>
+    <string name="cache_filter_named_filter">Filtro Con Nome</string>
     <string name="cache_filter_logical_filter_group">Filtro Nested</string>
     <string name="cache_filtergroup_basic">Base</string>
     <string name="cache_filtergroup_details">Dettagli</string>
@@ -875,6 +877,9 @@
     <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
     <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
     <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
+    <string name="init_brouterProfileUser">Profilo definito dall\'utente</string>
+    <string name="init_removeFromRouteOnLog">Rimuovi dal percorso dopo log</string>
+    <string name="init_summary_removeFromRouteOnLog">Quando si invia o memorizza un log il cache viene rimosso dal percorso corrente.</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
     <string name="brouter_missing_data">Apri BRouter per scaricare i dati di routing mancanti (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
@@ -911,6 +916,8 @@
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
     <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
     <string name="init_summary_quicklaunchitems">Seleziona uno o più elementi come pulsanti di avvio rapido nella schermata iniziale</string>
+    <string name="init_custombnitem">Voce di menu Personalizzata</string>
+    <string name="init_custombnitem_description">Elemento di menu di navigazione più basso a destra:\n%s</string>
     <string name="init_custombnitem_default">Ricerca nelle vicinanze (predefinita)</string>
     <string name="init_custombnitem_none">(nessuno)</string>
     <string name="init_custombnitem_empty_placeholder">(segnaposto vuoto)</string>
@@ -995,6 +1002,7 @@
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
     <string name="settings_folder_changed">La cartella \"%1$s\" sarà cambiata a \"%2$s\" durante il ripristino.\n\nTocca \"%4$s per procedere. In quel caso ti sarà chiesto di garantire a c:geo l\'accesso a quella cartella.\n\nTocca invece \"%3$s\" per mantenere l\'impostazione corrente della cartella.</string>
+    <string name="settings_file_changed">\"%1$s\" sarà cambiato in \"%2$s\" durante il ripristino.\n\nTocca \"%4$s\" per procedere. In questo caso ti verrà chiesto di concedere l\'accesso a c:geo a quella cartella.\n\nTocca \"%3$s\" per mantenere invece l\'impostazione attuale della cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -2172,6 +2180,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
+    <string name="failed_creating_shortcut">Impossibile creare il collegamento</string>
     <string name="send">Invia</string>
     <string name="confirm_log_title">Tipo di log speciale</string>
     <string name="confirm_log_message">Si desidera registrare \'%s\'. Sei sicuro?</string>
@@ -2338,6 +2347,8 @@
     <string name="routingmode_walk">A piedi</string>
     <string name="routingmode_bike">Bici</string>
     <string name="routingmode_car">Automobile</string>
+    <string name="routingmode_user1">Utente 1</string>
+    <string name="routingmode_user2">Utente 2</string>
     <!-- view settings -->
     <string name="view_settings">Impostazioni vista</string>
     <string name="delete_setting">Elimina impostazioni</string>
@@ -2486,6 +2497,7 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>
