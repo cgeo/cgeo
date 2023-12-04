@@ -2751,7 +2751,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             offlineEdit.setOnLongClickListener(moveCacheListener);
         }
 
-        offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+        offlineRefresh.setVisibility(cache.supportsRefresh() && cache.isOffline() ? View.VISIBLE : View.GONE);
         offlineRefresh.setClickable(true);
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
