@@ -416,6 +416,7 @@
     <string name="caches_sort_state">Stan</string>
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
+    <string name="caches_sort_lastfounddate">Data ostatniego znalezienia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
     <string name="caches_select_next20">Wybierz następne 20 skrytek</string>
     <string name="caches_select_next100">Wybierz następne 100 skrytek</string>
