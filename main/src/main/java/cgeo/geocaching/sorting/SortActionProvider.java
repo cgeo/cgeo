@@ -22,7 +22,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     /**
      * Callback triggered on selecting a new sort order.
      */
-    private Action1<GeocacheSortContext.SortType> onClickListener;
+    private Action1<GeocacheSort.SortType> onClickListener;
 
     private GeocacheSortContext sortContext;
 
@@ -56,11 +56,11 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     @Override
     public void onPrepareSubMenu(final SubMenu subMenu) {
         subMenu.clear();
-        for (Pair<GeocacheSortContext.SortType, String> entry : sortContext.getAvailableTypes()) {
+        for (Pair<GeocacheSort.SortType, String> entry : sortContext.getSort().getAvailableTypes()) {
             final int id = entry.first.ordinal();
             final MenuItem menuItem = subMenu.add(MENU_GROUP, id, id, entry.second);
             menuItem.setOnMenuItemClickListener(this).setCheckable(true);
-            menuItem.setChecked(entry.first.equals(sortContext.getType()));
+            menuItem.setChecked(entry.first.equals(sortContext.getSort().getType()));
         }
 
         subMenu.setGroupCheckable(MENU_GROUP, true, true);
@@ -68,16 +68,16 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     @Override
     public boolean onMenuItemClick(final MenuItem item) {
-        final GeocacheSortContext.SortType selected = GeocacheSortContext.SortType.values()[item.getItemId()];
+        final GeocacheSort.SortType selected = GeocacheSort.SortType.values()[item.getItemId()];
         onSortTypeSelection(selected);
         return true;
     }
 
-    public void setClickListener(@NonNull final Action1<GeocacheSortContext.SortType> onClickListener) {
+    public void setClickListener(@NonNull final Action1<GeocacheSort.SortType> onClickListener) {
         this.onClickListener = onClickListener;
     }
 
-    public boolean onSortTypeSelection(final GeocacheSortContext.SortType type) {
+    public boolean onSortTypeSelection(final GeocacheSort.SortType type) {
         onClickListener.call(type);
         return true;
     }

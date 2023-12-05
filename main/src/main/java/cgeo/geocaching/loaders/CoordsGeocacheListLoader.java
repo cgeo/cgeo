@@ -5,6 +5,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 
 import android.app.Activity;
 
@@ -14,8 +15,8 @@ public class CoordsGeocacheListLoader extends LiveFilterGeocacheListLoader {
     @NonNull public final Geopoint coords;
     private final boolean applyNearbySearchLimit;
 
-    public CoordsGeocacheListLoader(final Activity activity, @NonNull final Geopoint coords, final boolean applyNearbySearchLimit) {
-        super(activity);
+    public CoordsGeocacheListLoader(final Activity activity, final GeocacheSort sort, @NonNull final Geopoint coords, final boolean applyNearbySearchLimit) {
+        super(activity, sort);
         this.coords = coords;
         this.applyNearbySearchLimit = applyNearbySearchLimit;
     }

@@ -64,6 +64,7 @@ import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.sorting.VisitComparator;
@@ -162,7 +163,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private CacheListType type = null;
     private final Bundle typeParameters = new Bundle();
     private Geopoint coords = null;
-    private final GeocacheSortContext sortContext = new GeocacheSortContext();
+    private GeocacheSortContext sortContext;
     private SearchResult search = null;
     /**
      * The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler
@@ -445,11 +446,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // get parameters
         final Bundle extras = getIntent().getExtras();
         typeParameters.clear();
+        Geopoint extraTargetCoords = null;
         if (extras != null) {
             typeParameters.putAll(extras);
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
-            sortContext.setTargetCoords(extras.getParcelable(Intents.EXTRA_COORDS));
+            extraTargetCoords = extras.getParcelable(Intents.EXTRA_COORDS);
         }
         if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
@@ -468,7 +470,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             currentCacheFilter = savedInstanceState.getParcelable(STATE_GEOCACHE_FILTER);
-            sortContext.loadFromBundle(savedInstanceState.getBundle(STATE_SORT_CONTEXT));
+            sortContext = savedInstanceState.getParcelable(STATE_SORT_CONTEXT);
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             typeParameters.clear();
             typeParameters.putAll(savedInstanceState.getBundle(STATE_TYPE_PARAMETERS));
@@ -477,6 +479,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
         } else {
+            sortContext = GeocacheSortContext.getFor(type, "" + listId);
+            sortContext.getSort().setTargetCoords(extraTargetCoords);
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
             currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
         }
@@ -520,7 +524,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // Save the current Filter
         savedInstanceState.putParcelable(STATE_GEOCACHE_FILTER, currentCacheFilter);
-        savedInstanceState.putBundle(STATE_SORT_CONTEXT, sortContext.saveToBundle());
+        savedInstanceState.putParcelable(STATE_SORT_CONTEXT, sortContext);
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putBundle(STATE_TYPE_PARAMETERS, typeParameters);
         savedInstanceState.putInt(STATE_LIST_ID, listId);
@@ -630,16 +634,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final SortActionProvider sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSortContext(sortContext);
-        sortProvider.setClickListener(type -> {
-            sortContext.setAndToggle(type);
+        sortProvider.setClickListener(sortType -> {
+            sortContext.getSort().setAndToggle(sortType);
+            sortContext.save();
             adapter.forceSort();
             updateSortBar();
             refreshCurrentList();
+            //for online searches, restart search with new sort argument
+            if (type.isOnline && type != CacheListType.POCKET) {
+                restartCacheLoader(false, null);
+            }
         });
 
         final View sortView = this.findViewById(R.id.sort_bar);
         sortView.setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
-        sortView.setOnLongClickListener(v -> sortProvider.onSortTypeSelection(sortContext.getType()));
+        sortView.setOnLongClickListener(v -> sortProvider.onSortTypeSelection(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
@@ -1177,7 +1186,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void initAdapter() {
 
-        refreshSortListContext();
+        sortContext = GeocacheSortContext.getFor(type, "" + listId);
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
@@ -1282,12 +1291,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void updateSortBar() {
         final View sortView = this.findViewById(R.id.sort_bar);
-        final GeocacheSortContext.SortType st = sortContext.getType();
-        if (st == null || GeocacheSortContext.SortType.AUTO.equals(st) || CacheListType.HISTORY.equals(type)) {
+        final GeocacheSort.SortType st = sortContext.getSort().getType();
+        if (st == null || GeocacheSort.SortType.AUTO.equals(st) || CacheListType.HISTORY.equals(type)) {
             sortView.setVisibility(View.GONE);
         } else {
             final TextView filterTextView = findViewById(R.id.sort_text);
-            filterTextView.setText(sortContext.getSortName());
+            filterTextView.setText(sortContext.getSort().getDisplayName());
             sortView.setVisibility(View.VISIBLE);
         }
     }
@@ -1338,10 +1347,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshFilterForOnlineSearch() {
         //not supported yet for all online searches
-        if (type != CacheListType.SEARCH_FILTER && type != CacheListType.KEYWORD
-                && type != CacheListType.COORDINATE && type != CacheListType.FINDER
-                && type != CacheListType.OWNER && type != CacheListType.ADDRESS
-                && type != CacheListType.NEAREST) {
+        if (type.isOnline && type != CacheListType.POCKET) {
             return;
         }
 
@@ -1860,31 +1866,31 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         preventAskForDeletion = list.preventAskForDeletion;
                     }
 
-                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), sortContext.getComparator(), false, offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), sortContext.getSort().getComparator(), false, offlineListLoadLimit);
 
                     break;
                 case HISTORY:
                     title = res.getString(R.string.caches_history);
                     listId = PseudoList.HISTORY_LIST.id;
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.isInverse(), offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.getSort().isInverse(), offlineListLoadLimit);
                     break;
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords, true);
+                    loader = new CoordsGeocacheListLoader(this, sortContext.getSort(), coords, true);
                     break;
                 case COORDINATE:
                     title = coords.toString();
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords, false);
+                    loader = new CoordsGeocacheListLoader(this, sortContext.getSort(), coords, false);
                     break;
                 case KEYWORD:
                     final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
                     markerId = EmojiUtils.NO_EMOJI;
                     title = listNameMemento.rememberTerm(keyword);
                     if (keyword != null) {
-                        loader = new KeywordGeocacheListLoader(this, keyword);
+                        loader = new KeywordGeocacheListLoader(this, sortContext.getSort(), keyword);
                     }
                     break;
                 case ADDRESS:
@@ -1895,26 +1901,26 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         title = coords.toString();
                     }
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords, false);
+                    loader = new CoordsGeocacheListLoader(this, sortContext.getSort(), coords, false);
                     break;
                 case FINDER:
                     final String username = extras.getString(Intents.EXTRA_USERNAME);
                     title = listNameMemento.rememberTerm(username);
                     markerId = EmojiUtils.NO_EMOJI;
                     if (username != null) {
-                        loader = new FinderGeocacheListLoader(this, username);
+                        loader = new FinderGeocacheListLoader(this, sortContext.getSort(), username);
                     }
                     break;
                 case SEARCH_FILTER:
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get());
+                    loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get(), sortContext.getSort());
                     break;
                 case OWNER:
                     final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
                     title = listNameMemento.rememberTerm(ownerName);
                     markerId = EmojiUtils.NO_EMOJI;
                     if (ownerName != null) {
-                        loader = new OwnerGeocacheListLoader(this, ownerName);
+                        loader = new OwnerGeocacheListLoader(this, sortContext.getSort(), ownerName);
                     }
                     break;
                 case MAP:
@@ -2067,14 +2073,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static int getOfflineListLimitIncrease() {
         return 100;
-    }
-
-    private void refreshSortListContext() {
-        if (type == CacheListType.OFFLINE) {
-            sortContext.setListContext(type, "" + listId);
-        } else {
-            sortContext.setListContext(type, null);
-        }
     }
 
     private void showProgress(final boolean loading) {

@@ -14,6 +14,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.GlobalGPSDistanceComparator;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -337,7 +338,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             checkUpdateGlobalGPS(true);
         }
 
-        sortContext.getComparator().sort(list);
+        sortContext.getSort().getComparator().sort(list);
 
         notifyDataSetChanged();
     }
@@ -371,7 +372,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private boolean isSortedByDistance() {
-        return sortContext.getType() == GeocacheSortContext.SortType.DISTANCE;
+        return sortContext.getSort().getType() == GeocacheSort.SortType.DISTANCE;
     }
 
     public void setActualHeading(final float direction) {
@@ -652,7 +653,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 break;
             }
         }
-        sortContext.setEventList(eventsOnly);
+        sortContext.getSort().setEventList(eventsOnly);
     }
 
     /**
@@ -679,7 +680,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 series = true;
             }
         }
-        sortContext.setSeriesList(series);
+        sortContext.getSort().setSeriesList(series);
     }
 
     // methods for section indexer
@@ -727,7 +728,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return " ";
         }
         try {
-            return sortContext.getComparator().getSortableSection(list.get(position));
+            return sortContext.getSort().getComparator().getSortableSection(list.get(position));
         } catch (NullPointerException e) {
             return " ";
         }

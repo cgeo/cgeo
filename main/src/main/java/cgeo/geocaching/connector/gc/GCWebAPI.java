@@ -20,8 +20,11 @@ import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -41,7 +44,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -69,9 +71,6 @@ public class GCWebAPI {
     private static final String WEBSITE_URL = "https://www.geocaching.com";
     private static final String API_URL = WEBSITE_URL + "/api/proxy";
 
-    //<input name="__RequestVerificationToken" type="hidden" value="(token-value)" />
-    private static final Pattern PATTERN_REQUEST_VERIFICATION_TOKEN = Pattern.compile("name=\"__RequestVerificationToken\"\\s+type=\"hidden\"\\s+value=\"([^\"]+)\"");
-
     private static final String HTML_HEADER_CSRF_TOKEN = "CSRF-Token";
 
     /**
@@ -91,7 +90,37 @@ public class GCWebAPI {
      */
     public static class WebApiSearch {
 
-        public enum SortType { DISTANCE, FAVORITEPOINT, DIFFICULTY, TERRAIN }
+        public enum SortType {
+            NAME("geocacheName", GeocacheSort.SortType.NAME),
+            DISTANCE("distance", GeocacheSort.SortType.DISTANCE),
+            FAVORITEPOINT("favoritePoint", GeocacheSort.SortType.FAVORITES, GeocacheSort.SortType.FAVORITES_RATIO),
+            SIZE("containerSize", GeocacheSort.SortType.SIZE),
+            DIFFICULTY("difficulty", GeocacheSort.SortType.DIFFICULTY),
+            TERRAIN("terrain", GeocacheSort.SortType.TERRAIN),
+            TRACKABLECOUNT("trackableCount", GeocacheSort.SortType.INVENTORY),
+            HIDDENDATE("placeDate", GeocacheSort.SortType.HIDDEN_DATE),
+            LASTFOUND("foundDate", GeocacheSort.SortType.LAST_FOUND);
+
+            public final String keyword;
+            public final GeocacheSort.SortType[] cgeoSortTypes;
+
+            private static final EnumValueMapper<GeocacheSort.SortType, SortType> CGEO_TO_GC_SORTTYPE = new EnumValueMapper<>();
+
+            static {
+                for (SortType type : values()) {
+                    CGEO_TO_GC_SORTTYPE.add(type, type.cgeoSortTypes);
+                }
+            }
+
+            SortType(final String keyword, final GeocacheSort.SortType ... cgeoSortTypes) {
+                this.keyword = keyword;
+                this.cgeoSortTypes = cgeoSortTypes;
+            }
+
+            public static SortType getByCGeoSortType(final GeocacheSort.SortType cgeoSortType) {
+                return CGEO_TO_GC_SORTTYPE.get(cgeoSortType, SortType.DISTANCE);
+            }
+        }
 
         private static final DateFormat PARAM_DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         private static final long ONE_DAY_MILLISECONDS = 24 * 60 * 60 * 1000;
@@ -119,6 +148,8 @@ public class GCWebAPI {
         private String placedTo;
         private String keywords;
         private int minFavoritePoints = -1;
+
+        private boolean deliverLastFoundDateOfFoundBy = true;
 
         private SortType sort = SortType.DISTANCE;
         private boolean sortAsc = true;
@@ -351,6 +382,12 @@ public class GCWebAPI {
             return this;
         }
 
+        /** If set to true and foundBy contains EXACTLY ONE element, then in the lastFound-field the date of the last found date of foundBy is returned instead of for the cache */
+        public WebApiSearch setDeliverLastFoundDateOfFoundBy(final boolean deliverLastFoundDateOfFoundBy) {
+            this.deliverLastFoundDateOfFoundBy = deliverLastFoundDateOfFoundBy;
+            return this;
+        }
+
         /**
          * Returns a string specifying a range from 1-5 (in 0.5-steps) as used for parameters difficulty and terrain
          */
@@ -477,13 +514,26 @@ public class GCWebAPI {
                 params.put("cn", this.keywords);
             }
 
+            //special
+            if (deliverLastFoundDateOfFoundBy && foundBy.size() == 1) {
+                params.put("properties", "callernote");
+            }
+
             //paging / result size
             params.put("take", "" + take);
             params.put("skip", "" + skip);
 
             //sort
-            params.put("sort", sort.name().toLowerCase(Locale.getDefault()));
-            params.put("asc", "" + sortAsc);
+            if (sort != null) {
+                params.put("sort", sort.keyword);
+                if (sort == SortType.DISTANCE) {
+                    //to sort by distance we need to set an origin of distance measurement
+                    final Geopoint dOrigin = origin != null ? origin : LocationDataProvider.getInstance().currentGeo().getCoords();
+                    params.put("dorigin", String.valueOf(dOrigin.getLatitude()) + ',' + dOrigin.getLongitude());
+                }
+                params.put("asc", "" + sortAsc);
+            }
+
 
             //ALWAYS send cgeo as an identifier
             params.put("app", "cgeo"); //identify us towards Groundspeak due to gentlemens agreement

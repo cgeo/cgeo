@@ -12,6 +12,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
@@ -142,7 +143,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @NonNull
     @Override
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
         return new SearchResult(ALApi.searchByFilter(filter, this));
     }
 
