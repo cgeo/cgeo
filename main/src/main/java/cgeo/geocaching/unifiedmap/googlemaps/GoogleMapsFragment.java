@@ -43,7 +43,8 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private final GoogleMapController mapController = new GoogleMapController();
     private GestureDetector gestureDetector;
 
-    private LatLngBounds lastBounds;
+    private final ScaleDrawer scaleDrawer = new ScaleDrawer();
+    private LatLngBounds lastBounds = null;
 
     private boolean mapIsCurrentlyMoving;
 
@@ -104,7 +105,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     private void onMapAndActivityReady() {
-        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap);
+        applyTheme();
         if (position != null) {
             setCenter(position);
         }
@@ -123,19 +124,21 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 //        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
 
         lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+        scaleDrawer.setImageView(requireActivity().findViewById(R.id.scale));
 
         mMap.setOnCameraMoveStartedListener(reason -> {
             mapIsCurrentlyMoving = true;
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-
+            scaleDrawer.drawScale(lastBounds);
             if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                 viewModel.followMyLocation.setValue(false);
             }
         });
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
-            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             viewModel.mapCenter.setValue(getCenter());
+            lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+            scaleDrawer.drawScale(lastBounds);
 //            if (activityMapChangeListener != null) {
 //                final CameraPosition pos = mMap.getCameraPosition();
 //                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
@@ -203,12 +206,17 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void selectTheme(final Activity activity) {
-        GoogleMapsThemeHelper.selectTheme(activity, mMap);
+        GoogleMapsThemeHelper.selectTheme(activity, mMap, this::applyTheme);
     }
 
     @Override
     public void applyTheme() {
-        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap);
+        applyTheme(GoogleMapsThemeHelper.GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()));
+    }
+
+    public void applyTheme(final GoogleMapsThemeHelper.GoogleMapsThemes theme) {
+        scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
+        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap, theme);
     }
 
     // ========================================================================
