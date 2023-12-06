@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.googlemaps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,18 +21,20 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 class GoogleMapsThemeHelper {
 
     public enum GoogleMapsThemes {
-        DEFAULT(R.string.google_maps_style_default, 0),
-        NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night),
-        AUTO(R.string.google_maps_style_auto, 0),
-        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro),
-        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
+        DEFAULT(R.string.google_maps_style_default, 0, false),
+        NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night, true),
+        AUTO(R.string.google_maps_style_auto, 0, false),
+        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro, false),
+        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false);
 
         final int labelRes;
         final int jsonRes;
+        final boolean needsInvertedColors; // for scale bar drawing
 
-        GoogleMapsThemes(final int labelRes, final int jsonRes) {
+        GoogleMapsThemes(final int labelRes, final int jsonRes, final boolean needsInvertedColors) {
             this.labelRes = labelRes;
             this.jsonRes = jsonRes;
+            this.needsInvertedColors = needsInvertedColors;
         }
 
         @Nullable
@@ -73,7 +76,7 @@ class GoogleMapsThemeHelper {
     }
 
     /** Open theme selection dialog for GM map view, store result in settings */
-    public static void selectTheme(final Activity activity, final GoogleMap googleMap) {
+    public static void selectTheme(final Activity activity, final GoogleMap googleMap, final Action1<GoogleMapsThemes> onThemeSelected) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.map_theme_select);
 
@@ -82,7 +85,7 @@ class GoogleMapsThemeHelper {
         builder.setSingleChoiceItems(GoogleMapsThemes.getLabels(activity).toArray(new String[0]), selectedItem, (dialog, selection) -> {
             final GoogleMapsThemes theme = GoogleMapsThemes.values()[selection];
             Settings.setSelectedGoogleMapTheme(theme.name());
-            googleMap.setMapStyle(theme.getMapStyleOptions(activity));
+            onThemeSelected.call(theme);
             dialog.cancel();
         });
 
@@ -90,9 +93,9 @@ class GoogleMapsThemeHelper {
     }
 
     /** Apply selected GM theme to map (use default theme, if none is selected) */
-    public static void setTheme(final Activity activity, final GoogleMap googleMap) {
-        final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
+    public static GoogleMapsThemes setTheme(final Activity activity, final GoogleMap googleMap, final GoogleMapsThemes theme) {
         googleMap.setMapStyle(theme.getMapStyleOptions(activity));
+        return theme;
     }
 
 }
