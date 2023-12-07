@@ -311,13 +311,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, clickableItemsLayer);
         new NavigationTargetLayer(this, nonClickableItemsLayer);
+        new CacheCirclesLayer(this, nonClickableItemsLayer);
 
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
-
-        final GeoItemLayer<String> circlesLayer = new GeoItemLayer<>("circles");
-        layers.add(circlesLayer);
-        new CacheCirclesLayer(this, circlesLayer);
 
         viewModel.init(routeTrackUtils);
 
@@ -881,6 +878,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private void refreshMapData(final boolean circlesSwitched) {
         MapUtils.filter(viewModel.caches.getValue(), mapType.filterContext);
         viewModel.caches.notifyDataChanged();
+        viewModel.waypoints.notifyDataChanged();
         if (loadInBackgroundHandler != null) {
             loadInBackgroundHandler.onDestroy();
             loadInBackgroundHandler = new LoadInBackgroundHandler(this);
