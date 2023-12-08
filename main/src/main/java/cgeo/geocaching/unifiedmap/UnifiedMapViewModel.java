@@ -17,9 +17,7 @@ import cgeo.geocaching.utils.livedata.ConstantLiveData;
 import cgeo.geocaching.utils.livedata.Event;
 
 import android.content.Context;
-import android.location.Location;
 
-import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -44,7 +42,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
      * Event based LiveData notifying about track updates
      */
     public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
-    public final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
+    public final MutableLiveData<LocUpdater.LocationWrapper> location = new MutableLiveData<>();
     public final MutableLiveData<Target> target = new MutableLiveData<>();
 
     public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
@@ -60,15 +58,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
     public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
-
-
-    public void setCurrentPositionAndHeading(final Location location, final float heading) {
-        final PositionHistory ph = positionHistory.getValue();
-        if (ph != null) {
-            ph.rememberTrailPosition(location);
-        }
-        positionAndHeading.setValue(new Pair<>(location, heading));
-    }
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);

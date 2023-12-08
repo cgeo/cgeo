@@ -13,11 +13,9 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Bitmap;
-import android.location.Location;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 
 public class PositionLayer {
@@ -37,22 +35,19 @@ public class PositionLayer {
             .build();
 
 
-    Pair<Location, Float> lastPos = null;
-
     public PositionLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
-        viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
+        viewModel.location.observe(activity, locationWrapper -> {
 
-            if (!positionAndHeading.equals(lastPos)) {
-                lastPos = positionAndHeading;
+            if (locationWrapper.needsRepaintForDistanceOrAccuracy) {
 
-                layer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(positionAndHeading.first),
-                                positionAndHeading.first.getAccuracy() / 1000.0f, accuracyStyle)
+                layer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(locationWrapper.location),
+                                locationWrapper.location.getAccuracy() / 1000.0f, accuracyStyle)
                         .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION_ACCURACY_CIRCLE).build());
 
                 layer.put(KEY_POSITION,
-                        GeoPrimitive.createMarker(new Geopoint(positionAndHeading.first), GeoIcon.builder()
-                                        .setRotation(positionAndHeading.second)
+                        GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
+                                        .setRotation(locationWrapper.heading)
                                         .setFlat(true)
                                         .setBitmap(markerPosition).build())
                                 .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());

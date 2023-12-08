@@ -29,7 +29,6 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -54,7 +53,6 @@ import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -90,10 +88,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -125,7 +121,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     GeoItemLayer<String> nonClickableItemsLayer;
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
-    private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
+    private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private MenuItem followMyLocationItem = null;
 
@@ -133,121 +129,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private ElevationChart elevationChartUtils = null;
     private String lastElevationChartRoute = null;
 
-    private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
     private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
-    // rotation indicator
-
-
-    // class: update location
-    private static class UpdateLoc extends GeoDirHandler {
-        // use the following constants for fine tuning - find good compromise between smooth updates and as less updates as possible
-
-        // minimum time in milliseconds between position overlay updates
-        private static final long MIN_UPDATE_INTERVAL = 500;
-        private long timeLastPositionOverlayCalculation = 0;
-        // last check for proximity notifications
-        private long timeLastDistanceCheck = 0;
-        // minimum change of heading in grad for position overlay update
-        private static final float MIN_HEADING_DELTA = 15f;
-        // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
-        private static final float MIN_LOCATION_DELTA = 0.01f;
-
-        @NonNull
-        Location currentLocation = LocationDataProvider.getInstance().currentGeo();
-        float currentHeading;
-
-        /**
-         * weak reference to the outer class
-         */
-        @NonNull
-        private final WeakReference<UnifiedMapActivity> mapActivityRef;
-
-        UpdateLoc(@NonNull final UnifiedMapActivity mapActivity) {
-            mapActivityRef = new WeakReference<>(mapActivity);
-        }
-
-        @Override
-        public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
-            currentLocation = geo;
-            currentHeading = AngleUtils.getDirectionNow(dir);
-            repaintPositionOverlay();
-        }
-
-        @NonNull
-        public Location getCurrentLocation() {
-            return currentLocation;
-        }
-
-        /**
-         * Repaint position overlay but only with a max frequency and if position or heading changes sufficiently.
-         */
-        void repaintPositionOverlay() {
-            final long currentTimeMillis = System.currentTimeMillis();
-            if (currentTimeMillis > (timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL)) {
-                timeLastPositionOverlayCalculation = currentTimeMillis;
-
-                try {
-                    final UnifiedMapActivity mapActivity = mapActivityRef.get();
-                    if (mapActivity != null) {
-                        final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
-                        final boolean needsRepaintForHeading = needsRepaintForHeading();
-
-                        if (needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(mapActivity.viewModel.followMyLocation.getValue())) {
-                            mapActivity.mapFragment.setCenter(new Geopoint(currentLocation));
-                            mapActivity.currentMapPosition.resetFollowMyLocation = false;
-                        }
-
-                        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                            mapActivity.viewModel.setCurrentPositionAndHeading(currentLocation, currentHeading);
-
-                            if (mapActivity.viewModel.proximityNotification.getValue() != null && (timeLastDistanceCheck == 0 || currentTimeMillis > (timeLastDistanceCheck + MIN_UPDATE_INTERVAL))) {
-                                mapActivity.viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()), mapActivity.viewModel));
-                                timeLastDistanceCheck = System.currentTimeMillis();
-                            }
-
-                            if (Settings.showElevation()) {
-                                float elevation = Routing.getElevation(new Geopoint(currentLocation));
-                                if (Float.isNaN(elevation) && currentLocation.hasAltitude()) {
-                                    elevation = (float) currentLocation.getAltitude();
-                                }
-                                mapActivity.viewModel.elevation.setValue(elevation);
-                            }
-                        }
-                    }
-                } catch (final RuntimeException e) {
-                    Log.w("Failed to update location", e);
-                }
-            }
-        }
-
-        boolean needsRepaintForHeading() {
-            final UnifiedMapActivity mapActivity = mapActivityRef.get();
-            if (mapActivity == null) {
-                return false;
-            }
-            final Pair<Location, Float> positionAndHeading = mapActivity.viewModel.positionAndHeading.getValue();
-            if (positionAndHeading == null) {
-                return true;
-            }
-            return Math.abs(AngleUtils.difference(currentHeading, positionAndHeading.second)) > MIN_HEADING_DELTA;
-        }
-
-        boolean needsRepaintForDistanceOrAccuracy() {
-            final UnifiedMapActivity map = mapActivityRef.get();
-            if (map == null) {
-                return false;
-            }
-            final Location lastLocation = map.getLocation();
-            if (lastLocation.getAccuracy() != currentLocation.getAccuracy()) {
-                return true;
-            }
-            // @todo: NewMap uses a more sophisticated calculation taking map dimensions into account - check if this is still needed
-            return currentLocation.distanceTo(lastLocation) > MIN_LOCATION_DELTA;
-        }
-    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -289,6 +174,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.trackUpdater.observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue()));
         viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
         viewModel.followMyLocation.observe(this, this::initFollowMyLocation);
+        viewModel.location.observe(this, this::handleLocUpdate);
+
+        geoDirUpdate = new LocUpdater(this);
 
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
@@ -597,18 +485,27 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.FOLLOW_MY_LOCATION.toggleMenuItem(followMyLocationItem, followMyLocation);
 
         if (followMyLocation) {
-            final Location currentLocation = geoDirUpdate.getCurrentLocation();
+            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if non was delivered to the view-model yet
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
-            currentMapPosition.resetFollowMyLocation = false;
         }
     }
 
-    private Location getLocation() {
-        final Geopoint center = mapFragment.getCenter();
-        final Location loc = new Location("UnifiedMap");
-        loc.setLatitude(center.getLatitude());
-        loc.setLongitude(center.getLongitude());
-        return loc;
+    private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
+        if (locationWrapper.needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
+            mapFragment.setCenter(new Geopoint(locationWrapper.location));
+        }
+
+        if (viewModel.proximityNotification.getValue() != null) {
+            viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
+        }
+
+        if (Settings.showElevation()) {
+            float elevation = Routing.getElevation(new Geopoint(locationWrapper.location));
+            if (Float.isNaN(elevation) && locationWrapper.location.hasAltitude()) {
+                elevation = (float) locationWrapper.location.getAltitude();
+            }
+            viewModel.elevation.setValue(elevation);
+        }
     }
 
     // ========================================================================

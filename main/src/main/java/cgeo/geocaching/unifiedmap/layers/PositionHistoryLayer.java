@@ -18,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
+import javax.annotation.Nullable;
+
 public class PositionHistoryLayer {
 
     private final GeoItemLayer<String> layer;
@@ -28,8 +30,6 @@ public class PositionHistoryLayer {
     private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
 
     private static final String KEY_HISTORY_LINE = "historyLine";
-
-    Location lastPos = null;
 
     final UnifiedMapViewModel viewModel;
 
@@ -44,17 +44,16 @@ public class PositionHistoryLayer {
 
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.positionHistory.observe(activity, positionHistory -> drawHistory());
+        viewModel.positionHistory.observe(activity, positionHistory -> drawHistory(null));
 
-        viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
-            if (!positionAndHeading.first.equals(lastPos)) {
-                lastPos = positionAndHeading.first;
-                drawHistory();
+        viewModel.location.observe(activity, locationWrapper -> {
+            if (locationWrapper.needsRepaintForDistanceOrAccuracy) {
+                drawHistory(locationWrapper.location);
             }
         });
     }
 
-    private void drawHistory() {
+    private void drawHistory(@Nullable final Location currentLoc) {
         final PositionHistory history = viewModel.positionHistory.getValue();
 
         // only draw if position history is currently enabled. Remove possible old history line if not.
@@ -77,8 +76,8 @@ public class PositionHistoryLayer {
             segmentPoints.add(new Geopoint(historyElements.get(i).getLocation()));
         }
         // always add current position
-        if (lastPos != null) {
-            segmentPoints.add(new Geopoint(lastPos));
+        if (currentLoc != null) {
+            segmentPoints.add(new Geopoint(currentLoc));
         }
         geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_HISTORY).build());
 

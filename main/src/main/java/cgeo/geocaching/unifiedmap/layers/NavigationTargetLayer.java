@@ -8,12 +8,11 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.LocUpdater;
 import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.MapLineUtils;
-
-import android.location.Location;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -35,8 +34,6 @@ public class NavigationTargetLayer {
     final GeoItemLayer<String> layer;
 
     private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
-
-    private Location currentLocation = null;
 
     public NavigationTargetLayer(final UnifiedMapActivity activity, final GeoItemLayer<String> layer) {
         mapDistanceDrawer = new UnifiedTargetAndDistancesHandler(activity.findViewById(R.id.distanceinfo));
@@ -62,23 +59,23 @@ public class NavigationTargetLayer {
             repaintHelper(target);
         });
 
-        viewModel.positionAndHeading.observe(activity, locationFloatPair -> {
-            if (currentLocation == null || !currentLocation.equals(locationFloatPair.first)) {
-                currentLocation = locationFloatPair.first;
+        viewModel.location.observe(activity, locationFloatPair -> {
+            if (locationFloatPair.needsRepaintForDistanceOrAccuracy && viewModel.target.getValue() != null) {
                 repaintHelper(viewModel.target.getValue());
             }
         });
 
         viewModel.individualRoute.observe(activity, individualRoute -> mapDistanceDrawer.drawRouteDistance(individualRoute.getDistance()));
 
-        viewModel.elevation.observe(activity, elevation -> mapDistanceDrawer.drawElevation(elevation));
+        viewModel.elevation.observe(activity, mapDistanceDrawer::drawElevation);
     }
 
 
     private void repaintHelper(final UnifiedMapViewModel.Target target) {
+        final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
 
         if (currentLocation != null && target.geopoint != null) {
-            final Geopoint currentGp = new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude());
+            final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
             final Geopoint[] routingPoints = Routing.getTrack(currentGp, target.geopoint);
 
             float routedDistance = 0.0f;
