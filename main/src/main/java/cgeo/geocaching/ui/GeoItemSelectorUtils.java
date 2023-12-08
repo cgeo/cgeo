@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
@@ -111,7 +112,7 @@ public class GeoItemSelectorUtils {
         final boolean isIndividualRoute = route.getName().isEmpty();
         final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
         final ImageParam routeIcon = ImageParam.id(R.drawable.map_quick_route);
-        final TextParam routeInfo = isIndividualRoute ? TextParam.text("") : TextParam.id(R.string.track);
+        final TextParam routeInfo = isIndividualRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
         setViewValues(view, routeName, routeInfo, routeIcon);
         ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorText)));
         return view;
