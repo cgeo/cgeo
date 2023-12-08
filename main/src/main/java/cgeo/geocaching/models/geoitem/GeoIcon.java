@@ -22,6 +22,7 @@ public class GeoIcon implements Parcelable {
     private final float xAnchor;
     private final float yAnchor;
     private final float rotation;
+    private final boolean flat;
 
     //lazy initialized
     private int bmWidth = -1;
@@ -140,11 +141,12 @@ public class GeoIcon implements Parcelable {
 
     }
 
-    private GeoIcon(@Nullable final BitmapProvider bitmapProvider, final float xAnchor, final float yAnchor, final float rotation) {
+    private GeoIcon(@Nullable final BitmapProvider bitmapProvider, final float xAnchor, final float yAnchor, final float rotation, final boolean flat) {
         this.bitmapProvider = bitmapProvider;
         this.xAnchor = xAnchor;
         this.yAnchor = yAnchor;
         this.rotation = rotation;
+        this.flat = flat;
     }
 
     @Nullable
@@ -173,6 +175,13 @@ public class GeoIcon implements Parcelable {
     /** Rotation angle for this icon in degrees (0-360°) */
     public float getRotation() {
         return rotation;
+    }
+
+    /**
+     * if the marker should rotate together with the map (flat mode) or should be displayed as billboard popup. Default is billboard.
+     */
+    public boolean isFlat() {
+        return flat;
     }
 
     public boolean touchesIcon(final Geopoint tap, final Geopoint iconBase, @Nullable final ToScreenProjector toScreenCoordFunc) {
@@ -208,7 +217,7 @@ public class GeoIcon implements Parcelable {
 
 
     public Builder buildUpon() {
-        return builder().setBitmapProvider(bitmapProvider).setXAnchor(xAnchor).setYAnchor(yAnchor).setRotation(rotation);
+        return builder().setBitmapProvider(bitmapProvider).setXAnchor(xAnchor).setYAnchor(yAnchor).setRotation(rotation).setFlat(flat);
     }
 
     //equals/hashCode
@@ -223,7 +232,8 @@ public class GeoIcon implements Parcelable {
             Objects.equals(bitmapProvider, other.bitmapProvider) &&
             Objects.equals(xAnchor, other.xAnchor) &&
             Objects.equals(yAnchor, other.yAnchor) &&
-            Objects.equals(rotation, other.rotation);
+            Objects.equals(rotation, other.rotation) &&
+            Objects.equals(flat, other.flat);
     }
 
     @Override
@@ -234,7 +244,7 @@ public class GeoIcon implements Parcelable {
     @Override
     @NonNull
     public String toString() {
-        return "bm:" + bitmapProvider + ", angle:" + getRotation() + ", x/yAnchor:" + xAnchor + "/" + yAnchor;
+        return "bm:" + bitmapProvider + ", angle:" + getRotation() + ", x/yAnchor:" + xAnchor + "/" + yAnchor + ", flat:" + flat;
     }
 
 
@@ -246,6 +256,7 @@ public class GeoIcon implements Parcelable {
         private float xAnchor;
         private float yAnchor;
         private float rotation;
+        private boolean flat = false;
 
         private Builder() {
             setHotspot(Hotspot.CENTER);
@@ -280,8 +291,14 @@ public class GeoIcon implements Parcelable {
             return this;
         }
 
+        /** if the marker should rotate together with the map (flat mode) or should be displayed as billboard popup. */
+        public Builder setFlat(final boolean flat) {
+            this.flat = flat;
+            return this;
+        }
+
         public GeoIcon build() {
-            return new GeoIcon(bitmapProvider, xAnchor, yAnchor, rotation);
+            return new GeoIcon(bitmapProvider, xAnchor, yAnchor, rotation, flat);
         }
     }
 
@@ -292,6 +309,7 @@ public class GeoIcon implements Parcelable {
         xAnchor = in.readFloat();
         yAnchor = in.readFloat();
         rotation = in.readFloat();
+        flat = in.readInt() > 0;
     }
 
     @Override
@@ -300,6 +318,7 @@ public class GeoIcon implements Parcelable {
         dest.writeFloat(xAnchor);
         dest.writeFloat(yAnchor);
         dest.writeFloat(rotation);
+        dest.writeInt(flat ? 1 : 0); // writeBoolean requires API 29
     }
 
     @Override

@@ -53,6 +53,7 @@ public class PositionLayer {
                 layer.put(KEY_POSITION,
                         GeoPrimitive.createMarker(new Geopoint(positionAndHeading.first), GeoIcon.builder()
                                         .setRotation(positionAndHeading.second)
+                                        .setFlat(true)
                                         .setBitmap(markerPosition).build())
                                 .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
             }
