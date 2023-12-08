@@ -4,8 +4,8 @@ import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.Log;
 
 import android.location.Location;
 
@@ -22,6 +22,8 @@ public class LocUpdater extends GeoDirHandler {
     private long timeLastPositionOverlayCalculation = 0;
     // minimum change of heading in grad for position overlay update
     private static final float MIN_HEADING_DELTA = 15f;
+    // higher accuracy when rotating map by compass orientation
+    private static final float MIN_HEADING_DELTA_AUTOROTATION = 1f;
     // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
     private static final float MIN_LOCATION_DELTA = 0.01f;
 
@@ -47,25 +49,19 @@ public class LocUpdater extends GeoDirHandler {
      * Repaint position overlay but only with a max frequency and if position or heading changes sufficiently.
      */
     void repaintPositionOverlay() {
-        final long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis > (timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL)) {
-            timeLastPositionOverlayCalculation = currentTimeMillis;
 
-            try {
-                final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy(viewModel);
-                final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel);
+        final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy(viewModel);
+        final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel);
 
-                final PositionHistory ph = viewModel.positionHistory.getValue();
-                if (ph != null) {
-                    ph.rememberTrailPosition(currentLocation);
-                }
-
-                if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                    viewModel.location.postValue(new LocationWrapper(currentLocation, currentHeading, needsRepaintForDistanceOrAccuracy, needsRepaintForHeading));
-                }
-            } catch (final RuntimeException e) {
-                Log.w("Failed to update location", e);
+        if (needsRepaintForDistanceOrAccuracy) {
+            final PositionHistory ph = viewModel.positionHistory.getValue();
+            if (ph != null) {
+                ph.rememberTrailPosition(currentLocation);
             }
+        }
+
+        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+            viewModel.location.postValue(new LocationWrapper(currentLocation, currentHeading, needsRepaintForDistanceOrAccuracy, needsRepaintForHeading));
         }
     }
 
@@ -74,10 +70,16 @@ public class LocUpdater extends GeoDirHandler {
         if (locationWrapper == null) {
             return true;
         }
-        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > MIN_HEADING_DELTA;
+        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > (Settings.getMapRotation() == Settings.MAPROTATION_AUTO ? MIN_HEADING_DELTA_AUTOROTATION : MIN_HEADING_DELTA);
     }
 
     private boolean needsRepaintForDistanceOrAccuracy(final UnifiedMapViewModel viewModel) {
+        final long currentTimeMillis = System.currentTimeMillis();
+        if (currentTimeMillis < (timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL)) {
+            return false;
+        }
+        timeLastPositionOverlayCalculation = currentTimeMillis;
+
         final LocationWrapper locationWrapper = viewModel.location.getValue();
         if (locationWrapper == null || locationWrapper.location.getAccuracy() != currentLocation.getAccuracy()) {
             return true;

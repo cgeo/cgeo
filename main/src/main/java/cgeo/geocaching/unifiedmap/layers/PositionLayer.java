@@ -44,14 +44,16 @@ public class PositionLayer {
                 layer.put(KEY_ACCURACY, GeoPrimitive.createCircle(new Geopoint(locationWrapper.location),
                                 locationWrapper.location.getAccuracy() / 1000.0f, accuracyStyle)
                         .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION_ACCURACY_CIRCLE).build());
-
-                layer.put(KEY_POSITION,
-                        GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
-                                        .setRotation(locationWrapper.heading)
-                                        .setFlat(true)
-                                        .setBitmap(markerPosition).build())
-                                .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
             }
+
+            // always update position indicator, no matter if it's because of position or heading
+            layer.put(KEY_POSITION,
+                    GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
+                                    .setRotation(locationWrapper.heading)
+                                    .setFlat(true)
+                                    .setBitmap(markerPosition).build())
+                            .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
+
         });
 
         // todo: hmm, maybe move to different layer?

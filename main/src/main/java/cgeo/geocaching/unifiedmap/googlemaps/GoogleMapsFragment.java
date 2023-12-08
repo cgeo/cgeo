@@ -179,7 +179,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void setCenter(final Geopoint geopoint) {
         if (mMap != null) {
-            mapController.animateTo(new GoogleGeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(geopoint.getLatitude(), geopoint.getLongitude())));
         }
     }
 
@@ -272,8 +272,12 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setMapRotation(final int mapRotation) {
-        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
         super.setMapRotation(mapRotation);
+
+        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+
+        final View compass = requireView().findViewWithTag("GoogleMapCompass");
+        compass.setVisibility(mapRotation == MAPROTATION_MANUAL ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -283,8 +287,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setBearing(final float bearing) {
-        // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
+        if (mMap != null) {
+            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
+        }
 
     }
 
