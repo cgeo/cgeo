@@ -146,6 +146,17 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
         return true;
     }
 
+    private boolean onMapLongClicked() {
+        if (!Settings.useUnifiedMap()) {
+            return false;
+        }
+        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
+            DefaultMap.startActivityList(this, selectedListId);
+            ActivityMixin.overrideTransitionToFade(this);
+        }, false, PseudoList.NEW_LIST.id);
+        return true;
+    }
+
     private boolean onSearchLongClicked() {
         final ArrayList<Geocache> lastCaches = new ArrayList<>(DataStore.getLastOpenedCaches());
 
@@ -254,6 +265,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     private void setCustomBNitem() {
         // remove existing long tap listeners before changing menu
         findViewById(MENU_LIST).setOnLongClickListener(null);
+        findViewById(MENU_MAP).setOnLongClickListener(null);
         findViewById(MENU_SEARCH).setOnLongClickListener(null);
 
         final MenuItem menu = ((NavigationBarView) binding.activityNavigationBar).getMenu().findItem(MENU_CUSTOM);
@@ -277,6 +289,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
         // set long click event listeners
         findViewById(MENU_LIST).setOnLongClickListener(view -> onListsLongClicked());
+        findViewById(MENU_MAP).setOnLongClickListener(view -> onMapLongClicked());
         findViewById(MENU_SEARCH).setOnLongClickListener(view -> onSearchLongClicked());
     }
 

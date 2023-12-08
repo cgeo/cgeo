@@ -12,6 +12,9 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
+import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -38,6 +41,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.RepeatOnHoldListener;
+import cgeo.geocaching.ui.TwoLineSpinnerAdapter;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -74,6 +78,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
@@ -91,6 +96,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -105,6 +111,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -142,6 +149,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private MapMode compatibilityMapMode = MapMode.LIVE;
     private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
+    private Spinner mapSpinner = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -262,6 +270,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         }));
 
+        setupActionBarSpinner();
     }
 
     public AbstractMapFragment getMapFragment() {
@@ -280,6 +289,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             compatibilityMapMode = MapMode.SINGLE;
         } else if (mapType.type == UMTT_TargetCoords) {
             compatibilityMapMode = MapMode.COORDS;
+        } else if (mapType.type == UMTT_List) {
+            compatibilityMapMode = MapMode.LIST;
         } else if (mapType.type == UMTT_SearchResult) {
             compatibilityMapMode = MapMode.LIST;
         } else {
@@ -371,13 +382,28 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     }
                     viewModel.coordsIndicator.setValue(mapType.coords);
                     break;
+                case UMTT_List:
+                    // load list of caches belonging to list and scale map to see them all
+                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
+                    final Viewport viewport3 = DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
+                    addSearchResultByGeocaches(searchResult);
+                    if (viewport3 != null) {
+                        loadWaypoints(this, viewModel, viewport3);
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.zoomToBounds(viewport3);
+                        }
+                        refreshMapData(false);
+                    }
+                    break;
                 case UMTT_SearchResult:
                     // load list of caches and scale map to see them all
                     final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
                     addSearchResultByGeocaches(mapType.searchResult);
-                    loadWaypoints(this, viewModel, viewport2);
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.zoomToBounds(viewport2);
+                    if (viewport2 != null) {
+                        loadWaypoints(this, viewModel, viewport2);
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.zoomToBounds(viewport2);
+                        }
                     }
                     break;
                 default:
@@ -467,7 +493,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         CompactIconModeUtils.forceCompactIconMode(cacheCount);
         final ActionBar actionbar = getSupportActionBar();
         if (actionbar != null) {
-            actionbar.setSubtitle(subtitle);
+            ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).setTextByReference(mapType.fromList, false, subtitle);
         }
     }
 
@@ -511,8 +537,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void setTitle() {
         final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(MapUtils.getColoredValue(calculateTitle()));
+        if (actionBar != null && mapSpinner != null) {
+            if (mapType.fromList == 0) {
+                ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).setTextByReference(mapType.fromList, true, calculateTitle());
+            } else {
+                final int position = ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).getPositionFromReference(mapType.fromList);
+                if (position >= 0) {
+                    actionBar.setSelectedNavigationItem(position);
+                }
+            }
         }
     }
 
@@ -528,6 +561,49 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         }
         return StringUtils.defaultIfEmpty(mapType.title, getString(R.string.map_offline));
+    }
+
+    private void setupActionBarSpinner() {
+        // allow switching between lists
+        final List<TwoLineSpinnerAdapter.TextSpinnerData> items = new ArrayList<>();
+        if (mapType.fromList == 0) {
+            items.add(new TwoLineSpinnerAdapter.TextSpinnerData("", "", 0));
+        }
+        for (AbstractList list : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
+            final int count = list.getNumberOfCaches();
+            final TwoLineSpinnerAdapter.TextSpinnerData temp = new TwoLineSpinnerAdapter.TextSpinnerData(list.title, res.getQuantityString(R.plurals.cache_counts, count, count), list.id);
+            if (list.id == mapType.fromList) {
+                items.add(0, temp);
+            } else {
+                items.add(temp);
+            }
+        }
+        final TwoLineSpinnerAdapter spinnerAdapter = new TwoLineSpinnerAdapter(this, items);
+        mapSpinner = new Spinner(this, Spinner.MODE_DROPDOWN);
+        mapSpinner.setAdapter(spinnerAdapter);
+
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setListNavigationCallbacks(spinnerAdapter, (position, l) -> {
+                final int newListId = ((TwoLineSpinnerAdapter.TextSpinnerData) mapSpinner.getAdapter().getItem(position)).reference;
+                if (position > 0) {
+                    // load new item and switch list
+                    if (newListId == 0) {
+                        new UnifiedMapType().launchMap(this);
+                        finish();
+                    } else {
+                        final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
+                        if (lNew.isPresent()) {
+                            new UnifiedMapType(newListId).launchMap(this);
+                            finish();
+                        }
+                    }
+                }
+                return true;
+            });
+        }
     }
 
     /**
@@ -604,7 +680,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapType == null || mapType.type == UMTT_PlainMap ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
+        return mapType == null || mapType.type == UMTT_PlainMap || mapType.type == UMTT_List ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
