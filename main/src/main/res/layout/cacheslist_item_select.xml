@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     tools:layout_height="60sp"
     android:background="@color/colorBackgroundDialog"
-    android:foreground="?android:attr/selectableItemBackground" >
+    android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="36dip"
         android:layout_height="wrap_content"
         android:minHeight="36dip"
-        android:layout_gravity="top|center"
+        android:layout_centerVertical="true"
         android:scaleType="fitStart"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
         tools:src="@drawable/ic_info_blue"
         />
 
