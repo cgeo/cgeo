@@ -51,11 +51,13 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
 
@@ -3577,13 +3579,14 @@ public class DataStore {
         });
     }
 
-    public static void removeFirstMatchingIdFromIndividualRoute(final String id) {
+    public static void removeFirstMatchingIdFromIndividualRoute(final Context context, final String id) {
         withAccessLock(() -> {
             init();
             database.beginTransaction();
             try {
                 database.delete(dbTableRoute, "precedence = (SELECT precedence FROM " + dbTableRoute + " WHERE id = ? OR id LIKE ? ORDER BY precedence LIMIT 1)", new String[] { id, id + "-%" });
                 database.setTransactionSuccessful();
+                LifecycleAwareBroadcastReceiver.sendBroadcast(context, ACTION_INDIVIDUALROUTE_CHANGED);
             } catch (final Exception e) {
                 Log.e("Saving route failed", e);
             } finally {

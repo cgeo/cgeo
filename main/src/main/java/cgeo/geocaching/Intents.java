@@ -65,6 +65,7 @@ public class Intents {
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
     public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
     public static final String ACTION_GEOCACHE_CHANGED = PREFIX_ACTION + "GEOCACHE_CHANGED";
+    public static final String ACTION_INDIVIDUALROUTE_CHANGED = PREFIX_ACTION + "INDIVIDUAL_ROUTE_CHANGED";
     public static final String ACTION_INVALIDATE_MAPLIST = PREFIX_ACTION + "INVALIDATE_MAPLIST";
     public static final String ACTION_MESSAGE_CENTER_UPDATE = PREFIX_ACTION + "MCUPDATE";
 
