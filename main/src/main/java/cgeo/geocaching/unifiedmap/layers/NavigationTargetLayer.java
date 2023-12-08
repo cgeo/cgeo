@@ -74,7 +74,7 @@ public class NavigationTargetLayer {
     private void repaintHelper(final UnifiedMapViewModel.Target target) {
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
 
-        if (currentLocation != null && target.geopoint != null) {
+        if (currentLocation != null && target != null && target.geopoint != null) {
             final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
             final Geopoint[] routingPoints = Routing.getTrack(currentGp, target.geopoint);
 
@@ -92,7 +92,7 @@ public class NavigationTargetLayer {
 
         }
 
-        if (target.geopoint == null) {
+        if (target == null || target.geopoint == null) {
             layer.remove(KEY_TARGET_PATH);
         }
     }

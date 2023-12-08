@@ -53,6 +53,7 @@ import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -124,6 +125,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private MenuItem followMyLocationItem = null;
+    private Location lastBearingCoordinates = null;
 
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
@@ -499,6 +501,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
         }
 
+        if (Settings.getMapRotation() == MAPROTATION_AUTO) {
+            if (null != lastBearingCoordinates) {
+                final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(locationWrapper.location));
+                final float bearingDiff = Math.abs(AngleUtils.difference(bearing, mapFragment.getCurrentBearing()));
+                if (bearingDiff > 15.0f) {
+                    lastBearingCoordinates = locationWrapper.location;
+                    mapFragment.setBearing(bearing);
+                }
+            } else {
+                lastBearingCoordinates = locationWrapper.location;
+            }
+        }
+
         if (Settings.showElevation()) {
             float elevation = Routing.getElevation(new Geopoint(locationWrapper.location));
             if (Float.isNaN(elevation) && locationWrapper.location.hasAltitude()) {
@@ -714,7 +729,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 return true;
             }
             // @todo: remove this if-block after having completed implementation of UnifiedMap
-            if (item.getItemId() != android.R.id.home) {
+            if (id != android.R.id.home && id != R.id.menu_map_rotation) {
                 ActivityMixin.showShortToast(this, "menu item '" + item.getTitle() + "' not yet implemented for UnifiedMap");
             }
             return super.onOptionsItemSelected(item);
