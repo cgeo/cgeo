@@ -60,6 +60,7 @@ import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -606,14 +607,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        /* yet missing:
-        - live mode (partially)
-        - all cache related menu entries
-        - all target related menu entries
-        - filter related menu entries
-         */
         if (id == R.id.menu_map_live) {
-            // partial implementation for PlainMap mode
             if (mapType.type == UMTT_PlainMap) {
                 Settings.setLiveMap(!Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
@@ -621,33 +615,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 setMapModeFromMapType();
             } else {
                 mapType.type = UMTT_PlainMap;
+                mapType.filterContext = new GeocacheFilterContext(LIVE);
+                MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
                 onMapReadyTasks(tileProvider, true);
             }
-
-            /*
-            mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
-            if (mapOptions.isLiveEnabled) {
-                mapOptions.isStoredEnabled = true;
-                mapType.filterContext = new GeocacheFilterContext(LIVE);
-                caches.setFilterContext(mapType.filterContext);
-                refreshMapData(false);
-            }
-
-            if (mapType.mapMode == MapMode.LIVE) {
-                Settings.setLiveMap(mapOptions.isLiveEnabled);
-            }
-            caches.handleStoredLayers(this, mapOptions);
-            caches.handleLiveLayers(this, mapOptions);
-            ActivityMixin.invalidateOptionsMenu(this);
-            if (mapOptions.mapMode == MapMode.SINGLE) {
-                setTarget(mapOptions.coords, mapOptions.geocode);
-            }
-            mapOptions.mapMode = MapMode.LIVE;
-            updateSelectedBottomNavItemId();
-            mapOptions.title = StringUtils.EMPTY;
-            setTitle();
-            */
         } else if (id == R.id.menu_toggle_mypos) {
             viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
         } else if (id == R.id.menu_map_rotation_off) {
@@ -712,10 +684,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
-            }
-            // @todo: remove this if-block after having completed implementation of UnifiedMap
-            if (item.getItemId() != android.R.id.home) {
-                ActivityMixin.showShortToast(this, "menu item '" + item.getTitle() + "' not yet implemented for UnifiedMap");
             }
             return super.onOptionsItemSelected(item);
         }
