@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -107,21 +108,18 @@ public final class DefaultMap {
         }
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title, final int fromList) {
+    public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title) {
         if (Settings.useUnifiedMap()) {
-            Log.e("Launching UnifiedMap in searchResult mode (1) (item count: " + search.getGeocodes().size() + ", title='" + title + "', fromList=" + fromList + ")");
-            new UnifiedMapType(search, title, fromList).launchMap(fromActivity);
+            Log.e("Launching UnifiedMap in searchResult mode (item count: " + search.getGeocodes().size() + ", title='" + title + "')");
+            new UnifiedMapType(search, title).launchMap(fromActivity);
         } else {
-            new MapOptions(search, title, fromList).startIntent(fromActivity, cls);
+            new MapOptions(search, title, StoredList.TEMPORARY_LIST.id).startIntent(fromActivity, cls);
         }
     }
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
         if (Settings.useUnifiedMap()) {
-            Log.e("Launching UnifiedMap in searchResult mode (2) (item count: " + search.getGeocodes().size() + ", title='" + title + "', fromList=" + fromList + ")");
-            final UnifiedMapType mapType = new UnifiedMapType(search, title, fromList);
-            mapType.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
-            mapType.launchMap(fromActivity);
+            startActivityList(fromActivity, fromList);
         } else {
             final MapOptions mo = new MapOptions(search, title, fromList);
             mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
@@ -129,4 +127,12 @@ public final class DefaultMap {
         }
     }
 
+    public static void startActivityList(final Activity fromActivity, final int fromList) {
+        if (Settings.useUnifiedMap()) { // only supported for UnifiedMap
+            Log.e("Launching UnifiedMap in list mode, fromList=" + fromList + ")");
+            final UnifiedMapType mapType = new UnifiedMapType(fromList);
+            mapType.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.OFFLINE);
+            mapType.launchMap(fromActivity);
+        }
+    }
 }

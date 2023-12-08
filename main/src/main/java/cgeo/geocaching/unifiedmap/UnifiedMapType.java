@@ -5,6 +5,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Waypoint;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.OFFLINE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class UnifiedMapType implements Parcelable {
         UMTT_PlainMap,          // open map (from bottom navigation)
         UMTT_TargetGeocode,     // set cache or waypoint as target
         UMTT_TargetCoords,      // set coords as target
+        UMTT_List,              // display list contents
         UMTT_SearchResult       // show and scale to searchresult
         // to be extended
     }
@@ -61,12 +63,18 @@ public class UnifiedMapType implements Parcelable {
         this.coords = coords;
     }
 
+    /** show and scale to list content */
+    public UnifiedMapType(final int fromList) {
+        type = UnifiedMapTypeType.UMTT_List;
+        filterContext = new GeocacheFilterContext(OFFLINE);
+        this.fromList = fromList;
+    }
+
     /** show and scale to search result */
-    public UnifiedMapType(final SearchResult searchResult, final String title, final int fromList) {
+    public UnifiedMapType(final SearchResult searchResult, final String title) {
         type = UnifiedMapTypeType.UMTT_SearchResult;
         this.searchResult = searchResult;
         this.title = title;
-        this.fromList = fromList;
     }
 
     /** get launch intent */
