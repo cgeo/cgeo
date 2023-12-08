@@ -219,7 +219,7 @@ public final class Routing {
                     }
                 }
             });
-        } catch (SAXException ignore) {
+        } catch (SAXException | NullPointerException ignore) {
             return NO_ELEVATION_AVAILABLE;
         }
         return result[0];
