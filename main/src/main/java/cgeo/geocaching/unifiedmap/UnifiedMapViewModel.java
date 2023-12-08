@@ -67,7 +67,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         if (ph != null) {
             ph.rememberTrailPosition(location);
         }
-        positionAndHeading.setValue(new Pair<>(location, heading));
+        positionAndHeading.postValue(new Pair<>(location, heading));
     }
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {

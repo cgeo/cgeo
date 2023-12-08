@@ -158,6 +158,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         @NonNull
         Location currentLocation = LocationDataProvider.getInstance().currentGeo();
         float currentHeading;
+        private Location lastBearingCoordinates = null;
 
         /**
          * weak reference to the outer class
@@ -206,6 +207,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             if (mapActivity.viewModel.proximityNotification.getValue() != null && (timeLastDistanceCheck == 0 || currentTimeMillis > (timeLastDistanceCheck + MIN_UPDATE_INTERVAL))) {
                                 mapActivity.viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()), mapActivity.viewModel));
                                 timeLastDistanceCheck = System.currentTimeMillis();
+                            }
+
+                            if (Settings.getMapRotation() == MAPROTATION_AUTO) {
+                                if (null != lastBearingCoordinates) {
+                                    final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(currentLocation));
+                                    final float bearingDiff = Math.abs(AngleUtils.difference(bearing, mapActivity.mapFragment.getCurrentBearing()));
+                                    if (bearingDiff > 15.0f) {
+                                        lastBearingCoordinates = currentLocation;
+                                        mapActivity.mapFragment.setBearing(bearing);
+                                    }
+                                } else {
+                                    lastBearingCoordinates = currentLocation;
+                                }
                             }
 
                             if (Settings.showElevation()) {
@@ -817,7 +831,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 return true;
             }
             // @todo: remove this if-block after having completed implementation of UnifiedMap
-            if (item.getItemId() != android.R.id.home) {
+            if (id != android.R.id.home && id != R.id.menu_map_rotation) {
                 ActivityMixin.showShortToast(this, "menu item '" + item.getTitle() + "' not yet implemented for UnifiedMap");
             }
             return super.onOptionsItemSelected(item);

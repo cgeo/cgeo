@@ -42,7 +42,6 @@ public class PositionLayer {
     public PositionLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
         viewModel.positionAndHeading.observe(activity, positionAndHeading -> {
-
             if (!positionAndHeading.equals(lastPos)) {
                 lastPos = positionAndHeading;
 
