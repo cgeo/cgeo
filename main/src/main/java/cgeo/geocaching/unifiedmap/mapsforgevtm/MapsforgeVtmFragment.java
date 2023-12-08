@@ -15,6 +15,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.ImageUtils;
 
@@ -294,19 +295,22 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     @Override
     public void setMapRotation(final int mapRotation) {
-        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
         super.setMapRotation(mapRotation);
+
+        mMap.getEventLayer().enableRotation(mapRotation == Settings.MAPROTATION_MANUAL);
+        repaintRotationIndicator(mMap.getMapPosition().bearing);
     }
 
     @Override
     public float getCurrentBearing() {
-        return mMap.getMapPosition().bearing;
+        return AngleUtils.normalize(360 - mMap.getMapPosition().bearing); // VTM uses opposite way of calculating bearing compared to GM
     }
 
     @Override
     public void setBearing(final float bearing) {
+        final float adjustedBearing = AngleUtils.normalize(360 - bearing); // VTM uses opposite way of calculating bearing compared to GM
         final MapPosition pos = mMap.getMapPosition();
-        pos.setBearing(bearing);
+        pos.setBearing(adjustedBearing);
         mMap.setMapPosition(pos);
     }
 

@@ -491,20 +491,25 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
+
+        if (locationWrapper.needsRepaintForHeading && Settings.getMapRotation() == MAPROTATION_AUTO) {
+            mapFragment.setBearing(locationWrapper.heading);
+        }
+
         if (locationWrapper.needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
             mapFragment.setCenter(new Geopoint(locationWrapper.location));
-        }
 
-        if (viewModel.proximityNotification.getValue() != null) {
-            viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
-        }
-
-        if (Settings.showElevation()) {
-            float elevation = Routing.getElevation(new Geopoint(locationWrapper.location));
-            if (Float.isNaN(elevation) && locationWrapper.location.hasAltitude()) {
-                elevation = (float) locationWrapper.location.getAltitude();
+            if (viewModel.proximityNotification.getValue() != null) {
+                viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
             }
-            viewModel.elevation.setValue(elevation);
+
+            if (Settings.showElevation()) {
+                float elevation = Routing.getElevation(new Geopoint(locationWrapper.location));
+                if (Float.isNaN(elevation) && locationWrapper.location.hasAltitude()) {
+                    elevation = (float) locationWrapper.location.getAltitude();
+                }
+                viewModel.elevation.setValue(elevation);
+            }
         }
     }
 
