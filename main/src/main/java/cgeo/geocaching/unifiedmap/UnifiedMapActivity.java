@@ -58,8 +58,10 @@ import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -231,6 +233,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewModel.caches.getValue().add(cache);
                     viewModel.caches.notifyDataChanged();
                 }
+            }
+        });
+
+        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INDIVIDUALROUTE_CHANGED) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                viewModel.reloadIndividualRoute();
             }
         });
 

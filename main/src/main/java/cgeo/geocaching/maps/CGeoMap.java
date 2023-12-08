@@ -64,11 +64,14 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
@@ -544,6 +547,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     caches.add(cache);
                     displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
                 }
+            }
+        });
+
+        activity.getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(activity, ACTION_INDIVIDUALROUTE_CHANGED) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                reloadIndividualRoute();
             }
         });
 

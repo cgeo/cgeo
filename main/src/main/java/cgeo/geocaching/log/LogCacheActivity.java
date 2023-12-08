@@ -557,7 +557,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
         if (Settings.removeFromRouteOnLog()) {
-            DataStore.removeFirstMatchingIdFromIndividualRoute(geocode);
+            DataStore.removeFirstMatchingIdFromIndividualRoute(this, geocode);
         }
     }
 

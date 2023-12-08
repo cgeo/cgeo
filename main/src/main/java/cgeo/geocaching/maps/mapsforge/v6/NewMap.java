@@ -80,6 +80,7 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
@@ -368,6 +369,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 invalidateOptionsMenu();
+            }
+        });
+
+        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INDIVIDUALROUTE_CHANGED) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                reloadIndividualRoute();
             }
         });
 
