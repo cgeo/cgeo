@@ -129,6 +129,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             marker = map.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorCache.toBitmapDescriptor(new BitmapDrawable(resources, icon.getBitmap())))
                 .rotation(icon.getRotation())
+                .flat(icon.isFlat())
                 .position(GP_CONVERTER.to(item.getCenter()))
                 .anchor(icon.getXAnchor(), icon.getYAnchor())
                 .zIndex(zLevel));

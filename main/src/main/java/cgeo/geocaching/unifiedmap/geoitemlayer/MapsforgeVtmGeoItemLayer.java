@@ -167,7 +167,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             final GeoIcon icon = item.getIcon();
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
-                    icon.getXAnchor(), icon.getYAnchor(), true));
+                    icon.getXAnchor(), icon.getYAnchor(), !icon.isFlat()));
             marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItem(marker);
             markerLayer.update();
