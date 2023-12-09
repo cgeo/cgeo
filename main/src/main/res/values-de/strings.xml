@@ -1275,6 +1275,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle generierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, keine Wiederherstellung möglich.</string>
     <string name="cache_delete_generated_waypoints_success">Generierte Wegpunkte gelöscht</string>
     <string name="cache_offline_store">Speichern</string>
+    <string name="cache_offline_stored_ago">Gespeichert %s</string>
     <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
     <string name="cache_offline_time_mins_few">vor ein paar Minuten</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1734,6 +1735,7 @@
     <string name="search_finder">Gefunden von</string>
     <string name="search_finder_prefill">Finder</string>
     <string name="search_finder_button">Suche nach Finder</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_tb">Trackable</string>
