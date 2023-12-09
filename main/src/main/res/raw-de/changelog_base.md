@@ -1,6 +1,6 @@
 ### Karte
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
-- New: Show cache's found state on waypoint icons
+- Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
