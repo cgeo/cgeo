@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/settings_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="top|start">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/settings_fragment_root"
+        android:name="cgeo.geocaching.settings.fragments.PreferencesFragmentRoot"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View style="@style/separator_vertical" />
+
+    <!-- second column in landscape mode only -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/settings_fragment_content_root"
+        android:name="cgeo.geocaching.settings.fragments.PreferencesFragmentContent"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

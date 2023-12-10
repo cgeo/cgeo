@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/settings_fragment_root"
-        android:name="cgeo.geocaching.settings.fragments.PreferencesFragment"
+        android:name="cgeo.geocaching.settings.fragments.PreferencesFragmentRoot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -3,15 +3,34 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
-public class PreferencesFragment extends BasePreferenceFragment {
+import java.util.Objects;
+
+public class PreferencesFragmentRoot extends BasePreferenceFragment {
+    private Preference lastPreference = null;
+
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences, rootKey);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(@NonNull final Preference preference) {
+        // toggle icon tint to highlight selected preference screen
+        if (preference.getIcon() != null) {
+            if (lastPreference != null) {
+                Objects.requireNonNull(lastPreference.getIcon()).setTint(Settings.isLightSkin(requireContext()) ? Color.BLACK : Color.WHITE);
+            }
+            lastPreference = preference;
+            preference.getIcon().setTint(getResources().getColor(R.color.colorAccent));
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
