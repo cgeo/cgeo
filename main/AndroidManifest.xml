@@ -46,7 +46,7 @@
     <application
         android:name=".CgeoApplication"
         android:allowBackup="true"
-        android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent"
+        android:backupAgent=".backup.CentralBackupAgent"
         android:icon="${appIcon}"
         android:roundIcon="${appIconRound}"
         android:label="@string/app_name"
@@ -199,7 +199,7 @@
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
         <activity
-            android:name="cgeo.geocaching.helper.UsefulAppsActivity"
+            android:name=".helper.UsefulAppsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/helpers"
             android:parentActivityName="cgeo.geocaching.MainActivity"
@@ -209,7 +209,7 @@
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
         <activity
-            android:name="cgeo.geocaching.helper.QueryMapFile"
+            android:name=".helper.QueryMapFile"
             android:exported="true">
         </activity>
         <activity
@@ -235,7 +235,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cgeo.geocaching.address.AddressListActivity"
+            android:name=".address.AddressListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_address_result"
             android:parentActivityName="cgeo.geocaching.SearchActivity"
@@ -411,11 +411,11 @@
             android:label="@string/map_map" >
         </activity>
         <activity
-            android:name="cgeo.geocaching.log.LogCacheActivity"
+            android:name=".log.LogCacheActivity"
             android:label="@string/log_new_log" >
         </activity>
         <activity
-            android:name="cgeo.geocaching.log.LogTrackableActivity"
+            android:name=".log.LogTrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/trackable_touch"
             android:exported="true">
@@ -636,7 +636,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.TrackableActivity"
+            android:name=".TrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true">
 
@@ -696,7 +696,7 @@
 
         </activity>
         <activity
-            android:name="cgeo.geocaching.connector.gc.ImportBookmarkLinks"
+            android:name=".connector.gc.ImportBookmarkLinks"
             android:exported="true">
 
             <!-- geocaching.com URL via coord.info redirection -->
@@ -808,7 +808,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.connector.trackable.GeokretyAuthorizationActivity"
+            android:name=".connector.trackable.GeokretyAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -821,7 +821,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.settings.GCAuthorizationActivity"
+            android:name=".settings.GCAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -834,7 +834,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.settings.ECAuthorizationActivity"
+            android:name=".settings.ECAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -847,7 +847,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.connector.su.SuAuthorizationActivity"
+            android:name=".connector.su.SuAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -865,7 +865,7 @@
         </activity>
 
         <activity
-            android:name="cgeo.geocaching.settings.GCVoteAuthorizationActivity"
+            android:name=".settings.GCVoteAuthorizationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden"
@@ -877,19 +877,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
+            android:name=".connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_pocket_title">
         </activity>
         <activity
-            android:name="cgeo.geocaching.connector.gc.BookmarkListActivity"
+            android:name=".connector.gc.BookmarkListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/search_bookmark_list">
         </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
         <activity android:name=".downloader.PendingDownloadsActivity" android:exported="false" />
         <activity
-            android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
+            android:name=".downloader.DownloadSelectorActivity"
             android:label="@string/download_title">
         </activity>
         <activity
