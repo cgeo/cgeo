@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
@@ -25,7 +26,6 @@ import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_UNKNOWN;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -42,6 +42,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
+import androidx.preference.PreferenceManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -382,7 +383,7 @@ public class BackupUtils {
             final InputStream file = ContentStorage.get().openForRead(getSettingsFile(backupDir).uri);
 
             // open shared prefs for writing
-            final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), Context.MODE_PRIVATE);
+            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
             final SharedPreferences.Editor editor = prefs.edit();
 
             // parse xml
@@ -550,7 +551,7 @@ public class BackupUtils {
     }
 
     private boolean createSettingsBackupInternal(final Folder backupDir, final Boolean fullBackup) {
-        final SharedPreferences prefs = activityContext.getSharedPreferences(ApplicationSettings.getPreferencesName(), Context.MODE_PRIVATE);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
         final Map<String, ?> keys = prefs.getAll();
         final HashSet<String> ignoreKeys = new HashSet<>();
 

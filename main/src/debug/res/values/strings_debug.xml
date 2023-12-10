@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- fileprovider for debug builds - must be different from main version as it otherwise cannot be installed im parallel to the main version -->
+    <string translatable="false" name="file_provider_authority">org.cgeo.devfileprovider</string>
+
+    </resources>

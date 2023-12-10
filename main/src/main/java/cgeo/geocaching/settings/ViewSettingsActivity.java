@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
@@ -8,7 +9,6 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.SettingsUtils;
 import static cgeo.geocaching.utils.SettingsUtils.getType;
 
@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -83,7 +84,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
         setUpNavigationEnabled(true);
 
         allItems = new ArrayList<>();
-        prefs = getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
         final Map<String, ?> keys = prefs.getAll();
         for (Map.Entry<String, ?> entry : keys.entrySet()) {
             final Object value = entry.getValue();

@@ -73,6 +73,11 @@ android {
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + GitCommit.currentShort() + " developer build"
 
+            // also give a different suffix so that it can be installed in parallel, however we do not want to affect the CI builds
+            if (!isContinuousIntegrationServer()) {
+                applicationIdSuffix ".developer"
+            }
+
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
