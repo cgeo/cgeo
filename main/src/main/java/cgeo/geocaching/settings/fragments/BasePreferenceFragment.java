@@ -132,7 +132,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
-        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragment);
+        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragmentRoot);
     }
 
     /**
@@ -160,7 +160,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
 
     public void initPreferences(final @XmlRes int preferenceResource, final String rootKey) {
         setPreferencesFromResource(preferenceResource, rootKey);
-        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragment);
+        checkExtendedSettingsVisibility(Settings.extendedSettingsAreEnabled() || this instanceof PreferencesFragmentRoot);
     }
 
     protected void checkExtendedSettingsVisibility(final boolean forceShowAll) {

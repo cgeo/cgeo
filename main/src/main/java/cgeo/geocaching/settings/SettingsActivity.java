@@ -22,7 +22,7 @@ import cgeo.geocaching.settings.fragments.PreferenceServiceGeokretyOrgFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServicesFragment;
 import cgeo.geocaching.settings.fragments.PreferenceSystemFragment;
-import cgeo.geocaching.settings.fragments.PreferencesFragment;
+import cgeo.geocaching.settings.fragments.PreferencesFragmentRoot;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
@@ -54,6 +54,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -88,6 +89,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
     private ContentStorageActivityHelper contentStorageHelper = null;
 
     private CharSequence title;
+    private int preferenceContentView = R.id.settings_fragment_root;
 
     private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
 
@@ -120,6 +122,10 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                 });
 
         setContentView(R.layout.layout_settings);
+        if (findViewById(R.id.settings_fragment_content_root) != null) {
+            // landscape mode?
+            preferenceContentView = R.id.settings_fragment_content_root;
+        }
         buildSearchIndex();
 
         handleIntent(savedInstanceState);
@@ -131,6 +137,10 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setResult(NO_RESTART_NEEDED);
+    }
+
+    private boolean isInDualPaneMode() {
+        return preferenceContentView == R.id.settings_fragment_content_root;
     }
 
     @Override
@@ -216,7 +226,11 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
      * and optionally starts scrolling to a preference identified by its key
      */
     private void openRequestedFragment(@NonNull final String baseKey, @Nullable final String scrollToPrefKey) {
-        Fragment preferenceFragment = new PreferencesFragment();
+        if (isInDualPaneMode() && StringUtils.isBlank(baseKey)) {
+            // never open category view in content pane when in dual pane mode
+            return;
+        }
+        Fragment preferenceFragment = new PreferencesFragmentRoot();
         if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_appearance))) {
@@ -250,7 +264,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         }
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.settings_fragment_root, preferenceFragment)
+                .replace(preferenceContentView, preferenceFragment)
                 .commit();
     }
 
@@ -307,10 +321,13 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.settings_fragment_root, fragment)
-                .addToBackStack(null)
-                .commit();
+        final FragmentManager fm = getSupportFragmentManager();
+        final FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(preferenceContentView, fragment);
+        if (!isInDualPaneMode() && fm.getBackStackEntryCount() == 0) {
+            ft.addToBackStack(null);
+        }
+        ft.commit();
         title = pref.getTitle();
         return true;
     }
@@ -361,13 +378,19 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         }
         final FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         for (Fragment f : fragments) {
-            t.add(R.id.settings_fragment_root, f);
+            t.add(preferenceContentView, f);
         }
         t.commit();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings_fragment_root, new PreferencesFragment())
-                .commit();
+
+        // in dual column mode open services section on start
+        if (isInDualPaneMode()) {
+            openRequestedFragment(getString(R.string.preference_screen_services), null);
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(preferenceContentView, new PreferencesFragmentRoot())
+                    .commit();
+        }
     }
 
     // callback for BasePreferenceFragments to register search data
