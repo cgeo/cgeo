@@ -21,12 +21,17 @@ public class ApplicationSettings {
 
     /**
      * Get the name of the preferences file.
+     * <br/>
+     * ONLY USE THIS METHOD IF NO CONTEXT IS AVAILABLE!
+     * <br/>
+     * Developer builds will have a different preferences name then specified here.
+     * The suggested way of retrieving the preferences is using {@link androidx.preference.PreferenceManager#getDefaultSharedPreferences(android.content.Context)}.
      *
      * @return the name of the shared preferences file without the extension
      */
     public static String getPreferencesName() {
         // There is currently no Android API to get the file name of the shared preferences. Let's hardcode
-        // it without needing a CgeoApplication instance.
+        // it without needing a CgeoApplication instance (see #2317).
         return "cgeo.geocaching_preferences";
     }
 
