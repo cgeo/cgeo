@@ -410,12 +410,16 @@ public class MapUtils {
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
             b.setState(SideSheetBehavior.STATE_EXPANDED);
+            final SideSheetCallback[] callbackStore = new SideSheetCallback[] { null };
 
             final SideSheetCallback callback = new SideSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull final View sheet, final int newState) {
                     if (newState == SideSheetBehavior.STATE_HIDDEN) {
                         removeDetailsFragment(activity);
+                        if (callbackStore[0] != null) {
+                            b.removeCallback(callbackStore[0]);
+                        }
                     }
                 }
 
@@ -424,7 +428,7 @@ public class MapUtils {
                     // nothing
                 }
             };
-
+            callbackStore[0] = callback;
             b.addCallback(callback);
         }
 
