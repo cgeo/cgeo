@@ -7,6 +7,24 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.11.13 Bugfix Release
+
+- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
+- Change: Reduce timeout for calls to bettercacher.org
+- Fix: Personal note from server contained incorrect chars
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.11.01 Bugfix Release
+
+- Fix: Issues with distance views
+- Fix: Not all launcher icon variants are adaptive
+- Fix: Outdated error message if not network connection is available
+- Fix: Crashes when creating waypoint markers
+- Fix: Timezone issues when logging
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.10.25 Feature Release
 
 ### Map
