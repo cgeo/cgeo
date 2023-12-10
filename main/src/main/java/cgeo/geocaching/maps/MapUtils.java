@@ -357,17 +357,20 @@ public class MapUtils {
 
     private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
 
-        final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        final SwipeToOpenFragment swipeToOpenFragment = new SwipeToOpenFragment();
-        ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
-        ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
-
-        ft.commit();
-
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
         final ViewGroup.LayoutParams params = fl.getLayoutParams();
         final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
+
+        final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        final SwipeToOpenFragment swipeToOpenFragment = isBottomSheet ? new SwipeToOpenFragment() : null;
+        if (isBottomSheet) {
+            ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
+            ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
+        } else {
+            ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
+        }
+        ft.commit();
 
         if (isBottomSheet) { // portrait mode uses BottomSheet
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
@@ -404,7 +407,6 @@ public class MapUtils {
 
             b.addBottomSheetCallback(callback);
             swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
-
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
             b.setState(SideSheetBehavior.STATE_EXPANDED);
@@ -424,8 +426,6 @@ public class MapUtils {
             };
 
             b.addCallback(callback);
-            swipeToOpenFragment.setOnStopCallback(() -> b.removeCallback(callback));
-
         }
 
         fl.setVisibility(View.VISIBLE);
