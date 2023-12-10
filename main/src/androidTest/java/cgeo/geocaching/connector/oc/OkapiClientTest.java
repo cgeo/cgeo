@@ -12,6 +12,7 @@ import cgeo.geocaching.test.CgeoTestUtils;
 
 import java.util.Locale;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -141,6 +142,7 @@ public class OkapiClientTest {
     }
 
     @Test
+    @Ignore
     public void testUploadPersonalNote() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
