@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -91,7 +90,7 @@ public interface IConnector {
      * Get an ILoggingManager to guide the logging process.
      */
     @NonNull
-    ILoggingManager getLoggingManager(@NonNull LogCacheActivity activity, @NonNull Geocache cache);
+    ILoggingManager getLoggingManager(@NonNull Geocache cache);
 
     /**
      * enable/disable changing the name of a cache

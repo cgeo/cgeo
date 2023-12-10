@@ -17,7 +17,6 @@ import cgeo.geocaching.contacts.IContactCardProvider;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -99,8 +98,8 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
-        return new NoLoggingManager();
+    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
+        return new NoLoggingManager(this, cache);
     }
 
     @Override

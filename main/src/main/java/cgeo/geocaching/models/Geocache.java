@@ -703,8 +703,8 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity) {
-        return getConnector().getLoggingManager(activity, this);
+    public ILoggingManager getLoggingManager() {
+        return getConnector().getLoggingManager(this);
     }
 
     public float getDifficulty() {

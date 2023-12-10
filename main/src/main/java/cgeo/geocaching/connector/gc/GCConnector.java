@@ -30,7 +30,6 @@ import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -222,8 +221,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
-        return new GCLoggingManager(activity, cache);
+    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
+        return new GCLoggingManager(cache);
     }
 
     @Override

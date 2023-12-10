@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ILoggingWithFavorites;
+import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -37,6 +38,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -53,6 +55,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -67,9 +73,11 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
-public class LogCacheActivity extends AbstractLoggingActivity {
+public class LogCacheActivity extends AbstractLoggingActivity implements LoaderManager.LoaderCallbacks<LogContextInfo> {
 
+    private static final int LOADER_ID_LOGGING_INFO = 409809;
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
+    private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final int LOG_MAX_LENGTH = 4000;
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
@@ -88,6 +96,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final CacheVotingBar cacheVotingBar = new CacheVotingBar();
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
+    private int availableFavoritePoints = -1;
 
     private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
@@ -109,41 +118,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         return logVisitIntent;
     }
 
-    /**
-     * Hook called at the beginning of onCreateLoader().
-     */
-    public void onLoadStarted() {
-        Log.v("LogCacheActivity.onLoadStarted()");
-        showProgress(true);
-    }
-
-    /**
-     * Hook called at the beginning of onLoadFinished().
-     */
-    public void onLoadFinished() {
-        Log.v("LogCacheActivity.onLoadFinished()");
-        if (loggingManager.hasLoaderError()) {
-            showErrorLoadingData();
-            return;
-        }
-
-        if (!loggingManager.hasTrackableLoadError()) {
-            trackables.addAll(initializeTrackableActions(loggingManager.getTrackables(), lastSavedState));
-        } else {
-            showErrorLoadingAdditionalData();
-        }
-
-        if (loggingManager.getPossibleLogTypes().isEmpty()) {
-            showErrorLoadingData();
-            return;
-        } else {
-            logType.setValues(loggingManager.getPossibleLogTypes());
-        }
-
-        refreshGui();
-        showProgress(false);
-    }
-
     private void verifySelectedReportProblemType() {
         final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
         possibleReportProblemTypes.add(ReportProblemType.NO_PROBLEM);
@@ -161,13 +135,13 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
     }
 
-    private void showErrorLoadingData() {
-        showToast(res.getString(R.string.err_log_load_data));
+    private void showErrorLoadingData(final String additionalData) {
+        String message = LocalizationUtils.getString(R.string.warn_log_load_additional_data);
+        if (additionalData != null) {
+            message += ": " + additionalData;
+        }
+        showToast(message);
         showProgress(false);
-    }
-
-    private void showErrorLoadingAdditionalData() {
-        showToast(res.getString(R.string.warn_log_load_additional_data));
     }
 
     private List<TrackableLog> initializeTrackableActions(final List<TrackableLog> tLogs, final OfflineLogEntry savedState) {
@@ -248,8 +222,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         setCacheTitleBar(cache);
         //initializeRatingBar();
 
-        loggingManager = cache.getLoggingManager(this);
-        loggingManager.init();
+        loggingManager = cache.getLoggingManager();
+        //loggingManager.init();
+        LoaderManager.getInstance(this).initLoader(LOADER_ID_LOGGING_INFO, null, this);
 
         this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
 
@@ -268,6 +243,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             }
         } else {
             fillViewFromEntry(lastSavedState);
+        }
+        if (savedInstanceState != null) {
+            this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
         }
 
         refreshGui();
@@ -360,9 +338,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
-            final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
-            binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
-            if (favoritePoints > 0) {
+            binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
+            if (availableFavoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
             }
         } else {
@@ -421,6 +398,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
+        outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
     }
 
     public void setType(final LogType type) {
@@ -627,6 +605,65 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Settings.setTrackableComparator(comparator);
         updateTrackablesList();
         invalidateOptionsMenuCompatible();
+    }
+
+    @NonNull
+    @Override
+    public Loader<LogContextInfo> onCreateLoader(final int id, @Nullable final Bundle args) {
+        Log.i("LogCacheActivity.onLoadStarted()");
+        showProgress(true);
+        return new LogContextInfoLoader(this, loggingManager, null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull final Loader<LogContextInfo> loader, final LogContextInfo data) {
+        Log.i("LogCacheActivity.onLoadFinished()");
+        if (data.hasLoadError()) {
+            showErrorLoadingData(data.getUserDisplayableErrorMessage());
+        }
+        if (!data.getAvailableLogTypes().isEmpty()) {
+            logType.setValues(data.getAvailableLogTypes());
+        }
+        if (!data.getAvailableTrackables().isEmpty()) {
+            trackables.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
+        }
+        if (!data.getAvailableReportProblemTypes().isEmpty()) {
+            reportProblem.setValues(data.getAvailableReportProblemTypes());
+        }
+        if (data.getAvailableFavoritePoints() >= 0) {
+            this.availableFavoritePoints = data.getAvailableFavoritePoints();
+        }
+
+        refreshGui();
+        showProgress(false);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull final Loader<LogContextInfo> loader) {
+        //do nothing
+    }
+
+    private static class LogContextInfoLoader extends AsyncTaskLoader<LogContextInfo> {
+
+        private final ILoggingManager loggingManager;
+        private final String serviceLogId;
+
+        LogContextInfoLoader(@NonNull final Context context, final ILoggingManager loggingManager, final String serviceLogId) {
+            super(context);
+            this.loggingManager = loggingManager;
+            this.serviceLogId = serviceLogId;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            forceLoad();
+        }
+
+        @Nullable
+        @Override
+        public LogContextInfo loadInBackground() {
+            return this.loggingManager.getLogContextInfo(serviceLogId);
+        }
     }
 
     protected static class ViewHolder extends AbstractViewHolder {
