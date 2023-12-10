@@ -220,7 +220,7 @@
     <string translatable="false" name="pref_fakekey_unifiedmap">fakekey_unifiedmap</string>
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_useUnifiedMap">useUnifiedMap</string>
+    <string translatable="false" name="pref_useUnifiedMap">featureSwitch_useUnifiedMap</string>
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
