@@ -412,6 +412,7 @@
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Speicherdatum</string>
     <string name="caches_sort_eventdate">Event-Datum</string>
+    <string name="caches_sort_lastfounddate">Letztes Funddatum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
     <string name="caches_select_next20">Nächste 20 Caches auswählen</string>
     <string name="caches_select_next100">Nächste 100 Caches auswählen</string>
@@ -891,6 +892,7 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Zeige eine Markierung für die Schwierigkeitswertung (links) und die Geländewertung (rechts) von Caches in der oberen rechten Ecke (\"Gespeichert\"-Markierung wird in die Mitte verschoben).</string>
     <string name="init_showElevation">Höhe anzeigen</string>
     <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
+    <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
