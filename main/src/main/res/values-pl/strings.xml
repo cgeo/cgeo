@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Nie można pobrać obrazu.</string>
     <string name="err_acquire_image_unsupported_format">Dopuszczalne formaty obrazu to JPEG/JPG, PNG lub GIF</string>
     <string name="err_tb_display">c:geo nie może pokazać przedmiotów podróżnych. Czy to naprawdę jest przedmiot podróżny?</string>
+    <string name="err_tb_details_open">c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
     <string name="err_tb_not_loggable">Ten przedmiot podróżny nie jest do logowania.</string>
     <string name="err_tb_not_found">c:geo nie może znaleźć przedmiotu podróżnego %s.</string>
     <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
@@ -415,6 +416,7 @@
     <string name="caches_sort_state">Stan</string>
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
+    <string name="caches_sort_lastfounddate">Data ostatniego znalezienia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
     <string name="caches_select_next20">Wybierz następne 20 skrytek</string>
     <string name="caches_select_next100">Wybierz następne 100 skrytek</string>
@@ -902,6 +904,7 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
     <string name="init_showElevation">Pokaż wysokość</string>
     <string name="init_summary_showElevation">Pokaż informacje o wysokości dla bieżącej pozycji, pobrane z danych trasy lub GNSS (jeśli są dostępne)</string>
+    <string name="init_elevation_notAvailable">"Brak dostępnych danych o wysokości"</string>
     <string name="init_global_wp_extraction_disable">Wyłącz wyodrębnianie punktów nawigacji</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacji z osobistych notatek skrytek. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki.</string>
     <string name="init_prevent_cache_note_merge">Nadpisz osobistą notatkę skrytki</string>
@@ -1113,6 +1116,9 @@
     <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
+    <string name="init_reset_otm">Resetuj jednorazowe wiadomości</string>
+    <string name="init_reset_otm_confirm">Czy chcesz zresetować wszystkie jednorazowe wiadomości?</string>
+    <string name="init_reset_otm_done">Wiadomości jednorazowe zostały zresetowane</string>
     <string name="init_please_wait">Proszę czekać…</string>
     <string name="settings_open_website">Otwórz stronę</string>
     <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
@@ -1291,7 +1297,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
     <string name="cache_delete_generated_waypoints_success">Usunięto wygenerowane punkty nawigacji</string>
     <string name="cache_offline_store">Zapisz</string>
-    <string name="cache_offline_stored">Zapisano na urządzeniu</string>
+    <string name="cache_offline_stored_ago">Zapisano: %s</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
     <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1466,6 +1472,7 @@
     <string name="cache_distance">Odległość</string>
     <string name="cache_difficulty">Trudność</string>
     <string name="cache_terrain">Teren</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Ocena</string>
     <string name="cache_own_rating">Własna ocena</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1525,6 +1532,7 @@
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_remove_from_route_end">Usuń od końca</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
+    <string name="edit">Edytuj</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -1539,8 +1547,6 @@
     <string name="init_summary_show_routing_menu">Długie dotknięcie na skrytce pokazuje menu z zaawansowanymi opcjami dodawania/usuwania skrytki do/z trasy. Jeśli opcja jest wyłączona, wtedy skrytka jest po prostu dodawana/usuwana do/z trasy.</string>
     <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
     <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
-    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
     <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
@@ -1575,6 +1581,7 @@
     <string name="web_downloaded">Pobrano</string>
     <!-- popup -->
     <string name="popup_more">Więcej szczegółów</string>
+    <string name="map_fragment_swipe_hint_text">Przesuń, aby otworzyć widok szczegółów</string>
     <!-- waypoint -->
     <string name="waypoint">Punkt nawigacji</string>
     <string name="waypoint_coordinates">Współrzędne</string>
@@ -2173,7 +2180,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która jest starsza niż rok. Niektóre funkcje mogą już nie działać ze względu na zmiany na stronie internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
-    <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
     <string name="tts_running">Usługa mowy jest uruchomiona…</string>
@@ -2305,8 +2311,6 @@
     <string name="permission_contacts_read_explanation">c:geo może szukać kontaktów w książce adresowej używając nazw keszerów. Aby to zrobić, musisz autoryzować c:geo do odczytu książki adresowej. W przeciwnym razie użycie tej funkcji nie jest możliwe.</string>
     <string name="permission_location_explanation_title">Uprawnienie do lokalizacji</string>
     <string name="permission_location_explanation">c:geo jest zoptymalizowany do użycia danych GPS (dokładna lokalizacja), aby zlokalizować swoją pozycję oraz obliczyć odległość i kierunek do skrzynek. Bez tego zezwolenia funkcje oparte na lokalizacji nie będą działać zgodnie z oczekiwaniami.</string>
-    <string name="permission_read_external_storage_explanation_title">Uprawnienia do odczytu pamięci zewnętrznej</string>
-    <string name="permission_read_external_storage_explanation">c:geo może używać tapety systemowej jako tła aplikacji. Aby to zrobić, c:geo potrzebuje uprawnień do odczytu Twoich danych multimedialnych z pamięci zewnętrznej.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo będzie zapisywał dane w pamięciu telefonu lub karcie SD, np. podczas zapisu skrytki do użytku offline, importu lub eksportu pliku i innych funkcji. W niektórych wersjach Androida musisz przyznać dodatkowe uprawnienia dla tych działań.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Uprawnienia do zapisu pamięci zewnętrznej</string>
     <string name="permission_post_notifications_explanation">c:geo używa powiadomień, aby poinformować Cię o pobieraniu i zbliżaniu się do skrytki (jeśli aktywowane)</string>
@@ -2384,12 +2388,12 @@
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="routes_tracks_color">Wybierz kolor</string>
-    <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
+    <string name="center">Wyśrodkuj</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
     <string name="track">Ślad</string>
-    <string name="make_visible">ustaw jako widoczne</string>
-    <string name="hide">ukryj</string>
+    <string name="make_visible">Ustaw jako widoczne</string>
+    <string name="hide">Ukryj</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2558,8 +2562,9 @@
     <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optymalizuj</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Zaznacz wszystko</string>
+    <string name="multiselect_selectvisible">Zaznacz widoczne</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Obszar</string>
     <string name="rtl_fell_meadow">łąka</string>
