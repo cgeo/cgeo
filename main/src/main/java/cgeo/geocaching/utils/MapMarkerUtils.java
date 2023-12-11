@@ -328,8 +328,11 @@ public final class MapMarkerUtils {
             }
             addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
         }
-
-        return buildLayerDrawable(insetsBuilder, 8, 8);
+        final LayerDrawable ld = buildLayerDrawable(insetsBuilder, 8, 8);
+        if ((waypoint.isVisited() || (cache != null && cache.isFound())) && Settings.getVisitedWaypointsSemiTransparent()) {
+            ld.setAlpha(144);
+        }
+        return ld;
     }
 
     /**

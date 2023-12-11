@@ -1344,6 +1344,10 @@ public class Settings {
         return getInt(R.string.pref_showwaypointsthreshold, getKeyInt(R.integer.waypoint_threshold_default));
     }
 
+    public static boolean getVisitedWaypointsSemiTransparent() {
+        return getBoolean(R.string.pref_visitedWaypointsSemiTransparent, false);
+    }
+
     /**
      * The threshold for brouter routing (max. distance)
      */
