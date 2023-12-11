@@ -69,6 +69,12 @@
             android:summary="@string/init_zoomincludingwaypoints_description"
             android:title="@string/init_zoomincludingwaypoints"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_visitedWaypointsSemiTransparent"
+            android:summary="@string/init_visitedWaypointsSemiTransparent_description"
+            android:title="@string/init_visitedWaypointsSemiTransparent"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

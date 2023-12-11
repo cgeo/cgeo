@@ -38,6 +38,10 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
             MapMarkerUtils.clearCachedItems();
             return true;
         });
+        findPreference(getString(R.string.pref_visitedWaypointsSemiTransparent)).setOnPreferenceChangeListener((preference, newValue) -> {
+            MapMarkerUtils.clearCachedItems();
+            return true;
+        });
     }
 
     public void updateNotificationAudioInfo() {
