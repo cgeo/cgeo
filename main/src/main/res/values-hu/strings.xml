@@ -225,6 +225,7 @@
     <string name="err_select_logimage_failed">Kép kiválasztása sikertelen.</string>
     <string name="err_acquire_image_failed">A kép készítése nem sikerült.</string>
     <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni az utazót. Biztos, hogy ez egy utazó?</string>
+    <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni az utazó adatait.</string>
     <string name="err_tb_not_loggable">Ezt az utazót nem lehet logolni.</string>
     <string name="err_tb_not_found">Sajnáljuk, a c:geo nem találja az utazót %s.</string>
     <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt az utazót.</string>
@@ -695,7 +696,6 @@
     <string name="last_day_available">utolsó nap</string>
     <string name="cache_offline_refresh">Frissítés</string>
     <string name="cache_offline_store">Mentés</string>
-    <string name="cache_offline_stored">Elmentve az eszközre</string>
     <string name="cache_offline_not_ready">Nem érhető el offline</string>
     <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1344,7 +1344,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Mégsem</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
