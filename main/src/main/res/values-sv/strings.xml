@@ -1031,10 +1031,8 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
-    <string name="category_unifiedMap">Enhetlig karta</string>
     <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Använd enhetlig karta</string>
-    <string name="init_summary_useUnifiedMap">Använd ny enhetlig karta istället för inbyggd Google Map / Mapsforge (OSM) kartor (experimentell / långt ifrån att vara komplett / endast för testning)</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
