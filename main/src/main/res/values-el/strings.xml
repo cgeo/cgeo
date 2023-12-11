@@ -228,6 +228,7 @@
     <string name="err_select_logimage_failed">Η επιλογή μιας εικόνας για το αρχείο καταγραφής απέτυχε.</string>
     <string name="err_acquire_image_failed">Απέτυχε η λήψη εικόνας.</string>
     <string name="err_tb_display">Το c:geo δεν μπορεί να εμφανίσει το ανιχνεύσιμο. Είστε σίγουροι ότι είναι ανιχνεύσιμο;</string>
+    <string name="err_tb_details_open">To c:geo δεν μπορεί να ανοίξει τις λεπτομέρειες του ανιχνεύσιμου.</string>
     <string name="err_tb_not_loggable">Αυτό το ανιχνεύσιμο δεν δέχεται καταγραφές.</string>
     <string name="err_tb_not_found">Δεν βρέθηκε το ανιχνεύσιμο %s.</string>
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
@@ -1116,7 +1117,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_generated_waypoints_success">Τα δημιουργημένα σημεία διαγράφηκαν</string>
     <string name="cache_offline_store">Αποθήκευση</string>
-    <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
     <string name="cache_offline_time_mins_few">μερικά λεπτά πριν</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1330,8 +1330,6 @@
     <string name="internal_goto_targets_description">Αυτή η κρύπτη αποθηκεύει τα πρόσφατα σας \"Πήγαινε σε\" σημεία. Δημιουργείται αυτόματα μόλις χρησιμοποιήσετε την δυνατότητα \"Πήγαινε σε\" στο κύριο μενού. Οι συντεταγμένες που εισάγονται εδώ θα αποθηκευτούν στα waypoints της παρούσας κρύπτης. Εάν πλέον δςν χρειάζεστε αυτές τις συντεταγμένες, μπορείτε να διαγράψετε αυτή την κρύπτη ή οποιοδήποτε από τα waypoints της. Επίσης μπορείτε να μεταφέρετε αυτήν την κρύπτη σε οποιαδήποτε λίστα της επιλογής σας.</string>
     <string name="init_longtap_map">Πιέστε παρατεταμένα στον χάρτη</string>
     <string name="init_summary_longtap_map">Ενεργοποίηση παρατεταμένου πατήματος στο εικονίδιο του χάρτη (δημιουργία ανεξάρτητης διαδρομής) ή στην επιφάνεια του χάρτη (δημιουργία προσωπικής κρύπτης/σημείου)</string>
-    <string name="onetime_info_longtap_disabled">Με παρατεταμένο πάτημα στο χάρτη, μπορείτε να δημιουργήσετε μεμονωμένες διαδρομές και προσωρινά καθορισμένες διαδρομές από το χρήστη.\n\nΤο παρατεταμένο πάτημα στον χάρτη είναι προς το παρόν απενεργοποιημένο.\n\nΑυτό μπορεί να αλλάξει στις: Ρυθμίσεις - Χάρτης - συμπεριφορά Χάρτη</string>
-    <string name="onetime_info_longtap_enabled">Με παρατεταμένο πάτημα στο χάρτη, μπορείτε να δημιουργήσετε μεμονωμένες διαδρομές και προσωρινά καθορισμένες διαδρομές από το χρήστη.\n\nΤο παρατεταμένο πάτημα στον χάρτη είναι προς το παρόν απενεργοποιημένο.\n\nΑυτό μπορεί να αλλάξει στις: Ρυθμίσεις - Χάρτης - συμπεριφορά Χάρτη</string>
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
@@ -1546,7 +1544,6 @@
     <string name="search_finder">Βρέθηκε από</string>
     <string name="search_finder_prefill">Το βρήκε</string>
     <string name="search_finder_button">Αναζήτηση με το όνομα του παίκτη</string>
-    <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
@@ -1957,7 +1954,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
-    <string name="tts_toggle">Φωνητική καθοδήγηση</string>
     <string name="tts_started">Η ομιλία άρχισε</string>
     <string name="tts_stopped">Η ομιλία σταμάτησε</string>
     <string name="tts_running">Η υπηρεσία ομιλίας εκτελείται…</string>
@@ -2102,10 +2098,7 @@
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
-    <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
-    <string name="make_visible">Να γίνει ορατό</string>
-    <string name="hide">απόκρυψη</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
@@ -2260,7 +2253,7 @@
     <string name="back">Πίσω</string>
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Περιοχές</string>
     <string name="rtl_fell_meadow">Λιβάδι</string>
