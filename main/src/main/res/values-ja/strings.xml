@@ -226,6 +226,7 @@
     <string name="err_select_logimage_failed">添付画像ファイルの選択に失敗しました</string>
     <string name="err_acquire_image_failed">画像ファイルの取得に失敗しました</string>
     <string name="err_tb_display">トラッカブルを表示することができません。本当にトラッカブルですか?</string>
+    <string name="err_tb_details_open">トラッカブルの詳細を開くことができません</string>
     <string name="err_tb_not_loggable">このトラッカブルにはログを書くことができません</string>
     <string name="err_tb_not_found">トラッカブル「%s」が見つかりません。</string>
     <string name="err_tb_find_that">トラッカブルが見つかりません</string>
@@ -1029,7 +1030,6 @@
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
     <string name="cache_delete_userdefined_waypoints_success">ユーザー定義のウェイポイントを削除しました</string>
     <string name="cache_offline_store">保存</string>
-    <string name="cache_offline_stored">デバイスに保存済み</string>
     <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
     <string name="cache_offline_time_mins_few">数分前</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1231,8 +1231,6 @@
     <string name="internal_goto_targets_description">このキャッシュには最近の「移動」の行先が保存されています。メインメニューの「移動」を使用すると自動的に作成されます。入力された座標はこのキャッシュのウェイポイントに保存されます。これらの座標が不要になったら、このキャッシュまたはそのウェイポイントを安全に削除できます。キャッシュをほかのリストに移動もできます</string>
     <string name="init_longtap_map">地図でのロングタップ</string>
     <string name="init_summary_longtap_map">ロングタップを有効化(地図のアイコン上: 個別ルート作成、アイコン以外: ユーザー定義のキャッシュ/ウェイポイントを作成)</string>
-    <string name="onetime_info_longtap_disabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は無効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で有効にできます</string>
-    <string name="onetime_info_longtap_enabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は有効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で無効にできます</string>
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
@@ -1428,7 +1426,6 @@
     <string name="search_finder">発見したユーザー名</string>
     <string name="search_finder_prefill">ユーザー名</string>
     <string name="search_finder_button">発見したユーザー名で検索</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1837,7 +1834,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">コンパスで音声案内</string>
-    <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
     <string name="tts_running">スピーチサービスを実行しています…</string>
@@ -1965,12 +1961,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
     <string name="routes_tracks_menu">ルート/トラック</string>
-    <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
     <string name="track">トラック</string>
-    <string name="make_visible">表示</string>
-    <string name="hide">非表示</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
@@ -2114,7 +2107,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="back">戻る</string>
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->

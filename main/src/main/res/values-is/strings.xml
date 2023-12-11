@@ -135,6 +135,7 @@
     <string name="err_load_descr_failed">c:geo getur ekki náð í lýsingu.</string>
     <string name="err_location_unknown">c:geo veit ekki staðsetningu kassans.</string>
     <string name="err_acquire_image_failed">Gat ekki náð í mynd.</string>
+    <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
     <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
     <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
     <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
@@ -375,7 +376,6 @@
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
-    <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
     <string name="cache_offline_time_mins_few">Fyrir nokkrum mínútum</string>
     <plurals name="cache_offline_about_time_mins">
@@ -700,7 +700,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->

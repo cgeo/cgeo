@@ -199,6 +199,7 @@
     <string name="err_select_logimage_failed">Nu a putut fi aleasă o imagine pentru jurnal.</string>
     <string name="err_acquire_image_failed">Imaginea nu a putut fi obţinută.</string>
     <string name="err_tb_display">c:geo nu poate afişa obiectul călător solicitat. Chiar este un obiect călător?</string>
+    <string name="err_tb_details_open">c:geo nu poate accesa detaliile obiectului călător.</string>
     <string name="err_tb_not_loggable">Nu se pot face însemnări cu acest obiect călător.</string>
     <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
@@ -562,7 +563,6 @@
     <string name="last_day_available">ultima zi disponibilă</string>
     <string name="cache_offline_refresh">Împrospătează</string>
     <string name="cache_offline_store">Salvează</string>
-    <string name="cache_offline_stored">Salvată pe dispozitiv</string>
     <string name="cache_offline_not_ready">Indisponibilă fără internet</string>
     <string name="cache_offline_time_mins_few">câteva minute în urmă</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1195,7 +1195,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Anulează</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->

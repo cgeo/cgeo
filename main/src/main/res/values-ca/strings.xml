@@ -259,6 +259,7 @@
     <string name="err_acquire_image_failed">S\'ha produït un error a l\'adquirir una imatge.</string>
     <string name="err_acquire_image_unsupported_format">El format d\'imatge ha de ser JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">El c:geo no pot mostrar el traçable que volíeu. És realment un traçable?</string>
+    <string name="err_tb_details_open">El c:geo no pot obrir els detalls del traçable.</string>
     <string name="err_tb_not_loggable">Aquest traçable no es pot registrar.</string>
     <string name="err_tb_not_found">El c:geo no pot trobar el traçable %s.</string>
     <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
@@ -1129,10 +1130,8 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
-    <string name="category_unifiedMap">Mapa unificat</string>
     <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilitzeu un mapa unificat</string>
-    <string name="init_summary_useUnifiedMap">Utilitzeu un mapa unificat nou en lloc dels mapes integrats de Google Map/Mapsforge (OSM) (experimentals / lluny d\'estar complets / només per a proves)</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -1272,7 +1271,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Eliminar tots els punts de ruta generats d\'aquest catxé?\n\nEls Punts de ruta s\'eliminaran immediatament, no es pot desfer.</string>
     <string name="cache_delete_generated_waypoints_success">Els punts de ruta generats s\'han suprimit</string>
     <string name="cache_offline_store">Desa</string>
-    <string name="cache_offline_stored">Desat al dispositiu</string>
     <string name="cache_offline_not_ready">No disponible fora de línia</string>
     <string name="cache_offline_time_mins_few">ara fa uns minuts</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1512,8 +1510,6 @@
     <string name="init_summary_show_routing_menu">Un toc llarg sobre un catxé mostra un menú amb opcions avançades per afegir/eliminar el catxé a/des d\'una ruta. Si està desactivat, el catxé només s\'afegeix/elimina a/des de la ruta.</string>
     <string name="init_ActionbarAutohide">Amaga la barra d\'eines al toc</string>
     <string name="init_summary_ActionbarAutohide">Toqueu l\'espai lliure del mapa per ocultar/mostrar la barra d\'eines</string>
-    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
-    <string name="onetime_info_longtap_enabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -1731,7 +1727,6 @@
     <string name="search_finder">Trobat per</string>
     <string name="search_finder_prefill">Cercador</string>
     <string name="search_finder_button">Cerca pel nom del cercador</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
@@ -2143,7 +2138,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
-    <string name="tts_toggle">Activa/Desact. la veu</string>
     <string name="tts_started">S\'ha iniciat el mode parlat</string>
     <string name="tts_stopped">S\'ha aturat el mode parlat</string>
     <string name="tts_running">El servei de veu està en funcionament…</string>
@@ -2249,8 +2243,6 @@
     <string name="permission_contacts_read_explanation">C:geo pot cercar contactes a la vostra llibreta d\'adreces mitjançant els noms del catxé. Per fer-ho, heu d\'autoritzar c:geo a llegir la vostra llibreta d\'adreces. En cas contrari, l\'ús d\'aquesta funció no és possible.</string>
     <string name="permission_location_explanation_title">Permís d\'ubicació</string>
     <string name="permission_location_explanation">C:geo està optimitzat per utilitzar-lo amb dades GPS (ubicació fina) per localitzar la vostra posició i calcular la distància i la direcció cap als geocatxés. Sense aquest permís, les funcions basades en la ubicació no funcionaran com s\'esperava.</string>
-    <string name="permission_read_external_storage_explanation_title">Llegir el permís d\'emmagatzematge extern</string>
-    <string name="permission_read_external_storage_explanation">C:geo pot utilitzar el fons de pantalla del vostre sistema com a fons de l\'aplicació. Per fer-ho, c:geo necessita permís per llegir les vostres dades multimèdia a l\'emmagatzematge extern.</string>
     <string name="permission_legacy_write_external_storage_explanation">C:geo escriurà dades a l\'emmagatzematge del telèfon o a la targeta SD, ex. Quan deseu catxés per utilitzar-los fora de línia, importeu o exporteu fitxers i altres funcions. En algunes versions d\'Android, heu de concedir un permís addicional per a aquestes accions.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permís d\'emmagatzematge extern d\'escriptura</string>
     <string name="permission_post_notifications_explanation">C:geo utilitza notificacions per informar-vos sobre les descàrregues i els catxés (si està activat)</string>
@@ -2326,12 +2318,9 @@
     <string name="routes_tracks_dialog_title">Opcions de rutes / tracks</string>
     <string name="routes_tracks_menu">Rutes / Tracks</string>
     <string name="routes_tracks_color">Seleccioneu el color</string>
-    <string name="center_on_route_track">Centre de la ruta/track</string>
     <string name="unload_route_track">Descarregar ruta/track</string>
     <string name="route">Ruta</string>
     <string name="track">Track</string>
-    <string name="make_visible">fer visible</string>
-    <string name="hide">Ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2500,7 +2489,7 @@
     <string name="redo">Refer</string>
     <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <string name="optimize">Optimitzar</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Àrees</string>
     <string name="rtl_fell_meadow">prat</string>

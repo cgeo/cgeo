@@ -146,6 +146,7 @@
     <string name="err_select_logimage_failed">Pagpili og imahe para sa log kay napakyas.</string>
     <string name="err_acquire_image_failed">Ang pagbaton og imahe kay napakyas.</string>
     <string name="err_tb_display">ang c:geo dili maka pakita sa trackable na imong gusto. Kani ba trackable gyud?</string>
+    <string name="err_tb_details_open">ang c:geo dili maka abli sa mga detalye sa trackable.</string>
     <string name="err_tb_not_loggable">Kani nga geocache trackable kay dili pwede gamiton.</string>
     <string name="err_tb_find_that">ang c:geo dili maka kita ni anang trackable.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
@@ -485,7 +486,6 @@
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
     <string name="cache_offline_refresh">I-refresh</string>
     <string name="cache_offline_store">Gitipigan</string>
-    <string name="cache_offline_stored">Gitipigan sa usa ka aparato</string>
     <string name="cache_offline_not_ready">Dili anaa basta offline</string>
     <string name="cache_offline_time_mins_few">pipila ka mga minuto ang milabay</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1087,7 +1087,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahon</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->

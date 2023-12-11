@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">사진 가져오기 실패</string>
     <string name="err_acquire_image_unsupported_format">이미지 형식은 JPEG/JPG, PNG 또는 GIF 중 하나여야 합니다.</string>
     <string name="err_tb_display">원하시는 추적아이템을 표시할 수 없습니다. 정말 추적아이템이 맞나요?</string>
+    <string name="err_tb_details_open">추적아이템 상세정보를 열 수 없습니다.</string>
     <string name="err_tb_not_loggable">이 추적아이템은 로그할 수 없습니다.</string>
     <string name="err_tb_not_found">%s 추적아이템을 찾을 수 없습니다.</string>
     <string name="err_tb_find_that">해당 추적아이템을 찾을 수 없습니다.</string>
@@ -1122,10 +1123,8 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
-    <string name="category_unifiedMap">통합 지도</string>
     <string name="experimental">(실험적)</string>
     <string name="init_title_useUnifiedMap">통합 지도 사용</string>
-    <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도 사용(실험 기능/완전하지 않음/테스트 전용)</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
     <string name="localstorage_migrate_status_major">버전 %1$d</string>
     <!-- proximity notification -->
@@ -1261,7 +1260,6 @@
     <string name="cache_delete_generated_waypoints_confirm">이 캐시에서 생성된 모든 지점을 제거하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_generated_waypoints_success">생성된 지점이 삭제되었습니다</string>
     <string name="cache_offline_store">저장</string>
-    <string name="cache_offline_stored">기기에 저장됨</string>
     <string name="cache_offline_not_ready">오프라인 사용 불가능</string>
     <string name="cache_offline_time_mins_few">몇분 전</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1497,8 +1495,6 @@
     <string name="init_summary_show_routing_menu">캐시를 길게 누르면 캐시를 경로에 추가/제거하는 고급 옵션이 있는 메뉴가 표시됩니다. 비활성화된 경우 캐시는 경로에서 추가/제거됩니다.</string>
     <string name="init_ActionbarAutohide">누를 때 툴바 숨기기</string>
     <string name="init_summary_ActionbarAutohide">툴바를 숨기거나 표시하려면 빈 지도 공간을 누르세요.</string>
-    <string name="onetime_info_longtap_disabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 비활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
-    <string name="onetime_info_longtap_enabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
@@ -1715,7 +1711,6 @@
     <string name="search_finder">찾은 사용자</string>
     <string name="search_finder_prefill">찾은 사용자</string>
     <string name="search_finder_button">찾은 사용자명으로 검색</string>
-    <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
@@ -2125,7 +2120,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1 년 이상 된 것으로 보이는 c:geo 버전을 사용하고 있습니다. 일부 기능은 웹 사이트 또는 기타 기술 변경으로 인해 더 이상 작동하지 않을 수 있습니다. 업그레이드 방법에 대한 FAQ를 읽어보십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
-    <string name="tts_toggle">말하기 전환</string>
     <string name="tts_started">연설 시작됨</string>
     <string name="tts_stopped">연설 중지됨</string>
     <string name="tts_running">음성 서비스 실행 중…</string>
@@ -2218,8 +2212,6 @@
     <string name="permission_contacts_read_explanation">c:geo는 캐셔 이름을 사용하여 주소록에서 연락처를 검색할 수 있습니다. 이렇게 하려면 주소록을 읽을 수 있도록 c:geo에 권한을 부여해야 합니다. 그렇지 않으면 이 기능을 사용할 수 없습니다.</string>
     <string name="permission_location_explanation_title">위치 정보 액세스 권한</string>
     <string name="permission_location_explanation">c:geo는 위치를 찾고 지오캐시까지의 거리와 방향을 계산하기 위해 GPS 데이터(정밀한 위치)와 함께 사용하는 데 최적화되어 있습니다. 이 권한이 없으면 위치 기반 기능이 예상대로 작동하지 않습니다.</string>
-    <string name="permission_read_external_storage_explanation_title">외부 저장소 권한 읽기</string>
-    <string name="permission_read_external_storage_explanation">c:geo는 시스템 배경화면을 앱의 배경으로 사용할 수 있습니다. 이렇게 하려면 c:geo에 외부 저장소의 미디어 데이터를 읽을 수 있는 권한이 필요합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo는 휴대폰 저장소 또는 SD 카드에 데이터를 기록합니다. 예: 오프라인 사용을 위해 지오캐시를 저장하면 파일 및 기타 기능을 가져오거나 내보낼 수 있습니다. 일부 Android 버전에서는 이러한 작업에 대한 추가 권한을 부여해야 합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">레거시 외부 저장소 쓰기 권한</string>
     <string name="permission_post_notifications_explanation">c:geo는 알림을 사용하여 다운로드 및 근처 캐시에 대해 알려줍니다. (활성화된 경우)</string>
@@ -2294,12 +2286,9 @@
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="routes_tracks_color">색상 선택</string>
-    <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
     <string name="track">트랙</string>
-    <string name="make_visible">숨김 비활성화</string>
-    <string name="hide">숨기기</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2468,7 +2457,7 @@
     <string name="redo">다시 실행</string>
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <string name="optimize">최적화</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>
