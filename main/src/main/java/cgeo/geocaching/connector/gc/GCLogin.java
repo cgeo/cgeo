@@ -575,7 +575,7 @@ public class GCLogin extends AbstractLogin {
         setHomeLocation();
         getServerParameters();
         // Force token retrieval to avoid avalanche requests
-        GCWebAPI.getAuthorizationHeader().subscribe();
+        GCAuthAPI.triggerAuthenticationTokenRetrieval();
         Settings.setLastLoginSuccessGC();
         return StatusCode.NO_ERROR; // logged in
     }

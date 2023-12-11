@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -18,20 +17,21 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
-import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.sorting.GeocacheSort;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.connector.gc.GCAuthAPI.WEBSITE_URL;
+import static cgeo.geocaching.connector.gc.GCAuthAPI.apiProxyReq;
+import static cgeo.geocaching.connector.gc.GCAuthAPI.httpReq;
+import static cgeo.geocaching.connector.gc.GCAuthAPI.websiteReq;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
-import androidx.core.util.Consumer;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,11 +49,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.reactivex.rxjava3.core.Single;
-import io.reactivex.rxjava3.core.SingleSource;
-import io.reactivex.rxjava3.functions.Function;
-import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -62,14 +58,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 /**
  * Handles geocaching.com web-api requests.
  *
- * These are all HTTP endpoints with prefix {@link #API_URL}.
+ * These are all HTTP endpoints with prefix {@link GCAuthAPI#API_PROXY_URL}.
  * This is not the official GC Live API.
  */
 public class GCWebAPI {
 
-    private static final Object CACHE_LOCK = new Object();
-    private static final String WEBSITE_URL = "https://www.geocaching.com";
-    private static final String API_URL = WEBSITE_URL + "/api/proxy";
 
     private static final String HTML_HEADER_CSRF_TOKEN = "CSRF-Token";
 
@@ -78,15 +71,12 @@ public class GCWebAPI {
      */
     private static final int MAX_TAKE = 50;
 
-    private static Authorization cachedAuthorization;
-    private static long cachedAuthorizationExpires;
-
     private GCWebAPI() {
         // Utility class, do not instantiate
     }
 
     /**
-     * This class encapsulates, explains and mimics the search against gc.com WebApi at https://www.geocaching.com/api/proxy/web/search/v2
+     * This class encapsulates, explains and mimics the search against gc.com WebApi at <a href="https://www.geocaching.com/api/proxy/web/search/v2">...</a>
      */
     public static class WebApiSearch {
 
@@ -538,7 +528,8 @@ public class GCWebAPI {
             //ALWAYS send cgeo as an identifier
             params.put("app", "cgeo"); //identify us towards Groundspeak due to gentlemens agreement
 
-            return getAPI("/web/search/v2", params, MapSearchResultSet.class).blockingGet();
+            return apiProxyReq().uri("/web/search/v2").uriParams(params).requestJson(MapSearchResultSet.class).blockingGet();
+            //return getAPI("/web/search/v2", params, MapSearchResultSet.class).blockingGet();
         }
 
         public void fillSearchCacheData(final SearchCacheData searchCacheData) {
@@ -546,20 +537,6 @@ public class GCWebAPI {
             searchCacheData.addNotFoundBy(notFoundBy);
         }
 
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class Authorization {
-        @JsonProperty("token_type")
-        String tokenType;
-        @JsonProperty("access_token")
-        String accessToken;
-        @JsonProperty("expires_in")
-        long expiresIn;      // In seconds
-
-        String getAuthorizationField() {
-            return tokenType + ' ' + accessToken;
-        }
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -609,56 +586,6 @@ public class GCWebAPI {
         String iconUrl;
         @JsonProperty("trackingNumber")
         String trackingNumber; // The secret one
-    }
-
-    private static Single<Authorization> getAuthorization() {
-        return Network.getRequest("https://www.geocaching.com/account/oauth/token", Authorization.class, null, null);
-    }
-
-    private static Single<Authorization> getCachedAuthorization() {
-        synchronized (CACHE_LOCK) {
-            if (System.currentTimeMillis() < cachedAuthorizationExpires) {
-                return Single.just(cachedAuthorization);
-            }
-            // We may request several authorizations at the same time. This is not a big deal, and the web
-            // implementation does this much more than we will ever do.
-            return getAuthorization().map(authorization -> {
-                synchronized (CACHE_LOCK) {
-                    cachedAuthorization = authorization;
-                    // Expires after .8 of authorized caching time.
-                    cachedAuthorizationExpires = System.currentTimeMillis() + authorization.expiresIn * 800;
-                    return cachedAuthorization;
-                }
-            });
-        }
-    }
-
-    static Single<Parameters> getAuthorizationHeader() {
-        return getCachedAuthorization().map(authorization -> new Parameters("Authorization", authorization.getAuthorizationField()));
-    }
-
-    /**
-     * <pre>
-     *     {"id":6189730,"referenceCode":"GC74HPM","postedCoordinates":{"latitude":48.818817,"longitude":2.337833},
-     *     "callerSpecific":{"favorited":false},
-     *     "owner":{"id":15646120,"referenceCode":"PRHBZWF"},
-     *     "geocacheType":{"id":3,"name":"Multi-cache"}}
-     * </pre>
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class CacheDetails {
-        long id;
-        String referenceCode;
-        PostedCoordinates postedCoordinates;
-        CallerSpecific callerSpecific;
-        Owner owner;
-        GeocacheType geocacheType;
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class Owner {
-        long id;
-        String referenceCode;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -795,12 +722,6 @@ public class GCWebAPI {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class GeocacheType {
-        long id;
-        String name;
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
     static final class Attribute {
         @JsonProperty("id")
         int id;
@@ -828,141 +749,6 @@ public class GCWebAPI {
         Geopoint toCoords() {
             return new Geopoint(latitude, longitude);
         }
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class CallerSpecific {
-        @JsonProperty("favorited")
-        boolean favorited;
-
-        CallerSpecific(final boolean favorited) {
-            this.favorited = favorited;
-        }
-
-        CallerSpecific() {
-        }
-    }
-
-    /**
-     * {"referenceCode":"GL...","logOwner":{"referenceCode":"PR..."},"imageCount":0,"dateTimeCreatedUtc":"2017-09-07T20:52:45.1344278Z","logDate":"2017-09-03T12:00:00","logText":"some log text","logType":4,"isTextRot13":false,"guid":"e6f6cc03-...","geocache":{"referenceCode":"GC..."},"usedFavoritePoint":false,"updatedCoordinates":{"latitude":0.0,"longitude":0.0}}
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class PostLogResponse {
-        @JsonProperty("referenceCode")
-        String referenceCode;
-        @JsonProperty("guid")
-        String guid;
-    }
-
-    /**
-     * {"guid":"14242d4d-...","url":"https://img.geocaching.com/14242d4d-...jpg","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","success":true}
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class PostLogImageResponse extends HttpResponse {
-        @JsonProperty("guid")
-        String guid;
-        @JsonProperty("url")
-        String url;
-        @JsonProperty("thumbnailUrl")
-        String thumbnailUrl;
-        @JsonProperty("success")
-        boolean success;
-    }
-
-    /**
-     * {"name":"","uuid":"","guid":"14242d4d-ca1f-425e-9496-aa830d769350","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","dateTaken":"2017-09-07","description":"","qqDropTarget":{},"id":3,"filename":"filename.png","lastModified":1494143750916,"lastModifiedDate":"2017-05-07T07:55:50.916Z","webkitRelativePath":"","size":13959,"type":"image/png"}
-     */
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class AttachLogImageRequest {
-        @JsonProperty("name")
-        String name = "";
-        @JsonProperty("guid")
-        String guid;
-        @JsonProperty("thumbnailUrl")
-        String thumbnailUrl;
-        @JsonProperty("dateTaken")
-        String dateTaken;
-        @JsonProperty("description")
-        String description = "";
-        @JsonProperty("type")
-        String type;
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static final class GeocacheLog {
-        @JsonProperty("geocache") final Geocache geocache;
-        @JsonProperty("logType") final String logType;
-        @JsonProperty("ownerIsViewing") final boolean ownerIsViewing;
-        @JsonProperty("logDate") final String logDate;
-        @JsonProperty("logText") final String logText;
-        @JsonProperty("usedFavoritePoint") final boolean usedFavoritePoint;
-
-        GeocacheLog(final String id, final String referenceCode, final double latitude,
-                    final double longitude, final boolean favorited, final String logType,
-                    final boolean ownerIsViewing, final String logDate, final String logText,
-                    final boolean usedFavoritePoint) {
-            this.geocache = new Geocache(id, referenceCode, latitude, longitude, favorited);
-            this.logType = logType;
-            this.ownerIsViewing = ownerIsViewing;
-            this.logDate = logDate;
-            this.logText = logText;
-            this.usedFavoritePoint = usedFavoritePoint;
-        }
-
-        @JsonIgnoreProperties(ignoreUnknown = true)
-        static final class Geocache {
-            @JsonProperty("id") final String id;
-            @JsonProperty("referenceCode") final String referenceCode;
-            @JsonProperty("postedCoordinates") final PostedCoordinates postedCoordinates;
-            @JsonProperty("callerSpecific") final CallerSpecific callerSpecific;
-
-            Geocache(final String id, final String referenceCode, final double latitude,
-                     final double longitude, final boolean favorited) {
-                this.id = id;
-                this.referenceCode = referenceCode;
-                this.postedCoordinates = new PostedCoordinates(latitude, longitude);
-                this.callerSpecific = new CallerSpecific(favorited);
-            }
-        }
-
-    }
-
-
-    private static <T> Single<T> getAPI(final String path, final Class<T> clazz) {
-        return Network.getRequest(API_URL + path, clazz, null, null).subscribeOn(AndroidRxUtils.networkScheduler);
-    }
-
-    private static <T> Single<T> getAPI(final String path, final Parameters parameters, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.getRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
-    }
-
-    private static Single<Response> patchAPI(final String path) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.patchRequest(API_URL + path, headers).subscribeOn(AndroidRxUtils.networkScheduler));
-    }
-
-    private static Single<Response> postAPI(final String path, final Parameters parameters) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.postRequest(API_URL + path, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
-    }
-
-    private static <T> Single<T> postAPI(final String path, final Parameters parameters, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers).subscribeOn(AndroidRxUtils.networkScheduler));
-    }
-
-    private static <T> Single<T> postAPI(final String path, final Object jsonObject, final Class<T> clazz) throws JsonProcessingException {
-        return Network.postJsonRequest(API_URL + path, clazz, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
-    }
-
-    private static Single<Response> postAPI(final String path, final Object jsonObject, final Consumer<Parameters> headerAdder) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> {
-            if (headerAdder != null) {
-                headerAdder.accept(headers);
-            }
-            return Network.postJsonRequest(API_URL + path, headers, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
-        });
-    }
-
-    static Single<CacheDetails> getCacheDetails(final String geocode) {
-        return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
     }
 
     @WorkerThread
@@ -1091,78 +877,6 @@ public class GCWebAPI {
         }
     }
 
-    @NonNull
-    @WorkerThread
-    static ImmutablePair<StatusCode, String> postLog(final Geocache geocache,
-                                                     final LogType logType, final Date date,
-                                                     final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
-                                                     final boolean addToFavorites) {
-        if (StringUtils.isBlank(log)) {
-            Log.w("GCWebAPI.postLog: No log text given");
-            return new ImmutablePair<>(StatusCode.NO_LOG_TEXT, "");
-        }
-
-        final String logInfo = log.replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
-
-        Log.i("Trying to post log for cache #" + geocache.getCacheId() + " - action: " + logType
-                + "; date: " + date + ", log: " + logInfo
-                + "; trackables: " + trackables.size());
-
-
-        return postLogInternal(geocache, logType, date, log, trackables, addToFavorites);
-    }
-
-    private static String formatDouble(final double dbl) {
-        return String.format(Locale.US, "%.6f", dbl);
-    }
-
-    private static String formatBoolean(final boolean bool) {
-        return bool ? "true" : "false";
-    }
-
-    private static String formatGCDate(final Date date) {
-        return new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(date);
-    }
-
-    /**
-     * Sends trackable logs in groups of 10.
-     * https://github.com/cgeo/cgeo/issues/7249
-     *
-     * https://www.geocaching.com/api/proxy/trackable/activities
-     * <div>
-     *   "postData": {
-     *       "mimeType": "application/json",
-     *       "text": "[{"logType":{"id":"75"},"date":"2017-08-19","geocache":{"gcCode":"GC..."},"referenceCode":"TB..."}]"
-     *   }
-     * </div>
-     */
-    static boolean postLogTrackable(final String geocode, final String logDate, final List<cgeo.geocaching.log.TrackableLog> trackables) {
-        final List<TrackableLog> trackableLogs = new ArrayList<>(trackables.size());
-
-        for (final cgeo.geocaching.log.TrackableLog tb : trackables) {
-            if (tb.action != LogTypeTrackable.DO_NOTHING && tb.brand == TrackableBrand.TRAVELBUG) {
-                trackableLogs.add(new TrackableLog(String.valueOf(tb.action.gcApiId), logDate, geocode, tb.geocode));
-            }
-            if (trackableLogs.size() == 10) {
-                if (postLogTrackable(trackableLogs).isSuccessful()) {
-                    trackableLogs.clear();
-                } else {
-                    return false;
-                }
-            }
-        }
-        return trackableLogs.isEmpty() || postLogTrackable(trackableLogs).isSuccessful();
-    }
-
-    @WorkerThread
-    private static Response postLogTrackable(final List<TrackableLog> trackableLogs) {
-        final Response response = postAPI("/trackable/activities", trackableLogs, (Consumer<Parameters>) null).blockingGet();
-        if (!response.isSuccessful()) {
-            Log.e("Logging trackables failed: " + response.message());
-        }
-        return response;
-    }
-
     /**
      * https://www.geocaching.com/api/proxy/trackables?inCollection=false&skip=0&take=50
      */
@@ -1173,7 +887,8 @@ public class GCWebAPI {
         int skip = 0;
         TrackableInventoryEntry[] entries;
         do {
-            entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
+            entries = apiProxyReq().uri("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip).requestJson(TrackableInventoryEntry[].class).blockingGet();
+            //entries = getAPI("/trackables?inCollection=false&take=" + MAX_TAKE + "&skip=" + skip, TrackableInventoryEntry[].class).blockingGet();
             trackableInventoryEntries.addAll(Arrays.asList(entries));
             skip += MAX_TAKE;
         } while (entries.length == MAX_TAKE);
@@ -1184,7 +899,8 @@ public class GCWebAPI {
      * https://www.geocaching.com/api/proxy/web/v1/users/PR.../availablefavoritepoints
      */
     static Single<Integer> getAvailableFavoritePoints(final String profile) {
-        return getAPI("/web/v1/users/" + profile + "/availablefavoritepoints", Integer.class);
+        return apiProxyReq().uri("/web/v1/users/" + profile + "/availablefavoritepoints").requestJson(Integer.class);
+        //return getAPI("/web/v1/users/" + profile + "/availablefavoritepoints", Integer.class);
     }
 
     @NonNull
@@ -1192,7 +908,7 @@ public class GCWebAPI {
         // Request URI: see code below
         // Answer is a json string array, something like: ["1-4.5","2.5-4.5","3-5","4.5-5","5-3.5","5-4","5-4.5"]
 
-        final String[] rawCombis = apiReq().uri("/web/v1/statistics/difficultyterrainmatrix/needed")
+        final String[] rawCombis = apiProxyReq().uri("/web/v1/statistics/difficultyterrainmatrix/needed")
                 .requestJson(String[].class).blockingGet();
         if (rawCombis == null || rawCombis.length == 0) {
             return Collections.emptyList();
@@ -1351,8 +1067,27 @@ public class GCWebAPI {
         String name;
     }
 
+    @NonNull
+    @WorkerThread
+    static ImmutablePair<StatusCode, String> postLog(final Geocache geocache,
+                                                     final LogType logType, final Date date,
+                                                     final String log, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables,
+                                                     final boolean addToFavorites) {
+        if (StringUtils.isBlank(log)) {
+            Log.w("GCWebAPI.postLog: No log text given");
+            return new ImmutablePair<>(StatusCode.NO_LOG_TEXT, "");
+        }
 
-    //New Log API
+        final String logInfo = log.replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
+
+        Log.i("Trying to post log for cache #" + geocache.getCacheId() + " - action: " + logType
+            + "; date: " + date + ", log: " + logInfo
+            + "; trackables: " + trackables.size());
+
+
+        return postLogInternal(geocache, logType, date, log, trackables, addToFavorites);
+    }
+
     @NonNull
     @WorkerThread
     public static ImmutablePair<StatusCode, String> postLogInternal(final Geocache geocache,
@@ -1507,31 +1242,15 @@ public class GCWebAPI {
     }
 
     private static ImmutablePair<String, String> getHtmlAndCsrfTokenFromUrl(final String url) {
-
-    final HttpResponse htmlResp =
-                httpReq().uri(url).request().blockingGet();
-        final String html = htmlResp.getBodyString();
-        final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
-        if (!htmlResp.isSuccessful() || csrfToken == null) {
-            Log.w("Log Post: unable to find a CSRF Token in Log Page '" + url + "':" + htmlResp);
-            return null;
+        try (HttpResponse htmlResp = httpReq().uri(url).request().blockingGet()) {
+            final String html = htmlResp.getBodyString();
+            final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
+            if (!htmlResp.isSuccessful() || csrfToken == null) {
+                Log.w("Log Post: unable to find a CSRF Token in Log Page '" + url + "':" + htmlResp);
+                return null;
+            }
+            return new ImmutablePair<>(html, csrfToken);
         }
-        return new ImmutablePair<>(html, csrfToken);
     }
 
-    private static HttpRequest httpReq() {
-        return new HttpRequest().requestPreparer(reqBuilder -> getCachedAuthorization().map(a -> {
-            reqBuilder.addHeader("Authorization", a.getAuthorizationField());
-            return reqBuilder;
-        }));
-    }
-
-    private static HttpRequest websiteReq() {
-        return httpReq().uriBase(WEBSITE_URL);
-    }
-
-
-    private static HttpRequest apiReq() {
-        return httpReq().uriBase(API_URL);
-    }
 }
