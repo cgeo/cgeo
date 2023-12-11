@@ -7,6 +7,17 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.12.11 Bugfix Release
+
+- Fix: Wrong default when manually logging a trackable
+- Fix: coord.info trackable links cannot be opened any more
+- Fix: Hint hidden behind compass when using large fonts
+- Fix: Cache icon on map not updated after logging from popup
+- Fix: Crash on displaying logging options
+- Fix: Crash on retrieving message center status
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.11.13 Bugfix Release
 
 - Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
