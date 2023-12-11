@@ -27,6 +27,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public static final int MAX_CACHES = 500;
 
     public static final String CACHE_KEY_PREFIX = "CACHE_";
+    public static final String CACHE_STAR_KEY_PREFIX = "CACHE_STAR_";
     public static final String WAYPOINT_KEY_PREFIX = "WP_";
     public static final String COORDSPOINT_KEY_PREFIX = "COORDS_";
 
@@ -47,6 +48,9 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
+
+    public final ConstantLiveData<LeastRecentlyUsedSet<String>> cachesWithStarDrawn = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES));
+
 
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden

@@ -36,6 +36,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
@@ -55,6 +56,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -295,14 +297,26 @@ public class MapUtils {
         return false;
     }
 
+    public static SimplePopupMenu createEmptyLongClickPopupMenu(final Activity activity, final int tapX, final int tapY) {
+        return SimplePopupMenu.of(activity).setPosition(new Point(tapX, tapY), 0);
+    }
+
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static SimplePopupMenu createCacheWaypointLongClickPopupMenu(final Activity activity, final RouteItem routeItem, final int tapX, final int tapY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
+        final SimplePopupMenu menu = createEmptyLongClickPopupMenu(activity, tapX, tapY);
+        addCacheWaypointLongClickPopupMenu(menu, activity, routeItem, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+        return menu;
+    }
+
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
+    public static void addCacheWaypointLongClickPopupMenu(final SimplePopupMenu menu, final Activity activity, final RouteItem routeItem, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
+
         final RouteSegment[] segments = (individualRoute != null ? individualRoute.getSegments() : null);
         final boolean routeIsNotEmpty = segments != null && segments.length > 0;
         final int baseId = (segments != null ? segments.length : 0) + 100;
 
         boolean isEnd = false;
-        final SimplePopupMenu menu = SimplePopupMenu.of(activity).setPosition(new Point(tapX, tapY), 0);
+
         if (routeIsNotEmpty) {
             final String routeItemIdentifier = routeItem.getIdentifier();
             final boolean isStart = StringUtils.equals(routeItemIdentifier, segments[0].getItem().getIdentifier());
@@ -325,23 +339,25 @@ public class MapUtils {
         if (!isEnd) {
             addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
         }
-        return menu;
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_delete);
-        menu.addItemClickListener(uniqueId, item -> {
+        addMenuHelper(menu, uniqueId, title, R.drawable.ic_menu_delete,  item -> {
             individualRoute.removeItem(activity, uniqueId, routeUpdater);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
         });
     }
 
     private static void addMenuHelper(final Activity activity, final SimplePopupMenu menu, final int uniqueId, final CharSequence title, final RouteItem routeItem, final boolean addToRouteStart, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility) {
-        menu.addMenuItem(uniqueId, title, R.drawable.ic_menu_add);
-        menu.addItemClickListener(uniqueId, item -> {
+        addMenuHelper(menu, uniqueId, title, R.drawable.ic_menu_add, item -> {
             individualRoute.addItem(activity, routeItem, routeUpdater, addToRouteStart);
             updateRouteTrackButtonVisibility(updateRouteTrackButtonVisibility);
         });
+    }
+
+    private static void addMenuHelper(final SimplePopupMenu menu, final int uniqueId, final CharSequence title, @DrawableRes final int drawable, final Action1<MenuItem> clickAction) {
+        menu.addMenuItem(uniqueId, title, drawable);
+        menu.addItemClickListener(uniqueId, clickAction::call);
     }
 
     // ---------------------------------------------------------------------------------------------

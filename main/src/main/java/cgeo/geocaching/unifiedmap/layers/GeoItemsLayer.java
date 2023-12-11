@@ -1,13 +1,18 @@
 package cgeo.geocaching.unifiedmap.layers;
 
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.CacheMarker;
+import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
+import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
+import cgeo.geocaching.utils.CollectionDiff;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
@@ -22,6 +27,7 @@ public class GeoItemsLayer {
 
     private Map<String, Integer> lastDisplayedGeocaches = new HashMap<>();
     private Map<String, Integer> lastDisplayedWaypoints = new HashMap<>();
+    private final CollectionDiff<String, String, String> lastDisplayedCacheStars = new CollectionDiff<>(k -> k);
     private boolean lastForceCompactIconMode = false;
 
 
@@ -47,10 +53,10 @@ public class GeoItemsLayer {
                 if (!lastDisplayedGeocaches.containsKey(cache.getGeocode()) || !lastDisplayedGeocaches.get(cache.getGeocode()).equals(cm.hashCode())) {
 
                     layer.put(UnifiedMapViewModel.CACHE_KEY_PREFIX + cache.getGeocode(), GeoPrimitive.createMarker(cache.getCoords(),
-                            GeoIcon.builder()
-                                    .setBitmap(cm.getBitmap())
-                                    .setHotspot(forceCompactIconMode ? GeoIcon.Hotspot.CENTER : GeoIcon.Hotspot.BOTTOM_CENTER)
-                                    .build()
+                        GeoIcon.builder()
+                            .setBitmap(cm.getBitmap())
+                            .setHotspot(forceCompactIconMode ? GeoIcon.Hotspot.CENTER : GeoIcon.Hotspot.BOTTOM_CENTER)
+                            .build()
                     ).buildUpon().setZLevel(LayerHelper.ZINDEX_GEOCACHE).build());
                 }
             }
@@ -64,6 +70,20 @@ public class GeoItemsLayer {
             }
 
             lastDisplayedGeocaches = currentlyDisplayedGeocaches;
+
+        });
+
+        viewModel.cachesWithStarDrawn.observe(activity, starCodes -> {
+            lastDisplayedCacheStars.executeDiff(starCodes.getAsList(), true, addStar -> {
+                final Geocache cache = DataStore.loadCache(addStar, LoadFlags.LOAD_CACHE_OR_DB);
+                final GeoItem star = MapStarUtils.createStar(cache);
+                if (star != null) {
+                    layer.put(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + addStar, star);
+                }
+            }, removeStar -> {
+                layer.remove(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + removeStar);
+            });
+
         });
 
 
@@ -98,4 +118,5 @@ public class GeoItemsLayer {
         });
 
     }
+
 }

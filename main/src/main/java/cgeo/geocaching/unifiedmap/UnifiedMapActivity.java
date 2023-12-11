@@ -18,6 +18,7 @@ import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapSettingsUtils;
+import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
@@ -39,6 +40,7 @@ import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.layers.CacheCirclesLayer;
@@ -53,6 +55,7 @@ import cgeo.geocaching.unifiedmap.layers.TracksLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -856,10 +859,23 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (isLongTap) {
             // toggle route item
             if (routeItem != null && Settings.isLongTapOnMapActivated()) {
-                if (Settings.isShowRouteMenu()) {
-                    MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null)
-//                            .setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
-                            .show();
+
+                final Geocache cache = routeItem.getGeocache();
+                final boolean canHaveStar = MapStarUtils.canHaveStar(cache);
+
+                if (Settings.isShowRouteMenu() || canHaveStar) {
+                    final SimplePopupMenu menu = MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null);
+                    if (canHaveStar) {
+                        final String geocode = routeItem.getGeocode();
+                        final boolean isStarDrawn = viewModel.cachesWithStarDrawn.getValue().contains(geocode);
+                        MapStarUtils.addMenuIfNecessary(menu, cache, isStarDrawn, drawStar -> {
+                            CommonUtils.addRemove(viewModel.cachesWithStarDrawn.getValue(), geocode, !drawStar);
+                            viewModel.cachesWithStarDrawn.notifyDataChanged();
+                        });
+                    }
+                    menu
+                        //.setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
+                        .show();
                 } else {
                     viewModel.toggleRouteItem(this, routeItem);
                 }

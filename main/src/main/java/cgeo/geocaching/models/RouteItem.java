@@ -14,6 +14,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Comparator;
 import java.util.List;
@@ -155,6 +156,14 @@ public class RouteItem implements Parcelable {
 
     public String getGeocode() {
         return cacheGeocode;
+    }
+
+    @Nullable
+    public Geocache getGeocache() {
+        if (cacheGeocode == null) {
+            return null;
+        }
+        return DataStore.loadCache(cacheGeocode, LoadFlags.LOAD_CACHE_OR_DB);
     }
 
     @NonNull

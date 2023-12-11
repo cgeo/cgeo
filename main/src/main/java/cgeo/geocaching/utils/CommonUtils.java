@@ -56,6 +56,17 @@ public class CommonUtils {
     }
 
     /**
+     * Helper method to quickly add OR remove an item from/to a collection programatically
+     * If parameter 'remove' is true then item is removed; otherwise it is added
+     */
+    public static <T> boolean addRemove(final Collection<T> coll, final T item, final boolean remove) {
+        if (remove) {
+            return coll.remove(item);
+        }
+        return coll.add(item);
+    }
+
+    /**
      * Compares two given maps. Returns a map with an entry for each key where the two maps differ
      * * For keys existing in m1 but not in m2, there will be an entry with a Pair<null, value ín m2>
      * * for keys existing in m2 but no in m1, there will be an entry with a Pair<value in m1, null>
