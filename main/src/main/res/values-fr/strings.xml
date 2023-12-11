@@ -1108,10 +1108,8 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
-    <string name="category_unifiedMap">Carte unifiée</string>
     <string name="experimental">(expérimental)</string>
     <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
-    <string name="init_summary_useUnifiedMap">Utiliser la nouvelle carte unifiée plutôt que les cartes Google Map / Mapsforge (OSM) (carte expérimentale loin d\'être complète, à utiliser seulement pour test)</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
