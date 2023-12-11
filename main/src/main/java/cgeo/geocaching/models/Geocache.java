@@ -55,7 +55,6 @@ import cgeo.geocaching.utils.LazyInitializedList;
 import cgeo.geocaching.utils.LazyInitializedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
@@ -644,16 +643,20 @@ public class Geocache implements IWaypoint {
         return getConnector().getPossibleLogTypes(this);
     }
 
-    public void openInBrowser(final Context context) {
-        ShareUtils.openUrl(context, getUrl(), true);
+    /**
+     * Get the browser URL for the given LogEntry. May return null if no url available or identifiable.
+     */
+    @Nullable
+    public String getLogUrl(@NonNull final LogEntry logEntry) {
+        return getConnector().getCacheLogUrl(this, logEntry);
     }
 
-    public void openLogInBrowser(final Context context, @NonNull final LogEntry logEntry) {
-        ShareUtils.openUrl(context, getConnector().getCacheLogUrl(this, logEntry), true);
-    }
-
-    public void openCreateNewLogInBrowser(final Context context) {
-        ShareUtils.openUrl(context, getConnector().getCacheCreateNewLogUrl(this), true);
+    /**
+     * Get a browser URL to create a new log entry. May return null if connector does not support this.
+     */
+    @Nullable
+    public String getCreateNewLogUrl() {
+        return getConnector().getCacheCreateNewLogUrl(this);
     }
 
     @NonNull
@@ -677,10 +680,6 @@ public class Geocache implements IWaypoint {
 
     public boolean supportsLogging() {
         return getConnector().supportsLogging();
-    }
-
-    public boolean supportsLoggingOnline() {
-        return getConnector().getCacheCreateNewLogUrl(this) != null;
     }
 
     public boolean supportsOwnCoordinates() {
@@ -884,7 +883,7 @@ public class Geocache implements IWaypoint {
     }
 
     @NonNull
-    private String getShareSubject() {
+    public String getShareSubject() {
         final StringBuilder subject = new StringBuilder("Geocache ");
         subject.append(geocode);
         if (StringUtils.isNotBlank(name)) {
@@ -893,24 +892,12 @@ public class Geocache implements IWaypoint {
         return subject.toString();
     }
 
-    public void shareCache(@NonNull final Activity fromActivity, final Resources res) {
-        ShareUtils.shareLink(fromActivity, getShareSubject(), getUrl());
-    }
-
-    public boolean canShareLog(@NonNull final LogEntry logEntry) {
-        return StringUtils.isNotBlank(getConnector().getCacheLogUrl(this, logEntry));
-    }
-
     @Nullable
     public String getServiceSpecificLogId(@Nullable final LogEntry logEntry) {
         if (logEntry == null) {
             return null;
         }
         return getConnector().getServiceSpecificLogId(logEntry.serviceLogId);
-    }
-
-    public void shareLog(@NonNull final Activity fromActivity, final LogEntry logEntry) {
-        ShareUtils.shareLink(fromActivity, getShareSubject(), getConnector().getCacheLogUrl(this, logEntry));
     }
 
     @Nullable
