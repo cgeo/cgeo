@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">A obtenção da imagem falhou.</string>
     <string name="err_acquire_image_unsupported_format">O formato de imagem deve ser JPEG/JPG, PNG ou GIF</string>
     <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
+    <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
     <string name="err_tb_not_loggable">Este trackable não pode ser registado.</string>
     <string name="err_tb_not_found">O c:geo não encontra o trackable %s.</string>
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
@@ -1101,6 +1102,9 @@
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
+    <string name="init_reset_otm">Repor mensagens únicas</string>
+    <string name="init_reset_otm_confirm">Deseja repor todas as mensagens únicas?</string>
+    <string name="init_reset_otm_done">As mensagens únicas foram repostas</string>
     <string name="init_please_wait">Por favor, aguarde…</string>
     <string name="settings_open_website">Abrir o sítio web do serviço</string>
     <string name="settings_open_geokretymap_website">Abrir o sítio web \"GeoKretyMap.org\"</string>
@@ -1271,7 +1275,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
-    <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
     <string name="cache_offline_time_mins_few">há alguns minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1438,6 +1441,7 @@
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1497,6 +1501,7 @@
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
+    <string name="edit">Editar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
@@ -1511,8 +1516,6 @@
     <string name="init_summary_show_routing_menu">Toque longo numa cache mostra um menu com opções avançadas para adicionar/remover a cache a/de uma rota. Se desabilitado, a cache é apenas adicionada/removida à/da rota.</string>
     <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
     <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
-    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está activada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
@@ -1545,6 +1548,7 @@
     <string name="web_downloaded">Transferido</string>
     <!-- popup -->
     <string name="popup_more">Mais detalhes</string>
+    <string name="map_fragment_swipe_hint_text">Deslize para abrir a visualização de detalhes</string>
     <!-- waypoint -->
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
@@ -1730,7 +1734,6 @@
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
     <string name="search_finder_button">Pesquisa por quem encontrou</string>
-    <string name="search_filter">Filtrar</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
@@ -2141,7 +2144,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
-    <string name="tts_toggle">Ligar/desligar a fala</string>
     <string name="tts_started">Início das instruções de voz</string>
     <string name="tts_stopped">Fala interrompida</string>
     <string name="tts_running">Serviço de fala está activo…</string>
@@ -2247,8 +2249,6 @@
     <string name="permission_contacts_read_explanation">O c:geo pode procurar por contactos na lista telefónica, usando os nomes dos GeoCachers. Para fazer isso, deve autorizar o c:geo a ler a sua lista. Caso contrário, o uso desta função não será possível.</string>
     <string name="permission_location_explanation_title">Permissão de localização</string>
     <string name="permission_location_explanation">O c:geo está optimizado para usar dados GPS (localização apurada), para localizar a sua posição e calcular a distância e direcção para as geocaches. Sem esta permissão, as funções baseadas na localização não funcionarão como esperado.</string>
-    <string name="permission_read_external_storage_explanation_title">Permissão de leitura para o armazenamento externo</string>
-    <string name="permission_read_external_storage_explanation">O c:geo pode usar o papel de parede do seu sistema como fundo para a aplicação. Para fazer isso, o c:geo precisa de permissão para ler os seus dados de fotos no armazenamento externo.</string>
     <string name="permission_legacy_write_external_storage_explanation">O c:geo escreverá dados no armazenamento do seu telefone ou cartão SD, por exemplo, quando guardar geocaches para utilização off-line, importar ou exportar ficheiros e outras funções. Em algumas versões do Android, terá de conceder uma permissão adicional para essas acções.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permissão de escrita em armazenamento externo antiga</string>
     <string name="permission_post_notifications_explanation">O c:geo usa notificações para informá-lo sobre transferências de dados e aproximação a caches (se activado)</string>
@@ -2324,12 +2324,12 @@
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
-    <string name="center_on_route_track">Centrar na rota/percurso</string>
+    <string name="center">Centrar</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
     <string name="track">Percurso</string>
-    <string name="make_visible">tornar visível</string>
-    <string name="hide">ocultar</string>
+    <string name="make_visible">Tornar visível</string>
+    <string name="hide">Ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2498,8 +2498,9 @@
     <string name="redo">Refazer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Selecionar Tudo</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Selecionar Tudo</string>
+    <string name="multiselect_selectvisible">Selecionar Visíveis</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
