@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Verwerven van een foto is mislukt.</string>
     <string name="err_acquire_image_unsupported_format">Afbeeldingsformaat moet van JPEG/JPG, PNG of GIF zijn</string>
     <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
+    <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
     <string name="err_tb_not_loggable">Deze Trackable kan je niet loggen.</string>
     <string name="err_tb_not_found">c:geo kan trackable %s niet vinden.</string>
     <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
@@ -411,6 +412,7 @@
     <string name="caches_sort_state">Selectie omkeren</string>
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
+    <string name="caches_sort_lastfounddate">Laatste Gevonden datum</string>
     <string name="caches_select_mode">Selectie modus</string>
     <string name="caches_select_next20">Selecteer de volgende 20 caches</string>
     <string name="caches_select_next100">Selecteer de volgende 100 caches</string>
@@ -1101,6 +1103,9 @@
     <string name="init_create_memory_dump">Geheugendump maken</string>
     <string name="init_memory_dump">Geheugendump</string>
     <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
+    <string name="init_reset_otm">Reset eenmalige berichten</string>
+    <string name="init_reset_otm_confirm">Wil je alle eenmalige berichten opnieuw instellen?</string>
+    <string name="init_reset_otm_done">Eenmalige berichten zijn gereset</string>
     <string name="init_please_wait">Even geduld…</string>
     <string name="settings_open_website">Website openen</string>
     <string name="settings_open_geokretymap_website">Open de GeoKretyMap.org website</string>
@@ -1271,7 +1276,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle gegenereerde waypoints uit deze cache verwijderen?\n\nWaypoints worden onmiddellijk verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_generated_waypoints_success">Gegenereerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
-    <string name="cache_offline_stored">Opgeslagen in apparaat</string>
+    <string name="cache_offline_stored_ago">Opgeslagen: %s</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
     <string name="cache_offline_time_mins_few">paar minuten geleden</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1438,6 +1443,7 @@
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
     <string name="cache_rating_of_new">%1$.1f van %2$d</string>
@@ -1497,6 +1503,7 @@
     <string name="context_map_remove_from_route_pos">Verwijder vanaf positie %d</string>
     <string name="context_map_remove_from_route_end">Verwijder vanaf het eind</string>
     <string name="context_map_show_coords">Coördinaten tonen</string>
+    <string name="edit">Bewerken</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
@@ -1511,8 +1518,6 @@
     <string name="init_summary_show_routing_menu">Lange tik op een cache toont een menu met geavanceerde opties om de cache naar/van een route toe te voegen/te verwijderen. Indien uitgeschakeld wordt de cache enkel toegevoegd/verwijderd aan/van de route.</string>
     <string name="init_ActionbarAutohide">Werkbalk verbergen bij tik</string>
     <string name="init_summary_ActionbarAutohide">Tik op vrije kaart ruimte om de werkbalk te verbergen/tonen</string>
-    <string name="onetime_info_longtap_disabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
-    <string name="onetime_info_longtap_enabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
@@ -1545,6 +1550,7 @@
     <string name="web_downloaded">Gedownload</string>
     <!-- popup -->
     <string name="popup_more">Meer details</string>
+    <string name="map_fragment_swipe_hint_text">Swipe om detailweergave te openen</string>
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coördinaten</string>
@@ -2141,7 +2147,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
-    <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
     <string name="tts_started">Gestart toespraak</string>
     <string name="tts_stopped">Gestopt toespraak</string>
     <string name="tts_running">Spraakservice is actief…</string>
@@ -2247,8 +2252,6 @@
     <string name="permission_contacts_read_explanation">c:geo kan zoeken naar contacten in je adresboek met behulp van cachernamen. Om dit te doen, dien je c:geo te autoriseren om je adresboek te lezen, anders is het gebruik van deze functie niet mogelijk.</string>
     <string name="permission_location_explanation_title">Locatie permissie</string>
     <string name="permission_location_explanation">c:geo is geoptimaliseerd voor gebruik met GPS-gegevens (detail locatie) om je positie te vinden en afstand en richting van geocaches te berekenen. Zonder deze permissie zullen locatie-gebaseerde functies niet werken zoals verwacht.</string>
-    <string name="permission_read_external_storage_explanation_title">Externe Opslag leespermissie</string>
-    <string name="permission_read_external_storage_explanation">c:geo kan je systeem achtergrond gebruiken als achtergrond voor de app. Hiervoor heeft c:geo toestemming nodig om je media gegevens te lezen op externe opslag.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo zal gegevens schrijven op je telefoon opslag of SD kaart, b.v. wanneer je geocaches opslaat voor offline gebruik, importeren of exporteren van bestanden en andere functies. Op sommige Android-versies, dien je extra toestemming te geven voor deze acties.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Oude schrijfrechten voor externe opslag</string>
     <string name="permission_post_notifications_explanation">c:geo gebruikt meldingen om je te informeren over downloads en het naderen van caches (indien geactiveerd)</string>
@@ -2324,12 +2327,12 @@
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Kleur selecteren</string>
-    <string name="center_on_route_track">Centreer op route/track</string>
+    <string name="center">Midden</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
     <string name="make_visible">Zichtbaar maken</string>
-    <string name="hide">verbergen</string>
+    <string name="hide">Verbergen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2498,8 +2501,9 @@
     <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimaliseren</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Alles selecteren</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Alles selecteren</string>
+    <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebieden</string>
     <string name="rtl_fell_meadow">heuvel / weide</string>
