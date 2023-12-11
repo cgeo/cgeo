@@ -1132,10 +1132,8 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
-    <string name="category_unifiedMap">Mappa Unificata</string>
     <string name="experimental">(sperimentale)</string>
     <string name="init_title_useUnifiedMap">Usa mappa unificata</string>
-    <string name="init_summary_useUnifiedMap">Usa la nuova mappa unificata invece delle mappe integrate di Google Map / Mapsforge (OSM) (sperimentale / lungi dall\'essere completo / solo per test)</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
     <!-- proximity notification -->
