@@ -188,6 +188,7 @@
     <string name="err_select_logimage_failed">Attēlu atlasīšana priekš pierakstīšanās neizdevās.</string>
     <string name="err_acquire_image_failed">Attēla iegūšana neizdevās.</string>
     <string name="err_tb_display">c:geo nevar parādīt ceļotājus, kurus izvēlējāties. Vai tie patiešām ir ceļotāji?</string>
+    <string name="err_tb_details_open">c:geo nevar atvērt ceļotāja datus.</string>
     <string name="err_tb_not_loggable">Šis ceļotājs nav reģistrējams.</string>
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
     <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
@@ -628,7 +629,6 @@
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline_refresh">Atjaunot</string>
     <string name="cache_offline_store">Saglabāt</string>
-    <string name="cache_offline_stored">Saglabāts bezsaistē tavā ierīcē</string>
     <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>
     <string name="cache_offline_time_mins_few">dažas minūtes atpakaļ</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1327,7 +1327,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
