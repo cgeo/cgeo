@@ -1010,6 +1010,7 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Show an marker for the Difficulty (left) and Terrain (right) ratings on cache markers in upper-right corner ("stored" marker is moved to middle).</string>
     <string name="init_showElevation">Show Elevation</string>
     <string name="init_summary_showElevation">Show elevation info for current position, taken from routing data or GNSS (if available)</string>
+    <string name="init_elevation_notAvailable">"No elevation data available"</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
     <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note.</string>
     <string name="init_prevent_cache_note_merge">Overwrite Personal Cache Note</string>

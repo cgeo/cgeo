@@ -76,6 +76,8 @@ public class ElevationChart {
         if (chartBlock.getVisibility() != View.VISIBLE) {
             chartBlock.setVisibility(View.VISIBLE);
 
+            chart.setNoDataText(chart.getContext().getString(R.string.init_elevation_notAvailable));
+
             // follow tap on elevation chart in route on map
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
@@ -124,10 +126,12 @@ public class ElevationChart {
         float distance = 0.0f;
         Geopoint lastPoint = null;
         entries.clear();
+        if (route == null || route.getSegments() == null) {
+            return;
+        }
         for (RouteSegment segment : route.getSegments()) {
             final ArrayList<Float> elevation = segment.getElevation();
             if (elevation == null) {
-                chart.setNoDataText("No elevation data available");
                 return;
             }
             final Iterator<Float> it = elevation.iterator();
