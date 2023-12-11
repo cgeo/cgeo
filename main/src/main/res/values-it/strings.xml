@@ -258,6 +258,7 @@
     <string name="err_acquire_image_failed">Acquisizione immagine fallita.</string>
     <string name="err_acquire_image_unsupported_format">Il formato immagine deve essere uno dei file JPEG/JPG, PNG o GIF</string>
     <string name="err_tb_display">c:geo non riesce a visualizzare il trackable che vuoi. È veramente un trackable?</string>
+    <string name="err_tb_details_open">c:geo non riesce ad aprire i dettagli del trackable.</string>
     <string name="err_tb_not_loggable">Questo trackable non è loggabile.</string>
     <string name="err_tb_not_found">c:geo non riesce a trovare trackable %s.</string>
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
@@ -1101,6 +1102,9 @@
     <string name="init_create_memory_dump">Salva un memory dump della situazione attuale</string>
     <string name="init_memory_dump">Salvataggio memoria</string>
     <string name="init_memory_dumped">Memoria salvata in %s</string>
+    <string name="init_reset_otm">Reimposta messaggi singoli</string>
+    <string name="init_reset_otm_confirm">Vuoi reimpostare tutti i messaggi una tantum?</string>
+    <string name="init_reset_otm_done">I messaggi una tantum sono stati reimpostati</string>
     <string name="init_please_wait">Attendere prego…</string>
     <string name="settings_open_website">Apri il sito</string>
     <string name="settings_open_geokretymap_website">Apri il sito di GeoKretyMap.org</string>
@@ -1271,7 +1275,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Rimuovere tutti i waypoint generati da questo cache?\n\nWaypoints verranno eliminati immediatamente, non è possibile annullare.</string>
     <string name="cache_delete_generated_waypoints_success">waypoint cancellati</string>
     <string name="cache_offline_store">Salva</string>
-    <string name="cache_offline_stored">Salvato nel dispositivo</string>
+    <string name="cache_offline_stored_ago">Archiviato: %s</string>
     <string name="cache_offline_not_ready">Non disponibile offline</string>
     <string name="cache_offline_time_mins_few">qualche minuto fa</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1362,6 +1366,8 @@
     <string name="cache_dialog_offline_drop_message">Eliminazione del cache dalla memoria del dispositivo…</string>
     <string name="cache_dialog_refresh_title">Aggiorna</string>
     <string name="cache_dialog_refresh_message">Ricaricamento dettagli cache…</string>
+    <string name="cache_menu_speechDeactivate">Stop voce</string>
+    <string name="cache_menu_speechActivate">Start voce</string>
     <string name="cache_menu_navigate">Naviga</string>
     <string name="cache_menu_target">Imposta come obiettivo</string>
     <string name="cache_menu_navigation_drive">Naviga (in auto)</string>
@@ -1436,6 +1442,7 @@
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
     <string name="cache_rating_of_new">%1$.1f di %2$d</string>
@@ -1495,6 +1502,7 @@
     <string name="context_map_remove_from_route_pos">Rimuovi dalla posizione %d</string>
     <string name="context_map_remove_from_route_end">Rimuovi dalla fine</string>
     <string name="context_map_show_coords">Mostra le coordinate</string>
+    <string name="edit">Modifica</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="create_internal_cache_short">Nuova cache</string>
     <string name="create_internal_cache_currentlist">Usa la lista corrente</string>
@@ -1509,8 +1517,6 @@
     <string name="init_summary_show_routing_menu">Un tocco prolungato su di un cache mostra un menu con opzioni avanzate per aggiungere/rimuovere il cache in un percorso. Se disabilitato, il cache viene direttamente aggiunto/rimosso dal percorso (configurabile).</string>
     <string name="init_ActionbarAutohide">Nascondi barra degli strumenti al tocco</string>
     <string name="init_summary_ActionbarAutohide">Tocca lo spazio libero della mappa per nascondere/mostrare la barra degli strumenti</string>
-    <string name="onetime_info_longtap_disabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
-    <string name="onetime_info_longtap_enabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
@@ -1543,6 +1549,7 @@
     <string name="web_downloaded">Download terminato</string>
     <!-- popup -->
     <string name="popup_more">Altri dettagli</string>
+    <string name="map_fragment_swipe_hint_text">Scorri per visualizzare i dettagli</string>
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coordinate</string>
@@ -2139,7 +2146,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Stai usando una versione di c:geo che sembra essere più vecchia di un anno. Alcune funzionalità potrebbero non funzionare più a causa del sito web o di altre modifiche tecniche. Per favore leggi le nostre FAQ su come aggiornare.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bussola parlante</string>
-    <string name="tts_toggle">Attiva/disattiva il parlato</string>
     <string name="tts_started">Sintesi vocale on</string>
     <string name="tts_stopped">Sintesi vocale off</string>
     <string name="tts_running">Il servizio vocale è attivo…</string>
@@ -2245,8 +2251,6 @@
     <string name="permission_contacts_read_explanation">c:geo può cercare i contatti nella rubrica usando il nome da cacher. Per fare questo, devi autorizzare c:geo a leggere la tua rubrica. Altrimenti, non sarà possibile utilizzare questa funzione.</string>
     <string name="permission_location_explanation_title">Permesso geolocalizzazione</string>
     <string name="permission_location_explanation">c:geo è ottimizzato per l\'utilizzo con i dati GPS (posizione fine) per individuare la posizione e calcolare la distanza e la direzione per i geocache. Senza questo permesso, le funzioni basate sulla posizione non funzioneranno come previsto.</string>
-    <string name="permission_read_external_storage_explanation_title">Permessi di lettura memoria esterna</string>
-    <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo scriverà dati sulla memoria del telefono o sulla scheda SD, ad es. quando si salvano geocache per l\'uso offline, importare o esportare file e altre funzioni. Su alcune versioni di Android, è necessario concedere un permesso aggiuntivo per queste azioni.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permessi di lettura memoria esterna (legacy)</string>
     <string name="permission_post_notifications_explanation">c:geo utilizza le notifiche per informarti dei download e dell\'avvicinamento a cache (se attivato)</string>
@@ -2294,6 +2298,7 @@
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
     <string name="sorted_route_saved">Percorso individuale salvato</string>
     <string name="load_individual_route_error">Errore caricando il percorso individuale</string>
+    <string name="route_item_point">Punto del percorso</string>
     <string name="route_item_not_yet_loaded">Elemento del percorso non ancora caricato</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Percorso caricato con %d punto di rotta</item>
@@ -2321,7 +2326,7 @@
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
     <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="routes_tracks_color">Seleziona il colore</string>
-    <string name="center_on_route_track">Centra sul percorso/traccia</string>
+    <string name="center">Centro</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
     <string name="track">Traccia</string>
@@ -2495,8 +2500,9 @@
     <string name="redo">Ripeti</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Seleziona Tutto</string>
+    <string name="multiselect_selectvisible">Seleziona visibili</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
     <string name="rtl_fell_meadow">pendenza / prato</string>
