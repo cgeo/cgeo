@@ -141,14 +141,10 @@ public class GeoItemSelectorUtils {
         }
 
         // Fallback - coords only points
-
-        final TextView tv = view.findViewById(R.id.text);
-        tv.setText(R.string.route_item_point);
-
-        final TextView infoView = view.findViewById(R.id.info);
-        infoView.setText(routeItem.getPoint().format(GeopointFormatter.Format.LAT_LON_DECMINUTE));
-
-         tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.marker_routepoint_large, 0, 0, 0);
+        final TextParam title = TextParam.id(R.string.route_item_point);
+        final ImageParam routeIcon = ImageParam.id(R.drawable.marker_routepoint);
+        final TextParam subtitle = TextParam.text(routeItem.getPoint().format(GeopointFormatter.Format.LAT_LON_DECMINUTE));
+        setViewValues(view, title, subtitle, routeIcon);
         return view;
     }
 
