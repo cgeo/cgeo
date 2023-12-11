@@ -17,7 +17,6 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -131,8 +130,8 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
 
     @Override
     @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
-        return new OkapiLoggingManager(activity, this, cache);
+    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
+        return new OkapiLoggingManager(this, cache);
     }
 
     @Override

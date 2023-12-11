@@ -13,13 +13,20 @@ import androidx.annotation.WorkerThread;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * An instance of an implementing class allows online logging activites for a concrete geocache.
+ */
 public interface ILoggingManager {
 
-    /**
-     * Post a log for a cache online
-     *
-     * @param logPassword optional, maybe null
-     */
+    /** Returns the cache that this instance is associated with */
+    @NonNull
+    Geocache getCache();
+
+    /** Returns the connector that this logging manager is associated with */
+    @NonNull
+    IConnector getConnector();
+
+    /** Post a new log for a cache online */
     @NonNull
     @WorkerThread
     LogResult postLog(@NonNull LogType logType,
@@ -35,16 +42,10 @@ public interface ILoggingManager {
     ImageResult postLogImage(String logId,
                              Image image);
 
-    boolean hasLoaderError();
-
+    /** Retrieves additional contexxt information which can be used for online logging */
     @NonNull
-    List<TrackableLog> getTrackables();
-
-    @NonNull
-    List<LogType> getPossibleLogTypes();
-
-    void init();
-
+    @WorkerThread
+    LogContextInfo getLogContextInfo(@Nullable String serviceLogId);
 
     Long getMaxImageUploadSize();
 
@@ -52,7 +53,5 @@ public interface ILoggingManager {
 
     @NonNull
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
-
-    boolean hasTrackableLoadError();
 
 }

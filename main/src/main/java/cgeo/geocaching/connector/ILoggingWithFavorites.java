@@ -39,12 +39,12 @@ public interface ILoggingWithFavorites extends ILoggingManager {
     /**
      * @return number of available favorite points. This number will be displayed near "add to favorites" checkbox
      */
-    int getFavoritePoints();
+    //int getFavoritePoints();
 
     /**
      * @return true if there was loading error, false otherwise.
      */
-    boolean hasFavPointLoadError();
+    //boolean hasFavPointLoadError();
 
     int getFavoriteCheckboxText();
 }
