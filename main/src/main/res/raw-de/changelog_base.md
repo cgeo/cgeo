@@ -1,23 +1,23 @@
-### UnifiedMap
-Welcome to our all-new map implementation, internally called "UnifiedMap". This is the result of nearly two years' work from the c:geo team for an all-new map implementation. The reason we started this was that our old map implementations got increasingly hard to maintain and to keep (more or less) in sync feature-wise, with some code parts being ten years old (or more).
+### Vereinheitlichte Karte
+Willkommen bei unserer völlig neuen Kartenimplementierung, intern als "Vereinheitlichte Karte" bezeichnet. Dies ist das Ergebnis der fast zweijährigen Arbeit des c:geo Teams an einer völlig neuen Kartenimplementierung. Der Anlass für diese Arbeit war, dass unsere alten Kartenimplementierungen immer schwieriger zu pflegen und von den Funktionen her (mehr oder weniger) synchron zu halten waren, da einige Code-Teilen bereits zehn Jahre oder älter sind.
 
-With UnifiedMap we tried to get the same user experience across all different map types (where possible), while modernizing and unifying the internal architecture.
+Mit der Vereinheitlichten Karte haben wir versucht, die gleiche Benutzererfahrung über alle verschiedenen Kartenarten zu erreichen (soweit möglich) und gleichzeitig die interne Architektur zu modernisieren und zu vereinheitlichen.
 
-UnifiedMap basically offers (nearly) all the features our old map implementations have, but gives you a couple of additional features:
+Die Vereinheitlichte Karte unterstützt grundsätzlich (fast) alle Funktionen unserer alten Kartenimplementierungen und bietet zugleich einige zusätzliche Funktionen:
 
-- Map rotation for OpenStreetMap based maps (online and offline)
-- Fractional scaling for OpenStreetMap based maps
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks (tap on route)
+- Kartendrehung für OpenStreetMap-basierte Karten (online und offline)
+- Nicht-ganzzahlige Skalierung für OpenStreetMap-basierte Karten
+- Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
+- Kartenquellen ausblenden, die nicht benötigt werden
+- Höhendiagramm für Routen und Tracks (auf Route tippen)
 
-UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
+Die Vereinheitlichte Karte hat inzwischen den Beta-Status erreicht, daher haben wir uns entschlossen, sie zur Standardkarte für alle Nightly-Nutzer zu machen.
 
-Everything should work, but there still may be (and will be) some bugs. In case of need you may switch between old and new map implementations (see settings - map sources), but we would really like you to try the new one. Please report any bugs you find on support ([support@cgeo.org](mailto:support@cgeo.org)) or [c:geo on GitHub](github.com/cgeo/cgeo/issues). Every feedback is welcome!
+Grundsätzlich sollte alles funktionieren, aber es kann (und wird) noch einige Fehler geben. Bei Bedarf kannst du zwischen alten und neuer Kartenimplementierungen wechseln (siehe Einstellungen - Kartenquellen), aber wir würden uns wünschen, dass du die neue ausprobierst. Bitte melde alle Fehler im Support ([support@cgeo.org](mailto:support@cgeo.org)) oder bei [c:geo auf GitHub](github.com/cgeo/cgeo/issues). Jede Rückmeldung ist willkommen!
 
 ---
 
-More changes:
+Weitere Änderungen:
 
 ### Karte
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
