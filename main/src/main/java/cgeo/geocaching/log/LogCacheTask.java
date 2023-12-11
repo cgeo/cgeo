@@ -134,7 +134,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                 final Image imgToSend;
                 if (imageFileForUpload == null) {
                     imgToSend = null;
-                    imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
+                    imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl(), "");
                 } else {
                     imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(taskInterface.imageListFragment.getImageTitle(img, pos++)).build();
                     imageResult = taskInterface.loggingManager.postLogImage(logResult.getLogId(), imgToSend);

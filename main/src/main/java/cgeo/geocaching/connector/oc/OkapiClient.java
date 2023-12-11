@@ -671,7 +671,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("log_uuid", logId);
         final File file = image.getFile();
         if (file == null) {
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
         }
         FileInputStream fileStream = null;
         try {
@@ -682,14 +682,14 @@ final class OkapiClient {
             final ObjectNode data = postRequest(connector, OkapiService.SERVICE_ADD_LOG_IMAGE, params).data;
 
             if (data == null) {
-                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
             }
 
             if (data.get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText());
+                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText(), "");
             }
 
-            final ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            final ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
             logResult.setPostServerMessage(data.get("message").asText());
             return logResult;
         } catch (final Exception e) {
@@ -697,7 +697,7 @@ final class OkapiClient {
         } finally {
             IOUtils.closeQuietly(fileStream);
         }
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @NonNull

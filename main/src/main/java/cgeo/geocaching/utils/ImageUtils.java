@@ -670,7 +670,7 @@ public final class ImageUtils {
 
     @Nullable
     private static InputStream openImageStreamIfLocal(final Uri imageUri) {
-        if (UriUtils.isFileUri(imageUri) || UriUtils.isContentUri(imageUri)) {
+        if (UriUtils.isLocalUri(imageUri)) {
             return ContentStorage.get().openForRead(imageUri, true);
         }
         return null;

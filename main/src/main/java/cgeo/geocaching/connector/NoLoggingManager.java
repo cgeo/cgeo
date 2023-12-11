@@ -29,7 +29,7 @@ class NoLoggingManager extends AbstractLoggingManager {
     @Override
     @NonNull
     public ImageResult postLogImage(final String logId, final Image image) {
-        return new ImageResult(StatusCode.LOG_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOG_POST_ERROR);
     }
 
 }
