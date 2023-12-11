@@ -53,21 +53,21 @@
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_alignParentLeft="true"
-                    android:layout_toLeftOf="@id/more_details"
-                    android:layout_alignBaseline="@id/more_details"
+                    android:layout_toLeftOf="@id/edit"
+                    android:layout_alignBaseline="@id/edit"
                     android:text="@string/waypoint_visited" />
                 <Button
-                    android:id="@+id/more_details"
+                    android:id="@+id/edit"
                     style="@style/button_small_popups"
                     android:layout_alignParentRight="true"
-                    android:text="@string/cache" />
+                    android:text="@string/waypoint_edit" />
 
             </RelativeLayout>
 
             <Button
-                android:id="@+id/edit"
+                android:id="@+id/more_details"
                 style="@style/button_full_popups"
-                android:text="@string/waypoint_edit" />
+                android:text="@string/cache" />
 
         </LinearLayout>
     </ScrollView>
