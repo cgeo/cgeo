@@ -228,6 +228,7 @@
     <string name="err_select_logimage_failed">Kayıt için görsel seçimi başarısız oldu.</string>
     <string name="err_acquire_image_failed">Görsel alımı başarısız oldu.</string>
     <string name="err_tb_display">c:geo istediğin Trackable\'ı görüntüleyemez. Bu gerçekten bir trackable mi?</string>
+    <string name="err_tb_details_open">c:geo Trackable\'ın ayrıntılarını açamıyor.</string>
     <string name="err_tb_not_loggable">Bu trackable kaydedilebilir değil.</string>
     <string name="err_tb_not_found">c:geo %s trackable\'ını bulamıyor.</string>
     <string name="err_tb_find_that">c:geo bu Trackable\'ı bulamıyor.</string>
@@ -1041,7 +1042,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Not: \"Nottan ara noktalar\" etkinleştirildi. Kişisel notunuzda c:geo tarafından tanınan koordinatlarınız varsa, ara noktalar onlar için otomatik olarak yeniden oluşturulacaktır. Kişisel not düzenleme iletişim kutusunda bunu devre dışı bırakabilirsiniz.</string>
     <string name="cache_delete_userdefined_waypoints_success">Kullanıcı tanımlı ara noktalar silindi</string>
     <string name="cache_offline_store">Kaydet</string>
-    <string name="cache_offline_stored">Cihazda depolandı</string>
     <string name="cache_offline_not_ready">Çevrimdışı kullanılamıyor</string>
     <string name="cache_offline_time_mins_few">birkaç dakika önce</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1242,8 +1242,6 @@
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
     <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
-    <string name="onetime_info_longtap_disabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktif değildir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
-    <string name="onetime_info_longtap_enabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktiftir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1418,7 +1416,6 @@
     <string name="search_finder">Bulan</string>
     <string name="search_finder_prefill">Bulan</string>
     <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
@@ -1828,7 +1825,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
-    <string name="tts_toggle">Sesli yönlendirme Aç/Kapat</string>
     <string name="tts_started">Konuşmaya başladı</string>
     <string name="tts_stopped">Konuşmayı bıraktı</string>
     <string name="err_tts_lang_not_supported">Geçerli dil metin okuma tarafından desteklenmiyor.</string>
@@ -1970,8 +1966,6 @@
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="route">Rota</string>
     <string name="track">İz</string>
-    <string name="make_visible">görünür yap</string>
-    <string name="hide">gizle</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2111,7 +2105,7 @@
     <string name="back">Geri</string>
     <string name="cancel">İptal</string>
     <string name="ok" tools:ignore="ButtonCase">Tamam</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alanlar</string>
     <string name="rtl_fell_meadow">otlak / çayırlık</string>
