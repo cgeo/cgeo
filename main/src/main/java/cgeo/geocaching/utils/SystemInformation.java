@@ -105,6 +105,7 @@ public final class SystemInformation {
                 .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never")
                 .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
                 .append("\n- Live map mode: ").append(Settings.isLiveMap())
+                .append("\n- Use unified map: ").append(Settings.useUnifiedMap())
                 .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
         appendMapSourceInformation(body, context);
         body
