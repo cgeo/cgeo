@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.StatusResult;
@@ -63,14 +62,15 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                 logRating = getLogRating((IVotingCapability) cacheConnector);
             }
 
-            final LogResult logResult;
-            if (taskInterface.loggingManager instanceof ILoggingWithFavorites) {
-                logResult = ((ILoggingWithFavorites) taskInterface.loggingManager).postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, taskInterface.binding.favoriteCheck.isChecked(), logRating);
-            } else {
-                logResult = taskInterface.loggingManager.postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, logRating);
-            }
+            final LogEntry logEntry = new LogEntry.Builder<>()
+                .setLogType(taskInterface.logType)
+                .setDate(taskInterface.date.getDate().getTime())
+                .setLog(log)
+                .setReportProblem(taskInterface.reportProblemType)
+                .build();
+
+            final LogResult logResult = taskInterface.loggingManager.createLog(
+                logEntry, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.binding.favoriteCheck.isChecked(), logRating);
 
             ImageResult imageResult = null;
             if (logResult.getStatusCode() == StatusCode.NO_ERROR) {
@@ -137,7 +137,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                     imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl(), "");
                 } else {
                     imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(taskInterface.imageListFragment.getImageTitle(img, pos++)).build();
-                    imageResult = taskInterface.loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                    imageResult = taskInterface.loggingManager.createLogImage(logResult.getLogId(), imgToSend);
                 }
                 if (!isOkResult(imageResult)) {
                     break;

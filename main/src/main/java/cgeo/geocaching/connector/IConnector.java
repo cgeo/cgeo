@@ -81,6 +81,10 @@ public interface IConnector {
      */
     boolean supportsLogging();
 
+    boolean canEditLog(Geocache cache, LogEntry logEntry);
+
+    boolean canDeleteLog(Geocache cache, LogEntry logEntry);
+
     /**
      * enable/disable attaching image to log
      */

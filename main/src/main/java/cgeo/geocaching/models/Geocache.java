@@ -694,11 +694,6 @@ public class Geocache implements IWaypoint {
         return getConnector().getCacheCreateNewLogUrl(this) != null;
     }
 
-
-    public boolean supportsLogImages() {
-        return getConnector().supportsLogImages();
-    }
-
     public boolean supportsOwnCoordinates() {
         return getConnector().supportsOwnCoordinates();
     }

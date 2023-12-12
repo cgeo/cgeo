@@ -29,9 +29,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
@@ -143,11 +143,11 @@ final class ECApi {
 
     @NonNull
     @WorkerThread
-    static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log) {
+    static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Date date, @NonNull final String log) {
         final Parameters params = new Parameters("cache_id", cache.getGeocode());
         params.add("type", logType.type);
         params.add("log", log);
-        params.add("date", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("date", LOG_DATE_FORMAT.format(date));
         params.add("sid", ecLogin.getSessionId());
 
         final String uri = API_HOST + "log.php";
