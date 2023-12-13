@@ -25,6 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.backend.canvas.Color;
+import org.oscim.backend.canvas.Paint;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.Point;
 import org.oscim.layers.Layer;
@@ -127,6 +128,8 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
+                .cap(Paint.Cap.BUTT)
+                .fixed(true)
                 .build();
         final int zLevel = getZLevel(item);
 

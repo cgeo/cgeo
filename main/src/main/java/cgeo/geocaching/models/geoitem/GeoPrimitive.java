@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +38,9 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     private GeoPrimitive(@Nullable final GeoItem.GeoType type, @Nullable final List<Geopoint> points, @Nullable final List<List<Geopoint>> holes, @Nullable final GeoIcon icon, final float radius, @Nullable final GeoStyle style, final int zLevel) {
         this.type = type == null || type == GeoType.GROUP ? GeoItem.GeoType.POLYLINE : type;
+
+        //points: remove duplicates
+        removeSuccessiveDuplicates(points);
 
         //points: ensure point order in case of polygon (see https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6)
         if (this.type == GeoType.POLYGON && points != null) {
@@ -374,6 +378,21 @@ public class GeoPrimitive implements GeoItem, Parcelable {
 
     }
 
+    private static void removeSuccessiveDuplicates(final List<Geopoint> points) {
+        if (points == null || points.isEmpty()) {
+            return;
+        }
+        Geopoint last = null;
+        final Iterator<Geopoint> it = points.listIterator();
+        while (it.hasNext()) {
+            final Geopoint current = it.next();
+            if (last != null && last.equals(current)) {
+                it.remove();
+            }
+            last = current;
+        }
+    }
+
     private static void fixPolygonLine(final List<Geopoint> points, final boolean clockwise) {
         if (points.isEmpty()) {
             return;
@@ -462,7 +481,7 @@ public class GeoPrimitive implements GeoItem, Parcelable {
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(type.ordinal());
         dest.writeList(points);
-        dest.writeInt(holes.size());
+        dest.writeInt(holes == null ? 0 : holes.size());
         dest.writeParcelable(icon, flags);
         dest.writeFloat(radius);
         dest.writeParcelable(style, flags);
