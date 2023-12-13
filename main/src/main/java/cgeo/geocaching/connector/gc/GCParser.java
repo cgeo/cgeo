@@ -1061,7 +1061,11 @@ public final class GCParser {
     }
 
     private static String getUserToken(@NonNull final Geocache cache) {
-        return parseUserToken(requestHtmlPage(cache.getGeocode(), null, "n"));
+        return getUserToken(cache.getGeocode());
+    }
+
+    private static String getUserToken(@NonNull final String geocode) {
+        return parseUserToken(requestHtmlPage(geocode, null, "n"));
     }
 
     private static String parseUserToken(final String page) {
@@ -1339,7 +1343,7 @@ public final class GCParser {
         return StringUtils.replace(input, "../", GCConstants.GC_URL);
     }
 
-    private enum Logs {
+    public enum Logs {
         ALL(null),
         FRIENDS("sf"),
         OWN("sp");
@@ -1363,6 +1367,10 @@ public final class GCParser {
      * @return Observable<LogEntry> The logs
      */
     private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {
+        return getLogs(userToken, logType, GCConstants.NUMBER_OF_LOGS);
+    }
+
+    private static Observable<LogEntry> getLogs(final String userToken, final Logs logType, final int take) {
         if (userToken.isEmpty()) {
             Log.e("GCParser.getLogs: unable to extract userToken");
             return Observable.empty();
@@ -1372,7 +1380,7 @@ public final class GCParser {
             final Parameters params = new Parameters(
                     "tkn", userToken,
                     "idx", "1",
-                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
+                    "num", String.valueOf(take),
                     "decrypt", "false"); // fetch encrypted logs as such
             if (logType != Logs.ALL) {
                 params.add(logType.getParamName(), Boolean.toString(Boolean.TRUE));
@@ -1442,7 +1450,7 @@ public final class GCParser {
                             description = null;
                         }
                         final Image logImage = new Image.Builder()
-                            .setServiceImageId(imageGuid + "::" + imageId)
+                            .setServiceImageId(GCLogAPI.getLogImageId(imageGuid, imageId))
                             .setUrl(url).setTitle(title).setDescription(description).build();
                         logDoneBuilder.addLogImage(logImage);
                     }
@@ -1554,6 +1562,13 @@ public final class GCParser {
 
         // Wait for completion of logs parsing, retrieving and merging
         mergedLogs.ignoreElement().blockingAwait();
+    }
+
+    @WorkerThread
+    public static List<LogEntry> loadLogs(final String geocode, final Logs logs, final int take) {
+        final String userToken = getUserToken(geocode);
+        final Observable<LogEntry> logObservable = getLogs(userToken, logs, take);
+        return logObservable.toList().blockingGet();
     }
 
     /**

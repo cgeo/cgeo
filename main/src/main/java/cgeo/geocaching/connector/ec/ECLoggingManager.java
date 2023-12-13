@@ -32,7 +32,7 @@ class ECLoggingManager extends AbstractLoggingManager {
     @Override
     @NonNull
     public final ImageResult postLogImage(final String logId, final Image image) {
-        return new ImageResult(StatusCode.LOG_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOG_POST_ERROR);
     }
 
     @NonNull

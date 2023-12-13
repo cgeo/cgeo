@@ -163,10 +163,10 @@ class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFav
 
             final ImmutablePair<StatusCode, String> imageResult = GCWebAPI.postLogImage(getCache().getGeocode(), logId, image);
 
-            return new ImageResult(imageResult.left, imageResult.right);
+            return new ImageResult(imageResult.left, imageResult.right, "");
         }
 
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "", "");
     }
 
     @Override
