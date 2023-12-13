@@ -92,8 +92,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMap = mMapView.map();
         mMapLayers = new GroupedList<>(mMap.layers(), 4);
         setMapRotation(Settings.getMapRotation());
-        requireView().findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
-        requireView().findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         mapAttribution = requireView().findViewById(R.id.map_attribution);
         themeHelper = new MapsforgeThemeHelper(requireActivity());
         if (position != null) {
@@ -293,7 +291,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMap.setMapPosition(pos);
     }
 
-    private void zoomInOut(final boolean zoomIn) {
+    public void zoomInOut(final boolean zoomIn) {
         mMap.animator().animateZoom(300, zoomIn ? 2 : 0.5, 0f, 0f);
     }
 
