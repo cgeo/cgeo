@@ -22,6 +22,7 @@ More changes:
 ### Mappa
 - Nuovo: Evidenzia i download in corso nel gestore download
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Dettagli del cache
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore
