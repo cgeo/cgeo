@@ -22,6 +22,7 @@ More changes:
 ### Harita
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Geocache ayrıntıları
 - Change: Make "Toggle talking" an actual toggle
