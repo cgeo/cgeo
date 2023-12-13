@@ -23,6 +23,7 @@ import android.graphics.Color;
 import androidx.annotation.DrawableRes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -161,6 +162,26 @@ public class GeoItemTestLayer {
         layer.put("test-zOne", one.buildUpon().setZLevel(0).build());
         layer.put("test-zTwo", two.buildUpon().setZLevel(2).build());
         layer.put("test-zThree", three.buildUpon().setZLevel(1).build());
+
+        //line thicknesses
+        final Geopoint lineThickness = zLevelStuff.project(180, 50);
+        for (int i = 0; i < 10 ; i++) {
+            final int widthInDp = (i + 1) * 5;
+            final Geopoint start = lineThickness.project(90, i * 10);
+            final Geopoint end = start.project(180, 10);
+            final GeoStyle style = GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth((float) widthInDp).build();
+            layer.put("lineThickness-" + widthInDp, GeoPrimitive.createPolyline(Arrays.asList(start, end), style));
+        }
+
+        //button width: 38dp
+        layer.put("lineThickness-oneButton",
+            GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 20), lineThickness.project(180, 20).project(90, 50)),
+                GeoStyle.builder().setStrokeColor(Color.GREEN).setStrokeWidth(38f).build()));
+        layer.put("lineThickness-twoButton",
+            GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 25), lineThickness.project(180, 25).project(90, 50)),
+                GeoStyle.builder().setStrokeColor(Color.RED).setStrokeWidth(38f * 2).build()));
+
+
 
 
     }
