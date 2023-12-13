@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -16,8 +15,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 
@@ -28,10 +25,7 @@ import androidx.annotation.WorkerThread;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 class GCLoggingManager extends AbstractLoggingManager {
 
@@ -39,6 +33,12 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     GCLoggingManager(final Geocache cache) {
         super(GCConnector.getInstance(), cache);
+    }
+
+    @NonNull
+    @Override
+    public GCConnector getConnector() {
+        return (GCConnector) super.getConnector();
     }
 
     @WorkerThread
@@ -111,68 +111,70 @@ class GCLoggingManager extends AbstractLoggingManager {
     @Override
     public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final  boolean addToFavorites, final float rating) {
 
-        final LogType logType = logEntry.logType;
-        final String log = logEntry.log;
-        final Date date = new Date(logEntry.date);
-        final ReportProblemType reportProblem = logEntry.reportProblem;
+        final Geocache cache = getCache();
 
         try {
-            final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(getCache(), logType,
-                date, log, trackableLogs, addToFavorites);
-            for (TrackableLog trackableLog : trackableLogs) {
-                LastTrackableAction.setAction(trackableLog);
-            }
-
-            final Geocache cache = getCache();
-
-            if (postResult.left == StatusCode.NO_ERROR) {
-                DataStore.saveVisitDate(cache.getGeocode(), date.getTime());
-
-                if (logType.isFoundLog()) {
-                    GCLogin.getInstance().increaseActualCachesFound();
-                } else if (logType == LogType.TEMP_DISABLE_LISTING) {
-                    cache.setDisabled(true);
-                } else if (logType == LogType.ENABLE_LISTING) {
-                    cache.setDisabled(false);
-                }
-
-                if (addToFavorites) {
-                    cache.setFavorite(true);
-                    cache.setFavoritePoints(cache.getFavoritePoints() + 1);
-                }
-            }
-
-            if (reportProblem != ReportProblemType.NO_PROBLEM) {
-                GCWebAPI.postLog(cache, reportProblem.logType, date, CgeoApplication.getInstance().getString(reportProblem.textId), Collections.emptyList(), false);
-            }
-
-            return new LogResult(postResult.left, postResult.right);
+            return GCLogAPI.createLog(cache.getGeocode(), logEntry, trackableLogs, addToFavorites);
         } catch (final Exception e) {
-            Log.e("GCLoggingManager.postLog", e);
+            Log.e("GCLoggingManager.createLog", e);
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "GCLoggingManager.createLog", e);
         }
+    }
 
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
+    @NonNull
+    @Override
+    public LogResult editLog(@NonNull final LogEntry newEntry) {
+        return GCLogAPI.editLog(getCache().getGeocode(), newEntry, Collections.emptyList(), false);
+    }
 
+    @NonNull
+    @Override
+    public LogResult deleteLog(@NonNull final String logId) {
+        return GCLogAPI.deleteLog(logId);
     }
 
     @NonNull
     @Override
     public ImageResult createLogImage(@NonNull final String logId, @NonNull final Image image) {
         if (!image.isEmpty() && image.getFile() != null) {
-
-            final ImmutablePair<StatusCode, String> imageResult = GCWebAPI.postLogImage(getCache().getGeocode(), logId, image);
-
-            return new ImageResult(imageResult.left, imageResult.right, "");
+            return GCLogAPI.addLogImage(logId, image);
         }
-
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+        return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, "No valid image:" + image, null);
     }
+
+    @NonNull
+    @Override
+    public ImageResult editLogImage(@NonNull final String logId, @NonNull final String serviceImageId, @Nullable final String title, @Nullable final String description) {
+        return GCLogAPI.editLogImageData(logId, serviceImageId, title, description);
+    }
+
+    @NonNull
+    @Override
+    public ImageResult deleteLogImage(@NonNull final String logId, @NonNull final String serviceImageId) {
+        return GCLogAPI.deleteLogImage(logId, serviceImageId);
+    }
+
+    @Override
+    public boolean supportsEditLogImages() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsDeleteLogImages() {
+        return true;
+    }
+
+
 
     @Override
     public boolean supportsLogWithFavorite() {
         return true;
     }
 
+    @Override
+    public boolean supportsLogWithTrackables() {
+        return true;
+    }
     @NonNull
     @Override
     public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {

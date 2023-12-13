@@ -53,9 +53,19 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
         }
         return info;
     }
+    @Override
+    public boolean canLogReportType(@NonNull final ReportProblemType reportType) {
+        //Okapi can handle one report type
+        return ReportProblemType.NEEDS_MAINTENANCE == reportType;
+    }
 
     @Override
     public boolean supportsLogWithFavorite() {
+        return true;
+    }
+
+    @Override
+    public boolean supportsLogWithVote() {
         return true;
     }
 

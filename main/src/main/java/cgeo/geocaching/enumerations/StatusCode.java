@@ -10,7 +10,6 @@ import androidx.annotation.StringRes;
 public enum StatusCode {
 
     NO_ERROR(R.string.err_none),
-    LOG_SAVED(R.string.info_log_saved),
     LOGIN_PARSE_ERROR(R.string.err_parse),
     LOGIN_CAPTCHA_ERROR(R.string.err_captcha),
     CONNECTION_FAILED_GC(R.string.err_server_gc),

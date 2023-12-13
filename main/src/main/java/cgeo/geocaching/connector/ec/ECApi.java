@@ -158,9 +158,7 @@ final class ECApi {
                 apiRequest(uri, params, true);
             }
             if (response.code() != 200) {
-                final LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
-                logResult.setPostServerMessage(response.message());
-                return logResult;
+                return LogResult.error(StatusCode.LOG_POST_ERROR, response.message(), null);
             }
 
             final String data = Network.getResponseData(response, false);
@@ -169,13 +167,12 @@ final class ECApi {
                     ecLogin.increaseActualCachesFound();
                 }
                 final String uid = StringUtils.remove(data, "success:");
-                return new LogResult(StatusCode.NO_ERROR, uid);
+                return LogResult.ok(uid);
             }
-        } catch (final Exception ignored) {
-            // Response is already logged
+            return LogResult.error(StatusCode.LOG_POST_ERROR, data, null);
+        } catch (final Exception ex) {
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "exception", ex);
         }
-
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     @NonNull

@@ -50,6 +50,10 @@ public interface ILoggingManager {
     /** Returns whether this log entry can be deleted */
     boolean canDeleteLog(@NonNull LogEntry entry);
 
+    /** Returns true if this manager can handle the given reporttype on log create */
+    boolean canLogReportType(@NonNull ReportProblemType reportType);
+
+
 
     /** Attach an image to an existing log. The supplied image's MUST point to a local file */
     @NonNull
@@ -74,6 +78,12 @@ public interface ILoggingManager {
 
     /** Returns whether this manager supports the assignment of a favorite point together with log creation */
     boolean supportsLogWithFavorite();
+
+    /** Returns whether this manager supports tracking actions together with log creation */
+    boolean supportsLogWithTrackables();
+
+    /** Returns whether this manager supports passing a vote/rating together with log creation */
+    boolean supportsLogWithVote();
 
     /** Retrieves additional contexxt information which can be used for online logging */
     @NonNull
