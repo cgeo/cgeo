@@ -22,6 +22,7 @@ Meer wijzigingen:
 ### Kaart
 - Nieuw: Markeer bestaande downloads in downloadbeheer
 - Nieuw: Toon cache gevonden status op waypoint iconen
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
