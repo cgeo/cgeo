@@ -1504,6 +1504,8 @@
     <string name="context_map_remove_from_route_pos">Verwijder vanaf positie %d</string>
     <string name="context_map_remove_from_route_end">Verwijder vanaf het eind</string>
     <string name="context_map_show_coords">Coördinaten tonen</string>
+    <string name="context_map_star_show">Toon lijnen naar waypoints</string>
+    <string name="context_map_star_hide">Verberg lijnen naar waypoints</string>
     <string name="edit">Bewerken</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
