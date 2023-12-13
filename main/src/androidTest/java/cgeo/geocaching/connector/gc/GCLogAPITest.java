@@ -34,7 +34,7 @@ public class GCLogAPITest {
     private static final String TEST_TRAVELBUG = "TB7YFQV"; // The shirt, the duck and the sea
 
     @Test
-    @NotForIntegrationTests // this blocks execution on CI -> decision needed whether execution is allowed there
+    @NotForIntegrationTests
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") //Asserts are in submethods
     public void cacheLoggingLifecycleTest() {
         GCLogin.getInstance().login();
@@ -48,8 +48,8 @@ public class GCLogAPITest {
     }
 
     @Test
-    @NotForIntegrationTests // this blocks execution on CI -> decision needed whether execution is allowed there
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") //Asserts are in submethods
+    @NotForIntegrationTests
     public void trackableLoggingLifecycleTest() {
         GCLogin.getInstance().login();
 
