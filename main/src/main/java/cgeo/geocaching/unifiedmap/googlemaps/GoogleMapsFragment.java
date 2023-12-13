@@ -281,8 +281,10 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
         mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
 
-        final View compass = requireView().findViewWithTag("GoogleMapCompass");
-        compass.setVisibility(mapRotation == MAPROTATION_MANUAL ? View.VISIBLE : View.GONE);
+        final View fragmentView = getView();
+        if (fragmentView != null) {
+            fragmentView.findViewWithTag("GoogleMapCompass").setVisibility(mapRotation == MAPROTATION_MANUAL ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
