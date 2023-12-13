@@ -22,6 +22,7 @@ More changes:
 ### 지도
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
