@@ -22,6 +22,7 @@ Weitere Änderungen:
 ### Karte
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
