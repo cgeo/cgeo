@@ -415,6 +415,7 @@ public class Geocache implements IWaypoint {
         if (assignedEmoji == 0) {
             assignedEmoji = other.assignedEmoji;
         }
+
         if (searchCacheData == null) {
             searchCacheData = other.searchCacheData;
         }

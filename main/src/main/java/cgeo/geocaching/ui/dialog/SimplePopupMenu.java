@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.utils.functions.Action1;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.tuple.Triple;
 
@@ -28,6 +31,8 @@ public class SimplePopupMenu {
 
     private final Map<Integer, OnItemClickListener> itemListeners = new HashMap<>();
     private final List<Triple<Integer, CharSequence, Drawable>> additionalMenuItems = new ArrayList<>();
+
+    private final AtomicInteger uniqueIdProvider = new AtomicInteger(23435);
 
     private Activity activity;
     private Point point;
@@ -83,6 +88,13 @@ public class SimplePopupMenu {
 
     public SimplePopupMenu addMenuItem(final int uniqueId, final CharSequence title, final @DrawableRes int icon) {
         this.additionalMenuItems.add(Triple.of(uniqueId, title, AppCompatResources.getDrawable(context, icon)));
+        return this;
+    }
+
+    public SimplePopupMenu addMenuItem(final CharSequence title, @DrawableRes final int drawable, final Action1<MenuItem> clickAction) {
+        final int uniqueId = uniqueIdProvider.addAndGet(1);
+        addMenuItem(uniqueId, title, drawable);
+        addItemClickListener(uniqueId, clickAction::call);
         return this;
     }
 
