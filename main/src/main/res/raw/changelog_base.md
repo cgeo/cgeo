@@ -26,6 +26,7 @@ More changes:
 ### Map
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Cache details
 - Change: Make "Toggle talking" an actual toggle
