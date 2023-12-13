@@ -274,7 +274,11 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     public void zoomToBounds(final BoundingBox bounds) {
-        mMap.animator().animateTo(bounds);
+        if (bounds.getLatitudeSpan() == 0 && bounds.getLongitudeSpan() == 0) {
+            mMap.animator().animateTo(new GeoPoint(bounds.getMaxLatitude(), bounds.getMaxLongitude()));
+        } else {
+            mMap.animator().animateTo(bounds);
+        }
     }
 
     @Override
