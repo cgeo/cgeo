@@ -3,12 +3,12 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
@@ -27,13 +27,13 @@ import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFavorites {
+class GCLoggingManager extends AbstractLoggingManager {
 
     private static final List<ReportProblemType> REPORT_PROBLEM_TYPES = Arrays.asList(ReportProblemType.LOG_FULL, ReportProblemType.DAMAGED, ReportProblemType.MISSING, ReportProblemType.ARCHIVE, ReportProblemType.OTHER);
 
@@ -109,17 +109,16 @@ class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFav
 
     @NonNull
     @Override
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final float rating) {
-        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false, rating);
-    }
+    public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final  boolean addToFavorites, final float rating) {
 
-    @Override
-    @NonNull
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
+        final LogType logType = logEntry.logType;
+        final String log = logEntry.log;
+        final Date date = new Date(logEntry.date);
+        final ReportProblemType reportProblem = logEntry.reportProblem;
 
         try {
             final ImmutablePair<StatusCode, String> postResult = GCWebAPI.postLog(getCache(), logType,
-                    date.getTime(), log, trackableLogs, addToFavorites);
+                date, log, trackableLogs, addToFavorites);
             for (TrackableLog trackableLog : trackableLogs) {
                 LastTrackableAction.setAction(trackableLog);
             }
@@ -127,7 +126,7 @@ class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFav
             final Geocache cache = getCache();
 
             if (postResult.left == StatusCode.NO_ERROR) {
-                DataStore.saveVisitDate(cache.getGeocode(), date.getTime().getTime());
+                DataStore.saveVisitDate(cache.getGeocode(), date.getTime());
 
                 if (logType.isFoundLog()) {
                     GCLogin.getInstance().increaseActualCachesFound();
@@ -144,7 +143,7 @@ class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFav
             }
 
             if (reportProblem != ReportProblemType.NO_PROBLEM) {
-                GCWebAPI.postLog(cache, reportProblem.logType, date.getTime(), CgeoApplication.getInstance().getString(reportProblem.textId), Collections.emptyList(), false);
+                GCWebAPI.postLog(cache, reportProblem.logType, date, CgeoApplication.getInstance().getString(reportProblem.textId), Collections.emptyList(), false);
             }
 
             return new LogResult(postResult.left, postResult.right);
@@ -153,25 +152,25 @@ class GCLoggingManager extends AbstractLoggingManager implements ILoggingWithFav
         }
 
         return new LogResult(StatusCode.LOG_POST_ERROR, "");
+
     }
 
-    @Override
     @NonNull
-    public ImageResult postLogImage(final String logId, final Image image) {
-
-        if (!image.isEmpty()) {
+    @Override
+    public ImageResult createLogImage(@NonNull final String logId, @NonNull final Image image) {
+        if (!image.isEmpty() && image.getFile() != null) {
 
             final ImmutablePair<StatusCode, String> imageResult = GCWebAPI.postLogImage(getCache().getGeocode(), logId, image);
 
             return new ImageResult(imageResult.left, imageResult.right, "");
         }
 
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "", "");
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @Override
-    public int getFavoriteCheckboxText() {
-        return R.plurals.fav_points_remaining;
+    public boolean supportsLogWithFavorite() {
+        return true;
     }
 
     @NonNull

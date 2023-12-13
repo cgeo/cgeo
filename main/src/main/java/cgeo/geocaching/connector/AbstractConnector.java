@@ -87,6 +87,16 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public boolean canEditLog(final Geocache cache, final LogEntry logEntry) {
+        return false;
+    }
+
+    @Override
+    public boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
+        return false;
+    }
+
+    @Override
     public boolean supportsLogImages() {
         return false;
     }

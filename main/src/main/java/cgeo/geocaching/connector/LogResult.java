@@ -12,6 +12,10 @@ public class LogResult extends StatusResult {
     @Nullable
     private final String serviceLogId;
 
+    public LogResult(@NonNull final StatusCode postLogResult) {
+        this(postLogResult, "");
+    }
+
     public LogResult(@NonNull final StatusCode postLogResult, @NonNull final String logId) {
         this(postLogResult, logId, logId);
     }

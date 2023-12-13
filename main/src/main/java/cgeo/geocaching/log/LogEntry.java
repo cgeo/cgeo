@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -81,7 +82,7 @@ public class LogEntry implements Parcelable {
     /**
      * Report problem
      */
-    public final ReportProblemType reportProblem;
+    @NonNull public final ReportProblemType reportProblem;
     /**
      * log {@link Image} List
      */
@@ -98,6 +99,11 @@ public class LogEntry implements Parcelable {
      * Spotted cache geocode
      */
     @NonNull public final String cacheGeocode; // used for trackables
+
+    @NonNull
+    public Date getDate() {
+        return new Date(date);
+    }
 
     // Parcelable START
 

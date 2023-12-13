@@ -7,7 +7,6 @@ import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
@@ -337,8 +336,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private void initializeFavoriteCheck() {
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
-        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
-            binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
+        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
+            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
             if (availableFavoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
             }

@@ -74,7 +74,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -620,12 +619,12 @@ final class OkapiClient {
     @NonNull
     @WorkerThread
     @SuppressWarnings("PMD.NPathComplexity")
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Date date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.ocType);
         params.add("comment", log);
         params.add("comment_format", "plaintext");
-        params.add("when", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("when", LOG_DATE_FORMAT.format(date));
         if (logType == LogType.NEEDS_MAINTENANCE) {
             params.add("needs_maintenance", "true");
         }
