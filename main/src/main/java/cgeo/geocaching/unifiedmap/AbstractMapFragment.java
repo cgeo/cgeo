@@ -122,6 +122,8 @@ public abstract class AbstractMapFragment extends Fragment {
 
     public abstract void setZoom(int zoomLevel);
 
+    public abstract void zoomInOut(boolean zoomIn);
+
     public void setMapRotation(final int mapRotation) {
         if (mapRotation == Settings.MAPROTATION_OFF) {
             setBearing(0);

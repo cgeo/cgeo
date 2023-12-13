@@ -89,7 +89,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     public void onMapReady(final @NonNull GoogleMap googleMap) {
         mMap = googleMap;
         mapController.setGoogleMap(googleMap);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
         setMapRotation(Settings.getMapRotation());
         onMapReadyCheckForActivity();
     }
@@ -268,6 +268,11 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         } else {
             this.zoomLevel = zoomLevel;
         }
+    }
+
+    @Override
+    public void zoomInOut(final boolean zoomIn) {
+        mMap.animateCamera(zoomIn ? CameraUpdateFactory.zoomIn() : CameraUpdateFactory.zoomOut());
     }
 
     @Override

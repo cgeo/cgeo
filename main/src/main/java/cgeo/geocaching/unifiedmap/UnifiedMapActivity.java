@@ -37,6 +37,7 @@ import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -245,6 +246,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.reloadIndividualRoute();
             }
         });
+
+        findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(1000, 500, v -> {
+            if (mapFragment != null) {
+                mapFragment.zoomInOut(true);
+            }
+        }));
+        findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(1000, 500, v -> {
+            if (mapFragment != null) {
+                mapFragment.zoomInOut(false);
+            }
+        }));
 
     }
 
