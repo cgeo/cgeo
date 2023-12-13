@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="detail">Upplýsingar</string>
     <string name="search">Leit</string>
@@ -43,6 +41,8 @@
     <string name="wp_waypoint">Viðmiðunarpunktur</string>
     <string name="wp_original">Upprunanleg hnit</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fundið</string>
     <string name="log_dnf">Fannst ekki</string>
@@ -74,7 +74,6 @@
     <string name="log_tb_archived">Í geymslu</string>
     <string name="log_saving">Færsla í innsendingu…</string>
     <string name="log_posting_log">Set færslu inn…</string>
-    <string name="log_posting_twitter">Set tíst inn…</string>
     <string name="log_posting_generic_trackable">Set inn %1$s %2$d/%3$d</string>
     <string name="log_clear">Hreinsa</string>
     <string name="log_post_not_possible">Niðurhal gagna er í gangi…\nVinsamlegast reyndu aftur eftir nokkrar sekúndur eða skoðaðu internet tenginguna þína.</string>
@@ -99,9 +98,6 @@
     <string name="log_yesterday">Í gær</string>
     <string name="log_smilies">Broskarlar</string>
     <string name="log_image">Mynd</string>
-    <string name="log_image_attach">Festa mynd við</string>
-    <string name="log_image_stored">úr safni</string>
-    <string name="log_image_camera">Ný</string>
     <string name="log_image_caption">Fyrirsögn</string>
     <string name="log_image_description">Lýsing</string>
     <string name="log_image_scale">Breyta stærð</string>
@@ -117,7 +113,6 @@
     <string name="translate_to_english">Þýða yfir á ensku</string>
     <string name="translate_length_warning">Þýðing getur mistekist ef textinn er langur.</string>
     <!-- errors, warnings, info toasts -->
-    <string name="err_server">Næ ekki sambandi við Geocaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
     <string name="err_server_gk">Gat ekki náð sambandi við GeoKrety.org. Vefsíðan gæti legið niðri eða internet tengingin þín virkar ekki.</string>
     <string name="err_login">Engar innskráningarupplýsingar vistaðar</string>
@@ -269,7 +264,6 @@
     <string name="settings_title_map_content">Innihald korts</string>
     <string name="confirm_data_dir_move">Færsla geocache gagna gæti tekið mjög langan tíma, en það fer eftir tækinu þínu og magni gagna.</string>
     <string name="settings_title_system">Kerfi</string>
-    <string name="settings_category_social">Samfélagsmiðlar</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
     <string name="settings_service_activate">Virkja</string>
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
@@ -313,6 +307,7 @@
     <string name="init_livelist">Sýna átt</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">Öryggisafrit</string>
     <string name="init_backup_running">Bý til öryggisafrit af gagnagrunninum…</string>
@@ -334,7 +329,6 @@
     <string name="settings_open_website">Opna heimasíðu</string>
     <string name="settings_settings">Stillingar</string>
     <string name="settings_information">Upplýsingar</string>
-    <string name="settings_advanced">Ítarlegar stillingar</string>
     <string name="init_ec_icons">Kortatákn</string>
     <string name="settings_features">Studdir eiginleikar</string>
     <string name="feature_watch_list">Vaktlisti</string>
@@ -365,8 +359,6 @@
     <string name="auth_dialog_waiting">Bíð eftir %s…</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo má núna setja inn á Twitter.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
     <!-- auth geokrety -->
@@ -384,7 +376,6 @@
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
-    <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
     <string name="cache_offline_time_mins_few">Fyrir nokkrum mínútum</string>
     <plurals name="cache_offline_about_time_mins">
@@ -497,7 +488,6 @@
     <string name="waypoint_save">Vista</string>
     <string name="waypoint_set_as_cache_coords">Setja sem hnit kassa í c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Setja sem hnit kassa í c:geo og á vefsíðunni</string>
-    <string name="waypoint_reset">Endurstilla</string>
     <string name="waypoint_localy_reset_cache_coords">Endurstilla í c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
     <string name="waypoint_done">Lokið</string>
@@ -506,8 +496,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Tilkynna fundinn á Twitter</string>
     <!-- map -->
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
@@ -634,7 +622,6 @@
     <string name="support_title">Aðstoð</string>
     <string name="website_title">Vefsíða</string>
     <string name="market_link"><a href="">c:geo á Google Play</a></string>
-    <string name="about_twitter">Á <b>c:geo</b> að setja inn nýja færslu á Twitter í hvert skipti sem þú skráir heimsókn þína?</string>
     <string name="faq_title">Algengar spurningar</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -695,6 +682,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -712,10 +700,11 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

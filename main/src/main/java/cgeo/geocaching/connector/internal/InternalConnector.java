@@ -165,6 +165,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
+    public boolean supportsDifficultyTerrain() {
+        return false;
+    }
+
+    @Override
     public SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final DisposableHandler handler) {
 
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
@@ -298,11 +303,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         final MaterialButton dialogButton = (MaterialButton) titleViewBinding.dialogButtonRight;
         dialogButton.setVisibility(View.VISIBLE);
         // This cross-converting solves a tinting issue described in #11715. Sorry, it is ugly but the only possibility we have found so far.
-        dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable())));
+        dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable())));
         dialogButton.setIconTint(null);
         dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
-            dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+            dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
         }));
 
         Dialogs.newBuilder(context)

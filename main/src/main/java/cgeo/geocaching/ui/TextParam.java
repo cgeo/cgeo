@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -31,6 +32,8 @@ import io.noties.markwon.Markwon;
  */
 public class TextParam {
 
+    public static final int IMAGE_SIZE_INTRINSIC_BOUND = 0;
+
     @StringRes
     private final int textId;
     private final Object[] textParams;
@@ -45,6 +48,7 @@ public class TextParam {
 
     private ImageParam image;
     private int imageSizeInDp = -1;
+    @ColorInt private int imageTintColor = 1;
 
 
     /**
@@ -111,10 +115,19 @@ public class TextParam {
 
     /**
      * sets whether text shall be accompanied by an image/icon
+     * Use this method to use a draw size for the image. Use IMAGE_SIZE_INTRINSIC_BOUND for intrinsic bounds
      */
     public TextParam setImage(final ImageParam image, final int imageSizeInDp) {
         this.image = image;
         this.imageSizeInDp = imageSizeInDp;
+        return this;
+    }
+
+    /**
+     * set tint color for compound image
+     */
+    public TextParam setImageTint(@ColorInt final int imageTintColor) {
+        this.imageTintColor = imageTintColor;
         return this;
     }
 
@@ -138,7 +151,7 @@ public class TextParam {
      * Applies the current settings of this TextParam to a textview.
      * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
      * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
-     * * Sets text returned by {@link #getText(Co ntext)}
+     * * Sets text returned by {@link #getText(Context)}
      * * Calls {@link #adjust(TextView, boolean)} on the textview
      */
     public void applyTo(@Nullable final TextView view, final boolean forceNoMovement) {
@@ -149,8 +162,8 @@ public class TextParam {
         final CharSequence tcs = getText(view.getContext());
         if (tcs != null) {
             view.setText(tcs);
-            adjust(view, forceNoMovement);
         }
+        adjust(view, forceNoMovement);
     }
 
     /**
@@ -218,15 +231,27 @@ public class TextParam {
             view.setMovementMethod(LinkMovementMethod.getInstance());
         }
         if (image != null || imageSizeInDp > 0) {
-            final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image)
-                    .getAsDrawable(view.getContext(), imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp);
-            if (imageSizeInDp < 0) {
-                view.setCompoundDrawablesWithIntrinsicBounds(imageDrawable, null, null, null);
-            } else {
-                imageDrawable.setBounds(new Rect(0, 0, ViewUtils.dpToPixel(imageSizeInDp), ViewUtils.dpToPixel(imageSizeInDp)));
-                view.setCompoundDrawables(imageDrawable, null, null, null);
-            }
+            final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image).getAsDrawable(view.getContext());
 
+            //if wanted imageSize is set explicitely -> use it. Otherwise deduct a sensible default from text size
+            final int imageSizeInPixel;
+            if (imageSizeInDp < 0) {
+                imageSizeInPixel = (int) (view.getTextSize() * 1.5f);
+            } else if (imageSizeInDp == IMAGE_SIZE_INTRINSIC_BOUND) {
+                imageSizeInPixel = imageDrawable.getIntrinsicHeight();
+            } else {
+                imageSizeInPixel = ViewUtils.dpToPixel(imageSizeInDp);
+            }
+            imageDrawable.setBounds(new Rect(0, 0, imageSizeInPixel, imageSizeInPixel));
+            view.setCompoundDrawables(imageDrawable, null, null, null);
+
+            // set image tint (if given)
+            if (imageTintColor != 1) {
+                final Drawable[] d = view.getCompoundDrawables();
+                if (d.length > 0) {
+                    d[0].setTint(imageTintColor);
+                }
+            }
             //Add margin between image and text (support various screen densities)
             view.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
         }

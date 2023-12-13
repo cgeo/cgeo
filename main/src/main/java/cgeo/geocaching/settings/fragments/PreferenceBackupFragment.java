@@ -15,7 +15,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_backup, rootKey);
+        initPreferences(R.xml.preferences_backup, rootKey);
 
         final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
@@ -38,7 +38,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         loginData.setOnPreferenceClickListener(preference -> {
             if (loginData.isChecked()) {
                 loginData.setChecked(false);
-                SimpleDialog.of(getActivity()).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm((dialog, which) -> loginData.setChecked(true));
+                SimpleDialog.of(getActivity()).setTitle(R.string.init_backup_settings_logins).setMessage(R.string.init_backup_settings_backup_full_confirm).confirm(() -> loginData.setChecked(true));
             }
             return true;
         });

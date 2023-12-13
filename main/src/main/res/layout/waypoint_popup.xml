@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/colorBackgroundDialog"
+    android:windowBackground="@color/colorBackgroundTransparent"
     tools:context=".WaypointPopupFragment" >
 
     <include
@@ -51,37 +53,22 @@
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"
                     android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/edit"
+                    android:layout_alignBaseline="@id/edit"
                     android:text="@string/waypoint_visited" />
                 <Button
                     android:id="@+id/edit"
-                    style="@style/button_small"
+                    style="@style/button_small_popups"
                     android:layout_alignParentRight="true"
                     android:text="@string/waypoint_edit" />
 
             </RelativeLayout>
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal" />
-            </RelativeLayout>
+            <Button
+                android:id="@+id/more_details"
+                style="@style/button_full_popups"
+                android:text="@string/cache" />
 
-            <LinearLayout
-                android:id="@+id/details_list"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/more_details_box"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/more_details"
-                    style="@style/button_full"
-                    android:text="@string/popup_more" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

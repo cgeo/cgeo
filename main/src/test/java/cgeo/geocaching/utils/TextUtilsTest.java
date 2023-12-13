@@ -6,6 +6,7 @@ import android.text.SpannableString;
 import android.util.Pair;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
@@ -266,6 +267,16 @@ public class TextUtilsTest {
 
         assertThat(TextUtils.containsHtml("Special char &; doesn't exist")).isFalse();
 
+    }
+
+    @Test
+    public void pattern() {
+        final String text = "abc\"logTypes\":[{\"value\":2},{\"value\":3},{\"value\":4},{\"value\":45},{\"value\":7}]def";
+        final Pattern p = Pattern.compile("\"logTypes\":\\[([^]]+)]");
+        final Matcher m = p.matcher(text);
+        assertThat(m.find()).isTrue();
+        assertThat(m.group(1)).isEqualTo("{\"value\":2},{\"value\":3},{\"value\":4},{\"value\":45},{\"value\":7}");
+        //"logTypes":[{"value":2},{"value":3},{"value":4},{"value":45},{"value":7}]
     }
 
 }

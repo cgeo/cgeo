@@ -1,23 +1,23 @@
 package cgeo.geocaching.enumerations;
 
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 
 import androidx.annotation.NonNull;
 
 public enum CacheListType {
-    OFFLINE(true, GeocacheFilterContext.FilterType.OFFLINE, AbstractBottomNavigationActivity.MENU_LIST, true, false),
-    POCKET(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_HIDE_BOTTOM_NAVIGATION, false, true),
-    HISTORY(true, GeocacheFilterContext.FilterType.TRANSIENT, AbstractBottomNavigationActivity.MENU_LIST, true, false),
-    NEAREST(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_NEARBY, false, true),
-    COORDINATE(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    KEYWORD(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    ADDRESS(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    FINDER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    OWNER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    MAP(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractBottomNavigationActivity.MENU_HIDE_BOTTOM_NAVIGATION, false, false),
-    LAST_VIEWED(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractBottomNavigationActivity.MENU_SEARCH, false, false),
-    SEARCH_FILTER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true);
+    OFFLINE(true, GeocacheFilterContext.FilterType.OFFLINE, AbstractNavigationBarActivity.MENU_LIST, true, false),
+    POCKET(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_HIDE_NAVIGATIONBAR, false, true),
+    HISTORY(true, GeocacheFilterContext.FilterType.TRANSIENT, AbstractNavigationBarActivity.MENU_LIST, true, false),
+    NEAREST(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_CUSTOM, false, true),
+    COORDINATE(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true),
+    KEYWORD(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true),
+    ADDRESS(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true),
+    FINDER(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true),
+    OWNER(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true),
+    MAP(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractNavigationBarActivity.MENU_HIDE_NAVIGATIONBAR, false, false),
+    LAST_VIEWED(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractNavigationBarActivity.MENU_SEARCH, false, false),
+    SEARCH_FILTER(false, GeocacheFilterContext.FilterType.LIVE, AbstractNavigationBarActivity.MENU_SEARCH, false, true);
 
     /**
      * whether or not this list allows switching to another list type

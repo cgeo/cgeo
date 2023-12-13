@@ -22,11 +22,11 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
@@ -252,7 +252,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
         try {
             return new SearchResult(SuApi.searchByFilter(filter, this));
         } catch (final SuApi.NotAuthorizedException e) {
@@ -297,8 +297,8 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
-        return new SuLoggingManager(activity, this, cache);
+    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
+        return new SuLoggingManager(this, cache);
     }
 
     @Override
@@ -415,6 +415,11 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsVoting(@NonNull final Geocache cache) {
         return true;
+    }
+
+    @Override
+    public float getRatingStep() {
+        return 1f; // Only integer votes are possible
     }
 
     @Override

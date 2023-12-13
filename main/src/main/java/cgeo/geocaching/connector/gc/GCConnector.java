@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.capability.IDifficultyTerrainMatrixNeededCapability;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -29,7 +30,6 @@ import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -37,6 +37,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -52,21 +53,23 @@ import androidx.annotation.WorkerThread;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar, IDifficultyTerrainMatrixNeededCapability {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
 
-    public static final String SEARCH_CONTEXT_LEGACY_PAGING = "sc_gc_legacy_paging";
     public static final String SEARCH_CONTEXT_FILTER = "sc_gc_filter";
+    public static final String SEARCH_CONTEXT_SORT = "sc_gc_sort";
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
 
     @NonNull
@@ -118,6 +121,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean supportsVoting(@NonNull final Geocache cache) {
         return true;
+    }
+
+    @Override
+    public float getRatingStep() {
+        return 0.5f;
     }
 
     @Override
@@ -183,7 +191,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
-        return GC_BASE_URL + "play/geocache/" + cache.getGeocode() + "/log";
+        return GC_BASE_URL + "live/geocache/" + cache.getGeocode() + "/log";
     }
 
     @Override
@@ -213,8 +221,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     @NonNull
-    public ILoggingManager getLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final Geocache cache) {
-        return new GCLoggingManager(activity, cache);
+    public ILoggingManager getLoggingManager(@NonNull final Geocache cache) {
+        return new GCLoggingManager(cache);
     }
 
     @Override
@@ -283,16 +291,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }
 
-        if (context.getBoolean(SEARCH_CONTEXT_LEGACY_PAGING)) {
-            return GCParser.searchByNextPage(this, context);
-        }
-
         if (filter == null) {
-            //non-legacy-nextpage needs a filter to proceed. If none is there then return empty result
+            //we need a filter to proceed. If none is there then return empty result
             return new SearchResult();
         }
 
-        return GCMap.searchByNextPage(this, context, filter);
+        final GeocacheSort sort = context.getParcelable(SEARCH_CONTEXT_SORT);
+
+        return GCMap.searchByNextPage(this, context, filter, sort == null ? new GeocacheSort() : sort);
     }
 
     @Override
@@ -307,15 +313,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
                 GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
                 GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
-                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
-                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
+                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN_MATRIX,
+                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.EVENT_DATE, GeocacheFilterType.LOG_ENTRY);
     }
 
 
     @Override
     @NonNull
-    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return GCMap.searchByFilter(this, filter);
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter, @NonNull final GeocacheSort sort) {
+        return GCMap.searchByFilter(this, filter, sort);
     }
 
     @Override
@@ -654,6 +660,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         // since 2020 (?) needs maintenance and need archive logs are no longer separate log types (but presented in a submenu)
         result.removeAll(Arrays.asList(LogType.NEEDS_MAINTENANCE, LogType.NEEDS_ARCHIVE));
         return result;
+    }
+
+    @Override
+    @NonNull
+    public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
+        return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
     }
 
     /**

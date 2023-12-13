@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/simpledialog_fragment"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Message field -->
+    <TextView
+        android:id="@+id/dialog_message"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp" />
+
+
+    <!-- Input field -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dialog_input_layout"
+        android:visibility="gone"
+        style="@style/textinput_edittext_singleline">
+        <EditText
+            android:id="@+id/dialog_input_edittext"
+            style="@style/textinput_embedded_singleline"
+            android:inputType="text"
+            android:hint="" tools:ignore="LabelFor" /> <!-- hint is set by Dialog builder -->
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Item List -->
+    <cgeo.geocaching.ui.SimpleItemListView
+        android:id="@+id/dialog_itemlistview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

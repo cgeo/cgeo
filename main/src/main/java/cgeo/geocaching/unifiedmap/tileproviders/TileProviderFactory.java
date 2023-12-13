@@ -8,10 +8,9 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsView;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -44,8 +43,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class TileProviderFactory {
     public static final int MAP_LANGUAGE_DEFAULT_ID = 432198765;
 
-    public static final GoogleMapsView MAP_GOOGLE = new GoogleMapsView();
-    public static final MapsforgeVtmView MAP_MAPSFORGE = new MapsforgeVtmView();
     private static final HashMap<String, AbstractTileProvider> tileProviders = new LinkedHashMap<>();
     private static String[] languages;
 
@@ -101,13 +98,20 @@ public class TileProviderFactory {
             return;
         }
 
-        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).selectSingle(list, (l, pos) -> TextParam.text(l.first), -1, SimpleDialog.SingleChoiceMode.NONE, (l, pos) -> {
+        final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(list)
+            .setDisplayMapper((l) -> TextParam.text(l.first))
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title))
+                .selectSingle(model, (l) -> {
             final AbstractMapsforgeOfflineTileProvider tileProvider = (AbstractMapsforgeOfflineTileProvider) getTileProvider(l.second);
             if (tileProvider != null) {
                 final ContentStorage cs = ContentStorage.get();
                 final ContentStorage.FileInformation fi = cs.getFileInfo(tileProvider.getMapUri());
                 if (fi != null) {
-                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm((dialog, which) -> {
+                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm(() -> {
                         final Uri cf = CompanionFileUtils.companionFileExists(cs.list(PersistableFolder.OFFLINE_MAPS), fi.name);
                         cs.delete(tileProvider.getMapUri());
                         if (cf != null) {
@@ -145,6 +149,7 @@ public class TileProviderFactory {
         registerTileProvider(new OsmOrgSource());
         registerTileProvider(new OsmDeSource());
         registerTileProvider(new CyclosmSource());
+        registerTileProvider(new OpenTopoMapSource());
 
         // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =
@@ -152,11 +157,11 @@ public class TileProviderFactory {
                         .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
-        for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
-        }
         if (offlineMaps.size() > 1) {
             registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+        }
+        for (ImmutablePair<String, Uri> data : offlineMaps) {
+            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
         }
     }
 

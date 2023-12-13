@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
-import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.Loaders;
@@ -17,12 +16,12 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
+import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -35,9 +34,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,11 +54,14 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+
+    private static final LogTypeTrackable[] PREFERRED_DEFAULTS = new LogTypeTrackable[] { LogTypeTrackable.DISCOVERED_IT, LogTypeTrackable.NOTE, LogTypeTrackable.RETRIEVED_IT };
     private LogtrackableActivityBinding binding;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
 
     private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
+    private final TextSpinner<LogTypeTrackable> logType = new TextSpinner<>();
     private String geocode = null;
     private Geopoint geopoint;
     private Geocache geocache = new Geocache();
@@ -103,14 +103,26 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
             possibleLogTypesTrackable.addAll(logTypesTrackable);
+            logType.setValues(possibleLogTypesTrackable);
 
             if (!logTypesTrackable.contains(typeSelected)) {
-                setType(logTypesTrackable.get(0));
+                //currently selected is not possible -> select the most preferred default
+                boolean found = false;
+                for (LogTypeTrackable candidate : PREFERRED_DEFAULTS) {
+                    if (logTypesTrackable.contains(candidate)) {
+                        setType(candidate, false);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    setType(logTypesTrackable.get(0), false);
+                }
                 showToast(res.getString(R.string.info_log_type_changed));
             }
         }
 
-        showProgress(!loggingManager.postReady());
+        showProgress(false);
     }
 
     @Override
@@ -128,7 +140,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
-        final Uri uri = AndroidBeam.getUri(getIntent());
 
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -143,21 +154,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             // Load Tracking Code
             if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TRACKING_CODE))) {
                 trackingCode = extras.getString(Intents.EXTRA_TRACKING_CODE);
-            }
-        }
-
-        // try to get data from URI
-        if (geocode == null && uri != null) {
-            geocode = ConnectorFactory.getTrackableFromURL(uri.toString());
-        }
-
-        // try to get data from URI from a potential tracking Code
-        if (geocode == null && uri != null) {
-            final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(uri.toString());
-
-            if (!tbTrackingCode.isEmpty()) {
-                brand = tbTrackingCode.brand;
-                geocode = tbTrackingCode.trackingCode;
             }
         }
 
@@ -258,37 +254,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         init();
     }
 
-    @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
-        super.onCreateContextMenu(menu, view, info);
-        final int viewId = view.getId();
-
-        if (viewId == R.id.type) {
-            for (final LogTypeTrackable typeOne : possibleLogTypesTrackable) {
-                menu.add(viewId, typeOne.id, 0, typeOne.getLabel());
-            }
-        }
-    }
-
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        final int group = item.getGroupId();
-        final int id = item.getItemId();
-
-        if (group == R.id.type) {
-            setType(LogTypeTrackable.getById(id));
-
-            return true;
-        }
-
-        return false;
-    }
-
     private void init() {
-        registerForContextMenu(binding.type);
-        binding.type.setOnClickListener(this::openContextMenu);
+        logType.setTextView(binding.type).setDisplayMapperPure(LogTypeTrackable::getLabel);
+        logType.setValues(possibleLogTypesTrackable);
+        logType.setChangeListener(lt -> setType(lt, true));
 
-        setType(typeSelected);
+        setType(typeSelected, false);
 
         // show/hide Time selector
         date.setTimeVisible(loggingManager.canLogTime());
@@ -300,8 +271,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             updateCoordinates(geocache.getCoords());
             binding.coordinates.setOnClickListener(new CoordinatesListener());
         }
-
-        initTwitter();
 
         if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
             possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
@@ -318,9 +287,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
     }
 
-    public void setType(final LogTypeTrackable type) {
+    public void setType(final LogTypeTrackable type, final boolean skipUpdateTextSpinner) {
         typeSelected = type;
-        binding.type.setText(typeSelected.getLabel());
+        if (!skipUpdateTextSpinner) {
+            logType.set(type);
+        }
 
         // show/hide Tracking Code Field for note type
         if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
@@ -348,15 +319,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private void showProgress(final boolean loading) {
         readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-    }
-
-    private void initTwitter() {
-        binding.tweet.setChecked(true);
-        if (Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            binding.tweetBox.setVisibility(View.VISIBLE);
-        } else {
-            binding.tweetBox.setVisibility(View.GONE);
-        }
     }
 
     @Override
@@ -424,7 +386,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             } else {
                 // Redirect user to concerned connector settings
                 //Dialogs.confirmYesNo(this, res.getString(R.string.settings_title_open_settings), res.getString(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()), (dialog, which) -> {
-                SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> {
+                SimpleDialog.of(this).setTitle(R.string.settings_title_open_settings).setMessage(R.string.err_trackable_log_not_anonymous, trackable.getBrand().getLabel(), connector.getServiceTitle()).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> {
                     if (connector.getPreferenceActivity() > 0) {
                         SettingsActivity.openForScreen(connector.getPreferenceActivity(), LogTrackableActivity.this);
                     } else {

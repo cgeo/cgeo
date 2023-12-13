@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">キャッシュ</string>
     <string name="detail">詳細</string>
@@ -87,6 +84,8 @@
     <string name="wpnew_trailhead">経由地</string>
     <string name="wpnew_waypoint">マーカー</string>
     <string name="wpnew_original">オリジナル</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">発見</string>
     <string name="log_dnf">未発見</string>
@@ -125,7 +124,6 @@
     <string name="log_saving">ログを投稿中…</string>
     <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
-    <string name="log_posting_twitter">ツイートを投稿中…</string>
     <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
     <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
@@ -153,10 +151,6 @@
     <string name="log_smilies">スマイルマーク</string>
     <string name="log_image">画像</string>
     <string name="log_images">画像</string>
-    <string name="log_image_attach">画像を添付</string>
-    <string name="log_image_stored">ファイル選択</string>
-    <string name="log_image_camera">撮影</string>
-    <string name="log_image_delete">削除</string>
     <string name="log_image_caption">タイトル</string>
     <string name="log_image_description">説明</string>
     <string name="log_image_scale">拡大縮小</string>
@@ -195,7 +189,6 @@
     <string name="err_none">OK</string>
     <string name="err_parse">ログインページの解析に失敗しました</string>
     <string name="err_captcha">このサービスにはCaptchaが必要です。ブラウザでgeocaching.comを開き、そこに表示されるCaptchaを解いてログインしてください。その後、再度c:geoでログインを試みてください。</string>
-    <string name="err_server">Geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_ec">Extremcaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_lc">labs.geocaching.comに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_su">Geocaching.suに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
@@ -219,7 +212,6 @@
     <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした</string>
     <string name="err_detail_still_working">ほかのタスクがまだ動作中です</string>
     <string name="err_detail_premium_log_found">このキャッシュはgeocaching.comプレミアム会員のみ利用できます。そのためキャッシュ情報を表示することはできません。\n\nただし、このキャッシュをすでに発見している場合はこちらからログを書くことは出来ます</string>
-    <string name="err_watchlist_still_managing">まだウォッチリストを管理中です</string>
     <string name="err_watchlist_failed">ウォッチリストの変更に失敗しました</string>
     <string name="err_application_no">適切なアプリが見つかりません</string>
     <string name="err_auth_initialize">認証プロセスの初期化に失敗しました</string>
@@ -543,24 +535,6 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">サブフィルタが未定義です</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
-    <string name="cache_filter_stored_since_notstored">未保存</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0時間前</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8時間前</item>
-        <item>24時間前</item>
-        <item>7日前</item>
-        <item>30日前</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8h</item>
-        <item>24h</item>
-        <item>7日</item>
-        <item>30日</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">時の始まり</string>
-    <string name="cache_filter_stored_since_stored_max_short">最大</string>
     <!-- about -->
     <string name="about_version">バージョン</string>
     <string name="about_changelog">更新履歴</string>
@@ -581,7 +555,6 @@
     <string name="about_system_write_logcat_type_extended">拡張</string>
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
-    <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>
@@ -621,7 +594,6 @@
     <string name="settings_title_map_data">地図データ</string>
     <string name="settings_title_offline_routing">オフライン ルート検索</string>
     <string name="settings_summary_offline_routing">オフラインルート検索は、BRouterアプリをインストール(セットアップ)しているか、c:geoルート検索が有効になっていると使用できます</string>
-    <string name="settings_title_map_rotation">地図の回転 (Googleマップ)</string>
     <string name="settings_title_waypoints">ウェイポイント</string>
     <string name="settings_title_map_content">地図の表示</string>
     <string name="settings_title_map_behavior">地図の動作</string>
@@ -644,7 +616,6 @@
     <string name="init_nearbysearchlimit_title">近くの検索の範囲</string>
     <string name="init_nearbysearchlimit_description">近くの検索でキャッシュまでの距離の範囲。0にすると無制限になります</string>
     <string name="settings_category_geocaching_additionals">ほかのサービスとアドオン</string>
-    <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
     <string name="settings_service_activate">有効化</string>
@@ -773,6 +744,7 @@
         <item>ライト</item>
         <item>ダーク</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">壁紙</string>
     <string name="init_summary_wallpaper">端末の壁紙をホーム画面の背景として表示</string>
     <!-- backup / restore -->
@@ -912,9 +884,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org</string>
     <string name="settings_settings">設定</string>
     <string name="settings_information">情報</string>
-    <string name="settings_advanced">詳細設定</string>
-    <string name="settings_twitter_cache_message">発見したキャッシュのメッセージ</string>
-    <string name="settings_twitter_trackable_message">発見したトラッカブルのメッセージ</string>
     <string name="init_ec_icons">地図のアイコン</string>
     <string name="settings_ec_icons_other">独自のスタイル</string>
     <string name="settings_ec_icons_oc">OCと同じ</string>
@@ -999,7 +968,6 @@
     <string name="persistablefolder_spoilerimages">スポイラー画像</string>
     <string name="persistablefolder_routingbase">ルート検索</string>
     <string name="persistablefolder_routingtiles">ルート検索データ</string>
-    <string name="persistableuri_track">トラックファイル</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s、%3$s/%4$s 完了</string>
     <string name="folder_process_status_currentfile">処理中:%1$s</string>
@@ -1040,8 +1008,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">次の処理で<b>c:geo</b>が%sにアクセスできるようになります</string>
     <string name="auth_token_explain_long">アカウント情報を入力して「c:geoを承認」ボタンをタップすると、%sに接続して認証トークンを取得します</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geoはTwitterにポストするための認証を受けました</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geoは%sと連携するための認証を受けました</string>
     <!-- auth geokrety -->
@@ -1064,7 +1030,6 @@
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
     <string name="cache_delete_userdefined_waypoints_success">ユーザー定義のウェイポイントを削除しました</string>
     <string name="cache_offline_store">保存</string>
-    <string name="cache_offline_stored">デバイスに保存済み</string>
     <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
     <string name="cache_offline_time_mins_few">数分前</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1096,10 +1061,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">ウェイポイント抽出しない</string>
     <string name="cache_personal_note_limit">パーソナルノートの制限</string>
     <string name="cache_personal_note_upload">アップロード</string>
-    <string name="cache_personal_note_uploading">パーソナルノートをアップロード中</string>
     <string name="cache_personal_note_upload_done">パーソナルノートをアップロードしました</string>
     <string name="cache_personal_note_upload_error">パーソナルノートのアップロードに失敗しました</string>
-    <string name="cache_personal_note_upload_cancelled">パーソナルノートのアップロードをキャンセルされました</string>
     <string name="cache_description">説明</string>
     <string name="cache_description_table_note">キャッシュの説明にはhtmlを使ったテーブル表が含まれています。正しく表示するには%sで開く必要があるかもしれません</string>
     <string name="cache_area_description">エリアの説明</string>
@@ -1144,14 +1107,6 @@
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
     <string name="cache_dialog_refresh_title">更新</string>
     <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中…</string>
-    <string name="cache_dialog_watchlist_add_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_add_message">ウォッチリストに追加中…</string>
-    <string name="cache_dialog_watchlist_remove_title">ウォッチリスト</string>
-    <string name="cache_dialog_watchlist_remove_message">ウォッチリストから削除中…</string>
-    <string name="cache_dialog_favorite_add_title">お気に入り</string>
-    <string name="cache_dialog_favorite_add_message">お気に入りに追加中…</string>
-    <string name="cache_dialog_favorite_remove_title">お気に入り</string>
-    <string name="cache_dialog_favorite_remove_message">お気に入りから削除中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_target">目的地に設定</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
@@ -1276,8 +1231,6 @@
     <string name="internal_goto_targets_description">このキャッシュには最近の「移動」の行先が保存されています。メインメニューの「移動」を使用すると自動的に作成されます。入力された座標はこのキャッシュのウェイポイントに保存されます。これらの座標が不要になったら、このキャッシュまたはそのウェイポイントを安全に削除できます。キャッシュをほかのリストに移動もできます</string>
     <string name="init_longtap_map">地図でのロングタップ</string>
     <string name="init_summary_longtap_map">ロングタップを有効化(地図のアイコン上: 個別ルート作成、アイコン以外: ユーザー定義のキャッシュ/ウェイポイントを作成)</string>
-    <string name="onetime_info_longtap_disabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は無効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で有効にできます</string>
-    <string name="onetime_info_longtap_enabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は有効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で無効にできます</string>
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
@@ -1339,8 +1292,6 @@
     <string name="waypoint_save_and_modify_on_website">c:geo内部とWebサイトでキャッシュ座標を変更</string>
     <string name="waypoint_reset_cache_coords">キャッシュ座標をリセット</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Webサイトでのキャッシュ座標をリセットしました</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Webサイトでのキャッシュ座標をリセットしています…</string>
-    <string name="waypoint_reset">リセット</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo内部のみでリセット</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo内部とWebサイトでリセット</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Webサイトではキャッシュ座標の修正に対応していません</string>
@@ -1408,8 +1359,6 @@
     <string name="imageview_mimetype">MIMEタイプ</string>
     <string name="imageview_metadata_geopoint">ジオポイント</string>
     <string name="imageview_metadata_comment">コメント</string>
-    <!-- visit -->
-    <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
     <string name="map_map">地図</string>
     <string name="map_live">オンライン地図</string>
@@ -1431,10 +1380,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
     <string name="onetime_mapthemefixslow_message">zip圧縮されてないテーマファイルでは表示が遅くなる時があります。zip圧縮するかテーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
-    <string name="init_hidewp">ウェイポイントを非表示</string>
-    <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
-    <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
-    <string name="init_summary_hidewp_visited">地図上で訪問したウェイポイントを非表示</string>
     <string name="map_theme_select">地図テーマを選択</string>
     <string name="map_theme_options">テーマのオプション</string>
     <string name="map_language">地図の言語</string>
@@ -1481,7 +1426,6 @@
     <string name="search_finder">発見したユーザー名</string>
     <string name="search_finder_prefill">ユーザー名</string>
     <string name="search_finder_button">発見したユーザー名で検索</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1877,7 +1821,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="fangroup_link"><a href="">ドイツ語ユーザーグループ</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Playストアのc:geo</a></string>
-    <string name="about_twitter">キャッシュのログを書いたら<b>c:geo</b>にTwitterでつぶやいてほしい?</string>
     <string name="github_title">課題/バグ管理</string>
     <string name="faq_title">よくある質問</string>
     <!-- status (used via string based resource loading) -->
@@ -1891,7 +1834,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">コンパスで音声案内</string>
-    <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
     <string name="tts_running">スピーチサービスを実行しています…</string>
@@ -1987,7 +1929,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="notification_channel_downloader_description">ダウンロード結果の通知(オフラインマップなど)</string>
     <string name="notification_channel_cache_download_name">キャッシュダウンローダー</string>
     <string name="notification_channel_cache_download_description">キャッシュのバックグラウンドダウンロード結果の通知</string>
-    <string name="notification_proximity_title">c:geo接近通知</string>
     <!-- individual routes -->
     <string name="individual_route">個別ルート</string>
     <string name="individual_route_added">ルートに追加しました</string>
@@ -2013,18 +1954,16 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     </plurals>
     <string name="individual_route_set_as_start_title">ルート開始点にする</string>
     <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
     <string name="routes_tracks_menu">ルート/トラック</string>
-    <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
     <string name="track">トラック</string>
-    <string name="make_visible">表示</string>
-    <string name="hide">非表示</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
@@ -2149,11 +2088,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="wizard_platforms_intro">c:geoでキャッシュを探すには、対応しているジオキャッシングサイトの少なくとも1つのアカウントが必要です。\nお持ちのアカウントでログインするかアカウント作成してください</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencachingや他のサイト</string>
-    <string name="wizard_welcome_advanced">追加設定</string>
-    <string name="wizard_advanced_offlinemaps_label">オフライン地図のダウンロード</string>
-    <string name="wizard_advanced_offlinemaps_info">ここでは追加の設定ができます\n\nオフラインで使うために地図ファイルをダウンロードできます</string>
-    <string name="wizard_advanced_routing_label">c:geoルート検索を使用する</string>
-    <string name="wizard_advanced_routing_info">c:geoルート検索(Brouter互換)はオフライン用のルート検索エンジンです。データの自動ダウンロードなどもできます。</string>
     <string name="wizard_advanced_restore_label">復元</string>
     <string name="wizard_advanced_restore_info">バックアップからc:geo設定やキャッシュ情報を復元できます</string>
     <string name="status_not_ok">未完了</string>
@@ -2173,8 +2107,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="back">戻る</string>
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">すべて選択</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->
@@ -2193,4 +2126,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_clown">ピエロ</string>
     <string name="smiley_8ball">8ボール</string>
     <string name="smiley_question">疑問</string>
+    <!-- message center notifications -->
 </resources>

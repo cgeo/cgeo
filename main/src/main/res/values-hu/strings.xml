@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Láda</string>
     <string name="detail">Adatok</string>
@@ -87,6 +84,8 @@
     <string name="wpnew_trailhead">Keresztül</string>
     <string name="wpnew_waypoint">Kijelölő</string>
     <string name="wpnew_original">Eredeti</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Megtaláltam</string>
     <string name="log_dnf">Nem találtam meg</string>
@@ -125,7 +124,6 @@
     <string name="log_saving">Log mentése…</string>
     <string name="log_saving_and_uploading">Log küldése és képek feltöltése…</string>
     <string name="log_posting_log">Log küldése…</string>
-    <string name="log_posting_twitter">Twittelés…</string>
     <string name="log_posting_vote">Ládaszavazat küldése…</string>
     <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
@@ -153,10 +151,6 @@
     <string name="log_smilies">Hangulatjelek</string>
     <string name="log_image">Kép</string>
     <string name="log_images">Képek</string>
-    <string name="log_image_attach">Kép csatolása</string>
-    <string name="log_image_stored">Meglévő</string>
-    <string name="log_image_camera">Új</string>
-    <string name="log_image_delete">Törlés</string>
     <string name="log_image_caption">Felirat</string>
     <string name="log_image_description">Leírás</string>
     <string name="log_image_scale">Méretezés</string>
@@ -194,7 +188,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Hiba a bejelentkező oldalon</string>
-    <string name="err_server">A geocaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_ec">Az extremcaching.com nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_lc">Nem sikerült kapcsolatba lépni a labs.geocaching.com oldallal. A webhely leállt vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_su">A geocaching.su. nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
@@ -218,7 +211,6 @@
     <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
     <string name="err_detail_still_working">Egy másik feladat még folyamatban van.</string>
     <string name="err_detail_premium_log_found">Ez a láda csak a geocaching.com prémium tagjai számára érhető el. Ezért a láda információi nem jeleníthetők meg.\n\nHa azonban már megtaláltad ezt a ládát, itt logolhatod.</string>
-    <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
     <string name="err_watchlist_failed">A figyelőlista módosítása sikertelen.</string>
     <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
     <string name="err_auth_initialize">A c:geo nem tudta elindítani a hitelesítést.</string>
@@ -489,7 +481,6 @@
     <string name="settings_title_navigation_menu">Navigációs menü</string>
     <string name="settings_category_geocaching_platform">Geocaching platformok</string>
     <string name="settings_category_geocaching_additionals">További szolgáltatások és addonok</string>
-    <string name="settings_category_social">Közösségi média</string>
     <string name="settings_category_logging_other">Egyéb logolási beállítások</string>
     <string name="settings_goto_url_button">Tovább…</string>
     <string name="settings_service_activate">Aktiválás</string>
@@ -566,6 +557,7 @@
     <string name="init_livelist">Ládák irányának jelzése a listán</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup">Ládák / útpontok biztonsági mentése</string>
     <string name="init_backup_backup">Biztonsági mentés</string>
@@ -633,9 +625,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
     <string name="settings_settings">Beállítások</string>
     <string name="settings_information">További információk</string>
-    <string name="settings_advanced">Haladó beállítások</string>
-    <string name="settings_twitter_cache_message">Twitter üzenet megtalált ládához</string>
-    <string name="settings_twitter_trackable_message">Twitter üzenet megtalált utazóhoz</string>
     <string name="init_ec_icons">Térkép ikonok</string>
     <string name="settings_ec_icons_other">Saját stílus</string>
     <string name="settings_ec_icons_oc">OC stílusú ládajelölők</string>
@@ -688,8 +677,6 @@
     <string name="auth_credentials_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">Itt engedélyeztetheted a <b>c:geo</b> hozzáférését a(z) %s adataihoz.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">Twitter: A c:geo engedélyt kapott bejegyzések küldésére.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <!-- auth geokrety -->
@@ -709,7 +696,6 @@
     <string name="last_day_available">utolsó nap</string>
     <string name="cache_offline_refresh">Frissítés</string>
     <string name="cache_offline_store">Mentés</string>
-    <string name="cache_offline_stored">Elmentve az eszközre</string>
     <string name="cache_offline_not_ready">Nem érhető el offline</string>
     <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
     <plurals name="cache_offline_about_time_mins">
@@ -736,10 +722,8 @@
     <string name="cache_personal_note_edit">Szerkesztés</string>
     <string name="cache_personal_note_limit">Személyes megjegyzés max. hossza</string>
     <string name="cache_personal_note_upload">Feltöltés</string>
-    <string name="cache_personal_note_uploading">Személyes megjegyzés feltöltése</string>
     <string name="cache_personal_note_upload_done">Személyes megjegyzés feltöltve</string>
     <string name="cache_personal_note_upload_error">A személyes megjegyzés feltöltése sikertelen</string>
-    <string name="cache_personal_note_upload_cancelled">Személyes megjegyzés feltöltése megszakítva</string>
     <string name="cache_description">Leírás</string>
     <string name="cache_description_table_note">A leírás táblázatot is tartalmaz. Lehetséges, hogy csak a %s jeleníti meg azt helyesen.</string>
     <string name="cache_area_description">Terület leírása</string>
@@ -774,14 +758,6 @@
     <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
     <string name="cache_dialog_refresh_title">Frissítés</string>
     <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
-    <string name="cache_dialog_watchlist_add_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_add_message">Láda hozzáadása a figyelőlistádhoz…</string>
-    <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
-    <string name="cache_dialog_watchlist_remove_message">Láda törlése a figyelőlistádról…</string>
-    <string name="cache_dialog_favorite_add_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_add_message">Láda hozzáadása a kedvencekhez…</string>
-    <string name="cache_dialog_favorite_remove_title">Kedvenc</string>
-    <string name="cache_dialog_favorite_remove_message">Láda törlése a kedvencek közül…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -893,8 +869,6 @@
     <string name="waypoint_save_and_modify_on_website">A láda új koordinátái a c:geo-ban és a weboldalon</string>
     <string name="waypoint_reset_cache_coords">Ládakoordináták visszaállítása</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">A ládakoordináták visszaállítása megtörtént a weboldalon.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Ládakoordináták visszaállítása a weboldalon…</string>
-    <string name="waypoint_reset">Visszaállítás</string>
     <string name="waypoint_localy_reset_cache_coords">Visszaállítás a c:geo-ban</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Visszaállítás a c:geo-ban és a weboldalon</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">A weboldal nem támogatja a ládakoordináták módosítását.</string>
@@ -911,8 +885,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
     <!-- map -->
     <string name="map_map">Térkép</string>
     <string name="map_live">Élő térkép</string>
@@ -1263,7 +1235,6 @@
     <string name="website_title">Weboldal</string>
     <string name="facebook_link"><a href="">c:geo honlap</a></string>
     <string name="market_link"><a href="">c:geo a Google Play-en</a></string>
-    <string name="about_twitter">Akarod, hogy a <b>c:geo</b> új bejegyzést írjon a Twitter-re, amikor megtalálsz egy ládát?</string>
     <string name="faq_title">GYIK</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1354,6 +1325,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1372,10 +1344,11 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Mégsem</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

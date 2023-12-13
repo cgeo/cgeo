@@ -17,6 +17,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.Projection;
@@ -99,12 +100,18 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
                         .zIndex(zLevel));
                 break;
             case POLYGON:
-                context = map.addPolygon(new PolygonOptions()
+                final PolygonOptions polygonOptions = new PolygonOptions()
                         .strokeWidth(strokeWidth)
                         .strokeColor(strokeColor)
                         .fillColor(fillColor)
                         .addAll(GP_CONVERTER.toList(item.getPoints()))
-                        .zIndex(zLevel));
+                        .zIndex(zLevel);
+                if (item.getHoles() != null) {
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        polygonOptions.addHole(GP_CONVERTER.toList(hole));
+                    }
+                }
+                context = map.addPolygon(polygonOptions);
                 break;
             case POLYLINE:
             default:
@@ -122,6 +129,7 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             marker = map.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorCache.toBitmapDescriptor(new BitmapDrawable(resources, icon.getBitmap())))
                 .rotation(icon.getRotation())
+                .flat(icon.isFlat())
                 .position(GP_CONVERTER.to(item.getCenter()))
                 .anchor(icon.getXAnchor(), icon.getYAnchor())
                 .zIndex(zLevel));
@@ -132,6 +140,10 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
 
     @Override
     public void remove(final GeoPrimitive item, final Pair<Object, Object> context) {
+        if (context == null) {
+            Log.e("GoogleV2GeoItemLayer.remove: can't remove <null> item"); // todo why does this happen at all? Especially as items still get removed correctly even if this is triggered...
+            return;
+        }
         removeSingle(context.first);
         removeSingle(context.second);
     }

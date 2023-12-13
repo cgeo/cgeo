@@ -9,8 +9,6 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import android.location.Location;
@@ -20,16 +18,18 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 
-public class PositionHistoryLayer implements ILayer {
+import javax.annotation.Nullable;
 
-    private final GeoItemLayer<String> geoItemLayer = new GeoItemLayer<>("history");
+public class PositionHistoryLayer {
+
+    private final GeoItemLayer<String> layer;
 
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
      */
     private static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
 
-    Location lastPos = null;
+    private static final String KEY_HISTORY_LINE = "historyLine";
 
     final UnifiedMapViewModel viewModel;
 
@@ -39,25 +39,26 @@ public class PositionHistoryLayer implements ILayer {
             .setStrokeWidth(MapLineUtils.getHistoryLineWidth(true))
             .build();
 
-    public PositionHistoryLayer(final AppCompatActivity activity) {
+    public PositionHistoryLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
+        this.layer = layer;
+
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getPositionHistory().observe(activity, positionHistory -> drawHistory());
+        viewModel.positionHistory.observe(activity, positionHistory -> drawHistory(null));
 
-        viewModel.getPositionAndHeading().observe(activity, positionAndHeading -> {
-            if (!positionAndHeading.first.equals(lastPos)) {
-                lastPos = positionAndHeading.first;
-                drawHistory();
+        viewModel.location.observe(activity, locationWrapper -> {
+            if (locationWrapper.needsRepaintForDistanceOrAccuracy) {
+                drawHistory(locationWrapper.location);
             }
         });
     }
 
-    private void drawHistory() {
-        final PositionHistory history = viewModel.getPositionHistory().getValue();
+    private void drawHistory(@Nullable final Location currentLoc) {
+        final PositionHistory history = viewModel.positionHistory.getValue();
 
         // only draw if position history is currently enabled. Remove possible old history line if not.
         if (history == null || history.getHistory().isEmpty()) {
-            geoItemLayer.remove("historyLine");
+            layer.remove(KEY_HISTORY_LINE);
             return;
         }
 
@@ -75,23 +76,12 @@ public class PositionHistoryLayer implements ILayer {
             segmentPoints.add(new Geopoint(historyElements.get(i).getLocation()));
         }
         // always add current position
-        if (lastPos != null) {
-            segmentPoints.add(new Geopoint(lastPos));
+        if (currentLoc != null) {
+            segmentPoints.add(new Geopoint(currentLoc));
         }
-        geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle));
+        geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_HISTORY).build());
 
-        geoItemLayer.put("historyLine", geoGroup.build());
+        layer.put(KEY_HISTORY_LINE, geoGroup.build());
     }
-
-    @Override
-    public void init(final IProviderGeoItemLayer<?> provider) {
-        geoItemLayer.setProvider(provider, LayerHelper.ZINDEX_HISTORY);
-    }
-
-    @Override
-    public void destroy() {
-        geoItemLayer.destroy();
-    }
-
 
 }

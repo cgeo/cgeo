@@ -30,7 +30,7 @@ public class DownloaderTest {
     private static int count(final List<Download> list, final boolean isDir) {
         int i = 0;
         for (Download d : list) {
-            if (d.getIsDir() == isDir) {
+            if (d.isDir() == isDir) {
                 i++;
             }
         }
@@ -55,7 +55,7 @@ public class DownloaderTest {
         assertThat(list.size()).isBetween(53, 57);
 
         // first entry has to be the "up" entry
-        assertThat(list.get(0).getIsDir()).isTrue();
+        assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(5);
@@ -79,7 +79,7 @@ public void testOpenAndroMaps() {
         assertThat(list.size()).isBetween(55, 65);
 
         // first entry has to be the "up" entry
-        assertThat(list.get(0).getIsDir()).isTrue();
+        assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
         assertThat(count(list, true)).isEqualTo(1);
@@ -90,9 +90,9 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "Scandinavia-SouthWest");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB
+        final String sizeInfoString = d.getSizeInfo(); // 1.7 GB / 2.1GB as of 5.11.23
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(1.6F, 2.0F);
+        assertThat(sizeInfoFloat).isBetween(1.6F, 2.5F);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SplashActivity;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -13,6 +14,7 @@ import static cgeo.geocaching.utils.Formatter.formatDateForFilename;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,6 +46,17 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         setContentView(R.layout.generic_recyclerview);
         setTitle(R.string.debug_current_downloads);
         fillAdapter();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!isTaskRoot()) {
+            super.onBackPressed();
+        } else {
+            // if launched from outside c:geo
+            startActivity(new Intent(this, SplashActivity.class));
+            finish();
+        }
     }
 
     private String formatStatus(final int statusCode) {
@@ -109,7 +122,8 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
         // retrieve list of pending downloads
         pendingDownloads = PendingDownload.getAllPendingDownloads();
         if (pendingDownloads.size() == 0) {
-            SimpleDialog.of(this).setTitle(R.string.debug_current_downloads).setMessage(R.string.downloader_no_pending_downloads).confirm((dialog, which) -> finish());
+            showShortToast(R.string.downloader_no_pending_downloads);
+            finish();
         } else {
             // get detailed info
             downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
@@ -218,7 +232,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
             viewHolder.title.setText(download == null ? "" : download.filename + " (# " + download.id + ")");
             if (download != null) {
                 markwon.setMarkdown(viewHolder.detail, download.info);
-                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm((dialog, which) -> activity.cancelDownload(download.id, false)));
+                viewHolder.buttonDelete.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.downloader_cancel_download).setMessage(TextParam.text(String.format(activity.getString(R.string.downloader_cancel_file), download.filename))).confirm(() -> activity.cancelDownload(download.id, false)));
                 if (download.isFailedDownload) {
                     viewHolder.buttonResume.setVisibility(View.VISIBLE);
                     viewHolder.buttonResume.setOnClickListener(v -> {

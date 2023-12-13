@@ -109,6 +109,7 @@ public final class NavigationAppFactory {
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
         PEBBLE(new PebbleApp(), 17, R.string.pref_navigation_menu_pebble),
         MAPSWITHME(new MapsMeApp(), 22, R.string.pref_navigation_menu_mapswithme),
+        ORGANICMAP(new OrganicMapsApp(), 29, R.string.pref_navigation_menu_organicmaps),
         CRUISER(new CruiserNavigationApp(), 28, R.string.pref_navigation_menu_cruiser);
 
         NavigationAppsEnum(final App app, final int id, final int preferenceKey) {

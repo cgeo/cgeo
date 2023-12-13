@@ -2,8 +2,10 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.AmendmentUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
@@ -33,7 +35,10 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
+import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -41,11 +46,13 @@ import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EventTimeParser;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LazyInitializedList;
+import cgeo.geocaching.utils.LazyInitializedSet;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.ShareUtils;
@@ -121,6 +128,7 @@ public class Geocache implements IWaypoint {
     private String ownerUserId = "";
     private int assignedEmoji = 0;
     private int alcMode = 0;
+    private Tier tier;
 
     @Nullable
     private Date hidden = null;
@@ -175,6 +183,8 @@ public class Geocache implements IWaypoint {
             return inDatabase() ? DataStore.loadWaypoints(geocode) : new LinkedList<>();
         }
     };
+    private final LazyInitializedSet<Category> categories = new LazyInitializedSet<>(() ->
+            inDatabase() ? DataStore.loadCategories(geocode) : null);
     private List<Image> spoilers = null;
 
     private List<Trackable> inventory = null;
@@ -202,8 +212,8 @@ public class Geocache implements IWaypoint {
 
     private CacheVariableList variables;
 
-    //transient field, used for online search by finder only
-    private String finder = null;
+    //transient field, used for online searches only
+    private SearchCacheData searchCacheData = null;
 
     public void setChangeNotificationHandler(@Nullable final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -212,9 +222,12 @@ public class Geocache implements IWaypoint {
     /**
      * Sends a change notification to interested parties
      */
-    private void notifyChange() {
+    private void notifyChange(@Nullable final Context context) {
         if (changeNotificationHandler != null) {
             changeNotificationHandler.sendEmptyMessage(0);
+        }
+        if (context != null) {
+            GeocacheChangedBroadcastReceiver.sendBroadcast(context, geocode);
         }
     }
 
@@ -350,6 +363,12 @@ public class Geocache implements IWaypoint {
         if (myVote == 0) {
             myVote = other.myVote;
         }
+        if (tier == null || Tier.NONE == tier) {
+            tier = other.tier;
+        }
+        if (categories.isEmpty()) {
+            setCategories(other.getCategories());
+        }
 
         mergeWaypoints(other.waypoints, false);
 
@@ -396,8 +415,9 @@ public class Geocache implements IWaypoint {
         if (assignedEmoji == 0) {
             assignedEmoji = other.assignedEmoji;
         }
-        if (finder == null) {
-            finder = other.finder;
+
+        if (searchCacheData == null) {
+            searchCacheData = other.searchCacheData;
         }
 
         this.eventTimesInMin.reset(); // will be recalculated if/when necessary
@@ -484,7 +504,7 @@ public class Geocache implements IWaypoint {
                 Objects.equals(logCounts, other.logCounts) &&
                 Objects.equals(hasLogOffline, other.hasLogOffline) &&
                 finalDefined == other.finalDefined &&
-                Objects.equals(finder, other.finder);
+                Objects.equals(searchCacheData, other.searchCacheData);
     }
 
     public boolean hasTrackables() {
@@ -583,8 +603,11 @@ public class Geocache implements IWaypoint {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.info_log_saved));
             DataStore.saveVisitDate(geocode, logEntry.date);
             hasLogOffline = Boolean.TRUE;
+            if (Settings.removeFromRouteOnLog()) {
+                DataStore.removeFirstMatchingIdFromIndividualRoute(fromActivity, geocode);
+            }
             offlineLog = logEntry;
-            notifyChange();
+            notifyChange(fromActivity);
         } else {
             ActivityMixin.showToast(fromActivity, res.getString(R.string.err_log_post_failed));
         }
@@ -621,10 +644,10 @@ public class Geocache implements IWaypoint {
     /**
      * Drop offline log for a given geocode.
      */
-    public void clearOfflineLog() {
+    public void clearOfflineLog(@Nullable final Context context) {
         DataStore.clearLogOffline(geocode);
         setHasLogOffline(false);
-        notifyChange();
+        notifyChange(context);
     }
 
     @NonNull
@@ -671,22 +694,17 @@ public class Geocache implements IWaypoint {
         return getConnector().getCacheCreateNewLogUrl(this) != null;
     }
 
-
-    public boolean supportsLogImages() {
-        return getConnector().supportsLogImages();
-    }
-
     public boolean supportsOwnCoordinates() {
         return getConnector().supportsOwnCoordinates();
     }
 
     @NonNull
-    public ILoggingManager getLoggingManager(final LogCacheActivity activity) {
-        return getConnector().getLoggingManager(activity, this);
+    public ILoggingManager getLoggingManager() {
+        return getConnector().getLoggingManager(this);
     }
 
     public float getDifficulty() {
-        return difficulty;
+        return getConnector().supportsDifficultyTerrain() ? difficulty : -1;
     }
 
     @Override
@@ -717,7 +735,7 @@ public class Geocache implements IWaypoint {
     }
 
     public float getTerrain() {
-        return terrain;
+        return getConnector().supportsDifficultyTerrain() ? terrain : -1;
     }
 
     public boolean isArchived() {
@@ -972,6 +990,10 @@ public class Geocache implements IWaypoint {
     @NonNull
     public List<String> getAttributes() {
         return attributes.getUnderlyingList();
+    }
+
+    public Set<Category> getCategories() {
+        return categories.getUnderlyingSet();
     }
 
     @NonNull
@@ -1290,6 +1312,14 @@ public class Geocache implements IWaypoint {
         return alcMode;
     }
 
+    public void setTier(final Tier tier) {
+        this.tier = tier;
+    }
+
+    public Tier getTier() {
+        return this.tier;
+    }
+
     /**
      * Set the number of users watching this geocache
      *
@@ -1467,6 +1497,13 @@ public class Geocache implements IWaypoint {
         this.attributes.clear();
         if (attributes != null) {
             this.attributes.addAll(attributes);
+        }
+    }
+
+    public void setCategories(final Collection<Category> categories) {
+        this.categories.clear();
+        if (categories != null) {
+            this.categories.addAll(CollectionStream.of(categories).filter(Category::isValid).toList());
         }
     }
 
@@ -1934,8 +1971,8 @@ public class Geocache implements IWaypoint {
 
     @Override
     public boolean equals(final Object obj) {
-        // TODO: explain the following line or remove this non-standard equality method
-        // just compare the geocode even if that is not what "equals" normally does
+        // just compare the geocode even if that is not what "equals" normally does.
+        // Reason: geocaches should be treated as equal even if two geocache objects have different amount of data cause they come from different sources.
         return this == obj || (obj instanceof Geocache && StringUtils.isNotEmpty(geocode) && geocode.equals(((Geocache) obj).geocode));
     }
 
@@ -2148,16 +2185,19 @@ public class Geocache implements IWaypoint {
             return search;
         }
 
+
+        SearchResult result = null;
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, handler);
+            result = GCConnector.getInstance().searchByGeocode(null, guid, handler);
+        } else {
+            final IConnector connector = ConnectorFactory.getConnector(geocode);
+            if (connector instanceof ISearchByGeocode) {
+                result = ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
+            }
         }
-
-        final IConnector connector = ConnectorFactory.getConnector(geocode);
-        if (connector instanceof ISearchByGeocode) {
-            return ((ISearchByGeocode) connector).searchByGeocode(geocode, guid, handler);
-        }
-        return null;
+        AmendmentUtils.amendCaches(result);
+        return result;
     }
 
     public boolean isOffline() {
@@ -2393,7 +2433,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public GeoitemRef getGeoitemRef() {
-        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().markerId);
+        return new GeoitemRef(getGeocode(), getCoordType(), getGeocode(), 0, getName(), getType().iconId);
     }
 
     @NonNull
@@ -2432,15 +2472,15 @@ public class Geocache implements IWaypoint {
      * used for online search metainfos (e.g. finder)
      */
     @Nullable
-    public String getSearchFinder() {
-        return finder;
+    public SearchCacheData getSearchData() {
+        return searchCacheData;
     }
 
     /**
      * used for online search metainfos (e.g. finder)
      */
-    public void setSearchFinder(@Nullable final String finder) {
-        this.finder = finder;
+    public void setSearchData(@Nullable final SearchCacheData searchCacheData) {
+        this.searchCacheData = searchCacheData;
     }
 
     private class EventTimesInMin {

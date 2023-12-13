@@ -258,9 +258,9 @@ public class DownloaderUtils {
             callback.run(folder, true);
         } else if (beforeDownload) {
             SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).setPositiveButton(TextParam.id(R.string.button_continue)).confirm(
-                    (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
+                    () -> callback.run(folder, true), () -> callback.run(folder, false));
         } else {
-            SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show((dialog, which) -> callback.run(folder, false));
+            SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show(() -> callback.run(folder, false));
         }
     }
 

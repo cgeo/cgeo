@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -29,6 +30,7 @@ import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.models.InfoItem;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.DirectionData;
@@ -43,12 +45,15 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
@@ -101,6 +106,10 @@ public class Settings {
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
 
+    public static final int CUSTOMBNITEM_PLACEHOLDER = -2;
+    public static final int CUSTOMBNITEM_NONE = -1;
+    public static final int CUSTOMBNITEM_NEARBY = 0;
+
     public static final int HOURS_TO_SECONDS = 60 * 60;
     public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
 
@@ -111,10 +120,6 @@ public class Settings {
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    // twitter api keys
-    @NonNull private static final String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
-    @NonNull private static final String TWITTER_KEY_CONSUMER_SECRET = CryptUtils.rot13("7vQWceACV9umEjJucmlpFe9FCMZSeqIqfkQ2BnhV9x");
 
     private static boolean useCompass = true;
     private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
@@ -294,14 +299,11 @@ public class Settings {
             // migrate from non standard file location and integer based boolean types
             final Editor e = sharedPrefs.edit();
 
-            e.putString(getKey(R.string.pref_temp_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_temp_twitter_token_public), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_public), null));
             e.putBoolean(getKey(R.string.pref_help_shown), prefsV0.getInt(getKey(R.string.pref_help_shown), 0) != 0);
             e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
             e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
             e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
             e.putInt(getKey(R.string.pref_mapsource), prefsV0.getInt(getKey(R.string.pref_mapsource), MAP_SOURCE_DEFAULT));
-            e.putBoolean(getKey(R.string.pref_twitter), prefsV0.getInt(getKey(R.string.pref_twitter), 0) != 0);
             e.putBoolean(getKey(R.string.pref_showaddress), prefsV0.getInt(getKey(R.string.pref_showaddress), 1) != 0);
             e.putBoolean(getKey(R.string.pref_maptrail), prefsV0.getInt(getKey(R.string.pref_maptrail), 1) != 0);
             e.putInt(getKey(R.string.pref_lastmapzoom), prefsV0.getInt(getKey(R.string.pref_lastmapzoom), 14));
@@ -309,8 +311,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
-            e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
-            e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
             e.putBoolean(getKey(R.string.pref_ratingwanted), prefsV0.getBoolean(getKey(R.string.pref_ratingwanted), true));
             e.putBoolean(getKey(R.string.pref_friendlogswanted), prefsV0.getBoolean(getKey(R.string.pref_friendlogswanted), true));
@@ -483,7 +483,7 @@ public class Settings {
         return CgeoApplication.getInstance() == null ? -1 : CgeoApplication.getInstance().getResources().getInteger(prefKeyId);
     }
 
-    protected static String getString(final int prefKeyId, final String defaultValue) {
+    public static String getString(final int prefKeyId, final String defaultValue) {
         return getStringDirect(getKey(prefKeyId), defaultValue);
     }
 
@@ -500,7 +500,7 @@ public class Settings {
         return Arrays.asList(StringUtils.split(getString(prefKeyId, defaultValue), SEPARATOR_CHAR));
     }
 
-    private static int getInt(final int prefKeyId, final int defaultValue) {
+    public static int getInt(final int prefKeyId, final int defaultValue) {
         return getIntDirect(getKey(prefKeyId), defaultValue);
     }
 
@@ -522,7 +522,7 @@ public class Settings {
 
     }
 
-    private static long getLong(final int prefKeyId, final long defaultValue) {
+    public static long getLong(final int prefKeyId, final long defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
     }
 
@@ -543,7 +543,7 @@ public class Settings {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
     }
 
-    protected static void putString(final int prefKeyId, final String value) {
+    public static void putString(final int prefKeyId, final String value) {
         putStringDirect(getKey(prefKeyId), value);
     }
 
@@ -560,7 +560,7 @@ public class Settings {
         putString(prefKeyId, StringUtils.join(elements, SEPARATOR_CHAR));
     }
 
-    protected static void putBoolean(final int prefKeyId, final boolean value) {
+    public static void putBoolean(final int prefKeyId, final boolean value) {
         if (sharedPrefs == null) {
             return;
         }
@@ -570,11 +570,15 @@ public class Settings {
     }
 
     private static void putInt(final int prefKeyId, final int value) {
+        putIntDirect(getKey(prefKeyId), value);
+    }
+
+    public static void putIntDirect(final String prefKey, final int value) {
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putInt(getKey(prefKeyId), value);
+        edit.putInt(prefKey, value);
         edit.apply();
     }
 
@@ -684,6 +688,10 @@ public class Settings {
 
     public static boolean isSUConnectorActive() {
         return getBoolean(R.string.pref_connectorSUActive, false);
+    }
+
+    public static boolean isBetterCacherConnectorActive() {
+        return getBoolean(R.string.pref_connectorBetterCacherActive, false);
     }
 
     public static boolean isGCPremiumMember() {
@@ -1188,7 +1196,7 @@ public class Settings {
 
     /** use UnifiedMap as default map in certain places */
     public static boolean useUnifiedMap() {
-        return getBoolean(R.string.pref_useUnifiedMap, false);
+        return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
     }
 
     public static void setMapDownloaderSource(final int source) {
@@ -1298,14 +1306,19 @@ public class Settings {
         return !isDarkThemeActive(context, getAppTheme(context));
     }
 
-    @NonNull
-    public static String getTwitterKeyConsumerPublic() {
-        return TWITTER_KEY_CONSUMER_PUBLIC;
-    }
-
-    @NonNull
-    public static String getTwitterKeyConsumerSecret() {
-        return TWITTER_KEY_CONSUMER_SECRET;
+    public static Intent getStartscreenIntent(final @NonNull Activity activity) {
+        final String startscreen = getString(R.string.pref_startscreen, activity.getString(R.string.pref_value_startscreen_home));
+        if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_stored))) {
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_LIST);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_map))) {
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_MAP);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_search))) {
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_SEARCH);
+        } else if (StringUtils.equals(startscreen, activity.getString(R.string.pref_value_startscreen_nearby))) {
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_CUSTOM);
+        } else {
+            return AbstractNavigationBarActivity.getBottomNavigationIntent(activity, AbstractNavigationBarActivity.MENU_HOME);
+        }
     }
 
     public static String getWebDeviceCode() {
@@ -1369,6 +1382,10 @@ public class Settings {
             return getString(R.string.pref_brouterProfileBike, BRouterConstants.BROUTER_PROFILE_BIKE_DEFAULT);
         } else if (mode.equals(RoutingMode.WALK)) {
             return getString(R.string.pref_brouterProfileWalk, BRouterConstants.BROUTER_PROFILE_WALK_DEFAULT);
+        } else if (mode.equals(RoutingMode.USER1)) {
+            return getString(R.string.pref_brouterProfileUser1, null);
+        } else if (mode.equals(RoutingMode.USER2)) {
+            return getString(R.string.pref_brouterProfileUser2, null);
         } else {
             return null;
         }
@@ -1402,16 +1419,38 @@ public class Settings {
         return getBoolean(R.string.pref_bigSmileysOnMap, false);
     }
 
+    public static boolean showElevation() {
+        return getBoolean(R.string.pref_showElevation, false);
+    }
+
     /**
      * Proximity notification settings
      */
 
     public static boolean isGeneralProximityNotificationActive() {
-        return getBoolean(R.string.pref_proximityNotificationGeneral, false);
+        return isProximityNotificationMasterToggleOn() && getBoolean(R.string.pref_proximityNotificationGeneral, false);
     }
 
     public static boolean isSpecificProximityNotificationActive() {
-        return getBoolean(R.string.pref_proximityNotificationSpecific, false);
+        return isProximityNotificationMasterToggleOn() && getBoolean(R.string.pref_proximityNotificationSpecific, false);
+    }
+
+    /** master toggle to enable/disable proximity notifications without changing their individual settings */
+    public static boolean isProximityNotificationMasterToggleOn() {
+        return getBoolean(R.string.pref_proximityNotificationMasterToggle, true);
+    }
+
+    /** similar to isGeneralProximityNotificationActive() || isSpecificProximityNotificationActive(), but without checking isProximityNotificationMasterToggleOn() */
+    public static boolean showProximityNotificationMasterToggle() {
+        return getBoolean(R.string.pref_proximityNotificationGeneral, false) || getBoolean(R.string.pref_proximityNotificationSpecific, false);
+    }
+
+    /**
+     * master toggle to enable/disable proximity notifications without changing their individual settings
+     * still requires individual notifications to be enabled / configured to get notifications
+     **/
+    public static void enableProximityNotifications(final boolean enable) {
+        putBoolean(R.string.pref_proximityNotificationMasterToggle, enable);
     }
 
     public static int getProximityNotificationThreshold(final boolean farDistance) {
@@ -1432,63 +1471,16 @@ public class Settings {
         return getBoolean(R.string.pref_longTapOnMap, true);
     }
 
+    public static boolean isShowRouteMenu() {
+        return getBoolean(R.string.pref_showRouteMenu, true);
+    }
+
     public static boolean getCreateUDCuseGivenList() {
         return getBoolean(R.string.pref_createUDCuseGivenList, false);
     }
 
     public static void setCreateUDCuseGivenList(final boolean createUDCuseGivenList) {
         putBoolean(R.string.pref_createUDCuseGivenList, createUDCuseGivenList);
-    }
-
-    public static boolean isUseTwitter() {
-        return getBoolean(R.string.pref_twitter, false);
-    }
-
-    private static void setUseTwitter(final boolean useTwitter) {
-        putBoolean(R.string.pref_twitter, useTwitter);
-    }
-
-    public static boolean isTwitterLoginValid() {
-        return StringUtils.isNotBlank(getTokenPublic())
-                && StringUtils.isNotBlank(getTokenSecret());
-    }
-
-    public static String getTokenPublic() {
-        return getString(R.string.pref_twitter_token_public, null);
-    }
-
-    public static String getTokenSecret() {
-        return getString(R.string.pref_twitter_token_secret, null);
-
-    }
-
-    static boolean hasTwitterAuthorization() {
-        return StringUtils.isNotBlank(getTokenPublic())
-                && StringUtils.isNotBlank(getTokenSecret());
-    }
-
-    public static void setTwitterTokens(@Nullable final String tokenPublic,
-                                        @Nullable final String tokenSecret, final boolean enableTwitter) {
-        putString(R.string.pref_twitter_token_public, tokenPublic);
-        putString(R.string.pref_twitter_token_secret, tokenSecret);
-        if (tokenPublic != null) {
-            remove(R.string.pref_temp_twitter_token_public);
-            remove(R.string.pref_temp_twitter_token_secret);
-        }
-        setUseTwitter(enableTwitter);
-    }
-
-    public static void setTwitterTempTokens(@Nullable final String tokenPublic,
-                                            @Nullable final String tokenSecret) {
-        putString(R.string.pref_temp_twitter_token_public, tokenPublic);
-        putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
-    }
-
-    @NonNull
-    public static ImmutablePair<String, String> getTempToken() {
-        final String tokenPublic = getString(R.string.pref_temp_twitter_token_public, null);
-        final String tokenSecret = getString(R.string.pref_temp_twitter_token_secret, null);
-        return new ImmutablePair<>(tokenPublic, tokenSecret);
     }
 
     public static int getVersion() {
@@ -1681,16 +1673,6 @@ public class Settings {
 
     public static int getNearbySearchLimit() {
         return getInt(R.string.pref_nearbySearchLimit, 0);
-    }
-
-    @NonNull
-    public static String getCacheTwitterMessage() {
-        return StringUtils.defaultString(getString(R.string.pref_twitter_cache_message, "I found [NAME] ([URL])."));
-    }
-
-    @NonNull
-    public static String getTrackableTwitterMessage() {
-        return StringUtils.defaultString(getString(R.string.pref_twitter_trackable_message, "I touched [NAME] ([URL])."));
     }
 
     public static int getLogImageScale() {
@@ -2019,6 +2001,19 @@ public class Settings {
         putString(prefKey, s.toString());
     }
 
+    public static int getCustomBNitem() {
+        final int item = Integer.parseInt(getString(R.string.pref_custombnitem, "0"));
+        if (item == CUSTOMBNITEM_NEARBY || item == CUSTOMBNITEM_NONE || item == CUSTOMBNITEM_PLACEHOLDER) {
+            return item;
+        }
+        // valid QuickLaunchItem entry?
+        final InfoItem temp = QuickLaunchItem.getById(item, QuickLaunchItem.ITEMS);
+        if (temp == null) {
+            return CUSTOMBNITEM_NEARBY;
+        }
+        return temp.getId();
+    }
+
     public static void setRoutingMode(@NonNull final RoutingMode mode) {
         putString(R.string.pref_map_routing, mode.parameterValue);
         Routing.invalidateRouting();
@@ -2150,8 +2145,6 @@ public class Settings {
             return new String[]{"mapDirectory"};
         } else if (keyId == R.string.pref_persistablefolder_gpx) {
             return new String[]{"gpxExportDir", "gpxImportDir"};
-        } else if (keyId == R.string.pref_persistableuri_track) {
-            return new String[]{"pref_trackfile"};
         } else if (keyId == R.string.pref_persistablefolder_offlinemapthemes) {
             return new String[]{"renderthemepath"};
         } else {
@@ -2237,7 +2230,6 @@ public class Settings {
                 context.getString(R.string.pref_username), context.getString(R.string.pref_password),
                 context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
                 context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
-                context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
                 context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
                 context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
                 context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
@@ -2290,6 +2282,18 @@ public class Settings {
         }
     }
 
+    public static String getLogImageCaptionDefaultPraefix() {
+        final String praefix = getString(R.string.pref_log_image_default_prefix, null);
+        return getLogImageCaptionDefaultPraefixFor(praefix);
+    }
+
+    public static String getLogImageCaptionDefaultPraefixFor(final String prefValue) {
+        if (StringUtils.isBlank(prefValue)) {
+            return LocalizationUtils.getString(R.string.log_image_titleprefix);
+        }
+        return prefValue.trim();
+    }
+
     public static boolean isDTMarkerEnabled() {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
@@ -2332,6 +2336,10 @@ public class Settings {
         return getBoolean(R.string.pref_rot13_hint, true);
     }
 
+    public static boolean getIconScaleEverywhere() {
+        return !getBoolean(R.string.pref_mapScaleOnly, true);
+    }
+
     public static double getMapShadingScale() {
         return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
     }
@@ -2344,4 +2352,17 @@ public class Settings {
         return getBoolean(R.string.pref_mapActionbarAutohide, false);
     }
 
+    public static boolean extendedSettingsAreEnabled() {
+        return getBoolean(R.string.pref_extended_settings_enabled, false);
+    }
+
+    public static boolean removeFromRouteOnLog() {
+        return getBoolean(R.string.pref_removeFromRouteOnLog, false);
+    }
+
+    public static boolean checkAndSetLegacyFilterConfigMigrated() {
+        final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
+        putBoolean(R.string.pref_legacy_filter_config_migrated, true);
+        return isMigrated;
+    }
 }

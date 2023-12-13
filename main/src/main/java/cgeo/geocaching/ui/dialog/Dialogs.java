@@ -10,7 +10,6 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -21,13 +20,11 @@ import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +34,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.util.Consumer;
 
-import java.util.List;
 import java.util.Objects;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -46,7 +42,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
@@ -74,7 +69,7 @@ public final class Dialogs {
      */
     // method readability will not improve by splitting it up
     @SuppressWarnings("PMD.NPathComplexity")
-    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
+    private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards, final boolean disableCancelOnDAMA) {
         final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
 
         content.message.setText(message);
@@ -108,7 +103,12 @@ public final class Dialogs {
         }
 
         if (cancellable) {
-            builder.setNegativeButton(android.R.string.cancel, null);
+            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                // reachable only when disableCancelOnDAMA is set to false
+                if (content.checkBox.isChecked()) {
+                    OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE);
+                }
+            });
         }
 
         builder.setIcon(ImageUtils.getTransparent1x1Drawable(context.getResources()));
@@ -120,7 +120,8 @@ public final class Dialogs {
         }
         dialog.show();
 
-        if (cancellable) {
+        // disable cancel on "don't ask me again"?
+        if (cancellable && disableCancelOnDAMA) {
             content.checkBox.setOnClickListener(result -> {
                 final Button button = dialog.getButton(AlertDialog.BUTTON_NEGATIVE);
                 button.setEnabled(!content.checkBox.isChecked());
@@ -141,7 +142,22 @@ public final class Dialogs {
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
             internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
-                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
+                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null, true);
+        }
+    }
+
+    /**
+     * Message dialog which is shown max one time each c:geo session, until "don't shown again" is checked.
+     * Please define your dialog name/message strings at OneTimeDialogs.DialogType.
+     * @param runOnOk gets started on closing the dialog with "ok".
+     * Dialog can be cancelled even when "don't ask me again" checkbox is set
+     */
+    public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType, @NonNull final Runnable runOnOk) {
+
+        if (OneTimeDialogs.showDialog(dialogType)) {
+            OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
+            internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
+                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), true, runOnOk, false);
         }
     }
 
@@ -154,7 +170,7 @@ public final class Dialogs {
      */
     public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
-            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards);
+            internalOneTimeMessage(context, title, message, moreInfoURL, dialogType, iconObservable, cancellable, runAfterwards, true);
         } else if (runAfterwards != null) {
             runAfterwards.run();
         }
@@ -204,46 +220,6 @@ public final class Dialogs {
         if (context instanceof Activity) {
             alertDialog.setOwnerActivity((Activity) context);
         }
-    }
-
-    /**
-     * Show a select dialog with additional delete item button
-     */
-    public static <T> void selectItemDialogWithAdditionalDeleteButton(final Context context, final @StringRes int title, @NonNull final List<T> items, @NotNull final Func1<T, TextParam> displayMapper, final Action1<T> onSelectListener, final Action1<T> onDeleteListener) {
-        final AlertDialog.Builder builder = Dialogs.newBuilder(context).setTitle(title);
-        final AlertDialog[] dialog = new AlertDialog[]{null};
-
-        final ListAdapter adapter = new ArrayAdapter<T>(context, R.layout.select_or_delete_item, android.R.id.text1, items) {
-            public View getView(final int position, final View convertView, final ViewGroup parent) {
-                //Use super class to create the View.
-                final View v = super.getView(position, convertView, parent);
-
-                // set text
-                final TextView tv = v.findViewById(android.R.id.text1);
-                displayMapper.call(getItem(position)).applyTo(tv);
-
-                // register delete listener
-                final View deleteButton = v.findViewById(R.id.delete);
-                deleteButton.setOnClickListener(v1 -> {
-                    onDeleteListener.call(items.get(position));
-
-                    // dismiss dialog
-                    if (dialog[0] != null) {
-                        dialog[0].dismiss();
-                    }
-                });
-                return v;
-            }
-        };
-
-        builder.setSingleChoiceItems(adapter, -1, (d, pos) -> {
-            d.dismiss();
-            onSelectListener.call(items.get(pos));
-        });
-
-        dialog[0] = builder.create();
-        dialog[0].show();
-
     }
 
 
@@ -370,5 +346,19 @@ public final class Dialogs {
 
     public static ContextThemeWrapper newContextThemeWrapper(final Context context) {
         return new ContextThemeWrapper(context, R.style.cgeo);
+    }
+
+    /** checks a float value and restricts it to given bounds, emitting a short warning message if necessary */
+    public static float checkInputRange(final Context context, final float currentValue, final float minValue, final float maxValue) {
+        float newValue = currentValue;
+        if (newValue > maxValue) {
+            newValue = maxValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+        }
+        if (newValue < minValue) {
+            newValue = minValue;
+            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+        }
+        return newValue;
     }
 }

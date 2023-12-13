@@ -18,12 +18,14 @@ import androidx.core.util.Supplier;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.backend.canvas.Color;
+import org.oscim.backend.canvas.Paint;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.Point;
 import org.oscim.layers.Layer;
@@ -38,6 +40,7 @@ import org.oscim.layers.vector.geometries.LineDrawable;
 import org.oscim.layers.vector.geometries.PolygonDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
+import org.oscim.utils.geom.GeomBuilder;
 
 public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Drawable, MarkerInterface>> {
 
@@ -125,6 +128,8 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
+                .cap(Paint.Cap.BUTT)
+                .fixed(true)
                 .build();
         final int zLevel = getZLevel(item);
 
@@ -136,7 +141,16 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 drawable = new CircleDrawable(GP_CONVERTER.to(item.getCenter()), item.getRadius(), style);
                 break;
             case POLYGON:
-                drawable = new PolygonDrawable(GP_CONVERTER.toList(item.getPoints()), style);
+                //we have to construct our own GeomBuilder
+                //because standard constructorss of PoygonDrawable doesn't support multiple holes
+                final GeomBuilder gb = new GeomBuilder();
+                addRingToGeoBuilder(gb, item.getPoints());
+                if (item.getHoles() != null) {
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        addRingToGeoBuilder(gb, hole);
+                    }
+                }
+                drawable = new PolygonDrawable(gb.toPolygon(), style);
                 break;
             case POLYLINE:
             default:
@@ -156,17 +170,31 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             final GeoIcon icon = item.getIcon();
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
-                    icon.getXAnchor(), icon.getYAnchor(), true));
+                    icon.getXAnchor(), icon.getYAnchor(), !icon.isFlat()));
             marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItem(marker);
+            markerLayer.update();
             markerLayer.update();
         }
 
         return new Pair<>(drawable, marker);
     }
 
+    private static void addRingToGeoBuilder(final GeomBuilder gb, final List<Geopoint> ring) {
+        for (Geopoint pt : ring) {
+            final GeoPoint gpt = GP_CONVERTER.to(pt);
+            gb.point(gpt.getLongitude(), gpt.getLatitude());
+        }
+        gb.ring();
+    }
+
     @Override
     public void remove(final GeoPrimitive item, final Pair<Drawable, MarkerInterface> context) {
+
+        if (context == null) {
+            return;
+        }
+
         final int zLevel = getZLevel(item);
         if (context.first != null) {
             final VectorLayer vectorLayer = getVectorLayer(zLevel, false);
@@ -179,7 +207,16 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             final ItemizedLayer markerLayer = getMarkerLayer(zLevel, false);
             if (markerLayer != null) {
                 markerLayer.removeItem(context.second);
+                markerLayer.update();
             }
+        }
+    }
+
+    @Override
+    public void onMapChangeBatchEnd(final long processedCount) {
+        //make sure map is redrawn. See e.g. #14787
+        if (map != null && processedCount > 0) {
+            map.updateMap(true);
         }
     }
 

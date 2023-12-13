@@ -183,7 +183,8 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     private void applyScales(final String themeStyleId) {
-        CanvasAdapter.userScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.MAP) / 100f;
+        // todo: restart of map engine necessary, or bug inside VTM? (see #13593)
+        // CanvasAdapter.userScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.MAP) / 100f;
         CanvasAdapter.textScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.TEXT) / 100f;
         CanvasAdapter.symbolScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.SYMBOL) / 100f;
     }

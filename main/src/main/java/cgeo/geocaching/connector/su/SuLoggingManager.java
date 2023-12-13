@@ -1,68 +1,47 @@
 package cgeo.geocaching.connector.su;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLoggingManager;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
+import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.LogResult;
-import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.log.LogCacheActivity;
-import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.utils.Log;
 
-import android.content.Context;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.AsyncTaskLoader;
-import androidx.loader.content.Loader;
 
-import java.util.Calendar;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
-public class SuLoggingManager extends AbstractLoggingManager implements LoaderManager.LoaderCallbacks<Integer>, ILoggingWithFavorites {
+public class SuLoggingManager extends AbstractLoggingManager {
 
-    @NonNull
-    private final SuConnector connector;
-    @NonNull
-    private final Geocache cache;
-    @NonNull
-    private final LogCacheActivity activity;
-
-    private boolean hasFavPointLoadError = true;
-    private int recommendationsCount;
-
-    SuLoggingManager(@NonNull final LogCacheActivity activity, @NonNull final SuConnector connector, @NonNull final Geocache cache) {
-        this.connector = connector;
-        this.cache = cache;
-        this.activity = activity;
-    }
-
-    @Override
-    public void init() {
-        LoaderManager.getInstance(activity).initLoader(Loaders.LOGGING_GEOCHACHING.getLoaderId(), null, this);
+    SuLoggingManager(@NonNull final SuConnector connector, @NonNull final Geocache cache) {
+        super(connector, cache);
     }
 
     @NonNull
     @Override
-    public LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
-        return postLog(logType, date, log, logPassword, trackableLogs, reportProblem, false);
+    public LogContextInfo getLogContextInfo(@Nullable final String serviceLogId) {
+        final LogContextInfo info = new LogContextInfo(this, serviceLogId);
+        final Integer recCount = SuApi.getAvailableRecommendations();
+        if (recCount != null) {
+            info.setAvailableFavoritePoints(recCount);
+        }
+        return info;
+
     }
 
-    @Override
     @NonNull
-    public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
+    @Override
+    public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final boolean addToFavorites, final float rating) {
         final LogResult result;
+        final Geocache cache = getCache();
         try {
-            result = SuApi.postLog(cache, logType, date, log, addToFavorites);
+            result = SuApi.postLog(cache, logEntry.logType, new Date(logEntry.date), logEntry.log, addToFavorites);
         } catch (final SuApi.SuApiException e) {
             Log.e("Logging manager SuApi.postLog exception: ", e);
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -75,73 +54,14 @@ public class SuLoggingManager extends AbstractLoggingManager implements LoaderMa
         return result;
     }
 
-    @Override
-    @NonNull
-    public final ImageResult postLogImage(final String logId, final Image image) {
-        return SuApi.postImage(cache, image);
-    }
-
-    @Override
-    @NonNull
-    public List<LogType> getPossibleLogTypes() {
-        return connector.getPossibleLogTypes(cache);
-    }
-
     @NonNull
     @Override
-    public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
-        return Collections.emptyList();
+    public ImageResult createLogImage(@NonNull final String logId, @NonNull final Image image) {
+        return SuApi.postImage(getCache(), image);
     }
 
     @Override
-    @NonNull
-    public Loader<Integer> onCreateLoader(final int id, final Bundle args) {
-        activity.onLoadStarted();
-        return new SuLoggingLoader(activity.getBaseContext());
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull final Loader<Integer> loader, final Integer data) {
-        recommendationsCount = data;
-        hasFavPointLoadError = false;
-
-        activity.onLoadFinished();
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull final Loader<Integer> loader) {
-        // nothing to do
-    }
-
-    @Override
-    public int getFavoritePoints() {
-        return (hasLoaderError() || hasFavPointLoadError()) ? 0 : recommendationsCount;
-    }
-
-    @Override
-    public boolean hasFavPointLoadError() {
-        return hasFavPointLoadError;
-    }
-
-    @Override
-    public int getFavoriteCheckboxText() {
-        return R.plurals.fav_points_remaining;
-    }
-
-    static class SuLoggingLoader extends AsyncTaskLoader<Integer> {
-        SuLoggingLoader(final Context context) {
-            super(context);
-        }
-
-        @Override
-        protected void onStartLoading() {
-            forceLoad();
-        }
-
-        @Override
-        public Integer loadInBackground() {
-            // Download fav points
-            return SuApi.getAvailableRecommendations();
-        }
+    public boolean supportsLogWithFavorite() {
+        return true;
     }
 }

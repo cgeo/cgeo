@@ -135,8 +135,8 @@ public class Waypoint implements IWaypoint {
         visited = old.visited;
     }
 
-    public static void mergeWayPoints(final List<Waypoint> newPoints, final List<Waypoint> oldPoints, final boolean forceMerge) {
-        if (oldPoints.isEmpty()) {
+    public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
+        if (oldPoints == null || oldPoints.isEmpty()) {
             return;
         }
 
@@ -173,7 +173,7 @@ public class Waypoint implements IWaypoint {
      */
     public boolean isUserModified() {
         return
-                isUserDefined() ||
+                isUserDefined() || isVisited() ||
                         (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
                         StringUtils.isNotBlank(getUserNote());
     }
@@ -393,6 +393,11 @@ public class Waypoint implements IWaypoint {
             this.setUserNote(parsedWaypoint.getUserNote());
             changed = true;
         }
+
+        if (parsedWaypoint.isVisited()) {
+            setVisited(true);
+        }
+
         return changed;
     }
 

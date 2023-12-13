@@ -21,6 +21,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.WaypointSelectionActionProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -77,7 +78,7 @@ public class CompassActivity extends AbstractActionBarActivity {
 
         deviceOrientationMode
                 .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
-                .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
                 .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
                 .setTextClickThrough(true)
                 .setChangeListener(Settings::setDeviceOrientationMode);
@@ -218,6 +219,11 @@ public class CompassActivity extends AbstractActionBarActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_hint).setVisible(cache != null && StringUtils.isNotEmpty(cache.getHint()));
+
+        final MenuItem ttsMenuItem = menu.findItem(R.id.menu_tts_toggle);
+        ttsMenuItem.setVisible(cache != null);
+        ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(ttsMenuItem, SpeechService.isRunning());
+
         return true;
     }
 
@@ -234,6 +240,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             }
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);
+            ToggleItemType.TOGGLE_SPEECH.toggleMenuItem(item, SpeechService.isRunning());
         } else if (id == R.id.menu_hint) {
             if (binding.hint.offlineHintText.getVisibility() == View.VISIBLE) {
                 binding.hint.offlineHintSeparator1.setVisibility(View.GONE);
@@ -380,9 +387,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding.deviceHeading.setText(String.format(Locale.getDefault(), "%3.1f°", direction));
 
         if (deviceOrientationMode.get() == DirectionData.DeviceOrientation.AUTO) {
-            deviceOrientationMode.setTextDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
+            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(dir.getDeviceOrientation().resId) + " (" + getString(DirectionData.DeviceOrientation.AUTO.resId) + ")");
         } else {
-            deviceOrientationMode.setTextDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
+            deviceOrientationMode.setTextDisplayMapperPure(d -> getString(R.string.device_orientation) + ": " + getString(d.resId));
         }
     }
 

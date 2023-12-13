@@ -1,31 +1,97 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractLoggingManager implements ILoggingManager {
 
-    @Override
-    public boolean hasLoaderError() {
-        return false;
+    private final Geocache cache;
+    private final IConnector connector;
+
+    protected AbstractLoggingManager(@NonNull final IConnector connector, @NonNull final Geocache cache) {
+        this.cache = Objects.requireNonNull(cache);
+        this.connector = Objects.requireNonNull(connector);
     }
 
-    @Override
-    public boolean hasTrackableLoadError() {
-        return false;
-    }
-
-    @Override
     @NonNull
-    public List<TrackableLog> getTrackables() {
-        return Collections.emptyList();
+    @Override
+    public Geocache getCache() {
+        return cache;
     }
+
+    @NonNull
+    @Override
+    public IConnector getConnector() {
+        return connector;
+    }
+
+
+    @NonNull
+    @Override
+    public LogResult editLog(@NonNull final LogEntry newEntry) {
+        return new LogResult(StatusCode.LOG_POST_ERROR);
+    }
+
+    @NonNull
+    @Override
+    public LogResult deleteLog(@NonNull final String logId) {
+        return new LogResult(StatusCode.LOG_POST_ERROR);
+    }
+
+    @Override
+    public boolean canEditLog(@NonNull final LogEntry entry) {
+        return getConnector().canEditLog(getCache(), entry);
+    }
+
+    @Override
+    public boolean canDeleteLog(@NonNull final LogEntry entry) {
+        return getConnector().canDeleteLog(getCache(), entry);
+    }
+
+    @NonNull
+    @Override
+    public ImageResult createLogImage(@NonNull final String logId, @NonNull final Image image) {
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+    }
+
+    @NonNull
+    @Override
+    public ImageResult editLogImage(@NonNull final String logId, @NonNull final String serviceImageId, @Nullable final String title, @Nullable final String description) {
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+    }
+
+    @NonNull
+    @Override
+    public ImageResult deleteLogImage(@NonNull final String logId, @NonNull final String serviceImageId) {
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+    }
+
+    @Override
+    public boolean supportsEditLogImages() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsDeleteLogImages() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsLogWithFavorite() {
+        return false;
+    }
+
 
     @Override
     public Long getMaxImageUploadSize() {
@@ -41,6 +107,17 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @NonNull
     public List<ReportProblemType> getReportProblemTypes(@NonNull final Geocache geocache) {
         return Collections.emptyList();
+    }
+
+    @NonNull
+    @Override
+    public LogContextInfo getLogContextInfo(@Nullable final String serviceLogId) {
+        return new LogContextInfo(this, serviceLogId);
+    }
+
+    @Override
+    public int getFavoriteCheckboxText() {
+        return R.plurals.fav_points_remaining;
     }
 
 }

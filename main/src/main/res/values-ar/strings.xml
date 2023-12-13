@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">المخبئ</string>
     <string name="detail">التفاصيل</string>
@@ -49,6 +47,8 @@
     <string name="wp_waypoint">النقطة المرجعية</string>
     <string name="wp_original">الإحداثيات الأصلية</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">معثور عليه</string>
     <string name="log_dnf">لم يتم العثور عليه</string>
@@ -86,7 +86,6 @@
     <string name="log_save">حفظ بدون اتصال</string>
     <string name="log_saving">إرسال السجل&#8230;</string>
     <string name="log_posting_log">جاري نشر السجل&#8230;</string>
-    <string name="log_posting_twitter">جاري نشر التغريدة&#8230;</string>
     <string name="log_posting_generic_trackable">نشر %1$s %2$d/%3$d</string>
     <string name="log_clear">مسح</string>
     <string name="log_post_not_possible">جاري تحميل البيانات&#8230;\nيرجى المحاولة مرة أخر بعد ثوان أو تحقق من إتصالك بالإنترنات.</string>
@@ -111,9 +110,6 @@
     <string name="log_yesterday">أمس</string>
     <string name="log_smilies">الابتسامات</string>
     <string name="log_image">صورة</string>
-    <string name="log_image_attach">إرفاق صورة</string>
-    <string name="log_image_stored">موجود</string>
-    <string name="log_image_camera">جديد</string>
     <string name="log_image_caption">التسمية</string>
     <string name="log_image_description">الوصف</string>
     <string name="log_image_scale">تحجيم</string>
@@ -130,7 +126,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">حسناً</string>
     <string name="err_parse">أخفق تحليل صفحة تسجيل الدخول</string>
-    <string name="err_server">غير قادر على الاتصال بـ Geocaching.com. قد يكون الموقع معطل أو يوجد مشكل في اتصالك بالانترنات.</string>
     <string name="err_server_ec">غير قادر على الاتصال بـ Extremcaching.com. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_server_gk">غير قادر على الاتصال بـ GeoKrety.org. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_login">لا توجد معلومات تسجيل الدخول مخزنة</string>
@@ -149,7 +144,6 @@
     <string name="err_detail_cache_find_any">c:geo لا يمكنه إيجاد و لا أي مخبآت.</string>
     <string name="err_detail_no_spoiler">c:geo لم يتمكن من العثور على صور مفسدة لهذا المخبئ.</string>
     <string name="err_detail_still_working">لا يزال يعمل في مهمة أخرى.</string>
-    <string name="err_watchlist_still_managing">لا يزال يدير القائمة الخاصة بك لمشاهدة المخبآت.</string>
     <string name="err_watchlist_failed">فشل في تغيير القائمة الخاصة بك لمشاهدة المخبآت.</string>
     <string name="err_application_no">c:geo لم يجد أي تطبيق مناسب.</string>
     <string name="err_auth_initialize">c:geo فشل في تهيئة عملية المصادقة.</string>
@@ -336,7 +330,6 @@
     <string name="settings_title_basicmembers">خيارات للاعضاء العاديين</string>
     <string name="settings_title_system">النظام</string>
     <string name="settings_title_navigation_menu">الملاحة</string>
-    <string name="settings_category_social">وسائل التواصل الإجتماعي</string>
     <string name="settings_category_logging_other">خيارات أخر ى لتسجيل الزيارات</string>
     <string name="settings_goto_url_button">المزيد &#8230;</string>
     <string name="settings_service_activate">تنشيط</string>
@@ -400,6 +393,7 @@
     <string name="init_livelist">عرض الاتجاه</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_backup">النسخ الاحتياطي</string>
     <string name="init_backup_running">إنشاء نسخ إحتياطي لبيانات المخبئ&#8230;</string>
@@ -458,9 +452,6 @@
     <string name="settings_open_geokretymap_website">فتح موقع GeoKretyMap.org</string>
     <string name="settings_settings">الإعدادات</string>
     <string name="settings_information">المعلومات</string>
-    <string name="settings_advanced">إعدادات متقدمة</string>
-    <string name="settings_twitter_cache_message">رسالة من أجل المخبآت التي تم العثور عليها</string>
-    <string name="settings_twitter_trackable_message">رسالة من أجل المخبآت أمتعة السفر التي تم العثور عليه</string>
     <string name="init_ec_icons">أيقونات الخريطة</string>
     <string name="settings_ec_icons_other">النمط الخاص</string>
     <string name="settings_ec_icons_oc">كما في OC</string>
@@ -511,8 +502,6 @@
     <string name="auth_credentials_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">العملية التالية سوف تسمح لـ <b>c:geo</b> بالوصول إلى %s.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo الآن مرخص له بالنشر على التويتر.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo الآن مرخص له بالتفاعل مع %s.</string>
     <!-- auth geokrety -->
@@ -524,7 +513,6 @@
     <string name="last_day_available">آخر يوم متاح</string>
     <string name="cache_offline_refresh">تحديث</string>
     <string name="cache_offline_store">تخزين</string>
-    <string name="cache_offline_stored">مخزن في الجهاز</string>
     <string name="cache_offline_not_ready">غير متاح في وضع عدم الاتصال</string>
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
@@ -534,10 +522,8 @@
     <string name="cache_personal_note_edit">تعديل</string>
     <string name="cache_personal_note_limit">حد الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload">رفع</string>
-    <string name="cache_personal_note_uploading">رفع الملاحظة الشخصية</string>
     <string name="cache_personal_note_upload_done">تم رفع الملاحضة الشخصية</string>
     <string name="cache_personal_note_upload_error">خطأ في رفع الملاحضة الشخصية</string>
-    <string name="cache_personal_note_upload_cancelled">تم إلغاء رفع الملاحضة الشخصية</string>
     <string name="cache_description">الوصف</string>
     <string name="cache_description_table_note">الوصف يحتوي على جدول التنسيقات الذي بدورها يتطلب مراجعة في %s لنظر فيه إن كان صحيحاً.</string>
     <string name="cache_watchlist_on">هذا المخبئ في قائمة المشاهدة الخاص بك.</string>
@@ -568,14 +554,6 @@
     <string name="cache_dialog_offline_drop_message">إزالة المخبئ من ذاكرة الجهاز&#8230;</string>
     <string name="cache_dialog_refresh_title">تحديث</string>
     <string name="cache_dialog_refresh_message">إعادة تحميل تفاصيل المخبآت&#8230;</string>
-    <string name="cache_dialog_watchlist_add_title">قائمة المشاهدة</string>
-    <string name="cache_dialog_watchlist_add_message">إضافة المخبئ إلى قائمة المشاهدة الخاصة بك&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_title">قائمة المشاهدة</string>
-    <string name="cache_dialog_watchlist_remove_message">إزالة المخبئ من قائمة المشاهدة الخاصة بك&#8230;</string>
-    <string name="cache_dialog_favorite_add_title">المفضل</string>
-    <string name="cache_dialog_favorite_add_message">إضافة المخبئ إلى المفضلات&#8230;</string>
-    <string name="cache_dialog_favorite_remove_title">المفضل</string>
-    <string name="cache_dialog_favorite_remove_message">إزالة المخبئ من المفضلات الخاصة بك&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
@@ -689,8 +667,6 @@
     <string name="waypoint_save_and_modify_on_website">قم بتعيين كـ إحدثيات طريق في c:geo و على الموقع</string>
     <string name="waypoint_reset_cache_coords">إعادة ظبط إحدثيات الطريق</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">تم إعادة ظبط إحدثيات الطريق.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">إعادة ظبط إحدثيات المخبآت على الموقع&#8230;</string>
-    <string name="waypoint_reset">إعادة ظبط</string>
     <string name="waypoint_localy_reset_cache_coords">إعادة الظبط في c:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">إعادة ظبط في c:geo على الموقع</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">الموقع لا يدعم التعديل على إحداثيات المخبآت.</string>
@@ -707,8 +683,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
-    <string name="visit_tweet">نشر هذا الاكتشاف على التويتر</string>
     <!-- map -->
     <string name="map_map">خريطة</string>
     <string name="map_live">خريطة على نات</string>
@@ -1048,7 +1022,6 @@
     <string name="website_title">الموقع</string>
     <string name="facebook_link"><a href="">صفحة c:geo</a></string>
     <string name="market_link"><a href="">صفحة c:geo على Google Play</a></string>
-    <string name="about_twitter">هل يجب على <b>c:geo</b> أن ينشر تغريدة جديدة في كل مرة تقوم فيها بتسجيل زيارة لمخبئ ما؟</string>
     <string name="faq_title">الأسئلة الشائعة</string>
     <!-- status (used via string based resource loading) -->
     <!-- text-to-speech for compass view -->
@@ -1096,6 +1069,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -1112,10 +1086,11 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">إلغاء</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

@@ -16,7 +16,6 @@ import cgeo.geocaching.utils.functions.Action2;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.text.InputType;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -324,8 +323,18 @@ public class VariableListView extends LinearLayout {
             if (viewHolder.viewButtonFunction != null) {
                 viewHolder.viewButtonFunction.setOnClickListener(d -> {
                     final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
+
+                    final SimpleDialog.ItemSelectModel<FormulaFunction> model = new SimpleDialog.ItemSelectModel<>();
+                    model
+                        .setItems(functions)
+                        .setDisplayMapper(VariablesListAdapter::getFunctionDisplayString)
+                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+                    model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper(VariablesListAdapter::getFunctionGroupDisplayString);
+
                     SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.id(R.string.formula_choose_function))
-                            .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
+                            .selectSingle(model, f -> {
+                            //.selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                                 if (viewHolder.viewVariableFormulaText != null) {
                                     final String current = viewHolder.viewVariableFormulaText.getText().toString();
                                     final int currentPos = viewHolder.viewVariableFormulaText.getSelectionStart();
@@ -443,15 +452,19 @@ public class VariableListView extends LinearLayout {
             final String nameToShow = oldNameIsInvisible ? "" : oldName;
             SimpleDialog.ofContext(recyclerView.getContext()).setTitle(TextParam.id(R.string.variables_varname_dialog_title))
                     .setMessage(TextParam.id(R.string.variables_varname_dialog_message))
-                    .input(InputType.TYPE_CLASS_TEXT, nameToShow, null, null, s -> StringUtils.isBlank(s) || isValidVarName(s), "[a-zA-Z0-9]", t -> {
-                        final boolean newNameIsInvisible = StringUtils.isBlank(t);
-                        if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
-                            //nothing to do
-                            return;
-                        }
-                        final String newName = StringUtils.isBlank(t) ? null : t;
-                        callback.call(oldName, newName);
-                    });
+                    .input(new SimpleDialog.InputOptions()
+                        .setInitialValue(nameToShow)
+                        .setInputChecker(s -> StringUtils.isBlank(s) || isValidVarName(s))
+                        .setAllowedChars("[a-zA-Z0-9]"),
+                        t -> {
+                            final boolean newNameIsInvisible = StringUtils.isBlank(t);
+                            if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
+                                //nothing to do
+                                return;
+                            }
+                            final String newName = StringUtils.isBlank(t) ? null : t;
+                            callback.call(oldName, newName);
+                        });
         }
 
         private boolean isValidVarName(final String varName) {

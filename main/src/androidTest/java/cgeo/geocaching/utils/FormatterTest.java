@@ -108,16 +108,16 @@ public class FormatterTest  {
         if (!StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage())) {
             return;
         }
-        assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored in device\n");
-        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 10, "Stored in device\na few minutes ago");
-        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 20, "Stored in device\nabout 20 minutes ago");
-        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 65, "Stored in device\nabout 1 hour ago");
-        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 45, "Stored in device\nabout 45 hours ago");
-        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 50, "Stored in device\nabout 2 days ago");
-        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 30, "Stored in device\nabout 30 days ago");
-        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 31, "Stored in device\nabout 1 month ago");
-        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 66, "Stored in device\nabout 2 months ago");
-        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 366, "Stored in device\nover a year ago");
+        assertThat(Formatter.formatStoredAgo(0)).isEqualTo("Stored ");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 10, "Stored a few minutes ago");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 20, "Stored about 20 minutes ago");
+        assertFormatStoredAgo(DateUtils.MINUTE_IN_MILLIS * 65, "Stored about 1 hour ago");
+        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 45, "Stored about 45 hours ago");
+        assertFormatStoredAgo(DateUtils.HOUR_IN_MILLIS * 50, "Stored about 2 days ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 30, "Stored about 30 days ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 31, "Stored about 1 month ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 66, "Stored about 2 months ago");
+        assertFormatStoredAgo(DateUtils.DAY_IN_MILLIS * 366, "Stored over a year ago");
     }
 
     private static void assertFormatStoredAgo(final long agoInMillis, final String expected) {

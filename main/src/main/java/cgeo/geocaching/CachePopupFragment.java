@@ -6,8 +6,10 @@ import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
@@ -31,7 +33,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import java.lang.ref.WeakReference;
@@ -44,13 +46,13 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     private final Progress progress = new Progress();
     private PopupBinding binding;
 
-    public static DialogFragment newInstance(final String geocode) {
+    public static Fragment newInstance(final String geocode) {
 
         final Bundle args = new Bundle();
         args.putString(GEOCODE_ARG, geocode);
 
-        final DialogFragment f = new CachePopupFragment();
-        f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        final Fragment f = new CachePopupFragment();
+        //f.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         f.setArguments(args);
 
         return f;
@@ -100,16 +102,15 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             if (popup == null) {
                 return;
             }
-            popup.getActivity().finish();
+            popup.progress.dismiss();
+            MapUtils.removeDetailsFragment(popup.requireActivity());
         }
     }
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = PopupBinding.inflate(getLayoutInflater(), container, false);
-        final View v = binding.getRoot();
-        initCustomActionBar(v);
-        return v;
+        return binding.getRoot();
     }
 
     @Override
@@ -123,19 +124,21 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(geocode);
-            toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
+            toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
             toolbar.setLongClickable(true);
             toolbar.setOnLongClickListener(v -> {
                 if (cache.isOffline()) {
                     EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
-                        toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
+                        toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
                     });
                     return true;
                 }
                 return false;
             });
+            onCreatePopupOptionsMenu(toolbar, this, cache);
+            toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
             binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
@@ -156,8 +159,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
+    public boolean onPopupOptionsItemSelected(@NonNull final MenuItem item) {
+        if (super.onPopupOptionsItemSelected(item)) {
             return true;
         }
 
@@ -240,7 +243,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             }
 
             if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server));
+                showToast(getString(R.string.err_server_general));
                 return;
             }
 
@@ -309,7 +312,6 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(2, getActivity(), cache);
-        getActivity().finish();
     }
 
     @Override
@@ -320,5 +322,9 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         return new TargetInfo(cache.getCoords(), cache.getGeocode());
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        GeocacheChangedBroadcastReceiver.sendBroadcast(getContext(), geocode);
+    }
 }

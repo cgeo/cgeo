@@ -1,57 +1,45 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.maps.Tracks;
-import cgeo.geocaching.models.geoitem.GeoGroup;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
-import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.ILayer;
-import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
-import cgeo.geocaching.utils.MapLineUtils;
+
+import android.graphics.Color;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-public class TracksLayer implements ILayer {
+public class TracksLayer {
 
-    private final GeoItemLayer<String> geoItemLayer = new GeoItemLayer<>("tracks");
+    public static final String TRACK_KEY_PREFIX = "TRACK-";
 
     final UnifiedMapViewModel viewModel;
 
-    public TracksLayer(final AppCompatActivity activity) {
+    public TracksLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.getTrackUpdater().observe(activity, event -> event.ifNotHandled((key -> {
+        viewModel.trackUpdater.observe(activity, event -> event.ifNotHandled((key -> {
             final Tracks.Track track = viewModel.getTracks().getTrack(key);
             if (track == null || track.getRoute().isHidden()) {
-                geoItemLayer.remove(key);
+                layer.remove(TRACK_KEY_PREFIX + key);
             } else {
-                final GeoStyle lineStyle = GeoStyle.builder()
-                        .setStrokeColor(track.getTrackfile().getColor())
-                        .setStrokeWidth(MapLineUtils.getWidthFromRaw(track.getTrackfile().getWidth(), true))
-                        .build();
 
-                final GeoGroup.Builder geoGroup = GeoGroup.builder();
-                for (GeoPrimitive segment : track.getRoute().getGeoData()) {
-                    geoGroup.addItems(GeoPrimitive.createPolyline(segment.getPoints(), lineStyle));
-                }
-                geoItemLayer.put(key, geoGroup.build());
-            }
+                //Apply current chosen default color to all elements and display
+
+                final float widthFactor = 2f;
+                final float defaultWidth = track.getTrackfile().getWidth() / widthFactor;
+                final int defaultStrokeColor = track.getTrackfile().getColor();
+                final int defaultFillColor = Color.argb(128, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
+                final GeoStyle defaultStyle = GeoStyle.builder()
+                        .setFillColor(defaultFillColor)
+                        .setStrokeColor(defaultStrokeColor)
+                        .setStrokeWidth(defaultWidth).build();
+
+                layer.put(TRACK_KEY_PREFIX + key, track.getRoute().getItem().applyDefaultStyle(defaultStyle));
+             }
         })));
 
     }
-
-    @Override
-    public void init(final IProviderGeoItemLayer<?> provider) {
-        geoItemLayer.setProvider(provider, LayerHelper.ZINDEX_TRACK_ROUTE);
-    }
-
-    @Override
-    public void destroy() {
-        geoItemLayer.destroy();
-    }
-
 
 }

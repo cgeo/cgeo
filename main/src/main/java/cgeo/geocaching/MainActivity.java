@@ -1,12 +1,13 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
@@ -14,8 +15,8 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.downloader.PendingDownloadsActivity;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionAction;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
@@ -27,41 +28,39 @@ import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
+import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.SearchManager;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -85,16 +84,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
-public class MainActivity extends AbstractBottomNavigationActivity {
-
-    private static final String STATE_BACKUPUTILS = "backuputils";
+public class MainActivity extends AbstractNavigationBarActivity {
 
     private MainActivityBinding binding;
 
@@ -105,7 +100,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     private MenuItem searchItem;
 
     private boolean initialized = false;
-    private boolean restoreMessageShown = false;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
     private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
@@ -114,10 +108,9 @@ public class MainActivity extends AbstractBottomNavigationActivity {
      */
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
-    private BackupUtils backupUtils = null;
-
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.locationStatus.updatePermissions());
-    private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, b -> setWallpaper());
+
+    private Long lastMCTime = 0L;
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -149,13 +142,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
                             final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
-                            if (conn instanceof GCConnector) {
-                                final String noError = activity.getString(R.string.init_login_popup_ok);
-                                if (!StringUtils.equals(conn.getLoginStatusString(), noError)) {
-                                    final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
-                                    if (lastError != null && StringUtils.isNotBlank(lastError.first)) {
-                                        connInfo.append(" (").append(lastError.first).append(")");
-                                    }
+                            if (conn instanceof GCConnector && Network.isConnected() && !StringUtils.equalsAny(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working), activity.getString(R.string.init_login_popup_ok))) {
+                                final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
+                                if (lastError != null && StringUtils.isNotBlank(lastError.first) && lastError.second > Settings.getLastLoginSuccessGC()) {
+                                    connInfo.append(" (").append(lastError.first).append(")");
                                 }
                             }
                             connectorStatus.setText(connInfo);
@@ -245,6 +235,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
             // don't call the super implementation with the layout argument, as that would set the wrong theme
+            setTheme(Settings.isWallpaper() ? R.style.cgeo_withWallpaper : R.style.cgeo);
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
@@ -256,49 +247,13 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             cLog.add("setview");
 
-            backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
-            cLog.add("bu");
-
-            //check database
-            final String errorMsg = DataStore.initAndCheck(false);
-            if (errorMsg != null) {
-                DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
-            }
-            cLog.add("ds");
-
             setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
-
-            Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
-
-            final LocationDataProvider locationDataProvider = LocationDataProvider.getInstance();
-            locationDataProvider.initialize();
-
-            // Attempt to acquire an initial location before any real activity happens.
-            locationDataProvider.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
-
-            cLog.add("ph");
 
             init();
             cLog.add("init");
 
-            LocalStorage.initGeocacheDataDir();
-            if (LocalStorage.isRunningLowOnDiskSpace()) {
-                SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
-            }
-            cLog.add("ls");
-
-            confirmDebug();
-
             binding.infoNotloggedin.setOnClickListener(v ->
-                    SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
-
-            //do file migrations if necessary
-            LocalStorage.migrateLocalStorage(this);
-            cLog.add("mls");
-
-            //sync map Theme folder
-            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-            cLog.add("rth");
+                    SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
             // automated update check
             DownloaderUtils.checkForRoutingTileUpdates(this);
@@ -307,29 +262,37 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
 
-            // automated backup check
-            if (Settings.automaticBackupDue()) {
-                new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
-            }
-            cLog.add("ab");
-
-            // check for finished, but unreceived downloads
-            DownloaderUtils.checkPendingDownloads(this);
-
             binding.locationStatus.setPermissionRequestCallback(() -> {
                 this.askLocationPermissionAction.launch(null);
             });
 
-            if (Settings.isWallpaper()) {
-                askShowWallpaperPermissionAction.launch();
-            }
+            configureMessageCenterPolling();
 
+            LegacyFilterConfig.checkAndMigrate();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
             binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreate"));
         }
 
+    }
+
+    private void configureMessageCenterPolling() {
+        final Activity that = this;
+        MessageCenterUtils.setReceiver(this, intent -> {
+            if (Looper.myLooper() == null) {
+                Looper.prepare();
+            }
+            final int count = intent.getIntExtra(EXTRA_MESSAGE_CENTER_COUNTER, 0);
+            new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
+                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
+                    updateHomeBadge(-1);
+                    if (actionRequested) {
+                        ShareUtils.openUrl(that, GCConstants.URL_MESSAGECENTER);
+                    }
+                });
+            });
+        });
     }
 
     private void prepareQuickLaunchItems() {
@@ -344,13 +307,13 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> launchQuickLaunchItem(item.getId()), getString(item.getTitleResId()));
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()));
             }
         }
 
         // temporarily add button for unified map, if enabled in settings
         if (Settings.showUnifiedMap()) {
-            addButton(R.drawable.sc_icon_map, lp, () -> startActivity(new Intent(this, UnifiedMapActivity.class)), "Start unified map");
+            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map");
         }
     }
 
@@ -365,35 +328,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         binding.quicklaunchitems.setVisibility(View.VISIBLE);
     }
 
-    private void launchQuickLaunchItem(final int which) {
-        if (which == QuickLaunchItem.VALUES.GOTO.id) {
-            InternalConnector.assertHistoryCacheExists(this);
-            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-        } else if (which == QuickLaunchItem.VALUES.POCKETQUERY.id) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, PocketQueryListActivity.class));
-            }
-        } else if (which == QuickLaunchItem.VALUES.BOOKMARKLIST.id) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, BookmarkListActivity.class));
-            }
-        } else if (which == QuickLaunchItem.VALUES.RECENTLY_VIEWED.id) {
-            CacheListActivity.startActivityLastViewed(this, new SearchResult(DataStore.getLastOpenedCaches()));
-        } else if (which == QuickLaunchItem.VALUES.SETTINGS.id) {
-            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
-        } else if (which == QuickLaunchItem.VALUES.BACKUPRESTORE.id) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
-        } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
-            ShareUtils.openUrl(this, getString(R.string.manual_link_full));
-        } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
-            ShareUtils.openUrl(this, getString(R.string.faq_link_full));
-        } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {
-            startActivity(new Intent(this, ViewSettingsActivity.class));
-        } else {
-            throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
-        }
-    }
-
     private void init() {
         if (initialized) {
             return;
@@ -401,8 +335,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         initialized = true;
 
-        checkRestore();
-        DataStore.cleanIfNeeded(this);
         updateCacheCounter();
         prepareQuickLaunchItems();
         checkPendingDownloads();
@@ -434,7 +366,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             if (colStatus >= 0) {
                                 final int status = c.getInt(colStatus);
                                 if (status != DownloadManager.STATUS_RUNNING && status != DownloadManager.STATUS_SUCCESSFUL) {
-                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm((dialog, which) -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
+                                    SimpleDialog.of(this).setTitle(R.string.downloader_pending_downloads).setMessage(R.string.downloader_pending_info).confirm(() -> startActivity(new Intent(this, PendingDownloadsActivity.class)));
                                     Settings.setPendingDownloadsLastCheck(false);
                                     break;
                                 }
@@ -447,21 +379,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     }
 
     @Override
-    public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
-    }
-
-    private void confirmDebug() {
-        if (Settings.isDebug() && !BuildConfig.DEBUG) {
-            SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
-        }
-    }
-
-    @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
         init();
     }
 
@@ -477,20 +396,12 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
 
-            setWallpaper();
-
             init();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
             binding.getRoot().post(() -> Log.d("Post after MainActivity.onResume"));
         }
-    }
-
-    private void setWallpaper() {
-        final Drawable wallpaper =  (Settings.isWallpaper() && PermissionContext.SHOW_WALLPAPER.hasAllPermissions()) ?
-                WallpaperManager.getInstance(this).getDrawable() : null;
-            ((ImageView) findViewById(R.id.background)).setImageDrawable(wallpaper);
     }
 
     @Override
@@ -564,11 +475,13 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_settings) {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (id == R.id.menu_backup) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, this, true);
         } else if (id == R.id.menu_paste_search) {
             startActivity(new Intent(this, SearchActivity.class).setAction(SearchActivity.ACTION_CLIPBOARD).putExtra(SearchManager.QUERY, ClipboardUtils.getText()));
         } else if (id == R.id.menu_history) {
-            startActivity(CacheListActivity.getHistoryIntent(this));
+            final Intent intent = CacheListActivity.getHistoryIntent(this);
+            AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, true);
+            startActivity(intent);
             ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_goto) {
             InternalConnector.assertHistoryCacheExists(this);
@@ -606,56 +519,18 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);  // call super to make lint happy
-        if (backupUtils.onActivityResult(requestCode, resultCode, intent)) {
-            return;
-        }
         if (requestCode == Intents.SETTINGS_ACTIVITY_REQUEST_CODE) {
             if (resultCode == SettingsActivity.RESTART_NEEDED) {
                 ProcessUtils.restartApplication(this);
             }
-        } else {
-            final IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-            if (scanResult != null) {
-                final String scan = scanResult.getContents();
-                if (StringUtils.isBlank(scan)) {
-                    return;
+        } else if (requestCode == Intents.SEARCH_REQUEST_CODE) {
+            // SearchActivity activity returned without making a search
+            if (resultCode == RESULT_CANCELED) {
+                String query = intent.getStringExtra(SearchManager.QUERY);
+                if (query == null) {
+                    query = "";
                 }
-                SearchActivity.startActivityScan(scan, this);
-            } else if (requestCode == Intents.SEARCH_REQUEST_CODE) {
-                // SearchActivity activity returned without making a search
-                if (resultCode == RESULT_CANCELED) {
-                    String query = intent.getStringExtra(SearchManager.QUERY);
-                    if (query == null) {
-                        query = "";
-                    }
-                    SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
-                }
-            }
-        }
-    }
-
-    private void checkRestore() {
-
-        if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
-
-            if (BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false))) {
-
-                restoreMessageShown = true;
-                Dialogs.newBuilder(this)
-                        .setTitle(res.getString(R.string.init_backup_restore))
-                        .setMessage(res.getString(R.string.init_restore_confirm))
-                        .setCancelable(false)
-                        .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
-                            dialog.dismiss();
-                            DataStore.resetNewlyCreatedDatabase();
-                            backupUtils.restore(BackupUtils.newestBackupFolder(false));
-                        })
-                        .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
-                            dialog.cancel();
-                            DataStore.resetNewlyCreatedDatabase();
-                        })
-                        .create()
-                        .show();
+                SimpleDialog.of(this).setMessage(TextParam.text(res.getString(R.string.unknown_scan) + "\n\n" + query)).show();
             }
         }
     }
@@ -711,10 +586,13 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     /**
      * display action notifications, e. g. update or backup reminders
-     * action callback accepts true, if action got performed / false if postponed
+     * action callback accepts true, if action is to be performed / false if to be postponed
      */
-
     public void displayActionItem(final int layout, final @StringRes int info, final Action1<Boolean> action) {
+        displayActionItem(layout, getString(info), action);
+    }
+
+    public void displayActionItem(final int layout, final String info, final Action1<Boolean> action) {
         final TextView l = findViewById(layout);
         if (l != null) {
             l.setVisibility(View.VISIBLE);

@@ -114,6 +114,13 @@ public class GeoItemLayer<K> {
         public final IProviderGeoItemLayer<Object> providerLayer;
         private final String logPraefix;
 
+        private long addProcessed = 0;
+        private long removeProcessed = 0;
+        private long replaceProcessed = 0;
+        private long addProcessedInBatch = 0;
+        private long removeProcessedInBatch = 0;
+        private long replaceProcessedInBatch = 0;
+
         @SuppressWarnings("unchecked")
         MapWriter(final String logPraefix, final IProviderGeoItemLayer<?> providerLayer) {
             this.providerLayer = (IProviderGeoItemLayer<Object>) providerLayer;
@@ -122,23 +129,51 @@ public class GeoItemLayer<K> {
 
         @Override
         public Object add(final Object key, final GeoPrimitive value) {
-            Log.d(this.logPraefix + "add '" + key + "'");
-            if (value != null && value.isValid()) {
-                return providerLayer.add(value);
+            Log.d(this.logPraefix + "ADD '" + key + "'");
+            addProcessed++;
+            addProcessedInBatch++;
+
+            //don't add invalid values
+            if (!GeoItem.isValid(value)) {
+                return null;
             }
-            return null;
+            return providerLayer.add(value);
         }
 
         @Override
         public void remove(final Object key, final GeoPrimitive value, final Object context) {
-            Log.d(this.logPraefix + "remove '" + key + "'");
+            Log.d(this.logPraefix + "REMOVE '" + key + "'");
+            removeProcessed++;
+            removeProcessedInBatch++;
+
+            //don't remove invalid values (because they were not added in the first place)
+            if (!GeoItem.isValid(value)) {
+                return;
+            }
             providerLayer.remove(value, context);
         }
 
         @Override
         public Object replace(final Object key, final GeoPrimitive oldValue, final Object oldContext, final GeoPrimitive newValue) {
-            Log.d(this.logPraefix + "replace '" + key + "'");
-            return providerLayer.replace(oldValue, oldContext, newValue);
+            Log.d(this.logPraefix + "REPLACE '" + key + "'");
+            replaceProcessed++;
+            replaceProcessedInBatch++;
+
+            //check validity of old and new value.
+            //If one of them is invalid, replacement has to handled as add or remove instead
+            final boolean oldIsValid = GeoItem.isValid(oldValue);
+            final boolean newIsValid = GeoItem.isValid(newValue);
+            if (oldIsValid && newIsValid) {
+                return providerLayer.replace(oldValue, oldContext, newValue);
+            }
+            if (oldIsValid) {
+                providerLayer.remove(oldValue, oldContext);
+                return null;
+            }
+            if (newIsValid) {
+                return providerLayer.add(newValue);
+            }
+            return null;
         }
 
         @Override
@@ -157,11 +192,27 @@ public class GeoItemLayer<K> {
 
         @Override
         public void destroy(final Collection<Pair<GeoPrimitive, Object>> values) {
-            Log.d(this.logPraefix + "destroy " + values.size() + " values");
+            Log.i(this.logPraefix + "DESTROY " + values.size() + " values");
 
             if (providerLayer != null) {
                 providerLayer.destroy(values);
             }
+        }
+
+        @Override
+        public void onMapChangeBatchEnd(final long processedCount) {
+            if (providerLayer != null) {
+                providerLayer.onMapChangeBatchEnd(processedCount);
+            }
+            if (addProcessedInBatch > 0 || removeProcessedInBatch > 0 || replaceProcessedInBatch > 0) {
+                Log.i(logPraefix + "BATCH-END - " +
+                        "ADDS:" + addProcessedInBatch + "(" + addProcessed + "), " +
+                        "REMOVES:" + removeProcessedInBatch + "(" + removeProcessed + "), " +
+                        "REPLACES:" + replaceProcessedInBatch + "(" + replaceProcessed + ")");
+            }
+            addProcessedInBatch = 0;
+            removeProcessedInBatch = 0;
+            replaceProcessedInBatch = 0;
         }
 
         @Override
@@ -225,6 +276,10 @@ public class GeoItemLayer<K> {
      * If "show" is false, the item is added to the layer but not (yet) shown.
      */
     public synchronized void put(final K key, final GeoItem item, final boolean show) {
+
+        if (!GeoItem.isValid(item)) {
+            Log.d("GeoItemLayer: adding invalid item: " + key + ": " + item);
+        }
 
         final Pair<GeoItem, Boolean> previousItem = itemMap.get(key);
         if (previousItem != null && previousItem.second && !show) {

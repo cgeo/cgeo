@@ -17,9 +17,13 @@ import java.util.List;
 public class Route implements IGeoItemSupplier, Parcelable {
     private String name = "";
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
-    private final boolean routeable;
+    private boolean routeable;
     protected float distance = 0.0f;
     protected boolean isHidden = false;
+
+    public Route() {
+        // should use setRouteable later if using this constructor
+    }
 
     public Route(final boolean routeable) {
         this.routeable = routeable;
@@ -42,8 +46,11 @@ public class Route implements IGeoItemSupplier, Parcelable {
         this.name = name;
     }
 
-    @Override
-    public String getId() {
+    public void setRouteable(final boolean routeable) {
+        this.routeable = routeable;
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -77,25 +84,6 @@ public class Route implements IGeoItemSupplier, Parcelable {
     }
 
     @Override
-    public List<GeoPrimitive> getGeoData() {
-        final List<GeoPrimitive> result = new ArrayList<>();
-        final List<Geopoint> points = new ArrayList<>();
-        if (getSegments() != null) {
-            for (RouteSegment rs : getSegments()) {
-                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
-                    result.add(GeoPrimitive.createPolyline(points, null));
-                    points.clear();
-                }
-                points.addAll(rs.getPoints());
-            }
-        }
-        if (!points.isEmpty()) {
-            result.add(GeoPrimitive.createPolyline(points, null));
-        }
-        return result;
-    }
-
-    @Override
     public Viewport getViewport() {
         final Viewport.ContainingViewportBuilder cvb = new Viewport.ContainingViewportBuilder();
         for (RouteSegment rs : getSegments()) {
@@ -106,7 +94,22 @@ public class Route implements IGeoItemSupplier, Parcelable {
 
     @Override
     public GeoItem getItem() {
-        return GeoGroup.create(getGeoData());
+        final GeoGroup.Builder result = GeoGroup.builder();
+        final List<Geopoint> points = new ArrayList<>();
+        if (getSegments() != null) {
+            for (RouteSegment rs : getSegments()) {
+                if (!points.isEmpty() && !rs.getLinkToPreviousSegment()) {
+                    result.addItems(GeoPrimitive.createPolyline(points, null));
+                    points.clear();
+                }
+                points.addAll(rs.getPoints());
+            }
+        }
+        if (!points.isEmpty()) {
+            result.addItems(GeoPrimitive.createPolyline(points, null));
+        }
+
+        return result.build();
     }
 
     public RouteSegment[] getSegments() {
@@ -175,10 +178,12 @@ public class Route implements IGeoItemSupplier, Parcelable {
                 segment.resetPoints();
                 // calculate route for segment between current point and its predecessor
                 if (pos > 0) {
-                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint());
+                    final ArrayList<Float> elevation = new ArrayList<>();
+                    final Geopoint[] temp = Routing.getTrackNoCaching(segments.get(pos - 1).getPoint(), segment.getPoint(), elevation);
                     for (Geopoint geopoint : temp) {
                         segment.addPoint(geopoint);
                     }
+                    segment.setElevation(elevation);
                 }
             }
             distance += segment.calculateDistance();

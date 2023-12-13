@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@color/colorBackgroundDialog"
     android:windowBackground="@color/colorBackgroundTransparent"
     android:orientation="vertical"
@@ -14,13 +14,13 @@
         layout="@layout/actionbar_popup" />
     <ScrollView
         android:id="@+id/details_list_box"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dip" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
@@ -36,109 +36,16 @@
 
             <LinearLayout
                 android:id="@+id/details_list"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
             </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/more_details"
-                    style="@style/button_full"
-                    android:layout_height="@dimen/buttonSize_iconButton"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="3dp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:layout_toLeftOf="@id/offline_hint"
-                    android:text="@string/popup_more" />
-
-                <Button
-                    android:id="@+id/offline_hint"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_hint"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_alignBaseline="@id/more_details"
-                    android:layout_marginLeft="0dp"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
-
-            </RelativeLayout>
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
                 <View style="@style/separator_horizontal" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/offline_text"
-                    tools:text="@string/cache_offline_not_ready"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="6dip"
-                    android:layout_marginRight="51dip"
-                    android:paddingRight="3dip"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/textSize_detailsSecondary"
-                    android:textColor="@color/colorText"/>
-
-                <Button
-                    android:id="@+id/offline_refresh"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_refresh"
-                    android:layout_alignParentRight="true"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/offline_lists"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="6dip"
-                    android:layout_toLeftOf="@id/offline_edit"
-                    android:paddingRight="3dip"
-                    android:textIsSelectable="false"
-                    android:textSize="@dimen/textSize_detailsSecondary"
-                    tools:text="list 1, list 2"
-                    android:textColor="@color/colorText"/>
-
-                <Button
-                    android:id="@+id/offline_edit"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_edit"
-                    android:layout_toLeftOf="@id/offline_drop"
-                    android:layout_marginLeft="0dp"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
-
-                <Button
-                    android:id="@+id/offline_drop"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_delete"
-                    android:layout_marginLeft="0dp"
-                    android:layout_alignParentRight="true"/>
-
-                <Button
-                    android:id="@+id/offline_store"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_save"
-                    android:layout_marginLeft="0dp"
-                    android:layout_alignParentRight="true"/>
-
-            </RelativeLayout>
+            <include layout="@layout/cache_offlinebox" />
 
             <RelativeLayout
                 android:id="@+id/offline_hint_separator"
@@ -158,6 +65,31 @@
                 android:visibility="gone"
                 tools:text="hint"
                 android:textColor="@color/colorText"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/more_details"
+                    style="@style/button_full_popups"
+                    android:layout_toLeftOf="@id/offline_hint"
+                    android:text="@string/popup_more" />
+
+                <Button
+                    android:id="@+id/offline_hint"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_hint"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_alignBaseline="@id/more_details"
+                    android:layout_marginLeft="0dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+            </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>

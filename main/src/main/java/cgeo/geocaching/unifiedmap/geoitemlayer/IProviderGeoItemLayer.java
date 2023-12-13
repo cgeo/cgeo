@@ -39,6 +39,13 @@ public interface IProviderGeoItemLayer<C> {
         return add(newItem);
     }
 
+    /** Optional method which is called after a batch of map layer updates (add/remove). It is intended to
+     *  be used to trigger a "global map view update" if this is required by map implementation
+      */
+    default void onMapChangeBatchEnd(final long processedCount) {
+        //default implementation does nothing
+    }
+
     /**
      * Hook to destroy object and free all allocated resources
      * Framework guarantees that this method is only called once and that after this call no other method

@@ -1,14 +1,19 @@
 package cgeo.geocaching.filters.core;
 
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.BooleanUtils;
 
 
@@ -49,10 +54,19 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     @Nullable
     @Override
     public Boolean filter(final Geocache cache) {
-        final String finder = cache.getSearchFinder();
-        if (finder != null && !inverse && foundByFilter.matches(finder)) {
-            return true;
+
+        //Check against result of online search
+        final SearchCacheData scd = cache.getSearchData();
+        if (scd != null && foundByFilter.isFilled()) {
+            final Set<String> checkSet = inverse ? scd.getNotFoundBy() : scd.getFoundBy();
+            for (String check : checkSet) {
+                if (foundByFilter.matches(check)) {
+                    return true;
+                }
+            }
         }
+
+        // Check against offline stored log data
         final List<LogEntry> logEntries = cache.getLogs();
         if (logEntries.isEmpty() && !cache.inDatabase()) {
             return inverse ? true : null; //if inverse=true then this might be a gc.com search
@@ -95,19 +109,36 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         foundByFilter.setConfig(config.getDefaultList());
         inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
         logTextFilter.setConfig(config.get(CONFIG_KEY_LOG_TEXT));
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = new ExpressionConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = new LegacyFilterConfig();
         config.putDefaultList(foundByFilter.getConfig());
         config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
         config.put(CONFIG_KEY_LOG_TEXT, logTextFilter.getConfig());
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.set(node, "foundBy", foundByFilter.getJsonConfig());
+        JsonUtils.setBoolean(node, CONFIG_KEY_INVERSE, inverse);
+        JsonUtils.set(node, "logText", logTextFilter.getJsonConfig());
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        foundByFilter.setJsonConfig(JsonUtils.get(node, "foundBy"));
+        inverse = JsonUtils.getBoolean(node, CONFIG_KEY_INVERSE, false);
+        logTextFilter.setJsonConfig(JsonUtils.get(node, "logText"));
     }
 
     @Override

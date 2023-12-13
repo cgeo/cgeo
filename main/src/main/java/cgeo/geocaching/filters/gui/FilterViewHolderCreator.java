@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.core.CategoryGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.HiddenGeocacheFilter;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
@@ -13,10 +14,12 @@ import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StoredListGeocacheFilter;
-import cgeo.geocaching.filters.core.StoredSinceGeocacheFilter;
+import cgeo.geocaching.filters.core.TierGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.models.bettercacher.Tier;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
@@ -85,6 +88,9 @@ public class FilterViewHolderCreator {
             case DIFFICULTY_TERRAIN:
                 result = new DifficultyAndTerrainFilterViewHolder();
                 break;
+            case DIFFICULTY_TERRAIN_MATRIX:
+                result = new DifficultyTerrainMatrixFilterViewHolder();
+                break;
             case STATUS:
                 result = new StatusFilterViewHolder();
                 break;
@@ -102,6 +108,12 @@ public class FilterViewHolderCreator {
                         LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d),
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label),
                         LocalizationUtils.getStringArray(R.array.cache_filter_hidden_since_stored_values_label_short));
+                break;
+            case EVENT_DATE:
+                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
+                        LocalizationUtils.getIntArray(R.array.cache_filter_event_date_stored_values_d),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_event_date_stored_values_label_short));
                 break;
             case LAST_FOUND:
                 final int[] values = LocalizationUtils.getIntArray(R.array.cache_filter_hidden_since_stored_values_d);
@@ -122,6 +134,9 @@ public class FilterViewHolderCreator {
             case STORED_LISTS:
                 result = createStoredListFilterViewHolder();
                 break;
+            case NAMED_FILTER:
+                result = new NamedFilterFilterViewHolder();
+                break;
             case ORIGIN:
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
@@ -131,7 +146,29 @@ public class FilterViewHolderCreator {
                         new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;
             case STORED_SINCE:
-                result = createStoredSinceFilterViewHolder();
+                result = new DateRangeFilterViewHolder<HiddenGeocacheFilter>(true,
+                        LocalizationUtils.getIntArray(R.array.cache_filter_stored_since_stored_values_d),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label),
+                        LocalizationUtils.getStringArray(R.array.cache_filter_stored_since_stored_values_label_short));
+                break;
+            case CATEGORY:
+                result = new CheckboxFilterViewHolder<>(
+                        new ValueGroupFilterAccessor<Category, CategoryGeocacheFilter>()
+                                .setFilterValueGetter(CategoryGeocacheFilter::getCategories)
+                                .setFilterValueSetter(CategoryGeocacheFilter::setCategories)
+                                .setGeocacheValueGetter((f, c) -> new HashSet<>(c.getCategories()))
+                                .setSelectableValues(Category.getAllCategoriesExceptUnknown())
+                                .setValueDisplayTextGetter(Category::getI18nText)
+                                .setValueDrawableGetter(c -> ImageParam.id(c.getIconId())),
+                        2, null);
+                break;
+            case TIER:
+                result = new CheckboxFilterViewHolder<>(
+                        ValueGroupFilterAccessor.<Tier, TierGeocacheFilter>createForValueGroupFilter()
+                                .setSelectableValues(Tier.values())
+                                .setValueDisplayTextGetter(Tier::getI18nText)
+                                .setValueDrawableGetter(t -> ImageParam.id(t.getIconId())),
+                        2, null);
                 break;
             case LOGICAL_FILTER_GROUP:
                 result = new LogicalFilterViewHolder();
@@ -161,7 +198,11 @@ public class FilterViewHolderCreator {
     }
 
     public static <T extends IGeocacheFilter> IGeocacheFilter createFrom(final IFilterViewHolder<T> holder) {
-        return holder.createFilterFromView();
+        final IGeocacheFilter filter = holder.createFilterFromView();
+        if (filter == null || filter.getType() == null) {
+            throw new IllegalStateException("ViewHolder did not create valid filter: " + holder.getClass().getName());
+        }
+        return filter;
     }
 
     public static boolean isListInfoFilled() {
@@ -218,15 +259,4 @@ public class FilterViewHolderCreator {
 
         return new CheckboxFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
-
-    private static IFilterViewHolder<?> createStoredSinceFilterViewHolder() {
-        return new ItemRangeSelectorViewHolder<>(
-                new ValueGroupFilterAccessor<Long, StoredSinceGeocacheFilter>()
-                        .setSelectableValues(StoredSinceGeocacheFilter.getValueRange())
-                        .setFilterValueGetter(f -> f.getValuesInRange(StoredSinceGeocacheFilter.getValueRange()))
-                        .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
-                        .setValueDisplayTextGetter(s -> StoredSinceGeocacheFilter.toUserDisplayValue(s, false)),
-                (i, s) -> StoredSinceGeocacheFilter.toUserDisplayValue(s, true));
-    }
-
 }

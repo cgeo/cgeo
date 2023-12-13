@@ -5,7 +5,7 @@ import cgeo.geocaching.models.Geocache;
 /**
  * Compares caches by date. Used only for event caches, if the cache list detects that a list contains only events.
  */
-public class EventDateComparator extends DateComparator {
+public class EventDateComparator extends HiddenDateComparator {
 
     public static final EventDateComparator INSTANCE = new EventDateComparator();
 

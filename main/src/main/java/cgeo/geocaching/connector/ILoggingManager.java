@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
@@ -10,40 +10,75 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import java.util.Calendar;
 import java.util.List;
 
+/**
+ * An instance of an implementing class allows online logging activites for a concrete geocache.
+ */
 public interface ILoggingManager {
 
-    /**
-     * Post a log for a cache online
-     *
-     * @param logPassword optional, maybe null
-     */
+    /** Returns the cache that this instance is associated with */
+    @NonNull
+    Geocache getCache();
+
+    /** Returns the connector that this logging manager is associated with */
+    @NonNull
+    IConnector getConnector();
+
+    /** Create a new log for a cache online */
     @NonNull
     @WorkerThread
-    LogResult postLog(@NonNull LogType logType,
-                      @NonNull Calendar date,
-                      @NonNull String log,
-                      @Nullable String logPassword,
-                      @NonNull List<TrackableLog> trackableLogs,
-                      @NonNull ReportProblemType reportProblem);
+    LogResult createLog(@NonNull LogEntry logEntry,
+                        @Nullable String logPassword,
+                        @NonNull List<TrackableLog> trackableLogs,
+                        boolean addToFavorites,
+                        float rating);
 
+    /** Edits an existing log for a cache online */
     @NonNull
     @WorkerThread
-    ImageResult postLogImage(String logId,
-                             Image image);
+    LogResult editLog(@NonNull LogEntry newEntry);
 
-    boolean hasLoaderError();
-
+    /** Deletes an existing log for a cache online */
     @NonNull
-    List<TrackableLog> getTrackables();
+    @WorkerThread
+    LogResult deleteLog(@NonNull String logId);
 
+    /** Returns whether this log entry can be edited */
+    boolean canEditLog(@NonNull LogEntry entry);
+
+    /** Returns whether this log entry can be deleted */
+    boolean canDeleteLog(@NonNull LogEntry entry);
+
+
+    /** Attach an image to an existing log. The supplied image's MUST point to a local file */
     @NonNull
-    List<LogType> getPossibleLogTypes();
+    @WorkerThread
+    ImageResult createLogImage(@NonNull String logId, @NonNull Image image);
 
-    void init();
+    /** Edit an images properties already attached to an existing log */
+    @NonNull
+    @WorkerThread
+    ImageResult editLogImage(@NonNull String logId, @NonNull String serviceImageId, @Nullable String title, @Nullable String description);
 
+    /** Deletes an image from an existing log */
+    @NonNull
+    @WorkerThread
+    ImageResult deleteLogImage(@NonNull String logId, @NonNull String serviceImageId);
+
+    /** Returns whether this manager supports editing a log image's properties */
+    boolean supportsEditLogImages();
+
+    /** Returns whether this manager supports deleting a log image from a log */
+    boolean supportsDeleteLogImages();
+
+    /** Returns whether this manager supports the assignment of a favorite point together with log creation */
+    boolean supportsLogWithFavorite();
+
+    /** Retrieves additional contexxt information which can be used for online logging */
+    @NonNull
+    @WorkerThread
+    LogContextInfo getLogContextInfo(@Nullable String serviceLogId);
 
     Long getMaxImageUploadSize();
 
@@ -52,6 +87,6 @@ public interface ILoggingManager {
     @NonNull
     List<ReportProblemType> getReportProblemTypes(@NonNull Geocache geocache);
 
-    boolean hasTrackableLoadError();
+    int getFavoriteCheckboxText();
 
 }

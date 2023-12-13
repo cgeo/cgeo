@@ -16,6 +16,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
@@ -203,7 +204,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         displayType.setSpinner(binding.ccGuidedFormat)
                 .setValues(CollectionStream.of(CalculatedCoordinateType.values()).filter(t -> PLAIN != t).toList())
-                .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
+                .setDisplayMapperPure(CalculatedCoordinateType::toUserDisplayableString)
                 .set(calcCoord.getType())
                 .setChangeListener(t -> refreshType(t, false));
 
@@ -263,8 +264,14 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.ccPlainTools.setOnClickListener(v -> {
             final List<Integer> options = Collections.singletonList(R.string.calccoord_remove_spaces);
+            final SimpleDialog.ItemSelectModel<Integer> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(options)
+                .setDisplayMapper((i) -> TextParam.id(i))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
-                    .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
+                    .selectSingle(model, (o) -> {
                         if (o == R.string.calccoord_remove_spaces) {
                             binding.PlainLat.setText(DegreeFormula.removeSpaces(binding.PlainLat.getText().toString()));
                             binding.PlainLon.setText(DegreeFormula.removeSpaces(binding.PlainLon.getText().toString()));
@@ -386,16 +393,15 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             return;
         }
 
+        final SimpleDialog.ItemSelectModel<Pair<String, Geopoint>> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(gps)
+            .setDisplayMapper((p) -> TextParam.text(p.first + ":\n" + p.second));
+
         SimpleDialog.of(this.getActivity()).setTitle(TextParam.id(R.string.calccoord_generate_title))
                 .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))
-                .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second), null, s -> {
-                    if (s.isEmpty()) {
-                        ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
-                        return;
-                    }
-                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                    generateWaypoints(cache, true, s);
-                }, s -> {
+                .setNeutralAction(() -> {
+                    final Set<Pair<String, Geopoint>> s = model.getSelectedItems();
                     if (s.isEmpty()) {
                         ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
                         return;
@@ -408,6 +414,14 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                     generateWaypoints(dummyCache, false, s);
 
                     DefaultMap.startActivityGeoCode(this.getActivity(), dummyGeocode);
+                })
+                .selectMultiple(model, s -> {
+                    if (s.isEmpty()) {
+                        ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
+                        return;
+                    }
+                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                    generateWaypoints(cache, true, s);
                 });
     }
 

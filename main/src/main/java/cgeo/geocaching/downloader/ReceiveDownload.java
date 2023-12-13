@@ -49,7 +49,7 @@ class ReceiveDownload {
 
 
     protected enum CopyStates {
-        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, UNKNOWN_STATE
+        SUCCESS, CANCELLED, IO_EXCEPTION, FILENOTFOUND_EXCEPTION, INTEGRITY_CHECK_ERROR, UNKNOWN_STATE
     }
 
     /**
@@ -123,14 +123,21 @@ class ReceiveDownload {
                                final boolean isZipFile, final String nameWithinZip) {
         cleanupFolder();
 
-        // now start copy task
-        final CopyStates status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip);
-
-        final String resultMsg;
         Worker.Result resultId = Worker.Result.failure();
+        final String resultMsg;
+
         String fileinfo = filename;
         if (fileinfo != null) {
             fileinfo = fileinfo.substring(0, fileinfo.length() - downloader.forceExtension.length());
+        }
+
+        // do some integrity checks (if supported by file type)
+        final CopyStates status;
+        if (!downloader.verifiedBeforeCopying(filename, uri)) {
+            status = CopyStates.INTEGRITY_CHECK_ERROR;
+        } else {
+            // now start copy task
+            status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip);
         }
         switch (status) {
             case SUCCESS:
@@ -149,6 +156,9 @@ class ReceiveDownload {
                 break;
             case FILENOTFOUND_EXCEPTION:
                 resultMsg = context.getString(R.string.receivedownload_error_filenotfound_exception);
+                break;
+            case INTEGRITY_CHECK_ERROR:
+                resultMsg = context.getString(R.string.receivedownload_integritycheck_failed);
                 break;
             default:
                 resultMsg = context.getString(R.string.receivedownload_error);
@@ -214,6 +224,10 @@ class ReceiveDownload {
             } else {
                 status = doCopy(context, notification, updateForegroundNotification, inputStream, outputUri);
             }
+            if (status == CopyStates.SUCCESS && !downloader.verifiedAfterCopying(filename, outputUri)) {
+                status = CopyStates.INTEGRITY_CHECK_ERROR;
+                cancelled.set(true);
+            }
         } catch (SecurityException e) {
             Log.e("SecurityException on receiving map file: " + e.getMessage());
             return CopyStates.FILENOTFOUND_EXCEPTION;
@@ -225,14 +239,21 @@ class ReceiveDownload {
 
         // clean up
         if (!cancelled.get()) {
-            try {
-                context.getContentResolver().delete(uri, null, null);
-            } catch (IllegalArgumentException iae) {
-                Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+            if (status == CopyStates.SUCCESS) {
+                // having successfully received the copy we can delete the temporary copy
+                try {
+                    context.getContentResolver().delete(uri, null, null);
+                } catch (IllegalArgumentException iae) {
+                    Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+                }
+                // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
+                downloader.onSuccessfulReceive(outputUri);
+            } else {
+                // delete partial copy, but don't change status
+                ContentStorage.get().delete(outputUri);
             }
-            // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
-            downloader.onSuccessfulReceive(outputUri);
         } else {
+            // delete partial copy, set status to CANCELLED
             ContentStorage.get().delete(outputUri);
             status = CopyStates.CANCELLED;
         }

@@ -5,11 +5,14 @@ import cgeo.geocaching.activity.Keyboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,13 +22,14 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
     public static final String ARGUMENT_INITIAL_NOTE = "initialNote";
     public static final String ARGUMENT_INITIAL_PREVENT = "initialPrevent";
+    public static final String ARGUMENT_INITIAL_UPLOAD_AVAILABLE = "initialUploadAvailable";
 
     private Toolbar toolbar;
     private EditText mEditText;
     private CheckBox mPreventCheckbox;
 
     public interface EditNoteDialogListener {
-        void onFinishEditNoteDialog(String inputText, boolean preventWaypointsFromNote);
+        void onFinishEditNoteDialog(String inputText, boolean preventWaypointsFromNote, boolean uploadNote);
     }
 
     /**
@@ -34,12 +38,13 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
      *
      * @param initialNote the initial note to insert in the edit dialog
      */
-    public static EditNoteDialog newInstance(final String initialNote, final boolean preventWaypointsFromNote) {
+    public static EditNoteDialog newInstance(final String initialNote, final boolean preventWaypointsFromNote, final boolean connectorSupportsUpload) {
         final EditNoteDialog dialog = new EditNoteDialog();
 
         final Bundle arguments = new Bundle();
         arguments.putString(ARGUMENT_INITIAL_NOTE, initialNote);
         arguments.putBoolean(ARGUMENT_INITIAL_PREVENT, preventWaypointsFromNote);
+        arguments.putBoolean(ARGUMENT_INITIAL_UPLOAD_AVAILABLE, connectorSupportsUpload);
         dialog.setArguments(arguments);
 
         return dialog;
@@ -53,6 +58,12 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
         toolbar = view.findViewById(R.id.toolbar);
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final @NonNull Menu menu, final @NonNull MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        menu.findItem(R.id.menu_item_save_and_upload).setVisible(getArguments().getBoolean(ARGUMENT_INITIAL_UPLOAD_AVAILABLE));
     }
 
     @Override
@@ -77,10 +88,12 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
         toolbar.setNavigationOnClickListener(v -> dismiss());
         toolbar.setTitle(R.string.cache_personal_note);
-        toolbar.inflateMenu(R.menu.menu_ok_cancel);
+        onCreateOptionsMenu(toolbar.getMenu(), new MenuInflater(getContext()));
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
-                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(mEditText.getText().toString(), mPreventCheckbox.isChecked());
+                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(mEditText.getText().toString(), mPreventCheckbox.isChecked(), false);
+            } else if (item.getItemId() == R.id.menu_item_save_and_upload) {
+                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(mEditText.getText().toString(), mPreventCheckbox.isChecked(), true);
             }
             dismiss();
             return true;

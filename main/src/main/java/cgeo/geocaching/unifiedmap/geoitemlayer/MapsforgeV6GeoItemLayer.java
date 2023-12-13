@@ -94,6 +94,11 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             default:
                 final Polygon po = new Polygon(fillPaint, strokePaint, AndroidGraphicFactory.INSTANCE);
                 po.addPoints(CollectionStream.of(item.getPoints()).map(MapsforgeV6GeoItemLayer::latLong).toList());
+                if (item.getHoles() != null) {
+                    for (List<Geopoint> hole : item.getHoles()) {
+                        po.addHole(CollectionStream.of(hole).map(MapsforgeV6GeoItemLayer::latLong).toList());
+                    }
+                }
                 goLayer = po;
                 break;
         }

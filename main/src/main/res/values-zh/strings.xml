@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">确定</string>
     <!-- basics -->
     <string name="cache">藏点</string>
     <string name="detail">详细资料</string>
@@ -60,6 +57,8 @@
     <string name="wpnew_pkg">停车场</string>
     <string name="wpnew_waypoint">标记</string>
     <string name="wpnew_original">原始坐标</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">已发现</string>
     <string name="log_dnf">未发现</string>
@@ -98,7 +97,6 @@
     <string name="log_saving">正在发送日志…</string>
     <string name="log_saving_and_uploading">正在发布日志并上传图片…</string>
     <string name="log_posting_log">正在发布日志…</string>
-    <string name="log_posting_twitter">正在发布推文…</string>
     <string name="log_posting_vote">正在发布藏点评分…</string>
     <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">正在发布 %1$s %2$d/%3$d</string>
@@ -126,10 +124,6 @@
     <string name="log_smilies">微笑</string>
     <string name="log_image">图片</string>
     <string name="log_images">图片</string>
-    <string name="log_image_attach">附加图片</string>
-    <string name="log_image_stored">现有</string>
-    <string name="log_image_camera">新建</string>
-    <string name="log_image_delete">删除</string>
     <string name="log_image_caption">说明</string>
     <string name="log_image_description">描述</string>
     <string name="log_image_scale">缩放</string>
@@ -162,7 +156,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">确定</string>
     <string name="err_parse">登录页解析失败</string>
-    <string name="err_server">无法连接 Geocaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_ec">无法连接 Extremcaching.com。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_su">无法连接 Geocaching.su。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_gk">无法连接 GeoKrety.org。网站可能已经关闭，或者是你的网络连接有问题。</string>
@@ -185,7 +178,6 @@
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
-    <string name="err_watchlist_still_managing">仍然在管理你的watchlist。</string>
     <string name="err_watchlist_failed">更改您的关注列表失败。</string>
     <string name="err_application_no">c:geo找不到任何合适的应用程序。</string>
     <string name="err_auth_initialize">c:geo 初始化授权过程失败。</string>
@@ -413,7 +405,6 @@
     <string name="settings_title_map_data">地图数据</string>
     <string name="settings_title_offline_routing">离线路线规划</string>
     <string name="settings_summary_offline_routing">如果安装并配置了辅助程序“BRouter”，或启用了内部路线规划，则离线路线规划可用。</string>
-    <string name="settings_title_map_rotation">地图旋转 (谷歌地图)</string>
     <string name="settings_title_waypoints">航点</string>
     <string name="settings_title_map_content">地图内容</string>
     <string name="settings_title_map_behavior">地图行为</string>
@@ -430,7 +421,6 @@
     <string name="settings_title_navigation_menu">导航菜单</string>
     <string name="settings_category_geocaching_platform">地理藏宝平台</string>
     <string name="settings_category_geocaching_additionals">更多服务和插件</string>
-    <string name="settings_category_social">社交媒体</string>
     <string name="settings_category_logging_other">其他记录日志选项</string>
     <string name="settings_goto_url_button">更多 …</string>
     <string name="settings_service_activate">激活</string>
@@ -518,6 +508,7 @@
     <string name="init_summary_livelist">为列表中的藏点显示带有指南针方向的箭头</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">创建备份</string>
     <string name="init_backup_summary">请注意，此功能可以备份藏点，航点和设置，但没有缓存图像。 \n为了能够在丢失您的手机后恢复数据。 备份文件应复制到独立位置。</string>
@@ -627,9 +618,6 @@
     <string name="settings_open_geokretymap_website">打开 GeoKretyMap.org 网站</string>
     <string name="settings_settings">设置</string>
     <string name="settings_information">信息</string>
-    <string name="settings_advanced">高级设置</string>
-    <string name="settings_twitter_cache_message">已找到藏点的消息</string>
-    <string name="settings_twitter_trackable_message">已找到可追踪物的消息</string>
     <string name="init_ec_icons">地图图标</string>
     <string name="settings_features">支持的功能</string>
     <string name="feature_personal_notes">个人笔记</string>
@@ -659,7 +647,6 @@
     <string name="auth_unconnected">尚未连接</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -674,7 +661,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <!-- search -->
     <!-- trackable -->
@@ -714,6 +700,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -728,10 +715,11 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

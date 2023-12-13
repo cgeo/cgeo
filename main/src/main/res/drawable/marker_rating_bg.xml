@@ -1,9 +1,0 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="13dp"
-    android:height="13dp"
-    android:viewportWidth="13"
-    android:viewportHeight="13">
-  <path
-      android:pathData="M6.5,6.5m-6.125,0a6.125,6.125 0,1 1,12.25 0a6.125,6.125 0,1 1,-12.25 0"
-      android:fillColor="@color/cacheMarker_background"/>
-</vector>

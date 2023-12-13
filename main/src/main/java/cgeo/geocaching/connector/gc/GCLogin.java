@@ -176,7 +176,7 @@ public class GCLogin extends AbstractLogin {
 
             if (StringUtils.isBlank(tryLoggedInData)) {
                 logLastLoginError("Failed to retrieve login page (1st)");
-                return StatusCode.CONNECTION_FAILED; // no login page
+                return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
             if (getLoginStatus(tryLoggedInData)) {
@@ -229,7 +229,7 @@ public class GCLogin extends AbstractLogin {
             return status.statusCode;
         } catch (final Exception ignored) {
             logLastLoginError("communication error");
-            return StatusCode.CONNECTION_FAILED;
+            return StatusCode.CONNECTION_FAILED_GC;
         }
     }
 
@@ -311,6 +311,15 @@ public class GCLogin extends AbstractLogin {
         try {
             final ServerParameters params = getServerParameters();
             return params.appOptions.localRegion;
+        } catch (final Exception e) {
+            return "UNKNOWN";
+        }
+    }
+
+    public String getPublicGuid() {
+        try {
+            final ServerParameters params = getServerParameters();
+            return params.userInfo.publicGuid;
         } catch (final Exception e) {
             return "UNKNOWN";
         }
@@ -566,7 +575,7 @@ public class GCLogin extends AbstractLogin {
         setHomeLocation();
         getServerParameters();
         // Force token retrieval to avoid avalanche requests
-        GCWebAPI.getAuthorizationHeader().subscribe();
+        GCAuthAPI.triggerAuthenticationTokenRetrieval();
         Settings.setLastLoginSuccessGC();
         return StatusCode.NO_ERROR; // logged in
     }

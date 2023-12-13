@@ -7,35 +7,33 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
-public abstract class AbstractDialogFragment extends DialogFragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
+public abstract class AbstractDialogFragment extends Fragment implements CacheMenuHandler.ActivityInterface, INavigationSource {
     public static final int RESULT_CODE_SET_TARGET = Activity.RESULT_FIRST_USER;
     public static final int REQUEST_CODE_TARGET_INFO = 1;
     protected static final String GEOCODE_ARG = "GEOCODE";
@@ -69,11 +67,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         setHasOptionsMenu(true);
     }
 
-    protected void initCustomActionBar(final View v) {
-        final Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -84,9 +77,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
-            ((AbstractActivity) getActivity()).showToast(res.getString(R.string.err_detail_cache_find));
+            ((AbstractActivity) requireActivity()).showToast(res.getString(R.string.err_detail_cache_find));
 
-            getActivity().finish();
+            MapUtils.removeDetailsFragment(requireActivity());
             return;
         }
 
@@ -123,8 +116,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
         cacheDistance = details.addDistance(cache, cacheDistance);
 
-        details.addDifficulty(cache);
-        details.addTerrain(cache);
+        details.addDifficultyTerrain(cache);
         details.addEventDate(cache);
 
         // rating
@@ -143,6 +135,8 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             }
         }
 
+        details.addBetterCacher(cache);
+
         // Latest logs
         details.addLatestLogs(cache);
 
@@ -153,7 +147,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
         buttonMore.setOnClickListener(arg0 -> {
             CacheDetailActivity.startActivity(getActivity(), geocode);
-            getActivity().finish();
         });
 
         /* Only working combination as it seems */
@@ -175,52 +168,37 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
      * Set the current popup coordinates as new navigation target on map
      */
     private void setAsTarget() {
-        final Activity activity = getActivity();
-        final Intent result = new Intent();
-        result.putExtra(Intents.EXTRA_TARGET_INFO, getTargetInfo());
-        activity.setResult(RESULT_CODE_SET_TARGET, result);
-        activity.finish();
+        final TargetUpdateReceiver activity = (TargetUpdateReceiver) requireActivity();
+        activity.onReceiveTargetUpdate(getTargetInfo());
+        MapUtils.removeDetailsFragment(requireActivity());
     }
 
-    @Override
-    public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        CacheMenuHandler.addMenuItems(inflater, menu, cache, true);
-        CacheMenuHandler.initDefaultNavigationMenuItem(menu, this);
-
-        if (requireActivity().getCallingActivity() != null) {
-            menu.findItem(R.id.menu_target).setVisible(true);
-        }
+    public static void onCreatePopupOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {
+        final Menu menu = toolbar.getMenu();
+        menu.clear();
+        toolbar.inflateMenu(R.menu.cache_options);
+        CacheMenuHandler.onPrepareOptionsMenu(menu, geocache, true);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, navigationSource);
+        ViewUtils.extendMenuActionBarDisplayItemCount(toolbar.getContext(), menu);
+        menu.findItem(R.id.menu_target).setVisible(true);
+        LoggingUI.onPrepareOptionsMenu(menu, geocache);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+    public boolean onPopupOptionsItemSelected(@NonNull final MenuItem item) {
         if (item.getItemId() == R.id.menu_target) {
             setAsTarget();
             return true;
         }
+
         if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init, true)) {
             return true;
         }
+
         if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        return false;
     }
-
-    @Override
-    public void onPrepareOptionsMenu(@NonNull final Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-
-        try {
-            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, true);
-            LoggingUI.onPrepareOptionsMenu(menu, cache);
-        } catch (final RuntimeException ignored) {
-            // nothing
-        }
-    }
-
 
     protected abstract TargetInfo getTargetInfo();
 
@@ -237,13 +215,10 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             return;
         }
         CacheListActivity.startActivityCoordinates((AbstractActivity) getActivity(), targetInfo.coords, cache != null ? cache.getName() : null);
-        getActivity().finish();
     }
 
-    @Override
-    public void onCancel(@NonNull final DialogInterface dialog) {
-        super.onCancel(dialog);
-        getActivity().finish();
+    public interface TargetUpdateReceiver {
+        void onReceiveTargetUpdate(TargetInfo targetInfo);
     }
 
     public static class TargetInfo implements Parcelable {

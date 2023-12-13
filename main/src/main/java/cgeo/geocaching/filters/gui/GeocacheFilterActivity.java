@@ -15,10 +15,10 @@ import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
@@ -144,7 +144,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 switchToBasic();
             } else {
                 SimpleDialog.of(this).setTitle(R.string.cache_filter_mode_basic_change_confirm_loss_title).setMessage(R.string.cache_filter_mode_basic_change_confirm_loss_message).confirm(
-                        (vv, ii) -> switchToBasic(), (vv, ii) -> {
+                        this::switchToBasic, () -> {
                             processBasicAdvancedListener = false;
                             this.binding.filterBasicAdvanced.setChecked(true);
                             processBasicAdvancedListener = true;
@@ -167,11 +167,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                 filterName = filterName.substring(0, filterName.length() - 1);
             }
             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_title)
-                    .input(-1, filterName, null, null, newName -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(filterName), newName -> {
                         final GeocacheFilter filter = getFilterFromView();
                         if (GeocacheFilter.Storage.existsAndDiffers(newName, filter)) {
                             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_confirm_title).setMessage(R.string.cache_filter_storage_save_confirm_message, newName).confirm(
-                                    (dialog, which) -> saveAs(newName));
+                                    () -> saveAs(newName));
                         } else {
                             saveAs(newName);
                         }
@@ -186,21 +186,28 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             if (filters.isEmpty()) {
                 SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title).setMessage(R.string.cache_filter_storage_load_delete_nofilter_message).show();
             } else {
-                Dialogs.selectItemDialogWithAdditionalDeleteButton(this, R.string.cache_filter_storage_load_delete_title,
-                        filters, (f) -> TextParam.text(f.getName()),
-                        // select listener
-                        (f) -> fillViewFromFilter(f.toConfig(), isAdvancedView()),
-                        // delete listener
-                        (f) -> SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_delete_title)
+                final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
+                model
+                    .setItems(filters)
+                    .setDisplayMapper((f) -> TextParam.text(f.getName()))
+                    .setItemActionIconMapper((f) -> ImageParam.id(R.drawable.ic_menu_delete))
+                    .setItemActionListener((f) -> {
+                        //DELETE action was tapped for a filter
+                        model.getDialog().dismiss();
+                        SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_delete_title)
                                 .setMessage(R.string.cache_filter_storage_delete_message)
-                                .confirm((dialog, which) -> {
+                                .confirm(() -> {
                                     GeocacheFilter.Storage.delete(f);
                                     //if currently shown view was just deleted -> then delete it in view as well
                                     if (f.getName().contentEquals(binding.filterStorageName.getText())) {
                                         binding.filterStorageName.setText("");
                                     }
-                                })
-                );
+                                });
+                    })
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+                SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title)
+                                .selectSingle(model, (f) -> fillViewFromFilter(f.toConfig(), isAdvancedView()));
             }
         });
         ViewUtils.setTooltip(binding.filterStorageManage, TextParam.id(R.string.cache_filter_storage_load_delete_title));
@@ -323,7 +330,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));
         addFilter.setValues(filterTypes)
-                .setDisplayMapper(GeocacheFilterType::getUserDisplayableName)
+                .setDisplayMapperPure(f -> {
+                    return f.getUserDisplayableName();
+                })
                 .setTextHideSelectionMarker(true)
                 .setView(binding.filterAdditem, (v, t) -> {
                 })
@@ -370,7 +379,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         final GeocacheFilter newFilter = getFilterFromView();
         final boolean filterWasChanged = !originalFilterConfig.equals(newFilter.toConfig());
         if (filterWasChanged) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
         } else {
             finish();
         }

@@ -92,7 +92,10 @@
                 style="@style/text_default"
                 android:layout_toLeftOf="@+id/imageview_information_icon_less"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:focusable="true"
+                android:maxLines="7"/>
             <ImageView android:id="@+id/imageview_information_icon_less"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"

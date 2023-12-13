@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -78,13 +79,13 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                     case GEOCACHE:
                         assert data instanceof Geocache;
                         holder.binding.detail.setText(Formatter.formatCacheInfoLong((Geocache) data, null, null));
-                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE).getDrawable(), null, null, null);
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, (Geocache) data, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
                         break;
                     case WAYPOINT:
                         assert data instanceof Waypoint;
                         final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                        holder.binding.detail.setText(data.getGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
-                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
+                        holder.binding.detail.setText(((Waypoint) data).getShortGeocode() + (cache != null ? Formatter.SEPARATOR + cache.getName() : ""));
+                        holder.binding.title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false, Settings.getIconScaleEverywhere()).getDrawable(), null, null, null);
                         break;
                     case COORDS:
                         // title.setText("Coordinates");
@@ -163,7 +164,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         if (position < 1 || position >= routeItemAdapter.getItems().size()) {
             return false;
         }
-        SimpleDialog.ofContext(this).setTitle(TextParam.id(R.string.individual_route_set_as_start_title)).setMessage(TextParam.id(R.string.individual_route_set_as_start_message)).confirm((d, v) -> {
+        SimpleDialog.ofContext(this).setTitle(TextParam.id(R.string.individual_route_set_as_start_title)).setMessage(TextParam.id(R.string.individual_route_set_as_start_message)).confirm(() -> {
             final ArrayList<RouteItem> newRouteItems = new ArrayList<>();
             for (int i = position; i < routeItemAdapter.getItems().size(); i++) {
                 newRouteItems.add(routeItemAdapter.getItems().get(i));
@@ -214,7 +215,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
     @Override
     public void onBackPressed() {
         if (!originalRouteItems.equals(routeItemAdapter.getItems())) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
+            SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm(this::finish);
         } else {
             finish();
         }

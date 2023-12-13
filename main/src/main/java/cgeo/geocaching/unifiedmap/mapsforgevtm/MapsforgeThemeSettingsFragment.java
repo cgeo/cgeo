@@ -67,8 +67,9 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         }
 
         //scale preferences for theme
-        addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.MAP),
-                R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);
+        //todo: map scale currently doesn't work for VTM (see #13593)
+        //addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.MAP),
+        //        R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.TEXT),
                 R.string.maptheme_scale_text_title, R.string.maptheme_scale_text_summary);
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.SYMBOL),

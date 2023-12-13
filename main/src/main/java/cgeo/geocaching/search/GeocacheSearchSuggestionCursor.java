@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 public class GeocacheSearchSuggestionCursor extends BaseSearchSuggestionCursor {
 
     public void addCache(@NonNull final String geocode, @NonNull final String name, final String type) {
-        final int icon = CacheType.getById(type).markerId;
+        final int icon = CacheType.getById(type).iconId;
         addRow(new String[]{
                 String.valueOf(rowId),
                 name,

@@ -3,11 +3,14 @@ package cgeo.geocaching.downloader;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.brouter.mapaccess.PhysicalFile;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -16,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,4 +89,12 @@ public class BRouterTileDownloader extends AbstractDownloader {
         return tiles;
     }
 
+    @Override
+    protected boolean verifiedBeforeCopying(final String filename, final Uri file) {
+        final String result = PhysicalFile.checkTileDataIntegrity(filename, (FileInputStream) ContentStorage.get().openForRead(file));
+        if (result != null) {
+            Log.e("Downloading routing tile '" + filename + "' failed: " + result);
+        }
+        return (result == null);
+    }
 }

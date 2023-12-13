@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -73,7 +74,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
@@ -197,6 +197,7 @@ final class OkapiClient {
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_FIELDS = "gc_code|attribution_note|willattends|short_description";
     private static final String SERVICE_CACHE_ADDITIONAL_L3_FIELDS = "my_notes";
     private static final String SERVICE_CACHE_ADDITIONAL_CURRENT_L3_FIELDS = "";
+    private static final String SERVICE_CACHE_FOUND_DATE_FIELDS = "code|name|is_found|latest_logs";
 
     private static final String METHOD_SEARCH_ALL = "services/caches/search/all";
     private static final String METHOD_SEARCH_BBOX = "services/caches/search/bbox";
@@ -233,6 +234,31 @@ final class OkapiClient {
         return result.isSuccess ? parseCache(result.data) : null;
     }
 
+    @Nullable
+    @WorkerThread
+    public static long getCacheFoundDate(final String geoCode) {
+        final IConnector connector = ConnectorFactory.getConnector(geoCode);
+        if (!(connector instanceof OCApiConnector)) {
+            return 0;
+        }
+
+        final OCApiConnector ocapiConn = (OCApiConnector) connector;
+
+        final Parameters params = new Parameters("cache_code", geoCode);
+        params.add("fields", SERVICE_CACHE_FOUND_DATE_FIELDS);
+        params.add("user_logs_only", "true");
+        params.add(PARAMETER_LOG_FIELDS_KEY, PARAMETER_LOG_FIELDS_VALUE);
+
+
+        final JSONResult result = getRequest(ocapiConn, OkapiService.SERVICE_CACHE, params);
+        final List<LogEntry> logs = parseLogs((ArrayNode) result.data.path(CACHE_LATEST_LOGS), geoCode);
+        for (LogEntry log : logs) {
+            if (log.logType.id == 2 || log.logType.id == 10) {
+                return log.date;
+            }
+        }
+        return 0;
+    }
     @NonNull
     @WorkerThread
     public static List<Geocache> getCachesAround(@NonNull final Geopoint center, @NonNull final OCApiConnector connector) {
@@ -365,7 +391,9 @@ final class OkapiClient {
         result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
 
         if (finder != null) {
-            result.setFinder(finder);
+            final SearchCacheData scd = new SearchCacheData();
+            scd.addFoundBy(finder);
+            result.setCacheData(scd);
         }
         return result;
 
@@ -590,12 +618,13 @@ final class OkapiClient {
 
     @NonNull
     @WorkerThread
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites) {
+    @SuppressWarnings("PMD.NPathComplexity")
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Date date, @NonNull final String log, @Nullable final String logPassword, @NonNull final OCApiConnector connector, @NonNull final ReportProblemType reportProblem, final boolean addToFavorites, final float rating) {
         final Parameters params = new Parameters("cache_code", cache.getGeocode());
         params.add("logtype", logType.ocType);
         params.add("comment", log);
         params.add("comment_format", "plaintext");
-        params.add("when", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("when", LOG_DATE_FORMAT.format(date));
         if (logType == LogType.NEEDS_MAINTENANCE) {
             params.add("needs_maintenance", "true");
         }
@@ -605,8 +634,13 @@ final class OkapiClient {
         if (reportProblem == ReportProblemType.NEEDS_MAINTENANCE) { // OKAPI only knows this one problem type
             params.add("needs_maintenance2", "true");
         }
-        if (logType == LogType.FOUND_IT && addToFavorites) {
-            params.add("recommend", "true");
+        if (logType == LogType.FOUND_IT) {
+            if (addToFavorites) {
+                params.add("recommend", "true");
+            }
+            if ((int) rating != 0) {
+                params.add("rating", String.valueOf((int) rating));
+            }
         }
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
@@ -621,7 +655,9 @@ final class OkapiClient {
                 return new LogResult(StatusCode.NO_ERROR, data.get("log_uuid").asText());
             }
 
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
+            final LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
+            logResult.setPostServerMessage(data.get("message").asText());
+            return logResult;
         } catch (final NullPointerException e) {
             Log.e("OkapiClient.postLog", e);
         }
@@ -634,7 +670,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("log_uuid", logId);
         final File file = image.getFile();
         if (file == null) {
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
         }
         FileInputStream fileStream = null;
         try {
@@ -645,20 +681,22 @@ final class OkapiClient {
             final ObjectNode data = postRequest(connector, OkapiService.SERVICE_ADD_LOG_IMAGE, params).data;
 
             if (data == null) {
-                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
             }
 
             if (data.get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText());
+                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText(), "");
             }
 
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            final ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+            logResult.setPostServerMessage(data.get("message").asText());
+            return logResult;
         } catch (final Exception e) {
             Log.e("OkapiClient.postLogImage", e);
         } finally {
             IOUtils.closeQuietly(fileStream);
         }
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @NonNull
@@ -799,6 +837,9 @@ final class OkapiClient {
             cache.setLogPasswordRequired(response.get(CACHE_REQ_PASSWORD).asBoolean());
 
             cache.setDetailedUpdatedNow();
+            if (cache.isFound()) {
+                cache.setVisitedDate(getCacheFoundDate(cache.getGeocode()));
+            }
             // save full detailed caches
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             DataStore.saveLogs(cache.getGeocode(), parseLogs((ArrayNode) response.path(CACHE_LATEST_LOGS), cache.getGeocode()), true);

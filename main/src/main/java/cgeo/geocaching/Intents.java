@@ -26,10 +26,8 @@ public class Intents {
     public static final String EXTRA_INDEX = PREFIX + "index";
     public static final String EXTRA_CLASS = PREFIX + "class";
     public static final String EXTRA_FIELD = PREFIX + "field";
-    public static final String EXTRA_DELETE_FLAG = PREFIX + "deleteflag";
     public static final String EXTRA_IMAGES = PREFIX + "images";
     public static final String EXTRA_MAX_IMAGE_UPLOAD_SIZE = PREFIX + "max-image-upload-size";
-    public static final String EXTRA_IMAGE_CAPTION_MANDATORY = PREFIX + "image-caption-mandatory";
     public static final String EXTRA_ID = PREFIX + "id";
     public static final String EXTRA_KEYWORD = PREFIX + "keyword";
     public static final String EXTRA_KEYWORD_SEARCH = PREFIX + "keyword_search";
@@ -38,6 +36,7 @@ public class Intents {
     public static final String EXTRA_COORD_DESCRIPTION = PREFIX + "coord_description";
     public static final String EXTRA_WPT_PAGE_UPDATE = PREFIX + "wpt_page_update";
     public static final String EXTRA_FILTER_CONTEXT = "filter_context";
+    public static final String EXTRA_MESSAGE_CENTER_COUNTER = "mccounter";
 
     public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";
     public static final String EXTRA_MAPSTATE = PREFIX + "mapstate";
@@ -66,7 +65,9 @@ public class Intents {
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
     public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
     public static final String ACTION_GEOCACHE_CHANGED = PREFIX_ACTION + "GEOCACHE_CHANGED";
+    public static final String ACTION_INDIVIDUALROUTE_CHANGED = PREFIX_ACTION + "INDIVIDUAL_ROUTE_CHANGED";
     public static final String ACTION_INVALIDATE_MAPLIST = PREFIX_ACTION + "INVALIDATE_MAPLIST";
+    public static final String ACTION_MESSAGE_CENTER_UPDATE = PREFIX_ACTION + "MCUPDATE";
 
     private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
     public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";

@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 
@@ -18,21 +18,21 @@ public class HideActionBarUtils {
         // utility class
     }
 
-    /** use this instead of AbstractBootmNavigationActivity.setContentView for being able to use a action bar toogle */
-    public static void setContentView(@NonNull final AbstractBottomNavigationActivity activity, final View contentView, final boolean showSpacer) {
+    /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
+    public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, final View contentView, final boolean showSpacer) {
         setStableLayout(activity, showSpacer);
         activity.setContentView(contentView);
         showActionBarSpacer(activity, showSpacer);
     }
 
-    /** use this instead of AbstractBootmNavigationActivity.setContentView for being able to use a action bar toogle */
-    public static void setContentView(@NonNull final AbstractBottomNavigationActivity activity, @LayoutRes final int layoutResID, final boolean showSpacer) {
+    /** use this instead of AbstractBottomNavigationActivity.setContentView for being able to use a action bar toogle */
+    public static void setContentView(@NonNull final AbstractNavigationBarActivity activity, @LayoutRes final int layoutResID, final boolean showSpacer) {
         setStableLayout(activity, showSpacer);
         activity.setContentView(layoutResID);
         showActionBarSpacer(activity, showSpacer);
     }
 
-    public static boolean toggleActionBar(@NonNull final AbstractBottomNavigationActivity activity) {
+    public static boolean toggleActionBar(@NonNull final AbstractNavigationBarActivity activity) {
         if (!Settings.getMapActionbarAutohide()) {
             return true;
         }
@@ -44,7 +44,7 @@ public class HideActionBarUtils {
         return actionBarShowing;
     }
 
-    private static boolean toggleActionBarHelper(@NonNull final AbstractBottomNavigationActivity activity) {
+    private static boolean toggleActionBarHelper(@NonNull final AbstractNavigationBarActivity activity) {
         final ActionBar actionBar = activity.getSupportActionBar();
         if (actionBar == null) {
             return false;
@@ -64,7 +64,7 @@ public class HideActionBarUtils {
         }
     }
 
-    private static void setStableLayout(@NonNull final AbstractBottomNavigationActivity activity, final boolean showSpacer) {
+    private static void setStableLayout(@NonNull final AbstractNavigationBarActivity activity, final boolean showSpacer) {
         if (showSpacer && Settings.getMapActionbarAutohide()) {
             activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         }

@@ -22,6 +22,11 @@
 
     <issue id="IconDensities" severity="ignore" />
 
+    <issue id="IconDuplicates" severity="ignore">
+        <!-- planned duplicate -->
+        <ignore path="src/main/res/drawable-xhdpi/attribute_kids*.png" />
+    </issue>
+
     <!-- unfinished localizations are okay since we always have English as fallback -->
     <issue id="MissingTranslation" severity="ignore" />
     <!-- old translation will be deleted by the next crowdin import -->
@@ -48,22 +53,25 @@
 
     <!-- resources loaded by dynamic name lookup -->
     <issue id="UnusedResources">
-        <!-- used for notification system -->
-        <ignore path="res/drawable-xhdpi/attribute_maintenance.png" />
+        <!-- changelog files are referenced depending of release phase -->
+        <ignore path="src/main/res/raw/changelog_*.md" />
 
         <!-- translations no longer used -->
-        <ignore path="res/values-*/strings.xml" />
+        <ignore path="src/main/res/values-*/strings.xml" />
+
+        <!-- used for notification system -->
+        <ignore path="src/main/res/drawable-xhdpi/attribute_maintenance.png" />
 
         <!-- cache rating markers (drawables and color values used by the drawables) -->
-        <ignore path="res/drawable/marker_rating_*.xml" />
+        <ignore path="src/main/res/drawable/marker_rating_*.xml" />
         <ignore regexp="R\.color\.marker_rating_[0-5]{1,2}" />
 
         <!-- defined in build.gradle android.buildTypes.manifestPlaceholders -->
-        <ignore path="res/*/ic_launcher_*round.xml" />
+        <ignore path="src/main/res/*/ic_launcher_*round.xml" />
     </issue>
 
     <issue id="MissingDefaultResource" severity="informational"/>
-    
+
     <!-- We've decided to stay with our slim splashscreen -->
     <issue id="CustomSplashScreen" severity="ignore"/>
 </lint>

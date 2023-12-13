@@ -3,11 +3,7 @@ package cgeo.geocaching.models.geoitem;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 
-import java.util.Collection;
-
 public interface IGeoItemSupplier {
-
-    String getId();
 
     boolean isHidden();
 
@@ -15,7 +11,7 @@ public interface IGeoItemSupplier {
 
     boolean hasData();
 
-    Collection<GeoPrimitive> getGeoData();
+    //Collection<GeoPrimitive> getGeoData();
 
     default Viewport getViewport() {
         return getItem().getViewport();

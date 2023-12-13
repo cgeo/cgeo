@@ -7,6 +7,141 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.12.11 Bugfix Release
+
+- Fix: Wrong default when manually logging a trackable
+- Fix: coord.info trackable links cannot be opened any more
+- Fix: Hint hidden behind compass when using large fonts
+- Fix: Cache icon on map not updated after logging from popup
+- Fix: Crash on displaying logging options
+- Fix: Crash on retrieving message center status
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.11.13 Bugfix Release
+
+- Change: Removed separate BetterCacher box, tap on BetterCacher info line instead
+- Change: Reduce timeout for calls to bettercacher.org
+- Fix: Personal note from server contained incorrect chars
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.11.01 Bugfix Release
+
+- Fix: Issues with distance views
+- Fix: Not all launcher icon variants are adaptive
+- Fix: Outdated error message if not network connection is available
+- Fix: Crashes when creating waypoint markers
+- Fix: Timezone issues when logging
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.10.25 Feature Release
+
+### Map
+- Updated Mapsforge and VTM libs to v0.20
+- Updated Google Maps renderer
+- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
+- New: Show custom cache icon as marker for related waypoints
+- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
+- New: Linear labs use numbers as waypoint markers
+- New: Waypoints of a cache show cache type icon as marker
+- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
+- New: User-defined routing profiles (internal routing only)
+- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+
+### Cache details
+- New: Edit default value for log image caption prefix
+- New: Ensure minimum image size for display
+- Change: Redesigned edit options for own log images
+- New: Bettercacher integration
+- New: Sync visited state on synchronizing waypoints to personal note
+- New: Retrieve found date for Opencaching-based caches
+- New: Append all waypoints to individual route
+
+### General
+- New: Increased target SDK to 33
+- Change: Handling of database access to avoid "database not available" crashes
+- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
+- New: Allow filtering in multi selection lists
+- New: Filter to include other named (stored) filters
+- Change: Removed AndroidBeam which is no longer supported by Android platform
+- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
+- Fix: Hide outdated connection error message
+- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.09.26 Bugfix Release
+
+- New: Increased target SDK to 33 (due to Play Store requirements)
+- New: (Android 13 only) Added "Notifications" permission - you may need to run the configuration wizard from home screen or grant notification permission manually to see download notifications
+- Fix: GPX import with multiple tracks in same file
+- Fix: Favorite ratio > 100% under certain conditions
+- Fix: Navigation line lost on screen rotation with Google Maps
+- Fix: Individual route not deleted from Google Maps on deletion
+- Fix: Last log text discarded when adding image first on new log
+- Fix: "Set as favorite" cannot be unchecked if no favorite point left, logging fails with error
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.08.24 Bugfix Release
+
+- Fix: Individual route actions not working when using Google Maps
+- Fix: Crash on adding to favorites (under certain conditions)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.08.16 Feature Release
+
+### Map
+- Change: Always show popup menu on cache/waypoint long-tap (configurable)
+- New: Add 'Set as target' to map's long-tap popup
+- Fix: Partial files remaining on aborted copying of downloaded files
+- New: Integrity check for downloaded routing tiles
+- New: Support for user-selected audio for proximity notifications
+- New: Toggle proximity notifications from map quick settings
+- New: Extended GeoJSON support for Google Maps
+- New: Display a search center indicator when performing address search => tap on map symbol
+- New: OpenTopoMap map provider
+
+### Cache details
+- New: 'Save and upload' button when editing personal note
+- Change: Replace most update progress dialogs by background actions
+- Change: Use only non-empty logs for 'repeat last log'
+- New: Display logging errors
+- New: Allow selecting, copying etc. of image description (EXIF info)
+
+### General
+- New: Add more number emojis (separate category)
+- Change: Use different source for preview of pocket queries
+- New: Make startscreen selectable
+- New: Support target selector for additional navi apps
+- New: Display question mark in difficulty/terrain symbol, if both difficulty and terrain are unknown
+- New: Option to vote on opencaching (OCPL) caches during logging
+- New: Event Date filter for upcoming events
+- Change: Make 'relative' the default for date filters
+- New: Display info on home screen for unread messages (optional)
+- New: Quick launch item for message center
+- New: Make last bottom navigation item customizable
+- New: Updated integrated BRouter
+- New: Add interface to OrganicMaps for navigation
+- Fix: HTML-encoded chars in 'trackable last spotted" name
+- Change: Removed outdated Twitter support
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2023.06.18 Bugfix Release
+
+### General
+- Fix: Crash in Google Maps on certain map source changes
+- Fix: Store caches - "refresh and keep list assignments" option does not store new caches
+- Fix: Some seekbar issues
+- Fix: SVG geochecker images not being displayed
+- New: Display geocaching.com login error messages on home screen
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.05.15 Feature Release
 
 ### Map

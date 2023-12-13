@@ -3,12 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_main">
 
+    <SwitchPreference
+        android:defaultValue="false"
+        android:key="@string/pref_extended_settings_enabled"
+        android:summary="@string/init_summary_extended_settings"
+        android:title="@string/init_title_extended_settings"
+        app:iconSpaceReserved="false"
+        app:allowDividerBelow="true"/>
+
     <!-- Services -->
     <Preference
         app:fragment="cgeo.geocaching.settings.fragments.PreferenceServicesFragment"
         app:icon="@drawable/settings_cloud"
         app:summary="@string/settings_summary_services"
-        app:title="@string/settings_title_services" />
+        app:title="@string/settings_title_services"
+        app:allowDividerAbove="true"/>
 
     <!-- Appearance -->
     <Preference
@@ -47,6 +56,7 @@
 
     <!-- Offline data -->
     <Preference
+        android:key="@string/preference_menu_offlinedata"
         app:fragment="cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment"
         app:icon="@drawable/settings_sdcard"
         app:summary="@string/settings_summary_offlinedata"

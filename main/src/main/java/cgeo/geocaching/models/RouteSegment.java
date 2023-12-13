@@ -11,12 +11,14 @@ public class RouteSegment implements Parcelable {
     private final RouteItem item;
     private float distance;
     private ArrayList<Geopoint> points;
+    private ArrayList<Float> elevation;
     private boolean linkToPreviousSegment = true;
 
     public RouteSegment(final RouteItem item, final ArrayList<Geopoint> points, final boolean linkToPreviousSegment) {
         this.item = item;
         distance = 0.0f;
         this.points = points;
+        this.elevation = null;
         this.linkToPreviousSegment = linkToPreviousSegment;
     }
 
@@ -64,12 +66,29 @@ public class RouteSegment implements Parcelable {
     }
 
     public void addPoint(final Geopoint geopoint) {
+        addPoint(geopoint, Float.NaN);
+    }
+
+    public void addPoint(final Geopoint geopoint, final float elevation) {
+        if (this.elevation != null && this.elevation.size() == points.size()) {
+            this.elevation.add(elevation);
+        }
         points.add(geopoint);
     }
 
     public void resetPoints() {
         points = new ArrayList<>();
+        elevation = new ArrayList<>();
         distance = 0.0f;
+    }
+
+    public void setElevation(final ArrayList<Float> elevation) {
+        this.elevation.clear();
+        this.elevation.addAll(elevation);
+    }
+
+    public ArrayList<Float> getElevation() {
+        return elevation;
     }
 
     public boolean getLinkToPreviousSegment() {
@@ -96,6 +115,7 @@ public class RouteSegment implements Parcelable {
         item = parcel.readParcelable(RouteItem.class.getClassLoader());
         distance = parcel.readFloat();
         points = parcel.readArrayList(Geopoint.class.getClassLoader());
+        elevation = parcel.readArrayList(Float.TYPE.getClassLoader());
     }
 
     @Override
@@ -108,6 +128,7 @@ public class RouteSegment implements Parcelable {
         dest.writeParcelable(item, flags);
         dest.writeFloat(distance);
         dest.writeList(points);
+        dest.writeList(elevation);
     }
 
 }

@@ -1,9 +1,8 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.location.GeoObjectList;
+import cgeo.geocaching.location.GeoItemHolder;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -21,7 +20,6 @@ import androidx.annotation.NonNull;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -65,15 +63,9 @@ public class GPXTrackOrRouteImporter {
     private static IGeoItemSupplier doInBackground(final Context context, final Uri uri) {
         try {
             // default: import properly formatted routes or tracks
-            Route route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
+            Route route = parse(new GPXTrackOrRouteParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
             if (null == route) {
-                route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/1", "1.1"), uri);
-            }
-            if (null == route) {
-                route = parse(new GPXTrackParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
-            }
-            if (null == route) {
-                route = parse(new GPXRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
+                route = parse(new GPXTrackOrRouteParser("http://www.topografix.com/GPX/1/0", "1.0"), uri);
             }
             // import waypoints as tracks
             if (null == route) {
@@ -84,7 +76,7 @@ public class GPXTrackOrRouteImporter {
             }
             // as last resort ignore missing namespace identifier
             if (null == route) {
-                route = parse(new GPXTrackParser("", "1.0"), uri);
+                route = parse(new GPXTrackOrRouteParser("", "1.0"), uri);
             }
             if (null != route) {
                 route.calculateNavigationRoute();
@@ -129,10 +121,8 @@ public class GPXTrackOrRouteImporter {
             if (is == null) {
                 return null;
             }
-            final List<GeoPrimitive> gos = GeoJsonUtils.parseGeoJson(is);
-            final GeoObjectList gg = new GeoObjectList();
-            gg.addAll(gos);
-            return gg;
+
+            return new GeoItemHolder(GeoJsonUtils.parseGeoJson(is));
         } catch (JSONException e) {
             Log.w("Problem parsing GeoJson file '" + uri + "': " + e);
             return null;

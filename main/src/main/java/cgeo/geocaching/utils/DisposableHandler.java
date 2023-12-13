@@ -47,7 +47,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     }
 
     @Override
-    public final void handleMessage(final Message message) {
+    public void handleMessage(final Message message) {
         if (message.obj instanceof CancelHolder) {
             final CancelHolder holder = (CancelHolder) message.obj;
             if (holder.kind == CancelHolder.CANCEL && !isDisposed()) {

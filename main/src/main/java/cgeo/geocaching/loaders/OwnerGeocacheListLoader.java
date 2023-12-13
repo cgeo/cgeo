@@ -3,6 +3,7 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.sorting.GeocacheSort;
 
 import android.app.Activity;
 
@@ -12,8 +13,8 @@ public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @NonNull public final String username;
 
-    public OwnerGeocacheListLoader(final Activity activity, @NonNull final String username) {
-        super(activity);
+    public OwnerGeocacheListLoader(final Activity activity, final GeocacheSort sort, @NonNull final String username) {
+        super(activity, sort);
         this.username = username;
     }
 

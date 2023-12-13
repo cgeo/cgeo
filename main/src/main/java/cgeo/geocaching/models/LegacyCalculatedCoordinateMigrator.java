@@ -350,7 +350,15 @@ public class LegacyCalculatedCoordinateMigrator {
                 .setPositiveButton(TextParam.id(R.string.calccoord_migrate_migrate))
                 .setNegativeButton(TextParam.id(R.string.calccoord_migrate_cancel))
                 .setNeutralButton(TextParam.id(R.string.calccoord_migrate_dismiss))
-                .show((v, i) -> {
+                .setNeutralAction(() -> {
+                    //dismiss calculated coordinate data
+                    w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
+                            ":" + mig.getMigrationData().getMigrationNotes());
+                    w.setCalcStateConfig(null);
+                    cache.addOrChangeWaypoint(w, true);
+                    actionAfterMigration.run();
+                })
+                .confirm(() -> {
                     w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate_usernote_praefix) +
                             ":" + mig.getMigrationData().getMigrationNotes());
                     for (Map.Entry<String, String> newVar : mig.getNewCacheVariables().entrySet()) {
@@ -364,14 +372,7 @@ public class LegacyCalculatedCoordinateMigrator {
                     w.setCalcStateConfig(cc.toConfig());
                     cache.addOrChangeWaypoint(w, true);
                     actionAfterMigration.run();
-                }, (v, i) -> actionAfterMigration.run(), (v, i) -> {
-                    //dismiss calculated coordinate data
-                    w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
-                            ":" + mig.getMigrationData().getMigrationNotes());
-                    w.setCalcStateConfig(null);
-                    cache.addOrChangeWaypoint(w, true);
-                    actionAfterMigration.run();
-                });
+                }, () -> actionAfterMigration.run());
     }
 
     private static String createNewUniqueVar(final String oldVar, final Set<String> existingVars) {

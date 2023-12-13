@@ -9,7 +9,7 @@ import android.os.Bundle;
 public class PreferenceServicesFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_services, rootKey);
+        initPreferences(R.xml.preferences_services, rootKey);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class PreferenceServicesFragment extends BasePreferenceFragment {
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_gcvote_authorization, Settings.isRatingWanted());
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_geokrety_authorization, Settings.isGeokretyConnectorActive());
         setPrefSummaryActiveStatus(this, R.string.pref_fakekey_sendtocgeo_info, Settings.isRegisteredForSend2cgeo());
-        setPrefSummaryActiveStatus(this, R.string.pref_fakekey_twitter_authorization, Settings.isUseTwitter());
+        setPrefSummaryActiveStatus(this, R.string.pref_fakekey_bettercacher_settings, Settings.isBetterCacherConnectorActive());
     }
 }

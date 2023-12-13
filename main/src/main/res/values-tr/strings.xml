@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaylar</string>
@@ -89,6 +86,8 @@
     <string name="wpnew_waypoint">Mevcut konum</string>
     <string name="wpnew_original">Orijinal</string>
     <string name="wpnew_generated">Oluşturuldu</string>
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Buldum</string>
     <string name="log_dnf">Bulamadım</string>
@@ -127,7 +126,6 @@
     <string name="log_saving">Kayıt gönderiliyor…</string>
     <string name="log_saving_and_uploading">Kaydınız yayınlanıyor ve resimler yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
-    <string name="log_posting_twitter">Tweet gönderiliyor…</string>
     <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
     <string name="log_posting_image">Resimler gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
@@ -156,10 +154,6 @@
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
     <string name="log_images">Resimler</string>
-    <string name="log_image_attach">Resim ekle</string>
-    <string name="log_image_stored">Var olan</string>
-    <string name="log_image_camera">Yeni</string>
-    <string name="log_image_delete">Sil</string>
     <string name="log_image_caption">Başlık</string>
     <string name="log_image_description">Açıklama</string>
     <string name="log_image_scale">Ölçekleme</string>
@@ -197,7 +191,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Tamam</string>
     <string name="err_parse">Oturum açma sayfası çözümlenemedi</string>
-    <string name="err_server">Geocaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_ec">Extremcaching.com\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_lc">labs.geocaching.com\'a bağlanılamıyor. Sitede sorun olabilir veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_su">Geocaching.su adresine bağlanılamıyor. Site veya internet bağlantınız çalışmıyor olabilir.</string>
@@ -221,7 +214,6 @@
     <string name="err_detail_no_spoiler">c: geo, bu Geocache için hiçbir ipucu görseli bulamadı.</string>
     <string name="err_detail_still_working">Hala başka bir görev üzerinde çalışıyor.</string>
     <string name="err_detail_premium_log_found">Bu Geocache yalnızca geocaching.com\'un premium üyeleri tarafından kullanılabilir. Bu nedenle, Geocache bilgileri görüntülenemiyor. \n \n Ancak, bu Geocache\'i zaten bulduysanız, buradan kayıt girebilirsiniz.</string>
-    <string name="err_watchlist_still_managing">Takip listeniz düzenleniyor.</string>
     <string name="err_watchlist_failed">Takip listenizin değiştirilmesi başarısız oldu.</string>
     <string name="err_application_no">c:geo uygun bir uygulama bulamıyor.</string>
     <string name="err_auth_initialize">c:geo yetkilendirme işlemini başlatamadı.</string>
@@ -552,24 +544,6 @@
     <string name="cache_filter_nested_filter_modify">düzenle</string>
     <string name="cache_filter_log_entry_foundby">Bulan</string>
     <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
-    <string name="cache_filter_stored_since_notstored">Kaydedilmemiş</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0 saat</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0s</string>
-    <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 saat</item>
-        <item>24 saat</item>
-        <item>7 gün</item>
-        <item>30 gün</item>
-    </string-array>
-    <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8s</item>
-        <item>24s</item>
-        <item>7g</item>
-        <item>30g</item>
-    </string-array>
-    <string name="cache_filter_stored_since_stored_max">ezelden beri</string>
-    <string name="cache_filter_stored_since_stored_max_short">maks</string>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -593,7 +567,6 @@
     <string name="about_system_write_logcat_type_extended">Genişletilmiş</string>
     <string name="about_system_write_logcat_success">\'\'%1$s\'\' kayıt dosyası \'\'%2$s\'\' klasörüne kaydedildi</string>
     <string name="about_system_write_logcat_error">Kayıt dosyasına yazılırken hata oluştu</string>
-    <string name="about_system_write_infos_downloadmanager">İndirmeleri Görüntüle</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
     <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
@@ -639,7 +612,6 @@
     <string name="settings_title_offline_maps">Çevrimdışı haritalar</string>
     <string name="settings_title_offline_routing">Çevrimdışı yönlendirme</string>
     <string name="settings_summary_offline_routing">Çevrim dışı yönlendirme \"BRouter\" yardımcı uygulaması yüklü olduğunda ve yapılandırıldığında veya dahili yönlendirme etkinleştirildiği zaman mevcut olacaktır.</string>
-    <string name="settings_title_map_rotation">Harita açısı (Google Maps)</string>
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
@@ -661,7 +633,6 @@
     <string name="settings_category_nearbysearch">Yakınlarda ara</string>
     <string name="init_nearbysearchlimit_title">Yakınları arama limiti</string>
     <string name="settings_category_geocaching_additionals">Diğer servisler ve eklentiler</string>
-    <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
     <string name="settings_service_activate">Etkinleştir</string>
@@ -784,6 +755,7 @@
         <item>Açık</item>
         <item>Koyu</item>
     </string-array>
+    <!-- app startscreen -->
     <string name="init_wallpaper">Duvar kağıdı</string>
     <string name="init_summary_wallpaper">Cihaz arka planını ana ekran arka planı olarak göster</string>
     <!-- backup / restore -->
@@ -920,9 +892,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org web sitesini aç</string>
     <string name="settings_settings">Ayarlar</string>
     <string name="settings_information">Bilgi</string>
-    <string name="settings_advanced">Gelişmiş ayarlar</string>
-    <string name="settings_twitter_cache_message">Bulunan Geocache için mesaj</string>
-    <string name="settings_twitter_trackable_message">Bulunan Trackable için mesaj</string>
     <string name="init_ec_icons">Harita Simgeleri</string>
     <string name="settings_ec_icons_other">Kendi tarzı</string>
     <string name="settings_ec_icons_oc">OC</string>
@@ -1007,7 +976,6 @@
     <string name="persistablefolder_spoilerimages">İpucu Görselleri</string>
     <string name="persistablefolder_routingbase">Yönlendirme</string>
     <string name="persistablefolder_routingtiles">Yönlendirme verisi</string>
-    <string name="persistableuri_track">Trackfile</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s tamamlandı</string>
     <string name="folder_process_status_currentfile">%1$s işlemi</string>
@@ -1050,8 +1018,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">Sıradaki işlem, <b>c:geo </b> \'nin %s\'e erişmesine izin verecektir.</string>
     <string name="auth_token_explain_long">Hesap bilgilerinizi doldurup \"c:geo\'yu yetkilendir\" düğmesine basmak işlemi başlatacaktır. Bu işlem, %s adresine bağlanıp kimlik doğrulama kodunu almaktır. Hepsi bu kadar.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">c:geo şimdi Twitter\'da yayın yapmaya yetkili.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
     <!-- auth geokrety -->
@@ -1076,7 +1042,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Not: \"Nottan ara noktalar\" etkinleştirildi. Kişisel notunuzda c:geo tarafından tanınan koordinatlarınız varsa, ara noktalar onlar için otomatik olarak yeniden oluşturulacaktır. Kişisel not düzenleme iletişim kutusunda bunu devre dışı bırakabilirsiniz.</string>
     <string name="cache_delete_userdefined_waypoints_success">Kullanıcı tanımlı ara noktalar silindi</string>
     <string name="cache_offline_store">Kaydet</string>
-    <string name="cache_offline_stored">Cihazda depolandı</string>
     <string name="cache_offline_not_ready">Çevrimdışı kullanılamıyor</string>
     <string name="cache_offline_time_mins_few">birkaç dakika önce</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1112,10 +1077,8 @@
     <string name="cache_personal_note_preventWaypointsExtraction">Yol noktası çıkarmayı engelle</string>
     <string name="cache_personal_note_limit">Kişisel not sınırı</string>
     <string name="cache_personal_note_upload">Yükle</string>
-    <string name="cache_personal_note_uploading">Kişisel not yükleniyor</string>
     <string name="cache_personal_note_upload_done">Kişisel not yüklendi</string>
     <string name="cache_personal_note_upload_error">Kişisel not yüklenirken hata oluştu</string>
-    <string name="cache_personal_note_upload_cancelled">Kişisel not yüklemesi iptal edildi</string>
     <string name="cache_description">Açıklama</string>
     <string name="cache_description_table_note">Açıklama %s\'de doğru şekilde görülebilmesi için görülebilecek tablo biçimlendirmesini içerir.</string>
     <string name="cache_area_description">Bölge Açıklaması</string>
@@ -1160,14 +1123,6 @@
     <string name="cache_dialog_offline_drop_message">Geocache cihaz hafızasından siliniyor…</string>
     <string name="cache_dialog_refresh_title">Yenile</string>
     <string name="cache_dialog_refresh_message">Geocache detayları yükleniyor…</string>
-    <string name="cache_dialog_watchlist_add_title">Takip listesi</string>
-    <string name="cache_dialog_watchlist_add_message">Geocache takip listenize ekleniyor…</string>
-    <string name="cache_dialog_watchlist_remove_title">Takip listesi</string>
-    <string name="cache_dialog_watchlist_remove_message">Geocache takip listenizden çıkartılıyor…</string>
-    <string name="cache_dialog_favorite_add_title">Favori</string>
-    <string name="cache_dialog_favorite_add_message">Geocache favorilerinize ekleniyor…</string>
-    <string name="cache_dialog_favorite_remove_title">Favori</string>
-    <string name="cache_dialog_favorite_remove_message">Geocache favorilerinizden çıkartılıyor…</string>
     <string name="cache_menu_navigate">Navigasyon</string>
     <string name="cache_menu_target">Hedef olarak ayarla</string>
     <string name="cache_menu_navigation_drive">Navigasyon (Arabayla)</string>
@@ -1287,8 +1242,6 @@
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
     <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
-    <string name="onetime_info_longtap_disabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktif değildir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
-    <string name="onetime_info_longtap_enabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun basma özelliği şu anda aktiftir.\n\nDeğiştirmek için: Ayarlar → Harita → Harita davranışı</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
@@ -1351,8 +1304,6 @@
     <string name="waypoint_save_and_modify_on_website">Web sitesinde ve c:geo\'da Geocache koordinatları olarak ayarla</string>
     <string name="waypoint_reset_cache_coords">Geocache koordinatlarını sıfırla</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">Geocache koordinatları web sitesi üzerinde sıfırlandı.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">Geocache koordinatları web sitesi üzerinde sıfırlanıyor…</string>
-    <string name="waypoint_reset">Sıfırla</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo\'da sıfırla</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">Web sitesi üzerinde ve c:geo\'da sıfırla</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">Web sitesi değiştirilmiş Geocache koordinatlarını desteklemez.</string>
@@ -1398,8 +1349,6 @@
     <!-- ImageView -->
     <string name="imageview_metadata_geopoint">Geopuan</string>
     <string name="imageview_metadata_comment">Yorum</string>
-    <!-- visit -->
-    <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
     <string name="map_map">Harita</string>
     <string name="map_live">Canlı Harita</string>
@@ -1422,10 +1371,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">Bu seçenek Harita Temaları klasöründeki dosyaları, dosyalara daha hızlı ulaşabilmek için uygulamaya özel bir klasöre senkronize eder. Bu seçeneği etkinleştirmeden önce tema klasörünüzün sadece temalarınızı içerdiğini, fazladan (büyük) dosya içermediğine emin olun.\n\nSizin harita dosyanız \'%1$s\' %4$s boyutunda %2$s, %3$s dosyaya sahip.\n\nKlasör senkronizasyonunu etkinleştirmek istediğinize emin misiniz?</string>
     <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
     <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
-    <string name="init_hidewp">Yol noktalarını gizle</string>
-    <string name="init_summary_hidewp_original">Haritadaki orijinal yol noktalarını gizle</string>
-    <string name="init_summary_hidewp_parking">Haritadaki park alanlarını gizle</string>
-    <string name="init_summary_hidewp_visited">Haritadaki ziyaret edilmiş yol noktalarını gizle</string>
     <string name="map_theme_select">Harita temasını seçin</string>
     <string name="map_theme_options">Tema Seçenekleri</string>
     <string name="map_language">Harita dili</string>
@@ -1471,7 +1416,6 @@
     <string name="search_finder">Bulan</string>
     <string name="search_finder_prefill">Bulan</string>
     <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
@@ -1868,7 +1812,6 @@
     <string name="fangroup_link"><a href="">Alman kullanıcı grubu</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">Google Play\'de c:geo</a></string>
-    <string name="about_twitter"><b>c:geo</b> her Geocache\'e kayıt girişinizde Twitter\'da yeni bir durum paylaşmalı mı?</string>
     <string name="github_title">Bugtracker</string>
     <string name="faq_title">Sıkça Sorulan Sorular</string>
     <!-- status (used via string based resource loading) -->
@@ -1882,7 +1825,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">c:geo\'nun 1 yıldan daha eski bir sürümünü kullanıyorsunuz. Bazı özellikler internet sitesi ve bazı teknik değişiklikler yüzünden çalışmayabilir. Nasıl yükselteceğinizi SSS\'den okuyabilirsiniz.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Konuşan pusula</string>
-    <string name="tts_toggle">Sesli yönlendirme Aç/Kapat</string>
     <string name="tts_started">Konuşmaya başladı</string>
     <string name="tts_stopped">Konuşmayı bıraktı</string>
     <string name="err_tts_lang_not_supported">Geçerli dil metin okuma tarafından desteklenmiyor.</string>
@@ -1990,7 +1932,6 @@
     <string name="notification_channel_downloader_name">c:geo indirici</string>
     <string name="notification_channel_downloader_description">indirme sonuç bildirimleri ( ör: çevrimdışı haritalar)</string>
     <string name="notification_channel_cache_download_name">Geocache indirici</string>
-    <string name="notification_proximity_title">c:geo yakınlık bildirimi</string>
     <string name="notification_download_receiver_title">İndirmeyi dışa aktarma</string>
     <!-- individual routes -->
     <string name="individual_route">Özel rota</string>
@@ -2017,6 +1958,7 @@
     </plurals>
     <string name="individual_route_set_as_start_title">Rota başlangıcı olarak ayarla</string>
     <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
@@ -2024,8 +1966,6 @@
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
     <string name="route">Rota</string>
     <string name="track">İz</string>
-    <string name="make_visible">görünür yap</string>
-    <string name="hide">gizle</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2146,11 +2086,6 @@
     <string name="wizard_platforms_intro">c:geo ile Geocache\'leri bulmak için c:geo tarafından desteklenen bir Geocaching hizmetinden hesabınızın olması gerekiyor.\nTercih ettiğiniz hizmeti var olan hesabınızla giriş yaparak veya yeni bir hesap oluşturak seçebilirsiniz.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; diğerleri</string>
-    <string name="wizard_welcome_advanced">Gelişmiş yapılandırma</string>
-    <string name="wizard_advanced_offlinemaps_label">Çevrimdışı haritalar</string>
-    <string name="wizard_advanced_offlinemaps_info">Bu sayfa, kullanılması isteğe bağlı bazı gelişmiş ayarları içerir.\n\nc:geo, harita dosyalarını çevrim dışı kullanım için indirebilir.</string>
-    <string name="wizard_advanced_routing_label">Çevrimdışı yönlendirmeyi aktive et</string>
-    <string name="wizard_advanced_routing_info">c:geo\'nun eksik yönlendirme verilerini otomatik indirebilen dahili bir çevrimdışı yönlendirme motoru bulunmaktadır.</string>
     <string name="wizard_advanced_restore_label">Geri Yükle</string>
     <string name="wizard_advanced_restore_info">Eğer daha önceki kurulumdan kalan bir yedeğiniz varsa, ayarlarınızı ve/veya geocache verilerinizi yenileyebilirsiniz.</string>
     <string name="status_not_ok">HATA</string>
@@ -2170,8 +2105,7 @@
     <string name="back">Geri</string>
     <string name="cancel">İptal</string>
     <string name="ok" tools:ignore="ButtonCase">Tamam</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Tümünü Seç</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Alanlar</string>
     <string name="rtl_fell_meadow">otlak / çayırlık</string>
@@ -2404,4 +2338,5 @@
     <string name="smiley_kisses">Öpücük</string>
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
+    <!-- message center notifications -->
 </resources>

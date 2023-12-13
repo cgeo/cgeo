@@ -1,62 +1,67 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.ConstantLiveData;
-import cgeo.geocaching.utils.Event;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LeastRecentlyUsedSet;
+import cgeo.geocaching.utils.livedata.ConstantLiveData;
+import cgeo.geocaching.utils.livedata.Event;
 
 import android.content.Context;
-import android.location.Location;
 
-import androidx.core.util.Pair;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.HashSet;
+
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
+    public static final int MAX_CACHES = 500;
+
+    public static final String CACHE_KEY_PREFIX = "CACHE_";
+    public static final String CACHE_STAR_KEY_PREFIX = "CACHE_STAR_";
+    public static final String WAYPOINT_KEY_PREFIX = "WP_";
+    public static final String COORDSPOINT_KEY_PREFIX = "COORDS_";
 
     // ViewModels will survive config changes, no savedInstanceState is needed
     // Don't hold an activity references inside the ViewModel!
 
+    // We might want to try LiveDataReactiveStreams as well
+
     private Tracks tracks = null;
-    private final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
-    private final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
-    private final MutableLiveData<Pair<Location, Float>> positionAndHeading = new MutableLiveData<>(); // we could create our own class for better understandability, this would require to implement the equals() method though
-    private final MutableLiveData<Target> target = new MutableLiveData<>();
-
-    private final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
-    private final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
-
-    public void setCurrentPositionAndHeading(final Location location, final float heading) {
-        final PositionHistory ph = positionHistory.getValue();
-        if (ph != null) {
-            ph.rememberTrailPosition(location);
-        }
-        positionAndHeading.setValue(new Pair<>(location, heading));
-    }
-
+    public final ConstantLiveData<IndividualRoute> individualRoute = new ConstantLiveData<>(new IndividualRoute(this::setTarget));
+    public MutableLiveData<ProximityNotification> proximityNotification = new MutableLiveData<>(null);
     /**
-     * Current location and heading of the user
+     * Event based LiveData notifying about track updates
      */
-    public MutableLiveData<Pair<Location, Float>> getPositionAndHeading() {
-        return positionAndHeading;
-    }
+    public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
+    public final MutableLiveData<LocUpdater.LocationWrapper> location = new MutableLiveData<>();
+    public final MutableLiveData<Target> target = new MutableLiveData<>();
 
-    public MutableLiveData<Geopoint> getLongTapCoords() {
-        return longTapCoords;
-    }
+    public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
+
+    public final ConstantLiveData<LeastRecentlyUsedSet<String>> cachesWithStarDrawn = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES));
+
+
+    public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
+    public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden
+    public final MutableLiveData<Float> elevation = new MutableLiveData<>();
 
     /**
      * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
      */
-    public MutableLiveData<PositionHistory> getPositionHistory() {
-        return positionHistory;
-    }
+    public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
+    public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
+    public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);
@@ -68,12 +73,12 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         target.setValue(new Target(geopoint, geocode));
     }
 
-    public MutableLiveData<Target> getTarget() {
-        return target;
-    }
-
     public void reloadIndividualRoute() {
         individualRoute.getValue().reloadRoute(route -> individualRoute.notifyDataChanged());
+    }
+
+    public void reloadTracks(final RouteTrackUtils routeTrackUtils) {
+        tracks = new Tracks(routeTrackUtils, this::setTrack);
     }
 
     public void clearIndividualRoute() {
@@ -93,21 +98,13 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         return tracks;
     }
 
-    public ConstantLiveData<IndividualRoute> getIndividualRoute() {
-        return individualRoute;
-    }
-
     public void init(final RouteTrackUtils routeTrackUtils) {
-        tracks = new Tracks(routeTrackUtils, this::setTrack);
+        reloadTracks(routeTrackUtils);
     }
 
-    /**
-     * Event based LiveData notifying about track updates
-     */
-    public MutableLiveData<Event<String>> getTrackUpdater() {
-        return trackUpdater;
+    public void configureProximityNotification() {
+        proximityNotification = new MutableLiveData<>(Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null);
     }
-
 
     // ========================================================================
     // Inner classes for wrapping data which strictly belongs together

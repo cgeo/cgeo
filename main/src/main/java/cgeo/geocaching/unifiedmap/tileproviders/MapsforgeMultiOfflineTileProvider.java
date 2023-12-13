@@ -5,9 +5,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
 import android.net.Uri;
+
+import androidx.core.util.Pair;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -34,9 +36,10 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
     }
 
     @Override
-    public void addTileLayer(final Map map) {
+    public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
         // collect metadata first: languages, zoom level range and bounding boxes
         final ArrayList<String> languages = new ArrayList<>();
+        final StringBuilder mapAttribution = new StringBuilder();
         BoundingBox boundingBox = null;
         for (ImmutablePair<String, Uri> data : maps) {
             final MapFileTileSource source = new MapFileTileSource();
@@ -48,29 +51,38 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
                 checkLanguage(languages, info.languagesPreference);
                 parseZoomLevel(info.zoomLevel);
                 boundingBox = boundingBox == null ? info.boundingBox : boundingBox.extendBoundingBox(info.boundingBox);
+
+                // map attribution
+                final String temp = StringUtils.isNotBlank(info.comment) ? info.comment : StringUtils.isNotBlank(info.createdBy) ? info.createdBy : "";
+                mapAttribution.append("<p><b>").append(data.left).append(":</b>");
+                if (StringUtils.isNotBlank(temp)) {
+                    mapAttribution.append("<br />").append(temp);
+                }
+                mapAttribution.append("</p>");
             }
         }
 
         // now prepare combined map
-        final MultiMapFileTileSource tileSource = new MultiMapFileTileSource();
+        tileSource = new MultiMapFileTileSource();
         tileSource.setPreferredLanguage(Settings.getMapLanguage());
         for (ImmutablePair<String, Uri> data : maps) {
             final MapFileTileSource mapFileTileSource = new MapFileTileSource();
             mapFileTileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
-            tileSource.add(mapFileTileSource);
+            ((MultiMapFileTileSource) tileSource).add(mapFileTileSource);
         }
         supportsLanguages = languages.size() > 0;
         if (supportsLanguages) {
             TileProviderFactory.setLanguages(languages.toArray(new String[]{}));
         }
+        setMapAttribution(new Pair<>(mapAttribution.toString(), true));
 
-        final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
-        MAP_MAPSFORGE.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
-        MAP_MAPSFORGE.applyTheme();
+        final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MultiMapFileTileSource) tileSource);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
+        fragment.applyTheme();
 
         if (boundingBox != null && !boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-            MAP_MAPSFORGE.zoomToBounds(boundingBox);
+            fragment.zoomToBounds(boundingBox);
         }
     }
 

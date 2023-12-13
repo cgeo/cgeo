@@ -59,7 +59,7 @@
         android:layout_toLeftOf="@id/item_delete"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:src="@drawable/center"
-        android:tooltipText="@string/center_on_route_track" />
+        android:tooltipText="@string/center" />
 
     <ImageButton
         android:id="@+id/item_delete"

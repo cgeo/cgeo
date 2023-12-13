@@ -17,7 +17,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_logging, rootKey);
+        initPreferences(R.xml.preferences_logging, rootKey);
         logTemplatesCategory = findPreference(getString(R.string.preference_category_logging_logtemplates));
     }
 
@@ -36,10 +36,17 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
         // Init "Log Templates"
         recreateLogTemplatePreferences();
 
+        // Update "Log Image Default Caption Prefix"
+        SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefix());
+        findPreference(getString(R.string.pref_log_image_default_prefix)).setOnPreferenceChangeListener((preference, newValue) -> {
+            SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefixFor(String.valueOf(newValue)));
+            return true;
+        });
     }
 
     private void recreateLogTemplatePreferences() {
         logTemplatesCategory.removeAll();
+        logTemplatesCategory.setVisible(true);
         for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
             logTemplatesCategory.addPreference(createLogTemplatePreference(template));
         }

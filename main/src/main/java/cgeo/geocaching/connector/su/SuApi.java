@@ -39,8 +39,8 @@ import androidx.annotation.WorkerThread;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -202,7 +202,7 @@ public class SuApi {
 
     @NonNull
     @WorkerThread
-    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, final boolean addRecommendation) throws SuApiException {
+    public static LogResult postLog(@NonNull final Geocache cache, @NonNull final LogType logType, @NonNull final Date date, @NonNull final String log, final boolean addRecommendation) throws SuApiException {
         final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
         if (!(connector instanceof SuConnector)) {
             return new LogResult(StatusCode.LOG_POST_ERROR, "");
@@ -214,7 +214,7 @@ public class SuApi {
         params.add("type", getSuLogType(logType));
         params.add("text", log);
         params.add("add_recommendation", addRecommendation ? "true" : "false");
-        params.add("find_date", LOG_DATE_FORMAT.format(date.getTime()));
+        params.add("find_date", LOG_DATE_FORMAT.format(date));
 
         final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.NOTE, params).data;
 
@@ -242,13 +242,13 @@ public class SuApi {
     public static ImageResult postImage(final Geocache cache, final Image image) {
         final IConnector connector = ConnectorFactory.getConnector(cache.getGeocode());
         if (!(connector instanceof SuConnector)) {
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
         }
         final SuConnector gcsuConnector = (SuConnector) connector;
 
         final File file = image.getFile();
         if (file == null) {
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
         }
         final Parameters params = new Parameters("cacheID", cache.getCacheId());
         FileInputStream fileStream = null;
@@ -260,7 +260,7 @@ public class SuApi {
             final ObjectNode data = postRequest(gcsuConnector, SuApiEndpoint.POST_IMAGE, params).data;
 
             if (data != null && data.get("data").get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, data.get("data").get("image_url").asText());
+                return new ImageResult(StatusCode.NO_ERROR, data.get("data").get("image_url").asText(), "");
             }
 
         } catch (final Exception e) {
@@ -268,7 +268,7 @@ public class SuApi {
         } finally {
             IOUtils.closeQuietly(fileStream);
         }
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, "");
+        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @WorkerThread

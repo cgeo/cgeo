@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                 intent.putExtra(InstallWizardActivity.BUNDLE_MODE, firstInstall ? InstallWizardActivity.WizardMode.WIZARDMODE_DEFAULT.id : InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id);
             } else {
                 // otherwise regular startup
-                intent = new Intent(this, MainActivity.class);
+                intent = Settings.getStartscreenIntent(this);
                 intent.putExtras(getIntent());
             }
             cLog.add("fi");

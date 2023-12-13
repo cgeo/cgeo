@@ -22,7 +22,7 @@ android {
     defaultConfig {
         minSdk 21
         //noinspection OldTargetApi
-        targetSdk 31
+        targetSdk 33
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
@@ -65,10 +65,10 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'
 
     // Support Library AppCompat
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Android annotations
-    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'androidx.annotation:annotation:1.7.0'
 }
 
 /*

@@ -11,16 +11,4 @@
         <item>@string/pref_value_pn_text_only</item>
         <item>@string/pref_value_pn_tone_and_text</item>
     </string-array>
-
-    <string-array name="maprotation">
-        <item>@string/switch_off</item>
-        <item>@string/switch_manual</item>
-        <item>@string/switch_auto</item>
-    </string-array>
-
-    <string-array name="maprotationValues">
-        <item>@string/pref_maprotation_off</item>
-        <item>@string/pref_maprotation_manual</item>
-        <item>@string/pref_maprotation_auto</item>
-    </string-array>
 </resources>

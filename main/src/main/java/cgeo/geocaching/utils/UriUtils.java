@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.UriPermission;
 import android.net.Uri;
@@ -11,10 +12,12 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.AnyRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.util.HashMap;
@@ -34,8 +37,10 @@ public final class UriUtils {
     public static final String UNITTEST_VOLUME_ID = "TEST-1111-2222";
     public static final String UNITTEST_VOLUME_NAME = "TEST-SDCARD";
 
-    public static final String SCHEME_CONTENT = "content";
-    public static final String SCHEME_FILE = "file";
+    public static final String SCHEME_CONTENT = ContentResolver.SCHEME_CONTENT;
+    public static final String SCHEME_FILE = ContentResolver.SCHEME_FILE;
+
+    public static final String SCHEME_ANDROID_RESOURCE = ContentResolver.SCHEME_ANDROID_RESOURCE;
 
     private static final Map<String, String> VOLUME_MAP = getVolumeMap();
 
@@ -250,6 +255,16 @@ public final class UriUtils {
         return SCHEME_FILE.equals(uri.getScheme());
     }
 
+    public static Uri toContentUri(final Context ctx, final Uri uri) {
+        if (isContentUri(uri)) {
+            return uri;
+        }
+        if (isFileUri(uri)) {
+            return FileProvider.getUriForFile(ctx, ctx.getString(R.string.file_provider_authority), toFile(uri));
+        }
+        return null;
+    }
+
     /**
      * Returns whether this Uri is a content Uri
      */
@@ -258,6 +273,23 @@ public final class UriUtils {
             return false;
         }
         return SCHEME_CONTENT.equals(uri.getScheme());
+    }
+
+    /** Returns whether this Uri is a resource Uri */
+    public static boolean isResourceUri(final Uri uri) {
+        if (uri == null) {
+            return false;
+        }
+        return SCHEME_ANDROID_RESOURCE.equals(uri.getScheme());
+    }
+
+    /** Returns whether the given Uri points to a local resource (on local device) */
+    public static boolean isLocalUri(final Uri uri) {
+        if (uri == null) {
+            return false;
+        }
+        return isResourceUri(uri) || isFileUri(uri) || isContentUri(uri);
+
     }
 
     /**
@@ -327,6 +359,15 @@ public final class UriUtils {
         }
 
         return Uri.parse(uriString);
+    }
+
+    /** Creates an Uri pointing at an android resource */
+    public static Uri resourceToUri(@AnyRes final int resId) {
+        final Context context = CgeoApplication.getInstance().getApplicationContext();
+        return Uri.parse(SCHEME_ANDROID_RESOURCE + "://" +
+            context.getResources().getResourcePackageName(resId) + '/' +
+            context.getResources().getResourceTypeName(resId) + '/' +
+            context.getResources().getResourceEntryName(resId));
     }
 
     /**

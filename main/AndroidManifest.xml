@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> Activate when SDKmin=23, see #13777 -->
 
     <uses-feature
@@ -188,12 +189,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".CachePopup"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/about"
@@ -216,25 +211,6 @@
         <activity
             android:name="cgeo.geocaching.helper.QueryMapFile"
             android:exported="true">
-        </activity>
-        <activity
-            android:name=".twitter.TwitterAuthorizationActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/auth_twitter"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.cgeo.org"
-                    android:pathPrefix="/twitter/"
-                    android:scheme="callback" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".EditWaypointActivity"
@@ -723,6 +699,22 @@
             android:name="cgeo.geocaching.connector.gc.ImportBookmarkLinks"
             android:exported="true">
 
+            <!-- geocaching.com URL via coord.info redirection -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="coord.info" />
+                <data android:host="www.coord.info" />
+                <data android:pathPrefix="/BM" />
+                <data android:pathPrefix="/bm" />
+                <data android:pathPrefix="/Bm" />
+                <data android:pathPrefix="/bM" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -744,14 +736,7 @@
         <activity android:name=".maps.routing.RouteSortActivity" />
         <activity android:name=".ui.CheckableItemSelectActivity" />
         <activity
-            android:name="WaypointPopup"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/waypoint"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:windowSoftInputMode="stateHidden" >
-        </activity>
-        <activity
-            android:name=".ImageSelectActivity"
+            android:name=".ImageEditActivity"
             android:label="@string/log_image" >
         </activity>
 
@@ -947,6 +932,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>
         </receiver>
 
         <!-- Map import service -->
@@ -972,6 +960,7 @@
         <package android:name="com.groundspeak.react.adventures" />
         <package android:name="com.mapswithme.maps.app" />
         <package android:name="com.mapswithme.maps.pro" />
+        <package android:name="app.organicmaps" />
         <package android:name="com.orux.oruxmapsDonate" />
         <package android:name="com.silentlexx.gpslock" />
         <package android:name="com.sygic.aura" />

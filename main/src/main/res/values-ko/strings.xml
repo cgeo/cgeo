@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
-    <string name="mtrl_picker_confirm" tools:override="true">확인</string>
     <!-- basics -->
     <string name="cache">캐시</string>
     <string name="detail">상세표시</string>
@@ -89,6 +86,30 @@
     <string name="wpnew_waypoint">표식</string>
     <string name="wpnew_original">원본</string>
     <string name="wpnew_generated">생성됨</string>
+    <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">알 수 없음</string>
+    <string name="cache_cat_bc_nature">자연</string>
+    <string name="cache_cat_bc_location">위치</string>
+    <string name="cache_cat_bc_recommended">추천</string>
+    <string name="cache_cat_bc_gadget">가젯</string>
+    <string name="cache_cat_bc_mystery">미스터리</string>
+    <string name="cache_cat_bc_hiking">등산</string>
+    <string name="cache_cat_bc_other">기타</string>
+    <string name="cache_cat_desc_bc_nature">특별한 자연에 둘러싸임</string>
+    <string name="cache_cat_desc_bc_location">좋은 위치를 보여줍니다</string>
+    <string name="cache_cat_desc_bc_recommended">BetterCacher 팀에서 추천함</string>
+    <string name="cache_cat_desc_bc_gadget">특별한 수공예품, 멋진 가잿 등</string>
+    <string name="cache_cat_desc_bc_mystery">특별하고 도전적인 퍼즐</string>
+    <string name="cache_cat_desc_bc_hiking">훌륭한 등산을 제공합니다</string>
+    <string name="cache_cat_desc_bc_other">기타 기능 - 추천 로그 참조</string>
+    <!-- cache Tier -->
+    <string name="cache_tier_bc_none">없음</string>
+    <string name="cache_tier_bc_blue">파랑</string>
+    <string name="cache_tier_bc_silver">은</string>
+    <string name="cache_tier_bc_gold">금</string>
+    <string name="cache_tier_desc_bc_blue">나열된 캐시의 기본 계층</string>
+    <string name="cache_tier_desc_bc_silver">BetterCacher 팀이 방문하여 자동으로 수여됨</string>
+    <string name="cache_tier_desc_bc_gold">BetterCacher 팀이 권장하는 뛰어난 캐시</string>
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -127,7 +148,6 @@
     <string name="log_saving">로그 발송중…</string>
     <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
-    <string name="log_posting_twitter">트위터에 올리는 중…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
     <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
@@ -156,10 +176,7 @@
     <string name="log_smilies">스마일</string>
     <string name="log_image">사진</string>
     <string name="log_images">이미지</string>
-    <string name="log_image_attach">사진 첨부</string>
-    <string name="log_image_stored">사진첩</string>
-    <string name="log_image_camera">촬영하기</string>
-    <string name="log_image_delete">삭제</string>
+    <string name="log_edit_image">이미지 편집</string>
     <string name="log_image_caption">제목</string>
     <string name="log_image_description">설명</string>
     <string name="log_image_scale">크기 조정</string>
@@ -200,7 +217,8 @@
     <string name="err_none">확인</string>
     <string name="err_parse">로그 페이지 분석에 실패했습니다</string>
     <string name="err_captcha">이 서비스에는 Captcha가 필요합니다. 브라우저에서 geocaching.com 웹 사이트를 열고 로그인할 때 표시되는 Captcha를 해결하십시오. 다음에는 c:geo로 다시 로그인을 시도하십시오.</string>
-    <string name="err_server">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
+    <string name="err_server_general">지오캐싱 서버에 연결할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
+    <string name="err_server_gc">Geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_ec">Extremcaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_lc">labs.geocaching.com에 접속이 되지 않습니다. 해당 웹사이트의 서버가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
     <string name="err_server_su">Geocaching.su에 접속할 수 없습니다. 해당 웹사이트가 다운됐거나 인터넷 연결이 안된 경우일 수도 있습니다.</string>
@@ -225,7 +243,6 @@
     <string name="err_detail_no_spoiler">이 캐시의 스포일러 사진을 찾을 수 없습니다.</string>
     <string name="err_detail_still_working">현재 다른 작업중입니다.</string>
     <string name="err_detail_premium_log_found">이 캐시는 geocaching.com의 프리미엄 회원만 사용할 수 있습니다. 따라서 캐시 정보를 표시 할 수 없습니다.\n\n그렇지만 이 캐시를 이미 찾은 경우 여기에 로그할 수 있습니다.</string>
-    <string name="err_watchlist_still_managing">현재 관심목록을 관리중입니다.</string>
     <string name="err_watchlist_failed">관심목록을 바꾸지 못했습니다.</string>
     <string name="err_application_no">적절한 응용프로그램을 찾지 못했습니다.</string>
     <string name="err_auth_initialize">인증 프로세스를 초기화시키지 못했습니다.</string>
@@ -252,6 +269,7 @@
     <string name="err_log_load_data">로그에 필요한 자료를 가져오지 못했습니다.</string>
     <string name="err_log_post_missing_tracking_code">추적코드가 빠졌습니다.</string>
     <string name="err_log_post_missing_coordinates">좌표가 빠졌습니다.</string>
+    <string name="err_website_message">웹 사이트는 다음 메시지로 응답했습니다. </string>
     <string name="err_log_post_failed">로그가 올려지지 않은 것 같습니다. 캐시 페이지에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_ec">로그가 올려지지 않은 것 같습니다. Extremcaching.com 에서 확인해보시기 바랍니다.</string>
     <string name="err_log_post_failed_gk">로그가 올려지지 않은 것 같습니다. GeoKrety.org 에서 확인해보시기 바랍니다.</string>
@@ -405,6 +423,7 @@
     <string name="caches_append_to_route_selected">선택한 것을 개별 경로에 추가</string>
     <string name="caches_append_to_route_all">모든 것을 개별 경로에 추가</string>
     <string name="caches_appended_to_route">경로에 추가된 캐시</string>
+    <string name="waypoints_appended_to_route">경로에 지점이 앞 추가됨</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
     <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
@@ -484,12 +503,14 @@
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
     <string name="cache_filter_difficulty_terrain">난이도 / 지형</string>
+    <string name="cache_filter_difficulty_terrain_matrix">난이도 / 지형 등급</string>
     <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">캐시 속성</string>
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
     <string name="cache_filter_hidden">숨긴 날짜</string>
+    <string name="cache_filter_eventdate">이벤트 날짜</string>
     <string name="cache_filter_logs_count">로그 수</string>
     <string name="cache_filter_last_found">마지막 찾은 날짜</string>
     <string name="cache_filter_log_entry">로그</string>
@@ -497,6 +518,9 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_category">BC 분류</string>
+    <string name="cache_filter_tier">BC 계층</string>
+    <string name="cache_filter_named_filter">명명된 필터</string>
     <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
@@ -571,28 +595,27 @@
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
+    <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">gc.com으로 채우기</string>
     <string name="cache_filter_nested_filter_modify">편집</string>
     <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
-    <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
-    <string name="cache_filter_stored_since_notstored_short">-</string>
-    <string name="cache_filter_stored_since_stored_zero">0시간</string>
-    <string name="cache_filter_stored_since_stored_zero_short">0시간</string>
     <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8시간</item>
-        <item>24시간</item>
-        <item>7 일</item>
-        <item>30일</item>
+        <item>1년 이상</item>
+        <item>1년 전</item>
+        <item>30일 전</item>
+        <item>1 주일 전</item>
+        <item>1일 전</item>
+        <item>1일 이내</item>
     </string-array>
     <string-array name="cache_filter_stored_since_stored_values_label_short">
-        <item>8시간</item>
-        <item>24 시간</item>
-        <item>7일</item>
+        <item>&gt;1년</item>
+        <item>1년</item>
         <item>30일</item>
+        <item>1주</item>
+        <item>1일</item>
+        <item>&lt;1일</item>
     </string-array>
-    <string name="cache_filter_stored_since_stored_max">시간의 여명</string>
-    <string name="cache_filter_stored_since_stored_max_short">최대</string>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>1년 이상</item>
         <item>1년 전</item>
@@ -614,6 +637,28 @@
         <item>1주</item>
         <item>3일</item>
         <item>&lt;3일</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>과거</item>
+        <item>오늘</item>
+        <item>내일</item>
+        <item>2일 후</item>
+        <item>3일 후</item>
+        <item>1주 후</item>
+        <item>2주 후</item>
+        <item>1달 후</item>
+        <item>모든 미래</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>과거</item>
+        <item>0일</item>
+        <item>1일</item>
+        <item>2일</item>
+        <item>3일</item>
+        <item>1주</item>
+        <item>2주</item>
+        <item>1달</item>
+        <item>&gt;1달</item>
     </string-array>
     <!-- about -->
     <string name="about_version">버전</string>
@@ -639,7 +684,7 @@
     <string name="about_system_write_logcat_type_extended">확장</string>
     <string name="about_system_write_logcat_success">\"%2$s\"폴더에 로그 파일 \"%1$s\"이 기록되었습니다.</string>
     <string name="about_system_write_logcat_error">로그 파일 쓰기 오류</string>
-    <string name="about_system_write_infos_downloadmanager">다운로드보기</string>
+    <string name="about_changelog_full">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
     <string name="about_contributors_recent">최근 기고자</string>
@@ -708,7 +753,6 @@
     <string name="settings_title_map_hillshading">오프라인 지도 음영식</string>
     <string name="settings_title_offline_routing">오프라인 라우팅</string>
     <string name="settings_summary_offline_routing">도우미 앱 \"BRouter\"가 설치 및 구성되어 있거나 내부 라우팅이 활성화 된 경우 오프라인 라우팅을 사용할 수 있습니다.</string>
-    <string name="settings_title_map_rotation">지도 회전 (구글 지도)</string>
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
@@ -734,7 +778,6 @@
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
     <string name="settings_category_geocaching_additionals">추가 서비스 및 애드온</string>
-    <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
     <string name="settings_service_activate">활성화</string>
@@ -807,6 +850,7 @@
     <string name="init_signature_template_geocode">지오코드</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
+    <string name="init_summary_bettercacher">BetterCacher.org에서 캐시 계층 및 분류를 로드하세요.</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
     <string name="init_summary_friends_and_own_logs_wanted">친구와 내 로그를 별도의 페이지에 표시합니다.</string>
     <string name="init_openlastdetailspage">마지막 상세내용 페이지</string>
@@ -827,6 +871,9 @@
     <string name="init_brouterProfileWalk">\"걷기\" 프로필</string>
     <string name="init_brouterProfileBike">\"자전거\" 프로필</string>
     <string name="init_brouterProfileCar">\"자동차\" 프로필</string>
+    <string name="init_brouterProfileUser">사용자 정의 프로필</string>
+    <string name="init_removeFromRouteOnLog">로그되면 경로에서 제거</string>
+    <string name="init_summary_removeFromRouteOnLog">로그를 보내거나 저장할 때 현재 경로에서 캐시를 제거</string>
     <string name="brouter_recalculating">백그라운드에서 경로를 다시 계산하는 중…</string>
     <string name="brouter_missing_data">BRouter를 열어 누락된 라우팅 데이터 (%s)를 다운로드합니다.</string>
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
@@ -836,6 +883,8 @@
     <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 \'찾음 스마일리\' 또는 \'수정된 좌표\' 마커와 같은 기호가 지도에서 확대되어 표시됩니다.</string>
     <string name="init_dtMarkerOnCacheIcon">캐시 아이콘의 D/T 등급</string>
     <string name="init_summary_dtMarkerOnCacheIcon">오른쪽 상단의 캐시 마커에 난이도(왼쪽) 및 지형(오른쪽) 등급 마커를 표시합니다 (\"저장된\" 마커가 가운데로 이동됨).</string>
+    <string name="init_showElevation">높이 값보기</string>
+    <string name="init_summary_showElevation">경로 데이터 또는 GNSS에서 가져온 현재 위치의 고도 정보 표시(사용 가능한 경우)</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_prevent_cache_note_merge">개인 캐시 메모 덮어쓰기</string>
@@ -861,6 +910,11 @@
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
     <string name="init_quicklaunchitems">빠른 실행 버튼</string>
     <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
+    <string name="init_custombnitem">사용자 정의 메뉴 항목</string>
+    <string name="init_custombnitem_description">가장 오른쪽 하단 탐색 메뉴 항목:\n%s</string>
+    <string name="init_custombnitem_default">주변 검색 (기본값)</string>
+    <string name="init_custombnitem_none">(없음)</string>
+    <string name="init_custombnitem_empty_placeholder">(빈 자리 표시자)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">지오코드</string>
     <string name="cacheListInfoItem_Difficulty">난이도</string>
@@ -880,6 +934,8 @@
         <item>밝음</item>
         <item>어두움</item>
     </string-array>
+    <!-- app startscreen -->
+    <string name="settings_startscreen_title">기본 화면</string>
     <string name="init_wallpaper">배경화면</string>
     <string name="init_summary_wallpaper">장치 배경 화면을 홈 화면 배경으로 표시</string>
     <!-- backup / restore -->
@@ -940,6 +996,7 @@
     <string name="settings_readingerror">설정 읽기 오류</string>
     <string name="settings_restart">로드 된 설정을 적용하려면 c:geo를 다시 시작해야합니다.</string>
     <string name="settings_folder_changed">복원 중에 \"%1$s\"폴더가 \"%2$s\"로 변경됩니다.\n\n계속하려면 \"%4$s\"를 누르십시오. 이 경우 해당 폴더에 대한 c:geo 액세스 권한을 다시 부여하라는 메시지가 표시됩니다.\n\n대신 현재 폴더 설정을 유지하려면 \"%3$s\"를 누르십시오.</string>
+    <string name="settings_file_changed">복원 중에 \"%1$s\"이 \"%2$s\"로 변경하게 됩니다.\n\n계속하려면 \"%4$s\". 이 경우 해당 파일에 대한 c:geo 액세스 권한을 다시 부여하라는 메시지가 표시됩니다.\n\n대신 현재 설정을 유지하려면 \"%3$s\"를 누르십시오.</string>
     <string name="settings_info_offline_maps_title">오프라인 지도에 대한 정보</string>
     <string name="settings_info_offline_maps">c:geo는 오프라인 지도를 지원합니다. 다른 공급자로부터 지도를 얻거나 OSM 데이터에서 자신 만의 지도를 만들 수도 있습니다. 먼저 오프라인지도를 저장할 폴더를 선택해야합니다.</string>
     <string name="settings_info_themes_title">지도 테마에 대한 정보</string>
@@ -982,6 +1039,7 @@
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
     <string name="init_sigautoinsert">자동으로 입력하기</string>
     <string name="init_offlinelogs_homescreen">오프라인 로그 표시</string>
+    <string name="init_log_image_default_prefix_title">로그 이미지의 기본 캡션</string>
     <string name="init_summary_offlinelogs_homescreen">아직 제출하지 않은 로그가있는 경우 홈 화면의 온라인 찾기 수 옆에 오프라인 로그 카운터 (예 \"+1\")가 표시됩니다.</string>
     <string name="init_loaddirectionimg">이미지 방향</string>
     <string name="init_summary_loaddirectionimg">필요시 방향 화살표 이미지를 다운로드 받습니다.(일반회원만 필요함)</string>
@@ -1013,6 +1071,11 @@
     <string name="init_mapShadingLinearity_description">작은 값은 가파른 경사면에서 대비를 강조하지만 평평한 곳의 변경 사항을 숨기고 큰 값은 더 선형입니다.</string>
     <string name="init_mapShadingScale_title">음영 불투명도</string>
     <string name="init_mapShadingScale_description">음영 레이어의 불투명도는 보이지 않는 값에서 더 높은 값까지 음영을 강화하지만 아티팩트를 생성할 수 있습니다.</string>
+    <string name="init_iconsizes">아이콘 크기</string>
+    <string name="init_mapCacheScaling_title">캐시 아이콘 크기 조정</string>
+    <string name="init_mapCacheScaling_description">캐시 아이콘의 크기 조정 (%으로)</string>
+    <string name="init_mapWpScaling_title">지점 아이콘 크기 조정</string>
+    <string name="init_mapWpScaling_description">지점 아이콘의 크기 조정 (%으로)</string>
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
@@ -1028,6 +1091,8 @@
     <string name="init_force_orientation_sensor_title">방향 센서</string>
     <string name="init_force_orientation_sensor_note">일부기기는 일반 회전 벡터 센서가 이상하게 작동하여 잘못된 방향으로 표시됩니다. 이 경우, 별도의 센서(방향센서)가 더 좋은 결과를 제공할 수 있습니다.</string>
     <string name="init_force_orientation_sensor">방향센서 강제 사용</string>
+    <string name="init_title_extended_settings">확장 설정</string>
+    <string name="init_summary_extended_settings">고급 사용자를 위한 설정 표시</string>
     <string name="init_create_memory_dump">메모리 덤프 생성</string>
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
@@ -1036,9 +1101,6 @@
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
     <string name="settings_settings">설정</string>
     <string name="settings_information">정보</string>
-    <string name="settings_advanced">고급 설정</string>
-    <string name="settings_twitter_cache_message">찾은 캐시에 대한 메시지</string>
-    <string name="settings_twitter_trackable_message">찾은 추적아이템에 대한 메시지</string>
     <string name="init_ec_icons">지도 아이콘</string>
     <string name="settings_ec_icons_other">나만의 스타일</string>
     <string name="settings_ec_icons_oc">OC 처럼</string>
@@ -1061,10 +1123,8 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
-    <string name="category_unifiedMap">통합 지도</string>
     <string name="experimental">(실험적)</string>
     <string name="init_title_useUnifiedMap">통합 지도 사용</string>
-    <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도 사용(실험 기능/완전하지 않음/테스트 전용)</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
     <string name="localstorage_migrate_status_major">버전 %1$d</string>
     <!-- proximity notification -->
@@ -1079,6 +1139,7 @@
     <string name="pn_tone_only">소리만</string>
     <string name="pn_text_only">텍스트만</string>
     <string name="pn_tone_and_text">소리 및 텍스트</string>
+    <string name="pn_enabled">근접성 알림 사용</string>
     <!-- map sources -->
     <string name="map_source_google_map">구글 : 지도</string>
     <string name="map_source_google_satellite">구글 : 위성</string>
@@ -1131,7 +1192,9 @@
     <string name="persistablefolder_spoilerimages">스포일러 사진</string>
     <string name="persistablefolder_routingbase">라우팅</string>
     <string name="persistablefolder_routingtiles">라우팅 데이터</string>
-    <string name="persistableuri_track">트랙파일</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">오디오 파일 (멀리)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">오디오 파일 (가까이)</string>
+    <string name="proximitynotification_internal">(내부)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s 완료</string>
     <string name="folder_process_status_currentfile">진행 %1$s</string>
@@ -1172,8 +1235,6 @@
     <!-- auth token -->
     <string name="auth_token_explain_short">아래 프로세스는 <b>c:geo</b>의 %s 접근을 필요로 합니다.</string>
     <string name="auth_token_explain_long">사용자 정보를 입력하고 \"c:geo 인증하기\" 버튼을 누르면 시작됩니다. 이 과정에서 %s 에 연결되고, 인증 토큰을 받아오게됩니다.</string>
-    <!-- auth Twitter -->
-    <string name="auth_dialog_completed_twitter">이제 c:geo에서 트위터에 글을 올리도록 허용되었습니다.</string>
     <!-- auth opencaching -->
     <string name="auth_dialog_completed_oc">이제 c:geo에서 %s 에 상호작용하도록 허용되었습니다.</string>
     <!-- auth geokrety -->
@@ -1199,7 +1260,6 @@
     <string name="cache_delete_generated_waypoints_confirm">이 캐시에서 생성된 모든 지점을 제거하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_generated_waypoints_success">생성된 지점이 삭제되었습니다</string>
     <string name="cache_offline_store">저장</string>
-    <string name="cache_offline_stored">기기에 저장됨</string>
     <string name="cache_offline_not_ready">오프라인 사용 불가능</string>
     <string name="cache_offline_time_mins_few">몇분 전</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1232,10 +1292,9 @@
     <string name="cache_personal_note_limit">개인 메모 한계 도달</string>
     <string name="cache_personal_note_truncated_by" tools:ignore="PluralsCandidate">이 개인 메모는 약 %1$d 문자에서 %3$s(최대 크기 %2$d)로 잘립니다.</string>
     <string name="cache_personal_note_upload">올리기</string>
-    <string name="cache_personal_note_uploading">개인 메모 올리기</string>
     <string name="cache_personal_note_upload_done">개인 메모 올라감</string>
     <string name="cache_personal_note_upload_error">개인 메모 올리기 실패</string>
-    <string name="cache_personal_note_upload_cancelled">개인 메모 올리기 취소됨</string>
+    <string name="cache_personal_note_save_and_upload">저장 및 업로드</string>
     <string name="cache_personal_note_vars_out_of_sync">메모의 변수가 동기화되지 않았습니다 (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">변수 동기화</string>
     <string name="cache_personal_note_vars_out_of_sync_title">메모에서 값을 덮어써야 하는 변수 확인</string>
@@ -1287,14 +1346,8 @@
     <string name="cache_dialog_offline_drop_message">기기에서 캐시 제거중…</string>
     <string name="cache_dialog_refresh_title">새로 고침</string>
     <string name="cache_dialog_refresh_message">캐시 정보 다시 불러오는 중…</string>
-    <string name="cache_dialog_watchlist_add_title">관심목록</string>
-    <string name="cache_dialog_watchlist_add_message">캐시를 관심목록에 추가중…</string>
-    <string name="cache_dialog_watchlist_remove_title">관심목록</string>
-    <string name="cache_dialog_watchlist_remove_message">캐시를 관심목록서 삭제중…</string>
-    <string name="cache_dialog_favorite_add_title">호감캐시</string>
-    <string name="cache_dialog_favorite_add_message">호감캐시로 추가중…</string>
-    <string name="cache_dialog_favorite_remove_title">호감캐시</string>
-    <string name="cache_dialog_favorite_remove_message">호감캐시에서 삭제중…</string>
+    <string name="cache_menu_speechDeactivate">말하기 끝</string>
+    <string name="cache_menu_speechActivate">말하기 시작</string>
     <string name="cache_menu_navigate">길찾기</string>
     <string name="cache_menu_target">대상으로 설정</string>
     <string name="cache_menu_navigation_drive">길찾기(자동차)</string>
@@ -1375,6 +1428,7 @@
     <string name="cache_favorite">호감점수</string>
     <string name="cache_owner">소유주</string>
     <string name="cache_hidden">숨긴 날짜</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
     <string name="cache_coordinates">좌표</string>
@@ -1402,6 +1456,11 @@
     <string name="cache_recently_viewed">최근에 조회됨</string>
     <string name="cache_recently_viewed_empty">최근 본 캐시 없음</string>
     <string name="cache_clear_recently_viewed">지우기</string>
+    <string name="cachedetails_progress_refresh">%s 새로 고침</string>
+    <string name="cachedetails_progress_watch">관심목록에 추가되었습니다</string>
+    <string name="cachedetails_progress_unwatch">관심목록에서 제거되었습니다</string>
+    <string name="cachedetails_progress_favorite">호감점수 목록에 추가했습니다</string>
+    <string name="cachedetails_progress_unfavorite">호감점수 목록에 제거했습니다</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -1409,6 +1468,7 @@
     <string name="cache_alc_start">이 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_related_start">연결한 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
+    <string name="cache_bettercacher_open">BetterCacher.org의 오픈캐시</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
     <string name="image_category_uncategorized">카테고리 없음</string>
@@ -1417,7 +1477,6 @@
     <string name="image_category_log">로그</string>
     <string name="context_map_add_to_route">경로 후에 추가</string>
     <string name="context_map_add_to_route_start">경로 전에 추가</string>
-    <string name="context_map_remove_from_route">경로에서 제거</string>
     <string name="context_map_remove_from_route_start">시작에서 제거</string>
     <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
     <string name="context_map_remove_from_route_end">끝에서 제거</string>
@@ -1432,10 +1491,10 @@
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시/지점 작성) 길게 탭하는 게 활동시킵니다.</string>
+    <string name="init_show_routing_menu">경로 메뉴 보기</string>
+    <string name="init_summary_show_routing_menu">캐시를 길게 누르면 캐시를 경로에 추가/제거하는 고급 옵션이 있는 메뉴가 표시됩니다. 비활성화된 경우 캐시는 경로에서 추가/제거됩니다.</string>
     <string name="init_ActionbarAutohide">누를 때 툴바 숨기기</string>
     <string name="init_summary_ActionbarAutohide">툴바를 숨기거나 표시하려면 빈 지도 공간을 누르세요.</string>
-    <string name="onetime_info_longtap_disabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 비활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
-    <string name="onetime_info_longtap_enabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
@@ -1497,8 +1556,6 @@
     <string name="waypoint_save_and_modify_on_website">c:geo에서 캐시 좌표를 설정합니다.</string>
     <string name="waypoint_reset_cache_coords">캐시 좌표 재설정</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">웹사이트에서 캐시 좌표가 재설정 되었습니다.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">웹사이트에서 캐시좌표 재설정중…</string>
-    <string name="waypoint_reset">재설정</string>
     <string name="waypoint_localy_reset_cache_coords">c:geo에서 초기화</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">c:geo와 웹사이트에서 초기화</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">웹사이트가 캐시 좌표 수정을 지원하지 않습니다.</string>
@@ -1583,8 +1640,6 @@
     <string name="imageview_error">이미지를 로드할 수 없습니다</string>
     <string name="imageview_metadata_geopoint">지오포인트</string>
     <string name="imageview_metadata_comment">코멘트</string>
-    <!-- visit -->
-    <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->
     <string name="map_map">지도</string>
     <string name="map_live">라이브 지도</string>
@@ -1607,10 +1662,6 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">이렇게하면 더 빠른 파일 액세스를 위해지도 테마 폴더의 콘텐츠가 앱 전용 폴더에 지속적으로 동기화됩니다. 이 기능을 활성화하기 전에 테마 폴더에 테마 만 포함되고 추가 (대용량) 데이터가 없는지 확인하십시오.\n\n지도 테마 폴더 \'%1$s\'의 현재 크기는 %2$s, %3$s이며 크기는 %4$s입니다.\n\n폴더 동기화를 켜시겠습니까?</string>
     <string name="onetime_mapthemefixslow_title">느린 지도 테마 렌더링 수정</string>
     <string name="onetime_mapthemefixslow_message">압축되지 않은 지도 테마로 작업하면 지도 보기 열기 성능이 저하 될 수 있습니다. 테마를 압축하거나 동기화하여 더 빠른 성능을 얻고 지도 시작 지연을 줄일 수 있습니다.</string>
-    <string name="init_hidewp">지점 숨기기</string>
-    <string name="init_summary_hidewp_original">지도에서 최초의 지점 숨기기</string>
-    <string name="init_summary_hidewp_parking">지도에서 주차 지점 숨기기</string>
-    <string name="init_summary_hidewp_visited">지도에서 방문한 지점 숨기기</string>
     <string name="map_theme_select">지도 테마 선택</string>
     <string name="map_theme_options">테마 옵션</string>
     <string name="map_language">지도 언어</string>
@@ -1627,6 +1678,7 @@
     <string name="map_gm_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <string name="quick_settings">빠른 설정</string>
     <string name="quick_settings_info">일부지도 설정 (지도 설정, 숨기기, 경로)이 새로운 \"빠른 설정\"팝업으로 이동되었습니다.\n지도 하단 중앙에있는 아이콘을 사용하여 이 팝업을 열 수 있습니다.</string>
+    <string name="other_settings">기타 설정</string>
     <string name="map_show_caches_title">캐시 보기:</string>
     <string name="map_show_waypoints_title">지점 보기:</string>
     <string name="map_show_other_title">기타 보기:</string>
@@ -1659,7 +1711,6 @@
     <string name="search_finder">찾은 사용자</string>
     <string name="search_finder_prefill">찾은 사용자</string>
     <string name="search_finder_button">찾은 사용자명으로 검색</string>
-    <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
@@ -2056,7 +2107,6 @@
     <string name="fangroup_link"><a href="">독일어 사용자 그룹</a></string>
     <string name="market_title">구글 플레이</string>
     <string name="market_link"><a href=""> 구글 플레이에서 c:geo</a></string>
-    <string name="about_twitter">로그를 할 떄마다 <b>c:geo</b>에서 트위터로 새로운 상황을 알리겠습니까?</string>
     <string name="github_title">버그추적기</string>
     <string name="faq_title">자주 묻는 질문(FAQ)</string>
     <!-- status (used via string based resource loading) -->
@@ -2070,7 +2120,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1 년 이상 된 것으로 보이는 c:geo 버전을 사용하고 있습니다. 일부 기능은 웹 사이트 또는 기타 기술 변경으로 인해 더 이상 작동하지 않을 수 있습니다. 업그레이드 방법에 대한 FAQ를 읽어보십시오.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">말하는 나침반</string>
-    <string name="tts_toggle">말하기 전환</string>
     <string name="tts_started">연설 시작됨</string>
     <string name="tts_stopped">연설 중지됨</string>
     <string name="tts_running">음성 서비스 실행 중…</string>
@@ -2104,6 +2153,7 @@
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>
+    <string name="failed_creating_shortcut">바로가기를 생성하지 못했습니다.</string>
     <string name="send">보내기</string>
     <string name="confirm_log_title">특별 로그 유형</string>
     <string name="confirm_log_message">정말 \'%s\'를 로그하시겠습니까?</string>
@@ -2162,10 +2212,10 @@
     <string name="permission_contacts_read_explanation">c:geo는 캐셔 이름을 사용하여 주소록에서 연락처를 검색할 수 있습니다. 이렇게 하려면 주소록을 읽을 수 있도록 c:geo에 권한을 부여해야 합니다. 그렇지 않으면 이 기능을 사용할 수 없습니다.</string>
     <string name="permission_location_explanation_title">위치 정보 액세스 권한</string>
     <string name="permission_location_explanation">c:geo는 위치를 찾고 지오캐시까지의 거리와 방향을 계산하기 위해 GPS 데이터(정밀한 위치)와 함께 사용하는 데 최적화되어 있습니다. 이 권한이 없으면 위치 기반 기능이 예상대로 작동하지 않습니다.</string>
-    <string name="permission_read_external_storage_explanation_title">외부 저장소 권한 읽기</string>
-    <string name="permission_read_external_storage_explanation">c:geo는 시스템 배경화면을 앱의 배경으로 사용할 수 있습니다. 이렇게 하려면 c:geo에 외부 저장소의 미디어 데이터를 읽을 수 있는 권한이 필요합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo는 휴대폰 저장소 또는 SD 카드에 데이터를 기록합니다. 예: 오프라인 사용을 위해 지오캐시를 저장하면 파일 및 기타 기능을 가져오거나 내보낼 수 있습니다. 일부 Android 버전에서는 이러한 작업에 대한 추가 권한을 부여해야 합니다.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">레거시 외부 저장소 쓰기 권한</string>
+    <string name="permission_post_notifications_explanation">c:geo는 알림을 사용하여 다운로드 및 근처 캐시에 대해 알려줍니다. (활성화된 경우)</string>
+    <string name="permission_post_notifications_explanation_title">알림 권한</string>
     <string name="storage_permission_needed">저장 권한이 없으면이 기능을 사용할 수 없습니다.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">색 구성표 선택</string>
@@ -2188,7 +2238,6 @@
     <string name="notification_channel_downloader_description">다운로드 결과 알림 (예: 오프라인지도)</string>
     <string name="notification_channel_cache_download_name">캐시 다운로더</string>
     <string name="notification_channel_cache_download_description">캐시 백그라운드 다운로드에 대한 결과 알림</string>
-    <string name="notification_proximity_title">c:geo 근접성 알림</string>
     <string name="notification_download_receiver_title">다운로드 가져오는 중</string>
     <!-- individual routes -->
     <string name="individual_route">개별 경로</string>
@@ -2210,6 +2259,7 @@
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
     <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
     <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
+    <string name="route_item_point">경로 지점</string>
     <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>
     <plurals name="individual_route_loaded">
         <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
@@ -2224,6 +2274,9 @@
     <string name="generating_distance_matrix">거리 행렬 생성</string>
     <string name="running_route_optimizations">경로 최적화 실행</string>
     <string name="route_optimization_finished">경로 최적화 완료</string>
+    <!-- changed permissions one time message -->
+    <string name="changed_permissions_title">변경된 권한</string>
+    <string name="changed_permissions_info">Android에서는 c:geo에 필요한 새로운 권한을 도입했습니다. c:geo 구성 마법사를 실행하여 이 권한을 확인하고 더 자세한 정보를 얻으세요. 지금 마법사를 실행하거나 나중에 c:geo 홈 화면의 메뉴 항목을 사용하여 실행할 수 있습니다.\n\n지금 구성 마법사를 실행하시겠습니까?</string>
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
@@ -2233,12 +2286,9 @@
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="routes_tracks_color">색상 선택</string>
-    <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
     <string name="track">트랙</string>
-    <string name="make_visible">숨김 비활성화</string>
-    <string name="hide">숨기기</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2258,6 +2308,8 @@
     <string name="routingmode_walk">걷기</string>
     <string name="routingmode_bike">자전거</string>
     <string name="routingmode_car">자동차</string>
+    <string name="routingmode_user1">사용자 1</string>
+    <string name="routingmode_user2">사용자 2</string>
     <!-- view settings -->
     <string name="view_settings">설정 보기</string>
     <string name="delete_setting">설정 삭제</string>
@@ -2285,6 +2337,7 @@
     <string name="receivedownload_error_filenotfound_exception">파일을 받는 중 파일을 찾을 수 없음 오류가 발생했습니다.</string>
     <string name="receivedownload_amount_copied">%s를 복사했습니다</string>
     <string name="receivedownload_cancelled">파일 전송이 취소되었습니다.</string>
+    <string name="receivedownload_integritycheck_failed">무결성 체크 실패</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">오프라인 지도 다운로드</string>
     <string name="delete_offlinemap_title">오프라인 지도 삭제</string>
@@ -2382,11 +2435,6 @@
     <string name="wizard_platforms_intro">c:geo로 지오 캐시를 찾으려면 c:geo에서 지원하는 지오 캐싱 서비스에 대한 계정이 필요합니다.\n아래에서 원하는 서비스를 선택하여 기존 계정으로 로그인하거나 새 계정을 만드십시오.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_platforms_others">Opencaching &amp; 기타</string>
-    <string name="wizard_welcome_advanced">고급 설정</string>
-    <string name="wizard_advanced_offlinemaps_label">오프라인 지도</string>
-    <string name="wizard_advanced_offlinemaps_info">이 페이지는 선택적으로 사용할 수있는 몇 가지 고급 기능을 제공합니다.\n\nc:geo는 오프라인 사용을 위해 지도 파일을 다운로드할 수 있습니다.</string>
-    <string name="wizard_advanced_routing_label">오프라인 라우팅 활성화</string>
-    <string name="wizard_advanced_routing_info">c:geo에는 오프라인 라우팅을위한 내부 라우팅 엔진이 있으며 누락된 라우팅 데이터를 자동으로 다운로드 할 수 있습니다.</string>
     <string name="wizard_advanced_restore_label">복원</string>
     <string name="wizard_advanced_restore_info">이전 설치의 백업이있는 경우 설정 및 / 또는 지오캐시 데이터를 복원 할 수 있습니다.</string>
     <string name="status_not_ok">오류</string>
@@ -2409,8 +2457,7 @@
     <string name="redo">다시 실행</string>
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <string name="optimize">최적화</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">모두 선택</string>
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>
@@ -2768,4 +2815,10 @@
     <string name="smiley_approve">승인</string>
     <string name="smiley_disapprove">승인되지 않음</string>
     <string name="smiley_question">질문</string>
+    <!-- message center notifications -->
+    <string name="mcpolling_title">메세지 센터</string>
+    <string name="mcpolling_summary">메시지 센터에서 정기적으로 들어오는 메시지를 확인합니다.</string>
+    <plurals name="mcupdate">
+        <item quantity="other">메시지 센터에서 %d개의 읽지 않은 메시지</item>
+    </plurals>
 </resources>

@@ -1,9 +1,11 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.SimpleItemListModel;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -31,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,6 +41,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +51,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton;
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
-public class ViewSettingsActivity extends AbstractActivity {
+public class ViewSettingsActivity extends CustomMenuEntryActivity {
 
     private ArrayAdapter<KeyValue> debugAdapter;
     private ArrayList<KeyValue> filteredItems;
@@ -221,7 +226,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     private void deleteItem(final int position) {
         final KeyValue keyValue = filteredItems.get(position);
         final String key = keyValue.key;
-        SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm((dialog, which) -> {
+        SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm(() -> {
             final SharedPreferences.Editor editor = prefs.edit();
             editor.remove(key);
             editor.apply();
@@ -231,35 +236,46 @@ public class ViewSettingsActivity extends AbstractActivity {
 
     private void editItem(final int position) {
         final KeyValue keyValue = filteredItems.get(position);
-        final String key = keyValue.key;
-        final SettingsUtils.SettingsType type = keyValue.type;
+        if (keyValue.type == SettingsUtils.SettingsType.TYPE_BOOLEAN) {
+            final ArrayList<Boolean> items = new ArrayList<>(Arrays.asList(false, true));
+            final SimpleDialog.ItemSelectModel<Boolean> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO, true)
+                .setItems(items).setDisplayMapper((l) -> TextParam.text(l ? "true" : "false"))
+                .setSelectedItems(Collections.singleton(StringUtils.equals(keyValue.value, "true") ? TRUE : FALSE));
 
-        int inputType = 0;
-        switch (type) {
-            case TYPE_INTEGER:
-            case TYPE_LONG:
-                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
-                break;
-            case TYPE_FLOAT:
-                inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_DECIMAL;
-                break;
-            default:
-                inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
-                break;
-        }
-        Dialogs.input(this, String.format(getString(R.string.edit_setting), key), keyValue.value, null, inputType, 1, 1, newValue -> {
-            final SharedPreferences.Editor editor = prefs.edit();
-            try {
-                SettingsUtils.putValue(editor, type, key, newValue);
-                editor.apply();
-                debugAdapter.remove(keyValue);
-                debugAdapter.insert(new KeyValue(key, newValue, type), position);
-            } catch (XmlPullParserException e) {
-                showToast(R.string.edit_setting_error_unknown_type);
-            } catch (NumberFormatException e) {
-                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+            SimpleDialog.of(this).setTitle(TextParam.text(keyValue.key))
+                    .selectSingle(model, (l) -> editItemHelper(position, keyValue, String.valueOf(l)));
+        } else {
+            int inputType = 0;
+            switch (keyValue.type) {
+                case TYPE_INTEGER:
+                case TYPE_LONG:
+                    inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_SIGNED;
+                    break;
+                case TYPE_FLOAT:
+                    inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL | InputType.TYPE_NUMBER_FLAG_DECIMAL;
+                    break;
+                default:
+                    inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL;
+                    break;
             }
-        });
+            Dialogs.input(this, String.format(getString(R.string.edit_setting), keyValue.key), keyValue.value, null, inputType, 1, 1, newValue -> editItemHelper(position, keyValue, newValue));
+        }
+    }
+
+    private void editItemHelper(final int position, final KeyValue keyValue, final String newValue) {
+        final SharedPreferences.Editor editor = prefs.edit();
+        try {
+            SettingsUtils.putValue(editor, keyValue.type, keyValue.key, newValue);
+            editor.apply();
+            debugAdapter.remove(keyValue);
+            debugAdapter.insert(new KeyValue(keyValue.key, newValue, keyValue.type), position);
+        } catch (XmlPullParserException e) {
+            showToast(R.string.edit_setting_error_unknown_type);
+        } catch (NumberFormatException e) {
+            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), newValue));
+        }
     }
 
     private void addItem() {
@@ -365,7 +381,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
         if (itemId == R.id.view_settings_edit && !editMode) {
-            SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
+            SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm(() -> {
                 editMode = true;
                 updateMenuButtons();
                 debugAdapter.notifyDataSetChanged();

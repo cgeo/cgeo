@@ -3,6 +3,8 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
+import cgeo.geocaching.models.geoitem.GeoGroup;
+import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 
@@ -28,7 +30,6 @@ import com.cocoahero.android.geojson.MultiPolygon;
 import com.cocoahero.android.geojson.Point;
 import com.cocoahero.android.geojson.Polygon;
 import com.cocoahero.android.geojson.Position;
-import com.cocoahero.android.geojson.Ring;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,16 +53,26 @@ public class GeoJsonUtils {
         //no instance
     }
 
-    public static List<GeoPrimitive> parseGeoJson(final InputStream is) throws JSONException, IOException {
+    public static GeoItem parseGeoJson(final InputStream is) throws JSONException, IOException {
         final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(is), null, result);
-        return result;
+        return listToItem(result);
     }
 
-    public static List<GeoPrimitive> parseGeoJson(final String string) throws JSONException {
+    public static GeoItem parseGeoJson(final String string) throws JSONException {
         final List<GeoPrimitive> result = new ArrayList<>();
         parseGeoJson(GeoJSON.parse(string), null, result);
-        return result;
+        return listToItem(result);
+    }
+
+    private static GeoItem listToItem(final List<GeoPrimitive> items) {
+        if (items == null) {
+            return GeoGroup.create();
+        }
+        if (items.size() == 1) {
+            return items.get(0);
+        }
+        return GeoGroup.create(items);
     }
 
     private static void parseGeoJson(final GeoJSONObject geoJson, final GeoJsonProperties props, final List<GeoPrimitive> list) throws JSONException {
@@ -121,10 +132,16 @@ public class GeoJsonUtils {
     }
 
     private static void parseGeoJsonPolygon(final Polygon polygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
-        //as of now, polygon rings are parsed as separate polygons
-        for (Ring r : polygon.getRings()) {
-            list.add(GeoPrimitive.createPolygon(GP_CONVERTER.fromList(r.getPositions()), toGeoStyle(props)));
+        final GeoPrimitive.Builder b = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON).setStyle(toGeoStyle(props));
+        if (polygon.getRings() != null && !polygon.getRings().isEmpty()) {
+            //first ring is polygon
+            b.addPoints(GP_CONVERTER.fromList(polygon.getRings().get(0).getPositions()));
+            //other rings are holes in this polygon
+            for (int i = 1; i < polygon.getRings().size(); i++) {
+                b.addHole(GP_CONVERTER.fromList(polygon.getRings().get(i).getPositions()));
+            }
         }
+        list.add(b.build());
     }
 
     private static void parseGeoJsonMultiPolygon(final MultiPolygon multiPolygon, final GeoJsonProperties props, final List<GeoPrimitive> list) {
@@ -140,7 +157,11 @@ public class GeoJsonUtils {
     }
 
     private static GeoStyle toGeoStyle(final GeoJsonProperties props) {
-        return GeoStyle.builder().setStrokeColor(props.strokeColor).setStrokeWidth(props.strokeWidth).setFillColor(props.fillColor).build();
+        return GeoStyle.builder()
+                .setStrokeColor(props.strokeColor)
+                .setStrokeWidth(props.strokeWidth)
+                .setFillColor(props.fillColor)
+                .build();
     }
 
     private static GeoJsonProperties parseProperties(final JSONObject json) {

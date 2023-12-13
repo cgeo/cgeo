@@ -60,6 +60,7 @@ public final class VoiceHintProcessor {
         float roundAboutTurnAngle = 0.f; // sums up angles in roundabout
 
         int roundaboutExit = 0;
+        int roundaboudStartIdx = -1;
 
         for (int hintIdx = 0; hintIdx < inputs.size(); hintIdx++) {
             final VoiceHint input = inputs.get(hintIdx);
@@ -78,7 +79,10 @@ public final class VoiceHintProcessor {
             final boolean isLink2Highway = input.oldWay.isLinktType() && !input.goodWay.isLinktType();
             final boolean isHighway2Link = !input.oldWay.isLinktType() && input.goodWay.isLinktType();
 
-            if (input.oldWay.isRoundabout()) {
+            if (explicitRoundabouts && input.oldWay.isRoundabout()) {
+                if (roundaboudStartIdx == -1) {
+                    roundaboudStartIdx = hintIdx;
+                }
                 roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
                 boolean isExit = roundaboutExit == 0; // exit point is always exit
                 if (input.badWays != null) {
@@ -95,13 +99,15 @@ public final class VoiceHintProcessor {
             }
             if (roundaboutExit > 0) {
                 roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
+                final double startTurn = (roundaboudStartIdx != -1 ? inputs.get(roundaboudStartIdx).goodWay.turnangle : turnAngle);
                 input.angle = roundAboutTurnAngle;
                 input.distanceToNext = distance;
-                input.roundaboutExit = turnAngle < 0 ? -roundaboutExit : roundaboutExit;
+                input.roundaboutExit = startTurn < 0 ? -roundaboutExit : roundaboutExit;
                 distance = 0.;
                 results.add(input);
                 roundAboutTurnAngle = 0.f;
                 roundaboutExit = 0;
+                roundaboudStartIdx = -1;
                 continue;
             }
             int maxPrioAll = -1; // max prio of all detours
@@ -248,8 +254,10 @@ public final class VoiceHintProcessor {
 
             if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
                 int badWayPrio = 0;
-                for (MessageData md : input.badWays) {
-                    badWayPrio = Math.max(badWayPrio, md.getPrio());
+                if (input.badWays != null) {
+                    for (MessageData md : input.badWays) {
+                        badWayPrio = Math.max(badWayPrio, md.getPrio());
+                    }
                 }
                 if (input.goodWay.getPrio() < badWayPrio) {
                     results.add(input);

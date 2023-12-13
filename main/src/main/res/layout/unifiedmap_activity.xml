@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/unifiedmap_activity_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/mapViewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/unifiedmap"/>
+
+        <include layout="@layout/filter_sort_bar" />
+        <include layout="@layout/map_distanceinfo" />
+        <include layout="@layout/map_settings_button" />
+        <include layout="@layout/map_progressbar" />
+        <include layout="@layout/map_detailsfragment" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/elevation_block"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:visibility="gone">
+        <include layout="@layout/elevation_block"/>
+    </RelativeLayout>
+
+</LinearLayout>

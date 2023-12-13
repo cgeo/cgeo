@@ -4,14 +4,19 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import static cgeo.geocaching.log.LogType.ATTENDED;
 import static cgeo.geocaching.log.LogType.FOUND_IT;
 import static cgeo.geocaching.log.LogType.WEBCAM_PHOTO_TAKEN;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.Arrays;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.EnumUtils;
 
 public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> {
@@ -21,7 +26,7 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
     private LogType logType = null;
 
     public LogsCountGeocacheFilter() {
-        super(Integer::valueOf);
+        super(Integer::valueOf, Math::round);
     }
 
     public LogType getLogType() {
@@ -89,16 +94,30 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
         super.setConfig(config);
         logType = config.getFirstValue(CONFIG_KEY_LOGTYPE, null, s -> EnumUtils.getEnum(LogType.class, s, null));
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig config = super.getConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig config = super.getConfig();
         config.putList(CONFIG_KEY_LOGTYPE, logType == null ? "" : logType.name());
         return config;
+    }
+
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = super.getJsonConfig();
+        JsonUtils.setText(node, CONFIG_KEY_LOGTYPE, logType == null ? null : logType.name());
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode config) {
+        super.setJsonConfig(config);
+        logType = EnumUtils.getEnum(LogType.class, JsonUtils.getText(config, CONFIG_KEY_LOGTYPE, null), null);
     }
 
     @Override

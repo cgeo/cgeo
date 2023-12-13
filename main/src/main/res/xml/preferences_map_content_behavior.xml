@@ -40,6 +40,12 @@
             android:summary="@string/init_summary_dtMarkerOnCacheIcon"
             android:title="@string/init_dtMarkerOnCacheIcon"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_showElevation"
+            android:title="@string/init_showElevation"
+            android:summary="@string/init_summary_showElevation"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -59,22 +65,6 @@
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="@string/pref_excludeWpOriginal"
-            android:summary="@string/init_summary_hidewp_original"
-            android:title="@string/init_hidewp"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludeWpParking"
-            android:summary="@string/init_summary_hidewp_parking"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_excludeWpVisited"
-            android:summary="@string/init_summary_hidewp_visited"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:defaultValue="false"
             android:key="@string/pref_zoomincludingwaypoints"
             android:summary="@string/init_zoomincludingwaypoints_description"
             android:title="@string/init_zoomincludingwaypoints"
@@ -90,13 +80,11 @@
             android:summary="@string/init_summary_longtap_map"
             android:title="@string/init_longtap_map"
             app:iconSpaceReserved="false" />
-        <ListPreference
-            android:defaultValue="@string/pref_maprotation_manual"
-            android:entries="@array/maprotation"
-            android:entryValues="@array/maprotationValues"
-            android:key="@string/pref_mapRotation"
-            android:summary="%s"
-            android:title="@string/settings_title_map_rotation"
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_showRouteMenu"
+            android:summary="@string/init_summary_show_routing_menu"
+            android:title="@string/init_show_routing_menu"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
@@ -145,6 +133,16 @@
             android:key="@string/pref_proximityNotificationType"
             android:summary="%s"
             android:title="@string/init_proximity_notification_type"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ButtonPreference
+            android:key="@string/pref_persistableuri_proximity_notification_far"
+            android:title="@string/persistableuri_proximitynotification_audiofile_far"
+            app:src="@drawable/ic_menu_delete"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.ButtonPreference
+            android:key="@string/pref_persistableuri_proximity_notification_close"
+            android:title="@string/persistableuri_proximitynotification_audiofile_close"
+            app:src="@drawable/ic_menu_delete"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

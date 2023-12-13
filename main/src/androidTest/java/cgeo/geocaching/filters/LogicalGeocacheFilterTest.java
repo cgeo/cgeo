@@ -7,10 +7,12 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -74,13 +76,24 @@ public class LogicalGeocacheFilterTest {
             }
 
             @Override
-            public void setConfig(final ExpressionConfig config) {
+            public void setConfig(final LegacyFilterConfig config) {
                 //no implementation needed
             }
 
             @Override
-            public ExpressionConfig getConfig() {
+            public LegacyFilterConfig getConfig() {
                 return null;
+            }
+
+            @Nullable
+            @Override
+            public ObjectNode getJsonConfig() {
+                return null;
+            }
+
+            @Override
+            public void setJsonConfig(@NonNull final ObjectNode node) {
+                //no implementation needed
             }
         };
     }

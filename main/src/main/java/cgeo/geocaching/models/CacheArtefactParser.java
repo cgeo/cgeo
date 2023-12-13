@@ -42,6 +42,8 @@ public class CacheArtefactParser {
 
     //Constants for waypoint parsing
     public static final String PARSING_CALCULATED_COORD = "{" + CalculatedCoordinate.CONFIG_KEY + "|";
+
+    public static final String PARSING_VISITED_FLAG = "{v}";
     private static final String PARSING_NAME_PRAEFIX = "@";
     private static final char PARSING_USERNOTE_DELIM = '"';
     private static final char PARSING_USERNOTE_ESCAPE = '\\';
@@ -170,7 +172,8 @@ public class CacheArtefactParser {
         final String text = match.getText();
         final String matchedText = text.substring(start, end);
 
-        final String[] wordsBefore = TextUtils.getWords(TextUtils.getTextBeforeIndexUntil(text, start, "\n"));
+        final String textBeforeIndex = TextUtils.getTextBeforeIndexUntil(text, start, "\n");
+        final String[] wordsBefore = TextUtils.getWords(textBeforeIndex);
         final String lastWordBefore = wordsBefore.length == 0 ? "" : wordsBefore[wordsBefore.length - 1];
 
         //try to get a waypointType
@@ -184,10 +187,14 @@ public class CacheArtefactParser {
             name = namePrefix + " " + counter;
         }
 
+        //try to get visited-flag
+        final boolean isVisited = textBeforeIndex.contains(PARSING_VISITED_FLAG);
+
         //create the waypoint
         final Waypoint waypoint = new Waypoint(name, wpType, true);
         waypoint.setCoords(point);
         waypoint.setPrefix(prefix);
+        waypoint.setVisited(isVisited);
 
         String afterCoords = TextUtils.getTextAfterIndexUntil(text, end - 1, null);
 
@@ -300,6 +307,7 @@ public class CacheArtefactParser {
                 (!StringUtils.isBlank(word)) &&
                         //remove words which are in parenthesis (is usually the waypoint type)
                         !(word.startsWith(PARSING_TYPE_OPEN) && word.endsWith(PARSING_TYPE_CLOSE)) &&
+                        !word.equals(PARSING_VISITED_FLAG) &&
                         //remove last word if it is just the waypoint type id
                         !(isLast && word.toLowerCase(Locale.getDefault()).equals(wpType.getShortId().toLowerCase(Locale.getDefault())));
     }
@@ -434,6 +442,11 @@ public class CacheArtefactParser {
         //type
         sb.append(PARSING_TYPE_OPEN).append(wp.getWaypointType().getShortId().toUpperCase(Locale.US))
                 .append(PARSING_TYPE_CLOSE).append(" ");
+
+        //visited-flag
+        if (wp.isVisited()) {
+            sb.append(PARSING_VISITED_FLAG).append(" ");
+        }
 
         // formula
         final String formulaString = getParseableFormula(wp);

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomnavigation_activity_viewroot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <FrameLayout
+        android:id="@+id/activity_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@id/activity_navigationBar" />
+
+    <!-- Show a navigation rail on landscape devices instead. -->
+    <com.google.android.material.navigationrail.NavigationRailView
+        android:id="@+id/activity_navigationBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/actionBarSpacer"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/activity_navigationbar_menu" />
+</cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility>

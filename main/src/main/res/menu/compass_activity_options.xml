@@ -16,8 +16,9 @@
     </item>
     <item
         android:id="@+id/menu_tts_toggle"
-        android:icon="@drawable/ic_menu_start_conversation"
-        android:title="@string/tts_toggle"
+        android:icon="@drawable/ic_menu_text_to_speech_off"
+        android:title="@string/cache_menu_speechActivate"
+        android:visible="false"
         app:showAsAction="ifRoom|withText">
     </item>
     <item

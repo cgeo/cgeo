@@ -1,7 +1,9 @@
 package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,11 +29,14 @@ public class UnifiedMapType implements Parcelable {
     public SearchResult searchResult = null;
     public String title = null;
     public int fromList = 0;
+    public GeocacheFilterContext filterContext = new GeocacheFilterContext(LIVE);
+    public boolean followMyLocation = false;
     // reminder: add additional fields to parcelable methods below
 
     /** default UnifiedMapType is PlainMap with no further data */
     public UnifiedMapType() {
         type = UnifiedMapTypeType.UMTT_PlainMap;
+        followMyLocation = true;
     }
 
     /** set geocode as target */
@@ -54,11 +59,16 @@ public class UnifiedMapType implements Parcelable {
         this.fromList = fromList;
     }
 
-    /** launch fresh map with current settings */
-    public void launchMap(final Context fromActivity) {
+    /** get launch intent */
+    public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
         intent.putExtra(BUNDLE_MAPTYPE, this);
-        fromActivity.startActivity(intent);
+        return intent;
+    }
+
+    /** launch fresh map with current settings */
+    public void launchMap(final Context fromActivity) {
+        fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
 
     // ========================================================================
@@ -71,6 +81,8 @@ public class UnifiedMapType implements Parcelable {
         searchResult = in.readParcelable(SearchResult.class.getClassLoader());
         title = in.readString();
         fromList = in.readInt();
+        filterContext = in.readParcelable(GeocacheFilterContext.class.getClassLoader());
+        followMyLocation = (in.readInt() > 0); // readBoolean available from SDK 29 on
         // ...
     }
 
@@ -87,6 +99,8 @@ public class UnifiedMapType implements Parcelable {
         dest.writeParcelable(searchResult, 0);
         dest.writeString(title);
         dest.writeInt(fromList);
+        dest.writeParcelable(filterContext, 0);
+        dest.writeInt(followMyLocation ? 1 : 0);
         // ...
     }
 

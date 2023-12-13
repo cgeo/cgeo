@@ -23,7 +23,6 @@
 package com.mapswithme.maps.api;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -60,26 +59,12 @@ public final class MapsWithMeApi {
   }
 
   public static void sendRequest(final Activity caller, final MwmRequest request) {
-    final Intent mwmIntent = request.toIntent(caller);
-
     if (isMapsWithMeInstalled(caller)) {
+      final Intent mwmIntent = request.toIntent(caller);
       // Match activity for intent
       final ActivityInfo aInfo = caller.getPackageManager().resolveActivity(mwmIntent, 0).activityInfo;
       mwmIntent.setClassName(aInfo.packageName, aInfo.name);
       caller.startActivity(mwmIntent);
-    } else {
-        // replace misleading/outdated maps.me dialog with c:geo warning message, see #13209
-        new AlertDialog.Builder(caller)
-            .setTitle("maps.me not found")
-            .setMessage("This may be due to maps.me not being installed or maps.me being installed in a version > 12.0, which is no longer compatible to their integration API.\n\nSee our FAQ for details.")
-            .setNeutralButton("Open FAQ", (dialog, which) -> {
-                final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://faq.cgeo.org#13209"));
-                caller.startActivity(viewIntent);
-                })
-            .setPositiveButton(android.R.string.ok, ((dialog, which) -> { }))
-            .show();
-        // original code was:
-        // (new DownloadMapsWithMeDialog(caller)).show();
     }
   }
 

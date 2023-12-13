@@ -4,8 +4,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.expressions.ExpressionConfig;
+import cgeo.geocaching.utils.config.LegacyFilterConfig;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +20,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
  * Base class for filters where a cache can have one value out of a group of values
@@ -110,27 +116,51 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     }
 
     @Override
-    public void setConfig(final ExpressionConfig config) {
+    public void setConfig(final LegacyFilterConfig config) {
+        setConfigInternal(config.getDefaultList());
+    }
+
+    private void setConfigInternal(final List<String> configValues) {
         values.clear();
-        for (String s : config.getDefaultList()) {
-            final G g = valueFromString(s);
-            if (g != null) {
-                values.add(g);
+        if (configValues != null) {
+            for (String s : configValues) {
+                final G g = valueFromString(s);
+                if (g != null) {
+                    values.add(g);
+                }
             }
         }
     }
 
     @Override
-    public ExpressionConfig getConfig() {
-        final ExpressionConfig result = new ExpressionConfig();
+    public LegacyFilterConfig getConfig() {
+        final LegacyFilterConfig result = new LegacyFilterConfig();
+        result.putDefaultList(getConfigInternal());
+        return result;
+    }
+
+    private List<String> getConfigInternal() {
+        final List<String> result = new ArrayList<>();
         for (G v : this.values) {
             final String c = valueToString(v);
             if (c != null) {
-                result.addToDefaultList(c);
+                result.add(c);
             }
         }
         return result;
+    }
 
+    @Nullable
+    @Override
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setTextCollection(node, "values", getConfigInternal());
+        return node;
+    }
+
+    @Override
+    public void setJsonConfig(@NonNull final ObjectNode node) {
+        setConfigInternal(JsonUtils.getTextList(node, "values"));
     }
 
     @Override
@@ -160,6 +190,8 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String colName = getSqlColumnName();
+        final T sqlNullValue = getSqlNullValue();
+        boolean addNull = false;
         if (colName != null && !getValues().isEmpty()) {
             final StringBuilder sb = new StringBuilder(sqlBuilder.getMainTableId() + "." + colName + " IN (");
             final List<String> params = new ArrayList<>();
@@ -167,6 +199,9 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
             for (T rawV : getRawValues()) {
                 if (rawV == null) {
                     continue;
+                }
+                if (rawV.equals(sqlNullValue)) {
+                    addNull = true;
                 }
                 if (!first) {
                     sb.append(",");
@@ -176,10 +211,22 @@ public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter 
                 params.add(valueToSqlValue(rawV));
             }
             sb.append(")");
+            if (addNull) {
+                sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + colName + " IS NULL");
+            }
             sqlBuilder.addWhere(sb.toString(), params);
+            if (addNull) {
+                sqlBuilder.closeWhere();
+            }
+
         } else {
             sqlBuilder.addWhereTrue();
         }
+    }
+
+    protected T getSqlNullValue() {
+        return null;
     }
 
     @Override

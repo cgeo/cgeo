@@ -14,6 +14,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Comparator;
 import java.util.List;
@@ -37,20 +38,21 @@ public class RouteItem implements Parcelable {
     private RouteItemType type;
     private String cacheGeocode;
     private int waypointId;
+    private String name;
 
     public RouteItem(final IWaypoint item) {
         setDetails(item);
     }
 
     public RouteItem(final Geopoint point) {
-        setDetails(buildIdentifier(point), point, RouteItemType.COORDS, "", 0);
+        setDetails(buildIdentifier(point), point, RouteItemType.COORDS, "", 0, null);
     }
 
     // parse name info of GPX route point entry into RouteItem
     public RouteItem(final String name, final Geopoint p) {
 
         // init with default values
-        setDetails(buildIdentifier(p), p, RouteItemType.COORDS, "", 0);
+        setDetails(buildIdentifier(p), p, RouteItemType.COORDS, "", 0, name);
 
         // try to parse name string
         if (StringUtils.isNotBlank(name)) {
@@ -128,15 +130,15 @@ public class RouteItem implements Parcelable {
             case CACHE:
                 final Geocache geocache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (null != geocache) {
-                    setDetails(buildIdentifier(geocache), geocache.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0);
+                    setDetails(buildIdentifier(geocache), geocache.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, geocache.getName());
                 } else {
-                    setDetails(item.getGeocode(), null, RouteItemType.GEOCACHE, item.getGeocode(), 0);
+                    setDetails(item.getGeocode(), null, RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getGeocode());
                 }
                 break;
             case WAYPOINT:
                 final Waypoint waypoint = DataStore.loadWaypoint(item.getId());
                 if (null != waypoint) {
-                    setDetails(buildIdentifier(waypoint), waypoint.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId());
+                    setDetails(buildIdentifier(waypoint), waypoint.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), waypoint.getName());
                 }
                 break;
             default:
@@ -156,6 +158,14 @@ public class RouteItem implements Parcelable {
         return cacheGeocode;
     }
 
+    @Nullable
+    public Geocache getGeocache() {
+        if (cacheGeocode == null) {
+            return null;
+        }
+        return DataStore.loadCache(cacheGeocode, LoadFlags.LOAD_CACHE_OR_DB);
+    }
+
     @NonNull
     public String getShortGeocode() {
         return generateShortGeocode(cacheGeocode);
@@ -165,24 +175,29 @@ public class RouteItem implements Parcelable {
         return identifier;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public Geopoint getPoint() {
         return point;
     }
 
     private void setDetails(final IWaypoint item) {
         if (item instanceof Geocache) {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0);
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getGeocode() + ": " + item.getName());
         } else {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId());
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), item.getGeocode() + ": " + item.getName());
         }
     }
 
-    private void setDetails(final String identifier, final Geopoint point, final RouteItemType type, final String geocode, final int waypointId) {
+    private void setDetails(final String identifier, final Geopoint point, final RouteItemType type, final String geocode, final int waypointId, final String name) {
         this.identifier = identifier;
         this.point = point;
         this.type = type;
         this.cacheGeocode = geocode;
         this.waypointId = waypointId;
+        this.name = name == null ? identifier : name;
         checkForCoordinates();
     }
 
@@ -243,6 +258,7 @@ public class RouteItem implements Parcelable {
         type = RouteItemType.values()[parcel.readInt()];
         cacheGeocode = parcel.readString();
         waypointId = parcel.readInt();
+        name = parcel.readString();
     }
 
     @Override
@@ -257,6 +273,7 @@ public class RouteItem implements Parcelable {
         dest.writeInt(type.ordinal());
         dest.writeString(cacheGeocode);
         dest.writeInt(waypointId);
+        dest.writeString(name);
     }
 
 }

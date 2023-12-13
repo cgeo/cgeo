@@ -4,10 +4,16 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCLogin;
+import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
+import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
@@ -17,6 +23,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
+import cgeo.geocaching.sorting.GeocacheSort;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.mock.GC2JVEH;
@@ -242,34 +249,48 @@ public class CgeoApplicationTest {
     @MediumTest
     @Test
     public void testSearchByCoords() {
-        withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByCoords(GCConnector.getInstance(), new Geopoint("N 50° 06.654 E 008° 39.777"));
-            assertThat(search).isNotNull();
-            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
-            assertThat(search.getGeocodes()).contains("GC1HBMY");
-        });
+
+        final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) GeocacheFilterType.DISTANCE.create();
+        distanceFilter.setCoordinate(new Geopoint("N 50° 06.654 E 008° 39.777"));
+
+        final GeocacheFilter filter = GeocacheFilter.createEmpty().and(distanceFilter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
+
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
+        assertThat(search.getGeocodes()).contains("GC1HBMY");
+
     }
 
     @MediumTest
     @Test
     public void testSearchByOwner() {
-        withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByOwner(GCConnector.getInstance(), "Lineflyer");
-            assertThat(search).isNotNull();
-            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
-            assertThat(search.getGeocodes()).contains("GC8TGJ6");
-        });
+
+        final OwnerGeocacheFilter ownerFilter = (OwnerGeocacheFilter) GeocacheFilterType.OWNER.create();
+        ownerFilter.getStringFilter().setTextValue("Lineflyer");
+
+        final GeocacheFilter filter = GeocacheFilter.createEmpty().and(ownerFilter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
+
+        assertThat(search).isNotNull();
+        assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
+        assertThat(search.getGeocodes()).contains("GC8TGJ6");
+
     }
 
     @MediumTest
     @Test
     public void testSearchByUsername() {
-        withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByUsername(GCConnector.getInstance(), "blafoo", null, false);
-            assertThat(search).isNotNull();
-            // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
-            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
-        });
+
+        final LogEntryGeocacheFilter foundByFilter = (LogEntryGeocacheFilter) GeocacheFilterType.LOG_ENTRY.create();
+        foundByFilter.setFoundByUser("blafoo");
+
+        final GeocacheFilter filter = GeocacheFilter.createEmpty().and(foundByFilter);
+        final SearchResult search = GCMap.searchByFilter(GCConnector.getInstance(), filter, new GeocacheSort());
+
+        assertThat(search).isNotNull();
+        // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
+        assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
     }
 
     /**

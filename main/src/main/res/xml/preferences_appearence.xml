@@ -51,6 +51,19 @@
             android:title="@string/init_quicklaunchitems"
             android:summary="@string/init_summary_quicklaunchitems"
             app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_startscreen_home"
+            android:entries="@array/settings_startscreen"
+            android:entryValues="@array/pref_startscreen_values"
+            android:key="@string/pref_startscreen"
+            android:title="@string/settings_startscreen_title"
+            android:summary="%s"
+            app:iconSpaceReserved="false" />
+        <ListPreference
+            android:defaultValue="0"
+            android:key="@string/pref_custombnitem"
+            android:title="@string/init_custombnitem"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -74,6 +87,31 @@
             android:key="@string/pref_cacheListInfo"
             android:title="@string/init_title_cacheListInfo1"
             android:summary="@string/init_summary_cacheListInfo"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_iconsizes"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:title="@string/init_mapCacheScaling_title"
+            android:summary="@string/init_mapCacheScaling_description"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_mapCacheScaling"
+            android:defaultValue="100"
+            app:min="50"
+            app:max="200"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:title="@string/init_mapWpScaling_title"
+            android:summary="@string/init_mapWpScaling_description"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_mapWpScaling"
+            android:defaultValue="100"
+            app:min="50"
+            app:max="200"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 

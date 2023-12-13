@@ -81,6 +81,11 @@ public class AsynchronousMapWrapper<K, V, C> {
             return true;
         }
 
+        /** called whenever a batch of map changes has been processed */
+        default void onMapChangeBatchEnd(final long processedCount) {
+            //empty on purpose
+        }
+
         default void destroy(final Collection<Pair<V, C>> valuesOnMap) {
             //empty on purpose
         }
@@ -297,6 +302,7 @@ public class AsynchronousMapWrapper<K, V, C> {
         private boolean processQueue() {
             final long time = System.currentTimeMillis();
             Pair<K, Boolean> request;
+            long processCnt = 0;
             while ((request = mapChangeProcessQueue.poll()) != null && !isDestroyed.get()) {
                 if (request.second) {
                     //ADD request
@@ -305,12 +311,18 @@ public class AsynchronousMapWrapper<K, V, C> {
                     //REMOVE request
                     processRemoveCommand(request.first);
                 }
+                processCnt++;
+                // removing and adding objects to maps are considered to be time costly operations
+                // which might block UI thread
+                // -> give the option to stop and recontinue at a later point in time
                 if (!changeExecutor.continueMapChangeExecutions(time, mapChangeProcessQueue.size())) {
-                    // removing and adding objects to Google Maps are time costly operations and we don't want to block UI thread
+                    changeExecutor.onMapChangeBatchEnd(processCnt);
+                    //queue the execution for a later point in time
                     changeExecutor.runMapChanges(this);
                     return false;
                 }
             }
+            changeExecutor.onMapChangeBatchEnd(processCnt);
             return true;
         }
 

@@ -68,6 +68,9 @@ public final class GCConstants {
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
+    static final Pattern PATTERN_CSRF_TOKEN = Pattern.compile("\"csrfToken\":\"([^\"]+)\"");
+    // matches: the inner JSON Code (w/o {}) of "currentGeocache":{"id":123,"referenceCode":"GCxyz","name":"somename"}
+    static final Pattern PATTERN_TB_CURRENT_GEOCACHE_JSON = Pattern.compile("\"currentGeocache\":\\{([^}]+)\\}");
 
     /**
      * Two groups !
@@ -181,6 +184,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TYPE2 = Pattern.compile("<option( selected=\"selected\")? value=\"(\\d+)\">[^<]+</option>", Pattern.CASE_INSENSITIVE);
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
     static final Pattern PATTERN_TYPE3 = Pattern.compile("logSettings.logTypes.push\\(([^;]*)\\);");
+    static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_OK2 = Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|'] class=", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -218,6 +222,9 @@ public final class GCConstants {
 
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";
+
+    // URL to message center
+    public static final String URL_MESSAGECENTER = "https://www.geocaching.com/account/messagecenter";
 
     /**
      * Number of logs to retrieve from GC.com

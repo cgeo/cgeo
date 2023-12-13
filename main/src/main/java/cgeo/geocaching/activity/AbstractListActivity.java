@@ -4,7 +4,7 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public abstract class AbstractListActivity extends AbstractBottomNavigationActivity {
+public abstract class AbstractListActivity extends AbstractNavigationBarActivity {
     private ListView mListView;
 
     protected ListView getListView() {

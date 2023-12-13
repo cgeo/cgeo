@@ -38,6 +38,12 @@ public class CompanionFileUtils {
         public long remoteDate;             // 2020-12-10 (as long)
         public String localFile;            // eg: map43.map (relative to map dir)
         public String displayName;          // eg: Hessen
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "{ n=" + displayName + ", d=" + remoteDate + ", t=" + remoteParsetype + ", u=" + remotePage + "/" + remoteFile + " }";
+        }
     }
 
     private CompanionFileUtils() {

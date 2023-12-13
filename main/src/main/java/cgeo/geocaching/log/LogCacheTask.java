@@ -4,9 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -14,7 +14,6 @@ import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.ImageUtils;
@@ -24,7 +23,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.view.View;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,15 +33,15 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> {
+public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult> {
     private final Resources res;
     private final LogCacheActivity.LogCacheTaskInterface taskInterface;
 
-    private final Action1<StatusCode> onPostExecuteInternal;
+    private final Action1<StatusResult> onPostExecuteInternal;
 
     LogCacheTask(final Activity activity, final Resources res, final String progressMessage, final String title,
                  final LogCacheActivity.LogCacheTaskInterface taskInterface,
-                 final Action1<StatusCode> onPostExecuteInternal) {
+                 final Action1<StatusResult> onPostExecuteInternal) {
         super(activity, title, progressMessage);
         this.res = res;
         this.taskInterface = taskInterface;
@@ -51,24 +49,31 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
     }
 
     @Override
-    protected StatusCode doInBackgroundInternal(final String[] logTexts) {
+    protected StatusResult doInBackgroundInternal(final String[] logTexts) {
 
         final String log = logTexts[0];
         final String logPwd = logTexts.length > 1 ? logTexts[1] : null;
 
         final ContextLogger cLog = new ContextLogger("LCA.Poster.doInBackgroundInternal(%s)", log);
         try {
-            final LogResult logResult;
-            if (taskInterface.loggingManager instanceof ILoggingWithFavorites) {
-                logResult = ((ILoggingWithFavorites) taskInterface.loggingManager).postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType, taskInterface.binding.favoriteCheck.isChecked());
-            } else {
-                logResult = taskInterface.loggingManager.postLog(taskInterface.logType, taskInterface.date.getCalendar(),
-                        log, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.reportProblemType);
+            final IConnector cacheConnector = ConnectorFactory.getConnector(taskInterface.geocache);
+            float logRating = 0;
+            if (cacheConnector instanceof IVotingCapability) {
+                logRating = getLogRating((IVotingCapability) cacheConnector);
             }
 
+            final LogEntry logEntry = new LogEntry.Builder<>()
+                .setLogType(taskInterface.logType)
+                .setDate(taskInterface.date.getDate().getTime())
+                .setLog(log)
+                .setReportProblem(taskInterface.reportProblemType)
+                .build();
+
+            final LogResult logResult = taskInterface.loggingManager.createLog(
+                logEntry, logPwd, new ArrayList<>(taskInterface.trackables), taskInterface.binding.favoriteCheck.isChecked(), logRating);
+
             ImageResult imageResult = null;
-            if (logResult.getPostLogResult() == StatusCode.NO_ERROR) {
+            if (logResult.getStatusCode() == StatusCode.NO_ERROR) {
                 // update geocache in DB
                 if (taskInterface.logType.isFoundLog()) {
                     taskInterface.geocache.setFound(true);
@@ -88,7 +93,6 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
 
                 // login credentials may vary from actual username
                 // Get correct author name from connector (if applicable)
-                final IConnector cacheConnector = ConnectorFactory.getConnector(taskInterface.geocache);
                 if (cacheConnector instanceof ILogin) {
                     final String username = ((ILogin) cacheConnector).getUserName();
                     if (StringUtils.isNotBlank(username)) {
@@ -97,16 +101,16 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
                 }
 
                 imageResult = postImages(logBuilder, logResult);
-                storeLogInDatabaseAndTwitter(logBuilder);
+                storeLogInDatabase(logBuilder);
                 postCacheRating(cacheConnector);
                 postTrackables(log);
             }
 
             // if an image could not be uploaded, use its error as final state
             if (!isOkResult(imageResult)) {
-                return imageResult.getPostResult();
+                return imageResult;
             }
-            return logResult.getPostLogResult();
+            return logResult;
         } catch (final RuntimeException e) {
             cLog.setException(e);
             Log.e("LogCacheActivity.Poster.doInBackgroundInternal", e);
@@ -114,7 +118,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
             cLog.endLog();
         }
 
-        return StatusCode.LOG_POST_ERROR;
+        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     private ImageResult postImages(final LogEntry.Builder logBuilder, final LogResult logResult) {
@@ -130,10 +134,10 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
                 final Image imgToSend;
                 if (imageFileForUpload == null) {
                     imgToSend = null;
-                    imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
+                    imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl(), "");
                 } else {
                     imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(taskInterface.imageListFragment.getImageTitle(img, pos++)).build();
-                    imageResult = taskInterface.loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                    imageResult = taskInterface.loggingManager.createLogImage(logResult.getLogId(), imgToSend);
                 }
                 if (!isOkResult(imageResult)) {
                     break;
@@ -162,7 +166,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
         return imageResult;
     }
 
-    private void storeLogInDatabaseAndTwitter(final LogEntry.Builder logBuilder) {
+    private void storeLogInDatabase(final LogEntry.Builder logBuilder) {
         // update logs in DB
         final List<LogEntry> newLogs = new ArrayList<>(taskInterface.geocache.getLogs());
         final LogEntry logNow = logBuilder.build();
@@ -174,12 +178,15 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
         DataStore.saveLogs(taskInterface.geocache.getGeocode(), newLogs, true);
 
         // update offline log in DB
-        taskInterface.geocache.clearOfflineLog();
+        taskInterface.geocache.clearOfflineLog(null);
 
-        if (taskInterface.logType == LogType.FOUND_IT && taskInterface.binding.tweet.isChecked() && taskInterface.binding.tweet.getVisibility() == View.VISIBLE) {
-            publishProgress(res.getString(R.string.log_posting_twitter));
-            Twitter.postTweetCache(taskInterface.geocache.getGeocode(), logNow);
+    }
+
+    private float getLogRating(final IVotingCapability votingConnector) {
+        if (votingConnector != null && votingConnector.supportsVoting(taskInterface.geocache) && votingConnector.isValidRating(taskInterface.cacheVotingBar.getRating())) {
+            return taskInterface.cacheVotingBar.getRating();
         }
+        return 0;
     }
 
     private void postCacheRating(final IConnector cacheConnector) {
@@ -223,11 +230,11 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusCode> 
     }
 
     private boolean isOkResult(final ImageResult imageResult) {
-        return imageResult == null || imageResult.getPostResult() == StatusCode.NO_ERROR || imageResult.getPostResult() == StatusCode.LOG_SAVED;
+        return imageResult == null || imageResult.getStatusCode() == StatusCode.NO_ERROR || imageResult.getStatusCode() == StatusCode.LOG_SAVED;
     }
 
     @Override
-    protected void onPostExecuteInternal(final StatusCode status) {
-        onPostExecuteInternal.call(status);
+    protected void onPostExecuteInternal(final StatusResult statusResult) {
+        onPostExecuteInternal.call(statusResult);
     }
 }

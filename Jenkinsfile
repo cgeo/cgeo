@@ -13,33 +13,33 @@ node('has-emulator') {
         try {
             // group steps by stages for better monitoring in the Jenkins pipeline stage view
             stage('Checkout from GitHub') {
-            
+
                 // set timeouts for every step instead of for the complete job. default unit are minutes
                 timeout(5) {
-                
+
                     // checkout the exact same version that triggered this pipeline script instead of specifying a repo and commit again
                     checkout scm
                 }
             }
-            
+
             stage('Prepare build environment') {
                 timeout(5) {
                     // Restart the emulator to be sure of its state
                     sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh'
-                 
+
                     // Ensure proper cleaning
                     sh './gradlew --no-daemon --scan  clean'
                     sh 'rm -fr build build-cache main/build || true'
-                       
+
                     // Accept Android licenses. these are the MD5 hashes of the license texts, so they may need to be adapted on license changes
                     // The following line does make the build fail, needs to be investigated
                     // sh '[ ! -d "/opt/android-sdk-linux/licenses" ] && mkdir "/opt/android-sdk-linux/licenses"'
                     sh 'echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "/opt/android-sdk-linux/licenses/android-sdk-license"'
                     sh 'echo -e "\nd975f751698a77b662f1254ddbeed3901e976f5a" > "/opt/android-sdk-linux/licenses/intel-android-extra-license"'
-                     
+
                     // gradle needs the sdk.dir in local.properties. Not sure if a template exists on the server, therefore we create it on demand.
                     sh 'echo "sdk.dir=/opt/android-sdk-linux" > local.properties'
-                    
+
                     // get all the necessary keys
                     sh 'cp /srv/private.properties .'
 
@@ -57,7 +57,7 @@ node('has-emulator') {
                         sh './gradlew --no-daemon --scan  checkstyle'
                     }
                    stage ('Run Lint tests') {
-                        sh './gradlew --no-daemon --scan  lintBasicDebug'                                        
+                        sh './gradlew --no-daemon --scan  lintBasicDebug'
                     }
                 }
             }
@@ -65,11 +65,11 @@ node('has-emulator') {
                 stage ('Cleanup environment') {
                     //shutdown emulator
                     sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh --stop'
-                     
+
                     // file cleanup
                     sh '[ -f private.properties ] && rm private.properties'
                     sh '[ -f main/cgeo.geocaching_preferences.xml ] && rm main/cgeo.geocaching_preferences.xml'
-                    sh '[ -f main/res/values/keys.xml ] && rm main/res/values/keys.xml'
+                    sh '[ -f main/src/main/res/values/keys.xml ] && rm main/src/main/res/values/keys.xml'
                  }
              }
 

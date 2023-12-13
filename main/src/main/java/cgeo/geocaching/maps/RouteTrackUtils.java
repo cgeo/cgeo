@@ -7,6 +7,7 @@ import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.routing.RouteOptimizationHelper;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
@@ -16,46 +17,54 @@ import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.ColorPickerUI;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.dialog.SimplePopupMenu;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.TooltipCompat;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 
 public class RouteTrackUtils {
 
     private static final int REQUEST_SORT_INDIVIDUAL_ROUTE = 4712;
-    private static final String STATE_CSAH_ROUTE = "csah_route";
-    private static final String STATE_CSAH_TRACK = "csah_track";
+    private static final String STATE_CSAH = "rtu_csah";
 
     private final Activity activity;
-    private final ContentStorageActivityHelper fileSelectorRoute;
-    private final ContentStorageActivityHelper fileSelectorTrack;
+    private final ContentStorageActivityHelper csah;
     private View popup = null;
     private Tracks tracks = null;
 
@@ -76,9 +85,8 @@ public class RouteTrackUtils {
         this.updateTrack = updateTrack;
         this.isTargetSet = isTargetSet;
 
-        this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
-                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
-        this.fileSelectorTrack = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_TRACK))
+        this.csah = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute)
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importTracks);
     }
 
@@ -120,6 +128,147 @@ public class RouteTrackUtils {
         dialog.show();
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // route/track context menu-related methods
+
+    /** show a popup for track/individual route, opened by using a long-tap on that item on the map */
+    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Route route) {
+        final SimplePopupMenu menu = SimplePopupMenu.of(activity).setMenuContent(R.menu.map_routetrack_context).setPosition(new Point(tapX, tapY), 0);
+        menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, route));
+        menu.setOnItemClickListener(item -> handleContextMenuClick(item, route));
+        menu.show();
+    }
+
+    public static void configureContextMenu(final Menu menu, final Route route) {
+        final boolean isIndividualRoute = isIndividualRoute(route);
+        menu.findItem(R.id.menu_edit).setVisible(isIndividualRoute);
+        menu.findItem(R.id.menu_optimize).setVisible(isIndividualRoute);
+        menu.findItem(R.id.menu_invert_order).setVisible(isIndividualRoute);
+        menu.findItem(R.id.menu_color).setVisible(!isIndividualRoute);
+    }
+
+    public boolean handleContextMenuClick(final MenuItem item, final Route route) {
+        final int id = item.getItemId();
+        if (id == R.id.menu_edit) {
+            menuEditRoute(route);
+        } else if (id == R.id.menu_optimize) {
+            if (isIndividualRoute(route)) {
+                menuOptimizeRoute((IndividualRoute) route);
+            }
+        } else if (id == R.id.menu_invert_order) {
+            if (isIndividualRoute(route)) {
+                menuInvertRoute((IndividualRoute) route);
+            }
+        } else if (id == R.id.menu_color) {
+            if (!isIndividualRoute(route)) {
+                tracks.traverse((key, routeForThisKey) -> {
+                    if (routeForThisKey.equals(route)) {
+                        menuColorTrack(key, null);
+                    }
+                });
+            }
+        } else if (id == R.id.item_visibility) {
+            final boolean newValue = menuToggleRouteOrTrack(route);
+            item.setTitle(newValue ? R.string.make_visible : R.string.hide);
+        } else if (id == R.id.item_center) {
+            menuCenterRouteOrTrack(route);
+        } else if (id == R.id.menu_item_delete) {
+            if (isIndividualRoute(route)) {
+                menuDeleteRoute(() -> { });
+            } else {
+                tracks.traverse((key, routeForThisKey) -> {
+                    if (routeForThisKey.equals(route)) {
+                        menuDeleteTrack(key, null);
+                    }
+                });
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // common methods for both route/track bottom dialog & context menu
+
+    private void menuEditRoute(final Route route) {
+        if (isIndividualRoute(route)) {
+            activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
+        }
+    }
+
+    private boolean menuToggleRouteOrTrack(final Route route) {
+        final boolean newValue = !route.isHidden();
+        if (isIndividualRoute(route)) {
+            route.setHidden(newValue);
+            reloadIndividualRoute.run();
+        } else {
+            tracks.traverse((key, routeForThisKey) -> {
+                if (routeForThisKey.equals(route)) {
+                    menuToggleTrack(key, newValue);
+                }
+            });
+        }
+        return newValue;
+    }
+
+    private void menuToggleTrack(final String key, final boolean newValue) {
+        final IGeoItemSupplier route = tracks.getTrack(key).getRoute();
+        route.setHidden(newValue);
+        updateTrack.updateRoute(key, route, tracks.getColor(key), tracks.getWidth(key));
+        tracks.hide(key, newValue);
+    }
+
+    private void menuOptimizeRoute(final IndividualRoute individualRoute) {
+        final RouteOptimizationHelper roh = new RouteOptimizationHelper(individualRoute.getRouteItems());
+        roh.start(activity, this::storeAndReloadIndividualRoute);
+    }
+
+    private void menuInvertRoute(final IndividualRoute individualRoute) {
+        final ArrayList<RouteItem> newRouteItems = new ArrayList<>(individualRoute.getRouteItems());
+        Collections.reverse(newRouteItems);
+        storeAndReloadIndividualRoute(newRouteItems);
+    }
+
+    private void storeAndReloadIndividualRoute(final ArrayList<RouteItem>newRouteItems) {
+        AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(newRouteItems), reloadIndividualRoute);
+    }
+
+    private void menuColorTrack(final String key, @Nullable final ImageView vColor) {
+        new ColorPickerUI(activity, tracks.getColor(key), tracks.getWidth(key), false, 0, 0, true, true).show((newColor, newWidth) -> {
+            tracks.setColor(key, newColor);
+            tracks.setWidth(key, newWidth);
+            if (vColor != null) {
+                ColorPickerUI.setViewColor(vColor, newColor, false);
+            }
+            updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
+        });
+    }
+
+    private void menuDeleteRoute(final Runnable onDeletion) {
+            SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm(() -> {
+            clearIndividualRoute.run();
+            onDeletion.run();
+        });
+    }
+
+    private void menuDeleteTrack(final String key, @Nullable final View dialog) {
+        SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm(() -> {
+            tracks.remove(key);
+            if (dialog != null) {
+                updateDialogTracks(dialog, tracks);
+            }
+            updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
+        });
+    }
+
+    private void menuCenterRouteOrTrack(final Route route) {
+        route.setCenter(centerOnPosition);
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // route/track bottom menu-related methods
+
     private void updateDialog(final View dialog, final IndividualRoute individualRoute, final Tracks tracks, final Action2<Geopoint, String> setTarget) {
         updateDialogIndividualRoute(dialog, individualRoute, setTarget);
         updateDialogTracks(dialog, tracks);
@@ -127,7 +276,7 @@ public class RouteTrackUtils {
     }
 
     private void startFileSelectorIndividualRoute() {
-        fileSelectorRoute.selectFile(null, PersistableFolder.GPX.getUri());
+        csah.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
     private void updateDialogIndividualRoute(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
@@ -139,7 +288,7 @@ public class RouteTrackUtils {
                 startFileSelectorIndividualRoute();
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
-                        (d, w) -> startFileSelectorIndividualRoute());
+                        this::startFileSelectorIndividualRoute);
             }
         });
 
@@ -148,7 +297,7 @@ public class RouteTrackUtils {
 
             final View vEdit = dialog.findViewById(R.id.item_edit);
             vEdit.setVisibility(View.VISIBLE);
-            vEdit.setOnClickListener(v1 -> activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE));
+            vEdit.setOnClickListener(v1 -> menuEditRoute(individualRoute));
 
             final View vRefresh = dialog.findViewById(R.id.item_refresh);
             vRefresh.setVisibility(View.VISIBLE);
@@ -171,22 +320,14 @@ public class RouteTrackUtils {
                 CacheDownloaderService.downloadCaches(activity, geocodes, true, true, null);
             });
 
-            dialog.findViewById(R.id.item_center).setOnClickListener(v1 -> individualRoute.setCenter(centerOnPosition));
+            dialog.findViewById(R.id.item_center).setOnClickListener(v1 -> menuCenterRouteOrTrack(individualRoute));
 
             final ImageButton vVisibility = dialog.findViewById(R.id.item_visibility);
             vVisibility.setVisibility(View.VISIBLE);
+            vVisibility.setOnClickListener(v -> setVisibilityInfo(vVisibility, menuToggleRouteOrTrack(individualRoute)));
             setVisibilityInfo(vVisibility, individualRoute.isHidden());
-            vVisibility.setOnClickListener(v -> {
-                final boolean newValue = !individualRoute.isHidden();
-                setVisibilityInfo(vVisibility, newValue);
-                individualRoute.setHidden(newValue);
-                reloadIndividualRoute.run();
-            });
 
-            dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm((d, w) -> {
-                clearIndividualRoute.run();
-                updateDialogIndividualRoute(dialog, individualRoute, setTarget);
-            }));
+            dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> menuDeleteRoute(() -> updateDialogIndividualRoute(dialog, individualRoute, setTarget)));
 
             dialog.findViewById(R.id.indivroute_export_route).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, false));
             dialog.findViewById(R.id.indivroute_export_track).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, true));
@@ -208,13 +349,14 @@ public class RouteTrackUtils {
         }
         final LinearLayout tracklist = dialog.findViewById(R.id.tracklist);
         tracklist.removeAllViews();
-        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> fileSelectorTrack.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
+        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> csah.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
         tracks.traverse((key, geoData) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
             final TextView displayName = vt.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
-            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name")).input(InputType.TYPE_CLASS_TEXT, displayName.getText().toString(), null, null, newName -> {
+            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name"))
+                    .input(new SimpleDialog.InputOptions().setInitialValue(displayName.getText().toString()), newName -> {
                 if (StringUtils.isNotBlank(newName)) {
                     tracks.setDisplayname(key, newName);
                     displayName.setText(newName);
@@ -224,12 +366,7 @@ public class RouteTrackUtils {
             final ImageButton vColor = vt.findViewById(R.id.item_color);
             ColorPickerUI.setViewColor(vColor, tracks.getColor(key), false);
             vColor.setVisibility(View.VISIBLE);
-            vColor.setOnClickListener(view -> new ColorPickerUI(dialog.getContext(), tracks.getColor(key), tracks.getWidth(key), false, 0, 0, true, true).show((newColor, newWidth) -> {
-                tracks.setColor(key, newColor);
-                tracks.setWidth(key, newWidth);
-                ColorPickerUI.setViewColor(vColor, newColor, false);
-                updateTrack.updateRoute(key, tracks.getRoute(key), tracks.getColor(key), tracks.getWidth(key));
-            }));
+            vColor.setOnClickListener(view -> menuColorTrack(key, vColor));
 
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
                 if (null != geoData) {
@@ -244,20 +381,10 @@ public class RouteTrackUtils {
             } else {
                 vVisibility.setVisibility(View.VISIBLE);
                 setVisibilityInfo(vVisibility, geoData.isHidden());
-                vVisibility.setOnClickListener(v -> {
-                    final boolean newValue = !geoData.isHidden();
-                    setVisibilityInfo(vVisibility, newValue);
-                    geoData.setHidden(newValue);
-                    updateTrack.updateRoute(key, geoData, tracks.getColor(key), tracks.getWidth(key));
-                    tracks.hide(key, newValue);
-                });
+                vVisibility.setOnClickListener(v -> menuToggleTrack(key, !geoData.isHidden()));
             }
 
-            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm((d, w) -> {
-                tracks.remove(key);
-                updateDialogTracks(dialog, tracks);
-                updateTrack.updateRoute(key, null, tracks.getColor(key), tracks.getWidth(key));
-            }));
+            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> menuDeleteTrack(key, dialog));
             tracklist.addView(vt);
         });
     }
@@ -317,20 +444,19 @@ public class RouteTrackUtils {
     }
 
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (fileSelectorRoute.onActivityResult(requestCode, resultCode, data)) {
+        if (csah.onActivityResult(requestCode, resultCode, data)) {
             return true;
         }
         if (requestCode == REQUEST_SORT_INDIVIDUAL_ROUTE) {
             reloadIndividualRoute.run();
             return true;
         }
-        return (fileSelectorTrack.onActivityResult(requestCode, resultCode, data));
+        return (csah.onActivityResult(requestCode, resultCode, data));
     }
 
     public Bundle getState() {
         final Bundle bundle = new Bundle();
-        bundle.putBundle(STATE_CSAH_ROUTE, this.fileSelectorRoute.getState());
-        bundle.putBundle(STATE_CSAH_TRACK, this.fileSelectorTrack.getState());
+        bundle.putBundle(STATE_CSAH, this.csah.getState());
         return bundle;
     }
 
@@ -338,5 +464,9 @@ public class RouteTrackUtils {
         Settings.setAutotargetIndividualRoute(newValue);
         route.triggerTargetUpdate(!Settings.isAutotargetIndividualRoute());
         ActivityMixin.invalidateOptionsMenu(activity);
+    }
+
+    public static boolean isIndividualRoute(final Route route) {
+        return (route != null && route.getName().isEmpty());
     }
 }

@@ -231,7 +231,6 @@ public final class Formatter {
     }
 
     private static void addConfiguredInfoItems(final Geocache cache, final List<Integer> configuredItems, final @Nullable List<AbstractList> storedLists, final @Nullable String excludeList, final List<SpannableString> infos) {
-        final int backgroundColor = CgeoApplication.getInstance().getResources().getColor(R.color.colorBackground);
         for (int item : configuredItems) {
             if (item == CacheListInfoItem.VALUES.GCCODE.id) {
                 if (StringUtils.isNotBlank(cache.getGeocode())) {
@@ -402,7 +401,7 @@ public final class Formatter {
             ago = CgeoApplication.getInstance().getString(R.string.cache_offline_about_time_year);
         }
 
-        return CgeoApplication.getInstance().getString(R.string.cache_offline_stored) + "\n" + ago;
+        return String.format(CgeoApplication.getInstance().getString(R.string.cache_offline_stored_ago), ago);
     }
 
     /**

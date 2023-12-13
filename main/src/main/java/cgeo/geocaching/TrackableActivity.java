@@ -14,7 +14,6 @@ import cgeo.geocaching.log.LogTrackableActivity;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.TrackableLogsViewCreator;
 import cgeo.geocaching.models.Trackable;
-import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -47,7 +46,6 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.view.ActionMode;
@@ -64,7 +62,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class TrackableActivity extends TabbedViewPagerActivity implements AndroidBeam.ActivitySharingInterface {
+public class TrackableActivity extends TabbedViewPagerActivity {
 
     public enum Page {
         DETAILS(R.string.detail),
@@ -128,7 +126,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         // get parameters
         final Bundle extras = getIntent().getExtras();
 
-        final Uri uri = AndroidBeam.getUri(getIntent());
         if (extras != null) {
             // try to get data from extras
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -142,6 +139,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         }
 
         // try to get data from URI
+        final Uri uri = getIntent().getData();
         if (geocode == null && guid == null && id == null && uri != null) {
             // check if port part needs to be removed
             String address = uri.toString();
@@ -201,9 +199,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             message = res.getString(R.string.trackable);
         }
 
-        // If we have a newer Android device setup Android Beam for easy cache sharing
-        AndroidBeam.enable(this, this);
-
         createViewPager(Page.DETAILS.id, getOrderedPages(), null, true);
 
         refreshTrackable(message);
@@ -243,12 +238,6 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                     showToast(res.getString(R.string.err_tb_find_that));
                     finish();
                 }, () -> act(null)));
-    }
-
-    @Nullable
-    @Override
-    public String getAndroidBeamUri() {
-        return trackable != null ? trackable.getUrl() : null;
     }
 
     @Override

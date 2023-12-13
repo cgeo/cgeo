@@ -2,10 +2,9 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.permission.PermissionAction;
-import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.search.BaseSearchSuggestionCursor;
 import cgeo.geocaching.search.BaseSuggestionsAdapter;
 import cgeo.geocaching.search.SearchUtils;
@@ -26,6 +25,7 @@ import cgeo.geocaching.settings.fragments.PreferenceSystemFragment;
 import cgeo.geocaching.settings.fragments.PreferencesFragment;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
@@ -36,6 +36,7 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -73,7 +74,7 @@ import org.apache.commons.lang3.StringUtils;
  * guidelines and the <a href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for
  * more information on developing a Settings UI.
  */
-public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+public class SettingsActivity extends CustomMenuEntryActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "preferencesActivityTitle";
     private static final String INTENT_OPEN_SCREEN = "OPEN_SCREEN";
@@ -85,14 +86,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     private BackupUtils backupUtils = null;
     private ContentStorageActivityHelper contentStorageHelper = null;
+
     private CharSequence title;
 
     private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
 
-    private final PermissionAction<Void> askShowWallpaperPermissionAction = PermissionAction.register(this, PermissionContext.SHOW_WALLPAPER, null);
-
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         ApplicationSettings.setLocale(this);
         super.onCreate(savedInstanceState);
 
@@ -100,16 +100,22 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
                 .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
-
                     final List<Fragment> fragments = getSupportFragmentManager().getFragments();
                     for (Fragment f : fragments) {
                         if (f instanceof PreferenceFragmentCompat) {
                             initPublicFolders((PreferenceFragmentCompat) f, contentStorageHelper);
                         }
                     }
-
                     if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
                         RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+                    }
+                })
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, file -> {
+                    final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                    for (Fragment f : fragments) {
+                        if (f instanceof PreferenceMapContentBehaviorFragment) {
+                            ((PreferenceMapContentBehaviorFragment) f).updateNotificationAudioInfo();
+                        }
                     }
                 });
 
@@ -124,17 +130,26 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        AndroidBeam.disable(this);
-
         setResult(NO_RESTART_NEEDED);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if (item.getItemId() == android.R.id.home && getSupportFragmentManager().popBackStackImmediate()) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!getSupportFragmentManager().popBackStackImmediate()) {
+            super.onBackPressed();
+        }
     }
 
     public BackupUtils getBackupUtils() {
         return backupUtils;
-    }
-
-    public void askShowWallpaperPermission() {
-        this.askShowWallpaperPermissionAction.launch();
     }
 
     private void handleIntent(final Bundle savedInstanceState) {
@@ -250,16 +265,27 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         Log.i("Requesting settings backup with settings manager");
         BackupManager.dataChanged(getPackageName());
         super.onPause();
     }
 
     public static void openForScreen(final int preferenceScreenKey, final Context fromActivity) {
+        final Intent intent = getOpenForScreenIntent(preferenceScreenKey, fromActivity);
+        fromActivity.startActivity(intent);
+    }
+
+    public static void openForScreen(final int preferenceScreenKey, final Context fromActivity, final boolean hideBottomNavigation) {
+        final Intent intent = getOpenForScreenIntent(preferenceScreenKey, fromActivity);
+        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideBottomNavigation);
+        fromActivity.startActivity(intent);
+    }
+
+    private static Intent getOpenForScreenIntent(final int preferenceScreenKey, final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, SettingsActivity.class);
         intent.putExtra(INTENT_OPEN_SCREEN, preferenceScreenKey);
-        fromActivity.startActivity(intent);
+        return intent;
     }
 
     @Override
@@ -291,6 +317,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     public ContentStorageActivityHelper getCsah() {
         return contentStorageHelper;
+    }
+
+    // to be called by PreferenceMapContentBehaviorFragment
+    public void startProximityNotificationSelector(final boolean first) {
+        contentStorageHelper.selectPersistableUri(first ? PersistableUri.PROXIMITY_NOTIFICATION_FAR : PersistableUri.PROXIMITY_NOTIFICATION_CLOSE);
     }
 
     @Override
@@ -396,11 +427,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         @Override
         protected Cursor query(@NonNull final String searchTerm) {
+            final boolean showExtended = Settings.extendedSettingsAreEnabled();
             final SettingsSearchSuggestionCursor resultCursor = new SettingsSearchSuggestionCursor();
             if (searchTerm.length() > 2) {
                 synchronized (searchdata) {
                     for (BasePreferenceFragment.PrefSearchDescriptor item : searchdata) {
-                        if (StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) {
+                        if ((StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) && (showExtended || item.isBasicSetting)) {
                             resultCursor.addItem(item.prefTitle, item.prefSummary, item.prefKey, item.prefCategoryIconRes);
                         }
                     }

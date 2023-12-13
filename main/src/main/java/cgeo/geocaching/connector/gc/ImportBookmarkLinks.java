@@ -2,43 +2,72 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.connector.gc.util.AggregatedUrlToIdParser;
+import cgeo.geocaching.connector.gc.util.SingleUrlToIdParser;
+import cgeo.geocaching.connector.gc.util.UrlToIdParser;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.regex.Pattern;
+import java.util.Optional;
 
 public class ImportBookmarkLinks extends AppCompatActivity {
+
+    public static final String BOOKMARK_LIST_API_PREFIX =
+            "https://www.geocaching.com/plan/api/gpx/list/";
+    private final UrlToIdParser intentUrlParser;
+
+    ImportBookmarkLinks(@NonNull final UrlToIdParser urlToIdParser) {
+        this.intentUrlParser = urlToIdParser;
+    }
+
+    public ImportBookmarkLinks() {
+        this(defaultBookmarkListUrlToIdParser());
+    }
+
+    static UrlToIdParser defaultBookmarkListUrlToIdParser() {
+        return new AggregatedUrlToIdParser(
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?geocaching\\.com/plan/lists/(?<identifier>[A-Z0-9]+)",
+                        1
+                ),
+                new SingleUrlToIdParser(
+                        "^https?://(?:www\\.)?coord\\.info/(?<identifier>[A-Z0-9]+)",
+                        1
+                )
+        );
+    }
 
     @Override
     protected void onCreate(final @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent intent = getIntent();
-        if (intent == null) {
-            finish();
-            return;
-        }
-        final String url = intent.getDataString();
-        // check url
-        final Pattern p = Pattern.compile("http[s]:\\/\\/(www\\.)?geocaching\\.com\\/plan\\/lists\\/([A-Z0-9]+)(\\?)");
-        final MatcherWrapper matcher = new MatcherWrapper(p, url);
-        while (matcher.find()) {
-            // list id given?
-            if (matcher.groupCount() >= 2) {
-                final Uri uri = Uri.parse("https://www.geocaching.com/plan/api/gpx/list/" + matcher.group(2));
-                Log.i("starting import of bookmark list with id=" + matcher.group(2));
-                final Intent cachesIntent = new Intent(Intent.ACTION_VIEW, uri, this, CacheListActivity.class);
-                cachesIntent.setDataAndType(uri, "application/xml");
-                cachesIntent.putExtra(Intents.EXTRA_NAME, matcher.group(2));
-                startActivity(cachesIntent);
-            }
-        }
+        Optional.ofNullable(getIntent())
+                .map(Intent::getDataString)
+                .map(this.intentUrlParser::tryExtractFromIntentUrl)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(bookmarkListId -> makeIntentFromId(BOOKMARK_LIST_API_PREFIX, bookmarkListId))
+                .ifPresent(this::startActivity);
         finish();
+    }
+
+    Intent makeIntentFromId(final String apiUrlPrefix, final String bookmarkListId) {
+        final Uri uri = Uri.parse(apiUrlPrefix + bookmarkListId);
+        final Intent bookmarkListIntent = new Intent(
+                Intent.ACTION_VIEW,
+                uri,
+                this,
+                CacheListActivity.class
+        );
+        bookmarkListIntent.setDataAndType(uri, "application/xml");
+        bookmarkListIntent.putExtra(Intents.EXTRA_NAME, bookmarkListId);
+        Log.i("starting import of bookmark list with id=" + bookmarkListId);
+        return bookmarkListIntent;
     }
 }

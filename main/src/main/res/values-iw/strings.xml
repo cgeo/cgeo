@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">מטמון</string>
     <string name="detail">פירוט</string>
@@ -51,6 +49,8 @@
     <string name="wp_waypoint">נקודת ייחוס</string>
     <string name="wp_original">נקודות ציון מקוריות</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">מצאתי</string>
     <string name="log_dnf">לא מצאתי</string>
@@ -88,7 +88,6 @@
     <string name="log_save">שמור באופן לא מקוון</string>
     <string name="log_saving">שולח לוג&#8230;</string>
     <string name="log_posting_log">מפרסם רישום ביומן&#8230;</string>
-    <string name="log_posting_twitter">מפרסם ציוץ&#8230;</string>
     <string name="log_posting_generic_trackable">מפרסם %1$s %2$d %3$d</string>
     <string name="log_clear">נקה</string>
     <string name="log_post_not_possible">הורדת נתונים&#8230;\n נסו שוב בעוד מספר שניות או בדקו את החיבור לרשת.</string>
@@ -113,9 +112,6 @@
     <string name="log_yesterday">אתמול</string>
     <string name="log_smilies">סמיילים</string>
     <string name="log_image">תמונה</string>
-    <string name="log_image_attach">צרף תמונה</string>
-    <string name="log_image_stored">תמונה קיימת</string>
-    <string name="log_image_camera">תמונה חדשה</string>
     <string name="log_image_caption">כותרת</string>
     <string name="log_image_description">תאור</string>
     <string name="log_image_scale">שינוי קנה מידה</string>
@@ -138,7 +134,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">אוקיי</string>
     <string name="err_parse">טעינת עמוד ההתחברות כשלה</string>
-    <string name="err_server">אין אפשרות ליצור קשר עם Geocaching.com. אתר האינטרנט עשוי להיות לא זמין או שחיבור האינטרנט שלך אינו פועל.</string>
     <string name="err_server_ec">אין אפשרות ליצור קשר עם Extremcaching.com. אתר האינטרנט עשוי להיות לא זמין או שחיבור האינטרנט שלך אינו פועל.</string>
     <string name="err_server_gk">אין אפשרות ליצור קשר עם GeoKrety.org. אתר האינטרנט עשוי להיות למטה או את החיבור שלך לאינטרנט אינו פועל.</string>
     <string name="err_login">אין מידע התחברות שמור</string>
@@ -157,7 +152,6 @@
     <string name="err_detail_cache_find_any">ג: גיא לא יכול למצוא אף ג\'יוקשים</string>
     <string name="err_detail_no_spoiler">c:geo לא מצאה תמונות ספוילר עבור מטמון זה.</string>
     <string name="err_detail_still_working">עדיין עובד על משימה אחרת.</string>
-    <string name="err_watchlist_still_managing">עדיין מנהל את רשימת המעקב.</string>
     <string name="err_watchlist_failed">שינוי רשימת המעקב שלך נכשלה.</string>
     <string name="err_application_no">c:geo לא הצליח למצוא אף יישום מתאים.</string>
     <string name="err_auth_initialize">c:geo כשל בהתחלת תהליך האימות.</string>
@@ -336,7 +330,6 @@
     <string name="settings_title_basicmembers">אפשרויות עבור משתמשים רגילים</string>
     <string name="settings_title_system">מערכת</string>
     <string name="settings_title_navigation_menu">תפריט ניווט</string>
-    <string name="settings_category_social">רשתות חבריות</string>
     <string name="settings_category_logging_other">אפשרויות לוג אחרות</string>
     <string name="settings_goto_url_button">עוד&#8230;</string>
     <string name="settings_service_activate">הפעל</string>
@@ -367,6 +360,7 @@
     <string name="init_summary_address">הצגת כתובת במקום נקודות ציון על המסך הראשי</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_running">Creating backup of cache database&#8230;</string>
     <string name="init_restore_running">Restoring cache database&#8230;</string>
@@ -383,7 +377,6 @@
     <string name="auth_dialog_waiting">Waiting for %s&#8230;</string>
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -393,10 +386,6 @@
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
     <string name="cache_dialog_refresh_message">Reloading cache details&#8230;</string>
-    <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist&#8230;</string>
-    <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist&#8230;</string>
-    <string name="cache_dialog_favorite_add_message">Adding cache to your favorites&#8230;</string>
-    <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites&#8230;</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
@@ -419,8 +408,6 @@
     <string name="waypoint_save_and_modify_on_website">הגדר כנקודות ציון של מטמון בc:geo ובאתר</string>
     <string name="waypoint_reset_cache_coords">הגדר מחדש נקודות ציון של מטמון</string>
     <string name="waypoint_coordinates_has_been_reset_on_website">נקודות ציון של המטמון עודכנו באתר.</string>
-    <string name="waypoint_coordinates_being_reset_on_website">מעדכן נקודות ציון של המטמון באתר&#8230;</string>
-    <string name="waypoint_reset">אתחל</string>
     <string name="waypoint_localy_reset_cache_coords">אתחל בc:geo</string>
     <string name="waypoint_reset_local_and_remote_cache_coords">אתחל בc:geo ובאתר</string>
     <string name="waypoint_coordinates_couldnt_be_modified_on_website">האתר אינו תומך בשינוי נקודות ציון של מטמון.</string>
@@ -432,7 +419,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
     <string name="map_gm_autorotation_disable">לבטל סיבוב מפה אוטומטי?\n\nניתן להפעיל זאת שוב באמצעות תפריט סיבוב מפה</string>
@@ -467,6 +453,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <string name="map_load_track">לטעון מסלול מ-GPX</string>
     <string name="load_track_error">שגיאה בטעינת מסלול</string>
@@ -483,10 +470,11 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

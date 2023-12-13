@@ -79,8 +79,8 @@ public final class ProfileCache {
 
         meta.readMetaData();
 
-        rc.expctxWay.parseFile(fi.uri, "global");
-        rc.expctxNode.parseFile(fi.uri, "global");
+        rc.expctxWay.parseFile(fi.uri, "global", rc.keyValues);
+        rc.expctxNode.parseFile(fi.uri, "global", rc.keyValues);
 
         rc.readGlobalConfig();
 

@@ -7,14 +7,13 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.2'
 
         // un-mocking of portable Android classes
         classpath 'com.github.bjoernq:unmockplugin:0.7.9'
 
         // monitor our application method limit
-        //noinspection GradleDependency - see https://github.com/cgeo/cgeo/issues/9208
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0'
     }
 }
 
@@ -23,16 +22,11 @@ plugins {
     id 'idea'
 
     // check for updates of gradle plugin dependencies
-    id 'com.github.ben-manes.versions' version '0.46.0'
+    id 'com.github.ben-manes.versions' version '0.50.0'
     id 'se.ascp.gradle.gradle-versions-filter' version "0.1.16"
 
     // use SpotBugs instead of FindBugs, see https://plugins.gradle.org/plugin/com.github.spotbugs
     id 'com.github.spotbugs' version '4.7.8'
-
-    // adds gradle tasks 'tiTree' (print a task dependency graph), 'tiOrder' (display the execution queue),
-    // 'tiJson' (export as a JSON file), see https://gitlab.com/barfuin/gradle-taskinfo
-    // they need cmdline parameter, e.g. gradlew tiTree assembleBasicDebug
-    id 'org.barfuin.gradle.taskinfo' version '2.0.0'
 }
 
 /*
@@ -86,7 +80,7 @@ tasks.register('cgeoHelp') {
 // filter out non release version updates and other updates we cannot use
 allprojects {
     configurations {
-        all {
+        configureEach {
             resolutionStrategy {
                 componentSelection {
                     all { ComponentSelection selection ->
@@ -133,7 +127,7 @@ subprojects {
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)
-    tasks.withType(JavaCompile) {
+    tasks.withType(JavaCompile).configureEach {
         options.compilerArgs << "-Xlint:-processing"
     }
 

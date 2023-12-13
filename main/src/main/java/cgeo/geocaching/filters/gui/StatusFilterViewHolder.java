@@ -110,7 +110,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         final ButtontogglegroupLabeledItemBinding binding = ButtontogglegroupLabeledItemBinding.bind(view);
         binding.itemText.setText(statusType.labelId);
         if (statusType.icon != null) {
-            statusType.icon.apply(binding.itemIcon);
+            statusType.icon.applyTo(binding.itemIcon);
         }
         if (statusType.infoTextId != 0) {
             binding.itemInfo.setVisibility(View.VISIBLE);

@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
@@ -82,6 +81,10 @@ public interface IConnector {
      */
     boolean supportsLogging();
 
+    boolean canEditLog(Geocache cache, LogEntry logEntry);
+
+    boolean canDeleteLog(Geocache cache, LogEntry logEntry);
+
     /**
      * enable/disable attaching image to log
      */
@@ -91,7 +94,7 @@ public interface IConnector {
      * Get an ILoggingManager to guide the logging process.
      */
     @NonNull
-    ILoggingManager getLoggingManager(@NonNull LogCacheActivity activity, @NonNull Geocache cache);
+    ILoggingManager getLoggingManager(@NonNull Geocache cache);
 
     /**
      * enable/disable changing the name of a cache
@@ -255,6 +258,12 @@ public interface IConnector {
      */
     @NonNull
     String getWaypointPrefix(String name);
+
+    /**
+     * Get info whether connector supports D/T ratings
+     */
+    @NonNull
+    boolean supportsDifficultyTerrain();
 
     /**
      * Get the maximum value for Terrain

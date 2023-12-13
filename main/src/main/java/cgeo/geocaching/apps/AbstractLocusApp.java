@@ -37,6 +37,7 @@ import locus.api.android.objects.VersionCode;
 import locus.api.android.utils.LocusUtils;
 import locus.api.android.utils.exceptions.RequiredVersionMissingException;
 import locus.api.objects.extra.Location;
+import locus.api.objects.geoData.GeoDataHelperKt;
 import locus.api.objects.geoData.Point;
 import locus.api.objects.geocaching.GeocachingAttribute;
 import locus.api.objects.geocaching.GeocachingData;
@@ -253,8 +254,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
         loc.setLongitude(coordinates.getLongitude());
 
         final Point p = new Point(waypoint.getName(), loc);
-        p.setParameterDescription(
-                "Name: " + waypoint.getName() +
+        GeoDataHelperKt.setParameterDescription(
+                p, "Name: " + waypoint.getName() +
                         "<br />Note: " + waypoint.getNote() +
                         "<br />UserNote: " + waypoint.getUserNote() +
                         "<br /><br /> <a href=\"" + waypoint.getUrl() + "\">" + waypoint.getGeocode() + "</a>"
@@ -305,19 +306,18 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 return GeocachingData.CACHE_TYPE_GC_HQ_BLOCK_PARTY;
             case LOCATIONLESS:
                 return GeocachingData.CACHE_TYPE_LOCATIONLESS;
-// Benchmark, not published over API from Locus (state: locus-api-android:0.9.21)
+            case ADVLAB:
+                return GeocachingData.CACHE_TYPE_LAB_CACHE;
+// Benchmark, not c:geo cache type - removed from geocaching.com
 //            case BENCHMARK:
 //                return GeocachingData.CACHE_TYPE_BENCHMARK;
-// Maze Exhibit, not published over API from Locus (state: locus-api-android:0.9.21)
+// Maze Exhibit, not supported c:geo cache type
 //            case MAZE_EXHIBIT:
 //                return GeocachingData.CACHE_TYPE_MAZE_EXHIBIT;
-// Waymark, not published over API from Locus (state: locus-api-android:0.9.21)
+// Waymark, not supported c:geo cache type
 //            case WAYMARK:
 //                return GeocachingData.CACHE_TYPE_WAYMARK;
-// Lab cache, not published over API from Locus (state: locus-api-android:0.9.21)
-//            case LAB_CACHE:
-//                return GeocachingData.CACHE_TYPE_LAB_CACHE;
-            // special map types to CACHE_TYPE_UNDEFINED
+            // special types are mapped to CACHE_TYPE_UNDEFINED
             case USER_DEFINED:
             case UNKNOWN:
             case ALL:
@@ -376,6 +376,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case WAYPOINT:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
             case ORIGINAL:
+                return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
+            case GENERATED:
                 return GeocachingWaypoint.CACHE_WAYPOINT_TYPE_REFERENCE;
         }
         // unknown waypoint type

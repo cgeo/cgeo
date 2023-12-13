@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.storage.SqlBuilder;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -12,6 +13,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -24,9 +27,11 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     private Boolean includeSpecialNumber;
 
     private final Func1<String, T> numberParser;
+    private final Func1<Float, T> numberConverter;
 
-    public NumberRangeFilter(final Func1<String, T> numberParser) {
+    public NumberRangeFilter(final Func1<String, T> numberParser, final Func1<Float, T> numberConverter) {
         this.numberParser = numberParser;
+        this.numberConverter = numberConverter;
     }
 
     public boolean isInRange(final T value) {
@@ -141,10 +146,6 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return minRangeValue != null || maxRangeValue != null || (specialNumber != null && includeSpecialNumber != null);
     }
 
-    public void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression) {
-        addRangeToSqlBuilder(sqlBuilder, valueExpression, null);
-    }
-
     public void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression, final Func1<T, T> valueConverter) {
         final boolean hasSpecial = specialNumber != null && includeSpecialNumber != null;
         final boolean hasMinMax = minRangeValue != null || maxRangeValue != null;
@@ -194,5 +195,32 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         }
         return v1 != null && v2 != null && Math.abs(v1.doubleValue() - v2.doubleValue()) < 0.00000001d;
     }
+
+    public void setJsonConfig(final JsonNode node) {
+
+        if (node != null) {
+            minRangeValue = floatToValue(JsonUtils.getFloat(node, "min", null));
+            maxRangeValue = floatToValue(JsonUtils.getFloat(node, "max", null));
+            specialNumber = floatToValue(JsonUtils.getFloat(node, "special", null));
+            includeSpecialNumber = JsonUtils.getBoolean(node, "includeSpecial", false);
+        }
+    }
+
+    private T floatToValue(final Float value) {
+        return value == null ? null : this.numberConverter.call(value);
+    }
+
+
+    public ObjectNode getJsonConfig() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.setFloat(node, "min", minRangeValue);
+        JsonUtils.setFloat(node, "max", maxRangeValue);
+        if (specialNumber != null && includeSpecialNumber != null) {
+            JsonUtils.setFloat(node, "special", specialNumber);
+            JsonUtils.setBoolean(node, "includeSpecial", includeSpecialNumber);
+        }
+        return node;
+    }
+
 
 }

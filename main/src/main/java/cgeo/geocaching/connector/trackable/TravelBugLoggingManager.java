@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
+import cgeo.geocaching.connector.gc.GCWebAPI;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
@@ -14,7 +15,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
-import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +22,8 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
@@ -65,24 +67,15 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     @Override
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
-        try {
-            LastTrackableAction.setAction(trackableLog);
-            final StatusCode status = GCParser.postLogTrackable(
-                    guid,
-                    trackableLog.trackCode,
-                    viewstates,
-                    trackableLog.action,
-                    date.get(Calendar.YEAR),
-                    date.get(Calendar.MONTH) + 1,
-                    date.get(Calendar.DATE),
-                    log);
+        LastTrackableAction.setAction(trackableLog);
 
-            return new LogResult(status, "");
-        } catch (final Exception e) {
-            Log.e("TrackableLoggingManager.postLog", e);
+        final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackable(trackableLog, date.getTime(), log);
+        if (result == null) {
+            return new LogResult(StatusCode.LOG_POST_ERROR, "");
         }
 
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
+        return new LogResult(result.left, result.right);
+
     }
 
     @Override

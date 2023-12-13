@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    tools:layout_height="60sp"
     android:background="@color/colorBackgroundDialog"
-    android:foreground="?android:attr/selectableItemBackground" >
+    android:foreground="?android:attr/selectableItemBackground">
 
-    <!-- cache name and icon -->
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="36dip"
+        android:layout_height="wrap_content"
+        android:minHeight="36dip"
+        android:layout_centerVertical="true"
+        android:scaleType="fitStart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        tools:src="@drawable/ic_info_blue"
+        />
+
+    <!-- cache name -->
     <!-- first TextView gets the size of a cache marker as minimum height -->
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/icon"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="36dp"
         android:layout_gravity="left"
         android:layout_marginRight="3dip"
         android:layout_marginLeft="3dip"
         android:ellipsize="end"
         android:lines="1"
         android:paddingRight="3dip"
-        android:paddingTop="5dip"
-        android:drawablePadding="3dip"
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
@@ -35,15 +47,17 @@
 
     <TextView
         android:id="@+id/info"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/icon"
+        android:layout_below="@id/text"
         android:layout_alignParentBottom="true"
         android:layout_gravity="left"
         android:layout_marginRight="3dip"
-        android:layout_marginLeft="43dip"
-        android:layout_marginTop="30dip"
+        android:layout_marginLeft="3dip"
         android:ellipsize="end"
-        android:paddingBottom="5dip"
+        android:paddingBottom="3dip"
         android:paddingRight="3dip"
         android:scrollHorizontally="true"
         android:textIsSelectable="false"

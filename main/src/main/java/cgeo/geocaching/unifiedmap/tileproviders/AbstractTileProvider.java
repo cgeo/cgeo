@@ -1,6 +1,8 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
+import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+
+import androidx.core.util.Pair;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +18,20 @@ public abstract class AbstractTileProvider {
 
     protected int zoomMin;
     protected int zoomMax;
+    protected Pair<String, Boolean> mapAttribution;
 
-    protected AbstractTileProvider(final int zoomMin, final int zoomMax) {
+    protected AbstractTileProvider(final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         this.zoomMin = zoomMin;
         this.zoomMax = zoomMax;
+        this.mapAttribution = mapAttribution;
+    }
+
+    protected void setMapAttribution(final Pair<String, Boolean> newAttribution) {
+        mapAttribution = newAttribution;
+    }
+
+    public Pair<String, Boolean> getMapAttribution() {
+        return mapAttribution;
     }
 
     public boolean supportsLanguages() {
@@ -62,7 +74,8 @@ public abstract class AbstractTileProvider {
         return numericId;
     }
 
-    public abstract AbstractUnifiedMapView getMap();
+    public abstract AbstractMapFragment createMapFragment();
+
 
     public int getZoomMin() {
         return zoomMin;

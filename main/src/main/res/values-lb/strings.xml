@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- fixes -->
-    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detailer</string>
@@ -55,6 +53,8 @@
     <string name="wp_waypoint">Referenzpunkt</string>
     <string name="wp_original">Original Koordinaten</string>
     <!-- waypoints short names for new waypoints -->
+    <!-- Cache Categories -->
+    <!-- cache Tier -->
     <!-- logs -->
     <string name="log_found">Fonnt</string>
     <string name="log_dnf">Net fonnt</string>
@@ -93,7 +93,6 @@
     <string name="log_saving">Log gëtt geschéckt…</string>
     <string name="log_saving_and_uploading">Log gëtt publizéiert an d\'Biller eropgelueden…</string>
     <string name="log_posting_log">Log gëtt publizéiert…</string>
-    <string name="log_posting_twitter">Tweet gëtt publizéiert…</string>
     <string name="log_posting_vote">Cache Bewäertung gëtt publizéiert…</string>
     <string name="log_posting_image">Biller gi publizéiert…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d gëtt publizéiert</string>
@@ -121,10 +120,6 @@
     <string name="log_smilies">Smilieen</string>
     <string name="log_image">Bild</string>
     <string name="log_images">Biller</string>
-    <string name="log_image_attach">Bild unhänken</string>
-    <string name="log_image_stored">Bestoend</string>
-    <string name="log_image_camera">Nei</string>
-    <string name="log_image_delete">Läschen</string>
     <string name="log_image_caption">Ënnertitel</string>
     <string name="log_image_description">Beschreiwung</string>
     <string name="log_image_scale">Scaléieren</string>
@@ -157,7 +152,6 @@
     <!-- errors, warnings, info toasts -->
     <string name="err_none">Ok</string>
     <string name="err_parse">Veraarbechten vun der Login-Säit feelgeschloen</string>
-    <string name="err_server">Onfäeg Geocaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_ec">Onfäeg Extremcaching.com ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_su">Onfäeg Geocaching.su ze kontaktéieren. D\'Website kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_gk">Onfäeg GeoKrety.org ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
@@ -180,7 +174,6 @@
     <string name="err_detail_no_spoiler">c:geo huet keng Hiweisbiller fonnt fir dëse Cache.</string>
     <string name="err_detail_still_working">Schafft nach ëmmer un enger anerer Aufgab.</string>
     <string name="err_detail_premium_log_found">Dëse Cache ass just zougänglech fir Premium Membere vu Geocaching.com. Dowéinst kënne keng Informatiounen ugewisen ginn.\n\nWa dir de Cache awer scho fonnt hutt, da kënnt dir en hei loggen.</string>
-    <string name="err_watchlist_still_managing">Verwalten nach ëmmer d\'Beobachtungslëscht.</string>
     <string name="err_watchlist_failed">Ee Feeler ass opgetruden beim Änneren vun der Beobachtungslëscht.</string>
     <string name="err_application_no">c:geo ka keng passend App fannen.</string>
     <string name="err_auth_initialize">c:geo konnt d\'Autorisatioun net starten.</string>
@@ -395,7 +388,6 @@
     <string name="settings_title_logging">Loggen</string>
     <string name="settings_summary_logging">Astellungen fir d\'Ënnerschrëft an Log-Optiounen.</string>
     <string name="settings_title_map_data">Kaartendaten</string>
-    <string name="settings_title_map_rotation">Kaart dréinen (Google Maps)</string>
     <string name="settings_title_waypoints">Weepunkte</string>
     <string name="settings_title_map_content">Kaarteninhalt</string>
     <string name="settings_title_map_behavior">Kaartenverhalen</string>
@@ -408,7 +400,6 @@
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
     <string name="settings_category_geocaching_platform">Geocaching Plattform</string>
     <string name="settings_category_geocaching_additionals">Aner Servicer an Addons</string>
-    <string name="settings_category_social">Sozial Netzwierker</string>
     <string name="settings_category_logging_other">Aner Logging Optiounen</string>
     <string name="settings_goto_url_button">méi …</string>
     <string name="settings_service_activate">Aktivéieren</string>
@@ -488,6 +479,7 @@
     <string name="init_livelist">Richtung uweisen</string>
     <!-- names for CacheListInfoItem -->
     <!-- app theme -->
+    <!-- app startscreen -->
     <!-- backup / restore -->
     <string name="init_backup_title">Backup erstellen</string>
     <string name="init_restore_title">Backup restauréieren</string>
@@ -512,7 +504,6 @@
     <!-- auth generic -->
     <!-- auth credentials -->
     <!-- auth token -->
-    <!-- auth Twitter -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
     <!-- cache -->
@@ -526,7 +517,6 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
-    <!-- visit -->
     <!-- map -->
     <!-- search -->
     <!-- trackable -->
@@ -581,6 +571,7 @@
     <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <!-- changed permissions one time message -->
     <!-- individual track -->
     <!-- route/track commons -->
     <!-- distance units -->
@@ -602,10 +593,11 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
+    <!-- message center notifications -->
 </resources>

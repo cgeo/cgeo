@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -16,6 +17,7 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
@@ -28,15 +30,18 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
-        setPreferencesFromResource(R.xml.preferences_map_sources, rootKey);
+        initPreferences(R.xml.preferences_map_sources, rootKey);
         prefMapSources = findPreference(getString(R.string.pref_mapsource));
 
         initMapSourcePreference();
 
-        final boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false);
+        final boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false) || !BranchDetectionHelper.isProductionBuild();
 
         final Preference catUnifiedMap = findPreference(getString(R.string.pref_fakekey_unifiedmap));
         catUnifiedMap.setVisible(showUnifiedMap);
+
+        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
+        useUnified.setChecked(Settings.useUnifiedMap());
 
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
         // hideTileprovidersPref.setVisible(showUnifiedMap);
@@ -71,10 +76,13 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         initPublicFolders(this, activity.getCsah());
 
         // display checkbox pref for unified map, if showUnifiedMap is enabled
-        final Preference p = findPreference(activity.getString(R.string.pref_useUnifiedMap));
+        final Preference p = findPreference(activity.getString(R.string.pref_fakekey_unifiedmap));
         if (p != null) {
-            p.setVisible(Settings.getBoolean(R.string.pref_showUnifiedMap, false));
+            p.setVisible(Settings.getBoolean(R.string.pref_showUnifiedMap, false) || !BranchDetectionHelper.isProductionBuild());
         }
+
+        final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
+        useUnified.setChecked(Settings.useUnifiedMap());
     }
 
     /**

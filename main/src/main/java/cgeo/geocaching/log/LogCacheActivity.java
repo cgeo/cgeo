@@ -7,7 +7,8 @@ import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
-import cgeo.geocaching.connector.ILoggingWithFavorites;
+import cgeo.geocaching.connector.LogContextInfo;
+import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
@@ -18,6 +19,7 @@ import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
@@ -25,6 +27,7 @@ import cgeo.geocaching.ui.AbstractViewHolder;
 import cgeo.geocaching.ui.CacheVotingBar;
 import cgeo.geocaching.ui.DateTimeEditor;
 import cgeo.geocaching.ui.ImageListFragment;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
@@ -34,6 +37,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -50,6 +54,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,9 +72,11 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
-public class LogCacheActivity extends AbstractLoggingActivity {
+public class LogCacheActivity extends AbstractLoggingActivity implements LoaderManager.LoaderCallbacks<LogContextInfo> {
 
+    private static final int LOADER_ID_LOGGING_INFO = 409809;
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
+    private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final int LOG_MAX_LENGTH = 4000;
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
@@ -85,6 +95,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final CacheVotingBar cacheVotingBar = new CacheVotingBar();
     private final TextSpinner<LogType> logType = new TextSpinner<>();
     private final DateTimeEditor date = new DateTimeEditor();
+    private int availableFavoritePoints = -1;
 
     private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
@@ -106,41 +117,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         return logVisitIntent;
     }
 
-    /**
-     * Hook called at the beginning of onCreateLoader().
-     */
-    public void onLoadStarted() {
-        Log.v("LogCacheActivity.onLoadStarted()");
-        showProgress(true);
-    }
-
-    /**
-     * Hook called at the beginning of onLoadFinished().
-     */
-    public void onLoadFinished() {
-        Log.v("LogCacheActivity.onLoadFinished()");
-        if (loggingManager.hasLoaderError()) {
-            showErrorLoadingData();
-            return;
-        }
-
-        if (!loggingManager.hasTrackableLoadError()) {
-            trackables.addAll(initializeTrackableActions(loggingManager.getTrackables(), lastSavedState));
-        } else {
-            showErrorLoadingAdditionalData();
-        }
-
-        if (loggingManager.getPossibleLogTypes().isEmpty()) {
-            showErrorLoadingData();
-            return;
-        } else {
-            logType.setValues(loggingManager.getPossibleLogTypes());
-        }
-
-        refreshGui();
-        showProgress(false);
-    }
-
     private void verifySelectedReportProblemType() {
         final List<ReportProblemType> possibleReportProblemTypes = new ArrayList<>();
         possibleReportProblemTypes.add(ReportProblemType.NO_PROBLEM);
@@ -158,13 +134,13 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         }
     }
 
-    private void showErrorLoadingData() {
-        showToast(res.getString(R.string.err_log_load_data));
+    private void showErrorLoadingData(final String additionalData) {
+        String message = LocalizationUtils.getString(R.string.warn_log_load_additional_data);
+        if (additionalData != null) {
+            message += ": " + additionalData;
+        }
+        showToast(message);
         showProgress(false);
-    }
-
-    private void showErrorLoadingAdditionalData() {
-        showToast(res.getString(R.string.warn_log_load_additional_data));
     }
 
     private List<TrackableLog> initializeTrackableActions(final List<TrackableLog> tLogs, final OfflineLogEntry savedState) {
@@ -205,18 +181,19 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
 
         date.init(binding.date, null, null, getSupportFragmentManager());
-        logType.setTextView(binding.type).setDisplayMapper(LogType::getL10n);
+        logType.setTextView(binding.type)
+                .setDisplayMapper(lt -> TextParam.text(lt.getL10n()).setImage(ImageParam.id(lt.getLogOverlay())));
         reportProblem.setTextView(binding.reportProblem)
-                .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")
-                .setDisplayMapper(ReportProblemType::getL10n);
+                .setTextDisplayMapperPure(rp -> rp.getL10n() + " ▼")
+                .setDisplayMapperPure(ReportProblemType::getL10n);
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
 
         //init trackable "change all" button
         trackableActionsChangeAll.setTextView(binding.changebutton)
                 .setTextDialogTitle(getString(R.string.log_tb_changeall))
-                .setTextDisplayMapper(lt -> getString(R.string.log_tb_changeall))
-                .setDisplayMapper(LogTypeTrackable::getLabel)
+                .setTextDisplayMapperPure(lt -> getString(R.string.log_tb_changeall))
+                .setDisplayMapperPure(LogTypeTrackable::getLabel)
                 .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                 .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
                 .setChangeListener(lt -> {
@@ -244,8 +221,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         setCacheTitleBar(cache);
         //initializeRatingBar();
 
-        loggingManager = cache.getLoggingManager(this);
-        loggingManager.init();
+        loggingManager = cache.getLoggingManager();
+        //loggingManager.init();
+        LoaderManager.getInstance(this).initLoader(LOADER_ID_LOGGING_INFO, null, this);
 
         this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
 
@@ -264,6 +242,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             }
         } else {
             fillViewFromEntry(lastSavedState);
+        }
+        if (savedInstanceState != null) {
+            this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
         }
 
         refreshGui();
@@ -321,7 +302,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(logEntry.reportProblem);
         cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
         binding.favoriteCheck.setChecked(logEntry.favorite);
-        binding.tweet.setChecked(logEntry.tweet);
+        //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
+        if (logEntry.favorite) {
+            binding.favoriteCheck.setVisibility(View.VISIBLE);
+        }
         binding.logPassword.setText(logEntry.password);
 
         imageListFragment.setImages(logEntry.logImages);
@@ -338,7 +322,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(binding.favoriteCheck.isChecked())
-                .setTweet(binding.tweet.isChecked())
                 .setPassword(binding.logPassword.getText().toString());
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
@@ -353,11 +336,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void initializeFavoriteCheck() {
         final IConnector connector = ConnectorFactory.getConnector(cache);
 
-        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager instanceof ILoggingWithFavorites) {
-            final int favoritePoints = ((ILoggingWithFavorites) loggingManager).getFavoritePoints();
-            if (favoritePoints > 0) {
+        if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
+            binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
+            if (availableFavoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
-                binding.favoriteCheck.setText(res.getQuantityString(((ILoggingWithFavorites) loggingManager).getFavoriteCheckboxText(), favoritePoints, favoritePoints));
             }
         } else {
             binding.favoriteCheck.setVisibility(View.GONE);
@@ -376,7 +358,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         reportProblem.set(ReportProblemType.NO_PROBLEM);
         cacheVotingBar.setRating(cache.getMyVote());
         imageListFragment.clearImages();
-        binding.tweet.setChecked(true);
         binding.favoriteCheck.setChecked(false);
         binding.logPassword.setText(StringUtils.EMPTY);
 
@@ -400,6 +381,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
     public void finish(final SaveMode saveMode) {
         saveLog(saveMode);
+        if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
+            Settings.setLastCacheLog(lastSavedState.log);
+        }
         super.finish();
     }
 
@@ -413,6 +397,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
+        outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
     }
 
     public void setType(final LogType type) {
@@ -421,7 +406,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     }
 
     public void refreshGui() {
-        updateTweetBox(logType.get());
         updateLogPasswordBox(logType.get());
         cacheVotingBar.validateVisibility(cache, logType.get());
         initializeFavoriteCheck();
@@ -432,14 +416,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private void showProgress(final boolean loading) {
         readyToPost = !loading;
         binding.progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
-    }
-
-    private void updateTweetBox(final LogType type) {
-        if (type == LogType.FOUND_IT && Settings.isUseTwitter() && Settings.isTwitterLoginValid()) {
-            binding.tweet.setVisibility(View.VISIBLE);
-        } else {
-            binding.tweet.setVisibility(View.GONE);
-        }
     }
 
     private void updateLogPasswordBox(final LogType type) {
@@ -469,7 +445,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
                         cache.logOffline(LogCacheActivity.this, logEntry);
-                        Settings.setLastCacheLog(logEntry.log);
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                     }
@@ -512,8 +487,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             } else {
                 Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
             }
-        } else if (itemId == R.id.menu_image) {
-            imageListFragment.startAddImageDialog();
         } else if (itemId == R.id.save) {
             finish(SaveMode.FORCE);
         } else if (itemId == R.id.clear) {
@@ -538,9 +511,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             return;
         }
         if (logType.get().mustConfirmLog()) {
-            SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm((dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(R.string.confirm_log_title).setMessage(R.string.confirm_log_message, logType.get().getL10n()).confirm(this::sendLogInternal);
         } else if (reportProblem.get() != ReportProblemType.NO_PROBLEM) {
-            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_report_problem_title)).setMessage(TextParam.id(R.string.confirm_report_problem_message, reportProblem.get().getL10n())).confirm((dialog, which) -> sendLogInternal());
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_report_problem_title)).setMessage(TextParam.id(R.string.confirm_report_problem_message, reportProblem.get().getL10n())).confirm(this::sendLogInternal);
         } else {
             sendLogInternal();
         }
@@ -560,6 +533,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         taskInterface.date = date;
         new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
         Settings.setLastCacheLog(currentLogText());
+        if (Settings.removeFromRouteOnLog()) {
+            DataStore.removeFirstMatchingIdFromIndividualRoute(this, geocode);
+        }
     }
 
     protected static class LogCacheTaskInterface {
@@ -574,8 +550,9 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         public DateTimeEditor date;
     }
 
-    private void onPostExecuteInternal(final StatusCode status) {
-        if (status == StatusCode.NO_ERROR) {
+    private void onPostExecuteInternal(final StatusResult statusResult) {
+        GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
+        if (statusResult.getStatusCode() == StatusCode.NO_ERROR) {
             //reset Gui and all values
             resetValues();
             refreshGui();
@@ -587,16 +564,16 @@ public class LogCacheActivity extends AbstractLoggingActivity {
             showToast(res.getString(R.string.info_log_posted));
             // Prevent from saving log after it was sent successfully.
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (status == StatusCode.LOG_SAVED) {
+        } else if (statusResult.getStatusCode() == StatusCode.LOG_SAVED) {
             showToast(res.getString(R.string.info_log_saved));
             finish(LogCacheActivity.SaveMode.SKIP);
-        } else {
-            SimpleDialog.of(this)
+        } else if (!LogCacheActivity.this.isFinishing()) {
+            SimpleDialog.of(LogCacheActivity.this)
                     .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
-                            TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
-                    .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(LogCacheActivity.SaveMode.FORCE));
+                    .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
+                    .confirm(this::sendLogInternal);
 
         }
     }
@@ -604,7 +581,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
-        menu.findItem(R.id.menu_image).setVisible(cache.supportsLogImages());
         menu.findItem(R.id.save).setVisible(true);
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
@@ -628,6 +604,65 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         Settings.setTrackableComparator(comparator);
         updateTrackablesList();
         invalidateOptionsMenuCompatible();
+    }
+
+    @NonNull
+    @Override
+    public Loader<LogContextInfo> onCreateLoader(final int id, @Nullable final Bundle args) {
+        Log.i("LogCacheActivity.onLoadStarted()");
+        showProgress(true);
+        return new LogContextInfoLoader(this, loggingManager, null);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull final Loader<LogContextInfo> loader, final LogContextInfo data) {
+        Log.i("LogCacheActivity.onLoadFinished()");
+        if (data.hasLoadError()) {
+            showErrorLoadingData(data.getUserDisplayableErrorMessage());
+        }
+        if (!data.getAvailableLogTypes().isEmpty()) {
+            logType.setValues(data.getAvailableLogTypes());
+        }
+        if (!data.getAvailableTrackables().isEmpty()) {
+            trackables.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
+        }
+        if (!data.getAvailableReportProblemTypes().isEmpty()) {
+            reportProblem.setValues(data.getAvailableReportProblemTypes());
+        }
+        if (data.getAvailableFavoritePoints() >= 0) {
+            this.availableFavoritePoints = data.getAvailableFavoritePoints();
+        }
+
+        refreshGui();
+        showProgress(false);
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull final Loader<LogContextInfo> loader) {
+        //do nothing
+    }
+
+    private static class LogContextInfoLoader extends AsyncTaskLoader<LogContextInfo> {
+
+        private final ILoggingManager loggingManager;
+        private final String serviceLogId;
+
+        LogContextInfoLoader(@NonNull final Context context, final ILoggingManager loggingManager, final String serviceLogId) {
+            super(context);
+            this.loggingManager = loggingManager;
+            this.serviceLogId = serviceLogId;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            forceLoad();
+        }
+
+        @Nullable
+        @Override
+        public LogContextInfo loadInBackground() {
+            return this.loggingManager.getLogContextInfo(serviceLogId);
+        }
     }
 
     protected static class ViewHolder extends AbstractViewHolder {
@@ -668,8 +703,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
             holder.trackableAction.setTextView(action)
                     .setTextDialogTitle(trackable.name)
-                    .setTextDisplayMapper(lt -> lt.getLabel() + " ▼")
-                    .setDisplayMapper(LogTypeTrackable::getLabel)
+                    .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
+                    .setDisplayMapperPure(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
                     .set(trackable.action)
                     .setChangeListener(lt -> {
@@ -700,8 +735,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         @Override
         protected void doCommand() {
             previousState = getEntryFromView();
-            cache.clearOfflineLog();
-
+            cache.clearOfflineLog(this.getContext());
         }
 
         @Override

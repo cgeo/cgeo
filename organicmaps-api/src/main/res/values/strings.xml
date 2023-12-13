@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string  name="om_should_be_installed">Organic Maps app is required to proceed. We have integrated with Organic Maps to provide you with offline maps of the entire world.\nTo continue please download the app:</string>
+    <string  name="download">Download Organic Maps</string>
+    <string  name="url">https://omaps.app/get?api</string>
+</resources>

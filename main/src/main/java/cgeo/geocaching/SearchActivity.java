@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -50,7 +50,7 @@ import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
 import org.apache.commons.lang3.StringUtils;
 
-public class SearchActivity extends AbstractBottomNavigationActivity implements CoordinatesInputDialog.CoordinateUpdate {
+public class SearchActivity extends AbstractNavigationBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
@@ -115,7 +115,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
                 // non-fuzzy-geo that already has lat/lon => search via lat/lon
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(geo.getLatitude(), geo.getLongitude()), name);
             } else if (name != null) {
-                // fuzzy geo with seach-query and without lat/lon => search via address
+                // fuzzy geo with search-query and without lat/lon => search via address
                 findByAddressFn(name);
             }
             finish();
@@ -129,7 +129,6 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
-
         init();
     }
 
@@ -523,14 +522,6 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public static void startActivityScan(final String scan, final Activity fromActivity) {
-        final Intent searchIntent = new Intent(fromActivity, SearchActivity.class);
-        searchIntent.setAction(Intent.ACTION_SEARCH).
-                putExtra(SearchManager.QUERY, scan).
-                putExtra(Intents.EXTRA_KEYWORD_SEARCH, false);
-        fromActivity.startActivityForResult(searchIntent, Intents.SEARCH_REQUEST_CODE);
     }
 
 }

@@ -6,6 +6,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MessageCenterUtils;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 
@@ -50,6 +51,7 @@ public class CgeoApplication extends Application {
     @Override
     public void onCreate() {
         Log.iForce("---------------- CGeoApplication: startup -------------");
+        Log.e("c:geo version " + BuildConfig.VERSION_NAME);
         try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
             super.onCreate();
 
@@ -76,6 +78,8 @@ public class CgeoApplication extends Application {
 
             // dump hash key to log, if requested
             // Log.e("app hashkey: " + getApplicationHashkey(this));
+
+            MessageCenterUtils.configureMessageCenterPolling();
 
             LooperLogger.startLogging(Looper.getMainLooper());
         }
