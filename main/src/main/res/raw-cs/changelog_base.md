@@ -22,6 +22,7 @@ More changes:
 ### Mapa
 - Novinka: Zvýraznění stávajících stahování ve správci stahování
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
