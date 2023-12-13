@@ -22,6 +22,7 @@ More changes:
 ### Mapa
 - Novo: Destacar transferências existentes no gestor de transferências
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Detalhes da cache
 - Alteração: Torne "Ligar/desligar a fala" num verdadeiro comutador
