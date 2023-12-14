@@ -64,7 +64,7 @@ public interface IProviderGeoItemLayer<C> {
         // inspired by http://stackoverflow.com/questions/12850143/android-basics-running-code-in-the-ui-thread/25250494#25250494
         // modifications of google map must be run on main (UI) thread
         //new Handler(Looper.getMainLooper()).post(runnable);
-        Log.iForce("AsyncMapWrapper: request Thread for: " + runnable.getClass().getName());
+        Log.v("AsyncMapWrapper: request Thread for: " + runnable.getClass().getName());
 
         AndroidRxUtils.runOnUi(runnable);
     }

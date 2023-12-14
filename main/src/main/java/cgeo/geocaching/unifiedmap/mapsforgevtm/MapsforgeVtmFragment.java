@@ -275,7 +275,13 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         if (bounds.getLatitudeSpan() == 0 && bounds.getLongitudeSpan() == 0) {
             mMap.animator().animateTo(new GeoPoint(bounds.getMaxLatitude(), bounds.getMaxLongitude()));
         } else {
-            mMap.animator().animateTo(bounds);
+            if (mMap.getWidth() == 0 || mMap.getHeight() == 0) {
+                //See Bug #14948: w/o map width/height the bounds can't be calculated
+                // -> postphone animation to later on UI thread (where map width/height will be set)
+                mMap.post(() -> mMap.animator().animateTo(bounds));
+            } else {
+                mMap.animator().animateTo(bounds);
+            }
         }
     }
 
