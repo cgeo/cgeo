@@ -461,6 +461,13 @@ public class LogEntry implements Parcelable {
                 log.compareTo(otherLog.log) == 0;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "id:" + id + "/serviceId:" + serviceLogId + "/date:" + new Date(date) + "/type:" + logType +
+            "/author:" + author + "/log:'" + log + "'/images:" + logImages;
+    }
+
     /**
      * Check if current LogType has Images.
      * Check if current {@link LogType} has {@link Image}.
