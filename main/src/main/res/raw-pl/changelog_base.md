@@ -22,7 +22,7 @@ Więcej zmian:
 ### Mapa
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
-- New: Long-tap option to connect a cache with its waypoints by lines
+- Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
