@@ -68,7 +68,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     // Android annotations
-    implementation 'androidx.annotation:annotation:1.7.0'
+    implementation 'androidx.annotation:annotation:1.7.1'
 }
 
 /*
