@@ -410,6 +410,7 @@
     <string name="caches_sort_state">상태</string>
     <string name="caches_sort_storage">기기에 저장된 데이터</string>
     <string name="caches_sort_eventdate">이벤트 날짜</string>
+    <string name="caches_sort_lastfounddate">마지막 찾은 날짜</string>
     <string name="caches_select_mode">선택 모드</string>
     <string name="caches_select_next20">다음 20개 캐시 선택</string>
     <string name="caches_select_next100">다음 100개 캐시 선택</string>
@@ -885,6 +886,7 @@
     <string name="init_summary_dtMarkerOnCacheIcon">오른쪽 상단의 캐시 마커에 난이도(왼쪽) 및 지형(오른쪽) 등급 마커를 표시합니다 (\"저장된\" 마커가 가운데로 이동됨).</string>
     <string name="init_showElevation">높이 값보기</string>
     <string name="init_summary_showElevation">경로 데이터 또는 GNSS에서 가져온 현재 위치의 고도 정보 표시(사용 가능한 경우)</string>
+    <string name="init_elevation_notAvailable">"사용 가능한 고도 데이터가 없습니다."</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_prevent_cache_note_merge">개인 캐시 메모 덮어쓰기</string>
@@ -1096,6 +1098,9 @@
     <string name="init_create_memory_dump">메모리 덤프 생성</string>
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
+    <string name="init_reset_otm">일회성 메시지 재설정</string>
+    <string name="init_reset_otm_confirm">모든 일회성 메시지를 재설정하시겠습니까?</string>
+    <string name="init_reset_otm_done">일회성 메시지가 재설정되었습니다.</string>
     <string name="init_please_wait">잠시 기다려 주십시오…</string>
     <string name="settings_open_website">웹사이트 열기</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
@@ -1123,8 +1128,10 @@
     <string name="init_map_other">기타</string>
     <string name="init_map_osm_multithreaded">다중 스레드 (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">여러 스레드를 사용하여 OpenStreetMap지도를 렌더링합니다.</string>
+    <string name="category_unifiedMap">통합 지도 (베타)</string>
     <string name="experimental">(실험적)</string>
     <string name="init_title_useUnifiedMap">통합 지도 사용</string>
+    <string name="init_summary_useUnifiedMap">내장된 Google 지도/Mapsforge(OSM) 지도 대신 새로운 통합 지도를 사용합니다.</string>
     <string name="localstorage_migrate_title">내부 파일 이동</string>
     <string name="localstorage_migrate_status_major">버전 %1$d</string>
     <!-- proximity notification -->
@@ -1260,6 +1267,7 @@
     <string name="cache_delete_generated_waypoints_confirm">이 캐시에서 생성된 모든 지점을 제거하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_generated_waypoints_success">생성된 지점이 삭제되었습니다</string>
     <string name="cache_offline_store">저장</string>
+    <string name="cache_offline_stored_ago">저장됨 %s</string>
     <string name="cache_offline_not_ready">오프라인 사용 불가능</string>
     <string name="cache_offline_time_mins_few">몇분 전</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1422,6 +1430,7 @@
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
+    <string name="cache_difficulty_terrain">난이도/지형</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>
@@ -1481,6 +1490,9 @@
     <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
     <string name="context_map_remove_from_route_end">끝에서 제거</string>
     <string name="context_map_show_coords">좌표 보기</string>
+    <string name="context_map_star_show">지점으로 이어지는 선 표시</string>
+    <string name="context_map_star_hide">지점으로 이어지는 선 숨기기</string>
+    <string name="edit">편집</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
@@ -1526,6 +1538,7 @@
     <string name="web_downloaded">다운로드됨</string>
     <!-- popup -->
     <string name="popup_more">상세정보 보기</string>
+    <string name="map_fragment_swipe_hint_text">스와이프로 세부 정보 보기 열기</string>
     <!-- waypoint -->
     <string name="waypoint">지점</string>
     <string name="waypoint_coordinates">좌표</string>
@@ -1711,6 +1724,7 @@
     <string name="search_finder">찾은 사용자</string>
     <string name="search_finder_prefill">찾은 사용자</string>
     <string name="search_finder_button">찾은 사용자명으로 검색</string>
+    <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_tb">추적아이템</string>
@@ -2286,9 +2300,12 @@
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="routes_tracks_color">색상 선택</string>
+    <string name="center">중앙</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
     <string name="track">트랙</string>
+    <string name="make_visible">보이게 함</string>
+    <string name="hide">숨기기</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2458,6 +2475,8 @@
     <string name="ok" tools:ignore="ButtonCase">확인</string>
     <string name="optimize">최적화</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">모두 선택</string>
+    <string name="multiselect_selectvisible">보이는 항목 선택</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">영역</string>
     <string name="rtl_fell_meadow">목초지</string>
