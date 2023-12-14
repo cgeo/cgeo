@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.connector.gc.GCLogAPITest;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
@@ -61,6 +62,18 @@ public class WatchdogTest {
     @Test
     public void testOpenCachingUS() {
         downloadOpenCaching("OU0331");
+    }
+
+    @NotForIntegrationTests
+    @Test
+    public void testGeocachingLogCache() {
+        new GCLogAPITest().cacheLoggingLifecycleTest();
+    }
+
+    @NotForIntegrationTests
+    @Test
+    public void testGeocachingLogTrackable() {
+        new GCLogAPITest().trackableLoggingLifecycleTest();
     }
 
     private static void downloadOpenCaching(final String geocode) {
