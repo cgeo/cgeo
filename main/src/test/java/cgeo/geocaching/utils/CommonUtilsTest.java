@@ -9,6 +9,8 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CommonUtilsTest {
 
+    private String testField = "";
+
     @Test
     public void nullComparator() {
         final List<String> someList = new ArrayList<>(Arrays.asList("one", null, "two", "three"));
@@ -61,6 +63,21 @@ public class CommonUtilsTest {
                 Arrays.asList("blue", false, 0, null, -1),
                 Arrays.asList("red", false, 1, null, -1),
                 Arrays.asList("green", false, 2, null, -1));
+    }
+
+    @Test
+    public void containsClassReference() {
+        //A Lambda with back reference should contain the class
+        Runnable r = () -> testField = testField + "*";
+        assertThat(CommonUtils.containsClassReference(r, CommonUtilsTest.class)).isTrue();
+        //A Lambda without back reference should contain the class
+        r = CommonUtilsTest::staticMethod;
+        assertThat(CommonUtils.containsClassReference(r, CommonUtilsTest.class)).isFalse();
+
+    }
+
+    private static void staticMethod() {
+        //do nothing
     }
 
 }

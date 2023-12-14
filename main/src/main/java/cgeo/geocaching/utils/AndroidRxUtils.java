@@ -51,6 +51,8 @@ public class AndroidRxUtils {
      */
     public static final Scheduler refreshScheduler = Schedulers.from(newFixedDiscardingThreadPool(3, "refresh-"));
 
+    public static final Scheduler mainThreadScheduler = AndroidSchedulers.mainThread();
+
     private static final HandlerThread looperCallbacksThread =
             new HandlerThread("looper callbacks", Process.THREAD_PRIORITY_DEFAULT);
 
