@@ -14,13 +14,13 @@ public class StatusResult {
     private final StatusCode postResult;
 
     @Nullable
-    private String postServerMessage;
+    private final String postServerMessage;
 
-    public StatusResult(@NonNull final StatusCode postResult) {
+    protected StatusResult(@NonNull final StatusCode postResult) {
         this(postResult, null);
     }
 
-    public StatusResult(@NonNull final StatusCode postResult, @Nullable final String postServerMessage) {
+    protected StatusResult(@NonNull final StatusCode postResult, @Nullable final String postServerMessage) {
         this.postResult = postResult;
         this.postServerMessage = postServerMessage;
     }
@@ -35,10 +35,6 @@ public class StatusResult {
         return postServerMessage;
     }
 
-    public void setPostServerMessage(@NonNull final String postServerMessage) {
-        this.postServerMessage = postServerMessage;
-    }
-
     @NonNull
     public String getErrorString(final Resources res) {
         String errorString = postResult.getErrorString(res);
@@ -46,5 +42,9 @@ public class StatusResult {
             errorString += "\n\n" + res.getString(R.string.err_website_message) + "\n" + postServerMessage;
         }
         return errorString;
+    }
+
+    public boolean isOk() {
+        return StatusCode.NO_ERROR == postResult;
     }
 }

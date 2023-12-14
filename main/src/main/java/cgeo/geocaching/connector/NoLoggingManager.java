@@ -20,7 +20,7 @@ class NoLoggingManager extends AbstractLoggingManager {
     @NonNull
     @Override
     public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final boolean addToFavorites, final float rating) {
-        return new LogResult(StatusCode.LOG_POST_ERROR);
+        return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 
 }

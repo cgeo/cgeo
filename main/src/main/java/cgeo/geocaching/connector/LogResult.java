@@ -12,16 +12,25 @@ public class LogResult extends StatusResult {
     @Nullable
     private final String serviceLogId;
 
-    public LogResult(@NonNull final StatusCode postLogResult) {
-        this(postLogResult, "");
+    public static LogResult ok(@NonNull final String logId, @Nullable final String serviceLogId) {
+        return new LogResult(StatusCode.NO_ERROR, null, logId, serviceLogId);
     }
 
-    public LogResult(@NonNull final StatusCode postLogResult, @NonNull final String logId) {
-        this(postLogResult, logId, logId);
+    public static LogResult ok(@NonNull final String logId) {
+        return ok(logId, logId);
     }
 
-    public LogResult(@NonNull final StatusCode postLogResult, @NonNull final String logId, @Nullable final String serviceLogId) {
-        super(postLogResult);
+    public static LogResult error(@NonNull final StatusCode statusCode, final String msg, final Throwable t) {
+        return new LogResult(statusCode == StatusCode.NO_ERROR ? StatusCode.LOG_POST_ERROR : statusCode,
+            msg + (t == null ? "" : ": " + t), "", "");
+    }
+
+    public static LogResult error(@NonNull final StatusCode statusCode) {
+        return error(statusCode, null, null);
+    }
+
+    private LogResult(@NonNull final StatusCode postLogResult, final String msg, @NonNull final String logId, @Nullable final String serviceLogId) {
+        super(postLogResult, msg);
         this.logId = logId;
         this.serviceLogId = serviceLogId;
     }

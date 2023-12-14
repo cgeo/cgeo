@@ -17,6 +17,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
@@ -66,6 +67,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -523,15 +525,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         lastSavedState = getEntryFromView();
         final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
         taskInterface.loggingManager = loggingManager;
-        taskInterface.geocache = cache;
+        taskInterface.logEntry = lastSavedState.buildUpon().build();
+        taskInterface.addToFavorite = binding.favoriteCheck.isChecked();
+        taskInterface.rating = cacheVotingBar.getRating();
         taskInterface.trackables = trackables;
-        taskInterface.binding = binding;
-        taskInterface.logType = logType.get();
-        taskInterface.reportProblemType = reportProblem.get();
-        taskInterface.imageListFragment = imageListFragment;
-        taskInterface.cacheVotingBar = cacheVotingBar;
-        taskInterface.date = date;
-        new LogCacheTask(this, res, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute(currentLogText(), currentLogPassword());
+        taskInterface.password = currentLogPassword();
+        taskInterface.imageTitleCreator = (i, p) -> imageListFragment.getImageTitle(i, p);
+        new LogCacheTask(this, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute();
         Settings.setLastCacheLog(currentLogText());
         if (Settings.removeFromRouteOnLog()) {
             DataStore.removeFirstMatchingIdFromIndividualRoute(this, geocode);
@@ -540,15 +540,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     protected static class LogCacheTaskInterface {
         public ILoggingManager loggingManager;
-        public Geocache geocache;
+        public LogEntry logEntry;
         public Set<TrackableLog> trackables;
-        public LogcacheActivityBinding binding;
-        public LogType logType;
-        public ReportProblemType reportProblemType;
-        public ImageListFragment imageListFragment;
-        public CacheVotingBar cacheVotingBar;
-        public DateTimeEditor date;
-    }
+        public float rating;
+        public boolean addToFavorite;
+        public String password;
+        public BiFunction<Image, Integer, String> imageTitleCreator;
+        }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
@@ -563,9 +561,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
             showToast(res.getString(R.string.info_log_posted));
             // Prevent from saving log after it was sent successfully.
-            finish(LogCacheActivity.SaveMode.SKIP);
-        } else if (statusResult.getStatusCode() == StatusCode.LOG_SAVED) {
-            showToast(res.getString(R.string.info_log_saved));
             finish(LogCacheActivity.SaveMode.SKIP);
         } else if (!LogCacheActivity.this.isFinishing()) {
             SimpleDialog.of(LogCacheActivity.this)

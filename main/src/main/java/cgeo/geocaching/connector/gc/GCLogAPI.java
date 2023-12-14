@@ -208,7 +208,7 @@ public class GCLogAPI {
                 return generateLogError("Problem pasting log, response is: " + response);
             }
 
-            return new LogResult(StatusCode.NO_ERROR, response.logReferenceCode);
+            return LogResult.ok(response.logReferenceCode);
         }
     }
 
@@ -240,7 +240,7 @@ public class GCLogAPI {
                 return generateLogError("Problem pasting log, response is: " + response);
             }
 
-            return new LogResult(StatusCode.NO_ERROR, response.logReferenceCode);
+            return LogResult.ok(response.logReferenceCode);
         }
 
     }
@@ -263,7 +263,7 @@ public class GCLogAPI {
                 return generateLogError("DeleteLog: Problem deleting, response is: " + response);
             }
 
-            return new LogResult(StatusCode.NO_ERROR, logId);
+            return LogResult.ok(logId);
         }
 
     }
@@ -296,7 +296,7 @@ public class GCLogAPI {
                 return resp;
             }
 
-            return new ImageResult(StatusCode.NO_ERROR, imgResponse.url, getLogImageId(imgResponse.guid, null));
+            return ImageResult.ok(imgResponse.url, getLogImageId(imgResponse.guid, null));
         }
     }
 
@@ -311,7 +311,7 @@ public class GCLogAPI {
 
         //2) Send edit request for image data
         final ImageResult  resp = putChangeImageData(logId, logImageId, csrfToken, name, description);
-        return resp == null ? new ImageResult(StatusCode.NO_ERROR, "", logImageId) : resp;
+        return resp == null ? ImageResult.ok("", logImageId) : resp;
 
      }
 
@@ -334,7 +334,7 @@ public class GCLogAPI {
                 return generateImageLogError("Problem pasting log, response is: " + response);
             }
 
-            return new ImageResult(StatusCode.NO_ERROR, "", logImageId);
+            return ImageResult.ok("", logImageId);
         }
 
     }
@@ -388,7 +388,7 @@ public class GCLogAPI {
             return generateLogError("Problem pasting trackable log, response is: " + response);
         }
 
-        return new LogResult(StatusCode.NO_ERROR, response.logReferenceCode);
+        return LogResult.ok(response.logReferenceCode);
 
     }
 
@@ -410,7 +410,7 @@ public class GCLogAPI {
                 return generateLogError("DeleteLogTrackable: Problem deleting, response is: " + response);
             }
 
-            return new LogResult(StatusCode.NO_ERROR, logId);
+            return LogResult.ok(logId);
         }
 
     }
@@ -484,17 +484,13 @@ public class GCLogAPI {
     private static LogResult generateLogError(final String errorMsg) {
         final String msg = "LOG ERROR(user=" + Settings.getUserName() + "):" + errorMsg;
         Log.w(msg);
-        final LogResult result = new LogResult(StatusCode.LOG_POST_ERROR, "");
-        result.setPostServerMessage(msg);
-        return result;
+        return LogResult.error(StatusCode.LOG_POST_ERROR, msg, null);
     }
 
     private static ImageResult generateImageLogError(final String errorMsg) {
         final String msg = "LOG IMAGE ERROR(user=" + Settings.getUserName() + "):" + errorMsg;
         Log.w(msg);
-        final ImageResult result = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
-        result.setPostServerMessage(msg);
-        return result;
+        return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, msg, null);
     }
 
     private static String getCsrfTokenFromUrl(final String url) {

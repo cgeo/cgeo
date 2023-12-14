@@ -121,6 +121,11 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public void increaseCachesFound() {
+        //not supported
+    }
+
+    @Override
     public String getLoginStatusString() {
         return CgeoApplication.getInstance().getString(userInfo.getStatus().resId);
     }

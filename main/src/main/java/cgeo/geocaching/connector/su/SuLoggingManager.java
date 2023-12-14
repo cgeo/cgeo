@@ -44,7 +44,7 @@ public class SuLoggingManager extends AbstractLoggingManager {
             result = SuApi.postLog(cache, logEntry.logType, new Date(logEntry.date), logEntry.log, addToFavorites);
         } catch (final SuApi.SuApiException e) {
             Log.e("Logging manager SuApi.postLog exception: ", e);
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "Logging manager SuApi.postLog exception", e);
         }
 
         if (addToFavorites) {

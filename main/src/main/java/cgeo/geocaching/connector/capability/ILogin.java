@@ -53,4 +53,7 @@ public interface ILogin extends IConnector {
      */
     int getCachesFound();
 
+    /** increases the (internally stored) number of caches found for this connector (not synchronized to server) */
+    void increaseCachesFound();
+
 }

@@ -41,14 +41,12 @@ public class GeokretyLoggingManager extends AbstractTrackableLoggingManager {
                     log);
 
             final String logs = response.getRight().isEmpty() ? "" : StringUtils.join(response.getRight(), "\n");
-            final LogResult logResult = new LogResult(response.getLeft(), "");
-            logResult.setPostServerMessage(logs);
-            return logResult;
+            return LogResult.error(response.getLeft(), logs, null);
         } catch (final Exception e) {
             Log.e("GeokretyLoggingManager.postLog", e);
         }
 
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
+        return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 
     @Override
