@@ -247,12 +247,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         });
 
-        findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(1000, 500, v -> {
+        findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> {
             if (mapFragment != null) {
                 mapFragment.zoomInOut(true);
             }
         }));
-        findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(1000, 500, v -> {
+        findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(500, v -> {
             if (mapFragment != null) {
                 mapFragment.zoomInOut(false);
             }

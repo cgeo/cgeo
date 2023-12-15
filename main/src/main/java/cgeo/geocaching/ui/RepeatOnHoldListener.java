@@ -39,12 +39,20 @@ public class RepeatOnHoldListener implements OnTouchListener {
         }
     };
 
+
     /**
-     * @param initialInterval The interval after first click event
-     * @param normalInterval  The interval after second and subsequent click
-     *                        events
-     * @param clickListener   The OnClickListener, that will be called
-     *                        periodically
+     * @param interval      The interval for first and subsequent click events (in ms)
+     * @param clickListener The OnClickListener, that will be called
+     *                      periodically
+     */
+    public RepeatOnHoldListener(final int interval, final OnClickListener clickListener) {
+        this(interval, interval, clickListener);
+    }
+
+    /**
+     * @param initialInterval The interval after first click event (in ms)
+     * @param normalInterval  The interval after second and subsequent click events (in ms)
+     * @param clickListener   The OnClickListener, that will be called periodically
      */
     public RepeatOnHoldListener(final int initialInterval, final int normalInterval, final OnClickListener clickListener) {
         if (clickListener == null) {
