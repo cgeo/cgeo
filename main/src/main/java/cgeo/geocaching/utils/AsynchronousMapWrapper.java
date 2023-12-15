@@ -367,7 +367,7 @@ public class AsynchronousMapWrapper<K, V, C> {
 
         @Override
         public void run() {
-            Log.iForce("AsyncMapWrapper: run Thread");
+            Log.v("AsyncMapWrapper: run Thread");
             lock.lock();
             try {
                 if (!isDestroyed.get() && mapChangeRequested && processQueue()) {
