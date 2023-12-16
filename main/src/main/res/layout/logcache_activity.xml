@@ -57,16 +57,16 @@
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/textinput_edittext"
                     app:counterEnabled="true"
-                    app:counterMaxLength="4000">
+                    app:counterMaxLength="5000">
                     <EditText
                         android:id="@+id/log"
                         style="@style/textinput_embedded"
                         android:hint="@string/log_new_log_text"
                         android:autofillHints="@string/log_new_log_text"
                         android:inputType="textMultiLine|textCapSentences"
-                        android:maxLength="4000"
+                        android:maxLength="5000"
                         android:minLines="5"
-                        tools:text="The log text is limited to 4000 characters."/>
+                        tools:text="The log text is limited to 5000 characters."/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout

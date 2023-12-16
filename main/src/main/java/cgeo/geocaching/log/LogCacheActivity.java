@@ -82,7 +82,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final String SAVED_STATE_OLDLOGENTRY = "cgeo.geocaching.saved_state_oldlogentry";
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
-    private static final int LOG_MAX_LENGTH = 4000;
+    private static final int LOG_MAX_LENGTH = 5000;
 
     private enum LogEditMode {
         CREATE_NEW, // create/edit a new log entry (which may be stored offline)
