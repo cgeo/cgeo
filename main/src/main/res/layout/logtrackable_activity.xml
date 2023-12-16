@@ -96,7 +96,7 @@
                 android:autofillHints="@string/log_new_log_text"
                 android:inputType="textMultiLine|textCapSentences"
                 android:lines="5"
-                android:maxLength="4000" />
+                android:maxLength="5000" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
