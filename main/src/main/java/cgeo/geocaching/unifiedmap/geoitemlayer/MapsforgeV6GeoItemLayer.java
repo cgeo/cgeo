@@ -69,7 +69,7 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     public Pair<Layer, Layer> add(final GeoPrimitive item) {
 
         final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle()));
-        strokePaint.setStrokeWidth(ViewUtils.dpToPixel(GeoStyle.getStrokeWidth(item.getStyle())));
+        strokePaint.setStrokeWidth(ViewUtils.dpToPixelFloat(GeoStyle.getStrokeWidth(item.getStyle())));
         strokePaint.setStyle(Style.STROKE);
         final Paint fillPaint = createPaint(GeoStyle.getFillColor(item.getStyle()));
         fillPaint.setStyle(Style.FILL);
