@@ -742,6 +742,7 @@ tasks.named('check') {
 
 apply plugin: 'pmd'
 
+// align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
 pmd {
     consoleOutput = true
     toolVersion = "6.55.0"
@@ -755,10 +756,10 @@ tasks.register('pmd', Pmd) {
     ruleSetFiles = rootProject.files("pmd-ruleset.xml")
     source = fileTree('src/main/java')
     include '**/*.java'
-    exclude '**/gen/**'
+    exclude '**/gen/**','**/brouter/**'
 
     reports {
-        xml.enabled = true
-        html.enabled = true
+        xml.required.set true
+        html.required.set true
     }
 }
