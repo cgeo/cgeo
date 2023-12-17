@@ -124,6 +124,11 @@ subprojects {
         maven {
             url 'https://jitpack.io'
         }
+        // Used for Mapsforge VTM Snapshots
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+
     }
 
     // disable warning of annotation processor about annotation types with no registered processor (like @NonNull)

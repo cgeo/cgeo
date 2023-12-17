@@ -30,6 +30,8 @@ import java.security.MessageDigest;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.oscim.utils.Parameters;
+
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
@@ -80,6 +82,9 @@ public class CgeoApplication extends Application {
             // Log.e("app hashkey: " + getApplicationHashkey(this));
 
             MessageCenterUtils.configureMessageCenterPolling();
+
+            //VTM map: global settings
+            Parameters.TRANSPARENT_LINES = true; //related to #15029
 
             LooperLogger.startLogging(Looper.getMainLooper());
         }

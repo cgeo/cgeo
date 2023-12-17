@@ -128,6 +128,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
+                .pointReduction(false)
                 .cap(Paint.Cap.BUTT)
                 .fixed(true)
                 .build();
