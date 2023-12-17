@@ -71,6 +71,7 @@ import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CO
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
+import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
@@ -85,6 +86,8 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -213,7 +216,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         viewModel.init(routeTrackUtils);
 
-        changeMapSource(Settings.getTileProvider());
+        final UnifiedMapState mapState = savedInstanceState != null ? savedInstanceState.getParcelable(BUNDLE_MAPSTATE) : null;
+        changeMapSource(Settings.getTileProvider(), mapState);
 
         FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapType.filterContext);
@@ -283,7 +287,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    private void changeMapSource(final AbstractTileProvider newSource) {
+    private void changeMapSource(final AbstractTileProvider newSource, @Nullable final UnifiedMapState mapState) {
         final AbstractTileProvider oldProvider = tileProvider;
         final AbstractMapFragment oldFragment = mapFragment;
 
@@ -295,9 +299,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         mapFragment = tileProvider.createMapFragment();
 
         if (oldFragment != null) {
-            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true));
+            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true, mapState));
         } else {
-            mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true));
+            mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true, mapState));
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -308,7 +312,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 //        }
     }
 
-    private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged) {
+    private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged, @Nullable final UnifiedMapState mapState) {
         TileProviderFactory.resetLanguages();
         mapFragment.setTileSource(newSource);
         Settings.setTileProvider(newSource);
@@ -377,6 +381,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         }
         hideProgressSpinner();
+
+        // override some settings, if given
+        if (mapState != null) {
+            ActivityMixin.postDelayed(() -> {
+                mapFragment.setCenter(mapState.center);
+                mapFragment.setZoom(mapState.zoomLevel);
+            }, 1000);
+        }
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
@@ -647,7 +659,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 mapType.filterContext = new GeocacheFilterContext(LIVE);
                 MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
-                onMapReadyTasks(tileProvider, true);
+                onMapReadyTasks(tileProvider, true, getCurrentMapState());
             }
         } else if (id == R.id.menu_toggle_mypos) {
             viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
@@ -708,7 +720,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
             if (tileProviderLocal != null) {
                 item.setChecked(true);
-                changeMapSource(tileProviderLocal);
+                changeMapSource(tileProviderLocal, getCurrentMapState());
                 return true;
             }
             if (mapFragment.onOptionsItemSelected(item)) {
@@ -970,12 +982,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // ========================================================================
     // Lifecycle methods
 
+    private UnifiedMapState getCurrentMapState() {
+        return new UnifiedMapState(mapFragment.getCenter(), mapFragment.getCurrentZoom());
+    }
+
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
 
-//        final MapState state = prepareMapState();
+        outState.putParcelable(BUNDLE_MAPSTATE, getCurrentMapState());
         outState.putParcelable(BUNDLE_MAPTYPE, mapType);
         if (mapType.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapType.filterContext);
