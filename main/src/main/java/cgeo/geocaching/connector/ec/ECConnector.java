@@ -172,6 +172,11 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public void increaseCachesFound() {
+        ecLogin.increaseActualCachesFound();
+    }
+
+    @Override
     public String getLoginStatusString() {
         return ecLogin.getActualStatus();
     }

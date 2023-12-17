@@ -84,41 +84,44 @@ public class CgeoApplicationTest {
     @Test
     @MediumTest
     public void testSearchTrackable() {
-        final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
-        assertThat(tb).isNotNull();
+        final String trackable = "TB2J1VZ";
+        final String msgPrefix = "Trackable " + trackable + ":";
+        final Trackable tb = GCParser.searchTrackable(trackable, null, null);
+        assertThat(tb).as(msgPrefix + "exists").isNotNull();
         // fix data
-        assertThat(tb.getGuid()).isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
-        assertThat(tb.getGeocode()).isEqualTo("TB2J1VZ");
-        assertThat(tb.getIconUrl()).endsWith("://www.geocaching.com/images/WptTypes/21.gif");
-        assertThat(tb.getName()).isEqualTo("blafoo's Children Music CD");
-        assertThat(tb.getType()).isEqualTo("Travel Bug Dog Tag");
-        assertThat(tb.getReleased()).isEqualTo(new GregorianCalendar(2009, 8 - 1, 24).getTime());
-        assertThat(tb.getLogDate()).isNull();
-        assertThat(tb.getLogType()).isNull();
-        assertThat(tb.getLogGuid()).isNull();
-        assertThat(tb.getOrigin()).isEqualTo("Niedersachsen, Germany");
-        assertThat(tb.getOwner()).isEqualTo("blafoo");
-        assertThat(tb.getOwnerGuid()).isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
-        assertThat(tb.getGoal()).isEqualTo("Kinder erfreuen.<br><br>Make children happy.");
-        assertThat(tb.getDetails()).startsWith("Auf der CD sind");
+        assertThat(tb.getGuid()).as(msgPrefix + "guid").isEqualTo("aefffb86-099f-444f-b132-605436163aa8");
+        assertThat(tb.getGeocode()).as(msgPrefix + "geocode").isEqualTo("TB2J1VZ");
+        assertThat(tb.getIconUrl()).as(msgPrefix + "iconurl").endsWith("://www.geocaching.com/images/WptTypes/21.gif");
+        assertThat(tb.getName()).as(msgPrefix + "name").isEqualTo("blafoo's Children Music CD");
+        assertThat(tb.getType()).as(msgPrefix + "type").isEqualTo("Travel Bug Dog Tag");
+        assertThat(tb.getReleased()).as(msgPrefix + "released").isEqualTo(new GregorianCalendar(2009, 8 - 1, 24).getTime());
+        assertThat(tb.getLogDate()).as(msgPrefix + "logdate").isNull();
+        assertThat(tb.getLogType()).as(msgPrefix + "logtype").isNull();
+        assertThat(tb.getLogGuid()).as(msgPrefix + "logguid").isNull();
+        assertThat(tb.getOrigin()).as(msgPrefix + "origin").isEqualTo("Niedersachsen, Germany");
+        assertThat(tb.getOwner()).as(msgPrefix + "owner").isEqualTo("blafoo");
+        assertThat(tb.getOwnerGuid()).as(msgPrefix + "ownerguid").isEqualTo("0564a940-8311-40ee-8e76-7e91b2cf6284");
+        assertThat(tb.getGoal()).as(msgPrefix + "goal").isEqualTo("Kinder erfreuen.<br><br>Make children happy.");
+        assertThat(tb.getDetails()).as(msgPrefix + "details").startsWith("Auf der CD sind");
         // the host of the image can vary
-        assertThat(tb.getImage()).endsWith("geocaching.com/track/large/38382780-87a7-4393-8393-78841678ee8c.jpg");
+        assertThat(tb.getImage()).as(msgPrefix + "image").endsWith("geocaching.com/track/large/38382780-87a7-4393-8393-78841678ee8c.jpg");
         // Following data can change over time
-        assertThat(tb.getDistance()).isGreaterThanOrEqualTo(10617.8f);
-        assertThat(tb.getLogs().size()).isGreaterThanOrEqualTo(10);
-        assertThat(tb.getSpottedType() == Trackable.SPOTTED_CACHE || tb.getSpottedType() == Trackable.SPOTTED_USER || tb.getSpottedType() == Trackable.SPOTTED_UNKNOWN).isTrue();
+        assertThat(tb.getDistance()).as(msgPrefix + "distance").isGreaterThanOrEqualTo(10617.8f);
+        assertThat(tb.getLogs().size()).as(msgPrefix + "logSize").isGreaterThanOrEqualTo(10);
+        assertThat(tb.getSpottedType() == Trackable.SPOTTED_CACHE || tb.getSpottedType() == Trackable.SPOTTED_USER || tb.getSpottedType() == Trackable.SPOTTED_UNKNOWN).as(msgPrefix + "spottedType").isTrue();
         // no assumption possible: assertThat(tb.getSpottedGuid()).isEqualTo("faa2d47d-19ea-422f-bec8-318fc82c8063");
         // no assumption possible: assertThat(tb.getSpottedName()).isEqualTo("Nice place for a break cache");
 
         // we can't check specifics in the log entries since they change, but we can verify data was parsed
         for (final LogEntry log : tb.getLogs()) {
-            assertThat(log.date).isGreaterThan(0);
-            assertThat(log.author).isNotEmpty();
+            final String logMsgPrefix = msgPrefix + "Log[" + log + "]:";
+            assertThat(log.date).as(logMsgPrefix + "date").isGreaterThan(0);
+            assertThat(log.author).as(logMsgPrefix + "author").isNotEmpty();
             if (log.logType == LogType.PLACED_IT || log.logType == LogType.RETRIEVED_IT) {
-                assertThat(log.cacheName).isNotEmpty();
-                assertThat(log.cacheGuid).isNotEmpty();
+                assertThat(log.cacheName).as(logMsgPrefix + "cacheName").isNotEmpty();
+                assertThat(log.cacheGuid).as(logMsgPrefix + "cacheGuid").isNotEmpty();
             } else {
-                assertThat(log.logType).isNotEqualTo(LogType.UNKNOWN);
+                assertThat(log.logType).as(logMsgPrefix + "logType").isNotEqualTo(LogType.UNKNOWN);
             }
         }
     }
@@ -150,7 +153,7 @@ public class CgeoApplicationTest {
         assertThat(lastLog.date).isEqualTo(new GregorianCalendar(2013, 11 - 1, 5).getTimeInMillis());
         assertThat(lastLog.logType).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
-        assertThat(lastLog.cacheGuid).isEqualTo("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f");
+        assertThat(lastLog.cacheGuid).isIn("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f", "GC0");
         assertThat(lastLog.serviceLogId).isEqualTo("817608e9-850d-428a-9318-442a14b7b631");
         assertThat(lastLog.log).isEqualTo("Das tb Hotel war sehr schön");
     }

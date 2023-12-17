@@ -1123,6 +1123,13 @@ public class DataStore {
             db.execSQL(dbCreateFilters);
 
             createIndices(db, dbVersion);
+
+            //at the very end of onCreate: write downgradeable versions in database
+            try {
+                DBDowngradeableVersions.save(db, DBVERSIONS_DOWNWARD_COMPATIBLE);
+            } catch (final Exception e) {
+                Log.e("Failed to write downgradeable versions to " + DBVERSIONS_DOWNWARD_COMPATIBLE, e);
+            }
         }
 
         private static void createIndices(final SQLiteDatabase db, final int currentVersion) {

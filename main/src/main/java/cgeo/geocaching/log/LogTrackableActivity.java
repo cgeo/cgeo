@@ -463,10 +463,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         if (status == StatusCode.NO_ERROR) {
             showToast(res.getString(R.string.info_log_posted));
             finish();
-        } else if (status == StatusCode.LOG_SAVED) {
-            // is this part of code really reachable? Didn't see StatusCode.LOG_SAVED in postLog()
-            showToast(res.getString(R.string.info_log_saved));
-            finish();
         } else {
             showToast(status.getErrorString(res));
         }

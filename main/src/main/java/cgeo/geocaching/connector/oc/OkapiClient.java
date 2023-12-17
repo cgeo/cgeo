@@ -646,22 +646,20 @@ final class OkapiClient {
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SUBMIT_LOG, params).data;
 
         if (data == null) {
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
+            return LogResult.error(StatusCode.LOG_POST_ERROR);
         }
 
         try {
             if (data.get("success").asBoolean()) {
                 //unfortunately we only have the uuid here (not the internal id)
-                return new LogResult(StatusCode.NO_ERROR, data.get("log_uuid").asText());
+                return LogResult.ok(data.get("log_uuid").asText());
             }
 
-            final LogResult logResult = new LogResult(StatusCode.LOG_POST_ERROR, "");
-            logResult.setPostServerMessage(data.get("message").asText());
-            return logResult;
+            return LogResult.error(StatusCode.LOG_POST_ERROR, data.get("message").asText(), null);
         } catch (final NullPointerException e) {
             Log.e("OkapiClient.postLog", e);
+            return LogResult.error(StatusCode.LOG_POST_ERROR, "OkapiClient.postLog", e);
         }
-        return new LogResult(StatusCode.LOG_POST_ERROR, "");
     }
 
     @NonNull
@@ -670,7 +668,7 @@ final class OkapiClient {
         final Parameters params = new Parameters("log_uuid", logId);
         final File file = image.getFile();
         if (file == null) {
-            return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, "image has no file", null);
         }
         FileInputStream fileStream = null;
         try {
@@ -681,22 +679,21 @@ final class OkapiClient {
             final ObjectNode data = postRequest(connector, OkapiService.SERVICE_ADD_LOG_IMAGE, params).data;
 
             if (data == null) {
-                return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+                return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR);
             }
 
             if (data.get("success").asBoolean()) {
-                return new ImageResult(StatusCode.NO_ERROR, data.get("image_url").asText(), "");
+                return ImageResult.ok(data.get("image_url").asText());
             }
 
-            final ImageResult logResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
-            logResult.setPostServerMessage(data.get("message").asText());
-            return logResult;
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, data.get("message").asText(), null);
         } catch (final Exception e) {
             Log.e("OkapiClient.postLogImage", e);
+            return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, "OkapiClient.postLogImage", e);
         } finally {
             IOUtils.closeQuietly(fileStream);
         }
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+
     }
 
     @NonNull

@@ -92,8 +92,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMap = mMapView.map();
         mMapLayers = new GroupedList<>(mMap.layers(), 4);
         setMapRotation(Settings.getMapRotation());
-        requireView().findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
-        requireView().findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
         mapAttribution = requireView().findViewById(R.id.map_attribution);
         themeHelper = new MapsforgeThemeHelper(requireActivity());
         if (position != null) {
@@ -274,7 +272,17 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     public void zoomToBounds(final BoundingBox bounds) {
-        mMap.animator().animateTo(bounds);
+        if (bounds.getLatitudeSpan() == 0 && bounds.getLongitudeSpan() == 0) {
+            mMap.animator().animateTo(new GeoPoint(bounds.getMaxLatitude(), bounds.getMaxLongitude()));
+        } else {
+            if (mMap.getWidth() == 0 || mMap.getHeight() == 0) {
+                //See Bug #14948: w/o map width/height the bounds can't be calculated
+                // -> postphone animation to later on UI thread (where map width/height will be set)
+                mMap.post(() -> mMap.animator().animateTo(bounds));
+            } else {
+                mMap.animator().animateTo(bounds);
+            }
+        }
     }
 
     @Override
@@ -289,7 +297,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMap.setMapPosition(pos);
     }
 
-    private void zoomInOut(final boolean zoomIn) {
+    public void zoomInOut(final boolean zoomIn) {
         mMap.animator().animateZoom(300, zoomIn ? 2 : 0.5, 0f, 0f);
     }
 

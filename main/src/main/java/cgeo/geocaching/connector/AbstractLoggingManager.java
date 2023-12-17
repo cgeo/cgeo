@@ -40,13 +40,13 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @NonNull
     @Override
     public LogResult editLog(@NonNull final LogEntry newEntry) {
-        return new LogResult(StatusCode.LOG_POST_ERROR);
+        return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 
     @NonNull
     @Override
     public LogResult deleteLog(@NonNull final String logId) {
-        return new LogResult(StatusCode.LOG_POST_ERROR);
+        return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 
     @Override
@@ -62,19 +62,19 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @NonNull
     @Override
     public ImageResult createLogImage(@NonNull final String logId, @NonNull final Image image) {
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+        return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @NonNull
     @Override
     public ImageResult editLogImage(@NonNull final String logId, @NonNull final String serviceImageId, @Nullable final String title, @Nullable final String description) {
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+        return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @NonNull
     @Override
     public ImageResult deleteLogImage(@NonNull final String logId, @NonNull final String serviceImageId) {
-        return new ImageResult(StatusCode.LOGIMAGE_POST_ERROR);
+        return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR);
     }
 
     @Override
@@ -92,6 +92,16 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
         return false;
     }
 
+    @Override
+    public boolean supportsLogWithTrackables() {
+        return false;
+    }
+
+    @Override
+    public boolean supportsLogWithVote() {
+        return false;
+    }
+
 
     @Override
     public Long getMaxImageUploadSize() {
@@ -100,6 +110,11 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
 
     @Override
     public boolean isImageCaptionMandatory() {
+        return false;
+    }
+
+    @Override
+    public boolean canLogReportType(@NonNull final ReportProblemType reportType) {
         return false;
     }
 

@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -103,6 +104,13 @@ public class LogEntry implements Parcelable {
     @NonNull
     public Date getDate() {
         return new Date(date);
+    }
+
+    @NonNull
+    public Calendar getCalendar() {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTime(getDate());
+        return cal;
     }
 
     // Parcelable START
@@ -459,6 +467,13 @@ public class LogEntry implements Parcelable {
                 logType == otherLog.logType &&
                 author.compareTo(otherLog.author) == 0 &&
                 log.compareTo(otherLog.log) == 0;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "id:" + id + "/serviceId:" + serviceLogId + "/date:" + new Date(date) + "/type:" + logType +
+            "/author:" + author + "/log:'" + log + "'/images:" + logImages;
     }
 
     /**

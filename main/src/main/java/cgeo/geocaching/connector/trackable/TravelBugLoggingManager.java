@@ -4,10 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.gc.GCLogAPI;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.connector.gc.GCWebAPI;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.TrackableLog;
@@ -22,8 +21,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
@@ -68,14 +65,7 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
     public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
         LastTrackableAction.setAction(trackableLog);
-
-        final ImmutablePair<StatusCode, String> result = GCWebAPI.postLogTrackable(trackableLog, date.getTime(), log);
-        if (result == null) {
-            return new LogResult(StatusCode.LOG_POST_ERROR, "");
-        }
-
-        return new LogResult(result.left, result.right);
-
+        return GCLogAPI.createLogTrackable(trackableLog, date.getTime(), log);
     }
 
     @Override
