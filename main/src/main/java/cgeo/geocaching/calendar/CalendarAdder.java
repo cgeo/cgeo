@@ -3,6 +3,7 @@ package cgeo.geocaching.calendar;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -26,7 +27,7 @@ public class CalendarAdder {
             return;
         }
         final CalendarEntry entry = new CalendarEntry(cache, hiddenDate);
-        if (cache.isPastEvent()) {
+        if (CalendarUtils.isPastEvent(cache)) {
             // Event is in the past, only add to calendar after confirmation
             SimpleDialog.of(activity).setTitle(R.string.helper_calendar_pastevent_title).setMessage(R.string.helper_calendar_pastevent_question).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(
                     () -> entry.addEntryToCalendar(activity));

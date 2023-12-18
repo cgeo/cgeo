@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.CalendarContract;
 
+import androidx.annotation.NonNull;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,7 +53,11 @@ public final class CalendarUtils {
         return daysSince(date.getTimeInMillis());
     }
 
-    public static boolean isPastEvent(final Geocache cache) {
+    /**
+     * Check if this cache is an event cache for an event in the past.
+     * If the event is on the same day, true is returned even if the event already started.
+     */
+    public static boolean isPastEvent(@NonNull final Geocache cache) {
         if (!cache.isEventCache()) {
             return false;
         }
