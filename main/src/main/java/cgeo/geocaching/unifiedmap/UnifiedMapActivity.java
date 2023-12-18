@@ -86,8 +86,6 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
