@@ -1,5 +1,6 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.ui.dialog.CustomProgressDialog;
 import cgeo.geocaching.utils.Log;
 
@@ -19,6 +20,8 @@ public class Progress {
     private int progress = 0;
     private final boolean hideAbsolute;
     private DialogInterface.OnClickListener cancelListener;
+    private DialogInterface.OnClickListener closeListener;
+    private DialogInterface.OnDismissListener dismissListener;
 
     public Progress(final boolean hideAbsolute) {
         this.hideAbsolute = hideAbsolute;
@@ -43,6 +46,9 @@ public class Progress {
         if (!isShowing()) {
             createProgressDialog(context, title, message, cancelMessage);
             dialog.setIndeterminate(indeterminate);
+            if (!indeterminate) {
+                dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            }
             dialog.show();
         }
     }
@@ -68,6 +74,13 @@ public class Progress {
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE, context.getString(android.R.string.cancel), cancelListener);
         } else {
             dialog.setCancelable(false);
+        }
+        if (closeListener != null) {
+            dialog.setCancelable(true);
+            dialog.setButton(DialogInterface.BUTTON_NEUTRAL, context.getString(R.string.done), closeListener);
+        }
+        if (dismissListener != null) {
+            dialog.setOnDismissListener(dismissListener);
         }
         dialog.setProgress(0);
         dialog.setCanceledOnTouchOutside(false);
@@ -113,5 +126,14 @@ public class Progress {
 
     public void setOnCancelListener(final DialogInterface.OnClickListener cancelListener) {
         this.cancelListener = cancelListener;
+    }
+
+    public void setOnCloseListener(final DialogInterface.OnClickListener closeListener) {
+        this.closeListener = closeListener;
+    }
+
+
+    public void setOnDismissListener(final DialogInterface.OnDismissListener dismissListener) {
+        this.dismissListener = dismissListener;
     }
 }
