@@ -7,9 +7,11 @@ import cgeo.geocaching.utils.functions.Func1;
 import android.os.Build;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 /** contains basic, common utility functions for c:geo */
 public class CommonUtils {
@@ -193,6 +197,24 @@ public class CommonUtils {
                 itemAdder.call(valuePair.second, valuePair.first, group, groupIdx);
                 listIdx++;
             }
+        }
+    }
+
+    public static boolean containsClassReference(final Object obj, @NonNull final Class<?> clazz) {
+        if (obj == null) {
+            return false;
+        }
+        try {
+            final List<Field> fields = FieldUtils.getAllFieldsList(obj.getClass());
+            for (Field field : fields) {
+                if (clazz.isAssignableFrom(field.getType())) {
+                    return true;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            //ignore
+            return false;
         }
     }
 

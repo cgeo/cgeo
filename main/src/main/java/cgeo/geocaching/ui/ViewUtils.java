@@ -78,11 +78,19 @@ public class ViewUtils {
     }
 
     public static int dpToPixel(final float dp) {
-        return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
+        return Math.round(dpToPixelFloat(dp));
+    }
+
+    public static float dpToPixelFloat(final float dp) {
+        return dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density);
     }
 
     public static int spToPixel(final float sp) {
-        return (int) (sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity));
+        return Math.round(spToPixelFloat(sp));
+    }
+
+    public static float spToPixelFloat(final float sp) {
+        return sp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().scaledDensity);
     }
 
     public static int pixelToDp(final float px) {

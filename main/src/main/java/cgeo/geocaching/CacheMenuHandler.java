@@ -15,6 +15,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
+import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.view.Menu;
@@ -79,17 +80,17 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             return true;
         } else if (menuItem == R.id.menu_show_in_browser) {
             if (cache != null) {
-                cache.openInBrowser(activity);
+                ShareUtils.openUrl(activity, cache.getUrl(), true);
             }
             return true;
         } else if (menuItem == R.id.menu_log_in_browser) {
             if (cache != null) {
-                cache.openCreateNewLogInBrowser(activity);
+                ShareUtils.openUrl(activity, cache.getCreateNewLogUrl(), true);
             }
             return true;
         } else if (menuItem == R.id.menu_share || menuItem == R.id.menu_share_from_popup) {
             if (cache != null && activity != null) {
-                cache.shareCache(activity, res);
+                ShareUtils.shareLink(activity, cache.getShareSubject(), cache.getUrl());
             }
             return true;
         } else if (menuItem == R.id.menu_calendar) {
@@ -138,7 +139,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
         }
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
-        menu.findItem(R.id.menu_log_in_browser).setVisible(cache.supportsLoggingOnline());
+        menu.findItem(R.id.menu_log_in_browser).setVisible(cache.getCreateNewLogUrl() != null);
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
         menu.findItem(R.id.menu_set_found).setVisible(cache.supportsSettingFoundState() && !cache.isFound());
         menu.findItem(R.id.menu_set_DNF).setVisible(cache.supportsSettingFoundState() && !cache.isDNF());

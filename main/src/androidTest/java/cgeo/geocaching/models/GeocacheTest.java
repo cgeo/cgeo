@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.utils.CalendarUtils;
 import static cgeo.geocaching.test.CgeoTestUtils.removeCacheCompletely;
 import static cgeo.geocaching.test.CgeoTestUtils.saveFreshCacheToDB;
 
@@ -38,11 +39,11 @@ public class GeocacheTest {
     public void testIsPastEvent() {
         final Date today = new Date();
         final Geocache cacheToday = new MockedEventCache(today);
-        assertThat(cacheToday.isPastEvent()).isFalse();
+        assertThat(CalendarUtils.isPastEvent(cacheToday)).isFalse();
 
         final Date yesterday = new Date(today.getTime() - 86400 * 1000);
         final MockedEventCache cacheYesterday = new MockedEventCache(yesterday);
-        assertThat(cacheYesterday.isPastEvent()).isTrue();
+        assertThat(CalendarUtils.isPastEvent(cacheYesterday)).isTrue();
     }
 
     @Test

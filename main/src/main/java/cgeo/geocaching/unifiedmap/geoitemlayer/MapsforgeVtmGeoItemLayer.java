@@ -123,8 +123,9 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     public Pair<Drawable, MarkerInterface> add(final GeoPrimitive item) {
 
         final int fillColor = GeoStyle.getFillColor(item.getStyle());
+        final float rawStrokeWidth = GeoStyle.getStrokeWidth(item.getStyle());
         final Style style = Style.builder()
-                .strokeWidth(ViewUtils.dpToPixel(GeoStyle.getStrokeWidth(item.getStyle()) / 2f))
+                .strokeWidth(ViewUtils.dpToPixelFloat(rawStrokeWidth) / 2f)
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
