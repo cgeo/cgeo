@@ -17,9 +17,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
@@ -200,22 +202,25 @@ public class CommonUtils {
         }
     }
 
-    public static boolean containsClassReference(final Object obj, @NonNull final Class<?> clazz) {
+    public static <T> Set<Class<? extends T>> getReferencedClasses(@Nullable final Object obj, @NonNull final Class<T> clazz) {
         if (obj == null) {
-            return false;
+            return Collections.emptySet();
         }
+        final Set<Class<? extends T>> result = new HashSet<>();
         try {
             final List<Field> fields = FieldUtils.getAllFieldsList(obj.getClass());
             for (Field field : fields) {
                 if (clazz.isAssignableFrom(field.getType())) {
-                    return true;
+                    @SuppressWarnings("unchecked")
+                    final Class<? extends T> typeClass = (Class<? extends T>) field.getType();
+                    result.add(typeClass);
                 }
             }
-            return false;
-        } catch (Exception e) {
+        } catch (Exception ignore) {
             //ignore
-            return false;
         }
+        return result;
+
     }
 
 

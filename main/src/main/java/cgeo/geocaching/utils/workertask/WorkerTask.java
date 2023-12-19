@@ -2,19 +2,21 @@ package cgeo.geocaching.utils.workertask;
 
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
-import cgeo.geocaching.utils.Log;
 
+import android.annotation.TargetApi;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -23,338 +25,369 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
 
-/**
- * Utility class to execute asynchronous worker tasks in the context of an activity.
- * <br>
- * While worker tasks are usually created and controlled in activities, they may span multiple activites
- * and continue running in the background even when an activity is destroyed. When the same or
- * another activity is accessing the same task while it is still running in background, task is reconnected
- */
-public class WorkerTask<I, P, R> implements WorkerTaskControl<I> {
+/** Utility class to execute asynchronous worker tasks in the context of an activity. */
+@TargetApi(24)
+public class WorkerTask<I, P, R>  {
 
-    private static final TaskModelStore taskModelStore = new TaskModelStore();
+    private final Object taskMutex = new Object();
 
-    private final AtomicBoolean isConnected = new AtomicBoolean(true);
+    private Supplier<WorkerTaskLogic<I, P, R>> taskSupplier;
 
-    private SharedTaskModel<I, P, R> sharedModel;
-
-    // The following vars contain references to the owner/activity
-    // and thus shall NOT be part of shared model! If we do this, this will result in memory leaks
     private LifecycleOwner owner;
 
-    private List<Consumer<WorkerTaskEvent<I, P, R>>> taskListeners;
-    private Disposable taskListenerDisposable;
-    private final Scheduler listenerScheduler;
+    private final AtomicBoolean propertyChangedAllowed = new AtomicBoolean(true);
 
+    private Subject<WorkerTaskEvent<I, P, R>> taskEventData = PublishSubject.create();
+    private final Queue<Consumer<WorkerTaskEvent<I, P, R>>> taskListeners = new ConcurrentLinkedQueue<>();
+    private Disposable observerDisposable;
 
-    /** The tasks model to be shared */
-    private static class SharedTaskModel<I, P, R> { // extends ViewModel {
+    @Nullable private Consumer<R> noOwnerAction;
 
-        //Immutable properties (set on creation, read-only)
-        private final Object taskMutex = new Object();
-        private final String globalTaskId;
-        private final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier;
-        private final Scheduler taskScheduler;
-        private final Consumer<R> noObserverAction;
+    private WorkerTaskLogic<I, P, R> taskLogic;
+    private AtomicBoolean cancelTrigger;
+    private final AtomicBoolean runFlag = new AtomicBoolean(false);
+    private final AtomicBoolean disposedFlag = new AtomicBoolean(false);
 
-        //mutable properties (inner value changed during task lifetime)
-        private final AtomicInteger activeOwnerReferenceCounter = new AtomicInteger(0);
-        private final AtomicBoolean isRunning = new AtomicBoolean(false);
+    private Scheduler taskScheduler = null; //lazy-initialized on first start
+    private Scheduler listenerScheduler = null; //lazy-initialized on first start
 
-        private WorkerTaskLogic<I, P, R> currentTask;
-
-        private AtomicBoolean currentRunCancelFlag;
-
-        private final Subject<WorkerTaskEvent<I, P, R>> taskEventData = PublishSubject.create();
-
-        private SharedTaskModel(final String globalTaskId, final WorkerTaskConfiguration<I, P, R> config) {
-            this.globalTaskId = globalTaskId;
-            this.taskSupplier = config.taskSupplier;
-            this.taskScheduler = config.taskScheduler == null ? AndroidRxUtils.networkScheduler : config.taskScheduler;
-            this.noObserverAction = config.noObserverAction;
-        }
+    public enum WorkerTaskEventType {
+        STARTED, PROGRESS, FINISHED, CANCELLED
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
-    private static class TaskModelStore {
 
-        private final Map<String, SharedTaskModel> store = new HashMap<>();
+    public static class WorkerTaskEvent<I, P, R> {
+        public final WorkerTaskLogic<I, P, R> task;
+        public final WorkerTask.WorkerTaskEventType type;
+        public final I input;
+        public final P progress;
+        public final R result;
 
-        public <I, P, R> SharedTaskModel<I, P, R> getOrCreate(final String id, final WorkerTaskConfiguration<I, P, R> config) {
-            synchronized (store) {
-                SharedTaskModel<I, P, R> model = store.get(id);
-                if (model == null) {
-                    Log.iForce("TaskStore: add TaskModel for id '" + id + "'");
-                    model = new SharedTaskModel<>(id, config);
-                    store.put(id, model);
-                }
-                model.activeOwnerReferenceCounter.addAndGet(1);
-                return model;
-            }
+        WorkerTaskEvent(final WorkerTaskLogic<I, P, R> task, final WorkerTask.WorkerTaskEventType type, final I input, final P progress, final R result) {
+            this.task = task;
+            this.type = type;
+            this.input = input;
+            this.progress = progress;
+            this.result = result;
         }
 
-        public void notifyDisconnect(final String id) {
-            synchronized (store) {
-                final SharedTaskModel model = store.get(id);
-                if (model == null) {
-                    throw new IllegalStateException("Dereferenced model for id '" + id + "', but was not there");
-                }
-                model.activeOwnerReferenceCounter.addAndGet(-1);
-                checkRemoval(id);
-            }
-        }
-
-        public void checkRemoval(final String id) {
-            synchronized (store) {
-                final SharedTaskModel model = store.get(id);
-                if (model == null) {
-                    return;
-                }
-                if (model.activeOwnerReferenceCounter.get() == 0 && !model.isRunning.get()) {
-                    Log.iForce("TaskStore: remove TaskModel for id '" + id + "'");
-                    store.remove(id);
-                }
-            }
-        }
-
-        public boolean exists(final String id) {
-            synchronized (store) {
-                return store.containsKey(id);
-            }
-        }
-
-        public boolean runs(final String id) {
-            synchronized (store) {
-                final SharedTaskModel model = store.get(id);
-                return model != null && model.isRunning.get();
-            }
+        @NonNull
+        @Override
+        public String toString() {
+            return type + (input == null ? "" : ":I=" + input) + (progress == null ? "" : ":P=" + progress) + (result == null ? "" : ":R=" + result);
         }
 
     }
 
-    private WorkerTask(final WorkerTaskConfiguration<I, P, R> config) {
+    public interface TaskFeature<I, P, R> {
 
-        if (config.owner != null && config.owner.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED) {
-            throw new IllegalStateException("Can't create task with id = " + config.globalTaskId + "' in state DESTROYED: " + owner);
-        }
-        checkNoOwnerReferences(config.taskSupplier, config.owner);
-        checkNoOwnerReferences(config.noObserverAction, owner);
+        void accept(WorkerTask<? extends I, ? extends P, ? extends R> task);
 
-        this.sharedModel = taskModelStore.getOrCreate(config.globalTaskId, config);
-        this.owner = config.owner;
+    }
 
-        //take over configuration
-        this.taskListeners = new ArrayList<>(config.taskListeners);
-        this.listenerScheduler = config.listenerScheduler == null ? AndroidRxUtils.mainThreadScheduler : config.listenerScheduler;
+    private WorkerTask(@Nullable final LifecycleOwner owner, @NonNull final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier) {
+        this.owner = owner;
+        this.taskSupplier = Objects.requireNonNull(taskSupplier);
+        this.observerDisposable = taskEventData.subscribe(this::forwardEventToListeners);
 
-        //connect taskcontrol
-        ((DelegateWorkerTaskControl<I>) config.taskControl).setDelegate(this);
+        checkNoLifecycleReferences(this.taskSupplier);
 
-        //if reconnecting, then send reconnect-events
-        final WorkerTaskLogic<I, P, R> currentTask = getTaskIfRunning();
-        if (currentTask != null) {
-            sendTaskEventToListeners(new WorkerTaskEvent<>(currentTask, WorkerTaskEventType.RECONNECTED));
-        }
-
-        //subscribe to global task-events
-        this.taskListenerDisposable = this.sharedModel.taskEventData.subscribe(this::sendTaskEventToListeners);
-
-        //if owner is given, then register it for automatic disconnect
-        if (owner != null) {
-            owner.getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> {
+        //auto-dispose on owner destroy
+        if (this.owner != null) {
+            this.owner.getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> {
                 if (event.getTargetState() == Lifecycle.State.DESTROYED) {
-                    this.disconnect();
+                    this.dispose();
                 }
             });
         }
     }
 
-    private void sendTaskEventToListeners(final WorkerTaskEvent<I, P, R> event) {
-        final List<Consumer<WorkerTaskEvent<I, P, R>>> taskListeners = this.taskListeners;
+    private void forwardEventToListeners(@NonNull final WorkerTaskEvent<I, P, R> event) {
         this.listenerScheduler.createWorker().schedule(() -> {
-            for (Consumer<WorkerTaskEvent<I, P, R>> listeners : taskListeners) {
-                listeners.accept(event);
+            for (Consumer<WorkerTaskEvent<I, P, R>> listener : this.taskListeners) {
+                listener.accept(event);
             }
         });
     }
 
-    private WorkerTaskLogic<I, P, R> getTaskIfRunning() {
-        synchronized (sharedModel.taskMutex) {
-            if (sharedModel.isRunning.get()) {
-                return sharedModel.currentTask;
+    private void postEvent(@NonNull final WorkerTaskEvent<I, P, R> event) {
+        synchronized (taskMutex) {
+            if (!disposedFlag.get()) {
+                taskEventData.onNext(event);
             }
         }
-        return null;
     }
 
-    public static boolean taskExists(final String id) {
-        return taskModelStore.exists(id);
+    /** Creates task configuration with given global id and task logic supplier */
+    public static <I, P, R> WorkerTask<I, P, R> of(@Nullable final LifecycleOwner owner, @NonNull final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier) {
+        return of(owner, taskSupplier, null);
     }
 
-    public static boolean taskIsRunning(final String id) {
-        return taskModelStore.runs(id);
+    public static <I, P, R> WorkerTask<I, P, R> of(@Nullable final LifecycleOwner owner, @NonNull final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier, final Consumer<R> resultListener) {
+        final WorkerTask<I, P, R> task = new WorkerTask<>(owner, taskSupplier);
+        task.addResultListener(resultListener);
+        return task;
     }
 
-
-    public static <I, P, R> WorkerTask<I, P, R> create(final WorkerTaskConfiguration<I, P, R> config) {
-        return new WorkerTask<>(config);
-    }
-
-    /** Returns whether task is currently running */
-    @Override
-    public boolean isRunning() {
-        final SharedTaskModel<I, P, R> model = this.sharedModel;
-        if (!isConnected()) {
-            return false;
-        }
-        return model.isRunning.get();
-    }
-
-    /** Restarts the task (if it is currently running, it will be canceled, then a new instance will be started) */
-    @Override
-    public boolean restart(final I input) {
-        synchronized (this.sharedModel.taskMutex) {
-            if (!isConnected()) {
-                return false;
+    /** Adds a generic listener to task lifecycle events */
+    public WorkerTask<I, P, R> addTaskListener(final WorkerTaskEventType eventType, final Consumer<WorkerTaskEvent<I, P, R>> taskListener) {
+        synchronized (taskMutex) {
+            checkChangeAllowed();
+            checkOnlyOwnerLifecycleReferences(taskListener);
+            if (taskListener != null) {
+                if (eventType == null) {
+                    this.taskListeners.add(taskListener);
+                } else {
+                    this.taskListeners.add(event -> {
+                        if (event.type == eventType) {
+                            taskListener.accept(event);
+                        }
+                    });
+                }
             }
+            return this;
+        }
+    }
+
+    /** Adds a generic listener to task lifecycle events */
+    public WorkerTask<I, P, R> addTaskListener(final Consumer<WorkerTaskEvent<I, P, R>> taskListener) {
+        return addTaskListener(null, taskListener);
+    }
+
+    /** adds a listener for task progress to this task. Consumer will be executed on UI thread */
+    public WorkerTask<I, P, R> addProgressListener(final Consumer<P> consumer) {
+        if (consumer != null) {
+            addTaskListener(WorkerTaskEventType.PROGRESS, event -> consumer.accept(event.progress));
+        }
+        return this;
+    }
+
+    /** adds a listener for task result to this task. Consumer will be executed on UI thread */
+    public WorkerTask<I, P, R> addResultListener(final Consumer<R> consumer) {
+        if (consumer != null) {
+            addTaskListener(WorkerTaskEventType.FINISHED, event -> consumer.accept(event.result));
+        }
+        return this;
+    }
+
+    /** Sets the scheduler on which the background task is run. Default is {@link AndroidRxUtils#networkScheduler} */
+    public WorkerTask<I, P, R> setTaskScheduler(final Scheduler taskScheduler) {
+        synchronized (taskMutex) {
+            checkChangeAllowed();
+            checkNoLifecycleReferences(taskScheduler);
+            this.taskScheduler = taskScheduler;
+            return this;
+        }
+    }
+
+    /** Sets the scheduler on which listeners are executed. Defaults to Android Main/UI Thread */
+    public WorkerTask<I, P, R> setListenerScheduler(final Scheduler listenerScheduler) {
+        synchronized (taskMutex) {
+            checkChangeAllowed();
+            checkNoLifecycleReferences(listenerScheduler);
+            this.listenerScheduler = listenerScheduler;
+            return this;
+        }
+    }
+
+    /** Sets action to be executed if at time of finishing no observer is connected to task. Will be executed on taskScheduler! */
+    public WorkerTask<I, P, R> setNoOwnerAction(final Consumer<R> noOwnerAction) {
+        synchronized (taskMutex) {
+            checkChangeAllowed();
+            checkNoLifecycleReferences(noOwnerAction);
+            this.noOwnerAction = noOwnerAction;
+            return this;
+        }
+    }
+
+    public WorkerTask<I, P, R> addFeature(final WorkerTask.TaskFeature<? super I, ? super P, ? super R> feature) {
+        synchronized (taskMutex) {
+            checkChangeAllowed();
+            feature.accept(this);
+            return this;
+        }
+    }
+
+    /** starts the task. If task is currently running, then run is cancelled */
+    public boolean start(final I input) {
+        synchronized (taskMutex) {
             if (isRunning()) {
                 cancel();
             }
-            return start(input);
+            return startIfNotRunning(input);
         }
     }
 
-    /** starts the task. If task is currently running, then nothing is done */
-    @Override
-    public boolean start(final I input) {
-        synchronized (this.sharedModel.taskMutex) {
-            final SharedTaskModel<I, P, R> model = this.sharedModel;
-            if (!isConnected()) {
+    public  boolean startIfNotRunning(final I input) {
+        synchronized (taskMutex) {
+
+            checkActionAllowed();
+            //check validity of configuration. If this fails, it is a programming error
+            if (owner != null && owner.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED) {
+                throw new IllegalStateException("Can't create task in state DESTROYED: " + owner);
+            }
+
+            //from now on, no more property changes...
+            propertyChangedAllowed.set(false);
+
+            //check if running
+            if (runFlag.get()) {
                 return false;
             }
-            if (isRunning()) {
-                return false;
+            runFlag.set(true);
+
+            final WorkerTaskLogic<I, P, R> lTaskLogic = taskSupplier.get();
+            checkNoLifecycleReferences(lTaskLogic);
+
+            final AtomicBoolean lCancelTrigger = new AtomicBoolean(false);
+            final Consumer<R> lNoOwnerAction = this.noOwnerAction;
+            this.taskLogic = lTaskLogic;
+            this.cancelTrigger = lCancelTrigger;
+
+            if (taskScheduler == null) {
+                taskScheduler = AndroidRxUtils.networkScheduler;
             }
-            final WorkerTaskLogic<I, P, R> task = model.taskSupplier.get();
-            checkNoOwnerReferences(task, owner);
+            if (listenerScheduler == null) {
+                listenerScheduler = AndroidRxUtils.mainThreadScheduler;
+            }
 
-            final AtomicBoolean cancelFlag = new AtomicBoolean(false);
-            model.currentRunCancelFlag = cancelFlag;
-            model.isRunning.set(true);
-            model.currentTask = task;
-
-            postNewEvent(model, new WorkerTaskEvent<>(task, WorkerTaskEventType.STARTED, input, null, null));
-            model.taskScheduler.createWorker().schedule(() -> runAsyncTask(this.sharedModel, task, input, cancelFlag));
+            postEvent(new WorkerTaskEvent<>(taskLogic, WorkerTaskEventType.STARTED, input, null, null));
+            taskScheduler.createWorker().schedule(() ->
+                runAsyncTask(lTaskLogic, lCancelTrigger, taskMutex, runFlag, disposedFlag, this::postEvent, lNoOwnerAction, input));
 
             return true;
         }
     }
 
-    private static <I, P, R> void postNewEvent(final SharedTaskModel<I, P, R> sharedModel, final WorkerTaskEvent<I, P, R> event) {
-        sharedModel.taskEventData.onNext(event);
+    public boolean isRunning() {
+        return runFlag.get();
     }
 
-    private static <I, P, R> void runAsyncTask(final SharedTaskModel<I, P, R> sharedModel, final WorkerTaskLogic<I, P, R> task, final I input, final AtomicBoolean cancelFlag) {
-
-        //trigger the actual worker thread run
-        final R result = task.run(input, m -> {
-            if (!cancelFlag.get()) {
-                postNewEvent(sharedModel, new WorkerTaskEvent<>(task, WorkerTaskEventType.PROGRESS, null, m, null));
-            }
-        }, cancelFlag::get);
-        final boolean wasCancelled = cancelFlag.get();
-        if (!wasCancelled) {
-            postNewEvent(sharedModel, new WorkerTaskEvent<>(task, WorkerTaskEventType.FINISHED, null, null, result));
-            if (!sharedModel.taskEventData.hasObservers() && sharedModel.noObserverAction != null) {
-                sharedModel.noObserverAction.accept(result);
-                AndroidRxUtils.runOnUi(() -> sharedModel.noObserverAction.accept(result));
-            }
-        } else {
-            postNewEvent(sharedModel, new WorkerTaskEvent<>(task, WorkerTaskEventType.CANCELLED, null, null, null));
-        }
-
-        //end the run
-        synchronized (sharedModel.taskMutex) {
-            //check whether run was maybe already ended by 'cancel'
-            if (sharedModel.isRunning.get() && sharedModel.currentTask == task) {
-                // -> no. If we are here, this is a run which ended "normal" (w/o a cancel)
-                sharedModel.isRunning.set(false);
-                sharedModel.currentTask = null;
-                sharedModel.currentRunCancelFlag = null;
-            }
-        }
-        //run ended. Check whether shared taskModel can be removed from storage
-        taskModelStore.checkRemoval(sharedModel.globalTaskId);
+    public boolean isDisposed() {
+        return disposedFlag.get();
     }
 
-    /** Cancels the task's execution (if it is currently running) */
     public boolean cancel() {
-        final SharedTaskModel<I, P, R> model = this.sharedModel;
-        if (!isConnected()) {
-            return false;
-        }
-        synchronized (model.taskMutex) {
-            if (!isRunning()) {
+        synchronized (taskMutex) {
+
+            checkActionAllowed();
+
+            if (!runFlag.get()) {
                 return false;
             }
-            model.currentRunCancelFlag.set(true);
-            model.isRunning.set(false);
-            model.currentTask = null;
-            model.currentRunCancelFlag = null;
+            runFlag.set(false);
+            cancelTrigger.set(true);
+            cancelTrigger = null;
+
+            postEvent(new WorkerTaskEvent<>(this.taskLogic, WorkerTaskEventType.CANCELLED, null, null, null));
+            this.taskLogic = null;
+
             return true;
         }
     }
 
-    /** Returns whether this task instance is still connected to the task */
-    @Override
-    public boolean isConnected() {
-        return isConnected.get();
+    public void dispose() {
+        dispose(true);
     }
 
-    @Override
-    @Nullable
-    public String getGlobalTaskId() {
-        final SharedTaskModel<I, P, R> model = this.sharedModel;
-        if (!isConnected()) {
-            return null;
-        }
-        return model.globalTaskId;
-    }
+    public void dispose(final boolean cancelTask) {
+        synchronized (taskMutex) {
 
-    /** Disconnects this task instance from the actual task logic (which continues running if not cancelled or finished) */
-    @Override
-    public void disconnect() {
-        final SharedTaskModel<I, P, R> model = this.sharedModel;
-        synchronized (model.taskMutex) {
-            if (!isConnected()) {
+            if (cancelTask) {
+                this.cancel();
+            }
+
+            if (disposedFlag.get()) {
                 return;
             }
-            isConnected.set(false);
-            this.taskListenerDisposable.dispose();
-            final WorkerTaskLogic<I, P, R> runningTask = getTaskIfRunning();
 
-            this.sharedModel = null;
-            this.taskListenerDisposable = null;
+            disposedFlag.set(true);
+
+            //release all resources
+            this.observerDisposable.dispose();
+
+            this.observerDisposable = null;
+            this.taskEventData = null;
+            this.taskListeners.clear();
+            this.taskSupplier = null;
             this.owner = null;
-
-            if (runningTask != null) {
-                sendTaskEventToListeners(new WorkerTaskEvent<>(runningTask, WorkerTaskEventType.DISCONNECTED));
-            }
-            this.taskListeners = null;
+            this.noOwnerAction = null;
+            this.taskScheduler = null;
+            this.listenerScheduler = null;
+            this.taskLogic = null;
         }
-
-        taskModelStore.notifyDisconnect(model.globalTaskId);
     }
 
-    private static void checkNoOwnerReferences(@Nullable final Object obj, @Nullable final Object owner) {
-        if (owner == null || obj == null) {
+    /** Runs the actual async task. It runs on the taskListenerScheduler (asynchronous to listeners and this classes' calls) and thus must be self-sustainable */
+    @WorkerThread
+    private static <I, P, R> void runAsyncTask(
+        final WorkerTaskLogic<I, P, R> task,
+        final AtomicBoolean cancelTrigger,
+        final Object taskMutex,
+        final AtomicBoolean runFlag,
+        final AtomicBoolean disposedFlag,
+        final Consumer<WorkerTaskEvent<I, P, R>> eventPoster,
+        final Consumer<R> noObserverAction,
+        final I input) {
+
+        //trigger the actual worker thread run
+        final R result = task.run(input, p -> {
+            synchronized (taskMutex) {
+                if (!cancelTrigger.get()) {
+                    eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.PROGRESS, null, p, null));
+                }
+            }
+        }, cancelTrigger::get);
+
+        //run ended
+        synchronized (taskMutex) {
+            final boolean wasCancelled = cancelTrigger.get();
+            if (!wasCancelled) {
+                //end the run
+                runFlag.set(false);
+                //post results
+                eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.FINISHED, null, null, result));
+                if (disposedFlag.get() && noObserverAction != null) {
+                    noObserverAction.accept(result);
+                }
+            }
+        }
+    }
+
+    private void checkChangeAllowed() {
+        if (!propertyChangedAllowed.get()) {
+            throw new IllegalStateException("Changes to properties now allowed after first task start");
+        }
+    }
+
+    private void checkActionAllowed() {
+        if (disposedFlag.get()) {
+            throw new IllegalStateException("Task was already destroyed");
+        }
+    }
+
+    private void checkNoLifecycleReferences(@Nullable final Object obj) {
+        checkNoUnallowedReferences(obj, null);
+    }
+
+    private void checkOnlyOwnerLifecycleReferences(@Nullable final Object obj) {
+        checkNoUnallowedReferences(obj, this.owner);
+    }
+
+    private static void checkNoUnallowedReferences(@Nullable final Object obj, @Nullable final LifecycleOwner allowedLifecycle) {
+        if (obj == null) {
             return;
         }
-        if (CommonUtils.containsClassReference(obj, owner.getClass())) {
-            throw new IllegalStateException("Class '" + obj.getClass() + "' contains back-reference to Owner '" + owner.getClass().getName() + "'" +
-                "This is not allowed because it would produce memory leaks! " +
-                "Recommendation: produce tasks using static method reference lambda or static class implementation.");
+        final Set<Class<? extends LifecycleOwner>> lifecycleClasses = CommonUtils.getReferencedClasses(obj, LifecycleOwner.class);
+        if (lifecycleClasses.isEmpty()) {
+            return;
         }
+        if (lifecycleClasses.size() == 1 && allowedLifecycle != null && lifecycleClasses.contains(allowedLifecycle.getClass())) {
+            return;
+        }
+
+        throw new IllegalStateException("Class '" + obj.getClass() + "' contains back-reference to LifecycleOwner(s) '" + lifecycleClasses + "'" +
+            "This is not allowed because it would produce memory leaks!");
     }
 
 

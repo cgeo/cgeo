@@ -549,7 +549,11 @@ public class Geocache implements IWaypoint {
             ActivityMixin.showToast(fromActivity, fromActivity.getString(R.string.err_cannot_log_visit));
             return;
         }
-        fromActivity.startActivity(LogCacheActivity.getLogCacheIntent(fromActivity, cacheId, geocode));
+        String geocode = this.geocode;
+        if (StringUtils.isBlank(geocode)) {
+            geocode = DataStore.getGeocodeForGuid(this.cacheId);
+        }
+        LogCacheActivity.startForCreate(fromActivity, geocode);
     }
 
     public boolean hasLogOffline() {
@@ -680,6 +684,14 @@ public class Geocache implements IWaypoint {
 
     public boolean supportsLogging() {
         return getConnector().supportsLogging();
+    }
+
+    public boolean supportsEditLog(final LogEntry logEntry) {
+        return getConnector().canEditLog(this, logEntry);
+    }
+
+    public boolean supportsDeleteLog(final LogEntry logEntry) {
+        return getConnector().canDeleteLog(this, logEntry);
     }
 
     public boolean supportsOwnCoordinates() {

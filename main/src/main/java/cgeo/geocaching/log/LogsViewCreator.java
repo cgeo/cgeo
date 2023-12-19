@@ -5,7 +5,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
@@ -134,13 +138,30 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
             final String title = activity.getString(R.string.cache_log_menu_popup_title, author);
 
-            final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity)
-                    .setTitle(title)
-                    .addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.binding.log))
-                    .addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
-                        ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
-                        activity.showToast(activity.getString(R.string.clipboard_copy_ok));
-                    });
+            final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity).setTitle(title);
+
+            //Decrypt/encrypt
+            ctxMenu.addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.binding.log));
+
+            //Edit/Delete Log Entry
+            if (Settings.enableFeatureLogEdit() && !StringUtils.isBlank(getGeocode())) {
+                final Geocache cache = DataStore.loadCache(getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+                if (LogUtils.canEditLog(cache, log)) {
+                    ctxMenu.addItem(R.string.cache_log_menu_edit, R.drawable.ic_menu_edit,
+                        it -> LogUtils.startEditLog(activity, cache, log));
+                }
+                if (LogUtils.canDeleteLog(cache, log)) {
+                    ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
+                        it -> LogUtils.deleteLog(activity, cache, log));
+                }
+
+            }
+
+            //Copy to clipboard
+            ctxMenu.addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
+                ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
+                    activity.showToast(activity.getString(R.string.clipboard_copy_ok));
+            });
 
             // translation
             if (TranslationUtils.supportsInAppTranslationPopup()) {
@@ -185,5 +206,6 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
     protected abstract void fillCountOrLocation(LogViewHolder holder, LogEntry log);
 
     protected abstract boolean isValid();
+
 
 }

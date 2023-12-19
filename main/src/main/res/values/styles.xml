@@ -21,6 +21,11 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="text_warning" parent="@style/text">
+        <item name="android:textSize">@dimen/textSize_headingPrimary</item>
+        <item name="android:textColor">@color/archived_cache_color</item>
+        <item name="android:background">@color/colorTextHint</item>
+    </style>
 
     <style name="text_note" parent="text">
     </style>

@@ -217,13 +217,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public boolean canEditLog(final Geocache cache, final LogEntry logEntry) {
         //needs to be log author
-        return logEntry.author.equals(getUserName());
+        return !StringUtils.isBlank(logEntry.serviceLogId) && logEntry.author.equals(getUserName());
     }
 
     @Override
     public boolean canDeleteLog(final Geocache cache, final LogEntry logEntry) {
         //needs to be log author or cache owner
-        return logEntry.author.equals(getUserName()) || cache.getOwnerUserId().equals(getUserName());
+        return !StringUtils.isBlank(logEntry.serviceLogId) &&
+            logEntry.author.equals(getUserName()) || cache.getOwnerUserId().equals(getUserName());
     }
 
     @Override
