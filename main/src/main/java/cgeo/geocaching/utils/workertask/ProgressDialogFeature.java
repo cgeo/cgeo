@@ -2,15 +2,16 @@ package cgeo.geocaching.utils.workertask;
 
 import cgeo.geocaching.activity.Progress;
 
-import android.app.Activity;
+import android.annotation.TargetApi;
+import android.content.Context;
 
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 /** Feature to surround execution of an activity worker task visually with a progress dialog */
-public class ProgressDialogFeature<P> implements Consumer<WorkerTaskConfiguration<?, ?, ?>> {
+@TargetApi(24)
+public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, P, Object> { //WorkerTask.TaskFeature<Object, P, Object> {
 
-    private final Activity activity;
+    private final Context activity;
 
     private String title = null;
     private String initialMessage = null;
@@ -23,11 +24,11 @@ public class ProgressDialogFeature<P> implements Consumer<WorkerTaskConfiguratio
     private int maxValue = 100;
     private Function<P, Integer> progressMapper = null;
 
-    private ProgressDialogFeature(final Activity activity) {
+    private ProgressDialogFeature(final Context activity) {
         this.activity = activity;
     }
 
-    public static <P> ProgressDialogFeature<P> of(final Activity activity, final Class<P> ignore) {
+    public static <P> ProgressDialogFeature<P> of(final Context activity, final Class<P> ignore) {
         return new ProgressDialogFeature<>(activity);
     }
 
@@ -70,53 +71,39 @@ public class ProgressDialogFeature<P> implements Consumer<WorkerTaskConfiguratio
         return this;
     }
 
+    //@Override
+    //public void prepareRun(final WorkerTask.TaskRun<?, ? extends P, ?> run) {
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void accept(final WorkerTaskConfiguration<?, ?, ?> taskConfiguration) {
-        acceptInternal((WorkerTaskConfiguration<?, P, ?>) taskConfiguration);
-    }
+    public void accept(final WorkerTask<?, ? extends P, ?> task) {
 
-
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private void acceptInternal(final WorkerTaskConfiguration<?, P, ?> taskConfig) {
-        if (activity == null) {
-            return;
-        }
         final Progress progress = new Progress();
 
-        //remember the task we associated the dialog with
-        @SuppressWarnings("rawtypes")
-        final WorkerTaskLogic[] taskStore = new WorkerTaskLogic[1];
-
-        taskConfig.addTaskListener(event -> {
-            final WorkerTaskLogic<?, P, ?> workerTask = event.task;
+        task.addTaskListener(event -> {
 
             switch (event.type) {
                 case STARTED:
-                case RECONNECTED:
                     if (allowCancel) {
                         progress.setOnCancelListener((dialog, which) -> {
                             if (allowCloseWithoutCancel) {
-                                taskConfig.getTaskControl().cancel();
+                                task.cancel();
                             }
                         });
                     }
                     if (allowCloseWithoutCancel) {
                         progress.setOnCloseListener((dialog, which) -> {
-                           dialog.dismiss();
+                            dialog.dismiss();
                         });
                     }
                     progress.setOnDismissListener(d -> {
                         if (!allowCloseWithoutCancel) {
-                            taskConfig.getTaskControl().cancel();
+                            task.cancel();
                         }
                     });
 
                     if (!indeterminate) {
                         progress.setMaxProgressAndReset(Math.max(0, maxValue));
                     }
-                    taskStore[0] = workerTask;
                     progress.show(activity, title == null ? "" : title, initialMessage == null ? "" : initialMessage, indeterminate, null);
                     break;
                 case PROGRESS:
@@ -130,16 +117,13 @@ public class ProgressDialogFeature<P> implements Consumer<WorkerTaskConfiguratio
                     break;
                 case FINISHED:
                 case CANCELLED:
-                case DISCONNECTED:
                 default:
-                    if (progress.isShowing() && taskStore[0] == workerTask) {
+                    if (progress.isShowing()) {
                         progress.dismiss();
-                        taskStore[0] = null;
                     }
                     break;
             }
         });
-
     }
 
 }

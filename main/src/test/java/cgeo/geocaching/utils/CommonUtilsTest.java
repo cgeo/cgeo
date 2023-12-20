@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -66,18 +67,39 @@ public class CommonUtilsTest {
     }
 
     @Test
-    public void containsClassReference() {
+    @SuppressWarnings("unchecked")
+    public void getReferencedClasses() {
         //A Lambda with back reference should contain the class
         Runnable r = () -> testField = testField + "*";
-        assertThat(CommonUtils.containsClassReference(r, CommonUtilsTest.class)).isTrue();
-        //A Lambda without back reference should contain the class
+        final Set<Class<? extends CommonUtilsTest>> set = CommonUtils.getReferencedClasses(r, CommonUtilsTest.class);
+        assertThat(set).hasSize(1);
+        assertThat(CommonUtils.first(set)).isEqualTo(CommonUtilsTest.class);
+
+        //A Lambda without back reference should NOT contain the class
         r = CommonUtilsTest::staticMethod;
-        assertThat(CommonUtils.containsClassReference(r, CommonUtilsTest.class)).isFalse();
+        assertThat(CommonUtils.getReferencedClasses(r, CommonUtilsTest.class)).isEmpty();
+
+        //Searching for a super class
+        final Set<Class<? extends Number>> set2 = CommonUtils.getReferencedClasses(new FindReferencesTestClass(), Number.class);
+        assertThat(set2).containsExactlyInAnyOrder(Integer.class, Float.class, Number.class); // and does NOT contain Object.class although it is a field
 
     }
 
     private static void staticMethod() {
         //do nothing
+    }
+
+    @SuppressWarnings("unused") //fields are necessary for unit test, which is based on reflection
+    private static class FindReferencesTestClass {
+
+        private Integer int1;
+        private Float float1;
+
+        private Float float2;
+
+        private Number num;
+
+        private Object obj1;
     }
 
 }

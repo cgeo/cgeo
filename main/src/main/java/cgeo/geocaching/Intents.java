@@ -20,6 +20,8 @@ public class Intents {
     public static final String EXTRA_COORDS = PREFIX + "coords";
     public static final String EXTRA_GEOCODE = PREFIX + "geocode";
     public static final String EXTRA_GEOCACHE = PREFIX + "geocache";
+
+    public static final String EXTRA_LOGENTRY = PREFIX + "logentry";
     public static final String EXTRA_GUID = PREFIX + "guid";
     public static final String EXTRA_BRAND = PREFIX + "brand";
     public static final String EXTRA_IMAGE = PREFIX + "image";

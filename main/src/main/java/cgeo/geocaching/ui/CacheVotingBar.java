@@ -62,8 +62,8 @@ public class CacheVotingBar {
         }
     }
 
-    public void validateVisibility(final Geocache cache, final LogType logType) {
-        final int visible = (this.votingConnector != null && this.votingConnector.canVote(cache, logType)) ? View.VISIBLE : View.GONE;
+    public void validateVisibility(final Geocache cache, final LogType logType, final boolean ratingAllowed) {
+        final int visible = ratingAllowed && (this.votingConnector != null && this.votingConnector.canVote(cache, logType)) ? View.VISIBLE : View.GONE;
         ratingBar.setVisibility(visible);
         label.setVisibility(visible);
     }

@@ -838,7 +838,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                     if (error == StatusCode.PREMIUM_ONLY) {
                         SimpleDialog.of(activity).setTitle(R.string.cache_status_premium).setMessage(R.string.err_detail_premium_log_found).setPositiveButton(TextParam.id(R.string.cache_menu_visit)).confirm(() -> {
-                            activity.startActivity(LogCacheActivity.getLogCacheIntent(activity, null, activity.geocode));
+                            LogCacheActivity.startForCreate(activity, activity.geocode);
                             finishActivity();
                         }, this::finishActivity);
 

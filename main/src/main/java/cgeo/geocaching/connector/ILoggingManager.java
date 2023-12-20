@@ -42,7 +42,7 @@ public interface ILoggingManager {
     /** Deletes an existing log for a cache online */
     @NonNull
     @WorkerThread
-    LogResult deleteLog(@NonNull String logId);
+    LogResult deleteLog(@NonNull LogEntry newEntry);
 
     /** Returns whether this log entry can be edited */
     boolean canEditLog(@NonNull LogEntry entry);

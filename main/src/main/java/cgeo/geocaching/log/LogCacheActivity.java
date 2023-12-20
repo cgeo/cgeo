@@ -77,9 +77,16 @@ import org.apache.commons.lang3.StringUtils;
 public class LogCacheActivity extends AbstractLoggingActivity implements LoaderManager.LoaderCallbacks<LogContextInfo> {
 
     private static final int LOADER_ID_LOGGING_INFO = 409809;
+
+    private static final String SAVED_STATE_LOGEDITMODE = "cgeo.geocaching.saved_state_logeditmode";
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final int LOG_MAX_LENGTH = 4000;
+
+    private enum LogEditMode {
+        CREATE_NEW, // create/edit a new log entry (which may be stored offline)
+        EDIT_EXISTING //edit an existing online log entry (as of now not storable offline)
+    }
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
 
@@ -99,6 +106,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private final DateTimeEditor date = new DateTimeEditor();
     private int availableFavoritePoints = -1;
 
+    private LogEditMode logEditMode = LogEditMode.CREATE_NEW;
+
     private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
@@ -112,11 +121,21 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
     };
 
-    public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
+    private static void startActivityInternal(final Context context, final String geocode, final LogEntry entryToEdit) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
-        logVisitIntent.putExtra(Intents.EXTRA_ID, cacheId);
         logVisitIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
-        return logVisitIntent;
+        if (entryToEdit != null) {
+            logVisitIntent.putExtra(Intents.EXTRA_LOGENTRY, entryToEdit);
+        }
+        context.startActivity(logVisitIntent);
+    }
+
+    public static void startForCreate(@NonNull final Context fromActivity, final String geocode) {
+        startActivityInternal(fromActivity, geocode, null);
+    }
+
+    public static void startForEdit(@NonNull final Context fromActivity, final String geocode, final LogEntry logEntry) {
+        startActivityInternal(fromActivity, geocode, logEntry);
     }
 
     private void verifySelectedReportProblemType() {
@@ -129,7 +148,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
         reportProblem.setValues(possibleReportProblemTypes);
 
-        if (possibleReportProblemTypes.size() == 1) {
+        if (logEditMode != LogEditMode.CREATE_NEW && possibleReportProblemTypes.size() == 1) {
             binding.reportProblemBox.setVisibility(View.GONE);
         } else {
             binding.reportProblemBox.setVisibility(View.VISIBLE);
@@ -163,7 +182,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         binding.inventory.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
         ViewUtils.setListViewHeightBasedOnItems(binding.inventory);
 
-        binding.inventoryBox.setVisibility(trackables.isEmpty() ? View.GONE : View.VISIBLE);
+        binding.inventoryBox.setVisibility(this.logEditMode == LogEditMode.CREATE_NEW && trackables.isEmpty() ? View.GONE : View.VISIBLE);
         binding.inventoryChangeall.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
         trackableActionsChangeAll.setTextDialogTitle(getString(R.string.log_tb_changeall) + " (" + trackables.size() + ")");
@@ -205,13 +224,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
+        logEditMode = LogEditMode.CREATE_NEW;
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            if (StringUtils.isBlank(geocode)) {
-                final String cacheid = extras.getString(Intents.EXTRA_ID);
-                if (StringUtils.isNotBlank(cacheid)) {
-                    geocode = DataStore.getGeocodeForGuid(cacheid);
-                }
+            final LogEntry logEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
+            if (logEntry != null) {
+               logEditMode = LogEditMode.EDIT_EXISTING;
+                binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
             }
         }
 
@@ -221,10 +240,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         cacheVotingBar.initialize(cache, binding.getRoot(), null);
 
         setCacheTitleBar(cache);
-        //initializeRatingBar();
 
         loggingManager = cache.getLoggingManager();
-        //loggingManager.init();
         LoaderManager.getInstance(this).initLoader(LOADER_ID_LOGGING_INFO, null, this);
 
         this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
@@ -236,7 +253,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         // Restore previous state
         lastSavedState = restorePreviousLogEntry(savedInstanceState);
         if (lastSavedState == null) {
-            //this means there is no previous entry
+            //this means this is the initial creation of the activity
             lastSavedState = getEntryFromView();
             //set initial signature. Setting this AFTER setting lastSavedState and GUI leads to the signature being a change-to-save as requested in #8973
             if (StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature() && StringUtils.isBlank(currentLogText())) {
@@ -247,6 +264,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
         if (savedInstanceState != null) {
             this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
+            this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
         }
 
         refreshGui();
@@ -264,6 +282,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         });
 
         requestKeyboardForLogging();
+
     }
 
     @Override
@@ -297,22 +316,29 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         return entry;
     }
 
-    private void fillViewFromEntry(final OfflineLogEntry logEntry) {
+    private void fillViewFromEntry(final LogEntry logEntry) {
         logType.set(logEntry.logType);
         date.setDate(new Date(logEntry.date));
         setLogText(logEntry.log);
         reportProblem.set(logEntry.reportProblem);
-        cacheVotingBar.setRating(logEntry.rating == null ? cache.getMyVote() : logEntry.rating);
-        binding.favoriteCheck.setChecked(logEntry.favorite);
-        //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
-        if (logEntry.favorite) {
-            binding.favoriteCheck.setVisibility(View.VISIBLE);
-        }
-        binding.logPassword.setText(logEntry.password);
-
         imageListFragment.setImages(logEntry.logImages);
 
-        CollectionStream.of(trackables).forEach(t -> initializeTrackableAction(t, logEntry));
+        if (logEntry instanceof OfflineLogEntry) {
+            final OfflineLogEntry offlineLogEntry = (OfflineLogEntry) logEntry;
+            cacheVotingBar.setRating(offlineLogEntry.rating == null ? cache.getMyVote() : offlineLogEntry.rating);
+            binding.favoriteCheck.setChecked(offlineLogEntry.favorite);
+            //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
+            if (offlineLogEntry.favorite) {
+                binding.favoriteCheck.setVisibility(View.VISIBLE);
+            }
+            binding.logPassword.setText(offlineLogEntry.password);
+            CollectionStream.of(trackables).forEach(t -> initializeTrackableAction(t, offlineLogEntry));
+        } else {
+            cacheVotingBar.setRating(0);
+            binding.favoriteCheck.setChecked(false);
+            binding.logPassword.setText("");
+        }
+
         updateTrackablesList();
     }
 
@@ -340,7 +366,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         if ((connector instanceof IFavoriteCapability) && ((IFavoriteCapability) connector).supportsAddToFavorite(cache, logType.get()) && loggingManager.supportsLogWithFavorite()) {
             binding.favoriteCheck.setText(res.getQuantityString(loggingManager.getFavoriteCheckboxText(), availableFavoritePoints, availableFavoritePoints));
-            if (availableFavoritePoints > 0) {
+            if (this.logEditMode == LogEditMode.CREATE_NEW && availableFavoritePoints > 0) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
             }
         } else {
@@ -398,6 +424,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(SAVED_STATE_LOGEDITMODE, this.logEditMode.ordinal());
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
     }
@@ -409,7 +436,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     public void refreshGui() {
         updateLogPasswordBox(logType.get());
-        cacheVotingBar.validateVisibility(cache, logType.get());
+        cacheVotingBar.validateVisibility(cache, logType.get(), this.logEditMode == LogEditMode.CREATE_NEW);
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
         updateTrackablesList();
@@ -421,7 +448,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void updateLogPasswordBox(final LogType type) {
-        if (type == LogType.FOUND_IT && cache.isLogPasswordRequired()) {
+        if (logEditMode == LogEditMode.CREATE_NEW && type == LogType.FOUND_IT && cache.isLogPasswordRequired()) {
             binding.logPasswordBox.setVisibility(View.VISIBLE);
         } else {
             binding.logPasswordBox.setVisibility(View.GONE);

@@ -1597,6 +1597,8 @@
     <string name="cache_menu_log_in_browser">Log in browser</string>
     <string name="cache_menu_ignore">Ignore cache</string>
     <string name="cache_log_menu_decrypt">Decrypt/Encrypt</string>
+    <string name="cache_log_menu_edit">Edit Log</string>
+    <string name="cache_log_menu_delete">Delete Log</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
