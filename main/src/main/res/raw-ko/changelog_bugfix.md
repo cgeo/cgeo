@@ -1,4 +1,7 @@
 ##
+- Fix: Trackables missing in cache inventory (website change)
+
+##
 - 수정: 큰 글꼴을 사용할 때 나침반 뒤에 숨겨진 힌트
 - 수정: coord.info 추적아이템 링크를 더 이상 열 수 없습니다
 - 수정: 추적아이템을 수동으로 로그할 때 기본값이 잘못됨
