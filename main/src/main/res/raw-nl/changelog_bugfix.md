@@ -1,4 +1,7 @@
 ##
+- Fix: Trackables missing in cache inventory (website change)
+
+##
 - Oplossing: Hint was verborgen achter het kompas bij gebruik van grote lettertypen
 - Oplossing: coord.info trackable links kunnen niet meer worden geopend
 - Oplossing: Verkeerde standaard bij handmatig loggen van een trackable
