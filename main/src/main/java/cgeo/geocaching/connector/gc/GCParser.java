@@ -715,29 +715,9 @@ public final class GCParser {
         cache.setSpoilers(cacheSpoilers);
 
         // cache inventory
-        try {
-            final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
-            if (matcherInventory.find()) {
-                final String inventoryPre = matcherInventory.group();
-
-                final ArrayList<Trackable> inventory = new ArrayList<>();
-                if (StringUtils.isNotBlank(inventoryPre)) {
-                    final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
-
-                    while (matcherInventoryInside.find()) {
-                        final Trackable inventoryItem = new Trackable();
-                        inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
-                        inventoryItem.setGuid(matcherInventoryInside.group(1));
-                        inventoryItem.setName(matcherInventoryInside.group(2));
-
-                        inventory.add(inventoryItem);
-                    }
-                }
-                cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
-            }
-        } catch (final RuntimeException e) {
-            // failed to parse cache inventory
-            Log.w("GCParser.parseCache: Failed to parse cache inventory (2)", e);
+        final List<Trackable> inventory = parseInventory(page);
+        if (inventory != null) {
+            cache.mergeInventory(inventory, EnumSet.of(TrackableBrand.TRAVELBUG));
         }
 
         // cache logs counts
@@ -868,6 +848,38 @@ public final class GCParser {
 
         cache.setDetailedUpdatedNow();
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
+    }
+
+    @Nullable
+    public static List<Trackable> parseInventory(final String page) {
+        try {
+            final MatcherWrapper matcherInventory = new MatcherWrapper(GCConstants.PATTERN_INVENTORY, page);
+            if (matcherInventory.find()) {
+                final String inventoryPre = matcherInventory.group();
+
+                final ArrayList<Trackable> inventory = new ArrayList<>();
+                if (StringUtils.isNotBlank(inventoryPre)) {
+                    final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
+
+                    while (matcherInventoryInside.find()) {
+                        final Trackable inventoryItem = new Trackable();
+                        inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
+                        final boolean isGeocode = "TB".equals(matcherInventoryInside.group(1));
+                        final String tbId = matcherInventoryInside.group(2);
+                        inventoryItem.setGuid(isGeocode ? null : tbId);
+                        inventoryItem.setGeocode(isGeocode ? tbId : null);
+                        inventoryItem.setName(matcherInventoryInside.group(3));
+
+                        inventory.add(inventoryItem);
+                    }
+                }
+                return inventory;
+            }
+        } catch (final RuntimeException e) {
+            // failed to parse cache inventory
+            Log.w("GCParser.parseCache: Failed to parse cache inventory (2)", e);
+        }
+        return null;
     }
 
     @Nullable
