@@ -657,7 +657,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 mapType.filterContext = new GeocacheFilterContext(LIVE);
                 MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
+                setMapModeFromMapType(); // to get zoomLevel stored for right mode
+                saveCenterAndZoom();
+                final Geopoint coordsIndicator = viewModel.coordsIndicator.getValue();
                 onMapReadyTasks(tileProvider, true, getCurrentMapState());
+                viewModel.coordsIndicator.setValue(coordsIndicator);
             }
         } else if (id == R.id.menu_toggle_mypos) {
             viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
@@ -727,6 +731,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void saveCenterAndZoom() {
+        Settings.setMapZoom(compatibilityMapMode, mapFragment.getCurrentZoom());
+        Settings.setMapCenter(mapFragment.getCenter());
     }
 
     private void setMapRotation(final MenuItem item, final int mapRotation) {
@@ -1016,8 +1025,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void onPause() {
-        Settings.setMapZoom(compatibilityMapMode, mapFragment.getCurrentZoom());
-        Settings.setMapCenter(mapFragment.getCenter());
+        saveCenterAndZoom();
         super.onPause();
     }
 
