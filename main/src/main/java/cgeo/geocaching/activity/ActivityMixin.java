@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Window;
@@ -147,6 +149,10 @@ public final class ActivityMixin {
 
     public static void showShortToast(final Activity activity, @StringRes final int resId) {
         postShowToast(activity, activity.getString(resId), Toast.LENGTH_SHORT);
+    }
+
+    public static void postDelayed(@NonNull final Runnable runnable, final int delay) {
+        new Handler(Looper.getMainLooper()).postDelayed(runnable, delay);
     }
 
     public static void onCreate(final Activity abstractActivity, final boolean keepScreenOn) {
