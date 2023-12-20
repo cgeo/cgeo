@@ -164,7 +164,7 @@ final class ECApi {
             final String data = Network.getResponseData(response, false);
             if (StringUtils.isNotBlank(data) && StringUtils.contains(data, "success")) {
                 if (logType.isFoundLog()) {
-                    ecLogin.increaseActualCachesFound();
+                    ecLogin.increaseActualCachesFound(1);
                 }
                 final String uid = StringUtils.remove(data, "success:");
                 return LogResult.ok(uid);

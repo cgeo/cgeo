@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.ImagelistFragmentBinding;
 import cgeo.geocaching.databinding.ImagelistItemBinding;
+import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -73,14 +74,7 @@ public class ImageListFragment extends Fragment {
      * get title for an image in the list as displayed
      */
     public String getImageTitle(final Image image, final int position) {
-        if (StringUtils.isNotBlank(image.getTitle())) {
-            return image.getTitle();
-        }
-        final String imageTitlePrafix = Settings.getLogImageCaptionDefaultPraefix();
-        if (imageList.getItemCount() == 1) {
-            return imageTitlePrafix; // number is unnecessary if only one image is posted
-        }
-        return imageTitlePrafix + " " + (position + 1);
+        return LogUtils.getLogImageTitle(image, position, imageList.getItemCount());
     }
 
     private void rebuildImageTitles() {

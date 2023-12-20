@@ -7,7 +7,7 @@ import android.content.Context;
 
 import java.util.function.Function;
 
-/** Feature to surround execution of an activity worker task visually with a progress dialog */
+/** Feature to surround execution of a worker task visually with a progress dialog */
 @TargetApi(24)
 public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, P, Object> { //WorkerTask.TaskFeature<Object, P, Object> {
 
@@ -28,7 +28,7 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
         this.activity = activity;
     }
 
-    public static <P> ProgressDialogFeature<P> of(final Context activity, final Class<P> ignore) {
+    public static <P> ProgressDialogFeature<P> of(final Context activity) {
         return new ProgressDialogFeature<>(activity);
     }
 
@@ -70,9 +70,6 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
         this.progressMapper = progressMapper;
         return this;
     }
-
-    //@Override
-    //public void prepareRun(final WorkerTask.TaskRun<?, ? extends P, ?> run) {
 
     @Override
     public void accept(final WorkerTask<?, ? extends P, ?> task) {

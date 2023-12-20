@@ -121,7 +121,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public void increaseCachesFound() {
+    public void increaseCachesFound(final int by) {
         //not supported
     }
 

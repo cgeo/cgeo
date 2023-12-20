@@ -108,9 +108,9 @@ public abstract class AbstractLogin {
     @WorkerThread
     protected abstract StatusCode login(boolean retry, @NonNull Credentials credentials);
 
-    public void increaseActualCachesFound() {
+    public void increaseActualCachesFound(final int by) {
         if (actualCachesFound >= 0) {
-            actualCachesFound++;
+            actualCachesFound += by;
         }
     }
 

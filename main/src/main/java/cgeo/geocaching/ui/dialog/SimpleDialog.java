@@ -434,10 +434,11 @@ public class SimpleDialog {
     /**
      * Use this method to create and display a simple 'show message' dialog using the data defined before using this classes' setters
      * <p>
-     * A show dialog just shows a message, only one positive button is mandatory (but does not need to have an action)
-     * Provide an opotional listener to define actions for 'positive' button.
+     * A show dialog just shows a message, only the positive button is shown (but does not need to have an action)
+     * Provide an optional listener to define actions for 'positive' button.
      */
     public void show(final Runnable positive) {
+        setNegativeButton(null);
         showInternal(positive, null);
     }
 

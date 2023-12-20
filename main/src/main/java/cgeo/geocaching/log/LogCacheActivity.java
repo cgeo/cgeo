@@ -79,6 +79,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private static final int LOADER_ID_LOGGING_INFO = 409809;
 
     private static final String SAVED_STATE_LOGEDITMODE = "cgeo.geocaching.saved_state_logeditmode";
+    private static final String SAVED_STATE_OLDLOGENTRY = "cgeo.geocaching.saved_state_oldlogentry";
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final String SAVED_STATE_AVAILABLE_FAV_POINTS  = "cgeo.geocaching.saved_state_available_fav_points";
     private static final int LOG_MAX_LENGTH = 4000;
@@ -107,6 +108,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private int availableFavoritePoints = -1;
 
     private LogEditMode logEditMode = LogEditMode.CREATE_NEW;
+    private LogEntry oldLogEntry = null;
 
     private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
@@ -227,10 +229,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         logEditMode = LogEditMode.CREATE_NEW;
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            final LogEntry logEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
-            if (logEntry != null) {
+            this.oldLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
+            if (this.oldLogEntry != null) {
                logEditMode = LogEditMode.EDIT_EXISTING;
-                binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
+               binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
             }
         }
 
@@ -250,6 +252,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         resetValues();
         logType.setChangeListener(lt -> refreshGui());
 
+        if (this.oldLogEntry != null) {
+            fillViewFromEntry(this.oldLogEntry);
+        }
+
         // Restore previous state
         lastSavedState = restorePreviousLogEntry(savedInstanceState);
         if (lastSavedState == null) {
@@ -265,6 +271,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (savedInstanceState != null) {
             this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
+            this.oldLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
         }
 
         refreshGui();
@@ -425,6 +432,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_STATE_LOGEDITMODE, this.logEditMode.ordinal());
+        outState.putParcelable(SAVED_STATE_OLDLOGENTRY, this.oldLogEntry);
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
     }
@@ -549,6 +557,19 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sendLogInternal() {
+        if (logEditMode == LogEditMode.EDIT_EXISTING) {
+            sendEditLogInternal();
+        } else {
+            sendCreateNewLogInternal();
+        }
+    }
+
+    private void sendEditLogInternal() {
+        LogUtils.editLog(this, cache, this.oldLogEntry,
+            getEntryFromView().buildUpon().setServiceLogId(this.oldLogEntry.serviceLogId).build(), this::onPostExecuteInternal);
+    }
+
+    private void sendCreateNewLogInternal() {
         lastSavedState = getEntryFromView();
         final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
         taskInterface.loggingManager = loggingManager;
