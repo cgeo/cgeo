@@ -1,5 +1,5 @@
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- Corretto: Trackables mancanti nell'inventario del cache (modifica del sito)
 
 ##
 - Corretto: Suggerimento nascosto dietro la bussola quando si usano caratteri di grandi dimensioni
