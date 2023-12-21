@@ -27,11 +27,13 @@ import java.util.HashMap;
 
 public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
     private ListPreference prefMapSources;
+    private ListPreference prefTileProvicers;
 
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_map_sources, rootKey);
         prefMapSources = findPreference(getString(R.string.pref_mapsource));
+        prefTileProvicers = findPreference(getString(R.string.pref_tileprovider));
 
         initMapSourcePreference();
 
@@ -89,6 +91,8 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
      * Fill the choice list for map sources.
      */
     private void initMapSourcePreference() {
+
+        // old map ---------------------------------------------------------------------------------
         final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
         final CharSequence[] entries = new CharSequence[mapSources.size()];
         final CharSequence[] values = new CharSequence[mapSources.size()];
@@ -125,5 +129,45 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
             Settings.setMapSource(mapSource);
             return true;
         });
+
+
+        // UnifiedMap ------------------------------------------------------------------------------
+        final HashMap<String, AbstractTileProvider> tileProviders = TileProviderFactory.getTileProviders();
+        final CharSequence[] entriesUM = new CharSequence[tileProviders.size()];
+        final CharSequence[] valuesUM = new CharSequence[tileProviders.size()];
+        int idxUM = 0;
+        for (AbstractTileProvider tileProvider : tileProviders.values()) {
+            entriesUM[idxUM] = tileProvider.getTileProviderName();
+            valuesUM[idxUM] = tileProvider.getId();
+            idxUM++;
+        }
+        prefTileProvicers.setEntries(entriesUM);
+        prefTileProvicers.setEntryValues(valuesUM);
+        prefTileProvicers.setOnPreferenceChangeListener((preference, newValue) -> {
+            final String newTileProvider = (String) newValue;
+
+            // reset the cached map source
+            AbstractTileProvider tileProvider;
+            try {
+                tileProvider = TileProviderFactory.getTileProvider(newTileProvider);
+            } catch (final NumberFormatException e) {
+                Log.e("PreferenceMapFragment.onMapSourcesChange: bad source id '" + newTileProvider + "'", e);
+                tileProvider = null;
+            }
+            // If there is no corresponding map source (because some map sources were
+            // removed from the device since) then use the first one available.
+            if (tileProvider == null) {
+                tileProvider = TileProviderFactory.getAnyTileProvider();
+                if (tileProvider == null) {
+                    // There are no map source. There is little we can do here, except log an error and
+                    // return to avoid triggering a null pointer exception.
+                    Log.e("PreferenceMapFragment.onMapSourcesChange: no map source available");
+                    return true;
+                }
+            }
+            Settings.setTileProvider(tileProvider);
+            return true;
+        });
+
     }
 }
