@@ -22,9 +22,12 @@ More changes:
 ### Карта
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Детали тайника
 - Изменение: Создано "Переключение разговора" фактическим переключением
+- Change: Increased maximum log length for geocaching.com
+- Fix: Cannot upload longer personal notes on opencaching sites
 
 ### Общее
 - Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
