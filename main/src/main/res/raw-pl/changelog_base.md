@@ -1,30 +1,33 @@
-### UnifiedMap
-Welcome to our all-new map implementation, internally called "UnifiedMap". This is the result of nearly two years' work from the c:geo team for an all-new map implementation. The reason we started this was that our old map implementations got increasingly hard to maintain and to keep (more or less) in sync feature-wise, with some code parts being ten years old (or more).
+### Ujednolicona mapa
+Witamy w naszej nowej implementacji mapy, wewnętrznie nazywanej „Ujednolicona mapa”. Jest to wynik prawie dwuletniej pracy zespołu c:geo nad całkowicie nową implementacją map. Powodem, dla którego zaczęliśmy to robić, było to, że nasze stare implementacje map stawały się coraz trudniejsze w utrzymaniu i zapewnieniu (mniej lub bardziej) synchronizacji pod względem funkcji, a niektóre części kodu miały dziesięć lat (lub więcej).
 
-With UnifiedMap we tried to get the same user experience across all different map types (where possible), while modernizing and unifying the internal architecture.
+W Ujednoliconej mapie staraliśmy się uzyskać takie same wrażenia użytkownika na wszystkich różnych typach map (tam, gdzie to możliwe), jednocześnie modernizując i ujednolicając wewnętrzną architekturę.
 
-UnifiedMap basically offers (nearly) all the features our old map implementations have, but gives you a couple of additional features:
+Ujednolicona mapa oferuje (prawie) wszystkie funkcje naszych starych implementacji mapy, ale oferuje kilka dodatkowych funkcji:
 
-- Map rotation for OpenStreetMap based maps (online and offline)
-- Fractional scaling for OpenStreetMap based maps
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks (tap on route)
+- Obracanie mapy dla map opartych na OpenStreetMap (online i offline)
+- Ułamkowe skalowanie map opartych na OpenStreetMap
+- Wyskakujące okienko klastra dla Google Maps
+- Ukrywanie źródeł map, których nie potrzebujesz
+- Wykres ukształtowania dróg i ścieżek (dotknij trasę)
 
-UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
+Ujednolicona mapa osiągnęła już stan beta, dlatego zdecydowaliśmy się uczynić ją domyślną mapą dla wszystkich użytkowników wersji Nightly.
 
-Everything should work, but there still may be (and will be) some bugs. In case of need you may switch between old and new map implementations (see settings - map sources), but we would really like you to try the new one. Please report any bugs you find on support ([support@cgeo.org](mailto:support@cgeo.org)) or [c:geo on GitHub](github.com/cgeo/cgeo/issues). Every feedback is welcome!
+Wszystko powinno działać, ale nadal mogą (i będą) występować pewne błędy. W razie potrzeby możesz przełączać się między starą i nową implementacją mapy (patrz ustawienia - źródła map), ale naprawdę chcielibyśmy, abyś wypróbował nową. Prosimy o zgłaszanie wszelkich błędów, które znalazłeś do pomocy technicznej ([support@cgeo.org](mailto:support@cgeo.org)) lub [c:geo na GitHub](github.com/cgeo/cgeo/issues). Każda opinia jest mile widziana!
 
 ---
 
-More changes:
+Więcej zmian:
 
 ### Mapa
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
+- Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
+- Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
+- Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
