@@ -7,6 +7,12 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2023.12.21 Bugfix Release
+
+- Fix: Trackables missing in cache inventory (website change)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.12.11 Bugfix Release
 
 - Fix: Wrong default when manually logging a trackable
