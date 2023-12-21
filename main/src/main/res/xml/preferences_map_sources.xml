@@ -113,6 +113,13 @@
         android:key="@string/pref_fakekey_unifiedmap"
         android:title="@string/category_unifiedMap"
         app:iconSpaceReserved="false">
+        <ListPreference
+            android:defaultValue="0"
+            android:dialogTitle="@string/init_mapsource_select"
+            android:key="@string/pref_tileprovider"
+            android:summary="%s"
+            android:title="@string/init_mapsource_select"
+            app:iconSpaceReserved="false" />
         <MultiSelectListPreference
             android:key="@string/pref_tileprovider_hidden"
             android:title="@string/settings_hide_tileproviders_title"
