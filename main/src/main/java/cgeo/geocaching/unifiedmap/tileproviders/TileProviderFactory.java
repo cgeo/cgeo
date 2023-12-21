@@ -89,7 +89,7 @@ public class TileProviderFactory {
         // build list of available offline map sources except currently active one
         final List<Pair<String, Integer>> list = new ArrayList<>();
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
-            if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider && tileProvider.getNumericalId() != currentSource) {
+            if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider && tileProvider.getNumericalId() != currentSource && !(tileProvider instanceof MapsforgeMultiOfflineTileProvider)) {
                 list.add(new Pair<>(tileProvider.getTileProviderName(), tileProvider.getNumericalId()));
             }
         }
