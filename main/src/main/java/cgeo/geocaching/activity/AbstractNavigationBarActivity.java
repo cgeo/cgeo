@@ -111,7 +111,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     public void setContentView(final View contentView) {
         checkIntentHideNavigationBar();
-        binding = ActivityNavigationbarBinding.inflate(getLayoutInflater());
         binding.activityContent.addView(contentView);
         super.setContentView(binding.getRoot());
 
@@ -194,6 +193,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityNavigationbarBinding.inflate(getLayoutInflater());
         backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
         MessageCenterUtils.setReceiver(this, intent -> updateHomeBadge(1));
     }
