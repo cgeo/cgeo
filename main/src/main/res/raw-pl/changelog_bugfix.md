@@ -1,4 +1,7 @@
 ##
+- Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
+
+##
 - Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
 
 ##
