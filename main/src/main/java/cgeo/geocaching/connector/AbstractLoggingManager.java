@@ -6,6 +6,9 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.utils.TextUtils;
+
+import android.text.Html;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +50,14 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
     @Override
     public LogResult deleteLog(@NonNull final LogEntry newEntry) {
         return LogResult.error(StatusCode.LOG_POST_ERROR);
+    }
+
+    @Override
+    public String convertLogTextToEditableText(final String logText) {
+        if (TextUtils.containsHtml(logText)) {
+            return Html.fromHtml(logText).toString();
+        }
+        return logText;
     }
 
     @Override

@@ -62,6 +62,7 @@ import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -108,7 +109,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private int availableFavoritePoints = -1;
 
     private LogEditMode logEditMode = LogEditMode.CREATE_NEW;
-    private LogEntry oldLogEntry = null;
+    private LogEntry originalLogEntry = null;
 
     private boolean readyToPost = false;
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
@@ -184,7 +185,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         binding.inventory.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
         ViewUtils.setListViewHeightBasedOnItems(binding.inventory);
 
-        binding.inventoryBox.setVisibility(this.logEditMode == LogEditMode.CREATE_NEW && trackables.isEmpty() ? View.GONE : View.VISIBLE);
+        binding.inventoryBox.setVisibility(this.logEditMode == LogEditMode.EDIT_EXISTING || trackables.isEmpty() ? View.GONE : View.VISIBLE);
         binding.inventoryChangeall.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
 
         trackableActionsChangeAll.setTextDialogTitle(getString(R.string.log_tb_changeall) + " (" + trackables.size() + ")");
@@ -229,16 +230,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         logEditMode = LogEditMode.CREATE_NEW;
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
-            this.oldLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
-            if (this.oldLogEntry != null) {
-               logEditMode = LogEditMode.EDIT_EXISTING;
-               binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
+            this.originalLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
+            if (this.originalLogEntry != null) {
+                logEditMode = LogEditMode.EDIT_EXISTING;
+                binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
             }
         }
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         invalidateOptionsMenuCompatible();
-        logType.setValues(cache.getPossibleLogTypes());
+        setLogTypeValues(cache.getPossibleLogTypes());
         cacheVotingBar.initialize(cache, binding.getRoot(), null);
 
         setCacheTitleBar(cache);
@@ -246,14 +247,19 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         loggingManager = cache.getLoggingManager();
         LoaderManager.getInstance(this).initLoader(LOADER_ID_LOGGING_INFO, null, this);
 
+        //convert log text if necessary
+        if (this.originalLogEntry != null) {
+            this.originalLogEntry = this.originalLogEntry.buildUpon().setLog(loggingManager.convertLogTextToEditableText(originalLogEntry.log)).build();
+        }
+
         this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
 
         // initialize with default values
         resetValues();
         logType.setChangeListener(lt -> refreshGui());
 
-        if (this.oldLogEntry != null) {
-            fillViewFromEntry(this.oldLogEntry);
+        if (this.originalLogEntry != null) {
+            fillViewFromEntry(this.originalLogEntry);
         }
 
         // Restore previous state
@@ -271,7 +277,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (savedInstanceState != null) {
             this.availableFavoritePoints = savedInstanceState.getInt(SAVED_STATE_AVAILABLE_FAV_POINTS);
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
-            this.oldLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
+            this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
         }
 
         refreshGui();
@@ -432,7 +438,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_STATE_LOGEDITMODE, this.logEditMode.ordinal());
-        outState.putParcelable(SAVED_STATE_OLDLOGENTRY, this.oldLogEntry);
+        outState.putParcelable(SAVED_STATE_OLDLOGENTRY, this.originalLogEntry);
         outState.putParcelable(SAVED_STATE_LOGENTRY, getEntryFromView());
         outState.putInt(SAVED_STATE_AVAILABLE_FAV_POINTS, availableFavoritePoints);
     }
@@ -565,8 +571,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sendEditLogInternal() {
-        LogUtils.editLog(this, cache, this.oldLogEntry,
-            getEntryFromView().buildUpon().setServiceLogId(this.oldLogEntry.serviceLogId).build(), this::onPostExecuteInternal);
+        LogUtils.editLog(this, cache, this.originalLogEntry,
+            getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build(), this::onPostExecuteInternal);
     }
 
     private void sendCreateNewLogInternal() {
@@ -664,7 +670,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             showErrorLoadingData(data.getUserDisplayableErrorMessage());
         }
         if (!data.getAvailableLogTypes().isEmpty()) {
-            logType.setValues(data.getAvailableLogTypes());
+            setLogTypeValues(data.getAvailableLogTypes());
         }
         if (!data.getAvailableTrackables().isEmpty()) {
             trackables.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
@@ -676,8 +682,21 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.availableFavoritePoints = data.getAvailableFavoritePoints();
         }
 
+
         refreshGui();
         showProgress(false);
+    }
+
+    private void setLogTypeValues(final Collection<LogType> logTypes) {
+        if (this.originalLogEntry != null && !logTypes.contains(this.originalLogEntry.logType)) {
+            //log type of original entry must ALWAYS be available for selection
+            final List<LogType> rLogTypes = new ArrayList<>();
+            rLogTypes.add(this.originalLogEntry.logType);
+            rLogTypes.addAll(logTypes);
+            this.logType.setValues(rLogTypes);
+        } else {
+            this.logType.setValues(logTypes);
+        }
     }
 
     @Override
