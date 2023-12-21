@@ -1,4 +1,7 @@
 ##
+- Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
+
+##
 - Poprawka: Wskazówka ukryta za kompasem podczas używania dużych czcionek
 - Poprawka: Nie można już otwierać łączy do przedmiotów podróżnych w domenie coord.info
 - Poprawka: Niepoprawna wartość domyślna podczas ręcznego logowania przedmiotu podróżnego

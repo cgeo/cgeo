@@ -1,4 +1,7 @@
 ##
+- Fix: Trackables missing in cache inventory (website change)
+
+##
 - Correcção: Dica ficava escondida atrás da bússola ao usar fontes grandes
 - Correcção: ligações de TB a coord.info não podiam mais ser abertos
 - Correcção: Padrão errado ao registar manualmente um TB

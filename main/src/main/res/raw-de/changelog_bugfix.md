@@ -1,4 +1,7 @@
 ##
+- Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
+
+##
 - Korrektur: Hinweis bei Nutzung großer Schriftarten durch Kompass verdeckt
 - Korrektur: Trackable-Links konnten nicht mehr geöffnet werden
 - Korrektur: Falscher Standardwert beim manuellen Loggen eines Trackables

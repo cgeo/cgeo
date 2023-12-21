@@ -1,4 +1,7 @@
 ##
+- Corretto: Trackables mancanti nell'inventario del cache (modifica del sito)
+
+##
 - Corretto: Suggerimento nascosto dietro la bussola quando si usano caratteri di grandi dimensioni
 - Corretto: i collegamenti tracciabili coord.info non possono più essere aperti
 - Corretto: predefinito errato con log manuale di un trackable

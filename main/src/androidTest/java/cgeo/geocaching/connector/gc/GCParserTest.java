@@ -354,4 +354,60 @@ public class GCParserTest {
     public void testGetUsername() {
         assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("abft");
     }
+
+    @Test
+    public void parseTrackableInventory() {
+        // Before #15043 happened
+        final String exampleOld = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
+            "    </h3>" +
+            "    <div class=\"WidgetBody\">" +
+            "                <ul>" +
+            "                <li>" +
+            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=e6aab619-9cc0-4060-91ee-dde3412bddc2\" class=\"lnk\">" +
+            "                        <img src=\"/images/WptTypes/sm/3069.gif\" width=\"16\" alt=\"\" /><span>Tuinkabouter</span></a>" +
+            "                </li>" +
+            "                <li>" +
+            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=758a8a62-5af9-4183-8386-3249befa075a\" class=\"lnk\">" +
+            "                        <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>Just Add Water Festival Geocoin</span></a>" +
+            "                </li>" +
+            "                </ul>" +
+            "            <div";
+
+        //New with #15043
+        final String exampleNew = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
+            " </h3> " +
+            "    <div class=\"WidgetBody\">" +
+            "     <ul>" +
+            "     <li>" +
+            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TB7ZAAK\" class=\"lnk\">" +
+            "               <img src=\"/images/WptTypes/sm/21.gif\" width=\"16\" alt=\"\" /><span>the gambler</span></a>" +
+            "     </li>" +
+            "     <li>" +
+            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TBABCD5\" class=\"lnk\">" +
+            "               <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>the test tb</span></a>" +
+            "     </li>" +
+            "     </ul>" +
+            "   <div";
+
+        // -> Assert that we can parse both
+
+        final List<Trackable> trackablesOld = GCParser.parseInventory(exampleOld);
+        assertThat(trackablesOld).hasSize(2);
+        assertThat(trackablesOld.get(0).getGuid()).isEqualTo("e6aab619-9cc0-4060-91ee-dde3412bddc2");
+        assertThat(trackablesOld.get(0).getGeocode()).isNull();
+        assertThat(trackablesOld.get(0).getName()).isEqualTo("Tuinkabouter");
+        assertThat(trackablesOld.get(1).getGuid()).isEqualTo("758a8a62-5af9-4183-8386-3249befa075a");
+        assertThat(trackablesOld.get(0).getGeocode()).isNull();
+        assertThat(trackablesOld.get(1).getName()).isEqualTo("Just Add Water Festival Geocoin");
+
+        final List<Trackable> trackablesNew = GCParser.parseInventory(exampleNew);
+        assertThat(trackablesNew).hasSize(2);
+        assertThat(trackablesNew.get(0).getGuid()).isNull();
+        assertThat(trackablesNew.get(0).getGeocode()).isEqualTo("TB7ZAAK");
+        assertThat(trackablesNew.get(0).getName()).isEqualTo("the gambler");
+        assertThat(trackablesNew.get(1).getGuid()).isNull();
+        assertThat(trackablesNew.get(1).getGeocode()).isEqualTo("TBABCD5");
+        assertThat(trackablesNew.get(1).getName()).isEqualTo("the test tb");
+
+    }
 }
