@@ -167,7 +167,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     }
 
     @Override
-    public void increaseCachesFound() {
+    public void increaseCachesFound(final int by) {
         //not supported
     }
 

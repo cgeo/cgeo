@@ -86,7 +86,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
 
                 //update "found" counter
                 if (logEntry.logType.isFoundLog() && cacheConnector instanceof ILogin) {
-                    ((ILogin) cacheConnector).increaseCachesFound();
+                    ((ILogin) cacheConnector).increaseCachesFound(1);
                 }
 
                 //update cache state

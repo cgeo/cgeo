@@ -25,7 +25,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
 
-/** Utility class to execute asynchronous worker tasks in the context of an activity. */
+/** Utility class to execute asynchronous worker tasks in the context of an activity or other lifecycle-owner. */
 @TargetApi(24)
 public class WorkerTask<I, P, R>  {
 
@@ -56,6 +56,7 @@ public class WorkerTask<I, P, R>  {
     }
 
 
+    /** An event fired by the worker task */
     public static class WorkerTaskEvent<I, P, R> {
         public final WorkerTaskLogic<I, P, R> task;
         public final WorkerTask.WorkerTaskEventType type;
@@ -79,6 +80,7 @@ public class WorkerTask<I, P, R>  {
 
     }
 
+    /** Implemented by Task Features such as {@link ProgressDialogFeature} */
     public interface TaskFeature<I, P, R> {
 
         void accept(WorkerTask<? extends I, ? extends P, ? extends R> task);
@@ -118,16 +120,17 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
-    /** Creates task configuration with given global id and task logic supplier */
+    /** Creates task for given owner (optional) and task logic supplier. If owner is given then task will automatically be disposed on DESTROYED */
     public static <I, P, R> WorkerTask<I, P, R> of(@Nullable final LifecycleOwner owner, @NonNull final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier) {
-        return of(owner, taskSupplier, null);
+        return new WorkerTask<>(owner, taskSupplier);
     }
 
-    public static <I, P, R> WorkerTask<I, P, R> of(@Nullable final LifecycleOwner owner, @NonNull final Supplier<WorkerTaskLogic<I, P, R>> taskSupplier, final Consumer<R> resultListener) {
-        final WorkerTask<I, P, R> task = new WorkerTask<>(owner, taskSupplier);
-        task.addResultListener(resultListener);
-        return task;
+    /** Convenience method to create simple task w/o need of progress message, input parameter, cancellation flag or task supplier */
+    public static <R> WorkerTask<Void, Void, R> ofSimple(@Nullable final LifecycleOwner owner, @NonNull final Supplier<R> task) {
+        checkNoLifecycleReferences(task);
+        return of(owner, () -> (input, progress, isCancelled) -> task.get());
     }
+
 
     /** Adds a generic listener to task lifecycle events */
     public WorkerTask<I, P, R> addTaskListener(final WorkerTaskEventType eventType, final Consumer<WorkerTaskEvent<I, P, R>> taskListener) {
@@ -190,7 +193,7 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
-    /** Sets action to be executed if at time of finishing no observer is connected to task. Will be executed on taskScheduler! */
+    /** Sets action to be executed if at time of finishing the task is already disposed (and task was not cancelled). Note: Will be executed on taskScheduler! */
     public WorkerTask<I, P, R> setNoOwnerAction(final Consumer<R> noOwnerAction) {
         synchronized (taskMutex) {
             checkChangeAllowed();
@@ -200,6 +203,7 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
+    /** Adds a feature to this WorkerTask */
     public WorkerTask<I, P, R> addFeature(final WorkerTask.TaskFeature<? super I, ? super P, ? super R> feature) {
         synchronized (taskMutex) {
             checkChangeAllowed();
@@ -208,7 +212,12 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
-    /** starts the task. If task is currently running, then run is cancelled */
+    /** (re-)starts the task. If task is currently running, then run is cancelled */
+    public boolean start() {
+        return start(null);
+    }
+
+    /** (re-)starts the task. If task is currently running, then run is cancelled */
     public boolean start(final I input) {
         synchronized (taskMutex) {
             if (isRunning()) {
@@ -218,6 +227,7 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
+    /** Starts this task if it is not currently running */
     public  boolean startIfNotRunning(final I input) {
         synchronized (taskMutex) {
 
@@ -267,6 +277,7 @@ public class WorkerTask<I, P, R>  {
         return disposedFlag.get();
     }
 
+    /** Cancels the current task if it is running */
     public boolean cancel() {
         synchronized (taskMutex) {
 
@@ -286,10 +297,12 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
+    /** Disposes this task and cancels any existing run */
     public void dispose() {
         dispose(true);
     }
 
+    /** Disposes this task. All ressources will be cleaned up, it will no longer receive any events. If cancelTask=true a currently running task will be cancelled */
     public void dispose(final boolean cancelTask) {
         synchronized (taskMutex) {
 
@@ -366,15 +379,15 @@ public class WorkerTask<I, P, R>  {
         }
     }
 
-    private void checkNoLifecycleReferences(@Nullable final Object obj) {
-        checkNoUnallowedReferences(obj, null);
+    private static void checkNoLifecycleReferences(@Nullable final Object obj) {
+        internalCheckNoUnallowedReferences(obj, null);
     }
 
     private void checkOnlyOwnerLifecycleReferences(@Nullable final Object obj) {
-        checkNoUnallowedReferences(obj, this.owner);
+        internalCheckNoUnallowedReferences(obj, this.owner);
     }
 
-    private static void checkNoUnallowedReferences(@Nullable final Object obj, @Nullable final LifecycleOwner allowedLifecycle) {
+    private static void internalCheckNoUnallowedReferences(@Nullable final Object obj, @Nullable final LifecycleOwner allowedLifecycle) {
         if (obj == null) {
             return;
         }

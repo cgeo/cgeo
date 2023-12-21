@@ -181,6 +181,14 @@ public class GCLogAPI {
         String name;
     }
 
+    public static String getUrlForNewLog(final String geocode) {
+        return WEBSITE_URL + "/live/geocache/" + geocode + "/log";
+    }
+
+    public static String getUrlForEditLog(final String geocode, final String serviceLogId) {
+        return WEBSITE_URL + "/live/geocache/" + geocode + "/log/" + serviceLogId + "/edit";
+    }
+
     @NonNull
     @WorkerThread
     public static LogResult createLog(
@@ -190,7 +198,7 @@ public class GCLogAPI {
         }
 
         //1.) Call log page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/geocache/" + geocode + "/log");
+        final String csrfToken = getCsrfTokenFromUrl(getUrlForNewLog(geocode));
         if (csrfToken == null) {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }
@@ -222,7 +230,7 @@ public class GCLogAPI {
 
         //https://www.geocaching.com/live/geocache/GCxyz/log/GLabc/edit
         //1.) Call log edit page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/geocache/" + geocode + "/log/" + logId + "/edit");
+        final String csrfToken = getCsrfTokenFromUrl(getUrlForEditLog(geocode, logId));
         if (csrfToken == null) {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }

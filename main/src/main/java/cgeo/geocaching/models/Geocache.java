@@ -218,9 +218,11 @@ public class Geocache implements IWaypoint {
         changeNotificationHandler = newNotificationHandler;
     }
 
-    /**
-     * Sends a change notification to interested parties
-     */
+    /** Sends a change notification for this Geocache to interested parties */
+    public void notifyChange() {
+        notifyChange(CgeoApplication.getInstance().getApplicationContext());
+    }
+
     private void notifyChange(@Nullable final Context context) {
         if (changeNotificationHandler != null) {
             changeNotificationHandler.sendEmptyMessage(0);

@@ -51,7 +51,9 @@ class GCLoggingManager extends AbstractLoggingManager {
             return result;
         }
 
-        final String url = "https://www.geocaching.com/play/geocache/" + getCache().getGeocode() + "/log";
+        //New Log: https://www.geocaching.com/live/geocache/gcXZ/log
+        //Existing log: https://www.geocaching.com/live/log/GLabc
+        final String url = serviceLogId == null ? GCLogAPI.getUrlForNewLog(getCache().getGeocode()) : GCLogAPI.getUrlForEditLog(getCache().getGeocode(), serviceLogId);
         final String page;
         try {
             page = Network.getResponseData(Network.getRequest(url, null));
