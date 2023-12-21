@@ -1,5 +1,5 @@
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- Oprava: Chybějící sledované položky v inventáři kešek (změna webu)
 
 ##
 - Oprava: Nápověda skrytá za kompasem při použití velkých písmen
