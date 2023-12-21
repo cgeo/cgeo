@@ -882,6 +882,8 @@
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas wyświetlania na mapie pojedynczej skrytki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Odwiedzone punkty nawigacji półprzezroczyste</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Oznacz odwiedzone punkty nawigacji za pomocą półprzezroczystego tła</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
     <string name="init_brouterThreshold_description">Maksymalna odległość, do której trasa będzie obliczana w trybie offline.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
@@ -1146,8 +1148,10 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
+    <string name="category_unifiedMap">Zunifikowana mapa (beta)</string>
     <string name="experimental">(eksperymentalna)</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1445,6 +1449,8 @@
     <string name="cache_menu_log_in_browser">Utwórz wpis w dzienniku w przeglądarce</string>
     <string name="cache_menu_ignore">Ignoruj skrytkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
+    <string name="cache_log_menu_edit">Edytuj wpis</string>
+    <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -1530,6 +1536,8 @@
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_remove_from_route_end">Usuń od końca</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
+    <string name="context_map_star_show">Pokaż linie do punktów nawigacji</string>
+    <string name="context_map_star_hide">Ukryj linie do punktów nawigacji</string>
     <string name="edit">Edytuj</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
