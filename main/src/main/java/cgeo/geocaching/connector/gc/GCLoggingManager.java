@@ -18,6 +18,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 
+import android.text.Html;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -166,7 +168,27 @@ class GCLoggingManager extends AbstractLoggingManager {
         return true;
     }
 
+    @Override
+    public String convertLogTextToEditableText(final String logText) {
 
+        //TODO there's more...
+        //Manual handling required:
+        //- italic: <em> and </em> -> *
+        //- bold: <strong> and </strong> -> **
+        //- link: <a href="link" ...>text</a> -> [text](link)
+
+        //Handled by Html.fromHtml()
+        //- <p></p> -> carriage return with one line space
+        //- <br /> -> just carriage return
+
+        final String preLogText = logText
+            .replaceAll("<strong>", "**")
+            .replaceAll("</strong>", "**")
+            .replaceAll("<em>", "*")
+            .replaceAll("</em>", "*")
+            .replaceAll("<a href=\"([^\"]+)\"[^>]*>([^<]+)</a>", "[$2]($1)");
+        return Html.fromHtml(preLogText).toString();
+    }
 
     @Override
     public boolean supportsLogWithFavorite() {

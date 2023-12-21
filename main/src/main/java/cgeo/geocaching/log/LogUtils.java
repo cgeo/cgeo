@@ -134,7 +134,7 @@ public final class LogUtils {
             while (it.hasNext()) {
                 final LogEntry log = it.next();
                 if (Objects.requireNonNull(adaptedNewLogEntry.serviceLogId).equals(log.serviceLogId)) {
-                    it.set(adaptedNewLogEntry);
+                    it.set(adaptedNewLogEntry.buildUpon().setAuthor(log.author).build());
                     break;
                 }
             }

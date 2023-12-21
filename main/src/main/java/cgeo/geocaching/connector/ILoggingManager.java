@@ -44,6 +44,9 @@ public interface ILoggingManager {
     @WorkerThread
     LogResult deleteLog(@NonNull LogEntry newEntry);
 
+    /** converts a log text from a */
+    String convertLogTextToEditableText(String logText);
+
     /** Returns whether this log entry can be edited */
     boolean canEditLog(@NonNull LogEntry entry);
 
@@ -52,7 +55,6 @@ public interface ILoggingManager {
 
     /** Returns true if this manager can handle the given reporttype on log create */
     boolean canLogReportType(@NonNull ReportProblemType reportType);
-
 
 
     /** Attach an image to an existing log. The supplied image's MUST point to a local file */
