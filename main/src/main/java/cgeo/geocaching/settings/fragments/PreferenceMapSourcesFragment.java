@@ -8,7 +8,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -20,7 +19,6 @@ import android.os.Bundle;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
-import androidx.preference.Preference;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,30 +35,22 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
 
         initMapSourcePreference();
 
-        final boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false) || !BranchDetectionHelper.isProductionBuild();
-
-        final Preference catUnifiedMap = findPreference(getString(R.string.pref_fakekey_unifiedmap));
-        catUnifiedMap.setVisible(showUnifiedMap);
-
         final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
         useUnified.setChecked(Settings.useUnifiedMap());
 
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
-        // hideTileprovidersPref.setVisible(showUnifiedMap);
-        if (showUnifiedMap) {
-            // new unified map providers
-            final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
-            final String[] tpEntries = new String[tileproviders.size()];
-            final String[] tpValues = new String[tileproviders.size()];
-            int i = 0;
-            for (AbstractTileProvider tileProvider : tileproviders.values()) {
-                tpEntries[i] = tileProvider.getTileProviderName();
-                tpValues[i] = tileProvider.getId();
-                i++;
-            }
-            hideTileprovidersPref.setEntries(tpEntries);
-            hideTileprovidersPref.setEntryValues(tpValues);
+        // new unified map providers
+        final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
+        final String[] tpEntries = new String[tileproviders.size()];
+        final String[] tpValues = new String[tileproviders.size()];
+        int i = 0;
+        for (AbstractTileProvider tileProvider : tileproviders.values()) {
+            tpEntries[i] = tileProvider.getTileProviderName();
+            tpValues[i] = tileProvider.getId();
+            i++;
         }
+        hideTileprovidersPref.setEntries(tpEntries);
+        hideTileprovidersPref.setEntryValues(tpValues);
 
     }
 
@@ -76,12 +66,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_info_offline_maphillshading, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_hillshading)));
 
         initPublicFolders(this, activity.getCsah());
-
-        // display checkbox pref for unified map, if showUnifiedMap is enabled
-        final Preference p = findPreference(activity.getString(R.string.pref_fakekey_unifiedmap));
-        if (p != null) {
-            p.setVisible(Settings.getBoolean(R.string.pref_showUnifiedMap, false) || !BranchDetectionHelper.isProductionBuild());
-        }
 
         final CheckBoxPreference useUnified = findPreference(getString(R.string.pref_useUnifiedMap));
         useUnified.setChecked(Settings.useUnifiedMap());

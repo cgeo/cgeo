@@ -217,7 +217,6 @@
     <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
 
     <!-- category unified map -->
-    <string translatable="false" name="pref_fakekey_unifiedmap">fakekey_unifiedmap</string>
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_useUnifiedMap">featureSwitch_useUnifiedMap</string>

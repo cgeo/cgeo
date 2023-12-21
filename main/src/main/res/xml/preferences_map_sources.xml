@@ -110,7 +110,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="@string/pref_fakekey_unifiedmap"
         android:title="@string/category_unifiedMap"
         app:iconSpaceReserved="false">
         <ListPreference
