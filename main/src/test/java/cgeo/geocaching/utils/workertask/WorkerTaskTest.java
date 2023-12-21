@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.workertask;
 
 import static cgeo.geocaching.utils.workertask.WorkerTask.WorkerTaskEventType.CANCELLED;
+import static cgeo.geocaching.utils.workertask.WorkerTask.WorkerTaskEventType.ERROR;
 import static cgeo.geocaching.utils.workertask.WorkerTask.WorkerTaskEventType.FINISHED;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.internal.schedulers.SingleScheduler;
@@ -23,10 +25,12 @@ import static org.assertj.core.api.Java6Assertions.fail;
 public class WorkerTaskTest {
 
     @Test(timeout = 500)
-    public void taskFinished() throws InterruptedException {
+    public void taskFinished() {
         //A simple task: executes and finishes normally
         final TestFeature testFeature = new TestFeature("taskFinished", FINISHED);
+        final CountDownLatch startLatcn = new CountDownLatch(1);
         final WorkerTask<String, String, String> task = WorkerTask.of(null, () -> (String input, Consumer<String> progress, Supplier<Boolean> isCancelled) -> {
+            await(startLatcn);
             progress.accept("one");
             progress.accept("two");
             return "end";
@@ -35,14 +39,15 @@ public class WorkerTaskTest {
 
         assertThat(task.isRunning()).isFalse();
         task.start("input");
-        assertThat(task.isRunning()).isTrue();
-        testFeature.endLatch.await();
+        assertThat(task.isRunning()).isTrue(); //need to check this before opening "startLatch"
+        startLatcn.countDown();
+        await(testFeature.endLatch);
         assertThat(task.isRunning()).isFalse();
-        assertThat(testFeature.collectedEvents).containsExactly("STARTED:I=input", "PROGRESS:P=one", "PROGRESS:P=two", "FINISHED:R=end");
+        assertThat(removeTaskIds(testFeature.collectedEvents)).containsExactly("STARTED:I=input", "PROGRESS:P=one", "PROGRESS:P=two", "FINISHED:R=end");
     }
 
     @Test(timeout = 500)
-    public void taskCancelAndRestart() throws InterruptedException {
+    public void taskCancelAndRestart() {
         //An endlessly running task which is cancelled two times
         final TestFeature testFeature = new TestFeature("taskCancelled", CANCELLED, CANCELLED);
         final WorkerTask<String, String, String> task = WorkerTask.of(null, () -> (String input, Consumer<String> progress, Supplier<Boolean> isCancelled) -> {
@@ -56,14 +61,14 @@ public class WorkerTaskTest {
         task.addFeature(testFeature);
         assertThat(task.isRunning()).isFalse();
         task.start("input");
-        assertThat(task.isRunning()).isTrue();
+        assertThat(task.isRunning()).isTrue(); //task runs endless
         sleep(50);
         task.start("input2"); // cancels then restarts the task
-        assertThat(task.isRunning()).isTrue();
+        assertThat(task.isRunning()).isTrue(); //task runs endless
         sleep(50);
         task.cancel();
         assertThat(task.isRunning()).isFalse();
-        testFeature.endLatch.await();
+        await(testFeature.endLatch);
 
         //check collected events. Is something like the following, but we can't exactly tell how many "progress" messages go through through:
         //"STARTED:I=input", "PROGRESS:P=0", "PROGRESS:P=1", "PROGRESS:P=2", ..., "CANCELLED", "STARTED:I=input2", "PROGRESS:P=0", "PROGRESS:P=1", ..., "CANCELLED"
@@ -71,7 +76,7 @@ public class WorkerTaskTest {
     }
 
     @Test(timeout = 500)
-    public void taskDispose() throws InterruptedException {
+    public void taskDispose() {
         //An endlessly running task which is ended when an additional flag is set
         final TestFeature testFeature = new TestFeature("taskDispose", FINISHED);
         final AtomicBoolean endTask = new AtomicBoolean(false);
@@ -101,7 +106,7 @@ public class WorkerTaskTest {
 
         //let the detached task end
         endTask.set(true);
-        testFeature.endLatch.await();
+        await(testFeature.endLatch);
         assertThat(task.isRunning()).isFalse();
 
         //check collected events. Is something like the following, but we can't exactly tell how many "progress" messages go through through:
@@ -112,8 +117,30 @@ public class WorkerTaskTest {
 
     }
 
+    @Test(timeout = 500)
+    public void taskWithException() {
+        //A task throwing an exception
+        final TestFeature testFeature = new TestFeature("taskWithException", ERROR);
+        final WorkerTask<String, String, String> task = WorkerTask.of(null, () -> (String input, Consumer<String> progress, Supplier<Boolean> isCancelled) -> {
+            progress.accept("one");
+            throw new IllegalStateException("my test exception");
+        });
+        task.addFeature(testFeature);
+
+        task.start("input");
+        await(testFeature.endLatch);
+        assertThat(task.isRunning()).isFalse();
+
+        assertThat(removeTaskIds(testFeature.collectedEvents)).containsExactly("STARTED:I=input", "PROGRESS:P=one", "ERROR:EX=java.lang.IllegalStateException: my test exception");
+    }
+
+    private static List<String> removeTaskIds(final List<String> events) {
+        return  events.stream()
+            .map(s -> s.substring(0, s.indexOf("{"))) // remove the task ids
+            .collect(Collectors.toList());
+    }
     private static void assertCollectedEvents(final List<String> collectedEvents, final Function<Integer, String> progresMsgMapper, final String ... expectedWithProgressRemoved) {
-        final List<String> events = new ArrayList<>(collectedEvents);
+        final List<String> events = removeTaskIds(collectedEvents);
         final String eventErrorMsg = "Events: " + events;
         //checks and removes progress events: must be after STARTED and then starting from 0 in 1-er-steps
         final Iterator<String> it = events.listIterator();
@@ -159,7 +186,7 @@ public class WorkerTaskTest {
                 log(logPraefix + ": Received event: " + event);
 
                 //check whether run shall end
-                if (event.type == CANCELLED || event.type == FINISHED) {
+                if (event.type == CANCELLED || event.type == FINISHED || event.type == ERROR) {
                     final WorkerTask.WorkerTaskEventType expectedType = expectedTypes.get(expectedIndex++);
                     if (event.type != expectedType || expectedIndex >= expectedTypes.size()) {
                         task.dispose(true);
@@ -170,7 +197,6 @@ public class WorkerTaskTest {
             .setTaskScheduler(taskScheduler)
             .setListenerScheduler(listenerScheduler);
         }
-
     }
 
     private static void sleep(final long ms) {
@@ -178,6 +204,14 @@ public class WorkerTaskTest {
             Thread.sleep(ms);
         } catch (InterruptedException ie) {
             fail("Unexpected interrupt wile sleeping", ie);
+        }
+    }
+
+    private static void await(final CountDownLatch latch) {
+        try {
+            latch.await();
+        } catch (InterruptedException ignore) {
+            //ignore
         }
     }
     

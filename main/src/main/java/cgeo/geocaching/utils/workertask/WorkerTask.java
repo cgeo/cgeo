@@ -2,6 +2,7 @@ package cgeo.geocaching.utils.workertask;
 
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.annotation.TargetApi;
 
@@ -29,6 +30,8 @@ import io.reactivex.rxjava3.subjects.Subject;
 @TargetApi(24)
 public class WorkerTask<I, P, R>  {
 
+    private static final String LOG_PRAEFIX = "WORKERTASK: ";
+
     private final Object taskMutex = new Object();
 
     private Supplier<WorkerTaskLogic<I, P, R>> taskSupplier;
@@ -52,7 +55,7 @@ public class WorkerTask<I, P, R>  {
     private Scheduler listenerScheduler = null; //lazy-initialized on first start
 
     public enum WorkerTaskEventType {
-        STARTED, PROGRESS, FINISHED, CANCELLED
+        STARTED, PROGRESS, FINISHED, CANCELLED, ERROR
     }
 
 
@@ -63,19 +66,26 @@ public class WorkerTask<I, P, R>  {
         public final I input;
         public final P progress;
         public final R result;
+        public final Exception exception;
 
-        WorkerTaskEvent(final WorkerTaskLogic<I, P, R> task, final WorkerTask.WorkerTaskEventType type, final I input, final P progress, final R result) {
+        WorkerTaskEvent(final WorkerTaskLogic<I, P, R> task, final WorkerTask.WorkerTaskEventType type, final I input, final P progress, final R result, final Exception exception) {
             this.task = task;
             this.type = type;
             this.input = input;
             this.progress = progress;
             this.result = result;
+            this.exception = exception;
         }
 
         @NonNull
         @Override
         public String toString() {
-            return type + (input == null ? "" : ":I=" + input) + (progress == null ? "" : ":P=" + progress) + (result == null ? "" : ":R=" + result);
+            return  type
+                + (input == null ? "" : ":I=" + input)
+                + (progress == null ? "" : ":P=" + progress)
+                + (result == null ? "" : ":R=" + result)
+                + (exception == null ? "" : ":EX=" + exception)
+                + "{" + (task == null ? "null" : task.getLogId()) + "}";
         }
 
     }
@@ -115,6 +125,11 @@ public class WorkerTask<I, P, R>  {
     private void postEvent(@NonNull final WorkerTaskEvent<I, P, R> event) {
         synchronized (taskMutex) {
             if (!disposedFlag.get()) {
+                if (event.type == WorkerTaskEventType.PROGRESS) {
+                    Log.d(LOG_PRAEFIX + "post " + event);
+                } else {
+                    Log.iForce(LOG_PRAEFIX + "post " + event);
+                }
                 taskEventData.onNext(event);
             }
         }
@@ -261,7 +276,7 @@ public class WorkerTask<I, P, R>  {
                 listenerScheduler = AndroidRxUtils.mainThreadScheduler;
             }
 
-            postEvent(new WorkerTaskEvent<>(taskLogic, WorkerTaskEventType.STARTED, input, null, null));
+            postEvent(new WorkerTaskEvent<>(taskLogic, WorkerTaskEventType.STARTED, input, null, null, null));
             taskScheduler.createWorker().schedule(() ->
                 runAsyncTask(lTaskLogic, lCancelTrigger, taskMutex, runFlag, disposedFlag, this::postEvent, lNoOwnerAction, input));
 
@@ -290,7 +305,7 @@ public class WorkerTask<I, P, R>  {
             cancelTrigger.set(true);
             cancelTrigger = null;
 
-            postEvent(new WorkerTaskEvent<>(this.taskLogic, WorkerTaskEventType.CANCELLED, null, null, null));
+            postEvent(new WorkerTaskEvent<>(this.taskLogic, WorkerTaskEventType.CANCELLED, null, null, null, null));
             this.taskLogic = null;
 
             return true;
@@ -344,13 +359,19 @@ public class WorkerTask<I, P, R>  {
         final I input) {
 
         //trigger the actual worker thread run
-        final R result = task.run(input, p -> {
-            synchronized (taskMutex) {
-                if (!cancelTrigger.get()) {
-                    eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.PROGRESS, null, p, null));
+        R result = null;
+        Exception runException = null;
+        try {
+            result = task.run(input, p -> {
+                synchronized (taskMutex) {
+                    if (!cancelTrigger.get()) {
+                        eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.PROGRESS, null, p, null, null));
+                    }
                 }
-            }
-        }, cancelTrigger::get);
+            }, cancelTrigger::get);
+        } catch (Exception re) {
+            runException = re;
+        }
 
         //run ended
         synchronized (taskMutex) {
@@ -358,10 +379,17 @@ public class WorkerTask<I, P, R>  {
             if (!wasCancelled) {
                 //end the run
                 runFlag.set(false);
-                //post results
-                eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.FINISHED, null, null, result));
-                if (disposedFlag.get() && noObserverAction != null) {
-                    noObserverAction.accept(result);
+                if (runException != null) {
+                    Log.w(LOG_PRAEFIX + "Error for {" + task.getLogId() + "}", runException);
+                    //post error result
+                    eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.ERROR, null, null, null, runException));
+                } else {
+                    //post results
+                    eventPoster.accept(new WorkerTaskEvent<>(task, WorkerTaskEventType.FINISHED, null, null, result, null));
+                    if (disposedFlag.get() && noObserverAction != null) {
+                        Log.iForce(LOG_PRAEFIX + "execute noObserver Action {" + task.getLogId() + "}");
+                        noObserverAction.accept(result);
+                    }
                 }
             }
         }
