@@ -22,9 +22,12 @@ Weitere Änderungen:
 ### Karte
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
+- Change: Increased maximum log length for geocaching.com
+- Fix: Cannot upload longer personal notes on opencaching sites
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
