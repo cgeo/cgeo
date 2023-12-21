@@ -89,7 +89,7 @@ public class MapLineUtils {
     // helper methods
 
     public static float getWidthFromRaw(final int rawValue, final boolean unifiedMap) {
-        return (rawValue / 2.0f) * (unifiedMap ? 1.0f : DisplayUtils.getDisplayDensity());
+        return unifiedMap ? rawValue / 1.5f : rawValue * DisplayUtils.getDisplayDensity() / 2.0f;
     }
 
     private static float getWidth(final int prefKeyId, final int defaultValueKeyId, final boolean unifiedMap) {
