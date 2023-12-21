@@ -1,5 +1,5 @@
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
 
 ##
 - Korrektur: Hinweis bei Nutzung großer Schriftarten durch Kompass verdeckt
