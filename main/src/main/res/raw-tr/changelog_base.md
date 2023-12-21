@@ -22,9 +22,12 @@ More changes:
 ### Harita
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
 
 ### Geocache ayrıntıları
 - Change: Make "Toggle talking" an actual toggle
+- Change: Increased maximum log length for geocaching.com
+- Fix: Cannot upload longer personal notes on opencaching sites
 
 ### Genel
 - New: Tapping on downloader notification opens "pending downloads" view
