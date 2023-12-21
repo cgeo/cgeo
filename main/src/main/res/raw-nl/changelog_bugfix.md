@@ -1,5 +1,5 @@
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- Oplossing: Trackables ontbreken in cache inventaris (website wijziging)
 
 ##
 - Oplossing: Hint was verborgen achter het kompas bij gebruik van grote lettertypen
