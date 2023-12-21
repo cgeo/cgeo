@@ -19,4 +19,9 @@ public interface WorkerTaskLogic<I, P, R> {
     @WorkerThread
     R run(I input, Consumer<P> progress, Supplier<Boolean> isCancelled);
 
+    /** provides an id string for logging purposes */
+    default String getLogId() {
+        return toString();
+    }
+
 }
