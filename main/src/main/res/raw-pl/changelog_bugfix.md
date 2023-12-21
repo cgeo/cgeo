@@ -1,5 +1,5 @@
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
 
 ##
 - Poprawka: Wskazówka ukryta za kompasem podczas używania dużych czcionek
