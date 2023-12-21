@@ -93,9 +93,9 @@ class LoadInBackgroundHandler {
                 // always retriever stored caches
                 {
                     final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(viewport.resize(1.2)));
-                    Log.e("load.searchResult: " + searchResult.getGeocodes());
+                    Log.d("load.searchResult: " + searchResult.getGeocodes());
                     final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
-                    Log.e("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
+                    Log.d("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
                     MapUtils.filter(cachesFromSearchResult, activity.getFilterContext());
                     activity.addSearchResultByGeocaches(cachesFromSearchResult);
                 }
