@@ -422,7 +422,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     waypoints.addAll(c.getWaypoints());
                 }
             }
-            Log.e("load.waypoints: " + waypoints.size());
+            Log.d("load.waypoints: " + waypoints.size());
             MapUtils.filter(waypoints, activity.getFilterContext());
             viewModel.waypoints.getValue().addAll(waypoints);
             viewModel.waypoints.postNotifyDataChanged();
@@ -449,7 +449,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
-        Log.e("add " + searchResult.getGeocodes());
+        Log.d("add " + searchResult.getGeocodes());
         for (String geocode : searchResult.getGeocodes()) {
             final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (temp != null && temp.getCoords() != null) {
@@ -461,7 +461,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     public void addSearchResultByGeocaches(final Set<Geocache> searchResult) {
-        Log.e("addSearchResult: " + searchResult.size());
+        Log.d("addSearchResult: " + searchResult.size());
         viewModel.caches.getValue().removeAll(searchResult);
         for (Geocache geocache : searchResult) {
             if (geocache.getCoords() != null) {
@@ -483,7 +483,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
             }
         }
-        Log.e("add [" + s + "]");
+        Log.d("add [" + s + "]");
     }
 
     private void setTitle() {
@@ -851,7 +851,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
 
         }
-        Log.e("touched elements (" + result.size() + "): " + result);
+        Log.d("touched elements (" + result.size() + "): " + result);
 
         if (result.size() == 0) {
             if (isLongTap) {
