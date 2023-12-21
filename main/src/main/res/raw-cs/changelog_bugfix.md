@@ -1,4 +1,7 @@
 ##
+- Fix: Crash on displaying notification dot
+
+##
 - Oprava: Chybějící sledované položky v inventáři kešek (změna webu)
 
 ##
