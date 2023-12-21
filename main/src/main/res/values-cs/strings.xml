@@ -1146,9 +1146,10 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="category_unifiedMap">Sjednocená mapa (beta)</string>
     <string name="experimental">(experimentální)</string>
     <string name="init_title_useUnifiedMap">Použít sjednocenou mapu</string>
-    <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
+    <string name="init_summary_useUnifiedMap">Použít novou sjednocenou mapu namísto vestavěných map Google Mapy / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -1446,6 +1447,8 @@
     <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
+    <string name="cache_log_menu_edit">Upravit log</string>
+    <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
@@ -1531,6 +1534,8 @@
     <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
     <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
     <string name="context_map_show_coords">Zobrazit souřadnice</string>
+    <string name="context_map_star_show">Zobrazit čáry k trasovým bodům</string>
+    <string name="context_map_star_hide">Skrýt čáry k trasovým bodům</string>
     <string name="edit">Upravit</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
