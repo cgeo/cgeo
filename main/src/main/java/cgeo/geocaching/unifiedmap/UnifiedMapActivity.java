@@ -696,7 +696,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
         } else if (id == R.id.menu_select_mapview) {
             // dynamically create submenu to reflect possible changes in map sources
-            final View v = findViewById(R.id.menu_select_mapview);
+            View v = findViewById(R.id.menu_select_mapview);
+            if (v == null) {
+                // if map selection is moved to overflow menu, use toggle menu item instead as anchor for popup
+                v = findViewById(R.id.menu_toggle_mypos);
+            }
             if (v != null) {
                 final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
                 menu.inflate(R.menu.map_downloader);
