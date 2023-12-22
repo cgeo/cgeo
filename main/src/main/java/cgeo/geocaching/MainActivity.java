@@ -235,7 +235,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
             // don't call the super implementation with the layout argument, as that would set the wrong theme
-            setTheme(R.style.cgeo_withWallpaper);
+            setTheme(Settings.isWallpaper() ? R.style.cgeo_withWallpaper : R.style.cgeo);
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
