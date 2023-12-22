@@ -1,5 +1,5 @@
 ##
-- Fix: Crash on displaying notification dot
+- Oprava: Pád při zobrazení oznamovací tečky
 
 ##
 - Oprava: Chybějící sledované položky v inventáři kešek (změna webu)
