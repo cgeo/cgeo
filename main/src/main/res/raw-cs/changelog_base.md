@@ -26,8 +26,8 @@ Další změny:
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
-- Change: Increased maximum log length for geocaching.com
-- Fix: Cannot upload longer personal notes on opencaching sites
+- Změna: Zvýšení maximální délky logu pro geocaching.com
+- Oprava: Nelze nahrát delší osobní poznámky na stránkách opencaching
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
