@@ -882,6 +882,8 @@
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
     <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné kešky: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Navštívené terasové body jsou poloprůhledné</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Označení navštívených trasových bodů poloprůhledným pozadím</string>
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost, do které offline směrování vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
