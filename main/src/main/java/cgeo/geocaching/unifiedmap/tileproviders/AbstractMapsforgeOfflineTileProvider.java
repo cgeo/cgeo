@@ -48,9 +48,6 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
                 TileProviderFactory.setLanguages(info.languagesPreference.split(","));
             }
             parseZoomLevel(info.zoomLevel);
-            if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-                fragment.zoomToBounds(info.boundingBox);
-            }
             // map attribution
             if (StringUtils.isNotBlank(info.comment)) {
                 setMapAttribution(new Pair<>(info.comment, true));
