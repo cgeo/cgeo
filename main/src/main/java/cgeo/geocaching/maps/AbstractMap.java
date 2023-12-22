@@ -15,6 +15,7 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -44,6 +45,7 @@ public abstract class AbstractMap {
     public Geopoint lastNavTarget = null;
     public TargetView targetView;
     protected volatile boolean latestRenderer = false; // GM specific
+    public UnifiedMapViewModel.SheetInfo sheetInfo = null;
 
     protected AbstractMap(@NonNull final MapActivityImpl activity) {
         mapActivity = activity;

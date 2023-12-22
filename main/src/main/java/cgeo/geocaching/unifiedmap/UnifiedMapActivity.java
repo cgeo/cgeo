@@ -861,7 +861,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
-                if (MapUtils.removeDetailsFragment(this)) {
+                if (MapUtils.sheetRemoveFragment(this)) {
                     return;
                 }
                 mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
@@ -926,13 +926,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (routeItem != null) {
             // open popup for element
             if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
-                // @todo: do we need a DataStore.loadCache() before?
-                // CachePopup.startActivityAllowTarget(this, routeItem.getGeocode());
-                MapUtils.showCacheDetails(this, routeItem.getGeocode());
+                viewModel.sheetInfo.setValue(new UnifiedMapViewModel.SheetInfo(routeItem.getGeocode(), 0));
+                MapUtils.sheetShowDetails(this, viewModel.sheetInfo.getValue());
             } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT && routeItem.getWaypointId() != 0) {
-                // @todo: do we need a DataStore.loadWaypoint() before?
-                // WaypointPopup.startActivityAllowTarget(this, routeItem.getWaypointId(), routeItem.getGeocode());
-                MapUtils.showWaypointDetails(this, routeItem.getGeocode(), routeItem.getWaypointId());
+                viewModel.sheetInfo.setValue(new UnifiedMapViewModel.SheetInfo(routeItem.getGeocode(), routeItem.getWaypointId()));
+                MapUtils.sheetShowDetails(this, viewModel.sheetInfo.getValue());
             }
         } else if (item.getRoute() != null) {
             // elevation charts for individual route and/or routes/tracks
@@ -962,6 +960,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             }
         }
+    }
+
+    @Override
+    public void clearSheetInfo() {
+        Log.e("clearSheetInfo");
+        viewModel.sheetInfo.setValue(null);
     }
 
     // ========================================================================
@@ -1014,8 +1018,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     protected void onStart() {
         super.onStart();
 
-        // close outdated details popups
-        MapUtils.removeDetailsFragment(this);
+        // close outdated details popups & restart sheet (if required)
+        MapUtils.sheetManageLifecycleOnStart(this, viewModel.sheetInfo.getValue(), this::clearSheetInfo, sheetInfo -> viewModel.sheetInfo.setValue(sheetInfo));
 
         // resume location access
         resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.WaypointPopupBinding;
 import cgeo.geocaching.location.Geopoint;
@@ -73,7 +74,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
         if (waypoint == null) {
             Log.e("WaypointPopupFragment.init: unable to get waypoint " + waypointId);
-            MapUtils.removeDetailsFragment(requireActivity());
+            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
             return;
         }
 

@@ -7,6 +7,7 @@ import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -32,6 +33,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -61,11 +63,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -364,16 +364,18 @@ public class MapUtils {
     // ---------------------------------------------------------------------------------------------
     // Handling of cache/waypoint details fragments
 
-    public static void showCacheDetails(final AppCompatActivity activity, final String geocode) {
-        configureDetailsFragment(CachePopupFragment.newInstance(geocode), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
+    public static void sheetShowDetails(final AbstractNavigationBarMapActivity activity, @Nullable final UnifiedMapViewModel.SheetInfo sheetInfo) {
+        if  (sheetInfo == null || StringUtils.isBlank(sheetInfo.geocode)) {
+            return;
+        }
+        if (sheetInfo.waypointId <= 0) {
+            sheetConfigureFragment(CachePopupFragment.newInstance(sheetInfo.geocode), activity, () -> CacheDetailActivity.startActivity(activity, sheetInfo.geocode));
+        } else {
+            sheetConfigureFragment(WaypointPopupFragment.newInstance(sheetInfo.geocode, sheetInfo.waypointId), activity, () -> CacheDetailActivity.startActivity(activity, sheetInfo.geocode));
+        }
     }
 
-    public static void showWaypointDetails(final AppCompatActivity activity, final String geocode, final int waypointId) {
-        configureDetailsFragment(WaypointPopupFragment.newInstance(geocode, waypointId), activity, () -> CacheDetailActivity.startActivity(activity, geocode));
-    }
-
-    private static void configureDetailsFragment(final Fragment fragment, final AppCompatActivity activity, final Runnable onUpSwipeAction) {
-
+    private static void sheetConfigureFragment(final Fragment fragment, final AbstractNavigationBarMapActivity activity, final Runnable onUpSwipeAction) {
         final FrameLayout fl = activity.findViewById(R.id.detailsfragment);
         final ViewGroup.LayoutParams params = fl.getLayoutParams();
         final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
@@ -408,7 +410,7 @@ public class MapUtils {
                 @Override
                 public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                        removeDetailsFragment(activity);
+                        sheetRemoveFragment(activity);
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
@@ -433,7 +435,7 @@ public class MapUtils {
                 @Override
                 public void onStateChanged(@NonNull final View sheet, final int newState) {
                     if (newState == SideSheetBehavior.STATE_HIDDEN) {
-                        removeDetailsFragment(activity);
+                        sheetRemoveFragment(activity);
                         if (callbackStore[0] != null) {
                             b.removeCallback(callbackStore[0]);
                         }
@@ -453,7 +455,8 @@ public class MapUtils {
     }
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
-    public static boolean removeDetailsFragment(final FragmentActivity activity) {
+    public static boolean sheetRemoveFragment(@NonNull final AbstractNavigationBarMapActivity activity) {
+        activity.clearSheetInfo();
         final FragmentManager fm = activity.getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
         if (f1 != null) {
@@ -478,4 +481,14 @@ public class MapUtils {
         return false;
     }
 
+    // manage onStart lifecycle for SheetInfo:
+    // - read current value
+    // - reset details fragment
+    // - restore current value
+    // - open new sheet (if non-empty)
+    public static void sheetManageLifecycleOnStart(final AbstractNavigationBarMapActivity activity, @Nullable final UnifiedMapViewModel.SheetInfo sheetInfo, @NonNull final Runnable clearSheetInfo, @NonNull final Action1<UnifiedMapViewModel.SheetInfo> setSheetInfo) {
+        MapUtils.sheetRemoveFragment(activity);
+        setSheetInfo.call(sheetInfo);
+        MapUtils.sheetShowDetails(activity, sheetInfo);
+    }
 }

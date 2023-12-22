@@ -4,7 +4,7 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CompassActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.MapGoogleBinding;
@@ -55,6 +55,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -142,10 +143,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final String BUNDLE_LIVE_ENABLED = "liveEnabled";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_FILTERCONTEXT = "filterContext";
+    private static final String BUNDLE_SHEETINFO = "sheetInfo";
 
     // Those are initialized in onCreate() and will never be null afterwards
     private Resources res;
-    private AbstractNavigationBarActivity activity;
+    private AbstractNavigationBarMapActivity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
     private MapSource mapSource;
@@ -372,6 +374,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (mapOptions.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
         }
+        if (sheetInfo != null) {
+            outState.putParcelable(BUNDLE_SHEETINFO, sheetInfo);
+        }
     }
 
     @Override
@@ -479,7 +484,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // class init
         res = this.getResources();
-        activity = (AbstractNavigationBarActivity) this.getActivity();
+        activity = (AbstractNavigationBarMapActivity) this.getActivity();
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
@@ -501,6 +506,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapOptions.isLiveEnabled = savedInstanceState.getBoolean(BUNDLE_LIVE_ENABLED, false);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
+            sheetInfo = savedInstanceState.getParcelable(BUNDLE_SHEETINFO);
         } else {
             currentSourceId = Settings.getMapSource().getNumericalId();
             configureProximityNotifications();
@@ -1667,16 +1673,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final Geocache cache = DataStore.loadCache(waypoint.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null) {
                 CGeoMap.markCacheAsDirty(cache.getGeocode());
-                // CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
-                MapUtils.showCacheDetails(activity, cache.getGeocode());
+                sheetInfo = new UnifiedMapViewModel.SheetInfo(cache.getGeocode(), 0);
+                MapUtils.sheetShowDetails(activity, sheetInfo);
             }
             return;
         }
 
         if (coordType == CoordinatesType.WAYPOINT && !((Waypoint) waypoint).isNewWaypoint()) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
-            // WaypointPopup.startActivityAllowTarget(getActivity(), waypoint.getId(), waypoint.getGeocode());
-            MapUtils.showWaypointDetails(activity, waypoint.getGeocode(), waypoint.getId());
+            sheetInfo = new UnifiedMapViewModel.SheetInfo(waypoint.getGeocode(), waypoint.getId());
+            MapUtils.sheetShowDetails(activity, sheetInfo);
         }
     }
 
