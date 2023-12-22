@@ -1,4 +1,7 @@
 ##
+- Fix: Crash on displaying notification dot
+
+##
 - Corretto: Trackables mancanti nell'inventario del cache (modifica del sito)
 
 ##
