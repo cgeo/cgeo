@@ -17,6 +17,8 @@ import cgeo.geocaching.utils.livedata.ConstantLiveData;
 import cgeo.geocaching.utils.livedata.Event;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -45,6 +47,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Event<String>> trackUpdater = new MutableLiveData<>();
     public final MutableLiveData<LocUpdater.LocationWrapper> location = new MutableLiveData<>();
     public final MutableLiveData<Target> target = new MutableLiveData<>();
+    public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
     public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
@@ -116,6 +119,48 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
         public Target(final Geopoint geopoint, final String geocode) {
             this.geopoint = geopoint;
             this.geocode = geocode;
+        }
+    }
+
+    // cache/waypoint sheet opened?
+    public static class SheetInfo implements Parcelable {
+        public final String geocode;
+        public final int waypointId;
+
+        public SheetInfo(final String geocode, final int waypointId) {
+            this.geocode = geocode;
+            this.waypointId = waypointId;
+        }
+
+        // parcelable methods
+        public static final Creator<SheetInfo> CREATOR = new Creator<SheetInfo>() {
+
+            @Override
+            public SheetInfo createFromParcel(final Parcel source) {
+                return new SheetInfo(source);
+            }
+
+            @Override
+            public SheetInfo[] newArray(final int size) {
+                return new SheetInfo[size];
+            }
+
+        };
+
+        protected SheetInfo(final Parcel parcel) {
+            geocode = parcel.readString();
+            waypointId = parcel.readInt();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            dest.writeString(geocode);
+            dest.writeInt(waypointId);
         }
     }
 }

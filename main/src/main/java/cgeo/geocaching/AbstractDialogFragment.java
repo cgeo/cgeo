@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -79,7 +80,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         if (cache == null) {
             ((AbstractActivity) requireActivity()).showToast(res.getString(R.string.err_detail_cache_find));
 
-            MapUtils.removeDetailsFragment(requireActivity());
+            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
             return;
         }
 
@@ -170,7 +171,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     private void setAsTarget() {
         final TargetUpdateReceiver activity = (TargetUpdateReceiver) requireActivity();
         activity.onReceiveTargetUpdate(getTargetInfo());
-        MapUtils.removeDetailsFragment(requireActivity());
+        MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
     }
 
     public static void onCreatePopupOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {

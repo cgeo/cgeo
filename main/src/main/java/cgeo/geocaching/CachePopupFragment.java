@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.PopupBinding;
@@ -103,7 +104,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return;
             }
             popup.progress.dismiss();
-            MapUtils.removeDetailsFragment(popup.requireActivity());
+            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) popup.requireActivity());
         }
     }
 

@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps.google.v2;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -96,7 +96,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private final ScaleDrawer scaleDrawer = new ScaleDrawer();
     private DistanceDrawer distanceDrawer;
 
-    private WeakReference<AbstractNavigationBarActivity> activityRef;
+    private WeakReference<AbstractNavigationBarMapActivity> activityRef;
     private WeakReference<PositionAndHistory> positionAndHistoryRef;
     private View root = null;
     private Marker coordsMarker;
@@ -139,7 +139,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         googleMap.setOnCameraIdleListener(this::recognizePositionChange);
         googleMap.setOnMapClickListener(latLng -> {
             if (activityRef.get() != null) {
-                if (MapUtils.removeDetailsFragment(activityRef.get())) {
+                if (MapUtils.sheetRemoveFragment(activityRef.get())) {
                     return;
                 }
                 adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(activityRef.get()));
@@ -293,7 +293,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             return;
         }
 
-        activityRef = new WeakReference<>((AbstractNavigationBarActivity) context);
+        activityRef = new WeakReference<>((AbstractNavigationBarMapActivity) context);
 
         if (!isGoogleMapsAvailable(context)) {
             // either play services are missing (should have been caught in MapProviderFactory) or Play Services version does not support this Google Maps API version
@@ -311,7 +311,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         getMapAsync(this);
-        gestureDetector = new GestureDetector(context, new GestureListener((AbstractNavigationBarActivity) context));
+        gestureDetector = new GestureDetector(context, new GestureListener((AbstractNavigationBarMapActivity) context));
     }
 
 
@@ -508,9 +508,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         private static final String GOOGLEMAP_ZOOMOUT_BUTTON = "GoogleMapZoomOutButton";
         private static final String GOOGLEMAP_COMPASS = "GoogleMapCompass";
 
-        private final WeakReference<AbstractNavigationBarActivity> activityRef;
+        private final WeakReference<AbstractNavigationBarMapActivity> activityRef;
 
-        GestureListener(final AbstractNavigationBarActivity activity) {
+        GestureListener(final AbstractNavigationBarMapActivity activity) {
             super();
             this.activityRef = new WeakReference<>(activity);
         }

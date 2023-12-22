@@ -68,6 +68,7 @@ import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -193,12 +194,14 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     private TargetView targetView;
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
+    private UnifiedMapViewModel.SheetInfo sheetInfo = null;
 
     private static boolean followMyLocation = Settings.getFollowMyLocation();
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
     private static final String BUNDLE_FILTERCONTEXT = "filterContext";
+    private static final String BUNDLE_SHEETINFO = "sheetInfo";
 
     // Handler messages
     // DisplayHandler
@@ -248,6 +251,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             followMyLocation = mapOptions.mapState.followsMyLocation();
+            sheetInfo = savedInstanceState.getParcelable(BUNDLE_SHEETINFO);
         } else {
             if (mapOptions.mapState != null) {
                 followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -798,8 +802,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         super.onStart();
         Log.d("NewMap: onStart");
 
-        MapUtils.removeDetailsFragment(this);
+        MapUtils.sheetManageLifecycleOnStart(this, sheetInfo, this::clearSheetInfo, newSheetInfo -> sheetInfo = newSheetInfo);
         initializeLayers();
+    }
+
+    @Override
+    public void clearSheetInfo() {
+        sheetInfo = null;
     }
 
     private void initializeLayers() {
@@ -968,6 +977,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
         if (mapOptions.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapOptions.filterContext);
+        }
+        if (sheetInfo != null) {
+            outState.putParcelable(BUNDLE_SHEETINFO, sheetInfo);
         }
     }
 
@@ -1338,7 +1350,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty() && !longPressMode) {
-            if (MapUtils.removeDetailsFragment(this)) {
+            if (MapUtils.sheetRemoveFragment(this)) {
                 return;
             }
             HideActionBarUtils.toggleActionBar(this);
@@ -1425,8 +1437,8 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     popupGeocodes.add(cache.getGeocode());
-                    // CachePopup.startActivityAllowTarget(this, cache.getGeocode());
-                    MapUtils.showCacheDetails(this, cache.getGeocode());
+                    sheetInfo = new UnifiedMapViewModel.SheetInfo(cache.getGeocode(), 0);
+                    MapUtils.sheetShowDetails(this, sheetInfo);
                     return;
                 }
                 return;
@@ -1434,8 +1446,8 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
             if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
                 popupGeocodes.add(item.getGeocode());
-                // WaypointPopup.startActivityAllowTarget(this, item.getId(), item.getGeocode());
-                MapUtils.showWaypointDetails(this, item.getGeocode(), item.getId());
+                sheetInfo = new UnifiedMapViewModel.SheetInfo(item.getGeocode(), item.getId());
+                MapUtils.sheetShowDetails(this, sheetInfo);
             }
 
         } catch (final NotFoundException e) {
