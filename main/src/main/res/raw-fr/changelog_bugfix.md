@@ -1,4 +1,7 @@
 ##
+- Fix: Crash on displaying notification dot
+
+##
 - Fix: Trackables missing in cache inventory (website change)
 
 ##
