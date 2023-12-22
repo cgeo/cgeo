@@ -80,10 +80,6 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProv
         fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
         fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         fragment.applyTheme();
-
-        if (boundingBox != null && !boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-            fragment.zoomToBounds(boundingBox);
-        }
     }
 
     private void checkLanguage(final ArrayList<String> languages, final String languagesPreference) {
