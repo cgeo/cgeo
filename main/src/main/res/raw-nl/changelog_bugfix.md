@@ -1,4 +1,7 @@
 ##
+- Oplossing: Crash bij weergave meldingsstip
+
+##
 - Oplossing: Trackables ontbreken in cache inventaris (website wijziging)
 
 ##
