@@ -18,10 +18,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
@@ -221,6 +223,19 @@ public class CommonUtils {
         }
         return result;
 
+    }
+
+    public static <T> void filterCollection(final Collection<T> coll, @NonNull final Predicate<T> retainCondition) {
+        if (coll == null) {
+            return;
+        }
+        final Iterator<T> it = coll.iterator();
+        while (it.hasNext()) {
+            final T item = it.next();
+            if (!retainCondition.test(item)) {
+                it.remove();
+            }
+        }
     }
 
 

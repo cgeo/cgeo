@@ -133,8 +133,9 @@ public final class Viewport {
     }
 
     @Override
+    @NonNull
     public String toString() {
-        return "(" + bottomLeft + "," + topRight + ")";
+        return "Viewport[" + bottomLeft + "," + topRight + "]";
     }
 
     /**
