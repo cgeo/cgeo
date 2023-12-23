@@ -2,6 +2,7 @@ package cgeo.geocaching.models.geoitem;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.utils.CommonUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -53,8 +54,11 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             this.holes = null;
         } else {
             for (List<Geopoint> hole : holes) {
+                removeSuccessiveDuplicates(hole);
                 fixPolygonLine(hole, true);
             }
+            //remove invalid holes
+            CommonUtils.filterCollection(holes, h -> h != null && h.size() >= 4);
             this.holes = Collections.unmodifiableList(holes);
         }
 
@@ -145,7 +149,8 @@ public class GeoPrimitive implements GeoItem, Parcelable {
             case CIRCLE:
                 return getCenter() != null && getCenter().isValid() && getRadius() > 0;
             case POLYGON:
-                return getPoints().size() >= 3;
+                //a valid polygon needs 4 points (with start/end being the same point)
+                return getPoints().size() >= 4;
             case POLYLINE:
             default:
                 return getPoints().size() >= 2;
@@ -401,11 +406,6 @@ public class GeoPrimitive implements GeoItem, Parcelable {
         //ensure that last point equals first point
         if (!Objects.equals(points.get(0), points.get(points.size() - 1))) {
             points.add(points.get(0));
-        }
-
-        //not a valid polygon -> make it empty
-        if (points.size() < 3) {
-            points.clear();
         }
 
         //correct orientation if necessary

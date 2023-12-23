@@ -69,6 +69,9 @@ public class GeoJsonUtils {
         if (items == null) {
             return GeoGroup.create();
         }
+        //Sole invalid items should not make whole GeoJson unrenderable. Thus remove invalid items. See e.g. #15074
+        CommonUtils.filterCollection(items, item -> item != null && item.isValid());
+
         if (items.size() == 1) {
             return items.get(0);
         }
@@ -174,7 +177,7 @@ public class GeoJsonUtils {
     }
 
     private static Float floatFromJson(final Float currentFloat, final JSONObject json, final String key) {
-        if (json.has(key)) {
+        if (json != null && json.has(key)) {
             final double value = json.optDouble(key, Double.NaN);
             if (!Double.isNaN(value)) {
                 return (float) value;
@@ -189,7 +192,7 @@ public class GeoJsonUtils {
         String colorString = null;
         double opacity = 1d;
         try {
-            if (json.has(key)) {
+            if (json != null && json.has(key)) {
                 colorString = json.getString(key);
                 int color = UNIT_TEST_MODE ? colorString.length() : Color.parseColor(colorString);
                 opacity = keyOpacity == null ? Double.NaN : json.optDouble(keyOpacity, Double.NaN);

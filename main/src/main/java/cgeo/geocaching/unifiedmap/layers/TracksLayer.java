@@ -21,7 +21,7 @@ public class TracksLayer {
 
         viewModel.trackUpdater.observe(activity, event -> event.ifNotHandled((key -> {
             final Tracks.Track track = viewModel.getTracks().getTrack(key);
-            if (track == null || track.getRoute().isHidden()) {
+            if (track == null || track.getRoute() == null || track.getRoute().isHidden()) {
                 layer.remove(TRACK_KEY_PREFIX + key);
             } else {
 
