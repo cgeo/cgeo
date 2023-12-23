@@ -2200,8 +2200,6 @@
     <string name="permission_contacts_read_explanation">c:geo voi etsiä yhteystietoja osoitekirjassasi käyttäen kätköilijän nimikerkkiä. Tehdäksesi tämän, sinun tulee valtuuttaa c:geo lukemaan osoitekirjaasi. Muuten tämän toiminnon käyttö ei ole mahdollista.</string>
     <string name="permission_location_explanation_title">Sijainnin käyttöoikeus</string>
     <string name="permission_location_explanation">c:geo on optimoitu käytettäväksi GPS-datan (hienon sijainnin) avulla paikantaaksesi sijaintisi ja laskeaksesi etäisyyden ja suunnan geokätköihin. Ilman tätä lupaa sijaintiin perustuvat toiminnot eivät toimi odotetusti.</string>
-    <string name="permission_read_external_storage_explanation_title">Ulkoisen tallennustilan lukuoikeus</string>
-    <string name="permission_read_external_storage_explanation">c:geo voi käyttää järjestelmien taustakuvaa sovelluksen taustakuvaksi. Jotta tämä tapahtuisi, c:geo tarvitsee luvan lukea mediatiedot ulkoisesta tallennustilasta.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo kirjoittaa tietoja puhelimen tallennustilaan tai SD-kortille esim. kun tallennat geokätköjä offline-käyttöön, tuot tai viet tiedostoja ja muita toimintoja. Joissakin Android-versioissa sinun on myönnettävä lisälupa näille toiminnoille.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Vanhempi lupa ulkoiseen tallennustilaan kirjoittamiseksi</string>
     <string name="storage_permission_needed">Tämä toiminto ei ole mahdollinen ilman tallennustila-lupaa.</string>
