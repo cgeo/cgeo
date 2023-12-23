@@ -1,5 +1,6 @@
 ##
 - Oprava: Pád při zobrazení oznamovací tečky
+- Oprava: Nepotřebné oprávnění READ_EXTERNAL_STORAGE vyžadované na novějších verzích systému Android
 
 ##
 - Oprava: Chybějící sledované položky v inventáři kešek (změna webu)
