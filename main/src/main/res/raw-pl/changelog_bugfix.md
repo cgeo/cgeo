@@ -1,5 +1,6 @@
 ##
 - Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
+- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
 
 ##
 - Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
