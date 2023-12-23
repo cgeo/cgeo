@@ -1,5 +1,6 @@
 ##
 - Fix: Crash on displaying notification dot
+- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
 
 ##
 - Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
