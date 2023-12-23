@@ -1137,7 +1137,6 @@
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
     <string name="category_unifiedMap">Unified Map (bèta)</string>
-    <string name="experimental">(experimenteel)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
     <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
