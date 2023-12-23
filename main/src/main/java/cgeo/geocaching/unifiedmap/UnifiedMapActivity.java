@@ -172,6 +172,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.followMyLocation.setValue(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && mapType.type == UMTT_PlainMap);
             }
         }
+        // make sure we have a defined mapType
+        if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
+            mapType = new UnifiedMapType();
+        }
+
+        viewModel.transientIsLiveEnabled.setValue(mapType.type == UMTT_PlainMap && Settings.isLiveMap());
 
         routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
         viewModel.configureProximityNotification();
@@ -185,11 +191,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.location.observe(this, this::handleLocUpdate);
 
         geoDirUpdate = new LocUpdater(this);
-
-        // make sure we have a defined mapType
-        if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
-            mapType = new UnifiedMapType();
-        }
 
         // initialize layers
         layers.clear();
@@ -412,7 +413,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.waypoints.getValue().clear();
         if (viewport.count(viewModel.caches.getValue().getAsList()) < Settings.getWayPointsThreshold()) {
             final Set<Waypoint> waypoints;
-            if (Settings.isLiveMap()) {
+            if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
                 //All visible waypoints
                 waypoints = DataStore.loadWaypoints(viewport);
             } else {
@@ -495,7 +496,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @NonNull
     private String calculateTitle() {
-        if (Settings.isLiveMap() && mapType.type == UMTT_PlainMap) {
+        if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
             return getString(R.string.map_live);
         }
         if (mapType.type == UMTT_TargetGeocode) {
@@ -603,7 +604,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Settings.isLiveMap() && mapType.type == UMTT_PlainMap);
+        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
         // map rotation state
@@ -649,12 +650,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (id == R.id.menu_map_live) {
             if (mapType.type == UMTT_PlainMap) {
                 Settings.setLiveMap(!Settings.isLiveMap());
+                viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
                 setTitle();
                 setMapModeFromMapType();
             } else {
                 mapType.type = UMTT_PlainMap;
                 mapType.filterContext = new GeocacheFilterContext(LIVE);
+                viewModel.transientIsLiveEnabled.setValue(true);
                 MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
                 setMapModeFromMapType(); // to get zoomLevel stored for right mode
@@ -994,7 +997,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // Lifecycle methods
 
     private UnifiedMapState getCurrentMapState() {
-        return new UnifiedMapState(mapFragment.getCenter(), mapFragment.getCurrentZoom());
+        return new UnifiedMapState(mapFragment.getCenter(), mapFragment.getCurrentZoom(), Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
     }
 
     @Override

@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
@@ -100,7 +99,7 @@ class LoadInBackgroundHandler {
                     activity.addSearchResultByGeocaches(cachesFromSearchResult);
                 }
 
-                if (Settings.isLiveMap()) {
+                if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
                     // retrieving live caches (if enabled)
                     final boolean useLastSearchResult = null != lastSearchResult && null != previousViewport && previousViewport.includes(viewport);
                     final Viewport newViewport = viewport.resize(3.0);
