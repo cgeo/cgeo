@@ -2124,8 +2124,6 @@
     <string name="permission_contacts_read_explanation">c:geo kan söka efter kontakter i din adressbok med cacharens namn. För att göra detta måste du tillåta c:geo att läsa din adressbok. Annars är det inte möjligt att använda denna funktion.</string>
     <string name="permission_location_explanation_title">Behörighet för plats</string>
     <string name="permission_location_explanation">c:geo är optimerad för användning med GPS-data (noggrann) för att lokalisera din position och beräkna avstånd och riktning till geocacher. Utan denna behörighet kommer platsbaserade funktioner inte att fungera som förväntat.</string>
-    <string name="permission_read_external_storage_explanation_title">Läs extern lagringsbehörighet</string>
-    <string name="permission_read_external_storage_explanation">c:geo kan använda systemets bakgrundsbild som bakgrund för appen. För att göra detta behöver c:geo tillåtelse att läsa dina mediedata på extern lagring.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo kommer att skriva data till din telefons lagring eller SD-kort t.ex. när du sparar geocacher för offline-användning, import eller export av filer och andra funktioner. På vissa Android-versioner måste du bevilja ytterligare tillstånd för dessa åtgärder.</string>
     <string name="storage_permission_needed">Denna funktion är inte möjlig utan lagringsbehörighet.</string>
     <!-- colors -->
