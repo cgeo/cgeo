@@ -2248,8 +2248,6 @@
     <string name="permission_contacts_read_explanation">C:geo pot cercar contactes a la vostra llibreta d\'adreces mitjançant els noms del catxé. Per fer-ho, heu d\'autoritzar c:geo a llegir la vostra llibreta d\'adreces. En cas contrari, l\'ús d\'aquesta funció no és possible.</string>
     <string name="permission_location_explanation_title">Permís d\'ubicació</string>
     <string name="permission_location_explanation">C:geo està optimitzat per utilitzar-lo amb dades GPS (ubicació fina) per localitzar la vostra posició i calcular la distància i la direcció cap als geocatxés. Sense aquest permís, les funcions basades en la ubicació no funcionaran com s\'esperava.</string>
-    <string name="permission_read_external_storage_explanation_title">Llegir el permís d\'emmagatzematge extern</string>
-    <string name="permission_read_external_storage_explanation">C:geo pot utilitzar el fons de pantalla del vostre sistema com a fons de l\'aplicació. Per fer-ho, c:geo necessita permís per llegir les vostres dades multimèdia a l\'emmagatzematge extern.</string>
     <string name="permission_legacy_write_external_storage_explanation">C:geo escriurà dades a l\'emmagatzematge del telèfon o a la targeta SD, ex. Quan deseu catxés per utilitzar-los fora de línia, importeu o exporteu fitxers i altres funcions. En algunes versions d\'Android, heu de concedir un permís addicional per a aquestes accions.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permís d\'emmagatzematge extern d\'escriptura</string>
     <string name="permission_post_notifications_explanation">C:geo utilitza notificacions per informar-vos sobre les descàrregues i els catxés (si està activat)</string>
