@@ -45,4 +45,9 @@ public class LogResult extends StatusResult {
         return serviceLogId;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "LogResult:" + super.toString() + "/logId=" + logId + "/serviceLogId=" + serviceLogId;
+    }
 }

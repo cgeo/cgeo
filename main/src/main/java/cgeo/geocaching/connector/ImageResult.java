@@ -43,4 +43,10 @@ public class ImageResult extends StatusResult {
     public String getServiceImageId() {
         return serviceImageId;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "ImageResult:" + super.toString() + "/serviceImageId=" + serviceImageId + "/imageUri=" + imageUri;
+    }
 }
