@@ -65,6 +65,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
     public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
+    public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
         tracks.setRoute(key, route);

@@ -10,10 +10,12 @@ public class UnifiedMapState implements Parcelable {
 
     Geopoint center;
     int zoomLevel;
+    boolean transientIsLiveEnabled;
 
-    public UnifiedMapState(final Geopoint center, final int zoomLevel) {
+    public UnifiedMapState(final Geopoint center, final int zoomLevel, final boolean transientIsLiveEnabled) {
         this.center = center;
         this.zoomLevel = zoomLevel;
+        this.transientIsLiveEnabled = transientIsLiveEnabled;
     };
 
     // ========================================================================
@@ -22,6 +24,7 @@ public class UnifiedMapState implements Parcelable {
     UnifiedMapState(final Parcel in) {
         center = in.readParcelable(Geopoint.class.getClassLoader());
         zoomLevel = in.readInt();
+        transientIsLiveEnabled = in.readInt() > 0;
     }
 
     @Override
@@ -33,6 +36,7 @@ public class UnifiedMapState implements Parcelable {
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeParcelable(center, 0);
         dest.writeInt(zoomLevel);
+        dest.writeInt(transientIsLiveEnabled ? 1 : 0);
     }
 
     public static final Parcelable.Creator<UnifiedMapState> CREATOR = new Parcelable.Creator<UnifiedMapState>() {
