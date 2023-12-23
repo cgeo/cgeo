@@ -19,7 +19,7 @@ public class LocUpdater extends GeoDirHandler {
 
     // minimum time in milliseconds between position overlay updates
     private static final long MIN_UPDATE_INTERVAL = 500;
-    private static final long MIN_UPDATE_INTERVAL_AUTOROTATION = 200;
+    private static final long MIN_UPDATE_INTERVAL_AUTOROTATION = 100;
     private long timeLastPositionOverlayCalculation = 0;
     // minimum change of heading in grad for position overlay update
     private static final float MIN_HEADING_DELTA = 15f;
