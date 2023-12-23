@@ -19,6 +19,7 @@ public class LocUpdater extends GeoDirHandler {
 
     // minimum time in milliseconds between position overlay updates
     private static final long MIN_UPDATE_INTERVAL = 500;
+    private static final long MIN_UPDATE_INTERVAL_AUTOROTATION = 200;
     private long timeLastPositionOverlayCalculation = 0;
     // minimum change of heading in grad for position overlay update
     private static final float MIN_HEADING_DELTA = 15f;
@@ -49,42 +50,39 @@ public class LocUpdater extends GeoDirHandler {
      * Repaint position overlay but only with a max frequency and if position or heading changes sufficiently.
      */
     void repaintPositionOverlay() {
+        final long currentTimeMillis = System.currentTimeMillis();
+        final boolean usesAutorotation = Settings.getMapRotation() == Settings.MAPROTATION_AUTO;
+        if (currentTimeMillis > (timeLastPositionOverlayCalculation + (usesAutorotation ? MIN_UPDATE_INTERVAL_AUTOROTATION : MIN_UPDATE_INTERVAL))) {
+            timeLastPositionOverlayCalculation = currentTimeMillis;
+            final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy(viewModel);
+            final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel, usesAutorotation);
 
-        final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy(viewModel);
-        final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel);
-
-        if (needsRepaintForDistanceOrAccuracy) {
-            final PositionHistory ph = viewModel.positionHistory.getValue();
-            if (ph != null) {
-                ph.rememberTrailPosition(currentLocation);
+            if (needsRepaintForDistanceOrAccuracy) {
+                final PositionHistory ph = viewModel.positionHistory.getValue();
+                if (ph != null) {
+                    ph.rememberTrailPosition(currentLocation);
+                }
             }
-        }
 
-        if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-            viewModel.location.postValue(new LocationWrapper(currentLocation, currentHeading, needsRepaintForDistanceOrAccuracy, needsRepaintForHeading));
+            if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
+                viewModel.location.postValue(new LocationWrapper(currentLocation, currentHeading, needsRepaintForDistanceOrAccuracy, needsRepaintForHeading));
+            }
         }
     }
 
-    private boolean needsRepaintForHeading(final UnifiedMapViewModel viewModel) {
+    private boolean needsRepaintForHeading(final UnifiedMapViewModel viewModel, final boolean usesAutorotation) {
         final LocationWrapper locationWrapper = viewModel.location.getValue();
         if (locationWrapper == null) {
             return true;
         }
-        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > (Settings.getMapRotation() == Settings.MAPROTATION_AUTO ? MIN_HEADING_DELTA_AUTOROTATION : MIN_HEADING_DELTA);
+        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > (usesAutorotation ? MIN_HEADING_DELTA_AUTOROTATION : MIN_HEADING_DELTA);
     }
 
     private boolean needsRepaintForDistanceOrAccuracy(final UnifiedMapViewModel viewModel) {
-        final long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis < (timeLastPositionOverlayCalculation + MIN_UPDATE_INTERVAL)) {
-            return false;
-        }
-        timeLastPositionOverlayCalculation = currentTimeMillis;
-
         final LocationWrapper locationWrapper = viewModel.location.getValue();
         if (locationWrapper == null || locationWrapper.location.getAccuracy() != currentLocation.getAccuracy()) {
             return true;
         }
-        // @todo: NewMap uses a more sophisticated calculation taking map dimensions into account - check if this is still needed
         return currentLocation.distanceTo(locationWrapper.location) > MIN_LOCATION_DELTA;
     }
 
