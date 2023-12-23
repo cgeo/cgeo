@@ -121,6 +121,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
             binding.moreDetails.setOnClickListener(arg0 -> {
                 CacheDetailActivity.startActivity(getActivity(), geocode);
+                MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
             });
 
             final View view = getView();

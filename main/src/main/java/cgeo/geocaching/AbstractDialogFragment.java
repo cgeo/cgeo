@@ -148,6 +148,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
 
         buttonMore.setOnClickListener(arg0 -> {
             CacheDetailActivity.startActivity(getActivity(), geocode);
+            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
         });
 
         /* Only working combination as it seems */
