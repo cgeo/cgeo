@@ -16,10 +16,6 @@ public class StatusResult {
     @Nullable
     private final String postServerMessage;
 
-    protected StatusResult(@NonNull final StatusCode postResult) {
-        this(postResult, null);
-    }
-
     protected StatusResult(@NonNull final StatusCode postResult, @Nullable final String postServerMessage) {
         this.postResult = postResult;
         this.postServerMessage = postServerMessage;
@@ -46,5 +42,11 @@ public class StatusResult {
 
     public boolean isOk() {
         return StatusCode.NO_ERROR == postResult;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return postResult + (postServerMessage == null ? "" : "(" + postServerMessage + ")");
     }
 }

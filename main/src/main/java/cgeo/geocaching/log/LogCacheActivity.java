@@ -322,7 +322,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (savedInstanceState != null) {
             entry = savedInstanceState.getParcelable(SAVED_STATE_LOGENTRY);
         }
-        if (entry == null) {
+        if (entry == null && this.logEditMode == LogEditMode.CREATE_NEW) {
             entry = DataStore.loadLogOffline(geocode);
         }
 

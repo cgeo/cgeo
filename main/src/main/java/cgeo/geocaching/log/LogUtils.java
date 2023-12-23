@@ -82,7 +82,7 @@ public final class LogUtils {
             .addFeature(ProgressDialogFeature.of(activity).setTitle("Editing").setInitialMessage("Editing log"))
             .addResultListener(result -> {
                 SimpleDialog.ofContext(activity).setTitle(TextParam.text("Edit result: " + result.isOk()))
-                    .setMessage(TextParam.text("EDIT RESULT: " + result)).show(() -> {
+                    .setMessage(TextParam.text("Edit result: " + result)).show(() -> {
                         if (postExecute != null) {
                             postExecute.accept(result);
                         }
@@ -105,7 +105,8 @@ public final class LogUtils {
                 WorkerTask.ofSimple(activity, () -> deleteLogTaskLogic(cache, entry))
                     .addFeature(ProgressDialogFeature.of(activity).setTitle("Deleting").setInitialMessage("Deleting log"))
                     .addResultListener(result -> {
-                        SimpleDialog.ofContext(activity).setTitle(TextParam.text("DELETE RESULT: " + result.isOk())).show();
+                        SimpleDialog.ofContext(activity).setTitle(TextParam.text("Delete result: " + result.isOk()))
+                            .setMessage(TextParam.text("Delete result: " + result)).show();
                     })
                     .start();
             });
