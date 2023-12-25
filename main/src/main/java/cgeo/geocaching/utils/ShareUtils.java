@@ -52,7 +52,7 @@ public class ShareUtils {
      */
     public static void shareOrDismissDialog(final Activity context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         SimpleDialog.of(context).setTitle(title).setMessage(TextParam.text(msg))
-                .setButtons(0, 0, R.string.cache_share_field)
+                .setNeutralButton(TextParam.id(R.string.cache_share_field))
                 .setNeutralAction(() -> {
                     final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
                     shareInternal(context, intent, title);

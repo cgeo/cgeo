@@ -73,7 +73,7 @@ public class DebugUtils {
             SimpleDialog.of(activity)
                     .setTitle(R.string.about_system_write_logcat)
                     .setMessage(R.string.about_system_write_logcat_type)
-                    .setButtons(R.string.about_system_write_logcat_type_standard, 0, R.string.about_system_write_logcat_type_extended)
+                    .setButtons(R.string.about_system_write_logcat_type_standard, R.string.cancel, R.string.about_system_write_logcat_type_extended)
                     .setNeutralAction(() -> createLogcatHelper(activity, true, false, null))
                     .confirm(() -> createLogcatHelper(activity, false, false, null));
         }
@@ -117,7 +117,7 @@ public class DebugUtils {
                     SimpleDialog.of(activity)
                             .setTitle(R.string.about_system_write_logcat)
                             .setMessage(R.string.about_system_write_logcat_success, UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString())
-                            .setButtons(0, 0, R.string.about_system_info_send_button)
+                            .setNeutralButton(TextParam.id(R.string.about_system_info_send_button))
                             .setNeutralAction(() -> shareLogfileAsEmail(activity, additionalMessage, result.get()))
                             .show();
 
