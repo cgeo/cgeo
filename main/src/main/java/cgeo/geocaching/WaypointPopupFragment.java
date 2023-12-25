@@ -98,15 +98,17 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
                 details.add(R.string.cache_name, waypoint.getName());
             }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
+            details.addLatestLogs(cache);
+
+            // addWideHTML should go to the end of the list
             final String note = waypoint.getNote();
             if (StringUtils.isNotBlank(note)) {
-                details.addHtml(R.string.waypoint_note, note, waypoint.getShortGeocode());
+                details.addWideHtml(-1, note, waypoint.getShortGeocode());
             }
             final String userNote = waypoint.getUserNote();
             if (StringUtils.isNotBlank(userNote)) {
-                details.addHtml(R.string.waypoint_user_note, userNote, waypoint.getShortGeocode());
+                details.addWideHtml(R.string.waypoint_user_note, userNote, waypoint.getShortGeocode());
             }
-            details.addLatestLogs(cache);
 
             binding.toggleVisited.setChecked(waypoint.isVisited());
             binding.toggleVisited.setOnClickListener(arg1 -> {
