@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,8 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     private static final String TAG_MAPDETAILS_FRAGMENT = "mapdetails_fragment";
     private static final String TAG_SWIPE_FRAGMENT = "swipetoopen_fragment";
+
+    private final ViewTreeObserver.OnGlobalLayoutListener[] layoutListeners = new ViewTreeObserver.OnGlobalLayoutListener[1];
 
     @Override
     public void onBackPressed() {
@@ -84,7 +87,13 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                 // make bottom sheet fill whole screen
                 swipeToOpenFragment.requireView().setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
                 // set the height of collapsed state to height of the details fragment
-                view.getViewTreeObserver().addOnGlobalLayoutListener(() -> b.setPeekHeight(view.getHeight()));
+                synchronized (layoutListeners) {
+                    if (layoutListeners[0] != null) {
+                        view.getViewTreeObserver().removeOnGlobalLayoutListener(layoutListeners[0]);
+                    }
+                    layoutListeners[0] = () -> b.setPeekHeight(view.getHeight());
+                    view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListeners[0]);
+                }
             });
 
             final Activity that = this;
