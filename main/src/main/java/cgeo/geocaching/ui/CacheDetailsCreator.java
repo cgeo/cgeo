@@ -95,11 +95,21 @@ public final class CacheDetailsCreator {
         return nameValue;
     }
 
+    public void addWideHtml(final int nameId, final CharSequence value, final String geocode) {
+        final NameValueLine nameValue = createNameValueLine(nameId);
+        nameValue.layout.findViewById(R.id.name).setVisibility(GONE);
+        final TextView valueView = nameValue.valueView;
+        final String label = nameId > 0 ? res.getString(nameId) + ": " : "";
+        valueView.setText(HtmlCompat.fromHtml(label + value.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+    }
+
     @NonNull
     private NameValueLine createNameValueLine(final int nameId) {
         final View layout = activity.getLayoutInflater().inflate(R.layout.cache_information_item, parentView, false);
         final TextView nameView = layout.findViewById(R.id.name);
-        nameView.setText(res.getString(nameId));
+        if (nameId > 0) {
+            nameView.setText(res.getString(nameId));
+        }
         final TextView valueView = layout.findViewById(R.id.value);
         parentView.addView(layout);
         return new NameValueLine(layout, valueView);
