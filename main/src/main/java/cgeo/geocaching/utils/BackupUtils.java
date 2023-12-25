@@ -656,9 +656,9 @@ public class BackupUtils {
             ActivityMixin.showToast(activityContext, msg);
         } else {
             SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
-                    .setButtons(0, 0, R.string.cache_share_field)
-                    .setNeutralAction(() -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup))
-                    .show();
+                .setNeutralButton(TextParam.id(R.string.cache_share_field))
+                .setNeutralAction(() -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup))
+                .show();
         }
     }
 

@@ -11,7 +11,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
@@ -52,14 +51,10 @@ public class FilterUtils {
 
             if (isFilterActive) {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
-                        .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
-                        .setButtonClickAction(which -> {
-                            if (which == DialogInterface.BUTTON_NEUTRAL) {
-                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()));
-                            }
-                            return false;
-                        })
-                        .selectSingle(model, filteredActivity::refreshWithFilter);
+                    .setNeutralButton(TextParam.id(R.string.cache_filter_storage_clear_button))
+                    .setNeutralAction(() ->
+                        filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+                    ).selectSingle(model, filteredActivity::refreshWithFilter);
             } else {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
                         .selectSingle(model, filteredActivity::refreshWithFilter);

@@ -14,6 +14,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
@@ -368,7 +369,8 @@ public class InstallWizardActivity extends AppCompatActivity {
     }
 
     private void skipWizard() {
-        SimpleDialog.of(this).setTitle(R.string.wizard).setMessage(R.string.wizard_skip_wizard_warning).setButtons(0, R.string.back).confirm(this::finishWizard, this::updateDialog);
+        SimpleDialog.of(this).setTitle(R.string.wizard).setMessage(R.string.wizard_skip_wizard_warning)
+            .setNegativeButton(TextParam.id(R.string.back)).confirm(this::finishWizard, this::updateDialog);
     }
 
     private void finishWizard() {
