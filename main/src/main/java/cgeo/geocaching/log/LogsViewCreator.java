@@ -152,7 +152,9 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 if (LogUtils.canDeleteLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
-                        it -> LogUtils.deleteLog(activity, cache, log));
+                        it -> {
+                        new LogActivityHelper(activity).deleteLog(cache, log);
+                    });
                 }
 
             }

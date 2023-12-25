@@ -1,17 +1,19 @@
 package cgeo.geocaching.utils.workertask;
 
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.utils.Log;
 
 import android.annotation.TargetApi;
-import android.content.Context;
+
+import androidx.core.app.ComponentActivity;
 
 import java.util.function.Function;
 
 /** Feature to surround execution of a worker task visually with a progress dialog */
 @TargetApi(24)
-public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, P, Object> { //WorkerTask.TaskFeature<Object, P, Object> {
+public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, P, Object> {
 
-    private final Context activity;
+    private final ComponentActivity activity;
 
     private String title = null;
     private String initialMessage = null;
@@ -24,11 +26,11 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
     private int maxValue = 100;
     private Function<P, Integer> progressMapper = null;
 
-    private ProgressDialogFeature(final Context activity) {
+    private ProgressDialogFeature(final ComponentActivity activity) {
         this.activity = activity;
     }
 
-    public static <P> ProgressDialogFeature<P> of(final Context activity) {
+    public static <P> ProgressDialogFeature<P> of(final ComponentActivity activity) {
         return new ProgressDialogFeature<>(activity);
     }
 
@@ -74,53 +76,75 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
     @Override
     public void accept(final WorkerTask<?, ? extends P, ?> task) {
 
-        final Progress progress = new Progress();
+        final Progress[] progressStore = new Progress[1];
 
-        task.addTaskListener(event -> {
+        task.observe(activity, event -> {
+            Log.d("WORKERTASK:PROGRESSDIALOG (progress = " + (progressStore[0] != null) + ": received " + event);
 
             switch (event.type) {
                 case STARTED:
-                    if (allowCancel) {
-                        progress.setOnCancelListener((dialog, which) -> {
-                            if (allowCloseWithoutCancel) {
-                                task.cancel();
-                            }
-                        });
+                    if (progressStore[0] == null) {
+                        progressStore[0] = createAndShowProgress(task::cancel);
                     }
-                    if (allowCloseWithoutCancel) {
-                        progress.setOnCloseListener((dialog, which) -> {
-                            dialog.dismiss();
-                        });
-                    }
-                    progress.setOnDismissListener(d -> {
-                        if (!allowCloseWithoutCancel) {
-                            task.cancel();
-                        }
-                    });
-
-                    if (!indeterminate) {
-                        progress.setMaxProgressAndReset(Math.max(0, maxValue));
-                    }
-                    progress.show(activity, title == null ? "" : title, initialMessage == null ? "" : initialMessage, indeterminate, null);
                     break;
                 case PROGRESS:
-                    progress.setMessage(messageMapper.apply(event.progress));
-                    if (!indeterminate && progressMapper != null) {
-                        final Integer progressValue = progressMapper.apply(event.progress);
-                        if (progressValue != null) {
-                            progress.setProgress(Math.min(maxValue, Math.max(0, progressValue)));
-                        }
+                    if (progressStore[0] == null) {
+                        progressStore[0] = createAndShowProgress(task::cancel);
                     }
+                    setProgress(progressStore[0], event.progress);
                     break;
-                case FINISHED:
-                case CANCELLED:
                 default:
-                    if (progress.isShowing()) {
-                        progress.dismiss();
-                    }
+                    cancelProgress(progressStore[0]);
+                    progressStore[0] = null;
                     break;
             }
         });
+    }
+
+    private Progress createAndShowProgress(final Runnable taskCancelAction) {
+        final Progress progress = new Progress();
+        if (allowCancel) {
+            progress.setOnCancelListener((dialog, which) -> {
+                if (allowCloseWithoutCancel) {
+                    taskCancelAction.run();
+                }
+            });
+        }
+        if (allowCloseWithoutCancel) {
+            progress.setOnCloseListener((dialog, which) -> {
+                dialog.dismiss();
+            });
+        }
+        progress.setOnDismissListener(d -> {
+            if (!allowCloseWithoutCancel) {
+                taskCancelAction.run();
+            }
+        });
+
+        if (!indeterminate) {
+            progress.setMaxProgressAndReset(Math.max(0, maxValue));
+        }
+        progress.show(activity, title == null ? "" : title, initialMessage == null ? "" : initialMessage, indeterminate, null);
+        return progress;
+    }
+
+    private void setProgress(final Progress progress, final P message) {
+        if (progress == null) {
+            return;
+        }
+        progress.setMessage(messageMapper.apply(message));
+        if (!indeterminate && progressMapper != null) {
+            final Integer progressValue = progressMapper.apply(message);
+            if (progressValue != null) {
+                progress.setProgress(Math.min(maxValue, Math.max(0, progressValue)));
+            }
+        }
+    }
+
+    private void cancelProgress(final Progress progress) {
+        if (progress != null && progress.isShowing()) {
+            progress.dismiss();
+        }
     }
 
 }

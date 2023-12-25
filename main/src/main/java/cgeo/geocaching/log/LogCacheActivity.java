@@ -97,6 +97,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     protected ImageListFragment imageListFragment;
 
+    private LogActivityHelper logActivityHelper = new LogActivityHelper(this)
+        .setLogEditResultConsumer(result -> onPostExecuteInternal(result));
+
     private Geocache cache = null;
     private String geocode = null;
     private ILoggingManager loggingManager;
@@ -200,6 +203,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.logcache_activity);
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
@@ -425,6 +429,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         if (lastSavedState != null && !StringUtils.isBlank(lastSavedState.log)) {
             Settings.setLastCacheLog(lastSavedState.log);
         }
+        logActivityHelper.finish();
         super.finish();
     }
 
@@ -474,6 +479,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void saveLog(final SaveMode saveMode) {
+
+        if (logEditMode != LogEditMode.CREATE_NEW) {
+            return;
+        }
 
         try (ContextLogger cLog = new ContextLogger("LogCacheActivity.saveLog(mode=%s)", saveMode)) {
 
@@ -571,8 +580,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sendEditLogInternal() {
-        LogUtils.editLog(this, cache, this.originalLogEntry,
-            getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build(), this::onPostExecuteInternal);
+        logActivityHelper.editLog(cache, this.originalLogEntry,
+            getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build());
     }
 
     private void sendCreateNewLogInternal() {
