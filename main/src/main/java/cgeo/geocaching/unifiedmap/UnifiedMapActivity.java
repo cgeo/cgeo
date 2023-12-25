@@ -353,10 +353,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     break;
                 case UMTT_SearchResult:
                     // load list of caches and scale map to see them all
-                    final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes());
+                    final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
                     addSearchResultByGeocaches(mapType.searchResult);
                     loadWaypoints(this, viewModel, viewport2);
-                    // tileProvider.getMap().zoomToBounds(Viewport.containing(tempCaches));
                     mapFragment.zoomToBounds(viewport2);
                     break;
                 default:
