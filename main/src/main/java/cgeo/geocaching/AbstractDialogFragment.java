@@ -8,7 +8,6 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LoggingUI;
-import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -80,7 +79,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         if (cache == null) {
             ((AbstractActivity) requireActivity()).showToast(res.getString(R.string.err_detail_cache_find));
 
-            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
+            ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
             return;
         }
 
@@ -171,7 +170,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
     private void setAsTarget() {
         final TargetUpdateReceiver activity = (TargetUpdateReceiver) requireActivity();
         activity.onReceiveTargetUpdate(getTargetInfo());
-        MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) requireActivity());
+        ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
     }
 
     public static void onCreatePopupOptionsMenu(final Toolbar toolbar, final INavigationSource navigationSource, final Geocache geocache) {

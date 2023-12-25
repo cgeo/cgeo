@@ -802,12 +802,12 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         super.onStart();
         Log.d("NewMap: onStart");
 
-        MapUtils.sheetManageLifecycleOnStart(this, sheetInfo, this::clearSheetInfo, newSheetInfo -> sheetInfo = newSheetInfo);
+        sheetManageLifecycleOnStart(sheetInfo, newSheetInfo -> sheetInfo = newSheetInfo);
         initializeLayers();
     }
 
     @Override
-    public void clearSheetInfo() {
+    protected void clearSheetInfo() {
         sheetInfo = null;
     }
 
@@ -1350,7 +1350,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
     public void showSelection(@NonNull final List<GeoitemRef> items, final boolean longPressMode) {
         if (items.isEmpty() && !longPressMode) {
-            if (MapUtils.sheetRemoveFragment(this)) {
+            if (sheetRemoveFragment()) {
                 return;
             }
             HideActionBarUtils.toggleActionBar(this);
@@ -1438,7 +1438,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 if (cache != null) {
                     popupGeocodes.add(cache.getGeocode());
                     sheetInfo = new UnifiedMapViewModel.SheetInfo(cache.getGeocode(), 0);
-                    MapUtils.sheetShowDetails(this, sheetInfo);
+                    sheetShowDetails(sheetInfo);
                     return;
                 }
                 return;
@@ -1447,7 +1447,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
                 popupGeocodes.add(item.getGeocode());
                 sheetInfo = new UnifiedMapViewModel.SheetInfo(item.getGeocode(), item.getId());
-                MapUtils.sheetShowDetails(this, sheetInfo);
+                sheetShowDetails(sheetInfo);
             }
 
         } catch (final NotFoundException e) {
