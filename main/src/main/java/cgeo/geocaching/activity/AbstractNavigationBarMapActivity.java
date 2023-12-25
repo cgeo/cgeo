@@ -3,17 +3,16 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CachePopupFragment;
 import cgeo.geocaching.R;
-import cgeo.geocaching.SwipeToOpenFragment;
 import cgeo.geocaching.WaypointPopupFragment;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +25,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.sidesheet.SideSheetBehavior;
 import com.google.android.material.sidesheet.SideSheetCallback;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Optional;
 
 public abstract class AbstractNavigationBarMapActivity extends AbstractNavigationBarActivity {
 
@@ -61,47 +62,52 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     private void sheetConfigureFragment(final Fragment fragment, final Runnable onUpSwipeAction) {
         final FrameLayout fl = findViewById(R.id.detailsfragment);
+
+        Optional.ofNullable(fragment.getView())
+                .map(v -> (LinearLayout) v.findViewById(R.id.swipeInfo))
+                .ifPresent(hint -> hint.setVisibility(View.GONE));
+
         final ViewGroup.LayoutParams params = fl.getLayoutParams();
         final CoordinatorLayout.Behavior<?> behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
         final boolean isBottomSheet = behavior instanceof BottomSheetBehavior;
 
         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        final SwipeToOpenFragment swipeToOpenFragment = isBottomSheet ? new SwipeToOpenFragment() : null;
-        if (isBottomSheet) {
-            ft.replace(R.id.detailsfragment, swipeToOpenFragment, TAG_SWIPE_FRAGMENT);
-            ft.add(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
-        } else {
-            ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT);
-        }
-        ft.commit();
+        ft.replace(R.id.detailsfragment, fragment, TAG_MAPDETAILS_FRAGMENT).commit();
 
         if (isBottomSheet) { // portrait mode uses BottomSheet
             final BottomSheetBehavior<FrameLayout> b = BottomSheetBehavior.from(fl);
             b.setHideable(true);
             b.setSkipCollapsed(false);
-            b.setPeekHeight(0); // temporary set to 0 to avoid bumping. Gets updated once view is loaded.
             b.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
             ft.runOnCommit(() -> {
                 final View view = fragment.requireView();
-                // make bottom sheet fill whole screen
-                swipeToOpenFragment.requireView().setMinimumHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
-                // set the height of collapsed state to height of the details fragment
+                // set the height of collapsed state and enable swipeinfo
                 synchronized (layoutListeners) {
                     if (layoutListeners[0] != null) {
                         view.getViewTreeObserver().removeOnGlobalLayoutListener(layoutListeners[0]);
                     }
-                    layoutListeners[0] = () -> b.setPeekHeight(view.getHeight());
+                    layoutListeners[0] = () -> {
+                        final LinearLayout hint = view.findViewById(R.id.swipeInfo);
+                        if (hint != null) {
+                            if (hint.getVisibility() == View.GONE) {
+                                b.setPeekHeight(view.getHeight());
+                                hint.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    };
                     view.getViewTreeObserver().addOnGlobalLayoutListener(layoutListeners[0]);
                 }
             });
 
             final Activity that = this;
-            final BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
+            final BottomSheetBehavior.BottomSheetCallback[] callbackStore = new BottomSheetBehavior.BottomSheetCallback[] { null };
+            callbackStore[0] = new BottomSheetBehavior.BottomSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull final View bottomSheet, final int newState) {
                     if (newState == BottomSheetBehavior.STATE_HIDDEN) {
                         sheetRemoveFragment();
+                        b.removeBottomSheetCallback(callbackStore[0]);
                     }
                     if (newState == BottomSheetBehavior.STATE_EXPANDED && onUpSwipeAction != null) {
                         onUpSwipeAction.run();
@@ -111,25 +117,22 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
                 @Override
                 public void onSlide(@NonNull final View bottomSheet, final float slideOffset) {
-                    swipeToOpenFragment.setExpansion(slideOffset, fragment.getView());
+                    // nothing
                 }
             };
+            b.addBottomSheetCallback(callbackStore[0]);
 
-            b.addBottomSheetCallback(callback);
-            swipeToOpenFragment.setOnStopCallback(() -> b.removeBottomSheetCallback(callback));
         } else { // landscape mode uses SideSheet
             final SideSheetBehavior<FrameLayout> b = SideSheetBehavior.from(fl);
             b.setState(SideSheetBehavior.STATE_EXPANDED);
-            final SideSheetCallback[] callbackStore = new SideSheetCallback[] { null };
 
-            final SideSheetCallback callback = new SideSheetCallback() {
+            final SideSheetCallback[] callbackStore = new SideSheetCallback[] { null };
+            callbackStore[0] = new SideSheetCallback() {
                 @Override
                 public void onStateChanged(@NonNull final View sheet, final int newState) {
                     if (newState == SideSheetBehavior.STATE_HIDDEN) {
                         sheetRemoveFragment();
-                        if (callbackStore[0] != null) {
-                            b.removeCallback(callbackStore[0]);
-                        }
+                        b.removeCallback(callbackStore[0]);
                     }
                 }
 
@@ -138,8 +141,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     // nothing
                 }
             };
-            callbackStore[0] = callback;
-            b.addCallback(callback);
+            b.addCallback(callbackStore[0]);
         }
 
         fl.setVisibility(View.VISIBLE);

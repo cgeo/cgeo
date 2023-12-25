@@ -69,6 +69,7 @@
                 style="@style/button_full_popups"
                 android:text="@string/cache" />
 
+            <include layout="@layout/swipe_info" />
         </LinearLayout>
     </ScrollView>
 

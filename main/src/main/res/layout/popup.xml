@@ -90,6 +90,7 @@
 
             </RelativeLayout>
 
+            <include layout="@layout/swipe_info" />
 
         </LinearLayout>
     </ScrollView>
