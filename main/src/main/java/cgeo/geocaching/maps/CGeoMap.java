@@ -1674,7 +1674,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (cache != null) {
                 CGeoMap.markCacheAsDirty(cache.getGeocode());
                 sheetInfo = new UnifiedMapViewModel.SheetInfo(cache.getGeocode(), 0);
-                MapUtils.sheetShowDetails(activity, sheetInfo);
+                activity.sheetShowDetails(sheetInfo);
             }
             return;
         }
@@ -1682,7 +1682,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (coordType == CoordinatesType.WAYPOINT && !((Waypoint) waypoint).isNewWaypoint()) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
             sheetInfo = new UnifiedMapViewModel.SheetInfo(waypoint.getGeocode(), waypoint.getId());
-            MapUtils.sheetShowDetails(activity, sheetInfo);
+            activity.sheetShowDetails(sheetInfo);
         }
     }
 

@@ -180,11 +180,11 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
         }
         mapBase.onStart();
 
-        MapUtils.sheetManageLifecycleOnStart(this, mapBase.sheetInfo, this::clearSheetInfo, newSheetInfo -> mapBase.sheetInfo = newSheetInfo);
+        sheetManageLifecycleOnStart(mapBase.sheetInfo, newSheetInfo -> mapBase.sheetInfo = newSheetInfo);
     }
 
     @Override
-    public void clearSheetInfo() {
+    protected void clearSheetInfo() {
         mapBase.sheetInfo = null;
     }
 

@@ -7,7 +7,6 @@ import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
@@ -104,7 +103,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return;
             }
             popup.progress.dismiss();
-            MapUtils.sheetRemoveFragment((AbstractNavigationBarMapActivity) popup.requireActivity());
+            ((AbstractNavigationBarMapActivity) popup.requireActivity()).sheetRemoveFragment();
         }
     }
 
