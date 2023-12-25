@@ -49,7 +49,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         @Override
         public void updateGeoData(final GeoData geo) {
             try {
-                if (cache != null && cache.getCoords() != null) {
+                if (cacheDistance != null && cache != null && cache.getCoords() != null) {
                     cacheDistance.setText(Units.getDistanceFromKilometers(geo.getCoords().distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
