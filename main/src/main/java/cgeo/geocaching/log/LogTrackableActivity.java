@@ -103,10 +103,12 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
             possibleLogTypesTrackable.addAll(logTypesTrackable);
-            logType.setValues(possibleLogTypesTrackable);
 
-            if (!logTypesTrackable.contains(typeSelected)) {
-                //currently selected is not possible -> select the most preferred default
+            final LogTypeTrackable previousTypeSelected = typeSelected;
+            logType.setValues(possibleLogTypesTrackable); //exists
+
+            if (!logTypesTrackable.contains(previousTypeSelected)) {
+                //previously selected is not possible -> select the most preferred default
                 boolean found = false;
                 for (LogTypeTrackable candidate : PREFERRED_DEFAULTS) {
                     if (logTypesTrackable.contains(candidate)) {
