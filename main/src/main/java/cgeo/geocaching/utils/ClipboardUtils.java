@@ -37,10 +37,12 @@ public final class ClipboardUtils {
     @Nullable
     public static String getText() {
         final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        final ClipData clip = clipboard.getPrimaryClip();
-        if (clip != null && clip.getItemCount() > 0) {
-            final CharSequence text = clip.getItemAt(0).getText();
-            return text != null ? text.toString() : null;
+        if (clipboard != null && clipboard.hasPrimaryClip()) {
+            final ClipData clip = clipboard.getPrimaryClip();
+            if (clip != null && clip.getItemCount() > 0) {
+                final CharSequence text = clip.getItemAt(0).getText();
+                return text != null ? text.toString() : null;
+            }
         }
         return null;
     }
