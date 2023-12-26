@@ -275,12 +275,15 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         if (bounds.getLatitudeSpan() == 0 && bounds.getLongitudeSpan() == 0) {
             mMap.animator().animateTo(new GeoPoint(bounds.getMaxLatitude(), bounds.getMaxLongitude()));
         } else {
+            // add some margin to not cut-off items at the edge
+            // Google Maps does this implicitly, so we need to add it here map-specific
+            final BoundingBox extendedBounds = bounds.extendMargin(1.1f);
             if (mMap.getWidth() == 0 || mMap.getHeight() == 0) {
                 //See Bug #14948: w/o map width/height the bounds can't be calculated
-                // -> postphone animation to later on UI thread (where map width/height will be set)
-                mMap.post(() -> mMap.animator().animateTo(bounds));
+                // -> postpone animation to later on UI thread (where map width/height will be set)
+                mMap.post(() -> mMap.animator().animateTo(extendedBounds));
             } else {
-                mMap.animator().animateTo(bounds);
+                mMap.animator().animateTo(extendedBounds);
             }
         }
     }
