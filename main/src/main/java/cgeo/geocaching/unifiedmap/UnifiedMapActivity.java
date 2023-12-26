@@ -387,6 +387,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 mapFragment.setZoom(mapState.zoomLevel);
             }, 1000);
         }
+        // both maps have invalid values for bounding box in the beginning, so need to delay counting a bit
+        ActivityMixin.postDelayed(this::updateCacheCountSubtitle, 2000);
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
