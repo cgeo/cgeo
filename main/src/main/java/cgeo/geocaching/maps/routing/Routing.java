@@ -98,7 +98,7 @@ public final class Routing {
         final Intent intent = new Intent();
         if (Settings.useInternalRouting()) {
             routingServiceConnection = new InternalServiceConnection(SERVICE_CONNECTED_CALLBACK);
-            intent.setClassName("cgeo.geocaching", "cgeo.geocaching.brouter.InternalRoutingService");
+            intent.setClassName(CgeoApplication.getInstance().getPackageName(), "cgeo.geocaching.brouter.InternalRoutingService");
         } else {
             routingServiceConnection = new BRouterServiceConnection(SERVICE_CONNECTED_CALLBACK);
             intent.setClassName("btools.routingapp", "btools.routingapp.BRouterService");
