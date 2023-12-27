@@ -1,6 +1,7 @@
 ##
 - Oplossing: Crash bij weergave meldingsstip
 - Oplossing: Onnodige READ_EXTERNAL_STORAGE machtiging werd opgevraagd op nieuwere Android versies
+- Oplossing: Trackable logsoort standaard selectie
 
 ##
 - Oplossing: Trackables ontbreken in cache inventaris (website wijziging)
