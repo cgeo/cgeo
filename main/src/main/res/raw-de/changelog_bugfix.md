@@ -1,6 +1,7 @@
 ##
 - Fix: Crash on displaying notification dot
 - Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
+- Fix: Trackable logtype default selection
 
 ##
 - Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
