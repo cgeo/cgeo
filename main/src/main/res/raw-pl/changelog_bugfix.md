@@ -1,6 +1,7 @@
 ##
 - Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
-- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
+- Poprawka: Niepotrzebne żądanie uprawnienia READ_EXTERNAL_STORAGE w nowszych wersjach Androida
+- Poprawka: Domyślny wybór typu dziennika dla przedmiotów podróżnych
 
 ##
 - Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
