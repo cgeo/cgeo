@@ -20,7 +20,8 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
-import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.location.Location;
@@ -122,7 +123,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             history.rememberTrailPosition(coordinates);
             mapView.setCoordinates(coordinates);
 
-            if (mapRotation == MAPROTATION_AUTO) {
+            if (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE) {
                 if (null != lastBearingCoordinates) {
                     final GoogleMap map = mapRef.get();
                     if (null != map) {

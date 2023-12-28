@@ -63,6 +63,8 @@ import org.oscim.scalebar.MapScaleBar;
 import org.oscim.scalebar.MapScaleBarLayer;
 import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.tiling.TileSource;
+import org.oscim.utils.animation.Easing;
+import static org.oscim.map.Animator.ANIM_ROTATE;
 
 public class MapsforgeVtmFragment extends AbstractMapFragment {
 
@@ -322,7 +324,12 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         final float adjustedBearing = AngleUtils.normalize(360 - bearing); // VTM uses opposite way of calculating bearing compared to GM
         final MapPosition pos = mMap.getMapPosition();
         pos.setBearing(adjustedBearing);
-        mMap.setMapPosition(pos);
+        final float bearingDelta = Math.abs(AngleUtils.difference(360 - pos.bearing, bearing));
+        if (bearingDelta > 10.f) {
+            mMap.animator().animateTo(5000, pos, Easing.Type.QUAD_INOUT, ANIM_ROTATE);
+        } else {
+            mMap.setMapPosition(pos);
+        }
     }
 
     /**

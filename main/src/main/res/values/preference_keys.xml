@@ -413,7 +413,8 @@
     <!-- map => maprotation -->
     <string translatable="false" name="pref_maprotation_off">off</string>
     <string translatable="false" name="pref_maprotation_manual">manual</string>
-    <string translatable="false" name="pref_maprotation_auto">auto</string>
+    <string translatable="false" name="pref_maprotation_auto_lowpower">auto</string>
+    <string translatable="false" name="pref_maprotation_auto_precise">auto_precise</string>
 
     <!-- map => compact icons -->
     <string translatable="false" name="pref_compacticon_off">off</string>

@@ -202,7 +202,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             // check for tap on compass rose, which resets bearing to 0.0
             // only active, if it has been not equal to 0.0 before
             final float bearing = cameraPosition.bearing;
-            if (canDisableAutoRotate && bearing == 0.0f && Settings.getMapRotation() == Settings.MAPROTATION_AUTO) {
+            if (canDisableAutoRotate && bearing == 0.0f && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
                 canDisableAutoRotate = false;
                 final Context context = getContext();
                 Dialogs.advancedOneTimeMessage(context, MAP_AUTOROTATION_DISABLE, context.getString(MAP_AUTOROTATION_DISABLE.messageTitle), context.getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> {

@@ -23,7 +23,8 @@ import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
-import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
@@ -248,8 +249,9 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
                 case MAPROTATION_MANUAL:
                     menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
                     break;
-                case MAPROTATION_AUTO:
-                    menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
+                case MAPROTATION_AUTO_LOWPOWER:
+                case MAPROTATION_AUTO_PRECISE:
+                    menu.findItem(R.id.menu_map_rotation_auto_lowpower).setChecked(true);
                     break;
                 default:
                     break;
