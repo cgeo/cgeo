@@ -23,6 +23,7 @@ More changes:
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
 - New: Long-tap option to connect a cache with its waypoints by lines
+- Change: Show cache/waypoint details in a non-blocking way
 
 ### Детали тайника
 - Изменение: Создано "Переключение разговора" фактическим переключением
@@ -32,3 +33,4 @@ More changes:
 ### Общее
 - Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
 - Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
+- New: Two column-layout for settings in landscape mode
