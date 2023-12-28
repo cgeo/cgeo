@@ -23,6 +23,7 @@ Więcej zmian:
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
+- Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
@@ -32,3 +33,4 @@ Więcej zmian:
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
 - Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
+- Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym
