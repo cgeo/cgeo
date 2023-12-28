@@ -23,6 +23,7 @@ Další změny:
 - Novinka: Zvýraznění stávajících stahování ve správci stahování
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
 - Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
+- Změna: Zobrazení podrobností o kešce/trasovém bodu neblokujícím způsobem
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
@@ -32,3 +33,4 @@ Další změny:
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
 - Změna: Použití tapety jako pozadí již nevyžaduje oprávnění READ_EXTERNAL_STORAGE
+- Novinka: Rozložení dvou sloupců pro nastavení v režimu na šířku
