@@ -968,7 +968,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void clearSheetInfo() {
-        Log.e("clearSheetInfo");
         viewModel.sheetInfo.setValue(null);
     }
 
