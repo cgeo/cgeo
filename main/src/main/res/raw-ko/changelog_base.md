@@ -23,6 +23,7 @@
 - 신규: 다운로드 관리자에서 기존 다운로드 강조 표시
 - 신규: 지점 아이콘에 캐시 찾음 상태 표시
 - 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
+- Change: Show cache/waypoint details in a non-blocking way
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
@@ -32,3 +33,4 @@
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
 - 변경: 배경화면을 배경으로 사용하는 데 더 이상 READ_EXTERNAL_STORAGE 권한이 필요하지 않습니다.
+- New: Two column-layout for settings in landscape mode
