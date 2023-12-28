@@ -68,7 +68,8 @@ import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
-import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
@@ -528,8 +529,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
-
-        if (locationWrapper.needsRepaintForHeading && Settings.getMapRotation() == MAPROTATION_AUTO) {
+        final int mapRotation = Settings.getMapRotation();
+        if (locationWrapper.needsRepaintForHeading && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE)) {
             mapFragment.setBearing(locationWrapper.heading);
         }
 
@@ -618,12 +619,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             case MAPROTATION_MANUAL:
                 menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
                 break;
-            case MAPROTATION_AUTO:
-                menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
+            case MAPROTATION_AUTO_LOWPOWER:
+                menu.findItem(R.id.menu_map_rotation_auto_lowpower).setChecked(true);
+                break;
+            case MAPROTATION_AUTO_PRECISE:
+                menu.findItem(R.id.menu_map_rotation_auto_precise).setChecked(true);
                 break;
             default:
                 break;
         }
+        menu.findItem(R.id.menu_map_rotation_auto_precise).setVisible(true); // UnifiedMap supports high precision auto-rotate
 
         // theming options
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
@@ -673,8 +678,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
             setMapRotation(item, MAPROTATION_MANUAL);
-        } else if (id == R.id.menu_map_rotation_auto) {
-            setMapRotation(item, MAPROTATION_AUTO);
+        } else if (id == R.id.menu_map_rotation_auto_lowpower) {
+            setMapRotation(item, MAPROTATION_AUTO_LOWPOWER);
+        } else if (id == R.id.menu_map_rotation_auto_precise) {
+            setMapRotation(item, MAPROTATION_AUTO_PRECISE);
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapFragment.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());

@@ -100,7 +100,8 @@ public class Settings {
 
     public static final int MAPROTATION_OFF = 0;
     public static final int MAPROTATION_MANUAL = 1;
-    public static final int MAPROTATION_AUTO = 2;
+    public static final int MAPROTATION_AUTO_LOWPOWER = 2; // more power-efficient than #3
+    public static final int MAPROTATION_AUTO_PRECISE = 3;  // more precise than #2
 
     public static final int COMPACTICON_OFF = 0;
     public static final int COMPACTICON_ON = 1;
@@ -822,8 +823,10 @@ public class Settings {
         final String prefValue = getString(R.string.pref_mapRotation, "");
         if (prefValue.equals(getKey(R.string.pref_maprotation_off))) {
             return MAPROTATION_OFF;
-        } else if (prefValue.equals(getKey(R.string.pref_maprotation_auto))) {
-            return MAPROTATION_AUTO;
+        } else if (prefValue.equals(getKey(R.string.pref_maprotation_auto_lowpower))) {
+            return MAPROTATION_AUTO_LOWPOWER;
+        } else if (prefValue.equals(getKey(R.string.pref_maprotation_auto_precise))) {
+            return MAPROTATION_AUTO_PRECISE;
         }
         return MAPROTATION_MANUAL;
     }
@@ -836,8 +839,11 @@ public class Settings {
             case MAPROTATION_MANUAL:
                 putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_manual));
                 break;
-            case MAPROTATION_AUTO:
-                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_auto));
+            case MAPROTATION_AUTO_LOWPOWER:
+                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_auto_lowpower));
+                break;
+            case MAPROTATION_AUTO_PRECISE:
+                putString(R.string.pref_mapRotation, getKey(R.string.pref_maprotation_auto_precise));
                 break;
             default:
                 // do nothing except satisfy static code analysis

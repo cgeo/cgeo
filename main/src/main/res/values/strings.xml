@@ -2657,6 +2657,8 @@
     <string name="switch_on">On</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automatic</string>
+    <string name="switch_auto_lowpower">Automatic (low power)</string>
+    <string name="switch_auto_precise">Automatic (precise)</string>
     <string name="switch_default">(default)</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>

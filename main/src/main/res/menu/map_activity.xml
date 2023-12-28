@@ -97,8 +97,12 @@
                     android:id="@+id/menu_map_rotation_manual"
                     android:title="@string/switch_manual" />
                 <item
-                    android:id="@+id/menu_map_rotation_auto"
-                    android:title="@string/switch_auto" />
+                    android:id="@+id/menu_map_rotation_auto_lowpower"
+                    android:title="@string/switch_auto_lowpower" />
+                <item
+                    android:id="@+id/menu_map_rotation_auto_precise"
+                    android:title="@string/switch_auto_precise"
+                    android:visible="false"/>
             </group>
         </menu>
     </item>

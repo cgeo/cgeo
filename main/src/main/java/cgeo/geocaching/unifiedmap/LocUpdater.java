@@ -19,12 +19,13 @@ public class LocUpdater extends GeoDirHandler {
 
     // minimum time in milliseconds between position overlay updates
     private static final long MIN_UPDATE_INTERVAL = 500;
-    private static final long MIN_UPDATE_INTERVAL_AUTOROTATION = 200;
+    private static final long MIN_UPDATE_INTERVAL_PRECISE_AUTOROTATION = 80;
+    private static final float MAX_SPEED_PRECISE_AUTOROTATION = 5000f / 60f / 60f; // 5 km/h
     private long timeLastPositionOverlayCalculation = 0;
     // minimum change of heading in grad for position overlay update
-    private static final float MIN_HEADING_DELTA = 15f;
+    private static final float MIN_HEADING_DELTA = 10f;
     // higher accuracy when rotating map by compass orientation
-    private static final float MIN_HEADING_DELTA_AUTOROTATION = 1f;
+    private static final float MIN_HEADING_DELTA_PRECISE_AUTOROTATION = 1f;
     // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
     private static final float MIN_LOCATION_DELTA = 0.01f;
 
@@ -51,11 +52,11 @@ public class LocUpdater extends GeoDirHandler {
      */
     void repaintPositionOverlay() {
         final long currentTimeMillis = System.currentTimeMillis();
-        final boolean usesAutorotation = Settings.getMapRotation() == Settings.MAPROTATION_AUTO;
-        if (currentTimeMillis > (timeLastPositionOverlayCalculation + (usesAutorotation ? MIN_UPDATE_INTERVAL_AUTOROTATION : MIN_UPDATE_INTERVAL))) {
+        final boolean usesPreciseAutorotation = Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE && (!currentLocation.hasSpeed() || currentLocation.getSpeed() <= MAX_SPEED_PRECISE_AUTOROTATION);
+        if (currentTimeMillis > (timeLastPositionOverlayCalculation + (usesPreciseAutorotation ? MIN_UPDATE_INTERVAL_PRECISE_AUTOROTATION : MIN_UPDATE_INTERVAL))) {
             timeLastPositionOverlayCalculation = currentTimeMillis;
             final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy(viewModel);
-            final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel, usesAutorotation);
+            final boolean needsRepaintForHeading = needsRepaintForHeading(viewModel, usesPreciseAutorotation);
 
             if (needsRepaintForDistanceOrAccuracy) {
                 final PositionHistory ph = viewModel.positionHistory.getValue();
@@ -70,12 +71,12 @@ public class LocUpdater extends GeoDirHandler {
         }
     }
 
-    private boolean needsRepaintForHeading(final UnifiedMapViewModel viewModel, final boolean usesAutorotation) {
+    private boolean needsRepaintForHeading(final UnifiedMapViewModel viewModel, final boolean usesPreciseAutorotation) {
         final LocationWrapper locationWrapper = viewModel.location.getValue();
         if (locationWrapper == null) {
             return true;
         }
-        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > (usesAutorotation ? MIN_HEADING_DELTA_AUTOROTATION : MIN_HEADING_DELTA);
+        return Math.abs(AngleUtils.difference(currentHeading, locationWrapper.heading)) > (usesPreciseAutorotation ? MIN_HEADING_DELTA_PRECISE_AUTOROTATION : MIN_HEADING_DELTA);
     }
 
     private boolean needsRepaintForDistanceOrAccuracy(final UnifiedMapViewModel viewModel) {
