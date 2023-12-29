@@ -870,6 +870,8 @@
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Waypoint visitati semi-trasparenti</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Segna i waypoint visitati con sfondo semi trasparente</string>
     <string name="init_brouterThreshold">Calcola percorso</string>
     <string name="init_brouterThreshold_description">Distanza massima fino alla quale il routing offline calcolerà un percorso.</string>
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
