@@ -25,7 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@android:color/transparent"
             android:padding="1dp"
-            android:visibility="gone"
+            android:visibility="visible"
             tools:visibility="visible"/>
 
         <RelativeLayout

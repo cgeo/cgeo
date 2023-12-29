@@ -367,17 +367,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         } else {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
-                if (p.first == null) {
+                if (p.imageData == null) {
                     binding.imageFull.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
                     binding.imageFull.setRotation(0);
                 } else {
-                    binding.imageFull.setImageDrawable(p.first);
+                    binding.imageFull.setImageDrawable(p.imageData);
                     ImageUtils.getImageOrientation(currentImage.getUri()).applyToView(binding.imageFull);
                 }
                 binding.imageProgressBar.setVisibility(View.GONE);
 
-                final int bmHeight = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getHeight();
-                final int bmWidth = p.first == null || p.first.getBitmap() == null ? -1 : p.first.getBitmap().getWidth();
+                final int bmHeight = p.imageData == null || p.imageData.getBitmap() == null ? -1 : p.imageData.getBitmap().getHeight();
+                final int bmWidth = p.imageData == null || p.imageData.getBitmap() == null ? -1 : p.imageData.getBitmap().getWidth();
 
                 //enhance description with metadata
                 final List<CharSequence> imageInfosNew = new ArrayList<>();
@@ -388,13 +388,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     imageInfosNew.add(LocalizationUtils.getString(R.string.imageview_error, bmWidth, bmHeight));
                 }
 
-                final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
+                final Geopoint gp = MetadataUtils.getFirstGeopoint(p.metadata);
                 if (gp != null) {
                     final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
                     imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_geopoint) + ":</b> <i>" + gpAsHtml + "</i>"));
                 }
 
-                final String comment = MetadataUtils.getComment(p.second);
+                final String comment = MetadataUtils.getComment(p.metadata);
                 if (!StringUtils.isBlank(comment)) {
                     imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + comment + "</i>"));
                 }

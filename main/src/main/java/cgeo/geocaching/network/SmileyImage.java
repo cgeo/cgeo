@@ -7,9 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.widget.TextView;
 
-import com.drew.metadata.Metadata;
 import io.reactivex.rxjava3.core.Observable;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Specialized image class for fetching and displaying smileys in the log book.
@@ -21,15 +19,14 @@ public class SmileyImage extends HtmlImage {
     }
 
     @Override
-    protected ImmutableTriple<BitmapDrawable, Metadata, Boolean> scaleImage(final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult) {
-        final Bitmap bitmap = loadResult.left;
+    protected BitmapDrawable scaleImage(final Bitmap bitmap) {
         final TextView view = viewRef.get();
         if (bitmap == null || view == null) {
-            return ImmutableTriple.of(null, null, loadResult.right);
+            return null;
         }
         final BitmapDrawable drawable = new BitmapDrawable(view.getResources(), bitmap);
         drawable.setBounds(ImageUtils.scaleImageToLineHeight(drawable, view));
-        return ImmutableTriple.of(drawable, null, loadResult.right);
+        return drawable;
     }
 
     @Override

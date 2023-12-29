@@ -3,9 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.functions.Action1;
 
-import android.graphics.drawable.BitmapDrawable;
-import android.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.drew.metadata.Metadata;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -26,8 +22,8 @@ public class ImageDataMemoryCache {
     private String htmlImageCode;
 
     private final Object imageCacheMutex = new Object();
-    private final LeastRecentlyUsedMap<String, Pair<BitmapDrawable, Metadata>> imageCache;
-    private final Map<String, List<Action1<Pair<BitmapDrawable, Metadata>>>> imageCacheListeners = new HashMap<>();
+    private final LeastRecentlyUsedMap<String, HtmlImage.ImageData> imageCache;
+    private final Map<String, List<Action1<HtmlImage.ImageData>>> imageCacheListeners = new HashMap<>();
     private final CompositeDisposable imageCacheDisposable = new CompositeDisposable();
 
     public ImageDataMemoryCache(final int cacheSize) {
@@ -43,11 +39,11 @@ public class ImageDataMemoryCache {
         this.htmlImageCode = htmlImageCode == null ? HtmlImage.SHARED : htmlImageCode;
     }
 
-    public void loadImage(final String imageUrl, final Action1<Pair<BitmapDrawable, Metadata>> action) {
+    public void loadImage(final String imageUrl, final Action1<HtmlImage.ImageData> action) {
         loadImage(imageUrl, action, null);
     }
 
-    public void loadImage(final String imageUrl, final Action1<Pair<BitmapDrawable, Metadata>> action, final Runnable actionOnCacheMiss) {
+    public void loadImage(final String imageUrl, final Action1<HtmlImage.ImageData> action, final Runnable actionOnCacheMiss) {
         synchronized (imageCacheMutex) {
             if (imageCache.containsKey(imageUrl)) {
                 action.call(imageCache.get(imageUrl));
@@ -66,12 +62,11 @@ public class ImageDataMemoryCache {
             imgGetter.setLoadMetadata(true);
             //TODO: continue editing here
             final Disposable disposable = imgGetter.fetchDrawableWithMetadata(imageUrl).observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(img -> {
+                    .subscribe(imgData -> {
                         synchronized (imageCacheMutex) {
-                            final Pair<BitmapDrawable, Metadata> imgData = Pair.create(img.left, img.right);
                             imageCache.put(imageUrl, imgData);
                             if (imageCacheListeners.containsKey(imageUrl)) {
-                                for (Action1<Pair<BitmapDrawable, Metadata>> a : imageCacheListeners.get(imageUrl)) {
+                                for (Action1<HtmlImage.ImageData> a : imageCacheListeners.get(imageUrl)) {
                                     a.call(imgData);
                                 }
                             }

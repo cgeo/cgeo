@@ -5,14 +5,15 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.ImageeditActivityBinding;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.ImageActivityHelper;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.ViewOrientation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,11 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class ImageEditActivity extends AbstractActionBarActivity {
+
+    private static final int SELECT_IMAGE = 101;
+
+    private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
+
     private ImageeditActivityBinding binding;
 
     private final TextSpinner<Integer> imageScale = new TextSpinner<>();
@@ -42,6 +48,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
 
     private static final String SAVED_STATE_IMAGE = "cgeo.geocaching.saved_state_image";
     private static final String SAVED_STATE_ORIGINAL_IMAGE_URI = "cgeo.geocaching.saved_state_original_image_uri";
+    private static final String SAVED_STATE_ORIGINAL_LOCAL_IMAGE_URI = "cgeo.geocaching.saved_state_original_local_image_uri";
     private static final String SAVED_STATE_IMAGE_INDEX = "cgeo.geocaching.saved_state_image_index";
     private static final String SAVED_STATE_IMAGE_SCALE = "cgeo.geocaching.saved_state_image_scale";
     private static final String SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE = "cgeo.geocaching.saved_state_max_image_upload_size";
@@ -50,6 +57,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_SAVED_IMAGE_ORIENTATION = "cgeo.geocaching.saved_state_saved_image_orientation";
 
     private Uri originalImageUri;
+    private Uri originalLocalUri;
     private Image image;
     private ViewOrientation imageOrientation;
     private ImmutablePair<Integer, Integer> imageSize;
@@ -58,6 +66,14 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private long maxImageUploadSize;
 
     @Nullable private String geocode;
+
+    public static void openImageEdit(final Activity activity, final Image image, final int imageIndex, final String geocode) {
+        final Intent selectImageIntent = new Intent(activity, ImageEditActivity.class);
+        selectImageIntent.putExtra(Intents.EXTRA_IMAGE, image);
+        selectImageIntent.putExtra(Intents.EXTRA_INDEX, imageIndex);
+        selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        activity.startActivityForResult(selectImageIntent, SELECT_IMAGE);
+    }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -76,6 +92,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         if (extras != null) {
             image = extras.getParcelable(Intents.EXTRA_IMAGE);
             originalImageUri = image == null ? null : image.uri;
+            originalLocalUri = UriUtils.isLocalUri(originalImageUri) ? originalImageUri : null;
             imageIndex = extras.getInt(Intents.EXTRA_INDEX, -1);
             maxImageUploadSize = extras.getLong(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE);
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
@@ -87,6 +104,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         if (savedInstanceState != null) {
             image = savedInstanceState.getParcelable(SAVED_STATE_IMAGE);
             originalImageUri = savedInstanceState.getParcelable(SAVED_STATE_ORIGINAL_IMAGE_URI);
+            originalLocalUri = savedInstanceState.getParcelable(SAVED_STATE_ORIGINAL_LOCAL_IMAGE_URI);
             imageIndex = savedInstanceState.getInt(SAVED_STATE_IMAGE_INDEX, -1);
             imageScale.set(savedInstanceState.getInt(SAVED_STATE_IMAGE_SCALE));
             maxImageUploadSize = savedInstanceState.getLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE);
@@ -103,6 +121,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         } else {
             imageScale.set(image.targetScale);
         }
+        imageCache.setCode(geocode);
 
         binding.imageRotate.setOnClickListener(view -> rotate90Clockwise());
         binding.imageFlip.setOnClickListener(view -> flipHorizontal());
@@ -119,6 +138,12 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         }
 
         loadImage();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        imageCache.clear();
     }
 
     @Override
@@ -148,6 +173,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         syncEditTexts();
         outState.putParcelable(SAVED_STATE_IMAGE, image);
         outState.putParcelable(SAVED_STATE_ORIGINAL_IMAGE_URI, originalImageUri);
+        outState.putParcelable(SAVED_STATE_ORIGINAL_LOCAL_IMAGE_URI, originalLocalUri);
         outState.putInt(SAVED_STATE_IMAGE_INDEX, imageIndex);
         outState.putInt(SAVED_STATE_IMAGE_SCALE, imageScale.get());
         outState.putLong(SAVED_STATE_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
@@ -165,21 +191,23 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             intent.putExtra(Intents.EXTRA_INDEX, imageIndex);
             //"originalImageUri" is now obsolete. But we never delete originalImage (in case log gets not stored)
             setResult(RESULT_OK, intent);
-            finish();
         } else {
             deleteImageEditCopyIfAny();
             setResult(RESULT_CANCELED);
-            finish();
         }
+
+        //finishAfterTransition();
+        finish();
     }
 
     private void syncEditTexts() {
         image = new Image.Builder()
-                .setUrl(image.uri)
-                .setTitle(binding.caption.getText().toString())
-                .setTargetScale(imageScale.get())
-                .setDescription(binding.description.getText().toString())
-                .build();
+            .setServiceImageId(image.serviceImageId)
+            .setUrl(image.uri)
+            .setTitle(binding.caption.getText().toString())
+            .setTargetScale(imageScale.get())
+            .setDescription(binding.description.getText().toString())
+            .build();
     }
 
     private void ensureImageEditsAreSaved(final boolean ensureEditableCopy) {
@@ -187,12 +215,18 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             return;
         }
         final boolean hasUnsavedChanges = !savedImageOrientation.equals(imageOrientation);
-        final boolean isEditCopy = !imageUriIsOriginal();
+        final boolean isEditCopy = imageWasCopied();
 
         if (!isEditCopy && (hasUnsavedChanges || ensureEditableCopy)) {
             // an edit copy of the image is needed
-            final Image copyImage = ImageUtils.toLocalLogImage(geocode, image.uri);
-            image = (image == null ? Image.NONE : image).buildUpon().setUrl(copyImage.uri).build();
+            if (originalLocalUri == null) {
+                throw new AssertionError("Image edit was possible w/o a local uri for image " + image);
+            }
+            final Image copyImage = ImageUtils.toLocalLogImage(geocode, originalLocalUri);
+            image = (image == null ? Image.NONE : image).buildUpon()
+                .setUrl(copyImage.uri)
+                .setServiceImageId(null) // for an edited image, the serviceId is no longer valid
+                .build();
         }
 
         if (hasUnsavedChanges) {
@@ -220,17 +254,17 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     }
 
     private boolean deleteImageEditCopyIfAny() {
-        if (!imageUriIsOriginal()) {
+        if (imageWasCopied()) {
             return ImageUtils.deleteImage(image.getUri());
         }
         return false;
     }
 
-    private boolean imageUriIsOriginal() {
-        if (originalImageUri == null) {
-            return image == null || image.getUri() == null;
+    private boolean imageWasCopied() {
+        if (originalLocalUri == null || originalImageUri == null) {
+            return false;
         }
-        return image != null && originalImageUri.equals(image.getUri());
+        return image != null && !originalImageUri.equals(image.getUri());
     }
 
     @Override
@@ -245,17 +279,27 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     }
 
     private void loadImage() {
-        ImageActivityHelper.displayImageAsync(image, binding.imagePreview, false, iv -> {
-            imageOrientation.applyToView(iv);
+        enableImageEditActions(true);
+        imageCache.loadImage(image.getUrl(), p -> {
+            binding.imagePreview.setImageDrawable(p.imageData);
+            imageOrientation.applyToView(binding.imagePreview);
+            if (p.localUri != null) {
+                this.originalLocalUri = p.localUri;
+                enableImageEditActions(true);
+            }
         });
+//        ImageActivityHelper.displayImageAsync(image, binding.imagePreview, false, iv -> {
+//            imageOrientation.applyToView(iv);
+//        });
         imageSize = ImageUtils.getImageSize(image.getUri());
         updateScaleValueDisplay();
     }
 
     private void enableImageEditActions(final boolean enable) {
-        binding.imageEditExternal.setEnabled(enable);
-        binding.imageRotate.setEnabled(enable);
-        binding.imageFlip.setEnabled(enable);
+        final boolean imageEditPossible = originalLocalUri != null;
+        binding.imageEditExternal.setEnabled(imageEditPossible && enable);
+        binding.imageRotate.setEnabled(imageEditPossible && enable);
+        binding.imageFlip.setEnabled(imageEditPossible && enable);
     }
 
     private void updateScaleValueDisplay() {
