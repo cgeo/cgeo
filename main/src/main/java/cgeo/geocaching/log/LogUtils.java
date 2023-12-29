@@ -1,6 +1,5 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.ImageResult;
@@ -11,20 +10,14 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
-import cgeo.geocaching.utils.workertask.WorkerTask;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.core.app.ComponentActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,12 +34,12 @@ import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
-@TargetApi(24)
 public final class LogUtils {
 
     private LogUtils() {
         //no instance
     }
+
 
     /** get title for a log image in the list */
     public static String getLogImageTitle(final Image image, final int imagePos, final int imageCount) {
@@ -72,48 +65,8 @@ public final class LogUtils {
         LogCacheActivity.startForEdit(activity, cache.getGeocode(), entry);
     }
 
-    public static void editLog(final ComponentActivity activity, final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<LogResult> postExecute) {
-        if (!canEditLog(cache, newEntry)) {
-            ActivityMixin.showToast(activity, "Can't edit log");
-            return;
-        }
-
-        WorkerTask.<Void, String, LogResult>of(activity, () -> (input, progress, isCancelled) -> editLogTaskLogic(cache, oldEntry, newEntry, progress))
-            .addFeature(ProgressDialogFeature.of(activity).setTitle("Editing").setInitialMessage("Editing log"))
-            .addResultListener(result -> {
-                SimpleDialog.ofContext(activity).setTitle(TextParam.text("Edit result: " + result.isOk()))
-                    .setMessage(TextParam.text("Edit result: " + result)).show(() -> {
-                        if (postExecute != null) {
-                            postExecute.accept(result);
-                        }
-                    });
-            })
-            .start();
-    }
-
-
-    public static void deleteLog(final ComponentActivity activity, final Geocache cache, final LogEntry entry) {
-        if (!canDeleteLog(cache, entry)) {
-            ActivityMixin.showToast(activity, "Can't delete log");
-            return;
-        }
-        SimpleDialog.ofContext(activity)
-            .setTitle(TextParam.text("Delete log"))
-            .setMessage(TextParam.text("Really delete log '" + entry.log + "' of cache '" + cache.getGeocode() + "'?"))
-            .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
-            .confirm(() -> {
-                WorkerTask.ofSimple(activity, () -> deleteLogTaskLogic(cache, entry))
-                    .addFeature(ProgressDialogFeature.of(activity).setTitle("Deleting").setInitialMessage("Deleting log"))
-                    .addResultListener(result -> {
-                        SimpleDialog.ofContext(activity).setTitle(TextParam.text("Delete result: " + result.isOk()))
-                            .setMessage(TextParam.text("Delete result: " + result)).show();
-                    })
-                    .start();
-            });
-    }
-
     @WorkerThread
-    private static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
+    static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
         //Upload changed log entry itself
         progress.accept("1: send changed log");
@@ -188,7 +141,7 @@ public final class LogUtils {
     }
 
     @WorkerThread
-    private static LogResult deleteLogTaskLogic(final Geocache cache, final LogEntry logEntry) {
+    static LogResult deleteLogTaskLogic(final Geocache cache, final LogEntry logEntry) {
         final LogResult result = cache.getLoggingManager().deleteLog(logEntry);
         if (!result.isOk()) {
             return result;
@@ -251,7 +204,7 @@ public final class LogUtils {
         int imgPos = 0;
         int imgCount = newImages.size();
         for (Image newImg : newImages) {
-            final Image oldImg = oldImageMap.get(newImg.serviceImageId);
+            final Image oldImg = oldImageMap.remove(newImg.serviceImageId);
             final String newTitle = getLogImageTitle(newImg, imgPos, imgCount);
 
             if (newImg.serviceImageId == null || oldImg == null) {
@@ -272,7 +225,11 @@ public final class LogUtils {
                 //Existing image with changed properties -> edit
                 progress.accept("Image " + (imgPos + 1) + "/" + imgCount + ": edit properties");
                 result = loggingManager.editLogImage(logId, newImg.serviceImageId, getLogImageTitle(newImg, imgPos, imgCount), newImg.getDescription());
-                oldImageMap.remove(newImg.serviceImageId);
+                adaptedImageList.add(newImg.buildUpon()
+                    .setTitle(newTitle)
+                    .build());
+            } else {
+                //image unchanged
                 adaptedImageList.add(newImg.buildUpon()
                     .setTitle(newTitle)
                     .build());
@@ -305,6 +262,4 @@ public final class LogUtils {
     private static boolean imagePropertiesEqual(final Image oldImg, final Image newImg, final String newTitle) {
         return Objects.equals(oldImg.title, newTitle) && Objects.equals(oldImg.getDescription(), newImg.getDescription());
     }
-
-
 }
