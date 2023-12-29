@@ -1,7 +1,7 @@
 ##
-- Fix: Crash on displaying notification dot
-- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
-- Fix: Trackable logtype default selection
+- Corretto: crash alla visualizzazione del punto di notifica
+- Corretto: permesso READ_EXTERNAL_STORAGE richiesto sulle versioni più recenti di Android
+- Corretto: valore predefinito per il logtype Trackable
 
 ##
 - Corretto: Trackables mancanti nell'inventario del cache (modifica del sito)
