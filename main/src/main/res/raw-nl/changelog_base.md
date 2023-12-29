@@ -23,7 +23,7 @@ Meer wijzigingen:
 - Nieuw: Markeer bestaande downloads in downloadbeheer
 - Nieuw: Toon cache gevonden status op waypoint iconen
 - Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
-- Change: Show cache/waypoint details in a non-blocking way
+- Wijziging: Toon cache/waypoint details op een niet-blokkerende manier
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
@@ -33,4 +33,4 @@ Meer wijzigingen:
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
 - Wijziging: het gebruik van wallpaper als achtergrond vereist niet langer READ_EXTERNAL_STORAGE toestemming
-- New: Two column-layout for settings in landscape mode
+- Nieuw: Twee kolom-indeling voor instellingen in liggende modus
