@@ -23,14 +23,14 @@ Altre modifiche:
 - Nuovo: Evidenzia i download in corso nel gestore download
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
 - Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
-- Change: Show cache/waypoint details in a non-blocking way
+- Cambio: Mostra dettagli cache/waypoint in modo non bloccante
 
 ### Dettagli del cache
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore
-- Change: Increased maximum log length for geocaching.com
-- Fix: Cannot upload longer personal notes on opencaching sites
+- Cambio: aumento della lunghezza massima del log per geocaching.com
+- Corretto: non è possibile caricare note personali più lunghe sui siti opencaching
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
 - Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
-- New: Two column-layout for settings in landscape mode
+- Nuovo: layout a due colonne per le impostazioni in modalità orizzontale
