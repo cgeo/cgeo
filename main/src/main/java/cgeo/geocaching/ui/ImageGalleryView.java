@@ -217,16 +217,16 @@ public class ImageGalleryView extends LinearLayout {
                     return;
                 }
 
-                if (p.first == null) {
+                if (p.imageData == null) {
                     binding.imageImage.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
                     binding.imageImage.setRotation(0);
                 } else {
-                    binding.imageImage.setImageDrawable(p.first);
+                    binding.imageImage.setImageDrawable(p.imageData);
                     ImageUtils.getImageOrientation(currentEntry.image.getUri()).applyToView(binding.imageImage);
                 }
                 binding.imageImage.setVisibility(View.VISIBLE);
 
-                final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
+                final Geopoint gp = MetadataUtils.getFirstGeopoint(p.metadata);
 
                 if (gp != null) {
                     binding.imageGeoOverlay.setVisibility(View.VISIBLE);
