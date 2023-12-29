@@ -58,34 +58,6 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class HtmlImage implements Html.ImageGetter {
 
-    public static class ImageData {
-        public final BitmapDrawable imageData;
-        public final Metadata metadata;
-        public final Uri localUri;
-
-        private ImageData(final BitmapDrawable imageData, final Metadata metadata, final Uri localUri) {
-            this.imageData = imageData;
-            this.metadata = metadata;
-            this.localUri = localUri;
-        }
-    }
-
-    private static class InternalImageData {
-        public final Bitmap bitmap;
-        public BitmapDrawable bitmapDrawable;
-        public final Metadata metadata;
-        public final Uri localUri;
-        public final boolean isFresh;
-
-        InternalImageData(final Bitmap bitmap, final BitmapDrawable bitmapDrawable, final Metadata metadata, final Uri localUri, final boolean isFresh) {
-            this.localUri = localUri;
-            this.bitmap = bitmap;
-            this.isFresh = isFresh;
-            this.metadata = metadata;
-            this.bitmapDrawable = bitmapDrawable;
-        }
-    }
-
     //for testing purposes: setting this value will delay every image get by the given amount of milliseconds
     private static final long TEST_DELAY_TIME_MS = 0;
 
@@ -132,6 +104,35 @@ public class HtmlImage implements Html.ImageGetter {
     private final PublishProcessor<Completable> loading = PublishProcessor.create();
     private final Completable waitForEnd = Completable.merge(loading).cache();
     private final CompositeDisposable disposable = new CompositeDisposable(waitForEnd.subscribe());
+
+    public static class ImageData {
+        public final BitmapDrawable imageData;
+        public final Metadata metadata;
+        public final Uri localUri;
+
+        private ImageData(final BitmapDrawable imageData, final Metadata metadata, final Uri localUri) {
+            this.imageData = imageData;
+            this.metadata = metadata;
+            this.localUri = localUri;
+        }
+    }
+
+    private static class InternalImageData {
+        public final Bitmap bitmap;
+        public BitmapDrawable bitmapDrawable;
+        public final Metadata metadata;
+        public final Uri localUri;
+        public final boolean isFresh;
+
+        InternalImageData(final Bitmap bitmap, final BitmapDrawable bitmapDrawable, final Metadata metadata, final Uri localUri, final boolean isFresh) {
+            this.localUri = localUri;
+            this.bitmap = bitmap;
+            this.isFresh = isFresh;
+            this.metadata = metadata;
+            this.bitmapDrawable = bitmapDrawable;
+        }
+    }
+
 
     /**
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> and <tt>view</tt> values.
