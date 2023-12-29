@@ -129,6 +129,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
+                .dropDistance(ViewUtils.dpToPixelFloat(2)) //see #15029. This setting stops rendering route parts at some point when zooming out
                 .cap(Paint.Cap.BUTT)
                 .fixed(true)
                 .build();
