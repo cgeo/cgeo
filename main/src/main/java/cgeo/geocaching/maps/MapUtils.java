@@ -14,6 +14,8 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
@@ -217,6 +219,7 @@ public class MapUtils {
      */
     public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
+        final float elevation = Routing.getElevation(longClickGeopoint);
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
@@ -224,6 +227,9 @@ public class MapUtils {
                 .setOnCreatePopupMenuListener(menu -> {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
+                    if (!Float.isNaN(elevation)) {
+                        menu.findItem(R.id.menu_elevation).setVisible(true).setTitle(String.format(activity.getString(R.string.menu_elevation_info), Units.getDistanceFromMeters(elevation)));
+                    }
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
@@ -318,6 +324,11 @@ public class MapUtils {
             }
         } else {
             addMenuHelper(activity, menu, baseId + 1, activity.getString(R.string.context_map_add_to_route), routeItem, false, individualRoute, routeUpdater, updateRouteTrackButtonVisibility);
+        }
+
+        final float elevation = Routing.getElevation(routeItem.getPoint());
+        if (!Float.isNaN(elevation)) {
+            menu.addMenuItem(baseId + 100, String.format(activity.getString(R.string.menu_elevation_info), Units.getDistanceFromMeters(elevation)), R.drawable.elevation);
         }
     }
 

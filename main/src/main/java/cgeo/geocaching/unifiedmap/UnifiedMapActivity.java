@@ -541,11 +541,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
 
             if (Settings.showElevation()) {
-                float elevation = Routing.getElevation(new Geopoint(locationWrapper.location));
-                if (Float.isNaN(elevation) && locationWrapper.location.hasAltitude()) {
-                    elevation = (float) locationWrapper.location.getAltitude();
-                }
-                viewModel.elevation.setValue(elevation);
+                viewModel.elevation.setValue(locationWrapper.location.hasAltitude() ? (float) locationWrapper.location.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
             }
         }
     }

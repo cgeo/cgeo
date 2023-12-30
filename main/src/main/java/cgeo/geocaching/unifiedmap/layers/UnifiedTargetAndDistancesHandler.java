@@ -190,13 +190,13 @@ public class UnifiedTargetAndDistancesHandler {
     // elevation handling -------------------------------------------------------------------------------------------
 
     public void drawElevation(final float elevation) {
-        elevationInfo = buildElevationInfo(elevation, Float.NaN);
+        elevationInfo = buildElevationInfo(elevation);
         updateDistanceViews();
     }
 
-    public static Pair<Integer, String> buildElevationInfo(final float elevationFromRouting, final float elevationFromGNSS) {
+    public static Pair<Integer, String> buildElevationInfo(final float elevation) {
         // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
-        final String temp = !Float.isNaN(elevationFromRouting) ? String.format(Locale.getDefault(), "%.1f", elevationFromRouting) : !Float.isNaN(elevationFromGNSS) ? String.format(Locale.getDefault(), "%.1f", elevationFromGNSS) : "";
+        final String temp = !Float.isNaN(elevation) ? String.format(Locale.getDefault(), "%.1f", elevation) : "";
         return new Pair<>(R.drawable.elevation, !StringUtils.isBlank(temp) ? temp + "m" : "");
     }
 

@@ -1282,8 +1282,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                             }
 
                             if (Settings.showElevation()) {
-                                final float elevation = Routing.getElevation(new Geopoint(currentLocation));
-                                map.distanceView.setElevation(elevation, currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
+                                map.distanceView.setElevation(currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
                             }
                         }
                     }
