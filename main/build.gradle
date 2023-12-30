@@ -360,6 +360,8 @@ dependencies {
     // Locus Maps integration
     implementation "com.asamm:locus-api-android:0.9.50"
 
+    // -- Mapsforge / Mapsforge --
+
     // Mapsforge official version
     String mapsforgeSource = 'org.mapsforge'
     String mapsforgeVersion = '0.20.0'
@@ -378,9 +380,22 @@ dependencies {
     implementation "$mapsforgeSource:mapsforge-map-reader:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion"
 
-    // Mapsforge VTM implementation
-    String mapsforgeVTMSource = 'org.mapsforge'
-    String mapsforgeVTMVersion = '0.20.0'
+    // -- Mapsforge / VTM --
+
+    // Mapsforge VTM implementation (official version)
+    //String mapsforgeVTMSource = 'org.mapsforge'
+    //String mapsforgeVTMVersion = '0.20.0'
+
+    // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
+    String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
+    String mapsforgeVTMVersion = '7879086e56' // LineBucket: transparent lines (9d68bdb) + dropDistance (31646b3)
+
+    // Mapsforge VTM Snapshots (created by project itself)
+    // See https://github.com/mapsforge/vtm/blob/master/docs/Integration.md#snapshots
+    // For available snapshots see https://oss.sonatype.org/content/repositories/snapshots/org/mapsforge/
+    //String mapsforgeVTMSource = 'org.mapsforge'
+    //String mapsforgeVTMVersion = 'master-SNAPSHOT'  // the really latest SNAPSHOT of master. Do not use for official builds!
+    //String mapsforgeVTMVersion = 'master-20231222.081736-913'
 
     implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
     implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
