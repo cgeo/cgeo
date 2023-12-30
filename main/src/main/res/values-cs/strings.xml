@@ -2410,6 +2410,8 @@
     <string name="switch_on">Zapnuto</string>
     <string name="switch_manual">Ručně</string>
     <string name="switch_auto">Automatický</string>
+    <string name="switch_auto_lowpower">Automaticky (nízký výkon)</string>
+    <string name="switch_auto_precise">Automaticky (přesný)</string>
     <string name="switch_default">(výchozí)</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>
