@@ -142,7 +142,7 @@ public class OkapiClientTest {
     }
 
     @Test
-    @Ignore
+    @Ignore("This tests needs a working OC account on the CI AVD")
     public void testUploadPersonalNote() {
         final String geoCode = "OCFBC8";
         final Geocache cache = OkapiClient.getCache(geoCode);
