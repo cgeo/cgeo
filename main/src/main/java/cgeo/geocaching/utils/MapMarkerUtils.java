@@ -257,10 +257,6 @@ public final class MapMarkerUtils {
         }
         final int hashcode = hcb.toHashCode();
 
-        if (cache != null && StringUtils.equals(cache.getName(), "Der Hausmeister vom Palast der Republik")) {
-            Log.e("wpt hash=" + hashcode + ", v=" + waypoint.isVisited() + ", cf=" + (cache != null ? cache.isFound() : "---") + " wpt=" + waypoint.getName() + (cache != null ? " (" + cache.getName() + ")" : ""));
-        }
-
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
@@ -334,9 +330,8 @@ public final class MapMarkerUtils {
             addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
         }
         final LayerDrawable ld = buildLayerDrawable(insetsBuilder, 8, 8);
-        ld.mutate(); // @todo: somehow this does NOT mark all included parts as mutated
+        ld.mutate();
         if ((waypoint.isVisited() || (cache != null && cache.isFound())) && Settings.getVisitedWaypointsSemiTransparent()) {
-            Log.e("wpt v=" + waypoint.isVisited() + ", cf=" + (cache != null ? cache.isFound() : "---") + " wpt=" + waypoint.getName() + (cache != null ? " (" + cache.getName() + ")" : ""));
             ld.setAlpha(144);
         }
         return ld;
