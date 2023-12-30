@@ -2344,6 +2344,8 @@
     <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (Energiesparmodus)</string>
+    <string name="switch_auto_precise">Automatisch (präzise)</string>
     <string name="switch_default">(Standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
