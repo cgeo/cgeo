@@ -281,11 +281,17 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
             if (mMap.getWidth() == 0 || mMap.getHeight() == 0) {
                 //See Bug #14948: w/o map width/height the bounds can't be calculated
                 // -> postpone animation to later on UI thread (where map width/height will be set)
-                mMap.post(() -> mMap.animator().animateTo(extendedBounds));
+                mMap.post(() -> zoomToBoundsDirect(extendedBounds));
             } else {
-                mMap.animator().animateTo(extendedBounds);
+                zoomToBoundsDirect(extendedBounds);
             }
         }
+    }
+
+    private void zoomToBoundsDirect(final BoundingBox bounds) {
+        MapPosition mp = mMap.getMapPosition();
+        mp.setByBoundingBox(bounds, mMapView.getWidth(), mMapView.getHeight());
+        mMap.setMapPosition(mp);
     }
 
     @Override
