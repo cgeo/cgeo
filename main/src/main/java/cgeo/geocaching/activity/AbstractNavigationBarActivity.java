@@ -116,9 +116,6 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
 
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
-        // long click event listeners
-        findViewById(MENU_LIST).setOnLongClickListener(view -> onListsLongClicked());
-        findViewById(MENU_SEARCH).setOnLongClickListener(view -> onSearchLongClicked());
         // will be called if c:geo cannot log in
         startLoginIssueHandler();
     }
@@ -255,8 +252,11 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     private void setCustomBNitem() {
-        final MenuItem menu = ((NavigationBarView) binding.activityNavigationBar).getMenu().findItem(MENU_CUSTOM);
+        // remove existing long tap listeners before changing menu
+        findViewById(MENU_LIST).setOnLongClickListener(null);
+        findViewById(MENU_SEARCH).setOnLongClickListener(null);
 
+        final MenuItem menu = ((NavigationBarView) binding.activityNavigationBar).getMenu().findItem(MENU_CUSTOM);
         menu.setVisible(true);
         menu.setEnabled(true);
         final int item = Settings.getCustomBNitem();
@@ -274,6 +274,10 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             menu.setIcon(iitem.iconRes);
             menu.setTitle(iitem.getTitleResId());
         }
+
+        // set long click event listeners
+        findViewById(MENU_LIST).setOnLongClickListener(view -> onListsLongClicked());
+        findViewById(MENU_SEARCH).setOnLongClickListener(view -> onSearchLongClicked());
     }
 
     /**
