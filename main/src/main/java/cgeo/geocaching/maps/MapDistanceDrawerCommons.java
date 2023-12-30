@@ -57,8 +57,8 @@ public class MapDistanceDrawerCommons {
         updateDistanceViews();
     }
 
-    public void drawElevation(final float elevationFromRouting, final float elevationFromGNSS) {
-        elevationInfo = UnifiedTargetAndDistancesHandler.buildElevationInfo(elevationFromRouting, elevationFromGNSS);
+    public void drawElevation(final float elevation) {
+        elevationInfo = UnifiedTargetAndDistancesHandler.buildElevationInfo(elevation);
         updateDistanceViews();
     }
 

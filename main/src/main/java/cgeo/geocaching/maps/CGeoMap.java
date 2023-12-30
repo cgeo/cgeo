@@ -1114,8 +1114,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                             }
 
                             if (Settings.showElevation()) {
-                                final float elevation = Routing.getElevation(new Geopoint(currentLocation));
-                                map.overlayPositionAndScale.setElevation(elevation, currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
+                                map.overlayPositionAndScale.setElevation(currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
                             }
                         } else if (needsRepaintForHeading) {
                             final float mapBearing = map.mapView.getBearing();
