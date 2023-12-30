@@ -318,7 +318,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
 //        tileProvider.getMap().showSpinner(); - should be handled from UnifiedMapActivity instead
         if (mapChanged) {
-
+            final boolean setDefaultCenterAndZoom = !overridePositionAndZoom && mapState == null;
             // map settings popup
             findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
 
@@ -332,8 +332,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             switch (mapType.type) {
                 case UMTT_PlainMap:
                     // restore last saved position and zoom
-                    mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
-                    mapFragment.setCenter(Settings.getUMMapCenter());
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
+                        mapFragment.setCenter(Settings.getUMMapCenter());
+                    }
                     break;
                 case UMTT_TargetGeocode:
                     // load cache, focus map on it, and set it as target
@@ -342,14 +344,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         viewModel.caches.getValue().add(cache);
                         viewModel.caches.notifyDataChanged();
                         loadWaypoints(this, viewModel, mapFragment.getViewport());
-                        mapFragment.setCenter(cache.getCoords());
-                        mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.setCenter(cache.getCoords());
+                            mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
+                        }
                         viewModel.setTarget(cache.getCoords(), cache.getGeocode());
                     }
                     break;
                 case UMTT_TargetCoords:
                     // set given coords as map center
-                    mapFragment.setCenter(mapType.coords);
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.setCenter(mapType.coords);
+                    }
                     viewModel.coordsIndicator.setValue(mapType.coords);
                     break;
                 case UMTT_SearchResult:
@@ -357,7 +363,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
                     addSearchResultByGeocaches(mapType.searchResult);
                     loadWaypoints(this, viewModel, viewport2);
-                    mapFragment.zoomToBounds(viewport2);
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.zoomToBounds(viewport2);
+                    }
                     break;
                 default:
                     // nothing to do
