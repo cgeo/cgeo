@@ -3,6 +3,7 @@ package cgeo.geocaching.utils.workertask;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func3;
 
 import android.annotation.TargetApi;
 
@@ -21,6 +22,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
@@ -54,6 +56,8 @@ public class WorkerTask<I, P, R>  {
 
     private final Scheduler taskScheduler;
     private final Scheduler observerScheduler;
+
+    private long lastStartTimeMillis = 0;
 
     /** A class representing either a progress value or a result value. Helper for Observable creation */
     public static class TaskValue<P, R> {
@@ -123,11 +127,13 @@ public class WorkerTask<I, P, R>  {
     }
 
     /** registers an observer for a result. Task is auto-finished after result is received */
-    public WorkerTask<I, P, R> observeResult(final LifecycleOwner owner, final Consumer<R> observer) {
+    public WorkerTask<I, P, R> observeResult(final LifecycleOwner owner, final Consumer<R> observer, final Consumer<Throwable> error) {
         return observe(owner, event -> {
             if (event.type == WorkerTaskEventType.RESULT) {
                 observer.accept(event.result);
                 event.task.finish();
+            } else if (event.type == WorkerTaskEventType.ERROR && error != null) {
+                error.accept(event.exception);
             }
         });
     }
@@ -216,7 +222,16 @@ public class WorkerTask<I, P, R>  {
         return getOrCreate(globalId, taskSupplier, taskScheduler, observerScheduler);
     }
 
-    /** Adds a feature to this WorkerTask (e.g. {@link ProgressDialogFeature}) */
+    /** Simplified version to create a standard task w/o dealing with JavaRx */
+    public static <I, P, R> WorkerTask<I, P, R> of(@NonNull final String globalId, @NonNull final Func3<I, Consumer<P>, Supplier<Boolean>, R> taskFunction, @Nullable final Scheduler taskScheduler) {
+        return of(globalId, input -> Observable.create(emit -> {
+            final R result = taskFunction.call(input, p -> emit.onNext(TaskValue.progress(p)), emit::isDisposed);
+            emit.onNext(TaskValue.result(result));
+            emit.onComplete();
+        }), taskScheduler, null);
+    }
+
+                                                   /** Adds a feature to this WorkerTask (e.g. {@link ProgressDialogFeature}) */
     public WorkerTask<I, P, R> addFeature(final WorkerTask.TaskFeature<? super I, ? super P, ? super R> feature) {
         synchronized (taskMutex) {
             feature.accept(this);
@@ -258,17 +273,18 @@ public class WorkerTask<I, P, R>  {
             final LambdaObserver<TaskValue<P, R>> lObserver = new LambdaObserver<>(tv -> {
                 synchronized (taskMutex) {
                     if (tv.isResult) {
-                        endAsynchronousRun(tv.result, null, lTaskDisposable[0]);
+                        endAsynchronousRun(tv.result, null, input, lTaskDisposable[0]);
                     } else if (!lTaskDisposable[0].isDisposed()) {
                         postEvent(new WorkerTaskEvent<>(this, WorkerTaskEventType.PROGRESS, null, tv.progress, null, null));
                     }
                 }
             },
-                error -> endAsynchronousRun(null, error, lTaskDisposable[0]),
-                () -> endAsynchronousRun(null, null, lTaskDisposable[0]),
+                error -> endAsynchronousRun(null, error, input, lTaskDisposable[0]),
+                () -> endAsynchronousRun(null, null, input, lTaskDisposable[0]),
                 d -> { });
             lTaskDisposable[0] = lObserver;
             this.taskDisposable = lTaskDisposable[0];
+            this.lastStartTimeMillis = System.currentTimeMillis();
 
             lTaskLogic.subscribeOn(taskScheduler).observeOn(observerScheduler, true).subscribe(lObserver);
 
@@ -306,17 +322,28 @@ public class WorkerTask<I, P, R>  {
     }
 
     @WorkerThread
-    private void endAsynchronousRun(final R result, final Throwable runException, final Disposable lTaskDisposable) {
+    private void endAsynchronousRun(final R result, final Throwable runException, final I input, final Disposable lTaskDisposable) {
         synchronized (taskMutex) {
+
+            final boolean wasCancelled = lTaskDisposable != this.taskDisposable;
+
+            if (Log.isEnabled(Log.LogLevel.INFO) || runException != null) {
+                final String logData = " (input=" + input + ", result=" + result + ", wasCancelled=" + wasCancelled + ", duration=" + (System.currentTimeMillis() - lastStartTimeMillis);
+                if (runException == null) {
+                    Log.i(getLogPraefix(globalId) + "End run" + logData);
+                } else {
+                    Log.w(getLogPraefix(globalId) + "End run with ERROR" + logData, runException);
+                }
+            }
+
             //end the run
             lTaskDisposable.dispose();
-            if (lTaskDisposable != this.taskDisposable) {
+            if (wasCancelled) {
                 //task run was cancelled/restarted inbetween -> don't forward task end events
                 return;
             }
             this.taskDisposable = null;
             if (runException != null) {
-                Log.w(getLogPraefix(globalId) + "Error during execution", runException);
                 //post error result
                 postEvent(new WorkerTaskEvent<>(this, WorkerTaskEventType.ERROR, null, null, null, runException));
             } else {
