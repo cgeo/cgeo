@@ -11,6 +11,8 @@ import androidx.exifinterface.media.ExifInterface;
 
 import java.util.Objects;
 
+import com.drew.metadata.Metadata;
+
 /**
  * Encapsulated an orientation value and helps changing it and applying it to Views.
  * Contains special helpers for ImageViews where this is usually used.
@@ -59,6 +61,10 @@ public class ViewOrientation implements Parcelable, Cloneable {
             default:
                 return new ViewOrientation(0, false);
         }
+    }
+
+    public static ViewOrientation ofMetadata(final Metadata metadata) {
+        return ViewOrientation.ofExif(MetadataUtils.getOrientation(metadata));
     }
 
     /** Writes the orientation value represented by this class to the given exif instance */

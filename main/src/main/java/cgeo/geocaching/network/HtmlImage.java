@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.ImageUtils.ContainerDrawable;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 import cgeo.geocaching.utils.UriUtils;
 
@@ -28,15 +29,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import com.drew.imaging.ImageMetadataReader;
-import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
@@ -106,12 +104,12 @@ public class HtmlImage implements Html.ImageGetter {
     private final CompositeDisposable disposable = new CompositeDisposable(waitForEnd.subscribe());
 
     public static class ImageData {
-        public final BitmapDrawable imageData;
+        public final BitmapDrawable bitmapDrawable;
         public final Metadata metadata;
         public final Uri localUri;
 
-        private ImageData(final BitmapDrawable imageData, final Metadata metadata, final Uri localUri) {
-            this.imageData = imageData;
+        private ImageData(final BitmapDrawable bitmapDrawable, final Metadata metadata, final Uri localUri) {
+            this.bitmapDrawable = bitmapDrawable;
             this.metadata = metadata;
             this.localUri = localUri;
         }
@@ -229,7 +227,7 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
-        return fetchDrawableWithMetadata(url).map(p -> p.imageData == null ? getErrorImage() : p.imageData);
+        return fetchDrawableWithMetadata(url).map(p -> p.bitmapDrawable == null ? getErrorImage() : p.bitmapDrawable);
     }
 
     public Observable<ImageData> fetchDrawableWithMetadata(final String url) {
@@ -508,13 +506,7 @@ public class HtmlImage implements Html.ImageGetter {
                 Log.i("Cannot open file from " + uri + " again for metadata, maybe it doesnt exist");
                 return ImmutableTriple.of(image, null, true);
             }
-            try {
-                metadata = ImageMetadataReader.readMetadata(imageStream);
-            } catch (IOException | ImageProcessingException ie) {
-                Log.w("Problem reading metadata from " + uri, ie);
-            } finally {
-                IOUtils.closeQuietly(imageStream);
-            }
+            metadata = MetadataUtils.readImageMetadata("[HtmlImage]" + uri, imageStream, true);
         }
         return ImmutableTriple.of(image, metadata, freshEnough);
     }

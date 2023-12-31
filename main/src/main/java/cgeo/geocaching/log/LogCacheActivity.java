@@ -256,7 +256,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.originalLogEntry = this.originalLogEntry.buildUpon().setLog(loggingManager.convertLogTextToEditableText(originalLogEntry.log)).build();
         }
 
-        this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize(), loggingManager.isImageCaptionMandatory());
+        this.imageListFragment.init(geocode, loggingManager.getMaxImageUploadSize());
 
         // initialize with default values
         resetValues();

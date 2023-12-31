@@ -2,6 +2,8 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.location.Geopoint;
 
+import androidx.exifinterface.media.ExifInterface;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
@@ -10,6 +12,7 @@ import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
+import com.drew.metadata.MetadataException;
 import com.drew.metadata.eps.EpsDirectory;
 import com.drew.metadata.exif.ExifDirectoryBase;
 import com.drew.metadata.exif.ExifIFD0Directory;
@@ -19,6 +22,7 @@ import com.drew.metadata.jpeg.JpegCommentDirectory;
 import com.drew.metadata.mov.metadata.QuickTimeMetadataDirectory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import static com.drew.metadata.exif.ExifDirectoryBase.TAG_ORIENTATION;
 
 /**
  * Utilitles to access an image's metadata.
@@ -26,6 +30,11 @@ import org.apache.commons.lang3.StringUtils;
  * This class evaloves around class {@link com.drew.metadata.Metadata}
  */
 public final class MetadataUtils {
+
+    private interface SafeSupplier<T> {
+
+        T get() throws MetadataException;
+    }
 
     private MetadataUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -57,10 +66,7 @@ public final class MetadataUtils {
     }
 
     public static Geopoint getFirstGeopoint(final Metadata metadata) {
-        if (metadata == null) {
-            return null;
-        }
-        try {
+        return safeProcess("geopoint", metadata, null, () -> {
             final Collection<GpsDirectory> gpsDirectories = metadata.getDirectoriesOfType(GpsDirectory.class);
             if (gpsDirectories == null) {
                 return null;
@@ -73,19 +79,28 @@ public final class MetadataUtils {
                     return new Geopoint(geoLocation.getLatitude(), geoLocation.getLongitude());
                 }
             }
-        } catch (final Exception e) {
-            Log.i("[MetadataUtils] Problem reading coordinates", e);
-        }
-        return null;
+            return null;
+        });
+    }
+
+    public static int getOrientation(final Metadata metadata) {
+        return safeProcess("orientation", metadata, ExifInterface.ORIENTATION_NORMAL, () -> {
+
+            final Collection<ExifDirectoryBase> exifDirs = metadata.getDirectoriesOfType(ExifDirectoryBase.class);
+            for (ExifDirectoryBase exifDir : exifDirs) {
+                if (exifDir.containsTag(TAG_ORIENTATION)) {
+                    return exifDir.getInt(TAG_ORIENTATION);
+                }
+            }
+
+            return ExifInterface.ORIENTATION_NORMAL;
+        });
     }
 
     public static String getComment(final Metadata metadata) {
-        if (metadata == null) {
-            return null;
-        }
-        final StringBuilder comment = new StringBuilder();
+        return safeProcess("comment", metadata, null, () -> {
+            final StringBuilder comment = new StringBuilder();
 
-        try {
             final Collection<ExifIFD0Directory> exifDirs = metadata.getDirectoriesOfType(ExifIFD0Directory.class);
             for (ExifIFD0Directory dir : exifDirs) {
                 addIf(comment, dir.getString(ExifDirectoryBase.TAG_IMAGE_DESCRIPTION));
@@ -114,11 +129,8 @@ public final class MetadataUtils {
             for (final QuickTimeMetadataDirectory dir : quickDirs) {
                 addIf(comment, dir.getString(QuickTimeMetadataDirectory.TAG_KEYWORDS));
             }
-
-        } catch (final Exception e) {
-            Log.i("[MetadataUtils] Problem reading comments", e);
-        }
-        return comment.toString();
+            return comment.toString();
+        });
     }
 
     private static void addIf(final StringBuilder sb, final String s) {
@@ -127,6 +139,18 @@ public final class MetadataUtils {
                 sb.append(" - ");
             }
             sb.append(s);
+        }
+    }
+
+    private static <T> T safeProcess(final String what, final Metadata metadata, final T defaultValue, final SafeSupplier<T> supplier) {
+        if (metadata == null) {
+            return defaultValue;
+        }
+        try {
+            return supplier.get();
+        } catch (final Exception e) {
+            Log.i("[MetadataUtils] Problem reading '" + what + "'", e);
+            return defaultValue;
         }
     }
 

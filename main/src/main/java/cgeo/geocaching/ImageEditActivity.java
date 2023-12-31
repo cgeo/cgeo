@@ -7,7 +7,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.ImageDataMemoryCache;
+import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
@@ -36,7 +36,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
 
     private static final int SELECT_IMAGE = 101;
 
-    private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
+    private final ImageLoader imageCache = new ImageLoader();
 
     private ImageeditActivityBinding binding;
 
@@ -281,7 +281,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     private void loadImage() {
         enableImageEditActions(true);
         imageCache.loadImage(image.getUrl(), p -> {
-            binding.imagePreview.setImageDrawable(p.imageData);
+            binding.imagePreview.setImageDrawable(p.bitmapDrawable);
             imageOrientation.applyToView(binding.imagePreview);
             if (p.localUri != null) {
                 this.originalLocalUri = p.localUri;

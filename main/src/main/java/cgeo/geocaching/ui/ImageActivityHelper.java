@@ -2,10 +2,7 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.models.Image;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
@@ -15,8 +12,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
-import android.view.View;
-import android.widget.ImageView;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
@@ -262,28 +257,6 @@ public class ImageActivityHelper {
         } else {
             call(intentContextData, result);
         }
-    }
-
-    /**
-     * Helper function to load and scale an image asynchronously into a view
-     */
-    public static void displayImageAsync(final Image image, final ImageView imageView) {
-        displayImageAsync(image, imageView, true, null);
-    }
-
-    public static void displayImageAsync(final Image image, final ImageView imageView, final boolean adjustOrientation, final Action1<ImageView> action) {
-
-        if (image.isEmpty()) {
-            return;
-        }
-        imageView.setVisibility(View.INVISIBLE);
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> ImageUtils.readAndScaleImageToFitDisplay(image.getUri(), adjustOrientation), bitmap -> {
-            imageView.setImageBitmap(bitmap);
-            if (action != null) {
-                action.call(imageView);
-            }
-            imageView.setVisibility(View.VISIBLE);
-        });
     }
 
     private boolean checkBasicResults(final int resultCode) {

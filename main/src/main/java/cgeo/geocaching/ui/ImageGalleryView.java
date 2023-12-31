@@ -12,7 +12,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
@@ -21,7 +20,7 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CategorizedListHelper;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.ImageDataMemoryCache;
+import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MetadataUtils;
@@ -71,7 +70,7 @@ public class ImageGalleryView extends LinearLayout {
     private boolean activityReenterCalled = false;
 
     private ImageActivityHelper imageHelper = null;
-    private final ImageDataMemoryCache imageDataMemoryCache = new ImageDataMemoryCache(2);
+    private final ImageLoader imageLoader = new ImageLoader();
 
     private String geocode;
     private int imageCount = 0;
@@ -197,19 +196,13 @@ public class ImageGalleryView extends LinearLayout {
         final ImageGalleryEntry imgData = viewHolder.entry;
         final Image img = imgData.image;
         setImageTitle(binding, img.getTitle());
-        //setImageLayoutSizes(binding, imageSizeDp);
-        binding.imageDescriptionMarker.setVisibility(img.hasDescription() ? View.VISIBLE : View.GONE);
 
+        binding.imageWrapper.setImagePreload(img);
         if (!img.isImageOrUnknownUri()) {
             binding.imageTitle.setText(TextUtils.concat(binding.imageTitle.getText(), " (" + UriUtils.getMimeFileExtension(img.getUri()) + ")"));
-            binding.imageImage.setImageResource(UriUtils.getMimeTypeIcon(img.getMimeType()));
-            binding.imageImage.setRotation(0);
-            binding.imageImage.setVisibility(View.VISIBLE);
-            binding.imageGeoOverlay.setVisibility(View.GONE);
-            binding.imageProgressBar.setVisibility(View.GONE);
         } else {
 
-            imageDataMemoryCache.loadImage(img.getUrl(), p -> {
+            imageLoader.loadImage(img.getUrl(), p -> {
 
                 final ImageGalleryEntry currentEntry = viewHolder.entry;
                 if (!currentEntry.image.getUrl().equals(img.getUrl())) {
@@ -217,29 +210,13 @@ public class ImageGalleryView extends LinearLayout {
                     return;
                 }
 
-                if (p.imageData == null) {
-                    binding.imageImage.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
-                    binding.imageImage.setRotation(0);
-                } else {
-                    binding.imageImage.setImageDrawable(p.imageData);
-                    ImageUtils.getImageOrientation(currentEntry.image.getUri()).applyToView(binding.imageImage);
-                }
-                binding.imageImage.setVisibility(View.VISIBLE);
+                binding.imageWrapper.setImagePostload(img, p.bitmapDrawable, p.metadata);
 
                 final Geopoint gp = MetadataUtils.getFirstGeopoint(p.metadata);
 
                 if (gp != null) {
-                    binding.imageGeoOverlay.setVisibility(View.VISIBLE);
                     imageCoordMap.put(img.getUrl(), gp);
-                } else {
-                    binding.imageGeoOverlay.setVisibility(View.GONE);
                 }
-                binding.imageProgressBar.setVisibility(View.GONE);
-            }, () -> {
-                binding.imageProgressBar.setVisibility(View.VISIBLE);
-                binding.imageImage.setImageResource(R.drawable.mark_transparent);
-                binding.imageImage.setRotation(0);
-                binding.imageGeoOverlay.setVisibility(View.GONE);
             });
         }
 
@@ -295,7 +272,7 @@ public class ImageGalleryView extends LinearLayout {
     /** (re)sets contextual information for gallery */
     public void setup(final String geocode) {
         this.geocode = geocode;
-        this.imageDataMemoryCache.setCode(this.geocode);
+        this.imageLoader.setCode(this.geocode);
     }
 
     /** gets total number of images currently displayed in this gallery */
@@ -473,12 +450,12 @@ public class ImageGalleryView extends LinearLayout {
         if (vh == null || vh.imageBinding == null) {
             return null;
         }
-        return vh.imageBinding.imageImage;
+        return vh.imageBinding.imageWrapper.getImageView();
     }
 
     /** clears this gallery */
     public void clear() {
-        this.imageDataMemoryCache.clear();
+        this.imageLoader.clear();
         this.adapter.clearList();
         this.categorizedImageListHelper.clear();
         this.imageCount = 0;
@@ -507,7 +484,7 @@ public class ImageGalleryView extends LinearLayout {
         super.onDetachedFromWindow();
 
         //clear image cache
-        this.imageDataMemoryCache.clear();
+        this.imageLoader.clear();
     }
 
     /** Important: include this in your activity's "onActivityReenter" method.

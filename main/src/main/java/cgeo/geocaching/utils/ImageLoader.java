@@ -14,10 +14,8 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-/**
- * Helper class for retrieving of image data and keeping it in-memory
- */
-public class ImageDataMemoryCache {
+/** Helper class to retrieve image data and cache it in-memory. Handles local and remote image uris */
+public class ImageLoader {
 
     private String htmlImageCode;
 
@@ -26,11 +24,16 @@ public class ImageDataMemoryCache {
     private final Map<String, List<Action1<HtmlImage.ImageData>>> imageCacheListeners = new HashMap<>();
     private final CompositeDisposable imageCacheDisposable = new CompositeDisposable();
 
-    public ImageDataMemoryCache(final int cacheSize) {
+    public ImageLoader() {
+        this(2);
+    }
+
+    public ImageLoader(final int cacheSize) {
         this.htmlImageCode = HtmlImage.SHARED;
         this.imageCache = new LeastRecentlyUsedMap.LruCache<>(cacheSize);
     }
 
+    /** set the code BEFORE starting to use the imageloader */
     public void setCode(final String htmlImageCode) {
         if (Objects.equals(htmlImageCode, this.htmlImageCode)) {
             return;
@@ -60,7 +63,7 @@ public class ImageDataMemoryCache {
             imageCacheListeners.put(imageUrl, new ArrayList<>(Collections.singletonList(action)));
             final HtmlImage imgGetter = new HtmlImage(this.htmlImageCode, true, false, false);
             imgGetter.setLoadMetadata(true);
-            //TODO: continue editing here
+
             final Disposable disposable = imgGetter.fetchDrawableWithMetadata(imageUrl).observeOn(AndroidSchedulers.mainThread())
                     .subscribe(imgData -> {
                         synchronized (imageCacheMutex) {
