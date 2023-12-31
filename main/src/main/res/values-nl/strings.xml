@@ -2350,6 +2350,8 @@
     <string name="switch_on">Aan</string>
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (minder accuverbruik)</string>
+    <string name="switch_auto_precise">Automatisch (nauwkeurig)</string>
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
