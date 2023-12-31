@@ -43,7 +43,7 @@ public final class DefaultMap {
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
         if (Settings.useUnifiedMap()) {
             Log.e("Launching UnifiedMap in waypoint mode (1)");
-            new UnifiedMapType(waypoint.getGeocode()).launchMap(fromActivity);
+            new UnifiedMapType(waypoint).launchMap(fromActivity);
         } else {
             new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
         }
@@ -52,7 +52,7 @@ public final class DefaultMap {
     public static void startActivityCoords(final Context fromActivity, final Waypoint waypoint) {
         if (Settings.useUnifiedMap()) {
             Log.e("Launching UnifiedMap in waypoint mode (2)");
-            new UnifiedMapType(waypoint.getGeocode()).launchMap(fromActivity);
+            new UnifiedMapType(waypoint).launchMap(fromActivity);
         } else {
             startActivityCoords(fromActivity, getDefaultMapClass(), waypoint);
         }

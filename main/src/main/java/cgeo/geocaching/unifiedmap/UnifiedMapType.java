@@ -3,12 +3,15 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Waypoint;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 
 public class UnifiedMapType implements Parcelable {
 
@@ -29,6 +32,7 @@ public class UnifiedMapType implements Parcelable {
     public SearchResult searchResult = null;
     public String title = null;
     public int fromList = 0;
+    public int waypointId = 0;
     public GeocacheFilterContext filterContext = new GeocacheFilterContext(LIVE);
     public boolean followMyLocation = false;
     // reminder: add additional fields to parcelable methods below
@@ -43,6 +47,12 @@ public class UnifiedMapType implements Parcelable {
     public UnifiedMapType(final String geocode) {
         type = UnifiedMapTypeType.UMTT_TargetGeocode;
         target = geocode;
+    }
+
+    /** set waypoint as target */
+    public UnifiedMapType(@NonNull final Waypoint waypoint) {
+        this(waypoint.getGeocode());
+        waypointId = waypoint.getId();
     }
 
     /** set coords as target */
@@ -83,6 +93,7 @@ public class UnifiedMapType implements Parcelable {
         fromList = in.readInt();
         filterContext = in.readParcelable(GeocacheFilterContext.class.getClassLoader());
         followMyLocation = (in.readInt() > 0); // readBoolean available from SDK 29 on
+        waypointId = in.readInt();
         // ...
     }
 
@@ -101,6 +112,7 @@ public class UnifiedMapType implements Parcelable {
         dest.writeInt(fromList);
         dest.writeParcelable(filterContext, 0);
         dest.writeInt(followMyLocation ? 1 : 0);
+        dest.writeInt(waypointId);
         // ...
     }
 
