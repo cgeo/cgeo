@@ -2410,6 +2410,8 @@
     <string name="switch_on">Włącz</string>
     <string name="switch_manual">Ręcznie</string>
     <string name="switch_auto">Automatycznie</string>
+    <string name="switch_auto_lowpower">Automatyczne (niska moc)</string>
+    <string name="switch_auto_precise">Automatyczne (precyzja)</string>
     <string name="switch_default">(domyślne)</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
