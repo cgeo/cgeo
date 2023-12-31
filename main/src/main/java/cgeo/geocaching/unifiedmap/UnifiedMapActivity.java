@@ -339,17 +339,29 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     }
                     break;
                 case UMTT_TargetGeocode:
-                    // load cache, focus map on it, and set it as target
-                    final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
+                    // load cache/waypoint, focus map on it, and set it as target
+                    final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
                     if (cache != null && cache.getCoords() != null) {
                         viewModel.caches.getValue().add(cache);
                         viewModel.caches.notifyDataChanged();
                         loadWaypoints(this, viewModel, mapFragment.getViewport());
+                        if (mapType.waypointId <= 0) {
+                            if (setDefaultCenterAndZoom) {
+                                mapFragment.setCenter(cache.getCoords());
+                            }
+                            viewModel.setTarget(cache.getCoords(), cache.getGeocode());
+                        } else {
+                            final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
+                            if (waypoint != null) {
+                                if (setDefaultCenterAndZoom) {
+                                    mapFragment.setCenter(waypoint.getCoords());
+                                }
+                                viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
+                            }
+                        }
                         if (setDefaultCenterAndZoom) {
-                            mapFragment.setCenter(cache.getCoords());
                             mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         }
-                        viewModel.setTarget(cache.getCoords(), cache.getGeocode());
                     }
                     break;
                 case UMTT_TargetCoords:
