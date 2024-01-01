@@ -1,31 +1,36 @@
-### UnifiedMap
-Welcome to our all-new map implementation, internally called "UnifiedMap". This is the result of nearly two years' work from the c:geo team for an all-new map implementation. The reason we started this was that our old map implementations got increasingly hard to maintain and to keep (more or less) in sync feature-wise, with some code parts being ten years old (or more).
+### Sjednocená mapa
+Vítejte v naší zcela nové implementaci map, interně nazývané "Sjednocená mapa". Jedná se o výsledek téměř dvouleté práce týmu c:geo na zcela nové implementaci map. Důvodem, proč jsme s tím začali, bylo to, že naše staré implementace map bylo stále obtížnější udržovat a (víceméně) synchronizovat z hlediska funkcí, přičemž některé části kódu byly staré deset (nebo více) let.
 
-With UnifiedMap we tried to get the same user experience across all different map types (where possible), while modernizing and unifying the internal architecture.
+Se Sjednocenou mapou jsme se snažili dosáhnout stejného uživatelského prostředí jako ve všech různých typech map (pokud to bylo možné) a zároveň modernizovat a sjednotit vnitřní architekturu.
 
-UnifiedMap basically offers (nearly) all the features our old map implementations have, but gives you a couple of additional features:
+Sjednocená mapa v podstatě nabízí (téměř) všechny funkce, které mají naše staré implementace map, ale poskytuje několik dalších funkcí:
 
-- Map rotation for OpenStreetMap based maps (online and offline)
-- Fractional scaling for OpenStreetMap based maps
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks (tap on route)
+- Otáčení mapy pro mapy založené na OpenStreetMap (online i offline)
+- Frakční škálování pro mapy založené na OpenStreetMap
+- Vyskakovací okno pro Google mapy
+- Skrytí nepotřebných zdrojů map
+- Graf nadmořské výšky pro trasy a stopy (klepněte na trasu)
 
-UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
+Sjednocená mapa již dosáhla stavu beta verze, a proto jsme se rozhodli, že se stane naší výchozí mapou pro všechny uživatele používající noční sestavení.
 
-Everything should work, but there still may be (and will be) some bugs. In case of need you may switch between old and new map implementations (see settings - map sources), but we would really like you to try the new one. Please report any bugs you find on support ([support@cgeo.org](mailto:support@cgeo.org)) or [c:geo on GitHub](github.com/cgeo/cgeo/issues). Every feedback is welcome!
+Vše by mělo fungovat, ale stále se mohou vyskytovat (a budou vyskytovat) nějaké chyby. V případě potřeby můžete přepínat mezi starou a novou implementací map (viz nastavení - zdroje map), ale byli bychom rádi, kdybyste vyzkoušeli tu novou. Jakékoli nalezené chyby prosím hlaste na podporu ([support@cgeo.org](mailto:support@cgeo.org)) nebo [c:geo na GitHubu](github.com/cgeo/cgeo/issues). Každá zpětná vazba je vítaná!
 
 ---
 
-More changes:
+Další změny:
 
 ### Mapa
 - Novinka: Zvýraznění stávajících stahování ve správci stahování
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
+- Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
+- Změna: Zobrazení podrobností o kešce/trasovém bodu neblokujícím způsobem
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
+- Změna: Zvýšení maximální délky logu pro geocaching.com
+- Oprava: Nelze nahrát delší osobní poznámky na stránkách opencaching
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
 - Změna: Použití tapety jako pozadí již nevyžaduje oprávnění READ_EXTERNAL_STORAGE
+- Novinka: Rozložení dvou sloupců pro nastavení v režimu na šířku

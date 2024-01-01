@@ -979,7 +979,6 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
-    <string name="experimental">(Πειραματικό)</string>
     <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
     <string name="localstorage_migrate_status_major">Έκδοση %1$d</string>

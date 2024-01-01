@@ -22,10 +22,15 @@ More changes:
 ### Kartta
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
+- Change: Show cache/waypoint details in a non-blocking way
 
 ### Kätkön tiedot
 - Change: Make "Toggle talking" an actual toggle
+- Change: Increased maximum log length for geocaching.com
+- Fix: Cannot upload longer personal notes on opencaching sites
 
 ### Yleinen
 - New: Tapping on downloader notification opens "pending downloads" view
 - Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
+- New: Two column-layout for settings in landscape mode

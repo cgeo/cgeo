@@ -1,31 +1,36 @@
 ### UnifiedMap
-Welcome to our all-new map implementation, internally called "UnifiedMap". This is the result of nearly two years' work from the c:geo team for an all-new map implementation. The reason we started this was that our old map implementations got increasingly hard to maintain and to keep (more or less) in sync feature-wise, with some code parts being ten years old (or more).
+Welkom bij onze geheel nieuwe kaart implementatie, intern genaamd "UnifiedMap". Dit is het resultaat van bijna twee jaar werk van het c:geo-team voor een volledig nieuwe kaart implementatie. De reden dat we dit begonnen zijn is dat onze oude kaart implementaties steeds moeilijker werden om te onderhouden en (min of meer) gesynchroniseerd te houden qua functies, want sommige coderonderdelen zijn tien jaar oud (of meer).
 
-With UnifiedMap we tried to get the same user experience across all different map types (where possible), while modernizing and unifying the internal architecture.
+Met UnifiedMap hebben we geprobeerd dezelfde gebruikerservaring te krijgen over alle verschillende kaarttypes (waar mogelijk), terwijl de interne architectuur wordt gemoderniseerd en geharmoniseerd.
 
-UnifiedMap basically offers (nearly) all the features our old map implementations have, but gives you a couple of additional features:
+UnifiedMap biedt in principe (bijna) alle functies aan die onze oude kaart implementaties hebben, maar geeft je een paar extra functies:
 
-- Map rotation for OpenStreetMap based maps (online and offline)
-- Fractional scaling for OpenStreetMap based maps
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks (tap on route)
+- Kaart rotatie voor OpenStreetMap gebaseerde kaarten (online en offline)
+- Fractionele schaling voor OpenStreetMap gebaseerde kaarten
+- Cluster popup voor Google Maps
+- Verberg kaart bronnen die je niet nodig hebt
+- Hoogte grafiek voor routes en tracks (tik op route)
 
-UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
+UnifiedMap heeft inmiddels de bèta-status bereikt, dus hebben we besloten om deze tot onze standaardkaart te maken voor alle nightly build gebruikers.
 
-Everything should work, but there still may be (and will be) some bugs. In case of need you may switch between old and new map implementations (see settings - map sources), but we would really like you to try the new one. Please report any bugs you find on support ([support@cgeo.org](mailto:support@cgeo.org)) or [c:geo on GitHub](github.com/cgeo/cgeo/issues). Every feedback is welcome!
+Alles zou moeten werken, maar er kunnen (en zullen) nog steeds bugs zijn. In geval van nood kan je wisselen tussen oude en nieuwe kaart implementaties (zie instellingen - kaartbronnen), maar we willen graag dat je de nieuwe probeert. Rapporteer alle bugs die je vindt via support ([support@cgeo.org](mailto:support@cgeo.org)) of [c:geo op GitHub](github.com/cgeo/cgeo/issues). Alle feedback is welkom!
 
 ---
 
-More changes:
+Meer wijzigingen:
 
 ### Kaart
 - Nieuw: Markeer bestaande downloads in downloadbeheer
 - Nieuw: Toon cache gevonden status op waypoint iconen
+- Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
+- Wijziging: Toon cache/waypoint details op een niet-blokkerende manier
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
+- Wijziging: Maximale loglengte verhoogd voor geocaching.com
+- Oplossing: Kan geen langere persoonlijke notities uploaden op opencaching sites
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
 - Wijziging: het gebruik van wallpaper als achtergrond vereist niet langer READ_EXTERNAL_STORAGE toestemming
+- Nieuw: Twee kolom-indeling voor instellingen in liggende modus

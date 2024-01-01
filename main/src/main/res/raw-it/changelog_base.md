@@ -1,31 +1,36 @@
-### UnifiedMap
-Welcome to our all-new map implementation, internally called "UnifiedMap". This is the result of nearly two years' work from the c:geo team for an all-new map implementation. The reason we started this was that our old map implementations got increasingly hard to maintain and to keep (more or less) in sync feature-wise, with some code parts being ten years old (or more).
+### Mappa unificata
+Benvenuto nella nostra nuova implementazione della mappa, internamente chiamata "Mappa Unificata". Questo è il risultato di quasi due anni di lavoro del team c:geo per una implementazione della mappa completamente rinnovata. Il motivo per cui abbiamo iniziato questo, era che le vecchie implementazioni della mappa erano diventate sempre più difficili da mantenere (più o meno) in sintonia con le funzionalità, con alcune parti di codice di dieci anni (o più).
 
-With UnifiedMap we tried to get the same user experience across all different map types (where possible), while modernizing and unifying the internal architecture.
+Con la Mappa Unificata abbiamo cercato di ottenere la stessa esperienza utente su tutti i diversi tipi di mappe (ove possibile), modernizzando e unificando l'architettura interna.
 
-UnifiedMap basically offers (nearly) all the features our old map implementations have, but gives you a couple of additional features:
+La Mappa Unificata offre (quasi) tutte le caratteristiche che le nostre vecchie implementazioni di mappa hanno, ma offrono un paio di funzionalità aggiuntive:
 
-- Map rotation for OpenStreetMap based maps (online and offline)
-- Fractional scaling for OpenStreetMap based maps
-- Cluster popup for Google Maps
-- Hide map sources you don't need
-- Elevation chart for routes and tracks (tap on route)
+- Rotazione della mappa basata su OpenStreetMap (online e offline)
+- Scala frazionaria per mappe basate su OpenStreetMap
+- Cluster popup per Google Maps
+- Le fonti delle mappe che non servono possono essere nascoste
+- Grafico di elevazione per percorsi e tracce (con un tocco sul percorso)
 
-UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
+La Mappa Unificata ha raggiunto lo stato beta adesso, così abbiamo deciso di renderla la nostra mappa predefinita per tutti gli utenti delle versioni notturne.
 
-Everything should work, but there still may be (and will be) some bugs. In case of need you may switch between old and new map implementations (see settings - map sources), but we would really like you to try the new one. Please report any bugs you find on support ([support@cgeo.org](mailto:support@cgeo.org)) or [c:geo on GitHub](github.com/cgeo/cgeo/issues). Every feedback is welcome!
+Tutto dovrebbe funzionare, ma ci possono ancora essere (e ce ne saranno) alcuni bug. In caso di necessità è possibile passare dalle nuove alle vecchie implementazioni della mappa (vedi impostazioni - sorgenti della mappa), ma vorremmo davvero che si provasse quella nuova. Si prega di segnalare qualsiasi bug trovato al supporto ([support@cgeo.org](mailto:support@cgeo.org)) o [c:geo su GitHub](github.com/cgeo/cgeo/issues). Ogni feedback è benvenuto!
 
 ---
 
-More changes:
+Altre modifiche:
 
 ### Mappa
 - Nuovo: Evidenzia i download in corso nel gestore download
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
+- Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
+- Cambio: Mostra dettagli cache/waypoint in modo non bloccante
 
 ### Dettagli del cache
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore
+- Cambio: aumento della lunghezza massima del log per geocaching.com
+- Corretto: non è possibile caricare note personali più lunghe sui siti opencaching
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
 - Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
+- Nuovo: layout a due colonne per le impostazioni in modalità orizzontale

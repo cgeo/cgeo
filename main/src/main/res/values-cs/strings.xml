@@ -882,6 +882,8 @@
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
     <string name="init_zoomincludingwaypoints_description">Při zobrazení jedné kešky: Měl by být zoom upraven tak, aby zahrnoval všechny její trasové body?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Navštívené terasové body jsou poloprůhledné</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Označení navštívených trasových bodů poloprůhledným pozadím</string>
     <string name="init_brouterThreshold">Vypočítat trasu</string>
     <string name="init_brouterThreshold_description">Maximální vzdálenost, do které offline směrování vypočítá trasu.</string>
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
@@ -905,6 +907,7 @@
     <string name="init_showElevation">Zobrazit nadmořskou výšku</string>
     <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_elevation_notAvailable">"Nejsou k dispozici žádné údaje o nadmořské výšce"</string>
+    <string name="menu_elevation_info">Nadmořská výška (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
     <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
@@ -1146,9 +1149,9 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
-    <string name="experimental">(experimentální)</string>
+    <string name="category_unifiedMap">Sjednocená mapa (beta)</string>
     <string name="init_title_useUnifiedMap">Použít sjednocenou mapu</string>
-    <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
+    <string name="init_summary_useUnifiedMap">Použít novou sjednocenou mapu namísto vestavěných map Google Mapy / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -1446,6 +1449,8 @@
     <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
+    <string name="cache_log_menu_edit">Upravit log</string>
+    <string name="cache_log_menu_delete">Smazat log</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
@@ -1531,6 +1536,8 @@
     <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
     <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
     <string name="context_map_show_coords">Zobrazit souřadnice</string>
+    <string name="context_map_star_show">Zobrazit čáry k trasovým bodům</string>
+    <string name="context_map_star_hide">Skrýt čáry k trasovým bodům</string>
     <string name="edit">Upravit</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
@@ -2404,6 +2411,8 @@
     <string name="switch_on">Zapnuto</string>
     <string name="switch_manual">Ručně</string>
     <string name="switch_auto">Automatický</string>
+    <string name="switch_auto_lowpower">Automaticky (nízký výkon)</string>
+    <string name="switch_auto_precise">Automaticky (přesný)</string>
     <string name="switch_default">(výchozí)</string>
     <string name="yes">Ano</string>
     <string name="no">Ne</string>

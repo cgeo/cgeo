@@ -870,6 +870,8 @@
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Bezochte waypoints semi-transparant</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Markeer bezochte waypoints met een semi transparante achtergrond</string>
     <string name="init_brouterThreshold">Route berekenen</string>
     <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
@@ -892,6 +894,7 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Toon een marker voor de moeilijkheidsgraad (links) en het terrein (rechts) waarderingen op de cache markers in de rechter bovenhoek (\"opgeslagen\" marker wordt verplaatst naar het midden).</string>
     <string name="init_showElevation">Toon steiging</string>
     <string name="init_summary_showElevation">Toon steigingsinformatie voor huidige positie, van routing data of GNSS (indien beschikbaar)</string>
+    <string name="init_elevation_notAvailable">"Geen hoogtegegevens beschikbaar"</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel algemene waypoint extractie uit van persoonlijke cache notities. Het kan nog steeds geactiveerd worden voor individuele caches door het vakje te deactiveren onder de persoonlijke cache notitie.</string>
     <string name="init_prevent_cache_note_merge">Overschrijf persoonlijke cache notitie</string>
@@ -1133,8 +1136,9 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
-    <string name="experimental">(experimenteel)</string>
+    <string name="category_unifiedMap">Unified Map (bèta)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
+    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1416,6 +1420,8 @@
     <string name="cache_menu_log_in_browser">Log bezoek in browser</string>
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
+    <string name="cache_log_menu_edit">Log bewerken</string>
+    <string name="cache_log_menu_delete">Logs wissen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
@@ -1501,6 +1507,8 @@
     <string name="context_map_remove_from_route_pos">Verwijder vanaf positie %d</string>
     <string name="context_map_remove_from_route_end">Verwijder vanaf het eind</string>
     <string name="context_map_show_coords">Coördinaten tonen</string>
+    <string name="context_map_star_show">Toon lijnen naar waypoints</string>
+    <string name="context_map_star_hide">Verberg lijnen naar waypoints</string>
     <string name="edit">Bewerken</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
@@ -2342,6 +2350,8 @@
     <string name="switch_on">Aan</string>
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (minder accuverbruik)</string>
+    <string name="switch_auto_precise">Automatisch (nauwkeurig)</string>
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>

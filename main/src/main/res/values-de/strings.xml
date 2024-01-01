@@ -870,6 +870,8 @@
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
     <string name="init_zoomincludingwaypoints_description">Wenn eine Karte für einen einzelnen Cache geöffnet wird: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Besuchte Wegpunkte halbtransparent</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Kennzeichne besuchte Wegpunkte mit halbtransparenten Icons</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher eine Route berechnet wird.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
@@ -1135,7 +1137,6 @@
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
     <string name="category_unifiedMap">Vereinheitlichte Karte (Beta)</string>
-    <string name="experimental">(experimentell)</string>
     <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
     <string name="init_summary_useUnifiedMap">Verwende die neue Vereinheitlichte Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
@@ -1419,6 +1420,8 @@
     <string name="cache_menu_log_in_browser">Im Browser loggen</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
+    <string name="cache_log_menu_edit">Log bearbeiten</string>
+    <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -1504,6 +1507,8 @@
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
+    <string name="context_map_star_show">Linien zu Wegpunkten anzeigen</string>
+    <string name="context_map_star_hide">Linien zu Wegpunkten verbergen</string>
     <string name="edit">Bearbeiten</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
@@ -2345,6 +2350,8 @@
     <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (Energiesparmodus)</string>
+    <string name="switch_auto_precise">Automatisch (präzise)</string>
     <string name="switch_default">(Standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
