@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
@@ -15,7 +16,6 @@ import androidx.core.app.ComponentActivity;
 
 import java.util.function.Consumer;
 
-import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 @TargetApi(24)
@@ -32,11 +32,10 @@ public class LogActivityHelper {
     public LogActivityHelper(final ComponentActivity activity) {
         this.activity = activity;
 
-        logEditTask = WorkerTask.<ImmutableTriple<Geocache, LogEntry, LogEntry>, String, LogResult>of("log-edit",
-            input -> Observable.create(emit -> {
-               final LogResult result = LogUtils.editLogTaskLogic(input.left, input.middle, input.right, p -> emit.onNext(WorkerTask.TaskValue.progress(p)));
-               emit.onNext(WorkerTask.TaskValue.result(result));
-            }))
+        logEditTask = WorkerTask.<ImmutableTriple<Geocache, LogEntry, LogEntry>, String, LogResult>of(
+                "log-edit",
+                (input, progress, cancelFlag) -> LogUtils.editLogTaskLogic(input.left, input.middle, input.right, progress),
+                AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle("Editing").setInitialMessage("Editing log"))
             .observeResult(activity, result ->
                 SimpleDialog.ofContext(activity).setTitle(TextParam.text("Edit result: " + result.isOk()))
@@ -44,16 +43,16 @@ public class LogActivityHelper {
                     if (logEditResultConsumer != null) {
                         logEditResultConsumer.accept(result);
                     }
-                }));
+                }), null);
 
-        logDeleteTask = WorkerTask.<Pair<Geocache, LogEntry>, Void, LogResult>of("log-delete",
-            input -> Observable.create(emit -> {
-                emit.onNext(WorkerTask.TaskValue.result(LogUtils.deleteLogTaskLogic(input.first, input.second)));
-            }))
+        logDeleteTask = WorkerTask.<Pair<Geocache, LogEntry>, Void, LogResult>of(
+                "log-delete",
+                (input, progress, cancelFlag) -> LogUtils.deleteLogTaskLogic(input.first, input.second),
+                AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle("Deleting").setInitialMessage("Deleting log"))
             .observeResult(activity, result ->
                 SimpleDialog.ofContext(activity).setTitle(TextParam.text("Delete result: " + result.isOk()))
-                .setMessage(TextParam.text("Delete result: " + result)).show());
+                .setMessage(TextParam.text("Delete result: " + result)).show(), null);
 
     }
 
