@@ -1,4 +1,10 @@
 ##
+- Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
+- Poprawka: Niepotrzebne żądanie uprawnienia READ_EXTERNAL_STORAGE w nowszych wersjach Androida
+- Poprawka: Domyślny wybór typu dziennika dla przedmiotów podróżnych
+- Poprawka: Awaria przy otwieraniu pobierania map pod pewnymi warunkami
+
+##
 - Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
 
 ##

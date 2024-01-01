@@ -2246,8 +2246,6 @@
     <string name="permission_contacts_read_explanation">c:geo può cercare i contatti nella rubrica usando il nome da cacher. Per fare questo, devi autorizzare c:geo a leggere la tua rubrica. Altrimenti, non sarà possibile utilizzare questa funzione.</string>
     <string name="permission_location_explanation_title">Permesso geolocalizzazione</string>
     <string name="permission_location_explanation">c:geo è ottimizzato per l\'utilizzo con i dati GPS (posizione fine) per individuare la posizione e calcolare la distanza e la direzione per i geocache. Senza questo permesso, le funzioni basate sulla posizione non funzioneranno come previsto.</string>
-    <string name="permission_read_external_storage_explanation_title">Permessi di lettura memoria esterna</string>
-    <string name="permission_read_external_storage_explanation">c:geo può utilizzare lo sfondo di sistema come sfondo per l\'app. Per fare questo, c:geo ha bisogno dell\'autorizzazione per leggere media sulla memoria esterna.</string>
     <string name="permission_legacy_write_external_storage_explanation">c:geo scriverà dati sulla memoria del telefono o sulla scheda SD, ad es. quando si salvano geocache per l\'uso offline, importare o esportare file e altre funzioni. Su alcune versioni di Android, è necessario concedere un permesso aggiuntivo per queste azioni.</string>
     <string name="permission_legacy_write_external_storage_explanation_title">Permessi di lettura memoria esterna (legacy)</string>
     <string name="permission_post_notifications_explanation">c:geo utilizza le notifiche per informarti dei download e dell\'avvicinamento a cache (se attivato)</string>
