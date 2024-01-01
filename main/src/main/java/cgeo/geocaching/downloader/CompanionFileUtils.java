@@ -105,22 +105,26 @@ public class CompanionFileUtils {
                     continue;
                 }
                 try (InputStream input = ContentStorage.get().openForRead(downloader.targetFolder.getFolder(), filename)) {
-                    final DownloadedFileData offlineMapData = new DownloadedFileData();
-                    final Properties prop = new Properties();
-                    prop.load(input);
-                    offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
-                    if (offlineMapData.remoteParsetype == filter.id) {
-                        offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
-                        offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
-                        offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
-                        offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
-                        offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
+                    if (input != null) {
+                        final DownloadedFileData offlineMapData = new DownloadedFileData();
+                        final Properties prop = new Properties();
+                        prop.load(input);
+                        offlineMapData.remoteParsetype = Integer.parseInt(prop.getProperty(PROP_PARSETYPE));
+                        if (offlineMapData.remoteParsetype == filter.id) {
+                            offlineMapData.remotePage = prop.getProperty(PROP_REMOTEPAGE);
+                            offlineMapData.remoteFile = prop.getProperty(PROP_REMOTEFILE);
+                            offlineMapData.remoteDate = CalendarUtils.parseYearMonthDay(prop.getProperty(PROP_REMOTEDATE));
+                            offlineMapData.localFile = prop.getProperty(PROP_LOCALFILE);
+                            offlineMapData.displayName = prop.getProperty(PROP_DISPLAYNAME);
 
-                        if (StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
-                            result.add(offlineMapData);
+                            if (StringUtils.isNotBlank(offlineMapData.localFile) && filesMap.containsKey(offlineMapData.localFile)) {
+                                result.add(offlineMapData);
+                            }
                         }
+                    } else {
+                        Log.d("Cannot open property file " + filename + " for reading");
                     }
-                } catch (IOException | NumberFormatException e) {
+                } catch (IOException | NumberFormatException | NullPointerException e) {
                     Log.d("Offline map property file error for " + filename + ": " + e.getMessage());
                 }
             }
