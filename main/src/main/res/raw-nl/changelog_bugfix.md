@@ -2,6 +2,7 @@
 - Oplossing: Crash bij weergave meldingsstip
 - Oplossing: Onnodige READ_EXTERNAL_STORAGE machtiging werd opgevraagd op nieuwere Android versies
 - Oplossing: Trackable logsoort standaard selectie
+- Fix: Crash on opening map downloader under certain conditions
 
 ##
 - Oplossing: Trackables ontbreken in cache inventaris (website wijziging)
