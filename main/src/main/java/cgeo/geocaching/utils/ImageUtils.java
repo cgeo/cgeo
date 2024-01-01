@@ -188,27 +188,6 @@ public final class ImageUtils {
     }
 
     /**
-     * Reads and scales an image to the device display size.
-     *
-     * @param imageData The image data to read and scale
-     * @return Bitmap The scaled image or Null if source image can't be read
-     */
-    @Nullable
-    public static Bitmap readAndScaleImageToFitDisplay(@NonNull final Uri imageData, final boolean adjustOrientation) {
-        final Point displaySize = DisplayUtils.getDisplaySize();
-        // Restrict image size to 800 x 800 to prevent OOM on tablets
-        final int maxWidth = Math.min(displaySize.x - 25, MAX_DISPLAY_IMAGE_XY);
-        final int maxHeight = Math.min(displaySize.y - 25, MAX_DISPLAY_IMAGE_XY);
-
-        final Bitmap image = readDownsampledImage(imageData, maxWidth, maxHeight, adjustOrientation);
-        if (image == null) {
-            return null;
-        }
-        final BitmapDrawable scaledImage = scaleBitmapTo(image, maxWidth, maxHeight);
-        return scaledImage.getBitmap();
-    }
-
-    /**
      * Scales a bitmap to the given bounds if it is larger, otherwise returns the original bitmap (except when "force" is set to true)
      *
      * @param image The bitmap to scale
@@ -681,13 +660,6 @@ public final class ImageUtils {
             return ContentStorage.get().delete(uri);
         }
         return false;
-    }
-
-    /**
-     * Returns image name and size in bytes
-     */
-    public static ContentStorage.FileInformation getImageFileInfos(final Image image) {
-        return ContentStorage.get().getFileInfo(image.getUri());
     }
 
     /**

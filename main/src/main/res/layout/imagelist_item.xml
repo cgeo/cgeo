@@ -17,7 +17,7 @@
         android:layout_height="fill_parent"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
-
+<!--
         <ImageView
             android:id="@+id/image_thumbnail"
             android:layout_width="100dp"
@@ -29,6 +29,59 @@
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_menu_add"
             tools:src="@tools:sample/avatars"/>
+        -->
+
+        <cgeo.geocaching.ui.ImageExtendedView
+            android:id="@+id/image_thumbnail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+        <!--
+        <RelativeLayout
+            android:id="@+id/image_wrapper"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/image_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:foregroundGravity="center"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_image"
+                app:materialThemeOverlay="@style/shapeRoundedCorner"
+                app:cornerRadius="12dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                />
+
+            <ImageView
+                android:id="@+id/image_geo_overlay"
+                app:srcCompat="@drawable/ic_menu_compass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                tools:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/image_description_marker"
+                app:srcCompat="@drawable/ic_menu_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                tools:visibility="visible"/>
+        </RelativeLayout> -->
 
         <LinearLayout
             android:layout_toRightOf="@id/image_thumbnail"

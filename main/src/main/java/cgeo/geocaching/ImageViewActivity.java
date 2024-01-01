@@ -8,7 +8,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.utils.ImageDataMemoryCache;
+import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MetadataUtils;
@@ -71,7 +71,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private static final  AtomicInteger IMAGE_LIST_CACHE_ID = new AtomicInteger(0);
     private static final  List<Image> IMAGE_LIST_CACHE = new ArrayList<>();
 
-    private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
+    private final ImageLoader imageCache = new ImageLoader();
     private ImageAdapter imageAdapter;
     private ImageviewActivityBinding mainBinding;
 
@@ -367,17 +367,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         } else {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
-                if (p.imageData == null) {
+                if (p.bitmapDrawable == null) {
                     binding.imageFull.setImageDrawable(HtmlImage.getErrorImage(getResources(), true));
                     binding.imageFull.setRotation(0);
                 } else {
-                    binding.imageFull.setImageDrawable(p.imageData);
+                    binding.imageFull.setImageDrawable(p.bitmapDrawable);
                     ImageUtils.getImageOrientation(currentImage.getUri()).applyToView(binding.imageFull);
                 }
                 binding.imageProgressBar.setVisibility(View.GONE);
 
-                final int bmHeight = p.imageData == null || p.imageData.getBitmap() == null ? -1 : p.imageData.getBitmap().getHeight();
-                final int bmWidth = p.imageData == null || p.imageData.getBitmap() == null ? -1 : p.imageData.getBitmap().getWidth();
+                final int bmHeight = p.bitmapDrawable == null || p.bitmapDrawable.getBitmap() == null ? -1 : p.bitmapDrawable.getBitmap().getHeight();
+                final int bmWidth = p.bitmapDrawable == null || p.bitmapDrawable.getBitmap() == null ? -1 : p.bitmapDrawable.getBitmap().getWidth();
 
                 //enhance description with metadata
                 final List<CharSequence> imageInfosNew = new ArrayList<>();

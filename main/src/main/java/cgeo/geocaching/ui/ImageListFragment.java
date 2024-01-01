@@ -14,9 +14,11 @@ import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,21 +55,20 @@ public class ImageListFragment extends Fragment {
     //following info is used to restrict image selections and for display
     private String geocode;
     private Long maxImageUploadSize;
-    private boolean captionMandatory;
+
+    private final ImageLoader imageCache = new ImageLoader();
 
     private static final int SELECT_IMAGE = 101;
 
     private static final String SAVED_STATE_IMAGELIST = "cgeo.geocaching.saved_state_imagelist";
     private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
 
-
     /**
      * call once to initialize values for image retrieval
      */
-    public void init(final String contextCode, final Long maxImageUploadSize, final boolean captionMandatory) {
+    public void init(final String contextCode, final Long maxImageUploadSize) {
         this.geocode = contextCode;
         this.maxImageUploadSize = maxImageUploadSize;
-        this.captionMandatory = captionMandatory;
     }
 
     /**
@@ -184,9 +185,16 @@ public class ImageListFragment extends Fragment {
         super.onDestroyView();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        imageCache.clear();
+    }
+
 
     protected static class ImageViewHolder extends AbstractRecyclerViewHolder {
         private final ImagelistItemBinding binding;
+        private Image entry;
 
         public ImageViewHolder(final View rowView) {
             super(rowView);
@@ -219,37 +227,51 @@ public class ImageListFragment extends Fragment {
             if (image == null || holder.binding.imageThumbnail == null) {
                 return;
             }
-            ImageActivityHelper.displayImageAsync(image, holder.binding.imageThumbnail);
+            holder.entry = image;
+
+            holder.binding.imageInfo.setText("...");
+
             holder.binding.imageTitle.setText(getImageTitle(image, position));
-            holder.binding.imageInfo.setText(getImageInfo(image));
             holder.binding.imageDescription.setText(image.getDescription());
             holder.binding.imageDescription.setVisibility(StringUtils.isNotBlank(image.getDescription()) ? View.VISIBLE : View.GONE);
+
+            holder.binding.imageThumbnail.setImagePreload(image);
+            if (image.isImageOrUnknownUri()) {
+                imageCache.loadImage(image.getUrl(), imageData -> {
+                    if (holder.entry == null || !holder.entry.getUrl().equals(image.getUrl())) {
+                        //holder holds a different image meanwhile, skip showing the image
+                        return;
+                    }
+                    holder.binding.imageThumbnail.setImagePostload(image, imageData.bitmapDrawable, imageData.metadata);
+                    holder.binding.imageInfo.setText(getImageInfo(imageData.localUri, image.targetScale));
+                });
+            }
         }
 
-        private String getImageInfo(final Image image) {
+        private String getImageInfo(final Uri localImageUri, final int targetScale) {
 
-            final ContentStorage.FileInformation imageFileInfo = ImageUtils.getImageFileInfos(image);
             int width = 0;
             int height = 0;
             int scaledWidth = width;
             int scaledHeight = height;
-            final ImmutablePair<Integer, Integer> widthHeight = ImageUtils.getImageSize(image.getUri());
+            final ImmutablePair<Integer, Integer> widthHeight = localImageUri == null ? null : ImageUtils.getImageSize(localImageUri);
             if (widthHeight != null) {
                 width = widthHeight.getLeft();
                 height = widthHeight.getRight();
-                final ImmutableTriple<Integer, Integer, Boolean> scaledImageSizes = ImageUtils.calculateScaledImageSizes(width, height, image.targetScale, image.targetScale);
+                final ImmutableTriple<Integer, Integer, Boolean> scaledImageSizes = ImageUtils.calculateScaledImageSizes(width, height, targetScale, targetScale);
                 scaledWidth = scaledImageSizes.left;
                 scaledHeight = scaledImageSizes.middle;
             }
             final String isScaled = getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
 
+            final ContentStorage.FileInformation imageFileInfo = localImageUri == null ? null : ContentStorage.get().getFileInfo(localImageUri);
             final long fileSize = imageFileInfo == null ? 0 : imageFileInfo.size;
             //A rough estimation for the size of the compressed image:
             // * tenth the size due to compress
             // * linear scale by pixel size
             // * round to full KB
             final long roughCompressedSize = width * height == 0 ? 0 :
-                    ((fileSize * (scaledHeight * scaledWidth) / 10 / (width * height)) / 1024) * 1024;
+                ((fileSize * ((long) scaledHeight * scaledWidth) / 10 / ((long) width * height)) / 1024) * 1024;
 
             return getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
