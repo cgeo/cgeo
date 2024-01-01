@@ -73,7 +73,7 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2022-10 to 2023-09 -->
+    <!-- currently listed: contributions 2023-01 to 2023-12 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
@@ -81,13 +81,13 @@
     fm-sys|https://github.com/fm-sys|cg|
     kumy|https://github.com/kumy|c|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
-    liroP|https://github.com/liroP|c|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    mzylowski|https://github.com/mzylowski|c|
     NotWoods|https://github.com/NotWoods|c|
-    osmpaws|https://github.com/osmpaws|c|
+    mortenbruhn|https://github.com/mortenbruhn|c|
+    mzylowski|https://github.com/mzylowski|c|
+    technetium|https://github.com/technetium|c|
     UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
@@ -123,6 +123,7 @@
     Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
     lazydays79||c|
+    liroP|https://github.com/liroP|c|
     Lomanic|https://github.com/Lomanic|c|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     marco-dev||c|
@@ -130,6 +131,7 @@
     Matze2||c|
     MichielK||c|
     nmrsmn||c|
+    osmpaws|https://github.com/osmpaws|c|
     msperkowski|||
     ncorreia||c|
     okainov|https://github.com/okainov|c|
