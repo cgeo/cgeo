@@ -2,6 +2,7 @@
 - Corretto: crash alla visualizzazione del punto di notifica
 - Corretto: permesso READ_EXTERNAL_STORAGE richiesto sulle versioni più recenti di Android
 - Corretto: valore predefinito per il logtype Trackable
+- Fix: Crash on opening map downloader under certain conditions
 
 ##
 - Corretto: Trackables mancanti nell'inventario del cache (modifica del sito)
