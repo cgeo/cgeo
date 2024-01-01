@@ -802,7 +802,7 @@
     <string name="about_nutshellmanual">Online manual</string>
 
     <string name="about_contributors_carnerodetails">as the father of c:geo</string>
-    <string name="about_contributors_recent">Recent contributors</string>
+    <string name="about_contributors_recent">Contributors (last 12 months)</string>
     <string name="about_contributors_specialthanks">Special thanks to</string>
     <string name="about_contributors_specialthanksdetails">- all our translation contributors on [Crowdin.net](https://crowdin.net/project/cgeo)!\n- all issue creators\n- and all other supporters.\n</string>
     <string name="about_contributors_other">Other contributors</string>
