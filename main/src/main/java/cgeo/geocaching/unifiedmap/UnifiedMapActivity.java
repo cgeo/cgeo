@@ -338,26 +338,28 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         mapFragment.setCenter(Settings.getUMMapCenter());
                     }
                     break;
-                case UMTT_TargetGeocode:
+                case UMTT_TargetGeocode: // can be either a cache or a waypoint
                     // load cache/waypoint, focus map on it, and set it as target
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
-                    if (cache != null && cache.getCoords() != null) {
-                        viewModel.caches.getValue().add(cache);
-                        viewModel.caches.notifyDataChanged();
-                        loadWaypoints(this, viewModel, mapFragment.getViewport());
-                        if (mapType.waypointId <= 0) {
-                            if (setDefaultCenterAndZoom) {
-                                mapFragment.setCenter(cache.getCoords());
-                            }
-                            viewModel.setTarget(cache.getCoords(), cache.getGeocode());
-                        } else {
+                    if (cache != null) {
+                        viewModel.waypoints.getValue().clear();
+                        if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
                             final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
                             if (waypoint != null) {
                                 if (setDefaultCenterAndZoom) {
                                     mapFragment.setCenter(waypoint.getCoords());
                                 }
+                                viewModel.waypoints.getValue().add(waypoint);
                                 viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
                             }
+                        } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
+                            viewModel.caches.getValue().add(cache);
+                            viewModel.caches.notifyDataChanged();
+                            if (setDefaultCenterAndZoom) {
+                                mapFragment.setCenter(cache.getCoords());
+                            }
+                            viewModel.waypoints.getValue().addAll(cache.getWaypoints());
+                            viewModel.setTarget(cache.getCoords(), cache.getGeocode());
                         }
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
