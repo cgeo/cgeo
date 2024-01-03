@@ -5,6 +5,7 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.databinding.DownloaderConfirmationBinding;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
@@ -33,8 +34,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
@@ -113,14 +112,14 @@ public class DownloaderUtils {
         final String filename = getFilenameFromUri(uri);
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
-        final View layout = View.inflate(activity, R.layout.downloader_confirmation, null);
-        builder.setView(layout);
-        ((TextView) layout.findViewById(R.id.download_info1)).setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
-        ((TextView) layout.findViewById(R.id.download_info2)).setVisibility(View.GONE);
+        final DownloaderConfirmationBinding binding = DownloaderConfirmationBinding.inflate(activity.getLayoutInflater());
+        builder.setView(binding.getRoot());
+        binding.downloadInfo1.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
+        binding.downloadInfo2.setVisibility(View.GONE);
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+                    final boolean allowMeteredNetwork = binding.allowMeteredNetwork.isChecked();
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
                         final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
@@ -160,12 +159,11 @@ public class DownloaderUtils {
     public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads, @Nullable final Action1<Boolean> downloadTriggered) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
-        final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
-        builder.setView(layout);
-        ((TextView) layout.findViewById(R.id.download_info1)).setText(confirmation);
-        ((TextView) layout.findViewById(R.id.download_info2)).setText(R.string.download_warning);
+        final DownloaderConfirmationBinding binding = DownloaderConfirmationBinding.inflate(activity.getLayoutInflater());
+        builder.setView(binding.getRoot());
+        binding.downloadInfo1.setText(confirmation);
+        binding.downloadInfo2.setText(R.string.download_warning);
 
-        final LinearLayout ll = layout.findViewById(R.id.checkbox_placeholder);
         for (Download download : downloads) {
             final CheckBox cb = new CheckBox(new ContextThemeWrapper(activity, R.style.checkbox_full));
             final String sizeinfo = download.getSizeInfo();
@@ -176,14 +174,14 @@ public class DownloaderUtils {
             cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 cb.setChecked(isChecked);
                 download.customMarker = isChecked;
-                Log.e(download.getName() + ", checked=" + isChecked);
+                Log.i(download.getName() + ", checked=" + isChecked);
             });
-            ll.addView(cb);
+            binding.checkboxPlaceholder.addView(cb);
         }
 
         builder
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                    final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+                    final boolean allowMeteredNetwork = binding.allowMeteredNetwork.isChecked();
 
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
