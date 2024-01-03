@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorBackgroundDialog"
-    android:windowBackground="@color/colorBackgroundTransparent"
+    android:background="@android:color/transparent"
+    android:windowBackground="@android:color/transparent"
     android:orientation="vertical"
     tools:context=".CachePopupFragment">
+
+    <include layout="@layout/swipe_up_indicator" />
 
     <include
         android:id="@+id/toolbar"
@@ -17,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/colorBackgroundDialog"
         android:padding="4dip" >
 
         <LinearLayout
