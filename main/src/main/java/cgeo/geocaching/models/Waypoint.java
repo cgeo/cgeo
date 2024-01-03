@@ -219,6 +219,7 @@ public class Waypoint implements IWaypoint {
     }
 
     @Override
+    @NonNull
     public String getGeocode() {
         return geocode;
     }
@@ -239,7 +240,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public void setGeocode(final String geocode) {
-        this.geocode = StringUtils.upperCase(geocode);
+        this.geocode = geocode == null ? "" : StringUtils.upperCase(geocode);
         this.parentCache = null;
     }
 

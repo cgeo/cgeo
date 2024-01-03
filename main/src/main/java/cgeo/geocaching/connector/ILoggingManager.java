@@ -1,16 +1,18 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * An instance of an implementing class allows online logging activites for a concrete geocache.
@@ -28,11 +30,7 @@ public interface ILoggingManager {
     /** Create a new log for a cache online */
     @NonNull
     @WorkerThread
-    LogResult createLog(@NonNull LogEntry logEntry,
-                        @Nullable String logPassword,
-                        @NonNull List<TrackableLog> trackableLogs,
-                        boolean addToFavorites,
-                        float rating);
+    LogResult createLog(@NonNull OfflineLogEntry logEntry, @Nullable Map<String, Trackable> inventory);
 
     /** Edits an existing log for a cache online */
     @NonNull

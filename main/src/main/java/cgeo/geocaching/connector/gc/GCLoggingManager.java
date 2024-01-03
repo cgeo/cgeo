@@ -9,10 +9,11 @@ import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 class GCLoggingManager extends AbstractLoggingManager {
 
@@ -70,7 +72,15 @@ class GCLoggingManager extends AbstractLoggingManager {
 
         try {
             final List<GCWebAPI.TrackableInventoryEntry> trackableInventoryItems = GCWebAPI.getTrackableInventory();
-            final List<TrackableLog> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, 0, 0, TrackableBrand.TRAVELBUG)).toList();
+            final List<Trackable> trackables = CollectionStream.of(trackableInventoryItems).map(entry -> {
+                final Trackable trackable = new Trackable();
+                trackable.setGeocode(entry.referenceCode);
+                trackable.setTrackingcode(entry.trackingNumber);
+                trackable.setName(entry.name);
+                trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
+                return trackable;
+                //new TrackableLog(entry.referenceCode, entry.trackingNumber, entry.name, TrackableBrand.TRAVELBUG)
+            }).toList();
             result.setAvailableTrackables(trackables);
         } catch (final Exception e) {
             result.setError();
@@ -113,12 +123,12 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final  boolean addToFavorites, final float rating) {
+    public LogResult createLog(@NonNull final OfflineLogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
 
         final Geocache cache = getCache();
 
         try {
-            return GCLogAPI.createLog(cache.getGeocode(), logEntry, trackableLogs, addToFavorites);
+            return GCLogAPI.createLog(cache.getGeocode(), logEntry, inventory);
         } catch (final Exception e) {
             Log.e("GCLoggingManager.createLog", e);
             return LogResult.error(StatusCode.LOG_POST_ERROR, "GCLoggingManager.createLog", e);
@@ -128,7 +138,7 @@ class GCLoggingManager extends AbstractLoggingManager {
     @NonNull
     @Override
     public LogResult editLog(@NonNull final LogEntry newEntry) {
-        return GCLogAPI.editLog(getCache().getGeocode(), newEntry, Collections.emptyList(), false);
+        return GCLogAPI.editLog(getCache().getGeocode(), newEntry);
     }
 
     @NonNull

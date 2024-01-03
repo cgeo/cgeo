@@ -41,7 +41,7 @@ public final class OfflineLogEntry extends LogEntry {
     /**
      * cache rating to be set with this log
      */
-    public final Float rating;
+    public final float rating;
     /**
      * password to use for password-protected caches (e.g. Opencaching.de)
      */
@@ -49,7 +49,7 @@ public final class OfflineLogEntry extends LogEntry {
     /**
      * trackable trackable log settings:  "action" to invoke with log
      */
-    public final Map<String, LogTypeTrackable> trackableActions;
+    public final Map<String, LogTypeTrackable> inventoryActions;
 
     // Parcelable START
 
@@ -58,10 +58,10 @@ public final class OfflineLogEntry extends LogEntry {
         imageTitlePraefix = in.readString();
         imageScale = in.readInt();
         favorite = in.readInt() == 1;
-        rating = (Float) in.readValue(Float.class.getClassLoader());
+        rating = in.readFloat();
         password = in.readString();
-        trackableActions = new HashMap<>();
-        in.readMap(trackableActions, LogTypeTrackable.class.getClassLoader());
+        inventoryActions = new HashMap<>();
+        in.readMap(inventoryActions, LogTypeTrackable.class.getClassLoader());
     }
 
     @Override
@@ -70,9 +70,9 @@ public final class OfflineLogEntry extends LogEntry {
         dest.writeString(imageTitlePraefix);
         dest.writeInt(imageScale);
         dest.writeInt(favorite ? 1 : 0);
-        dest.writeValue(rating);
+        dest.writeFloat(rating);
         dest.writeString(password);
-        dest.writeMap(trackableActions);
+        dest.writeMap(inventoryActions);
     }
 
     public static final Parcelable.Creator<OfflineLogEntry> CREATOR = new Parcelable.Creator<OfflineLogEntry>() {
@@ -97,7 +97,7 @@ public final class OfflineLogEntry extends LogEntry {
         this.favorite = builder.favorite;
         this.rating = builder.rating;
         this.password = builder.password;
-        this.trackableActions = Collections.unmodifiableMap(builder.trackableActions);
+        this.inventoryActions = Collections.<String, TrackableLogEntry>unmodifiableMap(builder.inventoryActions);
     }
 
 
@@ -112,9 +112,9 @@ public final class OfflineLogEntry extends LogEntry {
         private String imageTitlePraefix = "";
         private int imageScale = -1; // not set
         private boolean favorite = false;
-        private Float rating = null;
+        private float rating = 0;
         private String password = null;
-        private final Map<String, LogTypeTrackable> trackableActions = new HashMap<>();
+        private final Map<String, LogTypeTrackable> inventoryActions = new HashMap<>();
 
         /**
          * Build an immutable {@link OfflineLogEntry} Object.
@@ -139,7 +139,7 @@ public final class OfflineLogEntry extends LogEntry {
             return (T) this;
         }
 
-        public T setRating(final Float rating) {
+        public T setRating(final float rating) {
             this.rating = rating;
             return (T) this;
         }
@@ -149,13 +149,18 @@ public final class OfflineLogEntry extends LogEntry {
             return (T) this;
         }
 
-        public T addTrackableAction(final String tbCode, final LogTypeTrackable action) {
-            this.trackableActions.put(tbCode, action);
+        public T addInventoryAction(final String trackableGeocode, final LogTypeTrackable action) {
+            this.inventoryActions.put(trackableGeocode, action);
             return (T) this;
         }
 
-        public T clearTrackableActions() {
-            this.trackableActions.clear();
+        public T addInventoryActions(final Map<String, LogTypeTrackable> actions) {
+            this.inventoryActions.putAll(actions);
+            return (T) this;
+        }
+
+        public T clearInventoryActions() {
+            this.inventoryActions.clear();
             return (T) this;
         }
     }
@@ -182,7 +187,7 @@ public final class OfflineLogEntry extends LogEntry {
         changed |= !Objects.equals(imageTitlePraefix, prev.imageTitlePraefix);
 
         changed |= logImages.size() != prev.logImages.size() || !new HashSet<>(logImages).equals(new HashSet<>(prev.logImages));
-        changed |= !Objects.equals(trackableActions, prev.trackableActions);
+        changed |= !Objects.equals(inventoryActions, prev.inventoryActions);
 
         return changed;
 

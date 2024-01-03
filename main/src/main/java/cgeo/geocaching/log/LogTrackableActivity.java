@@ -4,12 +4,11 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.trackable.AbstractTrackableLoggingManager;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
+import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.Loaders;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
@@ -42,8 +41,10 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
 import java.util.ArrayList;
@@ -54,6 +55,8 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogTrackableActivity extends AbstractLoggingActivity implements CoordinateUpdate, LoaderManager.LoaderCallbacks<List<LogTypeTrackable>> {
+
+    private static final int LOADER_ID_LOGGING_INFO = 409842;
 
     private static final LogTypeTrackable[] PREFERRED_DEFAULTS = new LogTypeTrackable[] { LogTypeTrackable.DISCOVERED_IT, LogTypeTrackable.NOTE, LogTypeTrackable.RETRIEVED_IT };
     private LogtrackableActivityBinding binding;
@@ -76,7 +79,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     String trackingCode;
 
     TrackableConnector connector;
-    private AbstractTrackableLoggingManager loggingManager;
+    private TrackableLoggingManager loggingManager;
 
     /**
      * How many times the warning popup for geocode not set should be displayed
@@ -85,20 +88,17 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     public static final int LOG_TRACKABLE = 1;
 
-    @Override
     @NonNull
-    public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, final Bundle bundle) {
+    @Override
+    public Loader<List<LogTypeTrackable>> onCreateLoader(final int id, @Nullable final Bundle args) {
+        Log.i("LogTrackableActivity.onLoadStarted()");
         showProgress(true);
-
-        if (id == Loaders.LOGGING_TRAVELBUG.getLoaderId()) {
-            loggingManager.setGuid(trackable.getGuid());
-        }
-
-        return loggingManager;
+        return new LogTrackableActivity.LogContextInfoLoader(this, loggingManager);
     }
 
     @Override
-    public void onLoadFinished(@NonNull final Loader<List<LogTypeTrackable>> listLoader, final List<LogTypeTrackable> logTypesTrackable) {
+    public void onLoadFinished(@NonNull final Loader<List<LogTypeTrackable>> loader, final List<LogTypeTrackable> logTypesTrackable) {
+        Log.i("LogTrackableActivity.onLoadFinished()");
 
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
             possibleLogTypesTrackable.clear();
@@ -174,7 +174,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
         // create trackable connector
         connector = ConnectorFactory.getTrackableConnector(geocode, brand);
-        loggingManager = connector.getTrackableLoggingManager(this);
+        loggingManager = connector.getTrackableLoggingManager(geocode);
 
         if (loggingManager == null) {
             showToast(res.getString(R.string.err_tb_not_loggable));
@@ -209,7 +209,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private void startLoader(@NonNull final Trackable newTrackable) {
         trackable = newTrackable;
         // Start loading in background
-        LoaderManager.getInstance(this).initLoader(connector.getTrackableLoggingManagerLoaderId(), null, LogTrackableActivity.this).forceLoad();
+        LoaderManager.getInstance(this).initLoader(LOADER_ID_LOGGING_INFO, null, LogTrackableActivity.this).forceLoad();
         displayTrackable();
     }
 
@@ -345,6 +345,28 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         }
     }
 
+    private static class LogContextInfoLoader extends AsyncTaskLoader<List<LogTypeTrackable>> {
+
+        private final TrackableLoggingManager loggingManager;
+
+        LogContextInfoLoader(@NonNull final Context context, final TrackableLoggingManager loggingManager) {
+            super(context);
+            this.loggingManager = loggingManager;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            forceLoad();
+        }
+
+        @Nullable
+        @Override
+        public List<LogTypeTrackable> loadInBackground() {
+            return this.loggingManager.getPossibleLogTypesTrackableOnline();
+        }
+    }
+
+
     // React when changing geocode
     private class LoadGeocacheListener implements OnFocusChangeListener {
         @Override
@@ -443,22 +465,24 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         final LogTrackableTaskInterface taskInterface = new LogTrackableTaskInterface();
         taskInterface.loggingManager = loggingManager;
         taskInterface.geocache = geocache;
-        taskInterface.trackable = trackable;
-        taskInterface.typeSelected = typeSelected;
-        taskInterface.binding = binding;
-        taskInterface.date = date;
-        new LogTrackableTask(this, res.getString(R.string.log_saving), taskInterface, this::onPostExecuteInternal).execute(binding.log.getText().toString());
+
+        taskInterface.trackableLogEntry = TrackableLogEntry.of(trackable)
+            .setAction(typeSelected)
+            .setDate(date.getDate())
+            .setLog(binding.log.getText().toString());
+
+        new LogTrackableTask(this, res.getString(R.string.log_saving), taskInterface, this::onPostExecuteInternal).execute();
         Settings.setTrackableAction(typeSelected.id);
         Settings.setLastTrackableLog(binding.log.getText().toString());
     }
 
     protected static class LogTrackableTaskInterface {
-        public AbstractTrackableLoggingManager loggingManager;
+        public TrackableLoggingManager loggingManager;
         public Geocache geocache;
-        public Trackable trackable;
-        public LogTypeTrackable typeSelected;
-        public LogtrackableActivityBinding binding;
-        public DateTimeEditor date;
+        public TrackableLogEntry trackableLogEntry;
+        //public LogTypeTrackable typeSelected;
+        //public LogtrackableActivityBinding binding;
+        //public DateTimeEditor date;
     }
 
     private void onPostExecuteInternal(final StatusCode status) {

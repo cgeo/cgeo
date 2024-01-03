@@ -616,12 +616,12 @@ public final class GCParser {
                     final MatcherWrapper matcherInventoryInside = new MatcherWrapper(GCConstants.PATTERN_INVENTORYINSIDE, inventoryPre);
 
                     while (matcherInventoryInside.find()) {
-                        final Trackable inventoryItem = new Trackable();
-                        inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
                         final boolean isGeocode = "TB".equals(matcherInventoryInside.group(1));
                         final String tbId = matcherInventoryInside.group(2);
-                        inventoryItem.setGuid(isGeocode ? null : tbId);
+                        final Trackable inventoryItem = new Trackable();
                         inventoryItem.setGeocode(isGeocode ? tbId : null);
+                        inventoryItem.setGuid(isGeocode ? null : tbId);
+                        inventoryItem.forceSetBrand(TrackableBrand.TRAVELBUG);
                         inventoryItem.setName(matcherInventoryInside.group(3));
 
                         inventory.add(inventoryItem);
@@ -1122,10 +1122,8 @@ public final class GCParser {
         }
 
         final Trackable trackable = new Trackable();
-        trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
-
-        // trackable geocode
         trackable.setGeocode(TextUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, StringUtils.upperCase(possibleTrackingcode)));
+        trackable.forceSetBrand(TrackableBrand.TRAVELBUG);
         if (trackable.getGeocode() == null) {
             Log.e("GCParser.parseTrackable: could not figure out trackable geocode");
             return null;

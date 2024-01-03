@@ -1,14 +1,14 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.List;
+import java.util.Map;
 
 class NoLoggingManager extends AbstractLoggingManager {
 
@@ -19,7 +19,7 @@ class NoLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final boolean addToFavorites, final float rating) {
+    public LogResult createLog(@NonNull final OfflineLogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
         return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 

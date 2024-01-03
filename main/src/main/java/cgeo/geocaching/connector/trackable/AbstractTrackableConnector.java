@@ -2,9 +2,7 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
-import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
@@ -12,8 +10,6 @@ import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;
-
-import io.reactivex.rxjava3.core.Observable;
 
 public abstract class AbstractTrackableConnector implements TrackableConnector {
 
@@ -121,18 +117,7 @@ public abstract class AbstractTrackableConnector implements TrackableConnector {
     }
 
     @Override
-    @NonNull
-    public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.empty();
-    }
-
-    @Override
-    public int getTrackableLoggingManagerLoaderId() {
-        return 0;
-    }
-
-    @Override
-    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
+    public TrackableLoggingManager getTrackableLoggingManager(final String tbCode) {
         return null;
     }
 }

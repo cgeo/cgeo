@@ -1,8 +1,6 @@
 package cgeo.geocaching.storage.extension;
 
-import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
@@ -18,17 +16,19 @@ public class LastTrackableAction extends DataStore.DBExtension {
 
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_LAST_TRACKABLE_ACTION;
 
-    public static LogTypeTrackable getNextAction(final TrackableBrand brand, final String trackCode) {
+    public static LogTypeTrackable getNextAction(final String tGeocode) {
         final boolean autoVisit = Settings.isTrackableAutoVisit();
         if (autoVisit) {
             return LogTypeTrackable.VISITED;
         }
+        if (tGeocode == null) {
+            return LogTypeTrackable.DO_NOTHING;
+        }
 
-        final String key = buildKey(brand, trackCode);
-        final DataStore.DBExtension temp = load(type, key);
+        final DataStore.DBExtension temp = load(type, tGeocode);
         if (temp != null) {
             final LogTypeTrackable lastAction = LogTypeTrackable.getById((int) temp.getLong1());
-            Log.d("get tb: key=" + key + ", action=" + lastAction);
+            Log.d("get tb: key=" + tGeocode + ", action=" + lastAction);
 
             // what is the next possible action?
             if (lastAction == LogTypeTrackable.VISITED || lastAction == LogTypeTrackable.NOTE || lastAction == LogTypeTrackable.DISCOVERED_IT) {
@@ -38,23 +38,18 @@ public class LastTrackableAction extends DataStore.DBExtension {
             // RETRIEVED_IT, GRABBED_IT (autoVisit is handled above)
             // DO_NOTHING, DROPPED_OFF, ARCHIVED, MOVE_COLLECTION, MOVE_INVENTORY
         } else {
-            Log.d("get tb: key=" + key + " (not found)");
+            Log.d("get tb: key=" + tGeocode + " (not found)");
         }
         return LogTypeTrackable.DO_NOTHING;
     }
 
-    public static void setAction(final TrackableBrand brand, final String trackCode, final LogTypeTrackable action) {
-        final String key = buildKey(brand, trackCode);
-        removeAll(type, key);
-        add(type, key, action.id, System.currentTimeMillis(), 0, 0, "", "", "", "");
-        Log.d("add tb: key=" + key + ", action=" + action);
+    public static void setAction(final String tGeocode, final LogTypeTrackable action) {
+        if (tGeocode == null) {
+            return;
+        }
+        removeAll(type, tGeocode);
+        add(type, tGeocode, action.id, System.currentTimeMillis(), 0, 0, "", "", "", "");
+        Log.d("add tb: key=" + tGeocode + ", action=" + action);
     }
 
-    public static void setAction(final TrackableLog trackableLog) {
-        setAction(trackableLog.brand, trackableLog.trackCode, trackableLog.action);
-    }
-
-    private static String buildKey(final TrackableBrand brand, final String trackCode) {
-        return "(" + brand.getId() + ")" + trackCode;
-    }
 }

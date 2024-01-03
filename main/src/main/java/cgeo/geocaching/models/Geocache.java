@@ -1407,7 +1407,7 @@ public class Geocache implements IWaypoint {
     }
 
     public void setGeocode(@NonNull final String geocode) {
-        this.geocode = StringUtils.upperCase(geocode);
+        this.geocode = geocode == null ? "" : StringUtils.upperCase(geocode);
     }
 
     public void setCacheId(final String cacheId) {

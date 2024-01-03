@@ -18,6 +18,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
@@ -46,11 +47,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,16 +66,13 @@ import androidx.loader.content.Loader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 import java.util.function.BiFunction;
 
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
 public class LogCacheActivity extends AbstractLoggingActivity implements LoaderManager.LoaderCallbacks<LogContextInfo> {
@@ -92,13 +92,15 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private enum SaveMode { NORMAL, FORCE, SKIP }
 
-    private final Set<TrackableLog> trackables = new HashSet<>();
     protected LogcacheActivityBinding binding;
 
     protected ImageListFragment imageListFragment;
 
-    private LogActivityHelper logActivityHelper = new LogActivityHelper(this)
-        .setLogEditResultConsumer(result -> onPostExecuteInternal(result));
+    private final LogActivityHelper logActivityHelper = new LogActivityHelper(this)
+        .setLogEditResultConsumer(this::onPostExecuteInternal);
+
+    private InventoryLogAdapter inventoryAdapter;
+
 
     private Geocache cache = null;
     private String geocode = null;
@@ -170,37 +172,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         showProgress(false);
     }
 
-    private List<TrackableLog> initializeTrackableActions(final List<TrackableLog> tLogs, final OfflineLogEntry savedState) {
-        return CollectionStream.of(tLogs).map(tLog -> initializeTrackableAction(tLog, savedState)).toList();
-    }
-
-    private TrackableLog initializeTrackableAction(final TrackableLog tLog, final OfflineLogEntry savedState) {
-        if (savedState != null && savedState.trackableActions.containsKey(tLog.trackCode)) {
-            tLog.setAction(savedState.trackableActions.get(tLog.trackCode));
-        } else {
-            tLog.setAction(LastTrackableAction.getNextAction(tLog.brand, tLog.trackCode));
-        }
-        return tLog;
-    }
-
-    private void updateTrackablesList() {
-        final TrackableLog[] trackablesArray = getSortedTrackables().toArray(new TrackableLog[trackables.size()]);
-        binding.inventory.setAdapter(new TrackableLogAdapter(this, R.layout.logcache_trackable_item, trackablesArray));
-        ViewUtils.setListViewHeightBasedOnItems(binding.inventory);
-
-        binding.inventoryBox.setVisibility(this.logEditMode == LogEditMode.EDIT_EXISTING || trackables.isEmpty() ? View.GONE : View.VISIBLE);
-        binding.inventoryChangeall.setVisibility(trackables.size() > 1 ? View.VISIBLE : View.GONE);
-
-        trackableActionsChangeAll.setTextDialogTitle(getString(R.string.log_tb_changeall) + " (" + trackables.size() + ")");
-    }
-
-    private ArrayList<TrackableLog> getSortedTrackables() {
-        final TrackableComparator comparator = Settings.getTrackableComparator();
-        final ArrayList<TrackableLog> sortedTrackables = new ArrayList<>(trackables);
-        Collections.sort(sortedTrackables, comparator.getComparator());
-        return sortedTrackables;
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
 
@@ -217,18 +188,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         this.imageListFragment = (ImageListFragment) getSupportFragmentManager().findFragmentById(R.id.imagelist_fragment);
 
-        //init trackable "change all" button
-        trackableActionsChangeAll.setTextView(binding.changebutton)
-                .setTextDialogTitle(getString(R.string.log_tb_changeall))
-                .setTextDisplayMapperPure(lt -> getString(R.string.log_tb_changeall))
-                .setDisplayMapperPure(LogTypeTrackable::getLabel)
-                .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
-                .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
-                .setChangeListener(lt -> {
-                    CollectionStream.of(trackables).forEach(t -> t.action = lt);
-                    updateTrackablesList();
-                }, false);
-
         // Get parameters from intent and basic cache information from database
         final Bundle extras = getIntent().getExtras();
         logEditMode = LogEditMode.CREATE_NEW;
@@ -240,6 +199,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
             }
         }
+
+        //handle inventory
+        trackableActionsChangeAll.setTextView(binding.changebutton);
+        inventoryAdapter = new InventoryLogAdapter(this, binding.inventory, trackableActionsChangeAll,
+            binding.inventoryChangeall, binding.inventoryBox, logEditMode == LogEditMode.CREATE_NEW);
+        binding.inventory.setAdapter(inventoryAdapter);
 
         cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         invalidateOptionsMenuCompatible();
@@ -283,20 +248,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.logEditMode = LogEditMode.values()[savedInstanceState.getInt(SAVED_STATE_LOGEDITMODE)];
             this.originalLogEntry = savedInstanceState.getParcelable(SAVED_STATE_OLDLOGENTRY);
         }
+        inventoryAdapter.putActions(lastSavedState.inventoryActions);
 
         refreshGui();
-
-        // Load Generic Trackables
-        AndroidRxUtils.bindActivity(this,
-                // Obtain the actives connectors
-                Observable.fromIterable(ConnectorFactory.getLoggableGenericTrackablesConnectors())
-                        .flatMap((Function<TrackableConnector, Observable<TrackableLog>>) trackableConnector -> Observable.defer(trackableConnector::trackableLogInventory).subscribeOn(AndroidRxUtils.networkScheduler)).toList()
-        ).subscribe(trackableLogs -> {
-            // Store trackables
-            trackables.addAll(initializeTrackableActions(trackableLogs, lastSavedState));
-            // Update the UI
-            updateTrackablesList();
-        });
 
         requestKeyboardForLogging();
 
@@ -342,21 +296,22 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         if (logEntry instanceof OfflineLogEntry) {
             final OfflineLogEntry offlineLogEntry = (OfflineLogEntry) logEntry;
-            cacheVotingBar.setRating(offlineLogEntry.rating == null ? cache.getMyVote() : offlineLogEntry.rating);
+            cacheVotingBar.setRating(offlineLogEntry.rating == 0 ? cache.getMyVote() : offlineLogEntry.rating);
             binding.favoriteCheck.setChecked(offlineLogEntry.favorite);
             //If fav check is set then ALWAYS make the checkbox visible. See https://github.com/cgeo/cgeo/issues/13309#issuecomment-1702026609
             if (offlineLogEntry.favorite) {
                 binding.favoriteCheck.setVisibility(View.VISIBLE);
             }
             binding.logPassword.setText(offlineLogEntry.password);
-            CollectionStream.of(trackables).forEach(t -> initializeTrackableAction(t, offlineLogEntry));
+            inventoryAdapter.putActions(offlineLogEntry.inventoryActions);
+            //CollectionStream.of(inventory).forEach(t -> initializeTrackableAction(t, offlineLogEntry));
         } else {
             cacheVotingBar.setRating(0);
             binding.favoriteCheck.setChecked(false);
             binding.logPassword.setText("");
         }
 
-        updateTrackablesList();
+        //updateTrackablesList();
     }
 
     private OfflineLogEntry getEntryFromView() {
@@ -369,7 +324,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 .setFavorite(binding.favoriteCheck.isChecked())
                 .setPassword(binding.logPassword.getText().toString());
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
-        CollectionStream.of(trackables).forEach(t -> builder.addTrackableAction(t.trackCode, t.action));
+        builder.addInventoryActions(inventoryAdapter.getActionLogs());
+        //CollectionStream.of(inventory).forEach(t -> builder.addTrackableAction(t.geocode, t.action));
 
         return builder.build();
     }
@@ -411,8 +367,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         logPasswordView.setText(StringUtils.EMPTY);
         */
 
+        inventoryAdapter.resetActions();
         //force copy due to #9101
-        CollectionStream.of(trackables, true).forEach(tl -> initializeTrackableAction(tl, null));
+        //CollectionStream.of(inventory, true).forEach(tl -> initializeTrackableAction(tl, null));
     }
 
     private void clearLog() {
@@ -458,7 +415,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         cacheVotingBar.validateVisibility(cache, logType.get(), this.logEditMode == LogEditMode.CREATE_NEW);
         initializeFavoriteCheck();
         verifySelectedReportProblemType();
-        updateTrackablesList();
+        //updateTrackablesList();
     }
 
     private void showProgress(final boolean loading) {
@@ -588,11 +545,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         lastSavedState = getEntryFromView();
         final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
         taskInterface.loggingManager = loggingManager;
-        taskInterface.logEntry = lastSavedState.buildUpon().build();
-        taskInterface.addToFavorite = binding.favoriteCheck.isChecked();
-        taskInterface.rating = cacheVotingBar.getRating();
-        taskInterface.trackables = trackables;
-        taskInterface.password = currentLogPassword();
+        taskInterface.logEntry = getEntryFromView();
+        taskInterface.inventory = inventoryAdapter.getInventory();
         taskInterface.imageTitleCreator = (i, p) -> imageListFragment.getImageTitle(i, p);
         new LogCacheTask(this, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute();
         Settings.setLastCacheLog(currentLogText());
@@ -604,12 +558,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     protected static class LogCacheTaskInterface {
         public ILoggingManager loggingManager;
         public LogEntry logEntry;
-        public Set<TrackableLog> trackables;
-        public float rating;
-        public boolean addToFavorite;
-        public String password;
+        public Map<String, Trackable> inventory;
         public BiFunction<Image, Integer, String> imageTitleCreator;
-        }
+    }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
@@ -659,8 +610,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private void sortTrackables(final TrackableComparator comparator) {
-        Settings.setTrackableComparator(comparator);
-        updateTrackablesList();
+        //Settings.setTrackableComparator(comparator);
+        inventoryAdapter.resortTrackables(comparator);
+        //updateTrackablesList();
         invalidateOptionsMenuCompatible();
     }
 
@@ -682,7 +634,8 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             setLogTypeValues(data.getAvailableLogTypes());
         }
         if (!data.getAvailableTrackables().isEmpty()) {
-            trackables.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
+            inventoryAdapter.setTrackables(data.getAvailableTrackables());
+            //inventory.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
         }
         if (!data.getAvailableReportProblemTypes().isEmpty()) {
             reportProblem.setValues(data.getAvailableReportProblemTypes());
@@ -732,7 +685,14 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         @Nullable
         @Override
         public LogContextInfo loadInBackground() {
-            return this.loggingManager.getLogContextInfo(serviceLogId);
+            final LogContextInfo info = this.loggingManager.getLogContextInfo(serviceLogId);
+
+            // Load Generic Trackables
+            for (TrackableConnector genericTrackableConnector : ConnectorFactory.getGenericTrackablesConnectors()) {
+                final List<Trackable> trackables = genericTrackableConnector.loadInventory();
+                info.addAvailableTrackables(trackables);
+            }
+            return info;
         }
     }
 
@@ -746,51 +706,134 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
     }
 
-    private final class TrackableLogAdapter extends ArrayAdapter<TrackableLog> {
-        private TrackableLogAdapter(final Context context, final int resource, final TrackableLog[] objects) {
-            super(context, resource, objects);
+    private static final class InventoryLogAdapter extends ArrayAdapter<Trackable> {
+
+        private final Map<String, LogTypeTrackable> actionLogs = new HashMap<>();
+        private final TextSpinner<LogTypeTrackable> changeAllButton;
+        private final ListView listView;
+        private final View changeAllBox;
+        private final View inventoryBox;
+
+        private final boolean activated;
+
+        private InventoryLogAdapter(final Context context, final ListView listView, final TextSpinner<LogTypeTrackable> changeAllButton, final View changeAllBox, final View inventoryBox, final boolean activated) {
+            super(context, R.layout.logcache_trackable_item);
+            this.setNotifyOnChange(false);
+            this.listView = listView;
+            this.changeAllButton = changeAllButton;
+            this.changeAllBox = changeAllBox;
+            this.inventoryBox = inventoryBox;
+            this.activated = activated;
+
+            //init trackable "change all" button
+            changeAllButton.setTextDialogTitle(LocalizationUtils.getString(R.string.log_tb_changeall))
+                .setTextDisplayMapperPure(lt -> LocalizationUtils.getString(R.string.log_tb_changeall))
+                .setDisplayMapperPure(LogTypeTrackable::getLabel)
+                .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
+                .setChangeListener(lt -> {
+                    final Map<String, LogTypeTrackable> newMap = new HashMap<>();
+                    for (int i = 0; i < getCount(); i++) {
+                        newMap.put(getItem(i).getGeocode(), lt);
+                    }
+                    putActions(newMap);
+                }, false);
+        }
+
+        public void setTrackables(final Collection<Trackable> inventory) {
+            this.clear();
+            this.addAll(inventory);
+            resortTrackables(Settings.getTrackableComparator());
+        }
+
+        public void resortTrackables(final TrackableComparator comparator) {
+
+            //sort trackables
+            this.sort(comparator.getComparator());
+            Settings.setTrackableComparator(comparator);
+
+            handleChangedData();
+        }
+
+        public void resetActions() {
+            this.actionLogs.clear();
+            handleChangedData();
+        }
+
+        public void putActions(final Map<String, LogTypeTrackable> actions) {
+            this.actionLogs.putAll(actions);
+            handleChangedData();
+        }
+
+        public Map<String, LogTypeTrackable> getActionLogs() {
+            return actionLogs;
+        }
+
+        public Map<String, Trackable> getInventory() {
+            final Map<String, Trackable> inventory = new HashMap<>();
+            for (int i = 0; i < getCount(); i++) {
+                inventory.put(getItem(i).getGeocode(), getItem(i));
+            }
+            return inventory;
+        }
+
+        private void handleChangedData() {
+            //re-render list
+            notifyDataSetChanged();
+            ViewUtils.setListViewHeightBasedOnItems(listView);
+
+            //handle "change all" button
+            inventoryBox.setVisibility(activated && getCount() > 0 ? View.VISIBLE : View.GONE);
+            changeAllBox.setVisibility(activated && getCount() > 1 ? View.VISIBLE : View.GONE);
+            changeAllButton.setTextDialogTitle(
+                LocalizationUtils.getString(R.string.log_tb_changeall) + " (" + getCount() + ")");
+
         }
 
         @Override
+        @NonNull
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View rowView = convertView;
             if (rowView == null) {
-                rowView = getLayoutInflater().inflate(R.layout.logcache_trackable_item, parent, false);
+                rowView = LayoutInflater.from(getContext()).inflate(R.layout.logcache_trackable_item, parent, false);
             }
             ViewHolder holder = (ViewHolder) rowView.getTag();
             if (holder == null) {
                 holder = new ViewHolder(rowView);
             }
 
-            final TrackableLog trackable = getItem(position);
+            final Trackable trackable = getItem(position);
             fillViewHolder(holder, trackable, holder.binding.action);
             return rowView;
         }
 
-        private void fillViewHolder(final ViewHolder holder, final TrackableLog trackable, final TextView action) {
-            holder.binding.trackableImageBrand.setImageResource(trackable.brand.getIconResource());
-            holder.binding.trackcode.setText(trackable.trackCode);
-            holder.binding.name.setText(trackable.name);
+        private void fillViewHolder(final ViewHolder holder, final Trackable trackable, final TextView actionView) {
+            holder.binding.trackableImageBrand.setImageResource(trackable.getBrand().getIconResource());
+            holder.binding.trackcode.setText(trackable.getTrackingcode());
+            holder.binding.name.setText(trackable.getName());
 
-            holder.trackableAction.setTextView(action)
-                    .setTextDialogTitle(trackable.name)
+            LogTypeTrackable action = actionLogs.get(trackable.getGeocode());
+            if (action == null) {
+                action = LastTrackableAction.getNextAction(trackable.getGeocode());
+                actionLogs.put(trackable.getGeocode(), action);
+            }
+
+            holder.trackableAction.setTextView(actionView)
+                    .setTextDialogTitle(trackable.getName())
                     .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
                     .setDisplayMapperPure(LogTypeTrackable::getLabel)
                     .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
-                    .set(trackable.action)
-                    .setChangeListener(lt -> {
-                        trackable.action = lt;
-                        updateTrackablesList();
-                    });
+                    .set(action)
+                    .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt));
 
 
             holder.binding.info.setOnClickListener(view -> {
-                final Intent trackablesIntent = new Intent(LogCacheActivity.this, TrackableActivity.class);
-                final String tbCode = StringUtils.isNotEmpty(trackable.geocode) ? trackable.geocode : trackable.trackCode;
+                final Intent trackablesIntent = new Intent(getContext(), TrackableActivity.class);
+                final String tbCode = StringUtils.isNotEmpty(trackable.getGeocode()) ? trackable.getGeocode() : trackable.getTrackingcode();
                 trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, tbCode);
-                trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.brand.getId());
-                trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.trackCode);
-                startActivity(trackablesIntent);
+                trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackable.getBrand().getId());
+                trackablesIntent.putExtra(Intents.EXTRA_TRACKING_CODE, trackable.getTrackingcode());
+                getContext().startActivity(trackablesIntent);
             });
         }
     }

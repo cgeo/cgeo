@@ -2,90 +2,74 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.gc.GCLogAPI;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.log.TrackableLogEntry;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.extension.LastTrackableAction;
+import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
 
-    private final AbstractLoggingActivity activity;
-    private String guid;
-
-    private boolean hasLoaderError = true;
-    private String[] viewstates = null;
-    private List<LogTypeTrackable> possibleLogTypesTrackable;
-
-    public TravelBugLoggingManager(final AbstractLoggingActivity activity) {
-        super(activity);
-        this.activity = activity;
+    public TravelBugLoggingManager(final String tbCode) {
+        super(tbCode);
     }
 
+    @WorkerThread
+    @NonNull
     @Override
-    public List<LogTypeTrackable> loadInBackground() {
+    public List<LogTypeTrackable> getPossibleLogTypesTrackableOnline() {
+
+        final String trackableCode = getTrackableCode();
+
         if (!Settings.hasGCCredentials()) { // allow offline logging
-            ActivityMixin.showToast(activity, activity.getString(R.string.err_login));
-            return null;
+            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_login));
+            return Collections.emptyList();
         }
 
-        final String page = TravelBugConnector.getTravelbugViewstates(guid);
+        final String url = GCLogAPI.getUrlForNewLog(GCLogAPI.getUrlForNewTrackableLog(trackableCode));
+        String page = null;
+        try {
+            page = Network.getResponseData(Network.getRequest(url, null));
+        } catch (final Exception e) {
+            Log.w("TBLoggingManager: failed to retrieve trackable log page data for '" + url + "'", e);
+        }
 
         if (page == null) {
-            activity.showToast(activity.getString(R.string.err_log_load_data));
-            hasLoaderError = true;
-        } else {
-            viewstates = GCLogin.getViewstates(page);
-            possibleLogTypesTrackable = GCParser.parseLogTypesTrackables(page);
-            hasLoaderError = possibleLogTypesTrackable.isEmpty();
+            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_log_load_data));
+            return Collections.emptyList();
         }
-        return possibleLogTypesTrackable;
+
+        return GCParser.parseLogTypesTrackables(page);
+
     }
 
     @Override
-    public boolean postReady() {
-        return !hasLoaderError;
-    }
-
-    @Override
-    public LogResult postLog(final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
+    public LogResult postLog(final Geocache cache, final TrackableLogEntry trackableLog) {
         // 'cache' is not used here, but it is for GeokretyLoggingManager
-        LastTrackableAction.setAction(trackableLog);
-        return GCLogAPI.createLogTrackable(trackableLog, date.getTime(), log);
-    }
-
-    @Override
-    @Nullable
-    public ImageResult postLogImage(final String logId, final Image image) {
-        return null;
+        return GCLogAPI.createLogTrackable(trackableLog, trackableLog.getDate(), trackableLog.getLog());
     }
 
     @Override
     @NonNull
     public List<LogTypeTrackable> getPossibleLogTypesTrackable() {
-        if (hasLoaderError) {
-            final List<LogTypeTrackable> logTypes = new ArrayList<>();
-            logTypes.add(LogTypeTrackable.RETRIEVED_IT);
-            logTypes.add(LogTypeTrackable.GRABBED_IT);
-            logTypes.add(LogTypeTrackable.NOTE);
-            logTypes.add(LogTypeTrackable.DISCOVERED_IT);
-            return logTypes;
-        }
-        return possibleLogTypesTrackable;
+        final List<LogTypeTrackable> logTypes = new ArrayList<>();
+        logTypes.add(LogTypeTrackable.RETRIEVED_IT);
+        logTypes.add(LogTypeTrackable.GRABBED_IT);
+        logTypes.add(LogTypeTrackable.NOTE);
+        logTypes.add(LogTypeTrackable.DISCOVERED_IT);
+        return logTypes;
     }
 
     @Override
@@ -98,8 +82,4 @@ public class TravelBugLoggingManager extends AbstractTrackableLoggingManager {
         return false;
     }
 
-    @Override
-    public void setGuid(final String guid) {
-        this.guid = guid;
-    }
 }

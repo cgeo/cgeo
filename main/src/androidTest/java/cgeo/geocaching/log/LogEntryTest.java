@@ -182,7 +182,7 @@ public class LogEntryTest {
                 .setImageTitlePraefix("praefix")
                 .addLogImage(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").build())
                 .addLogImage(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").build())
-                .addTrackableAction("TBFake1", LogTypeTrackable.DROPPED_OFF)
+                .addInventoryAction("TBFake1", LogTypeTrackable.DROPPED_OFF)
                 .build();
 
         //serialize and deserialize;
@@ -202,8 +202,8 @@ public class LogEntryTest {
         assertThat(otherLogEntry.logImages.size()).isEqualTo(2);
         assertThat(otherLogEntry.logImages.get(0)).isEqualTo(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").setCategory(Image.ImageCategory.LOG).build());
         assertThat(otherLogEntry.logImages.get(1)).isEqualTo(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").setCategory(Image.ImageCategory.LOG).build());
-        assertThat(otherLogEntry.trackableActions.size()).isEqualTo(1);
-        assertThat(otherLogEntry.trackableActions.get("TBFake1")).isEqualTo(LogTypeTrackable.DROPPED_OFF);
+        assertThat(otherLogEntry.inventoryActions.size()).isEqualTo(1);
+        assertThat(otherLogEntry.inventoryActions.get("TBFake1")).isEqualTo(LogTypeTrackable.DROPPED_OFF);
     }
 
     @Test
@@ -216,9 +216,9 @@ public class LogEntryTest {
         final byte[] parcel = marshall(logEntry);
         final OfflineLogEntry otherLogEntry = unmarshall(parcel, OfflineLogEntry.CREATOR);
 
-        assertThat(otherLogEntry.rating).isNull();
+        assertThat(otherLogEntry.rating).isEqualTo(0.0f);
         assertThat(otherLogEntry.logImages.size()).isEqualTo(0);
-        assertThat(otherLogEntry.trackableActions.size()).isEqualTo(0);
+        assertThat(otherLogEntry.inventoryActions.size()).isEqualTo(0);
 
     }
 
