@@ -1229,6 +1229,10 @@ public class Settings {
         putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval() * 24));
     }
 
+    public static boolean getMapDownloadsKeepTemporaryFiles() {
+        return getBoolean(R.string.pref_mapDownloadsKeepTemporaryFiles, false);
+    }
+
     public static boolean dbNeedsCleanup() {
         return needsIntervalAction(R.string.pref_dbCleanupLastCheck, 24, () -> setDbCleanupLastCheck(false));
     }

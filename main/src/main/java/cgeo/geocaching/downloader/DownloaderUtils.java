@@ -224,7 +224,7 @@ public class DownloaderUtils {
                 .setTitle(filename)
                 .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, filename)
+                .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
                 .setAllowedOverMetered(allowMeteredNetwork)
                 .setAllowedOverRoaming(allowMeteredNetwork);
         Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
