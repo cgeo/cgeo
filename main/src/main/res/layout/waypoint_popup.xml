@@ -4,9 +4,11 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/colorBackgroundDialog"
-    android:windowBackground="@color/colorBackgroundTransparent"
-    tools:context=".WaypointPopupFragment" >
+    android:background="@android:color/transparent"
+    android:windowBackground="@android:color/transparent"
+    tools:context=".WaypointPopupFragment">
+
+    <include layout="@layout/swipe_up_indicator" />
 
     <include
         android:id="@+id/toolbar"
@@ -17,6 +19,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
+        android:background="@color/colorBackgroundDialog"
         android:padding="4dip" >
 
         <LinearLayout
