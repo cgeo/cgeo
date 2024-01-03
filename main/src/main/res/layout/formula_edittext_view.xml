@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/formula_edittext_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <!-- "merge" will be a LinearLayout -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/formula_function"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:minWidth="@dimen/textSize_buttonsPrimary"
+                android:layout_marginTop="6dp"
+                android:textSize="24sp"
+                android:text="𝑓"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/formula_text_layout"
+                style="@style/textinput_edittext_singleline"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                tools:hint="hint text"
+                android:labelFor="@id/formula_text"
+                >
+
+                <EditText style="@style/textinput_embedded_singleline"
+                    android:id="@+id/formula_text"
+                    android:inputType="text|textNoSuggestions"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/formula_result"
+                style="@style/text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:focusable="true"
+                android:textIsSelectable="true"
+                android:selectAllOnFocus="true"
+                tools:text="= formula result\n line2\n line3" />
+
+        </LinearLayout>
+
+</merge>

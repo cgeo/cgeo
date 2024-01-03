@@ -291,7 +291,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     private void zoomToBoundsDirect(final BoundingBox bounds) {
-        MapPosition mp = mMap.getMapPosition();
+        final MapPosition mp = mMap.getMapPosition();
         mp.setByBoundingBox(bounds, mMapView.getWidth(), mMapView.getHeight());
         mMap.setMapPosition(mp);
     }
