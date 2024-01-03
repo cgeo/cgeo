@@ -23,7 +23,7 @@ Weitere Änderungen:
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 - Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
-- Change: Show cache/waypoint details in a non-blocking way
+- Änderung: Cache/Wegpunkt-Details auf nicht-blockierende Weise anzeigen
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
