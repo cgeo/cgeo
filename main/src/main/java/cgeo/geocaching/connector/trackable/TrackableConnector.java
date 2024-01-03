@@ -1,9 +1,7 @@
 package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.connector.UserAction;
-import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
@@ -11,8 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.List;
-
-import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Methods to be implemented by any connector for handling trackables
@@ -143,11 +139,10 @@ public interface TrackableConnector {
     /**
      * Return the Trackable Logging Manager for the Trackable.
      *
-     * @param activity currently running
      * @return the Trackable logging manager.
      */
     @Nullable
-    AbstractTrackableLoggingManager getTrackableLoggingManager(AbstractLoggingActivity activity);
+    TrackableLoggingManager getTrackableLoggingManager(String tbCode);
 
     /**
      * Tell if the trackable is loggable via a generic Trackable Connector.
@@ -176,18 +171,6 @@ public interface TrackableConnector {
      * @return True if connector recommend Geocode.
      */
     boolean recommendLogWithGeocode();
-
-    int getTrackableLoggingManagerLoaderId();
-
-    /**
-     * Return list of Trackables in user's inventory converted to TrackableLog object.
-     * TrackableLog are used for posting a Trackable Log, they contain necessary
-     * information to post the Trackable Log.
-     *
-     * @return the TrackableLog corresponding to trackables in user's inventory as Observable.
-     */
-    @NonNull
-    Observable<TrackableLog> trackableLogInventory();
 
     /**
      * Get host name of the connector server for dynamic loading of data.

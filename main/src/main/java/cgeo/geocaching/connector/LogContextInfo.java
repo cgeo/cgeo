@@ -2,7 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.Nullable;
@@ -31,7 +31,7 @@ public class LogContextInfo {
 
     private final List<LogType> availableLogTypes = new ArrayList<>();
 
-    private final List<TrackableLog> availableTrackables = new ArrayList<>();
+    private final List<Trackable> availableTrackables = new ArrayList<>();
     private final List<ReportProblemType> availableReportProblemTypes = new ArrayList<>();
 
     private int availableFavoritePoints = -1; //-1 means "not supported"
@@ -93,15 +93,19 @@ public class LogContextInfo {
         }
     }
 
-    public List<TrackableLog> getAvailableTrackables() {
+    public List<Trackable> getAvailableTrackables() {
         return availableTrackables;
     }
 
-    public void setAvailableTrackables(final Iterable<TrackableLog> trackables) {
-        availableTrackables.clear();
-        for (TrackableLog lt : trackables) {
+    public void addAvailableTrackables(final Iterable<Trackable> trackables) {
+        for (Trackable lt : trackables) {
             availableTrackables.add(lt);
         }
+    }
+
+    public void setAvailableTrackables(final Iterable<Trackable> trackables) {
+        availableTrackables.clear();
+        addAvailableTrackables(trackables);
     }
 
     public List<ReportProblemType> getAvailableReportProblemTypes() {

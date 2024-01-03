@@ -26,7 +26,7 @@ public class GeocodeComparatorTest {
 
         Collections.sort(caches, new GeocodeComparator());
 
-        assertThat(caches.get(0).getGeocode()).isNull();
+        assertThat(caches.get(0).getGeocode()).isEmpty();
         assertThat(caches.get(1).getGeocode()).isEqualTo("GC77");
         assertThat(caches.get(2).getGeocode()).isEqualTo("GC2345");
         assertThat(caches.get(3).getGeocode()).isEqualTo("GC1ABCD");

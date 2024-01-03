@@ -3,7 +3,7 @@ package cgeo.geocaching.models;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.WaypointType;
 
-public interface IWaypoint extends ILogable, ICoordinates {
+public interface IWaypoint extends IGeoObject, ICoordinates {
 
     /**
      * Return an unique waypoint id.

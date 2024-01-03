@@ -9,7 +9,8 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.log.OfflineLogEntry;
+import cgeo.geocaching.log.TrackableLogEntry;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.test.NotForIntegrationTests;
@@ -61,12 +62,12 @@ public class GCLogAPITest {
 
     private String createCacheLog() {
         final long logTime = new Date().getTime();
-        final LogEntry logEntry = new LogEntry.Builder<>()
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
             .setLog("This is a test log (should be deleted automatically)")
             .setDate(logTime)
             .setLogType(LogType.NOTE)
             .build();
-        final LogResult result = GCLogAPI.createLog(TEST_GEOCODE, logEntry, Collections.emptyList(), false);
+        final LogResult result = GCLogAPI.createLog(TEST_GEOCODE, logEntry, Collections.emptyMap());
         assertStatusOk(result);
         assertThat(result.getServiceLogId()).startsWith("GL");
         final LogEntry check = retrieveCacheLogEntry(TEST_GEOCODE, result.getServiceLogId());
@@ -84,7 +85,7 @@ public class GCLogAPITest {
             .setDate(newLogTime)
             .setLogType(LogType.NOTE)
             .build();
-        final LogResult result = GCLogAPI.editLog(TEST_GEOCODE, newLogEntry, Collections.emptyList(), false);
+        final LogResult result = GCLogAPI.editLog(TEST_GEOCODE, newLogEntry);
         assertStatusOk(result);
         assertThat(result.getServiceLogId()).startsWith("GL");
         final LogEntry check = retrieveCacheLogEntry(TEST_GEOCODE, result.getServiceLogId());
@@ -104,15 +105,15 @@ public class GCLogAPITest {
     }
 
     private String createTrackableLog(final String logTextMarker) {
-        final TrackableLog tLog = new TrackableLog(TEST_TRAVELBUG, null, null, -1, -1, TrackableBrand.TRAVELBUG);
+        final TrackableLogEntry tLog = TrackableLogEntry.of(TEST_TRAVELBUG, null, TrackableBrand.TRAVELBUG);
         tLog.setAction(LogTypeTrackable.NOTE);
-        final LogResult result = GCLogAPI.createLogTrackable(tLog, new Date(), logTextMarker + "This is a test log");
+        final LogResult result = GCLogAPI.createLogTrackable(tLog, new Date(), logTextMarker + "This is a test log (will be deleted automatically)");
 
         assertStatusOk(result);
         assertThat(result.getServiceLogId()).startsWith("TL");
         final LogEntry check = retrieveTrackableLogEntry(TEST_TRAVELBUG, logTextMarker);
         assertThat(check).isNotNull();
-        assertThat(check.log).isEqualTo(logTextMarker + "This is a test log");
+        assertThat(check.log).isEqualTo(logTextMarker + "This is a test log (will be deleted automatically)");
 
         return result.getServiceLogId();
     }
@@ -170,7 +171,7 @@ public class GCLogAPITest {
             .setLogType(LogType.NOTE)
             .setLogImages(Collections.singletonList(new Image.Builder().setServiceImageId(logImageId).build()))
             .build();
-        final LogResult result = GCLogAPI.editLog(TEST_GEOCODE, newLogEntry, Collections.emptyList(), false);
+        final LogResult result = GCLogAPI.editLog(TEST_GEOCODE, newLogEntry);
         assertStatusOk(result);
         assertThat(result.getServiceLogId()).isEqualTo(logId);
         final LogEntry check = retrieveCacheLogEntry(TEST_GEOCODE, result.getServiceLogId());

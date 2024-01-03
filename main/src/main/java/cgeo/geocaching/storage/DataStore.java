@@ -3811,8 +3811,8 @@ public class DataStore {
 
     @NonNull
     private static Trackable createTrackableFromDatabaseContent(final Cursor cursor) {
-        final Trackable trackable = new Trackable();
         try {
+            final Trackable trackable = new Trackable();
             trackable.setGeocode(cursor.getString(cursor.getColumnIndexOrThrow("tbcode")));
             trackable.setGuid(cursor.getString(cursor.getColumnIndexOrThrow("guid")));
             trackable.setName(cursor.getString(cursor.getColumnIndexOrThrow("title")));
@@ -3824,10 +3824,11 @@ public class DataStore {
             trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndexOrThrow("log_type"))));
             trackable.setLogGuid(cursor.getString(cursor.getColumnIndexOrThrow("log_guid")));
             trackable.setLogs(loadLogs(trackable.getGeocode()));
+            return trackable;
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createTrackableFromDatabaseContent", e);
+            return null;
         }
-        return trackable;
     }
 
     @Nullable
@@ -5515,7 +5516,7 @@ public class DataStore {
                         cLog.add("images:%s", images.size());
 
                         //trackable entries
-                        final List<ContentValues> trackables = CollectionStream.of(logEntry.trackableActions.entrySet()).map(tr -> {
+                        final List<ContentValues> trackables = CollectionStream.of(logEntry.inventoryActions.entrySet()).map(tr -> {
                             final ContentValues cv = new ContentValues();
                             cv.put("logoffline_id", finalOfflineLogId);
                             cv.put("tbcode", tr.getKey());
@@ -5543,8 +5544,6 @@ public class DataStore {
             }
         }
 
-
-        //TODO
         @Nullable
         public static OfflineLogEntry load(final String geocode) {
             return withAccessLock(() -> {
@@ -5571,7 +5570,7 @@ public class DataStore {
                                     .setImageTitlePraefix(c.getString(7))
                                     .setImageScale(c.getInt(8))
                                     .setFavorite(c.getInt(9) > 0)
-                                    .setRating(c.isNull(11) ? null : c.getFloat(11))
+                                    .setRating(c.isNull(11) ? 0 : c.getFloat(11))
                                     .setPassword(c.getString(12))
                     );
 
@@ -5602,8 +5601,8 @@ public class DataStore {
                             .setColumns(new String[]{"tbcode", "actioncode"})
                             .setWhereClause("logoffline_id = " + logId).build();
                     queryTrackables.selectRows(database,
-                            c -> logBuilder.addTrackableAction(
-                                    c.getString(0),
+                            c -> logBuilder.addInventoryAction(
+                                c.getString(0),
                                     LogTypeTrackable.getById(ObjectUtils.defaultIfNull(c.getInt(1), LogTypeTrackable.UNKNOWN.id))
                             )
                     );

@@ -227,8 +227,8 @@ public class DataStoreTest {
                     .setRating(4.5f)
                     .addLogImage(new Image.Builder().setUrl("https://www.cgeo.org/images/logo.png").setTitle("The logo").setDescription("This is the logo").build())
                     .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_multi.png").setTitle("Multicache icon").setDescription("This is the icon for a multicache").build())
-                    .addTrackableAction("TBFAKE1", LogTypeTrackable.VISITED)
-                    .addTrackableAction("TBFAKE2", LogTypeTrackable.DROPPED_OFF);
+                    .addInventoryAction("TBFAKE1", LogTypeTrackable.VISITED)
+                    .addInventoryAction("TBFAKE2", LogTypeTrackable.DROPPED_OFF);
 
             //test insert and reload
             DataStore.saveLogOffline(geocode, builder.build());
@@ -250,9 +250,9 @@ public class DataStoreTest {
                     .addLogImage(new Image.Builder().setUrl("https://www.cgeo.org/images/logo.png").setTitle("The logo").setDescription("This is the logo").build())
                     .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_virtual.png").setTitle("Virtual icon").setDescription("This is the icon for a virtualcache").build())
                     .addLogImage(new Image.Builder().setUrl("https://manual.cgeo.org/_media/type_tradi.png").setTitle("Tradicache icon").setDescription("This is the icon for a traditionalcache").build())
-                    .clearTrackableActions()
-                    .addTrackableAction("TBFAKE1", LogTypeTrackable.DO_NOTHING)
-                    .addTrackableAction("TBFAKE3", LogTypeTrackable.ARCHIVED);
+                    .clearInventoryActions()
+                    .addInventoryAction("TBFAKE1", LogTypeTrackable.DO_NOTHING)
+                    .addInventoryAction("TBFAKE3", LogTypeTrackable.ARCHIVED);
 
             //test update and reload
             DataStore.saveLogOffline(geocode, builder.build());
@@ -321,7 +321,7 @@ public class DataStoreTest {
             assertThat(dbImages.get(i).getDescription()).isEqualTo(expImages.get(i).getDescription());
         }
 
-        assertThat(dbLogEntry.trackableActions).isEqualTo(expectedLogEntry.trackableActions);
+        assertThat(dbLogEntry.inventoryActions).isEqualTo(expectedLogEntry.inventoryActions);
     }
 
 

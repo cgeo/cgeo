@@ -2,10 +2,14 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
+import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.log.OfflineLogEntry;
+import cgeo.geocaching.log.TrackableLogEntry;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.network.Parameters;
@@ -19,10 +23,11 @@ import static cgeo.geocaching.connector.gc.GCAuthAPI.httpReq;
 import static cgeo.geocaching.connector.gc.GCAuthAPI.websiteReq;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -181,6 +186,10 @@ public class GCLogAPI {
         String name;
     }
 
+    public static String getUrlForNewTrackableLog(final String trackableCode) {
+        return WEBSITE_URL + "/live/trackable/" + trackableCode + "/log";
+    }
+
     public static String getUrlForNewLog(final String geocode) {
         return WEBSITE_URL + "/live/geocache/" + geocode + "/log";
     }
@@ -192,7 +201,7 @@ public class GCLogAPI {
     @NonNull
     @WorkerThread
     public static LogResult createLog(
-        final String geocode, final LogEntry logEntry, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables, final boolean addToFavorites) {
+        final String geocode, final OfflineLogEntry logEntry, final Map<String, Trackable> inventory) {
         if (StringUtils.isBlank(logEntry.log)) {
             return generateLogError("GCWebAPI.postLog: No log text given");
         }
@@ -204,7 +213,7 @@ public class GCLogAPI {
         }
 
         //2,) Fill Log Entry object and post it
-        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, trackables, addToFavorites);
+        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, inventory);
 
         try (GCWebLogResponse response = websiteReq().uri("/api/live/v1/logs/" + geocode + "/geocacheLog")
                 .method(HttpRequest.Method.POST)
@@ -220,7 +229,7 @@ public class GCLogAPI {
         }
     }
 
-    public static LogResult editLog(final String geocode, final LogEntry logEntry, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables, final boolean addToFavorites) {
+    public static LogResult editLog(final String geocode, final LogEntry logEntry) {
 
         if (StringUtils.isBlank(logEntry.serviceLogId)) {
             return generateLogError("Need a serviceLogId to edit a log entry");
@@ -236,7 +245,7 @@ public class GCLogAPI {
         }
 
         //2,) Fill Log Entry object and PUT it
-        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, trackables, addToFavorites);
+        final GCWebLogRequest logEntryRequest = createLogRequest(logEntry, null);
 
         try (GCWebLogResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/" + logId)
             .method(HttpRequest.Method.PUT)
@@ -347,15 +356,16 @@ public class GCLogAPI {
 
     }
 
-    public static LogResult createLogTrackable(final cgeo.geocaching.log.TrackableLog trackableLog, final Date date, final String log) {
+    @SuppressWarnings("PMD.NPathComplexity") // readability won't be improved upon split
+    public static LogResult createLogTrackable(final TrackableLogEntry trackableLog, final Date date, final String log) {
         final String tbCode = trackableLog.geocode;
 
-        if (StringUtils.isBlank(tbCode) || trackableLog == null || trackableLog.action == LogTypeTrackable.DO_NOTHING) {
+        if (StringUtils.isBlank(tbCode) || trackableLog == null || trackableLog.getAction() == LogTypeTrackable.DO_NOTHING) {
             generateLogError("Incomplete data for logging: " + trackableLog);
         }
 
         //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
-        final ImmutablePair<String, String> htmlAndCsrfToken = getHtmlAndCsrfTokenFromUrl(WEBSITE_URL + "/live/trackable/" + tbCode + "/log");
+        final ImmutablePair<String, String> htmlAndCsrfToken = getHtmlAndCsrfTokenFromUrl(getUrlForNewTrackableLog(tbCode));
         final String csrfToken = htmlAndCsrfToken == null ? null : htmlAndCsrfToken.right;
         if (csrfToken == null) {
             return generateLogError("Log Trackable Post: unable to extract CSRF Token in new Log Flow Page");
@@ -376,27 +386,28 @@ public class GCLogAPI {
         final GCWebTrackableLogRequest logEntry = new GCWebTrackableLogRequest();
         logEntry.images = new String[0];
         logEntry.logDate = date;
-        logEntry.logType = trackableLog.action.gcApiId;
+        logEntry.logType = trackableLog.getAction().gcApiId;
         logEntry.logText = log;
-        logEntry.trackingCode = trackableLog.trackCode;
+        logEntry.trackingCode = trackableLog.trackingCode;
 
         //special case: if type is RETRIEVED, we need to fill reference code
-        if (trackableLog.action == LogTypeTrackable.RETRIEVED_IT) {
+        if (trackableLog.getAction() == LogTypeTrackable.RETRIEVED_IT) {
             logEntry.geocacheReferenceCode = geocacheReferenceCode;
         }
 
         //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
-        final GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
+        try (GCWebTrackableLogResponse response = websiteReq().uri("/api/live/v1/logs/" + tbCode + "/trackableLog")
                 .method(HttpRequest.Method.POST)
                 .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
                 .bodyJson(logEntry)
-                .requestJson(GCWebTrackableLogResponse.class).blockingGet();
+                .requestJson(GCWebTrackableLogResponse.class).blockingGet()) {
+            if (response.logReferenceCode == null) {
+                return generateLogError("Problem pasting trackable log, response is: " + response);
+            }
 
-        if (response.logReferenceCode == null) {
-            return generateLogError("Problem pasting trackable log, response is: " + response);
+            return LogResult.ok(response.logReferenceCode);
         }
 
-        return LogResult.ok(response.logReferenceCode);
 
     }
 
@@ -435,19 +446,25 @@ public class GCLogAPI {
         return tokenizeLogImageId(logImageId)[1];
     }
 
-    private static GCWebLogRequest createLogRequest(final LogEntry logEntry, @NonNull final List<cgeo.geocaching.log.TrackableLog> trackables, final boolean addToFavorites) {
+    private static GCWebLogRequest createLogRequest(final LogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
+
+        final OfflineLogEntry offlineLogEntry = logEntry instanceof OfflineLogEntry ? (OfflineLogEntry) logEntry : null;
+
         final GCWebLogRequest logEntryRequest = new GCWebLogRequest();
         logEntryRequest.images = CollectionStream.of(logEntry.logImages).filter(img -> img.serviceImageId != null).map(img -> getGuidFrom(img.serviceImageId)).toArray(String.class);
         logEntryRequest.logDate = new Date(logEntry.date);
         logEntryRequest.logType = logEntry.logType.id;
         logEntryRequest.logText = logEntry.log;
-        logEntryRequest.trackables = CollectionStream.of(trackables).map(t -> {
-            final GCWebLogTrackable tLog = new GCWebLogTrackable();
-            tLog.trackableCode = t.geocode;
-            tLog.trackableLogTypeId = t.action.gcApiId;
-            return tLog;
+        logEntryRequest.trackables = offlineLogEntry == null ? new GCWebLogTrackable[0] : CollectionStream.of(offlineLogEntry.inventoryActions.entrySet())
+            .filter(a ->
+                inventory != null && inventory.containsKey(a.getKey()) && inventory.get(a.getKey()).getBrand() == TrackableBrand.TRAVELBUG)
+            .map(entry -> {
+                final GCWebLogTrackable tLog = new GCWebLogTrackable();
+                tLog.trackableCode = entry.getKey();
+                tLog.trackableLogTypeId = entry.getValue().gcApiId;
+                return tLog;
         }).toArray(GCWebLogTrackable.class);
-        logEntryRequest.usedFavoritePoint = addToFavorites; //not used by web page, but seems to work
+        logEntryRequest.usedFavoritePoint = offlineLogEntry != null && offlineLogEntry.favorite; //not used by web page, but seems to work
 
         return logEntryRequest;
     }

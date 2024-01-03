@@ -1,15 +1,17 @@
 package cgeo.geocaching.models;
 
-public interface ILogable {
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+public interface IGeoObject {
 
     /**
      * @return Geocode like GCxxxx
      */
+    @NonNull
     String getGeocode();
 
-    /**
-     * @return Name
-     */
+    @Nullable
     String getName();
 
 }

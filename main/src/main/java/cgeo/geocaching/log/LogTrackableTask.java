@@ -3,6 +3,7 @@ package cgeo.geocaching.log;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
@@ -24,17 +25,16 @@ public class LogTrackableTask extends AsyncTaskWithProgress<String, StatusCode> 
 
     @Override
     protected StatusCode doInBackgroundInternal(final String[] params) {
-        final String logMsg = params[0];
         try {
-            // Set selected action
-            final TrackableLog trackableLog = new TrackableLog(taskInterface.trackable.getGeocode(), taskInterface.trackable.getTrackingcode(), taskInterface.trackable.getName(), 0, 0, taskInterface.trackable.getBrand());
-            trackableLog.setAction(taskInterface.typeSelected);
             // Real call to post log
-            final LogResult logResult = taskInterface.loggingManager.postLog(taskInterface.geocache, trackableLog, taskInterface.date.getCalendar(), logMsg);
+            final LogResult logResult = taskInterface.loggingManager.postLog(taskInterface.geocache, taskInterface.trackableLogEntry);
 
+            if (logResult.isOk()) {
+                LastTrackableAction.setAction(taskInterface.trackableLogEntry.geocode, taskInterface.trackableLogEntry.getAction());
+            }
             // Display errors to the user
-            if (StringUtils.isNotEmpty(logResult.getLogId())) {
-                ActivityMixin.showToast(activity, logResult.getLogId());
+            if (StringUtils.isNotEmpty(logResult.getPostServerMessage())) {
+                ActivityMixin.showToast(activity, logResult.getPostServerMessage());
             }
 
             // Return request status

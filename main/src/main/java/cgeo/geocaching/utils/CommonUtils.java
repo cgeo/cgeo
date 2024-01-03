@@ -238,5 +238,16 @@ public class CommonUtils {
         }
     }
 
+    // --- Helpers for Parcelable ---
+
+    public static <E extends Enum<E>> int enumToInt(final E value) {
+        return value == null ? -1 : value.ordinal();
+    }
+
+    public static <E extends Enum<E>> E intToEnum(final Class<E> clazz, final int value) {
+        final E[] enumValues = clazz.getEnumConstants();
+        return value < 0 || enumValues == null || value >= enumValues.length ? null : enumValues[value];
+    }
+
 
 }

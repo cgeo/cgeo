@@ -394,10 +394,10 @@ public class GCParserTest {
         final List<Trackable> trackablesOld = GCParser.parseInventory(exampleOld);
         assertThat(trackablesOld).hasSize(2);
         assertThat(trackablesOld.get(0).getGuid()).isEqualTo("e6aab619-9cc0-4060-91ee-dde3412bddc2");
-        assertThat(trackablesOld.get(0).getGeocode()).isNull();
+        assertThat(trackablesOld.get(0).getGeocode()).isEmpty();
         assertThat(trackablesOld.get(0).getName()).isEqualTo("Tuinkabouter");
         assertThat(trackablesOld.get(1).getGuid()).isEqualTo("758a8a62-5af9-4183-8386-3249befa075a");
-        assertThat(trackablesOld.get(0).getGeocode()).isNull();
+        assertThat(trackablesOld.get(0).getGeocode()).isEmpty();
         assertThat(trackablesOld.get(1).getName()).isEqualTo("Just Add Water Festival Geocoin");
 
         final List<Trackable> trackablesNew = GCParser.parseInventory(exampleNew);

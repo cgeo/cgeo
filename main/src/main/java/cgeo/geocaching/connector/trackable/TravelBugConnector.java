@@ -5,8 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.enumerations.Loaders;
-import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
@@ -127,13 +125,8 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public int getTrackableLoggingManagerLoaderId() {
-        return Loaders.LOGGING_TRAVELBUG.getLoaderId();
-    }
-
-    @Override
-    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
-        return new TravelBugLoggingManager(activity);
+    public TravelBugLoggingManager getTrackableLoggingManager(final String tbCode) {
+        return new TravelBugLoggingManager(tbCode);
     }
 
     @Override

@@ -15,6 +15,7 @@ import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.LastTrackableAction;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
@@ -33,6 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -58,20 +60,19 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
             final ILoggingManager loggingManager = taskInterface.loggingManager;
             final Geocache cache = loggingManager.getCache();
             final IConnector cacheConnector = loggingManager.getConnector();
-            final LogEntry logEntry = taskInterface.logEntry;
+            final OfflineLogEntry logEntry = (OfflineLogEntry) taskInterface.logEntry;
 
-            final float logRating = getRatingforLog(taskInterface.rating, cache, loggingManager);
-
-            final LogResult logResult = taskInterface.loggingManager.createLog(
-                logEntry, taskInterface.password, new ArrayList<>(taskInterface.trackables), taskInterface.addToFavorite, logRating);
+            final LogResult logResult = taskInterface.loggingManager.createLog(logEntry, taskInterface.inventory);
+                //logEntry, taskInterface.password, new ArrayList<>(taskInterface.trackables), taskInterface.addToFavorite, logRating);
 
             if (logEntry.reportProblem != ReportProblemType.NO_PROBLEM && !taskInterface.loggingManager.canLogReportType(logEntry.reportProblem)) {
-                final LogEntry reportProblemEntry = new LogEntry.Builder<>()
+                final OfflineLogEntry reportProblemEntry = new OfflineLogEntry.Builder<>()
                     .setLogType(logEntry.reportProblem.logType)
                     .setDate(logEntry.date)
                     .setLog(LocalizationUtils.getString(logEntry.reportProblem.textId))
+                    .setPassword(logEntry.password)
                     .build();
-                taskInterface.loggingManager.createLog(reportProblemEntry, taskInterface.password, Collections.emptyList(), false, -1);
+                taskInterface.loggingManager.createLog(reportProblemEntry, null);
             }
 
             ImageResult imageResult = null;
@@ -79,8 +80,8 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
 
                 //update trackable actions
                 if (loggingManager.supportsLogWithTrackables()) {
-                    for (TrackableLog trackableLog : new ArrayList<>(taskInterface.trackables)) {
-                        LastTrackableAction.setAction(trackableLog);
+                    for (Map.Entry<String, LogTypeTrackable> entry : logEntry.inventoryActions.entrySet()) {
+                        LastTrackableAction.setAction(entry.getKey(), entry.getValue());
                     }
                 }
 
@@ -97,7 +98,7 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                 }
 
                 //update favorites
-                if (loggingManager.supportsLogWithFavorite() && taskInterface.addToFavorite) {
+                if (loggingManager.supportsLogWithFavorite() && logEntry.favorite) {
                     cache.setFavorite(true);
                     cache.setFavoritePoints(cache.getFavoritePoints() + 1);
                 }
@@ -131,8 +132,8 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
                 imageResult = postImages(logBuilder, logResult, logEntry.logImages);
 
                 storeLogInDatabase(logBuilder, cache, logEntry);
-                postCacheRating(cacheConnector, cache, taskInterface.rating);
-                postTrackables(logEntry.log, cache, logEntry, taskInterface.trackables);
+                postCacheRating(cacheConnector, cache, logEntry.rating);
+                postGenericIntentoryLogs(cache, logEntry, taskInterface.inventory.values());
             }
 
             // if an image could not be uploaded, use its error as final state
@@ -213,19 +214,6 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
 
     }
 
-    private float getRatingforLog(final float rating, final Geocache cache, final ILoggingManager loggingManager) {
-        final IConnector connector = loggingManager.getConnector();
-        if (! (connector instanceof IVotingCapability)) {
-            return 0;
-        }
-        final IVotingCapability votingConnector = (IVotingCapability) connector;
-
-        if (votingConnector.supportsVoting(cache) && votingConnector.isValidRating(rating) && loggingManager.supportsLogWithVote()) {
-            return rating;
-        }
-        return 0;
-    }
-
     private void postCacheRating(final IConnector cacheConnector, final Geocache cache, final float rating) {
         // Post cache rating
         if (cacheConnector instanceof IVotingCapability) {
@@ -242,27 +230,33 @@ public class LogCacheTask extends AsyncTaskWithProgressText<String, StatusResult
         }
     }
 
-    private void postTrackables(final String log, final Geocache cache, final LogEntry logEntry, final Collection<TrackableLog> trackableLogs) {
+    private void postGenericIntentoryLogs(final Geocache cache, final OfflineLogEntry logEntry, final Collection<Trackable> inventory) {
         // Posting Generic Trackables
         for (final TrackableConnector connector : ConnectorFactory.getLoggableGenericTrackablesConnectors()) {
-            final TrackableLoggingManager manager = connector.getTrackableLoggingManager((AbstractLoggingActivity) activity);
-            if (manager != null) {
-                // Filter trackables logs by action and brand
-                final Set<TrackableLog> trackablesMoved = new HashSet<>();
-                for (final TrackableLog trackableLog : trackableLogs) {
-                    if (trackableLog.action != LogTypeTrackable.DO_NOTHING && trackableLog.brand == connector.getBrand()) {
-                        trackablesMoved.add(trackableLog);
-                    }
+            // Filter trackables logs by action and brand
+            final Set<Trackable> trackablesMoved = new HashSet<>();
+            for (final Trackable trackable : inventory) {
+                final LogTypeTrackable action = logEntry.inventoryActions.get(trackable.getGeocode());
+                if (action != null && action != LogTypeTrackable.DO_NOTHING && trackable.getBrand() == connector.getBrand()) {
+                    trackablesMoved.add(trackable);
                 }
+            }
 
-                // Posting trackables logs
-                int trackableLogcounter = 1;
-                for (final TrackableLog trackableLog : trackablesMoved) {
-                    publishProgress(LocalizationUtils.getString(R.string.log_posting_generic_trackable, trackableLog.brand.getLabel(), trackableLogcounter, trackablesMoved.size()));
-                    manager.postLog(cache, trackableLog, logEntry.getCalendar(), log);
+            // Posting trackables logs
+            int trackableLogcounter = 1;
+            for (final Trackable trackable : trackablesMoved) {
+                final TrackableLoggingManager manager = connector.getTrackableLoggingManager(trackable.getGeocode());
+                if (manager != null) {
+                    publishProgress(LocalizationUtils.getString(R.string.log_posting_generic_trackable, trackable.getBrand().getLabel(), trackableLogcounter, trackablesMoved.size()));
+                    final TrackableLogEntry tle = TrackableLogEntry.of(trackable);
+                    tle.setAction(logEntry.inventoryActions.get(trackable.getGeocode()))
+                        .setLog(logEntry.log)
+                        .setDate(logEntry.getDate());
+                    manager.postLog(cache, tle);
                     trackableLogcounter++;
                 }
             }
+
         }
     }
 

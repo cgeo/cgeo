@@ -2,21 +2,20 @@ package cgeo.geocaching.connector.trackable;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.log.AbstractLoggingActivity;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.log.TrackableLog;
+import cgeo.geocaching.log.TrackableLogEntry;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.Version;
-
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,8 +30,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
-import io.reactivex.rxjava3.core.Observable;
-import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -251,26 +248,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         }
     }
 
-    @Override
-    @NonNull
-    public Observable<TrackableLog> trackableLogInventory() {
-        return Observable.fromIterable(loadInventory()).map(new TrackableLogFunction());
-    }
-
-    private static class TrackableLogFunction implements Function<Trackable, TrackableLog> {
-        @Override
-        public TrackableLog apply(final Trackable trackable) {
-            return new TrackableLog(
-                    trackable.getGeocode(),
-                    trackable.getTrackingcode(),
-                    trackable.getName(),
-                    getId(trackable.getGeocode()),
-                    0,
-                    trackable.getBrand()
-            );
-        }
-    }
-
     public static int getId(final String geocode) {
         try {
             final String hex = geocode.substring(2);
@@ -354,8 +331,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @Override
-    public AbstractTrackableLoggingManager getTrackableLoggingManager(final AbstractLoggingActivity activity) {
-        return new GeokretyLoggingManager(activity);
+    public GeokretyLoggingManager getTrackableLoggingManager(final String tbCode) {
+        return new GeokretyLoggingManager(tbCode);
     }
 
     /**
@@ -371,24 +348,31 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     }
 
     @WorkerThread
-    public static ImmutablePair<StatusCode, List<String>> postLogTrackable(final Context context, final Geocache cache, final TrackableLog trackableLog, final Calendar date, final String log) {
+    @SuppressWarnings("PMD.NPathComplexity") // Legacy
+    public static LogResult postLogTrackable(final Geocache cache, final TrackableLogEntry trackableLog) {
         // See doc: http://geokrety.org/api.php
-        Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackCode);
+        Log.d("GeokretyConnector.postLogTrackable: nr=" + trackableLog.trackingCode);
         if (trackableLog.brand != TrackableBrand.GEOKRETY) {
             Log.d("GeokretyConnector.postLogTrackable: received invalid brand");
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
+            return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: received invalid brand", null);
         }
-        if (trackableLog.action == LogTypeTrackable.DO_NOTHING) {
+        if (trackableLog.getAction() == LogTypeTrackable.DO_NOTHING) {
             Log.d("GeokretyConnector.postLogTrackable: received invalid logtype");
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
+            return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: received invalid logtype", null);
         }
+
         try {
             // SecId is mandatory when using API, anonymous log are only possible via website
             final String secId = Settings.getGeokretySecId();
             if (StringUtils.isEmpty(secId)) {
                 Log.d("GeokretyConnector.postLogTrackable: not authenticated");
-                return new ImmutablePair<>(StatusCode.NO_LOGIN_INFO_STORED, Collections.emptyList());
+                return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: not authenticated", null);
             }
+            Calendar date = trackableLog.getCalendar();
+            if (date == null) {
+                date = Calendar.getInstance();
+            }
+
             // XXX: Use always CET timezone for Geokrety logging
             // See https://github.com/cgeo/cgeo/issues/9496
             date.setTimeZone(TimeZone.getTimeZone("Europe/Paris"));
@@ -397,15 +381,15 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final Parameters params = new Parameters(
                     "secid", secId,
                     "gzip", "0",
-                    "nr", trackableLog.trackCode,
+                    "nr", trackableLog.trackingCode,
                     "formname", "ruchy",
-                    "logtype", String.valueOf(trackableLog.action.gkid),
+                    "logtype", String.valueOf(trackableLog.getAction().gkid),
                     "data", String.format(Locale.ENGLISH, "%tY-%tm-%td", date, date, date), // YYYY-MM-DD
                     "godzina", String.format("%tH", date), // HH
                     "minuta", String.format("%tM", date), // MM
-                    "comment", log,
-                    "app", context.getString(R.string.app_name),
-                    "app_ver", Version.getVersionName(context),
+                    "comment", trackableLog.getLog() == null ? "" : trackableLog.getLog(),
+                    "app", LocalizationUtils.getString(R.string.app_name),
+                    "app_ver", Version.getVersionName(CgeoApplication.getInstance()),
                     "mobile_lang", Settings.getApplicationLocale() + ".UTF-8"
             );
 
@@ -425,13 +409,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
             final String page = Network.getResponseData(Network.postRequest(URL + "/ruchy.php", params));
             if (page == null) {
                 Log.d("GeokretyConnector.postLogTrackable: No data from server");
-                return new ImmutablePair<>(StatusCode.CONNECTION_FAILED_GK, Collections.emptyList());
+                return LogResult.error(StatusCode.CONNECTION_FAILED_GK, "GeokretyConnector.postLogTrackable: No data from server", null);
             }
 
             final ImmutablePair<Integer, List<String>> response = GeokretyParser.parseResponse(page);
             if (response == null) {
                 Log.w("GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety");
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
+                return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: Cannot parseResponse GeoKrety", null);
             }
 
             final List<String> errors = response.getRight();
@@ -439,13 +423,13 @@ public class GeokretyConnector extends AbstractTrackableConnector {
                 for (final String error : errors) {
                     Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
-                return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, errors);
+                return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: " + StringUtils.join(errors, ","), null);
             }
-            Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackCode);
-            return new ImmutablePair<>(StatusCode.NO_ERROR, Collections.emptyList());
+            Log.i("Geokrety Log successfully posted to trackable #" + trackableLog.trackingCode);
+            return LogResult.ok(String.valueOf(response.getLeft()));
         } catch (final RuntimeException e) {
             Log.w("GeokretyConnector.searchTrackable", e);
-            return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, Collections.emptyList());
+            return LogResult.error(StatusCode.LOG_POST_ERROR_GK, "GeokretyConnector.postLogTrackable: Exception", e);
         }
     }
 

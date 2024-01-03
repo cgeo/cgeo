@@ -5,11 +5,11 @@ import cgeo.geocaching.connector.AbstractLoggingManager;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogContextInfo;
 import cgeo.geocaching.connector.LogResult;
-import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.log.TrackableLog;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.models.Trackable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class OkapiLoggingManager extends AbstractLoggingManager {
 
@@ -32,8 +33,8 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public LogResult createLog(@NonNull final LogEntry logEntry, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, final boolean addToFavorites, final float rating) {
-        final LogResult result = OkapiClient.postLog(getCache(), logEntry.logType, new Date(logEntry.date), logEntry.log, logPassword, getConnector(), logEntry.reportProblem, addToFavorites, rating);
+    public LogResult createLog(@NonNull final OfflineLogEntry logEntry, @Nullable final Map<String, Trackable> inventory) {
+        final LogResult result = OkapiClient.postLog(getCache(), logEntry.logType, new Date(logEntry.date), logEntry.log, logEntry.password, getConnector(), logEntry.reportProblem, logEntry.favorite, logEntry.rating);
         getConnector().login();
         return result;
     }

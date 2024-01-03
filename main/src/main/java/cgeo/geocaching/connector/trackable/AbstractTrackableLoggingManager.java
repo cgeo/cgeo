@@ -1,19 +1,23 @@
 package cgeo.geocaching.connector.trackable;
 
-import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.models.Image;
 
-import android.content.Context;
-
-import androidx.loader.content.AsyncTaskLoader;
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 
 import java.util.List;
 
-public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<List<LogTypeTrackable>> implements TrackableLoggingManager {
+public abstract class AbstractTrackableLoggingManager implements TrackableLoggingManager {
 
-    public AbstractTrackableLoggingManager(final Context context) {
-        super(context);
+    private final String trackableCode;
+
+    public AbstractTrackableLoggingManager(final String tbCode) {
+        this.trackableCode = tbCode;
+    }
+
+    @Override
+    public String getTrackableCode() {
+        return trackableCode;
     }
 
     @Override
@@ -21,10 +25,10 @@ public abstract class AbstractTrackableLoggingManager extends AsyncTaskLoader<Li
         return false;
     }
 
+    @NonNull
+    @WorkerThread
     @Override
-    public ImageResult postLogImage(final String logId, final Image image) {
-        // No support for images
-        return null;
+    public List<LogTypeTrackable> getPossibleLogTypesTrackableOnline() {
+        return getPossibleLogTypesTrackable();
     }
-
 }
