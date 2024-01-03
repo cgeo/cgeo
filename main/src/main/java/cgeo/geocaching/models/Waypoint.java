@@ -4,12 +4,15 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
@@ -60,6 +63,11 @@ public class Waypoint implements IWaypoint {
     private boolean originalCoordsEmpty = false;
 
     private String calcStateConfig = null;
+
+    private ProjectionType projectionType = ProjectionType.NO_PROJECTION;
+    private DistanceUnit projectionDistanceUnit = DistanceUnit.METER;
+    private Formula projectionFormula1 = null;
+    private Formula projectionFormula2 = null;
 
     /**
      * Sort waypoints by their probable order (e.g. parking first, final last).
@@ -437,6 +445,29 @@ public class Waypoint implements IWaypoint {
 
     public void setCalcStateConfig(final String calcStateConfig) {
         this.calcStateConfig = calcStateConfig;
+    }
+
+    public void setProjection(final ProjectionType type, final DistanceUnit unit, final Formula formula1, final Formula formula2) {
+        this.projectionType = type;
+        this.projectionDistanceUnit = unit;
+        this.projectionFormula1 = formula1;
+        this.projectionFormula2 = formula2;
+    }
+
+    public ProjectionType getProjectionType() {
+        return this.projectionType;
+    }
+
+    public DistanceUnit getProjectionDistanceUnit() {
+        return this.projectionDistanceUnit;
+    }
+
+    public Formula getProjectionFormula1() {
+        return this.projectionFormula1;
+    }
+
+    public Formula getProjectionFormula2() {
+        return this.projectionFormula2;
     }
 
     /*

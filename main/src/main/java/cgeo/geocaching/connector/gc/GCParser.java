@@ -13,7 +13,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
-import cgeo.geocaching.location.DistanceParser;
+import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
@@ -1240,10 +1240,10 @@ public final class GCParser {
         // trackable distance
         final MatcherWrapper distanceMatcher = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_DISTANCE, page);
         if (distanceMatcher.find()) {
-            final DistanceParser.DistanceUnit unit = DistanceParser.DistanceUnit.parseUnit(distanceMatcher.group(2),
-                    Settings.useImperialUnits() ? DistanceParser.DistanceUnit.MI : DistanceParser.DistanceUnit.KM);
+            final DistanceUnit unit = DistanceUnit.findById(distanceMatcher.group(2),
+                    Settings.useImperialUnits() ? DistanceUnit.MILE : DistanceUnit.KILOMETER);
             try {
-                trackable.setDistance(DistanceParser.parseDistance(distanceMatcher.group(1), unit));
+                trackable.setDistance(unit.parseToKilometers(distanceMatcher.group(1)));
             } catch (final NumberFormatException e) {
                 Log.e("GCParser.parseTrackable: Failed to parse distance", e);
             }
