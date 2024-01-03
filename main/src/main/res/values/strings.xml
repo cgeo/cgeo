@@ -2712,6 +2712,8 @@
     <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
     <string name="downloadmap_filename">Downloading %s</string>
+    <string name="downloadmap_keep_temporary_files">Keep temporary files</string>
+    <string name="downloadmap_keep_temporary_files_summary">Some download sources support additional files not used by c:geo. Keep those extra files in system\'s download folder instead of deleting it</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
     <string name="download_none_selected">No files selected for download</string>

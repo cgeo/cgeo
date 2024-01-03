@@ -30,6 +30,7 @@ public abstract class AbstractDownloader {
     public final PersistableFolder targetFolder;
     public String forceExtension = "";
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
+    public boolean downloadHasExtraContents = false; // some sources download a zip file containing additional files worthwhile keeping (though not used by c:geo); those zips can be kept using a setting under map => sources
     @DrawableRes public int iconRes = R.drawable.ic_menu_save;
 
     public static final int ICONRES_FOLDER = R.drawable.downloader_folder;

@@ -137,7 +137,7 @@ class ReceiveDownload {
             status = CopyStates.INTEGRITY_CHECK_ERROR;
         } else {
             // now start copy task
-            status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip);
+            status = copyInternal(context, notification, updateForegroundNotification, isZipFile, nameWithinZip, downloader.downloadHasExtraContents);
         }
         switch (status) {
             case SUCCESS:
@@ -198,7 +198,8 @@ class ReceiveDownload {
         return StringUtils.replace(StringUtils.lowerCase(filename), "-", "_");
     }
 
-    private CopyStates copyInternal(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final boolean isZipFile, final String nameWithinZip) {
+    private CopyStates copyInternal(final Context context, final NotificationCompat.Builder notification, final Runnable updateForegroundNotification, final boolean isZipFile, final String nameWithinZip, final boolean potentiallyKeepTemporaryFile) {
+        boolean keepTemporaryFile = potentiallyKeepTemporaryFile && Settings.getMapDownloadsKeepTemporaryFiles();
         CopyStates status = CopyStates.UNKNOWN_STATE;
 
         Log.d("start receiving map file: " + filename);
@@ -223,6 +224,7 @@ class ReceiveDownload {
                 }
             } else {
                 status = doCopy(context, notification, updateForegroundNotification, inputStream, outputUri);
+                keepTemporaryFile = false;
             }
             if (status == CopyStates.SUCCESS && !downloader.verifiedAfterCopying(filename, outputUri)) {
                 status = CopyStates.INTEGRITY_CHECK_ERROR;
@@ -242,7 +244,9 @@ class ReceiveDownload {
             if (status == CopyStates.SUCCESS) {
                 // having successfully received the copy we can delete the temporary copy
                 try {
-                    context.getContentResolver().delete(uri, null, null);
+                    if (!keepTemporaryFile) {
+                        context.getContentResolver().delete(uri, null, null);
+                    }
                 } catch (IllegalArgumentException iae) {
                     Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
                 }

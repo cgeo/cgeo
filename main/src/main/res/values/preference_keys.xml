@@ -201,6 +201,7 @@
     <!-- category offline maps -->
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
     <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
+    <string translatable="false" name="pref_mapDownloadsKeepTemporaryFiles">mapDownloadsKeepTemporaryFiles</string>
     <string translatable="false" name="pref_mapAutoDownloadsInterval">mapAutoDownloadsInterval</string>
     <string translatable="false" name="pref_persistablefolder_offlinemaps">persistablefolder_offlinemaps</string>
 

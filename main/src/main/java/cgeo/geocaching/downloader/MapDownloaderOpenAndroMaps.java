@@ -26,6 +26,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     private MapDownloaderOpenAndroMaps() {
         super(Download.DownloadType.DOWNLOADTYPE_MAP_OPENANDROMAPS, R.string.mapserver_openandromaps_downloadurl, R.string.mapserver_openandromaps_name, R.string.mapserver_openandromaps_info, R.string.mapserver_openandromaps_projecturl, R.string.mapserver_openandromaps_likeiturl);
         companionType = Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS;
+        downloadHasExtraContents = true;
     }
 
     @Override
