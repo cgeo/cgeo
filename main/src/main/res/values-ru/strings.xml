@@ -705,7 +705,6 @@
     <string name="about_changelog_full">Список всех изменений</string>
     <string name="about_nutshellmanual">Описание на сайте</string>
     <string name="about_contributors_carnerodetails">\"папа\" c:geo</string>
-    <string name="about_contributors_recent">Недавние участники</string>
     <string name="about_contributors_specialthanks">Особая благодарность</string>
     <string name="about_contributors_specialthanksdetails">- всем, кто участвует в переводе на [Crowdin.net](https://crowdin.net/project/cgeo)\n- всем, кто сообщает о проблемах\n- и всем тем, кто как-то поддерживает проект\n</string>
     <string name="about_contributors_other">Другие участники</string>
