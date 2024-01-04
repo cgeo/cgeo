@@ -126,7 +126,7 @@ public class PositionLayer extends Layer {
     }
 
     private void rotateArrow() {
-        if (arrowNative == null) {
+        if (arrowNative == null || arrowNative.getWidth() == 0 || arrowNative.getHeight() == 0) {
             return;
         }
 
