@@ -1,9 +1,10 @@
 package cgeo.geocaching.storage.extension;
 
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
+
+import androidx.annotation.Nullable;
 
 public class LastTrackableAction extends DataStore.DBExtension {
 
@@ -16,31 +17,19 @@ public class LastTrackableAction extends DataStore.DBExtension {
 
     private static final DataStore.DBExtensionType type = DataStore.DBExtensionType.DBEXTENSION_LAST_TRACKABLE_ACTION;
 
-    public static LogTypeTrackable getNextAction(final String tGeocode) {
-        final boolean autoVisit = Settings.isTrackableAutoVisit();
-        if (autoVisit) {
-            return LogTypeTrackable.VISITED;
-        }
-        if (tGeocode == null) {
-            return LogTypeTrackable.DO_NOTHING;
-        }
+    @Nullable
+    public static LogTypeTrackable getLastAction(final String tGeocode) {
 
         final DataStore.DBExtension temp = load(type, tGeocode);
         if (temp != null) {
             final LogTypeTrackable lastAction = LogTypeTrackable.getById((int) temp.getLong1());
             Log.d("get tb: key=" + tGeocode + ", action=" + lastAction);
 
-            // what is the next possible action?
-            if (lastAction == LogTypeTrackable.VISITED || lastAction == LogTypeTrackable.NOTE || lastAction == LogTypeTrackable.DISCOVERED_IT) {
-                return lastAction;
-            }
-            // default DO_NOTHING for
-            // RETRIEVED_IT, GRABBED_IT (autoVisit is handled above)
-            // DO_NOTHING, DROPPED_OFF, ARCHIVED, MOVE_COLLECTION, MOVE_INVENTORY
+            return lastAction;
         } else {
             Log.d("get tb: key=" + tGeocode + " (not found)");
         }
-        return LogTypeTrackable.DO_NOTHING;
+        return null;
     }
 
     public static void setAction(final String tGeocode, final LogTypeTrackable action) {
