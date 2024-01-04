@@ -707,10 +707,6 @@ public class Settings {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
-    public static boolean enableFeatureLogEdit() {
-        return getBoolean(R.string.pref_feature_log_edit, false);
-    }
-
     public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
     }

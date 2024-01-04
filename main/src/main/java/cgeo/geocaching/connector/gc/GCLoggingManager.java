@@ -181,11 +181,13 @@ class GCLoggingManager extends AbstractLoggingManager {
     @Override
     public String convertLogTextToEditableText(final String logText) {
 
-        //TODO there's more...
         //Manual handling required:
         //- italic: <em> and </em> -> *
         //- bold: <strong> and </strong> -> **
         //- link: <a href="link" ...>text</a> -> [text](link)
+        //- headers: <h1>, <h2>, <h3>
+        //- horizontal rule: <hr>
+        //- lists
 
         //Handled by Html.fromHtml()
         //- <p></p> -> carriage return with one line space
@@ -196,6 +198,17 @@ class GCLoggingManager extends AbstractLoggingManager {
             .replaceAll("</strong>", "**")
             .replaceAll("<em>", "*")
             .replaceAll("</em>", "*")
+            .replaceAll("<h1>", "# ")
+            .replaceAll("</h1>", " #")
+            .replaceAll("<h2>", "## ")
+            .replaceAll("</h2>", " ##")
+            .replaceAll("<h3>", "### ")
+            .replaceAll("</h3>", " ###")
+            .replaceAll("<hr>", "---")
+            .replaceAll("<ul>", "")
+            .replaceAll("<ol>", "")
+            .replaceAll("</li>", "")
+            .replaceAll("<li>", "* ")
             .replaceAll("<a href=\"([^\"]+)\"[^>]*>([^<]+)</a>", "[$2]($1)");
         return Html.fromHtml(preLogText).toString();
     }

@@ -8,7 +8,6 @@ import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.SmileyImage;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -145,7 +144,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             ctxMenu.addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.binding.log));
 
             //Edit/Delete Log Entry
-            if (Settings.enableFeatureLogEdit() && !StringUtils.isBlank(getGeocode())) {
+            if (!StringUtils.isBlank(getGeocode())) {
                 final Geocache cache = DataStore.loadCache(getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (LogUtils.canEditLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_edit, R.drawable.ic_menu_edit,
