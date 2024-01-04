@@ -694,7 +694,6 @@
     <string name="about_changelog_full">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
-    <string name="about_contributors_recent">Neueste Mitwirkende</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
     <string name="about_contributors_specialthanksdetails">- Alle Mitwirkenden an der Übersetzung auf [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Alle Issue-Ersteller\n- und alle anderen Unterstützer.\n</string>
     <string name="about_contributors_other">Weitere Mitwirkende</string>
