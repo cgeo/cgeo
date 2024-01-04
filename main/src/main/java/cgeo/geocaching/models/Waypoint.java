@@ -53,6 +53,9 @@ public class Waypoint implements IWaypoint {
     private String name = "";
     @Nullable
     private Geopoint coords = null;
+
+    @Nullable
+    private Geopoint preprojectedCoords = null;
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -96,6 +99,7 @@ public class Waypoint implements IWaypoint {
         this.prefix = prefix;
         this.lookup = lookup;
         this.coords = coords;
+        this.preprojectedCoords = coords;
         this.note = note;
     }
 
@@ -121,6 +125,9 @@ public class Waypoint implements IWaypoint {
         if (coords == null) {
             coords = old.coords;
         }
+        if (preprojectedCoords == null) {
+            preprojectedCoords = old.preprojectedCoords;
+        }
 
         // keep note only for user-defined waypoints
         if (StringUtils.isBlank(note) && isUserDefined()) {
@@ -141,6 +148,13 @@ public class Waypoint implements IWaypoint {
             id = old.id;
         }
         visited = old.visited;
+
+        if (projectionType == ProjectionType.NO_PROJECTION && old.projectionType != ProjectionType.NO_PROJECTION) {
+            projectionType = old.projectionType;
+            projectionFormula1 = old.projectionFormula1;
+            projectionFormula2 = old.projectionFormula2;
+            projectionDistanceUnit = old.projectionDistanceUnit;
+        }
     }
 
     public static void mergeWayPoints(@NonNull final List<Waypoint> newPoints, @Nullable final List<Waypoint> oldPoints, final boolean forceMerge) {
@@ -280,8 +294,16 @@ public class Waypoint implements IWaypoint {
         return coords;
     }
 
+    public Geopoint getPreprojectedCoords() {
+        return preprojectedCoords;
+    }
+
     public void setCoords(final Geopoint coords) {
         this.coords = coords;
+    }
+
+    public void setPreprojectedCoords(final Geopoint coords) {
+        this.preprojectedCoords = coords;
     }
 
     @NonNull

@@ -229,7 +229,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -242,7 +242,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 102;
+    private static final int dbVersion = 103;
     public static final int customListIdOffset = 10;
 
     /**
@@ -280,7 +280,8 @@ public class DataStore {
             99,  // add alcMode to differentiate Linear vs Random
             100, // add column "tier" and table for cache categories. Initially used for bettercacher.org data
             101, // add service_image_id to saved log images
-            102  // add projection attributes to waypoints
+            102,  // add projection attributes to waypoints
+            103   // add more projection attributes to waypoints
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -399,7 +400,9 @@ public class DataStore {
             + "projection_type TEXT, "
             + "projection_unit TEXT, "
             + "projection_formula_2 TEXT, "
-            + "projection_formula_1 TEXT"
+            + "projection_formula_1 TEXT, "
+            + "preprojected_latitude DOUBLE, "
+            + "preprojected_longitude DOUBLE "
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -1827,6 +1830,16 @@ public class DataStore {
                         }
                     }
 
+                    // Adds more projection attributes to waypoints
+                    if (oldVersion < 103) {
+                        try {
+                            createColumnIfNotExists(db, dbTableWaypoints, "preprojected_latitude DOUBLE");
+                            createColumnIfNotExists(db, dbTableWaypoints, "preprojected_longitude DOUBLE");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 103);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2258,7 +2271,7 @@ public class DataStore {
             final ContentValues values = new ContentValues();
             try {
                 saveWaypointsWithoutTransaction(cache);
-                putCoords(values, cache.getCoords());
+                putCoords(values, "", cache.getCoords());
                 values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
 
                 database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
@@ -2416,7 +2429,7 @@ public class DataStore {
             values.put("location", cache.getLocation());
             values.put("distance", cache.getDistance());
             values.put("direction", cache.getDirection());
-            putCoords(values, cache.getCoords());
+            putCoords(values, "", cache.getCoords());
             values.put("reliable_latlon", 0);          // Todo: refactor - remove column
             values.put("shortdesc", cache.getShortDescription());
             values.put("personal_note", cache.getPersonalNote());
@@ -2621,9 +2634,9 @@ public class DataStore {
      * @param values a ContentValues to save coordinates in
      * @param coords coordinates to save, or null to save empty coordinates
      */
-    private static void putCoords(final ContentValues values, final Geopoint coords) {
-        values.put("latitude", coords == null ? null : coords.getLatitude());
-        values.put("longitude", coords == null ? null : coords.getLongitude());
+    private static void putCoords(final ContentValues values, final String colnamePraefix, final Geopoint coords) {
+        values.put(colnamePraefix + "latitude", coords == null ? null : coords.getLatitude());
+        values.put(colnamePraefix +  "longitude", coords == null ? null : coords.getLongitude());
     }
 
     /**
@@ -2680,7 +2693,7 @@ public class DataStore {
         values.put("prefix", waypoint.getPrefix());
         values.put("lookup", waypoint.getLookup());
         values.put("name", waypoint.getName());
-        putCoords(values, waypoint.getCoords());
+        putCoords(values, "", waypoint.getCoords());
         values.put("note", waypoint.getNote());
         values.put("user_note", waypoint.getUserNote());
         values.put("own", waypoint.isUserDefined() ? 1 : 0);
@@ -2691,6 +2704,7 @@ public class DataStore {
         values.put("projection_unit", waypoint.getProjectionDistanceUnit().getId());
         values.put("projection_formula_1", waypoint.getProjectionFormula1() == null ? null : waypoint.getProjectionFormula1().getExpression());
         values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2().getExpression());
+        putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
         return values;
     }
 
@@ -3363,6 +3377,7 @@ public class DataStore {
             waypoint.setPrefix(cursor.getString(cursor.getColumnIndexOrThrow("prefix")));
             waypoint.setLookup(cursor.getString(cursor.getColumnIndexOrThrow("lookup")));
             waypoint.setCoords(getCoords(cursor, cursor.getColumnIndexOrThrow("latitude"), cursor.getColumnIndexOrThrow("longitude")));
+            waypoint.setPreprojectedCoords(getCoords(cursor, cursor.getColumnIndexOrThrow("preprojected_latitude"), cursor.getColumnIndexOrThrow("preprojected_longitude")));
             waypoint.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
