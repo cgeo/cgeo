@@ -10,6 +10,7 @@
 - Google 지도에 대한 클러스터 팝업
 - 필요 없는 지도 원본 숨기기
 - 노선 및 경로 입면도(노선 시 누름)
+- Switch between lists directly from map (or by long-tapping on map icon)
 
 통합지도는 현재 베타 상태에 도달하여 모든 야간 사용자를 위한 기본 지도로 만들기로 결정했습니다.
 
@@ -24,6 +25,7 @@
 - 신규: 지점 아이콘에 캐시 찾음 상태 표시
 - 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
 - Change: Show cache/waypoint details in a non-blocking way
+- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
