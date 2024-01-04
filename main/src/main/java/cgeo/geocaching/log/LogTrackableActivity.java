@@ -4,12 +4,12 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.connector.trackable.TrackableLoggingManager;
 import cgeo.geocaching.databinding.LogtrackableActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
@@ -80,6 +80,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     TrackableConnector connector;
     private TrackableLoggingManager loggingManager;
+
+    private final LogActivityHelper logActivityHelper = new LogActivityHelper(this)
+        .setLogResultConsumer((type, result) -> onPostExecuteInternal(result));
 
     /**
      * How many times the warning popup for geocode not set should be displayed
@@ -257,6 +260,9 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     }
 
     private void init() {
+        if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
+            possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
+        }
         logType.setTextView(binding.type).setDisplayMapperPure(LogTypeTrackable::getLabel);
         logType.setValues(possibleLogTypesTrackable);
         logType.setChangeListener(lt -> setType(lt, true));
@@ -272,10 +278,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             binding.geocode.setText(geocache.getGeocode());
             updateCoordinates(geocache.getCoords());
             binding.coordinates.setOnClickListener(new CoordinatesListener());
-        }
-
-        if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
-            possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
         }
 
         disableSuggestions(binding.tracking);
@@ -462,36 +464,31 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Post Log in Background
      */
     private void postLog() {
-        final LogTrackableTaskInterface taskInterface = new LogTrackableTaskInterface();
-        taskInterface.loggingManager = loggingManager;
-        taskInterface.geocache = geocache;
 
-        taskInterface.trackableLogEntry = TrackableLogEntry.of(trackable)
+    final TrackableLogEntry logEntry = TrackableLogEntry.of(trackable)
             .setAction(typeSelected)
             .setDate(date.getDate())
             .setLog(binding.log.getText().toString());
 
-        new LogTrackableTask(this, res.getString(R.string.log_saving), taskInterface, this::onPostExecuteInternal).execute();
+        logActivityHelper.createLogTrackable(geocache, logEntry, connector);
+
         Settings.setTrackableAction(typeSelected.id);
         Settings.setLastTrackableLog(binding.log.getText().toString());
     }
 
-    protected static class LogTrackableTaskInterface {
-        public TrackableLoggingManager loggingManager;
-        public Geocache geocache;
-        public TrackableLogEntry trackableLogEntry;
-        //public LogTypeTrackable typeSelected;
-        //public LogtrackableActivityBinding binding;
-        //public DateTimeEditor date;
-    }
-
-    private void onPostExecuteInternal(final StatusCode status) {
-        if (status == StatusCode.NO_ERROR) {
+    private void onPostExecuteInternal(final LogResult status) {
+        if (status.isOk()) {
             showToast(res.getString(R.string.info_log_posted));
             finish();
         } else {
             showToast(status.getErrorString(res));
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        this.logActivityHelper.finish();
     }
 
     @Override

@@ -158,10 +158,14 @@
     <string name="log_tb_archived">Archived</string>
     <string name="log_save">Save offline</string>
     <string name="log_saving">Sending log…</string>
-    <string name="log_saving_and_uploading">Posting log and uploading images…</string>
     <string name="log_posting_log">Posting log…</string>
+    <string name="log_posting_problemreport">Posting problem report log…</string>
+    <string name="log_posting_deletelog">Delete log…</string>
+    <string name="log_posting_image_create">Image %1$s/%2$s: posting data…</string>
+    <string name="log_posting_image_edit">Image %1$s/%2$s: changing data…</string>
+    <string name="log_posting_image_delete">Deleting image %1$s/%2$s</string>
+    <string name="log_posting_save_internal">Save new log state…</string>
     <string name="log_posting_vote">Posting cache vote…</string>
-    <string name="log_posting_image">Posting images…</string>
     <string name="log_posting_generic_trackable">Posting %1$s %2$d/%3$d</string>
     <string name="log_clear">Clear</string>
     <string name="log_templates">Found it: Log template…</string>
@@ -218,6 +222,8 @@
     <string name="log_image_info_scaled">scaled</string>
     <string name="log_image_info_notscaled">not scaled</string>
     <string name="log_image_titleprefix">Image</string>
+
+    <string name="log_delete_confirm">Do you really want to delete log of type %1%s by author %2%s with log date %3%s?</string>
 
     <string name="datetime_nodateset_display">No date set</string>
 

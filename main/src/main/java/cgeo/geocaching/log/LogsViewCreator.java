@@ -17,6 +17,7 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
@@ -136,7 +137,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         return v -> {
             final AbstractActionBarActivity activity = (AbstractActionBarActivity) getActivity();
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
-            final String title = activity.getString(R.string.cache_log_menu_popup_title, author);
+            final String title = LocalizationUtils.getString(R.string.cache_log_menu_popup_title, author);
 
             final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity).setTitle(title);
 
@@ -152,15 +153,13 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 if (LogUtils.canDeleteLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
-                        it -> {
-                        new LogActivityHelper(activity).deleteLog(cache, log);
-                    });
+                        it -> new LogActivityHelper(activity).deleteLog(cache, log));
                 }
 
             }
 
             //Copy to clipboard
-            ctxMenu.addItem(activity.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.copy_to_clipboard), R.drawable.ic_menu_copy, i -> {
                 ClipboardUtils.copyToClipboard(holder.binding.log.getText().toString());
                     activity.showToast(activity.getString(R.string.clipboard_copy_ok));
             });

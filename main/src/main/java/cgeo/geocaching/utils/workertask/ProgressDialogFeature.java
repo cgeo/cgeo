@@ -16,7 +16,7 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
     private final ComponentActivity activity;
 
     private String title = null;
-    private String initialMessage = null;
+    private String initialMessage = "…";
     private boolean allowCancel = false;
     private boolean allowCloseWithoutCancel = false;
     private boolean indeterminate = true;

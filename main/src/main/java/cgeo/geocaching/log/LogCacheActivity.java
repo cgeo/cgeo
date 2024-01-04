@@ -14,10 +14,8 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.LogcacheActivityBinding;
 import cgeo.geocaching.databinding.LogcacheTrackableItemBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
@@ -70,7 +68,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
@@ -97,7 +94,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     protected ImageListFragment imageListFragment;
 
     private final LogActivityHelper logActivityHelper = new LogActivityHelper(this)
-        .setLogEditResultConsumer(this::onPostExecuteInternal);
+        .setLogResultConsumer((type, result) -> onPostExecuteInternal(result));
 
     private InventoryLogAdapter inventoryAdapter;
 
@@ -196,7 +193,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             this.originalLogEntry = extras.getParcelable(Intents.EXTRA_LOGENTRY);
             if (this.originalLogEntry != null) {
                 logEditMode = LogEditMode.EDIT_EXISTING;
-                binding.logeditFeatureWarning.setVisibility(View.VISIBLE);
             }
         }
 
@@ -530,41 +526,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void sendLogInternal() {
         if (logEditMode == LogEditMode.EDIT_EXISTING) {
-            sendEditLogInternal();
+            logActivityHelper.editLog(cache, this.originalLogEntry,
+                getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build());
         } else {
-            sendCreateNewLogInternal();
+            logActivityHelper.createLog(cache, getEntryFromView(), inventoryAdapter.getInventory());
         }
-    }
-
-    private void sendEditLogInternal() {
-        logActivityHelper.editLog(cache, this.originalLogEntry,
-            getEntryFromView().buildUpon().setServiceLogId(this.originalLogEntry.serviceLogId).build());
-    }
-
-    private void sendCreateNewLogInternal() {
-        lastSavedState = getEntryFromView();
-        final LogCacheTaskInterface taskInterface = new LogCacheTaskInterface();
-        taskInterface.loggingManager = loggingManager;
-        taskInterface.logEntry = getEntryFromView();
-        taskInterface.inventory = inventoryAdapter.getInventory();
-        taskInterface.imageTitleCreator = (i, p) -> imageListFragment.getImageTitle(i, p);
-        new LogCacheTask(this, getString(R.string.log_saving), getString(imageListFragment.getImages().isEmpty() ? R.string.log_posting_log : R.string.log_saving_and_uploading), taskInterface, this::onPostExecuteInternal).execute();
-        Settings.setLastCacheLog(currentLogText());
-        if (Settings.removeFromRouteOnLog()) {
-            DataStore.removeFirstMatchingIdFromIndividualRoute(this, geocode);
-        }
-    }
-
-    protected static class LogCacheTaskInterface {
-        public ILoggingManager loggingManager;
-        public LogEntry logEntry;
-        public Map<String, Trackable> inventory;
-        public BiFunction<Image, Integer, String> imageTitleCreator;
     }
 
     private void onPostExecuteInternal(final StatusResult statusResult) {
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
-        if (statusResult.getStatusCode() == StatusCode.NO_ERROR) {
+        if (statusResult.isOk()) {
             //reset Gui and all values
             resetValues();
             refreshGui();
@@ -583,7 +554,6 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                     .setButtons(R.string.info_log_post_retry, R.string.cancel, R.string.info_log_post_save)
                     .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
                     .confirm(this::sendLogInternal);
-
         }
     }
 
@@ -635,10 +605,11 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
         if (!data.getAvailableTrackables().isEmpty()) {
             inventoryAdapter.setTrackables(data.getAvailableTrackables());
-            //inventory.addAll(initializeTrackableActions(data.getAvailableTrackables(), lastSavedState));
         }
         if (!data.getAvailableReportProblemTypes().isEmpty()) {
-            reportProblem.setValues(data.getAvailableReportProblemTypes());
+            final List<ReportProblemType> list = data.getAvailableReportProblemTypes();
+            reportProblem.setValues(list);
+
         }
         if (data.getAvailableFavoritePoints() >= 0) {
             this.availableFavoritePoints = data.getAvailableFavoritePoints();
@@ -729,7 +700,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             changeAllButton.setTextDialogTitle(LocalizationUtils.getString(R.string.log_tb_changeall))
                 .setTextDisplayMapperPure(lt -> LocalizationUtils.getString(R.string.log_tb_changeall))
                 .setDisplayMapperPure(LogTypeTrackable::getLabel)
-                .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                .setValues(LogTypeTrackable.getLogTypesAllowedForInventory())
                 .set(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING)
                 .setChangeListener(lt -> {
                     final Map<String, LogTypeTrackable> newMap = new HashMap<>();
@@ -760,8 +731,31 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             handleChangedData();
         }
 
+        @NonNull
+        private LogTypeTrackable checkAndGetAction(final String key, @Nullable final LogTypeTrackable candidate) {
+            if (candidate != null && candidate.allowedForInventory) {
+                actionLogs.put(key, candidate);
+                return candidate;
+            }
+
+            final LogTypeTrackable result = actionLogs.get(key);
+            if (result != null) {
+                return result;
+            }
+
+            LogTypeTrackable newAction = LastTrackableAction.getLastAction(key);
+            if (!newAction.allowedForInventory) {
+                newAction = Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING;
+            }
+            actionLogs.put(key, newAction);
+            return newAction;
+
+        }
+
         public void putActions(final Map<String, LogTypeTrackable> actions) {
-            this.actionLogs.putAll(actions);
+            for (Map.Entry<String, LogTypeTrackable> entry : actions.entrySet()) {
+                checkAndGetAction(entry.getKey(), entry.getValue());
+            }
             handleChangedData();
         }
 
@@ -812,17 +806,13 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             holder.binding.trackcode.setText(trackable.getTrackingcode());
             holder.binding.name.setText(trackable.getName());
 
-            LogTypeTrackable action = actionLogs.get(trackable.getGeocode());
-            if (action == null) {
-                action = LastTrackableAction.getNextAction(trackable.getGeocode());
-                actionLogs.put(trackable.getGeocode(), action);
-            }
+            final LogTypeTrackable action = checkAndGetAction(trackable.getGeocode(), null);
 
             holder.trackableAction.setTextView(actionView)
                     .setTextDialogTitle(trackable.getName())
                     .setTextDisplayMapperPure(lt -> lt.getLabel() + " ▼")
                     .setDisplayMapperPure(LogTypeTrackable::getLabel)
-                    .setValues(LogTypeTrackable.getLogTypeTrackableForLogCache())
+                    .setValues(LogTypeTrackable.getLogTypesAllowedForInventory())
                     .set(action)
                     .setChangeListener(lt -> actionLogs.put(trackable.getGeocode(), lt));
 
