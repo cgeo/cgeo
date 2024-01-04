@@ -706,7 +706,6 @@
     <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
-    <string name="about_contributors_recent">Nedávní přispěvatelé</string>
     <string name="about_contributors_specialthanks">Zvláštní poděkování</string>
     <string name="about_contributors_specialthanksdetails">- všem našim překladatelům na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všem ohlašovatelům problémů\n- a všem ostatním podporovatelům.\n</string>
     <string name="about_contributors_other">Další přispěvatelé</string>
