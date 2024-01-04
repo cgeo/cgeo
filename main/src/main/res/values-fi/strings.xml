@@ -665,7 +665,6 @@
     <string name="about_changelog_full">Luettelo kaikista muutoksista</string>
     <string name="about_nutshellmanual">Online-ohjeet</string>
     <string name="about_contributors_carnerodetails">c:geon luojana</string>
-    <string name="about_contributors_recent">Viimeisimmät avustajat</string>
     <string name="about_contributors_specialthanks">Erikoiskiitokset</string>
     <string name="about_contributors_specialthanksdetails">- kaikki kääntäjämme [Crowdin.net](https://crowdin.net/project/cgeo)-sivustolla!\n- kaikki ongelmien ilmoittajat\n- ja kaikki muut tukijat.\n</string>
     <string name="about_contributors_other">Muut avustajat</string>
