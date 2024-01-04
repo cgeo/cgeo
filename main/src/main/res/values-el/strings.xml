@@ -594,7 +594,6 @@
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
-    <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
     <string name="about_contributors_specialthanksdetails">- όλους τους συνεισφέροντες στην μετάφρασή μας στο [Crowdin.net](https://crowdin.net/project/cgeo)!\n- όλους τους δημιουργους θεμάτων\n- και όλους τους άλλους υποστηρικτές.\n</string>
     <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
