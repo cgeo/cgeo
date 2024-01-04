@@ -632,7 +632,6 @@
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
-    <string name="about_contributors_recent">Nedávni prispievatelia</string>
     <string name="about_contributors_specialthanks">Zvláštne poďakovanie pre</string>
     <string name="about_contributors_specialthanksdetails">- všetkým našim prekladateľom na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všetkým oznamovateľom problémov\n- a všetkým ostatným podporovateľom.\n</string>
     <string name="about_contributors_other">Ďalší prispievatelia</string>
