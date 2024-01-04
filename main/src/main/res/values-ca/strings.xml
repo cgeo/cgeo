@@ -694,7 +694,6 @@
     <string name="about_changelog_full">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
-    <string name="about_contributors_recent">Col·laboradors recents</string>
     <string name="about_contributors_specialthanks">Agraïments especials a:</string>
     <string name="about_contributors_specialthanksdetails">- tots els nostres col·laboradors de traducció a [Crowdin.net] (https://crowdin.net/project/cgeo)!\n- tots els creadors de problemes\n- i la resta de suports.\n</string>
     <string name="about_contributors_other">Altres col·laboradors</string>
