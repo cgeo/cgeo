@@ -365,7 +365,6 @@
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
     <string name="about_contributors_carnerodetails">kā c:geo tēvs</string>
-    <string name="about_contributors_recent">Pēdējie atbalstītāji</string>
     <string name="about_contributors_specialthanks">Īpašs paldies</string>
     <string name="about_contributors_other">Citi atbalstītāji</string>
     <string name="about_components">Sastāvdaļas</string>
