@@ -557,7 +557,6 @@
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
-    <string name="about_contributors_recent">最近の貢献者</string>
     <string name="about_contributors_specialthanks">スペシャルサンクス</string>
     <string name="about_contributors_specialthanksdetails">- [Crowdin.net](https://crowdin.net/project/cgeo)のすべての翻訳者!\n- 不具合や提案などのすべての報告者\n- その他すべてのサポーター\n</string>
     <string name="about_contributors_other">そのほかの貢献者</string>
