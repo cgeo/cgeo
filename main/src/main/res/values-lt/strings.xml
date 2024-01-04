@@ -632,7 +632,6 @@
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
-    <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
     <string name="about_contributors_specialthanks">Ypatingas ačiū</string>
     <string name="about_contributors_specialthanksdetails">- visiems mūsų vertimo pagalbininkams [Crowdin.net](https://crowdin.net/project/cgeo)!\n- visiems pranešusiems apie problemas\n- ir visiems kitiems rėmėjams.\n</string>
     <string name="about_contributors_other">Kiti pagalbininkai</string>
