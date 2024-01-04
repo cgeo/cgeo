@@ -376,7 +376,6 @@
     <string name="about_system_write_logcat_error">写入日志文件出错</string>
     <string name="about_nutshellmanual">在线手册</string>
     <string name="about_contributors_carnerodetails">作为 c:geo 的创始人</string>
-    <string name="about_contributors_recent">最近贡献者</string>
     <string name="about_contributors_specialthanks">特别鸣谢</string>
     <string name="about_contributors_other">其他贡献者</string>
     <string name="about_components">组件</string>
