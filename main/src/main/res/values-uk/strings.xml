@@ -364,7 +364,6 @@
     <string name="about_system_write_logcat_error">Помилка записування вмісту</string>
     <string name="about_nutshellmanual">Онлайн допомога</string>
     <string name="about_contributors_carnerodetails">як батько c:geo</string>
-    <string name="about_contributors_recent">Останні учасники</string>
     <string name="about_contributors_specialthanks">Особлива подяка</string>
     <string name="about_contributors_other">Останні учасники</string>
     <string name="about_components">Компоненти</string>
