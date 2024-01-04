@@ -533,7 +533,6 @@
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
-    <string name="about_contributors_recent">Seneste bidragsydere</string>
     <string name="about_contributors_specialthanks">Særlig tak til</string>
     <string name="about_contributors_specialthanksdetails">· alle vores oversættere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n· alle fejlfindere\n· og alle andre bidragsydere.\n</string>
     <string name="about_contributors_other">Andre bidragsydere</string>
