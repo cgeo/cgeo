@@ -1,8 +1,16 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.Keyboard;
+import cgeo.geocaching.ui.SimpleItemListModel;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.content.Context;
 import android.util.Pair;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +22,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -370,6 +379,57 @@ public class FormulaUtils {
             default:
                 return 0;
         }
+    }
+
+    /** Shows a function selection dialog, and upon user selection pastes the function into the formula field given by 'formulaView' */
+    public static void showSelectFunctionDialog(final Context context, final TextView formulaView, final Consumer<String> newFormulaConsumer) {
+
+        final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
+
+        final SimpleDialog.ItemSelectModel<FormulaFunction> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(functions)
+            .setDisplayMapper(FormulaUtils::getFunctionDisplayString)
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+        model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper(FormulaUtils::getFunctionGroupDisplayString);
+
+        SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.formula_choose_function))
+            .selectSingle(model, f -> {
+                if (formulaView != null) {
+                    final String current = formulaView.getText().toString();
+                    final int currentPos = formulaView.getSelectionStart();
+
+                    final String function = f.getFunctionInsertString();
+                    final int functionPos = f.getFunctionInsertCursorPosition();
+
+                    final String newFormula = current.substring(0, currentPos) + function + current.substring(currentPos);
+                    final int newPos = currentPos + functionPos;
+
+                    formulaView.setText(newFormula);
+                    //changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
+                    if (formulaView instanceof EditText) {
+                        ((EditText) formulaView).setSelection(newPos);
+                    }
+                    Keyboard.show(context, formulaView);
+                }
+            });
+    }
+
+    private static TextParam getFunctionDisplayString(final FormulaFunction f) {
+        //find the shortest abbrevation
+        String fAbbr = f.getMainName();
+        for (String name : f.getNames()) {
+            if (name.length() < fAbbr.length()) {
+                fAbbr = name;
+            }
+        }
+        return TextParam.text(f.getUserDisplayableString() + " (" + fAbbr + ")");
+    }
+
+    private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
+        return
+            TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
     }
 
 }

@@ -1,13 +1,12 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.VariableListViewBinding;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.formulas.FormulaFunction;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.formulas.VariableMap;
@@ -322,37 +321,9 @@ public class VariableListView extends LinearLayout {
 
             if (viewHolder.viewButtonFunction != null) {
                 viewHolder.viewButtonFunction.setOnClickListener(d -> {
-                    final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
-
-                    final SimpleDialog.ItemSelectModel<FormulaFunction> model = new SimpleDialog.ItemSelectModel<>();
-                    model
-                        .setItems(functions)
-                        .setDisplayMapper(VariablesListAdapter::getFunctionDisplayString)
-                        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-
-                    model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper(VariablesListAdapter::getFunctionGroupDisplayString);
-
-                    SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.id(R.string.formula_choose_function))
-                            .selectSingle(model, f -> {
-                            //.selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
-                                if (viewHolder.viewVariableFormulaText != null) {
-                                    final String current = viewHolder.viewVariableFormulaText.getText().toString();
-                                    final int currentPos = viewHolder.viewVariableFormulaText.getSelectionStart();
-
-                                    final String function = f.getFunctionInsertString();
-                                    final int functionPos = f.getFunctionInsertCursorPosition();
-
-                                    final String newFormula = current.substring(0, currentPos) + function + current.substring(currentPos);
-                                    final int newPos = currentPos + functionPos;
-
-                                    viewHolder.viewVariableFormulaText.setText(newFormula);
-                                    changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
-                                    if (viewHolder.viewVariableFormulaText instanceof EditText) {
-                                        ((EditText) viewHolder.viewVariableFormulaText).setSelection(newPos);
-                                    }
-                                    Keyboard.show(parent.getContext(), viewHolder.viewVariableFormulaText);
-                                }
-                            });
+                    FormulaUtils.showSelectFunctionDialog(parent.getContext(), viewHolder.viewVariableFormulaText, newFormula -> {
+                        changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
+                    });
                 });
             }
 
@@ -361,22 +332,6 @@ public class VariableListView extends LinearLayout {
                         selectVariableName(viewHolder.getVar(), (o, n) -> changeVarAt(viewHolder.getBindingAdapterPosition(), n))));
             }
             return viewHolder;
-        }
-
-        private static TextParam getFunctionDisplayString(final FormulaFunction f) {
-            //find the shortest abbrevation
-            String fAbbr = f.getMainName();
-            for (String name : f.getNames()) {
-                if (name.length() < fAbbr.length()) {
-                    fAbbr = name;
-                }
-            }
-            return TextParam.text(f.getUserDisplayableString() + " (" + fAbbr + ")");
-        }
-
-        private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
-            return
-                    TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
         }
 
         @Override
