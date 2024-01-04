@@ -494,7 +494,6 @@
     <string name="about_system_write_logcat_error">檔案寫入錯誤</string>
     <string name="about_nutshellmanual">線上手冊</string>
     <string name="about_contributors_carnerodetails">當成是c:geo的爸爸XD</string>
-    <string name="about_contributors_recent">當前的貢獻者</string>
     <string name="about_contributors_specialthanks">特別感謝</string>
     <string name="about_contributors_other">其他貢獻者：</string>
     <string name="about_components">元件</string>
