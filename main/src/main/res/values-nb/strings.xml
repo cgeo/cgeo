@@ -550,7 +550,6 @@
     <string name="about_system_write_logcat_error">Feil ved skriving av loggfil</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
     <string name="about_contributors_carnerodetails">som faren til c:geo</string>
-    <string name="about_contributors_recent">Siste bidragsytere</string>
     <string name="about_contributors_specialthanks">Spesielt takk til</string>
     <string name="about_contributors_specialthanksdetails">- alle våre oversettelsesbidragsytere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n- alle som rapporterer feil\n- og alle andre bidragsytere.\n</string>
     <string name="about_contributors_other">Andre bidragsytere</string>
