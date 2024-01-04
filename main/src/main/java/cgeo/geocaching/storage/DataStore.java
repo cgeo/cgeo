@@ -13,11 +13,13 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogEntry;
@@ -55,6 +57,7 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
@@ -226,7 +229,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -239,7 +242,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 101;
+    private static final int dbVersion = 102;
     public static final int customListIdOffset = 10;
 
     /**
@@ -276,7 +279,8 @@ public class DataStore {
             98, // add table cg_variables to store cache variables
             99,  // add alcMode to differentiate Linear vs Random
             100, // add column "tier" and table for cache categories. Initially used for bettercacher.org data
-            101  //add service_image_id to saved log images
+            101, // add service_image_id to saved log images
+            102  // add projection attributes to waypoints
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -391,7 +395,11 @@ public class DataStore {
             + "visited INTEGER DEFAULT 0, "
             + "user_note TEXT, "
             + "org_coords_empty INTEGER DEFAULT 0, "
-            + "calc_state TEXT"
+            + "calc_state TEXT, "
+            + "projection_type TEXT, "
+            + "projection_unit TEXT, "
+            + "projection_formula_2 TEXT, "
+            + "projection_formula_1 TEXT"
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -1807,6 +1815,18 @@ public class DataStore {
                         }
                     }
 
+                    // Adds projection attributes to waypoints
+                    if (oldVersion < 102) {
+                        try {
+                            createColumnIfNotExists(db, dbTableWaypoints, "projection_type TEXT");
+                            createColumnIfNotExists(db, dbTableWaypoints, "projection_unit TEXT");
+                            createColumnIfNotExists(db, dbTableWaypoints, "projection_formula_1 TEXT");
+                            createColumnIfNotExists(db, dbTableWaypoints, "projection_formula_2 TEXT");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 102);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2667,6 +2687,10 @@ public class DataStore {
         values.put("visited", waypoint.isVisited() ? 1 : 0);
         values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
         values.put("calc_state", waypoint.getCalcStateConfig());
+        values.put("projection_type", waypoint.getProjectionType().getId());
+        values.put("projection_unit", waypoint.getProjectionDistanceUnit().getId());
+        values.put("projection_formula_1", waypoint.getProjectionFormula1() == null ? null : waypoint.getProjectionFormula1().getExpression());
+        values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2().getExpression());
         return values;
     }
 
@@ -3343,6 +3367,12 @@ public class DataStore {
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
             waypoint.setCalcStateConfig(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
+            waypoint.setProjection(
+                ProjectionType.findById(cursor.getString(cursor.getColumnIndexOrThrow("projection_type"))),
+                DistanceUnit.findById(cursor.getString(cursor.getColumnIndexOrThrow("projection_unit"))),
+                Formula.safeCompile(cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_1"))),
+                Formula.safeCompile(cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2")))
+            );
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

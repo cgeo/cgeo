@@ -8,7 +8,7 @@ import cgeo.geocaching.databinding.EditwaypointActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.location.DistanceParser;
+import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalculatedCoordinate;
@@ -360,7 +360,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private void initializeDistanceUnitSelector() {
         if (initViews) {
             binding.distanceUnit.setSelection(Settings.useImperialUnits() ?
-                    DistanceParser.DistanceUnit.FT.getValue() : DistanceParser.DistanceUnit.M.getValue());
+                    DistanceUnit.FEET.getValue() : DistanceUnit.METER.getValue());
         }
     }
 
@@ -539,7 +539,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final String bearingText = binding.bearing.getText().toString();
         final String distanceText = binding.distance.getText().toString();
-        final DistanceParser.DistanceUnit distanceUnit = DistanceParser.DistanceUnit.getById(binding.distanceUnit.getSelectedItemPosition());
+        final DistanceUnit distanceUnit = DistanceUnit.getByPos(binding.distanceUnit.getSelectedItemPosition());
 
         if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
@@ -553,7 +553,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             final double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText, distanceUnit);
+                distance = distanceUnit.parseToKilometers(distanceText);
             } catch (final NumberFormatException ignored) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;

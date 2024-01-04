@@ -319,6 +319,14 @@ public final class Formula {
         }
     }
 
+    public static Formula safeCompile(final String expression) {
+        try {
+            return compile(expression);
+        } catch (FormulaException fe) {
+            return null;
+        }
+    }
+
     public static Formula compile(final String expression) throws FormulaException {
         return compile(expression, 0, null);
     }

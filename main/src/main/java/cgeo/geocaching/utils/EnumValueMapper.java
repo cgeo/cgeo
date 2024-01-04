@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * Helper class to construct a value-to-enum-type mapper.
@@ -31,6 +32,12 @@ public class EnumValueMapper<T, E extends Enum<E>> {
                         "': maps to both '" + existingEnumValue + "' and '" + enumValue + "'");
             }
             valueMap.put(pValue, enumValue);
+        }
+    }
+
+    public void addAll(final E[] enumValues, final Function<E, T> mapper) {
+        for (E value : enumValues) {
+            add(value, mapper.apply(value));
         }
     }
 
