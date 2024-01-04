@@ -5,7 +5,9 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
@@ -289,6 +291,18 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         binding.searchFilterInfo.setOnClickListener(v -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
         handlePotentialClipboardGeocode();
+
+        // mitigation for #13312
+        boolean disableKeywordSearch = false;
+        if (!Settings.isGCPremiumMember()) {
+            final int activeCount = ConnectorFactory.getActiveConnectors().size();
+            if (GCConnector.getInstance().isActive() && (activeCount == 1 || (activeCount == 2 && ALConnector.getInstance().isActive()))) {
+                // only gc.com connectors active, and user has basic member status => disable keyword search
+                disableKeywordSearch = true;
+            }
+        }
+        binding.keyword.setEnabled(!disableKeywordSearch);
+        binding.searchKeyword.setEnabled(!disableKeywordSearch);
     }
 
     /**
