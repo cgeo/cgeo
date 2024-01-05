@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Gearchiveerd</string>
     <string name="log_save">Off line opslaan</string>
     <string name="log_saving">Log opslaan…</string>
-    <string name="log_saving_and_uploading">Log posten en afbeeldingen uploaden…</string>
     <string name="log_posting_log">Posten log…</string>
+    <string name="log_posting_problemreport">Probleem rapport log posten…</string>
+    <string name="log_posting_deletelog">Log wissen…</string>
+    <string name="log_posting_image_create">Afbeelding %1$s/%2$s: gegevens posten…</string>
+    <string name="log_posting_image_edit">Afbeelding %1$s/%2$s: gegevens wijzigen…</string>
+    <string name="log_posting_image_delete">Afbeelding %1$s/%2$s verwijderen</string>
+    <string name="log_posting_save_internal">Opslaan nieuwe log status…</string>
     <string name="log_posting_vote">Cache stem posten…</string>
-    <string name="log_posting_image">Afbeeldingen posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">geschaald</string>
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
+    <string name="log_delete_confirm">Weet je zeker dat je het logboek %1%s van auteur %2%s met logdatum %3%s wilt verwijderen?</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
@@ -694,6 +699,7 @@
     <string name="about_changelog_full">Lijst van alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
+    <string name="about_contributors_recent">Bijdragers (laatste 12 maanden)</string>
     <string name="about_contributors_specialthanks">Speciale dank aan</string>
     <string name="about_contributors_specialthanksdetails">- al onze vertalingsbijdragers op [Crowdin.net](https://crowdin.net/project/cgeo)!\n- alle makers van issues\n- en alle andere supporters.\n</string>
     <string name="about_contributors_other">Andere bijdragers</string>
@@ -2399,6 +2405,8 @@
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_filename">%s downloaden</string>
+    <string name="downloadmap_keep_temporary_files">Tijdelijke bestanden behouden</string>
+    <string name="downloadmap_keep_temporary_files_summary">Sommige download bronnen ondersteunen extra bestanden die niet gebruikt worden door c:geo. Houd deze extra bestanden in de downloadmap van het systeem in plaats van te verwijderen</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="download_none_selected">Geen bestanden geselecteerd om te downloaden</string>
