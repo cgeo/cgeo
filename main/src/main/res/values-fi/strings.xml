@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arkistoitu</string>
     <string name="log_save">Offline-tallennus</string>
     <string name="log_saving">Lähetetään merkintää…</string>
-    <string name="log_saving_and_uploading">Lähetetään lokia ja kuvia…</string>
     <string name="log_posting_log">Lähetetään lokia…</string>
     <string name="log_posting_vote">Lähetetään kätkön arvostelua…</string>
-    <string name="log_posting_image">Kuvia lähetetään…</string>
     <string name="log_posting_generic_trackable">Lähetetään %1$s %2$d/%3$d</string>
     <string name="log_clear">Tyhjennä</string>
     <string name="log_templates">Löytyi: Lokimalline…</string>
