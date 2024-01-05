@@ -145,10 +145,8 @@
     <string name="log_tb_archived">Archivé</string>
     <string name="log_save">Enregistrer hors-ligne</string>
     <string name="log_saving">Enregistrement en cours…</string>
-    <string name="log_saving_and_uploading">Envoi de la visite et des images…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
-    <string name="log_posting_image">Envoi des images…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
