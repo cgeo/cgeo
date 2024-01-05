@@ -54,7 +54,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -313,6 +312,12 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     @Override
     public boolean onPreferenceStartFragment(final PreferenceFragmentCompat caller, final Preference pref) {
+        // clear fragment backstack if new base category opened and in dualmode
+        if (isInDualPaneMode() && caller instanceof PreferencesFragmentRoot) {
+            while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+        }
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager()
@@ -321,13 +326,10 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
-        final FragmentManager fm = getSupportFragmentManager();
-        final FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(preferenceContentView, fragment);
-        if (!isInDualPaneMode() && fm.getBackStackEntryCount() == 0) {
-            ft.addToBackStack(null);
-        }
-        ft.commit();
+        getSupportFragmentManager().beginTransaction()
+            .replace(preferenceContentView, fragment)
+            .addToBackStack(null)
+            .commit();
         title = pref.getTitle();
         return true;
     }
