@@ -25,7 +25,10 @@ import org.apache.commons.lang3.StringUtils;
 public class FormulaUtils {
 
     private static final String F_OPS = "\\+/!\\^:\\*x-";
-    private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()\\[\\]]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
+    private static final String MAX_NR_OF_OPS = "10"; //max number of operators which will be found in a formula
+
+    private static final String F_WS = "\\h{0,5}"; //max number of successive whitespaces. We need to limit
+    private static final String F_FORMULA = "((" + F_WS + "\\(){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((" + F_WS + "[()\\[\\]]){0,5}" + F_WS + "(" + F_WS + "[" + F_OPS + "]" + F_WS + "){1,5})(" + F_WS + "[()]){0,5}" + F_WS + "([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})){1," + MAX_NR_OF_OPS + "}(" + F_WS + "\\)){0,5}" + F_WS + ")";
 
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
 
@@ -228,7 +231,8 @@ public class FormulaUtils {
             return;
         }
         final String text = preprocessScanText(stext);
-        final Matcher m = FORMULA_SCAN_PATTERN.matcher(" " + text + " ");
+        final String searchText = " " + text + " ";
+        final Matcher m = FORMULA_SCAN_PATTERN.matcher(searchText);
         int start = 0;
         while (m.find(start)) {
             final String found = processFoundText(Objects.requireNonNull(m.group(1)));
