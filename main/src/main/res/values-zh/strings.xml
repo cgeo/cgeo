@@ -95,10 +95,8 @@
     <string name="log_tb_archived">已归档</string>
     <string name="log_save">离线保存</string>
     <string name="log_saving">正在发送日志…</string>
-    <string name="log_saving_and_uploading">正在发布日志并上传图片…</string>
     <string name="log_posting_log">正在发布日志…</string>
     <string name="log_posting_vote">正在发布藏点评分…</string>
-    <string name="log_posting_image">正在发布图片…</string>
     <string name="log_posting_generic_trackable">正在发布 %1$s %2$d/%3$d</string>
     <string name="log_clear">清除</string>
     <string name="log_post_not_possible">正在下载数据…\n请几秒钟后再试一次或检查您的网络连接。</string>
