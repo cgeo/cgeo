@@ -122,10 +122,8 @@
     <string name="log_tb_archived">アーカイブ済み</string>
     <string name="log_save">オフライン保存</string>
     <string name="log_saving">ログを投稿中…</string>
-    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
     <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
-    <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
     <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
