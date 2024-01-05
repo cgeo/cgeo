@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arşivlendi</string>
     <string name="log_save">Çevrimdışı kaydet</string>
     <string name="log_saving">Kayıt gönderiliyor…</string>
-    <string name="log_saving_and_uploading">Kaydınız yayınlanıyor ve resimler yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
     <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
-    <string name="log_posting_image">Resimler gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
     <string name="log_templates">Buldum: Şablon…</string>
