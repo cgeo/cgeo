@@ -257,15 +257,26 @@ public class HttpRequest {
 
     /** Sets body to Json parsed from given object */
     public HttpRequest bodyJson(final Object jsonObject) {
+        final String jsonString = getJsonBody(jsonObject);
+        Log.d("HTTP-JSON: attempt to send: " + jsonString);
+        this.requestBodySupplier = () -> RequestBody.create(jsonString, MEDIA_TYPE_APPLICATION_JSON);
+        return this;
+    }
+
+    public static String getJsonBody(final Object jsonObject) {
         try {
-            final String jsonString = JSON_MAPPER.writeValueAsString(jsonObject);
-            Log.d("HTTP-JSON: attempt to send: " + jsonString);
-            this.requestBodySupplier = () -> RequestBody.create(jsonString, MEDIA_TYPE_APPLICATION_JSON);
-            return this;
+            return JSON_MAPPER.writeValueAsString(jsonObject);
         } catch (JsonProcessingException jpe) {
             throw new IllegalArgumentException(LOGPRAEFIX + "ERR: Could not parse as Json: " + jsonObject, jpe);
         }
     }
 
+    public static String safeGetJsonBody(final Object jsonObject) {
+        try {
+            return getJsonBody(jsonObject);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
 }
