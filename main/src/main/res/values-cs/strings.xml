@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Archivován</string>
     <string name="log_save">Uložit offline</string>
     <string name="log_saving">Odesílání logu…</string>
-    <string name="log_saving_and_uploading">Odesílání logu a nahrávání obrázků…</string>
     <string name="log_posting_log">Odesílání logu…</string>
     <string name="log_posting_vote">Přidává se hlas kešce…</string>
-    <string name="log_posting_image">Odesílání obrázků…</string>
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
     <string name="log_templates">Nalezeno: Šablona logu…</string>
