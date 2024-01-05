@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Zarchiwizowana</string>
     <string name="log_save">Zapisz offline</string>
     <string name="log_saving">Zapisuję w dzienniku…</string>
-    <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
+    <string name="log_posting_problemreport">Wysyłanie dziennika z raportem o problemie…</string>
+    <string name="log_posting_deletelog">Usuń dziennik…</string>
+    <string name="log_posting_image_create">Obraz %1$s/%2$s: wysyłanie danych…</string>
+    <string name="log_posting_image_edit">Obraz %1$s/%2$s: zmiana danych…</string>
+    <string name="log_posting_image_delete">Usuwanie obrazu %1$s/%2$s</string>
+    <string name="log_posting_save_internal">Zapisz nowy stan dziennika…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrytki…</string>
-    <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_templates">Znaleziono: Szablon wpisu…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">skalowane</string>
     <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
+    <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu %1%s autorstwa %2%s z datą logowania %3%s?</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -706,6 +711,7 @@
     <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
+    <string name="about_contributors_recent">Współtwórcy (ostatnie 12 miesięcy)</string>
     <string name="about_contributors_specialthanks">Specjalne podziękowania dla</string>
     <string name="about_contributors_specialthanksdetails">- wszystkich naszych tłumaczy na [Crowdin.net](https://crowdin.net/project/cgeo)!\n– wszystkich zgłaszających błędy\n– i wszystkich innych wspierających.\n</string>
     <string name="about_contributors_other">Inni współpracownicy</string>
@@ -2459,6 +2465,8 @@
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
+    <string name="downloadmap_keep_temporary_files">Zachowaj pliki tymczasowe</string>
+    <string name="downloadmap_keep_temporary_files_summary">Niektóre źródła obsługują dodatkowe pliki nieużywane przez c:geo. Zachowaj te dodatkowe pliki w folderze pobierania systemu zamiast usuwać je</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="download_none_selected">Nie wybrano plików do pobrania</string>
