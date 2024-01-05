@@ -35,4 +35,4 @@ Weitere Änderungen:
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
 - Änderung: Verwendung des Hintergrundbildes benötigt nicht mehr die Berechtigung zum Lesen von Dateien
-- New: Two column-layout for settings in landscape mode
+- Neu: Zwei Spalten-Layout für Einstellungen im Querformat
