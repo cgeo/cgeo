@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archivado</string>
     <string name="log_save">Guardar sin conexión</string>
     <string name="log_saving">Enviando registro…</string>
-    <string name="log_saving_and_uploading">Publicando registro y subiendo imágenes…</string>
     <string name="log_posting_log">Enviando registro…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
-    <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_templates">Encontrado: Plantilla de registro…</string>
