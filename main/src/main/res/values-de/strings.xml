@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
-    <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
+    <string name="log_posting_problemreport">Sende Problem-Log…</string>
+    <string name="log_posting_deletelog">Lösche Log…</string>
+    <string name="log_posting_image_create">Bild %1$s/%2$s: Sende Daten…</string>
+    <string name="log_posting_image_edit">Bild %1$s/%2$s: Ändere Daten…</string>
+    <string name="log_posting_image_delete">Lösche Bild %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Speichere neuen Log-Status…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
-    <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">skaliert</string>
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
+    <string name="log_delete_confirm">Möchten Sie das Log vom Typ %1%s des Autors %2%s mit dem Logdatum %3%s wirklich löschen?</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -894,6 +899,7 @@
     <string name="init_showElevation">Höhe anzeigen</string>
     <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
     <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
+    <string name="menu_elevation_info">Höhe (Karte): %s</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
