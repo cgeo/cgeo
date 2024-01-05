@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archyvuotas</string>
     <string name="log_save">Išsaugoti neprisijungus</string>
     <string name="log_saving">Siunčiamas įrašas…</string>
-    <string name="log_saving_and_uploading">Skelbiamas įrašas ir įkeliami vaizdai…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
-    <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
