@@ -77,6 +77,7 @@ public class BackupUtils {
     private static final String AUTO_BACKUP_FOLDER = "auto"; // subfolder of PersistableFolder.BACKUP
 
     private static final String STATE_CSAH = "csam";
+    private static final int NO_ACCESSIBLE_FILE = -1;
 
     private final ContentStorageActivityHelper fileSelector;
 
@@ -189,14 +190,14 @@ public class BackupUtils {
         final CheckBox settingsCheckbox = content.findViewById(R.id.settings_check_box);
         final TextView warningText = content.findViewById(R.id.warning);
 
-        if (getDatabaseBackupTime(backupDir) != 0) {
+        if (getDatabaseBackupTime(backupDir) != NO_ACCESSIBLE_FILE) {
             databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + Formatter.formatShortDateTime(getDatabaseBackupTime(backupDir)) + ")");
             databaseCheckbox.setEnabled(true);
             databaseCheckbox.setChecked(true);
         } else {
             databaseCheckbox.setText(activityContext.getString(R.string.init_backup_caches) + "\n(" + activityContext.getString(R.string.init_backup_unavailable) + ")");
         }
-        if (getSettingsBackupTime(backupDir) != 0) {
+        if (getSettingsBackupTime(backupDir) != NO_ACCESSIBLE_FILE) {
             settingsCheckbox.setText(activityContext.getString(R.string.init_backup_program_settings) + "\n(" + Formatter.formatShortDateTime(getSettingsBackupTime(backupDir)) + ")");
             settingsCheckbox.setEnabled(true);
             settingsCheckbox.setChecked(true);
@@ -680,7 +681,7 @@ public class BackupUtils {
     private static long getDatabaseBackupTime(final Folder backupDir) {
         final ContentStorage.FileInformation restoreFile = getDatabaseFile(backupDir);
         if (restoreFile == null) {
-            return 0;
+            return NO_ACCESSIBLE_FILE;
         }
         return restoreFile.lastModified;
     }
@@ -688,13 +689,13 @@ public class BackupUtils {
     private static long getSettingsBackupTime(final Folder backupDir) {
         final ContentStorage.FileInformation file = getSettingsFile(backupDir);
         if (file == null) {
-            return 0;
+            return NO_ACCESSIBLE_FILE;
         }
         return file.lastModified;
     }
 
     private static long getBackupTime(final Folder backupDir) {
-        return backupDir == null ? 0 : Math.max(getDatabaseBackupTime(backupDir), getSettingsBackupTime(backupDir));
+        return backupDir == null ? NO_ACCESSIBLE_FILE : Math.max(getDatabaseBackupTime(backupDir), getSettingsBackupTime(backupDir));
     }
 
     @NonNull
@@ -705,7 +706,7 @@ public class BackupUtils {
     @NonNull
     private static String getBackupDateTime(final Folder backupDir) {
         final long time = getBackupTime(backupDir);
-        if (time == 0) {
+        if (time == NO_ACCESSIBLE_FILE) {
             return StringUtils.EMPTY;
         }
         return Formatter.formatShortDateTime(time);
