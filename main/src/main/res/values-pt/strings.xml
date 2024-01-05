@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Arquivado</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
-    <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_vote">A submeter votação da cache…</string>
-    <string name="log_posting_image">A publicar imagens…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_templates">Encontrada: Modelo de registo…</string>
