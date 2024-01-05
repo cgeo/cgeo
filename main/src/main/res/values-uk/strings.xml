@@ -91,10 +91,8 @@
     <string name="log_tb_archived">Архівний</string>
     <string name="log_save">Зберегти оффлайн</string>
     <string name="log_saving">Надсилання журналу…</string>
-    <string name="log_saving_and_uploading">Розміщення журналу та завантаження зображень…</string>
     <string name="log_posting_log">Журнал відправлення…</string>
     <string name="log_posting_vote">Розміщення кешу голосування…</string>
-    <string name="log_posting_image">Розміщення зображень…</string>
     <string name="log_posting_generic_trackable">Постинг %1$s %2$d/%3$d</string>
     <string name="log_clear">Чистий</string>
     <string name="log_post_not_possible">Триває завантаження даних… \nБудь ласка, спробуйте ще раз за кілька секунд або перевірте підключення до Інтернету.</string>
