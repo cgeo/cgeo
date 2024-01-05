@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Αρχειοθετημένο</string>
     <string name="log_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="log_saving">Αποστολή αρχείου καταγραφής…</string>
-    <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και μεταφόρτωση εικόνων…</string>
     <string name="log_posting_log">Αποστολή καταγραφής…</string>
     <string name="log_posting_vote">Δημοσίευση βαθμολογίας κρύπτης…</string>
-    <string name="log_posting_image">Μεταφόρτωση εικόνων…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_templates">Πρότυπο καταγραφής: Βρέθηκε…</string>
