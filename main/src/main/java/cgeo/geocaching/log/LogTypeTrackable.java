@@ -2,7 +2,7 @@ package cgeo.geocaching.log;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.EnumValueMapper;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
@@ -35,9 +35,11 @@ public enum LogTypeTrackable {
 
     public final boolean allowedForInventory;
 
-    public static final List<LogTypeTrackable> ALLOWED_FOR_INVENTORY = new ArrayList<>();
+    private static final List<LogTypeTrackable> ALLOWED_FOR_INVENTORY = new ArrayList<>();
+    private static final EnumValueMapper<Integer, LogTypeTrackable> GET_BY_ID = new EnumValueMapper<>();
 
     static {
+        GET_BY_ID.addAll(values(), lt -> lt.id);
         for (LogTypeTrackable lt : values()) {
             if (lt.allowedForInventory) {
                 ALLOWED_FOR_INVENTORY.add(lt);
@@ -55,16 +57,8 @@ public enum LogTypeTrackable {
         this.allowedForInventory = allowedForInventory;
     }
 
-//    LogTypeTrackable(final int id, final int gkid, @NonNull final String action, @StringRes final int resourceId, @DrawableRes final int markerId) {
-//        this(id, gkid, action, resourceId, markerId, id);
-//    }
-//
-//    LogTypeTrackable(final int id, final int gkid, final String action, @StringRes final int resourceId, final int gcApiId) {
-//        this(id, gkid, action, resourceId, R.drawable.mark_gray, gcApiId);
-//    }
-
     LogTypeTrackable(final int id, final int gcApiId, final int gkid, @StringRes final int resourceId) {
-        this(id, gkid, gcApiId, resourceId, 0, false);
+        this(id, gcApiId, gkid, resourceId, 0, false);
     }
 
     @NonNull
@@ -73,13 +67,7 @@ public enum LogTypeTrackable {
     }
 
     public static LogTypeTrackable getById(final int id) {
-        for (final LogTypeTrackable logTypeTrackable : values()) {
-            if (logTypeTrackable.id == id) {
-                return logTypeTrackable;
-            }
-        }
-        Log.e("LogTypeTrackable.getById(): Failed to lookup id:" + id);
-        return UNKNOWN;
+        return GET_BY_ID.get(id, UNKNOWN);
     }
 
     // Specify the list of trackable action when in LogCacheActivity

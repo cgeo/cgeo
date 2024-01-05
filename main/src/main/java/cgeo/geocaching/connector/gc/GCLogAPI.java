@@ -402,7 +402,7 @@ public class GCLogAPI {
                 .bodyJson(logEntry)
                 .requestJson(GCWebTrackableLogResponse.class).blockingGet()) {
             if (response.logReferenceCode == null) {
-                return generateLogError("Problem pasting trackable log, response is: " + response);
+                return generateLogError("Problem pasting trackable log, response is: " + response + ", request was:" + HttpRequest.safeGetJsonBody(logEntry));
             }
 
             return LogResult.ok(response.logReferenceCode);
