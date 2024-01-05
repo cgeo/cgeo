@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Архивирован</string>
     <string name="log_save">Сохранить офлайн</string>
     <string name="log_saving">Отправка записи…</string>
-    <string name="log_saving_and_uploading">Отправка записи и загрузка фотографий…</string>
     <string name="log_posting_log">Отправка записи…</string>
     <string name="log_posting_vote">Отправка оценки тайника…</string>
-    <string name="log_posting_image">Отправка фотографий…</string>
     <string name="log_posting_generic_trackable">Отправка %1$s %2$d/%3$d</string>
     <string name="log_clear">Очистить</string>
     <string name="log_templates">Найдено: Шаблон отзыва…</string>
