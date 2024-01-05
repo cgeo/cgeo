@@ -3,6 +3,7 @@
 - Oplossing: Onnodige READ_EXTERNAL_STORAGE machtiging werd opgevraagd op nieuwere Android versies
 - Oplossing: Trackable logsoort standaard selectie
 - Oplossing: Crash bij het openen van de kaart downloader onder bepaalde omstandigheden
+- Oplossing: Crash in OpenStreetMap kaarten onder bepaalde omstandigheden
 
 ##
 - Oplossing: Trackables ontbreken in cache inventaris (website wijziging)
