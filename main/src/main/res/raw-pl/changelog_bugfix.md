@@ -3,6 +3,7 @@
 - Poprawka: Niepotrzebne żądanie uprawnienia READ_EXTERNAL_STORAGE w nowszych wersjach Androida
 - Poprawka: Domyślny wybór typu dziennika dla przedmiotów podróżnych
 - Poprawka: Awaria przy otwieraniu pobierania map pod pewnymi warunkami
+- Poprawka: W określonych warunkach występowała awaria na mapach OpenStreetMap
 
 ##
 - Poprawka: Brakujące przedmioty podróżne w ewidencji skrytki (zmiana strony internetowej)
