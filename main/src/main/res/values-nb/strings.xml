@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arkivert</string>
     <string name="log_save">Lagre lokalt</string>
     <string name="log_saving">Lagrer logg…</string>
-    <string name="log_saving_and_uploading">Laster opp logg og bilder…</string>
     <string name="log_posting_log">Laster opp logg…</string>
     <string name="log_posting_vote">Laster opp cachestemme…</string>
-    <string name="log_posting_image">Laster opp bilder…</string>
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
     <string name="log_templates">Fant den: Logg mal…</string>
