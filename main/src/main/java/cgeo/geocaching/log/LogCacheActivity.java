@@ -744,7 +744,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             }
 
             LogTypeTrackable newAction = LastTrackableAction.getLastAction(key);
-            if (!newAction.allowedForInventory) {
+            if (newAction == null || !newAction.allowedForInventory) {
                 newAction = Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED : LogTypeTrackable.DO_NOTHING;
             }
             actionLogs.put(key, newAction);
