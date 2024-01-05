@@ -3,6 +3,7 @@
 - Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
 - Fix: Trackable logtype default selection
 - Oprava: Pri otvorení sťahovača máp dochádzalo za určitých podmienok k pádu aplikácie
+- Fix: Crash on OSM-based maps under certain conditions
 
 ##
 - Fix: Trackables missing in cache inventory (website change)
