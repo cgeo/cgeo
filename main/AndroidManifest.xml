@@ -751,13 +751,15 @@
 
         <service
             android:name=".speech.SpeechService"
-            android:label="@string/tts_service" >
+            android:label="@string/tts_service"
+            android:foregroundServiceType="mediaPlayback">
         </service>
         <service
             android:name=".brouter.InternalRoutingService"
             android:exported="false"
             android:enabled="true"
-            android:process=":brouter_service">
+            android:process=":brouter_service"
+            android:foregroundServiceType="location">
         </service>
 
         <activity
@@ -930,10 +932,14 @@
         </receiver>
 
         <!-- Map import service -->
-        <service android:name=".downloader.ReceiveDownloadService" />
+        <service
+            android:name=".downloader.ReceiveDownloadService"
+            android:foregroundServiceType="dataSync"/>
 
         <!-- Background cache downloader -->
-        <service android:name=".service.CacheDownloaderService" />
+        <service
+            android:name=".service.CacheDownloaderService"
+            android:foregroundServiceType="dataSync"/>
         <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
 
         <!-- Receiver for custom tabs share intent -->
