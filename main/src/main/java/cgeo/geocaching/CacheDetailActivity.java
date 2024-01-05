@@ -2225,7 +2225,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
             // coordinates
             final TextView coordinatesView = holder.binding.coordinates;
-            final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinates;
+            final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinateInfo;
             final Geopoint coordinates = wpt.getCoords();
             final String calcStateJson = wpt.getCalcStateConfig();
 
@@ -2237,6 +2237,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
             calculatedCoordinatesView.setText("(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern());
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
+
+            holder.binding.projectionIcon.setVisibility(wpt.hasProjection() ? View.VISIBLE : View.GONE);
+            holder.binding.projectionIcon.setImageResource(wpt.getProjectionType().markerId);
+            holder.binding.projectionInfo.setVisibility(wpt.hasProjection() ? View.VISIBLE : View.GONE);
+            holder.binding.projectionInfo.setText("(↦):" + wpt.getProjectionType().getUserDisplayableInfo(wpt.getProjectionFormula1(), wpt.getProjectionFormula2(), wpt.getProjectionDistanceUnit()));
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);

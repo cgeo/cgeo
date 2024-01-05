@@ -2,8 +2,14 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.TextUtils;
+
+import android.graphics.Color;
+import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.StringRes;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class FormulaException extends IllegalArgumentException {
 
@@ -73,8 +79,22 @@ public class FormulaException extends IllegalArgumentException {
         this.evaluationContext = context;
     }
 
-    public String getUserDisplayableString() {
+    public String getUserDisplayableErrorMessage() {
         return (this.functionContext == null ? "" : this.functionContext + ": ") + localizedMessage;
+    }
+
+    public CharSequence getUserDisplayableString() {
+        final String errorMessage = getUserDisplayableErrorMessage();
+        final CharSequence expression = getExpressionFormatted();
+
+        if (StringUtils.isBlank(errorMessage)) {
+            return StringUtils.isBlank(expression) ? "--" : expression;
+        }
+        if (StringUtils.isBlank(expression)) {
+            return errorMessage;
+        }
+
+        return TextUtils.concat(expression, TextUtils.setSpan(" | " + errorMessage, new ForegroundColorSpan(Color.RED)));
     }
 
     public CharSequence getExpressionFormatted() {

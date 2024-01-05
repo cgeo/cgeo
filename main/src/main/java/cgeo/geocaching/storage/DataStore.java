@@ -57,7 +57,6 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
-import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
@@ -2702,8 +2701,8 @@ public class DataStore {
         values.put("calc_state", waypoint.getCalcStateConfig());
         values.put("projection_type", waypoint.getProjectionType().getId());
         values.put("projection_unit", waypoint.getProjectionDistanceUnit().getId());
-        values.put("projection_formula_1", waypoint.getProjectionFormula1() == null ? null : waypoint.getProjectionFormula1().getExpression());
-        values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2().getExpression());
+        values.put("projection_formula_1", waypoint.getProjectionFormula1() == null ? null : waypoint.getProjectionFormula1());
+        values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2());
         putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
         return values;
     }
@@ -3376,8 +3375,10 @@ public class DataStore {
             waypoint.setGeocode(cursor.getString(cursor.getColumnIndexOrThrow("geocode")));
             waypoint.setPrefix(cursor.getString(cursor.getColumnIndexOrThrow("prefix")));
             waypoint.setLookup(cursor.getString(cursor.getColumnIndexOrThrow("lookup")));
-            waypoint.setCoords(getCoords(cursor, cursor.getColumnIndexOrThrow("latitude"), cursor.getColumnIndexOrThrow("longitude")));
-            waypoint.setPreprojectedCoords(getCoords(cursor, cursor.getColumnIndexOrThrow("preprojected_latitude"), cursor.getColumnIndexOrThrow("preprojected_longitude")));
+            final Geopoint coords = getCoords(cursor, cursor.getColumnIndexOrThrow("latitude"), cursor.getColumnIndexOrThrow("longitude"));
+            final Geopoint preprojectedCoords = getCoords(cursor, cursor.getColumnIndexOrThrow("preprojected_latitude"), cursor.getColumnIndexOrThrow("preprojected_longitude"));
+            waypoint.setCoords(coords);
+            waypoint.setPreprojectedCoords(preprojectedCoords == null ? coords : preprojectedCoords); // older entries don't have preprojected coords stored
             waypoint.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
@@ -3385,8 +3386,8 @@ public class DataStore {
             waypoint.setProjection(
                 ProjectionType.findById(cursor.getString(cursor.getColumnIndexOrThrow("projection_type"))),
                 DistanceUnit.findById(cursor.getString(cursor.getColumnIndexOrThrow("projection_unit"))),
-                Formula.safeCompile(cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_1"))),
-                Formula.safeCompile(cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2")))
+                cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_1")),
+                cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2"))
             );
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);

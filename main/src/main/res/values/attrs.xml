@@ -48,6 +48,11 @@
     <!-- button style for home screen's quick launch buttons -->
     <attr name="quickLaunchButtonStyle" format="reference"/>
 
+    <!-- custom attributes for FormulaEditView -->
+    <declare-styleable name="FormulaEditText">
+        <attr name="hint" format="string" />
+    </declare-styleable>
+
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />

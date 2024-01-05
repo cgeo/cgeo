@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
+import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
@@ -67,10 +68,10 @@ public class Waypoint implements IWaypoint {
 
     private String calcStateConfig = null;
 
-    private ProjectionType projectionType = ProjectionType.NO_PROJECTION;
-    private DistanceUnit projectionDistanceUnit = DistanceUnit.METER;
-    private Formula projectionFormula1 = null;
-    private Formula projectionFormula2 = null;
+    @NonNull private ProjectionType projectionType = ProjectionType.NO_PROJECTION;
+    @NonNull private DistanceUnit projectionDistanceUnit = DistanceUnit.getDefaultUnit(false);
+    private String projectionFormula1 = null;
+    private String projectionFormula2 = null;
 
     /**
      * Sort waypoints by their probable order (e.g. parking first, final last).
@@ -195,9 +196,9 @@ public class Waypoint implements IWaypoint {
      */
     public boolean isUserModified() {
         return
-                isUserDefined() || isVisited() ||
-                        (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
-                        StringUtils.isNotBlank(getUserNote());
+            isUserDefined() || isVisited() ||
+                (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
+                StringUtils.isNotBlank(getUserNote());
     }
 
     public void setUserDefined() {
@@ -343,6 +344,45 @@ public class Waypoint implements IWaypoint {
         return CalculatedCoordinate.createFromConfig(calcStateConfig);
     }
 
+    public boolean hasProjection() {
+        return projectionType != ProjectionType.NO_PROJECTION;
+    }
+
+    /**
+     * Recalculates all values in this waypoint which are depending on variable list.
+     * Returns whether a recalculation was actually done
+     */
+    public boolean recalculateVariableDependentValues(final VariableList varList) {
+        //coords and proprojectedcoords are variable-dependent. Let's see whether we have to recalculate
+        final boolean hasProjection = this.getProjectionType() != ProjectionType.NO_PROJECTION;
+        boolean calcDone = false;
+        if (this.isCalculated()) {
+            final CalculatedCoordinate cc = getCalculated();
+            setPreprojectedCoords(cc.calculateGeopoint(varList::getValue));
+            if (!hasProjection) {
+                setCoords(getPreprojectedCoords());
+            }
+            calcDone = true;
+        }
+        if (hasProjection) {
+            setCoords(
+                this.getProjectionType().project(
+                    getPreprojectedCoords(),
+                    safeToDouble(getProjectionFormula1(), varList),
+                    safeToDouble(getProjectionFormula2(), varList),
+                    getProjectionDistanceUnit()
+                ));
+            calcDone = true;
+        }
+        return calcDone;
+    }
+
+    private Double safeToDouble(final String expression, final VariableList varList) {
+        final Formula formula = expression == null ? null : Formula.safeCompile(expression);
+        final Value value = formula == null ? null : formula.evaluate(varList::getValue);
+        return value == null || !value.isDouble() ? null : value.getAsDouble();
+    }
+
     @Override
     public CoordinatesType getCoordType() {
         return CoordinatesType.WAYPOINT;
@@ -470,26 +510,28 @@ public class Waypoint implements IWaypoint {
         this.calcStateConfig = calcStateConfig;
     }
 
-    public void setProjection(final ProjectionType type, final DistanceUnit unit, final Formula formula1, final Formula formula2) {
-        this.projectionType = type;
-        this.projectionDistanceUnit = unit;
+    public void setProjection(final ProjectionType type, final DistanceUnit unit, final String formula1, final String formula2) {
+        this.projectionType = type == null ? ProjectionType.NO_PROJECTION : type;
+        this.projectionDistanceUnit = unit == null ? DistanceUnit.getDefaultUnit(false) : unit;
         this.projectionFormula1 = formula1;
         this.projectionFormula2 = formula2;
     }
 
+    @NonNull
     public ProjectionType getProjectionType() {
         return this.projectionType;
     }
 
+    @NonNull
     public DistanceUnit getProjectionDistanceUnit() {
         return this.projectionDistanceUnit;
     }
 
-    public Formula getProjectionFormula1() {
+    public String getProjectionFormula1() {
         return this.projectionFormula1;
     }
 
-    public Formula getProjectionFormula2() {
+    public String getProjectionFormula2() {
         return this.projectionFormula2;
     }
 

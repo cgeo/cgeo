@@ -216,6 +216,16 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
         return new Geopoint(g.lat2, g.lon2);
     }
 
+    public Geopoint offsetMinuteMillis(final double latOffset, final double lonOffset) {
+        return offsetDegree(latOffset / 60000, lonOffset / 60000);
+    }
+
+    public Geopoint offsetDegree(final double latOffset, final double lonOffset) {
+        final double newLat = Math.max(-90, Math.min(90, getLatitude() + latOffset));
+        final double newLon = (((getLongitude() + lonOffset) + 180) % 360) - 180;
+        return new Geopoint(newLat, newLon);
+    }
+
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

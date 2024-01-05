@@ -299,7 +299,7 @@ public class VariableMap {
             state.formula = Formula.compile(formulaString);
         } catch (FormulaException ce) {
             state.state = State.ERROR;
-            state.error = ce.getUserDisplayableString();
+            state.error = ce.getUserDisplayableErrorMessage();
             state.resultAsCharSequence = ce.getExpressionFormatted();
         }
     }
@@ -423,7 +423,7 @@ public class VariableMap {
                 state.result = null;
                 state.resultAsCharSequence = ce.getExpressionFormatted();
                 state.state = State.ERROR;
-                state.error = ce.getUserDisplayableString();
+                state.error = ce.getUserDisplayableErrorMessage();
             }
         }
         return false;

@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.offset;
 
 public class CommonUtilsTest {
 
@@ -64,6 +65,12 @@ public class CommonUtilsTest {
                 Arrays.asList("blue", false, 0, null, -1),
                 Arrays.asList("red", false, 1, null, -1),
                 Arrays.asList("green", false, 2, null, -1));
+    }
+
+    @Test
+    public void testModulo() {
+        assertThat(18 % 8.7).isEqualTo(0.6, offset(0.00001));
+        assertThat(-18 % 8.7).isEqualTo(-0.6, offset(0.00001));
     }
 
     @Test

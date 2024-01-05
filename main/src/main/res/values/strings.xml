@@ -1807,6 +1807,19 @@
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
 
+    <!-- Projection -->
+    <string name="projection_type_none">No projection</string>
+
+    <string name="projection_type_bearing">Bearing</string>
+    <string name="projection_type_bearing_info">Bearing %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Bearing in °</string>
+    <string name="projection_type_bearing_hint_distance">Distance</string>
+
+    <string name="projection_type_offset">Offset</string>
+    <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Latitude Offset in Micro-Minutes</string>
+    <string name="projection_type_offset_hint_longitude">Longitude Offset in Micro-Minutes</string>
+
     <!-- Variables -->
     <string name="variables_titletext">Use this page to note down values and do calculations necessary for this cache.</string>
     <string name="variables_scanlisting">Scan listing</string>

@@ -4,8 +4,11 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
 import cgeo.geocaching.databinding.DialogEdittextBinding;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
@@ -17,6 +20,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +31,7 @@ import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.text.util.Linkify;
+import android.util.AttributeSet;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -47,9 +52,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.core.util.Consumer;
@@ -626,5 +633,40 @@ public class ViewUtils {
         } else { //paddingsInDp-length is 1
             view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]));        }
         return true;
+    }
+
+    public static void setCoordinates(@Nullable final Geopoint gp, final TextView textView) {
+        if (gp != null) {
+            textView.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
+        } else {
+            textView.setText(String.format("%s%n%s", LocalizationUtils.getString(R.string.waypoint_latitude_null), LocalizationUtils.getString(R.string.waypoint_longitude_null)));
+        }
+    }
+
+    public static Geopoint getCoordinates(final TextView textView) {
+        final String[] latlonText = textView.getText().toString().split("\n");
+        final String latText = StringUtils.trim(latlonText[0]);
+        final String lonText = StringUtils.trim(latlonText[1]);
+
+        if (!latText.equals(LocalizationUtils.getString(R.string.waypoint_latitude_null)) && !lonText.equals(LocalizationUtils.getString(R.string.waypoint_longitude_null))) {
+            try {
+                return new Geopoint(latText, lonText);
+            } catch (final Geopoint.ParseException e) {
+                // ignore
+            }
+        }
+        return null;
+    }
+
+    public static void consumeAttributes(final Context context, final AttributeSet attrs, @StyleableRes final int[] styleable,
+                                          @AttrRes final int defStyleAttr, final @StyleRes int defStyleRes, final Consumer<TypedArray> consumer) {
+        if (attrs != null) {
+            final TypedArray a = context.getTheme().obtainStyledAttributes(attrs, styleable, defStyleAttr, defStyleRes);
+            try {
+                consumer.accept(a);
+            } finally {
+                a.recycle();
+            }
+        }
     }
 }

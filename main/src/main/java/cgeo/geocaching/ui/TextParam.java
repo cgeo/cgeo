@@ -4,7 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -47,7 +46,8 @@ public class TextParam {
     private boolean useMovement = false;
 
     private ImageParam image;
-    private int imageSizeInDp = -1;
+    private int imageHeightInDp = -1;
+    private int imageWidthInDp = -1;
     @ColorInt private int imageTintColor = 1;
 
 
@@ -118,8 +118,13 @@ public class TextParam {
      * Use this method to use a draw size for the image. Use IMAGE_SIZE_INTRINSIC_BOUND for intrinsic bounds
      */
     public TextParam setImage(final ImageParam image, final int imageSizeInDp) {
+        return setImage(image, imageSizeInDp, imageSizeInDp);
+    }
+
+    public TextParam setImage(final ImageParam image, final int imageWidthInDp, final int imageHeightInDp) {
         this.image = image;
-        this.imageSizeInDp = imageSizeInDp;
+        this.imageWidthInDp = imageWidthInDp;
+        this.imageHeightInDp = imageHeightInDp;
         return this;
     }
 
@@ -161,7 +166,7 @@ public class TextParam {
         }
         final CharSequence tcs = getText(view.getContext());
         if (tcs != null) {
-            view.setText(tcs);
+            //view.setText(tcs);
         }
         adjust(view, forceNoMovement);
     }
@@ -230,20 +235,25 @@ public class TextParam {
         if (!forceNoMovement && (useHtml || linkifyMask != 0 || useMarkdown)) {
             view.setMovementMethod(LinkMovementMethod.getInstance());
         }
-        if (image != null || imageSizeInDp > 0) {
+        if (image != null || imageHeightInDp > 0) {
             final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image).getAsDrawable(view.getContext());
 
             //if wanted imageSize is set explicitely -> use it. Otherwise deduct a sensible default from text size
-            final int imageSizeInPixel;
-            if (imageSizeInDp < 0) {
-                imageSizeInPixel = (int) (view.getTextSize() * 1.5f);
-            } else if (imageSizeInDp == IMAGE_SIZE_INTRINSIC_BOUND) {
-                imageSizeInPixel = imageDrawable.getIntrinsicHeight();
+            final int imageWidthInPixel;
+            final int imageHeightInPixel;
+            if (imageHeightInDp < 0 || imageWidthInDp < 0) {
+                imageHeightInPixel = (int) (view.getTextSize() * 1.5f);
+                imageWidthInPixel = (int) (view.getTextSize() * 1.5f);
+            } else if (imageHeightInDp == IMAGE_SIZE_INTRINSIC_BOUND) {
+                imageHeightInPixel = imageDrawable.getIntrinsicHeight();
+                imageWidthInPixel = imageDrawable.getIntrinsicWidth();
             } else {
-                imageSizeInPixel = ViewUtils.dpToPixel(imageSizeInDp);
+                imageHeightInPixel = ViewUtils.dpToPixel(imageHeightInDp);
+                imageWidthInPixel = ViewUtils.dpToPixel(imageWidthInDp);
             }
-            imageDrawable.setBounds(new Rect(0, 0, imageSizeInPixel, imageSizeInPixel));
+            imageDrawable.setBounds(0, 0, imageWidthInPixel, imageHeightInPixel);
             view.setCompoundDrawables(imageDrawable, null, null, null);
+            //view.setCompoundDrawablesWithIntrinsicBounds(imageDrawable, null, null, null);
 
             // set image tint (if given)
             if (imageTintColor != 1) {

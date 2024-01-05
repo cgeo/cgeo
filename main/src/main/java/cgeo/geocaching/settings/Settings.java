@@ -703,6 +703,10 @@ public class Settings {
         return getBoolean(R.string.pref_alc_advanced, false);
     }
 
+    public static boolean enableFeatureCalculatedProjections() {
+        return getBoolean(R.string.pref_feature_calculated_projections, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }

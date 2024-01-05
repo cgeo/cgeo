@@ -12,13 +12,13 @@ import cgeo.geocaching.databinding.SearchActivityBinding;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -363,7 +363,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     @Override
     public void updateCoordinates(@NonNull final Geopoint gp) {
-        binding.buttonLatLongitude.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
+        ViewUtils.setCoordinates(gp, binding.buttonLatLongitude);
     }
 
     @Override
@@ -372,28 +372,22 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByCoordsFn() {
-        String[] latlonText = getCoordText();
-
-        if (latlonText.length < 2) {
-            final Geopoint gp = LocationDataProvider.getInstance().currentGeo().getCoords();
-            if (gp.isValid()) {
-                updateCoordinates(gp);
-                latlonText = getCoordText();
+        Geopoint geopoint = ViewUtils.getCoordinates(binding.buttonLatLongitude);
+        if (geopoint == null || !geopoint.isValid()) {
+            geopoint = LocationDataProvider.getInstance().currentGeo().getCoords();
+            if (geopoint.isValid()) {
+                updateCoordinates(geopoint);
             } else {
                 return;
             }
         }
 
         try {
-            CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1])), null);
+            CacheListActivity.startActivityCoordinates(this, geopoint, null);
             ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
-    }
-
-    private String[] getCoordText() {
-        return binding.buttonLatLongitude.getText().toString().split("\n");
     }
 
     private void findByKeywordFn() {
