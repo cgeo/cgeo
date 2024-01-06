@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.databinding.EditwaypointActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
 import cgeo.geocaching.location.Geopoint;
@@ -22,16 +23,24 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.FormulaEditText;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.formulas.Formula;
+import cgeo.geocaching.utils.formulas.VariableList;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 
 import android.app.ProgressDialog;
@@ -43,8 +52,6 @@ import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -56,13 +63,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.BiConsumer;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 
 public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate {
@@ -74,16 +85,19 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int UPLOAD_SUCCESS = 4;
     public static final int SAVE_ERROR = 5;
 
-    private static final String CALC_STATE_JSON = "calc_state_json";
-    private static final String WP_TYPE_SELECTOR_POS = "wp_type_selector_pos";
+
+    private static final String STATE_CURRENT_COORD = "current_coord";
+    private static final String STATE_PREPROJECTED_COORD = "preprojected_coord";
+
+    private static final String STATE_CALC_STATE_JSON = "calc_state_json";
+    private static final String STATE_LAST_SELECTED_WP_TYPE = "wp_type_selector_pos";
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_ORIGINAL_AND_GENERATED);
     private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES_WITH_GENERATED = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     private String geocode = null;
     private int waypointId = -1;
-    private Geopoint initialCoords = null;
 
-    private int waypointTypeSelectorPosition = -1;
+    private WaypointType lastSelectedWaypointType = null;
 
     private ProgressDialog waitDialog = null;
     private Waypoint waypoint = null;
@@ -91,6 +105,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private String lookup = "---";
     private boolean own = true;
     private boolean originalCoordsEmpty = false;
+
+    private Geopoint preprojectedCoords = null;
+    private Geopoint currentCoords = null;
 
     /**
      * {@code true} if the activity is newly created, {@code false} if it is restored from an instance state
@@ -109,6 +126,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
 
+    private final TextSpinner<WaypointType> waypointType = new TextSpinner<>();
+    private final TextSpinner<ProjectionType> projectionType = new TextSpinner<>();
+    private final TextSpinner<DistanceUnit> projectionBearingUnit = new TextSpinner<>();
 
     private static final class LoadWaypointHandler extends WeakReferenceHandler<EditWaypointActivity> {
         LoadWaypointHandler(final EditWaypointActivity activity) {
@@ -135,9 +155,23 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
                     activity.calcStateString = waypoint.getCalcStateConfig();
 
+                    //projection
+                    activity.projectionType.set(waypoint.getProjectionType());
+                    final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> projectionFields =
+                        getFieldsForProjectionType(activity);
+                    if (projectionFields.left != null) {
+                        projectionFields.left.setFormulaText(waypoint.getProjectionFormula1());
+                    }
+                    if (projectionFields.middle != null) {
+                        projectionFields.middle.setFormulaText(waypoint.getProjectionFormula2());
+                    }
+                    if (projectionFields.right != null) {
+                        projectionFields.right.set(waypoint.getProjectionDistanceUnit());
+                    }
+
                     if (activity.initViews) {
                         activity.binding.wptVisitedCheckbox.setChecked(waypoint.isVisited());
-                        activity.updateCoordinates(waypoint.getCoords());
+                        activity.updateCoordinates(waypoint.getPreprojectedCoords());
                         final AutoCompleteTextView waypointName = activity.binding.name;
                         waypointName.setText(TextUtils.stripHtml(StringUtils.trimToEmpty(waypoint.getName())));
                         Dialogs.moveCursorToEnd(waypointName);
@@ -160,6 +194,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.nonEditable(activity.binding.noteLayout, activity.binding.note);
                     if (waypoint != null && !waypoint.isOriginalCoordsEmpty()) {
                         activity.binding.projection.setVisibility(View.GONE);
+                        activity.binding.projectionType.setVisibility(View.GONE);
                     }
                 }
 
@@ -194,7 +229,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             waypointId = extras.getInt(Intents.EXTRA_WAYPOINT_ID);
-            initialCoords = extras.getParcelable(Intents.EXTRA_COORDS);
+            preprojectedCoords = extras.getParcelable(Intents.EXTRA_COORDS);
         }
 
         if (StringUtils.isBlank(geocode) && waypointId <= 0) {
@@ -223,8 +258,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (savedInstanceState != null) {
             initViews = false;
-            calcStateString = savedInstanceState.getString(CALC_STATE_JSON);
-            waypointTypeSelectorPosition = savedInstanceState.getInt(WP_TYPE_SELECTOR_POS);
+            calcStateString = savedInstanceState.getString(STATE_CALC_STATE_JSON);
+            lastSelectedWaypointType = CommonUtils.intToEnum(WaypointType.class, savedInstanceState.getInt(STATE_LAST_SELECTED_WP_TYPE));
+            currentCoords = savedInstanceState.getParcelable(STATE_CURRENT_COORD);
+            preprojectedCoords = savedInstanceState.getParcelable(STATE_PREPROJECTED_COORD);
         } else {
             calcStateString = null;
         }
@@ -233,6 +270,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
         }
+
+        if (Settings.enableFeatureCalculatedProjections()) {
+            binding.projectionType.setVisibility(View.VISIBLE);
+            binding.projection.setVisibility(View.GONE);
+        }
+        initializeProjectionView(cache);
+        recalculateProjectionView();
+
         if (waypointId > 0) { // existing waypoint
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
@@ -240,13 +285,14 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         } else { // new waypoint
             initializeWaypointTypeSelector(true);
             binding.noteLayout.setVisibility(View.GONE);
-            updateCoordinates(initialCoords);
+            updateCoordinates(preprojectedCoords);
         }
-
 
         initializeDistanceUnitSelector();
 
         disableSuggestions(binding.distance);
+
+
     }
 
     private void setCoordsModificationVisibility(final IConnector con) {
@@ -291,69 +337,44 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private void initializeWaypointTypeSelector(final boolean excludeGenerated) {
         final ArrayList<WaypointType> allowedTypes = excludeGenerated ? POSSIBLE_WAYPOINT_TYPES : POSSIBLE_WAYPOINT_TYPES_WITH_GENERATED;
-        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, allowedTypes.toArray(new WaypointType[0])) {
-            @Override
-            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                final View view = super.getView(position, convertView, parent);
-                addWaypointIcon(position, view);
-                return view;
-            }
+        waypointType
+            .setValues(allowedTypes)
+            .setSpinner(binding.type)
+            .setDisplayMapper(wpt -> TextParam.text(wpt.getL10n())
+                .setImage(ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(getResources(), wpt)), 30));
 
-            @Override
-            public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                final View view = super.getDropDownView(position, convertView, parent);
-                addWaypointIcon(position, view);
-                return view;
-            }
-
-            private void addWaypointIcon(final int position, final View view) {
-                final TextView label = view.findViewById(android.R.id.text1);
-                label.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointTypeMarker(res, allowedTypes.get(position)), null, null, null);
-            }
-        };
-        wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.type.setAdapter(wpAdapter);
-
-        binding.type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(final AdapterView<?> parent, final View v, final int pos, final long id) {
-                final String oldDefaultName = waypointTypeSelectorPosition >= 0 ? getDefaultWaypointName(cache, allowedTypes.get(waypointTypeSelectorPosition)) : StringUtils.EMPTY;
-                waypointTypeSelectorPosition = pos;
-                final String currentName = binding.name.getText().toString().trim();
-                if (StringUtils.isBlank(currentName) || oldDefaultName.equals(currentName)) {
-                    binding.name.setText(getDefaultWaypointName(cache, getSelectedWaypointType()));
-                }
-            }
-
-            @Override
-            public void onNothingSelected(final AdapterView<?> parent) {
-                // empty
+        waypointType.setChangeListener(wpt -> {
+            final String oldDefaultName = lastSelectedWaypointType == null ? StringUtils.EMPTY : getDefaultWaypointName(cache, (lastSelectedWaypointType));
+            lastSelectedWaypointType = wpt;
+            final String currentName = binding.name.getText().toString().trim();
+            if (StringUtils.isBlank(currentName) || oldDefaultName.equals(currentName)) {
+                binding.name.setText(getDefaultWaypointName(cache, getSelectedWaypointType()));
             }
         });
+        waypointType.set(getDefaultWaypointType());
 
-        binding.type.setSelection(getDefaultWaypointTypePosition(wpAdapter));
         binding.type.setVisibility(View.VISIBLE);
     }
 
-    private int getDefaultWaypointTypePosition(final ArrayAdapter<WaypointType> wpAdapter) {
+    private WaypointType getDefaultWaypointType() {
         // potentially restore saved instance state
-        if (waypointTypeSelectorPosition >= 0) {
-            return waypointTypeSelectorPosition;
+        if (lastSelectedWaypointType != null) {
+            return lastSelectedWaypointType;
         }
 
         // when editing, use the existing type
-        if (waypoint != null) {
-            return wpAdapter.getPosition(waypoint.getWaypointType());
+        if (waypoint != null && waypoint.getWaypointType() != null) {
+            return waypoint.getWaypointType();
         }
 
         // make default for new waypoint depend on cache type
         switch (cache.getType()) {
             case MYSTERY:
-                return wpAdapter.getPosition(WaypointType.FINAL);
+                return WaypointType.FINAL;
             case MULTI:
-                return wpAdapter.getPosition(WaypointType.STAGE);
+                return WaypointType.STAGE;
             default:
-                return wpAdapter.getPosition(WaypointType.WAYPOINT);
+                return WaypointType.WAYPOINT;
         }
     }
 
@@ -362,6 +383,86 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             binding.distanceUnit.setSelection(Settings.useImperialUnits() ?
                     DistanceUnit.FEET.getValue() : DistanceUnit.METER.getValue());
         }
+    }
+
+    private Geopoint calculateProjection(final Geopoint coords) {
+        final ProjectionType pt = projectionType.get();
+        final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
+
+        return pt.project(coords,
+            fields.left == null ? null : fields.left.getValueAsDouble(),
+            fields.middle == null ? null : fields.middle.getValueAsDouble(),
+            fields.right == null ? null : fields.right.get());
+    }
+
+    private ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> getFieldsForProjectionType() {
+        return getFieldsForProjectionType(this);
+    }
+
+    public static ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> getFieldsForProjectionType(final EditWaypointActivity activity) {
+        final ProjectionType pt = activity.projectionType.get();
+        final EditwaypointActivityBinding binding = activity.binding;
+        switch (pt) {
+            case BEARING:
+                return ImmutableTriple.of(binding.projectionBearingDistance, binding.projectionBearingAngle, activity.projectionBearingUnit);
+            case OFFSET:
+                return ImmutableTriple.of(binding.projectionOffsetLatitude, binding.projectionOffsetLongitude, null);
+            case NO_PROJECTION:
+            default:
+                return ImmutableTriple.of(null, null, null);
+        }
+    }
+
+    private void initializeProjectionView(final Geocache cache) {
+
+        //connect formula-editfields with cache's Variable list
+        final VariableList varList = cache.getVariables();
+        final BiConsumer<String, Formula> listener = (s, f) -> recalculateProjectionView();
+        binding.projectionBearingAngle.setVariableList(varList);
+        binding.projectionBearingAngle.setFormulaChangeListener(listener);
+        binding.projectionBearingDistance.setVariableList(varList);
+        binding.projectionBearingDistance.setFormulaChangeListener(listener);
+        binding.projectionOffsetLatitude.setVariableList(varList);
+        binding.projectionOffsetLatitude.setFormulaChangeListener(listener);
+        binding.projectionOffsetLongitude.setVariableList(varList);
+        binding.projectionOffsetLongitude.setFormulaChangeListener(listener);
+
+        //initialize spinners
+        projectionType.setValues(Arrays.asList(ProjectionType.values()))
+            .setDisplayMapper(pt -> TextParam.text(pt.getL10n()).setImage(ImageParam.id(pt.markerId)))
+            .setSpinner(binding.projectionType)
+            .setChangeListener(pt -> recalculateProjectionView());
+        projectionBearingUnit.setValues(Arrays.asList(DistanceUnit.values()))
+            .setDisplayMapper(pt -> TextParam.text(pt.getId()))
+            .setSpinner(binding.projectionBearingUnit)
+            .setChangeListener(pt -> recalculateProjectionView());
+    }
+
+    /**
+     * this method assumes a correctly filled "preprojectedCoord"-var.
+     * It recalculates the "currentCoord" value and updates view according to projection settings
+     */
+    @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
+    private void recalculateProjectionView() {
+
+        final Geopoint base = this.preprojectedCoords;
+        final ProjectionType pType = this.projectionType.get();
+        final boolean projectionEnabled = Settings.enableFeatureCalculatedProjections();
+
+        //update view visibilities
+        binding.projectionType.setVisibility(projectionEnabled ? View.VISIBLE : View.GONE);
+        binding.projectedLatLongitude.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
+        binding.projectionBearingBox.setVisibility(projectionEnabled && pType == ProjectionType.BEARING ? View.VISIBLE : View.GONE);
+        binding.projectionOffsetBox.setVisibility(projectionEnabled && pType == ProjectionType.OFFSET ? View.VISIBLE : View.GONE);
+
+        //update currentCoords and coordinate Views
+        if (!projectionEnabled || pType == ProjectionType.NO_PROJECTION || base == null) {
+            this.currentCoords = base;
+        } else {
+            this.currentCoords = calculateProjection(base);
+        }
+        ViewUtils.setCoordinates(base, binding.buttonLatLongitude);
+        ViewUtils.setCoordinates(this.currentCoords, binding.projectedLatLongitude);
     }
 
     private class LoadWaypointThread extends Thread {
@@ -398,14 +499,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         @Override
         public void onClick(final View view) {
-            Geopoint gp = null;
-            try {
-                final String[] latlonText = binding.buttonLatLongitude.getText().toString().split("\n");
-                gp = new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1]));
-            } catch (final Geopoint.ParseException ignored) {
-                // button text is blank when creating new waypoint
-            }
-            final Geopoint geopoint = gp;
+            final Geopoint geopoint = preprojectedCoords;
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS), geocache -> {
                 if (waypoint == null || waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty()) {
                     showCoordinatesInputDialog(geopoint, cache);
@@ -451,13 +545,12 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void updateCoordinates(@Nullable final Geopoint gp) {
-        if (gp != null) {
-            binding.buttonLatLongitude.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
-            setProjectionEnabled(true);
-        } else {
-            binding.buttonLatLongitude.setText(String.format("%s%n%s", getResources().getString(R.string.waypoint_latitude_null), getResources().getString(R.string.waypoint_longitude_null)));
-            setProjectionEnabled(false);
+        //this method is supposed to update the "base" / "preprojected" coordinate
+        if (!Objects.equals(preprojectedCoords, gp)) {
+            preprojectedCoords = gp;
+            recalculateProjectionView();
         }
+        setProjectionEnabled(gp != null);
         ((MaterialButton) binding.buttonLatLongitude).setIconResource(CalculatedCoordinate.isValidConfig(calcStateString) ? R.drawable.ic_menu_variable : 0);
     }
 
@@ -493,13 +586,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(CALC_STATE_JSON, calcStateString);
-        outState.putInt(WP_TYPE_SELECTOR_POS, waypointTypeSelectorPosition);
+        outState.putString(STATE_CALC_STATE_JSON, calcStateString);
+        outState.putInt(STATE_LAST_SELECTED_WP_TYPE, CommonUtils.enumToInt(lastSelectedWaypointType));
+        outState.putParcelable(STATE_CURRENT_COORD, currentCoords);
+        outState.putParcelable(STATE_PREPROJECTED_COORD, preprojectedCoords);
 
     }
 
     private WaypointType getSelectedWaypointType() {
-        final WaypointType selectedType = (WaypointType) binding.type.getSelectedItem();
+        final WaypointType selectedType = waypointType.get();
         return selectedType != null ? selectedType : waypoint.getWaypointType();
     }
 
@@ -517,54 +612,52 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         return binding.userNote;
     }
 
-    private boolean coordsTextsValid(final String latText, final String lonText) {
-        return !latText.equals(getResources().getString(R.string.waypoint_latitude_null))
-                && !lonText.equals(getResources().getString(R.string.waypoint_longitude_null));
-    }
-
     @Nullable
     private ActivityData getActivityData() {
-        final String[] latlonText = binding.buttonLatLongitude.getText().toString().split("\n");
-        final String latText = StringUtils.trim(latlonText[0]);
-        final String lonText = StringUtils.trim(latlonText[1]);
-        Geopoint coords = null;
-        if (coordsTextsValid(latText, lonText)) {
-            try {
-                coords = new Geopoint(latText, lonText);
-            } catch (final Geopoint.ParseException e) {
-                showToast(res.getString(e.resource));
-                return null;
-            }
-        }
-
-        final String bearingText = binding.bearing.getText().toString();
-        final String distanceText = binding.distance.getText().toString();
-        final DistanceUnit distanceUnit = DistanceUnit.getByPos(binding.distanceUnit.getSelectedItemPosition());
-
-        if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
-            // bearing & distance
-            final double bearing;
-            try {
-                bearing = Double.parseDouble(bearingText);
-            } catch (final NumberFormatException ignored) {
-                SimpleDialog.of(this).setTitle(R.string.err_point_bear_and_dist_title).setMessage(R.string.err_point_bear_and_dist).show();
-                return null;
-            }
-
-            final double distance;
-            try {
-                distance = distanceUnit.parseToKilometers(distanceText);
-            } catch (final NumberFormatException ignored) {
-                showToast(res.getString(R.string.err_parse_dist));
-                return null;
-            }
-
-            coords = coords.project(bearing, distance);
-        }
 
         final ActivityData currentState = new ActivityData();
 
-        currentState.coords = coords;
+        if (Settings.enableFeatureCalculatedProjections()) {
+            currentState.preprojectedCoords = this.preprojectedCoords;
+            currentState.coords = this.currentCoords;
+            currentState.projectionType = this.projectionType.get();
+        } else {
+            Geopoint coords = this.preprojectedCoords;
+            currentState.projectionType = ProjectionType.NO_PROJECTION;
+
+            final String bearingText = binding.bearing.getText().toString();
+            final String distanceText = binding.distance.getText().toString();
+            final DistanceUnit distanceUnit = DistanceUnit.getByPos(binding.distanceUnit.getSelectedItemPosition());
+
+            if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
+                // bearing & distance
+                final double bearing;
+                try {
+                    bearing = Double.parseDouble(bearingText);
+                } catch (final NumberFormatException ignored) {
+                    SimpleDialog.of(this).setTitle(R.string.err_point_bear_and_dist_title).setMessage(R.string.err_point_bear_and_dist).show();
+                    return null;
+                }
+
+                final double distance;
+                try {
+                    distance = distanceUnit.parseToKilometers(distanceText);
+                } catch (final NumberFormatException ignored) {
+                    showToast(res.getString(R.string.err_parse_dist));
+                    return null;
+                }
+
+                coords = coords.project(bearing, distance);
+            }
+            currentState.preprojectedCoords = null;
+            currentState.coords = coords;
+        }
+
+        //projection settings
+        final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
+        currentState.projectionFormula1 = fields.left == null ? null : fields.left.getFormulaText();
+        currentState.projectionFormula2 = fields.middle == null ? null : fields.middle.getFormulaText();
+        currentState.projectionUnits = fields.right == null ? null : fields.right.get();
 
         final String givenName = binding.name.getText().toString().trim();
         currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(cache, getSelectedWaypointType()));
@@ -582,7 +675,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private boolean isWaypointChanged(@NonNull final ActivityData currentState) {
-        return waypoint == null
+        final boolean changedBase = waypoint == null
                 || !Geopoint.equalsFormatted(currentState.coords, waypoint.getCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
                 || !StringUtils.equals(currentState.name, waypoint.getName())
                 || !StringUtils.equals(currentState.noteText, waypoint.getNote())
@@ -590,6 +683,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 || currentState.visited != waypoint.isVisited()
                 || currentState.type != waypoint.getWaypointType()
                 || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateConfig());
+
+        if (Settings.enableFeatureCalculatedProjections()) {
+            return changedBase
+                || !Geopoint.equalsFormatted(currentState.preprojectedCoords, waypoint.getPreprojectedCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
+                || currentState.projectionType != waypoint.getProjectionType()
+                || currentState.projectionUnits != waypoint.getProjectionDistanceUnit()
+                || !StringUtils.equals(currentState.projectionFormula1, waypoint.getProjectionFormula1())
+                || !StringUtils.equals(currentState.projectionFormula2, waypoint.getProjectionFormula2());
+        } else {
+            return changedBase;
+        }
     }
 
     private static class FinishWaypointSaveHandler extends WeakReferenceHandler<EditWaypointActivity> {
@@ -650,12 +754,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setPrefix(prefix);
         waypoint.setLookup(lookup);
         waypoint.setCoords(currentState.coords);
+        waypoint.setPreprojectedCoords(currentState.preprojectedCoords);
         waypoint.setNote(currentState.noteText);
         waypoint.setUserNote(currentState.userNoteText);
         waypoint.setVisited(currentState.visited);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
+        waypoint.setProjection(currentState.projectionType, currentState.projectionUnits,
+            currentState.projectionFormula1, currentState.projectionFormula2);
 
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
         if (cache == null) {
@@ -699,10 +806,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public String name;
         public WaypointType type;
         public Geopoint coords;
+        public Geopoint preprojectedCoords;
         public String noteText;
         public String userNoteText;
         public boolean visited;
         public String calcStateJson;
+        public ProjectionType projectionType;
+        public DistanceUnit projectionUnits;
+        public String projectionFormula1;
+        public String projectionFormula2;
     }
 
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {

@@ -1,5 +1,6 @@
 package cgeo.geocaching.location;
 
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.EnumValueMapper;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,13 @@ public enum DistanceUnit {
 
     public static DistanceUnit findById(final String id) {
         return FIND_BY_ID.get(id, DistanceUnit.METER);
+    }
+
+    public static DistanceUnit getDefaultUnit(final boolean useBig) {
+        if (useBig) {
+            return Settings.useImperialUnits() ? DistanceUnit.MILE : DistanceUnit.KILOMETER;
+        }
+        return Settings.useImperialUnits() ? DistanceUnit.FEET : DistanceUnit.METER;
     }
 
     public int getValue() {

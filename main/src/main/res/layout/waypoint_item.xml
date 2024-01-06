@@ -49,6 +49,19 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
+            <ImageView
+                android:id="@+id/projection_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dip"
+                android:layout_marginRight="4dip"
+                android:scaleType="fitXY"
+                android:gravity="left|top"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_menu_compass"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -99,7 +112,25 @@
                 android:maxLines="1" />
 
             <TextView
-                android:id="@+id/calculated_coordinates"
+                android:id="@+id/calculated_coordinate_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:lines="1"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText_listsPrimary"
+                android:visibility="gone"
+                android:text="(x)"
+                android:textStyle="italic"
+                tools:visiblity="visible"
+                tools:ignore="HardcodedText"/>
+
+            <TextView
+                android:id="@+id/projection_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"

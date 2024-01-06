@@ -5,7 +5,9 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Checkable;
@@ -254,7 +256,32 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     private SpinnerAdapter createSpinnerAdapter() {
-        final ArrayAdapter<TextParam> adapter = new ArrayAdapter<>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues);
+        final ArrayAdapter<TextParam> adapter = new ArrayAdapter<TextParam>(spinner.getContext(), android.R.layout.simple_spinner_item, this.displayValues) {
+
+            @NonNull
+            @Override
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
+                fillTextParam(position, view);
+                return view;
+            }
+
+            @Override
+            public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                final View view = super.getDropDownView(position, convertView, parent);
+                fillTextParam(position, view);
+                return view;
+            }
+
+            private void fillTextParam(final int position, final View view) {
+                final TextView tv = view.findViewById(android.R.id.text1);
+                final TextParam tp = getItem(position);
+                if (tp != null && tv != null) {
+                    tv.setGravity(Gravity.CENTER_VERTICAL);
+                    tp.applyTo(tv);
+                }
+            }
+        };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         return adapter;
     }

@@ -514,8 +514,11 @@
     <string translatable="false" name="pref_user_vote">user-vote</string>
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
+    <string translatable="false" name="pref_feature_calculated_projections">feature_calculated_projections</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
     <string translatable="false" name="pref_feature_log_edit">feature_log_edit</string>
+
+
 
     <!-- additional map settings -->
     <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>

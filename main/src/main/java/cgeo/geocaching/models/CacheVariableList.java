@@ -1,7 +1,6 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.formulas.VariableList;
 
@@ -107,12 +106,8 @@ public class CacheVariableList extends VariableList {
         boolean hasCalculatedWp = false;
         if (cache != null) {
             for (Waypoint wp : cache.getWaypoints()) {
-                if (wp.isCalculated()) {
-                    hasCalculatedWp = true;
-                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
-                    final Geopoint gp = cc.calculateGeopoint(this::getValue);
-                    wp.setCoords(gp);
-                }
+                hasCalculatedWp |=  wp.recalculateVariableDependentValues(this);
+
             }
             if (hasCalculatedWp) {
                 DataStore.saveWaypoints(cache);
