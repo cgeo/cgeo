@@ -3,7 +3,7 @@
 - Korrektur: Unter neueren Android-Versionen nicht mehr benötigte Berechtigung READ_EXTERNAL_STORAGE angefordert
 - Korrektur: Standardauswahl des Trackable-Logtyps
 - Korrektur: Absturz des Karten-Downloaders unter bestimmten Bedingungen
-- Fix: Crash on OSM-based maps under certain conditions
+- Korrektur: Absturz bei OSM-basierten Karten unter bestimmten Bedingungen
 
 ##
 - Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
