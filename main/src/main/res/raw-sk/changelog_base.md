@@ -10,6 +10,7 @@ UnifiedMap basically offers (nearly) all the features our old map implementation
 - Cluster popup for Google Maps
 - Hide map sources you don't need
 - Elevation chart for routes and tracks (tap on route)
+- Switch between lists directly from map (or by long-tapping on map icon)
 
 UnifiedMap has reached beta state by now, thus we decided to make it our default map for all nightly users.
 
@@ -24,6 +25,7 @@ More changes:
 - New: Show cache's found state on waypoint icons
 - New: Long-tap option to connect a cache with its waypoints by lines
 - Change: Show cache/waypoint details in a non-blocking way
+- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
 
 ### Detaily kešky
 - Change: Make "Toggle talking" an actual toggle

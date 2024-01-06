@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archivado</string>
     <string name="log_save">Guardar sin conexión</string>
     <string name="log_saving">Enviando registro…</string>
-    <string name="log_saving_and_uploading">Publicando registro y subiendo imágenes…</string>
     <string name="log_posting_log">Enviando registro…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
-    <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_templates">Encontrado: Plantilla de registro…</string>
@@ -572,7 +570,6 @@
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
-    <string name="about_contributors_recent">Contribuyentes recientes</string>
     <string name="about_contributors_specialthanks">Agradecimientos especiales a</string>
     <string name="about_contributors_specialthanksdetails">- Todos nuestros colaboradores de traducción en [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Todos los creadores de incidencias\n- Y todos los demás seguidores.\n</string>
     <string name="about_contributors_other">Otros colaboradores</string>

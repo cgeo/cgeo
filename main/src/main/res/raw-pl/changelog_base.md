@@ -10,6 +10,7 @@ Ujednolicona mapa oferuje (prawie) wszystkie funkcje naszych starych implementac
 - Wyskakujące okienko klastra dla Google Maps
 - Ukrywanie źródeł map, których nie potrzebujesz
 - Wykres ukształtowania dróg i ścieżek (dotknij trasę)
+- Przełącz pomiędzy listami bezpośrednio z mapy (lub przez długie dotknięcie ikony mapy)
 
 Ujednolicona mapa osiągnęła już stan beta, dlatego zdecydowaliśmy się uczynić ją domyślną mapą dla wszystkich użytkowników wersji Nightly.
 
@@ -24,6 +25,7 @@ Więcej zmian:
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
 - Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
+- Nowość: Opcjonalnie zachowuj tymczasowe pliki OAM (pobieranie map, przydatne przy użyciu plików POI w innych aplikacjach)
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik

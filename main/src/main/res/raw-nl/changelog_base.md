@@ -10,6 +10,7 @@ UnifiedMap biedt in principe (bijna) alle functies aan die onze oude kaart imple
 - Cluster popup voor Google Maps
 - Verberg kaart bronnen die je niet nodig hebt
 - Hoogte grafiek voor routes en tracks (tik op route)
+- Wissel tussen lijsten rechtstreeks vanaf de kaart (of door lang te tikken op de kaart-icoon)
 
 UnifiedMap heeft inmiddels de bèta-status bereikt, dus hebben we besloten om deze tot onze standaardkaart te maken voor alle nightly build gebruikers.
 
@@ -24,6 +25,7 @@ Meer wijzigingen:
 - Nieuw: Toon cache gevonden status op waypoint iconen
 - Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
 - Wijziging: Toon cache/waypoint details op een niet-blokkerende manier
+- Nieuw: Optioneel tijdelijke OAM bestanden behouden (kaart downloader, nuttig bij het gebruik van POI bestanden met andere apps)
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar

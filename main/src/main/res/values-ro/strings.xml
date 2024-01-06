@@ -103,10 +103,8 @@
     <string name="log_tb_archived">Arhivată</string>
     <string name="log_save">Salvează local</string>
     <string name="log_saving">Trimitere jurnal…</string>
-    <string name="log_saving_and_uploading">Publicare jurnal și încărcare imagini…</string>
     <string name="log_posting_log">Se publică însemnarea…</string>
     <string name="log_posting_vote">Publicarea votului…</string>
-    <string name="log_posting_image">Publicare imagini…</string>
     <string name="log_posting_generic_trackable">Postare %1$s %2$d/%3$d</string>
     <string name="log_clear">Şterge</string>
     <string name="log_post_not_possible">Descărcare în curs…\nTe rog încearcă din nou peste câteva secunde sau verifică-ţi conexiunea la internet.</string>

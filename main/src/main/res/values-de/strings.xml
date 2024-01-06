@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
-    <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
+    <string name="log_posting_problemreport">Sende Problem-Log…</string>
+    <string name="log_posting_deletelog">Lösche Log…</string>
+    <string name="log_posting_image_create">Bild %1$s/%2$s: Sende Daten…</string>
+    <string name="log_posting_image_edit">Bild %1$s/%2$s: Ändere Daten…</string>
+    <string name="log_posting_image_delete">Lösche Bild %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Speichere neuen Log-Status…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
-    <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">skaliert</string>
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
+    <string name="log_delete_confirm">Möchten Sie das Log vom Typ %1%s des Autors %2%s mit dem Logdatum %3%s wirklich löschen?</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -694,7 +699,7 @@
     <string name="about_changelog_full">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
-    <string name="about_contributors_recent">Neueste Mitwirkende</string>
+    <string name="about_contributors_recent">Mitwirkende (letzte 12 Monate)</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
     <string name="about_contributors_specialthanksdetails">- Alle Mitwirkenden an der Übersetzung auf [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Alle Issue-Ersteller\n- und alle anderen Unterstützer.\n</string>
     <string name="about_contributors_other">Weitere Mitwirkende</string>
@@ -895,6 +900,7 @@
     <string name="init_showElevation">Höhe anzeigen</string>
     <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
     <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
+    <string name="menu_elevation_info">Höhe (Karte): %s</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
@@ -2399,6 +2405,8 @@
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_filename">Lade %s</string>
+    <string name="downloadmap_keep_temporary_files">Temporäre Dateien aufbewahren</string>
+    <string name="downloadmap_keep_temporary_files_summary">Einige Downloadquellen unterstützen zusätzliche Dateien, die nicht von c:geo verwendet werden. Sollen diese zusätzlichen Dateien im Download-Ordner des Systems aufbewahrt werden statt sie zu löschen?</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
     <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>

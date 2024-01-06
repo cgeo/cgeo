@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Архивирован</string>
     <string name="log_save">Сохранить офлайн</string>
     <string name="log_saving">Отправка записи…</string>
-    <string name="log_saving_and_uploading">Отправка записи и загрузка фотографий…</string>
     <string name="log_posting_log">Отправка записи…</string>
     <string name="log_posting_vote">Отправка оценки тайника…</string>
-    <string name="log_posting_image">Отправка фотографий…</string>
     <string name="log_posting_generic_trackable">Отправка %1$s %2$d/%3$d</string>
     <string name="log_clear">Очистить</string>
     <string name="log_templates">Найдено: Шаблон отзыва…</string>
@@ -705,7 +703,6 @@
     <string name="about_changelog_full">Список всех изменений</string>
     <string name="about_nutshellmanual">Описание на сайте</string>
     <string name="about_contributors_carnerodetails">\"папа\" c:geo</string>
-    <string name="about_contributors_recent">Недавние участники</string>
     <string name="about_contributors_specialthanks">Особая благодарность</string>
     <string name="about_contributors_specialthanksdetails">- всем, кто участвует в переводе на [Crowdin.net](https://crowdin.net/project/cgeo)\n- всем, кто сообщает о проблемах\n- и всем тем, кто как-то поддерживает проект\n</string>
     <string name="about_contributors_other">Другие участники</string>

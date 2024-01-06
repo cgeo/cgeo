@@ -122,10 +122,8 @@
     <string name="log_tb_archived">Archiválva</string>
     <string name="log_save">Offline mentés</string>
     <string name="log_saving">Log mentése…</string>
-    <string name="log_saving_and_uploading">Log küldése és képek feltöltése…</string>
     <string name="log_posting_log">Log küldése…</string>
     <string name="log_posting_vote">Ládaszavazat küldése…</string>
-    <string name="log_posting_image">Képek küldése…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d log küldése</string>
     <string name="log_clear">Törlés</string>
     <string name="log_post_not_possible">Az adatok letöltése folyamatban van…\nKérlek, próbáld újra néhány másodperc múlva vagy ellenőrizd az internetkapcsolatodat!</string>
@@ -444,7 +442,6 @@
     <string name="about_system_info_send_chooser">Rendszeradatok küldése</string>
     <string name="about_nutshellmanual">Online kézikönyv</string>
     <string name="about_contributors_carnerodetails">mint a c:geo szülőatyja</string>
-    <string name="about_contributors_recent">2018/2019-es közreműködők</string>
     <string name="about_contributors_specialthanks">Külön köszönet</string>
     <string name="about_contributors_other">2018 előtti közreműködők</string>
     <string name="about_components">Komponensek</string>

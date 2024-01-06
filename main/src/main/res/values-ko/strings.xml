@@ -146,10 +146,8 @@
     <string name="log_tb_archived">영구보관됨</string>
     <string name="log_save">오프라인 저장</string>
     <string name="log_saving">로그 발송중…</string>
-    <string name="log_saving_and_uploading">로그 및 사진 올리는 중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
-    <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
     <string name="log_templates">찾음: 로그 템플릿…</string>
@@ -688,7 +686,6 @@
     <string name="about_changelog_full">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
-    <string name="about_contributors_recent">최근 기고자</string>
     <string name="about_contributors_specialthanks">특별히 감사함</string>
     <string name="about_contributors_specialthanksdetails">-[Crowdin.net](https://crowdin.net/project/cgeo)의 모든 번역 기여자!\n-모든 이슈 생성자\n-그리고 다른 모든 지지자들입니다.\n</string>
     <string name="about_contributors_other">다른 기고자</string>

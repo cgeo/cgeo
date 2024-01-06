@@ -121,10 +121,8 @@
     <string name="log_tb_archived">Arkiveret</string>
     <string name="log_save">Gem offline</string>
     <string name="log_saving">Sender logbesked…</string>
-    <string name="log_saving_and_uploading">Sender logs og billeder…</string>
     <string name="log_posting_log">Sender logbesked…</string>
     <string name="log_posting_vote">Sender din stemme på cachen…</string>
-    <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
     <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
@@ -533,7 +531,6 @@
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
-    <string name="about_contributors_recent">Seneste bidragsydere</string>
     <string name="about_contributors_specialthanks">Særlig tak til</string>
     <string name="about_contributors_specialthanksdetails">· alle vores oversættere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n· alle fejlfindere\n· og alle andre bidragsydere.\n</string>
     <string name="about_contributors_other">Andre bidragsydere</string>

@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arşivlendi</string>
     <string name="log_save">Çevrimdışı kaydet</string>
     <string name="log_saving">Kayıt gönderiliyor…</string>
-    <string name="log_saving_and_uploading">Kaydınız yayınlanıyor ve resimler yükleniyor…</string>
     <string name="log_posting_log">Kayıt gönderiliyor…</string>
     <string name="log_posting_vote">Cache puanı gönderiliyor…</string>
-    <string name="log_posting_image">Resimler gönderiliyor…</string>
     <string name="log_posting_generic_trackable">Gönderiliyor %1$s %2$d/%3$d</string>
     <string name="log_clear">Temizle</string>
     <string name="log_templates">Buldum: Şablon…</string>
@@ -569,7 +567,6 @@
     <string name="about_system_write_logcat_error">Kayıt dosyasına yazılırken hata oluştu</string>
     <string name="about_nutshellmanual">Çevrimiçi kullanım klavuzu</string>
     <string name="about_contributors_carnerodetails">C:geo\'nun kurucusu</string>
-    <string name="about_contributors_recent">Güncel katkıda bulunanlar</string>
     <string name="about_contributors_specialthanks">Katkılarından dolayı teşekkürler</string>
     <string name="about_contributors_specialthanksdetails">-[Crowdin.net](https://crowdin.net/project/cgeo)! üzerinden çevirilere katkı verenler\n- tüm sorun bildirenler\n- ve diğer tüm destekçilerimiz.\n</string>
     <string name="about_contributors_other">Diğer katkıda bulunanlar</string>

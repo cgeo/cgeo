@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Archivován</string>
     <string name="log_save">Uložit offline</string>
     <string name="log_saving">Odesílání logu…</string>
-    <string name="log_saving_and_uploading">Odesílání logu a nahrávání obrázků…</string>
     <string name="log_posting_log">Odesílání logu…</string>
     <string name="log_posting_vote">Přidává se hlas kešce…</string>
-    <string name="log_posting_image">Odesílání obrázků…</string>
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
     <string name="log_templates">Nalezeno: Šablona logu…</string>
@@ -706,7 +704,6 @@
     <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
-    <string name="about_contributors_recent">Nedávní přispěvatelé</string>
     <string name="about_contributors_specialthanks">Zvláštní poděkování</string>
     <string name="about_contributors_specialthanksdetails">- všem našim překladatelům na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všem ohlašovatelům problémů\n- a všem ostatním podporovatelům.\n</string>
     <string name="about_contributors_other">Další přispěvatelé</string>

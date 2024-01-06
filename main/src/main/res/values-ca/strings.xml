@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Arxivat</string>
     <string name="log_save">Guarda-ho  fora de línia</string>
     <string name="log_saving">S\'està enviant el registre…</string>
-    <string name="log_saving_and_uploading">Publicant registre i carregant la imatge…</string>
     <string name="log_posting_log">Publicant registre…</string>
     <string name="log_posting_vote">S’està publicant el vot…</string>
-    <string name="log_posting_image">Publicant imatges…</string>
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
     <string name="log_clear">Esborra</string>
     <string name="log_templates">Trobat: Plantilla de registre…</string>
@@ -694,7 +692,6 @@
     <string name="about_changelog_full">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
-    <string name="about_contributors_recent">Col·laboradors recents</string>
     <string name="about_contributors_specialthanks">Agraïments especials a:</string>
     <string name="about_contributors_specialthanksdetails">- tots els nostres col·laboradors de traducció a [Crowdin.net] (https://crowdin.net/project/cgeo)!\n- tots els creadors de problemes\n- i la resta de suports.\n</string>
     <string name="about_contributors_other">Altres col·laboradors</string>

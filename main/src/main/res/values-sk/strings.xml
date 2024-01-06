@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archivované</string>
     <string name="log_save">Uložiť offline</string>
     <string name="log_saving">Ukladanie logu…</string>
-    <string name="log_saving_and_uploading">Pridáva sa log a obrázky…</string>
     <string name="log_posting_log">Odosielanie logu…</string>
     <string name="log_posting_vote">Pridáva sa hlas keške…</string>
-    <string name="log_posting_image">Pridávajú sa obrázky…</string>
     <string name="log_posting_generic_trackable">Odosielanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistiť</string>
     <string name="log_templates">Nájdené: Šablóna logu…</string>
@@ -632,7 +630,6 @@
     <string name="about_system_write_logcat_error">Chyba pri zapisovaní súboru denníka</string>
     <string name="about_nutshellmanual">Návod na internete</string>
     <string name="about_contributors_carnerodetails">ako otec c:geo</string>
-    <string name="about_contributors_recent">Nedávni prispievatelia</string>
     <string name="about_contributors_specialthanks">Zvláštne poďakovanie pre</string>
     <string name="about_contributors_specialthanksdetails">- všetkým našim prekladateľom na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všetkým oznamovateľom problémov\n- a všetkým ostatným podporovateľom.\n</string>
     <string name="about_contributors_other">Ďalší prispievatelia</string>
@@ -824,6 +821,7 @@
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
+    <string name="menu_elevation_info">Nadmorská výška (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
     <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>

@@ -10,6 +10,7 @@ La Mappa Unificata offre (quasi) tutte le caratteristiche che le nostre vecchie 
 - Cluster popup per Google Maps
 - Le fonti delle mappe che non servono possono essere nascoste
 - Grafico di elevazione per percorsi e tracce (con un tocco sul percorso)
+- Switch between lists directly from map (or by long-tapping on map icon)
 
 La Mappa Unificata ha raggiunto lo stato beta adesso, così abbiamo deciso di renderla la nostra mappa predefinita per tutti gli utenti delle versioni notturne.
 
@@ -24,6 +25,7 @@ Altre modifiche:
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
 - Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
 - Cambio: Mostra dettagli cache/waypoint in modo non bloccante
+- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
 
 ### Dettagli del cache
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore

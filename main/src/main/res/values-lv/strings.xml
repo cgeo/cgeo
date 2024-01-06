@@ -91,10 +91,8 @@
     <string name="log_tb_archived">Arhivēts</string>
     <string name="log_save">Saglabāt bezsaistes režīmā</string>
     <string name="log_saving">Ieraksta nosūtīšana…</string>
-    <string name="log_saving_and_uploading">Publicē ierakstu un augšupielādē attēlu…</string>
     <string name="log_posting_log">Publicē ierakstu…</string>
     <string name="log_posting_vote">Publicē slēpņa balsojumu…</string>
-    <string name="log_posting_image">Publicē attēlu…</string>
     <string name="log_posting_generic_trackable">Publicē %1$s %2$d/%3$d</string>
     <string name="log_clear">Notīrīt</string>
     <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
@@ -365,7 +363,6 @@
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
     <string name="about_contributors_carnerodetails">kā c:geo tēvs</string>
-    <string name="about_contributors_recent">Pēdējie atbalstītāji</string>
     <string name="about_contributors_specialthanks">Īpašs paldies</string>
     <string name="about_contributors_other">Citi atbalstītāji</string>
     <string name="about_components">Sastāvdaļas</string>

@@ -145,10 +145,8 @@
     <string name="log_tb_archived">Archivé</string>
     <string name="log_save">Enregistrer hors-ligne</string>
     <string name="log_saving">Enregistrement en cours…</string>
-    <string name="log_saving_and_uploading">Envoi de la visite et des images…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
-    <string name="log_posting_image">Envoi des images…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
@@ -690,7 +688,6 @@
     <string name="about_changelog_full">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
-    <string name="about_contributors_recent">Contributeurs récents</string>
     <string name="about_contributors_specialthanks">Remerciements spéciaux à</string>
     <string name="about_contributors_specialthanksdetails">- les traducteurs sur [Crowdin.net](https://crowdin.net/project/cgeo) !\n- les personnes ayant signalé des anomalies ou des améliorations\n- et tous les autres contributeurs.\n</string>
     <string name="about_contributors_other">Autres contributeurs</string>

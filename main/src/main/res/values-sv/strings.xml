@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arkiverad</string>
     <string name="log_save">Spara offline</string>
     <string name="log_saving">Sparar logg…</string>
-    <string name="log_saving_and_uploading">Skickar logg och laddar upp bilder…</string>
     <string name="log_posting_log">Skickar logg…</string>
     <string name="log_posting_vote">Skickar cache-röst…</string>
-    <string name="log_posting_image">Skickar bilder…</string>
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
     <string name="log_templates">Hittade det: Loggmall…</string>
@@ -617,7 +615,6 @@
     <string name="about_system_write_logcat_error">Fel vid skrivning av loggfil</string>
     <string name="about_nutshellmanual">Hjälpmanualen på webben</string>
     <string name="about_contributors_carnerodetails">som skaparen av c:geo</string>
-    <string name="about_contributors_recent">Senaste bidragsgivare</string>
     <string name="about_contributors_specialthanks">Särskilt tack till</string>
     <string name="about_contributors_specialthanksdetails">- alla våra översättare på [Crowdin.net](https://crowdin.net/project/cgeo)!\n- alla som rapporterar problem\n- och alla andra supportrar.\n</string>
     <string name="about_contributors_other">Andra bidragsgivare</string>

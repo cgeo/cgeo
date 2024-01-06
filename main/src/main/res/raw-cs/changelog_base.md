@@ -10,6 +10,7 @@ Sjednocená mapa v podstatě nabízí (téměř) všechny funkce, které mají n
 - Vyskakovací okno pro Google mapy
 - Skrytí nepotřebných zdrojů map
 - Graf nadmořské výšky pro trasy a stopy (klepněte na trasu)
+- Switch between lists directly from map (or by long-tapping on map icon)
 
 Sjednocená mapa již dosáhla stavu beta verze, a proto jsme se rozhodli, že se stane naší výchozí mapou pro všechny uživatele používající noční sestavení.
 
@@ -24,6 +25,7 @@ Další změny:
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
 - Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
 - Změna: Zobrazení podrobností o kešce/trasovém bodu neblokujícím způsobem
+- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač

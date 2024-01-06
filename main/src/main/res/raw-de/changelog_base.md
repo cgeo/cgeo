@@ -10,6 +10,7 @@ Die Vereinheitlichte Karte unterstützt grundsätzlich (fast) alle Funktionen un
 - Auswahl-Popups für Google Maps bei überlappenden Caches/Wegpunkten
 - Kartenquellen ausblenden, die nicht benötigt werden
 - Höhendiagramm für Routen und Tracks (auf Route tippen)
+- Wechseln zwischen Listen direkt in der Karte (oder durch langes Tippen auf Kartensymbol)
 
 Die Vereinheitlichte Karte hat inzwischen den Beta-Status erreicht, daher haben wir uns entschlossen, sie zur Standardkarte für alle Nightly-Nutzer zu machen.
 
@@ -23,7 +24,8 @@ Weitere Änderungen:
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 - Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
-- Change: Show cache/waypoint details in a non-blocking way
+- Änderung: Cache/Wegpunkt-Details auf nicht-blockierende Weise anzeigen
+- Neu: Optional temporäre OAM-Dateien behalten (Kartendownloader, nützlich bei der Verwendung von POI-Dateien mit anderen Apps)
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
@@ -33,4 +35,4 @@ Weitere Änderungen:
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
 - Änderung: Verwendung des Hintergrundbildes benötigt nicht mehr die Berechtigung zum Lesen von Dateien
-- New: Two column-layout for settings in landscape mode
+- Neu: Zwei Spalten-Layout für Einstellungen im Querformat

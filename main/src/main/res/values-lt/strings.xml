@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archyvuotas</string>
     <string name="log_save">Išsaugoti neprisijungus</string>
     <string name="log_saving">Siunčiamas įrašas…</string>
-    <string name="log_saving_and_uploading">Skelbiamas įrašas ir įkeliami vaizdai…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
-    <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
@@ -632,7 +630,6 @@
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
-    <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
     <string name="about_contributors_specialthanks">Ypatingas ačiū</string>
     <string name="about_contributors_specialthanksdetails">- visiems mūsų vertimo pagalbininkams [Crowdin.net](https://crowdin.net/project/cgeo)!\n- visiems pranešusiems apie problemas\n- ir visiems kitiems rėmėjams.\n</string>
     <string name="about_contributors_other">Kiti pagalbininkai</string>
