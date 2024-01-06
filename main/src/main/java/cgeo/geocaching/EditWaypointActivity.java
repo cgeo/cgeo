@@ -21,7 +21,6 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.FormulaEditText;
 import cgeo.geocaching.ui.ImageParam;
@@ -192,15 +191,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 } else {
                     activity.nonEditable(activity.binding.nameLayout, activity.binding.name);
                     activity.nonEditable(activity.binding.noteLayout, activity.binding.note);
-                    if (waypoint != null && !waypoint.isOriginalCoordsEmpty()) {
-                        activity.binding.projection.setVisibility(View.GONE);
-                        activity.binding.projectionType.setVisibility(View.GONE);
-                    }
+                    activity.projectionType.set(ProjectionType.NO_PROJECTION);
                 }
 
                 if (StringUtils.isBlank(activity.binding.note.getText())) {
                     activity.binding.noteLayout.setVisibility(View.GONE);
                 }
+                activity.recalculateProjectionView();
 
             } catch (final RuntimeException e) {
                 Log.e("EditWaypointActivity.loadWaypointHandler", e);
@@ -271,10 +268,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             setCoordsModificationVisibility(ConnectorFactory.getConnector(geocode));
         }
 
-        if (Settings.enableFeatureCalculatedProjections()) {
-            binding.projectionType.setVisibility(View.VISIBLE);
-            binding.projection.setVisibility(View.GONE);
-        }
         initializeProjectionView(cache);
         recalculateProjectionView();
 
@@ -287,11 +280,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             binding.noteLayout.setVisibility(View.GONE);
             updateCoordinates(preprojectedCoords);
         }
-
-        initializeDistanceUnitSelector();
-
-        disableSuggestions(binding.distance);
-
 
     }
 
@@ -378,13 +366,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    private void initializeDistanceUnitSelector() {
-        if (initViews) {
-            binding.distanceUnit.setSelection(Settings.useImperialUnits() ?
-                    DistanceUnit.FEET.getValue() : DistanceUnit.METER.getValue());
-        }
-    }
-
     private Geopoint calculateProjection(final Geopoint coords) {
         final ProjectionType pt = projectionType.get();
         final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
@@ -447,7 +428,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final Geopoint base = this.preprojectedCoords;
         final ProjectionType pType = this.projectionType.get();
-        final boolean projectionEnabled = Settings.enableFeatureCalculatedProjections();
+        final boolean projectionEnabled = waypoint == null || (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty());
 
         //update view visibilities
         binding.projectionType.setVisibility(projectionEnabled ? View.VISIBLE : View.GONE);
@@ -550,7 +531,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             preprojectedCoords = gp;
             recalculateProjectionView();
         }
-        setProjectionEnabled(gp != null);
         ((MaterialButton) binding.buttonLatLongitude).setIconResource(CalculatedCoordinate.isValidConfig(calcStateString) ? R.drawable.ic_menu_variable : 0);
     }
 
@@ -568,16 +548,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public boolean supportsNullCoordinates() {
         return true;
-    }
-
-    private void setProjectionEnabled(final boolean enabled) {
-        binding.bearing.setEnabled(enabled);
-        binding.distance.setEnabled(enabled);
-        binding.distanceUnit.setEnabled(enabled);
-        if (!enabled) {
-            binding.bearing.setText("");
-            binding.distance.setText("");
-        }
     }
 
     /**
@@ -617,47 +587,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final ActivityData currentState = new ActivityData();
 
-        if (Settings.enableFeatureCalculatedProjections()) {
-            currentState.preprojectedCoords = this.preprojectedCoords;
-            currentState.coords = this.currentCoords;
-            currentState.projectionType = this.projectionType.get();
-        } else {
-            Geopoint coords = this.preprojectedCoords;
-            currentState.projectionType = ProjectionType.NO_PROJECTION;
-
-            final String bearingText = binding.bearing.getText().toString();
-            final String distanceText = binding.distance.getText().toString();
-            final DistanceUnit distanceUnit = DistanceUnit.getByPos(binding.distanceUnit.getSelectedItemPosition());
-
-            if (coords != null && StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
-                // bearing & distance
-                final double bearing;
-                try {
-                    bearing = Double.parseDouble(bearingText);
-                } catch (final NumberFormatException ignored) {
-                    SimpleDialog.of(this).setTitle(R.string.err_point_bear_and_dist_title).setMessage(R.string.err_point_bear_and_dist).show();
-                    return null;
-                }
-
-                final double distance;
-                try {
-                    distance = distanceUnit.parseToKilometers(distanceText);
-                } catch (final NumberFormatException ignored) {
-                    showToast(res.getString(R.string.err_parse_dist));
-                    return null;
-                }
-
-                coords = coords.project(bearing, distance);
-            }
-            currentState.preprojectedCoords = null;
-            currentState.coords = coords;
-        }
+        //projection
+        currentState.preprojectedCoords = this.preprojectedCoords;
+        currentState.coords = this.currentCoords;
+        currentState.projectionType = this.projectionType.get();
 
         //projection settings
         final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
         currentState.projectionFormula1 = fields.left == null ? null : fields.left.getFormulaText();
         currentState.projectionFormula2 = fields.middle == null ? null : fields.middle.getFormulaText();
-        currentState.projectionUnits = fields.right == null ? null : fields.right.get();
+        currentState.projectionUnits = fields.right == null ? DistanceUnit.getDefaultUnit(false) : fields.right.get();
 
         final String givenName = binding.name.getText().toString().trim();
         currentState.name = StringUtils.defaultIfBlank(givenName, getDefaultWaypointName(cache, getSelectedWaypointType()));
@@ -675,26 +614,20 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private boolean isWaypointChanged(@NonNull final ActivityData currentState) {
-        final boolean changedBase = waypoint == null
-                || !Geopoint.equalsFormatted(currentState.coords, waypoint.getCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
-                || !StringUtils.equals(currentState.name, waypoint.getName())
-                || !StringUtils.equals(currentState.noteText, waypoint.getNote())
-                || !StringUtils.equals(currentState.userNoteText, waypoint.getUserNote())
-                || currentState.visited != waypoint.isVisited()
-                || currentState.type != waypoint.getWaypointType()
-                || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateConfig());
-
-        if (Settings.enableFeatureCalculatedProjections()) {
-            return changedBase
-                || !Geopoint.equalsFormatted(currentState.preprojectedCoords, waypoint.getPreprojectedCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
-                || currentState.projectionType != waypoint.getProjectionType()
-                || currentState.projectionUnits != waypoint.getProjectionDistanceUnit()
-                || !StringUtils.equals(currentState.projectionFormula1, waypoint.getProjectionFormula1())
-                || !StringUtils.equals(currentState.projectionFormula2, waypoint.getProjectionFormula2());
-        } else {
-            return changedBase;
-        }
-    }
+        return waypoint == null
+            || !Geopoint.equalsFormatted(currentState.coords, waypoint.getCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
+            || !StringUtils.equals(currentState.name, waypoint.getName())
+            || !StringUtils.equals(currentState.noteText, waypoint.getNote())
+            || !StringUtils.equals(currentState.userNoteText, waypoint.getUserNote())
+            || currentState.visited != waypoint.isVisited()
+            || currentState.type != waypoint.getWaypointType()
+            || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateConfig())
+            || !Geopoint.equalsFormatted(currentState.preprojectedCoords, waypoint.getPreprojectedCoords(), GeopointFormatter.Format.LAT_LON_DECMINUTE)
+            || currentState.projectionType != waypoint.getProjectionType()
+            || currentState.projectionUnits != waypoint.getProjectionDistanceUnit()
+            || !StringUtils.equals(currentState.projectionFormula1, waypoint.getProjectionFormula1())
+            || !StringUtils.equals(currentState.projectionFormula2, waypoint.getProjectionFormula2());
+}
 
     private static class FinishWaypointSaveHandler extends WeakReferenceHandler<EditWaypointActivity> {
 
