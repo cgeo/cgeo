@@ -699,6 +699,7 @@
     <string name="about_changelog_full">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
+    <string name="about_contributors_recent">Mitwirkende (letzte 12 Monate)</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
     <string name="about_contributors_specialthanksdetails">- Alle Mitwirkenden an der Übersetzung auf [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Alle Issue-Ersteller\n- und alle anderen Unterstützer.\n</string>
     <string name="about_contributors_other">Weitere Mitwirkende</string>
@@ -2404,6 +2405,8 @@
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_filename">Lade %s</string>
+    <string name="downloadmap_keep_temporary_files">Temporäre Dateien aufbewahren</string>
+    <string name="downloadmap_keep_temporary_files_summary">Einige Downloadquellen unterstützen zusätzliche Dateien, die nicht von c:geo verwendet werden. Sollen diese zusätzlichen Dateien im Download-Ordner des Systems aufbewahrt werden statt sie zu löschen?</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
     <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>
