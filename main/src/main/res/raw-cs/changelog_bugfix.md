@@ -3,6 +3,7 @@
 - Oprava: Nepotřebné oprávnění READ_EXTERNAL_STORAGE vyžadované na novějších verzích systému Android
 - Oprava: Výchozí výběr typu logu sledovatelného předmětu
 - Oprava: Pád při otevření stahovače map za určitých podmínek
+- Fix: Crash on OSM-based maps under certain conditions
 
 ##
 - Oprava: Chybějící sledované položky v inventáři kešek (změna webu)

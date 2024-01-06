@@ -1,8 +1,9 @@
 ##
 - Korrektur: Absturz bei Anzeige des Benachrichtigungs-Markers
 - Korrektur: Unter neueren Android-Versionen nicht mehr benötigte Berechtigung READ_EXTERNAL_STORAGE angefordert
-- Fix: Trackable logtype default selection
-- Fix: Crash on opening map downloader under certain conditions
+- Korrektur: Standardauswahl des Trackable-Logtyps
+- Korrektur: Absturz des Karten-Downloaders unter bestimmten Bedingungen
+- Korrektur: Absturz bei OSM-basierten Karten unter bestimmten Bedingungen
 
 ##
 - Korrektur: Trackables im Cache-Inventar werden nicht angezeigt (Webseiten-Änderung)
