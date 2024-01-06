@@ -380,8 +380,11 @@ public class RouteTrackUtils {
                 vVisibility.setVisibility(View.GONE);
             } else {
                 vVisibility.setVisibility(View.VISIBLE);
+                vVisibility.setOnClickListener(v -> {
+                    setVisibilityInfo(vVisibility, !geoData.isHidden());
+                    menuToggleTrack(key, !geoData.isHidden());
+                });
                 setVisibilityInfo(vVisibility, geoData.isHidden());
-                vVisibility.setOnClickListener(v -> menuToggleTrack(key, !geoData.isHidden()));
             }
 
             vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> menuDeleteTrack(key, dialog));
