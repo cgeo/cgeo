@@ -16,13 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * An offline log entry.
- * <p>
+ * <br>
  * In contrast to {@link LogEntry}, this object represents a (not-yet-published) offline log entry.
  * It builds upon {@link LogEntry} and contains some properties which are only relevant for the time the log is not published yet.
- * <p>
+ * <br>
  * Instances are immutable. For class design see {@link LogEntry}.
- *
- * Implementation Note: this class is not yet used, will be as part of Offline Logging extension (as of 2.8.20) // TODO remove when done
  */
 public final class OfflineLogEntry extends LogEntry {
 
@@ -51,7 +49,24 @@ public final class OfflineLogEntry extends LogEntry {
      */
     public final Map<String, LogTypeTrackable> inventoryActions;
 
-    // Parcelable START
+    public Builder buildUponOfflineLogEntry() {
+        final Builder builder = new Builder();
+        fillBuilder(builder);
+        return builder;
+    }
+
+    void fillBuilder(final OfflineLogEntry.GenericBuilder<?> builder) {
+        super.fillBuilder(builder);
+        builder
+            .setImageTitlePraefix(imageTitlePraefix)
+            .setImageScale(imageScale)
+            .setFavorite(favorite)
+            .setRating(rating)
+            .setPassword(password)
+            .addInventoryActions(inventoryActions);
+    }
+
+        // Parcelable START
 
     private OfflineLogEntry(final Parcel in) {
         super(in);
@@ -90,14 +105,14 @@ public final class OfflineLogEntry extends LogEntry {
     // Parcelable END
 
 
-    private OfflineLogEntry(final Builder builder) {
+    private OfflineLogEntry(final GenericBuilder<?> builder) {
         super(builder);
         this.imageTitlePraefix = builder.imageTitlePraefix;
         this.imageScale = builder.imageScale;
         this.favorite = builder.favorite;
         this.rating = builder.rating;
         this.password = builder.password;
-        this.inventoryActions = Collections.<String, TrackableLogEntry>unmodifiableMap(builder.inventoryActions);
+        this.inventoryActions = Collections.unmodifiableMap(builder.inventoryActions);
     }
 
 
@@ -106,62 +121,67 @@ public final class OfflineLogEntry extends LogEntry {
      * <p>
      * Use {@link #buildUpon()} to obtain a builder representing an existing {@link OfflineLogEntry}.
      */
-    public static class Builder<T extends Builder<T>> extends LogEntry.Builder<T> {
+    public static final class Builder extends GenericBuilder<Builder> {
+
+        @NonNull
+        @Override
+        public OfflineLogEntry build() {
+            return new OfflineLogEntry(this);
+        }
+    }
+
+    public abstract static class GenericBuilder<T extends GenericBuilder<T>> extends LogEntry.GenericBuilder<T> {
 
         //see {@link OfflineLogEntry} for explanation of properties
-        private String imageTitlePraefix = "";
-        private int imageScale = -1; // not set
-        private boolean favorite = false;
-        private float rating = 0;
-        private String password = null;
-        private final Map<String, LogTypeTrackable> inventoryActions = new HashMap<>();
+        String imageTitlePraefix = "";
+        int imageScale = -1; // not set
+        boolean favorite = false;
+        float rating = 0;
+        String password = null;
+        @NonNull final Map<String, LogTypeTrackable> inventoryActions = new HashMap<>();
 
         /**
          * Build an immutable {@link OfflineLogEntry} Object.
          */
-        @NonNull
-        public OfflineLogEntry build() {
-            return new OfflineLogEntry(this);
-        }
 
         public T setImageTitlePraefix(final String imageTitlePraefix) {
             this.imageTitlePraefix = imageTitlePraefix;
-            return (T) this;
+            return self();
         }
 
         public T setImageScale(final int imageScale) {
             this.imageScale = imageScale;
-            return (T) this;
+            return self();
         }
 
         public T setFavorite(final boolean favorite) {
             this.favorite = favorite;
-            return (T) this;
+            return self();
         }
 
         public T setRating(final float rating) {
             this.rating = rating;
-            return (T) this;
+            return self();
         }
 
         public T setPassword(final String password) {
             this.password = password;
-            return (T) this;
+            return self();
         }
 
         public T addInventoryAction(final String trackableGeocode, final LogTypeTrackable action) {
             this.inventoryActions.put(trackableGeocode, action);
-            return (T) this;
+            return self();
         }
 
         public T addInventoryActions(final Map<String, LogTypeTrackable> actions) {
             this.inventoryActions.putAll(actions);
-            return (T) this;
+            return self();
         }
 
         public T clearInventoryActions() {
             this.inventoryActions.clear();
-            return (T) this;
+            return self();
         }
     }
 

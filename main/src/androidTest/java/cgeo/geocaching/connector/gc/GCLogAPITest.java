@@ -62,7 +62,7 @@ public class GCLogAPITest {
 
     private String createCacheLog() {
         final long logTime = new Date().getTime();
-        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder()
             .setLog("This is a test log (should be deleted automatically)")
             .setDate(logTime)
             .setLogType(LogType.NOTE)
@@ -79,7 +79,7 @@ public class GCLogAPITest {
 
     private String editCacheLog(final String logId) {
         final long newLogTime = new Date().getTime();
-        final LogEntry newLogEntry = new LogEntry.Builder<>()
+        final LogEntry newLogEntry = new LogEntry.Builder()
             .setServiceLogId(logId)
             .setLog("This is a new test log (should be deleted automatically)")
             .setDate(newLogTime)
@@ -164,7 +164,7 @@ public class GCLogAPITest {
     private String editCacheLogPreserveImage(final String logId, final String logImageId) {
 
         //Construct an edited log entry. This test is to ensure that images are preserved on log edit.
-        final LogEntry newLogEntry = new LogEntry.Builder<>()
+        final LogEntry newLogEntry = new LogEntry.Builder()
             .setServiceLogId(logId)
             .setLog("This is a third test log (should be deleted automatically)")
             .setDate(new Date().getTime())

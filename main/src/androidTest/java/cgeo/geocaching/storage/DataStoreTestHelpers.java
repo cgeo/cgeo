@@ -78,7 +78,7 @@ public class DataStoreTestHelpers {
     private static List<LogEntry> createDummyLogsForCache(final String geocode, final int count) {
         final List<LogEntry> result = new ArrayList<>();
         for (int idx = 0; idx < count; idx++) {
-            result.add(new LogEntry.Builder<>()
+            result.add(new LogEntry.Builder()
                     .setCacheGeocode(geocode)
                     .setLog("Some log " + idx)
                     .setLogType(LogType.NOTE).build());

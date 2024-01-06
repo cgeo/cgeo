@@ -99,7 +99,7 @@ public final class LogUtils {
             final LogEntry adaptedLogEntryProblemReport;
             if (logEntry.reportProblem != ReportProblemType.NO_PROBLEM && !loggingManager.canLogReportType(logEntry.reportProblem)) {
                 progress.accept(LocalizationUtils.getString(R.string.log_posting_problemreport));
-                final OfflineLogEntry logEntryProblemReport = new OfflineLogEntry.Builder<>()
+                final OfflineLogEntry logEntryProblemReport = new OfflineLogEntry.Builder()
                     .setLogType(logEntry.reportProblem.logType)
                     .setDate(logEntry.date)
                     .setLog(LocalizationUtils.getString(logEntry.reportProblem.textId))
@@ -175,7 +175,7 @@ public final class LogUtils {
         }
     }
 
-    private static LogEntry.Builder<?> applyCommonsToOwnLog(final LogEntry.Builder<?> logBuilder, final IConnector cacheConnector) {
+    private static LogEntry.Builder applyCommonsToOwnLog(final LogEntry.Builder logBuilder, final IConnector cacheConnector) {
         logBuilder.setFriend(true);
         // login credentials may vary from actual username
         // Get correct author name from connector (if applicable)

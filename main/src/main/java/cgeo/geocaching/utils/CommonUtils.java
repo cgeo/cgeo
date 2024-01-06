@@ -245,8 +245,12 @@ public class CommonUtils {
     }
 
     public static <E extends Enum<E>> E intToEnum(final Class<E> clazz, final int value) {
+       return intToEnum(clazz, value, null);
+    }
+
+    public static <E extends Enum<E>> E intToEnum(final Class<E> clazz, final int value, final E defaultValue) {
         final E[] enumValues = clazz.getEnumConstants();
-        return value < 0 || enumValues == null || value >= enumValues.length ? null : enumValues[value];
+        return value < 0 || enumValues == null || value >= enumValues.length ? defaultValue : enumValues[value];
     }
 
 

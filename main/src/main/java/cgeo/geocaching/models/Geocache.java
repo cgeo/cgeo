@@ -570,7 +570,7 @@ public class Geocache implements IWaypoint {
         final boolean mustIncludeSignature = StringUtils.isNotBlank(Settings.getSignature()) && Settings.isAutoInsertSignature();
         final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, null, true)) : "";
 
-        logOffline(fromActivity, new OfflineLogEntry.Builder<>()
+        logOffline(fromActivity, new OfflineLogEntry.Builder()
                 .setLog(initial)
                 .setDate(Calendar.getInstance().getTimeInMillis())
                 .setLogType(logType)
