@@ -7,6 +7,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.01.06 Bugfix Release
+
+- Fix: Trackable logtype default selection
+- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
+- Fix: Crash on displaying notification dot
+- Fix: Crash on opening map downloader under certain conditions
+- Fix: Crash on OSM-based maps under certain conditions
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2023.12.21 Bugfix Release
 
 - Fix: Trackables missing in cache inventory (website change)
