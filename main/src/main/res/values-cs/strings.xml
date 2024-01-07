@@ -1629,6 +1629,7 @@
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Tuto stránku můžete použít k zapisování poznámek a výpočtů nutných pro tuto kešku.</string>
     <string name="variables_scanlisting">Prohledat listing</string>
