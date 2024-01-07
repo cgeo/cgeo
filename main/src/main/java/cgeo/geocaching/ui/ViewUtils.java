@@ -10,6 +10,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ScalableDrawable;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -53,17 +54,21 @@ import android.widget.TextView;
 import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.AttrRes;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.text.util.LinkifyCompat;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -668,5 +673,23 @@ public class ViewUtils {
                 a.recycle();
             }
         }
+    }
+
+    public static Drawable getDrawable(@DrawableRes final int drwId, final boolean mutate) {
+        return getDrawable(drwId, 1.0f, mutate);
+    }
+
+    public static Drawable getDrawable(@DrawableRes final int drwId, final float scalingFactor, final boolean mutate) {
+        Drawable result = DrawableCompat.wrap(Objects.requireNonNull(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), drwId, null)));
+        if (mutate) {
+            result.mutate();
+        }
+        if (scalingFactor != 1.0f) {
+            result = new ScalableDrawable(result, scalingFactor);
+            if (mutate) {
+                result.mutate();
+            }
+        }
+        return result;
     }
 }
