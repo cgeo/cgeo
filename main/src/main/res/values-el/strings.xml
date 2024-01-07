@@ -1400,6 +1400,7 @@
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
