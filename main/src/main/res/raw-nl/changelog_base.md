@@ -31,6 +31,7 @@ Meer wijzigingen:
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
 - Wijziging: Maximale loglengte verhoogd voor geocaching.com
 - Oplossing: Kan geen langere persoonlijke notities uploaden op opencaching sites
+- New: Edit/delete own logs
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
