@@ -31,6 +31,7 @@ More changes:
 - Canvi: feu que "Canviar parlant" sigui una activació real
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### General
 - Nou: en tocar la notificació del descarregador, s'obre la vista de "descàrregues pendents"
