@@ -679,6 +679,7 @@
     <string name="waypoint_coordinate_formats_plain">بسيط</string>
     <string name="from_clipboard">من الحافظة</string>
     <string name="copy_to_clipboard">نسخ من الحافظة</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
