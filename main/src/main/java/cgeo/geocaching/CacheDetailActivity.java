@@ -722,7 +722,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
             extractWaypoints(searchText, cache);
         } else if (menuItem == R.id.menu_scan_calculated_waypoints) {
-            scanForCalculatedWaypints(cache);
+            scanForCalculatedWaypoints(cache);
         } else if (menuItem == R.id.menu_toggleWaypointsFromNote) {
             cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
             setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
