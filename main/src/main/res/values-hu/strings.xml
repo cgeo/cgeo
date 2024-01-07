@@ -878,6 +878,7 @@
     <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
     <string name="from_clipboard">A vágólapról</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
