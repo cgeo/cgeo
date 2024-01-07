@@ -642,6 +642,7 @@
     <string name="waypoint_coordinate_formats_plain">Osnovno</string>
     <string name="from_clipboard">Iz odložišča</string>
     <string name="copy_to_clipboard">Kopiraj v odložišče</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
