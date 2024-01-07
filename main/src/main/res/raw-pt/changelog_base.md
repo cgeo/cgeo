@@ -31,6 +31,7 @@ More changes:
 - Alteração: Torne "Ligar/desligar a fala" num verdadeiro comutador
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### Geral
 - Novo: Ao tocar na notificação do gestor de transferências abre a visualização "transferências pendentes"
