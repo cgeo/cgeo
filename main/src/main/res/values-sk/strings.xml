@@ -1501,6 +1501,7 @@
     <string name="waypoint_coordinate_formats_plain">Iba text</string>
     <string name="from_clipboard">Zo schránky</string>
     <string name="copy_to_clipboard">Kopírovať do schránky</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
     <string name="variables_scanlisting">Prehľadať listing</string>
