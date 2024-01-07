@@ -31,6 +31,7 @@ More changes:
 - Change: Make "Toggle talking" an actual toggle
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### Allmänt
 - New: Tapping on downloader notification opens "pending downloads" view
