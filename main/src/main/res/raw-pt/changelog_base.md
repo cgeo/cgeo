@@ -36,3 +36,4 @@ More changes:
 - Novo: Ao tocar na notificação do gestor de transferências abre a visualização "transferências pendentes"
 - Alteração: Usar imagem de fundo do ecrã como plano de fundo já não precisa da permissão de READ_EXTERNAL_STORAGE
 - New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info
