@@ -31,6 +31,7 @@
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
