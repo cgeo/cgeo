@@ -1612,6 +1612,7 @@
     <string name="waypoint_coordinate_formats_plain">Текст</string>
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_scanlisting">Сканирование</string>
