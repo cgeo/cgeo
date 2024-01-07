@@ -31,6 +31,7 @@ More changes:
 - Изменение: Создано "Переключение разговора" фактическим переключением
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### Общее
 - Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
