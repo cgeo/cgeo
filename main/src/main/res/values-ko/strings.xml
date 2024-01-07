@@ -1579,6 +1579,7 @@
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">이 페이지를 사용하여 값을 기록하고 이 캐시에 필요한 계산을 수행합니다.</string>
     <string name="variables_scanlisting">지오캐시 스캔</string>
