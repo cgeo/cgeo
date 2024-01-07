@@ -36,3 +36,4 @@ Meer wijzigingen:
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
 - Wijziging: het gebruik van wallpaper als achtergrond vereist niet langer READ_EXTERNAL_STORAGE toestemming
 - Nieuw: Twee kolom-indeling voor instellingen in liggende modus
+- Oplossing: Herstel van back-ups zonder geldige datum/tijd informatie
