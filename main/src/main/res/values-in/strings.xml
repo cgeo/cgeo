@@ -679,6 +679,7 @@
     <string name="waypoint_coordinate_formats_plain">Polos</string>
     <string name="from_clipboard">Dari papan tulis kecil</string>
     <string name="copy_to_clipboard">Salin ke papan tulis kecil</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
