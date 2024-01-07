@@ -1587,6 +1587,7 @@
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
