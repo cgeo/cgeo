@@ -36,3 +36,4 @@
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
 - 변경: 배경화면을 배경으로 사용하는 데 더 이상 READ_EXTERNAL_STORAGE 권한이 필요하지 않습니다.
 - New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info
