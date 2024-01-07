@@ -36,3 +36,4 @@ Altre modifiche:
 - Toccando la notifica sul download apre "download in attesa"
 - Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
 - Nuovo: layout a due colonne per le impostazioni in modalità orizzontale
+- Fix: Restore of backups without valid date/time info
