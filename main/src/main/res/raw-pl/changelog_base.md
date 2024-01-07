@@ -31,6 +31,7 @@ Więcej zmian:
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
 - Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
 - Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
+- New: Edit/delete own logs
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
