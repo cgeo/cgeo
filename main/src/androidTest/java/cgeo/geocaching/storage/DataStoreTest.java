@@ -214,7 +214,7 @@ public class DataStoreTest {
         assertThat(DataStore.clearLogOffline(geocode)).isEqualTo(false);
 
         try {
-            final OfflineLogEntry.Builder<?> builder = new OfflineLogEntry.Builder<>()
+            final OfflineLogEntry.Builder builder = new OfflineLogEntry.Builder()
                     .setServiceLogId("pid")
                     .setCacheGeocode(geocode)
                     .setDate(logDate.getTime())
@@ -279,7 +279,7 @@ public class DataStoreTest {
         assertThat(logEntry).isNull();
 
         try {
-            final OfflineLogEntry.Builder<?> builder = new OfflineLogEntry.Builder<>();
+            final OfflineLogEntry.Builder builder = new OfflineLogEntry.Builder();
             assertThat(DataStore.saveLogOffline(geocode, builder.build())).isEqualTo(false);
 
             assertThat(DataStore.saveLogOffline(geocode, builder.setCacheGeocode(geocode).setLog("test").build())).isEqualTo(true);
@@ -292,7 +292,7 @@ public class DataStoreTest {
         }
     }
 
-    private static void assertEqualToBuilder(final OfflineLogEntry dbLogEntry, final OfflineLogEntry.Builder<?> builder) {
+    private static void assertEqualToBuilder(final OfflineLogEntry dbLogEntry, final OfflineLogEntry.Builder builder) {
         final OfflineLogEntry expectedLogEntry = builder.build();
 
         assertThat(dbLogEntry).isNotNull();

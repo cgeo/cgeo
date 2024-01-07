@@ -311,7 +311,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private OfflineLogEntry getEntryFromView() {
-        final OfflineLogEntry.Builder<?> builder = new OfflineLogEntry.Builder<>()
+        final OfflineLogEntry.Builder builder = new OfflineLogEntry.Builder()
                 .setLogType(logType.get())
                 .setDate(date.getDate().getTime())
                 .setLog(currentLogText())

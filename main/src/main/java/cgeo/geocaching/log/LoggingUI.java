@@ -162,7 +162,7 @@ public final class LoggingUI extends AbstractUIFactory {
 
         builder.setAdapter(adapter, (dialog, item) -> {
             final Settings.PrefLogTemplate logTemplate = adapter.getItem(item);
-            cache.logOffline(activity, new OfflineLogEntry.Builder<>()
+            cache.logOffline(activity, new OfflineLogEntry.Builder()
                     .setLog(LogTemplateProvider.applyTemplates(logTemplate.getText(), new LogTemplateProvider.LogContext(cache, null, true)))
                     .setDate(Calendar.getInstance().getTimeInMillis())
                     .setLogType(LogType.FOUND_IT)

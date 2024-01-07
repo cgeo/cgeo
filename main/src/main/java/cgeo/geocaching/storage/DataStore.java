@@ -5604,8 +5604,8 @@ public class DataStore {
                     final DBQuery query = new DBQuery.Builder().setTable(dbTableLogsOffline)
                             .setColumns(new String[]{"_id", "geocode", "date", "service_log_id", "type", "log", "report_problem", "image_title_prefix", "image_scale", "favorite", "tweet", "rating", "password"})
                             .setWhereClause("geocode = ?").setWhereArgs(new String[]{geocode}).build();
-                    final OfflineLogEntry.Builder<?> logBuilder = query.selectFirstRow(database,
-                            c -> new OfflineLogEntry.Builder<>()
+                    final OfflineLogEntry.Builder logBuilder = query.selectFirstRow(database,
+                            c -> new OfflineLogEntry.Builder()
                                     .setId(c.getInt(0))
                                     .setCacheGeocode(c.getString(1))
                                     .setDate(c.getLong(2))

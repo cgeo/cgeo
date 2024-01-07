@@ -136,7 +136,7 @@ public class LogEntryTest {
     @Test
     public void testOfflineLogEntry() {
 
-        final OfflineLogEntry.Builder<?> oleBuilder = new OfflineLogEntry.Builder<>()
+        final OfflineLogEntry.Builder oleBuilder = new OfflineLogEntry.Builder()
                 //set a LogEntry-specific property
                 .setLog("some log message")
                 //set an OfflineLogEntry-specific property
@@ -170,7 +170,7 @@ public class LogEntryTest {
     public void testOfflineLogParcelable() {
 
         //initialize a fully-fledged OfflineLogEntry
-        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>()
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder()
                 .setServiceLogId("pid")
                 .setLog("log message")
                 .setLogType(LogType.DIDNT_FIND_IT)
@@ -210,7 +210,7 @@ public class LogEntryTest {
     public void testEmptyOfflineLogParcelable() {
 
         //initialize a fully-fledged OfflineLogEntry
-        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder<>().build();
+        final OfflineLogEntry logEntry = new OfflineLogEntry.Builder().build();
 
         //serialize and deserialize;
         final byte[] parcel = marshall(logEntry);

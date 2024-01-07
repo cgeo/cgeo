@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -28,14 +29,14 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Entry in a log book.
- *
+ * <br>
  * {@link LogEntry} Objects are immutable. They should be manipulated by {@link LogEntry.Builder}. Use {@link LogEntry#buildUpon()}
  * to create a {@link LogEntry.Builder} object capable of creating a new {@link LogEntry}.
- *
+ * <br>
  * Class utilizes the Builder pattern as explained <a href="https://en.wikipedia.org/wiki/Builder_pattern">here</a>.
  * To support inheritance, it utilizes the <a href="https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern">Curiously Recursive Generic Pattern</a>
  * (usage for java builders is explained e.g. <a href="https://stackoverflow.com/questions/17164375/subclassing-a-java-builder-class">here</a>)
- *
+ * <br>
  * This object should not be referenced directly from a Geocache object to reduce the memory usage
  * of the Geocache objects.
  */
@@ -43,62 +44,33 @@ public class LogEntry implements Parcelable {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
-    /**
-     * Log id
-     */
+    /** Log id */
     public final int id;
-    /**
-     * service-specific log id (only filled if log was loaded from a service)
-     */
+    /** service-specific log id (only filled if log was loaded from a service) */
     @Nullable public final String serviceLogId;
-    /**
-     * The {@link LogType}
-     */
+    /** The {@link LogType} */
     @NonNull public final LogType logType;
-    /**
-     * The author
-     */
+    /** The author */
     @NonNull public final String author;
-    /**
-     * The author guid
-     */
+    /** The author guid */
     @NonNull public final String authorGuid;
-    /**
-     * The log message
-     */
+    /** The log message */
     @NonNull public final String log;
-    /**
-     * The log date
-     */
+    /** The log date */
     public final long date;
-    /**
-     * Is a found log
-     */
+    /** Is a found log */
     public final int found;
-    /**
-     * Own's or Friend's log entry indicator.
-     * Such logs will be visible in separated tab "Friends/Own Logs" in addition to main Logbook
-     */
+    /** Own's or Friend's log entry indicator. */
     public final boolean friend;
-    /**
-     * Report problem
-     */
+    /** Report problem */
     @NonNull public final ReportProblemType reportProblem;
-    /**
-     * log {@link Image} List
-     */
+    /** log {@link Image} List */
     @NonNull public final List<Image> logImages;
-    /**
-     * Spotted cache name
-     */
+    /** Spotted cache name */
     @NonNull public final String cacheName; // used for trackables
-    /**
-     * Spotted cache guid
-     */
+    /** Spotted cache guid */
     @NonNull public final String cacheGuid; // used for trackables
-    /**
-     * Spotted cache geocode
-     */
+    /** Spotted cache geocode */
     @NonNull public final String cacheGeocode; // used for trackables
 
     @NonNull
@@ -123,34 +95,34 @@ public class LogEntry implements Parcelable {
     protected LogEntry(final Parcel in) {
         id = in.readInt();
         serviceLogId = in.readString();
-        logType = (LogType) in.readSerializable();
-        author = in.readString();
-        authorGuid = in.readString();
-        log = in.readString();
+        logType = CommonUtils.intToEnum(LogType.class, in.readInt(), LogType.UNKNOWN);
+        author = StringUtils.defaultString(in.readString());
+        authorGuid = StringUtils.defaultString(in.readString());
+        log = StringUtils.defaultString(in.readString());
         date = in.readLong();
         found = in.readInt();
         friend = in.readInt() == 1;
-        reportProblem = (ReportProblemType) in.readSerializable();
+        reportProblem = CommonUtils.intToEnum(ReportProblemType.class, in.readInt(), ReportProblemType.NO_PROBLEM);
         final List<Image> localLogImages = new ArrayList<>();
         in.readList(localLogImages, Image.class.getClassLoader());
         logImages = processLogImages(localLogImages);
-        cacheName = in.readString();
-        cacheGuid = in.readString();
-        cacheGeocode = in.readString();
+        cacheName = StringUtils.defaultString(in.readString());
+        cacheGuid = StringUtils.defaultString(in.readString());
+        cacheGeocode = StringUtils.defaultString(in.readString());
     }
 
     @Override
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeInt(id);
         dest.writeString(serviceLogId);
-        dest.writeSerializable(logType);
+        dest.writeInt(CommonUtils.enumToInt(logType));
         dest.writeString(author);
         dest.writeString(authorGuid);
         dest.writeString(log);
         dest.writeLong(date);
         dest.writeInt(found);
         dest.writeInt(friend ? 1 : 0);
-        dest.writeSerializable(reportProblem);
+        dest.writeInt(CommonUtils.enumToInt(reportProblem));
         dest.writeList(logImages);
         dest.writeString(cacheName);
         dest.writeString(cacheGuid);
@@ -176,58 +148,63 @@ public class LogEntry implements Parcelable {
         final List<Image> result = new ArrayList<>();
         for (Image img : logImages) {
             result.add(img.buildUpon()
-                    .setContextInformation(author + " - " + Formatter.formatShortDateVerbally(this.date) + " - " + logType.getL10n())
-                    .build());
+                .setContextInformation(author + " - " + Formatter.formatShortDateVerbally(this.date) + " - " + logType.getL10n())
+                .build());
         }
         return result;
     }
 
     /**
      * Helper class for building or manipulating {@link LogEntry} references.
-     *
      * Use {@link #buildUpon()} to obtain a builder representing an existing {@link LogEntry}.
      */
-    public static class Builder<T extends Builder<T>> {
-        // see {@link LogEntry} for explanation of these properties
-        protected int id = 0;
-        protected String serviceLogId = null;
-        @NonNull
-        protected LogType logType = LogType.UNKNOWN;
-        @NonNull protected String author = "";
-        @NonNull protected String authorGuid = "";
-        @NonNull protected String log = "";
-        protected long date = 0;
-        protected int found = -1;
-        protected boolean friend = false;
-        @NonNull protected ReportProblemType reportProblem = ReportProblemType.NO_PROBLEM;
-        @NonNull protected List<Image> logImages = Collections.emptyList();
-        @NonNull protected String cacheName = ""; // used for trackables
-        @NonNull protected String cacheGuid = ""; // used for trackables
-        @NonNull protected String cacheGeocode = ""; // used for trackables
+    public static final class Builder extends GenericBuilder<Builder> {
 
-
-        /**
-         * Build an immutable {@link LogEntry} Object.
-         */
         @NonNull
+        @Override
         public LogEntry build() {
             return new LogEntry(this);
         }
+    }
 
-        /**
-         * Set {@link LogEntry} id.
-         *
-         * @param id The log id
-         */
+    /** base class for builders also for inherited classes. See e.g. <a href="https://stackoverflow.com/questions/21086417/builder-pattern-and-inheritance">...</a> */
+    public abstract static class GenericBuilder<T extends GenericBuilder<T>> {
+        // see {@link LogEntry} for explanation of these properties
+        int id = 0;
+        String serviceLogId = null;
+        @NonNull LogType logType = LogType.UNKNOWN;
+        @NonNull String author = "";
+        @NonNull String authorGuid = "";
+        @NonNull String log = "";
+        long date = 0;
+        int found = -1;
+        boolean friend = false;
+        ReportProblemType reportProblem = ReportProblemType.NO_PROBLEM;
+        @NonNull final List<Image> logImages = new ArrayList<>();
+        String cacheName = ""; // used for trackables
+        String cacheGuid = ""; // used for trackables
+        String cacheGeocode = ""; // used for trackables
+
+
+        /** Build an immutable {@link LogEntry} Object. */
+        @NonNull
+        public abstract LogEntry build();
+
+        @SuppressWarnings("unchecked")
+        final T self() {
+            return (T) this;
+        }
+
+        /** Set {@link LogEntry} id. */
         @NonNull
         public T setId(final int id) {
             this.id = id;
-            return (T) this;
+            return self();
         }
 
         public T setServiceLogId(final String serviceLogId) {
             this.serviceLogId = serviceLogId;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -250,7 +227,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setLogType(@NonNull final LogType logType) {
             this.logType = logType;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -261,7 +238,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setAuthor(@NonNull final String author) {
             this.author = author;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -272,7 +249,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setAuthorGuid(@NonNull final String authorGuid) {
             this.authorGuid = authorGuid;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -283,7 +260,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setLog(@NonNull final String message) {
             this.log = HtmlUtils.removeExtraTags(message);
-            return (T) this;
+            return self();
         }
 
         /**
@@ -294,7 +271,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setDate(final long date) {
             this.date = date;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -305,7 +282,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setFound(final int found) {
             this.found = found;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -316,7 +293,7 @@ public class LogEntry implements Parcelable {
         @NonNull
         public T setFriend(final boolean friend) {
             this.friend = friend;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -325,9 +302,9 @@ public class LogEntry implements Parcelable {
          * @param cacheName The cache name
          */
         @NonNull
-        public T setCacheName(@NonNull final String cacheName) {
+        public T setCacheName(final String cacheName) {
             this.cacheName = cacheName;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -336,9 +313,9 @@ public class LogEntry implements Parcelable {
          * @param cacheGuid The cache guid
          */
         @NonNull
-        public T setCacheGuid(@NonNull final String cacheGuid) {
+        public T setCacheGuid(final String cacheGuid) {
             this.cacheGuid = cacheGuid;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -347,9 +324,9 @@ public class LogEntry implements Parcelable {
          * @param cacheGeocode The cache geocode
          */
         @NonNull
-        public T setCacheGeocode(@NonNull final String cacheGeocode) {
+        public T setCacheGeocode(final String cacheGeocode) {
             this.cacheGeocode = cacheGeocode;
-            return (T) this;
+            return self();
         }
 
         /**
@@ -358,9 +335,12 @@ public class LogEntry implements Parcelable {
          * @param logImages The {@code Image}s List
          */
         @NonNull
-        public T setLogImages(@NonNull final List<Image> logImages) {
-            this.logImages = logImages;
-            return (T) this;
+        public T setLogImages(final List<Image> logImages) {
+            this.logImages.clear();
+            if (logImages != null) {
+                this.logImages.addAll(logImages);
+            }
+            return self();
         }
 
         /**
@@ -370,19 +350,16 @@ public class LogEntry implements Parcelable {
          */
         public T addLogImage(final Image image) {
             if (image.equals(Image.NONE)) {
-                return (T) this;
+                return self();
             }
 
-            if (logImages.isEmpty()) {
-                logImages = new ArrayList<>();
-            }
             logImages.add(image.buildUpon().setCategory(Image.ImageCategory.LOG).build());
-            return (T) this;
+            return self();
         }
 
         public T setReportProblem(@NonNull final ReportProblemType reportProblem) {
             this.reportProblem = reportProblem;
-            return (T) this;
+            return self();
         }
     }
 
@@ -391,7 +368,7 @@ public class LogEntry implements Parcelable {
      *
      * @param builder builder to contruct from
      */
-    protected LogEntry(final Builder builder) {
+    protected LogEntry(final GenericBuilder<?> builder) {
         this.id = builder.id;
         this.serviceLogId = builder.serviceLogId;
         this.logType = builder.logType;
@@ -405,7 +382,7 @@ public class LogEntry implements Parcelable {
         this.cacheName = builder.cacheName;
         this.cacheGuid = builder.cacheGuid;
         this.cacheGeocode = builder.cacheGeocode;
-        this.reportProblem = builder.reportProblem;
+        this.reportProblem = builder.reportProblem == null ? ReportProblemType.NO_PROBLEM : builder.reportProblem;
     }
 
     /**
@@ -414,21 +391,30 @@ public class LogEntry implements Parcelable {
      * @return A new {@link LogEntry.Builder}
      */
     public Builder buildUpon() {
-        return new Builder()
-                .setId(id)
-                .setServiceLogId(serviceLogId)
-                .setLogType(logType)
-                .setAuthor(author)
-                .setAuthorGuid(authorGuid)
-                .setLog(log)
-                .setDate(date)
-                .setFound(found)
-                .setFriend(friend)
-                .setLogImages(new ArrayList<>(logImages))
-                .setCacheName(cacheName)
-                .setCacheGuid(cacheGuid)
-                .setCacheGeocode(cacheGeocode);
+        final Builder builder = new Builder();
+        fillBuilder(builder);
+        return builder;
     }
+
+    void fillBuilder(final GenericBuilder<?> builder) {
+        builder
+            .setId(id)
+            .setServiceLogId(serviceLogId)
+            .setLogType(logType)
+            .setAuthor(author)
+            .setAuthorGuid(authorGuid)
+            .setLog(log)
+            .setDate(date)
+            .setFound(found)
+            .setFriend(friend)
+            .setLogImages(logImages)
+            .setCacheName(cacheName)
+            .setCacheGuid(cacheGuid)
+            .setCacheGeocode(cacheGeocode);
+    }
+
+
+
 
     /**
      * Get the hashCode of a LogEntry Object.
