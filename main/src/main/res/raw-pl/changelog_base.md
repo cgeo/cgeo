@@ -36,3 +36,4 @@ Więcej zmian:
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
 - Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
 - Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym
+- Poprawka: Przywracanie kopii zapasowych bez prawidłowych informacji o dacie i czasie
