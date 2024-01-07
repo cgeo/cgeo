@@ -36,3 +36,4 @@ More changes:
 - Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
 - Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
 - New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info
