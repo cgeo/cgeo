@@ -36,3 +36,4 @@ More changes:
 - New: Tapping on downloader notification opens "pending downloads" view
 - Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
 - New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info
