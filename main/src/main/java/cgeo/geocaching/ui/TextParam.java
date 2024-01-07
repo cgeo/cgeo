@@ -166,7 +166,7 @@ public class TextParam {
         }
         final CharSequence tcs = getText(view.getContext());
         if (tcs != null) {
-            //view.setText(tcs);
+            view.setText(tcs);
         }
         adjust(view, forceNoMovement);
     }
@@ -253,7 +253,6 @@ public class TextParam {
             }
             imageDrawable.setBounds(0, 0, imageWidthInPixel, imageHeightInPixel);
             view.setCompoundDrawables(imageDrawable, null, null, null);
-            //view.setCompoundDrawablesWithIntrinsicBounds(imageDrawable, null, null, null);
 
             // set image tint (if given)
             if (imageTintColor != 1) {
