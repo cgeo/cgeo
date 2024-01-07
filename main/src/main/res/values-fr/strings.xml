@@ -1554,6 +1554,7 @@
     <string name="waypoint_coordinate_formats_plain">Texte</string>
     <string name="from_clipboard">Depuis le presse-papiers</string>
     <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_scanlisting">Scanner la liste</string>
