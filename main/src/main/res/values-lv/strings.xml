@@ -848,6 +848,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_coordinate_formats_plain">Vienkāršā</string>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
