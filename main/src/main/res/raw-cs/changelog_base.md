@@ -10,7 +10,7 @@ Sjednocená mapa v podstatě nabízí (téměř) všechny funkce, které mají n
 - Vyskakovací okno pro Google mapy
 - Skrytí nepotřebných zdrojů map
 - Graf nadmořské výšky pro trasy a stopy (klepněte na trasu)
-- Switch between lists directly from map (or by long-tapping on map icon)
+- Přepínání mezi seznamy přímo z mapy (nebo dlouhým klepnutím na ikonu mapy)
 
 Sjednocená mapa již dosáhla stavu beta verze, a proto jsme se rozhodli, že se stane naší výchozí mapou pro všechny uživatele používající noční sestavení.
 
@@ -25,15 +25,16 @@ Další změny:
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
 - Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
 - Změna: Zobrazení podrobností o kešce/trasovém bodu neblokujícím způsobem
-- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
+- Novinka: Volitelně uchovávat dočasné OAM soubory (stahování map, užitečné při použití souborů POI s jinými aplikacemi)
 
 ### Detaily kešky
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
 - Změna: Zvýšení maximální délky logu pro geocaching.com
 - Oprava: Nelze nahrát delší osobní poznámky na stránkách opencaching
+- New: Edit/delete own logs
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
 - Změna: Použití tapety jako pozadí již nevyžaduje oprávnění READ_EXTERNAL_STORAGE
 - Novinka: Rozložení dvou sloupců pro nastavení v režimu na šířku
-- Fix: Restore of backups without valid date/time info
+- Oprava: Obnovení záloh bez platné informace o datu/času
