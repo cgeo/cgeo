@@ -256,7 +256,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
         }
     }
 
-    protected void scanForCalculatedWaypints(@Nullable final Geocache cache) {
+    protected void scanForCalculatedWaypoints(@Nullable final Geocache cache) {
         if (cache != null) {
             final List<String> toScan = new ArrayList<>();
             final List<Pair<String, String>> existingCoords = new ArrayList<>();
