@@ -683,6 +683,7 @@
     <string name="waypoint_coordinate_formats_plain">Ang Malinaw</string>
     <string name="from_clipboard">Ang Mula sa clipboard</string>
     <string name="copy_to_clipboard">Ang Kopyahin sa clipboard</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
