@@ -1105,6 +1105,7 @@
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
