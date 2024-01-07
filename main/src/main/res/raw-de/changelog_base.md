@@ -31,6 +31,7 @@ Weitere Änderungen:
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
 - Änderung: Erhöhung der maximalen Loglänge für geocaching.com
 - Korrektur: Kann keine längeren persönlichen Notizen auf Opencaching-Seiten hochladen
+- New: Edit/delete own logs
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
