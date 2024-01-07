@@ -36,3 +36,4 @@ Weitere Änderungen:
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
 - Änderung: Verwendung des Hintergrundbildes benötigt nicht mehr die Berechtigung zum Lesen von Dateien
 - Neu: Zwei Spalten-Layout für Einstellungen im Querformat
+- Korrektur: Wiederherstellung von Backups ohne gültige Datum/Uhrzeit
