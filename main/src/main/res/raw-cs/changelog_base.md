@@ -36,3 +36,4 @@ Další změny:
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
 - Změna: Použití tapety jako pozadí již nevyžaduje oprávnění READ_EXTERNAL_STORAGE
 - Novinka: Rozložení dvou sloupců pro nastavení v režimu na šířku
+- Fix: Restore of backups without valid date/time info
