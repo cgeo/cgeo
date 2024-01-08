@@ -31,7 +31,7 @@ Další změny:
 - Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
 - Změna: Zvýšení maximální délky logu pro geocaching.com
 - Oprava: Nelze nahrát delší osobní poznámky na stránkách opencaching
-- New: Edit/delete own logs
+- Novinka: Upravit/smazat vlastní logy
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
