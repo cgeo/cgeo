@@ -355,13 +355,14 @@ public class RouteTrackUtils {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
             final TextView displayName = vt.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
-            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext()).setTitle(TextParam.text("Change name"))
+            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext())
+                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
                     .input(new SimpleDialog.InputOptions().setInitialValue(displayName.getText().toString()), newName -> {
-                if (StringUtils.isNotBlank(newName)) {
-                    tracks.setDisplayname(key, newName);
-                    displayName.setText(newName);
-                }
-            }));
+                        if (StringUtils.isNotBlank(newName)) {
+                            tracks.setDisplayname(key, newName);
+                            displayName.setText(newName);
+                        }
+                    }));
 
             final ImageButton vColor = vt.findViewById(R.id.item_color);
             ColorPickerUI.setViewColor(vColor, tracks.getColor(key), false);

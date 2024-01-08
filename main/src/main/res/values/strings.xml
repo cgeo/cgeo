@@ -2658,6 +2658,7 @@
     <string name="routes_tracks_dialog_title">Routes / tracks options</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Select color</string>
+    <string name="routes_tracks_change_name">Change name</string>
     <string name="center">Center</string>
     <string name="unload_route_track">Unload route/track</string>
     <string name="route">Route</string>
