@@ -208,7 +208,7 @@
     <string name="log_image_info_scaled">skaliert</string>
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
-    <string name="log_delete_confirm">Möchten Sie das Log vom Typ %1%s des Autors %2%s mit dem Logdatum %3%s wirklich löschen?</string>
+    <string name="log_delete_confirm">Möchten Sie das Log vom Typ \'%1$s\' des Autors \'%2$s\' mit dem Logdatum \'%3$s\' wirklich löschen?</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -1607,6 +1607,16 @@
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Keine Projektion</string>
+    <string name="projection_type_bearing">Peilung</string>
+    <string name="projection_type_bearing_info">Peilung mit %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Richtung in °</string>
+    <string name="projection_type_bearing_hint_distance">Entfernung</string>
+    <string name="projection_type_offset">Verschiebung</string>
+    <string name="projection_type_offset_info">Verschiebung Breite %1$s mm, Länge %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Breitengrad Verschiebung in Mikro-Minuten</string>
+    <string name="projection_type_offset_hint_longitude">Längengrad Verschiebung in Mikro-Minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
     <string name="variables_scanlisting">Scanne Listing</string>

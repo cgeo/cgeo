@@ -1582,6 +1582,7 @@
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>

@@ -878,6 +878,7 @@
     <string name="waypoint_coordinate_formats_plain">Простий</string>
     <string name="from_clipboard">З буферу обміну</string>
     <string name="copy_to_clipboard">Скопіювати в буфер обміну</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

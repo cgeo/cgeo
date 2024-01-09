@@ -654,6 +654,7 @@
     <string name="waypoint_coordinate_formats_plain">Yano</string>
     <string name="from_clipboard">Gikan sa clipboard</string>
     <string name="copy_to_clipboard">Gikopya padung sa clipboard</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

@@ -1320,6 +1320,7 @@
     <string name="waypoint_coordinate_formats_plain">Sencillo</string>
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_scanlisting">Escanear listado</string>

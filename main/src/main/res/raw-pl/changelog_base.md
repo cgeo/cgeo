@@ -31,8 +31,10 @@ Więcej zmian:
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
 - Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
 - Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
+- New: Edit/delete own logs
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
 - Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
 - Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym
+- Poprawka: Przywracanie kopii zapasowych bez prawidłowych informacji o dacie i czasie

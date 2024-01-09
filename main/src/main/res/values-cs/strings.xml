@@ -147,6 +147,12 @@
     <string name="log_save">Uložit offline</string>
     <string name="log_saving">Odesílání logu…</string>
     <string name="log_posting_log">Odesílání logu…</string>
+    <string name="log_posting_problemreport">Odesílání zprávy o problémech s logem…</string>
+    <string name="log_posting_deletelog">Smazat log…</string>
+    <string name="log_posting_image_create">Obrázek %1$s/%2$s: odeslání dat…</string>
+    <string name="log_posting_image_edit">Obrázek %1$s/%2$s: změna dat…</string>
+    <string name="log_posting_image_delete">Mazání obrázku %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Uložit nový stav logu…</string>
     <string name="log_posting_vote">Přidává se hlas kešce…</string>
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
@@ -202,6 +208,7 @@
     <string name="log_image_info_scaled">zmenšen</string>
     <string name="log_image_info_notscaled">nezmenšen</string>
     <string name="log_image_titleprefix">Obrázek</string>
+    <string name="log_delete_confirm">Opravdu chcete smazat log typu \'%1$s\' od autora \'%2$s\' s datem logu \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
@@ -704,6 +711,7 @@
     <string name="about_changelog_full">Seznam všech změn</string>
     <string name="about_nutshellmanual">Online návod</string>
     <string name="about_contributors_carnerodetails">jako otec c:geo</string>
+    <string name="about_contributors_recent">Přispěvatelé (posledních 12 měsíců)</string>
     <string name="about_contributors_specialthanks">Zvláštní poděkování</string>
     <string name="about_contributors_specialthanksdetails">- všem našim překladatelům na [Crowdin.net](https://crowdin.net/project/cgeo)!\n- všem ohlašovatelům problémů\n- a všem ostatním podporovatelům.\n</string>
     <string name="about_contributors_other">Další přispěvatelé</string>
@@ -1629,6 +1637,16 @@
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Bez projekce</string>
+    <string name="projection_type_bearing">Azimut</string>
+    <string name="projection_type_bearing_info">Azimut %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Azimut v °</string>
+    <string name="projection_type_bearing_hint_distance">Vzdálenost</string>
+    <string name="projection_type_offset">Posun</string>
+    <string name="projection_type_offset_info">Posun šířka %1$s mm, délka %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Posun zeměpisné šířky v mikrominutách</string>
+    <string name="projection_type_offset_hint_longitude">Posun zeměpisné délky v mikrominutách</string>
     <!-- Variables -->
     <string name="variables_titletext">Tuto stránku můžete použít k zapisování poznámek a výpočtů nutných pro tuto kešku.</string>
     <string name="variables_scanlisting">Prohledat listing</string>
@@ -2457,6 +2475,8 @@
     <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
     <string name="downloadmap_filename">Stahování %s</string>
+    <string name="downloadmap_keep_temporary_files">Zachovat dočasné soubory</string>
+    <string name="downloadmap_keep_temporary_files_summary">Některé zdroje stahování podporují další soubory, které c:geo nepoužívá. Tyto dodatečné soubory ponechte v systémové složce pro stahování, místo abyste je smazali</string>
     <string name="downloadmanager_not_available">Soubor nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
     <string name="download_none_selected">Nebyly vybrány žádné soubory ke stažení</string>

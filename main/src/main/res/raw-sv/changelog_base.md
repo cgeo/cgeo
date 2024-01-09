@@ -31,8 +31,10 @@ More changes:
 - Change: Make "Toggle talking" an actual toggle
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
 
 ### Allmänt
 - New: Tapping on downloader notification opens "pending downloads" view
 - Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
 - New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info

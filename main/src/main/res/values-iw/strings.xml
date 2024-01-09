@@ -415,6 +415,7 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">נקודות ציון של המטמון עודכנו באתר ל:%s.</string>
     <string name="waypointcalc_notes_prompt">Enter notes here&#8230;</string>
     <string name="waypoint_coordinate_formats_plain">פשוט</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

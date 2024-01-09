@@ -1315,6 +1315,7 @@
     <string name="waypoint_coordinate_formats_plain">Açık koordinat</string>
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
     <string name="variables_deleteall">Tümünü Sil</string>

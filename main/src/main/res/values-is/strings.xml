@@ -492,6 +492,7 @@
     <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
     <string name="waypoint_done">Lokið</string>
     <string name="waypoint_copy_of">Afrit af</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

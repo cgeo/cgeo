@@ -1097,6 +1097,7 @@
     <string name="waypointcalc_notes_prompt">在這輸入筆記</string>
     <string name="from_clipboard">從剪貼簿</string>
     <string name="copy_to_clipboard">複製到剪貼簿</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

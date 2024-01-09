@@ -151,7 +151,7 @@
     <string name="log_posting_deletelog">Usuń dziennik…</string>
     <string name="log_posting_image_create">Obraz %1$s/%2$s: wysyłanie danych…</string>
     <string name="log_posting_image_edit">Obraz %1$s/%2$s: zmiana danych…</string>
-    <string name="log_posting_image_delete">Usuwanie obrazu %1$s/%2$s</string>
+    <string name="log_posting_image_delete">Usuwanie obrazu %1$s/%2$s…</string>
     <string name="log_posting_save_internal">Zapisz nowy stan dziennika…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrytki…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
@@ -208,7 +208,7 @@
     <string name="log_image_info_scaled">skalowane</string>
     <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
-    <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu %1%s autorstwa %2%s z datą logowania %3%s?</string>
+    <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -1637,6 +1637,16 @@
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Brak projekcji</string>
+    <string name="projection_type_bearing">Kierunek</string>
+    <string name="projection_type_bearing_info">Azymut %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Kierunek w stopniach</string>
+    <string name="projection_type_bearing_hint_distance">Odległość</string>
+    <string name="projection_type_offset">Przesunięcie</string>
+    <string name="projection_type_offset_info">Przesunięcie szer. %1$s mm, dł. %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w mikrominutach</string>
+    <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
     <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
     <string name="variables_scanlisting">Skanuj wpis</string>

@@ -151,7 +151,7 @@
     <string name="log_posting_deletelog">Log wissen…</string>
     <string name="log_posting_image_create">Afbeelding %1$s/%2$s: gegevens posten…</string>
     <string name="log_posting_image_edit">Afbeelding %1$s/%2$s: gegevens wijzigen…</string>
-    <string name="log_posting_image_delete">Afbeelding %1$s/%2$s verwijderen</string>
+    <string name="log_posting_image_delete">Afbeelding %1$s/%2$s verwijderen…</string>
     <string name="log_posting_save_internal">Opslaan nieuwe log status…</string>
     <string name="log_posting_vote">Cache stem posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
@@ -208,7 +208,7 @@
     <string name="log_image_info_scaled">geschaald</string>
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
-    <string name="log_delete_confirm">Weet je zeker dat je het logboek %1%s van auteur %2%s met logdatum %3%s wilt verwijderen?</string>
+    <string name="log_delete_confirm">Weet u zeker dat u het log \'%1$s\' door auteur \'%2$s\' met logdatum \'%3$s \' wilt verwijderen?</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
@@ -1607,6 +1607,16 @@
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
     <string name="copy_to_clipboard">Kopieer naar klembord</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Geen projectie</string>
+    <string name="projection_type_bearing">Richting</string>
+    <string name="projection_type_bearing_info">Richting %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Richting in °</string>
+    <string name="projection_type_bearing_hint_distance">Afstand</string>
+    <string name="projection_type_offset">Offset</string>
+    <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Breedtegraad Offset in Micro-minuten</string>
+    <string name="projection_type_offset_hint_longitude">Lengtegraad Offset in Micro-minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
     <string name="variables_scanlisting">Lijst scannen</string>

@@ -31,8 +31,10 @@ Altre modifiche:
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore
 - Cambio: aumento della lunghezza massima del log per geocaching.com
 - Corretto: non è possibile caricare note personali più lunghe sui siti opencaching
+- New: Edit/delete own logs
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
 - Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
 - Nuovo: layout a due colonne per le impostazioni in modalità orizzontale
+- Fix: Restore of backups without valid date/time info

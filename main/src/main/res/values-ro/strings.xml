@@ -738,6 +738,7 @@
     <string name="waypoint_coordinate_formats_plain">Simplu</string>
     <string name="from_clipboard">Din memoria temporară</string>
     <string name="copy_to_clipboard">Copiază în memoria temporară</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

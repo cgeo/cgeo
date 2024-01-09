@@ -31,8 +31,10 @@ Weitere Änderungen:
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
 - Änderung: Erhöhung der maximalen Loglänge für geocaching.com
 - Korrektur: Kann keine längeren persönlichen Notizen auf Opencaching-Seiten hochladen
+- New: Edit/delete own logs
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
 - Änderung: Verwendung des Hintergrundbildes benötigt nicht mehr die Berechtigung zum Lesen von Dateien
 - Neu: Zwei Spalten-Layout für Einstellungen im Querformat
+- Korrektur: Wiederherstellung von Backups ohne gültige Datum/Uhrzeit
