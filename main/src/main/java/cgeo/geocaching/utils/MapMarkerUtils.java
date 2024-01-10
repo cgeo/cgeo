@@ -16,6 +16,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
@@ -40,7 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -88,9 +88,9 @@ public final class MapMarkerUtils {
     /**
      * Obtain the drawable for a given cache.
      * Return a drawable from the cache, if a similar drawable was already generated.
-     *
+     * <br>
      * cacheListType should be Null if the requesting activity is Map.
-     *
+     * <br>
      * @param res           the resources to use
      * @param cache         the cache to build the drawable for
      * @param cacheListType the current CacheListType or Null
@@ -150,7 +150,7 @@ public final class MapMarkerUtils {
 
         // marker shape
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null), getCacheScalingFactor(applyScaling));
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight(), true);
         if (showPin(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getCacheScalingFactor(applyScaling)));
         }
@@ -162,7 +162,7 @@ public final class MapMarkerUtils {
         // Main icon
         if (showBigSmileys(cacheListType) && !mainIconIsTypeIcon(cache, cacheListType)) {
             // log icon in bigSmiley mode
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, getCacheScalingFactor(applyScaling), true));
         } else if (cache.getAssignedEmoji() != 0) {
             // custom icon
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, useEmoji, "mainIconForCache", applyScaling), Gravity.CENTER));
@@ -171,7 +171,7 @@ public final class MapMarkerUtils {
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
             // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-            final Drawable backgroundTemp = getMutatedDrawable(res, cache.getMapMarkerBackgroundId());
+            final Drawable backgroundTemp = ViewUtils.getDrawable(cache.getMapMarkerBackgroundId(), true);
             DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
             insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, getCacheScalingFactor(applyScaling)), Gravity.CENTER));
             // main icon (type icon / custom cache icon)
@@ -283,7 +283,7 @@ public final class MapMarkerUtils {
         final Drawable marker = new ScalableDrawable(ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null), getWaypointScalingFactor(applyScaling));
         final int size = marker.getIntrinsicWidth();
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, size, size);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, size, size, true);
         if (forMap) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin, getWaypointScalingFactor(applyScaling)));
         }
@@ -302,7 +302,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
-            final Drawable waypointTypeIcon = getMutatedDrawable(res, waypointType.markerId);
+            final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
             if (cache != null && (cache.isDisabled() || cache.isArchived())) {
                 DrawableCompat.setTint(waypointTypeIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
@@ -330,7 +330,6 @@ public final class MapMarkerUtils {
             addListMarkers(res, insetsBuilder, getAssignedMarkers(cache), false, applyScaling);
         }
         final LayerDrawable ld = buildLayerDrawable(insetsBuilder, 8, 8);
-        ld.mutate();
         if ((waypoint.isVisited() || (cache != null && cache.isFound())) && Settings.getVisitedWaypointsSemiTransparent()) {
             ld.setAlpha(144);
         }
@@ -340,7 +339,7 @@ public final class MapMarkerUtils {
     /**
      * Obtain the drawable for a given cache.
      * Return a drawable from the cache, if a similar drawable was already generated.
-     *
+     * <br>
      * cacheListType should be Null if the requesting activity is Map.
      *
      * @param res   the resources to use
@@ -426,10 +425,10 @@ public final class MapMarkerUtils {
 
         final Drawable dotMarker = ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null);
         // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-        final Drawable dotBackground = getMutatedDrawable(res, cache.getMapDotMarkerBackgroundId());
+        final Drawable dotBackground = ViewUtils.getDrawable(cache.getMapDotMarkerBackgroundId(), true);
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         if (dotIcon != -1) {
@@ -484,25 +483,23 @@ public final class MapMarkerUtils {
      */
     @NonNull
     private static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable dotMarker = getMutatedDrawable(res, waypoint.getMapDotMarkerId());
+        final Drawable dotMarker = ViewUtils.getDrawable(waypoint.getMapDotMarkerId(), true);
         DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointOutline, null));
-        final Drawable dotBackground = getMutatedDrawable(res, waypoint.getMapDotMarkerBackgroundId());
+        final Drawable dotBackground = ViewUtils.getDrawable(waypoint.getMapDotMarkerBackgroundId(), true);
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
-        final Drawable dotIcon = getMutatedDrawable(res, waypoint.getWaypointType().dotMarkerId);
+        final Drawable dotIcon = ViewUtils.getDrawable(waypoint.getWaypointType().dotMarkerId, true);
 
         // Tint disabled waypoints
         final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null && (cache.isDisabled() || cache.isArchived())) {
-                // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
-                dotIcon.mutate();
                 DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
         }
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
@@ -552,7 +549,7 @@ public final class MapMarkerUtils {
      * @return Layered Drawable
      */
     private static Drawable createWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
-        final Drawable waypointMarker = getMutatedDrawable(res, waypoint.markerId);
+        final Drawable waypointMarker = ViewUtils.getDrawable(waypoint.markerId, true);
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{waypointMarker});
 
         // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17,25dp). Drawable must be square!
@@ -714,8 +711,8 @@ public final class MapMarkerUtils {
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
     private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final Drawable background = new ScalableDrawable(DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_empty, null)), getCacheScalingFactor(applyScaling));
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getCacheScalingFactor(applyScaling));
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
@@ -801,8 +798,8 @@ public final class MapMarkerUtils {
     }
 
     private static Drawable getEmojiMarker(final Resources res, final int emoji, final boolean applyScaling) {
-        final Drawable markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_empty, null), getWaypointScalingFactor(applyScaling));
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
+        final Drawable markerBg = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getWaypointScalingFactor(applyScaling));
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight(), true);
         markerBuilder.withInset(new InsetBuilder(markerBg));
         markerBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, emoji, "iconMarkerForWaypoint", applyScaling)));
         return buildLayerDrawable(markerBuilder, 2, 2);
@@ -860,28 +857,25 @@ public final class MapMarkerUtils {
         }
         final Drawable markerBg;
         if (withBorder) {
-            markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_empty, null), scalingFactor);
+            markerBg = ViewUtils.getDrawable(R.drawable.marker_empty, scalingFactor, true);
         } else {
-            markerBg = new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.marker_background, null), scalingFactor);
+            markerBg = ViewUtils.getDrawable(R.drawable.marker_background, scalingFactor, true);
         }
-        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight());
+        final InsetsBuilder markerBuilder = new InsetsBuilder(res, markerBg.getIntrinsicWidth(), markerBg.getIntrinsicHeight(), true);
         markerBuilder.withInset(new InsetBuilder(markerBg));
         // cache type background color
         final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
         final Drawable backgroundTemp;
         // special case for drawing the userdefined type icon in filter dialog
         if (!"ZZ1".equals(cache.getGeocode())) {
-            backgroundTemp = getMutatedDrawable(res, R.drawable.marker_background);
+            backgroundTemp = ViewUtils.getDrawable(R.drawable.marker_background, true);
         } else {
-            backgroundTemp = getMutatedDrawable(res, R.drawable.dot_marker_other);
+            backgroundTemp = ViewUtils.getDrawable(R.drawable.dot_marker_other, true);
         }
         DrawableCompat.setTint(backgroundTemp, ResourcesCompat.getColor(res, tintColor, null));
         markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, scalingFactor), Gravity.CENTER));
         markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
-
-    private static Drawable getMutatedDrawable(final Resources res, final int drwId) {
-        return DrawableCompat.wrap(Objects.requireNonNull(ResourcesCompat.getDrawable(res, drwId, null))).mutate();
-    }
+    
 }

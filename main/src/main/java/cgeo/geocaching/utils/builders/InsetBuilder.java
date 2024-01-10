@@ -1,7 +1,7 @@
 package cgeo.geocaching.utils.builders;
 
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.DisplayUtils;
-import cgeo.geocaching.utils.ScalableDrawable;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 
 import android.content.res.Resources;
@@ -9,73 +9,62 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.Gravity;
 
-import androidx.core.content.res.ResourcesCompat;
-
 import java.util.List;
 
 public class InsetBuilder {
-    private static final int[] FULLSIZE = {0, 0, 0, 0};
 
-    private Drawable drawable = null;
-    private int id;
-    private int pos;
+    private final Drawable drawable;
+    private final int drawableId;
+    private final int gravity;
     private boolean doubleSize = false;
     private float scalingFactor = 1.0f;
 
-    public InsetBuilder(final int id, final int pos) {
-        this.id = id;
-        this.pos = pos;
+
+    public InsetBuilder(final int drawableId, final int gravity) {
+        this(drawableId, gravity, 1.0f);
     }
 
-    public InsetBuilder(final int id, final int pos, final float scalingFactor) {
-        this(id, pos);
-        this.scalingFactor = scalingFactor;
+    public InsetBuilder(final int drawableId, final int gravity, final float scalingFactor) {
+        this(drawableId, gravity, scalingFactor, false);
     }
 
-    public InsetBuilder(final int id) {
-        this.id = id;
-    }
-
-    public InsetBuilder(final int id, final float scalingFactor) {
-        this(id);
-        this.scalingFactor = scalingFactor;
+    public InsetBuilder(final int drawableId, final float scalingFactor) {
+        this(drawableId, 0, scalingFactor);
     }
 
     public InsetBuilder(final Drawable drawable) {
-        this.drawable = drawable;
+        this(drawable, 0);
     }
 
-    public InsetBuilder(final Drawable drawable, final int pos) {
+    public InsetBuilder(final Drawable drawable, final int gravity) {
         this.drawable = drawable;
-        this.pos = pos;
+        this.drawableId = 0;
+        this.gravity = gravity;
     }
 
-    public InsetBuilder(final Drawable drawable, final int pos, final float scalingFactor) {
-        this.drawable = drawable;
-        this.pos = pos;
-        this.scalingFactor = scalingFactor;
-    }
-
-    public InsetBuilder(final int id, final int pos, final boolean doubleSize, final float scalingFactor) {
-        this(id, pos);
+    public InsetBuilder(final int drawableId, final int gravity, final float scalingFactor, final boolean doubleSize) {
+        this.drawableId = drawableId;
+        this.drawable = null;
+        this.gravity = gravity;
         this.doubleSize = doubleSize;
         this.scalingFactor = scalingFactor;
     }
 
-    public int[] build(final Resources res, final List<Drawable> layers, final int width, final int height) {
-        if (drawable == null) {
-            drawable = scalingFactor == 1.0f ? ResourcesCompat.getDrawable(res, id, null) : new ScalableDrawable(ResourcesCompat.getDrawable(res, id, null), scalingFactor);
+    public int[] build(final Resources res, final List<Drawable> layers, final int width, final int height, final boolean mutate) {
+        Drawable drawableToUse = this.drawable;
+        if (drawableToUse == null) {
+            drawableToUse = ViewUtils.getDrawable(drawableId, scalingFactor, mutate);
         }
-        layers.add(drawable);
+        layers.add(drawableToUse);
 
         if (Build.VERSION.SDK_INT > 22) {
             // solution for API 23+, returns parameters for setLayerGravity and a flag for doubleSize
-            return new int[]{doubleSize ? DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, scalingFactor) : 0, pos == 0 ? Gravity.CENTER : pos};
+            return new int[]{doubleSize ? DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, scalingFactor) : 0, gravity == 0 ? Gravity.CENTER : gravity};
         } else {
             // solution for API < 23, returns parameters for LayerDrawable.setLayerInset
             final int[] insetPadding = {0, 0, 0, 0}; // left, top, right, bottom padding for inset
-            int iWidth = drawable.getIntrinsicWidth();
-            int iHeight = drawable.getIntrinsicHeight();
+            int iWidth = drawableToUse.getIntrinsicWidth();
+            int iHeight = drawableToUse.getIntrinsicHeight();
 
             if (doubleSize) {
                 iWidth *= 2;
@@ -87,9 +76,9 @@ public class InsetBuilder {
             // and TOP/BOTTOM contain CENTER_VERTICAL as well
 
             // horizontal
-            if ((pos & 2) > 0) { // LEFT
+            if ((gravity & 2) > 0) { // LEFT
                 insetPadding[2] = width - iWidth;
-            } else if ((pos & 4) > 0) { // RIGHT
+            } else if ((gravity & 4) > 0) { // RIGHT
                 insetPadding[0] = width - iWidth;
                 insetPadding[2] = width - iWidth - insetPadding[0];
             } else { // CENTER
@@ -98,9 +87,9 @@ public class InsetBuilder {
             }
 
             // vertical
-            if ((pos & 32) > 0) { // TOP
+            if ((gravity & 32) > 0) { // TOP
                 insetPadding[3] = height - iHeight;
-            } else if ((pos & 64) > 0) { // BOTTOM
+            } else if ((gravity & 64) > 0) { // BOTTOM
                 insetPadding[1] = Math.max(height - iHeight, 0);
                 insetPadding[3] = height - iHeight - insetPadding[1];
             } else { // CENTER
