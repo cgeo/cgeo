@@ -2,6 +2,7 @@ package cgeo.geocaching.utils.formulas;
 
 import android.util.Pair;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -125,14 +126,165 @@ public class FormulaUtilsTest {
         assertScanFormula("N 48° (F-H)/2-1.((J-H)*I-2*A+E+9) E 008° (A/G+12).(A+D)*B/2-6*C+49", "(F-H)/2-1", "((J-H)*I-2*A+E+9)", "(A/G+12)", "(A+D)*B/2-6*C+49");
     }
 
+    @Test(timeout = 1000)
+    public void scanForFormulasGCAHQ78() {
+        //taken from GCAHQ78, preprocessed by c:geo, shortened for test purposes.
+        // Test case is related to issue #15173. The following text leads to ANR / endless scan when processed by "scanFormula"
+        final String text =
+            "D+C*E\n" +
+            "* * * * * * * * * * " +
+                "* *        " +
+                "             " +
+                "* * * * * * * * * " +
+                "* * * * * * \n" +
+            "“on the Internet” (C, D, E, F) and others “on site” (A, B). …\n" +
+            "N 28° A-E+F.A*(D+E)-F*(E+C). / W016° A-B.D+C*E";
+
+        assertScanFormula(text, "A*(D+E)-F*(E+C)", "A-B", "A-E+F", "D+C*E");
+    }
+
+    @Test(timeout = 1000)
+    public void scanForFormulasGCAHQ78FullText() {
+        //taken from GCAHQ78, preprocessed by c:geo. Related to issue #15173
+        final String text = "„Da musst du durch!“\n" +
+            "\n" +
+            "Ein kleiner Rätselcache, der an einen wohl selten besuchten Ort lockt!\n" +
+            "\n" +
+            "Trau dich!!! Wenn nicht gerade längere Regenzeit ist oder ein Wolkenbruch niedergeht, ist der Cache sicher und recht bequem zu erreichen!\n" +
+            "\n" +
+            "Einige der Fragen sollten teilweise zuhause „im Internet“ (C, D, E, F)\n" +
+            "und andere „vor Ort“ (A, B) einfach zu beantworten sein. …\n" +
+            "\n" +
+            "Dann ist nur noch eine nervige Rechnerei nötig!    :{\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "A= Bestimme den Buchstabenwortwert (BWW: A=1,B=2, C=3, …) der ganz nah verlaufenden Fernverkehrsstraße.\n" +
+            "\n" +
+            "B= Wie viele „Spielgeräte“ hat jeder Spieler für die Freizeitsportart, die auf der gegenüberliegenden Straßenseite von den Park-/Startkoordinaten gespielt wird, wenn jede Mannschaft aus 1 oder 2 Spielern besteht?\n" +
+            "\n" +
+            "C= BWW des 1. Buchstaben des Landes, in dem der Cache liegt – in Landessprache!\n" +
+            "\n" +
+            "D= BWW des 1. Buchstaben des Landes, in dem der Cache liegt – in deutsch oder englisch!\n" +
+            "\n" +
+            "E= BWW des 1. Buchstaben der Insel, auf der der Cache liegt.\n" +
+            "\n" +
+            "F= BWW des 1. Buchstaben der Gemeinde, in dem das Fragezeichen liegt.\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "Parken/Start:\n" +
+            "\n" +
+            "N28° 14.[867-(C+D+E+F)] / W16° 24.[C*D-F]\n" +
+            " \n" +
+            "\n" +
+            "FINAL (Lösungsformel):\n" +
+            "\n" +
+            "N 28° A-E+F.A*(D+E)-F*(E+C). / W016° A-B.D+C*E\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "* * * * * * * * * * * * * * *                     * * * * * * * * * * * * * * *                     * * * * * * * * * * * * * * * \n" +
+            "\n" +
+            "Espanol:\n" +
+            "\n" +
+            "\"¡Tienes que pasar por esto!\"\n" +
+            "\n" +
+            "¡Un pequeño caché de rompecabezas que te atrae a un lugar que probablemente rara vez se visita!\n" +
+            "\n" +
+            "¡¡¡Te atreves!!! A menos que haya una larga temporada de lluvias o un chaparrón, ¡el caché es seguro y de fácil acceso!\n" +
+            "\n" +
+            "Algunas de las preguntas deberían ser fáciles de responder en casa\n" +
+            "“en Internet” (C, D, E, F) y otras “in situ” (A, B). …\n" +
+            "\n" +
+            "¡Entonces todo lo que necesitas son algunos cálculos molestos!   :{\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "A= Determine el valor de la palabra letra (BWW: A=1, B=2, C=3, …) de la carretera que pasa muy cerca.\n" +
+            "\n" +
+            "B= ¿Cuántos \"equipos de juego\" tiene cada jugador para el deporte recreativo que se juega frente al parque/coordenadas de inicio si cada equipo consta de 1 o 2 jugadores?\n" +
+            "\n" +
+            "C= BWW de la primera letra del país en el que se encuentra el caché - ¡en el idioma nacional!\n" +
+            "\n" +
+            "D= BWW de la primera letra del país en el que se encuentra el caché - ¡en alemán o inglés!\n" +
+            "\n" +
+            "E= [BWW de la primera letra de la isla donde se encuentra el caché.\n" +
+            "\n" +
+            "F= BWW de la primera letra del municipio en el que se encuentra el signo de interrogación\n" +
+            "\n" +
+            "Estacionar/Iniciar:\n" +
+            "\n" +
+            "N28° 14.[867-(C+D+E+F)] / W16° 24.[C*D-F]\n" +
+            "\n" +
+            "FINAL (Fórmula de solución):\n" +
+            "\n" +
+            "N 28° A-E+F.A*(D+E)-F*(E+C). / W016° A-B.D+C*E\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "* * * * * * * * * * * * * * *                     * * * * * * * * * * * * * * *                     * * * * * * * * * * * * * * * \n" +
+            "\n" +
+            "English:\n" +
+            "\n" +
+            "“You have to go through it!”\n" +
+            "\n" +
+            "A small puzzle cache that lures you to a place that is probably rarely visited!\n" +
+            "\n" +
+            "You dare!!! Unless there is a long rainy season or a cloudburst, the cache is safe and quite easy to reach!\n" +
+            "\n" +
+            "Some of the questions should be easy to answer at home\n" +
+            "“on the Internet” (C, D, E, F) and others “on site” (A, B). …\n" +
+            "\n" +
+            "Then all you need is some annoying calculations!   :{\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "A= Determine the letter word value (BWW: A=1, B=2, C=3, …) of the highway that runs very close.\n" +
+            "\n" +
+            "B= How many \"play equipment\" does each player have for the recreational sport played across the street from the park/start coordinates if each team consists of 1 or 2 players\n" +
+            "\n" +
+            "C= BWW of the 1st letter of the country in which the cache is located - in the national language!\n" +
+            "\n" +
+            "D= BWW of the 1st letter of the country in which the cache is located - in German or English!\n" +
+            "\n" +
+            "E= BWW of the 1st letter of the island where the cache is located.\n" +
+            "\n" +
+            "F= BWW of the 1st letter of the municipality in which the question mark is located.\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "Park/Start:\n" +
+            "\n" +
+            "N28° 14.[867-(C+D+E+F)] / W16° 24.[C*D-F]\n" +
+            "\n" +
+            "FINAL (Solution formula):\n" +
+            "\n" +
+            "N 28° A-E+F.A*(D+E)-F*(E+C). / W016° A-B.D+C*E";
+
+        //this test is not so much about found content but about timing.
+        //nevertheless check the most important results
+        assertScanFormula(text, false, "A*(D+E)-F*(E+C)", "A-B", "A-E+F", "C*D-F", "D+C*E");
+    }
+
+
     private void assertScanFormula(final String textToScan, final String... expectedFinds) {
+        assertScanFormula(textToScan, true, expectedFinds);
+    }
+    private void assertScanFormula(final String textToScan, final boolean checkExact, final String... expectedFinds) {
         final List<String> result = FormulaUtils.scanForFormulas(Collections.singleton(textToScan), null);
         if (expectedFinds == null || expectedFinds.length == 0) {
             assertThat(result).as("Scan: '" + textToScan + "'").isEmpty();
+        } else if (checkExact) {
+            assertThat(result).as("Scan: '" + textToScan).containsExactlyInAnyOrder(expectedFinds);
         } else {
-            for (int i = 0; i < expectedFinds.length; i++) {
-                assertThat(result).as("Scan: '" + textToScan).containsExactlyInAnyOrder(expectedFinds);
-            }
+            assertThat(result).as("Scan: '" + textToScan).containsAll(Arrays.asList(expectedFinds));
         }
     }
 
