@@ -6,6 +6,7 @@ import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.geoitem.GeoGroup;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -23,6 +24,7 @@ import javax.annotation.Nullable;
 public class PositionHistoryLayer {
 
     private final GeoItemLayer<String> layer;
+    private boolean pathStored = true;
 
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
@@ -54,11 +56,17 @@ public class PositionHistoryLayer {
     }
 
     private void drawHistory(@Nullable final Location currentLoc) {
+        // only draw if position history is currently enabled. Remove possible old history line if not.
+        if (!Settings.isMapTrail()) {
+            removePath();
+            return;
+        }
+
         final PositionHistory history = viewModel.positionHistory.getValue();
 
-        // only draw if position history is currently enabled. Remove possible old history line if not.
+        // only draw if position history is non-empty. Remove possible old history line if not.
         if (history == null || history.getHistory().isEmpty()) {
-            layer.remove(KEY_HISTORY_LINE);
+            removePath();
             return;
         }
 
@@ -82,6 +90,14 @@ public class PositionHistoryLayer {
         geoGroup.addItems(GeoPrimitive.createPolyline(segmentPoints, lineStyle).buildUpon().setZLevel(LayerHelper.ZINDEX_HISTORY).build());
 
         layer.put(KEY_HISTORY_LINE, geoGroup.build());
+        pathStored = true;
+    }
+
+    private void removePath() {
+        if (pathStored) {
+            layer.remove(KEY_HISTORY_LINE);
+            pathStored = false;
+        }
     }
 
 }

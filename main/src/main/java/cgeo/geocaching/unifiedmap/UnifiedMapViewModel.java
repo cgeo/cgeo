@@ -62,7 +62,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     /**
      * LiveData wrapping the PositionHistory object or null if PositionHistory should be hidden
      */
-    public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(Settings.isMapTrail() ? new PositionHistory() : null);
+    public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(new PositionHistory());
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
     public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
     public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
