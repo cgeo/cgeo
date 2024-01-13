@@ -54,6 +54,8 @@ public class SimpleDialog {
 
     private Runnable neutralAction;
 
+    private AlertDialog alertDialog;
+
     /** Define common button text sets */
     public enum ButtonTextSet {
         OK_CANCEL(TextParam.id(android.R.string.ok), TextParam.id(android.R.string.cancel), null),
@@ -187,6 +189,10 @@ public class SimpleDialog {
 
     public Context getContext() {
         return this.context;
+    }
+
+    public AlertDialog getDialog() {
+        return alertDialog;
     }
 
     public SimpleDialog setTitle(final TextParam title) {
@@ -360,7 +366,7 @@ public class SimpleDialog {
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_POSITIVE, positiveButton, buttonListener);
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_NEGATIVE, negativeButton, buttonListener);
         finalizeButtonCommons(dialog, DialogInterface.BUTTON_NEUTRAL, neutralButton, buttonListener);
-
+        this.alertDialog = dialog;
     }
 
     private void finalizeButtonCommons(final AlertDialog dialog, final int which, final TextParam buttonText, final Func1<Integer, Boolean> specialButtonListener) {

@@ -707,6 +707,14 @@ public class Settings {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
+    public static boolean enableFeatureWherigo() {
+        return getBoolean(R.string.pref_feature_wherigo, false);
+    }
+
+    public static boolean enableFeatureWherigoDebug() {
+        return enableFeatureWherigo() && getBoolean(R.string.pref_feature_wherigo_debug, false);
+    }
+
     public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
     }

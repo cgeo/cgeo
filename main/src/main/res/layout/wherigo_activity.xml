@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".wherigo.WherigoActivity" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="Wherigo" />
+        </RelativeLayout>
+
+        <!--  buttons -->
+        <LinearLayout
+            android:id="@+id/action_buttons"
+            android:visibility="visible"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            >
+
+            <Button
+                android:id="@+id/start_game"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_open_in_browser" />
+
+            <Button
+                android:id="@+id/save_game"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_save" />
+
+            <Button
+                android:id="@+id/stop_game"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_cancel" />
+
+
+        </LinearLayout>
+
+        <!-- Item List -->
+
+        <cgeo.geocaching.ui.SimpleItemListView
+            android:id="@+id/wherigo_things_list"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:nestedScrollingEnabled="true"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

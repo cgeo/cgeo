@@ -244,7 +244,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         final Uri uri = docUri != null ? docUri :
                 (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
 
-        return new ContentStorage.FileInformation(name, uri, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
+        return new ContentStorage.FileInformation(name, uri, parentFolder, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
     }
 
     @Override
