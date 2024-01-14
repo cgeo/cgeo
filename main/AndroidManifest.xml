@@ -378,15 +378,18 @@
         </activity>
         <activity
             android:name=".maps.google.v2.GoogleMapActivity"
-            android:label="@string/map_map" >
+            android:label="@string/map_map"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
             android:name=".maps.mapsforge.v6.NewMap"
-            android:label="@string/map_map" >
+            android:label="@string/map_map"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
             android:name=".unifiedmap.UnifiedMapActivity"
-            android:label="@string/map_map" >
+            android:label="@string/map_map"
+            android:windowSoftInputMode="adjustNothing">
         </activity>
         <activity
             android:name=".log.LogCacheActivity"
