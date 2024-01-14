@@ -36,6 +36,7 @@ More changes:
 - Change: Increased maximum log length for geocaching.com
 - Fix: Cannot upload longer personal notes on opencaching sites
 - New: Edit/delete own logs
+- New: Waypoint projection with variables
 
 ### General
 - New: Tapping on downloader notification opens "pending downloads" view
