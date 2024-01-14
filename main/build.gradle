@@ -761,3 +761,27 @@ tasks.register('checkstyle', Checkstyle) {
 tasks.named('check') {
     mustRunAfter tasks.named('checkstyle')
 }
+
+apply plugin: 'pmd'
+
+// align the toolVersion with codacy (https://github.com/codacy/codacy-pmd/blob/master/build.sbt#L9C23-L9C23)
+pmd {
+    consoleOutput = true
+    toolVersion = "6.55.0"
+    rulesMinimumPriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
+}
+
+tasks.register('pmd', Pmd) {
+    group 'verification'
+    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    ruleSetFiles = rootProject.files("pmd-ruleset.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**','**/brouter/**'
+
+    reports {
+        xml.required.set true
+        html.required.set true
+    }
+}

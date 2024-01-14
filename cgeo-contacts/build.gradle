@@ -90,3 +90,26 @@ if (privatePropertiesFile.exists()) {
     }
     android.buildTypes.release.signingConfig android.signingConfigs.release
 }
+
+apply plugin: 'pmd'
+
+pmd {
+    consoleOutput = true
+    toolVersion = "6.55.0"
+    rulesMinimumPriority = 5
+    ruleSets = ["category/java/errorprone.xml", "category/java/codestyle.xml", "category/java/design.xml"]
+}
+
+tasks.register('pmd', Pmd) {
+    group 'verification'
+    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    ruleSetFiles = rootProject.files("pmd-ruleset.xml")
+    source = fileTree('src')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}

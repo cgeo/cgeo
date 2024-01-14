@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+
+<ruleset name="c:geo rules"
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
+
+    <description>c:geo standard rules</description>
+
+    <!-- exclude mapsme -->
+    <exclude-pattern>.*/mapswithme-api/.*</exclude-pattern>
+    <!-- exclude organicmaps -->
+    <exclude-pattern>.*/organicmaps-api/.*</exclude-pattern>
+
+    <!-- PMDException: Error while processing ... -->
+    <!-- TokenMgrError: Lexical error at line 232, column 20.  Encountered: "\u00b0" (176), after : "\'\u00c2" (in lexical state 0) -->
+    <exclude-pattern>.*/main/src/main/java/cgeo/geocaching/utils/formulas/DegreeFormula.java</exclude-pattern>
+    <!-- TokenMgrError: Lexical error at line 558, column 46.  Encountered: "\u20ac" (8364), after : "\'\u00e2" (in lexical state 0) -->
+    <exclude-pattern>.*/main/src/main/java/cgeo/geocaching/utils/formulas/Formula.java</exclude-pattern>
+    <!-- TokenMgrError: Lexical error at line 51, column 33.  Encountered: "\u00a4" (164), after : "\'\u00c3" (in lexical state 0) -->
+    <exclude-pattern>.*/main/src/main/java/cgeo/geocaching/utils/formulas/FormulaUtils.java</exclude-pattern>
+
+    <!-- generally hint:
+        The exclude rules are created to have locally no errors as on codacy.
+        For the future one could remove the excludes step by step and resolve the rule violations.
+        Alternative: define the same rules as codacy and fine tune/resolve open errors.
+    -->
+    <rule ref="category/java/codestyle.xml">
+        <exclude name="AbstractNaming" />
+        <exclude name="AtLeastOneConstructor" />
+        <exclude name="AvoidFinalLocalVariable" />
+        <exclude name="AvoidPrefixingMethodParameters" />
+        <exclude name="AvoidProtectedFieldInFinalClass" />
+        <exclude name="AvoidProtectedMethodInFinalClassNotExtending" />
+        <exclude name="BooleanGetMethodName" />
+        <exclude name="CallSuperInConstructor" />
+        <exclude name="CommentDefaultAccessModifier" />
+        <exclude name="ConfusingTernary" />
+        <exclude name="DefaultPackage" />
+        <exclude name="EmptyControlStatement" />
+        <exclude name="EmptyMethodInAbstractClassShouldBeAbstract" />
+        <exclude name="FieldDeclarationsShouldBeAtStartOfClass" />
+        <exclude name="FieldNamingConventions" />
+        <exclude name="GenericsNaming" />
+        <exclude name="LinguisticNaming" />
+        <exclude name="LocalVariableCouldBeFinal" />
+        <exclude name="LocalVariableNamingConventions" />
+        <exclude name="LongVariable" />
+        <exclude name="OnlyOneReturn" />
+        <exclude name="PrematureDeclaration" />
+        <exclude name="ShortClassName" />
+        <exclude name="ShortMethodName" />
+        <exclude name="ShortVariable" />
+        <exclude name="TooManyStaticImports" />
+        <exclude name="UseDiamondOperator" />
+        <exclude name="UselessParentheses" />
+        <exclude name="UselessQualifiedThis" />
+        <exclude name="UseShortArrayInitializer" />
+        <exclude name="UseUnderscoresInNumericLiterals" />
+        <exclude name="UnnecessaryCast" />
+        <exclude name="UnnecessaryFullyQualifiedName" />
+        <exclude name="UnnecessaryLocalBeforeReturn" />
+        <exclude name="UnnecessaryModifier" />
+        <exclude name="UnnecessarySemicolon" />
+        <exclude name="VariableNamingConventions" />
+        <exclude name="MethodArgumentCouldBeFinal" />
+    </rule>
+
+    <rule ref="category/java/design.xml">
+        <exclude name="AbstractClassWithoutAnyMethod" />
+        <exclude name="AvoidCatchingGenericException" />
+        <exclude name="AvoidDeeplyNestedIfStmts" />
+        <exclude name="AvoidRethrowingException" />
+        <exclude name="AvoidThrowingRawExceptionTypes" />
+        <exclude name="AvoidUncheckedExceptionsInSignatures" />
+        <exclude name="ClassWithOnlyPrivateConstructorsShouldBeFinal" />
+        <exclude name="CognitiveComplexity" />
+        <exclude name="CollapsibleIfStatements" />
+        <exclude name="CouplingBetweenObjects" />
+        <exclude name="CyclomaticComplexity" />
+        <exclude name="DataClass" />
+        <exclude name="ExcessiveClassLength" />
+        <exclude name="ExcessiveImports" />
+        <exclude name="ExcessiveMethodLength" />
+        <exclude name="ExcessiveParameterList" />
+        <exclude name="ExcessivePublicCount" />
+        <exclude name="FinalFieldCouldBeStatic" />
+        <exclude name="GodClass" />
+        <exclude name="ImmutableField" />
+        <exclude name="LawOfDemeter" />
+        <exclude name="LoosePackageCoupling" />
+        <exclude name="ModifiedCyclomaticComplexity" />
+        <exclude name="MutableStaticState" />
+        <exclude name="NcssCount" />
+        <exclude name="NcssMethodCount" />
+        <exclude name="NcssConstructorCount" />
+        <exclude name="NPathComplexity" />
+        <exclude name="SignatureDeclareThrowsException" />
+        <exclude name="SimplifiedTernary" />
+        <exclude name="SimplifyBooleanReturns" />
+        <exclude name="SimplifyConditional" />
+        <exclude name="SingularField" />
+        <exclude name="StdCyclomaticComplexity" />
+        <exclude name="SwitchDensity" />
+        <exclude name="TooManyFields" />
+        <exclude name="TooManyMethods" />
+        <exclude name="UselessOverridingMethod" />
+        <exclude name="UseObjectForClearerAPI" />
+        <exclude name="UseUtilityClass" />
+    </rule>
+
+    <!-- TODO Finetuning later
+    <rule ref="category/java/design.xml/NPathComplexity">
+        <properties>
+            <property name="reportLevel">
+                <value>20000</value>
+            </property>
+        </properties>
+    </rule>
+    -->
+
+    <rule ref="category/java/errorprone.xml">
+        <exclude name="AssignmentInOperand" />
+        <exclude name="AssignmentToNonFinalStatic" />
+        <exclude name="AvoidAccessibilityAlteration" />
+        <exclude name="AvoidBranchingStatementAsLastInLoop" />
+        <exclude name="AvoidCatchingNPE" />
+        <exclude name="AvoidCatchingThrowable" />
+        <exclude name="AvoidDuplicateLiterals" />
+        <exclude name="AvoidFieldNameMatchingMethodName" />
+        <exclude name="AvoidFieldNameMatchingTypeName" />
+        <exclude name="AvoidInstanceofChecksInCatchClause" />
+        <exclude name="AvoidLiteralsInIfCondition" />
+        <exclude name="AvoidLosingExceptionInformation" />
+        <exclude name="CallSuperFirst" />
+        <exclude name="CallSuperLast" />
+        <exclude name="CloneThrowsCloneNotSupportedException" />
+        <exclude name="CloseResource" />
+        <exclude name="CompareObjectsWithEquals" />
+        <exclude name="ConstructorCallsOverridableMethod" />
+        <exclude name="DataflowAnomalyAnalysis" />
+        <exclude name="DoNotTerminateVM" />
+        <exclude name="DoNotThrowExceptionInFinally" />
+        <exclude name="EmptyCatchBlock" />
+        <exclude name="EmptyIfStmt" />
+        <exclude name="ImplicitSwitchFallThrough" />
+        <exclude name="MissingSerialVersionUID" />
+        <exclude name="MissingStaticMethodInNonInstantiatableClass" />
+        <exclude name="NonSerializableClass" />
+        <exclude name="NullAssignment" />
+        <exclude name="OverrideBothEqualsAndHashcode" />
+        <exclude name="ProperCloneImplementation" />
+        <exclude name="ReturnEmptyArrayRatherThanNull" />
+        <exclude name="ReturnEmptyCollectionRatherThanNull" />
+        <exclude name="SimpleDateFormatNeedsLocale" />
+        <exclude name="UnusedNullCheckInEquals" />
+        <exclude name="UseLocaleWithCaseConversions" />
+        <exclude name="UseProperClassLoader" />
+    </rule>
+
+</ruleset>
