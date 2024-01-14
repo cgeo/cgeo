@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 public class SwipeToOpenFragment extends Fragment {
 
     private Runnable onStopCallback = null;
-    private View ownView = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -22,8 +21,7 @@ public class SwipeToOpenFragment extends Fragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ownView = inflater.inflate(R.layout.fragment_swipe_to_open, container, false);
-        return ownView;
+        return inflater.inflate(R.layout.fragment_swipe_to_open, container, false);
     }
 
     public void setExpansion(final float expansion, final View alphaView) {
@@ -37,9 +35,6 @@ public class SwipeToOpenFragment extends Fragment {
                 alpha = 0;
             }
             alphaView.setAlpha(alpha);
-            if (ownView != null) {
-                ownView.setAlpha(alpha >= 0.8 ? 0 : 1);
-            }
 
             final ImageView imageview = view.findViewById(R.id.icon);
             imageview.setImageResource(alpha == 0 ? R.drawable.ic_menu_done : R.drawable.expand_less);
