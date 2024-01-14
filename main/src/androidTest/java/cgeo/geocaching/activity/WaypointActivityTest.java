@@ -4,6 +4,7 @@ import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -80,8 +81,6 @@ public class WaypointActivityTest {
                 scenario -> {
                     onView(withId(R.id.note)).check(matches(withText("")));
                     onView(withId(R.id.user_note)).check(matches(withText("")));
-                    onView(withId(R.id.bearing)).check(matches(withText("")));
-                    onView(withId(R.id.distance)).check(matches(withText("")));
                 }
         );
     }
@@ -154,6 +153,8 @@ public class WaypointActivityTest {
             onView(withId(R.id.user_note)).check(matches(withText(containsString(note.trim()))));
 
             onView(withId(R.id.type)).check(matches(withChild(withText(waypoint.getWaypointType().getL10n()))));
+
+            onView(withId(R.id.projection_type)).check(matches(withChild(withText(ProjectionType.NO_PROJECTION.getL10n()))));
 
         });
     }

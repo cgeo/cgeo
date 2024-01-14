@@ -31,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:visibility="gone"
             tools:listitem="@android:layout/simple_spinner_item" />
 
         <RelativeLayout
@@ -98,55 +97,6 @@
             android:freezesText="true"
             android:visibility="gone"
             android:text="@string/latlongitude" />
-
-        <!-- Legacy projection Start -->
-        <LinearLayout
-            android:id="@+id/projection"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:importantForAutofill="noExcludeDescendants">
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/textinput_edittext_singleline"
-                android:hint="@string/waypoint_bearing"
-                android:labelFor="@id/bearing">
-                <EditText
-                    android:id="@+id/bearing"
-                    style="@style/textinput_embedded_singleline"
-                    android:inputType="numberDecimal|numberSigned"
-                    android:enabled="false"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/textinput_edittext_singleline"
-                    android:layout_toLeftOf="@id/distanceUnit"
-                    android:hint="@string/waypoint_distance"
-                    android:labelFor="@id/distance">
-                    <EditText
-                        android:id="@+id/distance"
-                        style="@style/textinput_embedded_singleline"
-                        android:inputType="numberDecimal"
-                        android:enabled="false"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <Spinner
-                    android:id="@+id/distanceUnit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:entries="@array/distance_units"
-                    tools:listitem="@android:layout/simple_spinner_item"
-                    android:enabled="false"/>
-            </RelativeLayout>
-
-        </LinearLayout>
-        <!-- Legacy projection End -->
 
         <Spinner
             android:id="@+id/type"
