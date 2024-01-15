@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:keepScreenOn="true">
 
     <RelativeLayout
         android:id="@+id/unifiedmap_activity_root"
