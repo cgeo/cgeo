@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.OFFLINE;
 
@@ -42,7 +43,7 @@ public class UnifiedMapType implements Parcelable {
     /** default UnifiedMapType is PlainMap with no further data */
     public UnifiedMapType() {
         type = UnifiedMapTypeType.UMTT_PlainMap;
-        followMyLocation = true;
+        followMyLocation = Settings.getFollowMyLocation();
     }
 
     /** set geocode as target */
