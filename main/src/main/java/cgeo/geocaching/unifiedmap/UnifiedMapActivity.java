@@ -70,7 +70,6 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
-import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
@@ -755,9 +754,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 setTitle();
                 setMapModeFromMapType();
             } else {
-                mapType.type = UMTT_PlainMap;
-                mapType.filterContext = new GeocacheFilterContext(LIVE);
+                mapType = new UnifiedMapType();
                 viewModel.transientIsLiveEnabled.setValue(true);
+                setupActionBarSpinner();
                 MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
                 setMapModeFromMapType(); // to get zoomLevel stored for right mode
