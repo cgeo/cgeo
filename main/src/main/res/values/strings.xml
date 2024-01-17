@@ -288,8 +288,6 @@
     <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add a waypoint for.</string>
     <string name="err_waypoint_add_failed">c:geo failed to add your waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Need some help?</string>
-    <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance doesn\'t require units.</string>
     <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code is missing.</string>
     <string name="err_log_post_missing_coordinates">Coordinates are missing.</string>
@@ -300,7 +298,6 @@
     <string name="err_logimage_post_failed">It seems that your log image was not uploaded. Please check it on the cache originating website.</string>
     <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
     <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
-    <string name="err_parse_dist">c:geo can\'t parse distance.</string>
     <string name="err_parse_lat_lon">c:geo can\'t parse latitude or longitude.</string>
     <string name="err_rendertheme_file_unreadable">Could not load the selected render theme. Reverting to the built-in one.</string>
     <string name="err_rendertheme_invalid">The selected render theme is not valid for this mapsforge version. Reverting to the built-in one.</string>
@@ -1770,8 +1767,6 @@
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>
     <string name="waypoint_my_coordinates_accuracy">My coordinates (±%s)</string>
-    <string name="waypoint_bearing">Bearing in °</string>
-    <string name="waypoint_distance">Distance</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Edit</string>
     <string name="waypoint_copy_coordinates">Copy coordinates</string>
