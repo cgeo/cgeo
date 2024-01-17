@@ -6,12 +6,11 @@
     android:clickable="true"
     android:clipToPadding="false"
     android:fastScrollEnabled="false"
-    android:focusable="false"
+    android:focusable="true"
     android:footerDividersEnabled="false"
     android:headerDividersEnabled="false"
     android:nestedScrollingEnabled="true"
     android:scrollbarStyle="outsideOverlay"
     android:paddingHorizontal="@dimen/paddingRight_fastscroll"
     tools:context=".CacheDetailActivity$WaypointsViewCreator">
-
 </ListView>

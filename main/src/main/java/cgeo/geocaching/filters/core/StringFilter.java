@@ -10,6 +10,7 @@ import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -88,7 +89,7 @@ public class StringFilter {
     public List<String> getConfig() {
         final List<String> config = new ArrayList<>();
         config.add(textValue);
-        config.add(filterType.name().toLowerCase());
+        config.add(filterType.name().toLowerCase(Locale.US));
         if (matchCase) {
             config.add(FLAG_MATCHCASE);
         }
@@ -107,7 +108,7 @@ public class StringFilter {
     public ObjectNode getJsonConfig() {
         final ObjectNode node = JsonUtils.createObjectNode();
         JsonUtils.setText(node, "text", getTextValue());
-        JsonUtils.setText(node, "type", filterType.name().toLowerCase());
+        JsonUtils.setText(node, "type", filterType.name().toLowerCase(Locale.US));
         JsonUtils.setBoolean(node, "matchCase", matchCase);
         return node;
     }
