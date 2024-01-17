@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <!-- <uses-permission android:name="android.permission.READ_CONTACTS" /> Activate when SDKmin=23, see #13777 -->
+     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-feature
         android:name="android.hardware.location.gps"
@@ -932,7 +932,6 @@
         <!-- packages we want to see using the package manager need to be declared starting with targetSDK 30, and we need to use specific strings / cannot use @string/xxx notation -->
         <package android:name="com.android.chrome" />
         <package android:name="btools.routingapp" />
-        <package android:name="cgeo.contacts" />
         <package android:name="com.eclipsim.gpsstatus2" />
         <package android:name="com.google.android.apps.translate" />
         <package android:name="com.google.android.street" />
