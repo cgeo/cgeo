@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.contacts.ContactsAddon;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -41,13 +40,11 @@ import androidx.core.content.ContextCompat;
 import androidx.core.util.Pair;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 import com.google.android.gms.common.GoogleApiAvailability;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -133,7 +130,6 @@ public final class SystemInformation {
             body.append("\n- Last successful login on geocaching.com: ").append(Formatter.formatDateForFilename(gcSuccess));
         }
         body.append("\n- Routing: ").append(Settings.useInternalRouting() ? "internal" : "external").append(" / BRouter installed: ").append(ProcessUtils.isInstalled(context.getString(R.string.package_brouter)));
-        appendAddons(body);
 
         appendPermissions(context, body);
 
@@ -281,15 +277,6 @@ public final class SystemInformation {
             }
         }
         body.append("\n- Geocaching sites enabled:").append(connectorCount > 0 ? connectors : " None");
-    }
-
-    private static void appendAddons(final StringBuilder body) {
-        final List<String> addons = new ArrayList<>(2);
-        if (ContactsAddon.isAvailable()) {
-            addons.add("contacts");
-        }
-        body.append("\n- Installed c:geo plugins: ");
-        body.append(CollectionUtils.isNotEmpty(addons) ? StringUtils.join(addons, ", ") : " none");
     }
 
     private static String presence(final boolean present) {

@@ -27,8 +27,6 @@ import org.apache.commons.lang3.StringUtils;
 /** Provides access to Android Contacts */
 public class ContactsHelper {
 
-    public static final boolean LEGACY_MODE = true; //TODO: can be set to false when SDKmin=23, see #13777
-
     private final Activity activity;
 
     public ContactsHelper(final Activity activity) {

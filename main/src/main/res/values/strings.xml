@@ -2065,8 +2065,6 @@
     <string name="helper_calendar_pastevent_title">Past event</string>
     <string name="helper_calendar_pastevent_question">The event date is in the past. Add it anyway?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title">c:geo contacts plugin</string>
-    <string name="helper_contacts_description">Enables you to open a contact card (of your address book) directly from a log entry, so you can more easily ask friends for help.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
