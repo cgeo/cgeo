@@ -156,7 +156,7 @@ public class ImageActivityHelper {
      */
     public void getImageFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
+        setImageMimeTypes(intent);
         startIntent(Intent.createChooser(intent, "Select Image"),
                 new IntentContextData(REQUEST_CODE_STORAGE_SELECT, fileid, null, callOnFailure, userKey, true));
     }
@@ -181,7 +181,11 @@ public class ImageActivityHelper {
 
     private void getMultipleItemsFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final boolean onlyImages) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType(onlyImages ? "image/*" : "*/*");
+        if (onlyImages) {
+            setImageMimeTypes(intent);
+        } else {
+            intent.setType("*/*");
+        }
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startIntent(Intent.createChooser(intent, "Select Multiple Images"),
                 new IntentContextData(REQUEST_CODE_STORAGE_SELECT_MULTI, fileid, null, callOnFailure, userKey, onlyImages));
@@ -323,5 +327,10 @@ public class ImageActivityHelper {
         if (callOnFailure && this.callbackHandler != null) {
             this.callbackHandler.call(requestCode, null, userKey);
         }
+    }
+
+    private void setImageMimeTypes(final Intent intent) {
+        intent.setType("image/*");
+        intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{ "image/jpeg", "image/png", "image/gif" });
     }
 }
