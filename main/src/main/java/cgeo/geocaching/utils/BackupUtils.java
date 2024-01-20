@@ -14,6 +14,7 @@ import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.FolderUtils;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -55,6 +56,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
@@ -73,6 +75,7 @@ public class BackupUtils {
     private static final String ATTRIBUTE_VALUE = "value";
     private static final String TAG_MAP = "map";
     private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
+    private static final String TRACKS_SUBFOLDER = "tracks";
 
     private static final int MAX_AUTO_BACKUPS = 4;  // most recent + x more
     private static final String AUTO_BACKUP_FOLDER = "auto"; // subfolder of PersistableFolder.BACKUP
@@ -300,7 +303,9 @@ public class BackupUtils {
         };
 
         if (database) {
-            restoreDatabaseInternal(backupDir, consumer);
+            AndroidRxUtils.andThenOnUi(Schedulers.io(),
+                () -> FolderUtils.get().copyAll(Folder.fromFolder(backupDir, TRACKS_SUBFOLDER), Folder.fromFile(LocalStorage.getTrackfilesDir()), false),
+                () -> restoreDatabaseInternal(backupDir, consumer));
         } else {
             consumer.accept("");
         }
@@ -540,15 +545,27 @@ public class BackupUtils {
             Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
             return;
         }
-        final boolean settingsResult = createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
-        final Consumer<Boolean> consumer = dbResult -> {
-            showBackupCompletedStatusDialog(backupDir, settingsResult, dbResult, autobackup);
 
-            if (runAfterwards != null) {
-                runAfterwards.run();
-            }
-        };
-        createDatabaseBackupInternal(backupDir, consumer);
+        final AtomicBoolean tracksResult = new AtomicBoolean(true);
+        AndroidRxUtils.andThenOnUi(Schedulers.io(),
+            () -> {
+                // copy trackfiles in background
+                tracksResult.set(FolderUtils.get().copyAll(Folder.fromFile(LocalStorage.getTrackfilesDir()), Folder.fromFolder(backupDir, TRACKS_SUBFOLDER), false).result == FolderUtils.ProcessResult.OK);
+            },
+            () -> {
+                // copy settings
+                final boolean settingsResult = createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
+
+                // copy database and display result
+                final Consumer<Boolean> consumer = dbResult -> {
+                    showBackupCompletedStatusDialog(backupDir, tracksResult.get(), settingsResult, dbResult, autobackup);
+
+                    if (runAfterwards != null) {
+                        runAfterwards.run();
+                    }
+                };
+                createDatabaseBackupInternal(backupDir, consumer);
+            });
     }
 
     private boolean createSettingsBackupInternal(final Folder backupDir, final Boolean fullBackup) {
@@ -620,10 +637,10 @@ public class BackupUtils {
         });
     }
 
-    private void showBackupCompletedStatusDialog(final Folder backupDir, final Boolean settingsResult, final Boolean databaseResult, final boolean autobackup) {
+    private void showBackupCompletedStatusDialog(final Folder backupDir, final boolean trackfilesResult, final boolean settingsResult, final Boolean databaseResult, final boolean autobackup) {
         String msg;
         final String title;
-        if (settingsResult && databaseResult) {
+        if (trackfilesResult && settingsResult && databaseResult) {
             if (autobackup) {
                 return; // We don't need to inform the user if everything went right
             }
@@ -640,10 +657,14 @@ public class BackupUtils {
 
             msg += "\n\n";
 
-            if (settingsResult != null) {
+            if (settingsResult) {
                 msg += activityContext.getString(R.string.settings_saved) + "\n" + backupDir.toUserDisplayableString() + "/" + SETTINGS_FILENAME;
             } else {
                 msg += activityContext.getString(R.string.settings_savingerror);
+            }
+
+            if (!trackfilesResult) {
+                msg += "\n\n" + activityContext.getString(R.string.backup_tracks_error);
             }
         }
 
