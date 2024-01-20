@@ -101,7 +101,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     }
 
     @Override
-    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
         return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_freizeitkarte_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE);
     }
 

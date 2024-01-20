@@ -100,7 +100,7 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
     }
 
     @Override
-    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
         return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_osmpaws_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_PAWS);
     }
 

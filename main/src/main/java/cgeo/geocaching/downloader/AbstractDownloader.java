@@ -96,7 +96,7 @@ public abstract class AbstractDownloader {
     }
 
     // extra file to download?
-    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
         return null;
     }
 

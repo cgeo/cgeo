@@ -130,7 +130,7 @@ public class DownloaderUtils {
                         // check for required extra files (e. g.: map theme)
                         final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
                         if (downloader != null) {
-                            final DownloadDescriptor extraFile = downloader.getExtrafile(activity);
+                            final DownloadDescriptor extraFile = downloader.getExtrafile(activity, uri);
                             if (extraFile != null) {
                                 addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
                             }
