@@ -1125,6 +1125,7 @@
     <string name="init_backup_unavailable">not available</string>
     <string name="init_backup_last_no">There is no file with a backup.</string>
     <string name="init_restore_version_error">Unexpected format - cannot restore database.\n\nExpected version is %1$d,\nbackup has version %2$d</string>
+    <string name="backup_tracks_error">Error creating backup of tracks.</string>
 
     <string name="settings_title_backup">Backup / Restore</string>
     <string name="settings_summary_backup">Perform backup and restore of cache/waypoint data and program settings.</string>
