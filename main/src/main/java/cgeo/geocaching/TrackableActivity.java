@@ -535,7 +535,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 spotted.setClickable(true);
                 if (trackable.getSpottedType() == Trackable.SPOTTED_CACHE) {
                     spotted.setOnClickListener(arg0 -> {
-                        if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
+                        if (StringUtils.isNotBlank(trackable.getSpottedCacheGeocode())) {
+                            CacheDetailActivity.startActivity(activity, trackable.getSpottedCacheGeocode(), trackable.getSpottedName());
+                        } else if (StringUtils.isNotBlank(trackable.getSpottedGuid())) {
                             CacheDetailActivity.startActivityGuid(activity, trackable.getSpottedGuid(), trackable.getSpottedName());
                         } else {
                             // for GeoKrety we only know the cache geocode

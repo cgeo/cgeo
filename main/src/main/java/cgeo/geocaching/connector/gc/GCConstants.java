@@ -124,8 +124,14 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
     /**
      * Two groups !
+     * Example matching text:
+     * <a id="ctl00_ContentBody_BugDetails_BugLocation" title="Visit Listing" data-name="Kärntner Adventkalender 2023 - Frohe Weihnachten!" data-status="Cache" href="https://www.geocaching.com/geocache/GCAH5AA">In Kärntner Adventkalender 2023 - Frohe Weihnachten!</a>
      */
-    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" data-name=\"([^\"]+)\" data-status=\"Cache\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">[^<]+</a>");
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE_BY_GEOCODE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" data-name=\"([^\"]+)\" data-status=\"Cache\" href=\"[^\"]*/geocache/(GC[A-Z0-9]+)\">[^<]+</a>");
+    /**
+     * Two groups !
+     */
+    static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE_BY_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" data-name=\"([^\"]+)\" data-status=\"Cache\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">[^<]+</a>");
     /**
      * Three groups !
      */

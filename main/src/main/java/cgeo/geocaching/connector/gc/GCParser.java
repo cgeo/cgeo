@@ -1615,11 +1615,18 @@ public final class GCParser {
 
         // trackable spotted
         try {
-            final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE, page);
+            final MatcherWrapper matcherSpottedCache = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE_BY_GEOCODE, page);
             if (matcherSpottedCache.find()) {
-                trackable.setSpottedGuid(matcherSpottedCache.group(2));
+                trackable.setSpottedCacheGeocode(matcherSpottedCache.group(2));
                 trackable.setSpottedName(matcherSpottedCache.group(1).trim());
                 trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+            } else {
+                final MatcherWrapper matcherSpottedCacheGuid = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDCACHE_BY_GUID, page);
+                if (matcherSpottedCacheGuid.find()) {
+                    trackable.setSpottedGuid(matcherSpottedCache.group(2));
+                    trackable.setSpottedName(matcherSpottedCache.group(1).trim());
+                    trackable.setSpottedType(Trackable.SPOTTED_CACHE);
+                }
             }
 
             final MatcherWrapper matcherSpottedUser = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_SPOTTEDUSER, page);
