@@ -190,7 +190,7 @@ public final class OfflineLogEntry extends LogEntry {
      * compared to a given previous instance
      * Note that this is NOT a hidden {@link #equals(Object)}-method!
      */
-    public boolean hasSaveRelevantChanges(final OfflineLogEntry prev) {
+    public boolean hasSaveRelevantChanges(final LogEntry prev) {
 
         // Do not erase the saved log if the user has removed all the characters
         // without using "Clear". This may be a manipulation mistake, and erasing
@@ -200,14 +200,17 @@ public final class OfflineLogEntry extends LogEntry {
         changed |= !Objects.equals(logType, prev.logType);
         changed |= !Objects.equals(reportProblem, prev.reportProblem);
         changed |= !Objects.equals(date, prev.date);
-        changed |= favorite != prev.favorite;
-        changed |= !equalsFloat(rating, prev.rating, 0.2f);
-        changed |= !Objects.equals(password, prev.password);
-        changed |= !Objects.equals(imageScale, prev.imageScale);
-        changed |= !Objects.equals(imageTitlePraefix, prev.imageTitlePraefix);
-
         changed |= logImages.size() != prev.logImages.size() || !new HashSet<>(logImages).equals(new HashSet<>(prev.logImages));
-        changed |= !Objects.equals(inventoryActions, prev.inventoryActions);
+
+        if (prev instanceof OfflineLogEntry) {
+            final OfflineLogEntry prevOffline = (OfflineLogEntry) prev;
+            changed |= favorite != prevOffline.favorite;
+            changed |= !equalsFloat(rating, prevOffline.rating, 0.2f);
+            changed |= !Objects.equals(password, prevOffline.password);
+            changed |= !Objects.equals(imageScale, prevOffline.imageScale);
+            changed |= !Objects.equals(imageTitlePraefix, prevOffline.imageTitlePraefix);
+            changed |= !Objects.equals(inventoryActions, prevOffline.inventoryActions);
+        }
 
         return changed;
 

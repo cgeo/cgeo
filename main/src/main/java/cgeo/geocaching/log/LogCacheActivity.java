@@ -3,6 +3,7 @@ package cgeo.geocaching.log;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.TrackableActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -387,6 +388,21 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     @Override
+    public void onBackPressed() {
+        checkFinish(super::onBackPressed);
+    }
+
+    public void checkFinish(final Runnable runnable) {
+        if (logEditMode == LogEditMode.EDIT_EXISTING && getEntryFromView().hasSaveRelevantChanges(originalLogEntry)) {
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.confirm_unsent_changes_title))
+                .setMessage(TextParam.id(R.string.confirm_unsent_changes))
+                .confirm(runnable);
+        } else {
+            runnable.run();
+        }
+    }
+
+    @Override
     public void onStop() {
         saveLog();
         super.onStop();
@@ -500,6 +516,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_NAME);
         } else if (itemId == R.id.menu_sort_trackables_code) {
             sortTrackables(TrackableComparator.TRACKABLE_COMPARATOR_TRACKCODE);
+        } else if (itemId == android.R.id.home) {
+            //back arrow
+            checkFinish(() -> ActivityMixin.navigateUp(this));
         } else {
             return super.onOptionsItemSelected(item);
         }
