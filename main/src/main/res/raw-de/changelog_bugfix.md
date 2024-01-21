@@ -1,4 +1,8 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+
+##
 - Korrektur: Absturz bei Anzeige des Benachrichtigungs-Markers
 - Korrektur: Unter neueren Android-Versionen nicht mehr benötigte Berechtigung READ_EXTERNAL_STORAGE angefordert
 - Korrektur: Standardauswahl des Trackable-Logtyps
