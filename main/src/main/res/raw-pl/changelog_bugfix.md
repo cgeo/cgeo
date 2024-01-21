@@ -1,4 +1,8 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+
+##
 - Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
 - Poprawka: Niepotrzebne żądanie uprawnienia READ_EXTERNAL_STORAGE w nowszych wersjach Androida
 - Poprawka: Domyślny wybór typu dziennika dla przedmiotów podróżnych
