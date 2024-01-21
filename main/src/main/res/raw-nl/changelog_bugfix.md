@@ -1,4 +1,8 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+
+##
 - Oplossing: Crash bij weergave meldingsstip
 - Oplossing: Onnodige READ_EXTERNAL_STORAGE machtiging werd opgevraagd op nieuwere Android versies
 - Oplossing: Trackable logsoort standaard selectie
