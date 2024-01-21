@@ -1,4 +1,8 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+
+##
 - Oprava: Pád při zobrazení oznamovací tečky
 - Oprava: Nepotřebné oprávnění READ_EXTERNAL_STORAGE vyžadované na novějších verzích systému Android
 - Oprava: Výchozí výběr typu logu sledovatelného předmětu
