@@ -1,6 +1,6 @@
 ##
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- Oprava: Přepracováno výchozí nastavení sledovatelného logu
+- Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 
 ##
 - Oprava: Pád při zobrazení oznamovací tečky
