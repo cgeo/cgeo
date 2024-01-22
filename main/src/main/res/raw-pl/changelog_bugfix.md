@@ -1,6 +1,6 @@
 ##
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
+- Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 
 ##
 - Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
