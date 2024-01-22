@@ -53,8 +53,14 @@ public class MapDownloaderHylly extends AbstractMapDownloader {
     }
 
     @Override
-    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
-        return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_hylly_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY);
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
+        // themes are stored in same subfolder as map is, named dynamically, so copy the path prefix from map's uri
+        String base = activity.getString(R.string.mapserver_hylly_themes_downloadurl);
+        if (mapUri != null && mapUri.getLastPathSegment() != null) {
+            final String newUri = mapUri.toString();
+            base = newUri.substring(0, newUri.length() - mapUri.getLastPathSegment().length());
+        }
+        return getExtrafile(THEME_FILES, base, Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY);
     }
 
     @NonNull

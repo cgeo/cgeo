@@ -68,7 +68,7 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     }
 
     @Override
-    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
+    public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity, final Uri mapUri) {
         return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_openandromaps_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS);
     }
 

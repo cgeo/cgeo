@@ -37,10 +37,10 @@
             <property name="severity" value="warning" />
         </module>
         <module name="FinalLocalVariable">
-            <property name="severity" value="info" />
+            <property name="severity" value="warning" />
         </module>
         <module name="FinalParameters">
-            <property name="severity" value="info" />
+            <property name="severity" value="warning" />
         </module>
         <module name="HideUtilityClassConstructor">
             <property name="severity" value="warning" />
@@ -130,11 +130,14 @@
             <property name="severity" value="info" />
         </module>
         <module name="ImportOrder">
-            <property name="severity" value="info" />
+            <property name="severity" value="warning" />
             <property name="groups" value="cgeo,android,androidx,java,javax,*" />
             <property name="ordered" value="true" />
             <property name="separated" value="true" />
             <property name="option" value="under" />
+        </module>
+        <module name="NestedIfDepth">
+            <property name="max" value="5"/>
         </module>
     </module>
 </module>
