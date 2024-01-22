@@ -21,3 +21,4 @@
 - New: Two column-layout for settings in landscape mode
 - Fix: Restore of backups without valid date/time info
 - New: Include active trackfiles in backup
+- New: Integrated c:geo contacts addon functionality (external addon no longer required)
