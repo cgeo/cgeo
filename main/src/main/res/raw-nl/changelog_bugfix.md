@@ -1,6 +1,6 @@
 ##
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- Oplossing: Standaard Trackable logtype bepaling herschreven
+- Oplossing: Trackable spotted cache info (website wijzigingen)
 
 ##
 - Oplossing: Crash bij weergave meldingsstip
