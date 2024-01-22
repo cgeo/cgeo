@@ -20,6 +20,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.DateTimeEditor;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog.CoordinateUpdate;
@@ -47,7 +48,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -63,7 +63,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
 
-    private List<LogTypeTrackable> possibleLogTypesTrackable = new ArrayList<>();
     private final TextSpinner<LogTypeTrackable> logType = new TextSpinner<>();
     private String geocode = null;
     private Geopoint geopoint;
@@ -73,7 +72,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      */
     private boolean readyToPost = true;
     private final DateTimeEditor date = new DateTimeEditor();
-    private LogTypeTrackable typeSelected = LogTypeTrackable.getById(Settings.getTrackableAction());
+
     private Trackable trackable;
     private TrackableBrand brand;
     String trackingCode;
@@ -104,30 +103,28 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         Log.i("LogTrackableActivity.onLoadFinished()");
 
         if (CollectionUtils.isNotEmpty(logTypesTrackable)) {
-            possibleLogTypesTrackable.clear();
-            possibleLogTypesTrackable.addAll(logTypesTrackable);
-
-            final LogTypeTrackable previousTypeSelected = typeSelected;
-            logType.setValues(possibleLogTypesTrackable); //exists
-
-            if (!logTypesTrackable.contains(previousTypeSelected)) {
-                //previously selected is not possible -> select the most preferred default
-                boolean found = false;
-                for (LogTypeTrackable candidate : PREFERRED_DEFAULTS) {
-                    if (logTypesTrackable.contains(candidate)) {
-                        setType(candidate, false);
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    setType(logTypesTrackable.get(0), false);
-                }
-                showToast(res.getString(R.string.info_log_type_changed));
-            }
+            logType.setValues(logTypesTrackable);
+            setLastUsedLogType();
         }
 
         showProgress(false);
+    }
+
+    private void setLastUsedLogType() {
+        final LogTypeTrackable lastUsedAction = LogTypeTrackable.getById(Settings.getTrackableAction());
+        if (logType.getValues().contains(lastUsedAction)) {
+            logType.set(lastUsedAction);
+        } else {
+            //last used action is not possible -> select the most preferred default
+            for (LogTypeTrackable candidate : PREFERRED_DEFAULTS) {
+                if (logType.getValues().contains(candidate)) {
+                    logType.set(candidate);
+                    updateForNewType();
+                    break;
+                }
+            }
+            showToast(res.getString(R.string.info_log_type_changed));
+        }
     }
 
     @Override
@@ -142,6 +139,11 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
         date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
+
+        logType.setTextView(binding.type).setDisplayMapper(tt -> TextParam.text(tt.getLabel()));
+        logType.setChangeListener(lt -> updateForNewType());
+        logType.setValues(Trackable.getPossibleLogTypes());
+        setLastUsedLogType();
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -260,14 +262,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     }
 
     private void init() {
-        if (CollectionUtils.isEmpty(possibleLogTypesTrackable)) {
-            possibleLogTypesTrackable = Trackable.getPossibleLogTypes();
-        }
-        logType.setTextView(binding.type).setDisplayMapperPure(LogTypeTrackable::getLabel);
-        logType.setValues(possibleLogTypesTrackable);
-        logType.setChangeListener(lt -> setType(lt, true));
-
-        setType(typeSelected, false);
+        updateForNewType();
 
         // show/hide Time selector
         date.setTimeVisible(loggingManager.canLogTime());
@@ -291,14 +286,10 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
     }
 
-    public void setType(final LogTypeTrackable type, final boolean skipUpdateTextSpinner) {
-        typeSelected = type;
-        if (!skipUpdateTextSpinner) {
-            logType.set(type);
-        }
+    public void updateForNewType() {
 
         // show/hide Tracking Code Field for note type
-        if (typeSelected != LogTypeTrackable.NOTE || loggingManager.isTrackingCodeNeededToPostNote()) {
+        if (logType.get() != LogTypeTrackable.NOTE || (loggingManager != null && loggingManager.isTrackingCodeNeededToPostNote())) {
             binding.trackingFrame.setVisibility(View.VISIBLE);
             // Request focus if field is empty
             if (StringUtils.isBlank(binding.tracking.getText())) {
@@ -309,7 +300,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         }
 
         // show/hide Coordinate fields as Trackable needs
-        if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates()) {
+        if (LogTypeTrackable.isCoordinatesNeeded(logType.get()) && loggingManager != null && loggingManager.canLogCoordinates()) {
             binding.locationFrame.setVisibility(View.VISIBLE);
             // Request focus if field is empty
             if (StringUtils.isBlank(binding.geocode.getText())) {
@@ -444,14 +435,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         trackable.setTrackingcode(binding.tracking.getText().toString());
 
         // Check params for trackables needing coordinates
-        if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(typeSelected) && geopoint == null) {
+        if (loggingManager.canLogCoordinates() && LogTypeTrackable.isCoordinatesNeeded(logType.get()) && geopoint == null) {
             SimpleDialog.of(this).setMessage(R.string.err_log_post_missing_coordinates).show();
             return;
         }
 
         // Some Trackable connectors recommend logging with a Geocode.
         // Note: Currently, counter is shared between all connectors recommending Geocode.
-        if (LogTypeTrackable.isCoordinatesNeeded(typeSelected) && loggingManager.canLogCoordinates() &&
+        if (LogTypeTrackable.isCoordinatesNeeded(logType.get()) && loggingManager.canLogCoordinates() &&
                 connector.recommendLogWithGeocode() && binding.geocode.getText().toString().isEmpty() &&
                 Settings.getLogTrackableWithoutGeocodeShowCount() < MAX_SHOWN_POPUP_TRACKABLE_WITHOUT_GEOCODE) {
             new LogTrackableWithoutGeocodeBuilder().create(this).show();
@@ -464,15 +455,14 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Post Log in Background
      */
     private void postLog() {
-
     final TrackableLogEntry logEntry = TrackableLogEntry.of(trackable)
-            .setAction(typeSelected)
+            .setAction(logType.get())
             .setDate(date.getDate())
             .setLog(binding.log.getText().toString());
 
         logActivityHelper.createLogTrackable(geocache, logEntry, connector);
 
-        Settings.setTrackableAction(typeSelected.id);
+        Settings.setTrackableAction(logType.get().id);
         Settings.setLastTrackableLog(binding.log.getText().toString());
     }
 

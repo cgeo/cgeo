@@ -48,6 +48,7 @@ public class Trackable implements IGeoObject {
     private String ownerGuid = null;
     private String spottedName = null;
     private int spottedType = SPOTTED_UNSET;
+    private String spottedCacheGeocode = null;
     private String spottedGuid = null;
     private String goal = null;
     private String details = null;
@@ -82,6 +83,7 @@ public class Trackable implements IGeoObject {
         ownerGuid = ObjectUtils.defaultIfNull(newTrackable.ownerGuid, ownerGuid);
         spottedName = ObjectUtils.defaultIfNull(newTrackable.spottedName, spottedName);
         spottedType = newTrackable.spottedType == SPOTTED_UNSET ? spottedType : newTrackable.spottedType;
+        spottedCacheGeocode = ObjectUtils.defaultIfNull(newTrackable.spottedCacheGeocode, spottedCacheGeocode);
         spottedGuid = ObjectUtils.defaultIfNull(newTrackable.spottedGuid, spottedGuid);
         goal = ObjectUtils.defaultIfNull(newTrackable.goal, goal);
         details = ObjectUtils.defaultIfNull(newTrackable.details, details);
@@ -297,6 +299,14 @@ public class Trackable implements IGeoObject {
 
     public void setSpottedType(final int spottedType) {
         this.spottedType = spottedType;
+    }
+
+    public String getSpottedCacheGeocode() {
+        return spottedCacheGeocode;
+    }
+
+    public void setSpottedCacheGeocode(final String spottedCacheGeocode) {
+        this.spottedCacheGeocode = spottedCacheGeocode;
     }
 
     public String getSpottedGuid() {
