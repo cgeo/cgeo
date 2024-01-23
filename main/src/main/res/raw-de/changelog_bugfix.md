@@ -1,6 +1,7 @@
 ##
 - Fix: Trackable log type defaults reworked
 - Fix: Trackable spotted cache info (website changes)
+- New: New formula CHARS to select multiple single chars
 
 ##
 - Korrektur: Absturz bei Anzeige des Benachrichtigungs-Markers
