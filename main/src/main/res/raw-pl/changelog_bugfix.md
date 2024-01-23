@@ -1,6 +1,7 @@
 ##
 - Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
+- Nowość: Nowa formuła CHARS, aby wybrać wiele pojedynczych znaków
 
 ##
 - Poprawka: Awaria przy wyświetlaniu kropki z powiadomieniami
