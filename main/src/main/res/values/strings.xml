@@ -2034,7 +2034,7 @@
     <string name="user_menu_open_browser">Open profile in browser</string>
     <string name="user_menu_send_message">Send message</string>
     <string name="user_menu_send_email">Send email</string>
-    <string name="user_menu_open_contact">Open contact card</string>
+    <string name="user_menu_open_contact">Search in contacts</string>
     <string name="user_unknown">Unknown user</string>
 
     <!-- navigation -->
