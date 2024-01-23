@@ -1663,6 +1663,7 @@
     <string name="formula_function_if">Když</string>
     <string name="formula_function_length">Délka řetězce</string>
     <string name="formula_function_substring">Podřetězec</string>
+    <string name="formula_function_chars">Vybrat znaky</string>
     <string name="formula_function_rot13">Otočit znaky o 13</string>
     <string name="formula_function_rot">Otočit znaky</string>
     <string name="formula_function_checksum">Kontrolní součet</string>
