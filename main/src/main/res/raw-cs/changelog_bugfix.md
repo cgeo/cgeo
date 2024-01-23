@@ -1,6 +1,7 @@
 ##
 - Oprava: Přepracováno výchozí nastavení sledovatelného logu
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
+- Novinka: Nový vzorec CHARS pro výběr více jednotlivých znaků
 
 ##
 - Oprava: Pád při zobrazení oznamovací tečky
