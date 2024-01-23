@@ -18,6 +18,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.text.Html;
 
@@ -181,6 +182,10 @@ class GCLoggingManager extends AbstractLoggingManager {
     @Override
     public String convertLogTextToEditableText(final String logText) {
 
+        if (!TextUtils.containsHtml(logText)) {
+            return logText;
+        }
+
         //Manual handling required:
         //- italic: <em> and </em> -> *
         //- bold: <strong> and </strong> -> **
@@ -205,6 +210,7 @@ class GCLoggingManager extends AbstractLoggingManager {
             .replaceAll("<h3>", "### ")
             .replaceAll("</h3>", " ###")
             .replaceAll("<hr>", "---")
+            .replaceAll("<hr />", "---")
             .replaceAll("<ul>", "")
             .replaceAll("<ol>", "")
             .replaceAll("</li>", "")
