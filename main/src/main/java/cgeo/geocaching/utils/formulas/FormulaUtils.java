@@ -6,6 +6,8 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
 import android.content.Context;
 import android.util.Pair;
@@ -110,6 +112,23 @@ public class FormulaUtils {
         }
         return hasElse ? values.get(values.size() - 1) : Value.of(0);
     }
+
+    public static Value selectChars(final ValueList values) {
+        final String value = values.getAsString(0, "");
+        final StringBuilder result = new StringBuilder();
+        for (int i = 1 ; i < values.size(); i++) {
+            if (!values.get(i).isInteger()) {
+                throw new FormulaException(WRONG_TYPE, "positive Integer", values.get(i), values.get(i).getType());
+            }
+            final int vInt = (int) values.get(i).getAsInt();
+            if (vInt < 1 || vInt > value.length()) {
+                throw new FormulaException(OTHER, "index out of range: " + vInt);
+            }
+            result.append(substring(value, vInt - 1, 1));
+        }
+        return Value.of(result.toString());
+    }
+
 
     public static long valueChecksum(final Value value, final boolean iterative) {
         final long cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
