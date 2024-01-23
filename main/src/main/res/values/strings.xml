@@ -1836,6 +1836,7 @@
     <string name="formula_function_if">If</string>
     <string name="formula_function_length">String Length</string>
     <string name="formula_function_substring">Substring</string>
+    <string name="formula_function_chars">Select Chars</string>
     <string name="formula_function_rot13">Rotate characters by 13</string>
     <string name="formula_function_rot">Rotate Characters</string>
     <string name="formula_function_checksum">Checksum</string>
