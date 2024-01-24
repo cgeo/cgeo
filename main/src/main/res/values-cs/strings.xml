@@ -269,8 +269,6 @@
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
     <string name="err_waypoint_cache_unknown">c:geo neví, k jaké kešce chceš přidat trasový bod.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
-    <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
-    <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
     <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
     <string name="err_log_post_missing_coordinates">Chybí souřadnice.</string>
@@ -281,7 +279,6 @@
     <string name="err_logimage_post_failed">Zdá se, že obrázek u logu nebyl správně odeslán. Prosím, zkontroluj to přímo na webové stránce kešky.</string>
     <string name="err_parse_lat">c:geo nemůže dopočítat zeměpisnou šířku.</string>
     <string name="err_parse_lon">c:geo nemůže dopočítat zeměpisnou délku.</string>
-    <string name="err_parse_dist">c:geo nemůže dopočítat vzdálenost.</string>
     <string name="err_parse_lat_lon">c:geo nemůže dopočítat zeměpisnou šířku nebo délku.</string>
     <string name="err_rendertheme_file_unreadable">Vybraný motiv vykreslování nelze načíst. Bude použit výchozí.</string>
     <string name="err_rendertheme_invalid">Vybraný motiv vykreslování nelze s touto verzí mapsforge použít. Bude použit výchozí.</string>
@@ -1601,8 +1598,6 @@
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_my_coordinates_accuracy">Moje souřadnice (±%s)</string>
-    <string name="waypoint_bearing">Azimut [°]</string>
-    <string name="waypoint_distance">Vzdálenost</string>
     <string name="waypoint_name">Název</string>
     <string name="waypoint_edit">Upravit</string>
     <string name="waypoint_copy_coordinates">Kopírovat souřadnice</string>
@@ -1692,6 +1687,7 @@
     <string name="formula_function_if">Když</string>
     <string name="formula_function_length">Délka řetězce</string>
     <string name="formula_function_substring">Podřetězec</string>
+    <string name="formula_function_chars">Vybrat znaky</string>
     <string name="formula_function_rot13">Otočit znaky o 13</string>
     <string name="formula_function_rot">Otočit znaky</string>
     <string name="formula_function_checksum">Kontrolní součet</string>
@@ -1850,7 +1846,6 @@
     <string name="user_menu_open_browser">Otevřít profil v prohlížeči</string>
     <string name="user_menu_send_message">Odeslat zprávu</string>
     <string name="user_menu_send_email">Poslat e-mail</string>
-    <string name="user_menu_open_contact">Otevřít kartu kontaktu</string>
     <string name="user_unknown">Neznámý uživatel</string>
     <!-- navigation -->
     <string name="navigation">Navigace</string>
@@ -1876,8 +1871,6 @@
     <string name="helper_calendar_pastevent_title">Uplynulá událost</string>
     <string name="helper_calendar_pastevent_question">Datum události již uplynulo. Chceš ji i přesto přidat?</string>
     <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
-    <string name="helper_contacts_title">Doplněk c:geo – kontakty</string>
-    <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
     <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání kešky do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
     <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov kešek, hlasová navigace a mnohem více.</string>
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
