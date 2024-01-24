@@ -202,8 +202,6 @@
     <string name="err_tb_find_that">c:geo nu poate găsi acest obiect călător.</string>
     <string name="err_waypoint_cache_unknown">c:geo nu ştie pentru ce cutie vrei sa adaugi un punct.</string>
     <string name="err_waypoint_add_failed">c:geo nu a putut adăuga punctul.</string>
-    <string name="err_point_bear_and_dist_title">Ai nevoie de ajutor?</string>
-    <string name="err_point_bear_and_dist">Completează şi azimutul şi distanţa. Azimutul este unghiul de la 0 la 360 faţă de nord. Distanţa nu necesită unităţi.</string>
     <string name="err_log_load_data">c:geo nu poate încărca informaţiile necesare pentru a posta o însemnare.</string>
     <string name="err_log_post_missing_tracking_code">Lipseşte codul de urmărire.</string>
     <string name="err_log_post_missing_coordinates">Lipsesc coordonatele.</string>
@@ -213,7 +211,6 @@
     <string name="err_logimage_post_failed">Se pare că imaginea pe care încercai să o trimiţi odată cu însemnarea nu a putut fi încărcată. Te rog verifică însemnarea în jurnalul geocutiei pe site-ul unde este publicată.</string>
     <string name="err_parse_lat">c:geo nu înţelege latitudinea.</string>
     <string name="err_parse_lon">c:geo nu înţelege longitudinea.</string>
-    <string name="err_parse_dist">c:geo nu înţelege distanţa.</string>
     <string name="err_parse_lat_lon">c:geo nu înţelege latitudinea sau longitudinea.</string>
     <string name="err_rendertheme_file_unreadable">Tema de afişare aleasă nu a putut fi încărcată. Revenire la tema implicită.</string>
     <string name="err_rendertheme_invalid">Tema de afişare aleasă nu este valabilă pentru această versiune de mapsforge. Revenire la tema implicită.</string>
@@ -707,8 +704,6 @@
     <string name="waypoint_cache_coordinates">Coordonate cutie</string>
     <string name="waypoint_custom">Personalizat</string>
     <string name="waypoint_my_coordinates">Coordonatele mele</string>
-    <string name="waypoint_bearing">Azimut în °</string>
-    <string name="waypoint_distance">Distanţă</string>
     <string name="waypoint_name">Nume</string>
     <string name="waypoint_edit">Modifică</string>
     <string name="waypoint_copy_coordinates">Copiază coordonatele</string>
@@ -739,6 +734,7 @@
     <string name="from_clipboard">Din memoria temporară</string>
     <string name="copy_to_clipboard">Copiază în memoria temporară</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Azimut în °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -804,7 +800,6 @@
     <string name="user_menu_view_hidden">Cutii ascunse</string>
     <string name="user_menu_open_browser">Deschide profilul în browser</string>
     <string name="user_menu_send_message">Trimite mesaj</string>
-    <string name="user_menu_open_contact">Deschide pagina contactului</string>
     <string name="user_unknown">Utilizator necunoscut</string>
     <!-- navigation -->
     <string name="navigation">Navigare</string>
@@ -821,8 +816,6 @@
     <string name="helper_calendar_pastevent_title">Eveniment trecut</string>
     <string name="helper_calendar_pastevent_question">Data evenimentului este în trecut. Adaugă-l oricum?</string>
     <string name="helper_sendtocgeo_title">Trimite la c:geo</string>
-    <string name="helper_contacts_title">c:geo - contacte (extensie)</string>
-    <string name="helper_contacts_description">Permite să afişezi contacte (din agenda de contacte) direct din formularul pentru însemnări, astfel încţt să ăti poţi întreba mai uşor prietenii.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
