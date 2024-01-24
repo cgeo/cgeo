@@ -262,8 +262,6 @@
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
     <string name="err_waypoint_cache_unknown">O c:geo não sabe a que cache pretende adicionar o ponto adicional.</string>
     <string name="err_waypoint_add_failed">O c:geo não conseguiu adicionar o seu ponto adicional.</string>
-    <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
-    <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao Norte. A distância não necessita de unidades.</string>
     <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
     <string name="err_log_post_missing_tracking_code">Código de acompanhamento em falta.</string>
     <string name="err_log_post_missing_coordinates">Coordenadas em falta.</string>
@@ -274,7 +272,6 @@
     <string name="err_logimage_post_failed">Parece que a imagem que anexou ao registo não foi enviada. Por favor, verifique na página web da cache se a imagem foi enviada.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
-    <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema seleccionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema seleccionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
@@ -1551,8 +1548,6 @@
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_my_coordinates_accuracy">As minhas coordenadas (±%s)</string>
-    <string name="waypoint_bearing">Azimute em º</string>
-    <string name="waypoint_distance">Distância</string>
     <string name="waypoint_name">Nome</string>
     <string name="waypoint_edit">Editar</string>
     <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
@@ -1588,6 +1583,7 @@
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Azimute em º</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
@@ -1790,7 +1786,6 @@
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
     <string name="user_menu_send_email">Enviar e-mail</string>
-    <string name="user_menu_open_contact">Abrir contacto</string>
     <string name="user_unknown">Utilizador desconhecido</string>
     <!-- navigation -->
     <string name="navigation">Navegação</string>
@@ -1816,8 +1811,6 @@
     <string name="helper_calendar_pastevent_title">Eventos passados</string>
     <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
     <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
-    <string name="helper_contacts_title">c:geo - contactos (extensão)</string>
-    <string name="helper_contacts_description">Permite-lhe que aceda directamente a um contacto (da sua lista de contactos), a partir de um registo feito numa geocache. Assim será mais fácil pedir ajuda aos seus amigos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a \'geocaching.com\' poderá, com o clique de um botão, enviar geocaches directamente para o seu smartphone.</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
