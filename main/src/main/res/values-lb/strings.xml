@@ -513,6 +513,7 @@
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
+    <string name="waypoint_distance">Distanz</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
