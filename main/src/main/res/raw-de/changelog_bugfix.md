@@ -1,4 +1,9 @@
 ##
+- Korrektur: Defaultwerte für Trackable Logs überarbeitet
+- Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
+- New: New formula CHARS to select multiple single chars
+
+##
 - Korrektur: Absturz bei Anzeige des Benachrichtigungs-Markers
 - Korrektur: Unter neueren Android-Versionen nicht mehr benötigte Berechtigung READ_EXTERNAL_STORAGE angefordert
 - Korrektur: Standardauswahl des Trackable-Logtyps
