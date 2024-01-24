@@ -196,8 +196,6 @@
     <string name="err_tb_find_that">c:geo 找不到那个可追踪物。</string>
     <string name="err_waypoint_cache_unknown">c:geo 不知道您想要添加航点到哪个藏点。</string>
     <string name="err_waypoint_add_failed">c:geo 无法添加您的航点。</string>
-    <string name="err_point_bear_and_dist_title">需要帮助吗？</string>
-    <string name="err_point_bear_and_dist">填写方位角和距离。方位角是从正北方顺时针转到目标方向的角度，大小为 0 至 360 度。距离不需要单位。</string>
     <string name="err_log_load_data">c:geo 无法加载记录到访所需的数据。</string>
     <string name="err_log_post_missing_tracking_code">缺少追踪代码。</string>
     <string name="err_log_post_missing_coordinates">缺少坐标。</string>
@@ -207,7 +205,6 @@
     <string name="err_logimage_post_failed">您的日志图像似乎没有被上传。请在藏点源网页上进行检查。</string>
     <string name="err_parse_lat">c: geo 不能解析纬度。</string>
     <string name="err_parse_lon">c: geo 不能解析经度。</string>
-    <string name="err_parse_dist">c: geo 不能解析距离。</string>
     <string name="err_parse_lat_lon">c: geo 不能解析纬度或经度。</string>
     <string name="err_rendertheme_file_unreadable">无法加载选中的渲染主题。还原为内置主题。</string>
     <string name="err_rendertheme_invalid">所选的渲染主题对此mapsforge版本无效。恢复到内置主题。</string>
