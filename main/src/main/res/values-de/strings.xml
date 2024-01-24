@@ -1633,6 +1633,7 @@
     <string name="formula_function_if">Wenn</string>
     <string name="formula_function_length">Zeichenlänge</string>
     <string name="formula_function_substring">Teilzeichenfolge</string>
+    <string name="formula_function_chars">Zeichen auswählen</string>
     <string name="formula_function_rot13">Verschiebe Zeichen um 13 Stellen</string>
     <string name="formula_function_rot">Verschiebe Zeichen</string>
     <string name="formula_function_checksum">Quersumme</string>
