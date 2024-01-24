@@ -269,8 +269,6 @@
     <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
     <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
     <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
-    <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
-    <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
     <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code ontbreekt.</string>
     <string name="err_log_post_missing_coordinates">Coördinaten ontbreken.</string>
@@ -281,7 +279,6 @@
     <string name="err_logimage_post_failed">Het lijkt erop dat uw log-afbeelding niet is geüpload. Controleer het op de cache webpagina.</string>
     <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
     <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
-    <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
     <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
     <string name="err_rendertheme_file_unreadable">Het geselecteerde render thema kan niet worden geladen. Er wordt teruggekeerd naar het ingebouwde thema.</string>
     <string name="err_rendertheme_invalid">Het geselecteerde render thema is niet geldig voor deze versie van mapsforge. Er wordt teruggekeerd naar het ingebouwde thema.</string>
@@ -1571,8 +1568,6 @@
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
     <string name="waypoint_my_coordinates_accuracy">Mijn coördinaten (±%s)</string>
-    <string name="waypoint_bearing">Richting</string>
-    <string name="waypoint_distance">Afstand</string>
     <string name="waypoint_name">Naam</string>
     <string name="waypoint_edit">Bewerken</string>
     <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
@@ -1820,7 +1815,6 @@
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
     <string name="user_menu_send_email">E-mail verzenden</string>
-    <string name="user_menu_open_contact">Open contactkaart</string>
     <string name="user_unknown">Onbekende gebruiker</string>
     <!-- navigation -->
     <string name="navigation">Navigatie</string>
@@ -1846,8 +1840,6 @@
     <string name="helper_calendar_pastevent_title">Event in het verleden</string>
     <string name="helper_calendar_pastevent_question">De Eventdatum is in het verleden. Toch toevoegen?</string>
     <string name="helper_sendtocgeo_title">Verzend naar c:geo</string>
-    <string name="helper_contacts_title">c:geo contacten-plug-in</string>
-    <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
     <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
     <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
