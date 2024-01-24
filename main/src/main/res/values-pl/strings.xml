@@ -1663,6 +1663,7 @@
     <string name="formula_function_if">Jeżeli</string>
     <string name="formula_function_length">Długość ciągu</string>
     <string name="formula_function_substring">Podciąg</string>
+    <string name="formula_function_chars">Wybierz znaki</string>
     <string name="formula_function_rot13">Obróć znaki o 13</string>
     <string name="formula_function_rot">Obróć znaki</string>
     <string name="formula_function_checksum">Suma kontrolna</string>

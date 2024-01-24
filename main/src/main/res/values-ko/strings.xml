@@ -1618,6 +1618,7 @@
     <string name="formula_function_if">만약</string>
     <string name="formula_function_length">스트링 길이</string>
     <string name="formula_function_substring">부스트링</string>
+    <string name="formula_function_chars">문자 선택</string>
     <string name="formula_function_rot13">문자를 13만큼 회전</string>
     <string name="formula_function_rot">문자 회전</string>
     <string name="formula_function_checksum">체크섬</string>

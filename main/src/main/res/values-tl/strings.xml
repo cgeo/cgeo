@@ -162,7 +162,7 @@
     <string name="err_tb_find_that">hindi mahanap ng c:geo ang trackable na iyon.</string>
     <string name="err_waypoint_cache_unknown">hindi alam ng c:geo kung aling cache ang gusto mong dagdagan ng waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo ay nabigo sa pagdagdag ng iyong waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Nangangailangan ka ba ng tulong?</string>
+    <string name="err_point_bear_and_dist_title">Kailangan mo ba ng tulong?</string>
     <string name="err_point_bear_and_dist">Punan ang parehong tindig at distansya. Ang tindig ay anggulo 0 hanggang 360 degrees na nakabase sa hilaga. Ang distansya ay hindi nangangailangan ng mga yunit.</string>
     <string name="err_log_load_data">ang c:geo ay hindi maka-load ng mga kinakailangang datos para maitala ang pagbisita.</string>
     <string name="err_log_post_missing_tracking_code">Ang code ng trackin ay nawawala.</string>

@@ -234,7 +234,7 @@
     <string name="err_tb_find_that">c:geo bu Trackable\'ı bulamıyor.</string>
     <string name="err_waypoint_cache_unknown">c:geo hangi Geocache için bir yol noktası eklemek istediğinizi bilmiyor.</string>
     <string name="err_waypoint_add_failed">c:geo yol noktanızı ekleyemedi.</string>
-    <string name="err_point_bear_and_dist_title">Yardıma ihtiyacın var mı?</string>
+    <string name="err_point_bear_and_dist_title">Yardıma ihtiyacınız var mı?</string>
     <string name="err_point_bear_and_dist">Hem azimut hem de mesafe doldurun. Azimut açısı kuzeye göre 0 ile 360 derecedir. Mesafe birim gerektirmez.</string>
     <string name="err_log_load_data">c:geo ziyaret kaydı için gerekli verileri yükleyemiyor.</string>
     <string name="err_log_post_missing_tracking_code">Takip kodu eksik.</string>

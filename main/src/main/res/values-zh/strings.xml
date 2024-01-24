@@ -657,6 +657,7 @@
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
+    <string name="waypoint_distance">游览路程</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

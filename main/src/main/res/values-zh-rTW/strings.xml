@@ -1069,7 +1069,7 @@
     <string name="waypoint_cache_coordinates">藏寶座標</string>
     <string name="waypoint_custom">自定</string>
     <string name="waypoint_my_coordinates">我的座標</string>
-    <string name="waypoint_distance">距離：</string>
+    <string name="waypoint_distance">游览路程</string>
     <string name="waypoint_name">名稱</string>
     <string name="waypoint_edit">編輯</string>
     <string name="waypoint_copy_coordinates">複製座標</string>

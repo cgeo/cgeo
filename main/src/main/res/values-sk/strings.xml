@@ -239,7 +239,7 @@
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
     <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
-    <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
+    <string name="err_point_bear_and_dist_title">Potrebujete pomoc?</string>
     <string name="err_point_bear_and_dist">Vyplňte azimut aj vzdialenosť. Azimut je uhol 0 až 360 stupňov vzhľadom k severu. Vzdialenosť môžete zadať bez jednotiek.</string>
     <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
     <string name="err_log_post_missing_tracking_code">Chýba kód trasovateľného predmetu (TB kód).</string>
@@ -1474,7 +1474,7 @@
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
     <string name="waypoint_my_coordinates_accuracy">Moje súradnice (±%s)</string>
     <string name="waypoint_bearing">Azimut v °</string>
-    <string name="waypoint_distance">Vzdialenosť</string>
+    <string name="waypoint_distance">vzdialenosti</string>
     <string name="waypoint_name">Názov</string>
     <string name="waypoint_edit">Upraviť</string>
     <string name="waypoint_copy_coordinates">Kopírovať súradnice</string>

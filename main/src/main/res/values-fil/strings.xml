@@ -155,7 +155,7 @@
     <string name="err_tb_find_that">ang c:geo ay hindi nakakita sa nasusubaybayang iyon.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo ay walang alam sa kung anong cache ang iyong gusto na dagdagan ng parang isang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo ay nabiigo sa pagdagdag ng iyong puntongdaan.</string>
-    <string name="err_point_bear_and_dist_title">Nangangailangan ng iilang tulong?</string>
+    <string name="err_point_bear_and_dist_title">Nangangailangan ka ng iilang tulong?</string>
     <string name="err_point_bear_and_dist">Punan ang parehong bearing at distansya. Ang bearing ay anggulo mula 0 hanggang 360 ng mga degree relatibo patungo sa hilaga. Ang distansya ay hindi nangangailangan ng mga yunit.</string>
     <string name="err_log_load_data">ang c:geo ay hindi nakapag-load sa kinakailangang datos para mai-log ang pagbisita.</string>
     <string name="err_log_post_missing_tracking_code">Nawawala ang code sa pagsusubaybay.</string>
@@ -654,7 +654,7 @@
     <string name="waypoint_custom">Ang kustom</string>
     <string name="waypoint_my_coordinates">Ang mga koordinado ko</string>
     <string name="waypoint_bearing">Ang tindig sa °</string>
-    <string name="waypoint_distance">Ang distansya</string>
+    <string name="waypoint_distance">Distansya</string>
     <string name="waypoint_name">Ang pangalan</string>
     <string name="waypoint_edit">I-edit</string>
     <string name="waypoint_copy_coordinates">Ang mga koordinado ay koptahin</string>

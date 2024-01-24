@@ -171,7 +171,7 @@
     <string name="err_tb_find_that">c:geo לא מצליח למצוא את הTrackable הזה.</string>
     <string name="err_waypoint_cache_unknown">c:geo לא יודע לאיזה מטמון ניסית להוסיף נקודת דרך.</string>
     <string name="err_waypoint_add_failed">c:geo כשל בהוספת נקודת הדרך שלך.</string>
-    <string name="err_point_bear_and_dist_title">צריך עזרה</string>
+    <string name="err_point_bear_and_dist_title">צריך עזרה?</string>
     <string name="err_point_bear_and_dist">מלאו את הכיוון ואת המרחק. הכיוון הוא זווית בין 0 ל-360 מעלות ביחס לצפון. המרחק אינו דורש יחידות.</string>
     <string name="err_log_load_data">c:geo לא יכול לטעון את המידע הדרוש לרשום הביקור</string>
     <string name="err_log_post_missing_tracking_code">קוד מעקב חסר.</string>
@@ -400,6 +400,7 @@
     <string name="waypoint_coordinates">נקודות ציון</string>
     <string name="waypoint_cache_coordinates">נקודות ציון של המטמון</string>
     <string name="waypoint_my_coordinates">נקוודת הציון שלי</string>
+    <string name="waypoint_distance">מרחק</string>
     <string name="waypoint_copy_coordinates">העתק נקודות ציון</string>
     <string name="waypoint_added">נקודת ציון נוספה</string>
     <string name="waypoint_loading">Loading waypoint&#8230;</string>
