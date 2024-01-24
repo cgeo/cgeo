@@ -269,8 +269,6 @@
     <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
     <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrytki chcesz dodać punkt nawigacji.</string>
     <string name="err_waypoint_add_failed">c:geo nie może dodać punktu nawigacji.</string>
-    <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
-    <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
     <string name="err_log_post_missing_tracking_code">Brak kodu przedmiotu podróżnego.</string>
     <string name="err_log_post_missing_coordinates">Brak współrzędnych.</string>
@@ -281,7 +279,6 @@
     <string name="err_logimage_post_failed">Wygląda na to, że zdjęcie nie zostało przesłane. Proszę sprawdzić to na stronie internetowej skrytki.</string>
     <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
     <string name="err_parse_lon">c:geo nie może obliczyć długości geograficznej.</string>
-    <string name="err_parse_dist">c:geo nie może obliczyć odległości.</string>
     <string name="err_parse_lat_lon">c:geo nie może obliczyć szerokości lub długości geograficznej.</string>
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
@@ -1601,8 +1598,6 @@
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
-    <string name="waypoint_bearing">Kierunek w stopniach</string>
-    <string name="waypoint_distance">Odległość</string>
     <string name="waypoint_name">Nazwa</string>
     <string name="waypoint_edit">Edytuj</string>
     <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
@@ -1692,6 +1687,7 @@
     <string name="formula_function_if">Jeżeli</string>
     <string name="formula_function_length">Długość ciągu</string>
     <string name="formula_function_substring">Podciąg</string>
+    <string name="formula_function_chars">Wybierz znaki</string>
     <string name="formula_function_rot13">Obróć znaki o 13</string>
     <string name="formula_function_rot">Obróć znaki</string>
     <string name="formula_function_checksum">Suma kontrolna</string>
@@ -1850,7 +1846,6 @@
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
     <string name="user_menu_send_email">Wyślij e-mail</string>
-    <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
     <string name="user_unknown">Nieznany użytkownik</string>
     <!-- navigation -->
     <string name="navigation">Nawigacja</string>
@@ -1876,8 +1871,6 @@
     <string name="helper_calendar_pastevent_title">Przeszłe wydarzenie</string>
     <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
     <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
-    <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
-    <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
     <string name="helper_sendtocgeo_description">Wyślij do c:geo (Send2cgeo) jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
