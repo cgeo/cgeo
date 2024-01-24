@@ -262,8 +262,6 @@
     <string name="err_tb_find_that">c:geo non trova quel trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo non conosce a quale cache vuoi aggiungere un waypoint.</string>
     <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Necessiti di aiuto?</string>
-    <string name="err_point_bear_and_dist">Inserisci angolo e distanza. Angolo specifica un valore in gradi tra 0 e 360 relativo al nord. La distanza non richiede unità di misura.</string>
     <string name="err_log_load_data">c:geo non riesce a caricare i dati necessari per salvare il log della tua visita.</string>
     <string name="err_log_post_missing_tracking_code">Il codice di tracking è mancante.</string>
     <string name="err_log_post_missing_coordinates">Mancano le coordinate.</string>
@@ -274,7 +272,6 @@
     <string name="err_logimage_post_failed">Sembra che l\'immagine del registro non sia stata caricata. Si prega di controllare sul sito Web del cache originario.</string>
     <string name="err_parse_lat">c:geo non riesce ad interpretare la latitudine.</string>
     <string name="err_parse_lon">c:geo non riesce ad interpretare la longitudine.</string>
-    <string name="err_parse_dist">c:geo non riesce ad interpretare la distanza.</string>
     <string name="err_parse_lat_lon">c:geo non riesce ad interpretare la latitudine o la longitudine.</string>
     <string name="err_rendertheme_file_unreadable">Impossibile caricare il tema di rendering selezionato. Ricarico quello predefinito.</string>
     <string name="err_rendertheme_invalid">Il tema di rendering selezionato non è valido per questa versione di mapsforge. Ricarico quello predefinito.</string>
@@ -1562,8 +1559,6 @@
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_my_coordinates_accuracy">Le mie coordinate (±%s)</string>
-    <string name="waypoint_bearing">Angolo in gradi</string>
-    <string name="waypoint_distance">Distanza</string>
     <string name="waypoint_name">Nome</string>
     <string name="waypoint_edit">Modifica</string>
     <string name="waypoint_copy_coordinates">Copia le coordinate</string>
@@ -1599,6 +1594,7 @@
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Angolo in gradi</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
@@ -1802,7 +1798,6 @@
     <string name="user_menu_open_browser">Apri profilo nel browser</string>
     <string name="user_menu_send_message">Invia messaggio</string>
     <string name="user_menu_send_email">Invia email</string>
-    <string name="user_menu_open_contact">Aprire scheda contatto</string>
     <string name="user_unknown">Utente sconosciuto</string>
     <!-- navigation -->
     <string name="navigation">Navigazione</string>
@@ -1828,8 +1823,6 @@
     <string name="helper_calendar_pastevent_title">Evento passato</string>
     <string name="helper_calendar_pastevent_question">La data dell\'evento è nel passato. Aggiungerlo comunque?</string>
     <string name="helper_sendtocgeo_title">Invia a c:geo</string>
-    <string name="helper_contacts_title">c:geo - plugin Contatti</string>
-    <string name="helper_contacts_description">Consente di aprire una scheda contatto (della tua rubrica) direttamente da un log, per permetterti di chiedere aiuto agli amici più facilmente.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
     <string name="helper_locus_description">App per la navigazione in esterni per cellulare o tablet. Mostra mappe offline, traccia il tuo percorso, cerca geocache, usa una voce guida e molto altro.</string>
     <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
