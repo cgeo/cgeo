@@ -14,6 +14,7 @@
 - 신규: 회원님의 로그 편집/삭제
 - New: Waypoint projection with variables
 - Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
@@ -22,3 +23,5 @@
 - 수정: 유효한 날짜/시간 정보 없이 백업 복원
 - New: Include active trackfiles in backup
 - New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
