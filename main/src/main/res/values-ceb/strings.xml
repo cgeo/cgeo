@@ -151,8 +151,6 @@
     <string name="err_tb_find_that">ang c:geo dili maka kita ni anang trackable.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo wala masayud kung sa asa na cache nimo gusto i-puno ang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo napakyas og pag puno sa imoha nga waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Nanginahanglan kag tabang?</string>
-    <string name="err_point_bear_and_dist">Butangi ang direksyon og gilay-on. Ang direksyon kay angulo 0 hangtud 360 grado kabanay sa norte. Ang distansya dili kinahanglan og yunit.</string>
     <string name="err_log_load_data">ang c:geo dili maka pakita sa datus na kinahanglan aron maka log sa pagbisita.</string>
     <string name="err_log_post_missing_tracking_code">Ang tracking na kodigo kay nawagtang.</string>
     <string name="err_log_post_missing_coordinates">Ang mga koordinar kay nawagtang.</string>
@@ -162,7 +160,6 @@
     <string name="err_logimage_post_failed">Murag ang imoga nga log nga imahe wala na nabutang. Palihug og pag-tan aw ani adto sa orihinal na website sa cache.</string>
     <string name="err_parse_lat">ang c:geo dili maka buwag sa latitud.</string>
     <string name="err_parse_lon">ang c:geo dili makabuwag sa longitud.</string>
-    <string name="err_parse_dist">ang c:geo dili maka buwag sa gilay-on.</string>
     <string name="err_parse_lat_lon">ang c:geo dili makabuwag sa latitud og longitud.</string>
     <string name="err_rendertheme_file_unreadable">Dili makahimo nga ma-load ang napilian nga gihatag nga tema. Gibalik ngadto sa usa nga naa na daan.</string>
     <string name="err_rendertheme_invalid">Ang napilian nga tema nga gihatag kay dili balido alang sa niini nga bersyon sa mapsforge. Gibalik ngadto sa usa nga naa na daan.</string>
@@ -623,8 +620,6 @@
     <string name="waypoint_cache_coordinates">Mga koordinetor sa cache</string>
     <string name="waypoint_custom">Kustom</string>
     <string name="waypoint_my_coordinates">Akong mga koordinetor</string>
-    <string name="waypoint_bearing">Bearing in</string>
-    <string name="waypoint_distance">Distansya</string>
     <string name="waypoint_name">Pangalan</string>
     <string name="waypoint_edit">I-edit</string>
     <string name="waypoint_copy_coordinates">Kopyaha ang mga coordinate</string>
@@ -655,6 +650,7 @@
     <string name="from_clipboard">Gikan sa clipboard</string>
     <string name="copy_to_clipboard">Gikopya padung sa clipboard</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Bearing in</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -716,7 +712,6 @@
     <string name="user_menu_view_hidden">Mga natago na cache</string>
     <string name="user_menu_open_browser">Abilihi ang profolio sa browser</string>
     <string name="user_menu_send_message">Magpadala ug mensahe</string>
-    <string name="user_menu_open_contact">Ablihi ang kontak kard</string>
     <string name="user_unknown">Wa mailhi na tiggamit</string>
     <!-- navigation -->
     <string name="navigation">Nabigasyon</string>
@@ -732,8 +727,6 @@
     <string name="helper_calendar_pastevent_title">Niaging hitabo</string>
     <string name="helper_calendar_pastevent_question">Ang petsa sa hitabi ay nasa kaniadto. Ipuno ba ni bisan inaana?</string>
     <string name="helper_sendtocgeo_title">Ipadala sa c:geo</string>
-    <string name="helper_contacts_title">c:geo ang mga kontak plugin</string>
-    <string name="helper_contacts_description">Maoy magpahimo nimo og abli sa kontak kard ( sa imong adres na libro) deretso gikan sa log entri, para mas dali ka makapangayo og tabang sa imong mga kahigalaan.</string>
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay usa ka browser na ekstenyon <strong>para sa imung PC</strong>.Kung kag-browse ug geocaching.com, pwede ka magpadala ug mga cache sa imong cellphone kauban sa pagpislit sa pislitanan diretso sa sulod na browser.</string>
     <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
