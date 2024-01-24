@@ -319,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
     <string name="confirm_discard_changes">Ungespeicherte Änderungen verwerfen?</string>
+    <string name="confirm_unsent_changes_title">Ungesendete Änderungen</string>
+    <string name="confirm_unsent_changes">Ungespeicherte Änderungen verwerfen?</string>
     <string name="confirm_discard_wp_changes">Wegpunktänderungen verwerfen?</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
@@ -998,6 +1000,7 @@
     <string name="init_backup_unavailable">nicht vorhanden</string>
     <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nSicherung hat Version %2$d</string>
+    <string name="backup_tracks_error">Fehler beim Erstellen der Sicherung von Tracks.</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings_logins">Zugangsdaten sichern</string>
@@ -1657,6 +1660,7 @@
     <string name="formula_function_if">Wenn</string>
     <string name="formula_function_length">Zeichenlänge</string>
     <string name="formula_function_substring">Teilzeichenfolge</string>
+    <string name="formula_function_chars">Zeichen auswählen</string>
     <string name="formula_function_rot13">Verschiebe Zeichen um 13 Stellen</string>
     <string name="formula_function_rot">Verschiebe Zeichen</string>
     <string name="formula_function_checksum">Quersumme</string>
@@ -1815,6 +1819,7 @@
     <string name="user_menu_open_browser">Profil im Browser öffnen</string>
     <string name="user_menu_send_message">Nachricht senden</string>
     <string name="user_menu_send_email">E-Mail senden</string>
+    <string name="user_menu_open_contact">Kontakt öffnen</string>
     <string name="user_unknown">Unbekannter Benutzer</string>
     <!-- navigation -->
     <string name="navigation">Navigation</string>
@@ -2341,6 +2346,7 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
+    <string name="routes_tracks_change_name">Namen ändern</string>
     <string name="center">Zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
