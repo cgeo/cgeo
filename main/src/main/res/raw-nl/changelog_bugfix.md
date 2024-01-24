@@ -1,4 +1,9 @@
 ##
+- Oplossing: Standaard Trackable logtype bepaling herschreven
+- Oplossing: Trackable spotted cache info (website wijzigingen)
+- Nieuw: Nieuwe formule CHARS om meerdere enkele tekens te selecteren
+
+##
 - Oplossing: Crash bij weergave meldingsstip
 - Oplossing: Onnodige READ_EXTERNAL_STORAGE machtiging werd opgevraagd op nieuwere Android versies
 - Oplossing: Trackable logsoort standaard selectie
