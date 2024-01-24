@@ -264,7 +264,7 @@
     <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
     <string name="err_waypoint_cache_unknown">c:geo neví, k jaké kešce chceš přidat trasový bod.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
-    <string name="err_point_bear_and_dist_title">Potřebuješ poradit?</string>
+    <string name="err_point_bear_and_dist_title">Potřebuješ pomoct?</string>
     <string name="err_point_bear_and_dist">Vyplň směr i vzdálenost. Směr je úhel 0 až 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
     <string name="err_log_post_missing_tracking_code">Chybí identifikační kód.</string>
@@ -1663,6 +1663,7 @@
     <string name="formula_function_if">Když</string>
     <string name="formula_function_length">Délka řetězce</string>
     <string name="formula_function_substring">Podřetězec</string>
+    <string name="formula_function_chars">Vybrat znaky</string>
     <string name="formula_function_rot13">Otočit znaky o 13</string>
     <string name="formula_function_rot">Otočit znaky</string>
     <string name="formula_function_checksum">Kontrolní součet</string>
