@@ -228,8 +228,6 @@
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo ved ikke hvilken cache, du ønsker at tilføje et rutepunkt til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Har du brug for hjælp?</string>
-    <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
     <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
     <string name="err_log_post_missing_tracking_code">Trackingkoden mangler.</string>
     <string name="err_log_post_missing_coordinates">Koordinaterne mangler.</string>
@@ -239,7 +237,6 @@
     <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
     <string name="err_parse_lat">c:geo kan ikke fortolke den indtastede breddegrad.</string>
     <string name="err_parse_lon">c:geo kan ikke fortolke den indtastede længdegrad.</string>
-    <string name="err_parse_dist">c:geo kan ikke forstå den indtastede afstand.</string>
     <string name="err_parse_lat_lon">c:geo kan ikke fortolke breddegrad eller længdegrad.</string>
     <string name="err_rendertheme_file_unreadable">Det valgte korttema kunne ikke indlæses. Vender tilbage til det indbyggede.</string>
     <string name="err_rendertheme_invalid">Det valgte korttema er ikke gyldigt for denne version af Mapsforge. Vender tilbage til det indbyggede.</string>
@@ -1070,8 +1067,6 @@
     <string name="waypoint_cache_coordinates">Cacheposition</string>
     <string name="waypoint_custom">Tilpasset</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
-    <string name="waypoint_bearing">Kompasretning</string>
-    <string name="waypoint_distance">Afstand</string>
     <string name="waypoint_name">Navn</string>
     <string name="waypoint_edit">Rediger</string>
     <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
@@ -1106,6 +1101,7 @@
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Kompasretning</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -1193,7 +1189,6 @@
     <string name="user_menu_open_browser">Åbn profil i browser</string>
     <string name="user_menu_send_message">Send besked</string>
     <string name="user_menu_send_email">Send email</string>
-    <string name="user_menu_open_contact">Åbn kontaktdetaljer</string>
     <string name="user_unknown">Ukendt brugerkonto</string>
     <!-- navigation -->
     <string name="navigation">Navigation</string>
@@ -1215,8 +1210,6 @@
     <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
     <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
     <string name="helper_sendtocgeo_title">Send2c:geo</string>
-    <string name="helper_contacts_title">c:geo kontakt-plugin</string>
-    <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
     <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
     <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
     <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>

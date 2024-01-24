@@ -191,8 +191,6 @@
     <string name="err_tb_find_that">c:geo не може знайти цей геокеш.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знає, який кеш ви хочете додати точку.</string>
     <string name="err_waypoint_add_failed">c:geo не вдалося додати вашу точку.</string>
-    <string name="err_point_bear_and_dist_title">Потрібна деяка допомога?</string>
-    <string name="err_point_bear_and_dist">Заповніть напрямок та відстань. Кут від 0 до 360 градусів відносно півночі. Відстань не потребує одиниць вимірювання.</string>
     <string name="err_log_load_data">c:geo не може завантажити дані, необхідні для візиту журналу.</string>
     <string name="err_log_post_missing_tracking_code">Відсутній код відстеження.</string>
     <string name="err_log_post_missing_coordinates">Координати відсутні.</string>
@@ -202,7 +200,6 @@
     <string name="err_logimage_post_failed">Здається, ваше зображення журналу не було завантажене. Будь ласка, перевірте його на веб-сайті, який відтворює кеш.</string>
     <string name="err_parse_lat">c:geo не вдалося розпарсити широту.</string>
     <string name="err_parse_lon">c:geo не вдалося розпарсити довготу.</string>
-    <string name="err_parse_dist">c:geo не може проаналізувати відстань.</string>
     <string name="err_parse_lat_lon">c: гео не може проаналізувати широту чи довготу.</string>
     <string name="err_rendertheme_file_unreadable">Не вдалося завантажити вибрану тему візуалізації. Повернення до вбудованого теми.</string>
     <string name="err_rendertheme_invalid">Вибрана тема візуалізації не є правильною для цієї версії карт. Повертаючись до вбудованої версії.</string>
@@ -843,8 +840,6 @@
     <string name="waypoint_cache_coordinates">координати кешу</string>
     <string name="waypoint_custom">звичай</string>
     <string name="waypoint_my_coordinates">Мої координати</string>
-    <string name="waypoint_bearing">несучи в</string>
-    <string name="waypoint_distance">Відстань</string>
     <string name="waypoint_name">Ім’я</string>
     <string name="waypoint_edit">Редагувати</string>
     <string name="waypoint_copy_coordinates">Копіювати координати</string>
@@ -879,6 +874,7 @@
     <string name="from_clipboard">З буферу обміну</string>
     <string name="copy_to_clipboard">Скопіювати в буфер обміну</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">несучи в</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -958,7 +954,6 @@
     <string name="user_menu_open_browser">Відкрити профіль в браузері</string>
     <string name="user_menu_send_message">Надіслати повідомлення</string>
     <string name="user_menu_send_email">Надіслати ел. листа</string>
-    <string name="user_menu_open_contact">відкрита контактна картка</string>
     <string name="user_unknown">невідомий користувач</string>
     <!-- navigation -->
     <string name="navigation">Навігація</string>
@@ -984,8 +979,6 @@
     <string name="helper_calendar_pastevent_title">Минула подія</string>
     <string name="helper_calendar_pastevent_question">Дата події минула. Додати все-таки?</string>
     <string name="helper_sendtocgeo_title">надіслати на c: geo</string>
-    <string name="helper_contacts_title">c:geo плагін контактів</string>
-    <string name="helper_contacts_description">Дозволяє вам відкрити картку контактів (адресної книги) безпосередньо з запису в журналі, щоб ви могли легше запитувати друзів про допомогу.</string>
     <string name="helper_sendtocgeo_description">Надсилається на c:geo розширення для браузера <strong>для вашого ПК</strong>. Під час перегляду геокешингу. коммм, ви можете надіслати кеші на свій смартфон за допомогою кнопки безпосередньо всередині браузера.</string>
     <string name="helper_locus_description">Програма навігації поза межами телефону або планшета. Переглядайте топографічні карти в режимі офлайн, відстежуйте ваш маршрут, схованки за допомогою голосового посібника і зробіть ще більше.</string>
     <string name="helper_gpsstatus_description">Ви можете використовувати радар у цьому додатку спільно з c: geo. Він також пропонує багато іншої інформації, пов\'язаної з GPS.</string>

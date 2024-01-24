@@ -230,8 +230,6 @@
     <string name="err_tb_find_that">トラッカブルが見つかりません</string>
     <string name="err_waypoint_cache_unknown">ウェイポイントを追加するキャッシュが見つかりません</string>
     <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした</string>
-    <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
-    <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表します。距離の単位は付けないでください</string>
     <string name="err_log_load_data">ログを書くのに必要なデータを読み込むことができません</string>
     <string name="err_log_post_missing_tracking_code">トラッキング・コードがありません</string>
     <string name="err_log_post_missing_coordinates">座標がありません</string>
@@ -241,7 +239,6 @@
     <string name="err_logimage_post_failed">ログ画像をアップロードすることができなかったようです。キャッシュのWebサイトで確認してください</string>
     <string name="err_parse_lat">緯度の解析ができません</string>
     <string name="err_parse_lon">経度の解析ができません</string>
-    <string name="err_parse_dist">距離の解析ができません</string>
     <string name="err_parse_lat_lon">緯度または経度の解析ができません</string>
     <string name="err_rendertheme_file_unreadable">選択した地図テーマファイルを読み込めませんでした。組み込みのものに戻します</string>
     <string name="err_rendertheme_invalid">選択した地図テーマファイルはこのMapsforgeバージョンには対応していません。組み込みのものに戻します</string>
@@ -1267,8 +1264,6 @@
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_my_coordinates_accuracy">現在地(±%s)</string>
-    <string name="waypoint_bearing">方位(度[°])</string>
-    <string name="waypoint_distance">距離</string>
     <string name="waypoint_name">ウェイポイント名</string>
     <string name="waypoint_edit">編集</string>
     <string name="waypoint_copy_coordinates">座標をコピー</string>
@@ -1304,6 +1299,7 @@
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">方位(度[°])</string>
     <!-- Variables -->
     <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
     <string name="variables_scanlisting">スキャン</string>
@@ -1484,7 +1480,6 @@
     <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
     <string name="user_menu_send_message">メッセージを送信</string>
     <string name="user_menu_send_email">メールを送る</string>
-    <string name="user_menu_open_contact">連絡先を開く</string>
     <string name="user_unknown">不明なユーザー</string>
     <!-- navigation -->
     <string name="navigation">ナビゲーション</string>
@@ -1509,8 +1504,6 @@
     <string name="helper_calendar_pastevent_title">過去のイベント</string>
     <string name="helper_calendar_pastevent_question">イベントの日付が過去です。それでも追加しますか?</string>
     <string name="helper_sendtocgeo_title">Send2cgeo</string>
-    <string name="helper_contacts_title">c:geo - 連絡先 アドオン</string>
-    <string name="helper_contacts_description">ログエントリから直接(連絡帳の)連絡先を開くことができるようになります。簡単に友達に助けを求めることができます</string>
     <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をAndroid端末に直接送ることができます</string>
     <string name="helper_locus_description">スマホやタブレット用のアウトドアナビゲーションアプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを探索、音声ガイドを使用、などが行えます</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>

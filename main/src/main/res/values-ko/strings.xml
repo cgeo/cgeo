@@ -147,6 +147,12 @@
     <string name="log_save">오프라인 저장</string>
     <string name="log_saving">로그 발송중…</string>
     <string name="log_posting_log">로그 올리는 중…</string>
+    <string name="log_posting_problemreport">문제 보고서 로그 게시 중…</string>
+    <string name="log_posting_deletelog">로그 삭제…</string>
+    <string name="log_posting_image_create">이미지 %1$s/%2$s: 데이터 게시 중…</string>
+    <string name="log_posting_image_edit">이미지 %1$s/%2$s: 데이터 변경 중…</string>
+    <string name="log_posting_image_delete">이미지 %1$s/%2$s 삭제 중…</string>
+    <string name="log_posting_save_internal">새 로그 상태 저장…</string>
     <string name="log_posting_vote">캐시 투표 게시 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
@@ -202,6 +208,7 @@
     <string name="log_image_info_scaled">배율</string>
     <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
+    <string name="log_delete_confirm">작성자 \'%2$s\', 로그 날짜 \'%3$s\'의 \'%1$s\' 유형 로그를 삭제하시겠습니까?</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
     <!-- Contacts -->
     <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
@@ -262,8 +269,6 @@
     <string name="err_tb_find_that">해당 추적아이템을 찾을 수 없습니다.</string>
     <string name="err_waypoint_cache_unknown">어느 캐시에 웨이포인트를 추가하시려는지 c:geo에서 알 수 없습니다.</string>
     <string name="err_waypoint_add_failed">웨이포인트 추가에 실패했습니다.</string>
-    <string name="err_point_bear_and_dist_title">도움이 더 필요하세요?</string>
-    <string name="err_point_bear_and_dist">방위각, 거리를 모두 채우세요. 방위각은 북쪽을 기준으로 한 0에서 360도 각입니다. 거리에는 단위를 넣지 마세요.</string>
     <string name="err_log_load_data">로그에 필요한 자료를 가져오지 못했습니다.</string>
     <string name="err_log_post_missing_tracking_code">추적코드가 빠졌습니다.</string>
     <string name="err_log_post_missing_coordinates">좌표가 빠졌습니다.</string>
@@ -274,7 +279,6 @@
     <string name="err_logimage_post_failed">로그 사진이 올라가지 않은 것 같습니다. 캐시 페이지에서 확인해보시기 바랍니다.</string>
     <string name="err_parse_lat">위도를 해석할 수 없습니다.</string>
     <string name="err_parse_lon">경도를 해석할 수 없습니다.</string>
-    <string name="err_parse_dist">거리를 해석할 수 없습니다.</string>
     <string name="err_parse_lat_lon">경위도를 해석할 수 없습니다.</string>
     <string name="err_rendertheme_file_unreadable">선택한 렌더링 테마를 로드할 수 없습니다. 내장 테마로 복귀합니다.</string>
     <string name="err_rendertheme_invalid">선택한 렌더링 테마를 이 mapforge 버전에 사용할 수 없습니다. 내장 테마로 복귀합니다.</string>
@@ -686,6 +690,7 @@
     <string name="about_changelog_full">모든 변경 목록</string>
     <string name="about_nutshellmanual">온라인 설명서</string>
     <string name="about_contributors_carnerodetails">c:geo의 아버지로서</string>
+    <string name="about_contributors_recent">기여자(지난 12개월)</string>
     <string name="about_contributors_specialthanks">특별히 감사함</string>
     <string name="about_contributors_specialthanksdetails">-[Crowdin.net](https://crowdin.net/project/cgeo)의 모든 번역 기여자!\n-모든 이슈 생성자\n-그리고 다른 모든 지지자들입니다.\n</string>
     <string name="about_contributors_other">다른 기고자</string>
@@ -861,6 +866,8 @@
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
     <string name="init_zoomincludingwaypoints_description">단일 캐시를 보는 경우: 모든 지점을 포함하도록 확대를 조정해야합니까?</string>
+    <string name="init_visitedWaypointsSemiTransparent">방문한 지점이 반투명합니다.</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">반투명 배경으로 방문한 지점 표시</string>
     <string name="init_brouterThreshold">경로 계산</string>
     <string name="init_brouterThreshold_description">오프라인 라우팅이 경로를 계산할 최대 거리입니다.</string>
     <string name="init_brouterShowBothDistances">직선 거리 보기</string>
@@ -884,6 +891,7 @@
     <string name="init_showElevation">높이 값보기</string>
     <string name="init_summary_showElevation">경로 데이터 또는 GNSS에서 가져온 현재 위치의 고도 정보 표시(사용 가능한 경우)</string>
     <string name="init_elevation_notAvailable">"사용 가능한 고도 데이터가 없습니다."</string>
+    <string name="menu_elevation_info">고도 (지도): %s</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_prevent_cache_note_merge">개인 캐시 메모 덮어쓰기</string>
@@ -1401,6 +1409,8 @@
     <string name="cache_menu_log_in_browser">브라우저에서 로그하기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
     <string name="cache_log_menu_decrypt">복호화/암호화</string>
+    <string name="cache_log_menu_edit">로그 편집</string>
+    <string name="cache_log_menu_delete">로그 삭제</string>
     <string name="cache_log_menu_popup_title">%s의 로그</string>
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
@@ -1543,8 +1553,6 @@
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
     <string name="waypoint_my_coordinates_accuracy">내 좌표 (±%s)</string>
-    <string name="waypoint_bearing">방위각(°)</string>
-    <string name="waypoint_distance">거리</string>
     <string name="waypoint_name">이름</string>
     <string name="waypoint_edit">편집</string>
     <string name="waypoint_copy_coordinates">좌표 복사하기</string>
@@ -1580,6 +1588,15 @@
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
     <!-- Projection -->
+    <string name="projection_type_none">투사 없음</string>
+    <string name="projection_type_bearing">방위</string>
+    <string name="projection_type_bearing_info">방위 %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">방위각 (°)</string>
+    <string name="projection_type_bearing_hint_distance">거리</string>
+    <string name="projection_type_offset">오프셋</string>
+    <string name="projection_type_offset_info">오프셋 위도 %1$s mm, 경도 %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">마이크로분 단위의 위도 오프셋</string>
+    <string name="projection_type_offset_hint_longitude">마이크로분 단위의 경도 오프셋</string>
     <!-- Variables -->
     <string name="variables_titletext">이 페이지를 사용하여 값을 기록하고 이 캐시에 필요한 계산을 수행합니다.</string>
     <string name="variables_scanlisting">지오캐시 스캔</string>
@@ -1625,6 +1642,7 @@
     <string name="formula_function_if">만약</string>
     <string name="formula_function_length">스트링 길이</string>
     <string name="formula_function_substring">부스트링</string>
+    <string name="formula_function_chars">문자 선택</string>
     <string name="formula_function_rot13">문자를 13만큼 회전</string>
     <string name="formula_function_rot">문자 회전</string>
     <string name="formula_function_checksum">체크섬</string>
@@ -1783,7 +1801,6 @@
     <string name="user_menu_open_browser">브라우저에서 회원정보 열기</string>
     <string name="user_menu_send_message">메시지 보내기</string>
     <string name="user_menu_send_email">이메일 보내기</string>
-    <string name="user_menu_open_contact">연락처 카드 보기</string>
     <string name="user_unknown">알 수 없는 사용자</string>
     <!-- navigation -->
     <string name="navigation">길찾기</string>
@@ -1809,8 +1826,6 @@
     <string name="helper_calendar_pastevent_title">지난 이벤트</string>
     <string name="helper_calendar_pastevent_question">이벤트 날짜가 과거입니다. 그래도 추가할까요?</string>
     <string name="helper_sendtocgeo_title">c:geo로 보내기</string>
-    <string name="helper_contacts_title">c:geo 연락처 플러그인</string>
-    <string name="helper_contacts_description">로그로부터 주소록에 있는 연락처 카드를 열어, 손쉽게 도움을 요청할 수 있습니다.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo는 <strong>PC를 위한</strong> 브라우저 확장프로그램입니다. geocaching.com을 보실 때 브라우저 내에 있는 버튼을 클릭하면 캐시를 스마트폰으로 보낼 수 있습니다.</string>
     <string name="helper_locus_description">폰이나 태블릿용 길찾기 앱. 오프라인 지형지도 보기, 경로찾기, 지오캐시 찾기, 음성 안내 등의 기능이 지원됩니다.</string>
     <string name="helper_gpsstatus_description">c:geo와 함께 이 어플에서 레이다를 사용할 수있습니다. GPS 와 관련된 다양한 정보를 볼 수 있습니다.</string>
@@ -2314,6 +2329,8 @@
     <string name="switch_on">켜짐 </string>
     <string name="switch_manual">수동</string>
     <string name="switch_auto">자동</string>
+    <string name="switch_auto_lowpower">자동 (저전력)</string>
+    <string name="switch_auto_precise">자동 (정밀)</string>
     <string name="switch_default">(기본값)</string>
     <string name="yes">네</string>
     <string name="no">아니오</string>
@@ -2361,6 +2378,8 @@
     <string name="download_title">파일 다운로드</string>
     <string name="downloadmap_info">\"저장\"아이콘을 눌러 해당 지역의지도 파일을 선택하십시오.\n\n다운로드는 백그라운드에서 수행됩니다. 전송이 완료되면 파일이 c:geo 지도 폴더에 복사되고 현재 지도으로 설정됩니다.\n\n주의: 지도를 다운로드하면 네트워크 트래픽이 증가 할 수 있습니다!</string>
     <string name="downloadmap_filename">다운로드 중 %s</string>
+    <string name="downloadmap_keep_temporary_files">임시 파일 보관</string>
+    <string name="downloadmap_keep_temporary_files_summary">일부 다운로드 소스는 c:geo에서 사용되지 않는 추가 파일을 지원합니다. 추가 파일을 삭제하는 대신 시스템의 다운로드 폴더에 보관합니다.</string>
     <string name="downloadmanager_not_available">파일을 다운로드 할 수 없습니다. 시스템 다운로드 관리자를 사용할 수 없습니다.</string>
     <string name="download_started">백그라운드에서 다운로드 시작합니다.</string>
     <string name="download_none_selected">다운로드할 파일을 선택하지 않았습니다.</string>

@@ -269,8 +269,6 @@
     <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
     <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
     <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
-    <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
-    <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad relativ zum Norden. Die Entfernung benötigt keine Bezeichnung der Einheiten. </string>
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking-Code fehlt.</string>
     <string name="err_log_post_missing_coordinates">Koordinaten fehlen.</string>
@@ -281,7 +279,6 @@
     <string name="err_logimage_post_failed">Das Log-Bild wurde scheinbar nicht hochgeladen. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
     <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
     <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
-    <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
     <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
     <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
     <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
@@ -322,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
     <string name="confirm_discard_changes">Ungespeicherte Änderungen verwerfen?</string>
+    <string name="confirm_unsent_changes_title">Ungesendete Änderungen</string>
+    <string name="confirm_unsent_changes">Ungespeicherte Änderungen verwerfen?</string>
     <string name="confirm_discard_wp_changes">Wegpunktänderungen verwerfen?</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
@@ -1001,6 +1000,7 @@
     <string name="init_backup_unavailable">nicht vorhanden</string>
     <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nSicherung hat Version %2$d</string>
+    <string name="backup_tracks_error">Fehler beim Erstellen der Sicherung von Tracks.</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings_logins">Zugangsdaten sichern</string>
@@ -1571,8 +1571,6 @@
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_my_coordinates_accuracy">Meine Koordinaten (±%s)</string>
-    <string name="waypoint_bearing">Richtung in °</string>
-    <string name="waypoint_distance">Entfernung</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Bearbeiten</string>
     <string name="waypoint_copy_coordinates">Kopiere Koordinaten</string>
@@ -1662,6 +1660,7 @@
     <string name="formula_function_if">Wenn</string>
     <string name="formula_function_length">Zeichenlänge</string>
     <string name="formula_function_substring">Teilzeichenfolge</string>
+    <string name="formula_function_chars">Zeichen auswählen</string>
     <string name="formula_function_rot13">Verschiebe Zeichen um 13 Stellen</string>
     <string name="formula_function_rot">Verschiebe Zeichen</string>
     <string name="formula_function_checksum">Quersumme</string>
@@ -1846,8 +1845,6 @@
     <string name="helper_calendar_pastevent_title">Event in der Vergangenheit</string>
     <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
-    <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
     <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
     <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
@@ -2349,6 +2346,7 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
+    <string name="routes_tracks_change_name">Namen ändern</string>
     <string name="center">Zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>

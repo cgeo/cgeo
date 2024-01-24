@@ -262,8 +262,6 @@
     <string name="err_tb_find_that">c:geo не удаётся найти данный трекабл.</string>
     <string name="err_waypoint_cache_unknown">c:geo не знает, к какому тайнику вы хотите добавить точку.</string>
     <string name="err_waypoint_add_failed">c:geo не удалось добавить вашу точку.</string>
-    <string name="err_point_bear_and_dist_title">Нужна помощь?</string>
-    <string name="err_point_bear_and_dist">Введите азимут и расстояние. Азимут это угол от 0 до 360 градусов относительно севера. Не вводите единицы измерения.</string>
     <string name="err_log_load_data">Не удалось загрузить данные, требуемые для записи.</string>
     <string name="err_log_post_missing_tracking_code">Отсутствует код отслеживания.</string>
     <string name="err_log_post_missing_coordinates">Координаты отсутствуют.</string>
@@ -274,7 +272,6 @@
     <string name="err_logimage_post_failed">Похоже, ваша фотография не была загружена в блокнот. Пожалуйста, проверьте это на сайте тайника.</string>
     <string name="err_parse_lat">c:geo не удается разобрать широту.</string>
     <string name="err_parse_lon">c:geo не удается разобрать долготу.</string>
-    <string name="err_parse_dist">c:geo не удается разобрать расстояние.</string>
     <string name="err_parse_lat_lon">c:geo не удается разобрать широту или долготу.</string>
     <string name="err_rendertheme_file_unreadable">Не удалось загрузить выбранную тему. Возвращаюсь к встроенной.</string>
     <string name="err_rendertheme_invalid">Выбранная тема не подходит к этой версии mapsforge. Возвращаюсь к встроенной.</string>
@@ -1576,8 +1573,6 @@
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
     <string name="waypoint_my_coordinates_accuracy">Мои координаты (±%s)</string>
-    <string name="waypoint_bearing">Азимут в °</string>
-    <string name="waypoint_distance">Расстояние</string>
     <string name="waypoint_name">Название</string>
     <string name="waypoint_edit">Редактировать</string>
     <string name="waypoint_copy_coordinates">Скопировать координаты</string>
@@ -1613,6 +1608,7 @@
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Азимут в °</string>
     <!-- Variables -->
     <string name="variables_titletext">Здесь можно сохранить значения и выполнить вычисления, связанные с этим тайником</string>
     <string name="variables_scanlisting">Сканирование</string>
@@ -1815,7 +1811,6 @@
     <string name="user_menu_open_browser">Открыть профиль в браузере</string>
     <string name="user_menu_send_message">Отправить сообщение</string>
     <string name="user_menu_send_email">Отправить e-mail</string>
-    <string name="user_menu_open_contact">Открыть контакт</string>
     <string name="user_unknown">Неизвестный пользователь</string>
     <!-- navigation -->
     <string name="navigation">Навигация</string>
@@ -1841,8 +1836,6 @@
     <string name="helper_calendar_pastevent_title">Прошедшее событие</string>
     <string name="helper_calendar_pastevent_question">Вы собираетесь создать событие в прошлом. Продолжить?</string>
     <string name="helper_sendtocgeo_title">Отправить в c:geo</string>
-    <string name="helper_contacts_title">Плагин контактов c:geo</string>
-    <string name="helper_contacts_description">Позволяет открыть контакт напрямую из записи в блокноте, чтобы было проще попросить друзей помочь.</string>
     <string name="helper_sendtocgeo_description">Это расширение для <strong>вашего компьютера</strong>. Позволяет отправлять тайники с geocaching.com на ваше устройство прямо из браузера.</string>
     <string name="helper_locus_description">Навигационное приложение для телефона или планшета. Просмотр топографических карт офлайн, запись треков, геокэшинг, голосовой помощник и многое другое.</string>
     <string name="helper_gpsstatus_description">Вы можете использовать радар этого приложения вместе с c:geo. Также приложение предлагает много другой информации, связанной с GPS.</string>

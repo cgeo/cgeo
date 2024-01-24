@@ -237,8 +237,6 @@
     <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
     <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
     <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
-    <string name="err_point_bear_and_dist_title">Tips!</string>
-    <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
     <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
     <string name="err_log_post_missing_tracking_code">Spårningskoden saknas.</string>
     <string name="err_log_post_missing_coordinates">Koordinater saknas.</string>
@@ -248,7 +246,6 @@
     <string name="err_logimage_post_failed">Det verkar som att din logg bild inte kunde laddas upp. Kontrollera bilden på cachens hemsida.</string>
     <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
     <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
-    <string name="err_parse_dist">Tyvärr kan c:geo inte tolka avstånd.</string>
     <string name="err_parse_lat_lon">Tyvärr kan c:geo inte tolka latitud eller longitud.</string>
     <string name="err_rendertheme_file_unreadable">Kunde ej ladda det valda renderingstemat. Återgår till det inbyggda.</string>
     <string name="err_rendertheme_invalid">Det valda renderingstemat är ej giltigt för denna version av mapforge. Återgår till det inbyggda.</string>
@@ -1427,8 +1424,6 @@
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_my_coordinates_accuracy">Mina koordinater (±%s)</string>
-    <string name="waypoint_bearing">Riktning (°)</string>
-    <string name="waypoint_distance">Avstånd</string>
     <string name="waypoint_name">Namn</string>
     <string name="waypoint_edit">Redigera</string>
     <string name="waypoint_copy_coordinates">Kopiera koordinater</string>
@@ -1464,6 +1459,7 @@
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Riktning (°)</string>
     <!-- Variables -->
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_scanlisting">Skanna listning</string>
@@ -1665,7 +1661,6 @@
     <string name="user_menu_open_browser">Öppna profil i webbläsaren</string>
     <string name="user_menu_send_message">Skicka meddelande</string>
     <string name="user_menu_send_email">Skicka e-post</string>
-    <string name="user_menu_open_contact">Öppna kontakt</string>
     <string name="user_unknown">Okänd användare</string>
     <!-- navigation -->
     <string name="navigation">Navigering</string>
@@ -1691,8 +1686,6 @@
     <string name="helper_calendar_pastevent_title">Tidigare event</string>
     <string name="helper_calendar_pastevent_question">Eventets datum har passerat. Vill du lägga till det ändå?</string>
     <string name="helper_sendtocgeo_title">Skicka till c:geo (Send2cgeo)</string>
-    <string name="helper_contacts_title">c:geo - Kontakttillägg</string>
-    <string name="helper_contacts_description">Gör det möjligt att öppna en kontakt (i telefonens adressbok) direkt från en logg, så att du enkelt kan kontakta vänner för att få hjälp.</string>
     <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
     <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>

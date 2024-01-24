@@ -191,8 +191,6 @@
     <string name="err_tb_find_that">c:geo kann dësen Trackable net fannen.</string>
     <string name="err_waypoint_cache_unknown">c:geo weess net zu wéi engem Cache\'s du e Weepunkt bäisetze wëlls.</string>
     <string name="err_waypoint_add_failed">c:geo konnt de Weepunkt net dobäisetzen.</string>
-    <string name="err_point_bear_and_dist_title">Brauchs du Hëllef?</string>
-    <string name="err_point_bear_and_dist">Fëll béid Peilung an Distanz an. Peilung ass e Wénkel tëscht 0 an 360 Grad relativ zu Norden. Distanz verlaangt keng Unitéit.</string>
     <string name="err_log_load_data">c:geo kann d\'erfuerdert Daten net lueden fir är Visitt ze loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code feelt.</string>
     <string name="err_log_post_missing_coordinates">Koordinate feelen.</string>
@@ -202,7 +200,6 @@
     <string name="err_logimage_post_failed">Et schéngt als gouf är Foto net eropgelueden. Iwwerpréift et iwwert de Website vum Cache.</string>
     <string name="err_parse_lat">c:geo kann d\'Breitengrade net bestëmmen.</string>
     <string name="err_parse_lon">c:geo kann d\'Längengrade net bestëmmen.</string>
-    <string name="err_parse_dist">c:geo kann d\'Distanz net bestëmmen.</string>
     <string name="err_parse_lat_lon">c:geo kann d\'Längengrade oder d\'Breitengrade net bestëmmen.</string>
     <string name="err_rendertheme_file_unreadable">Kann déi gewënschte Kaartenduerstellung net lueden. D\'Standardduerstellung gëtt nees gelueden.</string>
     <string name="err_rendertheme_invalid">Déi gewielte Kaartenduerstellung ass net dës mapsforge-Versioun gülteg. Déi Standardduerstellung gëtt nees gelueden.</string>

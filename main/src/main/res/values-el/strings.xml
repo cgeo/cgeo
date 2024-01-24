@@ -232,8 +232,6 @@
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
     <string name="err_waypoint_cache_unknown">Το c:geo δεν ξέρει για ποια κρύπτη θέλετε να προσθέσετε ένα σημείο αναφοράς.</string>
     <string name="err_waypoint_add_failed">Το c:geo απέτυχε να προσθέσει το σημείο αναφοράς.</string>
-    <string name="err_point_bear_and_dist_title">Χρειάζεστε κάποια βοήθεια;</string>
-    <string name="err_point_bear_and_dist">Συμπληρώστε και την κατεύθυνση και την απόσταση. Η κατεύθυνση είναι μια γωνία από 0 έως 360 μοίρες σε σχέση με το Βορρά. Η απόσταση δεν απαιτεί μονάδες.</string>
     <string name="err_log_load_data">Το c:geo δεν μπορεί να φορτώσει τα δεδομένα που απαιτούνται για να καταγράψετε την επίσκεψη.</string>
     <string name="err_log_post_missing_tracking_code">Λείπει ο κωδικός παρακολούθησης.</string>
     <string name="err_log_post_missing_coordinates">Λείπουν οι συντεταγμένες.</string>
@@ -243,7 +241,6 @@
     <string name="err_logimage_post_failed">Φαίνεται ότι δεν δημοσιεύτηκε η εικόνα καταγραφής. Παρακαλούμε ελέγξτε το στην ιστοσελίδα της κρύπτης.</string>
     <string name="err_parse_lat">Το c:geo δεν μπορεί να καταλάβει το γεωγραφικό πλάτος.</string>
     <string name="err_parse_lon">Το c:geo δεν μπορεί να καταλάβει το γεωγραφικό μήκος.</string>
-    <string name="err_parse_dist">Το c:geo δεν μπορεί να καταλάβει την απόσταση.</string>
     <string name="err_parse_lat_lon">Το c:geo  δεν μπορεί να καταλάβει το γεωγραφικό πλάτος ή μήκος.</string>
     <string name="err_rendertheme_file_unreadable">Δεν πραγματοποιήθηκε η φόρτωση του συγκεκριμένου θέματος. Γίνεται επαναφορά στο αρχικό.</string>
     <string name="err_rendertheme_invalid">Το επιλεγμένο θέμα δεν είναι συμβατό με αυτή την έκδοση mapsforge. Επιστροφή στο ενσωματωμένο θέμα.</string>
@@ -1364,8 +1361,6 @@
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
     <string name="waypoint_my_coordinates_accuracy">Οι συντεταγμένες μου (±%s)</string>
-    <string name="waypoint_bearing">Κατεύθυνση σε °</string>
-    <string name="waypoint_distance">Απόσταση</string>
     <string name="waypoint_name">Όνομα</string>
     <string name="waypoint_edit">Επεξεργασία</string>
     <string name="waypoint_copy_coordinates">Αντιγραφή συντεταγμένων</string>
@@ -1401,6 +1396,7 @@
     <string name="from_clipboard">Από το πρόχειρο</string>
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Κατεύθυνση σε °</string>
     <!-- Variables -->
     <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
@@ -1600,7 +1596,6 @@
     <string name="user_menu_open_browser">Άνοιγμα προφίλ σε πρόγραμμα περιήγησης</string>
     <string name="user_menu_send_message">Αποστολή μηνύματος</string>
     <string name="user_menu_send_email">Αποστολή email</string>
-    <string name="user_menu_open_contact">Άνοιγμα κάρτας επαφής</string>
     <string name="user_unknown">Άγνωστος χρήστης</string>
     <!-- navigation -->
     <string name="navigation">Πλοήγηση</string>
@@ -1626,8 +1621,6 @@
     <string name="helper_calendar_pastevent_title">Προηγούμενη εκδήλωση</string>
     <string name="helper_calendar_pastevent_question">Η ημερομηνία της εκδήλωσης έχει περάσει. Να προστεθεί ούτως ή άλλως;</string>
     <string name="helper_sendtocgeo_title">Αποστολή στο c:geo</string>
-    <string name="helper_contacts_title">Πρόσθετο επαφών στο c:geo</string>
-    <string name="helper_contacts_description">Σας επιτρέπει να ανοίξετε μια κάρτα επαφής (από το βιβλίο διευθύνσεών σας) απευθείας από μια καταχώρηση αρχείου καταγραφής, ώστε να μπορείτε να ζητήσετε βοήθεια από φίλους πιο εύκολα.</string>
     <string name="helper_sendtocgeo_description">Αποστολή σε c:geo είναι μια επέκταση του προγράμματος περιήγησης <strong>για τον υπολογιστή σας</strong>. Κατά την περιήγηση στο geocaching.com, μπορείτε να στείλετε κρύπτες στο smartphone σας άμεσα μέσα στο πρόγραμμα περιήγησης με το πάτημα ενός κουμπιού.</string>
     <string name="helper_locus_description">Εφαρμογή πλοήγησης σε εξωτερικούς χώρους για το τηλέφωνο ή το tablet σας. Δείτε τοπογραφικούς χάρτες χωρίς σύνδεση, ακολουθείστε τη διαδρομή σας, βρείτε κρύπτες, χρησιμοποιήστε φωνητικό οδηγό και κάνετε ακόμη περισσότερα.</string>
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>

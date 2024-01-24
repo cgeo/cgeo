@@ -220,8 +220,6 @@
     <string name="err_tb_find_that">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_waypoint_cache_unknown">哪個地理藏寶要加入航點</string>
     <string name="err_waypoint_add_failed">c:geo無法增加您的航點</string>
-    <string name="err_point_bear_and_dist_title">需要協助嗎?</string>
-    <string name="err_point_bear_and_dist">請輸入角度和距離，這裡的角度是從北方開始為0度；距離不需要加入單位。</string>
     <string name="err_log_load_data">c:geo無法讀取資訊</string>
     <string name="err_log_post_missing_tracking_code">旅行蟲的追蹤碼遺失了</string>
     <string name="err_log_post_missing_coordinates">GPS座標遺失</string>
@@ -231,7 +229,6 @@
     <string name="err_logimage_post_failed">似乎您的日志映像未上载。请在缓存源网站上进行检查。</string>
     <string name="err_parse_lat">c: geo 不能解析纬度。</string>
     <string name="err_parse_lon">c: geo 不能解析纬度。</string>
-    <string name="err_parse_dist">c: geo 不能解析纬度。</string>
     <string name="err_parse_lat_lon">c: geo 不能解析纬度或经度。</string>
     <string name="err_rendertheme_file_unreadable">无法加载所选的主题。切换至预置主题。</string>
     <string name="err_rendertheme_invalid">所选的主题不适用于当前mapsforge版本。切换至预置主题。</string>
@@ -1065,7 +1062,6 @@
     <string name="waypoint_cache_coordinates">藏寶座標</string>
     <string name="waypoint_custom">自定</string>
     <string name="waypoint_my_coordinates">我的座標</string>
-    <string name="waypoint_distance">距離：</string>
     <string name="waypoint_name">名稱</string>
     <string name="waypoint_edit">編輯</string>
     <string name="waypoint_copy_coordinates">複製座標</string>
@@ -1190,7 +1186,6 @@
     <string name="user_menu_open_browser">在瀏覽器開啟資訊</string>
     <string name="user_menu_send_message">傳送訊息</string>
     <string name="user_menu_send_email">傳送電子郵件</string>
-    <string name="user_menu_open_contact">開啟聯絡人卡片</string>
     <string name="user_unknown">未知的使用者</string>
     <!-- navigation -->
     <string name="navigation">導航</string>

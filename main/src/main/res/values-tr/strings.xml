@@ -232,8 +232,6 @@
     <string name="err_tb_find_that">c:geo bu Trackable\'ı bulamıyor.</string>
     <string name="err_waypoint_cache_unknown">c:geo hangi Geocache için bir yol noktası eklemek istediğinizi bilmiyor.</string>
     <string name="err_waypoint_add_failed">c:geo yol noktanızı ekleyemedi.</string>
-    <string name="err_point_bear_and_dist_title">Yardıma ihtiyacın var mı?</string>
-    <string name="err_point_bear_and_dist">Hem azimut hem de mesafe doldurun. Azimut açısı kuzeye göre 0 ile 360 derecedir. Mesafe birim gerektirmez.</string>
     <string name="err_log_load_data">c:geo ziyaret kaydı için gerekli verileri yükleyemiyor.</string>
     <string name="err_log_post_missing_tracking_code">Takip kodu eksik.</string>
     <string name="err_log_post_missing_coordinates">Koordinatlar eksik.</string>
@@ -243,7 +241,6 @@
     <string name="err_logimage_post_failed">Görünüşe göre kayıt görseliniz yüklenmedi. Lütfen bunu web sitesinden kontrol edin.</string>
     <string name="err_parse_lat">c:geo enlemi çözümleyemiyor.</string>
     <string name="err_parse_lon">c:geo boylamı çözümleyemiyor.</string>
-    <string name="err_parse_dist">c:geo mesafeyi çözümleyemiyor.</string>
     <string name="err_parse_lat_lon">c:geo enlemi ve boylamı çözümleyemiyor.</string>
     <string name="err_rendertheme_file_unreadable">Şeçili işleyici teması yüklenemedi. Dahili ayara geri dönülüyor.</string>
     <string name="err_rendertheme_invalid">Seçilen işleme teması bu mapsforge versiyonu için geçerli değil. Dahili olana geri dönülüyor.</string>
@@ -1279,8 +1276,6 @@
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
     <string name="waypoint_my_coordinates_accuracy">Koordinatlarım (±%s)</string>
-    <string name="waypoint_bearing">Azimut açısı</string>
-    <string name="waypoint_distance">Mesafe</string>
     <string name="waypoint_name">İsim</string>
     <string name="waypoint_edit">Düzenle</string>
     <string name="waypoint_copy_coordinates">Koordinatları kopyala</string>
@@ -1316,6 +1311,7 @@
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Azimut açısı</string>
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
     <string name="variables_deleteall">Tümünü Sil</string>
@@ -1475,7 +1471,6 @@
     <string name="user_menu_open_browser">Profili tarayıcıda aç</string>
     <string name="user_menu_send_message">Mesaj gönder</string>
     <string name="user_menu_send_email">E-posta gönder</string>
-    <string name="user_menu_open_contact">Kişi kartını göster</string>
     <string name="user_unknown">Bilinmeyen kullanıcı</string>
     <!-- navigation -->
     <string name="navigation">Navigasyon</string>
@@ -1501,8 +1496,6 @@
     <string name="helper_calendar_pastevent_title">Geçmiş etkinlikler</string>
     <string name="helper_calendar_pastevent_question">Etkinlik tarihi geçmişte kaldı. Yine de eklensin mi?</string>
     <string name="helper_sendtocgeo_title">c:geo\'ya gönder</string>
-    <string name="helper_contacts_title">c:geo iletişim eklentisi</string>
-    <string name="helper_contacts_description">Bir kayıttan kartvizit kartı(senin adres defterinden) açmanızı sağlar, ve bu yolla kolay bir şekilde arkadaşlarınızdan yardım isteyebilirsiniz.</string>
     <string name="helper_sendtocgeo_description">c:geo\'ya gönder <strong>bilgisayarınız</strong> için bir tarayıcı eklentisidir. Geocaching.com\'u açtığınızda, tarayıcı içindeki tuşa tıklayarak direkt olarak Geocache\'leri akıllı telefonlarınıza gönderebilirsiniz.</string>
     <string name="helper_locus_description">Telefonunuz veya tabletiniz için kullanıma uygun navigasyon uygulaması. Topo haritaları çevrim dışı görüntüleme, rotanızı takip etme, Geocache bulma, sesli rehber kullanma ve daha fazlasını gerçekleştirebilirsiniz.</string>
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
