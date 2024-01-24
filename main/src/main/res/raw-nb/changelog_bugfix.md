@@ -1,4 +1,9 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+- New: New formula CHARS to select multiple single chars
+
+##
 - Fix: Crash on displaying notification dot
 - Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
 - Fix: Trackable logtype default selection
