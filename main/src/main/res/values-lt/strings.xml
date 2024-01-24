@@ -237,8 +237,6 @@
     <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
     <string name="err_waypoint_cache_unknown">c:geo nežino, kokiai slėptuvei norite pridėti kelio tašką.</string>
     <string name="err_waypoint_add_failed">c:geo nepavyko pridėti kelio taško.</string>
-    <string name="err_point_bear_and_dist_title">Reikalinga pagalba?</string>
-    <string name="err_point_bear_and_dist">Užpildykite azimutą ir atstumą. Azimutas tai nuo 0 iki 360 laipsnių kampas nuo šiaurės. Atstumas nereikalauja matavimo vienetų.</string>
     <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>
     <string name="err_log_post_missing_tracking_code">Trūksta sekimo kodo.</string>
     <string name="err_log_post_missing_coordinates">Trūksta koordinačių.</string>
@@ -248,7 +246,6 @@
     <string name="err_logimage_post_failed">Atrodo, kad jūsų įraše vaizdas nebuvo įkeltas. Prašome patikrinti jį slėptuvės svetainėje.</string>
     <string name="err_parse_lat">c:geo nesupranta įvestos platumos.</string>
     <string name="err_parse_lon">c:geo nesupranta įvestos ilgumos.</string>
-    <string name="err_parse_dist">c:geo negali apdoroti atstumo.</string>
     <string name="err_parse_lat_lon">c:geo negali išanalizuoti platumos arba ilgumos.</string>
     <string name="err_rendertheme_file_unreadable">Neįmanoma įkelti pasirinktos žemėlapio temos. Atkuriama į numatytąją temą.</string>
     <string name="err_rendertheme_invalid">Pasirinkta žemėlapio tema netinka šiai mapsforge versijai. Atkuriama į numatytąją temą.</string>
@@ -1464,8 +1461,6 @@
     <string name="waypoint_custom">Savas</string>
     <string name="waypoint_my_coordinates">Mano koordinates</string>
     <string name="waypoint_my_coordinates_accuracy">Mano koordinates (±%s)</string>
-    <string name="waypoint_bearing">Azimutas °</string>
-    <string name="waypoint_distance">Atstumas</string>
     <string name="waypoint_name">Pavadinimas</string>
     <string name="waypoint_edit">Redaguoti</string>
     <string name="waypoint_copy_coordinates">Kopijuoti koordinates</string>
@@ -1501,6 +1496,7 @@
     <string name="from_clipboard">Iš iškarpinės</string>
     <string name="copy_to_clipboard">Kopijuoti į iškarpinę</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Azimutas °</string>
     <!-- Variables -->
     <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
@@ -1702,7 +1698,6 @@
     <string name="user_menu_open_browser">Atidaryti profilį naršyklėje</string>
     <string name="user_menu_send_message">Siųsti žinutę</string>
     <string name="user_menu_send_email">Siųsti el. laišką</string>
-    <string name="user_menu_open_contact">Atidaryti kontakto kortelę</string>
     <string name="user_unknown">Nežinomas vartotojas</string>
     <!-- navigation -->
     <string name="navigation">Navigacija</string>
@@ -1728,8 +1723,6 @@
     <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
     <string name="helper_calendar_pastevent_question">Renginio data yra praeityje. Vis tiek pridėti?</string>
     <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>
-    <string name="helper_contacts_title">c:geo kontaktai (įskiepis)</string>
-    <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
     <string name="helper_locus_description">Lauko navigacijos programėlė jūsų telefonui ar planšetiniam kompiuteriui. Peržiūrėkite topo žemėlapius neprisijungę, stebėkite maršrutą, ieškokite geoslėptuves, naudokite balso vadovą ir dar daugiau.</string>
     <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
