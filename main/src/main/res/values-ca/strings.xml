@@ -263,8 +263,6 @@
     <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
     <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
     <string name="err_waypoint_add_failed">El c:geo no ha pogut afegir la fita.</string>
-    <string name="err_point_bear_and_dist_title">Necessiteu ajuda?</string>
-    <string name="err_point_bear_and_dist">Ompliu el rumb i la distància. El rumb son angles del 0º al 360º respecte al Nord. La distància no necessita unitats.</string>
     <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
     <string name="err_log_post_missing_tracking_code">Falta el codi traçable.</string>
     <string name="err_log_post_missing_coordinates">Falten les coordenades.</string>
@@ -275,7 +273,6 @@
     <string name="err_logimage_post_failed">La imatge de registre no s\'ha pujat. Comproveu la memòria del lloc web d\'origen.</string>
     <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
     <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
-    <string name="err_parse_dist">El c:geo no pot calcular la distància.</string>
     <string name="err_parse_lat_lon">El c:geo no pot calcular la latitud o la longitud.</string>
     <string name="err_rendertheme_file_unreadable">No s\'ha pogut carregar el tema de la representació seleccionada. S\'utilitzarà el predefinit.</string>
     <string name="err_rendertheme_invalid">El tema de representació seleccionat no és vàlid per aquesta versió de mapsforge. S\'utilitzarà el predefinit.</string>
@@ -1546,8 +1543,6 @@
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_my_coordinates_accuracy">Les meves coordenades (±%s)</string>
-    <string name="waypoint_bearing">Direcció en º</string>
-    <string name="waypoint_distance">Distància</string>
     <string name="waypoint_name">Nom</string>
     <string name="waypoint_edit">Edita</string>
     <string name="waypoint_copy_coordinates">Copiar coordenades</string>
@@ -1583,6 +1578,7 @@
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Direcció en º</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
@@ -1785,7 +1781,6 @@
     <string name="user_menu_open_browser">Obre el perfil al navegador</string>
     <string name="user_menu_send_message">Envia un missatge</string>
     <string name="user_menu_send_email">Envia un correu electrònic</string>
-    <string name="user_menu_open_contact">Obre targeta del contacte</string>
     <string name="user_unknown">Usuari desconegut</string>
     <!-- navigation -->
     <string name="navigation">Navegació</string>
@@ -1811,8 +1806,6 @@
     <string name="helper_calendar_pastevent_title">Trobada passada</string>
     <string name="helper_calendar_pastevent_question">La trobada ja ha passat. Voleu afegir-la de totes maneres?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title">Complement de contactes del c:geo</string>
-    <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
     <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
