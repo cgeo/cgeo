@@ -138,13 +138,10 @@
     <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
     <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
     <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
-    <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
-    <string name="err_point_bear_and_dist">Skráðu inn bæði legu og vegalengd. Lega er horn frá 0 til 360 gráðum frá norðri. Vegalengd þarfnast ekki mælieiningar.</string>
     <string name="err_log_load_data">c:geo gat ekki náð í nauðsynleg gögn til að skrá heimsókn þína.</string>
     <string name="err_log_post_missing_coordinates">Hnit vantar.</string>
     <string name="err_parse_lat">c:geo getur ekki þáttað lengdargráðu.</string>
     <string name="err_parse_lon">c:geo getur ekki þáttað breiddargráðu.</string>
-    <string name="err_parse_dist">c:geo getur ekki þáttað vegalengd.</string>
     <string name="err_parse_lat_lon">c:geo getur hvorki þáttað lengdargráðu né breiddargráðu.</string>
     <string name="warn_save_nothing">Það er ekkert sem þarf að vista.</string>
     <string name="warn_no_coordinates">Engin hnit gefin.</string>
@@ -475,8 +472,6 @@
     <string name="waypoint">Vegpunktur</string>
     <string name="waypoint_custom">Sérsniðinn</string>
     <string name="waypoint_my_coordinates">Hnitin mín</string>
-    <string name="waypoint_bearing">Lega í °</string>
-    <string name="waypoint_distance">Fjarlægð</string>
     <string name="waypoint_name">Nafn</string>
     <string name="waypoint_edit">Breyta</string>
     <string name="waypoint_copy_coordinates">Afrita hnit</string>
@@ -493,6 +488,7 @@
     <string name="waypoint_done">Lokið</string>
     <string name="waypoint_copy_of">Afrit af</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Lega í °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
