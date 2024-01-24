@@ -14,6 +14,7 @@
 - New: Edit/delete own logs
 - New: Waypoint projection with variables
 - Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
@@ -22,3 +23,5 @@
 - Poprawka: Przywracanie kopii zapasowych bez prawidłowych informacji o dacie i czasie
 - New: Include active trackfiles in backup
 - New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
