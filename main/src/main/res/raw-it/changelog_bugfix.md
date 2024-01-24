@@ -1,4 +1,9 @@
 ##
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
+- New: New formula CHARS to select multiple single chars
+
+##
 - Corretto: crash alla visualizzazione del punto di notifica
 - Corretto: permesso READ_EXTERNAL_STORAGE richiesto sulle versioni più recenti di Android
 - Corretto: valore predefinito per il logtype Trackable
