@@ -1,9 +1,14 @@
 ##
+- Oprava: Přepracováno výchozí nastavení sledovatelného logu
+- Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
+- Novinka: Nový vzorec CHARS pro výběr více jednotlivých znaků
+
+##
 - Oprava: Pád při zobrazení oznamovací tečky
 - Oprava: Nepotřebné oprávnění READ_EXTERNAL_STORAGE vyžadované na novějších verzích systému Android
 - Oprava: Výchozí výběr typu logu sledovatelného předmětu
 - Oprava: Pád při otevření stahovače map za určitých podmínek
-- Fix: Crash on OSM-based maps under certain conditions
+- Oprava: Pád v mapách založených na OSM za určitých podmínek
 
 ##
 - Oprava: Chybějící sledované položky v inventáři kešek (změna webu)
