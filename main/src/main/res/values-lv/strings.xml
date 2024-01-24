@@ -818,7 +818,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_custom">Uzstādīt</string>
     <string name="waypoint_my_coordinates">Manas koordinātas</string>
     <string name="waypoint_bearing">Pagrieziena leņķis °</string>
-    <string name="waypoint_distance">Attālums</string>
+    <string name="waypoint_distance">Pēc attāluma</string>
     <string name="waypoint_name">Nosaukums</string>
     <string name="waypoint_edit">Rediģēt</string>
     <string name="waypoint_copy_coordinates">Kopēt koordinātas</string>
