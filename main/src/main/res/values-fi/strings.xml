@@ -240,8 +240,6 @@
     <string name="err_tb_find_that">c:geo ei löydä reissaajan tietoja.</string>
     <string name="err_waypoint_cache_unknown">c:geo ei tiedä minkä kätkön haluat lisätä välietapiksi.</string>
     <string name="err_waypoint_add_failed">c:geo epäonnistui välietapin lisäämisessä.</string>
-    <string name="err_point_bear_and_dist_title">Tarvitsetko apua?</string>
-    <string name="err_point_bear_and_dist">Täytä sekä suunta että matka. Suunta on 0–360 asteen kulma suhteessa pohjoiseen. Matka ei vaadi yksikköä.</string>
     <string name="err_log_load_data">c:geo ei voi ladata kirjaamiseen tarvittavia tietoja.</string>
     <string name="err_log_post_missing_tracking_code">Seurantakoodi puuttuu.</string>
     <string name="err_log_post_missing_coordinates">Koordinaatit puuttuvat.</string>
@@ -252,7 +250,6 @@
     <string name="err_logimage_post_failed">Näyttää siltä että lokisi kuvaa ei ladattu. Tarkistathan sen kätkön alkuperäiseltä nettisivulta.</string>
     <string name="err_parse_lat">c:geo ei saanut käsiteltyä leveysastetta.</string>
     <string name="err_parse_lon">c:geo ei saanut käsiteltyä pituusastetta.</string>
-    <string name="err_parse_dist">c:geo ei saanut käsiteltyä etäisyyttä.</string>
     <string name="err_parse_lat_lon">c:geo ei saanut käsiteltyä leveys- tai pituusastetta.</string>
     <string name="err_rendertheme_file_unreadable">Valittua kartanpiirtoteemaa ei voitu ladata. Käytetään sisäänrakennettua teemaa.</string>
     <string name="err_rendertheme_invalid">Valittu kartanpiirtoteema ei ole kelvollinen tässä Mapsforge-versiossa. Käytetään sisäänrakennettua teemaa.</string>
@@ -1498,8 +1495,6 @@
     <string name="waypoint_custom">Oma</string>
     <string name="waypoint_my_coordinates">Sijaintini</string>
     <string name="waypoint_my_coordinates_accuracy">Omat koordinaatit (±%s)</string>
-    <string name="waypoint_bearing">Suunnassa</string>
-    <string name="waypoint_distance">Etäisyys</string>
     <string name="waypoint_name">Nimi</string>
     <string name="waypoint_edit">Muokkaa</string>
     <string name="waypoint_copy_coordinates">Kopioi koordinaatit</string>
@@ -1535,6 +1530,7 @@
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Suunnassa</string>
     <!-- Variables -->
     <string name="variables_titletext">Käytä tätä sivua kirjataksesi alas arvot ja tehdäksesi tarvittavat laskelmat tälle kätkölle.</string>
     <string name="variables_scanlisting">Skannaa kuvaus</string>
@@ -1737,7 +1733,6 @@
     <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
     <string name="user_menu_send_message">Lähetä viesti</string>
     <string name="user_menu_send_email">Lähetä sähköposti</string>
-    <string name="user_menu_open_contact">Avaa yhteystiedot</string>
     <string name="user_unknown">Tuntematon käyttäjä</string>
     <!-- navigation -->
     <string name="navigation">Navigointi</string>
@@ -1763,8 +1758,6 @@
     <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
     <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
     <string name="helper_sendtocgeo_title">Lähetä c:geoon</string>
-    <string name="helper_contacts_title">c:geo yhteystiedot -lisäosa</string>
-    <string name="helper_contacts_description">Voit avata kontaktit (puhelimen osoitekirjasta) suoraan kätkön sivulta, joten voit helpommin pyytää ystävän apua.</string>
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
     <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, jäljitä reittisi, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
