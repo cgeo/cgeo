@@ -237,8 +237,6 @@
     <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
     <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
     <string name="err_waypoint_add_failed">c:geo nemôže pridať bod trasy.</string>
-    <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
-    <string name="err_point_bear_and_dist">Vyplňte azimut aj vzdialenosť. Azimut je uhol 0 až 360 stupňov vzhľadom k severu. Vzdialenosť môžete zadať bez jednotiek.</string>
     <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
     <string name="err_log_post_missing_tracking_code">Chýba kód trasovateľného predmetu (TB kód).</string>
     <string name="err_log_post_missing_coordinates">Súradnice chýbajú.</string>
@@ -248,7 +246,6 @@
     <string name="err_logimage_post_failed">Zdá sa, že obrázok logu nebol nahratý. Skontrolujte to na webovej stránke skrýše.</string>
     <string name="err_parse_lat">c:geo nemôže zistiť zemepisnú šírku.</string>
     <string name="err_parse_lon">c:geo nemôže dopočítať zemepisnú dĺžku.</string>
-    <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
     <string name="err_parse_lat_lon">c:geo nemôže zistiť zemepisnú šírku alebo dĺžku.</string>
     <string name="err_rendertheme_file_unreadable">Nepodarilo sa načítať vybranú tému. Návrat na pôvodnú.</string>
     <string name="err_rendertheme_invalid">Vybraná téma nie je platná pre túto verziu mapsforge. Návrat na pôvodnú.</string>
@@ -1465,8 +1462,6 @@
     <string name="waypoint_custom">vlastný</string>
     <string name="waypoint_my_coordinates">Aktuálna poloha</string>
     <string name="waypoint_my_coordinates_accuracy">Moje súradnice (±%s)</string>
-    <string name="waypoint_bearing">Azimut v °</string>
-    <string name="waypoint_distance">Vzdialenosť</string>
     <string name="waypoint_name">Názov</string>
     <string name="waypoint_edit">Upraviť</string>
     <string name="waypoint_copy_coordinates">Kopírovať súradnice</string>
@@ -1502,6 +1497,7 @@
     <string name="from_clipboard">Zo schránky</string>
     <string name="copy_to_clipboard">Kopírovať do schránky</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Azimut v °</string>
     <!-- Variables -->
     <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
     <string name="variables_scanlisting">Prehľadať listing</string>
@@ -1703,7 +1699,6 @@
     <string name="user_menu_open_browser">Otvoriť profil v prehliadači</string>
     <string name="user_menu_send_message">Odoslať správu</string>
     <string name="user_menu_send_email">Odoslať e-mail</string>
-    <string name="user_menu_open_contact">Otvoriť kartu kontaktu</string>
     <string name="user_unknown">Neznámy používateľ</string>
     <!-- navigation -->
     <string name="navigation">Navigácia</string>
@@ -1729,8 +1724,6 @@
     <string name="helper_calendar_pastevent_title">Minulá udalosť</string>
     <string name="helper_calendar_pastevent_question">Dátum udalosti je v minulosti. Pridať napriek tomu?</string>
     <string name="helper_sendtocgeo_title">Poslať do c:geo</string>
-    <string name="helper_contacts_title">Doplnok c:geo kontakty</string>
-    <string name="helper_contacts_description">Umožňuje otvorenie karty kontaktu (z adresára) priamo z logbooku, takže môžete ľahko požiadať priateľov o pomoc.</string>
     <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
     <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
     <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
