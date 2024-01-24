@@ -14,7 +14,7 @@
 - Neu: Bearbeiten/Löschen von eigenen Logs
 - Neu: Wegpunkt-Projektion mit Variablen
 - Änderung: Bildauswahl auf jpg, png und gif beschränken
-- New: New formula CHARS to select multiple single chars
+- Neu: Neue Formel CHARS zum Auswählen mehrerer Zeichen
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -23,5 +23,5 @@
 - Korrektur: Wiederherstellung von Backups ohne gültige Datum/Uhrzeit
 - Neu: Aktive Trackdateien in die Sicherung einbeziehen
 - Neu: Integrierte c:geo Kontakte-Funktionalität (externes Addon ist nicht mehr erforderlich)
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- Korrektur: Defaultwerte für Trackable Logs überarbeitet
+- Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
