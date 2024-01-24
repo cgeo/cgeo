@@ -1,7 +1,7 @@
 ##
 - Korrektur: Defaultwerte für Trackable Logs überarbeitet
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
-- New: New formula CHARS to select multiple single chars
+- Neu: Neue Formel CHARS zum Auswählen mehrerer Zeichen
 
 ##
 - Korrektur: Absturz bei Anzeige des Benachrichtigungs-Markers
