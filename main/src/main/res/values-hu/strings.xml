@@ -229,8 +229,6 @@
     <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt az utazót.</string>
     <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
     <string name="err_waypoint_add_failed">Sajnáljuk, a c:geo nem tudta hozzáadni az útpontodat.</string>
-    <string name="err_point_bear_and_dist_title">Segítségre van szükséged?</string>
-    <string name="err_point_bear_and_dist">Tölsd ki az irányt és a távolságot is. Az irány az északkal bezárt szög 0 és 360 fok között. A távolság mértékegységgel és mértékegység nélkül is állhat.</string>
     <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni a megtalálás bejelentéséhez szükséges adatokat.</string>
     <string name="err_log_post_missing_tracking_code">A követőkód hiányzik.</string>
     <string name="err_log_post_missing_coordinates">A koordináták hiányoznak.</string>
@@ -240,7 +238,6 @@
     <string name="err_logimage_post_failed">Úgy tűnik, hogy a logfotóid nem mentek át. Kérlek, ellenőrizd a láda weboldalát!</string>
     <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
     <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
-    <string name="err_parse_dist">Sajnáljuk, a c:geo nem tudja értelmezni a távolságot.</string>
     <string name="err_parse_lat_lon">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet vagy a hosszúságot.</string>
     <string name="err_rendertheme_file_unreadable">A kiválasztott stílus betöltése sikertelen. Visszatérés a beépítetthez.</string>
     <string name="err_rendertheme_invalid">A kiválasztott stílus inkompatibilis a mapsforge verzióval. Visszatérés a beépítetthez.</string>
@@ -847,8 +844,6 @@
     <string name="waypoint_cache_coordinates">A láda koordinátái</string>
     <string name="waypoint_custom">Egyedi</string>
     <string name="waypoint_my_coordinates">Az én koordinátáim</string>
-    <string name="waypoint_bearing">Irány</string>
-    <string name="waypoint_distance">Távolság</string>
     <string name="waypoint_name">Név</string>
     <string name="waypoint_edit">Szerkesztés</string>
     <string name="waypoint_copy_coordinates">Koordináták másolása</string>
@@ -879,6 +874,7 @@
     <string name="from_clipboard">A vágólapról</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Irány</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -946,7 +942,6 @@
     <string name="user_menu_view_hidden">Ládák száma</string>
     <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
     <string name="user_menu_send_message">Üzenet küldése</string>
-    <string name="user_menu_open_contact">Névjegy megnyitása</string>
     <string name="user_unknown">Ismeretlen felhasználó</string>
     <!-- navigation -->
     <string name="navigation">Navigáció</string>
@@ -963,8 +958,6 @@
     <string name="helper_calendar_pastevent_title">Múltbéli esemény</string>
     <string name="helper_calendar_pastevent_question">Az esemény időpontja már elmúlt. Mégis hozzáadod?</string>
     <string name="helper_sendtocgeo_title">Send2cgeo</string>
-    <string name="helper_contacts_title">c:geo kapcsolatok add-on</string>
-    <string name="helper_contacts_description">Lehetővé teszi egy névjegy közvetlen megnyitását a log bejegyzésekből, így könnyebben segítséget tudsz kérni.</string>
     <string name="helper_sendtocgeo_description">A Send2cgeo egy böngészőbővítmény <strong>PC-re</strong>. A geocaching.com böngészése közben, egy kattintással tudsz ládákat küldeni a készülékedre.</string>
     <string name="helper_locus_description">Telefonon, tableten használható szabadtéri navigációs program. Offline térképek használata, útvonalkövetés, ládavadászat, hangos útikalauz, stb.</string>
     <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
