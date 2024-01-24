@@ -1,12 +1,17 @@
 ##
-- Fix: Crash on displaying notification dot
-- Fix: Unneded READ_EXTERNAL_STORAGE permission requested on newer Android versions
-- Fix: Trackable logtype default selection
-- Fix: Crash on opening map downloader under certain conditions
-- Fix: Crash on OSM-based maps under certain conditions
+- 수정: 추적아이템 로그 유형 기본값이 재작업되었습니다.
+- 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
+- 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS
 
 ##
-- Fix: Trackables missing in cache inventory (website change)
+- 수정: 알림 점 표시 시 충돌이 발생함
+- 수정: 최신 Android 버전에서 불필요한 READ_EXTERNAL_STORAGE 권한이 요청되었습니다.
+- 수정: 추적아이템 로그 유형 기본 선택
+- 수정: 특정 조건에서 지도 다운로더를 열 때 충돌이 발생함
+- 수정: 특정 조건에서 OSM 기반 지도에서 충돌이 발생함
+
+##
+- 수정: 캐시 보관함에서 추적아이템이 누락됨 (웹사이트 변경)
 
 ##
 - 수정: 큰 글꼴을 사용할 때 나침반 뒤에 숨겨진 힌트
