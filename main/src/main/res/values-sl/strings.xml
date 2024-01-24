@@ -174,8 +174,6 @@
     <string name="err_tb_find_that">c:geo ni našel tega sledljivčka.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne ve h kateremu zakladu želite dodati točko.</string>
     <string name="err_waypoint_add_failed">c:geo ni uspelo dodati točke.</string>
-    <string name="err_point_bear_and_dist_title">Potrebujete pomoč?</string>
-    <string name="err_point_bear_and_dist">Vnesite smer in razdaljo. Smer je kot med 0 in 360 stopinjami od severa. Razdalja je lahko z ali brez enot.</string>
     <string name="err_log_load_data">c:geo ni mogel naložiti podatkov za zapis obiska.</string>
     <string name="err_log_post_missing_tracking_code">Manjkajoča koda za sledenje.</string>
     <string name="err_log_post_missing_coordinates">Manjkajo koordinate.</string>
@@ -185,7 +183,6 @@
     <string name="err_logimage_post_failed">Izgleda, kot da slikani bila objavljena. Preverite na spletni strani.</string>
     <string name="err_parse_lat">c:geo ni razumel geografske širine.</string>
     <string name="err_parse_lon">c:geo ni razumel geografske dolžine.</string>
-    <string name="err_parse_dist">c:geo ni razumel razdalje.</string>
     <string name="err_parse_lat_lon">c:geo ni razumel geografske širine in dolžine.</string>
     <string name="warn_save_nothing">Nič ni za shraniti.</string>
     <string name="warn_no_cache_coord">Ni nobenega zaklada s koordinatami.</string>
@@ -613,8 +610,6 @@
     <string name="waypoint_cache_coordinates">Koordinate zaklada</string>
     <string name="waypoint_custom">Posebno</string>
     <string name="waypoint_my_coordinates">Moje koordinate</string>
-    <string name="waypoint_bearing">Smer v stopinjah</string>
-    <string name="waypoint_distance">Razdalja</string>
     <string name="waypoint_name">Ime</string>
     <string name="waypoint_edit">Uredi</string>
     <string name="waypoint_copy_coordinates">Kopiraj koordinate</string>
@@ -643,6 +638,7 @@
     <string name="from_clipboard">Iz odložišča</string>
     <string name="copy_to_clipboard">Kopiraj v odložišče</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Smer v stopinjah</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -704,7 +700,6 @@
     <string name="user_menu_view_hidden">Skriti zakladi</string>
     <string name="user_menu_open_browser">Odpri profil v brskalniku</string>
     <string name="user_menu_send_message">Pošlji sporočilo</string>
-    <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
     <string name="user_unknown">Neznan uporabnik</string>
     <!-- navigation -->
     <string name="navigation">Navigacija</string>
@@ -719,8 +714,6 @@
     <string name="license_dismiss">Zapri</string>
     <!-- helpers -->
     <string name="helper_sendtocgeo_title">Pošlji v c:geo</string>
-    <string name="helper_contacts_title">Kontakti - dodatek za c:geo</string>
-    <string name="helper_contacts_description">Omogoča vam odpiranje vizitke kontakta (v vašem adresarju) direktno iz zapisa, tako da lahko lažje vprašate prijatelje za pomoč.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo je razširitev za vaš brskalnik <strong>na vašem računalniku</strong>. Ko brskate na geocaching.com, lahko iz spletne strani pošljete zaklad direktno na vašo napravo s klikom na gumb znotraj brskalnika.</string>
     <string name="helper_gpsstatus_description">Aplikacija GPS Status vam omogoča prikaz radarja in uporabljate jo lahko z aplikacijo c:geo. Omogoča tudi prikaz veliko drugih informacij povezanih z GPS in njihovimi orodji.</string>
     <string name="helper_bluetoothgps_description">Omogoča vam uporabo zunanjega GPS sprejemnika, ki ga povežete z vašo napravo preko Bluetooth. Na ta način lahko varčujete z baterijo in dobite bolj natančen sprejem.</string>
