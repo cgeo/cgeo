@@ -155,8 +155,6 @@
     <string name="err_tb_find_that">ang c:geo ay hindi nakakita sa nasusubaybayang iyon.</string>
     <string name="err_waypoint_cache_unknown">ang c:geo ay walang alam sa kung anong cache ang iyong gusto na dagdagan ng parang isang waypoint.</string>
     <string name="err_waypoint_add_failed">ang c:geo ay nabiigo sa pagdagdag ng iyong puntongdaan.</string>
-    <string name="err_point_bear_and_dist_title">Nangangailangan ng iilang tulong?</string>
-    <string name="err_point_bear_and_dist">Punan ang parehong bearing at distansya. Ang bearing ay anggulo mula 0 hanggang 360 ng mga degree relatibo patungo sa hilaga. Ang distansya ay hindi nangangailangan ng mga yunit.</string>
     <string name="err_log_load_data">ang c:geo ay hindi nakapag-load sa kinakailangang datos para mai-log ang pagbisita.</string>
     <string name="err_log_post_missing_tracking_code">Nawawala ang code sa pagsusubaybay.</string>
     <string name="err_log_post_missing_coordinates">Ang mga coordinate ay nawawala.</string>
@@ -166,7 +164,6 @@
     <string name="err_logimage_post_failed">Mukhang sa tingin ko ang larawan ng iyong pag log ay hindi naupload. Mangyaring suriin ito sa cache na pinagmula ng website.</string>
     <string name="err_parse_lat">hindi masuri ng c:geo ang latitud.</string>
     <string name="err_parse_lon">hindi masuri ng c:geo ang longhitud.</string>
-    <string name="err_parse_dist">hindi masuri ng c:geo ang distansya.</string>
     <string name="err_parse_lat_lon">hindi masuri ng c:geo ang latitud o longhitud.</string>
     <string name="err_rendertheme_file_unreadable">Hindi makapag load sa napili na tema. Ibinalik sa built-in na isa.</string>
     <string name="err_rendertheme_invalid">Ang temang namipili ay hindi puwede paa sa mapsforge na uri. Pinabalik ang naka built-in na isa.</string>
@@ -652,8 +649,6 @@
     <string name="waypoint_cache_coordinates">Mga koordinado sa cache</string>
     <string name="waypoint_custom">Ang kustom</string>
     <string name="waypoint_my_coordinates">Ang mga koordinado ko</string>
-    <string name="waypoint_bearing">Ang tindig sa °</string>
-    <string name="waypoint_distance">Ang distansya</string>
     <string name="waypoint_name">Ang pangalan</string>
     <string name="waypoint_edit">I-edit</string>
     <string name="waypoint_copy_coordinates">Ang mga koordinado ay koptahin</string>
@@ -684,6 +679,7 @@
     <string name="from_clipboard">Ang Mula sa clipboard</string>
     <string name="copy_to_clipboard">Ang Kopyahin sa clipboard</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Ang tindig sa °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -750,7 +746,6 @@
     <string name="user_menu_view_hidden">Nakatago ang mga cache</string>
     <string name="user_menu_open_browser">Ang profile ay buksan sa browser</string>
     <string name="user_menu_send_message">Magpadala ng mensahe</string>
-    <string name="user_menu_open_contact">Ang kard ng kontak ay buksan</string>
     <string name="user_unknown">Hindi kilalang gumagamit</string>
     <!-- navigation -->
     <string name="navigation">Ang nabigasyon</string>
@@ -767,8 +762,6 @@
     <string name="helper_calendar_pastevent_title">Lipas na pangyayari</string>
     <string name="helper_calendar_pastevent_question">Nasa nakaraan ang petsa ng pangyayari. Anumang mangyari idagdag ito?</string>
     <string name="helper_sendtocgeo_title">I-send sa c:geo</string>
-    <string name="helper_contacts_title">ang plugin sa mga kontak ng c:geo</string>
-    <string name="helper_contacts_description">Nagbibigay-daan sa iyo na makapagbukas ng isang kard sa kontak (ng iyong libro ng address) direkta mula sa pasukan ng log, kaya ikaw ay maaaring mas madaling makapanghingi ng tulong sa iyong mga kaibigan.</string>
     <string name="helper_sendtocgeo_description">Ang Ipadala sa c:geo ay isang ekstensyon sa browser <strong>para sa iyong PC</strong>. Kapag nagba-browse sa geocaching.com, maaaring kang makapagpadala ng mga cache patungo sa iyong smartphone sa direktahang pagpindut sa pindutang nasa loob ng browser.</string>
     <string name="helper_locus_description">Panglabas na app sa nabigasyon para sa iyong telepono o tablet. Tingnan ang mga mapang topo sa offline, subaybayan ang iyong ruta, maghanap ng mga geocache, gumamit ng isang gabay sa tunog at makakagawa ng mas higit pa.</string>
     <string name="helper_gpsstatus_description">Pwede kang gumamit ng radar sa aplikasyong ito kaugnay ng c:geo. Ito rin ay naghahandog ng marami pang ibang impormasyon na may kaugnayan sa GPS.</string>
