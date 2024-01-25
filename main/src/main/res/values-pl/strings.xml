@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Zarchiwizowana</string>
     <string name="log_save">Zapisz offline</string>
     <string name="log_saving">Zapisuję w dzienniku…</string>
-    <string name="log_saving_and_uploading">Wysyłanie wpisu i obrazu…</string>
     <string name="log_posting_log">Wysyłanie wpisu…</string>
+    <string name="log_posting_problemreport">Wysyłanie dziennika z raportem o problemie…</string>
+    <string name="log_posting_deletelog">Usuń dziennik…</string>
+    <string name="log_posting_image_create">Obraz %1$s/%2$s: wysyłanie danych…</string>
+    <string name="log_posting_image_edit">Obraz %1$s/%2$s: zmiana danych…</string>
+    <string name="log_posting_image_delete">Usuwanie obrazu %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Zapisz nowy stan dziennika…</string>
     <string name="log_posting_vote">Wysyłanie oceny skrytki…</string>
-    <string name="log_posting_image">Wysyłanie obrazka…</string>
     <string name="log_posting_generic_trackable">Wysyłanie %1$s %2$d/%3$d</string>
     <string name="log_clear">Wyczyść</string>
     <string name="log_templates">Znaleziono: Szablon wpisu…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">skalowane</string>
     <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
+    <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -264,8 +269,6 @@
     <string name="err_tb_find_that">c:geo nie może znaleźć tego przedmiotu podróżnego.</string>
     <string name="err_waypoint_cache_unknown">c:geo nie wie, do której skrytki chcesz dodać punkt nawigacji.</string>
     <string name="err_waypoint_add_failed">c:geo nie może dodać punktu nawigacji.</string>
-    <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
-    <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
     <string name="err_log_load_data">c:geo nie może załadować danych wymaganych do wpisania wizyty.</string>
     <string name="err_log_post_missing_tracking_code">Brak kodu przedmiotu podróżnego.</string>
     <string name="err_log_post_missing_coordinates">Brak współrzędnych.</string>
@@ -276,7 +279,6 @@
     <string name="err_logimage_post_failed">Wygląda na to, że zdjęcie nie zostało przesłane. Proszę sprawdzić to na stronie internetowej skrytki.</string>
     <string name="err_parse_lat">c:geo nie może obliczyć szerokości geograficznej.</string>
     <string name="err_parse_lon">c:geo nie może obliczyć długości geograficznej.</string>
-    <string name="err_parse_dist">c:geo nie może obliczyć odległości.</string>
     <string name="err_parse_lat_lon">c:geo nie może obliczyć szerokości lub długości geograficznej.</string>
     <string name="err_rendertheme_file_unreadable">Nie można załadować wybranego motywu. Przywracanie wbudowanego motywu.</string>
     <string name="err_rendertheme_invalid">Wybrany motyw nie jest prawidłowy dla tej wersji mapsforge. Przywracanie wbudowanego motywu.</string>
@@ -317,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
+    <string name="confirm_unsent_changes_title">Niewysłane zmiany</string>
+    <string name="confirm_unsent_changes">Odrzucić niewysłane zmiany?</string>
     <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacji?</string>
     <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
     <string name="more_information">Więcej informacji</string>
@@ -416,6 +420,7 @@
     <string name="caches_sort_state">Stan</string>
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
+    <string name="caches_sort_lastfounddate">Data ostatniego znalezienia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
     <string name="caches_select_next20">Wybierz następne 20 skrytek</string>
     <string name="caches_select_next100">Wybierz następne 100 skrytek</string>
@@ -705,7 +710,7 @@
     <string name="about_changelog_full">Lista wszystkich zmian</string>
     <string name="about_nutshellmanual">Podręcznik online</string>
     <string name="about_contributors_carnerodetails">jako ojciec c:geo</string>
-    <string name="about_contributors_recent">Ostatni współpracownicy</string>
+    <string name="about_contributors_recent">Współtwórcy (ostatnie 12 miesięcy)</string>
     <string name="about_contributors_specialthanks">Specjalne podziękowania dla</string>
     <string name="about_contributors_specialthanksdetails">- wszystkich naszych tłumaczy na [Crowdin.net](https://crowdin.net/project/cgeo)!\n– wszystkich zgłaszających błędy\n– i wszystkich innych wspierających.\n</string>
     <string name="about_contributors_other">Inni współpracownicy</string>
@@ -881,6 +886,8 @@
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas wyświetlania na mapie pojedynczej skrytki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Odwiedzone punkty nawigacji półprzezroczyste</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Oznacz odwiedzone punkty nawigacji za pomocą półprzezroczystego tła</string>
     <string name="init_brouterThreshold">Obliczanie trasy</string>
     <string name="init_brouterThreshold_description">Maksymalna odległość, do której trasa będzie obliczana w trybie offline.</string>
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
@@ -903,6 +910,8 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
     <string name="init_showElevation">Pokaż wysokość</string>
     <string name="init_summary_showElevation">Pokaż informacje o wysokości dla bieżącej pozycji, pobrane z danych trasy lub GNSS (jeśli są dostępne)</string>
+    <string name="init_elevation_notAvailable">"Brak dostępnych danych o wysokości"</string>
+    <string name="menu_elevation_info">Wysokość (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Wyłącz wyodrębnianie punktów nawigacji</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacji z osobistych notatek skrytek. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki.</string>
     <string name="init_prevent_cache_note_merge">Nadpisz osobistą notatkę skrytki</string>
@@ -1003,6 +1012,7 @@
     <string name="init_backup_unavailable">niedostępne</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="init_restore_version_error">Nieoczekiwany format - nie można przywrócić bazy danych.\n\nOczekiwana wersja to %1$d,\nkopia zapasowa ma wersję %2$d</string>
+    <string name="backup_tracks_error">Błąd podczas tworzenia kopii zapasowej śladów.</string>
     <string name="settings_title_backup">Kopia zapasowa / przywracanie</string>
     <string name="settings_summary_backup">Wykonaj kopię zapasową i przywrócenie danych o skrytkach/punktach nawigacji oraz ustawień programu.</string>
     <string name="init_backup_settings_logins">Kopia zapasowa danych konta</string>
@@ -1114,6 +1124,9 @@
     <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
+    <string name="init_reset_otm">Resetuj jednorazowe wiadomości</string>
+    <string name="init_reset_otm_confirm">Czy chcesz zresetować wszystkie jednorazowe wiadomości?</string>
+    <string name="init_reset_otm_done">Wiadomości jednorazowe zostały zresetowane</string>
     <string name="init_please_wait">Proszę czekać…</string>
     <string name="settings_open_website">Otwórz stronę</string>
     <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
@@ -1141,10 +1154,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="category_unifiedMap">Ujednolicona mapa</string>
-    <string name="experimental">(eksperymentalna)</string>
+    <string name="category_unifiedMap">Zunifikowana mapa (beta)</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanej mapy Google lub map Mapsforge (OSM) (eksperymentalne / dalekie od ukończenia / tylko do testowania)</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1292,7 +1304,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Usunąć wszystkie wygenerowane punkty nawigacji z tej skrytki?\n\nPunkty nawigacji zostaną usunięte natychmiast, bez możliwości cofnięcia tej operacji.</string>
     <string name="cache_delete_generated_waypoints_success">Usunięto wygenerowane punkty nawigacji</string>
     <string name="cache_offline_store">Zapisz</string>
-    <string name="cache_offline_stored">Zapisano na urządzeniu</string>
+    <string name="cache_offline_stored_ago">Zapisano: %s</string>
     <string name="cache_offline_not_ready">Nie jest pobrana\ndo użytku offline</string>
     <string name="cache_offline_time_mins_few">przed kilkoma minutami</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1391,6 +1403,8 @@
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
     <string name="cache_dialog_refresh_title">Odśwież</string>
     <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrytki…</string>
+    <string name="cache_menu_speechDeactivate">Przestań mówić</string>
+    <string name="cache_menu_speechActivate">Zacznij mówić</string>
     <string name="cache_menu_navigate">Nawiguj</string>
     <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
@@ -1440,6 +1454,8 @@
     <string name="cache_menu_log_in_browser">Utwórz wpis w dzienniku w przeglądarce</string>
     <string name="cache_menu_ignore">Ignoruj skrytkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
+    <string name="cache_log_menu_edit">Edytuj wpis</string>
+    <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
@@ -1465,6 +1481,7 @@
     <string name="cache_distance">Odległość</string>
     <string name="cache_difficulty">Trudność</string>
     <string name="cache_terrain">Teren</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Ocena</string>
     <string name="cache_own_rating">Własna ocena</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1524,6 +1541,9 @@
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_remove_from_route_end">Usuń od końca</string>
     <string name="context_map_show_coords">Pokaż współrzędne</string>
+    <string name="context_map_star_show">Pokaż linie do punktów nawigacji</string>
+    <string name="context_map_star_hide">Ukryj linie do punktów nawigacji</string>
+    <string name="edit">Edytuj</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -1538,8 +1558,6 @@
     <string name="init_summary_show_routing_menu">Długie dotknięcie na skrytce pokazuje menu z zaawansowanymi opcjami dodawania/usuwania skrytki do/z trasy. Jeśli opcja jest wyłączona, wtedy skrytka jest po prostu dodawana/usuwana do/z trasy.</string>
     <string name="init_ActionbarAutohide">Ukryj pasek narzędzi po dotknięciu</string>
     <string name="init_summary_ActionbarAutohide">Dotknij wolne miejsce na mapie, aby ukryć/pokazać pasek narzędzi</string>
-    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
     <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
@@ -1574,6 +1592,7 @@
     <string name="web_downloaded">Pobrano</string>
     <!-- popup -->
     <string name="popup_more">Więcej szczegółów</string>
+    <string name="map_fragment_swipe_hint_text">Przesuń, aby otworzyć widok szczegółów</string>
     <!-- waypoint -->
     <string name="waypoint">Punkt nawigacji</string>
     <string name="waypoint_coordinates">Współrzędne</string>
@@ -1582,8 +1601,6 @@
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
-    <string name="waypoint_bearing">Kierunek w stopniach</string>
-    <string name="waypoint_distance">Odległość</string>
     <string name="waypoint_name">Nazwa</string>
     <string name="waypoint_edit">Edytuj</string>
     <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
@@ -1618,6 +1635,16 @@
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Brak projekcji</string>
+    <string name="projection_type_bearing">Kierunek</string>
+    <string name="projection_type_bearing_info">Azymut %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Kierunek w stopniach</string>
+    <string name="projection_type_bearing_hint_distance">Odległość</string>
+    <string name="projection_type_offset">Przesunięcie</string>
+    <string name="projection_type_offset_info">Przesunięcie szer. %1$s mm, dł. %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Przesunięcie szerokości geograficznej w mikrominutach</string>
+    <string name="projection_type_offset_hint_longitude">Przesunięcie długości geograficznej w mikrominutach</string>
     <!-- Variables -->
     <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
     <string name="variables_scanlisting">Skanuj wpis</string>
@@ -1822,7 +1849,6 @@
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
     <string name="user_menu_send_email">Wyślij e-mail</string>
-    <string name="user_menu_open_contact">Otwórz wizytówkę kontaktu</string>
     <string name="user_unknown">Nieznany użytkownik</string>
     <!-- navigation -->
     <string name="navigation">Nawigacja</string>
@@ -1848,8 +1874,6 @@
     <string name="helper_calendar_pastevent_title">Przeszłe wydarzenie</string>
     <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
     <string name="helper_sendtocgeo_title">Wyślij do c:geo</string>
-    <string name="helper_contacts_title">c:geo - dodatek Kontakty</string>
-    <string name="helper_contacts_description">Umożliwia otwarcie kontaktu (z Twojej książki adresowej) bezpośrednio z wpisu do dziennika, więc możesz łatwiej poprosić przyjaciół o pomoc.</string>
     <string name="helper_sendtocgeo_description">Wyślij do c:geo (Send2cgeo) jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
@@ -2173,7 +2197,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Używasz wersji c:geo, która jest starsza niż rok. Niektóre funkcje mogą już nie działać ze względu na zmiany na stronie internetowej lub inne zmiany techniczne. Przeczytaj nasze FAQ na temat aktualizacji aplikacji.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Mówiący kompas</string>
-    <string name="tts_toggle">Przełącz mówienie</string>
     <string name="tts_started">Mówienie rozpoczęte</string>
     <string name="tts_stopped">Mówienie zakończone</string>
     <string name="tts_running">Usługa mowy jest uruchomiona…</string>
@@ -2352,6 +2375,7 @@
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
     <string name="sorted_route_saved">Indywidualna trasa zapisana</string>
     <string name="load_individual_route_error">Błąd ładowania indywidualnej trasy</string>
+    <string name="route_item_point">Punkt trasy</string>
     <string name="route_item_not_yet_loaded">Nie załadowano jeszcze elementu trasy</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Trasa załadowana z %d punktem trasy</item>
@@ -2381,12 +2405,13 @@
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="routes_tracks_color">Wybierz kolor</string>
-    <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
+    <string name="routes_tracks_change_name">Zmień nazwę</string>
+    <string name="center">Wyśrodkuj</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
     <string name="track">Ślad</string>
-    <string name="make_visible">ustaw jako widoczne</string>
-    <string name="hide">ukryj</string>
+    <string name="make_visible">Ustaw jako widoczne</string>
+    <string name="hide">Ukryj</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2398,6 +2423,8 @@
     <string name="switch_on">Włącz</string>
     <string name="switch_manual">Ręcznie</string>
     <string name="switch_auto">Automatycznie</string>
+    <string name="switch_auto_lowpower">Automatyczne (niska moc)</string>
+    <string name="switch_auto_precise">Automatyczne (precyzja)</string>
     <string name="switch_default">(domyślne)</string>
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
@@ -2445,6 +2472,8 @@
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony „Zapisz”.\n\nPobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\nBądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
+    <string name="downloadmap_keep_temporary_files">Zachowaj pliki tymczasowe</string>
+    <string name="downloadmap_keep_temporary_files_summary">Niektóre źródła obsługują dodatkowe pliki nieużywane przez c:geo. Zachowaj te dodatkowe pliki w folderze pobierania systemu zamiast usuwać je</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
     <string name="download_none_selected">Nie wybrano plików do pobrania</string>
@@ -2555,8 +2584,9 @@
     <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optymalizuj</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Zaznacz wszystko</string>
+    <string name="multiselect_selectvisible">Zaznacz widoczne</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Obszar</string>
     <string name="rtl_fell_meadow">łąka</string>
