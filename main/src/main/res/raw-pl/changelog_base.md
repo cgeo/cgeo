@@ -1,31 +1,27 @@
 ### Mapa
-- Zaktualizowano bliblioteki Mapsforge i VTM do v0.20
-- Zaktualizowano renderer Google Maps
-- Nowość: Pokaż ikonę typu skrytki jako znacznik, jeśli ustawiono ikonę skrytki (emoji) lub włączone są duże ikony
-- Nowość: Pokaż ikonę skrytki jako znacznik dla powiązanych punktów nawigacji
-- Nowość: Zezwalaj na skalowanie ikon skrytek/punktów nawigacji (patrz Ustawienia => Wygląd)
-- Nowość: Liniowe laby wykorzystują liczby jako znaczniki punktów nawigacji
-- Nowość: Punkty nawigacji skrytki wyświetlają ikonę typu skrzynki jako znacznik
-- Nowość: Pokaż informacje o wysokości dla bieżącej pozycji na mapie (patrz Ustawienia => Zawartość mapy & Zachowanie)
-- Nowe: Profil nawigowania zdefiniowany przez użytkownika (tylko nawigowanie wewnętrzne)
-- Poprawka: Zbyt długi tytuł powiadomień zbliżeniowych, rzeczywiste powiadomienia były obcięte na małych ekranach
+- Nowość: [ujednolicona mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zobacz Ustawienia => Źródła mapy => Ujednolicona mapa
+- Nowość: Podświetl istniejące pliki w menedżerze pobierania
+- Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
+- Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
+- Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
+- Nowość: Opcjonalnie zachowuj tymczasowe pliki OAM (pobieranie map, przydatne przy użyciu plików POI w innych aplikacjach)
+- Poprawka: Błąd 404 przy pobieraniu motywu Hylly
 
 ### Szczegóły skrytki
-- Nowość: Edytuj domyślną wartość prefiksu podpisu pod obrazem w dzienniku
-- Nowość: Zapewnij minimalny rozmiar obrazu do wyświetlenia
-- Zmiana: Przeprojektowane opcje edycji dla własnych obrazów dziennika
-- Nowość: Integracja z Bettercacher
-- Nowość: Synchronizacja stanu odwiedzin podczas synchronizacji punktów nawigacji z notatką osobistą
-- Nowość: Pobierz datę znalezienia skrytek Opencaching
-- Nowość: Dołącz wszystkie punkty nawigacji do indywidualnej trasy
+- Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
+- Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
+- Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
+- New: Edit/delete own logs
+- Nowość: Projekcja punktu nawigacji ze zmiennymi
+- Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
+- Nowość: Nowa formuła CHARS, aby wybrać wiele pojedynczych znaków
 
 ### Ogólne
-- Nowość: Zwiększony docelowy SDK do 33
-- Zmiana: Obsługa dostępu do bazy danych, aby uniknąć awarii „Baza danych niedostępna”
-- Zmiana: Domyślnie będą wyświetlane tylko podstawowe ustawienia. Przejdź do Ustawienia => Ustawienia rozszerzone, aby włączyć rozszerzone ustawienia
-- Nowość: Zezwalaj na filtrowanie na listach wielokrotnego wyboru
-- Nowość: Filtr, który pozwala na dołączenie innych nazwanych (zapisanych) filtrów
-- Zmiana: Usunięto AndroidBeam, który nie jest już obsługiwany przez platformę Android
-- Zmiana: Kreator konfiguracji: zintegrowano funkcjonalność „Przywróć” na ekranie „Konfigurowanie usług” i usunięto zaawansowany ekran konfiguracyjny.
-- Poprawka: Ukryj nieaktualny komunikat o błędzie połączenia
-- Poprawka: Nie można utworzyć skrótów dla widgetów c:geo na nowszych systemach Android
+- Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
+- Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
+- Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym
+- Poprawka: Przywracanie kopii zapasowych bez prawidłowych informacji o dacie i czasie
+- Nowość: Dołącz aktywne pliki ze śladami do kopii zapasowej
+- Nowość: Zintegrowano dodatek dla kontaktów c:geo (dodatek zewnętrzny nie jest już potrzebny)
+- Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
+- Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
