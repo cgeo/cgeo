@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Gearchiveerd</string>
     <string name="log_save">Off line opslaan</string>
     <string name="log_saving">Log opslaan…</string>
-    <string name="log_saving_and_uploading">Log posten en afbeeldingen uploaden…</string>
     <string name="log_posting_log">Posten log…</string>
+    <string name="log_posting_problemreport">Probleem rapport log posten…</string>
+    <string name="log_posting_deletelog">Log wissen…</string>
+    <string name="log_posting_image_create">Afbeelding %1$s/%2$s: gegevens posten…</string>
+    <string name="log_posting_image_edit">Afbeelding %1$s/%2$s: gegevens wijzigen…</string>
+    <string name="log_posting_image_delete">Afbeelding %1$s/%2$s verwijderen…</string>
+    <string name="log_posting_save_internal">Opslaan nieuwe log status…</string>
     <string name="log_posting_vote">Cache stem posten…</string>
-    <string name="log_posting_image">Afbeeldingen posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
     <string name="log_templates">Gevonden: Log sjabloon…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">geschaald</string>
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
+    <string name="log_delete_confirm">Weet u zeker dat u het log \'%1$s\' door auteur \'%2$s\' met logdatum \'%3$s \' wilt verwijderen?</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
@@ -264,8 +269,6 @@
     <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
     <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
     <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
-    <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
-    <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
     <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code ontbreekt.</string>
     <string name="err_log_post_missing_coordinates">Coördinaten ontbreken.</string>
@@ -276,7 +279,6 @@
     <string name="err_logimage_post_failed">Het lijkt erop dat uw log-afbeelding niet is geüpload. Controleer het op de cache webpagina.</string>
     <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
     <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
-    <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
     <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
     <string name="err_rendertheme_file_unreadable">Het geselecteerde render thema kan niet worden geladen. Er wordt teruggekeerd naar het ingebouwde thema.</string>
     <string name="err_rendertheme_invalid">Het geselecteerde render thema is niet geldig voor deze versie van mapsforge. Er wordt teruggekeerd naar het ingebouwde thema.</string>
@@ -412,6 +414,7 @@
     <string name="caches_sort_state">Selectie omkeren</string>
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
+    <string name="caches_sort_lastfounddate">Laatste Gevonden datum</string>
     <string name="caches_select_mode">Selectie modus</string>
     <string name="caches_select_next20">Selecteer de volgende 20 caches</string>
     <string name="caches_select_next100">Selecteer de volgende 100 caches</string>
@@ -693,7 +696,7 @@
     <string name="about_changelog_full">Lijst van alle wijzigingen</string>
     <string name="about_nutshellmanual">Online handleiding</string>
     <string name="about_contributors_carnerodetails">als vader van c:geo</string>
-    <string name="about_contributors_recent">Recente bijdragers</string>
+    <string name="about_contributors_recent">Bijdragers (laatste 12 maanden)</string>
     <string name="about_contributors_specialthanks">Speciale dank aan</string>
     <string name="about_contributors_specialthanksdetails">- al onze vertalingsbijdragers op [Crowdin.net](https://crowdin.net/project/cgeo)!\n- alle makers van issues\n- en alle andere supporters.\n</string>
     <string name="about_contributors_other">Andere bijdragers</string>
@@ -869,6 +872,8 @@
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Bezochte waypoints semi-transparant</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Markeer bezochte waypoints met een semi transparante achtergrond</string>
     <string name="init_brouterThreshold">Route berekenen</string>
     <string name="init_brouterThreshold_description">Maximale afstand tot welke offline routering een route berekent.</string>
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
@@ -891,6 +896,8 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Toon een marker voor de moeilijkheidsgraad (links) en het terrein (rechts) waarderingen op de cache markers in de rechter bovenhoek (\"opgeslagen\" marker wordt verplaatst naar het midden).</string>
     <string name="init_showElevation">Toon steiging</string>
     <string name="init_summary_showElevation">Toon steigingsinformatie voor huidige positie, van routing data of GNSS (indien beschikbaar)</string>
+    <string name="init_elevation_notAvailable">"Geen hoogtegegevens beschikbaar"</string>
+    <string name="menu_elevation_info">Hoogte (kaart): %s</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel algemene waypoint extractie uit van persoonlijke cache notities. Het kan nog steeds geactiveerd worden voor individuele caches door het vakje te deactiveren onder de persoonlijke cache notitie.</string>
     <string name="init_prevent_cache_note_merge">Overschrijf persoonlijke cache notitie</string>
@@ -1102,6 +1109,9 @@
     <string name="init_create_memory_dump">Geheugendump maken</string>
     <string name="init_memory_dump">Geheugendump</string>
     <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
+    <string name="init_reset_otm">Reset eenmalige berichten</string>
+    <string name="init_reset_otm_confirm">Wil je alle eenmalige berichten opnieuw instellen?</string>
+    <string name="init_reset_otm_done">Eenmalige berichten zijn gereset</string>
     <string name="init_please_wait">Even geduld…</string>
     <string name="settings_open_website">Website openen</string>
     <string name="settings_open_geokretymap_website">Open de GeoKretyMap.org website</string>
@@ -1129,10 +1139,9 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
-    <string name="category_unifiedMap">Gecombineerde Kaart</string>
-    <string name="experimental">(experimenteel)</string>
+    <string name="category_unifiedMap">Unified Map (bèta)</string>
     <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
-    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten (experimenteel / verre van compleet / alleen voor test)</string>
+    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1272,7 +1281,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle gegenereerde waypoints uit deze cache verwijderen?\n\nWaypoints worden onmiddellijk verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_generated_waypoints_success">Gegenereerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
-    <string name="cache_offline_stored">Opgeslagen in apparaat</string>
+    <string name="cache_offline_stored_ago">Opgeslagen: %s</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
     <string name="cache_offline_time_mins_few">paar minuten geleden</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1363,6 +1372,8 @@
     <string name="cache_dialog_offline_drop_message">Verwijder cache uit geheugen…</string>
     <string name="cache_dialog_refresh_title">Ververs</string>
     <string name="cache_dialog_refresh_message">Vernieuw cachedetails…</string>
+    <string name="cache_menu_speechDeactivate">Stop met praten</string>
+    <string name="cache_menu_speechActivate">Begin met praten</string>
     <string name="cache_menu_navigate">Navigeer</string>
     <string name="cache_menu_target">Instellen als doel</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
@@ -1412,6 +1423,8 @@
     <string name="cache_menu_log_in_browser">Log bezoek in browser</string>
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
+    <string name="cache_log_menu_edit">Log bewerken</string>
+    <string name="cache_log_menu_delete">Logs wissen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
@@ -1437,6 +1450,7 @@
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
     <string name="cache_rating_of_new">%1$.1f van %2$d</string>
@@ -1496,6 +1510,9 @@
     <string name="context_map_remove_from_route_pos">Verwijder vanaf positie %d</string>
     <string name="context_map_remove_from_route_end">Verwijder vanaf het eind</string>
     <string name="context_map_show_coords">Coördinaten tonen</string>
+    <string name="context_map_star_show">Toon lijnen naar waypoints</string>
+    <string name="context_map_star_hide">Verberg lijnen naar waypoints</string>
+    <string name="edit">Bewerken</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
@@ -1510,8 +1527,6 @@
     <string name="init_summary_show_routing_menu">Lange tik op een cache toont een menu met geavanceerde opties om de cache naar/van een route toe te voegen/te verwijderen. Indien uitgeschakeld wordt de cache enkel toegevoegd/verwijderd aan/van de route.</string>
     <string name="init_ActionbarAutohide">Werkbalk verbergen bij tik</string>
     <string name="init_summary_ActionbarAutohide">Tik op vrije kaart ruimte om de werkbalk te verbergen/tonen</string>
-    <string name="onetime_info_longtap_disabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
-    <string name="onetime_info_longtap_enabled">Door lang te tikken op de kaart kan je afzonderlijke routes en door de gebruiker gedefinieerde caches maken.\n\nLange tik op de kaart is momenteel uitgeschakeld.\n\nJe kunt dit wijzigen in Instellingen - Kaart - Kaartgedrag</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
@@ -1544,6 +1559,7 @@
     <string name="web_downloaded">Gedownload</string>
     <!-- popup -->
     <string name="popup_more">Meer details</string>
+    <string name="map_fragment_swipe_hint_text">Swipe om detailweergave te openen</string>
     <!-- waypoint -->
     <string name="waypoint">Waypoint</string>
     <string name="waypoint_coordinates">Coördinaten</string>
@@ -1552,8 +1568,6 @@
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
     <string name="waypoint_my_coordinates_accuracy">Mijn coördinaten (±%s)</string>
-    <string name="waypoint_bearing">Richting</string>
-    <string name="waypoint_distance">Afstand</string>
     <string name="waypoint_name">Naam</string>
     <string name="waypoint_edit">Bewerken</string>
     <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
@@ -1588,6 +1602,15 @@
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
     <string name="copy_to_clipboard">Kopieer naar klembord</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Geen projectie</string>
+    <string name="projection_type_bearing">Richting</string>
+    <string name="projection_type_bearing_info">Richting %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_distance">Afstand</string>
+    <string name="projection_type_offset">Offset</string>
+    <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Breedtegraad Offset in Micro-minuten</string>
+    <string name="projection_type_offset_hint_longitude">Lengtegraad Offset in Micro-minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
     <string name="variables_scanlisting">Lijst scannen</string>
@@ -1791,7 +1814,6 @@
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
     <string name="user_menu_send_email">E-mail verzenden</string>
-    <string name="user_menu_open_contact">Open contactkaart</string>
     <string name="user_unknown">Onbekende gebruiker</string>
     <!-- navigation -->
     <string name="navigation">Navigatie</string>
@@ -1817,8 +1839,6 @@
     <string name="helper_calendar_pastevent_title">Event in het verleden</string>
     <string name="helper_calendar_pastevent_question">De Eventdatum is in het verleden. Toch toevoegen?</string>
     <string name="helper_sendtocgeo_title">Verzend naar c:geo</string>
-    <string name="helper_contacts_title">c:geo contacten-plug-in</string>
-    <string name="helper_contacts_description">Maakt het mogelijk een contactpersoon (uit je adresboek) te openen rechtstreeks vanuit een log, zodat je vrienden makkelijker om hulp kunt vragen.</string>
     <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
     <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
@@ -2140,7 +2160,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Je gebruikt een versie van c:geo die ouder lijkt te zijn dan één jaar. Sommige functies werken mogelijk niet meer vanwege de website of andere technische wijzigingen. Lees onze FAQ over hoe je kunt upgraden.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Pratend kompas</string>
-    <string name="tts_toggle">Stemweergave in-/uitschakelen</string>
     <string name="tts_started">Gestart toespraak</string>
     <string name="tts_stopped">Gestopt toespraak</string>
     <string name="tts_running">Spraakservice is actief…</string>
@@ -2293,6 +2312,7 @@
     <string name="map_individual_route_cleared">Individuele route gewist</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
     <string name="load_individual_route_error">Fout bij laden individuele route</string>
+    <string name="route_item_point">Route punt</string>
     <string name="route_item_not_yet_loaded">Route item nog niet geladen</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Route geladen met %d routepunt</item>
@@ -2320,12 +2340,12 @@
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Kleur selecteren</string>
-    <string name="center_on_route_track">Centreer op route/track</string>
+    <string name="center">Midden</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
     <string name="make_visible">Zichtbaar maken</string>
-    <string name="hide">verbergen</string>
+    <string name="hide">Verbergen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2337,6 +2357,8 @@
     <string name="switch_on">Aan</string>
     <string name="switch_manual">Handmatig</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (minder accuverbruik)</string>
+    <string name="switch_auto_precise">Automatisch (nauwkeurig)</string>
     <string name="switch_default">(standaard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
@@ -2384,6 +2406,8 @@
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
     <string name="downloadmap_filename">%s downloaden</string>
+    <string name="downloadmap_keep_temporary_files">Tijdelijke bestanden behouden</string>
+    <string name="downloadmap_keep_temporary_files_summary">Sommige download bronnen ondersteunen extra bestanden die niet gebruikt worden door c:geo. Houd deze extra bestanden in de downloadmap van het systeem in plaats van te verwijderen</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
     <string name="download_none_selected">Geen bestanden geselecteerd om te downloaden</string>
@@ -2494,8 +2518,9 @@
     <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimaliseren</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Alles selecteren</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Alles selecteren</string>
+    <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebieden</string>
     <string name="rtl_fell_meadow">heuvel / weide</string>
