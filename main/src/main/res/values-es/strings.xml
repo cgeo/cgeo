@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archivado</string>
     <string name="log_save">Guardar sin conexión</string>
     <string name="log_saving">Enviando registro…</string>
-    <string name="log_saving_and_uploading">Publicando registro y subiendo imágenes…</string>
     <string name="log_posting_log">Enviando registro…</string>
     <string name="log_posting_vote">Publicando el voto del caché…</string>
-    <string name="log_posting_image">Publicando imágenes…</string>
     <string name="log_posting_generic_trackable">Publicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpiar</string>
     <string name="log_templates">Encontrado: Plantilla de registro…</string>
@@ -234,8 +232,6 @@
     <string name="err_tb_find_that">c:geo no encuentra ese rastreable.</string>
     <string name="err_waypoint_cache_unknown">c:geo no sabe a qué caché quieres añadir un punto de referencia.</string>
     <string name="err_waypoint_add_failed">c:geo falló al añadir tu punto de referencia.</string>
-    <string name="err_point_bear_and_dist_title">¿Necesitas ayuda?</string>
-    <string name="err_point_bear_and_dist">Rellena ambos, orientación y distancia. La orientación es un ángulo de 0 a 360 grados relativo al norte. Distancia con o sin unidades.</string>
     <string name="err_log_load_data">c:geo no puede cargar los datos necesarios para registrar la visita.</string>
     <string name="err_log_post_missing_tracking_code">Falta el código rastreable.</string>
     <string name="err_log_post_missing_coordinates">Faltan las coordenadas.</string>
@@ -245,7 +241,6 @@
     <string name="err_logimage_post_failed">Parece que tu imagen no se ha subido. Compruébalo en la página original del caché.</string>
     <string name="err_parse_lat">c:geo no puede procesar la latitud.</string>
     <string name="err_parse_lon">c:geo no puede procesar la longitud.</string>
-    <string name="err_parse_dist">c:geo no puede procesar la distancia.</string>
     <string name="err_parse_lat_lon">c:geo no ha podido interpretar la latitud o la longitud.</string>
     <string name="err_rendertheme_file_unreadable">No se ha podido cargar el tema de representación seleccionado. Se revertirá al predeterminado.</string>
     <string name="err_rendertheme_invalid">El tema de procesamiento seleccionado no es válido para esta versión de mapsforge. Se volverá al predeterminado.</string>
@@ -572,7 +567,6 @@
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
-    <string name="about_contributors_recent">Contribuyentes recientes</string>
     <string name="about_contributors_specialthanks">Agradecimientos especiales a</string>
     <string name="about_contributors_specialthanksdetails">- Todos nuestros colaboradores de traducción en [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Todos los creadores de incidencias\n- Y todos los demás seguidores.\n</string>
     <string name="about_contributors_other">Otros colaboradores</string>
@@ -1058,7 +1052,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tiene habilitados \"waypoints de la nota\". Si tiene coordenadas en su nota personal reconocida por c:geo, los waypoints serán recreados para ellos automáticamente. Puede desactivar esto en el cuadro de diálogo de edición de notas personales.</string>
     <string name="cache_delete_userdefined_waypoints_success">Waypoints definidos por el usuario eliminados</string>
     <string name="cache_offline_store">Guardar</string>
-    <string name="cache_offline_stored">Guardado en el dispositivo</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
     <string name="cache_offline_time_mins_few">hace unos minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1249,8 +1242,6 @@
     <string name="internal_goto_targets_description">Este caché almacena tus últimos objetivos \"Ir a\" y se crea automáticamente una vez que has usado la función \"Ir a\" en el menú principal. Las coordenadas introducidas se almacenarán en los waypoints de este caché. Si ya no necesitas estas coordenadas, puedes borrar este caché o cualquiera de sus waypoints. También puedes mover el caché a cualquier otra lista de tu elección.</string>
     <string name="init_longtap_map">Toque largo en el mapa</string>
     <string name="init_summary_longtap_map">Activar el toque largo en el icono del mapa (para crear una ruta individual) o en el espacio libre del mapa (para crear un caché definido por el usuario)</string>
-    <string name="onetime_info_longtap_disabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está deshabilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
-    <string name="onetime_info_longtap_enabled">Mantener pulsado en el mapa puede crear rutas individuales y cachés definidos por el usuario.\n\n El toque largo en el mapa está habilitado.\n\nPuede cambiar esto en Ajustes → Mapa → Comportamiento del mapa</string>
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
@@ -1291,8 +1282,6 @@
     <string name="waypoint_custom">A medida</string>
     <string name="waypoint_my_coordinates">Mis coordenadas</string>
     <string name="waypoint_my_coordinates_accuracy">Mis coordenadas (±%s)</string>
-    <string name="waypoint_bearing">Orientación en º</string>
-    <string name="waypoint_distance">Distancia</string>
     <string name="waypoint_name">Nombre</string>
     <string name="waypoint_edit">Editar</string>
     <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
@@ -1326,6 +1315,7 @@
     <string name="waypoint_coordinate_formats_plain">Sencillo</string>
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_scanlisting">Escanear listado</string>
@@ -1496,7 +1486,6 @@
     <string name="user_menu_open_browser">Abrir perfil en el navegador</string>
     <string name="user_menu_send_message">Enviar mensaje</string>
     <string name="user_menu_send_email">Enviar email</string>
-    <string name="user_menu_open_contact">Abriendo contacto</string>
     <string name="user_unknown">Usuario desconocido</string>
     <!-- navigation -->
     <string name="navigation">Navegación</string>
@@ -1522,8 +1511,6 @@
     <string name="helper_calendar_pastevent_title">Evento pasado</string>
     <string name="helper_calendar_pastevent_question">La fecha del evento ya ha pasado. ¿Añadirlo de todos modos?</string>
     <string name="helper_sendtocgeo_title">Enviar a c:geo</string>
-    <string name="helper_contacts_title">Complemento de contactos de c:geo</string>
-    <string name="helper_contacts_description">Permite abrir un contacto (de tu libreta de contactos) directamente desde un registro, para que puedas pedir ayuda a tus amigos más fácilmente.</string>
     <string name="helper_sendtocgeo_description">\'Send to c:geo\' es una extensión <strong>para tu PC</strong>. Cuando navegues por geocaching.com, puedes enviar cachés a tu smartphone haciendo clic directamente desde tu navegador.</string>
     <string name="helper_locus_description">App de navegación exterior para tu móvil o tableta. Puede visualizar mapas Topo sin conexión, marcar tu ruta, buscar geocachés, usar una guía de voz y mucho más.</string>
     <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
@@ -1843,7 +1830,6 @@ Nombre de archivo:%2$s</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Estás usando una versión de c:geo que parece tener más de un año. Es posible que algunas características ya no funcionen debido a la página web u otros cambios técnicos. Por favor, lea nuestras Preguntas Frecuentes sobre cómo actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brújula con voz</string>
-    <string name="tts_toggle">Activar/desactivar voz</string>
     <string name="tts_started">Voz iniciada</string>
     <string name="tts_stopped">Voz detenida</string>
     <string name="err_tts_lang_not_supported">El idioma actual no es compatible con la síntesis de voz.</string>
@@ -2125,7 +2111,7 @@ Nombre de archivo:%2$s</string>
     <string name="back">Atrás</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">estiva / pradera</string>
