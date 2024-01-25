@@ -638,7 +638,6 @@
     <string name="from_clipboard">Iz odložišča</string>
     <string name="copy_to_clipboard">Kopiraj v odložišče</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Smer v stopinjah</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
