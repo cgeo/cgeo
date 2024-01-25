@@ -91,10 +91,8 @@
     <string name="log_tb_archived">Archivéiert</string>
     <string name="log_save">Offline späicheren</string>
     <string name="log_saving">Log gëtt geschéckt…</string>
-    <string name="log_saving_and_uploading">Log gëtt publizéiert an d\'Biller eropgelueden…</string>
     <string name="log_posting_log">Log gëtt publizéiert…</string>
     <string name="log_posting_vote">Cache Bewäertung gëtt publizéiert…</string>
-    <string name="log_posting_image">Biller gi publizéiert…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d gëtt publizéiert</string>
     <string name="log_clear">Läschen</string>
     <string name="log_post_not_possible">Erofluden vun den Daten ass am gaang…\n Wgl., versicht et spéider nach eng Kéier oder iwwerpréift d\'Internet Verbindung.</string>
@@ -193,8 +191,6 @@
     <string name="err_tb_find_that">c:geo kann dësen Trackable net fannen.</string>
     <string name="err_waypoint_cache_unknown">c:geo weess net zu wéi engem Cache\'s du e Weepunkt bäisetze wëlls.</string>
     <string name="err_waypoint_add_failed">c:geo konnt de Weepunkt net dobäisetzen.</string>
-    <string name="err_point_bear_and_dist_title">Brauchs du Hëllef?</string>
-    <string name="err_point_bear_and_dist">Fëll béid Peilung an Distanz an. Peilung ass e Wénkel tëscht 0 an 360 Grad relativ zu Norden. Distanz verlaangt keng Unitéit.</string>
     <string name="err_log_load_data">c:geo kann d\'erfuerdert Daten net lueden fir är Visitt ze loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking code feelt.</string>
     <string name="err_log_post_missing_coordinates">Koordinate feelen.</string>
@@ -204,7 +200,6 @@
     <string name="err_logimage_post_failed">Et schéngt als gouf är Foto net eropgelueden. Iwwerpréift et iwwert de Website vum Cache.</string>
     <string name="err_parse_lat">c:geo kann d\'Breitengrade net bestëmmen.</string>
     <string name="err_parse_lon">c:geo kann d\'Längengrade net bestëmmen.</string>
-    <string name="err_parse_dist">c:geo kann d\'Distanz net bestëmmen.</string>
     <string name="err_parse_lat_lon">c:geo kann d\'Längengrade oder d\'Breitengrade net bestëmmen.</string>
     <string name="err_rendertheme_file_unreadable">Kann déi gewënschte Kaartenduerstellung net lueden. D\'Standardduerstellung gëtt nees gelueden.</string>
     <string name="err_rendertheme_invalid">Déi gewielte Kaartenduerstellung ass net dës mapsforge-Versioun gülteg. Déi Standardduerstellung gëtt nees gelueden.</string>
@@ -364,7 +359,6 @@
     <string name="about_system_write_logcat_error">Feeler beim Schreiwe vun der Logdatei</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Papp vum c:geo</string>
-    <string name="about_contributors_recent">Rezent Mataarbechter</string>
     <string name="about_contributors_specialthanks">Ee grousse Merci un</string>
     <string name="about_contributors_other">Aner Mataarbechter</string>
     <string name="about_components">Komponenten</string>
@@ -513,7 +507,7 @@
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
-    <string name="waypoint_distance">Distanz</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -594,7 +588,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
