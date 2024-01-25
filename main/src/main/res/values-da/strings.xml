@@ -121,10 +121,8 @@
     <string name="log_tb_archived">Arkiveret</string>
     <string name="log_save">Gem offline</string>
     <string name="log_saving">Sender logbesked…</string>
-    <string name="log_saving_and_uploading">Sender logs og billeder…</string>
     <string name="log_posting_log">Sender logbesked…</string>
     <string name="log_posting_vote">Sender din stemme på cachen…</string>
-    <string name="log_posting_image">Sender billeder…</string>
     <string name="log_posting_generic_trackable">Sender %1$s %2$d/%3$d</string>
     <string name="log_clear">Fjern</string>
     <string name="log_post_not_possible">Download af data er i gang…\nPrøv venligst igen om et øjeblik eller kontrollér din Internetforbindelse.</string>
@@ -230,8 +228,6 @@
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo ved ikke hvilken cache, du ønsker at tilføje et rutepunkt til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
-    <string name="err_point_bear_and_dist_title">Brug for hjælp?</string>
-    <string name="err_point_bear_and_dist">Udfyld både pejling og afstand. Pejlingen er en kompasvinkel mellem 0 og 360 grader i forhold til nord. Afstanden kræver ikke enheder.</string>
     <string name="err_log_load_data">c: geo kan ikke indlæse de data, der kræves for at logge besøget.</string>
     <string name="err_log_post_missing_tracking_code">Trackingkoden mangler.</string>
     <string name="err_log_post_missing_coordinates">Koordinaterne mangler.</string>
@@ -241,7 +237,6 @@
     <string name="err_logimage_post_failed">Dit logbillede blev muligvis ikke uploadet korrekt. Kontrollér billedet på geocachens hjemmeside.</string>
     <string name="err_parse_lat">c:geo kan ikke fortolke den indtastede breddegrad.</string>
     <string name="err_parse_lon">c:geo kan ikke fortolke den indtastede længdegrad.</string>
-    <string name="err_parse_dist">c:geo kan ikke forstå den indtastede afstand.</string>
     <string name="err_parse_lat_lon">c:geo kan ikke fortolke breddegrad eller længdegrad.</string>
     <string name="err_rendertheme_file_unreadable">Det valgte korttema kunne ikke indlæses. Vender tilbage til det indbyggede.</string>
     <string name="err_rendertheme_invalid">Det valgte korttema er ikke gyldigt for denne version af Mapsforge. Vender tilbage til det indbyggede.</string>
@@ -533,7 +528,6 @@
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
-    <string name="about_contributors_recent">Seneste bidragsydere</string>
     <string name="about_contributors_specialthanks">Særlig tak til</string>
     <string name="about_contributors_specialthanksdetails">· alle vores oversættere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n· alle fejlfindere\n· og alle andre bidragsydere.\n</string>
     <string name="about_contributors_other">Andre bidragsydere</string>
@@ -876,7 +870,6 @@
     <string name="cache_delete_userdefined_waypoints_note">Bemærk: Du har aktiveret \"waypoints fra note\". Hvis du har koordinater i din personlige note som c:geo kan genkende, vil waypoints automatisk blive genskabt for dem. Du kan deaktivere dette i dialogen til redigering af personlige noter.</string>
     <string name="cache_delete_userdefined_waypoints_success">Brugerdefinerede waypoints er slettet</string>
     <string name="cache_offline_store">Gem</string>
-    <string name="cache_offline_stored">Gemt i telefon</string>
     <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
     <string name="cache_offline_time_mins_few">få minutter siden</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1037,8 +1030,6 @@
     <string name="internal_goto_targets_title">\'Gå til\' mål</string>
     <string name="internal_goto_targets_description">Denne cache gemmer dine seneste \"Gå til\" mål. Den oprettes automatisk, når du har brugt funktionen \"Gå til\" i hovedmenuen. Den indtastede position vil blive gemt i rutepunkter for denne cache. Hvis du ikke længere har brug for disse positioner, kan du sikkert slette denne cache eller nogen af dens rutepunkter. Du kan også flytte cachen til enhver anden liste efter eget valg.</string>
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
-    <string name="onetime_info_longtap_disabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået fra.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
-    <string name="onetime_info_longtap_enabled">Hvis du trykker og holder på kortet kan du oprette dine egne ruter og caches/waypoints.\n\nTryk-og-hold er slået til.\n\nDu kan ændre dette i Indstillinger → Kort → Kortbetjening</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
     <!-- coordinate calculator hints -->
@@ -1076,8 +1067,6 @@
     <string name="waypoint_cache_coordinates">Cacheposition</string>
     <string name="waypoint_custom">Tilpasset</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
-    <string name="waypoint_bearing">Kompasretning</string>
-    <string name="waypoint_distance">Afstand</string>
     <string name="waypoint_name">Navn</string>
     <string name="waypoint_edit">Rediger</string>
     <string name="waypoint_copy_coordinates">Kopiér koordinater</string>
@@ -1111,6 +1100,7 @@
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -1199,7 +1189,6 @@
     <string name="user_menu_open_browser">Åbn profil i browser</string>
     <string name="user_menu_send_message">Send besked</string>
     <string name="user_menu_send_email">Send email</string>
-    <string name="user_menu_open_contact">Åbn kontaktdetaljer</string>
     <string name="user_unknown">Ukendt brugerkonto</string>
     <!-- navigation -->
     <string name="navigation">Navigation</string>
@@ -1221,8 +1210,6 @@
     <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
     <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
     <string name="helper_sendtocgeo_title">Send2c:geo</string>
-    <string name="helper_contacts_title">c:geo kontakt-plugin</string>
-    <string name="helper_contacts_description">Giver dig mulighed for at åbne kontaktside (fra dine kontakter) direkte fra en logbesked, så du let kan kontakte dine venner.</string>
     <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
     <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
     <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
@@ -1518,7 +1505,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Din enhed bruger en version af c:geo, som er ældre end et år. Tekniske ændringer på benyttede tjenester kan bevirke at nogle funktioner ikke længere fungerer. Læs venligst vores OSS om hvordan du opgraderer.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompas</string>
-    <string name="tts_toggle">Skift tekst-til-tale-tilstand</string>
     <string name="tts_started">Tale startet</string>
     <string name="tts_stopped">Tale stoppet</string>
     <string name="err_tts_lang_not_supported">Det aktuelle sprog understøttes ikke af tekst-til-tale.</string>
@@ -1720,7 +1706,7 @@
     <string name="done">Færdig</string>
     <string name="finish">Afslut</string>
     <string name="cancel">Annullér</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
