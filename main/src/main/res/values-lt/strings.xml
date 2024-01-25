@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Archyvuotas</string>
     <string name="log_save">Išsaugoti neprisijungus</string>
     <string name="log_saving">Siunčiamas įrašas…</string>
-    <string name="log_saving_and_uploading">Skelbiamas įrašas ir įkeliami vaizdai…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
-    <string name="log_posting_image">Skelbiami vaizdai…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
     <string name="log_templates">Surasta: įrašo šablonas…</string>
@@ -239,8 +237,6 @@
     <string name="err_tb_find_that">c:geo neranda šito keliauninko.</string>
     <string name="err_waypoint_cache_unknown">c:geo nežino, kokiai slėptuvei norite pridėti kelio tašką.</string>
     <string name="err_waypoint_add_failed">c:geo nepavyko pridėti kelio taško.</string>
-    <string name="err_point_bear_and_dist_title">Reikalinga pagalba?</string>
-    <string name="err_point_bear_and_dist">Užpildykite azimutą ir atstumą. Azimutas tai nuo 0 iki 360 laipsnių kampas nuo šiaurės. Atstumas nereikalauja matavimo vienetų.</string>
     <string name="err_log_load_data">c:geo negali įkelti duomenų reikalingų apsilankymui įrašyti.</string>
     <string name="err_log_post_missing_tracking_code">Trūksta sekimo kodo.</string>
     <string name="err_log_post_missing_coordinates">Trūksta koordinačių.</string>
@@ -250,7 +246,6 @@
     <string name="err_logimage_post_failed">Atrodo, kad jūsų įraše vaizdas nebuvo įkeltas. Prašome patikrinti jį slėptuvės svetainėje.</string>
     <string name="err_parse_lat">c:geo nesupranta įvestos platumos.</string>
     <string name="err_parse_lon">c:geo nesupranta įvestos ilgumos.</string>
-    <string name="err_parse_dist">c:geo negali apdoroti atstumo.</string>
     <string name="err_parse_lat_lon">c:geo negali išanalizuoti platumos arba ilgumos.</string>
     <string name="err_rendertheme_file_unreadable">Neįmanoma įkelti pasirinktos žemėlapio temos. Atkuriama į numatytąją temą.</string>
     <string name="err_rendertheme_invalid">Pasirinkta žemėlapio tema netinka šiai mapsforge versijai. Atkuriama į numatytąją temą.</string>
@@ -632,7 +627,6 @@
     <string name="about_system_write_logcat_error">Klaida rašant į žurnalą</string>
     <string name="about_nutshellmanual">Internetinė instrukcija</string>
     <string name="about_contributors_carnerodetails">c:geo tėvas</string>
-    <string name="about_contributors_recent">Paskutiniai pagalbininkai</string>
     <string name="about_contributors_specialthanks">Ypatingas ačiū</string>
     <string name="about_contributors_specialthanksdetails">- visiems mūsų vertimo pagalbininkams [Crowdin.net](https://crowdin.net/project/cgeo)!\n- visiems pranešusiems apie problemas\n- ir visiems kitiems rėmėjams.\n</string>
     <string name="about_contributors_other">Kiti pagalbininkai</string>
@@ -1047,10 +1041,7 @@
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
-    <string name="category_unifiedMap">Vieningas žemėlapis</string>
-    <string name="experimental">(eksperimentinis)</string>
     <string name="init_title_useUnifiedMap">Naudokite vieningą žemėlapį</string>
-    <string name="init_summary_useUnifiedMap">Naudokite naują vieningą žemėlapį, o ne įtaisytuosius Google Map / Mapsforge (OSM) žemėlapius (eksperimentiniai / toli gražu nebaigti / tik bandymams)</string>
     <string name="localstorage_migrate_title">Vietinių failų perkėlimas</string>
     <string name="localstorage_migrate_status_major">Versija %1$d</string>
     <!-- proximity notification -->
@@ -1194,7 +1185,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Pašalinti visus sugeneruotus kelio taškus iš šios slėptuvės?\n\nKelio taškai bus nedelsiant ištrinti, anuliuoti negalima.</string>
     <string name="cache_delete_generated_waypoints_success">Sugeneruoti kelio taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
-    <string name="cache_offline_stored">Išsaugota įrenginyje</string>
     <string name="cache_offline_not_ready">Nepasiekiama neprisijungus</string>
     <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1429,8 +1419,6 @@
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
     <string name="init_ActionbarAutohide">Slėpti įrankių juostą bakstelėjus</string>
     <string name="init_summary_ActionbarAutohide">Bakstelėkite laisvą vietą žemėlapyje norėdami slėpti/rodyti įrankių juostą</string>
-    <string name="onetime_info_longtap_disabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu išjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
-    <string name="onetime_info_longtap_enabled">Ilgai palietus žemėlapį galite sukurti atskirus maršrutus ir vartotojo nustatytas slėptuves / kelio taškus.\n\nIlgas žemėlapio palietimas šiuo metu įjungtas.\n\nTai galite pakeisti skiltyje Nustatymai → Žemėlapis → Žemėlapio elgsena</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
@@ -1473,8 +1461,6 @@
     <string name="waypoint_custom">Savas</string>
     <string name="waypoint_my_coordinates">Mano koordinates</string>
     <string name="waypoint_my_coordinates_accuracy">Mano koordinates (±%s)</string>
-    <string name="waypoint_bearing">Azimutas °</string>
-    <string name="waypoint_distance">Atstumas</string>
     <string name="waypoint_name">Pavadinimas</string>
     <string name="waypoint_edit">Redaguoti</string>
     <string name="waypoint_copy_coordinates">Kopijuoti koordinates</string>
@@ -1509,6 +1495,7 @@
     <string name="waypoint_coordinate_formats_plain">Paprastas</string>
     <string name="from_clipboard">Iš iškarpinės</string>
     <string name="copy_to_clipboard">Kopijuoti į iškarpinę</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
@@ -1711,7 +1698,6 @@
     <string name="user_menu_open_browser">Atidaryti profilį naršyklėje</string>
     <string name="user_menu_send_message">Siųsti žinutę</string>
     <string name="user_menu_send_email">Siųsti el. laišką</string>
-    <string name="user_menu_open_contact">Atidaryti kontakto kortelę</string>
     <string name="user_unknown">Nežinomas vartotojas</string>
     <!-- navigation -->
     <string name="navigation">Navigacija</string>
@@ -1737,8 +1723,6 @@
     <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
     <string name="helper_calendar_pastevent_question">Renginio data yra praeityje. Vis tiek pridėti?</string>
     <string name="helper_sendtocgeo_title">Siųsti į c:geo</string>
-    <string name="helper_contacts_title">c:geo kontaktai (įskiepis)</string>
-    <string name="helper_contacts_description">Leidžia tiesiai iš įrašo atidaryti kontakto kortelę (iš jūsų adresų knygos), kad galėtumėte susisiekti su draugais paprašyti pagalbos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
     <string name="helper_locus_description">Lauko navigacijos programėlė jūsų telefonui ar planšetiniam kompiuteriui. Peržiūrėkite topo žemėlapius neprisijungę, stebėkite maršrutą, ieškokite geoslėptuves, naudokite balso vadovą ir dar daugiau.</string>
     <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
@@ -2062,7 +2046,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Naudojate c:geo versiją, kuri atrodo senesnė nei vieneri metai. Kai kurios funkcijos gali nebeveikti dėl svetainės ar kitų techninių pakeitimų. Perskaitykite mūsų DUK apie tai, kaip atnaujinti.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Kalbantis kompasas</string>
-    <string name="tts_toggle">Įjungti kalbėjimą</string>
     <string name="tts_started">Pradėtas kalbėjimas</string>
     <string name="tts_stopped">Sustabdytas kalbėjimas</string>
     <string name="tts_running">Kalbėjimo tarnyba veikia…</string>
@@ -2259,12 +2242,9 @@
     <string name="routes_tracks_dialog_title">Maršrutų / pėdsakų parinktys</string>
     <string name="routes_tracks_menu">Maršrutai / Pėdsakai</string>
     <string name="routes_tracks_color">Pasirinkite spalvą</string>
-    <string name="center_on_route_track">Centruoti maršrutą/pedsaką</string>
     <string name="unload_route_track">Iškelti maršrutą/pėdsaką</string>
     <string name="route">Maršrutas</string>
     <string name="track">Pėdsakas</string>
-    <string name="make_visible">padaryti matomą</string>
-    <string name="hide">slėpti</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2430,7 +2410,7 @@
     <string name="redo">Grąžinti</string>
     <string name="ok" tools:ignore="ButtonCase">Gerai</string>
     <string name="optimize">Optimizuoti</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Plotai</string>
     <string name="rtl_fell_meadow">kirtimas / pieva</string>
