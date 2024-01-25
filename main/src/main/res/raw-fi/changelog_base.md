@@ -1,31 +1,27 @@
 ### Kartta
-- Mapsforge ja VTM libs päivitetty versioon v0.20
-- Updated Google Maps renderer
-- New: Show cache type icon as marker if custom cache icon has been set (emoji) or big icons are enabled
-- New: Show custom cache icon as marker for related waypoints
-- New: Allow scaling of cache/waypoint icons (see Settings => Appearance)
-- New: Linear labs use numbers as waypoint markers
-- New: Waypoints of a cache show cache type icon as marker
-- New: Show elevation info for current position on map (see Settings => Map Content & Behavior)
-- New: User-defined routing profiles (internal routing only)
-- Fix: Proximity notification title too long, actual notification gets cut off on small screens
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- New: Highlight existing downloads in download manager
+- New: Show cache's found state on waypoint icons
+- New: Long-tap option to connect a cache with its waypoints by lines
+- Change: Show cache/waypoint details in a non-blocking way
+- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
+- Fix: Hylly theme download error 404
 
 ### Kätkön tiedot
-- Uusi: Muokkaa lokikuvan kuvatekstin oletusarvoa
-- Uusi: Varmista kuvan pienin koko näytölle
-- Muutos: Omien lokikuvien muokkausvalinnat on uudelleen suunniteltu
-- New: Bettercacher integration
-- New: Sync visited state on synchronizing waypoints to personal note
-- New: Retrieve found date for Opencaching-based caches
-- New: Append all waypoints to individual route
+- Change: Make "Toggle talking" an actual toggle
+- Change: Increased maximum log length for geocaching.com
+- Fix: Cannot upload longer personal notes on opencaching sites
+- New: Edit/delete own logs
+- New: Waypoint projection with variables
+- Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### Yleinen
-- Uusi: nostettu tavoite SDK 33:een
-- Muutos: Tietokannan käyttöoikeuden käsittely "tietokantaa ei saatavilla" kaatumisien välttämiseksi
-- Change: Only basic settings will be displayed per default. Go to Settings => Extended Settings to enable extended settings
-- New: Allow filtering in multi selection lists
-- New: Filter to include other named (stored) filters
-- Change: Removed AndroidBeam which is no longer supported by Android platform
-- Change: Configuration wizard: Integrated "restore" functionality in "configure services" screen and removed advanced configuration screen.
-- Fix: Hide outdated connection error message
-- Fix: Cannot create shortcuts for c:geo widgets on newer Android systems
+- New: Tapping on downloader notification opens "pending downloads" view
+- Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
+- New: Two column-layout for settings in landscape mode
+- Fix: Restore of backups without valid date/time info
+- New: Include active trackfiles in backup
+- New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
