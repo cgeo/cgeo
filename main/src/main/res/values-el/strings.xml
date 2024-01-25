@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Αρχειοθετημένο</string>
     <string name="log_save">Αποθήκευση εκτός σύνδεσης</string>
     <string name="log_saving">Αποστολή αρχείου καταγραφής…</string>
-    <string name="log_saving_and_uploading">Καταχώρηση αρχείου καταγραφής και μεταφόρτωση εικόνων…</string>
     <string name="log_posting_log">Αποστολή καταγραφής…</string>
     <string name="log_posting_vote">Δημοσίευση βαθμολογίας κρύπτης…</string>
-    <string name="log_posting_image">Μεταφόρτωση εικόνων…</string>
     <string name="log_posting_generic_trackable">Αποστολή %1$s %2$d/%3$d</string>
     <string name="log_clear">Kαθαρισμός</string>
     <string name="log_templates">Πρότυπο καταγραφής: Βρέθηκε…</string>
@@ -234,8 +232,6 @@
     <string name="err_tb_find_that">Το c:geo δεν μπορεί να βρει το συγκεκριμένο ανιχνεύσιμο.</string>
     <string name="err_waypoint_cache_unknown">Το c:geo δεν ξέρει για ποια κρύπτη θέλετε να προσθέσετε ένα σημείο αναφοράς.</string>
     <string name="err_waypoint_add_failed">Το c:geo απέτυχε να προσθέσει το σημείο αναφοράς.</string>
-    <string name="err_point_bear_and_dist_title">Χρειάζεστε κάποια βοήθεια;</string>
-    <string name="err_point_bear_and_dist">Συμπληρώστε και την κατεύθυνση και την απόσταση. Η κατεύθυνση είναι μια γωνία από 0 έως 360 μοίρες σε σχέση με το Βορρά. Η απόσταση δεν απαιτεί μονάδες.</string>
     <string name="err_log_load_data">Το c:geo δεν μπορεί να φορτώσει τα δεδομένα που απαιτούνται για να καταγράψετε την επίσκεψη.</string>
     <string name="err_log_post_missing_tracking_code">Λείπει ο κωδικός παρακολούθησης.</string>
     <string name="err_log_post_missing_coordinates">Λείπουν οι συντεταγμένες.</string>
@@ -245,7 +241,6 @@
     <string name="err_logimage_post_failed">Φαίνεται ότι δεν δημοσιεύτηκε η εικόνα καταγραφής. Παρακαλούμε ελέγξτε το στην ιστοσελίδα της κρύπτης.</string>
     <string name="err_parse_lat">Το c:geo δεν μπορεί να καταλάβει το γεωγραφικό πλάτος.</string>
     <string name="err_parse_lon">Το c:geo δεν μπορεί να καταλάβει το γεωγραφικό μήκος.</string>
-    <string name="err_parse_dist">Το c:geo δεν μπορεί να καταλάβει την απόσταση.</string>
     <string name="err_parse_lat_lon">Το c:geo  δεν μπορεί να καταλάβει το γεωγραφικό πλάτος ή μήκος.</string>
     <string name="err_rendertheme_file_unreadable">Δεν πραγματοποιήθηκε η φόρτωση του συγκεκριμένου θέματος. Γίνεται επαναφορά στο αρχικό.</string>
     <string name="err_rendertheme_invalid">Το επιλεγμένο θέμα δεν είναι συμβατό με αυτή την έκδοση mapsforge. Επιστροφή στο ενσωματωμένο θέμα.</string>
@@ -594,7 +589,6 @@
     <string name="about_system_write_logcat_error">Σφάλμα εγγραφής αρχείου</string>
     <string name="about_nutshellmanual">Online εγχειρίδιο χρήσης</string>
     <string name="about_contributors_carnerodetails">ως ο πατέρας του c:geo</string>
-    <string name="about_contributors_recent">Πρόσφατοι χρήστες που συνεισφέραν</string>
     <string name="about_contributors_specialthanks">Ένα μεγάλο ευχαριστώ σε</string>
     <string name="about_contributors_specialthanksdetails">- όλους τους συνεισφέροντες στην μετάφρασή μας στο [Crowdin.net](https://crowdin.net/project/cgeo)!\n- όλους τους δημιουργους θεμάτων\n- και όλους τους άλλους υποστηρικτές.\n</string>
     <string name="about_contributors_other">Άλλοι χρήστες που συνεισφέραν</string>
@@ -979,10 +973,7 @@
     <string name="init_map_other">Άλλο</string>
     <string name="init_map_osm_multithreaded">Πολλαπλά Νήματα (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Χρήση πολλαπλών νημάτων για την απόδοση χαρτών OpenStreetMap</string>
-    <string name="category_unifiedMap">Ενοποιημένος Χάρτης</string>
-    <string name="experimental">(Πειραματικό)</string>
     <string name="init_title_useUnifiedMap">Χρήση ενοποιημένου χάρτη</string>
-    <string name="init_summary_useUnifiedMap">Χρήση νέου ενοποιημένου χάρτη αντί για ενσωματωμένους χάρτες Google Map / Mapsforge (OSM) (πειραματικό / μακριά από το να είναι πλήρες / μόνο για δοκιμή)</string>
     <string name="localstorage_migrate_title">Μετανάστευση τοπικών αρχείων</string>
     <string name="localstorage_migrate_status_major">Έκδοση %1$d</string>
     <!-- proximity notification -->
@@ -1117,7 +1108,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_generated_waypoints_success">Τα δημιουργημένα σημεία διαγράφηκαν</string>
     <string name="cache_offline_store">Αποθήκευση</string>
-    <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
     <string name="cache_offline_time_mins_few">μερικά λεπτά πριν</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1331,8 +1321,6 @@
     <string name="internal_goto_targets_description">Αυτή η κρύπτη αποθηκεύει τα πρόσφατα σας \"Πήγαινε σε\" σημεία. Δημιουργείται αυτόματα μόλις χρησιμοποιήσετε την δυνατότητα \"Πήγαινε σε\" στο κύριο μενού. Οι συντεταγμένες που εισάγονται εδώ θα αποθηκευτούν στα waypoints της παρούσας κρύπτης. Εάν πλέον δςν χρειάζεστε αυτές τις συντεταγμένες, μπορείτε να διαγράψετε αυτή την κρύπτη ή οποιοδήποτε από τα waypoints της. Επίσης μπορείτε να μεταφέρετε αυτήν την κρύπτη σε οποιαδήποτε λίστα της επιλογής σας.</string>
     <string name="init_longtap_map">Πιέστε παρατεταμένα στον χάρτη</string>
     <string name="init_summary_longtap_map">Ενεργοποίηση παρατεταμένου πατήματος στο εικονίδιο του χάρτη (δημιουργία ανεξάρτητης διαδρομής) ή στην επιφάνεια του χάρτη (δημιουργία προσωπικής κρύπτης/σημείου)</string>
-    <string name="onetime_info_longtap_disabled">Με παρατεταμένο πάτημα στο χάρτη, μπορείτε να δημιουργήσετε μεμονωμένες διαδρομές και προσωρινά καθορισμένες διαδρομές από το χρήστη.\n\nΤο παρατεταμένο πάτημα στον χάρτη είναι προς το παρόν απενεργοποιημένο.\n\nΑυτό μπορεί να αλλάξει στις: Ρυθμίσεις - Χάρτης - συμπεριφορά Χάρτη</string>
-    <string name="onetime_info_longtap_enabled">Με παρατεταμένο πάτημα στο χάρτη, μπορείτε να δημιουργήσετε μεμονωμένες διαδρομές και προσωρινά καθορισμένες διαδρομές από το χρήστη.\n\nΤο παρατεταμένο πάτημα στον χάρτη είναι προς το παρόν απενεργοποιημένο.\n\nΑυτό μπορεί να αλλάξει στις: Ρυθμίσεις - Χάρτης - συμπεριφορά Χάρτη</string>
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
@@ -1373,8 +1361,6 @@
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
     <string name="waypoint_my_coordinates_accuracy">Οι συντεταγμένες μου (±%s)</string>
-    <string name="waypoint_bearing">Κατεύθυνση σε °</string>
-    <string name="waypoint_distance">Απόσταση</string>
     <string name="waypoint_name">Όνομα</string>
     <string name="waypoint_edit">Επεξεργασία</string>
     <string name="waypoint_copy_coordinates">Αντιγραφή συντεταγμένων</string>
@@ -1409,6 +1395,7 @@
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
@@ -1609,7 +1596,6 @@
     <string name="user_menu_open_browser">Άνοιγμα προφίλ σε πρόγραμμα περιήγησης</string>
     <string name="user_menu_send_message">Αποστολή μηνύματος</string>
     <string name="user_menu_send_email">Αποστολή email</string>
-    <string name="user_menu_open_contact">Άνοιγμα κάρτας επαφής</string>
     <string name="user_unknown">Άγνωστος χρήστης</string>
     <!-- navigation -->
     <string name="navigation">Πλοήγηση</string>
@@ -1635,8 +1621,6 @@
     <string name="helper_calendar_pastevent_title">Προηγούμενη εκδήλωση</string>
     <string name="helper_calendar_pastevent_question">Η ημερομηνία της εκδήλωσης έχει περάσει. Να προστεθεί ούτως ή άλλως;</string>
     <string name="helper_sendtocgeo_title">Αποστολή στο c:geo</string>
-    <string name="helper_contacts_title">Πρόσθετο επαφών στο c:geo</string>
-    <string name="helper_contacts_description">Σας επιτρέπει να ανοίξετε μια κάρτα επαφής (από το βιβλίο διευθύνσεών σας) απευθείας από μια καταχώρηση αρχείου καταγραφής, ώστε να μπορείτε να ζητήσετε βοήθεια από φίλους πιο εύκολα.</string>
     <string name="helper_sendtocgeo_description">Αποστολή σε c:geo είναι μια επέκταση του προγράμματος περιήγησης <strong>για τον υπολογιστή σας</strong>. Κατά την περιήγηση στο geocaching.com, μπορείτε να στείλετε κρύπτες στο smartphone σας άμεσα μέσα στο πρόγραμμα περιήγησης με το πάτημα ενός κουμπιού.</string>
     <string name="helper_locus_description">Εφαρμογή πλοήγησης σε εξωτερικούς χώρους για το τηλέφωνο ή το tablet σας. Δείτε τοπογραφικούς χάρτες χωρίς σύνδεση, ακολουθείστε τη διαδρομή σας, βρείτε κρύπτες, χρησιμοποιήστε φωνητικό οδηγό και κάνετε ακόμη περισσότερα.</string>
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>
@@ -1958,7 +1942,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Χρησιμοποιείτε μιά έκδοση του c:geo παλαιότερη. Κάποιες δυνατότητες μπορεί να μην είναι λειτουργικές λογω αλλαγών στο website ή τεχνικές αλλαγές. Παρακαλώ διαβάστε τις συχνές ερωταπαντήσεις (FAQ) για το πως θα κάνετε αναβάθμιση.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Ομιλούσα πυξίδα</string>
-    <string name="tts_toggle">Φωνητική καθοδήγηση</string>
     <string name="tts_started">Η ομιλία άρχισε</string>
     <string name="tts_stopped">Η ομιλία σταμάτησε</string>
     <string name="tts_running">Η υπηρεσία ομιλίας εκτελείται…</string>
@@ -2103,10 +2086,7 @@
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
-    <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
-    <string name="make_visible">Να γίνει ορατό</string>
-    <string name="hide">απόκρυψη</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
@@ -2261,7 +2241,7 @@
     <string name="back">Πίσω</string>
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Περιοχές</string>
     <string name="rtl_fell_meadow">Λιβάδι</string>
