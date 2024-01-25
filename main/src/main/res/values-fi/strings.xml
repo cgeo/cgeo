@@ -1530,7 +1530,6 @@
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Suunnassa</string>
     <!-- Variables -->
     <string name="variables_titletext">Käytä tätä sivua kirjataksesi alas arvot ja tehdäksesi tarvittavat laskelmat tälle kätkölle.</string>
     <string name="variables_scanlisting">Skannaa kuvaus</string>
