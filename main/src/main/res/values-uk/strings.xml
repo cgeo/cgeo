@@ -874,7 +874,6 @@
     <string name="from_clipboard">З буферу обміну</string>
     <string name="copy_to_clipboard">Скопіювати в буфер обміну</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">несучи в</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
