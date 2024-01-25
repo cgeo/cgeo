@@ -157,8 +157,6 @@
     <string name="err_tb_find_that">c: geo tidak dapat menemukan yang bisa dilacak.</string>
     <string name="err_waypoint_cache_unknown">c:geo tidak tahu ke cache mana titik arah ingin anda tambahkan.</string>
     <string name="err_waypoint_add_failed">c:geo gagal untuk menambahkan titik arah anda.</string>
-    <string name="err_point_bear_and_dist_title">Memerlukan pertolongan?</string>
-    <string name="err_point_bear_and_dist">Isi kedua bantalan dan jarak. Bearing adalah sudut 0 sampai 360 derajat relatif ke utara. Jarak tidak membutuhkan unit.</string>
     <string name="err_log_load_data">c: geo tidak bisa memuat data yang diperlukan untuk login.</string>
     <string name="err_log_post_missing_tracking_code">Kode pelacakan tidak ada.</string>
     <string name="err_log_post_missing_coordinates">Koordinat hilang.</string>
@@ -168,7 +166,6 @@
     <string name="err_logimage_post_failed">Tampaknya gambar log Anda tidak di unggah. Silakan cek di situs yang berasal dari cache.</string>
     <string name="err_parse_lat">c: geo tidak bisa mengurai garis lintang.</string>
     <string name="err_parse_lon">c: geo tidak bisa mengurai bujur.</string>
-    <string name="err_parse_dist">c: geo tidak bisa mengurai jarak.</string>
     <string name="err_parse_lat_lon">c: geo tidak bisa mengurai garis lintang atau bujur.</string>
     <string name="err_rendertheme_file_unreadable">Tidak dapat memuat tema yang dipilih. Pulihkan ke buil dari satu.</string>
     <string name="err_rendertheme_invalid">Tema yang dipilih tidak valid untuk versi memetakan peta. Pulihkan ini ke satu built-in.</string>
@@ -509,7 +506,6 @@
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline_refresh">Segarkan</string>
     <string name="cache_offline_store">Toko</string>
-    <string name="cache_offline_stored">Disimpan dalam perangkat</string>
     <string name="cache_offline_not_ready">Tidak tersedia secara offline</string>
     <string name="cache_offline_time_mins_few">beberapa menit yang lalu</string>
     <plurals name="cache_offline_about_time_mins">
@@ -649,8 +645,6 @@
     <string name="waypoint_cache_coordinates">Koordinat cache</string>
     <string name="waypoint_custom">Tampilan</string>
     <string name="waypoint_my_coordinates">Koordinat saya</string>
-    <string name="waypoint_bearing">Bearing dalam °</string>
-    <string name="waypoint_distance">Jarak</string>
     <string name="waypoint_name">Nama</string>
     <string name="waypoint_edit">Ubah</string>
     <string name="waypoint_copy_coordinates">Salin koordinat</string>
@@ -680,6 +674,7 @@
     <string name="waypoint_coordinate_formats_plain">Polos</string>
     <string name="from_clipboard">Dari papan tulis kecil</string>
     <string name="copy_to_clipboard">Salin ke papan tulis kecil</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -746,7 +741,6 @@
     <string name="user_menu_view_hidden">Cache tersembunyi</string>
     <string name="user_menu_open_browser">Buka profil di browser</string>
     <string name="user_menu_send_message">Kirim pesan</string>
-    <string name="user_menu_open_contact">Kartu kontak yang terbuka</string>
     <string name="user_unknown">Pengguna tidak diketahui</string>
     <!-- navigation -->
     <string name="navigation">Navigasi</string>
@@ -763,8 +757,6 @@
     <string name="helper_calendar_pastevent_title">Peristiwa yang lalu</string>
     <string name="helper_calendar_pastevent_question">Tanggal acara adalah di masa lalu. Tambahkan saja?</string>
     <string name="helper_sendtocgeo_title">Kirim ke c:geo</string>
-    <string name="helper_contacts_title">c:geo kontak plugin</string>
-    <string name="helper_contacts_description">Memungkinkan Anda untuk membuka kartu kontak (dari buku alamat Anda) langsung dari entri log, sehingga Anda dapat dengan mudah meminta bantuan kepada teman.</string>
     <string name="helper_sendtocgeo_description">Kirim ke c:geo adalah ekstensi browser <strong>untuk PC Anda</strong>. Saat browsing geocaching.com, Anda bisa mengirim cache ke smartphone Anda dengan satu klik tombol langsung di dalam browser.</string>
     <string name="helper_locus_description">Aplikasi navigasi luar ruang untuk ponsel anda atau tablet. Lihat peta topo offline, melacak rute anda, geocaches, menggunakan panduan suara dan melakukan bahkan lebih.</string>
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
@@ -1112,7 +1104,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Batal</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
