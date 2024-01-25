@@ -145,10 +145,8 @@
     <string name="log_tb_archived">Archivé</string>
     <string name="log_save">Enregistrer hors-ligne</string>
     <string name="log_saving">Enregistrement en cours…</string>
-    <string name="log_saving_and_uploading">Envoi de la visite et des images…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
-    <string name="log_posting_image">Envoi des images…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
     <string name="log_templates">Trouvé : modèle de log…</string>
@@ -262,8 +260,6 @@
     <string name="err_tb_find_that">c:geo ne peut pas trouver cet objet voyageur.</string>
     <string name="err_waypoint_cache_unknown">c:geo ne sait pas à quelle cache vous souhaitez ajouter un point de passage.</string>
     <string name="err_waypoint_add_failed">c:geo n\'a pas réussi à ajouter votre point de passage.</string>
-    <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
-    <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
     <string name="err_log_load_data">c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
     <string name="err_log_post_missing_tracking_code">Le code de suivi est absent.</string>
     <string name="err_log_post_missing_coordinates">Les coordonnées sont absentes.</string>
@@ -274,7 +270,6 @@
     <string name="err_logimage_post_failed">Il semble que l\'envoi de l\'image ait échoué. Veuillez vérifier sur le site web d\'origine de la cache.</string>
     <string name="err_parse_lat">c:geo n\'arrive pas à lire la latitude.</string>
     <string name="err_parse_lon">c:geo n\'arrive pas à lire la longitude.</string>
-    <string name="err_parse_dist">c:geo n\'arrive pas à lire la distance.</string>
     <string name="err_parse_lat_lon">c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
     <string name="err_rendertheme_file_unreadable">Impossible de charger le thème de rendu sélectionné. Retour au thème intégré.</string>
     <string name="err_rendertheme_invalid">Le thème de rendu sélectionné n\'est pas valide pour cette version de mapsforge. Retour au thème intégré.</string>
@@ -690,7 +685,6 @@
     <string name="about_changelog_full">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
-    <string name="about_contributors_recent">Contributeurs récents</string>
     <string name="about_contributors_specialthanks">Remerciements spéciaux à</string>
     <string name="about_contributors_specialthanksdetails">- les traducteurs sur [Crowdin.net](https://crowdin.net/project/cgeo) !\n- les personnes ayant signalé des anomalies ou des améliorations\n- et tous les autres contributeurs.\n</string>
     <string name="about_contributors_other">Autres contributeurs</string>
@@ -1108,10 +1102,7 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
-    <string name="category_unifiedMap">Carte unifiée</string>
-    <string name="experimental">(expérimental)</string>
     <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
-    <string name="init_summary_useUnifiedMap">Utiliser la nouvelle carte unifiée plutôt que les cartes Google Map / Mapsforge (OSM) (carte expérimentale loin d\'être complète, à utiliser seulement pour test)</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1248,7 +1239,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Supprimer tous les points de passage générés pour cette cache ?\n\nCette action est définitive.</string>
     <string name="cache_delete_generated_waypoints_success">Les points de passage générés ont été supprimés</string>
     <string name="cache_offline_store">Enregistrer</string>
-    <string name="cache_offline_stored">Enregistrée</string>
     <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
     <string name="cache_offline_time_mins_few">il y a quelques minutes</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1485,8 +1475,6 @@
     <string name="init_summary_show_routing_menu">Un appui long sur une cache affiche un menu avec des options avancées pour ajouter/supprimer la cache vers/depuis une route. Si désactivé, la cache est juste ajouté/supprimé à/de la route.</string>
     <string name="init_ActionbarAutohide">Masquer la barre d\'outils par appui</string>
     <string name="init_summary_ActionbarAutohide">Appuyez sur un espace libre de la carte pour masquer / afficher la barre d\'outils</string>
-    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
-    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
@@ -1527,8 +1515,6 @@
     <string name="waypoint_custom">Personnalisé</string>
     <string name="waypoint_my_coordinates">Ma position</string>
     <string name="waypoint_my_coordinates_accuracy">Mes coordonnées (±%s)</string>
-    <string name="waypoint_bearing">Relèvement en °</string>
-    <string name="waypoint_distance">Distance</string>
     <string name="waypoint_name">Nom</string>
     <string name="waypoint_edit">Modifier</string>
     <string name="waypoint_copy_coordinates">Copier les coordonnées</string>
@@ -1563,6 +1549,7 @@
     <string name="waypoint_coordinate_formats_plain">Texte</string>
     <string name="from_clipboard">Depuis le presse-papiers</string>
     <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_scanlisting">Scanner la liste</string>
@@ -1766,7 +1753,6 @@
     <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
     <string name="user_menu_send_message">Envoyer un message</string>
     <string name="user_menu_send_email">Envoyer un courriel</string>
-    <string name="user_menu_open_contact">Ouvrir la fiche du contact</string>
     <string name="user_unknown">Utilisateur inconnu</string>
     <!-- navigation -->
     <string name="navigation">Navigation</string>
@@ -1792,8 +1778,6 @@
     <string name="helper_calendar_pastevent_title">Événement passé</string>
     <string name="helper_calendar_pastevent_question">La date de l\'événement est dans le passé. Ajouter quand même ?</string>
     <string name="helper_sendtocgeo_title">Envoyer vers c:geo</string>
-    <string name="helper_contacts_title">c:geo contacts</string>
-    <string name="helper_contacts_description">Permet d\'ouvrir un contact (dans votre carnet d\'adresses) directement depuis le nom d\'un utilisateur dans une visite, de manière à pouvoir plus facilement appeler des amis à l\'aide.</string>
     <string name="helper_sendtocgeo_description">Envoyer à c:geo (<i>Send to c:geo</i>) est une extension pour le navigateur <strong>de votre ordinateur</strong>. Lorsque vous naviguez sur geocaching.com, vous pouvez envoyer des caches vers votre appareil Android équipé de c:geo en un simple clic sur un bouton apparaissant dans la page de description de la cache. Les caches ainsi envoyées seront téléchargées par c:geo puis disponibles localement comme si vous les aviez enregistrées directement dans c:geo.</string>
     <string name="helper_locus_description">Application pour la navigation en plein air pour téléphone ou tablette. Visualisez les cartes topo hors-ligne, enregistrez le chemin parcouru, cherchez les géocaches, utilisez le guidage vocal et plus encore.</string>
     <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
@@ -2115,7 +2099,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Vous utilisez une version de c:geo qui semble avoir plus d\'un an. Certaines fonctionnalités peuvent ne plus fonctionner en raison de modifications du site Web geocaching.com ou d\'autres modifications techniques. Veuillez lire notre FAQ pour savoir comment réaliser la mise à jour.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Boussole parlante</string>
-    <string name="tts_toggle">Basculer la synthèse vocale</string>
     <string name="tts_started">Boussole parlante démarrée</string>
     <string name="tts_stopped">Boussole parlante arrêtée</string>
     <string name="tts_running">Le service vocal écoute…</string>
@@ -2264,6 +2247,7 @@
     <string name="map_individual_route_cleared">Itinéraire individuel effacé</string>
     <string name="sorted_route_saved">Itinéraire individuel sauvegardé</string>
     <string name="load_individual_route_error">Erreur lors du chargement de l\'itinéraire individuel</string>
+    <string name="route_item_point">Point d\'itinéraire</string>
     <string name="route_item_not_yet_loaded">Élément de l\'itinéraire pas encore chargé</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Itinéraire chargé avec %d points de passage</item>
@@ -2291,12 +2275,9 @@
     <string name="routes_tracks_dialog_title">Options des itinéraires / traces</string>
     <string name="routes_tracks_menu">Itinéraires / Traces</string>
     <string name="routes_tracks_color">Sélectionner la couleur</string>
-    <string name="center_on_route_track">Centrer sur l\'itinéraire</string>
     <string name="unload_route_track">Décharger la trace</string>
     <string name="route">Itinéraire</string>
     <string name="track">Trace</string>
-    <string name="make_visible">afficher</string>
-    <string name="hide">masquer</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2463,7 +2444,7 @@
     <string name="redo">Recommencer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimiser</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>
