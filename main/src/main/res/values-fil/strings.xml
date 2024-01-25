@@ -679,7 +679,6 @@
     <string name="from_clipboard">Ang Mula sa clipboard</string>
     <string name="copy_to_clipboard">Ang Kopyahin sa clipboard</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Ang tindig sa °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
