@@ -1,31 +1,27 @@
 ### Mapa
-- Aktualizovány Mapsforge a knihovny VTM na v0.20
-- Aktualizovaný vykreslovač Google Maps
-- Novinka: Zobrazení ikony typu kešky jako značky, pokud byla nastavena vlastní ikona kešky (emoji) nebo jsou povoleny velké ikony
-- Novinka: Zobrazení vlastní ikony kešky jako značky pro související trasové body
-- Novinka: Povolení měřítka ikon kešek/trasových bodů (viz Nastavení => Vzhled)
-- Novinka: Lineární labky používají čísla jako značky trasových bodů
-- Novinka: Trasové body kešky zobrazují ikonu typu kešky jako značku
-- Novinka: Zobrazení informací o nadmořské výšce pro aktuální polohu na mapě (viz Nastavení => Obsah mapy & Chování)
-- Novinka: Uživatelem definované profily směrování (pouze interní směrování)
-- Oprava: Příliš dlouhý název oznámení o přiblížení, skutečné oznámení se na malých obrazovkách ořízne
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- Novinka: Zvýraznění stávajících stahování ve správci stahování
+- Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
+- Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
+- Změna: Zobrazení podrobností o kešce/trasovém bodu neblokujícím způsobem
+- Novinka: Volitelně uchovávat dočasné OAM soubory (stahování map, užitečné při použití souborů POI s jinými aplikacemi)
+- Fix: Hylly theme download error 404
 
 ### Detaily kešky
-- Novinka: Úprava výchozí hodnoty pro předponu názvu obrázku
-- Novinka: Zajištění minimální velikosti obrázku pro zobrazení
-- Změna: Přepracované možnosti úprav vlastních obrázků do logu
-- Novinka: Integrace Bettercacher
-- Novinka: Synchronizace navštíveného stavu při synchronizaci trasových bodů s osobní poznámkou
-- Novinka: Získání data nálezu pro kešky založené na službě Opencaching
-- Novinka: Přidání všech trasových bodů k jednotlivým trasám
+- Změna: Z "Přepnout mluvení" byl vytvořen skutečný přepínač
+- Změna: Zvýšení maximální délky logu pro geocaching.com
+- Oprava: Nelze nahrát delší osobní poznámky na stránkách opencaching
+- Novinka: Upravit/smazat vlastní logy
+- New: Waypoint projection with variables
+- Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### Obecné
-- Novinka: Zvýšeno cílové SDK na 33
-- Změna: Zpracování přístupu k databázi, aby se zabránilo pádům "databáze není k dispozici"
-- Změna: Ve výchozím nastavení se zobrazí pouze základní nastavení. Přejděte do Nastavení => Rozšířená nastavení a povolte rozšířené nastavení
-- Nové: Umožněno filtrování v seznamech s vícenásobným výběrem
-- Novinka: Filtr pro zahrnutí ostatních pojmenovaných (uložených) filtrů
-- Změna: Odstraněn AndroidBeam, který již není podporován platformou Android
-- Změna: Průvodce konfigurací: Integrována funkce "obnovení" na obrazovce "konfigurace služeb" a odstraněna obrazovka pokročilé konfigurace.
-- Oprava: Skryta chybová zprává o zastaralém připojení
-- Oprava: Na novějších systémech Android nelze vytvořit zástupce pro widgety c:geo
+- Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
+- Změna: Použití tapety jako pozadí již nevyžaduje oprávnění READ_EXTERNAL_STORAGE
+- Novinka: Rozložení dvou sloupců pro nastavení v režimu na šířku
+- Oprava: Obnovení záloh bez platné informace o datu/času
+- New: Include active trackfiles in backup
+- New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
