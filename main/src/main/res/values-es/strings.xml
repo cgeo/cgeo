@@ -1316,7 +1316,6 @@
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Orientación en º</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilice esta página para anotar valores y hacer cálculos necesarios para este caché.</string>
     <string name="variables_scanlisting">Escanear listado</string>
