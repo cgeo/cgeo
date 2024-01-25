@@ -1,31 +1,27 @@
 ### Karte
-- Mapsforge und VTM-Bibliotheken auf v0.20 aktualisiert
-- Google Maps Bibliothek aktualisiert
-- Neu: Symbol für Cachetyp als Marker anzeigen, wenn benutzerdefiniertes Cache-Symbol gesetzt wurde (Emoji) oder große Symbole aktiviert sind
-- Neu: Benutzerdefiniertes Cache-Symbol als Marker für zugehörige Wegpunkte anzeigen
-- Neu: Skalierung von Cache/Wegpunkt-Symbolen (siehe Einstellungen => Erscheinungsbild)
-- Neu: Lineare Lab Adventures verwenden Zahlen als Wegpunkt-Marker
-- Neu: Wegpunkte eines Caches zeigen Cache-Typ als Marker
-- Neu: Höhe für aktuelle Position auf der Karte anzeigen (siehe Einstellungen => Karteninhalt & Verhalten)
-- Neu: Benutzerdefinierte Routingprofile (nur internes Routing)
-- Korrektur: Titel der Näherungsbenachrichtigung ist zu lang, die tatsächliche Benachrichtigung wird auf kleinen Bildschirmen abgeschnitten
+- Neu: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (Beta), siehe Einstellungen => Kartenquellen => Vereinheitlichte Karte
+- Neu: Hervorhebung vorhandener Downloads im Download-Manager
+- Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
+- Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
+- Änderung: Cache/Wegpunkt-Details auf nicht-blockierende Weise anzeigen
+- Neu: Optional temporäre OAM-Dateien behalten (Kartendownloader, nützlich bei der Verwendung von POI-Dateien mit anderen Apps)
+- Korrektur: Hylly Kartendesign Download-Fehler 404
 
 ### Cache-Details
-- Neu: Standardpräfix für die Beschriftung des Logbildes ändern
-- Neu: Mindestgröße für Bilder in Cachelistings
-- Änderung: Neues Design der Bearbeitungsoptionen für eigene Logbilder
-- Neu: Bettercacher Integration
-- Neu: Synchronisiere "besucht"-Status beim Synchronisieren von Wegpunkten mit persönlicher Notiz
-- Neu: Funddatum für Opencaching-basierte Caches anzeigen
-- Neu: Alle Wegpunkte an individuelle Route anhängen
+- Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
+- Änderung: Erhöhung der maximalen Loglänge für geocaching.com
+- Korrektur: Kann keine längeren persönlichen Notizen auf Opencaching-Seiten hochladen
+- Neu: Bearbeiten/Löschen von eigenen Logs
+- Neu: Wegpunkt-Projektion mit Variablen
+- Änderung: Bildauswahl auf jpg, png und gif beschränken
+- Neu: Neue Formel CHARS zum Auswählen mehrerer Zeichen
 
 ### Allgemein
-- Neu: targetSDK auf 33 erhöht
-- Änderung: Art des Datenbankzugriffs optimiert, um Abstürze zu vermeiden, wenn die Datenbank nicht verfügbar ist
-- Änderung: Standardmäßig werden nur noch Basiseinstellungen gezeigt. Über Einstellungen => Erweiterte Einstellungen kannst du alle sichtbar machen
-- Neu: Filtern in Mehrfachauswahllisten
-- Neu: Filter zum Einbinden benannter (gespeicherter) Filter
-- Änderung: AndroidBeam-Unterstützung entfernt, da nicht mehr von der Android-Plattform unterstützt
-- Änderung: Konfigurationsassistent: "Wiederherstellung"-Funktionalität in Bildschirm "Dienste konfigurieren" integriert und erweiterten Konfigurationsbildschirm entfernt
-- Korrektur: Veraltete Verbindungsfehlermeldung ausblenden
-- Korrektur: Verknüpfungen für c:geo Widgets können auf neueren Android Systemen nicht erstellt werden
+- Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
+- Änderung: Verwendung des Hintergrundbildes benötigt nicht mehr die Berechtigung zum Lesen von Dateien
+- Neu: Zwei Spalten-Layout für Einstellungen im Querformat
+- Korrektur: Wiederherstellung von Backups ohne gültige Datum/Uhrzeit
+- Neu: Aktive Trackdateien in die Sicherung einbeziehen
+- Neu: Integrierte c:geo Kontakte-Funktionalität (externes Addon ist nicht mehr erforderlich)
+- Korrektur: Defaultwerte für Trackable Logs überarbeitet
+- Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
