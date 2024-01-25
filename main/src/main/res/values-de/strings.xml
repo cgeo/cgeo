@@ -146,10 +146,14 @@
     <string name="log_tb_archived">Archiviert</string>
     <string name="log_save">Offline speichern</string>
     <string name="log_saving">Log wird gesendet…</string>
-    <string name="log_saving_and_uploading">Sende Log und Bilder…</string>
     <string name="log_posting_log">Sende Log…</string>
+    <string name="log_posting_problemreport">Sende Problem-Log…</string>
+    <string name="log_posting_deletelog">Lösche Log…</string>
+    <string name="log_posting_image_create">Bild %1$s/%2$s: Sende Daten…</string>
+    <string name="log_posting_image_edit">Bild %1$s/%2$s: Ändere Daten…</string>
+    <string name="log_posting_image_delete">Lösche Bild %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Speichere neuen Log-Status…</string>
     <string name="log_posting_vote">Sende Cache-Bewertung…</string>
-    <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
     <string name="log_templates">Gefunden: Log-Vorlage…</string>
@@ -204,6 +208,7 @@
     <string name="log_image_info_scaled">skaliert</string>
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
+    <string name="log_delete_confirm">Möchten Sie das Log vom Typ \'%1$s\' des Autors \'%2$s\' mit dem Logdatum \'%3$s\' wirklich löschen?</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -264,8 +269,6 @@
     <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
     <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
     <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
-    <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
-    <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad relativ zum Norden. Die Entfernung benötigt keine Bezeichnung der Einheiten. </string>
     <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
     <string name="err_log_post_missing_tracking_code">Tracking-Code fehlt.</string>
     <string name="err_log_post_missing_coordinates">Koordinaten fehlen.</string>
@@ -276,7 +279,6 @@
     <string name="err_logimage_post_failed">Das Log-Bild wurde scheinbar nicht hochgeladen. Bitte auf der betreffenden Geocaching-Webseite prüfen.</string>
     <string name="err_parse_lat">c:geo konnte den Breitengrad nicht verarbeiten.</string>
     <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
-    <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
     <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
     <string name="err_rendertheme_file_unreadable">Konnte das gewählte Kartendesign nicht laden. Standarddesign wird verwendet.</string>
     <string name="err_rendertheme_invalid">Das gewählte Kartendesign ist nicht für diese Mapsforge-Version geeignet. Standarddesign wird verwendet.</string>
@@ -317,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
     <string name="confirm_discard_changes">Ungespeicherte Änderungen verwerfen?</string>
+    <string name="confirm_unsent_changes_title">Ungesendete Änderungen</string>
+    <string name="confirm_unsent_changes">Ungespeicherte Änderungen verwerfen?</string>
     <string name="confirm_discard_wp_changes">Wegpunktänderungen verwerfen?</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
@@ -412,6 +416,7 @@
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Speicherdatum</string>
     <string name="caches_sort_eventdate">Event-Datum</string>
+    <string name="caches_sort_lastfounddate">Letztes Funddatum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
     <string name="caches_select_next20">Nächste 20 Caches auswählen</string>
     <string name="caches_select_next100">Nächste 100 Caches auswählen</string>
@@ -693,7 +698,7 @@
     <string name="about_changelog_full">Liste aller Änderungen</string>
     <string name="about_nutshellmanual">Onlinehandbuch</string>
     <string name="about_contributors_carnerodetails">als Vater von c:geo</string>
-    <string name="about_contributors_recent">Neueste Mitwirkende</string>
+    <string name="about_contributors_recent">Mitwirkende (letzte 12 Monate)</string>
     <string name="about_contributors_specialthanks">Besonderer Dank an</string>
     <string name="about_contributors_specialthanksdetails">- Alle Mitwirkenden an der Übersetzung auf [Crowdin.net](https://crowdin.net/project/cgeo)!\n- Alle Issue-Ersteller\n- und alle anderen Unterstützer.\n</string>
     <string name="about_contributors_other">Weitere Mitwirkende</string>
@@ -869,6 +874,8 @@
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
     <string name="init_zoomincludingwaypoints_description">Wenn eine Karte für einen einzelnen Cache geöffnet wird: Soll der Zoom so eingestellt werden, dass alle Wegpunkte dargestellt werden?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Besuchte Wegpunkte halbtransparent</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Kennzeichne besuchte Wegpunkte mit halbtransparenten Icons</string>
     <string name="init_brouterThreshold">Routenberechnung</string>
     <string name="init_brouterThreshold_description">Maximale Distanz, bis zu welcher eine Route berechnet wird.</string>
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
@@ -891,6 +898,8 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Zeige eine Markierung für die Schwierigkeitswertung (links) und die Geländewertung (rechts) von Caches in der oberen rechten Ecke (\"Gespeichert\"-Markierung wird in die Mitte verschoben).</string>
     <string name="init_showElevation">Höhe anzeigen</string>
     <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
+    <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
+    <string name="menu_elevation_info">Höhe (Karte): %s</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
@@ -991,6 +1000,7 @@
     <string name="init_backup_unavailable">nicht vorhanden</string>
     <string name="init_backup_last_no">Keine Sicherungsdatei gefunden.</string>
     <string name="init_restore_version_error">Unerwartetes Format - Datenbank kann nicht wiederhergestellt werden:\n\nErwartete Version: %1$d,\nSicherung hat Version %2$d</string>
+    <string name="backup_tracks_error">Fehler beim Erstellen der Sicherung von Tracks.</string>
     <string name="settings_title_backup">Sichern / Wiederherstellen</string>
     <string name="settings_summary_backup">Sichern und Wiederherstellen von Cache-/Wegpunkt-Daten und Einstellungen.</string>
     <string name="init_backup_settings_logins">Zugangsdaten sichern</string>
@@ -1102,6 +1112,9 @@
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
+    <string name="init_reset_otm">Einmalige Nachrichten zurücksetzen</string>
+    <string name="init_reset_otm_confirm">Möchtest du alle einmaligen Nachrichten zurücksetzen?</string>
+    <string name="init_reset_otm_done">Einmalige Nachrichten wurden zurückgesetzt</string>
     <string name="init_please_wait">Bitte warten…</string>
     <string name="settings_open_website">Webseite öffnen</string>
     <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
@@ -1129,10 +1142,9 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
-    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
-    <string name="experimental">(experimentell)</string>
+    <string name="category_unifiedMap">Vereinheitlichte Karte (Beta)</string>
     <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
-    <string name="init_summary_useUnifiedMap">Verwende die neue einheitliche Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten (experimentell / bei weitem nicht komplett / nur zum Testen)</string>
+    <string name="init_summary_useUnifiedMap">Verwende die neue Vereinheitlichte Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1272,7 +1284,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Alle generierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, keine Wiederherstellung möglich.</string>
     <string name="cache_delete_generated_waypoints_success">Generierte Wegpunkte gelöscht</string>
     <string name="cache_offline_store">Speichern</string>
-    <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
+    <string name="cache_offline_stored_ago">Gespeichert %s</string>
     <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
     <string name="cache_offline_time_mins_few">vor ein paar Minuten</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1363,6 +1375,8 @@
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
     <string name="cache_dialog_refresh_title">Aktualisieren</string>
     <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
+    <string name="cache_menu_speechDeactivate">Beende Sprachausgabe</string>
+    <string name="cache_menu_speechActivate">Starte Sprachausgabe</string>
     <string name="cache_menu_navigate">Navigieren</string>
     <string name="cache_menu_target">Als Ziel festlegen</string>
     <string name="cache_menu_navigation_drive">Navigation (Fahren)</string>
@@ -1412,6 +1426,8 @@
     <string name="cache_menu_log_in_browser">Im Browser loggen</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
+    <string name="cache_log_menu_edit">Log bearbeiten</string>
+    <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
@@ -1437,6 +1453,7 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
@@ -1496,6 +1513,9 @@
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
     <string name="context_map_show_coords">Koordinaten anzeigen</string>
+    <string name="context_map_star_show">Linien zu Wegpunkten anzeigen</string>
+    <string name="context_map_star_hide">Linien zu Wegpunkten verbergen</string>
+    <string name="edit">Bearbeiten</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
@@ -1510,8 +1530,6 @@
     <string name="init_summary_show_routing_menu">Langes Tippen auf einen Cache zeigt ein Menü mit erweiterten Optionen, um den Cache zu einer Route hinzuzufügen/von ihr zu entfernen. Wenn deaktiviert, wird der Cache direkt zur Route hinzugefügt/von ihr entfernt.</string>
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
-    <string name="onetime_info_longtap_disabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches /Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit deaktiviert\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
-    <string name="onetime_info_longtap_enabled">Durch langes Tippen auf die Karte kannst Du individuelle Routen und benutzerdefinierte Caches / Wegpunkte anlegen.\n\nLanges Tippen auf die Karte ist derzeit aktiviert.\n\nDu kannst die Einstellung unter Einstellungen → Karte → Kartenverhalten ändern</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
@@ -1544,6 +1562,7 @@
     <string name="web_downloaded">Heruntergeladen</string>
     <!-- popup -->
     <string name="popup_more">Mehr Details</string>
+    <string name="map_fragment_swipe_hint_text">Zum Öffnen der Detailansicht wischen</string>
     <!-- waypoint -->
     <string name="waypoint">Wegpunkt</string>
     <string name="waypoint_coordinates">Koordinaten</string>
@@ -1552,8 +1571,6 @@
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_my_coordinates_accuracy">Meine Koordinaten (±%s)</string>
-    <string name="waypoint_bearing">Richtung in °</string>
-    <string name="waypoint_distance">Entfernung</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Bearbeiten</string>
     <string name="waypoint_copy_coordinates">Kopiere Koordinaten</string>
@@ -1588,6 +1605,16 @@
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
+    <!-- Projection -->
+    <string name="projection_type_none">Keine Projektion</string>
+    <string name="projection_type_bearing">Peilung</string>
+    <string name="projection_type_bearing_info">Peilung mit %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Richtung in °</string>
+    <string name="projection_type_bearing_hint_distance">Entfernung</string>
+    <string name="projection_type_offset">Verschiebung</string>
+    <string name="projection_type_offset_info">Verschiebung Breite %1$s mm, Länge %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Breitengrad Verschiebung in Mikro-Minuten</string>
+    <string name="projection_type_offset_hint_longitude">Längengrad Verschiebung in Mikro-Minuten</string>
     <!-- Variables -->
     <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
     <string name="variables_scanlisting">Scanne Listing</string>
@@ -1818,8 +1845,6 @@
     <string name="helper_calendar_pastevent_title">Event in der Vergangenheit</string>
     <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title"> c:geo Kontakte-Plugin</string>
-    <string name="helper_contacts_description">Ermöglicht das direkte Öffnen von Kontakten (aus dem eigenen Adressbuch) von Logeinträgen aus, sodass man Freunde einfacher um Hilfe fragen kann.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
     <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
     <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
@@ -2141,7 +2166,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Deine Version von c:geo scheint älter als ein Jahr zu sein. Möglicherweise funktionieren aufgrund von Webseiten- oder anderen technischen Änderungen einige Dinge nicht mehr. Lies unsere FAQ zum Thema Upgrade.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Sprechender Kompass</string>
-    <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
     <string name="tts_started">Sprachausgabe gestartet</string>
     <string name="tts_stopped">Sprachausgabe gestoppt</string>
     <string name="tts_running">Sprachdienst läuft…</string>
@@ -2294,6 +2318,7 @@
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
     <string name="load_individual_route_error">Fehler beim Laden der individuellen Route</string>
+    <string name="route_item_point">Routenpunkt</string>
     <string name="route_item_not_yet_loaded">Element noch nicht geladen</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Route geladen mit %d Punkt</item>
@@ -2321,12 +2346,13 @@
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="routes_tracks_color">Farbe auswählen</string>
-    <string name="center_on_route_track">Auf Route/Track zentrieren</string>
+    <string name="routes_tracks_change_name">Namen ändern</string>
+    <string name="center">Zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
     <string name="make_visible">Sichtbar machen</string>
-    <string name="hide">verbergen</string>
+    <string name="hide">Ausblenden</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2338,6 +2364,8 @@
     <string name="switch_on">An</string>
     <string name="switch_manual">Manuell</string>
     <string name="switch_auto">Automatisch</string>
+    <string name="switch_auto_lowpower">Automatisch (Energiesparmodus)</string>
+    <string name="switch_auto_precise">Automatisch (präzise)</string>
     <string name="switch_default">(Standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
@@ -2385,6 +2413,8 @@
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
     <string name="downloadmap_filename">Lade %s</string>
+    <string name="downloadmap_keep_temporary_files">Temporäre Dateien aufbewahren</string>
+    <string name="downloadmap_keep_temporary_files_summary">Einige Downloadquellen unterstützen zusätzliche Dateien, die nicht von c:geo verwendet werden. Sollen diese zusätzlichen Dateien im Download-Ordner des Systems aufbewahrt werden statt sie zu löschen?</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
     <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>
@@ -2495,8 +2525,9 @@
     <string name="redo">Wiederholen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimieren</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Alle auswählen</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Alle auswählen</string>
+    <string name="multiselect_selectvisible">Sichtbare auswählen</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Gebiet</string>
     <string name="rtl_fell_meadow">Wiese</string>
