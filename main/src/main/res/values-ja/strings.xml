@@ -122,10 +122,8 @@
     <string name="log_tb_archived">アーカイブ済み</string>
     <string name="log_save">オフライン保存</string>
     <string name="log_saving">ログを投稿中…</string>
-    <string name="log_saving_and_uploading">ログの投稿と画像をアップロード中…</string>
     <string name="log_posting_log">ログを投稿中…</string>
     <string name="log_posting_vote">キャッシュの評価を投稿中…</string>
-    <string name="log_posting_image">画像を投稿中…</string>
     <string name="log_posting_generic_trackable">投稿中 %1$s %2$d/%3$d</string>
     <string name="log_clear">削除</string>
     <string name="log_post_not_possible">データをダウンロード中…\nしばらく待ってもう一度やり直すか、インターネット接続をご確認ください</string>
@@ -232,8 +230,6 @@
     <string name="err_tb_find_that">トラッカブルが見つかりません</string>
     <string name="err_waypoint_cache_unknown">ウェイポイントを追加するキャッシュが見つかりません</string>
     <string name="err_waypoint_add_failed">ウェイポイントを追加することができませんでした</string>
-    <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
-    <string name="err_point_bear_and_dist">方位と距離を入力してください。方位は北を基準として時計回りに0～360度で表します。距離の単位は付けないでください</string>
     <string name="err_log_load_data">ログを書くのに必要なデータを読み込むことができません</string>
     <string name="err_log_post_missing_tracking_code">トラッキング・コードがありません</string>
     <string name="err_log_post_missing_coordinates">座標がありません</string>
@@ -243,7 +239,6 @@
     <string name="err_logimage_post_failed">ログ画像をアップロードすることができなかったようです。キャッシュのWebサイトで確認してください</string>
     <string name="err_parse_lat">緯度の解析ができません</string>
     <string name="err_parse_lon">経度の解析ができません</string>
-    <string name="err_parse_dist">距離の解析ができません</string>
     <string name="err_parse_lat_lon">緯度または経度の解析ができません</string>
     <string name="err_rendertheme_file_unreadable">選択した地図テーマファイルを読み込めませんでした。組み込みのものに戻します</string>
     <string name="err_rendertheme_invalid">選択した地図テーマファイルはこのMapsforgeバージョンには対応していません。組み込みのものに戻します</string>
@@ -557,7 +552,6 @@
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
-    <string name="about_contributors_recent">最近の貢献者</string>
     <string name="about_contributors_specialthanks">スペシャルサンクス</string>
     <string name="about_contributors_specialthanksdetails">- [Crowdin.net](https://crowdin.net/project/cgeo)のすべての翻訳者!\n- 不具合や提案などのすべての報告者\n- その他すべてのサポーター\n</string>
     <string name="about_contributors_other">そのほかの貢献者</string>
@@ -1030,7 +1024,6 @@
     <string name="cache_delete_userdefined_waypoints_note">注意: 「ノートからウェイポイント抽出する」が有効化されています。パーソナルノートに(c:geoが認識できる)座標値が書いてある場合はウェイポイントが自動的に再作成されます。パーソナルノートのダイアログで抽出を無効化できます</string>
     <string name="cache_delete_userdefined_waypoints_success">ユーザー定義のウェイポイントを削除しました</string>
     <string name="cache_offline_store">保存</string>
-    <string name="cache_offline_stored">デバイスに保存済み</string>
     <string name="cache_offline_not_ready">オフライン用に保存されていません</string>
     <string name="cache_offline_time_mins_few">数分前</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1232,8 +1225,6 @@
     <string name="internal_goto_targets_description">このキャッシュには最近の「移動」の行先が保存されています。メインメニューの「移動」を使用すると自動的に作成されます。入力された座標はこのキャッシュのウェイポイントに保存されます。これらの座標が不要になったら、このキャッシュまたはそのウェイポイントを安全に削除できます。キャッシュをほかのリストに移動もできます</string>
     <string name="init_longtap_map">地図でのロングタップ</string>
     <string name="init_summary_longtap_map">ロングタップを有効化(地図のアイコン上: 個別ルート作成、アイコン以外: ユーザー定義のキャッシュ/ウェイポイントを作成)</string>
-    <string name="onetime_info_longtap_disabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は無効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で有効にできます</string>
-    <string name="onetime_info_longtap_enabled">地図でロングタップすると個別ルート作成やユーザー定義のキャッシュ/ウェイポイントを作成することができます\n\n現在、ロングタップ機能は有効にされています\n\n「設定」&gt;「地図」&gt;「地図の動作」で無効にできます</string>
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
@@ -1273,8 +1264,6 @@
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_my_coordinates_accuracy">現在地(±%s)</string>
-    <string name="waypoint_bearing">方位(度[°])</string>
-    <string name="waypoint_distance">距離</string>
     <string name="waypoint_name">ウェイポイント名</string>
     <string name="waypoint_edit">編集</string>
     <string name="waypoint_copy_coordinates">座標をコピー</string>
@@ -1309,6 +1298,7 @@
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
     <string name="variables_scanlisting">スキャン</string>
@@ -1490,7 +1480,6 @@
     <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
     <string name="user_menu_send_message">メッセージを送信</string>
     <string name="user_menu_send_email">メールを送る</string>
-    <string name="user_menu_open_contact">連絡先を開く</string>
     <string name="user_unknown">不明なユーザー</string>
     <!-- navigation -->
     <string name="navigation">ナビゲーション</string>
@@ -1515,8 +1504,6 @@
     <string name="helper_calendar_pastevent_title">過去のイベント</string>
     <string name="helper_calendar_pastevent_question">イベントの日付が過去です。それでも追加しますか?</string>
     <string name="helper_sendtocgeo_title">Send2cgeo</string>
-    <string name="helper_contacts_title">c:geo - 連絡先 アドオン</string>
-    <string name="helper_contacts_description">ログエントリから直接(連絡帳の)連絡先を開くことができるようになります。簡単に友達に助けを求めることができます</string>
     <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をAndroid端末に直接送ることができます</string>
     <string name="helper_locus_description">スマホやタブレット用のアウトドアナビゲーションアプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを探索、音声ガイドを使用、などが行えます</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>
@@ -1838,7 +1825,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="status_version_deprecated" tools:ignore="UnusedResources">1年以上前のc:geoのバージョンをご利用中です。 一部の機能はWebサイトやそのほかの技術的な変更により動作しない可能性があります。アップグレード方法に関するFAQをお読みください</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">コンパスで音声案内</string>
-    <string name="tts_toggle">音声案内の切替</string>
     <string name="tts_started">音声案内を開始しました</string>
     <string name="tts_stopped">音声案内を停止しました</string>
     <string name="tts_running">スピーチサービスを実行しています…</string>
@@ -1966,12 +1952,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
     <string name="routes_tracks_menu">ルート/トラック</string>
-    <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
     <string name="track">トラック</string>
-    <string name="make_visible">表示</string>
-    <string name="hide">非表示</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
@@ -2115,7 +2098,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="back">戻る</string>
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->
