@@ -874,7 +874,6 @@
     <string name="from_clipboard">A vágólapról</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Irány</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
