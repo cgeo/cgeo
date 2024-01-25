@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Arxivat</string>
     <string name="log_save">Guarda-ho  fora de línia</string>
     <string name="log_saving">S\'està enviant el registre…</string>
-    <string name="log_saving_and_uploading">Publicant registre i carregant la imatge…</string>
     <string name="log_posting_log">Publicant registre…</string>
     <string name="log_posting_vote">S’està publicant el vot…</string>
-    <string name="log_posting_image">Publicant imatges…</string>
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
     <string name="log_clear">Esborra</string>
     <string name="log_templates">Trobat: Plantilla de registre…</string>
@@ -265,8 +263,6 @@
     <string name="err_tb_find_that">El c:geo no pot trobar aquest traçable.</string>
     <string name="err_waypoint_cache_unknown">El c:geo no sap a quin catxé voleu afegir la fita.</string>
     <string name="err_waypoint_add_failed">El c:geo no ha pogut afegir la fita.</string>
-    <string name="err_point_bear_and_dist_title">Necessiteu ajuda?</string>
-    <string name="err_point_bear_and_dist">Ompliu el rumb i la distància. El rumb son angles del 0º al 360º respecte al Nord. La distància no necessita unitats.</string>
     <string name="err_log_load_data">El c:geo no pot carregar les dades necessàries per registrar la visita.</string>
     <string name="err_log_post_missing_tracking_code">Falta el codi traçable.</string>
     <string name="err_log_post_missing_coordinates">Falten les coordenades.</string>
@@ -277,7 +273,6 @@
     <string name="err_logimage_post_failed">La imatge de registre no s\'ha pujat. Comproveu la memòria del lloc web d\'origen.</string>
     <string name="err_parse_lat">El c:geo no pot calcular la latitud.</string>
     <string name="err_parse_lon">El c:geo no pot calcular la longitud.</string>
-    <string name="err_parse_dist">El c:geo no pot calcular la distància.</string>
     <string name="err_parse_lat_lon">El c:geo no pot calcular la latitud o la longitud.</string>
     <string name="err_rendertheme_file_unreadable">No s\'ha pogut carregar el tema de la representació seleccionada. S\'utilitzarà el predefinit.</string>
     <string name="err_rendertheme_invalid">El tema de representació seleccionat no és vàlid per aquesta versió de mapsforge. S\'utilitzarà el predefinit.</string>
@@ -694,7 +689,6 @@
     <string name="about_changelog_full">Llista de tots els canvis</string>
     <string name="about_nutshellmanual">Manual en línia</string>
     <string name="about_contributors_carnerodetails">com el pare de c:geo</string>
-    <string name="about_contributors_recent">Col·laboradors recents</string>
     <string name="about_contributors_specialthanks">Agraïments especials a:</string>
     <string name="about_contributors_specialthanksdetails">- tots els nostres col·laboradors de traducció a [Crowdin.net] (https://crowdin.net/project/cgeo)!\n- tots els creadors de problemes\n- i la resta de suports.\n</string>
     <string name="about_contributors_other">Altres col·laboradors</string>
@@ -1130,10 +1124,7 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
-    <string name="category_unifiedMap">Mapa unificat</string>
-    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilitzeu un mapa unificat</string>
-    <string name="init_summary_useUnifiedMap">Utilitzeu un mapa unificat nou en lloc dels mapes integrats de Google Map/Mapsforge (OSM) (experimentals / lluny d\'estar complets / només per a proves)</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -1273,7 +1264,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Eliminar tots els punts de ruta generats d\'aquest catxé?\n\nEls Punts de ruta s\'eliminaran immediatament, no es pot desfer.</string>
     <string name="cache_delete_generated_waypoints_success">Els punts de ruta generats s\'han suprimit</string>
     <string name="cache_offline_store">Desa</string>
-    <string name="cache_offline_stored">Desat al dispositiu</string>
     <string name="cache_offline_not_ready">No disponible fora de línia</string>
     <string name="cache_offline_time_mins_few">ara fa uns minuts</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1364,6 +1354,8 @@
     <string name="cache_dialog_offline_drop_message">S\'estan eliminant el catxé de la memòria del dispositiu…</string>
     <string name="cache_dialog_refresh_title">Actualitza</string>
     <string name="cache_dialog_refresh_message">S\'estan recarregant els detalls del catxé…</string>
+    <string name="cache_menu_speechDeactivate">Deixa de parlar</string>
+    <string name="cache_menu_speechActivate">Comença a parlar</string>
     <string name="cache_menu_navigate">Navega</string>
     <string name="cache_menu_target">Definiu com objectiu</string>
     <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
@@ -1511,8 +1503,6 @@
     <string name="init_summary_show_routing_menu">Un toc llarg sobre un catxé mostra un menú amb opcions avançades per afegir/eliminar el catxé a/des d\'una ruta. Si està desactivat, el catxé només s\'afegeix/elimina a/des de la ruta.</string>
     <string name="init_ActionbarAutohide">Amaga la barra d\'eines al toc</string>
     <string name="init_summary_ActionbarAutohide">Toqueu l\'espai lliure del mapa per ocultar/mostrar la barra d\'eines</string>
-    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
-    <string name="onetime_info_longtap_enabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -1553,8 +1543,6 @@
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_my_coordinates_accuracy">Les meves coordenades (±%s)</string>
-    <string name="waypoint_bearing">Direcció en º</string>
-    <string name="waypoint_distance">Distància</string>
     <string name="waypoint_name">Nom</string>
     <string name="waypoint_edit">Edita</string>
     <string name="waypoint_copy_coordinates">Copiar coordenades</string>
@@ -1589,6 +1577,7 @@
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
@@ -1792,7 +1781,6 @@
     <string name="user_menu_open_browser">Obre el perfil al navegador</string>
     <string name="user_menu_send_message">Envia un missatge</string>
     <string name="user_menu_send_email">Envia un correu electrònic</string>
-    <string name="user_menu_open_contact">Obre targeta del contacte</string>
     <string name="user_unknown">Usuari desconegut</string>
     <!-- navigation -->
     <string name="navigation">Navegació</string>
@@ -1818,8 +1806,6 @@
     <string name="helper_calendar_pastevent_title">Trobada passada</string>
     <string name="helper_calendar_pastevent_question">La trobada ja ha passat. Voleu afegir-la de totes maneres?</string>
     <string name="helper_sendtocgeo_title">Send to c:geo</string>
-    <string name="helper_contacts_title">Complement de contactes del c:geo</string>
-    <string name="helper_contacts_description">Us permet obrir un contacte (de la llibreta de contactes) directament des d\'una entrada del registre, així podeu demanar ajuda als amics més fàcilment.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
     <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
@@ -2142,7 +2128,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Esteu fent servir una versió de c: geo que sembla tenir més d’un any. És possible que algunes funcions ja no funcionin a causa de canvis tècnics. Llegiu les nostres FAQ sobre com actualitzar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Brúixola parlant</string>
-    <string name="tts_toggle">Activa/Desact. la veu</string>
     <string name="tts_started">S\'ha iniciat el mode parlat</string>
     <string name="tts_stopped">S\'ha aturat el mode parlat</string>
     <string name="tts_running">El servei de veu està en funcionament…</string>
@@ -2295,6 +2280,7 @@
     <string name="map_individual_route_cleared">Ruta individual esborrada</string>
     <string name="sorted_route_saved">Ruta individual desada</string>
     <string name="load_individual_route_error">Error en carregar la ruta individual</string>
+    <string name="route_item_point">Punt de ruta</string>
     <string name="route_item_not_yet_loaded">La ruta encara no s\'ha carregat</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Ruta carregada amb %d punt de ruta</item>
@@ -2322,12 +2308,9 @@
     <string name="routes_tracks_dialog_title">Opcions de rutes / tracks</string>
     <string name="routes_tracks_menu">Rutes / Tracks</string>
     <string name="routes_tracks_color">Seleccioneu el color</string>
-    <string name="center_on_route_track">Centre de la ruta/track</string>
     <string name="unload_route_track">Descarregar ruta/track</string>
     <string name="route">Ruta</string>
     <string name="track">Track</string>
-    <string name="make_visible">fer visible</string>
-    <string name="hide">Ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2496,7 +2479,7 @@
     <string name="redo">Refer</string>
     <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <string name="optimize">Optimitzar</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Àrees</string>
     <string name="rtl_fell_meadow">prat</string>
