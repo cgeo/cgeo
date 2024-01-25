@@ -1,31 +1,27 @@
 ### 지도
-- Mapsforge 및 VTM libs를 v0.20으로 업데이트했습니다.
-- 업데이트된 Google 지도 렌더러
-- 신규: 사용자 정의 캐시 아이콘이 설정(이모티콘)되었거나 큰 아이콘이 활성화된 경우 캐시 유형 아이콘을 마커로 표시합니다.
-- 신규: 관련 지점에 대한 마커로 사용자 지정 캐시 아이콘 표시
-- 신규: 캐시/지점 아이콘 크기 조정 허용(설정 => 모양 참조)
-- 신규: 선형 연구소는 숫자를 지점 마커로 사용합니다.
-- 신규: 캐시의 지점은 캐시 유형 아이콘을 마커로 표시합니다.
-- 신규: 지도의 현재 위치에 대한 고도 정보 표시 (설정 => 지도 콘텐츠 및 동작 참조)
-- 신규: 사용자 정의 경로 프로필(내부 경로에만 해당)
-- 수정: 근접 알림 제목이 너무 길어서 작은 화면에서 실제 알림이 잘립니다.
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- 신규: 다운로드 관리자에서 기존 다운로드 강조 표시
+- 신규: 지점 아이콘에 캐시 찾음 상태 표시
+- 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
+- 변경: 캐시/지점 세부 정보를 비차단 방식으로 표시
+- 신규: 선택적으로 임시 OAM 파일 유지 (지도 다운로더, 다른 앱에서 POI 파일을 사용할 때 유용함)
+- Fix: Hylly theme download error 404
 
 ### 캐시 상세정보
-- 신규: 로그 이미지 캡션 접두사의 기본값 편집
-- 신규: 표시할 최소 이미지 크기 보장
-- 변경: 자체 로그 이미지에 대한 편집 옵션을 재설계했습니다.
-- 신규: Bettercacher 통합
-- 신규: 지점을 개인 메모에 동기화할 때 방문 상태를 동기화합니다.
-- 신규: Opencaching 기반 캐시의 찾음 날짜 검색
-- 신규: 모든 지점을 개별 경로에 추가
+- 변경: "전환 말하기"는 이제 실제 전환입니다.
+- 변경: geocaching.com의 최대 로그 길이 증가
+- 수정: 오픈캐싱 사이트에 더 긴 개인 메모를 업로드할 수 없습니다.
+- 신규: 회원님의 로그 편집/삭제
+- New: Waypoint projection with variables
+- Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### 일반
-- 신규: 대상 SDK를 33으로 증가
-- 변경: "데이터베이스를 사용할 수 없음" 충돌을 방지하기 위한 데이터베이스 액세스 처리
-- 변경: 기본적으로 기본 설정만 표시됩니다. 설정으로 이동 => 확장 설정을 활성화하는 확장 설정
-- 신규: 다중 선택 목록에서 필터 허용
-- 신규: 다른 명명된(저장된) 필터를 포함하는 필터
-- 변경: Android 플랫폼에서 더 이상 지원되지 않는 AndroidBeam을 제거했습니다.
-- 변경: 구성 마법사: "서비스 구성" 화면에 "복원" 기능이 통합되고 고급 구성 화면이 제거되었습니다.
-- 수정: 오래된 연결 오류 메시지 숨기기
-- 수정: 최신 Android 시스템에서 c:geo 위젯에 대한 바로가기를 만들 수 없습니다.
+- 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
+- 변경: 배경화면을 배경으로 사용하는 데 더 이상 READ_EXTERNAL_STORAGE 권한이 필요하지 않습니다.
+- 신규: 가로 모드 설정을 위한 두 개의 열 레이아웃
+- 수정: 유효한 날짜/시간 정보 없이 백업 복원
+- New: Include active trackfiles in backup
+- New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
