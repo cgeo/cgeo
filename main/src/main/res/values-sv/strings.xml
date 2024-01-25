@@ -1459,7 +1459,6 @@
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Riktning (°)</string>
     <!-- Variables -->
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_scanlisting">Skanna listning</string>
