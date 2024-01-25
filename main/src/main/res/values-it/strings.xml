@@ -1594,7 +1594,6 @@
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Angolo in gradi</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
