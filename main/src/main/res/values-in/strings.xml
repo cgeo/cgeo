@@ -675,7 +675,6 @@
     <string name="from_clipboard">Dari papan tulis kecil</string>
     <string name="copy_to_clipboard">Salin ke papan tulis kecil</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Bearing dalam °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
