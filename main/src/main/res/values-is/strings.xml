@@ -138,13 +138,10 @@
     <string name="err_tb_details_open">c:geo getur ekki opnað upplýsingar um ferðalang.</string>
     <string name="err_tb_not_loggable">Ekki er hægt að skrá færslu fyrir þennan ferðalang.</string>
     <string name="err_tb_find_that">c:geo getur ekki fundið þennan ferðalang.</string>
-    <string name="err_point_bear_and_dist_title">Þarftu aðstoð?</string>
-    <string name="err_point_bear_and_dist">Skráðu inn bæði legu og vegalengd. Lega er horn frá 0 til 360 gráðum frá norðri. Vegalengd þarfnast ekki mælieiningar.</string>
     <string name="err_log_load_data">c:geo gat ekki náð í nauðsynleg gögn til að skrá heimsókn þína.</string>
     <string name="err_log_post_missing_coordinates">Hnit vantar.</string>
     <string name="err_parse_lat">c:geo getur ekki þáttað lengdargráðu.</string>
     <string name="err_parse_lon">c:geo getur ekki þáttað breiddargráðu.</string>
-    <string name="err_parse_dist">c:geo getur ekki þáttað vegalengd.</string>
     <string name="err_parse_lat_lon">c:geo getur hvorki þáttað lengdargráðu né breiddargráðu.</string>
     <string name="warn_save_nothing">Það er ekkert sem þarf að vista.</string>
     <string name="warn_no_coordinates">Engin hnit gefin.</string>
@@ -376,7 +373,6 @@
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
     <string name="cache_offline_store">Vista</string>
-    <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>
     <string name="cache_offline_time_mins_few">Fyrir nokkrum mínútum</string>
     <plurals name="cache_offline_about_time_mins">
@@ -476,8 +472,6 @@
     <string name="waypoint">Vegpunktur</string>
     <string name="waypoint_custom">Sérsniðinn</string>
     <string name="waypoint_my_coordinates">Hnitin mín</string>
-    <string name="waypoint_bearing">Lega í °</string>
-    <string name="waypoint_distance">Fjarlægð</string>
     <string name="waypoint_name">Nafn</string>
     <string name="waypoint_edit">Breyta</string>
     <string name="waypoint_copy_coordinates">Afrita hnit</string>
@@ -493,6 +487,7 @@
     <string name="waypoint_reset_local_and_remote_cache_coords">Endurstilla í c:geo og á heimasíðu</string>
     <string name="waypoint_done">Lokið</string>
     <string name="waypoint_copy_of">Afrit af</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -701,7 +696,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
