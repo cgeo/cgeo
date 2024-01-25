@@ -91,10 +91,8 @@
     <string name="log_tb_archived">Arhivēts</string>
     <string name="log_save">Saglabāt bezsaistes režīmā</string>
     <string name="log_saving">Ieraksta nosūtīšana…</string>
-    <string name="log_saving_and_uploading">Publicē ierakstu un augšupielādē attēlu…</string>
     <string name="log_posting_log">Publicē ierakstu…</string>
     <string name="log_posting_vote">Publicē slēpņa balsojumu…</string>
-    <string name="log_posting_image">Publicē attēlu…</string>
     <string name="log_posting_generic_trackable">Publicē %1$s %2$d/%3$d</string>
     <string name="log_clear">Notīrīt</string>
     <string name="log_post_not_possible">Datu lejupielādēšana ir procesā…\nLūdzu mēģini vēlreiz pēc dažām sekundēm vai pārbaudi interneta savienojumu.</string>
@@ -193,8 +191,6 @@
     <string name="err_tb_find_that">c:feo nevar atrast šo ceļotāju.</string>
     <string name="err_waypoint_cache_unknown">c:geo, nezina, kuram slēpnim tu vēlies pievienot starpposma punktu.</string>
     <string name="err_waypoint_add_failed">c:geo neizdevās pievienot tavu starpposmu.</string>
-    <string name="err_point_bear_and_dist_title">Nepieciešama palīdzība?</string>
-    <string name="err_point_bear_and_dist">Aizpildīt abus - gan virzienu, gan attālumu. Virziena leņķis ir no 0 līdz 360 grādiem attiecībā pret ziemeļiem. Attālumam nav jānorāda mērvienības.</string>
     <string name="err_log_load_data">c:geo nevar ielādēt datus, kas nepieciešami lai pierakstītu apmeklējumu.</string>
     <string name="err_log_post_missing_tracking_code">Izsekošanas kods nav ievadīts.</string>
     <string name="err_log_post_missing_coordinates">Koordinātas nav atrastas.</string>
@@ -204,7 +200,6 @@
     <string name="err_logimage_post_failed">Šķiet, ka tavs apmeklējuma ieraksta attēls nav augšupielādēts. Lūdzu, pārbaudi to slēpņa mājas lapā.</string>
     <string name="err_parse_lat">c:geo nevar apstrādāt platuma grādus.</string>
     <string name="err_parse_lon">c:geo nevar apstrādāt garuma grādus.</string>
-    <string name="err_parse_dist">c:geo nevar parsēt attālumu.</string>
     <string name="err_parse_lat_lon">c:geo nevar apstrādāt platuma vai garuma  grādus.</string>
     <string name="err_rendertheme_file_unreadable">Nevarēja ielādēt izvēlēto izskatu. Atgriežos pie oriģinālā (iebūvētā).</string>
     <string name="err_rendertheme_invalid">Izvēlētais kartes izskats neder šai mapsforge versijai. Atgriežos pie oriģinālā (iebūvētā).</string>
@@ -365,7 +360,6 @@
     <string name="about_system_write_logcat_error">Kļūda rakstot reģistra failu</string>
     <string name="about_nutshellmanual">Tiešsaistes rokasgrāmata</string>
     <string name="about_contributors_carnerodetails">kā c:geo tēvs</string>
-    <string name="about_contributors_recent">Pēdējie atbalstītāji</string>
     <string name="about_contributors_specialthanks">Īpašs paldies</string>
     <string name="about_contributors_other">Citi atbalstītāji</string>
     <string name="about_components">Sastāvdaļas</string>
@@ -629,7 +623,6 @@
     <string name="last_day_available">pieejama pēdējo dienu</string>
     <string name="cache_offline_refresh">Atjaunot</string>
     <string name="cache_offline_store">Saglabāt</string>
-    <string name="cache_offline_stored">Saglabāts bezsaistē tavā ierīcē</string>
     <string name="cache_offline_not_ready">Nav pieejams bezsaistē</string>
     <string name="cache_offline_time_mins_few">dažas minūtes atpakaļ</string>
     <plurals name="cache_offline_about_time_mins">
@@ -817,8 +810,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_cache_coordinates">Slēpņa koordinātas</string>
     <string name="waypoint_custom">Uzstādīt</string>
     <string name="waypoint_my_coordinates">Manas koordinātas</string>
-    <string name="waypoint_bearing">Pagrieziena leņķis °</string>
-    <string name="waypoint_distance">Pēc attāluma</string>
     <string name="waypoint_name">Nosaukums</string>
     <string name="waypoint_edit">Rediģēt</string>
     <string name="waypoint_copy_coordinates">Kopēt koordinātas</string>
@@ -852,6 +843,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_coordinate_formats_plain">Vienkāršā</string>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -924,7 +916,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="user_menu_view_hidden">Paslēptie slēpņi</string>
     <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
     <string name="user_menu_send_message">Nosūtīt ziņu</string>
-    <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>
     <string name="user_unknown">Nezināms lietotājs</string>
     <!-- navigation -->
     <string name="navigation">Navigācija</string>
@@ -941,8 +932,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_calendar_pastevent_title">Pagājušie notikumi (events)</string>
     <string name="helper_calendar_pastevent_question">Pasākuma (Eventa) datums ir pagājis. Vai tomēr pievienot?</string>
     <string name="helper_sendtocgeo_title">Sūtīt uz c:geo</string>
-    <string name="helper_contacts_title">c:geo kontaktu spraudnis</string>
-    <string name="helper_contacts_description">Ļauj tev atvērt kontakta kartīti (adrešu grāmatā) tieši no ieraksta vietas, lai tu vieglāk varētu uzdot jautājumu draugam pēc palīdzības.</string>
     <string name="helper_sendtocgeo_description">Send2cgeo ir interneta pārlūka spraudnis <strong>tavam datoram</strong>. No geocaching.com varēsi viegli pārsūtīt slēpņu informāciju uz šo ierīci.</string>
     <string name="helper_locus_description">Āra navigācijas aplikācija tālrunim vai planšetei. Ļauj skatīt bezsaistes topogrāfiskās kartes, izsekot maršrutu, meklēt slēpņus, lietot balss ceļvedi un darīt vēl daudz ko citu.</string>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
@@ -1328,7 +1317,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
