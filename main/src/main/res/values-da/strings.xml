@@ -1101,7 +1101,6 @@
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Kompasretning</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
