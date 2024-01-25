@@ -1,31 +1,27 @@
 ### Kaart
-- Mapsforge en VTM libs bijgewerkt naar v0.20
-- Google Maps renderer bijgewerkt
-- Nieuw: Toon cache type icoon als marker als een eigen cache icoon is ingesteld (emoji) of grote iconen zijn ingeschakeld
-- Nieuw: Toon eigen cache icoon als markering voor gerelateerde waypoints
-- Nieuw: Sta het schalen van cache/waypoint iconen toe (Zie Instellingen => uiterlijk)
-- Nieuw: Lineaire labs gebruiken getallen als markeerpunten
-- Nieuw: Waypoints van een cache tonen cache type icoon als markeerpunt
-- Nieuw: Toon hoogteinfo voor de huidige positie op de kaart (zie Instellingen => Kaart Inhoud & Gedrag)
-- Nieuw: Gebruikersgedefinieerde routeringsprofielen (alleen interne routering)
-- Oplossing: De titel van de nabijheidsmeldingen is te lang, de notificatie wordt afgebroken op kleine schermen
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- Nieuw: Markeer bestaande downloads in downloadbeheer
+- Nieuw: Toon cache gevonden status op waypoint iconen
+- Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
+- Wijziging: Toon cache/waypoint details op een niet-blokkerende manier
+- Nieuw: Optioneel tijdelijke OAM bestanden behouden (kaart downloader, nuttig bij het gebruik van POI bestanden met andere apps)
+- Fix: Hylly theme download error 404
 
 ### Cache details
-- Nieuw: Bewerk standaardwaarde voor voorvoegsel van de logafbeeldingsonderschrift
-- Nieuw: Zorg voor minimale afbeeldingsgrootte voor weergave
-- Wijziging: Opties voor eigen log-afbeeldingen herontworpen
-- Nieuw: Bettercacher integratie
-- Nieuw: Synchroniseer bezocht status bij het synchroniseren van waypoints met persoonlijke notitie
-- Nieuw: Haal datum gevonden op voor Opencaching-gebaseerde caches
-- Nieuw: Voeg alle waypoints toe aan de afzonderlijke route
+- Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
+- Wijziging: Maximale loglengte verhoogd voor geocaching.com
+- Oplossing: Kan geen langere persoonlijke notities uploaden op opencaching sites
+- Nieuw: Bewerk/verwijder eigen logs
+- New: Waypoint projection with variables
+- Change: Restrict image selection to types jpg, png, gif
+- New: New formula CHARS to select multiple single chars
 
 ### Algemeen
-- Nieuw: Doel SDK opgehoogd naar 33
-- Wijziging: Afhandeling van databasetoegang om crashes met "database niet beschikbaar" te voorkomen
-- Wijziging: Alleen basisinstellingen worden standaard weergegeven. Ga naar Instellingen => Uitgebreide instellingen om uitgebreide instellingen in te schakelen
-- Nieuw: Filteren in multiselect lijsten toestaan
-- Nieuw: Filter om andere met naam (opgeslagen) filters op te nemen
-- Wijziging: AndroidBeam verwijderd, die niet langer wordt ondersteund door het Android-platform
-- Wijziging: Configuratiewizard: "herstel" functionaliteit in het "services configureren" scherm geïntegreerd en het geavanceerde configuratiescherm verwijderd.
-- Oplossing: Verberg verouderde verbindingsfoutmelding
-- Oplossing: Kan geen snelkoppelingen maken voor c:geo widgets op nieuwere Android-systemen
+- Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
+- Wijziging: het gebruik van wallpaper als achtergrond vereist niet langer READ_EXTERNAL_STORAGE toestemming
+- Nieuw: Twee kolom-indeling voor instellingen in liggende modus
+- Oplossing: Herstel van back-ups zonder geldige datum/tijd informatie
+- New: Include active trackfiles in backup
+- New: Integrated c:geo contacts addon functionality (external addon no longer required)
+- Fix: Trackable log type defaults reworked
+- Fix: Trackable spotted cache info (website changes)
