@@ -1496,7 +1496,6 @@
     <string name="from_clipboard">Iš iškarpinės</string>
     <string name="copy_to_clipboard">Kopijuoti į iškarpinę</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimutas °</string>
     <!-- Variables -->
     <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
