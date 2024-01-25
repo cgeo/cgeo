@@ -1299,7 +1299,6 @@
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">方位(度[°])</string>
     <!-- Variables -->
     <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
     <string name="variables_scanlisting">スキャン</string>
