@@ -1396,7 +1396,6 @@
     <string name="from_clipboard">Από το πρόχειρο</string>
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Κατεύθυνση σε °</string>
     <!-- Variables -->
     <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
