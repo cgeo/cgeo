@@ -1262,7 +1262,6 @@
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Retning i °</string>
     <!-- Variables -->
     <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
