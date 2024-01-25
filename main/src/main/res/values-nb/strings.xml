@@ -124,10 +124,8 @@
     <string name="log_tb_archived">Arkivert</string>
     <string name="log_save">Lagre lokalt</string>
     <string name="log_saving">Lagrer logg…</string>
-    <string name="log_saving_and_uploading">Laster opp logg og bilder…</string>
     <string name="log_posting_log">Laster opp logg…</string>
     <string name="log_posting_vote">Laster opp cachestemme…</string>
-    <string name="log_posting_image">Laster opp bilder…</string>
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
     <string name="log_templates">Fant den: Logg mal…</string>
@@ -234,8 +232,6 @@
     <string name="err_tb_find_that">Beklager, c:geo finner ikke den sporbare.</string>
     <string name="err_waypoint_cache_unknown">c:geo vet ikke hvilken cache du vil legge til et veipunkt for.</string>
     <string name="err_waypoint_add_failed">c:geo kan ikke legge til veipunktet.</string>
-    <string name="err_point_bear_and_dist_title">Trenger du hjelp?</string>
-    <string name="err_point_bear_and_dist">Skriv inn både retning og avstand. Retning er 0 til 360 grader i forhold til nord. Avstand angis med eller uten enheter.</string>
     <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
     <string name="err_log_post_missing_tracking_code">Sporingskode mangler.</string>
     <string name="err_log_post_missing_coordinates">Koordinatene mangler.</string>
@@ -245,7 +241,6 @@
     <string name="err_logimage_post_failed">Det ser ut som loggbildet ditt ikke ble lastet opp. Du bør sjekke om dette er tilfelle på cachens nettside.</string>
     <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
     <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
-    <string name="err_parse_dist">Beklager, c:geo klarte ikke å lese avstanden.</string>
     <string name="err_parse_lat_lon">c:geo kan ikke tyde breddegraden eller lengdegraden.</string>
     <string name="err_rendertheme_file_unreadable">Klarte ikke laste det valgte utseende-temaet. Bruker heller det innebygde.</string>
     <string name="err_rendertheme_invalid">Det valgte utseende-temaet kan ikke brukes på denne versjonen av mapsforge. Bruker heller det innebygde temaet.</string>
@@ -550,7 +545,6 @@
     <string name="about_system_write_logcat_error">Feil ved skriving av loggfil</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
     <string name="about_contributors_carnerodetails">som faren til c:geo</string>
-    <string name="about_contributors_recent">Siste bidragsytere</string>
     <string name="about_contributors_specialthanks">Spesielt takk til</string>
     <string name="about_contributors_specialthanksdetails">- alle våre oversettelsesbidragsytere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n- alle som rapporterer feil\n- og alle andre bidragsytere.\n</string>
     <string name="about_contributors_other">Andre bidragsytere</string>
@@ -1006,7 +1000,6 @@
     <string name="cache_delete_userdefined_waypoints_success">Brukerdefinerte veipunkter slettet</string>
     <string name="cache_delete_generated_waypoints">Fjern genererte veipunkter</string>
     <string name="cache_offline_store">Lagre</string>
-    <string name="cache_offline_stored">Lagret på enheten for</string>
     <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
     <string name="cache_offline_time_mins_few">en liten stund siden</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1235,8 +1228,6 @@
     <string name="waypoint_custom">Eget veipunkt</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_my_coordinates_accuracy">Mine koordinater (±%s)</string>
-    <string name="waypoint_bearing">Retning i °</string>
-    <string name="waypoint_distance">Avstand</string>
     <string name="waypoint_name">Navn</string>
     <string name="waypoint_edit">Rediger</string>
     <string name="waypoint_copy_coordinates">Kopier koordinater</string>
@@ -1270,6 +1261,7 @@
     <string name="waypoint_coordinate_formats_plain">Ren tekst</string>
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
@@ -1442,7 +1434,6 @@
     <string name="user_menu_open_browser">Åpne profil i nettleseren</string>
     <string name="user_menu_send_message">Send melding</string>
     <string name="user_menu_send_email">Send e-post</string>
-    <string name="user_menu_open_contact">Åpne kontaktinfo</string>
     <string name="user_unknown">Ukjent bruker</string>
     <!-- navigation -->
     <string name="navigation">Navigasjon</string>
@@ -1468,8 +1459,6 @@
     <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
     <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
     <string name="helper_sendtocgeo_title">Send til c:geo</string>
-    <string name="helper_contacts_title">c:geo - kontakttillegg</string>
-    <string name="helper_contacts_description">Gjør det mulig å åpne en kontakt (i telefonens adressebok) direkte fra en logg så du enklere kan be om hjelp fra dine venner.</string>
     <string name="helper_sendtocgeo_description">Send til c:geo (send2c:geo) er en nettleserutvidelse <strong>for din pc</strong>. På geocaching.com kan du sende cacher til din smarttelefon ved hjelp av en egen knapp i nettleseren.</string>
     <string name="helper_locus_description">App for utendørs navigasjon til din mobil eller tablet. I appen kan du se topo-kart offline, spore ruten din, lete etter turbokser, bruke en stemmeguide og mye annet.</string>
     <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
@@ -1786,7 +1775,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Du bruker en versjon av c:geo som ser ut til å være eldre enn ett år. Enkelte funksjoner fungerer kanskje ikke lenger på grunn av nettstedets eller andre tekniske endringer. Vennligst les vår FAQ om hvordan du oppgraderer.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Talende kompass</string>
-    <string name="tts_toggle">Skru av/på taleinstruksjoner</string>
     <string name="tts_started">Startet tale</string>
     <string name="tts_stopped">Stoppet tale</string>
     <string name="err_tts_lang_not_supported">Dette språket er ikke støttet av text-to-speech.</string>
@@ -1925,12 +1913,9 @@
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Ruter / spor valg</string>
     <string name="routes_tracks_menu">Ruter / Spor</string>
-    <string name="center_on_route_track">Midtstill på rute/spor</string>
     <string name="unload_route_track">Slett rute/spor</string>
     <string name="route">Rute</string>
     <string name="track">Spor</string>
-    <string name="make_visible">Gjør synlig</string>
-    <string name="hide">Skjul</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2045,7 +2030,7 @@
     <string name="back">Tilbake</string>
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Områder</string>
     <string name="rtl_heath">varme</string>
