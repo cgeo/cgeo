@@ -844,7 +844,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Pagrieziena leņķis °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
