@@ -734,7 +734,6 @@
     <string name="from_clipboard">Din memoria temporară</string>
     <string name="copy_to_clipboard">Copiază în memoria temporară</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimut în °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
