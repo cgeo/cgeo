@@ -675,7 +675,6 @@
     <string name="from_clipboard">من الحافظة</string>
     <string name="copy_to_clipboard">نسخ من الحافظة</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">الاتجاه بالدرجة °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
