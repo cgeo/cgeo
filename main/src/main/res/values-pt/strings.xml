@@ -1583,7 +1583,6 @@
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimute em º</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
