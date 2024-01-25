@@ -146,10 +146,8 @@
     <string name="log_tb_archived">Arquivado</string>
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
-    <string name="log_saving_and_uploading">A publicar o registo e a enviar as imagens…</string>
     <string name="log_posting_log">A publicar o registo…</string>
     <string name="log_posting_vote">A submeter votação da cache…</string>
-    <string name="log_posting_image">A publicar imagens…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
     <string name="log_templates">Encontrada: Modelo de registo…</string>
@@ -264,8 +262,6 @@
     <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
     <string name="err_waypoint_cache_unknown">O c:geo não sabe a que cache pretende adicionar o ponto adicional.</string>
     <string name="err_waypoint_add_failed">O c:geo não conseguiu adicionar o seu ponto adicional.</string>
-    <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
-    <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao Norte. A distância não necessita de unidades.</string>
     <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
     <string name="err_log_post_missing_tracking_code">Código de acompanhamento em falta.</string>
     <string name="err_log_post_missing_coordinates">Coordenadas em falta.</string>
@@ -276,7 +272,6 @@
     <string name="err_logimage_post_failed">Parece que a imagem que anexou ao registo não foi enviada. Por favor, verifique na página web da cache se a imagem foi enviada.</string>
     <string name="err_parse_lat">O c:geo não conseguiu extrair a latitude.</string>
     <string name="err_parse_lon">O c:geo não conseguiu extrair a longitude.</string>
-    <string name="err_parse_dist">O c:geo não conseguiu calcular a distância.</string>
     <string name="err_parse_lat_lon">O c:geo não conseguiu extrair a latitude ou longitude.</string>
     <string name="err_rendertheme_file_unreadable">Não foi possível carregar o tema seleccionado. A reverter para o tema predefinido.</string>
     <string name="err_rendertheme_invalid">O tema seleccionado não é válido para esta versão do mapsforge. A reverter para o tema predefinido.</string>
@@ -693,7 +688,6 @@
     <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
-    <string name="about_contributors_recent">Colaboradores recentes</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
     <string name="about_contributors_specialthanksdetails">- a todos os contribuidores de tradução em [Crowdin.net](https://crowdin.net/project/cgeo!\n- a todos os geradores de questões\n- e a todos os outros apoiantes.\n</string>
     <string name="about_contributors_other">Outros colaboradores</string>
@@ -1102,6 +1096,9 @@
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
     <string name="init_memory_dump">Imagem de erro da memória</string>
     <string name="init_memory_dumped">Imagem de erro da memória em %s</string>
+    <string name="init_reset_otm">Repor mensagens únicas</string>
+    <string name="init_reset_otm_confirm">Deseja repor todas as mensagens únicas?</string>
+    <string name="init_reset_otm_done">As mensagens únicas foram repostas</string>
     <string name="init_please_wait">Por favor, aguarde…</string>
     <string name="settings_open_website">Abrir o sítio web do serviço</string>
     <string name="settings_open_geokretymap_website">Abrir o sítio web \"GeoKretyMap.org\"</string>
@@ -1129,10 +1126,7 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
-    <string name="category_unifiedMap">Mapa unificado</string>
-    <string name="experimental">(experimental)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
-    <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1272,7 +1266,6 @@
     <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
-    <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
     <string name="cache_offline_time_mins_few">há alguns minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1363,6 +1356,8 @@
     <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
     <string name="cache_dialog_refresh_title">Actualizar</string>
     <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
+    <string name="cache_menu_speechDeactivate">Parar de falar</string>
+    <string name="cache_menu_speechActivate">Começar a falar</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Definir como destino</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
@@ -1437,6 +1432,7 @@
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">D/T</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1496,6 +1492,7 @@
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
+    <string name="edit">Editar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
@@ -1510,8 +1507,6 @@
     <string name="init_summary_show_routing_menu">Toque longo numa cache mostra um menu com opções avançadas para adicionar/remover a cache a/de uma rota. Se desabilitado, a cache é apenas adicionada/removida à/da rota.</string>
     <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
     <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
-    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está activada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
@@ -1544,6 +1539,7 @@
     <string name="web_downloaded">Transferido</string>
     <!-- popup -->
     <string name="popup_more">Mais detalhes</string>
+    <string name="map_fragment_swipe_hint_text">Deslize para abrir a visualização de detalhes</string>
     <!-- waypoint -->
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
@@ -1552,8 +1548,6 @@
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_my_coordinates_accuracy">As minhas coordenadas (±%s)</string>
-    <string name="waypoint_bearing">Azimute em º</string>
-    <string name="waypoint_distance">Distância</string>
     <string name="waypoint_name">Nome</string>
     <string name="waypoint_edit">Editar</string>
     <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
@@ -1588,6 +1582,7 @@
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
+    <!-- Projection -->
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
@@ -1791,7 +1786,6 @@
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
     <string name="user_menu_send_email">Enviar e-mail</string>
-    <string name="user_menu_open_contact">Abrir contacto</string>
     <string name="user_unknown">Utilizador desconhecido</string>
     <!-- navigation -->
     <string name="navigation">Navegação</string>
@@ -1817,8 +1811,6 @@
     <string name="helper_calendar_pastevent_title">Eventos passados</string>
     <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
     <string name="helper_sendtocgeo_title">Enviar para o c:geo</string>
-    <string name="helper_contacts_title">c:geo - contactos (extensão)</string>
-    <string name="helper_contacts_description">Permite-lhe que aceda directamente a um contacto (da sua lista de contactos), a partir de um registo feito numa geocache. Assim será mais fácil pedir ajuda aos seus amigos.</string>
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a \'geocaching.com\' poderá, com o clique de um botão, enviar geocaches directamente para o seu smartphone.</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
@@ -2140,7 +2132,6 @@
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Está a utilizar uma versão do c:geo que parece ter mais de um ano. Alguns recursos podem já não funcionar, fruto de alterações num sítio web ou outros motivos técnicos. Por favor, leia a nossa \'FAQ\' para saber como actualizar.</string>
     <!-- text-to-speech for compass view -->
     <string name="tts_service">Bússola com voz</string>
-    <string name="tts_toggle">Ligar/desligar a fala</string>
     <string name="tts_started">Início das instruções de voz</string>
     <string name="tts_stopped">Fala interrompida</string>
     <string name="tts_running">Serviço de fala está activo…</string>
@@ -2293,6 +2284,7 @@
     <string name="map_individual_route_cleared">Rota individual limpa</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
+    <string name="route_item_point">Ponto da rota</string>
     <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
     <plurals name="individual_route_loaded">
         <item quantity="one">Rota carregada com %d ponto de rota</item>
@@ -2320,12 +2312,12 @@
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
-    <string name="center_on_route_track">Centrar na rota/percurso</string>
+    <string name="center">Centrar</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
     <string name="track">Percurso</string>
-    <string name="make_visible">tornar visível</string>
-    <string name="hide">ocultar</string>
+    <string name="make_visible">Tornar visível</string>
+    <string name="hide">Ocultar</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2494,8 +2486,9 @@
     <string name="redo">Refazer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
-    <!-- ChipChoiceGroup -->
-    <string name="chipchoicegroup_selectall">Selecionar Tudo</string>
+    <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Selecionar Tudo</string>
+    <string name="multiselect_selectvisible">Selecionar Visíveis</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
     <string name="rtl_fell_meadow">prado em montanha</string>
