@@ -1311,7 +1311,6 @@
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimut açısı</string>
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
     <string name="variables_deleteall">Tümünü Sil</string>
