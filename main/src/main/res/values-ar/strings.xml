@@ -163,8 +163,6 @@
     <string name="err_tb_find_that">c:geo لا يستطيع العثور على أمتعة السفر تلك.</string>
     <string name="err_waypoint_cache_unknown">c:geo لا يعرف ماهو المخبئ الذي تريد أن تضيف له إحداثية طريق.</string>
     <string name="err_waypoint_add_failed">c:geo فشل في إضافة إحداثية طريق.</string>
-    <string name="err_point_bear_and_dist_title">هل تحتاج مساعدة؟</string>
-    <string name="err_point_bear_and_dist">املئ الاتجاه و المسافة. الاتجاه هو زاوية من 0 إلى 360 درجة إلى الشمال. المسافة لا تتطلب وحدات.</string>
     <string name="err_log_load_data">c:geo لا يستطيع تحميل البيانات المطلوبة لتسجيل الزيارة.</string>
     <string name="err_log_post_missing_tracking_code">شفرة التتبع مفقودة.</string>
     <string name="err_log_post_missing_coordinates">الإحداثيات مفقودة.</string>
@@ -174,7 +172,6 @@
     <string name="err_logimage_post_failed">يبدو أنه لم يتم رفع صورة تسجيل زيارتك. الرجاء التحقق من ذالك من خلال موقع إحدثيات المخبآت.</string>
     <string name="err_parse_lat">c:geo لا يستطيع تحليل خط العرض.</string>
     <string name="err_parse_lon">c:geo لا يستطيع تحليل خط الطول.</string>
-    <string name="err_parse_dist">c:geo لا يستطيع تحليل المسافة.</string>
     <string name="err_parse_lat_lon">c:geo لا يستطيع تحليل خط العرض أو خط الطول.</string>
     <string name="err_rendertheme_file_unreadable">تعذر تحميل الثيم المحدد. العودة إلى الثيم المدمج.</string>
     <string name="err_rendertheme_invalid">الثيم المحدد غير صالح لهذا الإصدار من mapsforge. العودة إلى الثيم المدمج.</string>
@@ -513,7 +510,6 @@
     <string name="last_day_available">آخر يوم متاح</string>
     <string name="cache_offline_refresh">تحديث</string>
     <string name="cache_offline_store">تخزين</string>
-    <string name="cache_offline_stored">مخزن في الجهاز</string>
     <string name="cache_offline_not_ready">غير متاح في وضع عدم الاتصال</string>
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
@@ -649,8 +645,6 @@
     <string name="waypoint_cache_coordinates">إحداثيات المخبئ</string>
     <string name="waypoint_custom">مخصص</string>
     <string name="waypoint_my_coordinates">إحداثياتي</string>
-    <string name="waypoint_bearing">الاتجاه بالدرجة °</string>
-    <string name="waypoint_distance">المسافة</string>
     <string name="waypoint_name">الاسم</string>
     <string name="waypoint_edit">تعديل</string>
     <string name="waypoint_copy_coordinates">نسخ الإحدثيات</string>
@@ -680,6 +674,7 @@
     <string name="waypoint_coordinate_formats_plain">بسيط</string>
     <string name="from_clipboard">من الحافظة</string>
     <string name="copy_to_clipboard">نسخ من الحافظة</string>
+    <!-- Projection -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
@@ -746,7 +741,6 @@
     <string name="user_menu_view_hidden">مخبآت مخفية</string>
     <string name="user_menu_open_browser">فتح الصفحة الشخصية في المتصفح</string>
     <string name="user_menu_send_message">إرسال رسالة</string>
-    <string name="user_menu_open_contact">فتح بطاقة جهة الاتصال</string>
     <string name="user_unknown">مستخدم غير معروف</string>
     <!-- navigation -->
     <string name="navigation">الملاحة</string>
@@ -763,8 +757,6 @@
     <string name="helper_calendar_pastevent_title">الأحداث الماضية</string>
     <string name="helper_calendar_pastevent_question">تاريخ الحدث في الماضي. أضفه على أية حال؟</string>
     <string name="helper_sendtocgeo_title">إرسال إلى c:geo</string>
-    <string name="helper_contacts_title">c:geo يتصل بالمساعد</string>
-    <string name="helper_contacts_description">يتيح لك أن تفتح بطاقة جهة الاتصال (من دفتر العناوين الخاص بك) مباشرة من إدلاخات السجل، حيث يمكنك بسهولة طلب المساعدة من أصدقائك.</string>
     <string name="helper_sendtocgeo_description">الإرسال إلى c:geo هو ملحق في المتصفح <strong>لحاسوبك</strong>. أثناء تصفح geocaching.com، يمكنك إرسال المخبآت إلى هاتفك الذكي من خلال النقر على الزر مباشرة داخل المتصفح.</string>
     <string name="helper_locus_description">تطبيق الملاحة في الهواء الطلق لهاتفك أو الكمبيوتر اللوحي. و عرض خرائط topo في وضع عدم اتصال، و تعقب مسارك و مطارة على الأخرين و الدليل الصوتي و أكثر من ذالك.</string>
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
@@ -1087,7 +1079,7 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="cancel">إلغاء</string>
-    <!-- ChipChoiceGroup -->
+    <!-- Multi-Selections -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
