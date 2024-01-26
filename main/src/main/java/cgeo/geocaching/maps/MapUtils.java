@@ -228,7 +228,7 @@ public class MapUtils {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
                     if (!Float.isNaN(elevation)) {
-                        menu.findItem(R.id.menu_elevation).setVisible(true).setTitle(String.format(activity.getString(R.string.menu_elevation_info), Units.getDistanceFromMeters(elevation)));
+                        menu.findItem(R.id.menu_elevation).setVisible(true).setTitle(String.format(activity.getString(R.string.menu_elevation_info), Units.formatElevation(elevation)));
                     }
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
@@ -328,7 +328,7 @@ public class MapUtils {
 
         final float elevation = Routing.getElevation(routeItem.getPoint());
         if (!Float.isNaN(elevation)) {
-            menu.addMenuItem(baseId + 100, String.format(activity.getString(R.string.menu_elevation_info), Units.getDistanceFromMeters(elevation)), R.drawable.elevation);
+            menu.addMenuItem(baseId + 100, String.format(activity.getString(R.string.menu_elevation_info), Units.formatElevation(elevation)), R.drawable.elevation);
         }
     }
 

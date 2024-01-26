@@ -26,6 +26,13 @@ public class Units {
         }
     }
 
+    /* formats elevation in m according to useImperialUnits() setting */
+    public static String formatElevation(final float elevationInM) {
+        // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
+        final double temp = Float.isNaN(elevationInM) ? Double.NaN : Settings.useImperialUnits() ? elevationInM * IConversion.METERS_TO_FEET : elevationInM;
+        return Double.isNaN(temp) ? "" : String.format(Locale.getDefault(), "%.1f", temp) + (Settings.useImperialUnits() ? " ft" : " m");
+    }
+
     public static float generateSmartRoundedAverageDistance(final float newDistance, final float lastDistance) {
         final float scaleFactor;
         if (Settings.useImperialUnits()) { // the rounded values should be user displayable. Therefore, use a different scaling factor for imperial units.
