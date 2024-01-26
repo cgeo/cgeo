@@ -118,6 +118,11 @@
     <PreferenceCategory
         android:title="@string/category_unifiedMap"
         app:iconSpaceReserved="false">
+        <CheckBoxPreference
+            android:key="@string/pref_useUnifiedMap"
+            android:summary="@string/init_summary_useUnifiedMap"
+            android:title="@string/init_title_useUnifiedMap"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/init_mapsource_select"
@@ -129,11 +134,6 @@
             android:key="@string/pref_tileprovider_hidden"
             android:title="@string/settings_hide_tileproviders_title"
             android:summary="@string/settings_hide_tileproviders_summary"
-            app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:key="@string/pref_useUnifiedMap"
-            android:summary="@string/init_summary_useUnifiedMap"
-            android:title="@string/init_title_useUnifiedMap"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
