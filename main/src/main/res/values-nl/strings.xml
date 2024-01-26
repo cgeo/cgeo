@@ -319,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
     <string name="confirm_discard_changes">Niet opgeslagen wijzigingen negeren?</string>
+    <string name="confirm_unsent_changes_title">Niet-verzonden wijzigingen</string>
+    <string name="confirm_unsent_changes">Niet-verzonden wijzigingen negeren?</string>
     <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
     <string name="more_information">Meer informatie</string>
@@ -998,6 +1000,7 @@
     <string name="init_backup_unavailable">niet beschikbaar</string>
     <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
     <string name="init_restore_version_error">Onverwacht formaat - kan database niet terugzetten.\n\nVerwachtte versie is %1$d,\nback-up heeft versie %2$d</string>
+    <string name="backup_tracks_error">Fout bij het maken van de back-up van tracks.</string>
     <string name="settings_title_backup">Back-up maken/terugzetten</string>
     <string name="settings_summary_backup">Back-up maken en terugzetten van cache- en waypoint-gegevens en programma-instellingen.</string>
     <string name="init_backup_settings_logins">Accountgegevens back-uppen</string>
@@ -1657,6 +1660,7 @@
     <string name="formula_function_if">Als</string>
     <string name="formula_function_length">String Lengte</string>
     <string name="formula_function_substring">Substring</string>
+    <string name="formula_function_chars">Selecteer Tekens</string>
     <string name="formula_function_rot13">Roteer karakters met 13</string>
     <string name="formula_function_rot">Roteer Karakters</string>
     <string name="formula_function_checksum">Controlesom</string>
@@ -1815,6 +1819,7 @@
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
     <string name="user_menu_send_email">E-mail verzenden</string>
+    <string name="user_menu_open_contact">Zoeken in contacten</string>
     <string name="user_unknown">Onbekende gebruiker</string>
     <!-- navigation -->
     <string name="navigation">Navigatie</string>
@@ -2341,6 +2346,7 @@
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="routes_tracks_color">Kleur selecteren</string>
+    <string name="routes_tracks_change_name">Naam wijzigen</string>
     <string name="center">Midden</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
