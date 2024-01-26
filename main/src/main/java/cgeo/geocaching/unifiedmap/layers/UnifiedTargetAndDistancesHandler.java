@@ -34,7 +34,6 @@ import android.widget.TextView;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -194,10 +193,8 @@ public class UnifiedTargetAndDistancesHandler {
         updateDistanceViews();
     }
 
-    public static Pair<Integer, String> buildElevationInfo(final float elevation) {
-        // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
-        final String temp = !Float.isNaN(elevation) ? String.format(Locale.getDefault(), "%.1f", elevation) : "";
-        return new Pair<>(R.drawable.elevation, !StringUtils.isBlank(temp) ? temp + "m" : "");
+    public static Pair<Integer, String> buildElevationInfo(final float elevationInM) {
+        return new Pair<>(R.drawable.elevation, Units.formatElevation(elevationInM));
     }
 
     // target handling ----------------------------------------------------------------------------------------------
