@@ -1,1 +1,0 @@
-To jest wtyczka kontaktów dla c:geo
