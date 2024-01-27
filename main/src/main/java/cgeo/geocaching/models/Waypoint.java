@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -32,6 +33,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class Waypoint implements IWaypoint {
@@ -40,6 +42,8 @@ public class Waypoint implements IWaypoint {
     public static final String CLIPBOARD_PREFIX = "c:geo:WAYPOINT:";
 
     private static final String WP_PREFIX_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    public static final String WP_PROJECTION_CONFIG_KEY = "P";
     private static final int ORDER_UNDEFINED = -2;
 
     public static final int NEW_ID = -1;
@@ -659,5 +663,34 @@ public class Waypoint implements IWaypoint {
             }
         }
         return applyDistanceRule;
+    }
+
+
+    public int setProjectionFromConfig(final String config, final int startIdx) {
+        if (config == null || startIdx < 0 || startIdx >= config.length()) {
+            return -1;
+        }
+        final String configToUse = config.substring(startIdx).trim();
+        if (!configToUse.startsWith("{" + WP_PROJECTION_CONFIG_KEY + "|")) {
+            return -1;
+        }
+
+        final TextParser tp = new TextParser(config);
+        tp.parseUntil('|');
+        final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
+        this.projectionType = tokens.size() > 0 ? EnumUtils.getEnum(ProjectionType.class, tokens.get(0), ProjectionType.NO_PROJECTION) : ProjectionType.NO_PROJECTION;
+        this.projectionFormula1 = tokens.size() > 1 ? tokens.get(1) : "";
+        this.projectionFormula2 = tokens.size() > 2 ? tokens.get(2) : "";
+        this.projectionDistanceUnit = tokens.size() > 3 ? EnumUtils.getEnum(DistanceUnit.class, tokens.get(3), DistanceUnit.getDefaultUnit(false)) : DistanceUnit.getDefaultUnit(false);
+        return tp.pos() + startIdx;
+    }
+
+    public String getProjectionConfig() {
+        return "{" + WP_PROJECTION_CONFIG_KEY +
+            "|" + this.projectionType.name() +
+            "|" + (this.projectionFormula1 == null ? "" : this.projectionFormula1) +
+            "|" + (this.projectionFormula2 == null ? "" : this.projectionFormula2) +
+            "|" + this.projectionDistanceUnit.name() +
+            '}';
     }
 }
