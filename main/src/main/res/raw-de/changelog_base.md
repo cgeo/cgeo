@@ -6,6 +6,7 @@
 - Änderung: Cache/Wegpunkt-Details auf nicht-blockierende Weise anzeigen
 - Neu: Optional temporäre OAM-Dateien behalten (Kartendownloader, nützlich bei der Verwendung von POI-Dateien mit anderen Apps)
 - Korrektur: Hylly Kartendesign Download-Fehler 404
+- Fix: Elevation info does not respect "use imperial units" setting
 
 ### Cache-Details
 - Änderung: "Sprachausgabe ein-/ausschalten" zu einem Umschalter geändert
@@ -14,7 +15,8 @@
 - Neu: Bearbeiten/Löschen von eigenen Logs
 - Neu: Wegpunkt-Projektion mit Variablen
 - Änderung: Bildauswahl auf jpg, png und gif beschränken
-- Neu: Neue Formel CHARS zum Auswählen mehrerer Zeichen
+- New: New formula CHARS (short form: CH) to select multiple single chars
+- Fix: Wrong result for TRUNC function with negative numbers
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -25,3 +27,4 @@
 - Neu: Integrierte c:geo Kontakte-Funktionalität (externes Addon ist nicht mehr erforderlich)
 - Korrektur: Defaultwerte für Trackable Logs überarbeitet
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
+- Fix: Missing star symbol for changed stored filters
