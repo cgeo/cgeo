@@ -88,10 +88,11 @@ public class FormulaUtils {
 
     public static double trunc(final double value, final int digits) {
         if (digits <= 0) {
-            return Math.floor(value);
+            return value < 0 ? Math.ceil(value) : Math.floor(value);
         }
         final double factor = Math.pow(10, digits);
-        return Math.floor(value * factor) / factor;
+        final double newValue = value * factor;
+        return (newValue < 0 ? Math.ceil(newValue) : Math.floor(newValue)) / factor;
     }
 
     public static String substring(final String value, final int start, final int length) {

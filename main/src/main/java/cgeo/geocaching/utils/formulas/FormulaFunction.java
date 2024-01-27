@@ -41,7 +41,7 @@ public enum FormulaFunction {
             singleValueStringFunction(String::length)),
     SUBSTRING(new String[]{"substring", "sub"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_substring, "Substring", "'';0;1", 1,
             minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), (int) p.getAsInt(1, 0), (int) p.getAsInt(2, 1)))),
-    CHARS(new String[]{"chars"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_chars, "Select Chars", "'';1;2", 1,
+    CHARS(new String[]{"chars", "ch"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_chars, "Select Chars", "'';1;2", 1,
         minMaxParamFunction(1, -1, FormulaUtils::selectChars)),
 
     ROT13("rot13", FunctionGroup.COMPLEX_STRING, R.string.formula_function_rot13, "Rotate characters by 13", "''", 1,

@@ -76,6 +76,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     protected MapsforgeThemeHelper themeHelper;
     protected Map.UpdateListener mapUpdateListener;
     private View mapAttribution;
+    private boolean doReapplyTheme = false;
 
     private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
     private final int rotationWidth = rotationIndicator.getWidth();
@@ -125,7 +126,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     public void onStart() {
         super.onStart();
         initLayers();
-        applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
+        if (doReapplyTheme) {
+            applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
+            doReapplyTheme = false;
+        }
         mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
     }
 
@@ -385,6 +389,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     @Override
     public void selectThemeOptions(final Activity activity) {
         themeHelper.selectMapThemeOptions(activity, currentTileProvider);
+        doReapplyTheme = true;
     }
 
     @Override

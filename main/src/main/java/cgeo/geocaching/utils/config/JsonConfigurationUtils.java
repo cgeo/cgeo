@@ -70,8 +70,8 @@ public final class JsonConfigurationUtils {
         if (jsonConfig1 == null || jsonConfig2 == null) {
             return false;
         }
-        final JsonNode node1 = jsonConfig1.getJsonConfig();
-        final JsonNode node2 = jsonConfig2.getJsonConfig();
+        final JsonNode node1 = toJsonConfig(jsonConfig1);
+        final JsonNode node2 = toJsonConfig(jsonConfig2);
 
         return Objects.equals(node1, node2);
     }
