@@ -1,1 +1,0 @@
-Dette plugin håndterer kontakter for c:geo

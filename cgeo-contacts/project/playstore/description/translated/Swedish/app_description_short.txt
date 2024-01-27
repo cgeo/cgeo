@@ -1,1 +1,0 @@
-Detta är ett kontakt-tillägg för c:geo

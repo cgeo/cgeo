@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">c:geo - mga kontak (pagdugang)</string>
-    <string name="contact_not_found">Ang kontak nga adunay alias/ angga %s kay wala makita. Ipuno ni og una sa kontak na app.</string>
-    <string name="multiple_matches">Daghan og kapareha</string>
-    <!-- permission handling -->
-</resources>

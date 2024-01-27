@@ -7,13 +7,6 @@ files:
     translation: /main/src/main/res/values-%two_letters_code%/%original_file_name%
     translate_attributes: 0
     content_segmentation: 0
-  - source: /cgeo-contacts/res/values/strings.xml
-    translation: /cgeo-contacts/res/values-%two_letters_code%/%original_file_name%
-    translate_attributes: 0
-    content_segmentation: 0
-  - source: /cgeo-contacts/project/playstore/description/_source/*.txt
-    translation: /cgeo-contacts/project/playstore/description/translated/%language%/%original_file_name%
-    content_segmentation: 1
   - source: /main/project/playstore/description/_source/*.txt
     translation: /main/project/playstore/description/translated/%language%/%original_file_name%
     content_segmentation: 1

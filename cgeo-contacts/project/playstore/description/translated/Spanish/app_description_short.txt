@@ -1,1 +1,0 @@
-Este es un plugin de contactos para c:geo
