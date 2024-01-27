@@ -6,6 +6,7 @@
 - Change: Show cache/waypoint details in a non-blocking way
 - New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
 - Fix: Hylly theme download error 404
+- Fix: Elevation info does not respect "use imperial units" setting
 
 ### Λεπτομέρειες κρύπτης
 - Change: Make "Toggle talking" an actual toggle
@@ -14,7 +15,8 @@
 - New: Edit/delete own logs
 - New: Waypoint projection with variables
 - Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS to select multiple single chars
+- New: New formula CHARS (short form: CH) to select multiple single chars
+- Fix: Wrong result for TRUNC function with negative numbers
 
 ### Γενικά
 - New: Tapping on downloader notification opens "pending downloads" view
@@ -25,3 +27,4 @@
 - New: Integrated c:geo contacts addon functionality (external addon no longer required)
 - Fix: Trackable log type defaults reworked
 - Fix: Trackable spotted cache info (website changes)
+- Fix: Missing star symbol for changed stored filters
