@@ -6,6 +6,7 @@
 - Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
 - Nowość: Opcjonalnie zachowuj tymczasowe pliki OAM (pobieranie map, przydatne przy użyciu plików POI w innych aplikacjach)
 - Poprawka: Błąd 404 przy pobieraniu motywu Hylly
+- Fix: Elevation info does not respect "use imperial units" setting
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
@@ -14,7 +15,8 @@
 - New: Edit/delete own logs
 - Nowość: Projekcja punktu nawigacji ze zmiennymi
 - Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
-- Nowość: Nowa formuła CHARS, aby wybrać wiele pojedynczych znaków
+- New: New formula CHARS (short form: CH) to select multiple single chars
+- Fix: Wrong result for TRUNC function with negative numbers
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
@@ -25,3 +27,4 @@
 - Nowość: Zintegrowano dodatek dla kontaktów c:geo (dodatek zewnętrzny nie jest już potrzebny)
 - Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
+- Fix: Missing star symbol for changed stored filters
