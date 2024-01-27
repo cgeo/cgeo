@@ -69,7 +69,6 @@
                 tools:text="hint"
                 android:textColor="@color/colorText"/>
 
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -77,19 +76,35 @@
                 <Button
                     android:id="@+id/more_details"
                     style="@style/button_full_popups"
-                    android:layout_toLeftOf="@id/offline_hint"
+                    android:layout_toLeftOf="@id/buttonbox"
                     android:text="@string/popup_more" />
 
+                <LinearLayout
+                    android:id="@+id/buttonbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal">
+                <Button
+                    android:id="@+id/send_to_whereyougo"
+                    style="@style/button_icon_colored"
+                    app:icon="@drawable/icon_whereyougo"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <Button
+                    android:id="@+id/send_to_alc"
+                    style="@style/button_icon_colored"
+                    app:icon="@drawable/icon_gc_alc"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
                 <Button
                     android:id="@+id/offline_hint"
                     style="@style/button_icon"
                     app:icon="@drawable/ic_menu_hint"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_alignBaseline="@id/more_details"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"
                     tools:visibility="visible"/>
+                </LinearLayout>
 
             </RelativeLayout>
 

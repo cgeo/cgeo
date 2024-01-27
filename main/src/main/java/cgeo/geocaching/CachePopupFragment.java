@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
@@ -16,6 +17,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.CacheUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
@@ -144,6 +146,22 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
 
             addCacheDetails(false);
+
+            // Wherigo
+            if (WhereYouGoApp.isWherigo(cache)) {
+                binding.sendToWhereyougo.setVisibility(View.VISIBLE);
+                CacheUtils.setWherigoLink(getActivity(), cache, binding.sendToWhereyougo);
+            } else {
+                binding.sendToWhereyougo.setVisibility(View.GONE);
+            }
+
+            // ALC
+            if (CacheUtils.isLabAdventure(cache)) {
+                binding.sendToAlc.setVisibility(View.VISIBLE);
+                CacheUtils.setLabLink(getActivity(), cache, binding.sendToAlc, cache.getUrl());
+            } else {
+                binding.sendToAlc.setVisibility(View.GONE);
+            }
 
             // offline use
             CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
