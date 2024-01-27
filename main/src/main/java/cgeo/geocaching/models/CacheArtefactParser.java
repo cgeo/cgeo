@@ -1,5 +1,6 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -192,7 +193,7 @@ public class CacheArtefactParser {
 
         //create the waypoint
         final Waypoint waypoint = new Waypoint(name, wpType, true);
-        waypoint.setCoords(point);
+        waypoint.setPreprojectedCoords(point);
         waypoint.setPrefix(prefix);
         waypoint.setVisited(isVisited);
 
@@ -208,14 +209,21 @@ public class CacheArtefactParser {
                 return null;
             }
             waypoint.setCalcStateConfig(cc.toConfig());
-            // try to evaluate valid coordinates
-            if (this.cache != null && this.cache.getVariables() != null) {
-                waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
-            }
-
             afterCoords = configAndMore.substring(parseEnd);
         }
 
+        //try to get a projection
+        final int pidx = waypoint.setProjectionFromConfig(afterCoords, 0);
+        if (pidx > 0) {
+            afterCoords = afterCoords.substring(pidx);
+        } else {
+            waypoint.setCoords(point);
+        }
+
+        //recalculate waypoint coord if necessary / possible
+        if (this.cache != null && this.cache.getVariables() != null) {
+            waypoint.recalculateVariableDependentValues(this.cache.getVariables());
+        }
         // parse calculated coordinates in legacy format
         if (LEGACY_PARSING_COORD_FORMULA.equals(matchedText)) {
 
@@ -461,6 +469,11 @@ public class CacheArtefactParser {
             }
         }
 
+        //projection
+        if (wp.getProjectionType() != ProjectionType.NO_PROJECTION) {
+            sb.append(wp.getProjectionConfig());
+        }
+
         //user note
         final String userNote = wp.getUserNote();
         if (!StringUtils.isBlank(userNote)) {
@@ -479,6 +492,7 @@ public class CacheArtefactParser {
         if (cc.isFilled()) {
             sb.append(cc.toConfig());
         }
+
         return sb.toString();
     }
 
