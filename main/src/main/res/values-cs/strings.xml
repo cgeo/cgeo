@@ -319,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
     <string name="confirm_discard_changes">Zahodit neuložené změny?</string>
+    <string name="confirm_unsent_changes_title">Neodeslané změny</string>
+    <string name="confirm_unsent_changes">Zahodit neodeslané změny?</string>
     <string name="confirm_discard_wp_changes">Zahodit neuložené změny trasových bodů?</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
@@ -1010,6 +1012,7 @@
     <string name="init_backup_unavailable">není k dispozici</string>
     <string name="init_backup_last_no">Nenalezen žádný soubor se zálohou.</string>
     <string name="init_restore_version_error">Neočekávaný formát - databázi nelze obnovit.\n\nOčekávaná verze je %1$d,\nzáloha má verzi %2$d</string>
+    <string name="backup_tracks_error">Chyba při vytváření zálohy tras.</string>
     <string name="settings_title_backup">Zálohovat / Obnovit</string>
     <string name="settings_summary_backup">Vytváří zálohu a obnovuje údaje o keškách/trasových bodech a nastavení programu.</string>
     <string name="init_backup_settings_logins">Zálohovat data o účtu</string>
@@ -1636,6 +1639,7 @@
     <string name="projection_type_none">Bez projekce</string>
     <string name="projection_type_bearing">Azimut</string>
     <string name="projection_type_bearing_info">Azimut %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Azimut v °</string>
     <string name="projection_type_bearing_hint_distance">Vzdálenost</string>
     <string name="projection_type_offset">Posun</string>
     <string name="projection_type_offset_info">Posun šířka %1$s mm, délka %2$s mm</string>
@@ -1845,6 +1849,7 @@
     <string name="user_menu_open_browser">Otevřít profil v prohlížeči</string>
     <string name="user_menu_send_message">Odeslat zprávu</string>
     <string name="user_menu_send_email">Poslat e-mail</string>
+    <string name="user_menu_open_contact">Hledat v kontaktech</string>
     <string name="user_unknown">Neznámý uživatel</string>
     <!-- navigation -->
     <string name="navigation">Navigace</string>
@@ -2401,6 +2406,7 @@
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
     <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="routes_tracks_color">Vyberte barvu</string>
+    <string name="routes_tracks_change_name">Změnit název</string>
     <string name="center">Vycentrovat</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
