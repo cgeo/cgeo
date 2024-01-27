@@ -6,6 +6,7 @@
 - Wijziging: Toon cache/waypoint details op een niet-blokkerende manier
 - Nieuw: Optioneel tijdelijke OAM bestanden behouden (kaart downloader, nuttig bij het gebruik van POI bestanden met andere apps)
 - Fix: Hylly thema download 404 fout
+- Fix: Elevation info does not respect "use imperial units" setting
 
 ### Cache details
 - Wijziging: Maak "Wissel praten" een daadwerkelijke schakelaar
@@ -14,7 +15,8 @@
 - Nieuw: Bewerk/verwijder eigen logs
 - Nieuw: Waypoint projectie met variabelen
 - Wijziging: Selectie van afbeeldingen beperken tot de typen jpg, png, gif
-- Nieuw: Nieuwe formule CHARS om meerdere enkele tekens te selecteren
+- New: New formula CHARS (short form: CH) to select multiple single chars
+- Fix: Wrong result for TRUNC function with negative numbers
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
@@ -25,3 +27,4 @@
 - Nieuw: c:geo contacten addon functionaliteit geïntegreerd (externe addon is niet langer nodig)
 - Oplossing: Standaard trackable logtype herschreven
 - Oplossing: Trackable gespotte cache info (website wijzigingen)
+- Fix: Missing star symbol for changed stored filters
