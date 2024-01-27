@@ -29,6 +29,10 @@ public class WhereYouGoApp extends AbstractGeneralApp {
 
     @Override
     public boolean isEnabled(@NonNull final Geocache cache) {
+        return isWherigo(cache);
+    }
+
+    public static boolean isWherigo(@NonNull final Geocache cache) {
         return cache.getType() == CacheType.WHERIGO && StringUtils.isNotEmpty(getWhereIGoUrl(cache));
     }
 
