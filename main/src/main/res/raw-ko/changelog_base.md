@@ -6,6 +6,7 @@
 - 변경: 캐시/지점 세부 정보를 비차단 방식으로 표시
 - 신규: 선택적으로 임시 OAM 파일 유지 (지도 다운로더, 다른 앱에서 POI 파일을 사용할 때 유용함)
 - Fix: Hylly theme download error 404
+- Fix: Elevation info does not respect "use imperial units" setting
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
@@ -14,7 +15,8 @@
 - 신규: 회원님의 로그 편집/삭제
 - New: Waypoint projection with variables
 - Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS to select multiple single chars
+- New: New formula CHARS (short form: CH) to select multiple single chars
+- Fix: Wrong result for TRUNC function with negative numbers
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
@@ -25,3 +27,4 @@
 - New: Integrated c:geo contacts addon functionality (external addon no longer required)
 - Fix: Trackable log type defaults reworked
 - Fix: Trackable spotted cache info (website changes)
+- Fix: Missing star symbol for changed stored filters
