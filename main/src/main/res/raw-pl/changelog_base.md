@@ -6,17 +6,17 @@
 - Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
 - Nowość: Opcjonalnie zachowuj tymczasowe pliki OAM (pobieranie map, przydatne przy użyciu plików POI w innych aplikacjach)
 - Poprawka: Błąd 404 przy pobieraniu motywu Hylly
-- Fix: Elevation info does not respect "use imperial units" setting
+- Poprawka: Informacja o ukształtowaniu terenu nie jest zgodna z ustawieniem „Używaj angielskich jednostek miary”
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
 - Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
 - Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
-- New: Edit/delete own logs
+- Nowość: Edycja/usuwanie własnych wpisów do dziennika znalezień
 - Nowość: Projekcja punktu nawigacji ze zmiennymi
 - Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
-- New: New formula CHARS (short form: CH) to select multiple single chars
-- Fix: Wrong result for TRUNC function with negative numbers
+- Nowość: Nowa formuła CHARS (krótka forma: CH), aby wybrać wiele pojedynczych znaków
+- Poprawka: Niewłaściwy wynik dla funkcji TRUNC z ujemnymi liczbami
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
@@ -27,4 +27,4 @@
 - Nowość: Zintegrowano dodatek dla kontaktów c:geo (dodatek zewnętrzny nie jest już potrzebny)
 - Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
-- Fix: Missing star symbol for changed stored filters
+- Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
