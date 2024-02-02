@@ -28,3 +28,4 @@
 - Fix: Trackable log type defaults reworked
 - Fix: Trackable spotted cache info (website changes)
 - Fix: Missing star symbol for changed stored filters
+- Fix: Keyword search field displays "GC" after performing a search
