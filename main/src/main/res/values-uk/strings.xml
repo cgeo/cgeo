@@ -880,7 +880,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Карта</string>
-    <string name="map_live">Жива карта</string>
     <string name="map_view_map">Перегляд карти</string>
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>
