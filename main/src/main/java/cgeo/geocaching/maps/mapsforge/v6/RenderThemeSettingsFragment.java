@@ -168,7 +168,7 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         info.setIconSpaceReserved(false);
         cat.addPreference(info);
 
-        final SeekbarPreference seek = new SeekbarPreference(context, 10, 500, "", "%",
+        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "", "%",
                 new SeekbarPreference.FactorizeValueMapper(10));
         seek.setDefaultValue(100);
         seek.setKey(prefKey);
