@@ -1531,8 +1531,6 @@
     <string name="imageview_metadata_comment">Kommentar</string>
     <!-- map -->
     <string name="map_map">Karta</string>
-    <string name="map_live">Live karta</string>
-    <string name="map_offline">Offline-kartor</string>
     <string name="map_view_map">Karttyp</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
