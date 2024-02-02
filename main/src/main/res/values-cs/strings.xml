@@ -1718,8 +1718,6 @@
     <string name="imageview_metadata_comment">Komentář</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Živá mapa</string>
-    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
