@@ -740,7 +740,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Hartă</string>
-    <string name="map_live">Hartă</string>
     <string name="map_view_map">Hărţi</string>
     <string name="onetime_mapthemefixslow_title">Repară randarea înceată a tematicii hărții</string>
     <string name="map_theme_select">Alege un stil pentru hartă</string>
