@@ -1344,8 +1344,6 @@
     <string name="imageview_metadata_comment">Yorum</string>
     <!-- map -->
     <string name="map_map">Harita</string>
-    <string name="map_live">Canlı Harita</string>
-    <string name="map_offline">Çevrimdışı harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
