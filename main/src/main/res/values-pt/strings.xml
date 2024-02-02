@@ -1655,8 +1655,6 @@
     <string name="imageview_metadata_comment">Comentário</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa (ligado)</string>
-    <string name="map_offline">Mapa (desligado)</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
