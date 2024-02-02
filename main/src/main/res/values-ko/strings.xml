@@ -1673,8 +1673,6 @@
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- map -->
     <string name="map_map">지도</string>
-    <string name="map_live">라이브 지도</string>
-    <string name="map_offline">오프라인 지도</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
