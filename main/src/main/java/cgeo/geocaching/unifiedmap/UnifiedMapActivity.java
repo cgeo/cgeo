@@ -360,6 +360,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                     mapFragment.setCenter(waypoint.getCoords());
                                 }
                                 viewModel.waypoints.getValue().add(waypoint);
+                                viewModel.waypoints.notifyDataChanged();
                                 viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
                             }
                         } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
