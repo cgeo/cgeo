@@ -28,3 +28,4 @@
 - Oprava: Přepracováno výchozí nastavení sledovatelného logu
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
+- Fix: Keyword search field displays "GC" after performing a search
