@@ -1354,7 +1354,6 @@
     <string name="imageview_metadata_comment">コメント</string>
     <!-- map -->
     <string name="map_map">地図</string>
-    <string name="map_live">オンライン地図</string>
     <string name="map_view_map">地図の変更</string>
     <string name="map_rotation">地図の回転</string>
     <string name="map_dot_mode">小さいアイコンを使用</string>
