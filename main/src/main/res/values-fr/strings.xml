@@ -1622,8 +1622,6 @@
     <string name="imageview_metadata_comment">Commentaire</string>
     <!-- map -->
     <string name="map_map">Carte</string>
-    <string name="map_live">Carte temps réel</string>
-    <string name="map_offline">Carte hors ligne</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
