@@ -644,7 +644,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Zemljevid</string>
-    <string name="map_live">Zemljevid</string>
     <string name="map_view_map">Pogled zemljevida</string>
     <string name="map_theme_select">Izberi temo zemljevida</string>
     <string name="map_live_enable">Vklopi podatke v živo</string>
