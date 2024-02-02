@@ -1313,8 +1313,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Kart</string>
-    <string name="map_live">Live-kart</string>
-    <string name="map_offline">Offline-kart</string>
     <string name="map_view_map">Kart</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
