@@ -1569,8 +1569,6 @@
     <string name="imageview_metadata_comment">Komentár</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Aktívna mapa</string>
-    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
