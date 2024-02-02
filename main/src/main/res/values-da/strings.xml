@@ -1107,7 +1107,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Kort</string>
-    <string name="map_live">Live-kort</string>
     <string name="map_view_map">Kort-view</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
