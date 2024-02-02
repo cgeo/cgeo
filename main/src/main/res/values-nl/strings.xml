@@ -1688,8 +1688,6 @@
     <string name="imageview_metadata_comment">Opmerking</string>
     <!-- map -->
     <string name="map_map">Kaart</string>
-    <string name="map_live">Live kaart</string>
-    <string name="map_offline">Offline kaart</string>
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
