@@ -685,7 +685,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Ang Mapa</string>
-    <string name="map_live">Ang Live na mapa</string>
     <string name="map_view_map">Tanawin ang mapa</string>
     <string name="map_theme_select">Ang Piliin ang tema ng mapa</string>
     <string name="map_live_enable">Ang Paganahin ng buhay</string>
