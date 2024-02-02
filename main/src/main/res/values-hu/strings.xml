@@ -880,7 +880,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Térkép</string>
-    <string name="map_live">Élő térkép</string>
     <string name="map_view_map">Térképek</string>
     <string name="map_dot_mode">Kompakt ikonok használata</string>
     <string name="onetime_mapthemefixslow_title">A lassú térképtéma-megjelenítés javítása</string>
