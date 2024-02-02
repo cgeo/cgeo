@@ -94,6 +94,11 @@ public abstract class AbstractMapFragment extends Fragment {
         return new Viewport(new Geopoint(bb.getMinLatitude(), bb.getMinLongitude()), new Geopoint(bb.getMaxLatitude(), bb.getMaxLongitude()));
     }
 
+    /** map "center" should be at app. 25% from bottom if in driving mode (if supported by map), centered otherwise */
+    public void setDrivingMode(final boolean enabled) {
+        // do nothing per default
+    }
+
 //    protected void setDelayedCenterTo() {
 //        if (delayedCenterTo != null) {
 //            setCenter(delayedCenterTo);
