@@ -1666,8 +1666,6 @@
     <string name="imageview_metadata_comment">Commento</string>
     <!-- map -->
     <string name="map_map">Mappa</string>
-    <string name="map_live">Mappa Live</string>
-    <string name="map_offline">Mappa offline</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
