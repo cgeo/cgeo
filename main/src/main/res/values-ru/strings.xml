@@ -1717,8 +1717,6 @@
     <string name="imageview_metadata_comment">Комментарий</string>
     <!-- map -->
     <string name="map_map">Карта</string>
-    <string name="map_live">Онлайн карта</string>
-    <string name="map_offline">Офлайн-карта</string>
     <string name="map_view_map">Тип карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
