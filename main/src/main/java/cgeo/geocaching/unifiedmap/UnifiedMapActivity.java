@@ -299,7 +299,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void changeMapSource(final AbstractTileProvider newSource, @Nullable final UnifiedMapState mapState) {
         final AbstractTileProvider oldProvider = tileProvider;
-        final AbstractMapFragment oldFragment = mapFragment;
+/*        final AbstractMapFragment oldFragment = mapFragment;
 
         if (oldProvider != null && oldFragment != null) {
             oldFragment.prepareForTileSourceChange();
@@ -313,6 +313,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else {
             mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true, mapState));
         }
+*/
+        tileProvider = newSource;
+        mapFragment = new TestFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mapViewFragment, mapFragment)
