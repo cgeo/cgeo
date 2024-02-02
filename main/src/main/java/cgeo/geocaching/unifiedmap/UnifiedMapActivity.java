@@ -623,6 +623,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if non was delivered to the view-model yet
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
         }
+        checkDrivingMode();
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
@@ -642,6 +643,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.elevation.setValue(locationWrapper.location.hasAltitude() ? (float) locationWrapper.location.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
             }
         }
+    }
+
+    private void checkDrivingMode() {
+        final int mapRotation = Settings.getMapRotation();
+        final boolean shouldBeInDrivingMode = Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE);
+        mapFragment.setDrivingMode(shouldBeInDrivingMode);
     }
 
     // ========================================================================
@@ -850,6 +857,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         Settings.setMapRotation(mapRotation);
         mapFragment.setMapRotation(mapRotation);
         item.setChecked(true);
+        checkDrivingMode();
     }
 
     @Override

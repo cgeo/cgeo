@@ -273,6 +273,11 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
+    public void setDrivingMode(final boolean enabled) {
+        mMap.viewport().setMapViewCenter(0f, enabled ? 0.5f : 0f);
+    }
+
+    @Override
     public void zoomToBounds(final Viewport bounds) {
         zoomToBounds(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()));
     }
