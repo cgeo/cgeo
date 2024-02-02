@@ -1467,8 +1467,6 @@
     <string name="imageview_metadata_comment">Σχόλιο</string>
     <!-- map -->
     <string name="map_map">Χάρτης</string>
-    <string name="map_live">Live Χάρτης</string>
-    <string name="map_offline">Χάρτες χωρίς σύνδεση</string>
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
