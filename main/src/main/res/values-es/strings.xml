@@ -1364,7 +1364,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa activo</string>
     <string name="map_view_map">Elegir mapa</string>
     <string name="map_rotation">Rotación del mapa</string>
     <string name="map_dot_mode">Usar iconos pequeños</string>
