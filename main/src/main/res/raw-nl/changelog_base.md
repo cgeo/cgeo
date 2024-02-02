@@ -28,3 +28,4 @@
 - Oplossing: Standaard trackable logtype herschreven
 - Oplossing: Trackable gespotte cache info (website wijzigingen)
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
+- Fix: Keyword search field displays "GC" after performing a search
