@@ -681,7 +681,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Peta</string>
-    <string name="map_live">Peta hidup</string>
     <string name="map_view_map">Tampilan peta</string>
     <string name="map_theme_select">Pilih tema peta</string>
     <string name="map_live_enable">Aktifkan hidup</string>
