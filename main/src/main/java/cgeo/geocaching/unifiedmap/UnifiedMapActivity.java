@@ -352,6 +352,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     // load cache/waypoint, focus map on it, and set it as target
                     final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
                     if (cache != null) {
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
+                        }
                         viewModel.waypoints.getValue().clear();
                         if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
                             final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
@@ -360,6 +363,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                     mapFragment.setCenter(waypoint.getCoords());
                                 }
                                 viewModel.waypoints.getValue().add(waypoint);
+                                viewModel.waypoints.notifyDataChanged();
                                 viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
                             }
                         } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
@@ -370,9 +374,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             }
                             viewModel.waypoints.getValue().addAll(cache.getWaypoints());
                             viewModel.setTarget(cache.getCoords(), cache.getGeocode());
-                        }
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                         }
                     }
                     break;
@@ -623,6 +624,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if non was delivered to the view-model yet
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
         }
+        checkDrivingMode();
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
@@ -642,6 +644,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.elevation.setValue(locationWrapper.location.hasAltitude() ? (float) locationWrapper.location.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
             }
         }
+    }
+
+    private void checkDrivingMode() {
+        final int mapRotation = Settings.getMapRotation();
+        final boolean shouldBeInDrivingMode = Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE);
+        mapFragment.setDrivingMode(shouldBeInDrivingMode);
     }
 
     // ========================================================================
@@ -850,6 +858,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         Settings.setMapRotation(mapRotation);
         mapFragment.setMapRotation(mapRotation);
         item.setChecked(true);
+        checkDrivingMode();
     }
 
     @Override
