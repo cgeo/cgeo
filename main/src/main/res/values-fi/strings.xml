@@ -1602,8 +1602,6 @@
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- map -->
     <string name="map_map">Kartta</string>
-    <string name="map_live">Live-kartta</string>
-    <string name="map_offline">Offline-kartta</string>
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
