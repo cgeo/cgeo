@@ -282,8 +282,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         setBasicSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
 
         // geocache searches
-        setGeocacheSearchAction(binding.geocode, binding.displayGeocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode);
-        setGeocacheSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        setGeocacheSearchAction(binding.geocode, binding.displayGeocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode, false);
+        setGeocacheSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword, true);
 
         binding.geocode.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
         binding.trackable.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
@@ -357,7 +357,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         button.setOnClickListener(arg0 -> runnable.run());
     }
 
-    private void setGeocacheSearchAction(@NonNull final AutoCompleteTextView editText, @NonNull final Button button, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction) {
+    private void setGeocacheSearchAction(@NonNull final AutoCompleteTextView editText, @NonNull final Button button, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction, final boolean resetToBlank) {
         EditUtils.setActionListener(editText, runnable);
         editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
         editText.setOnItemClickListener((parent, view, position, id) -> {
@@ -365,7 +365,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // as we directly start the cache details activity on item selection,
             // reset the edit text to not confuse the user and to provide a better workflow.
             // use the current cache's prefix as new prefix
-            editText.setText(geocode.substring(0, 2));
+            editText.setText(resetToBlank ? "" : geocode.substring(0, 2));
             findByGeocodeFn(geocode);
         });
         button.setOnClickListener(arg0 -> runnable.run());
