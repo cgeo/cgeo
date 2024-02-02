@@ -28,3 +28,4 @@
 - 수정: 추적아이템 로그 유형 기본값이 재작업되었습니다.
 - 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
 - 수정: 변경된 저장 필터의 별 기호 누락
+- Fix: Keyword search field displays "GC" after performing a search
