@@ -1568,8 +1568,6 @@
     <string name="imageview_metadata_comment">Komentaras</string>
     <!-- map -->
     <string name="map_map">Žemėlapis</string>
-    <string name="map_live">Žemėlapis gyvai</string>
-    <string name="map_offline">Žemėlapis neprisijungus</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio pasukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
