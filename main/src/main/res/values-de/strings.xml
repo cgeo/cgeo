@@ -1688,8 +1688,6 @@
     <string name="imageview_metadata_comment">Kommentar</string>
     <!-- map -->
     <string name="map_map">Karte</string>
-    <string name="map_live">Live-Karte</string>
-    <string name="map_offline">Offline-Karte</string>
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
