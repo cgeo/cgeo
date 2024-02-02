@@ -28,3 +28,4 @@
 - Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
+- Fix: Keyword search field displays "GC" after performing a search
