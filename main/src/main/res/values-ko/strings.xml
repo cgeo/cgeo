@@ -319,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">죄송합니다만, 적절한 해당 서비스 설정화면이 없습니다.</string>
     <string name="confirm_unsaved_changes_title">저장되지 않은 변경사항</string>
     <string name="confirm_discard_changes">저장되지 않은 변경사항을 삭제하시겠습니까?</string>
+    <string name="confirm_unsent_changes_title">전송되지 않은 변경사항</string>
+    <string name="confirm_unsent_changes">전송되지 않은 변경사항을 삭제하시겠습니까?</string>
     <string name="confirm_discard_wp_changes">저장되지 않은 지점 변경을 삭제하시겠습니까?</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
@@ -992,6 +994,7 @@
     <string name="init_backup_unavailable">사용할 수 없음</string>
     <string name="init_backup_last_no">백업할 파일이 없습니다.</string>
     <string name="init_restore_version_error">예기치 않은 형식-데이터베이스를 복원 할 수 없습니다.\n\n예상 버전은 %1$d이고\n백업 버전은 %2$d입니다.</string>
+    <string name="backup_tracks_error">트랙 백업을 만드는 중 오류가 발생했습니다.</string>
     <string name="settings_title_backup">백업 / 복원</string>
     <string name="settings_summary_backup">캐시 / 웨이포인트 데이터 및 프로그램 설정의 백업 및 복원을 수행합니다.</string>
     <string name="init_backup_settings_logins">계정 데이터 백업</string>
@@ -1670,8 +1673,6 @@
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- map -->
     <string name="map_map">지도</string>
-    <string name="map_live">라이브 지도</string>
-    <string name="map_offline">오프라인 지도</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
@@ -1801,6 +1802,7 @@
     <string name="user_menu_open_browser">브라우저에서 회원정보 열기</string>
     <string name="user_menu_send_message">메시지 보내기</string>
     <string name="user_menu_send_email">이메일 보내기</string>
+    <string name="user_menu_open_contact">연락처에서 검색</string>
     <string name="user_unknown">알 수 없는 사용자</string>
     <!-- navigation -->
     <string name="navigation">길찾기</string>
@@ -2312,6 +2314,7 @@
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
     <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="routes_tracks_color">색상 선택</string>
+    <string name="routes_tracks_change_name">이름 변경</string>
     <string name="center">중앙</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
