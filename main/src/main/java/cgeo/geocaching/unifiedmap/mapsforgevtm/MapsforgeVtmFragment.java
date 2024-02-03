@@ -111,58 +111,12 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                 }
                 viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
             }
-//            if (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT) {
-//                activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));
-//            }
         };
         mMap.events.bind(mapUpdateListener);
 
         if (onMapReadyTasks != null) {
             onMapReadyTasks.run();
         }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        initLayers();
-        if (doReapplyTheme) {
-            applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
-            doReapplyTheme = false;
-        }
-        mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
-
-    }
-
-    @Override
-    public void onPause() {
-        mMapView.onPause();
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroyView() {
-        mMapView.onDestroy();
-        themeHelper.disposeTheme();
-        super.onDestroyView();
-    }
-
-    @Override
-    public boolean supportsTileSource(final AbstractTileProvider newSource) {
-        return newSource instanceof AbstractMapsforgeTileProvider;
-    }
-
-    @Override
-    public void setTileSource(final AbstractTileProvider newSource) {
-        super.setTileSource(newSource);
-        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
-        startMap();
     }
 
     private void startMap() {
@@ -230,6 +184,50 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     }
 
+
+    // ========================================================================
+    // lifecycle methods
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initLayers();
+        if (doReapplyTheme) {
+            applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
+            doReapplyTheme = false;
+        }
+        mMapLayers.add(new MapsforgeVtmFragment.MapEventsReceiver(mMap));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+
+    }
+
+    @Override
+    public void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroyView() {
+        mMapView.onDestroy();
+        themeHelper.disposeTheme();
+        super.onDestroyView();
+    }
+
+
+    // ========================================================================
+    // tilesource handling
+
+    @Override
+    public boolean supportsTileSource(final AbstractTileProvider newSource) {
+        return newSource instanceof AbstractMapsforgeTileProvider;
+    }
+
     @Override
     public void prepareForTileSourceChange() {
         // remove layers from currently displayed Mapsforge map
@@ -250,9 +248,60 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
+    public void setTileSource(final AbstractTileProvider newSource) {
+        super.setTileSource(newSource);
+        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
+        startMap();
+    }
+
+
+    // ========================================================================
+    // layer handling
+
+    @Override
     public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
         return new MapsforgeVtmGeoItemLayer(mMap, mMapLayers);
     }
+
+    /**
+     * call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider
+     */
+    public synchronized TileLayer setBaseMap(final TileSource tileSource) {
+        removeBaseMap();
+
+        final VectorTileLayer l = new OsmTileLayer(mMap);
+        l.setTileSource(tileSource);
+        addLayerToGroup(l, LayerHelper.ZINDEX_BASEMAP);
+        baseMap = l;
+        return baseMap;
+    }
+
+    private void removeBaseMap() {
+        if (baseMap != null) {
+            mMapLayers.removeGroup(LayerHelper.ZINDEX_BASEMAP);
+        }
+        baseMap = null;
+    }
+
+    /**
+     * call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider
+     */
+    public synchronized void addLayer(final int index, final Layer layer) {
+        layers.add(layer);
+        mMapLayers.addToGroup(layer, index);
+    }
+
+    public synchronized void addLayerToGroup(final Layer layer, final int groupIndex) {
+        mMapLayers.addToGroup(layer, groupIndex);
+    }
+
+    public synchronized void clearGroup(final int groupIndex) {
+        mMapLayers.removeGroup(groupIndex);
+    }
+
+
+    // ========================================================================
+    // position related methods
 
     @Override
     public void setCenter(final Geopoint geopoint) {
@@ -276,6 +325,10 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     public void setDrivingMode(final boolean enabled) {
         mMap.viewport().setMapViewCenter(0f, enabled ? 0.5f : 0f);
     }
+
+
+    // ========================================================================
+    // zoom, bearing & heading methods
 
     @Override
     public void zoomToBounds(final Viewport bounds) {
@@ -347,41 +400,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
     }
 
-    /**
-     * call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider
-     */
-    public synchronized TileLayer setBaseMap(final TileSource tileSource) {
-        removeBaseMap();
-
-        final VectorTileLayer l = new OsmTileLayer(mMap);
-        l.setTileSource(tileSource);
-        addLayerToGroup(l, LayerHelper.ZINDEX_BASEMAP);
-        baseMap = l;
-        return baseMap;
-    }
-
-    private void removeBaseMap() {
-        if (baseMap != null) {
-            mMapLayers.removeGroup(LayerHelper.ZINDEX_BASEMAP);
-        }
-        baseMap = null;
-    }
-
-    /**
-     * call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider
-     */
-    public synchronized void addLayer(final int index, final Layer layer) {
-        layers.add(layer);
-        mMapLayers.addToGroup(layer, index);
-    }
-
-    public synchronized void addLayerToGroup(final Layer layer, final int groupIndex) {
-        mMapLayers.addToGroup(layer, groupIndex);
-    }
-
-    public synchronized void clearGroup(final int groupIndex) {
-        mMapLayers.removeGroup(groupIndex);
-    }
 
     // ========================================================================
     // theme & language related methods
@@ -421,10 +439,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
 
+    // ========================================================================
+    // Tap handling methods
 
-//    // ========================================================================
-//    // Tap handling methods
-//
     class MapEventsReceiver extends Layer implements GestureListener {
 
         MapEventsReceiver(final Map map) {
