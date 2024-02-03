@@ -1,5 +1,5 @@
 ### 지도
-- 새로 고침: [통합 지도](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (베타), 설정 => 지도 원본 => 통합 지도 참조
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - 신규: 다운로드 관리자에서 기존 다운로드 강조 표시
 - 신규: 지점 아이콘에 캐시 찾음 상태 표시
 - 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
