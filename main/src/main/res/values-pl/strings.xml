@@ -1718,6 +1718,8 @@
     <string name="imageview_metadata_comment">Komentarz</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
+    <string name="map_live">Na żywo</string>
+    <string name="map_offline">Offline</string>
     <string name="map_view_map">Widok mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
