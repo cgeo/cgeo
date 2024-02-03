@@ -1,5 +1,5 @@
 ### Kart
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - New: Highlight existing downloads in download manager
 - New: Show cache's found state on waypoint icons
 - New: Long-tap option to connect a cache with its waypoints by lines
