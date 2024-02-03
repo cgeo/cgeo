@@ -1594,7 +1594,6 @@
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Angolo in gradi</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
@@ -1667,8 +1666,6 @@
     <string name="imageview_metadata_comment">Commento</string>
     <!-- map -->
     <string name="map_map">Mappa</string>
-    <string name="map_live">Mappa Live</string>
-    <string name="map_offline">Mappa offline</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
