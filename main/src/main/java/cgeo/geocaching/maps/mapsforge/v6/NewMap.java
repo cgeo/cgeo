@@ -271,7 +271,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         ActivityMixin.setTheme(this);
 
         // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
-        HideActionBarUtils.setContentView(this, MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot(), true);
+        setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
 
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);

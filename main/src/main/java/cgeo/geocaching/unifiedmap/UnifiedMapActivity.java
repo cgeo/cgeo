@@ -154,7 +154,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        setContentView(R.layout.unifiedmap_activity);
 
         viewModel = new ViewModelProvider(this).get(UnifiedMapViewModel.class);
 
