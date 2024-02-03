@@ -679,14 +679,12 @@
     <string name="from_clipboard">Ang Mula sa clipboard</string>
     <string name="copy_to_clipboard">Ang Kopyahin sa clipboard</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Ang tindig sa °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Ang Mapa</string>
-    <string name="map_live">Ang Live na mapa</string>
     <string name="map_view_map">Tanawin ang mapa</string>
     <string name="map_theme_select">Ang Piliin ang tema ng mapa</string>
     <string name="map_live_enable">Ang Paganahin ng buhay</string>

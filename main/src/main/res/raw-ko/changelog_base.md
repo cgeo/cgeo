@@ -1,27 +1,31 @@
 ### 지도
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - 신규: 다운로드 관리자에서 기존 다운로드 강조 표시
 - 신규: 지점 아이콘에 캐시 찾음 상태 표시
 - 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
 - 변경: 캐시/지점 세부 정보를 비차단 방식으로 표시
 - 신규: 선택적으로 임시 OAM 파일 유지 (지도 다운로더, 다른 앱에서 POI 파일을 사용할 때 유용함)
-- Fix: Hylly theme download error 404
+- 수정: Hylly 테마 다운로드 오류 404
+- 수정: 입면 정보가 "제국 단위 사용" 설정을 존중하지 않습니다
 
 ### 캐시 상세정보
 - 변경: "전환 말하기"는 이제 실제 전환입니다.
 - 변경: geocaching.com의 최대 로그 길이 증가
 - 수정: 오픈캐싱 사이트에 더 긴 개인 메모를 업로드할 수 없습니다.
 - 신규: 회원님의 로그 편집/삭제
-- New: Waypoint projection with variables
-- Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS to select multiple single chars
+- 신규: 변수가 있는 지점 투영
+- 변경: 이미지 선택을 jpg, png, gif 유형으로 제한
+- 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS (짧은 형태: CH)
+- 수정: 숫자가 음수인 TRUNC 함수에 대한 잘못된 결과
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
 - 변경: 배경화면을 배경으로 사용하는 데 더 이상 READ_EXTERNAL_STORAGE 권한이 필요하지 않습니다.
 - 신규: 가로 모드 설정을 위한 두 개의 열 레이아웃
 - 수정: 유효한 날짜/시간 정보 없이 백업 복원
-- New: Include active trackfiles in backup
-- New: Integrated c:geo contacts addon functionality (external addon no longer required)
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- 신규: 백업에 활성 트랙 파일 포함
+- 신규: 통합 c:geo 연락처 추가 기능(외부 추가 기능 필요 없음)
+- 수정: 추적아이템 로그 유형 기본값이 재작업되었습니다.
+- 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
+- 수정: 변경된 저장 필터의 별 기호 누락
+- Fix: Keyword search field displays "GC" after performing a search
