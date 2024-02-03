@@ -89,6 +89,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     private CharSequence title;
     private int preferenceContentView = R.id.settings_fragment_root;
+    private String delayedOpenPreference = null;
 
     private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
 
@@ -182,6 +183,18 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                         }
                     }
                 }
+            } else {
+                // Uri starting with "cgeo-setting://" + prefKey value
+                final String data = intent.getDataString();
+                final String scheme = getString(R.string.settings_scheme) + "://";
+                if (data != null && data.startsWith(scheme)) {
+                    final String prefKey = data.substring(scheme.length()).replaceAll("[^A-Za-z0-9_]+", " ").trim();
+                    if (StringUtils.isNotBlank(prefKey)) {
+                        Log.d("external link to: cgeo-settings://" + prefKey);
+                        openRequestedFragment(prefKey);
+                        found = true;
+                    }
+                }
             }
             if (!found) {
                 openRequestedFragment("");
@@ -207,6 +220,10 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
                         fragment = pref.baseKey;
                         break;
                     }
+                }
+                if (StringUtils.isBlank(fragment)) {
+                    delayedOpenPreference = preference;
+                    return;
                 }
             }
         } else {
@@ -399,6 +416,15 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
     private void collectSearchdataCallback(final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> data) {
         synchronized (searchIndex) {
             searchIndex.addAll(data);
+            if (StringUtils.isNotBlank(delayedOpenPreference)) {
+                for (BasePreferenceFragment.PrefSearchDescriptor pref : data) {
+                    if (StringUtils.equals(delayedOpenPreference, pref.prefKey)) {
+                        openRequestedFragment(pref.baseKey, delayedOpenPreference);
+                        delayedOpenPreference = null;
+                        break;
+                    }
+                }
+            }
         }
     }
 

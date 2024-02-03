@@ -55,6 +55,7 @@
     <string translatable="false" name="settings_gc_legal_note_url">https://www.geocaching.com/account/documents/termsofuse</string>
     <string translatable="false" name="settings_send2cgeo_url">https://send2.cgeo.org/</string>
     <string translatable="false" name="settings_facebook_login_url">https://faq.cgeo.org/#facebook-login</string>
+    <string translatable="false" name="settings_scheme">cgeo-setting</string>
 
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
