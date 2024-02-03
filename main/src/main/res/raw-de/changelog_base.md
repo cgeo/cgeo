@@ -1,5 +1,5 @@
 ### Karte
-- Neu: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (Beta), siehe Einstellungen => Kartenquellen => Vereinheitlichte Karte
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 - Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
@@ -28,4 +28,4 @@
 - Korrektur: Defaultwerte für Trackable Logs überarbeitet
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
-- Fix: Keyword search field displays "GC" after performing a search
+- Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
