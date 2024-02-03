@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -400,10 +401,16 @@ public final class UriUtils {
         if (uriPerm == null) {
             return "---";
         }
-        return uriPerm.getUri() + " (" + Formatter.formatShortDateTime(uriPerm.getPersistedTime()) +
+        return uriToString(uriPerm.getUri()) + " (" + Formatter.formatShortDateTime(uriPerm.getPersistedTime()) +
                 "):" + (uriPerm.isReadPermission() ? "R" : "-") + (uriPerm.isWritePermission() ? "W" : "-");
     }
 
+    /**
+     * toString()-method for {@link Uri}
+     */
+    public static String uriToString(final Uri uri) {
+        return uri == null ? "---" : URLDecoder.decode(uri.toString());
+    }
 
     /**
      * Returns a PSEUDO-Tree-Uri based on the given path. This URI can be used e.g. as EXTRA_INITIAL_URI when requesting access to a folder
