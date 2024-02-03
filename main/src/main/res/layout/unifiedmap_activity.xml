@@ -13,8 +13,8 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/mapViewFragment"
+        <org.oscim.android.MapView
+            android:id="@+id/mapView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

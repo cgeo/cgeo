@@ -38,7 +38,9 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
@@ -57,9 +59,9 @@ import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -71,6 +73,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
+import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -90,6 +93,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -110,13 +114,17 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.oscim.android.MapView;
 import org.oscim.core.BoundingBox;
+import org.oscim.theme.IRenderTheme;
 
 public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
@@ -130,7 +138,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
-    private AbstractMapFragment mapFragment = null;
+
+    private TestFragment mapFragment;
+    private MapView mapView;
+    private IRenderTheme theme;
+
     private final List<GeoItemLayer<?>> layers = new ArrayList<>();
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
@@ -224,7 +236,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.init(routeTrackUtils);
 
         final UnifiedMapState mapState = savedInstanceState != null ? savedInstanceState.getParcelable(BUNDLE_MAPSTATE) : null;
-        changeMapSource(Settings.getTileProvider(), mapState);
+//        changeMapSource(Settings.getTileProvider(), mapState);
+
+        // Open map
+        mapView = findViewById(R.id.mapView);
+        final List<ImmutablePair<String, Uri>> offlineMaps =
+                CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("berlin (oam).map") && isValidMapFile(fi.uri))
+                        .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+        mapFragment = new TestFragment(this, mapView, null);
+        mapFragment.loadMap(offlineMaps.get(0).right); // berlin (oam).map
+        mapFragment.loadTheme(null);
+
+
 
         FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapType.filterContext);
@@ -273,7 +297,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     public AbstractMapFragment getMapFragment() {
-        return mapFragment;
+        return null; //mapFragment;
     }
 
     public List<GeoItemLayer<?>> getLayers() {
@@ -297,34 +321,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    private void changeMapSource(final AbstractTileProvider newSource, @Nullable final UnifiedMapState mapState) {
-        final AbstractTileProvider oldProvider = tileProvider;
-        final AbstractMapFragment oldFragment = mapFragment;
-
-        if (oldProvider != null && oldFragment != null) {
-            oldFragment.prepareForTileSourceChange();
-        }
-        tileProvider = newSource;
-//        if (oldFragment == null || !oldFragment.supportsTileSource(tileProvider)) {
-        mapFragment = tileProvider.createMapFragment();
-
-        if (oldFragment != null) {
-            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true, mapState));
-        } else {
-            mapFragment.init(Settings.getMapZoom(compatibilityMapMode), null, () -> onMapReadyTasks(newSource, true, mapState));
-        }
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.mapViewFragment, mapFragment)
-                .commit();
-//        } else {
-//            onMapReadyTasks(newSource, false);
-//        }
-    }
-
     private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged, @Nullable final UnifiedMapState mapState) {
         TileProviderFactory.resetLanguages();
-        mapFragment.setTileSource(newSource);
+//        mapFragment.setTileSource(newSource);
         Settings.setTileProvider(newSource);
 
 //        tileProvider.getMap().showSpinner(); - should be handled from UnifiedMapActivity instead
@@ -732,10 +731,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         menu.findItem(R.id.menu_map_rotation_auto_precise).setVisible(true); // UnifiedMap supports high precision auto-rotate
 
         // theming options
+/*
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
         menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
-
+*/
         menu.findItem(R.id.menu_as_list).setVisible(true);
         MapUtils.onPrepareOptionsMenu(menu);
 
@@ -805,9 +805,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     .collect(Collectors.toSet());
             CacheDownloaderService.downloadCaches(this, geocodes, false, false, () -> viewModel.caches.notifyDataChanged());
         } else if (id == R.id.menu_theme_mode) {
-            mapFragment.selectTheme(this);
+//            mapFragment.selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
-            mapFragment.selectThemeOptions(this);
+//            mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
         } else if (id == R.id.menu_select_mapview) {
@@ -832,19 +832,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
                 Settings.setMapLanguage(language);
-                mapFragment.setPreferredLanguage(language);
+//                mapFragment.setPreferredLanguage(language);
                 return true;
             }
             final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
             if (tileProviderLocal != null) {
                 item.setChecked(true);
-                changeMapSource(tileProviderLocal, getCurrentMapState());
+//                changeMapSource(tileProviderLocal, getCurrentMapState());
                 return true;
             }
-            if (mapFragment.onOptionsItemSelected(item)) {
+/*            if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
             }
-            return super.onOptionsItemSelected(item);
+*/            return super.onOptionsItemSelected(item);
         }
         return true;
     }
