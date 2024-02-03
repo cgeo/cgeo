@@ -363,7 +363,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                     mapFragment.setCenter(waypoint.getCoords());
                                 }
                                 viewModel.waypoints.getValue().add(waypoint);
-                                viewModel.waypoints.notifyDataChanged();
                                 viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
                             }
                         } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
@@ -375,6 +374,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             viewModel.waypoints.getValue().addAll(cache.getWaypoints());
                             viewModel.setTarget(cache.getCoords(), cache.getGeocode());
                         }
+                        viewModel.waypoints.notifyDataChanged();
                     }
                     break;
                 case UMTT_TargetCoords:
@@ -476,8 +476,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             Log.d("load.waypoints: " + waypoints.size());
             MapUtils.filter(waypoints, activity.getFilterContext());
             viewModel.waypoints.getValue().addAll(waypoints);
-            viewModel.waypoints.postNotifyDataChanged();
         }
+        viewModel.waypoints.postNotifyDataChanged();
     }
 
     private void updateCacheCountSubtitle() {
