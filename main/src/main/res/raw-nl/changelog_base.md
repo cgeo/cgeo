@@ -1,5 +1,5 @@
 ### Kaart
-- Nieuw: [Gecombineerde Kaart](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zie Instellingen => Kaart Bronnen => Gecombineerde Kaart
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nieuw: Markeer bestaande downloads in downloadbeheer
 - Nieuw: Toon cache gevonden status op waypoint iconen
 - Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
@@ -28,4 +28,4 @@
 - Oplossing: Standaard trackable logtype herschreven
 - Oplossing: Trackable gespotte cache info (website wijzigingen)
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
-- Fix: Keyword search field displays "GC" after performing a search
+- Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
