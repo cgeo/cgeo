@@ -186,9 +186,8 @@ public final class SystemInformation {
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
         final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
-        body.append("\n\nStored Filters (#").append(storedFilters.size()).append("):");
-        for (GeocacheFilter storedFilter : storedFilters) {
-            body.append("\n- ").append(storedFilter.getName()).append(": ").append(storedFilter.toConfig()).append(")");
+        if (storedFilters.size() > 0) {
+            body.append("\n- ").append("Additional stored filters: ").append(storedFilters.size());
         }
     }
 
@@ -222,10 +221,13 @@ public final class SystemInformation {
             final boolean isAvailable = ContentStorage.get().ensureFolder(folder);
             final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
-            body.append("\n  - ").append(folder)
-                    .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
-                    .append(", Av:").append(isAvailable).append(", ").append(folderInfo)
-                    .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
+            body.append("\n  - ").append(folder.name()).append(": ")
+                    .append(UriUtils.uriToString(ContentStorage.get().getUriForFolder(folder.getFolder())))
+                    .append(" (av:").append(isAvailable)
+                    .append(", files:>=").append(folderInfo.fileCount)
+                    .append(", size:>=").append(Formatter.formatBytes(folderInfo.totalFileSize))
+                    .append(", free:>=").append(Formatter.formatBytes(freeSpace.left))
+                    .append(")");
         }
     }
 
