@@ -1,5 +1,5 @@
 ### Mapa
-- Nowość: [ujednolicona mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zobacz Ustawienia => Źródła mapy => Ujednolicona mapa
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
@@ -28,4 +28,4 @@
 - Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
-- Fix: Keyword search field displays "GC" after performing a search
+- Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania
