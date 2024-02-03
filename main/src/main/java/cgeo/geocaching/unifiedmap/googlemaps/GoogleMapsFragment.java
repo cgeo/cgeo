@@ -52,7 +52,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         super(R.layout.unifiedmap_googlemaps_fragment);
     }
 
-
     @Override
     public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -113,16 +112,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
         ((TouchableWrapper) (requireView().findViewById(R.id.mapViewGMWrapper))).setOnTouch(gestureDetector::onTouchEvent);
 
-//        googleMap.setOnMapClickListener(latLng -> {
-//            if (activityRef.get() != null) {
-//                final ActionBar actionBar = activityRef.get().getSupportActionBar();
-//                if (actionBar != null) {
-//                    adaptLayoutForActionbar(activityRef.get(), googleMap, actionBar.isShowing());
-//                }
-//            }
-//        });
-//        adaptLayoutForActionbar(activityRef.get(), googleMap, true);
-
         lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
         scaleDrawer.setImageView(requireActivity().findViewById(R.id.scale));
 
@@ -139,18 +128,17 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             viewModel.mapCenter.setValue(getCenter());
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
-//            if (activityMapChangeListener != null) {
-//                final CameraPosition pos = mMap.getCameraPosition();
-//                activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
-//            }
         });
 
         adaptLayoutForActionbar(true);
 
-
         initLayers();
         onMapReadyTasks.run();
     }
+
+
+    // ========================================================================
+    // lifecycle methods
 
     @Override
     public void onStart() {
@@ -159,6 +147,10 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             initLayers();
         }
     }
+
+
+    // ========================================================================
+    // tilesource handling
 
     @Override
     public boolean supportsTileSource(final AbstractTileProvider newSource) {
@@ -171,10 +163,18 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
     }
 
+
+    // ========================================================================
+    // layer handling
+
     @Override
     public IProviderGeoItemLayer<?> createGeoItemProviderLayer() {
         return new GoogleV2GeoItemLayer(mMap);
     }
+
+
+    // ========================================================================
+    // position related methods
 
     @Override
     public void setCenter(final Geopoint geopoint) {
@@ -201,48 +201,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
-    // ========================================================================
-    // theme & language related methods
-
-    @Override
-    public void selectTheme(final Activity activity) {
-        GoogleMapsThemeHelper.selectTheme(activity, mMap, this::applyTheme);
-    }
-
-    @Override
-    public void applyTheme() {
-        applyTheme(GoogleMapsThemeHelper.GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()));
-    }
-
-    public void applyTheme(final GoogleMapsThemeHelper.GoogleMapsThemes theme) {
-        scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
-        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap, theme);
-    }
 
     // ========================================================================
     // zoom, bearing & heading methods
-
-//    /** keep track of rotation and zoom level changes */
-//    @Override
-//    protected void configMapChangeListener(final boolean enable) {
-//        if (mMap != null) {
-//            mMap.setOnCameraIdleListener(null);
-//            mMap.setOnCameraMoveStartedListener(null);
-//            if (enable) {
-//                mMap.setOnCameraIdleListener(() -> {
-//                    if (activityMapChangeListener != null) {
-//                        final CameraPosition pos = mMap.getCameraPosition();
-//                        activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
-//                    }
-//                });
-//                mMap.setOnCameraMoveStartedListener(reason -> {
-//                    if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE && resetFollowMyLocationListener != null) {
-//                        resetFollowMyLocationListener.run();
-//                    }
-//                });
-//            }
-//        }
-//    }
 
     @Override
     public void zoomToBounds(final Viewport bounds) {
@@ -297,8 +258,38 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
         }
-
     }
+
+
+    // ========================================================================
+    // theme & language related methods
+
+    @Override
+    public void selectTheme(final Activity activity) {
+        GoogleMapsThemeHelper.selectTheme(activity, mMap, this::applyTheme);
+    }
+
+    @Override
+    public void applyTheme() {
+        applyTheme(GoogleMapsThemeHelper.GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()));
+    }
+
+    public void applyTheme(final GoogleMapsThemeHelper.GoogleMapsThemes theme) {
+        scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
+        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap, theme);
+    }
+
+
+    // ========================================================================
+    // additional menu entries
+
+    // @Override
+    // public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
+    // }
+
+
+    // ========================================================================
+    // Tap handling methods
 
     @Override
     protected void adaptLayoutForActionbar(final boolean actionBarShowing) {

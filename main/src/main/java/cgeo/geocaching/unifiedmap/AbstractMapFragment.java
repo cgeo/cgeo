@@ -33,25 +33,15 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
 
-    public void setTileSource(final AbstractTileProvider newSource) {
-        currentTileProvider = newSource;
-    }
-
-    public abstract boolean supportsTileSource(AbstractTileProvider newSource);
-
     public void init(final int initialZoomLevel, @Nullable final Geopoint initialPosition, final Runnable onMapReadyTasks) {
         zoomLevel = initialZoomLevel;
         position = initialPosition;
         this.onMapReadyTasks = onMapReadyTasks;
     }
 
-    protected void initLayers() {
-        forEveryLayer(layer -> layer.setProvider(createGeoItemProviderLayer(), 0));
-    }
 
-    public void prepareForTileSourceChange() {
-        forEveryLayer(GeoItemLayer::destroy);
-    }
+    // ========================================================================
+    // lifecycle methods
 
     @Override
     public void onCreate(final @Nullable Bundle savedInstanceState) {
@@ -68,6 +58,28 @@ public abstract class AbstractMapFragment extends Fragment {
     public void onStop() {
         super.onStop();
         forEveryLayer(GeoItemLayer::destroy);
+    }
+
+
+    // ========================================================================
+    // tilesource handling
+
+    public abstract boolean supportsTileSource(AbstractTileProvider newSource);
+
+    public void prepareForTileSourceChange() {
+        forEveryLayer(GeoItemLayer::destroy);
+    }
+
+    public void setTileSource(final AbstractTileProvider newSource) {
+        currentTileProvider = newSource;
+    }
+
+
+    // ========================================================================
+    // layer handling
+
+    protected void initLayers() {
+        forEveryLayer(layer -> layer.setProvider(createGeoItemProviderLayer(), 0));
     }
 
     private void forEveryLayer(final Consumer<GeoItemLayer<?>> consumer) {
@@ -99,16 +111,6 @@ public abstract class AbstractMapFragment extends Fragment {
         // do nothing per default
     }
 
-//    protected void setDelayedCenterTo() {
-//        if (delayedCenterTo != null) {
-//            setCenter(delayedCenterTo);
-//            delayedCenterTo = null;
-//        }
-//    }
-
-//    public void setResetFollowMyLocationListener(@Nullable final Runnable listener) {
-//        resetFollowMyLocationListener = listener;
-//    }
 
     // ========================================================================
     // zoom, bearing & heading methods
@@ -139,15 +141,6 @@ public abstract class AbstractMapFragment extends Fragment {
 
     public abstract void setBearing(float bearing);
 
-//    /**
-//     * adjust zoom to be in allowed zoom range for current map
-//     */
-//    protected void setDelayedZoomTo() {
-//        if (delayedZoomTo != -1) {
-//            setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
-//            delayedZoomTo = -1;
-//        }
-//    }
 
     // ========================================================================
     // theme & language related methods
