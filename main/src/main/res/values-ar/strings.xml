@@ -675,14 +675,12 @@
     <string name="from_clipboard">من الحافظة</string>
     <string name="copy_to_clipboard">نسخ من الحافظة</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">الاتجاه بالدرجة °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">خريطة</string>
-    <string name="map_live">خريطة على نات</string>
     <string name="map_view_map">عرض الخريطة</string>
     <string name="map_theme_select">حدد ثيم الخريطة</string>
     <string name="map_live_enable">تمكين عرض مباشر</string>

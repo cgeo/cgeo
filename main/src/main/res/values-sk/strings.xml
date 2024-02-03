@@ -1497,7 +1497,6 @@
     <string name="from_clipboard">Zo schránky</string>
     <string name="copy_to_clipboard">Kopírovať do schránky</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimut v °</string>
     <!-- Variables -->
     <string name="variables_titletext">Túto stránku použite na zaznamenávanie hodnôt a na výpočty potrebné pre túto kešku.</string>
     <string name="variables_scanlisting">Prehľadať listing</string>
@@ -1570,8 +1569,6 @@
     <string name="imageview_metadata_comment">Komentár</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Aktívna mapa</string>
-    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Vybrať mapu</string>
     <string name="map_rotation">Otáčanie mapy</string>
     <string name="map_dot_mode">Použiť kompaktné ikony</string>
@@ -1638,6 +1635,7 @@
     <string name="search_finder">Nájdené kým</string>
     <string name="search_finder_prefill">Nálezca</string>
     <string name="search_finder_button">Hľadať podľa mena nálezcu</string>
+    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_tb">Trasovateľné predmety</string>

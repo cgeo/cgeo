@@ -874,14 +874,12 @@
     <string name="from_clipboard">З буферу обміну</string>
     <string name="copy_to_clipboard">Скопіювати в буфер обміну</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">несучи в</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Карта</string>
-    <string name="map_live">Жива карта</string>
     <string name="map_view_map">Перегляд карти</string>
     <string name="map_rotation">Обертання мапи</string>
     <string name="map_dot_mode">Використовуйте компактні значки</string>

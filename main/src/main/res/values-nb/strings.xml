@@ -1262,7 +1262,6 @@
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Retning i °</string>
     <!-- Variables -->
     <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
@@ -1314,8 +1313,6 @@
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Kart</string>
-    <string name="map_live">Live-kart</string>
-    <string name="map_offline">Offline-kart</string>
     <string name="map_view_map">Kart</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
@@ -1374,6 +1371,7 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>

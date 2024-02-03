@@ -1,27 +1,31 @@
 ### Mapa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
 - Zmiana: Pokaż szczegóły skrytki/punktu nawigacji w sposób nieblokujący
 - Nowość: Opcjonalnie zachowuj tymczasowe pliki OAM (pobieranie map, przydatne przy użyciu plików POI w innych aplikacjach)
-- Fix: Hylly theme download error 404
+- Poprawka: Błąd 404 przy pobieraniu motywu Hylly
+- Poprawka: Informacja o ukształtowaniu terenu nie jest zgodna z ustawieniem „Używaj angielskich jednostek miary”
 
 ### Szczegóły skrytki
 - Zmiana: Ustawienie „Przełącz mówienie” jako rzeczywisty przełącznik
 - Zmiana: Zwiększona maksymalna długość dziennika dla geocaching.com
 - Poprawka: Nie można przesłać dłuższych osobistych notatek na stronach opencachingu
-- New: Edit/delete own logs
-- New: Waypoint projection with variables
-- Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS to select multiple single chars
+- Nowość: Edycja/usuwanie własnych wpisów do dziennika znalezień
+- Nowość: Projekcja punktu nawigacji ze zmiennymi
+- Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
+- Nowość: Nowa formuła CHARS (krótka forma: CH), aby wybrać wiele pojedynczych znaków
+- Poprawka: Niewłaściwy wynik dla funkcji TRUNC z ujemnymi liczbami
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
 - Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
 - Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym
 - Poprawka: Przywracanie kopii zapasowych bez prawidłowych informacji o dacie i czasie
-- New: Include active trackfiles in backup
-- New: Integrated c:geo contacts addon functionality (external addon no longer required)
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
+- Nowość: Dołącz aktywne pliki ze śladami do kopii zapasowej
+- Nowość: Zintegrowano dodatek dla kontaktów c:geo (dodatek zewnętrzny nie jest już potrzebny)
+- Poprawka: Domyślny wybór typu wpisu dla przedmiotów podróżnych
+- Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
+- Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
+- Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania

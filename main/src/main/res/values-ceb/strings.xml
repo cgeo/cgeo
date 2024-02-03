@@ -650,14 +650,12 @@
     <string name="from_clipboard">Gikan sa clipboard</string>
     <string name="copy_to_clipboard">Gikopya padung sa clipboard</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Bearing in</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mga mapa nga live</string>
     <string name="map_view_map">View sa mapa</string>
     <string name="map_theme_select">Pagpili ug tema sa mapa</string>
     <string name="map_live_enable">Makahimo nga mag-live</string>

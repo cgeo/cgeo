@@ -488,7 +488,6 @@
     <string name="waypoint_done">Lokið</string>
     <string name="waypoint_copy_of">Afrit af</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Lega í °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->

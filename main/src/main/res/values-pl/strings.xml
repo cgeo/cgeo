@@ -319,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
+    <string name="confirm_unsent_changes_title">Niewysłane zmiany</string>
+    <string name="confirm_unsent_changes">Odrzucić niewysłane zmiany?</string>
     <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacji?</string>
     <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
     <string name="more_information">Więcej informacji</string>
@@ -1010,6 +1012,7 @@
     <string name="init_backup_unavailable">niedostępne</string>
     <string name="init_backup_last_no">Brak pliku z kopią zapasową.</string>
     <string name="init_restore_version_error">Nieoczekiwany format - nie można przywrócić bazy danych.\n\nOczekiwana wersja to %1$d,\nkopia zapasowa ma wersję %2$d</string>
+    <string name="backup_tracks_error">Błąd podczas tworzenia kopii zapasowej śladów.</string>
     <string name="settings_title_backup">Kopia zapasowa / przywracanie</string>
     <string name="settings_summary_backup">Wykonaj kopię zapasową i przywrócenie danych o skrytkach/punktach nawigacji oraz ustawień programu.</string>
     <string name="init_backup_settings_logins">Kopia zapasowa danych konta</string>
@@ -1715,8 +1718,8 @@
     <string name="imageview_metadata_comment">Komentarz</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa online</string>
-    <string name="map_offline">Mapa offline</string>
+    <string name="map_live">Na żywo</string>
+    <string name="map_offline">Offline</string>
     <string name="map_view_map">Widok mapy</string>
     <string name="map_rotation">Obrót mapy</string>
     <string name="map_dot_mode">Użyj kompaktowych ikon</string>
@@ -2402,6 +2405,7 @@
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
     <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="routes_tracks_color">Wybierz kolor</string>
+    <string name="routes_tracks_change_name">Zmień nazwę</string>
     <string name="center">Wyśrodkuj</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>

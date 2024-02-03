@@ -844,14 +844,12 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Pagrieziena leņķis °</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Karte</string>
-    <string name="map_live">TIešsaistes karte</string>
     <string name="map_view_map">Kartes skats</string>
     <string name="map_rotation">Kartes rotācija</string>
     <string name="map_dot_mode">Lietot kompakto ikonu skatu</string>
