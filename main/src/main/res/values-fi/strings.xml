@@ -1530,7 +1530,6 @@
     <string name="from_clipboard">Leikepöydältä</string>
     <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Suunnassa</string>
     <!-- Variables -->
     <string name="variables_titletext">Käytä tätä sivua kirjataksesi alas arvot ja tehdäksesi tarvittavat laskelmat tälle kätkölle.</string>
     <string name="variables_scanlisting">Skannaa kuvaus</string>
@@ -1603,8 +1602,6 @@
     <string name="imageview_metadata_comment">Kommentti</string>
     <!-- map -->
     <string name="map_map">Kartta</string>
-    <string name="map_live">Live-kartta</string>
-    <string name="map_offline">Offline-kartta</string>
     <string name="map_view_map">Karttanäkymä</string>
     <string name="map_rotation">Kartan kääntö</string>
     <string name="map_dot_mode">Käytä pieniä kuvakkeita</string>
@@ -1672,6 +1669,7 @@
     <string name="search_finder">Löytänyt</string>
     <string name="search_finder_prefill">Löytäjä</string>
     <string name="search_finder_button">Etsi löytäjän mukaan</string>
+    <string name="search_filter">Suodatin</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
