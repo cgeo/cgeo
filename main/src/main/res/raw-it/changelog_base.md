@@ -1,5 +1,5 @@
 ### Mappa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see Settings => Map Sources => Unified Map
+- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nuovo: Evidenzia i download in corso nel gestore download
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
 - Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
