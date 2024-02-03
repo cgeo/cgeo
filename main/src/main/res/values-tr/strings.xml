@@ -1311,7 +1311,6 @@
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Azimut açısı</string>
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
     <string name="variables_deleteall">Tümünü Sil</string>
@@ -1345,8 +1344,6 @@
     <string name="imageview_metadata_comment">Yorum</string>
     <!-- map -->
     <string name="map_map">Harita</string>
-    <string name="map_live">Canlı Harita</string>
-    <string name="map_offline">Çevrimdışı harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
@@ -1410,6 +1407,7 @@
     <string name="search_finder">Bulan</string>
     <string name="search_finder_prefill">Bulan</string>
     <string name="search_finder_button">Bulanın ismine göre ara</string>
+    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
