@@ -1101,14 +1101,12 @@
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
     <!-- Projection -->
-    <string name="projection_type_bearing_hint_angle">Kompasretning</string>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
     <string name="map_map">Kort</string>
-    <string name="map_live">Live-kort</string>
     <string name="map_view_map">Kort-view</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
@@ -1139,6 +1137,7 @@
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
