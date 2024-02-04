@@ -42,7 +42,13 @@ public class DegreeFormulaTest {
         assertParse("NA A/100", s -> Value.of(40.5d), null, "N40.5°[0.405]'");
 
         assertParse("N48° 12.1 A + 2 3", s -> Value.of(5d), 48d + (12.173d) / 60, "N48°12.173'");
+    }
 
+    @Test
+    public void parseEEFormula() {
+        final DegreeFormula formula = DegreeFormula.compile("E E HC.CIC", true);
+        assertThat(formula.evaluateToDouble(v -> Value.of(1d))).isEqualTo(1d + 11.111d / 60);
+        assertThat(formula.getNeededVars()).containsExactlyInAnyOrder("E", "H", "C", "I");
     }
 
     @Test
@@ -68,6 +74,7 @@ public class DegreeFormulaTest {
         assertThat(DegreeFormula.compile("N48", false).evaluateToDouble(null)).isEqualTo(48);
         assertThat(DegreeFormula.compile("S48", false).evaluateToDouble(null)).isEqualTo(-48);
         assertThat(DegreeFormula.compile("48 N", false).evaluateToDouble(null)).isEqualTo(48);
+        assertThat(DegreeFormula.compile("48 N  ", false).evaluateToDouble(null)).isEqualTo(48);
 
         assertThat(DegreeFormula.compile("W48", false).evaluateToDouble(null)).isEqualTo(null);
         assertThat(DegreeFormula.compile("W48", true).evaluateToDouble(null)).isEqualTo(-48);
