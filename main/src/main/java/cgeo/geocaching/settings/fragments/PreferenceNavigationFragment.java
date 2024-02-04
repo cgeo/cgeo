@@ -106,16 +106,22 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
         }
         final CharSequence[] entries = profiles.toArray(new CharSequence[0]);
         final CharSequence[] values = profiles.toArray(new CharSequence[0]);
-        updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values);
-        updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values);
-        updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values);
-        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, entries, values);
-        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, entries, values);
+        updateRoutingProfilePref(R.string.pref_brouterProfileWalk, RoutingMode.WALK, entries, values, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileBike, RoutingMode.BIKE, entries, values, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileCar, RoutingMode.CAR, entries, values, 0);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser1, RoutingMode.USER1, entries, values, 1);
+        updateRoutingProfilePref(R.string.pref_brouterProfileUser2, RoutingMode.USER2, entries, values, 2);
     }
 
-    private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values) {
+    private void updateRoutingProfilePref(@StringRes final int prefId, final RoutingMode mode, final CharSequence[] entries, final CharSequence[] values, final int number) {
         final String current = Settings.getRoutingProfile(mode);
         final ListPreference pref = findPreference(getString(prefId));
+        assert pref != null;
+        if (number > 0) {
+            final String title = String.format(getString(R.string.init_brouterProfileUserNumber), number);
+            pref.setDialogTitle(title);
+            pref.setTitle(title);
+        }
         pref.setEntries(entries);
         pref.setEntryValues(values);
         pref.setSummary(current);

@@ -92,7 +92,7 @@ public class DegreeFormula {
     }
 
     private boolean isParserOnHemisphereChar(final boolean checkEof) {
-        return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || TextParser.isFormulaWhitespace(parser.peek()));
+        return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR);
     }
 
     private Formula parseFormula(final KeyableCharSet kcs) {

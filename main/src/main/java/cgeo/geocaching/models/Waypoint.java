@@ -304,6 +304,12 @@ public class Waypoint implements IWaypoint {
     }
 
     public void setCoords(final Geopoint coords) {
+        setCoordsPure(coords);
+        setPreprojectedCoords(coords);
+        setProjection(ProjectionType.NO_PROJECTION, DistanceUnit.getDefaultUnit(false), "", "");
+    }
+
+    public void setCoordsPure(final Geopoint coords) {
         this.coords = coords;
     }
 
@@ -341,7 +347,7 @@ public class Waypoint implements IWaypoint {
 
     public void setCalculated(final CalculatedCoordinate cc, final Func1<String, Value> varMap) {
         this.setCalcStateConfig(cc.toConfig());
-        this.setCoords(cc.calculateGeopoint(varMap));
+        this.setPreprojectedCoords(cc.calculateGeopoint(varMap));
     }
 
     public CalculatedCoordinate getCalculated() {
@@ -364,12 +370,12 @@ public class Waypoint implements IWaypoint {
             final CalculatedCoordinate cc = getCalculated();
             setPreprojectedCoords(cc.calculateGeopoint(varList::getValue));
             if (!hasProjection) {
-                setCoords(getPreprojectedCoords());
+                setCoordsPure(getPreprojectedCoords());
             }
             calcDone = true;
         }
         if (hasProjection) {
-            setCoords(
+            setCoordsPure(
                 this.getProjectionType().project(
                     getPreprojectedCoords(),
                     safeToDouble(getProjectionFormula1(), varList),
@@ -377,6 +383,9 @@ public class Waypoint implements IWaypoint {
                     getProjectionDistanceUnit()
                 ));
             calcDone = true;
+        }
+        if (!calcDone) {
+            setCoordsPure(getPreprojectedCoords());
         }
         return calcDone;
     }
