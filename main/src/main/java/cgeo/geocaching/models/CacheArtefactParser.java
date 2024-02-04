@@ -239,7 +239,7 @@ public class CacheArtefactParser {
                 waypoint.setCalcStateConfig(cc.toConfig());
                 // try to evaluate valid coordinates
                 if (this.cache != null && this.cache.getVariables() != null) {
-                    waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
+                    waypoint.setCoordsPure(cc.calculateGeopoint(this.cache.getVariables()::getValue));
                 }
                 int idx = afterCoords.indexOf(lonString);
                 if (idx > 0) {
@@ -462,10 +462,10 @@ public class CacheArtefactParser {
             sb.append(formulaString);
         } else {
             //coordinate
-            if (wp.getCoords() == null) {
+            if (wp.getPreprojectedCoords() == null) {
                 sb.append(PARSING_COORD_EMPTY);
             } else {
-                sb.append(wp.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
+                sb.append(wp.getPreprojectedCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT_RAW));
             }
         }
 

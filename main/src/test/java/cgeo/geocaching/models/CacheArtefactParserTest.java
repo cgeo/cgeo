@@ -220,7 +220,8 @@ public class CacheArtefactParserTest {
     public void testCreateParseableWaypointVisitedTextAndParseIt() {
         final Waypoint wp = new Waypoint("name", WaypointType.FINAL, true);
         final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
-        wp.setCoords(gp);
+        wp.setPreprojectedCoords(gp);
+        wp.recalculateVariableDependentValues(null);
         wp.setPrefix("PR");
         wp.setUserNote("user note with {v} visited text");
         assertThat(CacheArtefactParser.getParseableText(wp)).isEqualTo(
@@ -463,6 +464,7 @@ public class CacheArtefactParserTest {
         final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
         wp1.setCoords(gp);
         wp1.setUserNote("This is a user note");
+        assertThat(wp1.getCoords()).isEqualTo(wp1.getPreprojectedCoords());
         final Waypoint wp2 = new Waypoint("name2", WaypointType.ORIGINAL, true);
         wp2.setCoords(gp);
         wp2.setUserNote("This is a user note 2");
