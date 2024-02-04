@@ -1,5 +1,5 @@
 ### Mapa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Nowość: [Ujednolicona mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zobacz [Ustawienia => Źródła mapy => Ujednolicona mapa](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
