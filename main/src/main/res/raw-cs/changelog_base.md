@@ -1,5 +1,5 @@
 ### Mapa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Novinka: [Sjednocená mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), viz [Nastavení => Zdroje map => Sjednocená mapa](cgeo-setting://featureSwitch_useUnifiedMap)
 - Novinka: Zvýraznění stávajících stahování ve správci stahování
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
 - Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
