@@ -86,15 +86,15 @@
             android:dependency="@string/pref_useInternalRouting"
             app:iconSpaceReserved="false" />
         <ListPreference
-            android:dialogTitle="@string/init_brouterProfileUser"
+            android:dialogTitle="@string/init_brouterProfileUserNumber"
             android:key="@string/pref_brouterProfileUser1"
-            android:title="@string/init_brouterProfileUser"
+            android:title="@string/init_brouterProfileUserNumber"
             android:dependency="@string/pref_useInternalRouting"
             app:iconSpaceReserved="false" />
         <ListPreference
-            android:dialogTitle="@string/init_brouterProfileUser"
+            android:dialogTitle="@string/init_brouterProfileUserNumber"
             android:key="@string/pref_brouterProfileUser2"
-            android:title="@string/init_brouterProfileUser"
+            android:title="@string/init_brouterProfileUserNumber"
             android:dependency="@string/pref_useInternalRouting"
             app:iconSpaceReserved="false" />
 
