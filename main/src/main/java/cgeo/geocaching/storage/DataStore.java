@@ -3377,7 +3377,7 @@ public class DataStore {
             waypoint.setLookup(cursor.getString(cursor.getColumnIndexOrThrow("lookup")));
             final Geopoint coords = getCoords(cursor, cursor.getColumnIndexOrThrow("latitude"), cursor.getColumnIndexOrThrow("longitude"));
             final Geopoint preprojectedCoords = getCoords(cursor, cursor.getColumnIndexOrThrow("preprojected_latitude"), cursor.getColumnIndexOrThrow("preprojected_longitude"));
-            waypoint.setCoords(coords);
+            waypoint.setCoordsPure(coords);
             waypoint.setPreprojectedCoords(preprojectedCoords == null ? coords : preprojectedCoords); // older entries don't have preprojected coords stored
             waypoint.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));

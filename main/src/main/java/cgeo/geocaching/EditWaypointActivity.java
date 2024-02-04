@@ -686,7 +686,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setGeocode(geocode);
         waypoint.setPrefix(prefix);
         waypoint.setLookup(lookup);
-        waypoint.setCoords(currentState.coords);
+        waypoint.setCoordsPure(currentState.coords);
         waypoint.setPreprojectedCoords(currentState.preprojectedCoords);
         waypoint.setNote(currentState.noteText);
         waypoint.setUserNote(currentState.userNoteText);
