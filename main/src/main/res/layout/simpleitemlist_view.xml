@@ -16,6 +16,7 @@
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
         android:paddingVertical="4dip"
-        android:scrollbars="none"/>
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"/>
 
 </merge>
