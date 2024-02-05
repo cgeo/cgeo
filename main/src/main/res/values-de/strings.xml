@@ -884,7 +884,6 @@
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
-    <string name="init_brouterProfileUser">Benutzerdefiniertes Profil</string>
     <string name="init_removeFromRouteOnLog">Von Route entfernen bei Log</string>
     <string name="init_summary_removeFromRouteOnLog">Beim Senden oder Speichern eines Logs den Cache von der aktuellen Route entfernen.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
