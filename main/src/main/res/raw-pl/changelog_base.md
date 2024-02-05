@@ -17,6 +17,7 @@
 - Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
 - Nowość: Nowa formuła CHARS (krótka forma: CH), aby wybrać wiele pojedynczych znaków
 - Poprawka: Niewłaściwy wynik dla funkcji TRUNC z ujemnymi liczbami
+- Poprawka: Nie można obliczyć wzorów zaczynających się od zmiennej podobnej do znacznika półkuli
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
