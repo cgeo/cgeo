@@ -17,6 +17,7 @@
 - Wijziging: Selectie van afbeeldingen beperken tot de typen jpg, png, gif
 - Nieuw: Nieuwe formule CHARS (korte notatie: CH) om meerdere tekens te selecteren
 - Oplossing: Verkeerd resultaat voor TRUNC functie met negatieve getallen
+- Oplossing: Formules beginnen met een variabele die vergelijkbaar is met een halfrond marker kunnen niet worden berekend
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
