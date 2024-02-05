@@ -17,6 +17,7 @@
 - Änderung: Bildauswahl auf jpg, png und gif beschränken
 - Neu: Neue Formel CHARS (Kurzform: CH) um mehrere Zeichen auszuwählen
 - Korrektur: Falsches Ergebnis für TRUNC Funktion mit negativen Zahlen
+- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
