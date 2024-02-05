@@ -896,7 +896,6 @@
     <string name="init_brouterProfileWalk">Профиль «Пешком»</string>
     <string name="init_brouterProfileBike">Профиль «Велосипед»</string>
     <string name="init_brouterProfileCar">Профиль «Автомобиль»</string>
-    <string name="init_brouterProfileUser">Пользовательский профиль</string>
     <string name="init_removeFromRouteOnLog">Удалить из маршрута после записи в блокноте</string>
     <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить 
 тайник из текущего маршрута.</string>
