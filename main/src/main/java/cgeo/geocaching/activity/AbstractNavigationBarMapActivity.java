@@ -148,11 +148,15 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
 
     /** removes fragment and view for mapdetails view; returns true, if view got removed */
     public boolean sheetRemoveFragment() {
+        //check activity state
+        if (isFinishing() || isDestroyed()) {
+            return false;
+        }
         clearSheetInfo();
         final FragmentManager fm = getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
         if (f1 != null) {
-            fm.beginTransaction().remove(f1).commit();
+            fm.beginTransaction().remove(f1).commit(); // #15247: consider commitAllowingStateLoss() instead of commit() ?
         }
         final Fragment f2 = fm.findFragmentByTag(TAG_SWIPE_FRAGMENT);
         if (f2 != null) {
