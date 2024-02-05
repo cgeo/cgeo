@@ -17,6 +17,7 @@
 - Change: Restrict image selection to types jpg, png, gif
 - New: New formula CHARS (short form: CH) to select multiple single chars
 - Fix: Wrong result for TRUNC function with negative numbers
+- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
 
 ### General
 - Nou: en tocar la notificació del descarregador, s'obre la vista de "descàrregues pendents"
