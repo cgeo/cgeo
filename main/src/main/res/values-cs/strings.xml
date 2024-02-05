@@ -896,7 +896,7 @@
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
-    <string name="init_brouterProfileUser">Uživatelem definovaný profil</string>
+    <string name="init_brouterProfileUserNumber">Uživatelem definovaný profil %d</string>
     <string name="init_removeFromRouteOnLog">Odstranit z trasy při zalogování</string>
     <string name="init_summary_removeFromRouteOnLog">Po odeslání nebo uložení logu odstraní kešku z aktuální trasy.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
