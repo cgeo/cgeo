@@ -896,7 +896,7 @@
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
-    <string name="init_brouterProfileUser">Uživatelem definovaný profil</string>
+    <string name="init_brouterProfileUserNumber">Uživatelem definovaný profil %d</string>
     <string name="init_removeFromRouteOnLog">Odstranit z trasy při zalogování</string>
     <string name="init_summary_removeFromRouteOnLog">Po odeslání nebo uložení logu odstraní kešku z aktuální trasy.</string>
     <string name="brouter_recalculating">Přepočítávání trasy na pozadí…</string>
@@ -1036,7 +1036,7 @@
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
-    <string name="init_brouter_directory_description">Složka s daty pro naviagaci BRouter</string>
+    <string name="init_brouter_directory_description">Složka s daty pro navigaci BRouter</string>
     <string name="init_updateinterval_title">Interval aktualizace</string>
     <string name="init_updateinterval_description">Každých x dní vám připomíná kontrolu aktualizací (platí pouze pro soubory, které jste stáhli prostřednictvím c:geo), 0=vypnuto</string>
     <string name="init_gpx_importexportdir">Složka pro GPX</string>
@@ -1412,7 +1412,7 @@
     <string name="cache_menu_navigation_walk">Navigace (chůze)</string>
     <string name="cache_menu_navigation_transit">Navigace (Transit)</string>
     <string name="cache_menu_navigation_bike">Navigace (kolo)</string>
-    <string name="cache_menu_maps_directions">Směry podle Google Maps</string>
+    <string name="cache_menu_maps_directions">Navigování pomocí Google Map</string>
     <string name="cache_menu_osmand">OsmAnd</string>
     <string name="cache_menu_cruiser">Cruiser</string>
     <string name="cache_menu_sygic_walk">Sygic (chůze)</string>
