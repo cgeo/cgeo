@@ -896,7 +896,7 @@
     <string name="init_brouterProfileWalk">Profil „Pieszo”</string>
     <string name="init_brouterProfileBike">Profil „Rower”</string>
     <string name="init_brouterProfileCar">Profil „Samochód”</string>
-    <string name="init_brouterProfileUser">Profil zdefiniowany przez użytkownika</string>
+    <string name="init_brouterProfileUserNumber">Profil zdefiniowany przez użytkownika %d</string>
     <string name="init_removeFromRouteOnLog">Usuń z trasy po zalogowaniu</string>
     <string name="init_summary_removeFromRouteOnLog">Przy wysyłaniu lub zapisaniu dziennika usuń skrytkę z bieżącej trasy.</string>
     <string name="brouter_recalculating">Przeliczanie trasy w tle…</string>
