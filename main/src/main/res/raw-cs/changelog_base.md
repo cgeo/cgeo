@@ -17,6 +17,7 @@
 - Změna: Omezit výběr obrázků na typy jpg, png, gif
 - Novinka: Nový vzorec CHARS (zkrácený tvar: CH) pro výběr více jednotlivých znaků
 - Oprava: Chybný výsledek funkce TRUNC se zápornými čísly
+- Oprava: Vzorce začínající proměnnou podobnou značce polokoule nelze vypočítat
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
