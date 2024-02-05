@@ -17,6 +17,7 @@
 - 변경: 이미지 선택을 jpg, png, gif 유형으로 제한
 - 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS (짧은 형태: CH)
 - 수정: 숫자가 음수인 TRUNC 함수에 대한 잘못된 결과
+- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
