@@ -884,7 +884,7 @@
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
-    <string name="init_brouterProfileUser">Gebruikersgedefinieerd profiel</string>
+    <string name="init_brouterProfileUserNumber">Gebruikersgedefinieerd profiel %d</string>
     <string name="init_removeFromRouteOnLog">Verwijder uit de route bij het logboek</string>
     <string name="init_summary_removeFromRouteOnLog">Bij het verzenden of opslaan van een log verwijder de cache van de huidige route.</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
