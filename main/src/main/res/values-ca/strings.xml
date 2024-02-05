@@ -872,7 +872,6 @@
     <string name="init_brouterProfileWalk">Perfil \"A peu\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Cotxe\"</string>
-    <string name="init_brouterProfileUser">Perfil definit per l\'usuari</string>
     <string name="init_removeFromRouteOnLog">Eliminar al registre de la ruta</string>
     <string name="init_summary_removeFromRouteOnLog">En enviar o emmagatzemar un registre, elimineu el catxé de la ruta actual.</string>
     <string name="brouter_recalculating">S\'està recalculant la ruta en segon pla…</string>
