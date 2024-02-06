@@ -392,7 +392,7 @@ public class Waypoint implements IWaypoint {
 
     private Double safeToDouble(final String expression, final VariableList varList) {
         final Formula formula = expression == null ? null : Formula.safeCompile(expression);
-        final Value value = formula == null ? null : formula.evaluate(varList::getValue);
+        final Value value = formula == null ? null : formula.safeEvaluate(varList::getValue);
         return value == null || !value.isDouble() ? null : value.getAsDouble();
     }
 
