@@ -410,7 +410,7 @@ public final class Formula {
     public Value safeEvaluate(final Func1<String, Value> vars) {
         try {
             return evaluate(vars);
-        catch (FormulaException fe) {
+        } catch (FormulaException fe) {
             return null;
         }
     }
