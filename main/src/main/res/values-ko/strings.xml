@@ -878,6 +878,7 @@
     <string name="init_brouterProfileWalk">\"걷기\" 프로필</string>
     <string name="init_brouterProfileBike">\"자전거\" 프로필</string>
     <string name="init_brouterProfileCar">\"자동차\" 프로필</string>
+    <string name="init_brouterProfileUserNumber">사용자 정의 프로필 %d</string>
     <string name="init_removeFromRouteOnLog">로그되면 경로에서 제거</string>
     <string name="init_summary_removeFromRouteOnLog">로그를 보내거나 저장할 때 현재 경로에서 캐시를 제거</string>
     <string name="brouter_recalculating">백그라운드에서 경로를 다시 계산하는 중…</string>
@@ -1672,6 +1673,8 @@
     <string name="imageview_metadata_comment">코멘트</string>
     <!-- map -->
     <string name="map_map">지도</string>
+    <string name="map_live">라이브</string>
+    <string name="map_offline">오프라인</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
