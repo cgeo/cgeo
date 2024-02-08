@@ -84,6 +84,7 @@ public final class ImageUtils {
     private static final String[] NO_EXTERNAL = {"geocheck.org"};
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
+    private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)\\S*)");
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
@@ -452,6 +453,42 @@ public final class ImageUtils {
             return "";
         }
         return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
+    }
+
+    /**
+     * Add images present in plain text to the existing collection.
+     *
+     * @param images   a collection of images
+     * @param texts    plain texts to be searched for image URLs
+     */
+    public static void addImagesFromText(final Collection<Image> images, final String... texts) {
+        final Set<String> urls = new LinkedHashSet<>();
+        for (final Image image : images) {
+            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
+        }
+        if (null == texts) {
+            return;
+        }
+        for (final String text : texts) {
+            //skip null or empty texts
+            if (StringUtils.isBlank(text)) {
+                continue;
+            }
+            final Matcher m = IMG_URL.matcher(text);
+
+            while (m.find()) {
+                if (m.groupCount() >= 1) {
+                    final String imgUrl = m.group(1);
+                    if (!urls.contains(imgUrl)) {
+                        urls.add(imgUrl);
+                        images.add(new Image.Builder()
+                                .setUrl(imgUrl, "https")
+                                .setCategory(Image.ImageCategory.NOTE)
+                                .build());
+                    }
+                }
+            }
+        }
     }
 
     /**
