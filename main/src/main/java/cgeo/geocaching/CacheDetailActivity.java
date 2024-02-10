@@ -842,7 +842,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         dismissProgress();
 
                     } else {
-                        activity.showToast(toastPrefix + error.getErrorString(res));
+                        activity.showToast(toastPrefix + error.getErrorString());
                         dismissProgress();
                         finishActivity();
                     }

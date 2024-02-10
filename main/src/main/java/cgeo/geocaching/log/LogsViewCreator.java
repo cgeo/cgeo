@@ -12,7 +12,9 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
@@ -152,7 +154,16 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                 }
                 if (LogUtils.canDeleteLog(cache, log)) {
                     ctxMenu.addItem(R.string.cache_log_menu_delete, R.drawable.ic_menu_delete,
-                        it -> new LogActivityHelper(activity).deleteLog(cache, log));
+                        it -> new LogActivityHelper(activity)
+                            .setLogResultConsumer((type, result) -> {
+                                if (!result.isOk()) {
+                                    SimpleDialog.of(activity)
+                                        .setTitle(R.string.info_log_delete_failed)
+                                        .setMessage(TextParam.id(R.string.info_log_post_failed_reason, result.getErrorString()).setMovement(true))
+                                        .show();
+                                }
+                            })
+                            .deleteLog(cache, log));
                 }
 
             }

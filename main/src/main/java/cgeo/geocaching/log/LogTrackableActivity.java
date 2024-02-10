@@ -471,7 +471,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             showToast(res.getString(R.string.info_log_posted));
             finish();
         } else {
-            showToast(status.getErrorString(res));
+            showToast(status.getErrorString());
         }
     }
 

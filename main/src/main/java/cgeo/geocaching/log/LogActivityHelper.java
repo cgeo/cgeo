@@ -15,7 +15,6 @@ import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
 
 import android.annotation.TargetApi;
-import android.util.Pair;
 
 import androidx.core.app.ComponentActivity;
 
@@ -30,7 +29,7 @@ public class LogActivityHelper {
 
     private final ComponentActivity activity;
 
-    private final WorkerTask<Pair<Geocache, LogEntry>, String, LogResult> logDeleteTask;
+    private final WorkerTask<ImmutableTriple<Geocache, LogEntry, String>, String, LogResult> logDeleteTask;
 
     private final WorkerTask<ImmutableTriple<Geocache, LogEntry, LogEntry>, String, LogResult> logEditTask;
 
@@ -69,9 +68,9 @@ public class LogActivityHelper {
                 }
             }, null);
 
-        logDeleteTask = WorkerTask.<Pair<Geocache, LogEntry>, String, LogResult>of(
+        logDeleteTask = WorkerTask.<ImmutableTriple<Geocache, LogEntry, String>, String, LogResult>of(
                 "log-delete",
-                (input, progress, cancelFlag) -> LogUtils.deleteLogTaskLogic(input.first, input.second, progress),
+                (input, progress, cancelFlag) -> LogUtils.deleteLogTaskLogic(input.left, input.middle, input.right, progress),
                 AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.cache_log_menu_delete)))
             .observeResult(activity, result -> {
@@ -135,7 +134,10 @@ public class LogActivityHelper {
             .setMessage(TextParam.id(R.string.log_delete_confirm,
                 entry.logType.getL10n(), entry.author, Formatter.formatShortDateVerbally(entry.date)))
             .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
-            .confirm(() -> logDeleteTask.start(new Pair<>(cache, entry)));
+            .input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> {
+                logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText));
+            });
+
     }
 
     /** create a trackable log on the trackable platform */
