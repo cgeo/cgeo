@@ -30,8 +30,6 @@ import java.security.MessageDigest;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.oscim.utils.Parameters;
-
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
@@ -172,7 +170,10 @@ public class CgeoApplication extends Application {
 
     private void initializeMaps() {
         //VTM map: global settings
-        Parameters.TRANSPARENT_LINES = true; //See #15029. This prevents rendering of "darker edges"git a for overlapping semi-transparent route parts
+
+        //See #15029. Following parameter prevents rendering of "darker edges" for overlapping semi-transparent route parts
+        // -> deactivate for now due to #15100, see comment https://github.com/cgeo/cgeo/issues/15100#issuecomment-1937077277
+        //Parameters.TRANSPARENT_LINES = true;
     }
 
 }
