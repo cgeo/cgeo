@@ -527,6 +527,7 @@ File templatesFile = project.file(templatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
 File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
 String adb = android.getAdbExecutable().absolutePath
+String appID = 'cgeo.geocaching'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -678,15 +679,15 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', 'cgeo.geocaching', 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', 'cgeo.geocaching', 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
+                    args = ['shell', 'run-as', appID, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', 'cgeo.geocaching', 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', appID, 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
                 }
                 injected.execOperations.exec {
                     executable = adb
@@ -737,7 +738,7 @@ checkstyle {
     // assign the checkstyle version explicitly here
     // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
     // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
-    toolVersion = '10.12.5'
+    toolVersion = '10.13.0'
 
     configDirectory = rootProject.projectDir
     configFile = rootProject.file("checkstyle.xml")
