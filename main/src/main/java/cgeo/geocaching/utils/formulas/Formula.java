@@ -407,6 +407,14 @@ public final class Formula {
         return varMap::get;
     }
 
+    public Value safeEvaluate(final Func1<String, Value> vars) {
+        try {
+            return evaluate(vars);
+        } catch (FormulaException fe) {
+            return null;
+        }
+    }
+
     public Value evaluate(final Func1<String, Value> vars) throws FormulaException {
         return evaluate(vars, 0);
     }
