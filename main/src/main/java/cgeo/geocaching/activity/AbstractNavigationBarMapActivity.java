@@ -154,13 +154,20 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         }
         clearSheetInfo();
         final FragmentManager fm = getSupportFragmentManager();
+        final FragmentTransaction ft = fm.beginTransaction();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
         if (f1 != null) {
-            fm.beginTransaction().remove(f1).commit(); // #15247: consider commitAllowingStateLoss() instead of commit() ?
+            ft.remove(f1);
+            if (!fm.isStateSaved()) {
+                ft.commitNow();
+            }
         }
         final Fragment f2 = fm.findFragmentByTag(TAG_SWIPE_FRAGMENT);
         if (f2 != null) {
-            fm.beginTransaction().remove(f2).commit();
+            ft.remove(f2);
+            if (!fm.isStateSaved()) {
+                ft.commitNow();
+            }
         }
         final FrameLayout v = findViewById(R.id.detailsfragment);
         if (v != null && v.getVisibility() != View.GONE) {
