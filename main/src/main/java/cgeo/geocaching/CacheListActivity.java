@@ -257,7 +257,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
                 showLicenseConfirmationDialog();
             } else if (search != null && search.getError() != StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString(res) + '.');
+                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
 
                 hideLoading();
                 showProgress(false);

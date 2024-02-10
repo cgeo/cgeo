@@ -317,11 +317,11 @@ public final class LogUtils {
     }
 
     @WorkerThread
-    static LogResult deleteLogTaskLogic(final Geocache cache, final LogEntry logEntry, final Consumer<String> progress) {
+    static LogResult deleteLogTaskLogic(final Geocache cache, final LogEntry logEntry, final String reason, final Consumer<String> progress) {
 
         progress.accept(LocalizationUtils.getString(R.string.log_posting_deletelog));
 
-        final LogResult result = cache.getLoggingManager().deleteLog(logEntry);
+        final LogResult result = cache.getLoggingManager().deleteLog(logEntry, reason);
         if (!result.isOk()) {
             return result;
         }

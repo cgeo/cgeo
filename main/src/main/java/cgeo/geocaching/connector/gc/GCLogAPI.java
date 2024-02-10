@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ImageResult;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
@@ -16,6 +17,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.connector.gc.GCAuthAPI.WEBSITE_URL;
@@ -186,7 +188,16 @@ public class GCLogAPI {
         String name;
     }
 
-    public static String getUrlForNewTrackableLog(final String trackableCode) {
+    //message for log delete
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class GCWebLogDelete extends HttpResponse {
+        @JsonProperty("reasonText")
+        String reasonText;
+
+    }
+
+
+        public static String getUrlForNewTrackableLog(final String trackableCode) {
         return WEBSITE_URL + "/live/trackable/" + trackableCode + "/log";
     }
 
@@ -262,7 +273,9 @@ public class GCLogAPI {
 
     }
 
-    public static LogResult deleteLog(final String logId) {
+    public static LogResult deleteLog(final String logId, final String reasonText) {
+
+        //{"reasonText":"Deleting test log"}
 
         //1.) Call log view page and get a valid CSRF Token
         final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
@@ -270,10 +283,18 @@ public class GCLogAPI {
             return generateLogError("DeleteLog: unable to extract CSRF Token");
         }
 
+        String reason = reasonText;
+        if (StringUtils.isBlank(reason)) {
+            reason = LocalizationUtils.getString(R.string.cache_log_delete_reason_default);
+        }
+        final GCWebLogDelete deleteBody = new GCWebLogDelete();
+        deleteBody.reasonText = reason;
+
         //2,) Send a DELETE Request (which is actually a POST)
         try (HttpResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/delete/" + logId)
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
+            .bodyJson(deleteBody)
             .request().blockingGet()) {
 
             if (!response.isSuccessful()) {

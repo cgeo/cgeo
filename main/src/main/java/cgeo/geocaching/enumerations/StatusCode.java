@@ -1,8 +1,7 @@
 package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
-
-import android.content.res.Resources;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -42,13 +41,13 @@ public enum StatusCode {
     }
 
     @StringRes
-    public int getErrorString() {
+    public int getErrorStringId() {
         return errorString;
     }
 
     @NonNull
-    public String getErrorString(final Resources res) {
-        return res.getString(errorString);
+    public String getErrorString() {
+        return LocalizationUtils.getString(errorString);
     }
 
 }

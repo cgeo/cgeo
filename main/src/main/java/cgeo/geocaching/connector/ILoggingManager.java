@@ -40,7 +40,7 @@ public interface ILoggingManager {
     /** Deletes an existing log for a cache online */
     @NonNull
     @WorkerThread
-    LogResult deleteLog(@NonNull LogEntry newEntry);
+    LogResult deleteLog(@NonNull LogEntry newEntry, @Nullable String reason);
 
     /** converts a log text from a */
     String convertLogTextToEditableText(String logText);

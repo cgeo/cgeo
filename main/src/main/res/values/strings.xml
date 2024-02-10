@@ -325,6 +325,7 @@
     <string name="info_log_posted">c:geo successfully submitted the log.</string>
     <string name="info_log_saved">c:geo successfully saved the log.</string>
     <string name="info_log_post_failed">Posting log failed.</string>
+    <string name="info_log_delete_failed">Deleting log failed.</string>
     <string name="info_log_post_failed_reason">Reason: %s</string>
     <string name="info_log_post_retry">Retry</string>
     <string name="info_log_post_save">Save offline</string>
@@ -1608,6 +1609,7 @@
     <string name="cache_log_menu_edit">Edit Log</string>
     <string name="cache_log_menu_delete">Delete Log</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>
+    <string name="cache_log_delete_reason_default">Log was deleted using c:geo</string>
     <string name="ignore_confirm_title">Be careful</string>
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>

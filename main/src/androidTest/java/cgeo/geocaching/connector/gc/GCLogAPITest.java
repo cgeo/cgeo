@@ -95,7 +95,7 @@ public class GCLogAPITest {
     }
 
     private String deleteCacheLog(final String logId) {
-        final LogResult result = GCLogAPI.deleteLog(logId);
+        final LogResult result = GCLogAPI.deleteLog(logId, null);
         assertStatusOk(result);
         assertThat(result.getServiceLogId()).startsWith("GL");
         assertThat(result.getServiceLogId()).isEqualTo(logId);
@@ -224,7 +224,7 @@ public class GCLogAPITest {
                     if (isTrackable) {
                         GCLogAPI.deleteLogTrackable(logId);
                     } else {
-                        GCLogAPI.deleteLog(logId);
+                        GCLogAPI.deleteLog(logId, null);
                     }
                 } catch (Exception ex) {
                     Log.w("Cleanup of test failed", ex);

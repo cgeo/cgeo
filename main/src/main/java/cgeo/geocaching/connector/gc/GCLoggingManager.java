@@ -144,8 +144,8 @@ class GCLoggingManager extends AbstractLoggingManager {
 
     @NonNull
     @Override
-    public LogResult deleteLog(@NonNull final LogEntry newEntry) {
-        return GCLogAPI.deleteLog(newEntry.serviceLogId);
+    public LogResult deleteLog(@NonNull final LogEntry newEntry, @Nullable final String reason) {
+        return GCLogAPI.deleteLog(newEntry.serviceLogId, reason);
     }
 
     @NonNull
