@@ -555,11 +555,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private void onPostExecuteInternal(final StatusResult statusResult) {
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.isOk()) {
-            lastSavedState = getEntryFromView();
+
+            final String currentLogText = currentLogText();
+            if (!StringUtils.isBlank(currentLogText)) {
+                Settings.setLastCacheLog(currentLogText);
+            }
 
             //reset Gui and all values
             resetValues();
             refreshGui();
+            lastSavedState = getEntryFromView();
 
             imageListFragment.clearImages();
             imageListFragment.adjustImagePersistentState();
