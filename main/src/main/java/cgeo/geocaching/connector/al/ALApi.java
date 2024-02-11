@@ -164,10 +164,12 @@ final class ALApi {
         try {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
-            final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
-            for (Geocache matchedLabCache : matchedLabCaches) {
-                if (matchedLabCache.getGeocode().equals(geocode)) {
-                    gc.setFound(matchedLabCache.isFound());
+            if (!Settings.isALCfoundStateManual()) {
+                final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
+                for (Geocache matchedLabCache : matchedLabCaches) {
+                    if (matchedLabCache.getGeocode().equals(geocode)) {
+                        gc.setFound(matchedLabCache.isFound());
+                    }
                 }
             }
             return gc;

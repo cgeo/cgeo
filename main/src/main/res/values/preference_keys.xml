@@ -70,6 +70,8 @@
     <string translatable="false" name="preference_screen_al">preference_screen_al</string>
     <string translatable="false" name="pref_connectorALActive">connectorLCActive</string><!-- variable stays with "LC" for compatibility reasons -->
     <string translatable="false" name="pref_fakekey_al_website">fakekey_al_website</string>
+    <string translatable="false" name="pref_foundstate_al">foundstate_al</string>
+
 
     <!-- settings for opencaching.de screen -->
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>
