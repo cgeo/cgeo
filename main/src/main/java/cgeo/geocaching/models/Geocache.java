@@ -2076,7 +2076,7 @@ public class Geocache implements IWaypoint {
                     final SearchResult search = searchByGeocode(origCache.getGeocode(), null, false, handler);
                     cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : origCache;
                     if (search != null && search.getError() != StatusCode.NO_ERROR) {
-                        DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorString());
+                        DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorStringId());
                     }
                 } else {
                     cache = origCache;
@@ -2085,7 +2085,7 @@ public class Geocache implements IWaypoint {
                 final SearchResult search = searchByGeocode(geocode, null, forceRedownload, handler);
                 cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
                 if (search != null && search.getError() != StatusCode.NO_ERROR) {
-                    DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorString());
+                    DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorStringId());
                 }
             } else {
                 cache = null;

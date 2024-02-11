@@ -48,7 +48,7 @@ public abstract class AbstractLoggingManager implements ILoggingManager {
 
     @NonNull
     @Override
-    public LogResult deleteLog(@NonNull final LogEntry newEntry) {
+    public LogResult deleteLog(@NonNull final LogEntry newEntry, @Nullable final String reason) {
         return LogResult.error(StatusCode.LOG_POST_ERROR);
     }
 

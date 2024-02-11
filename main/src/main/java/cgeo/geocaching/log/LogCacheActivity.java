@@ -555,11 +555,16 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     private void onPostExecuteInternal(final StatusResult statusResult) {
         GeocacheChangedBroadcastReceiver.sendBroadcast(this, cache.getGeocode());
         if (statusResult.isOk()) {
-            lastSavedState = getEntryFromView();
+
+            final String currentLogText = currentLogText();
+            if (!StringUtils.isBlank(currentLogText)) {
+                Settings.setLastCacheLog(currentLogText);
+            }
 
             //reset Gui and all values
             resetValues();
             refreshGui();
+            lastSavedState = getEntryFromView();
 
             imageListFragment.clearImages();
             imageListFragment.adjustImagePersistentState();
@@ -570,7 +575,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         } else if (!LogCacheActivity.this.isFinishing()) {
             SimpleDialog.of(LogCacheActivity.this)
                     .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString(res)).setMovement(true))
+                    .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString()).setMovement(true))
                     .setButtons(R.string.info_log_post_retry, R.string.cancel, R.string.info_log_post_save)
                     .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
                     .confirm(this::sendLogInternal);
