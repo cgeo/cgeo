@@ -30,3 +30,6 @@
 - Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
 - Corretto: Simbolo stella mancante per i filtri memorizzati modificati
 - Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab
