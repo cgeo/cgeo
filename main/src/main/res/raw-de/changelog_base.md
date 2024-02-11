@@ -30,3 +30,6 @@
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab
