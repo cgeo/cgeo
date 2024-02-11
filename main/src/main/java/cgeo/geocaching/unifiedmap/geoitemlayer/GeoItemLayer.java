@@ -16,21 +16,24 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * An abstracted Map Layer which allows to handle a group of related geo objects on a map layer
  * together.
- *
+ * <br>
  * Methods of this class allow adding, removing, hiding/showing, ... of objects onto the layer in
  * a map-like fashion (means: using a key-GeoItem-concept).
  * Touch handling is also provided.
- *
+ * <br>
  * The abstract layer is connected towards a concrete map layer implementation by using the
  * setProvider method
  *
@@ -222,7 +225,7 @@ public class GeoItemLayer<K> {
     }
 
     /** Creates a new GeoItemLayer.
-     *
+     * <br>
      * Constructor is designed to be usable in a "final" fashion on construction of any Android object
      * (e.g. Activities or Views). Means: it doesn't need anything to be set up GUI-wise to be called.
      */
@@ -322,6 +325,25 @@ public class GeoItemLayer<K> {
      * is a COPY of all keys NOT backed by the layer. */
     public synchronized Set<K> keySet() {
         return new HashSet<>(itemMap.keySet());
+    }
+
+    /** Replaces a set of items (identified by keysToReplace) with the given items. Prevents unnecessary remove+put for same key */
+    public synchronized void replace(@Nullable final Predicate<K> keysToReplace, @NonNull final Map<K, GeoItem> items, final boolean show) {
+        final List<K> keysToRemove = new ArrayList<>();
+        //collect what needs to be removed
+        for (K key : itemMap.keySet()) {
+            if ((keysToReplace == null || keysToReplace.test(key)) && !items.containsKey(key)) {
+                keysToRemove.add(key);
+            }
+        }
+        //remove what needs to be removed
+        for (K key : keysToRemove) {
+            remove(key);
+        }
+        //put all the rest
+        for (Map.Entry<K, GeoItem> entry : items.entrySet()) {
+            put(entry.getKey(), entry.getValue(), show);
+        }
     }
 
     private void putToMap(final K key, final GeoItem item, final GeoItem oldItem) {
