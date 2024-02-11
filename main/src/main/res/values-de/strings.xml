@@ -306,6 +306,7 @@
     <string name="info_log_posted">Log erfolgreich gesendet.</string>
     <string name="info_log_saved">Log erfolgreich gespeichert.</string>
     <string name="info_log_post_failed">Das Senden des Logs ist fehlgeschlagen.</string>
+    <string name="info_log_delete_failed">Löschen des Logs fehlgeschlagen.</string>
     <string name="info_log_post_failed_reason">Ursache: %s</string>
     <string name="info_log_post_retry">Wiederholen</string>
     <string name="info_log_post_save">Offline speichern</string>
@@ -884,6 +885,7 @@
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
+    <string name="init_brouterProfileUserNumber">Benutzerdefiniertes Profil %d</string>
     <string name="init_removeFromRouteOnLog">Von Route entfernen bei Log</string>
     <string name="init_summary_removeFromRouteOnLog">Beim Senden oder Speichern eines Logs den Cache von der aktuellen Route entfernen.</string>
     <string name="brouter_recalculating">Route wird im Hintergrund neu berechnet…</string>
@@ -1428,6 +1430,7 @@
     <string name="cache_log_menu_edit">Log bearbeiten</string>
     <string name="cache_log_menu_delete">Log löschen</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
+    <string name="cache_log_delete_reason_default">Log wurde mit c:geo gelöscht</string>
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
