@@ -17,7 +17,7 @@
 - Änderung: Bildauswahl auf jpg, png und gif beschränken
 - Neu: Neue Formel CHARS (Kurzform: CH) um mehrere Zeichen auszuwählen
 - Korrektur: Falsches Ergebnis für TRUNC Funktion mit negativen Zahlen
-- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
+- Korrektur: Formeln können nicht berechnet werden, wenn sie mit einer Variablen beginnen, die einem Hemispährenkürzel gleicht
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -31,5 +31,5 @@
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
 
-### Changes since current beta version
-- New: Show images linked in "personal note" in Images tab
+### Änderungen seit der aktuellen Beta-Version
+- Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
