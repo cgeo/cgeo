@@ -1,31 +1,35 @@
 ### Mappa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Nuovo: [Mappa Unificata](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), vedi [Impostazioni => Sorgenti Mappa => Mappa Unificata](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nuovo: Evidenzia i download in corso nel gestore download
 - Nuovo: Mostra lo stato trovato sulle icone dei cache
 - Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
 - Cambio: Mostra dettagli cache/waypoint in modo non bloccante
-- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
-- Fix: Hylly theme download error 404
-- Fix: Elevation info does not respect "use imperial units" setting
+- Nuovo: Facoltativamente mantiene file OAM temporanei (scaricatore di mappe, utile quando si utilizzano i file POI con altre applicazioni)
+- Corretto: Errore download tema Hylly 404
+- Corretto: le informazioni di elevazione non rispettano l'impostazione "usa unità imperiali"
 
 ### Dettagli del cache
 - Cambio: "Attiva/disattiva parlato" è diventato un interruttore
 - Cambio: aumento della lunghezza massima del log per geocaching.com
 - Corretto: non è possibile caricare note personali più lunghe sui siti opencaching
-- New: Edit/delete own logs
-- New: Waypoint projection with variables
-- Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS (short form: CH) to select multiple single chars
-- Fix: Wrong result for TRUNC function with negative numbers
+- Nuovo: Modifica/elimina i propri log
+- Nuovo: Proiezione Waypoint con variabili
+- Cambio: Limita la selezione di immagini ai tipi jpg, png, gif
+- Nuovo: Nuova formula CHARS per selezionare più caratteri singoli
+- Corretto: risultato errato per la funzione TRUNC con numeri negativi
+- Corretto: le formule che iniziano con una variabile simile a un marcatore emisfero non possono essere calcolate
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
 - Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
 - Nuovo: layout a due colonne per le impostazioni in modalità orizzontale
-- Fix: Restore of backups without valid date/time info
-- New: Include active trackfiles in backup
-- New: Integrated c:geo contacts addon functionality (external addon no longer required)
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
-- Fix: Missing star symbol for changed stored filters
-- Fix: Keyword search field displays "GC" after performing a search
+- Corretto: Ripristino dei backup senza informazioni valide di data/ora
+- Nuovo: Includi i trackfiles attivi nel backup
+- Nuovo: Integrato addon dei contatti c:geo (addon esterno non più richiesto)
+- Corretto: Tipo di log predefinito per tracciabile rielaborato
+- Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
+- Corretto: Simbolo stella mancante per i filtri memorizzati modificati
+- Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab

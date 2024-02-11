@@ -1,5 +1,5 @@
 ### Mapa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Nowość: [Ujednolicona mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zobacz [Ustawienia => Źródła mapy => Ujednolicona mapa](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nowość: Podświetl istniejące pliki w menedżerze pobierania
 - Nowość: Pokaż stan znalezień skrytek na ikonach punktu nawigacji
 - Nowość: Opcja długiego dotknięcia w celu połączenia liniami skrytki z jej punktami nawigacji
@@ -17,6 +17,7 @@
 - Zmiana: Ogranicz wybór obrazu do typów jpg, png, gif
 - Nowość: Nowa formuła CHARS (krótka forma: CH), aby wybrać wiele pojedynczych znaków
 - Poprawka: Niewłaściwy wynik dla funkcji TRUNC z ujemnymi liczbami
+- Poprawka: Nie można obliczyć wzorów zaczynających się od zmiennej podobnej do znacznika półkuli
 
 ### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
@@ -29,3 +30,6 @@
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
 - Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab

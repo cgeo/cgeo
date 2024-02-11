@@ -17,6 +17,7 @@
 - Change: Restrict image selection to types jpg, png, gif
 - New: New formula CHARS (short form: CH) to select multiple single chars
 - Fix: Wrong result for TRUNC function with negative numbers
+- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
 
 ### Bendras
 - New: Tapping on downloader notification opens "pending downloads" view
@@ -29,3 +30,6 @@
 - Fix: Trackable spotted cache info (website changes)
 - Fix: Missing star symbol for changed stored filters
 - Fix: Keyword search field displays "GC" after performing a search
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab

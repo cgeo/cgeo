@@ -1,5 +1,5 @@
 ### Mapa
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Novinka: [Sjednocená mapa](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), viz [Nastavení => Zdroje map => Sjednocená mapa](cgeo-setting://featureSwitch_useUnifiedMap)
 - Novinka: Zvýraznění stávajících stahování ve správci stahování
 - Novinka: Zobrazit stav nálezu kešek na ikonách trasových bodů
 - Novinka: Možnost dlouhým klepnutím spojit kešku s jejími trasovými body pomocí čar
@@ -17,6 +17,7 @@
 - Změna: Omezit výběr obrázků na typy jpg, png, gif
 - Novinka: Nový vzorec CHARS (zkrácený tvar: CH) pro výběr více jednotlivých znaků
 - Oprava: Chybný výsledek funkce TRUNC se zápornými čísly
+- Oprava: Vzorce začínající proměnnou podobnou značce polokoule nelze vypočítat
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
@@ -29,3 +30,6 @@
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
+
+### Změny od aktuální beta verze
+- Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
