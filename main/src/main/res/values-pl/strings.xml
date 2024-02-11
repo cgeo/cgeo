@@ -306,6 +306,7 @@
     <string name="info_log_posted">Wpis został wysłany.</string>
     <string name="info_log_saved">Wpis został zapisany.</string>
     <string name="info_log_post_failed">Wysyłanie wpisu zakończone niepowodzeniem.</string>
+    <string name="info_log_delete_failed">Usuwanie wpisu do dziennika nie powiodło się.</string>
     <string name="info_log_post_failed_reason">Powód: %s</string>
     <string name="info_log_post_retry">Spróbuj ponownie</string>
     <string name="info_log_post_save">Zapisz offline</string>
@@ -1457,6 +1458,7 @@
     <string name="cache_log_menu_edit">Edytuj wpis</string>
     <string name="cache_log_menu_delete">Usuń wpis</string>
     <string name="cache_log_menu_popup_title">Dziennik – %s</string>
+    <string name="cache_log_delete_reason_default">Wpis został usunięty za pomocą c:geo</string>
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
