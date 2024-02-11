@@ -30,3 +30,6 @@
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
+
+### Changes since current beta version
+- New: Show images linked in "personal note" in Images tab
