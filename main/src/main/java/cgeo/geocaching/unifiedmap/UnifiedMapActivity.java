@@ -680,6 +680,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         centerMap(new Geopoint(latitude, longitude)); // todo consider viewport
     }
 
+    private void updateRouteTrackButtonVisibility() {
+        routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue(), viewModel.getTracks());
+    }
+
     private boolean isTargetSet() {
         return viewModel.target.getValue() != null;
     }
@@ -970,7 +974,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (isLongTap) {
                 final Geopoint gp = Geopoint.forE6(latitudeE6, longitudeE6);
                 viewModel.longTapCoords.setValue(gp);
-                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), null, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
+                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
