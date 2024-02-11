@@ -81,8 +81,6 @@ public class CgeoApplication extends Application {
 
             MessageCenterUtils.configureMessageCenterPolling();
 
-            initializeMaps();
-
             LooperLogger.startLogging(Looper.getMainLooper());
         }
     }
@@ -166,14 +164,6 @@ public class CgeoApplication extends Application {
             return e.toString();
         }
         return sb.toString();
-    }
-
-    private void initializeMaps() {
-        //VTM map: global settings
-
-        //See #15029. Following parameter prevents rendering of "darker edges" for overlapping semi-transparent route parts
-        // -> deactivate for now due to #15100, see comment https://github.com/cgeo/cgeo/issues/15100#issuecomment-1937077277
-        //Parameters.TRANSPARENT_LINES = true;
     }
 
 }
