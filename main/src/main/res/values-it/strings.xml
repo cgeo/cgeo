@@ -147,6 +147,12 @@
     <string name="log_save">Salva offline</string>
     <string name="log_saving">Invio log…</string>
     <string name="log_posting_log">Caricamento log…</string>
+    <string name="log_posting_problemreport">Pubblicazione log report problemi…</string>
+    <string name="log_posting_deletelog">Cancella Log…</string>
+    <string name="log_posting_image_create">Immagine %1$s/%2$s: invio dati…</string>
+    <string name="log_posting_image_edit">Immagine %1$s/%2$s: modifica dei dati…</string>
+    <string name="log_posting_image_delete">Eliminazione immagine %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Salva nuovo stato del log…</string>
     <string name="log_posting_vote">Pubblicazione voto cache…</string>
     <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Azzera</string>
@@ -202,6 +208,7 @@
     <string name="log_image_info_scaled">Ridotta</string>
     <string name="log_image_info_notscaled">non ridotta</string>
     <string name="log_image_titleprefix">Immagine</string>
+    <string name="log_delete_confirm">Vuoi davvero eliminare il registro di tipo \'%1$s\' dall\'autore \'%2$s\' con la data di log \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
@@ -312,6 +319,8 @@
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
     <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
+    <string name="confirm_unsent_changes_title">Modifiche non inviate</string>
+    <string name="confirm_unsent_changes">Eliminare le modifiche non inviate?</string>
     <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
     <string name="more_information">Ulterioni informazioni</string>
@@ -689,6 +698,7 @@
     <string name="about_changelog_full">Elenco di tutte le modifiche</string>
     <string name="about_nutshellmanual">Manuale online</string>
     <string name="about_contributors_carnerodetails">come padre di c:geo</string>
+    <string name="about_contributors_recent">Collaboratori (ultimi 12 mesi)</string>
     <string name="about_contributors_specialthanks">Ringraziamenti speciali a</string>
     <string name="about_contributors_specialthanksdetails">- tutti i nostri collaboratori per le traduzioni su [Crowdin.net](https://crowdin.net/project/cgeo)!\n- tutti i bug tester\n· e tutti gli altri sostenitori.\n</string>
     <string name="about_contributors_other">Altri contributori</string>
@@ -874,7 +884,7 @@
     <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
     <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
     <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
-    <string name="init_brouterProfileUser">Profilo definito dall\'utente</string>
+    <string name="init_brouterProfileUserNumber">Profilo definito dall\'utente %d</string>
     <string name="init_removeFromRouteOnLog">Rimuovi dal percorso dopo log</string>
     <string name="init_summary_removeFromRouteOnLog">Quando si invia o memorizza un log il cache viene rimosso dal percorso corrente.</string>
     <string name="brouter_recalculating">Ricalcolo percorso in background…</string>
@@ -889,6 +899,7 @@
     <string name="init_showElevation">Mostra altitudine</string>
     <string name="init_summary_showElevation">Mostra l\"altitudine per la posizione corrente, prendendola dai dati di routing o GNSS (se disponibile)</string>
     <string name="init_elevation_notAvailable">"Nessun dato di elevazione disponibile"</string>
+    <string name="menu_elevation_info">Altitudine (mappa): %s</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache.</string>
     <string name="init_prevent_cache_note_merge">Sovrascrivi Nota Personale cache</string>
@@ -989,6 +1000,7 @@
     <string name="init_backup_unavailable">non disponibile</string>
     <string name="init_backup_last_no">Non esiste il file con il backup.</string>
     <string name="init_restore_version_error">Formato non previsto - non è possibile ripristinare il database.\n\nLa versione prevista è %1$d,\nmentre il backup ha la versione %2$d</string>
+    <string name="backup_tracks_error">Errore nella creazione di backup delle tracce.</string>
     <string name="settings_title_backup">Backup / Ripristino</string>
     <string name="settings_summary_backup">Esegui il backup e ripristino dei cache/waypoint e le impostazioni del programma.</string>
     <string name="init_backup_settings_logins">Backup dati account</string>
@@ -1594,6 +1606,15 @@
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- Projection -->
+    <string name="projection_type_none">Nessuna proiezione</string>
+    <string name="projection_type_bearing">Direzione</string>
+    <string name="projection_type_bearing_info">Direzione %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Direzione in °</string>
+    <string name="projection_type_bearing_hint_distance">Distanza</string>
+    <string name="projection_type_offset">Offset</string>
+    <string name="projection_type_offset_info">Offset lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Latitudine Offset in Micro-Minuti</string>
+    <string name="projection_type_offset_hint_longitude">Longitudine Offset in Micro-Minuti</string>
     <!-- Variables -->
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
@@ -1639,6 +1660,7 @@
     <string name="formula_function_if">Se</string>
     <string name="formula_function_length">Lunghezza della stringa</string>
     <string name="formula_function_substring">Sottostringa</string>
+    <string name="formula_function_chars">Seleziona Caratteri</string>
     <string name="formula_function_rot13">Ruota i caratteri di 13</string>
     <string name="formula_function_rot">Ruota Caratteri</string>
     <string name="formula_function_checksum">Checksum</string>
@@ -1666,6 +1688,8 @@
     <string name="imageview_metadata_comment">Commento</string>
     <!-- map -->
     <string name="map_map">Mappa</string>
+    <string name="map_live">Dal vivo</string>
+    <string name="map_offline">Offline</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
@@ -1795,6 +1819,7 @@
     <string name="user_menu_open_browser">Apri profilo nel browser</string>
     <string name="user_menu_send_message">Invia messaggio</string>
     <string name="user_menu_send_email">Invia email</string>
+    <string name="user_menu_open_contact">Cerca nei contatti</string>
     <string name="user_unknown">Utente sconosciuto</string>
     <!-- navigation -->
     <string name="navigation">Navigazione</string>
@@ -2321,6 +2346,7 @@
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
     <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="routes_tracks_color">Seleziona il colore</string>
+    <string name="routes_tracks_change_name">Cambia nome</string>
     <string name="center">Centro</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
@@ -2338,6 +2364,8 @@
     <string name="switch_on">Attivo</string>
     <string name="switch_manual">Manuale</string>
     <string name="switch_auto">Automatico</string>
+    <string name="switch_auto_lowpower">Automatico (bassa potenza)</string>
+    <string name="switch_auto_precise">Automatico (preciso)</string>
     <string name="switch_default">(predefinito)</string>
     <string name="yes">Sì</string>
     <string name="no">No</string>
@@ -2385,6 +2413,8 @@
     <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
+    <string name="downloadmap_keep_temporary_files">Mantieni i file temporanei</string>
+    <string name="downloadmap_keep_temporary_files_summary">Alcune fonti di download supportano file aggiuntivi non utilizzati da c:geo. Mantieni questi file extra nella cartella di download del sistema invece di eliminarli</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
     <string name="download_none_selected">Nessun file selezionato per il download</string>

@@ -306,6 +306,7 @@
     <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
     <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
     <string name="info_log_post_failed">Het posten van de log is mislukt.</string>
+    <string name="info_log_delete_failed">Log verwijderen is mislukt.</string>
     <string name="info_log_post_failed_reason">Reden: %s</string>
     <string name="info_log_post_retry">Probeer opnieuw</string>
     <string name="info_log_post_save">Off line opslaan</string>
@@ -884,7 +885,7 @@
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
-    <string name="init_brouterProfileUser">Gebruikersgedefinieerd profiel</string>
+    <string name="init_brouterProfileUserNumber">Gebruikersgedefinieerd profiel %d</string>
     <string name="init_removeFromRouteOnLog">Verwijder uit de route bij het logboek</string>
     <string name="init_summary_removeFromRouteOnLog">Bij het verzenden of opslaan van een log verwijder de cache van de huidige route.</string>
     <string name="brouter_recalculating">Route herberekenen op de achtergrond…</string>
@@ -1429,6 +1430,7 @@
     <string name="cache_log_menu_edit">Log bewerken</string>
     <string name="cache_log_menu_delete">Logs wissen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
+    <string name="cache_log_delete_reason_default">Log is verwijderd met c:geo</string>
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>

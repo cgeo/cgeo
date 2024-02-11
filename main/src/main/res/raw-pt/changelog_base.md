@@ -17,6 +17,7 @@
 - Change: Restrict image selection to types jpg, png, gif
 - New: New formula CHARS (short form: CH) to select multiple single chars
 - Fix: Wrong result for TRUNC function with negative numbers
+- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
 
 ### Geral
 - Novo: Ao tocar na notificação do gestor de transferências abre a visualização "transferências pendentes"

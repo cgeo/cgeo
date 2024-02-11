@@ -1,5 +1,5 @@
 ### 지도
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- 새로 고침: [통합 지도](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (베타), [설정 => 지도 원본 => 통합 지도](cgeo-setting://featureSwitch_useUnifiedMap) 참조
 - 신규: 다운로드 관리자에서 기존 다운로드 강조 표시
 - 신규: 지점 아이콘에 캐시 찾음 상태 표시
 - 신규: 캐시와 지점을 선으로 연결하는 길게 누르기 옵션
@@ -17,6 +17,7 @@
 - 변경: 이미지 선택을 jpg, png, gif 유형으로 제한
 - 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS (짧은 형태: CH)
 - 수정: 숫자가 음수인 TRUNC 함수에 대한 잘못된 결과
+- 수정: 반구 마커와 유사한 변수로 시작하는 공식을 계산할 수 없습니다.
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
@@ -28,4 +29,4 @@
 - 수정: 추적아이템 로그 유형 기본값이 재작업되었습니다.
 - 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
 - 수정: 변경된 저장 필터의 별 기호 누락
-- Fix: Keyword search field displays "GC" after performing a search
+- 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.

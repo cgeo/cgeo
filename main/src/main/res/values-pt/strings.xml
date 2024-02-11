@@ -871,7 +871,6 @@
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
-    <string name="init_brouterProfileUser">Perfil definido pelo utilizador</string>
     <string name="init_removeFromRouteOnLog">Remover da rota ao registar</string>
     <string name="init_summary_removeFromRouteOnLog">Ao enviar ou armazenar um registo, remover a cache da rota actual.</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>

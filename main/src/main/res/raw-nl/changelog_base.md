@@ -1,5 +1,5 @@
 ### Kaart
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
+- Nieuw: [Gecombineerde Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), zie [Instellingen => Map Bronnen => Gecombineerde Kaart](cgeo-setting://featureSwitch_useUnifiedMap)
 - Nieuw: Markeer bestaande downloads in downloadbeheer
 - Nieuw: Toon cache gevonden status op waypoint iconen
 - Nieuw: Lang-tik optie om een cache met zijn waypoints met regels te verbinden
@@ -17,6 +17,7 @@
 - Wijziging: Selectie van afbeeldingen beperken tot de typen jpg, png, gif
 - Nieuw: Nieuwe formule CHARS (korte notatie: CH) om meerdere tekens te selecteren
 - Oplossing: Verkeerd resultaat voor TRUNC functie met negatieve getallen
+- Oplossing: Formules beginnen met een variabele die vergelijkbaar is met een halfrond marker kunnen niet worden berekend
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
