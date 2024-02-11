@@ -102,7 +102,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
         setZoom(zoomLevel);
         mapUpdateListener = (event, mapPosition) -> {
-            if (event == Map.ROTATE_EVENT) {
+            if (event == Map.ROTATE_EVENT || event == Map.POSITION_EVENT) {
                 repaintRotationIndicator(mapPosition.bearing);
             }
             if (event == Map.MOVE_EVENT) {
