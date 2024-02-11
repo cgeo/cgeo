@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 import cgeo.geocaching.utils.TransactionSizeLogger;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
@@ -20,32 +21,103 @@ import android.content.pm.Signature;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Looper;
 import android.os.UserManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
-    private static final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
-    private static final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
+    private final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
+    private final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
 
-    public CgeoApplication() {
-        setInstance(this);
+    private final LifecycleInfo lifecycleInfo;
+
+    private static class LifecycleInfo implements ActivityLifecycleCallbacks {
+
+        private Activity currentForegroundActivity = null;
+        private final List<Runnable> lifecycleListeners = new ArrayList<>();
+
+        @Override
+        public void onActivityCreated(@NonNull final Activity activity, @Nullable final Bundle savedInstanceState) {
+            //do nothing
+        }
+
+        @Override
+        public void onActivityStarted(@NonNull final Activity activity) {
+            //do nothing
+        }
+
+        @Override
+        public void onActivityResumed(@NonNull final Activity activity) {
+            if (currentForegroundActivity != activity) {
+                currentForegroundActivity = activity;
+                callListeners();
+            }
+        }
+
+        @Override
+        public void onActivityPaused(@NonNull final Activity activity) {
+            if (activity == currentForegroundActivity) {
+                currentForegroundActivity = null;
+                callListeners();
+            }
+        }
+
+        @Override
+        public void onActivityStopped(@NonNull final Activity activity) {
+            //do nothing
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(@NonNull final Activity activity, @NonNull final Bundle outState) {
+            //do nothing
+        }
+
+        @Override
+        public void onActivityDestroyed(@NonNull final Activity activity) {
+            //do nothing
+        }
+
+        private void callListeners() {
+            for (Runnable r : lifecycleListeners) {
+                r.run();
+            }
+        }
     }
 
-    private static void setInstance(@NonNull final CgeoApplication application) {
-        instance = application;
+
+
+    public CgeoApplication() {
+        instance = this;
+        this.lifecycleInfo = new LifecycleInfo();
+        try {
+            registerActivityLifecycleCallbacks(this.lifecycleInfo);
+        } catch (Exception ex) {
+            Log.e("Exception", ex);
+        }
     }
 
     public static CgeoApplication getInstance() {
         return instance;
+    }
+
+    public Activity getCurrentForegroundActivity() {
+        return lifecycleInfo.currentForegroundActivity;
+    }
+
+    public void addLifecycleListener(final Runnable run) {
+        this.lifecycleInfo.lifecycleListeners.add(run);
     }
 
     @Override
@@ -88,7 +160,7 @@ public class CgeoApplication extends Application {
     }
 
     /**
-     * https://code.google.com/p/android/issues/detail?id=173789
+     * <a href="https://code.google.com/p/android/issues/detail?id=173789">...</a>
      * introduced with JELLY_BEAN_MR2 / fixed in October 2016
      */
     private void fixUserManagerMemoryLeak() {
