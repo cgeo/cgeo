@@ -94,6 +94,9 @@ public class FilterViewHolderCreator {
             case STATUS:
                 result = new StatusFilterViewHolder();
                 break;
+            case INDIVIDUAL_ROUTE:
+                result = new BooleanFilterViewHolder(R.string.cache_filter_boolean_individualroute_contained, ImageParam.id(R.drawable.map_quick_route));
+                break;
             case ATTRIBUTES:
                 result = new AttributesFilterViewHolder();
                 break;

@@ -23,6 +23,7 @@ public enum GeocacheFilterType {
     DIFFICULTY_TERRAIN_MATRIX("difficulty_terrain_matrix", R.string.cache_filter_difficulty_terrain_matrix, R.string.cache_filtergroup_details, DifficultyTerrainMatrixGeocacheFilter::new),
     RATING("rating", R.string.cache_filter_rating, R.string.cache_filtergroup_details, RatingGeocacheFilter::new),
     STATUS("status", R.string.cache_filter_status, R.string.cache_filtergroup_basic, StatusGeocacheFilter::new),
+    INDIVIDUAL_ROUTE("individualroute", R.string.cache_filter_individualroute, R.string.cache_filtergroup_userspecific, IndividualRouteGeocacheFilter::new),
     ATTRIBUTES("attributes", R.string.cache_filter_attributes, R.string.cache_filtergroup_details, AttributesGeocacheFilter::new),
     OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, R.string.cache_filtergroup_userspecific, OfflineLogGeocacheFilter::new),
     FAVORITES("favorites", R.string.cache_filter_favorites, R.string.cache_filtergroup_details, FavoritesGeocacheFilter::new),
