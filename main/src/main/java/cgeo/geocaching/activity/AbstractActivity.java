@@ -14,16 +14,13 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
-import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
-import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 
 import android.content.BroadcastReceiver;
@@ -33,7 +30,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.util.Pair;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.EditText;
@@ -43,14 +39,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -202,44 +196,6 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     protected void hideKeyboard() {
         Keyboard.hide(this);
-    }
-
-    protected void buildDetailsContextMenu(final ActionMode actionMode, final Menu menu, final CharSequence fieldTitle, final boolean copyOnly) {
-        actionMode.setTitle(fieldTitle);
-        menu.findItem(R.id.menu_translate_to_sys_lang).setVisible(!copyOnly);
-        if (!copyOnly) {
-            menu.findItem(R.id.menu_translate_to_sys_lang).setTitle(res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
-        }
-        final boolean localeIsEnglish = StringUtils.equals(Locale.getDefault().getLanguage(), Locale.ENGLISH.getLanguage());
-        menu.findItem(R.id.menu_translate_to_english).setVisible(!copyOnly && !localeIsEnglish);
-    }
-
-    protected boolean onClipboardItemSelected(@NonNull final ActionMode actionMode, final MenuItem item, final CharSequence clickedItemText, @Nullable final Geocache cache) {
-        Log.v(logToken + ".onClipboardItemSelected: " + clickedItemText);
-        if (clickedItemText == null) {
-            return false;
-        }
-        final int itemId = item.getItemId();
-        if (itemId == R.id.menu_copy) {
-            ClipboardUtils.copyToClipboard(clickedItemText);
-            showToast(res.getString(R.string.clipboard_copy_ok));
-            actionMode.finish();
-        } else if (itemId == R.id.menu_translate_to_sys_lang) {
-            TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), HtmlUtils.extractText(clickedItemText));
-            actionMode.finish();
-        } else if (itemId == R.id.menu_translate_to_english) {
-            TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(clickedItemText));
-            actionMode.finish();
-        } else if (itemId == R.id.menu_extract_waypoints) {
-            extractWaypoints(clickedItemText, cache);
-            actionMode.finish();
-        } else if (itemId == R.id.menu_cache_share_field) {
-            ShareUtils.sharePlainText(this, clickedItemText.toString());
-            actionMode.finish();
-        } else {
-            return false;
-        }
-        return true;
     }
 
     protected void extractWaypoints(@Nullable final CharSequence text, @Nullable final Geocache cache) {

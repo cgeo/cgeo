@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.ActionBar;
 
@@ -30,12 +29,5 @@ public class AbstractActionBarActivity extends AbstractActivity {
         super.setTitle(title);
         // reflect the title in the actionbar
         ActivityMixin.setTitle(this, title);
-    }
-
-    /**
-     * @param view view to activate the context ActionBar for
-     */
-    public void addContextMenu(final View view) {
-        // placeholder for derived implementations
     }
 }
