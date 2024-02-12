@@ -568,6 +568,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Difficulty / Terrain Matrix</string>
     <string name="cache_filter_rating">Rating</string>
     <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_individualroute">Individual route</string>
     <string name="cache_filter_attributes">Cache Attributes</string>
     <string name="cache_filter_favorites">Favorites</string>
     <string name="cache_filter_distance">Distance</string>
@@ -676,6 +677,8 @@
     <string name="cache_filter_status_exclude_active">Exclude Active</string>
     <string name="cache_filter_status_exclude_disabled">Exclude Disabled</string>
     <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
+
+    <string name="cache_filter_boolean_individualroute_contained">Contained in route</string>
 
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Include caches without D/T</string>
 
