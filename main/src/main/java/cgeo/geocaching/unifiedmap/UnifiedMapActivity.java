@@ -315,7 +315,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
 */
         tileProvider = newSource;
-        mapFragment = new TestFragment();
+        mapFragment = new TinyFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mapViewFragment, mapFragment)

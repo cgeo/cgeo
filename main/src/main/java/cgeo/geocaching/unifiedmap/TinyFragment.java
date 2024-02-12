@@ -20,6 +20,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.zip.ZipInputStream;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.oscim.android.MapView;
@@ -46,54 +54,58 @@ import org.oscim.tiling.source.mapfile.MapInfo;
 import org.oscim.utils.animation.Easing;
 import static org.oscim.map.Animator.ANIM_ROTATE;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.zip.ZipInputStream;
-
-public class TestFragment extends AbstractMapFragment implements XmlRenderThemeMenuCallback {
+public class TinyFragment extends AbstractMapFragment implements XmlRenderThemeMenuCallback {
 
     private MapView mapView;
     private IRenderTheme theme;
 
-    public TestFragment() {
+    public TinyFragment() {
         super(R.layout.fragment_map);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mapView = new MapView(getActivity());
-        RelativeLayout relativeLayout = view.findViewById(R.id.mapView);
+        final RelativeLayout relativeLayout = view.findViewById(R.id.mapView);
         relativeLayout.addView(mapView);
 
         // Open map
-        final List<ImmutablePair<String, Uri>> offlineMaps =
+        List<ImmutablePair<String, Uri>> offlineMaps =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
-                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("berlin (oam).map") && isValidMapFile(fi.uri))
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("germany (oam).map") && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
-        loadMap(offlineMaps.get(0).right); // berlin (oam).map
-        loadTheme(null);
+        if (offlineMaps.size() != 1) {
+            offlineMaps =
+                    CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
+                            .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("berlin (oam).map") && isValidMapFile(fi.uri))
+                            .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+        }
+        loadMap(offlineMaps.get(0).right); // "germany (oam).map" or "berlin (oam).map", whatever is found first
+
+        // try to load Elevate.zip theme; use built-in VTM.DEFAULT otherwise
+        List<ImmutablePair<String, Uri>> themes =
+                CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_THEMES, true))
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("elevate.zip"))
+                        .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+        loadTheme(themes.size() > 0 ? themes.get(0).right : null);
     }
 
-    private void loadMap(Uri mapUri) {
+    private void loadMap(final Uri mapUri) {
         try {
             // Tile source
-            MapFileTileSource tileSource = new MapFileTileSource();
-            FileInputStream fis = (FileInputStream) getActivity().getContentResolver().openInputStream(mapUri);
+            final MapFileTileSource tileSource = new MapFileTileSource();
+            final FileInputStream fis = (FileInputStream) getActivity().getContentResolver().openInputStream(mapUri);
             tileSource.setMapFileInputStream(fis);
 
             // Vector layer
-            VectorTileLayer tileLayer = mapView.map().setBaseMap(tileSource);
+            final VectorTileLayer tileLayer = mapView.map().setBaseMap(tileSource);
 
             // Building layer
             mapView.map().layers().add(new BuildingLayer(mapView.map(), tileLayer));
@@ -106,16 +118,16 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
             }
 
             // Scale bar
-            MapScaleBar mapScaleBar = new DefaultMapScaleBar(mapView.map());
-            MapScaleBarLayer mapScaleBarLayer = new MapScaleBarLayer(mapView.map(), mapScaleBar);
+            final MapScaleBar mapScaleBar = new DefaultMapScaleBar(mapView.map());
+            final MapScaleBarLayer mapScaleBarLayer = new MapScaleBarLayer(mapView.map(), mapScaleBar);
             mapScaleBarLayer.getRenderer().setPosition(GLViewport.Position.BOTTOM_LEFT);
             mapScaleBarLayer.getRenderer().setOffset(5 * CanvasAdapter.getScale(), 0);
             mapView.map().layers().add(mapScaleBarLayer);
 
             // initial position
-            MapInfo info = tileSource.getMapInfo();
+            final MapInfo info = tileSource.getMapInfo();
             if (!info.boundingBox.contains(mapView.map().getMapPosition().getGeoPoint())) {
-                MapPosition pos = new MapPosition();
+                final MapPosition pos = new MapPosition();
                 pos.setByBoundingBox(info.boundingBox, Tile.SIZE * 4, Tile.SIZE * 4);
                 mapView.map().setMapPosition(pos);
             }
@@ -125,7 +137,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
         }
     }
 
-    private void loadTheme(Uri themeUri) {
+    private void loadTheme(final Uri themeUri) {
         try {
             if (theme != null) {
                 theme.dispose();
@@ -137,7 +149,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
                 if (xmlThemes.isEmpty()) {
                     return;
                 }
-                ThemeFile themeFile = new ZipRenderTheme(xmlThemes.get(0), new ZipXmlThemeResourceProvider(new ZipInputStream(new BufferedInputStream(getActivity().getContentResolver().openInputStream(themeUri)))));
+                final ThemeFile themeFile = new ZipRenderTheme(xmlThemes.get(0), new ZipXmlThemeResourceProvider(new ZipInputStream(new BufferedInputStream(getActivity().getContentResolver().openInputStream(themeUri)))));
                 theme = mapView.map().setTheme(themeFile);
             } else {
                 theme = mapView.map().setTheme(VtmThemes.DEFAULT);
@@ -184,7 +196,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
     }
 
     @Override
-    public boolean supportsTileSource(AbstractTileProvider newSource) {
+    public boolean supportsTileSource(final AbstractTileProvider newSource) {
         return true;
     }
 
@@ -194,7 +206,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
     }
 
     @Override
-    public void setCenter(Geopoint geopoint) {
+    public void setCenter(final Geopoint geopoint) {
         final MapPosition pos = mapView.map().getMapPosition();
         pos.setPosition(geopoint.getLatitude(), geopoint.getLongitude());
         mapView.map().setMapPosition(pos);
@@ -212,7 +224,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
     }
 
     @Override
-    public void zoomToBounds(Viewport bounds) {
+    public void zoomToBounds(final Viewport bounds) {
         zoomToBounds(new BoundingBox(bounds.bottomLeft.getLatitudeE6(), bounds.bottomLeft.getLongitudeE6(), bounds.topRight.getLatitudeE6(), bounds.topRight.getLongitudeE6()));
     }
 
@@ -245,14 +257,14 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
     }
 
     @Override
-    public void setZoom(int zoomLevel) {
+    public void setZoom(final int zoomLevel) {
         final MapPosition pos = mapView.map().getMapPosition();
         pos.setZoomLevel(zoomLevel);
         mapView.map().setMapPosition(pos);
     }
 
     @Override
-    public void zoomInOut(boolean zoomIn) {
+    public void zoomInOut(final boolean zoomIn) {
         mapView.map().animator().animateZoom(300, zoomIn ? 2 : 0.5, 0f, 0f);
     }
 
@@ -262,7 +274,7 @@ public class TestFragment extends AbstractMapFragment implements XmlRenderThemeM
     }
 
     @Override
-    public void setBearing(float bearing) {
+    public void setBearing(final float bearing) {
         final float adjustedBearing = AngleUtils.normalize(360 - bearing); // VTM uses opposite way of calculating bearing compared to GM
         final MapPosition pos = mapView.map().getMapPosition();
         pos.setBearing(adjustedBearing);

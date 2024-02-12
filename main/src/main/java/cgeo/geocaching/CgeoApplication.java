@@ -30,8 +30,6 @@ import java.security.MessageDigest;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.oscim.utils.Parameters;
-
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
@@ -82,8 +80,6 @@ public class CgeoApplication extends Application {
             // Log.e("app hashkey: " + getApplicationHashkey(this));
 
             MessageCenterUtils.configureMessageCenterPolling();
-
-            initializeMaps();
 
             LooperLogger.startLogging(Looper.getMainLooper());
         }
@@ -168,11 +164,6 @@ public class CgeoApplication extends Application {
             return e.toString();
         }
         return sb.toString();
-    }
-
-    private void initializeMaps() {
-        //VTM map: global settings
-        Parameters.TRANSPARENT_LINES = true; //See #15029. This prevents rendering of "darker edges"git a for overlapping semi-transparent route parts
     }
 
 }
