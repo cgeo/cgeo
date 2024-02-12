@@ -139,7 +139,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
 
-    private TestFragment mapFragment;
+    private TinyFragment mapFragment;
     private MapView mapView;
     private IRenderTheme theme;
 
@@ -240,15 +240,25 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // Open map
         mapView = findViewById(R.id.mapView);
-        final List<ImmutablePair<String, Uri>> offlineMaps =
+        List<ImmutablePair<String, Uri>> offlineMaps =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
-                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("berlin (oam).map") && isValidMapFile(fi.uri))
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("germany (oam).map") && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
-        mapFragment = new TestFragment(this, mapView, null);
-        mapFragment.loadMap(offlineMaps.get(0).right); // berlin (oam).map
-        mapFragment.loadTheme(null);
+        if (offlineMaps.size() != 1) {
+            offlineMaps =
+                    CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
+                            .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("berlin (oam).map") && isValidMapFile(fi.uri))
+                            .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+        }
+        mapFragment = new TinyFragment(this, mapView, null);
+        mapFragment.loadMap(offlineMaps.get(0).right); // "germany (oam).map" or "berlin (oam).map", whatever is found first
 
-
+        // try to load Elevate.zip theme; use built-in VTM.DEFAULT otherwise
+        final List<ImmutablePair<String, Uri>> themes =
+        CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_THEMES, true))
+                .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith("elevate.zip"))
+                .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+        mapFragment.loadTheme(themes.size() > 0 ? themes.get(0).right : null);
 
         FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapType.filterContext);

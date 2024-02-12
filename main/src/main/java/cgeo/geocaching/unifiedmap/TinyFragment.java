@@ -15,6 +15,13 @@ import cgeo.geocaching.utils.Log;
 import android.net.Uri;
 import android.view.View;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.zip.ZipInputStream;
+
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
@@ -39,21 +46,13 @@ import org.oscim.tiling.source.mapfile.MapInfo;
 import org.oscim.utils.animation.Easing;
 import static org.oscim.map.Animator.ANIM_ROTATE;
 
-import java.io.BufferedInputStream;
+public class TinyFragment implements XmlRenderThemeMenuCallback {
 
-import java.io.FileInputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.zip.ZipInputStream;
-
-public class TestFragment implements XmlRenderThemeMenuCallback {
-
-    private MapView mapView;
+    private final MapView mapView;
     private IRenderTheme theme;
-    private AbstractNavigationBarMapActivity activity;
+    private final AbstractNavigationBarMapActivity activity;
 
-    public TestFragment(final AbstractNavigationBarMapActivity activity, final MapView mapView, final IRenderTheme theme) {
+    public TinyFragment(final AbstractNavigationBarMapActivity activity, final MapView mapView, final IRenderTheme theme) {
         this.activity = activity;
         this.mapView = mapView;
         this.theme = theme;
@@ -131,7 +130,7 @@ public class TestFragment implements XmlRenderThemeMenuCallback {
         return new HashSet<>();
     }
 
-    public boolean supportsTileSource(AbstractTileProvider newSource) {
+    public boolean supportsTileSource(final AbstractTileProvider newSource) {
         return true;
     }
 
@@ -200,7 +199,7 @@ public class TestFragment implements XmlRenderThemeMenuCallback {
         mapView.map().setMapPosition(pos);
     }
 
-    public void zoomInOut(boolean zoomIn) {
+    public void zoomInOut(final boolean zoomIn) {
         mapView.map().animator().animateZoom(300, zoomIn ? 2 : 0.5, 0f, 0f);
     }
 

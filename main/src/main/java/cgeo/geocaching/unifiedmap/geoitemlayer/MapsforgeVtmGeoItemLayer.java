@@ -129,6 +129,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
                 .fillAlpha(Color.aToFloat(fillColor))
                 .fillColor(fillColor)
+                .transparent(true) ////See #15029. Following parameter prevents rendering of "darker edges" for overlapping semi-transparent route parts
                 .dropDistance(ViewUtils.dpToPixelFloat(2)) //see #15029. This setting stops rendering route parts at some point when zooming out
                 .cap(Paint.Cap.BUTT)
                 .fixed(true)
