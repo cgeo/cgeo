@@ -74,7 +74,6 @@ import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.TrackableListAdapter;
@@ -155,7 +154,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
@@ -351,11 +349,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             requireGeodata = currentPageId == Page.DETAILS.id;
             // resume location access
             startOrStopGeoDataListener(false);
-
-            // dispose contextual actions on page change
-            if (currentActionMode != null) {
-                currentActionMode.finish();
-            }
         }, true);
         requireGeodata = pageToOpen == Page.DETAILS.id;
 
@@ -1154,7 +1147,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache name (full name), may be editable
             // Not using colored cache names at this place to have at least one place without any formatting to support visually impaired users
             final TextView cachename = details.add(R.string.cache_name, cache.getName()).valueView;
-            activity.addContextMenu(cachename);
+            activity.addShareAction(cachename);
             if (cache.supportsNamechange()) {
                 cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
                     cachename.setText(name);
@@ -1169,7 +1162,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 details.addAlcMode(cache);
             }
             details.addSize(cache);
-            activity.addContextMenu(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
+            activity.addShareAction(details.add(R.string.cache_geocode, cache.getShortGeocode()).valueView);
             details.addCacheState(cache);
 
             activity.cacheDistanceView = details.addDistance(cache, activity.cacheDistanceView);
@@ -1202,7 +1195,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // hidden or event date
             final TextView hiddenView = details.addHiddenDate(cache);
             if (hiddenView != null) {
-                activity.addContextMenu(hiddenView);
+                activity.addShareAction(hiddenView);
                 if (cache.isEventCache()) {
                     hiddenView.setOnClickListener(v -> CalendarUtils.openCalendar(activity, cache.getHiddenDate()));
                 }
@@ -1217,7 +1210,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache.getCoords() != null) {
                 final TextView valueView = details.add(R.string.cache_coordinates, cache.getCoords().toString()).valueView;
                 new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
-                activity.addContextMenu(valueView);
+                activity.addShareAction(valueView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             }
 
             // Latest logs
@@ -1600,11 +1593,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    /**
-     * Reflect the (contextual) action mode of the action bar.
-     */
-    protected ActionMode currentActionMode;
-
     public static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
         private static final int DESCRIPTION_MAX_SAFE_LENGTH = 50000;
@@ -1665,7 +1653,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // cache personal note
             setPersonalNote(binding.personalnote, binding.personalnoteButtonSeparator, cache.getPersonalNote());
             binding.personalnote.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-            activity.addContextMenu(binding.personalnote);
+            activity.addShareAction(binding.personalnote);
             TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
             binding.editPersonalnote.setOnClickListener(v -> {
                 activity.ensureSaved();
@@ -1724,7 +1712,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     binding.hintBox.setOnClickListener(new DecryptTextClickListener(binding.hint));
                     binding.hintBox.setClickable(true);
                 }
-                activity.addContextMenu(binding.hint);
             } else {
                 binding.hint.setVisibility(View.GONE);
                 binding.hint.setClickable(false);
@@ -2190,7 +2177,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // coordinates
             holder.setCoordinate(coordinates);
-            activity.addContextMenu(coordinatesView);
+            activity.addShareAction(coordinatesView, s -> GeopointFormatter.reformatForClipboard(s).toString());
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
             final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
@@ -2259,7 +2246,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return true;
             });
 
-            activity.addContextMenu(rowView);
             rowView.setOnClickListener(v -> {
                 activity.selectedWaypoint = wpt;
                 activity.ensureSaved();
@@ -2354,58 +2340,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         context.startActivity(cachesIntent);
     }
 
-    private ActionMode mActionMode = null;
-    private boolean mSelectionModeActive = false;
-    private IndexOutOfBoundsAvoidingTextView selectedTextView;
-
-    private class TextMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
-
-        @Override
-        public boolean onMenuItemClick(final MenuItem menuItem) {
-            if (selectedTextView == null || selectedTextView.getText() == null) {
-                return false;
-            }
-            final CharSequence text = selectedTextView.getText();
-            final int startSelection = selectedTextView.getSelectionStart();
-            final int endSelection = selectedTextView.getSelectionEnd();
-            clickedItemText = startSelection >= 0 && endSelection >= startSelection && endSelection <= text.length() ?
-                    text.subSequence(startSelection, endSelection) : text;
-            return onClipboardItemSelected(mActionMode, menuItem, clickedItemText, cache);
-        }
-    }
-
-    @Override
-    public void onSupportActionModeStarted(@NonNull final ActionMode mode) {
-        if (mSelectionModeActive && selectedTextView != null) {
-            mSelectionModeActive = false;
-            mActionMode = mode;
-            final Menu menu = mode.getMenu();
-            mode.getMenuInflater().inflate(R.menu.details_context, menu);
-            menu.findItem(R.id.menu_copy).setVisible(false);
-            menu.findItem(R.id.menu_cache_share_field).setOnMenuItemClickListener(new TextMenuItemClickListener());
-            menu.findItem(R.id.menu_translate_to_sys_lang).setOnMenuItemClickListener(new TextMenuItemClickListener());
-            menu.findItem(R.id.menu_translate_to_english).setOnMenuItemClickListener(new TextMenuItemClickListener());
-            final MenuItem extWpts = menu.findItem(R.id.menu_extract_waypoints);
-            extWpts.setVisible(true);
-            extWpts.setOnMenuItemClickListener(new TextMenuItemClickListener());
-            buildDetailsContextMenu(mode, menu, res.getString(R.string.cache_description), false);
-            selectedTextView.setWindowFocusWait(true);
-        }
-        super.onSupportActionModeStarted(mode);
-    }
-
-    @Override
-    public void onSupportActionModeFinished(@NonNull final ActionMode mode) {
-        mActionMode = null;
-        if (selectedTextView != null) {
-            selectedTextView.setWindowFocusWait(false);
-        }
-        if (!mSelectionModeActive) {
-            selectedTextView = null;
-        }
-        super.onSupportActionModeFinished(mode);
-    }
-
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -2420,87 +2354,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         this.imageGalleryPos = ImageGalleryView.onActivityReenter(this, this.imageGallery, data);
     }
 
-    @Override
-    public void addContextMenu(final View view) {
+    public void addShareAction(final TextView view) {
+        addShareAction(view, s -> s);
+    }
+
+    public void addShareAction(final TextView view, final androidx.arch.core.util.Function<String, String> formatter) {
         view.setOnLongClickListener(v -> {
-            if (view.getId() == R.id.description || view.getId() == R.id.hint) {
-                selectedTextView = (IndexOutOfBoundsAvoidingTextView) view;
-                mSelectionModeActive = true;
-                return false;
-            }
-            currentActionMode = startSupportActionMode(new ActionMode.Callback() {
-
-                @Override
-                public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
-                    return prepareClipboardActionMode(view, actionMode, menu);
-                }
-
-                private boolean prepareClipboardActionMode(final View view1, final ActionMode actionMode, final Menu menu) {
-                    final int viewId = view1.getId();
-                    if (viewId == R.id.value) { // coordinates, gc-code, name
-                        clickedItemText = ((TextView) view1).getText();
-                        final CharSequence itemTitle = ((TextView) ((View) view1.getParent().getParent()).findViewById(R.id.name)).getText();
-                        if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
-                            clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
-                        }
-                        buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                    } else if (viewId == R.id.description) {
-                        // combine short and long description
-                        final String shortDesc = cache.getShortDescription();
-                        if (StringUtils.isBlank(shortDesc)) {
-                            clickedItemText = cache.getDescription();
-                        } else {
-                            clickedItemText = shortDesc + "\n\n" + cache.getDescription();
-                        }
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_description), false);
-                    } else if (viewId == R.id.personalnote) {
-                        clickedItemText = cache.getPersonalNote();
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_personal_note), true);
-                    } else if (viewId == R.id.hint) {
-                        clickedItemText = cache.getHint();
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_hint), false);
-                    } else if (viewId == R.id.log) {
-                        clickedItemText = ((TextView) view1).getText();
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
-                    } else if (viewId == R.id.date) { // event date
-                        clickedItemText = Formatter.formatHiddenDate(cache);
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_event), true);
-                        menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
-                    } else if (viewId == R.id.coordinates) {
-                        clickedItemText = ((TextView) view1).getText();
-                        clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
-                        buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_coordinates), true);
-                    } else {
-                        return false;
-                    }
-                    return true;
-                }
-
-                @Override
-                public void onDestroyActionMode(final ActionMode actionMode) {
-                    currentActionMode = null;
-                }
-
-                @Override
-                public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
-                    actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-                    prepareClipboardActionMode(view, actionMode, menu);
-                    // Return true so that the action mode is shown
-                    return true;
-                }
-
-                @Override
-                public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                    // detail fields
-                    if (menuItem.getItemId() == R.id.menu_calendar) {
-                        CalendarAdder.addToCalendar(CacheDetailActivity.this, cache);
-                        actionMode.finish();
-                        return true;
-                        // handle clipboard actions in base
-                    }
-                    return onClipboardItemSelected(actionMode, menuItem, clickedItemText, cache);
-                }
-            });
+            ShareUtils.sharePlainText(this, formatter.apply(view.getText().toString()));
             return true;
         });
     }

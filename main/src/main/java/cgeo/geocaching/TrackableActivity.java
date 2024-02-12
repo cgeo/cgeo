@@ -48,7 +48,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.view.ActionMode;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -109,11 +108,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             // Do not do anything, as we just want to maintain the GPS on
         }
     };
-
-    /**
-     * Action mode of the current contextual action bar (e.g. for copy and share actions).
-     */
-    private ActionMode currentActionMode;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -453,7 +447,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
             // trackable name
             final TextView nameTxtView = details.add(R.string.trackable_name, StringUtils.isNotBlank(trackable.getName()) ? TextUtils.stripHtml(trackable.getName()) : activity.res.getString(R.string.trackable_unknown)).valueView;
-            activity.addContextMenu(nameTxtView);
+            activity.addShareAction(nameTxtView);
 
             // missing status
             if (trackable.isMissing()) {
@@ -471,7 +465,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             details.add(R.string.trackable_type, tbType);
 
             // trackable geocode
-            activity.addContextMenu(details.add(R.string.trackable_code, trackable.getGeocode()).valueView);
+            activity.addShareAction(details.add(R.string.trackable_code, trackable.getGeocode()).valueView);
 
             // retrieved status
             final Date logDate = trackable.getLogDate();
@@ -558,18 +552,18 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             if (StringUtils.isNotBlank(trackable.getOrigin())) {
                 final TextView origin = details.add(R.string.trackable_origin, "").valueView;
                 origin.setText(HtmlCompat.fromHtml(trackable.getOrigin(), HtmlCompat.FROM_HTML_MODE_LEGACY), TextView.BufferType.SPANNABLE);
-                activity.addContextMenu(origin);
+                activity.addShareAction(origin);
             }
 
             // trackable released
             final Date releasedDate = trackable.getReleased();
             if (releasedDate != null) {
-                activity.addContextMenu(details.add(R.string.trackable_released, Formatter.formatDate(releasedDate.getTime())).valueView);
+                activity.addShareAction(details.add(R.string.trackable_released, Formatter.formatDate(releasedDate.getTime())).valueView);
             }
 
             // trackable distance
             if (trackable.getDistance() >= 0) {
-                activity.addContextMenu(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())).valueView);
+                activity.addShareAction(details.add(R.string.trackable_distance, Units.getDistanceFromKilometers(trackable.getDistance())).valueView);
             }
 
             // trackable goal
@@ -578,7 +572,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.goal.setVisibility(View.VISIBLE);
                 binding.goal.setText(HtmlCompat.fromHtml(trackable.getGoal(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(activity.geocode, true, false, binding.goal, false), null), TextView.BufferType.SPANNABLE);
                 binding.goal.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                activity.addContextMenu(binding.goal);
             }
 
             // trackable details
@@ -587,7 +580,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.details.setVisibility(View.VISIBLE);
                 binding.details.setText(HtmlCompat.fromHtml(trackable.getDetails(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(activity.geocode, true, false, binding.details, false), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
                 binding.details.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
-                activity.addContextMenu(binding.details);
             }
 
             // trackable image
@@ -609,61 +601,11 @@ public class TrackableActivity extends TabbedViewPagerActivity {
 
     }
 
-    @Override
-    public void addContextMenu(final View view) {
-        view.setOnLongClickListener(v -> startContextualActionBar(view));
-
-        view.setOnClickListener(v -> startContextualActionBar(view));
-    }
-
-    private boolean startContextualActionBar(final View view) {
-        if (currentActionMode != null) {
-            return false;
-        }
-        currentActionMode = startSupportActionMode(new ActionMode.Callback() {
-
-            @Override
-            public boolean onPrepareActionMode(final ActionMode actionMode, final Menu menu) {
-                return prepareClipboardActionMode(view, actionMode, menu);
-            }
-
-            private boolean prepareClipboardActionMode(final View view, final ActionMode actionMode, final Menu menu) {
-                clickedItemText = ((TextView) view).getText();
-                final int viewId = view.getId();
-                if (viewId == R.id.value) { // name, TB-code, origin, released, distance
-                    final TextView textView = ((View) view.getParent().getParent()).findViewById(R.id.name);
-                    final CharSequence itemTitle = textView.getText();
-                    buildDetailsContextMenu(actionMode, menu, itemTitle, true);
-                } else if (viewId == R.id.goal) {
-                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_goal), false);
-                } else if (viewId == R.id.details) {
-                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.trackable_details), false);
-                } else if (viewId == R.id.log) {
-                    buildDetailsContextMenu(actionMode, menu, res.getString(R.string.cache_logs), false);
-                } else {
-                    return false;
-                }
-                return true;
-            }
-
-            @Override
-            public void onDestroyActionMode(final ActionMode actionMode) {
-                currentActionMode = null;
-            }
-
-            @Override
-            public boolean onCreateActionMode(final ActionMode actionMode, final Menu menu) {
-                actionMode.getMenuInflater().inflate(R.menu.details_context, menu);
-                prepareClipboardActionMode(view, actionMode, menu);
-                return true;
-            }
-
-            @Override
-            public boolean onActionItemClicked(final ActionMode actionMode, final MenuItem menuItem) {
-                return onClipboardItemSelected(actionMode, menuItem, clickedItemText, null);
-            }
+    public void addShareAction(final TextView view) {
+        view.setOnLongClickListener(v -> {
+            ShareUtils.sharePlainText(this, view.getText().toString());
+            return true;
         });
-        return false;
     }
 
     @Override
