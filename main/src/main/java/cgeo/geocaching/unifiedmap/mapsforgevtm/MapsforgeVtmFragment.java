@@ -248,10 +248,13 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    public void setTileSource(final AbstractTileProvider newSource) {
-        super.setTileSource(newSource);
-        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
-        startMap();
+    public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
+        final boolean needsUpdate = super.setTileSource(newSource, force);
+        if (needsUpdate) {
+            ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
+            startMap();
+        }
+        return needsUpdate;
     }
 
 
