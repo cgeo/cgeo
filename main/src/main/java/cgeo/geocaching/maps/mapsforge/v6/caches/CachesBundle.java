@@ -116,9 +116,9 @@ public class CachesBundle {
      * @param mapView      the map view this bundle is displayed on
      * @param mapHandlers  the handlers of the map to send events to
      */
-    public CachesBundle(final NewMap map, final Geopoint coords, final WaypointType waypointType, final MfMapView mapView, final MapHandlers mapHandlers, @Nullable final String geocode) {
+    public CachesBundle(final NewMap map, final Geopoint coords, final WaypointType waypointType, final String waypointPrefix, final MfMapView mapView, final MapHandlers mapHandlers, @Nullable final String geocode) {
         this(map, mapView, mapHandlers);
-        this.baseOverlay = new SinglePointOverlay(map, coords, waypointType, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers, geocode);
+        this.baseOverlay = new SinglePointOverlay(map, coords, waypointType, waypointPrefix, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers, geocode);
     }
 
     public void handleLiveLayers(final NewMap map, @NonNull final MapOptions mapOptions) {
