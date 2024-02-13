@@ -390,7 +390,7 @@ dependencies {
 
     // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
     String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
-    String mapsforgeVTMVersion = 'b3ff48fcc6' // LineBucket: transparent lines (9d68bdb) + dropDistance (31646b3) + line transparent style option (b3ff48fcc6)
+    String mapsforgeVTMVersion = '0.16.0' // LineBucket: transparent lines (9d68bdb) + dropDistance (31646b3) + line transparent style option (b3ff48fcc6)
 
     // Mapsforge VTM Snapshots (created by project itself)
     // See https://github.com/mapsforge/vtm/blob/master/docs/Integration.md#snapshots
