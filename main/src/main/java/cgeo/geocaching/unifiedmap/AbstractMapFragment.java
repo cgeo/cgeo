@@ -70,10 +70,13 @@ public abstract class AbstractMapFragment extends Fragment {
         forEveryLayer(GeoItemLayer::destroy);
     }
 
-    public void setTileSource(final AbstractTileProvider newSource) {
-        currentTileProvider = newSource;
+    public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
+        if (currentTileProvider != newSource || force) {
+            currentTileProvider = newSource;
+            return true;
+        }
+        return false;
     }
-
 
     // ========================================================================
     // layer handling

@@ -158,9 +158,12 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    public void setTileSource(final AbstractTileProvider newSource) {
-        super.setTileSource(newSource);
-        ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+    public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
+        final boolean needsUpdate = super.setTileSource(newSource, force);
+        if (needsUpdate) {
+            ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+        }
+        return needsUpdate;
     }
 
 
