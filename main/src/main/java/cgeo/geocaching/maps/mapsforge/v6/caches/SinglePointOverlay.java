@@ -18,13 +18,15 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
 
     private final Geopoint coords;
     private final WaypointType type;
+    private final String waypointPrefix;
     private final String geocode;
 
-    public SinglePointOverlay(final NewMap map, final Geopoint coords, final WaypointType type, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers, @Nullable final String geocode) {
+    public SinglePointOverlay(final NewMap map, final Geopoint coords, final WaypointType type, final String waypointPrefix, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers, @Nullable final String geocode) {
         super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
 
         this.coords = coords;
         this.type = type;
+        this.waypointPrefix = waypointPrefix;
         this.geocode = geocode;
 
         AndroidRxUtils.computationScheduler.scheduleDirect(this::fill);
@@ -45,6 +47,7 @@ public class SinglePointOverlay extends AbstractCachesOverlay {
             // construct waypoint
             final Waypoint waypoint = new Waypoint("", type, false);
             waypoint.setCoords(coords);
+            waypoint.setPrefix(waypointPrefix);
             if (StringUtils.isNotBlank(geocode)) {
                 waypoint.setGeocode(geocode);
             }
