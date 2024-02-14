@@ -306,6 +306,7 @@
     <string name="info_log_posted">로그를 성공적으로 제출했습니다.</string>
     <string name="info_log_saved">로그를 성공적으로 저장했습니다.</string>
     <string name="info_log_post_failed">로그 올리기가 실패했습니다.</string>
+    <string name="info_log_delete_failed">로그 삭제 실패했습니다.</string>
     <string name="info_log_post_failed_reason">사유 : %s</string>
     <string name="info_log_post_retry">재시도</string>
     <string name="info_log_post_save">오프라인 저장</string>
@@ -1415,6 +1416,7 @@
     <string name="cache_log_menu_edit">로그 편집</string>
     <string name="cache_log_menu_delete">로그 삭제</string>
     <string name="cache_log_menu_popup_title">%s의 로그</string>
+    <string name="cache_log_delete_reason_default">c:geo를 사용하여 로그가 삭제되었습니다.</string>
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
