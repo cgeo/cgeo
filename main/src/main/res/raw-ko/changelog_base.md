@@ -31,5 +31,5 @@
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
 
-### Changes since current beta version
-- New: Show images linked in "personal note" in Images tab
+### 현재 베타버전 이후 변경사항
+- 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
