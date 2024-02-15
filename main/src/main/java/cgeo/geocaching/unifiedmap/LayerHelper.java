@@ -10,13 +10,13 @@ public class LayerHelper {
 
     public static final int ZINDEX_SEARCHCENTER = 13;
 
-    public static final int ZINDEX_TRACK_ROUTE = 12;
+    public static final int ZINDEX_GEOCACHE = 12;
+    public static final int ZINDEX_WAYPOINT = 11;
+    public static final int ZINDEX_COORD_POINT = 10;
 
-    public static final int ZINDEX_DIRECTION_LINE = 11;
+    public static final int ZINDEX_TRACK_ROUTE = 9;
 
-    public static final int ZINDEX_GEOCACHE = 10;
-    public static final int ZINDEX_WAYPOINT = 9;
-    public static final int ZINDEX_COORD_POINT = 8;
+    public static final int ZINDEX_DIRECTION_LINE = 8;
 
     public static final int ZINDEX_POSITION_ACCURACY_CIRCLE = 7;
 
