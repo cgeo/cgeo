@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.models.geoitem.GeoIcon;
-import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
@@ -123,7 +122,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     public Pair<Drawable, MarkerInterface> add(final GeoPrimitive item) {
 
         final int fillColor = GeoStyle.getFillColor(item.getStyle());
-        final float rawStrokeWidth = GeoStyle.getStrokeWidth(item.getStyle()) / (item.getType() == GeoItem.GeoType.POLYGON ? 1.5f : 2f);
+        final float rawStrokeWidth = GeoStyle.getStrokeWidth(item.getStyle()) / 1.5f;
         final Style style = Style.builder()
                 .strokeWidth(ViewUtils.dpToPixelFloat(rawStrokeWidth))
                 .strokeColor(GeoStyle.getStrokeColor(item.getStyle()))
