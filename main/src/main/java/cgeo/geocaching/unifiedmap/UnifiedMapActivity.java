@@ -324,7 +324,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged, @Nullable final UnifiedMapState mapState) {
         TileProviderFactory.resetLanguages();
-        mapFragment.setTileSource(newSource);
+        mapFragment.setTileSource(newSource, false);
         Settings.setTileProvider(newSource);
 
 //        tileProvider.getMap().showSpinner(); - should be handled from UnifiedMapActivity instead

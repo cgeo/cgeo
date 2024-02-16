@@ -41,6 +41,7 @@ public class Intents {
     public static final String EXTRA_MESSAGE_CENTER_COUNTER = "mccounter";
 
     public static final String EXTRA_WPTTYPE = PREFIX + "wpttype";
+    public static final String EXTRA_WPTPREFIX = PREFIX + "wptprefix";
     public static final String EXTRA_MAPSTATE = PREFIX + "mapstate";
     public static final String EXTRA_TITLE = PREFIX + "title";
     public static final String EXTRA_MAP_MODE = PREFIX + "mapMode";

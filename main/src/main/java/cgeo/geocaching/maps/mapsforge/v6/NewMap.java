@@ -870,12 +870,12 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             this.caches = new CachesBundle(this, mapOptions.searchResult, this.mapView, this.mapHandlers);
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
             if (mapOptions.mapMode == MapMode.COORDS && mapOptions.coords != null) {
-                this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, mapOptions.geocode);
+                this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, mapOptions.waypointPrefix, this.mapView, this.mapHandlers, mapOptions.geocode);
             } else {
                 this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
             }
         } else if (mapOptions.coords != null) {
-            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, null);
+            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, mapOptions.waypointPrefix, this.mapView, this.mapHandlers, null);
         } else {
             caches = new CachesBundle(this, this.mapView, this.mapHandlers);
         }

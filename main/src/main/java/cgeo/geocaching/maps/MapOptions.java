@@ -29,6 +29,7 @@ public class MapOptions {
     public String geocode;
     public Geopoint coords;
     public WaypointType waypointType;
+    public String waypointPrefix;
     public MapState mapState;
     public String title;
     public int fromList;
@@ -43,6 +44,7 @@ public class MapOptions {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
             waypointType = (WaypointType) extras.get(Intents.EXTRA_WPTTYPE);
+            waypointPrefix = extras.getString(Intents.EXTRA_WPTPREFIX);
             mapState = extras.getParcelable(Intents.EXTRA_MAPSTATE);
             title = extras.getString(Intents.EXTRA_TITLE);
             if (null != coords && null == waypointType) {
@@ -89,9 +91,10 @@ public class MapOptions {
         isLiveEnabled = false;
     }
 
-    public MapOptions(final Geopoint coords, final WaypointType type, final String title, final String geocode) {
+    public MapOptions(final Geopoint coords, final WaypointType type, final String waypointPrefix, final String title, final String geocode) {
         this.coords = coords;
         this.waypointType = type;
+        this.waypointPrefix = waypointPrefix;
         this.title = title;
         this.geocode = geocode;
         mapMode = MapMode.COORDS;
@@ -113,6 +116,7 @@ public class MapOptions {
         intent.putExtra(Intents.EXTRA_GEOCODE, mapState != null && StringUtils.isNotBlank(mapState.getTargetGeocode()) ? mapState.getTargetGeocode() : geocode);
         intent.putExtra(Intents.EXTRA_COORDS, coords);
         intent.putExtra(Intents.EXTRA_WPTTYPE, waypointType);
+        intent.putExtra(Intents.EXTRA_WPTPREFIX, waypointPrefix);
         intent.putExtra(Intents.EXTRA_MAPSTATE, mapState);
         intent.putExtra(Intents.EXTRA_TITLE, title);
         intent.putExtra(Intents.EXTRA_LIST_ID, fromList);

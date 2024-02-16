@@ -46,7 +46,7 @@ public final class DefaultMap {
             Log.e("Launching UnifiedMap in waypoint mode (1)");
             new UnifiedMapType(waypoint).launchMap(fromActivity);
         } else {
-            new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
+            new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getPrefix(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
         }
     }
 
