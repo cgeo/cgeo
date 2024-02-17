@@ -253,7 +253,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(allLists)
                         .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
                         .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
-                        .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_manage_list))
+                        .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_list))
                         .setValueDisplayTextGetter(f -> f.title)
                         .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
