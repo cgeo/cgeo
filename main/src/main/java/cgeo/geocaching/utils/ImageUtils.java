@@ -20,9 +20,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -37,6 +41,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
@@ -960,6 +965,27 @@ public final class ImageUtils {
         intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         return Intent.createChooser(intent, null);
+    }
+
+    public static Bitmap createBitmapForText(final String text, final float textSizeInDp, @Nullable final Typeface typeface, @ColorInt final int textColor, @ColorInt final int fillColor) {
+        final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setTextSize(ViewUtils.dpToPixelFloat(textSizeInDp));
+        paint.setColor(textColor);
+        if (typeface != null) {
+            paint.setTypeface(typeface);
+        }
+
+        paint.setTextAlign(Paint.Align.LEFT);
+        final float baseline = -paint.ascent(); // ascent() is negative
+        final int width = (int) (paint.measureText(text) + 0.5f); // round
+        final int height = (int) (baseline + paint.descent() + 0.5f);
+        final Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(image);
+        if (fillColor != Color.TRANSPARENT) {
+            canvas.drawColor(fillColor, PorterDuff.Mode.SRC_OVER);
+        }
+        canvas.drawText(text, 0, baseline, paint);
+        return image;
     }
 
     /** tries to read an image from a stream supplier. Returns null if this fails. Supports normal Android bitmaps and SVG. */

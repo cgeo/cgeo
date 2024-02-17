@@ -4,10 +4,13 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ImageUtils;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -113,6 +116,94 @@ public class GeoIcon implements Parcelable {
         @NonNull
         public String toString() {
             return bitmap == null ? "<empty>" : (bitmap.getWidth() + "x" + bitmap.getHeight() + "px, hash:" + bitmap.hashCode());
+        }
+    }
+
+    /** A provider for text bitmaps */
+    public static class TextBitmapProvider implements BitmapProvider {
+
+        private final String text;
+        private final float textSizeInDp;
+        private final Typeface typeface;
+        private final int textColor;
+        private final int fillColor;
+
+        private Bitmap bitmap;
+
+        public TextBitmapProvider(final String text) {
+            this(text, 10, null, Color.BLACK, Color.TRANSPARENT);
+        }
+
+        public TextBitmapProvider(final String text, final float textSizeInDp, @Nullable final Typeface typeface, @ColorInt final int textColor, @ColorInt final int fillColor) {
+            this.text = text;
+            this.textSizeInDp = textSizeInDp;
+            this.typeface = typeface == null ? Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD) : typeface;
+            this.textColor = textColor;
+            this.fillColor = fillColor;
+        }
+
+        @Override
+        public Bitmap getBitmap() {
+            if (bitmap == null) {
+                bitmap = ImageUtils.createBitmapForText(text, textSizeInDp, typeface, textColor, fillColor);
+            }
+            return bitmap;
+        }
+
+        // Parcelable stuff
+
+        public TextBitmapProvider(final Parcel in) {
+            this.text = in.readString();
+            this.textSizeInDp = in.readFloat();
+            this.typeface = Typeface.create(Typeface.DEFAULT, in.readInt());
+            this.textColor = in.readInt();
+            this.fillColor = in.readInt();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(final Parcel dest, final int flags) {
+            dest.writeString(text);
+            dest.writeFloat(textSizeInDp);
+            dest.writeInt(typeface == null ? Typeface.NORMAL : typeface.getStyle());
+            dest.writeInt(textColor);
+            dest.writeInt(fillColor);
+        }
+
+        public static final Creator<TextBitmapProvider> CREATOR = new Creator<TextBitmapProvider>() {
+            @Override
+            public TextBitmapProvider createFromParcel(final Parcel in) {
+                return new TextBitmapProvider(in);
+            }
+
+            @Override
+            public TextBitmapProvider[] newArray(final int size) {
+                return new TextBitmapProvider[size];
+            }
+        };
+
+        // equals/hashCode stuff
+        @Override
+        public boolean equals(final Object o) {
+            if (!(o instanceof TextBitmapProvider)) {
+                return false;
+            }
+            return Objects.equals(text, ((TextBitmapProvider) o).text);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(text);
+        }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return "Bitmap:" + text;
         }
     }
 
@@ -264,6 +355,10 @@ public class GeoIcon implements Parcelable {
 
         public Builder setBitmap(@Nullable final Bitmap bitmap) {
             return setBitmapProvider(new SimpleBitmapProvider(bitmap));
+        }
+
+        public Builder setText(@Nullable final String text) {
+            return setBitmapProvider(new TextBitmapProvider(text));
         }
 
         public Builder setBitmapProvider(@Nullable final BitmapProvider bitmapProvider) {
