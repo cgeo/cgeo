@@ -1711,13 +1711,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getActiveFilterName());
+        FilterUtils.updateFilterBar(this, getActiveFilterName(), getActiveFilterSavedDifferently());
     }
 
     @Nullable
     private String getActiveFilterName() {
         if (currentCacheFilter.get().isFiltering()) {
             return currentCacheFilter.get().toUserDisplayableString();
+        }
+        return null;
+    }
+
+    @Nullable
+    private Boolean getActiveFilterSavedDifferently() {
+        if (currentCacheFilter.get().isFiltering()) {
+            return currentCacheFilter.get().isSavedDifferently();
         }
         return null;
     }
