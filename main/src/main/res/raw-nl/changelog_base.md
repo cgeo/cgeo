@@ -33,3 +33,4 @@
 
 ### Veranderingen sinds huidige bètaversie
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
+- Change: Simplify long-tap action in cache details and trackable details
