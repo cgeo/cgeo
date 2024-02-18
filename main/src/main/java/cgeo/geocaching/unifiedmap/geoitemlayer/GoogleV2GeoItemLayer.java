@@ -116,8 +116,8 @@ public class GoogleV2GeoItemLayer implements IProviderGeoItemLayer<Pair<Object, 
             case POLYLINE:
             default:
                 context = map.addPolyline(new PolylineOptions()
-                        .width(ViewUtils.dpToPixel(GeoStyle.getStrokeWidth(item.getStyle())))
-                        .color(GeoStyle.getStrokeColor(item.getStyle()))
+                        .width(strokeWidth * 4f / 3f) // factor required to adjust to OSM line width
+                        .color(strokeColor)
                         .addAll(GP_CONVERTER.toList(item.getPoints()))
                         .zIndex(zLevel));
                 break;
