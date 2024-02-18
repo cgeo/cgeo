@@ -33,3 +33,4 @@
 
 ### 현재 베타버전 이후 변경사항
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
+- Change: Simplify long-tap action in cache details and trackable details
