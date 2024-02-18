@@ -33,3 +33,4 @@
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
+- Change: Simplify long-tap action in cache details and trackable details
