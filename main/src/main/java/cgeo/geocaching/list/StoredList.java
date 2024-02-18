@@ -121,7 +121,7 @@ public final class StoredList extends AbstractList {
                         if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
                             return ImageParam.emoji(((StoredList) item).markerId, 30);
                         }
-                        return ImageParam.id(R.drawable.ic_menu_manage_list);
+                        return ImageParam.id(R.drawable.ic_menu_list);
                     })
                     .setSelectedItems(selectedListSet);
 
