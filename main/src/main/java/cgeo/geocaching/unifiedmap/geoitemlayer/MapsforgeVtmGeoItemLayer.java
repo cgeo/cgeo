@@ -14,8 +14,6 @@ import cgeo.geocaching.utils.GroupedList;
 import android.graphics.BitmapFactory;
 import android.util.Pair;
 
-import androidx.core.util.Supplier;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -76,11 +74,11 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
     @SuppressWarnings("unchecked")
-    private <T extends Layer> T getZLevelLayer(final int zLevel, final java.util.Map<Integer, T> layerMap, final Class<T> layerClass, final Supplier<T> layerCreator) {
+    private <T extends Layer> T getZLevelLayer(final int zLevel, final java.util.Map<Integer, T> layerMap, final Class<T> layerClass, final boolean createIfNotExisting) {
         layerMapLock.lock();
         try {
             T zLayer = layerMap.get(zLevel);
-            if (zLayer != null || layerCreator == null) {
+            if (zLayer != null) {
                 return zLayer;
             }
 
@@ -89,13 +87,19 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 final int layerIdx = mapLayers.groupIndexOf(zLevel, c -> layerClass.isAssignableFrom(c.getClass()));
                 if (layerIdx > 0) {
                     zLayer = (T) mapLayers.get(layerIdx);
-                } else {
-                    zLayer = layerCreator.get();
-                    mapLayers.addToGroup(zLayer, zLevel);
+                } else if (createIfNotExisting) {
+                    //create marker layer first, then vectorlayer. That way, markers will always be shown above shapes with same zLevel
+                    mapLayers.addToGroup(new ItemizedLayer(map, defaultMarkerSymbol), zLevel);
+                    mapLayers.addToGroup(new VectorLayer(map), zLevel);
+                    //since we just created the layers, we will surely find it
+                    zLayer = (T) mapLayers.get(mapLayers.groupIndexOf(zLevel, c -> layerClass.isAssignableFrom(c.getClass())));
                 }
             }
 
-            layerMap.put(zLevel, zLayer);
+            //if we found OR created layer then it will be assigned to zLayer in this place
+            if (zLayer != null) {
+                layerMap.put(zLevel, zLayer);
+            }
 
             return zLayer;
 
@@ -105,11 +109,11 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
     private ItemizedLayer getMarkerLayer(final int zLevel, final boolean createIfNonexisting) {
-        return getZLevelLayer(zLevel, markerLayerMap, ItemizedLayer.class, createIfNonexisting ? () -> new ItemizedLayer(map, defaultMarkerSymbol) : null);
+        return getZLevelLayer(zLevel, markerLayerMap, ItemizedLayer.class, createIfNonexisting);
     }
 
     private VectorLayer getVectorLayer(final int zLevel, final boolean createIfNonexisting) {
-        return getZLevelLayer(zLevel, vectorLayerMap, VectorLayer.class, createIfNonexisting ? () -> new VectorLayer(map) : null);
+        return getZLevelLayer(zLevel, vectorLayerMap, VectorLayer.class, createIfNonexisting);
     }
 
     private int getZLevel(final GeoPrimitive item) {
@@ -177,8 +181,8 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItem(marker);
             markerLayer.update();
-            markerLayer.update();
         }
+
 
         return new Pair<>(drawable, marker);
     }

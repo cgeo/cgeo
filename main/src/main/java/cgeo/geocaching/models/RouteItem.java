@@ -38,7 +38,7 @@ public class RouteItem implements Parcelable {
     private RouteItemType type;
     private String cacheGeocode;
     private int waypointId;
-    private String name;
+    private String sortFilterString;
 
     public RouteItem(final IWaypoint item) {
         setDetails(item);
@@ -49,34 +49,34 @@ public class RouteItem implements Parcelable {
     }
 
     // parse name info of GPX route point entry into RouteItem
-    public RouteItem(final String name, final Geopoint p) {
+    public RouteItem(final String sortFilterString, final Geopoint p) {
 
         // init with default values
-        setDetails(buildIdentifier(p), p, RouteItemType.COORDS, "", 0, name);
+        setDetails(buildIdentifier(p), p, RouteItemType.COORDS, "", 0, sortFilterString);
 
         // try to parse name string
-        if (StringUtils.isNotBlank(name)) {
+        if (StringUtils.isNotBlank(sortFilterString)) {
             String geocode = null;
             String prefix = null;
-            final MatcherWrapper matches = new MatcherWrapper(GEOINFO_PATTERN, name);
+            final MatcherWrapper matches = new MatcherWrapper(GEOINFO_PATTERN, sortFilterString);
             if (matches.find()) {
                 geocode = matches.group(1);
                 if (matches.groupCount() >= 3) {
                     prefix = matches.group(3);
                 }
             } else {
-                final MatcherWrapper matchesAL = new MatcherWrapper(AL_GEOINFO_PATTERN, name);
+                final MatcherWrapper matchesAL = new MatcherWrapper(AL_GEOINFO_PATTERN, sortFilterString);
                 if (matchesAL.find()) {
-                    final MatcherWrapper matchesALwpt = new MatcherWrapper(AL_WAYPOINT_PATTERN, name);
+                    final MatcherWrapper matchesALwpt = new MatcherWrapper(AL_WAYPOINT_PATTERN, sortFilterString);
                     if (matchesALwpt.find()) {
                         final int l1 = matchesALwpt.group(1) == null ? 0 : matchesALwpt.group(1).length();
                         final int l3 = matchesALwpt.group(3) == null ? 0 : matchesALwpt.group(3).length();
-                        geocode = StringUtils.left(name, name.length() - l1 - l3);
+                        geocode = StringUtils.left(sortFilterString, sortFilterString.length() - l1 - l3);
                         prefix = matchesALwpt.group(2);
                     } else {
                         // remove comment at end (if given)
                         final int l2 = matchesAL.group(3) == null ? 0 : matchesAL.group(3).length();
-                        geocode = StringUtils.left(name, name.length() - l2);
+                        geocode = StringUtils.left(sortFilterString, sortFilterString.length() - l2);
                         prefix = null;
                     }
                 }
@@ -175,8 +175,8 @@ public class RouteItem implements Parcelable {
         return identifier;
     }
 
-    public String getName() {
-        return name;
+    public String getSortFilterString() {
+        return sortFilterString;
     }
 
     public Geopoint getPoint() {
@@ -185,9 +185,9 @@ public class RouteItem implements Parcelable {
 
     private void setDetails(final IWaypoint item) {
         if (item instanceof Geocache) {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getGeocode() + ": " + item.getName());
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getName());
         } else {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), item.getGeocode() + ": " + item.getName());
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), item.getName());
         }
     }
 
@@ -197,7 +197,11 @@ public class RouteItem implements Parcelable {
         this.type = type;
         this.cacheGeocode = geocode;
         this.waypointId = waypointId;
-        this.name = name == null ? identifier : name;
+        this.sortFilterString =
+            (name == null ? "" : name)  + ":" +
+            (geocode == null ? "" : geocode) + ":" +
+            (point == null ? "" : point) + ":" +
+            (identifier == null ? "" : identifier);
         checkForCoordinates();
     }
 
@@ -258,7 +262,7 @@ public class RouteItem implements Parcelable {
         type = RouteItemType.values()[parcel.readInt()];
         cacheGeocode = parcel.readString();
         waypointId = parcel.readInt();
-        name = parcel.readString();
+        sortFilterString = parcel.readString();
     }
 
     @Override
@@ -273,7 +277,7 @@ public class RouteItem implements Parcelable {
         dest.writeInt(type.ordinal());
         dest.writeString(cacheGeocode);
         dest.writeInt(waypointId);
-        dest.writeString(name);
+        dest.writeString(sortFilterString);
     }
 
 }
