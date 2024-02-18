@@ -12,9 +12,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.EmojiUtils;
-import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,12 +23,13 @@ import androidx.annotation.DrawableRes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
 /** This is a test layer to experiment with unified geoitem layers. It is only activated with a specific developer setting */
 public class GeoItemTestLayer {
+
+    public static final String TESTLAYER_KEY_PREFIX = "TESTLAYER_";
 
     private static final Geopoint CENTER = new Geopoint(40, 10);
 
@@ -79,24 +78,14 @@ public class GeoItemTestLayer {
         }
     }
 
-    public static void handleTapTest(final GeoItemLayer<String> testLayer, final Context ctx, final Geopoint tapped, final boolean isLongTap) {
+    public static void handleTapTest(final GeoItemLayer<String> testLayer, final Context ctx, final Geopoint tapped, final String key, final boolean isLongTap) {
         if (!Settings.enableFeatureUnifiedGeoItemLayer() || testLayer == null) {
             return;
         }
-
-        final Set<String> touched = testLayer.getTouched(tapped);
-        if (touched.isEmpty()) {
-            return;
-        }
-
-        final String message = CollectionStream.of(touched).map(s -> "* " + s + " (`" + testLayer.get(s) + "`)").toJoinedString("\n");
-
-        if (ctx == null) {
-            Log.w("Context is null! Wanted to display message: " + message);
-        } else {
-            SimpleDialog.ofContext(ctx).setTitle(TextParam.text("Touched items")).setMessage(TextParam.text(message).setMarkdown(true))
-                    .show();
-        }
+        SimpleDialog.ofContext(ctx)
+            .setTitle(TextParam.text("Touched Test item"))
+            .setMessage(TextParam.text("**" + key + "**\n\n*Point: " + tapped + "*\n\n" + testLayer.get(key)).setMarkdown(true))
+            .show();
     }
 
     private Disposable startData() {
@@ -121,29 +110,30 @@ public class GeoItemTestLayer {
             for (int y = 0; y <= 2; y++) {
                 final Geopoint point = center.project(90, x * 20).project(180, y * 20);
                 final GeoItem gi = testIconWithPoly(point, Color.GREEN, x * 0.5f, y * 0.5f, 0);
-                layer.put("test-MarkerOffset-" + x + "-" + y, gi);
+                layer.put(TESTLAYER_KEY_PREFIX + "MarkerOffset-" + x + "-" + y, gi);
             }
         }
 
-        layer.put("test-MarkerOffsetRightTop", testIconWithPoly(center.project(90, 100), Color.GRAY, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.xAnchor, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.yAnchor, 0));
+        layer.put(TESTLAYER_KEY_PREFIX + "MarkerOffsetRightTop", testIconWithPoly(center.project(90, 100), Color.GRAY, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.xAnchor, GeoIcon.Hotspot.UPPER_RIGHT_CORNER.yAnchor, 0));
 
         final Geopoint circleCenter = center.project(90, 200);
         for (int a = 0; a < 360; a += 40) {
             final Geopoint point = circleCenter.project(a, 40);
             final GeoItem gi = testIconWithPoly(point, Color.RED, GeoIcon.Hotspot.CENTER.xAnchor, GeoIcon.Hotspot.CENTER.yAnchor, a);
-            layer.put("test-MarkerAngle-" + a, gi);
+            layer.put(TESTLAYER_KEY_PREFIX + "MarkerAngle-" + a, gi);
         }
 
         final Geopoint staticPolylineCenter = center.project(180, 50);
-        layer.put("test-staticPolyline", polygonAround(staticPolylineCenter, 50, Color.RED));
+        layer.put(TESTLAYER_KEY_PREFIX + "staticPolyline", polygonAround(staticPolylineCenter, 50, Color.RED));
 
         final Geopoint staticCircle = staticPolylineCenter.project(90, 50);
-        layer.put("test-staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.builder().setStrokeColor(Color.DKGRAY).setFillColor(Color.YELLOW).build()));
+        layer.put(TESTLAYER_KEY_PREFIX + "staticCircle", GeoPrimitive.createCircle(staticCircle, 40, GeoStyle.builder().setStrokeColor(Color.DKGRAY).setFillColor(Color.YELLOW).build()));
 
         final Geopoint staticPolygon = staticCircle.project(90, 50);
-        layer.put("test-staticPolygon", GeoPrimitive.createPolygon(geoGridPoints(
+        layer.put(TESTLAYER_KEY_PREFIX + "staticPolygonWithText", GeoPrimitive.createPolygon(geoGridPoints(
                 staticPolygon, 10, 0, 0, 3, 0, 3, 1, 2, 1, 2, 2, 3, 2, 3, 3, 1, 3, 0, 2
-        ), GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build()));
+        ), GeoStyle.builder().setStrokeColor(Color.YELLOW).setStrokeWidth(5f).setFillColor(Color.GREEN).build())
+                .buildUpon().setIcon(GeoIcon.builder().setText("This is my polygon").build()).build());
 
         final Geopoint staticPolWithHole = staticPolygon.project(90, 50);
         final GeoPrimitive pol = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON)
@@ -152,16 +142,16 @@ public class GeoItemTestLayer {
                 .addHole(geoGridPoints(staticPolWithHole, 10, 1, 1, 1, 2, 2, 2, 2, 1))
                 .addHole(geoGridPoints(staticPolWithHole, 10, 4, 4, 4, 5, 5, 5, 5, 4))
                 .build();
-        layer.put("test-staticPolygonWithTwoHoles", pol);
+        layer.put(TESTLAYER_KEY_PREFIX + "staticPolygonWithTwoHoles", pol);
 
         final Geopoint zLevelStuff = staticPolygon.project(180, 50);
         final GeoPrimitive one = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff, 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.GREEN).build());
         final GeoPrimitive two = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(110, 8), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.YELLOW).build());
         final GeoPrimitive three = GeoPrimitive.createPolygon(geoGridPoints(zLevelStuff.project(140, 6), 10, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0), GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth(5f).setFillColor(Color.RED).build());
 
-        layer.put("test-zOne", one.buildUpon().setZLevel(0).build());
-        layer.put("test-zTwo", two.buildUpon().setZLevel(2).build());
-        layer.put("test-zThree", three.buildUpon().setZLevel(1).build());
+        layer.put(TESTLAYER_KEY_PREFIX + "zOne", one.buildUpon().setZLevel(0).build());
+        layer.put(TESTLAYER_KEY_PREFIX + "zTwo", two.buildUpon().setZLevel(2).build());
+        layer.put(TESTLAYER_KEY_PREFIX + "zThree", three.buildUpon().setZLevel(1).build());
 
         //line thicknesses
         final Geopoint lineThickness = zLevelStuff.project(180, 50);
@@ -170,14 +160,15 @@ public class GeoItemTestLayer {
             final Geopoint start = lineThickness.project(90, i * 10);
             final Geopoint end = start.project(180, 10);
             final GeoStyle style = GeoStyle.builder().setStrokeColor(Color.BLUE).setStrokeWidth((float) widthInDp).build();
-            layer.put("lineThickness-" + widthInDp, GeoPrimitive.createPolyline(Arrays.asList(start, end), style));
+            layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-" + widthInDp,
+                GeoPrimitive.createPolyline(Arrays.asList(start, end), style).buildUpon().setIcon(GeoIcon.builder().setText(widthInDp + "dp").build()).build());
         }
 
         //button width: 38dp
-        layer.put("lineThickness-oneButton",
+        layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-oneButton",
             GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 20), lineThickness.project(180, 20).project(90, 50)),
                 GeoStyle.builder().setStrokeColor(Color.GREEN).setStrokeWidth(38f).build()));
-        layer.put("lineThickness-twoButton",
+        layer.put(TESTLAYER_KEY_PREFIX + "lineThickness-twoButton",
             GeoPrimitive.createPolyline(Arrays.asList(lineThickness.project(180, 25), lineThickness.project(180, 25).project(90, 50)),
                 GeoStyle.builder().setStrokeColor(Color.RED).setStrokeWidth(38f * 2).build()));
 
@@ -239,18 +230,18 @@ public class GeoItemTestLayer {
         final GeoItem point = GeoPrimitive.createPoint(center.project(angle, distance), GeoStyle.builder().setStrokeColor(Color.GREEN).build());
         final GeoItem group = GeoGroup.builder().addItems(point, poly).build();
 
-        layer.put("test-Quad", group);
+        layer.put(TESTLAYER_KEY_PREFIX + "Quad", group);
 
         final GeoItem flowMarker = GeoPrimitive.createMarker(center.project(angle, distance * 0.8), GeoIcon.builder()
                 .setBitmap(createBitmap(R.drawable.type_event))
                 .setRotation(angle).build());
-        layer.put("test-FlowMarker", flowMarker);
+        layer.put(TESTLAYER_KEY_PREFIX + "FlowMarker", flowMarker);
 
         //a series of markers with changing icons
         final Geopoint startDynamicMarkers = center.project(180, 80);
         for (int i = 0; i < 20; i++) {
             final GeoPrimitive iconI = GeoPrimitive.createMarker(startDynamicMarkers.project(90, 4 * i), ICON_ALL[(index + i) % ICON_ALL.length]);
-            layer.put("test-dynamicIconMarker-" + i, iconI);
+            layer.put(TESTLAYER_KEY_PREFIX + "dynamicIconMarker-" + i, iconI);
         }
 
 

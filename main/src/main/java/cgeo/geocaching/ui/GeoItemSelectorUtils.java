@@ -9,9 +9,9 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -118,14 +118,27 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createRouteOrRouteItemView(final Context context, final RouteOrRouteItem item, final View view) {
+    public static View createMapSelectableItemView(final Context context, final MapSelectableItem item, final View view) {
+
+        //handle special cases
         if (item.isRoute()) {
             return createRouteView(context, Objects.requireNonNull(item.getRoute()), view);
         }
-        return createRouteItemView(context, Objects.requireNonNull(item.getRouteItem()), view);
+        if (item.isRouteItem()) {
+            return createRouteItemView(context, Objects.requireNonNull(item.getRouteItem()), view);
+        }
+
+        //create "pure" mapselectable item view
+        setViewValues(view,
+            item.getName() == null ? TextParam.id(R.string.unknown) : item.getName(),
+            item.getDescription(),
+            item.getIcon() == null ? ImageParam.id(R.drawable.shape_line) : item.getIcon());
+        ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorText)));
+        return view;
+
     }
 
-    public static View createRouteItemView(final Context context, final RouteItem routeItem, final View view) {
+    private static View createRouteItemView(final Context context, final RouteItem routeItem, final View view) {
         if (StringUtils.isNotEmpty(routeItem.getGeocode())) {
             if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                 final Geocache cache = DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -139,7 +152,6 @@ public class GeoItemSelectorUtils {
                 }
             }
         }
-
         // Fallback - coords only points
         final TextParam title = TextParam.id(R.string.route_item_point);
         final ImageParam routeIcon = ImageParam.id(R.drawable.marker_routepoint);

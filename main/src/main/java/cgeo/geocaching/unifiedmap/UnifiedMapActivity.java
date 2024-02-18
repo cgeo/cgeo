@@ -29,9 +29,9 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
-import cgeo.geocaching.models.RouteOrRouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -924,8 +924,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public void onTap(final int latitudeE6, final int longitudeE6, final int x, final int y, final boolean isLongTap) {
 
+        final Geopoint touchedPoint = Geopoint.forE6(latitudeE6, longitudeE6);
+
         // lookup elements touched by this
-        final LinkedList<RouteOrRouteItem> result = new LinkedList<>();
+        final LinkedList<MapSelectableItem> result = new LinkedList<>();
 
         for (String key : clickableItemsLayer.getTouched(Geopoint.forE6(latitudeE6, longitudeE6))) {
 
@@ -934,7 +936,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
                 final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (temp != null && temp.getCoords() != null) {
-                    result.add(new RouteOrRouteItem(new RouteItem(temp)));
+                    result.add(new MapSelectableItem(new RouteItem(temp)));
                 }
             }
 
@@ -943,7 +945,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
                 for (RouteItem item : viewModel.individualRoute.getValue().getRouteItems()) {
                     if (identifier.equals(item.getIdentifier())) {
-                        result.add(new RouteOrRouteItem(item));
+                        result.add(new MapSelectableItem(item));
                         break;
                     }
                 }
@@ -954,27 +956,30 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
                 for (Waypoint waypoint : viewModel.waypoints.getValue()) {
                     if (fullGpxId.equals(waypoint.getFullGpxId())) {
-                        result.add(new RouteOrRouteItem(new RouteItem(waypoint)));
+                        result.add(new MapSelectableItem(new RouteItem(waypoint)));
                         break;
                     }
                 }
             }
 
             if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE)) {
-                result.add(new RouteOrRouteItem(viewModel.individualRoute.getValue()));
+                result.add(new MapSelectableItem(viewModel.individualRoute.getValue()));
             }
             if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route) {
-                result.add(new RouteOrRouteItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
+                result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
+            }
+            if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
+                result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString()));
             }
 
         }
-        Log.d("touched elements (" + result.size() + "): " + result);
+        Log.d("touched elements on " + touchedPoint + " (" + result.size() + "): " + result);
 
         if (result.size() == 0) {
             if (isLongTap) {
-                final Geopoint gp = Geopoint.forE6(latitudeE6, longitudeE6);
-                viewModel.longTapCoords.setValue(gp);
-                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
+
+                viewModel.longTapCoords.setValue(touchedPoint);
+                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
@@ -982,26 +987,25 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     return;
                 }
                 mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
-                GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap);
             }
         } else if (result.size() == 1) {
-            handleTap(result.get(0), isLongTap, x, y);
+            handleTap(result.get(0), touchedPoint, isLongTap, x, y);
         } else {
             try {
-                final ArrayList<RouteOrRouteItem> sorted = new ArrayList<>(result);
-                Collections.sort(sorted, RouteOrRouteItem.NAME_COMPARATOR);
+                final ArrayList<MapSelectableItem> sorted = new ArrayList<>(result);
+                Collections.sort(sorted, MapSelectableItem.NAME_COMPARATOR);
 
-                final SimpleDialog.ItemSelectModel<RouteOrRouteItem> model = new SimpleDialog.ItemSelectModel<>();
+                final SimpleDialog.ItemSelectModel<MapSelectableItem> model = new SimpleDialog.ItemSelectModel<>();
                 model
                     .setItems(sorted)
                     .setDisplayViewMapper((item, ctx, view, parent) ->
-                        GeoItemSelectorUtils.createRouteOrRouteItemView(UnifiedMapActivity.this, item, GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, view, parent)),
-                        (item) -> item == null ? "" : item.getName())
+                        GeoItemSelectorUtils.createMapSelectableItemView(UnifiedMapActivity.this, item, GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, view, parent)),
+                        (item) -> item == null ? "" : item.getSortFilterString())
                     .setItemPadding(0)
                     .setPlainItemPaddingLeftInDp(0);
 
                 SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
-                    handleTap(item, isLongTap, x, y);
+                    handleTap(item, touchedPoint, isLongTap, x, y);
                 });
 
             } catch (final Resources.NotFoundException e) {
@@ -1011,7 +1015,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     }
 
-    private void handleTap(final RouteOrRouteItem item, final boolean isLongTap, final int tapX, final int tapY) {
+    private void handleTap(final MapSelectableItem item, final Geopoint touchedPoint, final boolean isLongTap, final int tapX, final int tapY) {
         final RouteItem routeItem = item.isRouteItem() ? item.getRouteItem() : null;
         if (isLongTap) {
             // toggle route item
@@ -1076,6 +1080,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     });
                 }
             }
+        } else if (item.getData() instanceof String) {
+            GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
         }
     }
 
