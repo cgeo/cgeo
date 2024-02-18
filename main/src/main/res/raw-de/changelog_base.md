@@ -33,3 +33,4 @@
 
 ### Änderungen seit der aktuellen Beta-Version
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
+- Change: Simplify long-tap action in cache details and trackable details
