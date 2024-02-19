@@ -33,4 +33,4 @@
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
-- Change: Simplify long-tap action in cache details and trackable details
+- Zmiana: Uproszczenie działania długiego dotknięcia w szczegółach skrytki i szczegółach przedmiotu podróżnego
