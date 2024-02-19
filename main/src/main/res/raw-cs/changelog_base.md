@@ -33,4 +33,4 @@
 
 ### Změny od aktuální beta verze
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
-- Change: Simplify long-tap action in cache details and trackable details
+- Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
