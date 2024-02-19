@@ -238,7 +238,7 @@ public abstract class AbstractDialogFragment extends Fragment implements CacheMe
         public final Geopoint coords;
         public final String geocode;
 
-        TargetInfo(final Geopoint coords, final String geocode) {
+        public TargetInfo(final Geopoint coords, final String geocode) {
             this.coords = coords;
             this.geocode = geocode;
         }
