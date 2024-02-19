@@ -30,7 +30,7 @@ public class TracksLayer {
                 final float widthFactor = 2f;
                 final float defaultWidth = track.getTrackfile().getWidth() / widthFactor;
                 final int defaultStrokeColor = track.getTrackfile().getColor();
-                final int defaultFillColor = Color.argb(128, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
+                final int defaultFillColor = Color.argb(32, Color.red(defaultStrokeColor), Color.green(defaultStrokeColor), Color.blue(defaultStrokeColor));
                 final GeoStyle defaultStyle = GeoStyle.builder()
                         .setFillColor(defaultFillColor)
                         .setStrokeColor(defaultStrokeColor)

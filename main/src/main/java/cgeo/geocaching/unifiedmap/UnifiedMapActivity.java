@@ -693,7 +693,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapType == null || mapType.type == UMTT_PlainMap || mapType.type == UMTT_List ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
+        return mapType == null || mapType.type == UMTT_PlainMap || mapType.type == UMTT_List || mapType.type == UMTT_TargetCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
