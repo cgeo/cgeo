@@ -136,7 +136,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         renderer.setOffset(30 * CanvasAdapter.getScale(), 0); // make room for attribution
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
 
-        if (Settings.getBoolean(R.string.pref_maphillshading, false)) {
+        if (Settings.getMapShadingEnabled()) {
             //addLayer(2, new MapilionHillshadingSource().getBitmapTileLayer(mMap));
             addLayer(2, new MapToolkitHillshadingSource().getBitmapTileLayer(mMap));
         }

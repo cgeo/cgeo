@@ -14,6 +14,7 @@ import org.oscim.map.Map;
 public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvider {
 
     protected Uri mapUri;
+    protected boolean supportsHillshading = true;
 
     public AbstractMapsforgeVTMTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         super(zoomMin, zoomMax, mapAttribution);
@@ -49,6 +50,14 @@ public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvi
     @NonNull
     public String getId() {
         return super.getId() + ":" + mapUri.getLastPathSegment();
+    }
+
+    public boolean supportsHillshading() {
+        return supportsHillshading;
+    }
+
+    public void setSupportsHillshading(boolean supportsHillshading) {
+        this.supportsHillshading = supportsHillshading;
     }
 
 }

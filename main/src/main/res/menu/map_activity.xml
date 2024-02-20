@@ -25,6 +25,9 @@
             </group>
             <group android:id="@+id/menu_group_offlinemaps">
                 <item
+                    android:id="@+id/menu_hillshading"
+                    android:visible="false" />
+                <item
                     android:id="@+id/menu_download_offlinemap"
                     android:visible="false" />
                 <item

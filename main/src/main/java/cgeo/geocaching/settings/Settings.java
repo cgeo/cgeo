@@ -2458,6 +2458,10 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
+    public static boolean getMapShadingEnabled() {
+        return getBoolean(R.string.pref_maphillshading, false);
+    }
+
     public static double getMapShadingScale() {
         return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
     }
