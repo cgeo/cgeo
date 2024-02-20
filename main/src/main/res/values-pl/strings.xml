@@ -527,6 +527,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Matryca Trudność / Teren</string>
     <string name="cache_filter_rating">Ocena</string>
     <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_individualroute">Indywidualna trasa</string>
     <string name="cache_filter_attributes">Atrybuty skrytki</string>
     <string name="cache_filter_favorites">Ulubione</string>
     <string name="cache_filter_distance">Odległość</string>
@@ -618,6 +619,7 @@
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
+    <string name="cache_filter_boolean_individualroute_contained">Zawarte na trasie</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Wypełnij z gc.com</string>
     <string name="cache_filter_nested_filter_modify">modyfikuj</string>
