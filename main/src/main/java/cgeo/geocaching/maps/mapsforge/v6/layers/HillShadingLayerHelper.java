@@ -21,7 +21,7 @@ public class HillShadingLayerHelper {
     }
 
     public static HillsRenderConfig getHillsRenderConfig() {
-        if (!Settings.getBoolean(R.string.pref_maphillshading, false)) {
+        if (!Settings.getMapShadingEnabled()) {
             return null;
         }
 

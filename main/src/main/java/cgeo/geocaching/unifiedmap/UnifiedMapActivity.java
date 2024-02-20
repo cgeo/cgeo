@@ -863,6 +863,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_as_list) {
             final Collection<Geocache> caches = mapFragment.getViewport().filter(viewModel.caches.getValue().getAsList());
             CacheListActivity.startActivityMap(this, new SearchResult(caches));
+        } else if (id == R.id.menu_hillshading) {
+            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingEnabled());
+            item.setChecked(Settings.getMapShadingEnabled());
+            changeMapSource(mapFragment.currentTileProvider, getCurrentMapState());
         } else {
             final String language = TileProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
