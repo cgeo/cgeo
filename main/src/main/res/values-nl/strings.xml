@@ -517,6 +517,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Moeilijkheidsgraad / terrein matrix</string>
     <string name="cache_filter_rating">Waardering</string>
     <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_individualroute">Individuele route</string>
     <string name="cache_filter_attributes">Cache attributen</string>
     <string name="cache_filter_favorites">Favorieten</string>
     <string name="cache_filter_distance">Afstand</string>
@@ -606,6 +607,7 @@
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
+    <string name="cache_filter_boolean_individualroute_contained">Opgenomen in route</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclusief caches zonder D/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Vul met gc.com</string>
     <string name="cache_filter_nested_filter_modify">bewerk</string>
