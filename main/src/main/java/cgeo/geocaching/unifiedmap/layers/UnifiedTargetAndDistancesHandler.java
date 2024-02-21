@@ -155,7 +155,7 @@ public class UnifiedTargetAndDistancesHandler {
             distanceSupersizeView.setVisibility(View.VISIBLE);
             targetView.setBackground(null);
             distances1.setBackgroundResource(0);
-            TextParam.text(supersizeInfo.second).setImage(ImageParam.id(supersizeInfo.first)).setImageTint(-1).applyTo(distanceSupersizeView);
+            TextParam.text(supersizeInfo.second).setImage(ImageParam.id(supersizeInfo.first), TextParam.IMAGE_SIZE_EQUAL_TEXT_SIZE).setImageTint(-1).applyTo(distanceSupersizeView);
         }
     }
 

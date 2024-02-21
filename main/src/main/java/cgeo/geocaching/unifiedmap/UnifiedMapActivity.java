@@ -363,7 +363,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                     mapFragment.setCenter(waypoint.getCoords());
                                 }
                                 viewModel.waypoints.getValue().add(waypoint);
-                                viewModel.setTarget(waypoint.getCoords(), waypoint.getName());
+                                onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
                             }
                         } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
                             viewModel.caches.getValue().add(cache);
@@ -372,7 +372,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                 mapFragment.setCenter(cache.getCoords());
                             }
                             viewModel.waypoints.getValue().addAll(cache.getWaypoints());
-                            viewModel.setTarget(cache.getCoords(), cache.getGeocode());
+                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
                         }
                         viewModel.waypoints.notifyDataChanged();
                     }
