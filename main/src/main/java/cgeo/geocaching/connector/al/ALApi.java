@@ -357,7 +357,9 @@ final class ALApi {
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            cache.setFound(response.get("IsComplete").asBoolean());
+            if (!Settings.isALCfoundStateManual()) {
+                cache.setFound(response.get("IsComplete").asBoolean());
+            }
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
