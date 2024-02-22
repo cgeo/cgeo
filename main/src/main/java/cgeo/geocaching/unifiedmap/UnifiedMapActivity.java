@@ -340,92 +340,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             // react to mapType
             setMapModeFromMapType();
             viewModel.coordsIndicator.setValue(null);
-            switch (mapType.type) {
-                case UMTT_PlainMap:
-                    // restore last saved position and zoom
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
-                        mapFragment.setCenter(Settings.getUMMapCenter());
-                    }
-                    break;
-                case UMTT_TargetGeocode: // can be either a cache or a waypoint
-                    // load cache/waypoint, focus map on it, and set it as target
-                    final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
-                    if (cache != null) {
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
-                        }
-                        viewModel.waypoints.getValue().clear();
-                        if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
-                            final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
-                            if (waypoint != null) {
-                                if (setDefaultCenterAndZoom) {
-                                    mapFragment.setCenter(waypoint.getCoords());
-                                }
-                                viewModel.waypoints.getValue().add(waypoint);
-                                onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
-                            }
-                        } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
-                            viewModel.caches.getValue().add(cache);
-                            viewModel.caches.notifyDataChanged();
-                            if (setDefaultCenterAndZoom) {
-                                mapFragment.setCenter(cache.getCoords());
-                            }
-                            viewModel.waypoints.getValue().addAll(cache.getWaypoints());
-                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
-                        }
-                        viewModel.waypoints.notifyDataChanged();
-                    }
-                    break;
-                case UMTT_TargetCoords:
-                    // set given coords as map center
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.setCenter(mapType.coords);
-                    }
-                    viewModel.coordsIndicator.setValue(mapType.coords);
-                    break;
-                case UMTT_List:
-                    // load list of caches belonging to list and scale map to see them all
-                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
-                    final Viewport viewport3 = DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
-                    addSearchResultByGeocaches(searchResult);
-                    if (viewport3 != null) {
-                        loadWaypoints(this, viewModel, viewport3);
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(viewport3);
-                        }
-                        refreshMapData(false);
-                    }
-                    break;
-                case UMTT_SearchResult:
-                    // load list of caches and scale map to see them all
-                    final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
-                    addSearchResultByGeocaches(mapType.searchResult);
-                    if (viewport2 != null) {
-                        loadWaypoints(this, viewModel, viewport2);
-                        if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(viewport2);
-                        }
-                    }
-                    break;
-                default:
-                    // nothing to do
-                    break;
-            }
-            if (overridePositionAndZoom) {
-                mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
-                mapFragment.setCenter(Settings.getUMMapCenter());
-                overridePositionAndZoom = false;
-            }
-            setTitle();
-
-            // only initialize loadInBackgroundHandler if caches should actually be loaded
-            if (mapType.type == UMTT_PlainMap) {
-                if (loadInBackgroundHandler != null) {
-                    loadInBackgroundHandler.onDestroy();
-                }
-                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-            }
+            reloadCachesAndWaypoints(setDefaultCenterAndZoom);
         }
         hideProgressSpinner();
 
@@ -442,6 +357,95 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
 //        onResume();
+    }
+
+    private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
+        switch (mapType.type) {
+            case UMTT_PlainMap:
+                // restore last saved position and zoom
+                if (setDefaultCenterAndZoom) {
+                    mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
+                    mapFragment.setCenter(Settings.getUMMapCenter());
+                }
+                break;
+            case UMTT_TargetGeocode: // can be either a cache or a waypoint
+                // load cache/waypoint, focus map on it, and set it as target
+                final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
+                if (cache != null) {
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
+                    }
+                    viewModel.waypoints.getValue().clear();
+                    if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
+                        final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
+                        if (waypoint != null) {
+                            if (setDefaultCenterAndZoom) {
+                                mapFragment.setCenter(waypoint.getCoords());
+                            }
+                            viewModel.waypoints.getValue().add(waypoint);
+                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
+                        }
+                    } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
+                        viewModel.caches.getValue().add(cache);
+                        viewModel.caches.notifyDataChanged();
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.setCenter(cache.getCoords());
+                        }
+                        viewModel.waypoints.getValue().addAll(cache.getWaypoints());
+                        onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
+                    }
+                    viewModel.waypoints.notifyDataChanged();
+                }
+                break;
+            case UMTT_TargetCoords:
+                // set given coords as map center
+                if (setDefaultCenterAndZoom) {
+                    mapFragment.setCenter(mapType.coords);
+                }
+                viewModel.coordsIndicator.setValue(mapType.coords);
+                break;
+            case UMTT_List:
+                // load list of caches belonging to list and scale map to see them all
+                final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
+                final Viewport viewport3 = DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
+                addSearchResultByGeocaches(searchResult);
+                if (viewport3 != null) {
+                    loadWaypoints(this, viewModel, viewport3);
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.zoomToBounds(viewport3);
+                    }
+                    refreshMapData(false);
+                }
+                break;
+            case UMTT_SearchResult:
+                // load list of caches and scale map to see them all
+                final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
+                addSearchResultByGeocaches(mapType.searchResult);
+                if (viewport2 != null) {
+                    loadWaypoints(this, viewModel, viewport2);
+                    if (setDefaultCenterAndZoom) {
+                        mapFragment.zoomToBounds(viewport2);
+                    }
+                }
+                break;
+            default:
+                // nothing to do
+                break;
+        }
+        if (overridePositionAndZoom) {
+            mapFragment.setZoom(Settings.getMapZoom(compatibilityMapMode));
+            mapFragment.setCenter(Settings.getUMMapCenter());
+            overridePositionAndZoom = false;
+        }
+        setTitle();
+
+        // only initialize loadInBackgroundHandler if caches should actually be loaded
+        if (mapType.type == UMTT_PlainMap) {
+            if (loadInBackgroundHandler != null) {
+                loadInBackgroundHandler.onDestroy();
+            }
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+        }
     }
 
     private void compactIconModeChanged(final int newValue) {
@@ -1159,6 +1163,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.reloadIndividualRoute();
         }
         super.onResume();
+        reloadCachesAndWaypoints(false);
         MapUtils.updateFilterBar(this, mapType.filterContext);
     }
 

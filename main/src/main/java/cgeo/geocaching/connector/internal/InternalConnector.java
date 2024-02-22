@@ -15,6 +15,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
@@ -318,6 +319,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
                     Settings.setCreateUDCuseGivenList(useGivenList);
                     final String geocode = createCache(context, binding.name.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
                     CacheDetailActivity.startActivity(context, geocode);
+                    GeocacheChangedBroadcastReceiver.sendBroadcast(context, geocode);
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
                 .show();
