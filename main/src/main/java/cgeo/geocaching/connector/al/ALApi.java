@@ -164,10 +164,12 @@ final class ALApi {
         try {
             final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
             final Geocache gc = importCacheFromJSON(response);
-            final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
-            for (Geocache matchedLabCache : matchedLabCaches) {
-                if (matchedLabCache.getGeocode().equals(geocode)) {
-                    gc.setFound(matchedLabCache.isFound());
+            if (!Settings.isALCfoundStateManual()) {
+                final Collection<Geocache> matchedLabCaches = search(gc.getCoords(), 1, null);
+                for (Geocache matchedLabCache : matchedLabCaches) {
+                    if (matchedLabCache.getGeocode().equals(geocode)) {
+                        gc.setFound(matchedLabCache.isFound());
+                    }
                 }
             }
             return gc;
@@ -355,7 +357,9 @@ final class ALApi {
             cache.setRating(response.get("RatingsAverage").floatValue());
             cache.setArchived(response.get("IsArchived").asBoolean());
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
-            cache.setFound(response.get("IsComplete").asBoolean());
+            if (!Settings.isALCfoundStateManual()) {
+                cache.setFound(response.get("IsComplete").asBoolean());
+            }
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
