@@ -248,6 +248,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewModel.caches.getValue().add(cache);
                     viewModel.caches.notifyDataChanged();
                 }
+                final List<Waypoint> waypoints = DataStore.loadWaypoints(geocode);
+                if (waypoints != null) {
+                    viewModel.waypoints.getValue().addAll(waypoints);
+                    viewModel.waypoints.notifyDataChanged();
+                }
             }
         });
 
