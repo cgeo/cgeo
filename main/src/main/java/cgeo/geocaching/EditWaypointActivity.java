@@ -501,7 +501,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
                     final Waypoint copy = cache.duplicateWaypoint(waypoint, true);
                     if (copy != null) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        CacheDetailActivity.saveAndNotify(EditWaypointActivity.this, cache);
                         EditWaypointActivity.startActivityEditWaypoint(EditWaypointActivity.this, cache, copy.getId());
                     }
                 }
