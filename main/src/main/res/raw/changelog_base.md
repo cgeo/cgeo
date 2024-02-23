@@ -34,3 +34,4 @@
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
 - Change: Simplify long-tap action in cache details and trackable details
+- New: Switch to set found state of Lab Adventures either manually or automatically
