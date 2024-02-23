@@ -1,13 +1,13 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.net.Uri;
 
 import androidx.core.util.Pair;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
 
 public class MapToolkitHillshadingSource extends AbstractMapsforgeOnlineTileProvider {
     public MapToolkitHillshadingSource() {

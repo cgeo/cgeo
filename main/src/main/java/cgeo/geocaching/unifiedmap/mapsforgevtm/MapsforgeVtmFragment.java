@@ -15,7 +15,6 @@ import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.MapToolkitHillshadingSource;
-import cgeo.geocaching.unifiedmap.tileproviders.MapilionHillshadingSource;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.ImageUtils;
@@ -41,7 +40,6 @@ import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.android.MapView;
@@ -141,7 +139,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         addLayer(LayerHelper.ZINDEX_SCALEBAR, mapScaleBarLayer);
 
         if (Settings.getMapShadingEnabled()) {
-            //addLayer(2, new MapilionHillshadingSource().getBitmapTileLayer(mMap));
             addLayer(2, new MapToolkitHillshadingSource().getBitmapTileLayer(mMap));
         }
 

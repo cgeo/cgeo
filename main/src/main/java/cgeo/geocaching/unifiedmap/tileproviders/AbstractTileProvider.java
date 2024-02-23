@@ -55,7 +55,7 @@ public abstract class AbstractTileProvider {
         return supportsHillshading;
     }
 
-    public void setSupportsHillshading(boolean supportsHillshading) {
+    public void setSupportsHillshading(final boolean supportsHillshading) {
         this.supportsHillshading = supportsHillshading;
     }
 
