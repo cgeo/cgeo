@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
@@ -69,7 +70,6 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
-import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
@@ -142,7 +142,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
-    private String lastElevationChartRoute = null;
+    private String lastElevationChartRoute = null; // null=none, empty=individual route, other=track
 
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
@@ -251,10 +251,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         });
 
-        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, ACTION_INDIVIDUALROUTE_CHANGED) {
+        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, Intents.ACTION_INDIVIDUALROUTE_CHANGED) {
             @Override
             public void onReceive(final Context context, final Intent intent) {
                 viewModel.reloadIndividualRoute();
+            }
+        });
+
+        getLifecycle().addObserver(new LifecycleAwareBroadcastReceiver(this, Intents.ACTION_ELEVATIONCHART_CLOSED) {
+            @Override
+            public void onReceive(final Context context, final Intent intent) {
+                lastElevationChartRoute = null;
             }
         });
 
@@ -1061,7 +1068,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 lastElevationChartRoute = item.getRoute().getName();
                 if (RouteTrackUtils.isIndividualRoute(item.getRoute())) {
                     viewModel.individualRoute.observe(this, individualRoute -> {
-                        if (lastElevationChartRoute.isEmpty()) { // still individual route being shown?
+                        if (lastElevationChartRoute != null && lastElevationChartRoute.isEmpty()) { // still individual route being shown?
                             elevationChartUtils.showElevationChart(individualRoute, routeTrackUtils);
                         }
                     });
