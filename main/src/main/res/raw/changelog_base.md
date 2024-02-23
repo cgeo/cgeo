@@ -30,6 +30,7 @@
 - Fix: Trackable spotted cache info (website changes)
 - Fix: Missing star symbol for changed stored filters
 - Fix: Keyword search field displays "GC" after performing a search
+- Fix: Internal crash in routing calculation
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
