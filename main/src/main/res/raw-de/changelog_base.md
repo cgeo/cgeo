@@ -30,7 +30,9 @@
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
+- Fix: Internal crash in routing calculation
 
 ### Änderungen seit der aktuellen Beta-Version
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
 - Change: Simplify long-tap action in cache details and trackable details
+- New: Switch to set found state of Lab Adventures either manually or automatically
