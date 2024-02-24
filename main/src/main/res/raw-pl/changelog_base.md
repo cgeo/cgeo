@@ -30,7 +30,9 @@
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
 - Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania
+- Poprawka: Wewnętrzna awaria przy obliczaniu trasy
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
 - Zmiana: Uproszczenie działania długiego dotknięcia w szczegółach skrytki i szczegółach przedmiotu podróżnego
+- Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
