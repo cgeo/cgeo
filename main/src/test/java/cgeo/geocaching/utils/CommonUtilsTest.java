@@ -27,7 +27,7 @@ public class CommonUtilsTest {
         final List<String> data = Arrays.asList("blue", "red", "green", "x-red", "yellow", "gray", "brown", "x-pink");
         //for test, group list after first letter with standard group order. "x" is not part of a group
         final List<List<Object>> groupedList = new ArrayList<>();
-        CommonUtils.groupList(data, (s) -> s.startsWith("x-") ? null : s.substring(0, 1), null, 1,
+        CommonUtils.groupList(data, (s) -> s.startsWith("x-") ? null : s.substring(0, 1), null, 1, null,
                 (group, firstIdx, size) -> groupedList.add(Arrays.asList(group, true, firstIdx, size)),
                 (item, originalIdx, group, groupIndex) -> groupedList.add(Arrays.asList(item, false, originalIdx, group, groupIndex)));
 
@@ -51,20 +51,24 @@ public class CommonUtilsTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void groupListMinGroup() {
-        //Original Index of test data:          0       1      2
-        final List<String> data = Arrays.asList("blue", "red", "green");
+    public void groupListMinCountPerGroup() {
+        //Original Index of test data:          0        1      2        3
+        final List<String> data = Arrays.asList("brown", "red", "green", "blue");
         //for test, group list after first letter with standard group order. "x" is not part of a group
         final List<List<Object>> groupedList = new ArrayList<>();
-        CommonUtils.groupList(data, (s) -> s.substring(0, 1), null, 100,
+        CommonUtils.groupList(data, (s) -> s.substring(0, 1), null, 2, null,
                 (group, firstIdx, size) -> groupedList.add(Arrays.asList(group, true, firstIdx, size)),
                 (item, originalIdx, group, groupIndex) -> groupedList.add(Arrays.asList(item, false, originalIdx, group, groupIndex)));
 
+        //expect that the one grtop with 2 items is created, but the others are not
         assertThat(groupedList).containsExactly(
-                //no grouping shall be done -> original order
-                Arrays.asList("blue", false, 0, null, -1),
+                //grouping shall be done only for 'b'. Order inside 'b' shall be as in original list. Ungrouped items shall go on top
                 Arrays.asList("red", false, 1, null, -1),
-                Arrays.asList("green", false, 2, null, -1));
+                Arrays.asList("green", false, 2, null, -1),
+                Arrays.asList("b", true, 3, 2),
+                Arrays.asList("brown", false, 0, "b", 2),
+                Arrays.asList("blue", false, 3, "b", 2)
+        );
     }
 
     @Test

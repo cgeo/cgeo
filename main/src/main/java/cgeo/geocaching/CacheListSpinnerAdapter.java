@@ -1,6 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.list.AbstractList;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.ui.TextParam;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +57,7 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
         }
 
         final AbstractList list = getItem(position);
-        holder.title.setText(list.getTitle());
+        TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list)).applyTo(holder.title);
         if (list.getNumberOfCaches() >= 0) {
             holder.subtitle.setVisibility(View.VISIBLE);
             holder.subtitle.setText(cacheListActivity.getCacheListSubtitle(list));

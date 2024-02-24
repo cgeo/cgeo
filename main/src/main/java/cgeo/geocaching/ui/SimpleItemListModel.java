@@ -4,9 +4,11 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func4;
 
 import android.content.Context;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,11 +63,13 @@ public class SimpleItemListModel<T> {
 
         private Func1<T, G> groupMapper = null;
 
-        private Func4<G, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
+        private Func4<Pair<G, Integer>, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
         private Func1<G, ImageParam> groupDisplayIconMapper = o -> null;
         private Comparator<G> groupComparator = null;
 
-        private int minActivationGroupCount = 2;
+        private int minCountPerGroup = 1;
+
+        private G defaultGroup = null;
 
         private GroupingOptions() {
             //no instances outside of this model class
@@ -82,20 +86,20 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public Func4<G, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
+        public Func4<Pair<G, Integer>, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
             return groupDisplayViewMapper;
         }
 
         /** Sets a mapper providing the text visualization for a group item */
-        public GroupingOptions<G> setGroupDisplayMapper(final Func1<G, TextParam> groupDisplayMapper) {
+        public GroupingOptions<G> setGroupDisplayMapper(final Func2<G, Integer, TextParam> groupDisplayMapper) {
             if (groupDisplayMapper != null) {
-                setGroupDisplayViewMapper(constructDisplayViewMapper(groupDisplayMapper));
+                setGroupDisplayViewMapper(constructGroupDisplayViewMapper(groupDisplayMapper));
                 triggerChange(ChangeType.COMPLETE);
             }
             return this;
         }
 
-        public GroupingOptions<G> setGroupDisplayViewMapper(final Func4<G, Context, View, ViewGroup, View> groupDisplayViewMapper) {
+        public GroupingOptions<G> setGroupDisplayViewMapper(final Func4<Pair<G, Integer>, Context, View, ViewGroup, View> groupDisplayViewMapper) {
             if (groupDisplayViewMapper != null) {
                 this.groupDisplayViewMapper = groupDisplayViewMapper;
                 triggerChange(ChangeType.COMPLETE);
@@ -127,13 +131,24 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public int getMinActivationGroupCount() {
-            return minActivationGroupCount;
+        public int getMinCountPerGroup() {
+            return minCountPerGroup;
+        }
+
+        public G getDefaultGroup() {
+            return defaultGroup;
         }
 
         /** Sets the  minimum number of groups on which grouping is really activated */
-        public GroupingOptions<G> setMinActivationGroupCount(final int minActivationGroupCount) {
-            this.minActivationGroupCount = minActivationGroupCount;
+        public GroupingOptions<G> setMinCountPerGroup(final int minCountPerGroup) {
+            this.minCountPerGroup = minCountPerGroup;
+            triggerChange(ChangeType.COMPLETE);
+            return this;
+        }
+
+        /** Sets the  minimum number of groups on which grouping is really activated */
+        public GroupingOptions<G> setDefaultGroup(final G defaultGroup) {
+            this.defaultGroup = defaultGroup;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
@@ -185,6 +200,19 @@ public class SimpleItemListModel<T> {
         return (item, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
             final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.call(item);
+            if (tp == null) {
+                tv.setText("--");
+            } else {
+                tp.applyTo(tv);
+            }
+            return tv;
+        };
+    }
+
+    public static <TT> Func4<Pair<TT, Integer>, Context, View, ViewGroup, View> constructGroupDisplayViewMapper(final Func2<TT, Integer, TextParam> displayGroupTextMapper) {
+        return (item, context, view, parent) -> {
+            final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
+            final TextParam tp = displayGroupTextMapper == null || item == null ? TextParam.text(String.valueOf(item)) : displayGroupTextMapper.call(item.first, item.second);
             if (tp == null) {
                 tv.setText("--");
             } else {
