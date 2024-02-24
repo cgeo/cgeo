@@ -692,4 +692,11 @@ public class ViewUtils {
         }
         return result;
     }
+
+    public static void makeMutatable(final ImageView view) {
+        if (view == null || view.getDrawable() == null) {
+            return;
+        }
+        view.getDrawable().mutate();
+    }
 }

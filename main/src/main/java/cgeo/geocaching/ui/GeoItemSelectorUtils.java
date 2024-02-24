@@ -164,6 +164,7 @@ public class GeoItemSelectorUtils {
         if (icon != null) {
             icon.applyTo(view.findViewById(R.id.icon));
         }
+        ViewUtils.makeMutatable(view.findViewById(R.id.icon));
         ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), null);
 
     }
