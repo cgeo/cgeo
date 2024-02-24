@@ -816,6 +816,8 @@
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrytek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Autoryzuj c:geo z geocaching.su aby wyszukać skrytki.</string>
     <string name="settings_lc_description">Wyświetlaj Skrytki Lab na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
+    <string name="settings_lc_found_state_title">Ręcznie podawany stan znalezienia</string>
+    <string name="settings_lc_found_state_handling">Jeśli zaznaczone, nie uzyskuj automatycznie prawdziwego stanu znalezień dla skrytek Lab, zamiast tego, pozwól użytkownikowi na ręcznie ustawienie stanu znalezienia</string>
     <string name="lc_default_description">To jest Skrytka Lab z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Lab na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Załaduj skrzynki z opencaching.de</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
