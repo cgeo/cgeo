@@ -16,6 +16,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -39,7 +40,8 @@ public class QuickLaunchItem extends InfoItem {
         BACKUPRESTORE(5),
         MESSAGECENTER(10),
         MANUAL(6),
-        FAQ(7);
+        FAQ(7),
+        WHERIGO(11);
 
         public final int id;
         VALUES(final int id) {
@@ -59,6 +61,12 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, false),
         new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false)
     ));
+
+    static {
+        if (Settings.enableFeatureWherigo()) {
+            ITEMS.add(new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.type_marker_wherigo, false));
+        }
+    }
 
     @DrawableRes public int iconRes;
     public boolean gcPremiumOnly;
@@ -101,6 +109,8 @@ public class QuickLaunchItem extends InfoItem {
             ShareUtils.openUrl(activity, GCConstants.URL_MESSAGECENTER);
         } else if (which == QuickLaunchItem.VALUES.MANUAL.id) {
             ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full));
+        } else if (which == VALUES.WHERIGO.id) {
+            WherigoActivity.start(activity, hideNavigationBar);
         } else if (which == QuickLaunchItem.VALUES.FAQ.id) {
             ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
         } else if (which == QuickLaunchItem.VALUES.VIEWSETTINGS.id) {

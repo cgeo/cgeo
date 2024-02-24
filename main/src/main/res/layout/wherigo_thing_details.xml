@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/actions"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/layoutDetailsTextViewName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/layoutDetailsTextViewState"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/layoutDetailsTextViewDistance"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <cgeo.geocaching.ui.WherigoMediaView
+                android:id="@+id/media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/layoutDetailsTextViewDescription"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web" />
+
+            <!-- Input field -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dialog_input_layout"
+                android:visibility="gone"
+                style="@style/textinput_edittext_singleline">
+                <EditText
+                    android:id="@+id/dialog_input_edittext"
+                    style="@style/textinput_embedded_singleline"
+                    android:inputType="text"
+                    android:hint="" tools:ignore="LabelFor" /> <!-- hint is set by Dialog builder -->
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Item List -->
+            <cgeo.geocaching.ui.SimpleItemListView
+                android:id="@+id/dialog_itemlistview"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+    <include android:id="@+id/actions" layout="@layout/wherigo_include_actions" />
+
+</RelativeLayout>

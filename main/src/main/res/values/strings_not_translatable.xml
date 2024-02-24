@@ -35,6 +35,7 @@
 
     <!-- Persistable Folders -->
     <string translatable="false"  name="persistablefolder_gpx">GPX</string>
+    <string translatable="false"  name="persistablefolder_wherigo">Wherigo</string>
 
     <!-- export -->
     <string translatable="false" name="export_gpx">GPX</string>

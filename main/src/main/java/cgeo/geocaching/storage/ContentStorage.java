@@ -68,6 +68,7 @@ public class ContentStorage {
     public static class FileInformation {
         public final String name;
         public final Uri uri;
+        public final Folder parentFolder; // folder in which this file resides. May be null depending on retrieval context
         public final boolean isDirectory;
         /**
          * if this is a directory: location of that directory. If this is not a directory: null
@@ -77,10 +78,11 @@ public class ContentStorage {
         public final long size;
         public final long lastModified;
 
-        public FileInformation(final String name, final Uri uri, final boolean isDirectory, final Folder dirLocation, final String mimeType,
+        public FileInformation(final String name, final Uri uri, final Folder parentFolder, final boolean isDirectory, final Folder dirLocation, final String mimeType,
                                final long size, final long lastModified) {
             this.name = name;
             this.uri = uri;
+            this.parentFolder = parentFolder;
             this.dirLocation = dirLocation;
             this.isDirectory = isDirectory;
             this.mimeType = mimeType;

@@ -49,6 +49,8 @@ public final class LocalStorage {
     private static final String MAP_THEME_INTERNAL_DIR_NAME = "MapThemeData";
     private static final String MAPSFORGE_SVG_CACHE_DIR_NAME = "mapsforge-svg-cache";
     private static final String TRACKFILE_CACHE_DIR_NAME = "trackfiles";
+
+    private static final String WHERIGO_DIRNAME = "wherigo";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
@@ -62,6 +64,7 @@ public final class LocalStorage {
     private static File internalCgeoDirectory;
     private static File externalPrivateCgeoDirectory;
     private static File externalPublicCgeoDirectory;
+    private static File internalCgeoCacheDirectory;
 
     private static final int LOCALSTORAGE_VERSION = 3;
 
@@ -80,6 +83,15 @@ public final class LocalStorage {
             internalCgeoDirectory = CgeoApplication.getInstance().getApplicationContext().getFilesDir().getParentFile();
         }
         return internalCgeoDirectory;
+    }
+
+    @NonNull
+    public static File getInternalCgeoCacheDirectory() {
+        if (internalCgeoCacheDirectory == null) {
+            // A race condition will do no harm as the operation is idempotent. No need to synchronize.
+            internalCgeoCacheDirectory = CgeoApplication.getInstance().getApplicationContext().getCacheDir();
+        }
+        return internalCgeoCacheDirectory;
     }
 
     /**
@@ -162,6 +174,11 @@ public final class LocalStorage {
     @NonNull
     public static File getInternalDbDirectory() {
         return new File(getInternalCgeoDirectory(), DATABASES_DIRNAME);
+    }
+
+    @NonNull
+    public static File getWherigoCacheDirectory() {
+        return new File(getInternalCgeoCacheDirectory(), WHERIGO_DIRNAME);
     }
 
     /**

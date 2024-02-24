@@ -57,6 +57,7 @@ import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionLayer;
 import cgeo.geocaching.unifiedmap.layers.TracksLayer;
+import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
@@ -69,6 +70,9 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.wherigo.WherigoDetailDialogProvider;
+import cgeo.geocaching.wherigo.WherigoDialogManager;
+import cgeo.geocaching.wherigo.WherigoGame;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
@@ -114,6 +118,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import cz.matejcik.openwig.Zone;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
@@ -220,6 +225,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);
+
+        WherigoLayer.get().setLayer(clickableItemsLayer);
 
         viewModel.init(routeTrackUtils);
 
@@ -968,9 +975,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             }
+            if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX)) {
+                result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())), "Zone:" + key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), null));
+            }
+
             if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
                 result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString()));
             }
+
+
 
         }
         Log.d("touched elements on " + touchedPoint + " (" + result.size() + "): " + result);
@@ -1080,6 +1093,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     });
                 }
             }
+        } else if (item.getData() instanceof Zone) {
+            WherigoDialogManager.get().display(new WherigoDetailDialogProvider(item.getData()));
         } else if (item.getData() instanceof String) {
             GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
         }
