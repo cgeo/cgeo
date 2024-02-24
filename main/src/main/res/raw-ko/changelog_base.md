@@ -30,7 +30,9 @@
 - 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
+- Fix: Internal crash in routing calculation
 
 ### 현재 베타버전 이후 변경사항
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
 - Change: Simplify long-tap action in cache details and trackable details
+- New: Switch to set found state of Lab Adventures either manually or automatically
