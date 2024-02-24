@@ -416,7 +416,7 @@ public class FormulaUtils {
             .setDisplayMapper(FormulaUtils::getFunctionDisplayString)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-        model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper(FormulaUtils::getFunctionGroupDisplayString);
+        model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper((s, c) -> FormulaUtils.getFunctionGroupDisplayString(s));
 
         SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.formula_choose_function))
             .selectSingle(model, f -> {

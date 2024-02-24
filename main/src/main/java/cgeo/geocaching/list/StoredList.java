@@ -116,14 +116,8 @@ public final class StoredList extends AbstractList {
                     .setSelectAction(TextParam.id(R.string.cache_list_select_last), () -> lastSelectedListSet)
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                     .setItems(lists)
-                    .setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
-                    .setDisplayIconMapper((item) -> {
-                        if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
-                            return ImageParam.emoji(((StoredList) item).markerId, 30);
-                        }
-                        return ImageParam.id(R.drawable.ic_menu_list);
-                    })
                     .setSelectedItems(selectedListSet);
+            setListDisplay(model);
 
             SimpleDialog.of(activityRef.get()).setTitle(TextParam.id(titleId))
                 .setNegativeButton(null)
@@ -148,8 +142,8 @@ public final class StoredList extends AbstractList {
             final SimpleDialog.ItemSelectModel<AbstractList> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(lists)
-                .setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+            setListDisplay(model);
 
             SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(model, item -> {
                         if (item == PseudoList.NEW_LIST) {
@@ -160,6 +154,24 @@ public final class StoredList extends AbstractList {
                         }
                     }
             );
+        }
+
+        private void setListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model) {
+            model.setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
+                .setDisplayIconMapper(UserInterface::getImageForList);
+
+            model.activateGrouping(item -> {
+                final int idx = item.getTitle().indexOf(":");
+                return idx > 0 ? item.getTitle().substring(0, idx) : null;
+            }).setGroupDisplayMapper((t, cnt) -> TextParam.text(t + " (" + cnt + ")"))
+                .setMinCountPerGroup(2);
+        }
+
+        public static ImageParam getImageForList(final AbstractList item) {
+            if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
+                return ImageParam.emoji(((StoredList) item).markerId, 30);
+            }
+            return ImageParam.id(R.drawable.ic_menu_list);
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {

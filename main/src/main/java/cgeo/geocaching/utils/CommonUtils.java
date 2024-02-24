@@ -152,15 +152,52 @@ public class CommonUtils {
         }
     }
 
+    /**
+     * Groups a list of items of type T to groups of type G.
+     * Using various parameters to steer grouping, the method will call the given functions groupAdder and itemAdder
+     * in exactly the order in which groups and items should appear e.g. in a grouped list
+     *
+     * @param items list of items to group
+     * @param groupMapper maps an item to its group. May be null or return null for single items, which means that those items have no group
+     * @param groupOrder comparator to give an order to groups. By default, groups will be ordered by their toString()-value
+     * @param minGroupCount if there are less than this number of groups, no groping will happen at all
+     * @param minCountPerGroup groups with item count smaller than this will not be created (items will be handled as if they have no group)
+     * @param defaultGroup if given, then all items w/o a group will be assigned this group
+     * @param groupAdder groupAdder
+     * @param itemAdder itemAdder
+     */
     @SuppressWarnings({"PMD.NPathComplexity"})
-    public static <T, G> void groupList(final List<T> items, @Nullable final Func1<T, G> groupMapper, @Nullable final Comparator<G> groupOrder, final int minGroupCount,
-                                        final Action3<G, Integer, Integer> groupAdder, final Action4<T, Integer, G, Integer> itemAdder) {
+    public static <T, G> void groupList(final List<T> items,
+                                        @Nullable final Func1<T, G> groupMapper,
+                                        @Nullable final Comparator<G> groupOrder,
+                                        final int minCountPerGroup,
+                                        @Nullable final G defaultGroup,
+                                        final Action3<G, Integer, Integer> groupAdder,
+                                        final Action4<T, Integer, G, Integer> itemAdder) {
 
-        //create lists per group
+
+        //get counts per group
+        final Map<G, Integer> groupCounts = new HashMap<>();
+        for (T value : items) {
+            G group = groupMapper == null ? null : groupMapper.call(value);
+            if (group == null) {
+                group = defaultGroup;
+            }
+            if (groupCounts.containsKey(group)) {
+                groupCounts.put(group, groupCounts.get(group) + 1);
+            } else {
+                groupCounts.put(group, 1);
+            }
+        }
+
+        //create lists per group (for elements w/o a group, a group with 'defaultGroup' will be created)
         final Map<G, List<Pair<Integer, T>>> groupedListMap = new HashMap<>();
         int pos = 0;
         for (T value : items) {
-            final G group = groupMapper == null ? null : groupMapper.call(value);
+            G group = groupMapper == null ? null : groupMapper.call(value);
+            if (group == null || (groupCounts.containsKey(group) && groupCounts.get(group) < minCountPerGroup)) {
+                group = defaultGroup;
+            }
             List<Pair<Integer, T>> groupList = groupedListMap.get(group);
             if (groupList == null) {
                 groupList = new ArrayList<>();
@@ -168,16 +205,6 @@ public class CommonUtils {
             }
             groupList.add(new Pair<>(pos, value));
             pos++;
-        }
-
-        //check whether to abandom
-        if (groupedListMap.size() < minGroupCount) {
-            //no grouping shall take place
-            int idx = 0;
-            for (T item : items) {
-                itemAdder.call(item, idx++, null, -1);
-            }
-            return;
         }
 
         //sort groups

@@ -70,7 +70,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     public WherigoActivity() {
         this.wherigoThingsModel.activateGrouping(EventTable::getClass)
-            .setGroupDisplayMapper(c -> TextParam.text(c.getSimpleName()))
+            .setGroupDisplayMapper((c, cnt) -> TextParam.text(c.getSimpleName()))
             .setGroupDisplayIconMapper(WherigoActivity::imageForEventType);
     }
 

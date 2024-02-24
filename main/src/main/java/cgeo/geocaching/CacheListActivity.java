@@ -804,6 +804,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
         adapter.notifyDataSetChanged();
+        refreshSpinnerAdapter();
+        refreshCurrentList();
     }
 
     private void setPreventAskForDeletion(final boolean prevent) {

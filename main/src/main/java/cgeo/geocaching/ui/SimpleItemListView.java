@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.functions.Func4;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -126,7 +127,11 @@ public class SimpleItemListView extends LinearLayout {
                     break;
                 default:
                     //handling of groups and items
-                    applyItemView(binding, data.value, data.type == ListItemType.GROUPHEADER ? model.getGroupingOptions().getGroupDisplayViewMapper() : model.getDisplayViewMapper());
+                    if (data.type == ListItemType.GROUPHEADER) {
+                        applyItemView(binding, new Pair<>(data.value, data.groupCount), model.getGroupingOptions().getGroupDisplayViewMapper());
+                    } else {
+                        applyItemView(binding, data.value, model.getDisplayViewMapper());
+                    }
 
                     final boolean showIcon = data.icon != null || (data.type == ListItemType.GROUPHEADER ? groupsHaveIcons : itemsHaveIcons);
                     if (showIcon) {
@@ -155,7 +160,7 @@ public class SimpleItemListView extends LinearLayout {
             binding.itemViewAnchor.setPadding(ViewUtils.dpToPixel(leftPaddingInDp), 0, 0, 0);
         }
 
-        private void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final Object value, final Func4<Object, Context, View, ViewGroup, View> viewMapper) {
+        private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final Func4<T, Context, View, ViewGroup, View> viewMapper) {
             final View currentView = itemBinding.itemViewAnchor.getChildAt(0);
             final View newView = viewMapper.call(value, getContext(), currentView, itemBinding.itemViewAnchor);
 
@@ -429,7 +434,8 @@ public class SimpleItemListView extends LinearLayout {
 
         CommonUtils.groupList(model.getItems(),
                 model.getGroupingOptions().getGroupMapper(), model.getGroupingOptions().getGroupComparator(),
-                model.getGroupingOptions().getMinActivationGroupCount(),
+                model.getGroupingOptions().getMinCountPerGroup(),
+                model.getGroupingOptions().getDefaultGroup(),
                 (group, firstItemIdx, size) -> list.add(createForGroup(group, firstItemIdx + 2, size)),
                 (value, originalIdx, group, groupIdx) -> list.add(createForItem(value, originalIdx, group)));
 
