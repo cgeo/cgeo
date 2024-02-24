@@ -30,3 +30,4 @@
 - Poprawka: Informacje o umieszczonych w skrytce przedmiotach podróżnych (zmiana strony internetowej)
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
 - Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania
+- Poprawka: Wewnętrzna awaria przy obliczaniu trasy
