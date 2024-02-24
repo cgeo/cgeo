@@ -30,3 +30,4 @@
 - 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
+- Fix: Internal crash in routing calculation
