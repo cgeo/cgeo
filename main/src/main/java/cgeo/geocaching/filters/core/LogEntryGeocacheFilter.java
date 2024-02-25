@@ -98,12 +98,12 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
         if (inverse) {
             sb.append("NOT ");
         }
-        sb.append("EXISTS( SELECT ").append(tid).append(".geocode FROM ").append(DataStore.dbTableLogs).append(" ").append(tid).append(" WHERE ").append(sqlBuilder.getMainTableId()).append(".geocode = ").append(tid).append(".geocode");
+        sb.append("EXISTS( SELECT ").append(tid).append(".").append(DataStore.dbField_Geocode).append(" FROM ").append(DataStore.dbTableLogs).append(" ").append(tid).append(" WHERE ").append(sqlBuilder.getMainTableId()).append(".").append(DataStore.dbField_Geocode).append(" = ").append(tid).append(".").append(DataStore.dbField_Geocode);
         if (foundByFilter.isFilled()) {
-            sb.append(" AND ").append(foundByFilter.getRawLikeSqlExpression("author"));
+            sb.append(" AND ").append(foundByFilter.getRawLikeSqlExpression(DataStore.dbFieldLogs_author));
         }
         if (logTextFilter.isFilled()) {
-            sb.append(" AND ").append(logTextFilter.getRawLikeSqlExpression("log"));
+            sb.append(" AND ").append(logTextFilter.getRawLikeSqlExpression(DataStore.dbFieldLogs_log));
         }
         sb.append(")");
         sqlBuilder.addWhere(sb.toString());

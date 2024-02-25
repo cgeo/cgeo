@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.storage.DataStore;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -163,10 +164,10 @@ public final class Viewport {
     @NonNull
     public StringBuilder sqlWhere(@Nullable final String dbTable) {
         final String prefix = dbTable == null ? "" : (dbTable + ".");
-        return new StringBuilder(prefix).append("latitude >= ").append(doubleToSql(getLatitudeMin())).append(" and ")
-                .append(prefix).append("latitude <= ").append(doubleToSql(getLatitudeMax())).append(" and ")
-                .append(prefix).append("longitude >= ").append(doubleToSql(getLongitudeMin())).append(" and ")
-                .append(prefix).append("longitude <= ").append(doubleToSql(getLongitudeMax()));
+        return new StringBuilder(prefix).append(DataStore.dbField_latitude).append(" >= ").append(doubleToSql(getLatitudeMin())).append(" and ")
+                .append(prefix).append(DataStore.dbField_latitude).append(" <= ").append(doubleToSql(getLatitudeMax())).append(" and ")
+                .append(prefix).append(DataStore.dbField_longitude).append(" >= ").append(doubleToSql(getLongitudeMin())).append(" and ")
+                .append(prefix).append(DataStore.dbField_longitude).append(" <= ").append(doubleToSql(getLongitudeMax()));
     }
 
     private static String doubleToSql(final double value) {

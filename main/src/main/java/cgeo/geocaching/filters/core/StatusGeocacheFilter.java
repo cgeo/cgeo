@@ -369,57 +369,57 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         } else {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (statusOwned != null) {
-                sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + ".owner_real) " + (statusOwned ? "=" : "<>") + " LOWER(?)", Settings.getUserName());
+                sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_owner_real + ") " + (statusOwned ? "=" : "<>") + " LOWER(?)", Settings.getUserName());
             }
             if (statusFound != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found " + (statusFound ? "= 1" : "<> 1"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_found + (statusFound ? "= 1" : "<> 1"));
             }
             if (statusDnf != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found " + (statusDnf ? "= -1" : "<> -1"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_found + (statusDnf ? "= -1" : "<> -1"));
             }
             if (statusStored != null && !statusStored) {
                 //this seems stupid, but we have to simply set a condition which is never true
                 sqlBuilder.addWhere("1=0");
             }
             if (statusFavorite != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".favourite = " + (statusFavorite ? "1" : "0"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_favourite + " = " + (statusFavorite ? "1" : "0"));
             }
             if (statusWatchlist != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".onWatchlist = " + (statusWatchlist ? "1" : "0"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_onWatchList + " = " + (statusWatchlist ? "1" : "0"));
             }
             if (statusPremium != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".members = " + (statusPremium ? "1" : "0"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_members + " = " + (statusPremium ? "1" : "0"));
             }
             if (statusHasTrackable != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".inventoryunknown " + (statusHasTrackable ? "> 0" : " = 0"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_inventoryunknown + (statusHasTrackable ? "> 0" : " = 0"));
             }
             if (statusHasOwnVote != null) {
                 if (statusHasOwnVote) {
-                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".myvote > 0");
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_myvote + " > 0");
                 } else {
-                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".myvote IS NULL OR  " + sqlBuilder.getMainTableId() + ".myvote = 0");
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_myvote + " IS NULL OR  " + sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_myvote + " = 0");
                 }
             }
             if (statusHasOfflineLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
+                        "EXISTS(SELECT " + DataStore.dbField_Geocode + " FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + ")");
             }
             if (statusHasOfflineFoundLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
                 sqlBuilder.addWhere((statusHasOfflineFoundLog ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                        "EXISTS(SELECT " + DataStore.dbField_Geocode + " FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode +
                         " AND " + logTableId + ".type in (" + logIds + ")" + ")");
             }
             if (statusSolvedMystery != null) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".type <> '" + CacheType.MYSTERY.id + "'"); // only filters mysteries
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_type + " <> '" + CacheType.MYSTERY.id + "'"); // only filters mysteries
                 final String wptId = sqlBuilder.getNewTableId();
-                final String coordsChangedWhere = sqlBuilder.getMainTableId() + ".coordsChanged = " + (statusSolvedMystery ? "1" : "0");
-                final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + ".geocode from " + DataStore.dbTableWaypoints + " " + wptId + " WHERE " +
-                        wptId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND " + wptId + ".type = '" + WaypointType.FINAL.id + "' AND " +
-                        wptId + ".latitude IS NOT NULL AND " + wptId + ".longitude IS NOT NULL)";
+                final String coordsChangedWhere = sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = " + (statusSolvedMystery ? "1" : "0");
+                final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + "." + DataStore.dbField_Geocode + " from " + DataStore.dbTableWaypoints + " " + wptId + " WHERE " +
+                        wptId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " AND " + wptId + "." + DataStore.dbFieldWaypoints_type + " = '" + WaypointType.FINAL.id + "' AND " +
+                        wptId + "." + DataStore.dbField_latitude + " IS NOT NULL AND " + wptId + "." + DataStore.dbField_longitude + " IS NOT NULL)";
                 if (statusSolvedMystery) {
                     //solved mysteries have either changed coord OR a filled final waypoint
                     sqlBuilder.addWhere(coordsChangedWhere);
@@ -428,7 +428,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 } else {
                     //unsolved mysteries have NEITHER a changed coord NOR a filled final waypoint
                     sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
-                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".coordsChanged = 0");
+                    sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = 0");
                     sqlBuilder.addWhere("NOT " + existsFilledFinalWpWhere);
                     sqlBuilder.closeWhere();
                 }
@@ -437,19 +437,19 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasUserDefinedWaypoints ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableWaypoints + " " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
+                        "EXISTS(SELECT " + DataStore.dbField_Geocode + " FROM " + DataStore.dbTableWaypoints + " " + waypointTableId + " WHERE " + waypointTableId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " AND (" + waypointTableId + "." + DataStore.dbFieldWaypoints_own + "=1 OR " + waypointTableId + "." + DataStore.dbFieldWaypoints_type + " = 'own'))");
             }
             if (excludeActive) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled <> 0");
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived <> 0");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_disabled + " <> 0");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_archived + " <> 0");
                 sqlBuilder.closeWhere();
             }
             if (excludeDisabled) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled = 0");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_disabled + " = 0");
             }
             if (excludeArchived) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived = 0");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_archived + " = 0");
             }
             sqlBuilder.closeWhere();
         }

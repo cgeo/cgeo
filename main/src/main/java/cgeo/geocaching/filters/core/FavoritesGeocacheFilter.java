@@ -46,7 +46,7 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     protected String getSqlColumnName() {
-        return "favourite_cnt";
+        return DataStore.dbFieldCaches_favourite_cnt;
     }
 
     @Override
@@ -55,14 +55,14 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
             super.addToSql(sqlBuilder);
         } else {
             final String newTableId = sqlBuilder.getNewTableId();
-            sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + ".geocode = " + newTableId + ".geocode");
-            addRangeToSqlBuilder(sqlBuilder, getFavoritePercentageStatement(sqlBuilder.getMainTableId() + ".favourite_cnt", newTableId + ".find_count"));
+            sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " = " + newTableId + "." + DataStore.dbField_Geocode);
+            addRangeToSqlBuilder(sqlBuilder, getFavoritePercentageStatement(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_favourite_cnt, newTableId + ".find_count"));
         }
     }
 
     private static String getGroupClause(final String tid) {
         final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
-        return "select " + tid + ".geocode, sum(count) as find_count from " + DataStore.dbTableLogCount + " " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
+        return "select " + tid + "." + DataStore.dbField_Geocode + ", sum(" + DataStore.dbFieldLogCount_Count + ") as find_count from " + DataStore.dbTableLogCount + " " + tid + " where " + tid + "." + DataStore.dbFieldLogCount_Type + " in (" + logIds + ") group by " + tid + "." + DataStore.dbField_Geocode;
     }
 
     private static String getFavoritePercentageStatement(final String favCountColumn, final String findCountColumn) {
