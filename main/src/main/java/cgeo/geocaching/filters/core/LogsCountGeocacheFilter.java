@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
@@ -90,7 +91,7 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
         } else {
             logIds = " where " + tid + ".type = " + this.logType.id;
         }
-        return "select " + tid + ".geocode, sum(count) as log_count from cg_logCount " + tid + logIds + " group by " + tid + ".geocode";
+        return "select " + tid + ".geocode, sum(count) as log_count from " + DataStore.dbTableLogCount + " " + tid + logIds + " group by " + tid + ".geocode";
     }
 
     @Override

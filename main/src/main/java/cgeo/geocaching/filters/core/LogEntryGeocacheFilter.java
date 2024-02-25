@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.SearchCacheData;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
@@ -97,7 +98,7 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
         if (inverse) {
             sb.append("NOT ");
         }
-        sb.append("EXISTS( SELECT ").append(tid).append(".geocode FROM cg_logs ").append(tid).append(" WHERE ").append(sqlBuilder.getMainTableId()).append(".geocode = ").append(tid).append(".geocode");
+        sb.append("EXISTS( SELECT ").append(tid).append(".geocode FROM ").append(DataStore.dbTableLogs).append(" ").append(tid).append(" WHERE ").append(sqlBuilder.getMainTableId()).append(".geocode = ").append(tid).append(".geocode");
         if (foundByFilter.isFilled()) {
             sb.append(" AND ").append(foundByFilter.getRawLikeSqlExpression("author"));
         }

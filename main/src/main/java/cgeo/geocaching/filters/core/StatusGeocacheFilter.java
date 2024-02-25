@@ -7,6 +7,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
@@ -402,13 +403,13 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusHasOfflineLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
+                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
             }
             if (statusHasOfflineFoundLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
                 sqlBuilder.addWhere((statusHasOfflineFoundLog ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
                         " AND " + logTableId + ".type in (" + logIds + ")" + ")");
             }
             if (statusSolvedMystery != null) {
@@ -416,7 +417,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".type <> '" + CacheType.MYSTERY.id + "'"); // only filters mysteries
                 final String wptId = sqlBuilder.getNewTableId();
                 final String coordsChangedWhere = sqlBuilder.getMainTableId() + ".coordsChanged = " + (statusSolvedMystery ? "1" : "0");
-                final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + ".geocode from cg_waypoints " + wptId + " WHERE " +
+                final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + ".geocode from " + DataStore.dbTableWaypoints + " " + wptId + " WHERE " +
                         wptId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND " + wptId + ".type = '" + WaypointType.FINAL.id + "' AND " +
                         wptId + ".latitude IS NOT NULL AND " + wptId + ".longitude IS NOT NULL)";
                 if (statusSolvedMystery) {
@@ -436,7 +437,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasUserDefinedWaypoints ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM cg_waypoints " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
+                        "EXISTS(SELECT geocode FROM " + DataStore.dbTableWaypoints + " " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
             }
             if (excludeActive) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);

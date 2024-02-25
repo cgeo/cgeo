@@ -20,7 +20,7 @@ public class IndividualRouteGeocacheFilter extends BooleanGeocacheFilter {
         final String routeTableId = sqlBuilder.getNewTableId();
 
         sqlBuilder.addWhere((value ? "" : "NOT ") +
-                "EXISTS(SELECT id FROM cg_route " + routeTableId + " WHERE " + routeTableId + ".id = " + sqlBuilder.getMainTableId() + ".geocode)");
+                "EXISTS(SELECT id FROM " + DataStore.dbTableRoute + " " + routeTableId + " WHERE " + routeTableId + ".id = " + sqlBuilder.getMainTableId() + ".geocode)");
     }
 
 }

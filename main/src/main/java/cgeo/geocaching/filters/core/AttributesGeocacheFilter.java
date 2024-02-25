@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -112,7 +113,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             for (Map.Entry<String, String> att : attributes.entrySet()) {
                 final String attTableId = sqlBuilder.getNewTableId();
-                final String whereStart = "EXISTS (SELECT geocode FROM cg_attributes " + attTableId + " WHERE " + attTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND attribute ";
+                final String whereStart = "EXISTS (SELECT geocode FROM " + DataStore.dbTableAttributes + " " + attTableId + " WHERE " + attTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND attribute ";
                 if (att.getValue() == null) {
                     sqlBuilder.addWhere(whereStart + " = ?)", att.getKey());
                 } else {

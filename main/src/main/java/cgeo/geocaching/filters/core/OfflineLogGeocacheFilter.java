@@ -1,6 +1,7 @@
 package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 
 
@@ -19,7 +20,7 @@ public class OfflineLogGeocacheFilter extends StringGeocacheFilter {
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String logTableId = sqlBuilder.getNewTableId();
         getStringFilter().addToSqlForSubquery(sqlBuilder,
-                "SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode",
+                "SELECT geocode FROM " + DataStore.dbTableLogsOffline + " " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode",
                 true, logTableId + ".log");
     }
 }
