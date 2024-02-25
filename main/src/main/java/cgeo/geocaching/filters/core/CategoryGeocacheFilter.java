@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.bettercacher.Category;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
@@ -62,7 +63,7 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             for (Category cat : categories) {
                 final String catTableId = sqlBuilder.getNewTableId();
-                sqlBuilder.addWhere("EXISTS (SELECT geocode FROM cg_categories " + catTableId + " WHERE " + catTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND category = ?)", cat.getRaw());
+                sqlBuilder.addWhere("EXISTS (SELECT geocode FROM " + DataStore.dbTableCategories + " " + catTableId + " WHERE " + catTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND category = ?)", cat.getRaw());
             }
             sqlBuilder.closeWhere();
         }

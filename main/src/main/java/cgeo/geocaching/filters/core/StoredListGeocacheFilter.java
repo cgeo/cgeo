@@ -77,7 +77,7 @@ public class StoredListGeocacheFilter extends BaseGeocacheFilter {
         } else {
             final String idString = CollectionStream.of(filterListIds).toJoinedString(",");
             final String clId = sqlBuilder.getNewTableId();
-            sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM cg_caches_lists " + clId +
+            sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM " + DataStore.dbTableLists + " " + clId +
                     " WHERE list_id IN (" + idString + "))");
         }
     }

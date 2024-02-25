@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
@@ -61,7 +62,7 @@ public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     private static String getGroupClause(final String tid) {
         final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
-        return "select " + tid + ".geocode, sum(count) as find_count from cg_logCount " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
+        return "select " + tid + ".geocode, sum(count) as find_count from " + DataStore.dbTableLogCount + " " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
     }
 
     private static String getFavoritePercentageStatement(final String favCountColumn, final String findCountColumn) {

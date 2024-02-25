@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.CollectionStream;
 
@@ -31,7 +32,7 @@ public class LastFoundGeocacheFilter extends DateRangeGeocacheFilter {
 
     private static String getGroupClause(final String tid) {
         final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
-        return "select " + tid + ".geocode, max(date) as max_date from cg_logs " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
+        return "select " + tid + ".geocode, max(date) as max_date from " + DataStore.dbTableLogs + " " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
     }
 
 
