@@ -77,7 +77,7 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String newTableId = sqlBuilder.getNewTableId();
-        sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + ".geocode = " + newTableId + ".geocode");
+        sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " = " + newTableId + "." + DataStore.dbField_Geocode);
         addRangeToSqlBuilder(sqlBuilder,
                 "CASE WHEN " + newTableId + ".log_count IS NULL THEN 0 ELSE " + newTableId + ".log_count END");
     }
@@ -87,11 +87,11 @@ public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> 
         if (this.logType == null) {
             logIds = "";
         } else if (this.logType == FOUND_IT) {
-            logIds = " where " + tid + ".type in (" + CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",") + ")";
+            logIds = " where " + tid + "." + DataStore.dbFieldLogCount_Type + " in (" + CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",") + ")";
         } else {
-            logIds = " where " + tid + ".type = " + this.logType.id;
+            logIds = " where " + tid + "." + DataStore.dbFieldLogCount_Type + " = " + this.logType.id;
         }
-        return "select " + tid + ".geocode, sum(count) as log_count from " + DataStore.dbTableLogCount + " " + tid + logIds + " group by " + tid + ".geocode";
+        return "select " + tid + "." + DataStore.dbField_Geocode + ", sum(" + DataStore.dbFieldLogCount_Count + ") as log_count from " + DataStore.dbTableLogCount + " " + tid + logIds + " group by " + tid + "." + DataStore.dbField_Geocode;
     }
 
     @Override

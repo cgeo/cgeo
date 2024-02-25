@@ -113,7 +113,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             for (Map.Entry<String, String> att : attributes.entrySet()) {
                 final String attTableId = sqlBuilder.getNewTableId();
-                final String whereStart = "EXISTS (SELECT geocode FROM " + DataStore.dbTableAttributes + " " + attTableId + " WHERE " + attTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND attribute ";
+                final String whereStart = "EXISTS (SELECT " + DataStore.dbField_Geocode + " FROM " + DataStore.dbTableAttributes + " " + attTableId + " WHERE " + attTableId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " AND " + DataStore.dbFieldAttributes_Attribute + " ";
                 if (att.getValue() == null) {
                     sqlBuilder.addWhere(whereStart + " = ?)", att.getKey());
                 } else {

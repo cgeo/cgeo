@@ -284,26 +284,56 @@ public class DataStore {
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
+        @NonNull public static final String dbFieldCaches_type = "type";
+        @NonNull public static final String dbFieldCaches_owner_real = "owner_real";
+        @NonNull public static final String dbFieldCaches_favourite_cnt = "favourite_cnt";
+        @NonNull public static final String dbFieldCaches_myvote = "myvote";
+        @NonNull public static final String dbFieldCaches_disabled = "disabled";
+        @NonNull public static final String dbFieldCaches_archived = "archived";
+        @NonNull public static final String dbFieldCaches_members = "members";
+        @NonNull public static final String dbFieldCaches_found = "found";
+        @NonNull public static final String dbFieldCaches_favourite = "favourite";
+        @NonNull public static final String dbFieldCaches_inventoryunknown = "inventoryunknown";
+        @NonNull public static final String dbFieldCaches_onWatchList = "onWatchList";
+        @NonNull public static final String dbFieldCaches_coordsChanged = "coordsChanged";
     @NonNull public static final String dbTableLists = "cg_lists";
-    @NonNull private static final String dbTableCachesLists = "cg_caches_lists";
+    @NonNull public static final String dbTableCachesLists = "cg_caches_lists";
+        @NonNull public static final String dbFieldCachesLists_list_id = "list_id";
     @NonNull public static final String dbTableAttributes = "cg_attributes";
+        @NonNull public static final String dbFieldAttributes_Attribute = "attribute";
     @NonNull public static final String dbTableWaypoints = "cg_waypoints";
+        @NonNull public static final String dbFieldWaypoints_type = "type";
+        @NonNull public static final String dbFieldWaypoints_own = "own";
     @NonNull private static final String dbTableVariables = "cg_variables";
     @NonNull public static final String dbTableCategories = "cg_categories";
+        @NonNull public static final String dbFieldCategories_Category = "category";
     @NonNull private static final String dbTableSpoilers = "cg_spoilers";
     @NonNull public static final String dbTableLogs = "cg_logs";
+        @NonNull public static final String dbFieldLogs_Type = "type";
+        @NonNull public static final String dbFieldLogs_author = "author";
+        @NonNull public static final String dbFieldLogs_log = "log";
     @NonNull public static final String dbTableLogCount = "cg_logCount";
+        @NonNull public static final String dbFieldLogCount_Type = "type";
+        @NonNull public static final String dbFieldLogCount_Count = "count";
     @NonNull private static final String dbTableLogImages = "cg_logImages";
     @NonNull public static final String dbTableLogsOffline = "cg_logs_offline";
+        @NonNull public static final String dbFieldLogsOffline_log = "log";
     @NonNull private static final String dbTableLogsOfflineImages = "cg_logs_offline_images";
     @NonNull private static final String dbTableLogsOfflineTrackables = "cg_logs_offline_trackables";
     @NonNull private static final String dbTableTrackables = "cg_trackables";
     @NonNull private static final String dbTableSearchDestinationHistory = "cg_search_destination_history";
     @NonNull private static final String dbTableTrailHistory = "cg_trail_history";
     @NonNull public static final String dbTableRoute = "cg_route";
+        @NonNull public static final String dbFieldRoute_id = "id";
     @NonNull private static final String dbTableExtension = "cg_extension";
     @NonNull private static final String dbTableFilters = "cg_filters";
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
+
+    // common table field names
+    @NonNull public static final String dbField_Geocode = "geocode";
+    @NonNull public static final String dbField_latitude = "latitude";
+    @NonNull public static final String dbField_longitude = "longitude";
+
     @NonNull private static final String dbCreateCaches = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCaches + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -315,10 +345,10 @@ public class DataStore {
             + "reason INTEGER NOT NULL DEFAULT 0, " // cached, favorite...
             + "cacheid TEXT, "
             + "guid TEXT, "
-            + "type TEXT, "
+            + dbFieldCaches_type + " TEXT, "
             + "name TEXT, "
             + "owner TEXT, "
-            + "owner_real TEXT, "
+            + dbFieldCaches_owner_real + " TEXT, "
             + "hidden LONG, "
             + "hint TEXT, "
             + "size TEXT, "
@@ -327,26 +357,26 @@ public class DataStore {
             + "location TEXT, "
             + "direction DOUBLE, "
             + "distance DOUBLE, "
-            + "latitude DOUBLE, "
-            + "longitude DOUBLE, "
+            + dbField_latitude + " DOUBLE, "
+            + dbField_longitude + " DOUBLE, "
             + "reliable_latlon INTEGER, "           // got unused while v96 - TODO should we remove the column?
             + "personal_note TEXT, "
             + "shortdesc TEXT, "
             + "description TEXT, "
-            + "favourite_cnt INTEGER, "
+            + dbFieldCaches_favourite_cnt + " INTEGER, "
             + "rating FLOAT, "
             + "votes INTEGER, "
-            + "myvote FLOAT, "
-            + "disabled INTEGER NOT NULL DEFAULT 0, "
-            + "archived INTEGER NOT NULL DEFAULT 0, "
-            + "members INTEGER NOT NULL DEFAULT 0, "
-            + "found INTEGER NOT NULL DEFAULT 0, "
-            + "favourite INTEGER NOT NULL DEFAULT 0, "
+            + dbFieldCaches_myvote + " FLOAT, "
+            + dbFieldCaches_disabled + " INTEGER NOT NULL DEFAULT 0, "
+            + dbFieldCaches_archived + " INTEGER NOT NULL DEFAULT 0, "
+            + dbFieldCaches_members + " INTEGER NOT NULL DEFAULT 0, "
+            + dbFieldCaches_found + " INTEGER NOT NULL DEFAULT 0, "
+            + dbFieldCaches_favourite + " INTEGER NOT NULL DEFAULT 0, "
             + "inventorycoins INTEGER DEFAULT 0, "
             + "inventorytags INTEGER DEFAULT 0, "
-            + "inventoryunknown INTEGER DEFAULT 0, "
-            + "onWatchlist INTEGER DEFAULT 0, "
-            + "coordsChanged INTEGER DEFAULT 0, "
+            + dbFieldCaches_inventoryunknown + " INTEGER DEFAULT 0, "
+            + dbFieldCaches_onWatchList + " INTEGER DEFAULT 0, "
+            + dbFieldCaches_coordsChanged + " INTEGER DEFAULT 0, "
             + "finalDefined INTEGER DEFAULT 0, "
             + "logPasswordRequired INTEGER DEFAULT 0,"
             + "watchlistCount INTEGER DEFAULT -1,"
@@ -367,16 +397,16 @@ public class DataStore {
             + "); ";
     private static final String dbCreateCachesLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
-            + "list_id INTEGER NOT NULL, "
+            + dbFieldCachesLists_list_id + " INTEGER NOT NULL, "
             + "geocode TEXT NOT NULL, "
             + "PRIMARY KEY (list_id, geocode)"
             + "); ";
     private static final String dbCreateAttributes = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableAttributes + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "geocode TEXT NOT NULL, "
+            + dbField_Geocode + " TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
-            + "attribute TEXT "
+            + dbFieldAttributes_Attribute + " TEXT "
             + "); ";
 
     private static final String dbCreateWaypoints = ""
@@ -384,14 +414,14 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "geocode TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
-            + "type TEXT NOT NULL DEFAULT 'waypoint', "
+            + dbFieldWaypoints_type + " TEXT NOT NULL DEFAULT 'waypoint', "
             + "prefix TEXT, "
             + "lookup TEXT, "
             + "name TEXT, "
-            + "latitude DOUBLE, "
-            + "longitude DOUBLE, "
+            + dbField_latitude + " DOUBLE, "
+            + dbField_longitude + " DOUBLE, "
             + "note TEXT, "
-            + "own INTEGER DEFAULT 0, "
+            + dbFieldWaypoints_own + " INTEGER DEFAULT 0, "
             + "visited INTEGER DEFAULT 0, "
             + "user_note TEXT, "
             + "org_coords_empty INTEGER DEFAULT 0, "
@@ -416,8 +446,8 @@ public class DataStore {
     private static final String dbCreateCategories = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCategories + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "geocode TEXT NOT NULL, "
-            + "category TEXT"
+            + dbField_Geocode + " TEXT NOT NULL, "
+            + dbFieldCategories_Category + " TEXT"
             + "); ";
 
     private static final String dbCreateSpoilers = ""
@@ -435,10 +465,10 @@ public class DataStore {
             + "geocode TEXT NOT NULL, "
             + "service_log_id TEXT," //added with db version 86
             + "updated LONG NOT NULL, " // date of save
-            + "type INTEGER NOT NULL DEFAULT 4, "
-            + "author TEXT, "
+            + dbFieldLogs_Type + " INTEGER NOT NULL DEFAULT 4, "
+            + dbFieldLogs_author + " TEXT, "
             + "author_guid TEXT NOT NULL DEFAULT '', "
-            + "log TEXT, "
+            + dbFieldLogs_log + " TEXT, "
             + "date LONG, "
             + "found INTEGER NOT NULL DEFAULT 0, "
             + "friend INTEGER "
@@ -447,10 +477,10 @@ public class DataStore {
     private static final String dbCreateLogCount = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLogCount + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "geocode TEXT NOT NULL, "
+            + dbField_Geocode + " TEXT NOT NULL, "
             + "updated LONG NOT NULL, " // date of save
-            + "type INTEGER NOT NULL DEFAULT 4, "
-            + "count INTEGER NOT NULL DEFAULT 0 "
+            + dbFieldLogCount_Type + " INTEGER NOT NULL DEFAULT 4, "
+            + dbFieldLogCount_Count + " INTEGER NOT NULL DEFAULT 0 "
             + "); ";
     private static final String dbCreateLogImages = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableLogImages + " ("
@@ -468,7 +498,7 @@ public class DataStore {
             + "updated LONG NOT NULL, " // date of save
             + "service_log_id TEXT," //added with db version 86
             + "type INTEGER NOT NULL DEFAULT 4, "
-            + "log TEXT, "
+            + dbFieldLogsOffline_log + " TEXT, "
             + "date LONG, "
             + "report_problem TEXT, "
             //new for version 85
@@ -517,15 +547,15 @@ public class DataStore {
             + "CREATE TABLE IF NOT EXISTS " + dbTableSearchDestinationHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "date LONG NOT NULL, "
-            + "latitude DOUBLE, "
-            + "longitude DOUBLE "
+            + dbField_latitude + " DOUBLE, "
+            + dbField_longitude + " DOUBLE "
             + "); ";
 
     private static final String dbCreateTrailHistory
             = "CREATE TABLE IF NOT EXISTS " + dbTableTrailHistory + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + "latitude DOUBLE, "
-            + "longitude DOUBLE, "
+            + dbField_latitude + " DOUBLE, "
+            + dbField_longitude + " DOUBLE, "
             + "altitude DOUBLE, "
             + "timestamp LONG"
             + "); ";
@@ -534,9 +564,9 @@ public class DataStore {
             = "CREATE TABLE IF NOT EXISTS " + dbTableRoute + " ("
             + "precedence INTEGER, "
             + "type INTEGER, "
-            + "id TEXT, "
-            + "latitude DOUBLE, "
-            + "longitude DOUBLE "
+            + dbFieldRoute_id + " TEXT, "
+            + dbField_latitude + " DOUBLE, "
+            + dbField_longitude + " DOUBLE "
             + "); ";
 
     @SuppressWarnings("SyntaxError")

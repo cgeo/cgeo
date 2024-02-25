@@ -63,7 +63,7 @@ public class CategoryGeocacheFilter extends BaseGeocacheFilter {
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             for (Category cat : categories) {
                 final String catTableId = sqlBuilder.getNewTableId();
-                sqlBuilder.addWhere("EXISTS (SELECT geocode FROM " + DataStore.dbTableCategories + " " + catTableId + " WHERE " + catTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND category = ?)", cat.getRaw());
+                sqlBuilder.addWhere("EXISTS (SELECT " + DataStore.dbField_Geocode + " FROM " + DataStore.dbTableCategories + " " + catTableId + " WHERE " + catTableId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " AND " + DataStore.dbFieldCategories_Category + " = ?)", cat.getRaw());
             }
             sqlBuilder.closeWhere();
         }

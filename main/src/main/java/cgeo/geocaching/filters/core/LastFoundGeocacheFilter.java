@@ -25,14 +25,14 @@ public class LastFoundGeocacheFilter extends DateRangeGeocacheFilter {
         }
 
         final String newTableId = sqlBuilder.getNewTableId();
-        sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + ".geocode = " + newTableId + ".geocode");
+        sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " = " + newTableId + "." + DataStore.dbField_Geocode);
 
         addToSql(sqlBuilder, "CASE WHEN " + newTableId + ".max_date IS NULL THEN 0 ELSE " + newTableId + ".max_date END");
     }
 
     private static String getGroupClause(final String tid) {
         final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
-        return "select " + tid + ".geocode, max(date) as max_date from " + DataStore.dbTableLogs + " " + tid + " where " + tid + ".type in (" + logIds + ") group by " + tid + ".geocode";
+        return "select " + tid + "." + DataStore.dbField_Geocode + ", max(date) as max_date from " + DataStore.dbTableLogs + " " + tid + " where " + tid + "." + DataStore.dbFieldLogs_Type + " in (" + logIds + ") group by " + tid + "." + DataStore.dbField_Geocode;
     }
 
 
