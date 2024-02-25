@@ -121,7 +121,7 @@ public class ColorPickerUI {
 
         if (showOpaquenessSlider) {
             v.findViewById(R.id.colorpicker_opaqueness_items).setVisibility(View.VISIBLE);
-            configureSlider(opaquenessSlider, opaquenessValue, this::selectOpaqueness);
+            configureSlider(opaquenessSlider, opaquenessValue, true, this::selectOpaqueness);
         } else {
             // without opaqueness slider don't use fully transparent colors
             if (opaqueness == 0) {
@@ -137,14 +137,16 @@ public class ColorPickerUI {
 
         if (showWidthSlider) {
             v.findViewById(R.id.colorpicker_width_items).setVisibility(View.VISIBLE);
-            configureSlider(widthSlider, widthValue, this::selectWidth);
+            configureSlider(widthSlider, widthValue, false, this::selectWidth);
         }
 
         widthSlider.setProgress(originalWidth);
         selectWidth(originalWidth);
     }
 
-    private void configureSlider(final SeekBar slider, final TextView value, final Consumer<Integer> progressChangedCallback) {
+    private void configureSlider(final SeekBar slider, final TextView value, final boolean inputAsPercent, final Consumer<Integer> progressChangedCallback) {
+        final float valueToShownValue = inputAsPercent ? 100f / 255f : 1f;
+
         slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(final SeekBar seekBar, final int progress, final boolean fromUser) {
@@ -165,10 +167,10 @@ public class ColorPickerUI {
         value.setOnClickListener(v2 -> {
             final EditText editText = new EditText(context);
             editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL);
-            editText.setText(String.valueOf(slider.getProgress()));
+            editText.setText(String.valueOf((int) Math.round(slider.getProgress() * valueToShownValue)));
 
             final int min = 0;
-            final int max = slider.getMax();
+            final int max = (int) Math.round(slider.getMax() * valueToShownValue);
 
             Dialogs.newBuilder(context)
                     .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
@@ -185,7 +187,7 @@ public class ColorPickerUI {
                                 newValue = min;
                                 Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
                             }
-                            slider.setProgress(newValue);
+                            slider.setProgress((int) Math.round(newValue / valueToShownValue));
                             progressChangedCallback.accept(slider.getProgress());
                         } catch (NumberFormatException e) {
                             Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
