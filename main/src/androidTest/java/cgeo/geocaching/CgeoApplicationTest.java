@@ -153,7 +153,7 @@ public class CgeoApplicationTest {
         assertThat(lastLog.date).isEqualTo(new GregorianCalendar(2013, 11 - 1, 5).getTimeInMillis());
         assertThat(lastLog.logType).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
-        assertThat(lastLog.cacheGuid).isIn("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f", "GC0");
+        assertThat(lastLog.cacheGuid).isIn("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f", "GC26VJD", "GC0");
         assertThat(lastLog.serviceLogId).isEqualTo("817608e9-850d-428a-9318-442a14b7b631");
         assertThat(lastLog.log).isEqualTo("Das tb Hotel war sehr schön");
     }
