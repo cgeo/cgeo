@@ -1043,11 +1043,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (routeItem != null && Settings.isLongTapOnMapActivated()) {
 
                 final Geocache cache = routeItem.getGeocache();
-                final boolean canHaveStar = MapStarUtils.canHaveStar(cache);
 
-                if (Settings.isShowRouteMenu() || canHaveStar) {
+                if (Settings.isShowRouteMenu()) {
                     final SimplePopupMenu menu = MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null);
-                    if (canHaveStar) {
+                    if (MapStarUtils.canHaveStar(cache)) {
                         final String geocode = routeItem.getGeocode();
                         final boolean isStarDrawn = viewModel.cachesWithStarDrawn.getValue().contains(geocode);
                         MapStarUtils.addMenuIfNecessary(menu, cache, isStarDrawn, drawStar -> {
