@@ -268,7 +268,6 @@
     <string translatable="false" name="package_whereyougo">menion.android.whereyougo</string>
     <string translatable="false" name="package_chirpwolf">de.wolffire.chirpwolf</string>
     <string translatable="false" name="package_brouter">btools.routingapp</string>
-    <string translatable="false" name="package_cgeo_contacts">cgeo.contacts</string>
     <string translatable="false" name="package_google_translate">com.google.android.apps.translate</string>
     <string translatable="false" name="package_gpsstatus">com.eclipsim.gpsstatus2</string>
     <string translatable="false" name="package_bluetoothgps">googoo.android.btgps</string>

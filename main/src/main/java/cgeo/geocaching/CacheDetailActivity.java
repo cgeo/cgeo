@@ -68,6 +68,7 @@ import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
@@ -387,6 +388,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             }
         });
+
+        // "go to" functionality deprecation notice
+        if (StringUtils.equals(geocode, InternalConnector.GEOCODE_HISTORY_CACHE)) {
+            Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.GOTO_DEPRECATION_NOTICE);
+        }
     }
 
     @Override
