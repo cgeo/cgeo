@@ -30,4 +30,4 @@
 - Korrektur: Anzeige des letzten Trackable-Ortes (Webseiten-Änderung)
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
-- Fix: Internal crash in routing calculation
+- Korrektur: Interner Absturz bei Routenberechnung
