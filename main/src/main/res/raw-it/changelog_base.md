@@ -30,6 +30,9 @@
 - Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
 - Corretto: Simbolo stella mancante per i filtri memorizzati modificati
 - Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
+- Fix: Internal crash in routing calculation
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
+- Change: Simplify long-tap action in cache details and trackable details
+- New: Switch to set found state of Lab Adventures either manually or automatically

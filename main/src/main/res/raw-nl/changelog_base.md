@@ -30,6 +30,9 @@
 - Oplossing: Trackable gespotte cache info (website wijzigingen)
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
 - Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
+- Oplossing: Interne crash bij routering berekening
 
 ### Veranderingen sinds huidige bètaversie
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
+- Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
+- Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen

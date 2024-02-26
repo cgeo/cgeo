@@ -527,6 +527,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Matrice obtížnosti / terénu</string>
     <string name="cache_filter_rating">Hodnocení</string>
     <string name="cache_filter_status">Stav</string>
+    <string name="cache_filter_individualroute">Individuální trasa</string>
     <string name="cache_filter_attributes">Atributy kešky</string>
     <string name="cache_filter_favorites">Oblíbené</string>
     <string name="cache_filter_distance">Vzdálenost</string>
@@ -618,6 +619,7 @@
     <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
+    <string name="cache_filter_boolean_individualroute_contained">Obsaženo na trase</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Zahrnout kešky bez O/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Vyplnit pomocí gc.com</string>
     <string name="cache_filter_nested_filter_modify">upravit</string>
@@ -1554,6 +1556,8 @@
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
     <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
+    <string name="goto_targets_deprecation_title">Oznámení o ukončení podpory</string>
+    <string name="goto_targets_deprecation_notice">Funkce \"Přejít na\" je zastaralá a bude odstraněna v některé z budoucích verzí. Pro nové cíle používejte místo toho kešky definované uživatelem.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku / trasový bod)</string>
     <string name="init_show_routing_menu">Zobrazit menu směrování</string>
