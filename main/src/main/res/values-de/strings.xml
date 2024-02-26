@@ -1526,6 +1526,8 @@
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
+    <string name="goto_targets_deprecation_title">Abkündigung</string>
+    <string name="goto_targets_deprecation_notice">Die \'Gehe zu\' Funktionalität ist abgekündigt und wird in einer zukünftigen Version entfernt. Bitte verwende stattdessen benutzerdefinierte Caches für neue Ziele.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache / Wegpunkt)</string>
     <string name="init_show_routing_menu">Routing-Menü anzeigen</string>
