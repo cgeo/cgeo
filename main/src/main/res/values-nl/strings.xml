@@ -1526,6 +1526,8 @@
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
     <string name="internal_goto_targets_description">Deze cache slaat je recente \"Ga naar\" doelen op. Deze wordt automatisch aangemaakt zodra je de \"ga naar\" functie in het hoofdmenu hebt gebruikt. De ingevoerde coördinaten zullen worden opgeslagen als waypoints van deze cache. Als je deze coördinaten niet meer nodig hebt, kan je deze cache of eventuele waypoints veilig verwijderen. Je kunt ook de cache verplaatsen naar elke andere lijst van jouw keuze.</string>
+    <string name="goto_targets_deprecation_title">Kennisgeving van beëindiging</string>
+    <string name="goto_targets_deprecation_notice">De \'Ga naar\' functionaliteit is verouderd en zal verwijderd worden in een toekomstige versie. Gebruik voortaan gebruikers-gedefinieerde caches hiervoor in de plaats.</string>
     <string name="init_longtap_map">Lang drukken op kaart</string>
     <string name="init_summary_longtap_map">Activeer lang tikken op kaart-pictogram (maak een individuele route) of op vrije ruimte op de kaart (maak een gebruiker gedefinieerde cache)</string>
     <string name="init_show_routing_menu">Toon routeringsmenu</string>

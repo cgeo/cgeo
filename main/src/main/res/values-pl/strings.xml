@@ -1554,6 +1554,8 @@
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele „Idź do”</string>
     <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele „Idź do”. Jest ona automatycznie tworzona po użyciu funkcji „Idź do” w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacji. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
+    <string name="goto_targets_deprecation_title">Informacja o wycofaniu</string>
+    <string name="goto_targets_deprecation_notice">Funkcja „Idź do” jest przestarzała i zostanie usunięta w przyszłej wersji. Użyj skrytek zdefiniowanych przez użytkownika dla nowych celów.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrytkę zdefiniowaną przez użytkownika)</string>
     <string name="init_show_routing_menu">Pokaż menu wyznaczania trasy</string>

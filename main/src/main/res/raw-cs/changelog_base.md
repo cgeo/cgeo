@@ -30,3 +30,4 @@
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
+- Oprava: Interní pád při výpočtu směrování

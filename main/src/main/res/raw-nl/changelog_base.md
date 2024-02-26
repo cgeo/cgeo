@@ -30,3 +30,4 @@
 - Oplossing: Trackable gespotte cache info (website wijzigingen)
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
 - Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
+- Oplossing: Interne crash bij routering berekening
