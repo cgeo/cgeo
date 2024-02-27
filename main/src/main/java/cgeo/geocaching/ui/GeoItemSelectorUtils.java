@@ -111,10 +111,9 @@ public class GeoItemSelectorUtils {
     public static View createRouteView(final Context context, final Route route, final View view) {
         final boolean isIndividualRoute = route.getName().isEmpty();
         final TextParam routeName = isIndividualRoute ? TextParam.id(R.string.individual_route) : TextParam.text(route.getName());
-        final ImageParam routeIcon = ImageParam.id(R.drawable.map_quick_route);
+        final ImageParam routeIcon = ImageParam.id(R.drawable.ic_menu_route);
         final TextParam routeInfo = isIndividualRoute ? TextParam.text(Units.getDistanceFromKilometers(route.getDistance())) : TextParam.id(R.string.track);
         setViewValues(view, routeName, routeInfo, routeIcon);
-        ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorText)));
         return view;
     }
 
@@ -176,8 +175,6 @@ public class GeoItemSelectorUtils {
         if (icon != null) {
             icon.applyTo(view.findViewById(R.id.icon));
         }
-        ImageViewCompat.setImageTintList(view.findViewById(R.id.icon), null);
-
     }
 
 }

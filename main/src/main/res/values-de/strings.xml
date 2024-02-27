@@ -517,6 +517,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Schwierigkeits- / Gelände-Matrix</string>
     <string name="cache_filter_rating">Bewertung</string>
     <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_individualroute">Individuelle Route</string>
     <string name="cache_filter_attributes">Cache-Attribute</string>
     <string name="cache_filter_favorites">Favoriten</string>
     <string name="cache_filter_distance">Entfernung</string>
@@ -606,6 +607,7 @@
     <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
+    <string name="cache_filter_boolean_individualroute_contained">In Route enthalten</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Caches ohne D/T einbeziehen</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Mit gc.com füllen</string>
     <string name="cache_filter_nested_filter_modify">Bearbeiten</string>
@@ -802,6 +804,8 @@
     <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
     <string name="settings_lc_description">Zeige Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)\n\nDas Ändern dieser Einstellung erfordert einen Neustart.</string>
+    <string name="settings_lc_found_state_title">Manueller Gefunden-Status</string>
+    <string name="settings_lc_found_state_handling">Erlaube Benutzern, den Gefunden-Status manuell zu setzen (statt ihn automatisch zu ermitteln)</string>
     <string name="lc_default_description">Dies ist ein Geocaching.com Adventure Lab Cache. Lab Caches können nur mit der Groundspeak Adventure Lab App gespielt werden. Tippe auf das Adventure Lab-Symbol auf der \"Details\"-Seite, um die Adventure Lab App für diesen Cache von dort aus zu öffnen/zu installieren.\nWenn du keine Adventure Lab-Caches auf deiner Karte und Suche sehen möchtest, kannst du sie im Menü \"Einstellungen\" - Dienste - Geocaching.com Adventure Lab deaktivieren</string>
     <string name="init_summary_oc_de">Caches von Opencaching.de laden</string>
     <string name="init_oc_de_description">Autorisiere c:geo auf Opencaching.de zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
@@ -1526,6 +1530,8 @@
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
     <string name="internal_goto_targets_description">Dieser Cache speichert deine letzten \"Gehe zu\" Ziele. Er wird automatisch erzeugt, sobald du die \"Gehe zu\" Funktion im Hauptmenü benutzt. Die dort eingegebenen Koordinaten werden in Wegpunkten dieses Caches gespeichert. Wenn du diese Koordinaten nicht mehr brauchst, so kannst du diesen Cache oder einen seiner Wegpunkte sicher löschen. Du kannst den Cache auch in jede andere Liste deiner Wahl verschieben.</string>
+    <string name="goto_targets_deprecation_title">Abkündigung</string>
+    <string name="goto_targets_deprecation_notice">Die \'Gehe zu\' Funktionalität ist abgekündigt und wird in einer zukünftigen Version entfernt. Bitte verwende stattdessen benutzerdefinierte Caches für neue Ziele.</string>
     <string name="init_longtap_map">Langes Tippen auf Karte</string>
     <string name="init_summary_longtap_map">Aktiviere langes Tippen auf ein Kartensymbol (erstellt eine individuelle Route) oder auf eine freie Stelle der Karte (erstellt einen benutzerdefinierten Cache / Wegpunkt)</string>
     <string name="init_show_routing_menu">Routing-Menü anzeigen</string>

@@ -113,6 +113,7 @@ class FileContentAccessor extends AbstractContentAccessor {
     private ContentStorage.FileInformation fileToInformation(final Folder folder, final File file) {
         return new ContentStorage.FileInformation(
                 file.getName(), UriUtils.appendPath(folderToUri(folder), file.getName()),
+                folder,
                 file.isDirectory(),
                 file.isDirectory() ? Folder.fromFolder(folder, file.getName()) : null, getTypeForName(file.getName()),
                 file.length(), file.lastModified());

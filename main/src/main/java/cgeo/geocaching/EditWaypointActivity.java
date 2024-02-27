@@ -6,7 +6,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.databinding.EditwaypointActivityBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.DistanceUnit;
@@ -63,7 +62,6 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -501,7 +499,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 } else if (res.getString(R.string.waypoint_duplicate).equals(selectedOption)) {
                     final Waypoint copy = cache.duplicateWaypoint(waypoint, true);
                     if (copy != null) {
-                        DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
+                        CacheDetailActivity.saveAndNotify(EditWaypointActivity.this, cache);
                         EditWaypointActivity.startActivityEditWaypoint(EditWaypointActivity.this, cache, copy.getId());
                     }
                 }

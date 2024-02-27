@@ -119,7 +119,11 @@ public final class DefaultMap {
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
         if (Settings.useUnifiedMap()) {
-            startActivityList(fromActivity, fromList);
+            if (fromList == 0) {
+                new UnifiedMapType(search, title).launchMap(fromActivity); // same as above
+            } else {
+                startActivityList(fromActivity, fromList);
+            }
         } else {
             final MapOptions mo = new MapOptions(search, title, fromList);
             mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);

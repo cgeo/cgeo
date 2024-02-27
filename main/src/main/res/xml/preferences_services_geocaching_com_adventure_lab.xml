@@ -16,6 +16,14 @@
         <Preference
             app:summary="@string/settings_lc_description"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_foundstate_al"
+            android:title="@string/settings_lc_found_state_title"
+            app:iconSpaceReserved="false" />
+        <Preference
+            app:summary="@string/settings_lc_found_state_handling"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

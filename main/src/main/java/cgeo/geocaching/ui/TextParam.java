@@ -32,6 +32,8 @@ import io.noties.markwon.Markwon;
 public class TextParam {
 
     public static final int IMAGE_SIZE_INTRINSIC_BOUND = 0;
+    public static final int IMAGE_SIZE_EQUAL_TEXT_SIZE = -2;
+    public static final int IMAGE_SIZE_LARGER_TEXT_SIZE = -1;
 
     @StringRes
     private final int textId;
@@ -46,8 +48,8 @@ public class TextParam {
     private boolean useMovement = false;
 
     private ImageParam image;
-    private int imageHeightInDp = -1;
-    private int imageWidthInDp = -1;
+    private int imageHeightInDp = IMAGE_SIZE_LARGER_TEXT_SIZE;
+    private int imageWidthInDp = IMAGE_SIZE_LARGER_TEXT_SIZE;
     @ColorInt private int imageTintColor = 1;
 
 
@@ -241,12 +243,15 @@ public class TextParam {
             //if wanted imageSize is set explicitely -> use it. Otherwise deduct a sensible default from text size
             final int imageWidthInPixel;
             final int imageHeightInPixel;
-            if (imageHeightInDp < 0 || imageWidthInDp < 0) {
-                imageHeightInPixel = (int) (view.getTextSize() * 1.5f);
-                imageWidthInPixel = (int) (view.getTextSize() * 1.5f);
+            if (imageHeightInDp == IMAGE_SIZE_EQUAL_TEXT_SIZE) {
+                imageHeightInPixel = (int) (view.getTextSize());
+                imageWidthInPixel = (int) (view.getTextSize());
             } else if (imageHeightInDp == IMAGE_SIZE_INTRINSIC_BOUND) {
                 imageHeightInPixel = imageDrawable.getIntrinsicHeight();
                 imageWidthInPixel = imageDrawable.getIntrinsicWidth();
+            } else if (imageHeightInDp < 0 || imageWidthInDp < 0) {
+                imageHeightInPixel = (int) (view.getTextSize() * 1.5f);
+                imageWidthInPixel = (int) (view.getTextSize() * 1.5f);
             } else {
                 imageHeightInPixel = ViewUtils.dpToPixel(imageHeightInDp);
                 imageWidthInPixel = ViewUtils.dpToPixel(imageWidthInDp);

@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -12,6 +13,7 @@ import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import static cgeo.geocaching.unifiedmap.LayerHelper.ZINDEX_ELEVATIONCHARTMARKERPOSITION;
 import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 
@@ -196,6 +198,7 @@ public class ElevationChart {
     private void closeChart(final GeoItemLayer<String> geoItemLayer) {
         chartBlock.setVisibility(View.GONE);
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
+        LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
     }
 
     /** find position in route corresponding to distance from start */

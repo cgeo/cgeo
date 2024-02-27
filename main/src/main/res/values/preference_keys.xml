@@ -70,6 +70,8 @@
     <string translatable="false" name="preference_screen_al">preference_screen_al</string>
     <string translatable="false" name="pref_connectorALActive">connectorLCActive</string><!-- variable stays with "LC" for compatibility reasons -->
     <string translatable="false" name="pref_fakekey_al_website">fakekey_al_website</string>
+    <string translatable="false" name="pref_foundstate_al">foundstate_al</string>
+
 
     <!-- settings for opencaching.de screen -->
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>
@@ -456,6 +458,7 @@
     <string translatable="false" name="pref_persistablefolder_fieldnotes">persistablefolder_fieldnotes</string>
     <string translatable="false" name="pref_persistablefolder_spoilerimages">persistablefolder_spoilerimages</string>
     <string translatable="false" name="pref_persistablefolder_routingbase">persistablefolder_routingbase</string>
+    <string translatable="false" name="pref_persistablefolder_wherigo">persistablefolder_wherigo</string>
     <string translatable="false" name="pref_persistableuri_proximity_notification_far">persistableuri_proximity_notification_far</string>
     <string translatable="false" name="pref_persistableuri_proximity_notification_close">persistableuri_proximity_notification_close</string>
 
@@ -515,6 +518,8 @@
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
+    <string translatable="false" name="pref_feature_wherigo">feature_wherigo</string>
+    <string translatable="false" name="pref_feature_wherigo_debug">feature_wherigo_debug</string>
 
 
 

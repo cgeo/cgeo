@@ -189,6 +189,12 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+            android:name=".wherigo.WherigoActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="Whereigo"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
             android:name=".AboutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/about"

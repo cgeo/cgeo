@@ -527,6 +527,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Matryca Trudność / Teren</string>
     <string name="cache_filter_rating">Ocena</string>
     <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_individualroute">Indywidualna trasa</string>
     <string name="cache_filter_attributes">Atrybuty skrytki</string>
     <string name="cache_filter_favorites">Ulubione</string>
     <string name="cache_filter_distance">Odległość</string>
@@ -618,6 +619,7 @@
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
+    <string name="cache_filter_boolean_individualroute_contained">Zawarte na trasie</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Wypełnij z gc.com</string>
     <string name="cache_filter_nested_filter_modify">modyfikuj</string>
@@ -814,6 +816,8 @@
     <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrytek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Autoryzuj c:geo z geocaching.su aby wyszukać skrytki.</string>
     <string name="settings_lc_description">Wyświetlaj Skrytki Lab na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
+    <string name="settings_lc_found_state_title">Ręcznie podawany stan znalezienia</string>
+    <string name="settings_lc_found_state_handling">Jeśli zaznaczone, nie uzyskuj automatycznie prawdziwego stanu znalezień dla skrytek Lab, zamiast tego, pozwól użytkownikowi na ręcznie ustawienie stanu znalezienia</string>
     <string name="lc_default_description">To jest Skrytka Lab z geocaching.com. Przygody można rozgrywać tylko w aplikacji Adventure Lab od Groundspeak. Dotknij ikony Adventure Lab w „Szczegółach”, aby otworzyć/zainstalować aplikację Adventure Lab.\nJeśli nie chcesz widzieć Skrytek Lab na mapie i podczas wyszukiwania, możesz je dezaktywować w menu Ustawienia - Usługi - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Załaduj skrzynki z opencaching.de</string>
     <string name="init_oc_de_description">Autoryzuj c:geo z opencaching.de aby wyszukiwać skrzynki i mieć dostęp/filtrować znalezione skrzynki.</string>
@@ -1554,6 +1558,8 @@
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele „Idź do”</string>
     <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele „Idź do”. Jest ona automatycznie tworzona po użyciu funkcji „Idź do” w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacji tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacji. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
+    <string name="goto_targets_deprecation_title">Informacja o wycofaniu</string>
+    <string name="goto_targets_deprecation_notice">Funkcja „Idź do” jest przestarzała i zostanie usunięta w przyszłej wersji. Użyj skrytek zdefiniowanych przez użytkownika dla nowych celów.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
     <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrytkę zdefiniowaną przez użytkownika)</string>
     <string name="init_show_routing_menu">Pokaż menu wyznaczania trasy</string>

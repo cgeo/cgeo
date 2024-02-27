@@ -30,6 +30,9 @@
 - Oprava: Sledovatelné informace o spatřené kešce (změny na webu)
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
+- Oprava: Interní pád při výpočtu směrování
 
 ### Změny od aktuální beta verze
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
+- Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
+- Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures

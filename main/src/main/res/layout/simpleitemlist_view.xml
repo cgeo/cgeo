@@ -13,7 +13,7 @@
         android:clipToPadding="false"
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
-        android:nestedScrollingEnabled="false"
+        android:nestedScrollingEnabled="true"
         android:orientation="vertical"
         android:paddingVertical="4dip"
         android:scrollbars="vertical"

@@ -20,58 +20,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/**
- * Instances of this enum represent applicaton folders whose state is persisted.
- */
+/** Instances of this enum represent applicaton folders whose state is persisted. */
 public enum PersistableFolder {
 
-    /**
-     * Base directory
-     */
+    /** Base directory*/
     BASE(R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT),
 
-    /**
-     * Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps)
-     */
+    /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
     //legacy setting: "mapDirectory", a pure file path is stored
     OFFLINE_MAPS(R.string.pref_persistablefolder_offlinemaps, R.string.persistablefolder_offline_maps, Folder.fromPersistableFolder(BASE, "maps")),
-    /**
-     * Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data
-     */
+    /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
     //legacy setting: "renderthemepath", a pure file path is stored
     OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(OFFLINE_MAPS, "_themes")),
     /** Offline Maps: optional folder for map shading files (dem) */
     OFFLINE_MAP_SHADING(R.string.pref_persistablefolder_offlinemapshading, R.string.persistablefolder_offline_maps_shading, Folder.fromPersistableFolder(OFFLINE_MAPS, "_hgt")),
-    /**
-     * Target folder for written logfiles
-     */
+    /** Target folder for written logfiles */
     LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
-    /**
-     * GPX Files
-     */
+    /** GPX Files */
     GPX(R.string.pref_persistablefolder_gpx, R.string.persistablefolder_gpx, Folder.fromPersistableFolder(BASE, "gpx")),
-    /**
-     * Backup storage folder
-     */
+    /** Backup storage folder */
     BACKUP(R.string.pref_persistablefolder_backup, R.string.persistablefolder_backup, Folder.fromPersistableFolder(BASE, "backup")),
-    /**
-     * Field Note folder
-     */
+    /** Field Note folder */
     FIELD_NOTES(R.string.pref_persistablefolder_fieldnotes, R.string.persistablefolder_fieldnotes, Folder.fromPersistableFolder(BASE, "field-notes")),
     ///** Spoiler Image folder */
     SPOILER_IMAGES(R.string.pref_persistablefolder_spoilerimages, R.string.persistablefolder_spoilerimages, Folder.fromPersistableFolder(BASE, "GeocachePhotos")),
-    /**
-     * Routing base & config folder
-     */
+    /** Routing base & config folder */
     ROUTING_BASE(R.string.pref_persistablefolder_routingbase, R.string.persistablefolder_routingbase, Folder.fromPersistableFolder(BASE, "routing")),
-    /**
-     * Routing tile files
-     */
+    /** Routing tile files */
     ROUTING_TILES(R.string.pref_persistablefolder_routingtiles, R.string.persistablefolder_routingtiles, Folder.fromPersistableFolder(ROUTING_BASE, "segments4")),
+    /** Wherigo Files */
+    WHERIGO(R.string.pref_persistablefolder_wherigo, R.string.persistablefolder_wherigo, Folder.fromPersistableFolder(BASE, "wherigo")),
 
-    /**
-     * A Folder to use solely for Unit Test
-     */
+
+    /** A Folder to use solely for Unit Test */
     TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES, "unittest"));
 
     @AnyRes

@@ -924,6 +924,8 @@
     <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
     <string name="settings_su_description">Authorize c:geo with geocaching.su to search for caches.</string>
     <string name="settings_lc_description">Include Adventure Lab caches on the map.\n\n(Available to \"Geocaching.com\" premium members only. Requires an activated \"Geocaching.com\" service.)\n\nChanging this setting requires a restart.</string>
+    <string name="settings_lc_found_state_title">Manual found state</string>
+    <string name="settings_lc_found_state_handling">If checked, do not automatically obtain the true found state for Adventure Lab caches, instead, provide controls for the user to manually set the found state</string>
     <string name="lc_default_description">This is a geocaching.com Adventure Lab Cache. Adventures can only be played with the Groundspeak Adventure Lab App. Tap on the Adventure Lab icon on the \"Details\" page to open/install the Adventure Lab App for this adventure from there.\nIf you don\'t want to see Adenture Lab caches on your map and search, you can deactivate using the \"settings\" menu - Services - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Load caches from opencaching.de</string>
     <string name="init_oc_de_description">Authorize c:geo with opencaching.de to search for caches and access/filter your found caches.</string>
@@ -1714,6 +1716,8 @@
     <string name="internal_cache_default_owner">You</string>
     <string name="internal_goto_targets_title">\'Go to\' targets</string>
     <string name="internal_goto_targets_description">This cache stores your recent \"Go to\" targets. It is automatically created once you have used the \"Go to\" function in the main menu. The coordinates entered there will be stored into waypoints of this cache. If you do no longer need these coordinates you can safely delete this cache or any of its waypoints. Also you can move the cache to any other list of your choice.</string>
+    <string name="goto_targets_deprecation_title">Deprecation notice</string>
+    <string name="goto_targets_deprecation_notice">The \'Go to\' functionality is deprecated and will be removed in a future version. Please use user-defined caches instead for new targets.</string>
     <string name="init_longtap_map">Long tap on map</string>
     <string name="init_summary_longtap_map">Activate long tap on map icon (create an individual route) or on free map space (create a user-defined cache / waypoint)</string>
     <string name="init_show_routing_menu">Show routing menu</string>
