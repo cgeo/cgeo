@@ -118,7 +118,7 @@
             android:id="@+id/note_layout"
             style="@style/textinput_edittext"
             android:hint="@string/waypoint_note" android:labelFor="@id/note">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/note"
                 style="@style/textinput_embedded"
                 android:inputType="textMultiLine|textCapSentences"
@@ -127,7 +127,7 @@
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
             android:hint="@string/waypoint_user_note" android:labelFor="@id/user_note">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_note"
                 style="@style/textinput_embedded"
                 android:inputType="textMultiLine|textCapSentences"

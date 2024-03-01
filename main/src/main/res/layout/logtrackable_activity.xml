@@ -80,7 +80,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/trackingFrame"
             style="@style/textinput_edittext_singleline">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tracking"
                 style="@style/textinput_embedded_singleline"
                 android:hint="@string/trackable_code"
@@ -89,7 +89,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/log"
                 style="@style/textinput_embedded"
                 android:hint="@string/log_new_log_text"

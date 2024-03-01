@@ -14,7 +14,7 @@
         android:textSize="@dimen/textSize_inputCoords"
         android:layout_weight="1" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditTextLatDeg"
         style="@style/edittext_coordinates"
         android:hint="@string/cc_hint_degrees"
@@ -24,7 +24,7 @@
         android:id="@+id/LatSeparator1"
         style="@style/separator_coordinates" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditTextLatMin"
         style="@style/edittext_coordinates"
         tools:ignore="LabelFor" />
@@ -34,7 +34,7 @@
         style="@style/separator_coordinates"
         android:layout_weight="0.5" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditTextLatSec"
         style="@style/edittext_coordinates"
         tools:ignore="LabelFor" />
@@ -43,7 +43,7 @@
         android:id="@+id/LatSeparator3"
         style="@style/separator_coordinates" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/EditTextLatSecFrac"
         style="@style/edittext_coordinates"
         tools:ignore="LabelFor" />

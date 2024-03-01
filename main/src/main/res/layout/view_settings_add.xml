@@ -12,8 +12,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
-
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/preference_name"
                 style="@style/textinput_embedded_singleline"
                 android:hint="@string/add_setting_preference_name"

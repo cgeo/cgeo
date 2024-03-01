@@ -18,7 +18,7 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
             android:id="@+id/cc_guide_value_layout"
             android:layout_centerInParent="true">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/cc_guide_value"
                 style="@style/textinput_embedded"
                 android:textSize="@dimen/textSize_detailsPrimary"

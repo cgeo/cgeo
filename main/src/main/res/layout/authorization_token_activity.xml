@@ -25,7 +25,7 @@
             tools:text="Auth text 2"/>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username"
                 android:inputType="textPersonName"
                 style="@style/textinput_embedded_singleline"
@@ -34,7 +34,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password"
                 android:inputType="textPassword"
                 android:hint="@string/init_authorization_credential_password"

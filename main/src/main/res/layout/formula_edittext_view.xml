@@ -35,7 +35,8 @@
                 android:labelFor="@id/formula_text"
                 >
 
-                <EditText style="@style/textinput_embedded_singleline"
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/textinput_embedded_singleline"
                     android:id="@+id/formula_text"
                     android:inputType="text|textNoSuggestions"/>
 

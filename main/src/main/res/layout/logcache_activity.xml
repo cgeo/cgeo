@@ -50,7 +50,7 @@
                     style="@style/textinput_edittext"
                     app:counterEnabled="true"
                     app:counterMaxLength="5000">
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/log"
                         style="@style/textinput_embedded"
                         android:hint="@string/log_new_log_text"
@@ -79,7 +79,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/log_password"
                             style="@style/textinput_embedded"
                             android:hint="@string/log_hint_log_password"

@@ -23,7 +23,7 @@
         android:id="@+id/dialog_input_layout"
         android:visibility="gone"
         style="@style/textinput_edittext_singleline">
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/dialog_input_edittext"
             style="@style/textinput_embedded_singleline"
             android:inputType="text"
