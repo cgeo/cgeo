@@ -61,7 +61,7 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             // offline data
             // whole section disabled in basic mode
             // routing / navigation
-            R.string.pref_fakekey_brouterDistanceThresholdTitle, R.string.pref_brouterDistanceThreshold,
+            R.string.pref_brouterDistanceThreshold,
             R.string.pref_defaultNavigationTool, R.string.pref_defaultNavigationTool2, R.string.pref_fakekey_navigationMenu,
             // system
             R.string.pref_persistablefolder_basedir,

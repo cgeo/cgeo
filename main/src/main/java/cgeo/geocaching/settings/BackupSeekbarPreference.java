@@ -45,7 +45,7 @@ public class BackupSeekbarPreference extends SeekbarPreference {
 
     public void setValue(final int value) {
         seekBar.setProgress(value);
-        valueView.setText(getValueString(value));
+        valueView.setText(value);
         saveSetting(value);
     }
 }

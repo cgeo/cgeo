@@ -1,37 +1,24 @@
-package cgeo.geocaching.settings;
+package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.IConversion;
+import cgeo.geocaching.settings.Settings;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.util.AttributeSet;
 
 import java.util.Locale;
 
-public class ProximityPreference extends SeekbarPreference {
-
+public class ProximityPreferenceUI extends SeekbarUI {
     private boolean highRes = false;
 
-    public ProximityPreference(final Context context) {
-        this(context, null);
-    }
-
-    public ProximityPreference(final Context context, final AttributeSet attrs) {
-        this(context, attrs, android.R.attr.preferenceStyle);
-    }
-
-    public ProximityPreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
-
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ProximityPreference);
-        highRes = a.getBoolean(R.styleable.ProximityPreference_highRes, false);
-        a.recycle();
+    public ProximityPreferenceUI(final Context context) {
+        super(context);
     }
 
     // init() gets called by super constructor, therefore before class constructor / class variable assignments!
     @Override
-    protected void init() {
+    public void init() {
         minProgress = 1;
     }
 
@@ -41,7 +28,7 @@ public class ProximityPreference extends SeekbarPreference {
     }
 
     @Override
-    protected int progressToValue(final int progress) {
+    public int progressToValue(final int progress) {
         final int value = (int) Math.pow(10, (double) progress / 250.0) - 1;
         return Math.max(value, 0);
     }
@@ -62,8 +49,13 @@ public class ProximityPreference extends SeekbarPreference {
     }
 
     @Override
-    protected boolean useDecimals() {
+    public boolean getHasDecimals() {
         // unit settings can be changed while ProximityPreference is already initialized
         return Settings.useImperialUnits();
+    }
+
+    @Override
+    public void loadAdditionalAttributes(final Context context, final TypedArray attrs, final int defStyle) {
+        highRes = attrs.getBoolean(R.styleable.ProximityPreference_highRes, false);
     }
 }

@@ -38,6 +38,7 @@
         <attr name="label" format="string" />
         <attr name="hasDecimals" format="boolean" />
         <attr name="logScaling" format="boolean" />
+        <attr name="ui" format="string" />
     </declare-styleable>
 
     <!-- custom attributes for ProximityPreference -->

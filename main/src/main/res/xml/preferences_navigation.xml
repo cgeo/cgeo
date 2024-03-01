@@ -11,14 +11,11 @@
         app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
 
-        <Preference
-            android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_brouterDistanceThreshold"
             android:title="@string/init_brouterThreshold"
             android:summary="@string/init_brouterThreshold_description"
-            app:allowDividerBelow="false"
-            app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.ProximityPreference
-            android:key="@string/pref_brouterDistanceThreshold"
+            app:ui="cgeo.geocaching.ui.ProximityPreferenceUI"
             android:defaultValue="@integer/brouter_threshold_default"
             app:min="1"
             app:max="@integer/brouter_threshold_max"
@@ -53,13 +50,10 @@
             android:title="@string/init_autoDownloads"
             app:iconSpaceReserved="false" />
 
-        <Preference
-            android:title="@string/init_updateinterval_title"
-            android:summary="@string/init_updateinterval_description"
-            app:allowDividerBelow="false"
-            app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_brouterAutoTileDownloadsInterval"
+            android:title="@string/init_updateinterval_title"
+            android:summary="@string/init_updateinterval_description"
             android:defaultValue="@integer/brouter_updateinterval_default"
             app:max="@integer/brouter_updateinterval_max"
             app:minValueDescription="@string/switch_off"

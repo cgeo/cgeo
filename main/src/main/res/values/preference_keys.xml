@@ -309,7 +309,6 @@
     <!-- ============================================================================================================================================================================== -->
 
     <!-- category offlinerouting -->
-    <string translatable="false" name="pref_fakekey_brouterDistanceThresholdTitle">fakekey_brouterDistanceThresholdTitle</string>
     <string translatable="false" name="pref_brouterDistanceThreshold">brouterDistanceThreshold</string>
     <string translatable="false" name="pref_brouterShowBothDistances">pref_brouterShowBothDistances</string>
     <string translatable="false" name="pref_useInternalRouting">useInternalRouting</string>
