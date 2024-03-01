@@ -1,5 +1,5 @@
 ### Karte
-- New: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), siehe [Einstellungen => Kartenquellen => Vereinheitlichte Karte](cgeo-setting://featureSwitch_useUnifiedMap)
+- Neu: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), siehe [Einstellungen => Kartenquellen => Vereinheitlichte Karte](cgeo-setting://featureSwitch_useUnifiedMap)
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 - Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
