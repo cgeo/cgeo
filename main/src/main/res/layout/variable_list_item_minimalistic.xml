@@ -32,7 +32,7 @@
         /><!-- intended use of dp text size and of hardcoded size -->
 
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/variable_formula_text"
         android:layout_height="wrap_content"
         android:layout_width="0dp"

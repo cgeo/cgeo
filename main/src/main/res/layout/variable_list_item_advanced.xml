@@ -62,7 +62,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1">
 
-                    <EditText style="@style/textinput_embedded_singleline"
+                    <com.google.android.material.textfield.TextInputEditText
+                        style="@style/textinput_embedded_singleline"
                         android:id="@+id/variable_formula_text"
                         android:inputType="text|textNoSuggestions"
                         tools:ignore="LabelFor" />

@@ -11,7 +11,7 @@
         android:id="@+id/titleLayout"
         android:visibility="gone"
         style="@style/textinput_edittext">
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title"
             style="@style/textinput_embedded"
             android:inputType="textEmailSubject"
@@ -20,7 +20,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit"
             style="@style/textinput_embedded"
             android:inputType="textMultiLine|textCapSentences"

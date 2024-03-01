@@ -10,7 +10,7 @@
     <com.google.android.material.textfield.TextInputLayout
         style="@style/textinput_edittext_singleline"
         app:endIconMode="clear_text">
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/filename"
             style="@style/textinput_embedded_singleline"
             android:inputType="textUri"

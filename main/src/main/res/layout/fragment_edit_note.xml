@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/note"
             style="@style/textinput_embedded"
             android:hint="@string/waypoint_note"

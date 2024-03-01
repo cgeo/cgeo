@@ -69,7 +69,7 @@
             style="@style/textinput_edittext_singleline"
             app:counterEnabled="true"
             app:counterMaxLength="50">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/caption"
                 style="@style/textinput_embedded_singleline"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             style="@style/textinput_edittext"
             app:counterEnabled="true"
             app:counterMaxLength="250">
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/description"
                 style="@style/textinput_embedded"
                 android:layout_height="wrap_content"

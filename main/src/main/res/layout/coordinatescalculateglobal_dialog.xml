@@ -69,7 +69,7 @@
                 android:importantForAutofill="noExcludeDescendants"
                 android:orientation="vertical">
                 <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/PlainLat"
                         style="@style/textinput_embedded_singleline"
                         android:inputType="text"
@@ -77,7 +77,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/PlainLon"
                         style="@style/textinput_embedded_singleline"
                         android:inputType="text"
@@ -146,7 +146,7 @@
                 android:textAlignment="gravity"/>
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/notes_text"
                     style="@style/textinput_embedded"
                     android:textSize="@dimen/textSize_detailsPrimary"
