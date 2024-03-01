@@ -650,6 +650,9 @@ public class ViewUtils {
 
     public static Geopoint getCoordinates(final TextView textView) {
         final String[] latlonText = textView.getText().toString().split("\n");
+        if (latlonText.length < 2) {
+            return null;
+        }
         final String latText = StringUtils.trim(latlonText[0]);
         final String lonText = StringUtils.trim(latlonText[1]);
 
