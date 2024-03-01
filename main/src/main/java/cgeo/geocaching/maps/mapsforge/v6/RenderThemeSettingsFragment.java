@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.SeekbarPreference;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.SeekbarUI;
 
 import android.app.Activity;
 import android.content.Context;
@@ -168,8 +169,8 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         info.setIconSpaceReserved(false);
         cat.addPreference(info);
 
-        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "", "%",
-                new SeekbarPreference.FactorizeValueMapper(10));
+        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%",
+                new SeekbarUI.FactorizeValueMapper(10));
         seek.setDefaultValue(100);
         seek.setKey(prefKey);
         cat.addPreference(seek);

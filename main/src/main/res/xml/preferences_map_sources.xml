@@ -37,13 +37,10 @@
             android:summary="@string/downloadmap_keep_temporary_files_summary"
             android:title="@string/downloadmap_keep_temporary_files"
             app:iconSpaceReserved="false" />
-        <Preference
-            android:summary="@string/init_updateinterval_description"
-            android:title="@string/init_updateinterval_title"
-            app:allowDividerBelow="false"
-            app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_mapAutoDownloadsInterval"
+            android:summary="@string/init_updateinterval_description"
+            android:title="@string/init_updateinterval_title"
             android:defaultValue="@integer/map_updateinterval_default"
             app:max="@integer/map_updateinterval_max"
             app:minValueDescription="@string/switch_off"

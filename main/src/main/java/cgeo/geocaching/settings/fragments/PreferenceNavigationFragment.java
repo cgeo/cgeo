@@ -141,7 +141,6 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
-        findPreference(getString(R.string.pref_fakekey_brouterDistanceThresholdTitle)).setEnabled(anyRoutingAvailable);
         findPreference(getString(R.string.pref_brouterDistanceThreshold)).setEnabled(anyRoutingAvailable);
         findPreference(getString(R.string.pref_brouterShowBothDistances)).setEnabled(anyRoutingAvailable);
     }

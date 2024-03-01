@@ -69,13 +69,10 @@
     <PreferenceCategory
         android:title="@string/init_cachelists"
         app:iconSpaceReserved="false">
-        <Preference
-            android:title="@string/init_list_initial_load_limit"
-            android:summary="@string/init_summary_list_initial_load_limit"
-            app:allowDividerBelow="false"
-            app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_list_initial_load_limit"
+            android:title="@string/init_list_initial_load_limit"
+            android:summary="@string/init_summary_list_initial_load_limit"
             android:defaultValue="@integer/list_load_limit_default"
             app:min="0"
             app:max="@integer/list_load_limit_max"
@@ -93,22 +90,18 @@
     <PreferenceCategory
         android:title="@string/init_iconsizes"
         app:iconSpaceReserved="false">
-        <Preference
-            android:title="@string/init_mapCacheScaling_title"
-            android:summary="@string/init_mapCacheScaling_description"
-            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_mapCacheScaling"
+            android:title="@string/init_mapCacheScaling_title"
+            android:summary="@string/init_mapCacheScaling_description"
             android:defaultValue="100"
             app:min="50"
             app:max="200"
             app:iconSpaceReserved="false" />
-        <Preference
-            android:title="@string/init_mapWpScaling_title"
-            android:summary="@string/init_mapWpScaling_description"
-            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_mapWpScaling"
+            android:title="@string/init_mapWpScaling_title"
+            android:summary="@string/init_mapWpScaling_description"
             android:defaultValue="100"
             app:min="50"
             app:max="200"
