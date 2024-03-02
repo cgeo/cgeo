@@ -276,7 +276,7 @@ public final class ImageUtils {
     @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
-        final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY, true);
+        final Bitmap image = readImage(imageUri, true);
         if (image == null) {
             return null;
         }
@@ -288,46 +288,24 @@ public final class ImageUtils {
             return null;
         }
 
-        final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
-        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, compressQuality <= 0 ? 75 : compressQuality, newImageUri);
+        final Bitmap scaledImage = scaleBitmapTo(image, maxXY, maxXY).getBitmap();
+        final ViewOrientation orientation = getImageOrientation(imageUri);
+        final Bitmap orientedImage = orientation.isNormal() ? scaledImage : Bitmap.createBitmap(scaledImage, 0, 0, scaledImage.getWidth(), scaledImage.getHeight(), orientation.createOrientationCalculationMatrix(), true);
+
+        storeBitmap(orientedImage, Bitmap.CompressFormat.JPEG, compressQuality <= 0 ? 75 : compressQuality, newImageUri);
 
         return targetFile;
     }
 
-    /**
-     * Reads and scales an image with downsampling in one step to prevent memory consumption.
-     *
-     * @param imageUri image to read
-     * @param maxX     The desired width. If <= 0 then actual bitmap width is used
-     * @param maxY     The desired height. If <= 0 then actual bitmap height is used
-     * @return Bitmap the image or null if image can't be read
-     */
     @Nullable
-    private static Bitmap readDownsampledImage(@NonNull final Uri imageUri, final int maxX, final int maxY, final boolean adjustOrientation) {
-
-        final BitmapFactory.Options sizeOnlyOptions = getBitmapSizeOptions(openImageStreamIfLocal(imageUri));
-        if (sizeOnlyOptions == null) {
-            return null;
-        }
-        final BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
-
-        return readDownsampledImageInternal(imageUri, sampleOptions, adjustOrientation);
-    }
-
-    private static Bitmap readDownsampledImageInternal(final Uri imageUri, final BitmapFactory.Options sampleOptions, final boolean adjustOrientation) {
+    private static Bitmap readImage(final Uri imageUri, final boolean adjustOrientation) {
         final ViewOrientation orientation = adjustOrientation ? getImageOrientation(imageUri) : null;
 
         try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
             }
-            final Bitmap decodedImage = BitmapFactory.decodeStream(imageStream, null, sampleOptions);
-            if (decodedImage != null) {
-                if (orientation != null && !orientation.isNormal()) {
-                    return Bitmap.createBitmap(decodedImage, 0, 0, decodedImage.getWidth(), decodedImage.getHeight(), orientation.createOrientationCalculationMatrix(), true);
-                }
-            }
-            return decodedImage;
+            return BitmapFactory.decodeStream(imageStream);
         } catch (final IOException e) {
             Log.e("ImageUtils.readDownsampledImage(decode)", e);
         }
