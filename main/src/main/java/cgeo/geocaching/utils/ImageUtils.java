@@ -45,6 +45,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
+import androidx.core.graphics.BitmapCompat;
 import androidx.core.util.Supplier;
 import androidx.exifinterface.media.ExifInterface;
 
@@ -211,7 +212,7 @@ public final class ImageUtils {
         final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight, minWidth, minHeight);
 
         if (scaledSize.right) {
-            result = Bitmap.createScaledBitmap(image, scaledSize.left, scaledSize.middle, true);
+            result = BitmapCompat.createScaledBitmap(image, scaledSize.left, scaledSize.middle, null, true);
         }
 
         final BitmapDrawable resultDrawable = new BitmapDrawable(app.getResources(), result);
@@ -308,13 +309,7 @@ public final class ImageUtils {
         if (sizeOnlyOptions == null) {
             return null;
         }
-        final int myMaxXY = Math.max(sizeOnlyOptions.outHeight, sizeOnlyOptions.outWidth);
-        final int maxXY = Math.max(maxX <= 0 ? sizeOnlyOptions.outWidth : maxX, maxY <= 0 ? sizeOnlyOptions.outHeight : maxY);
-        final int sampleSize = maxXY <= 0 ? 1 : myMaxXY / maxXY;
         final BitmapFactory.Options sampleOptions = new BitmapFactory.Options();
-        if (sampleSize > 1) {
-            sampleOptions.inSampleSize = sampleSize;
-        }
 
         return readDownsampledImageInternal(imageUri, sampleOptions, adjustOrientation);
     }
