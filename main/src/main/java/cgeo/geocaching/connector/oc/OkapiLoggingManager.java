@@ -52,6 +52,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager {
         if (!getConnector().isLoggedIn()) {
             info.setError();
         }
+        info.setAvailableFavoritePoints(getConnector().getRemainingFavoritePoints());
         return info;
     }
     @Override
