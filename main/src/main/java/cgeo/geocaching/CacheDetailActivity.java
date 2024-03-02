@@ -195,6 +195,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private static final int MESSAGE_SUCCEEDED = 1;
 
     private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
+    private static final String EXTRA_EDIT_PERSONALNOTE = "cgeo.geocaching.extra.cachedetail.editPersonalNote";
 
     /**
      * Minimal contrast ratio. If description:background contrast ratio is less than this value
@@ -247,6 +248,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private final PermissionAction<String> openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, user -> {
         new ContactsHelper(this).openContactCard(user);
     });
+    private boolean activityIsStartedForEditNote = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -323,6 +325,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         setCacheTitleBar(geocode, name, null);
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
+
+        if (extras.getBoolean(EXTRA_EDIT_PERSONALNOTE)) {
+            progress.setOnDismissListener((dialog) -> {
+                activityIsStartedForEditNote = true;
+                editPersonalNote(cache, this);
+            });
+        }
 
         try {
             String title = res.getString(R.string.cache);
@@ -943,6 +952,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
         detailIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         detailIntent.putExtra(EXTRA_FORCE_WAYPOINTSPAGE, forceWaypointsPage);
+        context.startActivity(detailIntent);
+    }
+
+    public static void startActivityForEditNote(final Context context, final String geocode) {
+        final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
+        detailIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
+        detailIntent.putExtra(EXTRA_EDIT_PERSONALNOTE, true);
         context.startActivity(detailIntent);
     }
 
@@ -2717,6 +2733,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         setNewPersonalNote(note, preventWaypointsFromNote);
         if (uploadNote) {
             checkAndUploadPersonalNote(ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class));
+        }
+    }
+
+    @Override
+    public void onDismissEditNoteDialog() {
+        if (activityIsStartedForEditNote) {
+            finish();
         }
     }
 

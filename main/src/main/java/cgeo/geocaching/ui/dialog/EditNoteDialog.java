@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,6 +31,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
 
     public interface EditNoteDialogListener {
         void onFinishEditNoteDialog(String inputText, boolean preventWaypointsFromNote, boolean uploadNote);
+        void onDismissEditNoteDialog();
     }
 
     /**
@@ -100,5 +102,11 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
         });
 
         Keyboard.show(requireActivity(), mEditText);
+    }
+
+    @Override
+    public void onDismiss(final @NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        ((EditNoteDialogListener) requireActivity()).onDismissEditNoteDialog();
     }
 }
