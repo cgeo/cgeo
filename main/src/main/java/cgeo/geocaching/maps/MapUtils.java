@@ -106,7 +106,7 @@ public class MapUtils {
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext), getActiveMapFilterSavedDifferently(filterContext));
     }
 
     @Nullable
@@ -114,6 +114,15 @@ public class MapUtils {
         final GeocacheFilter filter = filterContext.get();
         if (filter.isFiltering()) {
             return filter.toUserDisplayableString();
+        }
+        return null;
+    }
+
+    @Nullable
+    private static Boolean getActiveMapFilterSavedDifferently(final GeocacheFilterContext filterContext) {
+        final GeocacheFilter filter = filterContext.get();
+        if (filter.isFiltering()) {
+            return filter.isSavedDifferently();
         }
         return null;
     }

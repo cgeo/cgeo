@@ -22,6 +22,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
@@ -162,10 +163,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         //handling of "save" button
         binding.filterStorageSave.setOnClickListener(v -> {
-            String filterName = binding.filterStorageName.getText().toString();
-            if (filterName.endsWith("*")) {
-                filterName = filterName.substring(0, filterName.length() - 1);
-            }
+            final String filterName = FilterUtils.getPurifiedFilterName(binding.filterStorageName.getText().toString());
             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_title)
                     .input(new SimpleDialog.InputOptions().setInitialValue(filterName), newName -> {
                         final GeocacheFilter filter = getFilterFromView();
@@ -291,7 +289,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             try {
                 final List<IFilterViewHolder<?>> filterList = new ArrayList<>();
                 final GeocacheFilter filter = GeocacheFilter.checkConfig(inputFilter);
-                binding.filterStorageName.setText(filter.getNameForUserDisplay());
+                FilterUtils.setFilterText(binding.filterStorageName, filter.getNameForUserDisplay(), filter.isSavedDifferently());
                 includeInconclusiveFilterCheckbox.setChecked(filter.isIncludeInconclusive());
                 setAdvanced = filter.isOpenInAdvancedMode();
                 IGeocacheFilter filterTree = filter.getTree();
@@ -403,7 +401,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         }
 
         return GeocacheFilter.create(
-                binding.filterStorageName.getText().toString(),
+                FilterUtils.getPurifiedFilterName(binding.filterStorageName.getText().toString()),
                 binding.filterBasicAdvanced.isChecked(),
                 this.includeInconclusiveFilterCheckbox.isChecked(),
                 filter);

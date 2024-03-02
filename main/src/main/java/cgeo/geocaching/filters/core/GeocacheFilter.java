@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -239,7 +240,7 @@ public class GeocacheFilter implements Cloneable {
     }
 
     public String getNameForUserDisplay() {
-        return getName() + (isSavedDifferently() ? "*" : "");
+        return FilterUtils.getFilterName(getName(), isSavedDifferently());
     }
 
     /**
