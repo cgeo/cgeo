@@ -62,6 +62,7 @@ import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.legend.RenderThemeLegend;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -116,10 +117,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Zone;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
 import org.oscim.core.BoundingBox;
 
@@ -419,27 +422,39 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 break;
             case UMTT_List:
                 // load list of caches belonging to list and scale map to see them all
-                final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
-                final Viewport viewport3 = DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
-                addSearchResultByGeocaches(searchResult);
-                if (viewport3 != null) {
-                    loadWaypoints(this, viewModel, viewport3);
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.zoomToBounds(viewport3);
+                final AtomicReference<Viewport> viewport3 = new AtomicReference<>();
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
+                    viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
+                    addSearchResultByGeocaches(searchResult);
+                    if (viewport3.get() != null) {
+                        loadWaypoints(this, viewModel, viewport3.get());
                     }
-                    refreshMapData(false);
-                }
+                }, () -> {
+                    if (viewport3.get() != null) {
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.zoomToBounds(viewport3.get());
+                        }
+                        refreshMapData(false);
+                    }
+                });
                 break;
             case UMTT_SearchResult:
                 // load list of caches and scale map to see them all
-                final Viewport viewport2 = DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints());
-                addSearchResultByGeocaches(mapType.searchResult);
-                if (viewport2 != null) {
-                    loadWaypoints(this, viewModel, viewport2);
-                    if (setDefaultCenterAndZoom) {
-                        mapFragment.zoomToBounds(viewport2);
+                final AtomicReference<Viewport> viewport2 = new AtomicReference<>();
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                    viewport2.set(DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
+                    addSearchResultByGeocaches(mapType.searchResult);
+                    if (viewport2.get() != null) {
+                        loadWaypoints(this, viewModel, viewport2.get());
                     }
-                }
+                }, () -> {
+                    if (viewport2.get() != null) {
+                        if (setDefaultCenterAndZoom) {
+                            mapFragment.zoomToBounds(viewport2.get());
+                        }
+                    }
+                });
                 break;
             default:
                 // nothing to do
@@ -1045,11 +1060,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (routeItem != null && Settings.isLongTapOnMapActivated()) {
 
                 final Geocache cache = routeItem.getGeocache();
-                final boolean canHaveStar = MapStarUtils.canHaveStar(cache);
 
-                if (Settings.isShowRouteMenu() || canHaveStar) {
+                if (Settings.isShowRouteMenu()) {
                     final SimplePopupMenu menu = MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null);
-                    if (canHaveStar) {
+                    if (MapStarUtils.canHaveStar(cache)) {
                         final String geocode = routeItem.getGeocode();
                         final boolean isStarDrawn = viewModel.cachesWithStarDrawn.getValue().contains(geocode);
                         MapStarUtils.addMenuIfNecessary(menu, cache, isStarDrawn, drawStar -> {
