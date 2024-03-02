@@ -192,7 +192,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         viewModel.transientIsLiveEnabled.setValue(mapType.type == UMTT_PlainMap && Settings.isLiveMap());
 
-        routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
+        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
         viewModel.configureProximityNotification();
         if (viewModel.proximityNotification.getValue() != null) {
             viewModel.proximityNotification.getValue().setTextNotifications(this);
@@ -324,7 +324,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             oldFragment.prepareForTileSourceChange();
         }
         tileProvider = newSource;
-//        if (oldFragment == null || !oldFragment.supportsTileSource(tileProvider)) {
         mapFragment = tileProvider.createMapFragment();
 
         if (oldFragment != null) {
@@ -336,9 +335,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.mapViewFragment, mapFragment)
                 .commit();
-//        } else {
-//            onMapReadyTasks(newSource, false);
-//        }
     }
 
     private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged, @Nullable final UnifiedMapState mapState) {
@@ -346,7 +342,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         mapFragment.setTileSource(newSource, false);
         Settings.setTileProvider(newSource);
 
-//        tileProvider.getMap().showSpinner(); - should be handled from UnifiedMapActivity instead
         if (mapChanged) {
             final boolean setDefaultCenterAndZoom = !overridePositionAndZoom && mapState == null;
             // map settings popup
@@ -375,7 +370,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
-//        onResume();
     }
 
     private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
@@ -1063,9 +1057,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             viewModel.cachesWithStarDrawn.notifyDataChanged();
                         });
                     }
-                    menu
-                        //.setOnDismissListener(menu -> tapHandlerLayer.resetLongTapLatLong())
-                        .show();
+                    menu.show();
                 } else {
                     viewModel.toggleRouteItem(this, routeItem);
                 }
