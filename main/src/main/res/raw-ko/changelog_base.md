@@ -36,3 +36,4 @@
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
 - 변경: 캐시 세부정보 및 추적아이템 세부정보에서 길게 누르는 작업을 단순화합니다.
 - 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
+- New: List selection dialog: Auto-group cache lists having a ":" in their name
