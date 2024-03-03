@@ -36,3 +36,4 @@
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
+- Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
