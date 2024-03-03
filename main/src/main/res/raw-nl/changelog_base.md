@@ -36,3 +36,4 @@
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
+- New: List selection dialog: Auto-group cache lists having a ":" in their name
