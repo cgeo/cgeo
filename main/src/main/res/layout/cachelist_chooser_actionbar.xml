@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="?attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="right|center_vertical"
-    android:orientation="vertical"
-    android:background="@drawable/mark_green"
     tools:context=".CacheListSpinnerAdapter">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/expand_more"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/icon"
+        android:orientation="vertical">
 
     <TextView
 
@@ -34,5 +47,5 @@
         android:id="@android:id/text2"
         android:maxLines="1"
         tools:ignore="SpUsage" /> <!-- usage of dp value is intended to fix height of action bar despite font size -->
-
-</LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

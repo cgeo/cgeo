@@ -4,6 +4,7 @@ import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.ui.TextParam;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
         super(context, resource);
         cacheListActivity = context;
     }
+
+
 
 
     @Override
@@ -64,6 +67,36 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
         } else {
             holder.subtitle.setVisibility(View.GONE);
         }
+
+        return resultView;
+    }
+
+    public static View getMyCustomView(final Context ctx, final AbstractList list, final View convertView, final ViewGroup parent) {
+
+        final int layoutRes = R.layout.cachelist_spinner_actionbar;
+
+        View resultView = convertView;
+        final LayoutInflater inflater = LayoutInflater.from(ctx);
+
+        final CacheListSpinnerAdapter.ViewHolder holder;
+        if (resultView == null) {
+            resultView = inflater.inflate(layoutRes, parent, false);
+            holder = new ViewHolder();
+            holder.title = resultView.findViewById(android.R.id.text1);
+            holder.subtitle = resultView.findViewById(android.R.id.text2);
+
+            resultView.setTag(holder);
+        } else {
+            holder = (CacheListSpinnerAdapter.ViewHolder) resultView.getTag();
+        }
+
+        TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list)).applyTo(holder.title);
+//        if (list.getNumberOfCaches() >= 0) {
+            holder.subtitle.setVisibility(View.VISIBLE);
+            holder.subtitle.setText("subtitle");
+//        } else {
+//            holder.subtitle.setVisibility(View.GONE);
+//        }
 
         return resultView;
     }

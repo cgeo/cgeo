@@ -72,6 +72,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
@@ -165,10 +166,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Geopoint coords = null;
     private GeocacheSortContext sortContext;
     private SearchResult search = null;
-    /**
-     * The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler
-     */
-    //private final List<Geocache> cacheList = new ArrayList<>();
+
+    private final CacheListActionBarChooser actionBarChooser =
+        new CacheListActionBarChooser(this, this::getSupportActionBar, this::switchListById);
     private CacheListAdapter adapter = null;
     private View listFooter = null;
     private TextView listFooterLine1 = null;
@@ -180,11 +180,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private int markerId = EmojiUtils.NO_EMOJI;
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
-
-    /**
-     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
-     */
-    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
 
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
@@ -491,6 +486,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         updateFilterBar();
 
         if (type.canSwitch) {
+            //this.actionBarChooser.setList(listId);
             initActionBarSpinner();
         }
 
@@ -535,39 +531,92 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void initActionBarSpinner() {
-        mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, (i, l) -> {
-                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-                if (newListId != listId) {
-                    switchListById(newListId);
-                }
-                return true;
-            });
-        }
+//        refreshActionBarTitle();
+//        final ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            //actionBar.getCustomView().findViewById(R.id.space).setMinimumWidth(ViewUtils.dpToPixel(5000));
+//            actionBar.setDisplayShowTitleEnabled(false);
+//            actionBar.setDisplayShowCustomEnabled(true);
+//            actionBar.getCustomView().setOnClickListener(v -> {
+//                new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
+//                    if (selectedListId != listId) {
+//                        switchListById(selectedListId);
+//                   }
+//                }, false, PseudoList.NEW_LIST.id);
+//            });
+//        }
+
+//            mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
+//        final ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setCustomView(CacheListSpinnerAdapter.getMyCustomView(this, PseudoList.HISTORY_LIST, actionBar.getCustomView(), null));
+//            //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//            actionBar.setDisplayShowTitleEnabled(false);
+//            actionBar.setDisplayShowCustomEnabled(true);
+////            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, (i, l) -> {
+////                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
+////                if (newListId != listId) {
+////                    switchListById(newListId);
+////                }
+////                return true;
+////            });
+//        }
     }
 
     private void refreshSpinnerAdapter() {
-        /* If the activity does not use the Spinner this will be null */
-        if (mCacheListSpinnerAdapter == null) {
-            return;
-        }
-        mCacheListSpinnerAdapter.clear();
-
-        final AbstractList list = AbstractList.getListById(listId);
-
-        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
-            mCacheListSpinnerAdapter.add(l);
+        if (type.canSwitch) {
+            refreshActionBarTitle();
         }
 
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
-        }
+//        /* If the activity does not use the Spinner this will be null */
+//        if (mCacheListSpinnerAdapter == null) {
+//            return;
+//        }
+//        mCacheListSpinnerAdapter.clear();
+//
+//        final AbstractList list = AbstractList.getListById(listId);
+//
+//        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
+//            mCacheListSpinnerAdapter.add(l);
+//        }
+//
+//        final ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+////            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+//        }
     }
+
+    private void refreshActionBarTitle() {
+        actionBarChooser.setList(listId, adapter.getCount(), resultIsOfflineAndLimited());
+
+//        final ActionBar actionBar = getSupportActionBar();
+//        if (actionBar == null) {
+//            return;
+//        }
+//
+//        final int layoutRes = R.layout.cachelist_chooser_actionbar;
+//        final AbstractList list = AbstractList.getListById(listId);
+//
+//        View resultView = actionBar.getCustomView();
+//        if (resultView == null) {
+//            final LayoutInflater inflater = LayoutInflater.from(this);
+//            resultView = inflater.inflate(layoutRes, null, false);
+//        }
+//
+//        final TextView title = resultView.findViewById(android.R.id.text1);
+//        final TextView subtitle = resultView.findViewById(android.R.id.text2);
+//
+//
+//        TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list)).applyTo(title);
+//        if (list.getNumberOfCaches() >= 0) {
+//            subtitle.setVisibility(View.VISIBLE);
+//            subtitle.setText(getCacheListSubtitle(list));
+//        } else {
+//            subtitle.setVisibility(View.GONE);
+//        }
+//        actionBar.setCustomView(resultView);
+    }
+
 
     @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
@@ -2033,6 +2082,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return StringUtils.EMPTY;
         }
         return getCacheNumberString(getResources(), numberOfCaches);
+    }
+
+    public int getCurrentlyShown() {
+        return adapter.getCount();
     }
 
     /**
