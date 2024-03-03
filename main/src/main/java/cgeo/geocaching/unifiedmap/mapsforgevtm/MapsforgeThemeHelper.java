@@ -47,7 +47,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.oscim.android.theme.ContentRenderTheme;
 import org.oscim.android.theme.ContentResolverResourceProvider;
-import org.oscim.backend.CanvasAdapter;
 import org.oscim.map.Map;
 import org.oscim.theme.ExternalRenderTheme;
 import org.oscim.theme.IRenderTheme;
@@ -84,7 +83,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     //current Theme style menu settings
     private XmlRenderThemeStyleMenu themeStyleMenu;
-    private String prefThemeStyleKey = "";
 
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
@@ -155,8 +153,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
                 */
                 mTheme = map.setTheme(xmlRenderTheme);
-                //setting xmlrendertheme has filled prefThemeStyleKey -> now apply scales
-                applyScales(prefThemeStyleKey);
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
@@ -179,14 +175,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         if (tileProvider.supportsThemes()) {
             mTheme = map.setTheme(VtmThemes.getDefaultVariant());
         }
-        applyScales(Settings.RENDERTHEMESCALE_DEFAULTKEY);
-    }
-
-    private void applyScales(final String themeStyleId) {
-        // todo: restart of map engine necessary, or bug inside VTM? (see #13593)
-        // CanvasAdapter.userScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.MAP) / 100f;
-        CanvasAdapter.textScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.TEXT) / 100f;
-        CanvasAdapter.symbolScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.SYMBOL) / 100f;
     }
 
     protected void disposeTheme() {
@@ -296,7 +284,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     public Set<String> getCategories(final XmlRenderThemeStyleMenu menu) {
         themeStyleMenu = menu;
         final String id = this.sharedPreferences.getString(themeStyleMenu.getId(), themeStyleMenu.getDefaultValue());
-        prefThemeStyleKey = menu.getId() + "-" + id;
         final XmlRenderThemeStyleLayer baseLayer = themeStyleMenu.getLayer(id);
         if (baseLayer == null) {
             Log.w("Invalid style " + id);

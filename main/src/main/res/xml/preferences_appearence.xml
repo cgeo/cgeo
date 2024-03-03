@@ -189,4 +189,41 @@
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/category_unifiedMap"
+        android:summary="@string/maptheme_vtm_scaling_summary"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:title="@string/maptheme_scale_map_title"
+            android:summary="@string/maptheme_scale_map_summary"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_vtmUserScale"
+            app:min="50"
+            app:max="200"
+            app:defaultValue="100"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:title="@string/maptheme_scale_text_title"
+            android:summary="@string/maptheme_scale_text_summary"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_vtmTextScale"
+            app:min="50"
+            app:max="200"
+            app:defaultValue="100"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:title="@string/maptheme_scale_symbol_title"
+            android:summary="@string/maptheme_scale_symbol_summary"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_vtmSymbolScale"
+            app:min="50"
+            app:max="200"
+            app:defaultValue="100"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 </PreferenceScreen>
