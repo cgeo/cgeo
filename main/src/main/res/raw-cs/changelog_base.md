@@ -36,3 +36,4 @@
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
+- Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
