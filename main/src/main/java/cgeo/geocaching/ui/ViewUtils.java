@@ -622,22 +622,32 @@ public class ViewUtils {
     }
 
     /** Sets padding (in DP) to apply to each list item.
+     *  List of int[] are added to each other to get the final padding. For each int[] following rule applies:
      *  If 4 numbers are given, they are applied to left, top, right, bottom in that order
      *  If 2 numbers are given, they are applied to horizontal (left+right), vertical (top+bottom)
      *  If 1 number is given it is applied to all 4 sides
-     *  Otherwise nothing is done and false is returned
      */
-    public static boolean applyPadding(final View view, final int[] paddingsInDp) {
-        if (view == null || paddingsInDp == null || paddingsInDp.length < 1 || paddingsInDp.length > 4 || paddingsInDp.length == 3) {
-            return false;
+    public static void applyPadding(final View view, final int[] ... paddingsInDp) {
+        if (view == null || paddingsInDp == null) {
+            return;
         }
-        if (paddingsInDp.length == 4) {
-            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]), dpToPixel(paddingsInDp[2]), dpToPixel(paddingsInDp[3]));
-        } else if (paddingsInDp.length == 2) {
-            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[1]));
-        } else { //paddingsInDp-length is 1
-            view.setPadding(dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]), dpToPixel(paddingsInDp[0]));        }
-        return true;
+        final int[] result = new int[4];
+        for (int[] paddingInDp : paddingsInDp) {
+            final int len = paddingInDp == null ? 0 : paddingInDp.length;
+            if (len != 4 && len != 2 && len != 1) {
+                continue;
+            }
+            //left
+            result[0] += paddingInDp[0];
+            //top
+            result[1] += len == 4 || len == 2 ? paddingInDp[1] : paddingInDp[0];
+            //right
+            result[2] += len == 4 ? paddingInDp[2] : paddingInDp[0];
+            //bottom
+            result[3] += len == 4 ? paddingInDp[3] : len == 2 ? paddingInDp[1] : paddingInDp[0];
+        }
+
+        view.setPadding(ViewUtils.dpToPixel(result[0]), ViewUtils.dpToPixel(result[1]), ViewUtils.dpToPixel(result[2]), ViewUtils.dpToPixel(result[3]));
     }
 
     public static void setCoordinates(@Nullable final Geopoint gp, final TextView textView) {

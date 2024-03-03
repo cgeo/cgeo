@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -99,20 +101,41 @@ public class CommonUtils {
         return result;
     }
 
-    public static <T> Comparator<T> getNullHandlingComparator(@Nullable final Comparator<T> source, final boolean sortNullTop) {
-        return (g1, g2) -> {
-            if (g1 == g2) {
-                return 0;
-            }
-            if (g1 == null) {
-                return sortNullTop ? -1 : 1;
-            }
-            if (g2 == null) {
-                return sortNullTop ? 1 : -1;
-            }
-            return source == null ? g1.toString().compareTo(g2.toString()) : source.compare(g1, g2);
+    public static <T> Comparator<T> getTextSortingComparator(final Function<T, String> mapper) {
+        return (o1, o2) -> {
+            final String txt1 = mapper == null ? (o1 == null ? null : o1.toString()) : mapper.apply(o1);
+            final String txt2 = mapper == null ? (o2 == null ? null : o2.toString()) : mapper.apply(o2);
+            return TextUtils.COLLATOR.compare(txt1 == null ? "" : txt1, txt2 == null ? "" : txt2);
         };
     }
+
+    public static <T> Comparator<T> getNullHandlingComparator(@Nullable final Comparator<T> source, final boolean sortNullTop) {
+        return getListSortingComparator(source, sortNullTop, Collections.singleton(null));
+    }
+
+    public static <T> Comparator<T> getListSortingComparator(@Nullable final Comparator<T> source, @Nullable final Iterable<T> first, @Nullable final Iterable<T> last) {
+        return getListSortingComparator(getListSortingComparator(source, true, first), false, last);
+    }
+
+    public static <T> Comparator<T> getListSortingComparator(@Nullable final Comparator<T> source, final boolean sortTop, @Nullable final Iterable<T> list) {
+        final HashMap<T, Integer> listMap = new HashMap<>();
+        if (list != null) {
+            for (T item : list) {
+                listMap.put(item, listMap.size());
+            }
+        }
+        return (g1, g2) -> {
+            final int outsideValue = sortTop ? -1 : listMap.size() + 1;
+            final int g1Idx = listMap.containsKey(g1) ? listMap.get(g1) : outsideValue;
+            final int g2Idx = listMap.containsKey(g2) ? listMap.get(g2) : outsideValue;
+
+            if (g1Idx == outsideValue && g2Idx == outsideValue) {
+                return source == null ? 0 : source.compare(g1, g2);
+            }
+            return g2Idx - g1Idx;
+        };
+    }
+
 
     /** Returns a ThreadLocal with initial value given by passed Supplier.
      * Use this method instead of ThreadLocal.withInitial() for SDK<26;
@@ -152,6 +175,19 @@ public class CommonUtils {
         }
     }
 
+    public static <I, T> Map<T, Integer> countOccurences(final Iterable<I> it, final Function<I, T> mapper) {
+        final Map<T, Integer> result = new HashMap<>();
+        for (I item : it) {
+           final T element = mapper.apply(item);
+           if (result.containsKey(element)) {
+               result.put(element, result.get(element) + 1);
+           } else {
+               result.put(element, 1);
+           }
+        }
+        return result;
+    }
+
     /**
      * Groups a list of items of type T to groups of type G.
      * Using various parameters to steer grouping, the method will call the given functions groupAdder and itemAdder
@@ -160,72 +196,64 @@ public class CommonUtils {
      * @param items list of items to group
      * @param groupMapper maps an item to its group. May be null or return null for single items, which means that those items have no group
      * @param groupOrder comparator to give an order to groups. By default, groups will be ordered by their toString()-value
-     * @param minGroupCount if there are less than this number of groups, no groping will happen at all
-     * @param minCountPerGroup groups with item count smaller than this will not be created (items will be handled as if they have no group)
-     * @param defaultGroup if given, then all items w/o a group will be assigned this group
-     * @param groupAdder groupAdder
-     * @param itemAdder itemAdder
+     * @param hasHeader given a group and its size, decides whether this group shall have a header. If null then all non-null groups will get a header
+     * @param groupHeaderAdder adds a group header with parameters: group, index of first element, group size
+     * @param itemAdder adds an item with oarameters: item, original index, group of item, index of group header (-1 if no header)
      */
     @SuppressWarnings({"PMD.NPathComplexity"})
     public static <T, G> void groupList(final List<T> items,
-                                        @Nullable final Func1<T, G> groupMapper,
+                                        @Nullable final Function<T, G> groupMapper,
                                         @Nullable final Comparator<G> groupOrder,
-                                        final int minCountPerGroup,
-                                        @Nullable final G defaultGroup,
-                                        final Action3<G, Integer, Integer> groupAdder,
+                                        @Nullable final BiPredicate<G, List<T>> hasHeader,
+                                        final Action3<G, Integer, List<T>> groupHeaderAdder,
                                         final Action4<T, Integer, G, Integer> itemAdder) {
 
 
-        //get counts per group
-        final Map<G, Integer> groupCounts = new HashMap<>();
-        for (T value : items) {
-            G group = groupMapper == null ? null : groupMapper.call(value);
-            if (group == null) {
-                group = defaultGroup;
-            }
-            if (groupCounts.containsKey(group)) {
-                groupCounts.put(group, groupCounts.get(group) + 1);
-            } else {
-                groupCounts.put(group, 1);
-            }
-        }
-
         //create lists per group (for elements w/o a group, a group with 'defaultGroup' will be created)
-        final Map<G, List<Pair<Integer, T>>> groupedListMap = new HashMap<>();
+        final Map<G, List<T>> groupedListMap = new HashMap<>();
+        final Map<G, List<Integer>> groupedListPosMap = new HashMap<>();
         int pos = 0;
         for (T value : items) {
-            G group = groupMapper == null ? null : groupMapper.call(value);
-            if (group == null || (groupCounts.containsKey(group) && groupCounts.get(group) < minCountPerGroup)) {
-                group = defaultGroup;
-            }
-            List<Pair<Integer, T>> groupList = groupedListMap.get(group);
+            final G group = groupMapper == null ? null : groupMapper.apply(value);
+            List<T> groupList = groupedListMap.get(group);
+            List<Integer> groupPosList = groupedListPosMap.get(group);
             if (groupList == null) {
                 groupList = new ArrayList<>();
                 groupedListMap.put(group, groupList);
+                groupPosList = new ArrayList<>();
+                groupedListPosMap.put(group, groupPosList);
             }
-            groupList.add(new Pair<>(pos, value));
+            groupList.add(value);
+            groupPosList.add(pos);
             pos++;
         }
 
         //sort groups
         final List<G> sortedGroupList = new ArrayList<>(groupedListMap.keySet());
-        Collections.sort(sortedGroupList, getNullHandlingComparator(groupOrder, true));
+        Collections.sort(sortedGroupList, groupOrder == null ? getTextSortingComparator(null) : groupOrder);
 
         //construct result
         int listIdx = 0;
-        int groupIdx = -1;
+        int groupIdx;
         for (G group : sortedGroupList) {
 
-            //group item, if not null
-            if (group != null) {
-                groupAdder.call(group, listIdx + 1, Objects.requireNonNull(groupedListMap.get(group)).size());
+            final List<T> groupElements = Objects.requireNonNull(groupedListMap.get(group));
+
+            // add header if wanted
+            final boolean addHeader = hasHeader == null ? group != null : hasHeader.test(group, groupElements);
+            if (addHeader) {
+                groupHeaderAdder.call(group, listIdx + 1, groupElements);
                 groupIdx = listIdx;
                 listIdx++;
+            } else {
+                groupIdx = -1;
             }
 
-            //items in group
-            for (Pair<Integer, T> valuePair : Objects.requireNonNull(groupedListMap.get(group))) {
-                itemAdder.call(valuePair.second, valuePair.first, group, groupIdx);
+            //Add items in group
+            final List<Integer> groupPos = groupedListPosMap.get(group);
+            int ppos = 0;
+            for (T value : Objects.requireNonNull(groupedListMap.get(group))) {
+                itemAdder.call(value, groupPos.get(ppos++), group, groupIdx);
                 listIdx++;
             }
         }

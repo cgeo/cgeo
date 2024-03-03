@@ -1378,8 +1378,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 .setDisplayViewMapper((item, ctx, view, parent) ->
                         GeoItemSelectorUtils.createGeoItemView(NewMap.this, item, GeoItemSelectorUtils.getOrCreateView(NewMap.this, view, parent)),
                         (item) -> item.getName() + "::" + item.getGeocode())
-                .setItemPadding(0)
-                .setPlainItemPaddingLeftInDp(0);
+                .setItemPadding(0);
 
             SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
                 if (longPressMode) {
