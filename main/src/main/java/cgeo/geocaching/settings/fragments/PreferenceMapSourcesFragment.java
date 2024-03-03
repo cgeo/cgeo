@@ -51,7 +51,6 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         }
         hideTileprovidersPref.setEntries(tpEntries);
         hideTileprovidersPref.setEntryValues(tpValues);
-
     }
 
     @Override

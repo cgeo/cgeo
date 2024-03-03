@@ -76,6 +76,8 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         findPreference(getString(R.string.pref_mapWpScaling)).setOnPreferenceChangeListener(pScaling);
 
         configCustomBNitemPreference();
+
+        setFlagForRestartRequired(R.string.pref_vtmUserScale, R.string.pref_vtmTextScale, R.string.pref_vtmSymbolScale);
     }
 
     @Override
