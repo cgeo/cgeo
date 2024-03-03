@@ -707,6 +707,14 @@ public class Settings {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
+    public static boolean isFeatureEnabledDefaultFalse(@StringRes final int featureKeyId) {
+        return getBoolean(featureKeyId, false);
+    }
+
+    public static boolean isFeatureEnabledDefaultTrue(@StringRes final int featureKeyId) {
+        return getBoolean(featureKeyId, true);
+    }
+
     public static String getALCLauncher() {
         return getString(R.string.pref_alc_launcher, "");
     }

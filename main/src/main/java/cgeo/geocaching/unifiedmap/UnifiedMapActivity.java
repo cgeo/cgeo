@@ -105,6 +105,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -152,10 +153,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
     private Spinner mapSpinner = null;
+    private UnifiedMapState lastMapStateFromOnPause = null;
+    private static WeakReference<UnifiedMapActivity> unifiedMapActivity = new WeakReference<>(null);
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        acquireUnifiedMap(this);
 
         HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
 
@@ -506,6 +510,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void updateCacheCountSubtitle() {
+        if (mapFragment == null) {
+            return;
+        }
         final int cacheCount = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
         String subtitle = res.getQuantityString(R.plurals.cache_counts, cacheCount, cacheCount);
 
@@ -642,6 +649,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void initFollowMyLocation(final boolean followMyLocation) {
+        if (mapFragment == null) {
+            return;
+        }
         Settings.setFollowMyLocation(followMyLocation);
         ToggleItemType.FOLLOW_MY_LOCATION.toggleMenuItem(followMyLocationItem, followMyLocation);
 
@@ -1145,7 +1155,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onSaveInstanceState(outState);
         outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
 
-        outState.putParcelable(BUNDLE_MAPSTATE, getCurrentMapState());
+        outState.putParcelable(BUNDLE_MAPSTATE, lastMapStateFromOnPause);
         outState.putParcelable(BUNDLE_MAPTYPE, mapType);
         if (mapType.filterContext != null) {
             outState.putParcelable(BUNDLE_FILTERCONTEXT, mapType.filterContext);
@@ -1172,12 +1182,41 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void onPause() {
-        saveCenterAndZoom();
+        if (mapFragment != null) {
+            saveCenterAndZoom();
+            lastMapStateFromOnPause = getCurrentMapState();
+        }
+        if (!Settings.isFeatureEnabledDefaultTrue(R.string.pref_useDelayedMapFragment)) {
+            destroyMapFragment();
+        }
         super.onPause();
+    }
+
+    public void destroyMapFragment() {
+        if (mapFragment != null) {
+            getSupportFragmentManager().beginTransaction().remove(mapFragment).commitNowAllowingStateLoss();
+        }
+        mapFragment = null;
+    }
+
+    public static void acquireUnifiedMap(final UnifiedMapActivity newUnifiedMapActivity) {
+        if (!Settings.isFeatureEnabledDefaultTrue(R.string.pref_useDelayedMapFragment)) {
+            return;
+        }
+        final UnifiedMapActivity oldUnifiedMapActivity = unifiedMapActivity.get();
+        if (oldUnifiedMapActivity != null) {
+            // may be optimized further to only destroy map fragment if it's a VTM instance
+            oldUnifiedMapActivity.destroyMapFragment();
+        }
+        unifiedMapActivity = new WeakReference<>(newUnifiedMapActivity);
     }
 
     @Override
     protected void onResume() {
+        if (mapFragment == null) {
+            recreate(); // restart with a fresh MapView
+        }
+
         if (Settings.removeFromRouteOnLog()) {
             viewModel.reloadIndividualRoute();
         }
