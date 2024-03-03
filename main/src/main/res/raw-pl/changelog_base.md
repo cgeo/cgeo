@@ -36,3 +36,4 @@
 - New: Show images linked in "personal note" in Images tab
 - Zmiana: Uproszczenie działania długiego dotknięcia w szczegółach skrytki i szczegółach przedmiotu podróżnego
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
+- Nowość: Okno wyboru listy: Automatycznie grupowane listy skrytek mają dwukropek w nazwie
