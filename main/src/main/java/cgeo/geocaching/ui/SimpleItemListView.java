@@ -151,9 +151,10 @@ public class SimpleItemListView extends LinearLayout {
                     break;
             }
 
-            binding.itemChecker.setVisibility(data.type != ListItemType.ITEM || model.getChoiceMode() != SimpleItemListModel.ChoiceMode.SINGLE_PLAIN ? VISIBLE : GONE);
+            binding.itemChecker.setVisibility(model.getChoiceMode() != SimpleItemListModel.ChoiceMode.SINGLE_PLAIN ? VISIBLE : GONE);
             binding.itemCheckbox.setVisibility(data.type != ListItemType.GROUPHEADER && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX ? VISIBLE : GONE);
             binding.itemRadiobutton.setVisibility(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_RADIO ? VISIBLE : GONE);
+            binding.itemGroupToggle.setVisibility(data.type == ListItemType.GROUPHEADER ? VISIBLE : GONE);
             binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
