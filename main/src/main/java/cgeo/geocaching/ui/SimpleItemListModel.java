@@ -68,7 +68,7 @@ public class SimpleItemListModel<T> {
 
         private BiPredicate<G, List<T>> hasGroupHeaderMapper = null;
 
-        private int groupedItemPaddingInDp = 20;
+        private int groupedItemPaddingInDp = 36;
 
         private GroupingOptions() {
             //no instances outside of this model class
