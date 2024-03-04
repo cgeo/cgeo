@@ -1039,8 +1039,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     .setDisplayViewMapper((item, ctx, view, parent) ->
                         GeoItemSelectorUtils.createMapSelectableItemView(UnifiedMapActivity.this, item, GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, view, parent)),
                         (item) -> item == null ? "" : item.getSortFilterString())
-                    .setItemPadding(0)
-                    .setPlainItemPaddingLeftInDp(0);
+                    .setItemPadding(0);
 
                 SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
                     handleTap(item, touchedPoint, isLongTap, x, y);

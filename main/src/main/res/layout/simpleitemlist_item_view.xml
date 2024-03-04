@@ -71,7 +71,7 @@
         android:id="@+id/item_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:paddingRight="5dp"
+        android:layout_marginRight="5dp"
         android:clickable="false"
         android:focusable="false"
         android:scaleType="fitCenter"

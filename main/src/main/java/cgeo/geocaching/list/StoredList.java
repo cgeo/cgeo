@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -70,6 +72,11 @@ public final class StoredList extends AbstractList {
     public static class UserInterface {
         private final WeakReference<Activity> activityRef;
         private final Resources res;
+
+        private static final String GROUP_SEPARATOR = ":";
+        private static final String TOP_GROUP = "-";
+        private static final String BOTTOM_GROUP = "ZZZ";
+
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
@@ -157,14 +164,37 @@ public final class StoredList extends AbstractList {
         }
 
         private void setListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model) {
-            model.setDisplayMapper((item) -> TextParam.text(item.getTitleAndCount()))
-                .setDisplayIconMapper(UserInterface::getImageForList);
 
-            model.activateGrouping(item -> {
-                final int idx = item.getTitle().indexOf(":");
-                return idx > 0 ? item.getTitle().substring(0, idx) : null;
-            }).setGroupDisplayMapper((t, cnt) -> TextParam.text(t + " (" + cnt + ")"))
-                .setMinCountPerGroup(2);
+            //prepare display: find out which groups will have >= 2 items
+            final Map<String, Integer> occurences = CommonUtils.countOccurences(model.getItems(), UserInterface::getGroupFromList);
+
+            //Display for normal items
+            model.setDisplayMapper((item) -> {
+                String title = item.getTitle();
+                final String group = getGroupFromList(item);
+                if (item instanceof StoredList && occurences.containsKey(group) && occurences.get(group) >= 2) {
+                    //cut off the group header
+                    final int idx = title.indexOf(GROUP_SEPARATOR);
+                    if (idx >= 0) {
+                        title = title.substring(idx + GROUP_SEPARATOR.length());
+                    }
+                    return TextParam.text(title + " [" + ((StoredList) item).count + "]");
+                }
+                return TextParam.text(item.getTitleAndCount());
+            });
+            model.setDisplayIconMapper(UserInterface::getImageForList);
+
+
+            //GROUPING
+
+           //Group sorting: "Stored"/"Create new", Grouped and ungrouped lists (sorted alphabetically), "History"/"All".
+
+            model.activateGrouping(UserInterface::getGroupFromList)
+            .setGroupComparator(CommonUtils.getListSortingComparator(
+                CommonUtils.getTextSortingComparator(null), Collections.singleton(TOP_GROUP), Collections.singleton(BOTTOM_GROUP))
+            ).setGroupDisplayMapper((t, elements) -> TextParam.text(t + " (" + elements.size() + ")"))
+            .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0)))
+            .setHasGroupHeaderMapper((g, elements) -> !TOP_GROUP.equals(g) && !BOTTOM_GROUP.equals(g) && elements.size() >= 2);
         }
 
         public static ImageParam getImageForList(final AbstractList item) {
@@ -174,11 +204,23 @@ public final class StoredList extends AbstractList {
             return ImageParam.id(R.drawable.ic_menu_list);
         }
 
+        private static String getGroupFromList(final AbstractList item) {
+            if (item.id == StoredList.STANDARD_LIST_ID || item.id == PseudoList.NEW_LIST.id) {
+                return TOP_GROUP; //sorted FIRST before all others
+            }
+            if (item.id == PseudoList.HISTORY_LIST.id || item.id == PseudoList.ALL_LIST.id) {
+                return BOTTOM_GROUP; // sorted LAST after all others
+            }
+            final String title = item == null || item.getTitle() == null ? "" : item.getTitle();
+            final int idx = title.indexOf(GROUP_SEPARATOR);
+            return idx > 0 ? title.substring(0, idx) : title;
+        }
+
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
             return getMenuLists(onlyConcreteLists, Collections.singleton(exceptListId), Collections.emptySet());
         }
 
-        public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
+        private static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
             final List<AbstractList> lists = new ArrayList<>(getSortedLists(selectedLists));
 
             if (exceptListIds.contains(STANDARD_LIST_ID)) {

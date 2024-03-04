@@ -62,38 +62,40 @@ public class SimpleItemListView extends LinearLayout {
 
         public final int originalIndex; // only filled for items
         public final Object group; // only filled if isGroupHeader = false and item belongs to a group
+        public final boolean hasGroupHeader; // true for items which belong to a group with a header
 
         public final int groupFirstItemIndex; // only filled if isGroupHeader = true
-        public final int groupCount; // only filled if isGroupHeader = true
+        public final List<Object> groupElements; // only filled if isGroupHeader = true
 
         private ListItem(final Object value, final ImageParam icon, final ImageParam actionIcon, final ListItemType type,
-                        final int originalIndex, final Object group, final int groupFirstItemIndex, final int groupCount) {
+                        final int originalIndex, final Object group, final boolean hasGroupHeader, final int groupFirstItemIndex, final List<Object> groupElements) {
             this.value = value;
             this.icon = icon;
             this.actionIcon = actionIcon;
             this.type = type;
             this.originalIndex = originalIndex;
             this.group = group;
+            this.hasGroupHeader = hasGroupHeader;
             this.groupFirstItemIndex = groupFirstItemIndex;
-            this.groupCount = groupCount;
+            this.groupElements = groupElements;
         }
 
     }
 
-    private ListItem createForItem(final Object value, final int originalIndex, final Object group) {
+    private ListItem createForItem(final Object value, final int originalIndex, final Object group, final boolean hasGroupHeader) {
         return new ListItem(value,
-            model.getDisplayIconMapper().call(value),
-            model.getActionIconMapper().call(value),
-            ListItemType.ITEM, originalIndex, group, -1, -1);
+            model.getDisplayIconMapper().apply(value),
+            model.getActionIconMapper().apply(value),
+            ListItemType.ITEM, originalIndex, group, hasGroupHeader, -1, null);
     }
 
-    private ListItem createForGroup(final Object group, final int groupFirstItemIndex, final int groupSize) {
-        return new ListItem(group, model.getGroupingOptions().getGroupDisplayIconMapper().call(group),
-    null, ListItemType.GROUPHEADER,  -1, -1, groupFirstItemIndex, groupSize);
+    private ListItem createForGroup(final Object group, final int groupFirstItemIndex, final List<Object> groupElements) {
+        return new ListItem(group, model.getGroupingOptions().getGroupDisplayIconMapper().call(group, groupElements),
+    null, ListItemType.GROUPHEADER,  -1, -1, false, groupFirstItemIndex, groupElements);
     }
 
     private ListItem createForType(final ListItemType type) {
-        return new ListItem(null, null, null, type,  -1, -1, -1, -1);
+        return new ListItem(null, null, null, type,  -1, -1, false, -1, null);
     }
 
 
@@ -128,7 +130,7 @@ public class SimpleItemListView extends LinearLayout {
                 default:
                     //handling of groups and items
                     if (data.type == ListItemType.GROUPHEADER) {
-                        applyItemView(binding, new Pair<>(data.value, data.groupCount), model.getGroupingOptions().getGroupDisplayViewMapper());
+                        applyItemView(binding, new Pair<>(data.value, data.groupElements), model.getGroupingOptions().getGroupDisplayViewMapper());
                     } else {
                         applyItemView(binding, data.value, model.getDisplayViewMapper());
                     }
@@ -156,8 +158,8 @@ public class SimpleItemListView extends LinearLayout {
             binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
 
-            final int leftPaddingInDp = data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_PLAIN ? model.getPlainItemPaddingLeftInDp() : 0;
-            binding.itemViewAnchor.setPadding(ViewUtils.dpToPixel(leftPaddingInDp), 0, 0, 0);
+            final int leftPaddingForGroupedItemsInDp = data.type == ListItemType.ITEM && model.getGroupingOptions() != null && data.hasGroupHeader ? model.getGroupingOptions().getGroupedItemPaddingInDp() : 0;
+            ViewUtils.applyPadding(binding.getRoot(), model.getItemPaddingInDp(), new int[]{ leftPaddingForGroupedItemsInDp, 0, 0, 0 });
         }
 
         private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final Func4<T, Context, View, ViewGroup, View> viewMapper) {
@@ -291,7 +293,7 @@ public class SimpleItemListView extends LinearLayout {
                 case SELECTED_VISIBLE:
                     return model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX && currentlyVisible < model.getItems().size();
                 case GROUPHEADER:
-                    for (int pos = item.groupFirstItemIndex; pos < item.groupFirstItemIndex + item.groupCount; pos++) {
+                    for (int pos = item.groupFirstItemIndex; pos < item.groupFirstItemIndex + item.groupElements.size(); pos++) {
                         if (isDisplayedSimpleItem(getOriginalItems().get(pos), false)) {
                             return true;
                         }
@@ -421,7 +423,7 @@ public class SimpleItemListView extends LinearLayout {
         if (StringUtils.isBlank(filter)) {
             return true;
         }
-        final String rawText = model.getTextFilterMapper() == null ? null : model.getTextFilterMapper().call(simpleItem.value);
+        final String rawText = model.getTextFilterMapper() == null ? null : model.getTextFilterMapper().apply(simpleItem.value);
 
         return rawText != null && rawText.toLowerCase(Locale.US).contains(filter.trim().toLowerCase(Locale.US));
     }
@@ -434,10 +436,9 @@ public class SimpleItemListView extends LinearLayout {
 
         CommonUtils.groupList(model.getItems(),
                 model.getGroupingOptions().getGroupMapper(), model.getGroupingOptions().getGroupComparator(),
-                model.getGroupingOptions().getMinCountPerGroup(),
-                model.getGroupingOptions().getDefaultGroup(),
-                (group, firstItemIdx, size) -> list.add(createForGroup(group, firstItemIdx + 2, size)),
-                (value, originalIdx, group, groupIdx) -> list.add(createForItem(value, originalIdx, group)));
+                model.getGroupingOptions().getHasGroupHeaderMapper(),
+                (group, firstItemIdx, elements) -> list.add(createForGroup(group, firstItemIdx + 2, elements)),
+                (value, originalIdx, group, groupHeaderIdx) -> list.add(createForItem(value, originalIdx, group, groupHeaderIdx >= 0)));
 
         listAdapter.setItems(list);
 

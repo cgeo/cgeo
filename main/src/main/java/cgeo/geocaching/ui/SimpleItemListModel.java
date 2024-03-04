@@ -3,7 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.functions.Action1;
-import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func4;
 
@@ -21,6 +20,8 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 
 /** Model class to work with {@link cgeo.geocaching.ui.SimpleItemListView} */
 public class SimpleItemListModel<T> {
@@ -29,16 +30,14 @@ public class SimpleItemListModel<T> {
     private final List<T> itemsReadOnly = Collections.unmodifiableList(items);
 
     private Func4<T, Context, View, ViewGroup, View> displayViewMapper = (item, context, view, parent) -> null;
-    private Func1<T, String> textFilterMapper = null;
-    private Func1<T, ImageParam> displayIconMapper = (o) -> null;
+    private Function<T, String> textFilterMapper = null;
+    private Function<T, ImageParam> displayIconMapper = (o) -> null;
 
-    private Func1<T, ImageParam> actionIconMapper = (o) -> null;
+    private Function<T, ImageParam> actionIconMapper = (o) -> null;
 
     private ChoiceMode choiceMode = ChoiceMode.SINGLE_PLAIN;
 
     private int[] itemPaddingInDp = new int[]{10, 4, 10, 4};
-
-    private int plainItemPaddingLeftInDp = 15;
 
     private final GroupingOptions<Object> groupingOptions = new GroupingOptions<>();
 
@@ -61,37 +60,37 @@ public class SimpleItemListModel<T> {
     /** Specifies options for grouping items */
     public class GroupingOptions<G> {
 
-        private Func1<T, G> groupMapper = null;
+        private Function<T, G> groupMapper = null;
 
-        private Func4<Pair<G, Integer>, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
-        private Func1<G, ImageParam> groupDisplayIconMapper = o -> null;
+        private Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
+        private Func2<G, List<T>, ImageParam> groupDisplayIconMapper = (o, e) -> null;
         private Comparator<G> groupComparator = null;
 
-        private int minCountPerGroup = 1;
+        private BiPredicate<G, List<T>> hasGroupHeaderMapper = null;
 
-        private G defaultGroup = null;
+        private int groupedItemPaddingInDp = 36;
 
         private GroupingOptions() {
             //no instances outside of this model class
         }
 
-        public Func1<T, G> getGroupMapper() {
+        public Function<T, G> getGroupMapper() {
             return groupMapper;
         }
 
         /** Sets a mapper specifying how list items (of type T) are sorted into groups (of type G) */
-        public GroupingOptions<G> setGroupMapper(final Func1<T, G> groupMapper) {
+        public GroupingOptions<G> setGroupMapper(final Function<T, G> groupMapper) {
             this.groupMapper = groupMapper;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
 
-        public Func4<Pair<G, Integer>, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
+        public Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
             return groupDisplayViewMapper;
         }
 
         /** Sets a mapper providing the text visualization for a group item */
-        public GroupingOptions<G> setGroupDisplayMapper(final Func2<G, Integer, TextParam> groupDisplayMapper) {
+        public GroupingOptions<G> setGroupDisplayMapper(final Func2<G, List<T>, TextParam> groupDisplayMapper) {
             if (groupDisplayMapper != null) {
                 setGroupDisplayViewMapper(constructGroupDisplayViewMapper(groupDisplayMapper));
                 triggerChange(ChangeType.COMPLETE);
@@ -99,7 +98,7 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public GroupingOptions<G> setGroupDisplayViewMapper(final Func4<Pair<G, Integer>, Context, View, ViewGroup, View> groupDisplayViewMapper) {
+        public GroupingOptions<G> setGroupDisplayViewMapper(final Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> groupDisplayViewMapper) {
             if (groupDisplayViewMapper != null) {
                 this.groupDisplayViewMapper = groupDisplayViewMapper;
                 triggerChange(ChangeType.COMPLETE);
@@ -107,12 +106,12 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public Func1<G, ImageParam> getGroupDisplayIconMapper() {
+        public Func2<G, List<T>, ImageParam> getGroupDisplayIconMapper() {
             return groupDisplayIconMapper;
         }
 
         /** Sets a mapper providing an optional display icon per group */
-        public GroupingOptions<G> setGroupDisplayIconMapper(final Func1<G, ImageParam> groupDisplayIconMapper) {
+        public GroupingOptions<G> setGroupDisplayIconMapper(final Func2<G, List<T>, ImageParam> groupDisplayIconMapper) {
             if (groupDisplayIconMapper != null) {
                 this.groupDisplayIconMapper = groupDisplayIconMapper;
                 triggerChange(ChangeType.COMPLETE);
@@ -131,27 +130,29 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public int getMinCountPerGroup() {
-            return minCountPerGroup;
+        public int getGroupedItemPaddingInDp() {
+            return groupedItemPaddingInDp;
         }
 
-        public G getDefaultGroup() {
-            return defaultGroup;
-        }
-
-        /** Sets the  minimum number of groups on which grouping is really activated */
-        public GroupingOptions<G> setMinCountPerGroup(final int minCountPerGroup) {
-            this.minCountPerGroup = minCountPerGroup;
+        /** Sets left-padding of items in a group */
+        public GroupingOptions<G> setGroupedItemPaddingInDp(final int groupedItemPaddingInDp) {
+            this.groupedItemPaddingInDp = groupedItemPaddingInDp;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
 
+
         /** Sets the  minimum number of groups on which grouping is really activated */
-        public GroupingOptions<G> setDefaultGroup(final G defaultGroup) {
-            this.defaultGroup = defaultGroup;
+        public GroupingOptions<G> setHasGroupHeaderMapper(final BiPredicate<G, List<T>> hasGroupHeaderMapper) {
+            this.hasGroupHeaderMapper = hasGroupHeaderMapper;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
+
+        public BiPredicate<G, List<T>> getHasGroupHeaderMapper() {
+            return this.hasGroupHeaderMapper;
+        }
+
     }
 
     public List<T> getItems() {
@@ -174,12 +175,12 @@ public class SimpleItemListModel<T> {
         return displayViewMapper;
     }
 
-    public Func1<T, String> getTextFilterMapper() {
+    public Function<T, String> getTextFilterMapper() {
         return textFilterMapper;
     }
 
     /** Sets a providing the text visualization for an item */
-    public SimpleItemListModel<T> setDisplayMapper(final Func1<T, TextParam> displayMapper) {
+    public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper) {
         if (displayMapper != null) {
             setDisplayViewMapper(constructDisplayViewMapper(displayMapper), constructFilterTextExtractor(displayMapper));
         }
@@ -196,10 +197,10 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Func1<TT, TextParam> displayTextMapper) {
+    public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Function<TT, TextParam> displayTextMapper) {
         return (item, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
-            final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.call(item);
+            final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.apply(item);
             if (tp == null) {
                 tv.setText("--");
             } else {
@@ -209,7 +210,7 @@ public class SimpleItemListModel<T> {
         };
     }
 
-    public static <TT> Func4<Pair<TT, Integer>, Context, View, ViewGroup, View> constructGroupDisplayViewMapper(final Func2<TT, Integer, TextParam> displayGroupTextMapper) {
+    public static <GT, TT> Func4<Pair<GT, List<TT>>, Context, View, ViewGroup, View> constructGroupDisplayViewMapper(final Func2<GT, List<TT>, TextParam> displayGroupTextMapper) {
         return (item, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
             final TextParam tp = displayGroupTextMapper == null || item == null ? TextParam.text(String.valueOf(item)) : displayGroupTextMapper.call(item.first, item.second);
@@ -222,10 +223,10 @@ public class SimpleItemListModel<T> {
         };
     }
 
-    public static <T> Func1<T, String> constructFilterTextExtractor(final Func1<T, TextParam> displayTextMapper) {
+    public static <T> Function<T, String> constructFilterTextExtractor(final Function<T, TextParam> displayTextMapper) {
         return (item) -> {
 
-            final TextParam tp = displayTextMapper == null ? null : displayTextMapper.call(item);
+            final TextParam tp = displayTextMapper == null ? null : displayTextMapper.apply(item);
             if (tp == null) {
                 return String.valueOf(item);
             }
@@ -234,7 +235,7 @@ public class SimpleItemListModel<T> {
     }
 
     /** Sets a view provider for the items */
-    public SimpleItemListModel<T> setDisplayViewMapper(final Func4<T, Context, View, ViewGroup, View> displayViewMapper, final Func1<T, String> textFilterMapper) {
+    public SimpleItemListModel<T> setDisplayViewMapper(final Func4<T, Context, View, ViewGroup, View> displayViewMapper, final Function<T, String> textFilterMapper) {
         if (displayViewMapper != null) {
             this.displayViewMapper = displayViewMapper;
             this.textFilterMapper = textFilterMapper;
@@ -243,12 +244,12 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public Func1<T, ImageParam> getDisplayIconMapper() {
+    public Function<T, ImageParam> getDisplayIconMapper() {
         return displayIconMapper;
     }
 
     /** Sets a apper providing an optional icon to visualize per item */
-    public SimpleItemListModel<T> setDisplayIconMapper(final Func1<T, ImageParam> displayIconMapper) {
+    public SimpleItemListModel<T> setDisplayIconMapper(final Function<T, ImageParam> displayIconMapper) {
         if (displayIconMapper != null) {
             this.displayIconMapper = displayIconMapper;
             triggerChange(ChangeType.COMPLETE);
@@ -256,13 +257,13 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public Func1<T, ImageParam> getActionIconMapper() {
+    public Function<T, ImageParam> getActionIconMapper() {
         return actionIconMapper;
     }
 
     /** Sets a mapper providing an optional action icon per item. For each item where the action item
      *  is non-null, it is displayed and the listener provided via {@link #setItemActionListener(Action1)} is fired */
-    public SimpleItemListModel<T> setItemActionIconMapper(final Func1<T, ImageParam> actionIconMapper) {
+    public SimpleItemListModel<T> setItemActionIconMapper(final Function<T, ImageParam> actionIconMapper) {
         if (actionIconMapper != null) {
             this.actionIconMapper = actionIconMapper;
             triggerChange(ChangeType.COMPLETE);
@@ -294,7 +295,7 @@ public class SimpleItemListModel<T> {
         }
     }
 
-    /** Sets padding (in DP) to apply to each list item. Usage is described in {@link ViewUtils#applyPadding(View, int[])}*/
+    /** Sets padding (in DP) to apply to each list item. Usage is described in {@link ViewUtils#applyPadding(View, int[]...)} */
     public SimpleItemListModel<T> setItemPadding(final int ... itemPaddingsInDp) {
         this.itemPaddingInDp = itemPaddingsInDp;
         triggerChange(ChangeType.COMPLETE);
@@ -305,20 +306,10 @@ public class SimpleItemListModel<T> {
         return this.itemPaddingInDp;
     }
 
-    public int getPlainItemPaddingLeftInDp() {
-        return plainItemPaddingLeftInDp;
-    }
-
-    public SimpleItemListModel<T> setPlainItemPaddingLeftInDp(final int plainItemPaddingLeftInDp) {
-        this.plainItemPaddingLeftInDp = plainItemPaddingLeftInDp;
-        triggerChange(ChangeType.COMPLETE);
-        return this;
-    }
-
     /** Activates Grouping for this model with given groupMapper. Returns a GroupingOptions instance to set further grouping settings. */
     @SuppressWarnings("unchecked")
-    public <G> GroupingOptions<G> activateGrouping(final Func1<T, G> groupMapper) {
-        this.groupingOptions.setGroupMapper((Func1<T, Object>) groupMapper);
+    public <G> GroupingOptions<G> activateGrouping(final Function<T, G> groupMapper) {
+        this.groupingOptions.setGroupMapper((Function<T, Object>) groupMapper);
         return (GroupingOptions<G>) this.groupingOptions;
     }
 
