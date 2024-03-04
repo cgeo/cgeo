@@ -63,7 +63,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/expand_less"/>
+            android:src="@drawable/expand_collapsed"/>
     </RelativeLayout>
 
     <!-- Item Icon (optional) -->
