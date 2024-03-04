@@ -164,7 +164,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             }
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
 
             CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res);
 
@@ -199,6 +199,33 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         init();
     }
 
+
+    private void doStoreCacheOnLists(final Set<Integer> listIds) {
+        if (cache.isOffline()) {
+            // cache already offline, just add to another list
+            DataStore.saveLists(Collections.singletonList(cache), listIds);
+            CacheDetailActivity.updateOfflineBox(getView(), cache, res,
+                    new RefreshCacheClickListener(), new DropCacheClickListener(),
+                    new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
+            CacheDetailActivity.updateCacheLists(getView(), cache, res);
+        } else {
+            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
+            final FragmentActivity activity = requireActivity();
+            progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
+                activity.invalidateOptionsMenu();
+                final View view = getView();
+                if (view != null) {
+                    CacheDetailActivity.updateOfflineBox(view, cache, res,
+                            new RefreshCacheClickListener(), new DropCacheClickListener(),
+                            new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
+                    CacheDetailActivity.updateCacheLists(view, cache, res);
+                }
+            });
+        }
+    }
+
+
     private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
         @Override
         public void onClick(final View arg0) {
@@ -227,28 +254,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         private void storeCacheOnLists(final Set<Integer> listIds) {
-            if (cache.isOffline()) {
-                // cache already offline, just add to another list
-                DataStore.saveLists(Collections.singletonList(cache), listIds);
-                CacheDetailActivity.updateOfflineBox(getView(), cache, res,
-                        new RefreshCacheClickListener(), new DropCacheClickListener(),
-                        new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
-                CacheDetailActivity.updateCacheLists(getView(), cache, res);
-            } else {
-                final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
-                final FragmentActivity activity = requireActivity();
-                progress.show(activity, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.disposeMessage());
-                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> cache.store(listIds, storeCacheHandler), () -> {
-                    activity.invalidateOptionsMenu();
-                    final View view = getView();
-                    if (view != null) {
-                        CacheDetailActivity.updateOfflineBox(view, cache, res,
-                                new RefreshCacheClickListener(), new DropCacheClickListener(),
-                                new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
-                        CacheDetailActivity.updateCacheLists(view, cache, res);
-                    }
-                });
-            }
+            doStoreCacheOnLists(listIds);
         }
     }
 
@@ -270,6 +276,28 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
         }
     }
+
+
+    private class MoveCacheClickListener implements View.OnLongClickListener {
+
+        @Override
+        public boolean onLongClick(final View v) {
+            if (progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
+                return false;
+            }
+
+            new StoredList.UserInterface(getActivity()).promptForListSelection(R.string.cache_menu_move_list,
+                    this::moveCacheToList, true, -1);
+
+            return true;
+        }
+
+        private void moveCacheToList(final Integer listId) {
+            doStoreCacheOnLists(Collections.singleton(listId));
+        }
+    }
+
 
     private class DropCacheClickListener implements View.OnClickListener {
         @Override
