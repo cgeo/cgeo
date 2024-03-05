@@ -263,12 +263,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         String name = null;
         String guid = null;
         boolean forceWaypointsPage = false;
+        boolean forceEditPersonalNote = false;
 
         if (extras != null) {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             name = extras.getString(Intents.EXTRA_NAME);
             guid = extras.getString(Intents.EXTRA_GUID);
             forceWaypointsPage = extras.getBoolean(EXTRA_FORCE_WAYPOINTSPAGE);
+            forceEditPersonalNote = extras.getBoolean(EXTRA_EDIT_PERSONALNOTE);
         }
 
         // When clicking a cache in MapsWithMe, we get back a PendingIntent
@@ -326,7 +328,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         final LoadCacheHandler loadCacheHandler = new LoadCacheHandler(this, progress);
 
-        if (extras.getBoolean(EXTRA_EDIT_PERSONALNOTE)) {
+        if (forceEditPersonalNote) {
             progress.setOnDismissListener((dialog) -> {
                 activityIsStartedForEditNote = true;
                 editPersonalNote(cache, this);
