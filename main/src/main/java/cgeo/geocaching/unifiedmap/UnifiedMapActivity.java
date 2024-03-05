@@ -100,7 +100,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -154,8 +153,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
     private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
-
-    private Spinner mapSpinner = null;
 
     private final CacheListActionBarChooser listChooser = new CacheListActionBarChooser(this, () -> getSupportActionBar(), newListId -> {
             final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
@@ -521,22 +518,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void updateCacheCountSubtitle() {
         refreshListChooser();
-//        final int cacheCount = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
-//        String subtitle = res.getQuantityString(R.plurals.cache_counts, cacheCount, cacheCount);
-//
-//        // for single cache map show cache details instead
-//        if (mapType.type == UMTT_TargetGeocode) {
-//            final Geocache targetCache = getCurrentTargetCache();
-//            if (targetCache != null) {
-//                subtitle = Formatter.formatMapSubtitle(targetCache);
-//            }
-//        }
-//
-//        CompactIconModeUtils.forceCompactIconMode(cacheCount);
-//        final ActionBar actionbar = getSupportActionBar();
-//        if (actionbar != null) {
-//            ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).setTextByReference(mapType.fromList, false, subtitle);
-//        }
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
@@ -579,17 +560,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void setTitle() {
         refreshListChooser();
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null && mapSpinner != null) {
-//            if (mapType.fromList == 0) {
-//                ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).setTextByReference(mapType.fromList, true, calculateTitle());
-//            } else {
-//                final int position = ((TwoLineSpinnerAdapter) mapSpinner.getAdapter()).getPositionFromReference(mapType.fromList);
-//                if (position >= 0) {
-//                    actionBar.setSelectedNavigationItem(position);
-//                }
-//            }
-//        }
     }
 
     @NonNull
@@ -607,7 +577,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void refreshListChooser() {
-        final int visibleCaches = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+        //try to get count of visible caches
+        int visibleCaches = 0;
+        if (mapFragment != null && mapFragment.getViewport() != null && viewModel != null) {
+            visibleCaches = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+        }
+
         if (mapType.fromList != 0) {
             //List
             listChooser.setList(mapType.fromList, visibleCaches, false);
@@ -627,47 +602,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void setupActionBarSpinner() {
         refreshListChooser();
-
-        // allow switching between lists
-//        final List<TwoLineSpinnerAdapter.TextSpinnerData> items = new ArrayList<>();
-//        if (mapType.fromList == 0) {
-//            items.add(new TwoLineSpinnerAdapter.TextSpinnerData("", "", 0));
-//        }
-//        for (AbstractList list : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
-//            final int count = list.getNumberOfCaches();
-//            final TwoLineSpinnerAdapter.TextSpinnerData temp = new TwoLineSpinnerAdapter.TextSpinnerData(list.title, res.getQuantityString(R.plurals.cache_counts, count, count), list.id);
-//            if (list.id == mapType.fromList) {
-//                items.add(0, temp);
-//            } else {
-//                items.add(temp);
-//            }
-//        }
-//        final TwoLineSpinnerAdapter spinnerAdapter = new TwoLineSpinnerAdapter(this, items);
-//        mapSpinner = new Spinner(this, Spinner.MODE_DROPDOWN);
-//        mapSpinner.setAdapter(spinnerAdapter);
-//
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//            actionBar.setDisplayShowTitleEnabled(false);
-//            actionBar.setListNavigationCallbacks(spinnerAdapter, (position, l) -> {
-//                final int newListId = ((TwoLineSpinnerAdapter.TextSpinnerData) mapSpinner.getAdapter().getItem(position)).reference;
-//                if (position > 0) {
-//                    // load new item and switch list
-//                    if (newListId == 0) {
-//                        new UnifiedMapType().launchMap(this);
-//                        finish();
-//                    } else {
-//                        final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
-//                        if (lNew.isPresent()) {
-//                            new UnifiedMapType(newListId).launchMap(this);
-//                            finish();
-//                        }
-//                    }
-//                }
-//                return true;
-//            });
-//        }
     }
 
     /**

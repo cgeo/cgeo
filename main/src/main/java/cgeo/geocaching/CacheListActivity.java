@@ -334,7 +334,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (actionBar != null) {
             actionBar.setSubtitle(getCurrentSubtitle());
         }
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
     }
 
     /**
@@ -485,11 +485,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         FilterUtils.initializeFilterBar(this, this);
         updateFilterBar();
 
-        if (type.canSwitch) {
-            //this.actionBarChooser.setList(listId);
-            initActionBarSpinner();
-        }
-
         restartCacheLoader(false, null);
         refreshListFooter();
 
@@ -530,93 +525,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
 
-    private void initActionBarSpinner() {
-//        refreshActionBarTitle();
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            //actionBar.getCustomView().findViewById(R.id.space).setMinimumWidth(ViewUtils.dpToPixel(5000));
-//            actionBar.setDisplayShowTitleEnabled(false);
-//            actionBar.setDisplayShowCustomEnabled(true);
-//            actionBar.getCustomView().setOnClickListener(v -> {
-//                new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
-//                    if (selectedListId != listId) {
-//                        switchListById(selectedListId);
-//                   }
-//                }, false, PseudoList.NEW_LIST.id);
-//            });
-//        }
-
-//            mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setCustomView(CacheListSpinnerAdapter.getMyCustomView(this, PseudoList.HISTORY_LIST, actionBar.getCustomView(), null));
-//            //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-//            actionBar.setDisplayShowTitleEnabled(false);
-//            actionBar.setDisplayShowCustomEnabled(true);
-////            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, (i, l) -> {
-////                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-////                if (newListId != listId) {
-////                    switchListById(newListId);
-////                }
-////                return true;
-////            });
-//        }
-    }
-
-    private void refreshSpinnerAdapter() {
-        if (type.canSwitch) {
-            refreshActionBarTitle();
-        }
-
-//        /* If the activity does not use the Spinner this will be null */
-//        if (mCacheListSpinnerAdapter == null) {
-//            return;
-//        }
-//        mCacheListSpinnerAdapter.clear();
-//
-//        final AbstractList list = AbstractList.getListById(listId);
-//
-//        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
-//            mCacheListSpinnerAdapter.add(l);
-//        }
-//
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-////            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
-//        }
-    }
-
     private void refreshActionBarTitle() {
-        actionBarChooser.setList(listId, adapter.getCount(), resultIsOfflineAndLimited());
-
-//        final ActionBar actionBar = getSupportActionBar();
-//        if (actionBar == null) {
-//            return;
-//        }
-//
-//        final int layoutRes = R.layout.cachelist_chooser_actionbar;
-//        final AbstractList list = AbstractList.getListById(listId);
-//
-//        View resultView = actionBar.getCustomView();
-//        if (resultView == null) {
-//            final LayoutInflater inflater = LayoutInflater.from(this);
-//            resultView = inflater.inflate(layoutRes, null, false);
-//        }
-//
-//        final TextView title = resultView.findViewById(android.R.id.text1);
-//        final TextView subtitle = resultView.findViewById(android.R.id.text2);
-//
-//
-//        TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list)).applyTo(title);
-//        if (list.getNumberOfCaches() >= 0) {
-//            subtitle.setVisibility(View.VISIBLE);
-//            subtitle.setText(getCacheListSubtitle(list));
-//        } else {
-//            subtitle.setVisibility(View.GONE);
-//        }
-//        actionBar.setCustomView(resultView);
+        if (type.canSwitch) {
+            actionBarChooser.setList(listId, adapter.getCount(), resultIsOfflineAndLimited());
+        }
     }
-
 
     @Override
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
@@ -853,7 +766,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
         adapter.notifyDataSetChanged();
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
         refreshCurrentList();
     }
 
@@ -910,7 +823,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_list) {
             new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
-            refreshSpinnerAdapter();
+            refreshActionBarTitle();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_list) {
             removeList();
@@ -964,12 +877,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 @Override
                 protected void onFinished() {
-                    refreshSpinnerAdapter();
+                    refreshActionBarTitle();
                 }
 
                 @Override
                 protected void onFinishedUndo() {
-                    refreshSpinnerAdapter();
+                    refreshActionBarTitle();
                 }
 
             }.execute();
@@ -1653,13 +1566,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             protected void onFinished() {
-                refreshSpinnerAdapter();
+                refreshActionBarTitle();
                 switchListById(StoredList.STANDARD_LIST_ID);
             }
 
             @Override
             protected void onFinishedUndo() {
-                refreshSpinnerAdapter();
+                refreshActionBarTitle();
                 for (final StoredList list : DataStore.getLists()) {
                     if (oldListName.equals(list.getTitle())) {
                         switchListById(list.id);
@@ -1705,7 +1618,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         final LastPositionHelper lph = new LastPositionHelper(this);
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
         switchListById(listId, action);
         lph.setLastListPosition();
     }

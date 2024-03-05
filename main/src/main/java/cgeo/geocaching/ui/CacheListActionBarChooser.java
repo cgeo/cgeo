@@ -6,6 +6,7 @@ import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,12 @@ import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * GUI helper for activities dealing with cache lists
+ * <br>
+ * Displays a clickalbe "dropdown-like" Title and Subtitle in the action bar of an activity.
+ * On click it let's the user choose a stored list and displays its data
+ */
 public class CacheListActionBarChooser {
 
 
@@ -29,6 +36,11 @@ public class CacheListActionBarChooser {
     private String title;
     private String subtitle;
 
+    /**
+     * @param context activity for actionbar
+     * @param actionBarSupplier a supplier to get the actionbar
+     * @param onSelectAction action to call when a list is selected
+     */
     public CacheListActionBarChooser(final Activity context, final Supplier<ActionBar> actionBarSupplier,
                                      final Action1<Integer> onSelectAction) {
         this.context = context;
@@ -36,6 +48,7 @@ public class CacheListActionBarChooser {
         this.onSelectAction = onSelectAction;
     }
 
+    /** Sets title to a stored list's data */
     public void setList(final int listId, final int visibleCaches, final boolean isLimited) {
         this.title = null;
         this.subtitle = null;
@@ -45,6 +58,7 @@ public class CacheListActionBarChooser {
         refreshActionBarTitle();
     }
 
+    /** Sets title directly, additionally displays number of visible caches in subtitle */
     public void setDirect(final String title, final int visibleCaches) {
         this.title = title;
         this.subtitle = null;
@@ -54,6 +68,7 @@ public class CacheListActionBarChooser {
         refreshActionBarTitle();
     }
 
+    /** Sets title and subtitle directly */
     public void setDirect(final String title, final String subtitle) {
         this.title = title;
         this.subtitle = subtitle;
@@ -63,6 +78,7 @@ public class CacheListActionBarChooser {
         refreshActionBarTitle();
     }
 
+    @SuppressLint("InflateParams")
     private void refreshActionBarTitle() {
         final ActionBar actionBar = this.actionBarSupplier.get();
         if (actionBar == null) {
@@ -76,15 +92,13 @@ public class CacheListActionBarChooser {
             actionBar.setCustomView(resultView);
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.getCustomView().setOnClickListener(v -> {
-                new StoredList.UserInterface(context).promptForListSelection(R.string.list_title, selectedListId -> {
-                    if (selectedListId != listId) {
-                        this.onSelectAction.call(selectedListId);
-                        this.listId = selectedListId;
-                        refreshActionBarTitle();
-                    }
-                }, false, PseudoList.NEW_LIST.id);
-            });
+            actionBar.getCustomView().setOnClickListener(v -> new StoredList.UserInterface(context).promptForListSelection(R.string.list_title, selectedListId -> {
+                if (selectedListId != listId) {
+                    this.onSelectAction.call(selectedListId);
+                    this.listId = selectedListId;
+                    refreshActionBarTitle();
+                }
+            }, false, PseudoList.NEW_LIST.id));
         }
 
         final TextView titleTv = resultView.findViewById(android.R.id.text1);
