@@ -1238,7 +1238,7 @@
     <string name="waypoint_added">Veipunkt lagt til</string>
     <string name="waypoint_note">Notat</string>
     <string name="waypoint_user_note">Personlig notat</string>
-    <string name="waypoint_visited">Besøkte</string>
+    <string name="waypoint_visited">Besøkt</string>
     <string name="waypoint_set_visited">Veipunkt satt til besøkt</string>
     <string name="waypoint_unset_visited">Veipunkt satt til ikke-besøkt</string>
     <string name="waypoint_save">Lagre</string>
