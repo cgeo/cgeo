@@ -151,16 +151,15 @@ public class SimpleItemListView extends LinearLayout {
                     break;
             }
 
-            binding.itemChecker.setVisibility(model.getChoiceMode() != SimpleItemListModel.ChoiceMode.SINGLE_PLAIN ? VISIBLE : GONE);
-            binding.itemCheckbox.setVisibility(data.type != ListItemType.GROUPHEADER && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX ? VISIBLE : GONE);
-            binding.itemRadiobutton.setVisibility(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_RADIO ? VISIBLE : GONE);
+            final boolean isGroupedItem = data.type == ListItemType.ITEM && data.hasGroupHeader;
+            binding.itemChecker.setVisibility(model.getChoiceMode() != SimpleItemListModel.ChoiceMode.SINGLE_PLAIN || isGroupedItem ? VISIBLE : GONE);
+            binding.itemCheckbox.setVisibility(data.type != ListItemType.GROUPHEADER && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_RADIO ? VISIBLE : GONE);
+            binding.itemRadiobutton.setVisibility(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX ? VISIBLE : GONE);
+            binding.itemGroupPadding.setVisibility(isGroupedItem ? VISIBLE : GONE);
             binding.itemGroupToggle.setVisibility(data.type == ListItemType.GROUPHEADER ? VISIBLE : GONE);
             binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.value) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
-
-            final int leftPaddingForGroupedItemsInDp = data.type == ListItemType.ITEM && model.getGroupingOptions() != null && data.hasGroupHeader ? model.getGroupingOptions().getGroupedItemPaddingInDp() : 0;
-            ViewUtils.applyPadding(binding.getRoot(), model.getItemPaddingInDp(), new int[]{ leftPaddingForGroupedItemsInDp, 0, 0, 0 });
         }
 
         private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final Func4<T, Context, View, ViewGroup, View> viewMapper) {

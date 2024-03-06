@@ -68,8 +68,6 @@ public class SimpleItemListModel<T> {
 
         private BiPredicate<G, List<T>> hasGroupHeaderMapper = null;
 
-        private int groupedItemPaddingInDp = 30;
-
         private GroupingOptions() {
             //no instances outside of this model class
         }
@@ -129,18 +127,6 @@ public class SimpleItemListModel<T> {
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
-
-        public int getGroupedItemPaddingInDp() {
-            return groupedItemPaddingInDp;
-        }
-
-        /** Sets left-padding of items in a group */
-        public GroupingOptions<G> setGroupedItemPaddingInDp(final int groupedItemPaddingInDp) {
-            this.groupedItemPaddingInDp = groupedItemPaddingInDp;
-            triggerChange(ChangeType.COMPLETE);
-            return this;
-        }
-
 
         /** Sets the  minimum number of groups on which grouping is really activated */
         public GroupingOptions<G> setHasGroupHeaderMapper(final BiPredicate<G, List<T>> hasGroupHeaderMapper) {
