@@ -72,6 +72,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
@@ -165,10 +166,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Geopoint coords = null;
     private GeocacheSortContext sortContext;
     private SearchResult search = null;
-    /**
-     * The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler
-     */
-    //private final List<Geocache> cacheList = new ArrayList<>();
+
+    private final CacheListActionBarChooser actionBarChooser =
+        new CacheListActionBarChooser(this, this::getSupportActionBar, this::switchListById);
     private CacheListAdapter adapter = null;
     private View listFooter = null;
     private TextView listFooterLine1 = null;
@@ -180,11 +180,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private int markerId = EmojiUtils.NO_EMOJI;
     private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
-
-    /**
-     * Action bar spinner adapter. {@code null} for list types that don't allow switching (search results, ...).
-     */
-    CacheListSpinnerAdapter mCacheListSpinnerAdapter;
 
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
@@ -339,7 +334,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (actionBar != null) {
             actionBar.setSubtitle(getCurrentSubtitle());
         }
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
     }
 
     /**
@@ -490,10 +485,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         FilterUtils.initializeFilterBar(this, this);
         updateFilterBar();
 
-        if (type.canSwitch) {
-            initActionBarSpinner();
-        }
-
         restartCacheLoader(false, null);
         refreshListFooter();
 
@@ -534,38 +525,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
 
-    private void initActionBarSpinner() {
-        mCacheListSpinnerAdapter = new CacheListSpinnerAdapter(this, R.layout.support_simple_spinner_dropdown_item);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setListNavigationCallbacks(mCacheListSpinnerAdapter, (i, l) -> {
-                final int newListId = mCacheListSpinnerAdapter.getItem(i).id;
-                if (newListId != listId) {
-                    switchListById(newListId);
-                }
-                return true;
-            });
-        }
-    }
-
-    private void refreshSpinnerAdapter() {
-        /* If the activity does not use the Spinner this will be null */
-        if (mCacheListSpinnerAdapter == null) {
-            return;
-        }
-        mCacheListSpinnerAdapter.clear();
-
-        final AbstractList list = AbstractList.getListById(listId);
-
-        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
-            mCacheListSpinnerAdapter.add(l);
-        }
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setSelectedNavigationItem(mCacheListSpinnerAdapter.getPosition(list));
+    private void refreshActionBarTitle() {
+        if (type.canSwitch) {
+            actionBarChooser.setList(listId, adapter.getCount(), resultIsOfflineAndLimited());
         }
     }
 
@@ -804,7 +766,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
         adapter.notifyDataSetChanged();
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
         refreshCurrentList();
     }
 
@@ -861,7 +823,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_create_list) {
             new StoredList.UserInterface(this).promptForListCreation(getListSwitchingRunnable(), StringUtils.EMPTY);
-            refreshSpinnerAdapter();
+            refreshActionBarTitle();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_list) {
             removeList();
@@ -915,12 +877,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 @Override
                 protected void onFinished() {
-                    refreshSpinnerAdapter();
+                    refreshActionBarTitle();
                 }
 
                 @Override
                 protected void onFinishedUndo() {
-                    refreshSpinnerAdapter();
+                    refreshActionBarTitle();
                 }
 
             }.execute();
@@ -1604,13 +1566,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             @Override
             protected void onFinished() {
-                refreshSpinnerAdapter();
+                refreshActionBarTitle();
                 switchListById(StoredList.STANDARD_LIST_ID);
             }
 
             @Override
             protected void onFinishedUndo() {
-                refreshSpinnerAdapter();
+                refreshActionBarTitle();
                 for (final StoredList list : DataStore.getLists()) {
                     if (oldListName.equals(list.getTitle())) {
                         switchListById(list.id);
@@ -1656,7 +1618,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         final LastPositionHelper lph = new LastPositionHelper(this);
-        refreshSpinnerAdapter();
+        refreshActionBarTitle();
         switchListById(listId, action);
         lph.setLastListPosition();
     }
@@ -2033,6 +1995,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return StringUtils.EMPTY;
         }
         return getCacheNumberString(getResources(), numberOfCaches);
+    }
+
+    public int getCurrentlyShown() {
+        return adapter.getCount();
     }
 
     /**
