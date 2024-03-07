@@ -37,3 +37,4 @@
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
 - Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
+- Nieuw: Soepeler schalen van log afbeeldingen
