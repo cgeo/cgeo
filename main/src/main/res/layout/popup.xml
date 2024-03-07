@@ -87,7 +87,7 @@
                     android:orientation="horizontal">
                 <Button
                     android:id="@+id/edit_personalnote"
-                    style="@style/button_icon_colored"
+                    style="@style/button_icon"
                     android:tooltipText="@string/cache_personal_note"
                     app:icon="@drawable/ic_menu_note_edit"
                     android:visibility="gone"

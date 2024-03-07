@@ -4,8 +4,6 @@ import cgeo.geocaching.activity.AbstractNavigationBarMapActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.WhereYouGoApp;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -149,14 +147,11 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             addCacheDetails(false);
 
-            final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
-            if (connector != null && connector.canAddPersonalNote(cache)) {
-                binding.editPersonalnote.setVisibility(View.VISIBLE);
-                binding.editPersonalnote.setOnClickListener(arg0 -> {
-                    CacheDetailActivity.startActivityForEditNote(getActivity(), geocode);
-                    ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
-                });
-            }
+            binding.editPersonalnote.setVisibility(View.VISIBLE);
+            binding.editPersonalnote.setOnClickListener(arg0 -> {
+                CacheDetailActivity.startActivityForEditNote(getActivity(), geocode);
+                ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
+            });
 
             // Wherigo
             if (WhereYouGoApp.isWherigo(cache)) {
