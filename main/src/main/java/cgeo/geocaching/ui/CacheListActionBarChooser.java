@@ -106,7 +106,7 @@ public class CacheListActionBarChooser {
 
         final AbstractList list = AbstractList.getListById(listId);
         if (list != null) {
-            TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list)).applyTo(titleTv);
+            TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list, false)).applyTo(titleTv);
             if (list.getNumberOfCaches() >= 0) {
                 subtitleTv.setVisibility(View.VISIBLE);
                 subtitleTv.setText(getCacheListSubtitle(list));
