@@ -37,3 +37,4 @@
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
 - Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
+- New: Smoother scaling of log images
