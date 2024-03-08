@@ -182,7 +182,7 @@ public final class StoredList extends AbstractList {
                 }
                 return TextParam.text(item.getTitleAndCount());
             });
-            model.setDisplayIconMapper(UserInterface::getImageForList);
+            model.setDisplayIconMapper((item) -> UserInterface.getImageForList(item, false));
 
 
             //GROUPING
@@ -193,13 +193,26 @@ public final class StoredList extends AbstractList {
             .setGroupComparator(CommonUtils.getListSortingComparator(
                 CommonUtils.getTextSortingComparator(null), Collections.singleton(TOP_GROUP), Collections.singleton(BOTTOM_GROUP))
             ).setGroupDisplayMapper((t, elements) -> TextParam.text(t + " (" + elements.size() + ")"))
-            .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0)))
+            .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
             .setHasGroupHeaderMapper((g, elements) -> !TOP_GROUP.equals(g) && !BOTTOM_GROUP.equals(g) && elements.size() >= 2);
         }
 
-        public static ImageParam getImageForList(final AbstractList item) {
-            if (item instanceof StoredList && ((StoredList) item).markerId > 0) {
-                return ImageParam.emoji(((StoredList) item).markerId, 30);
+        public static ImageParam getImageForList(final AbstractList item, final boolean isGroup) {
+            if (item instanceof StoredList) {
+                if (item.id == STANDARD_LIST_ID) {
+                    return ImageParam.id(R.drawable.ic_menu_save);
+                } else if (((StoredList) item).markerId > 0) {
+                    return ImageParam.emoji(((StoredList) item).markerId, 30);
+                }
+            } else if (item instanceof PseudoList) {
+                if (item.id == PseudoList.ALL_LIST.id) {
+                    return ImageParam.id(R.drawable.ic_menu_list_group);
+                } else if (item.id == PseudoList.HISTORY_LIST.id) {
+                    return ImageParam.id(R.drawable.ic_menu_recent_history);
+                }
+            }
+            if (isGroup) {
+                return ImageParam.id(R.drawable.downloader_folder);
             }
             return ImageParam.id(R.drawable.ic_menu_list);
         }

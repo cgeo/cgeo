@@ -15,55 +15,40 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"/>
 
-    <!-- icons at beginning: radiobutton, checkbox, group-reduced, group-expanded -->
+    <!-- icons at beginning: radiobutton, checkbox -->
     <RelativeLayout
         android:id="@+id/item_checker"
-        android:layout_width="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginRight="5dp"
         android:clickable="false"
         android:focusable="false"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/item_leftAnchor">
+        <Space
+            android:id="@+id/item_groupPadding"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
         <CheckBox
             android:id="@+id/item_checkbox"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/item_groupPadding"
             android:layout_centerVertical="true"/>
         <RadioButton
             android:id="@+id/item_radiobutton"
-
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/item_checkbox"
             android:layout_centerVertical="true"/>
-        <ImageView
-            android:id="@+id/group_expanded"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/expand_more"/>
-        <ImageView
-            android:id="@+id/group_reduced"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/expand_collapsed"/>
     </RelativeLayout>
 
     <!-- Item Icon (optional) -->
@@ -103,11 +88,38 @@
     <Button
         android:id="@+id/item_action"
         style="@style/button_icon"
-        android:layout_toLeftOf="@id/item_rightAnchor"
+        android:layout_toLeftOf="@id/item_groupToggle"
         android:layout_gravity="center"
         android:scaleType="centerInside"
         android:icon="@drawable/ic_menu_delete"
         tools:src="@drawable/ic_menu_delete" />
+
+    <!-- icons at right: group-reduced, group-expanded -->
+    <RelativeLayout
+        android:id="@+id/item_groupToggle"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="false"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_rightAnchor">
+        <ImageView
+            android:id="@+id/group_expanded"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_centerVertical="true"
+            android:src="@drawable/expand_less"/>
+        <ImageView
+            android:id="@+id/group_reduced"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_centerVertical="true"
+            android:src="@drawable/expand_more"/>
+    </RelativeLayout>
 
     <!-- We need an anchor on right side for layout to work correctly when item's visibility is set to GONE-->
     <Space
