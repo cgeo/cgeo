@@ -320,8 +320,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
+    @NonNull
     public BoundingBox getBoundingBox() {
-        return mMap.getBoundingBox(0);
+        return mMap == null ? new BoundingBox(0, 0, 0, 0) : mMap.getBoundingBox(0);
     }
 
     @Override
