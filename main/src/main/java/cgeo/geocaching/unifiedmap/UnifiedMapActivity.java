@@ -579,8 +579,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private void refreshListChooser() {
         //try to get count of visible caches
         int visibleCaches = 0;
-        if (mapFragment != null && mapFragment.getViewport() != null && viewModel != null) {
-            visibleCaches = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+        try {
+            if (mapFragment != null && mapFragment.getViewport() != null && viewModel != null) {
+                visibleCaches = mapFragment.getViewport().count(viewModel.caches.getValue().getAsList());
+            }
+        } catch (NullPointerException e) {
+            Log.e("UnifiedMapActivity:refreshListChooser", e);
         }
 
         if (mapType.fromList != 0) {
