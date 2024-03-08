@@ -33,6 +33,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -613,6 +614,16 @@ public class ImageGalleryView extends LinearLayout {
             });
         }
         ctxMenu.show();
+    }
+
+    public void setState(final Bundle state) {
+        if (imageHelper != null) {
+            imageHelper.setState(state);
+        }
+    }
+
+    public Bundle getState() {
+        return imageHelper == null ? null : imageHelper.getState();
     }
 
 }

@@ -208,6 +208,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private static final float CONTRAST_THRESHOLD = 4.5f;
 
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
+    public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
 
     // Store Geocode here, as 'cache' is loaded Async.
     private String geocode;
@@ -234,6 +235,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private ImageGalleryView imageGallery;
     private int imageGalleryPos = -1;
+
+    private int imageGalleryResultRequestCode = -1;
+    private int imageGalleryResultResultCode = -1;
+    private Intent imageGalleryData;
+    private Bundle imageGalleryState = null;
 
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
@@ -345,6 +351,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                         Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
 
+        imageGalleryState = savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_IMAGE_GALLERY);
+
         createViewPager(pageToOpen, getOrderedPages(), currentPageId -> {
             if (Settings.isOpenLastDetailsPage()) {
                 Settings.setLastDetailsPage((int) (long) currentPageId);
@@ -406,6 +414,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
+        outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -2365,6 +2374,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.imageGallery.initializeToPosition(activity.imageGalleryPos);
                 reinitializeTitle();
                 activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
+                if (activity.imageGalleryState != null) {
+                    imageGallery.setState(activity.imageGalleryState);
+                }
+                if (activity.imageGalleryResultRequestCode >= 0) {
+                    activity.imageGallery.onActivityResult(activity.imageGalleryResultRequestCode, activity.imageGalleryResultResultCode, activity.imageGalleryData);
+                }
+                activity.imageGalleryState = null;
+                activity.imageGalleryResultRequestCode = -1;
+                activity.imageGalleryResultResultCode = 0;
+                activity.imageGalleryData = null;
             }
         }
     }
@@ -2433,6 +2452,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (imageGallery != null) {
             imageGallery.onActivityResult(requestCode, resultCode, data);
+        } else {
+            imageGalleryResultRequestCode = requestCode;
+            imageGalleryResultResultCode = resultCode;
+            imageGalleryData = data;
         }
     }
 
