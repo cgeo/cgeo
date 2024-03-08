@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
@@ -102,6 +103,7 @@ public abstract class AbstractMapFragment extends Fragment {
 
     public abstract Geopoint getCenter();
 
+    @NonNull
     public abstract BoundingBox getBoundingBox();
 
     public Viewport getViewport() {

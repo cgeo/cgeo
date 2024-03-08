@@ -196,6 +196,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
+    @NonNull
     public BoundingBox getBoundingBox() {
         if (lastBounds == null) {
             return new BoundingBox(0, 0, 0, 0);
