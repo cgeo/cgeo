@@ -586,6 +586,7 @@
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
     <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>
     <string translatable="false" name="pref_pollMessageCenter">pollMessageCenter</string>
+    <string translatable="false" name="pref_simple_list_model_config">simple_list_model_config</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

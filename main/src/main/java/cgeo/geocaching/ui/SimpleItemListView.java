@@ -44,7 +44,6 @@ public class SimpleItemListView extends LinearLayout {
 
     private SimpleItemListModel<Object> model = new SimpleItemListModel<>();
 
-    private final Set<Object> reducedGroups = new HashSet<>();
     private int currentlyVisible = 0;
     private int currentlyVisibleSelected = 0;
     private boolean itemsHaveIcons = false;
@@ -234,7 +233,6 @@ public class SimpleItemListView extends LinearLayout {
                     break;
                 case GROUPHEADER:
                     toggleGroupExpanded(itemData.value);
-                    triggerRefreshList();
                     break;
                 case ITEM:
                 default:
@@ -356,6 +354,7 @@ public class SimpleItemListView extends LinearLayout {
                 break;
             case SELECTION:
             case FILTER:
+            case GROUP_HEADER:
             default:
                 triggerRefreshList();
                 break;
@@ -401,15 +400,11 @@ public class SimpleItemListView extends LinearLayout {
     }
 
     private boolean isGroupExpanded(final Object group) {
-        return !reducedGroups.contains(group);
+        return !model.getGroupingOptions().getReducedGroups().contains(group);
     }
 
     private void toggleGroupExpanded(final Object group) {
-        if (reducedGroups.contains(group)) {
-            reducedGroups.remove(group);
-        } else {
-            reducedGroups.add(group);
-        }
+        model.getGroupingOptions().toggleGroup(group);
     }
 
     private boolean isDisplayedSimpleItem(final ListItem simpleItem, final boolean checkGroupExpanded) {

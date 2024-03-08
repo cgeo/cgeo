@@ -2225,6 +2225,16 @@ public class Settings {
         putStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, config);
     }
 
+    /** should SOLELY be called by class {@link cgeo.geocaching.ui.SimpleItemListModel */
+    public static String getSimpleListModelConfig(final String saveId) {
+        return getStringDirect(getKey(R.string.pref_simple_list_model_config) + "." + saveId, null);
+    }
+
+    /** should SOLELY be called by class {@link cgeo.geocaching.ui.SimpleItemListModel */
+    public static void setSimpleListModelConfig(final String saveId, final String config) {
+        putStringDirect(getKey(R.string.pref_simple_list_model_config) + "." + saveId, config);
+    }
+
     /**
      * Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}!
      */
