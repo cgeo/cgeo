@@ -1,7 +1,9 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func4;
@@ -22,6 +24,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /** Model class to work with {@link cgeo.geocaching.ui.SimpleItemListView} */
 public class SimpleItemListModel<T> {
@@ -55,7 +61,7 @@ public class SimpleItemListModel<T> {
     public enum ChoiceMode { SINGLE_PLAIN, SINGLE_RADIO, MULTI_CHECKBOX }
 
     /** Types of model changes for which events are fired */
-    public enum ChangeType { COMPLETE, SELECTION, FILTER }
+    public enum ChangeType { COMPLETE, SELECTION, FILTER, GROUP_HEADER }
 
     /** Specifies options for grouping items */
     public class GroupingOptions<G> {
@@ -65,6 +71,12 @@ public class SimpleItemListModel<T> {
         private Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
         private Func2<G, List<T>, ImageParam> groupDisplayIconMapper = (o, e) -> null;
         private Comparator<G> groupComparator = null;
+
+        private final Set<G> reducedGroups = new HashSet<>();
+
+        private String reducedGroupSaveId = null;
+        private Function<G, String> reducedGroupIdMapper = null;
+        private Function<String, G> reducedGroupIdBackMapper = null;
 
         private BiPredicate<G, List<T>> hasGroupHeaderMapper = null;
 
@@ -137,6 +149,59 @@ public class SimpleItemListModel<T> {
 
         public BiPredicate<G, List<T>> getHasGroupHeaderMapper() {
             return this.hasGroupHeaderMapper;
+        }
+
+        public Set<G> getReducedGroups() {
+            return reducedGroups;
+        }
+
+        public GroupingOptions<G> toggleGroup(final G group) {
+            if (reducedGroups.contains(group)) {
+                reducedGroups.remove(group);
+            } else {
+                reducedGroups.add(group);
+            }
+            saveReducedGroups();
+            triggerChange(ChangeType.GROUP_HEADER);
+            return this;
+        }
+
+        public GroupingOptions<G> setReducedGroups(final Iterable<G> reducedGroups) {
+            this.reducedGroups.clear();
+            if (reducedGroups != null) {
+                for (G group : reducedGroups) {
+                    this.reducedGroups.add(group);
+                }
+            }
+            saveReducedGroups();
+            triggerChange(ChangeType.GROUP_HEADER);
+            return this;
+        }
+
+        public GroupingOptions<G> setReducedGroupSaver(final String saveId, final Function<G, String> saveGroupMapper, final Function<String, G> saveGroupBackMapper) {
+            this.reducedGroupSaveId = saveId;
+            this.reducedGroupIdMapper = saveGroupMapper;
+            this.reducedGroupIdBackMapper = saveGroupBackMapper;
+            loadReducedGroups();
+            return this;
+        }
+
+        private void loadReducedGroups() {
+            if (this.reducedGroupSaveId != null && this.reducedGroupIdBackMapper != null) {
+                final JsonNode node = JsonUtils.stringToNode(Settings.getSimpleListModelConfig(this.reducedGroupSaveId));
+                if (node != null) {
+                    final List<String> groupStrings = JsonUtils.getTextList(node, "groups");
+                    setReducedGroups(groupStrings.stream().map(s -> this.reducedGroupIdBackMapper.apply(s)).collect(Collectors.toList()));
+                }
+            }
+        }
+
+        private void saveReducedGroups() {
+            if (this.reducedGroupSaveId != null && this.reducedGroupIdMapper != null) {
+                final ObjectNode node = JsonUtils.createObjectNode();
+                JsonUtils.setCollection(node, "groups", reducedGroups, g -> JsonUtils.fromText(this.reducedGroupIdMapper.apply(g)));
+                Settings.setSimpleListModelConfig(this.reducedGroupSaveId, JsonUtils.nodeToString(node));
+            }
         }
 
     }

@@ -194,7 +194,8 @@ public final class StoredList extends AbstractList {
                 CommonUtils.getTextSortingComparator(null), Collections.singleton(TOP_GROUP), Collections.singleton(BOTTOM_GROUP))
             ).setGroupDisplayMapper((t, elements) -> TextParam.text(t + " (" + elements.size() + ")"))
             .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
-            .setHasGroupHeaderMapper((g, elements) -> !TOP_GROUP.equals(g) && !BOTTOM_GROUP.equals(g) && elements.size() >= 2);
+            .setHasGroupHeaderMapper((g, elements) -> !TOP_GROUP.equals(g) && !BOTTOM_GROUP.equals(g) && elements.size() >= 2)
+            .setReducedGroupSaver("storedlist", g -> g, g -> g);
         }
 
         public static ImageParam getImageForList(final AbstractList item, final boolean isGroup) {
