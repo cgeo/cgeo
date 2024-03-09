@@ -12,7 +12,6 @@ import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -94,14 +93,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         setThemeAndContentView(binding);
 
         binding.wherigoThingsList.setModel(wherigoThingsModel);
-        wherigoThingsModel.addChangeListeners(ct -> {
-            if (ct == SimpleItemListModel.ChangeType.SELECTION) {
-                final EventTable et = CommonUtils.first(wherigoThingsModel.getSelectedItems());
-                if (et.hasEvent("OnClick")) {
-                    Engine.callEvent(et, "OnClick", null);
-                } else {
-                    WherigoDialogManager.get().display(new WherigoDetailDialogProvider(et));
-                }
+        wherigoThingsModel.addSingleSelectListener(et -> {
+            if (et.hasEvent("OnClick")) {
+                Engine.callEvent(et, "OnClick", null);
+            } else {
+                WherigoDialogManager.get().display(new WherigoThingDialogProvider(et));
             }
         });
 

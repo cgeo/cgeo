@@ -2,15 +2,18 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
@@ -52,22 +55,16 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
             binding.media.setMedia(media[0]);
         }
 
-        binding.actions.buttonPositive.setText(StringUtils.isBlank(s) ? "ok" : s);
-        binding.actions.buttonNegative.setText(StringUtils.isBlank(s1) ? "cancel" : s1);
-        binding.actions.buttonNeutral.setVisibility(View.GONE);
-
-        binding.actions.buttonPositive.setOnClickListener(v -> {
-            if (luaClosure != null) {
-                Engine.invokeCallback(luaClosure, "Button1");
+        WherigoUtils.setViewActions(Arrays.asList(TRUE, FALSE), binding.dialogActionlist, item -> TRUE.equals(item) ?
+                TextParam.text(StringUtils.isBlank(s) ? "ok" : s).setImage(ImageParam.id(R.drawable.ic_menu_done)) :
+                TextParam.text(StringUtils.isBlank(s1) ? "cancel" : s1).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
+            item -> {
+                WherigoDialogManager.get().clear();
+                if (luaClosure != null) {
+                    Engine.invokeCallback(luaClosure, TRUE.equals(item) ? "Button1" : "Button2");
+                }
             }
-            dialog.dismiss();
-        });
-        binding.actions.buttonNegative.setOnClickListener(v -> {
-            if (luaClosure != null) {
-                Engine.invokeCallback(luaClosure, "Button2");
-            }
-            dialog.dismiss();
-        });
+        );
 
         return dialog;
 

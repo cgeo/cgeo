@@ -118,7 +118,7 @@ public class WherigoGame implements UI {
             if (saveGame != null) {
                 engine.restore();
             } else {
-                engine.start();
+                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(this.cartridgeFile, engine::start));
             }
         } catch (IOException ie) {
             Log.e("Problem", ie);
@@ -214,6 +214,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void showError(final String s) {
+        Log.w("WHERIGO: ERROR" + s);
         setStatusText("ERROR:" + s);
     }
 
@@ -229,39 +230,19 @@ public class WherigoGame implements UI {
 
     @Override
     public void pushDialog(final String[] strings, final Media[] media, final String s, final String s1, final LuaClosure luaClosure) {
+        Log.iForce("WHERIGO: pushDialog:" + strings);
         WherigoDialogManager.get().display(new WherigoPushDialogProvider(strings, media, s, s1, luaClosure));
     }
 
     @Override
     public void pushInput(final EventTable input) {
-        /** Request an input from the user.
-         * <p>
-         * If another dialog or input is open, it should be closed
-         * before displaying this input.
-         * <p>
-         * The <code>input</code> table must contain a "Type" field,
-         * which can be either "Text" (then the UI should offer an one-line text input),
-         * or "MultipleChoice". In that case, "Choices" field holds
-         * another Lua table with list of strings representing the individual choices.
-         * UI can then offer either a button for each choice, or some other
-         * method of choosing one answer (such as combo box, radio buttons).
-         * <p>
-         * "Text" field holds a text of this query - this should be displayed above the
-         * input field or the choices. "Media" field holds the associated <code>Media</code>.
-         * <p>
-         * This EventTable has an event "OnGetInput". When the input is processed, this
-         * event should be called with a string parameter - either text of the selected choice,
-         * or text from the input line. If the input is closed by another API call, the event
-         * should be called with null parameter.
-         * @param input Lua table describing the input parameters
-         */
+        Log.iForce("WHERIGO: pushInput:" + input);
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
     @Override
     public void showScreen(final int i, final EventTable eventTable) {
-        //NEEDED???
-        Log.e("WHERIGO showScreen called?");
+        Log.iForce("WHERIGO: showScreen:" + i + ":" + eventTable);
     }
 
     @Override
@@ -281,6 +262,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void command(final String cmd) {
+        Log.iForce("WHERIGO: command:" + cmd);
         //From WhereYouGo
         if ("StopSound".equals(cmd)) {
          //   UtilsAudio.stopSound();

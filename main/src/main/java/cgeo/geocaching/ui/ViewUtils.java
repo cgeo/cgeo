@@ -259,7 +259,11 @@ public class ViewUtils {
     }
 
     public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
-        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
+        return createButton(context, root, text, false);
+    }
+
+    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text, final boolean fillParent) {
+        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(fillParent ? R.layout.button_fillparent_view : R.layout.button_view, root, false);
         text.applyTo(button);
         return button;
     }

@@ -38,7 +38,7 @@ public class SimpleItemListView extends LinearLayout {
 
     private enum ListItemType { ITEM, GROUPHEADER, SELECT_ALL, SELECTED_VISIBLE }
 
-    private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()));
+    private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()), null);
 
     private ItemListAdapter listAdapter;
 
@@ -201,7 +201,7 @@ public class SimpleItemListView extends LinearLayout {
             if (itemData == null || itemData.type != ListItemType.ITEM || model.getActionListener() == null) {
                 return;
             }
-            model.getActionListener().call(itemData.value);
+            model.getActionListener().accept(itemData.value);
         }
 
         private void handleClick(final int adapterPos) {

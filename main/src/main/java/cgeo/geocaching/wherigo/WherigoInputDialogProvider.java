@@ -1,16 +1,22 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.ui.SimpleItemListModel;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.EditUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
-import android.view.View;
 import static android.view.View.VISIBLE;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -39,46 +45,60 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         binding.media.setMedia((Media) input.table.rawget("Media"));
 
-        binding.actions.buttonNegative.setVisibility(View.GONE);
-        binding.actions.buttonNeutral.setVisibility(View.GONE);
-
-        binding.actions.buttonPositive.setVisibility(VISIBLE);
-        binding.actions.buttonPositive.setText("ok");
-
         final String type = (String) input.rawget("InputType");
+        boolean handled = false;
 
         if ("Text".equals(type)) {
             binding.dialogInputLayout.setVisibility(VISIBLE);
-            binding.actions.buttonPositive.setOnClickListener(v -> {
+            WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
+                WherigoDialogManager.get().clear();
                 Engine.callEvent(input, "OnGetInput", binding.dialogInputEdittext.getText().toString());
-                dialog.dismiss();
             });
-        } else if ("MultipleChoice".equals(type)) {
+            EditUtils.setActionListener(binding.dialogInputEdittext, () -> {
+                WherigoDialogManager.get().clear();
+                Engine.callEvent(input, "OnGetInput", binding.dialogInputEdittext.getText().toString());
+            });
+            Keyboard.show(activity, binding.dialogInputEdittext);
+
+            handled = true;
+        }
+        if ("MultipleChoice".equals(type)) {
             final LuaTable choicesTable = (LuaTable) input.table.rawget("Choices");
-            final String[] choices = new String[choicesTable.len()];
+            final List<String> choices = new ArrayList<>(choicesTable.len());
             for (int i = 0; i < choicesTable.len(); i++) {
-                choices[i] = (String) choicesTable.rawget((double) (i + 1));
-                if (choices[i] == null) {
-                    choices[i] = "-";
+                String choice = (String) choicesTable.rawget((double) (i + 1));
+                if (choice == null) {
+                    choice = "-";
                 }
+                choices.add(choice);
             }
 
-            binding.dialogItemlistview.setVisibility(VISIBLE);
+            if (!choices.isEmpty()) {
 
-            final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
-            choiceModel.setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
-            binding.dialogItemlistview.setModel(choiceModel);
-            binding.actions.buttonPositive.setOnClickListener(v -> {
-                final String item = CommonUtils.first(choiceModel.getSelectedItems());
-                Engine.callEvent(input, "OnGetInput", item);
-                dialog.dismiss();
-            });
-        } else {
-            binding.actions.buttonPositive.setOnClickListener(v -> {
+                binding.dialogItemlistview.setVisibility(VISIBLE);
+
+                final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
+                choiceModel
+                    .setItems(choices)
+                    .setDisplayMapper(TextParam::text)
+                    .setSelectedItems(Collections.singleton(choices.get(0)))
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
+                binding.dialogItemlistview.setModel(choiceModel);
+
+                WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
+                    WherigoDialogManager.get().clear();
+                    Engine.callEvent(input, "OnGetInput", CommonUtils.first(choiceModel.getSelectedItems()));
+                });
+                handled = true;
+            }
+
+        }
+
+        if (!handled) {
+            WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
+                WherigoDialogManager.get().clear();
                 Engine.callEvent(input, "OnGetInput", null);
-                dialog.dismiss();
             });
-
         }
         return dialog;
 

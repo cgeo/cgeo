@@ -7,7 +7,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/actions"
+        android:layout_above="@+id/dialog_actionlist"
         android:padding="5dp">
 
         <LinearLayout
@@ -65,9 +65,20 @@
         </LinearLayout>
     </ScrollView>
 
+    <!-- Action List -->
+    <cgeo.geocaching.ui.SimpleItemListView
+        android:id="@+id/dialog_actionlist"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:paddingBottom="4dip"
+        android:paddingLeft="4dip"
+        android:paddingRight="4dip"
+        android:paddingTop="6dip"/>
 
 
 
-    <include android:id="@+id/actions" layout="@layout/wherigo_include_actions" />
 
 </RelativeLayout>
