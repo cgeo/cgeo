@@ -86,6 +86,13 @@
                     android:layout_alignParentRight="true"
                     android:orientation="horizontal">
                 <Button
+                    android:id="@+id/edit_personalnote"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/cache_personal_note"
+                    app:icon="@drawable/ic_menu_note_edit"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+                <Button
                     android:id="@+id/send_to_whereyougo"
                     style="@style/button_icon_colored"
                     app:icon="@drawable/icon_whereyougo"

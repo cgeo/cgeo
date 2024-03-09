@@ -147,6 +147,12 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             addCacheDetails(false);
 
+            binding.editPersonalnote.setVisibility(View.VISIBLE);
+            binding.editPersonalnote.setOnClickListener(arg0 -> {
+                CacheDetailActivity.startActivityForEditNote(getActivity(), geocode);
+                ((AbstractNavigationBarMapActivity) requireActivity()).sheetRemoveFragment();
+            });
+
             // Wherigo
             if (WhereYouGoApp.isWherigo(cache)) {
                 binding.sendToWhereyougo.setVisibility(View.VISIBLE);
