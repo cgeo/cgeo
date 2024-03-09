@@ -31,6 +31,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.core.util.Pair;
 
 import java.util.ArrayList;
@@ -53,6 +54,8 @@ public class UnifiedTargetAndDistancesHandler {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
+    private @DrawableRes int turnInstructionResId = 0;
+    private float turnInstructionDistance = 0.0f;
 
     private static final float MIN_DISTANCE = 0.0005f;
     private static final float MIN_DIFF = 0.015f;
@@ -72,16 +75,18 @@ public class UnifiedTargetAndDistancesHandler {
 
     // distances handling -------------------------------------------------------------------------------------------
 
-    public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance) {
+    public void drawDistance(final boolean showBothDistances, final float distance, final float realDistance, @DrawableRes final int turnInstructionResId, final float turnInstructionDistance) {
         this.showBothDistances = showBothDistances;
         this.distance = distance;
         this.realDistance = realDistance;
+        this.turnInstructionResId = turnInstructionResId;
+        this.turnInstructionDistance = turnInstructionDistance;
         updateDistanceViews();
     }
 
     public void drawRouteDistance(final float routeDistance) {
         this.routeDistance = routeDistance;
-        drawDistance(showBothDistances, distance, realDistance);
+        drawDistance(showBothDistances, distance, realDistance, turnInstructionResId, turnInstructionDistance);
     }
 
     private void swap() {
@@ -91,12 +96,13 @@ public class UnifiedTargetAndDistancesHandler {
     }
 
     private void updateDistanceViews() {
-        updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, turnInstructionResId, turnInstructionDistance, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
             final float distance, final float realDistance, final float routeDistance, final Pair<Integer, String> elevationInfo, final boolean showBothDistances,
+            @DrawableRes final int turnInstructionResId, final float turnInstructionDistance,
             final LinearLayout distances1, final LinearLayout distances2,
             final TextView distanceSupersizeView, final TextView targetView,
             final Action1<Boolean> updateBothViewNeeded
@@ -139,6 +145,10 @@ public class UnifiedTargetAndDistancesHandler {
 
         if (!elevationInfo.second.isEmpty()) {
             data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(elevationInfo);
+        }
+
+        if (turnInstructionResId != 0 && turnInstructionDistance > 0.0f) {
+            data[1].add(new Pair<>(turnInstructionResId, Units.getDistanceFromKilometers(turnInstructionDistance)));
         }
 
         // update views

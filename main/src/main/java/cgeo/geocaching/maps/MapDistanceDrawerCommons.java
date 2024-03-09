@@ -75,7 +75,7 @@ public class MapDistanceDrawerCommons {
 
     private void updateDistanceViews() {
         // glue code to UnifiedMap
-        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, 0, 0.0f, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
 }

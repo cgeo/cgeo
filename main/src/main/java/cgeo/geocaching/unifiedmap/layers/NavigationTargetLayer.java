@@ -53,7 +53,7 @@ public class NavigationTargetLayer {
             } else {
                 mapDistanceDrawer.setTargetGeocode(null);
                 mapDistanceDrawer.setTarget(null);
-                mapDistanceDrawer.drawDistance(showBothDistances, 0, 0);
+                mapDistanceDrawer.drawDistance(showBothDistances, 0, 0, 0, 0.0f);
             }
 
             repaintHelper(target);
@@ -76,7 +76,8 @@ public class NavigationTargetLayer {
 
         if (currentLocation != null && target.geopoint != null) {
             final Geopoint currentGp = new Geopoint(currentLocation.location.getLatitude(), currentLocation.location.getLongitude());
-            final Geopoint[] routingPoints = Routing.getTrack(currentGp, target.geopoint);
+            final Routing.TurnInstruction turnInstruction = new Routing.TurnInstruction();
+            final Geopoint[] routingPoints = Routing.getTrack(currentGp, target.geopoint, turnInstruction);
 
             float routedDistance = 0.0f;
             if (routingPoints.length > 2 || Settings.isMapDirection()) {
@@ -88,7 +89,7 @@ public class NavigationTargetLayer {
             layer.put(KEY_TARGET_PATH, GeoPrimitive.createPolyline(Arrays.asList(routingPoints), lineStyle).buildUpon()
                     .setZLevel(LayerHelper.ZINDEX_DIRECTION_LINE).build());
 
-            mapDistanceDrawer.drawDistance(showBothDistances, currentGp.distanceTo(target.geopoint), routedDistance);
+            mapDistanceDrawer.drawDistance(showBothDistances, currentGp.distanceTo(target.geopoint), routedDistance, turnInstruction.getSymbolFromInstruction(), turnInstruction.distanceFromStart);
 
         }
 
