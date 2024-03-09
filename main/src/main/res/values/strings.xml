@@ -2786,6 +2786,7 @@
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
+    <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (require restart)</string>
     <string name="maptheme_scale_map_title">Map Scale Factor</string>
     <string name="maptheme_scale_map_summary">Scales map; 100% = no scaling</string>
     <string name="maptheme_scale_text_title">Text Scale factor</string>

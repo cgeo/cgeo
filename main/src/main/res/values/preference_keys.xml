@@ -178,6 +178,10 @@
     <string translatable="false" name="pref_mapline_accuracycirclecolor">mapline_accuracycirclecolor</string>
     <string translatable="false" name="pref_mapline_accuracycirclefillcolor">mapline_accuracycirclefillcolor</string>
 
+    <!-- category UnifiedMap -->
+    <string translatable="false" name="pref_vtmUserScale">vtmUserScale</string>
+    <string translatable="false" name="pref_vtmTextScale">vtmTextScale</string>
+    <string translatable="false" name="pref_vtmSymbolScale">vtmSymbolScale</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys for cachedetails screen -->

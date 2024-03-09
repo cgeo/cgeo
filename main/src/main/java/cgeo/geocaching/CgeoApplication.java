@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.oscim.backend.CanvasAdapter;
+
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
@@ -154,7 +156,15 @@ public class CgeoApplication extends Application {
             MessageCenterUtils.configureMessageCenterPolling();
 
             LooperLogger.startLogging(Looper.getMainLooper());
+
+            applyVTMScales();
         }
+    }
+
+    private void applyVTMScales() {
+        CanvasAdapter.userScale = Settings.getInt(R.string.pref_vtmUserScale, 100) / 100.0f;
+        CanvasAdapter.textScale = Settings.getInt(R.string.pref_vtmTextScale, 100) / 100f;
+        CanvasAdapter.symbolScale = Settings.getInt(R.string.pref_vtmSymbolScale, 100) / 100f;
     }
 
     /**

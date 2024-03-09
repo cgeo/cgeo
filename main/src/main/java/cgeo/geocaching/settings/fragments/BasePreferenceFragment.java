@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.PreferenceTextAlwaysShow;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.XmlRes;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -201,5 +203,18 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
             start.setVisible(false);
         }
         return visibleCount;
+    }
+
+    protected void setFlagForRestartRequired() {
+        getActivity().setResult(SettingsActivity.RESTART_NEEDED);
+    }
+
+    protected void setFlagForRestartRequired(final @StringRes int... prefKeyIds) {
+        for (int prefKeyId : prefKeyIds) {
+            findPreference(getString(prefKeyId)).setOnPreferenceChangeListener((preference, newValue) -> {
+                setFlagForRestartRequired();
+                return true;
+            });
+        }
     }
 }

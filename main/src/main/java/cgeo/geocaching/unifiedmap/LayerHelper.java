@@ -8,16 +8,16 @@ public class LayerHelper {
     public static final int ZINDEX_ELEVATIONCHARTMARKERPOSITION = 15;
     public static final int ZINDEX_POSITION = 14;
     public static final int ZINDEX_SEARCHCENTER = 13;
-    public static final int ZINDEX_GEOCACHE = 12;
-    public static final int ZINDEX_WAYPOINT = 11;
-    public static final int ZINDEX_COORD_POINT = 10;
-    public static final int ZINDEX_DIRECTION_LINE = 9;
-    public static final int ZINDEX_TRACK_ROUTE = 8;
-    public static final int ZINDEX_POSITION_ACCURACY_CIRCLE = 7;
-    public static final int ZINDEX_HISTORY = 6;
-    public static final int ZINDEX_CIRCLE = 5;
     // some OSM-only layers
-    public static final int ZINDEX_SCALEBAR = 4;
+    public static final int ZINDEX_SCALEBAR = 12;
+    public static final int ZINDEX_GEOCACHE = 11;
+    public static final int ZINDEX_WAYPOINT = 10;
+    public static final int ZINDEX_COORD_POINT = 9;
+    public static final int ZINDEX_DIRECTION_LINE = 8;
+    public static final int ZINDEX_TRACK_ROUTE = 7;
+    public static final int ZINDEX_POSITION_ACCURACY_CIRCLE = 6;
+    public static final int ZINDEX_HISTORY = 5;
+    public static final int ZINDEX_CIRCLE = 4;
     public static final int ZINDEX_LABELS = 3;
     public static final int ZINDEX_BUILDINGS = 2;
     public static final int ZINDEX_BASEMAP = 1;     // this is hard-coded in VTM:Map.java

@@ -896,6 +896,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
+        reloadCachesAndWaypoints(false);
         mapType.filterContext.set(filter);
         MapUtils.updateFilterBar(this, mapType.filterContext);
         refreshMapData(false);
