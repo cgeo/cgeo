@@ -147,6 +147,12 @@
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
     <string name="log_posting_log">A publicar o registo…</string>
+    <string name="log_posting_problemreport">A publicar relatório de problemas…</string>
+    <string name="log_posting_deletelog">Eliminar registo…</string>
+    <string name="log_posting_image_create">Imagem %1$s/%2$s: a publicar dados…</string>
+    <string name="log_posting_image_edit">Imagem %1$s/%2$s: a alterar dados…</string>
+    <string name="log_posting_image_delete">A remover imagem %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Guardar novo estado do registo…</string>
     <string name="log_posting_vote">A submeter votação da cache…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -202,6 +208,7 @@
     <string name="log_image_info_scaled">redimensionado</string>
     <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
+    <string name="log_delete_confirm">Deseja mesmo eliminar o registo do tipo \'%1$s\' do autor \'%2$s\' com data de registo \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- Contacts -->
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
@@ -299,6 +306,7 @@
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
+    <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
     <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Tentar novamente</string>
     <string name="info_log_post_save">Guardar offline</string>
@@ -312,6 +320,8 @@
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
     <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
     <string name="confirm_discard_changes">Descartar as alterações não guardadas?</string>
+    <string name="confirm_unsent_changes_title">Alterações não enviadas</string>
+    <string name="confirm_unsent_changes">Descartar alterações não enviadas?</string>
     <string name="confirm_discard_wp_changes">Descartar as alterações aos pontos adicionais não guardadas?</string>
     <string name="warn_log_load_additional_data">O c:geo falhou ao carregar dados adicionais (de trackables/pontos de favoritos) para o registo.</string>
     <string name="more_information">Mais informação</string>
@@ -407,6 +417,7 @@
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
     <string name="caches_sort_eventdate">Data do evento</string>
+    <string name="caches_sort_lastfounddate">Data da última vez encontrada</string>
     <string name="caches_select_mode">Modo de selecção</string>
     <string name="caches_select_next20">Seleccionar as próximas 20 caches</string>
     <string name="caches_select_next100">Seleccionar as próximas 100 caches</string>
@@ -688,6 +699,7 @@
     <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
+    <string name="about_contributors_recent">Colaboradores (últimos 12 meses)</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
     <string name="about_contributors_specialthanksdetails">- a todos os contribuidores de tradução em [Crowdin.net](https://crowdin.net/project/cgeo!\n- a todos os geradores de questões\n- e a todos os outros apoiantes.\n</string>
     <string name="about_contributors_other">Outros colaboradores</string>
@@ -1406,7 +1418,10 @@
     <string name="cache_menu_log_in_browser">Registar no browser</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
     <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
+    <string name="cache_log_menu_edit">Editar Registo</string>
+    <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
+    <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
@@ -1491,6 +1506,8 @@
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
+    <string name="context_map_star_show">Mostrar linhas para pontos adicionais</string>
+    <string name="context_map_star_hide">Ocultar linhas para pontos adicionais</string>
     <string name="edit">Editar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
@@ -1500,6 +1517,7 @@
     <string name="internal_cache_default_owner">Você</string>
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
+    <string name="goto_targets_deprecation_title">Aviso de descontinuação</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
     <string name="init_show_routing_menu">Mostrar menu de encaminhamento</string>
@@ -1654,6 +1672,8 @@
     <string name="imageview_metadata_comment">Comentário</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
+    <string name="map_live">Em tempo real</string>
+    <string name="map_offline">Desligado</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -1782,6 +1802,7 @@
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
     <string name="user_menu_send_email">Enviar e-mail</string>
+    <string name="user_menu_open_contact">Pesquisar nos contactos</string>
     <string name="user_unknown">Utilizador desconhecido</string>
     <!-- navigation -->
     <string name="navigation">Navegação</string>
