@@ -66,6 +66,7 @@ public class GCMap {
             }
 
             search.setBox(viewport);
+            search.setPage(500, 0);
 
             final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
 
