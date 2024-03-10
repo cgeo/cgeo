@@ -38,3 +38,4 @@
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
 - Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
 - Novinka: Lepší vyhlazování obrázků v logu
+- Novinka: "Úprava osobní poznámky" z informačního listu kešky
