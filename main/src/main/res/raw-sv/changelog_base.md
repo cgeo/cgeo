@@ -38,3 +38,4 @@
 - New: Switch to set found state of Lab Adventures either manually or automatically
 - New: List selection dialog: Auto-group cache lists having a ":" in their name
 - New: Smoother scaling of log images
+- New: "Edit Personal Note" from cache info sheet
