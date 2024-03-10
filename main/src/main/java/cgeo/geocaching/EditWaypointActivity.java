@@ -189,7 +189,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 } else {
                     activity.nonEditable(activity.binding.nameLayout, activity.binding.name);
                     activity.nonEditable(activity.binding.noteLayout, activity.binding.note);
-                    activity.projectionType.set(ProjectionType.NO_PROJECTION);
                 }
 
                 if (StringUtils.isBlank(activity.binding.note.getText())) {

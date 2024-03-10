@@ -160,7 +160,7 @@ public class RouteItem implements Parcelable {
 
     @Nullable
     public Geocache getGeocache() {
-        if (cacheGeocode == null) {
+        if (cacheGeocode == null || cacheGeocode.isEmpty()) {
             return null;
         }
         return DataStore.loadCache(cacheGeocode, LoadFlags.LOAD_CACHE_OR_DB);
