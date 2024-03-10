@@ -2529,6 +2529,7 @@
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
+    <string name="maptheme_vtm_scaling_summary">Možnosti měřítka pro offline mapy (vyžaduje restart)</string>
     <string name="maptheme_scale_map_title">Měřítko mapy</string>
     <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
     <string name="maptheme_scale_text_title">Měřítko textu</string>
