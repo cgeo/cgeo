@@ -38,3 +38,4 @@
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
 - Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
 - New: Smoother scaling of log images
+- New: "Edit Personal Note" from cache info sheet
