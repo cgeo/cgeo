@@ -38,3 +38,4 @@
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
 - Nowość: Okno wyboru listy: Automatycznie grupowane listy skrytek mają dwukropek w nazwie
 - Nowość: płynniejsze skalowanie obrazów z dziennika znalezień
+- Nowość: „Edytuj notatkę osobistą” z arkusza informacji o skrytce
