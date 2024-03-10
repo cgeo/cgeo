@@ -66,6 +66,10 @@ android {
 
     buildFeatures {
         viewBinding true
+        // Enable aidl, some modules in this project appear to be using AIDL
+        aidl true
+        // use BuildConfig classes
+        buildConfig true
     }
 
     buildTypes {
