@@ -72,9 +72,9 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
-import cgeo.geocaching.wherigo.WherigoDetailDialogProvider;
 import cgeo.geocaching.wherigo.WherigoDialogManager;
 import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.WherigoThingDialogProvider;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
@@ -1091,7 +1091,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             }
         } else if (item.getData() instanceof Zone) {
-            WherigoDialogManager.get().display(new WherigoDetailDialogProvider(item.getData()));
+            WherigoDialogManager.get().display(new WherigoThingDialogProvider(item.getData()));
         } else if (item.getData() instanceof String) {
             GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
         }

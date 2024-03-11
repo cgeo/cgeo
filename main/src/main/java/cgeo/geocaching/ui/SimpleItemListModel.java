@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func4;
 
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +22,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -32,11 +34,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 /** Model class to work with {@link cgeo.geocaching.ui.SimpleItemListView} */
 public class SimpleItemListModel<T> {
 
+    private final Function<T, TextParam> defaultDisplayMapper = obj -> TextParam.text(obj == null ? "-" : obj.toString());
+
     private final List<T> items = new ArrayList<>();
     private final List<T> itemsReadOnly = Collections.unmodifiableList(items);
 
-    private Func4<T, Context, View, ViewGroup, View> displayViewMapper = (item, context, view, parent) -> null;
-    private Function<T, String> textFilterMapper = null;
+    private Func4<T, Context, View, ViewGroup, View> displayViewMapper = constructDisplayViewMapper(defaultDisplayMapper, null);
+    private Function<T, String> textFilterMapper = constructFilterTextExtractor(defaultDisplayMapper);
     private Function<T, ImageParam> displayIconMapper = (o) -> null;
 
     private Function<T, ImageParam> actionIconMapper = (o) -> null;
@@ -52,9 +56,9 @@ public class SimpleItemListModel<T> {
 
     private final Set<T> selectedItems = new HashSet<>();
 
-    private final List<Action1<ChangeType>> changeListeners = new ArrayList<>();
+    private final List<Consumer<ChangeType>> changeListeners = new ArrayList<>();
 
-    private Action1<T> actionListener = null;
+    private Consumer<T> actionListener = null;
 
 
     /** Supported display modes for choosing items from a list */
@@ -230,10 +234,14 @@ public class SimpleItemListModel<T> {
         return textFilterMapper;
     }
 
-    /** Sets a providing the text visualization for an item */
+    /** Sets a display providing the text visualization for an item */
     public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper) {
+        return setDisplayMapper(displayMapper, null);
+    }
+
+    public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         if (displayMapper != null) {
-            setDisplayViewMapper(constructDisplayViewMapper(displayMapper), constructFilterTextExtractor(displayMapper));
+            setDisplayViewMapper(constructDisplayViewMapper(displayMapper, textViewCreator), constructFilterTextExtractor(displayMapper));
         }
         return this;
     }
@@ -248,9 +256,11 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Function<TT, TextParam> displayTextMapper) {
+    public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Function<TT, TextParam> displayTextMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+        final BiFunction<Context, ViewGroup, TextView> tvCreator = textViewCreator != null ? textViewCreator :
+            (ctx, parent) -> ViewUtils.createTextItem(ctx, R.style.text_default, TextParam.text(""));
         return (item, context, view, parent) -> {
-            final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
+            final TextView tv = view instanceof TextView ? (TextView) view : tvCreator.apply(context, parent);
             final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.apply(item);
             if (tp == null) {
                 tv.setText("--");
@@ -313,7 +323,7 @@ public class SimpleItemListModel<T> {
     }
 
     /** Sets a mapper providing an optional action icon per item. For each item where the action item
-     *  is non-null, it is displayed and the listener provided via {@link #setItemActionListener(Action1)} is fired */
+     *  is non-null, it is displayed and the listener provided via {@link #setItemActionListener(Consumer)} is fired */
     public SimpleItemListModel<T> setItemActionIconMapper(final Function<T, ImageParam> actionIconMapper) {
         if (actionIconMapper != null) {
             this.actionIconMapper = actionIconMapper;
@@ -389,23 +399,42 @@ public class SimpleItemListModel<T> {
     }
 
     /** Adds a model change listener */
-    public void addChangeListeners(final Action1<ChangeType> changeListeners) {
+    public SimpleItemListModel<T> addChangeListeners(final Consumer<ChangeType> changeListeners) {
         this.changeListeners.add(changeListeners);
+        return this;
+    }
+
+    /** Adds an item click listener. Use this for SINGLE select models */
+    public SimpleItemListModel<T> addSingleSelectListener(final Consumer<T> selectListener) {
+        return addChangeListeners(ct -> {
+            if (ct == ChangeType.SELECTION && selectListener != null) {
+                selectListener.accept(CommonUtils.first(getSelectedItems()));
+            }
+        });
+    }
+
+    /** Adds an item click listener. Use this for MULTI select models */
+    public SimpleItemListModel<T> addMultiSelectListener(final Consumer<Set<T>> selectListener) {
+        return addChangeListeners(ct -> {
+            if (ct == ChangeType.SELECTION && selectListener != null) {
+                selectListener.accept(getSelectedItems());
+            }
+        });
     }
 
     /** The listener provided here will be fired for items where an action icon is set if user clicks this icon */
-    public SimpleItemListModel<T> setItemActionListener(final Action1<T> actionListener) {
+    public SimpleItemListModel<T> setItemActionListener(final Consumer<T> actionListener) {
         this.actionListener = actionListener;
         return this;
     }
 
-    public Action1<T> getActionListener() {
+    public Consumer<T> getActionListener() {
         return this.actionListener;
     }
 
     private void triggerChange(final ChangeType mode) {
-        for (Action1<ChangeType> changeListener : this.changeListeners) {
-            changeListener.call(mode);
+        for (Consumer<ChangeType> changeListener : this.changeListeners) {
+            changeListener.accept(mode);
         }
     }
 }

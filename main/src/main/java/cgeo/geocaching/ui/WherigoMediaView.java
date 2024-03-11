@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.function.Supplier;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.Media;
@@ -56,41 +58,40 @@ public class WherigoMediaView extends LinearLayout {
 
     }
 
-    public void setMedia(final Media media) {
-        if (media == null || media.id == mediaId) {
+    private void setMediaData(final int mediaId, final String type, final String fileNameToUse, final String altText, final Supplier<byte[]> dataSupplier) {
+        if (mediaId == this.mediaId) {
             return;
         }
 
-        if (StringUtils.isBlank(media.altText)) {
+        if (StringUtils.isBlank(altText)) {
             binding.mediaTextView.setVisibility(GONE);
         } else {
             binding.mediaTextView.setVisibility(VISIBLE);
-            binding.mediaTextView.setText(Engine.removeHtml(media.altText));
+            binding.mediaTextView.setText(Engine.removeHtml(altText));
         }
 
-        if (media.type == null) {
+        if (type == null) {
             return;
         }
 
         final File cacheDir = LocalStorage.getWherigoCacheDirectory();
-        final File mediaFile = new File(cacheDir, media.jarFilename());
+        final File mediaFile = new File(cacheDir, fileNameToUse);
 
-        byte[] data = null;
         try {
-            data = Engine.mediaFile(media);
+            final byte[] data = dataSupplier.get();
             FileUtils.writeByteArrayToFile(mediaFile, data);
         } catch (Exception e) {
             Log.e("Problem extracting media data", e);
             return;
         }
 
-        this.mediaId = media.id;
+        this.mediaId = mediaId;
 
         binding.mediaImageView.setVisibility(GONE);
         binding.mediaVideoView.setVisibility(GONE);
         binding.mediaGifView.setVisibility(GONE);
 
-        switch (media.type.toLowerCase()) {
+        switch (type.toLowerCase()) {
             case "mp4":
                 //Video
                 binding.mediaVideoView.setVideoURI(Uri.fromFile(mediaFile));
@@ -112,7 +113,25 @@ public class WherigoMediaView extends LinearLayout {
                 //do nothing
                 break;
         }
+    }
 
+    public void setMediaData(final String type, final byte[] data, final String altText) {
+        final int mediaId = this.mediaId >= 0 ? -1 : this.mediaId - 1;
+        setMediaData(mediaId, type, "file" + mediaId, altText, () -> data);
+    }
+
+    public void setMedia(final Media media) {
+        if (media == null || media.id == mediaId) {
+            return;
+        }
+
+        setMediaData(media.id, media.type, media.jarFilename(), media.altText, () -> {
+            try {
+                return Engine.mediaFile(media);
+            } catch (IOException ex) {
+                return null;
+            }
+        });
 
     }
 

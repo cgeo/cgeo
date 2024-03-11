@@ -2,22 +2,28 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
-import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
+import cz.matejcik.openwig.Thing;
 
-public class WherigoDetailDialogProvider implements IWherigoDialogProvider {
+public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
     private WherigoThingDetailsBinding binding;
 
-    public WherigoDetailDialogProvider(final EventTable et) {
+    public WherigoThingDialogProvider(final EventTable et) {
         this.eventTable = et;
     }
 
@@ -31,10 +37,25 @@ public class WherigoDetailDialogProvider implements IWherigoDialogProvider {
 
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
-        binding.actions.buttonPositive.setText("Close");
-        binding.actions.buttonNegative.setVisibility(View.GONE);
-        binding.actions.buttonNeutral.setVisibility(View.GONE);
-        binding.actions.buttonPositive.setOnClickListener(v -> WherigoDialogManager.get().clear());
+        final List<Object> actions = new ArrayList<>();
+        if (eventTable instanceof Thing) {
+            actions.addAll(WherigoUtils.getActions((Thing) eventTable));
+        }
+        actions.add("Close");
+
+
+        WherigoUtils.setViewActions(actions, binding.dialogActionlist,
+            a -> a instanceof Action ?
+                TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
+                TextParam.text(a.toString()).setImage(ImageParam.id(R.drawable.ic_menu_done)),
+            item -> {
+                WherigoDialogManager.get().clear();
+                if (item instanceof Action) {
+                    WherigoUtils.callAction((Thing) eventTable, (Action) item);
+                }
+            }
+        );
+
         return dialog;
     }
 
