@@ -2465,6 +2465,7 @@
     <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (herstart vereist)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
