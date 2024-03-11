@@ -38,4 +38,4 @@
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
 - Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
 - Nieuw: Soepeler schalen van log afbeeldingen
-- New: "Edit Personal Note" from cache info sheet
+- Nieuw: "Persoonlijke Notitie bewerken" van het cache informatieblad
