@@ -57,7 +57,7 @@ public final class GCList {
     }
 
     public Uri getUri() {
-        return isBookmarkList() ? Uri.parse("https://www.geocaching.com/plan/api/gpx/list/" + guid) : Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + guid + "&src=web");
+        return isBookmarkList() ? Uri.parse("https://www.geocaching.com/api/live/v1/gpx/list/" + guid) : Uri.parse("https://www.geocaching.com/pocket/downloadpq.ashx?g=" + guid + "&src=web");
     }
 
     public String getShortGuid() {

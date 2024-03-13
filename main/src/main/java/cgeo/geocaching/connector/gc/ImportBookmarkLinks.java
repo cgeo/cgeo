@@ -20,7 +20,7 @@ import java.util.Optional;
 public class ImportBookmarkLinks extends AppCompatActivity {
 
     public static final String BOOKMARK_LIST_API_PREFIX =
-            "https://www.geocaching.com/plan/api/gpx/list/";
+            "https://www.geocaching.com/api/live/v1/gpx/list/";
     private final UrlToIdParser intentUrlParser;
 
     ImportBookmarkLinks(@NonNull final UrlToIdParser urlToIdParser) {
