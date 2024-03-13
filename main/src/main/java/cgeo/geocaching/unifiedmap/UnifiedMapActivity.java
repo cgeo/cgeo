@@ -253,8 +253,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        viewModel.mapCenter.observe(this, center -> updateCacheCountSubtitle());
-        viewModel.caches.observe(this, caches -> updateCacheCountSubtitle());
+        viewModel.mapCenter.observe(this, center -> refreshListChooser());
+        viewModel.caches.observe(this, caches -> refreshListChooser());
 
         MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
@@ -300,7 +300,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         }));
 
-        setupActionBarSpinner();
+        refreshListChooser();
     }
 
     public AbstractMapFragment getMapFragment() {
@@ -378,7 +378,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }, 1000);
         }
         // both maps have invalid values for bounding box in the beginning, so need to delay counting a bit
-        ActivityMixin.postDelayed(this::updateCacheCountSubtitle, 2000);
+        ActivityMixin.postDelayed(this::refreshListChooser, 2000);
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
@@ -474,7 +474,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             mapFragment.setCenter(Settings.getUMMapCenter());
             overridePositionAndZoom = false;
         }
-        setTitle();
+        refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
         if (mapType.type == UMTT_PlainMap) {
@@ -521,13 +521,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.waypoints.postNotifyDataChanged();
     }
 
-    private void updateCacheCountSubtitle() {
-        if (mapFragment == null) {
-            return;
-        }
-        refreshListChooser();
-    }
-
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
         Log.d("add " + searchResult.getGeocodes());
         for (String geocode : searchResult.getGeocodes()) {
@@ -566,10 +559,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         Log.d("add [" + s + "]");
     }
 
-    private void setTitle() {
-        refreshListChooser();
-    }
-
     @NonNull
     private String calculateTitle() {
         if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
@@ -606,10 +595,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             //all others, e.g. "Live"
             listChooser.setDirect(calculateTitle(), visibleCaches);
         }
-    }
-
-    private void setupActionBarSpinner() {
-        refreshListChooser();
     }
 
     /**
@@ -770,12 +755,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 Settings.setLiveMap(!Settings.isLiveMap());
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
-                setTitle();
+                refreshListChooser();
                 setMapModeFromMapType();
             } else {
                 mapType = new UnifiedMapType();
                 viewModel.transientIsLiveEnabled.setValue(true);
-                setupActionBarSpinner();
+                refreshListChooser();
                 MapUtils.updateFilterBar(this, mapType.filterContext);
                 updateSelectedBottomNavItemId();
                 setMapModeFromMapType(); // to get zoomLevel stored for right mode
