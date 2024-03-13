@@ -249,17 +249,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                if (cache != null && cache.getCoords() != null) {
-                    viewModel.caches.getValue().remove(cache);
-                    viewModel.caches.getValue().add(cache);
-                    viewModel.caches.notifyDataChanged();
-                }
-                final List<Waypoint> waypoints = DataStore.loadWaypoints(geocode);
-                if (waypoints != null) {
-                    viewModel.waypoints.getValue().addAll(waypoints);
-                    viewModel.waypoints.notifyDataChanged();
-                }
+                reloadCachesAndWaypoints(false);
             }
         });
 
