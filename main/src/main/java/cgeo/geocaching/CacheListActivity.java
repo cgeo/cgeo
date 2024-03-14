@@ -2026,7 +2026,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean resultIsOfflineAndLimited() {
-        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search.getTotalCount() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
+        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search != null && search.getTotalCount() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
     }
 
     /**
