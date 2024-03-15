@@ -261,17 +261,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                if (cache != null && cache.getCoords() != null) {
-                    viewModel.caches.getValue().remove(cache);
-                    viewModel.caches.getValue().add(cache);
-                    viewModel.caches.notifyDataChanged();
-                }
-                final List<Waypoint> waypoints = DataStore.loadWaypoints(geocode);
-                if (waypoints != null) {
-                    viewModel.waypoints.getValue().addAll(waypoints);
-                    viewModel.waypoints.notifyDataChanged();
-                }
+                reloadCachesAndWaypoints(false);
             }
         });
 
@@ -433,7 +423,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // load list of caches belonging to list and scale map to see them all
                 final AtomicReference<Viewport> viewport3 = new AtomicReference<>();
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
+                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, mapType.filterContext.get(), null, false, -1);
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(searchResult);
                     if (viewport3.get() != null) {
@@ -907,10 +897,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
-        reloadCachesAndWaypoints(false);
         mapType.filterContext.set(filter);
-        MapUtils.updateFilterBar(this, mapType.filterContext);
-        refreshMapData(false);
+        onResume();
     }
 
     protected GeocacheFilterContext getFilterContext() {
