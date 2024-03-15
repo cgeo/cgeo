@@ -421,7 +421,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // load list of caches belonging to list and scale map to see them all
                 final AtomicReference<Viewport> viewport3 = new AtomicReference<>();
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
-                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList);
+                    final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, mapType.filterContext.get(), null, false, -1);
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(searchResult);
                     if (viewport3.get() != null) {
