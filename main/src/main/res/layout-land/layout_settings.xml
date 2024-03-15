@@ -14,7 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="2" />
 
-    <View style="@style/separator_vertical" />
+    <View
+        android:id="@+id/settings_fragment_divider"
+        style="@style/separator_vertical" />
 
     <!-- second column in landscape mode only -->
     <androidx.fragment.app.FragmentContainerView

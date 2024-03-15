@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.settings.SettingsActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ public class MapsforgeThemeSettings extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.settings_fragment_root, new MapsforgeThemeSettingsFragment())
                 .commit();
+        SettingsActivity.hideRightColumnInLandscapeMode(this);
     }
 
 }
