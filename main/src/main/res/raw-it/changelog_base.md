@@ -31,3 +31,4 @@
 - Corretto: Simbolo stella mancante per i filtri memorizzati modificati
 - Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
 - Fix: Internal crash in routing calculation
+- Fix: Downloading bookmark lists returns empty list (website change)
