@@ -177,7 +177,8 @@ public class ShareUtils {
     }
 
     /**
-     * Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs
+     * Opens a URL in browser, in the registered default application or (if activated by the user in the settings) with customTabs
+     * (exception: uri using "mailto" scheme are never opened in custom tab)
      */
     public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {
         if (StringUtils.isBlank(url)) {
@@ -185,12 +186,13 @@ public class ShareUtils {
         }
 
         try {
-            if (Settings.getUseCustomTabs() && ProcessUtils.isChromeLaunchable()) {
+            final Uri uri = Uri.parse(url);
+            if (Settings.getUseCustomTabs() && ProcessUtils.isChromeLaunchable() && !StringUtils.equals(uri.getScheme(), "mailto")) {
                 openCustomTab(context, url);
                 return;
             }
 
-            final Intent viewIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            final Intent viewIntent = new Intent(Intent.ACTION_VIEW, uri);
 
             // Always shows an application chooser with all possible targets
             if (forceIntentChooser) {
@@ -201,7 +203,7 @@ public class ShareUtils {
 
                 final List<ResolveInfo> alreadyExistingShareIntents = context.getPackageManager().queryIntentActivities(viewIntent, PackageManager.MATCH_DEFAULT_ONLY);
                 final List<Intent> additionalTargetedShareIntents = new ArrayList<>();
-                customTabs.setData(Uri.parse(url));
+                customTabs.setData(uri);
                 additionalTargetedShareIntents.add(customTabs);
 
                 // on some devices, only c:geo is returned as possible share target, if it is set as default.
@@ -209,7 +211,7 @@ public class ShareUtils {
                 for (ResolveInfo resolveInfo : ProcessUtils.getInstalledBrowsers(context)) {
                     if (IterableUtils.find(alreadyExistingShareIntents,
                             info -> resolveInfo.activityInfo.packageName.equals(info.activityInfo.packageName)) == null) {
-                        final Intent targetedShare = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        final Intent targetedShare = new Intent(Intent.ACTION_VIEW, uri);
                         targetedShare.setPackage(resolveInfo.activityInfo.packageName);
                         additionalTargetedShareIntents.add(targetedShare);
                     }
