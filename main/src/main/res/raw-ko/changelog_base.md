@@ -31,3 +31,4 @@
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
 - 수정: 라우팅 계산 시 내부 충돌이 발생함
+- Fix: Downloading bookmark lists returns empty list (website change)
