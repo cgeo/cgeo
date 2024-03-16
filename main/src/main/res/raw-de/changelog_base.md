@@ -31,6 +31,7 @@
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
 - Korrektur: Interner Absturz bei Routenberechnung
+- Fix: Downloading bookmark lists returns empty list (website change)
 
 ### Änderungen seit der aktuellen Beta-Version
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
