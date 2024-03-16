@@ -850,8 +850,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public void refreshMapData(final boolean circlesSwitched) {
         markersInvalidated = true;
-        overlayPositionAndScale.repaintRequired();
-        if (circlesSwitched) {
+        if (overlayPositionAndScale != null) {
+            overlayPositionAndScale.repaintRequired();
+        }
+        if (circlesSwitched && mapView != null) {
             mapView.setCircles(Settings.isShowCircles());
             mapView.repaintRequired(null);
         }
