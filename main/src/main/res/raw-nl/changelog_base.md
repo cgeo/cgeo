@@ -31,6 +31,7 @@
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
 - Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
 - Oplossing: Interne crash bij routering berekening
+- Fix: Downloading bookmark lists returns empty list (website change)
 
 ### Veranderingen sinds huidige bètaversie
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
