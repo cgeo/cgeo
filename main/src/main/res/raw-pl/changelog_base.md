@@ -31,6 +31,7 @@
 - Poprawka: brakujący symbol gwiazdki dla zmienionych zapisanych filtrów
 - Poprawka: Pole wyszukiwania słowa kluczowego wyświetla „GC” po przeprowadzeniu wyszukiwania
 - Poprawka: Wewnętrzna awaria przy obliczaniu trasy
+- Poprawka: Pobieranie list zakładek zwraca pustą listę (zmiana na stronie internetowej)
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
