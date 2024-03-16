@@ -31,3 +31,4 @@
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
 - Oprava: Interní pád při výpočtu směrování
+- Oprava: Stahování seznamů záložek vrací prázdný seznam (změna webové stránky)
