@@ -183,7 +183,7 @@ public final class StoredList extends AbstractList {
                     return TextParam.text(title + " [" + ((StoredList) item).count + "]");
                 }
                 return TextParam.text(item.getTitleAndCount());
-            });
+            }, AbstractList::getTitle, null);
             model.setDisplayIconMapper((item) -> UserInterface.getImageForList(item, false));
 
 
