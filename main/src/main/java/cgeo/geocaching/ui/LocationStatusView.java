@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AndroidGeocoder;
+import cgeo.geocaching.address.OsmNominatumGeocoder;
 import cgeo.geocaching.databinding.LocationStatusViewBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -122,7 +123,10 @@ public class LocationStatusView extends LinearLayout {
             }
             if (currentAddressCoords == null || currentCoords.distanceTo(currentAddressCoords) > 0.5) {
                 currentAddressCoords = currentCoords;
-                final Single<String> address = (new AndroidGeocoder(context).getFromLocation(currentCoords)).map(LocationStatusView::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
+                final Single<String> address = (new AndroidGeocoder(context).getFromLocation(currentCoords))
+                        .onErrorResumeNext(throwable -> OsmNominatumGeocoder.getFromLocation(currentCoords))
+                        .map(LocationStatusView::formatAddress)
+                        .onErrorResumeNext(throwable -> Single.just(currentCoords.toString()));
                 AndroidRxUtils.bindActivity(activity, address)
                         .subscribeOn(AndroidRxUtils.networkScheduler)
                         .subscribe(address12 -> binding.locationText.setText(address12 + averageHeight));
