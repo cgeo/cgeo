@@ -1292,11 +1292,12 @@ public final class GCParser {
              * 2. Date
              * 3. Author-GUID
              * 4. Author
-             * 5. Cache-GUID
-             * 6. <ignored> (strike-through property for ancient caches)
-             * 7. Cache-name
-             * 8. Log-ID
-             * 9. Log text
+             * 5. Decider whether next field is a GUID or cache-code (if it starts with "guid" it is a guid)
+             * 6. Cache-GUID or cache-code
+             * 7. <ignored> (strike-through property for ancient caches)
+             * 8. Cache-name
+             * 9. Log-ID
+             * 10. Log text
              */
             while (matcherLogs.find()) {
                 long date = 0;
@@ -1310,12 +1311,18 @@ public final class GCParser {
                         .setAuthorGuid(matcherLogs.group(3))
                         .setDate(date)
                         .setLogType(LogType.getByIconName(matcherLogs.group(1)))
-                        .setServiceLogId(matcherLogs.group(8))
-                        .setLog(matcherLogs.group(9).trim());
+                        .setServiceLogId(matcherLogs.group(9))
+                        .setLog(matcherLogs.group(10).trim());
 
-                if (matcherLogs.group(5) != null && matcherLogs.group(7) != null) {
-                    logDoneBuilder.setCacheGuid(matcherLogs.group(5));
-                    logDoneBuilder.setCacheName(matcherLogs.group(7));
+                if (matcherLogs.group(6) != null && matcherLogs.group(8) != null) {
+                    final String guidOrCachecode = matcherLogs.group(6);
+                    final boolean isGuid = matcherLogs.group(5) != null && matcherLogs.group(5).startsWith("guid");
+                    if (isGuid) {
+                        logDoneBuilder.setCacheGuid(guidOrCachecode);
+                    } else {
+                        logDoneBuilder.setCacheGeocode(guidOrCachecode);
+                    }
+                    logDoneBuilder.setCacheName(matcherLogs.group(8));
                 }
 
                 // Apply the pattern for images in a trackable log entry against each full log (group(0))

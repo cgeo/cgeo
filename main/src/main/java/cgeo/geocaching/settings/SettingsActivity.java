@@ -520,4 +520,18 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         return s;
     }
 
+    /** for theme settings, don't show second column in landscape mode */
+    public static void hideRightColumnInLandscapeMode(final AppCompatActivity activity) {
+        final Fragment rightColumn = activity.getSupportFragmentManager().findFragmentById(R.id.settings_fragment_content_root);
+        if (rightColumn != null) {
+            activity.getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(rightColumn)
+                    .commit();
+            activity.findViewById(R.id.settings_fragment_divider).setVisibility(View.GONE);
+            activity.findViewById(R.id.settings_fragment_content_root).setVisibility(View.GONE);
+        }
+
+    }
+
 }
