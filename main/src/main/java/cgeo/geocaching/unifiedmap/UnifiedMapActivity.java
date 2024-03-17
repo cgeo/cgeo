@@ -523,13 +523,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
         Log.d("add " + searchResult.getGeocodes());
-        for (String geocode : searchResult.getGeocodes()) {
-            final Geocache temp = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            if (temp != null && temp.getCoords() != null) {
-                viewModel.caches.getValue().remove(temp);
-                viewModel.caches.getValue().add(temp);
-                viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
-            }
+        final Set<Geocache> geocaches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
+        CommonUtils.filterCollection(geocaches, cache -> cache != null && cache.getCoords() != null);
+        if (!geocaches.isEmpty()) {
+            viewModel.caches.getValue().removeAll(geocaches);
+            viewModel.caches.getValue().addAll(geocaches);
+            viewModel.caches.postNotifyDataChanged(); // use post to make it background capable
         }
     }
 
