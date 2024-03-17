@@ -7,8 +7,6 @@ import cgeo.geocaching.utils.Log;
 import android.location.Address;
 import android.location.Geocoder;
 
-import androidx.test.filters.Suppress;
-
 import java.util.Locale;
 
 import io.reactivex.rxjava3.core.Single;
@@ -43,14 +41,13 @@ public class GeocoderTest {
         }
     }
 
-    @Suppress // Do not run test on MapQuest, quotas are very low and exhaust easily.
     @Test
-    public void testMapQuestGeocoder() {
+    public void testOsmNominatumGeocoder() {
         final Locale locale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
-            assertGeocoder(MapQuestGeocoder.getFromLocationName(TEST_ADDRESS).firstOrError(), "MapQuest", true);
-            assertGeocoder(MapQuestGeocoder.getFromLocation(TEST_COORDS), "MapQuest reverse", true);
+            assertGeocoder(OsmNominatumGeocoder.getFromLocationName(TEST_ADDRESS).firstOrError(), "OSM Nominatum", true);
+            assertGeocoder(OsmNominatumGeocoder.getFromLocation(TEST_COORDS), "OSM Nominatum reverse", true);
         } finally {
             Locale.setDefault(locale);
         }
