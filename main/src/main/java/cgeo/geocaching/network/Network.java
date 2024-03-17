@@ -39,6 +39,7 @@ import javax.net.ssl.X509TrustManager;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.BaseJsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Completable;
@@ -68,7 +69,7 @@ public final class Network {
     /**
      * User agent id
      */
-    private static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1 cgeo/" + BuildConfig.VERSION_NAME;
+    public static final String USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1 cgeo/" + BuildConfig.VERSION_NAME;
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
 
@@ -131,6 +132,14 @@ public final class Network {
     public static final Function<String, Single<? extends ObjectNode>> stringToJson = s -> {
         try {
             return Single.just((ObjectNode) JsonUtils.reader.readTree(s));
+        } catch (final Throwable t) {
+            return Single.error(t);
+        }
+    };
+
+    public static final Function<String, Single<? extends ArrayNode>> stringToJsonArray = s -> {
+        try {
+            return Single.just((ArrayNode) JsonUtils.reader.readTree(s));
         } catch (final Throwable t) {
             return Single.error(t);
         }
@@ -541,6 +550,20 @@ public final class Network {
         return request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null)
                 .flatMap(getResponseData)
                 .flatMap(stringToJson);
+    }
+
+    /**
+     * Get the result of a GET HTTP request returning a JSON body.
+     *
+     * @param uri    the base URI of the GET HTTP request
+     * @param params the query parameters, or {@code null} if there are none
+     * @return a Single with a JSON object if the request was successful and the body could be decoded, an error otherwise
+     */
+    @NonNull
+    public static Single<ArrayNode> requestJSONArray(final String uri, @Nullable final Parameters params) {
+        return request("GET", uri, params, new Parameters("Accept", "application/json, text/javascript, */*; q=0.01"), null)
+                .flatMap(getResponseData)
+                .flatMap(stringToJsonArray);
     }
 
     /**
