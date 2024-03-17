@@ -517,6 +517,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Matriz Dificuldade / Terreno</string>
     <string name="cache_filter_rating">Avaliação</string>
     <string name="cache_filter_status">Estado</string>
+    <string name="cache_filter_individualroute">Rota individual</string>
     <string name="cache_filter_attributes">Atributos da cache</string>
     <string name="cache_filter_favorites">Favoritos</string>
     <string name="cache_filter_distance">Distância</string>
@@ -606,6 +607,7 @@
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
+    <string name="cache_filter_boolean_individualroute_contained">Incluídas na rota</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluir caches sem D/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Preencher com gc.com</string>
     <string name="cache_filter_nested_filter_modify">modificar</string>
@@ -802,6 +804,8 @@
     <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
     <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
+    <string name="settings_lc_found_state_title">Estado \"Encontrada\" manual</string>
+    <string name="settings_lc_found_state_handling">Se marcado, não obter automaticamente o verdadeiro estado \"encontrado\" para caches Adventure Lab, em vez disso, fornecer controles para o utilizador definir manualmente o estado de \"encontrado\"</string>
     <string name="lc_default_description">Esta é uma geocache Adventure Lab (do serviço \'geocaching.com\'). As aventuras apenas podem ser jogadas dentro da aplicação Adventure Lab da Groundspeak. Toque no ícone Adventure Lab na página \"Detalhes\" para abrir/instalar a aplicação Adventure Lab para prosseguir com a aventura na mesma.\nSe não deseja ver as geocaches Adventure Lab no mapa e na pesquisa, pode desactiva-las em \"Definições\" - \"Serviços\" - \"Adventure Lab (geocaching.com)\"</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
     <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
@@ -875,6 +879,8 @@
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Pontos adicionais visitados semi-transparentes</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Marcar pontos adicionais visitados com fundo semi-transparente</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">Distância máxima até à qual o encaminhamento offline calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
@@ -883,6 +889,7 @@
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
+    <string name="init_brouterProfileUserNumber">Perfil definido pelo utilizador %d</string>
     <string name="init_removeFromRouteOnLog">Remover da rota ao registar</string>
     <string name="init_summary_removeFromRouteOnLog">Ao enviar ou armazenar um registo, remover a cache da rota actual.</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
@@ -896,6 +903,8 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Mostrar um marcador para as classificações Dificuldade (esquerda) e Terreno (direita) nos marcadores das caches no canto superior direito (marcador \"armazenado\" é movido para o meio).</string>
     <string name="init_showElevation">Mostrar Relevo</string>
     <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
+    <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
+    <string name="menu_elevation_info">Elevação (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
@@ -996,6 +1005,7 @@
     <string name="init_backup_unavailable">não disponível</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
+    <string name="backup_tracks_error">Erro ao criar cópia de segurança de percursos.</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
     <string name="init_backup_settings_logins">Cópia de segurança dos dados de contas</string>
@@ -1137,7 +1147,9 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="category_unifiedMap">Mapa Unificado (beta)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
+    <string name="init_summary_useUnifiedMap">Usar novo mapa unificado em vez dos mapas integrados do Google Maps / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1277,6 +1289,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
+    <string name="cache_offline_stored_ago">Armazenada(s) %s</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
     <string name="cache_offline_time_mins_few">há alguns minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1518,6 +1531,7 @@
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="goto_targets_deprecation_title">Aviso de descontinuação</string>
+    <string name="goto_targets_deprecation_notice">A funcionalidade \'Ir para\' está obsoleta e será removida numa versão futura. Em vez disso, por favor, utilize as \'caches definidas pelo utilizador\' para criar marcadores.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
     <string name="init_show_routing_menu">Mostrar menu de encaminhamento</string>
@@ -1600,6 +1614,15 @@
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <!-- Projection -->
+    <string name="projection_type_none">Sem projecção</string>
+    <string name="projection_type_bearing">Azimute</string>
+    <string name="projection_type_bearing_info">Azimute %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Azimute em º (graus)</string>
+    <string name="projection_type_bearing_hint_distance">Distância</string>
+    <string name="projection_type_offset">Desvio</string>
+    <string name="projection_type_offset_info">Desvio lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Desvio da Latitude em Micro-Minutos</string>
+    <string name="projection_type_offset_hint_longitude">Desvio da Longitude em Micro-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
@@ -1645,6 +1668,7 @@
     <string name="formula_function_if">Se</string>
     <string name="formula_function_length">Comprimento da Sequência de Caracteres</string>
     <string name="formula_function_substring">Parte de Sequência de Caracteres</string>
+    <string name="formula_function_chars">Seleccionar caracteres</string>
     <string name="formula_function_rot13">Rodar Caracteres em 13</string>
     <string name="formula_function_rot">Rodar Caracteres</string>
     <string name="formula_function_checksum">Soma de verificação</string>
@@ -1741,6 +1765,7 @@
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
     <string name="search_finder_button">Pesquisa por quem encontrou</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
@@ -2329,6 +2354,7 @@
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
+    <string name="routes_tracks_change_name">Alterar o nome</string>
     <string name="center">Centrar</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
@@ -2346,6 +2372,8 @@
     <string name="switch_on">Ligado</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
+    <string name="switch_auto_lowpower">Automática (pouca bateria)</string>
+    <string name="switch_auto_precise">Automática (precisa)</string>
     <string name="switch_default">(padrão)</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -2393,6 +2421,8 @@
     <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_filename">A transferir %s</string>
+    <string name="downloadmap_keep_temporary_files">Manter ficheiros temporários</string>
+    <string name="downloadmap_keep_temporary_files_summary">Algumas fontes de transferência suportam ficheiros adicionais que não são utilizados pelo c:geo. Mantenha esses ficheiros extra na pasta de transferências do sistema em vez de os eliminar</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
     <string name="download_none_selected">Não há ficheiros selecionados para transferir</string>
@@ -2439,6 +2469,7 @@
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
+    <string name="maptheme_vtm_scaling_summary">Opções de dimensionamento para mapas offline (requer reinício)</string>
     <string name="maptheme_scale_map_title">Factor de Escala do Mapa</string>
     <string name="maptheme_scale_map_summary">Redimensionar mapa; 100% = sem dimensionamento</string>
     <string name="maptheme_scale_text_title">Factor de Escala do Texto</string>
