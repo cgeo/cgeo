@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -74,8 +75,8 @@ public final class StoredList extends AbstractList {
         private final Resources res;
 
         private static final String GROUP_SEPARATOR = ":";
-        private static final String TOP_GROUP = "-";
-        private static final String BOTTOM_GROUP = "ZZZ";
+
+        private static final String SYSTEM_GROUP_PREFIX = "system-group-";
 
 
         public UserInterface(@NonNull final Activity activity) {
@@ -124,7 +125,7 @@ public final class StoredList extends AbstractList {
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
                     .setItems(lists)
                     .setSelectedItems(selectedListSet);
-            setListDisplay(model);
+            configureListDisplay(model, selectedListIds);
 
             SimpleDialog.of(activityRef.get()).setTitle(TextParam.id(titleId))
                 .setNegativeButton(null)
@@ -150,7 +151,7 @@ public final class StoredList extends AbstractList {
             model
                 .setItems(lists)
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-            setListDisplay(model);
+            configureListDisplay(model, null);
 
             SimpleDialog.of(activityRef.get()).setTitle(titleId).selectSingle(model, item -> {
                         if (item == PseudoList.NEW_LIST) {
@@ -163,10 +164,11 @@ public final class StoredList extends AbstractList {
             );
         }
 
-        private void setListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model) {
+        private void configureListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model, final Set<Integer> selectedListIds) {
 
             //prepare display: find out which groups will have >= 2 items
             final Map<String, Integer> occurences = CommonUtils.countOccurences(model.getItems(), UserInterface::getGroupFromList);
+
 
             //Display for normal items
             model.setDisplayMapper((item) -> {
@@ -186,16 +188,38 @@ public final class StoredList extends AbstractList {
 
 
             //GROUPING
-
-           //Group sorting: "Stored"/"Create new", Grouped and ungrouped lists (sorted alphabetically), "History"/"All".
-
             model.activateGrouping(UserInterface::getGroupFromList)
-            .setGroupComparator(CommonUtils.getListSortingComparator(
-                CommonUtils.getTextSortingComparator(null), Collections.singleton(TOP_GROUP), Collections.singleton(BOTTOM_GROUP))
-            ).setGroupDisplayMapper((t, elements) -> TextParam.text(t + " (" + elements.size() + ")"))
-            .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
-            .setHasGroupHeaderMapper((g, elements) -> !TOP_GROUP.equals(g) && !BOTTOM_GROUP.equals(g) && elements.size() >= 2)
-            .setReducedGroupSaver("storedlist", g -> g, g -> g);
+                .setGroupComparator(CommonUtils.getListSortingComparator(null, true, getSortedGroups(model.getItems(), selectedListIds)))
+                .setGroupDisplayMapper((t, elements) -> TextParam.text("**" + t.trim() + "** *(" + elements.size() + ")*").setMarkdown(true))
+                .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
+                .setHasGroupHeaderMapper((g, elements) -> elements.size() >= 2)
+                .setReducedGroupSaver("storedlist", g -> g, g -> g);
+        }
+
+        private static List<String> getSortedGroups(final List<AbstractList> items, final Set<Integer> selectedIds) {
+            //Group sorting:
+            // 1. "Create new", "Stored",
+            // 2. Grouped and ungrouped lists with selected items in them (sorted alphabetically)
+            // 2. Grouped and ungrouped lists w/o selected items (sorted alphabetically)
+            // 4. "All", "History"
+
+            //find groups with selected items in them
+            final Set<String> groupsWithSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID && selectedIds != null && selectedIds.contains(item.id))
+                .map(UserInterface::getGroupFromList).collect(Collectors.toSet());
+            final Set<String> groupsWoSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID)
+                .map(UserInterface::getGroupFromList).collect(Collectors.toSet());
+            groupsWoSelection.removeAll(groupsWithSelection);
+
+            final List<String> sortedGroups = new ArrayList<>();
+            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.NEW_LIST.id);
+            sortedGroups.add(SYSTEM_GROUP_PREFIX + StoredList.STANDARD_LIST_ID);
+            sortedGroups.addAll(TextUtils.sortListLocaleAware(new ArrayList<>(groupsWithSelection)));
+            sortedGroups.addAll(TextUtils.sortListLocaleAware(new ArrayList<>(groupsWoSelection)));
+            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.ALL_LIST.id);
+            sortedGroups.add(SYSTEM_GROUP_PREFIX + PseudoList.HISTORY_LIST.id);
+
+            return sortedGroups;
+
         }
 
         public static ImageParam getImageForList(final AbstractList item, final boolean isGroup) {
@@ -219,11 +243,10 @@ public final class StoredList extends AbstractList {
         }
 
         private static String getGroupFromList(final AbstractList item) {
-            if (item.id == StoredList.STANDARD_LIST_ID || item.id == PseudoList.NEW_LIST.id) {
-                return TOP_GROUP; //sorted FIRST before all others
-            }
-            if (item.id == PseudoList.HISTORY_LIST.id || item.id == PseudoList.ALL_LIST.id) {
-                return BOTTOM_GROUP; // sorted LAST after all others
+            //special groups
+            if (item.id == StoredList.STANDARD_LIST_ID || item.id == PseudoList.NEW_LIST.id ||
+                item.id == PseudoList.HISTORY_LIST.id || item.id == PseudoList.ALL_LIST.id) {
+                return SYSTEM_GROUP_PREFIX + item.id;
             }
             final String title = item == null || item.getTitle() == null ? "" : item.getTitle();
             final int idx = title.indexOf(GROUP_SEPARATOR);

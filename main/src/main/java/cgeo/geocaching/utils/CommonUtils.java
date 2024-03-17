@@ -125,14 +125,14 @@ public class CommonUtils {
             }
         }
         return (g1, g2) -> {
-            final int outsideValue = sortTop ? -1 : listMap.size() + 1;
+            final int outsideValue = sortTop ? listMap.size() + 1 : -1;
             final int g1Idx = listMap.containsKey(g1) ? listMap.get(g1) : outsideValue;
             final int g2Idx = listMap.containsKey(g2) ? listMap.get(g2) : outsideValue;
 
             if (g1Idx == outsideValue && g2Idx == outsideValue) {
                 return source == null ? 0 : source.compare(g1, g2);
             }
-            return g2Idx - g1Idx;
+            return g1Idx - g2Idx;
         };
     }
 

@@ -80,6 +80,14 @@ public class CommonUtilsTest {
     }
 
     @Test
+    public void testListSortingComparator() {
+        final List<String> sorterList = Arrays.asList("apple", "bee", "peach");
+        final List<String> toSort = new ArrayList<>(Arrays.asList("milk", "peach", "corn", "apple", "bean", "bee"));
+        Collections.sort(toSort, CommonUtils.getListSortingComparator(null, true, sorterList));
+        assertThat(toSort).as("Actual: " + toSort).containsExactly("apple", "bee", "peach",  "milk", "corn",  "bean");
+    }
+
+    @Test
     @SuppressWarnings("unchecked")
     public void getReferencedClasses() {
         //A Lambda with back reference should contain the class
