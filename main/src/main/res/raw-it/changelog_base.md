@@ -18,6 +18,7 @@
 - Nuovo: Nuova formula CHARS per selezionare più caratteri singoli
 - Corretto: risultato errato per la funzione TRUNC con numeri negativi
 - Corretto: le formule che iniziano con una variabile simile a un marcatore emisfero non possono essere calcolate
+- Corretto: i link e-mail negli elenchi cache non si aprivano quando era abiliata la webview personalizzata
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
@@ -30,13 +31,13 @@
 - Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
 - Corretto: Simbolo stella mancante per i filtri memorizzati modificati
 - Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
-- Fix: Internal crash in routing calculation
-- Fix: Downloading bookmark lists returns empty list (website change)
+- Corretto: crash interno nel calcolo del routing
+- Corretto: Scaricando le liste dei segnalibri restituisce la lista vuota (modifica del sito)
 
-### Changes since current beta version
-- New: Show images linked in "personal note" in Images tab
-- Change: Simplify long-tap action in cache details and trackable details
-- New: Switch to set found state of Lab Adventures either manually or automatically
-- New: List selection dialog: Auto-group cache lists having a ":" in their name
-- New: Smoother scaling of log images
-- New: "Edit Personal Note" from cache info sheet
+### Modifiche dalla versione beta corrente
+- Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
+- Cambio: semplificato il tocco lungo nei dettagli dei cache e dei tracciabili
+- Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
+- Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
+- Novità: ridimensionamento delle immagini del log
+- Nuovo: "Modifica nota personale" dalla pagina info del cache
