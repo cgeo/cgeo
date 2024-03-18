@@ -85,7 +85,7 @@ public final class WherigoUtils {
         final SimpleItemListModel<T> model = new SimpleItemListModel<>();
         model
             .setItems(actions)
-            .setDisplayMapper(displayMapper, (ctx, parent) -> ViewUtils.createButton(ctx, parent, TextParam.text(""), true))
+            .setDisplayMapper(displayMapper, null, (ctx, parent) -> ViewUtils.createButton(ctx, parent, TextParam.text(""), true))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
             .setItemPadding(10, 0)
             .addSingleSelectListener(clickHandler);

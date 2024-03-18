@@ -236,12 +236,12 @@ public class SimpleItemListModel<T> {
 
     /** Sets a display providing the text visualization for an item */
     public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper) {
-        return setDisplayMapper(displayMapper, null);
+        return setDisplayMapper(displayMapper, null, null);
     }
 
-    public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+    public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper, @Nullable final Function<T, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         if (displayMapper != null) {
-            setDisplayViewMapper(constructDisplayViewMapper(displayMapper, textViewCreator), constructFilterTextExtractor(displayMapper));
+            setDisplayViewMapper(constructDisplayViewMapper(displayMapper, textViewCreator), textFilterMapper != null ? textFilterMapper : constructFilterTextExtractor(displayMapper));
         }
         return this;
     }
