@@ -306,6 +306,7 @@
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
     <string name="info_log_saved">c:geo ha salvato il log.</string>
     <string name="info_log_post_failed">Caricamento log fallito.</string>
+    <string name="info_log_delete_failed">Eliminazione del log fallita.</string>
     <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Riprova</string>
     <string name="info_log_post_save">Salva offline</string>
@@ -1429,6 +1430,7 @@
     <string name="cache_log_menu_edit">Modifica Log</string>
     <string name="cache_log_menu_delete">Cancella Log</string>
     <string name="cache_log_menu_popup_title">Registro di %s</string>
+    <string name="cache_log_delete_reason_default">Il log è stato eliminato usando c:geo</string>
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
@@ -1524,6 +1526,8 @@
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Obiettivi \"Vai a\"</string>
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
+    <string name="goto_targets_deprecation_title">Avviso di Deprecazione</string>
+    <string name="goto_targets_deprecation_notice">La funzionalità \'Vai a\' è deprecata e verrà rimossa in una versione futura. Utilizza invece le cache definite dall\'utente per i nuovi obiettivi.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
     <string name="init_summary_longtap_map">Attiva tocco prolungato sudi un\'icona nella mappa (crea un percorso personalizzato) o sullo spazio libero sulla mappa (crea un cache/waypoint definito dall\'utente)</string>
     <string name="init_show_routing_menu">Mostra menu di navigazione</string>
@@ -2461,6 +2465,7 @@
     <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
     <string name="maptheme_elevate_categoryinfo">Rilevante per: [A] Aree, [P] POI, [R] Percorsi, [W] Vie</string>
+    <string name="maptheme_vtm_scaling_summary">Opzioni di scala per le mappe offline (richiede riavvio)</string>
     <string name="maptheme_scale_map_title">Fattore di scala della mappa</string>
     <string name="maptheme_scale_map_summary">Scala della mappa; 100% = nessuna scala</string>
     <string name="maptheme_scale_text_title">Fattore di Scala del testo</string>
