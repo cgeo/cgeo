@@ -18,6 +18,7 @@
 - Neu: Neue Formel CHARS (Kurzform: CH) um mehrere Zeichen auszuwählen
 - Korrektur: Falsches Ergebnis für TRUNC Funktion mit negativen Zahlen
 - Korrektur: Formeln können nicht berechnet werden, wenn sie mit einer Variablen beginnen, die einem Hemispährenkürzel gleicht
+- Fix: Email links in cache listings do not open if custom webview is enabled
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -38,5 +39,5 @@
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
 - Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
-- New: Smoother scaling of log images
-- New: "Edit Personal Note" from cache info sheet
+- Neu: Feiner geglättete Skalierung von Logbildern
+- Neu: "Persönliche Notiz bearbeiten" von der Cache-Informationsansicht auf der Karte aus
