@@ -18,6 +18,7 @@
 - Nuovo: Nuova formula CHARS per selezionare più caratteri singoli
 - Corretto: risultato errato per la funzione TRUNC con numeri negativi
 - Corretto: le formule che iniziano con una variabile simile a un marcatore emisfero non possono essere calcolate
+- Corretto: i link e-mail negli elenchi cache non si aprivano quando era abiliata la webview personalizzata
 
 ### Generale
 - Toccando la notifica sul download apre "download in attesa"
@@ -30,5 +31,5 @@
 - Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
 - Corretto: Simbolo stella mancante per i filtri memorizzati modificati
 - Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
-- Fix: Internal crash in routing calculation
-- Fix: Downloading bookmark lists returns empty list (website change)
+- Corretto: crash interno nel calcolo del routing
+- Corretto: Scaricando le liste dei segnalibri restituisce la lista vuota (modifica del sito)
