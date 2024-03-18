@@ -18,6 +18,7 @@
 - New: New formula CHARS (short form: CH) to select multiple single chars
 - Fix: Wrong result for TRUNC function with negative numbers
 - Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
+- Fix: Email links in cache listings do not open if custom webview is enabled
 
 ### Všeobecné
 - New: Tapping on downloader notification opens "pending downloads" view
