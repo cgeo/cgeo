@@ -77,7 +77,7 @@ public final class StoredList extends AbstractList {
         private static final String GROUP_SEPARATOR = ":";
 
         private static final String SYSTEM_GROUP_PREFIX = "system-group-";
-
+        private static final String SELECTED_GROUP_PREFIX = "selected-group-";
 
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
@@ -167,13 +167,13 @@ public final class StoredList extends AbstractList {
         private void configureListDisplay(final SimpleDialog.ItemSelectModel<AbstractList> model, final Set<Integer> selectedListIds) {
 
             //prepare display: find out which groups will have >= 2 items
-            final Map<String, Integer> occurences = CommonUtils.countOccurences(model.getItems(), UserInterface::getGroupFromList);
+            final Map<String, Integer> occurences = CommonUtils.countOccurences(model.getItems(), item -> getGroupFromList(item, selectedListIds));
 
 
             //Display for normal items
             model.setDisplayMapper((item) -> {
                 String title = item.getTitle();
-                final String group = getGroupFromList(item);
+                final String group = getGroupFromList(item, selectedListIds);
                 if (item instanceof StoredList && occurences.containsKey(group) && occurences.get(group) >= 2) {
                     //cut off the group header
                     final int idx = title.indexOf(GROUP_SEPARATOR);
@@ -188,7 +188,7 @@ public final class StoredList extends AbstractList {
 
 
             //GROUPING
-            model.activateGrouping(UserInterface::getGroupFromList)
+            model.activateGrouping(item -> getGroupFromList(item, selectedListIds))
                 .setGroupComparator(CommonUtils.getListSortingComparator(null, true, getSortedGroups(model.getItems(), selectedListIds)))
                 .setGroupDisplayMapper((t, elements) -> TextParam.text("**" + t.trim() + "** *(" + elements.size() + ")*").setMarkdown(true))
                 .setGroupDisplayIconMapper((t, elements) -> elements.isEmpty() ? null : getImageForList(elements.get(0), true))
@@ -205,9 +205,9 @@ public final class StoredList extends AbstractList {
 
             //find groups with selected items in them
             final Set<String> groupsWithSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID && selectedIds != null && selectedIds.contains(item.id))
-                .map(UserInterface::getGroupFromList).collect(Collectors.toSet());
+                .map(item -> getGroupFromList(item, selectedIds)).collect(Collectors.toSet());
             final Set<String> groupsWoSelection = items.stream().filter(item -> item instanceof StoredList && item.id != StoredList.STANDARD_LIST_ID)
-                .map(UserInterface::getGroupFromList).collect(Collectors.toSet());
+                .map(item -> getGroupFromList(item, selectedIds)).collect(Collectors.toSet());
             groupsWoSelection.removeAll(groupsWithSelection);
 
             final List<String> sortedGroups = new ArrayList<>();
@@ -242,15 +242,19 @@ public final class StoredList extends AbstractList {
             return ImageParam.id(R.drawable.ic_menu_list);
         }
 
-        private static String getGroupFromList(final AbstractList item) {
+        private static String getGroupFromList(final AbstractList item, final Set<Integer> selectedIds) {
             //special groups
             if (item.id == StoredList.STANDARD_LIST_ID || item.id == PseudoList.NEW_LIST.id ||
                 item.id == PseudoList.HISTORY_LIST.id || item.id == PseudoList.ALL_LIST.id) {
                 return SYSTEM_GROUP_PREFIX + item.id;
             }
             final String title = item == null || item.getTitle() == null ? "" : item.getTitle();
+            //selected lists are always their own group -> mark them as such
+            if (selectedIds != null && selectedIds.contains(item.id)) {
+                return SELECTED_GROUP_PREFIX + title;
+            }
             final int idx = title.indexOf(GROUP_SEPARATOR);
-            return idx > 0 ? title.substring(0, idx) : title;
+            return idx > 0 ? title.substring(0, idx).trim() : title.trim();
         }
 
         public static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final int exceptListId) {
