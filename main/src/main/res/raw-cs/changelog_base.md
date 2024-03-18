@@ -18,6 +18,7 @@
 - Novinka: Nový vzorec CHARS (zkrácený tvar: CH) pro výběr více jednotlivých znaků
 - Oprava: Chybný výsledek funkce TRUNC se zápornými čísly
 - Oprava: Vzorce začínající proměnnou podobnou značce polokoule nelze vypočítat
+- Oprava: E-mailové odkazy v seznamech kešek se neotevřou, pokud je povoleno vlastní webové zobrazení
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
