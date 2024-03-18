@@ -2469,6 +2469,7 @@
     <string name="mapserver_hylly_themes_info">Detailliertes Kartendesign, passend für \"Hylly\"-Karten</string>
     <string name="brouter_info">Offline Routing-Dienst</string>
     <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
+    <string name="maptheme_vtm_scaling_summary">Skalierungsoptionen für Offline-Karten (Neustart erforderlich)</string>
     <string name="maptheme_scale_map_title">Kartenskalierungsfaktor</string>
     <string name="maptheme_scale_map_summary">Skaliert die Karte; 100% = keine Skalierung</string>
     <string name="maptheme_scale_text_title">Textskalierungsfaktor</string>
