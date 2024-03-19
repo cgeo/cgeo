@@ -512,6 +512,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">난이도 / 지형 등급</string>
     <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
+    <string name="cache_filter_individualroute">개별 경로</string>
     <string name="cache_filter_attributes">캐시 속성</string>
     <string name="cache_filter_favorites">호감점수</string>
     <string name="cache_filter_distance">거리</string>
@@ -600,6 +601,7 @@
     <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
+    <string name="cache_filter_boolean_individualroute_contained">경로에 포함됨</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">gc.com으로 채우기</string>
     <string name="cache_filter_nested_filter_modify">편집</string>
@@ -796,6 +798,8 @@
     <string name="settings_ec_description">캐시 검색과 찾은 캐시 접근을 위하여 extremgeocaching.com에 c:geo를 인증하기</string>
     <string name="settings_su_description">캐시 검색을 위하여 geocaching.su에 c:geo를 인증하기</string>
     <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)\n\n이 설정을 변경하려면 다시 시작해야합니다.</string>
+    <string name="settings_lc_found_state_title">수동 찾음 상태</string>
+    <string name="settings_lc_found_state_handling">이 옵션을 선택하면 어드벤처 랩 캐시의 실제 검색 상태를 자동으로 가져오지 않습니다. 대신 사용자가 검색 상태를 수동으로 설정할 수 있는 컨트롤을 제공합니다</string>
     <string name="lc_default_description">이것은 geocaching.com 어드벤처 랩 캐시입니다. 어드벤처는 그라운드스픽 어드벤처 랩 앱에서만 플레이 할 수 있습니다. \"상세 정보\"페이지에서 어드벤처 랩 아이콘을 눌러 이 어드벤처를 위한 어드벤처 랩 앱을 열거나 설치합니다.\n지도 및 검색에서 어드벤처 랩 캐시를 보고 싶지 않은 경우 \"설정\"메뉴-서비스-Geocaching.com 어드벤처 랩을 사용하여 비활성화 할 수 있습니다.</string>
     <string name="init_summary_oc_de">Opencaching.de 에서 캐시 불러오기</string>
     <string name="init_oc_de_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.de에 c:geo를 인증하기</string>
@@ -1512,6 +1516,8 @@
     <string name="internal_cache_default_owner">당신</string>
     <string name="internal_goto_targets_title">\'이동으로\' 목표</string>
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
+    <string name="goto_targets_deprecation_title">지원 중단 경고</string>
+    <string name="goto_targets_deprecation_notice">\'위치 이동\' 기능은 사용되지 않으며 이후 버전에서는 제거됩니다. 대신 새로운 대상에 대해 사용자 정의 캐시를 사용하십시오.</string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
     <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시/지점 작성) 길게 탭하는 게 활동시킵니다.</string>
     <string name="init_show_routing_menu">경로 메뉴 보기</string>

@@ -18,6 +18,7 @@
 - Nieuw: Nieuwe formule CHARS (korte notatie: CH) om meerdere tekens te selecteren
 - Oplossing: Verkeerd resultaat voor TRUNC functie met negatieve getallen
 - Oplossing: Formules beginnen met een variabele die vergelijkbaar is met een halfrond marker kunnen niet worden berekend
+- Oplossing: E-maillinks in cachelijsten worden niet geopend als aangepaste webweergave is ingeschakeld
 
 ### Algemeen
 - Nieuw: tikken op downloader melding opent "openstaande downloads" weergave
@@ -31,8 +32,12 @@
 - Fix: Ontbrekende ster symbool voor gewijzigde opgeslagen filters
 - Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
 - Oplossing: Interne crash bij routering berekening
+- Oplossing: Bladwijzerlijsten downloaden geeft lege lijst weer (wijziging website)
 
 ### Veranderingen sinds huidige bètaversie
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
+- Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
+- Nieuw: Soepeler schalen van log afbeeldingen
+- Nieuw: "Persoonlijke Notitie bewerken" van het cache informatieblad

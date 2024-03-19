@@ -816,6 +816,8 @@
     <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
     <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
+    <string name="settings_lc_found_state_title">Ručně zadaný stav nálezu</string>
+    <string name="settings_lc_found_state_handling">Pokud je zaškrtnuto, nezjišťuje automaticky skutečný stav nálezu Adventure Lab kešek, místo toho poskytuje uživateli ovládací prvky pro ruční nastavení stavu nálezu</string>
     <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Dobrodružství lze hrát pouze s aplikací Adventure Lab od Groundspeaku. Klepnutím na ikonu Adventure Lab na stránce „Podrobnosti“ odtud otevřete/nainstalujete aplikaci Adventure Lab pro hraní tohoto dobrodružství.\nPokud nechcete na své mapě vidět kešky typu Adventure Lab, můžete je deaktivovat pomocí nabídky „nastavení“ - Služby - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Načíst kešky z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby opencaching.de.</string>
@@ -2527,6 +2529,7 @@
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
+    <string name="maptheme_vtm_scaling_summary">Možnosti měřítka pro offline mapy (vyžaduje restart)</string>
     <string name="maptheme_scale_map_title">Měřítko mapy</string>
     <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
     <string name="maptheme_scale_text_title">Měřítko textu</string>

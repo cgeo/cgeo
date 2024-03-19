@@ -18,6 +18,7 @@
 - Novinka: Nový vzorec CHARS (zkrácený tvar: CH) pro výběr více jednotlivých znaků
 - Oprava: Chybný výsledek funkce TRUNC se zápornými čísly
 - Oprava: Vzorce začínající proměnnou podobnou značce polokoule nelze vypočítat
+- Oprava: E-mailové odkazy v seznamech kešek se neotevřou, pokud je povoleno vlastní webové zobrazení
 
 ### Obecné
 - Novinka: Klepnutím na oznámení stahovače se otevře zobrazení "čekající na stažení"
@@ -31,8 +32,12 @@
 - Oprava: Chybějící symbol hvězdičky pro změněné uložené filtry
 - Oprava: V poli pro vyhledávání klíčových slov se po provedení vyhledávání zobrazí "GC"
 - Oprava: Interní pád při výpočtu směrování
+- Oprava: Stahování seznamů záložek vrací prázdný seznam (změna webové stránky)
 
 ### Změny od aktuální beta verze
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
+- Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
+- Novinka: Lepší vyhlazování obrázků v logu
+- Novinka: "Úprava osobní poznámky" z informačního listu kešky

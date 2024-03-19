@@ -18,6 +18,7 @@
 - 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS (짧은 형태: CH)
 - 수정: 숫자가 음수인 TRUNC 함수에 대한 잘못된 결과
 - 수정: 반구 마커와 유사한 변수로 시작하는 공식을 계산할 수 없습니다.
+- Fix: Email links in cache listings do not open if custom webview is enabled
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
@@ -30,9 +31,13 @@
 - 수정: 추적아이템 발견된 캐시 정보 (웹사이트 변경)
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
-- Fix: Internal crash in routing calculation
+- 수정: 라우팅 계산 시 내부 충돌이 발생함
+- Fix: Downloading bookmark lists returns empty list (website change)
 
 ### 현재 베타버전 이후 변경사항
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
-- Change: Simplify long-tap action in cache details and trackable details
-- New: Switch to set found state of Lab Adventures either manually or automatically
+- 변경: 캐시 세부정보 및 추적아이템 세부정보에서 길게 누르는 작업을 단순화합니다.
+- 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
+- 신규: 목록 선택 대화 상자: 이름에 ":"가 포함된 캐시 목록 자동 그룹화
+- 신규: 로그 이미지의 원활한 스케일링
+- New: "Edit Personal Note" from cache info sheet

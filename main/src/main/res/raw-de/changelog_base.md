@@ -1,5 +1,5 @@
 ### Karte
-- New: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), siehe [Einstellungen => Kartenquellen => Vereinheitlichte Karte](cgeo-setting://featureSwitch_useUnifiedMap)
+- Neu: [Vereinheitlichte Karte](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), siehe [Einstellungen => Kartenquellen => Vereinheitlichte Karte](cgeo-setting://featureSwitch_useUnifiedMap)
 - Neu: Hervorhebung vorhandener Downloads im Download-Manager
 - Neu: Gefunden-Status bei Wegpunkt-Icons eines Caches anzeigen
 - Neu: Option bei langem Tippen auf Cache: Wegpunkte mit Linien verbinden
@@ -18,6 +18,7 @@
 - Neu: Neue Formel CHARS (Kurzform: CH) um mehrere Zeichen auszuwählen
 - Korrektur: Falsches Ergebnis für TRUNC Funktion mit negativen Zahlen
 - Korrektur: Formeln können nicht berechnet werden, wenn sie mit einer Variablen beginnen, die einem Hemispährenkürzel gleicht
+- Korrektur: E-Mail-Links in Cache-Listings werden nicht geöffnet, wenn Chrome WebView aktiviert ist
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -31,8 +32,12 @@
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
 - Korrektur: Interner Absturz bei Routenberechnung
+- Korrektur: Das Herunterladen von Lesezeichenlisten gibt eine leere Liste zurück (Webseitenänderung)
 
 ### Änderungen seit der aktuellen Beta-Version
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
+- Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
+- Neu: Feiner geglättete Skalierung von Logbildern
+- Neu: "Persönliche Notiz bearbeiten" von der Cache-Informationsansicht auf der Karte aus
