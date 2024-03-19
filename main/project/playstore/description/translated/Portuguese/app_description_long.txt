@@ -1,4 +1,4 @@
-O c:geo é uma aplicação de código aberto, repleta de funcionalidades e pronta a utilizar. É um utilitário não oficial para o serviço 'geocaching.com', mas também oferece suporte básico a outras plataformas de geocaching (como o Opencaching). Não precisa de um navegador web ou de exportar dados - basta instalar e começar a utilizar.
+O c:geo é uma aplicação de código aberto, repleta de funcionalidades e pronta a utilizar. É um utilitário não oficial para o serviço 'geocaching.com', como oferece suporte básico a outras plataformas de geocaching (como o Opencaching). Não precisa de um navegador web ou de exportar dados - basta instalar e começar a utilizar.
 
 Principais funcionalidades:
 - Ver caches num Mapa (em tempo real)

@@ -2524,6 +2524,7 @@
     <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, przygotowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
+    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>

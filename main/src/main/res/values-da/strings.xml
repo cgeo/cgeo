@@ -8,7 +8,7 @@
     <string name="about">Om c:geo</string>
     <string name="latitude">Breddegrad</string>
     <string name="longitude">Længdegrad</string>
-    <string name="latlongitude">Breddegrad\nlængdegrad</string>
+    <string name="latlongitude">Breddegrad\nLængdegrad</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo indstillinger</string>
     <!-- caches -->

@@ -147,6 +147,12 @@
     <string name="log_save">Guardar offline</string>
     <string name="log_saving">A enviar o registo…</string>
     <string name="log_posting_log">A publicar o registo…</string>
+    <string name="log_posting_problemreport">A publicar relatório de problemas…</string>
+    <string name="log_posting_deletelog">Eliminar registo…</string>
+    <string name="log_posting_image_create">Imagem %1$s/%2$s: a publicar dados…</string>
+    <string name="log_posting_image_edit">Imagem %1$s/%2$s: a alterar dados…</string>
+    <string name="log_posting_image_delete">A remover imagem %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Guardar novo estado do registo…</string>
     <string name="log_posting_vote">A submeter votação da cache…</string>
     <string name="log_posting_generic_trackable">A publicar %1$s %2$d/%3$d</string>
     <string name="log_clear">Limpar</string>
@@ -202,6 +208,7 @@
     <string name="log_image_info_scaled">redimensionado</string>
     <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
+    <string name="log_delete_confirm">Deseja mesmo eliminar o registo do tipo \'%1$s\' do autor \'%2$s\' com data de registo \'%3$s\'?</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- Contacts -->
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
@@ -299,6 +306,7 @@
     <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
     <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
     <string name="info_log_post_failed">A publicação do registo falhou.</string>
+    <string name="info_log_delete_failed">Falha ao apagar o registo.</string>
     <string name="info_log_post_failed_reason">Motivo: %s</string>
     <string name="info_log_post_retry">Tentar novamente</string>
     <string name="info_log_post_save">Guardar offline</string>
@@ -312,6 +320,8 @@
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
     <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
     <string name="confirm_discard_changes">Descartar as alterações não guardadas?</string>
+    <string name="confirm_unsent_changes_title">Alterações não enviadas</string>
+    <string name="confirm_unsent_changes">Descartar alterações não enviadas?</string>
     <string name="confirm_discard_wp_changes">Descartar as alterações aos pontos adicionais não guardadas?</string>
     <string name="warn_log_load_additional_data">O c:geo falhou ao carregar dados adicionais (de trackables/pontos de favoritos) para o registo.</string>
     <string name="more_information">Mais informação</string>
@@ -407,6 +417,7 @@
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
     <string name="caches_sort_eventdate">Data do evento</string>
+    <string name="caches_sort_lastfounddate">Data da última vez encontrada</string>
     <string name="caches_select_mode">Modo de selecção</string>
     <string name="caches_select_next20">Seleccionar as próximas 20 caches</string>
     <string name="caches_select_next100">Seleccionar as próximas 100 caches</string>
@@ -688,6 +699,7 @@
     <string name="about_changelog_full">Lista de todas as alterações</string>
     <string name="about_nutshellmanual">Manual on-line</string>
     <string name="about_contributors_carnerodetails">como pai do c:geo</string>
+    <string name="about_contributors_recent">Colaboradores (últimos 12 meses)</string>
     <string name="about_contributors_specialthanks">Agradecimentos especiais a</string>
     <string name="about_contributors_specialthanksdetails">- a todos os contribuidores de tradução em [Crowdin.net](https://crowdin.net/project/cgeo!\n- a todos os geradores de questões\n- e a todos os outros apoiantes.\n</string>
     <string name="about_contributors_other">Outros colaboradores</string>
@@ -863,6 +875,8 @@
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Pontos adicionais visitados semi-transparentes</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Marcar pontos adicionais visitados com fundo semi-transparente</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">Distância máxima até à qual o encaminhamento offline calculará uma rota.</string>
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
@@ -871,6 +885,7 @@
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
+    <string name="init_brouterProfileUserNumber">Perfil definido pelo utilizador %d</string>
     <string name="init_removeFromRouteOnLog">Remover da rota ao registar</string>
     <string name="init_summary_removeFromRouteOnLog">Ao enviar ou armazenar um registo, remover a cache da rota actual.</string>
     <string name="brouter_recalculating">A recalcular a rota em segundo plano…</string>
@@ -884,6 +899,8 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Mostrar um marcador para as classificações Dificuldade (esquerda) e Terreno (direita) nos marcadores das caches no canto superior direito (marcador \"armazenado\" é movido para o meio).</string>
     <string name="init_showElevation">Mostrar Relevo</string>
     <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
+    <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
+    <string name="menu_elevation_info">Elevação (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
@@ -984,6 +1001,7 @@
     <string name="init_backup_unavailable">não disponível</string>
     <string name="init_backup_last_no">Não existe nenhum ficheiro com uma cópia de segurança.</string>
     <string name="init_restore_version_error">Formato inesperado - não é possível restaurar a base de dados.\n\nVersão esperada é %1$d,\na cópia de segurança tem a versão %2$d</string>
+    <string name="backup_tracks_error">Erro ao criar cópia de segurança de percursos.</string>
     <string name="settings_title_backup">Cópia de Seg. / Restauro</string>
     <string name="settings_summary_backup">Realização de cópia de segurança e restauro de dados de geocaches/pontos adicionais e configurações do programa.</string>
     <string name="init_backup_settings_logins">Cópia de segurança dos dados de contas</string>
@@ -1125,7 +1143,9 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="category_unifiedMap">Mapa Unificado (beta)</string>
     <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
+    <string name="init_summary_useUnifiedMap">Usar novo mapa unificado em vez dos mapas integrados do Google Maps / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1265,6 +1285,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
+    <string name="cache_offline_stored_ago">Armazenada(s) %s</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
     <string name="cache_offline_time_mins_few">há alguns minutos</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1406,7 +1427,10 @@
     <string name="cache_menu_log_in_browser">Registar no browser</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
     <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
+    <string name="cache_log_menu_edit">Editar Registo</string>
+    <string name="cache_log_menu_delete">Eliminar Registo</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
+    <string name="cache_log_delete_reason_default">O registo foi eliminado, através do c:geo</string>
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
@@ -1491,6 +1515,8 @@
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
     <string name="context_map_show_coords">Mostrar coordenadas</string>
+    <string name="context_map_star_show">Mostrar linhas para pontos adicionais</string>
+    <string name="context_map_star_hide">Ocultar linhas para pontos adicionais</string>
     <string name="edit">Editar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
@@ -1500,6 +1526,8 @@
     <string name="internal_cache_default_owner">Você</string>
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
+    <string name="goto_targets_deprecation_title">Aviso de descontinuação</string>
+    <string name="goto_targets_deprecation_notice">A funcionalidade \'Ir para\' está obsoleta e será removida numa versão futura. Em vez disso, por favor, utilize as \'caches definidas pelo utilizador\' para criar marcadores.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
     <string name="init_show_routing_menu">Mostrar menu de encaminhamento</string>
@@ -1582,6 +1610,15 @@
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
     <!-- Projection -->
+    <string name="projection_type_none">Sem projecção</string>
+    <string name="projection_type_bearing">Azimute</string>
+    <string name="projection_type_bearing_info">Azimute %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Azimute em º (graus)</string>
+    <string name="projection_type_bearing_hint_distance">Distância</string>
+    <string name="projection_type_offset">Desvio</string>
+    <string name="projection_type_offset_info">Desvio lat %1$s mm, lon %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Desvio da Latitude em Micro-Minutos</string>
+    <string name="projection_type_offset_hint_longitude">Desvio da Longitude em Micro-Minutos</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
@@ -1627,6 +1664,7 @@
     <string name="formula_function_if">Se</string>
     <string name="formula_function_length">Comprimento da Sequência de Caracteres</string>
     <string name="formula_function_substring">Parte de Sequência de Caracteres</string>
+    <string name="formula_function_chars">Seleccionar caracteres</string>
     <string name="formula_function_rot13">Rodar Caracteres em 13</string>
     <string name="formula_function_rot">Rodar Caracteres</string>
     <string name="formula_function_checksum">Soma de verificação</string>
@@ -1654,6 +1692,8 @@
     <string name="imageview_metadata_comment">Comentário</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
+    <string name="map_live">Em tempo real</string>
+    <string name="map_offline">Desligado</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -1783,6 +1823,7 @@
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
     <string name="user_menu_send_email">Enviar e-mail</string>
+    <string name="user_menu_open_contact">Pesquisar nos contactos</string>
     <string name="user_unknown">Utilizador desconhecido</string>
     <!-- navigation -->
     <string name="navigation">Navegação</string>
@@ -2309,6 +2350,7 @@
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="routes_tracks_color">Seleccionar cor</string>
+    <string name="routes_tracks_change_name">Alterar o nome</string>
     <string name="center">Centrar</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
@@ -2326,6 +2368,8 @@
     <string name="switch_on">Ligado</string>
     <string name="switch_manual">Manual</string>
     <string name="switch_auto">Automático</string>
+    <string name="switch_auto_lowpower">Automática (pouca bateria)</string>
+    <string name="switch_auto_precise">Automática (precisa)</string>
     <string name="switch_default">(padrão)</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
@@ -2373,6 +2417,8 @@
     <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
     <string name="downloadmap_filename">A transferir %s</string>
+    <string name="downloadmap_keep_temporary_files">Manter ficheiros temporários</string>
+    <string name="downloadmap_keep_temporary_files_summary">Algumas fontes de transferência suportam ficheiros adicionais que não são utilizados pelo c:geo. Mantenha esses ficheiros extra na pasta de transferências do sistema em vez de os eliminar</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
     <string name="download_none_selected">Não há ficheiros selecionados para transferir</string>
@@ -2419,6 +2465,7 @@
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
+    <string name="maptheme_vtm_scaling_summary">Opções de dimensionamento para mapas offline (requer reinício)</string>
     <string name="maptheme_scale_map_title">Factor de Escala do Mapa</string>
     <string name="maptheme_scale_map_summary">Redimensionar mapa; 100% = sem dimensionamento</string>
     <string name="maptheme_scale_text_title">Factor de Escala do Texto</string>
