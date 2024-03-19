@@ -385,12 +385,12 @@ dependencies {
     // -- Mapsforge / VTM --
 
     // Mapsforge VTM implementation (official version)
-    //String mapsforgeVTMSource = 'org.mapsforge'
-    //String mapsforgeVTMVersion = '0.20.0'
+    String mapsforgeVTMSource = 'org.mapsforge'
+    String mapsforgeVTMVersion = '0.21.0'
 
     // Mapsforge VTM Snapshot from official master branch (via https://jitpack.io/#mapsforge/vtm)
-    String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
-    String mapsforgeVTMVersion = 'b3ff48fcc6' // LineBucket: transparent lines (9d68bdb) + dropDistance (31646b3) + line transparent style option (b3ff48fcc6)
+    // String mapsforgeVTMSource = 'com.github.mapsforge.vtm'
+    // String mapsforgeVTMVersion = 'b3ff48fcc6' // LineBucket: transparent lines (9d68bdb) + dropDistance (31646b3) + line transparent style option (b3ff48fcc6)
 
     // Mapsforge VTM Snapshots (created by project itself)
     // See https://github.com/mapsforge/vtm/blob/master/docs/Integration.md#snapshots
