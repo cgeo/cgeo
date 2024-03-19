@@ -18,7 +18,7 @@
 - Neu: Neue Formel CHARS (Kurzform: CH) um mehrere Zeichen auszuwählen
 - Korrektur: Falsches Ergebnis für TRUNC Funktion mit negativen Zahlen
 - Korrektur: Formeln können nicht berechnet werden, wenn sie mit einer Variablen beginnen, die einem Hemispährenkürzel gleicht
-- Fix: Email links in cache listings do not open if custom webview is enabled
+- Korrektur: E-Mail-Links in Cache-Listings werden nicht geöffnet, wenn Chrome WebView aktiviert ist
 
 ### Allgemein
 - Tippen auf Downloader-Benachrichtigung öffnet die Ansicht "Ausstehende Downloads"
@@ -32,7 +32,7 @@
 - Fix: Fehlendes Sternsymbol für geänderte gespeicherte Filter
 - Korrektur: Suchfeld für Stichwortsuche zeigt nach Suche "GC" an
 - Korrektur: Interner Absturz bei Routenberechnung
-- Fix: Downloading bookmark lists returns empty list (website change)
+- Korrektur: Das Herunterladen von Lesezeichenlisten gibt eine leere Liste zurück (Webseitenänderung)
 
 ### Änderungen seit der aktuellen Beta-Version
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
