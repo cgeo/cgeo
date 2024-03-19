@@ -33,6 +33,7 @@
 - Oplossing: Sleutelwoord zoekveld geeft "GC" weer na het zoeken
 - Oplossing: Interne crash bij routering berekening
 - Oplossing: Bladwijzerlijsten downloaden geeft lege lijst weer (wijziging website)
+<<<<<<< HEAD
 
 ### Veranderingen sinds huidige bètaversie
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -41,3 +42,5 @@
 - Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
 - Nieuw: Soepeler schalen van log afbeeldingen
 - Nieuw: "Persoonlijke Notitie bewerken" van het cache informatieblad
+=======
+>>>>>>> release

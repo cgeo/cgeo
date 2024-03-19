@@ -1,43 +1,11 @@
 ### Mappa
-- Nuovo: [Mappa Unificata](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), vedi [Impostazioni => Sorgenti Mappa => Mappa Unificata](cgeo-setting://featureSwitch_useUnifiedMap)
-- Nuovo: Evidenzia i download in corso nel gestore download
-- Nuovo: Mostra lo stato trovato sulle icone dei cache
-- Nuovo: Con tocco prolungato è possibile tracciare una linea che unisca un cache con i suoi waypoint
-- Cambio: Mostra dettagli cache/waypoint in modo non bloccante
-- Nuovo: Facoltativamente mantiene file OAM temporanei (scaricatore di mappe, utile quando si utilizzano i file POI con altre applicazioni)
-- Corretto: Errore download tema Hylly 404
-- Corretto: le informazioni di elevazione non rispettano l'impostazione "usa unità imperiali"
+- Nuovo: "Modifica nota personale" dalla pagina info del cache
 
 ### Dettagli del cache
-- Cambio: "Attiva/disattiva parlato" è diventato un interruttore
-- Cambio: aumento della lunghezza massima del log per geocaching.com
-- Corretto: non è possibile caricare note personali più lunghe sui siti opencaching
-- Nuovo: Modifica/elimina i propri log
-- Nuovo: Proiezione Waypoint con variabili
-- Cambio: Limita la selezione di immagini ai tipi jpg, png, gif
-- Nuovo: Nuova formula CHARS per selezionare più caratteri singoli
-- Corretto: risultato errato per la funzione TRUNC con numeri negativi
-- Corretto: le formule che iniziano con una variabile simile a un marcatore emisfero non possono essere calcolate
-- Corretto: i link e-mail negli elenchi cache non si aprivano quando era abiliata la webview personalizzata
-
-### Generale
-- Toccando la notifica sul download apre "download in attesa"
-- Cambio: l'utilizzo come sfondo non richiede più l'autorizzazione READ_EXTERNAL_STORAGE
-- Nuovo: layout a due colonne per le impostazioni in modalità orizzontale
-- Corretto: Ripristino dei backup senza informazioni valide di data/ora
-- Nuovo: Includi i trackfiles attivi nel backup
-- Nuovo: Integrato addon dei contatti c:geo (addon esterno non più richiesto)
-- Corretto: Tipo di log predefinito per tracciabile rielaborato
-- Corretto: Tracciabile mancante nell'inventario del cache (modifica del sito)
-- Corretto: Simbolo stella mancante per i filtri memorizzati modificati
-- Corretto: Il campo di ricerca per parola chiave visualizza "GC" dopo aver eseguito una ricerca
-- Corretto: crash interno nel calcolo del routing
-- Corretto: Scaricando le liste dei segnalibri restituisce la lista vuota (modifica del sito)
-
-### Modifiche dalla versione beta corrente
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
 - Cambio: semplificato il tocco lungo nei dettagli dei cache e dei tracciabili
+- Novità: ridimensionamento delle immagini del log
+
+### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
 - Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
-- Novità: ridimensionamento delle immagini del log
-- Nuovo: "Modifica nota personale" dalla pagina info del cache

@@ -33,6 +33,7 @@
 - Fix: Keyword search field displays "GC" after performing a search
 - Fix: Internal crash in routing calculation
 - Fix: Downloading bookmark lists returns empty list (website change)
+<<<<<<< HEAD
 
 ### Changes since current beta version
 - New: Show images linked in "personal note" in Images tab
@@ -41,3 +42,5 @@
 - New: List selection dialog: Auto-group cache lists having a ":" in their name
 - New: Smoother scaling of log images
 - New: "Edit Personal Note" from cache info sheet
+=======
+>>>>>>> release
