@@ -18,7 +18,7 @@
 - 신규: 여러 단일 문자를 선택하는 새로운 수식 CHARS (짧은 형태: CH)
 - 수정: 숫자가 음수인 TRUNC 함수에 대한 잘못된 결과
 - 수정: 반구 마커와 유사한 변수로 시작하는 공식을 계산할 수 없습니다.
-- Fix: Email links in cache listings do not open if custom webview is enabled
+- 수정: 사용자 정의 웹 보기를 사용하도록 설정한 경우 캐시 목록의 전자 메일 링크가 열리지 않음
 
 ### 일반
 - 신규: 다운로더 알림을 누르면 "대기 중인 다운로드" 보기가 열립니다.
@@ -32,4 +32,4 @@
 - 수정: 변경된 저장 필터의 별 기호 누락
 - 수정: 검색을 수행한 후 키워드 검색 필드에 "GC"가 표시됩니다.
 - 수정: 라우팅 계산 시 내부 충돌이 발생함
-- Fix: Downloading bookmark lists returns empty list (website change)
+- 수정: 북마크 목록을 다운로드하면 빈 목록이 반환됩니다(웹사이트 변경)
