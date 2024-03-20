@@ -1,5 +1,5 @@
 ### 지도
-- New: "Edit Personal Note" from cache info sheet
+- 신규: 캐시 정보 시트에서 "개인 메모 편집"
 
 ### 캐시 상세정보
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
