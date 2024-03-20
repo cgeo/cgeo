@@ -21,16 +21,16 @@
         android:title="@string/context_map_show_coords">
     </item>
     <item
+        android:id="@+id/menu_elevation"
+        android:title=""
+        android:visible="false">
+    </item>
+    <item
         android:id="@+id/menu_target"
         android:title="@string/cache_menu_target">
     </item>
     <item
         android:id="@+id/menu_navigate"
         android:title="@string/cache_menu_navigate">
-    </item>
-    <item
-        android:id="@+id/menu_elevation"
-        android:title=""
-        android:visible="false">
     </item>
 </menu>
