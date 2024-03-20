@@ -280,7 +280,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 .zIndex(ZINDEX_DIRECTION_LINE)
                 .add(new LatLng(from.getLatitude(), from.getLongitude()));
 
-        final Geopoint[] routingPoints = Routing.getTrack(from, to);
+        final Geopoint[] routingPoints = Routing.getTrack(from, to, null);
 
         if (routingPoints.length > 1) {
             // calculate polyline to draw
