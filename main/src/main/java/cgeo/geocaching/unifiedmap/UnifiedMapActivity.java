@@ -350,10 +350,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // override some settings, if given
         if (mapState != null) {
-            ActivityMixin.postDelayed(() -> {
-                mapFragment.setCenter(mapState.center);
-                mapFragment.setZoom(mapState.zoomLevel);
-            }, 1000);
+            mapFragment.setCenter(mapState.center);
+            mapFragment.setZoom(mapState.zoomLevel);
         }
         // both maps have invalid values for bounding box in the beginning, so need to delay counting a bit
         ActivityMixin.postDelayed(this::updateCacheCountSubtitle, 2000);
