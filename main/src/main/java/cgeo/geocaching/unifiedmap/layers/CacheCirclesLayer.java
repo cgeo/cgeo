@@ -28,12 +28,12 @@ public class CacheCirclesLayer {
     public CacheCirclesLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
-        viewModel.caches.observe(activity, caches -> {
+        viewModel.caches.observeForRead(activity, caches -> {
 
             if (Settings.isShowCircles()) {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
 
-                for (Geocache cache : caches.getAsList()) { // Creates a clone to avoid ConcurrentModificationException
+                for (Geocache cache : caches) { // Creates a clone to avoid ConcurrentModificationException
                     if (cache.applyDistanceRule()) {
                         geoGroup.addItems(
                                 GeoPrimitive.createCircle(cache.getCoords(), radius, GeoStyle.builder()
