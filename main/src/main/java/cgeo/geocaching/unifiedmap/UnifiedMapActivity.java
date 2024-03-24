@@ -940,6 +940,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             loadInBackgroundHandler.onDestroy();
             loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
+        MapUtils.updateFilterBar(this, mapType.filterContext);
     }
 
     // ========================================================================

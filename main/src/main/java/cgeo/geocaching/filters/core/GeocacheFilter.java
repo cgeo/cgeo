@@ -39,7 +39,7 @@ public class GeocacheFilter implements Cloneable {
     private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
     private static final String CONFIG_KEY_TREE = "tree";
 
-    private String name;
+    private final String name;
     private IGeocacheFilter tree;
 
     private final boolean openInAdvancedMode;
@@ -208,7 +208,6 @@ public class GeocacheFilter implements Cloneable {
 
         if (this.tree == null && filters.length == 1) {
             this.tree = filters[0];
-            this.name = null;
             return this;
         }
 
@@ -225,7 +224,6 @@ public class GeocacheFilter implements Cloneable {
                 andFilter.addChild(this.tree);
             }
         }
-        this.name = null;
         this.tree = andFilter;
         return this;
     }
@@ -240,6 +238,10 @@ public class GeocacheFilter implements Cloneable {
 
     public String getNameForUserDisplay() {
         return getName() + (isSavedDifferently() ? "*" : "");
+    }
+
+    public static String getFilterNameFromUserDisplayName(final String userDisplayName) {
+        return userDisplayName != null && userDisplayName.endsWith("*") ? userDisplayName.substring(0, userDisplayName.length() - 1) : userDisplayName;
     }
 
     /**

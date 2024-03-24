@@ -403,10 +403,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         }
 
         return GeocacheFilter.create(
-                binding.filterStorageName.getText().toString(),
-                binding.filterBasicAdvanced.isChecked(),
-                this.includeInconclusiveFilterCheckbox.isChecked(),
-                filter);
+            GeocacheFilter.getFilterNameFromUserDisplayName(binding.filterStorageName.getText().toString()),
+            binding.filterBasicAdvanced.isChecked(),
+            this.includeInconclusiveFilterCheckbox.isChecked(),
+            filter);
     }
 
     public static void selectFilter(@NonNull final Activity context, final GeocacheFilterContext filterContext,
