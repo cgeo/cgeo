@@ -468,6 +468,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                         cache.logOffline(LogCacheActivity.this, logEntry);
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
+                        inventoryAdapter.saveActions();
                     }
                 });
             }
@@ -754,6 +755,12 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         public void resetActions() {
             this.actionLogs.clear();
             handleChangedData();
+        }
+
+        public void saveActions() {
+            for (Map.Entry<String, LogTypeTrackable> entry : actionLogs.entrySet()) {
+                LastTrackableAction.setAction(entry.getKey(), entry.getValue());
+            }
         }
 
         @NonNull
