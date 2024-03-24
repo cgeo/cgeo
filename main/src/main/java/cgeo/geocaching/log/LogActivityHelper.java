@@ -137,7 +137,6 @@ public class LogActivityHelper {
             .input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> {
                 logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText));
             });
-
     }
 
     /** create a trackable log on the trackable platform */
