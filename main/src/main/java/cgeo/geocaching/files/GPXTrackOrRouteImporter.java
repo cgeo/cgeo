@@ -1,6 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.GeoItemHolder;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
@@ -13,7 +14,6 @@ import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.net.Uri;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -32,7 +32,7 @@ public class GPXTrackOrRouteImporter {
     private GPXTrackOrRouteImporter() {
     }
 
-    public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback) {
+    public static void doImport(final Context context, final Uri uri, final String displayName, final Route.UpdateRoute callback) {
         final AtomicBoolean success = new AtomicBoolean(false);
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
@@ -52,7 +52,11 @@ public class GPXTrackOrRouteImporter {
             }
         }, () -> {
             if (!success.get()) {
-                Toast.makeText(context, R.string.load_track_error, Toast.LENGTH_SHORT).show();
+                if (displayName == null) {
+                    ActivityMixin.showToast(context, R.string.load_track_error);
+                } else {
+                    ActivityMixin.showToast(context, R.string.load_track_error_named, displayName);
+                }
                 callback.updateRoute(null);
             }
         });
