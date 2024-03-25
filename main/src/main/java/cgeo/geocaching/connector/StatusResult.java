@@ -9,13 +9,15 @@ import androidx.annotation.Nullable;
 
 public class StatusResult {
 
+    public static final StatusResult OK = new StatusResult(StatusCode.NO_ERROR, null);
+
     @NonNull
     private final StatusCode postResult;
 
     @Nullable
     private final String postServerMessage;
 
-    protected StatusResult(@NonNull final StatusCode postResult, @Nullable final String postServerMessage) {
+    public StatusResult(@NonNull final StatusCode postResult, @Nullable final String postServerMessage) {
         this.postResult = postResult;
         this.postServerMessage = postServerMessage;
     }

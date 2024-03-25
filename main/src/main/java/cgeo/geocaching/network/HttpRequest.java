@@ -249,6 +249,19 @@ public class HttpRequest {
         return this;
     }
 
+    public HttpRequest bodyForm(final Parameters formParams) {
+        this.requestBodySupplier = () -> {
+            final FormBody.Builder entity = new FormBody.Builder();
+            if (formParams != null) {
+                for (final ImmutablePair<String, String> param : formParams) {
+                    entity.add(param.left, param.right);
+                }
+            }
+            return entity.build();
+        };
+        return this;
+    }
+
     /** Sets body to plain text */
     public HttpRequest body(final String text) {
         this.requestBodySupplier = () -> RequestBody.create(text, MEDIA_TYPE_TEXT_PLAIN);

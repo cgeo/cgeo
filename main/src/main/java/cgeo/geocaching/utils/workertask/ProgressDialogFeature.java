@@ -121,10 +121,12 @@ public class ProgressDialogFeature<P> implements WorkerTask.TaskFeature<Object, 
             }
         });
 
+
+        progress.show(activity, title == null ? "" : title, initialMessage == null ? "" : initialMessage, indeterminate, null);
         if (!indeterminate) {
             progress.setMaxProgressAndReset(Math.max(0, maxValue));
         }
-        progress.show(activity, title == null ? "" : title, initialMessage == null ? "" : initialMessage, indeterminate, null);
+
         return progress;
     }
 
