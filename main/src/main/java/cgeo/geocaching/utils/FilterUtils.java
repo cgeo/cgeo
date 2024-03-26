@@ -69,7 +69,7 @@ public class FilterUtils {
     }
 
     public static String getPurifiedFilterName(final String filterName) {
-        if (filterName.endsWith(FilterUtils.savedDifferentlyMarkerPostFix) && filterName.startsWith(FilterUtils.savedDifferentlyMarkerPreFix)) {
+        if (filterName != null && filterName.endsWith(FilterUtils.savedDifferentlyMarkerPostFix) && filterName.startsWith(FilterUtils.savedDifferentlyMarkerPreFix)) {
             return filterName.substring(FilterUtils.savedDifferentlyMarkerPreFix.length(), filterName.length() - FilterUtils.savedDifferentlyMarkerPostFix.length());
         }
         return filterName;
