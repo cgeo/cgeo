@@ -241,10 +241,6 @@ public class GeocacheFilter implements Cloneable {
         return FilterUtils.getFilterName(getName(), isSavedDifferently());
     }
 
-    public static String getFilterNameFromUserDisplayName(final String userDisplayName) {
-        return userDisplayName != null && userDisplayName.endsWith("*") ? userDisplayName.substring(0, userDisplayName.length() - 1) : userDisplayName;
-    }
-
     /**
      * Helper method to map filter to search providers only offering AND filter capability.
      * * If this filter is a base filter, this base filter is returned
