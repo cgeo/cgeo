@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -209,7 +210,13 @@ public final class OfflineLogEntry extends LogEntry {
             changed |= !Objects.equals(password, prevOffline.password);
             changed |= !Objects.equals(imageScale, prevOffline.imageScale);
             changed |= !Objects.equals(imageTitlePraefix, prevOffline.imageTitlePraefix);
-            changed |= !Objects.equals(inventoryActions, prevOffline.inventoryActions);
+
+            //inventory: add/remove is NOT save-relevant! Only value changes for common keys are relevant
+            final Set<String> commonInventoryKeys = new HashSet<>(inventoryActions.keySet());
+            commonInventoryKeys.retainAll(prevOffline.inventoryActions.keySet());
+            for (String key : commonInventoryKeys) {
+                changed |= !Objects.equals(inventoryActions.get(key), prevOffline.inventoryActions.get(key));
+            }
         }
 
         return changed;

@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -109,6 +110,7 @@ public class Trackfiles extends DataStore.DBExtension {
         for (DataStore.DBExtension item : getAll(type, null)) {
             result.add(new Trackfiles(item));
         }
+        TextUtils.sortListLocaleAware(result, Trackfiles::getDisplayname);
         return result;
     }
 

@@ -224,6 +224,7 @@
     <string name="log_image_titleprefix">Image</string>
 
     <string name="log_delete_confirm">Do you really want to delete log of type \'%1$s\' by author \'%2$s\' with log date \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Do you really want to delete your stored offline log of type \'%1$s\' with log date \'%2$s\'?</string>
 
     <string name="datetime_nodateset_display">No date set</string>
 
@@ -2657,6 +2658,7 @@
     <!-- individual track -->
     <string name="map_load_track">Load track/route from GPX</string>
     <string name="load_track_error">Error loading track/route</string>
+    <string name="load_track_error_named">Error loading track/route: \"%s\"</string>
     <string name="map_clear_track">Clear route/track</string>
     <string name="map_clear_track_confirm">Do you want to remove route/track \"%s\"?</string>
 

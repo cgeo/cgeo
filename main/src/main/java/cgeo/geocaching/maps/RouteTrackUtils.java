@@ -27,6 +27,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
@@ -102,7 +103,7 @@ public class RouteTrackUtils {
         if (uris != null && this.updateTrack != null) {
             for (Uri uri : uris) {
                 Log.d("[RouteTrackDebug] Start import of track " + uri);
-                GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+                GPXTrackOrRouteImporter.doImport(activity, uri, UriUtils.getLastPathSegment(uri), (route) -> {
                     Log.d("[RouteTrackDebug] Finished import of track " + uri + ": " + (route == null ? "null returned" : "updating map"));
                     final String key = tracks.add(activity, uri, updateTrack);
                     tracks.setRoute(key, route);
@@ -419,7 +420,7 @@ public class RouteTrackUtils {
     public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
         final Uri uri = Trackfiles.getUriFromKey(trackfile.getKey());
         Log.d("[RouteTrackDebug] Start reloading track from trackfile " + trackfile.getFilename());
-        GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+        GPXTrackOrRouteImporter.doImport(activity, uri, trackfile.getDisplayname(), (route) -> {
             if (route != null) {
                 Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " finished, updating map");
                 route.setHidden(trackfile.isHidden());

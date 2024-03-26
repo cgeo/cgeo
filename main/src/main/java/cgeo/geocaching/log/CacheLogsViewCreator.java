@@ -7,8 +7,12 @@ import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.annotation.SuppressLint;
@@ -147,23 +151,28 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         final boolean canShareLog = StringUtils.isNotBlank(logUrl);
         if (canShareLog) {
             ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> ShareUtils.shareLink(activity, getCache().getShareSubject(), logUrl));
-            ctxMenu.addItem(activity.getString(R.string.cache_menu_browser),
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_browser),
                     R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(activity, logUrl, true));
         }
         if (isOfflineLog(log)) {
-            ctxMenu.addItem(R.string.cache_personal_note_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), activity).onClick(null));
+            ctxMenu.setTitle(LocalizationUtils.getString(R.string.log_your_saved_log));
+            ctxMenu.addItem(0, R.string.cache_log_menu_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), activity).onClick(null));
+            ctxMenu.addItem(1, R.string.cache_log_menu_delete, R.drawable.ic_menu_delete, it -> deleteOfflineLogEntry(activity, getCache(), log));
         }
         return ctxMenu;
     }
 
-    @Override
-    protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
-        if (isOfflineLog(log)) {
-            return new EditOfflineLogListener(getCache(), (CacheDetailActivity) getActivity());
-        }
-        return super.createOnLogClickListener(holder, log);
+    private void deleteOfflineLogEntry(final CacheDetailActivity activity, final Geocache cache, final LogEntry entry) {
+        SimpleDialog.ofContext(activity)
+            .setTitle(TextParam.id(R.string.cache_log_menu_delete))
+            .setMessage(TextParam.id(R.string.log_offline_delete_confirm,
+                entry.logType.getL10n(), Formatter.formatShortDateVerbally(entry.date)))
+            .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+            .confirm(() -> {
+                DataStore.clearLogOffline(cache.getGeocode());
+                cache.notifyChange();
+            });
     }
-
 
     @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {

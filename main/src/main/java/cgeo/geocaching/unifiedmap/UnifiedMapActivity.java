@@ -362,10 +362,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // override some settings, if given
         if (mapState != null) {
-            ActivityMixin.postDelayed(() -> {
-                mapFragment.setCenter(mapState.center);
-                mapFragment.setZoom(mapState.zoomLevel);
-            }, 1000);
+            mapFragment.setCenter(mapState.center);
+            mapFragment.setZoom(mapState.zoomLevel);
         }
         // both maps have invalid values for bounding box in the beginning, so need to delay counting a bit
         ActivityMixin.postDelayed(this::refreshListChooser, 2000);
@@ -398,7 +396,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                 mapFragment.setCenter(waypoint.getCoords());
                             }
                             viewModel.waypoints.getValue().add(waypoint);
-                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
+                            if (!isTargetSet()) {
+                                onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
+                            }
                         }
                     } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
                         viewModel.caches.getValue().add(cache);
@@ -407,7 +407,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             mapFragment.setCenter(cache.getCoords());
                         }
                         viewModel.waypoints.getValue().addAll(cache.getWaypoints());
-                        onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
+                        if (!isTargetSet()) {
+                            onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
+                        }
                     }
                     viewModel.waypoints.notifyDataChanged();
                 }
@@ -897,6 +899,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             loadInBackgroundHandler.onDestroy();
             loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
+        MapUtils.updateFilterBar(this, mapType.filterContext);
     }
 
     // ========================================================================
