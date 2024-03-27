@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="log_delete_confirm">Weet u zeker dat u het log \'%1$s\' door auteur \'%2$s\' met logdatum \'%3$s \' wilt verwijderen?</string>
+    <string name="log_offline_delete_confirm">Weet je zeker dat je je opgeslagen offline log van type \'%1$s\' met log datum \'%2$s \' wilt verwijderen?</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contact met alias/nickname %s niet gevonden. Voeg deze eerst toe in de contacten-app.</string>
@@ -2344,6 +2345,7 @@
     <!-- individual track -->
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
+    <string name="load_track_error_named">Fout bij het laden van spoor/routespoor: \"%s\"</string>
     <string name="map_clear_track">Wis route/track</string>
     <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
     <!-- route/track commons -->
