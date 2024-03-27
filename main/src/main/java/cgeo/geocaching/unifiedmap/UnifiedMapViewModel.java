@@ -13,6 +13,7 @@ import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
+import cgeo.geocaching.utils.livedata.CollectionLiveData;
 import cgeo.geocaching.utils.livedata.ConstantLiveData;
 import cgeo.geocaching.utils.livedata.Event;
 
@@ -49,7 +50,8 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Target> target = new MutableLiveData<>();
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
-    public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    //public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    public final CollectionLiveData<Geocache, LeastRecentlyUsedSet<Geocache>> caches = new CollectionLiveData<>(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
 
     public final ConstantLiveData<LeastRecentlyUsedSet<String>> cachesWithStarDrawn = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES));

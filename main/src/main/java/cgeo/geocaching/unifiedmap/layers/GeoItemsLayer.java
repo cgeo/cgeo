@@ -36,7 +36,7 @@ public class GeoItemsLayer {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
 
 
-        viewModel.caches.observe(activity, caches -> { // this is always executed on UI thread, thus doesn't need to be thread save
+        viewModel.caches.observeForRead(activity, caches -> { // this is always executed on UI thread, thus doesn't need to be thread save
 
             final Map<String, Integer> currentlyDisplayedGeocaches = new HashMap<>();
 
@@ -46,7 +46,7 @@ public class GeoItemsLayer {
                 viewModel.waypoints.notifyDataChanged();
             }
 
-            for (Geocache cache : caches.getAsList()) { // Creates a clone to avoid ConcurrentModificationExceptions
+            for (Geocache cache : caches) { // Creates a clone to avoid ConcurrentModificationExceptions
                 final CacheMarker cm = forceCompactIconMode ? MapMarkerUtils.getCacheDotMarker(activity.getResources(), cache) : MapMarkerUtils.getCacheMarker(activity.getResources(), cache, null, true);
                 currentlyDisplayedGeocaches.put(cache.getGeocode(), cm.hashCode());
 

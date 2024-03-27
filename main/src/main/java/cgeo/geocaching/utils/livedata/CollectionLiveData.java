@@ -1,0 +1,91 @@
+package cgeo.geocaching.utils.livedata;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+/**
+ * A data holder class whose content is a collection. Provides methods to safely read and write to this collection
+ * avoiding concurrent-access-exceptions. Also, write access will notify consumers
+ *
+ * @param <T> The type of data held by the collection in this instance
+ * @param <C> The type of collection
+ */
+public class CollectionLiveData<T, C extends Collection<T>> {
+
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();
+    private final MutableLiveData<Integer> liveData;
+    private final C value;
+
+    public CollectionLiveData(@NonNull final Supplier<C> supplier) {
+        this.value = supplier.get();
+        this.liveData = new MutableLiveData<>(0);
+    }
+
+    /** executes an Action reading the collection */
+    public void read(final Consumer<C> readAction) {
+        lock.readLock().lock();
+        try {
+            readAction.accept(value);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    /** executes an Action reading the collection and returning a result */
+    public <R> R readWithResult(final Function<C, R> readFunction) {
+        lock.readLock().lock();
+        try {
+            return readFunction.apply(value);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
+
+
+    /** executes an Action writing to the collection. Notification is auto-executed after write */
+    public void write(final boolean post, final Consumer<C> writeAction) {
+        lock.writeLock().lock();
+        try {
+            writeAction.accept(value);
+        } finally {
+            lock.writeLock().unlock();
+        }
+        notifyDataChanged(post);
+    }
+
+    /** returns a list-copy from this collection.  */
+    public List<T> getListCopy() {
+        return readWithResult(ArrayList::new);
+    }
+
+    /** registers an observer which wants to read from the collection */
+    public void observeForRead(@NonNull final LifecycleOwner owner, @NonNull final Observer<? super C> observer) {
+        this.liveData.observe(owner, x -> read(observer::onChanged));
+    }
+
+    /** registers an observer which just wants to be notified that the collecton changed */
+    public void observeForNotification(@NonNull final LifecycleOwner owner, @NonNull final Runnable observer) {
+        this.liveData.observe(owner, x -> observer.run());
+    }
+
+    /** manually triggers a notification */
+    public void notifyDataChanged(final boolean post) {
+        if (post) {
+            this.liveData.postValue(0);
+        } else {
+            this.liveData.setValue(0);
+        }
+    }
+
+}
