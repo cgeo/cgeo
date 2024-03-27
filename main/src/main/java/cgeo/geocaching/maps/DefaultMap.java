@@ -14,6 +14,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.Nullable;
+
 public final class DefaultMap {
 
     private DefaultMap() {
@@ -122,7 +124,8 @@ public final class DefaultMap {
             if (fromList == 0) {
                 new UnifiedMapType(search, title).launchMap(fromActivity); // same as above
             } else {
-                startActivityList(fromActivity, fromList);
+                // no longer allowed / CacheListActivity directly launches into startActivityList in this case
+                startActivityList(fromActivity, fromList, null);
             }
         } else {
             final MapOptions mo = new MapOptions(search, title, fromList);
@@ -131,11 +134,10 @@ public final class DefaultMap {
         }
     }
 
-    public static void startActivityList(final Activity fromActivity, final int fromList) {
-        if (Settings.useUnifiedMap()) { // only supported for UnifiedMap
+    public static void startActivityList(final Activity fromActivity, final int fromList, final @Nullable GeocacheFilterContext filterContext) {
+        if (Settings.useUnifiedMap() && fromList != 0) { // only supported for UnifiedMap
             Log.e("Launching UnifiedMap in list mode, fromList=" + fromList + ")");
-            final UnifiedMapType mapType = new UnifiedMapType(fromList);
-            mapType.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.OFFLINE);
+            final UnifiedMapType mapType = new UnifiedMapType(fromList, filterContext);
             mapType.launchMap(fromActivity);
         }
     }
