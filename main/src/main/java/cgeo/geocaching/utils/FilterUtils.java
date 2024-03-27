@@ -26,9 +26,6 @@ import java.util.List;
 
 public class FilterUtils {
 
-    private static String savedDifferentlyMarkerPreFix = "(";
-    private static String savedDifferentlyMarkerPostFix = ")*";
-
     private FilterUtils() {
         // should not be instantiated
     }
@@ -66,21 +63,6 @@ public class FilterUtils {
             }
         }
         return true;
-    }
-
-    public static String getPurifiedFilterName(final String filterName) {
-        if (filterName != null && filterName.endsWith(FilterUtils.savedDifferentlyMarkerPostFix) && filterName.startsWith(FilterUtils.savedDifferentlyMarkerPreFix)) {
-            return filterName.substring(FilterUtils.savedDifferentlyMarkerPreFix.length(), filterName.length() - FilterUtils.savedDifferentlyMarkerPostFix.length());
-        }
-        return filterName;
-    }
-
-    public static String getFilterName(@NonNull final String filterName, final boolean filterChanged) {
-        String changedFilterName = filterName;
-        if (filterChanged) {
-            changedFilterName = FilterUtils.savedDifferentlyMarkerPreFix + filterName + FilterUtils.savedDifferentlyMarkerPostFix;
-        }
-        return changedFilterName;
     }
 
     public static void setFilterText(@NonNull final TextView viewField, @Nullable final String filterName, @Nullable final Boolean filterChanged) {
