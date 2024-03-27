@@ -3,7 +3,6 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -30,6 +29,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter implements Cloneable {
+
+    private static String savedDifferentlyMarkerPreFix = "(";
+    private static String savedDifferentlyMarkerPostFix = ")*";
 
     public enum QuickFilter {
         FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_FOUND_LOG
@@ -94,6 +96,22 @@ public class GeocacheFilter implements Cloneable {
                 isInitialized = true;
             }
         }
+    }
+
+
+    public static String getPurifiedFilterName(final String filterName) {
+        if (filterName != null && filterName.endsWith(savedDifferentlyMarkerPostFix) && filterName.startsWith(savedDifferentlyMarkerPreFix)) {
+            return filterName.substring(savedDifferentlyMarkerPreFix.length(), filterName.length() - savedDifferentlyMarkerPostFix.length());
+        }
+        return filterName;
+    }
+
+    public static String getFilterName(@NonNull final String filterName, final boolean filterChanged) {
+        String changedFilterName = filterName;
+        if (filterChanged) {
+            changedFilterName = savedDifferentlyMarkerPreFix + filterName + savedDifferentlyMarkerPostFix;
+        }
+        return changedFilterName;
     }
 
     private GeocacheFilter(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
@@ -238,7 +256,7 @@ public class GeocacheFilter implements Cloneable {
     }
 
     public String getNameForUserDisplay() {
-        return FilterUtils.getFilterName(getName(), isSavedDifferently());
+        return getFilterName(getName(), isSavedDifferently());
     }
 
     /**
