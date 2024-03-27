@@ -47,6 +47,12 @@
                 android:layout_gravity="left"
                 app:icon="@drawable/ic_menu_cancel" />
 
+            <Button
+                android:id="@+id/download"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_face" />
+
 
         </LinearLayout>
 

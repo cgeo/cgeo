@@ -143,8 +143,8 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
         return result;
     }
 
-    public void add(final String key, final String value) {
-        put(key, value);
+    public Parameters add(final String key, final String value) {
+        return put(key, value);
     }
 
 }

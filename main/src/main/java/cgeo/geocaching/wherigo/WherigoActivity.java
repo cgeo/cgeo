@@ -3,6 +3,7 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
+import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
@@ -44,6 +45,8 @@ import cz.matejcik.openwig.formats.CartridgeFile;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
+
+    private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, result -> handleDownloadResult(result));
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
@@ -105,6 +108,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.startGame.setOnClickListener(v -> startGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
+        binding.download.setOnClickListener(v -> downloadCartridge());
     }
 
     private void startGame() {
@@ -175,6 +179,18 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             .selectSingle(model, s -> {
                 WherigoGame.get().loadGame(cartridge, s);
             });
+    }
+
+    private void downloadCartridge() {
+        SimpleDialog.of(this).setTitle(TextParam.text("Download"))
+            .input(new SimpleDialog.InputOptions().setLabel("Enter CGID").setInitialValue("f6002f33-c68a-4966-82ca-3c392a85d892"), input -> {
+                wherigoDownloader.downloadWherigo(input, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
+            });
+    }
+
+    private void handleDownloadResult(final StatusResult result) {
+        SimpleDialog.of(this).setTitle(TextParam.text("Download result"))
+            .setMessage(TextParam.text("Download result:" + result)).show();
     }
 
     private void refreshGui() {

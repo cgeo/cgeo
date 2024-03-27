@@ -3,6 +3,7 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -110,7 +111,7 @@ public final class ActivityMixin {
      */
     public static void showApplicationToast(final String message) {
         final Context context = new ContextThemeWrapper(CgeoApplication.getInstance().getApplicationContext(), getThemeId());
-        showCgeoToast(context, message, Toast.LENGTH_LONG);
+        AndroidRxUtils.runOnUi(() -> showCgeoToast(context, message, Toast.LENGTH_LONG));
     }
 
     /**
