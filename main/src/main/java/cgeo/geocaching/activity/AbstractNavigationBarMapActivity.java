@@ -156,11 +156,19 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
         final FragmentManager fm = getSupportFragmentManager();
         final Fragment f1 = fm.findFragmentByTag(TAG_MAPDETAILS_FRAGMENT);
         if (f1 != null) {
-            fm.beginTransaction().remove(f1).commitNowAllowingStateLoss();
+            try {
+                fm.beginTransaction().remove(f1).commitNowAllowingStateLoss();
+            } catch (IllegalStateException ignore) {
+                // ignore fm error on sheet removal
+            }
         }
         final Fragment f2 = fm.findFragmentByTag(TAG_SWIPE_FRAGMENT);
         if (f2 != null) {
-            fm.beginTransaction().remove(f2).commitNowAllowingStateLoss();
+            try {
+                fm.beginTransaction().remove(f2).commitNowAllowingStateLoss();
+            } catch (IllegalStateException ignore) {
+                // ignore fm error on sheet removal
+            }
         }
         final FrameLayout v = findViewById(R.id.detailsfragment);
         if (v != null && v.getVisibility() != View.GONE) {
