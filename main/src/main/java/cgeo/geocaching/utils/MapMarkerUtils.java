@@ -710,7 +710,7 @@ public final class MapMarkerUtils {
      * @param terrain       Terrain rating
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
-    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
+    public static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
         final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getCacheScalingFactor(applyScaling));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
@@ -877,5 +877,5 @@ public final class MapMarkerUtils {
         markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
-    
+
 }
