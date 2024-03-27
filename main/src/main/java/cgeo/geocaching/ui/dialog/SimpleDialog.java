@@ -544,19 +544,7 @@ public class SimpleDialog {
         });
 
         model.addChangeListeners(ct -> {
-            //special handling if some buttons are marked as "enabled only if something is selected"
-            if (model.selectionIsMandatory != null) {
-                final boolean somethingSelected = !model.getSelectedItems().isEmpty();
-                if (model.selectionIsMandatory.length > 0 && model.selectionIsMandatory[0] && positiveButton != null) {
-                    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(somethingSelected);
-                }
-                if (model.selectionIsMandatory.length > 1 && model.selectionIsMandatory[1] && negativeButton != null) {
-                    dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(somethingSelected);
-                }
-                if (model.selectionIsMandatory.length > 2 && model.selectionIsMandatory[2] && neutralButton != null) {
-                    dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(somethingSelected);
-                }
-            }
+            adjustButtonEnablement(model, dialog);
             if (model.selectionChangedListener != null && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 model.selectionChangedListener.call(model);
             }
@@ -568,7 +556,23 @@ public class SimpleDialog {
                 }
             }
         });
+        adjustButtonEnablement(model, dialog);
+    }
 
+    private <T> void adjustButtonEnablement(final ItemSelectModel<T> model, final AlertDialog dialog) {
+        //special handling if some buttons are marked as "enabled only if something is selected"
+        if (model.selectionIsMandatory != null) {
+            final boolean somethingSelected = !model.getSelectedItems().isEmpty();
+            if (model.selectionIsMandatory.length > 0 && model.selectionIsMandatory[0] && positiveButton != null) {
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(somethingSelected);
+            }
+            if (model.selectionIsMandatory.length > 1 && model.selectionIsMandatory[1] && negativeButton != null) {
+                dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setEnabled(somethingSelected);
+            }
+            if (model.selectionIsMandatory.length > 2 && model.selectionIsMandatory[2] && neutralButton != null) {
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(somethingSelected);
+            }
+        }
     }
 
     /**
@@ -591,7 +595,7 @@ public class SimpleDialog {
         textField.setInputType(io.inputType);
          if (io.initialValue != null) {
              textField.setText(io.initialValue);
-         }    
+         }
          if (io.label != null) {
              textLayout.setHint(io.label);
          }
