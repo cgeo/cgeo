@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="log_delete_confirm">Czy na pewno chcesz usunąć wpis typu \'%1$s\' autorstwa \'%2$s\' z datą logowania \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Czy na pewno chcesz usunąć zapisany wpis typu \'%1$s\' z datą logowania \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt z aliasem/nazwą %s nie został znaleziony. Dodaj go najpierw do swoich kontaktów.</string>
@@ -2403,6 +2404,7 @@
     <!-- individual track -->
     <string name="map_load_track">Załaduj ślad/trasę z GPX</string>
     <string name="load_track_error">Błąd ładowania śladu/trasy</string>
+    <string name="load_track_error_named">Błąd wczytywania śladu/trasy: \"%s\"</string>
     <string name="map_clear_track">Wyczyść trasę/ślad</string>
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad „%s”?</string>
     <!-- route/track commons -->

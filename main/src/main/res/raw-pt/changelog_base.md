@@ -23,7 +23,7 @@ Configurações => Fontes de Mapa => Mapa Unificado<1></li>
 - Novo: Fórmula nova CHARS (diminutivo: CH) para seleccionar múltiplos caracteres individuais
 - Correcção: Resultado errado para a função TRUNC com números negativos
 - Correcção: Fórmulas que começam com uma variável semelhante a um marcador de hemisfério não podem ser calculadas
-- Fix: Email links in cache listings do not open if custom webview is enabled
+- Correcção: As ligações em e-mails nas listagens de cache não abriam se a vista web personalizada estivesse activada
 
 
 

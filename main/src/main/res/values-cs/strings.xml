@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">nezmenšen</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <string name="log_delete_confirm">Opravdu chcete smazat log typu \'%1$s\' od autora \'%2$s\' s datem logu \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Opravdu chcete odstranit uložený offline log typu \'%1$s\' s datem zápisu \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt s přezdívkou %s nenalezen. Přidej ho nejprve do databáze kontaktů.</string>
@@ -2404,6 +2405,7 @@
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
+    <string name="load_track_error_named">Chyba při načítání stopy/trasy: \"%s\"</string>
     <string name="map_clear_track">Vymazat trasu/stopu</string>
     <string name="map_clear_track_confirm">Chcete odstranit trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
