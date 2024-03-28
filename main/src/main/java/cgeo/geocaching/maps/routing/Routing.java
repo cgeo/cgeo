@@ -184,7 +184,7 @@ public final class Routing {
     }
 
     public static float getElevation(final Geopoint current) {
-        if (routingServiceConnection == null || !routingServiceConnection.isConnected()) {
+        if (routingServiceConnection == null || current == null || !routingServiceConnection.isConnected()) {
             return NO_ELEVATION_AVAILABLE;
         }
         final Bundle params = new Bundle();

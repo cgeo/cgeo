@@ -66,8 +66,13 @@ public class UnifiedMapType implements Parcelable {
 
     /** show and scale to list content */
     public UnifiedMapType(final int fromList) {
+        this(fromList, null);
+    }
+
+    /** show and scale to list content with filter applied */
+    public UnifiedMapType(final int fromList, final GeocacheFilterContext filterContext) {
         type = UnifiedMapTypeType.UMTT_List;
-        filterContext = new GeocacheFilterContext(OFFLINE);
+        this.filterContext = filterContext != null ? filterContext : new GeocacheFilterContext(OFFLINE);
         this.fromList = fromList;
     }
 

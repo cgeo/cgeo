@@ -151,7 +151,7 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             return false;
         }
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
-            DefaultMap.startActivityList(this, selectedListId);
+            DefaultMap.startActivityList(this, selectedListId, null);
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;

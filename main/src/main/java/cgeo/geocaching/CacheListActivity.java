@@ -1603,7 +1603,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
-        DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+        if (Settings.useUnifiedMap() && listId != 0) {
+            DefaultMap.startActivityList(this, listId, currentCacheFilter);
+        } else {
+            DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+        }
         ActivityMixin.overrideTransitionToFade(this);
     }
 
