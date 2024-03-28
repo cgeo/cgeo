@@ -265,7 +265,10 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+          script: |
+            ./gradlew :main:copyDefaultPreferencesToAndroid --no-daemon -Dorg.gradle.debug=true
+            ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+          # script: ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
