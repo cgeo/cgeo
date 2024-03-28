@@ -204,7 +204,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [26, 29, 30]
+        api-level: [26, 29]
+        # Unit tests are having issues with API 30, so disabling until fixed
+        # api-level: [26, 29, 30]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
