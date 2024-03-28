@@ -1,7 +1,6 @@
 name: Run watchdog tests
 
 on:
-  push:
   schedule:
     - cron: '0 */4 * * *'
   workflow_dispatch:
@@ -20,9 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [ "androidci" ]
-        # main and release branches don't have the necessary workflows. This cannot work until merged
-        # branch: [ "main", "release" ]
+        branch: [ "main", "release" ]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
