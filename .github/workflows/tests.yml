@@ -259,6 +259,12 @@ jobs:
 
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
+        env:
+          # Define BUILD_NUMBER environment variable else the change from commit
+          # https://github.com/cgeo/cgeo/commit/cfa797e3a48cbd581a31f470703ee15ddb191f49
+          # prevent us to be recognized as a runner, which lead to appID being suffixed
+          # by ".developer" thus leading to failure installing the cgeo prefrences
+          BUILD_NUMBER: ${{ github.run_number }}
         with:
           api-level: ${{ env.API_LEVEL }}
           arch: x86_64
@@ -266,9 +272,12 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew :main:copyDefaultPreferencesToAndroid --no-daemon --stacktrace --info
-            ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
-          # script: ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            ./gradlew \
+              testDebug \
+              --stacktrace \
+              --no-daemon \
+              --scan \
+              -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
