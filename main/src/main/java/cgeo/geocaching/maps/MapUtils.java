@@ -28,6 +28,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -42,9 +43,13 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -72,6 +77,9 @@ public class MapUtils {
     private MapUtils() {
         // should not be instantiated
     }
+
+    private static TextPaint elevationTextPaint = null;
+    private static Paint elevationPaint = null;
 
     // filter waypoints from owned caches or certain wp types if requested.
     public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext) {
@@ -351,4 +359,38 @@ public class MapUtils {
         menu.addItemClickListener(uniqueId, clickAction::call);
     }
 
+    // elevation handling -------------------------------------------------------------------------------------------
+
+    public static Bitmap getElevationBitmap(final Resources res, final int markerHeight, final double altitude) {
+        final float textSizeInPx = ViewUtils.dpToPixel(14f);
+        final int width = (int) (8 * textSizeInPx);
+        final int height = markerHeight + (int) (2 * textSizeInPx) + 2;
+
+        if (elevationTextPaint == null) {
+            elevationTextPaint = new TextPaint();
+            elevationTextPaint.setColor(0xff007ae3); // same as in heading indicator
+            elevationTextPaint.setTextSize(textSizeInPx);
+            elevationTextPaint.setAntiAlias(true);
+            elevationTextPaint.setTextAlign(Paint.Align.CENTER);
+        }
+
+        if (elevationPaint == null) {
+            elevationPaint = new Paint();
+            elevationPaint.setColor(res.getColor(R.color.osm_zoomcontrolbackground));
+            elevationPaint.setStrokeCap(Paint.Cap.ROUND);
+            elevationPaint.setStrokeWidth(textSizeInPx);
+        }
+
+        final Bitmap bm = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        final android.graphics.Canvas canvas = new android.graphics.Canvas(bm);
+        final String info = Units.formatElevation((float) altitude);
+
+        final float textWidth = elevationTextPaint.measureText(info) + 10;
+        final float yPos = height - 0.45f * textSizeInPx;
+        canvas.drawLine((float) (width - textWidth) / 2, yPos, (float) (width + textWidth) / 2, yPos, elevationPaint);
+
+        canvas.drawText(info, (int) (width / 2), height - 4, elevationTextPaint);
+
+        return bm;
+    }
 }

@@ -29,10 +29,6 @@ public class DistanceView {
         }
     }
 
-    public void setElevation(final float elevation) {
-        mapDistanceDrawer.drawElevation(elevation);
-    }
-
     public void setRealDistance(final float realDistance) {
         this.realDistance = realDistance;
     }

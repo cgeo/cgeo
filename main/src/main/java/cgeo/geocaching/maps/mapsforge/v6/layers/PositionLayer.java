@@ -2,6 +2,8 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.MapUtils;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -21,6 +23,7 @@ import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.model.Rectangle;
 import org.mapsforge.core.util.MercatorProjection;
+import org.mapsforge.map.android.graphics.AndroidBitmap;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.overlay.Circle;
@@ -90,6 +93,11 @@ public class PositionLayer extends Layer {
                 return;
             }
             canvas.drawBitmap(localArrow, left, top);
+
+            if (coordinates.hasAltitude() && Settings.showElevation()) {
+                final Bitmap elevationInfo = new AndroidBitmap(MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), localArrow.getHeight(), coordinates.getAltitude()));
+                canvas.drawBitmap(elevationInfo, centerX - elevationInfo.getWidth() / 2, centerY - elevationInfo.getHeight() / 2);
+            }
         } else {
             Log.e("PositionLayer.draw: localArrow=null or destroyed, arrowNative=" + arrowNative);
         }

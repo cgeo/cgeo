@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
@@ -24,6 +25,8 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -36,6 +39,7 @@ import java.util.Objects;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -149,11 +153,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 }
             }
         }
-    }
-
-    @Override
-    public void setElevation(final float elevation) {
-        mapView.setElevation(elevation);
     }
 
     public void updateMapRotation() {
@@ -320,8 +319,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
         );
 
+        final Drawable positionMarker = ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null);
         positionObjs.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null)))
+                .icon(BitmapDescriptorCache.toBitmapDescriptor(positionMarker))
                 .position(latLng)
                 .rotation(heading)
                 .anchor(0.5f, 0.5f)
@@ -338,6 +338,17 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             } else if (null != postRealDistance) {
                 postRealDistance.postRealDistance(destCoords.distanceTo(currentCoords));
             }
+        }
+
+        if (coordinates.hasAltitude() && Settings.showElevation()) {
+            final Bitmap elevationInfo = MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), positionMarker.getIntrinsicHeight(), coordinates.getAltitude());
+            positionObjs.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(elevationInfo))
+                    .position(latLng)
+                    .rotation(0)
+                    .anchor(0.5f, 0.5f)
+                    .flat(true)
+                    .zIndex(ZINDEX_POSITION));
         }
     }
 

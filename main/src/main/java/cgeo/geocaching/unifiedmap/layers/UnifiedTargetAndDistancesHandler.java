@@ -57,8 +57,6 @@ public class UnifiedTargetAndDistancesHandler {
     private static final float MIN_DISTANCE = 0.0005f;
     private static final float MIN_DIFF = 0.015f;
 
-    private Pair<Integer, String>  elevationInfo = new Pair<>(0, "");
-
     UnifiedTargetAndDistancesHandler(final View root) {
         distances1 = root.findViewById(R.id.distances1);
         distances2 = root.findViewById(R.id.distances2);
@@ -91,12 +89,12 @@ public class UnifiedTargetAndDistancesHandler {
     }
 
     private void updateDistanceViews() {
-        updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public static void updateDistanceViews(
-            final float distance, final float realDistance, final float routeDistance, final Pair<Integer, String> elevationInfo, final boolean showBothDistances,
+            final float distance, final float realDistance, final float routeDistance, final boolean showBothDistances,
             final LinearLayout distances1, final LinearLayout distances2,
             final TextView distanceSupersizeView, final TextView targetView,
             final Action1<Boolean> updateBothViewNeeded
@@ -135,10 +133,6 @@ public class UnifiedTargetAndDistancesHandler {
         }
         if (routeDistance > MIN_DISTANCE) {
             data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(new Pair<>(R.drawable.map_quick_route, Units.getDistanceFromKilometers(routeDistance)));
-        }
-
-        if (!elevationInfo.second.isEmpty()) {
-            data[data[0].size() > 0 && !supersizeInfo.second.isEmpty() ? 1 : 0].add(elevationInfo);
         }
 
         // update views
@@ -184,17 +178,6 @@ public class UnifiedTargetAndDistancesHandler {
         for (int i = count; i < existing; i++) {
             ll.removeView(ll.getChildAt(data.size()));
         }
-    }
-
-    // elevation handling -------------------------------------------------------------------------------------------
-
-    public void drawElevation(final float elevation) {
-        elevationInfo = buildElevationInfo(elevation);
-        updateDistanceViews();
-    }
-
-    public static Pair<Integer, String> buildElevationInfo(final float elevationInM) {
-        return new Pair<>(R.drawable.elevation, Units.formatElevation(elevationInM));
     }
 
     // target handling ----------------------------------------------------------------------------------------------
