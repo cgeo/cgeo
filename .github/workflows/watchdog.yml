@@ -20,7 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        branch: [ "main", "release" ]
+        branch: [ "androidci" ]
+        # main and release branches don't have the necessary workflows. This cannot work until merged
+        # branch: [ "main", "release" ]
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
