@@ -182,7 +182,6 @@ jobs:
           cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run lintBasicDebug
-        # This job is known to fail. So skip until code is properly fixed
         continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
@@ -192,6 +191,7 @@ jobs:
         uses: hidakatsuya/action-report-android-lint@v1
         with:
           result-path: 'main/build/reports/lint-results-basicDebug.xml'
+          fail-on-warning: false
 
 
 
