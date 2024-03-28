@@ -266,7 +266,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew :main:copyDefaultPreferencesToAndroid --no-daemon --stacktrace
+            ./gradlew :main:copyDefaultPreferencesToAndroid --no-daemon --stacktrace --debug
             ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
           # script: ./gradlew --no-daemon --scan testDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
 

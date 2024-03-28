@@ -686,6 +686,10 @@ tasks.register('copyDefaultPreferencesToAndroid') {
             }
             injected.execOperations.exec {
                 executable = adb
+                args = ['shell', 'cmd', 'package', 'list', 'packages']
+            }
+            injected.execOperations.exec {
+                executable = adb
                 args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
             }
             injected.execOperations.exec {
