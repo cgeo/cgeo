@@ -1,5 +1,5 @@
 name: Unit tests
-run-name: "Unit tests JDK:${{ inputs.JDK_VERSION || '11' }} API:${{ inputs.API_LEVEL || '26' }}"
+run-name: "Unit tests JDK:${{ inputs.JDK_VERSION || '11' }}"
 
 on:
   push:
