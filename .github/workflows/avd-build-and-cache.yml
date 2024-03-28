@@ -1,6 +1,7 @@
 name: Build AVD cache
 
 on:
+  push:
   schedule:
     - cron:  '0 10 * * *'
   workflow_dispatch: 
@@ -9,14 +10,9 @@ on:
         description: The JDK version to use
         type: number
         default: 11
-      API_LEVEL:
-        description: The API Level version to use
-        type: number
-        default: 26
 
 env:
   JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
-  API_LEVEL: ${{ inputs.API_LEVEL || '26' }}
 
 jobs:
   avd-cache-update:
@@ -24,6 +20,9 @@ jobs:
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api-level: [26, 29, 30]
     steps:
       # https://github.blog/changelog/2023-02-23-hardware-accelerated-android-virtualization-on-actions-windows-and-linux-larger-hosted-runners/
       - name: Enable KVM group perms
@@ -48,13 +47,14 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-${{ env.API_LEVEL }}
+          key: avd-${{ matrix.api-level }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ env.API_LEVEL }}
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
           arch: x86_64
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none

@@ -251,6 +251,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ env.API_LEVEL }}
+          target: google_apis
           arch: x86_64
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -267,17 +268,13 @@ jobs:
           BUILD_NUMBER: ${{ github.run_number }}
         with:
           api-level: ${{ env.API_LEVEL }}
+          target: google_apis
           arch: x86_64
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            ./gradlew \
-              testDebug \
-              --stacktrace \
-              --no-daemon \
-              --scan \
-              -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
+            ./gradlew testDebug --stacktrace --no-daemon --scan -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests
 
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
