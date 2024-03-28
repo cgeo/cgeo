@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  JDK_VERSION: 17
+  API_LEVEL: 26
+
 jobs:
   dex-count:
     name: DEX count
@@ -44,10 +48,10 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
       - name: Run countBasicDebugDexMethods
@@ -94,10 +98,10 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
       - name: Run checkstyle
@@ -148,10 +152,10 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
       - name: Run lintBasicDebug
@@ -205,10 +209,10 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
 
       - name: Setup Gradle
@@ -223,13 +227,13 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-26
+          key: avd-${{ env.API_LEVEL }}
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 26
+          api-level: ${{ env.API_LEVEL }}
           arch: x86_64
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
@@ -239,7 +243,7 @@ jobs:
       - name: Run Unit Tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 26
+          api-level: ${{ env.API_LEVEL }}
           arch: x86_64
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
