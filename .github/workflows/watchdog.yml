@@ -1,10 +1,19 @@
 name: Run watchdog tests
 
 on:
-  workflow_dispatch:
+  push:
   schedule:
     - cron:  '0 */4 * * *'
+  workflow_dispatch:
+    inputs:
+      JDK_VERSION:
+        description: The JDK version to use
+        type: number
+        default: 11
 
+env:
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  API_LEVEL: 26
 
 jobs:
   watchdog-tests:
@@ -48,13 +57,25 @@ jobs:
           PREF_USERNAME: ${{ secrets.PREF_USERNAME }}
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
-      - name: Set up JDK 11
+      - name: Set up JDK ${{ env.JDK_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 11
+          java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
+
+      - name: Gradle cache
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/androidci' }}
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
 
       - name: Run WatchdogTest
         uses: gradle/gradle-build-action@v2
         with:
           arguments: --no-daemon --continue main:connectedBasicDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=cgeo.watchdog.WatchdogTest
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/test-results/**/*.xml'
