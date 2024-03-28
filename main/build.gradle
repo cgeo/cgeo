@@ -680,31 +680,25 @@ tasks.register('copyDefaultPreferencesToAndroid') {
     Injected injected = project.objects.newInstance(Injected)
     doFirst {
         if (preferencesFile.exists()) {
-            try {
-                injected.execOperations.exec {
-                    executable = adb
-                    args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
-                }
-                injected.execOperations.exec {
-                    executable = adb
-                    args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
-                }
-                injected.execOperations.exec {
-                    executable = adb
-                    args = ['shell', 'run-as', appID, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
-                }
-                injected.execOperations.exec {
-                    executable = adb
-                    args = ['shell', 'run-as', appID, 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
-                }
-                injected.execOperations.exec {
-                    executable = adb
-                    args = ['shell', 'getprop', 'ro.build.version.release']
-                }
+            injected.execOperations.exec {
+                executable = adb
+                args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
             }
-            // we might not actually have permission to copy the preferences on actual devices, let's continue running the app then
-            catch (RuntimeException e) {
-                print(e.message)
+            injected.execOperations.exec {
+                executable = adb
+                args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
+            }
+            injected.execOperations.exec {
+                executable = adb
+                args = ['shell', 'run-as', appID, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
+            }
+            injected.execOperations.exec {
+                executable = adb
+                args = ['shell', 'run-as', appID, 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
+            }
+            injected.execOperations.exec {
+                executable = adb
+                args = ['shell', 'getprop', 'ro.build.version.release']
             }
         }
     }
