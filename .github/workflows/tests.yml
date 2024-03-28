@@ -1,14 +1,25 @@
-name: Test code
+name: Unit tests
+run-name: "Unit tests JDK:${{ inputs.JDK_VERSION || '11' }} API:${{ inputs.API_LEVEL || '26' }}"
 
 on:
   push:
     branches: [ "master", "androidci" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      JDK_VERSION:
+        description: The JDK version to use
+        type: number
+        default: 11
+      API_LEVEL:
+        description: The API Level version to use
+        type: number
+        default: 26
 
 env:
-  JDK_VERSION: 17
-  API_LEVEL: 26
+  JDK_VERSION: ${{ inputs.JDK_VERSION || '11' }}
+  API_LEVEL: ${{ inputs.API_LEVEL || '26' }}
 
 jobs:
   dex-count:
