@@ -6,3 +6,4 @@
 - Change: Save trackable action also for offline logs
 - Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
 - Fix: Waypoint target switching back to cache as target (UnifiedMap)
+- Fix: "Storing" a cache without selecting a list
