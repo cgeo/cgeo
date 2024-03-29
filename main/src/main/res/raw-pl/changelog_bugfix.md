@@ -6,3 +6,4 @@
 - Zmiana: Zapisz działanie dla przedmiotu podróżnego również dla wpisów offline
 - Poprawka: Przełączanie mapy na współrzędne 0,0 przy zmianie typu mapy (UnifiedMap)
 - Poprawka: Cel punktu nawigacji przełączał się na skrytkę jako cel (UnifiedMap)
+- Poprawka: „Zapisywanie” skrytki bez wybierania listy
