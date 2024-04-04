@@ -1703,7 +1703,13 @@ public final class GCParser {
 
     @Nullable
     public static String getUsername(@NonNull final String page) {
-        final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
+        String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_CACHE_COUNT, null);
+        if (StringUtils.isNotBlank(username)) {
+            return username;
+        }
+
+        //second try
+        username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
         }
@@ -1718,7 +1724,7 @@ public final class GCParser {
     public static int getCachesCount(@Nullable final String page) {
         int cachesCount = -1;
         try {
-            final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, ""));
+            final String intStringToParse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_CACHE_COUNT, true, 2, "", false);
             if (!StringUtils.isBlank(intStringToParse)) {
                 cachesCount = Integer.parseInt(intStringToParse);
             }

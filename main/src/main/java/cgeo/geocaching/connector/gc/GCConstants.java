@@ -92,6 +92,11 @@ public final class GCConstants {
     static final Pattern PATTERN_BACKGROUND_IMAGE = Pattern.compile("<body background=\"(.+?)\"");
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
+
+    //Try to find pattern as follows:
+    //"publicGuid":"abc.def","referenceCode":"PRxyz","id":1234567,"username":"user","dateCreated":"2012-01-21T20:51:14","findCount":15123,
+    public static final Pattern PATTERN_LOGIN_NAME_CACHE_COUNT = Pattern.compile("\"publicGuid\":\"[^\"]+\",\"referenceCode\":\"[^\"]+\",\"id\":[0-9]+,\"username\":\"([^\"]+)\",\"dateCreated\":\"[0-9:T-]+\",\"findCount\":([0-9]+),");
+
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /**
