@@ -212,7 +212,12 @@ public final class ImageUtils {
         final ImmutableTriple<Integer, Integer, Boolean> scaledSize = calculateScaledImageSizes(image.getWidth(), image.getHeight(), maxWidth, maxHeight, minWidth, minHeight);
 
         if (scaledSize.right) {
-            result = BitmapCompat.createScaledBitmap(image, scaledSize.left, scaledSize.middle, null, true);
+            if (image.getConfig() == null) {
+                // see #15526: surprisingly, Bitmaps with getConfig() == null may causing a NPE when using BitmapCompat...
+                result = Bitmap.createScaledBitmap(image, scaledSize.left, scaledSize.middle, true);
+            } else {
+                result = BitmapCompat.createScaledBitmap(image, scaledSize.left, scaledSize.middle, null, true);
+            }
         }
 
         final BitmapDrawable resultDrawable = new BitmapDrawable(app.getResources(), result);
