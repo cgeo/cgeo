@@ -8,3 +8,4 @@
 - Fix: Waypoint target switching back to cache as target (UnifiedMap)
 - Fix: "Storing" a cache without selecting a list
 - Fix: Login failure due to website change on geocaching.com
+- Change: Show elevation info below position marker (if activated)
