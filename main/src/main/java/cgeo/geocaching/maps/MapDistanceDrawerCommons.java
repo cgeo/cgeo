@@ -23,8 +23,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.core.util.Pair;
-
 public class MapDistanceDrawerCommons {
     private final LinearLayout distances1;
     private final LinearLayout distances2;
@@ -36,8 +34,6 @@ public class MapDistanceDrawerCommons {
     private float distance = 0.0f;
     private float realDistance = 0.0f;
     private float routeDistance = 0.0f;
-
-    private Pair<Integer, String> elevationInfo = new Pair<>(0, "");
 
     public MapDistanceDrawerCommons(final View root) {
         distances1 = root.findViewById(R.id.distances1);
@@ -57,11 +53,6 @@ public class MapDistanceDrawerCommons {
         updateDistanceViews();
     }
 
-    public void drawElevation(final float elevation) {
-        elevationInfo = UnifiedTargetAndDistancesHandler.buildElevationInfo(elevation);
-        updateDistanceViews();
-    }
-
     public void drawRouteDistance(final float routeDistance) {
         this.routeDistance = routeDistance;
         drawDistance(showBothDistances, distance, realDistance);
@@ -75,7 +66,7 @@ public class MapDistanceDrawerCommons {
 
     private void updateDistanceViews() {
         // glue code to UnifiedMap
-        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, elevationInfo, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
+        UnifiedTargetAndDistancesHandler.updateDistanceViews(distance, realDistance, routeDistance, showBothDistances, distances1, distances2, distanceSupersizeView, targetView, bvn -> bothViewsNeeded = bvn);
     }
 
 }

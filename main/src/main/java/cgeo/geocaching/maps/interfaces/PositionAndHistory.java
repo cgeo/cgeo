@@ -16,8 +16,6 @@ public interface PositionAndHistory extends IndividualRoute.UpdateIndividualRout
 
     Location getCoordinates();
 
-    void setElevation(float elevation);
-
     void setHeading(float bearingNow);
 
     float getHeading();

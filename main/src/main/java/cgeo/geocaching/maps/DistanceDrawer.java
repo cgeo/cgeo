@@ -30,10 +30,6 @@ public class DistanceDrawer {
         }
     }
 
-    public void setElevation(final float elevation) {
-        mapDistanceDrawer.drawElevation(elevation);
-    }
-
     public Geopoint getDestinationCoords() {
         return destinationCoords;
     }

@@ -1280,10 +1280,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                                 map.proximityNotification.checkDistance(map.caches.getClosestDistanceInM(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude())));
                                 timeLastDistanceCheck = System.currentTimeMillis();
                             }
-
-                            if (Settings.showElevation()) {
-                                map.distanceView.setElevation(currentLocation.hasAltitude() ? (float) currentLocation.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
-                            }
                         }
                     }
                 } catch (final RuntimeException e) {

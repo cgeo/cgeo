@@ -614,10 +614,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (viewModel.proximityNotification.getValue() != null) {
                 viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
             }
-
-            if (Settings.showElevation()) {
-                viewModel.elevation.setValue(locationWrapper.location.hasAltitude() ? (float) locationWrapper.location.getAltitude() : Routing.NO_ELEVATION_AVAILABLE);
-            }
         }
     }
 
