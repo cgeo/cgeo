@@ -1,9 +1,11 @@
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
+- Neu: Löschen von Offline-Logs über Kontextmenü
+- Korrektur: Löschen eines Offline-Logs funktioniert unter bestimmten Bedingungen nicht
+- Korrektur: Filtername nach Änderungen über Schnelleinstellungen verloren
+- Änderung: Trackdateien nach Namen sortieren
+- Änderung: Speichere gewählte Trackable-Aktion auch bei Offline-Logs
+- Korrektur: Karte springt zu 0,0 Koordinaten bei Kartenänderung (UnifiedMap)
+- Korrektur: Nach Setzen eines Wegpunktes als Ziel springt die Zielanzeige wieder zurück zum Cache (UnifiedMap)
+- Korrektur: "Speichern" eines Caches ohne eine Liste auszuwählen
+- Korrektur: Anmeldefehler bei geocaching.com (Webseitenänderung)
+- Change: Show elevation info below position marker (if activated)
