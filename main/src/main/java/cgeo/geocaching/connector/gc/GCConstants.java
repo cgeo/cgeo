@@ -148,11 +148,12 @@ public final class GCConstants {
      * Four groups
      */
     static final Pattern PATTERN_TRACKABLE_DETAILSIMAGE = Pattern.compile("<div id=\"TrackableDetails\">([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*</div> <div class=\"Clear\">");
-    static final Pattern PATTERN_TRACKABLE_ICON = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>");
-    static final Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
+    static final Pattern PATTERN_TRACKABLE_ICON = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" aria-hidden=\"true\" src=\"([^\"]+)\"[^>]*>");
+    static final Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" aria-hidden=\"true\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_TYPE_TITLE = Pattern.compile("<title>\\s\\(TB[0-9A-Z]*\\) ([^<]*)<\\/title>");
     static final Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("\\(([0-9.,]+)(km|mi)[^\\)]*\\)\\s*<a href=\"map_gm");
-    static final Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data BorderTop .+?/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</th>.+?guid=([^\"]+).+?>([^<]+)</a>.+?(?:(guid=|https://www.geocaching.com/geocache/)([^\"]+)\">(<span[^>]+>)?([^<]+)</.+?)?LUID=([^\"]+)\">.+?<td colspan=\"4\">\\s*<div.*?>(.*?)</div>\\s*(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
+    static final Pattern PATTERN_TRACKABLE_LOG_OUTER = Pattern.compile("<tr class=\"Data BorderTop \\w*\">[\\S\\s]+?(?=</tr>)[\\S\\s]+?(?=<tr)[\\S\\s]+?(?=</tr)");
+    static final Pattern PATTERN_TRACKABLE_LOG_INNER = Pattern.compile("/images/logtypes/([^.]+)\\.png[^>]+>&nbsp;([^<]+)</th>[\\S\\s]+?(?=\\?guid=)\\?guid=([^\"]+)\">([^<]+)</a>(?:.+?(?=https://www\\.geocaching\\.com/geocache/)https://www\\.geocaching\\.com/geocache/([^\"]+)\">(<span[^>]+>)?([^<]+))?[\\S\\s]+?(?=/live/log)/live/log/([^\"]+)[\\S\\s]+?(?=TrackLogText)[^\"]+\">([\\S\\s]*?(?=</div>))");
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<ul class=\"log_images\"><li><a href=\"([^\"]+)\".+?class=\"tb_images\".+?alt=\"([^<]*)\"" + Pattern.quote(" />"));
     static final Pattern PATTERN_TRACKABLE_IS_LOCKED = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\"[^(]*\\(locked\\)</a></td>");
 
