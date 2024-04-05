@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="log_delete_confirm">Möchten Sie das Log vom Typ \'%1$s\' des Autors \'%2$s\' mit dem Logdatum \'%3$s\' wirklich löschen?</string>
+    <string name="log_offline_delete_confirm">Möchtest du wirklich das gespeicherte Offline-Log vom Typ \'%1$s\' mit dem Logdatum \'%2$s \' löschen?</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- Contacts -->
     <string name="contact_not_found">Kontakt mit Alias/Spitzname %s nicht gefunden. Bitte zuerst im Adressbuch hinzufügen.</string>
@@ -2348,6 +2349,7 @@
     <!-- individual track -->
     <string name="map_load_track">Lade Track/Route aus GPX</string>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
+    <string name="load_track_error_named">Fehler beim Laden von Track/Route: \"%s\"</string>
     <string name="map_clear_track">Route/Track löschen</string>
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>
     <!-- route/track commons -->
