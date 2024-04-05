@@ -7,3 +7,5 @@
 - Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
 - Fix: Waypoint target switching back to cache as target (UnifiedMap)
 - Fix: "Storing" a cache without selecting a list
+- Oprava: Selhání přihlášení kvůli změně na webových stránkách geocaching.com
+- Změna: Zobrazit informace o nadmořské výšce pod značkou polohy (pokud je aktivováno)
