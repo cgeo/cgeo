@@ -8,4 +8,4 @@
 - Korrektur: Nach Setzen eines Wegpunktes als Ziel springt die Zielanzeige wieder zurück zum Cache (UnifiedMap)
 - Korrektur: "Speichern" eines Caches ohne eine Liste auszuwählen
 - Korrektur: Anmeldefehler bei geocaching.com (Webseitenänderung)
-- Change: Show elevation info below position marker (if activated)
+- Änderung: Höhenangabe unterhalb des Positionsmarkers anzeigen (falls aktiviert)
