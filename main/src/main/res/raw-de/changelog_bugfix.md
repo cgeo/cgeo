@@ -9,4 +9,4 @@
 - Korrektur: "Speichern" eines Caches ohne eine Liste auszuwählen
 - Korrektur: Anmeldefehler bei geocaching.com (Webseitenänderung)
 - Änderung: Höhenangabe unterhalb des Positionsmarkers anzeigen (falls aktiviert)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- HINWEIS: Es gibt weitere Probleme aufgrund kürzlicher Änderungen auf der geocaching.com-Webseite, die noch nicht behoben werden konnten. Wir arbeiten daran. Auf unserer [Statusseite](https://github.com/cgeo/cgeo/issues/15555) findest du den aktuellen Fortschritt.
