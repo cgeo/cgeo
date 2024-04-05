@@ -7,6 +7,24 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.04.05 Bugfix Release
+
+- Fix: Login failure due to website change on geocaching.com
+- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+<br />
+
+- New: Delete offline logs using context menu
+- Fix: Deleting offline log not working under certain condition
+- Fix: Filter name lost on filter quickchange
+- Change: Sort trackfiles by name
+- Change: Save trackable action also for offline logs
+- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
+- Fix: Waypoint target switching back to cache as target (UnifiedMap)
+- Fix: "Storing" a cache without selecting a list
+- Change: Show elevation info below position marker (if activated)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.03.19 Feature Release
 
 ### Map
