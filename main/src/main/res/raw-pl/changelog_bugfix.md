@@ -7,3 +7,5 @@
 - Poprawka: Przełączanie mapy na współrzędne 0,0 przy zmianie typu mapy (UnifiedMap)
 - Poprawka: Cel punktu nawigacji przełączał się na skrytkę jako cel (UnifiedMap)
 - Poprawka: „Zapisywanie” skrytki bez wybierania listy
+- Poprawka: Błąd logowania z powodu zmiany strony na geocaching.com
+- Change: Show elevation info below position marker (if activated)
