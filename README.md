@@ -14,8 +14,7 @@ It would be bad for you to have implemented something great but we can't include
 ### Starting points for contribution
 
 You can also take a look at the [project page](https://github.com/cgeo/cgeo/projects) of our repository.
-For example, we have a collection of [urgent issues](https://github.com/cgeo/cgeo/projects/6) and a list of [beginner topics](https://github.com/cgeo/cgeo/projects/7).
-They collect issues that might be suitable for your first contribution.
+We have a list of [good first issues](https://github.com/cgeo/cgeo/contribute), that might be suitable for your first contribution, and a collection of [high priority issues](https://github.com/cgeo/cgeo/issues?q=is%3Aissue+is%3Aopen+label%3A%22Prio+-+High%22).
 
 ## Project status
 
