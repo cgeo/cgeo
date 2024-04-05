@@ -7,3 +7,5 @@
 - Oplossing: Kaart overschakelen naar 0,0 coördinaten op kaart type verandering (UnifiedMap)
 - Oplossing: Waypoint doel terugschakelen naar de cache als doel (UnifiedMap)
 - Oplossing: "Opslaan" van een cache zonder een lijst te selecteren
+- Oplossing: Inloggen mislukt als gevolg van websitewijziging op geocaching.com
+- Wijziging: Toon hoogte info onder de positie marker (indien geactiveerd)
