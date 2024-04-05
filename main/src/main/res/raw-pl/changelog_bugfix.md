@@ -1,1 +1,12 @@
 ##
+- Nowość: Usuwanie wpisów offline za pomocą menu kontekstowego
+- Poprawka: Usuwanie wpisów offline czasami nie działało
+- Poprawka: Tracono nazwę filtra przy szybkiej zmianie filtra
+- Zmiana: Sortowanie plików ze śladami według nazwy
+- Zmiana: Zapisz działanie dla przedmiotu podróżnego również dla wpisów offline
+- Poprawka: Przełączanie mapy na współrzędne 0,0 przy zmianie typu mapy (UnifiedMap)
+- Poprawka: Cel punktu nawigacji przełączał się na skrytkę jako cel (UnifiedMap)
+- Poprawka: „Zapisywanie” skrytki bez wybierania listy
+- Poprawka: Błąd logowania z powodu zmiany strony na geocaching.com
+- Change: Show elevation info below position marker (if activated)
+- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.

@@ -2439,6 +2439,7 @@
     <string name="mapserver_hylly_themes_info">\"Hylly\"지도를 위해 제작 된 상세한지도 테마</string>
     <string name="brouter_info">오프라인 라우팅 서비스</string>
     <string name="maptheme_elevate_categoryinfo">관련 항목: [A] 지역, [P] 관심 지점, [R] 경로, [W] 길</string>
+    <string name="maptheme_vtm_scaling_summary">오프라인 지도의 크기 조정 옵션(다시 시작해야 함)</string>
     <string name="maptheme_scale_map_title">지도 축척 비율</string>
     <string name="maptheme_scale_map_summary">지도 축척; 100% = 축척 없음</string>
     <string name="maptheme_scale_text_title">문자 축척 비율</string>
