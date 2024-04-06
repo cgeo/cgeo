@@ -9,3 +9,4 @@
 ### Obecné
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
 - Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
+- Změna: Použijte OSM Nominatum jako záložní geokodér, který nahradí geokodér MapQuest (který nám již nefunguje)
