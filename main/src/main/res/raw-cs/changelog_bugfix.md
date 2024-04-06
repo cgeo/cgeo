@@ -9,4 +9,4 @@
 - Fix: "Storing" a cache without selecting a list
 - Oprava: Selhání přihlášení kvůli změně na webových stránkách geocaching.com
 - Změna: Zobrazit informace o nadmořské výšce pod značkou polohy (pokud je aktivováno)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- POZNÁMKA: V důsledku nedávných změn na webu geocaching.com se objevily další problémy, které ještě nebyly odstraněny. Pracujeme na tom. Podívejte se na naší [stavovou stránku](https://github.com/cgeo/cgeo/issues/15555) pro aktuální pokrok.
