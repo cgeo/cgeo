@@ -1,5 +1,5 @@
 ### 지도
-- New: "Edit Personal Note" from cache info sheet
+- 신규: 캐시 정보 시트에서 "개인 메모 편집"
 
 ### 캐시 상세정보
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
@@ -9,3 +9,4 @@
 ### 일반
 - 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
 - 신규: 목록 선택 대화 상자: 이름에 ":"가 포함된 캐시 목록 자동 그룹화
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
