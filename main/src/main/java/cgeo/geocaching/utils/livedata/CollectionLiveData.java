@@ -1,13 +1,18 @@
 package cgeo.geocaching.utils.livedata;
 
+import cgeo.geocaching.utils.Log;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Consumer;
@@ -26,17 +31,23 @@ public class CollectionLiveData<T, C extends Collection<T>> {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final MutableLiveData<Integer> liveData;
     private final C value;
+    private final C valueReadOnly;
 
-    public CollectionLiveData(@NonNull final Supplier<C> supplier) {
+    private CollectionLiveData(@NonNull final Supplier<C> supplier, @Nullable final Function<C, C> readOnlyMaker) {
         this.value = supplier.get();
+        this.valueReadOnly = readOnlyMaker == null ? this.value : readOnlyMaker.apply(this.value);
         this.liveData = new MutableLiveData<>(0);
+    }
+
+    public static <TT> CollectionLiveData<TT, Set<TT>> set(@NonNull final Supplier<Set<TT>> supplier) {
+        return new CollectionLiveData<>(supplier, Collections::unmodifiableSet);
     }
 
     /** executes an Action reading the collection */
     public void read(final Consumer<C> readAction) {
         lock.readLock().lock();
         try {
-            readAction.accept(value);
+            readAction.accept(valueReadOnly);
         } finally {
             lock.readLock().unlock();
         }
@@ -46,7 +57,7 @@ public class CollectionLiveData<T, C extends Collection<T>> {
     public <R> R readWithResult(final Function<C, R> readFunction) {
         lock.readLock().lock();
         try {
-            return readFunction.apply(value);
+            return readFunction.apply(valueReadOnly);
         } finally {
             lock.readLock().unlock();
         }
@@ -57,7 +68,9 @@ public class CollectionLiveData<T, C extends Collection<T>> {
     public void write(final boolean post, final Consumer<C> writeAction) {
         lock.writeLock().lock();
         try {
+            final int sizeBefore = value.size();
             writeAction.accept(value);
+            Log.d("CollectionLiveData: write action changed size: " + sizeBefore + "->" + value.size());
         } finally {
             lock.writeLock().unlock();
         }

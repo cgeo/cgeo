@@ -25,9 +25,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
-    public static final int MAX_CACHES = 500;
+    public static final int MAX_CACHES = 2000;
 
     public static final String CACHE_KEY_PREFIX = "CACHE_";
     public static final String CACHE_STAR_KEY_PREFIX = "CACHE_STAR_";
@@ -51,7 +52,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
     //public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
-    public final CollectionLiveData<Geocache, LeastRecentlyUsedSet<Geocache>> caches = new CollectionLiveData<>(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
+    public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
 
     public final ConstantLiveData<LeastRecentlyUsedSet<String>> cachesWithStarDrawn = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES));
