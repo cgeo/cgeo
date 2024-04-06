@@ -1322,7 +1322,7 @@ public final class GCParser {
                     }
 
                     // Apply the pattern for images in a trackable log entry against each full log (group(0))
-                    final String logEntry = matcherLogs.group(0);
+                    final String logEntry = matcherLogsOuter.group(0);
                     final MatcherWrapper matcherLogImages = new MatcherWrapper(GCConstants.PATTERN_TRACKABLE_LOG_IMAGES, logEntry);
                     /*
                      * 1. Image URL
