@@ -1374,8 +1374,8 @@
     <string name="map_routing">Yönlendirme</string>
     <string name="map_routing_activate_title">Yönlendirmeyi aktifleştir</string>
     <string name="map_routing_activate">Yönlendirme motorları aktif olmadıkları için bazı yönlendirme modları çalışmamaktadır.\n\nc:geo\'nun dahili yönlendirme motorunu aktive edip yönlendirme verisini indirmek istiyor musunuz?</string>
-    <string name="map_gm_autorotation">Haritayı otomatik döndür</string>
-    <string name="map_gm_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
+    <string name="map_autorotation">Haritayı otomatik döndür</string>
+    <string name="map_autorotation_disable">Otomatik harita döndürmesini devre dışı bırakılsın mı?\n\nHarita döndürme menüsünü kullanarak tekrardan etkinleştirebilirsiniz</string>
     <string name="quick_settings">Hızlı ayarlar</string>
     <string name="quick_settings_info">Bazı harita ayarları (Harita ayarları, gizleme, rotalama) yeni \"Hızlı ayarlar\" penceresine taşındı.\nBu pencereyi haritanın en alt ortasındaki ikonu kullanarak açabilirsiniz.</string>
     <string name="map_show_caches_title">Bu Cache\'leri Göster:</string>

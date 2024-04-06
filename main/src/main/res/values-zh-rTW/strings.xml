@@ -1122,7 +1122,7 @@
     <string name="map_select_multiple_items">選取項目</string>
     <string name="map_routing">路徑</string>
     <string name="map_routing_activate_title">打開路徑</string>
-    <string name="map_gm_autorotation">自動旋轉地圖</string>
+    <string name="map_autorotation">自動旋轉地圖</string>
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>

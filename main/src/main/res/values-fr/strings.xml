@@ -1651,8 +1651,8 @@
     <string name="map_routing">Calcul de l\'itinéraire</string>
     <string name="map_routing_activate_title">Activer le routage</string>
     <string name="map_routing_activate">Certains modes de routage ne sont actuellement pas disponibles, car aucun moteur de routage n\'est actif.\n\nVoulez-vous activer le moteur de routage interne de c:geo et télécharger les données de routage ?</string>
-    <string name="map_gm_autorotation">Rotation automatique de la carte</string>
-    <string name="map_gm_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
+    <string name="map_autorotation">Rotation automatique de la carte</string>
+    <string name="map_autorotation_disable">Désactiver la rotation automatique de la carte ?\n\nVous pourrez l\'activer à nouveau depuis le menu Rotation de la carte</string>
     <string name="quick_settings">Paramètres rapides</string>
     <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
     <string name="other_settings">Autres paramètres</string>

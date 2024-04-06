@@ -1384,8 +1384,8 @@
     <string name="map_routing">ルート検索</string>
     <string name="map_routing_activate_title">ルート検索について</string>
     <string name="map_routing_activate">ルート検索エンジンがないためルート検索は現在使用できません。\n\nc:geoルート検索を有効にしてルート検索データをダウンロードしますか? </string>
-    <string name="map_gm_autorotation">地図の自動回転</string>
-    <string name="map_gm_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
+    <string name="map_autorotation">地図の自動回転</string>
+    <string name="map_autorotation_disable">地図の自動回転を無効にしますか?\n\n地図の回転メニューで再度有効にできます</string>
     <string name="quick_settings">クイック設定</string>
     <string name="quick_settings_info">いくつか地図の設定(地図上の表示/非表示、ルート検索など)は新しい「クイック設定」に移動しました。\n地図の下部中央の歯車アイコンをタップすると開けます</string>
     <string name="map_show_caches_title">キャッシュ表示:</string>
