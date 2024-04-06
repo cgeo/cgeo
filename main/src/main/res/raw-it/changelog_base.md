@@ -9,3 +9,4 @@
 ### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
 - Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
