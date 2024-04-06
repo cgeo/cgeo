@@ -1755,8 +1755,8 @@
     <string name="map_routing">Wyznaczanie trasy</string>
     <string name="map_routing_activate_title">Włącz wyznaczanie trasy</string>
     <string name="map_routing_activate">Niektóre tryby wyznaczania trasy są obecnie niedostępne, ponieważ silnik wyznaczania trasy nie jest aktywny.\n\nCzy chcesz aktywować wewnętrzny silnik wyznaczania trasy c:geo i pobierać dane nawigowania?</string>
-    <string name="map_gm_autorotation">Automatyczne obracanie mapy</string>
-    <string name="map_gm_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
+    <string name="map_autorotation">Automatyczne obracanie mapy</string>
+    <string name="map_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
     <string name="other_settings">Inne ustawienia</string>

@@ -890,8 +890,8 @@
     <string name="map_live_disable">неповне життя</string>
     <string name="map_as_list">показати як список</string>
     <string name="map_select_multiple_items">виберіть елемент</string>
-    <string name="map_gm_autorotation">маршрутизація</string>
-    <string name="map_gm_autorotation_disable">Відключити автоповорот карти?\n\nМожете знову включити її в меню обертання карти</string>
+    <string name="map_autorotation">маршрутизація</string>
+    <string name="map_autorotation_disable">Відключити автоповорот карти?\n\nМожете знову включити її в меню обертання карти</string>
     <string name="quick_settings">Швидкі налаштування</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>

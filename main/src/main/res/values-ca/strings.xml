@@ -1679,8 +1679,8 @@
     <string name="map_routing">Encaminament</string>
     <string name="map_routing_activate_title">Activa l\'encaminament</string>
     <string name="map_routing_activate">Alguns modes d’encaminament actualment no estan disponibles, ja que no hi ha cap motor d’encaminament actiu.\n\nVoleu activar el motor d’encaminament intern de C:geo i la descàrrega de dades d’encaminament?</string>
-    <string name="map_gm_autorotation">Mapa autorotatori</string>
-    <string name="map_gm_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
+    <string name="map_autorotation">Mapa autorotatori</string>
+    <string name="map_autorotation_disable">Voleu desactivar la rotació automàtica del mapa?\n\nPodeu tornar a activar-lo mitjançant el menú de rotació del mapa</string>
     <string name="quick_settings">Configuració ràpida</string>
     <string name="quick_settings_info">Algunes configuracions del mapa (Configuració del mapa, ocultació, encaminament) s\'han mogut a la nova finestra emergent \"Configuració ràpida\".\nPodeu obrir aquesta finestra emergent mitjançant la icona que hi ha al centre de la part inferior del mapa.</string>
     <string name="other_settings">Altres configuracions</string>

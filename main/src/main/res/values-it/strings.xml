@@ -1724,8 +1724,8 @@
     <string name="map_routing">Percorso</string>
     <string name="map_routing_activate_title">Abilita percorso</string>
     <string name="map_routing_activate">Alcune modalità di navigazione non sono attualmente disponibili, poiché nessun motore di routing è attivo.\n\nVuoi attivare il motore di routing interno di c:geo e scaricare i dati di routing?</string>
-    <string name="map_gm_autorotation">Rotazione automatica mappa</string>
-    <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
+    <string name="map_autorotation">Rotazione automatica mappa</string>
+    <string name="map_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
     <string name="other_settings">Altre impostazioni</string>
