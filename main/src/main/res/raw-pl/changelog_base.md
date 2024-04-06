@@ -9,3 +9,4 @@
 ### General
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
 - Nowość: Okno wyboru listy: Automatycznie grupowane listy skrytek mają dwukropek w nazwie
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
