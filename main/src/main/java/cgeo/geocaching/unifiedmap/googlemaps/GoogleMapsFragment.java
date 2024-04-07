@@ -15,6 +15,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 
 import android.app.Activity;
 import android.graphics.Point;
@@ -248,7 +249,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
         final View fragmentView = getView();
         if (fragmentView != null) {
-            fragmentView.findViewWithTag("GoogleMapCompass").setVisibility(mapRotation == MAPROTATION_MANUAL ? View.VISIBLE : View.GONE);
+            fragmentView.findViewWithTag("GoogleMapCompass").setVisibility(mapRotation != MAPROTATION_OFF ? View.VISIBLE : View.GONE);
         }
     }
 

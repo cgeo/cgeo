@@ -2,7 +2,8 @@
 - Fix: Found counter not detected in certain situations due to website changes
 - Fix: Crash on opening map with empty track file names
 - Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-
+- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
+- Fix: Trackable logs cannot be loaded due to website changes
 
 ##
 - New: Delete offline logs using context menu
