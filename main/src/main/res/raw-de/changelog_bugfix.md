@@ -1,4 +1,11 @@
 ##
+- Fix: Found counter not detected in certain situations due to website changes
+- Fix: Crash on opening map with empty track file names
+- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
+- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
+- Fix: Trackable logs cannot be loaded due to website changes
+
+##
 - Neu: Löschen von Offline-Logs über Kontextmenü
 - Korrektur: Löschen eines Offline-Logs funktioniert unter bestimmten Bedingungen nicht
 - Korrektur: Filtername nach Änderungen über Schnelleinstellungen verloren
@@ -6,7 +13,7 @@
 - Änderung: Speichere gewählte Trackable-Aktion auch bei Offline-Logs
 - Korrektur: Karte springt zu 0,0 Koordinaten bei Kartenänderung (UnifiedMap)
 - Korrektur: Nach Setzen eines Wegpunktes als Ziel springt die Zielanzeige wieder zurück zum Cache (UnifiedMap)
-- Korrektur: "Speichern" eines Caches ohne eine Liste auszuwählen
+- Fix: "Storing" a cache without selecting a list
 - Korrektur: Anmeldefehler bei geocaching.com (Webseitenänderung)
 - Änderung: Höhenangabe unterhalb des Positionsmarkers anzeigen (falls aktiviert)
-- HINWEIS: Es gibt weitere Probleme aufgrund kürzlicher Änderungen auf der geocaching.com-Webseite, die noch nicht behoben werden konnten. Wir arbeiten daran. Auf unserer [Statusseite](https://github.com/cgeo/cgeo/issues/15555) findest du den aktuellen Fortschritt.
+- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
