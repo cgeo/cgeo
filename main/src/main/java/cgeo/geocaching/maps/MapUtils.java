@@ -22,6 +22,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -227,7 +228,6 @@ public class MapUtils {
      */
     public static SimplePopupMenu createMapLongClickPopupMenu(final Activity activity, final Geopoint longClickGeopoint, final Point tapXY, final IndividualRoute individualRoute, final IndividualRoute.UpdateIndividualRoute routeUpdater, final Runnable updateRouteTrackButtonVisibility, final Geocache currentTargetCache, final MapOptions mapOptions, final Action2<Geopoint, String> setTarget) {
         final int offset = ResourcesCompat.getDrawable(activity.getResources(), R.drawable.map_pin, null).getIntrinsicHeight() / 2;
-        final float elevation = Routing.getElevation(longClickGeopoint);
 
         return SimplePopupMenu.of(activity)
                 .setMenuContent(R.menu.map_longclick)
@@ -235,25 +235,32 @@ public class MapUtils {
                 .setOnCreatePopupMenuListener(menu -> {
                     menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
                     menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
-                    if (!Float.isNaN(elevation)) {
-                        menu.findItem(R.id.menu_elevation).setVisible(true).setTitle(String.format(activity.getString(R.string.menu_elevation_info), Units.formatElevation(elevation)));
-                    }
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
                 .addItemClickListener(R.id.menu_coords, item -> {
                     final AtomicReference<TextView> textview = new AtomicReference<>();
                     final AlertDialog dialog = Dialogs.newBuilder(activity)
-                            .setTitle(R.string.waypoint_coordinates)
-                            .setMessage("") // set a dummy message so that the textview gets created
+                            .setTitle(R.string.selected_position)
+                            .setView(R.layout.dialog_selected_position)
                             .setPositiveButton(R.string.ok, null)
-                            .setNegativeButton(android.R.string.copy, (d, which) -> {
+                            .setNegativeButton(R.string.copy_coordinates, (d, which) -> {
                                 ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
                                 Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
                             })
                             .show();
-                    textview.set(dialog.findViewById(android.R.id.message));
+                    textview.set(dialog.findViewById(R.id.tv1));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
+
+                    final float elevation = Routing.getElevation(longClickGeopoint);
+                    if (!Float.isNaN(elevation)) {
+                        ((TextView) dialog.findViewById(R.id.tv2a)).setText(R.string.menu_elevation_info);
+                        ((TextView) dialog.findViewById(R.id.tv2b)).setText(Units.formatElevation(elevation));
+                    }
+
+                    final float distance = longClickGeopoint.distanceTo(LocationDataProvider.getInstance().currentGeo().getCoords());
+                    ((TextView) dialog.findViewById(R.id.tv3a)).setText(R.string.distance);
+                    ((TextView) dialog.findViewById(R.id.tv3b)).setText(Units.getDistanceFromKilometers(distance));
                 })
                 .addItemClickListener(R.id.menu_add_to_route, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false);

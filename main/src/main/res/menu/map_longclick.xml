@@ -18,7 +18,7 @@
     </item>
     <item
         android:id="@+id/menu_coords"
-        android:title="@string/context_map_show_coords">
+        android:title="@string/selected_position">
     </item>
     <item
         android:id="@+id/menu_target"
@@ -27,10 +27,5 @@
     <item
         android:id="@+id/menu_navigate"
         android:title="@string/cache_menu_navigate">
-    </item>
-    <item
-        android:id="@+id/menu_elevation"
-        android:title=""
-        android:visible="false">
     </item>
 </menu>

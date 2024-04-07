@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/abc_dialog_padding_top_material"
+    android:paddingLeft="?attr/dialogPreferredPadding"
+    android:paddingRight="?attr/dialogPreferredPadding">
+
+    <!-- dialog paddings taken from material/values.xml -->
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/alertDialogBodyTextStyle" />
+
+    <TextView
+        android:id="@+id/tv2a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/tv1"
+        style="@style/alertDialogBodyTextStyle" />
+    <TextView
+        android:id="@+id/tv2b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/tv1"
+        android:layout_toRightOf="@id/tv2a"
+        android:layout_alignEnd="@id/tv1"
+        android:gravity="right"
+        style="@style/alertDialogBodyTextStyle" />
+
+    <TextView
+        android:id="@+id/tv3a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/tv2a"
+        style="@style/alertDialogBodyTextStyle" />
+    <TextView
+        android:id="@+id/tv3b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_below="@id/tv2b"
+        android:layout_toRightOf="@id/tv3a"
+        android:layout_alignEnd="@id/tv1"
+        android:gravity="right"
+        style="@style/alertDialogBodyTextStyle" />
+
+</RelativeLayout>
