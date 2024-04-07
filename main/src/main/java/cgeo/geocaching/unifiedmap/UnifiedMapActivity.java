@@ -455,6 +455,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(viewport2.get());
                         }
+                        refreshMapData(false);
                     }
                 });
                 break;
