@@ -1724,8 +1724,6 @@
     <string name="map_routing">Percorso</string>
     <string name="map_routing_activate_title">Abilita percorso</string>
     <string name="map_routing_activate">Alcune modalità di navigazione non sono attualmente disponibili, poiché nessun motore di routing è attivo.\n\nVuoi attivare il motore di routing interno di c:geo e scaricare i dati di routing?</string>
-    <string name="map_gm_autorotation">Rotazione automatica mappa</string>
-    <string name="map_gm_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
     <string name="other_settings">Altre impostazioni</string>
@@ -2163,7 +2161,7 @@
     <string name="status_new_release" tools:ignore="UnusedResources">Una nuova versione è disponibile.\nClicca per installarla.</string>
     <string name="status_new_nightly" tools:ignore="UnusedResources">Una nuova versione nightly è disponibile.\nClicca per installarla.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">Una nuova release candidate è disponibile.\nClicca per installarla.</string>
-    <string name="status_geocaching_change" tools:ignore="UnusedResources">I cambiamenti su geocaching.com stanno causando problemi in c:geo.\nNe siamo al correwnte e ci stiamo lavorando, ti preghiamo di darci un po\' di tempo!</string>
+    <string name="status_geocaching_change" tools:ignore="UnusedResources">I cambiamenti su geocaching.com stanno causando problemi in c:geo.\nNe siamo al corrente e ci stiamo lavorando, ti preghiamo di darci un po\' di tempo!</string>
     <string name="status_geocaching_livemap" tools:ignore="UnusedResources">I cambiamenti su geocaching.com stanno causando problemi sulla mappa dal vivo.\nNe siamo consapevoli e ci stiamo lavorando, ti preghiamo di darci un po\' di tempo!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com non è (completamente) disponibile al momento.\nPotresti riscontrare vari problemi in c:geo.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Sembra che tu stia usando una versione precedente di Android. Questa versione di c:geo non è più compatibile con il tuo dispositivo e potrebbe fallire o comportarsi inaspettatamente!\nTocca questo messaggio per ulteriori informazioni.</string>
