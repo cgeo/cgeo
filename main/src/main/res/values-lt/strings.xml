@@ -1598,8 +1598,8 @@
     <string name="map_routing">Maršrutizavimas</string>
     <string name="map_routing_activate_title">Įgalinti maršrutą</string>
     <string name="map_routing_activate">Kai kurie maršruto parinkimo režimai šiuo metu nepasiekiami, nes joks maršruto parinkimo variklis neaktyvus.\n\nAr norite suaktyvinti c:geo vidinį maršruto parinkimo variklį ir atsisiųsti maršruto duomenis?</string>
-    <string name="map_gm_autorotation">Automatinis žemėlapio pasukimas</string>
-    <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
+    <string name="map_autorotation">Automatinis žemėlapio pasukimas</string>
+    <string name="map_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>
     <string name="quick_settings_info">Kai kurie žemėlapio nustatymai (žemėlapio nustatymai, slėpimas, maršruto parinkimas) buvo perkelti į naują iššokantįjį langą „Greiti nustatymai“.\nŠį iššokantįjį langą galite atidaryti naudodami piktogramą, esančią žemėlapio apačioje centre.</string>
     <string name="map_show_caches_title">Rodyti slėptuves:</string>

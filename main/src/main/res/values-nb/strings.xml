@@ -1339,8 +1339,8 @@
     <string name="map_select_multiple_items">Velg objekt</string>
     <string name="map_routing">Ruting</string>
     <string name="map_routing_activate_title">Aktiver ruting</string>
-    <string name="map_gm_autorotation">Automatisk rotering av kart</string>
-    <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
+    <string name="map_autorotation">Automatisk rotering av kart</string>
+    <string name="map_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <string name="quick_settings">Hurtiginnstillinger</string>
     <string name="quick_settings_info">Noen kartinnstillinger (Kartinnstillinger, skjul, ruting) er flyttet til det nye \"Hurtiginnstillinger\"-vinduet.\nDu kan åpne dette vinduet ved å bruke ikonet i nederst i midten av kartet.</string>
     <string name="map_show_caches_title">Vis cacher:</string>

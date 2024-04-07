@@ -1724,7 +1724,7 @@ public final class GCParser {
     public static int getCachesCount(@Nullable final String page) {
         int cachesCount = -1;
         try {
-            final String intStringToParse = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_CACHE_COUNT, true, 2, "", false);
+            final String intStringToParse = TextUtils.getMatch(page, GCConstants.PATTERN_FINDCOUNT, true, 1, "", false);
             if (!StringUtils.isBlank(intStringToParse)) {
                 cachesCount = Integer.parseInt(intStringToParse);
             }

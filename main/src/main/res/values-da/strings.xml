@@ -1119,8 +1119,8 @@
     <string name="map_live_disable">Deaktivér live</string>
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
-    <string name="map_gm_autorotation">Auto-rotér kort</string>
-    <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
+    <string name="map_autorotation">Auto-rotér kort</string>
+    <string name="map_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>

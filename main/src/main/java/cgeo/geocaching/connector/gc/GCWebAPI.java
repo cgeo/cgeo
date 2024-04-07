@@ -11,6 +11,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.sorting.GeocacheSort;
@@ -399,6 +400,10 @@ public class GCWebAPI {
                 params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
                         ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
 
+                //6.4.24: seems like gc.com adds a strange "rad=16000" parameter to every box search. Always 16000, regardless of zoom level.
+                // Don't know why yet...
+                params.put("rad", "16000");
+
                 //set origin to middle of viewport (will be overridden if origin is set explicitely later)
                 params.put("origin", String.valueOf(this.box.getCenter().getLatitude()) + ',' + this.box.getCenter().getLongitude());
             }
@@ -489,9 +494,10 @@ public class GCWebAPI {
             }
 
             //special
-            if (deliverLastFoundDateOfFoundBy && foundBy.size() == 1) {
-                params.put("properties", "callernote");
-            }
+            //6.4.24: seems like "properties=callernote" is now ALWAYS set
+            //if (deliverLastFoundDateOfFoundBy && foundBy.size() == 1) {
+            params.put("properties", "callernote");
+            //}
 
             //paging / result size
             params.put("take", "" + take);
@@ -500,8 +506,9 @@ public class GCWebAPI {
             //sort
             if (sort != null) {
                 params.put("sort", sort.keyword);
-                if (sort == SortType.DISTANCE) {
+                if (sort == SortType.DISTANCE && this.box == null) {
                     //to sort by distance we need to set an origin of distance measurement
+                    //6.4.24: gc.com seems to avoid dorigin param when box is set. So let's avoid it too...
                     final Geopoint dOrigin = origin != null ? origin : LocationDataProvider.getInstance().currentGeo().getCoords();
                     params.put("dorigin", String.valueOf(dOrigin.getLatitude()) + ',' + dOrigin.getLongitude());
                 }
@@ -512,8 +519,9 @@ public class GCWebAPI {
             //ALWAYS send cgeo as an identifier
             params.put("app", "cgeo"); //identify us towards Groundspeak due to gentlemens agreement
 
-            return apiProxyReq().uri("/web/search/v2").uriParams(params).requestJson(MapSearchResultSet.class).blockingGet();
-            //return getAPI("/web/search/v2", params, MapSearchResultSet.class).blockingGet();
+            final HttpRequest request = apiProxyReq().uri("/web/search/v2").uriParams(params);
+            Log.iForce("GCWEBAPI: request: " + request.getRequestUrl());
+            return request.requestJson(MapSearchResultSet.class).blockingGet();
         }
 
         public void fillSearchCacheData(final SearchCacheData searchCacheData) {

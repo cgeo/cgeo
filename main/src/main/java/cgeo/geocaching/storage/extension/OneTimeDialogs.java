@@ -24,7 +24,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
         MISSING_UNICODE_CHARACTERS(R.string.select_icon, R.string.onetime_missing_unicode_info, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_THEME_FIX_SLOWNESS(R.string.onetime_mapthemefixslow_title, R.string.onetime_mapthemefixslow_message, DefaultBehavior.SHOW_ALWAYS, R.string.faq_url_settings_themes),
-        MAP_AUTOROTATION_DISABLE(R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0),
+        MAP_AUTOROTATION_DISABLE(R.string.map_autorotation, R.string.map_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_LIVE_DISABLED(R.string.map_live_disabled, R.string.map_live_disabled_hint, DefaultBehavior.SHOW_ALWAYS, 0),
         ROUTE_OPTIMIZATION(R.string.route_optimization, R.string.route_optimization_info, DefaultBehavior.SHOW_ALWAYS, 0),
         NOTIFICATION_PERMISSION(R.string.changed_permissions_title, R.string.changed_permissions_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),

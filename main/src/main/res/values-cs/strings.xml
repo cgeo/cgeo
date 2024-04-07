@@ -1759,8 +1759,8 @@
     <string name="map_routing">Směrování</string>
     <string name="map_routing_activate_title">Povolit směrování</string>
     <string name="map_routing_activate">Některé režimy směrování nejsou momentálně k dispozici, protože není aktivní žádný směrovací modul.\n\nChcete aktivovat zabudované směrování aplikace c:geo a stahování směrovacích dat?</string>
-    <string name="map_gm_autorotation">Automatické otáčení mapy</string>
-    <string name="map_gm_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
+    <string name="map_autorotation">Automatické otáčení mapy</string>
+    <string name="map_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete ji znovu povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
     <string name="other_settings">Další nastavení</string>

@@ -1599,8 +1599,8 @@
     <string name="map_routing">Navigácia</string>
     <string name="map_routing_activate_title">Povoliť navigáciu</string>
     <string name="map_routing_activate">Niektoré režimy navigácie nie sú momentálne k dispozícii, pretože nie je aktívne žiadne navigačné prostredie.\n\nChcete aktivovať zabudované navigačné prostredie aplikácie c:geo a prevziať údaje navigácie?</string>
-    <string name="map_gm_autorotation">Automatické otáčanie mapy</string>
-    <string name="map_gm_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
+    <string name="map_autorotation">Automatické otáčanie mapy</string>
+    <string name="map_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
     <string name="quick_settings_info">Niektoré nastavenia mapy (nastavenie mapy, skrytie, trasy) boli presunuté do nového kontextového okna \"Rýchle nastavenia\"\nToto kontextové okno môžete otvoriť pomocou ikony na mape dole v strede.</string>
     <string name="map_show_caches_title">Zobraziť kešky:</string>

@@ -1394,8 +1394,8 @@
     <string name="map_routing">Enrutamiento</string>
     <string name="map_routing_activate_title">Activar enrutamiento</string>
     <string name="map_routing_activate">Algunos modos de enrutamiento no están actualmente disponibles, ya que ningún motor de enrutamiento está activo.\n\n¿Quieres activar el motor de enrutamiento interno de c:geo y descargar los datos de enrutamiento?</string>
-    <string name="map_gm_autorotation">Rotación automática del mapa</string>
-    <string name="map_gm_autorotation_disable">¿Desactivar la rotación automática del mapa?\n\nPuede activarla de nuevo usando el menú de rotación del mapa</string>
+    <string name="map_autorotation">Rotación automática del mapa</string>
+    <string name="map_autorotation_disable">¿Desactivar la rotación automática del mapa?\n\nPuede activarla de nuevo usando el menú de rotación del mapa</string>
     <string name="quick_settings">Configuración rápida</string>
     <string name="quick_settings_info">Algunos ajustes del mapa (configuración del mapa, ocultar, enrutar) se han movido a la nueva ventana de \"Configuración rápida\".\nPuedes abrir esta ventana mediante el icono que hay en la parte inferior del mapa.</string>
     <string name="map_show_caches_title">Mostrar cachés:</string>

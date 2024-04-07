@@ -162,10 +162,22 @@ public class HttpRequest {
         return RxOkHttpUtils.request(httpClient, req);
     }
 
+    /** Returns request url. Meant for logging purposes etc */
+    @Nullable
+    public String getRequestUrl() {
+        try {
+            final HttpUrl url = constructRequestUrl();
+            if (url != null) {
+                return url.toString();
+            }
+        } catch (RuntimeException re) {
+           //ignore
+        }
+        return null;
+    }
 
-    private Request.Builder prepareRequest() {
-        final Request.Builder builder = new Request.Builder();
 
+    private HttpUrl constructRequestUrl() {
         //Uri
         final String finalUri = getFinalUri();
         final HttpUrl httpUrl = HttpUrl.parse(finalUri);
@@ -176,7 +188,15 @@ public class HttpRequest {
         if (!uriParams.isEmpty()) {
             urlBuilder.encodedQuery(uriParams.toString());
         }
-        builder.url(urlBuilder.build());
+        return urlBuilder.build();
+    }
+
+
+    private Request.Builder prepareRequest() {
+        final Request.Builder builder = new Request.Builder();
+
+        //Uri
+        builder.url(constructRequestUrl());
 
         //method and body
         final Method m = (method != null ? method : (requestBodySupplier == null ? Method.GET : Method.POST));
