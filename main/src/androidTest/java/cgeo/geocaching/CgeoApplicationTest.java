@@ -143,7 +143,7 @@ public class CgeoApplicationTest {
         assertThat(tb.getOwner()).isEqualTo("Die Eybacher");
         assertThat(tb.getOwnerGuid()).isEqualTo("5888ea6c-413b-4b60-959d-d3d729ad642b");
 
-        // Following data can potentially change over time. However, is's very unlikely as the trackable is lost since years
+        // Following data can potentially change over time. However, it's very unlikely as the trackable is lost since years
         assertThat(tb.getSpottedType()).isEqualTo(Trackable.SPOTTED_USER);
         assertThat(tb.getSpottedGuid()).isEqualTo("83858f68-ba77-4342-ad89-83aebcf37f86");
         assertThat(tb.getSpottedName()).isEqualTo("cachertimsi");
@@ -154,7 +154,7 @@ public class CgeoApplicationTest {
         assertThat(lastLog.logType).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
         assertThat(lastLog.cacheGeocode).isEqualTo("GC26VJD"); //Guid was: e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f
-        assertThat(lastLog.serviceLogId).isEqualTo("817608e9-850d-428a-9318-442a14b7b631");
+        assertThat(lastLog.serviceLogId).isEqualTo("TL78QV26"); // guid was: 817608e9-850d-428a-9318-442a14b7b631
         assertThat(lastLog.log).isEqualTo("Das tb Hotel war sehr schön");
     }
 
