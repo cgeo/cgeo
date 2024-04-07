@@ -1,4 +1,11 @@
 ##
+- Fix: Found counter not detected in certain situations due to website changes
+- Fix: Crash on opening map with empty track file names
+- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
+- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
+- Fix: Trackable logs cannot be loaded due to website changes
+
+##
 - New: Delete offline logs using context menu
 - Fix: Deleting offline log not working under certain condition
 - Fix: Filter name lost on filter quickchange
@@ -9,4 +16,4 @@
 - Fix: "Storing" a cache without selecting a list
 - Oprava: Selhání přihlášení kvůli změně na webových stránkách geocaching.com
 - Změna: Zobrazit informace o nadmořské výšce pod značkou polohy (pokud je aktivováno)
-- POZNÁMKA: V důsledku nedávných změn na webu geocaching.com se objevily další problémy, které ještě nebyly odstraněny. Pracujeme na tom. Podívejte se na naší [stavovou stránku](https://github.com/cgeo/cgeo/issues/15555) pro aktuální pokrok.
+- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
