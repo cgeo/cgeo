@@ -71,7 +71,7 @@ public final class TextUtils {
     }
 
     public static <T> List<T> sortListLocaleAware(final List<T> listToSort, final Func1<T, String> sortStringAccessor) {
-        Collections.sort(listToSort, (e1, e2) -> COLLATOR.compare(sortStringAccessor.call(e1), sortStringAccessor.call(e2)));
+        Collections.sort(listToSort, CommonUtils.getNullHandlingComparator((e1, e2) -> COLLATOR.compare(sortStringAccessor.call(e1), sortStringAccessor.call(e2)), true));
         return listToSort;
     }
 
