@@ -1729,8 +1729,6 @@
     <string name="map_routing">Routing</string>
     <string name="map_routing_activate_title">Routing aktivieren</string>
     <string name="map_routing_activate">Einige Routing-Modi sind derzeit nicht verfügbar, da keine Routing-Engine aktiv ist.\n\nMöchtest du die interne Routing-Engine von c:geo und das Herunterladen von Routing-Daten aktivieren?</string>
-    <string name="map_gm_autorotation">Automatische Kartendrehung</string>
-    <string name="map_gm_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
     <string name="other_settings">Weitere Einstellungen</string>
