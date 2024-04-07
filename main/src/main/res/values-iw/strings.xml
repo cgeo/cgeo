@@ -418,8 +418,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
-    <string name="map_gm_autorotation_disable">לבטל סיבוב מפה אוטומטי?\n\nניתן להפעיל זאת שוב באמצעות תפריט סיבוב מפה</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
