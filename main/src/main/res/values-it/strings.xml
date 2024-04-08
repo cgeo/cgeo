@@ -900,7 +900,6 @@
     <string name="init_showElevation">Mostra altitudine</string>
     <string name="init_summary_showElevation">Mostra l\"altitudine per la posizione corrente, prendendola dai dati di routing o GNSS (se disponibile)</string>
     <string name="init_elevation_notAvailable">"Nessun dato di elevazione disponibile"</string>
-    <string name="menu_elevation_info">Altitudine (mappa): %s</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache.</string>
     <string name="init_prevent_cache_note_merge">Sovrascrivi Nota Personale cache</string>
