@@ -1025,7 +1025,10 @@
     <string name="init_showElevation">Show Elevation</string>
     <string name="init_summary_showElevation">Show elevation info for current position, taken from routing data or GNSS (if available)</string>
     <string name="init_elevation_notAvailable">"No elevation data available"</string>
-    <string name="menu_elevation_info">Elevation (map): %s</string>
+    <string name="menu_elevation_info">Elevation (map):</string>
+    <string name="distance">Distance:</string>
+    <string name="copy_coordinates">Copy coordinates</string>
+    <string name="selected_position">Selected position</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
     <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note.</string>
     <string name="init_prevent_cache_note_merge">Overwrite Personal Cache Note</string>
