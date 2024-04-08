@@ -901,7 +901,6 @@
     <string name="init_showElevation">Toon steiging</string>
     <string name="init_summary_showElevation">Toon steigingsinformatie voor huidige positie, van routing data of GNSS (indien beschikbaar)</string>
     <string name="init_elevation_notAvailable">"Geen hoogtegegevens beschikbaar"</string>
-    <string name="menu_elevation_info">Hoogte (kaart): %s</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel algemene waypoint extractie uit van persoonlijke cache notities. Het kan nog steeds geactiveerd worden voor individuele caches door het vakje te deactiveren onder de persoonlijke cache notitie.</string>
     <string name="init_prevent_cache_note_merge">Overschrijf persoonlijke cache notitie</string>
@@ -1725,6 +1724,8 @@
     <string name="map_routing">Routering</string>
     <string name="map_routing_activate_title">Routering inschakelen</string>
     <string name="map_routing_activate">Sommige routingingsmodes zijn momenteel niet beschikbaar, omdat er geen routplanner actief is.\n\nWil je c:geo\'s interne routeplanner activeren en data downloaden?</string>
+    <string name="map_autorotation">Automatische kaartrotatie</string>
+    <string name="map_autorotation_disable">Automatische kaartrotatie uitschakelen?\n\nJe kunt het weer inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
     <string name="other_settings">Overige instellingen</string>
