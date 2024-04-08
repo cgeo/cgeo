@@ -911,7 +911,6 @@
     <string name="init_showElevation">Показать высоту</string>
     <string name="init_summary_showElevation">Показывать информацию о высоте для текущего местоположения взятую из данных маршрутизации или со спутниковой системы навигации (если доступно)</string>
     <string name="init_elevation_notAvailable">"Данные о высотах отсутствуют"</string>
-    <string name="menu_elevation_info">Высота над уровнем моря (карта): %s</string>
     <string name="init_global_wp_extraction_disable">Не создавать точки из текста заметки</string>
     <string name="init_summary_global_wp_extraction_disable">Отключить извлечение путевых точек из личных записей тайников. Оно по-прежнему может быть включено для отдельных тайников, путем деактивации чекбокса под индивидуальными заметками тайника.</string>
     <string name="init_prevent_cache_note_merge">Перезаписывать личные заметки тайников</string>
