@@ -818,7 +818,6 @@
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
-    <string name="menu_elevation_info">Nadmorská výška (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
     <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>
