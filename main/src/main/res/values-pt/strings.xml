@@ -904,7 +904,6 @@
     <string name="init_showElevation">Mostrar Relevo</string>
     <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
     <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
-    <string name="menu_elevation_info">Elevação (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
