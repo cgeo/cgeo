@@ -473,6 +473,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         // only initialize loadInBackgroundHandler if caches should actually be loaded
         if (mapType.type == UMTT_PlainMap) {
             refreshMapData(false);
+            if (loadInBackgroundHandler == null) {
+                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+            }
         }
     }
 
@@ -884,8 +887,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.waypoints.notifyDataChanged();
         if (loadInBackgroundHandler != null) {
             loadInBackgroundHandler.onDestroy();
+            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
-        loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         MapUtils.updateFilterBar(this, mapType.filterContext);
     }
 
