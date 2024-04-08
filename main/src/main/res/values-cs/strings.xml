@@ -917,7 +917,6 @@
     <string name="init_showElevation">Zobrazit nadmořskou výšku</string>
     <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_elevation_notAvailable">"Nejsou k dispozici žádné údaje o nadmořské výšce"</string>
-    <string name="menu_elevation_info">Nadmořská výška (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
     <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
