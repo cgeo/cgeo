@@ -9,4 +9,4 @@
 ### Allgemein
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
 - Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
-- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
+- Änderung: Benutze OSM Nominatum als Fallback-Geokodierer, ersetze MapQuest Geocoder (der für uns nicht mehr funktioniert)
