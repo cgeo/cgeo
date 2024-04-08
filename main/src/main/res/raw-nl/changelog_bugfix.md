@@ -1,9 +1,10 @@
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
+- Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
+- Oplossing: Crash bij het openen van kaart met lege track bestandsnamen
+- Oplossing: Automatische kaartrotatie nog steeds actief na resetten met behulp van kompas (UnifiedMap)
+- Oplossing: Ontbrekende kompas roos in autorotatie modus op Google Maps (UnifiedMap)
+- Oplossing: Trackable logs kunnen niet worden geladen vanwege websitewijzigingen
+- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
 
 ##
 - Nieuw: Offline logs verwijderen met behulp van contextmenu
@@ -13,7 +14,7 @@
 - Wijziging: Sla trackable actie ook op voor offline logs
 - Oplossing: Kaart overschakelen naar 0,0 coördinaten op kaart type verandering (UnifiedMap)
 - Oplossing: Waypoint doel terugschakelen naar de cache als doel (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
+- Oplossing: "Opslaan" van een cache zonder een lijst te selecteren
 - Oplossing: Inloggen mislukt als gevolg van websitewijziging op geocaching.com
 - Wijziging: Toon hoogte info onder de positie marker (indien geactiveerd)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- OPMERKING: Er zijn meer problemen als gevolg van recente website wijzigingen op geocaching.com, die nog niet zijn verholpen. We zijn ermee bezig. Bekijk onze [status pagina](https://github.com/cgeo/cgeo/issues/15555) voor de huidige voortgang.
