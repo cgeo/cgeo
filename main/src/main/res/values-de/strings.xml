@@ -901,7 +901,10 @@
     <string name="init_showElevation">Höhe anzeigen</string>
     <string name="init_summary_showElevation">Höhe für aktuelle Position anzeigen (falls verfügbar, aus Routing-Daten oder GNSS-Daten)</string>
     <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
-    <string name="menu_elevation_info">Höhe (Karte): %s</string>
+    <string name="menu_elevation_info">Höhe (Karte):</string>
+    <string name="distance">Entfernung:</string>
+    <string name="copy_coordinates">Kopiere Koordinaten</string>
+    <string name="selected_position">Ausgewählte Position</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
     <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
@@ -1725,6 +1728,8 @@
     <string name="map_routing">Routing</string>
     <string name="map_routing_activate_title">Routing aktivieren</string>
     <string name="map_routing_activate">Einige Routing-Modi sind derzeit nicht verfügbar, da keine Routing-Engine aktiv ist.\n\nMöchtest du die interne Routing-Engine von c:geo und das Herunterladen von Routing-Daten aktivieren?</string>
+    <string name="map_autorotation">Automatische Kartendrehung</string>
+    <string name="map_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
     <string name="other_settings">Weitere Einstellungen</string>
