@@ -4,7 +4,7 @@
 - Oplossing: Automatische kaartrotatie nog steeds actief na resetten met behulp van kompas (UnifiedMap)
 - Oplossing: Ontbrekende kompas roos in autorotatie modus op Google Maps (UnifiedMap)
 - Oplossing: Trackable logs kunnen niet worden geladen vanwege websitewijzigingen
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Wijziging: Combineer hoogte + coördinaat info in kaart lange tik menu in één "geselecteerde positie" + toon afstand tot de huidige positie
 
 ##
 - Nieuw: Offline logs verwijderen met behulp van contextmenu
