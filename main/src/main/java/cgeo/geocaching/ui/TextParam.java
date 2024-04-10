@@ -14,9 +14,11 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 
 import io.noties.markwon.Markwon;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Encapsulates a text object to be set to a TextView.
@@ -41,11 +43,12 @@ public class TextParam {
     private final CharSequence text;
     private final TextParam[] concatTexts;
 
-
     private boolean useHtml = false;
     private boolean useMarkdown = false;
     private int linkifyMask = 0;
     private boolean useMovement = false;
+    private String tooltip = "";
+    private int tooltipId = -1;
 
     private ImageParam image;
     private int imageHeightInDp = IMAGE_SIZE_LARGER_TEXT_SIZE;
@@ -105,6 +108,24 @@ public class TextParam {
      */
     public TextParam setMovement(final boolean useMovement) {
         this.useMovement = useMovement;
+        return this;
+    }
+
+    /**
+     * set tooltip
+     */
+    public TextParam setTooltip(final String tooltip) {
+        this.tooltip = tooltip;
+        this.tooltipId = -1;
+        return this;
+    }
+
+    /**
+     * set tooltip (using resource id)
+     */
+    public TextParam setTooltip(final @StringRes int tooltip) {
+        this.tooltip = "";
+        this.tooltipId = tooltip;
         return this;
     }
 
@@ -171,6 +192,11 @@ public class TextParam {
             view.setText(tcs);
         }
         adjust(view, forceNoMovement);
+        if (StringUtils.isNotBlank(tooltip)) {
+            TooltipCompat.setTooltipText(view, tooltip);
+        } else if (tooltipId > 0) {
+            TooltipCompat.setTooltipText(view, view.getContext().getString(tooltipId));
+        }
     }
 
     /**
