@@ -1,16 +1,22 @@
 package cgeo.geocaching.brouter;
 
+import cgeo.geocaching.brouter.core.FormatGpx;
+import cgeo.geocaching.brouter.core.FormatJson;
+import cgeo.geocaching.brouter.core.FormatKml;
 import cgeo.geocaching.brouter.core.OsmNodeNamed;
 import cgeo.geocaching.brouter.core.OsmTrack;
 import cgeo.geocaching.brouter.core.RoutingContext;
 import cgeo.geocaching.brouter.core.RoutingEngine;
+import cgeo.geocaching.brouter.core.RoutingParamCollector;
 
 import android.os.Bundle;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.Map;
 
 public class BRouterWorker {
     private static final int OUTPUT_FORMAT_GPX = 0;
@@ -25,96 +31,82 @@ public class BRouterWorker {
     public String profileParams;
 
     // external code, do not refactor
-    @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch"})
+    @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch", "deprecation"})
     public String getTrackFromParams(final Bundle params) {
         int engineMode = 0;
         if (params.containsKey("engineMode")) {
             engineMode = params.getInt("engineMode", 0);
         }
 
-        long maxRunningTime = 60000;
-        final String sMaxRunningTime = params.getString("maxRunningTime");
-        if (sMaxRunningTime != null) {
-            maxRunningTime = Integer.parseInt(sMaxRunningTime) * 1000;
-        }
-
         final RoutingContext rc = new RoutingContext();
         rc.rawTrackPath = rawTrackPath;
         rc.profileFilename = profileFilename;
 
-        final String tiFormat = params.getString("turnInstructionFormat");
-        if (tiFormat != null) {
-            if ("osmand".equalsIgnoreCase(tiFormat)) {
-                rc.turnInstructionMode = 3;
-            } else if ("locus".equalsIgnoreCase(tiFormat)) {
-                rc.turnInstructionMode = 2;
+        final RoutingParamCollector routingParamCollector = new RoutingParamCollector();
+
+        // parameter pre control
+        if (params.containsKey("lonlats")) {
+            waypoints = routingParamCollector.getWayPointList(params.getString("lonlats"));
+            params.remove("lonlats");
+        }
+        if (params.containsKey("lats")) {
+            final double[] lats = params.getDoubleArray("lats");
+            final double[] lons = params.getDoubleArray("lons");
+            waypoints = routingParamCollector.readPositions(lons, lats);
+            params.remove("lons");
+            params.remove("lats");
+        }
+
+        if (waypoints == null) {
+            throw new IllegalArgumentException("no points!");
+        }
+        if (engineMode == 0) {
+            if (waypoints.size() < 2) {
+                throw new IllegalArgumentException("we need two lat/lon points at least!");
+            }
+        } else {
+            if (waypoints.size() < 1) {
+                throw new IllegalArgumentException("we need two lat/lon points at least!");
             }
         }
-        if (params.containsKey("timode")) {
-            rc.turnInstructionMode = params.getInt("timode");
-        }
 
-        if (params.containsKey("direction")) {
-            rc.startDirection = params.getInt("direction");
-        }
-        if (params.containsKey("alternativeidx")) {
-            rc.alternativeIdx = params.getInt("alternativeidx");
-        }
-
-        if (nogoList != null) {
-            RoutingContext.prepareNogoPoints(nogoList);
+        if (nogoList != null && nogoList.size() > 0) {
+            // forward already read nogos from filesystem
             if (rc.nogopoints == null) {
                 rc.nogopoints = nogoList;
             } else {
                 rc.nogopoints.addAll(nogoList);
             }
-        }
-        if (rc.nogopoints == null) {
-            rc.nogopoints = nogoPolygonsList;
-        } else if (nogoPolygonsList != null) {
-            rc.nogopoints.addAll(nogoPolygonsList);
-        }
-        final List<OsmNodeNamed> poisList = readPoisList(params);
-        rc.poipoints = poisList;
 
-        if (params.containsKey("lats")) {
-            waypoints = readPositions(params);
-        }
-        if (params.containsKey("lonlats")) {
-            waypoints = readLonlats(params, engineMode);
         }
 
-        if (waypoints == null) {
-            return "no pts ";
-        }
-
-        String extraParams = null;
-        if (params.containsKey("extraParams")) {  // add user params
-            extraParams = params.getString("extraParams");
-        }
-        if (extraParams != null && this.profileParams != null) {
-            // don't overwrite incoming values
-            extraParams = this.profileParams + "&" + extraParams;
-        } else if (this.profileParams != null) {
-            extraParams = this.profileParams;
-        }
-
-        if (params.containsKey("extraParams")) {  // add user params
-            if (rc.keyValues == null) {
-                rc.keyValues = new HashMap<String, String>();
+        final Map<String, String> theParams = new HashMap<>();
+        for (String key : params.keySet()) {
+            final Object value = params.get(key);
+            if (value instanceof double[]) {
+                String s = Arrays.toString(params.getDoubleArray(key));
+                s = s.replace("[", "").replace("]", "");
+                theParams.put(key, s);
+            } else {
+                theParams.put(key, value.toString());
             }
-            final StringTokenizer tk = new StringTokenizer(extraParams, "?&");
-            while (tk.hasMoreTokens()) {
-                final String t = tk.nextToken();
-                final StringTokenizer tk2 = new StringTokenizer(t, "=");
-                if (tk2.hasMoreTokens()) {
-                    final String key = tk2.nextToken();
-                    if (tk2.hasMoreTokens()) {
-                        final String value = tk2.nextToken();
-                        rc.keyValues.put(key, value);
-                    }
-                }
+        }
+        routingParamCollector.setParams(rc, waypoints, theParams);
+
+        if (params.containsKey("extraParams")) {
+            Map<String, String> profileparams = null;
+            try {
+                profileparams = routingParamCollector.getUrlParams(params.getString("extraParams"));
+                routingParamCollector.setProfileParams(rc, profileparams);
+            } catch (UnsupportedEncodingException e) {
+                // ignore
             }
+        }
+
+        long maxRunningTime = 60000;
+        final String sMaxRunningTime = params.getString("maxRunningTime");
+        if (sMaxRunningTime != null) {
+            maxRunningTime = Integer.parseInt(sMaxRunningTime) * 1000L;
         }
 
         final RoutingEngine cr = new RoutingEngine(waypoints, rc, engineMode);
@@ -134,13 +126,12 @@ public class BRouterWorker {
                 return cr.getErrorMessage();
             }
 
-            final String format = params.getString("trackFormat");
             int writeFromat = OUTPUT_FORMAT_GPX;
-            if (format != null) {
-                if ("kml".equals(format)) {
+            if (rc.outputFormat != null) {
+                if ("kml".equals(rc.outputFormat)) {
                     writeFromat = OUTPUT_FORMAT_KML;
                 }
-                if ("json".equals(format)) {
+                if ("json".equals(rc.outputFormat)) {
                     writeFromat = OUTPUT_FORMAT_JSON;
                 }
             }
@@ -148,18 +139,15 @@ public class BRouterWorker {
             final OsmTrack track = cr.getFoundTrack();
 
             if (track != null) {
-                if (params.containsKey("exportWaypoints")) {
-                    track.exportWaypoints = (params.getInt("exportWaypoints", 0) == 1);
-                }
+                track.exportWaypoints = rc.exportWaypoints;
                 switch (writeFromat) {
-                    case OUTPUT_FORMAT_GPX:
-                        return track.formatAsGpx();
                     case OUTPUT_FORMAT_KML:
-                        return track.formatAsKml();
+                        return new FormatKml(rc).format(track);
                     case OUTPUT_FORMAT_JSON:
-                        return track.formatAsGeoJson();
+                        return new FormatJson(rc).format(track);
+                    case OUTPUT_FORMAT_GPX:
                     default:
-                        return track.formatAsGpx();
+                        return new FormatGpx(rc).format(track);
                 }
             }
         } else {    // get other infos
@@ -169,104 +157,6 @@ public class BRouterWorker {
             return cr.getFoundInfo();
         }
         return null;
-    }
-
-    private List<OsmNodeNamed> readPositions(final Bundle params) {
-        final List<OsmNodeNamed> wplist = new ArrayList<>();
-
-        final double[] lats = params.getDoubleArray("lats");
-        final double[] lons = params.getDoubleArray("lons");
-
-        if (lats == null || lats.length < 2 || lons == null || lons.length < 2) {
-            throw new IllegalArgumentException("we need two lat/lon points at least!");
-        }
-
-        for (int i = 0; i < lats.length && i < lons.length; i++) {
-            final OsmNodeNamed n = new OsmNodeNamed();
-            n.name = "via" + i;
-            n.ilon = (int) ((lons[i] + 180.) * 1000000. + 0.5);
-            n.ilat = (int) ((lats[i] + 90.) * 1000000. + 0.5);
-            wplist.add(n);
-        }
-        wplist.get(0).name = "from";
-        wplist.get(wplist.size() - 1).name = "to";
-
-        return wplist;
-    }
-
-    private List<OsmNodeNamed> readLonlats(final Bundle params, final int mode) {
-        final List<OsmNodeNamed> wplist = new ArrayList<>();
-
-        final String lonLats = params.getString("lonlats");
-        if (lonLats == null) {
-            throw new IllegalArgumentException("lonlats parameter not set");
-        }
-
-        final String[] coords;
-        if (mode == 0) {
-            coords = lonLats.split("\\|");
-            if (coords.length < 2) {
-                throw new IllegalArgumentException("we need two lat/lon points at least!");
-            }
-        } else {
-            coords = new String[1];
-            coords[0] = lonLats;
-        }
-
-        for (int i = 0; i < coords.length; i++) {
-            final String[] lonLat = coords[i].split(",");
-            if (lonLat.length < 2) {
-                throw new IllegalArgumentException("we need a lat and a lon point at least!");
-            }
-            wplist.add(readPosition(lonLat[0], lonLat[1], "via" + i));
-        }
-
-        wplist.get(0).name = "from";
-        wplist.get(wplist.size() - 1).name = "to";
-
-        return wplist;
-    }
-
-    private static OsmNodeNamed readPosition(final String vlon, final String vlat, final String name) {
-        if (vlon == null) {
-            throw new IllegalArgumentException("lon " + name + " not found in input");
-        }
-        if (vlat == null) {
-            throw new IllegalArgumentException("lat " + name + " not found in input");
-        }
-
-        return readPosition(Double.parseDouble(vlon), Double.parseDouble(vlat), name);
-    }
-
-    private static OsmNodeNamed readPosition(final double lon, final double lat, final String name) {
-        final OsmNodeNamed n = new OsmNodeNamed();
-        n.name = name;
-        n.ilon = (int) ((lon + 180.) * 1000000. + 0.5);
-        n.ilat = (int) ((lat + 90.) * 1000000. + 0.5);
-        return n;
-    }
-
-    private List<OsmNodeNamed> readPoisList(Bundle params) {
-        // lon,lat,name|...
-        final String pois = params.getString("pois");
-        if (pois == null) {
-            return null;
-        }
-
-        final String[] lonLatNameList = pois.split("\\|");
-
-        final List<OsmNodeNamed> poisList = new ArrayList<OsmNodeNamed>();
-        for (String s : lonLatNameList) {
-            final String[] lonLatName = s.split(",");
-
-            final OsmNodeNamed n = new OsmNodeNamed();
-            n.ilon = (int) ((Double.parseDouble(lonLatName[0]) + 180.) * 1000000. + 0.5);
-            n.ilat = (int) ((Double.parseDouble(lonLatName[1]) + 90.) * 1000000. + 0.5);
-            n.name = lonLatName[2];
-            poisList.add(n);
-        }
-
-        return poisList;
     }
 
 }

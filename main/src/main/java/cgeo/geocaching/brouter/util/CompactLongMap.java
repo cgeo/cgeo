@@ -217,6 +217,7 @@ public class CompactLongMap<V> {
 
 
     // does sorted array "a" contain "id" ?
+    @SuppressWarnings("unchecked")
     private boolean contains(final int idx, final long id, final boolean doPut) {
         final long[] a = al[idx];
         int offset = a.length;
@@ -238,6 +239,7 @@ public class CompactLongMap<V> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     protected void moveToFrozenArrays(final long[] faid, final List<V> flv) {
         for (int i = 1; i < MAXLISTS; i++) {
             pa[i] = 0;

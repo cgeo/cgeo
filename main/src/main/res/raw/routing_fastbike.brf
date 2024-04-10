@@ -25,7 +25,7 @@ assign allow_motorways       = false  # %allow_motorways% | Set to true to allow
 
 assign consider_traffic      = false  # %consider_traffic% | Activate to avoid traffic | boolean
 assign consider_noise        = false  # %consider_noise% | Activate to prefer a low-noise route | boolean
-assign consider_river        = false  # %consider_river% | Activate to prefer a route along rivers or sees | boolean
+assign consider_river        = false  # %consider_river% | Activate to prefer a route along rivers, lakes, etc. | boolean
 assign consider_forest       = false  # %consider_forest% | Activate to prefer a route in forest or parks | boolean
 assign consider_town         = false  # %consider_town% | Activate to bypass cities / big towns as far as possible | boolean
 
