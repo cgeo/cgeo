@@ -1728,7 +1728,6 @@ public final class GCParser {
         } catch (final NumberFormatException e) {
             Log.e("getCachesCount: bad cache count", e);
         }
-
         return cachesCount;
     }
 
