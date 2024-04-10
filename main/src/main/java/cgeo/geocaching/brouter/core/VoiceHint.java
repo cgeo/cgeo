@@ -39,6 +39,7 @@ public class VoiceHint {
     float angle = Float.MAX_VALUE;
     public boolean turnAngleConsumed;
     public boolean needsRealTurn;
+    int maxBadPrio = -1;
     public int roundaboutExit;
 
     public float getTime() {

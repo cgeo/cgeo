@@ -11,14 +11,15 @@ final class BExpression {
 
     private static final int ADD_EXP = 20;
     private static final int MULTIPLY_EXP = 21;
-    private static final int MAX_EXP = 22;
-    private static final int EQUAL_EXP = 23;
-    private static final int GREATER_EXP = 24;
-    private static final int MIN_EXP = 25;
+    private static final int DIVIDE_EXP = 22;
+    private static final int MAX_EXP = 23;
+    private static final int EQUAL_EXP = 24;
+    private static final int GREATER_EXP = 25;
+    private static final int MIN_EXP = 26;
 
-    private static final int SUB_EXP = 26;
-    private static final int LESSER_EXP = 27;
-    private static final int XOR_EXP = 28;
+    private static final int SUB_EXP = 27;
+    private static final int LESSER_EXP = 28;
+    private static final int XOR_EXP = 29;
 
     private static final int SWITCH_EXP = 30;
     private static final int ASSIGN_EXP = 31;
@@ -145,6 +146,8 @@ final class BExpression {
                 exp.typ = AND_EXP;
             } else if ("multiply".equals(operator)) {
                 exp.typ = MULTIPLY_EXP;
+            } else if ("divide".equals(operator)) {
+                exp.typ = DIVIDE_EXP;
             } else if ("add".equals(operator)) {
                 exp.typ = ADD_EXP;
             } else if ("max".equals(operator)) {
@@ -295,6 +298,8 @@ final class BExpression {
                 return op1.evaluate(ctx) - op2.evaluate(ctx);
             case MULTIPLY_EXP:
                 return op1.evaluate(ctx) * op2.evaluate(ctx);
+            case DIVIDE_EXP:
+                return divide(op1.evaluate(ctx), op2.evaluate(ctx));
             case MAX_EXP:
                 return max(op1.evaluate(ctx), op2.evaluate(ctx));
             case MIN_EXP:
@@ -376,6 +381,13 @@ final class BExpression {
 
     private float min(final float v1, final float v2) {
         return v1 < v2 ? v1 : v2;
+    }
+
+    private float divide(float v1, float v2) {
+        if (v2 == 0f) {
+            throw new IllegalArgumentException("div by zero");
+        }
+        return v1 / v2;
     }
 
     @NonNull

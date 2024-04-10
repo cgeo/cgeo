@@ -6,6 +6,7 @@ import cgeo.geocaching.brouter.mapaccess.OsmLink;
 import cgeo.geocaching.brouter.mapaccess.OsmLinkHolder;
 import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.mapaccess.OsmNodePairSet;
+import cgeo.geocaching.brouter.mapaccess.OsmPos;
 import cgeo.geocaching.brouter.util.CompactLongMap;
 import cgeo.geocaching.brouter.util.SortedHeap;
 import cgeo.geocaching.utils.Log;
@@ -88,16 +89,21 @@ public class RoutingEngine extends Thread {
 
         switch (engineMode) {
             case BROUTER_ENGINEMODE_ROUTING:
+                if (waypoints.size() < 2) {
+                    throw new IllegalArgumentException("we need two lat/lon points at least!");
+                }
                 doRouting(maxRunningTime);
                 break;
             case BROUTER_ENGINEMODE_SEED: /* do nothing, handled the old way */
-                break;
+                throw new IllegalArgumentException("not a valid engine mode");
             case BROUTER_ENGINEMODE_GETELEV:
+                if (waypoints.size() < 1) {
+                    throw new IllegalArgumentException("we need one lat/lon point at least!");
+                }
                 doGetElev();
                 break;
             default:
-                doRouting(maxRunningTime);
-                break;
+                throw new IllegalArgumentException("not a valid engine mode");
         }
     }
 
@@ -116,16 +122,22 @@ public class RoutingEngine extends Thread {
                 track.message = "track-length = " + track.distance + " filtered ascend = " + track.ascend
                         + " plain-ascend = " + track.plainAscend + " cost=" + track.cost;
                 if (track.energy != 0) {
-                    track.message += " energy=" + track.getFormattedEnergy() + " time=" + track.getFormattedTime2();
+                    track.message += " energy=" + Formatter.getFormattedEnergy(track.energy) + " time=" + Formatter.getFormattedTime2(track.getTotalSeconds());
                 }
                 track.name = "brouter_" + routingContext.getProfileName() + "_" + i;
 
                 messageList.add(track.message);
                 track.messageList = messageList;
                 if (i == routingContext.getAlternativeIdx(0, 3)) {
+                    /*
                     if ("CSV".equals(System.getProperty("reportFormat"))) {
-                        track.dumpMessages(null, routingContext);
+                        track.dumpMessages(null, routingContext); // old
+
+                        // new
+                        String filename = outfileBase + i + ".csv";
+                        new btools.router.FormatCsv(routingContext).write(filename, track);
                     }
+                    */
                     foundTrack = track;
                 } else {
                     continue;
@@ -190,7 +202,7 @@ public class RoutingEngine extends Thread {
             final OsmNodeNamed n = new OsmNodeNamed(listOne.get(0).crosspoint);
             n.selev = startNode != null ? startNode.getSElev() : Short.MIN_VALUE;
 
-            outputMessage = OsmTrack.formatAsGpxWaypoint(n);
+            outputMessage = new FormatGpx(routingContext).formatAsWaypoint(n);
 
             final long endTime = System.currentTimeMillis();
             logInfo("execution time = " + (endTime - startTime) / 1000. + " seconds");
@@ -704,11 +716,12 @@ public class RoutingEngine extends Thread {
                 if (eleLast != Short.MIN_VALUE) {
                     ehb = ehb + (eleLast - ele) * eleFactor;
                 }
+                final double filter = elevationFilter(n);
                 if (ehb > 0) {
                     ascend += ehb;
                     ehb = 0;
-                } else if (ehb < -10) {
-                    ehb = -10;
+                } else if (ehb < filter) {
+                    ehb = filter;
                 }
             }
 
@@ -743,6 +756,23 @@ public class RoutingEngine extends Thread {
 
         logInfo("track-length total = " + t.distance);
         logInfo("filtered ascend = " + t.ascend);
+    }
+
+    /**
+     * find the elevation type for position
+     * to determine the filter value
+     *
+     * @param n  the point
+     * @return  the filter value for 1sec / 3sec elevation source
+     */
+    double elevationFilter(OsmPos n) {
+        if (nodesCache != null) {
+            final int r = nodesCache.getElevationType(n.getILon(), n.getILat());
+            if (r == 1) {
+                return -5.;
+            }
+        }
+        return -10.;
     }
 
     // geometric position matching finding the nearest routable way-section
@@ -1454,7 +1484,7 @@ public class RoutingEngine extends Thread {
     }
 
     public String getTime() {
-        return foundTrack.getFormattedTime2();
+        return Formatter.getFormattedTime2(foundTrack.getTotalSeconds());
     }
 
     public OsmTrack getFoundTrack() {

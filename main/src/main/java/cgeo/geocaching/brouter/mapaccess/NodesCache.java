@@ -394,4 +394,21 @@ public final class NodesCache implements Closeable {
             }
         }
     }
+
+    public int getElevationType(final int ilon, final int ilat) {
+        final int lonDegree = ilon / 1000000;
+        final int latDegree = ilat / 1000000;
+        final OsmFile[] fileRow = fileRows[latDegree];
+        final int ndegrees = fileRow == null ? 0 : fileRow.length;
+        for (int i = 0; i < ndegrees; i++) {
+            if (fileRow[i].lonDegree == lonDegree) {
+                final OsmFile osmf = fileRow[i];
+                if (osmf != null) {
+                    return osmf.elevationType;
+                }
+                break;
+            }
+        }
+        return 3;
+    }
 }

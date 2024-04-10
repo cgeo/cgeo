@@ -10,22 +10,25 @@ import java.util.List;
 
 public final class VoiceHintProcessor {
 
-    double significantAngle = 22.5;
-    double internalCatchingRange = 2.;
+    static final double SIGNIFICANT_ANGLE = 22.5;
+    static final double INTERNAL_CATCHING_RANGE = 2.;
 
     // private double catchingRange; // range to catch angles and merge turns
     private final boolean explicitRoundabouts;
+    private final int transportMode;
 
-    public VoiceHintProcessor(final boolean explicitRoundabouts) {
+    public VoiceHintProcessor(final double catchingRange, final boolean explicitRoundabouts, final int transportMode) {
         // this.catchingRange = catchingRange;
         this.explicitRoundabouts = explicitRoundabouts;
+        this.transportMode = transportMode;
     }
 
-    private float sumNonConsumedWithinCatchingRange(final List<VoiceHint> inputs, int offset) {
+    private float sumNonConsumedWithinCatchingRange(final List<VoiceHint> inputs, final int offset) {
+        int offsetLocal = offset;
         double distance = 0.;
         float angle = 0.f;
-        while (offset >= 0 && distance < internalCatchingRange) {
-            final VoiceHint input = inputs.get(offset--);
+        while (offsetLocal >= 0 && distance < INTERNAL_CATCHING_RANGE) {
+            final VoiceHint input = inputs.get(offsetLocal--);
             if (input.turnAngleConsumed) {
                 break;
             }
@@ -84,11 +87,24 @@ public final class VoiceHintProcessor {
                     roundaboudStartIdx = hintIdx;
                 }
                 roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
+                if (roundaboudStartIdx == hintIdx) {
+                    if (input.badWays != null) {
+                        // remove goodWay
+                        roundAboutTurnAngle -= input.goodWay.turnangle;
+                        // add a badWay
+                        for (MessageData badWay : input.badWays) {
+                            if (!badWay.isBadOneway()) {
+                                roundAboutTurnAngle += badWay.turnangle;
+                            }
+                        }
+                    }
+                }
                 boolean isExit = roundaboutExit == 0; // exit point is always exit
                 if (input.badWays != null) {
                     for (MessageData badWay : input.badWays) {
-                        if (!badWay.isBadOneway() && badWay.isGoodForCars() && Math.abs(badWay.turnangle) < 120.) {
+                        if (!badWay.isBadOneway() && badWay.isGoodForCars()) {
                             isExit = true;
+                            break;
                         }
                     }
                 }
@@ -98,12 +114,34 @@ public final class VoiceHintProcessor {
                 continue;
             }
             if (roundaboutExit > 0) {
-                roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
-                final double startTurn = (roundaboudStartIdx != -1 ? inputs.get(roundaboudStartIdx).goodWay.turnangle : turnAngle);
+                //roundAboutTurnAngle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
+                //double startTurn = (roundaboudStartIdx != -1 ? inputs.get(roundaboudStartIdx + 1).goodWay.turnangle : turnAngle);
                 input.angle = roundAboutTurnAngle;
+                input.goodWay.turnangle = roundAboutTurnAngle;
                 input.distanceToNext = distance;
-                input.roundaboutExit = startTurn < 0 ? -roundaboutExit : roundaboutExit;
+                //input.roundaboutExit = startTurn < 0 ? roundaboutExit : -roundaboutExit;
+                input.roundaboutExit = roundAboutTurnAngle < 0 ? roundaboutExit : -roundaboutExit;
+                float tmpangle = 0;
+                final VoiceHint tmpRndAbt = new VoiceHint();
+                tmpRndAbt.badWays = new ArrayList<>();
+                for (int i = hintIdx - 1; i > roundaboudStartIdx; i--) {
+                    final VoiceHint vh = inputs.get(i);
+                    tmpangle += inputs.get(i).goodWay.turnangle;
+                    if (vh.badWays != null) {
+                        for (MessageData badWay : vh.badWays) {
+                            if (!badWay.isBadOneway()) {
+                                final MessageData md = new MessageData();
+                                md.linkdist = vh.goodWay.linkdist;
+                                md.priorityclassifier = vh.goodWay.priorityclassifier;
+                                md.turnangle = tmpangle;
+                                tmpRndAbt.badWays.add(md);
+                            }
+                        }
+                    }
+                }
                 distance = 0.;
+
+                input.badWays = tmpRndAbt.badWays;
                 results.add(input);
                 roundAboutTurnAngle = 0.f;
                 roundaboutExit = 0;
@@ -130,6 +168,7 @@ public final class VoiceHintProcessor {
 
                     if (badPrio > maxPrioAll && !isBadHighway2Link) {
                         maxPrioAll = badPrio;
+                        input.maxBadPrio = Math.max(input.maxBadPrio, badPrio);
                     }
 
                     if (badWay.costfactor < 20.f && Math.abs(badTurn) < minAbsAngeRaw) {
@@ -148,8 +187,13 @@ public final class VoiceHintProcessor {
                         continue; // ways from the back should not trigger a slight turn
                     }
 
+                    if (badWay.costfactor < 20.f && Math.abs(badTurn) < minAbsAngeRaw) {
+                        minAbsAngeRaw = Math.abs(badTurn);
+                    }
+
                     if (badPrio > maxPrioCandidates) {
                         maxPrioCandidates = badPrio;
+                        input.maxBadPrio = Math.max(input.maxBadPrio, badPrio);
                     }
                     if (badTurn > maxAngle) {
                         maxAngle = badTurn;
@@ -160,7 +204,8 @@ public final class VoiceHintProcessor {
                 }
             }
 
-            final boolean hasSomethingMoreStraight = (Math.abs(turnAngle) - minAbsAngeRaw) > 20.;
+            // boolean hasSomethingMoreStraight = (Math.abs(turnAngle) - minAbsAngeRaw) > 20.;
+            final boolean hasSomethingMoreStraight = (Math.abs(turnAngle - minAbsAngeRaw)) > 20. && input.badWays != null; // && !ignoreBadway;
 
             // unconditional triggers are all junctions with
             // - higher detour prios than the minimum route prio (except link->highway junctions)
@@ -197,7 +242,7 @@ public final class VoiceHintProcessor {
                 distance = 0.;
                 results.add(input);
             }
-            if (results.size() > 0 && distance < internalCatchingRange) { //catchingRange
+            if (results.size() > 0 && distance < INTERNAL_CATCHING_RANGE) { //catchingRange
                 results.get(results.size() - 1).angle += sumNonConsumedWithinCatchingRange(inputs, hintIdx);
             }
         }
@@ -215,7 +260,7 @@ public final class VoiceHintProcessor {
             if (!(hint.needsRealTurn && (hint.cmd == VoiceHint.C || hint.cmd == VoiceHint.BL))) {
                 double dist = hint.distanceToNext;
                 // sum up other hints within the catching range (e.g. 40m)
-                while (dist < internalCatchingRange && i > 0) {
+                while (dist < INTERNAL_CATCHING_RANGE && i > 0) {
                     final VoiceHint h2 = results.get(i - 1);
                     dist = h2.distanceToNext;
                     hint.distanceToNext += dist;
@@ -245,82 +290,134 @@ public final class VoiceHintProcessor {
     }
 
     @SuppressWarnings("checkstyle:ModifiedControlVariable")
-    public List<VoiceHint> postProcess(List<VoiceHint> inputs, double catchingRange, double minRange) {
-        final List<VoiceHint> results = new ArrayList<VoiceHint>();
+    public List<VoiceHint> postProcess(final List<VoiceHint> inputs, final double catchingRange, final double minRange) {
+        final List<VoiceHint> results = new ArrayList<>();
+        final double distance = 0;
         VoiceHint inputLast = null;
-        final ArrayList<VoiceHint> tmpList = new ArrayList<>();
+        VoiceHint inputLastSaved = null;
         for (int hintIdx = 0; hintIdx < inputs.size(); hintIdx++) {
             final VoiceHint input = inputs.get(hintIdx);
+            VoiceHint nextInput = null;
+            if (hintIdx + 1 < inputs.size()) {
+                nextInput = inputs.get(hintIdx + 1);
+            }
 
-            if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
-                int badWayPrio = 0;
-                if (input.badWays != null) {
-                    for (MessageData md : input.badWays) {
-                        badWayPrio = Math.max(badWayPrio, md.getPrio());
+            if (nextInput == null) {
+                if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
+                    if (input.goodWay.getPrio() < input.maxBadPrio && (inputLastSaved != null && inputLastSaved.distanceToNext > catchingRange)) {
+                        results.add(input);
+                    } else {
+                        if (inputLast != null) { // when drop add distance to last
+                            inputLast.distanceToNext += input.distanceToNext;
+                        }
+                        continue;
                     }
-                }
-                if (input.goodWay.getPrio() < badWayPrio) {
-                    results.add(input);
                 } else {
-                    if (inputLast != null) { // when drop add distance to last
-                        inputLast.distanceToNext += input.distanceToNext;
-                    }
-                    continue;
+                    results.add(input);
                 }
             } else {
-                if (input.distanceToNext < catchingRange) {
+                if ((inputLastSaved != null && inputLastSaved.distanceToNext > catchingRange) || input.distanceToNext > catchingRange) {
+                    if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
+                        if (input.goodWay.getPrio() < input.maxBadPrio
+                                && (inputLastSaved != null && inputLastSaved.distanceToNext > minRange)
+                                && (input.distanceToNext > minRange)) {
+                            // add only on prio
+                            results.add(input);
+                            inputLastSaved = input;
+                        } else {
+                            if (inputLastSaved != null) { // when drop add distance to last
+                                inputLastSaved.distanceToNext += input.distanceToNext;
+                            }
+                        }
+                    } else {
+                        // add all others
+                        // ignore motorway / primary continue
+                        if (((input.goodWay.getPrio() != 28) &&
+                                (input.goodWay.getPrio() != 30) &&
+                                (input.goodWay.getPrio() != 26))
+                                || input.isRoundabout()
+                                || Math.abs(input.angle) > 21.f) {
+                            results.add(input);
+                            inputLastSaved = input;
+                        } else {
+                            if (inputLastSaved != null) { // when drop add distance to last
+                                inputLastSaved.distanceToNext += input.distanceToNext;
+                            }
+                        }
+                    }
+                } else if (input.distanceToNext < catchingRange) {
                     double dist = input.distanceToNext;
                     float angles = input.angle;
-                    int i = 1;
-                    boolean save = true;
-                    tmpList.clear();
-                    while (dist < catchingRange && hintIdx + i < inputs.size()) {
-                        final VoiceHint h2 = inputs.get(hintIdx + i);
-                        dist += h2.distanceToNext;
-                        angles += h2.angle;
-                        if (VoiceHint.is180DegAngle(input.angle) || VoiceHint.is180DegAngle(h2.angle)) {  // u-turn, 180 degree
-                            save = true;
-                            break;
-                        } else if (Math.abs(angles) > 180 - significantAngle) { // u-turn, collects e.g. two left turns in range
-                            input.angle = angles;
-                            input.calcCommand();
-                            input.distanceToNext += h2.distanceToNext;
-                            save = true;
-                            hintIdx++;
-                            break;
-                        } else if (Math.abs(angles) < significantAngle && input.distanceToNext < minRange) {
-                            input.angle = angles;
-                            input.calcCommand();
-                            input.distanceToNext += h2.distanceToNext;
-                            save = true;
-                            hintIdx++;
-                            break;
-                        } else if (Math.abs(input.angle) > significantAngle) {
-                            tmpList.add(h2);
-                            hintIdx++;
-                        } else if (dist > catchingRange) { // distance reached
-                            break;
-                        } else {
-                            if (inputLast != null) { // when drop add distance to last
-                                inputLast.distanceToNext += input.distanceToNext;
+                    final int i = 1;
+                    boolean save = false;
+
+                    dist += nextInput.distanceToNext;
+                    angles += nextInput.angle;
+
+                    if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
+                        if (input.goodWay.getPrio() < input.maxBadPrio) {
+                            if (inputLastSaved != null && inputLastSaved.cmd != VoiceHint.C
+                                    && (inputLastSaved != null && inputLastSaved.distanceToNext > minRange)
+                                    && transportMode != VoiceHintList.TRANS_MODE_CAR) {
+                                // add when straight and not linktype
+                                // and last vh not straight
+                                save = true;
+                                // remove when next straight and not linktype
+                                if (nextInput != null &&
+                                        nextInput.cmd == VoiceHint.C &&
+                                        !nextInput.goodWay.isLinktType()) {
+                                    input.distanceToNext += nextInput.distanceToNext;
+                                    hintIdx++;
+                                }
                             }
-                            save = false;
+
+                        } else {
+                            if (inputLastSaved != null) { // when drop add distance to last
+                                inputLastSaved.distanceToNext += input.distanceToNext;
+                            }
                         }
-                        i++;
+                    } else if (VoiceHint.is180DegAngle(input.angle)) {
+                        // add u-turn, 180 degree
+                        save = true;
+                    } else if (transportMode == VoiceHintList.TRANS_MODE_CAR && Math.abs(angles) > 180 - SIGNIFICANT_ANGLE) {
+                        // add when inc car mode and u-turn, collects e.g. two left turns in range
+                        input.angle = angles;
+                        input.calcCommand();
+                        input.distanceToNext += nextInput.distanceToNext;
+                        save = true;
+                        hintIdx++;
+                    } else if (Math.abs(angles) < SIGNIFICANT_ANGLE && input.distanceToNext < minRange) {
+                        input.angle = angles;
+                        input.calcCommand();
+                        input.distanceToNext += nextInput.distanceToNext;
+                        save = true;
+                        hintIdx++;
+                    } else if (Math.abs(input.angle) > SIGNIFICANT_ANGLE) {
+                        // add when angle above 22.5 deg
+                        save = true;
+                    } else if (Math.abs(input.angle) < SIGNIFICANT_ANGLE) {
+                        // add when angle below 22.5 deg ???
+                        // save = true;
+                    } else {
+                        // otherwise ignore but add distance to next
+                        if (nextInput != null) { // when drop add distance to last
+                            nextInput.distanceToNext += input.distanceToNext;
+                        }
+                        save = false;
                     }
+
                     if (save) {
                         results.add(input); // add when last
-                        if (tmpList.size() > 0) { // add when something in stock
-                            results.addAll(tmpList);
-                            hintIdx += tmpList.size() - 1;
-                        }
+                        inputLastSaved = input;
                     }
                 } else {
                     results.add(input);
+                    inputLastSaved = input;
                 }
-                inputLast = input;
             }
+            inputLast = input;
         }
+
         return results;
     }
 

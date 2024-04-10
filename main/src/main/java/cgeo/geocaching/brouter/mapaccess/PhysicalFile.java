@@ -22,6 +22,7 @@ import org.apache.commons.io.IOUtils;
 public final class PhysicalFile implements Closeable {
     public long creationTime;
     public int divisor = 80;
+    public byte elevationType = 3;
     private FileByteReader fbr = null;
     long[] fileIndex = new long[25];
     int[] fileHeaderCrcs;
@@ -48,10 +49,14 @@ public final class PhysicalFile implements Closeable {
         final long len = fbr.size();
 
         final long pos = fileIndex[24];
-        final int extraLen = 8 + 26 * 4;
+        int extraLen = 8 + 26 * 4;
 
         if (len == pos) {
             return; // old format o.k.
+        }
+
+        if ((len - pos) > extraLen) {
+            extraLen++;
         }
 
         if (len < pos + extraLen) { // > is o.k. for future extensions!
@@ -73,6 +78,10 @@ public final class PhysicalFile implements Closeable {
         fileHeaderCrcs = new int[25];
         for (int i = 0; i < 25; i++) {
             fileHeaderCrcs[i] = dis.readInt();
+        }
+        try {
+            elevationType = dis.readByte();
+        } catch (Exception ignore) {
         }
     }
 
