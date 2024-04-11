@@ -913,6 +913,10 @@
     <string name="init_showElevation">Zobrazit nadmořskou výšku</string>
     <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_elevation_notAvailable">"Nejsou k dispozici žádné údaje o nadmořské výšce"</string>
+    <string name="menu_elevation_info">Nadmořská výška (mapa):</string>
+    <string name="distance">Vzdálenost:</string>
+    <string name="copy_coordinates">Kopírovat souřadnice</string>
+    <string name="selected_position">Vybraná pozice</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
     <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
@@ -1754,6 +1758,8 @@
     <string name="map_routing">Směrování</string>
     <string name="map_routing_activate_title">Povolit směrování</string>
     <string name="map_routing_activate">Některé režimy směrování nejsou momentálně k dispozici, protože není aktivní žádný směrovací modul.\n\nChcete aktivovat zabudované směrování aplikace c:geo a stahování směrovacích dat?</string>
+    <string name="map_autorotation">Automatické otáčení mapy</string>
+    <string name="map_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete jej opět povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
     <string name="other_settings">Další nastavení</string>
