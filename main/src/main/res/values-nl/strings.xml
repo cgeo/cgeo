@@ -906,6 +906,8 @@
     <string name="init_summary_showElevation">Toon steigingsinformatie voor huidige positie, van routing data of GNSS (indien beschikbaar)</string>
     <string name="init_elevation_notAvailable">"Geen hoogtegegevens beschikbaar"</string>
     <string name="menu_elevation_info">Hoogte (kaart):</string>
+    <string name="elevation_selected">Hoogte (kaart) op de geselecteerde positie</string>
+    <string name="elevation_difference">Hoogte verschil</string>
     <string name="distance">Afstand:</string>
     <string name="copy_coordinates">Coördinaten kopiëren</string>
     <string name="selected_position">Geselecteerde positie</string>
