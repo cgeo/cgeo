@@ -356,7 +356,7 @@ public class MapUtils {
 
         final float elevation = Routing.getElevation(routeItem.getPoint());
         if (!Float.isNaN(elevation)) {
-            menu.addMenuItem(baseId + 100, String.format(activity.getString(R.string.menu_elevation_info), Units.formatElevation(elevation)), R.drawable.elevation);
+            menu.addMenuItem(baseId + 100, activity.getString(R.string.menu_elevation_info) + " " + Units.formatElevation(elevation), R.drawable.elevation);
         }
     }
 
