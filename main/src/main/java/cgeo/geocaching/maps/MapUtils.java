@@ -29,6 +29,8 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
@@ -60,6 +62,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
@@ -258,18 +261,28 @@ public class MapUtils {
                                 Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
                             })
                             .show();
-                    textview.set(dialog.findViewById(R.id.tv1));
+                    final TextView tv1 = dialog.findViewById(R.id.tv1);
+                    assert tv1 != null;
+                    textview.set(tv1);
+                    tv1.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.compass_rose_mini, 0, 0, 0);
+                    tv1.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
+                    TooltipCompat.setTooltipText(tv1, tv1.getContext().getString(R.string.selected_position));
                     new CoordinatesFormatSwitcher().setView(textview.get()).setCoordinate(longClickGeopoint);
+
+                    final Geopoint currentPosition = LocationDataProvider.getInstance().currentGeo().getCoords();
+                    final float distance = longClickGeopoint.distanceTo(currentPosition);
+                    TextParam.text(Units.getDistanceFromKilometers(distance)).setImage(ImageParam.id(R.drawable.routing_straight)).setTooltip(R.string.distance).applyTo(dialog.findViewById(R.id.tv2));
 
                     final float elevation = Routing.getElevation(longClickGeopoint);
                     if (!Float.isNaN(elevation)) {
-                        ((TextView) dialog.findViewById(R.id.tv2a)).setText(R.string.menu_elevation_info);
-                        ((TextView) dialog.findViewById(R.id.tv2b)).setText(Units.formatElevation(elevation));
+                        TextParam.text(Units.formatElevation(elevation)).setImage(ImageParam.id(R.drawable.elevation)).setTooltip(R.string.elevation_selected).applyTo(dialog.findViewById(R.id.tv4));
+
+                        final float elevationCurrent = Routing.getElevation(currentPosition);
+                        if (!Float.isNaN(elevationCurrent)) {
+                            TextParam.text(Units.formatElevation(elevation - elevationCurrent)).setImage(ImageParam.id(R.drawable.height)).setTooltip(R.string.elevation_difference).applyTo(dialog.findViewById(R.id.tv3));
+                        }
                     }
 
-                    final float distance = longClickGeopoint.distanceTo(LocationDataProvider.getInstance().currentGeo().getCoords());
-                    ((TextView) dialog.findViewById(R.id.tv3a)).setText(R.string.distance);
-                    ((TextView) dialog.findViewById(R.id.tv3b)).setText(Units.getDistanceFromKilometers(distance));
                 })
                 .addItemClickListener(R.id.menu_add_to_route, item -> {
                     individualRoute.toggleItem(activity, new RouteItem(longClickGeopoint), routeUpdater, false);

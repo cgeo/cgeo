@@ -1026,6 +1026,8 @@
     <string name="init_summary_showElevation">Show elevation info for current position, taken from routing data or GNSS (if available)</string>
     <string name="init_elevation_notAvailable">"No elevation data available"</string>
     <string name="menu_elevation_info">Elevation (map):</string>
+    <string name="elevation_selected">Elevation (map) at selected position</string>
+    <string name="elevation_difference">Elevation difference</string>
     <string name="distance">Distance:</string>
     <string name="copy_coordinates">Copy coordinates</string>
     <string name="selected_position">Selected position</string>
