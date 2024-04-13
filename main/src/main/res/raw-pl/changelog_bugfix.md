@@ -1,4 +1,12 @@
 ##
+- Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
+- Poprawka: Błąd podczas otwierania mapy z pustymi nazwami plików śladu
+- Poprawka: Automatyczne obracanie mapy jest nadal aktywne po zresetowaniu przy użyciu róży kompasu (UnifiedMap)
+- Poprawka: Brakujący kompas w trybach automatycznego obrotu na mapach Google (UnifiedMap)
+- Poprawka: Nie można załadować logów przedmiotów podróżnych ze względu na zmiany w witrynie
+- Zmiana: Połączenie informacji o wysokości + informacji o współrzędnych w menu po długim dotknięciu mapy w pojedynczą „wybraną pozycję” + pokaż odległość do bieżącej pozycji
+
+##
 - Nowość: Usuwanie wpisów offline za pomocą menu kontekstowego
 - Poprawka: Usuwanie wpisów offline czasami nie działało
 - Poprawka: Tracono nazwę filtra przy szybkiej zmianie filtra
@@ -8,5 +16,5 @@
 - Poprawka: Cel punktu nawigacji przełączał się na skrytkę jako cel (UnifiedMap)
 - Poprawka: „Zapisywanie” skrytki bez wybierania listy
 - Poprawka: Błąd logowania z powodu zmiany strony na geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Zmiana: Pokaż informacje o wysokości pod znacznikiem pozycji (jeśli aktywowany)
+- UWAGA: Istnieje więcej problemów z powodu ostatnich zmian na stronie geocaching.com, które nie zostały jeszcze naprawione. Pracujemy nad tym. Zobacz bieżący postęp na [stronie statusu](https://github.com/cgeo/cgeo/issues/15555).
