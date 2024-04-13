@@ -150,6 +150,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
     private String lastElevationChartRoute = null; // null=none, empty=individual route, other=track
+    private boolean waypointsFilteredDueToLimit = false;
+    private int lastCacheCount = -1;
 
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
@@ -373,6 +375,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
+        waypointsFilteredDueToLimit = false;
         switch (mapType.type) {
             case UMTT_PlainMap:
                 // restore last saved position and zoom
@@ -493,12 +496,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         spinner.setVisibility(View.GONE);
     }
 
-    public static void loadWaypoints(final UnifiedMapActivity activity, final UnifiedMapViewModel viewModel, final Viewport viewport) {
+    public void loadWaypoints(final UnifiedMapActivity activity, final UnifiedMapViewModel viewModel, final Viewport viewport) {
         viewModel.waypoints.getValue().clear();
-        if (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold()) {
+        final Viewport currentlyVisible = mapFragment.getViewport();
+        if (viewModel.caches.readWithResult(currentlyVisible::count) < Settings.getWayPointsThreshold()) {
             final Set<Waypoint> waypoints;
             if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
-                //All visible waypoints
+                //All waypoints in given viewport
                 waypoints = DataStore.loadWaypoints(viewport);
             } else {
                 waypoints = new HashSet<>();
@@ -513,6 +517,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             Log.d("load.waypoints: " + waypoints.size());
             MapUtils.filter(waypoints, activity.getFilterContext());
             viewModel.waypoints.getValue().addAll(waypoints);
+        } else {
+            waypointsFilteredDueToLimit = true;
         }
         viewModel.waypoints.postNotifyDataChanged();
     }

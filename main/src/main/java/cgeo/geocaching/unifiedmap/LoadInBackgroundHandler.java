@@ -119,7 +119,7 @@ class LoadInBackgroundHandler {
                     Log.d("searchByViewport: cached=" + useLastSearchResult + ", results=" + lastSearchResult.getCount() + ", viewport=" + previousViewport);
                 }
 
-                UnifiedMapActivity.loadWaypoints(activity, viewModel, viewport);
+                activity.loadWaypoints(activity, viewModel, viewport);
 
             } catch (Exception e) {
                 Log.e("load exception: " + e.getMessage());
