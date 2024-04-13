@@ -897,7 +897,7 @@
     <string name="init_brouterProfileBike">Профиль «Велосипед»</string>
     <string name="init_brouterProfileCar">Профиль «Автомобиль»</string>
     <string name="init_removeFromRouteOnLog">Удалить из маршрута после записи в блокноте</string>
-    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить
+    <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить 
 тайник из текущего маршрута.</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="brouter_missing_data">Откройте BRouter для загрузки недостающих данных маршрутизации (%s)</string>
@@ -911,7 +911,6 @@
     <string name="init_showElevation">Показать высоту</string>
     <string name="init_summary_showElevation">Показывать информацию о высоте для текущего местоположения взятую из данных маршрутизации или со спутниковой системы навигации (если доступно)</string>
     <string name="init_elevation_notAvailable">"Данные о высотах отсутствуют"</string>
-    <string name="menu_elevation_info">Высота над уровнем моря (карта): %s</string>
     <string name="init_global_wp_extraction_disable">Не создавать точки из текста заметки</string>
     <string name="init_summary_global_wp_extraction_disable">Отключить извлечение путевых точек из личных записей тайников. Оно по-прежнему может быть включено для отдельных тайников, путем деактивации чекбокса под индивидуальными заметками тайника.</string>
     <string name="init_prevent_cache_note_merge">Перезаписывать личные заметки тайников</string>
@@ -1746,8 +1745,6 @@
     <string name="map_routing">Маршрутизация</string>
     <string name="map_routing_activate_title">Включить маршрутизацию</string>
     <string name="map_routing_activate">Некоторые режимы маршрутизации в настоящее время недоступны, так как не выбран механизм маршрутизации.\n\nВы хотите активировать внутренний механизм маршрутизации c:geo и загрузить данные маршрутизации?</string>
-    <string name="map_autorotation">Авто-поворот карты</string>
-    <string name="map_autorotation_disable">Отключить автоповорот карты?\n\nВы можете включить его снова с помощью меню поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
     <string name="other_settings">Другие настройки</string>

@@ -900,7 +900,6 @@
     <string name="init_showElevation">Mostrar Relevo</string>
     <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
     <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
-    <string name="menu_elevation_info">Elevação (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
@@ -1724,8 +1723,6 @@
     <string name="map_routing">Encaminhamento</string>
     <string name="map_routing_activate_title">Permitir rastreamento</string>
     <string name="map_routing_activate">Alguns modos de rastreamento não estão disponíveis de momento, pois não há nenhum motor de encaminhamento activo.\n\nQuer activar o mecanismo de encaminhamento interno do c:geo e transferir os respectivos dados?</string>
-    <string name="map_autorotation">Rotação do mapa automática</string>
-    <string name="map_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
     <string name="other_settings">Outras configurações</string>

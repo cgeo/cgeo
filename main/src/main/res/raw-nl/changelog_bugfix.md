@@ -1,4 +1,12 @@
 ##
+- Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
+- Oplossing: Crash bij het openen van kaart met lege track bestandsnamen
+- Oplossing: Automatische kaartrotatie nog steeds actief na resetten met behulp van kompas (UnifiedMap)
+- Oplossing: Ontbrekende kompas roos in autorotatie modus op Google Maps (UnifiedMap)
+- Oplossing: Trackable logs kunnen niet worden geladen vanwege websitewijzigingen
+- Wijziging: Combineer hoogte + coördinaat info in kaart lange tik menu in één "geselecteerde positie" + toon afstand tot de huidige positie
+
+##
 - Nieuw: Offline logs verwijderen met behulp van contextmenu
 - Oplossing: Verwijderen offline log niet werkt onder bepaalde voorwaarde
 - Oplossing: Filternaam verloren bij filter snelwijziging
@@ -9,4 +17,4 @@
 - Oplossing: "Opslaan" van een cache zonder een lijst te selecteren
 - Oplossing: Inloggen mislukt als gevolg van websitewijziging op geocaching.com
 - Wijziging: Toon hoogte info onder de positie marker (indien geactiveerd)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- OPMERKING: Er zijn meer problemen als gevolg van recente website wijzigingen op geocaching.com, die nog niet zijn verholpen. We zijn ermee bezig. Bekijk onze [status pagina](https://github.com/cgeo/cgeo/issues/15555) voor de huidige voortgang.

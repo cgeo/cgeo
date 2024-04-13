@@ -1561,8 +1561,6 @@
     <string name="map_routing">Navigering</string>
     <string name="map_routing_activate_title">Aktivera navigering</string>
     <string name="map_routing_activate">Vissa navigeringslägen är för närvarande inte tillgängliga, detta eftersom ingen navigeringsapp är aktiv.\n\nVill du aktivera c:geo\'s interna navigering och nerladdning av navigeringsdata?</string>
-    <string name="map_autorotation">Rotera kartan automatiskt</string>
-    <string name="map_autorotation_disable">Inaktivera automatisk kartrotation?\n\nDu kan aktivera det igen med hjälp av menyn</string>
     <string name="quick_settings">Snabbinställningar</string>
     <string name="quick_settings_info">Vissa kartinställningar (mappinställningar, gömma, routing) har flyttats till popup-fönstret \"Snabbinställningar\".\nDu kan öppna denna popup med hjälp av ikonen i mitten längst ner på kartan.</string>
     <string name="map_show_caches_title">Visa cacher:</string>
