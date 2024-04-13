@@ -818,7 +818,6 @@
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
-    <string name="menu_elevation_info">Nadmorská výška (mapa): %s</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
     <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>
@@ -1599,8 +1598,6 @@
     <string name="map_routing">Navigácia</string>
     <string name="map_routing_activate_title">Povoliť navigáciu</string>
     <string name="map_routing_activate">Niektoré režimy navigácie nie sú momentálne k dispozícii, pretože nie je aktívne žiadne navigačné prostredie.\n\nChcete aktivovať zabudované navigačné prostredie aplikácie c:geo a prevziať údaje navigácie?</string>
-    <string name="map_autorotation">Automatické otáčanie mapy</string>
-    <string name="map_autorotation_disable">Vypnúť automatické otáčanie mapy?\n\nMôžete ho znova povoliť pomocou ponuky Otáčanie mapy.</string>
     <string name="quick_settings">Rýchle nastavenia</string>
     <string name="quick_settings_info">Niektoré nastavenia mapy (nastavenie mapy, skrytie, trasy) boli presunuté do nového kontextového okna \"Rýchle nastavenia\"\nToto kontextové okno môžete otvoriť pomocou ikony na mape dole v strede.</string>
     <string name="map_show_caches_title">Zobraziť kešky:</string>

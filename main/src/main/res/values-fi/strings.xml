@@ -1632,8 +1632,6 @@
     <string name="map_routing">Reititys</string>
     <string name="map_routing_activate_title">Ota reititys käyttöön</string>
     <string name="map_routing_activate">Joitakin reititystiloja ei ole tällä hetkellä saatavilla, koska reititysmoottori ei ole käytössä.\n\nHaluatko aktivoida c:geon sisäisen reititysmoottorin ja reititystietojen lataamisen?</string>
-    <string name="map_autorotation">Kartan automaattinen kääntö</string>
-    <string name="map_autorotation_disable">Kytketäänkö kartan automaattinen kääntö pois päältä?\n\nVoit kytkeä sen uudelleen päälle käyttäen Kartan kääntö -valikkoa</string>
     <string name="quick_settings">Pika-asetukset</string>
     <string name="quick_settings_info">Jotkut kartta-asetukset (Kartan asetukset, piilota, reititys) on siirretty uuteen \"Pika-asetukset\"-ikkunaan\nVoit avata tämän ikkunan käyttämällä painiketta, joka sijaitsee karttanäkymän alareunassa keskellä.</string>
     <string name="other_settings">Muut asetukset</string>
