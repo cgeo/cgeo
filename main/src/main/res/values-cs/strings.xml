@@ -914,6 +914,8 @@
     <string name="init_summary_showElevation">Zobrazí informace o nadmořské výšce pro aktuální polohu, převzaté ze směrovacích dat nebo GNSS (pokud je k dispozici)</string>
     <string name="init_elevation_notAvailable">"Nejsou k dispozici žádné údaje o nadmořské výšce"</string>
     <string name="menu_elevation_info">Nadmořská výška (mapa):</string>
+    <string name="elevation_selected">Nadmořská výška (mapa) na vybraném místě</string>
+    <string name="elevation_difference">Výškový rozdíl</string>
     <string name="distance">Vzdálenost:</string>
     <string name="copy_coordinates">Kopírovat souřadnice</string>
     <string name="selected_position">Vybraná pozice</string>
