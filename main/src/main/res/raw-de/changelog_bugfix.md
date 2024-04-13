@@ -4,7 +4,7 @@
 - Korrektur: Automatische Kartendrehung weiter aktiv nach Zurücksetzen über Kompassrose (UnifiedMap)
 - Korrektur: Fehlende Kompassrose in Modi zur automatischen Kartendrehung auf Google Maps (UnifiedMap)
 - Korrektur: Trackable Logs können aufgrund von Änderungen der Webseite nicht geladen werden
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Änderung: "Höhe (Karte)" und "Koordinaten anzeigen" im Kartenmenü zu "Ausgewählte Position" zusammengefasst und Entfernung zur aktuellen Position ergänzt
 
 ##
 - Neu: Löschen von Offline-Logs über Kontextmenü
