@@ -1,4 +1,12 @@
 ##
+- Korrektur: Fundzähler wird in bestimmten Situationen aufgrund von Webseiten-Änderungen nicht korrekt erkannt
+- Korrektur: Absturz beim Öffnen der Karte mit leeren Track-Dateinamen
+- Korrektur: Automatische Kartendrehung weiter aktiv nach Zurücksetzen über Kompassrose (UnifiedMap)
+- Korrektur: Fehlende Kompassrose in Modi zur automatischen Kartendrehung auf Google Maps (UnifiedMap)
+- Korrektur: Trackable Logs können aufgrund von Änderungen der Webseite nicht geladen werden
+- Änderung: "Höhe (Karte)" und "Koordinaten anzeigen" im Kartenmenü zu "Ausgewählte Position" zusammengefasst und Entfernung zur aktuellen Position ergänzt
+
+##
 - Neu: Löschen von Offline-Logs über Kontextmenü
 - Korrektur: Löschen eines Offline-Logs funktioniert unter bestimmten Bedingungen nicht
 - Korrektur: Filtername nach Änderungen über Schnelleinstellungen verloren
