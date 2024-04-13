@@ -14,11 +14,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="2" />
 
+    <!-- second column in landscape mode only -->
+
     <View
+        tools:ignore="InconsistentLayout"
         android:id="@+id/settings_fragment_divider"
         style="@style/separator_vertical" />
 
-    <!-- second column in landscape mode only -->
     <androidx.fragment.app.FragmentContainerView
         tools:ignore="InconsistentLayout"
         android:id="@+id/settings_fragment_content_root"
