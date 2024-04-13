@@ -4,7 +4,7 @@
 - Poprawka: Automatyczne obracanie mapy jest nadal aktywne po zresetowaniu przy użyciu róży kompasu (UnifiedMap)
 - Poprawka: Brakujący kompas w trybach automatycznego obrotu na mapach Google (UnifiedMap)
 - Poprawka: Nie można załadować logów przedmiotów podróżnych ze względu na zmiany w witrynie
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Zmiana: Połączenie informacji o wysokości + informacji o współrzędnych w menu po długim dotknięciu mapy w pojedynczą „wybraną pozycję” + pokaż odległość do bieżącej pozycji
 
 ##
 - Nowość: Usuwanie wpisów offline za pomocą menu kontekstowego
