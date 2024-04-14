@@ -1,4 +1,7 @@
 ##
+- Poprawka: Opca Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
+
+##
 - Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
 - Poprawka: Błąd podczas otwierania mapy z pustymi nazwami plików śladu
 - Poprawka: Automatyczne obracanie mapy jest nadal aktywne po zresetowaniu przy użyciu róży kompasu (UnifiedMap)
