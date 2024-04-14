@@ -1,4 +1,7 @@
 ##
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+
+##
 - Korrektur: Fundzähler wird in bestimmten Situationen aufgrund von Webseiten-Änderungen nicht korrekt erkannt
 - Korrektur: Absturz beim Öffnen der Karte mit leeren Track-Dateinamen
 - Korrektur: Automatische Kartendrehung weiter aktiv nach Zurücksetzen über Kompassrose (UnifiedMap)
