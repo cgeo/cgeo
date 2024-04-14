@@ -165,7 +165,12 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     protected void repaintRotationIndicator(final float bearing) {
-        final ImageView compassrose = requireView().findViewById(R.id.bearingIndicator);
+        final View currentView = getView();
+        if (currentView == null) {
+            return;
+        }
+
+        final ImageView compassrose = currentView.findViewById(R.id.bearingIndicator);
         if (bearing == 0.0f) {
             compassrose.setImageBitmap(null);
         } else {
