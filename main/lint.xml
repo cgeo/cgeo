@@ -59,6 +59,9 @@
         <!-- translations no longer used -->
         <ignore path="src/main/res/values-*/strings.xml" />
 
+        <!-- keep for later use -->
+        <ignore path="src/main/res/drawable/ic_menu_note.xml" />
+
         <!-- used for notification system -->
         <ignore path="src/main/res/drawable-xhdpi/attribute_maintenance.png" />
 

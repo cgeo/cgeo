@@ -12,7 +12,6 @@ import cgeo.geocaching.brouter.core.RoutingParamCollector;
 import android.os.Bundle;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
