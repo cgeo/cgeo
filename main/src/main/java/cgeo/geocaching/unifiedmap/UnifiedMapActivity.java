@@ -609,6 +609,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
+        // no need to handle location update if map fragment is gone
+        if (mapFragment == null) {
+            return;
+        }
+
         final int mapRotation = Settings.getMapRotation();
         if (locationWrapper.needsRepaintForHeading && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE)) {
             mapFragment.setBearing(locationWrapper.heading);
