@@ -60,7 +60,6 @@
         <ignore path="src/main/res/values-*/strings.xml" />
 
         <!-- keep for later use -->
-        <ignore path="src/main/res/drawable/expand_collapsed.xml" />
         <ignore path="src/main/res/drawable/ic_menu_note.xml" />
 
         <!-- used for notification system -->
