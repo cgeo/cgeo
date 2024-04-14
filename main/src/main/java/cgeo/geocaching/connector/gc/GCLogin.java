@@ -400,6 +400,10 @@ public class GCLogin extends AbstractLogin {
                 AvatarUtils.changeAvatar(GCConnector.getInstance(), avatarUrl);
             }
 
+            // check for race condition while logging in
+            if (StringUtils.isBlank(serverParameters.userInfo.userType)) {
+                resetServerParameters(); // not yet logged in, thus try to read again on next call
+            }
         } catch (final IOException e) {
             Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
             Log.e("Error loading serverparameters", e);
