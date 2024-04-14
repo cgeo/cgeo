@@ -1,4 +1,7 @@
 ##
+- Oprava: Zobrazení/skrytí trasových bodů nefunguje správně, pokud se překročí limit trasových bodů (Sjednocená mapa)
+
+##
 - Oprava: V některých situacích nebylo zjištěno počítadlo nalezených položek kvůli změnám webových stránek geocaching.com
 - Oprava: Pád při otevření mapy s prázdnými názvy souborů tras
 - Oprava: Automatické otáčení mapy je aktivní i po resetování pomocí kompasové růžice (Sjednocená mapa)
