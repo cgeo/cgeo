@@ -7,6 +7,17 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.04.13 Bugfix Release
+
+- Fix: Found counter not detected in certain situations due to website changes
+- Fix: Trackable logs cannot be loaded due to website changes
+- Fix: Crash on opening map with empty track file names
+- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
+- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
+- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.04.05 Bugfix Release
 
 - Fix: Login failure due to website change on geocaching.com
