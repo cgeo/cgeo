@@ -51,14 +51,6 @@
 
     <!-- Full-screen dialogs -->
 
-    <style name="cgeo.fullScreenDialog2" parent="cgeo">
-        <item name="android:windowBackground">@color/colorBackgroundDialog</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:windowNoTitle">true</item>
-    </style>
-
     <style name="cgeo.fullScreenDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
         <item name="android:windowIsFloating">false</item>
