@@ -897,6 +897,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched) {
+        if (loadInBackgroundHandler == null) {
+            reloadCachesAndWaypoints(false);
+        }
         refreshMapData(circlesSwitched);
     }
 
