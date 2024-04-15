@@ -349,7 +349,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (mapChanged) {
             final boolean setDefaultCenterAndZoom = !overridePositionAndZoom && mapState == null;
             // map settings popup
-            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
+            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapDataAfterSettingsChanged, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
@@ -894,6 +894,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     protected GeocacheFilterContext getFilterContext() {
         return mapType.filterContext;
+    }
+
+    private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched) {
+        refreshMapData(circlesSwitched);
     }
 
     private void refreshMapData(final boolean circlesSwitched) {
