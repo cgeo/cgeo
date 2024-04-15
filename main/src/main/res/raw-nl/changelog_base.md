@@ -10,4 +10,4 @@
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
 - Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
 - Wijziging: gebruik OSM Nominatum als terugval geocoder, ter vervanging van MapQuest geocoder (die niet meer werkt)
-- Change: Updated integrated BRouter to v1.7.4
+- Wijziging: Geïntegreerde BRouter bijgewerkt naar v1.7.4
