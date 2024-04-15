@@ -1,5 +1,5 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Oplossing: Toon/Verberg waypoints werken niet correct bij overschrijden waypoint limieten (UnifiedMap)
 
 ##
 - Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
