@@ -408,7 +408,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                             mapFragment.setCenter(cache.getCoords());
                         }
 
-                        Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+                        final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
                         MapUtils.filter(waypoints, getFilterContext());
                         viewModel.waypoints.getValue().addAll(waypoints);
                         if (!isTargetSet()) {
