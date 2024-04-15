@@ -180,7 +180,7 @@ runs:
       run: |
         base64 -d <<<${{ inputs.KEY_STORE }} > key.keystore
 
-    # TODO append parts to the file conditionnally
+    # TODO append parts to the file conditionally
     - name: Setup the private.properties
       shell: bash
       run: |
