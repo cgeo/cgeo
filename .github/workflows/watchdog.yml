@@ -64,7 +64,7 @@ jobs:
           PREF_PASSWORD: ${{ secrets.PREF_PASSWORD }}
 
       - name: Set up JDK ${{ env.JDK_VERSION }}
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: ${{ env.JDK_VERSION }}
           distribution: temurin
