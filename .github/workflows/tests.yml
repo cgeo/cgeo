@@ -16,6 +16,7 @@ env:
 
 jobs:
   dex-count:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id)
     name: DEX count
     runs-on: ubuntu-latest
     steps:
@@ -73,6 +74,7 @@ jobs:
 
 
   checkstyle:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
@@ -133,6 +135,7 @@ jobs:
 
 
   lint:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
@@ -196,6 +199,7 @@ jobs:
 
 
   integration-tests:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.base.repo.id == github.event.pull_request.head.repo.id)
     # > It is now recommended to use the Ubuntu (ubuntu-latest) runners which
     # > are 2-3 times faster than the macOS ones which are also a lot more expensive.
     # https://github.com/ReactiveCircus/android-emulator-runner#running-hardware-accelerated-emulators-on-linux-runners
