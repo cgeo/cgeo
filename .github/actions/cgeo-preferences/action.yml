@@ -1,0 +1,231 @@
+name: Configure cgeo preferences
+
+inputs:
+  KEY_STORE:
+    description: The base64 keystore file
+    required: true
+  KEY_ALIAS:
+    description: The pkcs12 keystore alias
+    required: true
+  KEY_STORE_PASSWORD:
+    description: The pkcs12 keystore password
+    required: true
+  KEY_ALIAS_PASSWORD:
+    description: The pkcs12 keystore alias password
+    required: true
+  MAPS_API_KEY:
+    description: Google Maps API key (maybe obsolete?)
+    required: false
+  MAPS_API_KEY_MARKET:
+    description: Google Maps API key for ???
+    required: false
+  MAPS_API2_KEY:
+    description: Google Maps API key
+    required: false
+  OCDE_OKAPI_CONSUMER_KEY:
+    description: OC.de OKAPI consumer key
+    required: false
+  OCDE_OKAPI_CONSUMER_SECRET:
+    description: OC.de OKAPI consumer secret
+    required: false
+  OCPL_OKAPI_CONSUMER_KEY:
+    description: OC.pl OKAPI consumer key
+    required: false
+  OCPL_OKAPI_CONSUMER_SECRET:
+    description: OC.pl OKAPI consumer secret
+    required: false
+  OCUS_OKAPI_CONSUMER_KEY:
+    description: OC.us OKAPI consumer key
+    required: false
+  OCUS_OKAPI_CONSUMER_SECRET:
+    description: OC.us OKAPI consumer secret
+    required: false
+  OCNL_OKAPI_CONSUMER_KEY:
+    description: OC.nl OKAPI consumer key
+    required: false
+  OCNL_OKAPI_CONSUMER_SECRET:
+    description: OC.nl OKAPI consumer secret
+    required: false
+  OCRO_OKAPI_CONSUMER_KEY:
+    description: OC.ro OKAPI consumer key
+    required: false
+  OCRO_OKAPI_CONSUMER_SECRET:
+    description: OC.ro OKAPI consumer secret
+    required: false
+  OCUK_OKAPI_CONSUMER_KEY:
+    description: OC.uk OKAPI consumer key
+    required: false
+  OCUK_OKAPI_CONSUMER_SECRET:
+    description: OC.uk OKAPI consumer secret
+    required: false
+  SU_CONSUMER_KEY:
+    description: GC.su OKAPI consumer key
+    required: false
+  SU_CONSUMER_SECRET:
+    description: GC.su OKAPI consumer secret
+    required: false
+  THUNDERFOREST_API_KEY:
+    description: Thunderforest API token
+    required: false
+  ALC_CONSUMER_KEY:
+    description: Geocaching.com public API for Adventure Labs
+    required: false
+  PREF_COOKIESTORE:
+    description: cgeo preferences xml cookiestore value
+    required: true
+  PREF_USERNAME:
+    description: cgeo preferences xml GC username
+    required: true
+  PREF_PASSWORD:
+    description: cgeo preferences xml GC password
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Set the emulator preferences
+      shell: bash
+      run: |
+        cat << EOF > main/cgeo.geocaching_preferences.xml
+        <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+        <map>
+            <boolean name="connectorECActive" value="false" />
+            <boolean name="googleplayservices" value="false" />
+            <boolean name="navigationSygicDriving" value="true" />
+            <boolean name="useenglish" value="false" />
+            <boolean name="showcaptcha" value="false" />
+            <long name="changelog_last_checksum" value="2686462252" />
+            <string name="password">${{ inputs.PREF_PASSWORD }}</string>
+            <boolean name="connectorOCNLActive" value="false" />
+            <boolean name="skin" value="false" />
+            <string name="ec_icons">1</string>
+            <boolean name="connectorOCROActive" value="false" />
+            <boolean name="connectorOCPLActive" value="false" />
+            <boolean name="twitter" value="false" />
+            <string name="memberstatus">Premium</string>
+            <string name="username">${{ inputs.PREF_USERNAME }}</string>
+            <boolean name="sigautoinsert" value="true" />
+            <boolean name="navigationStreetView" value="true" />
+            <boolean name="connectorOCActive" value="false" />
+            <boolean name="opendetailslastpage" value="false" />
+            <boolean name="connectorOXActive" value="false" />
+            <boolean name="livelist" value="true" />
+            <boolean name="navigationInternalMap" value="true" />
+            <boolean name="navigationStaticDownload" value="true" />
+            <boolean name="navigationGoogleWalk" value="true" />
+            <string name="cachetype">all</string>
+            <string name="signature"></string>
+            <boolean name="choose_list" value="true" />
+            <boolean name="lowpowerlocation" value="false" />
+            <boolean name="connectorGeokretyActive" value="false" />
+            <boolean name="nativeUa" value="false" />
+            <boolean name="navigationMapsDirections" value="true" />
+            <boolean name="friendlogswanted" value="true" />
+            <boolean name="showaddress" value="true" />
+            <string name="defaultNavigationTool">0</string>
+            <boolean name="ratingwanted" value="true" />
+            <boolean name="connectorGCActive" value="true" />
+            <boolean name="navigationStatic" value="true" />
+            <boolean name="navigationRmaps" value="true" />
+            <boolean name="mapsforgeScaleText" value="true" />
+            <boolean name="map_direction" value="true" />
+            <boolean name="connectorOCUKActive" value="false" />
+            <string name="mapsource">658963267</string>
+            <boolean name="navigationSygicWalking" value="true" />
+            <boolean name="offlinemaps" value="true" />
+            <int name="settingsversion" value="2" />
+            <boolean name="excludedisabled" value="false" />
+            <boolean name="navigationCompass" value="true" />
+            <boolean name="navigationLocus" value="true" />
+            <boolean name="logimages" value="false" />
+            <boolean name="debug" value="false" />
+            <string name="webDeviceName">sdk</string>
+            <boolean name="connectorOCUSActive" value="false" />
+            <int name="version" value="20140712" />
+            <boolean name="navigationRadar" value="true" />
+            <boolean name="navigationPebble" value="true" />
+            <boolean name="geokretycache" value="true" />
+            <boolean name="excludemine" value="false" />
+            <boolean name="trackautovisit" value="false" />
+            <string name="twitter_cache_message">I found [NAME] ([URL]).</string>
+            <boolean name="navigationOruxmaps" value="true" />
+            <string name="gccustomdate">MM/dd/yyyy</string>
+            <int name="livemapstrategy" value="3" />
+            <string name="home_location">N 46° 19.899′ E 14° 19.169′</string>
+            <boolean name="dbonsdcard" value="false" />
+            <boolean name="plainLogs" value="false" />
+            <boolean name="navigationWhereYouGo" value="true" />
+            <boolean name="navigationGoogleBike" value="true" />
+            <boolean name="navigationNavigon" value="true" />
+            <boolean name="maptrail" value="false" />
+            <boolean name="units" value="true" />
+            <string name="cookiestore">${{ inputs.PREF_COOKIESTORE }}</string>
+            <boolean name="autoloaddesc" value="true" />
+            <boolean name="navigationGoogleNav" value="true" />
+            <boolean name="navigationGoogleMaps" value="true" />
+            <boolean name="log_offline" value="false" />
+            <boolean name="navigationAndroidWear" value="true" />
+            <boolean name="navigationMapsWithMe" value="true" />
+            <boolean name="loaddirectionimg" value="true" />
+            <string name="twitter_trackable_message">I found [NAME] ([URL]).</string>
+            <boolean name="offlinewpmaps" value="true" />
+            <string name="defaultNavigationTool2">2</string>
+            <boolean name="hardware_acceleration2" value="true" />
+        </map>
+        EOF
+
+    - name: Setup the keystore
+      shell: bash
+      run: |
+        base64 -d <<<${{ inputs.KEY_STORE }} > key.keystore
+
+    # TODO append parts to the file conditionally
+    - name: Setup the private.properties
+      shell: bash
+      run: |
+        cat << EOF > ./private.properties
+        # Release APK signing
+        key.store=key.keystore
+        key.alias=${{ inputs.KEY_ALIAS }}
+        key.store.password=${{ inputs.KEY_STORE_PASSWORD }}
+        key.alias.password=${{ inputs.KEY_ALIAS_PASSWORD }}
+
+        # Google Maps
+        maps.api.key=${{ inputs.MAPS_API_KEY }}
+        maps.api.key.market=${{ inputs.MAPS_API_KEY_MARKET }}
+        maps.api2.key=${{ inputs.MAPS_API2_KEY }}
+
+        # Opencaching.de
+        ocde.okapi.consumer.key=${{ inputs.OCDE_OKAPI_CONSUMER_KEY }}
+        ocde.okapi.consumer.secret=${{ inputs.OCDE_OKAPI_CONSUMER_SECRET }}
+
+        # Opencaching.pl
+        ocpl.okapi.consumer.key=${{ inputs.OCPL_OKAPI_CONSUMER_KEY }}
+        ocpl.okapi.consumer.secret=${{ inputs.OCPL_OKAPI_CONSUMER_SECRET }}
+
+        # Opencaching.us
+        ocus.okapi.consumer.key=${{ inputs.OCUS_OKAPI_CONSUMER_KEY }}
+        ocus.okapi.consumer.secret=${{ inputs.OCUS_OKAPI_CONSUMER_SECRET }}
+
+        # Opencaching.nl
+        ocnl.okapi.consumer.key=${{ inputs.OCNL_OKAPI_CONSUMER_KEY }}
+        ocnl.okapi.consumer.secret=${{ inputs.OCNL_OKAPI_CONSUMER_SECRET }}
+
+        # Opencaching.ro
+        ocro.okapi.consumer.key=${{ inputs.OCRO_OKAPI_CONSUMER_KEY }}
+        ocro.okapi.consumer.secret=${{ inputs.OCRO_OKAPI_CONSUMER_SECRET }}
+
+        # Opencache.uk
+        ocuk.okapi.consumer.key=${{ inputs.OCUK_OKAPI_CONSUMER_KEY }}
+        ocuk.okapi.consumer.secret=${{ inputs.OCUK_OKAPI_CONSUMER_SECRET }}
+
+        # Geocaching.su
+        su.consumer.key=${{ inputs.SU_CONSUMER_KEY }}
+        su.consumer.secret=${{ inputs.SU_CONSUMER_SECRET }}
+
+        thunderforest.api.key=${{ inputs.THUNDERFOREST_API_KEY }}
+
+        # Geocaching.com public API for Adventure Labs
+        alc.consumer.key=${{ inputs.ALC_CONSUMER_KEY }}
+        EOF
