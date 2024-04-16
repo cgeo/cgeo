@@ -9,5 +9,5 @@
 ### 일반
 - 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
 - 신규: 목록 선택 대화 상자: 이름에 ":"가 포함된 캐시 목록 자동 그룹화
-- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
-- Change: Updated integrated BRouter to v1.7.4
+- 변경: OSM Nominatum을 보조 지오코더로 사용하고, MapQuest 지오코더를 대체합니다(더 이상 작동하지 않음)
+- 변경: 통합 브라우저를 v1.7.4로 업데이트
