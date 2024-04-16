@@ -1,23 +1,23 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- 수정: 지점 제한을 초과하는 경우 지점 표시/숨기기가 올바르게 작동하지 않음 (Unified Map)
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- 수정사항: 웹사이트 변경으로 인해 특정 상황에서 찾음 카운터가 감지되지 않음
+- 수정: 빈 트랙 파일 이름이 있는 지도 열 때 충돌
+- 수정: 나침반 장미를 사용하여 재설정한 후에도 자동 회전이 활성화된 지도(Unified Map)
+- 수정: Google 지도의 자동 회전 모드에서 누락된 나침반이 상승했습니다. (Unified Map)
+- 수정: 웹사이트 변경으로 인해 추적 아이템 로그를 로드할 수 없습니다
+- 변경: 지도 롱 탭 메뉴의 표고 + 좌표 정보를 단일 "선택된 위치"로 결합 + 현재 위치까지의 거리 표시
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- 신규: 컨텍스트 메뉴를 사용하여 오프라인 로그 삭제
+- 수정: 오프라인 로그 삭제 중 특정 조건에서 작동하지 않습니다
+- 수정: 필터 빠른 변경 시 필터 이름이 손실됨
+- 변경: 트랙 파일을 이름별로 정렬합니다
+- 변경: 오프라인 로그에도 추적 아이템 작업 저장
+- 수정: 지도 유형 변경 시 0.0 좌표로 지도 전환 (Unified Map)
+- 수정: 지점 대상에서 대상으로 캐시로 다시 전환(Unified Map)
+- 수정: 목록을 선택하지 않고 캐시 "저장"
+- 수정: geocaching.com 웹사이트 변경으로 로그인 실패
+- 변경: 위치 마커 아래에 표고 정보 표시(활성화된 경우)
+- 참고: geocaching.com의 최근 웹사이트 변경으로 인해 더 많은 문제가 발생했는데, 이 문제는 아직 해결되지 않았습니다. 작업 중입니다. 현재 진행 상황은 [상태 페이지](https://github.com/cgeo/cgeo/issues/15555)을 참조하십시오.
