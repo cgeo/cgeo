@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -124,19 +126,24 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
             final List<T> items = new ArrayList<>(filterAccessor.getSelectableValues());
             items.removeAll(visibleValues);
 
-            final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
-            model
-                .setItems(items)
-                .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
+            if (filterAccessor.getSelectableValues().size() > 0 && filterAccessor.getSelectableValues().get(0) instanceof StoredList) {
+                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
+                        value -> getValueCheckbox((T) value).right.setChecked(true), true, Collections.emptySet(), false);
+            } else {
+                final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
+                model
+                        .setItems(items)
+                        .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
 
-            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
-                .selectMultiple(model, s -> {
-                visibleValues.addAll(s);
-                for (T value : s) {
-                    getValueCheckbox(value).right.setChecked(true);
-                }
-                relayout();
-            });
+                SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
+                    .selectMultiple(model, s -> {
+                    visibleValues.addAll(s);
+                    for (T value : s) {
+                        getValueCheckbox(value).right.setChecked(true);
+                    }
+                    relayout();
+                });
+            }
         });
 
         return this.addItemsButton;
