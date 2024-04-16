@@ -3,7 +3,7 @@ name: Unit tests
 on:
   push:
     branches: [ "master", "androidci" ]
-  pull_request:
+  pull_request_target:
   workflow_dispatch:
     inputs:
       JDK_VERSION:
