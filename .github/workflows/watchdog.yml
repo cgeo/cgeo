@@ -21,6 +21,7 @@ env:
 jobs:
   watchdog-tests:
     runs-on: ubuntu-latest
+    if: github.repository == 'cgeo/cgeo'
     strategy:
       matrix:
         branch: [ "master", "release" ]
