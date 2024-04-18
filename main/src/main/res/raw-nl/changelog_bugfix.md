@@ -1,5 +1,5 @@
 ##
-- Oplossing: Toon/Verberg waypoints werken niet correct bij overschrijden waypoint limieten (UnifiedMap)
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
 - Fix: Logging caches or trackables no longer working (website changes)
 - Fix: Deleting own logs not working
 
