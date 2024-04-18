@@ -308,7 +308,7 @@ public class GCLogAPI {
         try (HttpResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/delete/" + logId)
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-            .bodyJson(deleteBody)
+            .bodyJson(reasonText == null ? null : deleteBody)
             .request().blockingGet()) {
 
             if (!response.isSuccessful()) {
