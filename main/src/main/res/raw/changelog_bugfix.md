@@ -1,5 +1,6 @@
 ##
 - Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
 
 ##
 - Fix: Found counter not detected in certain situations due to website changes
