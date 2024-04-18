@@ -7,6 +7,14 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.04.18 Bugfix Release
+
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+ 
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.04.13 Bugfix Release
 
 - Fix: Found counter not detected in certain situations due to website changes
