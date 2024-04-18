@@ -82,6 +82,11 @@ public class GCLogAPI {
         @JsonInclude(JsonInclude.Include.NON_NULL)
         Boolean usedFavoritePoint;
     }
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class GCWebLogCsrfRequest {
+        @JsonProperty("csrfToken")
+        String csrfToken;
+    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class GCWebLogResponse extends GCWebLogRequest {
@@ -294,7 +299,7 @@ public class GCLogAPI {
         try (HttpResponse response = websiteReq().uri("/api/live/v1/logs/geocacheLog/delete/" + logId)
             .method(HttpRequest.Method.POST)
             .headers(HTML_HEADER_CSRF_TOKEN, csrfToken)
-            .bodyJson(deleteBody)
+            .bodyJson(reasonText == null ? null : deleteBody)
             .request().blockingGet()) {
 
             if (!response.isSuccessful()) {
@@ -540,6 +545,13 @@ public class GCLogAPI {
     }
 
     private static String getCsrfTokenFromUrl(final String url) {
+        final GCWebLogCsrfRequest csrfResponse = websiteReq().uri("/api/auth/csrf")
+                .method(HttpRequest.Method.GET)
+                .requestJson(GCWebLogCsrfRequest.class)
+                .blockingGet();
+        if (!StringUtils.isBlank(csrfResponse.csrfToken)) {
+            return csrfResponse.csrfToken;
+        }
         final ImmutablePair<String, String> htmlAndUrl = getHtmlAndCsrfTokenFromUrl(url);
         return htmlAndUrl == null ? null : htmlAndUrl.right;
     }
