@@ -1,5 +1,7 @@
 ##
 - 수정: 지점 제한을 초과하는 경우 지점 표시/숨기기가 올바르게 작동하지 않음 (Unified Map)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
 
 ##
 - 수정사항: 웹사이트 변경으로 인해 특정 상황에서 찾음 카운터가 감지되지 않음
