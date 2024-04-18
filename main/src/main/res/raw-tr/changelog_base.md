@@ -9,3 +9,5 @@
 ### Genel
 - New: Switch to set found state of Lab Adventures either manually or automatically
 - New: List selection dialog: Auto-group cache lists having a ":" in their name
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
+- Change: Updated integrated BRouter to v1.7.4
