@@ -1,4 +1,9 @@
 ##
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
+
+##
 - Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
 - Oplossing: Crash bij het openen van kaart met lege track bestandsnamen
 - Oplossing: Automatische kaartrotatie nog steeds actief na resetten met behulp van kompas (UnifiedMap)
