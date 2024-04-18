@@ -129,14 +129,18 @@ public class LogActivityHelper {
             ActivityMixin.showToast(activity, "Can't delete log");
             return;
         }
-        SimpleDialog.ofContext(activity)
+        final SimpleDialog dialog = SimpleDialog.ofContext(activity)
             .setTitle(TextParam.id(R.string.cache_log_menu_delete))
             .setMessage(TextParam.id(R.string.log_delete_confirm,
                 entry.logType.getL10n(), entry.author, Formatter.formatShortDateVerbally(entry.date)))
-            .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
-            .input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> {
+            .setButtons(SimpleDialog.ButtonTextSet.YES_NO);
+        if (entry.isOwn()) {
+            dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
+        } else {
+            dialog.input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> {
                 logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText));
             });
+        }
     }
 
     /** create a trackable log on the trackable platform */
