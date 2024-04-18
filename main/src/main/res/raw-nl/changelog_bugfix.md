@@ -1,5 +1,7 @@
 ##
 - Oplossing: Toon/Verberg waypoints werken niet correct bij overschrijden waypoint limieten (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
 
 ##
 - Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website
