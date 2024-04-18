@@ -1,4 +1,9 @@
 ##
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
+
+##
 - Fix: Found counter not detected in certain situations due to website changes
 - Fix: Crash on opening map with empty track file names
 - Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)

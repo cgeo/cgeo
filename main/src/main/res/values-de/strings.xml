@@ -903,6 +903,7 @@
     <string name="init_elevation_notAvailable">"Keine Höhendaten verfügbar"</string>
     <string name="menu_elevation_info">Höhe (Karte):</string>
     <string name="elevation_selected">Höhe (Karte) an ausgewählter Position</string>
+    <string name="elevation_difference">Höhenunterschied</string>
     <string name="distance">Entfernung:</string>
     <string name="copy_coordinates">Kopiere Koordinaten</string>
     <string name="selected_position">Ausgewählte Position</string>

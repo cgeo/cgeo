@@ -1,4 +1,9 @@
 ##
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
+
+##
 - Oprava: V některých situacích nebylo zjištěno počítadlo nalezených položek kvůli změnám webových stránek geocaching.com
 - Oprava: Pád při otevření mapy s prázdnými názvy souborů tras
 - Oprava: Automatické otáčení mapy je aktivní i po resetování pomocí kompasové růžice (Sjednocená mapa)

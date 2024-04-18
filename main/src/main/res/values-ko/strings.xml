@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
     <string name="log_delete_confirm">작성자 \'%2$s\', 로그 날짜 \'%3$s\'의 \'%1$s\' 유형 로그를 삭제하시겠습니까?</string>
+    <string name="log_offline_delete_confirm">로그 날짜가 \'%2$s\'인 \'%1$s\' 유형의 저장된 오프라인 로그를 삭제하시겠습니까?</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
     <!-- Contacts -->
     <string name="contact_not_found">별명/닉네임이 %s인 연락처가 없습니다. 먼저 연락처 앱에 추가해주세요.</string>
@@ -894,6 +895,12 @@
     <string name="init_showElevation">높이 값보기</string>
     <string name="init_summary_showElevation">경로 데이터 또는 GNSS에서 가져온 현재 위치의 고도 정보 표시(사용 가능한 경우)</string>
     <string name="init_elevation_notAvailable">"사용 가능한 고도 데이터가 없습니다."</string>
+    <string name="menu_elevation_info">고도 (지도):</string>
+    <string name="elevation_selected">선택한 위치의 표고 (지도)</string>
+    <string name="elevation_difference">표고차</string>
+    <string name="distance">거리:</string>
+    <string name="copy_coordinates">좌표 복사</string>
+    <string name="selected_position">선택한 위치</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_prevent_cache_note_merge">개인 캐시 메모 덮어쓰기</string>
@@ -1708,6 +1715,8 @@
     <string name="map_routing">길찾기</string>
     <string name="map_routing_activate_title">라우팅 활성화</string>
     <string name="map_routing_activate">라우팅 엔진이 활성화되어 있지 않기 때문에 일부 라우팅 모드는 현재 사용할 수 없습니다.\n\nc:geo의 내부 라우팅 엔진을 활성화하고 라우팅 데이터를 다운로드 하시겠습니까?</string>
+    <string name="map_autorotation">지도 자동 회전</string>
+    <string name="map_autorotation_disable">지도 자동 회전을 끄시겠습니까?\n\n지도 회전 메뉴를 사용하여 다시 켜질 수 있습니다</string>
     <string name="quick_settings">빠른 설정</string>
     <string name="quick_settings_info">일부지도 설정 (지도 설정, 숨기기, 경로)이 새로운 \"빠른 설정\"팝업으로 이동되었습니다.\n지도 하단 중앙에있는 아이콘을 사용하여 이 팝업을 열 수 있습니다.</string>
     <string name="other_settings">기타 설정</string>
@@ -2311,6 +2320,7 @@
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
+    <string name="load_track_error_named">트랙/경로 로딩중 오류: \"%s\"</string>
     <string name="map_clear_track">경로/트랙 지우기</string>
     <string name="map_clear_track_confirm">경로/트랙 \"%s\" 제거하시겠습니까?</string>
     <!-- route/track commons -->

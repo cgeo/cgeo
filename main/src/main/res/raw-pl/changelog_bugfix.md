@@ -1,4 +1,9 @@
 ##
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
+- Fix: Logging caches or trackables no longer working (website changes)
+- Fix: Deleting own logs not working
+
+##
 - Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
 - Poprawka: Błąd podczas otwierania mapy z pustymi nazwami plików śladu
 - Poprawka: Automatyczne obracanie mapy jest nadal aktywne po zresetowaniu przy użyciu róży kompasu (UnifiedMap)

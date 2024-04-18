@@ -1,4 +1,9 @@
 ##
+- Korrektur: Wegpunkte ein-/ausblenden funktioniert nicht korrekt, wenn Wegpunktlimit überschritten wird (UnifiedMap)
+- Korrektur: Loggen von Caches oder Trackables funktioniert aufgrund von Webseiten-Änderung nicht mehr
+- Korrektur: Löschen eigener Logs funktioniert nicht
+
+##
 - Korrektur: Fundzähler wird in bestimmten Situationen aufgrund von Webseiten-Änderungen nicht korrekt erkannt
 - Korrektur: Absturz beim Öffnen der Karte mit leeren Track-Dateinamen
 - Korrektur: Automatische Kartendrehung weiter aktiv nach Zurücksetzen über Kompassrose (UnifiedMap)
