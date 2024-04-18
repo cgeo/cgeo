@@ -1,5 +1,5 @@
 ##
-- 수정: 지점 제한을 초과하는 경우 지점 표시/숨기기가 올바르게 작동하지 않음 (Unified Map)
+- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
 - Fix: Logging caches or trackables no longer working (website changes)
 - Fix: Deleting own logs not working
 
