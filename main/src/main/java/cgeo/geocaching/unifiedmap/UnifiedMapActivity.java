@@ -458,6 +458,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(viewport2.get());
                         }
+                        refreshMapData(false);
                     }
                 });
                 break;
@@ -474,10 +475,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
         if (mapType.type == UMTT_PlainMap) {
-            if (loadInBackgroundHandler != null) {
-                loadInBackgroundHandler.onDestroy();
+            refreshMapData(false);
+            if (loadInBackgroundHandler == null) {
+                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
             }
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
         }
     }
 
