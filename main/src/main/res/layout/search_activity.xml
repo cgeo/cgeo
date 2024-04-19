@@ -127,6 +127,14 @@
             android:id="@+id/search_keyword"
             style="@style/button_full"
             android:text="@string/search_kw_button" />
+        <TextView
+            android:id="@+id/search_keyword_disabled_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dip"
+            android:layout_marginRight="6dip"
+            android:text="@string/search_kw_disabled_hint"
+            android:visibility="gone" />
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
