@@ -152,6 +152,9 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             final String uriHost = uri.getHost().toLowerCase(Locale.US);
             if (uriHost.endsWith("geocaching.com")) {
                 geocode = uri.getQueryParameter("tracker");
+                if (StringUtils.isBlank(geocode)) {
+                    geocode = uri.getQueryParameter("TB");
+                }
                 guid = uri.getQueryParameter("guid");
                 id = uri.getQueryParameter("id");
 
