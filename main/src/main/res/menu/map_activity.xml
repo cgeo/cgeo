@@ -62,14 +62,14 @@
     </item>
     <item
         android:id="@+id/menu_log_visit_offline"
-        android:icon="@drawable/ic_menu_edit"
+        android:icon="@drawable/ic_menu_foundlog"
         android:title="@string/cache_menu_visit_offline"
         android:visible="false"
         app:showAsAction="ifRoom">
     </item>
     <item
         android:id="@+id/menu_log_visit"
-        android:icon="@drawable/ic_menu_edit"
+        android:icon="@drawable/ic_menu_foundlog"
         android:title="@string/cache_menu_visit"
         android:visible="false"
         app:showAsAction="ifRoom">
