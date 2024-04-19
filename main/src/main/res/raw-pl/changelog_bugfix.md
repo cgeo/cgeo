@@ -1,7 +1,7 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Poprawka: Opcja Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
+- Poprawka: Logowanie skrytek lub przedmiotów podróżnych nie działało (zmiany na stronie internetowej)
+- Poprawka: Usuwanie własnych logów nie działało
 
 ##
 - Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
