@@ -1979,6 +1979,7 @@
     <string name="search_kw">Keyword</string>
     <string name="search_kw_prefill">Keyword</string>
     <string name="search_kw_button">Search by keyword</string>
+    <string name="search_kw_disabled_hint">Disabled as it is not supported by geocaching.com for BASIC members</string>
     <string name="search_hbu">Hidden by</string>
     <string name="search_hbu_prefill">Owner</string>
     <string name="search_hbu_button">Search by owner name</string>

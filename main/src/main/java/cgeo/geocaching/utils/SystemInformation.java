@@ -10,6 +10,7 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.playservices.GooglePlayServices;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -99,8 +100,9 @@ public final class SystemInformation {
                 .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
                 .append("\n- Log Settings: ").append(Log.getLogSettingsForDisplay())
                 .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
-                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never")
-                .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
+                .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never");
+        appendRoutingModes(body, context);
+        body
                 .append("\n- Live map mode: ").append(Settings.isLiveMap())
                 .append("\n- Use unified map: ").append(Settings.useUnifiedMap())
                 .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
@@ -236,6 +238,20 @@ public final class SystemInformation {
         for (PersistableUri persDocUri : PersistableUri.values()) {
             body.append("\n  - ").append(persDocUri);
         }
+    }
+
+    private static void appendRoutingModes(@NonNull final StringBuilder body, @NonNull final Context ctx) {
+        body.append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(ctx, Settings.getRoutingMode().infoResId)).append(" (");
+        for (RoutingMode mode : RoutingMode.values()) {
+            if (mode != RoutingMode.OFF && mode != RoutingMode.STRAIGHT) {
+                if (mode != RoutingMode.WALK) {
+                    body.append(" / ");
+                }
+                final String profile = Settings.getRoutingProfile(mode);
+                body.append(profile == null ? "-" : profile);
+            }
+        }
+        body.append(")");
     }
 
     private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {

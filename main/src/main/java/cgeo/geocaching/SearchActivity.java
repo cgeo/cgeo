@@ -39,6 +39,7 @@ import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
@@ -303,6 +304,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         }
         binding.keyword.setEnabled(!disableKeywordSearch);
         binding.searchKeyword.setEnabled(!disableKeywordSearch);
+        binding.searchKeywordDisabledHint.setVisibility(disableKeywordSearch ? View.VISIBLE : View.GONE);
     }
 
     /**
