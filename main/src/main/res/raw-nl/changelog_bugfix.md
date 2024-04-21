@@ -1,4 +1,8 @@
 ##
+- Fix: Accept TB parameter in trackable links
+- New: Add hint to disabled keyword search for basic members
+
+##
 - Oplossing: Toon/Verberg waypoints werkt niet meer correct bij overschrijden waypoint limieten (UnifiedMap)
 - Oplossing: Loggen van caches of trackables werkt niet meer (website wijzigingen)
 - Oplossing: Verwijderen van eigen logs werkt niet meer
