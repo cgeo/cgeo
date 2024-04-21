@@ -1,10 +1,12 @@
 ### Mapa
 - Novinka: "Úprava osobní poznámky" z informačního listu kešky
+- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Lepší vyhlazování obrázků v logu
+- Change: Change "log" icon from pencil to smiley icon
 
 ### Obecné
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
