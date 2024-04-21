@@ -49,7 +49,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 public class GooglePositionAndHistory implements PositionAndHistory, Tracks.UpdateTrack, IndividualRoute.UpdateIndividualRoute {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
-    public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_POSITION = 11;
+    public static final float ZINDEX_POSITION_ELEVATION = 10;
     public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
@@ -345,10 +346,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             positionObjs.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(elevationInfo))
                     .position(latLng)
-                    .rotation(0)
                     .anchor(0.5f, 0.5f)
-                    .flat(true)
-                    .zIndex(ZINDEX_POSITION));
+                    .flat(false)
+                    .zIndex(ZINDEX_POSITION_ELEVATION));
         }
     }
 

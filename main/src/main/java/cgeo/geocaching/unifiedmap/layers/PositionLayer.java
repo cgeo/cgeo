@@ -56,11 +56,10 @@ public class PositionLayer {
             if (locationWrapper.location.hasAltitude() && Settings.showElevation()) {
                 layer.put(KEY_ELEVATION,
                         GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
-                                        .setRotation(0f)
-                                        .setFlat(true)
+                                        .setFlat(false)
                                         .setBitmap(MapUtils.getElevationBitmap(activity.getResources(), markerPosition.getHeight(), locationWrapper.location.getAltitude()))
                                         .build())
-                                .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION).build());
+                                .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION_ELEVATION).build());
             }
 
         });
