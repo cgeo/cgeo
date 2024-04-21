@@ -485,6 +485,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     public void loadWaypoints(final UnifiedMapActivity activity, final UnifiedMapViewModel viewModel, final Viewport viewport) {
+        if (mapFragment == null) {
+            return;
+        }
         viewModel.waypoints.getValue().clear();
         final Viewport currentlyVisible = mapFragment.getViewport();
         if (viewModel.caches.readWithResult(currentlyVisible::count) < Settings.getWayPointsThreshold()) {
