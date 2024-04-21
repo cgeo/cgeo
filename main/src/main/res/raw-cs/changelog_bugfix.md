@@ -1,4 +1,8 @@
 ##
+- Fix: Accept TB parameter in trackable links
+- New: Add hint to disabled keyword search for basic members
+
+##
 - Oprava: Zobrazení/skrytí trasových bodů nefunguje správně, pokud se překročí limit trasových bodů (Sjednocená mapa)
 - Oprava: Logování kešek nebo sledovatelných předmětů nefunguje (změny na webu)
 - Oprava: Nefunguje mazání vlastních logů
