@@ -95,11 +95,11 @@ public final class GCConstants {
 
     //Try to find pattern as follows:
     //"publicGuid":"abc.def","referenceCode":"PRxyz","id":1234567,"username":"user","dateCreated":"2012-01-21T20:51:14","findCount":15123,
-    public static final Pattern PATTERN_LOGIN_NAME_CACHE_COUNT = Pattern.compile("\"publicGuid\":\"[^\"]+\",\"referenceCode\":\"[^\"]+\",\"id\":[0-9]+,\"username\":\"([^\"]+)\",\"dateCreated\":\"[0-9:T-]+\",\"findCount\":([0-9]+),");
+    public static final Pattern PATTERN_LOGIN_NAME1 = Pattern.compile(",\"referenceCode\":\"[^\"]+\",\"id\":[0-9]+,\"username\":\\s*\"(([^\\\\\\\"]*(\\\\[a-z\\\"])*)*)\\\",");
     public static final Pattern PATTERN_FINDCOUNT = Pattern.compile("\"findCount\":\\s*([0-9]+)[,\\s]");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
+    public static final Pattern PATTERN_LOGIN_NAME2 = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
     /**
      * Use replaceAll("[,.]","") on the resulting string before converting to an int
      */

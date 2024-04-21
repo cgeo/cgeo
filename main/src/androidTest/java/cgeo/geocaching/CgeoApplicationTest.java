@@ -52,7 +52,7 @@ public class CgeoApplicationTest {
     @MediumTest
     public void testRegEx() {
         final String page = MockedCache.readCachePage("GC2CJPF");
-        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
+        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, true, "???")).isEqualTo("abft");
     }
 
     /**

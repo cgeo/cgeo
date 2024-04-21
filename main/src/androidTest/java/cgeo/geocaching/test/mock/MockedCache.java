@@ -38,7 +38,7 @@ public abstract class MockedCache extends Geocache {
         this.coords = coords;
         this.data = MockedCache.readCachePage(getGeocode());
         // for mocked caches the user logged in is the user who saved the html file(s)
-        this.mockedDataUser = TextUtils.getMatch(data, GCConstants.PATTERN_LOGIN_NAME, true, "");
+        this.mockedDataUser = TextUtils.getMatch(data, GCConstants.PATTERN_LOGIN_NAME2, true, "");
     }
 
     public String getMockedDataUser() {
