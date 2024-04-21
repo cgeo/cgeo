@@ -1,4 +1,8 @@
 ##
+- Fix: Accept TB parameter in trackable links
+- New: Add hint to disabled keyword search for basic members
+
+##
 - Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
 - Fix: Logging caches or trackables no longer working (website changes)
 - Fix: Deleting own logs not working
