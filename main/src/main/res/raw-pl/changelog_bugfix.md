@@ -1,4 +1,8 @@
 ##
+- Fix: Accept TB parameter in trackable links
+- New: Add hint to disabled keyword search for basic members
+
+##
 - Poprawka: Opcja Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
 - Poprawka: Logowanie skrytek lub przedmiotów podróżnych nie działało (zmiany na stronie internetowej)
 - Poprawka: Usuwanie własnych logów nie działało
