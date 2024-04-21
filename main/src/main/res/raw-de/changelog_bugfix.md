@@ -1,4 +1,8 @@
 ##
+- Fix: Accept TB parameter in trackable links
+- New: Add hint to disabled keyword search for basic members
+
+##
 - Korrektur: Wegpunkte ein-/ausblenden funktioniert nicht korrekt, wenn Wegpunktlimit überschritten wird (UnifiedMap)
 - Korrektur: Loggen von Caches oder Trackables funktioniert aufgrund von Webseiten-Änderung nicht mehr
 - Korrektur: Löschen eigener Logs funktioniert nicht
