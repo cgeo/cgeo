@@ -1700,13 +1700,16 @@ public final class GCParser {
 
     @Nullable
     public static String getUsername(@NonNull final String page) {
-        String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME_CACHE_COUNT, null);
+        String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME1, null);
         if (StringUtils.isNotBlank(username)) {
+            if (username.contains("\\")) {
+                username = StringEscapeUtils.unescapeEcmaScript(username);
+            }
             return username;
         }
 
         //second try
-        username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
+        username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
         }
