@@ -410,7 +410,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.setCenter(cache.getCoords());
                         }
-                        viewModel.waypoints.getValue().addAll(cache.getWaypoints());
+
+                        final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+                        MapUtils.filter(waypoints, getFilterContext());
+                        viewModel.waypoints.getValue().addAll(waypoints);
                         if (!isTargetSet()) {
                             onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
                         }
