@@ -1,10 +1,12 @@
 ### Mapa
 - Nowość: „Edytuj notatkę osobistą” z arkusza informacji o skrytce
+- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
 
 ### Szczegóły skrytki
 - New: Show images linked in "personal note" in Images tab
 - Zmiana: Uproszczenie działania długiego dotknięcia w szczegółach skrytki i szczegółach przedmiotu podróżnego
 - Nowość: płynniejsze skalowanie obrazów z dziennika znalezień
+- Change: Change "log" icon from pencil to smiley icon
 
 ### General
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
