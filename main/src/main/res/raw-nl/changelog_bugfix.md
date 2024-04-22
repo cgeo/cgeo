@@ -1,6 +1,6 @@
 ##
-- Fix: Accept TB parameter in trackable links
-- New: Add hint to disabled keyword search for basic members
+- Oplossing: Accepteer TB-parameter in trackable links
+- Nieuw: Voeg hint toe aan uitgeschakelde zoekwoorden voor basis leden
 
 ##
 - Oplossing: Toon/Verberg waypoints werkt niet meer correct bij overschrijden waypoint limieten (UnifiedMap)
