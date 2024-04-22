@@ -1,12 +1,12 @@
 ### Kaart
 - Nieuw: "Persoonlijke Notitie bewerken" van het cache informatieblad
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Oplossing: Waypoints niet gefilterd bij het toewijzen van een enkele cache (UnifiedMap)
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Soepeler schalen van log afbeeldingen
-- Change: Change "log" icon from pencil to smiley icon
+- Wijziging: Wijzig "gelogd" icoon van potlood naar smiley icoon
 
 ### Algemeen
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
