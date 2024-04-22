@@ -1,6 +1,6 @@
 ##
-- Fix: Accept TB parameter in trackable links
-- New: Add hint to disabled keyword search for basic members
+- Poprawka: Akceptuj parametr TB w linkach przedmiotów podróżnych
+- Nowość: Dodano wskazówkę do wyłączonego wyszukiwania słów kluczowych dla podstawowych użytkowników
 
 ##
 - Poprawka: Opcja Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
