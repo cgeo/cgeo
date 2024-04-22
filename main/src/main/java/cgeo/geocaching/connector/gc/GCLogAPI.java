@@ -36,7 +36,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /** Provides methods to handle all aspects of creating, editing and deleting Log entries for GC.com (both caches and trackables) */
 public class GCLogAPI {
@@ -223,7 +222,7 @@ public class GCLogAPI {
         }
 
         //1.) Call log page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(getUrlForNewLog(geocode));
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }
@@ -255,7 +254,7 @@ public class GCLogAPI {
 
         //https://www.geocaching.com/live/geocache/GCxyz/log/GLabc/edit
         //1.) Call log edit page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(getUrlForEditLog(geocode, logId));
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("Log Post: unable to extract CSRF Token");
         }
@@ -283,7 +282,7 @@ public class GCLogAPI {
         //{"reasonText":"Deleting test log"}
 
         //1.) Call log view page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("DeleteLog: unable to extract CSRF Token");
         }
@@ -315,7 +314,7 @@ public class GCLogAPI {
     @NonNull
     public static ImageResult addLogImage(final String logId, final Image image) {
         //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             Log.w("Log Image Post: unable to extract CSRF Token in new Log Flow Page");
             return generateImageLogError("No CSRFToken found");
@@ -346,7 +345,7 @@ public class GCLogAPI {
     public static ImageResult editLogImageData(final String logId, final String logImageId, final String name, final String description) {
 
         //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             Log.w("Log Image Edit: unable to extract CSRF Token in new Log Flow Page");
             return generateImageLogError("No CSRFToken found");
@@ -361,7 +360,7 @@ public class GCLogAPI {
     public static ImageResult deleteLogImage(final String logId, final String logImageId) {
 
         //1) Get CSRF Token from "Edit Log" page. URL is https://www.geocaching.com/live/log/GLxyz
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             Log.w("Log Image Edit: unable to extract CSRF Token in new Log Flow Page");
             return generateImageLogError("No CSRFToken found");
@@ -390,21 +389,10 @@ public class GCLogAPI {
             generateLogError("Incomplete data for logging: " + trackableLog);
         }
 
-        //1) Get CSRF Token from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
-        final ImmutablePair<String, String> htmlAndCsrfToken = getHtmlAndCsrfTokenFromUrl(getUrlForNewTrackableLog(tbCode));
-        final String csrfToken = htmlAndCsrfToken == null ? null : htmlAndCsrfToken.right;
+        //1) Get CSRF Token
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("Log Trackable Post: unable to extract CSRF Token in new Log Flow Page");
-        }
-
-        //1.5) see if we find a geocache reference in the HTML
-        final String geocacheReferenceJson = TextUtils.getMatch(htmlAndCsrfToken.left, GCConstants.PATTERN_TB_CURRENT_GEOCACHE_JSON, null);
-        String geocacheReferenceCode = null;
-        if (geocacheReferenceJson != null) {
-            final GCGeocacheReference gcRef = JsonUtils.readValueFailSilently("{" + geocacheReferenceJson + "}", GCGeocacheReference.class, null);
-            if (gcRef != null) {
-                geocacheReferenceCode = gcRef.referenceCode;
-            }
         }
 
         //2,) Fill Trackable Log Entry object and post it
@@ -416,9 +404,17 @@ public class GCLogAPI {
         logEntry.logText = log;
         logEntry.trackingCode = trackableLog.trackingCode;
 
-        //special case: if type is RETRIEVED, we need to fill reference code
+        // special case: if type is RETRIEVED, we need to fill reference code
         if (trackableLog.getAction() == LogTypeTrackable.RETRIEVED_IT) {
-            logEntry.geocacheReferenceCode = geocacheReferenceCode;
+            //1.5) see if we find a geocache reference in the HTML from Trackable "Edit Log" page. URL is https://www.geocaching.com/live/trackable/TBxyz/log
+            final String logPageHtml = httpReq().uri(getUrlForNewTrackableLog(tbCode)).request().blockingGet().getBodyString();
+            final String geocacheReferenceJson = TextUtils.getMatch(logPageHtml, GCConstants.PATTERN_TB_CURRENT_GEOCACHE_JSON, null);
+            if (geocacheReferenceJson != null) {
+                final GCGeocacheReference gcRef = JsonUtils.readValueFailSilently("{" + geocacheReferenceJson + "}", GCGeocacheReference.class, null);
+                if (gcRef != null) {
+                    logEntry.geocacheReferenceCode = gcRef.referenceCode;
+                }
+            }
         }
 
         //URL: https://www.geocaching.com/api/live/v1/logs/TBxyz/trackableLog
@@ -440,7 +436,7 @@ public class GCLogAPI {
     public static LogResult deleteLogTrackable(final String logId) {
 
         //1.) Call log view page and get a valid CSRF Token
-        final String csrfToken = getCsrfTokenFromUrl(WEBSITE_URL + "/live/log/" + logId);
+        final String csrfToken = getCsrfToken();
         if (csrfToken == null) {
             return generateLogError("DeleteLogTrackable: unable to extract CSRF Token");
         }
@@ -544,28 +540,11 @@ public class GCLogAPI {
         return ImageResult.error(StatusCode.LOGIMAGE_POST_ERROR, msg, null);
     }
 
-    private static String getCsrfTokenFromUrl(final String url) {
+    private static String getCsrfToken() {
         final GCWebLogCsrfRequest csrfResponse = websiteReq().uri("/api/auth/csrf")
                 .method(HttpRequest.Method.GET)
                 .requestJson(GCWebLogCsrfRequest.class)
                 .blockingGet();
-        if (!StringUtils.isBlank(csrfResponse.csrfToken)) {
-            return csrfResponse.csrfToken;
-        }
-        final ImmutablePair<String, String> htmlAndUrl = getHtmlAndCsrfTokenFromUrl(url);
-        return htmlAndUrl == null ? null : htmlAndUrl.right;
+        return StringUtils.isBlank(csrfResponse.csrfToken) ? null : csrfResponse.csrfToken;
     }
-
-    private static ImmutablePair<String, String> getHtmlAndCsrfTokenFromUrl(final String url) {
-        try (HttpResponse htmlResp = httpReq().uri(url).request().blockingGet()) {
-            final String html = htmlResp.getBodyString();
-            final String csrfToken = TextUtils.getMatch(html, GCConstants.PATTERN_CSRF_TOKEN, null);
-            if (!htmlResp.isSuccessful() || csrfToken == null) {
-                Log.w("Log Post: unable to find a CSRF Token in Log Page '" + url + "':" + htmlResp);
-                return null;
-            }
-            return new ImmutablePair<>(html, csrfToken);
-        }
-    }
-
 }
