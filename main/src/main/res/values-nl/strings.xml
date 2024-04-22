@@ -1765,6 +1765,7 @@
     <string name="search_kw">Trefwoord</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
+    <string name="search_kw_disabled_hint">Uitgeschakeld omdat het niet ondersteund wordt door geocaching.com voor BASIS-leden</string>
     <string name="search_hbu">Verborgen door</string>
     <string name="search_hbu_prefill">Eigenaar</string>
     <string name="search_hbu_button">Zoeken op eigenaar</string>
