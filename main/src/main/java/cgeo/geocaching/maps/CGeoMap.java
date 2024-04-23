@@ -790,7 +790,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (mapOptions.isLiveEnabled) {
                 mapOptions.isStoredEnabled = true;
                 mapOptions.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
-                refreshMapData(false);
+                refreshMapData(false, true);
             }
             markersInvalidated = true;
             lastSearchResult = null;
@@ -847,7 +847,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void refreshMapData(final boolean circlesSwitched) {
+    public void refreshMapData(final boolean circlesSwitched, final boolean filterChanged) {
         markersInvalidated = true;
         if (overlayPositionAndScale != null) {
             overlayPositionAndScale.repaintRequired();
@@ -856,8 +856,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapView.setCircles(Settings.isShowCircles());
             mapView.repaintRequired(null);
         }
-        MapUtils.updateFilterBar(activity, mapOptions.filterContext);
-
+        if (filterChanged) {
+            MapUtils.updateFilterBar(activity, mapOptions.filterContext);
+        }
     }
 
     private void routingModeChanged(final RoutingMode newValue) {

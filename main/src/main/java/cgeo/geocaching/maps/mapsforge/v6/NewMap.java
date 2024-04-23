@@ -467,7 +467,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 mapOptions.isStoredEnabled = true;
                 mapOptions.filterContext = new GeocacheFilterContext(LIVE);
                 caches.setFilterContext(mapOptions.filterContext);
-                refreshMapData(false);
+                refreshMapData(false, true);
             }
 
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -530,7 +530,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         return true;
     }
 
-    private void refreshMapData(final boolean circlesSwitched) {
+    private void refreshMapData(final boolean circlesSwitched, final boolean filterChanged) {
         if (circlesSwitched) {
             caches.switchCircles();
         }
@@ -543,7 +543,10 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         if (null != geoObjectLayer) {
             geoObjectLayer.requestRedraw();
         }
-        MapUtils.updateFilterBar(this, mapOptions.filterContext);
+
+        if (filterChanged) {
+            MapUtils.updateFilterBar(this, mapOptions.filterContext);
+        }
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
@@ -623,7 +626,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapOptions.filterContext.set(filter);
-        refreshMapData(false);
+        refreshMapData(false, true);
     }
 
     private void changeMapSource(@NonNull final MapSource newSource) {
@@ -1543,7 +1546,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapOptions.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            refreshMapData(false);
+            refreshMapData(false, true);
         }
 
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);

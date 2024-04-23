@@ -17,6 +17,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Action2;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -45,7 +46,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
-    private static boolean isShowCircles;
     private static boolean isAutotargetIndividualRoute;
     private static boolean showAutotargetIndividualRoute;
 
@@ -56,8 +56,7 @@ public class MapSettingsUtils {
     // splitting up that method would not help improve readability
     @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
-        isShowCircles = Settings.isShowCircles();
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action2<Boolean, Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final Runnable configureProximityNotifications, final GeocacheFilterContext filterContext) {
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
         final boolean showPNMastertoggle = Settings.showProximityNotificationMasterToggle();
@@ -74,8 +73,8 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
         final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.ORIGINAL)), Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.PARKING)), Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
-        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
-        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, isShowCircles, Settings::setShowCircles, false);
+        final SettingsCheckboxModel wpVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
+        final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, Settings.isShowCircles(), Settings::setShowCircles, false);
 
         final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
 
@@ -95,7 +94,7 @@ public class MapSettingsUtils {
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
         wpOriginalCb.addToViewGroup(activity, rightColumn);
         wpParkingCb.addToViewGroup(activity, rightColumn);
-        wbVisitedCb.addToViewGroup(activity, rightColumn);
+        wpVisitedCb.addToViewGroup(activity, rightColumn);
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         circlesCb.addToViewGroup(activity, rightColumn);
 
@@ -141,7 +140,12 @@ public class MapSettingsUtils {
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
+            boolean filterChanged = false;
+            boolean circleChanged = circlesCb.valueChanged;
             for (SettingsCheckboxModel item : allCbs) {
+                if (item.valueChanged() && item != circlesCb) {
+                    filterChanged = true;
+                }
                 item.setValue();
             }
             compactIconWrapper.setValue();
@@ -152,7 +156,7 @@ public class MapSettingsUtils {
                 filterContext.set(filter);
             }
 
-            onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+            onMapSettingsPopupFinished.call(circleChanged, filterChanged);
 
             if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
                 if (route == null) {
@@ -217,12 +221,15 @@ public class MapSettingsUtils {
         private final Action1<Boolean> setValue;
         private final boolean isNegated;
 
+        private boolean valueChanged;
+
         SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
             this.imageParam = ImageParam.id(resIcon);
             this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
+            this.valueChanged = false;
         }
 
         SettingsCheckboxModel(@StringRes final int resTitle, final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
@@ -231,6 +238,7 @@ public class MapSettingsUtils {
             this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
+            this.valueChanged = false;
         }
 
         public void setValue() {
@@ -254,7 +262,16 @@ public class MapSettingsUtils {
             }
 
             ip.right.setChecked(currentValue);
-            ip.right.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
+            ip.right.setOnCheckedChangeListener((v, c) -> changeValue());
+        }
+
+        public boolean valueChanged() {
+            return valueChanged;
+        }
+
+        private void changeValue() {
+            this.currentValue = !this.currentValue;
+            this.valueChanged = !this.valueChanged;
         }
     }
 
