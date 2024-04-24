@@ -141,7 +141,7 @@ public class MapSettingsUtils {
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
             boolean filterChanged = false;
-            boolean circleChanged = circlesCb.valueChanged;
+            final boolean circleChanged = circlesCb.valueChanged;
             for (SettingsCheckboxModel item : allCbs) {
                 if (item.valueChanged() && item != circlesCb) {
                     filterChanged = true;

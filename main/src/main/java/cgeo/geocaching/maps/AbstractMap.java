@@ -123,7 +123,7 @@ public abstract class AbstractMap {
         //
     }
 
-    public abstract void refreshMapData(boolean circlesSwitched, final boolean filterChanged);
+    public abstract void refreshMapData(boolean circlesSwitched, boolean filterChanged);
 
     public boolean isTargetSet() {
         return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;
