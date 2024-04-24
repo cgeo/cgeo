@@ -39,6 +39,7 @@ import androidx.test.filters.SmallTest;
 
 import java.util.GregorianCalendar;
 
+import org.apache.commons.text.StringEscapeUtils;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -52,7 +53,20 @@ public class CgeoApplicationTest {
     @MediumTest
     public void testRegEx() {
         final String page = MockedCache.readCachePage("GC2CJPF");
-        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
+        assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME2, true, "???")).isEqualTo("abft");
+
+        // test special character handling in usernames during login
+        testUsername("Max\\u0026Moritz"); // JS-escaped Unicode character
+        testUsername("Hello\\\"World\\\""); // JS-escaped double quote
+        testUsername("Hello\\\"Max\\u0026Moritz\\\""); // combination of both
+    }
+
+    private void testUsername(final String username) {
+        // pagePrefix / pagePostfix is part of the surrounding JS code around the username parameter
+        final String pagePrefix = "\"publicGuid\":\"abcdef01-2345-6789-abcd-ef0123456789\",\"referenceCode\":\"PRABCDE\",\"id\":1234567,\"username\":\"";
+        final String pagePostfix = "\",\"dateCreated\":\"2010-01-01T00:00:00\"";
+        final String purifiedUsername = StringEscapeUtils.unescapeEcmaScript(username); // unescape JS-escaped Unicode characters
+        assertThat(GCParser.getUsername(pagePrefix + username + pagePostfix)).isEqualTo(purifiedUsername);
     }
 
     /**
