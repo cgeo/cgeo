@@ -1,6 +1,9 @@
 ##
-- Fix: Accept TB parameter in trackable links
-- New: Add hint to disabled keyword search for basic members
+- Fix: Trackable links with TB parameter not working
+- Novinka: Přidání nápovědy k zakázanému vyhledávání klíčových slov pro základní členy
+- Fix: Trackable logging not working again (website changes)
+- Fix: Elevation info is rotating with position marker
+- Fix: Username not detected during login when containing certain special characters
 
 ##
 - Oprava: Zobrazení/skrytí trasových bodů nefunguje správně, pokud se překročí limit trasových bodů (Sjednocená mapa)
