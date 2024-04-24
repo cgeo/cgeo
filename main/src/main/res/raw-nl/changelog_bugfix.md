@@ -1,6 +1,9 @@
 ##
-- Oplossing: Accepteer TB-parameter in trackable links
+- Fix: Trackable links with TB parameter not working
 - Nieuw: Voeg hint toe aan uitgeschakelde zoekwoorden voor basis leden
+- Fix: Trackable logging not working again (website changes)
+- Fix: Elevation info is rotating with position marker
+- Fix: Username not detected during login when containing certain special characters
 
 ##
 - Oplossing: Toon/Verberg waypoints werkt niet meer correct bij overschrijden waypoint limieten (UnifiedMap)
