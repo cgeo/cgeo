@@ -906,11 +906,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private void refreshMapData(final boolean circlesSwitched, final boolean filterChanged) {
         viewModel.caches.write(false, caches -> MapUtils.filter(caches, mapType.filterContext));
         viewModel.waypoints.notifyDataChanged();
-        if (loadInBackgroundHandler != null) {
-            loadInBackgroundHandler.onDestroy();
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-        }
         if (filterChanged) {
+            if (loadInBackgroundHandler != null) {
+                loadInBackgroundHandler.onDestroy();
+                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+            }
             MapUtils.updateFilterBar(this, mapType.filterContext);
         }
     }
