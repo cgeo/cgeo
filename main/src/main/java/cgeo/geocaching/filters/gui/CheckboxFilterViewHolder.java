@@ -2,7 +2,6 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
@@ -20,7 +19,6 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,9 +30,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends BaseFilterViewHolder<F> {
 
-    private final ValueGroupFilterAccessor<T, F> filterAccessor;
+    final ValueGroupFilterAccessor<T, F> filterAccessor;
 
-    private final Set<T> visibleValues = new HashSet<>();
+    final Set<T> visibleValues = new HashSet<>();
     private final Map<T, ImmutablePair<View, CheckBox>> valueCheckboxes = new HashMap<>();
 
     private ImmutablePair<View, CheckBox> selectAllNoneCheckbox;
@@ -118,34 +116,31 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         return selectAllNoneCheckbox.left;
     }
 
-    private View createAddItemButton(final ViewGroup vg) {
-        this.addItemsButton = ViewUtils.createButton(getActivity(), vg, TextParam.id(R.string.cache_filter_checkboxlist_add_items));
-
-        this.addItemsButton.setOnClickListener(v -> {
-
+    protected View.OnClickListener getAddItemButtonCallback() {
+        return v -> {
             final List<T> items = new ArrayList<>(filterAccessor.getSelectableValues());
             items.removeAll(visibleValues);
 
-            if (filterAccessor.getSelectableValues().size() > 0 && filterAccessor.getSelectableValues().get(0) instanceof StoredList) {
-                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        value -> getValueCheckbox((T) value).right.setChecked(true), true, Collections.emptySet(), false);
-            } else {
-                final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
-                model
-                        .setItems(items)
-                        .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
+            final SimpleDialog.ItemSelectModel<T> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                    .setItems(items)
+                    .setDisplayMapper((s) -> TextParam.text(filterAccessor.getDisplayText(s)));
 
-                SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
+            SimpleDialog.of(getActivity()).setTitle(TextParam.id(R.string.cache_filter_checkboxlist_add_items_dialog_title))
                     .selectMultiple(model, s -> {
-                    visibleValues.addAll(s);
-                    for (T value : s) {
-                        getValueCheckbox(value).right.setChecked(true);
-                    }
-                    relayout();
-                });
-            }
-        });
+                        visibleValues.addAll(s);
+                        for (T value : s) {
+                            getValueCheckbox(value).right.setChecked(true);
+                        }
+                        relayout();
+                    });
+        };
+    }
 
+    private View createAddItemButton(final ViewGroup vg) {
+        this.addItemsButton = ViewUtils.createButton(getActivity(), vg, TextParam.id(R.string.cache_filter_checkboxlist_add_items));
+
+        this.addItemsButton.setOnClickListener(getAddItemButtonCallback());
         return this.addItemsButton;
     }
 
@@ -161,7 +156,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
 
-    private void relayout() {
+    void relayout() {
 
         for (ViewGroup column : this.columns) {
             column.removeAllViews();
@@ -186,7 +181,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
     @NonNull
-    private ImmutablePair<View, CheckBox> getValueCheckbox(final T value) {
+    ImmutablePair<View, CheckBox> getValueCheckbox(final T value) {
         ImmutablePair<View, CheckBox> cb = this.valueCheckboxes.get(value);
         if (cb == null) {
             final String vText = this.filterAccessor.getDisplayText(value) +
