@@ -1,7 +1,14 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Oplossing: Trackable links met TB parameter werken niet
+- Nieuw: Voeg hint toe aan uitgeschakelde zoekwoorden voor basis leden
+- Oplossing: Trackable loggen werkt weer niet (website wijzigingen)
+- Fix: Hoogteinfo roteert met positie marker
+- Oplossing: Gebruikersnaam niet gedetecteerd tijdens het inloggen wanneer het bepaalde speciale tekens bevat
+
+##
+- Oplossing: Toon/Verberg waypoints werkt niet meer correct bij overschrijden waypoint limieten (UnifiedMap)
+- Oplossing: Loggen van caches of trackables werkt niet meer (website wijzigingen)
+- Oplossing: Verwijderen van eigen logs werkt niet meer
 
 ##
 - Oplossing: Gevonden teller niet gedetecteerd in bepaalde situaties door veranderingen op de website

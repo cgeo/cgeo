@@ -1,7 +1,14 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Oprava: Nefungují trasovatelné odkazy s parametrem TB
+- Novinka: Přidání nápovědy k zakázanému vyhledávání klíčových slov pro základní členy
+- Oprava: Trasovatelné logování opět nefunguje (změny na webu)
+- Oprava: Informace o nadmořské výšce se otáčejí s poziční značkou
+- Oprava: Uživatelské jméno nebylo rozpoznáno při přihlášení, pokud obsahovalo určité speciální znaky
+
+##
+- Oprava: Zobrazení/skrytí trasových bodů nefunguje správně, pokud se překročí limit trasových bodů (Sjednocená mapa)
+- Oprava: Logování kešek nebo sledovatelných předmětů nefunguje (změny na webu)
+- Oprava: Nefunguje mazání vlastních logů
 
 ##
 - Oprava: V některých situacích nebylo zjištěno počítadlo nalezených položek kvůli změnám webových stránek geocaching.com

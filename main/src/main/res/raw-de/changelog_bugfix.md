@@ -1,4 +1,11 @@
 ##
+- Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
+- Neu: Hinweis auf deaktivierte Stichwortsuche für Basismitglieder ergänzt
+- Korrektur: Logging von Trackables funktioniert erneut nicht (Änderungen der Webseite)
+- Korrektur: Höhen-Info dreht sich mit Positionsmarkierung
+- Korrektur: Benutzername wird beim Login nicht erkannt, wenn bestimmte Sonderzeichen enthalten sind
+
+##
 - Korrektur: Wegpunkte ein-/ausblenden funktioniert nicht korrekt, wenn Wegpunktlimit überschritten wird (UnifiedMap)
 - Korrektur: Loggen von Caches oder Trackables funktioniert aufgrund von Webseiten-Änderung nicht mehr
 - Korrektur: Löschen eigener Logs funktioniert nicht

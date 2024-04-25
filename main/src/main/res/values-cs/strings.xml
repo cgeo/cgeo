@@ -1791,6 +1791,7 @@
     <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
+    <string name="search_kw_disabled_hint">Zakázáno, protože není podporováno službou geocaching.com pro ZÁKLADNÍ členy</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hledat podle vlastníka</string>

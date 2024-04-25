@@ -1,4 +1,11 @@
 ##
+- Fix: Trackable links with TB parameter not working
+- New: Add hint to disabled keyword search for basic members
+- Fix: Trackable logging not working again (website changes)
+- Fix: Elevation info is rotating with position marker
+- Fix: Username not detected during login when containing certain special characters
+
+##
 - Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
 - Fix: Logging caches or trackables no longer working (website changes)
 - Fix: Deleting own logs not working
