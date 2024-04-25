@@ -517,6 +517,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Matrice de Difficulté / Terrain</string>
     <string name="cache_filter_rating">Évaluation</string>
     <string name="cache_filter_status">Statut</string>
+    <string name="cache_filter_individualroute">Itinéraire individuel</string>
     <string name="cache_filter_attributes">Attributs de la cache</string>
     <string name="cache_filter_favorites">Favoris</string>
     <string name="cache_filter_distance">Distance</string>
@@ -606,6 +607,7 @@
     <string name="cache_filter_status_exclude_active">Exclure les caches actives</string>
     <string name="cache_filter_status_exclude_disabled">Exclure les caches désactivées</string>
     <string name="cache_filter_status_exclude_archived">Exclure les caches archivées</string>
+    <string name="cache_filter_boolean_individualroute_contained">Contenu dans l\'itinéraire</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclure les caches sans D/T</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Remplir avec gc.com</string>
     <string name="cache_filter_nested_filter_modify">modifier</string>
@@ -802,6 +804,7 @@
     <string name="settings_ec_description">Autoriser c:geo à utiliser extremcaching.com pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
     <string name="settings_su_description">Autoriser c:geo à utiliser geocaching.su pour chercher des caches.</string>
     <string name="settings_lc_description">Ce paramètre ajoute les Adventure Lab sur la carte.\n\n(Disponible pour les membres premium uniquement sur geocaching.com. Nécessite d\'activer le service “Géocaching”.)\n\nModifier ce paramètre nécessite de redémarrer l\'application.</string>
+    <string name="settings_lc_found_state_handling">Si coché, ne pas récupérer automatiquement l\'état trouvé des Labcaches, à la place, fournir des contrôles pour que l\'utilisateur définisse manuellement l\'état trouvé</string>
     <string name="lc_default_description">C\'est une Adventure Lab de geocaching.com. Les Adventures peuvent seulement être jouées avec l\'application Adventure Lab de Groundspeak. Appuyez sur l\'icône Adventure Lab sur l\'onglet “Détails” pour ouvrir/installer l\'application.\nSi vous ne voulez pas voir les Adventure Lab sur votre carte et la recherche, vous pouvez les désactiver dans le menu “Paramètres”, “Services”, puis “Geocaching.com Adventure Lab”</string>
     <string name="init_summary_oc_de">Charger les caches depuis opencaching.de</string>
     <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
