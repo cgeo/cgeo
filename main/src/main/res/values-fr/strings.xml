@@ -96,6 +96,7 @@
     <string name="cache_cat_bc_hiking">Randonnée</string>
     <string name="cache_cat_bc_other">Autres</string>
     <string name="cache_cat_desc_bc_nature">Entouré par une nature particulière</string>
+    <string name="cache_cat_desc_bc_location">Vous montre un bel emplacement</string>
     <string name="cache_cat_desc_bc_recommended">Recommandé par l\'équipe de BetterCacher</string>
     <string name="cache_cat_desc_bc_gadget">Fabrication spéciale, gadget cool, etc</string>
     <string name="cache_cat_desc_bc_mystery">Une énigme extraordinaire et stimulante</string>
@@ -146,6 +147,12 @@
     <string name="log_save">Enregistrer hors-ligne</string>
     <string name="log_saving">Enregistrement en cours…</string>
     <string name="log_posting_log">Envoi de la visite…</string>
+    <string name="log_posting_problemreport">Envoi du log d\'erreurs…</string>
+    <string name="log_posting_deletelog">Supprimer le log…</string>
+    <string name="log_posting_image_create">Image %1$s/%2$s : envoi des infos…</string>
+    <string name="log_posting_image_edit">Image %1$s/%2$s : envoi des infos…</string>
+    <string name="log_posting_image_delete">Suppression de l\'image %1$s/%2$s…</string>
+    <string name="log_posting_save_internal">Enregistrer l\'état du nouveau log…</string>
     <string name="log_posting_vote">Envoi de l\'évaluation de la cache…</string>
     <string name="log_posting_generic_trackable">Envoi de %1$s %2$d/%3$d</string>
     <string name="log_clear">Effacer</string>
@@ -201,6 +208,8 @@
     <string name="log_image_info_scaled">redimensionnée</string>
     <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
+    <string name="log_delete_confirm">Voulez-vous vraiment supprimer le log de type \'%1$s\' par l\'auteur \'%2$s\' en date du \'%3$s \' ?</string>
+    <string name="log_offline_delete_confirm">Voulez-vous vraiment supprimer vos logs hors-ligne de type \'%1$s\' avec en date du \'%2$s \' ?</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
     <!-- Contacts -->
     <string name="contact_not_found">Le contact avec l\'alias / pseudo %s est introuvable. Ajoutez-le d\'abord dans vos contacts.</string>
@@ -215,6 +224,7 @@
     <string name="err_parse">Échec login lecture page</string>
     <string name="err_captcha">Le service utilise un Captcha. Veuillez vous connecter au site geocaching.com avec votre navigateur web et résoudre le Captcha puis essayez de vous connecter à nouveau à c:geo.</string>
     <string name="err_server_general">Échec de la connexion au serveur géocaching. Le site web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
+    <string name="err_server_gc">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
@@ -297,6 +307,7 @@
     <string name="info_log_posted">Envoi de la visite réussi.</string>
     <string name="info_log_saved">Enregistrement de la visite réussie.</string>
     <string name="info_log_post_failed">L\'envoi de la visite a échoué.</string>
+    <string name="info_log_delete_failed">La suppression du log a échoué.</string>
     <string name="info_log_post_failed_reason">Raison : %s</string>
     <string name="info_log_post_retry">Réessayer</string>
     <string name="info_log_post_save">Sauver hors-ligne</string>
@@ -310,6 +321,8 @@
     <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
     <string name="confirm_discard_changes">Ignorer les modifications non enregistrées ?</string>
+    <string name="confirm_unsent_changes_title">Modifications non envoyées</string>
+    <string name="confirm_unsent_changes">Ignorer les modifications non envoyées ?</string>
     <string name="confirm_discard_wp_changes">Abandonner les points de passage non enregistrés ?</string>
     <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
     <string name="more_information">Plus d\'informations</string>
@@ -501,6 +514,7 @@
     <string name="cache_filter_difficulty">Difficulté</string>
     <string name="cache_filter_terrain">Terrain</string>
     <string name="cache_filter_difficulty_terrain">Difficulté / Terrain</string>
+    <string name="cache_filter_difficulty_terrain_matrix">Matrice de Difficulté / Terrain</string>
     <string name="cache_filter_rating">Évaluation</string>
     <string name="cache_filter_status">Statut</string>
     <string name="cache_filter_attributes">Attributs de la cache</string>
@@ -638,23 +652,23 @@
     </string-array>
     <string-array name="cache_filter_event_date_stored_values_label">
         <item>passé</item>
-        <item>today</item>
-        <item>tomorrow</item>
-        <item>2 days from now</item>
-        <item>3 days from now</item>
-        <item>1 week from now</item>
-        <item>2 weeks from now</item>
-        <item>1 month from now</item>
-        <item>all future</item>
+        <item>aujourd\'hui</item>
+        <item>demain</item>
+        <item>dans 2 jours</item>
+        <item>dans 3 jours</item>
+        <item>dans 1 semaine</item>
+        <item>dans 2 semaines</item>
+        <item>dans un mois</item>
+        <item>tous les prochains</item>
     </string-array>
     <string-array name="cache_filter_event_date_stored_values_label_short">
-        <item>past</item>
-        <item>0d</item>
-        <item>1d</item>
-        <item>2d</item>
-        <item>3d</item>
-        <item>1w</item>
-        <item>2w</item>
+        <item>passé</item>
+        <item>0j</item>
+        <item>1j</item>
+        <item>2j</item>
+        <item>3j</item>
+        <item>1sem</item>
+        <item>2sem</item>
         <item>1m</item>
         <item>&gt;1mois</item>
     </string-array>
@@ -685,6 +699,7 @@
     <string name="about_changelog_full">Liste de toutes les modifications</string>
     <string name="about_nutshellmanual">Manuel utilisateur en ligne</string>
     <string name="about_contributors_carnerodetails">comme le père de c:geo</string>
+    <string name="about_contributors_recent">Contributeurs (12 derniers mois)</string>
     <string name="about_contributors_specialthanks">Remerciements spéciaux à</string>
     <string name="about_contributors_specialthanksdetails">- les traducteurs sur [Crowdin.net](https://crowdin.net/project/cgeo) !\n- les personnes ayant signalé des anomalies ou des améliorations\n- et tous les autres contributeurs.\n</string>
     <string name="about_contributors_other">Autres contributeurs</string>
@@ -860,6 +875,8 @@
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
+    <string name="init_visitedWaypointsSemiTransparent">Points de passage visités semi-transparents</string>
+    <string name="init_visitedWaypointsSemiTransparent_description">Marquer les waypoints visités avec un fond semi-transparent</string>
     <string name="init_brouterThreshold">Calculer l\'itinéraire</string>
     <string name="init_brouterThreshold_description">Distance maximale jusqu\'à laquelle le routage hors ligne calculera une route.</string>
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
@@ -868,7 +885,9 @@
     <string name="init_brouterProfileWalk">Profil \"Marche\"</string>
     <string name="init_brouterProfileBike">Profil \"Vélo\"</string>
     <string name="init_brouterProfileCar">Profil \"Voiture\"</string>
+    <string name="init_brouterProfileUserNumber">Profil défini par l\'utilisateur %d</string>
     <string name="init_removeFromRouteOnLog">Retirer de la route</string>
+    <string name="init_summary_removeFromRouteOnLog">En envoyant ou en stockant un log, supprimer la cache de la route actuelle.</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
     <string name="brouter_missing_data">Ouvrir BRouter pour télécharger les données de routage manquantes (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
@@ -879,6 +898,14 @@
     <string name="init_dtMarkerOnCacheIcon">Notation D/T sur les icônes de cache</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Afficher des icônes pour la Difficulté (à gauche) et pour le Terrain (à droite) dans le coin supérieur droit de la cache (l\'indicateur \"Enregistré\" est alors placé au milieu).</string>
     <string name="init_showElevation">Afficher l\'altitude</string>
+    <string name="init_summary_showElevation">Afficher les informations d\'altitude pour la position actuelle, prises à partir de données de routage ou GNSS (si disponible)</string>
+    <string name="init_elevation_notAvailable">"Aucune donnée d'altitude disponible"</string>
+    <string name="menu_elevation_info">Altitude (carte) :</string>
+    <string name="elevation_selected">Altitude (carte) à la position sélectionnée</string>
+    <string name="elevation_difference">Différence d\'altitude</string>
+    <string name="distance">Distance :</string>
+    <string name="copy_coordinates">Copier les coordonnées</string>
+    <string name="selected_position">Position sélectionnée</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction des points de passage des notes personnelles. Elle peut encore être activée pour des caches individuellement en désactivant la case à cocher sous la note personnelle.</string>
     <string name="init_prevent_cache_note_merge">Remplacer la note personnelle de la cache</string>
@@ -904,8 +931,11 @@
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
     <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
     <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
+    <string name="init_custombnitem">Élément de menu personnalisé</string>
+    <string name="init_custombnitem_description">Élément du menu de navigation le plus à droite :\n%s</string>
     <string name="init_custombnitem_default">Recherche à proximité (par défaut)</string>
     <string name="init_custombnitem_none">(aucun)</string>
+    <string name="init_custombnitem_empty_placeholder">(texte de substitution vide)</string>
     <!-- names for CacheListInfoItem -->
     <string name="cacheListInfoItem_Geocode">Géocode</string>
     <string name="cacheListInfoItem_Difficulty">Difficulté</string>
@@ -926,6 +956,7 @@
         <item>Sombre</item>
     </string-array>
     <!-- app startscreen -->
+    <string name="settings_startscreen_title">Écran par défaut</string>
     <string name="init_wallpaper">Fond d\'écran</string>
     <string name="init_summary_wallpaper">Afficher le fond d\'écran de l\'appareil comme fond d\'écran d\'accueil</string>
     <!-- backup / restore -->
@@ -1028,6 +1059,7 @@
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
     <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
     <string name="init_offlinelogs_homescreen">Afficher les visites hors ligne</string>
+    <string name="init_log_image_default_prefix_title">Légende par défaut pour les images du log</string>
     <string name="init_summary_offlinelogs_homescreen">Un compteur de visites hors ligne (p. ex. \"+ 1\") sera affiché à côté de votre compteur en ligne sur l\'écran d\'accueil, si vous avez des visites qui n\'ont pas encore été chargées.</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
@@ -1055,7 +1087,15 @@
     <string name="init_summary_plain_logs">Afficher les visites sans les couleurs</string>
     <string name="init_rendertheme_folder">Dossier des thèmes de carte</string>
     <string name="init_mapshading_folder">Dossier des fichiers d\'ombrage de la carte</string>
+    <string name="init_mapShadingLinearity_title">Opacité de l\'ombrage du relief</string>
+    <string name="init_mapShadingLinearity_description">Les petites valeurs accentuent le contraste dans les pentes abruptes mais masquent les changements dans les plages, les grandes valeurs le rendent plus linéaire</string>
     <string name="init_mapShadingScale_title">Opacité de l\'ombrage du relief</string>
+    <string name="init_mapShadingScale_description">Opacité du calque d\'ombrage, de l\'invisible à des valeurs plus élevées intensifiant l\'ombrage mais pouvant produire des artefacts</string>
+    <string name="init_iconsizes">Tailles des icônes</string>
+    <string name="init_mapCacheScaling_title">Mise à l\'échelle de l\'icône de cache</string>
+    <string name="init_mapCacheScaling_description">Facteur d\'échelle pour les icônes de cache (en %)</string>
+    <string name="init_mapWpScaling_title">Mise à l\'échelle de l\'icône Waypoint</string>
+    <string name="init_mapWpScaling_description">Facteur d\'échelle pour les icônes de waypoint (en %)</string>
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
@@ -1549,6 +1589,7 @@
     <string name="from_clipboard">Depuis le presse-papiers</string>
     <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Orientation en °</string>
     <!-- Variables -->
     <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
     <string name="variables_scanlisting">Scanner la liste</string>
@@ -1594,6 +1635,7 @@
     <string name="formula_function_if">Si</string>
     <string name="formula_function_length">longueur de la chaine de caractère</string>
     <string name="formula_function_substring">sous-chaine</string>
+    <string name="formula_function_chars">Sélectionner les caractères</string>
     <string name="formula_function_rot13">rotation des lettres par 13</string>
     <string name="formula_function_rot">rotation des caractères</string>
     <string name="formula_function_checksum">Somme de contrôle</string>
@@ -1680,6 +1722,7 @@
     <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
+    <string name="search_kw_disabled_hint">Désactivé car ce n\'est pas pris en charge par geocaching.com pour les membres BASIC</string>
     <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
@@ -2164,6 +2207,10 @@
     <string name="command_rename_list_result">Liste renommée</string>
     <string name="command_delete_list_result">Liste supprimée</string>
     <string name="command_unique_list_result">Caches supprimées des autres listes</string>
+    <plurals name="fav_points_remaining_oc">
+        <item quantity="one">Recommandez cette cache (%d restants)</item>
+        <item quantity="other">Recommander cette cache (%d restants)</item>
+    </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Ajouter cette cache à vos favoris (%d restant)</item>
         <item quantity="other">Ajouter cette cache à vos favoris (%d restants)</item>
@@ -2263,6 +2310,7 @@
     <!-- individual track -->
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
     <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>
+    <string name="load_track_error_named">Erreur lors du chargement de la trace/itinéraire : \"%s\"</string>
     <string name="map_clear_track">Supprimer la trace</string>
     <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
     <!-- route/track commons -->
@@ -2370,10 +2418,13 @@
     <string name="mapserver_openandromaps_themes_info">Thème de carte détaillée et optimisé pour les cartes \"OpenAndroMaps\"</string>
     <string name="mapserver_freizeitkarte_info">Cartes détaillées, nécessitent l\'un des thèmes de carte \"freizeitkarte\".</string>
     <string name="mapserver_freizeitkarte_themes_info">Thème de carte détaillé, construit pour les cartes \"Freizeitkarte\"</string>
+    <string name="mapserver_osmpaws_info">Cartes détaillées, requiert le thème \"paws_4\".</string>
+    <string name="mapserver_osmpaws_themes_info">Thème de carte détaillé, conçu pour les cartes \"Paws\"</string>
     <string name="mapserver_hylly_info">Cartes détaillées pour la Finlande, nécessite l\'un des thèmes de carte \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Thème de carte détaillé et optimisé pour les cartes \"Hylly\"</string>
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <string name="maptheme_elevate_categoryinfo">Pertinent pour : [A] Zones, [P] POI, [R] Itinéraires, [W] Voies</string>
+    <string name="maptheme_vtm_scaling_summary">Options de mise à l\'échelle pour les cartes hors ligne (redémarrage nécessaire)</string>
     <string name="maptheme_scale_map_title">Facteur d\'échelle pour la carte</string>
     <string name="maptheme_scale_map_summary">Met la carte à l\'échelle ; 100% = sans mise à l\'échelle</string>
     <string name="maptheme_scale_text_title">Facteur de mise à l\'échelle du texte</string>
@@ -2439,6 +2490,8 @@
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimiser</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Tout sélectionner</string>
+    <string name="multiselect_selectvisible">Sélectionner les éléments visibles</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Zones</string>
     <string name="rtl_fell_meadow">prairie</string>

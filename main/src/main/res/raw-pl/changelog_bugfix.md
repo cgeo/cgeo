@@ -1,7 +1,14 @@
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Poprawka: Linki śledzące z parametrem TB nie działały
+- Nowość: Dodano wskazówkę do wyłączonego wyszukiwania słów kluczowych dla podstawowych użytkowników
+- Poprawka: Logowanie przedmiotów podróżnych znowu nie działało ponownie (zmiany na stronie internetowej)
+- Poprawka: Informacja o wysokości obraca się wraz ze znacznikiem pozycji
+- Poprawka: Nazwa użytkownika nie była wykrywana podczas logowania, gdy zawierała niektóre znaki specjalne
+
+##
+- Poprawka: Opcja Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
+- Poprawka: Logowanie skrytek lub przedmiotów podróżnych nie działało (zmiany na stronie internetowej)
+- Poprawka: Usuwanie własnych logów nie działało
 
 ##
 - Poprawka: Nie wykrywano licznika znalezień w niektórych sytuacjach z powodu zmian w witrynie
