@@ -7,6 +7,16 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.04.25 Bugfix Release
+
+- Fix: Trackable logging not working again (website changes)
+- Fix: Username not detected during login when containing certain special characters
+- Fix: Elevation info is rotating with position marker
+- Fix: Trackable links with TB parameter not working
+- New: Add hint to disabled keyword search for basic members
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.04.18 Bugfix Release
 
 - Fix: Logging caches or trackables no longer working (website changes)
