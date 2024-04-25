@@ -1,9 +1,9 @@
 ##
-- Fix: Trackable links with TB parameter not working
+- Poprawka: Linki śledzące z parametrem TB nie działały
 - Nowość: Dodano wskazówkę do wyłączonego wyszukiwania słów kluczowych dla podstawowych użytkowników
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Poprawka: Logowanie przedmiotów podróżnych znowu nie działało ponownie (zmiany na stronie internetowej)
+- Poprawka: Informacja o wysokości obraca się wraz ze znacznikiem pozycji
+- Poprawka: Nazwa użytkownika nie była wykrywana podczas logowania, gdy zawierała niektóre znaki specjalne
 
 ##
 - Poprawka: Opcja Pokaż/ukryj punkty nawigacji nie działała poprawnie, jeśli przekroczona limity punktów (UnifiedMap)
