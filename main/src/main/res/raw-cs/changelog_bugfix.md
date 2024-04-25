@@ -1,9 +1,9 @@
 ##
-- Fix: Trackable links with TB parameter not working
+- Oprava: Nefungují trasovatelné odkazy s parametrem TB
 - Novinka: Přidání nápovědy k zakázanému vyhledávání klíčových slov pro základní členy
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Oprava: Trasovatelné logování opět nefunguje (změny na webu)
+- Oprava: Informace o nadmořské výšce se otáčejí s poziční značkou
+- Oprava: Uživatelské jméno nebylo rozpoznáno při přihlášení, pokud obsahovalo určité speciální znaky
 
 ##
 - Oprava: Zobrazení/skrytí trasových bodů nefunguje správně, pokud se překročí limit trasových bodů (Sjednocená mapa)
