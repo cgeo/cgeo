@@ -1,9 +1,9 @@
 ##
-- Fix: Trackable links with TB parameter not working
-- New: Add hint to disabled keyword search for basic members
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
+- Neu: Hinweis auf deaktivierte Stichwortsuche für Basismitglieder ergänzt
+- Korrektur: Logging von Trackables funktioniert erneut nicht (Änderungen der Webseite)
+- Korrektur: Höhen-Info dreht sich mit Positionsmarkierung
+- Korrektur: Benutzername wird beim Login nicht erkannt, wenn bestimmte Sonderzeichen enthalten sind
 
 ##
 - Korrektur: Wegpunkte ein-/ausblenden funktioniert nicht korrekt, wenn Wegpunktlimit überschritten wird (UnifiedMap)
