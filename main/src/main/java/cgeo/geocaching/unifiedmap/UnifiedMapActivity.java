@@ -1013,7 +1013,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (isLongTap) {
                 final Geopoint gp = Geopoint.forE6(latitudeE6, longitudeE6);
                 viewModel.longTapCoords.setValue(gp);
-                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
+                MapUtils.createMapLongClickPopupMenu(this, gp, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(null, "", mapType.fromList), viewModel::setTarget)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
