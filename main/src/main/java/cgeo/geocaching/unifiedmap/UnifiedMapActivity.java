@@ -803,6 +803,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 ActivityMixin.invalidateOptionsMenu(this);
                 setTitle();
                 setMapModeFromMapType();
+                if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                    reloadCachesAndWaypoints(false);
+                }
             } else {
                 mapType = new UnifiedMapType();
                 viewModel.transientIsLiveEnabled.setValue(true);
