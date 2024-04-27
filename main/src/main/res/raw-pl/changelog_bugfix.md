@@ -1,4 +1,8 @@
 ##
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+
+##
 - Poprawka: Linki śledzące z parametrem TB nie działały
 - Nowość: Dodano wskazówkę do wyłączonego wyszukiwania słów kluczowych dla podstawowych użytkowników
 - Poprawka: Logowanie przedmiotów podróżnych znowu nie działało ponownie (zmiany na stronie internetowej)
