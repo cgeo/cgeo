@@ -1,4 +1,8 @@
 ##
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+
+##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
 - Novinka: Přidání nápovědy k zakázanému vyhledávání klíčových slov pro základní členy
 - Oprava: Trasovatelné logování opět nefunguje (změny na webu)
