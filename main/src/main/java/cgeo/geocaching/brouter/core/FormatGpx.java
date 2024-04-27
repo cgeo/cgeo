@@ -177,7 +177,7 @@ public class FormatGpx extends Formatter {
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
                         .append(formatILat(hint.ilat)).append("\">")
                         .append("<name>").append(hint.getMessageString()).append("</name>")
-                        .append("<sym>").append(hint.getSymbolString().toLowerCase()).append("</sym>")
+                        .append("<sym>").append(hint.getSymbolString().toLowerCase(Locale.ROOT)).append("</sym>")
                         .append("<type>").append(hint.getSymbolString()).append("</type>")
                         .append("</wpt>\n");
             }
