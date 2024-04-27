@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -232,9 +233,9 @@ public class RoutingParamCollector {
                 } else if (key.equals("exportWaypoints")) {
                     rctx.exportWaypoints = (Integer.parseInt(value) == 1);
                 } else if (key.equals("format")) {
-                    rctx.outputFormat = ((String) value).toLowerCase();
+                    rctx.outputFormat = ((String) value).toLowerCase(Locale.ROOT);
                 } else if (key.equals("trackFormat")) {
-                    rctx.outputFormat = ((String) value).toLowerCase();
+                    rctx.outputFormat = ((String) value).toLowerCase(Locale.ROOT);
                 } else if (key.startsWith("profile:")) {
                     if (rctx.keyValues == null) {
                         rctx.keyValues = new HashMap<>();
