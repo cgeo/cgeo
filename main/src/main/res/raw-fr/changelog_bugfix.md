@@ -1,4 +1,8 @@
 ##
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+
+##
 - Correction : les liens des objets voyageurs avec le paramètre TB ne fonctionnent pas
 - Nouveau : Ajouter un indice à la recherche de mots clés désactivés pour les membres basic
 - Corriger : la journalisation des objets voyageurs ne fonctionne pas à nouveau (modifications du site web)
