@@ -754,6 +754,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 ActivityMixin.invalidateOptionsMenu(this);
                 refreshListChooser();
                 setMapModeFromMapType();
+                if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                    reloadCachesAndWaypoints(false);
+                }
             } else {
                 mapType = new UnifiedMapType();
                 viewModel.transientIsLiveEnabled.setValue(true);
@@ -973,9 +976,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (result.size() == 0) {
             if (isLongTap) {
-
                 viewModel.longTapCoords.setValue(touchedPoint);
-                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(), viewModel::setTarget)
+                MapUtils.createMapLongClickPopupMenu(this, touchedPoint, new Point(x, y), viewModel.individualRoute.getValue(), route -> viewModel.individualRoute.notifyDataChanged(), this::updateRouteTrackButtonVisibility, getCurrentTargetCache(), new MapOptions(null, "", mapType.fromList), viewModel::setTarget)
                         .setOnDismissListener(d -> viewModel.longTapCoords.setValue(null))
                         .show();
             } else {
