@@ -1709,7 +1709,6 @@
     <string name="context_map_remove_from_route_start">Remove from start</string>
     <string name="context_map_remove_from_route_pos">Remove from position %d</string>
     <string name="context_map_remove_from_route_end">Remove from end</string>
-    <string name="context_map_show_coords">Show coordinates</string>
     <string name="context_map_star_show">Show lines to waypoints</string>
     <string name="context_map_star_hide">Hide lines to waypoints</string>
     <string name="edit">Edit</string>
