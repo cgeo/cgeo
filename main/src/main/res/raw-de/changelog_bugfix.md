@@ -1,4 +1,8 @@
 ##
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+
+##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
 - Neu: Hinweis auf deaktivierte Stichwortsuche für Basismitglieder ergänzt
 - Korrektur: Logging von Trackables funktioniert erneut nicht (Änderungen der Webseite)
