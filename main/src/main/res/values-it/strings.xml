@@ -1513,7 +1513,6 @@
     <string name="context_map_remove_from_route_start">Rimuovi dall\'inizio</string>
     <string name="context_map_remove_from_route_pos">Rimuovi dalla posizione %d</string>
     <string name="context_map_remove_from_route_end">Rimuovi dalla fine</string>
-    <string name="context_map_show_coords">Mostra le coordinate</string>
     <string name="context_map_star_show">Mostra linee ai waypoint</string>
     <string name="context_map_star_hide">Nascondi le linee ai waypoint</string>
     <string name="edit">Modifica</string>
