@@ -1487,7 +1487,6 @@
     <string name="context_map_remove_from_route_start">Eliminar des de l\'inici</string>
     <string name="context_map_remove_from_route_pos">Retirar de la posició %d</string>
     <string name="context_map_remove_from_route_end">Eliminar des del final</string>
-    <string name="context_map_show_coords">Mostra les coordenades</string>
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
     <string name="create_internal_cache_short">Nou catxé</string>
     <string name="create_internal_cache_currentlist">Utilitzeu la llista actual</string>
