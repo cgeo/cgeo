@@ -1406,7 +1406,6 @@
     <string name="context_map_remove_from_route_start">Odstrániť zo štartu</string>
     <string name="context_map_remove_from_route_pos">Odstrániť z pozície %d</string>
     <string name="context_map_remove_from_route_end">Odstrániť z konca</string>
-    <string name="context_map_show_coords">Zobraziť súradnice</string>
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použiť aktuálny zoznam</string>
