@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
     <string name="log_delete_confirm">Deseja mesmo eliminar o registo do tipo \'%1$s\' do autor \'%2$s\' com data de registo \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Quer mesmo apagar o seu registo offline armazenado do tipo \'%1$s\', com data de registo de \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- Contacts -->
     <string name="contact_not_found">O contacto com apelido/alcunha %s não foi encontrado. Adicione-o primeiro na sua aplicação de contactos.</string>
@@ -900,6 +901,12 @@
     <string name="init_showElevation">Mostrar Relevo</string>
     <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
     <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
+    <string name="menu_elevation_info">Elevação (mapa):</string>
+    <string name="elevation_selected">Elevação (mapa) na posição seleccionada</string>
+    <string name="elevation_difference">Diferença de elevação</string>
+    <string name="distance">Distância:</string>
+    <string name="copy_coordinates">Copiar coordenadas</string>
+    <string name="selected_position">Posição seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
     <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
@@ -1513,7 +1520,6 @@
     <string name="context_map_remove_from_route_start">Remover do início</string>
     <string name="context_map_remove_from_route_pos">Remover da posição %d</string>
     <string name="context_map_remove_from_route_end">Remover do fim</string>
-    <string name="context_map_show_coords">Mostrar coordenadas</string>
     <string name="context_map_star_show">Mostrar linhas para pontos adicionais</string>
     <string name="context_map_star_hide">Ocultar linhas para pontos adicionais</string>
     <string name="edit">Editar</string>
@@ -1723,6 +1729,8 @@
     <string name="map_routing">Encaminhamento</string>
     <string name="map_routing_activate_title">Permitir rastreamento</string>
     <string name="map_routing_activate">Alguns modos de rastreamento não estão disponíveis de momento, pois não há nenhum motor de encaminhamento activo.\n\nQuer activar o mecanismo de encaminhamento interno do c:geo e transferir os respectivos dados?</string>
+    <string name="map_autorotation">Auto-rotação do mapa</string>
+    <string name="map_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
     <string name="other_settings">Outras configurações</string>
@@ -1752,6 +1760,7 @@
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
+    <string name="search_kw_disabled_hint">Desactivado, pois não é suportado pelo geocaching.com para membros BASICOS</string>
     <string name="search_hbu">Escondidas por</string>
     <string name="search_hbu_prefill">Proprietário</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
@@ -2341,6 +2350,7 @@
     <!-- individual track -->
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
+    <string name="load_track_error_named">Erro ao carregar percurso/rota: \"%s\"</string>
     <string name="map_clear_track">Limpar rota/percurso</string>
     <string name="map_clear_track_confirm">Deseja remover a rota/percurso \"%s\"?</string>
     <!-- route/track commons -->
