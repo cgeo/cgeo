@@ -1548,7 +1548,6 @@
     <string name="context_map_remove_from_route_start">Usuń z początku</string>
     <string name="context_map_remove_from_route_pos">Usuń od pozycji %d</string>
     <string name="context_map_remove_from_route_end">Usuń od końca</string>
-    <string name="context_map_show_coords">Pokaż współrzędne</string>
     <string name="context_map_star_show">Pokaż linie do punktów nawigacji</string>
     <string name="context_map_star_hide">Ukryj linie do punktów nawigacji</string>
     <string name="edit">Edytuj</string>
