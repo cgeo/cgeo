@@ -1,6 +1,6 @@
 ##
-- Fix: Caches not loading after enabling live map (UnifiedMap)
-- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
+- Poprawka: Brakuje opcji „Użyj bieżącej listy” przy tworzeniu skrytki zdefiniowanej przez użytkownika (UnifiedMap)
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały
