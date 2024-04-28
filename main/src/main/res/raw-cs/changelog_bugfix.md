@@ -1,6 +1,6 @@
 ##
-- Fix: Caches not loading after enabling live map (UnifiedMap)
-- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
+- Oprava: Chybějící možnost 'použít aktuální seznam' při vytváření uživatelsky definované kešky (Sjednocená mapa)
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
