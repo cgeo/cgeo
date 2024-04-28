@@ -1506,7 +1506,6 @@
     <string name="context_map_remove_from_route_start">시작에서 제거</string>
     <string name="context_map_remove_from_route_pos">위치 %d에서 제거</string>
     <string name="context_map_remove_from_route_end">끝에서 제거</string>
-    <string name="context_map_show_coords">좌표 보기</string>
     <string name="context_map_star_show">지점으로 이어지는 선 표시</string>
     <string name="context_map_star_hide">지점으로 이어지는 선 숨기기</string>
     <string name="edit">편집</string>
