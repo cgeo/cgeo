@@ -1539,7 +1539,6 @@
     <string name="context_map_remove_from_route_start">Удалить из начала маршрута</string>
     <string name="context_map_remove_from_route_pos">Удалить из позиции %d</string>
     <string name="context_map_remove_from_route_end">Удалить из конца маршрута</string>
-    <string name="context_map_show_coords">Показать координаты</string>
     <string name="context_map_star_show">Показывать линии к путевым точкам</string>
     <string name="context_map_star_hide">Скрыть линии к путевым точкам</string>
     <string name="edit">Редактировать</string>
