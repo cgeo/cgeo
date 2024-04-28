@@ -1371,7 +1371,6 @@
     <string name="image_category_log">Logg</string>
     <string name="context_map_add_to_route">Lägg till rutt</string>
     <string name="context_map_add_to_route_start">Lägg till i början av rutt</string>
-    <string name="context_map_show_coords">Visa koordinater</string>
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Använd aktuell lista</string>
