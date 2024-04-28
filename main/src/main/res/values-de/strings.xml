@@ -1520,7 +1520,6 @@
     <string name="context_map_remove_from_route_start">Vom Start entfernen</string>
     <string name="context_map_remove_from_route_pos">Von Position %d entfernen</string>
     <string name="context_map_remove_from_route_end">Vom Ende entfernen</string>
-    <string name="context_map_show_coords">Koordinaten anzeigen</string>
     <string name="context_map_star_show">Linien zu Wegpunkten anzeigen</string>
     <string name="context_map_star_hide">Linien zu Wegpunkten verbergen</string>
     <string name="edit">Bearbeiten</string>
