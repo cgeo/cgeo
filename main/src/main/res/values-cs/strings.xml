@@ -1552,7 +1552,6 @@
     <string name="context_map_remove_from_route_start">Odstranit ze začátku trasy</string>
     <string name="context_map_remove_from_route_pos">Odstranit z pozice %d</string>
     <string name="context_map_remove_from_route_end">Odstranit z konce trasy</string>
-    <string name="context_map_show_coords">Zobrazit souřadnice</string>
     <string name="context_map_star_show">Zobrazit čáry k trasovým bodům</string>
     <string name="context_map_star_hide">Skrýt čáry k trasovým bodům</string>
     <string name="edit">Upravit</string>
