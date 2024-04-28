@@ -1440,7 +1440,6 @@
     <string name="context_map_remove_from_route_start">Poista alusta</string>
     <string name="context_map_remove_from_route_pos">Poista paikasta %d</string>
     <string name="context_map_remove_from_route_end">Poista lopusta</string>
-    <string name="context_map_show_coords">Näytä koordinaatit</string>
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
