@@ -1,6 +1,6 @@
 ##
-- Fix: Caches not loading after enabling live map (UnifiedMap)
-- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
+- Oplossing: Ontbrekende optie 'gebruik huidige lijst' bij het maken van door de gebruiker gedefinieerde cache (UnifiedMap)
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet
