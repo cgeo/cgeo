@@ -260,6 +260,6 @@ public class FilterViewHolderCreator {
                         .setValueDisplayTextGetter(f -> f.title)
                         .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
-        return new CheckboxFilterViewHolder<>(vgfa, 1, Collections.emptySet());
+        return new StoredListsFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
 }
