@@ -1023,7 +1023,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (sheetRemoveFragment()) {
                     return;
                 }
-                mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
+                mapFragment.adaptLayoutForActionBar(HideActionBarUtils.toggleActionBar(this));
                 GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, Geopoint.forE6(latitudeE6, longitudeE6), isLongTap);
             }
         } else if (result.size() == 1) {
