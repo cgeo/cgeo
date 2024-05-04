@@ -57,11 +57,11 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         this.parsingMode = parsingMode;
         result.setRouteable(routeable);
 
-        temp = new ArrayList<>();
+        resetTempData();
         setNameAndLatLonParsers();
         endElementForListener.setEndElementListener(() -> {
             if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, false));
+                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, elevation, false));
                 temp = new ArrayList<>();
             }
         });
