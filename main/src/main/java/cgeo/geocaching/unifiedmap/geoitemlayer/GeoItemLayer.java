@@ -205,7 +205,7 @@ public class GeoItemLayer<K> {
                 providerLayer.onMapChangeBatchEnd(processedCount);
             }
             if (addProcessedInBatch > 0 || removeProcessedInBatch > 0 || replaceProcessedInBatch > 0) {
-                Log.i(logPraefix + "BATCH-END - " +
+                Log.e(logPraefix + "BATCH-END - " +
                         "ADDS:" + addProcessedInBatch + "(" + addProcessed + "), " +
                         "REMOVES:" + removeProcessedInBatch + "(" + removeProcessed + "), " +
                         "REPLACES:" + replaceProcessedInBatch + "(" + replaceProcessed + ")");

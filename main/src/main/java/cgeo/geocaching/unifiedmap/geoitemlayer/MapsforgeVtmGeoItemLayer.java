@@ -16,6 +16,7 @@ import android.util.Pair;
 
 import androidx.core.util.Supplier;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,15 @@ import org.oscim.map.Map;
 import org.oscim.utils.geom.GeomBuilder;
 
 public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Drawable, MarkerInterface>> {
+
+    // temporary cache for map marker items, speeds up mapping large lists (see #15462)
+    // markerCache: caches for up to CACHE_ZLEVELS different zLevels, each one with up to CACHE_SIZE marker items
+    // markerCacheZLevels: which entry holds cache for which zLevel?
+    private static final int CACHEITEM_UNUSED = -1;
+    private static final int CACHE_SIZE = 100;
+    private static final int CACHE_ZLEVELS = 5;
+    private static final Object[] markerCache = new Object[CACHE_ZLEVELS];
+    private static final int[] markerCacheZLevels = { CACHEITEM_UNUSED, CACHEITEM_UNUSED, CACHEITEM_UNUSED, CACHEITEM_UNUSED, CACHEITEM_UNUSED };
 
     private static final GeopointConverter<GeoPoint> GP_CONVERTER = new GeopointConverter<>(
             gc -> new GeoPoint(gc.getLatitude(), gc.getLongitude()),
@@ -174,12 +184,48 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
                     icon.getXAnchor(), icon.getYAnchor(), !icon.isFlat()));
             marker.setRotation(item.getIcon().getRotation());
-            markerLayer.addItem(marker);
-            markerLayer.update();
-            markerLayer.update();
+            // markerLayer.addItem(marker);
+            add2cache(marker, zLevel);
+            // markerLayer.update();
+            // markerLayer.update();
         }
 
         return new Pair<>(drawable, marker);
+    }
+
+    private void add2cache(final MarkerInterface marker, final int zLevel) {
+        int iPosition = CACHEITEM_UNUSED;
+        for (int i = CACHE_ZLEVELS - 1; i >= 0; i--) {
+            if (markerCacheZLevels[i] == zLevel) {
+                iPosition = i;
+                break;
+            }
+        }
+        if (iPosition == CACHEITEM_UNUSED) {
+            // clear first entry, move all elements one down, and create new zLevel cache at last position
+            transferCache(0);
+            for (int i = 1; i < CACHE_ZLEVELS; i++) {
+                markerCacheZLevels[i - 1] = markerCacheZLevels[i];
+                markerCache[i - 1] = markerCache[i];
+            }
+            iPosition = CACHE_ZLEVELS - 1;
+            markerCacheZLevels[iPosition] = zLevel;
+            markerCache[iPosition] = new ArrayList<MarkerInterface>(CACHE_SIZE);
+        }
+        if (((ArrayList<?>) markerCache[iPosition]).size() == CACHE_SIZE) {
+            transferCache(iPosition);
+        }
+        ((ArrayList<MarkerInterface>) markerCache[iPosition]).add(marker);
+    }
+
+    private void transferCache(final int position) {
+        if (markerCacheZLevels[position] != -1 && markerCache[position] != null) {
+//            Log.e("transfer cache at position" + position + ": zLevel=" + markerCacheZLevels[position] + ", size=" + ((ArrayList<?>) markerCache[position]).size());
+            final ItemizedLayer markerLayer = getMarkerLayer(markerCacheZLevels[position], true);
+            markerLayer.addItems((ArrayList<MarkerInterface>) markerCache[position]);
+            ((ArrayList<?>) markerCache[position]).clear();
+            markerLayer.update();
+        }
     }
 
     private static void addRingToGeoBuilder(final GeomBuilder gb, final List<Geopoint> ring) {
@@ -219,6 +265,10 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         //make sure map is redrawn. See e.g. #14787
         if (map != null && processedCount > 0) {
             map.updateMap(true);
+        }
+        // cleanup caches
+        for (int i = 0; i < CACHE_ZLEVELS; i++) {
+            transferCache(i);
         }
     }
 
