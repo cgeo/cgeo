@@ -49,7 +49,7 @@
         <Button
             android:id="@+id/offline_edit"
             style="@style/button_icon"
-            app:icon="@drawable/ic_menu_edit"
+            app:icon="@drawable/ic_menu_manage_list"
             android:layout_marginLeft="0dp"
             android:visibility="gone"
             tools:visibility="visible"/>
