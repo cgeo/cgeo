@@ -18,7 +18,9 @@ import androidx.core.util.Supplier;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -51,13 +53,32 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     private Map map;
     private GroupedList<Layer> mapLayers;
 
-    private final java.util.Map<Integer, ItemizedLayer> markerLayerMap = new HashMap<>();
+    private final java.util.Map<Integer, PopulateControlledItemizedLayer> markerLayerMap = new HashMap<>();
     private final java.util.Map<Integer, VectorLayer> vectorLayerMap = new HashMap<>();
     private final Lock layerMapLock = new ReentrantLock();
 
     private MarkerSymbol defaultMarkerSymbol;
 
     private int defaultZLevel = 0;
+
+    private final Set<Integer> markerLayersForRefresh = new HashSet<>();
+
+    public static class PopulateControlledItemizedLayer extends ItemizedLayer {
+
+        public PopulateControlledItemizedLayer(final Map map, final MarkerSymbol defaultMarker) {
+            super(map, defaultMarker);
+        }
+
+        /** mimics {@link #addItem(MarkerInterface)} but w/o calling 'populate' */
+        public boolean addItemNoPopulate(final MarkerInterface marker) {
+            return this.mItemList.add(marker);
+        }
+
+        /** mimics {@link #removeItem(MarkerInterface)} but w/o calling 'populate' */
+        public boolean removeItemNoPopulate(final MarkerInterface marker) {
+            return this.mItemList.remove(marker);
+        }
+    }
 
     public MapsforgeVtmGeoItemLayer(final Map map, final GroupedList<Layer> mapLayers) {
         this.map = map;
@@ -103,8 +124,8 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         }
     }
 
-    private ItemizedLayer getMarkerLayer(final int zLevel, final boolean createIfNonexisting) {
-        return getZLevelLayer(zLevel, markerLayerMap, ItemizedLayer.class, createIfNonexisting ? () -> new ItemizedLayer(map, defaultMarkerSymbol) : null);
+    private PopulateControlledItemizedLayer getMarkerLayer(final int zLevel, final boolean createIfNonexisting) {
+        return getZLevelLayer(zLevel, markerLayerMap, PopulateControlledItemizedLayer.class, createIfNonexisting ? () -> new PopulateControlledItemizedLayer(map, defaultMarkerSymbol) : null);
     }
 
     private VectorLayer getVectorLayer(final int zLevel, final boolean createIfNonexisting) {
@@ -168,15 +189,14 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
         MarkerItem marker = null;
         if (item.getIcon() != null) {
-            final ItemizedLayer markerLayer = getMarkerLayer(zLevel, true);
+            final PopulateControlledItemizedLayer markerLayer = getMarkerLayer(zLevel, true);
             final GeoIcon icon = item.getIcon();
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
             marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
                     icon.getXAnchor(), icon.getYAnchor(), !icon.isFlat()));
             marker.setRotation(item.getIcon().getRotation());
-            markerLayer.addItem(marker);
-            markerLayer.update();
-            markerLayer.update();
+            markerLayer.addItemNoPopulate(marker);
+            markerLayersForRefresh.add(zLevel);
         }
 
         return new Pair<>(drawable, marker);
@@ -206,20 +226,34 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             }
         }
         if (context.second != null) {
-            final ItemizedLayer markerLayer = getMarkerLayer(zLevel, false);
+            final PopulateControlledItemizedLayer markerLayer = getMarkerLayer(zLevel, false);
             if (markerLayer != null) {
-                markerLayer.removeItem(context.second);
-                markerLayer.update();
+                markerLayer.removeItemNoPopulate(context.second);
+                markerLayersForRefresh.add(zLevel);
             }
         }
     }
 
     @Override
     public void onMapChangeBatchEnd(final long processedCount) {
-        //make sure map is redrawn. See e.g. #14787
-        if (map != null && processedCount > 0) {
-            map.updateMap(true);
+        if (map == null || processedCount == 0) {
+            return;
         }
+
+        //populate and update marker layers which were touched
+        for (int markerZLevelToRefresh : markerLayersForRefresh) {
+            final PopulateControlledItemizedLayer markerLayer = getMarkerLayer(markerZLevelToRefresh, false);
+            if (markerLayer == null) {
+                continue;
+            }
+            markerLayer.populate();
+            markerLayer.update();
+        }
+        markerLayersForRefresh.clear();
+
+        //make sure map is redrawn. See e.g. #14787
+        map.updateMap(true);
+
     }
 
     @Override
