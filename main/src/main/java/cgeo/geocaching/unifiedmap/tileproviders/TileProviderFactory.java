@@ -160,6 +160,9 @@ public class TileProviderFactory {
         if (offlineMaps.size() > 1) {
             registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
         }
+        if (UserDefinedMapsforgeOnlineSource.isConfigured()) {
+            registerTileProvider(new UserDefinedMapsforgeOnlineSource());
+        }
         for (ImmutablePair<String, Uri> data : offlineMaps) {
             registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
         }

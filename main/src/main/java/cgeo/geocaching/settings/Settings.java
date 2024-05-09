@@ -1200,6 +1200,11 @@ public class Settings {
         return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
     }
 
+    @Nullable
+    public static String getUserDefinedTileProviderUri() {
+        return getString(R.string.pref_userDefinedTileProviderUri, null);
+    }
+
     public static void setMapLanguage(@Nullable final String language) {
         putString(R.string.pref_mapLanguage, StringUtils.isBlank(language) ? "" : language);
     }
