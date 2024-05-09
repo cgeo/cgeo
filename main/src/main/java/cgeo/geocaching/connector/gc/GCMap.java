@@ -128,14 +128,6 @@ public class GCMap {
             fillForBasicFilter(baseFilter, search);
         }
 
-        //special case (see #13891): if we search for owner AND archived caches are not excluded
-        // -> then remove status from filter (otherwise archived caches are not returned from gc.com on Owner search)
-        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filterAndChain, StatusGeocacheFilter.class);
-        final OwnerGeocacheFilter ownerFilter = GeocacheFilter.findInChain(filterAndChain, OwnerGeocacheFilter.class);
-        if (ownerFilter != null && ownerFilter.isFiltering() && statusFilter != null && !statusFilter.isExcludeArchived()) {
-            search.setStatusEnabled(null);
-        }
-
         search.setSort(GCWebAPI.WebApiSearch.SortType.getByCGeoSortType(sort.getEffectiveType()), sort.isEffectiveAscending());
 
         return search;
@@ -199,7 +191,10 @@ public class GCMap {
                 final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
                 search.setStatusFound(statusFilter.getStatusFound());
                 search.setStatusOwn(statusFilter.getStatusOwned());
-                search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? FALSE : null));
+                search.setStatusEnabled(
+                        statusFilter.isExcludeDisabled() && statusFilter.isExcludeArchived() ? Boolean.TRUE :
+                                (statusFilter.isExcludeActive() && statusFilter.isExcludeArchived() ? FALSE : null));
+                search.setShowArchived(!statusFilter.isExcludeArchived());
                 break;
             case HIDDEN:
             case EVENT_DATE:

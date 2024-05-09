@@ -108,6 +108,7 @@ public class GCWebAPI {
         private Boolean statusMembership = null;
         private Boolean statusEnabled = null;
         private Boolean statusCorrectedCoordinates = null;
+        private boolean showArchived = true;
 
         private final Set<CacheType> cacheTypes = new HashSet<>();
         private final Set<CacheSize> cacheSizes = new HashSet<>();
@@ -222,6 +223,14 @@ public class GCWebAPI {
          */
         public WebApiSearch setStatusEnabled(final Boolean statusEnabled) {
             this.statusEnabled = statusEnabled;
+            return this;
+        }
+
+        /**
+         * set to true to show archived caches. Note that gc.com respects this setting not in all cases
+         */
+        public WebApiSearch setShowArchived(final boolean showArchived) {
+            this.showArchived = showArchived;
             return this;
         }
 
@@ -440,6 +449,9 @@ public class GCWebAPI {
 
             if (this.statusEnabled != null) {
                 params.put("sd", this.statusEnabled ? "0" : "1");
+            }
+            if (this.showArchived) {
+                params.put("sa", "1");
             }
 
             if (this.statusCorrectedCoordinates != null) {

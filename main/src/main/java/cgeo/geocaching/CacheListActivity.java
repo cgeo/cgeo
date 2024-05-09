@@ -259,7 +259,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else if (search != null && search.getError() != StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
 
-                hideLoading();
                 showProgress(false);
 
                 finish();
@@ -271,7 +270,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showToast(res.getString(R.string.err_detail_cache_find_any));
             Log.e("CacheListActivity.loadCachesHandler", e);
 
-            hideLoading();
             showProgress(false);
 
             finish();
@@ -279,7 +277,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         try {
-            hideLoading();
             showProgress(false);
         } catch (final Exception e2) {
             Log.e("CacheListActivity.loadCachesHandler.2", e2);
@@ -606,11 +603,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
-
         lastPosition.refreshListAtLastPosition();
 
         if (search != null) {
-            loadCachesHandler.sendEmptyMessage(0);
+            updateAdapter();
+           // loadCachesHandler.sendEmptyMessage(0);
         }
     }
 
@@ -1210,6 +1207,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void updateAdapter() {
         final LastPositionHelper lph = new LastPositionHelper(this);
+        setAdapterCurrentCoordinates(false);
         adapter.notifyDataSetChanged();
         adapter.forceFilter();
         adapter.checkSpecialSortOrder();
@@ -1348,10 +1346,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void refreshFilterForOnlineSearch() {
         //not supported yet for all online searches
         if (type.isOnline && type != CacheListType.POCKET) {
-            return;
+            restartCacheLoader(false, null);
         }
-
-        restartCacheLoader(false, null);
     }
 
     private void refreshInBackground(final List<Geocache> caches) {
@@ -1507,15 +1503,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         extras.putBoolean(EXTRAS_NEXTPAGE, nextPage);
         LoaderManager.getInstance(CacheListActivity.this).restartLoader(CACHE_LOADER_ID, extras, CacheListActivity.this);
-    }
-
-    private void hideLoading() {
-        final ListView list = getListView();
-        if (list.getVisibility() == View.GONE) {
-            list.setVisibility(View.VISIBLE);
-            final View loading = findViewById(R.id.loading);
-            loading.setVisibility(View.GONE);
-        }
     }
 
     @NonNull
@@ -1932,7 +1919,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     markerId = EmojiUtils.NO_EMOJI;
                     search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                     replaceCacheListFromSearch();
-                    loadCachesHandler.sendMessage(Message.obtain());
+                    //loadCachesHandler.sendMessage(Message.obtain());
                     loader = new NullGeocacheListLoader(this, search);
                     break;
                 case LAST_VIEWED:
@@ -1940,7 +1927,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     markerId = EmojiUtils.NO_EMOJI;
                     search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
                     replaceCacheListFromSearch();
-                    loadCachesHandler.sendMessage(Message.obtain());
+                    //loadCachesHandler.sendMessage(Message.obtain());
                     loader = new NullGeocacheListLoader(this, search);
                     break;
                 case POCKET:
@@ -1993,9 +1980,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             search = searchIn;
             updateGui();
             lph.setLastListPosition();
+
+            if (search.getError() != StatusCode.NO_ERROR) {
+                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
+            }
         }
         showProgress(false);
-        hideLoading();
         invalidateOptionsMenuCompatible();
         if (arg0 instanceof AbstractSearchLoader) {
             switch (((AbstractSearchLoader) arg0).getAfterLoadAction()) {
@@ -2082,5 +2072,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void showProgress(final boolean loading) {
         final View progressBar = findViewById(R.id.loading);
         progressBar.setVisibility(loading ? View.VISIBLE : View.GONE);
+        final ListView list = getListView();
+        list.setVisibility(loading ? View.GONE : View.VISIBLE);
     }
 }
