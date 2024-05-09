@@ -228,6 +228,7 @@
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_useUnifiedMap">featureSwitch_useUnifiedMap</string>
     <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
+    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>

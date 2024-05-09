@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -51,6 +52,13 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         }
         hideTileprovidersPref.setEntries(tpEntries);
         hideTileprovidersPref.setEntryValues(tpValues);
+
+        setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
+        findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setOnPreferenceChangeListener((preference, newValue) -> {
+            setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
+            return true;
+        });
+
     }
 
     @Override
@@ -153,4 +161,9 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         });
 
     }
+
+    private void setUserDefinedTileProviderUriSummary(final String uri) {
+        SettingsUtils.setPrefSummary(this, R.string.pref_userDefinedTileProviderUri, getString(R.string.settings_userDefinedTileProviderUri) + "\n\n" + uri);
+    }
+
 }
