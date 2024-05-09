@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -63,6 +64,8 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
     private final Set<Integer> markerLayersForRefresh = new HashSet<>();
 
+    private final java.util.Map<MarkerSymbolCacheKey, MarkerSymbol> markerSymbolCache = new HashMap<>();
+
     public static class PopulateControlledItemizedLayer extends ItemizedLayer {
 
         public PopulateControlledItemizedLayer(final Map map, final MarkerSymbol defaultMarker) {
@@ -80,6 +83,39 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         }
     }
 
+    public static class MarkerSymbolCacheKey {
+
+        private final android.graphics.Bitmap bitmap;
+        private final float xAnchor;
+        private final float yAnchor;
+        private final boolean isFlat;
+
+        private MarkerSymbolCacheKey(final android.graphics.Bitmap bitmap, final float xAnchor, final float yAnchor, final boolean isFlat) {
+            this.bitmap = bitmap;
+            this.xAnchor = xAnchor;
+            this.yAnchor = yAnchor;
+            this.isFlat = isFlat;
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            if (!(obj instanceof MarkerSymbolCacheKey)) {
+                return false;
+            }
+            final MarkerSymbolCacheKey other = (MarkerSymbolCacheKey) obj;
+            return bitmap == other.bitmap // identity!
+                && Objects.equals(xAnchor, other.xAnchor)
+                && Objects.equals(yAnchor, other.yAnchor)
+                && isFlat == other.isFlat;
+        }
+
+        @Override
+        public int hashCode() {
+            return bitmap == null ? 7 : System.identityHashCode(bitmap);
+        }
+
+    }
+
     public MapsforgeVtmGeoItemLayer(final Map map, final GroupedList<Layer> mapLayers) {
         this.map = map;
         this.mapLayers = mapLayers;
@@ -91,7 +127,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
         //initialize marker layer stuff
         final Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
-        defaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
+        defaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER, true);
 
     }
 
@@ -192,8 +228,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             final PopulateControlledItemizedLayer markerLayer = getMarkerLayer(zLevel, true);
             final GeoIcon icon = item.getIcon();
             marker = new MarkerItem("", "", GP_CONVERTER.to(item.getCenter()));
-            marker.setMarker(new MarkerSymbol(new AndroidBitmap(icon.getBitmap()),
-                    icon.getXAnchor(), icon.getYAnchor(), !icon.isFlat()));
+            marker.setMarker(getMarkerSymbol(icon.getBitmap(), icon.getXAnchor(), icon.getYAnchor(), icon.isFlat()));
             marker.setRotation(item.getIcon().getRotation());
             markerLayer.addItemNoPopulate(marker);
             markerLayersForRefresh.add(zLevel);
@@ -235,10 +270,12 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
     @Override
-    public void onMapChangeBatchEnd(final long processedCount) {
+    public String onMapChangeBatchEnd(final long processedCount) {
         if (map == null || processedCount == 0) {
-            return;
+            return null;
         }
+
+        final int layersSize = markerLayersForRefresh.size();
 
         //populate and update marker layers which were touched
         for (int markerZLevelToRefresh : markerLayersForRefresh) {
@@ -253,8 +290,29 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
 
         //make sure map is redrawn. See e.g. #14787
         map.updateMap(true);
-
+        return "l:" + layersSize + ",s:" + markerSymbolCache.size();
     }
+
+    private MarkerSymbol getMarkerSymbol(final android.graphics.Bitmap bitmap, final float xAnchor, final float yAnchor, final boolean isFlat) {
+
+        final MarkerSymbolCacheKey key = new MarkerSymbolCacheKey(bitmap, xAnchor, yAnchor, isFlat);
+        synchronized (markerSymbolCache) {
+            MarkerSymbol symbol = markerSymbolCache.get(key);
+            if (symbol != null) {
+                return symbol;
+            }
+
+            //for testing of #15462: restricting the number of total symbols helps to prevent OOM
+            //if (markerSymbolCache.size() > 2) {
+            //    return defaultMarkerSymbol;
+            //}
+
+            symbol = new MarkerSymbol(new AndroidBitmap(bitmap), xAnchor, yAnchor, !isFlat);
+            markerSymbolCache.put(key, symbol);
+            return symbol;
+        }
+    }
+
 
     @Override
     public void destroy(final Collection<Pair<GeoPrimitive, Pair<Drawable, MarkerInterface>>> values) {
