@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -43,6 +44,8 @@ import org.oscim.layers.vector.geometries.LineDrawable;
 import org.oscim.layers.vector.geometries.PolygonDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
+import org.oscim.renderer.atlas.TextureRegion;
+import org.oscim.utils.BitmapPacker;
 import org.oscim.utils.geom.GeomBuilder;
 
 public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Drawable, MarkerInterface>> {
@@ -294,6 +297,9 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         return "l:" + layersSize + ",s:" + markerSymbolCache.size();
     }
 
+    private final BitmapPacker markerPacker = new BitmapPacker(2048, 2048, 2, new BitmapPacker.SkylineStrategy(), false);
+    private final AtomicInteger markerCounter = new AtomicInteger(0);
+
     private MarkerSymbol getMarkerSymbol(final android.graphics.Bitmap bitmap, final float xAnchor, final float yAnchor, final boolean isFlat) {
         if (Settings.enableVtmSingleMarkerSymbol()) {
             return defaultMarkerSymbol;
@@ -306,12 +312,17 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 return symbol;
             }
 
-            //for testing of #15462: restricting the number of total symbols helps to prevent OOM
-            //if (markerSymbolCache.size() > 2) {
-            //    return defaultMarkerSymbol;
-            //}
+            //Create a new Marker Symbol
+            //For efficiency we use an image atlas (which is provided by VTM library)
+            //General info about image atlas can be found e.g. here: https://en.wikipedia.org/wiki/Texture_atlas
 
-            symbol = new MarkerSymbol(new AndroidBitmap(bitmap), xAnchor, yAnchor, !isFlat);
+            //1. Place the bitmap on an atlas of our bitmap packer. Use an arbitrarily id to reference it afterwards
+            final int id = markerCounter.addAndGet(1);
+            markerPacker.add(id, new AndroidBitmap(bitmap));
+            //2. Get the TextureRegion for the just added bitmap. Naturally it has to be in the last atlas of the bitmappacker
+            final TextureRegion region = markerPacker.getAtlasItem(markerPacker.getAtlasCount() - 1).getAtlas().getTextureRegion(id);
+            //3. Use the TextureRegion to create the symbol
+            symbol = new MarkerSymbol(region, xAnchor, yAnchor, !isFlat);
             markerSymbolCache.put(key, symbol);
             return symbol;
         }
