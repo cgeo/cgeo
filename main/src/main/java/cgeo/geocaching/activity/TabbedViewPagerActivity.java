@@ -6,8 +6,10 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -252,6 +254,10 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             //triggering adapter change will re-layout the view pager tabs
             viewPager.post(this::notifyAdapterDataSetChanged);
         }
+    }
+
+    protected void scrollToBottom() {
+        findViewById(R.id.detailScroll).post(() -> ((NestedScrollView) findViewById(R.id.detailScroll)).fullScroll(View.FOCUS_DOWN));
     }
 
     /**
