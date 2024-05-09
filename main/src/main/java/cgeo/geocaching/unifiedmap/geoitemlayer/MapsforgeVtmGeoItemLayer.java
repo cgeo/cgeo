@@ -8,6 +8,7 @@ import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.GroupedList;
 
@@ -294,6 +295,9 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
     }
 
     private MarkerSymbol getMarkerSymbol(final android.graphics.Bitmap bitmap, final float xAnchor, final float yAnchor, final boolean isFlat) {
+        if (Settings.enableVtmSingleMarkerSymbol()) {
+            return defaultMarkerSymbol;
+        }
 
         final MarkerSymbolCacheKey key = new MarkerSymbolCacheKey(bitmap, xAnchor, yAnchor, isFlat);
         synchronized (markerSymbolCache) {
