@@ -87,13 +87,17 @@ public final class CgeoTestUtils {
     public static void generateTestCaches(final Set<Integer> listIds, final Geocache orig, final int count) {
         final String origName = orig.getName();
         final Geopoint origCoords = orig.getCoords();
+        generateTestCaches(listIds, origName, origCoords, count);
+    }
 
-        for (int i = 0; i < count ; i++) {
+    public static void generateTestCaches(final Set<Integer> listIds, final String origName, final Geopoint origCoords, final int count) {
+
+            for (int i = 0; i < count ; i++) {
             final Geocache gc = new Geocache();
             gc.setName(origName + " " + i);
             gc.setCoords(origCoords.project(90, (i / 100)).project(180, (i % 100)));
             gc.setType(CacheType.values()[i % 9]);
-            gc.setGeocode("GC" + i);
+            gc.setGeocode("GCT" + i);
             gc.setDescription("test");
             gc.setLists(listIds);
             DataStore.saveCache(gc, EnumSet.of(LoadFlags.SaveFlag.DB));
