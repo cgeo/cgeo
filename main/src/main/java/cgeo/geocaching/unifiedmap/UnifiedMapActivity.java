@@ -992,7 +992,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 if (sheetRemoveFragment()) {
                     return;
                 }
-                mapFragment.adaptLayoutForActionbar(HideActionBarUtils.toggleActionBar(this));
+                mapFragment.adaptLayoutForActionBar(HideActionBarUtils.toggleActionBar(this));
+                GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, "", isLongTap);
             }
         } else if (result.size() == 1) {
             handleTap(result.get(0), touchedPoint, isLongTap, x, y);

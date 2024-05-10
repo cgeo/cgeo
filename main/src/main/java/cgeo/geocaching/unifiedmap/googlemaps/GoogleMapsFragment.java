@@ -7,7 +7,6 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
@@ -133,7 +132,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
             scaleDrawer.drawScale(lastBounds);
         });
 
-        adaptLayoutForActionbar(true);
+        adaptLayoutForActionBar(true);
 
         initLayers();
         onMapReadyTasks.run();
@@ -306,13 +305,11 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     // Tap handling methods
 
     @Override
-    protected void adaptLayoutForActionbar(final boolean actionBarShowing) {
+    public void adaptLayoutForActionBar(@Nullable final Boolean actionBarShowing) {
         if (mMap == null) {
             return;
         }
-
-        final View compass = requireView().findViewWithTag("GoogleMapCompass");
-        compass.animate().translationY((actionBarShowing ? requireActivity().findViewById(R.id.actionBarSpacer).getHeight() : 0) + ViewUtils.dpToPixel(25)).start();
+        adaptLayoutForActionBar(requireView().findViewWithTag("GoogleMapCompass"), actionBarShowing);
     }
 
 }

@@ -248,6 +248,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private boolean requireGeodata;
     private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
+    private boolean lastActionWasEditNote = false;
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
@@ -1824,12 +1825,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 createDescriptionContent(activity, cache, restrictLength, binding.description), p -> {
                     displayDescription(activity, cache, p.first, binding.description);
                     // we need to use post, so that the textview is layouted before scrolling gets called
-                    if (initialScroll != 0) {
+                    if (((CacheDetailActivity) activity).lastActionWasEditNote) {
+                        ((CacheDetailActivity) activity).scrollToBottom();
+                    } else if (initialScroll != 0) {
                         binding.detailScroll.post(() -> binding.detailScroll.setScrollY(initialScroll));
                     }
                     if (p.second) {
                             binding.descriptionRenderFully.setVisibility(View.VISIBLE);
                             binding.descriptionRenderFully.setOnClickListener(v -> reloadDescription(activity, cache, false, binding.detailScroll.getScrollY()));
+                        } else {
+                            ((CacheDetailActivity) activity).lastActionWasEditNote = false;
                         }
                     }
             );
@@ -2759,6 +2764,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (uploadNote) {
             checkAndUploadPersonalNote(ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class));
         }
+        scrollToBottom();
+        lastActionWasEditNote = true;
     }
 
     @Override
