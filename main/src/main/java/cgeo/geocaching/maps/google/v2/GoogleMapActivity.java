@@ -287,7 +287,7 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapBase.getMapOptions().filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            mapBase.refreshMapData(false);
+            mapBase.refreshMapData(false, true);
         }
 
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
@@ -307,7 +307,7 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapBase.getMapOptions().filterContext.set(filter);
         MapUtils.filter(mapBase.getCaches(), mapBase.getMapOptions().filterContext);
-        mapBase.refreshMapData(false);
+        mapBase.refreshMapData(false, true);
     }
 
     @Override

@@ -349,7 +349,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (mapChanged) {
             final boolean setDefaultCenterAndZoom = !overridePositionAndZoom && mapState == null;
             // map settings popup
-            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
+            findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapDataAfterSettingsChanged, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
@@ -443,7 +443,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(viewport3.get());
                         }
-                        refreshMapData(false);
+                        refreshMapData(false, true);
                     }
                 });
                 break;
@@ -461,7 +461,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(viewport2.get());
                         }
-                        refreshMapData(false);
+                        refreshMapData(false, true);
                     }
                 });
                 break;
@@ -478,7 +478,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
         if (mapType.type == UMTT_PlainMap) {
-            refreshMapData(false);
+            refreshMapData(false, true);
             if (loadInBackgroundHandler == null) {
                 loadInBackgroundHandler = new LoadInBackgroundHandler(this);
             }
@@ -865,7 +865,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapType.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            refreshMapData(false);
+            refreshMapData(false, true);
         }
     }
 
@@ -901,14 +901,23 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         return mapType.filterContext;
     }
 
-    private void refreshMapData(final boolean circlesSwitched) {
+    private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched, final boolean filterChanged) {
+        if (loadInBackgroundHandler == null && filterChanged) {
+            reloadCachesAndWaypoints(false);
+        }
+        refreshMapData(circlesSwitched, filterChanged);
+    }
+
+    private void refreshMapData(final boolean circlesSwitched, final boolean filterChanged) {
         viewModel.caches.write(false, caches -> MapUtils.filter(caches, mapType.filterContext));
         viewModel.waypoints.notifyDataChanged();
-        if (loadInBackgroundHandler != null) {
-            loadInBackgroundHandler.onDestroy();
-            loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+        if (filterChanged) {
+            if (loadInBackgroundHandler != null) {
+                loadInBackgroundHandler.onDestroy();
+                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+            }
+            MapUtils.updateFilterBar(this, mapType.filterContext);
         }
-        MapUtils.updateFilterBar(this, mapType.filterContext);
     }
 
     // ========================================================================
