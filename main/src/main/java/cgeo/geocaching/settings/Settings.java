@@ -1374,7 +1374,7 @@ public class Settings {
     }
 
     public static boolean isBrouterAutoTileDownloads() {
-        return getBoolean(R.string.pref_brouterAutoTileDownloads, false);
+        return getBoolean(R.string.pref_brouterAutoTileDownloads, true);
     }
 
     public static void setBrouterAutoTileDownloads(final boolean value) {
@@ -2050,7 +2050,7 @@ public class Settings {
     }
 
     public static boolean useInternalRouting() {
-        return getBoolean(R.string.pref_useInternalRouting, false);
+        return getBoolean(R.string.pref_useInternalRouting, true);
     }
 
     public static boolean getBackupLoginData() {
