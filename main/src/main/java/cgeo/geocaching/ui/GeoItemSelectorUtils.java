@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +49,12 @@ public class GeoItemSelectorUtils {
         }
         if (cache.getTerrain() > 0.1f) {
             text.append(Formatter.SEPARATOR).append("T ").append(cache.getTerrain());
+        }
+        if (cache.isEventCache()) {
+            final Date d = cache.getHiddenDate();
+            if (d != null) {
+                text.append(Formatter.SEPARATOR).append(Formatter.formatShortDate(d.getTime()));
+            }
         }
 
         setViewValues(view, cacheName, TextParam.text(text), cacheIcon);
