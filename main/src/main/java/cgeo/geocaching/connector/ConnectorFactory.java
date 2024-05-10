@@ -3,7 +3,6 @@ package cgeo.geocaching.connector;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.al.ALConnector;
-import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
@@ -188,7 +187,7 @@ public final class ConnectorFactory {
     public static IConnector[] getActiveConnectorsWithValidCredentials() {
         final List<IConnector> credConns = new ArrayList<>();
         for (final IConnector conn : CONNECTORS) {
-            if (conn instanceof ILogin && conn instanceof ICredentials && conn.isActive() && Settings.getCredentials((ICredentials) conn).isValid()) {
+            if (conn.hasValidCredentials()) {
                 credConns.add(conn);
             }
         }
