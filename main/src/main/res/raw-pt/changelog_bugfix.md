@@ -1,6 +1,8 @@
 ##
 - Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
 - Correcção: Falta a opção 'usar lista actual" na criação de cache definida pelo utilizador (Mapa Unificado)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
 
 ##
 - Correcção: Ligações de TB com parâmetro TB não funcionavam
