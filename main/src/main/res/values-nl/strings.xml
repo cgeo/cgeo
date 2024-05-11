@@ -774,6 +774,8 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
+    <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
+    <string name="settings_userDefinedTileProviderUri">Voer volledige Uri (zonder slash aan het eind) in voor de tegelprovider. Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
