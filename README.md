@@ -26,8 +26,8 @@ We have a list of [good first issues](https://github.com/cgeo/cgeo/contribute), 
 
 **Fork** the [project source code](https://github.com/cgeo/cgeo), make changes to your clone, and [create a pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests) afterwards.
 
-Note: make sure to really **fork** the source code, **do not** just clone the main cgeo repository. Then work locally with a clone of your fork.
-Otherwise you won't be able to bring your changes into cgeo later.
+Note: make sure to really **fork** the source code, **do not** just clone the main c:geo repository. Then work locally with a clone of your fork.
+Otherwise you won't be able to bring your changes into c:geo later.
 If you are a github / git beginner and don't know what this means, consult our [git/github setup page for beginners](https://github.com/cgeo/cgeo/wiki/Working-on-c%3Ageo-for-git-beginners).
 
 ### Branches
