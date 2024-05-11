@@ -1,6 +1,8 @@
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
 - Poprawka: Brakuje opcji „Użyj bieżącej listy” przy tworzeniu skrytki zdefiniowanej przez użytkownika (UnifiedMap)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały
