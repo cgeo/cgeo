@@ -1,6 +1,8 @@
 ##
 - Correction : Les caches ne se chargent pas après l'activation de la carte en temps réel (UnifiedMap)
 - Correction : Il manque l'option 'utiliser la liste courante' lors de la création d'une cache définie par l'utilisateur (UnifiedMap)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
 
 ##
 - Correction : les liens des objets voyageurs avec le paramètre TB ne fonctionnent pas
