@@ -1,6 +1,8 @@
 ##
 - Fix: Caches not loading after enabling live map (UnifiedMap)
 - Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
 
 ##
 - Fix: Trackable links with TB parameter not working
