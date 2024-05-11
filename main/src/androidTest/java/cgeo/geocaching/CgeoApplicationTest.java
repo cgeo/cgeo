@@ -49,6 +49,12 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  */
 public class CgeoApplicationTest {
 
+//    @Test
+//    public void createTestCaches() {
+//        final int listId = DataStore.createList("manycaches2");
+//        CgeoTestUtils.generateTestCaches(Collections.singleton(listId), "Test", new Geopoint(40, 10), 20000);
+//    }
+
     @Test
     @MediumTest
     public void testRegEx() {

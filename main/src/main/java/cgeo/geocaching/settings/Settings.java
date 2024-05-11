@@ -707,6 +707,10 @@ public class Settings {
         return getBoolean(R.string.pref_foundstate_al, false);
     }
 
+    public static boolean enableVtmSingleMarkerSymbol() {
+        return getBoolean(R.string.pref_vtm_single_marker_symbol, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
