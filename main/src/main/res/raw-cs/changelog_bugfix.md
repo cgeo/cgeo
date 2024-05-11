@@ -1,6 +1,8 @@
 ##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
 - Oprava: Chybějící možnost 'použít aktuální seznam' při vytváření uživatelsky definované kešky (Sjednocená mapa)
+- Oprava: Kompasová růžice skrytá za zobrazením vzdáleností (Sjednocená mapa)
+- Oprava: Přesun podrobností o kešce do záhlaví stránky po úpravě osobní poznámky
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
