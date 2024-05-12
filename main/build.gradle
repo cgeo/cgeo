@@ -73,10 +73,7 @@ android {
             // debug build name contains git commit for better reproduction of bugs
             versionNameSuffix "-" + GitCommit.currentShort() + " developer build"
 
-            // also give a different suffix so that it can be installed in parallel, however we do not want to affect the CI builds
-            if (!isContinuousIntegrationServer()) {
-                applicationIdSuffix ".developer"
-            }
+            applicationIdSuffix ".developer"
 
             // additional proguard rules just for the test code
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
@@ -539,7 +536,7 @@ File templatesFile = project.file(templatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
 File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
 String adb = android.getAdbExecutable().absolutePath
-String appID = 'cgeo.geocaching'
+String debugBuildAppId = 'cgeo.geocaching.developer'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -691,15 +688,15 @@ tasks.register('copyDefaultPreferencesToAndroid') {
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'mkdir', '-p', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', '/data/data/'+debugBuildAppId+'/shared_prefs/']
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/cgeo.geocaching/shared_prefs/cgeo.geocaching_preferences.xml']
+                    args = ['shell', 'run-as', debugBuildAppId, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/'+debugBuildAppId+'/shared_prefs/'+debugBuildAppId+'_preferences.xml']
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', appID, 'ls', '-l', '/data/data/cgeo.geocaching/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', '/data/data/'+debugBuildAppId+'/shared_prefs/']
                 }
                 injected.execOperations.exec {
                     executable = adb
