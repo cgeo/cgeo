@@ -346,7 +346,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case NOT_CHOSEN:
                 return GeocachingData.CACHE_SIZE_NOT_CHOSEN;
             case VIRTUAL:
-                return GeocachingData.CACHE_SIZE_OTHER;
+                return GeocachingData.CACHE_SIZE_VIRTUAL;
             case OTHER:
                 return GeocachingData.CACHE_SIZE_OTHER;
             case UNKNOWN:
