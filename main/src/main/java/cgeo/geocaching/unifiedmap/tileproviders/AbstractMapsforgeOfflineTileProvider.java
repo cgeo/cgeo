@@ -21,9 +21,10 @@ import org.oscim.tiling.source.mapfile.IMapFileTileSource;
 import org.oscim.tiling.source.mapfile.MapFileTileSource;
 import org.oscim.tiling.source.mapfile.MapInfo;
 
-class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
+public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
     IMapFileTileSource tileSource;
+    private BuildingLayer buildingLayer;
 
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
         super(name, uri, zoomMin, zoomMax, new Pair<>("", false));
@@ -37,7 +38,8 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
         tileSource.setPreferredLanguage(Settings.getMapLanguage());
         ((MapFileTileSource) tileSource).setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(mapUri));
         final VectorTileLayer tileLayer = (VectorTileLayer) fragment.setBaseMap((MapFileTileSource) tileSource);
-        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, new BuildingLayer(map, tileLayer));
+        buildingLayer = new BuildingLayer(map, tileLayer);
+        fragment.addLayer(LayerHelper.ZINDEX_BUILDINGS, buildingLayer);
         fragment.addLayer(LayerHelper.ZINDEX_LABELS, new LabelLayer(map, tileLayer));
         fragment.applyTheme();
 
@@ -64,5 +66,16 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
         } else {
             Log.w("AbstractMapsforgeOfflineTileProvider.setPreferredLanguage: tilesource is null");
         }
+    }
+
+    public boolean isBuildingLayerEnabled() {
+        return buildingLayer != null && buildingLayer.isEnabled();
+    }
+
+    public void switchBuildingLayer(final boolean enabled) {
+        if (buildingLayer == null) {
+            return;
+        }
+        buildingLayer.setEnabled(enabled);
     }
 }
