@@ -12,6 +12,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeOfflineTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -167,6 +168,10 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
         setSelectedTheme(selectedTheme);
 
+        if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider) {
+            ((AbstractMapsforgeOfflineTileProvider) tileProvider).switchBuildingLayer(Settings.getBoolean(R.string.pref_buildingLayer3D, true));
+        }
+
         map.updateMap(true);
         map.render();
     }
@@ -267,6 +272,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         if (themeOptionsAvailable() && themeStyleMenu != null) {
             intent.putExtra(MapsforgeThemeSettingsFragment.RENDERTHEME_MENU, themeStyleMenu);
+            intent.putExtra(MapsforgeThemeSettingsFragment.SHOW3DOPTION, tileProvider instanceof AbstractMapsforgeOfflineTileProvider);
         }
         activity.startActivity(intent);
     }
