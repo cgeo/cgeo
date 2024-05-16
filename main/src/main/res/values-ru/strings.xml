@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">не масштабировано</string>
     <string name="log_image_titleprefix">Фотография</string>
     <string name="log_delete_confirm">Вы действительно хотите удалить запись типа \'%1$s\' от \'%2$s\' с датой отметки \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Вы действительно хотите удалить сохраненную оффлайн-запись типа \'%1$s\' с датой записи \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Дата не установлена</string>
     <!-- Contacts -->
     <string name="contact_not_found">Контакт с ником %s не найден. Вначале добавьте его в приложение контактов.</string>
@@ -306,6 +307,7 @@
     <string name="info_log_posted">Запись в блокнот успешно отправлена.</string>
     <string name="info_log_saved">Запись в блокнот успешно сохранена.</string>
     <string name="info_log_post_failed">Запись в блокнот не удалась.</string>
+    <string name="info_log_delete_failed">Не удалось удалить запись.</string>
     <string name="info_log_post_failed_reason">Причина: %s</string>
     <string name="info_log_post_retry">Повторить</string>
     <string name="info_log_post_save">Сохранить офлайн</string>
@@ -896,6 +898,7 @@
     <string name="init_brouterProfileWalk">Профиль «Пешком»</string>
     <string name="init_brouterProfileBike">Профиль «Велосипед»</string>
     <string name="init_brouterProfileCar">Профиль «Автомобиль»</string>
+    <string name="init_brouterProfileUserNumber">Пользовательский профиль %d</string>
     <string name="init_removeFromRouteOnLog">Удалить из маршрута после записи в блокноте</string>
     <string name="init_summary_removeFromRouteOnLog">При отправке или сохранении записи удалить 
 тайник из текущего маршрута.</string>
@@ -911,6 +914,12 @@
     <string name="init_showElevation">Показать высоту</string>
     <string name="init_summary_showElevation">Показывать информацию о высоте для текущего местоположения взятую из данных маршрутизации или со спутниковой системы навигации (если доступно)</string>
     <string name="init_elevation_notAvailable">"Данные о высотах отсутствуют"</string>
+    <string name="menu_elevation_info">Высота (карта):</string>
+    <string name="elevation_selected">Высота (на карте) в выбранном месте</string>
+    <string name="elevation_difference">Перепад высот</string>
+    <string name="distance">Расстояние:</string>
+    <string name="copy_coordinates">Копировать координаты</string>
+    <string name="selected_position">Выбранная позиция</string>
     <string name="init_global_wp_extraction_disable">Не создавать точки из текста заметки</string>
     <string name="init_summary_global_wp_extraction_disable">Отключить извлечение путевых точек из личных записей тайников. Оно по-прежнему может быть включено для отдельных тайников, путем деактивации чекбокса под индивидуальными заметками тайника.</string>
     <string name="init_prevent_cache_note_merge">Перезаписывать личные заметки тайников</string>
@@ -1456,6 +1465,7 @@
     <string name="cache_log_menu_edit">Редактировать запись</string>
     <string name="cache_log_menu_delete">Удалить запись</string>
     <string name="cache_log_menu_popup_title">Запись %s</string>
+    <string name="cache_log_delete_reason_default">Запись была удалена с помощью c:geo</string>
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
@@ -1550,6 +1560,8 @@
     <string name="internal_cache_default_owner">Вы</string>
     <string name="internal_goto_targets_title">\"Перейти к\" целям</string>
     <string name="internal_goto_targets_description">Этот тайник сохраняет ваши последние цели «Перейти к». Он автоматически создается после использования функции «Перейти к» в главном меню. Введенные координаты будут сохранены в путевых точках этого тайника. Если Вам больше не нужны эти координаты, Вы можете удалить этот тайник или любую из его путевых точек. Также Вы можете переместить тайник в любой другой список по Вашему выбору.</string>
+    <string name="goto_targets_deprecation_title">Уведомление о неактуальности</string>
+    <string name="goto_targets_deprecation_notice">Функция \"Перейти к\" устарела и будет удалена в будущей версии. Пожалуйста, используйте вместо неё пользовательские тайники для новых целей.</string>
     <string name="init_longtap_map">Долгое нажатие на карте</string>
     <string name="init_summary_longtap_map">Активировать долгое нажатие на иконке карты (создание личного маршрута) или на пустом месте на карте (создание пользовательского тайника или путевой точки)</string>
     <string name="init_show_routing_menu">Показать меню маршрутизации</string>
@@ -1637,6 +1649,7 @@
     <string name="projection_type_none">Нет проекции</string>
     <string name="projection_type_bearing">Азимут</string>
     <string name="projection_type_bearing_info">Азимут %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_angle">Азимут в °</string>
     <string name="projection_type_bearing_hint_distance">Расстояние</string>
     <string name="projection_type_offset">Смещение</string>
     <string name="projection_type_offset_info">Смещение. широта %1$s микроминут (mm), долгота %2$s микроминут</string>
@@ -1687,6 +1700,7 @@
     <string name="formula_function_if">Если</string>
     <string name="formula_function_length">Длина строки</string>
     <string name="formula_function_substring">Подстрока</string>
+    <string name="formula_function_chars">Выберите символы</string>
     <string name="formula_function_rot13">Замена на буквы со сдвигом на 13 позиций (ROT13)</string>
     <string name="formula_function_rot">Сдвиг Символов</string>
     <string name="formula_function_checksum">Контрольная сумма</string>
@@ -1714,6 +1728,8 @@
     <string name="imageview_metadata_comment">Комментарий</string>
     <!-- map -->
     <string name="map_map">Карта</string>
+    <string name="map_live">Онлайн</string>
+    <string name="map_offline">Офлайн</string>
     <string name="map_view_map">Тип карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
@@ -1744,6 +1760,8 @@
     <string name="map_routing">Маршрутизация</string>
     <string name="map_routing_activate_title">Включить маршрутизацию</string>
     <string name="map_routing_activate">Некоторые режимы маршрутизации в настоящее время недоступны, так как не выбран механизм маршрутизации.\n\nВы хотите активировать внутренний механизм маршрутизации c:geo и загрузить данные маршрутизации?</string>
+    <string name="map_autorotation">Автоповорот карты</string>
+    <string name="map_autorotation_disable">Отключить автоматическое вращение карты?\n\nВы можете включить его снова, используя меню Поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
     <string name="other_settings">Другие настройки</string>
@@ -1773,6 +1791,7 @@
     <string name="search_kw">Ключевое слово</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
+    <string name="search_kw_disabled_hint">Отключено, так как это не поддерживается geocaching.com для базовых аккаунтов</string>
     <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
     <string name="search_hbu_button">Поиск по создателю</string>
@@ -2392,6 +2411,7 @@
     <!-- individual track -->
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>
+    <string name="load_track_error_named">Ошибка загрузки трека/маршрута: \"%s\"</string>
     <string name="map_clear_track">Очистить маршрут/трек</string>
     <string name="map_clear_track_confirm">Вы хотите удалить маршрут/трек \"%s\"?</string>
     <!-- route/track commons -->
@@ -2513,6 +2533,7 @@
     <string name="mapserver_hylly_themes_info">Подробная тема карты, созданная для карт «Hylly»</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
+    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования для оффлайн карт (требуется перезагрузка)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>
