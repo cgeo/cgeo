@@ -2,7 +2,7 @@
 - Korrektur: Caches werden nach Aktivierung der Live-Karte nicht geladen (UnifiedMap)
 - Korrektur: Option 'Aktuelle Liste verwenden' fehlt beim Erstellen eines benutzerdefinierten Caches (UnifiedMap)
 - Fix: Compass rose hidden behind distance views (UnifiedMap)
-- Fix: Cache details scroll to page header after editing personal note
+- Korrektur: Cache-Detailseite scrollt nach dem Bearbeiten der persönlichen Notiz an den Seitenanfang
 
 ##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
