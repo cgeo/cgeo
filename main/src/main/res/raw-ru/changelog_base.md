@@ -1,35 +1,35 @@
 ### Карта
-- New: [Unified Map](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), see [Settings => Map Sources => Unified Map](cgeo-setting://featureSwitch_useUnifiedMap)
-- New: Highlight existing downloads in download manager
-- New: Show cache's found state on waypoint icons
-- New: Long-tap option to connect a cache with its waypoints by lines
-- Change: Show cache/waypoint details in a non-blocking way
-- New: Optionally keep temporary OAM files (map downloader, useful when using POI files with other apps)
-- Fix: Hylly theme download error 404
-- Fix: Elevation info does not respect "use imperial units" setting
+- Новое: [ЕдинаяКарта](https://github.com/cgeo/cgeo/wiki/UnifiedMap) (beta), смотри [Настройки => Источник карт => ЕдинаяКарта](cgeo-setting://featureSwitch_useUnifiedMap)
+- Новое: Выделение существующих загрузок в менеджере загрузок
+- Новое: Показывать на путевых точках статус того, что тайник найден
+- Новое: Опция длительного нажатия для связи линиями тайника с его путевыми точками
+- Изменение: Отображать сведения о тайниках/путевых точках неблокирующим способом
+- Новое: При необходимости можно хранить временные OAM-файлы (программа загрузки карт, полезна при использовании POI-файлов в других приложениях)
+- Исправлено: Ошибка загрузки (404) темы Hylly
+- Исправлено: Информация о высоте не соответствовала настройке "использовать имперские единицы измерения" (Британская система измерений)
 
 ### Детали тайника
 - Изменение: Создано "Переключение разговора" фактическим переключением
-- Change: Increased maximum log length for geocaching.com
-- Fix: Cannot upload longer personal notes on opencaching sites
-- New: Edit/delete own logs
-- New: Waypoint projection with variables
-- Change: Restrict image selection to types jpg, png, gif
-- New: New formula CHARS (short form: CH) to select multiple single chars
-- Fix: Wrong result for TRUNC function with negative numbers
-- Fix: Formulas starting with variable similar to a hemisphere marker cannot be calculated
-- Fix: Email links in cache listings do not open if custom webview is enabled
+- Изменение: увеличена максимальная длина записи о взятии тайника для geocaching.com
+- Исправлено: Невозможно было загружать более длинные личные заметки на сайтах opencaching
+- Новое: Редактировать/Удалять собственные отчеты о взятии тайников
+- Новое: проекция путевой точки с переменными
+- Изменение: Выбор изображений ограничен вариантами jpg, png, gif
+- Новое: Новая формула CHARS (краткая форма: CH) для выбора нескольких одиночных символов
+- Исправлено: Неправильный результат для функции TRUNC с отрицательным числом
+- Исправлено: Для формул начинающихся с переменной, похожей на маркер полусферы, не могли быть произведены вычисления
+- Исправлено: Ссылки на электронную почту в списках тайников не открывались, если был включен пользовательский webview
 
 ### Общее
 - Новое: Нажатие на уведомление загрузчика открывает окно "ожидающие загрузки"
-- Change: Using wallpaper as background no longer requires READ_EXTERNAL_STORAGE permission
-- New: Two column-layout for settings in landscape mode
-- Fix: Restore of backups without valid date/time info
-- New: Include active trackfiles in backup
-- New: Integrated c:geo contacts addon functionality (external addon no longer required)
-- Fix: Trackable log type defaults reworked
-- Fix: Trackable spotted cache info (website changes)
-- Fix: Missing star symbol for changed stored filters
-- Fix: Keyword search field displays "GC" after performing a search
-- Fix: Internal crash in routing calculation
-- Fix: Downloading bookmark lists returns empty list (website change)
+- Изменение: Использование обоев в качестве фона больше не требует разрешения READ_EXTERNAL_STORAGE
+- Новое: Две колонки для настроек в альбомном режиме
+- Исправлено: Восстановление резервных копий было без корректной информации о дате/времени
+- Новое: Включение активных файлов треков в резервную копию
+- Новое: Интегрирована функциональность расширения контактов c:geo (внешнее расширение больше не требуется)
+- Исправлено: Изменены значения по умолчанию для записей кротов (трекаблов)
+- Исправление: Информация в тайнике об обнаруженом геокроте (в связи с изменениями на веб-сайте)
+- Исправлено: Отсутствовал символ звездочки для измененных сохраненных фильтров
+- Исправлено: в поле поиска по ключевому слову отображалось "GC" после выполнения поиска
+- Исправлено: Внутренний сбой при расчёте маршрутизации
+- Исправлено: Загрузка списков закладок возвращала пустой список (изменение веб-сайта)
