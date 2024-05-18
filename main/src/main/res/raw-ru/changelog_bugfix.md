@@ -3,6 +3,12 @@
 - Исправлено: Отсутствовала опция «использовать текущий список» при создании определенного пользователем тайника (ЕдинаяКарта)
 - Исправление: роза компаса была скрыта за отображением расстояния (ЕдинаяКарта)
 - Исправлено: информация о тайнике выводилась на заголовок страницы после редактирования личной заметки
+- New: Show event date to cache selector
+- Fix: Login to OC platform not recognized by installation wizard
+- Fix: Routing not working by default after fresh installation
+- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
+- Fix: Individual routes exported as track cannot be read by Garmin devices
 
 ##
 - Исправлено: геокротовые ссылки с TB параметром не работали
