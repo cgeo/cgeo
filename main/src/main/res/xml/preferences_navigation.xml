@@ -30,7 +30,7 @@
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_useInternalRouting"
             android:summary="@string/init_summary_useInternalRouting"
             android:title="@string/init_useInternalRouting"
@@ -43,7 +43,7 @@
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:dependency="@string/pref_useInternalRouting"
             android:key="@string/pref_brouterAutoTileDownloads"
             android:summary="@string/init_brouterAutoTileDownloads_description"

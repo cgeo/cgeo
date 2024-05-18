@@ -46,6 +46,7 @@ import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
+import org.oscim.event.Event;
 import org.oscim.event.Gesture;
 import org.oscim.event.GestureListener;
 import org.oscim.event.MotionEvent;
@@ -80,7 +81,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
     private final int rotationWidth = rotationIndicator.getWidth();
     private final int rotationHeight = rotationIndicator.getHeight();
-
+    private Event lastEvent = null;
 
     public MapsforgeVtmFragment() {
         super(R.layout.unifiedmap_mapsforgevtm_fragment);
@@ -104,12 +105,17 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
             if (event == Map.ROTATE_EVENT || event == Map.POSITION_EVENT) {
                 repaintRotationIndicator(mapPosition.bearing);
             }
-            if (event == Map.MOVE_EVENT) {
+            if (event == Map.MOVE_EVENT || (lastEvent == Map.SCALE_EVENT && event == Map.POSITION_EVENT /* see #15590 */)) {
+                // SCALE event is sent only on manually scaling the map, not when using zoom controls
+                // (which send a POSITION event)
+                // moving while zooming sends a SCALE event first, then one or more POSITION events,
+                // while moving without zooming sends a MOVE event
                 if (Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                     viewModel.followMyLocation.setValue(false);
                 }
                 viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
             }
+            lastEvent = event; // remember to detect scaling combined with panning
         };
         mMap.events.bind(mapUpdateListener);
 

@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
@@ -95,6 +96,11 @@ public class OCApiConnector extends OCConnector implements ISearchByGeocode, IOA
     public boolean isActive() {
         // currently always active, but only for details download
         return true;
+    }
+
+    @Override
+    public boolean hasValidCredentials() {
+        return isActive() && StringUtils.isNotBlank(Settings.getString(getTokenPublicPrefKeyId(), null)) && StringUtils.isNotBlank(Settings.getString(getTokenSecretPrefKeyId(), null));
     }
 
     public OAuthLevel getSupportedAuthLevel() {
