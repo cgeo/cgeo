@@ -19,4 +19,3 @@
 - Change: Updated integrated BRouter to v1.7.4
 - New: Read elevation info from track on import
 - New: API to Locus now supporting cache size "virtual"
-- Fix: Loading trackables from internal database fails under certain conditions
