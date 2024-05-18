@@ -3,6 +3,12 @@
 - Oplossing: Ontbrekende optie 'gebruik huidige lijst' bij het maken van door de gebruiker gedefinieerde cache (UnifiedMap)
 - Oplossing: Kompas roos verborgen achter afstandsweergave (UnifiedMap)
 - Oplossing: Cache details scrollen naar pagina kop na het bewerken van persoonlijke notitie
+- Nieuw: Toon event datum aan cache kiezer
+- Oplossing: Login op OC platform niet herkend door de installatiewizard
+- Oplossing: Routering werkt standaard niet na verse installatie
+- Oplossing: Infoblad werkbalk verborgen in liggende modus, zelfs op grote apparaten
+- Fix: "volg mijn locatie" nog steeds actief na zoomen met pan (UnifiedMap)
+- Oplossing: Individuele routes geëxporteerd als track kunnen niet worden gelezen door Garmin apparaten
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet
