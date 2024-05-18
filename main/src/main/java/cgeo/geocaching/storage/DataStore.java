@@ -3869,7 +3869,7 @@ public class DataStore {
 
             final Cursor cursor = database.query(
                     dbTableTrackables,
-                    new String[]{"updated", "tbcode", "guid", "title", "owner", "released", "goal", "description"},
+                    new String[]{"updated", "tbcode", "guid", "title", "owner", "released", "goal", "description", "log_date", "log_type", "log_guid"},
                     "tbcode = ?",
                     new String[]{geocode},
                     null,
