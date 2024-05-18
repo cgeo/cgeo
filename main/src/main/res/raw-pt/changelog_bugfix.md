@@ -3,6 +3,12 @@
 - Correcção: Falta a opção 'usar lista actual" na criação de cache definida pelo utilizador (Mapa Unificado)
 - Fix: Compass rose hidden behind distance views (UnifiedMap)
 - Fix: Cache details scroll to page header after editing personal note
+- New: Show event date to cache selector
+- Fix: Login to OC platform not recognized by installation wizard
+- Fix: Routing not working by default after fresh installation
+- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
+- Fix: Individual routes exported as track cannot be read by Garmin devices
 
 ##
 - Correcção: Ligações de TB com parâmetro TB não funcionavam
