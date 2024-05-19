@@ -9,6 +9,7 @@
 - Fix: Info sheet toolbar hidden in landscape mode even on large devices
 - Fix: "follow my location" still active after zoom with pan (UnifiedMap)
 - Fix: Individual routes exported as track cannot be read by Garmin devices
+- Fix: Loading trackables from internal database fails under certain conditions
 
 ##
 - Fix: Trackable links with TB parameter not working
