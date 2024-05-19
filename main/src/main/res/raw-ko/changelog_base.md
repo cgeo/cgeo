@@ -3,6 +3,7 @@
 - Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
 - New: Support user-defined tile providers
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 
 ### 캐시 상세정보
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
@@ -17,3 +18,4 @@
 - 변경: OSM Nominatum을 보조 지오코더로 사용하고, MapQuest 지오코더를 대체합니다(더 이상 작동하지 않음)
 - 변경: 통합 브라우저를 v1.7.4로 업데이트
 - New: Read elevation info from track on import
+- New: API to Locus now supporting cache size "virtual"
