@@ -1,14 +1,15 @@
 ##
 - Korrektur: Caches werden nach Aktivierung der Live-Karte nicht geladen (UnifiedMap)
 - Korrektur: Option 'Aktuelle Liste verwenden' fehlt beim Erstellen eines benutzerdefinierten Caches (UnifiedMap)
-- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Korrektur: Kompassrose durch Distanzansichten verdeckt (UnifiedMap)
 - Korrektur: Cache-Detailseite scrollt nach dem Bearbeiten der persönlichen Notiz an den Seitenanfang
 - New: Show event date to cache selector
-- Fix: Login to OC platform not recognized by installation wizard
-- Fix: Routing not working by default after fresh installation
+- Korrektur: Die Anmeldung zu einer OC-Plattform wird vom Installationsassistenten nicht erkannt
+- Korrektur: Routing funktioniert standardmäßig nicht nach einer Neuinstallation
 - Fix: Info sheet toolbar hidden in landscape mode even on large devices
-- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
-- Fix: Individual routes exported as track cannot be read by Garmin devices
+- Korrektur: "Meinem Standort folgen" nach Zoomen mit gleichzeitigem Verschieben weiterhin aktiv (UnifiedMap)
+- Korrektur: Individuelle Routen, die als Track exportiert werden, können von Garmin-Geräten nicht gelesen werden
+- Fix: Loading trackables from internal database fails under certain conditions
 
 ##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
