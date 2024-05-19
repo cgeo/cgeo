@@ -2544,6 +2544,7 @@
     <string name="maptheme_scale_text_summary">Dodatkowo skaluje etykiety tekstowe na mapie; 100% = bez dodatkowego skalowania</string>
     <string name="maptheme_scale_symbol_title">Współczynnik skali symboli</string>
     <string name="maptheme_scale_symbol_summary">Dodatkowo skaluje rozmiary symboli na mapie; 100% = brak dodatkowego skalowania</string>
+    <string name="maptheme_show3Dbuildings">Pokaż budynki w 3D</string>
     <string name="vtm_theme_variant">Wariant motywu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię śladu</string>
