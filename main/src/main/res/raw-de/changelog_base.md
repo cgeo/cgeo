@@ -3,6 +3,7 @@
 - Korrektur: Wegpunkte werden bei Anzeige eines einzelnen Caches nicht gefiltert (UnifiedMap)
 - Neu: Unterstützung für benutzerdefinierte Kartenanbieter für OSM Online-Karten
 - Korrektur: Kartendaten nach dem Öffnen / Schließen von Einstellungen aktualisieren (UnifiedMap)
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
@@ -17,3 +18,4 @@
 - Änderung: Benutze OSM Nominatum als Fallback-Geokodierer, ersetze MapQuest Geocoder (der für uns nicht mehr funktioniert)
 - Neu: Internen BRouter auf v1.7.4 aktualisiert
 - Neu: Höheninformationen beim Import einer Trackdatei auswerten
+- New: API to Locus now supporting cache size "virtual"
