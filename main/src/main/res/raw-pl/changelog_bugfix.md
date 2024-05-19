@@ -9,6 +9,7 @@
 - Poprawka: Pasek narzędzi z arkuszem informacji był ukryty w trybie poziomym nawet na dużych urządzeniach
 - Poprawka: Opcja „Podążaj za moją lokalizacją” była nadal aktywna po powiększeniu (UnifiedMap)
 - Poprawka: Indywidualne trasy eksportowane jako ślady nie mogą być odczytane przez urządzenia Garmin
+- Poprawka: Wczytywanie przedmiotów podróżnych z wewnętrznej bazy danych nie udawało się pod pewnymi warunkami
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały
