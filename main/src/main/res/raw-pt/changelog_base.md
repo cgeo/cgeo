@@ -3,6 +3,7 @@
 - Correcção: Pontos adicionais não são filtrados ao mapear uma única cache (Mapa Unificado)
 - New: Support user-defined tile providers
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
@@ -17,3 +18,4 @@
 - Alteração: Uso de Nominatum OSM como geocodificador padrão, substituindo o geocodificador MapQuest (que já não está funcional para nós)
 - Alteração: BRouter integrado actualizado para v1.7.4
 - New: Read elevation info from track on import
+- New: API to Locus now supporting cache size "virtual"
