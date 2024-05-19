@@ -3,6 +3,7 @@
 - Poprawka: Punkty nawigacji nie były filtrowane na mapowaniu pojedynczej skrytki (UnifiedMap)
 - Nowość: Wsparcie dla dostawców kafelków zdefiniowanych przez użytkownika
 - Poprawka: Odświeżanie danych mapy po otwarciu/zamknięciu okna z ustawieniami (UnifiedMap)
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 
 ### Szczegóły skrytki
 - New: Show images linked in "personal note" in Images tab
@@ -17,3 +18,4 @@
 - Zmiana: Użycie OSM Nominatum jako rezerwowego geokodera, zastępując geokoder MapQuest (który już nie działa dla nas)
 - Nowość: Zaktualizowano zintegrowany BRouter do wersji 1.7.4
 - Nowość: Odczytywanie informacji o wysokości ze ścieżki przy imporcie
+- New: API to Locus now supporting cache size "virtual"
