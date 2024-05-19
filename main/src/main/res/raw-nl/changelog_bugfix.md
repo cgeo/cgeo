@@ -9,6 +9,7 @@
 - Oplossing: Infoblad werkbalk verborgen in liggende modus, zelfs op grote apparaten
 - Fix: "volg mijn locatie" nog steeds actief na zoomen met pan (UnifiedMap)
 - Oplossing: Individuele routes geëxporteerd als track kunnen niet worden gelezen door Garmin apparaten
+- Fix: Loading trackables from internal database fails under certain conditions
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet
