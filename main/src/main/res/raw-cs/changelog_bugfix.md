@@ -9,6 +9,7 @@
 - Oprava: Panel nástrojů informačního listu skrytý v režimu na šířku i na velkých zařízeních
 - Oprava: "sledovat mou polohu" je stále aktivní po přiblížení s posunem (Sjednocená mapa)
 - Oprava: Jednotlivé trasy exportované jako stopy nemohou být načteny zařízeními Garmin
+- Oprava: Načítání trackovatelných položek z interní databáze za určitých podmínek selhává
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
