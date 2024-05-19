@@ -138,6 +138,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private final List<GeoItemLayer<?>> layers = new ArrayList<>();
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
+    NavigationTargetLayer navigationTargetLayer = null;
     private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private LocUpdater geoDirUpdate;
@@ -224,7 +225,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         new CoordsIndicatorLayer(this, nonClickableItemsLayer);
         new PositionHistoryLayer(this, nonClickableItemsLayer);
         new TracksLayer(this, clickableItemsLayer);
-        new NavigationTargetLayer(this, nonClickableItemsLayer);
+        navigationTargetLayer = new NavigationTargetLayer(this, nonClickableItemsLayer);
         new CacheCirclesLayer(this, nonClickableItemsLayer);
 
         new IndividualRouteLayer(this, clickableItemsLayer);
@@ -700,6 +701,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         viewModel.reloadIndividualRoute();
         viewModel.reloadTracks(routeTrackUtils);
+        if (navigationTargetLayer != null) {
+            navigationTargetLayer.triggerRepaint();
+        }
     }
 
     @Nullable

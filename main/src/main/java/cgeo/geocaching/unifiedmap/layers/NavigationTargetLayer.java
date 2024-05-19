@@ -72,6 +72,12 @@ public class NavigationTargetLayer {
         viewModel.individualRoute.observe(activity, individualRoute -> mapDistanceDrawer.drawRouteDistance(individualRoute.getDistance()));
     }
 
+    public void triggerRepaint() {
+        final UnifiedMapViewModel.Target target = viewModel.target.getValue();
+        if (target != null) {
+            repaintHelper(target);
+        }
+    }
 
     private void repaintHelper(final UnifiedMapViewModel.Target target) {
         final LocUpdater.LocationWrapper currentLocation = viewModel.location.getValue();
