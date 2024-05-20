@@ -2485,6 +2485,7 @@
     <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
     <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
     <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="maptheme_show3Dbuildings">Toon gebouwen in 3D</string>
     <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
