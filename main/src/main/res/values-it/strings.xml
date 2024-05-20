@@ -209,6 +209,7 @@
     <string name="log_image_info_notscaled">non ridotta</string>
     <string name="log_image_titleprefix">Immagine</string>
     <string name="log_delete_confirm">Vuoi davvero eliminare il registro di tipo \'%1$s\' dall\'autore \'%2$s\' con la data di log \'%3$s\'?</string>
+    <string name="log_offline_delete_confirm">Vuoi davvero eliminare il tuo log offline di tipo \'%1$s\' memorizzato con la data di log \'%2$s\'?</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- Contacts -->
     <string name="contact_not_found">Contatto con alias/nickname %s non trovato. Aggiungilo prima nei tuoi contatti.</string>
@@ -904,6 +905,8 @@
     <string name="init_showElevation">Mostra altitudine</string>
     <string name="init_summary_showElevation">Mostra l\"altitudine per la posizione corrente, prendendola dai dati di routing o GNSS (se disponibile)</string>
     <string name="init_elevation_notAvailable">"Nessun dato di elevazione disponibile"</string>
+    <string name="elevation_selected">Quota (mappa) alla posizione selezionata</string>
+    <string name="elevation_difference">Dislivello</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache.</string>
     <string name="init_prevent_cache_note_merge">Sovrascrivi Nota Personale cache</string>
@@ -1726,6 +1729,8 @@
     <string name="map_routing">Percorso</string>
     <string name="map_routing_activate_title">Abilita percorso</string>
     <string name="map_routing_activate">Alcune modalità di navigazione non sono attualmente disponibili, poiché nessun motore di routing è attivo.\n\nVuoi attivare il motore di routing interno di c:geo e scaricare i dati di routing?</string>
+    <string name="map_autorotation">Rotazione automatica mappa</string>
+    <string name="map_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
     <string name="other_settings">Altre impostazioni</string>
@@ -1755,6 +1760,7 @@
     <string name="search_kw">Parola chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
+    <string name="search_kw_disabled_hint">Disabilitato in quanto non supportato da geocaching.com per gli utenti BASIC</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
@@ -2344,6 +2350,7 @@
     <!-- individual track -->
     <string name="map_load_track">Carica traccia/percorso da GPX</string>
     <string name="load_track_error">Errore nel caricare la traccia/percorso</string>
+    <string name="load_track_error_named">Errore nel caricare la traccia/percorso: \"%s\"</string>
     <string name="map_clear_track">Cancella percorso/traccia</string>
     <string name="map_clear_track_confirm">Vuoi rimuovere il percorso/traccia\"%s\"?</string>
     <!-- route/track commons -->
@@ -2472,6 +2479,7 @@
     <string name="maptheme_scale_text_summary">Scala aggiuntiva delle etichette di testo nella mappa; 100% = nessun ridimensionamento extra</string>
     <string name="maptheme_scale_symbol_title">Fattore di scala dei simboli</string>
     <string name="maptheme_scale_symbol_summary">Scala aggiuntiva dei simboli nella mappa; 100% = nessun ridimensionamento extra</string>
+    <string name="maptheme_show3Dbuildings">Mostra edifici in 3D</string>
     <string name="vtm_theme_variant">Variante Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
