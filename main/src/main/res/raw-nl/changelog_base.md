@@ -3,7 +3,7 @@
 - Oplossing: Waypoints niet gefilterd bij het toewijzen van een enkele cache (UnifiedMap)
 - Nieuw: Ondersteuning voor gebruiker-gedefinieerde tegelaanbieders
 - Oplossing: Vernieuw kaartgegevens na het openen / sluiten van instellingen dialoogvenster (UnifiedMap)
-- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- Nieuw: Wissel display van gebouwen 2D/3D (UnifiedMap OSM kaarten)
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -18,4 +18,4 @@
 - Wijziging: gebruik OSM Nominatum als terugval geocoder, ter vervanging van MapQuest geocoder (die niet meer werkt)
 - Wijziging: Geïntegreerde BRouter bijgewerkt naar v1.7.4
 - Nieuw: Lees hoogte informatie van track bij importeren
-- New: API to Locus now supporting cache size "virtual"
+- Nieuw: API van Locus ondersteunt nu de cache grootte "virtueel"
