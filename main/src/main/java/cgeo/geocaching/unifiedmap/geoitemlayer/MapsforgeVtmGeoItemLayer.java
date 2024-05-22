@@ -10,7 +10,9 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.models.geoitem.ToScreenProjector;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.GroupedList;
+import cgeo.geocaching.utils.Log;
 
 import android.graphics.BitmapFactory;
 import android.util.Pair;
@@ -305,27 +307,37 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
             return defaultMarkerSymbol;
         }
 
-        final MarkerSymbolCacheKey key = new MarkerSymbolCacheKey(bitmap, xAnchor, yAnchor, isFlat);
-        synchronized (markerSymbolCache) {
-            MarkerSymbol symbol = markerSymbolCache.get(key);
-            if (symbol != null) {
+        final ContextLogger ctx = new ContextLogger(Log.LogLevel.DEBUG, "VTM:getMarkerSymbol");
+        try {
+
+            final MarkerSymbolCacheKey key = new MarkerSymbolCacheKey(bitmap, xAnchor, yAnchor, isFlat);
+            synchronized (markerSymbolCache) {
+                MarkerSymbol symbol = markerSymbolCache.get(key);
+                if (symbol != null) {
+                    return symbol;
+                }
+
+                //Create a new Marker Symbol
+                //For efficiency we use an image atlas (which is provided by VTM library)
+                //General info about image atlas can be found e.g. here: https://en.wikipedia.org/wiki/Texture_atlas
+
+                //1. Place the bitmap on an atlas of our bitmap packer. Use an arbitrarily id to reference it afterwards
+                final int id = markerCounter.addAndGet(1);
+                markerPacker.add(id, new AndroidBitmap(bitmap));
+                //2. Get the TextureRegion for the just added bitmap. Naturally it has to be in the last atlas of the bitmappacker
+                final TextureRegion region = markerPacker.getAtlasItem(markerPacker.getAtlasCount() - 1).getAtlas().getTextureRegion(id);
+                //3. Use the TextureRegion to create the symbol
+                symbol = new MarkerSymbol(region, xAnchor, yAnchor, !isFlat);
+                markerSymbolCache.put(key, symbol);
                 return symbol;
             }
-
-            //Create a new Marker Symbol
-            //For efficiency we use an image atlas (which is provided by VTM library)
-            //General info about image atlas can be found e.g. here: https://en.wikipedia.org/wiki/Texture_atlas
-
-            //1. Place the bitmap on an atlas of our bitmap packer. Use an arbitrarily id to reference it afterwards
-            final int id = markerCounter.addAndGet(1);
-            markerPacker.add(id, new AndroidBitmap(bitmap));
-            //2. Get the TextureRegion for the just added bitmap. Naturally it has to be in the last atlas of the bitmappacker
-            final TextureRegion region = markerPacker.getAtlasItem(markerPacker.getAtlasCount() - 1).getAtlas().getTextureRegion(id);
-            //3. Use the TextureRegion to create the symbol
-            symbol = new MarkerSymbol(region, xAnchor, yAnchor, !isFlat);
-            markerSymbolCache.put(key, symbol);
-            return symbol;
+        } catch (RuntimeException re) {
+            ctx.setException(re, true);
+            return defaultMarkerSymbol;
+        } finally {
+            ctx.close();
         }
+
     }
 
 
