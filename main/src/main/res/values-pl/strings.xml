@@ -1865,6 +1865,7 @@
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
     <string name="user_menu_send_email">Wyślij e-mail</string>
+    <string name="user_menu_open_contact">Wyszukaj w kontaktach</string>
     <string name="user_unknown">Nieznany użytkownik</string>
     <!-- navigation -->
     <string name="navigation">Nawigacja</string>
