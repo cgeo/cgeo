@@ -3,13 +3,13 @@
 - Korrektur: Option 'Aktuelle Liste verwenden' fehlt beim Erstellen eines benutzerdefinierten Caches (UnifiedMap)
 - Korrektur: Kompassrose durch Distanzansichten verdeckt (UnifiedMap)
 - Korrektur: Cache-Detailseite scrollt nach dem Bearbeiten der persönlichen Notiz an den Seitenanfang
-- New: Show event date to cache selector
+- Neu: Eventdatum bei Cache-Auswahl anzeigen
 - Korrektur: Die Anmeldung zu einer OC-Plattform wird vom Installationsassistenten nicht erkannt
 - Korrektur: Routing funktioniert standardmäßig nicht nach einer Neuinstallation
-- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Korrektur: Toolbar auf Cache-Infoseite im Querformat auch auf großen Geräten verdeckt
 - Korrektur: "Meinem Standort folgen" nach Zoomen mit gleichzeitigem Verschieben weiterhin aktiv (UnifiedMap)
 - Korrektur: Individuelle Routen, die als Track exportiert werden, können von Garmin-Geräten nicht gelesen werden
-- Fix: Loading trackables from internal database fails under certain conditions
+- Korrektur: Laden von Trackables aus der internen Datenbank schlägt unter bestimmten Bedingungen fehl
 
 ##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
