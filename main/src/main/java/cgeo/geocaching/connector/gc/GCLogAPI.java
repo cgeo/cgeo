@@ -200,8 +200,7 @@ public class GCLogAPI {
 
     }
 
-
-        public static String getUrlForNewTrackableLog(final String trackableCode) {
+    public static String getUrlForNewTrackableLog(final String trackableCode) {
         return WEBSITE_URL + "/live/trackable/" + trackableCode + "/log";
     }
 
