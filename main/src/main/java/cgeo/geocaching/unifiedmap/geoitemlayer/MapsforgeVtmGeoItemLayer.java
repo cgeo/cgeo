@@ -318,16 +318,22 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
                 }
 
                 //Create a new Marker Symbol
-                //For efficiency we use an image atlas (which is provided by VTM library)
-                //General info about image atlas can be found e.g. here: https://en.wikipedia.org/wiki/Texture_atlas
+                if (Settings.enableVtmMarkerAtlasUsage()) {
+                    //For efficiency we use an image atlas (which is provided by VTM library)
+                    //General info about image atlas can be found e.g. here: https://en.wikipedia.org/wiki/Texture_atlas
 
-                //1. Place the bitmap on an atlas of our bitmap packer. Use an arbitrarily id to reference it afterwards
-                final int id = markerCounter.addAndGet(1);
-                markerPacker.add(id, new AndroidBitmap(bitmap));
-                //2. Get the TextureRegion for the just added bitmap. Naturally it has to be in the last atlas of the bitmappacker
-                final TextureRegion region = markerPacker.getAtlasItem(markerPacker.getAtlasCount() - 1).getAtlas().getTextureRegion(id);
-                //3. Use the TextureRegion to create the symbol
-                symbol = new MarkerSymbol(region, xAnchor, yAnchor, !isFlat);
+                    //1. Place the bitmap on an atlas of our bitmap packer. Use an arbitrarily id to reference it afterwards
+                    final int id = markerCounter.addAndGet(1);
+                    markerPacker.add(id, new AndroidBitmap(bitmap));
+                    //2. Get the TextureRegion for the just added bitmap. Naturally it has to be in the last atlas of the bitmappacker
+                    final TextureRegion region = markerPacker.getAtlasItem(markerPacker.getAtlasCount() - 1).getAtlas().getTextureRegion(id);
+                    //3. Use the TextureRegion to create the symbol
+                    symbol = new MarkerSymbol(region, xAnchor, yAnchor, !isFlat);
+                } else {
+                    //create marker symbol w/o usage of atlas
+                    symbol = new MarkerSymbol(new AndroidBitmap(bitmap), xAnchor, yAnchor, !isFlat);
+                }
+                //cache the marker symbol and return it
                 markerSymbolCache.put(key, symbol);
                 return symbol;
             }

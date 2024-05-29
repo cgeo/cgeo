@@ -521,6 +521,7 @@
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
     <string translatable="false" name="pref_feature_unified_geoitem_layer">feature_unified_geoitem_layer</string>
     <string translatable="false" name="pref_vtm_single_marker_symbol">vtmSingleMarkerSymbol</string>
+    <string translatable="false" name="pref_vtm_marker_atlas_usage">vtmMarkerAtlasUsage</string>
 
 
 
