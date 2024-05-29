@@ -707,6 +707,10 @@ public class Settings {
         return getBoolean(R.string.pref_vtm_single_marker_symbol, false);
     }
 
+    public static boolean enableVtmMarkerAtlasUsage() {
+        return getBoolean(R.string.pref_vtm_marker_atlas_usage, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
