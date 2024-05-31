@@ -617,7 +617,8 @@ public class GeopointParser {
                 waypoints.add(best);
             }
 
-        } while (best != null && startIndex < text.length());
+        // Limit maximum scanned geopoints to 20 -> quickfix for #15687
+        } while (waypoints.size() < 20 && (best != null && startIndex < text.length()));
 
         return waypoints;
     }

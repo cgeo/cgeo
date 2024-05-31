@@ -527,6 +527,7 @@
     <string translatable="false" name="pref_feature_wherigo">feature_wherigo</string>
     <string translatable="false" name="pref_feature_wherigo_debug">feature_wherigo_debug</string>
     <string translatable="false" name="pref_vtm_single_marker_symbol">vtmSingleMarkerSymbol</string>
+    <string translatable="false" name="pref_vtm_marker_atlas_usage">vtmMarkerAtlasUsage</string>
 
 
 
