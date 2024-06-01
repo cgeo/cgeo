@@ -10,6 +10,7 @@
 - Corretto: "segui la mia posizione" ancora attiva dopo lo zoom con pan (UnifiedMap)
 - Corretto: i singoli percorsi esportati come traccia non possono essere letti dai dispositivi Garmin
 - Corretto: Caricamento dei trackables dal database interno che fallisce in determinate condizioni
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
 - Corretto: link dei tracciabili con il parametro TB non funzionante
