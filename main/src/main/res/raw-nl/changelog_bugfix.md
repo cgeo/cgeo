@@ -10,6 +10,7 @@
 - Fix: "volg mijn locatie" nog steeds actief na zoomen met pan (UnifiedMap)
 - Oplossing: Individuele routes geëxporteerd als track kunnen niet worden gelezen door Garmin apparaten
 - Oplossing: Het laden van trackables uit interne database mislukt onder bepaalde voorwaarden
+- Oplossing: Route naar navigatie doel niet herberekend bij verandering routering modus
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet
