@@ -10,6 +10,7 @@
 - Fix: "follow my location" still active after zoom with pan (UnifiedMap)
 - Fix: Individual routes exported as track cannot be read by Garmin devices
 - Fix: Loading trackables from internal database fails under certain conditions
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
 - Correction : les liens des objets voyageurs avec le paramètre TB ne fonctionnent pas
