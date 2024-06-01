@@ -10,6 +10,7 @@
 - Poprawka: Opcja „Podążaj za moją lokalizacją” była nadal aktywna po powiększeniu (UnifiedMap)
 - Poprawka: Indywidualne trasy eksportowane jako ślady nie mogą być odczytane przez urządzenia Garmin
 - Poprawka: Wczytywanie przedmiotów podróżnych z wewnętrznej bazy danych nie udawało się pod pewnymi warunkami
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały
