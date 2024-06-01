@@ -10,7 +10,7 @@
 - Korrektur: "Meinem Standort folgen" nach Zoomen mit gleichzeitigem Verschieben weiterhin aktiv (UnifiedMap)
 - Korrektur: Individuelle Routen, die als Track exportiert werden, können von Garmin-Geräten nicht gelesen werden
 - Korrektur: Laden von Trackables aus der internen Datenbank schlägt unter bestimmten Bedingungen fehl
-- Fix: Route to navigation target not recalculated on routing mode change
+- Korrektur: Route zum Navigationsziel wird beim Ändern des Routing-Modus nicht neu berechnet
 
 ##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
