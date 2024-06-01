@@ -10,6 +10,7 @@
 - Correcção: "seguir a minha localização" permanecia activa após ampliação com deslocamento (Mapa Unificado)
 - Correcção: Rotas individuais exportadas como percurso não podiam ser lidas por dispositivos Garmin
 - Correcção: carregar TBs da base de dados interna falhava em certas condições
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
 - Correcção: Ligações de TB com parâmetro TB não funcionavam
