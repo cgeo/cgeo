@@ -10,6 +10,7 @@
 - Oprava: "sledovat mou polohu" je stále aktivní po přiblížení s posunem (Sjednocená mapa)
 - Oprava: Jednotlivé trasy exportované jako stopy nemohou být načteny zařízeními Garmin
 - Oprava: Načítání trackovatelných položek z interní databáze za určitých podmínek selhává
+- Oprava: Trasa k navigačnímu cíli se nepřepočítává při změně režimu trasování
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
