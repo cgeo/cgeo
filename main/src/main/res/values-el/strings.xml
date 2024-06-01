@@ -1310,7 +1310,6 @@
     <string name="image_category_log">Αρχείο καταγραφής</string>
     <string name="context_map_add_to_route">Προσθήκη στη διαδρομή</string>
     <string name="context_map_add_to_route_start">Προσθήκη στη διαδρομή</string>
-    <string name="context_map_show_coords">Εμφάνιση συντεταγμένων</string>
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
     <string name="create_internal_cache_short">Νέα κρύπτη</string>
     <string name="create_internal_cache_currentlist">Χρήση τρέχουσας λίστας</string>

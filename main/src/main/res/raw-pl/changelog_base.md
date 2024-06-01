@@ -18,9 +18,9 @@
 - Nowość: Nowa formuła CHARS (krótka forma: CH), aby wybrać wiele pojedynczych znaków
 - Poprawka: Niewłaściwy wynik dla funkcji TRUNC z ujemnymi liczbami
 - Poprawka: Nie można obliczyć wzorów zaczynających się od zmiennej podobnej do znacznika półkuli
-- Fix: Email links in cache listings do not open if custom webview is enabled
+- Poprawka: Linki e-mail w listingach skrytek nie otwierają się, jeśli włączony jest niestandardowy widok internetowy
 
-### General
+### Ogólne
 - Nowość: Dotknięcie powiadomienia o pobieraniu otwiera widok „oczekujące pobierania”
 - Zmiana: Używanie tapety jako tła nie wymaga już uprawnień READ_EXTERNAL_STORAGE
 - Nowość: Układ dwukolumnowy dla ustawień w trybie poziomym

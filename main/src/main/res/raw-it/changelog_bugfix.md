@@ -1,32 +1,46 @@
 ##
-- Fix: Trackable links with TB parameter not working
-- New: Add hint to disabled keyword search for basic members
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Corretto: cache che non si caricano dopo aver abilitato la mappa live (UnifiedMap)
+- Corretto: Manca l'opzione 'usa la lista corrente' per creare un cache definito dall'utente (UnifiedMap)
+- Corretto: Bussola nascosta dietro le viste a distanza (UnifiedMap)
+- Corretto: i dettagli della cache scorrono nell'intestazione della pagina dopo aver modificato la nota personale
+- Nuovo: Mostra la data dell'evento al selettore della cache
+- Corretto: Login alla piattaforma OC non riconosciuto dalla procedura guidata di installazione
+- Corretto: Routing non funziona di default dopo nuova installazione
+- Corretto: Info foglio barra degli strumenti nascosta in modalità orizzontale anche su dispositivi di grandi dimensioni
+- Corretto: "segui la mia posizione" ancora attiva dopo lo zoom con pan (UnifiedMap)
+- Corretto: i singoli percorsi esportati come traccia non possono essere letti dai dispositivi Garmin
+- Corretto: Caricamento dei trackables dal database interno che fallisce in determinate condizioni
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Corretto: link dei tracciabili con il parametro TB non funzionante
+- Nuovo: Aggiunto suggerimento per la ricerca disabilitata per parole chiave per gli utenti base
+- Corretto: la registrazione dei tracciabili non funziona di nuovo (modifica del sito web)
+- Corretto: informazioni di elevazione ruotano con il marcatore di posizione
+- Corretto: Nome utente non rilevato durante il login quando contiene determinati caratteri speciali
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Corretto: Mostra/nascondi i waypoint non funziona correttamente se attraversano i limiti dei waypoint (UnifiedMap)
+- Corretto: i log di cache o tracciabili non funzionano più (modifica del sito)
+- Corretto: L'eliminazione dei propri log non funziona
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Corretto: contatore dei "trovati" non rilevato in determinate situazioni a causa di cambiamenti del sito
+- Corretto: Errore durante l'apertura della mappa con nomi dei file della traccia vuoti
+- Corretto: la rotazione automatica della mappa è ancora attiva dopo aver reimpostato la bussola rosa (UnifiedMap)
+- Risolto: Bussola mancante nella modalità di autorotazione su Google Maps (UnifiedMap)
+- Corretto: i log dei tracciabili non possono essere caricati a causa di modifiche del sito
+- Cambio: combina l'elevazione + informazioni sulle coordinate nel menu a lungo tocco della mappa in una singola "posizione selezionata" + mostra la distanza dalla posizione corrente
+
+##
+- Nuovo: Eliminazione dei log offline usando il menu contestuale
+- Corretto: L'eliminazione del log offline non funzionava in determinate condizioni
+- Corretto: il nome del filtro veniva perso nel cambio rapido del filtro
+- Cambio: Ordina i trackfiles per nome
+- Modifica: Salva azione tracciabile anche per i log offline
+- Corretto: Passaggio della mappa alle coordinate 0,0 con il cambiamento del tipo di mappa (UnifiedMap)
+- Corretto: Waypoint target che torna alla cache come destinazione (UnifiedMap)
+- Corretto: "Archiviare" un cache senza selezionare un elenco
+- Corretto: Errore di accesso su geocaching.com a causa del cambiamento del sito web
+- Cambio: Mostra le informazioni di elevazione sotto l'indicatore di posizione (se attivato)
+- NOTA: Ci sono ulteriori problemi, dovuti alle recenti modifiche del sito web geocaching.com, che non sono ancora stati risolti. Ci stiamo lavorando. Vedi la nostra [ pagina di stato](https://github.com/cgeo/cgeo/issues/15555) per i progressi attuali.

@@ -1,32 +1,46 @@
 ##
-- Fix: Trackable links with TB parameter not working
-- New: Add hint to disabled keyword search for basic members
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Исправлено: Тайники не загружались после включения онлайн карты (ЕдинаяКарта)
+- Исправлено: Отсутствовала опция «использовать текущий список» при создании определенного пользователем тайника (ЕдинаяКарта)
+- Исправление: роза компаса была скрыта за отображением расстояния (ЕдинаяКарта)
+- Исправлено: информация о тайнике выводилась на заголовок страницы после редактирования личной заметки
+- New: Show event date to cache selector
+- Fix: Login to OC platform not recognized by installation wizard
+- Fix: Routing not working by default after fresh installation
+- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
+- Fix: Individual routes exported as track cannot be read by Garmin devices
+- Fix: Loading trackables from internal database fails under certain conditions
+- Fix: Route to navigation target not recalculated on routing mode change
 
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Исправлено: геокротовые ссылки с TB параметром не работали
+- Новое: Добавлена подсказка к отключенному поиску по ключевым словам для базовых пользователей
+- Исправлено: Кротовые записи снова не работали в связи с изменениями на сайте
+- Исправлено: Информация о высоте вращалась вместе с указателем положения
+- Исправлено: Имя пользователя не обнаруживалось при входе в систему если содержало специальные символы
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Исправлено: Отображение/сокрытие путевых точек не работало корректно при пересечении границ путевых точек (ЕдинаяКарта)
+- Исправлено: запись в тайники и геокротов не работала в связи с изменениями на веб-сайте
+- Исправлено: Невозможно было удалить собственные записи
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Исправлено: Найденный счетчик не обнаруживался в определенных ситуациях из-за изменений на веб-сайте
+- Исправлено: Сбой при открытии карты с пустым названием файла трека
+- Исправлено: автоматическое вращение карты оставалось активным после сброса с помощью направления компаса (ЕдинаяКарта)
+- Исправлено: Отсутствовала стрелка компаса в режимах авторотации на Google Maps (ЕдинаяКарта)
+- Исправлено: Отслеживаемые записи не могли быть загружены из-за изменений на веб-сайте
+- Изменение: Объединение высоты + информации о координатах в меню путем длинного нажатия на карте в одну "выбранную позицию" + показать расстояние до текущей позиции
+
+##
+- Новое: Удаление оффлайновых записей с помощью контекстного меню
+- Исправлено: Удаление оффлайновых записей не работало при определенных условиях
+- Исправлено: Название фильтра терялось при быстрой смене фильтра
+- Изменение: Сортировка файлов треков по названию
+- Изменение: Сохранение отслеживаемых действий также для оффлайновых записей
+- Исправлено: переключение карты на координаты 0,0 при изменении типа карты (ЕдинаяКарта)
+- Исправлено: Целевая точка маршрута переключалась обратно на координаты тайника в качестве цели (ЕдинаяКарта)
+- Исправлено: "Сохранение" тайника без выбора списка
+- Исправлено: ошибка входа в систему из-за изменений на веб-сайте geocaching.com
+- Изменение: Отображение информации о высоте под маркером местоположения (если активировано)
+- ПРИМЕЧАНИЕ: В связи с недавними изменениями на веб-сайте geocaching.com возникли дополнительные проблемы, которые пока не были исправлены. Мы работаем над этим. Смотрите нашу [страницу состояния](https://github.com/cgeo/cgeo/issues/15555) для оценки текущего прогресса.
