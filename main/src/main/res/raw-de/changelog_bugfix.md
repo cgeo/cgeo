@@ -11,7 +11,7 @@
 - Korrektur: Individuelle Routen, die als Track exportiert werden, können von Garmin-Geräten nicht gelesen werden
 - Korrektur: Laden von Trackables aus der internen Datenbank schlägt unter bestimmten Bedingungen fehl
 - Korrektur: Route zum Navigationsziel wird beim Ändern des Routing-Modus nicht neu berechnet
-- Fix: Error while reading available trackable log types
+- Korrektur: Fehler beim Lesen der verfügbaren Logaktionen für Trackables
 
 ##
 - Korrektur: Trackable Links mit TB-Parameter funktionieren nicht
