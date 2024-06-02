@@ -11,6 +11,7 @@
 - Fix: Individual routes exported as track cannot be read by Garmin devices
 - Fix: Loading trackables from internal database fails under certain conditions
 - Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
 
 ##
 - Исправлено: геокротовые ссылки с TB параметром не работали
