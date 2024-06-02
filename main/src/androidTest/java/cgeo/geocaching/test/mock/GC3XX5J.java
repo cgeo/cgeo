@@ -55,6 +55,7 @@ public class GC3XX5J extends MockedCache {
         return 2.0f;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.TRADITIONAL;
@@ -72,6 +73,7 @@ public class GC3XX5J extends MockedCache {
         return "Murncki";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "SLO:<br>";
@@ -87,6 +89,7 @@ public class GC3XX5J extends MockedCache {
         return "51e40dec-6272-4dad-934b-e175daaac265";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Slovenia";
@@ -120,6 +123,7 @@ public class GC3XX5J extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
@@ -134,11 +138,13 @@ public class GC3XX5J extends MockedCache {
         return 1;
     }
 
+    @NonNull
     @Override
     public String getHint() {
         return "Odmakni kamen ob tiru / Remove the stone wich lies beside the rail";
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "Kadar zbolimo nam pomaga...<br> <br> When we get sick, they are helpful...";

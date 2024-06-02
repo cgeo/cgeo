@@ -64,21 +64,25 @@ public class GC3FJ5F extends MockedCache {
         return 2.0f;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.MULTI;
     }
 
+    @NonNull
     @Override
     public String getHint() {
         return "[FINAL] Geteilter Baumstumpf, dann ganz unten (Spoiler-Bild)";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "<b>Update 31.12.2014:</b><br> Koordinaten für Station 2 neu eingemessen.<br>";
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "<b>Spaziergang durch den Velberter Herminghauspark.</b><br> <br> Ich möchte euch einen Besuch im Velberter Herminghauspark nahelegen. Hier wurde in den letzten Jahren viel getan um den Park attraktiv für Besucher und insbesondere für Familien zu machen. Aber seht selbst...<br>";
@@ -94,6 +98,7 @@ public class GC3FJ5F extends MockedCache {
         return "ba954eb7-29c5-4b4a-a6d8-8546b05b5bae";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Nordrhein-Westfalen, Germany";
@@ -143,6 +148,7 @@ public class GC3FJ5F extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
