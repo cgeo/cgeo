@@ -1,4 +1,19 @@
 ##
+- Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
+- Oprava: Chybějící možnost 'použít aktuální seznam' při vytváření uživatelsky definované kešky (Sjednocená mapa)
+- Oprava: Kompasová růžice skrytá za zobrazením vzdáleností (Sjednocená mapa)
+- Oprava: Přesun podrobností o kešce do záhlaví stránky po úpravě osobní poznámky
+- Novinka: Zobrazení data eventu ve výběru kešku
+- Oprava: Průvodce instalací nerozpoznal přihlášení k platformě OC
+- Oprava: Po čerstvé instalaci nefunguje směrování ve výchozím nastavení
+- Oprava: Panel nástrojů informačního listu skrytý v režimu na šířku i na velkých zařízeních
+- Oprava: "sledovat mou polohu" je stále aktivní po přiblížení s posunem (Sjednocená mapa)
+- Oprava: Jednotlivé trasy exportované jako stopy nemohou být načteny zařízeními Garmin
+- Oprava: Načítání trackovatelných položek z interní databáze za určitých podmínek selhává
+- Oprava: Trasa k navigačnímu cíli se nepřepočítává při změně režimu trasování
+- Fix: Error while reading available trackable log types
+
+##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
 - Novinka: Přidání nápovědy k zakázanému vyhledávání klíčových slov pro základní členy
 - Oprava: Trasovatelné logování opět nefunguje (změny na webu)

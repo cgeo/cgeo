@@ -1,4 +1,19 @@
 ##
+- Fix: Caches not loading after enabling live map (UnifiedMap)
+- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
+- Fix: Compass rose hidden behind distance views (UnifiedMap)
+- Fix: Cache details scroll to page header after editing personal note
+- New: Show event date to cache selector
+- Fix: Login to OC platform not recognized by installation wizard
+- Fix: Routing not working by default after fresh installation
+- Fix: Info sheet toolbar hidden in landscape mode even on large devices
+- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
+- Fix: Individual routes exported as track cannot be read by Garmin devices
+- Fix: Loading trackables from internal database fails under certain conditions
+- Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
+
+##
 - Fix: Trackable links with TB parameter not working
 - New: Add hint to disabled keyword search for basic members
 - Fix: Trackable logging not working again (website changes)

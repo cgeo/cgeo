@@ -1,32 +1,47 @@
 ##
-- Fix: Trackable links with TB parameter not working
-- New: Add hint to disabled keyword search for basic members
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
+- Correcção: Falta a opção 'usar lista actual" na criação de cache definida pelo utilizador (Mapa Unificado)
+- Correcção: Bússola escondida atrás das visualizações de distância (Mapa Unificado)
+- Correcção: Descrição da cache volta ao início, para o cabeçalho da página, após a edição da nota pessoal
+- Novo: Mostrar data do evento no selector de cache
+- Correcção: Início de sessão na plataforma OC não era reconhecida pelo assistente de instalação
+- Correcção: Encaminhamento não funcionava por padrão, após uma nova instalação
+- Correcção: Barra de Ferramentas da página de informações ficava escondida no modo paisagem, até mesmo em dispositivos grandes
+- Correcção: "seguir a minha localização" permanecia activa após ampliação com deslocamento (Mapa Unificado)
+- Correcção: Rotas individuais exportadas como percurso não podiam ser lidas por dispositivos Garmin
+- Correcção: carregar TBs da base de dados interna falhava em certas condições
+- Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
 
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- Correcção: Ligações de TB com parâmetro TB não funcionavam
+- Novo: Adicionada mensagem para a busca por palavra-chave para membros básicos desactivada
+- Correcção: Registo de TBs não funcionavam novamente (alterações no sítio web)
+- Correcção: As informações de elevação rodavam com o marcador de posição
+- Correcção: Nome de utilizador não detectado durante o início de sessão, se tivesse certos caracteres especiais
 
 ##
-- Fix: Found counter not detected in certain situations due to website changes
-- Fix: Crash on opening map with empty track file names
-- Fix: Map auto rotation still active after reset using compass rose (UnifiedMap)
-- Fix: Missing compass rose in autorotation modes on Google Maps (UnifiedMap)
-- Fix: Trackable logs cannot be loaded due to website changes
-- Change: Combine elevation + coordinate info in map long-tap menu into single "selected position" + show distance to current position
+- Correcção: Mostrar/ocultar pontos adicionais não funcionava correctamente se ultrapassasse os limites do ponto adicional (Mapa Unificado)
+- Correcção: Registo de caches ou TB deixaram de funcionar (mudanças no sítio web)
+- Correcção: A eliminação dos registos pessoais não funcionava
 
 ##
-- New: Delete offline logs using context menu
-- Fix: Deleting offline log not working under certain condition
-- Fix: Filter name lost on filter quickchange
-- Change: Sort trackfiles by name
-- Change: Save trackable action also for offline logs
-- Fix: Map switching to 0,0 coordinates on map type change (UnifiedMap)
-- Fix: Waypoint target switching back to cache as target (UnifiedMap)
-- Fix: "Storing" a cache without selecting a list
-- Fix: Login failure due to website change on geocaching.com
-- Change: Show elevation info below position marker (if activated)
-- NOTE: There are more issues due to recent website changes on geocaching.com, which have not been fixed yet. We are working on it. See our [status page](https://github.com/cgeo/cgeo/issues/15555) for current progress.
+- Correcção: O contador de "encontradas" não era detectado em certas situações devido a mudanças no sítio web
+- Correcção: Falha na abertura do mapa com nomes de ficheiro de percurso vazios
+- Correcção: Rotação automática do mapa ainda activa após repor definições usando a bússola (Mapa Unificado)
+- Correcção: Bússola ausente nos modos de autorrotação no Google Maps (Mapa Unificado)
+- Correcção: Registos dos TB não eram carregados devido a alterações no sítio web
+- Alteração: Combinar elevação + informações das coordenadas no menu de toque longo no mapa numa única "posição selecionada" + mostrar distância até à posição actual
+
+##
+- Novo: Apagar registos offline através de menu de contexto
+- Correcção: Apagar o registo offline não funcionava em determinada condição
+- Correcção: Nome de filtro perdido na mudança rápida do filtro
+- Alteração: Ordenar ficheiros de percurso pelo nome
+- Alteração: Guardar acção do TB também para registos offline
+- Correcção: Mudança do mapa para as coordenadas 0,0 na alteração do tipo de mapa (Mapa Unificado)
+- Correcção: Destino do ponto adicional voltava para a cache, como destino (Mapa Unificado)
+- Correcção: "Armazenar" uma cache sem seleccionar uma lista
+- Correcção: Falha de início de sessão devido a alteração no sítio web 'geocaching.com'
+- Alteração: Mostrar informação de elevação por baixo do marcador de posição (se activado)
+- NOTA: Existem mais problemas devido a mudanças recentes no sítio Web geocaching.com, que ainda não foram corrigidos. Estamos a trabalhar para solucionar o problema. Veja a nossa [página de estado ](https://github.com/cgeo/cgeo/issues/15555) para saber do progresso actual.

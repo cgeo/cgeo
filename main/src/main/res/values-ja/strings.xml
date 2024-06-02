@@ -1214,7 +1214,6 @@
     <string name="image_category_log">ログ</string>
     <string name="context_map_add_to_route">ルートの最後に追加</string>
     <string name="context_map_add_to_route_start">ルートの最初に追加</string>
-    <string name="context_map_show_coords">座標を表示</string>
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="create_internal_cache_short">新しいキャッシュ</string>
     <string name="create_internal_cache_currentlist">現在のリストを使用</string>

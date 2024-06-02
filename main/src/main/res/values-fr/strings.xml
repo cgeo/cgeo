@@ -1502,7 +1502,6 @@
     <string name="context_map_remove_from_route_start">Retirer depuis le début</string>
     <string name="context_map_remove_from_route_pos">Retirer de la position %d</string>
     <string name="context_map_remove_from_route_end">Retirer depuis la fin</string>
-    <string name="context_map_show_coords">Afficher les coordonnées</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
