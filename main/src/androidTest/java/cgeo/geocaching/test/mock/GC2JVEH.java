@@ -71,21 +71,25 @@ public class GC2JVEH extends MockedCache {
         return CacheSize.SMALL;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.MYSTERY;
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "Aufgabe zum Start: Finde die Schattenlinie. !!!Die Skizze mit den Zahlen solltest du mitnehmen!!! Du solltest den cache so beginnen, das du station 2 in der Zeit von mo- fr von 11-19 Uhr und sa von 11-16 Uhr erledigt hast. Achtung: Damit ihr die Zahlenpause in druckbarer Größe sehen könnt müsst ihr über die Bildergalerie gehen nicht über den unten zu sehenden link.....";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "<img src=\"http://img.geocaching.com/cache/large/1711f8a1-796a-405b-82ba-8685f2e9f024.jpg\">";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Niedersachsen, Germany";
@@ -116,6 +120,7 @@ public class GC2JVEH extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);

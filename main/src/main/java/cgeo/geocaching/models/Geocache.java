@@ -2044,7 +2044,7 @@ public class Geocache implements IWaypoint {
         return scheduler.scheduleDirect(() -> refreshSynchronous(handler));
     }
 
-    public void refreshSynchronous(@NonNull final DisposableHandler handler) {
+    public void refreshSynchronous(@Nullable final DisposableHandler handler) {
         refreshSynchronous(handler, lists);
     }
 
@@ -2207,8 +2207,6 @@ public class Geocache implements IWaypoint {
 
     /**
      * guess an event start time from the description
-     *
-     * @return start time in minutes after midnight
      */
     private void guessEventTimeMinutes() {
         if (!isEventCache()) {

@@ -108,11 +108,13 @@ public abstract class MockedCache extends Geocache {
         return false;
     }
 
+    @NonNull
     @Override
     public String getHint() {
         return "";
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "";

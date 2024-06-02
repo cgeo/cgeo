@@ -69,21 +69,25 @@ public class GC2CJPF extends MockedCache {
         return 2.0f;
     }
 
+    @NonNull
     @Override
     public CacheType getType() {
         return CacheType.MULTI;
     }
 
+    @NonNull
     @Override
     public String getHint() {
         return "Das Final ist unter Steinen";
     }
 
+    @NonNull
     @Override
     public String getDescription() {
         return "Kleiner Multi über 7 Stationen";
     }
 
+    @NonNull
     @Override
     public String getShortDescription() {
         return "Von Nachwuchs-Cachern für Nachwuchs-Cacher.";
@@ -99,6 +103,7 @@ public class GC2CJPF extends MockedCache {
         return "73246a5a-ebb9-4d4f-8db9-a951036f5376";
     }
 
+    @NonNull
     @Override
     public String getLocation() {
         return "Niedersachsen, Germany";
@@ -161,6 +166,7 @@ public class GC2CJPF extends MockedCache {
         return new MockedLazyInitializedList<>(attributes);
     }
 
+    @NonNull
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new EnumMap<>(LogType.class);
