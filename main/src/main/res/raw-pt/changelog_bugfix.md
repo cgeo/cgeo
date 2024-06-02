@@ -11,6 +11,7 @@
 - Correcção: Rotas individuais exportadas como percurso não podiam ser lidas por dispositivos Garmin
 - Correcção: carregar TBs da base de dados interna falhava em certas condições
 - Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
 
 ##
 - Correcção: Ligações de TB com parâmetro TB não funcionavam

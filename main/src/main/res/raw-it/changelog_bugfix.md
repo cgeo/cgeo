@@ -11,6 +11,7 @@
 - Corretto: i singoli percorsi esportati come traccia non possono essere letti dai dispositivi Garmin
 - Corretto: Caricamento dei trackables dal database interno che fallisce in determinate condizioni
 - Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
 
 ##
 - Corretto: link dei tracciabili con il parametro TB non funzionante

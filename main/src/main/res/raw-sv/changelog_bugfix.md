@@ -11,6 +11,7 @@
 - Fix: Individual routes exported as track cannot be read by Garmin devices
 - Fix: Laddar spårbara objekt från intern databas misslyckas under vissa förhållanden
 - Fix: Route to navigation target not recalculated on routing mode change
+- Fix: Error while reading available trackable log types
 
 ##
 - Fix: Trackable links with TB parameter not working
