@@ -11,7 +11,7 @@
 - Oprava: Jednotlivé trasy exportované jako stopy nemohou být načteny zařízeními Garmin
 - Oprava: Načítání trackovatelných položek z interní databáze za určitých podmínek selhává
 - Oprava: Trasa k navigačnímu cíli se nepřepočítává při změně režimu trasování
-- Fix: Error while reading available trackable log types
+- Oprava: Chyba při načítání dostupných typů sledovatelných logů
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB
