@@ -11,7 +11,7 @@
 - Poprawka: Indywidualne trasy eksportowane jako ślady nie mogą być odczytane przez urządzenia Garmin
 - Poprawka: Wczytywanie przedmiotów podróżnych z wewnętrznej bazy danych nie udawało się pod pewnymi warunkami
 - Poprawka: Trasa do celu nawigacji nie była ponownie obliczana przy zmianie trybu prowadzenia
-- Fix: Error while reading available trackable log types
+- Poprawka: Błąd podczas odczytywania dostępnych typów logów przedmiotów podróżnych
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały
