@@ -11,7 +11,7 @@
 - Oplossing: Individuele routes geëxporteerd als track kunnen niet worden gelezen door Garmin apparaten
 - Oplossing: Het laden van trackables uit interne database mislukt onder bepaalde voorwaarden
 - Oplossing: Route naar navigatie doel niet herberekend bij verandering routering modus
-- Fix: Error while reading available trackable log types
+- Oplossing: Fout tijdens het lezen van beschikbare trackable logtypes
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet
