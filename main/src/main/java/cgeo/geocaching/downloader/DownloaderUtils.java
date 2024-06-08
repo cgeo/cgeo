@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
@@ -34,7 +35,6 @@ import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Toast;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 import androidx.annotation.NonNull;
@@ -363,7 +363,7 @@ public class DownloaderUtils {
             final Activity activity = activityRef.get();
             if (activity != null) {
                 if (result.size() == 0) {
-                    Toast.makeText(activity, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
+                    ViewUtils.showShortToast(activity, R.string.no_updates_found);
                 } else {
                     triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result, null);
                 }

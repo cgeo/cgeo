@@ -7,6 +7,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
@@ -20,7 +21,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -137,7 +137,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
         ContextCompat.startForegroundService(context, intent);
-        Toast.makeText(context, R.string.download_started, Toast.LENGTH_LONG).show();
+        ViewUtils.showToast(context, R.string.download_started);
 
         if (onStartCallback != null) {
             onStartCallback.run();

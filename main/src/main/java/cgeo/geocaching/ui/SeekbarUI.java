@@ -15,7 +15,6 @@ import android.view.ContextThemeWrapper;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -156,7 +155,7 @@ public class SeekbarUI extends LinearLayout {
                             }
                             valueView.setText(getValueString(newProgress));
                         } catch (NumberFormatException e) {
-                            Toast.makeText(getContext(), R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(getContext(), R.string.number_input_err_format);
                         }
                     });
         });

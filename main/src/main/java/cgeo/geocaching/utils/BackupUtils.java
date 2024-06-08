@@ -19,6 +19,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import static cgeo.geocaching.utils.SettingsUtils.SettingsType.TYPE_STRING;
@@ -37,7 +38,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -169,7 +169,7 @@ public class BackupUtils {
     /* Public methods containing question dialogs, etc */
 
     public void selectBackupDirIntent() {
-        Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
+        ViewUtils.showToast(activityContext, R.string.init_backup_restore_different_backup_explanation);
         fileSelector.selectFolder(PersistableFolder.BACKUP.getUri());
     }
 
@@ -184,7 +184,7 @@ public class BackupUtils {
         }
 
         if (!hasBackup(backupDir)) {
-            Toast.makeText(activityContext, R.string.init_backup_no_backup_available, Toast.LENGTH_LONG).show();
+            ViewUtils.showToast(activityContext, R.string.init_backup_no_backup_available);
             return;
         }
 
@@ -542,7 +542,7 @@ public class BackupUtils {
     private void backupInternal(final Runnable runAfterwards, final boolean autobackup) {
         final Folder backupDir = getNewBackupFolder(System.currentTimeMillis(), autobackup);
         if (backupDir == null) {
-            Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
+            ViewUtils.showToast(activityContext, R.string.init_backup_folder_exists_error);
             return;
         }
 

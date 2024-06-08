@@ -7,6 +7,7 @@ import cgeo.geocaching.databinding.ViewSettingsAddBinding;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -27,7 +28,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -297,13 +297,13 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                     final String preferenceName = binding.preferenceName.getText().toString().trim();
                     final int rbId = rg.getCheckedRadioButtonId();
                     if (rbId == -1) {
-                        Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
+                        ViewUtils.showShortToast(this, R.string.add_setting_missing_type);
                     } else {
                         final SettingsUtils.SettingsType preferenceType = getType(((RadioButton) rg.findViewById(rbId)).getText().toString());
                         if (StringUtils.isBlank(preferenceName)) {
-                            Toast.makeText(this, R.string.add_setting_missing_name, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(this, R.string.add_setting_missing_name);
                         } else if (findItem(preferenceName) != -1) {
-                            Toast.makeText(this, R.string.add_setting_already_exists, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(this, R.string.add_setting_already_exists);
                         } else {
                             final KeyValue newItem = new KeyValue(preferenceName, preferenceType.getDefaultString(), preferenceType);
                             final SharedPreferences.Editor editor = prefs.edit();

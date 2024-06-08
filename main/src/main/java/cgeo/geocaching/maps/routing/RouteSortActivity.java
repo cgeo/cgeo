@@ -14,6 +14,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
@@ -29,7 +30,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -192,7 +192,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItemAdapter.getItems()), () -> {
                 originalRouteItems = new ArrayList<>(routeItemAdapter.getItems());
                 invalidateOptionsMenu();
-                Toast.makeText(this, R.string.sorted_route_saved, Toast.LENGTH_SHORT).show();
+                ViewUtils.showShortToast(this, R.string.sorted_route_saved);
                 finish();
             });
             return true;

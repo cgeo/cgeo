@@ -87,7 +87,6 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import androidx.annotation.NonNull;
@@ -865,7 +864,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         Settings.setRoutingMode(newValue);
         final Tracks tracks = mapActivity.getTracks();
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
-            Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(activity, R.string.brouter_recalculating);
         }
         reloadIndividualRoute();
         if (null != tracks) {

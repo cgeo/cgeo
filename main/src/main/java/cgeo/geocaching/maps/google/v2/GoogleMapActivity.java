@@ -17,6 +17,7 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
@@ -36,7 +37,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -269,7 +269,7 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
             if (targetInfo != null) {
                 if (Settings.isAutotargetIndividualRoute()) {
                     Settings.setAutotargetIndividualRoute(false);
-                    Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                    ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
                 }
                 mapBase.setTarget(targetInfo.coords, targetInfo.geocode);
             }
@@ -319,7 +319,7 @@ public class GoogleMapActivity extends AbstractNavigationBarMapActivity implemen
     public void onReceiveTargetUpdate(final AbstractDialogFragment.TargetInfo targetInfo) {
         if (Settings.isAutotargetIndividualRoute()) {
             Settings.setAutotargetIndividualRoute(false);
-            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
         }
         mapBase.setTarget(targetInfo.coords, targetInfo.geocode);
     }

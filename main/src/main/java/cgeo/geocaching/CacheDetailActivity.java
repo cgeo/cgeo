@@ -148,7 +148,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
-import android.widget.Toast;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
@@ -782,7 +781,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private void setCacheIcon(final int newCacheIcon) {
         cache.setAssignedEmoji(newCacheIcon);
         saveAndNotify(LoadFlags.SAVE_ALL);
-        Toast.makeText(this, R.string.cache_icon_updated, Toast.LENGTH_SHORT).show();
+        ViewUtils.showShortToast(this, R.string.cache_icon_updated);
         notifyDataSetChanged();
     }
 
@@ -1187,7 +1186,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     cachename.setText(name);
                     cache.setName(name);
                     CacheDetailActivity.saveAndNotify(getContext(), cache, LoadFlags.SAVE_ALL);
-                    Toast.makeText(activity, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
+                    ViewUtils.showShortToast(activity, R.string.cache_name_updated);
                 }));
             }
 
@@ -1852,7 +1851,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                 descriptionView.setText(description);
                                 cache.setDescription(description);
                                 saveAndNotify(activity, cache, LoadFlags.SAVE_ALL);
-                                Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(activity, R.string.cache_description_updated);
                             }));
                 } else {
                     descriptionView.setOnClickListener(null);

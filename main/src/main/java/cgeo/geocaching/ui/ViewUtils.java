@@ -8,6 +8,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ScalableDrawable;
@@ -26,6 +27,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;
@@ -51,6 +54,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.AttrRes;
@@ -433,6 +437,69 @@ public class ViewUtils {
 
         return null;
 
+    }
+
+    public static boolean currentThreadIsUiThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
+    }
+
+    public static void runOnUiThread(final Runnable action) {
+        if (action == null) {
+            return;
+        }
+        if (currentThreadIsUiThread()) {
+            action.run();
+        } else {
+            AndroidRxUtils.runOnUi(action);
+        }
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a short toast with a simple text */
+    public static void showShortToast(@Nullable final Context context, final String message) {
+        showToast(context, TextParam.text(message), true);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a short toast with a resource id */
+    public static void showShortToast(@Nullable final Context context, final int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), true);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a normal-length toast with a simple text */
+    public static void showToast(@Nullable final Context context, final String message) {
+        showToast(context, TextParam.text(message), false);
+    }
+
+    /** convenience method to call {@link #showToast(Context, TextParam, boolean)} for a normal-length toast with a resource id */
+    public static void showToast(@Nullable final Context context, final int resId, final Object ... params) {
+        showToast(context, TextParam.id(resId, params), false);
+    }
+
+    /**
+     * Shows a toast message to the user. This can be called from any thread.
+     *
+     * @param context any context, usually an activity. If context is null, then the application context will be used.
+     * @param text    the message
+     * @param shortToast set to true if this should be a short toast
+     */
+    public static void showToast(@Nullable final Context context, final TextParam text, final boolean shortToast) {
+        runOnUiThread(() -> {
+            final Context toastContext = wrap(context == null || (context instanceof Activity && ((Activity) context).isFinishing()) ?
+                    CgeoApplication.getInstance() : context);
+            final int toastDuration = shortToast ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG;
+            final CharSequence toastText = text == null ? "---" : text.getText(toastContext);
+
+            Log.iForce("[" + (context == null ? "APP" : context.getClass().getName()) + "].showToast(" + toastText + "){" + (shortToast ? "SHORT" : "LONG") + "}");
+            try {
+                final Toast toast = Toast.makeText(toastContext, toastText, toastDuration);
+                if (Build.VERSION.SDK_INT < 30) {
+                    toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM, 0, 100);
+                }
+                toast.show();
+            } catch (RuntimeException re) {
+                //this can happen e.g. in Unit tests when thread has no called Looper.prepare()
+                Log.w("Could not show toast '" + toastText + "' to user", re);
+            }
+        });
     }
 
     /**
