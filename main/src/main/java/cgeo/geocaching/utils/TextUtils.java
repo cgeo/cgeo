@@ -207,16 +207,6 @@ public final class TextUtils {
     }
 
     /**
-     * @param str input string
-     *            As of performance reasons we non't use a REGEX here. Don't use this function for strings which could contain new-line characters like "\r\n" or "\r"
-     * @return normalized String Length like it is counted at the gc website (count UNIX new-line character "\n" as two characters)
-     */
-    public static int getNormalizedStringLength(@NonNull final String str) {
-        final String newStr = str.trim();
-        return StringUtils.countMatches(newStr, "\n") + newStr.length();
-    }
-
-    /**
      * Quick and naive check for possible rich HTML content in a string.
      *
      * @param str A string containing HTML code.
