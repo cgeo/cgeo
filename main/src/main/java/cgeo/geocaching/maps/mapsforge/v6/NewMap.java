@@ -109,7 +109,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -552,7 +551,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
-            Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.brouter_recalculating);
         }
         reloadIndividualRoute();
         if (null != tracks) {
@@ -1038,7 +1037,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     public void onReceiveTargetUpdate(final TargetInfo targetInfo) {
         if (Settings.isAutotargetIndividualRoute()) {
             Settings.setAutotargetIndividualRoute(false);
-            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
         }
         setTarget(targetInfo.coords, targetInfo.geocode);
     }
@@ -1529,7 +1528,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 if (targetInfo != null) {
                     if (Settings.isAutotargetIndividualRoute()) {
                         Settings.setAutotargetIndividualRoute(false);
-                        Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+                        ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
                     }
                     setTarget(targetInfo.coords, targetInfo.geocode);
                 }

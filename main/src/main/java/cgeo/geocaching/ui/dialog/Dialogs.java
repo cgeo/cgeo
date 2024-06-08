@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -353,11 +352,11 @@ public final class Dialogs {
         float newValue = currentValue;
         if (newValue > maxValue) {
             newValue = maxValue;
-            Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(context, R.string.number_input_err_boundarymax);
         }
         if (newValue < minValue) {
             newValue = minValue;
-            Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(context, R.string.number_input_err_boundarymin);
         }
         return newValue;
     }

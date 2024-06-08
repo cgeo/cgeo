@@ -100,7 +100,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -647,7 +646,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
         if ((null != viewModel.individualRoute && viewModel.individualRoute.getValue().getNumSegments() > 0) || null != viewModel.getTracks()) {
-            Toast.makeText(this, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.brouter_recalculating);
         }
         viewModel.reloadIndividualRoute();
         viewModel.reloadTracks(routeTrackUtils);
@@ -877,7 +876,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public void onReceiveTargetUpdate(final AbstractDialogFragment.TargetInfo targetInfo) {
         if (Settings.isAutotargetIndividualRoute()) {
             Settings.setAutotargetIndividualRoute(false);
-            Toast.makeText(this, R.string.map_disable_autotarget_individual_route, Toast.LENGTH_SHORT).show();
+            ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
         }
         viewModel.setTarget(targetInfo.coords, targetInfo.geocode);
     }

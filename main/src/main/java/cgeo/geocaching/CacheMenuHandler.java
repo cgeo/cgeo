@@ -15,13 +15,13 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AbstractUIFactory;
 import cgeo.geocaching.ui.NavigationActionProvider;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -120,7 +120,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             cache.setLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
         }
         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-        Toast.makeText(activity, R.string.cache_foundstate_updated, Toast.LENGTH_SHORT).show();
+        ViewUtils.showShortToast(activity, R.string.cache_foundstate_updated);
         if (notifyDataSetChanged != null) {
             notifyDataSetChanged.run();
         }

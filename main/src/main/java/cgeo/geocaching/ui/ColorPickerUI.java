@@ -21,7 +21,6 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
@@ -181,16 +180,16 @@ public class ColorPickerUI {
                             newValue = Integer.parseInt(editText.getText().toString());
                             if (newValue > max) {
                                 newValue = max;
-                                Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(context, R.string.number_input_err_boundarymax);
                             }
                             if (newValue < min) {
                                 newValue = min;
-                                Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(context, R.string.number_input_err_boundarymin);
                             }
                             slider.setProgress((int) Math.round(newValue / valueToShownValue));
                             progressChangedCallback.accept(slider.getProgress());
                         } catch (NumberFormatException e) {
-                            Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
+                            ViewUtils.showShortToast(context, R.string.number_input_err_format);
                         }
                     })
                     .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> {

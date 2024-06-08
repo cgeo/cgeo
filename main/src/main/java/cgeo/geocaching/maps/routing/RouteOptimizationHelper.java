@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleProgressDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -13,7 +14,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.content.Context;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
 import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
@@ -117,7 +117,7 @@ public class RouteOptimizationHelper {
 
     public void start(final Context context, final Action1<ArrayList<RouteItem>> updateRoute) {
         if (routeSize < 3 || routeSize > 100) {
-            Toast.makeText(context, R.string.route_optimization_out_of_bounds, Toast.LENGTH_LONG).show();
+            ViewUtils.showToast(context, R.string.route_optimization_out_of_bounds);
             return;
         }
 

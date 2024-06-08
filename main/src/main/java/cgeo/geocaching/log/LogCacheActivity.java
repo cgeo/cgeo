@@ -54,7 +54,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -504,10 +503,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 if (logLength <= LOG_MAX_LENGTH) {
                     sendLogAndConfirm();
                 } else {
-                    Toast.makeText(this, R.string.cache_log_too_long, Toast.LENGTH_LONG).show();
+                    ViewUtils.showToast(this, R.string.cache_log_too_long);
                 }
             } else {
-                Toast.makeText(this, R.string.cache_empty_log, Toast.LENGTH_LONG).show();
+                ViewUtils.showToast(this, R.string.cache_empty_log);
             }
         } else if (itemId == R.id.save) {
             finish(SaveMode.FORCE);

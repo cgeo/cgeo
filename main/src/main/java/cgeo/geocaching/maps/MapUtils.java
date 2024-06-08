@@ -56,7 +56,6 @@ import android.text.TextPaint;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -258,7 +257,7 @@ public class MapUtils {
                             .setPositiveButton(R.string.ok, null)
                             .setNegativeButton(R.string.copy_coordinates, (d, which) -> {
                                 ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(textview.get().getText()));
-                                Toast.makeText(activity, R.string.clipboard_copy_ok, Toast.LENGTH_SHORT).show();
+                                ViewUtils.showShortToast(activity, R.string.clipboard_copy_ok);
                             })
                             .show();
                     final TextView tv1 = dialog.findViewById(R.id.tv1);
