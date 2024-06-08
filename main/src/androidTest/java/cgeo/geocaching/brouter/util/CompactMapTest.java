@@ -1,6 +1,7 @@
 package cgeo.geocaching.brouter.util;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class CompactMapTest {
 
     private void hashMapComparison(final int mapsize, final int trycount) {
         final Random rand = new Random(12345);
-        final HashMap<Long, String> hmap = new HashMap<>();
+        final Map<Long, String> hmap = new HashMap<>();
         CompactLongMap<String> cmapSlow = new CompactLongMap<>();
         CompactLongMap<String> cmapFast = new CompactLongMap<>();
 

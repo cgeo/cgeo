@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Encoder/Decoder for way-/node-descriptions
@@ -67,7 +68,7 @@ public final class TagValueCoder {
                 final TagValueSet dummy = new TagValueSet(nextTagValueSetId++);
                 identityMap.put(dummy, dummy);
             }
-            final PriorityQueue<TagValueSet> queue = new PriorityQueue<>(2 * identityMap.size(), new TagValueSet.FrequencyComparator());
+            final Queue<TagValueSet> queue = new PriorityQueue<>(2 * identityMap.size(), new TagValueSet.FrequencyComparator());
             queue.addAll(identityMap.values());
             while (queue.size() > 1) {
                 final TagValueSet node = new TagValueSet(nextTagValueSetId++);

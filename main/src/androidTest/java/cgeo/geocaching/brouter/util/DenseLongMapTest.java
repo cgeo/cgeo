@@ -2,7 +2,9 @@ package cgeo.geocaching.brouter.util;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +19,7 @@ public class DenseLongMapTest {
 
     private void hashMapComparison(final int mapsize, final int trycount, final long keyrange) {
         final Random rand = new Random(12345);
-        final HashMap<Long, Integer> hmap = new HashMap<>();
+        final Map<Long, Integer> hmap = new HashMap<>();
         final DenseLongMap dmap = new DenseLongMap(512);
 
         for (int i = 0; i < mapsize; i++) {
@@ -33,7 +35,7 @@ public class DenseLongMapTest {
             final long k = (long) (rand.nextDouble() * keyrange);
             final Long kk = new Long(k);
             final Integer vv = hmap.get(kk);
-            final int hvalue = vv == null ? -1 : vv.intValue();
+            final int hvalue = vv == null ? -1 : vv;
             final int dvalue = dmap.getInt(k);
 
             if (hvalue != dvalue) {
@@ -49,7 +51,7 @@ public class DenseLongMapTest {
         final int trycount = 100000;
 
         final Random rand = new Random(12345);
-        final HashSet<Long> hset = new HashSet<>();
+        final Set<Long> hset = new HashSet<>();
 
         final DenseLongMap dmap = new DenseLongMap(512);
         for (int i = 0; i < mapputs; i++) {

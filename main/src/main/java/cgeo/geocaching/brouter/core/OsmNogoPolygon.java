@@ -304,7 +304,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
         Point p1 = points.get(0);
         for (int i = 1; i <= iLast; i++) {
             final Point p2 = points.get(i);
-            if (OsmNogoPolygon.isOnLine(px, py, p1.x, p1.y, p2.x, p2.y)) {
+            if (isOnLine(px, py, p1.x, p1.y, p2.x, p2.y)) {
                 return true;
             }
             p1 = p2;
@@ -334,7 +334,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
             final long p1x = p1.x;
             final long p1y = p1.y;
 
-            if (OsmNogoPolygon.isOnLine(px, py, p0x, p0y, p1x, p1y)) {
+            if (isOnLine(px, py, p0x, p0y, p1x, p1y)) {
                 return true;
             }
 

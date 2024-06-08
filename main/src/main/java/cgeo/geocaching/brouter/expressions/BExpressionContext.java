@@ -23,9 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 public abstract class BExpressionContext implements IByteArrayUnifier {
     private static final String CONTEXT_TAG = "---context:";
@@ -237,7 +235,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public List<String> getKeyValueList(final boolean inverseDirection, final byte[] ab) {
-        final ArrayList<String> res = new ArrayList<>();
+        final List<String> res = new ArrayList<>();
         decode(lookupData, inverseDirection, ab);
         for (int inum = 0; inum < lookupValues.size(); inum++) { // loop over lookup names
             final BExpressionLookupValue[] va = lookupValues.get(inum);
@@ -450,44 +448,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         }
     }
 
-
-    public void dumpStatistics() {
-        final TreeMap<String, String> counts = new TreeMap<>();
-        // first count
-        for (String name : lookupNumbers.keySet()) {
-            int cnt = 0;
-            final int inum = lookupNumbers.get(name);
-            final int[] histo = lookupHistograms.get(inum);
-//    if ( histo.length == 500 ) continue;
-            for (int i = 2; i < histo.length; i++) {
-                cnt += histo[i];
-            }
-            counts.put("" + (1000000000 + cnt) + "_" + name, name);
-        }
-
-        while (counts.size() > 0) {
-            final String key = counts.lastEntry().getKey();
-            final String name = counts.get(key);
-            counts.remove(key);
-            final int inum = lookupNumbers.get(name);
-            final BExpressionLookupValue[] values = lookupValues.get(inum);
-            final int[] histo = lookupHistograms.get(inum);
-            if (values.length == 1000) {
-                continue;
-            }
-            final String[] svalues = new String[values.length];
-            for (int i = 0; i < values.length; i++) {
-                String scnt = "0000000000" + histo[i];
-                scnt = scnt.substring(scnt.length() - 10);
-                svalues[i] = scnt + " " + values[i].toString();
-            }
-            Arrays.sort(svalues);
-            for (int i = svalues.length - 1; i >= 0; i--) {
-                System.out.println(name + ";" + svalues[i]);
-            }
-        }
-    }
-
     /**
      * @return a new lookupData array, or null if no metadata defined
      */
@@ -496,47 +456,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             return new int[lookupValues.size()];
         }
         return null;
-    }
-
-    /**
-     * generate random values for regression testing
-     */
-    public int[] generateRandomValues(final Random rnd) {
-        final int[] data = createNewLookupData();
-        data[0] = 2 * rnd.nextInt(2); // reverse-direction = 0 or 2
-        for (int inum = 1; inum < data.length; inum++) {
-            final int nvalues = lookupValues.get(inum).length;
-            data[inum] = 0;
-            if (inum > 1 && rnd.nextInt(10) > 0) {
-                continue; // tags other than highway only 10%
-            }
-            data[inum] = rnd.nextInt(nvalues);
-        }
-        lookupDataValid = true;
-        return data;
-    }
-
-    public void assertAllVariablesEqual(final BExpressionContext other) {
-        final int nv = variableData.length;
-        final int nv2 = other.variableData.length;
-        if (nv != nv2) {
-            throw new RuntimeException("mismatch in variable-count: " + nv + "<->" + nv2);
-        }
-        for (int i = 0; i < nv; i++) {
-            if (variableData[i] != other.variableData[i]) {
-                throw new RuntimeException("mismatch in variable " + variableName(i) + " " + variableData[i] + "<->" + other.variableData[i]
-                        + "\ntags = " + getKeyValueDescription(false, encode()));
-            }
-        }
-    }
-
-    public String variableName(final int idx) {
-        for (Map.Entry<String, Integer> e : variableNumbers.entrySet()) {
-            if (e.getValue().intValue() == idx) {
-                return e.getKey();
-            }
-        }
-        throw new RuntimeException("no variable for index" + idx);
     }
 
     /**
@@ -572,9 +491,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         }
 
         // look for that value
-        final int inum = num;
-        BExpressionLookupValue[] values = lookupValues.get(inum);
-        int[] histo = lookupHistograms.get(inum);
+        BExpressionLookupValue[] values = lookupValues.get(num);
+        int[] histo = lookupHistograms.get(num);
         int i = 0;
         boolean bFoundAsterix = false;
         for (; i < values.length; i++) {
@@ -590,7 +508,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             if (lookupData2 != null) {
                 // do not create unknown value for external data array,
                 // record as 'unknown' instead
-                lookupData2[inum] = 1; // 1 == unknown
+                lookupData2[num] = 1; // 1 == unknown
                 if (bFoundAsterix) {
                     // found value for lookup *
                     //System.out.println( "add unknown " + name + "  " + value );
@@ -710,11 +628,11 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
                         // found negative maxdraft values
                         // no negative values
                         // values are float with 2 decimals
-                        lookupData2[inum] = 1000 + (int) (Math.abs(Float.parseFloat(valueMutable)) * 100f);
+                        lookupData2[num] = 1000 + (int) (Math.abs(Float.parseFloat(valueMutable)) * 100f);
                     } catch (Exception e) {
                         // ignore errors
                         System.err.println("error for " + name + "  " + value /* original value */ + " trans " + valueMutable + " " + e.getMessage());
-                        lookupData2[inum] = 0;
+                        lookupData2[num] = 0;
                     }
                 }
                 return newValue;
@@ -732,38 +650,19 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             histo = nhisto;
             newValue = new BExpressionLookupValue(valueMutable);
             values[i] = newValue;
-            lookupHistograms.set(inum, histo);
-            lookupValues.set(inum, values);
+            lookupHistograms.set(num, histo);
+            lookupValues.set(num, values);
         }
 
         histo[i]++;
 
         // finally remember the actual data
         if (lookupData2 != null) {
-            lookupData2[inum] = i;
+            lookupData2[num] = i;
         } else {
-            lookupData[inum] = i;
+            lookupData[num] = i;
         }
         return newValue;
-    }
-
-    /**
-     * add a value-index to to internal array
-     * value-index means 0=unknown, 1=other, 2=value-x, ...
-     */
-    public void addLookupValue(final String name, final int valueIndex) {
-        final Integer num = lookupNumbers.get(name);
-        if (num == null) {
-            return;
-        }
-
-        // look for that value
-        final int inum = num;
-        final int nvalues = lookupValues.get(inum).length;
-        if (valueIndex < 0 || valueIndex >= nvalues) {
-            throw new IllegalArgumentException("value index out of range for name " + name + ": " + valueIndex);
-        }
-        lookupData[inum] = valueIndex;
     }
 
     public int getOutputVariableIndex(final String name, final boolean mustExist) {
@@ -877,22 +776,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         return result;
     }
 
-    public void setVariableValue(String name, float value, boolean create) {
-        Integer num = variableNumbers.get(name);
-        if (num != null) {
-            variableData[num] = value;
-        } else if (create) {
-            num = getVariableIdx(name, create);
-            final float[] readOnlyData = variableData;
-            final int minWriteIdx = readOnlyData.length;
-            variableData = new float[variableNumbers.size()];
-            for (int i = 0; i < minWriteIdx; i++) {
-                variableData[i] = readOnlyData[i];
-            }
-            variableData[num] = value;
-        }
-    }
-
     public float getVariableValue(final String name, final float defaultValue) {
         final Integer num = variableNumbers.get(name);
         return num == null ? defaultValue : getVariableValue(num.intValue());
@@ -946,19 +829,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         for (int i = 0; i < lookupIdxUsed.length; i++) {
             lookupIdxUsed[i] = true;
         }
-    }
-
-    public String usedTagList() {
-        final StringBuilder sb = new StringBuilder();
-        for (int inum = 0; inum < lookupValues.size(); inum++) {
-            if (lookupIdxUsed[inum]) {
-                if (sb.length() > 0) {
-                    sb.append(',');
-                }
-                sb.append(lookupNames.get(inum));
-            }
-        }
-        return sb.toString();
     }
 
     public int getLookupValueIdx(final int nameIdx, final String value) {
