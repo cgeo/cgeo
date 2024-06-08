@@ -26,16 +26,16 @@ public class OsmPathElement implements OsmPos {
     }
 
     // construct a path element from a path
-    public static OsmPathElement create(final OsmPath path, final boolean countTraffic) {
+    public static OsmPathElement create(final OsmPath path) {
         final OsmNode n = path.getTargetNode();
-        final OsmPathElement pe = create(n.getILon(), n.getILat(), path.selev, path.originElement, countTraffic);
+        final OsmPathElement pe = create(n.getILon(), n.getILat(), path.selev, path.originElement);
         pe.cost = path.cost;
         pe.message = path.message;
         return pe;
     }
 
-    public static OsmPathElement create(final int ilon, final int ilat, final short selev, final OsmPathElement origin, final boolean countTraffic) {
-        final OsmPathElement pe = countTraffic ? new OsmPathElementWithTraffic() : new OsmPathElement();
+    public static OsmPathElement create(final int ilon, final int ilat, final short selev, final OsmPathElement origin) {
+        final OsmPathElement pe = new OsmPathElement();
         pe.ilon = ilon;
         pe.ilat = ilat;
         pe.selev = selev;
@@ -105,10 +105,6 @@ public class OsmPathElement implements OsmPos {
 
     public final int calcDistance(final OsmPos p) {
         return (int) Math.max(1.0, Math.round(CheapRulerHelper.distance(ilon, ilat, p.getILon(), p.getILat())));
-    }
-
-    public void addTraffic(final float traffic) {
-        // default: do nothing
     }
 
     public String toString() {

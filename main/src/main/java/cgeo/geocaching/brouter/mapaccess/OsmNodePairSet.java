@@ -96,7 +96,7 @@ public class OsmNodePairSet {
         return null;
     }
 
-    private static class OsmNodePair {
+    private static final class OsmNodePair {
         public long node2;
         public OsmNodePair next;
     }

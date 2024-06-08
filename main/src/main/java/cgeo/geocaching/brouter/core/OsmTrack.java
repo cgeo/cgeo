@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class OsmTrack {
-    static final String version = "1.7.4";
+    static final String version = "1.7.5";
 
     // csv-header-line
     private static final String MESSAGES_HEADER = "Longitude\tLatitude\tElevation\tDistance\tCostPerKm\tElevCost\tTurnCost\tNodeCost\tInitialCost\tWayTags\tNodeTags\tTime\tEnergy";
@@ -261,7 +261,7 @@ public final class OsmTrack {
     }
 
     public List<String> aggregateMessages() {
-        final ArrayList<String> res = new ArrayList<>();
+        final List<String> res = new ArrayList<>();
         MessageData current = null;
         for (OsmPathElement n : nodes) {
             if (n.message != null && n.message.wayKeyValues != null) {
@@ -283,7 +283,7 @@ public final class OsmTrack {
     }
 
     public List<String> aggregateSpeedProfile() {
-        final ArrayList<String> res = new ArrayList<>();
+        final List<String> res = new ArrayList<>();
         int vmax = -1;
         int vmaxe = -1;
         int vmin = -1;

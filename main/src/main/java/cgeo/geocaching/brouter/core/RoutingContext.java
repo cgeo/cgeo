@@ -16,7 +16,6 @@ import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.util.CheapAngleMeter;
 import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
-import java.io.DataOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,16 +64,7 @@ public final class RoutingContext {
     public double wayfraction;
     public int ilatshortest;
     public int ilonshortest;
-    public boolean countTraffic;
     public boolean inverseDirection;
-    public DataOutput trafficOutputStream;
-    public double farTrafficWeight;
-    public double nearTrafficWeight;
-    public double farTrafficDecayLength;
-    public double nearTrafficDecayLength;
-    public double trafficDirectionFactor;
-    public double trafficSourceExponent;
-    public double trafficSourceMinDist;
     public boolean showspeed;
     public boolean showSpeedProfile;
     public boolean inverseRouting;
@@ -314,14 +304,6 @@ public final class RoutingContext {
         inittimeadjustment = expctxGlobal.getVariableValue("inittimeadjustment", 0.2f);
         starttimeoffset = expctxGlobal.getVariableValue("starttimeoffset", 0.f);
         transitonly = expctxGlobal.getVariableValue("transitonly", 0.f) != 0.f;
-
-        farTrafficWeight = expctxGlobal.getVariableValue("farTrafficWeight", 2.f);
-        nearTrafficWeight = expctxGlobal.getVariableValue("nearTrafficWeight", 2.f);
-        farTrafficDecayLength = expctxGlobal.getVariableValue("farTrafficDecayLength", 30000.f);
-        nearTrafficDecayLength = expctxGlobal.getVariableValue("nearTrafficDecayLength", 3000.f);
-        trafficDirectionFactor = expctxGlobal.getVariableValue("trafficDirectionFactor", 0.9f);
-        trafficSourceExponent = expctxGlobal.getVariableValue("trafficSourceExponent", -0.7f);
-        trafficSourceMinDist = expctxGlobal.getVariableValue("trafficSourceMinDist", 3000.f);
 
         showspeed = 0.f != expctxGlobal.getVariableValue("showspeed", 0.f);
         showSpeedProfile = 0.f != expctxGlobal.getVariableValue("showSpeedProfile", 0.f);
