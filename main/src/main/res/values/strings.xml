@@ -1584,7 +1584,6 @@
     <string name="no_browser_found">No browser found</string>
     <string name="cache_menu_open_with">Open with…</string>
     <string name="cache_menu_visit">Log Visit</string>
-    <string name="cache_log_too_long">c:geo couldn\'t submit your log cause it is too long. But thanks for trying to write such an extensive log ;-)</string>
     <string name="cache_empty_log">c:geo couldn\'t submit your log cause it is empty.</string>
     <string name="cache_menu_visit_offline">Quick offline log</string>
     <string name="cache_menu_spoilers">Spoiler images</string>
