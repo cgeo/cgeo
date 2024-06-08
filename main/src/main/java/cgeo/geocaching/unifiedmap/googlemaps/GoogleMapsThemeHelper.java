@@ -25,7 +25,8 @@ class GoogleMapsThemeHelper {
         NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night, true),
         AUTO(R.string.google_maps_style_auto, 0, false),
         RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro, false),
-        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false);
+        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false),
+        DETAILS(R.string.google_maps_style_details, R.raw.googlemap_style_details, false);
 
         final int labelRes;
         final int jsonRes;
