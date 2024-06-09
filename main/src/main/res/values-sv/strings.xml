@@ -1271,7 +1271,6 @@
     <string name="no_browser_found">Hittade ingen webbläsare</string>
     <string name="cache_menu_open_with">Öppna med…</string>
     <string name="cache_menu_visit">Logga besök</string>
-    <string name="cache_log_too_long">c:geo kunde inte skicka in din logg eftersom den är för lång. Tack för att du försöker skriva en så omfattande logg ;-)</string>
     <string name="cache_menu_visit_offline">Snabblogga offline</string>
     <string name="cache_menu_spoilers">Spoiler bilder</string>
     <string name="cache_menu_around">Cacher i närheten</string>
