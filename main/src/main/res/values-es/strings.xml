@@ -1152,7 +1152,6 @@
     <string name="no_browser_found">Navegador no encontrado</string>
     <string name="cache_menu_open_with">Abrir con…</string>
     <string name="cache_menu_visit">Registrar visita</string>
-    <string name="cache_log_too_long">c:geo no pudo enviar tu registro porque es demasiado largo. Pero gracias por intentar escribir un registro tan extenso ;-)</string>
     <string name="cache_menu_visit_offline">Registro rápido sin conexión</string>
     <string name="cache_menu_spoilers">Revelaciones</string>
     <string name="cache_menu_around">Cachés cercanos</string>
