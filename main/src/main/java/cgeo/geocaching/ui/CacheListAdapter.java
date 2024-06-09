@@ -436,7 +436,12 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         distances.add(holder.binding.distance);
         holder.binding.distance.setCacheData(cache.getCoords(), cache.getDistance());
-        holder.binding.distance.update(coords);
+
+        Geopoint targetCoords = sortContext.getSort().getTargetCoords();
+        if (null == targetCoords) {
+            targetCoords = coords;
+        }
+        holder.binding.distance.update(targetCoords);
 
         compasses.add(holder.binding.direction);
         holder.binding.direction.setTargetCoords(cache.getCoords());
@@ -458,8 +463,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 holder.binding.direction.setVisibility(View.VISIBLE);
                 holder.binding.dirimg.setVisibility(View.GONE);
                 holder.binding.direction.updateAzimuth(azimuth);
-                if (coords != null) {
-                    holder.binding.direction.updateCurrentCoords(coords);
+
+                if (targetCoords != null) {
+                    holder.binding.direction.updateCurrentCoords(targetCoords);
                 }
             } else if (cache.getDirection() != null) {
                 holder.binding.direction.setVisibility(View.VISIBLE);
