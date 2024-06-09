@@ -1213,7 +1213,6 @@
     <string name="no_browser_found">Δε βρέθηκε εφαρμογή περιήγησης</string>
     <string name="cache_menu_open_with">Άνοιγμα με…</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
-    <string name="cache_log_too_long">Το c:geoδεν μπορεί να στείλει αυτή την καταγραφή λόγω μεγέθους. Αλλά μπράβο σας για το τόσο μεγάλο κείμενο ;-)</string>
     <string name="cache_menu_visit_offline">Γρήγορη καταγραφή εκτός σύνδεσης</string>
     <string name="cache_menu_spoilers">Βοηθητικές εικόνες</string>
     <string name="cache_menu_around">Κρύπτες τριγύρω</string>
