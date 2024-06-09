@@ -1146,8 +1146,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void initAdapter() {
-
-        sortContext = GeocacheSortContext.getFor(type, "" + listId);
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
@@ -1521,6 +1519,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             Settings.setLastDisplayedList(listId);
         }
+
+        sortContext = GeocacheSortContext.getFor(type, "" + listId);
 
         initAdapter();
         setFilter();
