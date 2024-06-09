@@ -40,7 +40,6 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -498,13 +497,9 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            final int logLength = TextUtils.getNormalizedStringLength(binding.log.getText().toString());
+            final int logLength = binding.log.getText().toString().trim().length();
             if (logLength > 0) {
-                if (logLength <= LOG_MAX_LENGTH) {
-                    sendLogAndConfirm();
-                } else {
-                    ViewUtils.showToast(this, R.string.cache_log_too_long);
-                }
+                sendLogAndConfirm();
             } else {
                 ViewUtils.showToast(this, R.string.cache_empty_log);
             }
