@@ -1405,7 +1405,6 @@
     <string name="no_browser_found">Kein Browser gefunden</string>
     <string name="cache_menu_open_with">Öffnen mit…</string>
     <string name="cache_menu_visit">Besuch loggen</string>
-    <string name="cache_log_too_long">c:geo konnte deinen Log nicht senden, da er zu lang ist. Aber danke für den Versuch, ein so umfangreiches Log zu schreiben ;-)</string>
     <string name="cache_empty_log">c:geo konnte den Logeintrag nicht senden, da er leer ist.</string>
     <string name="cache_menu_visit_offline">Schneller Offline-Log</string>
     <string name="cache_menu_spoilers">Hinweisbild</string>
