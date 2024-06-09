@@ -1405,7 +1405,6 @@
     <string name="no_browser_found">Não foi encontrado nenhum navegador de Internet</string>
     <string name="cache_menu_open_with">Abrir com…</string>
     <string name="cache_menu_visit">Registar visita</string>
-    <string name="cache_log_too_long">O c:geo não pôde enviar o seu registo por ser muito longo. Mas obrigado por tentar escrever um registo tão extenso ;-)</string>
     <string name="cache_empty_log">c:geo não pôde enviar o seu registo porque está vazio.</string>
     <string name="cache_menu_visit_offline">Registo rápido sem ligação</string>
     <string name="cache_menu_spoilers">Imagens spoiler</string>
