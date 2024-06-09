@@ -1303,7 +1303,6 @@
     <string name="no_browser_found">Nebol nájdený prehliadač</string>
     <string name="cache_menu_open_with">Otvoriť s…</string>
     <string name="cache_menu_visit">Zalogovať návštevu</string>
-    <string name="cache_log_too_long">Aplikácia c:geo nemôže odoslať váš log, pretože je príliš dlhý. Ďakujeme ale, že ste sa pokúsili napísať taký obsiahly log ;-)</string>
     <string name="cache_menu_visit_offline">Rýchly offline log</string>
     <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
     <string name="cache_menu_around">Skrýše v okolí</string>
