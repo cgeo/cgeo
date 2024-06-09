@@ -1120,7 +1120,6 @@
     <string name="no_browser_found">ブラウザが見つかりません</string>
     <string name="cache_menu_open_with">開く…</string>
     <string name="cache_menu_visit">ログを書く</string>
-    <string name="cache_log_too_long">ログが長すぎるために投稿できませんでした。克明なログを書こうとしてくれてありがとう ;-)</string>
     <string name="cache_menu_visit_offline">オフラインログをすぐに書く</string>
     <string name="cache_menu_spoilers">スポイラー画像</string>
     <string name="cache_menu_around">近くのキャッシュ</string>
