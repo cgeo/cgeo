@@ -1376,7 +1376,6 @@
     <string name="no_browser_found">No s\'ha trobat cap navegador</string>
     <string name="cache_menu_open_with">Obre amb…</string>
     <string name="cache_menu_visit">Registra visita</string>
-    <string name="cache_log_too_long">c: geo no ha pogut enviar el registre perquè és massa llarg. Però gràcies per intentar escriure un registre tan extens ;-)</string>
     <string name="cache_empty_log">C:geo no ha pogut enviar el vostre registre perquè està buit.</string>
     <string name="cache_menu_visit_offline">Registre ràpid fora de línia</string>
     <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
