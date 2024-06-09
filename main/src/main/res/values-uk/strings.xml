@@ -736,7 +736,6 @@
     <string name="cache_menu_browser">Відкрити в браузері</string>
     <string name="cache_menu_open_with">Відкрити за допомогою…</string>
     <string name="cache_menu_visit">Журнал відвідування</string>
-    <string name="cache_log_too_long">c:geo не вдалося представити ваш лог, занадто довго. Але дякуємо за те, що спробували написати такий великий журнал ;-)</string>
     <string name="cache_menu_visit_offline">Швидкий журнал оффлайн</string>
     <string name="cache_menu_spoilers">Зображення спойлера</string>
     <string name="cache_menu_around">Кеш навколо</string>
