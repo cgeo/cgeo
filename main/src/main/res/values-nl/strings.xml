@@ -1405,7 +1405,6 @@
     <string name="no_browser_found">Geen browser gevonden</string>
     <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
-    <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
     <string name="cache_empty_log">Sorry, c:geo kon je log niet indienen omdat het leeg is.</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
