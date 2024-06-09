@@ -169,7 +169,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         setSelectedTheme(selectedTheme);
 
         if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider) {
-            ((AbstractMapsforgeOfflineTileProvider) tileProvider).switchBuildingLayer(Settings.getBoolean(R.string.pref_buildingLayer3D, true));
+            ((AbstractMapsforgeOfflineTileProvider) tileProvider).switchBuildingLayer(Settings.getBuildings3D());
         }
 
         map.updateMap(true);

@@ -875,6 +875,10 @@ public class Settings {
         }
     }
 
+    public static boolean getBuildings3D() {
+        return getBoolean(R.string.pref_buildingLayer3D, true);
+    }
+
     public static boolean isAutotargetIndividualRoute() {
         return getBoolean(R.string.pref_autotarget_individualroute, false);
     }
