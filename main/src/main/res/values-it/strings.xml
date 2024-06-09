@@ -1401,7 +1401,6 @@
     <string name="no_browser_found">Nessun browser trovato</string>
     <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
-    <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
     <string name="cache_empty_log">c:geo non ha potuto inviare il tuo log perché è vuoto.</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
