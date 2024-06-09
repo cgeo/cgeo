@@ -1,4 +1,7 @@
 ##
+- Fix: Log length check counting some characters twice
+
+##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
 - Oprava: Chybějící možnost 'použít aktuální seznam' při vytváření uživatelsky definované kešky (Sjednocená mapa)
 - Oprava: Kompasová růžice skrytá za zobrazením vzdáleností (Sjednocená mapa)
