@@ -1,15 +1,21 @@
 ### Mappa
 - Nuovo: "Modifica nota personale" dalla pagina info del cache
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Corretto: Waypoint non filtrati sulla mappatura di una singola cache (UnifiedMap)
+- Nuovo: Supporto a fornitore di tasselli definiti dall'utente
+- Corretto: aggiorna i dati della mappa dopo l'apertura / chiusura della finestra di dialogo delle impostazioni (UnifiedMap)
+- Nuovo: Mostra/nascondi edifici 2D/3D (UnifiedMap OSM)
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
 - Cambio: semplificato il tocco lungo nei dettagli dei cache e dei tracciabili
 - Novità: ridimensionamento delle immagini del log
-- Change: Change "log" icon from pencil to smiley icon
+- Cambiato: cambia l'icona del log da "matita" a "smile"
+- Cambia: Cambio dell1'icona "modifica liste" da matita a lista + matita
 
 ### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
 - Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
-- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
-- Change: Updated integrated BRouter to v1.7.4
+- Cambiamento: utilizzo di OSM Nominatum come geocoder fallback, in sostituzione di MapQuest geocoder (che non funziona più per noi)
+- Change: Updated integrated BRouter to v1.7.5
+- Nuovo: Lettura delle informazioni di elevazione dalla traccia durante l'importazione
+- Nuovo: API a Locus che supporta ora la dimensione del cache "virtuale"
