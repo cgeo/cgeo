@@ -1,4 +1,7 @@
 ##
+- Fix: Log length check counting some characters twice
+
+##
 - Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
 - Correcção: Falta a opção 'usar lista actual" na criação de cache definida pelo utilizador (Mapa Unificado)
 - Correcção: Bússola escondida atrás das visualizações de distância (Mapa Unificado)
