@@ -949,7 +949,6 @@
     <string name="cache_menu_browser">在瀏覽器中開啟</string>
     <string name="cache_menu_open_with">開啟用…</string>
     <string name="cache_menu_visit">登錄拜訪</string>
-    <string name="cache_log_too_long">因為你的尋寶日誌太長了，c:geo無法傳送你的尋寶日誌。感謝您寫下如此豐富的藏寶日誌。;-)</string>
     <string name="cache_menu_visit_offline">快速的離線日誌</string>
     <string name="cache_menu_spoilers">提示圖片</string>
     <string name="cache_menu_around">附近的藏寶</string>
