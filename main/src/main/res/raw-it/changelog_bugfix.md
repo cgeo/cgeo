@@ -1,4 +1,7 @@
 ##
+- Fix: Log length check counting some characters twice
+
+##
 - Corretto: cache che non si caricano dopo aver abilitato la mappa live (UnifiedMap)
 - Corretto: Manca l'opzione 'usa la lista corrente' per creare un cache definito dall'utente (UnifiedMap)
 - Corretto: Bussola nascosta dietro le viste a distanza (UnifiedMap)
