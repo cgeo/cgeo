@@ -1,5 +1,5 @@
 ##
-- Fix: Log length check counting some characters twice
+- Oprava: Kontrola délky logu počítající některé znaky dvakrát
 
 ##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
