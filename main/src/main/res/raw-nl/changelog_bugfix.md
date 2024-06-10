@@ -1,4 +1,7 @@
 ##
+- Oplossing: Log lengte controle telt sommige tekens twee keer
+
+##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
 - Oplossing: Ontbrekende optie 'gebruik huidige lijst' bij het maken van door de gebruiker gedefinieerde cache (UnifiedMap)
 - Oplossing: Kompas roos verborgen achter afstandsweergave (UnifiedMap)
