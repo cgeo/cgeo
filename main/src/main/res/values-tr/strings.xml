@@ -1384,6 +1384,7 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
+    <string name="google_maps_style_details">Detaylar</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
