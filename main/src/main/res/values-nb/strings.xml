@@ -1099,7 +1099,6 @@
     <string name="no_browser_found">Ingen nettleser funnet</string>
     <string name="cache_menu_open_with">Åpne med…</string>
     <string name="cache_menu_visit">Logg funn</string>
-    <string name="cache_log_too_long">c:geo kunne ikke sende inn loggen din fordi den er for lang. Men takk for forsøket med å skrive en så omfattende logg ;-)</string>
     <string name="cache_menu_visit_offline">Rask offlinelogg</string>
     <string name="cache_menu_spoilers">Bilder</string>
     <string name="cache_menu_around">Cacher i nærheten</string>
