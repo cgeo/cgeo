@@ -1,4 +1,7 @@
 ##
+- Fix: Log length check counting some characters twice
+
+##
 - Fix: Cacher laddar inte efter att ha aktiverat livekartan (UnifiedMap)
 - Fix: Saknar alternativet "använd aktuell lista" för att skapa användardefinierad cache (UnifiedMap)
 - Fix: Kompass-ros gömd bakom distansvyer (UnifiedMap)
