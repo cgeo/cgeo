@@ -1395,6 +1395,7 @@
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
+    <string name="google_maps_style_details">詳細</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
