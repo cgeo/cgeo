@@ -1136,7 +1136,6 @@
     <string name="no_browser_found">Tarayıcı bulunamadı</string>
     <string name="cache_menu_open_with">Birlikte aç…</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
-    <string name="cache_log_too_long">c:geo, kaydınızı gönderemedi çünkü çok uzun. Ama böylesine kapsamlı bir kayıt yazmaya çalıştığınız için teşekkürler ;-)</string>
     <string name="cache_menu_visit_offline">Hızlı çevrimdışı kayıt</string>
     <string name="cache_menu_spoilers">İpucu Görseller</string>
     <string name="cache_menu_around">Yakınlardaki Geocache\'ler</string>
