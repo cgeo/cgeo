@@ -513,6 +513,7 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
+    <string name="google_maps_style_details">Detailer</string>
     <!-- search -->
     <!-- trackable -->
     <!-- user -->
