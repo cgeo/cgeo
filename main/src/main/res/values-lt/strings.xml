@@ -1303,7 +1303,6 @@
     <string name="no_browser_found">Nerasta jokios naršyklės</string>
     <string name="cache_menu_open_with">Atidaryti naudojant…</string>
     <string name="cache_menu_visit">Registruoti</string>
-    <string name="cache_log_too_long">c:geo negalėjo pateikti jūsų įrašo, nes jis per ilgas. Bet ačiū, kad bandėte parašyti tokį ilgą įrašą ;-)</string>
     <string name="cache_menu_visit_offline">Greitas įrašas neprisijungus</string>
     <string name="cache_menu_spoilers">Užuominos vaizdai</string>
     <string name="cache_menu_around">Slėptuvės aplink</string>
