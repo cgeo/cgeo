@@ -591,6 +591,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             //all others, e.g. "Live"
             listChooser.setDirect(calculateTitle(), visibleCaches);
         }
+
+        CompactIconModeUtils.forceCompactIconMode(visibleCaches);
     }
 
     /**
