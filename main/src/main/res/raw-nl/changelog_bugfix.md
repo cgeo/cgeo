@@ -1,5 +1,5 @@
 ##
-- Fix: Log length check counting some characters twice
+- Oplossing: Log lengte controle telt sommige tekens twee keer
 
 ##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
