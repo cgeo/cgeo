@@ -16,6 +16,6 @@
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
 - Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
 - Změna: Použijte OSM Nominatum jako záložní geokodér, který nahradí geokodér MapQuest (který nám již nefunguje)
-- Change: Updated integrated BRouter to v1.7.5
+- Změna: Aktualizace doplňku BRouter na verzi 1.7.5
 - Novinka: Čtení informací o nadmořské výšce ze stopy při importu
 - Novinka: API pro Locus nyní podporuje "virtuální" velikost kešky
