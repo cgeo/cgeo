@@ -1,5 +1,5 @@
 ##
-- Fix: Log length check counting some characters twice
+- Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
 
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
