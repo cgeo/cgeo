@@ -1391,7 +1391,6 @@
     <string name="no_browser_found">Aucun navigateur Internet n\'a été trouvé</string>
     <string name="cache_menu_open_with">Ouvrir avec…</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
-    <string name="cache_log_too_long">c:geo n\'a pas pu envoyer votre log car il est trop long. Merci d\'avoir essayé d\'écrire un log aussi complet ;-).</string>
     <string name="cache_empty_log">c:geo n\'a pas pu soumettre votre log car il est vide.</string>
     <string name="cache_menu_visit_offline">Visite rapide hors-ligne</string>
     <string name="cache_menu_spoilers">Images indices</string>
