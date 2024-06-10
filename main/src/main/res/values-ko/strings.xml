@@ -1395,7 +1395,6 @@
     <string name="no_browser_found">브라우저를 찾을 수 없음</string>
     <string name="cache_menu_open_with">다른 프로그램으로 열기…</string>
     <string name="cache_menu_visit">로그하기</string>
-    <string name="cache_log_too_long">c:geo가 로그가 너무 길어서 제출할 수 없습니다. 하지만 이렇게 광범위한 로그를 작성 해주셔서 감사합니다 ;-)</string>
     <string name="cache_empty_log">c:geo는 로그가 비어 있어서 제출할 수 없습니다.</string>
     <string name="cache_menu_visit_offline">빠른 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
