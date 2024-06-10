@@ -691,6 +691,7 @@
     <string name="map_live_disable">Hindi paganahin ang buhay</string>
     <string name="map_as_list">Ipakita ang listahan</string>
     <string name="map_select_multiple_items">Pumili ng gamit</string>
+    <string name="google_maps_style_details">Mga Detalye</string>
     <!-- search -->
     <string name="search_coordinates">Ang mga Coordinate</string>
     <string name="search_coordinates_button">Ang Magsaliksik sa pamamagitan ng mga Coordinate</string>
