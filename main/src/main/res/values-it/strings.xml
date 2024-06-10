@@ -1405,7 +1405,6 @@
     <string name="no_browser_found">Nessun browser trovato</string>
     <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
-    <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
     <string name="cache_empty_log">c:geo non ha potuto inviare il tuo log perché è vuoto.</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
@@ -2479,6 +2478,7 @@
     <string name="maptheme_scale_text_summary">Scala aggiuntiva delle etichette di testo nella mappa; 100% = nessun ridimensionamento extra</string>
     <string name="maptheme_scale_symbol_title">Fattore di scala dei simboli</string>
     <string name="maptheme_scale_symbol_summary">Scala aggiuntiva dei simboli nella mappa; 100% = nessun ridimensionamento extra</string>
+    <string name="maptheme_show3Dbuildings">Mostra edifici in 3D</string>
     <string name="vtm_theme_variant">Variante Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
