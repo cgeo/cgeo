@@ -1745,6 +1745,7 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Alto contraste</string>
     <string name="google_maps_style_auto">Tema do dispositivo (Dia/Noite)</string>
+    <string name="google_maps_style_details">Detalhes</string>
     <!-- search -->
     <string name="geo_search_label">Procurar caches próximas</string>
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
