@@ -1,4 +1,7 @@
 ##
+- Fix: Log length check counting some characters twice
+
+##
 - Fix: Caches not loading after enabling live map (UnifiedMap)
 - Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
 - Fix: Compass rose hidden behind distance views (UnifiedMap)
