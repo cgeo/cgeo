@@ -687,6 +687,7 @@
     <string name="map_live_disable">Nonaktifkan hidup</string>
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
+    <string name="google_maps_style_details">Rincian</string>
     <!-- search -->
     <string name="search_coordinates">Koordinat</string>
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
