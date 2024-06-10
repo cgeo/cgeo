@@ -958,7 +958,6 @@
     <string name="no_browser_found">Ingen browser fundet</string>
     <string name="cache_menu_open_with">Åbn med…</string>
     <string name="cache_menu_visit">Log besøg</string>
-    <string name="cache_log_too_long">c:geo kunne ikke indsende din log da den er for lang. Men tak for at du forsøgte at skrive sådan en omfattende log ;-)</string>
     <string name="cache_menu_visit_offline">Hurtig offline log</string>
     <string name="cache_menu_spoilers">Spoilerbilleder</string>
     <string name="cache_menu_around">Cacher i nærheden</string>
