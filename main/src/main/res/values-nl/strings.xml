@@ -774,6 +774,8 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
+    <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
+    <string name="settings_userDefinedTileProviderUri">Voer volledige Uri (zonder slash aan het eind) in voor de tegelprovider. Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -1409,7 +1411,6 @@
     <string name="no_browser_found">Geen browser gevonden</string>
     <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
-    <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
     <string name="cache_empty_log">Sorry, c:geo kon je log niet indienen omdat het leeg is.</string>
     <string name="cache_menu_visit_offline">Snelle offline log</string>
     <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
@@ -2483,6 +2484,7 @@
     <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
     <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
     <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="maptheme_show3Dbuildings">Toon gebouwen in 3D</string>
     <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
