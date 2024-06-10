@@ -1,4 +1,7 @@
 ##
+- Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
+
+##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
 - Poprawka: Brakuje opcji „Użyj bieżącej listy” przy tworzeniu skrytki zdefiniowanej przez użytkownika (UnifiedMap)
 - Poprawka: Kompas ukryty za widokiem odległości (UnifiedMap)
