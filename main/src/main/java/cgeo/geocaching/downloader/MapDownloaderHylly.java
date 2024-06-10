@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class MapDownloaderHylly extends AbstractMapDownloader {
-    private static final Pattern PATTERN_MAP = Pattern.compile("href=\"(https:\\/\\/kartat-dl\\.hylly\\.org\\/(\\d{4}-\\d\\d-\\d\\d)\\/(mtk_suomi\\.map))\">mtk_suomi.map<\\/a>\\s*<\\/td>\\s*<td>(\\d+\\.\\d+ GB)<\\/td>"); // 1:url, 2:date yyyy-MM-dd, 3:file name, 4:size (string)
+    private static final Pattern PATTERN_MAP = Pattern.compile("href=\"(https:\\/\\/kartat-dl\\.hylly\\.org\\/(\\d{4}-\\d\\d-\\d\\d)\\/(mtk_suomi\\.map))\">mtk_suomi.map<\\/a>\\s*<\\/td>\\s*<td>(\\d+(?>\\.\\d+)? GB)<\\/td>"); // 1:url, 2:date yyyy-MM-dd, 3:file name, 4:size (string)
     private static final String[] THEME_FILES = {"peruskartta.zip"};
     private static final MapDownloaderHylly INSTANCE = new MapDownloaderHylly();
 
