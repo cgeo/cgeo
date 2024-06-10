@@ -786,6 +786,8 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
+    <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
+    <string name="settings_userDefinedTileProviderUri">Zadejte úplnou adresu URL (bez koncového lomítka) poskytovatele dlaždic. Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -1437,7 +1439,6 @@
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
     <string name="cache_menu_open_with">Otevřít pomocí…</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
-    <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
     <string name="cache_empty_log">c:geo nemohl odeslat váš log, protože je prázdný.</string>
     <string name="cache_menu_visit_offline">Rychlý offline log</string>
     <string name="cache_menu_spoilers">Obrázky</string>
@@ -2543,6 +2544,7 @@
     <string name="maptheme_scale_text_summary">Dodatečně škáluje textové popisky v mapě; 100% = žádné další škálování</string>
     <string name="maptheme_scale_symbol_title">Měřítko symbolu</string>
     <string name="maptheme_scale_symbol_summary">Dodatečně škáluje velikosti symbolů v mapě; 100% = žádné další škálování</string>
+    <string name="maptheme_show3Dbuildings">Zobrazit budovy ve 3D</string>
     <string name="vtm_theme_variant">Varianta motivu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
