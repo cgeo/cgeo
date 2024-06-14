@@ -1,5 +1,6 @@
 ##
 - Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Fix: Caches not loading after enabling live map (UnifiedMap)
