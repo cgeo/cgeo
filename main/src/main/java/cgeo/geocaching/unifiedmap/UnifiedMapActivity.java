@@ -391,14 +391,16 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     if (setDefaultCenterAndZoom) {
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                     }
-                    viewModel.waypoints.getValue().clear();
                     if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
                         final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
                         if (waypoint != null) {
                             if (setDefaultCenterAndZoom) {
                                 mapFragment.setCenter(waypoint.getCoords());
                             }
-                            viewModel.waypoints.getValue().add(waypoint);
+                            viewModel.waypoints.write(wps -> {
+                                wps.clear();
+                                wps.add(waypoint);
+                            });
                             if (!isTargetSet()) {
                                 onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
                             }
@@ -410,10 +412,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.setCenter(cache.getCoords());
                         }
-
-                        final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
-                        MapUtils.filter(waypoints, getFilterContext());
-                        viewModel.waypoints.getValue().addAll(waypoints);
+                        viewModel.waypoints.write(wps -> {
+                            wps.clear();
+                            final Set<Waypoint> waypoints = new HashSet<>(cache.getWaypoints());
+                            MapUtils.filter(waypoints, getFilterContext());
+                            wps.addAll(waypoints);
+                        });
                         if (!isTargetSet()) {
                             onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(cache.getCoords(), cache.getGeocode()));
                         }
@@ -504,7 +508,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (mapFragment == null) {
             return;
         }
-        viewModel.waypoints.getValue().clear();
         final Viewport currentlyVisible = mapFragment.getViewport();
         if (viewModel.caches.readWithResult(currentlyVisible::count) < Settings.getWayPointsThreshold()) {
             final Set<Waypoint> waypoints;
@@ -523,11 +526,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             Log.d("load.waypoints: " + waypoints.size());
             MapUtils.filter(waypoints, activity.getFilterContext());
-            viewModel.waypoints.getValue().addAll(waypoints);
+            viewModel.waypoints.write(wps -> {
+                wps.clear();
+                wps.addAll(waypoints);
+            });
         } else {
             waypointsFilteredDueToLimit = true;
+            viewModel.waypoints.notifyDataChanged();
         }
-        viewModel.waypoints.postNotifyDataChanged();
     }
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
@@ -957,13 +963,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
             if (key.startsWith(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX)) {
                 final String fullGpxId = key.substring(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX.length());
-
-                for (Waypoint waypoint : viewModel.waypoints.getValue()) {
-                    if (fullGpxId.equals(waypoint.getFullGpxId())) {
-                        result.add(new MapSelectableItem(new RouteItem(waypoint)));
-                        break;
+                viewModel.waypoints.read(wps -> {
+                    for (Waypoint waypoint : wps) {
+                        if (fullGpxId.equals(waypoint.getFullGpxId())) {
+                            result.add(new MapSelectableItem(new RouteItem(waypoint)));
+                            break;
+                        }
                     }
-                }
+                });
             }
 
             if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE)) {
@@ -1036,10 +1043,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     final SimplePopupMenu menu = MapUtils.createCacheWaypointLongClickPopupMenu(this, routeItem, tapX, tapY, viewModel.individualRoute.getValue(), viewModel, null);
                     if (MapStarUtils.canHaveStar(cache)) {
                         final String geocode = routeItem.getGeocode();
-                        final boolean isStarDrawn = viewModel.cachesWithStarDrawn.getValue().contains(geocode);
-                        MapStarUtils.addMenuIfNecessary(menu, cache, isStarDrawn, drawStar -> {
-                            CommonUtils.addRemove(viewModel.cachesWithStarDrawn.getValue(), geocode, !drawStar);
-                            viewModel.cachesWithStarDrawn.notifyDataChanged();
+                        viewModel.cachesWithStarDrawn.write(cwsd -> {
+                            final boolean isStarDrawn = cwsd.contains(geocode);
+                            MapStarUtils.addMenuIfNecessary(menu, cache, isStarDrawn, drawStar -> {
+                                CommonUtils.addRemove(cwsd, geocode, !drawStar);
+                                viewModel.cachesWithStarDrawn.notifyDataChanged();
+                            });
                         });
                     }
                     menu.show();
@@ -1103,8 +1112,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private static WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord, final UnifiedMapViewModel viewModel) {
         WaypointDistanceInfo result;
         // work on a copy to avoid race conditions
-        result = getClosestDistanceInM(coord, viewModel.caches.getListCopy(), Integer.MAX_VALUE, item -> ((Geocache) item).getShortGeocode() + " " + ((Geocache) item).getName());
-        result = getClosestDistanceInM(coord, new ArrayList<>(viewModel.waypoints.getValue()), result.meters, item -> ((Waypoint) item).getName() + " (" + ((Waypoint) item).getWaypointType().gpx + ")");
+        result = getClosestDistanceInM(coord, viewModel.caches.getListCopy(), Integer.MAX_VALUE, item -> ((Geocache) item).getShortGeocode() + " " + item.getName());
+        result = getClosestDistanceInM(coord, viewModel.waypoints.getListCopy(), result.meters, item -> item.getName() + " (" + item.getWaypointType().gpx + ")");
         return result;
     }
 

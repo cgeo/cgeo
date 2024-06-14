@@ -15,8 +15,6 @@ import cgeo.geocaching.utils.MapLineUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Set;
-
 public class CacheCirclesLayer {
 
     private static final String KEY_CACHE_CIRCLES = "cache_circles";
@@ -33,7 +31,7 @@ public class CacheCirclesLayer {
             if (Settings.isShowCircles()) {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
 
-                for (Geocache cache : caches) { // Creates a clone to avoid ConcurrentModificationException
+                for (Geocache cache : caches) {
                     if (cache.applyDistanceRule()) {
                         geoGroup.addItems(
                                 GeoPrimitive.createCircle(cache.getCoords(), radius, GeoStyle.builder()
@@ -50,12 +48,12 @@ public class CacheCirclesLayer {
             }
         });
 
-        viewModel.waypoints.observe(activity, waypoints -> {
+        viewModel.waypoints.observeForRead(activity, waypoints -> {
 
             if (Settings.isShowCircles()) {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
 
-                for (Waypoint waypoint : (Set<Waypoint>) waypoints.clone()) { // Creates a clone to avoid ConcurrentModificationExceptions
+                for (Waypoint waypoint : waypoints) {
                     if (waypoint.applyDistanceRule()) {
 
                         geoGroup.addItems(

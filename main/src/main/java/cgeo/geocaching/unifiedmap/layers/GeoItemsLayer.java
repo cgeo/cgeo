@@ -21,7 +21,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class GeoItemsLayer {
 
@@ -73,8 +72,8 @@ public class GeoItemsLayer {
 
         });
 
-        viewModel.cachesWithStarDrawn.observe(activity, starCodes -> {
-            lastDisplayedCacheStars.executeDiff(starCodes.getAsList(), true, addStar -> {
+        viewModel.cachesWithStarDrawn.observeForRead(activity, starCodes -> {
+            lastDisplayedCacheStars.executeDiff(starCodes, true, addStar -> {
                 final Geocache cache = DataStore.loadCache(addStar, LoadFlags.LOAD_CACHE_OR_DB);
                 final GeoItem star = MapStarUtils.createStar(cache);
                 if (star != null) {
@@ -87,11 +86,11 @@ public class GeoItemsLayer {
         });
 
 
-        viewModel.waypoints.observe(activity, waypoints -> { // this is always executed on UI thread, thus doesn't need to be thread save
+        viewModel.waypoints.observeForRead(activity, waypoints -> { // this is always executed on UI thread, thus doesn't need to be thread save
 
             final Map<String, Integer> currentlyDisplayedWaypoints = new HashMap<>();
 
-            for (Waypoint waypoint : (Set<Waypoint>) waypoints.clone()) { // Creates a clone to avoid ConcurrentModificationExceptions
+            for (Waypoint waypoint : waypoints) { 
                 final CacheMarker cm = lastForceCompactIconMode ? MapMarkerUtils.getWaypointDotMarker(activity.getResources(), waypoint) : MapMarkerUtils.getWaypointMarker(activity.getResources(), waypoint, true, true);
                 currentlyDisplayedWaypoints.put(waypoint.getFullGpxId(), cm.hashCode());
 

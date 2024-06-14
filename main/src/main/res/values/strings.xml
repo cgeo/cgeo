@@ -1964,6 +1964,7 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
+    <string name="google_maps_style_details">Details</string>
 
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>

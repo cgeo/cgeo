@@ -2,6 +2,8 @@ package cgeo.geocaching.utils.livedata;
 
 import cgeo.geocaching.utils.Log;
 
+import android.os.Looper;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
@@ -11,6 +13,7 @@ import androidx.lifecycle.Observer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -43,6 +46,10 @@ public class CollectionLiveData<T, C extends Collection<T>> {
         return new CollectionLiveData<>(supplier, Collections::unmodifiableSet);
     }
 
+    public static <TT> CollectionLiveData<TT, Set<TT>> set() {
+        return set(HashSet::new);
+    }
+
     /** executes an Action reading the collection */
     public void read(final Consumer<C> readAction) {
         lock.readLock().lock();
@@ -65,7 +72,7 @@ public class CollectionLiveData<T, C extends Collection<T>> {
 
 
     /** executes an Action writing to the collection. Notification is auto-executed after write */
-    public void write(final boolean post, final Consumer<C> writeAction) {
+    public void write(final boolean forcePost, final Consumer<C> writeAction) {
         lock.writeLock().lock();
         try {
             final int sizeBefore = value.size();
@@ -74,10 +81,15 @@ public class CollectionLiveData<T, C extends Collection<T>> {
         } finally {
             lock.writeLock().unlock();
         }
-        notifyDataChanged(post);
+        notifyDataChanged(forcePost);
     }
 
-    /** returns a list-copy from this collection.  */
+    /** executes an Action writing to the collection. Notification is auto-executed after write */
+    public void write(final Consumer<C> writeAction) {
+        write(false, writeAction);
+    }
+
+        /** returns a list-copy from this collection.  */
     public List<T> getListCopy() {
         return readWithResult(ArrayList::new);
     }
@@ -93,12 +105,20 @@ public class CollectionLiveData<T, C extends Collection<T>> {
     }
 
     /** manually triggers a notification */
-    public void notifyDataChanged(final boolean post) {
-        if (post) {
+    public void notifyDataChanged(final boolean forcePost) {
+        if (forcePost || !isMainThread()) {
             this.liveData.postValue(0);
         } else {
             this.liveData.setValue(0);
         }
+    }
+
+    public void notifyDataChanged() {
+        notifyDataChanged(false);
+    }
+
+    private static boolean isMainThread() {
+        return Looper.getMainLooper().getThread() == Thread.currentThread();
     }
 
 }

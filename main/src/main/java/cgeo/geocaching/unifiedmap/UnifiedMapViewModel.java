@@ -24,7 +24,6 @@ import android.os.Parcelable;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.UpdateIndividualRoute {
@@ -51,12 +50,10 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Target> target = new MutableLiveData<>();
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
-    //public final ConstantLiveData<LeastRecentlyUsedSet<Geocache>> caches = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
-    public final ConstantLiveData<HashSet<Waypoint>> waypoints = new ConstantLiveData<>(new HashSet<>());
+    public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
 
-    public final ConstantLiveData<LeastRecentlyUsedSet<String>> cachesWithStarDrawn = new ConstantLiveData<>(new LeastRecentlyUsedSet<>(MAX_CACHES));
-
+    public final CollectionLiveData<String, Set<String>> cachesWithStarDrawn = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));
 
     public final MutableLiveData<Geopoint> longTapCoords = new MutableLiveData<>();
     public final MutableLiveData<Geopoint> coordsIndicator = new MutableLiveData<>(); // null if coords indicator should be hidden
