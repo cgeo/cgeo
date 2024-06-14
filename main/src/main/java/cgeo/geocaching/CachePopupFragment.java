@@ -10,11 +10,13 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CacheUtils;
@@ -24,6 +26,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Message;
@@ -43,6 +46,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import org.apache.commons.lang3.StringUtils;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
@@ -174,6 +178,16 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
             CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res);
 
+            updateStoreRefreshButtons(true);
+            getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
+                @Override
+                protected void onReceive(final Context context, final String geocode) {
+                    if (StringUtils.equals(geocode, CachePopupFragment.this.geocode)) {
+                        init();
+                    }
+                }
+            });
+
         } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
         }
@@ -232,9 +246,15 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
 
+    private void updateStoreRefreshButtons(final boolean enable) {
+        ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_store), enable);
+        ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_refresh), enable);
+    }
+
+
     private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
         @Override
-        public void onClick(final View arg0) {
+        public void onClick(final View v) {
             selectListsAndStore(false);
         }
 
@@ -245,41 +265,22 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         private void selectListsAndStore(final boolean fastStoreOnLastSelection) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
+            if (!Network.isConnected()) {
+                showToast(getString(R.string.err_server_general));
                 return;
             }
-
-            if (Settings.getChooseList() || cache.isOffline()) {
-                // let user select list to store cache in
-                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
-                        this::storeCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
-            } else {
-                storeCacheOnLists(Collections.singleton(StoredList.STANDARD_LIST_ID));
-            }
-        }
-
-        private void storeCacheOnLists(final Set<Integer> listIds) {
-            doStoreCacheOnLists(listIds);
+            CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
         }
     }
 
     private class RefreshCacheClickListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            if (progress.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_working));
-                return;
-            }
-
             if (!Network.isConnected()) {
                 showToast(getString(R.string.err_server_general));
                 return;
             }
-
-            final StoreCacheHandler refreshCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
-            progress.show(getActivity(), res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.disposeMessage());
-            cache.refresh(refreshCacheHandler, AndroidRxUtils.networkScheduler);
+            CacheDownloaderService.refreshCache(getActivity(), cache.getGeocode(), true, () -> updateStoreRefreshButtons(false));
         }
     }
 
