@@ -118,6 +118,16 @@ public class ViewUtils {
     }
 
     /**
+     * Sets enabled/disabled flag for given view (without crashing on null view)
+     */
+    public static void setEnabled(final View view, final boolean enabled) {
+        if (view == null) {
+            return;
+        }
+        view.setEnabled(enabled);
+    }
+
+    /**
      * Sets enabled/disabled flag for given view and all nested child views recursively
      */
     public static void setEnabledDeep(final View view, final boolean enabled) {

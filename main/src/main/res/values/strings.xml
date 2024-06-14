@@ -1566,8 +1566,6 @@
     <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory…</string>
-    <string name="cache_dialog_refresh_title">Refresh</string>
-    <string name="cache_dialog_refresh_message">Reloading cache details…</string>
     <string name="cache_menu_speechDeactivate">Stop talking</string>
     <string name="cache_menu_speechActivate">Start talking</string>
     <string name="cache_menu_navigate">Navigate</string>
