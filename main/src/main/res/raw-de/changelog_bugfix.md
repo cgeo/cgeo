@@ -1,5 +1,6 @@
 ##
 - Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Korrektur: Caches werden nach Aktivierung der Live-Karte nicht geladen (UnifiedMap)
