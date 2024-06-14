@@ -1,5 +1,6 @@
 ##
-- Oprava: Kontrola délky logu počítající některé znaky dvakrát
+- Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
