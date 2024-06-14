@@ -1,5 +1,6 @@
 ##
 - Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Correction : Les caches ne se chargent pas après l'activation de la carte en temps réel (UnifiedMap)
