@@ -19,3 +19,4 @@
 - Zmiana: Zaktualizowano zintegrowany BRouter do wersji 1.7.5
 - Nowość: Odczytywanie informacji o wysokości ze ścieżki przy imporcie
 - Nowość: API do Locusa teraz obsługuje rozmiar skrytki wirtualnej
+- Poprawki: Wyniki wyszukiwania dla lokalizacji nie były posortowane według odległości do lokalizacji docelowej
