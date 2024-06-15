@@ -19,3 +19,4 @@
 - Change: Updated integrated BRouter to v1.7.5
 - Nuovo: Lettura delle informazioni di elevazione dalla traccia durante l'importazione
 - Nuovo: API a Locus che supporta ora la dimensione del cache "virtuale"
+- Fix: Search results for a location no longer sorted by distance to target location
