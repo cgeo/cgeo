@@ -1,5 +1,6 @@
 ##
 - Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
