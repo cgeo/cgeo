@@ -19,3 +19,4 @@
 - Změna: Aktualizace doplňku BRouter na verzi 1.7.5
 - Novinka: Čtení informací o nadmořské výšce ze stopy při importu
 - Novinka: API pro Locus nyní podporuje "virtuální" velikost kešky
+- Oprava: Výsledky vyhledání místa již nejsou řazeny podle vzdálenosti od cílového místa
