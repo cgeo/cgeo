@@ -16,7 +16,7 @@ public class DistanceView {
     private final MapDistanceDrawerCommons mapDistanceDrawer;
 
     public DistanceView(final View root, final Geopoint destinationCoords, final boolean showBothDistances) {
-        mapDistanceDrawer = new MapDistanceDrawerCommons(root);
+        mapDistanceDrawer = new MapDistanceDrawerCommons(root, null);
         this.showBothDistances = showBothDistances;
         setDestination(destinationCoords);
     }

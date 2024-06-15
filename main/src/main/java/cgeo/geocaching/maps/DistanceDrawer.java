@@ -16,10 +16,10 @@ public class DistanceDrawer {
 
     private final MapDistanceDrawerCommons mapDistanceDrawer;
 
-    public DistanceDrawer(final View root, final Geopoint destinationCoords, final boolean showBothDistances) {
+    public DistanceDrawer(final View root, final Geopoint destinationCoords, final boolean showBothDistances, final Runnable handleSwapNotification) {
         this.destinationCoords = destinationCoords;
         this.showBothDistances = showBothDistances;
-        mapDistanceDrawer = new MapDistanceDrawerCommons(root);
+        mapDistanceDrawer = new MapDistanceDrawerCommons(root, handleSwapNotification);
     }
 
     public void setCoordinates(final Location location) {
