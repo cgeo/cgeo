@@ -121,6 +121,10 @@
             <!-- 'adjustNothing' fixes the issue described in #11610 -->
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
+        <activity android:name=".DBInspectionActivity"
+            android:exported="false"
+            android:theme="@style/cgeo"
+            android:launchMode="singleTop" />
         <activity
             android:name=".InstallWizardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

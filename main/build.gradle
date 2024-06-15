@@ -337,6 +337,10 @@ dependencies {
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
 
+    // DB inspection
+    implementation 'com.github.moving-bits:datatables:-SNAPSHOT'
+    implementation 'com.github.moving-bits:dbinspection:b6c15506ee'
+
     // Jackson XML processing
     // Jackson 2.14++ needs minSdk 26
     //noinspection GradleDependency

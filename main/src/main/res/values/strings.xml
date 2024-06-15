@@ -3290,4 +3290,17 @@
         <item quantity="many">%d unread messages in message center</item>
         <item quantity="other">%d unread messages in message center</item>
     </plurals>
+
+    <!-- db inspection -->
+    <string name="view_database">View database</string>
+    <string name="dbi_select_title">(Select table)</string>
+    <string name="dbi_columnproperties_title">Column properties</string>
+    <string name="dbi_columnproperties_message">Field: %1$s\nType: %2$s\nStorage: %3$s</string>
+    <string name="dbi_edit_title">Edit "%1$s" of row %2$d"</string>
+    <string name="dbi_edit_ok">Field updated</string>
+    <string name="dbi_edit_error">Error while updating field</string>
+    <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
+    <string name="dbi_search_title">Search for</string>
+
+
 </resources>
