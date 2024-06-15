@@ -1,5 +1,6 @@
 ##
 - Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
+- Poprawka: Dostosowanie do zmian na stronie hylly
 
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
