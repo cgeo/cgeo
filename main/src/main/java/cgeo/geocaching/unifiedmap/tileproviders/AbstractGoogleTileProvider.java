@@ -20,12 +20,17 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider implements 
         super(2, 21, new Pair<>("", false));
         this.mapType = mapType;
         this.tileProviderName = CgeoApplication.getInstance().getString(nameRes);
+        this.supportsThemeOptions = true;
     }
 
     public void setMapType(final GoogleMap googleMap) {
         if (googleMap != null) {
             googleMap.setMapType(mapType);
         }
+    }
+
+    public int getMapType() {
+        return mapType;
     }
 
     @Override
