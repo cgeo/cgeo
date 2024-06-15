@@ -392,6 +392,7 @@
     <string translatable="false" name="pref_fakekey_memory_dump">fakekey_memory_dump</string>
     <string translatable="false" name="pref_fakekey_reset_otm">fakekey_reset_otm</string>
     <string translatable="false" name="pref_fakekey_view_settings">fakekey_view_settings</string>
+    <string translatable="false" name="pref_fakekey_view_database">fakekey_view_database</string>
 
 
     <!-- ============================================================================================================================================================================== -->

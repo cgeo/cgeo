@@ -1,6 +1,7 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.DBInspectionActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
@@ -5940,6 +5941,34 @@ public class DataStore {
                 return this;
             }
         }
+    }
+
+    /**
+     * Solely to be used by {@link DBInspectionActivity}!
+     * make sure to release the lock by using {@link #releaseDatabase}
+     */
+    public static SQLiteDatabase getDatabase(final boolean writable) {
+        if (writable) {
+            databaseLock.writeLock().lock();
+            Log.d("lock db in writable mode");
+        } else {
+            databaseLock.readLock().lock();
+            Log.d("lock db in readable mode");
+        }
+        return database;
+    }
+
+    /**
+     * Solely to be used by {@link DBInspectionActivity}!
+     * Release a lock acquired by using {@link #getDatabase}
+     */
+    public static void releaseDatabase(final boolean writable) {
+        if (writable) {
+            databaseLock.writeLock().unlock();
+        } else {
+            databaseLock.readLock().unlock();
+        }
+        Log.d("unlock db");
     }
 
 }

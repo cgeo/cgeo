@@ -1,5 +1,6 @@
 package cgeo.geocaching.settings.fragments;
 
+import cgeo.geocaching.DBInspectionActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
@@ -36,6 +37,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         }));
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
+        setPrefClick(this, R.string.pref_fakekey_view_database, () -> startActivity(new Intent(activity, DBInspectionActivity.class)));
 
         findPreference(getString(R.string.pref_persistablefolder_testdir)).setVisible(BranchDetectionHelper.isDeveloperBuild());
 

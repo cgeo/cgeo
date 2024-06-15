@@ -81,5 +81,10 @@
             android:layout="@layout/preference_button"
             android:title="@string/view_settings"
             app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_fakekey_view_database"
+            android:layout="@layout/preference_button"
+            android:title="@string/view_database"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
