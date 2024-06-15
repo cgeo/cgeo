@@ -19,3 +19,4 @@
 - Wijziging: geïntegreerde BRouter bijgewerkt naar v1.7.5
 - Nieuw: Lees hoogte informatie van track bij importeren
 - Nieuw: API van Locus ondersteunt nu de cache grootte "virtueel"
+- Fix: Search results for a location no longer sorted by distance to target location
