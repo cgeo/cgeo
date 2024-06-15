@@ -1,5 +1,6 @@
 ##
 - Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
 
 ##
 - Исправлено: Тайники не загружались после включения онлайн карты (ЕдинаяКарта)
