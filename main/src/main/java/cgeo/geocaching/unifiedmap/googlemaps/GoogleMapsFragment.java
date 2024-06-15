@@ -89,6 +89,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void onMapReady(final @NonNull GoogleMap googleMap) {
         mMap = googleMap;
+
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
         setMapRotation(Settings.getMapRotation());
@@ -277,18 +278,19 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     // theme & language related methods
 
     @Override
+    public void selectThemeOptions(final Activity activity) {
+        final int mapType = ((AbstractGoogleTileProvider) currentTileProvider).getMapType();
+        GoogleMapsThemeHelper.selectThemeOptions(activity, mapType, mMap, scaleDrawer);
+    }
+
+    @Override
     public void selectTheme(final Activity activity) {
-        GoogleMapsThemeHelper.selectTheme(activity, mMap, this::applyTheme);
+        GoogleMapsThemeHelper.selectTheme(activity, mMap, scaleDrawer);
     }
 
     @Override
     public void applyTheme() {
-        applyTheme(GoogleMapsThemeHelper.GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()));
-    }
-
-    public void applyTheme(final GoogleMapsThemeHelper.GoogleMapsThemes theme) {
-        scaleDrawer.setNeedsInvertedColors(theme.needsInvertedColors);
-        GoogleMapsThemeHelper.setTheme(requireActivity(), mMap, theme);
+        GoogleMapsThemeHelper.setCurrentThemeOnMap(mMap, scaleDrawer);
     }
 
 

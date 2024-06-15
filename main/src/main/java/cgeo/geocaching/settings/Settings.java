@@ -562,11 +562,16 @@ public class Settings {
     }
 
     public static void putBoolean(final int prefKeyId, final boolean value) {
+        putBooleanDirect(getKey(prefKeyId), value);
+    }
+
+    public static void putBooleanDirect(final String key, final boolean value) {
+
         if (sharedPrefs == null) {
             return;
         }
         final SharedPreferences.Editor edit = sharedPrefs.edit();
-        edit.putBoolean(getKey(prefKeyId), value);
+        edit.putBoolean(key, value);
         edit.apply();
     }
 
@@ -2360,6 +2365,16 @@ public class Settings {
 
     public static String getSelectedGoogleMapTheme() {
         return getString(R.string.pref_google_map_theme, "DEFAULT");
+    }
+
+    public static boolean isGoogleMapOptionEnabled(final String option, final boolean defaultValue) {
+        final String key = getKey(R.string.pref_google_map_option_enabled) + "." + option;
+        return getBooleanDirect(key, defaultValue);
+    }
+
+    public static void setGoogleMapOptionEnabled(final String option, final boolean enabled) {
+        final String key = getKey(R.string.pref_google_map_option_enabled) + "." + option;
+        putBooleanDirect(key, enabled);
     }
 
     public static boolean getHintAsRot13() {
