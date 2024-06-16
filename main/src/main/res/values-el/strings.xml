@@ -1509,6 +1509,7 @@
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
     <string name="google_maps_style_details">Λεπτομέρειες</string>
+    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
