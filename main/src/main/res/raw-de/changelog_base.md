@@ -16,7 +16,7 @@
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
 - Neu: Listenauswahl: Automatische Gruppierung von Einträgen mit einem ':' im Namen
 - Änderung: Benutze OSM Nominatum als Fallback-Geokodierer, ersetze MapQuest Geocoder (der für uns nicht mehr funktioniert)
-- Change: Updated integrated BRouter to v1.7.5
+- Neu: Internen BRouter auf v1.7.5 aktualisiert
 - Neu: Höheninformationen beim Import einer Trackdatei auswerten
 - Neu: API für Locus unterstützt die Cache-Größe "virtuell"
 - Fix: Search results for a location no longer sorted by distance to target location
