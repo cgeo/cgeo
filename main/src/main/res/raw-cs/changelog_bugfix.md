@@ -1,6 +1,7 @@
 ##
 - Oprava: Kontrola délky logu počítající některé znaky dvakrát
 - Oprava: Přizpůsobení se změně webových stránek hylly
+- Novinka: Další možnosti témat pro Mapy Google
 
 ##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
