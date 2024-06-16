@@ -1574,6 +1574,7 @@
     <string name="google_maps_style_contrast">Hög kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
     <string name="google_maps_style_details">Detaljer</string>
+    <string name="google_maps_option_group_theme">Inställningar för teman</string>
     <!-- search -->
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
