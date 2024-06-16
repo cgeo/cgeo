@@ -1120,6 +1120,7 @@
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
     <string name="google_maps_style_details">Detaljer</string>
+    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
