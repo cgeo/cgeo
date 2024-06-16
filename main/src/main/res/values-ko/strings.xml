@@ -1731,6 +1731,7 @@
     <string name="google_maps_style_contrast">고대비</string>
     <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
     <string name="google_maps_style_details">상세표시</string>
+    <string name="google_maps_option_group_theme">테마 옵션</string>
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
