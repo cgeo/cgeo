@@ -1777,6 +1777,7 @@
     <string name="google_maps_style_contrast">Высокая контрастность</string>
     <string name="google_maps_style_auto">Тема устройства (День/ночь)</string>
     <string name="google_maps_style_details">Детали</string>
+    <string name="google_maps_option_group_theme">Опции темы</string>
     <!-- search -->
     <string name="geo_search_label">Поиск тайников поблизости</string>
     <string name="search_bar_hint">Поиск тайника / трекабла</string>
