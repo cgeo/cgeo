@@ -669,6 +669,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Has Offline Log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Has Offline Found Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Solved Mystery</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Corrected Coordinates</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Has User Defined Waypoints</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">This filter setting will only affect mystery caches. If you like to exclude other cache types, please define an appropriate cache type filter.\n\nA mystery is considered \'solved\' if it has either changed coordinates or a valid final waypoint filled with coordinates.</string>
 
