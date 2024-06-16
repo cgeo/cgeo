@@ -1611,6 +1611,7 @@
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
     <string name="google_maps_style_details">Detail</string>
+    <string name="google_maps_option_group_theme">Nastavenia Témy</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
