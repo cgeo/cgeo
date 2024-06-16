@@ -1400,6 +1400,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
     <string name="google_maps_style_details">Detalles</string>
+    <string name="google_maps_option_group_theme">Opciones de Temas</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
