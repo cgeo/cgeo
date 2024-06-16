@@ -1,6 +1,7 @@
 ##
 - Fix: Log length check counting some characters twice
 - Fix: Adapt to hylly website change
+- New: Additional theming options for Google Maps
 
 ##
 - Fix: Caches not loading after enabling live map (UnifiedMap)
