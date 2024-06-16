@@ -28,6 +28,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -440,6 +441,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         Geopoint targetCoords = sortContext.getSort().getTargetCoords();
         if (null == targetCoords) {
             targetCoords = coords;
+        } else {
+            holder.binding.distance.setTypeface(Typeface.BOLD_ITALIC);
         }
         holder.binding.distance.update(targetCoords);
 

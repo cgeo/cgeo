@@ -4,6 +4,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -36,5 +37,9 @@ public class DistanceView extends AppCompatTextView {
         } else {
             setText(coords == null ? "?" : Units.getDistanceFromKilometers(coords.distanceTo(cacheCoords)));
         }
+    }
+
+    public void setTypeface(int typeface) {
+        setTypeface(getTypeface(), typeface);
     }
 }
