@@ -155,16 +155,26 @@ public class GCLogin extends AbstractLogin {
         return status;
     }
 
-    private void logLastLoginError(final String status) {
-        Settings.setLastLoginErrorGC(status);
-        Log.w("Login.login: " + status);
+    private void logLastLoginError(final String status, final boolean retry) {
+        logLastLoginError(status, retry, "");
+    }
+
+    private void logLastLoginError(final String status, final boolean retry, final String additionalLogInfo) {
+        final String retryMarker = " // ";
+        final String currentStatus = Settings.getLastLoginErrorGC() == null || Settings.getLastLoginErrorGC().first == null ? "" : Settings.getLastLoginErrorGC().first;
+        if (!retry && currentStatus.endsWith(retryMarker)) {
+            Settings.setLastLoginErrorGC(currentStatus + status);
+        } else {
+            Settings.setLastLoginErrorGC(status + retryMarker);
+        }
+        Log.w("Login.login: " + status + " (retry=" + retry + ") [" + additionalLogInfo + "]");
     }
 
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            logLastLoginError("No login information stored");
+            logLastLoginError("No login information stored", retry);
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
@@ -175,7 +185,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                logLastLoginError("Failed to retrieve login page (1st)");
+                logLastLoginError("Failed to retrieve login page (1st)", retry);
                 return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
@@ -186,13 +196,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                logLastLoginError("failed to find request verification token");
+                logLastLoginError("failed to find request verification token", retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                logLastLoginError("Failed to retrieve login page (2nd)");
+                logLastLoginError("Failed to retrieve login page (2nd)", retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -203,32 +213,32 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (loginData.contains("<div class=\"g-recaptcha\" data-sitekey=\"")) {
-                logLastLoginError("Failed to log in to geocaching.com due to captcha required");
+                logLastLoginError("Failed to log in to geocaching.com due to captcha required", retry);
                 return resetGcCustomDate(StatusCode.LOGIN_CAPTCHA_ERROR);
             }
 
             if (loginData.contains("id=\"signup-validation-error\"")) {
-                logLastLoginError("Failed to log in to geocaching.com as " + username + " because of wrong username/password");
+                logLastLoginError("Failed to log in to geocaching.com as " + username + " because of wrong username/password", retry);
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("content=\"account/join/success\"")) {
-                logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
+                logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first", retry);
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason");
+            logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason", retry, loginData);
             if (retry) {
                 getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
-            logLastLoginError("Unknown error");
+            logLastLoginError("Unknown error", retry, loginData);
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
-            logLastLoginError("communication error");
+            logLastLoginError("communication error", retry);
             return StatusCode.CONNECTION_FAILED_GC;
         }
     }
