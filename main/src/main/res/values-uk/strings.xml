@@ -891,6 +891,7 @@
     <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="quick_settings">Швидкі налаштування</string>
     <string name="google_maps_style_details">Деталі</string>
+    <string name="google_maps_option_group_theme">Параметри тем</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_coordinates_button">Пошук за координатами</string>
