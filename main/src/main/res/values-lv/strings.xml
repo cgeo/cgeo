@@ -861,6 +861,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <string name="google_maps_style_details">Informācija</string>
+    <string name="google_maps_option_group_theme">Kartes motīva iestatījumi</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
