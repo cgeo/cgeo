@@ -1776,6 +1776,17 @@
     <string name="google_maps_style_contrast">Wysoki kontrast</string>
     <string name="google_maps_style_auto">Motyw urządzenia (Dzień/Noc)</string>
     <string name="google_maps_style_details">Szczegóły</string>
+    <string name="google_maps_option_group_map">Opcje mapy</string>
+    <string name="google_maps_option_show_traffic">Pokaż natężenie ruchu</string>
+    <string name="google_maps_option_show_buildings">Pokaż budynki 3D</string>
+    <string name="google_maps_option_group_theme">Opcje motywu</string>
+    <string name="google_maps_option_show_feature_theme">Pokaż funkcje motywu</string>
+    <string name="google_maps_option_show_feature_administrative_all">Pokaż granice administracyjne</string>
+    <string name="google_maps_option_show_feature_landscape_all">Pokaż w trybie poziomym</string>
+    <string name="google_maps_option_show_feature_poi_all">Pokaż ciekawe miejsca</string>
+    <string name="google_maps_option_show_feature_road_all">Pokaż drogi</string>
+    <string name="google_maps_option_show_feature_transit_all">Pokaż przejścia</string>
+    <string name="google_maps_option_show_feature_water_all">Pokaż wodę</string>
     <!-- search -->
     <string name="geo_search_label">Szukaj skrytek w pobliżu</string>
     <string name="search_bar_hint">Szukaj skrytek/przedmiotów podróżnych</string>
