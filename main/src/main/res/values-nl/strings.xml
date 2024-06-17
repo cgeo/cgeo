@@ -1746,7 +1746,17 @@
     <string name="google_maps_style_contrast">Hoog contrast</string>
     <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
     <string name="google_maps_style_details">Details</string>
+    <string name="google_maps_option_group_map">Kaart Opties</string>
+    <string name="google_maps_option_show_traffic">Toon Verkeer</string>
+    <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
     <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
+    <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
+    <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
+    <string name="google_maps_option_show_feature_poi_all">Toon Interessante punten</string>
+    <string name="google_maps_option_show_feature_road_all">Toon Wegen</string>
+    <string name="google_maps_option_show_feature_transit_all">Toon Doorvoer</string>
+    <string name="google_maps_option_show_feature_water_all">Toon Water</string>
     <!-- search -->
     <string name="geo_search_label">Zoek caches in de omgeving</string>
     <string name="search_bar_hint">Caches/trackables zoeken</string>
