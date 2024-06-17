@@ -2,6 +2,8 @@
 - Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
 - Poprawka: Dostosowanie do zmian na stronie hylly
 - Nowość: Dodatkowe opcje motywu dla map Google
+- Poprawka: Kompas ukryty za widokiem odległości (Google Maps v2)
+- Nowość: Ulepszenie logowania w przypadku błędów logowania GC
 
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
