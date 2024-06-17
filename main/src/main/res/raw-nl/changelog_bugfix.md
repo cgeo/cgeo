@@ -1,7 +1,9 @@
 ##
-- Fix: Log length check counting some characters twice
-- Fix: Adapt to hylly website change
-- New: Additional theming options for Google Maps
+- Oplossing: Log lengte controle telt sommige tekens twee keer
+- Oplossing: Aanpassen aan hylly's website verandering
+- Nieuw: Aanvullende themaopties voor Google Maps
+- Oplossing: Kompas roos verborgen achter afstandsweergave (Google Maps v2)
+- Nieuw: Aanpassen van inloggen in geval van GC login fouten
 
 ##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
