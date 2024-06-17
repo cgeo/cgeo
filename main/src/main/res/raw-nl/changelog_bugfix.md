@@ -1,6 +1,6 @@
 ##
-- Fix: Log length check counting some characters twice
-- Fix: Adapt to hylly website change
+- Oplossing: Log lengte controle telt sommige tekens twee keer
+- Oplossing: Aanpassen aan hylly's website verandering
 
 ##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
