@@ -4,7 +4,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
@@ -39,7 +38,7 @@ public class DistanceView extends AppCompatTextView {
         }
     }
 
-    public void setTypeface(int typeface) {
+    public void setTypeface(final int typeface) {
         setTypeface(getTypeface(), typeface);
     }
 }
