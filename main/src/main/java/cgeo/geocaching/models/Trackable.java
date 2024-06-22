@@ -6,9 +6,9 @@ import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;

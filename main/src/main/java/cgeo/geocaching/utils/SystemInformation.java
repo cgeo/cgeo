@@ -24,6 +24,7 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.ActivityManager;
 import android.content.Context;

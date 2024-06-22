@@ -1,6 +1,11 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+
 import android.graphics.Color;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 
 public class ColorUtils {
     private ColorUtils() {
@@ -33,9 +38,18 @@ public class ColorUtils {
      * @param rgb2 second {@link Color} int
      * @return contrast ratio in range from 1 to 21
      */
-    public static double getContrastRatio(final int rgb1, final int rgb2) {
+    public static double getContrastRatio(@ColorInt final int rgb1, @ColorInt final int rgb2) {
         final double lumi1 = getLuminance(Color.red(rgb1), Color.green(rgb1), Color.blue(rgb1)) + 0.05;
         final double lumi2 = getLuminance(Color.red(rgb2), Color.green(rgb2), Color.blue(rgb2)) + 0.05;
         return Math.max(lumi1, lumi2) / Math.min(lumi1, lumi2);
+    }
+
+    public static String colorToString(@ColorInt final int color) {
+        return "R:" + Color.red(color) + ";G:" + Color.green(color) + ";B:" + Color.blue(color) + ";A:" + Color.alpha(color);
+    }
+
+    @ColorInt
+    public static int colorFromResource(@ColorRes final int colorRes) {
+        return CgeoApplication.getInstance().getResources().getColor(colorRes);
     }
 }

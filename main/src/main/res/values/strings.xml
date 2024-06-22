@@ -1604,6 +1604,7 @@
     <string name="cache_menu_reset_foundstate">Reset found state</string>
     <string name="cache_foundstate_updated">Found state updated</string>
     <string name="cache_menu_set_cache_icon">Set cache icon</string>
+    <string name="cache_menu_change_description_style">Change description style</string>
     <string name="cache_icon_updated">Cache icon updated</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>
@@ -1732,6 +1733,11 @@
     <string name="goto_targets_list">User-defined caches</string>
     <string name="clear_goto_history_title">Clear goto history</string>
     <string name="clear_goto_history">This will delete all historical waypoints except the five most recent</string>
+
+    <!-- html styles -->
+    <string name="html_style_default">Default</string>
+    <string name="html_style_monochrome">Monochrome</string>
+    <string name="html_style_source">HTML Source</string>
 
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">degrees</string>

@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.utils.html;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;

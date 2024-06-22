@@ -17,12 +17,12 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
