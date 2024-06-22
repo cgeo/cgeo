@@ -130,9 +130,9 @@ public void testOpenAndroMaps() {
         // check one named entry
         final Download d = findByName(list, "Freizeitkarte Hamburg");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 18.64 MB
+        final String sizeInfoString = d.getSizeInfo(); // 20.11 MB
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(17.8F, 20.0F);
+        assertThat(sizeInfoFloat).isBetween(17.8F, 25.0F);
     }
 
     @Test
