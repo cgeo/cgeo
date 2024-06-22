@@ -153,6 +153,7 @@ public abstract class AbstractMapFragment extends Fragment {
     // ========================================================================
     // theme & language related methods
 
+
     public void selectTheme(final Activity activity) {
         // default is empty
     }

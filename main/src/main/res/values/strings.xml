@@ -1965,6 +1965,17 @@
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
     <string name="google_maps_style_details">Details</string>
+    <string name="google_maps_option_group_map">Map Options</string>
+    <string name="google_maps_option_show_traffic">Show Traffic</string>
+    <string name="google_maps_option_show_buildings">Show 3D buildings</string>
+    <string name="google_maps_option_group_theme">Theme Options</string>
+    <string name="google_maps_option_show_feature_theme">Show Theme features</string>
+    <string name="google_maps_option_show_feature_administrative_all">Show Administrative</string>
+    <string name="google_maps_option_show_feature_landscape_all">Show Landscape</string>
+    <string name="google_maps_option_show_feature_poi_all">Show Points of Interest</string>
+    <string name="google_maps_option_show_feature_road_all">Show Roads</string>
+    <string name="google_maps_option_show_feature_transit_all">Show Transit</string>
+    <string name="google_maps_option_show_feature_water_all">Show Water</string>
 
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>
