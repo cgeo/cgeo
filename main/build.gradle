@@ -15,7 +15,7 @@ apply plugin: 'com.android.application'
 
 android {
     namespace 'cgeo.geocaching'
-    compileSdk 33
+    compileSdk 34
 
 
     compileOptions {
@@ -30,7 +30,7 @@ android {
     defaultConfig {
         minSdk 21
         //noinspection OldTargetApi
-        targetSdk 33
+        targetSdk 34
         versionName versionNameFromDate()
         versionCode versionCodeFromDate(0)
 
