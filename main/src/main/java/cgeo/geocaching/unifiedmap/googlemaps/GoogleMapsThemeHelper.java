@@ -196,7 +196,7 @@ class GoogleMapsThemeHelper {
             .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
             .setSelectedItems(selected)
             .activateGrouping(l -> LocalizationUtils.getString(l.isThemeSpecific ? R.string.google_maps_option_group_theme : R.string.google_maps_option_group_map))
-            .setGroupDisplayMapper(s -> TextParam.text("**" + s + "**").setMarkdown(true));
+            .setGroupDisplayMapper((s, elements) -> TextParam.text("**" + s + "**").setMarkdown(true));
 
         SimpleDialog.of(activity).setTitle(R.string.map_theme_options).selectMultiple(model, selectedOptions -> {
             for (GoogleMapsThemeOption option : GoogleMapsThemeOption.values()) {
