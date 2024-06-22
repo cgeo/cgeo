@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.utils.html;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;

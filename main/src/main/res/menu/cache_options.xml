@@ -193,6 +193,11 @@
                 android:title="@string/cache_menu_set_cache_icon"
                 android:visible="false">
             </item>
+            <item
+                android:id="@+id/menu_change_description_style"
+                android:title="@string/cache_menu_change_description_style"
+                android:visible="true">
+            </item>
         </menu>
     </item>
 </menu>

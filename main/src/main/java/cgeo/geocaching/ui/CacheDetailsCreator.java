@@ -18,7 +18,7 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import static cgeo.geocaching.utils.Formatter.SEPARATOR;
 
 import android.annotation.SuppressLint;

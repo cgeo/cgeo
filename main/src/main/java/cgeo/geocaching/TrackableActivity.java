@@ -24,12 +24,12 @@ import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.UnknownTagsHandler;
+import cgeo.geocaching.utils.html.HtmlUtils;
+import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
 import android.app.ProgressDialog;
 import android.content.Intent;

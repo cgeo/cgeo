@@ -6,8 +6,8 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -15,13 +15,13 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.EditUtils;
-import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
