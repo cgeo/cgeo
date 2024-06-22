@@ -459,6 +459,9 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
     }
 
     public void updateHomeBadge(final int delta) {
+        if (delta == 0) {
+            return;
+        }
         final int badgeColor;
         synchronized (hasHighPrioNotification) {
             badgeColor = hasHighPrioNotification.get() ? 0xffff0000 : 0xff0a67e2;

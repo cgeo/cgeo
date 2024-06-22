@@ -269,7 +269,7 @@ public class DownloaderUtils {
      * if yes: trigger download(s)
      */
     public static void checkForUpdatesAndDownloadAll(final MainActivity activity, final int layout, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
-        activity.displayActionItem(layout, info, (actionRequested) -> {
+        activity.displayActionItem(layout, info, true, (actionRequested) -> {
             if (actionRequested) {
                 new CheckForDownloadsTask(activity, title, type).execute();
             }

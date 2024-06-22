@@ -262,6 +262,14 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
 
+            // location permission currently granted?
+            if (!PermissionContext.LOCATION.getNotGrantedPermissions().isEmpty()) {
+                displayActionItem(R.id.missingLocationPermission, R.string.location_no_permission, false, doAsk -> {
+                    if (doAsk) {
+                        this.askLocationPermissionAction.launch(null);
+                    }
+                });
+            }
             binding.locationStatus.setPermissionRequestCallback(() -> {
                 this.askLocationPermissionAction.launch(null);
             });
@@ -285,7 +293,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
             }
             final int count = intent.getIntExtra(EXTRA_MESSAGE_CENTER_COUNTER, 0);
             new Handler(Looper.getMainLooper()).post(() -> { // needs to be done on UI thread
-                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), (actionRequested) -> {
+                displayActionItem(R.id.mcupdate, res.getQuantityString(R.plurals.mcupdate, count, count), true, (actionRequested) -> {
                     updateHomeBadge(-1);
                     if (actionRequested) {
                         ShareUtils.openUrl(that, GCConstants.URL_MESSAGECENTER);
@@ -588,25 +596,26 @@ public class MainActivity extends AbstractNavigationBarActivity {
      * display action notifications, e. g. update or backup reminders
      * action callback accepts true, if action is to be performed / false if to be postponed
      */
-    public void displayActionItem(final int layout, final @StringRes int info, final Action1<Boolean> action) {
-        displayActionItem(layout, getString(info), action);
+    public void displayActionItem(final int layout, final @StringRes int info, final boolean withBadge, final Action1<Boolean> action) {
+        displayActionItem(layout, getString(info), withBadge, action);
     }
 
-    public void displayActionItem(final int layout, final String info, final Action1<Boolean> action) {
+    public void displayActionItem(final int layout, final String info, final boolean withBadge, final Action1<Boolean> action) {
+        final int delta = withBadge ? 1 : 0;
         final TextView l = findViewById(layout);
         if (l != null) {
             l.setVisibility(View.VISIBLE);
-            updateHomeBadge(1);
+            updateHomeBadge(delta);
             l.setText(info);
             l.setOnClickListener(v -> {
                 action.call(true);
                 l.setVisibility(View.GONE);
-                updateHomeBadge(-1);
+                updateHomeBadge(-delta);
             });
             l.setOnLongClickListener(v -> {
                 action.call(false);
                 l.setVisibility(View.GONE);
-                updateHomeBadge(-1);
+                updateHomeBadge(-delta);
                 return true;
             });
         }
