@@ -1380,8 +1380,6 @@
     <string name="cache_dialog_offline_save_message">Salvataggio del cache per uso offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Eliminazione del cache dalla memoria del dispositivo…</string>
-    <string name="cache_dialog_refresh_title">Aggiorna</string>
-    <string name="cache_dialog_refresh_message">Ricaricamento dettagli cache…</string>
     <string name="cache_menu_speechDeactivate">Stop voce</string>
     <string name="cache_menu_speechActivate">Start voce</string>
     <string name="cache_menu_navigate">Naviga</string>
