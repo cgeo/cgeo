@@ -2542,12 +2542,12 @@
         <item quantity="other">Recommend this cache (%d remaining)</item>
     </plurals>
     <plurals name="fav_points_remaining">
-        <item quantity="zero">Add this cache to favorites (%d remaining)</item>
-        <item quantity="one">Add this cache to favorites (%d remaining)</item>
-        <item quantity="two">Add this cache to favorites (%d remaining)</item>
-        <item quantity="few">Add this cache to favorites (%d remaining)</item>
-        <item quantity="many">Add this cache to favorites (%d remaining)</item>
-        <item quantity="other">Add this cache to favorites (%d remaining)</item>
+        <item quantity="zero">Make this cache a favorite (%d remaining)</item>
+        <item quantity="one">Make this cache a favorite (%d remaining)</item>
+        <item quantity="two">Make this cache a favorite (%d remaining)</item>
+        <item quantity="few">Make this cache a favorite (%d remaining)</item>
+        <item quantity="many">Make this cache a favorite (%d remaining)</item>
+        <item quantity="other">Make this cache a favorite (%d remaining)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Setting cache icons</string>
     <plurals name="command_set_cache_icons_result">
