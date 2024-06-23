@@ -1078,8 +1078,6 @@
     <string name="cache_dialog_offline_save_message">Lagrer cachen lokalt…</string>
     <string name="cache_dialog_offline_drop_title">Lagret lokalt</string>
     <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten…</string>
-    <string name="cache_dialog_refresh_title">Oppdater</string>
-    <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_target">Sett som mål</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
