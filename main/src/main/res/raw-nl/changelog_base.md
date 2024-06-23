@@ -4,6 +4,7 @@
 - Nieuw: Ondersteuning voor gebruiker-gedefinieerde tegelaanbieders
 - Oplossing: Vernieuw kaartgegevens na het openen / sluiten van instellingen dialoogvenster (UnifiedMap)
 - Nieuw: Wissel display van gebouwen 2D/3D (UnifiedMap OSM kaarten)
+- New: Cache store/refresh from popup moved into background
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -20,3 +21,4 @@
 - Nieuw: Lees hoogte informatie van track bij importeren
 - Nieuw: API van Locus ondersteunt nu de cache grootte "virtueel"
 - Oplossing: Zoekresultaten voor een locatie niet langer gesorteerd op afstand tot doellocatie
+- New: "Corrected coordinates" filter
