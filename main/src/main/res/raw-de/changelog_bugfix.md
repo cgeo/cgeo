@@ -1,6 +1,6 @@
 ##
-- Fix: Log length check counting some characters twice
-- Fix: Adapt to hylly website change
+- Korrektur: Längenprüfung bei Logs zählt manche Zeichen doppelt
+- Korrektur: hylly-Karte wird im Downloader nicht angezeigt (Webseitenänderung)
 - New: Additional theming options for Google Maps
 - Fix: Compass rose hidden behind distance views (Google Maps v2)
 - New: Enhance logging in case of GC login errors
