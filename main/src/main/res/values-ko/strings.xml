@@ -1370,8 +1370,6 @@
     <string name="cache_dialog_offline_save_message">캐시를 오프라인용으로 저장중…</string>
     <string name="cache_dialog_offline_drop_title">오프라인</string>
     <string name="cache_dialog_offline_drop_message">기기에서 캐시 제거중…</string>
-    <string name="cache_dialog_refresh_title">새로 고침</string>
-    <string name="cache_dialog_refresh_message">캐시 정보 다시 불러오는 중…</string>
     <string name="cache_menu_speechDeactivate">말하기 끝</string>
     <string name="cache_menu_speechActivate">말하기 시작</string>
     <string name="cache_menu_navigate">길찾기</string>
