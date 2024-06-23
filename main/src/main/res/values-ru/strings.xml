@@ -1409,7 +1409,7 @@
     <string name="cache_dialog_offline_save_message">Сохранение тайника для использования офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Удаление</string>
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
-    <string name="cache_dialog_refresh_title">Обновление</string>
+    <string name="cache_dialog_refresh_title">Обновить</string>
     <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
     <string name="cache_menu_speechDeactivate">Перестать говорить</string>
     <string name="cache_menu_speechActivate">Начать говорить</string>
