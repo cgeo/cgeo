@@ -1191,8 +1191,6 @@
     <string name="cache_dialog_offline_save_message">Αποθηκεύει την κρύπτη για χρήση εκτός σύνδεσης…</string>
     <string name="cache_dialog_offline_drop_title">Εκτός σύνδεσης</string>
     <string name="cache_dialog_offline_drop_message">Αφαιρείται η κρύπτη από τη μνήμη της συσκευής…</string>
-    <string name="cache_dialog_refresh_title">Ανανέωση</string>
-    <string name="cache_dialog_refresh_message">Επαναφορτώνει τις λεπτομέρειες της κρύπτης…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
