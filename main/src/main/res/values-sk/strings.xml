@@ -1280,8 +1280,6 @@
     <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňovanie skrýše z pamäte zariadenia…</string>
-    <string name="cache_dialog_refresh_title">Obnoviť</string>
-    <string name="cache_dialog_refresh_message">Aktualizujem detaily skrýše…</string>
     <string name="cache_menu_navigate">Navigovať</string>
     <string name="cache_menu_target">Nastaviť ako cieľ</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
