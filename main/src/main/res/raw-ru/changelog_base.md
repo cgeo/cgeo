@@ -4,6 +4,7 @@
 - Новое: Поддержка заданных пользователем сторонних карт
 - Исправлено: Обновление данных карты после открытия/закрытия окна настроек (ЕдинаяКарта)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- New: Cache store/refresh from popup moved into background
 
 ### Детали тайника
 - Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
@@ -20,3 +21,4 @@
 - Новое: Чтение информации о высотах из трека при импорте
 - New: API to Locus now supporting cache size "virtual"
 - Fix: Search results for a location no longer sorted by distance to target location
+- New: "Corrected coordinates" filter
