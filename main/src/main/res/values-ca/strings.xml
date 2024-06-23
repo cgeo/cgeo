@@ -1351,8 +1351,6 @@
     <string name="cache_dialog_offline_save_message">S\'està desant el catxé per utilitzar fora de línia…</string>
     <string name="cache_dialog_offline_drop_title">Fora de línia</string>
     <string name="cache_dialog_offline_drop_message">S\'estan eliminant el catxé de la memòria del dispositiu…</string>
-    <string name="cache_dialog_refresh_title">Actualitza</string>
-    <string name="cache_dialog_refresh_message">S\'estan recarregant els detalls del catxé…</string>
     <string name="cache_menu_speechDeactivate">Deixa de parlar</string>
     <string name="cache_menu_speechActivate">Comença a parlar</string>
     <string name="cache_menu_navigate">Navega</string>
