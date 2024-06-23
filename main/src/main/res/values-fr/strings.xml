@@ -1368,8 +1368,6 @@
     <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors-ligne…</string>
     <string name="cache_dialog_offline_drop_title">Hors-ligne</string>
     <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
-    <string name="cache_dialog_refresh_title">Actualiser</string>
-    <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
     <string name="cache_menu_navigate">Navigation</string>
     <string name="cache_menu_target">Définir comme destination</string>
     <string name="cache_menu_navigation_drive">Navigation (voiture)</string>
