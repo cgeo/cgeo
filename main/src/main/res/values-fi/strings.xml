@@ -1307,8 +1307,6 @@
     <string name="cache_dialog_offline_save_message">Tallennetaan kätköä offline-käyttöä varten…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Poistetaan kätkö laitteen muistista…</string>
-    <string name="cache_dialog_refresh_title">Päivitä</string>
-    <string name="cache_dialog_refresh_message">Ladataan kätkön tietoja uudestaan…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
