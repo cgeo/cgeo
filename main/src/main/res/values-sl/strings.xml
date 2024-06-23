@@ -528,8 +528,6 @@
     <string name="cache_dialog_offline_save_message">Shranjevanje zaklada za delo brez povezave…</string>
     <string name="cache_dialog_offline_drop_title">Brez povezave</string>
     <string name="cache_dialog_offline_drop_message">Brisanje zaklada iz naprave…</string>
-    <string name="cache_dialog_refresh_title">Osveži</string>
-    <string name="cache_dialog_refresh_message">Ponovno nalaganje podatkov zaklada…</string>
     <string name="cache_menu_navigate">Navigiraj</string>
     <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
     <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
