@@ -83,7 +83,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/settings_category_nearbysearch"
+        android:title="@string/settings_category_locationcentersearch"
         app:iconSpaceReserved="false">
         <Preference
             android:summary="@string/init_nearbysearchlimit_description"
@@ -92,6 +92,19 @@
             app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.ProximityPreference
             android:key="@string/pref_nearbySearchLimit"
+            android:defaultValue="0"
+            app:min="0"
+            app:max="999"
+            app:minValueDescription="@string/init_settings_description_unlimited"
+            app:highRes="false"
+            app:iconSpaceReserved="false" />
+        <Preference
+            android:summary="@string/init_coordsearchlimit_description"
+            android:title="@string/init_coordsearchlimit_title"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false"/>
+        <cgeo.geocaching.settings.ProximityPreference
+            android:key="@string/pref_coordSearchLimit"
             android:defaultValue="0"
             app:min="0"
             app:max="999"
