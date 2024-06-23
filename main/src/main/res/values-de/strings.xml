@@ -1386,8 +1386,6 @@
     <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
     <string name="cache_dialog_offline_drop_title">Offline-Verwendung</string>
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
-    <string name="cache_dialog_refresh_title">Aktualisieren</string>
-    <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
     <string name="cache_menu_speechDeactivate">Beende Sprachausgabe</string>
     <string name="cache_menu_speechActivate">Starte Sprachausgabe</string>
     <string name="cache_menu_navigate">Navigieren</string>
@@ -1752,6 +1750,16 @@
     <string name="google_maps_style_contrast">Hoher Kontrast</string>
     <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
     <string name="google_maps_style_details">Details</string>
+    <string name="google_maps_option_group_map">Kartenoptionen</string>
+    <string name="google_maps_option_show_traffic">Verkehr anzeigen</string>
+    <string name="google_maps_option_show_buildings">3D-Gebäude anzeigen</string>
+    <string name="google_maps_option_show_feature_theme">Theme Features anzeigen</string>
+    <string name="google_maps_option_show_feature_administrative_all">Administrative Fratures anzeigen</string>
+    <string name="google_maps_option_show_feature_landscape_all">Landschaftsfeatures anzeigen</string>
+    <string name="google_maps_option_show_feature_poi_all">Interessante Punkte anzeigen</string>
+    <string name="google_maps_option_show_feature_road_all">Straßen anzeigen</string>
+    <string name="google_maps_option_show_feature_transit_all">Verkehrsmittel anzeigen</string>
+    <string name="google_maps_option_show_feature_water_all">Wasser anzeigen</string>
     <!-- search -->
     <string name="geo_search_label">Caches in der Nähe suchen</string>
     <string name="search_bar_hint">Caches/Trackables suchen</string>
