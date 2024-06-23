@@ -939,8 +939,6 @@
     <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
-    <string name="cache_dialog_refresh_title">Genindlæs</string>
-    <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_navigation_drive">Navigation (bil)</string>
     <string name="cache_menu_navigation_walk">Navigation (til fods)</string>
