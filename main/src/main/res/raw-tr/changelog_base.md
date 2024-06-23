@@ -4,6 +4,7 @@
 - New: Support user-defined tile providers
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- New: Cache store/refresh from popup moved into background
 
 ### Geocache ayrıntıları
 - New: Show images linked in "personal note" in Images tab
@@ -20,3 +21,4 @@
 - New: Read elevation info from track on import
 - New: API to Locus now supporting cache size "virtual"
 - Fix: Search results for a location no longer sorted by distance to target location
+- New: "Corrected coordinates" filter
