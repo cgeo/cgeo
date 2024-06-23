@@ -549,8 +549,6 @@
     <string name="cache_dialog_offline_save_message">حفظ المخبئ للاستخدام في وضع عدم الاتصال&#8230;</string>
     <string name="cache_dialog_offline_drop_title">وضع عدم الاتصال</string>
     <string name="cache_dialog_offline_drop_message">إزالة المخبئ من ذاكرة الجهاز&#8230;</string>
-    <string name="cache_dialog_refresh_title">تحديث</string>
-    <string name="cache_dialog_refresh_message">إعادة تحميل تفاصيل المخبآت&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
