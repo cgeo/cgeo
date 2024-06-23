@@ -1,6 +1,9 @@
 ##
 - Fix: Log length check counting some characters twice
 - Fix: Adapt to hylly website change
+- New: Additional theming options for Google Maps
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- New: Enhance logging in case of GC login errors
 
 ##
 - Corretto: cache che non si caricano dopo aver abilitato la mappa live (UnifiedMap)
