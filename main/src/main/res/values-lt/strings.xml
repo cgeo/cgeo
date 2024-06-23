@@ -1280,8 +1280,6 @@
     <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
     <string name="cache_dialog_offline_drop_title">Pašalinti</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
-    <string name="cache_dialog_refresh_title">Atnaujinama</string>
-    <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
