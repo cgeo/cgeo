@@ -691,8 +691,6 @@
     <string name="cache_dialog_offline_save_message">Saglabā slēpni bezsaistes lietošanai…</string>
     <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
     <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
-    <string name="cache_dialog_refresh_title">Atjaunot</string>
-    <string name="cache_dialog_refresh_message">Pārlādē slēpņa informāciju…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
     <string name="cache_menu_navigation_walk">Navigēt (Ar kājām)</string>
