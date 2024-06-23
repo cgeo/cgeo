@@ -1131,8 +1131,6 @@
     <string name="cache_dialog_offline_save_message">Guardando caché para usar desconectado…</string>
     <string name="cache_dialog_offline_drop_title">Desconectado</string>
     <string name="cache_dialog_offline_drop_message">Borrando caché de la memoria del dispositivo…</string>
-    <string name="cache_dialog_refresh_title">Actualizar</string>
-    <string name="cache_dialog_refresh_message">Recargando detalles del caché…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Establecer como objetivo</string>
     <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
