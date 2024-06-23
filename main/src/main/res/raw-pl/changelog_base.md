@@ -4,6 +4,7 @@
 - Nowość: Wsparcie dla dostawców kafelków zdefiniowanych przez użytkownika
 - Poprawka: Odświeżanie danych mapy po otwarciu/zamknięciu okna z ustawieniami (UnifiedMap)
 - Nowość: Przełącz wyświetlanie budynków 2D/3D (UnifiedMap OSM)
+- New: Cache store/refresh from popup moved into background
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
@@ -20,3 +21,4 @@
 - Nowość: Odczytywanie informacji o wysokości ze ścieżki przy imporcie
 - Nowość: API do Locusa teraz obsługuje rozmiar skrytki wirtualnej
 - Poprawki: Wyniki wyszukiwania dla lokalizacji nie były posortowane według odległości do lokalizacji docelowej
+- New: "Corrected coordinates" filter
