@@ -612,8 +612,6 @@
     <string name="cache_dialog_offline_save_message">Salvare pentru uz fără internet…</string>
     <string name="cache_dialog_offline_drop_title">Cutie salvată</string>
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
-    <string name="cache_dialog_refresh_title">Reîncarcă</string>
-    <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
