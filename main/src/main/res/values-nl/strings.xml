@@ -1386,8 +1386,6 @@
     <string name="cache_dialog_offline_save_message">Cache opslaan voor offline gebruik…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Verwijder cache uit geheugen…</string>
-    <string name="cache_dialog_refresh_title">Ververs</string>
-    <string name="cache_dialog_refresh_message">Vernieuw cachedetails…</string>
     <string name="cache_menu_speechDeactivate">Stop met praten</string>
     <string name="cache_menu_speechActivate">Begin met praten</string>
     <string name="cache_menu_navigate">Navigeer</string>
@@ -1752,6 +1750,16 @@
     <string name="google_maps_style_contrast">Hoog contrast</string>
     <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
     <string name="google_maps_style_details">Details</string>
+    <string name="google_maps_option_group_map">Kaart Opties</string>
+    <string name="google_maps_option_show_traffic">Toon Verkeer</string>
+    <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
+    <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
+    <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
+    <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
+    <string name="google_maps_option_show_feature_poi_all">Toon Interessante punten</string>
+    <string name="google_maps_option_show_feature_road_all">Toon Wegen</string>
+    <string name="google_maps_option_show_feature_transit_all">Toon Doorvoer</string>
+    <string name="google_maps_option_show_feature_water_all">Toon Water</string>
     <!-- search -->
     <string name="geo_search_label">Zoek caches in de omgeving</string>
     <string name="search_bar_hint">Caches/trackables zoeken</string>
