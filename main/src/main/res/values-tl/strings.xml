@@ -555,8 +555,6 @@
     <string name="cache_dialog_loading_details_status_render">Tingnan na naka-render</string>
     <string name="cache_dialog_offline_save_message">Ang pag-save ng cache para sa paggamit sa offline&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Ang pag-tanggal ng cache mula sa aparato&#8230;</string>
-    <string name="cache_dialog_refresh_title">I-refresh</string>
-    <string name="cache_dialog_refresh_message">Ang pag-load mulit na mga detalye ng mga cache&#8230;</string>
     <string name="cache_menu_navigate">Mag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmamaneho)</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglalakad)</string>
