@@ -1248,8 +1248,6 @@
     <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
     <string name="cache_dialog_offline_drop_title">Sparad lokalt</string>
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
-    <string name="cache_dialog_refresh_title">Uppdatera</string>
-    <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
     <string name="cache_menu_navigate">Navigera</string>
     <string name="cache_menu_target">Ange som mål</string>
     <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
