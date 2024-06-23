@@ -4,6 +4,7 @@
 - Novo: Suporte para novos fornecedores de blocos de mapa definidos pelo utilizador
 - Correcção: Actualizar dados do mapa após abrir / fechar o diálogo de configurações (Mapa Unificado)
 - Novo: Alternar exibição de edifícios 2D/3D (mapas OSM, Mapa Unificado)
+- New: Cache store/refresh from popup moved into background
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
@@ -20,3 +21,4 @@
 - Novo: Ler informações de elevação da rota ao ser importada
 - Novo: API para o Locus agora suporta o tamanho de cache "virtual"
 - Fix: Search results for a location no longer sorted by distance to target location
+- New: "Corrected coordinates" filter
