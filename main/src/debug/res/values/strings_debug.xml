@@ -2,6 +2,6 @@
 <resources>
 
     <!-- fileprovider for debug builds - must be different from main version as it otherwise cannot be installed im parallel to the main version -->
-    <string translatable="false" name="file_provider_authority">org.cgeo.devfileprovider</string>
+    <string translatable="false" name="file_provider_authority">org.cgeo.developer.fileprovider</string>
 
     </resources>
