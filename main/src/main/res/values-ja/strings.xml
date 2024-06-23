@@ -1099,8 +1099,6 @@
     <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
     <string name="cache_dialog_offline_drop_title">オフライン</string>
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
-    <string name="cache_dialog_refresh_title">更新</string>
-    <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_target">目的地に設定</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
