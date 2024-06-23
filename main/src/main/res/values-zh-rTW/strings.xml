@@ -932,8 +932,6 @@
     <string name="cache_dialog_offline_save_title">離線</string>
     <string name="cache_dialog_offline_save_message">儲存寶藏給離線使用</string>
     <string name="cache_dialog_offline_drop_title">離線</string>
-    <string name="cache_dialog_refresh_title">重新整理</string>
-    <string name="cache_dialog_refresh_message">重新載入詳細的cache資訊</string>
     <string name="cache_menu_navigate">瀏覽</string>
     <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
