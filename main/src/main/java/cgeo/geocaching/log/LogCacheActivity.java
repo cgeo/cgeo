@@ -572,7 +572,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
             SimpleDialog.of(LogCacheActivity.this)
                     .setTitle(R.string.info_log_post_failed)
                     .setMessage(TextParam.id(R.string.info_log_post_failed_reason, statusResult.getErrorString()).setMovement(true))
-                    .setButtons(R.string.info_log_post_retry, R.string.cancel, R.string.info_log_post_save)
+                    .setButtons(R.string.info_log_post_retry, R.string.cancel, logEditMode == LogEditMode.CREATE_NEW ? R.string.info_log_post_save : 0)
                     .setNeutralAction(() -> finish(LogCacheActivity.SaveMode.FORCE))
                     .confirm(this::sendLogInternal);
         }
