@@ -4,6 +4,7 @@
 - Neu: Unterstützung für benutzerdefinierte Kartenanbieter für OSM Online-Karten
 - Korrektur: Kartendaten nach dem Öffnen / Schließen von Einstellungen aktualisieren (UnifiedMap)
 - Neu: Anzeige von Gebäuden in 2D oder 3D (UnifiedMap OSM Karten)
+- New: Cache store/refresh from popup moved into background
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
@@ -19,4 +20,5 @@
 - Neu: Internen BRouter auf v1.7.5 aktualisiert
 - Neu: Höheninformationen beim Import einer Trackdatei auswerten
 - Neu: API für Locus unterstützt die Cache-Größe "virtuell"
-- Fix: Search results for a location no longer sorted by distance to target location
+- Korrektur: Ergebnisse für Adresssuche sind nicht mehr nach Entfernung zum Zielort sortiert
+- New: "Corrected coordinates" filter
