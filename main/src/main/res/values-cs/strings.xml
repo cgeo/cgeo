@@ -1414,8 +1414,6 @@
     <string name="cache_dialog_offline_save_message">Ukládání kešky pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování kešky z paměti zařízení…</string>
-    <string name="cache_dialog_refresh_title">Aktualizovat</string>
-    <string name="cache_dialog_refresh_message">Aktualizace detailů kešky…</string>
     <string name="cache_menu_speechDeactivate">Přestat mluvit</string>
     <string name="cache_menu_speechActivate">Začít mluvit</string>
     <string name="cache_menu_navigate">Navigovat</string>
@@ -1782,6 +1780,7 @@
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
     <string name="google_maps_style_details">Detaily</string>
+    <string name="google_maps_option_group_theme">Možnosti motivu</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
