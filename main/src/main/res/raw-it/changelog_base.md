@@ -4,6 +4,7 @@
 - Nuovo: Supporto a fornitore di tasselli definiti dall'utente
 - Corretto: aggiorna i dati della mappa dopo l'apertura / chiusura della finestra di dialogo delle impostazioni (UnifiedMap)
 - Nuovo: Mostra/nascondi edifici 2D/3D (UnifiedMap OSM)
+- New: Cache store/refresh from popup moved into background
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
@@ -20,3 +21,4 @@
 - Nuovo: Lettura delle informazioni di elevazione dalla traccia durante l'importazione
 - Nuovo: API a Locus che supporta ora la dimensione del cache "virtuale"
 - Fix: Search results for a location no longer sorted by distance to target location
+- New: "Corrected coordinates" filter
