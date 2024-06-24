@@ -1539,6 +1539,7 @@
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">gradi</string>
     <string name="cc_hint_minutes">minuti</string>
