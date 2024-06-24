@@ -616,6 +616,7 @@
     <string name="cache_share_field">مشاركة</string>
     <string name="cache_time_full_hours">ساعة</string>
     <string name="cache_listed_on">تم إدراجه على %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">تحميل المخبآت من %1$s</string>
