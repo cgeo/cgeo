@@ -620,6 +620,7 @@
     <string name="cache_share_field">Ibahagi</string>
     <string name="cache_time_full_hours">alas</string>
     <string name="cache_listed_on">Nailista sa %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ang nag-loloading na mga caches sa %1$s</string>
