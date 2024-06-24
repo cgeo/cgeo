@@ -1454,6 +1454,7 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
     <string name="cc_hint_minutes">minuuttia</string>
