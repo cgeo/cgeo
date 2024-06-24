@@ -1574,6 +1574,7 @@
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градусы</string>
     <string name="cc_hint_minutes">минуты</string>
