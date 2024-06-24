@@ -770,6 +770,7 @@
     <string name="goto_targets_list">Lietotāja definēti slēpņi</string>
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grādi</string>
     <string name="cc_hint_minutes">minūtes</string>
