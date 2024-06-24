@@ -1188,6 +1188,7 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
