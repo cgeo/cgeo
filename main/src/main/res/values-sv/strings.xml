@@ -1383,6 +1383,7 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minuter</string>
