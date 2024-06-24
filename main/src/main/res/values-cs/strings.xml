@@ -612,6 +612,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Upravené souřadnice</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky. Pokud chcete vyloučit ostatní typy kešek, zadejte příslušný filtr typu kešky.\n\nMysterka je považována za \'vyřešenou\', pokud změnila souřadnice nebo platný finální trasový bod vyplněný souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -1451,6 +1452,7 @@
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
     <string name="cache_menu_set_cache_icon">Nastavit ikonu kešky</string>
+    <string name="cache_menu_change_description_style">Změnit styl popisu</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
@@ -1573,6 +1575,10 @@
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
+    <!-- html styles -->
+    <string name="html_style_default">Výchozí</string>
+    <string name="html_style_monochrome">Monochromatický</string>
+    <string name="html_style_source">Zdroj HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>
