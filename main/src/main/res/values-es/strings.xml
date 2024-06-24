@@ -1241,6 +1241,7 @@
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grados</string>
     <string name="cc_hint_minutes">minutos</string>
