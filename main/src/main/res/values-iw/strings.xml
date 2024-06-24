@@ -387,6 +387,7 @@
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <string name="init_longtap_map">לחיצה ארוכה על המפה</string>
     <string name="clear_goto_history">פעולה זו תמחק את כל נקודות הציון פרט לחמש האחרונות</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
