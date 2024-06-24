@@ -1423,6 +1423,7 @@
     <string name="cache_menu_reset_foundstate">Fundstatus zurücksetzen</string>
     <string name="cache_foundstate_updated">Fundstatus aktualisiert</string>
     <string name="cache_menu_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="cache_menu_change_description_style">Beschreibungsstil wechseln</string>
     <string name="cache_icon_updated">Cache-Symbol aktualisiert</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Aktualisieren</string>
@@ -1545,6 +1546,10 @@
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
+    <!-- html styles -->
+    <string name="html_style_default">Standard</string>
+    <string name="html_style_monochrome">Monochrom</string>
+    <string name="html_style_source">HTML-Quelltext</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Grad</string>
     <string name="cc_hint_minutes">Minuten</string>
