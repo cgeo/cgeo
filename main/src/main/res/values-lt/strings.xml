@@ -1418,6 +1418,7 @@
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
