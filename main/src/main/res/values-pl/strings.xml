@@ -1573,6 +1573,7 @@
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
     <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
     <string name="cc_hint_minutes">minut(y)</string>
