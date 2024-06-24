@@ -4,7 +4,7 @@
 - Novinka: Podpora uživatelsky definovaných poskytovatelů dlaždic
 - Oprava: Obnovení dat mapy po otevření / zavření dialogu nastavení (Sjednocená mapa)
 - Novinka: Přepínání zobrazení budov 2D/3D (Sjednocená mapa OSM maps)
-- New: Cache store/refresh from popup moved into background
+- Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
@@ -21,4 +21,4 @@
 - Novinka: Čtení informací o nadmořské výšce ze stopy při importu
 - Novinka: API pro Locus nyní podporuje "virtuální" velikost kešky
 - Oprava: Výsledky vyhledání místa již nejsou řazeny podle vzdálenosti od cílového místa
-- New: "Corrected coordinates" filter
+- Novinka: filtr "Upravené souřadnice"
