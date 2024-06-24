@@ -583,6 +583,7 @@
     <string name="cache_share_field">deli</string>
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
