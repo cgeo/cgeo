@@ -616,6 +616,7 @@
     <string name="cache_share_field">Bagikan</string>
     <string name="cache_time_full_hours">jam</string>
     <string name="cache_listed_on">Terdaftar %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Memuat cache dri %1$s</string>
