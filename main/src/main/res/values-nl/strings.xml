@@ -600,6 +600,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Gecorrigeerde coördinaten</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches. Indien je andere cachetypes wilt uitsluiten, vul dan een passend cachetype filter in.\n\nEen mystery wordt beschouwd als \'opgelost\' als de coördinaten zijn gewijzigd of een geldig waypoint de heeft voorzien van coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
@@ -1423,6 +1424,7 @@
     <string name="cache_menu_reset_foundstate">Gevonden status resetten</string>
     <string name="cache_foundstate_updated">Gevonden status bijgewerkt</string>
     <string name="cache_menu_set_cache_icon">Cache pictogram instellen</string>
+    <string name="cache_menu_change_description_style">Wijzig beschrijving stijl</string>
     <string name="cache_icon_updated">Cache pictogram bijgewerkt</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Verversen</string>
@@ -1545,6 +1547,10 @@
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
+    <!-- html styles -->
+    <string name="html_style_default">Standaard</string>
+    <string name="html_style_monochrome">Monochroom</string>
+    <string name="html_style_source">HTML Bron</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
     <string name="cc_hint_minutes">minuten</string>
@@ -1753,6 +1759,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
