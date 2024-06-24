@@ -1320,6 +1320,7 @@
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Μοίρες</string>
     <string name="cc_hint_minutes">Λεπτά</string>
