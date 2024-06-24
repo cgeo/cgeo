@@ -806,6 +806,7 @@
     <string name="goto_targets_list">Визначений користувачем кеш</string>
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градуси</string>
     <string name="cc_hint_minutes">хвилини</string>
