@@ -798,9 +798,11 @@
     <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
-    <string name="settings_category_nearbysearch">Szukaj w pobliżu</string>
+    <string name="settings_category_locationcentersearch">Wyszukiwanie wokół lokalizacji</string>
     <string name="init_nearbysearchlimit_title">Limit szukania w pobliżu</string>
     <string name="init_nearbysearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania w pobliżu (0=nieograniczona)</string>
+    <string name="init_coordsearchlimit_title">Limit wyszukiwania współrzędnych/adresu</string>
+    <string name="init_coordsearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania współrzędnych/adresu (0=nieograniczona)</string>
     <string name="init_settings_description_unlimited">bez ograniczeń</string>
     <string name="settings_category_geocaching_additionals">Dalsze usługi i dodatki</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
@@ -2316,9 +2318,9 @@
     </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="few">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="many">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="other">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
+        <item quantity="few">Dodaj te skrytki do ulubionych (pozostało %d)</item>
+        <item quantity="many">Dodaj te skrytki do ulubionych (pozostało %d)</item>
+        <item quantity="other">Dodaj te skrytki do ulubionych (pozostało %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Ustawienie ikon skrytek</string>
     <plurals name="command_set_cache_icons_result">
