@@ -2722,6 +2722,7 @@
     <string name="routingmode_car">Car</string>
     <string name="routingmode_user1">User 1</string>
     <string name="routingmode_user2">User 2</string>
+    <string name="routingmode_none">(none)</string>
 
     <!-- view settings -->
     <string name="view_settings">View settings</string>
