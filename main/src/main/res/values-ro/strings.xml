@@ -1145,11 +1145,6 @@
     <string name="command_rename_list_result">Lista a fost redenumită</string>
     <string name="command_delete_list_result">Lista a fost ştearsă</string>
     <string name="command_unique_list_result">Geocutii şterse din alte liste</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Adaugă această geocutie la favorite (%d disponibil)</item>
-        <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
-        <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
     <string name="list_list_headline">Liste:</string>
     <plurals name="extract_waypoints_result">
