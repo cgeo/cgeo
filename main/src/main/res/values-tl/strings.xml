@@ -1082,10 +1082,6 @@
     <string name="command_rename_list_result">Palitan muli ang pangalan ng listahan</string>
     <string name="command_delete_list_result">Naburang listahan</string>
     <string name="command_unique_list_result">Burahin ang mga cache mula sa iba pang mgalistahan</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
-        <item quantity="other">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Itong aksyon ay maaaring humantong sa mataas na trapiko sa network. Ikw ba ay sigurado na gusto mong i-refresh ang lahat ng mga cache?</string>
     <string name="list_list_headline">Ang mga listahan:</string>
     <plurals name="extract_waypoints_result">
