@@ -1043,10 +1043,6 @@
     <string name="command_rename_list_result">Usba ang pangan sa listahan</string>
     <string name="command_delete_list_result">Gipapas na listahan</string>
     <string name="command_unique_list_result">Mga gipangwala nga cache gikan sa ubang mga listahan</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
-        <item quantity="other">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Ang kani na aksyon mahimong modulong sa taas nga network trapik. Sigurado ba ka na ganahan ka i-grupo og bag-ohon ang tanan n mga caches?</string>
     <string name="list_list_headline">Mga lista:</string>
     <plurals name="extract_waypoints_result">
