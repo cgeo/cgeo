@@ -1564,10 +1564,6 @@
     <string name="command_rename_list_result">Liste omdøbt</string>
     <string name="command_delete_list_result">Listen blev slettet</string>
     <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Tilføj denne cache til favoritter (%d resterende)</item>
-        <item quantity="other">Tilføj denne cache til favoritter (%d resterende)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
     <string name="list_list_headline">Lister:</string>
     <plurals name="extract_waypoints_result">
