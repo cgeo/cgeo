@@ -712,7 +712,6 @@
     <string name="settings_summary_system">Specifiniai sistemos nustatymai ir derinimo parinktys.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
-    <string name="settings_category_nearbysearch">Paieška netoliase</string>
     <string name="init_nearbysearchlimit_title">Paieškos netoliase limitas</string>
     <string name="init_nearbysearchlimit_description">Apriboja atstumą, iki kurio slėptuvės rodomos atliekant paiešką netoliese (0= neribotas)</string>
     <string name="init_settings_description_unlimited">neribotas</string>
@@ -2130,12 +2129,6 @@
     <string name="command_rename_list_result">Pervadinti sąrašą</string>
     <string name="command_delete_list_result">Sąrašas ištrintas</string>
     <string name="command_unique_list_result">Ištrintos slėptuvės iš kitų sąrašų</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Pridėti šią slėptuvę prie mėgstamų (liko %d)</item>
-        <item quantity="few">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-        <item quantity="many">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-        <item quantity="other">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Nustatomos slėptuvės piktogramos</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Nustatoma %d slėptuvės piktograma</item>
