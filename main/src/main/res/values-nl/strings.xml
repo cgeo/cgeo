@@ -786,8 +786,11 @@
     <string name="settings_summary_system">Systeemspecifieke instellingen en foutopsporingsopties.</string>
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_locationcentersearch">Locatie-gecentreerde zoekopdrachten</string>
     <string name="init_nearbysearchlimit_title">Zoeken in de buurt limiet</string>
     <string name="init_nearbysearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met zoeken in de buurt (0=ongelimiteerd)</string>
+    <string name="init_coordsearchlimit_title">Zoeklimiet coördinaat/adres</string>
+    <string name="init_coordsearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met het coördinaat/adres zoeken (0=ongelimiteerd)</string>
     <string name="init_settings_description_unlimited">onbeperkt</string>
     <string name="settings_category_geocaching_additionals">Overige diensten en addons</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
@@ -2260,6 +2263,10 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="one">Deze cache aanbevelen (%d resterend)</item>
         <item quantity="other">Deze caches aanbevelen (%d resterend)</item>
+    </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Deze cache toevoegen aan favorieten (%d resterend)</item>
+        <item quantity="other">Deze cache toevoegen aan favorieten (%d resterend)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Cache pictogrammen aan het instellen</string>
     <plurals name="command_set_cache_icons_result">
