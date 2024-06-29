@@ -788,7 +788,6 @@
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
-    <string name="settings_category_nearbysearch">Ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_title">Limite di ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_description">Limita la distanza fino alla quale vengono mostrati i cache con la ricerca nelle vicinanze (0=illimitato)</string>
     <string name="init_settings_description_unlimited">illimitato</string>
@@ -2248,10 +2247,6 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="one">Consiglia questo cache (%d rimanenti)</item>
         <item quantity="other">Consiglia questi cache (%d rimanenti)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
-        <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Imposta icone cache</string>
     <plurals name="command_set_cache_icons_result">
