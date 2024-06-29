@@ -4,6 +4,9 @@
 - Nowość: Dodatkowe opcje motywu dla map Google
 - Poprawka: Kompas ukryty za widokiem odległości (Google Maps v2)
 - Nowość: Ulepszenie logowania w przypadku błędów logowania GC
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
 
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
