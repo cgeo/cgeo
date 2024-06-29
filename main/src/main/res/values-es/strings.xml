@@ -1888,10 +1888,6 @@ Nombre de archivo:%2$s</string>
     <string name="command_rename_list_result">Lista renombrada</string>
     <string name="command_delete_list_result">Lista borrada</string>
     <string name="command_unique_list_result">Cachés borrados de otras listas</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Añadir el caché a favoritos (te queda %d)</item>
-        <item quantity="other">Añadir el caché a favoritos (te quedan %d)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Configurando iconos de caché</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Establecer %d icono de caché</item>
