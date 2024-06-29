@@ -5,6 +5,7 @@
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Λεπτομέρειες κρύπτης
 - New: Show images linked in "personal note" in Images tab
