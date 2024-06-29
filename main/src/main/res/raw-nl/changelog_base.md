@@ -5,6 +5,7 @@
 - Oplossing: Vernieuw kaartgegevens na het openen / sluiten van instellingen dialoogvenster (UnifiedMap)
 - Nieuw: Wissel display van gebouwen 2D/3D (UnifiedMap OSM kaarten)
 - Nieuw: Cache opslaan/vernieuwen van popup verplaatst naar de achtergrond
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
