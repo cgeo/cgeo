@@ -5,6 +5,7 @@
 - Poprawka: Odświeżanie danych mapy po otwarciu/zamknięciu okna z ustawieniami (UnifiedMap)
 - Nowość: Przełącz wyświetlanie budynków 2D/3D (UnifiedMap OSM)
 - Nowość: Zapisywanie/odświeżanie skrytki przesunięte z wyskakującego okna na tło
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
