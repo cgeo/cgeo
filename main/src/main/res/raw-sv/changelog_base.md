@@ -5,6 +5,7 @@
 - Fix: Uppdatera kartdata efter att du öppnat / stängt inställningsdialogen (UnifiedMap)
 - Nyhet: Växla visning av byggnader 2D/3D (UnifiedMap OSM-kartor)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Cachedetaljer
 - Nyhet: Visa bilder länkade i "personlig anteckning" i fliken Bilder
