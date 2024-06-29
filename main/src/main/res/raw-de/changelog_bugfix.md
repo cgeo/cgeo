@@ -4,6 +4,9 @@
 - New: Additional theming options for Google Maps
 - Fix: Compass rose hidden behind distance views (Google Maps v2)
 - New: Enhance logging in case of GC login errors
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
 
 ##
 - Korrektur: Caches werden nach Aktivierung der Live-Karte nicht geladen (UnifiedMap)
