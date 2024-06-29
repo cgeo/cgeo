@@ -697,7 +697,6 @@
     <string name="settings_summary_system">Systemspecifika inställningar och felsökningsalternativ.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
-    <string name="settings_category_nearbysearch">Närliggande sökning</string>
     <string name="init_nearbysearchlimit_title">Närliggande sökgräns</string>
     <string name="init_nearbysearchlimit_description">Begränsar avståndet upp till vilka cacher som returneras med sökning i närheten (0=obegränsat)</string>
     <string name="init_settings_description_unlimited">obegränsad</string>
@@ -2069,10 +2068,6 @@
     <string name="command_rename_list_result">Namn ändrat på lista</string>
     <string name="command_delete_list_result">Lista borttagen</string>
     <string name="command_unique_list_result">Borttagna cacher från andra listor</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Lägg till cachen bland dina favoriter (%d kvar)</item>
-        <item quantity="other">Lägg till cachen bland dina favoriter (%d kvar)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Ställer in cache-ikoner</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Ange %d cache-ikon</item>
