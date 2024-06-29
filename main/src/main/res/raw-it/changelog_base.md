@@ -5,6 +5,7 @@
 - Corretto: aggiorna i dati della mappa dopo l'apertura / chiusura della finestra di dialogo delle impostazioni (UnifiedMap)
 - Nuovo: Mostra/nascondi edifici 2D/3D (UnifiedMap OSM)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
