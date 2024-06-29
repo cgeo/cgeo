@@ -5,6 +5,7 @@
 - Oprava: Obnovení dat mapy po otevření / zavření dialogu nastavení (Sjednocená mapa)
 - Novinka: Přepínání zobrazení budov 2D/3D (Sjednocená mapa OSM maps)
 - Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
