@@ -5,6 +5,7 @@
 - Korrektur: Kartendaten nach dem Öffnen / Schließen von Einstellungen aktualisieren (UnifiedMap)
 - Neu: Anzeige von Gebäuden in 2D oder 3D (UnifiedMap OSM Karten)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
