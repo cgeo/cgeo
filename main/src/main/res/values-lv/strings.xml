@@ -1267,11 +1267,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="command_rename_list_result">Pārdēvēts saraksts</string>
     <string name="command_delete_list_result">Dzēsts saraksts</string>
     <string name="command_unique_list_result">Dzēst slēpņus no citiem sarakstiem</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="zero">Pievienot šo slēpni favorītiem (%d atlikuši)</item>
-        <item quantity="one">Pievienot šo slēpni favorītiem (%d atlicis)</item>
-        <item quantity="other">Pievienot šos slēpņus favorītiem (%d atlikuši)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Šī darbība var patērēt daudz interneta apjoma/tīkla trafika. Vai tiešām vēlaties uzsākt atjaunināt visus slēpņus?</string>
     <string name="list_list_headline">Saraksti:</string>
     <plurals name="extract_waypoints_result">
