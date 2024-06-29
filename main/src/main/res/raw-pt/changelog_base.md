@@ -5,6 +5,7 @@
 - Correcção: Actualizar dados do mapa após abrir / fechar o diálogo de configurações (Mapa Unificado)
 - Novo: Alternar exibição de edifícios 2D/3D (mapas OSM, Mapa Unificado)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
