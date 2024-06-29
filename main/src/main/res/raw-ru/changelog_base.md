@@ -5,6 +5,7 @@
 - Исправлено: Обновление данных карты после открытия/закрытия окна настроек (ЕдинаяКарта)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 - New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Детали тайника
 - Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
