@@ -271,6 +271,16 @@ public final class LogUtils {
         });
         //adapt commons in database
         adaptCacheCommonsAfterLogging(cache, loggingManager, oldEntry, adaptedNewLogEntry);
+        // adapt cache facvorite status and stored favorite points
+        if (loggingManager.supportsLogWithFavorite() && newEntry instanceof OfflineLogEntry) {
+            final boolean oldWasFavorite = cache.isFavorite();
+            final boolean isFavorite = ((OfflineLogEntry) newEntry).favorite;
+            if (oldWasFavorite != isFavorite) {
+                cache.setFavorite(isFavorite);
+                cache.setFavoritePoints(cache.getFavoritePoints() + (isFavorite ? 1 : -1));
+            }
+        }
+        //store
         DataStore.saveChangedCache(cache);
 
         //Cleanup

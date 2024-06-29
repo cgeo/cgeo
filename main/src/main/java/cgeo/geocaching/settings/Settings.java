@@ -1731,6 +1731,10 @@ public class Settings {
         return getInt(R.string.pref_nearbySearchLimit, 0);
     }
 
+    public static int getCoordinateSearchLimit() {
+        return getInt(R.string.pref_coordSearchLimit, 0);
+    }
+
     public static int getLogImageScale() {
         final int scale = getInt(R.string.pref_logImageScale, -1);
 

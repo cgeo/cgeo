@@ -908,9 +908,11 @@
     <string name="settings_title_navigation_menu">Navigation Menu</string>
 
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
-    <string name="settings_category_nearbysearch">Nearby search</string>
+    <string name="settings_category_locationcentersearch">Location-centered searches</string>
     <string name="init_nearbysearchlimit_title">Nearby search limit</string>
     <string name="init_nearbysearchlimit_description">Limits the distance up to which caches are returned for with nearby search (0=unlimited)</string>
+    <string name="init_coordsearchlimit_title">Coordinate/Address search limit</string>
+    <string name="init_coordsearchlimit_description">Limits the distance up to which caches are returned for with coordinate/address search (0=unlimited)</string>
     <string name="init_settings_description_unlimited">unlimited</string>
 
     <string name="settings_category_geocaching_additionals">Further services and addon</string>
@@ -2554,12 +2556,12 @@
         <item quantity="other">Recommend this cache (%d remaining)</item>
     </plurals>
     <plurals name="fav_points_remaining">
-        <item quantity="zero">Add this cache to favorites (%d remaining)</item>
-        <item quantity="one">Add this cache to favorites (%d remaining)</item>
-        <item quantity="two">Add this cache to favorites (%d remaining)</item>
-        <item quantity="few">Add this cache to favorites (%d remaining)</item>
-        <item quantity="many">Add this cache to favorites (%d remaining)</item>
-        <item quantity="other">Add this cache to favorites (%d remaining)</item>
+        <item quantity="zero">Make this cache a favorite (%d remaining)</item>
+        <item quantity="one">Make this cache a favorite (%d remaining)</item>
+        <item quantity="two">Make this cache a favorite (%d remaining)</item>
+        <item quantity="few">Make this cache a favorite (%d remaining)</item>
+        <item quantity="many">Make this cache a favorite (%d remaining)</item>
+        <item quantity="other">Make this cache a favorite (%d remaining)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Setting cache icons</string>
     <plurals name="command_set_cache_icons_result">
