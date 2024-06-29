@@ -782,7 +782,6 @@
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
-    <string name="settings_category_nearbysearch">주변 검색</string>
     <string name="init_nearbysearchlimit_title">주변 검색 제한</string>
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
@@ -2225,9 +2224,6 @@
     <string name="command_unique_list_result">다른 목록에서 캐시 삭제함</string>
     <plurals name="fav_points_remaining_oc">
         <item quantity="other">이 캐시 추천 (%d개 남음)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="other">이 캐시를 호감캐시에 추가 (%d 남음)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">캐시 아이콘 설정 중</string>
     <plurals name="command_set_cache_icons_result">
