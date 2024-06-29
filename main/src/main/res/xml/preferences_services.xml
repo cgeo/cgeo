@@ -96,13 +96,11 @@
             app:minValueDescription="@string/init_settings_description_unlimited"
             app:highRes="false"
             app:iconSpaceReserved="false" />
-        <Preference
+        <cgeo.geocaching.settings.SeekbarPreference
+            android:key="@string/pref_coordSearchLimit"
             android:summary="@string/init_coordsearchlimit_description"
             android:title="@string/init_coordsearchlimit_title"
-            app:allowDividerBelow="false"
-            app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.ProximityPreference
-            android:key="@string/pref_coordSearchLimit"
+            app:ui="cgeo.geocaching.ui.ProximityPreferenceUI"
             android:defaultValue="0"
             app:min="0"
             app:max="999"
