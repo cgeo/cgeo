@@ -1067,9 +1067,6 @@
     <string name="command_rename_list_result">Ganti daftar nama</string>
     <string name="command_delete_list_result">Daftar dihapus</string>
     <string name="command_unique_list_result">Menghapus cache dari daftar lain</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="other">Tambahkan tembolok ini ke favorit (%d tersisa)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Tindakan ini bisa menimbulkan lalu lintas jaringan yang tinggi. Apakah anda yakin ingin menggabungkan semua cache?</string>
     <string name="list_list_headline">Daftar:</string>
     <plurals name="extract_waypoints_result">
