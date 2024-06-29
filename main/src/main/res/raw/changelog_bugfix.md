@@ -7,6 +7,7 @@
 - Fix: Editing cache logs does not take care of existing favorite points
 - Fix: "Save offline" not working after failing to edit a found log
 - New: Option to limit search radius for address search
+- New: Show notification for missing location permission
 
 ##
 - Fix: Caches not loading after enabling live map (UnifiedMap)
