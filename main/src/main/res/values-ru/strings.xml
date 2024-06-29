@@ -802,7 +802,6 @@
     <string name="settings_summary_system">Системные настройки, опции отладки</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
-    <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
@@ -2307,12 +2306,6 @@
         <item quantity="few">Рекомендовать эти тайники (%d осталось)</item>
         <item quantity="many">Рекомендовать эти тайники (%d осталось)</item>
         <item quantity="other">Рекомендовать эти тайники (%d осталось)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Рекомендовать тайник (%d осталось)</item>
-        <item quantity="few">Рекомендовать тайники (%d осталось)</item>
-        <item quantity="many">Рекомендовать тайники (%d осталось)</item>
-        <item quantity="other">Рекомендовать тайники (%d осталось)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Установка иконок тайника</string>
     <plurals name="command_set_cache_icons_result">
