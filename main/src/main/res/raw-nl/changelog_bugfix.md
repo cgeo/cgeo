@@ -4,10 +4,10 @@
 - Nieuw: Aanvullende themaopties voor Google Maps
 - Oplossing: Kompas roos verborgen achter afstandsweergave (Google Maps v2)
 - Nieuw: Aanpassen van inloggen in geval van GC login fouten
-- Fix: Editing cache logs does not take care of existing favorite points
-- Fix: "Save offline" not working after failing to edit a found log
-- New: Option to limit search radius for address search
-- New: Show notification for missing location permission
+- Oplossing: Het bewerken van cache logs zorgt niet voor bestaande favoriete punten
+- Oplossing: "Offline opslaan" werkt niet na het bewerken van een gevonden log
+- Nieuw: Optie om de zoekstraal voor adres zoeken te beperken
+- Nieuw: Toon notificatie voor ontbrekende locatiemachtiging
 
 ##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
