@@ -340,7 +340,7 @@ dependencies {
     // Jackson XML processing
     // Jackson 2.14++ needs minSdk 26
     //noinspection GradleDependency
-    String jacksonVersion = '2.13.5'
+    String jacksonVersion = '2.17.1'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
