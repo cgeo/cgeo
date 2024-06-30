@@ -798,7 +798,6 @@
     <string name="settings_summary_system">Системные настройки, опции отладки</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
-    <string name="settings_category_nearbysearch">Поиск поблизости</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
@@ -1409,7 +1408,7 @@
     <string name="cache_dialog_offline_save_message">Сохранение тайника для использования офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Удаление</string>
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
-    <string name="cache_dialog_refresh_title">Обновление</string>
+    <string name="cache_dialog_refresh_title">Обновить</string>
     <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
     <string name="cache_menu_speechDeactivate">Перестать говорить</string>
     <string name="cache_menu_speechActivate">Начать говорить</string>
@@ -1434,7 +1433,6 @@
     <string name="no_browser_found">Браузер не найден</string>
     <string name="cache_menu_open_with">Открыть с помощью…</string>
     <string name="cache_menu_visit">Запись в блокнот</string>
-    <string name="cache_log_too_long">c:geo не смог отправить вашу запись, так как она слишком длинная. Но спасибо за то, что вы пытались написать такой объемный комментарий ;-)</string>
     <string name="cache_empty_log">c:geo не удалось отправить вашу запись, потому что она пуста.</string>
     <string name="cache_menu_visit_offline">Быстрая офлайн-запись</string>
     <string name="cache_menu_spoilers">Фото в спойлере</string>
@@ -1777,6 +1775,8 @@
     <string name="google_maps_style_retro">Ретро</string>
     <string name="google_maps_style_contrast">Высокая контрастность</string>
     <string name="google_maps_style_auto">Тема устройства (День/ночь)</string>
+    <string name="google_maps_style_details">Детали</string>
+    <string name="google_maps_option_group_theme">Опции темы</string>
     <!-- search -->
     <string name="geo_search_label">Поиск тайников поблизости</string>
     <string name="search_bar_hint">Поиск тайника / трекабла</string>
@@ -2303,12 +2303,6 @@
         <item quantity="few">Рекомендовать эти тайники (%d осталось)</item>
         <item quantity="many">Рекомендовать эти тайники (%d осталось)</item>
         <item quantity="other">Рекомендовать эти тайники (%d осталось)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Рекомендовать тайник (%d осталось)</item>
-        <item quantity="few">Рекомендовать тайники (%d осталось)</item>
-        <item quantity="many">Рекомендовать тайники (%d осталось)</item>
-        <item quantity="other">Рекомендовать тайники (%d осталось)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Установка иконок тайника</string>
     <plurals name="command_set_cache_icons_result">

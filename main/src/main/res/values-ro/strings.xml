@@ -612,7 +612,7 @@
     <string name="cache_dialog_offline_save_message">Salvare pentru uz fără internet…</string>
     <string name="cache_dialog_offline_drop_title">Cutie salvată</string>
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
-    <string name="cache_dialog_refresh_title">Reîncarcă</string>
+    <string name="cache_dialog_refresh_title">Împrospătează</string>
     <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
@@ -747,6 +747,7 @@
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
+    <string name="google_maps_style_details">Detalii</string>
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
     <string name="search_coordinates_button">Caută după coordonate</string>
@@ -1144,11 +1145,6 @@
     <string name="command_rename_list_result">Lista a fost redenumită</string>
     <string name="command_delete_list_result">Lista a fost ştearsă</string>
     <string name="command_unique_list_result">Geocutii şterse din alte liste</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Adaugă această geocutie la favorite (%d disponibil)</item>
-        <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
-        <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
     <string name="list_list_headline">Liste:</string>
     <plurals name="extract_waypoints_result">

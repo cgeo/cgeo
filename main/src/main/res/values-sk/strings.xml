@@ -712,7 +712,6 @@
     <string name="settings_summary_system">Systémové nastavenia a možnosti ladenia.</string>
     <string name="settings_title_navigation_menu">Navigačné Menu</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
-    <string name="settings_category_nearbysearch">Hľadať v okolí</string>
     <string name="init_nearbysearchlimit_title">Limit hľadania v okolí</string>
     <string name="init_nearbysearchlimit_description">Obmedzuje vzdialenosť, v rámci ktorej sú kešky vrátené pomocou vyhľadávania v okolí (0=neobmedzené)</string>
     <string name="init_settings_description_unlimited">neobmedzené</string>
@@ -1303,7 +1302,6 @@
     <string name="no_browser_found">Nebol nájdený prehliadač</string>
     <string name="cache_menu_open_with">Otvoriť s…</string>
     <string name="cache_menu_visit">Zalogovať návštevu</string>
-    <string name="cache_log_too_long">Aplikácia c:geo nemôže odoslať váš log, pretože je príliš dlhý. Ďakujeme ale, že ste sa pokúsili napísať taký obsiahly log ;-)</string>
     <string name="cache_menu_visit_offline">Rýchly offline log</string>
     <string name="cache_menu_spoilers">Obrázky s nápovedou</string>
     <string name="cache_menu_around">Skrýše v okolí</string>
@@ -1611,6 +1609,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
+    <string name="google_maps_style_details">Detail</string>
+    <string name="google_maps_option_group_theme">Nastavenia Témy</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
@@ -2129,12 +2129,6 @@
     <string name="command_rename_list_result">Zoznam premenovaný</string>
     <string name="command_delete_list_result">Zoznam vymazaný</string>
     <string name="command_unique_list_result">Skrýše odstránené z iných zoznamov</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
-        <item quantity="few">Pridať túto skrýšu medzi obľúbené (%d zostávajú)</item>
-        <item quantity="many">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
-        <item quantity="other">Pridať túto skrýšu medzi obľúbené (%d zostáva)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Nastavujú sa ikony kešky</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Nastaviť %d ikonu kešky</item>

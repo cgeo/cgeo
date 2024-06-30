@@ -1,4 +1,15 @@
 ##
+- Oprava: Kontrola délky logu počítající některé znaky dvakrát
+- Oprava: Přizpůsobení se změně webových stránek hylly
+- Novinka: Další možnosti témat pro Mapy Google
+- Oprava: Kompasová růžice skrytá za zobrazeními vzdáleností (Mapy Google v2)
+- Novinka: Vylepšení logování v případě chyb při přihlašování do GC
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)
 - Oprava: Chybějící možnost 'použít aktuální seznam' při vytváření uživatelsky definované kešky (Sjednocená mapa)
 - Oprava: Kompasová růžice skrytá za zobrazením vzdáleností (Sjednocená mapa)
@@ -11,7 +22,7 @@
 - Oprava: Jednotlivé trasy exportované jako stopy nemohou být načteny zařízeními Garmin
 - Oprava: Načítání trackovatelných položek z interní databáze za určitých podmínek selhává
 - Oprava: Trasa k navigačnímu cíli se nepřepočítává při změně režimu trasování
-- Fix: Error while reading available trackable log types
+- Oprava: Chyba při načítání dostupných typů sledovatelných logů
 
 ##
 - Oprava: Nefungují trasovatelné odkazy s parametrem TB

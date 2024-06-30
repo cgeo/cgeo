@@ -595,7 +595,6 @@
     <string name="settings_summary_system">Systemspesifikke instillinger og debugging alternativer.</string>
     <string name="settings_title_navigation_menu">Navigasjonsmenyen</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
-    <string name="settings_category_nearbysearch">Søk i nærheten</string>
     <string name="init_nearbysearchlimit_title">Søk i nærheten avgrensning</string>
     <string name="settings_category_geocaching_additionals">Flere tjenester og tillegg</string>
     <string name="settings_category_logging_other">Andre loggeinnstillinger</string>
@@ -1099,7 +1098,6 @@
     <string name="no_browser_found">Ingen nettleser funnet</string>
     <string name="cache_menu_open_with">Åpne med…</string>
     <string name="cache_menu_visit">Logg funn</string>
-    <string name="cache_log_too_long">c:geo kunne ikke sende inn loggen din fordi den er for lang. Men takk for forsøket med å skrive en så omfattende logg ;-)</string>
     <string name="cache_menu_visit_offline">Rask offlinelogg</string>
     <string name="cache_menu_spoilers">Bilder</string>
     <string name="cache_menu_around">Cacher i nærheten</string>
@@ -1350,6 +1348,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
+    <string name="google_maps_style_details">Detaljer</string>
+    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1836,10 +1836,6 @@
     <string name="command_rename_list_result">Endret listenavn</string>
     <string name="command_delete_list_result">Slettet listen</string>
     <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Legg denne cachen til favoritter (%d tilgjengelig)</item>
-        <item quantity="other">Legg denne cachen til favoritter (%d tilgjengelig)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Angir cacheikoner</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Angi cacheikon for %d</item>

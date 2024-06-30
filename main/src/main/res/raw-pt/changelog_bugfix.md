@@ -1,4 +1,15 @@
 ##
+- Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
+- New: Additional theming options for Google Maps
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- New: Enhance logging in case of GC login errors
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
 - Correcção: Falta a opção 'usar lista actual" na criação de cache definida pelo utilizador (Mapa Unificado)
 - Correcção: Bússola escondida atrás das visualizações de distância (Mapa Unificado)

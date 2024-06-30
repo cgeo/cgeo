@@ -780,7 +780,6 @@
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
-    <string name="settings_category_nearbysearch">주변 검색</string>
     <string name="init_nearbysearchlimit_title">주변 검색 제한</string>
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
@@ -1391,7 +1390,6 @@
     <string name="no_browser_found">브라우저를 찾을 수 없음</string>
     <string name="cache_menu_open_with">다른 프로그램으로 열기…</string>
     <string name="cache_menu_visit">로그하기</string>
-    <string name="cache_log_too_long">c:geo가 로그가 너무 길어서 제출할 수 없습니다. 하지만 이렇게 광범위한 로그를 작성 해주셔서 감사합니다 ;-)</string>
     <string name="cache_empty_log">c:geo는 로그가 비어 있어서 제출할 수 없습니다.</string>
     <string name="cache_menu_visit_offline">빠른 오프라인 로그</string>
     <string name="cache_menu_spoilers">스포일러 사진</string>
@@ -1731,6 +1729,8 @@
     <string name="google_maps_style_retro">복고풍 모드</string>
     <string name="google_maps_style_contrast">고대비</string>
     <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
+    <string name="google_maps_style_details">상세표시</string>
+    <string name="google_maps_option_group_theme">테마 옵션</string>
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
@@ -2223,9 +2223,6 @@
     <string name="command_unique_list_result">다른 목록에서 캐시 삭제함</string>
     <plurals name="fav_points_remaining_oc">
         <item quantity="other">이 캐시 추천 (%d개 남음)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="other">이 캐시를 호감캐시에 추가 (%d 남음)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">캐시 아이콘 설정 중</string>
     <plurals name="command_set_cache_icons_result">

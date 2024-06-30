@@ -1,4 +1,15 @@
 ##
+- Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
+- Poprawka: Dostosowanie do zmian na stronie hylly
+- Nowość: Dodatkowe opcje motywu dla map Google
+- Poprawka: Kompas ukryty za widokiem odległości (Google Maps v2)
+- Nowość: Ulepszenie logowania w przypadku błędów logowania GC
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
 - Poprawka: Brakuje opcji „Użyj bieżącej listy” przy tworzeniu skrytki zdefiniowanej przez użytkownika (UnifiedMap)
 - Poprawka: Kompas ukryty za widokiem odległości (UnifiedMap)
@@ -11,7 +22,7 @@
 - Poprawka: Indywidualne trasy eksportowane jako ślady nie mogą być odczytane przez urządzenia Garmin
 - Poprawka: Wczytywanie przedmiotów podróżnych z wewnętrznej bazy danych nie udawało się pod pewnymi warunkami
 - Poprawka: Trasa do celu nawigacji nie była ponownie obliczana przy zmianie trybu prowadzenia
-- Fix: Error while reading available trackable log types
+- Poprawka: Błąd podczas odczytywania dostępnych typów logów przedmiotów podróżnych
 
 ##
 - Poprawka: Linki śledzące z parametrem TB nie działały

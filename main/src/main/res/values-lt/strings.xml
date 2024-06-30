@@ -712,7 +712,6 @@
     <string name="settings_summary_system">Specifiniai sistemos nustatymai ir derinimo parinktys.</string>
     <string name="settings_title_navigation_menu">Navigacijos meniu</string>
     <string name="settings_category_geocaching_platform">Geocaching platforma</string>
-    <string name="settings_category_nearbysearch">Paieška netoliase</string>
     <string name="init_nearbysearchlimit_title">Paieškos netoliase limitas</string>
     <string name="init_nearbysearchlimit_description">Apriboja atstumą, iki kurio slėptuvės rodomos atliekant paiešką netoliese (0= neribotas)</string>
     <string name="init_settings_description_unlimited">neribotas</string>
@@ -1280,7 +1279,7 @@
     <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
     <string name="cache_dialog_offline_drop_title">Pašalinti</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
-    <string name="cache_dialog_refresh_title">Atnaujinama</string>
+    <string name="cache_dialog_refresh_title">Naujinti</string>
     <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
@@ -1303,7 +1302,6 @@
     <string name="no_browser_found">Nerasta jokios naršyklės</string>
     <string name="cache_menu_open_with">Atidaryti naudojant…</string>
     <string name="cache_menu_visit">Registruoti</string>
-    <string name="cache_log_too_long">c:geo negalėjo pateikti jūsų įrašo, nes jis per ilgas. Bet ačiū, kad bandėte parašyti tokį ilgą įrašą ;-)</string>
     <string name="cache_menu_visit_offline">Greitas įrašas neprisijungus</string>
     <string name="cache_menu_spoilers">Užuominos vaizdai</string>
     <string name="cache_menu_around">Slėptuvės aplink</string>
@@ -1611,6 +1609,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Didelis kontrastas</string>
     <string name="google_maps_style_auto">Įrenginio tema (Diena/Naktis)</string>
+    <string name="google_maps_style_details">Informacija</string>
+    <string name="google_maps_option_group_theme">Temos parinktys</string>
     <!-- search -->
     <string name="geo_search_label">Ieškoti slėptuvių netoliese</string>
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
@@ -2129,12 +2129,6 @@
     <string name="command_rename_list_result">Pervadinti sąrašą</string>
     <string name="command_delete_list_result">Sąrašas ištrintas</string>
     <string name="command_unique_list_result">Ištrintos slėptuvės iš kitų sąrašų</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Pridėti šią slėptuvę prie mėgstamų (liko %d)</item>
-        <item quantity="few">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-        <item quantity="many">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-        <item quantity="other">Pridėti šias slėptuves prie mėgstamų (liko %d)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Nustatomos slėptuvės piktogramos</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Nustatoma %d slėptuvės piktograma</item>
