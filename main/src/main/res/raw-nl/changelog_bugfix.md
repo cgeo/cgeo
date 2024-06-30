@@ -1,4 +1,15 @@
 ##
+- Oplossing: Log lengte controle telt sommige tekens twee keer
+- Oplossing: Aanpassen aan hylly's website verandering
+- Nieuw: Aanvullende themaopties voor Google Maps
+- Oplossing: Kompas roos verborgen achter afstandsweergave (Google Maps v2)
+- Nieuw: Aanpassen van inloggen in geval van GC login fouten
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Oplossing: Caches laden niet nadat live kaart is ingeschakeld (UnifiedMap)
 - Oplossing: Ontbrekende optie 'gebruik huidige lijst' bij het maken van door de gebruiker gedefinieerde cache (UnifiedMap)
 - Oplossing: Kompas roos verborgen achter afstandsweergave (UnifiedMap)
@@ -11,7 +22,7 @@
 - Oplossing: Individuele routes geëxporteerd als track kunnen niet worden gelezen door Garmin apparaten
 - Oplossing: Het laden van trackables uit interne database mislukt onder bepaalde voorwaarden
 - Oplossing: Route naar navigatie doel niet herberekend bij verandering routering modus
-- Fix: Error while reading available trackable log types
+- Oplossing: Fout tijdens het lezen van beschikbare trackable logtypes
 
 ##
 - Oplossing: Trackable links met TB parameter werken niet

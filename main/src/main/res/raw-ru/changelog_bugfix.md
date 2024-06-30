@@ -1,4 +1,15 @@
 ##
+- Fix: Log length check counting some characters twice
+- Fix: Adapt to hylly website change
+- New: Additional theming options for Google Maps
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- New: Enhance logging in case of GC login errors
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Исправлено: Тайники не загружались после включения онлайн карты (ЕдинаяКарта)
 - Исправлено: Отсутствовала опция «использовать текущий список» при создании определенного пользователем тайника (ЕдинаяКарта)
 - Исправление: роза компаса была скрыта за отображением расстояния (ЕдинаяКарта)

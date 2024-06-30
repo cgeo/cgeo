@@ -774,7 +774,6 @@
     <string name="settings_summary_system">Configuració i opcions de depuració específiques del sistema.</string>
     <string name="settings_title_navigation_menu">Menú de navegació</string>
     <string name="settings_category_geocaching_platform">Plataformes de Geocatxing</string>
-    <string name="settings_category_nearbysearch">Cerca propers</string>
     <string name="init_nearbysearchlimit_title">Límit de cerca propers</string>
     <string name="init_nearbysearchlimit_description">Limita la distància fins a la qual es retornen els catxés amb la cerca propera (0=il·limitat)</string>
     <string name="init_settings_description_unlimited">il·limitat</string>
@@ -1376,7 +1375,6 @@
     <string name="no_browser_found">No s\'ha trobat cap navegador</string>
     <string name="cache_menu_open_with">Obre amb…</string>
     <string name="cache_menu_visit">Registra visita</string>
-    <string name="cache_log_too_long">c: geo no ha pogut enviar el registre perquè és massa llarg. Però gràcies per intentar escriure un registre tan extens ;-)</string>
     <string name="cache_empty_log">C:geo no ha pogut enviar el vostre registre perquè està buit.</string>
     <string name="cache_menu_visit_offline">Registre ràpid fora de línia</string>
     <string name="cache_menu_spoilers">Imatges d\'ajuda</string>
@@ -1693,6 +1691,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Contrast Alt</string>
     <string name="google_maps_style_auto">Tema del dispositiu (Dia/Nit)</string>
+    <string name="google_maps_style_details">Detalls</string>
+    <string name="google_maps_option_group_theme">Opcions del tema</string>
     <!-- search -->
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
@@ -2195,10 +2195,6 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="one">Recomana aquest catxé (%d restant)</item>
         <item quantity="other">Recomana aquest catxé (%d restant)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Afegeix aquest geoamagatall als preferits (%d restants)</item>
-        <item quantity="other">Afegeix aquests geoamagatalls als preferits (%d restants)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Configuració d’icones de catxés</string>
     <plurals name="command_set_cache_icons_result">

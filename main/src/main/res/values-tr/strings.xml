@@ -624,7 +624,6 @@
     <string name="settings_summary_system">Sisteme özgül ayarlar ve hata ayıklama seçenekleri.</string>
     <string name="settings_title_navigation_menu">Navigasyon Menüsü</string>
     <string name="settings_category_geocaching_platform">Geocaching Platformu</string>
-    <string name="settings_category_nearbysearch">Yakınlarda ara</string>
     <string name="init_nearbysearchlimit_title">Yakınları arama limiti</string>
     <string name="settings_category_geocaching_additionals">Diğer servisler ve eklentiler</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
@@ -1136,7 +1135,6 @@
     <string name="no_browser_found">Tarayıcı bulunamadı</string>
     <string name="cache_menu_open_with">Birlikte aç…</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
-    <string name="cache_log_too_long">c:geo, kaydınızı gönderemedi çünkü çok uzun. Ama böylesine kapsamlı bir kayıt yazmaya çalıştığınız için teşekkürler ;-)</string>
     <string name="cache_menu_visit_offline">Hızlı çevrimdışı kayıt</string>
     <string name="cache_menu_spoilers">İpucu Görseller</string>
     <string name="cache_menu_around">Yakınlardaki Geocache\'ler</string>
@@ -1385,6 +1383,8 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
+    <string name="google_maps_style_details">Detaylar</string>
+    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1876,10 +1876,6 @@
     <string name="command_rename_list_result">Liste yeniden adlandırıldı</string>
     <string name="command_delete_list_result">Liste silindi</string>
     <string name="command_unique_list_result">Geocache\'ler diğer listelerden silindi</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Bu Geocache\'i favorilerilere ekle (kalan %d)</item>
-        <item quantity="other">Bu Geocache\'leri favorilerilere ekle (kalan %d)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Geocache simgesi ayarı</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">%d cache simgesini ayarla</item>

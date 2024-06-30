@@ -736,7 +736,6 @@
     <string name="cache_menu_browser">Відкрити в браузері</string>
     <string name="cache_menu_open_with">Відкрити за допомогою…</string>
     <string name="cache_menu_visit">Журнал відвідування</string>
-    <string name="cache_log_too_long">c:geo не вдалося представити ваш лог, занадто довго. Але дякуємо за те, що спробували написати такий великий журнал ;-)</string>
     <string name="cache_menu_visit_offline">Швидкий журнал оффлайн</string>
     <string name="cache_menu_spoilers">Зображення спойлера</string>
     <string name="cache_menu_around">Кеш навколо</string>
@@ -891,6 +890,8 @@
     <string name="map_as_list">показати як список</string>
     <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="quick_settings">Швидкі налаштування</string>
+    <string name="google_maps_style_details">Деталі</string>
+    <string name="google_maps_option_group_theme">Параметри тем</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_coordinates_button">Пошук за координатами</string>

@@ -958,7 +958,6 @@
     <string name="no_browser_found">Ingen browser fundet</string>
     <string name="cache_menu_open_with">Åbn med…</string>
     <string name="cache_menu_visit">Log besøg</string>
-    <string name="cache_log_too_long">c:geo kunne ikke indsende din log da den er for lang. Men tak for at du forsøgte at skrive sådan en omfattende log ;-)</string>
     <string name="cache_menu_visit_offline">Hurtig offline log</string>
     <string name="cache_menu_spoilers">Spoilerbilleder</string>
     <string name="cache_menu_around">Cacher i nærheden</string>
@@ -1120,6 +1119,8 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
+    <string name="google_maps_style_details">Detaljer</string>
+    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
@@ -1562,10 +1563,6 @@
     <string name="command_rename_list_result">Liste omdøbt</string>
     <string name="command_delete_list_result">Listen blev slettet</string>
     <string name="command_unique_list_result">Slettede cacher fra andre lister</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Tilføj denne cache til favoritter (%d resterende)</item>
-        <item quantity="other">Tilføj denne cache til favoritter (%d resterende)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
     <string name="list_list_headline">Lister:</string>
     <plurals name="extract_waypoints_result">

@@ -745,7 +745,6 @@
     <string name="settings_summary_system">Järjestelmäkohtaiset asetukset ja vianetsintäasetukset.</string>
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
-    <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
     <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
     <string name="init_settings_description_unlimited">rajoittamaton</string>
@@ -1330,7 +1329,6 @@
     <string name="no_browser_found">Selainta ei löytynyt</string>
     <string name="cache_menu_open_with">Avaa kohteessa…</string>
     <string name="cache_menu_visit">Kirjaa käynti</string>
-    <string name="cache_log_too_long">c:geo ei voinut lähettää lokiasi, koska se on liian pitkä. Kiitos kuitenkin siitä, että yrität kirjoittaa näin laajan lokin ;-)</string>
     <string name="cache_empty_log">c:geo ei voinut lähettää kirjaustasi, koska se on tyhjä.</string>
     <string name="cache_menu_visit_offline">Nopea offline-loki</string>
     <string name="cache_menu_spoilers">Spoiler-kuvat</string>
@@ -1646,6 +1644,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Suuri kontrasti</string>
     <string name="google_maps_style_auto">Laitteen teema (päivä/yö)</string>
+    <string name="google_maps_style_details">Yksityiskohdat</string>
+    <string name="google_maps_option_group_theme">Teeman asetukset</string>
     <!-- search -->
     <string name="geo_search_label">Etsi kätköjä lähistöllä</string>
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
@@ -2146,10 +2146,6 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="one">Suosittele tätä kätköä (%d jäljellä)</item>
         <item quantity="other">Suosittele tätä kätköä (%d jäljellä)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Lisää kätkö suosikkeihin (%d jäljellä)</item>
-        <item quantity="other">Lisää kätkö suosikkeihin (%d jäljellä)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Asetetaan kätkökuvakkeita</string>
     <plurals name="command_set_cache_icons_result">

@@ -800,9 +800,11 @@
     <string name="settings_summary_system">Specifická nastavení systému a možnosti ladění.</string>
     <string name="settings_title_navigation_menu">Navigační menu</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
-    <string name="settings_category_nearbysearch">Hledat v okolí</string>
+    <string name="settings_category_locationcentersearch">Vyhledávání zaměřené na polohu</string>
     <string name="init_nearbysearchlimit_title">Limit hledání v okolí</string>
     <string name="init_nearbysearchlimit_description">Omezí vzdálenost, do které jsou zobrazeny kešky hledané v okolí (0=neomezeno)</string>
+    <string name="init_coordsearchlimit_title">Limit pro vyhledávání souřadnic/adres</string>
+    <string name="init_coordsearchlimit_description">Omezí vzdálenost, do které jsou zobrazeny kešky při vyhledávání souřadnic/adres (0=neomezeno)</string>
     <string name="init_settings_description_unlimited">neomezený</string>
     <string name="settings_category_geocaching_additionals">Další služby a doplňky</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
@@ -1437,7 +1439,6 @@
     <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
     <string name="cache_menu_open_with">Otevřít pomocí…</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
-    <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
     <string name="cache_empty_log">c:geo nemohl odeslat váš log, protože je prázdný.</string>
     <string name="cache_menu_visit_offline">Rychlý offline log</string>
     <string name="cache_menu_spoilers">Obrázky</string>
@@ -1780,6 +1781,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
+    <string name="google_maps_style_details">Detaily</string>
+    <string name="google_maps_option_group_theme">Možnosti motivu</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
@@ -2309,9 +2312,9 @@
     </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Přidat tuto kešku do oblíbených (zbývá %d)</item>
-        <item quantity="few">Přidat tuto kešku do oblíbených (zbývá %d)</item>
+        <item quantity="few">Přidat tyto kešky do oblíbených (zbývá %d)</item>
         <item quantity="many">Přidat tyto kešky do oblíbených (zbývá %d)</item>
-        <item quantity="other">Přidat tuto kešku do oblíbených (zbývá %d)</item>
+        <item quantity="other">Přidat tyto kešky do oblíbených (zbývá %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Nastavují se ikony kešky</string>
     <plurals name="command_set_cache_icons_result">

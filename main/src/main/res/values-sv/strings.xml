@@ -697,7 +697,6 @@
     <string name="settings_summary_system">Systemspecifika inställningar och felsökningsalternativ.</string>
     <string name="settings_title_navigation_menu">Navigeringsmeny</string>
     <string name="settings_category_geocaching_platform">Geocaching-plattform</string>
-    <string name="settings_category_nearbysearch">Närliggande sökning</string>
     <string name="init_nearbysearchlimit_title">Närliggande sökgräns</string>
     <string name="init_nearbysearchlimit_description">Begränsar avståndet upp till vilka cacher som returneras med sökning i närheten (0=obegränsat)</string>
     <string name="init_settings_description_unlimited">obegränsad</string>
@@ -1271,7 +1270,6 @@
     <string name="no_browser_found">Hittade ingen webbläsare</string>
     <string name="cache_menu_open_with">Öppna med…</string>
     <string name="cache_menu_visit">Logga besök</string>
-    <string name="cache_log_too_long">c:geo kunde inte skicka in din logg eftersom den är för lång. Tack för att du försöker skriva en så omfattande logg ;-)</string>
     <string name="cache_menu_visit_offline">Snabblogga offline</string>
     <string name="cache_menu_spoilers">Spoiler bilder</string>
     <string name="cache_menu_around">Cacher i närheten</string>
@@ -1574,6 +1572,8 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hög kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
+    <string name="google_maps_style_details">Detaljer</string>
+    <string name="google_maps_option_group_theme">Inställningar för teman</string>
     <!-- search -->
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
@@ -2071,10 +2071,6 @@
     <string name="command_rename_list_result">Namn ändrat på lista</string>
     <string name="command_delete_list_result">Lista borttagen</string>
     <string name="command_unique_list_result">Borttagna cacher från andra listor</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Lägg till cachen bland dina favoriter (%d kvar)</item>
-        <item quantity="other">Lägg till cachen bland dina favoriter (%d kvar)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Ställer in cache-ikoner</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Ange %d cache-ikon</item>

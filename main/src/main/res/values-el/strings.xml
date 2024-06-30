@@ -670,7 +670,6 @@
     <string name="settings_summary_system">Ρυθμίσεις συστήματος και επιλογές αποσφαλμάτωσης.</string>
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
-    <string name="settings_category_nearbysearch">Κοντινή αναζήτηση</string>
     <string name="init_nearbysearchlimit_title">Όρια αναζήτησης αποτελεσμάτων</string>
     <string name="init_nearbysearchlimit_description">Περιορίζει την απόσταση μέχρι την οποία επιστρέφονται κρύπτες με κοντινή αναζήτηση (0=απεριόριστη)</string>
     <string name="settings_category_geocaching_additionals">Περαιτέρω υπηρεσίες και πρόσθετα</string>
@@ -1213,7 +1212,6 @@
     <string name="no_browser_found">Δε βρέθηκε εφαρμογή περιήγησης</string>
     <string name="cache_menu_open_with">Άνοιγμα με…</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
-    <string name="cache_log_too_long">Το c:geoδεν μπορεί να στείλει αυτή την καταγραφή λόγω μεγέθους. Αλλά μπράβο σας για το τόσο μεγάλο κείμενο ;-)</string>
     <string name="cache_menu_visit_offline">Γρήγορη καταγραφή εκτός σύνδεσης</string>
     <string name="cache_menu_spoilers">Βοηθητικές εικόνες</string>
     <string name="cache_menu_around">Κρύπτες τριγύρω</string>
@@ -1509,6 +1507,8 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
+    <string name="google_maps_style_details">Λεπτομέρειες</string>
+    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -2002,10 +2002,6 @@
     <string name="command_rename_list_result">Μετονομασία λίστας</string>
     <string name="command_delete_list_result">Η λίστα διαγράφηκε</string>
     <string name="command_unique_list_result">Διεγράφησαν οι κρύπτες από άλλες λίστες</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
-        <item quantity="other">Προσθήκη αυτής της κρύπτης στις αγαπημένες (απομένουν %d)</item>
-    </plurals>
     <string name="command_set_cache_icons_progress">Ορισμός εικονιδίου κρύπτης</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Ορισμός %d εικονιδίου κρύπτης</item>

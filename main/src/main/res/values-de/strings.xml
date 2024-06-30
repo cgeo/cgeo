@@ -788,9 +788,11 @@
     <string name="settings_summary_system">Systemeinstellungen und Optionen zur Fehlersuche.</string>
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
-    <string name="settings_category_nearbysearch">Suche in der Nähe</string>
+    <string name="settings_category_locationcentersearch">Standortzentrierte Suchen</string>
     <string name="init_nearbysearchlimit_title">Limit für Suche in der Nähe</string>
     <string name="init_nearbysearchlimit_description">Begrenzt die Distanz, bis zu der Caches für die Suche in der Nähe zurückgegeben werden (0=unbegrenzt)</string>
+    <string name="init_coordsearchlimit_title">Koordinaten-/Adress-Suchlimit</string>
+    <string name="init_coordsearchlimit_description">Begrenzt die Distanz bis zu der Caches mit Koordinaten/Adressensuche zurückgegeben werden (0=unbegrenzt)</string>
     <string name="init_settings_description_unlimited">unbegrenzt</string>
     <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
@@ -1409,7 +1411,6 @@
     <string name="no_browser_found">Kein Browser gefunden</string>
     <string name="cache_menu_open_with">Öffnen mit…</string>
     <string name="cache_menu_visit">Besuch loggen</string>
-    <string name="cache_log_too_long">c:geo konnte deinen Log nicht senden, da er zu lang ist. Aber danke für den Versuch, ein so umfangreiches Log zu schreiben ;-)</string>
     <string name="cache_empty_log">c:geo konnte den Logeintrag nicht senden, da er leer ist.</string>
     <string name="cache_menu_visit_offline">Schneller Offline-Log</string>
     <string name="cache_menu_spoilers">Hinweisbild</string>
@@ -1750,6 +1751,18 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoher Kontrast</string>
     <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
+    <string name="google_maps_style_details">Details</string>
+    <string name="google_maps_option_group_map">Kartenoptionen</string>
+    <string name="google_maps_option_show_traffic">Verkehr anzeigen</string>
+    <string name="google_maps_option_show_buildings">3D-Gebäude anzeigen</string>
+    <string name="google_maps_option_group_theme">Design-Optionen</string>
+    <string name="google_maps_option_show_feature_theme">Theme Features anzeigen</string>
+    <string name="google_maps_option_show_feature_administrative_all">Administrative Fratures anzeigen</string>
+    <string name="google_maps_option_show_feature_landscape_all">Landschaftsfeatures anzeigen</string>
+    <string name="google_maps_option_show_feature_poi_all">Interessante Punkte anzeigen</string>
+    <string name="google_maps_option_show_feature_road_all">Straßen anzeigen</string>
+    <string name="google_maps_option_show_feature_transit_all">Verkehrsmittel anzeigen</string>
+    <string name="google_maps_option_show_feature_water_all">Wasser anzeigen</string>
     <!-- search -->
     <string name="geo_search_label">Caches in der Nähe suchen</string>
     <string name="search_bar_hint">Caches/Trackables suchen</string>
@@ -2256,8 +2269,8 @@
         <item quantity="other">Diesen Cache empfehlen (%d verbleibend)</item>
     </plurals>
     <plurals name="fav_points_remaining">
-        <item quantity="one">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
-        <item quantity="other">Füge den Cache zu Favoriten hinzu (%d verfügbar)</item>
+        <item quantity="one">Diesen Cache zum Favoriten machen (%d verbleibend)</item>
+        <item quantity="other">Diesen Cache zum Favoriten machen (%d verbleibend)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Speichere Cache-Symbole</string>
     <plurals name="command_set_cache_icons_result">

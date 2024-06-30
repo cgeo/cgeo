@@ -800,9 +800,11 @@
     <string name="settings_summary_system">Ustawienia specyficzne dla systemu i opcje debugowania.</string>
     <string name="settings_title_navigation_menu">Menu nawigacji</string>
     <string name="settings_category_geocaching_platform">Platforma Geocaching</string>
-    <string name="settings_category_nearbysearch">Szukaj w pobliżu</string>
+    <string name="settings_category_locationcentersearch">Wyszukiwanie wokół lokalizacji</string>
     <string name="init_nearbysearchlimit_title">Limit szukania w pobliżu</string>
     <string name="init_nearbysearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania w pobliżu (0=nieograniczona)</string>
+    <string name="init_coordsearchlimit_title">Limit wyszukiwania współrzędnych/adresu</string>
+    <string name="init_coordsearchlimit_description">Ogranicza odległość, do której wyszukuje skrytki podczas szukania współrzędnych/adresu (0=nieograniczona)</string>
     <string name="init_settings_description_unlimited">bez ograniczeń</string>
     <string name="settings_category_geocaching_additionals">Dalsze usługi i dodatki</string>
     <string name="settings_category_logging_other">Inne opcje logowania</string>
@@ -1437,7 +1439,6 @@
     <string name="no_browser_found">Nie znaleziono przeglądarki</string>
     <string name="cache_menu_open_with">Otwórz za pomocą…</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
-    <string name="cache_log_too_long">c:geo nie mógł przesłać twojego wpisu, gdyż jest zbyt długi. Ale dziękujemy za próbę zapisu tak obszernego wpisu ;-)</string>
     <string name="cache_empty_log">c:geo nie mógł przesłać twojego wpisu wizyty, ponieważ jest pusty.</string>
     <string name="cache_menu_visit_offline">Szybki log offline</string>
     <string name="cache_menu_spoilers">Zdjęcia ze spoilerami</string>
@@ -1780,6 +1781,18 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Wysoki kontrast</string>
     <string name="google_maps_style_auto">Motyw urządzenia (Dzień/Noc)</string>
+    <string name="google_maps_style_details">Szczegóły</string>
+    <string name="google_maps_option_group_map">Opcje mapy</string>
+    <string name="google_maps_option_show_traffic">Pokaż natężenie ruchu</string>
+    <string name="google_maps_option_show_buildings">Pokaż budynki 3D</string>
+    <string name="google_maps_option_group_theme">Opcje motywu</string>
+    <string name="google_maps_option_show_feature_theme">Pokaż funkcje motywu</string>
+    <string name="google_maps_option_show_feature_administrative_all">Pokaż granice administracyjne</string>
+    <string name="google_maps_option_show_feature_landscape_all">Pokaż w trybie poziomym</string>
+    <string name="google_maps_option_show_feature_poi_all">Pokaż ciekawe miejsca</string>
+    <string name="google_maps_option_show_feature_road_all">Pokaż drogi</string>
+    <string name="google_maps_option_show_feature_transit_all">Pokaż przejścia</string>
+    <string name="google_maps_option_show_feature_water_all">Pokaż wodę</string>
     <!-- search -->
     <string name="geo_search_label">Szukaj skrytek w pobliżu</string>
     <string name="search_bar_hint">Szukaj skrytek/przedmiotów podróżnych</string>
@@ -2309,9 +2322,9 @@
     </plurals>
     <plurals name="fav_points_remaining">
         <item quantity="one">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="few">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="many">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
-        <item quantity="other">Dodaj tę skrytkę do ulubionych (pozostało %d)</item>
+        <item quantity="few">Dodaj te skrytki do ulubionych (pozostało %d)</item>
+        <item quantity="many">Dodaj te skrytki do ulubionych (pozostało %d)</item>
+        <item quantity="other">Dodaj te skrytki do ulubionych (pozostało %d)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Ustawienie ikon skrytek</string>
     <plurals name="command_set_cache_icons_result">

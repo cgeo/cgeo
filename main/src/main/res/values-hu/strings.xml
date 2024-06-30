@@ -890,6 +890,8 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
+    <string name="google_maps_style_details">Adatok</string>
+    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -1289,10 +1291,6 @@
     <string name="command_rename_list_result">Átnevezett lista</string>
     <string name="command_delete_list_result">Törölt lista</string>
     <string name="command_unique_list_result">Ládák törölve</string>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
-        <item quantity="other">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
-    </plurals>
     <string name="caches_refresh_all_warning">Ez a művelet nagy hálózati forgalmat okozhat. Biztosan frissíteni akarod összes ládát?</string>
     <string name="list_list_headline">Listák:</string>
     <plurals name="extract_waypoints_result">

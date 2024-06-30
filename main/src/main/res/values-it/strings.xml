@@ -788,7 +788,6 @@
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
-    <string name="settings_category_nearbysearch">Ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_title">Limite di ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_description">Limita la distanza fino alla quale vengono mostrati i cache con la ricerca nelle vicinanze (0=illimitato)</string>
     <string name="init_settings_description_unlimited">illimitato</string>
@@ -1405,7 +1404,6 @@
     <string name="no_browser_found">Nessun browser trovato</string>
     <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
-    <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
     <string name="cache_empty_log">c:geo non ha potuto inviare il tuo log perché è vuoto.</string>
     <string name="cache_menu_visit_offline">Rapido log offline</string>
     <string name="cache_menu_spoilers">Immagini spoiler</string>
@@ -1746,6 +1744,8 @@
     <string name="google_maps_style_retro">Stile Retrò</string>
     <string name="google_maps_style_contrast">Contrasto Elevato</string>
     <string name="google_maps_style_auto">Tema del dispositivo (giorno/notte)</string>
+    <string name="google_maps_style_details">Dettagli</string>
+    <string name="google_maps_option_group_theme">Opzioni Tema</string>
     <!-- search -->
     <string name="geo_search_label">Cerca cache nelle vicinanze</string>
     <string name="search_bar_hint">Cerca caches/trackables</string>
@@ -2250,10 +2250,6 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="one">Consiglia questo cache (%d rimanenti)</item>
         <item quantity="other">Consiglia questi cache (%d rimanenti)</item>
-    </plurals>
-    <plurals name="fav_points_remaining">
-        <item quantity="one">Aggiungi questo cache ai preferiti (%d restanti)</item>
-        <item quantity="other">Aggiungi questo cache ai preferiti (%d restanti)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Imposta icone cache</string>
     <plurals name="command_set_cache_icons_result">

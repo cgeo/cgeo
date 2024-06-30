@@ -1,4 +1,15 @@
 ##
+- Korrektur: Längenprüfung bei Logs zählt manche Zeichen doppelt
+- Korrektur: hylly-Karte wird im Downloader nicht angezeigt (Webseitenänderung)
+- New: Additional theming options for Google Maps
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- New: Enhance logging in case of GC login errors
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+##
 - Korrektur: Caches werden nach Aktivierung der Live-Karte nicht geladen (UnifiedMap)
 - Korrektur: Option 'Aktuelle Liste verwenden' fehlt beim Erstellen eines benutzerdefinierten Caches (UnifiedMap)
 - Korrektur: Kompassrose durch Distanzansichten verdeckt (UnifiedMap)
