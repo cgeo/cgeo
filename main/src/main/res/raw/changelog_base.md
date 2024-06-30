@@ -23,3 +23,4 @@
 - New: API to Locus now supporting cache size "virtual"
 - Fix: Search results for a location no longer sorted by distance to target location
 - New: "Corrected coordinates" filter
+- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
