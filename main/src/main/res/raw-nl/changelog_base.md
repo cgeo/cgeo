@@ -1,15 +1,25 @@
 ### Kaart
 - Nieuw: "Persoonlijke Notitie bewerken" van het cache informatieblad
 - Oplossing: Waypoints niet gefilterd bij het toewijzen van een enkele cache (UnifiedMap)
+- Nieuw: Ondersteuning voor gebruiker-gedefinieerde tegelaanbieders
+- Oplossing: Vernieuw kaartgegevens na het openen / sluiten van instellingen dialoogvenster (UnifiedMap)
+- Nieuw: Wissel display van gebouwen 2D/3D (UnifiedMap OSM kaarten)
+- Nieuw: Cache opslaan/vernieuwen van popup verplaatst naar de achtergrond
+- Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Soepeler schalen van log afbeeldingen
 - Wijziging: Wijzig "gelogd" icoon van potlood naar smiley icoon
+- Wijziging: "Bewerk lijsten" pictogram van potlood naar lijst + potlood wijzigen
 
 ### Algemeen
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
 - Nieuw: Lijst selectie dialoog: Groepeer cache lijsten met een ":" in de naam automatisch
 - Wijziging: gebruik OSM Nominatum als terugval geocoder, ter vervanging van MapQuest geocoder (die niet meer werkt)
-- Wijziging: Geïntegreerde BRouter bijgewerkt naar v1.7.4
+- Wijziging: geïntegreerde BRouter bijgewerkt naar v1.7.5
+- Nieuw: Lees hoogte informatie van track bij importeren
+- Nieuw: API van Locus ondersteunt nu de cache grootte "virtueel"
+- Oplossing: Zoekresultaten voor een locatie niet langer gesorteerd op afstand tot doellocatie
+- Nieuw: "Gecorrigeerde coördinaten" filter
