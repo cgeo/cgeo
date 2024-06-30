@@ -265,11 +265,17 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         private void selectListsAndStore(final boolean fastStoreOnLastSelection) {
-            if (!Network.isConnected()) {
-                showToast(getString(R.string.err_server_general));
-                return;
+            if (cache.isOffline()) {
+                // just update list selection
+                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
+                        CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
+            } else {
+                if (!Network.isConnected()) {
+                    showToast(getString(R.string.err_server_general));
+                    return;
+                }
+                CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
             }
-            CacheDownloaderService.storeCache(getActivity(), cache, fastStoreOnLastSelection, () -> updateStoreRefreshButtons(false));
         }
     }
 
