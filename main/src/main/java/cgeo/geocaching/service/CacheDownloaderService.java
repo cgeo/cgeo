@@ -101,7 +101,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     public static void storeCache(final Activity context, final Geocache cache, final boolean fastStoreOnLastSelection, @Nullable final Runnable onStartCallback) {
         if (Settings.getChooseList() || cache.isOffline()) {
             // let user select list to store cache in
-            new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, Collections.singleton(cache.getGeocode()), selectedListIds, cache.isOffline(), true, onStartCallback), true, Collections.emptySet(), fastStoreOnLastSelection);
+            new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, Collections.singleton(cache.getGeocode()), selectedListIds, false, true, onStartCallback), true, cache.getLists(), fastStoreOnLastSelection);
         } else {
             downloadCachesInternal(context, Collections.singleton(cache.getGeocode()), Collections.singleton(StoredList.STANDARD_LIST_ID), false, true, onStartCallback);
         }
