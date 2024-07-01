@@ -594,6 +594,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">오프라인 로그 있음</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">정정된 좌표</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다. 다른 캐시 유형을 제외하려면 적절한 캐시 유형 필터를 정의하십시오.\n\n미스터리는 좌표가 변경되었거나 좌표로 채워진 유효한 최종 지점니 있는 경우 \'해결됨\' 것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
@@ -768,6 +769,8 @@
     <string name="settings_title_map_style">지도 스타일</string>
     <string name="settings_hide_tileproviders_title">지도 소스 숨기기</string>
     <string name="settings_hide_tileproviders_summary">지도 소스 선택에서 하나 이상의 지도 소스 제외</string>
+    <string name="settings_userDefinedTileProvider">사용자 정의 타일 공급자</string>
+    <string name="settings_userDefinedTileProviderUri">타일 공급자에 (후행 슬래시 없이) 전체 URI를 입력합니다. 사용 조건을 확인하고 준수했는지 확인하십시오.</string>
     <string name="settings_title_data_dir">지오캐시 데이터 폴더</string>
     <string name="settings_title_data_dir_usage">지오캐시 데이터 폴더 (%1$s 사용)</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
@@ -782,8 +785,11 @@
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
+    <string name="settings_category_locationcentersearch">위치 중심 검색</string>
     <string name="init_nearbysearchlimit_title">주변 검색 제한</string>
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
+    <string name="init_coordsearchlimit_title">좌표/주소 검색 제한</string>
+    <string name="init_coordsearchlimit_description">좌표/주소 검색을 통해 캐시를 반환할 수 있는 거리 제한 (0=무제한)</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
     <string name="settings_category_geocaching_additionals">추가 서비스 및 애드온</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
@@ -1369,8 +1375,6 @@
     <string name="cache_dialog_offline_save_message">캐시를 오프라인용으로 저장중…</string>
     <string name="cache_dialog_offline_drop_title">오프라인</string>
     <string name="cache_dialog_offline_drop_message">기기에서 캐시 제거중…</string>
-    <string name="cache_dialog_refresh_title">새로 고침</string>
-    <string name="cache_dialog_refresh_message">캐시 정보 다시 불러오는 중…</string>
     <string name="cache_menu_speechDeactivate">말하기 끝</string>
     <string name="cache_menu_speechActivate">말하기 시작</string>
     <string name="cache_menu_navigate">길찾기</string>
@@ -1408,6 +1412,7 @@
     <string name="cache_menu_reset_foundstate">찾은 상태 재설정</string>
     <string name="cache_foundstate_updated">찾은 상태가 업데이트되었습니다.</string>
     <string name="cache_menu_set_cache_icon">캐시 아이콘 설정</string>
+    <string name="cache_menu_change_description_style">설명 스타일 변경</string>
     <string name="cache_icon_updated">캐시 아이콘 갱신</string>
     <string name="cache_menu_details">상세내용</string>
     <string name="cache_menu_refresh">새로 고침</string>
@@ -1530,6 +1535,10 @@
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
+    <!-- html styles -->
+    <string name="html_style_default">기본</string>
+    <string name="html_style_monochrome">흑백크롬</string>
+    <string name="html_style_source">HTML 원본</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">각도</string>
     <string name="cc_hint_minutes">분</string>
@@ -1733,8 +1742,18 @@
     <string name="google_maps_style_retro">복고풍 모드</string>
     <string name="google_maps_style_contrast">고대비</string>
     <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
-    <string name="google_maps_style_details">상세표시</string>
+    <string name="google_maps_style_details">상세내용</string>
+    <string name="google_maps_option_group_map">지도 옵션</string>
+    <string name="google_maps_option_show_traffic">교통체증 표시</string>
+    <string name="google_maps_option_show_buildings">3D 건물 표시</string>
     <string name="google_maps_option_group_theme">테마 옵션</string>
+    <string name="google_maps_option_show_feature_theme">테마 기능 표시</string>
+    <string name="google_maps_option_show_feature_administrative_all">행정 표시</string>
+    <string name="google_maps_option_show_feature_landscape_all">풍경 표시</string>
+    <string name="google_maps_option_show_feature_poi_all">관심 지점 표시</string>
+    <string name="google_maps_option_show_feature_road_all">도로 표시</string>
+    <string name="google_maps_option_show_feature_transit_all">교통 표시</string>
+    <string name="google_maps_option_show_feature_water_all">수역 표시</string>
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
@@ -1749,6 +1768,7 @@
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
+    <string name="search_kw_disabled_hint">기본 회원의 경우 geocaching.com에서 지원하지 않으므로 사용할 수 없음</string>
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
@@ -2228,6 +2248,9 @@
     <plurals name="fav_points_remaining_oc">
         <item quantity="other">이 캐시 추천 (%d개 남음)</item>
     </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="other">이 캐시에 호감점수를 부여합니다 (남은 %d개)</item>
+    </plurals>
     <string name="command_set_cache_icons_progress">캐시 아이콘 설정 중</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="other">%d 캐시 아이콘 설정</item>
@@ -2449,6 +2472,7 @@
     <string name="maptheme_scale_text_summary">그리고 지도에서 문자 레이블의 크기를 축척합니다. 100% = 추가 축척 없음</string>
     <string name="maptheme_scale_symbol_title">기호 축척 비율</string>
     <string name="maptheme_scale_symbol_summary">그리고 지도에서 기호 크기의 크기를 축척합니다. 100% = 추가 축척 없음</string>
+    <string name="maptheme_show3Dbuildings">건물을 3D로 표시</string>
     <string name="vtm_theme_variant">테마 변형</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
