@@ -23,3 +23,4 @@
 - Novinka: API pro Locus nyní podporuje "virtuální" velikost kešky
 - Oprava: Výsledky vyhledání místa již nejsou řazeny podle vzdálenosti od cílového místa
 - Novinka: filtr "Upravené souřadnice"
+- Změna: Aktualizováno cílové SDK na verzi 34, aby bylo v souladu s nadcházejícími požadavky Obchodu Play
