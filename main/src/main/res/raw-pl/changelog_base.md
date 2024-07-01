@@ -5,7 +5,7 @@
 - Poprawka: Odświeżanie danych mapy po otwarciu/zamknięciu okna z ustawieniami (UnifiedMap)
 - Nowość: Przełącz wyświetlanie budynków 2D/3D (UnifiedMap OSM)
 - Nowość: Zapisywanie/odświeżanie skrytki przesunięte z wyskakującego okna na tło
-- Change: Search for coordinates: Show direction and distance to target and not to current position
+- Zmiana: Wyszukiwanie współrzędnych: Pokaż kierunek i odległość do celu, a nie do aktualnej pozycji
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
@@ -23,3 +23,4 @@
 - Nowość: API do Locusa teraz obsługuje rozmiar skrytki wirtualnej
 - Poprawka: Wyniki wyszukiwania dla lokalizacji nie były posortowane według odległości do lokalizacji docelowej
 - Nowość: Filtr „Poprawione współrzędne”
+- Zmiana: Zaktualizowano targetSDK do wersji 34, aby spełnić przyszłe wymagania Sklepu Play
