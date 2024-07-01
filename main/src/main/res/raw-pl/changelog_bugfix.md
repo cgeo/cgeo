@@ -4,10 +4,10 @@
 - Nowość: Dodatkowe opcje motywu dla map Google
 - Poprawka: Kompas ukryty za widokiem odległości (Google Maps v2)
 - Nowość: Ulepszenie logowania w przypadku błędów logowania GC
-- Fix: Editing cache logs does not take care of existing favorite points
-- Fix: "Save offline" not working after failing to edit a found log
-- New: Option to limit search radius for address search
-- New: Show notification for missing location permission
+- Poprawka: Edycja dzienników skrytek nie zajmuje się istniejącymi punktami ulubionych
+- Poprawka: „Zapisz offline“ nie działa po nieudanej edycji wpisu znalezienia
+- Nowość: Opcja ograniczenia promienia wyszukiwania dla wyszukiwania adresów
+- Nowość: Pokaż powiadomienia o brakujących uprawnieniach do lokalizacji
 
 ##
 - Poprawka: Skrytki nie wczytują się po włączeniu mapy na żywo (UnifiedMap)
