@@ -23,3 +23,4 @@
 - Nieuw: API van Locus ondersteunt nu de cache grootte "virtueel"
 - Oplossing: Zoekresultaten voor een locatie niet langer gesorteerd op afstand tot doellocatie
 - Nieuw: "Gecorrigeerde coördinaten" filter
+- Wijziging: targetSDK bijgewerkt naar 34 om te voldoen aan de aankomende Play Store eisen
