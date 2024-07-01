@@ -774,6 +774,8 @@
     <string name="settings_title_map_style">Kartenstil</string>
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
     <string name="settings_hide_tileproviders_summary">Eine oder mehrere Kartenquellen aus der Kartenauswahl ausblenden</string>
+    <string name="settings_userDefinedTileProvider">Benutzerdefinierter Kartenabieter</string>
+    <string name="settings_userDefinedTileProviderUri">Gib den vollständigen Uri (ohne abschließenden Schrägstrich) für den Kartenanbieter ein. Stelle sicher, dass du dessen Benutzungsbedingungen geprüft hast und einhältst.</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
     <string name="settings_title_data_dir_usage">Geocache-Datenordner (%1$s genutzt)</string>
     <string name="calculate_dataDir_title">Geocache-Datennutzung</string>
@@ -1386,8 +1388,6 @@
     <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
     <string name="cache_dialog_offline_drop_title">Offline-Verwendung</string>
     <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
-    <string name="cache_dialog_refresh_title">Aktualisieren</string>
-    <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
     <string name="cache_menu_speechDeactivate">Beende Sprachausgabe</string>
     <string name="cache_menu_speechActivate">Starte Sprachausgabe</string>
     <string name="cache_menu_navigate">Navigieren</string>
@@ -1425,6 +1425,7 @@
     <string name="cache_menu_reset_foundstate">Fundstatus zurücksetzen</string>
     <string name="cache_foundstate_updated">Fundstatus aktualisiert</string>
     <string name="cache_menu_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="cache_menu_change_description_style">Beschreibungsstil wechseln</string>
     <string name="cache_icon_updated">Cache-Symbol aktualisiert</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Aktualisieren</string>
@@ -1547,6 +1548,10 @@
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
+    <!-- html styles -->
+    <string name="html_style_default">Standard</string>
+    <string name="html_style_monochrome">Monochrom</string>
+    <string name="html_style_source">HTML-Quelltext</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Grad</string>
     <string name="cc_hint_minutes">Minuten</string>
@@ -2496,6 +2501,7 @@
     <string name="maptheme_scale_text_summary">Skaliert zusätzlich angezeigte Texte in der Karte; 100% = keine zusätzliche Skalierung</string>
     <string name="maptheme_scale_symbol_title">Symbolskalierungsfaktor</string>
     <string name="maptheme_scale_symbol_summary">Skaliert zusätzlich angezeigte Symbole in der Karte; 100% = keine zusätzliche Skalierung</string>
+    <string name="maptheme_show3Dbuildings">Gebäude in 3D anzeigen</string>
     <string name="vtm_theme_variant">Design-Variante</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>

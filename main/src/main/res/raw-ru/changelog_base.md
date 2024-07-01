@@ -1,15 +1,26 @@
 ### Карта
-- New: "Edit Personal Note" from cache info sheet
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Новое: "Редактировать личную заметку" в информации о тайнике
+- Исправлено: путевые точки не фильтровались при отображении одного тайника (ЕдинаяКарта)
+- Новое: Поддержка заданных пользователем сторонних карт
+- Исправлено: Обновление данных карты после открытия/закрытия окна настроек (ЕдинаяКарта)
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- New: Cache store/refresh from popup moved into background
+- Change: Search for coordinates: Show direction and distance to target and not to current position
 
 ### Детали тайника
-- New: Show images linked in "personal note" in Images tab
-- Change: Simplify long-tap action in cache details and trackable details
-- New: Smoother scaling of log images
-- Change: Change "log" icon from pencil to smiley icon
+- Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
+- Изменение: Упрощено действие при длительном нажатии в разделах детали и трекаблы тайников
+- Новое: Более плавное масштабирование изображений при добавлении их в записи о взятии тайника
+- Изменено: Заменена иконка "запись" с карандаша на смайлик
+- Изменение: изменена иконка «редактировать списки» с карандаша на список + карандаш
 
 ### Общее
-- New: Switch to set found state of Lab Adventures either manually or automatically
-- New: List selection dialog: Auto-group cache lists having a ":" in their name
-- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
-- Change: Updated integrated BRouter to v1.7.4
+- Новое: Переключение на настройку статуса нахождения тайника в Lab Adventures вручную или автоматически
+- Новое: Диалог выбора списка: Списки тайников с автоматической группировкой, в названии которых есть ":"
+- Изменение: Используйте OSM Nominatum в качестве резервного геокодера, заменив геокодер MapQuest (который у нас больше не работает)
+- Change: Updated integrated BRouter to v1.7.5
+- Новое: Чтение информации о высотах из трека при импорте
+- New: API to Locus now supporting cache size "virtual"
+- Fix: Search results for a location no longer sorted by distance to target location
+- New: "Corrected coordinates" filter
+- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements

@@ -646,6 +646,7 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -657,7 +658,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="google_maps_style_details">详细资料</string>
     <!-- search -->
     <!-- trackable -->
     <!-- user -->
