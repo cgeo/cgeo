@@ -113,14 +113,15 @@ public class MapSettingsUtils {
         boolean useUser1 = false;
         boolean useUser2 = false;
         if (useInternalRouting) {
+            final String profileNoneString = activity.getResources().getString(R.string.routingmode_none);
             final StringBuilder sb = new StringBuilder();
             final String temp1 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER1), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
-            if (StringUtils.isNotBlank(temp1)) {
+            if (StringUtils.isNotBlank(temp1) && !temp1.equals(profileNoneString)) {
                 sb.append("1: ").append(temp1);
                 useUser1 = true;
             }
             final String temp2 = StringUtils.removeEndIgnoreCase(Settings.getRoutingProfile(RoutingMode.USER2), BRouterConstants.BROUTER_PROFILE_FILEEXTENSION);
-            if (StringUtils.isNotBlank(temp2)) {
+            if (StringUtils.isNotBlank(temp2) && !temp2.equals(profileNoneString)) {
                 sb.append(StringUtils.isNotBlank(sb) ? " - " : "").append("2: ").append(temp2);
                 useUser2 = true;
             }
