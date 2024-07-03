@@ -528,6 +528,7 @@
     <string name="cache_filter_difficulty_terrain_matrix">Сложность / Местность</string>
     <string name="cache_filter_rating">Оценка</string>
     <string name="cache_filter_status">Статус</string>
+    <string name="cache_filter_individualroute">Личный маршрут</string>
     <string name="cache_filter_attributes">Атрибуты</string>
     <string name="cache_filter_favorites">Избранное</string>
     <string name="cache_filter_distance">Расстояние</string>
@@ -619,6 +620,7 @@
     <string name="cache_filter_status_exclude_active">Кроме активных</string>
     <string name="cache_filter_status_exclude_disabled">Кроме тайников вне игры</string>
     <string name="cache_filter_status_exclude_archived">Исключить архивные</string>
+    <string name="cache_filter_boolean_individualroute_contained">Включен в маршрут</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Добавлять тайники без сложности/местности (D/T)</string>
     <string name="cache_filter_difficulty_terrain_matrix_fill_with_gc_data">Заполнить с gc.com</string>
     <string name="cache_filter_nested_filter_modify">изменить</string>
@@ -784,6 +786,8 @@
     <string name="settings_title_map_style">Стиль карты</string>
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
     <string name="settings_hide_tileproviders_summary">Исключить один или несколько источников карты из выбора источника карты</string>
+    <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
+    <string name="settings_userDefinedTileProviderUri">Введите полный URL-адрес (без косой черты в конце) поставщика карт. Убедитесь, что вы проверили и соблюдаете условия их использования.</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -814,6 +818,8 @@
     <string name="settings_ec_description">Авторизовать c:geo для extremcaching.com, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
     <string name="settings_su_description">Авторизовать c:geo для поиска тайников geocaching.su.</string>
     <string name="settings_lc_description">Включить тайники Лаборатории Приключений на карте.\n\n(Доступно только для премиум-пользователей \"Geocaching.com\". Требуется активный сервис \"Geocaching.com\".)\n\nИзменение этой настройки требует перезапуска c:geo.</string>
+    <string name="settings_lc_found_state_title">Ручной выбор состояния нахождения тайника</string>
+    <string name="settings_lc_found_state_handling">При отмеченной опции, вы автоматически не получаете истинное состояние нахождения тайника в Adventure Lab, вместо этого, предоставлена возможность пользователю вручную задать это состояние</string>
     <string name="lc_default_description">Это тайник geocaching.com Adventure Lab. Поучаствовать в приключении можно только с помощью приложения Groundspeak Adventure Lab. Нажмите на иконку \"Details\", чтобы открыть/установить \"Adventure Lab\".\nЕсли вы не хотите видеть тайники Adenture Lab на вашей карте и при поиске, вы можете их отключить с помощью меню Services - Geocaching.com Adventure Lab</string>
     <string name="init_summary_oc_de">Загрузить тайники с opencaching.de</string>
     <string name="init_oc_de_description">Авторизовать c:geo для opencaching.de, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
@@ -1408,8 +1414,6 @@
     <string name="cache_dialog_offline_save_message">Сохранение тайника для использования офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Удаление</string>
     <string name="cache_dialog_offline_drop_message">Удаление тайника из памяти устройства…</string>
-    <string name="cache_dialog_refresh_title">Обновить</string>
-    <string name="cache_dialog_refresh_message">Обновление деталей тайника…</string>
     <string name="cache_menu_speechDeactivate">Перестать говорить</string>
     <string name="cache_menu_speechActivate">Начать говорить</string>
     <string name="cache_menu_navigate">Навигация</string>
@@ -1569,6 +1573,7 @@
     <string name="goto_targets_list">Внутренние тайники</string>
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градусы</string>
     <string name="cc_hint_minutes">минуты</string>
@@ -1775,8 +1780,6 @@
     <string name="google_maps_style_retro">Ретро</string>
     <string name="google_maps_style_contrast">Высокая контрастность</string>
     <string name="google_maps_style_auto">Тема устройства (День/ночь)</string>
-    <string name="google_maps_style_details">Детали</string>
-    <string name="google_maps_option_group_theme">Опции темы</string>
     <!-- search -->
     <string name="geo_search_label">Поиск тайников поблизости</string>
     <string name="search_bar_hint">Поиск тайника / трекабла</string>
