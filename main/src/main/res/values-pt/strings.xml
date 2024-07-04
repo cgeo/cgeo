@@ -786,8 +786,11 @@
     <string name="settings_summary_system">Definições específicas de sistema e opções de depuração.</string>
     <string name="settings_title_navigation_menu">Menu de navegação</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
+    <string name="settings_category_locationcentersearch">Pesquisas centradas na localização</string>
     <string name="init_nearbysearchlimit_title">Limite de pesquisa próxima</string>
     <string name="init_nearbysearchlimit_description">Limita a distância até à qual as caches são mostradas com a pesquisa nas proximidades (0=ilimitada)</string>
+    <string name="init_coordsearchlimit_title">Limite de pesquisa de coordenada/endereço</string>
+    <string name="init_coordsearchlimit_description">Limita a distância até à qual as caches são mostradas com a pesquisa por coordenada/endereço (0=ilimitada)</string>
     <string name="init_settings_description_unlimited">ilimitado</string>
     <string name="settings_category_geocaching_additionals">Outros serviços e suplementos</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
@@ -1745,7 +1748,17 @@
     <string name="google_maps_style_contrast">Alto contraste</string>
     <string name="google_maps_style_auto">Tema do dispositivo (Dia/Noite)</string>
     <string name="google_maps_style_details">Detalhes</string>
+    <string name="google_maps_option_group_map">Opções do Mapa</string>
+    <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
+    <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
     <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
+    <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
+    <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
+    <string name="google_maps_option_show_feature_poi_all">Mostrar Pontos de Interesse</string>
+    <string name="google_maps_option_show_feature_road_all">Mostrar Estradas</string>
+    <string name="google_maps_option_show_feature_transit_all">Mostrar tráfego</string>
+    <string name="google_maps_option_show_feature_water_all">Mostrar Água</string>
     <!-- search -->
     <string name="geo_search_label">Procurar caches próximas</string>
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
