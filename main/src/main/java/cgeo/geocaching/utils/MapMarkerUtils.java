@@ -711,33 +711,37 @@ public final class MapMarkerUtils {
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
     private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), getCacheScalingFactor(applyScaling));
+        return createDTRatingMarker(res, difficulty, terrain, getCacheScalingFactor(applyScaling));
+    }
+
+    public static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final float scaling) {
+        final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), scaling);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
         if (difficulty == -1 && terrain == -1) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, scaling));
         } else if (difficulty == 0 && terrain == 0) {
             layers = 2;
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, scaling));
         } else {
             final String packageName = CgeoApplication.getInstance().getPackageName();
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty, applyScaling)));
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain, applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty, scaling)));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain, scaling)));
 
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg, getCacheScalingFactor(applyScaling)));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg, scaling));
         }
 
         return buildLayerDrawable(insetsBuilder, layers, 0);
     }
 
     @SuppressWarnings("DiscouragedApi")
-    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final boolean applyScaling) {
+    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating, final float scaling) {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
-        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), getCacheScalingFactor(applyScaling));
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
     }
 
     private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {
@@ -877,5 +881,5 @@ public final class MapMarkerUtils {
         markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
     }
-    
+
 }
