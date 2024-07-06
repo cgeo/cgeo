@@ -143,6 +143,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         notifyDataSetChanged();
     }
 
+    public void setElement(@NonNull final Geocache geocache) {
+        final String geocode = geocache.getGeocode();
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).getGeocode().equalsIgnoreCase(geocode)) {
+                this.list.set(i, geocache);
+            }
+        }
+    }
+
     public void setStoredLists(final List<AbstractList> storedLists) {
         this.storedLists = storedLists;
     }
