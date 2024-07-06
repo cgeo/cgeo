@@ -125,6 +125,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -508,7 +509,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             @Override
             protected void onReceive(final Context context, final String geocode) {
                 if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
-                    refreshCurrentList();
+                    final Geocache geocache = DataStore.loadCache(geocode, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL));
+                    if (geocache != null) {
+                        adapter.setElement(geocache);
+                    }
                 }
             }
         });
