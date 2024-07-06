@@ -18,11 +18,10 @@ import androidx.annotation.StringRes;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceNavigationFragment extends BasePreferenceFragment {
     @Override
