@@ -403,7 +403,6 @@
     <string name="cache_hint_not_available">Engin vísbending í boði</string>
     <string name="cache_logs">Færslubók</string>
     <string name="cache_dialog_offline_drop_message">Fjarlægja cache úr minni tækis…</string>
-    <string name="cache_dialog_refresh_title">Endurhlaða</string>
     <string name="cache_menu_navigation_drive">Leiðsögn (keyrandi)</string>
     <string name="cache_menu_navigation_walk">Leiðsögn (gangandi)</string>
     <string name="cache_menu_navigation_transit">Leiðsögn (almenningssamgöngur)</string>
@@ -455,6 +454,7 @@
     <string name="cache_image_open_file">Opna sem skrá</string>
     <string name="cache_image_open_browser">Opna í vafra</string>
     <string name="cache_share_field">Deila</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Hleð kössum úr %1$s</string>
@@ -497,7 +497,6 @@
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
-    <string name="google_maps_style_details">Upplýsingar</string>
     <!-- search -->
     <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
