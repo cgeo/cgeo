@@ -7,6 +7,20 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.07.07 Bugfix Release
+
+- Fix: Log length check counting some characters twice
+- Fix: Editing cache logs does not take care of existing favorite points
+- Fix: Adapt to hylly website change
+- Fix: Compass rose hidden behind distance views (Google Maps v2)
+- Fix: "Save offline" not working after failing to edit a found log
+- New: Enhance logging in case of GC login errors
+- New: Additional theming options for Google Maps
+- New: Option to limit search radius for address search
+- New: Show notification for missing location permission
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.06.02 Bugfix Release
 
 - Fix: Caches not loading after enabling live map (UnifiedMap)
