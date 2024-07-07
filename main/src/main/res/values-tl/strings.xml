@@ -555,8 +555,6 @@
     <string name="cache_dialog_loading_details_status_render">Tingnan na naka-render</string>
     <string name="cache_dialog_offline_save_message">Ang pag-save ng cache para sa paggamit sa offline&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Ang pag-tanggal ng cache mula sa aparato&#8230;</string>
-    <string name="cache_dialog_refresh_title">I-refresh</string>
-    <string name="cache_dialog_refresh_message">Ang pag-load mulit na mga detalye ng mga cache&#8230;</string>
     <string name="cache_menu_navigate">Mag-navigate</string>
     <string name="cache_menu_navigation_drive">Nabigasyon (Pagmamaneho)</string>
     <string name="cache_menu_navigation_walk">Nabigasyon (Paglalakad)</string>
@@ -622,6 +620,7 @@
     <string name="cache_share_field">Ibahagi</string>
     <string name="cache_time_full_hours">alas</string>
     <string name="cache_listed_on">Nailista sa %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Ang nag-loloading na mga caches sa %1$s</string>
@@ -691,7 +690,6 @@
     <string name="map_live_disable">Huwag paganahin ang live</string>
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
-    <string name="google_maps_style_details">Ang mga detalye</string>
     <!-- search -->
     <string name="search_coordinates">Ang mga koordinado</string>
     <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
