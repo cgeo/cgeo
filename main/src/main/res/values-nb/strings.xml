@@ -1077,8 +1077,6 @@
     <string name="cache_dialog_offline_save_message">Lagrer cachen lokalt…</string>
     <string name="cache_dialog_offline_drop_title">Lagret lokalt</string>
     <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten…</string>
-    <string name="cache_dialog_refresh_title">Oppdater</string>
-    <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_target">Sett som mål</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
@@ -1189,6 +1187,7 @@
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
@@ -1348,8 +1347,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_style_details">Detaljer</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
