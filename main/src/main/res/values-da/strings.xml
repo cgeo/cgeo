@@ -939,8 +939,6 @@
     <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
-    <string name="cache_dialog_refresh_title">Genindlæs</string>
-    <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_navigation_drive">Navigation (bil)</string>
     <string name="cache_menu_navigation_walk">Navigation (til fods)</string>
@@ -1031,6 +1029,7 @@
     <string name="init_longtap_map">Tryk-og-hold på kortet</string>
     <string name="goto_targets_list">Brugerdefinerede caches</string>
     <string name="clear_goto_history">Dette vil slette alle historiske rutepunkter undtagen de fem seneste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minutter</string>
@@ -1119,8 +1118,6 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
-    <string name="google_maps_style_details">Detaljer</string>
-    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
