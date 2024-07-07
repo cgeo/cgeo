@@ -612,6 +612,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Ma wpis offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma znal. offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Poprawione współrzędne</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe. Jeśli chcesz wykluczyć inne typy skrytek, zdefiniuj odpowiedni filtr typu skrytki.\n\nZagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt trasy jest wypełniony współrzędnymi.</string>
     <string name="cache_filter_status_active">Aktywna</string>
@@ -786,6 +787,8 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
+    <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
+    <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków. Upewnij się, że sprawdziłeś i spełniłeś warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -1414,8 +1417,6 @@
     <string name="cache_dialog_offline_save_message">Zapisuję skrytkę do użytku offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Usuwam skrytkę z pamięci urządzenia…</string>
-    <string name="cache_dialog_refresh_title">Odśwież</string>
-    <string name="cache_dialog_refresh_message">Aktualizuję szczegóły skrytki…</string>
     <string name="cache_menu_speechDeactivate">Przestań mówić</string>
     <string name="cache_menu_speechActivate">Zacznij mówić</string>
     <string name="cache_menu_navigate">Nawiguj</string>
@@ -1453,6 +1454,7 @@
     <string name="cache_menu_reset_foundstate">Resetuj stan znalezienia</string>
     <string name="cache_foundstate_updated">Zaktualizowano stan znalezienia</string>
     <string name="cache_menu_set_cache_icon">Ustaw ikonę skrytki</string>
+    <string name="cache_menu_change_description_style">Zmień styl opisu</string>
     <string name="cache_icon_updated">Zaktualizowano ikonę skrytki</string>
     <string name="cache_menu_details">Szczegóły</string>
     <string name="cache_menu_refresh">Odśwież</string>
@@ -1575,6 +1577,10 @@
     <string name="goto_targets_list">Skrytki zdefiniowane przez użytkownika</string>
     <string name="clear_goto_history_title">Wyczyść historię „Idź do”</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
+    <!-- html styles -->
+    <string name="html_style_default">Domyślny</string>
+    <string name="html_style_monochrome">Monochromatyczny</string>
+    <string name="html_style_source">Źródło HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
     <string name="cc_hint_minutes">minut(y)</string>
@@ -2556,6 +2562,7 @@
     <string name="maptheme_scale_text_summary">Dodatkowo skaluje etykiety tekstowe na mapie; 100% = bez dodatkowego skalowania</string>
     <string name="maptheme_scale_symbol_title">Współczynnik skali symboli</string>
     <string name="maptheme_scale_symbol_summary">Dodatkowo skaluje rozmiary symboli na mapie; 100% = brak dodatkowego skalowania</string>
+    <string name="maptheme_show3Dbuildings">Pokaż budynki w 3D</string>
     <string name="vtm_theme_variant">Wariant motywu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię śladu</string>
