@@ -6,6 +6,7 @@
 - Nyhet: Växla visning av byggnader 2D/3D (UnifiedMap OSM-kartor)
 - New: Cache store/refresh from popup moved into background
 - Change: Search for coordinates: Show direction and distance to target and not to current position
+- New: Graphical D/T indicator in cache info sheet
 
 ### Cachedetaljer
 - Nyhet: Visa bilder länkade i "personlig anteckning" i fliken Bilder
@@ -24,3 +25,4 @@
 - Fix: Search results for a location no longer sorted by distance to target location
 - New: "Corrected coordinates" filter
 - Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
+- New: Added "none"-entry to selection of routing profiles
