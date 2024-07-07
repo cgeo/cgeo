@@ -6,6 +6,7 @@
 - Novo: Alternar exibição de edifícios 2D/3D (mapas OSM, Mapa Unificado)
 - Novo: Armazenamento/actualização de cache a partir de popup movido para segundo plano
 - Alteração: Pesquisar coordenadas: Mostrar direcção e distância para o alvo e não para a posição actual
+- New: Graphical D/T indicator in cache info sheet
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
@@ -24,3 +25,4 @@
 - Correcção: Resultados da pesquisa por local já não são classificados pela distância para o local de destino
 - Novo: Filtro "Coordenadas corrigidas"
 - Alteração: Actualizado "targetSDK" para 34 para cumprir os próximos requisitos da Play Store
+- New: Added "none"-entry to selection of routing profiles
