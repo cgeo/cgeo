@@ -6,6 +6,7 @@
 - Nowość: Przełącz wyświetlanie budynków 2D/3D (UnifiedMap OSM)
 - Nowość: Zapisywanie/odświeżanie skrytki przesunięte z wyskakującego okna na tło
 - Zmiana: Wyszukiwanie współrzędnych: Pokaż kierunek i odległość do celu, a nie do aktualnej pozycji
+- New: Graphical D/T indicator in cache info sheet
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
@@ -24,3 +25,4 @@
 - Poprawka: Wyniki wyszukiwania dla lokalizacji nie były posortowane według odległości do lokalizacji docelowej
 - Nowość: Filtr „Poprawione współrzędne”
 - Zmiana: Zaktualizowano targetSDK do wersji 34, aby spełnić przyszłe wymagania Sklepu Play
+- New: Added "none"-entry to selection of routing profiles
