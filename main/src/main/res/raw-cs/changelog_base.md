@@ -6,6 +6,7 @@
 - Novinka: Přepínání zobrazení budov 2D/3D (Sjednocená mapa OSM maps)
 - Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
+- Novinka: Grafický indikátor D/T v informačním listu kešky
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
@@ -24,3 +25,4 @@
 - Oprava: Výsledky vyhledání místa již nejsou řazeny podle vzdálenosti od cílového místa
 - Novinka: filtr "Upravené souřadnice"
 - Změna: Aktualizováno cílové SDK na verzi 34, aby bylo v souladu s nadcházejícími požadavky Obchodu Play
+- Novinka: Do výběru profilů směrování byla přidána položka "žádný"
