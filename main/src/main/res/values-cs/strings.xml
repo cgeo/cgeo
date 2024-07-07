@@ -612,6 +612,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Upravené souřadnice</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky. Pokud chcete vyloučit ostatní typy kešek, zadejte příslušný filtr typu kešky.\n\nMysterka je považována za \'vyřešenou\', pokud změnila souřadnice nebo platný finální trasový bod vyplněný souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -786,6 +787,8 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
+    <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
+    <string name="settings_userDefinedTileProviderUri">Zadejte úplnou adresu URL (bez koncového lomítka) poskytovatele dlaždic. Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -1414,8 +1417,6 @@
     <string name="cache_dialog_offline_save_message">Ukládání kešky pro offline použití…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňování kešky z paměti zařízení…</string>
-    <string name="cache_dialog_refresh_title">Aktualizovat</string>
-    <string name="cache_dialog_refresh_message">Aktualizace detailů kešky…</string>
     <string name="cache_menu_speechDeactivate">Přestat mluvit</string>
     <string name="cache_menu_speechActivate">Začít mluvit</string>
     <string name="cache_menu_navigate">Navigovat</string>
@@ -1453,6 +1454,7 @@
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
     <string name="cache_menu_set_cache_icon">Nastavit ikonu kešky</string>
+    <string name="cache_menu_change_description_style">Změnit styl popisu</string>
     <string name="cache_icon_updated">Ikona kešky aktualizována</string>
     <string name="cache_menu_details">Detaily</string>
     <string name="cache_menu_refresh">Aktualizovat</string>
@@ -1575,6 +1577,10 @@
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
+    <!-- html styles -->
+    <string name="html_style_default">Výchozí</string>
+    <string name="html_style_monochrome">Monochromatický</string>
+    <string name="html_style_source">Zdroj HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
     <string name="cc_hint_minutes">minuty</string>
@@ -2454,6 +2460,7 @@
     <string name="routingmode_car">Auto</string>
     <string name="routingmode_user1">Uživatel 1</string>
     <string name="routingmode_user2">Uživatel 2</string>
+    <string name="routingmode_none">(žádný)</string>
     <!-- view settings -->
     <string name="view_settings">Zobrazit nastavení</string>
     <string name="delete_setting">Odstranit nastavení</string>
@@ -2546,6 +2553,7 @@
     <string name="maptheme_scale_text_summary">Dodatečně škáluje textové popisky v mapě; 100% = žádné další škálování</string>
     <string name="maptheme_scale_symbol_title">Měřítko symbolu</string>
     <string name="maptheme_scale_symbol_summary">Dodatečně škáluje velikosti symbolů v mapě; 100% = žádné další škálování</string>
+    <string name="maptheme_show3Dbuildings">Zobrazit budovy ve 3D</string>
     <string name="vtm_theme_variant">Varianta motivu</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
