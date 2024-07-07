@@ -750,8 +750,6 @@
     <string name="cache_dialog_loading_details_status_render">Nézet betöltése</string>
     <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
     <string name="cache_dialog_offline_drop_message">Láda törlése a memóriából…</string>
-    <string name="cache_dialog_refresh_title">Frissítés</string>
-    <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
     <string name="cache_menu_navigate">Navigáció</string>
     <string name="cache_menu_navigation_drive">Autós navigáció</string>
     <string name="cache_menu_navigation_walk">Gyalogos navigáció</string>
@@ -817,6 +815,7 @@
     <string name="cache_time_full_hours">óra</string>
     <string name="cache_listed_on">Listázva a %s-on is</string>
     <string name="internal_cache_default_owner">Te</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">%1$s: ládák betöltése</string>
@@ -890,8 +889,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_style_details">Adatok</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
