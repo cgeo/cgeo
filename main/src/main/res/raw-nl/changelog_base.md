@@ -6,6 +6,7 @@
 - Nieuw: Wissel display van gebouwen 2D/3D (UnifiedMap OSM kaarten)
 - Nieuw: Cache opslaan/vernieuwen van popup verplaatst naar de achtergrond
 - Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
+- Nieuw: Grafische D/T indicator in het cache informatieblad
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -24,3 +25,4 @@
 - Oplossing: Zoekresultaten voor een locatie niet langer gesorteerd op afstand tot doellocatie
 - Nieuw: "Gecorrigeerde coördinaten" filter
 - Wijziging: targetSDK bijgewerkt naar 34 om te voldoen aan de aankomende Play Store eisen
+- Nieuw: "geen"-regel toegevoegd aan selectie van routeringsprofielen
