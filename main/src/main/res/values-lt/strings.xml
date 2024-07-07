@@ -1279,8 +1279,6 @@
     <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
     <string name="cache_dialog_offline_drop_title">Pašalinti</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
-    <string name="cache_dialog_refresh_title">Naujinti</string>
-    <string name="cache_dialog_refresh_message">Atnaujinama slėptuvės informacija…</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
@@ -1419,6 +1417,7 @@
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
@@ -1609,8 +1608,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Didelis kontrastas</string>
     <string name="google_maps_style_auto">Įrenginio tema (Diena/Naktis)</string>
-    <string name="google_maps_style_details">Informacija</string>
-    <string name="google_maps_option_group_theme">Temos parinktys</string>
     <!-- search -->
     <string name="geo_search_label">Ieškoti slėptuvių netoliese</string>
     <string name="search_bar_hint">Ieškoti slėptuvių/keliauninkų</string>
