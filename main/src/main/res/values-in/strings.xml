@@ -552,8 +552,6 @@
     <string name="cache_dialog_loading_details_status_render">Tampilan render</string>
     <string name="cache_dialog_offline_save_message">Simpan cache untuk penggunaan offline&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Menghapus cache dari memori perangkat&#8230;</string>
-    <string name="cache_dialog_refresh_title">Segarkan</string>
-    <string name="cache_dialog_refresh_message">Memuat ulang rincian cache&#8230;</string>
     <string name="cache_menu_navigate">Navigasi</string>
     <string name="cache_menu_navigation_drive">Navigasi (Mengemudi)</string>
     <string name="cache_menu_navigation_walk">Navigasi (Berjalan)</string>
@@ -618,6 +616,7 @@
     <string name="cache_share_field">Bagikan</string>
     <string name="cache_time_full_hours">jam</string>
     <string name="cache_listed_on">Terdaftar %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Memuat cache dri %1$s</string>
@@ -687,7 +686,6 @@
     <string name="map_live_disable">Nonaktifkan hidup</string>
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
-    <string name="google_maps_style_details">Rincian</string>
     <!-- search -->
     <string name="search_coordinates">Koordinat</string>
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
