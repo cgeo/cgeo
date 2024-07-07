@@ -6,6 +6,7 @@
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
 - New: Cache store/refresh from popup moved into background
 - Change: Search for coordinates: Show direction and distance to target and not to current position
+- New: Graphical D/T indicator in cache info sheet
 
 ### Slėptuvės detalės
 - New: Show images linked in "personal note" in Images tab
@@ -24,3 +25,4 @@
 - Fix: Search results for a location no longer sorted by distance to target location
 - New: "Corrected coordinates" filter
 - Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
+- New: Added "none"-entry to selection of routing profiles
