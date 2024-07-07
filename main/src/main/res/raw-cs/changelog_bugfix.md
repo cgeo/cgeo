@@ -4,10 +4,10 @@
 - Novinka: Další možnosti témat pro Mapy Google
 - Oprava: Kompasová růžice skrytá za zobrazeními vzdáleností (Mapy Google v2)
 - Novinka: Vylepšení logování v případě chyb při přihlašování do GC
-- Fix: Editing cache logs does not take care of existing favorite points
-- Fix: "Save offline" not working after failing to edit a found log
-- New: Option to limit search radius for address search
-- New: Show notification for missing location permission
+- Oprava: Úprava logů kešky se nezabývá existujícími oblíbenými body
+- Oprava: "Uložit offline" nefunguje poté, co se nepodařilo upravit nalezený log
+- Novinka: Možnost omezení poloměru hledaných adres
+- Novinka: Zobrazit upozornění při chybějícím oprávnění k poloze
 
 ##
 - Oprava: Nenačítání kešek po zapnutí živé mapy (Sjednocená mapa)

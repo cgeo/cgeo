@@ -1,13 +1,13 @@
 ##
-- Fix: Log length check counting some characters twice
-- Fix: Adapt to hylly website change
-- New: Additional theming options for Google Maps
-- Fix: Compass rose hidden behind distance views (Google Maps v2)
-- New: Enhance logging in case of GC login errors
-- Fix: Editing cache logs does not take care of existing favorite points
-- Fix: "Save offline" not working after failing to edit a found log
-- New: Option to limit search radius for address search
-- New: Show notification for missing location permission
+- Correcção: Verificação do comprimento do registo contava alguns caracteres duas vezes
+- Correcção: Adaptações à mudança do website hylly
+- Novo: Opções adicionais de temas para o Google Maps
+- Correcção: Bússola escondida atrás das visualizações de distância (Google Maps v2)
+- Novo: Melhorar o início de sessão no caso de erros do GC
+- Correcção: Editar registos de cache não tinha em conta pontos favoritos existentes
+- Correcção: "Guardar offline" não funcionava após falhar a edição de um registo "encontrado"
+- Novo: Opção para limitar o raio de pesquisa para pesquisa de endereços
+- Novo: Mostrar notificação para ausência de permissão de localização
 
 ##
 - Correcção: Caches não carregam após activar o mapa ao vivo (Mapa Unificado)
@@ -21,8 +21,8 @@
 - Correcção: "seguir a minha localização" permanecia activa após ampliação com deslocamento (Mapa Unificado)
 - Correcção: Rotas individuais exportadas como percurso não podiam ser lidas por dispositivos Garmin
 - Correcção: carregar TBs da base de dados interna falhava em certas condições
-- Fix: Route to navigation target not recalculated on routing mode change
-- Fix: Error while reading available trackable log types
+- Correcção: Rota para o destino de navegação não era recalculada ao mudar o modo de encaminhamento
+- Correcção: Erro ao ler tipos de registo de TB disponíveis
 
 ##
 - Correcção: Ligações de TB com parâmetro TB não funcionavam

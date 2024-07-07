@@ -780,8 +780,11 @@
     <string name="settings_summary_system">시스템 특정 설정 및 디버깅 옵션.</string>
     <string name="settings_title_navigation_menu">길찾기 메뉴</string>
     <string name="settings_category_geocaching_platform">지오캐싱 플랫폼</string>
+    <string name="settings_category_locationcentersearch">위치 중심 검색</string>
     <string name="init_nearbysearchlimit_title">주변 검색 제한</string>
     <string name="init_nearbysearchlimit_description">주변 검색으로 캐시가 반환되는 거리를 제한합니다(0=무제한).</string>
+    <string name="init_coordsearchlimit_title">좌표/주소 검색 제한</string>
+    <string name="init_coordsearchlimit_description">좌표/주소 검색을 통해 캐시를 반환할 수 있는 거리 제한 (0=무제한)</string>
     <string name="init_settings_description_unlimited">제한 없음</string>
     <string name="settings_category_geocaching_additionals">추가 서비스 및 애드온</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
@@ -1730,7 +1733,17 @@
     <string name="google_maps_style_contrast">고대비</string>
     <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
     <string name="google_maps_style_details">상세표시</string>
+    <string name="google_maps_option_group_map">지도 옵션</string>
+    <string name="google_maps_option_show_traffic">교통체증 표시</string>
+    <string name="google_maps_option_show_buildings">3D 건물 표시</string>
     <string name="google_maps_option_group_theme">테마 옵션</string>
+    <string name="google_maps_option_show_feature_theme">테마 기능 표시</string>
+    <string name="google_maps_option_show_feature_administrative_all">행정 표시</string>
+    <string name="google_maps_option_show_feature_landscape_all">풍경 표시</string>
+    <string name="google_maps_option_show_feature_poi_all">관심 지점 표시</string>
+    <string name="google_maps_option_show_feature_road_all">도로 표시</string>
+    <string name="google_maps_option_show_feature_transit_all">교통 표시</string>
+    <string name="google_maps_option_show_feature_water_all">수역 표시</string>
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
@@ -1745,6 +1758,7 @@
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
+    <string name="search_kw_disabled_hint">기본 회원의 경우 geocaching.com에서 지원하지 않으므로 사용할 수 없음</string>
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
@@ -2223,6 +2237,9 @@
     <string name="command_unique_list_result">다른 목록에서 캐시 삭제함</string>
     <plurals name="fav_points_remaining_oc">
         <item quantity="other">이 캐시 추천 (%d개 남음)</item>
+    </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="other">이 캐시에 호감점수를 부여합니다 (남은 %d개)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">캐시 아이콘 설정 중</string>
     <plurals name="command_set_cache_icons_result">
