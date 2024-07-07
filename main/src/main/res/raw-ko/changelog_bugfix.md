@@ -1,40 +1,40 @@
 ##
-- Fix: Log length check counting some characters twice
-- Fix: Adapt to hylly website change
-- New: Additional theming options for Google Maps
-- Fix: Compass rose hidden behind distance views (Google Maps v2)
-- New: Enhance logging in case of GC login errors
-- Fix: Editing cache logs does not take care of existing favorite points
-- Fix: "Save offline" not working after failing to edit a found log
-- New: Option to limit search radius for address search
-- New: Show notification for missing location permission
+- 수정: 일부 문자를 두 번 세는 로그 길이 확인
+- 수정: hylly 웹사이트 변경에 적응합니다
+- 신규: Google 지도에 대한 추가 테마 옵션
+- 수정: 원근법 뒤에 숨겨진 나침반 장미 (Google Maps v2)
+- 신규: GC 로그인 오류 발생 시 로그 기능 강화
+- 수정: 캐시 로그 편집은 기존 호감점수를 처리하지 않습니다
+- 수정: 찾음 로그를 편집하지 못한 후 "오프라인 저장"이 작동하지 않습니다
+- 신규: 주소 검색을 위해 검색 반경을 제한하는 옵션
+- 신규: 누락된 위치 권한에 대한 알림 표시
 
 ##
-- Fix: Caches not loading after enabling live map (UnifiedMap)
-- Fix: Missing 'use current list' option on creating user-defined cache (UnifiedMap)
-- Fix: Compass rose hidden behind distance views (UnifiedMap)
-- Fix: Cache details scroll to page header after editing personal note
-- New: Show event date to cache selector
-- Fix: Login to OC platform not recognized by installation wizard
-- Fix: Routing not working by default after fresh installation
-- Fix: Info sheet toolbar hidden in landscape mode even on large devices
-- Fix: "follow my location" still active after zoom with pan (UnifiedMap)
-- Fix: Individual routes exported as track cannot be read by Garmin devices
-- Fix: Loading trackables from internal database fails under certain conditions
-- Fix: Route to navigation target not recalculated on routing mode change
-- Fix: Error while reading available trackable log types
+- 수정: 라이브 지도(Unified Map)을 활성화한 후 캐시가 로드되지 않음
+- 수정: 사용자 정의 캐시 생성 시 '현재 목록 사용' 옵션 누락(Unified Map)
+- 수정: 원근법 뒤에 숨겨진 나침반 장미 (Unified Map)
+- 수정: 개인 노트 편집 후 캐시 상세 내역이 페이지 헤더로 스크롤됩니다
+- 신규: 캐시 선택기에 이벤트 날짜 표시
+- 수정: 설치 마법사에서 OC 플랫폼에 로그인할 수 없습니다
+- 수정: 새로 설치한 후 기본적으로 라우팅이 작동하지 않습니다
+- 수정: 대형 장치에서도 가로 모드로 숨겨진 정보 시트 도구 모음
+- 수정: "내 위치 따라가기"는 팬(Unified Map)으로 줌 후에도 활성화됩니다
+- 수정: 트랙으로 내보낸 개별 경로를 Garmin 장치에서 읽을 수 없습니다
+- 수정: 특정 조건에서 내부 데이터베이스에서 추적 가능한 것을 로드하지 못합니다
+- 수정: 라우팅 모드 변경 시 내비게이션 대상으로 가는 경로가 다시 계산되지 않음
+- 수정: 사용 가능한 추적 아이템 로그 유형을 읽는 동안 오류가 발생했습니다
 
 ##
-- Fix: Trackable links with TB parameter not working
-- New: Add hint to disabled keyword search for basic members
-- Fix: Trackable logging not working again (website changes)
-- Fix: Elevation info is rotating with position marker
-- Fix: Username not detected during login when containing certain special characters
+- 수정: TB 매개변수가 작동하지 않는 추적 가능한 링크
+- 신규: 기본 회원님에 대한 비활성화된 키워드 검색에 힌트 추가
+- 수정: 추적 아이템 로그가 다시 작동하지 않음(웹사이트 변경)
+- 수정: 위치 마커를 사용하여 표고 정보가 회전하고 있습니다
+- 수정: 로그인 중 특정 특수 문자가 포함된 경우 사용자 이름이 감지되지 않습니다
 
 ##
-- Fix: Show/hide waypoints not working correctly if crossing waypoint limits (UnifiedMap)
-- Fix: Logging caches or trackables no longer working (website changes)
-- Fix: Deleting own logs not working
+- 수정: 지점 제한을 초과하는 경우 지점 표시/숨기기가 올바르게 작동하지 않음 (Unified Map)
+- 수정: 더 이상 캐시나 추적 아이템 로그가 작동하지 않습니다(웹사이트 변경)
+- 수정: 자체 로그 삭제가 작동하지 않습니다
 
 ##
 - 수정사항: 웹사이트 변경으로 인해 특정 상황에서 찾음 카운터가 감지되지 않음
