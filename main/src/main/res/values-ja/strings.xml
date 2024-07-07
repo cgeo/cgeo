@@ -1098,8 +1098,6 @@
     <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
     <string name="cache_dialog_offline_drop_title">オフライン</string>
     <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
-    <string name="cache_dialog_refresh_title">更新</string>
-    <string name="cache_dialog_refresh_message">キャッシュの詳細を再読み込み中…</string>
     <string name="cache_menu_navigate">ナビゲーション</string>
     <string name="cache_menu_target">目的地に設定</string>
     <string name="cache_menu_navigation_drive">ナビゲーション(自動車)</string>
@@ -1225,6 +1223,7 @@
     <string name="goto_targets_list">ユーザー定義キャッシュ</string>
     <string name="clear_goto_history_title">移動の履歴を削除</string>
     <string name="clear_goto_history">最近5つを除いて過去のウェイポイントがすべて削除されます</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">度</string>
     <string name="cc_hint_minutes">分</string>
@@ -1394,8 +1393,6 @@
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
-    <string name="google_maps_style_details">詳細</string>
-    <string name="google_maps_option_group_theme">テーマのオプション</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
