@@ -382,12 +382,12 @@
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
-    <string name="cache_dialog_refresh_message">Reloading cache details&#8230;</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
     <string name="init_longtap_map">לחיצה ארוכה על המפה</string>
     <string name="clear_goto_history">פעולה זו תמחק את כל נקודות הציון פרט לחמש האחרונות</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -418,7 +418,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="google_maps_style_details">פירוט</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
