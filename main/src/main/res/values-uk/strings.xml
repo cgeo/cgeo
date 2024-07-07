@@ -718,8 +718,6 @@
     <string name="cache_dialog_offline_save_message">Зберігання кешу для використання в режимі офлайн…</string>
     <string name="cache_dialog_offline_drop_title">Офлайн</string>
     <string name="cache_dialog_offline_drop_message">Видалення кеш-пам\'яті з пам\'яті пристрою…</string>
-    <string name="cache_dialog_refresh_title">освіжити</string>
-    <string name="cache_dialog_refresh_message">перезавантаження деталей кешу…</string>
     <string name="cache_menu_navigate">Навігація</string>
     <string name="cache_menu_navigation_drive">Навігація (водіння)</string>
     <string name="cache_menu_navigation_walk">Навігація (ходьба)</string>
@@ -808,6 +806,7 @@
     <string name="goto_targets_list">Визначений користувачем кеш</string>
     <string name="clear_goto_history_title">Очистити історію Goto</string>
     <string name="clear_goto_history">Це видалить всі історичні шляхові точки, окрім п\'яти останніх</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градуси</string>
     <string name="cc_hint_minutes">хвилини</string>
@@ -890,8 +889,6 @@
     <string name="map_as_list">показати як список</string>
     <string name="map_select_multiple_items">виберіть елемент</string>
     <string name="quick_settings">Швидкі налаштування</string>
-    <string name="google_maps_style_details">Деталі</string>
-    <string name="google_maps_option_group_theme">Параметри тем</string>
     <!-- search -->
     <string name="search_coordinates">Координати</string>
     <string name="search_coordinates_button">Пошук за координатами</string>
