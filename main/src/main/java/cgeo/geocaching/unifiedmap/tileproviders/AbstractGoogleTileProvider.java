@@ -21,6 +21,7 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider implements 
         this.mapType = mapType;
         this.tileProviderName = CgeoApplication.getInstance().getString(nameRes);
         this.supportsThemeOptions = true;
+        setSupportsHillshading(false);
     }
 
     public void setMapType(final GoogleMap googleMap) {
