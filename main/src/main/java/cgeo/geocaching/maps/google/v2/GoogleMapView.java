@@ -67,6 +67,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapColorScheme;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -132,7 +133,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         mapController.setGoogleMap(googleMap);
 
         final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
-        googleMap.setMapStyle(theme.getMapStyleOptions(getContext()));
+        if (theme.isInternalColorScheme) {
+            googleMap.setMapColorScheme(theme.jsonRes);
+        } else {
+            googleMap.setMapStyle(theme.getMapStyleOptions(getContext()));
+        }
 
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(this::recognizePositionChange);
@@ -702,7 +707,11 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         builder.setSingleChoiceItems(GoogleMapsThemes.getLabels(activity).toArray(new String[0]), selectedItem, (dialog, selection) -> {
             final GoogleMapsThemes theme = GoogleMapsThemes.values()[selection];
             Settings.setSelectedGoogleMapTheme(theme.name());
-            googleMap.setMapStyle(theme.getMapStyleOptions(activity));
+            if (theme.isInternalColorScheme) {
+                googleMap.setMapColorScheme(theme.jsonRes);
+            } else {
+                googleMap.setMapStyle(theme.getMapStyleOptions(activity));
+            }
             dialog.cancel();
         });
 
@@ -710,31 +719,25 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     public enum GoogleMapsThemes {
-        DEFAULT(R.string.google_maps_style_default, 0),
-        NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night),
-        AUTO(R.string.google_maps_style_auto, 0),
-        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro),
-        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
+        DEFAULT(R.string.google_maps_style_default, MapColorScheme.LIGHT, true),
+        NIGHT(R.string.google_maps_style_night, MapColorScheme.DARK, true),
+        AUTO(R.string.google_maps_style_auto, MapColorScheme.FOLLOW_SYSTEM, true),
+        CLASSIC(R.string.google_maps_style_classic, R.raw.googlemap_style_classic, false),
+        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro, false),
+        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false);
 
         final int labelRes;
         final int jsonRes;
+        final boolean isInternalColorScheme;
 
-        GoogleMapsThemes(final int labelRes, final int jsonRes) {
+        GoogleMapsThemes(final int labelRes, final int jsonRes, final boolean isInternalColorScheme) {
             this.labelRes = labelRes;
             this.jsonRes = jsonRes;
+            this.isInternalColorScheme = isInternalColorScheme;
         }
 
         public MapStyleOptions getMapStyleOptions(final Context context) {
-            final int jsonResId;
-            if (this == AUTO) {
-                jsonResId = Settings.isLightSkin(context) ? DEFAULT.jsonRes : NIGHT.jsonRes;
-            } else {
-                jsonResId = this.jsonRes;
-            }
-            if (jsonResId != 0) {
-                return MapStyleOptions.loadRawResourceStyle(context, jsonResId);
-            }
-            return null;
+            return MapStyleOptions.loadRawResourceStyle(context, this.jsonRes);
         }
 
         public static List<String> getLabels(final Context context) {

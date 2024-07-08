@@ -29,19 +29,22 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.MapColorScheme;
 import com.google.android.gms.maps.model.MapStyleOptions;
 
 class GoogleMapsThemeHelper {
 
     private enum GoogleMapsTheme {
-        DEFAULT(R.string.google_maps_style_default, 0, false),
-        NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night, true),
-        AUTO(R.string.google_maps_style_auto, 0, false),
-        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro, false),
-        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false);
+        DEFAULT(R.string.google_maps_style_default, MapColorScheme.LIGHT, true, false),
+        NIGHT(R.string.google_maps_style_night, MapColorScheme.DARK, true, true),
+        AUTO(R.string.google_maps_style_auto, MapColorScheme.FOLLOW_SYSTEM, true, false),
+        CLASSIC(R.string.google_maps_style_classic, R.raw.googlemap_style_classic, false, false),
+        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro, false, false),
+        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast, false, false);
 
         final int labelRes;
         final int jsonRes;
+        final boolean isInternalColorScheme;
         final boolean needsInvertedColors; // for scale bar drawing
 
         private static final EnumValueMapper<String, GoogleMapsTheme> NAME_TO_THEME = new EnumValueMapper<>();
@@ -52,27 +55,20 @@ class GoogleMapsThemeHelper {
             }
         }
 
-        GoogleMapsTheme(final int labelRes, final int jsonRes, final boolean needsInvertedColors) {
+        GoogleMapsTheme(final int labelRes, final int jsonRes, final boolean isInternalColorScheme, final boolean needsInvertedColors) {
             this.labelRes = labelRes;
             this.jsonRes = jsonRes;
+            this.isInternalColorScheme = isInternalColorScheme;
             this.needsInvertedColors = needsInvertedColors;
         }
 
         @Nullable
         public ArrayNode getMapStyleOptions() {
-            final int jsonResId;
-            if (this == AUTO) {
-                jsonResId = Settings.isLightSkin(CgeoApplication.getInstance()) ? DEFAULT.jsonRes : NIGHT.jsonRes;
-            } else {
-                jsonResId = this.jsonRes;
-            }
-            if (jsonResId != 0) {
-                try {
-                    final String rawJson = FileUtils.getRawResourceAsString(CgeoApplication.getInstance(), jsonResId);
-                    return (ArrayNode) JsonUtils.stringToNode(rawJson);
-                } catch (RuntimeException ioe) {
-                    Log.e("FAILED to read Google Maps Style ressource for " + this, ioe);
-                }
+            try {
+                final String rawJson = FileUtils.getRawResourceAsString(CgeoApplication.getInstance(), this.jsonRes);
+                return (ArrayNode) JsonUtils.stringToNode(rawJson);
+            } catch (RuntimeException ioe) {
+                Log.e("FAILED to read Google Maps Style ressource for " + this, ioe);
             }
             return null;
         }
@@ -211,7 +207,13 @@ class GoogleMapsThemeHelper {
         final GoogleMapsTheme theme = GoogleMapsTheme.getCurrent();
 
         // -- Apply Theme options
-        ArrayNode style = theme.getMapStyleOptions();
+        ArrayNode style;
+        if (theme.isInternalColorScheme) {
+            map.setMapColorScheme(theme.jsonRes);
+            style = JsonUtils.createArrayNode();
+        } else {
+            style = theme.getMapStyleOptions();
+        }
 
         //1. find out if ALL features are enabled
         boolean allThemeOptionsEnabled = true;
