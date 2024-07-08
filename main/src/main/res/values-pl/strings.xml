@@ -2470,6 +2470,7 @@
     <string name="routingmode_car">Samochód</string>
     <string name="routingmode_user1">Użytkownik 1</string>
     <string name="routingmode_user2">Użytkownik 2</string>
+    <string name="routingmode_none">(brak)</string>
     <!-- view settings -->
     <string name="view_settings">Pokaż ustawienia</string>
     <string name="delete_setting">Usuń ustawienie</string>
