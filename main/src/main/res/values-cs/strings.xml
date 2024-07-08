@@ -1784,6 +1784,7 @@
     <string name="map_theme_legend_info">Klepnutím na název kategorie otevřete/zavřete kategorii. Dlouhým klepnutím na symbol získáte krátké informace o daném symbolu. Klepnutím na ikonu informace zobrazíte podrobnou legendu online.</string>
     <string name="google_maps_style_default">Výchozí</string>
     <string name="google_maps_style_night">Noc</string>
+    <string name="google_maps_style_classic">Klasický</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
