@@ -146,6 +146,10 @@ public final class SystemInformation {
         appendPublicFolders(body);
         appendPersistedDocumentUris(body);
         appendPersistedUriPermission(body, context);
+
+        body.append("\n")
+                .append("\nDatabase")
+                .append("\n-------");
         appendDatabase(body);
 
         body.append("\n\n--- End of system information ---\n");
@@ -167,10 +171,12 @@ public final class SystemInformation {
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
         final File dbFile = DataStore.databasePath();
-        body.append("\n- Database: ").append(dbFile)
+        body.append("\n- File: ").append(dbFile)
                 .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
                 .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
                 .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
+        body.append("\n- Data: ").append(DataStore.getTableCounts());
+        body.append("\n- Extension Data: ").append(DataStore.getExtensionTableKeyCounts());
     }
 
     private static void appendSettings(@NonNull final StringBuilder body) {
