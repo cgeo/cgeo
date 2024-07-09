@@ -1754,6 +1754,7 @@
     <string name="map_theme_legend_info">Tik op de categorietitel om de categorie te openen/sluiten. Druk lang op een symbool voor korte info over dat symbool. Tik op het info pictogram om online een gedetailleerde legenda te bekijken.</string>
     <string name="google_maps_style_default">Standaard</string>
     <string name="google_maps_style_night">Nacht</string>
+    <string name="google_maps_style_classic">Klassiek</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoog contrast</string>
     <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
