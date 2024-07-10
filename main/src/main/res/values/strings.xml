@@ -1238,8 +1238,8 @@
     <string name="init_mapWpScaling_title">Waypoint icon scaling</string>
     <string name="init_mapWpScaling_description">Scaling factor for waypoint icons (in %)</string>
     <string name="init_maintenance">Maintenance</string>
-    <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
-    <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_maintenance_directories_note">Deleted caches are buffered internally for 72 hours by c:geo to prevent accidental data loss. Besides that, c:geo also stores images and other files related to caches in dedicated folders. In some special cases such data might not be removed although the cache is no longer stored. This function can be used to clean up such orphaned data.</string>
+    <string name="init_maintenance_directories">Delete orphaned data</string>
     <string name="init_maintenance_start">Maintenance started</string>
     <string name="init_maintenance_ongoing">This may take some time…</string>
     <string name="init_maintenance_finished">Maintenance finished</string>
