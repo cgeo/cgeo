@@ -14,6 +14,7 @@ import android.util.Pair;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -351,10 +352,10 @@ public class FormulaUtils {
         }
     }
 
-    public static int vanity(final String value) {
-        int result = 0;
+    public static BigInteger vanity(final String value) {
+        BigInteger result = BigInteger.valueOf(0);
         for (char c : value.toUpperCase(Locale.US).toCharArray()) {
-            result = result * 10 + vanityDigit(c);
+            result = result.multiply(BigInteger.TEN).add(BigInteger.valueOf(vanityDigit(c)));
         }
         return result;
     }
