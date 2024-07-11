@@ -100,11 +100,11 @@ public class CacheArtefactParser {
             //if a backup is found, we parse it first
             for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
                 parseWaypointsFromString(backup);
-                parseVariablesFromString(backup);
+                parseVariablesFromString(backup, true);
             }
             final String remainder = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "");
             parseWaypointsFromString(remainder);
-            parseVariablesFromString(remainder);
+            parseVariablesFromString(remainder, false);
         }
 
         return this;
@@ -509,7 +509,7 @@ public class CacheArtefactParser {
         return sb.toString();
     }
 
-    private void parseVariablesFromString(final String pText) {
+    private void parseVariablesFromString(final String pText, final boolean highPrio) {
         final String text = " " + pText + "\n";
         final Matcher matcher = PARSING_VARS.matcher(text);
         int pos = 0;
@@ -518,7 +518,7 @@ public class CacheArtefactParser {
             final String varName = matcher.group(group);
             final String value = matcher.group(group + 1);
             pos = matcher.end(group + 1);
-            addVariable(varName, value, true);
+            addVariable(varName, value, highPrio);
         }
     }
 
