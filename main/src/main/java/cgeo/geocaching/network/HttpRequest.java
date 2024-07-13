@@ -1,5 +1,6 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
@@ -144,6 +145,10 @@ public class HttpRequest {
             final T mappedResponse = mapper.apply(response);
             if (mappedResponse instanceof HttpResponse && response != mappedResponse) {
                 ((HttpResponse) mappedResponse).setFromHttpResponse(response);
+            }
+            if (response.getStatusCode() == 429) {
+                Log.w("Request throttled: " + this.getRequestUrl());
+                ActivityMixin.showApplicationToast("Please slow down, too many requests to " + HttpUrl.parse(getRequestUrl()).host() + "/" + HttpUrl.parse(getRequestUrl()).encodedPath());
             }
             return mappedResponse;
         });
