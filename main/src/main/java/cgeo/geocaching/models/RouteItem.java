@@ -166,6 +166,14 @@ public class RouteItem implements Parcelable {
         return DataStore.loadCache(cacheGeocode, LoadFlags.LOAD_CACHE_OR_DB);
     }
 
+    @Nullable
+    public Waypoint getWaypoint() {
+        if (waypointId != 0) {
+            return null;
+        }
+        return DataStore.loadWaypoint(waypointId);
+    }
+
     @NonNull
     public String getShortGeocode() {
         return generateShortGeocode(cacheGeocode);
