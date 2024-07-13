@@ -34,6 +34,8 @@ import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.GeoIcon;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -71,6 +73,7 @@ import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoDialogManager;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -93,6 +96,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
@@ -103,6 +107,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -133,6 +138,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
+
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND = "cacheWaypointHighlighterBackground";
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM = "cacheWaypointHighlighterGeoitem";
 
     private UnifiedMapViewModel viewModel = null;
     private AbstractTileProvider tileProvider = null;
@@ -1060,12 +1068,22 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
         } else if (routeItem != null) {
             // open popup for element
+            Bitmap b1 = null;
             if (routeItem.getType() == RouteItem.RouteItemType.GEOCACHE) {
                 viewModel.sheetInfo.setValue(new UnifiedMapViewModel.SheetInfo(routeItem.getGeocode(), 0));
                 sheetShowDetails(viewModel.sheetInfo.getValue());
+                b1 = MapMarkerUtils.getCacheMarker(getResources(), routeItem.getGeocache(), null, true).getBitmap();
             } else if (routeItem.getType() == RouteItem.RouteItemType.WAYPOINT && routeItem.getWaypointId() != 0) {
                 viewModel.sheetInfo.setValue(new UnifiedMapViewModel.SheetInfo(routeItem.getGeocode(), routeItem.getWaypointId()));
                 sheetShowDetails(viewModel.sheetInfo.getValue());
+                b1 = MapMarkerUtils.getWaypointMarker(getResources(), routeItem.getWaypoint(), true, true).getBitmap();
+            }
+            if (b1 != null) {
+                final Bitmap b = ViewUtils.drawableToBitmap(AppCompatResources.getDrawable(this, R.drawable.background_gc_hightlighted));
+                final GeoPrimitive gp = GeoPrimitive.createMarker(routeItem.getPoint(), GeoIcon.builder().setBitmap(b).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_MARKER).build();
+                nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND, gp);
+                final GeoPrimitive gp1 = GeoPrimitive.createMarker(routeItem.getPoint(), GeoIcon.builder().setBitmap(b1).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM).build();
+                nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM, gp1);
             }
         } else if (item.getRoute() != null) {
             // elevation charts for individual route and/or routes/tracks
@@ -1103,6 +1121,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void clearSheetInfo() {
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM);
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND);
         viewModel.sheetInfo.setValue(null);
     }
 
