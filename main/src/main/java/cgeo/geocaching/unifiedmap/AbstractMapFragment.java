@@ -1,12 +1,12 @@
 package cgeo.geocaching.unifiedmap;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -15,7 +15,6 @@ import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -184,26 +183,7 @@ public abstract class AbstractMapFragment extends Fragment {
 
     protected void adaptLayoutForActionBar(final View compassRose, @Nullable final Boolean actionBarShowing) {
         final UnifiedMapActivity activity = ((UnifiedMapActivity) requireActivity());
-        int minHeight = 0;
-
-        Boolean abs = actionBarShowing;
-        if (actionBarShowing == null) {
-            final ActionBar actionBar = activity.getSupportActionBar();
-            abs = actionBar != null && actionBar.isShowing();
-        }
-        if (abs) {
-            minHeight = activity.findViewById(R.id.actionBarSpacer).getHeight();
-        }
-
-        View v = activity.findViewById(R.id.distanceSupersize);
-        if (v.getVisibility() != View.VISIBLE) {
-            v = activity.findViewById(R.id.target);
-        }
-        if (v.getVisibility() == View.VISIBLE) {
-            minHeight += v.getHeight();
-        }
-
-        compassRose.animate().translationY(minHeight).start(); // + ViewUtils.dpToPixel(25)).start();
+        HideActionBarUtils.adaptLayoutForActionBarHelper(activity, actionBarShowing, compassRose);
     }
 
 }
