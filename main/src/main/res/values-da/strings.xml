@@ -763,7 +763,6 @@
     <string name="init_plain_logs">Simple logbeskeder</string>
     <string name="init_summary_plain_logs">Vis logbeskeder uden farver</string>
     <string name="init_maintenance">Oprydning</string>
-    <string name="init_maintenance_directories">Slet ubrugte filer</string>
     <string name="init_location">Geolokation</string>
     <string name="init_location_note">På enheder, som har installeret Google Play-tjenester, kan c:geo automatisk bruge en bedre metode til positionsbestemmelse. Dette forhindrer dog brugen af en ekstern Bluetooth GPS-modtager.</string>
     <string name="init_location_googleplayservices">Brug Google Play-tjenester</string>
