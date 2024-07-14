@@ -1076,8 +1076,6 @@
     <string name="init_mapWpScaling_title">Escala de la icona de waypoint</string>
     <string name="init_mapWpScaling_description">Factor d\'escala per a les icones de waypoint (en %)</string>
     <string name="init_maintenance">Manteniment</string>
-    <string name="init_maintenance_directories_note">C: geo emmagatzema imatges i altres fitxers relacionats amb catxés en una carpeta dedicada. En alguns casos (per exemple, quan s’importa / exporta la base de dades), aquesta carpeta pot contenir fitxers obsolets que es poden suprimir aquí.</string>
-    <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
     <string name="init_maintenance_start">S\'ha iniciat el manteniment</string>
     <string name="init_maintenance_ongoing">Això pot trigar una mica…</string>
     <string name="init_maintenance_finished">Manteniment acabat</string>
@@ -1350,8 +1348,6 @@
     <string name="cache_dialog_offline_save_message">S\'està desant el catxé per utilitzar fora de línia…</string>
     <string name="cache_dialog_offline_drop_title">Fora de línia</string>
     <string name="cache_dialog_offline_drop_message">S\'estan eliminant el catxé de la memòria del dispositiu…</string>
-    <string name="cache_dialog_refresh_title">Actualitza</string>
-    <string name="cache_dialog_refresh_message">S\'estan recarregant els detalls del catxé…</string>
     <string name="cache_menu_speechDeactivate">Deixa de parlar</string>
     <string name="cache_menu_speechActivate">Comença a parlar</string>
     <string name="cache_menu_navigate">Navega</string>
@@ -1502,6 +1498,7 @@
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
     <string name="cc_hint_minutes">minuts</string>
@@ -1691,8 +1688,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Contrast Alt</string>
     <string name="google_maps_style_auto">Tema del dispositiu (Dia/Nit)</string>
-    <string name="google_maps_style_details">Detalls</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
     <!-- search -->
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
