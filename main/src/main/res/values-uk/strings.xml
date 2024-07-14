@@ -566,7 +566,6 @@
     <string name="init_plain_logs">Звичайні журнали</string>
     <string name="init_summary_plain_logs">Відображати записи журналу без кольорів</string>
     <string name="init_maintenance">Технічне обслуговування</string>
-    <string name="init_maintenance_directories">осиротіли файли</string>
     <string name="init_location">геолокація</string>
     <string name="init_location_note">На пристроях, обладнаних Службами Google Play, c: geo може автоматично використовувати кращого постачальника геолокації. Однак це запобігає використанню зовнішнього приймача BlueTooth GPS.</string>
     <string name="init_location_googleplayservices">Використовуйте сервіси Google Play</string>
