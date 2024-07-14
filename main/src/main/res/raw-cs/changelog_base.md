@@ -7,6 +7,7 @@
 - Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
 - Novinka: Grafický indikátor D/T v informačním listu kešky
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
@@ -14,6 +15,8 @@
 - Novinka: Lepší vyhlazování obrázků v logu
 - Změna: Změna ikony "log" z tužky na ikonu smajlíka
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### Obecné
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
