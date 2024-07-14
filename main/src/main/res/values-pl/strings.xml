@@ -1121,8 +1121,8 @@
     <string name="init_mapWpScaling_title">Skalowanie ikon punktów nawigacji</string>
     <string name="init_mapWpScaling_description">Współczynnik skalowania dla ikon punktów nawigacji (w %)</string>
     <string name="init_maintenance">Konserwacja</string>
-    <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
-    <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
+    <string name="init_maintenance_directories_note">Usunięte skrytki są buforowane wewnętrznie przez 72 godziny przez c:geo, aby zapobiec przypadkowej utracie danych. Ponadto c:geo przechowuje również obrazy i inne pliki związane z skrytkami w dedykowanych folderach. W niektórych szczególnych przypadkach takie dane mogą nie zostać usunięte, chociaż skrytka nie jest już przechowywana. Funkcja ta może być wykorzystywana do czyszczenia takich osieroconych (nieaktualnych) danych.</string>
+    <string name="init_maintenance_directories">Usuń nieaktualne dane</string>
     <string name="init_maintenance_start">Konserwacja rozpoczęta</string>
     <string name="init_maintenance_ongoing">To może trochę potrwać…</string>
     <string name="init_maintenance_finished">Konserwacja zakończona</string>
@@ -1784,6 +1784,7 @@
     <string name="map_theme_legend_info">Dotknij tytuł kategorii, aby otworzyć/zamknąć kategorię. Długie dotknięcie na symbolu pozwoli na uzyskanie krótkiej informacji o tym symbolu. Dotknij ikonę informacji, aby odwiedzić szczegółową legendę online.</string>
     <string name="google_maps_style_default">Domyślny</string>
     <string name="google_maps_style_night">Nocny</string>
+    <string name="google_maps_style_classic">Klasyczny</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Wysoki kontrast</string>
     <string name="google_maps_style_auto">Motyw urządzenia (Dzień/Noc)</string>
