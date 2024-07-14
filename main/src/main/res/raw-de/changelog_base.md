@@ -4,9 +4,10 @@
 - Neu: Unterstützung für benutzerdefinierte Kartenanbieter für OSM Online-Karten
 - Korrektur: Kartendaten nach dem Öffnen / Schließen von Einstellungen aktualisieren (UnifiedMap)
 - Neu: Anzeige von Gebäuden in 2D oder 3D (UnifiedMap OSM Karten)
-- New: Cache store/refresh from popup moved into background
-- Change: Search for coordinates: Show direction and distance to target and not to current position
-- New: Graphical D/T indicator in cache info sheet
+- Neu: Cache-Download/-Aktualisierung aus Infofenster im Hintergrund durchführen
+- Änderung: Suche nach Koordinaten: Zeige Richtung und Distanz zum Ziel und nicht zur aktuellen Position
+- Neu: Grafischer D/T-Indikator auf der Cache-Informationsseite
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
@@ -14,6 +15,8 @@
 - Neu: Feiner geglättete Skalierung von Logbildern
 - Änderung: "Log"-Symbol ist nun ein Smiley (statt Bleistift)
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### Allgemein
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
@@ -23,9 +26,9 @@
 - Neu: Höheninformationen beim Import einer Trackdatei auswerten
 - Neu: API für Locus unterstützt die Cache-Größe "virtuell"
 - Korrektur: Ergebnisse für Adresssuche sind nicht mehr nach Entfernung zum Zielort sortiert
-- New: "Corrected coordinates" filter
-- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
-- New: Added "none"-entry to selection of routing profiles
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
+- Neu: Filter "Geänderte Koordinaten"
+- Änderung: TargetSDK auf 34 aktualisiert, um den bevorstehenden Play Store-Anforderungen zu entsprechen
+- Neu: Eintrag "keine" zur Auswahl der Routingprofile hinzugefügt
+- Änderung: Verbesserte Beschreibung für Wartungsfunktion (Verwaiste Daten löschen)
+- Neu: Zeige Warnungen beim Auftreten von HTTP-Fehler 429 (zu viele Anfragen)
+- Korrektur: Flackern beim Aktualisieren der Cacheliste
