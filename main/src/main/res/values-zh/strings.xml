@@ -594,7 +594,6 @@
     <string name="init_plain_logs">普通日志</string>
     <string name="init_summary_plain_logs">显示不带颜色的日志条目</string>
     <string name="init_maintenance">维护</string>
-    <string name="init_maintenance_directories">删除孤立的文件</string>
     <string name="init_location">地理位置</string>
     <string name="init_location_note">在装有 Google Play 的服务设备上，c:geo 可以自动使用更好的地理位置提供商。然而，这让外部蓝牙 GPS 接收器无法使用。</string>
     <string name="init_location_googleplayservices">使用 Google Play 服务</string>
@@ -646,6 +645,7 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -657,7 +657,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="google_maps_style_details">详细资料</string>
     <!-- search -->
     <!-- trackable -->
     <!-- user -->

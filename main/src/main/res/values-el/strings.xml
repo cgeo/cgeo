@@ -930,8 +930,6 @@
     <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
     <string name="init_mapShadingScale_description">Αδιαφάνεια του στρώματος σκίασης, από αόρατες έως υψηλότερες τιμές που εντείνουν τη σκίαση, αλλά μπορεί να παράγει οπτικά λαθη</string>
     <string name="init_maintenance">Συντήρηση</string>
-    <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
-    <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
     <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
     <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
@@ -1190,8 +1188,6 @@
     <string name="cache_dialog_offline_save_message">Αποθηκεύει την κρύπτη για χρήση εκτός σύνδεσης…</string>
     <string name="cache_dialog_offline_drop_title">Εκτός σύνδεσης</string>
     <string name="cache_dialog_offline_drop_message">Αφαιρείται η κρύπτη από τη μνήμη της συσκευής…</string>
-    <string name="cache_dialog_refresh_title">Ανανέωση</string>
-    <string name="cache_dialog_refresh_message">Επαναφορτώνει τις λεπτομέρειες της κρύπτης…</string>
     <string name="cache_menu_navigate">Πλοήγηση</string>
     <string name="cache_menu_target">Ορισμός ως στόχος</string>
     <string name="cache_menu_navigation_drive">Πλοήγηση (Οδήγηση)</string>
@@ -1321,6 +1317,7 @@
     <string name="goto_targets_list">Κρύπτες ορισμένες από τον χρήστη</string>
     <string name="clear_goto_history_title">Εκκαθάριση ιστορικού σημείων \"Πήγαινε σε\"</string>
     <string name="clear_goto_history">Αυτή η ενέργεια θα διαγράψει όλο το ιστορικό των ενδιάμεσων σημείων εκτός των πέντε πιο πρόσφατων</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Μοίρες</string>
     <string name="cc_hint_minutes">Λεπτά</string>
@@ -1507,8 +1504,6 @@
     <string name="google_maps_style_retro">Ρετρό</string>
     <string name="google_maps_style_contrast">Υψηλή αντίθεση</string>
     <string name="google_maps_style_auto">Θέμα συσκευής (Ημέρα/Νύχτα)</string>
-    <string name="google_maps_style_details">Λεπτομέρειες</string>
-    <string name="google_maps_option_group_theme">Επιλογές θέματος</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>

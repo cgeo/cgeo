@@ -502,6 +502,7 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -513,7 +514,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="google_maps_style_details">Detailer</string>
     <!-- search -->
     <!-- trackable -->
     <!-- user -->

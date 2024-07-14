@@ -432,7 +432,6 @@
     <string name="init_plain_logs">سجلات بسيطة</string>
     <string name="init_summary_plain_logs">عرض إدخالات السجل بدون ألوان</string>
     <string name="init_maintenance">الصيانة</string>
-    <string name="init_maintenance_directories">حذف الملفات المعزولة</string>
     <string name="init_location">تحديد الموقع الجغرافي</string>
     <string name="init_location_note">على الأجهزة المرتبطة بخدماتGoogle Play، و بذالك c:geo يمكنه تلقائياً استخدام موفر تحديد الموقع الجغرافي. مع ذالك، هذا يمنع استخدام مستقبل GPS عن طريق البلوتوث.</string>
     <string name="init_location_googleplayservices">استخدم خدمات Google Play</string>
@@ -549,8 +548,6 @@
     <string name="cache_dialog_offline_save_message">حفظ المخبئ للاستخدام في وضع عدم الاتصال&#8230;</string>
     <string name="cache_dialog_offline_drop_title">وضع عدم الاتصال</string>
     <string name="cache_dialog_offline_drop_message">إزالة المخبئ من ذاكرة الجهاز&#8230;</string>
-    <string name="cache_dialog_refresh_title">تحديث</string>
-    <string name="cache_dialog_refresh_message">إعادة تحميل تفاصيل المخبآت&#8230;</string>
     <string name="cache_menu_navigate">الملاحة</string>
     <string name="cache_menu_navigation_drive">الملاحة (القيادة)</string>
     <string name="cache_menu_navigation_walk">الملاحة ( المشي)</string>
@@ -618,6 +615,7 @@
     <string name="cache_share_field">مشاركة</string>
     <string name="cache_time_full_hours">ساعة</string>
     <string name="cache_listed_on">تم إدراجه على %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">تحميل المخبآت من %1$s</string>
@@ -687,7 +685,6 @@
     <string name="map_live_disable">تعطيل العرض المباشر</string>
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
-    <string name="google_maps_style_details">التفاصيل</string>
     <!-- search -->
     <string name="search_coordinates">الإحداثيات</string>
     <string name="search_coordinates_button">البحث بواسطة الإحدثيات</string>

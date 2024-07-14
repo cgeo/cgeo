@@ -932,8 +932,6 @@
     <string name="cache_dialog_offline_save_title">離線</string>
     <string name="cache_dialog_offline_save_message">儲存寶藏給離線使用</string>
     <string name="cache_dialog_offline_drop_title">離線</string>
-    <string name="cache_dialog_refresh_title">重新整理</string>
-    <string name="cache_dialog_refresh_message">重新載入詳細的cache資訊</string>
     <string name="cache_menu_navigate">瀏覽</string>
     <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
@@ -1029,6 +1027,7 @@
     <string name="goto_targets_list">玩家自訂cache</string>
     <string name="clear_goto_history_title">清除記錄</string>
     <string name="clear_goto_history">除了五個最近的航點外，其他航點將被刪除。</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">角度</string>
     <string name="cc_hint_minutes">分鐘</string>
@@ -1124,8 +1123,6 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_style_details">详细资料</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>

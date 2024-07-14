@@ -600,6 +600,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tem Registo Offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Coordenadas Corrigidas</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Tendo pontos adicionais definidos pelo utilizador</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">A configuração deste filtro apenas afectará caches mistério. Se pretende excluir outros tipos de cache, por favor especifique um filtro adequado para esse tipo de cache.\n\nUma cache mistério é considerada \'resolvida\' caso tenha as suas coordenadas alteradas ou tenha um ponto adicional \'final\' preenchido com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
@@ -774,6 +775,8 @@
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
+    <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
+    <string name="settings_userDefinedTileProviderUri">Insira o Uri completo (sem barra à direita) para o fornecedor de blocos de mapa. Certifique-se que verificou e obedece às suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -1106,8 +1109,6 @@
     <string name="init_mapWpScaling_title">Dimensionamento do ícone de Pontos Adicionais</string>
     <string name="init_mapWpScaling_description">Factor de dimensionamento para ícones de pontos adicionais (em %)</string>
     <string name="init_maintenance">Manutenção</string>
-    <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
-    <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
     <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
@@ -1386,8 +1387,6 @@
     <string name="cache_dialog_offline_save_message">A guardar cache para utilização em modo offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
-    <string name="cache_dialog_refresh_title">Actualizar</string>
-    <string name="cache_dialog_refresh_message">A recarregar a informação da geocache…</string>
     <string name="cache_menu_speechDeactivate">Parar de falar</string>
     <string name="cache_menu_speechActivate">Começar a falar</string>
     <string name="cache_menu_navigate">Navegar</string>
@@ -1425,6 +1424,7 @@
     <string name="cache_menu_reset_foundstate">Redefinir o estado de encontrada</string>
     <string name="cache_foundstate_updated">Estado de encontrada actualizado</string>
     <string name="cache_menu_set_cache_icon">Definir ícone da cache</string>
+    <string name="cache_menu_change_description_style">Alterar estilo da descrição</string>
     <string name="cache_icon_updated">Ícone da cache actualizado</string>
     <string name="cache_menu_details">Detalhes</string>
     <string name="cache_menu_refresh">Actualizar</string>
@@ -1547,6 +1547,10 @@
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
+    <!-- html styles -->
+    <string name="html_style_default">Predefinição</string>
+    <string name="html_style_monochrome">Monocromático</string>
+    <string name="html_style_source">Fonte HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
     <string name="cc_hint_minutes">minutos</string>
@@ -1755,7 +1759,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -2492,6 +2496,7 @@
     <string name="maptheme_scale_text_summary">Adicionalmente, permite redimensionar o texto das etiquetas no mapa; 100% = sem dimensionamento extra</string>
     <string name="maptheme_scale_symbol_title">Factor de escala do símbolo</string>
     <string name="maptheme_scale_symbol_summary">Adicionalmente, permite redimensionar o tamanho dos símbolos no mapa; 100% = sem dimensionamento extra</string>
+    <string name="maptheme_show3Dbuildings">Mostrar edifícios em 3D</string>
     <string name="vtm_theme_variant">Variante de Tema</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
