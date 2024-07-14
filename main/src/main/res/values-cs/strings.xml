@@ -1121,8 +1121,6 @@
     <string name="init_mapWpScaling_title">Měřítko ikony trasového bodu</string>
     <string name="init_mapWpScaling_description">Měřítko pro ikony trasových bodů (v %)</string>
     <string name="init_maintenance">Údržba</string>
-    <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
-    <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
     <string name="init_maintenance_start">Údržba zahájena</string>
     <string name="init_maintenance_ongoing">To může nějakou dobu trvat…</string>
     <string name="init_maintenance_finished">Údržba dokončena</string>
