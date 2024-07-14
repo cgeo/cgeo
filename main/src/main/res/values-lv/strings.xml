@@ -535,7 +535,6 @@
     <string name="init_plain_logs">Vienkārši ieraksti</string>
     <string name="init_summary_plain_logs">Attēlot ierakstus bezkrāsainus</string>
     <string name="init_maintenance">Uzturēšana</string>
-    <string name="init_maintenance_directories">Dzēst failus, kas palikuši nevajadzīgi (novecojuši)</string>
     <string name="init_location">Ģeolokācija</string>
     <string name="init_location_note">Ierīcēs, kas aprīkoti ar Google Play pakalpojumiem, c:geo automātiski var izmantot labāku ģeolokācijas nodrošinātāju. Tomēr tas neļauj izmantot ārējo BlueTooth GPS uztvērēju.</string>
     <string name="init_location_googleplayservices">Izmantt Google Play pakalpojumus</string>
