@@ -600,6 +600,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Gecorrigeerde coördinaten</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches. Indien je andere cachetypes wilt uitsluiten, vul dan een passend cachetype filter in.\n\nEen mystery wordt beschouwd als \'opgelost\' als de coördinaten zijn gewijzigd of een geldig waypoint de heeft voorzien van coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
@@ -774,6 +775,8 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
+    <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
+    <string name="settings_userDefinedTileProviderUri">Voer volledige Uri (zonder slash aan het eind) in voor de tegelprovider. Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -1106,7 +1109,7 @@
     <string name="init_mapWpScaling_title">Waypoint pictogram schalen</string>
     <string name="init_mapWpScaling_description">Schaalfactor voor waypoint iconen (in %)</string>
     <string name="init_maintenance">Onderhoud</string>
-    <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
+    <string name="init_maintenance_directories_note">Verwijderde caches worden intern door c:geo gedurende 72 uur gebufferd om onbedoeld dataverlies te voorkomen. Daarnaast slaat c:geo ook afbeeldingen en andere bestanden met betrekking tot caches op in speciale mappen. In sommige speciale gevallen kunnen dergelijke gegevens niet worden verwijderd, hoewel de cache niet meer is opgeslagen. Deze functie kan worden gebruikt om dergelijke verweesde gegevens op te schonen.</string>
     <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
     <string name="init_maintenance_start">Onderhoud gestart</string>
     <string name="init_maintenance_ongoing">Dit kan enige tijd duren…</string>
@@ -1386,8 +1389,6 @@
     <string name="cache_dialog_offline_save_message">Cache opslaan voor offline gebruik…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Verwijder cache uit geheugen…</string>
-    <string name="cache_dialog_refresh_title">Verversen</string>
-    <string name="cache_dialog_refresh_message">Vernieuw cachedetails…</string>
     <string name="cache_menu_speechDeactivate">Stop met praten</string>
     <string name="cache_menu_speechActivate">Begin met praten</string>
     <string name="cache_menu_navigate">Navigeer</string>
@@ -1425,6 +1426,7 @@
     <string name="cache_menu_reset_foundstate">Gevonden status resetten</string>
     <string name="cache_foundstate_updated">Gevonden status bijgewerkt</string>
     <string name="cache_menu_set_cache_icon">Cache pictogram instellen</string>
+    <string name="cache_menu_change_description_style">Wijzig beschrijving stijl</string>
     <string name="cache_icon_updated">Cache pictogram bijgewerkt</string>
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Verversen</string>
@@ -1547,6 +1549,10 @@
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
+    <!-- html styles -->
+    <string name="html_style_default">Standaard</string>
+    <string name="html_style_monochrome">Monochroom</string>
+    <string name="html_style_source">HTML Bron</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
     <string name="cc_hint_minutes">minuten</string>
@@ -1748,6 +1754,7 @@
     <string name="map_theme_legend_info">Tik op de categorietitel om de categorie te openen/sluiten. Druk lang op een symbool voor korte info over dat symbool. Tik op het info pictogram om online een gedetailleerde legenda te bekijken.</string>
     <string name="google_maps_style_default">Standaard</string>
     <string name="google_maps_style_night">Nacht</string>
+    <string name="google_maps_style_classic">Klassiek</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoog contrast</string>
     <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
@@ -1755,7 +1762,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2404,6 +2411,7 @@
     <string name="routingmode_car">Auto</string>
     <string name="routingmode_user1">Gebruiker 1</string>
     <string name="routingmode_user2">Gebruiker 2</string>
+    <string name="routingmode_none">(geen)</string>
     <!-- view settings -->
     <string name="view_settings">Instellingen bekijken</string>
     <string name="delete_setting">Instelling verwijderen</string>
@@ -2496,6 +2504,7 @@
     <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
     <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
     <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="maptheme_show3Dbuildings">Toon gebouwen in 3D</string>
     <string name="vtm_theme_variant">Thema Variant</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
