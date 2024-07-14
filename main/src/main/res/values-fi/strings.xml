@@ -1034,8 +1034,6 @@
     <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
     <string name="init_mapShadingScale_description">Varjostuskerroksen läpikuultavuus näkymättömistä korkeampiin arvoihin tehostaen varjostusta, mutta se voi tuottaa virheitä</string>
     <string name="init_maintenance">Ylläpito</string>
-    <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
-    <string name="init_maintenance_directories">Poista orpotiedostot</string>
     <string name="init_maintenance_start">Huolto aloitettu</string>
     <string name="init_maintenance_ongoing">Tämä voi kestää jonkin aikaa…</string>
     <string name="init_maintenance_finished">Huolto suoritettu</string>
@@ -1306,8 +1304,6 @@
     <string name="cache_dialog_offline_save_message">Tallennetaan kätköä offline-käyttöä varten…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Poistetaan kätkö laitteen muistista…</string>
-    <string name="cache_dialog_refresh_title">Päivitä</string>
-    <string name="cache_dialog_refresh_message">Ladataan kätkön tietoja uudestaan…</string>
     <string name="cache_menu_navigate">Navigoi</string>
     <string name="cache_menu_target">Aseta kohteeksi</string>
     <string name="cache_menu_navigation_drive">Navigointi (ajo)</string>
@@ -1455,6 +1451,7 @@
     <string name="goto_targets_list">Sisäiset kätköt</string>
     <string name="clear_goto_history_title">Poista Siirry-historia</string>
     <string name="clear_goto_history">Tämä poistaa historiasta kaikki paitsi 5 viimeisintä reittipistettä</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">astetta</string>
     <string name="cc_hint_minutes">minuuttia</string>
@@ -1644,8 +1641,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Suuri kontrasti</string>
     <string name="google_maps_style_auto">Laitteen teema (päivä/yö)</string>
-    <string name="google_maps_style_details">Yksityiskohdat</string>
-    <string name="google_maps_option_group_theme">Teeman asetukset</string>
     <!-- search -->
     <string name="geo_search_label">Etsi kätköjä lähistöllä</string>
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
