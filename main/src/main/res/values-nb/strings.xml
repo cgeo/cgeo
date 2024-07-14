@@ -829,8 +829,6 @@
     <string name="init_summary_plain_logs">Vis ren tekst i loggene (ikke farger og annen formatering)</string>
     <string name="init_rendertheme_folder">Mappe for karttemaer</string>
     <string name="init_maintenance">Vedlikehold</string>
-    <string name="init_maintenance_directories_note">c:geo lagrer bilder og andre filer relatert til en cache i en dedikert mappe. I enkelte tilfeller (f.eks. når du importerer/eksporterer databasen) kan denne mappen inneholde foreldede filer som kan slettes her.</string>
-    <string name="init_maintenance_directories">Slett utdaterte filer</string>
     <string name="init_maintenance_start">Vedlikehold startet</string>
     <string name="init_maintenance_finished">Vedlikehold ferdig</string>
     <string name="init_location">Geolokasjon</string>
