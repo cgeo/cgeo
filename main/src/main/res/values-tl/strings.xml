@@ -689,6 +689,7 @@
     <string name="map_live_disable">Huwag paganahin ang live</string>
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
+    <string name="google_maps_style_details">Ang mga detalye</string>
     <!-- search -->
     <string name="search_coordinates">Ang mga koordinado</string>
     <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
