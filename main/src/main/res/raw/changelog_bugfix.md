@@ -1,6 +1,7 @@
 ##
 - Fix: `vanity` function failing on long strings
-- Fix: wrong parsing priority in formula backup
+- Fix: Wrong parsing priority in formula backup
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ##
 - Fix: Log length check counting some characters twice
