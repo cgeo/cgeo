@@ -1109,8 +1109,6 @@
     <string name="init_mapWpScaling_title">Waypoint pictogram schalen</string>
     <string name="init_mapWpScaling_description">Schaalfactor voor waypoint iconen (in %)</string>
     <string name="init_maintenance">Onderhoud</string>
-    <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
-    <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
     <string name="init_maintenance_start">Onderhoud gestart</string>
     <string name="init_maintenance_ongoing">Dit kan enige tijd duren…</string>
     <string name="init_maintenance_finished">Onderhoud voltooid</string>
