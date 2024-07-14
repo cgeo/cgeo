@@ -865,8 +865,6 @@
     <string name="init_summary_plain_logs">Giriş kayıtlarını renksiz olarak görüntüle</string>
     <string name="init_rendertheme_folder">Harita Temaları Klasörü</string>
     <string name="init_maintenance">Bakım</string>
-    <string name="init_maintenance_directories_note">c:geo resimleri ve kutuyla ilgili diğer dosyaları belirli bir klasörde saklar. Bazı durumlarda (örn. veri tabanını içe/dışa aktarmak gerektiğinde) bu klasör, buradan silinebilecek eski veriler içerebilir.</string>
-    <string name="init_maintenance_directories">Artık dosyaları sil</string>
     <string name="init_maintenance_finished">Bakım tamamlandı</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">Google Play Hizmetleri ile donatılmış cihazlarda, c:geo daha iyi bir geolokasyon sağlayıcısını otomatik olarak kullanabilir. Ancak, bu harici bir Bluetooth GPS alıcısının kullanımını engeller.</string>
