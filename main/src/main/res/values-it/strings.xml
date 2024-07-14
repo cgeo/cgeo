@@ -1099,8 +1099,6 @@
     <string name="init_mapWpScaling_title">Scala icona del Waypoint</string>
     <string name="init_mapWpScaling_description">Fattore di scala per le icone dei waypoint (in %)</string>
     <string name="init_maintenance">Manutenzione</string>
-    <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
-    <string name="init_maintenance_directories">Elimina file orfani</string>
     <string name="init_maintenance_start">Manutenzione avviata</string>
     <string name="init_maintenance_ongoing">Questo potrebbe richiedere un po\' di tempo…</string>
     <string name="init_maintenance_finished">Manutenzione terminata</string>
