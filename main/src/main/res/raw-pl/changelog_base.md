@@ -7,7 +7,7 @@
 - Nowość: Zapisywanie/odświeżanie skrytki przesunięte z wyskakującego okna na tło
 - Zmiana: Wyszukiwanie współrzędnych: Pokaż kierunek i odległość do celu, a nie do aktualnej pozycji
 - Nowość: Graficzny wskaźnik D/T w informacjach o skrytce
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Poprawka: Kompas jest ukryty gdy widoczny jest pasek filtrowania (UnifiedMap)
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
@@ -15,8 +15,8 @@
 - Nowość: płynniejsze skalowanie obrazów z dziennika znalezień
 - Zmiana: Zmieniono ikonę „zaloguj” z ołówka na ikonę uśmiechniętej buźki
 - Zmiana: Zmieniono ikonę „edytuj listy” z ołówka na listę + ołówek
-- Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
+- Poprawka: funkcja vanity nie działała na długich tekstach
+- Poprawka: Błędny priorytet analizowania w kopii zapasowej formuły
 
 ### Ogólne
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
