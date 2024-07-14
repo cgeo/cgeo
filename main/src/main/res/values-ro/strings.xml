@@ -477,7 +477,6 @@
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
     <string name="init_maintenance">Întreţinere</string>
-    <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
     <string name="init_location_note">Pe dispozitivele echipate cu serviciile Google Play, c:geo poate utiliza automat un furnizor de geolocalizare mai bun. Aceasta însă împiedică folosirea unui receptor GPS extern conectat prin Bluetooth.</string>
     <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
