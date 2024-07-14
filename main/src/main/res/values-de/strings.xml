@@ -1108,8 +1108,6 @@
     <string name="init_mapWpScaling_title">Skalierung Wegpunktsymbole</string>
     <string name="init_mapWpScaling_description">Skalierungsfaktor für Wegpunktsymbole (in %)</string>
     <string name="init_maintenance">Wartung</string>
-    <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
-    <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
     <string name="init_maintenance_start">Wartung gestartet</string>
     <string name="init_maintenance_ongoing">Dies kann einige Zeit dauern…</string>
     <string name="init_maintenance_finished">Wartung beendet</string>
