@@ -980,8 +980,6 @@
     <string name="init_mapShadingScale_title">Skuggning opacitet</string>
     <string name="init_mapShadingScale_description">Opacitet av skuggning lager, från osynliga till högre värden som intensifierar skuggning men kan ge artefakter</string>
     <string name="init_maintenance">Underhåll</string>
-    <string name="init_maintenance_directories_note">c:geo lagrar bilder och andra filer relaterade till en cache i en särskild mapp. I vissa fall (t.ex. vid import/export av databasen) kan denna mapp innehålla föråldrade filer som kan tas bort här.</string>
-    <string name="init_maintenance_directories">Ta bort överblivna filer</string>
     <string name="init_maintenance_start">Underhåll startat</string>
     <string name="init_maintenance_ongoing">Detta kan ta en stund…</string>
     <string name="init_maintenance_finished">Underhåll avslutat</string>
@@ -1247,8 +1245,6 @@
     <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
     <string name="cache_dialog_offline_drop_title">Sparad lokalt</string>
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
-    <string name="cache_dialog_refresh_title">Uppdatera</string>
-    <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
     <string name="cache_menu_navigate">Navigera</string>
     <string name="cache_menu_target">Ange som mål</string>
     <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
@@ -1384,6 +1380,7 @@
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
     <string name="cc_hint_minutes">minuter</string>
@@ -1572,8 +1569,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hög kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_style_details">Detaljer</string>
-    <string name="google_maps_option_group_theme">Inställningar för teman</string>
     <!-- search -->
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
