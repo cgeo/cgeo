@@ -427,7 +427,6 @@
     <string name="init_plain_logs">Osnovni zapisih</string>
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
     <string name="init_maintenance">Vzdrževanje</string>
-    <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
     <string name="init_location">Geolokacija</string>
     <string name="init_location_note">Na napravah, ki so opremljena s storitvijo Google Play lahko c:geo samodejno uporabi najboljšega ponudnika geolokacije. Vendar to preprečuje uporabo zunanjega BlueTooth GPS sprejemnika.</string>
     <string name="init_location_googleplayservices">Uporabljaj storitve Google Play</string>
