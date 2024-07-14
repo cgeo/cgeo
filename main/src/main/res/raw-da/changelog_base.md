@@ -7,6 +7,7 @@
 - New: Cache store/refresh from popup moved into background
 - Change: Search for coordinates: Show direction and distance to target and not to current position
 - New: Graphical D/T indicator in cache info sheet
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Cachedetaljer
 - New: Show images linked in "personal note" in Images tab
@@ -14,6 +15,8 @@
 - New: Smoother scaling of log images
 - Change: Change "log" icon from pencil to smiley icon
 - Change: Change "edit lists" icon from pencil to list + pencil
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### General
 - New: Switch to set found state of Lab Adventures either manually or automatically
