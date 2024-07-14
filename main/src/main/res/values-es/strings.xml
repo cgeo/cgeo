@@ -881,8 +881,6 @@
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
     <string name="init_rendertheme_folder">Carpeta de temas del mapa</string>
     <string name="init_maintenance">Mantenimiento</string>
-    <string name="init_maintenance_directories_note">c:geo almacena imágenes y otros archivos relacionados con un caché en una carpeta dedicada. En algunos casos (al importar/exportar la base de datos) esta carpeta puede contener archivos obsoletos que se pueden eliminar aquí.</string>
-    <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
     <string name="init_maintenance_start">Mantenimiento iniciado</string>
     <string name="init_maintenance_finished">Mantenimiento finalizado</string>
     <string name="init_location">Geolocalización</string>
