@@ -420,7 +420,6 @@
     <string name="init_plain_logs">Ang maliwanag na mga logs</string>
     <string name="init_summary_plain_logs">Iladlad ang log ng mga entry na walang mga kulay</string>
     <string name="init_maintenance">Ang sustento</string>
-    <string name="init_maintenance_directories">Ang mga luma payl ay alisin</string>
     <string name="init_location">Ang Heyolokasyon</string>
     <string name="init_location_note">Sa mga aparato na may mga Serbisyo ng Google Play,awtomatikong magagamit ng isang mabuting probayder ng geolocation ang c:geo. Gayunpaman, mapipigilan ang paggamit ng panlabas na bluetooth Gps reciever.</string>
     <string name="init_location_googleplayservices">Ang mga serbisyo ng google ay gamitin</string>
