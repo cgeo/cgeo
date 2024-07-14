@@ -865,8 +865,6 @@
     <string name="init_summary_plain_logs">Giriş kayıtlarını renksiz olarak görüntüle</string>
     <string name="init_rendertheme_folder">Harita Temaları Klasörü</string>
     <string name="init_maintenance">Bakım</string>
-    <string name="init_maintenance_directories_note">c:geo resimleri ve kutuyla ilgili diğer dosyaları belirli bir klasörde saklar. Bazı durumlarda (örn. veri tabanını içe/dışa aktarmak gerektiğinde) bu klasör, buradan silinebilecek eski veriler içerebilir.</string>
-    <string name="init_maintenance_directories">Artık dosyaları sil</string>
     <string name="init_maintenance_finished">Bakım tamamlandı</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">Google Play Hizmetleri ile donatılmış cihazlarda, c:geo daha iyi bir geolokasyon sağlayıcısını otomatik olarak kullanabilir. Ancak, bu harici bir Bluetooth GPS alıcısının kullanımını engeller.</string>
@@ -1114,8 +1112,6 @@
     <string name="cache_dialog_offline_save_message">Geocache çevrimdışı kullanım için kaydediliyor…</string>
     <string name="cache_dialog_offline_drop_title">Çevrimdışı</string>
     <string name="cache_dialog_offline_drop_message">Geocache cihaz hafızasından siliniyor…</string>
-    <string name="cache_dialog_refresh_title">Yenile</string>
-    <string name="cache_dialog_refresh_message">Geocache detayları yükleniyor…</string>
     <string name="cache_menu_navigate">Navigasyon</string>
     <string name="cache_menu_target">Hedef olarak ayarla</string>
     <string name="cache_menu_navigation_drive">Navigasyon (Arabayla)</string>
@@ -1237,6 +1233,7 @@
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">derece</string>
     <string name="cc_hint_minutes">dakika</string>
@@ -1383,8 +1380,6 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
-    <string name="google_maps_style_details">Detaylar</string>
-    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
