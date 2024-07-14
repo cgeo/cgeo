@@ -477,7 +477,6 @@
     <string name="init_plain_logs">Însemnări simple</string>
     <string name="init_summary_plain_logs">Afişează însemnările fără culori</string>
     <string name="init_maintenance">Întreţinere</string>
-    <string name="init_maintenance_directories">Şterge fişierele devenite inutile</string>
     <string name="init_location">Geolocație</string>
     <string name="init_location_note">Pe dispozitivele echipate cu serviciile Google Play, c:geo poate utiliza automat un furnizor de geolocalizare mai bun. Aceasta însă împiedică folosirea unui receptor GPS extern conectat prin Bluetooth.</string>
     <string name="init_location_googleplayservices">Foloseşte serviciile Google Play</string>
@@ -612,8 +611,6 @@
     <string name="cache_dialog_offline_save_message">Salvare pentru uz fără internet…</string>
     <string name="cache_dialog_offline_drop_title">Cutie salvată</string>
     <string name="cache_dialog_offline_drop_message">Ştergere cutie din memoria dispozitivului…</string>
-    <string name="cache_dialog_refresh_title">Împrospătează</string>
-    <string name="cache_dialog_refresh_message">Reîncărcare detaliile cutiei…</string>
     <string name="cache_menu_navigate">Navighează</string>
     <string name="cache_menu_navigation_drive">Navigare (auto)</string>
     <string name="cache_menu_navigation_walk">Navigare (pe jos)</string>
@@ -677,6 +674,7 @@
     <string name="cache_share_field">ora</string>
     <string name="cache_time_full_hours">ora</string>
     <string name="cache_listed_on">Publicat pe %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Se încarcă geocutiile din %1$s</string>
@@ -747,7 +745,6 @@
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
-    <string name="google_maps_style_details">Detalii</string>
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
     <string name="search_coordinates_button">Caută după coordonate</string>
