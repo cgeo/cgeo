@@ -7,6 +7,7 @@
 - Nieuw: Cache opslaan/vernieuwen van popup verplaatst naar de achtergrond
 - Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
 - Nieuw: Grafische D/T indicator in het cache informatieblad
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -14,6 +15,8 @@
 - Nieuw: Soepeler schalen van log afbeeldingen
 - Wijziging: Wijzig "gelogd" icoon van potlood naar smiley icoon
 - Wijziging: "Bewerk lijsten" pictogram van potlood naar lijst + potlood wijzigen
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### Algemeen
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
@@ -26,6 +29,6 @@
 - Nieuw: "Gecorrigeerde coördinaten" filter
 - Wijziging: targetSDK bijgewerkt naar 34 om te voldoen aan de aankomende Play Store eisen
 - Nieuw: "geen"-regel toegevoegd aan selectie van routeringsprofielen
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
+- Wijziging: Verbeter de omschrijving voor de "onderhouds" functie (verwijder verweesde gegevens)
+- Nieuw: Toon waarschuwingen wanneer HTTP fout 429 optreedt (Te veel verzoeken)
+- Oplossing: Knipperen bij het vernieuwen van de cache lijst
