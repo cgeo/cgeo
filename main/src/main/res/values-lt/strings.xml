@@ -996,8 +996,6 @@
     <string name="init_mapShadingScale_title">Šešėlių skaidrumas</string>
     <string name="init_mapShadingScale_description">Šešėlių sluoksnio skaidrumas, nuo nematomo iki didžiausių verčių, sustiprinantis šešėlį, bet gali atsirasti artefaktų</string>
     <string name="init_maintenance">Priežiūra</string>
-    <string name="init_maintenance_directories_note">c:geo vaizdus ir kitus failus, susijusius su slėptuve, saugo tam skirtame aplanke. Kai kuriais atvejais (pvz., importuojant/eksportuojant duomenų bazę) šiame aplanke gali būti pasenusių failų, kuriuos galima ištrinti čia.</string>
-    <string name="init_maintenance_directories">Ištrinti nebereikalingus failus</string>
     <string name="init_maintenance_start">Priežiūra prasidėjo</string>
     <string name="init_maintenance_ongoing">Tai gali užtrukti…</string>
     <string name="init_maintenance_finished">Priežiūra baigta</string>
