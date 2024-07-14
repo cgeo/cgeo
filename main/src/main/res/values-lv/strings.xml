@@ -535,7 +535,6 @@
     <string name="init_plain_logs">Vienkārši ieraksti</string>
     <string name="init_summary_plain_logs">Attēlot ierakstus bezkrāsainus</string>
     <string name="init_maintenance">Uzturēšana</string>
-    <string name="init_maintenance_directories">Dzēst failus, kas palikuši nevajadzīgi (novecojuši)</string>
     <string name="init_location">Ģeolokācija</string>
     <string name="init_location_note">Ierīcēs, kas aprīkoti ar Google Play pakalpojumiem, c:geo automātiski var izmantot labāku ģeolokācijas nodrošinātāju. Tomēr tas neļauj izmantot ārējo BlueTooth GPS uztvērēju.</string>
     <string name="init_location_googleplayservices">Izmantt Google Play pakalpojumus</string>
@@ -691,8 +690,6 @@
     <string name="cache_dialog_offline_save_message">Saglabā slēpni bezsaistes lietošanai…</string>
     <string name="cache_dialog_offline_drop_title">Bezsaistes režīmā</string>
     <string name="cache_dialog_offline_drop_message">Notiek slēpņa izdzēšana no ierīces atmiņas…</string>
-    <string name="cache_dialog_refresh_title">Atjaunot</string>
-    <string name="cache_dialog_refresh_message">Pārlādē slēpņa informāciju…</string>
     <string name="cache_menu_navigate">Navigēt</string>
     <string name="cache_menu_navigation_drive">Navigēt (Ar automašīnu)</string>
     <string name="cache_menu_navigation_walk">Navigēt (Ar kājām)</string>
@@ -772,6 +769,7 @@
     <string name="goto_targets_list">Lietotāja definēti slēpņi</string>
     <string name="clear_goto_history_title">Dzēst \"iet uz\" (goto) vēsturi</string>
     <string name="clear_goto_history">Šis izdzēsīs visus vēsturiskos starpposmus, izņemot pēdējos piecus</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grādi</string>
     <string name="cc_hint_minutes">minūtes</string>
@@ -860,8 +858,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
-    <string name="google_maps_style_details">Informācija</string>
-    <string name="google_maps_option_group_theme">Kartes motīva iestatījumi</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
