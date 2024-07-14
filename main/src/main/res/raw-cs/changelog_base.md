@@ -26,3 +26,6 @@
 - Novinka: filtr "Upravené souřadnice"
 - Změna: Aktualizováno cílové SDK na verzi 34, aby bylo v souladu s nadcházejícími požadavky Obchodu Play
 - Novinka: Do výběru profilů směrování byla přidána položka "žádný"
+- Change: Improve description for "maintenance" function (remove orphaned data)
+- New: Show warnings when HTTP error 429 occurs (Too many requests)
+- Fix: Flickering on cache list refresh
