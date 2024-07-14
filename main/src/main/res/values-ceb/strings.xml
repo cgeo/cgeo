@@ -410,7 +410,6 @@
     <string name="init_plain_logs">Yano na logs</string>
     <string name="init_summary_plain_logs">I-balandra and log entri nga walay kolor</string>
     <string name="init_maintenance">Pag-mintinar</string>
-    <string name="init_maintenance_directories">Tangtanga ang mga naulahi nga mga file</string>
     <string name="init_location_note">Sa mga kagamitan nga adunay mga Google Play Services, ang c:geo mahimong gamiton sa usa ka mas maayo nga geolocation provider. Hinoon, kini nagpugong sa paggamit sa usa ka eksternal nga GPS receiver sa GPS.</string>
     <string name="init_location_googleplayservices">Gamita ang Google Play Services</string>
     <string name="init_low_power">Hinay-og-power nga mode</string>
