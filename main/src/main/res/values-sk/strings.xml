@@ -996,8 +996,6 @@
     <string name="init_mapShadingScale_title">Nepriehľadnosť tieňovania</string>
     <string name="init_mapShadingScale_description">Nepriehľadnosť vrstvy tieňovania, od neviditeľnej po vyššie hodnoty, ktoré zintenzívňujú tieňovanie, ale môžu vytvárať artefakty</string>
     <string name="init_maintenance">Údržba</string>
-    <string name="init_maintenance_directories_note">Aplikácia c:geo ukladá obrázky a ďalšie súbory týkajúce sa kešky vo vyhradenom priečinku. V niektorých prípadoch (napríklad pri importe/exporte databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete odstrániť tu.</string>
-    <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
     <string name="init_maintenance_start">Údržba spustená</string>
     <string name="init_maintenance_ongoing">Môže to chvíľu trvať…</string>
     <string name="init_maintenance_finished">Údržba dokončená</string>
