@@ -7,6 +7,7 @@
 - New: Cache store/refresh from popup moved into background
 - Change: Search for coordinates: Show direction and distance to target and not to current position
 - New: Graphical D/T indicator in cache info sheet
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Детали тайника
 - Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
@@ -14,6 +15,8 @@
 - Новое: Более плавное масштабирование изображений при добавлении их в записи о взятии тайника
 - Изменено: Заменена иконка "запись" с карандаша на смайлик
 - Изменение: изменена иконка «редактировать списки» с карандаша на список + карандаш
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### Общее
 - Новое: Переключение на настройку статуса нахождения тайника в Lab Adventures вручную или автоматически
