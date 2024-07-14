@@ -26,3 +26,6 @@
 - Nieuw: "Gecorrigeerde coördinaten" filter
 - Wijziging: targetSDK bijgewerkt naar 34 om te voldoen aan de aankomende Play Store eisen
 - Nieuw: "geen"-regel toegevoegd aan selectie van routeringsprofielen
+- Change: Improve description for "maintenance" function (remove orphaned data)
+- New: Show warnings when HTTP error 429 occurs (Too many requests)
+- Fix: Flickering on cache list refresh
