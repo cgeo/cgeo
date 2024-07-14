@@ -426,7 +426,6 @@
     <string name="init_plain_logs">Ang mga plain na log</string>
     <string name="init_summary_plain_logs">Ipakita ang mga ipapadalang log na walang mga kulay</string>
     <string name="init_maintenance">Pagpapanatili</string>
-    <string name="init_maintenance_directories">Burahin ang inabandong mga payl</string>
     <string name="init_location">Ang geolocation</string>
     <string name="init_location_note">Ang mga device ay handa sa google play na serbisyo, ang c:geo ay awtomatikong nagbibigay ng geolocation. Gayunman,ito ay nagpipigil sa paggamit ng panlabas na bluetooth GPS na tagatanggap.</string>
     <string name="init_location_googleplayservices">Gumamit na google play na serbisyo</string>
