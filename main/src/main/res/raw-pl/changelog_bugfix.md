@@ -1,4 +1,8 @@
 ##
+- Poprawka: `vanity` funkcja nie powiodła się w długich ciągach
+- Poprawka: błędny priorytet analizowania w kopii zapasowej formuły
+
+##
 - Poprawka: Sprawdzanie długości dziennika liczyło niektóre znaki podwójnie
 - Poprawka: Dostosowanie do zmian na stronie hylly
 - Nowość: Dodatkowe opcje motywu dla map Google
