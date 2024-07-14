@@ -600,6 +600,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Hat Offline-Log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Geänderte Koordinaten</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Mit eigenen Wegpunkten</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus. Falls Du auch andere Cachetypen ausschließen möchtest, verwende bitte zusätzlich einen Cachetyp-Filter.\n\nEin Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
@@ -1108,6 +1109,8 @@
     <string name="init_mapWpScaling_title">Skalierung Wegpunktsymbole</string>
     <string name="init_mapWpScaling_description">Skalierungsfaktor für Wegpunktsymbole (in %)</string>
     <string name="init_maintenance">Wartung</string>
+    <string name="init_maintenance_directories_note">Gelöschte Caches werden intern 72 Stunden von c:geo gepuffert, um einen zufälligen Datenverlust zu verhindern. Zusätzlich speichert c:geo auch Bilder und andere Dateien im Zusammenhang mit Caches. Unter Umständen werden solche Daten nicht gelöscht, obwohl der Cache nicht mehr gespeichert ist. Diese Funktion kann benutzt werden, um verwaiste Daten zu bereinigen.</string>
+    <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
     <string name="init_maintenance_start">Wartung gestartet</string>
     <string name="init_maintenance_ongoing">Dies kann einige Zeit dauern…</string>
     <string name="init_maintenance_finished">Wartung beendet</string>
@@ -1751,6 +1754,7 @@
     <string name="map_theme_legend_info">Tippe auf den Kategorietitel um die Kategorie zu öffnen/schließen. Tippe lange auf ein Symbol für kurze Informationen über darüber. Tippe auf das Info-Symbol, um eine detaillierte Legende online zu besuchen.</string>
     <string name="google_maps_style_default">Standard</string>
     <string name="google_maps_style_night">Nacht</string>
+    <string name="google_maps_style_classic">Klassisch</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoher Kontrast</string>
     <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
@@ -2407,6 +2411,7 @@
     <string name="routingmode_car">Auto</string>
     <string name="routingmode_user1">Benutzerdefiniert 1</string>
     <string name="routingmode_user2">Benutzerdefiniert 2</string>
+    <string name="routingmode_none">(keine)</string>
     <!-- view settings -->
     <string name="view_settings">Einstellungen anzeigen</string>
     <string name="delete_setting">Einstellung löschen</string>
