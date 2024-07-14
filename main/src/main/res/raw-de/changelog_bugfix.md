@@ -1,4 +1,8 @@
 ##
+- Fix: `vanity` function failing on long strings
+- Fix: wrong parsing priority in formula backup
+
+##
 - Korrektur: Längenprüfung bei Logs zählt manche Zeichen doppelt
 - Korrektur: hylly-Karte wird im Downloader nicht angezeigt (Webseitenänderung)
 - Neu: Zusätzliche Design-Optionen für Google Maps
