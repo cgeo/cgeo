@@ -980,8 +980,6 @@
     <string name="init_mapShadingScale_title">Skuggning opacitet</string>
     <string name="init_mapShadingScale_description">Opacitet av skuggning lager, från osynliga till högre värden som intensifierar skuggning men kan ge artefakter</string>
     <string name="init_maintenance">Underhåll</string>
-    <string name="init_maintenance_directories_note">c:geo lagrar bilder och andra filer relaterade till en cache i en särskild mapp. I vissa fall (t.ex. vid import/export av databasen) kan denna mapp innehålla föråldrade filer som kan tas bort här.</string>
-    <string name="init_maintenance_directories">Ta bort överblivna filer</string>
     <string name="init_maintenance_start">Underhåll startat</string>
     <string name="init_maintenance_ongoing">Detta kan ta en stund…</string>
     <string name="init_maintenance_finished">Underhåll avslutat</string>
