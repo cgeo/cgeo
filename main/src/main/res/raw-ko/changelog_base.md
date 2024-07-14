@@ -7,6 +7,7 @@
 - 신규: 팝업에서 캐시 저장소/새로고침이 백그라운드로 이동됨
 - 변경: 좌표 검색: 현재 위치가 아닌 목표까지 방향 및 거리 표시
 - New: Graphical D/T indicator in cache info sheet
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### 캐시 상세정보
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
@@ -14,6 +15,8 @@
 - 신규: 로그 이미지의 원활한 스케일링
 - 변경: "로그" 아이콘을 연필에서 스마일 아이콘으로 변경
 - 변경: "목록 편집" 아이콘을 연필에서 목록 및 연필로 변경
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### 일반
 - 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
