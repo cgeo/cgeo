@@ -427,7 +427,6 @@
     <string name="init_plain_logs">Osnovni zapisih</string>
     <string name="init_summary_plain_logs">Ne pokaži barv pri zapisih</string>
     <string name="init_maintenance">Vzdrževanje</string>
-    <string name="init_maintenance_directories">Izbriši osirotišene datoteke</string>
     <string name="init_location">Geolokacija</string>
     <string name="init_location_note">Na napravah, ki so opremljena s storitvijo Google Play lahko c:geo samodejno uporabi najboljšega ponudnika geolokacije. Vendar to preprečuje uporabo zunanjega BlueTooth GPS sprejemnika.</string>
     <string name="init_location_googleplayservices">Uporabljaj storitve Google Play</string>
@@ -528,8 +527,6 @@
     <string name="cache_dialog_offline_save_message">Shranjevanje zaklada za delo brez povezave…</string>
     <string name="cache_dialog_offline_drop_title">Brez povezave</string>
     <string name="cache_dialog_offline_drop_message">Brisanje zaklada iz naprave…</string>
-    <string name="cache_dialog_refresh_title">Osveži</string>
-    <string name="cache_dialog_refresh_message">Ponovno nalaganje podatkov zaklada…</string>
     <string name="cache_menu_navigate">Navigiraj</string>
     <string name="cache_menu_navigation_drive">Navigiraj - vožnja</string>
     <string name="cache_menu_navigation_walk">Navigiraj - hoja</string>
@@ -585,6 +582,7 @@
     <string name="cache_share_field">deli</string>
     <string name="cache_time_full_hours">h</string>
     <string name="cache_listed_on">Objavljen na %s</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <string name="gpx_import_loading_caches_with_filename">Nalaganje zakladov iz %1$s</string>
@@ -650,7 +648,6 @@
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
-    <string name="google_maps_style_details">Podrobnosti</string>
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
