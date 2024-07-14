@@ -7,7 +7,7 @@
 - Neu: Cache-Download/-Aktualisierung aus Infofenster im Hintergrund durchführen
 - Änderung: Suche nach Koordinaten: Zeige Richtung und Distanz zum Ziel und nicht zur aktuellen Position
 - Neu: Grafischer D/T-Indikator auf der Cache-Informationsseite
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Korrektur: Kompassrose versteckt, wenn Filterleiste sichtbar ist (UnifiedMap)
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
@@ -15,8 +15,8 @@
 - Neu: Feiner geglättete Skalierung von Logbildern
 - Änderung: "Log"-Symbol ist nun ein Smiley (statt Bleistift)
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
-- Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
+- Korrektur: `vanity` Funktion fehlerhaft bei langen Zeichenketten
+- Korrektur: Falsche Parsing-Priorität bei Formel-Backup
 
 ### Allgemein
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
