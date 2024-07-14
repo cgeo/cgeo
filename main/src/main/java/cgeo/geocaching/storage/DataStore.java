@@ -50,6 +50,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -107,6 +108,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -163,9 +165,21 @@ public class DataStore {
         DBEXTENSION_LAST_TRACKABLE_ACTION(8);
 
         public final int id;
+        private static EnumValueMapper<Integer, DBExtensionType> mapper = new EnumValueMapper<>();
+
+        static {
+            for (DBExtensionType type : values()) {
+                mapper.add(type, type.id);
+            }
+        }
 
         DBExtensionType(final int id) {
             this.id = id;
+        }
+
+        public static String getNameFor(final int id) {
+            final DBExtensionType type = mapper.get(id);
+            return type == null ? "unknown:" + id : type.name();
         }
     }
 
@@ -327,6 +341,16 @@ public class DataStore {
         @NonNull public static final String dbFieldRoute_id = "id";
     @NonNull private static final String dbTableExtension = "cg_extension";
     @NonNull private static final String dbTableFilters = "cg_filters";
+
+    @NonNull private static final String[] dbAll = new String[]{
+            dbTableCaches, dbTableLists, dbTableCachesLists, dbTableAttributes, dbTableWaypoints,
+            dbTableVariables, dbTableCategories, dbTableSpoilers, dbTableLogs, dbTableLogCount,
+            dbTableLogImages, dbTableLogsOffline, dbTableLogsOfflineImages,
+            dbTableLogsOfflineTrackables, dbTableTrackables,
+            dbTableSearchDestinationHistory, dbTableTrailHistory, dbTableRoute,
+            dbTableExtension, dbTableFilters
+    };
+
     @NonNull private static final String dbTableSequences = "sqlite_sequence";
 
     // common table field names
@@ -5521,9 +5545,44 @@ public class DataStore {
         return 0;
     }
 
-    /**
-     * Helper methods for Offline Logs
-     */
+    public static Map<String, Long> getTableCounts() {
+        final Map<String, Long> result = new TreeMap<>();
+
+        try {
+            return withAccessLock(() -> {
+                for (String table : dbAll) {
+                    final long cnt = database.compileStatement("SELECT COUNT(*) FROM " + table).simpleQueryForLong();
+                    result.put(table, cnt);
+                }
+                return result;
+            });
+        } catch (RuntimeException re) {
+            Log.w("Exception retrieving tablecounts", re);
+            return result;
+        }
+    }
+
+    public static Map<String, Long> getExtensionTableKeyCounts() {
+        final Map<String, Long> result = new TreeMap<>();
+        try {
+            return withAccessLock(() -> {
+                final Cursor cursor = database.rawQuery("SELECT _type, COUNT(*) FROM " + dbTableExtension + " GROUP BY _type", null);
+                try {
+                    while (cursor.moveToNext()) {
+                        result.put(DBExtensionType.getNameFor(cursor.getInt(0)), cursor.getLong(1));
+                    }
+                    return result;
+                } finally {
+                    cursor.close();
+                }
+            });
+        } catch (RuntimeException re) {
+            Log.w("Exception retrieving extensionTableInfo", re);
+            return result;
+        }
+    }
+
+    /** Helper methods for Offline Logs */
     private static class DBLogOfflineUtils {
 
         public static boolean save(final String geocode, final OfflineLogEntry logEntry) {

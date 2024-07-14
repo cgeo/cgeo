@@ -45,7 +45,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -256,33 +255,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         if (activity != null && googleMap != null) {
             try {
                 final View mapView = findViewById(R.id.map);
-                int minHeight = 0;
-
-                Boolean abs = actionBarShowing;
-                if (actionBarShowing == null) {
-                    final ActionBar actionBar = activity.getSupportActionBar();
-                    abs = actionBar != null && actionBar.isShowing();
-                }
-
-                if (abs) {
-                    minHeight = activity.findViewById(R.id.actionBarSpacer).getHeight();
-                }
-
-                final View filterbar = activity.findViewById(R.id.filter_bar);
-                if (filterbar != null) {
-                    minHeight += filterbar.getHeight();
-                }
-
-                View v = activity.findViewById(R.id.distanceSupersize);
-                if (v.getVisibility() != View.VISIBLE) {
-                    v = activity.findViewById(R.id.target);
-                }
-                if (v.getVisibility() == View.VISIBLE) {
-                    minHeight += v.getHeight();
-                }
-
                 final View compass = mapView.findViewWithTag("GoogleMapCompass");
-                compass.animate().translationY(minHeight).start();
+                HideActionBarUtils.adaptLayoutForActionBarHelper(activity, actionBarShowing, compass);
             } catch (Exception ignore) {
             }
         }

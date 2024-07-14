@@ -3,6 +3,7 @@ package cgeo.geocaching.utils.formulas;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
@@ -60,7 +61,7 @@ public class Value {
         if (asString == null) {
             if (raw == null) {
                 asString = "";
-            } else if (raw instanceof Number && !(raw instanceof Integer)) {
+            } else if (raw instanceof Number && !(raw instanceof Integer) && !(raw instanceof BigInteger)) {
                 asString = DOUBLE_TO_STRING_FORMAT.format(((Number) raw).doubleValue());
             } else {
                 asString = raw instanceof String ? (String) raw : raw.toString();
