@@ -26,3 +26,6 @@
 - Novo: Filtro "Coordenadas corrigidas"
 - Alteração: Actualizado "targetSDK" para 34 para cumprir os próximos requisitos da Play Store
 - New: Added "none"-entry to selection of routing profiles
+- Change: Improve description for "maintenance" function (remove orphaned data)
+- New: Show warnings when HTTP error 429 occurs (Too many requests)
+- Fix: Flickering on cache list refresh
