@@ -881,8 +881,6 @@
     <string name="init_summary_plain_logs">Muestra los registros sin usar colores</string>
     <string name="init_rendertheme_folder">Carpeta de temas del mapa</string>
     <string name="init_maintenance">Mantenimiento</string>
-    <string name="init_maintenance_directories_note">c:geo almacena imágenes y otros archivos relacionados con un caché en una carpeta dedicada. En algunos casos (al importar/exportar la base de datos) esta carpeta puede contener archivos obsoletos que se pueden eliminar aquí.</string>
-    <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
     <string name="init_maintenance_start">Mantenimiento iniciado</string>
     <string name="init_maintenance_finished">Mantenimiento finalizado</string>
     <string name="init_location">Geolocalización</string>
@@ -1131,8 +1129,6 @@
     <string name="cache_dialog_offline_save_message">Guardando caché para usar desconectado…</string>
     <string name="cache_dialog_offline_drop_title">Desconectado</string>
     <string name="cache_dialog_offline_drop_message">Borrando caché de la memoria del dispositivo…</string>
-    <string name="cache_dialog_refresh_title">Actualizar</string>
-    <string name="cache_dialog_refresh_message">Recargando detalles del caché…</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Establecer como objetivo</string>
     <string name="cache_menu_navigation_drive">Navegación (Coche)</string>
@@ -1243,6 +1239,7 @@
     <string name="goto_targets_list">Cachés definidos por el usuario</string>
     <string name="clear_goto_history_title">Borrar historial de destinos</string>
     <string name="clear_goto_history">Esto eliminará todos los waypoints históricos excepto los cinco más recientes</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grados</string>
     <string name="cc_hint_minutes">minutos</string>
@@ -1399,8 +1396,6 @@
     <string name="map_show_other_title">Mostrar otros:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
-    <string name="google_maps_style_details">Detalles</string>
-    <string name="google_maps_option_group_theme">Opciones de Temas</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
