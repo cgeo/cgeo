@@ -602,7 +602,6 @@
     <string name="init_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_summary_plain_logs">Log bejegyzések mutatása színek nélkül</string>
     <string name="init_maintenance">Karbantartás</string>
-    <string name="init_maintenance_directories">Felesleges fájlok törlése</string>
     <string name="init_location">Helymeghatározás</string>
     <string name="init_location_note">A Google Play-szolgáltatásokat használó készülékeken a c:geo automatikusan egy jobb helymeghatározó technikát használhat. Ez azonban lehetetlenné teszi külső, BlueTooth-os GPS vevő alkalmazását.</string>
     <string name="init_location_googleplayservices">Google Play-szolgáltatások használata</string>
