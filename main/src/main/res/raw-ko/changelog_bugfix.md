@@ -1,4 +1,8 @@
 ##
+- Fix: `vanity` function failing on long strings
+- Fix: wrong parsing priority in formula backup
+
+##
 - 수정: 일부 문자를 두 번 세는 로그 길이 확인
 - 수정: hylly 웹사이트 변경에 적응합니다
 - 신규: Google 지도에 대한 추가 테마 옵션
