@@ -1109,8 +1109,6 @@
     <string name="init_mapWpScaling_title">Dimensionamento do ícone de Pontos Adicionais</string>
     <string name="init_mapWpScaling_description">Factor de dimensionamento para ícones de pontos adicionais (em %)</string>
     <string name="init_maintenance">Manutenção</string>
-    <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
-    <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
     <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
