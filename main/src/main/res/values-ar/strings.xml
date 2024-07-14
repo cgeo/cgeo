@@ -432,7 +432,6 @@
     <string name="init_plain_logs">سجلات بسيطة</string>
     <string name="init_summary_plain_logs">عرض إدخالات السجل بدون ألوان</string>
     <string name="init_maintenance">الصيانة</string>
-    <string name="init_maintenance_directories">حذف الملفات المعزولة</string>
     <string name="init_location">تحديد الموقع الجغرافي</string>
     <string name="init_location_note">على الأجهزة المرتبطة بخدماتGoogle Play، و بذالك c:geo يمكنه تلقائياً استخدام موفر تحديد الموقع الجغرافي. مع ذالك، هذا يمنع استخدام مستقبل GPS عن طريق البلوتوث.</string>
     <string name="init_location_googleplayservices">استخدم خدمات Google Play</string>
