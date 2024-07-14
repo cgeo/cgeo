@@ -7,6 +7,7 @@
 - Novo: Armazenamento/actualização de cache a partir de popup movido para segundo plano
 - Alteração: Pesquisar coordenadas: Mostrar direcção e distância para o alvo e não para a posição actual
 - New: Graphical D/T indicator in cache info sheet
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
@@ -14,6 +15,8 @@
 - Novo: Dimensionamento mais suave das imagens de registo
 - Alteração: Mudança do ícone "Registar visita" de lápis para um ícone smiley
 - Alteração: Alterado o ícone "editar listas" do lápis para lista + lápis
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
 
 ### Geral
 - Novo: Opção para definir o estado de "encontrado" das Adventure Lab manualmente ou automaticamente
