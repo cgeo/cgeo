@@ -1,4 +1,8 @@
 ##
+- Fix: `vanity` function failing on long strings
+- Fix: wrong parsing priority in formula backup
+
+##
 - Correcção: Verificação do comprimento do registo contava alguns caracteres duas vezes
 - Correcção: Adaptações à mudança do website hylly
 - Novo: Opções adicionais de temas para o Google Maps
