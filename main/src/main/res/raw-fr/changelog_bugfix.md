@@ -1,4 +1,8 @@
 ##
+- Fix: `vanity` function failing on long strings
+- Fix: wrong parsing priority in formula backup
+
+##
 - Fix: Log length check counting some characters twice
 - Fix: Adapt to hylly website change
 - New: Additional theming options for Google Maps
