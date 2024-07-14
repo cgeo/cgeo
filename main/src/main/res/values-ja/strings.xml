@@ -856,8 +856,6 @@
     <string name="init_summary_plain_logs">ログブックのフォントカラーを無効化</string>
     <string name="init_rendertheme_folder">地図テーマフォルダ</string>
     <string name="init_maintenance">メンテナンス</string>
-    <string name="init_maintenance_directories_note">c:geoは画像、ログの画像、キャッシュ関係ファイルを別々のフォルダに保存しますが、古いファイルが残っている時があります(例えば、データベースをインポート/エクスポートする時など)。その不必要なファイルを削除できます</string>
-    <string name="init_maintenance_directories">使われてないファイルを削除</string>
     <string name="init_maintenance_start">メンテナンスを開始しました</string>
     <string name="init_maintenance_finished">メンテナンスが完了しました</string>
     <string name="init_location">位置情報</string>
