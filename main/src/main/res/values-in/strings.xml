@@ -423,7 +423,6 @@
     <string name="init_plain_logs">Log polos</string>
     <string name="init_summary_plain_logs">Menampilkan entri log tanpa warna</string>
     <string name="init_maintenance">Pemeliharaan</string>
-    <string name="init_maintenance_directories">Hapus file yatim piatu</string>
     <string name="init_location">Geolokasi</string>
     <string name="init_location_note">Pada perangkat yang telah dilengkapi dengan Google Play Services, c:geo dapat secara otomatis menggunakan penyedia geolocation secara lebih baik. Namun, hal ini untuk mencegah penggunaan unit penerima GPS BlueTooth eksternal.</string>
     <string name="init_location_googleplayservices">Gunakan Layanan Google Play</string>
