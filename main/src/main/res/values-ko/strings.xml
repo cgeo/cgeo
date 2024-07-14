@@ -1103,8 +1103,6 @@
     <string name="init_mapWpScaling_title">지점 아이콘 크기 조정</string>
     <string name="init_mapWpScaling_description">지점 아이콘의 크기 조정 (%으로)</string>
     <string name="init_maintenance">유지보수</string>
-    <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
-    <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
     <string name="init_maintenance_start">유지 보수 시작됨</string>
     <string name="init_maintenance_ongoing">시간이 좀 걸릴 수 있습니다…</string>
     <string name="init_maintenance_finished">유지 보수 완료</string>
