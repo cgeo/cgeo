@@ -1118,8 +1118,6 @@
     <string name="init_mapWpScaling_title">Масштабирование иконок путевых точек</string>
     <string name="init_mapWpScaling_description">Масштабирующий коэффициент для иконок путевых точек (в %)</string>
     <string name="init_maintenance">Обслуживание</string>
-    <string name="init_maintenance_directories_note">c:geo сохраняет изображения и другие файлы, связанные с тайниками в отдельной папке. Иногда (например, при восстановлении резервной копии) эта папка может содержать устаревшие данные, которые могут быть удалены.</string>
-    <string name="init_maintenance_directories">Удалить устаревшие файлы</string>
     <string name="init_maintenance_start">Обслуживание начато</string>
     <string name="init_maintenance_ongoing">Это может занять некоторое время…</string>
     <string name="init_maintenance_finished">Обслуживание завершено</string>
