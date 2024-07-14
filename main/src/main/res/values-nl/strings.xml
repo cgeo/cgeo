@@ -1109,6 +1109,8 @@
     <string name="init_mapWpScaling_title">Waypoint pictogram schalen</string>
     <string name="init_mapWpScaling_description">Schaalfactor voor waypoint iconen (in %)</string>
     <string name="init_maintenance">Onderhoud</string>
+    <string name="init_maintenance_directories_note">Verwijderde caches worden intern door c:geo gedurende 72 uur gebufferd om onbedoeld dataverlies te voorkomen. Daarnaast slaat c:geo ook afbeeldingen en andere bestanden met betrekking tot caches op in speciale mappen. In sommige speciale gevallen kunnen dergelijke gegevens niet worden verwijderd, hoewel de cache niet meer is opgeslagen. Deze functie kan worden gebruikt om dergelijke verweesde gegevens op te schonen.</string>
+    <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
     <string name="init_maintenance_start">Onderhoud gestart</string>
     <string name="init_maintenance_ongoing">Dit kan enige tijd duren…</string>
     <string name="init_maintenance_finished">Onderhoud voltooid</string>
