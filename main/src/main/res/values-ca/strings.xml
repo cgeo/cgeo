@@ -1076,8 +1076,6 @@
     <string name="init_mapWpScaling_title">Escala de la icona de waypoint</string>
     <string name="init_mapWpScaling_description">Factor d\'escala per a les icones de waypoint (en %)</string>
     <string name="init_maintenance">Manteniment</string>
-    <string name="init_maintenance_directories_note">C: geo emmagatzema imatges i altres fitxers relacionats amb catxés en una carpeta dedicada. En alguns casos (per exemple, quan s’importa / exporta la base de dades), aquesta carpeta pot contenir fitxers obsolets que es poden suprimir aquí.</string>
-    <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
     <string name="init_maintenance_start">S\'ha iniciat el manteniment</string>
     <string name="init_maintenance_ongoing">Això pot trigar una mica…</string>
     <string name="init_maintenance_finished">Manteniment acabat</string>
