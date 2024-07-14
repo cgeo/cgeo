@@ -996,8 +996,6 @@
     <string name="init_mapShadingScale_title">Nepriehľadnosť tieňovania</string>
     <string name="init_mapShadingScale_description">Nepriehľadnosť vrstvy tieňovania, od neviditeľnej po vyššie hodnoty, ktoré zintenzívňujú tieňovanie, ale môžu vytvárať artefakty</string>
     <string name="init_maintenance">Údržba</string>
-    <string name="init_maintenance_directories_note">Aplikácia c:geo ukladá obrázky a ďalšie súbory týkajúce sa kešky vo vyhradenom priečinku. V niektorých prípadoch (napríklad pri importe/exporte databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete odstrániť tu.</string>
-    <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
     <string name="init_maintenance_start">Údržba spustená</string>
     <string name="init_maintenance_ongoing">Môže to chvíľu trvať…</string>
     <string name="init_maintenance_finished">Údržba dokončená</string>
@@ -1279,8 +1277,6 @@
     <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
     <string name="cache_dialog_offline_drop_title">Offline</string>
     <string name="cache_dialog_offline_drop_message">Odstraňovanie skrýše z pamäte zariadenia…</string>
-    <string name="cache_dialog_refresh_title">Obnoviť</string>
-    <string name="cache_dialog_refresh_message">Aktualizujem detaily skrýše…</string>
     <string name="cache_menu_navigate">Navigovať</string>
     <string name="cache_menu_target">Nastaviť ako cieľ</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
@@ -1419,6 +1415,7 @@
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
+    <!-- html styles -->
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupne</string>
     <string name="cc_hint_minutes">minúty</string>
@@ -1609,8 +1606,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Téma zariadenia (deň/noc)</string>
-    <string name="google_maps_style_details">Detail</string>
-    <string name="google_maps_option_group_theme">Nastavenia Témy</string>
     <!-- search -->
     <string name="geo_search_label">Hľadať kešky v okolí</string>
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
