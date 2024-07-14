@@ -930,8 +930,6 @@
     <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
     <string name="init_mapShadingScale_description">Αδιαφάνεια του στρώματος σκίασης, από αόρατες έως υψηλότερες τιμές που εντείνουν τη σκίαση, αλλά μπορεί να παράγει οπτικά λαθη</string>
     <string name="init_maintenance">Συντήρηση</string>
-    <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
-    <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
     <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
     <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
