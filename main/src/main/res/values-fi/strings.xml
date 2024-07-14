@@ -1034,8 +1034,6 @@
     <string name="init_mapShadingScale_title">Varjostuksen läpinäkyvyys</string>
     <string name="init_mapShadingScale_description">Varjostuskerroksen läpikuultavuus näkymättömistä korkeampiin arvoihin tehostaen varjostusta, mutta se voi tuottaa virheitä</string>
     <string name="init_maintenance">Ylläpito</string>
-    <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
-    <string name="init_maintenance_directories">Poista orpotiedostot</string>
     <string name="init_maintenance_start">Huolto aloitettu</string>
     <string name="init_maintenance_ongoing">Tämä voi kestää jonkin aikaa…</string>
     <string name="init_maintenance_finished">Huolto suoritettu</string>
