@@ -7,7 +7,7 @@
 - Nieuw: Cache opslaan/vernieuwen van popup verplaatst naar de achtergrond
 - Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
 - Nieuw: Grafische D/T indicator in het cache informatieblad
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Oplossing: Kompasroos verborgen wanneer de filterbalk zichtbaar is (UnifiedMap)
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
@@ -15,8 +15,8 @@
 - Nieuw: Soepeler schalen van log afbeeldingen
 - Wijziging: Wijzig "gelogd" icoon van potlood naar smiley icoon
 - Wijziging: "Bewerk lijsten" pictogram van potlood naar lijst + potlood wijzigen
-- Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
+- Oplossing: vanity functie mislukt op lange tekenreeksen
+- Oplossing: Verkeerde verwerkingsprioriteit in de back-up van de formule
 
 ### Algemeen
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
