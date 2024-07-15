@@ -139,7 +139,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
 
         //try to apply stored value
-        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
+        ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme(Settings.getTileProvider()));
 
         if (selectedTheme == null) {
             applyDefaultTheme(map, tileProvider);
@@ -236,7 +236,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         if (!tileProvider.supportsThemes()) {
             return;
         }
-        final String currentThemeId = Settings.getSelectedMapRenderTheme();
+        final String currentThemeId = Settings.getSelectedMapRenderTheme(tileProvider);
 
         final List<String> names = new ArrayList<>();
         names.add(activity.getString(R.string.switch_default));
@@ -278,7 +278,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     public boolean themeOptionsAvailable() {
-        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme());
+        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme(Settings.getTileProvider()));
     }
 
     /**
@@ -352,7 +352,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     private static void setSelectedTheme(final ThemeData theme) {
-        Settings.setSelectedMapRenderTheme(theme == null ? StringUtils.EMPTY : theme.id);
+        Settings.setSelectedMapRenderTheme(Settings.getTileProvider().getId(), theme == null ? StringUtils.EMPTY : theme.id);
     }
 
     /**
@@ -602,7 +602,7 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     public static RenderThemeType getRenderThemeType() {
-        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
+        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme(Settings.getTileProvider());
         for (MapsforgeThemeHelper.RenderThemeType rtt : MapsforgeThemeHelper.RenderThemeType.values()) {
             for (String searchPath : rtt.searchPaths) {
                 if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
