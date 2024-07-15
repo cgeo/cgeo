@@ -1659,6 +1659,16 @@ public class Settings {
         return getString(R.string.pref_renderthemefile, "");
     }
 
+    /**
+     * Variant used by UnifiedMap: try tileprovider-specifc first
+     */
+    public static String getSelectedMapRenderTheme(final AbstractTileProvider tileProvider) {
+        final String temp = getStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider.getId(), "");
+        final String temp2 = StringUtils.isNotBlank(temp) ? temp : getSelectedMapRenderTheme();
+        Log.e("getTheme: " + temp2);
+        return temp2;
+    }
+
     public static boolean isDefaultMapRenderTheme() {
         return StringUtils.isBlank(getSelectedMapRenderTheme());
     }
@@ -1673,6 +1683,15 @@ public class Settings {
      */
     public static void setSelectedMapRenderTheme(final String customRenderThemeFile) {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
+    }
+
+    /**
+     * variant used by UnifiedMap: store tileprovider-specific (additionally)
+     */
+    public static void setSelectedMapRenderTheme(final String tileProvider, final String customRenderThemeFile) {
+        Log.e("setTheme: " + tileProvider + " / " + customRenderThemeFile);
+        setSelectedMapRenderTheme(customRenderThemeFile);
+        putStringDirect(CgeoApplication.getInstance().getString(R.string.pref_renderthemefile) + "-" + tileProvider, customRenderThemeFile);
     }
 
     /**

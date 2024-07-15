@@ -327,6 +327,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         tileProvider = newSource;
         mapFragment = tileProvider.createMapFragment();
+        Settings.setTileProvider(newSource); // store new tileProvider, so that next getRenderTheme retrieves correct tileProvider-specific theme
 
         if (oldFragment != null) {
             mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, true, mapState));
