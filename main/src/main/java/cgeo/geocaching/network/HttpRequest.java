@@ -1,7 +1,9 @@
 package cgeo.geocaching.network;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.RxOkHttpUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -38,6 +40,8 @@ public class HttpRequest {
     private static final ObjectMapper JSON_MAPPER = JsonUtils.mapper;
 
     private static final String LOGPRAEFIX = "HTTP-";
+    public static final String HTTP429 = "HTTP429";
+    public static final String HTTP429_ADDRESS = "HTTP429ADDRESS";
 
     private Method method = null;
     private String uriBase;
@@ -148,7 +152,7 @@ public class HttpRequest {
             }
             if (response.getStatusCode() == 429) {
                 Log.w("Request throttled: " + this.getRequestUrl());
-                ActivityMixin.showApplicationToast("Please slow down, too many requests to " + HttpUrl.parse(getRequestUrl()).host() + "/" + HttpUrl.parse(getRequestUrl()).encodedPath());
+                LifecycleAwareBroadcastReceiver.sendBroadcast(CgeoApplication.getInstance(), HTTP429, HTTP429_ADDRESS, HttpUrl.parse(getRequestUrl()).host() + "/" + HttpUrl.parse(getRequestUrl()).encodedPath());
             }
             return mappedResponse;
         });

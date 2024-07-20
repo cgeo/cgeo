@@ -2575,6 +2575,7 @@
     </plurals>
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
+    <string name="http429_warning">Please slow down, too many requests to %s</string>
 
     <string name="list_list_headline">Lists:</string>
     <plurals name="extract_waypoints_result">

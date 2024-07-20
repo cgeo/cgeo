@@ -34,6 +34,7 @@ import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.network.HttpRequest;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.service.CacheDownloaderService;
@@ -280,7 +281,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 lastElevationChartRoute = null;
             }
         });
-
+        add429observer();
         findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> {
             if (mapFragment != null) {
                 mapFragment.zoomInOut(true);

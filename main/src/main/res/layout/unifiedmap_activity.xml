@@ -29,6 +29,22 @@
         <include layout="@layout/map_zoom_control" />
         <include layout="@layout/map_progressbar" />
         <include layout="@layout/map_detailsfragment" />
+
+        <TextView
+            android:id="@+id/http429warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/distanceinfo"
+
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:textFontWeight="800"
+            android:background="@drawable/icon_bcg"
+            android:gravity="center"
+            android:text="@string/http429_warning"
+
+            android:visibility="gone"/>
+
     </RelativeLayout>
 
     <RelativeLayout
