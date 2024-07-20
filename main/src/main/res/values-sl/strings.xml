@@ -648,6 +648,7 @@
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
+    <string name="google_maps_style_details">Podrobnosti</string>
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
