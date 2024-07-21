@@ -10,6 +10,7 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.permission.PermissionContext;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -32,6 +33,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.view.View;
 import android.widget.CheckBox;
@@ -123,20 +125,23 @@ public class DownloaderUtils {
                     final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                     if (null != downloadManager) {
                         final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
-                        if (downloadStartedCallback != null) {
-                            downloadStartedCallback.accept(id);
-                        }
-
-                        // check for required extra files (e. g.: map theme)
-                        final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
-                        if (downloader != null) {
-                            final DownloadDescriptor extraFile = downloader.getExtrafile(activity, uri);
-                            if (extraFile != null) {
-                                addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
+                        if (id != -1) {
+                            if (downloadStartedCallback != null) {
+                                downloadStartedCallback.accept(id);
                             }
-                        }
 
-                        ActivityMixin.showShortToast(activity, R.string.download_started);
+                            // check for required extra files (e. g.: map theme)
+                            final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
+                            if (downloader != null) {
+                                final DownloadDescriptor extraFile = downloader.getExtrafile(activity, uri);
+                                if (extraFile != null) {
+                                    addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
+                                }
+                            }
+                            ActivityMixin.showShortToast(activity, R.string.download_started);
+                        } else {
+                            ActivityMixin.showShortToast(activity, R.string.download_enqueing_error);
+                        }
                     } else {
                         ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
                     }
@@ -220,6 +225,11 @@ public class DownloaderUtils {
     }
 
     private static long addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Build.VERSION.SDK_INT <= Build.VERSION_CODES.P && !PermissionContext.LEGACY_WRITE_EXTERNAL_STORAGE.hasAllPermissions()) {
+            // those versions still need WRITE_EXTERNAL_STORAGE permission to enqueue a download
+            SimpleDialog.ofContext(activity).setTitle(TextParam.id(R.string.permission_missing)).setMessage(TextParam.id(R.string.storage_permission_needed)).show();
+            return -1;
+        }
         final DownloadManager.Request request = new DownloadManager.Request(uri)
                 .setTitle(filename)
                 .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
