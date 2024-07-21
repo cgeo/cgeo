@@ -150,8 +150,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
     private String lastElevationChartRoute = null; // null=none, empty=individual route, other=track
-    private boolean waypointsFilteredDueToLimit = false;
-    private int lastCacheCount = -1;
 
     private UnifiedMapType mapType = null;
     private MapMode compatibilityMapMode = MapMode.LIVE;
@@ -375,7 +373,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
-        waypointsFilteredDueToLimit = false;
         switch (mapType.type) {
             case UMTT_PlainMap:
                 // restore last saved position and zoom
@@ -531,7 +528,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 wps.addAll(waypoints);
             });
         } else {
-            waypointsFilteredDueToLimit = true;
             viewModel.waypoints.notifyDataChanged();
         }
     }
