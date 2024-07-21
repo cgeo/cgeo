@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -106,7 +107,12 @@ public class CacheListActionBarChooser {
 
         final AbstractList list = AbstractList.getListById(listId);
         if (list != null) {
-            TextParam.text(list.getTitle()).setImage(StoredList.UserInterface.getImageForList(list, false)).applyTo(titleTv);
+            final ImageParam ip = StoredList.UserInterface.getImageForList(list, false);
+            if (ip.isReferencedById()) { // see #15883
+                TextParam.text(list.getTitle()).setImage(ip).setImageTint(ColorUtils.colorFromResource(R.color.colorTextActionBar)).applyTo(titleTv);
+            } else {
+                TextParam.text(list.getTitle()).setImage(ip).applyTo(titleTv);
+            }
             if (list.getNumberOfCaches() >= 0) {
                 subtitleTv.setVisibility(View.VISIBLE);
                 subtitleTv.setText(getCacheListSubtitle(list));
