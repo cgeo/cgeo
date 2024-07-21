@@ -252,7 +252,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         if (downloadQuery.size() > 0) {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
-        } else {
+        } else if (cachesDownloaded.get() != 1) { // see #15881
             showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded.get(), cachesDownloaded.get()));
         }
         downloadQuery.clear();
