@@ -1757,11 +1757,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hint.setVisibility(View.VISIBLE);
                 if (Settings.getHintAsRot13()) {
                     binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
-                    binding.hint.setClickable(true);
-                    binding.hint.setOnClickListener(new DecryptTextClickListener(binding.hint));
-                    binding.hintBox.setOnClickListener(new DecryptTextClickListener(binding.hint));
-                    binding.hintBox.setClickable(true);
                 }
+                final DecryptTextClickListener decryptListener = new DecryptTextClickListener(binding.hint);
+                binding.hint.setOnClickListener(decryptListener);
+                binding.hint.setClickable(true);
+                binding.hintBox.setOnClickListener(decryptListener);
+                binding.hintBox.setClickable(true);
             } else {
                 binding.hint.setVisibility(View.GONE);
                 binding.hint.setClickable(false);
