@@ -2687,4 +2687,5 @@
     <string name="smiley_disapprove">Ej godkänd</string>
     <string name="smiley_question">Fråga</string>
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
