@@ -2930,4 +2930,5 @@
         <item quantity="one">%d ongelezen bericht in berichtencentrum</item>
         <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
