@@ -2845,4 +2845,5 @@
     <!-- message center notifications -->
     <string name="mcpolling_title">Centre des messages</string>
     <string name="mcpolling_summary">Vérifier le centre des messages pour les messages entrants à intervalles réguliers</string>
+    <!-- db inspection -->
 </resources>
