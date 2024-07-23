@@ -2596,6 +2596,7 @@
     <string name="list_confirm_debug_message">The debug mode causes instabilities! Do you want to deactivate the debug mode?</string>
 
     <!-- permission handling -->
+    <string name="permission_missing">Missing permission</string>
     <string name="permission_ask_again">Ask me again</string>
     <string name="permission_goto_app_details">Open Application Info</string>
 
@@ -2771,6 +2772,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Some download sources support additional files not used by c:geo. Keep those extra files in system\'s download folder instead of deleting it</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
+    <string name="download_enqueing_error">Error on trying to start download</string>
     <string name="download_none_selected">No files selected for download</string>
     <string name="downloadmap_target_not_writable">The selected target \"%s\" is not writable - the downloaded map file is saved in the system download folder and must be moved manually to the map folder.</string>
     <string name="downloadmap_allow_metered_network">Allow download over metered network (e.g.: mobile connection)</string>

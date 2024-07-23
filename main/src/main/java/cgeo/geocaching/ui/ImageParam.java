@@ -73,6 +73,10 @@ public class ImageParam {
         this.drawable = drawable;
     }
 
+    public boolean isReferencedById() {
+        return drawableId != -1;
+    }
+
     public void applyTo(final ImageView view) {
         if (this.drawable != null) {
             view.setImageDrawable(this.drawable);
