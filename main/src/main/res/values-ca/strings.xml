@@ -2828,4 +2828,5 @@
         <item quantity="one">%d missatge no llegit al centre de missatges</item>
         <item quantity="other">%d missatges no llegits al centre de missatges</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
