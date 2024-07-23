@@ -2930,4 +2930,5 @@
         <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
         <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
