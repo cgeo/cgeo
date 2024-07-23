@@ -2896,4 +2896,5 @@
         <item quantity="one">%d messaggio non letto nel centro messaggi</item>
         <item quantity="other">%d messaggi non letti nel centro messaggi</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
