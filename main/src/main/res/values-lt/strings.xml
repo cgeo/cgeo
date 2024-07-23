@@ -2752,4 +2752,5 @@
     <string name="smiley_disapprove">Nepatvirtinta</string>
     <string name="smiley_question">Klausimas</string>
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
