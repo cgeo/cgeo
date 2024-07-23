@@ -2962,4 +2962,5 @@
         <item quantity="many">%d непрочитанных сообщений в центре сообщений</item>
         <item quantity="other">%d непрочитанных сообщений в центре сообщений</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
