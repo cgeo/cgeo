@@ -2299,6 +2299,7 @@
     <string name="init_confirm_debug">c:geo wordt uitgevoerd in de foutopsporingsmodus!</string>
     <string name="list_confirm_debug_message">De debug-modus zorgt voor instabiliteit! Wil je de debug-modus uitschakelen?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Machtiging ontbreekt</string>
     <string name="permission_ask_again">Opnieuw vragen</string>
     <string name="permission_goto_app_details">Open Applicatie Info</string>
     <string name="permission_contacts_read_explanation_title">Contacten leesmachtiging</string>
@@ -2453,6 +2454,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Sommige download bronnen ondersteunen extra bestanden die niet gebruikt worden door c:geo. Houd deze extra bestanden in de downloadmap van het systeem in plaats van te verwijderen</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>
+    <string name="download_enqueing_error">Fout bij het starten van de download</string>
     <string name="download_none_selected">Geen bestanden geselecteerd om te downloaden</string>
     <string name="downloadmap_target_not_writable">Het geselecteerde doel \"%s\" is niet schrijfbaar - het gedownloade kaartbestand wordt opgeslagen in de systeem downloads map en dient handmatig te worden verplaatst naar de kaartenmap.</string>
     <string name="downloadmap_allow_metered_network">Download via data netwerk toestaan (bijv. mobiele verbinding met datalimiet)</string>
@@ -2931,4 +2933,13 @@
         <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
     </plurals>
     <!-- db inspection -->
+    <string name="view_database">Bekijk database</string>
+    <string name="dbi_select_title">(Selecteer tabel)</string>
+    <string name="dbi_columnproperties_title">Kolom-eigenschappen</string>
+    <string name="dbi_columnproperties_message">Veld: %1$s\nType: %2$s\nOpslag: %3$s</string>
+    <string name="dbi_edit_title">Bewerk \"%1$s\" van rij %2$d\"</string>
+    <string name="dbi_edit_ok">Veld bijgewerkt</string>
+    <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
+    <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
+    <string name="dbi_search_title">Zoek naar</string>
 </resources>
