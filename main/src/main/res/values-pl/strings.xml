@@ -2357,6 +2357,7 @@
     <string name="init_confirm_debug">c:geo jest uruchomiony w trybie debugowania!</string>
     <string name="list_confirm_debug_message">Tryb debugowania może powodować niestabilność. Czy chcesz wyłączyć ten tryb?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Brak uprawnień</string>
     <string name="permission_ask_again">Zapytaj mnie ponownie</string>
     <string name="permission_goto_app_details">Otwórz informacje o aplikacji</string>
     <string name="permission_contacts_read_explanation_title">Uprawnienia dostępu do kontaktów</string>
@@ -2513,6 +2514,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Niektóre źródła obsługują dodatkowe pliki nieużywane przez c:geo. Zachowaj te dodatkowe pliki w folderze pobierania systemu zamiast usuwać je</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>
+    <string name="download_enqueing_error">Błąd przy próbie rozpoczęcia pobierania</string>
     <string name="download_none_selected">Nie wybrano plików do pobrania</string>
     <string name="downloadmap_target_not_writable">Wybrany cel \"%s\" nie jest zapisywalny - pobrany plik mapy został zapisany w systemowym folderze pobierania i musi być przeniesiony ręcznie do folderu z mapami.</string>
     <string name="downloadmap_allow_metered_network">Zezwalaj na pobieranie przez dowolną sieć (np. połączenie komórkowe)</string>
@@ -2993,4 +2995,13 @@
         <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
     </plurals>
     <!-- db inspection -->
+    <string name="view_database">Zobacz bazę danych</string>
+    <string name="dbi_select_title">(Zaznacz tabelę)</string>
+    <string name="dbi_columnproperties_title">Właściwości kolumny</string>
+    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nMagazynowanie: %3$s</string>
+    <string name="dbi_edit_title">Edytuj \"%1$s\" wiersza %2$d\"</string>
+    <string name="dbi_edit_ok">Pole zaktualizowane</string>
+    <string name="dbi_edit_error">Błąd podczas aktualizacji pola</string>
+    <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
+    <string name="dbi_search_title">Szukaj</string>
 </resources>
