@@ -32,3 +32,6 @@
 - Zmiana: Poprawienie opisu funkcji w dziale „Dane offline – Konserwacja” (Usuń nieaktualne dane)
 - Nowość: Pokaż ostrzeżenia, gdy wystąpi błąd HTTP 429 (Too wiele żądań)
 - Poprawka: Mruganie podczas odświeżania listy skrytek
+
+### Zmiany nie uwzględnione w bieżącej wersji beta
+- Nowość: Zapisuj motyw mapy osobno dla każdego dostawcy kafelków (UnifiedMap)
