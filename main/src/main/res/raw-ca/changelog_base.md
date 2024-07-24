@@ -32,3 +32,6 @@
 - Change: Improve description for "maintenance" function (remove orphaned data)
 - New: Show warnings when HTTP error 429 occurs (Too many requests)
 - Fix: Flickering on cache list refresh
+
+### Changes not included in current beta version
+- New: Store map theme per tile provider (UnifiedMap)
