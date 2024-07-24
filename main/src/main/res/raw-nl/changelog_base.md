@@ -32,3 +32,6 @@
 - Wijziging: Verbeter de omschrijving voor de "onderhouds" functie (verwijder verweesde gegevens)
 - Nieuw: Toon waarschuwingen wanneer HTTP fout 429 optreedt (Te veel verzoeken)
 - Oplossing: Knipperen bij het vernieuwen van de cache lijst
+
+### Wijzigingen niet opgenomen in huidige bètaversie
+- Nieuw: Kaartthema opslaan per tegelprovider (UnifiedMap)
