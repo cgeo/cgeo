@@ -54,6 +54,7 @@ import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.EnumValueMapper;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
@@ -2620,7 +2621,7 @@ public class DataStore {
                 final SQLiteStatement insertTrailpoint = PreparedStatement.INSERT_TRAILPOINT.getStatement();
                 insertTrailpoint.bindDouble(1, location.getLatitude());
                 insertTrailpoint.bindDouble(2, location.getLongitude());
-                insertTrailpoint.bindDouble(3, location.getAltitude());
+                insertTrailpoint.bindDouble(3, GeoHeightUtils.getAltitude(location));
                 insertTrailpoint.bindLong(4, System.currentTimeMillis());
                 insertTrailpoint.executeInsert();
                 database.setTransactionSuccessful();

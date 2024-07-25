@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -95,7 +96,7 @@ public class PositionLayer extends Layer {
             canvas.drawBitmap(localArrow, left, top);
 
             if (coordinates.hasAltitude() && Settings.showElevation()) {
-                final Bitmap elevationInfo = new AndroidBitmap(MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), localArrow.getHeight(), coordinates.getAltitude()));
+                final Bitmap elevationInfo = new AndroidBitmap(MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), localArrow.getHeight(), GeoHeightUtils.getAltitude(coordinates)));
                 canvas.drawBitmap(elevationInfo, centerX - elevationInfo.getWidth() / 2, centerY - elevationInfo.getHeight() / 2);
             }
         } else {
