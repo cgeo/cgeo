@@ -58,7 +58,7 @@ public class DownloaderTest {
         assertThat(list.get(0).isDir()).isTrue();
 
         // number of dirs found
-        assertThat(count(list, true)).isEqualTo(5);
+        assertThat(count(list, true)).isEqualTo(7);
 
         // number of non-dirs found
         assertThat(count(list, false)).isBetween(49, 53);
