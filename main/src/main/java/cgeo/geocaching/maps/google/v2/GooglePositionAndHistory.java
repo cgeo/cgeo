@@ -19,6 +19,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemTestLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
@@ -342,7 +343,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
 
         if (coordinates.hasAltitude() && Settings.showElevation()) {
-            final Bitmap elevationInfo = MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), positionMarker.getIntrinsicHeight(), coordinates.getAltitude());
+            final Bitmap elevationInfo = MapUtils.getElevationBitmap(CgeoApplication.getInstance().getResources(), positionMarker.getIntrinsicHeight(), GeoHeightUtils.getAltitude(coordinates));
             positionObjs.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromBitmap(elevationInfo))
                     .position(latLng)

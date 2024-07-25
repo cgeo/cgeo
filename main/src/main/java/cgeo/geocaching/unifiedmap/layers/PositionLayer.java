@@ -11,6 +11,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -57,7 +58,7 @@ public class PositionLayer {
                 layer.put(KEY_ELEVATION,
                         GeoPrimitive.createMarker(new Geopoint(locationWrapper.location), GeoIcon.builder()
                                         .setFlat(false)
-                                        .setBitmap(MapUtils.getElevationBitmap(activity.getResources(), markerPosition.getHeight(), locationWrapper.location.getAltitude()))
+                                        .setBitmap(MapUtils.getElevationBitmap(activity.getResources(), markerPosition.getHeight(), GeoHeightUtils.getAltitude(locationWrapper.location)))
                                         .build())
                                 .buildUpon().setZLevel(LayerHelper.ZINDEX_POSITION_ELEVATION).build());
             }

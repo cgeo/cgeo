@@ -1,5 +1,7 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.utils.GeoHeightUtils;
+
 import android.location.Location;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -38,7 +40,7 @@ public class TrailHistoryElement implements Parcelable {
     }
 
     public double getAltitude() {
-        return location.getAltitude();
+        return GeoHeightUtils.getAltitude(location);
     }
 
     public long getTimestamp() {
