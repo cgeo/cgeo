@@ -35,3 +35,4 @@
 
 ### Changes not included in current beta version
 - New: Store map theme per tile provider (UnifiedMap)
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
