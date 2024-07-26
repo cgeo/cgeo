@@ -35,3 +35,4 @@
 
 ### Zmiany nie uwzględnione w bieżącej wersji beta
 - Nowość: Zapisuj motyw mapy osobno dla każdego dostawcy kafelków (UnifiedMap)
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
