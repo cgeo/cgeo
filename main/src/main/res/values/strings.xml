@@ -2892,6 +2892,8 @@
     <string name="redo">Redo</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimize</string>
+    <string name="expand">Expand</string>
+    <string name="close">Close</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
