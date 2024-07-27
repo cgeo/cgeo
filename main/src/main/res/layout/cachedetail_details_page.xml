@@ -108,7 +108,7 @@
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/ic_menu_watch"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
 
                 <Button
                     android:id="@+id/remove_from_watchlist"
@@ -159,7 +159,8 @@
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/icon_whereyougo"
                     android:visibility="visible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+                    android:hint="@string/cache_whereyougo_start"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -247,7 +248,8 @@
                     android:layout_alignParentRight="true"
                     app:icon="@drawable/icon_gc_alc"
                     android:visibility="visible"
-                    tools:visibility="visible"/>
+                    tools:visibility="visible"
+                    android:hint="@string/cache_alc_start"/>
             </RelativeLayout>
         </LinearLayout>
 
