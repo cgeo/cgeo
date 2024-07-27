@@ -70,6 +70,7 @@ public class IndividualRoute extends Route implements Parcelable {
             Log.d("[RouteTrackDebug] Individual route: Removed first element from route (" + item.getIdentifier() + ")");
         }
         ViewUtils.showShortToast(context, result == ToggleItemState.ADDED ? R.string.individual_route_added : result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint);
+        updateRoute(routeUpdater);
         saveRoute();
     }
 
