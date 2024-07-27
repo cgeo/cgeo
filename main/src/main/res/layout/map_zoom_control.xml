@@ -14,6 +14,7 @@
         <ImageButton
             android:id="@+id/map_zoomin"
             android:src="@drawable/map_zoomin"
+            android:contentDescription="@string/zoom_in"
             style="@style/map_quicksettingsbutton" />
     </LinearLayout>
     <LinearLayout
@@ -28,6 +29,7 @@
         <ImageButton
             android:id="@+id/map_zoomout"
             android:src="@drawable/map_zoomout"
+            android:contentDescription="@string/zoom_out"
             style="@style/map_quicksettingsbutton" />
     </LinearLayout>
 </RelativeLayout>
