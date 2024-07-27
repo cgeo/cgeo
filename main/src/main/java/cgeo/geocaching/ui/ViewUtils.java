@@ -329,6 +329,7 @@ public class ViewUtils {
             itemBinding.itemInfo.setOnClickListener(v -> SimpleDialog.of(activity).setMessage(infoText).show());
         }
         itemView.setOnClickListener(v -> itemBinding.itemCheckbox.toggle());
+        itemBinding.itemCheckbox.setContentDescription(itemBinding.itemText.getText());
 
         return new ImmutablePair<>(itemView, itemBinding.itemCheckbox);
     }
