@@ -99,7 +99,8 @@ public class VariableList {
     public Map<String, String> toMap() {
         final Map<String, String> result = new HashMap<>();
         for (String varName : variableList) {
-            result.put(varName, getState(varName).getFormulaString());
+            final String varValue = getState(varName).getFormulaString();
+            result.put(varName, StringUtils.isBlank(varValue) ? "" : varValue);
         }
         return result;
     }
