@@ -23,6 +23,7 @@
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:paddingRight="12dp"
+        android:hint="@string/search"
         android:src="@drawable/ic_menu_search"
     />
 
