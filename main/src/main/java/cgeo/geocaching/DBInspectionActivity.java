@@ -116,20 +116,19 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
     }
 
     @Override
-    protected boolean onFieldLongClickListener(final ColumnInfo columnInfo, final int row, final int inputType, final String currentValue) {
-        Dialogs.input(this, String.format(getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
-            if (persistData(row, columnInfo.name, newValue)) {
-                ViewUtils.showShortToast(this, R.string.dbi_edit_ok);
-            } else {
-                ViewUtils.showToast(this, R.string.dbi_edit_error);
-            }
-        });
-        return true;
-    }
-
-    @Override
-    protected boolean onFieldLongClickPKListener(final ColumnInfo columnInfo) {
-        ViewUtils.showShortToast(null, String.format(getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
+    protected boolean onFieldLongClickListener(final ColumnInfo columnInfo, final int row, final int inputType, final String currentValue, final boolean isPartOfPrimaryKey) {
+        if (isPartOfPrimaryKey) {
+            ViewUtils.showShortToast(null, String.format(getString(R.string.dbi_edit_error_pkfield), columnInfo.name));
+            return true;
+        } else {
+            Dialogs.input(this, String.format(getString(R.string.dbi_edit_title), columnInfo.name, row), currentValue, null, inputType, 1, 1, newValue -> {
+                if (persistData(row, columnInfo.name, newValue)) {
+                    ViewUtils.showShortToast(this, R.string.dbi_edit_ok);
+                } else {
+                    ViewUtils.showToast(this, R.string.dbi_edit_error);
+                }
+            });
+        }
         return true;
     }
 
