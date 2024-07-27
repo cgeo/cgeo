@@ -52,25 +52,29 @@
             app:icon="@drawable/ic_menu_manage_list"
             android:layout_marginLeft="0dp"
             android:visibility="gone"
-            tools:visibility="visible"/>
+            tools:visibility="visible"
+            android:hint="@string/menu_lists"/>
 
         <Button
             android:id="@+id/offline_refresh"
             style="@style/button_icon"
             app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="0dp"/>
+            android:layout_marginLeft="0dp"
+            android:hint="@string/cache_offline_refresh"/>
 
         <Button
             android:id="@+id/offline_drop"
             style="@style/button_icon"
             app:icon="@drawable/ic_menu_delete"
-            android:layout_marginLeft="0dp"/>
+            android:layout_marginLeft="0dp"
+            android:hint="@string/cache_offline_delete"/>
 
         <Button
             android:id="@+id/offline_store"
             style="@style/button_icon"
             app:icon="@drawable/ic_menu_save"
-            android:layout_marginLeft="0dp"/>
+            android:layout_marginLeft="0dp"
+            android:hint="@string/cache_offline_store"/>
     </LinearLayout>
 
 </RelativeLayout>
