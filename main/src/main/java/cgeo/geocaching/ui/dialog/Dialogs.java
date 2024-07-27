@@ -247,8 +247,10 @@ public final class Dialogs {
     private static void updateActionbarAfterStateChange(final BottomSheetDialog dialog, final BottomsheetDialogWithActionbarBinding dialogView) {
         if (dialog.getBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED) {
             dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_more_white);
+            dialogView.toolbar.setNavigationContentDescription(dialog.getContext().getString(R.string.close));
         } else {
             dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
+            dialogView.toolbar.setNavigationContentDescription(dialog.getContext().getString(R.string.expand));
         }
     }
 
