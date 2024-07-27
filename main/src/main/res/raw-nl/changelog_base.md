@@ -35,4 +35,5 @@
 
 ### Wijzigingen niet opgenomen in huidige bètaversie
 - Nieuw: Kaartthema opslaan per tegelprovider (UnifiedMap)
-- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
+- Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
