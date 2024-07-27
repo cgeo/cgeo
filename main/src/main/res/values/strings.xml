@@ -1686,8 +1686,6 @@
     <string name="cache_clear_recently_viewed">clear</string>
 
     <string name="cachedetails_progress_refresh">%s refreshed</string>
-    <string name="cachedetails_hint_watch">Watchlist</string>
-    <string name="cachedetails_hint_unwatch">Remove from watchlist</string>
     <string name="cachedetails_progress_watch">Added to watchlist</string>
     <string name="cachedetails_progress_unwatch">Removed from watchlist</string>
     <string name="cachedetails_progress_favorite">Added to favorites</string>
@@ -1977,7 +1975,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
-    <string name="google_maps_style_details">Details</string>
     <string name="google_maps_option_group_map">Map Options</string>
     <string name="google_maps_option_show_traffic">Show Traffic</string>
     <string name="google_maps_option_show_buildings">Show 3D buildings</string>
