@@ -306,6 +306,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         // This cross-converting solves a tinting issue described in #11715. Sorry, it is ugly but the only possibility we have found so far.
         dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable())));
         dialogButton.setIconTint(null);
+        dialogButton.setHint(R.string.caches_set_cache_icon);
         dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
             dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE, Settings.getIconScaleEverywhere()).getDrawable());
