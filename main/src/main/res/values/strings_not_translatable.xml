@@ -75,21 +75,18 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2023-01 to 2023-12 -->
+    <!-- currently listed: contributions 2023-07 to 2024-07 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
-    kumy|https://github.com/kumy|c|
+    kumy|https://github.com/kumy|ci|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
     mortenbruhn|https://github.com/mortenbruhn|c|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    mzylowski|https://github.com/mzylowski|c|
-    NotWoods|https://github.com/NotWoods|c|
-    technetium|https://github.com/technetium|c|
     UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
@@ -133,8 +130,10 @@
     Matze2||c|
     MichielK||c|
     msperkowski|||
+    mzylowski|https://github.com/mzylowski|c|
     ncorreia||c|
     nmrsmn||c|
+    NotWoods|https://github.com/NotWoods|c|
     okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     osmpaws|https://github.com/osmpaws|c|
@@ -145,13 +144,14 @@
     Rainer S.||c|
     Ray||c|
     RoadRunner-||c|
-    SammysHP|https://www.sammyshp.de/|i|
-    Samuel Tardieu|https://www.rfc1149.net/sam.html||
+    SammysHP|https://www.sammyshp.de/|ci|
+    Samuel Tardieu|https://www.rfc1149.net/sam.html|c|
     S-Bartfast|https://github.com/S-Bartfast|c|
     SchoolGuy|https://github.com/SchoolGuy|c|
     stephanme/Geoteufel||c|
     Surfoo||c|
     TakoTheDank|https://github.com/TacoTheDank|c|
+    technetium|https://github.com/technetium|c|
     thiasB||c|
     Volthai7us||c
     YraFyra||c|
