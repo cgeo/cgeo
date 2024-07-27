@@ -138,6 +138,7 @@ public class SimpleDialog {
         private String suffix = null;
         private Predicate<String> inputChecker = null;
         private String allowedChars = null;
+        private String hint = null;
 
         /** input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed */
         public InputOptions setInputType(final int inputType) {
@@ -154,6 +155,11 @@ public class SimpleDialog {
         /** if non-null & non-empty, this will be displayed as a hint within the input field (e.g. to display a hint) */
         public InputOptions setLabel(final String label) {
             this.label = label;
+            return this;
+        }
+
+        public InputOptions setHint(final String hint) {
+            this.hint = hint;
             return this;
         }
 
@@ -588,19 +594,21 @@ public class SimpleDialog {
      */
      public void input(final InputOptions options, final Consumer<String> okayListener) {
 
+         final InputOptions io = options == null ? new InputOptions() : options;
 
-        final InputOptions io = options == null ? new InputOptions() : options;
+         final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
+         final EditText textField = dialogBinding.second.dialogInputEdittext;
+         final TextInputLayout textLayout = dialogBinding.second.dialogInputLayout;
+         final AlertDialog dialog = dialogBinding.first;
+         textField.setVisibility(View.VISIBLE);
+         textLayout.setVisibility(View.VISIBLE);
 
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons();
-        final EditText textField = dialogBinding.second.dialogInputEdittext;
-        final TextInputLayout textLayout = dialogBinding.second.dialogInputLayout;
-        final AlertDialog dialog = dialogBinding.first;
-        textField.setVisibility(View.VISIBLE);
-        textLayout.setVisibility(View.VISIBLE);
-
-        textField.setInputType(io.inputType);
+         textField.setInputType(io.inputType);
          if (io.initialValue != null) {
              textField.setText(io.initialValue);
+         }
+         if (io.hint != null) {
+             textField.setHint(io.hint);
          }
          if (io.label != null) {
              textLayout.setHint(io.label);

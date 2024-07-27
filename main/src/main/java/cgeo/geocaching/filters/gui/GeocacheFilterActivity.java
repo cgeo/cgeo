@@ -165,7 +165,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding.filterStorageSave.setOnClickListener(v -> {
             final String filterName = GeocacheFilter.getPurifiedFilterName(binding.filterStorageName.getText().toString());
             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_title)
-                    .input(new SimpleDialog.InputOptions().setInitialValue(filterName), newName -> {
+                    .input(new SimpleDialog.InputOptions().setInitialValue(filterName).setHint(getString(R.string.cache_filter_storage_save_title)), newName -> {
                         final GeocacheFilter filter = getFilterFromView();
                         if (GeocacheFilter.Storage.existsAndDiffers(newName, filter)) {
                             SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_save_confirm_title).setMessage(R.string.cache_filter_storage_save_confirm_message, newName).confirm(
