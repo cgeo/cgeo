@@ -418,7 +418,6 @@
     <!-- Formula -->
     <!-- ImageView -->
     <!-- map -->
-    <string name="google_maps_style_details">פירוט</string>
     <!-- search -->
     <string name="search_coordinates">נקודות ציון</string>
     <string name="search_coordinates_button">חיפוש לפי נקודות ציון</string>
