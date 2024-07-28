@@ -1786,7 +1786,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
-    <string name="google_maps_style_details">Detaily</string>
     <string name="google_maps_option_group_theme">Možnosti motivu</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
