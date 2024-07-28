@@ -1758,7 +1758,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoher Kontrast</string>
     <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
-    <string name="google_maps_style_details">Details</string>
     <string name="google_maps_option_group_map">Kartenoptionen</string>
     <string name="google_maps_option_show_traffic">Verkehr anzeigen</string>
     <string name="google_maps_option_show_buildings">3D-Gebäude anzeigen</string>
@@ -2299,6 +2298,7 @@
     <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
     <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Fehlende Berechtigung</string>
     <string name="permission_ask_again">Erneut fragen</string>
     <string name="permission_goto_app_details">\"App-Info\" öffnen</string>
     <string name="permission_contacts_read_explanation_title">Leseberechtigung für Kontakte</string>
@@ -2453,6 +2453,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Einige Downloadquellen unterstützen zusätzliche Dateien, die nicht von c:geo verwendet werden. Sollen diese zusätzlichen Dateien im Download-Ordner des Systems aufbewahrt werden statt sie zu löschen?</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
+    <string name="download_enqueing_error">Fehler beim Starten des Downloads</string>
     <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>
     <string name="downloadmap_target_not_writable">Das ausgewählte Ziel \"%s\" ist nicht beschreibbar - die heruntergeladene Kartendatei wird im Download-Ordner des Systems gespeichert und muss manuell in den Kartenordner verschoben werden.</string>
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
@@ -2931,4 +2932,13 @@
         <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
     </plurals>
     <!-- db inspection -->
+    <string name="view_database">Datenbank anzeigen</string>
+    <string name="dbi_select_title">(Tabelle auswählen)</string>
+    <string name="dbi_columnproperties_title">Spalteneigenschaften</string>
+    <string name="dbi_columnproperties_message">Feld: %1$s\nTyp: %2$s\nSpeicher: %3$s</string>
+    <string name="dbi_edit_title">Bearbeite \"%1$s\" der Zeile %2$d\"</string>
+    <string name="dbi_edit_ok">Feld aktualisiert</string>
+    <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
+    <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
+    <string name="dbi_search_title">Suche nach</string>
 </resources>
