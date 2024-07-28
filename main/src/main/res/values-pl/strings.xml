@@ -1788,7 +1788,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Wysoki kontrast</string>
     <string name="google_maps_style_auto">Motyw urządzenia (Dzień/Noc)</string>
-    <string name="google_maps_style_details">Szczegóły</string>
     <string name="google_maps_option_group_map">Opcje mapy</string>
     <string name="google_maps_option_show_traffic">Pokaż natężenie ruchu</string>
     <string name="google_maps_option_show_buildings">Pokaż budynki 3D</string>
