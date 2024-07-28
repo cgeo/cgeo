@@ -33,6 +33,7 @@
             android:id="@+id/img_gallery_add_multi_images"
             style="@style/button_icon"
             android:layout_gravity="left"
+            android:hint="@string/feature_log_images"
             app:icon="@drawable/ic_menu_image_multi" />
 
         <Button
@@ -40,6 +41,7 @@
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/img_gallery_add_multi_images"
+            android:hint="@string/cache_image_title_camera_prefix"
             app:icon="@drawable/ic_menu_camera" />
 
         <Button
@@ -47,6 +49,7 @@
             style="@style/button_icon"
             android:layout_gravity="left"
             android:layout_toRightOf="@+id/img_gallery_add_camera"
+            android:hint="@string/localfile_title"
             app:icon="@drawable/ic_menu_file_add" />
 
     </RelativeLayout>

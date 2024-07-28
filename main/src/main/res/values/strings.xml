@@ -1456,6 +1456,7 @@
 
     <string name="cache_offline_refresh">Refresh</string>
     <string name="cache_offline_drop">Remove from list</string>
+    <string name="cache_offline_delete">Delete</string>
     <string name="cache_delete_userdefined_waypoints">Remove user-defined waypoints</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remove all user-defined waypoints of this cache?\n\nWaypoints will be deleted immediately, there is no undo.</string>
     <string name="cache_delete_userdefined_waypoints_note">Note: You have \"waypoints from note\" enabled. If you have coordinates in your personal note recognized by c:geo, waypoints will be recreated for them automatically. You can disable this in the personal note edit dialog.</string>
@@ -1958,6 +1959,8 @@
     <string name="map_autorotation_disable">Disable map auto rotation?\n\nYou can enable it again using the Map rotation menu</string>
     <string name="quick_settings">Quick settings</string>
     <string name="quick_settings_info">Some map settings (Map settings, hide, routing) have been moved to the new \"Quick settings\" popup.\nYou can open this popup using the icon in the map\'s bottom center.</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
     <string name="other_settings">Other settings</string>
     <string name="map_show_caches_title">Show Caches:</string>
     <string name="map_show_waypoints_title">Show waypoints:</string>
@@ -1972,7 +1975,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
-    <string name="google_maps_style_details">Details</string>
     <string name="google_maps_option_group_map">Map Options</string>
     <string name="google_maps_option_show_traffic">Show Traffic</string>
     <string name="google_maps_option_show_buildings">Show 3D buildings</string>
@@ -2889,6 +2891,8 @@
     <string name="redo">Redo</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimize</string>
+    <string name="expand">Expand</string>
+    <string name="close">Close</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
