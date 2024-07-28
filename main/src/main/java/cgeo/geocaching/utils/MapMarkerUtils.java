@@ -12,11 +12,16 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.GeoIcon;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
@@ -24,6 +29,7 @@ import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 import static cgeo.geocaching.utils.EmojiUtils.NUMBER_START;
 
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -48,6 +54,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
+
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND = "cacheWaypointHighlighterBackground";
+    private static final String CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM = "cacheWaypointHighlighterGeoitem";
 
     private static final Map<Integer, Integer> list2marker = new TreeMap<>();
     private static Boolean listsRead = false;
@@ -880,6 +889,33 @@ public final class MapMarkerUtils {
         markerBuilder.withInset(new InsetBuilder(new ScalableDrawable(backgroundTemp, scalingFactor), Gravity.CENTER));
         markerBuilder.withInset(new InsetBuilder(cache.getType().markerId, Gravity.CENTER, scalingFactor));
         return buildLayerDrawable(markerBuilder, 3, 3);
+    }
+
+    // ------------------------------------------------------------------------
+    // methods for highlighting selected cache on map (UnifiedMap)
+
+    public static void addHighlighting(final IWaypoint geoitem, final Resources res, final GeoItemLayer<String> nonClickableItemsLayer) {
+        Bitmap b1 = null;
+        float scalingFactor = 100f;
+        if (geoitem instanceof Geocache) {
+            b1 = MapMarkerUtils.getCacheMarker(res, (Geocache) geoitem, null, true).getBitmap();
+            scalingFactor = scalingFactorCacheIcons;
+        } else if (geoitem instanceof Waypoint) {
+            b1 = MapMarkerUtils.getWaypointMarker(res, (Waypoint) geoitem, true, true).getBitmap();
+            scalingFactor = scalingFactorWpIcons;
+        }
+        if (b1 != null) {
+            final Bitmap b = ViewUtils.drawableToBitmap(new ScalableDrawable(ResourcesCompat.getDrawable(res, R.drawable.background_gc_hightlighted, null), scalingFactor));
+            final GeoPrimitive gp = GeoPrimitive.createMarker(geoitem.getCoords(), GeoIcon.builder().setBitmap(b).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_MARKER).build();
+            nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND, gp);
+            final GeoPrimitive gp1 = GeoPrimitive.createMarker(geoitem.getCoords(), GeoIcon.builder().setBitmap(b1).setHotspot(GeoIcon.Hotspot.BOTTOM_CENTER).build()).buildUpon().setZLevel(LayerHelper.ZINDEX_CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM).build();
+            nonClickableItemsLayer.put(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM, gp1);
+        }
+    }
+
+    public static void removeHighlighting(final GeoItemLayer<String> nonClickableItemsLayer) {
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_GEOITEM);
+        nonClickableItemsLayer.remove(CACHE_WAYPOINT_HIGHLIGHTER_BACKGROUND);
     }
 
 }
