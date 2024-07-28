@@ -2775,4 +2775,5 @@
         <item quantity="one">%d lukematon viesti viestikeskuksessa</item>
         <item quantity="other">%d lukematonta viestiä viestikeskuksessa</item>
     </plurals>
+    <!-- db inspection -->
 </resources>

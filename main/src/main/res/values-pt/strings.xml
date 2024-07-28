@@ -2922,4 +2922,5 @@
         <item quantity="one">%d mensagem não lida no centro de mensagens</item>
         <item quantity="other">%d mensagens não lidas no centro de mensagens</item>
     </plurals>
+    <!-- db inspection -->
 </resources>

@@ -2895,4 +2895,5 @@
     <plurals name="mcupdate">
         <item quantity="other">메시지 센터에서 %d개의 읽지 않은 메시지</item>
     </plurals>
+    <!-- db inspection -->
 </resources>

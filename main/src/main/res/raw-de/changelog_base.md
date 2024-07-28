@@ -32,3 +32,8 @@
 - Änderung: Verbesserte Beschreibung für Wartungsfunktion (Verwaiste Daten löschen)
 - Neu: Zeige Warnungen beim Auftreten von HTTP-Fehler 429 (zu viele Anfragen)
 - Korrektur: Flackern beim Aktualisieren der Cacheliste
+
+### Changes not included in current beta version
+- New: Store map theme per tile provider (UnifiedMap)
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- New: Highlight selected cache/waypoint (UnifiedMap)
