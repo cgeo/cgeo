@@ -15,6 +15,8 @@ import android.util.Pair;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -460,4 +462,14 @@ public class FormulaUtils {
             TextParam.text("**" + (g == null ? "null" : g.getUserDisplayableString()) + "**").setMarkdown(true);
     }
 
+    public static void addNeededVariables(final Set<String> neededVars, @Nullable final String formulaString) {
+        if (formulaString == null) {
+            return;
+        }
+        final Formula compiledFormula = Formula.safeCompile(formulaString);
+        if (compiledFormula == null) {
+            return;
+        }
+        neededVars.addAll(compiledFormula.getNeededVariables());
+    }
 }

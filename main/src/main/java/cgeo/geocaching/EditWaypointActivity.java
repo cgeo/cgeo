@@ -37,6 +37,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.Formula;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
@@ -62,8 +63,10 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 import com.google.android.material.button.MaterialButton;
@@ -391,11 +394,27 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
+    private void addNeededVariablesForProjection(final VariableList varList) {
+        final Set<String> distVars = new HashSet<>();
+        FormulaUtils.addNeededVariables(distVars, binding.projectionBearingDistance.getFormulaText());
+        FormulaUtils.addNeededVariables(distVars, binding.projectionBearingAngle.getFormulaText());
+
+        for (String var : distVars) {
+            if (!varList.contains(var)) {
+                varList.addVariable(var, "");
+            }
+        }
+    }
+
+
     private void initializeProjectionView(final Geocache cache) {
 
         //connect formula-editfields with cache's Variable list
         final VariableList varList = cache.getVariables();
-        final BiConsumer<String, Formula> listener = (s, f) -> recalculateProjectionView();
+        final BiConsumer<String, Formula> listener = (s, f) -> {
+            addNeededVariablesForProjection(varList);
+            recalculateProjectionView();
+        };
         binding.projectionBearingAngle.setVariableList(varList);
         binding.projectionBearingAngle.setFormulaChangeListener(listener);
         binding.projectionBearingDistance.setVariableList(varList);
@@ -442,6 +461,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         ViewUtils.setCoordinates(base, binding.buttonLatLongitude);
         ViewUtils.setCoordinates(this.currentCoords, binding.projectedLatLongitude);
     }
+
 
     private class LoadWaypointThread extends Thread {
 
