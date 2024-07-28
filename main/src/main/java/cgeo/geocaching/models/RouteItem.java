@@ -168,7 +168,7 @@ public class RouteItem implements Parcelable {
 
     @Nullable
     public Waypoint getWaypoint() {
-        if (waypointId != 0) {
+        if (waypointId == 0) {
             return null;
         }
         return DataStore.loadWaypoint(waypointId);
