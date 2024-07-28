@@ -685,7 +685,6 @@
     <string name="map_live_disable">تعطيل العرض المباشر</string>
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
-    <string name="google_maps_style_details">التفاصيل</string>
     <!-- search -->
     <string name="search_coordinates">الإحداثيات</string>
     <string name="search_coordinates_button">البحث بواسطة الإحدثيات</string>
