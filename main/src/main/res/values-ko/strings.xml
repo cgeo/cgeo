@@ -1740,7 +1740,6 @@
     <string name="google_maps_style_retro">복고풍 모드</string>
     <string name="google_maps_style_contrast">고대비</string>
     <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
-    <string name="google_maps_style_details">상세내용</string>
     <string name="google_maps_option_group_map">지도 옵션</string>
     <string name="google_maps_option_show_traffic">교통체증 표시</string>
     <string name="google_maps_option_show_buildings">3D 건물 표시</string>
