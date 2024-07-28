@@ -1758,7 +1758,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoog contrast</string>
     <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
-    <string name="google_maps_style_details">Details</string>
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
