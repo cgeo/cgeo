@@ -2,6 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 
 import androidx.annotation.NonNull;
@@ -91,6 +92,10 @@ public class CacheVariableList extends VariableList {
                 if (wp.isCalculated()) {
                     final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
                     neededVars.addAll(cc.getNeededVars());
+               }
+                if( wp.hasProjection()){
+                    FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula1());
+                    FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula2());
                 }
             }
         }
