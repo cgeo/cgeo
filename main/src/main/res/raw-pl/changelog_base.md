@@ -36,4 +36,4 @@
 ### Zmiany nie uwzględnione w bieżącej wersji beta
 - Nowość: Zapisuj motyw mapy osobno dla każdego dostawcy kafelków (UnifiedMap)
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
-- New: Highlight selected cache/waypoint (UnifiedMap)
+- Nowość: Podświetl wybraną skrytkę/punkt nawigacji (UnifiedMap)
