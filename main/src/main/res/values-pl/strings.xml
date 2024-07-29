@@ -1312,6 +1312,7 @@
     <string name="last_day_available">dostępne ostatni dzień</string>
     <string name="cache_offline_refresh">Odśwież</string>
     <string name="cache_offline_drop">Usuń z listy</string>
+    <string name="cache_offline_delete">Usuń</string>
     <string name="cache_delete_userdefined_waypoints">Usuń punkty zdefiniowane przez użytkownika</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Czy usunąć wszystkie zdefiniowane punkty użytkownika dla tej skrytki?\n\nPunkty zostaną zostaną natychmiast usunięte, nie można tego cofnąć.</string>
     <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono „Punkty nawigacji z notatki”. Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty nawigacji zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki osobistej.</string>
@@ -1774,6 +1775,8 @@
     <string name="map_autorotation_disable">Wyłączyć automatyczne obracanie mapy?\n\nMożesz włączyć ją ponownie za pomocą menu Obrót mapy</string>
     <string name="quick_settings">Szybkie ustawienia</string>
     <string name="quick_settings_info">Niektóre ustawienia mapy (ustawienia mapy, ukrywanie, nawigacja) zostały przeniesione do nowego okienka „Szybkie ustawienia”.\nMożesz otworzyć to okienko używając ikony w dolnym środku mapy.</string>
+    <string name="zoom_in">Powiększ</string>
+    <string name="zoom_out">Pomniejsz</string>
     <string name="other_settings">Inne ustawienia</string>
     <string name="map_show_caches_title">Pokaż skrytki:</string>
     <string name="map_show_waypoints_title">Pokaż punkty nawigacji:</string>
@@ -2624,6 +2627,8 @@
     <string name="redo">Ponów</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optymalizuj</string>
+    <string name="expand">Rozszerz</string>
+    <string name="close">Zamknij</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
