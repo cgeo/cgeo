@@ -4,10 +4,10 @@
 - Nuovo: Supporto a fornitore di tasselli definiti dall'utente
 - Corretto: aggiorna i dati della mappa dopo l'apertura / chiusura della finestra di dialogo delle impostazioni (UnifiedMap)
 - Nuovo: Mostra/nascondi edifici 2D/3D (UnifiedMap OSM)
-- New: Cache store/refresh from popup moved into background
-- Change: Search for coordinates: Show direction and distance to target and not to current position
-- New: Graphical D/T indicator in cache info sheet
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Nuovo: Cache store/refresh dal popup spostato in background
+- Modifica: cerca le coordinate: mostra la direzione e la distanza dall'obiettivo e non dalla posizione corrente
+- Nuovo: Indicatore grafico D/T nel foglio informazioni cache
+- Corretto: Bussola nascosta quando la barra dei filtri è visibile (UnifiedMap)
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
@@ -16,24 +16,24 @@
 - Cambiato: cambia l'icona del log da "matita" a "smile"
 - Cambia: Cambio dell1'icona "modifica liste" da matita a lista + matita
 - Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
+- Corretto: errata priorità nel parsing della formula backup
 
 ### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
 - Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
 - Cambiamento: utilizzo di OSM Nominatum come geocoder fallback, in sostituzione di MapQuest geocoder (che non funziona più per noi)
-- Change: Updated integrated BRouter to v1.7.5
+- Cambiamento: aggiornato BRouter intergrato alla versione 1.7.4
 - Nuovo: Lettura delle informazioni di elevazione dalla traccia durante l'importazione
 - Nuovo: API a Locus che supporta ora la dimensione del cache "virtuale"
-- Fix: Search results for a location no longer sorted by distance to target location
-- New: "Corrected coordinates" filter
-- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
+- Corretto: risultati della ricerca per una posizione non più ordinata per distanza dalla posizione di destinazione
+- Nuovo: filtro "Coordinate corrette"
+- Modifica: Aggiornato targetSDK a 34 per soddisfare i requisiti imminenti del Play Store
 - New: Added "none"-entry to selection of routing profiles
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
+- Modifica: Migliorata la descrizione della funzione "manutenzione" (rimuove i dati orfani)
+- Nuovo: Mostra avvisi quando si verifica l'errore HTTP 429 (troppe richieste)
+- Corretto: Flickering in aggiornamento della lista cache
 
-### Changes not included in current beta version
+### Modifiche non incluse nella versione beta corrente
 - New: Store map theme per tile provider (UnifiedMap)
-- Change: Use elevation above mean sea level (if available, Android 14+ only)
-- New: Highlight selected cache/waypoint (UnifiedMap)
+- Cambio: utilizzare l'elevazione sopra il livello medio del mare (se disponibile, solo Android 14+)
+- Nuovo: Evidenzia cache/waypoint selezionato (UnifiedMap)
