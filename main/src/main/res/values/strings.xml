@@ -448,7 +448,7 @@
     <string name="caches_sort_vote">Vote (Own Rating)</string>
     <string name="caches_sort_inventory">Count of Inventory</string>
     <string name="caches_sort_date_hidden">Date Hidden</string>
-    <string name="caches_sort_date_logged">Date Logged</string>
+    <string name="caches_sort_date_logged">Date Logged (Own Log)</string>
     <string name="caches_sort_finds">Finds</string>
     <string name="caches_sort_state">State</string>
     <string name="caches_sort_storage">Date stored on device</string>
