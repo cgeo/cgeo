@@ -1292,6 +1292,7 @@
     <string name="last_day_available">laatste dag beschikbaar</string>
     <string name="cache_offline_refresh">Verversen</string>
     <string name="cache_offline_drop">Uit lijst verwijderen</string>
+    <string name="cache_offline_delete">Verwijderen</string>
     <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_userdefined_waypoints_note">Opmerking: Je hebt \"waypoints van notitie\" ingeschakeld. Als er coördinaten in je persoonlijke notitie worden herkend door c:geo, worden hiervan automatisch waypoints aangemaakt. Je kunt dit uitschakelen in het persoonlijke notitiebewerkingsvenster.</string>
@@ -1744,6 +1745,8 @@
     <string name="map_autorotation_disable">Automatische kaartrotatie uitschakelen?\n\nJe kunt het weer inschakelen met behulp van het Kaartrotatiemenu</string>
     <string name="quick_settings">Snelle instellingen</string>
     <string name="quick_settings_info">Enkele kaartinstellingen (kaartinstellingen, verbergen, routing) zijn verplaatst naar de nieuwe \"Snelle instellingen\" popup.\nJe kunt deze pop-up openen met behulp van het icoon in het midden onderin de kaart.</string>
+    <string name="zoom_in">Inzoomen</string>
+    <string name="zoom_out">Uitzoomen</string>
     <string name="other_settings">Overige instellingen</string>
     <string name="map_show_caches_title">Toon caches:</string>
     <string name="map_show_waypoints_title">Toon waypoints:</string>
@@ -2564,6 +2567,8 @@
     <string name="redo">Opnieuw</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimaliseren</string>
+    <string name="expand">Uitklappen</string>
+    <string name="close">Sluiten</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
