@@ -15,9 +15,7 @@
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
-        android:showAsAction="always"
         android:title="@string/caches_sort"
-        app:actionProviderClass="cgeo.geocaching.sorting.SortActionProvider"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_switch_select_mode"
