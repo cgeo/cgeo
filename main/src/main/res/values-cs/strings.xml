@@ -1121,6 +1121,8 @@
     <string name="init_mapWpScaling_title">Měřítko ikony trasového bodu</string>
     <string name="init_mapWpScaling_description">Měřítko pro ikony trasových bodů (v %)</string>
     <string name="init_maintenance">Údržba</string>
+    <string name="init_maintenance_directories_note">Odstraněné kešky zůstávají v paměti c:geo po dobu 72 hodin, aby se předešlo nechtěné ztrátě dat. Kromě toho ukládá c:geo ve zvláštních složkách také obrázky a ostatní soubory související s keškami. V různých výjimečných případech nemusí být tato data odstraněna, ačkoliv keš už není uložena. Pomocí této funkce lze smazat podobná zbytková data.</string>
+    <string name="init_maintenance_directories">Odstranit zbytková data</string>
     <string name="init_maintenance_start">Údržba zahájena</string>
     <string name="init_maintenance_ongoing">To může nějakou dobu trvat…</string>
     <string name="init_maintenance_finished">Údržba dokončena</string>
@@ -1310,6 +1312,7 @@
     <string name="last_day_available">zbývá poslední den</string>
     <string name="cache_offline_refresh">Aktualizovat</string>
     <string name="cache_offline_drop">Odstranit ze seznamu</string>
+    <string name="cache_offline_delete">Odstranit</string>
     <string name="cache_delete_userdefined_waypoints">Odstranit uživatelsky definovatelné trasové body</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povoleny „trasové body z poznámky“. Pokud máte souřadnice v osobní poznámce rozpoznané aplikací c:geo, budou pro ně automaticky vytvořeny trasové body. Tuto funkci můžete deaktivovat v dialogovém okně pro úpravu osobní poznámky.</string>
@@ -1772,6 +1775,8 @@
     <string name="map_autorotation_disable">Zakázat automatické otáčení mapy? \n\nMůžete jej opět povolit pomocí nabídky Otáčení mapy</string>
     <string name="quick_settings">Rychlé nastavení</string>
     <string name="quick_settings_info">Některá nastavení mapy (nastavení mapy, skrytí, směrování) byly přesunuty do nového vyskakovacího okna \"Rychlé nastavení\".\nToto vyskakovací okno můžete otevřít pomocí ikony na mapě v dolním středu mapy.</string>
+    <string name="zoom_in">Přiblížit</string>
+    <string name="zoom_out">Oddálit</string>
     <string name="other_settings">Další nastavení</string>
     <string name="map_show_caches_title">Zobrazit kešky:</string>
     <string name="map_show_waypoints_title">Zobrazit trasové body:</string>
@@ -1786,7 +1791,17 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Vysoký kontrast</string>
     <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
+    <string name="google_maps_option_group_map">Možnosti mapy</string>
+    <string name="google_maps_option_show_traffic">Zobrazit provoz</string>
+    <string name="google_maps_option_show_buildings">Zobrazit budovy ve 3D</string>
     <string name="google_maps_option_group_theme">Možnosti motivu</string>
+    <string name="google_maps_option_show_feature_theme">Zobrazit možnosti motivu</string>
+    <string name="google_maps_option_show_feature_administrative_all">Zobrazit administrativu</string>
+    <string name="google_maps_option_show_feature_landscape_all">Zobrazit krajinné prvky</string>
+    <string name="google_maps_option_show_feature_poi_all">Zobrazit body zájmu</string>
+    <string name="google_maps_option_show_feature_road_all">Zobrazit silnice</string>
+    <string name="google_maps_option_show_feature_transit_all">Zobrazit veřejnou dopravu</string>
+    <string name="google_maps_option_show_feature_water_all">Zobrazit vodní plochy</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
@@ -2344,6 +2359,7 @@
     <string name="init_confirm_debug">c:geo běží v režimu ladění!</string>
     <string name="list_confirm_debug_message">Režim ladění může způsobit nestabilitu aplikace. Chceš režim ladění vypnout?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Chybějící oprávnění</string>
     <string name="permission_ask_again">Zeptat se znova</string>
     <string name="permission_goto_app_details">Otevřít informace o aplikaci</string>
     <string name="permission_contacts_read_explanation_title">Oprávnění ke čtení kontaktů</string>
@@ -2500,6 +2516,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Některé zdroje stahování podporují další soubory, které c:geo nepoužívá. Tyto dodatečné soubory ponechte v systémové složce pro stahování, místo abyste je smazali</string>
     <string name="downloadmanager_not_available">Soubor nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>
+    <string name="download_enqueing_error">Chyba při pokusu o spuštění stahování</string>
     <string name="download_none_selected">Nebyly vybrány žádné soubory ke stažení</string>
     <string name="downloadmap_target_not_writable">Vybraný cíl \"%s\" není zapisovatelný - stažený mapový soubor je uložen v systémové složce pro stahování a musí být ručně přesunut do složky s mapami.</string>
     <string name="downloadmap_allow_metered_network">Povolit stahování přes měřenou síť (např. mobilní připojení)</string>
@@ -2610,6 +2627,8 @@
     <string name="redo">Znovu</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimalizovat</string>
+    <string name="expand">Rozbalit</string>
+    <string name="close">Zavřít</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
