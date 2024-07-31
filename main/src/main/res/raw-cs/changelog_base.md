@@ -7,7 +7,7 @@
 - Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
 - Novinka: Grafický indikátor D/T v informačním listu kešky
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Oprava: Kompasová růžice skrytá, když je viditelný panel filtrů (Sjednocená mapa)
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
@@ -15,8 +15,8 @@
 - Novinka: Lepší vyhlazování obrázků v logu
 - Změna: Změna ikony "log" z tužky na ikonu smajlíka
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
-- Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
+- Oprava: Selhání funkce vanity na dlouhých řetězcích
+- Oprava: Chybná priorita parsování v záloze vzorce
 
 ### Obecné
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
@@ -29,11 +29,11 @@
 - Novinka: filtr "Upravené souřadnice"
 - Změna: Aktualizováno cílové SDK na verzi 34, aby bylo v souladu s nadcházejícími požadavky Obchodu Play
 - Novinka: Do výběru profilů směrování byla přidána položka "žádný"
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
+- Změna: Zlepšen popis funkce „údržba“ (odstranit zbytková data)
+- Novinka: Zobrazení varování při výskytu chyby HTTP 429 (Příliš mnoho požadavků)
+- Oprava: Blikání při obnovení seznamu kešek
 
-### Changes not included in current beta version
-- New: Store map theme per tile provider (UnifiedMap)
-- Change: Use elevation above mean sea level (if available, Android 14+ only)
-- New: Highlight selected cache/waypoint (UnifiedMap)
+### Změny nezahrnuté v aktuální beta verzi
+- Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
+- Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
+- Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
