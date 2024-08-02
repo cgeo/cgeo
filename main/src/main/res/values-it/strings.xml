@@ -600,6 +600,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Ha un Log Offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Ha un Log \"Trovato\" Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Coordinate aggiornate</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Ha Waypoint Definiti Dall\'Utente</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro influirà solo sui mystery cache. Se vuoi escludere altri tipi di cache, definisci un filtro di tipo cache appropriato.\n\nUn mystery è considerato \'risolto\' se ha cambiato coordinate o un waypoint finale valido viene settato con delle coordinate.</string>
     <string name="cache_filter_status_active">Attivo</string>
@@ -788,8 +789,11 @@
     <string name="settings_summary_system">Impostazioni specifiche di sistema e opzioni di debug.</string>
     <string name="settings_title_navigation_menu">Menu \"Naviga\"</string>
     <string name="settings_category_geocaching_platform">Piattaforma Geocaching</string>
+    <string name="settings_category_locationcentersearch">Ricerche centrate sulla posizione</string>
     <string name="init_nearbysearchlimit_title">Limite di ricerca nelle vicinanze</string>
     <string name="init_nearbysearchlimit_description">Limita la distanza fino alla quale vengono mostrati i cache con la ricerca nelle vicinanze (0=illimitato)</string>
+    <string name="init_coordsearchlimit_title">Coordinate/indirizzo per il limite di ricerca</string>
+    <string name="init_coordsearchlimit_description">Limita la distanza entro la quale vengono mostrati i cache con la ricerca nelle vicinanze (0=illimitato)</string>
     <string name="init_settings_description_unlimited">illimitato</string>
     <string name="settings_category_geocaching_additionals">Ulteriori servizi e addon</string>
     <string name="settings_category_logging_other">Altre opzioni di log</string>
@@ -904,8 +908,12 @@
     <string name="init_showElevation">Mostra altitudine</string>
     <string name="init_summary_showElevation">Mostra l\"altitudine per la posizione corrente, prendendola dai dati di routing o GNSS (se disponibile)</string>
     <string name="init_elevation_notAvailable">"Nessun dato di elevazione disponibile"</string>
+    <string name="menu_elevation_info">Altitudine (mappa):</string>
     <string name="elevation_selected">Quota (mappa) alla posizione selezionata</string>
     <string name="elevation_difference">Dislivello</string>
+    <string name="distance">Distanza:</string>
+    <string name="copy_coordinates">Copia le coordinate</string>
+    <string name="selected_position">Posizione selezionata</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache.</string>
     <string name="init_prevent_cache_note_merge">Sovrascrivi Nota Personale cache</string>
@@ -1099,6 +1107,8 @@
     <string name="init_mapWpScaling_title">Scala icona del Waypoint</string>
     <string name="init_mapWpScaling_description">Fattore di scala per le icone dei waypoint (in %)</string>
     <string name="init_maintenance">Manutenzione</string>
+    <string name="init_maintenance_directories_note">I cache eliminati restano memorizzati internamente per 72 ore da c:geo per prevenire la perdita accidentale di dati. Oltre a questo, c:geo memorizza anche immagini e altri file relativi ai cache in cartelle dedicate. In alcuni casi particolari tali dati potrebbero non essere rimossi anche se il cache non è più memorizzato. Questa funzione può essere utilizzata per ripulire tali dati orfani.</string>
+    <string name="init_maintenance_directories">Elimina file orfani</string>
     <string name="init_maintenance_start">Manutenzione avviata</string>
     <string name="init_maintenance_ongoing">Questo potrebbe richiedere un po\' di tempo…</string>
     <string name="init_maintenance_finished">Manutenzione terminata</string>
@@ -1280,6 +1290,7 @@
     <string name="last_day_available">ultimo giorno disponibile</string>
     <string name="cache_offline_refresh">Aggiorna</string>
     <string name="cache_offline_drop">Rimuovi dalla lista</string>
+    <string name="cache_offline_delete">Elimina</string>
     <string name="cache_delete_userdefined_waypoints">Rimuovi waypoint definiti dall\'utente</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Rimuovere tutti i waypoint definiti dall\'utente di questa cache?\n\nWaypoints verranno eliminati immediatamente, non puoi annullare.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: è abilitata la funzione \"Estrazione Waypoint\". Se hai coordinate nelle tue note personali riconosciute da c:geo, i waypoint verranno ricreati automaticamente. Puoi disabilitare questo nella finestra di modifica delle note personali.</string>
@@ -1414,6 +1425,7 @@
     <string name="cache_menu_reset_foundstate">Resetta lo stato trovato</string>
     <string name="cache_foundstate_updated">Stato trovato, aggiornato</string>
     <string name="cache_menu_set_cache_icon">Imposta icona cache</string>
+    <string name="cache_menu_change_description_style">Cambia lo stile della descrizione</string>
     <string name="cache_icon_updated">Icona cache aggiornata</string>
     <string name="cache_menu_details">Dettagli</string>
     <string name="cache_menu_refresh">Aggiorna</string>
@@ -1537,6 +1549,9 @@
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
     <!-- html styles -->
+    <string name="html_style_default">Predefinito</string>
+    <string name="html_style_monochrome">Monocromatico</string>
+    <string name="html_style_source">Sorgente HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">gradi</string>
     <string name="cc_hint_minutes">minuti</string>
@@ -1728,6 +1743,8 @@
     <string name="map_autorotation_disable">Disabilita la rotazione automatica della mappa?\n\nPuoi riattivarla usando il menu di rotazione della mappa</string>
     <string name="quick_settings">Impostazioni rapide</string>
     <string name="quick_settings_info">Alcune impostazioni della mappa (impostazioni mappa, routing) sono state spostate nella nuova finestra popup \"Impostazioni rapide\".\nPuoi aprire questo popup usando l\'icona nel centro inferiore della mappa.</string>
+    <string name="zoom_in">Ingrandisci</string>
+    <string name="zoom_out">Riduci ingrandimento</string>
     <string name="other_settings">Altre impostazioni</string>
     <string name="map_show_caches_title">Mostra Cache:</string>
     <string name="map_show_waypoints_title">Mostra waypoint:</string>
@@ -1738,11 +1755,21 @@
     <string name="map_theme_legend_info">Tocca il titolo della categoria per aprire/chiudere la categoria. Tocca a lungo un simbolo per avere brevi informazioni su quel simbolo. Tocca l\'icona delle informazioni per visitare una leggenda dettagliata online.</string>
     <string name="google_maps_style_default">Predefinito</string>
     <string name="google_maps_style_night">Notte</string>
+    <string name="google_maps_style_classic">Classico</string>
     <string name="google_maps_style_retro">Stile Retrò</string>
     <string name="google_maps_style_contrast">Contrasto Elevato</string>
     <string name="google_maps_style_auto">Tema del dispositivo (giorno/notte)</string>
-    <string name="google_maps_style_details">Dettagli</string>
+    <string name="google_maps_option_group_map">Opzioni della mappa</string>
+    <string name="google_maps_option_show_traffic">Mostra il traffico</string>
+    <string name="google_maps_option_show_buildings">Mostra edifici 3D</string>
     <string name="google_maps_option_group_theme">Opzioni Tema</string>
+    <string name="google_maps_option_show_feature_theme">Mostra funzionalità del tema</string>
+    <string name="google_maps_option_show_feature_administrative_all">Mostra Amministrativo</string>
+    <string name="google_maps_option_show_feature_landscape_all">Mostra in orizzontale</string>
+    <string name="google_maps_option_show_feature_poi_all">Mostra punti di interesse</string>
+    <string name="google_maps_option_show_feature_road_all">Mostra Strade</string>
+    <string name="google_maps_option_show_feature_transit_all">Mostra il traffico</string>
+    <string name="google_maps_option_show_feature_water_all">Mostra Acqua</string>
     <!-- search -->
     <string name="geo_search_label">Cerca cache nelle vicinanze</string>
     <string name="search_bar_hint">Cerca caches/trackables</string>
@@ -2248,6 +2275,10 @@
         <item quantity="one">Consiglia questo cache (%d rimanenti)</item>
         <item quantity="other">Consiglia questi cache (%d rimanenti)</item>
     </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Rendi questo cache un favorito (%d rimanente)</item>
+        <item quantity="other">Rendi questo cache un favorito (%d rimanenti)</item>
+    </plurals>
     <string name="command_set_cache_icons_progress">Imposta icone cache</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">%d icona cache impostata</item>
@@ -2268,6 +2299,7 @@
     <string name="init_confirm_debug">c:geo è in esecuzione in modalità di debug!</string>
     <string name="list_confirm_debug_message">La modalità di debug può causare instabilità! Vuoi tornare alla modalità normale?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Permesso mancante</string>
     <string name="permission_ask_again">Chiedimi di nuovo</string>
     <string name="permission_goto_app_details">Apri Informazioni Applicazione</string>
     <string name="permission_contacts_read_explanation_title">Permesso per la lettura dei contatti</string>
@@ -2380,6 +2412,7 @@
     <string name="routingmode_car">Automobile</string>
     <string name="routingmode_user1">Utente 1</string>
     <string name="routingmode_user2">Utente 2</string>
+    <string name="routingmode_none">(nessuno)</string>
     <!-- view settings -->
     <string name="view_settings">Impostazioni vista</string>
     <string name="delete_setting">Elimina impostazioni</string>
@@ -2421,6 +2454,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Alcune fonti di download supportano file aggiuntivi non utilizzati da c:geo. Mantieni questi file extra nella cartella di download del sistema invece di eliminarli</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>
+    <string name="download_enqueing_error">Errore nel tentativo di avviare il download</string>
     <string name="download_none_selected">Nessun file selezionato per il download</string>
     <string name="downloadmap_target_not_writable">L\'obiettivo selezionato \"%s\" non è scrivibile - il file di mappa scaricato viene salvato nella cartella di download di sistema e deve essere spostato manualmente nella cartella mappa.</string>
     <string name="downloadmap_allow_metered_network">Consenti il download tramite rete a consumo (ad esempio: connessione mobile)</string>
@@ -2531,6 +2565,8 @@
     <string name="redo">Ripeti</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Ottimizza</string>
+    <string name="expand">Espandi</string>
+    <string name="close">Chiudi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>

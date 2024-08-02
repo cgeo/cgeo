@@ -1688,7 +1688,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Contrast Alt</string>
     <string name="google_maps_style_auto">Tema del dispositiu (Dia/Nit)</string>
-    <string name="google_maps_style_details">Detalls</string>
     <string name="google_maps_option_group_theme">Opcions del tema</string>
     <!-- search -->
     <string name="geo_search_label">Cerca catxés propers</string>

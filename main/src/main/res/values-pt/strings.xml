@@ -1755,7 +1755,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Alto contraste</string>
     <string name="google_maps_style_auto">Tema do dispositivo (Dia/Noite)</string>
-    <string name="google_maps_style_details">Detalhes</string>
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>

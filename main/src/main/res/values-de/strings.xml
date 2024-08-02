@@ -1292,6 +1292,7 @@
     <string name="last_day_available">letzter Tag verfügbar</string>
     <string name="cache_offline_refresh">Aktualisieren</string>
     <string name="cache_offline_drop">Aus Liste entfernen</string>
+    <string name="cache_offline_delete">Löschen</string>
     <string name="cache_delete_userdefined_waypoints">Benutzerdefinierte Wegpunkte löschen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Alle benutzerdefinierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, es gibt keine Wiederherstellen-Funktion.</string>
     <string name="cache_delete_userdefined_waypoints_note">Hinweis: Du hast \"Wegpunkte aus der Notiz\" aktiviert. Wenn du Koordinaten in deiner persönlichen Notiz hast, werden diese von c:geo erkannt und Wegpunkte automatisch wiederhergestellt. Du kannst dies im Beareitungsfenster der persönlichen Notiz deaktivieren.</string>
@@ -1744,6 +1745,8 @@
     <string name="map_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
+    <string name="zoom_in">heranzoomen</string>
+    <string name="zoom_out">herauszoomen</string>
     <string name="other_settings">Weitere Einstellungen</string>
     <string name="map_show_caches_title">Caches anzeigen:</string>
     <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
@@ -1758,7 +1761,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Hoher Kontrast</string>
     <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
-    <string name="google_maps_style_details">Details</string>
     <string name="google_maps_option_group_map">Kartenoptionen</string>
     <string name="google_maps_option_show_traffic">Verkehr anzeigen</string>
     <string name="google_maps_option_show_buildings">3D-Gebäude anzeigen</string>
@@ -2299,6 +2301,7 @@
     <string name="init_confirm_debug">c:geo arbeitet im Debug-Modus!</string>
     <string name="list_confirm_debug_message">Der Debug-Modus verursacht Instabilität! Debug-Modus beenden?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Fehlende Berechtigung</string>
     <string name="permission_ask_again">Erneut fragen</string>
     <string name="permission_goto_app_details">\"App-Info\" öffnen</string>
     <string name="permission_contacts_read_explanation_title">Leseberechtigung für Kontakte</string>
@@ -2453,6 +2456,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Einige Downloadquellen unterstützen zusätzliche Dateien, die nicht von c:geo verwendet werden. Sollen diese zusätzlichen Dateien im Download-Ordner des Systems aufbewahrt werden statt sie zu löschen?</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>
+    <string name="download_enqueing_error">Fehler beim Starten des Downloads</string>
     <string name="download_none_selected">Keine Dateien für den Download ausgewählt</string>
     <string name="downloadmap_target_not_writable">Das ausgewählte Ziel \"%s\" ist nicht beschreibbar - die heruntergeladene Kartendatei wird im Download-Ordner des Systems gespeichert und muss manuell in den Kartenordner verschoben werden.</string>
     <string name="downloadmap_allow_metered_network">Erlaube Download über getaktetes Netz (z.B.: mobile Verbindung)</string>
@@ -2563,6 +2567,8 @@
     <string name="redo">Wiederholen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimieren</string>
+    <string name="expand">Erweitern</string>
+    <string name="close">Schließen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>

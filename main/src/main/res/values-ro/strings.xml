@@ -745,7 +745,6 @@
     <string name="map_live_disable">Fără internet</string>
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
-    <string name="google_maps_style_details">Detalii</string>
     <!-- search -->
     <string name="search_coordinates">Coordonate</string>
     <string name="search_coordinates_button">Caută după coordonate</string>

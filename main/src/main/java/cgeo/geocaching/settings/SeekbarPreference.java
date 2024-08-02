@@ -183,8 +183,6 @@ public class SeekbarPreference extends Preference {
             seekbarUI.setSaveProgressListener(this::saveSetting);
             setInitialValue(restoreStoredValue, tempDefaultValue);
             seekbarUI.init();
-        } else {
-            setExtraView(holder);
         }
     }
 
