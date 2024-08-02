@@ -35,5 +35,5 @@
 
 ### Änderungen nach der aktuellen Beta-Version
 - Neu: Kartendesign pro Kartenanbieter merken (UnifiedMap)
-- Change: Use elevation above mean sea level (if available, Android 14+ only)
-- New: Highlight selected cache/waypoint (UnifiedMap)
+- Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
+- Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
