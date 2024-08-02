@@ -1292,6 +1292,7 @@
     <string name="last_day_available">letzter Tag verfügbar</string>
     <string name="cache_offline_refresh">Aktualisieren</string>
     <string name="cache_offline_drop">Aus Liste entfernen</string>
+    <string name="cache_offline_delete">Löschen</string>
     <string name="cache_delete_userdefined_waypoints">Benutzerdefinierte Wegpunkte löschen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Alle benutzerdefinierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, es gibt keine Wiederherstellen-Funktion.</string>
     <string name="cache_delete_userdefined_waypoints_note">Hinweis: Du hast \"Wegpunkte aus der Notiz\" aktiviert. Wenn du Koordinaten in deiner persönlichen Notiz hast, werden diese von c:geo erkannt und Wegpunkte automatisch wiederhergestellt. Du kannst dies im Beareitungsfenster der persönlichen Notiz deaktivieren.</string>
@@ -1744,6 +1745,8 @@
     <string name="map_autorotation_disable">Automatische Kartendrehung deaktivieren?\n\nDu kannst dies im Kartendrehungs-Menü erneut einschalten</string>
     <string name="quick_settings">Schnelleinstellungen</string>
     <string name="quick_settings_info">Einige Einstellungen (Karteneinstellungen, Verbergen, Routing) wurden verschoben in das \"Schnelleinstellungen\"-Popup.\nZum Öffnen verwende das Icon unten mittig in der Karte.</string>
+    <string name="zoom_in">heranzoomen</string>
+    <string name="zoom_out">herauszoomen</string>
     <string name="other_settings">Weitere Einstellungen</string>
     <string name="map_show_caches_title">Caches anzeigen:</string>
     <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
@@ -2564,6 +2567,8 @@
     <string name="redo">Wiederholen</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimieren</string>
+    <string name="expand">Erweitern</string>
+    <string name="close">Schließen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
