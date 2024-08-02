@@ -160,7 +160,7 @@
                     app:icon="@drawable/icon_whereyougo"
                     android:visibility="visible"
                     tools:visibility="visible"
-                    android:hint="@string/cache_whereyougo_start"/>
+                    android:tooltipText="@string/cache_whereyougo_start"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -249,7 +249,7 @@
                     app:icon="@drawable/icon_gc_alc"
                     android:visibility="visible"
                     tools:visibility="visible"
-                    android:hint="@string/cache_alc_start"/>
+                    android:tooltipText="@string/cache_alc_start"/>
             </RelativeLayout>
         </LinearLayout>
 
