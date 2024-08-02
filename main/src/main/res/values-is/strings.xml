@@ -497,7 +497,6 @@
     <string name="map_map">Kort</string>
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
-    <string name="google_maps_style_details">Upplýsingar</string>
     <!-- search -->
     <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>

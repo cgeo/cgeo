@@ -659,7 +659,6 @@
     <string name="map_live_enable">Makahimo nga mag-live</string>
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
-    <string name="google_maps_style_details">Mga Detalye</string>
     <!-- search -->
     <string name="search_coordinates">Mga koordinate</string>
     <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
