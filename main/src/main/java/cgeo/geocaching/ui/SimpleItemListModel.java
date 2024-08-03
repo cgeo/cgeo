@@ -53,6 +53,8 @@ public class SimpleItemListModel<T> {
 
     private String filterTerm = null;
 
+    private T scrollAnchorOnOpen = null;
+
 
     private final Set<T> selectedItems = new HashSet<>();
 

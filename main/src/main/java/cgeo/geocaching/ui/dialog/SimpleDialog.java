@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
@@ -82,6 +83,7 @@ public class SimpleDialog {
 
         private TextParam selectSetActionText = null;
         private Supplier<Set<T>> selectSetSupplier = null;
+        private T scrollAnchor = null;
 
         private AlertDialog dialog;
 
@@ -105,6 +107,12 @@ public class SimpleDialog {
         public ItemSelectModel<T> setSelectAction(final TextParam actionText, final Supplier<Set<T>> selectSetSupplier) {
             this.selectSetSupplier = selectSetSupplier;
             this.selectSetActionText = (actionText == null && selectSetSupplier != null) ? TextParam.id(R.string.unknown) : actionText;
+            return this;
+        }
+
+        /** if set, then view is scrolled to this item when opened. Has no effect after that */
+        public ItemSelectModel<T> setScrollAnchor(@Nullable  final T scrollAnchor) {
+            this.scrollAnchor = scrollAnchor;
             return this;
         }
 
@@ -524,6 +532,10 @@ public class SimpleDialog {
         binding.dialogItemlistview.setModel(model);
 
         dialog.show();
+
+        if (model.scrollAnchor != null) {
+            binding.dialogItemlistview.scrollTo(model.scrollAnchor);
+        }
 
         finalizeCommons(dialog, (which) -> {
             boolean handled = false;
