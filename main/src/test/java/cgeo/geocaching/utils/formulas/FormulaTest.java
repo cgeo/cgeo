@@ -182,8 +182,11 @@ public class FormulaTest {
         assertThat(Formula.compile("[:0-9]").getRangeIndexSize()).isEqualTo(10);
 
         assertThat(Formula.compile("[:0-3]*[:0-4]").getRangeIndexSize()).isEqualTo(20);
+        assertRangeFormula("[:1-2, 8]*3", null, 3, 6, 24);
+        assertRangeFormula("[:2-1, 8]*3", null, 3, 6, 24);
         assertRangeFormula("[:1-2]*[:3-4]", null, 3, 6, 4, 8);
-        assertRangeFormula("[:1-3, ^2]*[:10-20, ^11-19]", null, 10, 30, 20, 60);
+        assertRangeFormula("[:1,3]*[:10,20]", null, 10, 30, 20, 60);
+        assertRangeFormula("[:3,1]*[:10,20]", null, 30, 10, 60, 20);
 
         //assert graceful handling of "strange" formats
         assertRangeFormula("[:abc1]", null, 1);
@@ -193,15 +196,10 @@ public class FormulaTest {
         //assert
         assertThatThrownBy(() -> eval("[:0-3"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
-        assertThatThrownBy(() -> eval("[:0-5000]")).as("Too many items in range")
-                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
         assertThatThrownBy(() -> eval("[:]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
         assertThatThrownBy(() -> eval("[:  ]"))
                 .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-        assertThatThrownBy(() -> eval("[:^1-2]"))
-                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
-
     }
 
     private void assertRangeFormula(final String formula, final Func1<String, Value> varMap, final Object... expectedResults) {
