@@ -25,7 +25,7 @@ public class IntegerRange {
     }
 
     public static IntegerRange createFromConfig(final String config) {
-        final List<Integer> parsed = parseConfig(config, 20);
+        final List<Integer> parsed = parseConfig(config, 200);
         return parsed == null ? null : new IntegerRange(ArrayUtils.toPrimitive(parsed.toArray(new Integer[0])));
     }
 
