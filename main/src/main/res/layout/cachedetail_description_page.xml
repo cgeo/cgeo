@@ -213,13 +213,13 @@
                     <Button
                         android:id="@+id/upload_personalnote"
                         style="@style/button_icon"
-                        android:hint="@string/cache_personal_note_upload"
+                        android:tooltipText="@string/cache_personal_note_upload"
                         app:icon="@drawable/ic_menu_upload" />
 
                     <Button
                         android:id="@+id/edit_personalnote"
                         style="@style/button_icon"
-                        android:hint="@string/cache_personal_note_edit"
+                        android:tooltipText="@string/cache_personal_note_edit"
                         app:icon="@drawable/ic_menu_edit" />
                 </LinearLayout>
 
@@ -233,13 +233,13 @@
                     <Button
                         android:id="@+id/storewaypoints_personalnote"
                         style="@style/button_icon"
-                        android:hint="@string/cache_personal_note_storewaypoints"
+                        android:tooltipText="@string/cache_personal_note_storewaypoints"
                         app:icon="@drawable/ic_menu_waypoint_sync" />
 
                     <Button
                         android:id="@+id/deleteewaypoints_personalnote"
                         style="@style/button_icon"
-                        android:hint="@string/cache_personal_note_removewaypoints"
+                        android:tooltipText="@string/cache_personal_note_removewaypoints"
                         app:icon="@drawable/ic_menu_waypoint_delete" />
 
                 </LinearLayout>
