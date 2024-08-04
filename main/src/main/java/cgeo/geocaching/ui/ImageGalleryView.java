@@ -351,7 +351,7 @@ public class ImageGalleryView extends LinearLayout {
 
         final boolean isEditableCat = this.editableCategoryHandlerMap.containsKey(category);
         binding.imgGalleryAddButtons.setVisibility(isEditableCat ? View.VISIBLE : View.GONE);
-        binding.imgGalleryAddMultiImages.setOnClickListener(v -> imageHelper.getMultipleImagesFromStorage(geocode, false, category));
+        binding.imgGalleryAddMultiImages.setOnClickListener(v -> imageHelper.getMultipleImagesFromStorage(geocode, false, category, null));
         binding.imgGalleryAddCamera.setOnClickListener(v -> imageHelper.getImageFromCamera(geocode, false, category));
         binding.imgGalleryAddMultiFiles.setOnClickListener(v -> imageHelper.getMultipleFilesFromStorage(geocode, false, category));
 

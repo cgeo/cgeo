@@ -10,6 +10,7 @@ import cgeo.geocaching.log.LogUtils;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.ui.recyclerview.AbstractRecyclerViewHolder;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
@@ -55,6 +56,7 @@ public class ImageListFragment extends Fragment {
     //following info is used to restrict image selections and for display
     private String geocode;
     private Long maxImageUploadSize;
+    private Uri ownImageFolderUri;
 
     private final ImageLoader imageCache = new ImageLoader();
 
@@ -69,6 +71,13 @@ public class ImageListFragment extends Fragment {
     public void init(final String contextCode, final Long maxImageUploadSize) {
         this.geocode = contextCode;
         this.maxImageUploadSize = maxImageUploadSize;
+
+        if (geocode != null) {
+            final Folder ownImageFolder = ImageUtils.getSpoilerImageFolder(geocode);
+            final boolean hasOwnImages = ownImageFolder != null && !ContentStorage.get().list(ownImageFolder).isEmpty();
+            this.ownImageFolderUri = hasOwnImages ? ownImageFolder.getUri() : null;
+            binding.imageAddOwn.setVisibility(hasOwnImages ? View.VISIBLE : View.GONE);
+        }
     }
 
     /**
@@ -163,9 +172,11 @@ public class ImageListFragment extends Fragment {
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-                imageHelper.getMultipleImagesFromStorage(geocode, false, null));
+                imageHelper.getMultipleImagesFromStorage(geocode, false, null, null));
         this.binding.imageAddCamera.setOnClickListener(v ->
                 imageHelper.getImageFromCamera(geocode, false, null));
+        this.binding.imageAddOwn.setOnClickListener(v ->
+                imageHelper.getMultipleImagesFromStorage(geocode, false, null, ownImageFolderUri));
 
         if (savedState != null) {
             imageList.setItems(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));

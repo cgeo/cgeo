@@ -270,7 +270,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
-        if (requestCode == RC_EDIT_IMAGE_EXTERNAL && resultCode == RESULT_OK) {
+        if (requestCode == RC_EDIT_IMAGE_EXTERNAL) {
             imageOrientation = ImageUtils.getImageOrientation(image.getUri());
             savedImageOrientation = imageOrientation.clone();
             loadImage();
