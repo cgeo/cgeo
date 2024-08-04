@@ -97,9 +97,7 @@ public final class ImageUtils {
         private final Folder folder;
 
         public ImageFolderCategoryHandler(final String geocode) {
-            final String suffix = StringUtils.right(geocode, 2);
-            folder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                    suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
+            folder = getSpoilerImageFolder(geocode);
         }
 
         @Override
@@ -1019,6 +1017,15 @@ public final class ImageUtils {
             Log.w("Problem parsing '" + logId + "' as SVG", es);
         }
         return null;
+    }
+
+    public static Folder getSpoilerImageFolder(final String geocode) {
+        if (geocode == null) {
+            return null;
+        }
+        final String suffix = StringUtils.right(geocode, 2);
+        return Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
+                suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
     }
 
 }

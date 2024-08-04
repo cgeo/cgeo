@@ -2,15 +2,18 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -28,7 +31,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Helper class for activities which want to deal with images.
- *
+ * <br>
  * Makes much usage of {@link cgeo.geocaching.utils.ImageUtils}, but adds activity-related behaviour
  */
 public class ImageActivityHelper {
@@ -146,22 +149,6 @@ public class ImageActivityHelper {
     }
 
     /**
-     * lets the user select ONE image from his/her device (calling necessary intents and such).
-     * It will create a local image copy for the selected images in c:geo private storage for further processing.
-     * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
-     * your activity as explained there.
-     *
-     * @param fileid        an id which will be part of resulting image name (e.g. a cache code)
-     * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
-     */
-    public void getImageFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
-        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        setImageMimeTypes(intent);
-        startIntent(Intent.createChooser(intent, "Select Image"),
-                new IntentContextData(REQUEST_CODE_STORAGE_SELECT, fileid, null, callOnFailure, userKey, true));
-    }
-
-    /**
      * lets the user select MULTIPLE images from his/her device (calling necessary intents and such).
      * It will create local image copies for all selected images in c:geo private storage for further processing.
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
@@ -170,21 +157,30 @@ public class ImageActivityHelper {
      * @param fileid        an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      */
-    public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
-        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, true);
+    public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final Uri startUri) {
+        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, startUri, true);
     }
 
     /** like above, but allows also for selection of non-image-files */
     public void getMultipleFilesFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
-        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, false);
+        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, null, false);
     }
 
-    private void getMultipleItemsFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final boolean onlyImages) {
-        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+    private void getMultipleItemsFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final Uri startUri, final boolean onlyImages) {
+        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         if (onlyImages) {
             setImageMimeTypes(intent);
         } else {
             intent.setType("*/*");
+        }
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // Attribute is supported starting SDK26 / O
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (startUri != null) {
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
+            } else {
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, PersistableFolder.BASE.getUri());
+            }
         }
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startIntent(Intent.createChooser(intent, "Select Multiple Images"),
