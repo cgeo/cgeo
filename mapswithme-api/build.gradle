@@ -32,6 +32,6 @@ android {
 
     dependencies {
         // Android annotations
-        implementation 'androidx.annotation:annotation:1.8.1'
+        implementation 'androidx.annotation:annotation:1.8.2'
     }
 }
