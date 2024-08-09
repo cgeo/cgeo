@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">Komentarz zespołu OC</string>
     <string name="log_your_saved_log">Twój zapisany wpis</string>
     <string name="log_empty_logbook">Dziennik tej skrytki jest pusty.</string>
+    <string name="log_image_selectfromstorage_tooltip">Wybierz obrazy z pamięci</string>
+    <string name="log_image_camera_tooltip">Zrób zdjęcie za pomocą aparatu</string>
+    <string name="log_image_selectfromown_tooltip">Wybierz obrazy z własnych obrazów</string>
     <string name="log_problem_none">Brak problemów</string>
     <string name="log_problem_needs_maintenance_label">Wymagany serwis skrytki</string>
     <string name="log_problem_needs_maintenance_text">Ten geocacher poinformował, że jest problem z tą skrytką.</string>
