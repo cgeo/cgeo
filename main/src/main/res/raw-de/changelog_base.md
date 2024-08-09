@@ -17,6 +17,9 @@
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
 - Korrektur: `vanity` Funktion fehlerhaft bei langen Zeichenketten
 - Korrektur: Falsche Parsing-Priorität bei Formel-Backup
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- New: Allow user-stored cache images on creating/editing log
+- Fix: Spoiler images no longer being loaded (website change)
 
 ### Allgemein
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
@@ -32,3 +35,5 @@
 - Änderung: Verbesserte Beschreibung für Wartungsfunktion (Verwaiste Daten löschen)
 - Neu: Zeige Warnungen beim Auftreten von HTTP-Fehler 429 (zu viele Anfragen)
 - Korrektur: Flackern beim Aktualisieren der Cacheliste
+- New: Allow display of passwords in connector configuration
+- Fix: Search for geokretys no longer working when using trackingcodes
