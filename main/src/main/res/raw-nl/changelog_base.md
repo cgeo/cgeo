@@ -17,6 +17,9 @@
 - Wijziging: "Bewerk lijsten" pictogram van potlood naar lijst + potlood wijzigen
 - Oplossing: vanity functie mislukt op lange tekenreeksen
 - Oplossing: Verkeerde verwerkingsprioriteit in de back-up van de formule
+- Wijziging: grotere integer bereiken toestaan in formules (gebruik van negatie niet toestaan)
+- Nieuw: Sta gebruiker opgeslagen cache afbeeldingen toe tijdens maken/wijzigen log
+- Oplossing: Spoiler afbeeldingen worden niet langer geladen (website wijziging)
 
 ### Algemeen
 - Nieuw: Schakel over om de status van Lab Avonturen handmatig of automatisch in te stellen
@@ -32,3 +35,5 @@
 - Wijziging: Verbeter de omschrijving voor de "onderhouds" functie (verwijder verweesde gegevens)
 - Nieuw: Toon waarschuwingen wanneer HTTP fout 429 optreedt (Te veel verzoeken)
 - Oplossing: Knipperen bij het vernieuwen van de cache lijst
+- Nieuw: Weergeven van wachtwoorden in de connectorconfiguratie toestaan
+- Oplossing: Zoek naar geokretys die niet meer werken tijdens het gebruik van trackingcodes
