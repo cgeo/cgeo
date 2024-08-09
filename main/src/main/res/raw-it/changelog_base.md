@@ -17,6 +17,9 @@
 - Cambia: Cambio dell1'icona "modifica liste" da matita a lista + matita
 - Fix: vanity function failing on long strings
 - Corretto: errata priorità nel parsing della formula backup
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- New: Allow user-stored cache images on creating/editing log
+- Fix: Spoiler images no longer being loaded (website change)
 
 ### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
@@ -32,6 +35,8 @@
 - Modifica: Migliorata la descrizione della funzione "manutenzione" (rimuove i dati orfani)
 - Nuovo: Mostra avvisi quando si verifica l'errore HTTP 429 (troppe richieste)
 - Corretto: Flickering in aggiornamento della lista cache
+- New: Allow display of passwords in connector configuration
+- Fix: Search for geokretys no longer working when using trackingcodes
 
 ### Modifiche non incluse nella versione beta corrente
 - New: Store map theme per tile provider (UnifiedMap)
