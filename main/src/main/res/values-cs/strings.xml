@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">Komentář týmu OC</string>
     <string name="log_your_saved_log">Tvé uložené logy</string>
     <string name="log_empty_logbook">Logbook této kešky je prázdný.</string>
+    <string name="log_image_selectfromstorage_tooltip">Vybrat obrázky z úložiště</string>
+    <string name="log_image_camera_tooltip">Pořídit snímek pomocí fotoaparátu</string>
+    <string name="log_image_selectfromown_tooltip">Vybrat obrázky z vlastních snímků</string>
     <string name="log_problem_none">Žádný problém</string>
     <string name="log_problem_needs_maintenance_label">Vyžaduje údržbu</string>
     <string name="log_problem_needs_maintenance_text">Tento hráč oznámil problém s keškou.</string>
