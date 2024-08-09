@@ -650,10 +650,20 @@ public final class GCParser {
 
     @NonNull
     static String fullScaleImageUrl(@NonNull final String imageUrl) {
-        // For images from geocaching.com: the original spoiler URL
-        // (include .../display/... contains a low-resolution image
-        // if we shorten the URL we get the original-resolution image
-        return GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find() ? imageUrl.replace("/display", "") : imageUrl;
+        // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
+        // Manipulate the URL to load the requested size.
+        String fullscaleUrl = imageUrl;
+        if (GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find()) {
+            for (String urlpath : new String[] {"/large/", "/display/", "/small/", "/thumb/"}) {
+                fullscaleUrl = imageUrl.replace(urlpath, "/");
+            }
+        }
+        if (GCConstants.PATTERN_GC_HOSTED_IMAGE_S3.matcher(imageUrl).find()) {
+            for (String urlpath : new String[] {"_l", "_d", "_sm", "_t"}) {
+                fullscaleUrl = imageUrl.replace(urlpath, "");
+            }
+        }
+        return fullscaleUrl;
     }
 
     private static SearchResult searchByMap(final IConnector con, final Parameters params) {

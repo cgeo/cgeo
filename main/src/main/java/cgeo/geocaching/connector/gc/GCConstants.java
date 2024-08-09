@@ -90,6 +90,7 @@ public final class GCConstants {
     static final Pattern PATTERN_WATCHLIST = Pattern.compile("data-cacheonwatchlist=\"True\"");
     static final Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("ctl00_ContentBody_uxCacheUrl.*? href=\"(.*?)\">");
     static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com/");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com/gs-geo-images/(.*)_(l|d|sm|t)\\." + IMAGE_FORMATS);
     static final Pattern PATTERN_BACKGROUND_IMAGE = Pattern.compile("<body background=\"(.+?)\"");
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
