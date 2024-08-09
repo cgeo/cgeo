@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">OC Team commentaar</string>
     <string name="log_your_saved_log">Je opgeslagen log</string>
     <string name="log_empty_logbook">Het logboek van deze cache is leeg.</string>
+    <string name="log_image_selectfromstorage_tooltip">Selecteer afbeeldingen uit opslag</string>
+    <string name="log_image_camera_tooltip">Foto maken met camera</string>
+    <string name="log_image_selectfromown_tooltip">Afbeeldingen selecteren uit eigen afbeeldingen</string>
     <string name="log_problem_none">Geen Probleem</string>
     <string name="log_problem_needs_maintenance_label">Heeft onderhoud nodig</string>
     <string name="log_problem_needs_maintenance_text">Deze geocacher meldt dat er een probleem is met deze cache.</string>
