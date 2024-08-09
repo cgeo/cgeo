@@ -649,21 +649,43 @@ public final class GCParser {
     }
 
     @NonNull
-    static String fullScaleImageUrl(@NonNull final String imageUrl) {
+    public static String fullScaleImageUrl(@NonNull final String imageUrl) {
         // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
         // Manipulate the URL to load the requested size.
-        String fullscaleUrl = imageUrl;
-        if (GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find()) {
-            for (String urlpath : new String[] {"/large/", "/display/", "/small/", "/thumb/"}) {
-                fullscaleUrl = imageUrl.replace(urlpath, "/");
-            }
+        final GCImageSize preferredSize = GCImageSize.ORIGINAL;
+        MatcherWrapper matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_GC_HOSTED_IMAGE, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
         }
-        if (GCConstants.PATTERN_GC_HOSTED_IMAGE_S3.matcher(imageUrl).find()) {
-            for (String urlpath : new String[] {"_l", "_d", "_sm", "_t"}) {
-                fullscaleUrl = imageUrl.replace(urlpath, "");
-            }
+        matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
         }
-        return fullscaleUrl;
+        return imageUrl;
+    }
+
+    public enum GCImageSize {
+        ORIGINAL("", ""),
+        LARGE("_l", "large/"),
+        DISPLAY("_d", "display/"),
+        SMALL("_sm", "small/"),
+        THUMB("_t", "thumb/");
+
+        private final String suffix;
+        private final String pathname;
+
+        GCImageSize(final String suffix, final String pathname) {
+            this.suffix = suffix;
+            this.pathname = pathname;
+        }
+
+        public String getPathname() {
+            return pathname;
+        }
+
+        public String getSuffix() {
+            return suffix;
+        }
     }
 
     private static SearchResult searchByMap(final IConnector con, final Parameters params) {

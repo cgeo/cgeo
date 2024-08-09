@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
@@ -485,6 +486,7 @@ public final class ImageUtils {
             urls.add(imageUrlForSpoilerCompare(image.getUrl()));
         }
         forEachImageUrlInHtml(source -> {
+            source = GCParser.fullScaleImageUrl(source);
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source, "https")
