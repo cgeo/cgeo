@@ -17,6 +17,9 @@
 - 변경: "목록 편집" 아이콘을 연필에서 목록 및 연필로 변경
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- New: Allow user-stored cache images on creating/editing log
+- Fix: Spoiler images no longer being loaded (website change)
 
 ### 일반
 - 신규: 어드벤처 랩의 발견 상태를 수동 또는 자동으로 설정하도록 전환합니다.
@@ -32,6 +35,8 @@
 - Change: Improve description for "maintenance" function (remove orphaned data)
 - New: Show warnings when HTTP error 429 occurs (Too many requests)
 - Fix: Flickering on cache list refresh
+- New: Allow display of passwords in connector configuration
+- Fix: Search for geokretys no longer working when using trackingcodes
 
 ### Changes not included in current beta version
 - New: Store map theme per tile provider (UnifiedMap)
