@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 
+import java.util.Collections;
 import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
@@ -99,7 +100,7 @@ public class CacheListActionBarChooser {
                     this.listId = selectedListId;
                     refreshActionBarTitle();
                 }
-            }, false, PseudoList.NEW_LIST.id));
+            }, false, Collections.singleton(PseudoList.NEW_LIST.id), listId, null));
         }
 
         final TextView titleTv = resultView.findViewById(android.R.id.text1);

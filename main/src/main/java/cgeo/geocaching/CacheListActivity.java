@@ -554,7 +554,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new StoredList.UserInterface(this).promptForListSelection(R.string.gpx_import_select_list_title, listId -> {
             new GPXImporter(CacheListActivity.this, listId, importGpxAttachementFinishedHandler).importGPX();
             switchListById(listId);
-        }, true, 0, listNameMemento);
+        }, true, Collections.singleton(0), -1, listNameMemento);
     }
 
     @Override

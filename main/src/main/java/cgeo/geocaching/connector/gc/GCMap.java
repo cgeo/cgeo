@@ -143,9 +143,15 @@ public class GCMap {
                 search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
                 break;
             case ATTRIBUTES:
-                search.addCacheAttributes(
-                        CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
-                                .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
+                final AttributesGeocacheFilter attFilter = (AttributesGeocacheFilter) basicFilter;
+                if (!attFilter.isInverse()) {
+                    search.addCacheAttributes(
+                        CollectionStream.of(attFilter.getAttributes().entrySet())
+                        .filter(e -> Boolean.TRUE.equals(e.getValue()))
+                        .filter(e -> e.getKey().gcid >= 0 && e.getKey().gcid < 100)
+                        .map(Map.Entry::getKey)
+                        .toArray(CacheAttribute.class));
+                }
                 break;
             case SIZE:
                 search.addCacheSizes(((SizeGeocacheFilter) basicFilter).getValues());

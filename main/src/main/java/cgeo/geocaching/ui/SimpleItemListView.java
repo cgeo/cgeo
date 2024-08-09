@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 
 import com.google.android.material.button.MaterialButton;
@@ -41,6 +42,7 @@ public class SimpleItemListView extends LinearLayout {
     private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()), null);
 
     private ItemListAdapter listAdapter;
+    private SimpleitemlistViewBinding binding;
 
     private SimpleItemListModel<Object> model = new SimpleItemListModel<>();
 
@@ -331,7 +333,7 @@ public class SimpleItemListView extends LinearLayout {
     private void init() {
         final Context ctw = getContext();
         inflate(ctw, R.layout.simpleitemlist_view, this);
-        final SimpleitemlistViewBinding binding = SimpleitemlistViewBinding.bind(this);
+        this.binding = SimpleitemlistViewBinding.bind(this);
         setOrientation(VERTICAL);
 
         listAdapter = new ItemListAdapter(binding.list);
@@ -345,6 +347,22 @@ public class SimpleItemListView extends LinearLayout {
             this.model.addChangeListeners(this::handleModelChange);
             handleModelChange(SimpleItemListModel.ChangeType.COMPLETE);
         }
+    }
+
+    public void scrollTo(final Object value) {
+        if (value == null || binding.list.getLayoutManager() == null) {
+            return;
+        }
+
+        int pos = 0;
+        for (ListItem item : listAdapter.getItems()) {
+            if (Objects.equals(value, item.value) && item.type == ListItemType.ITEM) {
+                binding.list.getLayoutManager().scrollToPosition(pos);
+                break;
+            }
+            pos++;
+        }
+
     }
 
     private void handleModelChange(final SimpleItemListModel.ChangeType changeType) {

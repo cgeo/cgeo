@@ -202,6 +202,9 @@
     <string name="log_oc_team_comment">OC Team comment</string>
     <string name="log_your_saved_log">Your saved log</string>
     <string name="log_empty_logbook">The logbook of this cache is empty.</string>
+    <string name="log_image_selectfromstorage_tooltip">Select images from storage</string>
+    <string name="log_image_camera_tooltip">Take picture with camera</string>
+    <string name="log_image_selectfromown_tooltip">Select images from own images</string>
 
     <string name="log_problem_none">No Problem</string>
     <string name="log_problem_needs_maintenance_label">Needs Maintenance</string>
