@@ -65,8 +65,8 @@ class LoadInBackgroundHandler {
                 final int currentZoom = map.getCurrentZoom();
 
                 // check if map moved or zoomed
-                final boolean moved = previousViewport == null || currentZoom != previousZoom || mapMoved(previousViewport, currentViewport);
-                if (moved) {
+                final boolean useLastSearchResult = null != lastSearchResult && null != previousViewport && (previousViewport.includes(currentViewport) || !mapMoved(previousViewport, currentViewport));
+                if (!useLastSearchResult) {
                     load(currentViewport);
                     previousZoom = currentZoom;
                     previousViewport = currentViewport;
