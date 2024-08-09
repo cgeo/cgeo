@@ -17,6 +17,9 @@
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
 - Oprava: Selhání funkce vanity na dlouhých řetězcích
 - Oprava: Chybná priorita parsování v záloze vzorce
+- Změna: Povolit větší rozsahy celých čísel ve vzorcích (zakázat použití negace)
+- Novinka: Povolení uživatelsky uložených obrázků kešky při vytváření/úpravě logu
+- Oprava: Obrázky spoilerů se již nenačítají (změna webových stránek)
 
 ### Obecné
 - Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
@@ -32,6 +35,8 @@
 - Změna: Zlepšen popis funkce „údržba“ (odstranit zbytková data)
 - Novinka: Zobrazení varování při výskytu chyby HTTP 429 (Příliš mnoho požadavků)
 - Oprava: Blikání při obnovení seznamu kešek
+- Novinka: Povolení zobrazení hesel v konfiguraci konektoru
+- Oprava: Vyhledávání geokretů již nefunguje při použití sledovacích kódů
 
 ### Změny nezahrnuté v aktuální beta verzi
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
