@@ -17,6 +17,9 @@
 - Alteração: Alterado o ícone "editar listas" do lápis para lista + lápis
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- New: Allow user-stored cache images on creating/editing log
+- Fix: Spoiler images no longer being loaded (website change)
 
 ### Geral
 - Novo: Opção para definir o estado de "encontrado" das Adventure Lab manualmente ou automaticamente
@@ -32,6 +35,8 @@
 - Change: Improve description for "maintenance" function (remove orphaned data)
 - New: Show warnings when HTTP error 429 occurs (Too many requests)
 - Fix: Flickering on cache list refresh
+- New: Allow display of passwords in connector configuration
+- Fix: Search for geokretys no longer working when using trackingcodes
 
 ### Changes not included in current beta version
 - New: Store map theme per tile provider (UnifiedMap)
