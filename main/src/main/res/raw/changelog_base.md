@@ -19,6 +19,7 @@
 - Fix: Wrong parsing priority in formula backup
 - Change: Allow larger integer ranges in formulas (disallow usage of negation)
 - New: Allow user-stored cache images on creating/editing log
+- Fix: Spoiler images no longer being loaded (website change)
 
 ### General
 - New: Switch to set found state of Lab Adventures either manually or automatically
