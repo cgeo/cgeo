@@ -684,8 +684,8 @@ tasks.register('copyDefaultPreferencesToAndroid') {
             try {
                 String debugBuildAppId = 'cgeo.geocaching.developer'
                 String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
-                String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/';
-                String tempDirectory = '/data/local/tmp/';
+                String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/'
+                String tempDirectory = '/data/local/tmp/'
                 injected.execOperations.exec {
                     executable = adb
                     args = ['push', preferencesXml, tempDirectory + preferencesXml]
