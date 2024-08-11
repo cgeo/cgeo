@@ -534,9 +534,7 @@ String keysDirectory = "src/main/res/values"
 String keysName = "keys.xml"
 File templatesFile = project.file(templatesDirectory + "/" + keysName)
 File keysFile = project.file(keysDirectory + "/" + keysName)
-File preferencesFile = project.file('cgeo.geocaching_preferences.xml')
 String adb = android.getAdbExecutable().absolutePath
-String debugBuildAppId = 'cgeo.geocaching.developer'
 
 // verify existence of the necessary keys for compilation, instead of waiting for a compile error
 project.afterEvaluate {
@@ -680,23 +678,29 @@ tasks.register('copyDefaultPreferencesToAndroid') {
     dependsOn 'installBasicDebug'
     Injected injected = project.objects.newInstance(Injected)
     doFirst {
+        String preferencesXml = 'cgeo.geocaching_preferences.xml'
+        File preferencesFile = project.file(preferencesXml)
         if (preferencesFile.exists()) {
             try {
+                String debugBuildAppId = 'cgeo.geocaching.developer'
+                String debugPreferencesXml = debugBuildAppId + '_preferences.xml'
+                String prefDirectory = '/data/data/' + debugBuildAppId + '/shared_prefs/';
+                String tempDirectory = '/data/local/tmp/';
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['push', 'cgeo.geocaching_preferences.xml', '/data/local/tmp/cgeo.geocaching_preferences.xml']
+                    args = ['push', preferencesXml, tempDirectory + preferencesXml]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', '/data/data/'+debugBuildAppId+'/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'mkdir', '-p', prefDirectory]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', debugBuildAppId, 'cp', '/data/local/tmp/cgeo.geocaching_preferences.xml', '/data/data/'+debugBuildAppId+'/shared_prefs/'+debugBuildAppId+'_preferences.xml']
+                    args = ['shell', 'run-as', debugBuildAppId, 'cp', tempDirectory + preferencesXml, prefDirectory + debugPreferencesXml]
                 }
                 injected.execOperations.exec {
                     executable = adb
-                    args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', '/data/data/'+debugBuildAppId+'/shared_prefs/']
+                    args = ['shell', 'run-as', debugBuildAppId, 'ls', '-l', prefDirectory]
                 }
                 injected.execOperations.exec {
                     executable = adb
