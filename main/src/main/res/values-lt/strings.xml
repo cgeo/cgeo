@@ -87,7 +87,25 @@
     <string name="wpnew_original">Originalus</string>
     <string name="wpnew_generated">Sugeneruotas</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Nežinoma</string>
+    <string name="cache_cat_bc_nature">Gamta</string>
+    <string name="cache_cat_bc_location">Vieta</string>
+    <string name="cache_cat_bc_recommended">Rekomenduojama</string>
+    <string name="cache_cat_bc_gadget">Įtaisas</string>
+    <string name="cache_cat_bc_mystery">Mystery</string>
+    <string name="cache_cat_bc_hiking">Žygis</string>
+    <string name="cache_cat_bc_other">Kita</string>
+    <string name="cache_cat_desc_bc_nature">Ypatingos gamtos apsuptyje</string>
+    <string name="cache_cat_desc_bc_location">Rodo puikią vietą</string>
+    <string name="cache_cat_desc_bc_recommended">Rekomendavo BetterCacher komanda</string>
+    <string name="cache_cat_desc_bc_gadget">Ypatingas rankdarbis, šaunus dalykėlis ir kt</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Nieko</string>
+    <string name="cache_tier_bc_blue">Mėlyna</string>
+    <string name="cache_tier_bc_silver">Sidabras</string>
+    <string name="cache_tier_bc_gold">Auksas</string>
+    <string name="cache_tier_desc_bc_blue">Numatytoji išvardytų slėptuvių pakopa</string>
+    <string name="cache_tier_desc_bc_silver">Apsilankyta BetterCacher komandos, automatiškai apdovanojama</string>
     <!-- logs -->
     <string name="log_found">Surasta</string>
     <string name="log_dnf">Nerasta</string>
@@ -125,6 +143,7 @@
     <string name="log_save">Išsaugoti neprisijungus</string>
     <string name="log_saving">Siunčiamas įrašas…</string>
     <string name="log_posting_log">Skelbiamas įrašas…</string>
+    <string name="log_posting_deletelog">Ištrinti įrašą…</string>
     <string name="log_posting_vote">Skelbiamas slėptuvės įvertinimas…</string>
     <string name="log_posting_generic_trackable">Skelbiama %1$s %2$d/%3$d</string>
     <string name="log_clear">Išvalyti</string>
@@ -152,6 +171,7 @@
     <string name="log_smilies">Šypsenėlės</string>
     <string name="log_image">Vaizdas</string>
     <string name="log_images">Vaizdai</string>
+    <string name="log_edit_image">Redaguoti paveikslėlį</string>
     <string name="log_image_caption">Antraštė</string>
     <string name="log_image_description">Aprašymas</string>
     <string name="log_image_scale">Pritaikyti dydį</string>
@@ -487,10 +507,12 @@
     <string name="cache_filter_difficulty_terrain">Sunkumas / Vietovė</string>
     <string name="cache_filter_rating">Reitingas</string>
     <string name="cache_filter_status">Būsena</string>
+    <string name="cache_filter_individualroute">Asmeninis maršrutas</string>
     <string name="cache_filter_attributes">Slėptuvės savybės</string>
     <string name="cache_filter_favorites">Mėgstamos</string>
     <string name="cache_filter_distance">Atstumas</string>
     <string name="cache_filter_hidden">Paslėpimo data</string>
+    <string name="cache_filter_eventdate">Renginio data</string>
     <string name="cache_filter_logs_count">Įrašų skaičius</string>
     <string name="cache_filter_last_found">Vėliausia suradimo data</string>
     <string name="cache_filter_log_entry">Žurnalo įrašas</string>
@@ -579,6 +601,22 @@
     <string name="cache_filter_nested_filter_empty_filterconfic">Papildomas filtras šiuo metu tuščias</string>
     <string name="cache_filter_log_entry_foundby">Surado</string>
     <string name="cache_filter_log_entry_logtext">Įrašo tekstas</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>daugiau nei prieš metus</item>
+        <item>prieš metus</item>
+        <item>prieš 30 dienų</item>
+        <item>prieš savaitę</item>
+        <item>prieš 1 dieną</item>
+        <item>mažiau nei prieš 1 dieną</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1m</item>
+        <item>1m</item>
+        <item>30d</item>
+        <item>1 sav</item>
+        <item>1d</item>
+        <item>&lt;1d</item>
+    </string-array>
     <string-array name="cache_filter_hidden_since_stored_values_label">
         <item>daugiau nei prieš metus</item>
         <item>prieš metus</item>
@@ -600,6 +638,28 @@
         <item>1sav.</item>
         <item>3d</item>
         <item>&lt;3d</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>buvę</item>
+        <item>šiandien</item>
+        <item>rytoj</item>
+        <item>už 2 dienų</item>
+        <item>už 3 dienų</item>
+        <item>už 1 savaitės</item>
+        <item>už 2 savaičių</item>
+        <item>už 1 mėnesio</item>
+        <item>visi būsimi</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>buvę</item>
+        <item>0d</item>
+        <item>1d</item>
+        <item>2d</item>
+        <item>3d</item>
+        <item>1 sav</item>
+        <item>2 sav</item>
+        <item>1 mėn</item>
+        <item>&gt;1m</item>
     </string-array>
     <!-- about -->
     <string name="about_version">Versija</string>
@@ -1038,6 +1098,7 @@
     <string name="init_map_other">Kiti</string>
     <string name="init_map_osm_multithreaded">Kelių gijų (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">OpenStreetMap žemėlapiams atvaizduoti naudokite kelias gijas</string>
+    <string name="category_unifiedMap">Vieningas žemėlapis (beta)</string>
     <string name="init_title_useUnifiedMap">Naudokite vieningą žemėlapį</string>
     <string name="localstorage_migrate_title">Vietinių failų perkėlimas</string>
     <string name="localstorage_migrate_status_major">Versija %1$d</string>
@@ -1053,6 +1114,7 @@
     <string name="pn_tone_only">Tik garsas</string>
     <string name="pn_text_only">Tik tekstas</string>
     <string name="pn_tone_and_text">Garsas ir tekstas</string>
+    <string name="pn_enabled">Įgalinti artumo pranešimus</string>
     <!-- map sources -->
     <string name="map_source_google_map">Google: Žemėlapis</string>
     <string name="map_source_google_satellite">Google: Palydovas</string>
@@ -1105,6 +1167,9 @@
     <string name="persistablefolder_spoilerimages">Užuominos vaizdai</string>
     <string name="persistablefolder_routingbase">Maršrutizavimas</string>
     <string name="persistablefolder_routingtiles">Maršruto duomenys</string>
+    <string name="persistableuri_proximitynotification_audiofile_far">Garso failas (toli)</string>
+    <string name="persistableuri_proximitynotification_audiofile_close">Garso failas (arti)</string>
+    <string name="proximitynotification_internal">(vidinis)</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s baigta</string>
     <string name="folder_process_status_currentfile">Apdorota %1$s</string>
@@ -1174,6 +1239,7 @@
     <string name="last_day_available">liko paskutine diena</string>
     <string name="cache_offline_refresh">Naujinti</string>
     <string name="cache_offline_drop">Pašalinti iš sąrašo</string>
+    <string name="cache_offline_delete">Ištrinti</string>
     <string name="cache_delete_userdefined_waypoints">Ištrinti vartotojo nustatytus kelio taškus</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Ištrinti visus vartotojo kelio taškus iš šios slėptuvės?\n\nKelio taškai bus nedelsiant ištrinti, anuliuoti nebus galima.</string>
     <string name="cache_delete_userdefined_waypoints_note">Pastaba: esate įjungę \"Kelio taškai iš pastabų\". Jei savo asmeninėje pastaboje turite koordinates, kurias atpažino c:geo, kelio taškai bus sukurti joms automatiškai. Tai galite išjungti asmeninių pastabų redagavimo dialogo lange.</string>
@@ -1182,6 +1248,7 @@
     <string name="cache_delete_generated_waypoints_confirm">Pašalinti visus sugeneruotus kelio taškus iš šios slėptuvės?\n\nKelio taškai bus nedelsiant ištrinti, anuliuoti negalima.</string>
     <string name="cache_delete_generated_waypoints_success">Sugeneruoti kelio taškai ištrinti</string>
     <string name="cache_offline_store">Saugoti</string>
+    <string name="cache_offline_stored_ago">Išsaugota %s</string>
     <string name="cache_offline_not_ready">Nepasiekiama neprisijungus</string>
     <string name="cache_offline_time_mins_few">prieš kelias minutes</string>
     <plurals name="cache_offline_about_time_mins">
@@ -1228,6 +1295,7 @@
     <string name="cache_personal_note_upload">Įkelti</string>
     <string name="cache_personal_note_upload_done">Asmeninė pastaba įkelta</string>
     <string name="cache_personal_note_upload_error">Klaida įkeliant asmeninę pastabą</string>
+    <string name="cache_personal_note_save_and_upload">Išsaugoti ir įkelti</string>
     <string name="cache_personal_note_vars_out_of_sync">Kintamieji pastabose nesinchronizuojami (%d)</string>
     <string name="cache_personal_note_vars_out_of_sync_dialog_title">Sinchronizuoti kintamuosius</string>
     <string name="cache_personal_note_vars_out_of_sync_title">Patikrinkite kintamuosius, kurių reikšmė turėtų būti perrašyta iš pastabų</string>
@@ -1277,6 +1345,8 @@
     <string name="cache_dialog_offline_save_message">Slėptuvė išsaugoma naudojimui neprisijungus…</string>
     <string name="cache_dialog_offline_drop_title">Pašalinti</string>
     <string name="cache_dialog_offline_drop_message">Slėptuvė pašalinama iš įrenginio atminties…</string>
+    <string name="cache_menu_speechDeactivate">Baikite kalbėti</string>
+    <string name="cache_menu_speechActivate">Pradėkite kalbėti</string>
     <string name="cache_menu_navigate">Naviguoti</string>
     <string name="cache_menu_target">Nustatyti kaip tikslą</string>
     <string name="cache_menu_navigation_drive">Navigacija (vairavimas)</string>
@@ -1311,6 +1381,7 @@
     <string name="cache_menu_reset_foundstate">Iš naujo nustatyti suradimo būseną</string>
     <string name="cache_foundstate_updated">Suradimo būsena atnaujinta</string>
     <string name="cache_menu_set_cache_icon">Nustatyti slėptuvės piktogramą</string>
+    <string name="cache_menu_change_description_style">Keisti aprašymo stilių</string>
     <string name="cache_icon_updated">Slėptuvės piktograma atnaujinta</string>
     <string name="cache_menu_details">Informacija</string>
     <string name="cache_menu_refresh">Atnaujinti</string>
@@ -1324,6 +1395,8 @@
     <string name="cache_menu_log_in_browser">Užregistruoti naršyklėje</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
     <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
+    <string name="cache_log_menu_edit">Redaguoti įrašą</string>
+    <string name="cache_log_menu_delete">Ištrinti įrašą</string>
     <string name="cache_log_menu_popup_title">%s įrašas</string>
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
@@ -1355,6 +1428,7 @@
     <string name="cache_favorite">Mėgstama</string>
     <string name="cache_owner">Savininkas</string>
     <string name="cache_hidden">Paslėpta</string>
+    <string name="cache_bettercacher">BetterCacher</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Vieta</string>
     <string name="cache_coordinates">Koordinatės</string>
@@ -1382,6 +1456,10 @@
     <string name="cache_recently_viewed">Neseniai peržiūrėta</string>
     <string name="cache_recently_viewed_empty">Nėra neseniai peržiūrėtų slėptuvių</string>
     <string name="cache_clear_recently_viewed">išvalyti</string>
+    <string name="cachedetails_progress_refresh">%s atnaujinta</string>
+    <string name="cachedetails_progress_watch">Įtraukta į stebimų sarašą</string>
+    <string name="cachedetails_progress_unwatch">Pašalinta iš stebimų sąrašo</string>
+    <string name="cachedetails_progress_favorite">Pridėta prie mėgstamiausių</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
     <string name="cache_chirpwolf_start">Šioje slėptuvėje gali būti naudojamas Chirp siųstuvas arba kitokio tipo belaidis švyturys. Norėdami skaityti Chirp duomenis, galite atidaryti Chirp Wolf.</string>
@@ -1400,6 +1478,8 @@
     <string name="context_map_remove_from_route_start">Pašalinti iš pradžios</string>
     <string name="context_map_remove_from_route_pos">Pašalinti iš pozicijos %d</string>
     <string name="context_map_remove_from_route_end">Pašalinti iš pabaigos</string>
+    <string name="context_map_star_show">Rodyti linijas į kelio taškus</string>
+    <string name="edit">Redaguoti</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
     <string name="create_internal_cache_short">Nauja slėptuvė</string>
     <string name="create_internal_cache_currentlist">Naudoti dabartinį sąrašą</string>
@@ -1410,12 +1490,16 @@
     <string name="internal_goto_targets_description">Šioje slėptuvėje saugomi naujausi \'\'Eiti į\'\' tikslai. Jis sukuriamas automatiškai, kai pagrindiniame meniu naudojate funkciją \'\'Eiti į\'\'. Ten įvestos koordinatės bus saugomos šios slėptuvės kelio taškuose. Jei jums nebereikia šių koordinačių, galite saugiai ištrinti šią slėptuvę arba bet kurį iš jos kelio taškų. Taip pat galite perkelti slėptuvę į bet kurį kitą pasirinktą sąrašą.</string>
     <string name="init_longtap_map">Ilgas žemėlapio palietimas</string>
     <string name="init_summary_longtap_map">Suaktyvinkite ilgą paspaudimą ant piktogramos žemėlapyje (sukurkite individualų maršrutą) arba laisvą žemėlapio vietą (sukurkite vartotojo nustatytą slėptuvę / kelio tašką)</string>
+    <string name="init_show_routing_menu">Rodyti maršruto parinkimo meniu</string>
     <string name="init_ActionbarAutohide">Slėpti įrankių juostą bakstelėjus</string>
     <string name="init_summary_ActionbarAutohide">Bakstelėkite laisvą vietą žemėlapyje norėdami slėpti/rodyti įrankių juostą</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Išvalyti \"Eiti į\" istoriją</string>
     <string name="clear_goto_history">Tai iš istorijos ištrins visus maršruto taškus, išskyrus penkis naujausius</string>
     <!-- html styles -->
+    <string name="html_style_default">Numatytas</string>
+    <string name="html_style_monochrome">Vienspalvė</string>
+    <string name="html_style_source">HTML pirminis tekstas</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">laipsniai</string>
     <string name="cc_hint_minutes">minutės</string>
@@ -1447,6 +1531,7 @@
     <string name="web_downloaded">Atsisiųsta</string>
     <!-- popup -->
     <string name="popup_more">Daugiau detalių</string>
+    <string name="map_fragment_swipe_hint_text">Braukite, kad atidarytumėte išsamią informaciją</string>
     <!-- waypoint -->
     <string name="waypoint">Kelio taškas</string>
     <string name="waypoint_coordinates">Koordinatės</string>
@@ -1490,6 +1575,14 @@
     <string name="from_clipboard">Iš iškarpinės</string>
     <string name="copy_to_clipboard">Kopijuoti į iškarpinę</string>
     <!-- Projection -->
+    <string name="projection_type_none">Jokios projekcijos</string>
+    <string name="projection_type_bearing">Azimutas</string>
+    <string name="projection_type_bearing_info">Azimutas %1$s%3$s, %2$s°</string>
+    <string name="projection_type_bearing_hint_distance">Atstumas</string>
+    <string name="projection_type_offset">Poslinkis</string>
+    <string name="projection_type_offset_info">Poslinkis platuma %1$s mm, ilguma %2$s mm</string>
+    <string name="projection_type_offset_hint_latitude">Platumos poslinkis mikro minutėmis</string>
+    <string name="projection_type_offset_hint_longitude">Ilgumos poslinkis mikro minutėmis</string>
     <!-- Variables -->
     <string name="variables_titletext">Naudokite šį puslapį, kad užsirašytumėte vertes ir atliktumėte skaičiavimus, reikalingus šiai slėptuvei.</string>
     <string name="variables_scanlisting">Nuskaityti aprašymą</string>
@@ -1562,6 +1655,8 @@
     <string name="imageview_metadata_comment">Komentaras</string>
     <!-- map -->
     <string name="map_map">Žemėlapis</string>
+    <string name="map_live">Tiesiogiai</string>
+    <string name="map_offline">Neprisijungus</string>
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio pasukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
