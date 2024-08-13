@@ -13,7 +13,6 @@
 - Nyhet: Visa bilder länkade i "personlig anteckning" i fliken Bilder
 - Change: Simplify long-tap action in cache details and trackable details
 - New: Smoother scaling of log images
-- Ändra: Ändra "logg"-ikonen från penna till smiley-ikon
 - Ändra: Ändra ikonen "redigera listor" från penna till lista + penna
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
