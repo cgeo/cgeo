@@ -122,11 +122,6 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_theme_legend"
-        android:title="@string/map_theme_legend"
-        android:visible="false">
-    </item>
-    <item
         android:id="@+id/menu_select_language"
         android:title="@string/map_language"
         android:visible="false"
