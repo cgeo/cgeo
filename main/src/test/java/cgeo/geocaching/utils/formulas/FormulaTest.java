@@ -61,6 +61,13 @@ public class FormulaTest {
     }
 
     @Test
+    public void bigDecimals() {
+        final int doublePowCs = 847; // manually calculated checksum of pow(99^99)
+        assertThat(Formula.evaluate("cs(99^99)").getAsDouble()).isEqualTo(doublePowCs);
+        assertThat(Formula.evaluate("99^99").getAsDouble()).isEqualTo(Math.pow(99, 99));
+    }
+
+    @Test
     public void complex() {
         assertThat(eval("-2.5 + 3 * (4-1) + 3^3")).isEqualTo(33.5d);
     }
