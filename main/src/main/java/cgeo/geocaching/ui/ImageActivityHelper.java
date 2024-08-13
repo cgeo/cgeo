@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action3;
 
 import android.app.Activity;
@@ -167,21 +168,23 @@ public class ImageActivityHelper {
     }
 
     private void getMultipleItemsFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final Uri startUri, final boolean onlyImages) {
-        final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+
+        final boolean hasStartUrl = UriUtils.isContentUri(startUri);
+
+        //ACTION_GET_CONTENT provides nicer support for images and allows remote image access
+        //ACTION_OPEN_DOCUMENT seems to allow only local files, but supports a startUri (which ACTION_GET_CONTENT does not)
+        final Intent intent = new Intent(hasStartUrl ? Intent.ACTION_OPEN_DOCUMENT : Intent.ACTION_GET_CONTENT);
+        // Attribute is supported starting SDK26 / O
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, hasStartUrl ? startUri : PersistableFolder.BASE.getUri());
+        }
+
         if (onlyImages) {
             setImageMimeTypes(intent);
         } else {
             intent.setType("*/*");
         }
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        // Attribute is supported starting SDK26 / O
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            if (startUri != null) {
-                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, startUri);
-            } else {
-                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, PersistableFolder.BASE.getUri());
-            }
-        }
+
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startIntent(Intent.createChooser(intent, "Select Multiple Images"),
                 new IntentContextData(REQUEST_CODE_STORAGE_SELECT_MULTI, fileid, null, callOnFailure, userKey, onlyImages));
