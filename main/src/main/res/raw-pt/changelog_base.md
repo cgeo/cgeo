@@ -13,7 +13,6 @@
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
 - Alteração: Simplificar acção de toque longo nos detalhes da cache e detalhes do TB
 - Novo: Dimensionamento mais suave das imagens de registo
-- Alteração: Mudança do ícone "Registar visita" de lápis para um ícone smiley
 - Alteração: Alterado o ícone "editar listas" do lápis para lista + lápis
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
