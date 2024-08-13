@@ -13,7 +13,6 @@
 - New: Show images linked in "personal note" in Images tab
 - Change: Simplify long-tap action in cache details and trackable details
 - New: Smoother scaling of log images
-- Change: Change "log" icon from pencil to smiley icon
 - Change: Change "edit lists" icon from pencil to list + pencil
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
