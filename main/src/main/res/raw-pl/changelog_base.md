@@ -17,6 +17,9 @@
 - Zmiana: Zmieniono ikonę „edytuj listy” z ołówka na listę + ołówek
 - Poprawka: funkcja vanity nie działała na długich tekstach
 - Poprawka: Błędny priorytet analizowania w kopii zapasowej formuły
+- Zmiana: Zezwalaj na większe zakresy licz całkowitych w formułach (nie zezwalaj na użycie negacji)
+- Nowość: Zezwalaj na zapisane przez użytkownika obrazy dot. skrytki przy tworzeniu/edycji dziennika
+- Poprawka: Obrazy ze spoilerami nie były wczytywane (zmiana na stronie internetowej)
 
 ### Ogólne
 - Nowość: Przełącznik do ustawiania znalezień skrytek Lab ręcznie lub automatycznie
@@ -32,3 +35,5 @@
 - Zmiana: Poprawienie opisu funkcji w dziale „Dane offline – Konserwacja” (Usuń nieaktualne dane)
 - Nowość: Pokaż ostrzeżenia, gdy wystąpi błąd HTTP 429 (Too wiele żądań)
 - Poprawka: Mruganie podczas odświeżania listy skrytek
+- Nowość: Zezwalaj na wyświetlanie haseł w konfiguracji konektora
+- Poprawka: Wyszukiwanie geokretów nie działało podczas korzystania z kodów śledzenia

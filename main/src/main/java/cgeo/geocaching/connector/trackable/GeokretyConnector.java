@@ -94,8 +94,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     @Override
     public boolean canHandleTrackable(@Nullable final String geocode, @Nullable final TrackableBrand brand) {
-        if (brand != null && brand != TrackableBrand.GEOKRETY && brand != TrackableBrand.UNKNOWN) {
-            return false;
+        if (brand != null && brand != TrackableBrand.GEOKRETY) {
+            return brand == TrackableBrand.UNKNOWN && canHandleTrackable(geocode);
         }
         return geocode != null && PATTERN_GK_CODE_EXTENDED.matcher(geocode).matches();
     }
