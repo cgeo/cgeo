@@ -46,7 +46,6 @@ import cgeo.geocaching.maps.mapsforge.v6.layers.PositionLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.RouteLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TapHandlerLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.TrackLayer;
-import cgeo.geocaching.maps.mapsforge.v6.legend.RenderThemeLegend;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
@@ -432,7 +431,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
             menu.findItem(R.id.menu_theme_options).setVisible(tileLayerHasThemes);
-            menu.findItem(R.id.menu_theme_legend).setVisible(tileLayerHasThemes && RenderThemeLegend.supportsLegend());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
@@ -492,8 +490,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {
             this.renderThemeHelper.selectMapThemeOptions();
-        } else if (id == R.id.menu_theme_legend) {
-            RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
             ActivityMixin.overrideTransitionToFade(this);
