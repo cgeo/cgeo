@@ -13,7 +13,6 @@
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Lepší vyhlazování obrázků v logu
-- Změna: Změna ikony "log" z tužky na ikonu smajlíka
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
 - Oprava: Selhání funkce vanity na dlouhých řetězcích
 - Oprava: Chybná priorita parsování v záloze vzorce
