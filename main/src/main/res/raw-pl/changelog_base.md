@@ -13,7 +13,6 @@
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
 - Zmiana: Uproszczenie działania długiego dotknięcia w szczegółach skrytki i szczegółach przedmiotu podróżnego
 - Nowość: płynniejsze skalowanie obrazów z dziennika znalezień
-- Zmiana: Zmieniono ikonę „zaloguj” z ołówka na ikonę uśmiechniętej buźki
 - Zmiana: Zmieniono ikonę „edytuj listy” z ołówka na listę + ołówek
 - Poprawka: funkcja vanity nie działała na długich tekstach
 - Poprawka: Błędny priorytet analizowania w kopii zapasowej formuły
