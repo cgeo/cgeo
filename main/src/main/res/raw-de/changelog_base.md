@@ -13,7 +13,6 @@
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Feiner geglättete Skalierung von Logbildern
-- Änderung: "Log"-Symbol ist nun ein Smiley (statt Bleistift)
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
 - Korrektur: `vanity` Funktion fehlerhaft bei langen Zeichenketten
 - Korrektur: Falsche Parsing-Priorität bei Formel-Backup
