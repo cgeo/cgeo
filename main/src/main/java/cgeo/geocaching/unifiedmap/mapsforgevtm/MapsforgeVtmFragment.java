@@ -11,7 +11,7 @@ import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
-import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
@@ -236,7 +236,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
     @Override
     public boolean supportsTileSource(final AbstractTileProvider newSource) {
-        return newSource instanceof AbstractMapsforgeTileProvider;
+        return newSource instanceof AbstractMapsforgeVTMTileProvider;
     }
 
     @Override
@@ -262,7 +262,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     public boolean setTileSource(final AbstractTileProvider newSource, final boolean force) {
         final boolean needsUpdate = super.setTileSource(newSource, force);
         if (needsUpdate) {
-            ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(this, mMap);
+            ((AbstractMapsforgeVTMTileProvider) currentTileProvider).addTileLayer(this, mMap);
             startMap();
         }
         return needsUpdate;

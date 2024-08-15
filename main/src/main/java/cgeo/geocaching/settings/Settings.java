@@ -1247,6 +1247,11 @@ public class Settings {
         return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
     }
 
+    /** use Mapsforge as additional map view for UnifiedMap */
+    public static boolean useMapsforgeInUnifiedMap() {
+        return getBoolean(R.string.pref_useMapsforgeInUnifiedMap, false);
+    }
+
     public static void setMapDownloaderSource(final int source) {
         putInt(R.string.pref_mapdownloader_source, source);
     }

@@ -26,11 +26,11 @@ import org.oscim.tiling.source.mapfile.MapFileTileSource;
 import org.oscim.tiling.source.mapfile.MapInfo;
 import org.oscim.tiling.source.mapfile.MultiMapFileTileSource;
 
-class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeOfflineTileProvider {
+class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTileProvider {
 
     private final List<ImmutablePair<String, Uri>> maps;
 
-    MapsforgeMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
+    MapsforgeVTMMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
         super(CgeoApplication.getInstance().getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
         this.maps = maps;
     }
