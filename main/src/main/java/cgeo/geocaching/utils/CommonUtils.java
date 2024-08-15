@@ -1,7 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.utils.functions.Action3;
-import cgeo.geocaching.utils.functions.Action4;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.os.Build;
@@ -23,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -172,90 +169,6 @@ public class CommonUtils {
         }
         if (!sublist.isEmpty()) {
             action.call(sublist);
-        }
-    }
-
-    public static <I, T> Map<T, Integer> countOccurences(final Iterable<I> it, final Function<I, T> mapper) {
-        final Map<T, Integer> result = new HashMap<>();
-        for (I item : it) {
-           final T element = mapper.apply(item);
-           if (result.containsKey(element)) {
-               result.put(element, result.get(element) + 1);
-           } else {
-               result.put(element, 1);
-           }
-        }
-        return result;
-    }
-
-    /**
-     * Groups a list of items of type T to groups of type G.
-     * Using various parameters to steer grouping, the method will call the given functions groupAdder and itemAdder
-     * in exactly the order in which groups and items should appear e.g. in a grouped list
-     *
-     * @param items list of items to group
-     * @param groupMapper maps an item to its group. May be null or return null for single items, which means that those items have no group
-     * @param groupOrder comparator to give an order to groups. By default, groups will be ordered by their toString()-value
-     * @param hasHeader given a group and its size, decides whether this group shall have a header. If null then all non-null groups will get a header
-     * @param groupHeaderAdder adds a group header with parameters: group, index of first element, group size
-     * @param itemAdder adds an item with oarameters: item, original index, group of item, index of group header (-1 if no header)
-     */
-    @SuppressWarnings({"PMD.NPathComplexity"})
-    public static <T, G> void groupList(final List<T> items,
-                                        @Nullable final Function<T, G> groupMapper,
-                                        @Nullable final Comparator<G> groupOrder,
-                                        @Nullable final BiPredicate<G, List<T>> hasHeader,
-                                        final Action3<G, Integer, List<T>> groupHeaderAdder,
-                                        final Action4<T, Integer, G, Integer> itemAdder) {
-
-
-        //create lists per group (for elements w/o a group, a group with 'defaultGroup' will be created)
-        final Map<G, List<T>> groupedListMap = new HashMap<>();
-        final Map<G, List<Integer>> groupedListPosMap = new HashMap<>();
-        int pos = 0;
-        for (T value : items) {
-            final G group = groupMapper == null ? null : groupMapper.apply(value);
-            List<T> groupList = groupedListMap.get(group);
-            List<Integer> groupPosList = groupedListPosMap.get(group);
-            if (groupList == null) {
-                groupList = new ArrayList<>();
-                groupedListMap.put(group, groupList);
-                groupPosList = new ArrayList<>();
-                groupedListPosMap.put(group, groupPosList);
-            }
-            groupList.add(value);
-            groupPosList.add(pos);
-            pos++;
-        }
-
-        //sort groups
-        final List<G> sortedGroupList = new ArrayList<>(groupedListMap.keySet());
-        Collections.sort(sortedGroupList, groupOrder == null ? getTextSortingComparator(null) : groupOrder);
-
-        //construct result
-        int listIdx = 0;
-        int groupIdx;
-        for (G group : sortedGroupList) {
-
-            final List<T> groupElements = Objects.requireNonNull(groupedListMap.get(group));
-
-            // add header if wanted
-            final boolean addHeader = hasHeader == null ? group != null : hasHeader.test(group, groupElements);
-            if (addHeader) {
-                groupHeaderAdder.call(group, listIdx + 1, groupElements);
-                groupIdx = listIdx;
-                listIdx++;
-            } else {
-                groupIdx = -1;
-            }
-
-            //Add items in group
-            final List<Integer> groupPos = groupedListPosMap.get(group);
-            int ppos = 0;
-            for (T value : Objects.requireNonNull(groupedListMap.get(group))) {
-                itemAdder.call(value, groupPos.get(ppos++), group, groupIdx);
-                listIdx++;
-            }
         }
     }
 

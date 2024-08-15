@@ -32,4 +32,9 @@ public abstract class AbstractList {
         return LISTS.get(listId);
     }
 
+    @NonNull
+    public String toString() {
+        return getTitleAndCount();
+    }
+
 }

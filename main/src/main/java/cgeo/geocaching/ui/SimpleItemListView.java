@@ -4,13 +4,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.SimpleitemlistItemViewBinding;
 import cgeo.geocaching.databinding.SimpleitemlistViewBinding;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
-import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.functions.Func4;
+import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 import com.google.android.material.button.MaterialButton;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +41,7 @@ public class SimpleItemListView extends LinearLayout {
 
     private enum ListItemType { ITEM, GROUPHEADER, SELECT_ALL, SELECTED_VISIBLE }
 
-    private static final Func4<Object, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper(s -> TextParam.text(s.toString()), null);
+    private static final Func5<Object, ItemGroup<Object, Object>, Context, View, ViewGroup, View> SELECT_VIEW_MAPPER = SimpleItemListModel.constructDisplayViewMapper((s, ig) -> TextParam.text(s.toString()), null);
 
     private ItemListAdapter listAdapter;
     private SimpleitemlistViewBinding binding;
@@ -53,50 +55,48 @@ public class SimpleItemListView extends LinearLayout {
 
     private static class ListItem {
 
-        public final Object value;
-
-        //public final TextParam text;
-        public final ImageParam icon;
-        public final ImageParam actionIcon;
+        public final Object value; //only filled for items
+        public final ItemGroup<Object, Object> itemGroup; // for groups: the group item. For items: the parent group
 
         public final ListItemType type;
 
-        public final int originalIndex; // only filled for items
-        public final Object group; // only filled if isGroupHeader = false and item belongs to a group
-        public final boolean hasGroupHeader; // true for items which belong to a group with a header
+        public final ImageParam icon;
+        public final ImageParam actionIcon;
 
-        public final int groupFirstItemIndex; // only filled if isGroupHeader = true
-        public final List<Object> groupElements; // only filled if isGroupHeader = true
+        //public Boolean isVisible = null; // "null" means: "need to be refreshed"
+        public boolean isVisibleByFilter = true; // will be set on text-filter-reevaluation
+        public boolean isVisible = true; //will be set on item visibility reevaluation
 
-        private ListItem(final Object value, final ImageParam icon, final ImageParam actionIcon, final ListItemType type,
-                        final int originalIndex, final Object group, final boolean hasGroupHeader, final int groupFirstItemIndex, final List<Object> groupElements) {
+        private ListItem(final Object value, final ItemGroup<Object, Object> itemGroup, final ImageParam icon, final ImageParam actionIcon, final ListItemType type) { // }, final int groupFirstItemIndex) {
             this.value = value;
             this.icon = icon;
             this.actionIcon = actionIcon;
             this.type = type;
-            this.originalIndex = originalIndex;
-            this.group = group;
-            this.hasGroupHeader = hasGroupHeader;
-            this.groupFirstItemIndex = groupFirstItemIndex;
-            this.groupElements = groupElements;
+            this.itemGroup = itemGroup;
+        }
+
+        @NonNull
+        public String toString() {
+            return "[" + type + "]" + (type == ListItemType.GROUPHEADER ? itemGroup.getGroup() : value) + "(visible: " + isVisible + ")";
         }
 
     }
 
-    private ListItem createForItem(final Object value, final int originalIndex, final Object group, final boolean hasGroupHeader) {
-        return new ListItem(value,
+    private ListItem createForItem(final Object value, final ItemGroup<Object, Object> group) {
+        return new ListItem(value, group,
             model.getDisplayIconMapper().apply(value),
             model.getActionIconMapper().apply(value),
-            ListItemType.ITEM, originalIndex, group, hasGroupHeader, -1, null);
+            ListItemType.ITEM);
     }
 
-    private ListItem createForGroup(final Object group, final int groupFirstItemIndex, final List<Object> groupElements) {
-        return new ListItem(group, model.getGroupingOptions().getGroupDisplayIconMapper().call(group, groupElements),
-    null, ListItemType.GROUPHEADER,  -1, -1, false, groupFirstItemIndex, groupElements);
+    private ListItem createForGroup(final ItemGroup<Object, Object> group) {
+        return new ListItem(null, group,
+                model.getGroupingOptions().getGroupDisplayIconMapper().apply(group),
+    null, ListItemType.GROUPHEADER);
     }
 
     private ListItem createForType(final ListItemType type) {
-        return new ListItem(null, null, null, type,  -1, -1, false, -1, null);
+        return new ListItem(null, null, null, null, type);
     }
 
 
@@ -118,22 +118,22 @@ public class SimpleItemListView extends LinearLayout {
             switch (data.type) {
                 case SELECT_ALL:
                     final String selectAllText = "<" + LocalizationUtils.getString(R.string.multiselect_selectall) + " (" + model.getSelectedItems().size() + "/" + model.getItems().size() + ")>";
-                    applyItemView(binding, selectAllText, SELECT_VIEW_MAPPER);
+                    applyItemView(binding, selectAllText, null, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(model.getSelectedItems().size() == model.getItems().size());
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 case SELECTED_VISIBLE:
                     final String selectVisibleText = "<" + LocalizationUtils.getString(R.string.multiselect_selectvisible) + " (" + currentlyVisibleSelected + "/" + currentlyVisible + ")>";
-                    applyItemView(binding, selectVisibleText, SELECT_VIEW_MAPPER);
+                    applyItemView(binding, selectVisibleText, null, SELECT_VIEW_MAPPER);
                     binding.itemCheckbox.setChecked(currentlyVisibleSelected == currentlyVisible);
                     binding.itemIcon.setVisibility(GONE);
                     break;
                 default:
                     //handling of groups and items
                     if (data.type == ListItemType.GROUPHEADER) {
-                        applyItemView(binding, new Pair<>(data.value, data.groupElements), model.getGroupingOptions().getGroupDisplayViewMapper());
+                        applyItemView(binding, data.itemGroup.getGroup(), data.itemGroup, model.getGroupingOptions().getGroupDisplayViewMapper());
                     } else {
-                        applyItemView(binding, data.value, model.getDisplayViewMapper());
+                        applyItemView(binding, data.value, data.itemGroup, model.getDisplayViewMapper());
                     }
 
                     final boolean showIcon = data.icon != null || (data.type == ListItemType.GROUPHEADER ? groupsHaveIcons : itemsHaveIcons);
@@ -152,20 +152,20 @@ public class SimpleItemListView extends LinearLayout {
                     break;
             }
 
-            final boolean isGroupedItem = data.type == ListItemType.ITEM && data.hasGroupHeader;
-            binding.itemChecker.setVisibility(model.getChoiceMode() != SimpleItemListModel.ChoiceMode.SINGLE_PLAIN || isGroupedItem ? VISIBLE : GONE);
+            final int groupPadding = Math.max(0, data.itemGroup == null ? 0 : data.itemGroup.getLevel() - (data.type == ListItemType.GROUPHEADER ? 1 : 0));
+            binding.itemChecker.setPadding(ViewUtils.dpToPixel(34 * groupPadding), 0, 0, 0);
+
             binding.itemCheckbox.setVisibility(data.type != ListItemType.GROUPHEADER && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX ? VISIBLE : GONE);
             binding.itemRadiobutton.setVisibility(data.type == ListItemType.ITEM && model.getChoiceMode() == SimpleItemListModel.ChoiceMode.SINGLE_RADIO ? VISIBLE : GONE);
-            binding.itemGroupPadding.setVisibility(isGroupedItem ? VISIBLE : GONE);
             binding.itemGroupToggle.setVisibility(data.type == ListItemType.GROUPHEADER ? VISIBLE : GONE);
-            binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.value) ? VISIBLE : GONE);
-            binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.value) ? VISIBLE : GONE);
+            binding.groupExpanded.setVisibility(data.type == ListItemType.GROUPHEADER && isGroupExpanded(data.itemGroup.getGroup()) ? VISIBLE : GONE);
+            binding.groupReduced.setVisibility(data.type == ListItemType.GROUPHEADER && !isGroupExpanded(data.itemGroup.getGroup()) ? VISIBLE : GONE);
             binding.itemAction.setVisibility(data.type == ListItemType.ITEM && data.actionIcon != null ? VISIBLE : GONE);
         }
 
-        private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final Func4<T, Context, View, ViewGroup, View> viewMapper) {
+        private <T> void applyItemView(final SimpleitemlistItemViewBinding itemBinding, final T value, final ItemGroup<T, Object> itemGroup, final Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> viewMapper) {
             final View currentView = itemBinding.itemViewAnchor.getChildAt(0);
-            final View newView = viewMapper.call(value, getContext(), currentView, itemBinding.itemViewAnchor);
+            final View newView = viewMapper.call(value, itemGroup, getContext(), currentView, itemBinding.itemViewAnchor);
 
             if (currentView != newView) {
                 itemBinding.itemViewAnchor.removeAllViews();
@@ -223,7 +223,7 @@ public class SimpleItemListView extends LinearLayout {
                 case SELECTED_VISIBLE:
                     final boolean remove = (currentlyVisible == currentlyVisibleSelected);
                     for (ListItem item : getOriginalItems()) {
-                        if (item.type == ListItemType.ITEM && isDisplayedSimpleItem(item, true)) {
+                        if (item.type == ListItemType.ITEM && item.isVisible) {
                             if (remove) {
                                 newSelection.remove(item.value);
                             } else {
@@ -234,7 +234,7 @@ public class SimpleItemListView extends LinearLayout {
                     }
                     break;
                 case GROUPHEADER:
-                    toggleGroupExpanded(itemData.value);
+                    toggleGroupExpanded(itemData.itemGroup.getGroup());
                     break;
                 case ITEM:
                 default:
@@ -293,15 +293,9 @@ public class SimpleItemListView extends LinearLayout {
                 case SELECTED_VISIBLE:
                     return model.getChoiceMode() == SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX && currentlyVisible < model.getItems().size();
                 case GROUPHEADER:
-                    for (int pos = item.groupFirstItemIndex; pos < item.groupFirstItemIndex + item.groupElements.size(); pos++) {
-                        if (isDisplayedSimpleItem(getOriginalItems().get(pos), false)) {
-                            return true;
-                        }
-                    }
-                    return false;
                 case ITEM:
                 default:
-                    return isDisplayedSimpleItem(item, true);
+                    return item.isVisible;
             }
         }
     }
@@ -370,8 +364,11 @@ public class SimpleItemListView extends LinearLayout {
             case COMPLETE:
                 recreateList();
                 break;
-            case SELECTION:
             case FILTER:
+                reevaluateTextFilterVisibility();
+                triggerRefreshList();
+                break;
+            case SELECTION:
             case GROUP_HEADER:
             default:
                 triggerRefreshList();
@@ -386,6 +383,9 @@ public class SimpleItemListView extends LinearLayout {
         int visibleSelected = 0;
         this.itemsHaveIcons = false;
         this.groupsHaveIcons = false;
+
+        reevaluateItemVisibility();
+
         for (ListItem item : listAdapter.getOriginalItems()) {
             switch (item.type) {
                 case GROUPHEADER:
@@ -397,7 +397,7 @@ public class SimpleItemListView extends LinearLayout {
                     if (item.icon != null) {
                         this.itemsHaveIcons = true;
                     }
-                    if (isDisplayedSimpleItem(item, true)) {
+                    if (item.isVisible) {
                         visible++;
                         if (model.getSelectedItems().contains(item.value)) {
                             visibleSelected++;
@@ -425,20 +425,55 @@ public class SimpleItemListView extends LinearLayout {
         model.getGroupingOptions().toggleGroup(group);
     }
 
-    private boolean isDisplayedSimpleItem(final ListItem simpleItem, final boolean checkGroupExpanded) {
-        if (simpleItem == null) {
-            return true;
-        }
-        if (checkGroupExpanded && !isGroupExpanded(simpleItem.group)) {
-            return false;
-        }
+    private void reevaluateTextFilterVisibility() {
         final String filter = model.getFilterTerm();
-        if (StringUtils.isBlank(filter)) {
+        final BiFunction<Object, ItemGroup<Object, Object>, String> textFilterMapper = model.getTextFilterMapper();
+        final boolean allVisible = StringUtils.isBlank(filter) || textFilterMapper == null;
+        for (ListItem item : listAdapter.getOriginalItems()) {
+            if (item.type != ListItemType.ITEM || allVisible) {
+                item.isVisibleByFilter = true;
+            } else {
+                final String rawText = textFilterMapper.apply(item.value, item.itemGroup);
+                item.isVisibleByFilter = rawText != null && rawText.toLowerCase(Locale.US).contains(filter.trim().toLowerCase(Locale.US));
+            }
+        }
+    }
+
+    private void reevaluateItemVisibility() {
+        //VISIBILITY RULES
+        //- An item is visible IF it is visible by its text filter AND its group is expanded
+        //- A group is visible IF it has at least one visible contained item (subgroup or base item) AND  none of its PARENTS it REDUCED
+        //  (note: group header of a reduced group MUST BE displayed (if none of the parents is reduced)
+        //Attention: this method assumes that the item.visibleByFilter is correctly set for all ITEMs!
+
+        //1. collect groups which are visible
+        final Map<Object, Boolean> visibleGroups = new HashMap<>();
+        for (ListItem item : listAdapter.getOriginalItems()) {
+            if (item.type == ListItemType.ITEM && item.isVisibleByFilter) {
+                determineGroupAndParentsVisibility(item.itemGroup, visibleGroups);
+            }
+        }
+
+        //2. set visible flag for items and groupheaders
+        for (ListItem item : listAdapter.getOriginalItems()) {
+            final Object group = item.itemGroup == null ? null : item.itemGroup.getGroup();
+            item.isVisible = item.isVisibleByFilter && (group == null || Boolean.TRUE.equals(visibleGroups.get(group)))
+              && (item.type != ListItemType.ITEM || isGroupExpanded(group));
+        }
+    }
+
+    private boolean determineGroupAndParentsVisibility(final ItemGroup<Object, Object> itemGroup, final Map<Object, Boolean> determinedGroups) {
+        if (itemGroup == null || itemGroup.getGroup() == null || itemGroup.getParent() == null) {
             return true;
         }
-        final String rawText = model.getTextFilterMapper() == null ? null : model.getTextFilterMapper().apply(simpleItem.value);
-
-        return rawText != null && rawText.toLowerCase(Locale.US).contains(filter.trim().toLowerCase(Locale.US));
+        if (determinedGroups.containsKey(itemGroup.getGroup())) {
+            return Boolean.TRUE.equals(determinedGroups.get(itemGroup.getGroup()));
+        }
+        final boolean isParentExpanded = isGroupExpanded(itemGroup.getParent().getGroup());
+        final boolean isParentVisible = determineGroupAndParentsVisibility(itemGroup.getParent(), determinedGroups);
+        final boolean isVisible = isParentVisible && isParentExpanded;
+        determinedGroups.put(itemGroup.getGroup(), isVisible);
+        return isVisible;
     }
 
     private void recreateList() {
@@ -447,16 +482,31 @@ public class SimpleItemListView extends LinearLayout {
         list.add(createForType(ListItemType.SELECT_ALL));
         list.add(createForType(ListItemType.SELECTED_VISIBLE));
 
-        CommonUtils.groupList(model.getItems(),
-                model.getGroupingOptions().getGroupMapper(), model.getGroupingOptions().getGroupComparator(),
-                model.getGroupingOptions().getHasGroupHeaderMapper(),
-                (group, firstItemIdx, elements) -> list.add(createForGroup(group, firstItemIdx + 2, elements)),
-                (value, originalIdx, group, groupHeaderIdx) -> list.add(createForItem(value, originalIdx, group, groupHeaderIdx >= 0)));
+        final ItemGroup<Object, Object> root =
+            ItemGroup.create(model.getItems(),
+            model.getGroupingOptions().getGroupMapper(),
+            model.getGroupingOptions().getGroupGroupMapper(),
+            model.getGroupingOptions().getItemGroupComparator(),
+            model.getGroupingOptions().getGroupPruner());
+
+        recreateListItem(root, list);
+
+        reevaluateTextFilterVisibility();
 
         listAdapter.setItems(list);
 
         triggerRefreshList();
     }
 
+    private void recreateListItem(final ItemGroup<Object, Object> group, final List<ListItem> list) {
+        for (Object child : group.getItemsAndGroups()) {
+            if (child instanceof ItemGroup) {
+                list.add(createForGroup((ItemGroup<Object, Object>) child));
+                recreateListItem((ItemGroup<Object, Object>) child, list);
+            } else {
+                list.add(createForItem(child, group));
+            }
+        }
+    }
 
 }

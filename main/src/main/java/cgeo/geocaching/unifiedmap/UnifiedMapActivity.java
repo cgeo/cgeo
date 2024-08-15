@@ -1013,9 +1013,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 final SimpleDialog.ItemSelectModel<MapSelectableItem> model = new SimpleDialog.ItemSelectModel<>();
                 model
                     .setItems(sorted)
-                    .setDisplayViewMapper((item, ctx, view, parent) ->
+                    .setDisplayViewMapper((item, itemGroup, ctx, view, parent) ->
                         GeoItemSelectorUtils.createMapSelectableItemView(UnifiedMapActivity.this, item, GeoItemSelectorUtils.getOrCreateView(UnifiedMapActivity.this, view, parent)),
-                        (item) -> item == null ? "" : item.getSortFilterString())
+                        (item, itemGroup) -> item == null ? "" : item.getSortFilterString())
                     .setItemPadding(0);
 
                 SimpleDialog.of(this).setTitle(R.string.map_select_multiple_items).selectSingle(model, item -> {
