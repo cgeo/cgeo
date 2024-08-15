@@ -72,8 +72,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     public WherigoActivity() {
         this.wherigoThingsModel.activateGrouping(EventTable::getClass)
-            .setGroupDisplayMapper((c, cnt) -> TextParam.text(c.getSimpleName()))
-            .setGroupDisplayIconMapper((c, cnt) -> WherigoActivity.imageForEventType(c));
+            .setGroupDisplayMapper(gi -> TextParam.text(gi.getGroup().getSimpleName()))
+            .setGroupDisplayIconMapper(gi -> WherigoActivity.imageForEventType(gi.getGroup()));
     }
 
     private static <T extends EventTable> ImageParam imageForEventType(final Class<T> c) {

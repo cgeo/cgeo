@@ -26,20 +26,17 @@
         android:layout_centerVertical="true"
         android:layout_toRightOf="@id/item_leftAnchor">
         <Space
-            android:id="@+id/item_groupPadding"
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"/>
+            android:id="@+id/item_checker_leftAnchor"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"/>
         <CheckBox
             android:id="@+id/item_checkbox"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:focusable="false"
-            android:layout_toRightOf="@id/item_groupPadding"
+            android:layout_toRightOf="@id/item_checker_leftAnchor"
             android:layout_centerVertical="true"/>
         <RadioButton
             android:id="@+id/item_radiobutton"

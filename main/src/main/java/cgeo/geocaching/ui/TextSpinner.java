@@ -408,7 +408,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
             if (this.textGroupMapper != null) {
                 model.activateGrouping((v) -> this.textGroupMapper.call(v))
-                        .setGroupDisplayMapper((s, c) -> TextParam.text("**" + s + "**").setMarkdown(true));
+                        .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "**").setMarkdown(true));
             }
             sd.selectSingle(model, this::set);
         }

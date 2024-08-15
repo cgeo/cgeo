@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
@@ -417,7 +418,9 @@ public class FormulaUtils {
             .setDisplayMapper(FormulaUtils::getFunctionDisplayString)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-        model.activateGrouping(FormulaFunction::getGroup).setGroupDisplayMapper((s, c) -> FormulaUtils.getFunctionGroupDisplayString(s));
+        model.activateGrouping(FormulaFunction::getGroup)
+                .setGroupDisplayMapper(gi -> FormulaUtils.getFunctionGroupDisplayString(gi.getGroup()))
+                .setGroupComparator(CommonUtils.getTextSortingComparator(FormulaFunction.FunctionGroup::getUserDisplayableString), true);
 
         SimpleDialog.ofContext(context).setTitle(TextParam.id(R.string.formula_choose_function))
             .selectSingle(model, f -> {
@@ -454,7 +457,7 @@ public class FormulaUtils {
 
     private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
         return
-            TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
+            TextParam.text("**" + (g == null ? "null" : g.getUserDisplayableString()) + "**").setMarkdown(true);
     }
 
 }

@@ -3,12 +3,11 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.JsonUtils;
-import cgeo.geocaching.utils.functions.Func2;
-import cgeo.geocaching.utils.functions.Func4;
+import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
-import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -21,11 +20,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiFunction;
-import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -34,13 +34,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 /** Model class to work with {@link cgeo.geocaching.ui.SimpleItemListView} */
 public class SimpleItemListModel<T> {
 
-    private final Function<T, TextParam> defaultDisplayMapper = obj -> TextParam.text(obj == null ? "-" : obj.toString());
+    private final BiFunction<T, ItemGroup<T, Object>, TextParam> defaultDisplayMapper = (i, gi) -> TextParam.text(i == null ? "-" : i.toString());
 
     private final List<T> items = new ArrayList<>();
     private final List<T> itemsReadOnly = Collections.unmodifiableList(items);
 
-    private Func4<T, Context, View, ViewGroup, View> displayViewMapper = constructDisplayViewMapper(defaultDisplayMapper, null);
-    private Function<T, String> textFilterMapper = constructFilterTextExtractor(defaultDisplayMapper);
+    private Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> displayViewMapper = constructDisplayViewMapper(defaultDisplayMapper, null);
+    private BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper = constructFilterTextExtractor(defaultDisplayMapper);
     private Function<T, ImageParam> displayIconMapper = (o) -> null;
 
     private Function<T, ImageParam> actionIconMapper = (o) -> null;
@@ -73,10 +73,14 @@ public class SimpleItemListModel<T> {
     public class GroupingOptions<G> {
 
         private Function<T, G> groupMapper = null;
+        private Function<G, G> groupGroupMapper = null;
 
-        private Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> groupDisplayViewMapper = (item, context, view, parent) -> null;
-        private Func2<G, List<T>, ImageParam> groupDisplayIconMapper = (o, e) -> null;
+        private Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper = (group, itemGroup, context, view, parent) -> null;
+        private Function<ItemGroup<T, G>, ImageParam> groupDisplayIconMapper = (ig) -> null;
+        private Comparator<Object> itemGroupComparator = null;
         private Comparator<G> groupComparator = null;
+        private boolean sortGroupsBeforeItems = false;
+        private Predicate<ItemGroup<T, G>> groupPruner = null;
 
         private final Set<G> reducedGroups = new HashSet<>();
 
@@ -84,7 +88,7 @@ public class SimpleItemListModel<T> {
         private Function<G, String> reducedGroupIdMapper = null;
         private Function<String, G> reducedGroupIdBackMapper = null;
 
-        private BiPredicate<G, List<T>> hasGroupHeaderMapper = null;
+
 
         private GroupingOptions() {
             //no instances outside of this model class
@@ -94,6 +98,10 @@ public class SimpleItemListModel<T> {
             return groupMapper;
         }
 
+        public Function<G, G> getGroupGroupMapper() {
+            return groupGroupMapper;
+        }
+
         /** Sets a mapper specifying how list items (of type T) are sorted into groups (of type G) */
         public GroupingOptions<G> setGroupMapper(final Function<T, G> groupMapper) {
             this.groupMapper = groupMapper;
@@ -101,12 +109,19 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
+        /** Sets a mapper specifying how group items (of type G) are sorted into other groups (of type G) */
+        public GroupingOptions<G> setGroupGroupMapper(final Function<G, G> groupGroupMapper) {
+            this.groupGroupMapper = groupGroupMapper;
+            triggerChange(ChangeType.COMPLETE);
+            return this;
+        }
+
+        public Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> getGroupDisplayViewMapper() {
             return groupDisplayViewMapper;
         }
 
         /** Sets a mapper providing the text visualization for a group item */
-        public GroupingOptions<G> setGroupDisplayMapper(final Func2<G, List<T>, TextParam> groupDisplayMapper) {
+        public GroupingOptions<G> setGroupDisplayMapper(final Function<ItemGroup<T, G>, TextParam> groupDisplayMapper) {
             if (groupDisplayMapper != null) {
                 setGroupDisplayViewMapper(constructGroupDisplayViewMapper(groupDisplayMapper));
                 triggerChange(ChangeType.COMPLETE);
@@ -114,7 +129,7 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public GroupingOptions<G> setGroupDisplayViewMapper(final Func4<Pair<G, List<T>>, Context, View, ViewGroup, View> groupDisplayViewMapper) {
+        public GroupingOptions<G> setGroupDisplayViewMapper(final Func5<G, ItemGroup<T, G>, Context, View, ViewGroup, View> groupDisplayViewMapper) {
             if (groupDisplayViewMapper != null) {
                 this.groupDisplayViewMapper = groupDisplayViewMapper;
                 triggerChange(ChangeType.COMPLETE);
@@ -122,12 +137,12 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public Func2<G, List<T>, ImageParam> getGroupDisplayIconMapper() {
+        public Function<ItemGroup<T, G>, ImageParam> getGroupDisplayIconMapper() {
             return groupDisplayIconMapper;
         }
 
         /** Sets a mapper providing an optional display icon per group */
-        public GroupingOptions<G> setGroupDisplayIconMapper(final Func2<G, List<T>, ImageParam> groupDisplayIconMapper) {
+        public GroupingOptions<G> setGroupDisplayIconMapper(final Function<ItemGroup<T, G>, ImageParam> groupDisplayIconMapper) {
             if (groupDisplayIconMapper != null) {
                 this.groupDisplayIconMapper = groupDisplayIconMapper;
                 triggerChange(ChangeType.COMPLETE);
@@ -135,26 +150,55 @@ public class SimpleItemListModel<T> {
             return this;
         }
 
-        public Comparator<G> getGroupComparator() {
-            return groupComparator;
+        @NonNull
+        public Comparator<Object> getItemGroupComparator() {
+            final boolean hasItemGroupComparator = itemGroupComparator != null;
+
+            final Comparator<G> gComparator = hasItemGroupComparator ? null : this.groupComparator != null ? this.groupComparator : CommonUtils.getTextSortingComparator(Objects::toString);
+            final Comparator<T> tComparator = hasItemGroupComparator ? null : CommonUtils.getListSortingComparator(null, true, getItems());
+
+            return CommonUtils.getNullHandlingComparator((o1, o2) -> {
+
+                if (hasItemGroupComparator) {
+                    return itemGroupComparator.compare(o1, o2);
+                }
+
+                final boolean o1IsGroup = o1 instanceof ItemGroup;
+                final boolean o2IsGroup = o2 instanceof ItemGroup;
+                if (o1IsGroup != o2IsGroup) {
+                    return this.sortGroupsBeforeItems ^ o1IsGroup ? -1 : 1;
+                }
+                if (o1IsGroup) {
+                    return gComparator.compare(((ItemGroup<T, G>) o1).getGroup(), ((ItemGroup<T, G>) o2).getGroup());
+                }
+                return tComparator.compare((T) o1, (T) o2);
+            }, true);
         }
 
-        /** Sets a comparator specifying how groups are sorted */
-        public GroupingOptions<G> setGroupComparator(final Comparator<G> groupComparator) {
+        /** Sets a cgroups are sorted and where items are sorted in reference to groups */
+        public GroupingOptions<G> setGroupComparator(final Comparator<G> groupComparator, final boolean sortGroupsBeforeItems) {
             this.groupComparator = groupComparator;
+            this.sortGroupsBeforeItems = sortGroupsBeforeItems;
+            triggerChange(ChangeType.COMPLETE);
+            return this;
+        }
+
+        /** Sets a comparator specifying how groups and items are sorted. Comparator must be able to handle lists of items of T and G intermixed */
+        public GroupingOptions<G> setItemGroupComparator(final Comparator<Object> groupComparator) {
+            this.itemGroupComparator = groupComparator;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
 
         /** Sets the  minimum number of groups on which grouping is really activated */
-        public GroupingOptions<G> setHasGroupHeaderMapper(final BiPredicate<G, List<T>> hasGroupHeaderMapper) {
-            this.hasGroupHeaderMapper = hasGroupHeaderMapper;
+        public GroupingOptions<G> setGroupPruner(final Predicate<ItemGroup<T, G>> groupPruner) {
+            this.groupPruner = groupPruner;
             triggerChange(ChangeType.COMPLETE);
             return this;
         }
 
-        public BiPredicate<G, List<T>> getHasGroupHeaderMapper() {
-            return this.hasGroupHeaderMapper;
+        public Predicate<ItemGroup<T, G>> getGroupPruner() {
+            return this.groupPruner;
         }
 
         public Set<G> getReducedGroups() {
@@ -228,11 +272,11 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public Func4<T, Context, View, ViewGroup, View> getDisplayViewMapper() {
+    public Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> getDisplayViewMapper() {
         return displayViewMapper;
     }
 
-    public Function<T, String> getTextFilterMapper() {
+    public BiFunction<T, ItemGroup<T, Object>, String> getTextFilterMapper() {
         return textFilterMapper;
     }
 
@@ -242,6 +286,13 @@ public class SimpleItemListModel<T> {
     }
 
     public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper, @Nullable final Function<T, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+        if (displayMapper != null) {
+            setDisplayMapper((item, itemGroup) -> displayMapper.apply(item), textFilterMapper == null ? null : (item, itemGroup) -> textFilterMapper.apply(item), textViewCreator);
+        }
+        return this;
+    }
+
+    public SimpleItemListModel<T> setDisplayMapper(final BiFunction<T, ItemGroup<T, Object>, TextParam> displayMapper, @Nullable final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         if (displayMapper != null) {
             setDisplayViewMapper(constructDisplayViewMapper(displayMapper, textViewCreator), textFilterMapper != null ? textFilterMapper : constructFilterTextExtractor(displayMapper));
         }
@@ -258,12 +309,12 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public static <TT> Func4<TT, Context, View, ViewGroup, View> constructDisplayViewMapper(final Function<TT, TextParam> displayTextMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+    public static <TT> Func5<TT, ItemGroup<TT, Object>, Context, View, ViewGroup, View> constructDisplayViewMapper(final BiFunction<TT, ItemGroup<TT, Object>, TextParam> displayTextMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         final BiFunction<Context, ViewGroup, TextView> tvCreator = textViewCreator != null ? textViewCreator :
             (ctx, parent) -> ViewUtils.createTextItem(ctx, R.style.text_default, TextParam.text(""));
-        return (item, context, view, parent) -> {
+        return (item, itemGroup, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : tvCreator.apply(context, parent);
-            final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.apply(item);
+            final TextParam tp = displayTextMapper == null ? TextParam.text(String.valueOf(item)) : displayTextMapper.apply(item, itemGroup);
             if (tp == null) {
                 tv.setText("--");
             } else {
@@ -273,10 +324,10 @@ public class SimpleItemListModel<T> {
         };
     }
 
-    public static <GT, TT> Func4<Pair<GT, List<TT>>, Context, View, ViewGroup, View> constructGroupDisplayViewMapper(final Func2<GT, List<TT>, TextParam> displayGroupTextMapper) {
-        return (item, context, view, parent) -> {
+    public static <GT, TT> Func5<GT, ItemGroup<TT, GT>, Context, View, ViewGroup, View> constructGroupDisplayViewMapper(final Function<ItemGroup<TT, GT>, TextParam> displayGroupTextMapper) {
+        return (group, itemGroup, context, view, parent) -> {
             final TextView tv = view instanceof TextView ? (TextView) view : ViewUtils.createTextItem(context, R.style.text_default, TextParam.text(""));
-            final TextParam tp = displayGroupTextMapper == null || item == null ? TextParam.text(String.valueOf(item)) : displayGroupTextMapper.call(item.first, item.second);
+            final TextParam tp = displayGroupTextMapper == null || itemGroup == null ? TextParam.text(String.valueOf(itemGroup)) : displayGroupTextMapper.apply(itemGroup);
             if (tp == null) {
                 tv.setText("--");
             } else {
@@ -286,10 +337,10 @@ public class SimpleItemListModel<T> {
         };
     }
 
-    public static <T> Function<T, String> constructFilterTextExtractor(final Function<T, TextParam> displayTextMapper) {
-        return (item) -> {
+    public static <T> BiFunction<T, ItemGroup<T, Object>, String> constructFilterTextExtractor(final BiFunction<T, ItemGroup<T, Object>, TextParam> displayTextMapper) {
+        return (item, itemGroup) -> {
 
-            final TextParam tp = displayTextMapper == null ? null : displayTextMapper.apply(item);
+            final TextParam tp = displayTextMapper == null ? null : displayTextMapper.apply(item, itemGroup);
             if (tp == null) {
                 return String.valueOf(item);
             }
@@ -298,7 +349,7 @@ public class SimpleItemListModel<T> {
     }
 
     /** Sets a view provider for the items */
-    public SimpleItemListModel<T> setDisplayViewMapper(final Func4<T, Context, View, ViewGroup, View> displayViewMapper, final Function<T, String> textFilterMapper) {
+    public SimpleItemListModel<T> setDisplayViewMapper(final Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> displayViewMapper, final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper) {
         if (displayViewMapper != null) {
             this.displayViewMapper = displayViewMapper;
             this.textFilterMapper = textFilterMapper;
