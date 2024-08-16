@@ -295,7 +295,7 @@ public class MapUtils {
                     setTarget.call(longClickGeopoint, null);
                     updateRouteTrackButtonVisibility.run();
                 })
-                .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true));
+                .addItemClickListener(R.id.menu_navigate, item -> NavigationAppFactory.showNavigationMenu(activity, null, null, longClickGeopoint, false, true, 0));
     }
 
     private static void updateRouteTrackButtonVisibility(final Runnable updateRouteTrackButtonVisibility) {

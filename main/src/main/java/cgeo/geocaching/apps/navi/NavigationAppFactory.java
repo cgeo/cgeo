@@ -21,6 +21,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -155,7 +156,7 @@ public final class NavigationAppFactory {
      */
     public static void showNavigationMenu(final Activity activity,
                                           final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
-        showNavigationMenu(activity, cache, waypoint, destination, true, false);
+        showNavigationMenu(activity, cache, waypoint, destination, true, false, 0);
     }
 
     /**
@@ -167,11 +168,12 @@ public final class NavigationAppFactory {
      * @param destination           may be {@code null}
      * @param showInternalMap       should be {@code false} only when called from within the internal map
      * @param showDefaultNavigation should be {@code false} by default
+     * @param menuResToEnableOnDismiss res id of menu item to enable on dialog dismiss (0 if unused)
      * @see #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)
      */
     public static void showNavigationMenu(final Activity activity,
                                           final Geocache cache, final Waypoint waypoint, final Geopoint destination,
-                                          final boolean showInternalMap, final boolean showDefaultNavigation) {
+                                          final boolean showInternalMap, final boolean showDefaultNavigation, final int menuResToEnableOnDismiss) {
         final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
@@ -211,6 +213,14 @@ public final class NavigationAppFactory {
             invokeNavigation(activity, cache, waypoint, destination, selectedItem.app);
         });
         final AlertDialog alert = builder.create();
+        if (menuResToEnableOnDismiss != 0) {
+            alert.setOnDismissListener(dialog -> {
+                final View menuItem = activity.findViewById(menuResToEnableOnDismiss);
+                if (menuItem != null) {
+                    menuItem.setEnabled(true);
+                }
+            });
+        }
         alert.show();
     }
 
