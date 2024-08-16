@@ -958,7 +958,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * referenced from XML view
      */
     public void showNavigationMenu(@SuppressWarnings("unused") final View view) {
-        NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true);
+        NavigationAppFactory.showNavigationMenu(this, cache, null, null, true, true, 0);
     }
 
     public static void startActivity(final Context context, final String geocode, final boolean forceWaypointsPage) {
