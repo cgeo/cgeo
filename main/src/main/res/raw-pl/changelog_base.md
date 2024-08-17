@@ -8,6 +8,8 @@
 - Zmiana: Wyszukiwanie współrzędnych: Pokaż kierunek i odległość do celu, a nie do aktualnej pozycji
 - Nowość: Graficzny wskaźnik D/T w informacjach o skrytce
 - Poprawka: Kompas jest ukryty gdy widoczny jest pasek filtrowania (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Szczegóły skrytki
 - Nowość: Pokaż obrazy połączone w „osobistej notatce” w zakładce ze zdjęciami
