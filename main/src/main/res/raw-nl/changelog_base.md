@@ -8,6 +8,8 @@
 - Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
 - Nieuw: Grafische D/T indicator in het cache informatieblad
 - Oplossing: Kompasroos verborgen wanneer de filterbalk zichtbaar is (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
