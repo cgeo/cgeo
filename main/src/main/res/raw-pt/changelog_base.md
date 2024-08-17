@@ -8,6 +8,8 @@
 - Alteração: Pesquisar coordenadas: Mostrar direcção e distância para o alvo e não para a posição actual
 - New: Graphical D/T indicator in cache info sheet
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
