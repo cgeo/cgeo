@@ -8,6 +8,8 @@
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
 - Novinka: Grafický indikátor D/T v informačním listu kešky
 - Oprava: Kompasová růžice skrytá, když je viditelný panel filtrů (Sjednocená mapa)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
