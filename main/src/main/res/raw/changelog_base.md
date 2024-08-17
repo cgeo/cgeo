@@ -43,3 +43,4 @@
 - New: Store map theme per tile provider (UnifiedMap)
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
 - New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Allow multiple hierarchy levels in cache lists
