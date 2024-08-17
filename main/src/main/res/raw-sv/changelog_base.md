@@ -8,6 +8,8 @@
 - Change: Search for coordinates: Show direction and distance to target and not to current position
 - New: Graphical D/T indicator in cache info sheet
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Cachedetaljer
 - Nyhet: Visa bilder länkade i "personlig anteckning" i fliken Bilder
