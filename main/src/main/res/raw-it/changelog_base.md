@@ -8,6 +8,8 @@
 - Modifica: cerca le coordinate: mostra la direzione e la distanza dall'obiettivo e non dalla posizione corrente
 - Nuovo: Indicatore grafico D/T nel foglio informazioni cache
 - Corretto: Bussola nascosta quando la barra dei filtri è visibile (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
