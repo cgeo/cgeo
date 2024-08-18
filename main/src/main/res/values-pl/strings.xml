@@ -420,7 +420,7 @@
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
     <string name="caches_sort_inventory">Liczebność inwentarza</string>
     <string name="caches_sort_date_hidden">Data ukrycia</string>
-    <string name="caches_sort_date_logged">Data znalezienia</string>
+    <string name="caches_sort_date_logged">Data zalogowania (własny wpis)</string>
     <string name="caches_sort_finds">Ile razy znaleziona</string>
     <string name="caches_sort_state">Stan</string>
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
@@ -3001,4 +3001,14 @@
         <item quantity="many">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
         <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Zobacz bazę danych</string>
+    <string name="dbi_select_title">(Zaznacz tabelę)</string>
+    <string name="dbi_columnproperties_title">Właściwości kolumny</string>
+    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nMagazynowanie: %3$s</string>
+    <string name="dbi_edit_title">Edytuj \"%1$s\" wiersza %2$d\"</string>
+    <string name="dbi_edit_ok">Pole zaktualizowane</string>
+    <string name="dbi_edit_error">Błąd podczas aktualizacji pola</string>
+    <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
+    <string name="dbi_search_title">Szukaj</string>
 </resources>
