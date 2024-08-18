@@ -1,21 +1,21 @@
 ### Kartta
-- New: "Edit Personal Note" from cache info sheet
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
-- New: Support user-defined tile providers
-- Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
-- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- Uusi: "Muokkaa henkilökohtaista muistiinpanoa" kätkön inforuudulta
+- Korjaus: Reittipisteitä ei ole suodatettu yhden kätkön kartoituksessa (UnifiedMap)
+- Uusi: Tuki käyttäjän määrittämille laattojen tarjoajille
+- Fix: Päivitä kartan tiedot asetukset dialogin avaamisen / sulkemisen jälkeen (UnifiedMap)
+- Uusi: Vaihda rakennusten näyttö 2D/3D (UnifiedMap OSM kartta)
 - New: Cache store/refresh from popup moved into background
-- Change: Search for coordinates: Show direction and distance to target and not to current position
-- New: Graphical D/T indicator in cache info sheet
+- Muutos: Etsi koordinaatteja: Näytä suunta ja etäisyys kohteeseen eikä nykyiseen sijaintiin
+- Uusi: Graafinen D/T ilmaisin kätköruudussa
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
 - Change: Removed map theme legends
 - Fix: Multiple navigation selection popups on long-press
 
 ### Kätkön tiedot
-- New: Show images linked in "personal note" in Images tab
-- Change: Simplify long-tap action in cache details and trackable details
-- New: Smoother scaling of log images
-- Change: Change "edit lists" icon from pencil to list + pencil
+- Uusi: Näytä kuvat jotka ovat linkitetty "henkilökohtaisiin muistiinpanoihin" Kuvat -välilehdessä
+- Muutos: Yksinkertaisempi pitkän napautuksen toiminto kätkön yksityiskohdissa ja kulkijoiden yksityiskohdissa
+- Uusi: Tasaisempi lokikuvien skaalaus
+- Muutos: Muuta "muokkaa luetteloita" -kuvaketta kynästä listaan + kynään
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
 - Change: Allow larger integer ranges in formulas (disallow usage of negation)
@@ -30,7 +30,7 @@
 - New: Read elevation info from track on import
 - New: API to Locus now supporting cache size "virtual"
 - Fix: Search results for a location no longer sorted by distance to target location
-- New: "Corrected coordinates" filter
+- Uusi: "Ratkaistut koordinaatit"- suodatin
 - Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
 - New: Added "none"-entry to selection of routing profiles
 - Change: Improve description for "maintenance" function (remove orphaned data)
