@@ -8,8 +8,8 @@
 - Änderung: Suche nach Koordinaten: Zeige Richtung und Distanz zum Ziel und nicht zur aktuellen Position
 - Neu: Grafischer D/T-Indikator auf der Cache-Informationsseite
 - Korrektur: Kompassrose versteckt, wenn Filterleiste sichtbar ist (UnifiedMap)
-- Change: Removed map theme legends
-- Fix: Multiple navigation selection popups on long-press
+- Änderung: Legende für Kartendesigns entfernt
+- Korrektur: Mehrfache Navigationsauswahl-Popups bei langem Drücken
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
@@ -18,8 +18,8 @@
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
 - Korrektur: `vanity` Funktion fehlerhaft bei langen Zeichenketten
 - Korrektur: Falsche Parsing-Priorität bei Formel-Backup
-- Change: Allow larger integer ranges in formulas (disallow usage of negation)
-- New: Allow user-stored cache images on creating/editing log
+- Änderung: Erlaube größere Zahlbereiche in Formeln (keine negativen Zahlen mehr möglich)
+- Neu: Benutzer-gespeicherte Cachebilder beim Erstellen/Bearbeiten von Logs erlauben
 - Korrektur: Spoilerbilder werden nicht mehr geladen (Webseitenänderung)
 
 ### Allgemein
