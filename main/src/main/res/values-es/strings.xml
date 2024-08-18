@@ -289,6 +289,8 @@
     <string name="warn_gm_not_available">Google Maps no está disponible.</string>
     <string name="switch_to_mf">Tu servicio de Google Play está desactualizado. ¿Quieres cambiar al proveedor de mapas de Mapsforge en su lugar?</string>
     <string name="switched_to_mf">El mapa por defecto cambió al proveedor de mapas de Mapsforge. Reinicia el mapa ahora.</string>
+    <string name="gc_premium">Premium</string>
+    <string name="gc_basic">Básico</string>
     <!-- location service -->
     <string name="loc_last">Última conocida</string>
     <string name="loc_net">Red</string>
@@ -359,7 +361,6 @@
     <string name="caches_sort_vote">Votos (valoración propia)</string>
     <string name="caches_sort_inventory">Número de rastreables</string>
     <string name="caches_sort_date_hidden">Fecha escondido</string>
-    <string name="caches_sort_date_logged">Fecha de registro</string>
     <string name="caches_sort_finds">Encontrados</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Fecha de guardado en dispositivo</string>
@@ -1357,6 +1358,7 @@
     <string name="formula_function_substring">Subhilo</string>
     <string name="formula_function_rot13">Rotar caracteres por 13</string>
     <!-- ImageView -->
+    <string name="imageview_error">No se pudo cargar la imagen</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_view_map">Elegir mapa</string>
@@ -1396,7 +1398,7 @@
     <string name="map_show_other_title">Mostrar otros:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
-    <string name="google_maps_option_group_theme">Opciones de Temas</string>
+    <string name="map_theme_legend">Leyenda del Tema</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
     <string name="search_bar_hint">Buscar cachés/rastreables</string>
@@ -1417,7 +1419,6 @@
     <string name="search_finder">Encontrado por</string>
     <string name="search_finder_prefill">Buscador</string>
     <string name="search_finder_button">Buscar por nombre del buscador</string>
-    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Buscar por filtro</string>
     <string name="search_filter_info_message" formatted="false">**Buscar por filtro** busca cachés en todos los servicios activos en línea (por ejemplo, geocaching.com) usando un filtro proporcionado. Sin embargo, las capacidades de búsqueda de estos servicios suelen ser más limitadas que las capacidades de filtro de c:geo.\n\n- Todos los servicios sólo soportan filtros AND (no hay filtros OR ni inversión de filtros).\n- Los filtros más básicos como **tipo de caché** o **tamaño de caché** son compatibles con todos los servicios. Los filtros más complicados a menudo no son compatibles o tienen algunas restricciones, por ejemplo, **favoritos** o **fecha oculta**.\n- Una lista detallada sobre los filtros soportados por servicio puede ser encontrada [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLos filtros no soportados por el servicio online serán aplicados por c:geo en los resultados recibidos.</string>
     <string name="search_tb">Rastreable</string>
@@ -1479,6 +1480,7 @@
     <string name="user_menu_open_browser">Abrir perfil en el navegador</string>
     <string name="user_menu_send_message">Enviar mensaje</string>
     <string name="user_menu_send_email">Enviar email</string>
+    <string name="user_menu_open_contact">Buscar en contactos</string>
     <string name="user_unknown">Usuario desconocido</string>
     <!-- navigation -->
     <string name="navigation">Navegación</string>
@@ -1907,6 +1909,9 @@ Nombre de archivo:%2$s</string>
     <string name="init_confirm_debug">¡c:geo se está ejecutando en modo de depuración!</string>
     <string name="list_confirm_debug_message">¡El modo de depuración provoca inestabilidades! ¿Quieres desactivar el modo depuración?</string>
     <!-- permission handling -->
+    <string name="permission_legacy_write_external_storage_explanation">c:geo escribirá datos en el almacenamiento de su teléfono o en la tarjeta SD, por ejemplo, cuando guarde geocachés para su uso sin conexión, importe o exporte archivos y otras funciones. En algunas versiones de Android, debe otorgar un permiso adicional para estas acciones.</string>
+    <string name="permission_post_notifications_explanation">c:geo utiliza notificaciones para informarte sobre descargas y acerca de cachés (si está activado)</string>
+    <string name="permission_post_notifications_explanation_title">Permiso de notificaciones</string>
     <string name="storage_permission_needed">Esta función no es posible sin permiso de almacenamiento.</string>
     <!-- colors -->
     <string name="preference_colorpicker_select_color_scheme">Seleccionar esquema de color</string>
@@ -1952,6 +1957,7 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
     <!-- changed permissions one time message -->
+    <string name="changed_permissions_info">Android ha introducido un nuevo permiso requerido por c:geo. Ejecute el asistente de configuración de c:geo para comprobar este permiso y obtener información más detallada. Puede ejecutar el asistente ahora o más tarde mediante la entrada de menú correspondiente en la pantalla de inicio de c:geo.\n\n¿Quieres ejecutar el asistente de configuración ahora?</string>
     <!-- individual track -->
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="load_track_error">Error al cargar pista/ruta</string>
@@ -2247,4 +2253,10 @@ Nombre de archivo:%2$s</string>
     <string name="rtl_wetland">humedal</string>
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <string name="mcpolling_title">Centro de Mensajes</string>
+    <plurals name="mcupdate">
+        <item quantity="one">%d mensaje no leído en el centro de mensajes</item>
+        <item quantity="other">%d mensajes no leídos en el centro de mensajes</item>
+    </plurals>
+    <!-- db inspection -->
 </resources>
