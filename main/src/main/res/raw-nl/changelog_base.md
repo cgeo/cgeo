@@ -8,12 +8,13 @@
 - Wijziging: Zoeken naar coördinaten: Toon richting en afstand naar doel en niet naar de huidige positie
 - Nieuw: Grafische D/T indicator in het cache informatieblad
 - Oplossing: Kompasroos verborgen wanneer de filterbalk zichtbaar is (UnifiedMap)
+- Wijziging: Map thema legends verwijderd
+- Oplossing: Meerdere navigatie selectie popups bij lang indrukken
 
 ### Cache details
 - Nieuw: Toon afbeeldingen gekoppeld in "persoonlijke notitie" op tabblad afbeeldingen
 - Wijziging: Vereenvoudig lang tik actie in de cache- en trackable-details
 - Nieuw: Soepeler schalen van log afbeeldingen
-- Wijziging: Wijzig "gelogd" icoon van potlood naar smiley icoon
 - Wijziging: "Bewerk lijsten" pictogram van potlood naar lijst + potlood wijzigen
 - Oplossing: vanity functie mislukt op lange tekenreeksen
 - Oplossing: Verkeerde verwerkingsprioriteit in de back-up van de formule
@@ -37,3 +38,9 @@
 - Oplossing: Knipperen bij het vernieuwen van de cache lijst
 - Nieuw: Weergeven van wachtwoorden in de connectorconfiguratie toestaan
 - Oplossing: Zoek naar geokretys die niet meer werken tijdens het gebruik van trackingcodes
+
+### Wijzigingen niet opgenomen in huidige bètaversie
+- Nieuw: Kaartthema opslaan per tegelprovider (UnifiedMap)
+- Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
+- Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
+- Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
