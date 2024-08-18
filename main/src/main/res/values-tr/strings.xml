@@ -362,7 +362,6 @@
     <string name="caches_sort_vote">Oy (Puanlamanız)</string>
     <string name="caches_sort_inventory">İçindeki TB Sayısı</string>
     <string name="caches_sort_date_hidden">Yerleştirme tarihi</string>
-    <string name="caches_sort_date_logged">Kayıt tarihi</string>
     <string name="caches_sort_finds">Bulunanlar</string>
     <string name="caches_sort_state">Durum</string>
     <string name="caches_sort_storage">Cihaza kaydedilen tarih</string>
@@ -1380,7 +1379,6 @@
     <string name="google_maps_style_night">Gece</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Yüksek Kontrast</string>
-    <string name="google_maps_option_group_theme">Tema Seçenekleri</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1401,7 +1399,6 @@
     <string name="search_finder">Bulan</string>
     <string name="search_finder_prefill">Bulan</string>
     <string name="search_finder_button">Bulanın ismine göre ara</string>
-    <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
     <string name="search_tb">Trackable</string>
@@ -2318,4 +2315,5 @@
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
