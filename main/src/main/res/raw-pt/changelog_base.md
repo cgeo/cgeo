@@ -6,20 +6,21 @@
 - Novo: Alternar exibição de edifícios 2D/3D (mapas OSM, Mapa Unificado)
 - Novo: Armazenamento/actualização de cache a partir de popup movido para segundo plano
 - Alteração: Pesquisar coordenadas: Mostrar direcção e distância para o alvo e não para a posição actual
-- New: Graphical D/T indicator in cache info sheet
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Novo: Indicador gráfico de D/T no separador de informações da geocache
+- Correcção: Bússola oculta quando a barra de filtros está visível (Mapa Unificado)
+- Alteração: Removidas as legendas do tema do mapa
+- Correcção: Vários popups de seleção de navegação num toque longo
 
 ### Detalhes da cache
 - Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
 - Alteração: Simplificar acção de toque longo nos detalhes da cache e detalhes do TB
 - Novo: Dimensionamento mais suave das imagens de registo
-- Alteração: Mudança do ícone "Registar visita" de lápis para um ícone smiley
 - Alteração: Alterado o ícone "editar listas" do lápis para lista + lápis
-- Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
-- Change: Allow larger integer ranges in formulas (disallow usage of negation)
-- New: Allow user-stored cache images on creating/editing log
-- Fix: Spoiler images no longer being loaded (website change)
+- Correcção: função vanity falhava em linhas de texto longas
+- Correcção: prioridade de análise errada na cópia de segurança de fórmulas
+- Alteração: Permitir intervalos maiores de números inteiros em fórmulas (não permitir o uso de negação)
+- Novo: Permitir imagens armazenadas do utilizador na criação/edição de registo
+- Correcção: Imagens de spoiler não estão a ser carregadas (mudanças do site)
 
 ### Geral
 - Novo: Opção para definir o estado de "encontrado" das Adventure Lab manualmente ou automaticamente
@@ -31,9 +32,9 @@
 - Correcção: Resultados da pesquisa por local já não são classificados pela distância para o local de destino
 - Novo: Filtro "Coordenadas corrigidas"
 - Alteração: Actualizado "targetSDK" para 34 para cumprir os próximos requisitos da Play Store
-- New: Added "none"-entry to selection of routing profiles
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
-- New: Allow display of passwords in connector configuration
-- Fix: Search for geokretys no longer working when using trackingcodes
+- Novo: Adicionado opção "nenhum" à selecção de perfis de encaminhamento
+- Alteração: Melhorar a descrição da função "manutenção" (remover dados soltos)
+- Novo: Mostrar avisos quando ocorrer o erro HTTP 429 (Muitas solicitações)
+- Correcção: Cintilação ao actualizar a lista de caches
+- Novo: Permitir a exibição de palavra-passe na configuração do conector
+- Correcção: Pesquisar por geokretys deixou de funcionar ao usar códigos de rastreamento

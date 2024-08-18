@@ -190,6 +190,8 @@
     <string name="log_oc_team_comment">Комментарий команды OC</string>
     <string name="log_your_saved_log">Ваша сохраненная запись</string>
     <string name="log_empty_logbook">Блокнот этого тайника пуст.</string>
+    <string name="log_image_selectfromstorage_tooltip">Выбрать изображение из хранилища</string>
+    <string name="log_image_camera_tooltip">Сделать снимок с помощью камеры</string>
     <string name="log_problem_none">Нет проблем</string>
     <string name="log_problem_needs_maintenance_label">Необходимо восстановление</string>
     <string name="log_problem_needs_maintenance_text">Этот пользователь сообщил, что есть проблема с тайником.</string>
@@ -802,6 +804,7 @@
     <string name="settings_summary_system">Системные настройки, опции отладки</string>
     <string name="settings_title_navigation_menu">Меню навигации</string>
     <string name="settings_category_geocaching_platform">Сервис геокешинга</string>
+    <string name="settings_category_locationcentersearch">Поиск по местоположению</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
@@ -1778,6 +1781,8 @@
     <string name="google_maps_style_retro">Ретро</string>
     <string name="google_maps_style_contrast">Высокая контрастность</string>
     <string name="google_maps_style_auto">Тема устройства (День/ночь)</string>
+    <string name="google_maps_option_group_map">Опции Карты</string>
+    <string name="google_maps_option_show_traffic">Показ Трафика</string>
     <string name="google_maps_option_group_theme">Опции темы</string>
     <!-- search -->
     <string name="geo_search_label">Поиск тайников поблизости</string>

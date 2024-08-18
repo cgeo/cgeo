@@ -8,12 +8,13 @@
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
 - Novinka: Grafický indikátor D/T v informačním listu kešky
 - Oprava: Kompasová růžice skrytá, když je viditelný panel filtrů (Sjednocená mapa)
+- Změna: Odstraněny legendy k tématu mapy
+- Oprava: Více vyskakovacích oken pro výběr navigace při dlouhém stisknutí tlačítka
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Lepší vyhlazování obrázků v logu
-- Změna: Změna ikony "log" z tužky na ikonu smajlíka
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
 - Oprava: Selhání funkce vanity na dlouhých řetězcích
 - Oprava: Chybná priorita parsování v záloze vzorce
