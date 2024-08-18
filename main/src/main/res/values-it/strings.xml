@@ -413,7 +413,6 @@
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
     <string name="caches_sort_date_hidden">Data</string>
-    <string name="caches_sort_date_logged">Data Log</string>
     <string name="caches_sort_finds">Numero ritrovamenti</string>
     <string name="caches_sort_state">Stato</string>
     <string name="caches_sort_storage">Data salvataggio</string>
@@ -2934,4 +2933,14 @@
         <item quantity="one">%d messaggio non letto nel centro messaggi</item>
         <item quantity="other">%d messaggi non letti nel centro messaggi</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Visualizza database</string>
+    <string name="dbi_select_title">(Seleziona tabella)</string>
+    <string name="dbi_columnproperties_title">Proprietà colonna</string>
+    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nArchiviazione: %3$s</string>
+    <string name="dbi_edit_title">Modifica \"%1$s\" della riga %2$d\"</string>
+    <string name="dbi_edit_ok">Campo aggiornato</string>
+    <string name="dbi_edit_error">Errore durante l\'aggiornamento del campo</string>
+    <string name="dbi_edit_error_pkfield">"%s\" fa parte della chiave primaria, non può essere modificato"</string>
+    <string name="dbi_search_title">Cerca per</string>
 </resources>
