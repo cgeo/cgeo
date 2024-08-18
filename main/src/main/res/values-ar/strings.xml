@@ -249,7 +249,6 @@
     <string name="caches_sort_vote">التصويت (التقييم الخاص)</string>
     <string name="caches_sort_inventory">حساب المخزون</string>
     <string name="caches_sort_date_hidden">تاريخ مخفي</string>
-    <string name="caches_sort_date_logged">تاريخ التسجيل</string>
     <string name="caches_sort_finds">إيجاد</string>
     <string name="caches_sort_state">الوضع</string>
     <string name="caches_sort_storage">تاريخ المخبآت المخزنة على الجهاز</string>
@@ -1083,4 +1082,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
