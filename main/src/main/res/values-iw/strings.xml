@@ -258,7 +258,6 @@
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
     <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
-    <string name="caches_sort_date_logged">תאריך מציאה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
     <string name="caches_sort_storage">תאריך בו נשמר במכשיר</string>
@@ -473,4 +472,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
