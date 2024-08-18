@@ -1,6 +1,6 @@
 ### Mapa
-- New: "Edit Personal Note" from cache info sheet
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Nuevo: "Editar nota personal" desde la hoja de información del caché
+- Corregir: Waypoints no filtrados al mapear un solo caché (UnifiedMap)
 - New: Support user-defined tile providers
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
@@ -8,12 +8,13 @@
 - Change: Search for coordinates: Show direction and distance to target and not to current position
 - New: Graphical D/T indicator in cache info sheet
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Detalles del caché
-- New: Show images linked in "personal note" in Images tab
+- Nuevo: Mostrar imágenes enlazadas en "nota personal" en la pestaña de imágenes
 - Change: Simplify long-tap action in cache details and trackable details
 - New: Smoother scaling of log images
-- Change: Change "log" icon from pencil to smiley icon
 - Change: Change "edit lists" icon from pencil to list + pencil
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
@@ -37,3 +38,9 @@
 - Fix: Flickering on cache list refresh
 - New: Allow display of passwords in connector configuration
 - Fix: Search for geokretys no longer working when using trackingcodes
+
+### Changes not included in current beta version
+- New: Store map theme per tile provider (UnifiedMap)
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Allow multiple hierarchy levels in cache lists
