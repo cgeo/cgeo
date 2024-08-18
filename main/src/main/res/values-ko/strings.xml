@@ -411,7 +411,6 @@
     <string name="caches_sort_vote">투표(자체 평점)</string>
     <string name="caches_sort_inventory">목록 갯수</string>
     <string name="caches_sort_date_hidden">숨긴 날짜</string>
-    <string name="caches_sort_date_logged">로그 날짜</string>
     <string name="caches_sort_finds">찾음</string>
     <string name="caches_sort_state">상태</string>
     <string name="caches_sort_storage">기기에 저장된 데이터</string>
@@ -2894,4 +2893,5 @@
     <plurals name="mcupdate">
         <item quantity="other">메시지 센터에서 %d개의 읽지 않은 메시지</item>
     </plurals>
+    <!-- db inspection -->
 </resources>
