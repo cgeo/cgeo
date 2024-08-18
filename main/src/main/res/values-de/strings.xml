@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
     <string name="log_your_saved_log">Dein gespeichertes Log</string>
     <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
+    <string name="log_image_selectfromstorage_tooltip">Bilder aus dem Speicher auswählen</string>
+    <string name="log_image_camera_tooltip">Foto mit Kamera aufnehmen</string>
+    <string name="log_image_selectfromown_tooltip">Bilder aus eigenen Bildern auswählen</string>
     <string name="log_problem_none">Kein Problem</string>
     <string name="log_problem_needs_maintenance_label">Wartung benötigt</string>
     <string name="log_problem_needs_maintenance_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
@@ -413,7 +416,7 @@
     <string name="caches_sort_vote">Eigene Bewertung</string>
     <string name="caches_sort_inventory">Inventaranzahl</string>
     <string name="caches_sort_date_hidden">Versteckdatum</string>
-    <string name="caches_sort_date_logged">Eigenes Log-Datum</string>
+    <string name="caches_sort_date_logged">Logdatum (Eigener Log)</string>
     <string name="caches_sort_finds">Funde</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Speicherdatum</string>
@@ -2936,4 +2939,14 @@
         <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
         <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Datenbank anzeigen</string>
+    <string name="dbi_select_title">(Tabelle auswählen)</string>
+    <string name="dbi_columnproperties_title">Spalteneigenschaften</string>
+    <string name="dbi_columnproperties_message">Feld: %1$s\nTyp: %2$s\nSpeicher: %3$s</string>
+    <string name="dbi_edit_title">Bearbeite \"%1$s\" der Zeile %2$d\"</string>
+    <string name="dbi_edit_ok">Feld aktualisiert</string>
+    <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
+    <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
+    <string name="dbi_search_title">Suche nach</string>
 </resources>
