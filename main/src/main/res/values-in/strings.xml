@@ -242,7 +242,6 @@
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
     <string name="caches_sort_inventory">Jumlah persedian</string>
     <string name="caches_sort_date_hidden">Tanggal Disembunyikan</string>
-    <string name="caches_sort_date_logged">Tanggal Masuk</string>
     <string name="caches_sort_finds">Menemukan</string>
     <string name="caches_sort_state">Keadaan</string>
     <string name="caches_sort_storage">Tanggal disimpan di perangkat</string>
@@ -1105,4 +1104,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
