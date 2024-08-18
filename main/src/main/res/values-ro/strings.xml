@@ -289,7 +289,6 @@
     <string name="caches_sort_vote">Vot (propriul vot)</string>
     <string name="caches_sort_inventory">Total inventar</string>
     <string name="caches_sort_date_hidden">Data ascunderii</string>
-    <string name="caches_sort_date_logged">Însemnată în data</string>
     <string name="caches_sort_finds">Găsite</string>
     <string name="caches_sort_state">Stare</string>
     <string name="caches_sort_storage">Data salvării pe acest dispozitiv</string>
@@ -1185,4 +1184,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
