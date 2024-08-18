@@ -1,6 +1,6 @@
 ### Mapa
-- New: "Edit Personal Note" from cache info sheet
-- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Nuevo: "Editar nota personal" desde la hoja de información del caché
+- Corregir: Waypoints no filtrados al mapear un solo caché (UnifiedMap)
 - New: Support user-defined tile providers
 - Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
 - New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
@@ -12,7 +12,7 @@
 - Fix: Multiple navigation selection popups on long-press
 
 ### Detalles del caché
-- New: Show images linked in "personal note" in Images tab
+- Nuevo: Mostrar imágenes enlazadas en "nota personal" en la pestaña de imágenes
 - Change: Simplify long-tap action in cache details and trackable details
 - New: Smoother scaling of log images
 - Change: Change "edit lists" icon from pencil to list + pencil
