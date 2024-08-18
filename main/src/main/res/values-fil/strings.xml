@@ -239,7 +239,6 @@
     <string name="caches_sort_vote">Iboto (Ang Sariling Marka)</string>
     <string name="caches_sort_inventory">Ang bilang ng pag-iimbentaryo</string>
     <string name="caches_sort_date_hidden">Ang Petsa ay Nakatago</string>
-    <string name="caches_sort_date_logged">Ang Pagtatala sa Petsa</string>
     <string name="caches_sort_finds">Ang paghahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ng pag-iimbak sa aparato</string>
@@ -1114,4 +1113,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
