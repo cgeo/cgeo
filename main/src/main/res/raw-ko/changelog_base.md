@@ -8,12 +8,13 @@
 - 변경: 좌표 검색: 현재 위치가 아닌 목표까지 방향 및 거리 표시
 - New: Graphical D/T indicator in cache info sheet
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### 캐시 상세정보
 - 신규: 이미지 탭의 "개인 메모"에 링크된 이미지 표시
 - 변경: 캐시 세부정보 및 추적아이템 세부정보에서 길게 누르는 작업을 단순화합니다.
 - 신규: 로그 이미지의 원활한 스케일링
-- 변경: "로그" 아이콘을 연필에서 스마일 아이콘으로 변경
 - 변경: "목록 편집" 아이콘을 연필에서 목록 및 연필로 변경
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup
@@ -37,3 +38,9 @@
 - Fix: Flickering on cache list refresh
 - New: Allow display of passwords in connector configuration
 - Fix: Search for geokretys no longer working when using trackingcodes
+
+### Changes not included in current beta version
+- New: Store map theme per tile provider (UnifiedMap)
+- Change: Use elevation above mean sea level (if available, Android 14+ only)
+- New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Allow multiple hierarchy levels in cache lists
