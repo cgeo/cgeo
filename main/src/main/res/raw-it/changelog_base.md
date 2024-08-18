@@ -8,12 +8,13 @@
 - Modifica: cerca le coordinate: mostra la direzione e la distanza dall'obiettivo e non dalla posizione corrente
 - Nuovo: Indicatore grafico D/T nel foglio informazioni cache
 - Corretto: Bussola nascosta quando la barra dei filtri è visibile (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
 - Cambio: semplificato il tocco lungo nei dettagli dei cache e dei tracciabili
 - Novità: ridimensionamento delle immagini del log
-- Cambiato: cambia l'icona del log da "matita" a "smile"
 - Cambia: Cambio dell1'icona "modifica liste" da matita a lista + matita
 - Fix: vanity function failing on long strings
 - Corretto: errata priorità nel parsing della formula backup
@@ -37,3 +38,9 @@
 - Corretto: Flickering in aggiornamento della lista cache
 - New: Allow display of passwords in connector configuration
 - Fix: Search for geokretys no longer working when using trackingcodes
+
+### Modifiche non incluse nella versione beta corrente
+- New: Store map theme per tile provider (UnifiedMap)
+- Cambio: utilizzare l'elevazione sopra il livello medio del mare (se disponibile, solo Android 14+)
+- Nuovo: Evidenzia cache/waypoint selezionato (UnifiedMap)
+- New: Allow multiple hierarchy levels in cache lists
