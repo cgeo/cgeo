@@ -87,7 +87,21 @@
     <string name="wpnew_original">Original</string>
     <string name="wpnew_generated">Generert</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_nature">Natur</string>
+    <string name="cache_cat_bc_location">Posisjon</string>
+    <string name="cache_cat_bc_recommended">Anbefalt</string>
+    <string name="cache_cat_bc_gadget">Gadget</string>
+    <string name="cache_cat_bc_mystery">Mysterie</string>
+    <string name="cache_cat_bc_hiking">Fottur</string>
+    <string name="cache_cat_bc_other">Annet</string>
+    <string name="cache_cat_desc_bc_nature">Omgitt av spesiell natur</string>
+    <string name="cache_cat_desc_bc_location">Viser deg et flott sted</string>
+    <string name="cache_cat_desc_bc_recommended">Anbefalt av BetterCacher-teamet</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Ingen</string>
+    <string name="cache_tier_bc_blue">Blå</string>
+    <string name="cache_tier_bc_silver">Sølv</string>
+    <string name="cache_tier_bc_gold">Gull</string>
     <!-- logs -->
     <string name="log_found">Funnet</string>
     <string name="log_dnf">Ikke funnet</string>
@@ -125,6 +139,8 @@
     <string name="log_save">Lagre lokalt</string>
     <string name="log_saving">Lagrer logg…</string>
     <string name="log_posting_log">Laster opp logg…</string>
+    <string name="log_posting_deletelog">Slett logg…</string>
+    <string name="log_posting_image_delete">Sletter bilde %1$s/%2$s…</string>
     <string name="log_posting_vote">Laster opp cachestemme…</string>
     <string name="log_posting_generic_trackable">Logger %1$s %2$d/%3$d</string>
     <string name="log_clear">Tøm</string>
@@ -152,6 +168,7 @@
     <string name="log_smilies">Smilefjes</string>
     <string name="log_image">Bilde</string>
     <string name="log_images">Bilder</string>
+    <string name="log_edit_image">Rediger bilde</string>
     <string name="log_image_caption">Bildetekst</string>
     <string name="log_image_description">Beskrivelse</string>
     <string name="log_image_scale">Skalering</string>
@@ -161,6 +178,8 @@
     <string name="log_oc_team_comment">Kommentar fra OC-teamet</string>
     <string name="log_your_saved_log">Din lagrede logg</string>
     <string name="log_empty_logbook">Loggboka på denne cachen er tom.</string>
+    <string name="log_image_camera_tooltip">Ta bilde med kamera</string>
+    <string name="log_image_selectfromown_tooltip">Velg bilder fra egne bilder</string>
     <string name="log_problem_none">Ingen problemer</string>
     <string name="log_problem_needs_maintenance_label">Trenger vedlikehold</string>
     <string name="log_problem_needs_maintenance_text">Denne geocacheren rapporterte at det er et problem med denne cachen.</string>
@@ -181,6 +200,7 @@
     <string name="log_image_titleprefix">Bilde</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- Contacts -->
+    <string name="contact_multiple_matches">Kontakt: Flere treff</string>
     <!-- translation -->
     <string name="translate">Oversett</string>
     <string name="translate_to_sys_lang">Oversett til %s</string>
@@ -198,6 +218,7 @@
     <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
     <string name="err_comm">Ukjent kommunikasjonsfeil. Se på vår <a href="https://www.cgeo.org/faq#login-failed">Ofte Stilte Spørsmål</a> for hjelp.</string>
     <string name="err_missing_auth">Brukernavn og/eller passord er ikke oppgitt</string>
+    <string name="err_wrong">Feil brukernavn og/eller passord.</string>
     <string name="err_maintenance">Geocaching.com er nede for vedlikehold. c:geo fungerer offline med lokalt lagrede cacher.</string>
     <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens. c:geo kan ikke laste cachens koordinater.</string>
     <string name="err_unvalidated_account">Du må aktivere kontoen din på Geocaching.com først.</string>
@@ -225,6 +246,7 @@
     <string name="err_favorite_failed">Endring av favorittstatus mislyktes.</string>
     <string name="err_select_logimage_failed">Valg av bilde til loggen mislyktes.</string>
     <string name="err_acquire_image_failed">Henting av bilde mislyktes.</string>
+    <string name="err_acquire_image_unsupported_format">Bildeformat må være JPEG/JPG, PNG eller GIF</string>
     <string name="err_tb_display">\"Beklager, c:geo klarte ikke å finne den sporbare du etterspurte. Er det virkelig en sporbar (trackable)?</string>
     <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne detaljerene til den sporbare.</string>
     <string name="err_tb_not_loggable">Denne sporbare er ikke mulig å logge.</string>
@@ -268,6 +290,7 @@
     <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
     <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
     <string name="info_log_post_failed">Opplastning av logg mislyktes.</string>
+    <string name="info_log_delete_failed">Sletting av loggen mislyktes.</string>
     <string name="info_log_post_failed_reason">Grunn: %s</string>
     <string name="info_log_post_retry">Prøv på nytt</string>
     <string name="info_log_post_save">Lagre lokalt</string>
@@ -281,6 +304,7 @@
     <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
     <string name="confirm_unsaved_changes_title">Ulagrede endringer</string>
     <string name="confirm_discard_changes">Forkaste ulagrede endringer?</string>
+    <string name="confirm_unsent_changes_title">Usendte endringer</string>
     <string name="confirm_discard_wp_changes">Forkaste ulagrede endringer i veipunktene?</string>
     <string name="warn_log_load_additional_data">c:geo kunne ikke laste tilleggsdata (trackables/favorittpoeng) for logging.</string>
     <string name="more_information">Mer informasjon</string>
@@ -346,7 +370,6 @@
     <string name="caches_sort_vote">Avstemming (egen rangering)</string>
     <string name="caches_sort_inventory">Antall sporbare</string>
     <string name="caches_sort_date_hidden">Dato gjemt</string>
-    <string name="caches_sort_date_logged">Dato logget</string>
     <string name="caches_sort_finds">Antall funn</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Dato lagret i c:geo</string>
@@ -1257,6 +1280,7 @@
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_angle">Retning i °</string>
     <!-- Variables -->
     <string name="variables_titletext">Bruk denne siden til å notere verdier og gjøre nødvendige beregninger for denne cachen.</string>
     <string name="variables_scanlisting">Skann liste</string>
@@ -1306,6 +1330,7 @@
     <string name="formula_error_empty">Tom formel</string>
     <string name="formula_error_other">Feil: \'%1$s</string>
     <!-- ImageView -->
+    <string name="imageview_error">Kunne ikke laste inn bilde</string>
     <!-- map -->
     <string name="map_map">Kart</string>
     <string name="map_view_map">Kart</string>
@@ -1345,7 +1370,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1365,7 +1389,6 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
@@ -2182,4 +2205,5 @@
     <string name="rtl_ruin">ruin</string>
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
