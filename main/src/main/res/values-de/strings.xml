@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">OC-Team-Bemerkung</string>
     <string name="log_your_saved_log">Dein gespeichertes Log</string>
     <string name="log_empty_logbook">Das Logbuch dieses Caches ist leer.</string>
+    <string name="log_image_selectfromstorage_tooltip">Bilder aus dem Speicher auswählen</string>
+    <string name="log_image_camera_tooltip">Foto mit Kamera aufnehmen</string>
+    <string name="log_image_selectfromown_tooltip">Bilder aus eigenen Bildern auswählen</string>
     <string name="log_problem_none">Kein Problem</string>
     <string name="log_problem_needs_maintenance_label">Wartung benötigt</string>
     <string name="log_problem_needs_maintenance_text">Dieser Geocacher hat gemeldet, dass es ein Problem mit diesem Cache gibt.</string>
