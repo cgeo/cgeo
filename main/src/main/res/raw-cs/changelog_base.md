@@ -8,12 +8,13 @@
 - Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
 - Novinka: Grafický indikátor D/T v informačním listu kešky
 - Oprava: Kompasová růžice skrytá, když je viditelný panel filtrů (Sjednocená mapa)
+- Změna: Odstraněny legendy k tématu mapy
+- Oprava: Více vyskakovacích oken pro výběr navigace při dlouhém stisknutí tlačítka
 
 ### Detaily kešky
 - Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
 - Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
 - Novinka: Lepší vyhlazování obrázků v logu
-- Změna: Změna ikony "log" z tužky na ikonu smajlíka
 - Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
 - Oprava: Selhání funkce vanity na dlouhých řetězcích
 - Oprava: Chybná priorita parsování v záloze vzorce
@@ -37,3 +38,9 @@
 - Oprava: Blikání při obnovení seznamu kešek
 - Novinka: Povolení zobrazení hesel v konfiguraci konektoru
 - Oprava: Vyhledávání geokretů již nefunguje při použití sledovacích kódů
+
+### Změny nezahrnuté v aktuální beta verzi
+- Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
+- Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
+- Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
+- Novinka: Povolení více úrovní hierarchie v seznamech kešek
