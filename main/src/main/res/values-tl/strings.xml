@@ -248,7 +248,6 @@
     <string name="caches_sort_vote">Boto (sariling Marka)</string>
     <string name="caches_sort_inventory">Bilang ng imbentaryo</string>
     <string name="caches_sort_date_hidden">Nakatago ang petsa</string>
-    <string name="caches_sort_date_logged">Petsa ng Pag-log</string>
     <string name="caches_sort_finds">Hinahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ay itinago sa aparato</string>
@@ -1118,4 +1117,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
