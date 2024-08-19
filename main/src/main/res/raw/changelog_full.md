@@ -7,6 +7,50 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.08.19 Feature Release
+
+### Map
+- Change: Search for coordinates: Show direction and distance to target and not to current position
+- Change: Removed map theme legends
+- Fix: Waypoints not filtered on mapping a single cache (UnifiedMap)
+- Fix: Refresh map data after opening / closing settings dialog (UnifiedMap)
+- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Fix: Multiple navigation selection popups on long-press
+- New: "Edit Personal Note" from cache info sheet
+- New: Support user-defined tile providers
+- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
+- New: Cache store/refresh from popup moved into background
+- New: Graphical D/T indicator in cache info sheet
+
+### Cache details
+- Change: Simplify long-tap action in cache details and trackable details
+- Change: Change "edit lists" icon from pencil to list + pencil
+- Change: Allow larger integer ranges in formulas (disallow usage of negation)
+- Fix: vanity function failing on long strings
+- Fix: Wrong parsing priority in formula backup
+- Fix: Spoiler images no longer being loaded (website change)
+- New: Allow user-stored cache images on creating/editing log
+- New: Show images linked in "personal note" in Images tab
+- New: Smoother scaling of log images
+
+### General
+- Change: Use OSM Nominatum as fallback geocoder, replacing MapQuest geocoder (which is no longer working for us)
+- Change: Updated integrated BRouter to v1.7.5
+- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
+- Change: Improve description for "maintenance" function (remove orphaned data)
+- Fix: Search results for a location no longer sorted by distance to target location
+- Fix: Flickering on cache list refresh
+- Fix: Search for geokretys no longer working when using trackingcodes
+- New: Switch to set found state of Lab Adventures either manually or automatically
+- New: List selection dialog: Auto-group cache lists having a ":" in their name
+- New: Read elevation info from track on import
+- New: API to Locus now supporting cache size "virtual"
+- New: "Corrected coordinates" filter
+- New: Added "none"-entry to selection of routing profiles
+- New: Allow display of passwords in connector configuration
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.07.07 Bugfix Release
 
 - Fix: Log length check counting some characters twice
