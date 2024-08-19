@@ -8,12 +8,13 @@
 - Change: Search for coordinates: Show direction and distance to target and not to current position
 - New: Graphical D/T indicator in cache info sheet
 - Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
+- Change: Removed map theme legends
+- Fix: Multiple navigation selection popups on long-press
 
 ### Детали тайника
 - Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
 - Изменение: Упрощено действие при длительном нажатии в разделах детали и трекаблы тайников
 - Новое: Более плавное масштабирование изображений при добавлении их в записи о взятии тайника
-- Изменено: Заменена иконка "запись" с карандаша на смайлик
 - Изменение: изменена иконка «редактировать списки» с карандаша на список + карандаш
 - Fix: vanity function failing on long strings
 - Fix: Wrong parsing priority in formula backup

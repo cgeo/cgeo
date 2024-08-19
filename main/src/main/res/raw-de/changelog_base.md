@@ -8,18 +8,19 @@
 - Änderung: Suche nach Koordinaten: Zeige Richtung und Distanz zum Ziel und nicht zur aktuellen Position
 - Neu: Grafischer D/T-Indikator auf der Cache-Informationsseite
 - Korrektur: Kompassrose versteckt, wenn Filterleiste sichtbar ist (UnifiedMap)
+- Änderung: Legende für Kartendesigns entfernt
+- Korrektur: Mehrfache Navigationsauswahl-Popups bei langem Drücken
 
 ### Cache-Details
 - Neu: In der persönlichen Notiz verlinkte Bilder auf dem "Bilder"-Reiter anzeigen
 - Änderung: Vereinfachte Aktion für langes Tippen in Cache-Details und Trackable Details
 - Neu: Feiner geglättete Skalierung von Logbildern
-- Änderung: "Log"-Symbol ist nun ein Smiley (statt Bleistift)
 - Änderung: Geändertes Symbol für "Liste bearbeiten": Liste + Bleistift
 - Korrektur: `vanity` Funktion fehlerhaft bei langen Zeichenketten
 - Korrektur: Falsche Parsing-Priorität bei Formel-Backup
-- Change: Allow larger integer ranges in formulas (disallow usage of negation)
-- New: Allow user-stored cache images on creating/editing log
-- Fix: Spoiler images no longer being loaded (website change)
+- Änderung: Erlaube größere Zahlbereiche in Formeln (keine negativen Zahlen mehr möglich)
+- Neu: Benutzer-gespeicherte Cachebilder beim Erstellen/Bearbeiten von Logs erlauben
+- Korrektur: Spoilerbilder werden nicht mehr geladen (Webseitenänderung)
 
 ### Allgemein
 - Neu: Schalter, um Gefunden-Status von Lab-Adventures automatisch oder manuell zu setzen
@@ -35,5 +36,5 @@
 - Änderung: Verbesserte Beschreibung für Wartungsfunktion (Verwaiste Daten löschen)
 - Neu: Zeige Warnungen beim Auftreten von HTTP-Fehler 429 (zu viele Anfragen)
 - Korrektur: Flackern beim Aktualisieren der Cacheliste
-- New: Allow display of passwords in connector configuration
-- Fix: Search for geokretys no longer working when using trackingcodes
+- Neu: Passwörter in der Konnektor-Konfiguration anzeigen lassen
+- Korrektur: Suche nach Geokretys funktioniert nicht mehr, wenn Trackingcodes verwendet werden

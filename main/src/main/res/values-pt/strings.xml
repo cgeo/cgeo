@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">Comentário da Equipa OC</string>
     <string name="log_your_saved_log">O seu registo gravado</string>
     <string name="log_empty_logbook">O logbook desta cache está vazio.</string>
+    <string name="log_image_selectfromstorage_tooltip">Seleccionar imagens a partir do armazenamento</string>
+    <string name="log_image_camera_tooltip">Tirar fotografia com a câmara</string>
+    <string name="log_image_selectfromown_tooltip">Seleccione imagens das suas próprias imagens</string>
     <string name="log_problem_none">Sem problemas</string>
     <string name="log_problem_needs_maintenance_label">Precisa de manutenção</string>
     <string name="log_problem_needs_maintenance_text">Este geocacher reportou que existe um problema com esta cache.</string>
@@ -1109,6 +1112,8 @@
     <string name="init_mapWpScaling_title">Dimensionamento do ícone de Pontos Adicionais</string>
     <string name="init_mapWpScaling_description">Factor de dimensionamento para ícones de pontos adicionais (em %)</string>
     <string name="init_maintenance">Manutenção</string>
+    <string name="init_maintenance_directories_note">As geocaches excluídas são armazenados internamente por 72 horas pelo c:geo para evitar a perda acidental de dados. Além disso, o c:geo também armazena imagens e outros ficheiros relacionados a caches em pastas dedicadas. Em alguns casos especiais, esses dados podem não ser removidos, embora a geocache já não esteja armazenada. Esta função pode ser usada para limpar esses dados soltos.</string>
+    <string name="init_maintenance_directories">Apagar dados obsoletos</string>
     <string name="init_maintenance_start">Manutenção iniciada</string>
     <string name="init_maintenance_ongoing">Isto pode demorar algum tempo…</string>
     <string name="init_maintenance_finished">Manutenção concluída</string>
@@ -1290,6 +1295,7 @@
     <string name="last_day_available">último dia disponível</string>
     <string name="cache_offline_refresh">Actualizar</string>
     <string name="cache_offline_drop">Remover da lista</string>
+    <string name="cache_offline_delete">Apagar</string>
     <string name="cache_delete_userdefined_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tem a opção \"pontos adicionais de notas\" activada. Se tiver coordenadas em notas pessoais, reconhecidas pelo c:geo, os pontos adicionais serão recriados automaticamente por elas. Pode desactivar isto na secção de edição de anotações pessoais.</string>
@@ -1742,6 +1748,8 @@
     <string name="map_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
+    <string name="zoom_in">Ampliar</string>
+    <string name="zoom_out">Reduzir</string>
     <string name="other_settings">Outras configurações</string>
     <string name="map_show_caches_title">Mostrar Caches:\n</string>
     <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
@@ -1752,6 +1760,7 @@
     <string name="map_theme_legend_info">Toque no título da categoria para abrir/fechar a categoria. Toque longo num símbolo para breves informações sobre esse símbolo. Toque no ícone de informações para visitar uma legenda detalhada online.</string>
     <string name="google_maps_style_default">Padrão</string>
     <string name="google_maps_style_night">Noite</string>
+    <string name="google_maps_style_classic">Clássico</string>
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Alto contraste</string>
     <string name="google_maps_style_auto">Tema do dispositivo (Dia/Noite)</string>
@@ -2271,6 +2280,10 @@
         <item quantity="one">Recomendar esta cache (%d restantes)</item>
         <item quantity="other">Recomendar esta cache (%d restantes)</item>
     </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Adicionar esta cache aos favoritos (%d restante)</item>
+        <item quantity="other">Adicionar esta cache aos favoritos (%d restantes)</item>
+    </plurals>
     <string name="command_set_cache_icons_progress">A configurar ícones da cache</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Definir %d ícone da cache</item>
@@ -2291,6 +2304,7 @@
     <string name="init_confirm_debug">O c:geo está a ser executado no modo de depuração!</string>
     <string name="list_confirm_debug_message">O modo de depuração provoca instabilidades! Quer desactivar o modo de depuração?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Permissão em falta</string>
     <string name="permission_ask_again">Perguntar-me novamente</string>
     <string name="permission_goto_app_details">Abrir a informação da aplicação</string>
     <string name="permission_contacts_read_explanation_title">Permissão de leitura de contactos</string>
@@ -2403,6 +2417,7 @@
     <string name="routingmode_car">Viatura</string>
     <string name="routingmode_user1">Utilizador 1</string>
     <string name="routingmode_user2">Utilizador 2</string>
+    <string name="routingmode_none">(nenhum)</string>
     <!-- view settings -->
     <string name="view_settings">Ver definições</string>
     <string name="delete_setting">Excluir configuração</string>
@@ -2444,6 +2459,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Algumas fontes de transferência suportam ficheiros adicionais que não são utilizados pelo c:geo. Mantenha esses ficheiros extra na pasta de transferências do sistema em vez de os eliminar</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
+    <string name="download_enqueing_error">Erro ao tentar iniciar a transferência</string>
     <string name="download_none_selected">Não há ficheiros selecionados para transferir</string>
     <string name="downloadmap_target_not_writable">O destino seleccionado \"%s\" não é gravável - o mapa transferido será gravado na pasta de transferências do sistema e deve ser movido manualmente para a pasta de mapas.</string>
     <string name="downloadmap_allow_metered_network">Permitir a transferência através de redes limitadas (por exemplo: ligação móvel)</string>
@@ -2554,6 +2570,8 @@
     <string name="redo">Refazer</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Optimizar</string>
+    <string name="expand">Expandir</string>
+    <string name="close">Fechar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Selecionar Tudo</string>
     <string name="multiselect_selectvisible">Selecionar Visíveis</string>

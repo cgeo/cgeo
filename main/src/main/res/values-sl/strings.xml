@@ -8,6 +8,7 @@
     <string name="about">O c:geo</string>
     <string name="latitude">Zemlj. širina</string>
     <string name="longitude">Zemlj. dolžina</string>
+    <string name="latlongitude">Zemljepisna širina\ndolžina</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo nastavitve</string>
     <!-- caches -->
@@ -24,11 +25,18 @@
     <string name="webcam">Spletna kamera</string>
     <string name="virtual">Virtualni zakladi</string>
     <string name="wherigo">Wherigo zakladi</string>
+    <string name="communceleb">Community Celebration dogodek</string>
     <string name="ape">Project APE zaklad</string>
     <string name="gchq">Geocaching HQ</string>
     <string name="gps">Razstava GPS Adventures</string>
     <string name="locationless">Zaklad brez lokacije (obratni zaklad)</string>
+    <string name="advlab">Adventure Lab zaklad</string>
+    <string name="userdefined">Lasten zaklad</string>
     <string name="unknown">Neznan tip zaklada</string>
+    <string name="all_types_short">Vsi</string>
+    <string name="traditional_short">Tradi</string>
+    <string name="event_short">Dogodek</string>
+    <string name="virtual_short">Virtualni</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">mikro</string>
     <string name="cache_size_small">majhen</string>
@@ -48,6 +56,7 @@
     <string name="wp_trailhead">Začetek poti</string>
     <string name="wp_waypoint">Referenčna točka</string>
     <string name="wp_original">Originalne koordinate</string>
+    <string name="wp_generated">Ustvarjen</string>
     <!-- waypoints short names for new waypoints -->
     <!-- Cache Categories -->
     <!-- cache Tier -->
@@ -640,6 +649,7 @@
     <!-- Calculated coordinates -->
     <!-- Formula -->
     <!-- ImageView -->
+    <string name="imageview_error">Slike ni bilo mogoče naložiti</string>
     <!-- map -->
     <string name="map_map">Zemljevid</string>
     <string name="map_view_map">Pogled zemljevida</string>
@@ -648,6 +658,7 @@
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
+    <string name="map_theme_legend">Tema Legenda</string>
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
@@ -1005,6 +1016,8 @@
     <string name="event_fail">Dogodka ni uspelo dodati v koledar</string>
     <string name="init_low_disk_space">Zmanjkuje prostora za shranjevanje</string>
     <!-- permission handling -->
+    <string name="permission_legacy_write_external_storage_explanation">c:geo bo zapisal podatke v pomnilnik vašega telefona ali na zunanjo SD kartico, ko shranjujete zaklad za uporabo brez povezave, uvozite ali izvozite datoteke in druge funkcije. V nekaterih različicah Androida morate za ta dejanja podeliti dodatno dovoljenje.</string>
+    <string name="permission_legacy_write_external_storage_explanation_title">Podedovano dovoljenje za zapisovanje na zunanjo pomnilniško enoto</string>
     <!-- colors -->
     <!-- number input -->
     <!-- notification / channel texts -->
