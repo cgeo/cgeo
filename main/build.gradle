@@ -335,8 +335,8 @@ dependencies {
     implementation 'net.sf.geographiclib:GeographicLib-Java:2.0'
 
     // DB inspection
-    implementation 'com.github.moving-bits:datatables:-SNAPSHOT'
-    implementation 'com.github.moving-bits:dbinspection:a717370360'
+    implementation 'com.github.moving-bits:datatables:v0.1.0'
+    implementation 'com.github.moving-bits:dbinspection:v0.1.0'
 
     // Jackson XML processing
     // Jackson 2.14++ needs minSdk 26
