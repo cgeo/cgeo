@@ -35,14 +35,17 @@ import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
 import org.apache.commons.lang3.StringUtils;
+import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.Dimension;
 import org.mapsforge.core.model.LatLong;
+import org.mapsforge.core.model.Point;
 import org.mapsforge.core.model.Rotation;
 import org.mapsforge.core.util.LatLongUtils;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
+import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.model.common.Observer;
 import org.mapsforge.map.view.InputListener;
@@ -81,8 +84,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
         tileCache = AndroidUtil.createTileCache(getContext(), "mapcache", mMapView.getModel().displayModel.getTileSize(), 1f, mMapView.getModel().frameBufferModel.getOverdrawFactor());
         themeHelper = new MapsforgeThemeHelper(requireActivity());
-
-
 
         if (position != null) {
             setCenter(position);
@@ -203,10 +204,8 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
             applyTheme(); // @todo: There must be a less resource-intensive way of applying style-changes...
             doReapplyTheme = false;
         }
-//        mMapLayers.add(new MapEventsReceiver(mMap));
-
+        mMapView.getLayerManager().getLayers().add(new MapEventsReceiver());
         mMapView.getModel().mapViewPosition.addObserver(this);
-
     }
 
     @Override
@@ -407,6 +406,26 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     // ========================================================================
     // Tap handling methods
+
+    class MapEventsReceiver extends Layer {
+
+        @Override
+        public boolean onLongPress(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, true);
+            return true;
+        }
+
+        @Override
+        public boolean onTap(final LatLong tapLatLong, final Point layerXY, final Point tapXY) {
+            onTapCallback(tapLatLong.getLatitudeE6(), tapLatLong.getLongitudeE6(), (int) tapXY.x, (int) tapXY.y, false);
+            return true;
+        }
+
+        @Override
+        public void draw(final org.mapsforge.core.model.BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
+            // nothing to do
+        }
+    }
 
     @Override
     public void adaptLayoutForActionBar(@Nullable final Boolean actionBarShowing) {
