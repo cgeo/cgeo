@@ -1961,6 +1961,10 @@ public class Settings {
                 );
     }
 
+    public static boolean provideClipboardCopyAction() {
+        return getBoolean(R.string.pref_clipboard_copy_action, false);
+    }
+
     /**
      * Get avatar URL by connector. Should SOLELY be used by class {@link AvatarUtils}!
      */

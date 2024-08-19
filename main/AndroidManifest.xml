@@ -209,6 +209,13 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
+            android:name=".helper.CopyToClipboardActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_menu_copy"
+            android:label="@string/copy"
+            >
+        </activity>
+        <activity
             android:name=".helper.QueryMapFile"
             android:exported="true">
         </activity>
