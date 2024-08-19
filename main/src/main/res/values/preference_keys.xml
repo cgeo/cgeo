@@ -383,6 +383,9 @@
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
 
+    <!-- category clpboard copy action -->
+    <string translatable="false" name="pref_clipboard_copy_action">clipboardCopyAction</string>
+
     <!-- category extended settings -->
     <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
 
