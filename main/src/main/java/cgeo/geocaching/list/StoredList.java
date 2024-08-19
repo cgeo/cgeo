@@ -78,9 +78,6 @@ public final class StoredList extends AbstractList {
 
         private static final String GROUP_SEPARATOR = ":";
 
-        private static final String SYSTEM_GROUP_PREFIX = "system-group-";
-        private static final String SELECTED_GROUP_PREFIX = "selected-group-";
-
         public UserInterface(@NonNull final Activity activity) {
             this.activityRef = new WeakReference<>(activity);
             res = CgeoApplication.getInstance().getResources();
@@ -207,17 +204,18 @@ public final class StoredList extends AbstractList {
 
 
         private Comparator<Object> getGroupAwareListSorter(final Set<Integer> selectedIds) {
-            return CommonUtils.getNullHandlingComparator((p1, p2) -> getSortString(p1, selectedIds).compareTo(getSortString(p2, selectedIds)), true);
+            final Collator collator = Collator.getInstance();
+            return CommonUtils.getNullHandlingComparator((p1, p2) -> collator.compare(getSortString(p1, selectedIds), getSortString(p2, selectedIds)), true);
         }
 
         private String getSortString(final Object item, final Set<Integer> selectedIds) {
-            //Group sorting:
-            // A. "Create new",
-            // B. "Stored",
-            // C. lists with selected items (those are not grouped)
-            // D. Grouped and ungrouped lists w/o selected items (sorted alphabetically)
-            // E. "All"
-            // F. "History"
+            //Stored list sorting:
+            // A. If displayed: "Create new"
+            // B. If displayed: "Stored",
+            // C. If multiselect: preselected lists in alphabetic order (those are not grouped)
+            // D. Grouped and ungrouped user lists w/o selected items (each level sorted alphabetically, groups and lists intermixed)
+            // E. If displayed: "All"
+            // F. If displayed: "History"
 
             if (item instanceof ItemGroup) {
                 return "D-" + ((ItemGroup<?, ?>) item).getGroup().toString();
@@ -292,7 +290,7 @@ public final class StoredList extends AbstractList {
         }
 
         private static List<AbstractList> getMenuLists(final boolean onlyConcreteLists, final Set<Integer> exceptListIds, final Set<Integer> selectedLists) {
-            final List<AbstractList> lists = new ArrayList<>(getSortedLists(selectedLists));
+            final List<AbstractList> lists = new ArrayList<>(DataStore.getLists());
 
             if (exceptListIds.contains(STANDARD_LIST_ID)) {
                 lists.remove(DataStore.getList(STANDARD_LIST_ID));
@@ -315,30 +313,6 @@ public final class StoredList extends AbstractList {
             if (!exceptListIds.contains(PseudoList.NEW_LIST.id)) {
                 lists.add(0, PseudoList.NEW_LIST);
             }
-            return lists;
-        }
-
-        @NonNull
-        private static List<StoredList> getSortedLists(final Set<Integer> selectedLists) {
-            final Collator collator = Collator.getInstance();
-            final List<StoredList> lists = DataStore.getLists();
-            Collections.sort(lists, (lhs, rhs) -> {
-                if (selectedLists.contains(lhs.id) && !selectedLists.contains(rhs.id)) {
-                    return -1;
-                }
-                if (selectedLists.contains(rhs.id) && !selectedLists.contains(lhs.id)) {
-                    return 1;
-                }
-                // have the standard list at the top
-                if (lhs.id == STANDARD_LIST_ID) {
-                    return -1;
-                }
-                if (rhs.id == STANDARD_LIST_ID) {
-                    return 1;
-                }
-                // otherwise sort alphabetical
-                return collator.compare(lhs.getTitle(), rhs.getTitle());
-            });
             return lists;
         }
 
