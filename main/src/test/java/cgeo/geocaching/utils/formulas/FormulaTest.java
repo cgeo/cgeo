@@ -62,11 +62,14 @@ public class FormulaTest {
 
     @Test
     public void bigDecimals() {
-        final int doublePowCs = 847; // manually calculated checksum of pow(99^99)
-        assertThat(Formula.evaluate("cs(99^99)").getAsDouble()).isEqualTo(doublePowCs);
+        final double doubleResult = 3.697296376497268E197;
         assertThat(Formula.evaluate("99^99").getAsDouble()).isEqualTo(Math.pow(99, 99));
-        assertThat(String.valueOf(Formula.evaluate("99^99").getAsString())).isEqualTo("369729637649726802192985226395427290145296428445515959701359650120802601667133273280053721002700400354392780458116125965728631706472588849812738072765460822138161108630185181415759762204338929270784");
+        assertThat(Formula.evaluate("99^99").getAsDouble()).isEqualTo(doubleResult);
         assertThat(String.valueOf(Formula.evaluate("99^99").getAsDouble())).isEqualTo("3.697296376497268E197");
+
+        final int doublePowCs = 847; // manually calculated checksum of pow(99^99)
+        assertThat(String.valueOf(Formula.evaluate("99^99").getAsString())).isEqualTo("369729637649726802192985226395427290145296428445515959701359650120802601667133273280053721002700400354392780458116125965728631706472588849812738072765460822138161108630185181415759762204338929270784");
+        assertThat(Formula.evaluate("cs(99^99)").getAsDouble()).isEqualTo(doublePowCs);
     }
 
     @Test
