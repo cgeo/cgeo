@@ -88,6 +88,11 @@
 
         </RelativeLayout>
 
+        <cgeo.geocaching.ui.VariableListView
+            android:id="@+id/variable_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/projectedLatLongitude"
             style="@style/button_full_double"

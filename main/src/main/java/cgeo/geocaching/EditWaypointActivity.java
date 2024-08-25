@@ -25,6 +25,7 @@ import cgeo.geocaching.ui.FormulaEditText;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
@@ -63,6 +64,8 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -114,6 +117,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
      */
     private boolean initViews = true;
     private EditwaypointActivityBinding binding;
+    private VariableListView.VariablesListAdapter varListAdapter;
 
     /**
      * This is the cache that the waypoint belongs to.
@@ -413,12 +417,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         //connect formula-editfields with cache's Variable list
         final VariableList varList = cache.getVariables();
         final BiConsumer<String, Formula> listener = (s, f) -> {
-            final Set<String> neededVars = varList.getDependentVariables(getNeededVariablesForProjection());
-            for (String var : neededVars) {
-                if (!varList.contains(var)) {
-                    varList.addVariable(var, "");
-                }
-            }
+            varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
             recalculateProjectedCoordinates();
             // recalculateProjectionView();
         };
@@ -440,6 +439,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             .setDisplayMapper(pt -> TextParam.text(pt.getId()))
             .setSpinner(binding.projectionBearingUnit)
             .setChangeListener(pt -> recalculateProjectionView());
+
+        varListAdapter = binding.variableList.getAdapter();
+        varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
+        varListAdapter.setVarChangeCallback((v, s) -> {
+            varListAdapter.checkAddVisibleVariables(Collections.singletonList(v));
+            recalculateProjectedCoordinates();
+        });
+
+        varListAdapter.setVariableList(varList);
+        varListAdapter.setVisibleVariablesAndDependent(getNeededVariablesForProjection());
     }
 
     /**
@@ -457,6 +466,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.projectedLatLongitude.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
         binding.projectionBearingBox.setVisibility(projectionEnabled && pType == ProjectionType.BEARING ? View.VISIBLE : View.GONE);
         binding.projectionOffsetBox.setVisibility(projectionEnabled && pType == ProjectionType.OFFSET ? View.VISIBLE : View.GONE);
+
+        binding.variableList.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
 
         //update currentCoords and coordinate Views
         // varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
