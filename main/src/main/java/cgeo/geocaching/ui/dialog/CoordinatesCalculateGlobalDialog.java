@@ -211,7 +211,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
         varListAdapter.setVarChangeCallback((v, s) -> {
-            checkAddVariables(Collections.singletonList(v));
+            varListAdapter.checkAddVisibleVariables(Collections.singletonList(v));
             updateView();
         });
         varListAdapter.setVariableList(varList);
@@ -223,14 +223,14 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLat.setText(calcCoord.getLatitudePattern());
 
         binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLongitudePattern(s.toString());
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLon.setText(calcCoord.getLongitudePattern());
@@ -238,7 +238,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.NonPlainFormat.setChangeListener(p -> {
             calcCoord.setLatitudePattern(p.first);
             calcCoord.setLongitudePattern(p.second);
-            checkAddVariables(calcCoord.getNeededVars());
+            varListAdapter.checkAddVisibleVariables(calcCoord.getNeededVars());
             updateView();
         });
 
@@ -288,12 +288,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         refreshType(calcCoord.getType(), true);
 
         return binding.getRoot();
-    }
-
-    private void checkAddVariables(final Collection<String> vars) {
-        final Set<String> neededVars = varListAdapter.getVariables().getDependentVariables(vars);
-        varListAdapter.ensureVariables(neededVars);
-        varListAdapter.addVisibleVariables(neededVars);
     }
 
     // splitting up that method would not help improve readability
