@@ -449,6 +449,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         varListAdapter.setVariableList(varList);
         varListAdapter.setVisibleVariablesAndDependent(getNeededVariablesForProjection());
+
+        binding.variablesTidyup.setOnClickListener(v -> varListAdapter.tidyUp(getNeededVariablesForProjection()));
     }
 
     /**
@@ -468,6 +470,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.projectionOffsetBox.setVisibility(projectionEnabled && pType == ProjectionType.OFFSET ? View.VISIBLE : View.GONE);
 
         binding.variableList.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
+        binding.variablesTidyup.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
 
         //update currentCoords and coordinate Views
         // varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
