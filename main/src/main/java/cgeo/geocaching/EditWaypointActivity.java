@@ -394,26 +394,33 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
     }
 
-    private void addNeededVariablesForProjection(final VariableList varList) {
-        final Set<String> distVars = new HashSet<>();
-        FormulaUtils.addNeededVariables(distVars, binding.projectionBearingDistance.getFormulaText());
-        FormulaUtils.addNeededVariables(distVars, binding.projectionBearingAngle.getFormulaText());
-
-        for (String var : distVars) {
-            if (!varList.contains(var)) {
-                varList.addVariable(var, "");
-            }
+    private Set<String> getNeededVariablesForProjection() {
+        final Set<String> projectionVars = new HashSet<>();
+        final ProjectionType pt = projectionType.get();
+        if (pt == ProjectionType.BEARING) {
+            FormulaUtils.addNeededVariables(projectionVars, binding.projectionBearingDistance.getFormulaText());
+            FormulaUtils.addNeededVariables(projectionVars, binding.projectionBearingAngle.getFormulaText());
+        } else if (pt == ProjectionType.OFFSET) {
+            FormulaUtils.addNeededVariables(projectionVars, binding.projectionOffsetLatitude.getFormulaText());
+            FormulaUtils.addNeededVariables(projectionVars, binding.projectionOffsetLongitude.getFormulaText());
         }
-    }
 
+        return projectionVars;
+    }
 
     private void initializeProjectionView(final Geocache cache) {
 
         //connect formula-editfields with cache's Variable list
         final VariableList varList = cache.getVariables();
         final BiConsumer<String, Formula> listener = (s, f) -> {
-            addNeededVariablesForProjection(varList);
-            recalculateProjectionView();
+            final Set<String> neededVars = varList.getDependentVariables(getNeededVariablesForProjection());
+            for (String var : neededVars) {
+                if (!varList.contains(var)) {
+                    varList.addVariable(var, "");
+                }
+            }
+            recalculateProjectedCoordinates();
+            // recalculateProjectionView();
         };
         binding.projectionBearingAngle.setVariableList(varList);
         binding.projectionBearingAngle.setFormulaChangeListener(listener);
@@ -442,7 +449,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @SuppressWarnings("PMD.NPathComplexity") // readability won't be imporved upon split
     private void recalculateProjectionView() {
 
-        final Geopoint base = this.preprojectedCoords;
         final ProjectionType pType = this.projectionType.get();
         final boolean projectionEnabled = waypoint == null || (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty());
 
@@ -453,6 +459,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.projectionOffsetBox.setVisibility(projectionEnabled && pType == ProjectionType.OFFSET ? View.VISIBLE : View.GONE);
 
         //update currentCoords and coordinate Views
+        // varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
+        recalculateProjectedCoordinates();
+    }
+
+    private void recalculateProjectedCoordinates(){
+        //update currentCoords and coordinate Views
+        final Geopoint base = this.preprojectedCoords;
+
+        final ProjectionType pType = this.projectionType.get();
+        final boolean projectionEnabled = waypoint == null || (waypoint.isUserDefined() || waypoint.isOriginalCoordsEmpty());
+
         if (!projectionEnabled || pType == ProjectionType.NO_PROJECTION || base == null) {
             this.currentCoords = base;
         } else {
@@ -461,7 +478,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         ViewUtils.setCoordinates(base, binding.buttonLatLongitude);
         ViewUtils.setCoordinates(this.currentCoords, binding.projectedLatLongitude);
     }
-
 
     private class LoadWaypointThread extends Thread {
 
