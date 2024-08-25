@@ -65,7 +65,7 @@ public class FormulaEditText extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    private void processFormulaChange() {
+    private void ensureFormula() {
         final String formulaString = binding.formulaText.getText().toString();
         try {
             this.formula = Formula.compile(formulaString);
@@ -74,8 +74,12 @@ public class FormulaEditText extends LinearLayout {
         } catch (FormulaException fe) {
             this.formula = null;
             binding.formulaResult.setText(fe.getUserDisplayableString());
-        }
+        } }
+
+    private void processFormulaChange() {
+        ensureFormula();
         if (this.formulaChangeListener != null) {
+            final String formulaString = binding.formulaText.getText().toString();
             this.formulaChangeListener.accept(formulaString, formula);
         }
     }
@@ -98,6 +102,9 @@ public class FormulaEditText extends LinearLayout {
 
     public Value getValue() {
         try {
+            if(formula == null) {
+                ensureFormula();
+            }
             return formula == null ? null : formula.evaluate(varList == null ? x -> null : varList::getValue);
         } catch (FormulaException fe) {
             return null;
