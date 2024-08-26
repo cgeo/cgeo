@@ -1138,6 +1138,9 @@
     <string name="init_force_orientation_sensor_title">Czujnik orientacji</string>
     <string name="init_force_orientation_sensor_note">Na niektórych urządzeniach, standardowy czujnik obrotu nie działa poprawnie, zwracając zły kierunek. W tej sytuacji, alternatywny czujnik (czujnik orientacji) może działać lepiej.</string>
     <string name="init_force_orientation_sensor">Wymuś użycie czujnika orientacji</string>
+    <string name="init_clipboard_copy_action_title">Akcja kopiuj do schowka</string>
+    <string name="init_clipboard_copy_action_note">Na niektórych urządzeniach opcje udostępniania tekstu nie zawierają akcji „Kopiuj do schowka”. Dla tych urządzeń, c:geo może dodać własną akcję „Kopiuj do schowka” do menu udostępniania.</string>
+    <string name="init_clipboard_copy_action">Dodaj akcję „kopiuj do schowka” aby udostępnić menu</string>
     <string name="init_title_extended_settings">Ustawienia rozszerzone</string>
     <string name="init_summary_extended_settings">Pokaż ustawienia dla bardziej doświadczonych użytkowników</string>
     <string name="init_create_memory_dump">Wykonaj zrzut pamięci</string>
@@ -2272,7 +2275,9 @@
     <string name="tts_one_oclock">pierwsza</string>
     <string name="tts_oclock">%s</string>
     <!-- various -->
+    <string name="copy">Kopiuj</string>
     <string name="clipboard_copy_ok">Skopiowano do schowka</string>
+    <string name="clipboard_copy_failed">Kopiowanie do schowka nie powiodło się</string>
     <plurals name="days_ago">
         <item quantity="one">%d dzień temu</item>
         <item quantity="few">%d dni temu</item>
