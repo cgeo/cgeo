@@ -38,7 +38,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.Formula;
-import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
@@ -399,13 +398,13 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     private Set<String> getNeededVariablesForProjection() {
         final Set<String> projectionVars = new HashSet<>();
-        final ProjectionType pt = projectionType.get();
-        if (pt == ProjectionType.BEARING) {
-            FormulaUtils.addNeededVariables(projectionVars, binding.projectionBearingDistance.getFormulaText());
-            FormulaUtils.addNeededVariables(projectionVars, binding.projectionBearingAngle.getFormulaText());
-        } else if (pt == ProjectionType.OFFSET) {
-            FormulaUtils.addNeededVariables(projectionVars, binding.projectionOffsetLatitude.getFormulaText());
-            FormulaUtils.addNeededVariables(projectionVars, binding.projectionOffsetLongitude.getFormulaText());
+
+        final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
+        if (fields.left == null) {
+            fields.left.addNeededVariables(projectionVars);
+        }
+        if (fields.middle == null) {
+            fields.middle.addNeededVariables(projectionVars);
         }
 
         return projectionVars;
@@ -418,7 +417,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final BiConsumer<String, Formula> listener = (s, f) -> {
             varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
             recalculateProjectedCoordinates();
-            // recalculateProjectionView();
         };
         binding.projectionBearingAngle.setVariableList(varList);
         binding.projectionBearingAngle.setFormulaChangeListener(listener);
@@ -472,7 +470,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.variablesTidyup.setVisibility(projectionEnabled && pType != ProjectionType.NO_PROJECTION ? View.VISIBLE : View.GONE);
 
         //update currentCoords and coordinate Views
-        // varListAdapter.checkAddVisibleVariables(getNeededVariablesForProjection());
         recalculateProjectedCoordinates();
     }
 

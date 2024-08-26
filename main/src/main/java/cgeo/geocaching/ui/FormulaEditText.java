@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 /** Allows live-editing of a formula, optionally associated with a Variable List*/
@@ -87,6 +88,11 @@ public class FormulaEditText extends LinearLayout {
 
     public void setVariableList(final VariableList varList) {
         this.varList = varList;
+    }
+
+    public void addNeededVariables(final Set<String> neededVars) {
+        ensureFormula();
+        neededVars.addAll(formula.getNeededVariables());
     }
 
     public void setHint(final String hint) {
