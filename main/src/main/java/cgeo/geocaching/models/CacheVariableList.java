@@ -92,8 +92,8 @@ public class CacheVariableList extends VariableList {
                 if (wp.isCalculated()) {
                     final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
                     neededVars.addAll(cc.getNeededVars());
-               }
-                if( wp.hasProjection()){
+                }
+                if (wp.hasProjection()) {
                     FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula1());
                     FormulaUtils.addNeededVariables(neededVars, wp.getProjectionFormula2());
                 }
@@ -111,7 +111,7 @@ public class CacheVariableList extends VariableList {
         boolean hasCalculatedWp = false;
         if (cache != null) {
             for (Waypoint wp : cache.getWaypoints()) {
-                hasCalculatedWp |=  wp.recalculateVariableDependentValues(this);
+                hasCalculatedWp |= wp.recalculateVariableDependentValues(this);
 
             }
             if (hasCalculatedWp) {

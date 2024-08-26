@@ -265,7 +265,7 @@ public class VariableListView extends LinearLayout {
         }
 
         public void checkAddVisibleVariables(final Collection<String> vars) {
-            if( !vars.isEmpty()) {
+            if (!vars.isEmpty()) {
                 final Set<String> neededVars = getVariables().getDependentVariables(vars);
                 ensureVariables(neededVars);
                 addVisibleVariables(neededVars);

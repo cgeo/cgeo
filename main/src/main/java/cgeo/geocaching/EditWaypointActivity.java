@@ -64,7 +64,6 @@ import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -477,7 +476,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         recalculateProjectedCoordinates();
     }
 
-    private void recalculateProjectedCoordinates(){
+    private void recalculateProjectedCoordinates() {
         //update currentCoords and coordinate Views
         final Geopoint base = this.preprojectedCoords;
 
