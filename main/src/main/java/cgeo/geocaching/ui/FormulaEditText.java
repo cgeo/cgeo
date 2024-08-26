@@ -74,7 +74,8 @@ public class FormulaEditText extends LinearLayout {
         } catch (FormulaException fe) {
             this.formula = null;
             binding.formulaResult.setText(fe.getUserDisplayableString());
-        } }
+        }
+    }
 
     private void processFormulaChange() {
         ensureFormula();
@@ -102,7 +103,7 @@ public class FormulaEditText extends LinearLayout {
 
     public Value getValue() {
         try {
-            if(formula == null) {
+            if (formula == null) {
                 ensureFormula();
             }
             return formula == null ? null : formula.evaluate(varList == null ? x -> null : varList::getValue);
