@@ -1256,7 +1256,7 @@
     <string name="init_force_orientation_sensor_note">On some devices, the regular rotation vector sensor behaves erratically, giving the wrong direction. In this case, an alternate sensor (the orientation sensor) may provide better results.</string>
     <string name="init_force_orientation_sensor">Force use of orientation sensor</string>
     <string name="init_clipboard_copy_action_title">Copy-to-Clipboard action</string>
-    <string name="init_clipboard_copy_action_note">On some devices, the text share options do not contain a \'Copy to Clipboard\' action. For these devices, c:geo can add its own \'Copy tp clipboard\' action to the share menu.</string>
+    <string name="init_clipboard_copy_action_note">On some devices, the text share options do not contain a \'Copy to Clipboard\' action. For these devices, c:geo can add its own \'Copy to clipboard\' action to the share menu.</string>
     <string name="init_clipboard_copy_action">Add \'copy to clipboard\' action to share menu</string>
     <string name="init_title_extended_settings">Extended settings</string>
     <string name="init_summary_extended_settings">Show settings for the more experienced user</string>
