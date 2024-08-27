@@ -400,10 +400,10 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final Set<String> projectionVars = new HashSet<>();
 
         final ImmutableTriple<FormulaEditText, FormulaEditText, TextSpinner<DistanceUnit>> fields = getFieldsForProjectionType();
-        if (fields.left == null) {
+        if (fields.left != null) {
             fields.left.addNeededVariables(projectionVars);
         }
-        if (fields.middle == null) {
+        if (fields.middle != null) {
             fields.middle.addNeededVariables(projectionVars);
         }
 
