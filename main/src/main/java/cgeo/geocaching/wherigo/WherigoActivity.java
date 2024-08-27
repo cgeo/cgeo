@@ -46,7 +46,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 
-    private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, result -> handleDownloadResult(result));
+    private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;

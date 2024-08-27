@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -27,7 +27,10 @@ import androidx.annotation.NonNull;
 import cz.matejcik.openwig.platform.LocationService;
 import io.reactivex.rxjava3.disposables.Disposable;
 
-public class WLocationService extends GeoDirHandler implements LocationService {
+public class WherigoLocationProvider extends GeoDirHandler implements LocationService {
+
+    private static final WherigoLocationProvider INSTANCE = new WherigoLocationProvider();
+
 
     private Disposable disposable = null;
     private GeoData geoData;
@@ -40,8 +43,12 @@ public class WLocationService extends GeoDirHandler implements LocationService {
 
     private long lastNotifyTimestamp = 0;
 
-    public WLocationService() {
-        connect();
+    public static WherigoLocationProvider get() {
+        return INSTANCE;
+    }
+
+    private WherigoLocationProvider() {
+        //singleton
     }
 
     @Override
@@ -50,14 +57,16 @@ public class WLocationService extends GeoDirHandler implements LocationService {
         this.direction = direction;
     }
 
+    @Override
     public void connect() {
         disconnect();
         this.geoData = LocationDataProvider.getInstance().currentGeo();
         this.direction = LocationDataProvider.getInstance().currentDirection();
         this.disposable = this.start(GeoDirHandler.UPDATE_GEODIR);
-        Log.w("connected: " + this);
+        Log.w("STARTED: " + this);
     }
 
+    @Override
     public void disconnect() {
         if (disposable != null) {
             disposable.dispose();
@@ -65,22 +74,25 @@ public class WLocationService extends GeoDirHandler implements LocationService {
             direction = 0;
             disposable = null;
         }
-        Log.w("disconnected: " + this);
+        Log.w("STOPPED: " + this);
     }
 
 
+    @Override
     public double getAltitude() {
         final double newAltitude = geoData == null ? 0 : geoData.getAltitude();
         lastSentAltitude = checkNotify(lastSentAltitude, newAltitude);
         return newAltitude <= 0 ? 1 : newAltitude; // important that altitute is over 0
     }
 
+    @Override
     public double getHeading() {
         lastSentDirection = checkNotify(lastSentDirection, direction);
         Log.iForce("WHERIGO: LocationService dir=" + direction + " [" + this + "]");
         return direction;
     }
 
+    @Override
     public double getLatitude() {
         final double newLatitude = geoData == null ? 0 : geoData.getLatitude();
         lastSentLatitude = checkNotify(lastSentLatitude, newLatitude);
@@ -88,6 +100,7 @@ public class WLocationService extends GeoDirHandler implements LocationService {
         return newLatitude;
     }
 
+    @Override
     public double getLongitude() {
         final double newLongitude = geoData == null ? 0 : geoData.getLongitude();
         lastSentLongitude = checkNotify(lastSentLongitude, newLongitude);
@@ -95,10 +108,12 @@ public class WLocationService extends GeoDirHandler implements LocationService {
         return newLongitude;
     }
 
+    @Override
     public double getPrecision() {
         return 0d;
     }
 
+    @Override
     public int getState() {
         Log.iForce("WHERIGO: LocationService state:" + this);
         return geoData == null ? LocationService.OFFLINE : LocationService.ONLINE;

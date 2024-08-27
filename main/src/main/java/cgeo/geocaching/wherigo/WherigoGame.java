@@ -47,12 +47,10 @@ public class WherigoGame implements UI {
         REFRESH, START, END, LOCATION
     }
 
-    private final Object mutex = new Object();
-
     private CartridgeFile cartridgeFile;
-    private Cartridge cartridge;
 
     private boolean isPlaying = false;
+    private Cartridge cartridge;
 
     private static final AtomicInteger LISTENER_ID_PROVIDER = new AtomicInteger(0);
     private final Map<Integer, Consumer<NotifyType>> listeners = new HashMap<>();
@@ -114,7 +112,7 @@ public class WherigoGame implements UI {
             }
             this.cartridgeFile = WherigoUtils.readCartridge(cartridgeInfo.uri);
 
-            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, new WLocationService());
+            final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (saveGame != null) {
                 engine.restore();
             } else {
@@ -202,14 +200,28 @@ public class WherigoGame implements UI {
         Log.iForce("WHERIGO pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);
         WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
+        WherigoLocationProvider.get().connect();
+        WherigoGameService.startService();
     }
 
     @Override
     public void end() {
-        isPlaying = false;
-        cartridge = null;
         notifyListeners(NotifyType.END);
+        isPlaying = false;
+        freeResources();
+    }
+
+    public void destroy() {
+        stopGame();
+        freeResources();
+    }
+
+    private void freeResources() {
         WherigoUtils.closeCartridgeQuietly(this.cartridgeFile);
+        this.cartridgeFile = null;
+        this.cartridge = null;
+        WherigoGameService.stopService();
+        WherigoLocationProvider.get().disconnect();
     }
 
     @Override

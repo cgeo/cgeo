@@ -1,12 +1,20 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
+
+import androidx.core.app.NotificationCompat;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -43,21 +51,40 @@ public class WherigoDialogManager {
             synchronized (mutex) {
                 clear();
                 this.dialogProvider = dialogProvider;
-                checkDialogDisplay();
+                final boolean success = checkDialogDisplay();
+                if (!success) {
+                    createNotification(this.dialogProvider);
+                }
             }
         });
     }
 
-    private void checkDialogDisplay() {
+    private void createNotification(final IWherigoDialogProvider provider) {
+        final String content = "Wherigo is waiting: " + provider.getClass().getName();
+        final Context context = CgeoApplication.getInstance();
+        Notifications.send(context, Notifications.ID_WHERIGO_NEW_DIALOG_ID, NotificationChannels.WHERIGO_NOTIFICATION, builder -> builder
+            .setSmallIcon(R.drawable.type_marker_wherigo)
+            // deliberately set notification info to both title and content, as some devices
+            // show title first (and content is cut off)
+            .setContentTitle(content)
+            .setContentText(content)
+            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, WherigoActivity.class), PendingIntent.FLAG_IMMUTABLE))
+            .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+        );
+    }
+
+    private boolean checkDialogDisplay() {
         synchronized (mutex) {
             if (currentDialog != null && currentDialog.getOwnerActivity() != null && currentDialog.getOwnerActivity().isFinishing()) {
                 closeCurrentDialog();
-                return;
             }
             final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
             if (currentActivity != null && (!onlyInWherigo || currentActivity instanceof WherigoActivity)) {
-                openCurrentDialog(currentActivity);
+                return openCurrentDialog(currentActivity);
             }
+            return false;
         }
     }
 
@@ -78,10 +105,10 @@ public class WherigoDialogManager {
         }
     }
 
-    private void openCurrentDialog(final Activity activity) {
+    private boolean openCurrentDialog(final Activity activity) {
         synchronized (mutex) {
             if (currentDialog != null || dialogProvider == null) {
-                return;
+                return false;
             }
             final int dialogId = currentDialogId.addAndGet(1);
             currentDialog = dialogProvider.createDialog(activity);
@@ -102,6 +129,9 @@ public class WherigoDialogManager {
                 }
             }));
             currentDialog.show();
+            //dismiss any wherigo dialog notification since the dialog would now be displayed
+            Notifications.cancel(activity, Notifications.ID_WHERIGO_NEW_DIALOG_ID);
+            return true;
         }
     }
 

@@ -247,5 +247,4 @@ public class CgeoApplication extends Application {
         }
         return sb.toString();
     }
-
 }
