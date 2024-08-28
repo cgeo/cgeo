@@ -3,13 +3,13 @@
 - Исправлено: путевые точки не фильтровались при отображении одного тайника (ЕдинаяКарта)
 - Новое: Поддержка заданных пользователем сторонних карт
 - Исправлено: Обновление данных карты после открытия/закрытия окна настроек (ЕдинаяКарта)
-- New: Toggle display of buildings 2D/3D (UnifiedMap OSM maps)
-- New: Cache store/refresh from popup moved into background
-- Change: Search for coordinates: Show direction and distance to target and not to current position
-- New: Graphical D/T indicator in cache info sheet
-- Fix: Compass rose hidden when filterbar is visible (UnifiedMap)
-- Change: Removed map theme legends
-- Fix: Multiple navigation selection popups on long-press
+- Новое: Переключение отображения зданий 2D/3D (карты UnifiedMap OSM)
+- Новое: Сохранение/обновление тайника из всплывающего окна перенесено в фоновый режим
+- Изменение: Поиск координат: Показывает направление и расстояние до цели, а не до текущего положения
+- Новое: Графический D/T(сложность/местность) индикатор в информации о тайнике
+- Исправлено: Отображение компаса было скрыто, когда была видна панель фильтров (ЕдинаяКарта)
+- Изменение: Удалены легенды тем карт
+- Исправлено: при длительном нажатии всплывало несколько вариантов выбора навигации
 
 ### Детали тайника
 - Новое: Отображение графических файлов на вкладке "Изображения", на которые даны ссылки в разделе "Личные заметки"
@@ -17,24 +17,24 @@
 - Новое: Более плавное масштабирование изображений при добавлении их в записи о взятии тайника
 - Изменение: изменена иконка «редактировать списки» с карандаша на список + карандаш
 - Fix: vanity function failing on long strings
-- Fix: Wrong parsing priority in formula backup
-- Change: Allow larger integer ranges in formulas (disallow usage of negation)
-- New: Allow user-stored cache images on creating/editing log
-- Fix: Spoiler images no longer being loaded (website change)
+- Исправлено: Неправильный приоритет синтаксического анализа при резервном копировании формулы
+- Изменение: Разрешены большие диапазоны целых чисел в формулах (запрещено использование отрицания)
+- Новое: Разрешено кэширование изображений, сохраненных пользователем, при создании/редактировании записи
+- Исправлено: изображения со спойлерами больше не загружаются (изменения на веб-сайте)
 
 ### Общее
 - Новое: Переключение на настройку статуса нахождения тайника в Lab Adventures вручную или автоматически
 - Новое: Диалог выбора списка: Списки тайников с автоматической группировкой, в названии которых есть ":"
 - Изменение: Используйте OSM Nominatum в качестве резервного геокодера, заменив геокодер MapQuest (который у нас больше не работает)
-- Change: Updated integrated BRouter to v1.7.5
+- Изменение: Обновлен встроенный BRouter до версии 1.7.5
 - Новое: Чтение информации о высотах из трека при импорте
-- New: API to Locus now supporting cache size "virtual"
-- Fix: Search results for a location no longer sorted by distance to target location
-- New: "Corrected coordinates" filter
-- Change: Updated targetSDK to 34 to comply with upcoming Play Store requirements
-- New: Added "none"-entry to selection of routing profiles
-- Change: Improve description for "maintenance" function (remove orphaned data)
-- New: Show warnings when HTTP error 429 occurs (Too many requests)
-- Fix: Flickering on cache list refresh
-- New: Allow display of passwords in connector configuration
-- Fix: Search for geokretys no longer working when using trackingcodes
+- Новое: API для Locus теперь поддерживает виртуальные тайники
+- Исправлено: результаты поиска с учетом местоположения не сортировались по расстоянию
+- Новое: фильтр "Исправленные координаты"
+- Изменение: Обновлен targetSdk до версии 34, чтобы соответствовать новым требованиям Play Store
+- Новое: Добавлена запись «нет» в выбор профилей маршрутизации
+- Изменение: Улучшено описание функции "техническое обслуживание" (удалены потерянные данные)
+- Новое: Показываются предупреждения при ошибке HTTP 429 (Слишком много запросов)
+- Исправлено: Мерцания при обновлении списка кэша
+- Новое: Разрешено отображение паролей в конфигурации коннектора
+- Исправлено: Поиск геокротов не работал при использовании кодов отслеживания
