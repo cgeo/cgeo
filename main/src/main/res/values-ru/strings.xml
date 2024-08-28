@@ -192,6 +192,7 @@
     <string name="log_empty_logbook">Блокнот этого тайника пуст.</string>
     <string name="log_image_selectfromstorage_tooltip">Выбрать изображение из хранилища</string>
     <string name="log_image_camera_tooltip">Сделать снимок с помощью камеры</string>
+    <string name="log_image_selectfromown_tooltip">Выберите изображение из ваших снимков</string>
     <string name="log_problem_none">Нет проблем</string>
     <string name="log_problem_needs_maintenance_label">Необходимо восстановление</string>
     <string name="log_problem_needs_maintenance_text">Этот пользователь сообщил, что есть проблема с тайником.</string>
@@ -614,6 +615,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Есть записи офлайн</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Есть офлайн-запись «Найден»</string>
     <string name="cache_filter_status_select_label_solved_mystery">Загадка разгадана</string>
+    <string name="cache_filter_status_select_label_corrected_coordinates">Исправленные координаты</string>
     <string name="cache_filter_status_select_label_has_user_defined_waypoints">Путевые точки пользователя</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Этот параметр фильтра повлияет только на логические тайники. Если вы хотите исключить другие типы тайников, пожалуйста, укажите подходящий фильтр по типу тайника.\n\nЗагадка считается \'решенной\', если изменились координаты или есть корректная конечная точка, заполненная координатами.</string>
     <string name="cache_filter_status_active">Активный</string>
@@ -807,6 +809,8 @@
     <string name="settings_category_locationcentersearch">Поиск по местоположению</string>
     <string name="init_nearbysearchlimit_title">Ограничение поиска</string>
     <string name="init_nearbysearchlimit_description">Максимальное расстояние для поиска поблизости (0 — без ограничений)</string>
+    <string name="init_coordsearchlimit_title">Ограничение поиска по координатам/адресам</string>
+    <string name="init_coordsearchlimit_description">Ограничивает расстояние, с учетом которого показываются тайники при поиске по координатам/адресам (0=неограниченно)</string>
     <string name="init_settings_description_unlimited">неограниченно</string>
     <string name="settings_category_geocaching_additionals">Дополнительные плагины и приложения</string>
     <string name="settings_category_logging_other">Остальные параметры</string>
@@ -1121,6 +1125,8 @@
     <string name="init_mapWpScaling_title">Масштабирование иконок путевых точек</string>
     <string name="init_mapWpScaling_description">Масштабирующий коэффициент для иконок путевых точек (в %)</string>
     <string name="init_maintenance">Обслуживание</string>
+    <string name="init_maintenance_directories_note">Удаленные тайники хранятся в буфере c:geo в течение 72 часов, чтобы предотвратить случайную потерю данных. Кроме того, c:geo также хранит изображения и другие файлы, связанные с тайниками, в специальных папках. В некоторых специфических случаях такие данные могут не удаляться, хотя тайник больше не хранится. Эта функция может быть использована для очистки таких потерянных данных.</string>
+    <string name="init_maintenance_directories">Удаление неактуальных данных</string>
     <string name="init_maintenance_start">Обслуживание начато</string>
     <string name="init_maintenance_ongoing">Это может занять некоторое время…</string>
     <string name="init_maintenance_finished">Обслуживание завершено</string>
@@ -1133,6 +1139,9 @@
     <string name="init_force_orientation_sensor_title">Сенсор ориентации</string>
     <string name="init_force_orientation_sensor_note">На некоторых устройствах встроенный датчик поворота ведет себя непредсказуемо, показывая неверное направление. В таком случае акселерометр (датчик ориентации) может выдать лучшие результаты.</string>
     <string name="init_force_orientation_sensor">Использовать акселерометр</string>
+    <string name="init_clipboard_copy_action_title">Копировать в буфер обмена</string>
+    <string name="init_clipboard_copy_action_note">На некоторых устройствах параметры общего доступа к тексту не содержат действия \"Копировать в буфер обмена\". Для этих устройств c:geo может добавить собственное действие \"Копировать в буфер обмена\" в меню общего доступа.</string>
+    <string name="init_clipboard_copy_action">Добавить «скопировать в буфер обмена» в меню общего доступа</string>
     <string name="init_title_extended_settings">Расширенные настройки</string>
     <string name="init_summary_extended_settings">Показать настройки для опытного пользователя</string>
     <string name="init_create_memory_dump">Создать дамп памяти</string>
@@ -1310,6 +1319,7 @@
     <string name="last_day_available">остался один день</string>
     <string name="cache_offline_refresh">Обновить</string>
     <string name="cache_offline_drop">Удалить из списка</string>
+    <string name="cache_offline_delete">Удалить</string>
     <string name="cache_delete_userdefined_waypoints">Удалить пользовательские точки</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Удалить все пользовательские точки из этого тайника?\n\nТочки будут удалены безвозвратно!</string>
     <string name="cache_delete_userdefined_waypoints_note">Примечание: У вас включено создание точек из заметок. Если в вашей заметке есть координаты, то точки будут созданы для них автоматически. Это можно отключить в диалоговом окне редактирования заметок.</string>
@@ -1452,6 +1462,7 @@
     <string name="cache_menu_reset_foundstate">Сбросить состояние \"найден\"</string>
     <string name="cache_foundstate_updated">Состояние \"найден\" обновлено</string>
     <string name="cache_menu_set_cache_icon">Установить иконку тайника</string>
+    <string name="cache_menu_change_description_style">Изменить стиль описания</string>
     <string name="cache_icon_updated">Иконка тайника обновлена</string>
     <string name="cache_menu_details">Детали</string>
     <string name="cache_menu_refresh">Обновить</string>
@@ -1575,6 +1586,9 @@
     <string name="clear_goto_history_title">Очистить историю \"перейти к\"</string>
     <string name="clear_goto_history">Это удалит все путевые точки, кроме пяти последних</string>
     <!-- html styles -->
+    <string name="html_style_default">По умолчанию</string>
+    <string name="html_style_monochrome">Монохромный</string>
+    <string name="html_style_source">HTML-источник</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">градусы</string>
     <string name="cc_hint_minutes">минуты</string>
@@ -1768,6 +1782,8 @@
     <string name="map_autorotation_disable">Отключить автоматическое вращение карты?\n\nВы можете включить его снова, используя меню Поворота карты</string>
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
+    <string name="zoom_in">Приблизить</string>
+    <string name="zoom_out">Отдалить</string>
     <string name="other_settings">Другие настройки</string>
     <string name="map_show_caches_title">Показать тайники:</string>
     <string name="map_show_waypoints_title">Показать точки:</string>
@@ -1778,12 +1794,21 @@
     <string name="map_theme_legend_info">Нажмите на название категории, чтобы открыть/закрыть категорию. Длительное нажатие на символ для краткой информации об этом символе. Нажмите на иконку с информацией, чтобы увидеть подробные легенды онлайн.</string>
     <string name="google_maps_style_default">По умолчанию</string>
     <string name="google_maps_style_night">Ночь</string>
+    <string name="google_maps_style_classic">Классический</string>
     <string name="google_maps_style_retro">Ретро</string>
     <string name="google_maps_style_contrast">Высокая контрастность</string>
     <string name="google_maps_style_auto">Тема устройства (День/ночь)</string>
     <string name="google_maps_option_group_map">Опции Карты</string>
     <string name="google_maps_option_show_traffic">Показ Трафика</string>
+    <string name="google_maps_option_show_buildings">Показ 3D-зданий</string>
     <string name="google_maps_option_group_theme">Опции темы</string>
+    <string name="google_maps_option_show_feature_theme">Показ возможностей темы</string>
+    <string name="google_maps_option_show_feature_administrative_all">Показ Административ. уровня</string>
+    <string name="google_maps_option_show_feature_landscape_all">Показ Ландшафта</string>
+    <string name="google_maps_option_show_feature_poi_all">Показ достопримечательностей</string>
+    <string name="google_maps_option_show_feature_road_all">Показ Дорог</string>
+    <string name="google_maps_option_show_feature_transit_all">Показ Маршрутов транспорта</string>
+    <string name="google_maps_option_show_feature_water_all">Показ Воды</string>
     <!-- search -->
     <string name="geo_search_label">Поиск тайников поблизости</string>
     <string name="search_bar_hint">Поиск тайника / трекабла</string>
@@ -2251,7 +2276,9 @@
     <string name="tts_one_oclock">один час</string>
     <string name="tts_oclock">%s часов</string>
     <!-- various -->
+    <string name="copy">Скопировать</string>
     <string name="clipboard_copy_ok">Скопировано в буфер</string>
+    <string name="clipboard_copy_failed">Не удалось скопировать в буфер обмена</string>
     <plurals name="days_ago">
         <item quantity="one">%d день назад</item>
         <item quantity="few">%d дня назад</item>
@@ -2311,6 +2338,12 @@
         <item quantity="many">Рекомендовать эти тайники (%d осталось)</item>
         <item quantity="other">Рекомендовать эти тайники (%d осталось)</item>
     </plurals>
+    <plurals name="fav_points_remaining">
+        <item quantity="one">Добавьте этот тайник в избранное (осталось %d)</item>
+        <item quantity="few">Добавьте эти тайники в избранное (осталось %d)</item>
+        <item quantity="many">Добавьте эти тайники в избранное (осталось %d)</item>
+        <item quantity="other">Добавьте этот тайник в избранное (осталось %d)</item>
+    </plurals>
     <string name="command_set_cache_icons_progress">Установка иконок тайника</string>
     <plurals name="command_set_cache_icons_result">
         <item quantity="one">Установлено %d иконка тайника</item>
@@ -2335,6 +2368,7 @@
     <string name="init_confirm_debug">c:geo запущено в режиме отладки!</string>
     <string name="list_confirm_debug_message">Режим отладки может вызвать нестабильное поведение. Вы действительно хотите активировать режим отладки?</string>
     <!-- permission handling -->
+    <string name="permission_missing">Отсутствует разрешение</string>
     <string name="permission_ask_again">Спросить снова</string>
     <string name="permission_goto_app_details">Открыть инфо о приложении</string>
     <string name="permission_contacts_read_explanation_title">Права на чтение контактов</string>
@@ -2449,6 +2483,7 @@
     <string name="routingmode_car">На авто</string>
     <string name="routingmode_user1">Пользователь 1</string>
     <string name="routingmode_user2">Пользователь 2</string>
+    <string name="routingmode_none">(нет)</string>
     <!-- view settings -->
     <string name="view_settings">Настройки просмотра</string>
     <string name="delete_setting">Удалить настройку</string>
@@ -2490,6 +2525,7 @@
     <string name="downloadmap_keep_temporary_files_summary">Некоторые источники загрузки поддерживают дополнительные файлы, не используемые c:geo. Сохранить эти дополнительные файлы в системную папку загрузок вместо удаления</string>
     <string name="downloadmanager_not_available">Файл не может быть загружен, системный менеджер загрузок недоступен</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>
+    <string name="download_enqueing_error">Ошибка при попытке начать загрузку</string>
     <string name="download_none_selected">Не выбраны файлы для загрузки</string>
     <string name="downloadmap_target_not_writable">Выбранная цель \"%s\" недоступна для записи - скачанный файл карты сохранен в системной папке загрузок и должен быть перемещен вручную в папку карты.</string>
     <string name="downloadmap_allow_metered_network">Разрешить загрузку по лимитированной сети (например, мобильному подключению)</string>
@@ -2541,6 +2577,7 @@
     <string name="maptheme_scale_text_summary">Дополнительно масштабирует текстовые метки на карте; 100% = без дополнительного масштабирования</string>
     <string name="maptheme_scale_symbol_title">Масштаб символов</string>
     <string name="maptheme_scale_symbol_summary">Дополнительно масштабирует размер символа на карте; 100% = без дополнительного масштабирования</string>
+    <string name="maptheme_show3Dbuildings">Показать здания в 3D</string>
     <string name="vtm_theme_variant">Вариация темы оформления</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Очистить историю трека</string>
@@ -2599,6 +2636,8 @@
     <string name="redo">Повторить</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <string name="optimize">Оптимизация</string>
+    <string name="expand">Раскрыть</string>
+    <string name="close">Закрыть</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Выбрать всё</string>
     <string name="multiselect_selectvisible">Выбрать видимое</string>
