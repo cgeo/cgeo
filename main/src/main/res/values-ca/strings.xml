@@ -1127,6 +1127,9 @@
     <string name="init_force_orientation_sensor_title">Sensor d\'orientació</string>
     <string name="init_force_orientation_sensor_note">En alguns dispositius, el sensor de rotació vectorial es comporta de manera erràtica, donant la direcció equivocada. En aquest cas, un sensor d\'orientació alternatiu pot donar millors resultats.</string>
     <string name="init_force_orientation_sensor">Força l\'ús del sensor d\'orientació</string>
+    <string name="init_clipboard_copy_action_title">Acció de còpia al porta-retalls</string>
+    <string name="init_clipboard_copy_action_note">En alguns dispositius, les opcions de compartició de text no contenen l\'acció \"Copia al porta-retalls\". Per a aquests dispositius, c:geo pot afegir la seva pròpia acció \"Copia el porta-retalls tp\" al menú compartit.</string>
+    <string name="init_clipboard_copy_action">Afegiu l\'acció \"copiar al porta-retalls\" per compartir el menú</string>
     <string name="init_title_extended_settings">Configuració ampliada</string>
     <string name="init_summary_extended_settings">Mostra la configuració per a l\'usuari més experimentat</string>
     <string name="init_create_memory_dump">Crea un buidat de memòria</string>
@@ -2234,7 +2237,9 @@
     <string name="tts_one_oclock">la una en punt</string>
     <string name="tts_oclock">%s en punt</string>
     <!-- various -->
+    <string name="copy">Còpia</string>
     <string name="clipboard_copy_ok">S\'ha copiat al portapapers</string>
+    <string name="clipboard_copy_failed">No s\'ha pogut copiar al porta-retalls</string>
     <plurals name="days_ago">
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
