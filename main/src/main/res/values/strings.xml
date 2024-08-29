@@ -1920,6 +1920,7 @@
     <string name="formula_error_missingvarvalue">Missing: %1$s</string>
     <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
     <string name="formula_error_empty">Empty Formula</string>
+    <string name="formula_error_numeric_overflow">Numeric overflow</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
 
     <!-- ImageView -->

@@ -1,11 +1,12 @@
 package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.functions.Func1;
 
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
+
+import java.util.function.Function;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
@@ -60,6 +61,7 @@ public class DegreeFormulaTest {
     @Test
     public void parseDegree() {
         assertParse("-A/100", s -> Value.of(40d), -0.4d, "-0.4°");
+        assertParse("A/100", s -> Value.of(40d), 0.4d, "0.4°");
         assertParse("NA/100", s -> Value.of(-40d), null, "N[-0.4]°");
     }
 
@@ -130,7 +132,7 @@ public class DegreeFormulaTest {
         assertParse("88. 3.45", null, null, "[88. 3.45?]");
     }
 
-    private void assertParse(final String expression, final Func1<String, Value> varMap, final Double expectedValue, final String expectedAnnotatedString) {
+    private void assertParse(final String expression, final Function<String, Value> varMap, final Double expectedValue, final String expectedAnnotatedString) {
         final ImmutableTriple<Double, CharSequence, Boolean> result = DegreeFormula.compile(expression, false).evaluate(varMap);
         final Double resultValue = result.left;
         final String annotatedCss = TextUtils.annotateSpans(result.middle, s -> {

@@ -13,18 +13,17 @@ public class FormulaUtilsTest {
 
     @Test
     public void substring() {
-        assertThat(FormulaUtils.substring("test", 1, 2)).isEqualTo("es");
-        assertThat(FormulaUtils.substring(null, 1, 2)).isEqualTo("");
-        assertThat(FormulaUtils.substring("t", 1, 2)).isEqualTo("");
-        assertThat(FormulaUtils.substring("te", 1, 2)).isEqualTo("e");
+        assertThat(FormulaUtils.substring(ValueList.ofPlain("test", 2, 3))).isEqualTo(Value.of("est"));
+        assertThat(FormulaUtils.substring(ValueList.ofPlain("te", 2, 1))).isEqualTo(Value.of("e"));
+        assertThat(FormulaUtils.substring(ValueList.ofPlain("test", -3, 2))).isEqualTo(Value.of("es"));
     }
 
     @Test
     public void checksum() {
-        assertThat(FormulaUtils.checksum(255, false)).isEqualTo(12);
-        assertThat(FormulaUtils.checksum(255, true)).isEqualTo(3);
-        assertThat(FormulaUtils.checksum(-255, false)).isEqualTo(12);
-        assertThat(FormulaUtils.checksum(0, false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of(255), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of(255), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of(-255), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of(0), false)).isEqualTo(0);
     }
 
     @Test
