@@ -44,3 +44,4 @@
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
 - Новое: Подсветка выбранного тайника/путевой точки (ЕдинаяКарта)
 - Новое: Разрешить использование нескольких уровней иерархии в списках тайников
+- New: Not yet existing variables used in projection get created in variable list
