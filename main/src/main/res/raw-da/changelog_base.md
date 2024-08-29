@@ -44,3 +44,4 @@
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
 - New: Highlight selected cache/waypoint (UnifiedMap)
 - New: Allow multiple hierarchy levels in cache lists
+- New: Not yet existing variables used in projection get created in variable list
