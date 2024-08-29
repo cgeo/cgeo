@@ -1140,7 +1140,6 @@
     <string name="init_force_orientation_sensor_note">На некоторых устройствах встроенный датчик поворота ведет себя непредсказуемо, показывая неверное направление. В таком случае акселерометр (датчик ориентации) может выдать лучшие результаты.</string>
     <string name="init_force_orientation_sensor">Использовать акселерометр</string>
     <string name="init_clipboard_copy_action_title">Копировать в буфер обмена</string>
-    <string name="init_clipboard_copy_action_note">На некоторых устройствах параметры общего доступа к тексту не содержат действия \"Копировать в буфер обмена\". Для этих устройств c:geo может добавить собственное действие \"Копировать в буфер обмена\" в меню общего доступа.</string>
     <string name="init_clipboard_copy_action">Добавить «скопировать в буфер обмена» в меню общего доступа</string>
     <string name="init_title_extended_settings">Расширенные настройки</string>
     <string name="init_summary_extended_settings">Показать настройки для опытного пользователя</string>
