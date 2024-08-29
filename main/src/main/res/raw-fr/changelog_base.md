@@ -44,3 +44,4 @@
 - Changement : Utiliser l'altitude au-dessus du niveau moyen de la mer (si disponible, Android 14+ uniquement)
 - Nouveau : Surligner le cache/waypoint sélectionné (UnifiedMap)
 - Nouveau : Autoriser plusieurs niveaux de hiérarchie dans les listes de caches
+- New: Not yet existing variables used in projection get created in variable list
