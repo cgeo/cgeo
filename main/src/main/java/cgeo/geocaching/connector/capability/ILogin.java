@@ -3,8 +3,10 @@ package cgeo.geocaching.connector.capability;
 import cgeo.geocaching.connector.IConnector;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Handler;
 
+import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
 public interface ILogin extends IConnector {
@@ -56,4 +58,12 @@ public interface ILogin extends IConnector {
     /** increases the (internally stored) number of caches found for this connector (not synchronized to server) */
     void increaseCachesFound(int by);
 
+    default boolean supportsManualLogin() {
+        return false;
+    }
+
+    @UiThread
+    default void performManualLogin(final Context context, final Runnable callback) {
+        //do nothing by default
+    }
 }

@@ -462,6 +462,9 @@
     <!-- other preference keys (not used directly in our preferences) -->
     <!-- ============================================================================================================================================================================== -->
 
+    <!-- persistent cookies in cookiejar -->
+    <string translatable="false" name="pref_cookiejar">cookiejar</string>
+
     <!-- ids for persistable folder/uri prefs -->
     <string translatable="false" name="pref_persistablefolder_logfiles">persistablefolder_logfiles</string>
     <string translatable="false" name="pref_persistablefolder_backup">persistablefolder_backup</string>

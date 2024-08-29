@@ -959,6 +959,9 @@
     <string name="init_login_popup_failed_reason">Login failed: %s</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
     <string name="init_login_popup_not_logged_in">Not logged in</string>
+    <string name="init_login_manual">Manual Login</string>
+    <string name="init_login_manual_description">Please wait for a website to appear and log into your account. Wait until login has completed. Then click the \'ok\' button below.</string>
+    <string name="init_login_manual_error_nocookie">No authorization token was found. Please perform login or \'cancel\' manual login.</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
     <string name="init_authorization_credential_username">Username</string>

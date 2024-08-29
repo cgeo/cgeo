@@ -66,6 +66,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -141,8 +142,10 @@ public class MainActivity extends AbstractNavigationBarActivity {
                         private void fillView(final View connectorInfo, final ILogin conn) {
 
                             final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
+                            final boolean isLoggingIn = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working));
+                            final boolean isLoggingOk = StringUtils.equals(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_ok));
                             final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
-                            if (conn instanceof GCConnector && Network.isConnected() && !StringUtils.equalsAny(conn.getLoginStatusString(), activity.getString(R.string.init_login_popup_working), activity.getString(R.string.init_login_popup_ok))) {
+                            if (conn instanceof GCConnector && Network.isConnected() && !isLoggingIn && !isLoggingOk) {
                                 final Pair<String, Long> lastError = Settings.getLastLoginErrorGC();
                                 if (lastError != null && StringUtils.isNotBlank(lastError.first) && lastError.second > Settings.getLastLoginSuccessGC()) {
                                     connInfo.append(" (").append(lastError.first).append(")");
@@ -150,6 +153,15 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             }
                             connectorStatus.setText(connInfo);
                             connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+
+                            final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
+                            manualLogin.setVisibility(!conn.isLoggedIn() && !isLoggingIn && !isLoggingOk && conn.supportsManualLogin() ? View.VISIBLE : View.GONE);
+                            manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
+                                if (!activity.isDestroyed() && !activity.isFinishing()) {
+                                    activity.updateUserInfoHandler.sendEmptyMessage(-1);
+                                    activity.onLoginIssue(!anyConnectorLoggedIn());
+                                }
+                            }));
 
                             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler,
                                     () -> {

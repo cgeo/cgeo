@@ -752,6 +752,16 @@ public class Settings {
         putString(R.string.pref_memberstatus, memberStatus.id);
     }
 
+    //solely to be used by class Cookies
+    public static String getPersistentCookies() {
+        return getString(R.string.pref_cookiejar, "");
+    }
+
+    //solely to be used by class Cookies
+    public static void setPersistentCookies(final String cookies) {
+        putString(R.string.pref_cookiejar, cookies);
+    }
+
     @NonNull
     public static ImmutablePair<String, String> getTokenPair(final int tokenPublicPrefKey, final int tokenSecretPrefKey) {
         return new ImmutablePair<>(getString(tokenPublicPrefKey, null), getString(tokenSecretPrefKey, null));
