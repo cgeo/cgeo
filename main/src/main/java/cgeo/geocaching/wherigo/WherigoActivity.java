@@ -31,20 +31,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Task;
 import cz.matejcik.openwig.Zone;
-import cz.matejcik.openwig.formats.CartridgeFile;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
+
+    private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
 
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
@@ -65,7 +65,18 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         });
 
     public static void start(final Activity parent, final boolean hideNavigationBar) {
+        startInternal(parent, null, hideNavigationBar);
+    }
+
+    public static void startForGuid(final Activity parent, final String guid, final boolean hideNavigationBar) {
+        startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_GUID, guid), hideNavigationBar);
+    }
+
+    private static void startInternal(final Activity parent, final Consumer<Intent> intentModifier, final boolean hideNavigationBar) {
         final Intent intent = new Intent(parent, WherigoActivity.class);
+        if (intentModifier != null) {
+            intentModifier.accept(intent);
+        }
         AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
         parent.startActivity(intent);
     }
@@ -108,7 +119,19 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.startGame.setOnClickListener(v -> startGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
-        binding.download.setOnClickListener(v -> downloadCartridge());
+        binding.download.setOnClickListener(v -> downloadCartridge(null));
+
+        if (getIntent().getExtras() != null) {
+            final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
+            if (guid != null) {
+                final List<WherigoUtils.WherigoCartridgeInfo> infos = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), info -> guid.equals(info.guid), false, false);
+                if (infos.isEmpty()) {
+                    downloadCartridge(guid);
+                } else {
+                    SimpleDialog.of(this).setTitle(TextParam.text("Wherigo")).setMessage(TextParam.text("Cartridge already available")).show();
+                }
+            }
+        }
     }
 
     private void startGame() {
@@ -116,25 +139,27 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void chooseCartridge() {
-        final Map<ContentStorage.FileInformation, CartridgeFile> cartridges = WherigoGame.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder());
-        final Map<ContentStorage.FileInformation, ImmutableTriple<String, Bitmap, Geopoint>> displayDataMap = new HashMap<>();
-        for (Map.Entry<ContentStorage.FileInformation, CartridgeFile> cart : cartridges.entrySet()) {
-            final CartridgeFile file = cart.getValue();
-            final String msg = cart.getKey().name + ", " + file.name + ", " + file.type + ", " + file.author + ", " + file.version;
-            final Geopoint point = new Geopoint(file.latitude, file.longitude);
-            final Bitmap bmp = WherigoUtils.getCartrdigeIcon(file);
-            displayDataMap.put(cart.getKey(), new ImmutableTriple<>(msg, bmp, point));
-            WherigoUtils.closeCartridgeQuietly(file);
-        }
-        final List<ContentStorage.FileInformation> files = new ArrayList<>(displayDataMap.keySet());
-        Collections.sort(files, Comparator.comparing(f -> f.name));
+        final List<WherigoUtils.WherigoCartridgeInfo> cartridges = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), null, true, true);
+//        final Map<ContentStorage.FileInformation, ImmutableTriple<String, Bitmap, Geopoint>> displayDataMap = new HashMap<>();
+//        for (Map.Entry<ContentStorage.FileInformation, CartridgeFile> cart : cartridges.entrySet()) {
+//            final CartridgeFile file = cart.getValue();
+//            final String msg = cart.getKey().name + ", " + file.name + ", " + file.type + ", " + file.author + ", " + file.version;
+//            final Geopoint point = new Geopoint(file.latitude, file.longitude);
+//            final Bitmap bmp = WherigoUtils.getCartrdigeIcon(file);
+//            displayDataMap.put(cart.getKey(), new ImmutableTriple<>(msg, bmp, point));
+//            WherigoUtils.closeCartridgeQuietly(file);
+//        }
+//        final List<ContentStorage.FileInformation> files = new ArrayList<>(displayDataMap.keySet());
+        Collections.sort(cartridges, Comparator.comparing(f -> f.fileInfo.name));
 
-        final SimpleDialog.ItemSelectModel<ContentStorage.FileInformation> model = new SimpleDialog.ItemSelectModel<>();
+        final SimpleDialog.ItemSelectModel<WherigoUtils.WherigoCartridgeInfo> model = new SimpleDialog.ItemSelectModel<>();
         model
-            .setItems(files)
-            .setDisplayMapper((s) -> TextParam.text(displayDataMap.get(s).left + ", " + displayDataMap.get(s).right))
-            .setDisplayIconMapper(s -> displayDataMap.containsKey(s) && displayDataMap.get(s).middle != null ?
-                ImageParam.drawable(new BitmapDrawable(getResources(), displayDataMap.get(s).middle)) : ImageParam.id(R.drawable.icon_whereyougo))
+            .setItems(cartridges)
+            .setDisplayMapper(info -> TextParam.text(
+                    info.fileInfo.name + ", " + info.cartridgeFile.name + ", " +
+                         info.cartridgeFile.type + ", " + info.cartridgeFile.author + ", " +
+                         info.cartridgeFile.version + ", " + new Geopoint(info.cartridgeFile.latitude, info.cartridgeFile.longitude)))
+            .setDisplayIconMapper(info -> info.icon != null ? ImageParam.drawable(new BitmapDrawable(getResources(), info.icon)) : ImageParam.id(R.drawable.icon_whereyougo))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this)
@@ -155,11 +180,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         WherigoGame.get().stopGame();
     }
 
-    private void chooseSavefile(final ContentStorage.FileInformation cartridge) {
+    private void chooseSavefile(final WherigoUtils.WherigoCartridgeInfo cartridge) {
 
-        final Map<String, Date> saveGames = WherigoGame.getAvailableSaveGames(cartridge);
+        final Map<String, Date> saveGames = WherigoUtils.getAvailableSaveGames(cartridge.fileInfo);
         if (saveGames.isEmpty()) {
-            WherigoGame.get().newGame(cartridge);
+            WherigoGame.get().newGame(cartridge.fileInfo);
             return;
         }
 
@@ -177,13 +202,13 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         SimpleDialog.of(this)
             .setTitle(TextParam.text("Choose a Savegame to load"))
             .selectSingle(model, s -> {
-                WherigoGame.get().loadGame(cartridge, s);
+                WherigoGame.get().loadGame(cartridge.fileInfo, s);
             });
     }
 
-    private void downloadCartridge() {
+    private void downloadCartridge(final String guid) {
         SimpleDialog.of(this).setTitle(TextParam.text("Download"))
-            .input(new SimpleDialog.InputOptions().setLabel("Enter CGID").setInitialValue("f6002f33-c68a-4966-82ca-3c392a85d892"), input -> {
+            .input(new SimpleDialog.InputOptions().setLabel("Enter CGID").setInitialValue(guid == null ? "f6002f33-c68a-4966-82ca-3c392a85d892" : guid), input -> {
                 wherigoDownloader.downloadWherigo(input, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
             });
     }

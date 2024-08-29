@@ -110,6 +110,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
+import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
@@ -1604,6 +1605,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (isEnabled) {
                 CacheUtils.setWherigoLink(activity, cache, binding.sendToWhereyougo);
             }
+            binding.playInCgeo.setVisibility(isEnabled && Settings.enableFeatureWherigo() ? View.VISIBLE : View.GONE);
+            binding.playInCgeo.setOnClickListener(v -> WherigoActivity.startForGuid(activity, WhereYouGoApp.getWhereIGoGuid(cache), false));
         }
 
         private void updateChirpWolfBox(final CacheDetailActivity activity) {

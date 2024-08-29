@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.SimpleItemListView;
@@ -17,12 +18,19 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Container;
@@ -44,6 +52,20 @@ public final class WherigoUtils {
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
         ll -> new Geopoint(ll.latitude, ll.longitude)
     );
+
+    public static class WherigoCartridgeInfo {
+        public final ContentStorage.FileInformation fileInfo;
+        public final String guid;
+        public final CartridgeFile cartridgeFile;
+        public final Bitmap icon;
+
+        private WherigoCartridgeInfo(final ContentStorage.FileInformation fileInfo, final String guid, final CartridgeFile cartridgeFile, final Bitmap icon) {
+            this.fileInfo = fileInfo;
+            this.guid = guid;
+            this.cartridgeFile = cartridgeFile;
+            this.icon = icon;
+        }
+    }
 
     private WherigoUtils() {
         //no instance
@@ -167,7 +189,7 @@ public final class WherigoUtils {
         }
     }
 
-    public static Bitmap getCartrdigeIcon(final CartridgeFile file) {
+    private static Bitmap getCartrdigeIcon(final CartridgeFile file) {
         if (file == null) {
             return null;
         }
@@ -202,6 +224,45 @@ public final class WherigoUtils {
             Log.w("WHEERIGO: Couldn't access seekable file inside cartridge", e);
         }
     }
+
+    @Nullable
+    public static String getGuid(final ContentStorage.FileInformation fileInfo) {
+        if (fileInfo == null || fileInfo.name == null || !fileInfo.name.endsWith(".gwc")) {
+            return null;
+        }
+        final String guid = fileInfo.name.substring(0, fileInfo.name.length() - 4);
+        final int idx = guid.indexOf("_");
+        return idx <= 0 ? guid : guid.substring(0, idx);
+    }
+
+    public static WherigoCartridgeInfo getCartridgeInfo(final ContentStorage.FileInformation file, final boolean loadCartridgeFile, final boolean loadIcon) {
+        if (file == null) {
+            return null;
+        }
+        final String guid = getGuid(file);
+        final CartridgeFile cf = loadCartridgeFile ? safeReadCartridge(file.uri) : null;
+        final Bitmap icon = cf != null && loadIcon ? getCartrdigeIcon(cf) : null;
+        closeCartridgeQuietly(cf);
+        return new WherigoCartridgeInfo(file, guid, cf, icon);
+    }
+
+    public static List<WherigoCartridgeInfo> getAvailableCartridges(final Folder folder, final Predicate<WherigoCartridgeInfo> filter, final boolean loadCartridgeFile, final boolean loadIcon) {
+        final List<ContentStorage.FileInformation> candidates = ContentStorage.get().list(folder).stream()
+                .filter(fi -> fi.name.endsWith(".gwc")).collect(Collectors.toList());
+        final List<WherigoCartridgeInfo> result = new ArrayList<>(candidates.size());
+        for (ContentStorage.FileInformation candidate : candidates) {
+            final WherigoCartridgeInfo info = getCartridgeInfo(candidate, loadCartridgeFile, loadIcon);
+            if (info != null && (filter == null || filter.test(info))) {
+                result.add(info);
+            }
+        }
+        return result;
+    }
+
+    public static Map<String, Date> getAvailableSaveGames(@NonNull final ContentStorage.FileInformation cartridgeInfo) {
+        return WherigoSaveFileHandler.getAvailableSaveFiles(cartridgeInfo.parentFolder, cartridgeInfo.name);
+    }
+
 
 
 }

@@ -128,7 +128,7 @@ public class WherigoDownloader {
         }
         final String token = m.group(1);
 
-        //pace download request
+        //place download request
         final Parameters params = new Parameters()
             .add("__EVENTTARGET", "")
             .add("__EVENTARGUMENT", "")
