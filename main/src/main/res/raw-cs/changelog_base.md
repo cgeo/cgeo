@@ -44,3 +44,4 @@
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
 - Novinka: Povolení více úrovní hierarchie v seznamech kešek
+- New: Not yet existing variables used in projection get created in variable list
