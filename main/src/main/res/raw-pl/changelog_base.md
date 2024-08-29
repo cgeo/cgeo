@@ -44,3 +44,4 @@
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
 - Nowość: Podświetl wybraną skrytkę/punkt nawigacji (UnifiedMap)
 - Nowość: Zezwalaj na wiele poziomów hierarchii na listach skrytek
+- Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
