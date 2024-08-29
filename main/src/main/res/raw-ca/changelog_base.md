@@ -44,3 +44,4 @@
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
 - Nou: permet múltiples nivells de jerarquia a les llistes de catxés
+- Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
