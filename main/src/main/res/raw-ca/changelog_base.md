@@ -38,3 +38,4 @@
 - Correcció: parpelleig a l'actualització de la llista de catxé
 - Nou: permet la visualització de contrasenyes a la configuració del connector
 - Solució: cerqueu geokretys que ja no funcionen quan feu servir codis de seguiment
+- Solució: falta l'opció "còpia al porta-retalls" en alguns dispositius (vegeu la configuració => sistema)
