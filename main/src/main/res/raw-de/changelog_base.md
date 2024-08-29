@@ -44,3 +44,4 @@
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
 - Neu: Erlaube mehrere Hierarchieebenen in Cachelisten
+- New: Not yet existing variables used in projection get created in variable list
