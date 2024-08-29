@@ -3,18 +3,33 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
+import cgeo.geocaching.databinding.GcManualLoginBinding;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AvatarUtils;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.webkit.CookieManager;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.annotation.VisibleForTesting;
 import androidx.annotation.WorkerThread;
 
@@ -23,12 +38,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.rxjava3.core.Single;
+import okhttp3.Cookie;
+import okhttp3.HttpUrl;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -274,6 +292,7 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private String getLoginPage() {
+        Log.iForce("GCLogin: get login Page");
         return getResponseBodyOrStatus(Network.getRequest(LOGIN_URI).blockingGet());
     }
 
@@ -286,6 +305,7 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private String postCredentials(final Credentials credentials, final String requestVerificationToken) {
+        Log.iForce("GCLogin: post credentials");
         final Parameters params = new Parameters("UsernameOrEmail", credentials.getUserName(),
                 "Password", credentials.getPassword(), REQUEST_VERIFICATION_TOKEN, requestVerificationToken);
         return getResponseBodyOrStatus(Network.postRequest(LOGIN_URI, params).blockingGet());
@@ -592,6 +612,75 @@ public class GCLogin extends AbstractLogin {
         GCAuthAPI.triggerAuthenticationTokenRetrieval();
         Settings.setLastLoginSuccessGC();
         return StatusCode.NO_ERROR; // logged in
+    }
+
+    public boolean supportsManualLogin() {
+        return true;
+    }
+
+    @UiThread
+    public void performManualLogin(@NonNull final Context activity, final Runnable callback) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final GcManualLoginBinding binding = GcManualLoginBinding.inflate(LayoutInflater.from(activity));
+        final AlertDialog dialog = builder.create();
+        dialog.setView(binding.getRoot());
+        initializeWebview(binding.webview);
+        CookieManager.getInstance().removeAllCookies(b -> {
+            final String url = "https://www.geocaching.com";
+            binding.webview.loadUrl(url + "/account/signin");
+            binding.okButton.setOnClickListener(bo -> {
+
+                //try to extract GC auth cookie from WebView
+                final String webViewCookies = CookieManager.getInstance().getCookie(url);
+                final List<Cookie> gcAuthCookies = cgeo.geocaching.network.Cookies.extractCookies(url, webViewCookies, c -> c.name().equals("gspkauth"));
+                if (gcAuthCookies.isEmpty()) {
+                    SimpleDialog.ofContext(activity).setTitle(TextParam.id(R.string.init_login_manual)).setMessage(TextParam.id(R.string.init_login_manual_error_nocookie)).show();
+                    return;
+                }
+
+                //insert cookie
+                resetLoginStatus();
+                cgeo.geocaching.network.Cookies.cookieJar.saveFromResponse(HttpUrl.get(url), gcAuthCookies);
+
+                dialog.dismiss();
+                //set to state "logging in..."
+                setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_working));
+                callback.run();
+
+                //perform the log-in and set state afterwards
+                AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+                    try {
+                        if (getLoginStatus(getLoginPage())) {
+                            completeLoginProcess();
+                            return;
+                        }
+                    } catch (final Exception ex) {
+                        logLastLoginError("manual login error: " + ex.getMessage(), true);
+                        Log.w("GCLogin: Exception on manual login", ex);
+                    }
+                    setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
+                }, callback);
+            });
+            binding.cancelButton.setOnClickListener(bo -> {
+                dialog.dismiss();
+            });
+            dialog.show();
+        });
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private static void initializeWebview(final WebView webView) {
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
+        final WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setSupportZoom(true);
+        webSettings.setDefaultTextEncodingName("utf-8");
     }
 
 }

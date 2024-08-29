@@ -45,10 +45,12 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 
 import java.io.File;
@@ -684,6 +686,17 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     public Collection<ImmutablePair<Float, Float>> getNeededDifficultyTerrainCombisFor81Matrix() {
         return GCWebAPI.getNeededDifficultyTerrainCombisFor81Matrix();
+    }
+
+    @Override
+    public boolean supportsManualLogin() {
+        return GCLogin.getInstance().supportsManualLogin();
+    }
+
+    @UiThread
+    @Override
+    public void performManualLogin(final Context context, final Runnable callback) {
+        GCLogin.getInstance().performManualLogin(context, callback);
     }
 
     /**
