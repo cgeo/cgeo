@@ -4,7 +4,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -14,14 +13,12 @@ import androidx.annotation.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Cartridge;
 import cz.matejcik.openwig.Engine;
@@ -78,23 +75,6 @@ public class WherigoGame implements UI {
 
     public boolean isPlaying() {
         return isPlaying;
-    }
-
-    public static Map<ContentStorage.FileInformation, CartridgeFile> getAvailableCartridges(final Folder folder) {
-        final List<ContentStorage.FileInformation> candidates = ContentStorage.get().list(folder).stream()
-            .filter(fi -> fi.name.endsWith(".gwc")).collect(Collectors.toList());
-        final Map<ContentStorage.FileInformation, CartridgeFile> result = new HashMap<>();
-        for (ContentStorage.FileInformation candidate : candidates) {
-            final CartridgeFile cartridgeFile = WherigoUtils.safeReadCartridge(candidate.uri);
-            if (cartridgeFile != null) {
-                result.put(candidate, cartridgeFile);
-            }
-        }
-        return result;
-    }
-
-    public static Map<String, Date> getAvailableSaveGames(@NonNull final ContentStorage.FileInformation cartridgeInfo) {
-        return WherigoSaveFileHandler.getAvailableSaveFiles(cartridgeInfo.parentFolder, cartridgeInfo.name);
     }
 
     public void newGame(@NonNull final ContentStorage.FileInformation cartridgeInfo) {

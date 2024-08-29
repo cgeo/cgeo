@@ -48,13 +48,20 @@ public class WhereYouGoApp extends AbstractGeneralApp {
      */
     @Nullable
     public static String getWhereIGoUrl(final Geocache cache) {
+        final String guid = getWhereIGoGuid(cache);
+        return guid == null ? null : URL_BASE + guid;
+    }
+
+    @Nullable
+    public static String getWhereIGoGuid(final Geocache cache) {
+
         final Matcher matcher = PATTERN_CARTRIDGE.matcher(cache.getShortDescription() + " " + cache.getDescription());
         final Set<String> cartridgeGuids = new HashSet<>();
         while (matcher.find()) {
             cartridgeGuids.add(matcher.group(2));
         }
         if (cartridgeGuids.size() == 1) {
-            return URL_BASE + cartridgeGuids.iterator().next();
+            return cartridgeGuids.iterator().next();
         }
         return null;
     }
