@@ -44,3 +44,4 @@
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
 - Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
 - Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
+- Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
