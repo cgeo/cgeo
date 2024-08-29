@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.functions.Func3;
 import cgeo.geocaching.utils.functions.Func4;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.EMPTY_FORMULA;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.NUMERIC_OVERFLOW;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECTED_TOKEN;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
@@ -20,10 +21,10 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Supplier;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -86,14 +88,10 @@ public final class Formula {
         return new ForegroundColorSpan(Color.GRAY);
     }
 
-    private static class ErrorValue extends Value {
+    public static class ErrorValue extends Value {
 
         protected ErrorValue(final CharSequence errorString) {
             super(errorString);
-        }
-
-        public CharSequence getErrorString() {
-            return (CharSequence) getRaw();
         }
 
         public static ErrorValue of(final CharSequence cs) {
@@ -104,9 +102,6 @@ public final class Formula {
             return v instanceof ErrorValue;
         }
 
-        public static CharSequence getErrorString(final Value v) {
-            return v.getRaw() instanceof CharSequence ? (CharSequence) v.getRaw() : v.getAsString();
-        }
     }
 
     private static class FormulaNode {
@@ -119,6 +114,11 @@ public final class Formula {
         private FormulaNode[] children;
 
         public final Set<String> neededVars;
+
+        FormulaNode(final String id, final FormulaNode[] children,
+                    final Func3<ValueList, Func1<String, Value>, Integer, Value> function) {
+            this(id, children, function, null, null);
+        }
 
         FormulaNode(final String id, final FormulaNode[] children,
                     final Func3<ValueList, Func1<String, Value>, Integer, Value> function,
@@ -244,27 +244,9 @@ public final class Formula {
                 cs = this.functionToErrorString.call(childValues, variables, rangeIdx, isDirectError);
             }
             if (cs == null) {
-                //default error string function
-                if (childValues.size() > 0) {
-                    cs = TextUtils.join(childValues, Value::getAsCharSequence, "");
-                } else {
-                    cs = "?";
-                }
-                if (isDirectError) {
-                    cs = TextUtils.setSpan(cs, createErrorSpan());
-                }
+                cs = optionalError(valueListToCharSequence(childValues), isDirectError);
             }
-
             return ErrorValue.of(cs);
-
-        }
-
-        public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables, final int rangeIdx) {
-            final ValueList childValues = new ValueList();
-            for (FormulaNode child : nodes) {
-                childValues.add(child.eval(variables, rangeIdx));
-            }
-            return childValues;
         }
 
         /**
@@ -288,12 +270,26 @@ public final class Formula {
     }
 
     private FormulaNode createNumeric(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
+        return createNumeric(id, children, function, null);
+    }
+
+    private FormulaNode createNumeric(final String id, final FormulaNode[] children,
+              @NonNull final Func2<ValueList, Func1<String, Value>, Value> doubleFunction,
+              @Nullable final Func2<ValueList, Func1<String, Value>, Value> intFunction) {
         return new FormulaNode(id, children, (objs, vars, rangeIdx) -> {
             objs.checkAllDouble();
-            return function.call(objs, vars);
-        }, (objs, vars, rangeIdx, error) ->
-                TextUtils.join(objs, v -> v.isDouble() || ErrorValue.isError(v) ? v.getAsCharSequence() : TextUtils.setSpan(
-                        TextUtils.concat("'", v.getAsCharSequence(), "'"), createErrorSpan()), " " + id + " "));
+            try {
+                final Value result = intFunction != null && objs.isAllInt() ? intFunction.call(objs, vars) : doubleFunction.call(objs, vars);
+                final double resultDouble = result.getAsDouble();
+                if (!result.isDouble() || resultDouble == Double.NEGATIVE_INFINITY || resultDouble == Double.POSITIVE_INFINITY || Double.isNaN(resultDouble)) {
+                    throw new FormulaException(NUMERIC_OVERFLOW);
+                }
+                return result;
+            } catch (ArithmeticException ae) {
+                throw new FormulaException(NUMERIC_OVERFLOW);
+            }
+        }, (valueList, vars, rangeIdx, directError) ->
+                optionalError(valueListToCharSequence(valueList, " " + id + " ", Value::isDouble, "'", "'"), directError));
     }
 
     static {
@@ -510,7 +506,7 @@ public final class Formula {
         if (multiResult == null) {
             return singleResult;
         }
-        return new FormulaNode("concat-exp", multiResult.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs), null);
+        return new FormulaNode("concat-exp", multiResult.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs));
 
     }
 
@@ -570,9 +566,13 @@ public final class Formula {
         FormulaNode x = parseMultiplyDivision();
         for (; ; ) {
             if (p.eat('+')) {
-                x = createNumeric("+", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
+                x = createNumeric("+", new FormulaNode[]{x, parseMultiplyDivision()},
+                        (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)),
+                        (nums, vars) -> Value.of(Math.addExact(nums.getAsInt(0, 0), nums.getAsInt(1, 0))));
             } else if (p.eat('-') || p.eat('—')) { //those are two different chars
-                x = createNumeric("-", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
+                x = createNumeric("-", new FormulaNode[]{x, parseMultiplyDivision()},
+                        (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)),
+                        (nums, vars) -> Value.of(Math.subtractExact(nums.getAsInt(0, 0), nums.getAsInt(1, 0))));
             } else {
                 return x;
             }
@@ -583,7 +583,9 @@ public final class Formula {
         FormulaNode x = parseFactor();
         for (; ; ) {
             if (p.eat('*') || p.eat('•')) {
-                x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
+                x = createNumeric("*", new FormulaNode[]{x, parseFactor()},
+                        (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)),
+                        (nums, vars) -> Value.of(Math.multiplyExact(nums.getAsInt(0, 0), nums.getAsInt(1, 0))));
             } else if (p.eat('/') || p.eat(':') || p.eat('÷')) {
                 x = createNumeric("/", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
             } else if (p.eat('%')) {
@@ -605,33 +607,48 @@ public final class Formula {
         FormulaNode x = parseConcatBlock();
 
         if (p.eat('!')) {
-            x = createNumeric("!", new FormulaNode[]{x}, (nums, vars) -> {
-                final int facValue = (int) nums.getAsInt(0, 0);
+            x = new FormulaNode("!", new FormulaNode[]{x}, (nums, vars, rangeIdx) -> {
+                final long facValue = nums.getAsInt(0, 0);
                 if (!nums.get(0).isInteger() || facValue < 0) {
                     throw new FormulaException(WRONG_TYPE, "positive Integer", nums.get(0), nums.get(0).getType());
                 }
-                int result = 1;
-                for (int i = 2; i <= facValue; i++) {
-                    result *= i;
+                try {
+                    long result = 1;
+                    for (int i = 2; i <= facValue; i++) {
+                        result = Math.multiplyExact(result, i);
+                    }
+                    return Value.of(result);
+                } catch (ArithmeticException ae) {
+                    throw new FormulaException(NUMERIC_OVERFLOW);
                 }
-                return Value.of(result);
-            });
+            }, (valueList, vars, rangeIdx, directError) -> optionalError(TextUtils.concat(valueListToCharSequence(valueList), "!"), directError));
         }
 
         p.skipWhitespaces();
-        if (p.chIsIn('²', '³')) {
-            final int factor = p.ch() == '³' ? 3 : 2;
-            p.next();
-            x = createNumeric("^" + factor, new FormulaNode[]{x}, (nums, vars) -> {
-                if (!nums.get(0).isDouble()) {
-                    throw new FormulaException(WRONG_TYPE, "numeric", nums.get(0), nums.get(0).getType());
-                }
-                return Value.of(Math.pow(nums.get(0).getAsDouble(), factor));
-            });
-        }
+//        if (p.chIsIn('²', '³')) {
+//            final int factor = p.ch() == '³' ? 3 : 2;
+//            p.next();
+//            x = createNumeric("^" + factor, new FormulaNode[]{x}, (nums, vars) -> {
+//                if (!nums.get(0).isDouble()) {
+//                    throw new FormulaException(WRONG_TYPE, "numeric", nums.get(0), nums.get(0).getType());
+//                }
+//                return Value.of(Math.pow(nums.get(0).getAsDouble(), factor));
+//            });
+//        }
 
-        if (p.eat('^')) {
-            x = createNumeric("^", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
+        if (p.chIsIn('^', '²', '³')) {
+            final char factorCh = p.ch();
+            p.next();
+
+            x = createNumeric("^", new FormulaNode[]{x, factorCh == '^' ? parseFactor() : createSingleValueNode("^const", factorCh == '²' ? 2 : 3)},
+                    (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))),
+                    (nums, vars) -> {
+                        final double dbl = Math.pow(nums.getAsInt(0, 0), nums.getAsInt(1, 0));
+                        if (dbl >= Long.MAX_VALUE || dbl <= Long.MIN_VALUE) {
+                            throw new FormulaException(NUMERIC_OVERFLOW);
+                        }
+                        return Value.of((long) dbl);
+                    });
         }
         if (p.eat('#')) {
             p.parseUntil(c -> '#' == c, false, null, true); // drop potential user comments
@@ -683,7 +700,7 @@ public final class Formula {
         }
         final int divisor = registerRange(range);
         return new FormulaNode(RANGE_NODE_ID, null,
-                (objs, vars, rangeIdx) -> Value.of(range.getValue((rangeIdx % (divisor * range.getSize())) / divisor)), null);
+                (objs, vars, rangeIdx) -> Value.of(range.getValue((rangeIdx % (divisor * range.getSize())) / divisor)));
     }
 
     private int registerRange(final IntegerRange range) {
@@ -704,8 +721,9 @@ public final class Formula {
                 final char expectedClosingChar = p.ch() == '(' ? ')' : ']';
                 p.next();
                 this.level++;
-                nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v, ri) -> o.get(0),
-                        (o, v, ri, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
+                nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()},
+                        (o, v, ri) -> o.get(0),
+                        (valueList, vars, rangeIdx, isDirectError) -> optionalError(TextUtils.concat("(", valueListToCharSequence(valueList), ")"), isDirectError)));
                 this.level--;
                 if (!p.eat(expectedClosingChar)) {
                     final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
@@ -740,12 +758,12 @@ public final class Formula {
         if (nodes.size() == 1) {
             return nodes.get(0);
         }
-        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs), null);
+        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs));
     }
 
     private static FormulaNode createSingleValueNode(final String nodeId, final Object value) {
         return new FormulaNode(nodeId, null,
-                (objs, vars, ri) -> value instanceof Value ? (Value) value : Value.of(value), null);
+                (objs, vars, ri) -> value instanceof Value ? (Value) value : Value.of(value));
     }
 
     private FormulaNode parseExplicitVariable() {
@@ -883,11 +901,9 @@ public final class Formula {
                         ce.setExpression(expression);
                         ce.setFunction(functionName);
                         throw ce;
-
                     }
                 },
-                (n, v, ri, error) -> functionName + "(" + StringUtils.join(n, ","));
-
+                (valueList, vars, rangeIdx, isDirectError) -> optionalError(TextUtils.concat(functionName + "(", valueListToCharSequence(valueList, ","), ")"), isDirectError));
     }
 
     /**
@@ -949,6 +965,34 @@ public final class Formula {
             }
         }
         return Value.of(sb.toString());
+    }
+
+    private static CharSequence valueListToCharSequence(final ValueList valueList) {
+        return valueListToCharSequence(valueList, null);
+    }
+
+    private static CharSequence valueListToCharSequence(final ValueList valueList, final CharSequence delim) {
+        return valueListToCharSequence(valueList, delim, null, null, null);
+    }
+
+    /** Helper function to create evalToCharSequence for errors */
+    private static CharSequence valueListToCharSequence(final ValueList valueList, final CharSequence delim, final Predicate<Value> childIsOk, final CharSequence errorPrefix, final CharSequence errorPostfix) {
+        return TextUtils.join(valueList, v -> Formula.ErrorValue.isError(v) || (childIsOk == null || childIsOk.test(v)) ?
+                        v.getAsCharSequence() : surround(v.getAsCharSequence(), errorPrefix, errorPostfix),
+                delim == null ? "" : delim);
+    }
+
+    /** Helper function to create evalToCharSequence */
+    private static CharSequence surround(final CharSequence value, @Nullable final CharSequence prefix, @Nullable final CharSequence postfix) {
+        if (prefix == null && postfix == null) {
+            return value;
+        }
+        return TextUtils.concat(prefix == null ? "" : prefix, value, postfix == null ? "" : postfix);
+    }
+
+    /** Helper function to create evalToCharSequence */
+    private static CharSequence optionalError(final CharSequence value, final boolean isError) {
+        return isError ? TextUtils.setSpan(value, createErrorSpan()) : value;
     }
 
 

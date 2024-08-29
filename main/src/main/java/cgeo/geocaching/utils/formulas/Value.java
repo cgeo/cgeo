@@ -61,7 +61,7 @@ public class Value {
         if (asString == null) {
             if (raw == null) {
                 asString = "";
-            } else if (raw instanceof Number && !(raw instanceof Integer) && !(raw instanceof BigInteger)) {
+            } else if (raw instanceof Number && !(raw instanceof Long) && !(raw instanceof Integer) && !(raw instanceof BigInteger)) {
                 asString = DOUBLE_TO_STRING_FORMAT.format(((Number) raw).doubleValue());
             } else {
                 asString = raw instanceof String ? (String) raw : raw.toString();
@@ -86,14 +86,19 @@ public class Value {
             } else if (raw instanceof Number && Math.abs(Math.round(((Number) raw).doubleValue()) - ((Number) raw).doubleValue()) < DOUBLE_DELTA) {
                 asInteger = ((Number) raw).longValue();
             } else {
-                try {
-                    asInteger = Long.parseLong(getAsString());
-                } catch (NumberFormatException nfe) {
-                    final double d = getAsDouble();
-                    if (isDouble() && d <= Long.MAX_VALUE && d >= Long.MIN_VALUE && Math.abs(Math.round(d) - d) < DOUBLE_DELTA) {
-                        asInteger = Math.round(d);
-                    } else {
-                        asInteger = Long.MIN_VALUE;
+                final String asString = getAsString();
+                if  (asString.contains(".") || asString.contains(",")) {
+                    asInteger = Long.MIN_VALUE;
+                } else {
+                    try {
+                        asInteger = Long.parseLong(getAsString());
+                    } catch (NumberFormatException nfe) {
+                        final double d = getAsDouble();
+                        if (isDouble() && d <= Long.MAX_VALUE && d >= Long.MIN_VALUE && Math.abs(Math.round(d) - d) < DOUBLE_DELTA) {
+                            asInteger = Math.round(d);
+                        } else {
+                            asInteger = Long.MIN_VALUE;
+                        }
                     }
                 }
             }

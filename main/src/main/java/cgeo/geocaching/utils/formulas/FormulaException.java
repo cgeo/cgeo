@@ -20,6 +20,7 @@ public class FormulaException extends IllegalArgumentException {
         MISSING_VARIABLE_VALUE(R.string.formula_error_missingvarvalue, "Missing: %1$s"),
         CYCLIC_DEPENDENCY(R.string.formula_error_cyclicdependency, "Cycle: %1$s"),
         EMPTY_FORMULA(R.string.formula_error_empty, "Empty Formula"),
+        NUMERIC_OVERFLOW(R.string.formula_error_numeric_overflow, "Numeric overflow"),
         OTHER(R.string.formula_error_other, "Error: '%1$s'");
 
         @StringRes

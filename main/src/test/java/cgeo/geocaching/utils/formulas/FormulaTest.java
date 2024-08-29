@@ -41,6 +41,25 @@ public class FormulaTest {
     }
 
     @Test
+    public void numericOverflow() {
+        //Factor
+        assertErrorStringFormats(Formula.compile("99^99").evaluateToCharSequence(null), "[99 ^ 99]");
+        assertErrorStringFormats(Formula.compile("99.2^99").evaluateToCharSequence(null), "451497701011169200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+        assertErrorStringFormats(Formula.compile("99.2^999").evaluateToCharSequence(null), "[99.2 ^ 999]");
+
+        //factor
+        assertErrorStringFormats(Formula.compile("20!").evaluateToCharSequence(null), "2432902008176640000");
+        assertErrorStringFormats(Formula.compile("21!").evaluateToCharSequence(null), "[21!]");
+
+
+        //long vs double. 9223372036854775807 is Long.MAX_VALUE
+        assertErrorStringFormats(Formula.compile("9223372036854775807 - 1").evaluateToCharSequence(null), "9223372036854775806");
+        assertErrorStringFormats(Formula.compile("9223372036854775807 - 1 + 2").evaluateToCharSequence(null), "[9223372036854775806 + 2]");
+        assertErrorStringFormats(Formula.compile("9223372036854775807 + 1").evaluateToCharSequence(null), "[9223372036854775807 + 1]");
+        assertErrorStringFormats(Formula.compile("9223372036854775807. + 1").evaluateToCharSequence(null), "9223372036854776000");
+    }
+
+    @Test
     public void bigIntegers() {
         //Long value
         final String longMax = String.valueOf(Long.MAX_VALUE); // this should be 9223372036854775807
@@ -352,8 +371,10 @@ public class FormulaTest {
         assertThat(Value.of("345b").isInteger()).isFalse();
         assertThat(Value.of("abcd").isInteger()).isFalse();
 
-        assertThat(Formula.evaluate("123.00").isInteger()).isTrue();
-        assertThat(Formula.evaluate("123.00").getAsInt()).isEqualTo(123L);
+        assertThat(Formula.evaluate("123").isInteger()).isTrue();
+        assertThat(Formula.evaluate("123").getAsInt()).isEqualTo(123L);
+        assertThat(Formula.evaluate("123.").isInteger()).isFalse();
+        assertThat(Formula.evaluate("123.").getAsInt()).isEqualTo(0);
     }
 
     @Test
@@ -393,10 +414,10 @@ public class FormulaTest {
 
     @Test
     public void evaluateToCharSequence() {
-        assertErrorStringFormats(Formula.compile("3-'a'").evaluateToCharSequence(null), "3 - ['a']");
-        assertErrorStringFormats(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "7 + ['a'] + 5");
-        assertErrorStringFormats(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "7 + ['a'] + [?A][?B]12");
-        assertErrorStringFormats(Formula.compile("(5+'a')").evaluateToCharSequence(null), "(5 + ['a'])");
+        assertErrorStringFormats(Formula.compile("3-'a'").evaluateToCharSequence(null), "[3 - 'a']");
+        assertErrorStringFormats(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "[7 + 'a'] + 5");
+        assertErrorStringFormats(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "[7 + 'a'] + [?A][?B]12");
+        assertErrorStringFormats(Formula.compile("(5+'a')").evaluateToCharSequence(null), "([5 + 'a'])");
     }
 
     /**

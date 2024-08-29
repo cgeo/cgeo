@@ -66,6 +66,15 @@ public class ValueList implements Iterable<Value> {
         }
     }
 
+    public boolean isAllInt() {
+        for (Value v : list) {
+            if (!v.isInteger()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void checkCount(final int minCount, final int maxCount) {
         if ((minCount > 0 && (size() < minCount)) ||
                 (maxCount > 0 && (size() > maxCount))) {
