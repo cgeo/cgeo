@@ -7,17 +7,18 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
-import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
 import android.content.Context;
 import android.util.Pair;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -82,32 +83,25 @@ public class FormulaUtils {
         //no instance
     }
 
-    public static double round(final double value, final int digits) {
-        if (digits <= 0) {
-            return Math.round(value);
-        }
-        final double factor = Math.pow(10, digits);
-        return Math.round(value * factor) / factor;
-    }
-
-    public static double trunc(final double value, final int digits) {
-        if (digits <= 0) {
-            return value < 0 ? Math.ceil(value) : Math.floor(value);
-        }
-        final double factor = Math.pow(10, digits);
-        final double newValue = value * factor;
-        return (newValue < 0 ? Math.ceil(newValue) : Math.floor(newValue)) / factor;
-    }
-
-    public static String substring(final String value, final int start, final int length) {
-        if (value == null || start >= value.length()) {
-            return "";
-        }
-        final int s = Math.max(0, start);
-        return value.substring(s, Math.min(Math.max(s + length, s), value.length()));
+    public static Value substring(@NonNull final ValueList valueList) {
+        valueList.assertCheckCount(1, 3, false);
+        final String value = valueList.getAsString(0, "");
+        valueList.assertCheckTypes((v, i) -> {
+            if (i == 1) {
+                return v.isLongBetween(-value.length(), value.length()) && !v.isNumericZero();
+            } else if (i == 2) {
+                return v.isLongBetween(0, value.length() + 1 - Math.abs(valueList.get(1).getAsLong()));
+            }
+            return true;
+        }, i -> "start/length must be valid indices", false);
+        final int start = valueList.size() <= 1 ? 0 : (
+            (int) (valueList.get(1).getAsLong() > 0 ? valueList.get(1).getAsLong() - 1 : value.length() + valueList.get(1).getAsLong()));
+        final int length = valueList.size() >= 3 ? (int) valueList.get(2).getAsLong() : value.length() - start;
+        return Value.of(value.substring(start, start + length));
     }
 
     public static Value ifFunction(final ValueList values) {
+        values.assertCheckCount(0, -1, false);
         final int ifConditionCount = values.size() / 2;
         final boolean hasElse = values.size() % 2 == 1;
         for (int i = 0; i < ifConditionCount; i++) {
@@ -119,45 +113,57 @@ public class FormulaUtils {
     }
 
     public static Value selectChars(final ValueList values) {
+        values.assertCheckCount(1, -1, false);
         final String value = values.getAsString(0, "");
+        values.assertCheckTypes((v, i) -> i == 0 || v.isLongBetween(1, value.length()), i -> "valid index", false);
         final StringBuilder result = new StringBuilder();
         for (int i = 1 ; i < values.size(); i++) {
-            if (!values.get(i).isInteger()) {
-                throw new FormulaException(WRONG_TYPE, "positive Integer", values.get(i), values.get(i).getType());
-            }
-            final int vInt = (int) values.get(i).getAsInt();
-            if (vInt < 1 || vInt > value.length()) {
-                throw new FormulaException(OTHER, "index out of range: " + vInt);
-            }
-            result.append(substring(value, vInt - 1, 1));
+            result.append(value.charAt((int) (values.get(i).getAsLong()) - 1));
         }
         return Value.of(result.toString());
     }
 
-
-    public static long valueChecksum(final Value value, final boolean iterative) {
-        final long cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
-        return iterative ? checksum(cs, true) : cs;
-    }
-
-    public static long checksum(final long value, final boolean iterative) {
-        long result = Math.abs(value);
-        do {
-            int cs = 0;
-            while (result > 0) {
-                cs += (result % 10);
-                result /= 10;
-            }
-            result = cs;
-        } while (result >= 10 && iterative);
+    public static BigDecimal factorial(final Value v) {
+        Value.assertType(v, vv -> vv.isLongBetween(1, 50), "integer in range 1-50");
+        final int facValue = (int) v.getAsLong();
+        BigDecimal result = BigDecimal.ONE;
+        for (int i = 2; i <= facValue; i++) {
+            result = result.multiply(BigDecimal.valueOf(i));
+        }
         return result;
     }
 
-    public static int letterValue(final String value) {
+    public static Value truncRound(final ValueList valueList, final boolean trunc) {
+        valueList.assertCheckCount(1, 2, false);
+        valueList.assertCheckTypes((v, i) -> {
+            if (i == 0) {
+                return v.isNumeric();
+            }
+            return v.isLongBetween(0, 20);
+        }, i -> "Numeric, Int between 0-20", false);
+
+        return Value.of(valueList.getAsDecimal(0).setScale((int) valueList.get(1).getAsLong(), trunc ? RoundingMode.DOWN : RoundingMode.HALF_UP));
+    }
+
+    public static Value checksum(final ValueList valueList, final boolean iterative) {
+        valueList.assertCheckCount(1, 1, false);
+        return Value.of(checksum(valueList.get(0), iterative));
+    }
+
+    public static long checksum(final Value value, final boolean iterative) {
+        final long cs = letterValue(value.getAsString());
+        if (!iterative) {
+            return cs;
+        }
+        final long itCs = cs % 9;
+        return itCs == 0 ? 9 : itCs;
+    }
+
+    public static long letterValue(final String value) {
         if (value == null) {
             return 0;
         }
-        int lv = 0;
+        long lv = 0;
         final String strippedValue = StringUtils.stripAccents(value);
         for (int i = 0; i < value.length(); i++) {
             final char c = strippedValue.charAt(i);
@@ -173,6 +179,17 @@ public class FormulaUtils {
             }
         }
         return lv;
+    }
+
+    public static Value rot(final ValueList valueList, final boolean isRot13) {
+        valueList.assertCheckCount(1, isRot13 ? 1 : 2, false);
+        valueList.assertCheckTypes((v, i) -> {
+            if (i == 1) {
+                return v.isLongBetween(-500, 500);
+            }
+            return true;
+        }, i -> "Int from 0-500", false);
+        return Value.of(rot(valueList.getAsString(0, ""), valueList.size() == 1 ? 13 : (int) valueList.get(1).getAsLong()));
     }
 
     public static String rot(final String value, final int rotate) {
