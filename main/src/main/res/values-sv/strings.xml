@@ -1127,6 +1127,7 @@
     <string name="init_force_orientation_sensor_note">På vissa enheter uppför sig rotationsgivaren illa och visar fel riktning. Om detta händer kan en alternativ givare (riktningsgivare) ge ett bättre resultat.</string>
     <string name="init_force_orientation_sensor">Tvinga användning av riktningsgivare</string>
     <string name="init_clipboard_copy_action_title">Åtgärd för kopiering till urklipp</string>
+    <string name="init_clipboard_copy_action_note">På vissa enheter innehåller inte alternativen för textdelning en åtgärd \'Kopiera till urklipp\'. För dessa enheter kan c:geo lägga till en egen åtgärd \'Kopiera till urklipp\' till dela-menyn.</string>
     <string name="init_clipboard_copy_action">Lägg till \'kopiera till urklipp\' till dela-menyn</string>
     <string name="init_title_extended_settings">Utökade inställningar</string>
     <string name="init_summary_extended_settings">Visa inställningar för den mer erfarna användaren</string>
