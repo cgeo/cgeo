@@ -44,4 +44,4 @@
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
 - Nytt: Tillåt flera hierarkiska nivåer i cachelistor
-- New: Not yet existing variables used in projection get created in variable list
+- Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
