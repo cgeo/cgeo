@@ -38,3 +38,6 @@
 - Oplossing: Knipperen bij het vernieuwen van de cache lijst
 - Nieuw: Weergeven van wachtwoorden in de connectorconfiguratie toestaan
 - Oplossing: Zoek naar geokretys die niet meer werken tijdens het gebruik van trackingcodes
+- Oplossing: Ontbrekende optie "Kopiëren naar klembord" op sommige apparaten (zie instellingen => systeem)
+- New: Offer manual login on Captcha error
+

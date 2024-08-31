@@ -38,3 +38,6 @@
 - Poprawka: Mruganie podczas odświeżania listy skrytek
 - Nowość: Zezwalaj na wyświetlanie haseł w konfiguracji konektora
 - Poprawka: Wyszukiwanie geokretów nie działało podczas korzystania z kodów śledzenia
+- Fix: Brakuje opcji "Kopiuj do schowka" na niektórych urządzeniach (patrz Ustawienia => System)
+- New: Offer manual login on Captcha error
+

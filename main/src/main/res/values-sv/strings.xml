@@ -1126,6 +1126,9 @@
     <string name="init_force_orientation_sensor_title">Riktningsgivare</string>
     <string name="init_force_orientation_sensor_note">På vissa enheter uppför sig rotationsgivaren illa och visar fel riktning. Om detta händer kan en alternativ givare (riktningsgivare) ge ett bättre resultat.</string>
     <string name="init_force_orientation_sensor">Tvinga användning av riktningsgivare</string>
+    <string name="init_clipboard_copy_action_title">Åtgärd för kopiering till urklipp</string>
+    <string name="init_clipboard_copy_action_note">På vissa enheter innehåller inte alternativen för textdelning en åtgärd \'Kopiera till urklipp\'. För dessa enheter kan c:geo lägga till en egen åtgärd \'Kopiera till urklipp\' till dela-menyn.</string>
+    <string name="init_clipboard_copy_action">Lägg till \'kopiera till urklipp\' till dela-menyn</string>
     <string name="init_title_extended_settings">Utökade inställningar</string>
     <string name="init_summary_extended_settings">Visa inställningar för den mer erfarna användaren</string>
     <string name="init_create_memory_dump">Skapa minnesdump</string>
@@ -2232,7 +2235,9 @@
     <string name="tts_one_oclock">Klockan ett</string>
     <string name="tts_oclock">Klockan %s</string>
     <!-- various -->
+    <string name="copy">Kopiera</string>
     <string name="clipboard_copy_ok">Kopierat till urklipp</string>
+    <string name="clipboard_copy_failed">Kopiering till urklipp misslyckades</string>
     <plurals name="days_ago">
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>

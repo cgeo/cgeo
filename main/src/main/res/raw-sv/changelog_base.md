@@ -38,3 +38,6 @@
 - Fix: Flimmer när cachelistan uppdateras
 - Nytt: Tillåt visning av lösenord i anslutnings-konfigurationen
 - Fix: Sök efter geokretys fungerar inte längre när du använder spårningskoder
+- Fix: Saknar alternativet "kopiera till urklipp" på vissa enheter (se inställningar => system)
+- New: Offer manual login on Captcha error
+

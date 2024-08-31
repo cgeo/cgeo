@@ -839,6 +839,9 @@
     <string name="init_login_popup_failed_reason">Anmeldung fehlgeschlagen: %s</string>
     <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
     <string name="init_login_popup_not_logged_in">Nicht angemeldet</string>
+    <string name="init_login_manual">Manuelle Anmeldung</string>
+    <string name="init_login_manual_description">Bitte warte, bis eine Webseite erscheint, und melde dich bei deinem Konto an. Warte, bis die Anmeldung abgeschlossen ist. Klicke dann auf den Button \'ok\'.</string>
+    <string name="init_login_manual_error_nocookie">Autorisierungs-Token nicht gefunden. Bitte melde dich an oder brich die manuelle Anmeldung ab.</string>
     <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
     <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
     <string name="init_authorization_credential_username">Benutzername</string>
@@ -1126,6 +1129,9 @@
     <string name="init_force_orientation_sensor_title">Orientierungssensor</string>
     <string name="init_force_orientation_sensor_note">Auf einigen Geräten verhält sich der Rotationssensor fehlerhaft und zeigt die falsche Richtung an. In diesem Fall kann ein alternativer Sensor (der Orientierungssensor) bessere Ergebnisse liefern.</string>
     <string name="init_force_orientation_sensor">Orientierungssensor nutzen</string>
+    <string name="init_clipboard_copy_action_title">Kopieren in Zwischenablage</string>
+    <string name="init_clipboard_copy_action_note">Auf einigen Geräten enthält das Freigabe-Menü für Texte keine Aktion \'In Zwischenablage kopieren\'. Für diese Geräte kann c:geo seine eigene Aktion \'In die Zwischenablage kopieren\' im Freigabe-Menü hinzufügen.</string>
+    <string name="init_clipboard_copy_action">Füge \"Kopieren in Zwischenablage\" im Freigabe-Menü hinzu</string>
     <string name="init_title_extended_settings">Erweiterte Einstellungen</string>
     <string name="init_summary_extended_settings">Einstellungen für erfahrenere Benutzer anzeigen</string>
     <string name="init_create_memory_dump">Erzeuge ein Speicherabbild</string>
@@ -2232,7 +2238,9 @@
     <string name="tts_one_oclock">ein Uhr</string>
     <string name="tts_oclock">%s Uhr</string>
     <!-- various -->
+    <string name="copy">Kopieren</string>
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
+    <string name="clipboard_copy_failed">Kopieren in die Zwischenablage fehlgeschlagen</string>
     <plurals name="days_ago">
         <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
