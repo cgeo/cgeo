@@ -39,3 +39,5 @@
 - Neu: Passwörter in der Konnektor-Konfiguration anzeigen lassen
 - Korrektur: Suche nach Geokretys funktioniert nicht mehr, wenn Trackingcodes verwendet werden
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+
