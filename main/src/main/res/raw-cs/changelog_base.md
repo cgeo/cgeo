@@ -39,3 +39,5 @@
 - Novinka: Povolení zobrazení hesel v konfiguraci konektoru
 - Oprava: Vyhledávání geokretů již nefunguje při použití sledovacích kódů
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+
