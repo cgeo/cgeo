@@ -39,3 +39,5 @@
 - Новое: Разрешено отображение паролей в конфигурации коннектора
 - Исправлено: Поиск геокротов не работал при использовании кодов отслеживания
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+
