@@ -2232,6 +2232,7 @@
     <string name="tts_one_oclock">ein Uhr</string>
     <string name="tts_oclock">%s Uhr</string>
     <!-- various -->
+    <string name="copy">Kopieren</string>
     <string name="clipboard_copy_ok">In Zwischenablage kopiert</string>
     <plurals name="days_ago">
         <item quantity="one">vor %d Tag</item>
