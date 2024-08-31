@@ -39,3 +39,5 @@
 - Nouveau : Autoriser l'affichage des mots de passe dans la configuration du connecteur
 - Correction : La recherche de GeoKrety ne fonctionne plus avec les codes de suivi
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+
