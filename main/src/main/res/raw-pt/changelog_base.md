@@ -39,3 +39,5 @@
 - Novo: Permitir a exibição de palavra-passe na configuração do conector
 - Correcção: Pesquisar por geokretys deixou de funcionar ao usar códigos de rastreamento
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+
