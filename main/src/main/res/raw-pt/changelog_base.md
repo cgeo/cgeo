@@ -45,3 +45,4 @@
 - Novo: Destacar cache/ponto adicional selecionado (Mapa Unificado)
 - Novo: Permitir vários níveis de hierarquia nas listas de caches
 - New: Not yet existing variables used in projection get created in variable list
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
