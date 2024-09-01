@@ -851,6 +851,9 @@
     <string name="init_login_popup_failed_reason">Logowanie nieudane: %s</string>
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
     <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
+    <string name="init_login_manual">Logowanie ręczne</string>
+    <string name="init_login_manual_description">Poczekaj, aż witryna pojawi się i zaloguj się na swoje konto. Poczekaj do zakończenia logowania. Następnie kliknij przycisk \'ok\' poniżej.</string>
+    <string name="init_login_manual_error_nocookie">Nie znaleziono tokenu autoryzacyjnego. Proszę wykonać logowanie lub \'anuluj\' manualne logowanie.</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
     <string name="init_authorization_credential_username">Nazwa użytkownika</string>

@@ -839,6 +839,9 @@
     <string name="init_login_popup_failed_reason">Inloggen mislukt: %s</string>
     <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
     <string name="init_login_popup_not_logged_in">Niet ingelogd</string>
+    <string name="init_login_manual">Handmatige aanmelding</string>
+    <string name="init_login_manual_description">Wacht totdat een website verschijnt en log in op je account. Wacht tot de login is voltooid. Klik dan op de knop \'ok\' hieronder.</string>
+    <string name="init_login_manual_error_nocookie">Er is geen autorisatietoken gevonden. Voer de aanmelding uit of \'annuleer\' de handmatige aanmelding.</string>
     <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
     <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
     <string name="init_authorization_credential_username">Gebruikersnaam</string>
