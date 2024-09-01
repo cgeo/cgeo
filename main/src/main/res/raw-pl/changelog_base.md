@@ -45,3 +45,4 @@
 - Nowość: Podświetl wybraną skrytkę/punkt nawigacji (UnifiedMap)
 - Nowość: Zezwalaj na wiele poziomów hierarchii na listach skrytek
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
+- Nowość: Dedykowane ikony dla typów wydarzeń blockparty geocaching.com i wydarzeń HQ
