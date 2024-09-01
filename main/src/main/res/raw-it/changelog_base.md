@@ -45,3 +45,4 @@
 - Nuovo: Evidenzia cache/waypoint selezionato (UnifiedMap)
 - New: Allow multiple hierarchy levels in cache lists
 - New: Not yet existing variables used in projection get created in variable list
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
