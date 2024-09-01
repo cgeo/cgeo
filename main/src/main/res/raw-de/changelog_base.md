@@ -45,3 +45,4 @@
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
 - Neu: Erlaube mehrere Hierarchieebenen in Cachelisten
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
