@@ -45,3 +45,4 @@
 - Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
 - Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
+- Nieuw: Unieke pictogrammen voor geocaching.com blockparty en HQ gebeurtenistypes
