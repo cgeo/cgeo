@@ -45,3 +45,4 @@
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
 - Nytt: Tillåt flera hierarkiska nivåer i cachelistor
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
