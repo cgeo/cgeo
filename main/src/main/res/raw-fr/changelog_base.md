@@ -45,3 +45,4 @@
 - Nouveau : Surligner le cache/waypoint sélectionné (UnifiedMap)
 - Nouveau : Autoriser plusieurs niveaux de hiérarchie dans les listes de caches
 - New: Not yet existing variables used in projection get created in variable list
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
