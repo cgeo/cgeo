@@ -839,6 +839,9 @@
     <string name="init_login_popup_failed_reason">Inloggen mislukt: %s</string>
     <string name="init_login_popup_not_authorized">Niet geautoriseerd</string>
     <string name="init_login_popup_not_logged_in">Niet ingelogd</string>
+    <string name="init_login_manual">Handmatige aanmelding</string>
+    <string name="init_login_manual_description">Wacht totdat een website verschijnt en log in op je account. Wacht tot de login is voltooid. Klik dan op de knop \'ok\' hieronder.</string>
+    <string name="init_login_manual_error_nocookie">Er is geen autorisatietoken gevonden. Voer de aanmelding uit of \'annuleer\' de handmatige aanmelding.</string>
     <string name="init_login_popup_invalid_timestamp">Lokale tijd ongeldig, pas apparaat tijd aan</string>
     <string name="init_login_popup_invalid_token">Autorisatie ongeldig, opnieuw autoriseren</string>
     <string name="init_authorization_credential_username">Gebruikersnaam</string>
@@ -1126,6 +1129,9 @@
     <string name="init_force_orientation_sensor_title">Oriëntatie-sensor</string>
     <string name="init_force_orientation_sensor_note">Op sommige apparaten werkt het kompas niet juist, waardoor de verkeerde richting wordt aangegeven. In dit geval kan de GPS-sensor een beter resultaat geven.</string>
     <string name="init_force_orientation_sensor">Forceer gebruik van oriëntatiesensor</string>
+    <string name="init_clipboard_copy_action_title">Kopiëren naar klembord actie</string>
+    <string name="init_clipboard_copy_action_note">Op sommige apparaten bevatten de opties voor tekst delen geen \'Kopieer naar klembord\' actie. Voor deze apparaten kan c:geo zijn eigen \'Kopieer naar klembord\' actie toevoegen aan het delen menu.</string>
+    <string name="init_clipboard_copy_action">Voeg \'kopiëren naar klembord\' toe aan het delen menu</string>
     <string name="init_title_extended_settings">Uitgebreide instellingen</string>
     <string name="init_summary_extended_settings">Instellingen voor de meer ervaren gebruiker weergeven</string>
     <string name="init_create_memory_dump">Geheugendump maken</string>
@@ -2232,7 +2238,9 @@
     <string name="tts_one_oclock">één uur</string>
     <string name="tts_oclock">%s uur</string>
     <!-- various -->
+    <string name="copy">Kopiëren</string>
     <string name="clipboard_copy_ok">Gekopieerd naar klembord</string>
+    <string name="clipboard_copy_failed">Kopiëren naar klembord mislukt</string>
     <plurals name="days_ago">
         <item quantity="one">%d dag geleden</item>
         <item quantity="other">%d dagen geleden</item>

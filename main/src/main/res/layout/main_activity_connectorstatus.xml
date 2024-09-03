@@ -60,5 +60,12 @@
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_headingSecondary" />
 
+        <Button
+            android:id="@+id/manual_login"
+            android:visibility="gone"
+            android:text="@string/init_login_manual"
+            style="@style/button_full"
+            android:hint="@string/init_login_manual" />
+
     </LinearLayout>
 </RelativeLayout>

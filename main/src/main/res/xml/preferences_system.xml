@@ -53,6 +53,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/init_clipboard_copy_action_title"
+        app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_clipboard_copy_action_note" app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_clipboard_copy_action"
+            android:title="@string/init_clipboard_copy_action"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/init_debug_title"
         app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.PreferenceTextAlwaysShow android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />

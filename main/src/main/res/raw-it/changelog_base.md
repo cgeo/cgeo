@@ -38,3 +38,6 @@
 - Corretto: Flickering in aggiornamento della lista cache
 - New: Allow display of passwords in connector configuration
 - Fix: Search for geokretys no longer working when using trackingcodes
+- Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Offer manual login on Captcha error
+

@@ -383,6 +383,9 @@
     <!-- category orientation sensor -->
     <string translatable="false" name="pref_force_orientation_sensor">forceOrientationSensort</string>
 
+    <!-- category clpboard copy action -->
+    <string translatable="false" name="pref_clipboard_copy_action">clipboardCopyAction</string>
+
     <!-- category extended settings -->
     <string translatable="false" name="pref_extended_settings_enabled">extended_settings_enabled</string>
 
@@ -459,6 +462,9 @@
     <!-- ============================================================================================================================================================================== -->
     <!-- other preference keys (not used directly in our preferences) -->
     <!-- ============================================================================================================================================================================== -->
+
+    <!-- persistent cookies in cookiejar -->
+    <string translatable="false" name="pref_cookiejar">cookiejar</string>
 
     <!-- ids for persistable folder/uri prefs -->
     <string translatable="false" name="pref_persistablefolder_logfiles">persistablefolder_logfiles</string>

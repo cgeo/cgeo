@@ -1,13 +1,16 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.settings.DiskCookieStore;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import okhttp3.Cookie;
 import okhttp3.Cookie.Builder;
@@ -17,9 +20,24 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class Cookies {
 
-    static final InMemoryCookieJar cookieJar = new InMemoryCookieJar();
+    public static final InMemoryCookieJar cookieJar = new InMemoryCookieJar();
 
-    private static class InMemoryCookieJar implements CookieJar {
+    public static List<Cookie> extractCookies(@NonNull final String url, final String cookieString, final Predicate<Cookie> filter) {
+        if (cookieString == null) {
+            return Collections.emptyList();
+        }
+        final HttpUrl httpUrl = HttpUrl.get(url);
+        final List<Cookie> cookies = new ArrayList<>();
+        for (String cookie : cookieString.split("; ")) {
+            final Cookie c = Cookie.parse(httpUrl, cookie);
+            if (c != null && (filter == null || filter.test(c))) {
+                cookies.add(c);
+            }
+        }
+        return cookies;
+    }
+
+    public static class InMemoryCookieJar implements CookieJar {
 
         final HashMap<String, Cookie> allCookies = new HashMap<>();
 
@@ -85,7 +103,7 @@ public final class Cookies {
         }
 
         private synchronized void restoreCookieStore() {
-            final String oldCookies = DiskCookieStore.getCookieStore();
+            final String oldCookies = Settings.getPersistentCookies();
             if (oldCookies != null) {
                 for (final String cookie : StringUtils.split(oldCookies, ';')) {
                     final String[] split = StringUtils.split(cookie, "=", 3);
@@ -113,7 +131,7 @@ public final class Cookies {
                 persistentCookies.append(cookie.domain());
                 persistentCookies.append(';');
             }
-            DiskCookieStore.setCookieStore(persistentCookies.toString());
+            Settings.setPersistentCookies(persistentCookies.toString());
         }
     }
 

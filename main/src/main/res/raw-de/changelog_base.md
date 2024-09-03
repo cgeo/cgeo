@@ -38,3 +38,6 @@
 - Korrektur: Flackern beim Aktualisieren der Cacheliste
 - Neu: Passwörter in der Konnektor-Konfiguration anzeigen lassen
 - Korrektur: Suche nach Geokretys funktioniert nicht mehr, wenn Trackingcodes verwendet werden
+- Korrektur: Die Option "Kopieren in die Zwischenablage" fehlt auf einigen Geräten (siehe Einstellungen => System)
+- Neu: Manuelle Anmeldung bei Captcha-Fehler
+
