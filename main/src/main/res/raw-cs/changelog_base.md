@@ -44,5 +44,5 @@
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
 - Novinka: Povolení více úrovní hierarchie v seznamech kešek
-- New: Not yet existing variables used in projection get created in variable list
-- New: Dedicated icons for geocaching.com blockparty and HQ event types
+- Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
+- Novinka: Vyhrazené ikony pro typy eventů na geocaching.com blockparty a HQ
