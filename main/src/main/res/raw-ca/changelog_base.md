@@ -45,4 +45,4 @@
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
 - Nou: permet múltiples nivells de jerarquia a les llistes de catxés
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
-- New: Dedicated icons for geocaching.com blockparty and HQ event types
+- Novetat: icones dedicades per als tipus de trobada blockparty i HQ de geocaching.com
