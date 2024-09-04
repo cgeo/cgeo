@@ -1126,6 +1126,8 @@
     <string name="init_force_orientation_sensor_title">Capteur d\'orientation</string>
     <string name="init_force_orientation_sensor_note">Sur certains appareils le capteur de rotation vectorielle utilisé par défaut se comporte de manière erratique et indique la mauvaise direction. Dans ce cas, un capteur alternatif (le capteur d\'orientation) peut donner de meilleurs résultats.</string>
     <string name="init_force_orientation_sensor">Forcer l\'utilisation du capteur d\'orientation</string>
+    <string name="init_clipboard_copy_action_title">Action Copy-vers-le-Presse-papier</string>
+    <string name="init_clipboard_copy_action">Ajouter l\'action \'Copier vers le presse-papier\' au menu partager</string>
     <string name="init_title_extended_settings">Paramètres étendus</string>
     <string name="init_summary_extended_settings">Afficher les paramètres pour l\'utilisateur plus expérimenté</string>
     <string name="init_create_memory_dump">Créer une image mémoire</string>
@@ -2232,7 +2234,9 @@
     <string name="tts_one_oclock">une heure</string>
     <string name="tts_oclock">%s heures</string>
     <!-- various -->
+    <string name="copy">Copier</string>
     <string name="clipboard_copy_ok">Copié dans le presse-papiers</string>
+    <string name="clipboard_copy_failed">La copie vers le presse-papiers a échoué</string>
     <plurals name="days_ago">
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
