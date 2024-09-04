@@ -839,6 +839,9 @@
     <string name="init_login_popup_failed_reason">Início de sessão falhou: %s</string>
     <string name="init_login_popup_not_authorized">Não autorizado</string>
     <string name="init_login_popup_not_logged_in">Sem sessão iniciada</string>
+    <string name="init_login_manual">Início de Sessão Manual</string>
+    <string name="init_login_manual_description">Por favor, aguarde até que uma página web apareça e entre na sua conta. Aguarde até que o início de sessão seja concluído. Em seguida, clique no botão \'ok\' abaixo.</string>
+    <string name="init_login_manual_error_nocookie">Não foi encontrado nenhum token de autorização. Por favor, inicie a sessão ou \'cancele\' a manual.</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
     <string name="init_login_popup_invalid_token">Autorização inválida, volte a autorizar</string>
     <string name="init_authorization_credential_username">Utilizador</string>
@@ -1126,6 +1129,9 @@
     <string name="init_force_orientation_sensor_title">Sensor de orientação</string>
     <string name="init_force_orientation_sensor_note">Em alguns dispositivos, o sensor normal de rotação vectorial tem um comportamento errático, dando a direcção errada. Neste caso, um sensor alternativo (o sensor de orientação) pode proporcionar melhores resultados.</string>
     <string name="init_force_orientation_sensor">Forçar uso do sensor de orientação</string>
+    <string name="init_clipboard_copy_action_title">Acção Copiar para área de transferência</string>
+    <string name="init_clipboard_copy_action_note">Em alguns dispositivos, as opções de partilha de texto não contêm a acção \'Copiar para área de transferência\'. Para estes dispositivos, o c:geo pode adicionar a sua própria acção \'Copiar para a área de transferência\' ao menu de partilha.</string>
+    <string name="init_clipboard_copy_action">Adicionar a acção \'Copiar para área de transferência\' ao menu de partilha</string>
     <string name="init_title_extended_settings">Definições adicionais</string>
     <string name="init_summary_extended_settings">Mostrar configurações para os utilizadores mais experientes</string>
     <string name="init_create_memory_dump">Criar imagem de erro da memória</string>
@@ -2232,7 +2238,9 @@
     <string name="tts_one_oclock">uma hora</string>
     <string name="tts_oclock">%s horas</string>
     <!-- various -->
+    <string name="copy">Copiar</string>
     <string name="clipboard_copy_ok">Copiado para a área de transferência</string>
+    <string name="clipboard_copy_failed">Falha ao copiar para a área de transferência</string>
     <plurals name="days_ago">
         <item quantity="one">Há %d dia</item>
         <item quantity="other">Há %d dias</item>
