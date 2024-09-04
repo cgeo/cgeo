@@ -190,6 +190,9 @@
     <string name="log_oc_team_comment">Commenti del Team OC</string>
     <string name="log_your_saved_log">I tuoi log salvati</string>
     <string name="log_empty_logbook">Il logbook di questo cache è vuoto.</string>
+    <string name="log_image_selectfromstorage_tooltip">Seleziona le immagini dalla memoria</string>
+    <string name="log_image_camera_tooltip">Scatta foto con la fotocamera</string>
+    <string name="log_image_selectfromown_tooltip">Seleziona immagini dalle proprie immagini</string>
     <string name="log_problem_none">Nessun problema</string>
     <string name="log_problem_needs_maintenance_label">Ha bisogno di manutenzione</string>
     <string name="log_problem_needs_maintenance_text">Questo geocacher ha segnalato che esiste un problema con questo cache.</string>
@@ -413,6 +416,7 @@
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
     <string name="caches_sort_date_hidden">Data</string>
+    <string name="caches_sort_date_logged">Data Di Registrazione (propri log)</string>
     <string name="caches_sort_finds">Numero ritrovamenti</string>
     <string name="caches_sort_state">Stato</string>
     <string name="caches_sort_storage">Data salvataggio</string>
@@ -774,6 +778,8 @@
     <string name="settings_title_map_style">Stile della mappa</string>
     <string name="settings_hide_tileproviders_title">Nascondi Sorgenti Mappa</string>
     <string name="settings_hide_tileproviders_summary">Escludi una o più fonti di mappa dalla selezione delle fonti di mappa</string>
+    <string name="settings_userDefinedTileProvider">Provider tile definito dall\'utente</string>
+    <string name="settings_userDefinedTileProviderUri">Inserisci l\'Uri completo (senza slash finale) per il provider tile. Assicurati di aver controllato e di rispettare le loro condizioni di utilizzo.</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -833,6 +839,9 @@
     <string name="init_login_popup_failed_reason">Accesso non riuscito: %s</string>
     <string name="init_login_popup_not_authorized">Non autorizzato</string>
     <string name="init_login_popup_not_logged_in">Login non effettuato</string>
+    <string name="init_login_manual">Login Manuale</string>
+    <string name="init_login_manual_description">Attendere che un sito web appaia e acceda al tuo account. Attendere che il login sia completato. Quindi fare clic sul pulsante \'ok\' qui sotto.</string>
+    <string name="init_login_manual_error_nocookie">Non è stato trovato alcun token di autorizzazione. Effettua login o \'annulla\' login manuale.</string>
     <string name="init_login_popup_invalid_timestamp">Ora locale non valida, regolare l\'orologio del dispositivo</string>
     <string name="init_login_popup_invalid_token">Autorizzazione non valida, ri-autorizzare</string>
     <string name="init_authorization_credential_username">Utente</string>
@@ -1120,6 +1129,9 @@
     <string name="init_force_orientation_sensor_title">Sensore di orientamento</string>
     <string name="init_force_orientation_sensor_note">Su alcuni dispositivi, il sensore standard di rotazione si comporta in modo errato, dando la direzione sbagliata. In questo caso, un sensore alternativo (il sensore di orientamento) può fornire risultati migliori.</string>
     <string name="init_force_orientation_sensor">Forza uso del sensore di orientamento</string>
+    <string name="init_clipboard_copy_action_title">Azione Copia-negli-appunti</string>
+    <string name="init_clipboard_copy_action_note">Su alcuni dispositivi, le opzioni di condivisione del testo non contengono un\'azione \'Copia negli appunti\'. Per questi dispositivi, c:geo può aggiungere la propria azione \'Copia negli appunti\' al menu di condivisione.</string>
+    <string name="init_clipboard_copy_action">Aggiungi l\'azione \'copia negli appunti\' nel menu condividi</string>
     <string name="init_title_extended_settings">Impostazioni avanzate</string>
     <string name="init_summary_extended_settings">Mostra le impostazioni per l\'utente più esperto</string>
     <string name="init_create_memory_dump">Salva un memory dump della situazione attuale</string>
@@ -2226,7 +2238,9 @@
     <string name="tts_one_oclock">a ore una</string>
     <string name="tts_oclock">a ore %s</string>
     <!-- various -->
+    <string name="copy">Copia</string>
     <string name="clipboard_copy_ok">Copiato nella clipboard</string>
+    <string name="clipboard_copy_failed">Copia negli appunti non riuscita</string>
     <plurals name="days_ago">
         <item quantity="one">%d giorno fa</item>
         <item quantity="other">%d giorni fa</item>
