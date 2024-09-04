@@ -1139,6 +1139,8 @@
     <string name="init_force_orientation_sensor_title">Сенсор ориентации</string>
     <string name="init_force_orientation_sensor_note">На некоторых устройствах встроенный датчик поворота ведет себя непредсказуемо, показывая неверное направление. В таком случае акселерометр (датчик ориентации) может выдать лучшие результаты.</string>
     <string name="init_force_orientation_sensor">Использовать акселерометр</string>
+    <string name="init_clipboard_copy_action_title">Копировать в буфер обмена</string>
+    <string name="init_clipboard_copy_action">Добавить «скопировать в буфер обмена» в меню общего доступа</string>
     <string name="init_title_extended_settings">Расширенные настройки</string>
     <string name="init_summary_extended_settings">Показать настройки для опытного пользователя</string>
     <string name="init_create_memory_dump">Создать дамп памяти</string>
@@ -2273,7 +2275,9 @@
     <string name="tts_one_oclock">один час</string>
     <string name="tts_oclock">%s часов</string>
     <!-- various -->
+    <string name="copy">Скопировать</string>
     <string name="clipboard_copy_ok">Скопировано в буфер</string>
+    <string name="clipboard_copy_failed">Не удалось скопировать в буфер обмена</string>
     <plurals name="days_ago">
         <item quantity="one">%d день назад</item>
         <item quantity="few">%d дня назад</item>
