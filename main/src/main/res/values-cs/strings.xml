@@ -851,6 +851,9 @@
     <string name="init_login_popup_failed_reason">Přihlášení se nezdařilo: %s</string>
     <string name="init_login_popup_not_authorized">Neautorizováno</string>
     <string name="init_login_popup_not_logged_in">Nepřihlášen</string>
+    <string name="init_login_manual">Manuální přihlášení</string>
+    <string name="init_login_manual_description">Počkejte prosím, než se webová stránka zobrazí a přihlaste se k vašemu účtu. Počkejte, dokud není přihlášení dokončeno. Poté klikněte na tlačítko \'ok\' níže.</string>
+    <string name="init_login_manual_error_nocookie">Nebyl nalezen žádný autorizační token. Proveďte prosím přihlášení nebo \'zrušte\' manuální přihlášení.</string>
     <string name="init_login_popup_invalid_timestamp">Místní čas je neplatný, nastav systémový čas</string>
     <string name="init_login_popup_invalid_token">Neplatná autorizace, opakuj akci</string>
     <string name="init_authorization_credential_username">Uživatelské jméno</string>
@@ -1138,6 +1141,9 @@
     <string name="init_force_orientation_sensor_title">Senzor orientace</string>
     <string name="init_force_orientation_sensor_note">Na některých zařízeních se běžný senzor otáčení chová nevyzpytatelně a udává špatný směr. V takových případech může alternativní senzor (snímač orientace) poskytnout lepší výsledky.</string>
     <string name="init_force_orientation_sensor">Vynutit použití orientačního senzoru</string>
+    <string name="init_clipboard_copy_action_title">Akce Kopírovat do schránky</string>
+    <string name="init_clipboard_copy_action_note">Na některých zařízeních možnosti sdílení textu nezahrnují akci ‚Kopírovat do schránky\'. Pro tato zařízení může c:geo přidat vlastní akci ‚Kopírovat do schránky\' do nabídky sdílení.</string>
+    <string name="init_clipboard_copy_action">Přidat akci ‚Kopírovat do schránky\' do nabídky sdílení</string>
     <string name="init_title_extended_settings">Rozšířené nastavení</string>
     <string name="init_summary_extended_settings">Zobrazit nastavení pro zkušenější uživatele</string>
     <string name="init_create_memory_dump">Vytvořit výpis paměti</string>
@@ -2272,7 +2278,9 @@
     <string name="tts_one_oclock">jedna hodina</string>
     <string name="tts_oclock">%s hodin</string>
     <!-- various -->
+    <string name="copy">Kopírovat</string>
     <string name="clipboard_copy_ok">Zkopírováno do schránky</string>
+    <string name="clipboard_copy_failed">Kopírování do schránky se nezdařilo</string>
     <plurals name="days_ago">
         <item quantity="one">před %d dnem</item>
         <item quantity="few">před %d dny</item>
