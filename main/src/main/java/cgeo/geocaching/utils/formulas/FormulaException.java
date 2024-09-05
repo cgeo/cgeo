@@ -9,6 +9,9 @@ import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.StringRes;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class FormulaException extends IllegalArgumentException {
@@ -41,22 +44,28 @@ public class FormulaException extends IllegalArgumentException {
     private CharSequence expressionFormatted;
     private String expression;
     private String functionContext;
+    private Set<Integer> childrenInError;
     private int parsingPos = -1;
     private int parsingChar = 0;
     private String evaluationContext;
 
-    public FormulaException(final Throwable cause, final ErrorType errorType, final Object... errorParams) {
+    public FormulaException(final Throwable cause, final Set<Integer> childrenInError, final ErrorType errorType, final Object... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
         this.errorType = errorType;
+        this.childrenInError = childrenInError;
     }
 
     public FormulaException(final ErrorType errorType, final Object... errorParams) {
-        this(null, errorType, errorParams);
+        this(null, null, errorType, errorParams);
     }
 
     public ErrorType getErrorType() {
         return errorType;
+    }
+
+    public Set<Integer> getChildrenInError() {
+        return childrenInError == null ? Collections.emptySet() : childrenInError;
     }
 
     public void setExpression(final String expression) {

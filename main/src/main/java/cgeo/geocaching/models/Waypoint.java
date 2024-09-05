@@ -16,7 +16,6 @@ import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.Formula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
-import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
@@ -31,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -345,7 +345,7 @@ public class Waypoint implements IWaypoint {
         return CalculatedCoordinate.isValidConfig(calcStateConfig);
     }
 
-    public void setCalculated(final CalculatedCoordinate cc, final Func1<String, Value> varMap) {
+    public void setCalculated(final CalculatedCoordinate cc, final Function<String, Value> varMap) {
         this.setCalcStateConfig(cc.toConfig());
         this.setPreprojectedCoords(cc.calculateGeopoint(varMap));
     }
