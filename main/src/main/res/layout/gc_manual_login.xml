@@ -30,7 +30,7 @@
         android:textSize="@dimen/textSize_headingSecondary"
         android:layout_below="@+id/title"/>
 
-    <WebView
+    <cgeo.geocaching.ui.DialogWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
