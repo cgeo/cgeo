@@ -91,9 +91,10 @@ public class FormulaEditText extends LinearLayout {
     }
 
     public void addNeededVariables(final Set<String> neededVars) {
-        ensureFormula();
         if (formula != null) {
             neededVars.addAll(formula.getNeededVariables());
+        } else {
+            FormulaUtils.addNeededVariables(neededVars, getFormulaText());
         }
     }
 
