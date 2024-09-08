@@ -101,8 +101,8 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
         AndroidRxUtils.bindActivity(authorizationActivity, Observable.defer(() -> Observable.just(checkCredentials(credentials)))).subscribeOn(AndroidRxUtils.networkScheduler).subscribe(statusCode -> {
             loginDialog.dismiss();
+            setCredentials(credentials);
             if (statusCode == StatusCode.NO_ERROR) {
-                setCredentials(credentials);
                 ConnectorFactory.forceRelog();
                 showToast(getAuthDialogCompleted());
                 setResult(RESULT_OK);

@@ -2722,6 +2722,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static void editPersonalNote(final Geocache cache, final CacheDetailActivity activity) {
+        if (cache == null) {
+            return;
+        }
         final FragmentManager fm = activity.getSupportFragmentManager();
         final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
         final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote(), (connector != null && connector.canAddPersonalNote(cache)));
