@@ -14,6 +14,7 @@ import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.model.Rotation;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.overlay.Marker;
@@ -46,9 +47,9 @@ public class CoordsMarkerLayer extends Layer {
     }
 
     @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
         if (coordsMarker != null) {
-            coordsMarker.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+            coordsMarker.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
         }
     }
 }

@@ -97,6 +97,7 @@ public class HideActionBarUtils {
             minHeight += v.getHeight();
         }
 
-        compassRose.animate().translationY(minHeight).start();
+        final int finalMinHeight = minHeight;
+        activity.runOnUiThread(() -> compassRose.animate().translationY(finalMinHeight).start());
     }
 }

@@ -11,8 +11,8 @@ import androidx.core.util.Pair;
 import org.apache.commons.lang3.StringUtils;
 import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
 
-public class UserDefinedMapsforgeOnlineSource extends AbstractMapsforgeOnlineTileProvider {
-    UserDefinedMapsforgeOnlineSource() {
+public class UserDefinedMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnlineTileProvider {
+    UserDefinedMapsforgeVTMOnlineSource() {
         super(CgeoApplication.getInstance().getString(R.string.settings_userDefinedTileProvider), Uri.parse(Settings.getUserDefinedTileProviderUri()), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.settings_userDefinedTileProvider), true));
     }
 

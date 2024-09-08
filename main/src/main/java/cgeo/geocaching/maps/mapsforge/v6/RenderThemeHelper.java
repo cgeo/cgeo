@@ -52,7 +52,7 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
-import org.mapsforge.map.rendertheme.InternalRenderTheme;
+import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
@@ -175,12 +175,12 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
                 selectedTheme = null;
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
-                rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+                rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
                 selectedTheme = null;
             }
         }
@@ -194,7 +194,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
     private void applyDefaultTheme(final TileRendererLayer rendererLayer) {
-        rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+        rendererLayer.setXmlRenderTheme(MapsforgeThemes.OSMARENDER);
         applyScales(rendererLayer, Settings.RENDERTHEMESCALE_DEFAULTKEY);
     }
 
@@ -639,4 +639,3 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     }
 
 }
-

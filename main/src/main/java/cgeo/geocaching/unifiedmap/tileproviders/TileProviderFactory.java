@@ -89,7 +89,7 @@ public class TileProviderFactory {
         // build list of available offline map sources except currently active one
         final List<Pair<String, Integer>> list = new ArrayList<>();
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
-            if (tileProvider instanceof AbstractMapsforgeOfflineTileProvider && tileProvider.getNumericalId() != currentSource && !(tileProvider instanceof MapsforgeMultiOfflineTileProvider)) {
+            if (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider && tileProvider.getNumericalId() != currentSource && !(tileProvider instanceof MapsforgeVTMMultiOfflineTileProvider)) {
                 list.add(new Pair<>(tileProvider.getTileProviderName(), tileProvider.getNumericalId()));
             }
         }
@@ -106,7 +106,7 @@ public class TileProviderFactory {
 
         SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title))
                 .selectSingle(model, (l) -> {
-            final AbstractMapsforgeOfflineTileProvider tileProvider = (AbstractMapsforgeOfflineTileProvider) getTileProvider(l.second);
+            final AbstractMapsforgeVTMOfflineTileProvider tileProvider = (AbstractMapsforgeVTMOfflineTileProvider) getTileProvider(l.second);
             if (tileProvider != null) {
                 final ContentStorage cs = ContentStorage.get();
                 final ContentStorage.FileInformation fi = cs.getFileInfo(tileProvider.getMapUri());
@@ -145,27 +145,47 @@ public class TileProviderFactory {
             registerTileProvider(new GoogleTerrainSource());
         }
 
-        // OSM online tile providers
-        registerTileProvider(new OsmOrgSource());
-        registerTileProvider(new OsmDeSource());
-        registerTileProvider(new CyclosmSource());
-        registerTileProvider(new OpenTopoMapSource());
+        // OSM online tile providers (VTM)
+        registerTileProvider(new OsmOrgVTMSource());
+        registerTileProvider(new OsmDeVTMSource());
+        registerTileProvider(new CyclosmVTMSource());
+        registerTileProvider(new OpenTopoMapVTMSource());
 
-        // OSM offline tile providers
+        // OSM offline tile providers (VTM)
         final List<ImmutablePair<String, Uri>> offlineMaps =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
                         .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         if (offlineMaps.size() > 1) {
-            registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+            registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
         }
-        if (UserDefinedMapsforgeOnlineSource.isConfigured()) {
-            registerTileProvider(new UserDefinedMapsforgeOnlineSource());
+        if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
+            registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
         }
         for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
+            registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
         }
+
+        // --------------------------------------------------------------------
+        // test: show Mapsforge-backed tile providers below the others
+        // --------------------------------------------------------------------
+        if (Settings.useMapsforgeInUnifiedMap()) {
+            // OSM online tile providers
+            registerTileProvider(new OsmOrgSource());
+            registerTileProvider(new OsmDeSource());
+            registerTileProvider(new CyclosmSource());
+            registerTileProvider(new OpenTopoMapSource());
+
+            // @todo: combined, user-defined
+
+            // OSM offline tile providers
+            for (ImmutablePair<String, Uri> data : offlineMaps) {
+                registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left + " (MF)", data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+            }
+        }
+        // --------------------------------------------------------------------
+
     }
 
     private static boolean isGoogleMapsInstalled() {

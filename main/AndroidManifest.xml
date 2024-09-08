@@ -927,6 +927,7 @@
         </activity>
         <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
         <activity android:name=".unifiedmap.mapsforgevtm.MapsforgeThemeSettings" />
+        <activity android:name=".unifiedmap.mapsforge.MapsforgeThemeSettings" />
 
         <!-- fileprovider to be able to share files -->
         <provider

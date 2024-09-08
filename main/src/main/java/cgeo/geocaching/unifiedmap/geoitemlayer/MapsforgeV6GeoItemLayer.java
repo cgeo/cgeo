@@ -28,6 +28,7 @@ import org.mapsforge.core.graphics.Style;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.model.Rotation;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
@@ -168,11 +169,11 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
 
 
     @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
+    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
         layerLock.lock();
         try {
             for (Layer layer : layers) {
-                layer.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+                layer.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
             }
         } finally {
             layerLock.unlock();

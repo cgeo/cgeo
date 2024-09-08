@@ -12,6 +12,7 @@ import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
+import org.mapsforge.core.model.Rotation;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
 
@@ -62,8 +63,8 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
     }
 
     @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
-        super.draw(boundingBox, zoomLevel, canvas, topLeftPoint);
+    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
+        super.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
 
         if (postRealRouteDistance != null) {
             postRealRouteDistance.postRealDistance(distance);

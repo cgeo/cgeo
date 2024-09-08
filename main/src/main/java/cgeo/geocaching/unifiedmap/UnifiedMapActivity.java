@@ -1177,6 +1177,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             saveCenterAndZoom();
             lastMapStateFromOnPause = getCurrentMapState();
         }
+        if (tileProvider != null) {
+            tileProvider.onPause();
+        }
         if (!Settings.isFeatureEnabledDefaultTrue(R.string.pref_useDelayedMapFragment)) {
             destroyMapFragment();
         }
@@ -1214,12 +1217,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onResume();
         reloadCachesAndWaypoints(false);
         MapUtils.updateFilterBar(this, mapType.filterContext);
+        if (tileProvider != null) {
+            tileProvider.onResume();
+        }
     }
 
     @Override
     protected void onDestroy() {
         if (loadInBackgroundHandler != null) {
             loadInBackgroundHandler.onDestroy();
+        }
+        if (tileProvider != null) {
+            tileProvider.onDestroy();
         }
         super.onDestroy();
     }
