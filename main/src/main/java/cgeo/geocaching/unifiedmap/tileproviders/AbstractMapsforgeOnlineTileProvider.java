@@ -40,12 +40,12 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
 
             @Override
             public byte getZoomLevelMax() {
-                return (byte) zoomMin;
+                return (byte) zoomMax;
             }
 
             @Override
             public byte getZoomLevelMin() {
-                return (byte) zoomMax;
+                return (byte) zoomMin;
             }
 
             @Override
@@ -60,5 +60,27 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
         mfTileSource.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA); // @todo
         tileLayer = new TileDownloadLayer(fragment.getTileCache(), map.getModel().mapViewPosition, mfTileSource, AndroidGraphicFactory.INSTANCE);
         map.getLayerManager().getLayers().add(tileLayer);
+        onResume(); // start tile downloader
+    }
+
+    // ========================================================================
+    // Lifecycle methods
+
+    @Override
+    public void onPause() {
+        ((TileDownloadLayer) tileLayer).onPause();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((TileDownloadLayer) tileLayer).onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        tileLayer.onDestroy();
+        super.onDestroy();
     }
 }

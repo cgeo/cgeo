@@ -26,7 +26,6 @@ import org.mapsforge.map.view.MapView;
 public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
     private MapFile mapFile = null;
-    private MapDataStoreLabelStore labelStore = null;
 
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
         super(name, uri, zoomMin, zoomMax, new Pair<>("", false));

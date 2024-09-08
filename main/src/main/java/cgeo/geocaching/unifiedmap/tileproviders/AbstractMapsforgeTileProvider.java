@@ -41,6 +41,7 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
 
     public void prepareForTileSourceChange(final MapView mapView) {
         if (tileLayer != null) {
+            onPause(); // notify tileProvider
             mapView.getLayerManager().getLayers().remove(tileLayer);
             tileLayer.onDestroy();
             tileLayer.getTileCache().purge();

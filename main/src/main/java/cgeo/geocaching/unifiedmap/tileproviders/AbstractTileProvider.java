@@ -85,4 +85,19 @@ public abstract class AbstractTileProvider {
         return zoomMax;
     }
 
+    // ========================================================================
+    // Lifecycle methods
+
+    public void onPause() {
+        // do nothing by default
+    }
+
+    public void onResume() {
+        // do nothing by default
+    }
+
+    public void onDestroy() {
+        // do nothing by default
+    }
+
 }
