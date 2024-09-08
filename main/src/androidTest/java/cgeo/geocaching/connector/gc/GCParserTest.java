@@ -340,6 +340,17 @@ public class GCParserTest {
         assertThat(spoiler.getUrl()).isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
     }
 
+    @Test
+    public void testSpoilerImageUrlWithStrong() {
+        //from GC601B
+        final String html = "<ul class=\"CachePageImages NoPrint\">\n" +
+                "            <li><a href=\"https://img.geocaching.com/cache/large/baf98e07-b431-4fbf-920d-0df4346c2847.JPG\" class=\"owner-image\" rel=\"owner_image_group\" data-title=\"<strong>Blick vom Weg</strong>\">Blick vom Weg</a></li><li><a href=\"https://img.geocaching.com/cache/large/a6772043-021c-4b6f-91c9-da4a92829f95.JPG\" class=\"owner-image\" rel=\"owner_image_group\" data-title=\"<strong>Da zeige ich auf den Cache</strong>\">Da zeige ich auf den Cache</a></li>\n" +
+                "        </ul>";
+        final List<Image> images = GCParser.parseSpoiler(html);
+        assertThat(images).hasSize(2);
+
+    }
+
     @MediumTest
     @Test
     public void testFullScaleImageUrl() {
