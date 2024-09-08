@@ -429,23 +429,8 @@ public final class GCParser {
             }
             DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
-            final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, page);
+            cacheSpoilers.addAll(parseSpoiler(page));
 
-            while (matcherSpoilersInside.find()) {
-                final String url = fullScaleImageUrl(matcherSpoilersInside.group(1));
-
-                String title = null;
-                if (matcherSpoilersInside.group(2) != null) {
-                    title = matcherSpoilersInside.group(2);
-                }
-                String description = null;
-                if (matcherSpoilersInside.group(3) != null) {
-                    description = matcherSpoilersInside.group(3);
-                }
-                if (title != null) {
-                    cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
-                }
-            }
         } catch (final RuntimeException e) {
             // failed to parse cache spoilers
             Log.w("GCParser.parseCache: Failed to parse cache spoilers", e);
@@ -602,6 +587,28 @@ public final class GCParser {
 
         cache.setDetailedUpdatedNow();
         return ImmutablePair.of(StatusCode.NO_ERROR, cache);
+    }
+
+    public static List<Image> parseSpoiler(final String html) {
+        final List<Image> cacheSpoilers = new ArrayList<>();
+        final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, html);
+
+        while (matcherSpoilersInside.find()) {
+            final String url = fullScaleImageUrl(matcherSpoilersInside.group(1));
+
+            String title = null;
+            if (matcherSpoilersInside.group(2) != null) {
+                title = matcherSpoilersInside.group(2);
+            }
+            String description = null;
+            if (matcherSpoilersInside.group(3) != null) {
+                description = matcherSpoilersInside.group(3);
+            }
+            if (title != null) {
+                cacheSpoilers.add(new Image.Builder().setUrl(url).setTitle(title).setDescription(description).build());
+            }
+        }
+        return cacheSpoilers;
     }
 
     @Nullable
