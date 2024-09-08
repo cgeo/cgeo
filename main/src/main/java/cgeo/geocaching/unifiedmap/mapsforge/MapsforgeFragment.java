@@ -14,6 +14,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
@@ -41,12 +42,14 @@ import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
 import org.mapsforge.core.model.Rotation;
 import org.mapsforge.core.util.LatLongUtils;
+import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.android.view.MapView;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
+import org.mapsforge.map.model.Model;
 import org.mapsforge.map.model.common.Observer;
 import org.mapsforge.map.view.InputListener;
 import org.oscim.core.BoundingBox;
@@ -290,8 +293,78 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         if (mMapView == null) {
             return new BoundingBox(0, 0, 0, 0);
         }
-        final org.mapsforge.core.model.BoundingBox bb = mMapView.getBoundingBox();
-        return new BoundingBox(bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.minLongitude);
+        final Viewport viewport = getViewport();
+        return new BoundingBox(viewport.getLatitudeMin(), viewport.getLongitudeMin(), viewport.getLatitudeMax(), viewport.getLongitudeMax());
+    }
+
+    @Override
+    public Viewport getViewport() {
+        if (mMapView == null) {
+            return null;
+        }
+        final Model model = mMapView.getModel();
+        if (model == null) {
+            return null;
+        }
+        final LatLong center = model.mapViewPosition.getCenter();
+        return new Viewport(new Geopoint(center.latitude, center.longitude), getLatitudeSpan(), getLongitudeSpan());
+    }
+
+    private double getLatitudeSpan() {
+        double span = 0;
+        final long mapSize = MercatorProjection.getMapSize(mMapView.getModel().mapViewPosition.getZoomLevel(), mMapView.getModel().displayModel.getTileSize());
+        final Point center = MercatorProjection.getPixelAbsolute(mMapView.getModel().mapViewPosition.getCenter(), mapSize);
+
+        if (mMapView.getHeight() > 0) {
+            try {
+                final LatLong low = mercatorFromPixels(center.x, center.y - mMapView.getHeight() / 2.0, mapSize);
+                final LatLong high = mercatorFromPixels(center.x, center.y + mMapView.getHeight() / 2.0, mapSize);
+                span = Math.abs(high.latitude - low.latitude);
+            } catch (final IllegalArgumentException ex) {
+                //should never happen due to handling in "mercatorFromPixels", but leave it here just in case
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mMapView.getDimension(), ex);
+            }
+        }
+        return span;
+    }
+
+    private double getLongitudeSpan() {
+        double span = 0;
+        final long mapSize = MercatorProjection.getMapSize(mMapView.getModel().mapViewPosition.getZoomLevel(), mMapView.getModel().displayModel.getTileSize());
+        final Point center = MercatorProjection.getPixelAbsolute(mMapView.getModel().mapViewPosition.getCenter(), mapSize);
+
+        if (mMapView.getWidth() > 0) {
+            try {
+                final LatLong low = mercatorFromPixels(center.x - mMapView.getWidth() / 2.0, center.y, mapSize);
+                final LatLong high = mercatorFromPixels(center.x + mMapView.getWidth() / 2.0, center.y, mapSize);
+                span = Math.abs(high.longitude - low.longitude);
+            } catch (final IllegalArgumentException ex) {
+                //should never happen due to handling in "mercatorFromPixels", but leave it here just in case
+                Log.w("Exception when calculating longitude span (center:" + center + ", h/w:" + mMapView.getDimension(), ex);
+            }
+        }
+        return span;
+    }
+
+    /**
+     * Calculates projection of pixel to coord.
+     * For this method to operate normally, it should 0 <= pixelX <= maxSize and 0 <= pixelY <= mapSize
+     * <br>
+     * If either pixelX or pixelY is OUT of these bounds, it is assumed that the map displays the WHOLE WORLD
+     * (and this displayed whole world map is smaller than the device's display size of the map.)
+     * In these cases, lat/lon is projected to the world-border-coordinates (for lat: -85° - 85°, for lon: -180° - 180°)
+     */
+    private static LatLong mercatorFromPixels(final double pixelX, final double pixelY, final long mapSize) {
+        final double normedPixelX = toBounds(pixelX, 0, mapSize);
+        final double normedPixelY = toBounds(pixelY, 0, mapSize);
+        final LatLong ll = MercatorProjection.fromPixels(normedPixelX, normedPixelY, mapSize);
+        final double lon = toBounds(ll.longitude, -180, 180);
+        final double lat = toBounds(ll.latitude, -85, 85);
+        return new LatLong(lat, lon);
+    }
+
+    private static double toBounds(final double value, final double min, final double max) {
+        return value < min ? min : Math.min(value, max);
     }
 
     @Override
