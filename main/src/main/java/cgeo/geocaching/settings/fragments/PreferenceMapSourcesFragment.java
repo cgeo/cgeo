@@ -56,6 +56,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
         findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setOnPreferenceChangeListener((preference, newValue) -> {
             setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
+            setFlagForRestartRequired();
             return true;
         });
 
