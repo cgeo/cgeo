@@ -16,7 +16,11 @@
         app:showAsAction="ifRoom">
         <menu>
             <group
-                android:id="@+id/menu_group_map_sources"
+                android:id="@+id/menu_group_map_sources_online"
+                android:checkableBehavior="single" >
+            </group>
+            <group
+                android:id="@+id/menu_group_map_sources_offline"
                 android:checkableBehavior="single" >
             </group>
             <group android:id="@+id/menu_group_offlinemaps">
