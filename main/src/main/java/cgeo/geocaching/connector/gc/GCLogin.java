@@ -670,8 +670,8 @@ public class GCLogin extends AbstractLogin {
 
     @SuppressLint("SetJavaScriptEnabled")
     private static void initializeWebview(final WebView webView) {
-        webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient());
         final WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
@@ -681,6 +681,8 @@ public class GCLogin extends AbstractLogin {
         webSettings.setDisplayZoomControls(false);
         webSettings.setSupportZoom(true);
         webSettings.setDefaultTextEncodingName("utf-8");
+        webView.setFocusable(true);
+        webView.setFocusableInTouchMode(true);
     }
 
 }
