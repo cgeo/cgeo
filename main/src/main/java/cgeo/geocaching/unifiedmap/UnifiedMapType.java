@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
@@ -22,6 +23,7 @@ public class UnifiedMapType implements Parcelable {
     public enum UnifiedMapTypeType {
         UMTT_Undefined,         // invalid state
         UMTT_PlainMap,          // open map (from bottom navigation)
+        UMTT_Viewport,          // open map, shows and scales to a given Viewport
         UMTT_TargetGeocode,     // set cache or waypoint as target
         UMTT_TargetCoords,      // set coords as target
         UMTT_List,              // display list contents
@@ -38,12 +40,19 @@ public class UnifiedMapType implements Parcelable {
     public int waypointId = 0;
     public GeocacheFilterContext filterContext = new GeocacheFilterContext(LIVE);
     public boolean followMyLocation = false;
+    public Viewport viewport;
     // reminder: add additional fields to parcelable methods below
 
     /** default UnifiedMapType is PlainMap with no further data */
     public UnifiedMapType() {
         type = UnifiedMapTypeType.UMTT_PlainMap;
         followMyLocation = Settings.getFollowMyLocation();
+    }
+
+    /** open map and scale to a given viewport */
+    public UnifiedMapType(final Viewport viewport) {
+        type = UnifiedMapTypeType.UMTT_Viewport;
+        this.viewport = viewport;
     }
 
     /** set geocode as target */
@@ -108,6 +117,7 @@ public class UnifiedMapType implements Parcelable {
         filterContext = in.readParcelable(GeocacheFilterContext.class.getClassLoader());
         followMyLocation = (in.readInt() > 0); // readBoolean available from SDK 29 on
         waypointId = in.readInt();
+        viewport = in.readParcelable(Viewport.class.getClassLoader());
         // ...
     }
 
@@ -127,6 +137,7 @@ public class UnifiedMapType implements Parcelable {
         dest.writeParcelable(filterContext, 0);
         dest.writeInt(followMyLocation ? 1 : 0);
         dest.writeInt(waypointId);
+        dest.writeParcelable(viewport, flags);
         // ...
     }
 

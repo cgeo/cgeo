@@ -128,21 +128,6 @@ public class ViewUtils {
     }
 
     /**
-     * Sets enabled/disabled flag for given view and all nested child views recursively
-     */
-    public static void setEnabledDeep(final View view, final boolean enabled) {
-        if (view == null) {
-            return;
-        }
-        view.setEnabled(enabled);
-        if (view instanceof ViewGroup) {
-            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                setEnabledDeep(((ViewGroup) view).getChildAt(i), enabled);
-            }
-        }
-    }
-
-    /**
      * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
      *
      * @param ctx           context to use for creating views

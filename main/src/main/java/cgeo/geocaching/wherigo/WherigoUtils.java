@@ -3,6 +3,8 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
@@ -24,6 +26,8 @@ import androidx.annotation.Nullable;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +123,28 @@ public final class WherigoUtils {
         return et != null && et.isVisible() && (!(et instanceof Container) || ((Container) et).visibleToPlayer());
     }
 
+    public static Geopoint getZoneCenter(final Zone zone) {
+        if (zone == null) {
+            return Geopoint.ZERO;
+        }
+        if (zone.bbCenter != null && zone.bbCenter.latitude != 0d && zone.bbCenter.longitude != 0d) {
+            return GP_CONVERTER.from(zone.bbCenter);
+        }
+        if (zone.points != null && zone.points.length > 0) {
+            final List<Geopoint> geopoints = WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points));
+            return new Viewport.ContainingViewportBuilder().add(geopoints).getViewport().getCenter();
+        }
+        return Geopoint.ZERO;
+    }
+
+    public static Viewport getZonesViewport(final Collection<Zone> zones) {
+        final Viewport.ContainingViewportBuilder builder = new Viewport.ContainingViewportBuilder();
+        for (Zone zone : zones) {
+            builder.add(WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points)));
+        }
+        return builder.getViewport();
+    }
+
     public static String eventTableToString(final EventTable et, final boolean longVersion) {
         if (et == null) {
             return "null";
@@ -156,7 +182,7 @@ public final class WherigoUtils {
             if (longVersion) {
                 msg.append(sep + "Zone center:" + WherigoGame.GP_CONVERTER.from(z.bbCenter));
             }
-            msg.append(", dist:" + z.distance + "m (");
+            msg.append(", dist:" + Units.getDistanceFromMeters((float) z.distance) + " (");
             switch (z.contain) {
                 case Zone.DISTANT:
                     msg.append("distant");

@@ -87,6 +87,7 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_SearchResult;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetCoords;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_Viewport;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -382,6 +383,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     mapFragment.setCenter(Settings.getUMMapCenter());
                 }
                 break;
+            case UMTT_Viewport:
+                // set bounds to given viewport
+                if (setDefaultCenterAndZoom && mapType.viewport != null) {
+                    mapFragment.setCenter(mapType.viewport.getCenter());
+                    mapFragment.zoomToBounds(mapType.viewport);
+                }
+                break;
             case UMTT_TargetGeocode: // can be either a cache or a waypoint
                 // load cache/waypoint, focus map on it, and set it as target
                 final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_WAYPOINTS);
@@ -479,7 +487,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
-        if (mapType.type == UMTT_PlainMap) {
+        if (mapType.type == UMTT_PlainMap || mapType.type == UMTT_Viewport) {
             refreshMapData(false, true);
             if (loadInBackgroundHandler == null) {
                 loadInBackgroundHandler = new LoadInBackgroundHandler(this);
@@ -689,7 +697,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     public int getSelectedBottomItemId() {
-        return mapType == null || mapType.type == UMTT_PlainMap || mapType.type == UMTT_List || mapType.type == UMTT_TargetCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
+        return mapType == null || mapType.type == UMTT_PlainMap || mapType.type == UMTT_Viewport || mapType.type == UMTT_List || mapType.type == UMTT_TargetCoords ? MENU_MAP : MENU_HIDE_NAVIGATIONBAR;
     }
 
     // ========================================================================
@@ -754,7 +762,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
         if (id == R.id.menu_map_live) {
-            if (mapType.type == UMTT_PlainMap) {
+            if (mapType.type == UMTT_PlainMap || mapType.type == UMTT_Viewport) {
                 Settings.setLiveMap(!Settings.isLiveMap());
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
