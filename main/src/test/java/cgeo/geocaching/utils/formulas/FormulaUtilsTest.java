@@ -89,7 +89,7 @@ public class FormulaUtilsTest {
         assertScanFormula("(c+20*b):2+5", "(c+20*b):2+5");
 
         //ensure that things like the following are NOT found
-        assertScanFormula("abcd-efgh");
+        assertScanFormula("abcde-fghi");
 
         //from cache GC86KMW
         assertScanFormula("1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5    E 009°10*b-1,c:4-a+5",
@@ -272,6 +272,12 @@ public class FormulaUtilsTest {
         assertScanFormula(text, false, "A*(D+E)-F*(E+C)", "A-B", "A-E+F", "C*D-F", "D+C*E");
     }
 
+    @Test
+    public void scanForFormulasGCAWBHB() {
+        final String description = "Nord = KM + BCO + AFJ + DGN + AF + K + EH + CD + I - L\n" +
+                "Ost = KM + BO + AF + GH + CDJN + AIN + DE + GH + A + B + C + F + I + N";
+        assertScanFormula(description, "KM + BCO + AFJ + DGN + AF + K + EH + CD + I - L", "KM + BO + AF + GH + CDJN + AIN + DE + GH + A + B + C + F + I + N");
+    }
 
     private void assertScanFormula(final String textToScan, final String... expectedFinds) {
         assertScanFormula(textToScan, true, expectedFinds);
