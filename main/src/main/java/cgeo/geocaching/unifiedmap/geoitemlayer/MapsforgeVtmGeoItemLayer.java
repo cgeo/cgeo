@@ -282,6 +282,10 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         if (map == null || processedCount == 0) {
             return null;
         }
+        return flushMapChanges();
+    }
+
+    private String flushMapChanges() {
 
         final int layersSize = markerLayersForRefresh.size();
 
@@ -355,6 +359,7 @@ public class MapsforgeVtmGeoItemLayer implements IProviderGeoItemLayer<Pair<Draw
         for (Pair<GeoPrimitive, Pair<Drawable, MarkerInterface>> v : values) {
             remove(v.first, v.second);
         }
+        flushMapChanges();
 
         map = null;
         mapLayers = null;
