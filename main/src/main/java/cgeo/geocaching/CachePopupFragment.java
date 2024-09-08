@@ -350,7 +350,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
     @Override
     public void showNavigationMenu() {
-        getActivity().findViewById(R.id.menu_navigate).setEnabled(false);
+        ViewUtils.setEnabled(getActivity().findViewById(R.id.menu_navigate), false);
         NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true, R.id.menu_navigate);
     }
 

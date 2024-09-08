@@ -17,11 +17,11 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.app.Activity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -214,12 +214,7 @@ public final class NavigationAppFactory {
         });
         final AlertDialog alert = builder.create();
         if (menuResToEnableOnDismiss != 0) {
-            alert.setOnDismissListener(dialog -> {
-                final View menuItem = activity.findViewById(menuResToEnableOnDismiss);
-                if (menuItem != null) {
-                    menuItem.setEnabled(true);
-                }
-            });
+            alert.setOnDismissListener(dialog -> ViewUtils.setEnabled(activity.findViewById(menuResToEnableOnDismiss), true));
         }
         alert.show();
     }
