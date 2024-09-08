@@ -1649,6 +1649,13 @@ public class Geocache implements IWaypoint {
         userModifiedCoords = coordsChanged;
     }
 
+    public void resetUserModifiedCoords(final Waypoint waypoint) {
+        setCoords(waypoint.getCoords());
+        setUserModifiedCoords(false);
+        deleteWaypointForce(waypoint);
+        DataStore.saveUserModifiedCoords(this);
+    }
+
     /**
      * Duplicate a waypoint.
      *
