@@ -98,10 +98,11 @@ public class MapProviderFactory {
         int i = 0;
         for (MapSource mapSource : mapSources.values()) {
             final int id = mapSource.getNumericalId();
-            parentMenu.add(R.id.menu_group_map_sources, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
+            parentMenu.add(mapSource instanceof MapsforgeMapProvider.OfflineMapSource || mapSource instanceof MapsforgeMapProvider.OfflineMultiMapSource ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, mapSource.getName()).setCheckable(true).setChecked(id == currentSource);
             i++;
         }
-        parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, mapSources.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
     }

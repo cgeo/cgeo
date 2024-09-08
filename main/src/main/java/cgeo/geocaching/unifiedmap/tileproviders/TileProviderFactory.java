@@ -71,11 +71,12 @@ public class TileProviderFactory {
             }
             if (!hide) {
                 final int id = tileProvider.getNumericalId();
-                parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+                parentMenu.add(tileProvider instanceof AbstractMapsforgeOfflineTileProvider ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
         }
-        parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
+        parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, tileProviders.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
     }
