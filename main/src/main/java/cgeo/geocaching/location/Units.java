@@ -54,7 +54,7 @@ public class Units {
     }
 
     public static String getDistanceFromKilometers(final Float distanceKilometers) {
-        if (distanceKilometers == null) {
+        if (distanceKilometers == null || Float.isNaN(distanceKilometers) || Float.isInfinite(distanceKilometers)) {
             return "?";
         }
 

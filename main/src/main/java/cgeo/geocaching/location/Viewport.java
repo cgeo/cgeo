@@ -6,13 +6,17 @@ import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
-public final class Viewport {
+public final class Viewport implements Parcelable {
 
     @NonNull public final Geopoint center;
     @NonNull public final Geopoint bottomLeft;
@@ -330,5 +334,37 @@ public final class Viewport {
     public int hashCode() {
         return bottomLeft.hashCode() ^ topRight.hashCode();
     }
+
+    // Parcelable
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull final Parcel dest, final int flags) {
+        dest.writeParcelable(center, flags);
+        dest.writeParcelable(bottomLeft, flags);
+        dest.writeParcelable(topRight, flags);
+    }
+
+    Viewport(final Parcel in) {
+        center = Objects.requireNonNull(in.readParcelable(Geopoint.class.getClassLoader()));
+        bottomLeft = Objects.requireNonNull(in.readParcelable(Geopoint.class.getClassLoader()));
+        topRight = Objects.requireNonNull(in.readParcelable(Geopoint.class.getClassLoader()));
+    }
+
+    public static final Creator<Viewport> CREATOR = new Creator<Viewport>() {
+        @Override
+        public Viewport createFromParcel(final Parcel in) {
+            return new Viewport(in);
+        }
+
+        @Override
+        public Viewport[] newArray(final int size) {
+            return new Viewport[size];
+        }
+    };
 
 }

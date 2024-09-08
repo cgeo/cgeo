@@ -51,7 +51,13 @@
                 android:id="@+id/download"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                app:icon="@drawable/ic_menu_face" />
+                app:icon="@drawable/downloader_folder" />
+
+            <Button
+                android:id="@+id/map"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                app:icon="@drawable/ic_menu_mapmode" />
 
 
         </LinearLayout>

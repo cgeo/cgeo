@@ -6,6 +6,10 @@ import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
+import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -120,6 +124,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> downloadCartridge(null));
+        binding.map.setOnClickListener(v -> showOnMap());
 
         if (getIntent().getExtras() != null) {
             final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
@@ -140,25 +145,18 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private void chooseCartridge() {
         final List<WherigoUtils.WherigoCartridgeInfo> cartridges = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), null, true, true);
-//        final Map<ContentStorage.FileInformation, ImmutableTriple<String, Bitmap, Geopoint>> displayDataMap = new HashMap<>();
-//        for (Map.Entry<ContentStorage.FileInformation, CartridgeFile> cart : cartridges.entrySet()) {
-//            final CartridgeFile file = cart.getValue();
-//            final String msg = cart.getKey().name + ", " + file.name + ", " + file.type + ", " + file.author + ", " + file.version;
-//            final Geopoint point = new Geopoint(file.latitude, file.longitude);
-//            final Bitmap bmp = WherigoUtils.getCartrdigeIcon(file);
-//            displayDataMap.put(cart.getKey(), new ImmutableTriple<>(msg, bmp, point));
-//            WherigoUtils.closeCartridgeQuietly(file);
-//        }
-//        final List<ContentStorage.FileInformation> files = new ArrayList<>(displayDataMap.keySet());
         Collections.sort(cartridges, Comparator.comparing(f -> f.fileInfo.name));
+
+        final Geopoint currentLocation = LocationDataProvider.getInstance().currentGeo().getCoords();
 
         final SimpleDialog.ItemSelectModel<WherigoUtils.WherigoCartridgeInfo> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(cartridges)
             .setDisplayMapper(info -> TextParam.text(
-                    info.fileInfo.name + ", " + info.cartridgeFile.name + ", " +
-                         info.cartridgeFile.type + ", " + info.cartridgeFile.author + ", " +
-                         info.cartridgeFile.version + ", " + new Geopoint(info.cartridgeFile.latitude, info.cartridgeFile.longitude)))
+            info.fileInfo.name + ", " + info.cartridgeFile.name + ", " +
+                 info.cartridgeFile.type + ", " + info.cartridgeFile.author + ", " +
+                 "v" + info.cartridgeFile.version + ", " +
+                 Units.getDistanceFromKilometers(currentLocation.distanceTo(new Geopoint(info.cartridgeFile.latitude, info.cartridgeFile.longitude))) + " away"))
             .setDisplayIconMapper(info -> info.icon != null ? ImageParam.drawable(new BitmapDrawable(getResources(), info.icon)) : ImageParam.id(R.drawable.icon_whereyougo))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
@@ -178,6 +176,22 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private void stopGame() {
         WherigoGame.get().stopGame();
+    }
+
+    private void showOnMap() {
+        if (!WherigoGame.get().isPlaying()) {
+            return;
+        }
+        final List<Zone> zones;
+        if (Settings.enableFeatureWherigoDebug()) {
+            zones = WherigoGame.get().getZones();
+        } else {
+            zones = WherigoGame.get().getZones().stream().filter(WherigoUtils::isVisibleToPlayer).collect(Collectors.toList());
+        }
+        final Viewport viewport = WherigoUtils.getZonesViewport(zones);
+        if (viewport != null && !viewport.isJustADot()) {
+            DefaultMap.startActivityViewport(this, viewport);
+        }
     }
 
     private void chooseSavefile(final WherigoUtils.WherigoCartridgeInfo cartridge) {
@@ -233,6 +247,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.startGame.setEnabled(!game.isPlaying());
         binding.saveGame.setEnabled(game.isPlaying());
         binding.stopGame.setEnabled(game.isPlaying());
+        binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
 
     }
 

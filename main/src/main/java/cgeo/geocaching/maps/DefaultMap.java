@@ -5,6 +5,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
@@ -138,6 +139,14 @@ public final class DefaultMap {
         if (Settings.useUnifiedMap() && fromList != 0) { // only supported for UnifiedMap
             Log.e("Launching UnifiedMap in list mode, fromList=" + fromList + ")");
             final UnifiedMapType mapType = new UnifiedMapType(fromList, filterContext);
+            mapType.launchMap(fromActivity);
+        }
+    }
+
+    public static void startActivityViewport(final Activity fromActivity, final Viewport viewport) {
+        if (Settings.useUnifiedMap()) { // only supported for UnifiedMap
+            Log.e("Launching UnifiedMap in viewport mode, viewport=" + viewport + ")");
+            final UnifiedMapType mapType = viewport == null ? new UnifiedMapType() : new UnifiedMapType(viewport);
             mapType.launchMap(fromActivity);
         }
     }

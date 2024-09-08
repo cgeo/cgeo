@@ -17,6 +17,7 @@
 
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -35,6 +36,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     private Disposable disposable = null;
     private GeoData geoData;
     private float direction;
+    private Geopoint fixedLocation;
 
     private double lastSentLatitude = 0d;
     private double lastSentLongitude = 0d;
@@ -77,6 +79,10 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
         Log.w("STOPPED: " + this);
     }
 
+    public void setFixedLocation(final Geopoint fixedLocation) {
+        this.fixedLocation = fixedLocation;
+    }
+
 
     @Override
     public double getAltitude() {
@@ -94,6 +100,9 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getLatitude() {
+        if (fixedLocation != null) {
+            return fixedLocation.getLatitude();
+        }
         final double newLatitude = geoData == null ? 0 : geoData.getLatitude();
         lastSentLatitude = checkNotify(lastSentLatitude, newLatitude);
         Log.iForce("WHERIGO: LocationService lat=" + newLatitude + " [" + this + "]");
@@ -102,6 +111,9 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getLongitude() {
+        if (fixedLocation != null) {
+            return fixedLocation.getLongitude();
+        }
         final double newLongitude = geoData == null ? 0 : geoData.getLongitude();
         lastSentLongitude = checkNotify(lastSentLongitude, newLongitude);
         Log.iForce("WHERIGO: LocationService long=" + newLongitude + " [" + this + "]");
@@ -116,7 +128,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     @Override
     public int getState() {
         Log.iForce("WHERIGO: LocationService state:" + this);
-        return geoData == null ? LocationService.OFFLINE : LocationService.ONLINE;
+        return fixedLocation == null && geoData == null ? LocationService.OFFLINE : LocationService.ONLINE;
     }
 
     private double checkNotify(final double lastSentValue, final double newValue) {
@@ -133,6 +145,6 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     @Override
     @NonNull
     public String toString() {
-        return "geoData:" + geoData + ", dir:" + direction;
+        return "geoData:" + geoData + ", dir:" + direction + ", fixedLocation: " + fixedLocation;
     }
 }
