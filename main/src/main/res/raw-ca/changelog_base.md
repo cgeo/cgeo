@@ -4,6 +4,8 @@
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
