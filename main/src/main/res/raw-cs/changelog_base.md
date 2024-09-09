@@ -4,6 +4,8 @@
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
