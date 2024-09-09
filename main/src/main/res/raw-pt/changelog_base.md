@@ -4,6 +4,8 @@
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### Geral
 - Alteração: Usar elevação acima do nível médio do mar (se disponível, Android 14+ apenas)
