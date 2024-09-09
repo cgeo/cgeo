@@ -1708,6 +1708,7 @@
     <string name="formula_error_missingvarvalue">Missend: %1$s</string>
     <string name="formula_error_cyclicdependency">Cyclus: %1$s</string>
     <string name="formula_error_empty">Lege Formule</string>
+    <string name="formula_error_numeric_overflow">Numerieke overloop</string>
     <string name="formula_error_other">Fout: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Naamloos</string>
