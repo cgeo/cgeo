@@ -840,6 +840,9 @@
     <string name="init_login_popup_failed_reason">L\'inici de sessió ha fallat: %s</string>
     <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
     <string name="init_login_popup_not_logged_in">No estàs registrat</string>
+    <string name="init_login_manual">Inici de sessió manual</string>
+    <string name="init_login_manual_description">Espereu que aparegui un lloc web i inicieu sessió al vostre compte. Espereu fins que s\'hagi completat la sessió. A continuació, feu clic al botó \"d\'acord\".</string>
+    <string name="init_login_manual_error_nocookie">No s\'ha trobat cap token d\'autorització. Si us plau, feu l\'inici de sessió o \"cancel·leu\" l\'inici de sessió manual.</string>
     <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
     <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
     <string name="init_authorization_credential_username">Nom d\'usuari</string>
