@@ -4,6 +4,8 @@
 
 ### Détails de la cache
 - New: Not yet existing variables used in projection get created in variable list
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### Général
 - Changement : Utiliser l'altitude au-dessus du niveau moyen de la mer (si disponible, Android 14+ uniquement)
