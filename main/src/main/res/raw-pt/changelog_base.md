@@ -38,6 +38,6 @@
 - Correcção: Cintilação ao actualizar a lista de caches
 - Novo: Permitir a exibição de palavra-passe na configuração do conector
 - Correcção: Pesquisar por geokretys deixou de funcionar ao usar códigos de rastreamento
-- Fix: Missing "copy to clipboard" option on some devices (see settings => system)
-- New: Offer manual login on Captcha error
+- Correcção: Opção "copiar para área de transferência" em falta em alguns dispositivos (ver configurações => system)
+- Novo: Possibilidade de início de sessão manual em caso de erro de Captcha
 

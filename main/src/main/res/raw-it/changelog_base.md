@@ -8,8 +8,8 @@
 - Modifica: cerca le coordinate: mostra la direzione e la distanza dall'obiettivo e non dalla posizione corrente
 - Nuovo: Indicatore grafico D/T nel foglio informazioni cache
 - Corretto: Bussola nascosta quando la barra dei filtri è visibile (UnifiedMap)
-- Change: Removed map theme legends
-- Fix: Multiple navigation selection popups on long-press
+- Cambiato: legende del tema della mappa rimosse
+- Correzione: popup di selezione di navigazione multiple su pressione prolungata
 
 ### Dettagli del cache
 - Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
@@ -20,7 +20,7 @@
 - Corretto: errata priorità nel parsing della formula backup
 - Change: Allow larger integer ranges in formulas (disallow usage of negation)
 - New: Allow user-stored cache images on creating/editing log
-- Fix: Spoiler images no longer being loaded (website change)
+- Correzione: le immagini Spoiler non vengono più caricate (modifica del sito)
 
 ### Generale
 - Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
@@ -39,5 +39,5 @@
 - New: Allow display of passwords in connector configuration
 - Fix: Search for geokretys no longer working when using trackingcodes
 - Fix: Missing "copy to clipboard" option on some devices (see settings => system)
-- New: Offer manual login on Captcha error
+- Nuovo: possibilità di effettuare il login manuale su errore del Captcha
 

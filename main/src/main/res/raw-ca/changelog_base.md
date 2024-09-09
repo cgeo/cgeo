@@ -39,5 +39,5 @@
 - Nou: permet la visualització de contrasenyes a la configuració del connector
 - Solució: cerqueu geokretys que ja no funcionen quan feu servir codis de seguiment
 - Solució: falta l'opció "còpia al porta-retalls" en alguns dispositius (vegeu la configuració => sistema)
-- New: Offer manual login on Captcha error
+- Nou: ofereix un inici de sessió manual per error de Captcha
 
