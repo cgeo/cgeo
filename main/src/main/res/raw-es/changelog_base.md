@@ -4,6 +4,8 @@
 
 ### Detalles del caché
 - New: Not yet existing variables used in projection get created in variable list
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### General
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
