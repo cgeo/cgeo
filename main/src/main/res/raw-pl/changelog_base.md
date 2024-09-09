@@ -4,6 +4,8 @@
 
 ### Szczegóły skrytki
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
