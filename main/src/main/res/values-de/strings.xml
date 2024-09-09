@@ -1708,6 +1708,7 @@
     <string name="formula_error_missingvarvalue">Fehlend: %1$s</string>
     <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
     <string name="formula_error_empty">Leere Formel</string>
+    <string name="formula_error_numeric_overflow">Numerischer Überlauf</string>
     <string name="formula_error_other">Fehler: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Ohne Titel</string>
