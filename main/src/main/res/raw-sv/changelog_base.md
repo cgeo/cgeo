@@ -4,6 +4,8 @@
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
