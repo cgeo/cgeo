@@ -1,7 +1,7 @@
 ##
 - Naprawiono: „Logowanie ręczne” nie może być aktywowane
-- Fix: "Manual login" shown even without stored credentials
+- Naprawiono: „Ręczne logowanie” wyświetlane nawet bez przechowywanych danych logowania
 - Naprawiono: Awaria mapy podczas otwierania menu nawigacji
-- Fix: Crash on editing personal note without cache
-- Fix: Certain spoiler images not detected
-- Fix: Current elevation on map shown with fraction
+- Naprawiono: Awaria podczas edycji notatki osbistej bez skrytki
+- Naprawiono: Niektóre obrazy spoilerów nie były wykrywane
+- Naprawiono: Bieżąca wysokość na mapie pokazana z ułamkiem
