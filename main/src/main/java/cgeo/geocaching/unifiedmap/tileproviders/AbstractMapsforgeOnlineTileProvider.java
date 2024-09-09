@@ -19,9 +19,11 @@ import org.mapsforge.map.view.MapView;
 public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider {
 
     private final AbstractTileSource mfTileSource;
+    private String tilePath;
 
     AbstractMapsforgeOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         super(name, uri, zoomMin, zoomMax, mapAttribution);
+        this.tilePath = tilePath;
         mfTileSource = new AbstractTileSource(new String[]{ uri.getHost() }, 443) {
             @Override
             public int getParallelRequestsLimit() {
@@ -53,6 +55,10 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
                 return false;
             }
         };
+    }
+
+    protected void setTilePath(final String tilePath) {
+        this.tilePath = tilePath;
     }
 
     @Override
