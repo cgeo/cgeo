@@ -1,7 +1,7 @@
 ##
-- Fix: "Manual login" cannot be activated
-- Fix: "Manual login" shown even without stored credentials
-- Fix: Map crash on opening navigation menu
-- Fix: Crash on editing personal note without cache
-- Fix: Certain spoiler images not detected
-- Fix: Current elevation on map shown with fraction
+- Korrektur: "Manuelle Anmeldung" kann nicht aktiviert werden
+- Korrektur: "Manuelle Anmeldung" wird auch ohne gespeicherte Anmeldeinformationen angezeigt
+- Korrektur: Absturz beim Öffnen des Navigationsmenüs
+- Korrektur: Absturz beim Bearbeiten einer persönlichen Notiz ohne Cache
+- Korrektur: Bestimmte Spoiler-Bilder werden nicht erkannt
+- Fix: Aktuelle Höhe auf Karte wird mit Dezimalstellen angezeigt
