@@ -7,7 +7,36 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.09.09 Bugfix Release
+
+- Fix: "Manual login" cannot be activated
+- Fix: "Manual login" shown even without stored credentials
+- Fix: Map crash on opening navigation menu
+- Fix: Crash on editing personal note without cache
+- Fix: Certain spoiler images not detected
+- Fix: Current elevation on map shown with fraction
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.09.01 Feature Release
+
+This is basically the same as release 2024.08.19, but with different foreground service type configuration. This build is available on Play Store again.
+
+The following features are included in addition to release 2024.08.19:
+
+- Fix: Missing "copy to clipboard" option on some devices (see settings => system)
+- New: Show warnings when HTTP error 429 occurs (Too many requests) (debug mode only)
+- New: Offer manual login on Captcha error
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.08.19 Feature Release
+
+### Notice
+
+This release is NOT available at Play Store currently.
+
+Reason for this are recent changes in Play Store policies which requires us to declare all service types c:geo offers (e. g.: downloading a map uses a so-called "foreground service"). There is quite a list of conditions which type of foreground service has to be declared for what type of service, but so far we seemingly have not found the right combination for the services c:geo offers. Thus Play Store has rejected c:geo's 2024.08.19 release (although it had accepted the beta versions for it, that used exactly the same declarations). We are working on it.
 
 ### Map
 - Change: Search for coordinates: Show direction and distance to target and not to current position
