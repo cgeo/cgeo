@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
-    <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till panelleverantör. Se till att du har kontrollerat och följt deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
