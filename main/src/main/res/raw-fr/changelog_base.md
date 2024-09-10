@@ -1,6 +1,7 @@
 ### Carte
 - Nouveau : Stocker le thème de la carte par fournisseur de tuiles (UnifiedMap)
 - Nouveau : Surligner le cache/waypoint sélectionné (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### Détails de la cache
 - New: Not yet existing variables used in projection get created in variable list
