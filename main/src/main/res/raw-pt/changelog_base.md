@@ -1,6 +1,7 @@
 ### Mapa
 - Novo: Armazenar tema do mapa por provedor de blocos (Mapa Unificado)
 - Novo: Destacar cache/ponto adicional selecionado (Mapa Unificado)
+- New: Add separator between offline and online map sources
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
