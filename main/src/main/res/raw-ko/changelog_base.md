@@ -1,6 +1,7 @@
 ### 지도
 - New: Store map theme per tile provider (UnifiedMap)
 - New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### 캐시 상세정보
 - New: Not yet existing variables used in projection get created in variable list
