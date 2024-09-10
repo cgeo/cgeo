@@ -1,4 +1,7 @@
 ##
+- Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
+
+##
 - Oprava: Nelze aktivovat funkci "Ruční přihlášení"
 - Oprava: "Ruční přihlášení" se zobrazuje i bez uložených pověření
 - Oprava: Pád mapy při otevření navigačního menu
