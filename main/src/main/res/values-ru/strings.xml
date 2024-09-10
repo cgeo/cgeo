@@ -791,7 +791,6 @@
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
     <string name="settings_hide_tileproviders_summary">Исключить один или несколько источников карты из выбора источника карты</string>
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
-    <string name="settings_userDefinedTileProviderUri">Введите полный URL-адрес (без косой черты в конце) поставщика карт. Убедитесь, что вы проверили и соблюдаете условия их использования.</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
