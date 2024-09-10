@@ -1,6 +1,7 @@
 ### Mapa
 - Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
