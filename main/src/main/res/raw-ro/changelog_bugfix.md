@@ -1,4 +1,7 @@
 ##
+- Fix: Missing parametrization for user-defined tileprovider
+
+##
 - Fix: "Manual login" cannot be activated
 - Fix: "Manual login" shown even without stored credentials
 - Fix: Map crash on opening navigation menu
