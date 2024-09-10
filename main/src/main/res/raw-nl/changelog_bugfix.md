@@ -1,4 +1,7 @@
 ##
+- Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
+
+##
 - Oplossing: "Handmatige login" kan niet worden geactiveerd
 - Oplossing: "Handmatige login" getoond zelfs zonder opgeslagen inloggegevens
 - Oplossing: Kaart crash bij het openen van het navigatiemenu
