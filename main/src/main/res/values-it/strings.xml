@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Nascondi Sorgenti Mappa</string>
     <string name="settings_hide_tileproviders_summary">Escludi una o più fonti di mappa dalla selezione delle fonti di mappa</string>
     <string name="settings_userDefinedTileProvider">Provider tile definito dall\'utente</string>
-    <string name="settings_userDefinedTileProviderUri">Inserisci l\'Uri completo (senza slash finale) per il provider tile. Assicurati di aver controllato e di rispettare le loro condizioni di utilizzo.</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
