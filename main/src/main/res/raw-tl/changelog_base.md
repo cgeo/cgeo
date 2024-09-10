@@ -1,6 +1,7 @@
 ### Map
 - New: Store map theme per tile provider (UnifiedMap)
 - New: Highlight selected cache/waypoint (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### Cache details
 - New: Not yet existing variables used in projection get created in variable list
