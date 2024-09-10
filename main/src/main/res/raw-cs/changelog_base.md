@@ -1,11 +1,12 @@
 ### Mapa
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
+- Novinka: Přidán oddělovač mezi offline a online zdroje map
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
-- New: Allow large integers in formulas
-- New: Support more constellations for variables in formulas
+- Novinka: Povolení velkých celých čísel ve vzorcích
+- Novinka: Podpora více konstelací pro proměnné ve vzorcích
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
