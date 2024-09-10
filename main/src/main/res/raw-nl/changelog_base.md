@@ -1,11 +1,12 @@
 ### Kaart
 - Nieuw: Kaartthema opslaan per tegelprovider (UnifiedMap)
 - Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
+- Nieuw: Voeg scheidingsteken toe tussen offline en online kaart bronnen
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
-- New: Allow large integers in formulas
-- New: Support more constellations for variables in formulas
+- Nieuw: Sta grote getallen toe in formules
+- Nieuw: Ondersteun meer constellaties voor variabelen in formules
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
