@@ -1,6 +1,7 @@
 ### Karte
 - Neu: Kartendesign pro Kartenanbieter merken (UnifiedMap)
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
