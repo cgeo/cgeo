@@ -1,6 +1,7 @@
 ### Karta
 - Nyhet: Spara kart-tema per leverantör (UnifiedMap)
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
+- New: Add separator between offline and online map sources
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
