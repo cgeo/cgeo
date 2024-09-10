@@ -371,7 +371,7 @@ dependencies {
 
     // Mapsforge Snapshot from official master branch (via https://jitpack.io/#mapsforge/mapsforge)
     String mapsforgeSource = 'com.github.mapsforge.mapsforge'
-    String mapsforgeVersion = 'd866ea2' // master as of 2024-08-15, including rotation & fractional zoom
+    String mapsforgeVersion = '0.18.0' // master as of 2024-08-15, including rotation & fractional zoom
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
     // String mapsforgeSource = 'com.github.cgeo.mapsforge'
