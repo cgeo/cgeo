@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
+- Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
 
 ##
-- Fix: "Manual login" cannot be activated
-- Fix: "Manual login" shown even without stored credentials
-- Fix: Map crash on opening navigation menu
-- Fix: Crash on editing personal note without cache
-- Fix: Certain spoiler images not detected
-- Fix: Current elevation on map shown with fraction
+- Solució: "Inici de sessió manual" no es pot activar
+- Correcció: "Inici de sessió manual" es mostra fins i tot sense les credencials emmagatzemades
+- Correcció: bloqueig del mapa en obrir el menú de navegació
+- Solució: fallada en editar una nota personal sense catxé
+- Correcció: determinades imatges spoilers no detectades
+- Correcció: l'elevació actual al mapa es mostra amb fracció
