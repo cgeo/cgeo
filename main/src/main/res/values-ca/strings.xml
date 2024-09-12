@@ -780,6 +780,7 @@
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
+    <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -1708,6 +1709,7 @@
     <string name="formula_error_missingvarvalue">Falta: %1$s</string>
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
+    <string name="formula_error_numeric_overflow">Desbordament numèric</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sense títol</string>
