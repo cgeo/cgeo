@@ -1418,6 +1418,7 @@
     <string name="auth_register">Create an account</string>
     <string name="auth_connected">Connected</string>
     <string name="auth_unconnected">Not connected yet</string>
+    <string name="auth_unconnected_tap_here">Not connected yet - tap here to authorize</string>
     <string name="auth_connected_as">Connected as %s.\nTap here to update or long tap to remove authorization data from c:geo.</string>
     <string name="auth_dialog_waiting">Waiting for %s…</string>
     <string name="auth_explain_short">The following process will allow <b>c:geo</b> to access %s.</string>

@@ -3,6 +3,7 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.settings.Credentials;
+import cgeo.geocaching.settings.CredentialsPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.SettingsUtils;
@@ -54,7 +55,14 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         final GCConnector connector = GCConnector.getInstance();
         final Credentials credentials = Settings.getCredentials(connector);
         SettingsUtils.setAuthTitle(this, R.string.pref_fakekey_gc_authorization, StringUtils.isNotBlank(credentials.getUsernameRaw()));
-        findPreference(getString(R.string.pref_fakekey_gc_authorization)).setSummary(credentials.isValid() ? getString(R.string.auth_connected_as, credentials.getUserName()) : getString(R.string.auth_unconnected));
+        final CredentialsPreference credentialsPreference = findPreference(getString(R.string.pref_fakekey_gc_authorization));
+        if (credentials.isValid()) {
+            credentialsPreference.setIcon(null);
+            credentialsPreference.setSummary(getString(R.string.auth_connected_as, credentials.getUserName()));
+        } else {
+            credentialsPreference.setIcon(R.drawable.attribute_firstaid);
+            credentialsPreference.setSummary(R.string.auth_unconnected_tap_here);
+        }
         initBasicMemberPreferences();
     }
 

@@ -27,7 +27,8 @@ abstract class AbstractClickablePreference extends Preference {
                 .setTitle(R.string.auth_forget_title)
                 .setPositiveButton(android.R.string.yes, (dialog, id) -> {
                     revokeAuthorization();
-                    setSummary(R.string.auth_unconnected);
+                    setSummary(R.string.auth_unconnected_tap_here);
+                    setIcon(R.drawable.attribute_firstaid);
                 })
                 .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
         builder.create().show();
