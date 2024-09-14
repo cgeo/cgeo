@@ -6,17 +6,13 @@
     app:key="@string/preference_screen_system">
 
     <PreferenceCategory
+        android:key="@string/pref_fakekey_local_filesystem"
         android:title="@string/init_local_file_system"
         app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_persistablefolder_basedir"
             android:title="@string/init_base_directory_description"
             app:iconSpaceReserved="false" />
-        <Preference
-            android:key="@string/pref_persistablefolder_testdir"
-            android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode"
-            app:iconSpaceReserved="false"
-            app:isPreferenceVisible="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

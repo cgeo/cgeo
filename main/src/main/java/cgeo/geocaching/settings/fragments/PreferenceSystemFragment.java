@@ -16,6 +16,9 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+
 public class PreferenceSystemFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
@@ -37,7 +40,18 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
 
-        findPreference(getString(R.string.pref_persistablefolder_testdir)).setVisible(BranchDetectionHelper.isDeveloperBuild());
+        if (BranchDetectionHelper.isDeveloperBuild()) {
+            Preference testDir = findPreference(getString(R.string.pref_persistablefolder_testdir));
+            if (testDir == null) {
+                testDir = new Preference(getActivity());
+                testDir.setKey(getString(R.string.pref_persistablefolder_testdir));
+                testDir.setTitle("Directory for Unit Tests. This setting is only needed for development and only visible in developer builds");
+                testDir.setIconSpaceReserved(false);
+
+                final PreferenceCategory localFileSystem = findPreference(getString(R.string.pref_fakekey_local_filesystem));
+                localFileSystem.addPreference(testDir);
+            }
+        }
 
         findPreference(getString(R.string.pref_debug)).setOnPreferenceChangeListener((pref, newValue) -> {
             Log.setDebug((Boolean) newValue);
