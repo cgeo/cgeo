@@ -94,7 +94,6 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     @Override
     public double getHeading() {
         lastSentDirection = checkNotify(lastSentDirection, direction);
-        Log.iForce("WHERIGO: LocationService dir=" + direction + " [" + this + "]");
         return direction;
     }
 
@@ -105,7 +104,6 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
         }
         final double newLatitude = geoData == null ? 0 : geoData.getLatitude();
         lastSentLatitude = checkNotify(lastSentLatitude, newLatitude);
-        Log.iForce("WHERIGO: LocationService lat=" + newLatitude + " [" + this + "]");
         return newLatitude;
     }
 
@@ -116,7 +114,6 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
         }
         final double newLongitude = geoData == null ? 0 : geoData.getLongitude();
         lastSentLongitude = checkNotify(lastSentLongitude, newLongitude);
-        Log.iForce("WHERIGO: LocationService long=" + newLongitude + " [" + this + "]");
         return newLongitude;
     }
 
@@ -127,7 +124,6 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public int getState() {
-        Log.iForce("WHERIGO: LocationService state:" + this);
         return fixedLocation == null && geoData == null ? LocationService.OFFLINE : LocationService.ONLINE;
     }
 

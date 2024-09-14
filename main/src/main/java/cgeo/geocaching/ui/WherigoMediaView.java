@@ -79,6 +79,9 @@ public class WherigoMediaView extends LinearLayout {
 
         try {
             final byte[] data = dataSupplier.get();
+            if (data == null) {
+                return;
+            }
             FileUtils.writeByteArrayToFile(mediaFile, data);
         } catch (Exception e) {
             Log.e("Problem extracting media data", e);

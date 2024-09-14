@@ -113,7 +113,7 @@ public class QuickLaunchItem extends InfoItem {
         } else if (which == VALUES.MANUAL.id) {
             ShareUtils.openUrl(activity, activity.getString(R.string.manual_link_full));
         } else if (which == VALUES.WHERIGO.id) {
-            WherigoActivity.start(activity, hideNavigationBar);
+            WherigoActivity.start(activity, hideNavigationBar, 0);
         } else if (which == VALUES.FAQ.id) {
             ShareUtils.openUrl(activity, activity.getString(R.string.faq_link_full));
         } else if (which == VALUES.VIEWSETTINGS.id) {

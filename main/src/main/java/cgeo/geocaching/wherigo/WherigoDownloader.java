@@ -11,6 +11,7 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
@@ -96,7 +97,8 @@ public class WherigoDownloader {
         progress.accept("Start Download");
         return download(cguid, outputSupplier, (c, t) -> {
             final int percent = Math.round(((float) c) / t * 100);
-            progress.accept("Downloaded " + c + "/" + t + " (" + percent + "%)");
+
+            progress.accept("Downloaded " + Formatter.formatBytes(c) + "/" + Formatter.formatBytes(t) + " (" + percent + "%)");
         }, cancelFlag);
     }
 
