@@ -373,6 +373,7 @@
     <!-- category local filesystem -->
     <string translatable="false" name="pref_persistablefolder_basedir">persistablefolder_basedir</string>
     <string translatable="false" name="pref_persistablefolder_testdir">persistablefolder_testdir</string>
+    <string translatable="false" name="pref_fakekey_local_filesystem">fakekey_local_filesystem</string>
 
     <!-- category geolocation -->
     <string translatable="false" name="pref_googleplayservices">googleplayservices</string>
