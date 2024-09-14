@@ -1,17 +1,22 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AudioClip;
 import cgeo.geocaching.utils.Log;
+
+import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +39,8 @@ import cz.matejcik.openwig.platform.UI;
 import se.krka.kahlua.vm.LuaClosure;
 
 public class WherigoGame implements UI {
+
+    private static final String LOG_PRAEFIX = "WHERIGOGAME: ";
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
@@ -61,6 +68,10 @@ public class WherigoGame implements UI {
 
     private WherigoGame() {
         //singleton
+    }
+
+    public boolean openOnlyInWherigo() {
+        return false; //TODO: replace with a setting later
     }
 
     public int addListener(final Consumer<NotifyType> listener) {
@@ -99,7 +110,7 @@ public class WherigoGame implements UI {
                 WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(this.cartridgeFile, engine::start));
             }
         } catch (IOException ie) {
-            Log.e("Problem", ie);
+            Log.e(LOG_PRAEFIX + "Problem", ie);
         }
     }
 
@@ -141,6 +152,19 @@ public class WherigoGame implements UI {
         return cartridge == null ? Collections.emptyList() : (List<Task>) cartridge.tasks;
     }
 
+    public List<Thing> getInventory() {
+        return getPlayer() == null ?
+            Collections.emptyList() :
+            WherigoUtils.getListFromContainer(getPlayer().inventory, Thing.class, null);
+    }
+
+    // Items = surroundings = "you see"
+    public List<Thing> getItems() {
+        return cartridge == null ?
+            Collections.emptyList() :
+            WherigoUtils.getListFromContainer(cartridge.currentThings(), Thing.class, null);
+    }
+
     public Player getPlayer() {
         return Engine.instance.player;
     }
@@ -157,7 +181,7 @@ public class WherigoGame implements UI {
 
     public void notifyListeners(final NotifyType type) {
         runOnUi(() -> {
-            Log.d("WHERIGOGAME: notify for " + type);
+            Log.d(LOG_PRAEFIX + "notify for " + type);
             for (Consumer<NotifyType> listener : listeners.values()) {
                 listener.accept(type);
             }
@@ -177,7 +201,7 @@ public class WherigoGame implements UI {
     public void start() {
         this.cartridge = Engine.instance.cartridge;
         isPlaying = true;
-        Log.iForce("WHERIGO pos: " + GP_CONVERTER.from(cartridge.position));
+        Log.iForce(LOG_PRAEFIX + "pos: " + GP_CONVERTER.from(cartridge.position));
         notifyListeners(NotifyType.START);
         WherigoSaveFileHandler.get().loadSaveFinished(); // ends a probable LOAD
         WherigoLocationProvider.get().connect();
@@ -206,13 +230,13 @@ public class WherigoGame implements UI {
 
     @Override
     public void showError(final String s) {
-        Log.w("WHERIGO: ERROR" + s);
+        Log.w(LOG_PRAEFIX + "ERROR" + s);
         setStatusText("ERROR:" + s);
     }
 
     @Override
     public void debugMsg(final String s) {
-        Log.w("WHERIGO: " + s);
+        Log.w(LOG_PRAEFIX + s);
     }
 
     @Override
@@ -222,24 +246,50 @@ public class WherigoGame implements UI {
 
     @Override
     public void pushDialog(final String[] strings, final Media[] media, final String s, final String s1, final LuaClosure luaClosure) {
-        Log.iForce("WHERIGO: pushDialog:" + strings);
+        Log.iForce(LOG_PRAEFIX + "pushDialog:" + Arrays.asList(strings));
         WherigoDialogManager.get().display(new WherigoPushDialogProvider(strings, media, s, s1, luaClosure));
     }
 
     @Override
     public void pushInput(final EventTable input) {
-        Log.iForce("WHERIGO: pushInput:" + input);
+        Log.iForce(LOG_PRAEFIX + "pushInput:" + input);
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
     @Override
-    public void showScreen(final int i, final EventTable eventTable) {
-        Log.iForce("WHERIGO: showScreen:" + i + ":" + eventTable);
+    public void showScreen(final int screenId, final EventTable eventTable) {
+        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + eventTable);
+
+        switch (screenId) {
+            case MAINSCREEN:
+            case INVENTORYSCREEN:
+            case ITEMSCREEN:
+            case LOCATIONSCREEN:
+            case TASKSCREEN:
+                final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
+                if (currentActivity instanceof WherigoActivity) {
+                    return;
+                }
+                if (currentActivity != null && !openOnlyInWherigo()) {
+                    WherigoActivity.start(currentActivity, false, screenId);
+                }
+                break;
+            case DETAILSCREEN:
+                WherigoDialogManager.get().display(new WherigoThingDialogProvider(eventTable));
+                break;
+            default:
+                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + eventTable + "]");
+                // do nothing
+                break;
+        }
+
     }
 
     @Override
-    public void playSound(final byte[] bytes, final String s) {
-        //TODO: later
+    public void playSound(final byte[] data, final String s) {
+
+        Log.iForce(LOG_PRAEFIX + "play sound (type = " + s + ", length=" + data.length + ")");
+        AudioClip.play(data);
     }
 
     @Override
@@ -254,13 +304,13 @@ public class WherigoGame implements UI {
 
     @Override
     public void command(final String cmd) {
-        Log.iForce("WHERIGO: command:" + cmd);
+        Log.iForce(LOG_PRAEFIX + "command:" + cmd);
         //From WhereYouGo
-        if ("StopSound".equals(cmd)) {
+        //if ("StopSound".equals(cmd)) {
          //   UtilsAudio.stopSound();
-        } else if ("Alert".equals(cmd)) {
+        //} else if ("Alert".equals(cmd)) {
          //   UtilsAudio.playBeep(1);
-        }
+        //}
     }
 
 

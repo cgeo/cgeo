@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import se.krka.kahlua.vm.LuaTable;
 
 public final class WherigoUtils {
 
@@ -73,6 +75,26 @@ public final class WherigoUtils {
 
     private WherigoUtils() {
         //no instance
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends EventTable> List<T> getListFromContainer(final LuaTable container, final Class<T> clazz, final Predicate<T> filter) {
+        if (container == null) {
+            return Collections.emptyList();
+        }
+        final List<T> result = new ArrayList<>();
+        Object key = null;
+        while ((key = container.next(key)) != null) {
+            final Object o = container.rawget(key);
+            if (!clazz.isInstance(o)) {
+                continue;
+            }
+            final T t = (T) o;
+            if (filter == null || filter.test(t)) {
+                result.add(t);
+            }
+        }
+        return result;
     }
 
     public static List<Action> getActions(final Thing thing) {

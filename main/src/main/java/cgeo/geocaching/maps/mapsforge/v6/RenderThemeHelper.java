@@ -52,7 +52,6 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
 import org.mapsforge.map.rendertheme.ExternalRenderTheme;
-import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
 import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
@@ -60,6 +59,7 @@ import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 import org.mapsforge.map.rendertheme.XmlThemeResourceProvider;
 import org.mapsforge.map.rendertheme.ZipRenderTheme;
 import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
+import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
 
 
 /**

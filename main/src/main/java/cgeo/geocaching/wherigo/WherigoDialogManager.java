@@ -32,8 +32,6 @@ public class WherigoDialogManager {
         return INSTANCE;
     }
 
-    private final boolean onlyInWherigo = false;
-
     private final Object mutex = new Object();
 
     private IWherigoDialogProvider dialogProvider;
@@ -81,7 +79,7 @@ public class WherigoDialogManager {
                 closeCurrentDialog();
             }
             final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
-            if (currentActivity != null && (!onlyInWherigo || currentActivity instanceof WherigoActivity)) {
+            if (currentActivity != null && (!WherigoGame.get().openOnlyInWherigo() || currentActivity instanceof WherigoActivity)) {
                 return openCurrentDialog(currentActivity);
             }
             return false;

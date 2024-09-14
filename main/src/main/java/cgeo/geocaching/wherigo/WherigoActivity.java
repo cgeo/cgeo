@@ -28,6 +28,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -43,20 +44,21 @@ import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
-import cz.matejcik.openwig.Task;
 import cz.matejcik.openwig.Zone;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
+    private static final String PARAM_WHERIGO_SCREENID = "wherigo_screenId";
 
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
-    private final SimpleItemListModel<EventTable> wherigoThingsModel = new SimpleItemListModel<EventTable>()
+    private final SimpleItemListModel<Pair<WherigoObjectType, EventTable>> wherigoThingsModel = new SimpleItemListModel<Pair<WherigoObjectType, EventTable>>()
         .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-        .setDisplayMapper(t -> {
+        .setDisplayMapper(p -> {
+            final EventTable t = p.second;
             CharSequence msg = WherigoUtils.eventTableToString(t, false);
             if (!WherigoUtils.isVisibleToPlayer(t)) {
                 msg = TextUtils.setSpan(msg, new ForegroundColorSpan(Color.GRAY));
@@ -64,12 +66,12 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             return TextParam.text(msg);
         })
         .setDisplayIconMapper(et -> {
-            final Bitmap bm = WherigoUtils.getEventTableIcon(et);
-            return bm == null ? imageForEventType(et == null ? null : et.getClass()) : ImageParam.drawable(new BitmapDrawable(getResources(), bm));
+            final Bitmap bm = WherigoUtils.getEventTableIcon(et.second);
+            return bm == null ? ImageParam.id(et.first.getIconId()) : ImageParam.drawable(new BitmapDrawable(getResources(), bm));
         });
 
-    public static void start(final Activity parent, final boolean hideNavigationBar) {
-        startInternal(parent, null, hideNavigationBar);
+    public static void start(final Activity parent, final boolean hideNavigationBar, final int itemTypeOpen) {
+        startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_SCREENID, itemTypeOpen), hideNavigationBar);
     }
 
     public static void startForGuid(final Activity parent, final String guid, final boolean hideNavigationBar) {
@@ -86,19 +88,10 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     public WherigoActivity() {
-        this.wherigoThingsModel.activateGrouping(EventTable::getClass)
-            .setGroupDisplayMapper(gi -> TextParam.text(gi.getGroup().getSimpleName()))
-            .setGroupDisplayIconMapper(gi -> WherigoActivity.imageForEventType(gi.getGroup()));
-    }
-
-    private static <T extends EventTable> ImageParam imageForEventType(final Class<T> c) {
-        if (Zone.class.isAssignableFrom(c)) {
-            return ImageParam.id(R.drawable.ic_menu_mapmode);
-        }
-        if (Task.class.isAssignableFrom(c)) {
-            return ImageParam.id(R.drawable.ic_menu_myplaces);
-        }
-        return ImageParam.id(R.drawable.ic_menu_list);
+        this.wherigoThingsModel.activateGrouping(p -> p.first)
+            .setGroupDisplayMapper(gi -> TextParam.text(gi.getGroup().toUserDisplayableString()))
+            .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getGroup().getIconId()))
+            .setGroupComparator((g1, g2) -> g1.ordinal() - g2.ordinal(), true);
     }
 
     @Override
@@ -110,12 +103,14 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
 
+        final int screenId = getIntent().getExtras() == null ? 0 : getIntent().getExtras().getInt(PARAM_WHERIGO_SCREENID);
+
         binding.wherigoThingsList.setModel(wherigoThingsModel);
         wherigoThingsModel.addSingleSelectListener(et -> {
-            if (et.hasEvent("OnClick")) {
-                Engine.callEvent(et, "OnClick", null);
+            if (et.second.hasEvent("OnClick")) {
+                Engine.callEvent(et.second, "OnClick", null);
             } else {
-                WherigoDialogManager.get().display(new WherigoThingDialogProvider(et));
+                WherigoDialogManager.get().display(new WherigoThingDialogProvider(et.second));
             }
         });
 
@@ -126,15 +121,13 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.download.setOnClickListener(v -> downloadCartridge(null));
         binding.map.setOnClickListener(v -> showOnMap());
 
-        if (getIntent().getExtras() != null) {
-            final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
-            if (guid != null) {
-                final List<WherigoUtils.WherigoCartridgeInfo> infos = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), info -> guid.equals(info.guid), false, false);
-                if (infos.isEmpty()) {
-                    downloadCartridge(guid);
-                } else {
-                    SimpleDialog.of(this).setTitle(TextParam.text("Wherigo")).setMessage(TextParam.text("Cartridge already available")).show();
-                }
+        final String guid = getIntent().getExtras() == null ? null : getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
+        if (guid != null) {
+            final List<WherigoUtils.WherigoCartridgeInfo> infos = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), info -> guid.equals(info.guid), false, false);
+            if (infos.isEmpty()) {
+                downloadCartridge(guid);
+            } else {
+                SimpleDialog.of(this).setTitle(TextParam.text("Wherigo")).setMessage(TextParam.text("Cartridge already available")).show();
             }
         }
     }
@@ -234,13 +227,15 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
-        final List<EventTable> allEvents;
-        if (!game.isPlaying()) {
-            allEvents = Collections.emptyList();
-        } else if (Settings.enableFeatureWherigoDebug()) {
-            allEvents = game.getAllEventTables();
-        } else {
-            allEvents = game.getAllEventTables().stream().filter(WherigoUtils::isVisibleToPlayer).collect(Collectors.toList());
+        final List<Pair<WherigoObjectType, EventTable>> allEvents = new ArrayList<>();
+        if (game.isPlaying()) {
+            addMatching(allEvents, game.getZones(), WherigoObjectType.LOCATION);
+            addMatching(allEvents, game.getInventory(), WherigoObjectType.INVENTORY);
+            addMatching(allEvents, game.getTasks(), WherigoObjectType.TASK);
+            addMatching(allEvents, game.getItems(), WherigoObjectType.ITEM);
+            if (Settings.enableFeatureWherigoDebug()) {
+                addMatching(allEvents, game.getThings(), WherigoObjectType.THING);
+            }
         }
         wherigoThingsModel.setItems(allEvents);
 
@@ -249,6 +244,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.stopGame.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
 
+    }
+
+    private static void addMatching(final List<Pair<WherigoObjectType, EventTable>> target, final List<? extends EventTable> source, final WherigoObjectType objType) {
+        final boolean debug = Settings.enableFeatureWherigoDebug();
+        target.addAll(source.stream().filter(et -> debug || WherigoUtils.isVisibleToPlayer(et)).map(et -> new Pair<>(objType, (EventTable) et)).collect(Collectors.toList()));
     }
 
     @Override
