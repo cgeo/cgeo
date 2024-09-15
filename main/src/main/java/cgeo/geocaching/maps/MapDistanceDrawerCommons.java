@@ -7,8 +7,8 @@ package cgeo.geocaching.maps;
  *             distances2
  *
  * - target is only used when in target navigation (opened via cache/waypoint popup)
- * - distances1/distances2 placeholder will be filled with straight distance, routed distance,
- *   individual route length and elevation info (depending on settings and current data)
+ * - distances1/distances2 placeholder will be filled with straight distance, routed distance
+ *   and individual route length (depending on settings and current data)
  * - By tapping on any of the distance fields either straight or routed distance can be supersized.
  *   It gets removed from the distance view containers and displayed in a larger font
  * - Tapping on the supersized window toggles between real distance supersized, straight distance
