@@ -1459,6 +1459,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
+    <string name="cache_status_attended">Vaig assistir</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
