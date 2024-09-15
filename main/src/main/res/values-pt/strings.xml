@@ -1457,6 +1457,7 @@
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
     <string name="cache_status_offline_log">Registo gravado</string>
+    <string name="cache_status_attended">Participei</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
     <string name="cache_status_archived">Arquivada</string>
