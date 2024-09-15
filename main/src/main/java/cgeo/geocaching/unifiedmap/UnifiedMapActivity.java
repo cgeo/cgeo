@@ -260,7 +260,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(this, true) {
             @Override
             protected void onReceive(final Context context, final String geocode) {
-                reloadCachesAndWaypoints(false);
+                handleGeocodeChangedBroadcastReceived(geocode);
             }
         });
 
@@ -483,6 +483,24 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 loadInBackgroundHandler = new LoadInBackgroundHandler(this);
             }
         }
+    }
+
+    private void handleGeocodeChangedBroadcastReceived(final String geocode) {
+        //add info from cache to viewmodel
+        final Geocache changedCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (changedCache == null || changedCache.getCoords() == null) {
+            return;
+        }
+        viewModel.caches.write(caches -> caches.add(changedCache));
+        final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
+        if (cacheWaypoints != null) {
+            for (Waypoint wp : cacheWaypoints) {
+                wp.recalculateVariableDependentValues(changedCache.getVariables());
+            }
+            viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
+        }
+        //call reload logic -> this will reapply filters and such
+        reloadCachesAndWaypoints(false);
     }
 
     private void compactIconModeChanged(final int newValue) {
