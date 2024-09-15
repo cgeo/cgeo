@@ -1,5 +1,5 @@
 ##
-- Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
+- Fix: Missing parametrization for user-defined tileprovider
 
 ##
 - Oplossing: "Handmatige login" kan niet worden geactiveerd
