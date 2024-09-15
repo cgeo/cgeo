@@ -1457,6 +1457,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
+    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
