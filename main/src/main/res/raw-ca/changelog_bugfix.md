@@ -1,5 +1,5 @@
 ##
-- Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
+- Fix: Missing parametrization for user-defined tileprovider
 
 ##
 - Solució: "Inici de sessió manual" no es pot activar
