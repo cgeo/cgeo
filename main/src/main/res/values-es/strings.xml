@@ -1179,6 +1179,7 @@
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
     <string name="cache_status_offline_log">Registro guardado</string>
+    <string name="cache_status_attended">Asistí</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
     <string name="cache_status_archived">Archivado</string>
