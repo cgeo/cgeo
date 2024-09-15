@@ -502,6 +502,7 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
