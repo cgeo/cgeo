@@ -1,5 +1,5 @@
 ##
-- Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
+- Fix: Missing parametrization for user-defined tileprovider
 
 ##
 - Oprava: Nelze aktivovat funkci "Ruční přihlášení"
