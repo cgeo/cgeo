@@ -30,7 +30,7 @@ public class GeoHeightUtils {
             }
         }
         averageAltitude /= (double) altitudeReadings.length;
-        return averageAltitude == 0 || (onlyFullReadings && countReadings < 5) ? "" : Formatter.SEPARATOR + (countReadings < 5 ? "~ " : "") + Units.getDistanceFromMeters((float) averageAltitude);
+        return averageAltitude == 0 || (onlyFullReadings && countReadings < 5) ? "" : Formatter.SEPARATOR + (countReadings < 5 ? "~ " : "") + Units.formatElevation((float) averageAltitude);
     }
 
 

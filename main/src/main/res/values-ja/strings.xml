@@ -1146,6 +1146,7 @@
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
+    <string name="cache_status_attended">参加した</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>

@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Nascondi Sorgenti Mappa</string>
     <string name="settings_hide_tileproviders_summary">Escludi una o più fonti di mappa dalla selezione delle fonti di mappa</string>
     <string name="settings_userDefinedTileProvider">Provider tile definito dall\'utente</string>
-    <string name="settings_userDefinedTileProviderUri">Inserisci l\'Uri completo (senza slash finale) per il provider tile. Assicurati di aver controllato e di rispettare le loro condizioni di utilizzo.</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -1458,6 +1457,7 @@
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
     <string name="cache_status_offline_log">Log salvato</string>
+    <string name="cache_status_attended">Partecipato</string>
     <string name="cache_status_found">Trovato</string>
     <string name="cache_not_status_found">Non trovato</string>
     <string name="cache_status_archived">Archiviato</string>

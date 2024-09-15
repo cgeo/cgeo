@@ -157,7 +157,7 @@ public final class CacheDetailsCreator {
             date = "";
         }
         if (cache.isFound()) {
-            states.add(res.getString(R.string.cache_status_found) + date);
+            states.add(res.getString(cache.isEventCache() ? R.string.cache_status_attended : R.string.cache_status_found) + date);
         } else if (cache.isDNF()) {
             states.add(res.getString(R.string.cache_not_status_found) + date);
         }

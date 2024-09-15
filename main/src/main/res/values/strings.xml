@@ -1638,6 +1638,7 @@
     <string name="ignore_confirm_message">Ignoring a cache means that this cache will never occur again when loading data from geocaching.com. You will only be able to see the cache again by unignoring it on the website.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Saved Log</string>
+    <string name="cache_status_attended">Attended</string>
     <string name="cache_status_found">Found</string>
     <string name="cache_not_status_found">Not Found</string>
     <string name="cache_status_archived">Archived</string>

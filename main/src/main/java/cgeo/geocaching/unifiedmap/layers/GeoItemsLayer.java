@@ -4,6 +4,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.ICoordinates;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
@@ -24,12 +25,15 @@ import java.util.Map;
 
 public class GeoItemsLayer {
 
-    private Map<String, Integer> lastDisplayedGeocaches = new HashMap<>();
-    private Map<String, Integer> lastDisplayedWaypoints = new HashMap<>();
+    private Map<String, String> lastDisplayedGeocaches = new HashMap<>();
+    private Map<String, String> lastDisplayedWaypoints = new HashMap<>();
     private final CollectionDiff<String, String, String> lastDisplayedCacheStars = new CollectionDiff<>(k -> k);
     private boolean lastForceCompactIconMode = false;
 
 
+    private static String getKeyFor(final ICoordinates coords, final CacheMarker marker) {
+        return coords.getCoords() + "-" + marker.hashCode();
+    }
 
     public GeoItemsLayer(final AppCompatActivity activity, final GeoItemLayer<String> layer) {
         final UnifiedMapViewModel viewModel = new ViewModelProvider(activity).get(UnifiedMapViewModel.class);
@@ -37,7 +41,7 @@ public class GeoItemsLayer {
 
         viewModel.caches.observeForRead(activity, caches -> { // this is always executed on UI thread, thus doesn't need to be thread save
 
-            final Map<String, Integer> currentlyDisplayedGeocaches = new HashMap<>();
+            final Map<String, String> currentlyDisplayedGeocaches = new HashMap<>();
 
             final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode();
             if (lastForceCompactIconMode != forceCompactIconMode) {
@@ -47,9 +51,10 @@ public class GeoItemsLayer {
 
             for (Geocache cache : caches) { // Creates a clone to avoid ConcurrentModificationExceptions
                 final CacheMarker cm = forceCompactIconMode ? MapMarkerUtils.getCacheDotMarker(activity.getResources(), cache) : MapMarkerUtils.getCacheMarker(activity.getResources(), cache, null, true);
-                currentlyDisplayedGeocaches.put(cache.getGeocode(), cm.hashCode());
+                final String contentKey = getKeyFor(cache, cm);
+                currentlyDisplayedGeocaches.put(cache.getGeocode(), contentKey);
 
-                if (!lastDisplayedGeocaches.containsKey(cache.getGeocode()) || !lastDisplayedGeocaches.get(cache.getGeocode()).equals(cm.hashCode())) {
+                if (!lastDisplayedGeocaches.containsKey(cache.getGeocode()) || !lastDisplayedGeocaches.get(cache.getGeocode()).equals(contentKey)) {
 
                     layer.put(UnifiedMapViewModel.CACHE_KEY_PREFIX + cache.getGeocode(), GeoPrimitive.createMarker(cache.getCoords(),
                         GeoIcon.builder()
@@ -88,13 +93,14 @@ public class GeoItemsLayer {
 
         viewModel.waypoints.observeForRead(activity, waypoints -> { // this is always executed on UI thread, thus doesn't need to be thread save
 
-            final Map<String, Integer> currentlyDisplayedWaypoints = new HashMap<>();
+            final Map<String, String> currentlyDisplayedWaypoints = new HashMap<>();
 
-            for (Waypoint waypoint : waypoints) { 
+            for (Waypoint waypoint : waypoints) {
                 final CacheMarker cm = lastForceCompactIconMode ? MapMarkerUtils.getWaypointDotMarker(activity.getResources(), waypoint) : MapMarkerUtils.getWaypointMarker(activity.getResources(), waypoint, true, true);
-                currentlyDisplayedWaypoints.put(waypoint.getFullGpxId(), cm.hashCode());
+                final String contentKey = getKeyFor(waypoint, cm);
+                currentlyDisplayedWaypoints.put(waypoint.getFullGpxId(), contentKey);
 
-                if (!lastDisplayedWaypoints.containsKey(waypoint.getFullGpxId()) || !lastDisplayedWaypoints.get(waypoint.getFullGpxId()).equals(cm.hashCode())) {
+                if (!lastDisplayedWaypoints.containsKey(waypoint.getFullGpxId()) || !lastDisplayedWaypoints.get(waypoint.getFullGpxId()).equals(contentKey)) {
 
                     layer.put(UnifiedMapViewModel.WAYPOINT_KEY_PREFIX + waypoint.getFullGpxId(), GeoPrimitive.createMarker(waypoint.getCoords(),
                             GeoIcon.builder()

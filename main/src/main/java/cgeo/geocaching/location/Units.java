@@ -2,6 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.settings.Settings;
 
+import java.text.NumberFormat;
 import java.util.Locale;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -26,11 +27,10 @@ public class Units {
         }
     }
 
-    /* formats elevation in m according to useImperialUnits() setting */
-    public static String formatElevation(final float elevationInM) {
-        // Float.isNaN() is equivalent to Routing.NO_ELEVATION_AVAILABLE
-        final double temp = Float.isNaN(elevationInM) ? Double.NaN : Settings.useImperialUnits() ? elevationInM * IConversion.METERS_TO_FEET : elevationInM;
-        return Double.isNaN(temp) ? "" : String.format(Locale.getDefault(), "%.0f", temp) + (Settings.useImperialUnits() ? " ft" : " m");
+    /** formats given elevation in meters or feet, no fractions, no kilometers/miles */
+    public static String formatElevation(final float meters) {
+        final NumberFormat nf = NumberFormat.getIntegerInstance(Locale.getDefault());
+        return Float.isNaN(meters) ? "" : Settings.useImperialUnits() ? nf.format(meters * IConversion.METERS_TO_FEET) + " ft" : nf.format(meters) + " m";
     }
 
     public static float generateSmartRoundedAverageDistance(final float newDistance, final float lastDistance) {

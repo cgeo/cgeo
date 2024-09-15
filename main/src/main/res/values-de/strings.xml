@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
     <string name="settings_hide_tileproviders_summary">Eine oder mehrere Kartenquellen aus der Kartenauswahl ausblenden</string>
     <string name="settings_userDefinedTileProvider">Benutzerdefinierter Kartenabieter</string>
-    <string name="settings_userDefinedTileProviderUri">Gib den vollständigen Uri (ohne abschließenden Schrägstrich) für den Kartenanbieter ein. Stelle sicher, dass du dessen Benutzungsbedingungen geprüft hast und einhältst.</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
     <string name="settings_title_data_dir_usage">Geocache-Datenordner (%1$s genutzt)</string>
     <string name="calculate_dataDir_title">Geocache-Datennutzung</string>
@@ -1458,6 +1457,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
+    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
