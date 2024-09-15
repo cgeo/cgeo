@@ -977,6 +977,7 @@
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log gemt</string>
+    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
     <string name="cache_status_archived">Arkiveret</string>

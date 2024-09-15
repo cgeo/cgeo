@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
-    <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till panelleverantör. Se till att du har kontrollerat och följt deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -1458,6 +1457,7 @@
     <string name="ignore_confirm_message">Genom att ignorera en cache så kommer den aldrig mer visas när data laddas ned från geocaching.com. Det enda sätt att visa den igen är genom att ändra inställningar på cachens webbsida.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Sparad logg</string>
+    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Hittad</string>
     <string name="cache_not_status_found">Ej hittad</string>
     <string name="cache_status_archived">Arkiverad</string>

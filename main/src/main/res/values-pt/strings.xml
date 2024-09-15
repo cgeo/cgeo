@@ -779,7 +779,6 @@
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
-    <string name="settings_userDefinedTileProviderUri">Insira o Uri completo (sem barra à direita) para o fornecedor de blocos de mapa. Certifique-se que verificou e obedece às suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -1458,6 +1457,7 @@
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
     <string name="cache_status_offline_log">Registo gravado</string>
+    <string name="cache_status_attended">Participei</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
     <string name="cache_status_archived">Arquivada</string>

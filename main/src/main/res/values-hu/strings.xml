@@ -780,6 +780,7 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
+    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>

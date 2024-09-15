@@ -1329,6 +1329,7 @@
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Uložený log</string>
+    <string name="cache_status_attended">Zúčastnil/a sa</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
     <string name="cache_status_archived">Archivovaná</string>

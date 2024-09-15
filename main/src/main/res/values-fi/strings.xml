@@ -1412,6 +1412,7 @@
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
+    <string name="cache_status_attended">Osallistui</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
     <string name="cache_status_archived">Arkistoitu</string>

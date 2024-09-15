@@ -791,7 +791,6 @@
     <string name="settings_hide_tileproviders_title">Скрыть источники карт</string>
     <string name="settings_hide_tileproviders_summary">Исключить один или несколько источников карты из выбора источника карты</string>
     <string name="settings_userDefinedTileProvider">Ваш поставщик карт</string>
-    <string name="settings_userDefinedTileProviderUri">Введите полный URL-адрес (без косой черты в конце) поставщика карт. Убедитесь, что вы проверили и соблюдаете условия их использования.</string>
     <string name="settings_title_data_dir">Папка данных тайников</string>
     <string name="settings_title_data_dir_usage">Папка данных тайников (сейчас %1$s)</string>
     <string name="calculate_dataDir_title">Использование данных тайниками</string>
@@ -1483,6 +1482,7 @@
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
+    <string name="cache_status_attended">Участвовал</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
     <string name="cache_status_archived">В архиве</string>

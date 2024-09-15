@@ -1239,6 +1239,7 @@
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
+    <string name="cache_status_attended">Συμμετείχα</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>

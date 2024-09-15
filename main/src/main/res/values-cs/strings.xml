@@ -791,7 +791,7 @@
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
-    <string name="settings_userDefinedTileProviderUri">Zadejte úplnou adresu URL (bez koncového lomítka) poskytovatele dlaždic. Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
+    <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -1486,6 +1486,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
+    <string name="cache_status_attended">Účastnil se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
