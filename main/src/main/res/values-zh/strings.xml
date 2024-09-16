@@ -293,7 +293,6 @@
     <string name="caches_sort_vote">投票 (个人评级)</string>
     <string name="caches_sort_inventory">库存计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
-    <string name="caches_sort_date_logged">记录日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_storage">存储在设备上的日期</string>
@@ -645,7 +644,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
-    <string name="cache_status_attended">已参加</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
@@ -718,4 +716,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
