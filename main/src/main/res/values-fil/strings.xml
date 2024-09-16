@@ -239,7 +239,6 @@
     <string name="caches_sort_vote">Iboto (Ang Sariling Marka)</string>
     <string name="caches_sort_inventory">Ang bilang ng pag-iimbentaryo</string>
     <string name="caches_sort_date_hidden">Ang Petsa ay Nakatago</string>
-    <string name="caches_sort_date_logged">Ang Pagtatala sa Petsa</string>
     <string name="caches_sort_finds">Ang paghahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ng pag-iimbak sa aparato</string>
@@ -586,7 +585,6 @@
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
     <string name="cache_status_archived">Ang naka-archive</string>
@@ -1115,4 +1113,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
