@@ -320,7 +320,6 @@
     <string name="caches_sort_vote">Saját értékelés</string>
     <string name="caches_sort_inventory">Utazók száma</string>
     <string name="caches_sort_date_hidden">Rejtés dátuma</string>
-    <string name="caches_sort_date_logged">Logolás dátuma</string>
     <string name="caches_sort_finds">Találatok száma</string>
     <string name="caches_sort_state">Állapot</string>
     <string name="caches_sort_storage">Mentés dátuma</string>
@@ -780,7 +779,6 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
-    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -889,7 +887,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -1336,4 +1333,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
