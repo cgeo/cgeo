@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
-- Fix: Bumping white space in settings - system
+- Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
+- Correcció: els waypoints o els catxés modificats no s'actualitzen al mapa (UnifiedMap)
+- Correcció: El catxé trobat no està marcat com a trobat al mapa (UnifiedMap)
+- Correcció: l'elevació s'està escalant a quilòmetres/milles a la pantalla d'inici
+- Correcció: els esdeveniments assistits es mostren com a "trobats"
+- Correcció: augment de l'espai en blanc a la configuració - sistema
 
 ##
 - Solució: "Inici de sessió manual" no es pot activar
