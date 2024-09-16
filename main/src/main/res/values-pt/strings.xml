@@ -416,7 +416,7 @@
     <string name="caches_sort_vote">Votos (avaliação própria)</string>
     <string name="caches_sort_inventory">Nº de itens no Inventário</string>
     <string name="caches_sort_date_hidden">Data de colocação</string>
-    <string name="caches_sort_date_logged">Data do registo</string>
+    <string name="caches_sort_date_logged">Data de registo (Próprio Registo)</string>
     <string name="caches_sort_finds">Nº de vezes encontrada</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Data de gravação no dispositivo</string>
@@ -1457,7 +1457,6 @@
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
     <string name="cache_status_offline_log">Registo gravado</string>
-    <string name="cache_status_attended">Participei</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
     <string name="cache_status_archived">Arquivada</string>
@@ -1773,7 +1772,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1802,7 +1801,7 @@
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
     <string name="search_finder_button">Pesquisa por quem encontrou</string>
-    <string name="search_filter">Filtrar</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
@@ -2947,4 +2946,14 @@
         <item quantity="one">%d mensagem não lida no centro de mensagens</item>
         <item quantity="other">%d mensagens não lidas no centro de mensagens</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Ver a base de dados</string>
+    <string name="dbi_select_title">(Selecionar tabela)</string>
+    <string name="dbi_columnproperties_title">Propriedades da coluna</string>
+    <string name="dbi_columnproperties_message">Campo: %1$s\nTipo: %2$s\nArmazenamento: %3$s</string>
+    <string name="dbi_edit_title">Editar \"%1$s\" da linha %2$d\"</string>
+    <string name="dbi_edit_ok">Campo actualizado</string>
+    <string name="dbi_edit_error">Erro ao actualizar o campo</string>
+    <string name="dbi_edit_error_pkfield">"%s\" faz parte da chave primária, não pode ser editado"</string>
+    <string name="dbi_search_title">Pesquisar por</string>
 </resources>
