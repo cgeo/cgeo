@@ -23,6 +23,7 @@ public final class CheckerUtils {
             new GeoChecker("certitudes.org/certitude?"),
             new GeoChecker("gc-apps.com/checker/"),
             new GeoChecker("geocheck.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
+            new GeoChecker("geocheck.eu.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
             new GeoChecker("geochecker.com/index.php?", "&lastcoords=", GeopointFormatter.Format.GEOCHECKERCOM),
             new GeoChecker("geochecker.gps-cache.de/check.aspx?"),
             new GeoChecker("geotjek.dk/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
