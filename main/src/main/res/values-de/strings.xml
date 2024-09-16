@@ -416,7 +416,7 @@
     <string name="caches_sort_vote">Eigene Bewertung</string>
     <string name="caches_sort_inventory">Inventaranzahl</string>
     <string name="caches_sort_date_hidden">Versteckdatum</string>
-    <string name="caches_sort_date_logged">Eigenes Log-Datum</string>
+    <string name="caches_sort_date_logged">Logdatum (Eigener Log)</string>
     <string name="caches_sort_finds">Funde</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Speicherdatum</string>
@@ -1457,7 +1457,6 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Habe teilgenommen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1708,6 +1707,7 @@
     <string name="formula_error_missingvarvalue">Fehlend: %1$s</string>
     <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
     <string name="formula_error_empty">Leere Formel</string>
+    <string name="formula_error_numeric_overflow">Numerischer Überlauf</string>
     <string name="formula_error_other">Fehler: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Ohne Titel</string>
@@ -2947,4 +2947,14 @@
         <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
         <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Datenbank anzeigen</string>
+    <string name="dbi_select_title">(Tabelle auswählen)</string>
+    <string name="dbi_columnproperties_title">Spalteneigenschaften</string>
+    <string name="dbi_columnproperties_message">Feld: %1$s\nTyp: %2$s\nSpeicher: %3$s</string>
+    <string name="dbi_edit_title">Bearbeite \"%1$s\" der Zeile %2$d\"</string>
+    <string name="dbi_edit_ok">Feld aktualisiert</string>
+    <string name="dbi_edit_error">Fehler beim Aktualisieren des Feldes</string>
+    <string name="dbi_edit_error_pkfield">"%s\" ist Teil des Primärschlüssels, kann nicht bearbeitet werden"</string>
+    <string name="dbi_search_title">Suche nach</string>
 </resources>
