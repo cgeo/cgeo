@@ -1,9 +1,9 @@
 ##
 - Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
+- Fix: Redigerade vägpunkter eller cacher uppdateras inte på kartan (UnifiedMap)
+- Fix: Hittad cache inte markerad som hittad på kartan (UnifiedMap)
+- Fix: Höjden skalas till kilometer/miles på startskärmen
+- Fix: Besökta evenemang visas som "hittad"
 - Fix: Bumping white space in settings - system
 
 ##
