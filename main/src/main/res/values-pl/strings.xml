@@ -420,7 +420,7 @@
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
     <string name="caches_sort_inventory">Liczebność inwentarza</string>
     <string name="caches_sort_date_hidden">Data ukrycia</string>
-    <string name="caches_sort_date_logged">Data znalezienia</string>
+    <string name="caches_sort_date_logged">Data zalogowania (własny wpis)</string>
     <string name="caches_sort_finds">Ile razy znaleziona</string>
     <string name="caches_sort_state">Stan</string>
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
@@ -791,6 +791,7 @@
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
+    <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -1485,7 +1486,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1738,6 +1739,7 @@
     <string name="formula_error_missingvarvalue">Brakuje: %1$s</string>
     <string name="formula_error_cyclicdependency">Cykl: %1$s</string>
     <string name="formula_error_empty">Pusta formuła</string>
+    <string name="formula_error_numeric_overflow">Przepełnienie numeryczne</string>
     <string name="formula_error_other">Błąd: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Bez nazwy</string>
@@ -3009,4 +3011,14 @@
         <item quantity="many">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
         <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Zobacz bazę danych</string>
+    <string name="dbi_select_title">(Zaznacz tabelę)</string>
+    <string name="dbi_columnproperties_title">Właściwości kolumny</string>
+    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nMagazynowanie: %3$s</string>
+    <string name="dbi_edit_title">Edytuj \"%1$s\" wiersza %2$d\"</string>
+    <string name="dbi_edit_ok">Pole zaktualizowane</string>
+    <string name="dbi_edit_error">Błąd podczas aktualizacji pola</string>
+    <string name="dbi_edit_error_pkfield">"%s\" jest częścią klucza głównego, nie można edytować"</string>
+    <string name="dbi_search_title">Szukaj</string>
 </resources>
