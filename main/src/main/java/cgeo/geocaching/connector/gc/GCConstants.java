@@ -89,8 +89,8 @@ public final class GCConstants {
     static final Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/(?:track|hide)\\/details\\.aspx\\?(guid|TB)=([0-9a-zA-Z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     static final Pattern PATTERN_WATCHLIST = Pattern.compile("data-cacheonwatchlist=\"True\"");
     static final Pattern PATTERN_RELATED_WEB_PAGE = Pattern.compile("ctl00_ContentBody_uxCacheUrl.*? href=\"(.*?)\">");
-    static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z]*)?/([^/]*)");
-    static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*)(_l|_d|_sm|_t)?(\\." + IMAGE_FORMATS + ")");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z/]*)?/([^/]*)");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*?)(?:_l|_d|_sm|_t)?(\\." + IMAGE_FORMATS + ")");
     static final Pattern PATTERN_BACKGROUND_IMAGE = Pattern.compile("<body background=\"(.+?)\"");
     static final String PATTERN_GC_CHECKER = "ctl00_ContentBody_lblSolutionChecker";
 
