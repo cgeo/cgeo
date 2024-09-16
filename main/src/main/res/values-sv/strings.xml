@@ -416,7 +416,7 @@
     <string name="caches_sort_vote">Betyg (eget)</string>
     <string name="caches_sort_inventory">Antal trackable</string>
     <string name="caches_sort_date_hidden">Datum för utplacering</string>
-    <string name="caches_sort_date_logged">Datum för senaste log</string>
+    <string name="caches_sort_date_logged">Logg-datum (egen logg)</string>
     <string name="caches_sort_finds">Antal som hittat</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Tid för sparandet i enheten</string>
@@ -1802,7 +1802,7 @@
     <string name="search_finder">Hittad av</string>
     <string name="search_finder_prefill">Vem som hittat</string>
     <string name="search_finder_button">Sök baserat på hittare</string>
-    <string name="search_filter">Filtrera</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
@@ -2947,4 +2947,14 @@
         <item quantity="one">%d oläst meddelande i meddelandecentret</item>
         <item quantity="other">%d olästa meddelanden i meddelandecentret</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Visa databas</string>
+    <string name="dbi_select_title">(Välj tabell)</string>
+    <string name="dbi_columnproperties_title">Kolumn-egenskaper</string>
+    <string name="dbi_columnproperties_message">Fält: %1$s\nTyp: %2$s\nLagring: %3$s</string>
+    <string name="dbi_edit_title">Redigera \"%1$s\" av rad %2$d\"</string>
+    <string name="dbi_edit_ok">Fält uppdaterat</string>
+    <string name="dbi_edit_error">Fel vid uppdatering av fält</string>
+    <string name="dbi_edit_error_pkfield">"%s\" är del av primär nyckel, kan inte redigeras"</string>
+    <string name="dbi_search_title">Sök efter</string>
 </resources>
