@@ -198,7 +198,6 @@
     <string name="caches_sort_rating">Einkunnagjöf</string>
     <string name="caches_sort_vote">Gefa einkunn</string>
     <string name="caches_sort_date_hidden">Hvenær komið fyrir</string>
-    <string name="caches_sort_date_logged">Hvenær skráð</string>
     <string name="caches_sort_finds">Fundir</string>
     <string name="caches_sort_state">Staða</string>
     <string name="caches_sort_storage">Hvenær vistað í tæki</string>
@@ -425,7 +424,6 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
-    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -705,4 +703,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
