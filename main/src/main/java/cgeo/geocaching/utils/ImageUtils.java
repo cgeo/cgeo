@@ -91,7 +91,7 @@ public final class ImageUtils {
     private static final String[] NO_EXTERNAL = {"geocheck.org"};
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
-    private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)(\\?|#|$|\\)|])\\S*)");
+    private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)((\\?|#|$|\\)|])\\S*)?)");
     static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z/]*)?/([^/]*)");
     static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*?)(?:_l|_d|_sm|_t)?(\\.jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)");
 
