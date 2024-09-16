@@ -417,7 +417,7 @@
     <string name="caches_sort_vote">Vota (valoració pròpia)</string>
     <string name="caches_sort_inventory">Recompte d\'inventari</string>
     <string name="caches_sort_date_hidden">Data d\'amagat</string>
-    <string name="caches_sort_date_logged">Data de registre</string>
+    <string name="caches_sort_date_logged">Data de registre (Registre propi)</string>
     <string name="caches_sort_finds">Trobats</string>
     <string name="caches_sort_state">Estat</string>
     <string name="caches_sort_storage">Data d\'emmagatzemat al dispositiu</string>
@@ -1459,7 +1459,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">Vaig assistir</string>
+    <string name="cache_status_attended">He assistit</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1710,6 +1710,7 @@
     <string name="formula_error_missingvarvalue">Falta: %1$s</string>
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
+    <string name="formula_error_numeric_overflow">Desbordament numèric</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Sense títol</string>
@@ -1775,7 +1776,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
+    <string name="google_maps_option_group_theme">Opcions del Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
@@ -2950,4 +2951,14 @@
         <item quantity="one">%d missatge no llegit al centre de missatges</item>
         <item quantity="other">%d missatges no llegits al centre de missatges</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Veure base de dades</string>
+    <string name="dbi_select_title">(Selecciona la taula)</string>
+    <string name="dbi_columnproperties_title">Propietats de la columna</string>
+    <string name="dbi_columnproperties_message">Camp: %1$s\nTipus: %2$s\nEmmagatzematge: %3$s</string>
+    <string name="dbi_edit_title">Edita \"%1$s\" de la fila %2$d</string>
+    <string name="dbi_edit_ok">Camp actualitzat</string>
+    <string name="dbi_edit_error">Error en actualitzar el camp</string>
+    <string name="dbi_edit_error_pkfield">"%s\" forma part de la clau primària, no es pot editar"</string>
+    <string name="dbi_search_title">Buscar per</string>
 </resources>
