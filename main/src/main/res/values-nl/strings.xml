@@ -416,7 +416,7 @@
     <string name="caches_sort_vote">Stemmen (eigen waardering)</string>
     <string name="caches_sort_inventory">Aantal items</string>
     <string name="caches_sort_date_hidden">Datum geplaatst</string>
-    <string name="caches_sort_date_logged">Datum gelogd</string>
+    <string name="caches_sort_date_logged">Datum gelogd (eigen log)</string>
     <string name="caches_sort_finds">Aantal keer gevonden</string>
     <string name="caches_sort_state">Selectie omkeren</string>
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
@@ -1458,7 +1458,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1709,6 +1709,7 @@
     <string name="formula_error_missingvarvalue">Missend: %1$s</string>
     <string name="formula_error_cyclicdependency">Cyclus: %1$s</string>
     <string name="formula_error_empty">Lege Formule</string>
+    <string name="formula_error_numeric_overflow">Numerieke overloop</string>
     <string name="formula_error_other">Fout: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Naamloos</string>
@@ -1774,7 +1775,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2948,4 +2949,14 @@
         <item quantity="one">%d ongelezen bericht in berichtencentrum</item>
         <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Bekijk database</string>
+    <string name="dbi_select_title">(Selecteer tabel)</string>
+    <string name="dbi_columnproperties_title">Kolom-eigenschappen</string>
+    <string name="dbi_columnproperties_message">Veld: %1$s\nType: %2$s\nOpslag: %3$s</string>
+    <string name="dbi_edit_title">Bewerk \"%1$s\" van rij %2$d\"</string>
+    <string name="dbi_edit_ok">Veld bijgewerkt</string>
+    <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
+    <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
+    <string name="dbi_search_title">Zoek naar</string>
 </resources>
