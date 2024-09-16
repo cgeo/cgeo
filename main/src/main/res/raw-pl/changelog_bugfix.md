@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
-- Fix: Bumping white space in settings - system
+- Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
+- Naprawiono: Edytowane punkty nawigacji lub skrytki nie są aktualizowane na mapie (UnifiedMap)
+- Naprawiono: Znaleziona skrytka nie była oznaczona jako znaleziona na mapie (UnifiedMap)
+- Naprawiono: Wysokość skalowana do kilometrów/mil na ekranie głównym
+- Naprawiono: Uczestnictwo w wydarzeniach było pokazywane jako „Znaleziono”
+- Naprawiono: Zwiększenie odstypów w Ustawienia - System
 
 ##
 - Naprawiono: „Logowanie ręczne” nie może być aktywowane
