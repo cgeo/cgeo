@@ -420,7 +420,7 @@
     <string name="caches_sort_vote">Hlasy (vlastní hodnocení)</string>
     <string name="caches_sort_inventory">Počet položek v inventáři</string>
     <string name="caches_sort_date_hidden">Datum schování</string>
-    <string name="caches_sort_date_logged">Datum zalogování</string>
+    <string name="caches_sort_date_logged">Datum zápisu (vlastní záznam)</string>
     <string name="caches_sort_finds">Počet nálezů</string>
     <string name="caches_sort_state">Stav</string>
     <string name="caches_sort_storage">Datum uložení do zařízení</string>
@@ -1486,7 +1486,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Účastnil se</string>
+    <string name="cache_status_attended">Zúčastnil jsem se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -1739,6 +1739,7 @@
     <string name="formula_error_missingvarvalue">Chybí: %1$s</string>
     <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
     <string name="formula_error_empty">Prázdný vzorec</string>
+    <string name="formula_error_numeric_overflow">Číselný přepad</string>
     <string name="formula_error_other">Chyba: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Bez názvu</string>
@@ -3010,4 +3011,14 @@
         <item quantity="many">%d nepřečtené zprávy v centru zpráv</item>
         <item quantity="other">%d nepřečtených zpráv v centru zpráv</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Zobrazit databázi</string>
+    <string name="dbi_select_title">(Vyber tabulku)</string>
+    <string name="dbi_columnproperties_title">Vlastnosti sloupce</string>
+    <string name="dbi_columnproperties_message">Pole: %1$s\nTyp: %2$s\nÚložiště: %3$s</string>
+    <string name="dbi_edit_title">Upravit „%1$s“ řádku „%2$d“</string>
+    <string name="dbi_edit_ok">Pole aktualizováno</string>
+    <string name="dbi_edit_error">Chyba při aktualizaci pole</string>
+    <string name="dbi_edit_error_pkfield">"%s\" je součást primárního klíče, nelze ho upravit"</string>
+    <string name="dbi_search_title">Hledat</string>
 </resources>
