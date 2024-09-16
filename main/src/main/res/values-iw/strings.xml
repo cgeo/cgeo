@@ -258,7 +258,6 @@
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
     <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
-    <string name="caches_sort_date_logged">תאריך מציאה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
     <string name="caches_sort_storage">תאריך בו נשמר במכשיר</string>
@@ -382,7 +381,6 @@
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>
-    <string name="cache_status_attended">השתתף</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
@@ -474,4 +472,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
