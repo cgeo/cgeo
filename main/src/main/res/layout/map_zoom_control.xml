@@ -13,8 +13,8 @@
         android:layout_marginBottom="6dp">
         <ImageButton
             android:id="@+id/map_followmylocation_btn"
-            android:src="@drawable/map_quick_settings"
-            style="@style/map_quicksettingsbutton"
+            android:src="@drawable/map_followmylocation_btn"
+            style="@style/map_overlaybutton_bg"
             android:tooltipText="@string/menu_centerposition"
             android:contentDescription="@string/menu_centerposition"/>
     </RelativeLayout>
@@ -31,18 +31,21 @@
         android:layout_marginBottom="18dp">
         <ImageButton
             android:id="@+id/map_zoomin"
-            android:src="@drawable/map_zoomin"
+            android:src="@drawable/map_zoomin_btn"
             android:contentDescription="@string/zoom_in"
-            style="@style/map_zoombutton" />
+            style="@style/map_overlaybutton"
+            android:background="@drawable/map_button_background_top" />
         <ImageButton
             android:id="@+id/map_zoomdivider"
             android:src="@drawable/map_zoom_divider"
             android:layout_height="1dp"
-            style="@style/map_zoombutton" />
+            style="@style/map_overlaybutton"
+            android:background="@drawable/mark_transparent" />
         <ImageButton
             android:id="@+id/map_zoomout"
-            android:src="@drawable/map_zoomout"
+            android:src="@drawable/map_zoomout_btn"
             android:contentDescription="@string/zoom_out"
-            style="@style/map_zoombutton" />
+            style="@style/map_overlaybutton"
+            android:background="@drawable/map_button_background_bottom" />
     </LinearLayout>
 </RelativeLayout>
