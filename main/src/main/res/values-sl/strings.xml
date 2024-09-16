@@ -264,7 +264,6 @@
     <string name="caches_sort_vote">Mojih glasovih</string>
     <string name="caches_sort_inventory">Številu sledljivčkov</string>
     <string name="caches_sort_date_hidden">Datum objave</string>
-    <string name="caches_sort_date_logged">Datum zapisa</string>
     <string name="caches_sort_finds">Število najdb</string>
     <string name="caches_sort_state">Država</string>
     <string name="caches_sort_storage">Datum shranjevanja na napravo</string>
@@ -558,7 +557,6 @@
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
-    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
@@ -1047,4 +1045,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
