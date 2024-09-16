@@ -416,7 +416,7 @@
     <string name="caches_sort_vote">Votre évaluation personnelle</string>
     <string name="caches_sort_inventory">Nombre d\'objets dans l\'inventaire</string>
     <string name="caches_sort_date_hidden">Date de création</string>
-    <string name="caches_sort_date_logged">Date de visite</string>
+    <string name="caches_sort_date_logged">Date loguée (dans ses propores logs)</string>
     <string name="caches_sort_finds">Trouvées</string>
     <string name="caches_sort_state">État</string>
     <string name="caches_sort_storage">Date d\'enregistrement dans l\'appareil</string>
@@ -1452,7 +1452,6 @@
     <string name="ignore_confirm_message">Ignorer une cache signifie que cette cache n\'apparaîtra plus lors du chargement de données depuis geocaching.com. Pour voir à nouveau cette cache : réactivez-la sur le site Web.</string>
     <string name="cache_status">Statut</string>
     <string name="cache_status_offline_log">Visite enregistrée hors-ligne</string>
-    <string name="cache_status_attended">A participé</string>
     <string name="cache_status_found">Trouvée</string>
     <string name="cache_not_status_found">Non trouvée</string>
     <string name="cache_status_archived">Archivée</string>
@@ -2942,4 +2941,14 @@
         <item quantity="one">%d message non lus dans le centre de message</item>
         <item quantity="other">%d messages non lus dans le centre de message</item>
     </plurals>
+    <!-- db inspection -->
+    <string name="view_database">Voir la base de données</string>
+    <string name="dbi_select_title">(Sélectionnez la table)</string>
+    <string name="dbi_columnproperties_title">Propriétés de la colonne</string>
+    <string name="dbi_columnproperties_message">Champ : %1$s\nType : %2$s\nStockage : %3$s</string>
+    <string name="dbi_edit_title">Modifier \"%1$s\" de la ligne %2$d\"</string>
+    <string name="dbi_edit_ok">Champ mis à jour</string>
+    <string name="dbi_edit_error">Erreur lors de la mise à jour du champ</string>
+    <string name="dbi_edit_error_pkfield">"%s\" fait partie de la clé primaire, ne peut pas être modifié"</string>
+    <string name="dbi_search_title">Rechercher</string>
 </resources>
