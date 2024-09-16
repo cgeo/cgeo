@@ -235,7 +235,6 @@
     <string name="caches_sort_vote">Botar (Kaugalingon na Grado)</string>
     <string name="caches_sort_inventory">Ihap sa imbentaryo</string>
     <string name="caches_sort_date_hidden">Ang gitagoan na petsa</string>
-    <string name="caches_sort_date_logged">Petsa na nisulod</string>
     <string name="caches_sort_finds">Napangita</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Petsa na nahan-ay sa butang</string>
@@ -558,7 +557,6 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_status_attended">Nitambong</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_status_archived">Ge-arkibo</string>
@@ -1081,4 +1079,5 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- db inspection -->
 </resources>
