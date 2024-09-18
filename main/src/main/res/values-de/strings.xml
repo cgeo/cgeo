@@ -779,6 +779,7 @@
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
     <string name="settings_hide_tileproviders_summary">Eine oder mehrere Kartenquellen aus der Kartenauswahl ausblenden</string>
     <string name="settings_userDefinedTileProvider">Benutzerdefinierter Kartenabieter</string>
+    <string name="settings_userDefinedTileProviderUri">Adresse (ohne abschließenden Schrägstrich) zum Kartenserver eingeben oder vollständige Adresse mit Parametern {X}, {Y} und {Z}. Stelle sicher, dass Du die Nutzungsbedingungen geprüft hast und einhältst.</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
     <string name="settings_title_data_dir_usage">Geocache-Datenordner (%1$s genutzt)</string>
     <string name="calculate_dataDir_title">Geocache-Datennutzung</string>
