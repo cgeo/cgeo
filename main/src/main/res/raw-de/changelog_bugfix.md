@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
-- Fix: Bumping white space in settings - system
+- Korrektur: Fehlende Parametrisierung für benutzerdefinierten Kartenanbieter
+- Korrektur: Veränderte Wegpunkte oder Caches werden auf der Karte nicht aktualisiert (UnifiedMap)
+- Fix: Gefundener Cache wird auf der Karte nicht als gefunden markiert (UnifiedMap)
+- Korrektur: Höhe wird auf dem Startbildschirn in Kilometern/Meilen angezeigt
+- Korrektur: Eventteilnahmen werden als "gefunden" angezeigt
+- Korrektur: Hüpfender Freiraum in Einstellungen - System
 
 ##
 - Korrektur: "Manuelle Anmeldung" kann nicht aktiviert werden
