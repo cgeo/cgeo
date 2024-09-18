@@ -1,13 +1,13 @@
 ### Karte
 - Neu: Kartendesign pro Kartenanbieter merken (UnifiedMap)
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
-- New: Add separator between offline and online map sources
+- Neu: Trennlinie zwischen Offline-und Online-Kartenquellen
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
-- New: Allow large integers in formulas
-- New: Support more constellations for variables in formulas
-- New: Detect geocheck.EU.org checker
+- Neu: Erlaube große Ganzzahlen in Formeln
+- Neu: Unterstütze mehr Konstellationen für Variablen in Formeln
+- Neu: Geocheck.EU.org Geochecker
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
