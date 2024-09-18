@@ -428,10 +428,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-
-        // enable or disable gestures for rotating the map
-        Parameters.ROTATION_GESTURE = (mapRotation == Settings.MAPROTATION_MANUAL);
-
         repaintRotationIndicator(mMapView.getMapRotation().degrees);
     }
 
