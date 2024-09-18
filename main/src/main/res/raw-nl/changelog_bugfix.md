@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
-- Fix: Bumping white space in settings - system
+- Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
+- Oplossing: Bewerkte waypoints of caches worden niet bijgewerkt op de kaart (UnifiedMap)
+- Oplossing: Gevonden cache niet gemarkeerd als gevonden op de kaart (UnifiedMap)
+- Oplossing: Stijging die wordt geschaald naar kilometers/mijlen op het startscherm
+- Oplossing: Bijgewoonde events die worden weergegeven als "gevonden"
+- Oplossing: Witte spatie in instellingen - systeem naar boven verplaatst
 
 ##
 - Oplossing: "Handmatige login" kan niet worden geactiveerd

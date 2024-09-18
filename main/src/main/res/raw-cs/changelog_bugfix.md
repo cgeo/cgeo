@@ -1,10 +1,10 @@
 ##
-- Fix: Missing parametrization for user-defined tileprovider
-- Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
-- Fix: Found cache not marked as found on map (UnifiedMap)
-- Fix: Elevation being scaled to kilometers/miles on home screen
-- Fix: Attended events being shown as "found"
-- Fix: Bumping white space in settings - system
+- Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
+- Oprava: Upravené trasové body nebo kešky se neaktualizují na mapě (Sjednocená mapa)
+- Oprava: Nalezené kešky nebyly na mapě označeny jako nalezené (Sjednocená mapa)
+- Oprava: Převýšení se na domovské obrazovce přepočítává na kilometry/míle
+- Oprava: Eventy kterých jsem se zúčastnil, se zobrazují jako "nalezené"
+- Oprava: Překážející bílé místo v nastavení - systém
 
 ##
 - Oprava: Nelze aktivovat funkci "Ruční přihlášení"
