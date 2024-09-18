@@ -7,6 +7,7 @@
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
 - Nowość: Zezwalaj na duże liczby całkowite we wzorach
 - Nowość: Wsparcie większej liczby konstelacji dla zmiennych we wzorach
+- Nowość: Wykryj sprawdzacz geocheck.EU.org
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
