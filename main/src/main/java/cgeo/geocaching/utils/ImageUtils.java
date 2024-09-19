@@ -484,10 +484,9 @@ public final class ImageUtils {
     public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
         final Set<String> urls = new LinkedHashSet<>();
         for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(getGCFullScaleImageUrl(image.getUrl())));
+            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
         }
         forEachImageUrlInHtml(source -> {
-            source = getGCFullScaleImageUrl(source);
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source, "https")
@@ -545,7 +544,8 @@ public final class ImageUtils {
         }
         matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
         if (matcherViewstates.find()) {
-            return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
+            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1) + matcherViewstates.group(2);
+            //return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
         }
         return imageUrl;
     }

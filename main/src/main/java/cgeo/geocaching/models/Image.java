@@ -3,6 +3,7 @@ package cgeo.geocaching.models;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
@@ -307,7 +308,7 @@ public class Image implements Parcelable {
         if (isEmpty()) {
             return "";
         }
-        return uri.toString();
+        return ImageUtils.getGCFullScaleImageUrl(uri.toString());
     }
 
     /**

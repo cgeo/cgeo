@@ -30,7 +30,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.DisposableHandler;
-import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -440,7 +439,7 @@ public final class GCParser {
         // background image, to be added only if the image is not already present in the cache listing
         final MatcherWrapper matcherBackgroundImage = new MatcherWrapper(GCConstants.PATTERN_BACKGROUND_IMAGE, page);
         if (matcherBackgroundImage.find()) {
-            final String url = ImageUtils.getGCFullScaleImageUrl(matcherBackgroundImage.group(1));
+            final String url = matcherBackgroundImage.group(1);
             boolean present = false;
             for (final Image image : cache.getSpoilers()) {
                 if (StringUtils.equals(image.getUrl(), url)) {
@@ -595,7 +594,7 @@ public final class GCParser {
         final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, html);
 
         while (matcherSpoilersInside.find()) {
-            final String url = ImageUtils.getGCFullScaleImageUrl(matcherSpoilersInside.group(1));
+            final String url = matcherSpoilersInside.group(1);
 
             String title = null;
             if (matcherSpoilersInside.group(2) != null) {
