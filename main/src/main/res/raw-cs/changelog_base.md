@@ -2,12 +2,12 @@
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
 - Novinka: Přidán oddělovač mezi offline a online zdroje map
+- Novinka: Podpora Mapsforge jako alternativy k VTM ve Sjednocené mapě (beta verze / kontaktujte podporu, pokud to chcete vyzkoušet)
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
 - Novinka: Povolení velkých celých čísel ve vzorcích
 - Novinka: Podpora více konstelací pro proměnné ve vzorcích
-- Novinka: Zjištění kontroly geocheck.EU.org
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
