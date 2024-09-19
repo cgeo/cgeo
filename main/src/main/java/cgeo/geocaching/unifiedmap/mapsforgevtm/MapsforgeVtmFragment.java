@@ -13,7 +13,7 @@ import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
-import cgeo.geocaching.unifiedmap.tileproviders.MapToolkitHillshadingSource;
+import cgeo.geocaching.unifiedmap.tileproviders.MapToolkitVTMHillshadingSource;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.GroupedList;
 import cgeo.geocaching.utils.ImageUtils;
@@ -138,7 +138,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
 
         if (Settings.getMapShadingEnabled()) {
             //addLayer(2, new MapilionHillshadingSource().getBitmapTileLayer(mMap));
-            addLayer(2, new MapToolkitHillshadingSource().getBitmapTileLayer(mMap));
+            addLayer(2, new MapToolkitVTMHillshadingSource().getBitmapTileLayer(mMap));
         }
 
         if (this.mapAttribution != null) {
