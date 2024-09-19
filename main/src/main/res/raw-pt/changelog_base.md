@@ -2,12 +2,12 @@
 - Novo: Armazenar tema do mapa por provedor de blocos (Mapa Unificado)
 - Novo: Destacar cache/ponto adicional selecionado (Mapa Unificado)
 - New: Add separator between offline and online map sources
+- New: Support Mapsforge as alternative to VTM in UnifiedMap (beta / contact support if you want to test this)
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
 - New: Allow large integers in formulas
 - New: Support more constellations for variables in formulas
-- New: Detect geocheck.EU.org checker
 
 ### Geral
 - Alteração: Usar elevação acima do nível médio do mar (se disponível, Android 14+ apenas)
