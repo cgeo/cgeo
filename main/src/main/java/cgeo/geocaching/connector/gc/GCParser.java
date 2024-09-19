@@ -30,6 +30,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -439,7 +440,7 @@ public final class GCParser {
         // background image, to be added only if the image is not already present in the cache listing
         final MatcherWrapper matcherBackgroundImage = new MatcherWrapper(GCConstants.PATTERN_BACKGROUND_IMAGE, page);
         if (matcherBackgroundImage.find()) {
-            final String url = fullScaleImageUrl(matcherBackgroundImage.group(1));
+            final String url = ImageUtils.getGCFullScaleImageUrl(matcherBackgroundImage.group(1));
             boolean present = false;
             for (final Image image : cache.getSpoilers()) {
                 if (StringUtils.equals(image.getUrl(), url)) {
@@ -594,7 +595,7 @@ public final class GCParser {
         final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, html);
 
         while (matcherSpoilersInside.find()) {
-            final String url = fullScaleImageUrl(matcherSpoilersInside.group(1));
+            final String url = ImageUtils.getGCFullScaleImageUrl(matcherSpoilersInside.group(1));
 
             String title = null;
             if (matcherSpoilersInside.group(2) != null) {
@@ -646,46 +647,6 @@ public final class GCParser {
     @Nullable
     private static String getNumberString(@Nullable final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
-    }
-
-    @NonNull
-    public static String fullScaleImageUrl(@NonNull final String imageUrl) {
-        // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
-        // Manipulate the URL to load the requested size.
-        final GCImageSize preferredSize = GCImageSize.ORIGINAL;
-        MatcherWrapper matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_GC_HOSTED_IMAGE, imageUrl);
-        if (matcherViewstates.find()) {
-            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
-        }
-        matcherViewstates = new MatcherWrapper(GCConstants.PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
-        if (matcherViewstates.find()) {
-            return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
-        }
-        return imageUrl;
-    }
-
-    public enum GCImageSize {
-        ORIGINAL("", ""),
-        LARGE("_l", "large/"),
-        DISPLAY("_d", "display/"),
-        SMALL("_sm", "small/"),
-        THUMB("_t", "thumb/");
-
-        private final String suffix;
-        private final String pathname;
-
-        GCImageSize(final String suffix, final String pathname) {
-            this.suffix = suffix;
-            this.pathname = pathname;
-        }
-
-        public String getPathname() {
-            return pathname;
-        }
-
-        public String getSuffix() {
-            return suffix;
-        }
     }
 
     private static SearchResult searchByMap(final IConnector con, final Parameters params) {

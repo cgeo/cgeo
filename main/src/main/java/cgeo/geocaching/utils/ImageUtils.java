@@ -2,7 +2,6 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
@@ -92,6 +91,8 @@ public final class ImageUtils {
 
     private static final Pattern IMG_TAG = Pattern.compile(Pattern.quote("<img") + "\\s[^>]*?" + Pattern.quote("src=\"") + "(.+?)" + Pattern.quote("\""));
     private static final Pattern IMG_URL = Pattern.compile("(https?://\\S*\\.(jpeg|jpe|jpg|png|webp|gif|svg)(\\?|#|$|\\)|])\\S*)");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE = Pattern.compile("^https?://img(?:cdn)?\\.geocaching\\.com(?::443)?(?:/[a-z/]*)?/([^/]*)");
+    static final Pattern PATTERN_GC_HOSTED_IMAGE_S3 = Pattern.compile("^https?://s3\\.amazonaws\\.com(?::443)?/gs-geo-images/(.*?)(?:_l|_d|_sm|_t)?(\\.jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)");
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
@@ -483,10 +484,10 @@ public final class ImageUtils {
     public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
         final Set<String> urls = new LinkedHashSet<>();
         for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
+            urls.add(imageUrlForSpoilerCompare(getGCFullScaleImageUrl(image.getUrl())));
         }
         forEachImageUrlInHtml(source -> {
-            source = GCParser.fullScaleImageUrl(source);
+            source = getGCFullScaleImageUrl(source);
                 if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source, "https")
@@ -530,6 +531,46 @@ public final class ImageUtils {
                     cLog.add("#found:" + count);
                 }
             }
+        }
+    }
+
+    @NonNull
+    public static String getGCFullScaleImageUrl(@NonNull final String imageUrl) {
+        // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
+        // Manipulate the URL to load the requested size.
+        final GCImageSize preferredSize = GCImageSize.ORIGINAL;
+        MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
+        }
+        matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE_S3, imageUrl);
+        if (matcherViewstates.find()) {
+            return "https://s3.amazonaws.com/gs-geo-images/" + matcherViewstates.group(1) + preferredSize.getSuffix() + matcherViewstates.group(2);
+        }
+        return imageUrl;
+    }
+
+    public enum GCImageSize {
+        ORIGINAL("", ""),
+        LARGE("_l", "large/"),
+        DISPLAY("_d", "display/"),
+        SMALL("_sm", "small/"),
+        THUMB("_t", "thumb/");
+
+        private final String suffix;
+        private final String pathname;
+
+        GCImageSize(final String suffix, final String pathname) {
+            this.suffix = suffix;
+            this.pathname = pathname;
+        }
+
+        public String getPathname() {
+            return pathname;
+        }
+
+        public String getSuffix() {
+            return suffix;
         }
     }
 
