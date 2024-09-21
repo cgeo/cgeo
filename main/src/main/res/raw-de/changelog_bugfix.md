@@ -1,4 +1,7 @@
 ##
+- New: Show warning for activated gc connector without credentials
+
+##
 - Korrektur: Fehlende Parametrisierung für benutzerdefinierten Kartenanbieter
 - Korrektur: Veränderte Wegpunkte oder Caches werden auf der Karte nicht aktualisiert (UnifiedMap)
 - Korrektur: Gefundener Cache wird auf der Karte nicht als gefunden markiert (UnifiedMap)
