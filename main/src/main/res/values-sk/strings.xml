@@ -2751,5 +2751,6 @@
     <string name="smiley_disapprove">Zamietavý</string>
     <string name="smiley_question">Otázka</string>
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
     <!-- db inspection -->
 </resources>
