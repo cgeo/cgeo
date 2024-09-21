@@ -2315,5 +2315,6 @@
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
     <!-- db inspection -->
 </resources>
