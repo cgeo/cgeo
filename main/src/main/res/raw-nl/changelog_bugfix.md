@@ -1,4 +1,7 @@
 ##
+- New: Show warning for activated gc connector without credentials
+
+##
 - Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
 - Oplossing: Bewerkte waypoints of caches worden niet bijgewerkt op de kaart (UnifiedMap)
 - Oplossing: Gevonden cache niet gemarkeerd als gevonden op de kaart (UnifiedMap)
