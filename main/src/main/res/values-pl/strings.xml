@@ -3011,6 +3011,7 @@
         <item quantity="many">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
         <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Zobacz bazę danych</string>
     <string name="dbi_select_title">(Zaznacz tabelę)</string>
