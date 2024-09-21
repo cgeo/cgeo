@@ -2,7 +2,7 @@
 - Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
 - Nou: afegiu un separador entre fonts de mapes fora de línia i en línia
-- New: Support Mapsforge as alternative to VTM in UnifiedMap (beta / contact support if you want to test this)
+- Nou: Admet Mapsforge com a alternativa a VTM a UnifiedMap (beta / contacteu amb l'assistència si voleu provar-ho)
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -13,4 +13,4 @@
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
 - Nou: permet múltiples nivells de jerarquia a les llistes de catxés
 - Novetat: icones dedicades per als tipus de trobada blockparty i HQ de geocaching.com
-
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
