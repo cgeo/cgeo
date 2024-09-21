@@ -1,4 +1,7 @@
 ##
+- Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
+
+##
 - Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
 - Oprava: Upravené trasové body nebo kešky se neaktualizují na mapě (Sjednocená mapa)
 - Oprava: Nalezené kešky nebyly na mapě označeny jako nalezené (Sjednocená mapa)
