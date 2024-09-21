@@ -223,8 +223,7 @@
     <string translatable="false" name="pref_maphillshading">maphillshading</string>
     <string translatable="false" name="pref_maphillshading_show_layer">maphillshading_show_layer</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
-    <string translatable="false" name="pref_rapidapiKeyMaptoolkit">rapidapiKeyMaptoolkit</string>
-    <string translatable="false" name="pref_rapidapiKeyMapilion">rapidapiKeyMapilion</string>
+    <string translatable="false" name="pref_rapidapiKey">rapidapiKey</string>
 
     <!-- category unified map -->
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
