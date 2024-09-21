@@ -2946,6 +2946,7 @@
         <item quantity="one">%d mensagem não lida no centro de mensagens</item>
         <item quantity="other">%d mensagens não lidas no centro de mensagens</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Ver a base de dados</string>
     <string name="dbi_select_title">(Selecionar tabela)</string>
