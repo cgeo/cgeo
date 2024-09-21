@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
@@ -537,7 +538,7 @@ public final class ImageUtils {
     public static String getGCFullScaleImageUrl(@NonNull final String imageUrl) {
         // Images from geocaching.com exist in original + 4 generated sizes: large, display, small, thumb
         // Manipulate the URL to load the requested size.
-        final GCImageSize preferredSize = GCImageSize.ORIGINAL;
+        final GCImageSize preferredSize = ImageUtils.GCImageSize.valueOf(Settings.getString(R.string.pref_gc_imagesize, "ORIGINAL"));
         MatcherWrapper matcherViewstates = new MatcherWrapper(PATTERN_GC_HOSTED_IMAGE, imageUrl);
         if (matcherViewstates.find()) {
             return "https://img.geocaching.com/" + preferredSize.getPathname() + matcherViewstates.group(1);
