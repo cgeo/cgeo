@@ -369,8 +369,8 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setDrivingMode(final boolean enabled) {
-        // todo: cross-check
         mMapView.setMapViewCenterY(enabled ? 0.75f : 0.5f);
+        mMapView.getModel().frameBufferModel.setOverdrawFactor(Math.max(mMapView.getModel().frameBufferModel.getOverdrawFactor(), mMapView.getMapViewCenterY() * 2));
     }
 
 
