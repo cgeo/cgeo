@@ -13,4 +13,4 @@
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
 - Neu: Erlaube mehrere Hierarchieebenen in Cachelisten
 - Neu: Eigene Icons für geocaching.com Blockparty und HQ Event Typen
-
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
