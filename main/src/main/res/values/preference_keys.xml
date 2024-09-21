@@ -460,6 +460,18 @@
         <item>@string/pref_value_startscreen_nearby</item>
     </string-array>
 
+    <!-- Geocaching.com => image size -->
+    <string translatable="false" name="pref_value_gc_imagesize_original">ORIGINAL</string>
+    <string translatable="false" name="pref_value_gc_imagesize_large">LARGE</string>
+    <string translatable="false" name="pref_value_gc_imagesize_display">DISPLAY</string>
+    <string translatable="false" name="pref_value_gc_imagesize_small">SMALL</string>
+    <string-array name="pref_gc_imagesize_values">
+        <item>@string/pref_value_gc_imagesize_original</item>
+        <item>@string/pref_value_gc_imagesize_large</item>
+        <item>@string/pref_value_gc_imagesize_display</item>
+        <item>@string/pref_value_gc_imagesize_small</item>
+    </string-array>
+
     <!-- ============================================================================================================================================================================== -->
     <!-- other preference keys (not used directly in our preferences) -->
     <!-- ============================================================================================================================================================================== -->
@@ -606,6 +618,7 @@
     <string translatable="false" name="pref_dbReindexLastCheck">dbReindexLastCheck</string>
     <string translatable="false" name="pref_pendingDownloadsLastCheck">pendingDownloadsLastCheck</string>
     <string translatable="false" name="pref_pollMessageCenter">pollMessageCenter</string>
+    <string translatable="false" name="pref_gc_imagesize">gc_imagesize</string>
     <string translatable="false" name="pref_simple_list_model_config">simple_list_model_config</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>

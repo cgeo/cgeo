@@ -2130,7 +2130,7 @@ public class Geocache implements IWaypoint {
                 for (final LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
                         for (final Image oneLogImg : log.logImages) {
-                            imgGetter.getDrawable(oneLogImg.getUrl());
+                            //imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
                 }
@@ -2235,7 +2235,17 @@ public class Geocache implements IWaypoint {
             result.addAll(log.logImages);
         }
         addLocalSpoilersTo(result);
-        return result;
+
+        // Deduplicate images and return them in requested size
+        final List<Image> uniqueImages = new LinkedList<>();
+        final List<String> uniqueUrls = new ArrayList<>();
+        for (final Image img : result) {
+            if (!uniqueUrls.contains(img.getUrl())) {
+                uniqueUrls.add(img.getUrl());
+                uniqueImages.add(img.buildUpon().setUrl(img.getUrl()).build());
+            }
+        }
+        return uniqueImages;
     }
 
     @NonNull

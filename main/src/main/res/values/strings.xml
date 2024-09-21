@@ -3311,6 +3311,16 @@
         <item quantity="other">%d unread messages in message center</item>
     </plurals>
 
+    <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Preferred Image Size</string>
+    <string name="settings_gc_imagesize_summary">Images from Geocaching.com in listing, logs and trackables are available in different sizes. Select the size to be loaded when loading and storing a cache.</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Original</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
+
     <!-- db inspection -->
     <string name="view_database">View database</string>
     <string name="dbi_select_title">(Select table)</string>

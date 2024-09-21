@@ -35,6 +35,15 @@
             android:defaultValue="false"
             app:iconSpaceReserved="false" />
 
+        <ListPreference
+            android:defaultValue="@string/pref_value_gc_imagesize_original"
+            android:entries="@array/settings_gc_imagesize_entries"
+            android:entryValues="@array/pref_gc_imagesize_values"
+            android:key="@string/pref_gc_imagesize"
+            android:title="@string/settings_gc_imagesize_title"
+            android:summary="@string/settings_gc_imagesize_summary"
+            app:iconSpaceReserved="false" />
+
     </PreferenceCategory>
 
     <PreferenceCategory

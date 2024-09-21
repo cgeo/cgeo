@@ -439,7 +439,7 @@ public final class GCParser {
         // background image, to be added only if the image is not already present in the cache listing
         final MatcherWrapper matcherBackgroundImage = new MatcherWrapper(GCConstants.PATTERN_BACKGROUND_IMAGE, page);
         if (matcherBackgroundImage.find()) {
-            final String url = fullScaleImageUrl(matcherBackgroundImage.group(1));
+            final String url = matcherBackgroundImage.group(1);
             boolean present = false;
             for (final Image image : cache.getSpoilers()) {
                 if (StringUtils.equals(image.getUrl(), url)) {
@@ -594,7 +594,7 @@ public final class GCParser {
         final MatcherWrapper matcherSpoilersInside = new MatcherWrapper(GCConstants.PATTERN_SPOILER_IMAGE, html);
 
         while (matcherSpoilersInside.find()) {
-            final String url = fullScaleImageUrl(matcherSpoilersInside.group(1));
+            final String url = matcherSpoilersInside.group(1);
 
             String title = null;
             if (matcherSpoilersInside.group(2) != null) {
@@ -646,14 +646,6 @@ public final class GCParser {
     @Nullable
     private static String getNumberString(@Nullable final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
-    }
-
-    @NonNull
-    static String fullScaleImageUrl(@NonNull final String imageUrl) {
-        // For images from geocaching.com: the original spoiler URL
-        // (include .../display/... contains a low-resolution image
-        // if we shorten the URL we get the original-resolution image
-        return GCConstants.PATTERN_GC_HOSTED_IMAGE.matcher(imageUrl).find() ? imageUrl.replace("/display", "") : imageUrl;
     }
 
     private static SearchResult searchByMap(final IConnector con, final Parameters params) {

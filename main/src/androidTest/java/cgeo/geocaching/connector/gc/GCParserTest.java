@@ -17,6 +17,7 @@ import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.test.Compare;
 import static cgeo.geocaching.connector.gc.GCParser.deleteModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
@@ -354,9 +355,9 @@ public class GCParserTest {
     @MediumTest
     @Test
     public void testFullScaleImageUrl() {
-        assertThat(GCParser.fullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
+        assertThat(ImageUtils.getGCFullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
-        assertThat(GCParser.fullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
+        assertThat(ImageUtils.getGCFullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
                 .isEqualTo("http://imgcdn.geocaching.com/track/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
     }
 
