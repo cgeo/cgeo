@@ -2258,5 +2258,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">%d mensaje no leído en el centro de mensajes</item>
         <item quantity="other">%d mensajes no leídos en el centro de mensajes</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
 </resources>
