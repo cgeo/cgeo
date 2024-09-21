@@ -189,18 +189,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             mapType.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
-            viewModel.followMyLocation.setValue(mapType.followMyLocation);
-        } else {
-            if (mapType != null) {
-                viewModel.followMyLocation.setValue(mapType.followMyLocation);
-            } else {
-                viewModel.followMyLocation.setValue(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && mapType.type == UMTT_PlainMap);
-            }
         }
+        
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
             mapType = new UnifiedMapType();
         }
+
+        viewModel.followMyLocation.setValue(mapType.followMyLocation);
 
         viewModel.transientIsLiveEnabled.setValue(mapType.type == UMTT_PlainMap && Settings.isLiveMap());
 
