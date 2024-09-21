@@ -2104,5 +2104,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_8ball">8ボール</string>
     <string name="smiley_question">疑問</string>
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
     <!-- db inspection -->
 </resources>
