@@ -13,4 +13,4 @@
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
 - Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
 - Nieuw: Unieke pictogrammen voor geocaching.com blockparty en HQ gebeurtenistypes
-
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
