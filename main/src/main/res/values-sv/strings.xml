@@ -2947,6 +2947,7 @@
         <item quantity="one">%d oläst meddelande i meddelandecentret</item>
         <item quantity="other">%d olästa meddelanden i meddelandecentret</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Visa databas</string>
     <string name="dbi_select_title">(Välj tabell)</string>
