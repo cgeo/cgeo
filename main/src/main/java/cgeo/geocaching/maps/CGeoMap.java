@@ -421,7 +421,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
         }
 
-        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity.findViewById(R.id.distances1).getRootView(), getIntentCoords(), mapOptions.geocode);
+        overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity.findViewById(R.id.distanceinfo), getIntentCoords(), mapOptions.geocode);
         if (trailHistory != null) {
             overlayPositionAndScale.setHistory(trailHistory);
         }

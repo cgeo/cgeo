@@ -30,43 +30,50 @@
             android:id="@+id/target"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/distances1"
             android:layout_marginLeft="-2dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginRight="-2dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:ellipsize="end"
             style="@style/map_distanceinfo"
             android:gravity="left" />
 
-        <LinearLayout
-            android:id="@+id/distances1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:orientation="vertical"
-            android:gravity="right"
-            style="@style/map_distanceinfo"
-            android:background="@drawable/icon_bcg">
-
-        </LinearLayout>
-
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/distances2"
+        android:id="@+id/distancesFrame2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/distancesFrame1"
-        android:padding="0dp"
-        android:layout_margin="0dp"
-        android:orientation="vertical"
-        android:gravity="right"
-        android:background="@drawable/icon_bcg" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/distanceStraight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+
+        <TextView
+            android:id="@+id/distanceRouted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+
+        <TextView
+            android:id="@+id/distanceIndividualRoute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:layout_margin="0dp"
+            style="@style/map_distanceinfo"
+            android:background="@drawable/icon_bcg" />
+    </LinearLayout>
 </RelativeLayout>

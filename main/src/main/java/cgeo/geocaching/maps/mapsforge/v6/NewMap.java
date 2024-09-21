@@ -889,7 +889,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         this.mapView.getLayerManager().getLayers().add(positionLayer);
 
         //Distance view
-        this.distanceView = new DistanceView(findViewById(R.id.distances1).getRootView(), navTarget, Settings.isBrouterShowBothDistances());
+        this.distanceView = new DistanceView(findViewById(R.id.distanceinfo), navTarget, Settings.isBrouterShowBothDistances());
 
         //Target view
         this.targetView = new TargetView(findViewById(R.id.target), StringUtils.EMPTY, StringUtils.EMPTY);
