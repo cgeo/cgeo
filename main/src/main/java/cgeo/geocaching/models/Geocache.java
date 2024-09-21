@@ -2130,7 +2130,7 @@ public class Geocache implements IWaypoint {
                 for (final LogEntry log : cache.getLogs()) {
                     if (log.hasLogImages()) {
                         for (final Image oneLogImg : log.logImages) {
-                            //imgGetter.getDrawable(oneLogImg.getUrl());
+                            imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
                 }
