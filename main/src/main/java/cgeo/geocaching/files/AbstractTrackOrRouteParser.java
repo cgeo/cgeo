@@ -27,7 +27,7 @@ abstract class AbstractTrackOrRouteParser {
 
     // temporary variables
     protected ArrayList<Geopoint> temp;
-    protected ArrayList<Float> elevation;
+    protected ArrayList<Float> tempElevation;
     protected Element points;
     protected Element point;
 
@@ -58,7 +58,7 @@ abstract class AbstractTrackOrRouteParser {
 
     protected void resetTempData() {
         temp = new ArrayList<>();
-        elevation = new ArrayList<>();
+        tempElevation = new ArrayList<>();
     }
 
     protected void setNameAndLatLonParsers() {
@@ -73,7 +73,7 @@ abstract class AbstractTrackOrRouteParser {
                 }
             }
         });
-        point.getChild(namespace, "ele").setEndTextElementListener(el -> elevation.add(Float.parseFloat(el)));
+        point.getChild(namespace, "ele").setEndTextElementListener(el -> tempElevation.add(Float.parseFloat(el)));
     }
 
     protected Route doParsing(@NonNull final InputStream stream, final RootElement root) throws IOException, ParserException {
