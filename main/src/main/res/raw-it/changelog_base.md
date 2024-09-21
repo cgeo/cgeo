@@ -13,4 +13,4 @@
 - Cambio: utilizzare l'elevazione sopra il livello medio del mare (se disponibile, solo Android 14+)
 - New: Allow multiple hierarchy levels in cache lists
 - New: Dedicated icons for geocaching.com blockparty and HQ event types
-
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
