@@ -12,7 +12,7 @@ import org.mapsforge.map.android.hills.DemFolderAndroidContent;
 import org.mapsforge.map.layer.hills.DemFolder;
 import org.mapsforge.map.layer.hills.HillsRenderConfig;
 import org.mapsforge.map.layer.hills.MemoryCachingHgtReaderTileSource;
-import org.mapsforge.map.layer.hills.SimpleShadingAlgorithm;
+import org.mapsforge.map.layer.hills.StandardClasyHillShading;
 
 public class HillShadingLayerHelper {
 
@@ -28,7 +28,7 @@ public class HillShadingLayerHelper {
         final Context context = CgeoApplication.getInstance();
         final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
 
-        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new SimpleShadingAlgorithm(Settings.getMapShadingLinearity(), Settings.getMapShadingScale()), AndroidGraphicFactory.INSTANCE);
+        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new StandardClasyHillShading(), AndroidGraphicFactory.INSTANCE);
         // avoid lines at between tiles
         hillTileSource.setEnableInterpolationOverlap(true);
         final HillsRenderConfig hillsConfig = new HillsRenderConfig(hillTileSource);

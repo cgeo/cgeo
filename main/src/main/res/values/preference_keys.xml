@@ -222,8 +222,6 @@
     <string translatable="false" name="pref_fakekey_info_offline_maphillshading">fakekey_info_offline_maphillshading</string>
     <string translatable="false" name="pref_maphillshading">maphillshading</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
-    <string translatable="false" name="pref_mapShadingLinearity">mapShadingLinearity</string>
-    <string translatable="false" name="pref_mapShadingScale">mapShadingScale</string>
     <string translatable="false" name="pref_rapidapiKeyMaptoolkit">rapidapiKeyMaptoolkit</string>
     <string translatable="false" name="pref_rapidapiKeyMapilion">rapidapiKeyMapilion</string>
 

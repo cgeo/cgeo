@@ -90,26 +90,6 @@
             android:summary="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
             app:iconSpaceReserved="false" />
-        <SeekBarPreference
-            android:key="@string/pref_mapShadingLinearity"
-            android:dependency="@string/pref_maphillshading"
-            android:summary="@string/init_mapShadingLinearity_description"
-            android:title="@string/init_mapShadingLinearity_title"
-            android:defaultValue="5"
-            android:max="100"
-            android:min="0"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
-        <SeekBarPreference
-            android:key="@string/pref_mapShadingScale"
-            android:dependency="@string/pref_maphillshading"
-            android:summary="@string/init_mapShadingScale_description"
-            android:title="@string/init_mapShadingScale_title"
-            android:defaultValue="120"
-            android:max="300"
-            android:min="0"
-            app:showSeekBarValue="true"
-            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
