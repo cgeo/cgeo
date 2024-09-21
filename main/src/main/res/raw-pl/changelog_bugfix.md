@@ -1,4 +1,7 @@
 ##
+- New: Show warning for activated gc connector without credentials
+
+##
 - Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
 - Naprawiono: Edytowane punkty nawigacji lub skrytki nie są aktualizowane na mapie (UnifiedMap)
 - Naprawiono: Znaleziona skrytka nie była oznaczona jako znaleziona na mapie (UnifiedMap)
