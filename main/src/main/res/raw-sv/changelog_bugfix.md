@@ -1,4 +1,7 @@
 ##
+- New: Show warning for activated gc connector without credentials
+
+##
 - Fix: Missing parametrization for user-defined tileprovider
 - Fix: Redigerade vägpunkter eller cacher uppdateras inte på kartan (UnifiedMap)
 - Fix: Hittad cache inte markerad som hittad på kartan (UnifiedMap)
