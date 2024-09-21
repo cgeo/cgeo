@@ -187,10 +187,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             if (savedInstanceState.containsKey(BUNDLE_MAPTYPE)) {
                 mapType = savedInstanceState.getParcelable(BUNDLE_MAPTYPE);
             }
-            mapType.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
+            if (mapType != null) {
+                mapType.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
+            }
             overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
         }
-        
+
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
             mapType = new UnifiedMapType();
