@@ -1285,6 +1285,7 @@
     <string name="auth_register">Vytvořit účet</string>
     <string name="auth_connected">Připojeno</string>
     <string name="auth_unconnected">Zatím nepřipojeno</string>
+    <string name="auth_unconnected_tap_here">Zatím nepřipojeno - klepněte zde pro autorizaci</string>
     <string name="auth_connected_as">Připojen jako %s.\nKlepněte zde pro aktualizaci nebo dlouhým stiskem odeberte autorizační data z aplikace c:geo.</string>
     <string name="auth_dialog_waiting">Čekání na %s…</string>
     <string name="auth_explain_short">Následující proces umožní <b>c:geu</b> přístup k %s.</string>
