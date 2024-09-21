@@ -493,6 +493,10 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
             ActivityMixin.overrideTransitionToFade(this);
+        } else if (id == R.id.menu_hillshading) {
+            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingEnabled());
+            item.setChecked(Settings.getMapShadingEnabled());
+            changeMapSource(mapSource);
         } else if (id == R.id.menu_hint) {
             menuShowHint();
         } else if (id == R.id.menu_compass) {
