@@ -2283,5 +2283,6 @@
     <string name="smiley_disapprove">Απορριπτέο</string>
     <string name="smiley_question">Ερώτηση</string>
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
     <!-- db inspection -->
 </resources>
