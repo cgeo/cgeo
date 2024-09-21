@@ -2949,6 +2949,7 @@
         <item quantity="one">%d ungelesene Nachricht im Nachrichten-Center</item>
         <item quantity="other">%d ungelesene Nachrichten im Nachrichten-Center</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Datenbank anzeigen</string>
     <string name="dbi_select_title">(Tabelle auswählen)</string>
