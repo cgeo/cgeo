@@ -13,4 +13,4 @@
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
 - Novinka: Povolení více úrovní hierarchie v seznamech kešek
 - Novinka: Vyhrazené ikony pro typy eventů na geocaching.com blockparty a HQ
-
+- Novinka: Nastavení preferované velikosti obrázku pro obrázky načtené z kešek a trasovatelných předmětů na webu geocaching.com
