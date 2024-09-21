@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.maps.mapsforge.v6.layers.HillShadingLayerHelper;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.unifiedmap.mapsforge.MapsforgeFragment;
@@ -61,7 +62,7 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
             }
 
             // create layers for tiles and labels
-            tileLayer = new TileRendererLayer(fragment.getTileCache(), mapFile, map.getModel().mapViewPosition, false, false, false, AndroidGraphicFactory.INSTANCE);
+            tileLayer = new TileRendererLayer(fragment.getTileCache(), mapFile, map.getModel().mapViewPosition, false, false, false, AndroidGraphicFactory.INSTANCE, HillShadingLayerHelper.getHillsRenderConfig());
 
             tileLayer.setCacheTileMargin(1);
             tileLayer.setCacheZoomMinus(1);
