@@ -2941,6 +2941,7 @@
         <item quantity="one">%d message non lus dans le centre de message</item>
         <item quantity="other">%d messages non lus dans le centre de message</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Voir la base de données</string>
     <string name="dbi_select_title">(Sélectionnez la table)</string>
