@@ -893,6 +893,8 @@
     <string name="settings_title_map_style">Map style</string>
     <string name="settings_hide_tileproviders_title">Hide Map Sources</string>
     <string name="settings_hide_tileproviders_summary">Exclude one or more map sources from map source selection</string>
+    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
+    <string name="settings_useMapsforgeInUnifiedMap_summary">Offer both VTM + Mapsforge engines for Mapsforge maps (for testing purposes)</string>
     <string name="settings_userDefinedTileProvider">User-defined tile provider</string>
     <string name="settings_userDefinedTileProviderUri">Enter full Uri (without trailing slash) to tile provider, or enter full Uri with parameters (including {X}, {Y} and {Z}). Make sure you have checked and comply to their usage conditions.</string>
     <string name="settings_title_data_dir">Geocache data folder</string>
