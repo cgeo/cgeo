@@ -2949,6 +2949,7 @@
         <item quantity="one">%d ongelezen bericht in berichtencentrum</item>
         <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
     </plurals>
+    <!-- GC image size conversion -->
     <!-- db inspection -->
     <string name="view_database">Bekijk database</string>
     <string name="dbi_select_title">(Selecteer tabel)</string>
