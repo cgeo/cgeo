@@ -856,8 +856,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 mapFragment.getViewport().filter(vmCaches));
             CacheListActivity.startActivityMap(this, new SearchResult(caches));
         } else if (id == R.id.menu_hillshading) {
-            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingEnabled());
-            item.setChecked(Settings.getMapShadingEnabled());
+            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingShowLayer());
+            item.setChecked(Settings.getMapShadingShowLayer());
             changeMapSource(mapFragment.currentTileProvider, getCurrentMapState());
         } else {
             final String language = TileProviderFactory.getLanguage(id);
