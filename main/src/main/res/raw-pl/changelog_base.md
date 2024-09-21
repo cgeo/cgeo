@@ -13,4 +13,4 @@
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
 - Nowość: Zezwalaj na wiele poziomów hierarchii na listach skrytek
 - Nowość: Dedykowane ikony dla typów wydarzeń blockparty geocaching.com i wydarzeń HQ
-
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
