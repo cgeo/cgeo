@@ -61,8 +61,8 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         setNameAndLatLonParsers();
         endElementForListener.setEndElementListener(() -> {
             if (temp.size() > 0) {
-                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, elevation, false));
-                temp = new ArrayList<>();
+                result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, tempElevation, false));
+                resetTempData();
             }
         });
     }
