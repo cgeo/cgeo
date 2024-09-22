@@ -28,6 +28,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
@@ -133,24 +134,27 @@ public class RouteTrackUtils {
     // route/track context menu-related methods
 
     /** show a popup for track/individual route, opened by using a long-tap on that item on the map */
-    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Route route) {
+    public void showRouteTrackContextMenu(final int tapX, final int tapY, final Action1<Route> handleLongTapOnRoutesOrTracks, final Route route) {
         final SimplePopupMenu menu = SimplePopupMenu.of(activity).setMenuContent(R.menu.map_routetrack_context).setPosition(new Point(tapX, tapY), 0);
-        menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, route));
-        menu.setOnItemClickListener(item -> handleContextMenuClick(item, route));
+        menu.setOnCreatePopupMenuListener(menu1 -> configureContextMenu(menu1, handleLongTapOnRoutesOrTracks != null, route));
+        menu.setOnItemClickListener(item -> handleContextMenuClick(item, handleLongTapOnRoutesOrTracks, route));
         menu.show();
     }
 
-    public static void configureContextMenu(final Menu menu, final Route route) {
+    public static void configureContextMenu(final Menu menu, final boolean showElevationChart, final Route route) {
         final boolean isIndividualRoute = isIndividualRoute(route);
+        menu.findItem(R.id.menu_showElevationChart).setVisible(showElevationChart);
         menu.findItem(R.id.menu_edit).setVisible(isIndividualRoute);
         menu.findItem(R.id.menu_optimize).setVisible(isIndividualRoute);
         menu.findItem(R.id.menu_invert_order).setVisible(isIndividualRoute);
         menu.findItem(R.id.menu_color).setVisible(!isIndividualRoute);
     }
 
-    public boolean handleContextMenuClick(final MenuItem item, final Route route) {
+    public boolean handleContextMenuClick(final MenuItem item, final Action1<Route> handleLongTapOnRoutesOrTracks, final Route route) {
         final int id = item.getItemId();
-        if (id == R.id.menu_edit) {
+        if (id == R.id.menu_showElevationChart && handleLongTapOnRoutesOrTracks != null) {
+            handleLongTapOnRoutesOrTracks.call(route);
+        } else if (id == R.id.menu_edit) {
             menuEditRoute(route);
         } else if (id == R.id.menu_optimize) {
             if (isIndividualRoute(route)) {

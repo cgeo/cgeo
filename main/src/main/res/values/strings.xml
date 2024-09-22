@@ -1729,6 +1729,7 @@
     <string name="context_map_star_show">Show lines to waypoints</string>
     <string name="context_map_star_hide">Hide lines to waypoints</string>
     <string name="edit">Edit</string>
+    <string name="showElevationChart">Show elevation chart</string>
 
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="create_internal_cache_short">New cache</string>

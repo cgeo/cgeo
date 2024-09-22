@@ -105,8 +105,8 @@ public class ElevationChart {
         if (routeTrackUtils != null) {
             toolbar.getMenu().clear();
             toolbar.inflateMenu(R.menu.map_routetrack_context);
-            RouteTrackUtils.configureContextMenu(toolbar.getMenu(), route);
-            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, route));
+            RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route);
+            toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route));
             // workaround to display icons in overflow menu of toolbar
             if (toolbar.getMenu() instanceof MenuBuilder) {
                 ((MenuBuilder) toolbar.getMenu()).setOptionalIconsVisible(true);
