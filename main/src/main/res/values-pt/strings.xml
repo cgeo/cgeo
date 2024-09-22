@@ -779,6 +779,7 @@
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
+    <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -890,7 +891,7 @@
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
-    <string name="init_visitedWaypointsSemiTransparent">Pontos adicionais visitados semi-transparentes</string>
+    <string name="init_visitedWaypointsSemiTransparent">Pontos adi. visitados semi-transparentes</string>
     <string name="init_visitedWaypointsSemiTransparent_description">Marcar pontos adicionais visitados com fundo semi-transparente</string>
     <string name="init_brouterThreshold">Calcular rota</string>
     <string name="init_brouterThreshold_description">Distância máxima até à qual o encaminhamento offline calculará uma rota.</string>
@@ -940,8 +941,8 @@
     <string name="init_summary_choose_list">Pede que escolha em que lista(s) a cache é armazenada</string>
     <string name="init_list_initial_load_limit">Limite de carregamento da lista</string>
     <string name="init_summary_list_initial_load_limit">Número máximo de caches que são inicialmente carregadas, a partir do banco de dados, quando é exibida uma lista de caches armazenadas. Escolha 0 para \'ilimitado\'</string>
-    <string name="init_title_cacheListInfo1">Configurar as linhas de informação da lista</string>
-    <string name="init_summary_cacheListInfo">Selecione as informações adicionais a serem mostradas para cada cache nas listas de caches</string>
+    <string name="init_title_cacheListInfo1">Composição das linhas de informação</string>
+    <string name="init_summary_cacheListInfo">Seleccione os elementos informativos a serem mostrados sobre cada cache, numa lista de caches</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
     <string name="init_quicklaunchitems">Botões de início rápido</string>
@@ -973,7 +974,7 @@
     <!-- app startscreen -->
     <string name="settings_startscreen_title">Ecrã padrão</string>
     <string name="init_wallpaper">Imagem de fundo</string>
-    <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
+    <string name="init_summary_wallpaper">Mostra a imagem de fundo do dispositivo como fundo no ecrã da página inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Salvaguarde caches (as imagens não são guardadas), pontos adicionais e configurações.\nDica: Copie os ficheiros de backup p/ outro armazenamento, podendo assim restaura-los mesmo que perca o telemóvel.</string>
@@ -1268,6 +1269,7 @@
     <string name="auth_register">Criar uma conta</string>
     <string name="auth_connected">Conectado</string>
     <string name="auth_unconnected">Ainda não está conectado</string>
+    <string name="auth_unconnected_tap_here">Ainda não está ligado — toque aqui para autorizar</string>
     <string name="auth_connected_as">Ligado como %s.\nToque aqui para actualizar ou mantenha premido para remover dados de autorização do c:geo.</string>
     <string name="auth_dialog_waiting">A aguardar por %s…</string>
     <string name="auth_explain_short">O procedimento seguinte permitirá que o <b>c:geo</b> aceda a %s.</string>
@@ -1554,8 +1556,8 @@
     <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
     <string name="init_show_routing_menu">Mostrar menu de encaminhamento</string>
     <string name="init_summary_show_routing_menu">Toque longo numa cache mostra um menu com opções avançadas para adicionar/remover a cache a/de uma rota. Se desabilitado, a cache é apenas adicionada/removida à/da rota.</string>
-    <string name="init_ActionbarAutohide">Ocultar barra de ferramentas ao tocar</string>
-    <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra de ferramentas</string>
+    <string name="init_ActionbarAutohide">Ocultar barra superior ao tocar</string>
+    <string name="init_summary_ActionbarAutohide">Toque num espaço livre do mapa para ocultar/mostrar a barra superior</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
