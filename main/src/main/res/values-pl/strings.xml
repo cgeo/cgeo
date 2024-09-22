@@ -790,6 +790,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
+    <string name="settings_useMapsforgeInUnifiedMap_summary">Oferuj oba silniki (VTM + Mapsforge) na mapach Mapsforge (do celów testowych)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -1285,6 +1286,7 @@
     <string name="auth_register">Utwórz konto</string>
     <string name="auth_connected">Połączono</string>
     <string name="auth_unconnected">Jeszcze nie połączono</string>
+    <string name="auth_unconnected_tap_here">Jeszcze nie połączono – dotknij tutaj, aby autoryzować</string>
     <string name="auth_connected_as">Połączony jako %s.\nDotknij tutaj, aby zaktualizować lub dotknij dłużej, aby usunąć dane autoryzacyjne z c:geo.</string>
     <string name="auth_dialog_waiting">Czekanie na %s…</string>
     <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>
@@ -3012,6 +3014,14 @@
         <item quantity="other">%d nieprzeczytanych wiadomości w centrum wiadomości</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Preferowany rozmiar obrazu</string>
+    <string name="settings_gc_imagesize_summary">Obrazy z Geocaching.com w opisach skrytek, dziennikach znalezień oraz i dziennikach przedmiotów podróżnych są dostępne w różnych rozmiarach. Wybierz rozmiar do załadowania podczas ładowania i przechowywania skrytek.</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Oryginalny</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <string name="view_database">Zobacz bazę danych</string>
     <string name="dbi_select_title">(Zaznacz tabelę)</string>
