@@ -997,10 +997,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 });
             }
 
-            if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE)) {
+            if (key.startsWith(IndividualRouteLayer.KEY_INDIVIDUAL_ROUTE) && isLongTap) {
                 result.add(new MapSelectableItem(viewModel.individualRoute.getValue()));
             }
-            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route) {
+            if (key.startsWith(TracksLayer.TRACK_KEY_PREFIX) && viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute() instanceof Route && isLongTap) {
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             }
             if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX)) {
@@ -1081,7 +1081,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
             } else if (item.isRoute() && routeTrackUtils != null && item.getRoute() != null) {
                 // individual route or track
-                routeTrackUtils.showRouteTrackContextMenu(tapX, tapY, RouteTrackUtils.isIndividualRoute(item.getRoute()) ? viewModel.individualRoute.getValue() : item.getRoute());
+                if (lastElevationChartRoute != null && StringUtils.equals(item.getRoute().getName(), lastElevationChartRoute)) {
+                    elevationChartUtils.removeElevationChart();
+                } else {
+                    routeTrackUtils.showRouteTrackContextMenu(tapX, tapY, this::handleLongTapOnRoutesOrTracks, RouteTrackUtils.isIndividualRoute(item.getRoute()) ? viewModel.individualRoute.getValue() : item.getRoute());
+                }
             }
         } else if (routeItem != null) {
             // open popup for element
@@ -1094,37 +1098,39 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 sheetShowDetails(viewModel.sheetInfo.getValue());
                 MapMarkerUtils.addHighlighting(routeItem.getWaypoint(), getResources(), nonClickableItemsLayer);
             }
-        } else if (item.getRoute() != null) {
-            // elevation charts for individual route and/or routes/tracks
-            if (elevationChartUtils == null) {
-                elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
-            }
-            if (lastElevationChartRoute != null && StringUtils.equals(item.getRoute().getName(), lastElevationChartRoute)) {
-                elevationChartUtils.removeElevationChart();
-            } else {
-                elevationChartUtils.showElevationChart(item.getRoute(), routeTrackUtils);
-                lastElevationChartRoute = item.getRoute().getName();
-                if (RouteTrackUtils.isIndividualRoute(item.getRoute())) {
-                    viewModel.individualRoute.observe(this, individualRoute -> {
-                        if (lastElevationChartRoute != null && lastElevationChartRoute.isEmpty()) { // still individual route being shown?
-                            elevationChartUtils.showElevationChart(individualRoute, routeTrackUtils);
-                        }
-                    });
-                } else {
-                    viewModel.trackUpdater.observe(this, event -> {
-                        if (viewModel.getTracks().getRoute(event.peek()) instanceof Route) {
-                            final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
-                            if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
-                                elevationChartUtils.showElevationChart(route, routeTrackUtils);
-                            }
-                        }
-                    });
-                }
-            }
         } else if (item.getData() instanceof Zone) {
             WherigoDialogManager.get().display(new WherigoThingDialogProvider(item.getData()));
         } else if (item.getData() instanceof String) {
             GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
+        }
+    }
+
+    private void handleLongTapOnRoutesOrTracks(final Route item) {
+        // elevation charts for individual route and/or routes/tracks
+        if (elevationChartUtils == null) {
+            elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
+        }
+        if (lastElevationChartRoute != null && StringUtils.equals(item.getName(), lastElevationChartRoute)) {
+            elevationChartUtils.removeElevationChart();
+        } else {
+            elevationChartUtils.showElevationChart(item, routeTrackUtils);
+            lastElevationChartRoute = item.getName();
+            if (RouteTrackUtils.isIndividualRoute(item)) {
+                viewModel.individualRoute.observe(this, individualRoute -> {
+                    if (lastElevationChartRoute != null && lastElevationChartRoute.isEmpty()) { // still individual route being shown?
+                        elevationChartUtils.showElevationChart(individualRoute, routeTrackUtils);
+                    }
+                });
+            } else {
+                viewModel.trackUpdater.observe(this, event -> {
+                    if (viewModel.getTracks().getRoute(event.peek()) instanceof Route) {
+                        final Route route = (Route) viewModel.getTracks().getRoute(event.peek());
+                        if (route != null && StringUtils.equals(lastElevationChartRoute, route.getName())) {
+                            elevationChartUtils.showElevationChart(route, routeTrackUtils);
+                        }
+                    }
+                });
+            }
         }
     }
 
