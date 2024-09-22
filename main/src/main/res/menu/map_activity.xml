@@ -47,7 +47,7 @@
         android:showAsAction="ifRoom"
         android:title="@string/map_live_disable"
         android:visible="false"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
     </item>
     <item
         android:id="@+id/menu_hint"
