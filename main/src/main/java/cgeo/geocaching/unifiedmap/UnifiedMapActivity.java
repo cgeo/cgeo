@@ -45,6 +45,7 @@ import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -62,6 +63,7 @@ import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -80,6 +82,7 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
+import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
@@ -101,6 +104,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -146,7 +150,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private MenuItem followMyLocationItem = null;
+    private final int[] inFollowMyLocation = { 0 };
 
     private RouteTrackUtils routeTrackUtils = null;
     private ElevationChart elevationChartUtils = null;
@@ -630,17 +634,26 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private void initFollowMyLocation(final boolean followMyLocation) {
-        if (mapFragment == null) {
-            return;
+        synchronized (inFollowMyLocation) {
+            if (mapFragment == null || inFollowMyLocation[0] > 0) {
+                return;
+            }
+            inFollowMyLocation[0]++;
         }
         Settings.setFollowMyLocation(followMyLocation);
-        ToggleItemType.FOLLOW_MY_LOCATION.toggleMenuItem(followMyLocationItem, followMyLocation);
+
+        final View followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
+        followMyLocationButton.setBackgroundResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
+        followMyLocationButton.setOnClickListener((view) -> viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue())));
 
         if (followMyLocation) {
-            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if non was delivered to the view-model yet
+            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if none was delivered to the view-model yet
             mapFragment.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
         }
         checkDrivingMode();
+        synchronized (inFollowMyLocation) {
+            inFollowMyLocation[0]--;
+        }
     }
 
     private void handleLocUpdate(final LocUpdater.LocationWrapper locationWrapper) {
@@ -769,7 +782,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        followMyLocationItem = menu.findItem(R.id.menu_toggle_mypos);
+        menu.findItem(R.id.menu_toggle_mypos).setVisible(false);
         FilterUtils.initializeFilterMenu(this, this);
         return result;
     }
@@ -799,8 +812,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 onMapReadyTasks(tileProvider, true, getCurrentMapState());
                 viewModel.coordsIndicator.setValue(coordsIndicator);
             }
-        } else if (id == R.id.menu_toggle_mypos) {
-            viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
         } else if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
@@ -884,17 +895,45 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         return true;
     }
 
+    // ========================================================================
+    // zoom, bearing & heading methods
+
     private void saveCenterAndZoom() {
         Settings.setMapZoom(compatibilityMapMode, mapFragment.getCurrentZoom());
         Settings.setMapCenter(mapFragment.getCenter());
     }
 
-    private void setMapRotation(final MenuItem item, final int mapRotation) {
+    private void setMapRotation(@Nullable final MenuItem item, final int mapRotation) {
         Settings.setMapRotation(mapRotation);
         mapFragment.setMapRotation(mapRotation);
-        item.setChecked(true);
+        if (item != null) {
+            item.setChecked(true);
+        }
         checkDrivingMode();
     }
+
+    public void repaintRotationIndicator(final float bearing) {
+        final ImageView compassrose = findViewById(R.id.map_compassrose);
+        compassrose.setRotation(AngleUtils.normalize(360f - bearing));
+        compassrose.setOnClickListener(v -> {
+            final boolean isRotated = mapFragment.getCurrentBearing() != 0f;
+            mapFragment.setBearing(0.0f);
+            repaintRotationIndicator(0.0f);
+            if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
+                Dialogs.advancedOneTimeMessage(this, MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
+            }
+        });
+        compassrose.setOnLongClickListener(v -> {
+            findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
+            MapSettingsUtils.showRotationMenu(this, newRotationMode -> {
+                setMapRotation(null, newRotationMode);
+                findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
+            });
+            return true;
+        });
+    }
+
+    // ========================================================================
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {

@@ -11,11 +11,11 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.util.Consumer;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -142,6 +142,7 @@ public abstract class AbstractMapFragment extends Fragment {
         if (mapRotation == Settings.MAPROTATION_OFF) {
             setBearing(0);
         }
+        ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(getCurrentBearing());
     }
 
     public abstract float getCurrentBearing();
@@ -181,11 +182,8 @@ public abstract class AbstractMapFragment extends Fragment {
         ((UnifiedMapActivity) requireActivity()).onTap(latitudeE6, longitudeE6, x, y, isLongTap);
     }
 
-    public abstract void adaptLayoutForActionBar(@Nullable Boolean actionBarShowing);
-
-    protected void adaptLayoutForActionBar(final View compassRose, @Nullable final Boolean actionBarShowing) {
-        final UnifiedMapActivity activity = ((UnifiedMapActivity) requireActivity());
-        HideActionBarUtils.adaptLayoutForActionBarHelper(activity, actionBarShowing, compassRose);
+    public void adaptLayoutForActionBar(final @Nullable Boolean actionBarShowing) {
+        HideActionBarUtils.adaptLayoutForActionBarHelper((AppCompatActivity) requireActivity(), actionBarShowing, null);
     }
 
 }

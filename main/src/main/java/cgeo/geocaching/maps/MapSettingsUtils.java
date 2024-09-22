@@ -53,6 +53,18 @@ public class MapSettingsUtils {
         // utility class
     }
 
+    public static void showRotationMenu(final Activity activity, final Action1<Integer> setRotationMode) {
+        final ToggleButtonWrapper<Integer> rotationChoiceWrapper = new ToggleButtonWrapper<>(Settings.getMapRotation(), setRotationMode, activity.findViewById(R.id.rotation_mode_tooglegroup));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_off, Settings.MAPROTATION_OFF, activity.getString(R.string.switch_off)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_manual, Settings.MAPROTATION_MANUAL, activity.getString(R.string.switch_manual)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_energy_saving, Settings.MAPROTATION_AUTO_LOWPOWER, activity.getString(R.string.switch_auto_lowpower)));
+        rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_high_precision, Settings.MAPROTATION_AUTO_PRECISE, activity.getString(R.string.switch_auto_precise)));
+        rotationChoiceWrapper.init();
+        for (ButtonChoiceModel<Integer> bcm : rotationChoiceWrapper.list) {
+            bcm.button.setOnClickListener(v -> rotationChoiceWrapper.setValue());
+        }
+    }
+
     // splitting up that method would not help improve readability
     @SuppressLint("SetTextI18n")
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})

@@ -72,7 +72,11 @@ public class HideActionBarUtils {
         }
     }
 
-    public static void adaptLayoutForActionBarHelper(final AppCompatActivity activity, @Nullable final Boolean actionBarShowing, final View compassRose) {
+    public static void adaptLayoutForActionBarHelper(final AppCompatActivity activity, @Nullable final Boolean actionBarShowing, @Nullable final View compassRose) {
+        if (compassRose == null) {
+            return;
+        }
+
         int minHeight = 0;
 
         Boolean abs = actionBarShowing;
@@ -89,7 +93,7 @@ public class HideActionBarUtils {
             minHeight += filterbar.getHeight();
         }
 
-        View v = activity.findViewById(R.id.distanceSupersize);
+        View v = activity.findViewById(R.id.distanceinfo);
         if (v.getVisibility() != View.VISIBLE) {
             v = activity.findViewById(R.id.target);
         }

@@ -8,30 +8,25 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
-import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
-import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Pair;
 
@@ -61,10 +56,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     private MapsforgeThemeHelper themeHelper;
     private View mapAttribution;
     private boolean doReapplyTheme = false;
-
-    private final Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
-    private final int rotationWidth = rotationIndicator.getWidth();
-    private final int rotationHeight = rotationIndicator.getHeight();
 
     public MapsforgeFragment() {
         super(R.layout.unifiedmap_mapsforge_fragment);
@@ -116,14 +107,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void onChange() {
-        /// todo: can this be used as observer?
-
-        //        mapUpdateListener = (event, mapPosition) -> {
-//            if (event == Map.ROTATE_EVENT || event == Map.POSITION_EVENT) {
-//                repaintRotationIndicator(mapPosition.bearing);
-//            }
-//        };
-        repaintRotationIndicator(mMapView.getMapRotation().degrees);
+        ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(getCurrentBearing());
     }
 
     private void startMap() {
@@ -165,34 +149,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         // Make the URLs in TextView clickable. Must be called after show()
         // Note: we do NOT use the "setView()" option of AlertDialog because this screws up the layout
         ((TextView) alertDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    protected void repaintRotationIndicator(final float bearing) {
-        final View currentView = getView();
-        if (currentView == null) {
-            return;
-        }
-
-        requireActivity().runOnUiThread(() -> {
-            final ImageView compassrose = currentView.findViewById(R.id.bearingIndicator);
-            if (bearing == 0.0f) {
-                compassrose.setImageBitmap(null);
-            } else {
-                adaptLayoutForActionBar(null);
-
-                final Matrix matrix = new Matrix();
-                matrix.setRotate(bearing, rotationWidth / 2.0f, rotationHeight / 2.0f);
-                compassrose.setImageBitmap(Bitmap.createBitmap(rotationIndicator, 0, 0, rotationWidth, rotationHeight, matrix, true));
-                compassrose.setOnClickListener(v -> {
-                    final boolean isRotated = getCurrentBearing() != 0f;
-                    setBearing(0.0f);
-                    repaintRotationIndicator(0.0f);
-                    if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                        Dialogs.advancedOneTimeMessage(getContext(), MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
-                    }
-                });
-            }
-        });
     }
 
 
@@ -428,11 +384,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-
-        // enable or disable gestures for rotating the map
         mMapView.getTouchGestureHandler().setRotationEnabled(mapRotation == Settings.MAPROTATION_MANUAL);
-
-        repaintRotationIndicator(mMapView.getMapRotation().degrees);
     }
 
     @Override
@@ -500,8 +452,4 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         }
     }
 
-    @Override
-    public void adaptLayoutForActionBar(@Nullable final Boolean actionBarShowing) {
-        adaptLayoutForActionBar(requireView().findViewById(R.id.bearingIndicator), actionBarShowing);
-    }
 }

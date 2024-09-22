@@ -7,16 +7,14 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.AngleUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
-import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
-import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
 import android.graphics.Point;
@@ -92,6 +90,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
+        googleMap.getUiSettings().setCompassEnabled(false);
         setMapRotation(Settings.getMapRotation());
         onMapReadyCheckForActivity();
     }
@@ -126,6 +125,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
                 viewModel.followMyLocation.setValue(false);
             }
         });
+        mMap.setOnCameraMoveListener(() -> ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(getCurrentBearing()));
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
             viewModel.mapCenter.setValue(getCenter());
@@ -246,20 +246,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     @Override
     public void setMapRotation(final int mapRotation) {
         super.setMapRotation(mapRotation);
-
         mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
-
-        final View fragmentView = getView();
-        if (fragmentView != null) {
-            fragmentView.findViewWithTag("GoogleMapCompass").setVisibility(mapRotation != MAPROTATION_OFF ? View.VISIBLE : View.GONE);
-            fragmentView.findViewWithTag("GoogleMapCompass").setOnClickListener(v -> {
-                final boolean isRotated = getCurrentBearing() != 0f;
-                setBearing(0.0f);
-                if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                    Dialogs.advancedOneTimeMessage(getContext(), MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
-                }
-            });
-        }
     }
 
     @Override
@@ -305,13 +292,5 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     // ========================================================================
     // Tap handling methods
-
-    @Override
-    public void adaptLayoutForActionBar(@Nullable final Boolean actionBarShowing) {
-        if (mMap == null) {
-            return;
-        }
-        adaptLayoutForActionBar(requireView().findViewWithTag("GoogleMapCompass"), actionBarShowing);
-    }
 
 }
