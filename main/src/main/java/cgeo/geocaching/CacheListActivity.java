@@ -678,6 +678,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
             setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
+            setVisibleEnabled(menu, R.id.menu_delete_caches_immediately, containsStoredCaches(), !isEmpty);
             setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
             setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
@@ -812,6 +813,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_caches) {
             deleteCaches(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_delete_caches_immediately) {
+            deleteCachesImmediately(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_pq) {
             startListSelection(REQUEST_CODE_IMPORT_PQ);
@@ -1365,6 +1369,21 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         new DeleteCachesFromListCommand(this, caches, listId).execute();
     }
 
+    private void deleteCachesImmediately(@NonNull final Collection<Geocache> caches) {
+        // only count caches that are stored offline
+        final List<Geocache> onlineCaches = new ArrayList<>();
+        for (Geocache cache : caches) {
+            if (!cache.isOffline()) {
+                onlineCaches.add(cache);
+            }
+        }
+        caches.removeAll(onlineCaches);
+
+        // confirmation dialog
+        final String title = res.getQuantityString(R.plurals.command_delete_caches, caches.size(), caches.size());
+        SimpleDialog.of(this).setTitle(TextParam.text(title)).setMessage(TextParam.id(R.string.command_delete_caches_immediately)).confirm(() -> new DeleteCachesImmediatelyCommand(this, caches).execute());
+    }
+
     private static final class LastPositionHelper {
         private final WeakReference<CacheListActivity> activityRef;
         private final int lastListPosition;
@@ -1405,6 +1424,39 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static boolean removeWillDeleteFromDevice(final int listId) {
         return listId == PseudoList.ALL_LIST.id || listId == PseudoList.HISTORY_LIST.id || listId == StoredList.TEMPORARY_LIST.id;
+    }
+
+    /** removes given caches from database without further interaction. cannot be undone */
+    private static final class DeleteCachesImmediatelyCommand extends AbstractCachesCommand {
+
+        private final LastPositionHelper lastPositionHelper;
+
+        DeleteCachesImmediatelyCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches) {
+            super(context, caches, R.string.command_delete_caches_progress);
+            this.undoSupported = false;
+            this.lastPositionHelper = new LastPositionHelper(context);
+        }
+
+        @Override
+        public void onFinished() {
+            lastPositionHelper.refreshListAtLastPosition();
+        }
+
+        @Override
+        protected void doCommand() {
+            final Collection<Geocache> caches = getCaches();
+            for (Geocache cache : caches) {
+                Log.e("calling remove for " + cache.getGeocode());
+                DataStore.removeCaches(Collections.singleton(cache.getGeocode()), LoadFlags.REMOVE_ALL);
+            }
+        }
+
+        @Override
+        @NonNull
+        protected String getResultMessage() {
+            final int size = getCaches().size();
+            return getContext().getResources().getQuantityString(R.plurals.command_delete_caches_result, size, size);
+        }
     }
 
     private static final class DeleteCachesFromListCommand extends AbstractCachesCommand {

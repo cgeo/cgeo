@@ -69,6 +69,10 @@
                 android:title="@string/caches_remove_all"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_delete_caches_immediately"
+                android:title="Delete caches immediately"
+                app:showAsAction="ifRoom|withText"/>
+            <item
                 android:id="@+id/menu_add_to_route"
                 android:title="@string/caches_append_to_route_all"
                 app:showAsAction="ifRoom|withText"/>

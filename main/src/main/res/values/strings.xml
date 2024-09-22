@@ -2551,6 +2551,15 @@
         <item quantity="many">Copied %d caches</item>
         <item quantity="other">Copied %d caches</item>
     </plurals>
+    <plurals name="command_delete_caches">
+        <item quantity="zero">Delete %d cache</item>
+        <item quantity="one">Delete %d cache</item>
+        <item quantity="two">Delete %d caches</item>
+        <item quantity="few">Delete %d caches</item>
+        <item quantity="many">Delete %d caches</item>
+        <item quantity="other">Delete %d caches</item>
+    </plurals>
+    <string name="command_delete_caches_immediately">This will remove the caches from c:geo database immediately as well as temporary data downloaded for those.\n\nThis action cannot be undone!\n\nDo you want to proceed?</string>
     <string name="command_delete_caches_progress">Deleting caches</string>
     <plurals name="command_delete_caches_result">
         <item quantity="zero">Deleted %d caches</item>

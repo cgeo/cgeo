@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class AbstractCommand implements Command {
 
     private static final int UNDO_DURATION_MILLISEC = 5_000;
+    protected boolean undoSupported = true;
 
     @NonNull
     private final Activity context;
@@ -57,7 +58,11 @@ public abstract class AbstractCommand implements Command {
      * This runs in a <b>non</b> UI thread.
      * </p>
      */
-    protected abstract void undoCommand();
+    protected void undoCommand() {
+        if (undoSupported) {
+            throw new IllegalStateException("missing undo implementation for " + this.getClass());
+        }
+    }
 
     /**
      * Called after the execution of {@link #doCommand()} or {@link #undoCommand()} finished.
@@ -118,7 +123,9 @@ public abstract class AbstractCommand implements Command {
         protected void onPostExecuteInternal(final Void result) {
             onFinished();
             final String resultMessage = getResultMessage();
-            showUndoToast(resultMessage);
+            if (undoSupported) {
+                showUndoToast(resultMessage);
+            }
         }
 
         @SuppressLint("WrongConstant")
@@ -133,7 +140,9 @@ public abstract class AbstractCommand implements Command {
 
         @Override
         public void onClick(final View view) {
-            new UndoTask(context).execute();
+            if (undoSupported) {
+                new UndoTask(context).execute();
+            }
         }
     }
 
