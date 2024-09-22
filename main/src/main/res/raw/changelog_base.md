@@ -8,6 +8,7 @@
 - New: Not yet existing variables used in projection get created in variable list
 - New: Allow large integers in formulas
 - New: Support more constellations for variables in formulas
+- Fix: Multiple images in personal note not added to images tab
 
 ### General
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
