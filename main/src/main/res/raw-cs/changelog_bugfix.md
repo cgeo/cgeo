@@ -1,5 +1,6 @@
 ##
 - Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
+- Oprava: Chybný výškový graf pro tratě s více segmenty
 
 ##
 - Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
