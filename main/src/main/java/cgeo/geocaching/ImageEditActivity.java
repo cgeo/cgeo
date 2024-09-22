@@ -98,6 +98,7 @@ public class ImageEditActivity extends AbstractActionBarActivity {
             geocode = extras.getString(Intents.EXTRA_GEOCODE);
             imageOrientation = ImageUtils.getImageOrientation(image.getUri());
             savedImageOrientation = imageOrientation.clone();
+            binding.caption.requestFocus();
         }
 
         // Restore previous state
