@@ -2,7 +2,7 @@
 - New: Store map theme per tile provider (UnifiedMap)
 - New: Highlight selected cache/waypoint (UnifiedMap)
 - New: Add separator between offline and online map sources
-- New: Support Mapsforge as alternative to VTM in UnifiedMap (beta / contact support if you want to test this)
+- New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
 
 ### Cache details
 - New: Not yet existing variables used in projection get created in variable list
