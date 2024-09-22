@@ -1,5 +1,6 @@
 ##
 - New: Show warning for activated gc connector without credentials
+- Fix: Wrong elevation chart for tracks with multiple segments
 
 ##
 - Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
