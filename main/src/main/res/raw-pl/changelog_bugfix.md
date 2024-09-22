@@ -1,5 +1,6 @@
 ##
-- New: Show warning for activated gc connector without credentials
+- Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
+- Fix: Wrong elevation chart for tracks with multiple segments
 
 ##
 - Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
