@@ -1,5 +1,6 @@
 ##
 - New: Show warning for activated gc connector without credentials
+- Fix: Wrong elevation chart for tracks with multiple segments
 
 ##
 - Korrektur: Fehlende Parametrisierung für benutzerdefinierten Kartenanbieter
