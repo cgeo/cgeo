@@ -2578,6 +2578,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                                  final OnClickListener showHintClickListener,
                                  final OnLongClickListener moveCacheListener,
                                  final OnLongClickListener storeCachePreselectedListener) {
+        if (view == null) {
+            return; // fragment already destroyed?
+        }
+
         // offline use
         final TextView offlineText = view.findViewById(R.id.offline_text);
         final View offlineRefresh = view.findViewById(R.id.offline_refresh);

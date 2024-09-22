@@ -2,6 +2,7 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -77,6 +78,7 @@ public class TemplateTextPreference extends Preference {
         editTitle = v.findViewById(R.id.title);
         editText = v.findViewById(R.id.edit);
 
+        boolean focusOnText = true;
         if (isSignature) {
             editText.setText(Settings.getSignature());
         } else {
@@ -86,8 +88,10 @@ public class TemplateTextPreference extends Preference {
                 editTitle.setText(template.getTitle());
                 editText.setText(template.getText());
             }
+            focusOnText = StringUtils.isNotEmpty(editTitle.getText());
         }
         Dialogs.moveCursorToEnd(editText);
+        Keyboard.show(getContext(), focusOnText ? editText : editTitle);
 
         final AlertDialog dialog = Dialogs.newBuilder(getContext())
                 .setView(v)

@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.SeekbarBinding;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -90,7 +89,6 @@ public class SeekbarUI extends LinearLayout {
 
     public SeekbarUI(final Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        Log.e("new SeekbarUI");
         createView();
         init();
     }
