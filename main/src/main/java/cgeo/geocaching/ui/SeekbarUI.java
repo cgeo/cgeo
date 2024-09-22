@@ -90,7 +90,6 @@ public class SeekbarUI extends LinearLayout {
 
     public SeekbarUI(final Context context, final @Nullable AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        Log.e("new SeekbarUI");
         createView();
         init();
     }
