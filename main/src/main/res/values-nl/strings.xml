@@ -778,6 +778,8 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
+    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
+    <string name="settings_useMapsforgeInUnifiedMap_summary">Bied zowel VTM als Mapsforge bronnen aan voor Mapsforge kaarten (voor testdoeleinden)</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -1269,6 +1271,7 @@
     <string name="auth_register">Account aanmaken</string>
     <string name="auth_connected">Verbonden</string>
     <string name="auth_unconnected">Nog niet verbonden</string>
+    <string name="auth_unconnected_tap_here">Nog niet verbonden - tik hier om te autoriseren</string>
     <string name="auth_connected_as">Verbonden als %s.\nDruk hier om te updaten of druk lang om de autorisatiegegevens van c:geo te verwijderen.</string>
     <string name="auth_dialog_waiting">Wachten op %s…</string>
     <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
@@ -2950,6 +2953,14 @@
         <item quantity="other">%d ongelezen berichten in berichtcentrum</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Voorkeur afbeeldingsgrootte</string>
+    <string name="settings_gc_imagesize_summary">Afbeeldingen van Geocaching.com in de lijst, logs en trackables zijn beschikbaar in verschillende formaten. Selecteer de grootte die moet worden geladen bij het laden en opslaan van een cache.</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Origineel</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <string name="view_database">Bekijk database</string>
     <string name="dbi_select_title">(Selecteer tabel)</string>
