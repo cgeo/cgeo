@@ -1,5 +1,6 @@
 ##
-- New: Show warning for activated gc connector without credentials
+- Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
+- Oplossing: Verkeerde hoogte grafiek voor tracks met meerdere segmenten
 
 ##
 - Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
