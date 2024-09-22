@@ -1268,6 +1268,7 @@
     <string name="auth_register">Skapa ett konto</string>
     <string name="auth_connected">Ansluten</string>
     <string name="auth_unconnected">Inte ansluten ännu</string>
+    <string name="auth_unconnected_tap_here">Inte ansluten ännu - tryck här för att auktorisera</string>
     <string name="auth_connected_as">Ansluten som %s.\nTryck här för att uppdatera eller långtryck för att ta bort behörighetsdata från c:geo.</string>
     <string name="auth_dialog_waiting">Väntar på %s…</string>
     <string name="auth_explain_short">Följande process kommer att tillåta <b>c:geo</b> att få tillgång till %s.</string>
