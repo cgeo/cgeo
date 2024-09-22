@@ -1,5 +1,6 @@
 ##
-- New: Show warning for activated gc connector without credentials
+- Nyhet: Visa varning för aktiverad gc-anslutning utan inloggningsuppgifter
+- Fix: Wrong elevation chart for tracks with multiple segments
 
 ##
 - Fix: Missing parametrization for user-defined tileprovider
