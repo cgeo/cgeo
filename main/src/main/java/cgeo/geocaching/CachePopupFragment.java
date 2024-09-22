@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -247,8 +248,11 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
 
     private void updateStoreRefreshButtons(final boolean enable) {
-        ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_store), enable);
-        ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_refresh), enable);
+        final Activity activity = getActivity();
+        if (activity != null) {
+            ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_store), enable);
+            ViewUtils.setEnabled(getActivity().findViewById(R.id.offline_refresh), enable);
+        }
     }
 
 
