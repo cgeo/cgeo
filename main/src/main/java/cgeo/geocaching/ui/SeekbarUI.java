@@ -2,9 +2,8 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.SeekbarBinding;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.ui.dia.Dias;
+import cgeo.geocaching.ui.dia.SimpleDia;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.content.Context;
@@ -31,7 +30,7 @@ import java.util.Locale;
  * - min          - minimum allowed value
  * - max          - maximum allowed value
  * - stepSize     - value will be rounded down to nearest stepSize
- * - logScaling   - use logarithmic scaling for seekbar display
+ * - Scaling   - use arithmic scaling for seekbar display
  */
 public class SeekbarUI extends LinearLayout {
 
@@ -47,7 +46,7 @@ public class SeekbarUI extends LinearLayout {
     protected int startProgress = 0;
     public static final int defaultValue = 10;
     protected boolean hasDecimals = false;
-    protected boolean useLogScaling = false;
+    protected boolean useScaling = false;
     protected String unitValue = "";
     private ValueProgressMapper valueProgressMapper = null;
     private Action1<Integer> saveProgressListener = null;
@@ -140,13 +139,13 @@ public class SeekbarUI extends LinearLayout {
             if (getHasDecimals()) {
                 inputType |= InputType.TYPE_NUMBER_FLAG_DECIMAL;
             }
-            SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue)))
-                    .input(new SimpleDialog.InputOptions()
+            SimpleDia.ofContext(getContext()).setTitle(TextParam.id(R.string.number_input_title, valueToShownValue(minValue), valueToShownValue(maxValue)))
+                    .input(new SimpleDia.InputOptions()
                             .setInputType(inputType)
                             .setInitialValue(currentValue)
                             .setSuffix(getUnitString()), input -> {
                         try {
-                            final int newValue = (int) Dialogs.checkInputRange(getContext(), shownValueToValue(Float.parseFloat(input)), minValue, maxValue);
+                            final int newValue = (int) Dias.checkInputRange(getContext(), shownValueToValue(Float.parseFloat(input)), minValue, maxValue);
                             final int newProgress = valueToProgress(newValue);
                             seekBar.setProgress(newProgress);
                             if (saveProgressListener != null) {
@@ -164,7 +163,7 @@ public class SeekbarUI extends LinearLayout {
     // ------------------------------------------------------------------------
 
     protected int valueToProgressHelper(final int value) {
-        return useLogScaling
+        return useScaling
                 ? (int) Math.sqrt((long) (value - minValue) * (maxValue - minValue))
                 : value - minValue;
     }
@@ -177,7 +176,7 @@ public class SeekbarUI extends LinearLayout {
         if (valueProgressMapper != null) {
             return valueProgressMapper.progressToValue(progress);
         }
-        final int value = useLogScaling
+        final int value = useScaling
                 ? (int) Math.round((minValue + (double) Math.pow(progress, 2) / (maxValue - minValue)))
                 : progress + minValue;
         return stepSize > 0 ? progress == maxProgress ? maxValue : ((int) Math.round((double) value / stepSize)) * stepSize : value;
@@ -278,8 +277,8 @@ public class SeekbarUI extends LinearLayout {
         this.unitValue = unitValue;
     }
 
-    public void setUseLogScaling(final boolean useLogScaling) {
-        this.useLogScaling = useLogScaling;
+    public void setUseScaling(final boolean useScaling) {
+        this.useScaling = useScaling;
     }
 
     /** can be overriden! so always use getHasDecimals instead of local member */
