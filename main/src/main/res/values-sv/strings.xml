@@ -778,6 +778,8 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
+    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
+    <string name="settings_useMapsforgeInUnifiedMap_summary">Erbjuder både VTM + Mapsforge-motorer för Mapsforge-kartor (för teständamål)</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
