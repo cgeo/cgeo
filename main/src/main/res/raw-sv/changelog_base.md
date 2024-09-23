@@ -2,7 +2,7 @@
 - Nyhet: Spara kart-tema per leverantör (UnifiedMap)
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
 - New: Add separator between offline and online map sources
-- New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Nyhet: Stöd för Mapsforge som alternativ till VTM i UnifiedMap, se [Inställningar => Kartkällor => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
