@@ -199,10 +199,8 @@ public class Waypoint implements IWaypoint {
      * the waypoint was modified by the user
      */
     public boolean isUserModified() {
-        return
-            isUserDefined() || isVisited() ||
-                (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
-                StringUtils.isNotBlank(getUserNote());
+        final boolean hasModifiedCoordinates = (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null) || hasProjection());
+        return isUserDefined() || isVisited() || hasModifiedCoordinates || StringUtils.isNotBlank(getUserNote());
     }
 
     public void setUserDefined() {
@@ -363,8 +361,8 @@ public class Waypoint implements IWaypoint {
      * Returns whether a recalculation was actually done
      */
     public boolean recalculateVariableDependentValues(final VariableList varList) {
-        //coords and proprojectedcoords are variable-dependent. Let's see whether we have to recalculate
-        final boolean hasProjection = this.getProjectionType() != ProjectionType.NO_PROJECTION;
+        //coords and projectedcoords are variable-dependent. Let's see whether we have to recalculate
+        final boolean hasProjection = hasProjection();
         boolean calcDone = false;
         if (this.isCalculated()) {
             final CalculatedCoordinate cc = getCalculated();
