@@ -464,6 +464,14 @@ public class Waypoint implements IWaypoint {
             changed = true;
         }
 
+        if (getCoords() == null && !hasProjection() && parsedWaypoint.hasProjection()) {
+            setProjection(parsedWaypoint.getProjectionType(), parsedWaypoint.getProjectionDistanceUnit(),
+                    parsedWaypoint.getProjectionFormula1(), parsedWaypoint.getProjectionFormula2());
+            setPreprojectedCoords(parsedWaypoint.getPreprojectedCoords());
+            setCoordsPure(parsedWaypoint.getCoords());
+            changed = true;
+        }
+
         //coordinates
         if (getCoords() == null && parsedWaypoint.getCoords() != null) {
             setCoords(parsedWaypoint.getCoords());
