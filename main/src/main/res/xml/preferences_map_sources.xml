@@ -87,7 +87,6 @@
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapshading"
             android:dependency="@string/pref_maphillshading"
-            android:summary="@string/settings_info_themes"
             android:title="@string/init_mapshading_folder"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>

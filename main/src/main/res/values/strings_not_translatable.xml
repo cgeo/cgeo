@@ -66,7 +66,6 @@
     <!-- links to manual pages -->
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
     <string translatable="false" name="faq_url_settings_themes">https://faq.cgeo.org/#theme-slow</string>
-    <string translatable="false" name="manual_url_hillshading">https://manual.cgeo.org/en/offlinemaps#hillshading</string>
 
     <!-- contributors -->
     <string translatable="false" name="contributors_carnero">carnero</string>
