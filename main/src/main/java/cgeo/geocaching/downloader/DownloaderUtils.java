@@ -84,11 +84,11 @@ public class DownloaderUtils {
 
     public static void checkForRoutingTileUpdates(final MainActivity activity) {
         if (Settings.useInternalRouting() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromBrouterTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
         }
     }
 
-    public static void returnFromBrouterTileUpdateCheck(final boolean updateCheckAllowed) {
+    public static void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
         Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
     }
 
