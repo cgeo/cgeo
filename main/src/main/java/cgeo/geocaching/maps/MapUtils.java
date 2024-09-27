@@ -233,12 +233,12 @@ public class MapUtils {
             }, () -> {
                 // give feedback to the user + offer to download missing tiles (if available)
                 if (missingDownloads.isEmpty()) {
-                    ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_tiles_unsupported : R.string.check_tiles_found);
+                    ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_hillshading_unsupported : R.string.check_hillshading_found);
                 } else {
                     if (hasUnsupportedTiles.get()) {
-                        ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
+                        ActivityMixin.showShortToast(activity, R.string.check_hillshading_unsupported);
                     }
-                    DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads, null);
+                    DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_hillshading_missing, missingDownloads, null);
                 }
             });
         }

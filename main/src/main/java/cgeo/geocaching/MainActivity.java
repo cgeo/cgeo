@@ -270,9 +270,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForRoutingTileUpdates(this);
             cLog.add("rtu");
 
-            DownloaderUtils.checkForHillshadingTileUpdates(this);
-            cLog.add("htu");
-
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
 

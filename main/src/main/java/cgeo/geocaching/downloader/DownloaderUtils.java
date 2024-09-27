@@ -92,16 +92,6 @@ public class DownloaderUtils {
         Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
     }
 
-    public static void checkForHillshadingTileUpdates(final MainActivity activity) {
-        if (Settings.useInternalRouting() && !PersistableFolder.OFFLINE_MAP_SHADING.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) { // TODO: brouter->hillshading
-            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromHillshadingTileUpdateCheck);
-        }
-    }
-
-    public static void returnFromHillshadingTileUpdateCheck(final boolean updateCheckAllowed) {
-        Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed); // TODO: brouter->hillshading
-    }
-
     public static void checkForMapUpdates(final MainActivity activity) {
         if (Settings.mapAutoDownloadsNeedUpdate()) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.mapupdate, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, DownloaderUtils::returnFromMapUpdateCheck);
