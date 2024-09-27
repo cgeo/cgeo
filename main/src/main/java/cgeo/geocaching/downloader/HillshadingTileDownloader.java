@@ -2,15 +2,9 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.brouter.BRouterConstants;
-import cgeo.geocaching.brouter.mapaccess.PhysicalFile;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
-import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.utils.CalendarUtils;
-import cgeo.geocaching.utils.Formatter;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -19,14 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class HillshadingTileDownloader extends AbstractDownloader {
-    private static final Pattern PATTERN_TILE = Pattern.compile("href=\"([N|S][0-9]+[E|W][0-9]*\\.hgt\\.zip)\">[N|S][0-9]+[E|W][0-9]*\\.hgt\\.zip<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
+    private static final Pattern PATTERN_TILE = Pattern.compile("href=\"(([N|S][0-9]+[E|W][0-9]*\\.hgt)\\.zip)\">[N|S][0-9]+[E|W][0-9]*\\.hgt\\.zip<\\/a><\\/td><td align=\"right\">([-0-9]+)[ 0-9:]+<\\/td><td align=\"right\">([ 0-9\\.]+[KMG])<\\/td>");
     private static final Pattern PATTERN_DIR = Pattern.compile("alt=\"\\[DIR\\]\"><\\/td><td><a href=\"([-a-z]+\\/)");
     private static final Pattern PATTERN_UP = Pattern.compile("alt=\"\\[PARENTDIR\\]\"><\\/td><td><a href=\"((\\/[-a-zA-Z0-9\\.]+)+\\/)");
     private static final HillshadingTileDownloader INSTANCE = new HillshadingTileDownloader();
@@ -50,7 +44,7 @@ public class HillshadingTileDownloader extends AbstractDownloader {
 
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
-            final Download offlineMap = new Download(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, matchMap.group(2), matchMap.group(3), offlineMapType, iconRes);
+            final Download offlineMap = new Download(matchMap.group(2), Uri.parse(uri + matchMap.group(1)), false, matchMap.group(3), matchMap.group(4), offlineMapType, iconRes);
             list.add(offlineMap);
         }
     }
@@ -81,15 +75,12 @@ public class HillshadingTileDownloader extends AbstractDownloader {
 
     // used for area tile checking, see MapUtils
     @WorkerThread
-    public HashMap<String, Download> getAvailableTiles() {
+    public HashMap<String, Download> getAvailableTiles(final Set<String> foldernames) {
         final HashMap<String, Download> tiles = new HashMap<>();
 
         final String url = CgeoApplication.getInstance().getString(R.string.hillshading_downloadurl);
-        for (int i = 0; i <= 83; i++) {
-            tiles.putAll(getAvailableTilesSubfolder(url + "N" + String.format("%02d", i) + "/"));
-        }
-        for (int i = 1; i <= 90; i++) {
-            tiles.putAll(getAvailableTilesSubfolder(url + "S" + String.format("%02d", i) + "/"));
+        for (String foldername : foldernames) {
+            tiles.putAll(getAvailableTilesSubfolder(url + foldername + "/"));
         }
         return tiles;
     }
@@ -105,14 +96,5 @@ public class HillshadingTileDownloader extends AbstractDownloader {
             tiles.put(download.getName(), download);
         }
         return tiles;
-    }
-
-    @Override
-    protected boolean verifiedBeforeCopying(final String filename, final Uri file) {
-        final String result = PhysicalFile.checkTileDataIntegrity(filename, (FileInputStream) ContentStorage.get().openForRead(file));
-        if (result != null) {
-            Log.e("Downloading hillshading tile '" + filename + "' failed: " + result);
-        }
-        return (result == null);
     }
 }
