@@ -315,6 +315,10 @@
     <string translatable="false" name="brouter_downloadurl">https://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
+    <string translatable="false" name="hillshading_name">Hillshading</string>
+    <string translatable="false" name="hillshading_downloadurl">https://ftp-stud.hs-esslingen.de/pub/Mirrors/download.mapsforge.org/maps/dem/dem3/</string>
+    <string translatable="false" name="hillshading_projecturl">https://download.mapsforge.org</string>
+
     <string translatable="false" name="mapserver_osmpaws_name">Paws</string>
     <string translatable="false" name="mapserver_osmpaws_downloadurl">https://osm.paws.cz/cgeo.php</string>
     <string translatable="false" name="mapserver_osmpaws_likeiturl">https://osm.paws.cz/podpora.php</string>

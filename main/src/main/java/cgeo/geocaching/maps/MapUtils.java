@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -41,6 +42,7 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
+import static cgeo.geocaching.downloader.HillshadingTileDownloader.HILLSHADING_TILE_FILEEXTENSION;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -201,6 +203,45 @@ public class MapUtils {
         }
     }
 
+    // check whether hillshading tile data is available for the whole viewport given
+    // and offer to download missing hillshading data
+    public static void checkHillshadingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
+        if (Settings.getMapShadingEnabled()) {
+            ActivityMixin.showToast(activity, R.string.downloadmap_checking);
+
+            final HashMap<String, String> missingTiles = new HashMap<>();
+            final ArrayList<Download> missingDownloads = new ArrayList<>();
+            final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
+
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+                // calculate affected routing tiles
+                int curLat = (int) Math.floor(minLatitude);
+                final int maxLat = (int) Math.floor(maxLatitude);
+                final int maxLon = (int) Math.floor(maxLongitude);
+                while (curLat <= maxLat) {
+                    int curLon = (int) Math.floor(minLongitude);
+                    while (curLon <= maxLon) {
+                        final String filenameBase = (curLat < 0 ? "S" : "N") + String.format("%02d", Math.abs(curLat)) + (curLon < 0 ? "W" : "E") + String.format("%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION + ".zip";
+                        missingTiles.put(filenameBase, filenameBase);
+                        curLon += 1;
+                    }
+                    curLat += 1;
+                }
+                checkHillshadingTiles(missingTiles, missingDownloads, hasUnsupportedTiles);
+            }, () -> {
+                // give feedback to the user + offer to download missing tiles (if available)
+                if (missingDownloads.isEmpty()) {
+                    ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_tiles_unsupported : R.string.check_tiles_found);
+                } else {
+                    if (hasUnsupportedTiles.get()) {
+                        ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
+                    }
+                    DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads, null);
+                }
+            });
+        }
+    }
+
     public static void onPrepareOptionsMenu(final Menu menu) {
         final MenuItem item = menu.findItem(R.id.menu_check_routingdata);
         if (item != null) {
@@ -222,6 +263,31 @@ public class MapUtils {
         // read list of available tiles from the server, if necessary
         if (!missingTiles.isEmpty()) {
             final HashMap<String, Download> tiles = BRouterTileDownloader.getInstance().getAvailableTiles();
+            final ArrayList<String> filenames = new ArrayList<>(missingTiles.values()); // work on copy to avoid concurrent modification
+            for (String filename : filenames) {
+                if (tiles.containsKey(filename)) {
+                    missingDownloads.add(tiles.get(filename));
+                } else {
+                    missingTiles.remove(filename);
+                    hasUnsupportedTiles.set(true);
+                }
+            }
+        }
+    }
+
+    @WorkerThread
+    private static void checkHillshadingTiles(final HashMap<String, String> missingTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
+        // read tiles already stored
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_SHADING.getFolder());
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.endsWith(HILLSHADING_TILE_FILEEXTENSION)) {
+                missingTiles.remove(fi.name);
+            }
+        }
+
+        // read list of available tiles from the server, if necessary
+        if (!missingTiles.isEmpty()) {
+            final HashMap<String, Download> tiles = HillshadingTileDownloader.getInstance().getAvailableTiles();
             final ArrayList<String> filenames = new ArrayList<>(missingTiles.values()); // work on copy to avoid concurrent modification
             for (String filename : filenames) {
                 if (tiles.containsKey(filename)) {

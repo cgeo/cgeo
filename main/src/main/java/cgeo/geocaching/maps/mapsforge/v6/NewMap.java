@@ -502,6 +502,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
+        } else if (id == R.id.menu_check_hillshadingdate) {
+            final BoundingBox bb = mapView.getBoundingBox();
+            MapUtils.checkHillshadingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
                 || DownloaderUtils.onOptionsItemSelected(this, id, false)) {
             return true;

@@ -814,6 +814,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapFragment.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
+        } else if (id == R.id.menu_check_hillshadingdate) {
+            final BoundingBox bb = mapFragment.getBoundingBox();
+            MapUtils.checkHillshadingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(viewModel.positionHistory.getValue()), () -> {
             PositionHistory positionHistory = viewModel.positionHistory.getValue();
             if (positionHistory == null) {

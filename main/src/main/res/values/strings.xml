@@ -2806,6 +2806,7 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
+    <string name="downloadmap_hillshadingfile">hillshading data file</string>
     <string name="downloadmap_checking">Checking available routing data…</string>
     <string name="downloadmap_othermapdownload">other map download</string>
     <string name="downloadmap_otherthemedownload">other theme download</string>
@@ -2819,6 +2820,7 @@
     <string name="check_tiles_missing">Found missing routing data:</string>
     <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
+    <string name="check_hillshading_tiles_menu">Check for missing hillshading data</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>
@@ -2832,6 +2834,7 @@
     <string name="mapserver_hylly_info">Detailed maps for Finland, require one of the \"Hylly\" map themes</string>
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
+    <string name="hillshading_info">Offline hillshading</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
     <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (require restart)</string>
     <string name="maptheme_scale_map_title">Map Scale Factor</string>

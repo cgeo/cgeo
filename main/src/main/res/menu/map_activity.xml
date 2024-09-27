@@ -166,6 +166,9 @@
         android:id="@+id/menu_check_routingdata"
         android:title="@string/check_tiles_menu" />
     <item
+        android:id="@+id/menu_check_hillshadingdate"
+        android:title="@string/check_hillshading_tiles_menu" />
+    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"
         android:title="@string/map_as_list">
