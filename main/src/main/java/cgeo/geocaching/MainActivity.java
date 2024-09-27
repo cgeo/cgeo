@@ -35,7 +35,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
@@ -270,6 +269,9 @@ public class MainActivity extends AbstractNavigationBarActivity {
             // automated update check
             DownloaderUtils.checkForRoutingTileUpdates(this);
             cLog.add("rtu");
+
+            DownloaderUtils.checkForHillshadingTileUpdates(this);
+            cLog.add("htu");
 
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
@@ -515,7 +517,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                 startActivity(new Intent(this, BookmarkListActivity.class));
             }
         } else if (id == R.id.menu_update_routingdata) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromBrouterTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
         } else if (id == R.id.menu_pending_downloads) {

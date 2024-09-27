@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.AbstractDownloader;
 import cgeo.geocaching.downloader.BRouterTileDownloader;
 import cgeo.geocaching.downloader.CompanionFileUtils;
+import cgeo.geocaching.downloader.HillshadingTileDownloader;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarte;
 import cgeo.geocaching.downloader.MapDownloaderFreizeitkarteThemes;
 import cgeo.geocaching.downloader.MapDownloaderHylly;
@@ -151,7 +152,8 @@ public class Download {
         DOWNLOADTYPE_MAP_JUSTDOWNLOAD(50, R.string.downloadmap_othermapdownload),
         DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload),
 
-        DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile);
+        DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile),
+        DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile);
 
         public final int id;
         @StringRes final int typeNameResId;
@@ -211,6 +213,7 @@ public class Download {
                 // all other download types
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_JUSTDOWNLOAD, MapDownloaderJustDownload.getInstance(), R.string.downloadmap_mapfile));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_JUSTDOWNLOAD, MapDownloaderJustDownloadThemes.getInstance(), R.string.downloadmap_themefile));
+                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_HILLSHADING_TILES, HillshadingTileDownloader.getInstance(), R.string.hillshading_name));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
 
                 // adding maps and map themes to download types for completeness
