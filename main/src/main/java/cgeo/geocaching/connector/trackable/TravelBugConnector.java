@@ -49,13 +49,13 @@ public class TravelBugConnector extends AbstractTrackableConnector {
     @Override
     @NonNull
     public String getUrl(@NonNull final Trackable trackable) {
-        return getHostUrl() + "//track/details.aspx?tracker=" + trackable.getGeocode();
+        return getHostUrl() + "/track/details.aspx?tracker=" + trackable.getGeocode();
     }
 
     @Override
     public String getLogUrl(@NonNull final LogEntry logEntry) {
         if (StringUtils.isNotBlank(logEntry.serviceLogId)) {
-            return "https://www.geocaching.com/track/log.aspx?LUID=" + logEntry.serviceLogId;
+            return "https://www.geocaching.com/live/log/" + logEntry.serviceLogId;
         }
         return null;
     }
