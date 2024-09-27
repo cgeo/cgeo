@@ -779,6 +779,8 @@
     <string name="settings_title_map_style">Estil de mapa</string>
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
+    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
+    <string name="settings_useMapsforgeInUnifiedMap_summary">Oferim motors VTM i Mapsforge per als mapes Mapsforge (amb finalitats de prova)</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
@@ -1270,6 +1272,7 @@
     <string name="auth_register">Crear un compte</string>
     <string name="auth_connected">Connectat</string>
     <string name="auth_unconnected">Encara no s\'ha connectat</string>
+    <string name="auth_unconnected_tap_here">Encara no està connectat: toca aquí per autoritzar</string>
     <string name="auth_connected_as">Connectat com a %s.\nToca aquí per actualitzar o toca llarg per eliminar les dades d\'autorització de C:geo.</string>
     <string name="auth_dialog_waiting">Esperant %s…</string>
     <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>
@@ -2952,6 +2955,14 @@
         <item quantity="other">%d missatges no llegits al centre de missatges</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Mida d\'imatge preferida</string>
+    <string name="settings_gc_imagesize_summary">Les imatges de Geocaching.com a la llista, registres i rastrejables estan disponibles en diferents mides. Seleccioneu la mida que voleu carregar quan carregueu i emmagatzemeu un catxé.</string>
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Original</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
     <string name="view_database">Veure base de dades</string>
     <string name="dbi_select_title">(Selecciona la taula)</string>
