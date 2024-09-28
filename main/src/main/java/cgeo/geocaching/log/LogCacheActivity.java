@@ -283,7 +283,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
     private void fillViewFromEntry(final LogEntry logEntry) {
         logType.set(logEntry.logType);
-        date.setDate(new Date(logEntry.date));
+        date.setDate(logEntry.getDate());
         setLogText(logEntry.log);
         reportProblem.set(logEntry.reportProblem);
         imageListFragment.setImages(logEntry.logImages);
