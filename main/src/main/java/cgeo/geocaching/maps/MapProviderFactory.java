@@ -105,54 +105,6 @@ public class MapProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, mapSources.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading());
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_delete_offlinemap, mapSources.size() + 1, '<' + activity.getString(R.string.delete_offlinemap_title) + '>');
-    }
-
-    /** displays a list of offline map sources and deletes selected item after confirmation */
-    public static void showDeleteMenu(final Activity activity) {
-        final int currentSource = Settings.getMapSource().getNumericalId();
-
-        // build list of available offline map sources except currently active one
-        final List<Pair<String, Integer>> list = new ArrayList<>();
-        for (MapSource mapSource : mapSources.values()) {
-            if (mapSource instanceof MapsforgeMapProvider.OfflineMapSource && mapSource.getNumericalId() != currentSource) {
-                list.add(new Pair<>(mapSource.getName(), mapSource.getNumericalId()));
-            }
-        }
-        if (list.isEmpty()) {
-            ActivityMixin.showToast(activity, R.string.no_deletable_offlinemaps);
-            return;
-        }
-
-        final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = new SimpleDialog.ItemSelectModel<>();
-        model
-                .setItems(list)
-                        .setDisplayMapper((l) -> TextParam.text(l.first))
-                                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-
-        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title))
-                .selectSingle(model, (l) -> {
-            final MapsforgeMapProvider.OfflineMapSource mapSource = (MapsforgeMapProvider.OfflineMapSource) getMapSource(l.second);
-            if (mapSource != null) {
-                final ContentStorage cs = ContentStorage.get();
-                final ContentStorage.FileInformation fi = cs.getFileInfo(mapSource.getMapUri());
-                if (fi != null) {
-                    SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_offlinemap_title)).setMessage(TextParam.text(String.format(activity.getString(R.string.delete_file_confirmation), fi.name))).confirm(() -> {
-                        final Uri cf = CompanionFileUtils.companionFileExists(cs.list(PersistableFolder.OFFLINE_MAPS), fi.name);
-                        cs.delete(mapSource.getMapUri());
-                        if (cf != null) {
-                            cs.delete(cf);
-                        }
-                        ActivityMixin.showShortToast(activity, String.format(activity.getString(R.string.file_deleted_info), fi.name));
-                        MapsforgeMapProvider.getInstance().updateOfflineMaps();
-                        if (Settings.showUnifiedMap()) {
-                            TileProviderFactory.buildTileProviderList(true);
-                        }
-                        ActivityMixin.invalidateOptionsMenu(activity);
-                    });
-                }
-            }
-        });
     }
 
     public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
