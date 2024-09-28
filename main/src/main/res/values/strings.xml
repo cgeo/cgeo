@@ -1170,7 +1170,7 @@
     <string name="settings_info_themes_title">Info on Map Themes</string>
     <string name="settings_info_themes">c:geo supports custom themes for offline maps. These can be used to change the color style of the map (e.g. to have a nightview map) or to highlight certain objects like cycle paths or height lines within the map.\n\nWorking with non-zipped map themes might decrease map viewer opening performance. In this case, the theme folder may optionally be synchronized to an app-private local folder for faster access (at the cost of some storage space).</string>
     <string name="settings_info_hillshading_title">Info on Hillshading</string>
-    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nThe source files containing the elevation information have to be obtained manually - click this item for sources - and placed in the sources folder defined below.</string>
+    <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nHillshading data can be downloaded from maps overflow menu.</string>
     <string name="settings_hillshading_enable">Enable Hillshading</string>
     <string name="init_mapsource_select">Select Map Source</string>
     <string name="init_local_file_system">Local File System</string>
@@ -2809,6 +2809,7 @@
     <string name="downloadmap_mapfile">map file</string>
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
+    <string name="downloadmap_hillshadingfile">hillshading data file</string>
     <string name="downloadmap_checking">Checking available routing data…</string>
     <string name="downloadmap_othermapdownload">other map download</string>
     <string name="downloadmap_otherthemedownload">other theme download</string>
@@ -2820,8 +2821,13 @@
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
     <string name="check_tiles_missing">Found missing routing data:</string>
-    <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
+    <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the selected region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
+    <string name="download_hillshading_title">Missing hillshading data</string>
+    <string name="check_hillshading_found">Hillshading data already present</string>
+    <string name="check_hillshading_missing">Found missing hillshading data:</string>
+    <string name="check_hillshading_unsupported">Warning: Hillshading data is at least partly not available for the selected region</string>
+    <string name="check_hillshading_tiles_menu">Check for missing hillshading data</string>
     <string name="mapupdate_info">Tap here to check for updates of map and theme files. Long-tap to postpone.</string>
     <string name="no_updates_found">No updates found</string>
     <string name="updates_check">Updates check</string>
@@ -2835,6 +2841,7 @@
     <string name="mapserver_hylly_info">Detailed maps for Finland, require one of the \"Hylly\" map themes</string>
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
+    <string name="hillshading_info">Offline hillshading</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
     <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (require restart)</string>
     <string name="maptheme_scale_map_title">Map Scale Factor</string>

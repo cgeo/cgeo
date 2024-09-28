@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import static cgeo.geocaching.downloader.HillshadingTileDownloader.HILLSHADING_TILE_FILEEXTENSION;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.settings.Settings;
@@ -78,7 +79,7 @@ class ReceiveDownload {
                 while ((ze = zis.getNextEntry()) != null) {
                     String filename = ze.getName();
                     final int posExt = filename.lastIndexOf('.');
-                    if (posExt != -1 && (StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt)))) {
+                    if (posExt != -1 && ((StringUtils.equalsIgnoreCase(FileUtils.MAP_FILE_EXTENSION, filename.substring(posExt))) || (StringUtils.equalsIgnoreCase(HILLSHADING_TILE_FILEEXTENSION, filename.substring(posExt))))) {
                         filename = downloader.toVisibleFilename(filename);
                         // found map file within zip
                         if (guessFilename(filename)) {

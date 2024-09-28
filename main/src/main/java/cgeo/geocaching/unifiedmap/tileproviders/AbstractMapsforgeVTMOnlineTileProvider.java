@@ -69,6 +69,10 @@ class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTilePro
 
     @Override
     public void addTileLayer(final MapsforgeVtmFragment fragment, final Map map) {
+        fragment.addLayer(LayerHelper.ZINDEX_BASEMAP, getBitmapTileLayer(map));
+    }
+
+    public BitmapTileLayer getBitmapTileLayer(final Map map) {
         final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
         final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
         httpBuilder.cache(cache);
@@ -80,7 +84,7 @@ class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTilePro
                 .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
         tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "cgeo-android"));
-        fragment.addLayer(LayerHelper.ZINDEX_BASEMAP, new BitmapTileLayer(map, tileSource));
+        return new BitmapTileLayer(map, tileSource);
     }
 
 }

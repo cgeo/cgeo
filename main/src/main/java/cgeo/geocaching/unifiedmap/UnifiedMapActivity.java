@@ -812,6 +812,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = mapFragment.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
+        } else if (id == R.id.menu_check_hillshadingdate) {
+            final BoundingBox bb = mapFragment.getBoundingBox();
+            MapUtils.checkHillshadingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(viewModel.positionHistory.getValue()), () -> {
             PositionHistory positionHistory = viewModel.positionHistory.getValue();
             if (positionHistory == null) {
@@ -855,6 +858,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
                 mapFragment.getViewport().filter(vmCaches));
             CacheListActivity.startActivityMap(this, new SearchResult(caches));
+        } else if (id == R.id.menu_hillshading) {
+            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingShowLayer());
+            item.setChecked(Settings.getMapShadingShowLayer());
+            changeMapSource(mapFragment.currentTileProvider, getCurrentMapState());
         } else {
             final String language = TileProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {

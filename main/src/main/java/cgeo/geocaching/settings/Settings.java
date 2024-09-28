@@ -2458,12 +2458,12 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
-    public static double getMapShadingScale() {
-        return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
+    public static boolean getMapShadingEnabled() {
+        return getBoolean(R.string.pref_maphillshading, false);
     }
 
-    public static double getMapShadingLinearity() {
-        return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
+    public static boolean getMapShadingShowLayer() {
+        return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
 
     public static boolean getMapActionbarAutohide() {

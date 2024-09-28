@@ -25,6 +25,9 @@
             </group>
             <group android:id="@+id/menu_group_offlinemaps">
                 <item
+                    android:id="@+id/menu_hillshading"
+                    android:visible="false" />
+                <item
                     android:id="@+id/menu_download_offlinemap"
                     android:visible="false" />
                 <item
@@ -165,6 +168,9 @@
     <item
         android:id="@+id/menu_check_routingdata"
         android:title="@string/check_tiles_menu" />
+    <item
+        android:id="@+id/menu_check_hillshadingdate"
+        android:title="@string/check_hillshading_tiles_menu" />
     <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"
