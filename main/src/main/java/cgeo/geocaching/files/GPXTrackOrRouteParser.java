@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements AbstractTrackOrRouteParser.RouteParse {
 
