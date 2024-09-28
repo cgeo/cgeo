@@ -3,6 +3,10 @@
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
 - Novinka: Přidán oddělovač mezi offline a online zdroje map
 - Novinka: Podpora Mapsforge jako alternativy k VTM ve Sjednocené mapě, viz [Nastavení => Zdroje map => Sjednocená mapa](cgeo-setting://useMapsforgeInUnifiedMap)
+- Změna: Volba "Zobrazit výškový graf" přesunuto do nabídky dlouhého klepnutí (Sjednocená mapa)
+- Změna: Použití nového algoritmu stínování kopců pro offline mapy Mapsforge
+- Novinka: Podpora stínování kopců pro offline mapy Sjednocená mapa Mapsforge
+- Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
