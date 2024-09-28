@@ -2482,7 +2482,7 @@ public class Geocache implements IWaypoint {
         this.searchCacheData = searchCacheData;
     }
 
-    private class EventTimesInMin {
+    private static class EventTimesInMin {
         public Integer start = null;
         public Integer end = null;
 
