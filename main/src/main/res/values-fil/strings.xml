@@ -368,8 +368,6 @@
     <string name="init_address">Ang Adress ay Ipakita</string>
     <string name="init_summary_address">Ang adress ang ipakita sa halip na mga koordinado sa pangunahing iskrin</string>
     <string name="init_showwaypoint_description">Kung mas mababa ang ibinigay na halaga ng mga cache ito ay naka-display duon sa mapa, ang kanilang mga waypoint ay karagdagang ipapakita.</string>
-    <string name="init_save_log_img">Ang pag-save ng mga imahe</string>
-    <string name="init_summary_save_log_img">I-seyb ang mga Image mula sa mga Log</string>
     <string name="init_units">Ang paggamit ng Imperyal na mga Yunit</string>
     <string name="init_summary_units">Ang paggamit ng mga Yunit ng Imperyal imbis na ang mga Yunit ng Metriko</string>
     <string name="init_log_offline">Ang mga offline na log</string>
@@ -1107,10 +1105,6 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahin</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
