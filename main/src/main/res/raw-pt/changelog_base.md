@@ -3,6 +3,10 @@
 - Novo: Destacar cache/ponto adicional selecionado (Mapa Unificado)
 - Novo: Adicionado um separador entre fontes de mapas offline e online
 - Novo: Suporte para Mapsforge como alternativa à VTM no Mapa Unificado, consulte [Definições => Fontes do Mapa => Mapa Unificado](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
