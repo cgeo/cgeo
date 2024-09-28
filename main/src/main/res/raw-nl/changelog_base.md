@@ -3,6 +3,10 @@
 - Nieuw: Markeer geselecteerde cache/waypoint (UnifiedMap)
 - Nieuw: Voeg scheidingsteken toe tussen offline en online kaart bronnen
 - Nieuw: Ondersteun Mapsforge als alternatief voor VTM in UnifiedMap, zie [Instellingen => Map Bronnen => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Wijziging: 'Toon hoogtekaart' verplaatst naar het lange tik menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
