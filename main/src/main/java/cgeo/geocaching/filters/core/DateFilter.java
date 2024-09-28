@@ -127,9 +127,9 @@ public class DateFilter {
 
     public void setConfig(final List<String> config) {
         if (config != null) {
-            minDate = config.size() > 0 ? parseDate(config.get(0)) : null;
+            minDate = config.isEmpty() ? null : parseDate(config.get(0));
             maxDate = config.size() > 1 ? parseDate(config.get(1)) : null;
-            isRelative = config.size() > 2 ? Boolean.parseBoolean(config.get(2)) : false;
+            isRelative = config.size() > 2 && Boolean.parseBoolean(config.get(2));
             minDateOffset = config.size() > 3 ? Integer.parseInt(config.get(3)) : -1;
             maxDateOffset = config.size() > 4 ? Integer.parseInt(config.get(4)) : -1;
         }

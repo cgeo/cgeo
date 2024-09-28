@@ -163,7 +163,7 @@ public class RoutingEngine extends Thread {
             ProfileCache.releaseProfile(routingContext);
 
             if (nodesCache != null) {
-                if (hasInfo() && nodesCache != null) {
+                if (hasInfo()) {
                     logInfo("NodesCache status before close=" + nodesCache.formatStatus());
                 }
                 nodesCache.close();
