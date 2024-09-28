@@ -461,8 +461,6 @@
     <string name="init_brouterShowBothDistances">Entfernung an der Loftlinn uweisen</string>
     <string name="brouter_recalculating">Wee gëtt am Hannergrond nei berechent…</string>
     <string name="init_summary_brouterShowBothDistances">Wann d\'Navigatioun aktiv ass: D\'Entfernung an der Loftlinn gëtt nieft der Längt vum berechenten Wee ugewisen.</string>
-    <string name="init_save_log_img">Biller späicheren</string>
-    <string name="init_summary_save_log_img">Biller vun de Logs späicheren</string>
     <string name="init_units">Imperial Eenheeten</string>
     <string name="init_summary_units">Imperial Eenheeten amplaz vu metreschen Eenheeten benotzen</string>
     <string name="init_log_offline">Offline loggen</string>
@@ -589,10 +587,6 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
