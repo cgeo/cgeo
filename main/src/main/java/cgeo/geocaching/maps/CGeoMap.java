@@ -819,7 +819,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (bb != null) {
                 MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
             }
-        } else if (id == R.id.menu_check_hillshadingdate) {
+        } else if (id == R.id.menu_check_hillshadingdata) {
             final Viewport bb = mapView.getViewport();
             if (bb != null) {
                 MapUtils.checkHillshadingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
