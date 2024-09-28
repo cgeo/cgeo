@@ -79,6 +79,7 @@ import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.Intents.ACTION_INVALIDATE_MAPLIST;
@@ -414,10 +415,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-            final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
-            if (menuItem != null) {
-                menuItem.setVisible(mapSource.isAvailable());
-            }
+            MenuUtils.setVisible(menu.findItem(mapSource.getNumericalId()), mapSource.isAvailable());
         }
 
         try {
