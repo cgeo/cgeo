@@ -71,7 +71,7 @@ public class FormatKml extends Formatter {
 
     private void createFolder(StringBuilder sb, String type, List<MatchedWaypoint> waypoints) {
         sb.append("    <Folder>\n");
-        sb.append("      <name>" + type + "</name>\n");
+        sb.append("      <name>").append(type).append("</name>\n");
         for (int i = 0; i < waypoints.size(); i++) {
             final MatchedWaypoint wp = waypoints.get(i);
             createPlaceMark(sb, wp.name, wp.waypoint.ilat, wp.waypoint.ilon);
@@ -81,9 +81,9 @@ public class FormatKml extends Formatter {
 
     private void createPlaceMark(StringBuilder sb, String name, int ilat, int ilon) {
         sb.append("      <Placemark>\n");
-        sb.append("        <name>" + StringUtils.escapeXml10(name) + "</name>\n");
+        sb.append("        <name>").append(StringUtils.escapeXml10(name)).append("</name>\n");
         sb.append("        <Point>\n");
-        sb.append("         <coordinates>" + formatILon(ilon) + "," + formatILat(ilat) + "</coordinates>\n");
+        sb.append("         <coordinates>").append(formatILon(ilon)).append(",").append(formatILat(ilat)).append("</coordinates>\n");
         sb.append("        </Point>\n");
         sb.append("      </Placemark>\n");
     }
