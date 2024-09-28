@@ -245,10 +245,15 @@ public class MapUtils {
     }
 
     public static void onPrepareOptionsMenu(final Menu menu) {
-        final MenuItem item = menu.findItem(R.id.menu_check_routingdata);
+        MenuItem item = menu.findItem(R.id.menu_check_routingdata);
         if (item != null) {
             // use same condition as in checkRoutingData() above
             item.setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
+        }
+        item = menu.findItem(R.id.menu_check_hillshadingdate);
+        if (item != null) {
+            // use same condition as in checkHillshadingData() above
+            item.setVisible(Settings.getMapShadingEnabled());
         }
     }
 
