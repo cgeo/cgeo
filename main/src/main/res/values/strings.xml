@@ -2810,13 +2810,13 @@
     <string name="downloadmap_themefile">theme file</string>
     <string name="downloadmap_tilefile">routing data file</string>
     <string name="downloadmap_hillshadingfile">hillshading data file</string>
-    <string name="downloadmap_checking">Checking available routing data…</string>
+    <string name="downloadmap_checking">Checking available data…</string>
     <string name="downloadmap_othermapdownload">other map download</string>
     <string name="downloadmap_otherthemedownload">other theme download</string>
     <string name="downloadmap_download">download</string>
     <string name="downloadmap_retrieving_directory_data">Retrieving folder data…</string>
     <string name="downloadmap_checking_for_updates">Checking for updates…</string>
-    <string name="downloadtile_title">Missing routing data</string>
+    <string name="downloadtile_title">Missing data</string>
     <string name="downloadtile_info">c:geo cannot calculate the requested route as there is some routing data file missing. Do you want to download missing routing data?</string>
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
