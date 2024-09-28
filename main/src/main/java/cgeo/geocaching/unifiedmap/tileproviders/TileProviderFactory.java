@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.util.Pair;
@@ -48,11 +47,6 @@ public class TileProviderFactory {
 
     private TileProviderFactory() {
         // Singleton
-    }
-
-    @NonNull
-    public static TileProviderFactory getInstance() {
-        return Holder.INSTANCE;
     }
 
     public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
@@ -286,13 +280,4 @@ public class TileProviderFactory {
         languages = new String[]{};
     }
 
-    // -----------------------------------------------------------------------------------------------
-
-    /**
-     * initialization on demand holder pattern
-     */
-    private static class Holder {
-        @NonNull
-        private static final TileProviderFactory INSTANCE = new TileProviderFactory();
-    }
 }
