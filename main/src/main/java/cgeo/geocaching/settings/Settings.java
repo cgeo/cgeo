@@ -70,6 +70,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -2482,5 +2483,15 @@ public class Settings {
         final boolean isMigrated = getBoolean(R.string.pref_legacy_filter_config_migrated, false);
         putBoolean(R.string.pref_legacy_filter_config_migrated, true);
         return isMigrated;
+    }
+
+    public static void setLastUsedDate(final Calendar date) {
+        putLong(R.string.pref_last_used_date, date.getTimeInMillis());
+    }
+
+    public static Calendar getLastUsedDate() {
+        final Calendar newDate = Calendar.getInstance();
+        newDate.setTimeInMillis(getLong(R.string.pref_last_used_date, newDate.getTimeInMillis()));
+        return newDate;
     }
 }
