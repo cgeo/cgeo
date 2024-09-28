@@ -1,6 +1,6 @@
 ##
 - Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
-- Fix: Wrong elevation chart for tracks with multiple segments
+- Naprawiono: Niepoprawny wykres wysokości dla ścieżek z wieloma segmentami
 
 ##
 - Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
