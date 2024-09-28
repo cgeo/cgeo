@@ -90,6 +90,7 @@ import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -619,20 +620,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return true;
     }
 
-    private static void setVisibleEnabled(final Menu menu, final int itemId, final boolean visible, final boolean enabled) {
-        final MenuItem item = menu.findItem(itemId);
-        item.setVisible(visible);
-        item.setEnabled(enabled);
-    }
-
-    private static void setVisible(final Menu menu, final int itemId, final boolean visible) {
-        menu.findItem(itemId).setVisible(visible);
-    }
-
-    private static void setEnabled(final Menu menu, final int itemId, final boolean enabled) {
-        menu.findItem(itemId).setEnabled(enabled);
-    }
-
     public void updateSelectSwitchMenuItem(final MenuItem item) {
         ToggleItemType.SELECT_MODE.toggleMenuItem(item, adapter.isSelectMode());
     }
@@ -657,30 +644,30 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
 
             // toplevel menu items
-            setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
 
-            setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_switch_select_mode, !isEmpty);
             updateSelectSwitchMenuItem(menu.findItem(R.id.menu_switch_select_mode));
-            setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
-            setVisible(menu, R.id.menu_select_next20, adapter.isSelectMode()); // same here
-            setVisible(menu, R.id.menu_select_next100, adapter.isSelectMode()); // same here
+            MenuUtils.setVisible(menu, R.id.menu_invert_selection, adapter.isSelectMode()); // exception to the general rule: only show in select mode
+            MenuUtils.setVisible(menu, R.id.menu_select_next20, adapter.isSelectMode()); // same here
+            MenuUtils.setVisible(menu, R.id.menu_select_next100, adapter.isSelectMode()); // same here
 
-            setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_cache_list_app_provider, listNavigationApps.size() > 1, !isEmpty);
 
             // Manage Caches submenu
-            setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
-            setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
-            setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_move_to_list, isHistory || isOffline, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
-            setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
-            setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
-            setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
             final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
             setMenuItemLabel(menu, R.id.menu_drop_caches,
@@ -693,28 +680,28 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else { // search and global list (all other than offline and history)
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_store_selected, R.string.caches_store_offline);
             }
-            setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, Settings.isGCConnectorActive() && Settings.isGCPremiumMember(), !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, Settings.isGCConnectorActive(), !isEmpty);
-            setVisibleEnabled(menu, R.id.menu_upload_allcoords, Settings.isGCConnectorActive(), !isEmpty);
-            setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
-            setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_bookmarklist, Settings.isGCConnectorActive() && Settings.isGCPremiumMember(), !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_modifiedcoords, Settings.isGCConnectorActive(), !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_upload_allcoords, Settings.isGCConnectorActive(), !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_show_attributes, !isEmpty);
+            MenuUtils.setEnabled(menu, R.id.menu_set_cache_icon, !isEmpty);
 
             // Manage Lists submenu
-            setVisible(menu, R.id.menu_lists, isOffline);
-            setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
-            setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
-            setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
-            setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
-            setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
-            setEnabled(menu, R.id.menu_set_askfordeletion, preventAskForDeletion);
+            MenuUtils.setVisible(menu, R.id.menu_lists, isOffline);
+            MenuUtils.setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
+            MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
+            MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
+            MenuUtils.setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
+            MenuUtils.setEnabled(menu, R.id.menu_set_askfordeletion, preventAskForDeletion);
 
             // Import submenu
-            setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
-            setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
-            setEnabled(menu, R.id.menu_bookmarklists, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+            MenuUtils.setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
+            MenuUtils.setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+            MenuUtils.setEnabled(menu, R.id.menu_bookmarklists, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
-            setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
@@ -992,15 +979,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
         final boolean hasCoords = cache.getCoords() != null;
-        menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
-        menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
-        menu.findItem(R.id.menu_cache_details).setVisible(hasCoords);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_default_navigation), hasCoords);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_navigate), hasCoords);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_cache_details), hasCoords);
         final boolean isOffline = cache.isOffline();
-        menu.findItem(R.id.menu_drop_cache).setVisible(isOffline);
-        menu.findItem(R.id.menu_move_to_list).setVisible(isOffline);
-        menu.findItem(R.id.menu_copy_to_list).setVisible(isOffline);
-        menu.findItem(R.id.menu_refresh).setVisible(isOffline);
-        menu.findItem(R.id.menu_store_cache).setVisible(!isOffline);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_drop_cache), isOffline);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_move_to_list), isOffline);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_copy_to_list), isOffline);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_refresh), isOffline);
+        MenuUtils.setVisible(menu.findItem(R.id.menu_store_cache), !isOffline);
 
         LoggingUI.onPrepareOptionsMenu(menu, cache);
     }

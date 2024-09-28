@@ -67,6 +67,7 @@ import cgeo.geocaching.utils.LeastRecentlyUsedSet;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import static cgeo.geocaching.Intents.ACTION_INDIVIDUALROUTE_CHANGED;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
@@ -736,10 +737,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             ViewUtils.extendMenuActionBarDisplayItemCount(getActivity(), menu);
         }
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
-            final MenuItem menuItem = menu.findItem(mapSource.getNumericalId());
-            if (menuItem != null) {
-                menuItem.setVisible(mapSource.isAvailable());
-            }
+            MenuUtils.setVisible(menu.findItem(mapSource.getNumericalId()), mapSource.isAvailable());
         }
 
         try {

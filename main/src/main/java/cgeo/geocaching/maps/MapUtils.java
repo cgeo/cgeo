@@ -38,6 +38,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
@@ -245,16 +246,10 @@ public class MapUtils {
     }
 
     public static void onPrepareOptionsMenu(final Menu menu) {
-        MenuItem item = menu.findItem(R.id.menu_check_routingdata);
-        if (item != null) {
-            // use same condition as in checkRoutingData() above
-            item.setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
-        }
-        item = menu.findItem(R.id.menu_check_hillshadingdata);
-        if (item != null) {
-            // use same condition as in checkHillshadingData() above
-            item.setVisible(Settings.getMapShadingEnabled());
-        }
+        // use same condition as in checkRoutingData() above
+        MenuUtils.setVisible(menu.findItem(R.id.menu_check_routingdata), Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
+        // use same condition as in checkHillshadingData() above
+        MenuUtils.setVisible(menu.findItem(R.id.menu_check_hillshadingdata), Settings.getMapShadingEnabled());
     }
 
     @WorkerThread
@@ -318,8 +313,8 @@ public class MapUtils {
                 .setMenuContent(R.menu.map_longclick)
                 .setPosition(new Point(tapXY.x, tapXY.y - offset), (int) (offset * 1.25))
                 .setOnCreatePopupMenuListener(menu -> {
-                    menu.findItem(R.id.menu_add_waypoint).setVisible(currentTargetCache != null);
-                    menu.findItem(R.id.menu_add_to_route_start).setVisible(individualRoute.getNumPoints() > 0);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_waypoint), currentTargetCache != null);
+                    MenuUtils.setVisible(menu.findItem(R.id.menu_add_to_route_start), individualRoute.getNumPoints() > 0);
                 })
                 .addItemClickListener(R.id.menu_udc, item -> InternalConnector.interactiveCreateCache(activity, longClickGeopoint, mapOptions.fromList, true))
                 .addItemClickListener(R.id.menu_add_waypoint, item -> EditWaypointActivity.startActivityAddWaypoint(activity, currentTargetCache, longClickGeopoint))
