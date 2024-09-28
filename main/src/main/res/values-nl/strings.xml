@@ -1042,7 +1042,6 @@
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="settings_info_hillshading_title">Informatie over reliëf tonen</string>
-    <string name="settings_info_hillshading">Reliëf tonen is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
     <string name="settings_hillshading_enable">Heuvelarcering inschakelen</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
@@ -1544,6 +1543,7 @@
     <string name="context_map_star_show">Toon lijnen naar waypoints</string>
     <string name="context_map_star_hide">Verberg lijnen naar waypoints</string>
     <string name="edit">Bewerken</string>
+    <string name="showElevationChart">Hoogtekaart weergeven</string>
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
@@ -2501,7 +2501,6 @@
     <string name="check_tiles_menu">Controleer op ontbrekende routeringsgegevens</string>
     <string name="check_tiles_found">Route gegevens zijn al aanwezig</string>
     <string name="check_tiles_missing">Ontbrekende routeringsgegevens gevonden:</string>
-    <string name="check_tiles_unsupported">Waarschuwing: Routegegevens zijn ten minste gedeeltelijk niet beschikbaar voor de gekozen regio</string>
     <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
     <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
     <string name="no_updates_found">Geen updates gevonden</string>
