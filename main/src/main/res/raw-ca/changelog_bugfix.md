@@ -1,4 +1,8 @@
 ##
+- Nou: Mostra l'avís per al connector gc activat sense credencials
+- Correcció: gràfic d'elevació incorrecte per a tracks amb diversos segments
+
+##
 - Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
 - Correcció: els waypoints o els catxés modificats no s'actualitzen al mapa (UnifiedMap)
 - Correcció: El catxé trobat no està marcat com a trobat al mapa (UnifiedMap)

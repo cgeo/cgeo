@@ -1269,6 +1269,7 @@
     <string name="auth_register">Nutzerkonto erstellen</string>
     <string name="auth_connected">Verbunden</string>
     <string name="auth_unconnected">Noch nicht verbunden</string>
+    <string name="auth_unconnected_tap_here">Noch nicht verbunden - hier tippen zur Autorisierung</string>
     <string name="auth_connected_as">Verbunden als %s.\nTippe kurz, um die Autorisierungsdaten von c:geo zu aktualisieren oder lang um sie zu löschen.</string>
     <string name="auth_dialog_waiting">Warte auf %s…</string>
     <string name="auth_explain_short">Der folgende Prozess erlaubt es <b>c:geo</b> auf %s zuzugreifen.</string>

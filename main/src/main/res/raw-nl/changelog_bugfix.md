@@ -1,4 +1,8 @@
 ##
+- Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
+- Oplossing: Verkeerde hoogte grafiek voor tracks met meerdere segmenten
+
+##
 - Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider
 - Oplossing: Bewerkte waypoints of caches worden niet bijgewerkt op de kaart (UnifiedMap)
 - Oplossing: Gevonden cache niet gemarkeerd als gevonden op de kaart (UnifiedMap)

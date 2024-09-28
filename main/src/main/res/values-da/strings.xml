@@ -302,7 +302,6 @@
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_backup">Backup/gendannelse</string>
     <string name="menu_update">Opdater offline data</string>
-    <string name="menu_update_routingdata">Rutevejledningsdata</string>
     <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
     <string name="menu_search_clipboard">Indlæs geokode fra udklipsholder</string>

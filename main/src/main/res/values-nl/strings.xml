@@ -1269,6 +1269,7 @@
     <string name="auth_register">Account aanmaken</string>
     <string name="auth_connected">Verbonden</string>
     <string name="auth_unconnected">Nog niet verbonden</string>
+    <string name="auth_unconnected_tap_here">Nog niet verbonden - tik hier om te autoriseren</string>
     <string name="auth_connected_as">Verbonden als %s.\nDruk hier om te updaten of druk lang om de autorisatiegegevens van c:geo te verwijderen.</string>
     <string name="auth_dialog_waiting">Wachten op %s…</string>
     <string name="auth_explain_short">Het volgende proces zal <b>c:geo</b> toegang geven tot %s.</string>
