@@ -378,8 +378,6 @@
     <string name="init_address">عرض العنوان</string>
     <string name="init_summary_address">عرض العنوان بدلاً من الإحدثيات على الشاشة الرئسية</string>
     <string name="init_showwaypoint_description">إذا تم عرض كمية أقل من المخبآت على الخريطة، يتم عرض إحدثيات الطريق الخاصة بهم إضافة إلى ذلك.</string>
-    <string name="init_save_log_img">حفظ الصور</string>
-    <string name="init_summary_save_log_img">حفظ الصور من تسجيل الزيارات</string>
     <string name="init_units">استخدم وحدات القياس الإمبراطورية</string>
     <string name="init_summary_units">استخدام وحدات القياس الإمبراطورية بدلاً من الوحدات المترية</string>
     <string name="init_log_offline">تسجيل الزيارات في وضع عدم الاتصال</string>
@@ -1076,10 +1074,6 @@
     <!-- default actions in dialogs -->
     <string name="cancel">إلغاء</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
