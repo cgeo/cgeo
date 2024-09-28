@@ -16,7 +16,7 @@ public class UnifiedMapState implements Parcelable {
         this.center = center;
         this.zoomLevel = zoomLevel;
         this.transientIsLiveEnabled = transientIsLiveEnabled;
-    };
+    }
 
     // ========================================================================
     // parcelable methods

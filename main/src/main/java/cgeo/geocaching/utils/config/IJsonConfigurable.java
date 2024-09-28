@@ -20,7 +20,7 @@ public interface IJsonConfigurable<T extends IJsonConfigurable<T>> {
     @Deprecated
     default LegacyFilterConfig getConfig() {
         return null;
-    };
+    }
 
     default void addChild(T child) {
         //do nothing
