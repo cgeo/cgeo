@@ -250,7 +250,7 @@ public class MapUtils {
             // use same condition as in checkRoutingData() above
             item.setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
         }
-        item = menu.findItem(R.id.menu_check_hillshadingdate);
+        item = menu.findItem(R.id.menu_check_hillshadingdata);
         if (item != null) {
             // use same condition as in checkHillshadingData() above
             item.setVisible(Settings.getMapShadingEnabled());

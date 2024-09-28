@@ -62,12 +62,6 @@ public class HillshadingTileDownloader extends AbstractDownloader {
         return null;
     }
 
-    // BRouter uses a single download page, need to map here to its fixed address
-    /*@Override
-    protected String getUpdatePageUrl(final String downloadPageUrl) {
-        return mapBase.toString();
-    }*/
-
     @NonNull
     public static HillshadingTileDownloader getInstance() {
         return INSTANCE;
