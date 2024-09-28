@@ -467,8 +467,6 @@
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
     <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
-    <string name="init_save_log_img">Saglabāt attēlus</string>
-    <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
     <string name="init_units">Izmantot imperiālo sistēmu</string>
     <string name="init_summary_units">Izmantot imperiālo sistēmu metriskās sistēmas vietā</string>
     <string name="init_log_offline">Bezsaistes apmeklējuma reģistrācija</string>
@@ -1309,10 +1307,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
