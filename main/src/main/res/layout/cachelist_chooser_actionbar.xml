@@ -5,8 +5,7 @@
     style="?attr/spinnerDropDownItemStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="right|center_vertical"
-    tools:context=".CacheListSpinnerAdapter">
+    android:layout_gravity="right|center_vertical">
 
     <ImageView
         android:id="@+id/icon"
