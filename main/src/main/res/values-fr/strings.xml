@@ -1036,7 +1036,6 @@
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
     <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
-    <string name="settings_info_hillshading">L\'ombrage du relief est une technique permettant un relief topographique en ajoutant un effet de lumière sur la carte permettant d\'indiquer les changements d\'altitude. Les pentes seront assombries ou éclaircies afin de générer un effet 3D.\nLes fichiers sources contenant les informations d\'altitude doivent être obtenus manuellement (cliquez sur l\'objet pour les sources) et placés ensuite dans le répertoire des sources défini ci-dessous.</string>
     <string name="settings_hillshading_enable">Activer l’ombrage du relief</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_local_file_system">Système de fichiers local</string>
@@ -2490,7 +2489,6 @@
     <string name="check_tiles_menu">Vérifier les données de navigation manquantes</string>
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
     <string name="check_tiles_missing">Données de routage manquantes :</string>
-    <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
     <string name="tileupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
