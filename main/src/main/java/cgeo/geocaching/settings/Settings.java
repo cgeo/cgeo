@@ -2467,6 +2467,10 @@ public class Settings {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
 
+    public static void setMapShadingShowLayer(final boolean show) {
+        putBoolean(R.string.pref_maphillshading_show_layer, show);
+    }
+
     public static boolean getMapActionbarAutohide() {
         return getBoolean(R.string.pref_mapActionbarAutohide, false);
     }

@@ -121,6 +121,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public OfflineMapSource(final Uri mapUri, final MapProvider mapProvider, final String name) {
             super(mapProvider, name);
             this.mapUri = mapUri;
+            setSupportsHillshading(true);
         }
 
         public Uri getMapUri() {
@@ -222,6 +223,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         public OfflineMultiMapSource(final List<ImmutablePair<String, Uri>> mapUris, final MapProvider mapProvider, final String name) {
             super(mapProvider, name);
             this.mapUris = mapUris;
+            setSupportsHillshading(true);
         }
 
         @Override
