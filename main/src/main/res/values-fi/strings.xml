@@ -1018,7 +1018,6 @@
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
     <string name="settings_info_themes">c:geo tukee mukautettuja teemoja offline-karttoille. Näitä voidaan käyttää muuttamaan kartan väriä (esim. yönäkymäkartta) tai korostaa tiettyjä asioita kartalla, kuten pyöräilyreittejä tai korkeuslinjoja.\n\nPurettujen karttateemojen kanssa työskentely voi hidastaa karttojen prosessointia. Tässä tapauksessa teemakansio voidaan vaihtoehtoisesti synkronoida sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi (jonkin verran tallennustilaa käyttäen).</string>
     <string name="settings_info_hillshading_title">Tietoa rinnevarjostuksesta</string>
-    <string name="settings_info_hillshading">Rinnevarjostus on topograafisten kohokarttojen luomiseen käytetty tekniikka, joka lisää valoefektin kartoille, näyttäen korkeuden muutoksen. Rinteet vaalennetaan/tummennetaan, luoden 3D-efektin\nLähdetiedostot, jotka sisältävät korkeustiedon, on ladattava manuaalisesti - napauta tätä lähteiden saamiseksi - ja asetettava alla selostettuun kansioon.</string>
     <string name="settings_hillshading_enable">Ota rinnevarjostus käyttöön</string>
     <string name="init_mapsource_select">Karttalähde</string>
     <string name="init_local_file_system">Paikallinen tiedostojärjestelmä</string>
@@ -2406,7 +2405,6 @@
     <string name="check_tiles_menu">Tarkista puuttuvat reititystiedot</string>
     <string name="check_tiles_found">Reititystiedot ovat jo olemassa</string>
     <string name="check_tiles_missing">Puuttuvat reititystiedot löytyivät:</string>
-    <string name="check_tiles_unsupported">Varoitus: Reititystietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
     <string name="tileupdate_info">Napauta tästä tarkistaaksesi ladatun reititysdatan päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="mapupdate_info">Napauta tästä tarkistaaksesi kartta- ja teematiedostojen päivitykset. Paina pitkään lykätäksesi.</string>
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
