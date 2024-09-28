@@ -358,8 +358,6 @@
     <string name="init_address">Pagpakita sa Address</string>
     <string name="init_summary_address">Ipakita ang address imbis nga coordinate sa main nga screen</string>
     <string name="init_showwaypoint_description">Kung mas ubos kay sa gihatag nga kantidad sa mga caches nga gipakita sa mapa, ang ilang mga waypoint gipakita usab.</string>
-    <string name="init_save_log_img">I-save ang mga Imahe</string>
-    <string name="init_summary_save_log_img">I-save ang mga Imahe nga gikan sa Logs</string>
     <string name="init_units">Gamita ang Imperial nga mga Unit</string>
     <string name="init_summary_units">Gamita ang mga Imperial Units imbes Metric nga Units</string>
     <string name="init_summary_log_offline">Pag-enable sa Offline Logging (Dili mapakita ang online log screen sa dihang mag log, dili mag-upload sa mga log)</string>
@@ -1073,10 +1071,6 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahon</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
