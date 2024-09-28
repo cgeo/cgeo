@@ -1,54 +1,29 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.LocalStorage;
 
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
 import android.net.Uri;
 
-import java.io.File;
-
 import io.reactivex.rxjava3.disposables.Disposable;
-import org.apache.commons.io.FileUtils;
 
 /** Represents and manages one audio file or tone */
 public class AudioClip implements Disposable {
 
     private static final String LOG_PRAEFIX = "AudioClip:";
-    private static final AudioClip DISPOSED_CLIP = new AudioClip();
-
 
     private MediaPlayer player = new MediaPlayer();
     private boolean isReleased = false;
     private Uri uri;
-    private boolean uriToDelete = false;
 
     private AudioClip() {
         //instances only via static creators
     }
 
-    public static AudioClip play(final byte[] data) {
-        final AudioClip clip = new AudioClip();
-        final File newTempFile = new File(LocalStorage.getInternalCgeoCacheDirectory(), "audio-" + System.currentTimeMillis());
-        try {
-            FileUtils.writeByteArrayToFile(newTempFile, data);
-        } catch (Exception e) {
-            Log.e(LOG_PRAEFIX + "Problem extracting/storing audio data", e);
-            return DISPOSED_CLIP;
-        }
-        clip.uri = Uri.fromFile(newTempFile);
-        Log.iForce("AUDIO: Creating file: " + clip.uri);
-        clip.uriToDelete = true;
-        startPlayer(clip.player, clip.uri, clip::safeDestroy);
-        return clip;
-    }
-
     public static AudioClip play(final Uri audiofile) {
         final AudioClip clip = new AudioClip();
         clip.uri = audiofile;
-        clip.uriToDelete = false;
         startPlayer(clip.player, clip.uri, clip::safeDestroy);
         return clip;
     }
@@ -112,10 +87,6 @@ public class AudioClip implements Disposable {
         }
         isReleased = true;
         player = null;
-        if (uriToDelete && uri != null) {
-            ContentStorage.get().delete(uri);
-            Log.iForce(LOG_PRAEFIX + "deleting file: " + uri);
-        }
         uri = null;
     }
 

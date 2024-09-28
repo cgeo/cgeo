@@ -33,6 +33,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -55,7 +56,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
-    private final SimpleItemListModel<Pair<WherigoObjectType, EventTable>> wherigoThingsModel = new SimpleItemListModel<Pair<WherigoObjectType, EventTable>>()
+    private final SimpleItemListModel<Pair<WherigoThingType, EventTable>> wherigoThingsModel = new SimpleItemListModel<Pair<WherigoThingType, EventTable>>()
         .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
         .setDisplayMapper(p -> {
             final EventTable t = p.second;
@@ -69,6 +70,22 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             final Bitmap bm = WherigoUtils.getEventTableIcon(et.second);
             return bm == null ? ImageParam.id(et.first.getIconId()) : ImageParam.drawable(new BitmapDrawable(getResources(), bm));
         });
+
+    private final SimpleItemListModel<WherigoThingType> wherigoThingTypeModel = new SimpleItemListModel<WherigoThingType>()
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setDisplayViewMapper((item, itemGroup, ctx, view, parent) ->
+                WherigoUtils.createWherigoThingTypeView(item, WherigoUtils.getOrCreateItemView(this, view, parent)),
+                (item, itemGroup) -> item == null  ? "" : item.toUserDisplayableString());
+
+//            .setDisplayMapper(type -> {
+//                final List<EventTable> items = type.getThingsForUserDisplay();
+//                final CharSequence msg = TextUtils.join(items, i -> {
+//                    final String name = i.name;
+//                    return WherigoUtils.isVisibleToPlayer(i) ? name : TextUtils.setSpan(name, new ForegroundColorSpan(Color.GRAY));
+//                }, ", ");
+//                return TextParam.text(TextUtils.concat("(" + items.size() + ")", msg));
+//            })
+//            .setDisplayIconMapper(type -> ImageParam.id(type.getIconId()));
 
     public static void start(final Activity parent, final boolean hideNavigationBar, final int itemTypeOpen) {
         startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_SCREENID, itemTypeOpen), hideNavigationBar);
@@ -113,6 +130,10 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 WherigoDialogManager.get().display(new WherigoThingDialogProvider(et.second));
             }
         });
+        binding.wherigoThingTypeList.setModel(wherigoThingTypeModel);
+        wherigoThingTypeModel.addSingleSelectListener(type -> {
+            WherigoDialogManager.get().display(new WherigoThingListDialogProvider(type));
+        });
 
         refreshGui();
         binding.startGame.setOnClickListener(v -> startGame());
@@ -123,7 +144,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         final String guid = getIntent().getExtras() == null ? null : getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
         if (guid != null) {
-            final List<WherigoUtils.WherigoCartridgeInfo> infos = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), info -> guid.equals(info.guid), false, false);
+            final List<WherigoCartridgeInfo> infos = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), info -> guid.equals(info.cguid), false, false);
             if (infos.isEmpty()) {
                 downloadCartridge(guid);
             } else {
@@ -137,19 +158,19 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void chooseCartridge() {
-        final List<WherigoUtils.WherigoCartridgeInfo> cartridges = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), null, true, true);
+        final List<WherigoCartridgeInfo> cartridges = WherigoUtils.getAvailableCartridges(PersistableFolder.WHERIGO.getFolder(), null, true, true);
         Collections.sort(cartridges, Comparator.comparing(f -> f.fileInfo.name));
 
         final Geopoint currentLocation = LocationDataProvider.getInstance().currentGeo().getCoords();
 
-        final SimpleDialog.ItemSelectModel<WherigoUtils.WherigoCartridgeInfo> model = new SimpleDialog.ItemSelectModel<>();
+        final SimpleDialog.ItemSelectModel<WherigoCartridgeInfo> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setItems(cartridges)
             .setDisplayMapper(info -> TextParam.text(
-            info.fileInfo.name + ", " + info.cartridgeFile.name + ", " +
-                 info.cartridgeFile.type + ", " + info.cartridgeFile.author + ", " +
-                 "v" + info.cartridgeFile.version + ", " +
-                 Units.getDistanceFromKilometers(currentLocation.distanceTo(new Geopoint(info.cartridgeFile.latitude, info.cartridgeFile.longitude))) + " away"))
+            info.fileInfo.name + ", " + info.closedCartridgeFile.name + ", " +
+                 info.closedCartridgeFile.type + ", " + info.closedCartridgeFile.author + ", " +
+                 "v" + info.closedCartridgeFile.version + ", " +
+                 Units.getDistanceFromKilometers(currentLocation.distanceTo(new Geopoint(info.closedCartridgeFile.latitude, info.closedCartridgeFile.longitude))) + " away"))
             .setDisplayIconMapper(info -> info.icon != null ? ImageParam.drawable(new BitmapDrawable(getResources(), info.icon)) : ImageParam.id(R.drawable.icon_whereyougo))
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
@@ -187,7 +208,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         }
     }
 
-    private void chooseSavefile(final WherigoUtils.WherigoCartridgeInfo cartridge) {
+    private void chooseSavefile(final WherigoCartridgeInfo cartridge) {
 
         final Map<String, Date> saveGames = WherigoUtils.getAvailableSaveGames(cartridge.fileInfo);
         if (saveGames.isEmpty()) {
@@ -227,17 +248,19 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
-        final List<Pair<WherigoObjectType, EventTable>> allEvents = new ArrayList<>();
+        final List<Pair<WherigoThingType, EventTable>> allEvents = new ArrayList<>();
         if (game.isPlaying()) {
-            addMatching(allEvents, game.getZones(), WherigoObjectType.LOCATION);
-            addMatching(allEvents, game.getInventory(), WherigoObjectType.INVENTORY);
-            addMatching(allEvents, game.getTasks(), WherigoObjectType.TASK);
-            addMatching(allEvents, game.getItems(), WherigoObjectType.ITEM);
+            addMatching(allEvents, game.getZones(), WherigoThingType.LOCATION);
+            addMatching(allEvents, game.getInventory(), WherigoThingType.INVENTORY);
+            addMatching(allEvents, game.getTasks(), WherigoThingType.TASK);
+            addMatching(allEvents, game.getItems(), WherigoThingType.ITEM);
             if (Settings.enableFeatureWherigoDebug()) {
-                addMatching(allEvents, game.getThings(), WherigoObjectType.THING);
+                addMatching(allEvents, game.getThings(), WherigoThingType.THING);
             }
         }
         wherigoThingsModel.setItems(allEvents);
+
+        wherigoThingTypeModel.setItems(Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM, WherigoThingType.THING));
 
         binding.startGame.setEnabled(!game.isPlaying());
         binding.saveGame.setEnabled(game.isPlaying());
@@ -246,7 +269,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     }
 
-    private static void addMatching(final List<Pair<WherigoObjectType, EventTable>> target, final List<? extends EventTable> source, final WherigoObjectType objType) {
+    private static void addMatching(final List<Pair<WherigoThingType, EventTable>> target, final List<? extends EventTable> source, final WherigoThingType objType) {
         final boolean debug = Settings.enableFeatureWherigoDebug();
         target.addAll(source.stream().filter(et -> debug || WherigoUtils.isVisibleToPlayer(et)).map(et -> new Pair<>(objType, (EventTable) et)).collect(Collectors.toList()));
     }

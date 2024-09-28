@@ -490,4 +490,5 @@ public class SimpleItemListModel<T> {
             changeListener.accept(mode);
         }
     }
+
 }

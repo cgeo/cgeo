@@ -13,15 +13,24 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.SimpleItemListView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -29,8 +38,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -58,20 +69,6 @@ public final class WherigoUtils {
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
         ll -> new Geopoint(ll.latitude, ll.longitude)
     );
-
-    public static class WherigoCartridgeInfo {
-        public final ContentStorage.FileInformation fileInfo;
-        public final String guid;
-        public final CartridgeFile cartridgeFile;
-        public final Bitmap icon;
-
-        private WherigoCartridgeInfo(final ContentStorage.FileInformation fileInfo, final String guid, final CartridgeFile cartridgeFile, final Bitmap icon) {
-            this.fileInfo = fileInfo;
-            this.guid = guid;
-            this.cartridgeFile = cartridgeFile;
-            this.icon = icon;
-        }
-    }
 
     private WherigoUtils() {
         //no instance
@@ -228,27 +225,6 @@ public final class WherigoUtils {
         return CartridgeFile.read(new WSeekableFile(fis.getChannel()), WherigoSaveFileHandler.get());
     }
 
-    public static CartridgeFile safeReadCartridge(final Uri uri) {
-        try {
-            return readCartridge(uri);
-        } catch (IOException ie) {
-            Log.d("Couldn't read Cartridge '" + uri + "'", ie);
-            return null;
-        }
-    }
-
-    private static Bitmap getCartrdigeIcon(final CartridgeFile file) {
-        if (file == null) {
-            return null;
-        }
-        try {
-            final byte[] iconData = file.getFile(file.iconId);
-            return BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
     public static Bitmap getEventTableIcon(final EventTable et) {
         if (et == null) {
             return null;
@@ -273,33 +249,12 @@ public final class WherigoUtils {
         }
     }
 
-    @Nullable
-    public static String getGuid(final ContentStorage.FileInformation fileInfo) {
-        if (fileInfo == null || fileInfo.name == null || !fileInfo.name.endsWith(".gwc")) {
-            return null;
-        }
-        final String guid = fileInfo.name.substring(0, fileInfo.name.length() - 4);
-        final int idx = guid.indexOf("_");
-        return idx <= 0 ? guid : guid.substring(0, idx);
-    }
-
-    public static WherigoCartridgeInfo getCartridgeInfo(final ContentStorage.FileInformation file, final boolean loadCartridgeFile, final boolean loadIcon) {
-        if (file == null) {
-            return null;
-        }
-        final String guid = getGuid(file);
-        final CartridgeFile cf = loadCartridgeFile ? safeReadCartridge(file.uri) : null;
-        final Bitmap icon = cf != null && loadIcon ? getCartrdigeIcon(cf) : null;
-        closeCartridgeQuietly(cf);
-        return new WherigoCartridgeInfo(file, guid, cf, icon);
-    }
-
     public static List<WherigoCartridgeInfo> getAvailableCartridges(final Folder folder, final Predicate<WherigoCartridgeInfo> filter, final boolean loadCartridgeFile, final boolean loadIcon) {
         final List<ContentStorage.FileInformation> candidates = ContentStorage.get().list(folder).stream()
                 .filter(fi -> fi.name.endsWith(".gwc")).collect(Collectors.toList());
         final List<WherigoCartridgeInfo> result = new ArrayList<>(candidates.size());
         for (ContentStorage.FileInformation candidate : candidates) {
-            final WherigoCartridgeInfo info = getCartridgeInfo(candidate, loadCartridgeFile, loadIcon);
+            final WherigoCartridgeInfo info = WherigoCartridgeInfo.get(candidate, loadCartridgeFile, loadIcon);
             if (info != null && (filter == null || filter.test(info))) {
                 result.add(info);
             }
@@ -309,6 +264,77 @@ public final class WherigoUtils {
 
     public static Map<String, Date> getAvailableSaveGames(@NonNull final ContentStorage.FileInformation cartridgeInfo) {
         return WherigoSaveFileHandler.getAvailableSaveFiles(cartridgeInfo.parentFolder, cartridgeInfo.name);
+    }
+
+    public static Comparator<EventTable> getThingsComparator() {
+        return CommonUtils.getNullHandlingComparator((t1, t2) -> {
+            if (!t1.getClass().equals(t2.getClass())) {
+                return t1.getClass().getName().compareTo(t2.getClass().getName());
+            }
+            if (isVisibleToPlayer(t1) != isVisibleToPlayer(t2)) {
+                return isVisibleToPlayer(t1) ? -1 : 1;
+            }
+            if (t1 instanceof Zone) {
+                final double dist1 = ((Zone) t1).distance;
+                final double dist2 = ((Zone) t2).distance;
+                final boolean dist1Valid = !Double.isNaN(dist1) && !Double.isInfinite(dist1);
+                final boolean dist2Valid = !Double.isNaN(dist2) && !Double.isInfinite(dist2);
+                if (dist1Valid != dist2Valid) {
+                    return dist1Valid ? -1 : 1;
+                }
+                if (dist1Valid && Math.abs(dist1 - dist2) > 5) { // more than 5 meters
+                    return dist1 < dist2 ? -1 : 1;
+                }
+            }
+            final String name1 = t1.name == null ? "-" : t1.name.trim().toLowerCase(Locale.ROOT);
+            final String name2 = t2.name == null ? "-" : t2.name.trim().toLowerCase(Locale.ROOT);
+            return name1.compareTo(name2);
+        }, true);
+    }
+
+    public static View createWherigoThingView(final Context ctx, final WherigoThingType type, final EventTable table, final View view) {
+
+        final String name = table.name;
+        CharSequence description = WherigoUtils.eventTableToString(table, false);
+        if (WherigoUtils.isVisibleToPlayer(table)) {
+            description = TextUtils.setSpan(description, new ForegroundColorSpan(Color.BLUE));
+        }
+        final Bitmap bm = WherigoUtils.getEventTableIcon(table);
+        final ImageParam icon = bm == null ? ImageParam.id(type.getIconId()) : ImageParam.drawable(new BitmapDrawable(ctx.getResources(), bm));
+
+        setViewValues(view, TextParam.text(name), TextParam.text(description), icon);
+        return view;
+    }
+
+    public static View createWherigoThingTypeView(final WherigoThingType type, final View view) {
+
+        final List<EventTable> things = type.getThingsForUserDisplay();
+        final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
+        final CharSequence description = TextUtils.join(things, i -> {
+            final String thingName = i.name;
+            return !WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan(thingName, new ForegroundColorSpan(Color.BLUE));
+        }, ", ");
+
+        setViewValues(view, TextParam.text(name), TextParam.text(description), ImageParam.id(type.getIconId()));
+        return view;
+    }
+
+    public static View getOrCreateItemView(final Context context, final View convertView, final ViewGroup parent) {
+        final View view = convertView == null ? LayoutInflater.from(context).inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
+        ((TextView) view.findViewById(R.id.text)).setText(new SpannableString(""));
+        return view;
+    }
+
+    private static void setViewValues(final View view, final TextParam name, final TextParam info, final ImageParam icon) {
+        if (name != null) {
+            name.applyTo(view.findViewById(R.id.text));
+        }
+        if (info != null) {
+            info.applyTo(view.findViewById(R.id.info));
+        }
+        if (icon != null) {
+            icon.applyTo(view.findViewById(R.id.icon));
+        }
     }
 
 

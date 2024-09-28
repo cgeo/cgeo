@@ -62,6 +62,15 @@
 
         </LinearLayout>
 
+        <!-- Item Type List -->
+
+        <cgeo.geocaching.ui.SimpleItemListView
+            android:id="@+id/wherigo_thing_type_list"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:nestedScrollingEnabled="true"
+            />
+
         <!-- Item List -->
 
         <cgeo.geocaching.ui.SimpleItemListView
