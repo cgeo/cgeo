@@ -1,4 +1,8 @@
 ##
+- New: Show warning for activated gc connector without credentials
+- Fix: Wrong elevation chart for tracks with multiple segments
+
+##
 - Fix: Missing parametrization for user-defined tileprovider
 - Fix: Edited waypoints or caches do not get updated on map (UnifiedMap)
 - Fix: Found cache not marked as found on map (UnifiedMap)

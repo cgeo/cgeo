@@ -358,7 +358,7 @@
     <string name="menu_settings">Paramètres</string>
     <string name="menu_backup">Sauvegarde / Restauration</string>
     <string name="menu_update">Mettre à jour les données hors ligne</string>
-    <string name="menu_update_routingdata">Données de navigation</string>
+    <string name="menu_update_routingdata">Données d\'itinéraire</string>
     <string name="menu_update_mapdata">Données cartographiques</string>
     <string name="menu_history">Historique</string>
     <string name="menu_search_clipboard">Charger le géocode du presse-papiers</string>

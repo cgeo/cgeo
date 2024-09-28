@@ -1270,6 +1270,7 @@
     <string name="auth_register">Crear un compte</string>
     <string name="auth_connected">Connectat</string>
     <string name="auth_unconnected">Encara no s\'ha connectat</string>
+    <string name="auth_unconnected_tap_here">Encara no està connectat: toca aquí per autoritzar</string>
     <string name="auth_connected_as">Connectat com a %s.\nToca aquí per actualitzar o toca llarg per eliminar les dades d\'autorització de C:geo.</string>
     <string name="auth_dialog_waiting">Esperant %s…</string>
     <string name="auth_explain_short">El següent procés permetrà al <b>c:geo</b> accedir a %s.</string>

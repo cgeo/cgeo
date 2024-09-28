@@ -1,4 +1,8 @@
 ##
+- Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
+- Naprawiono: Niepoprawny wykres wysokości dla ścieżek z wieloma segmentami
+
+##
 - Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
 - Naprawiono: Edytowane punkty nawigacji lub skrytki nie są aktualizowane na mapie (UnifiedMap)
 - Naprawiono: Znaleziona skrytka nie była oznaczona jako znaleziona na mapie (UnifiedMap)

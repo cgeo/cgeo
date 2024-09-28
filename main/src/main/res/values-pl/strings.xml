@@ -1285,6 +1285,7 @@
     <string name="auth_register">Utwórz konto</string>
     <string name="auth_connected">Połączono</string>
     <string name="auth_unconnected">Jeszcze nie połączono</string>
+    <string name="auth_unconnected_tap_here">Jeszcze nie połączono – dotknij tutaj, aby autoryzować</string>
     <string name="auth_connected_as">Połączony jako %s.\nDotknij tutaj, aby zaktualizować lub dotknij dłużej, aby usunąć dane autoryzacyjne z c:geo.</string>
     <string name="auth_dialog_waiting">Czekanie na %s…</string>
     <string name="auth_explain_short">Wybrany proces pozwoli na dostęp <b>c:geo</b> do %s.</string>

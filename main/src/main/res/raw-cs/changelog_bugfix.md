@@ -1,4 +1,8 @@
 ##
+- Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
+- Oprava: Chybný výškový graf pro tratě s více segmenty
+
+##
 - Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel
 - Oprava: Upravené trasové body nebo kešky se neaktualizují na mapě (Sjednocená mapa)
 - Oprava: Nalezené kešky nebyly na mapě označeny jako nalezené (Sjednocená mapa)
