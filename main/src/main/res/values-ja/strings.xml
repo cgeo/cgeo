@@ -2016,7 +2016,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="check_tiles_menu">ルート検索データの確認</string>
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
-    <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
     <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="no_updates_found">更新はありません。</string>
