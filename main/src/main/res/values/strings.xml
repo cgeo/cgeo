@@ -1052,8 +1052,8 @@
     <string name="init_summary_customtabs_as_browser">External websites will be displayed without leaving c:geo (only possible if Chrome is installed)</string>
     <string name="init_rot13_hint">Encrypt hint</string>
     <string name="init_summary_rot13_hint">Show hint text ROT-13 encrypted until tapped</string>
-    <string name="init_save_log_img">Save Images</string>
-    <string name="init_summary_save_log_img">Save Images from Logs</string>
+    <string name="init_save_log_img">Store log images</string>
+    <string name="init_summary_save_log_img">Download and store images from logs in addition to those from the cache</string>
     <string name="init_units">Use Imperial Units</string>
     <string name="init_summary_units">Use Imperial Units instead of Metric Units</string>
     <string name="init_cachelists">Cache Lists</string>
