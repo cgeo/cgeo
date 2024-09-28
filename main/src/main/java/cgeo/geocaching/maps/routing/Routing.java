@@ -362,7 +362,7 @@ public final class Routing {
                     elevation.add(Float.NaN);
                 }
             }
-            return result.toArray(new Geopoint[result.size()]);
+            return result.toArray(new Geopoint[0]);
 
         } catch (SAXException e) {
             Log.w("cannot parse brouter output of length " + gpx.length() + ", gpx=" + gpx, e);
