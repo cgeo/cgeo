@@ -391,7 +391,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         for (String attribute : attributes) {
             String rawAttribute = CacheAttribute.trimAttributeName(attribute);
-            if (rawAttribute.equals("")) {
+            if (rawAttribute.isEmpty()) {
                 continue;
             }
             // translate to locus names
