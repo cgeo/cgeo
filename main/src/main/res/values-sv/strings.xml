@@ -1041,7 +1041,6 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
-    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nKällfilerna som innehåller höjdinformation måste erhållas manuellt - klicka på detta objekt för källor - och placeras i källmappen nedan.</string>
     <string name="settings_hillshading_enable">Aktivera terrängskuggning</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
@@ -2499,7 +2498,6 @@
     <string name="check_tiles_menu">Sök efter saknad ruttberäkningsdata</string>
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
     <string name="check_tiles_missing">Hittade saknad ruttdata:</string>
-    <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgänglig för den valda regionen</string>
     <string name="tileupdate_info">Tryck här för att söka efter uppdateringar av hämtade routing-datafiler. Långtryck för att skjuta upp.</string>
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
