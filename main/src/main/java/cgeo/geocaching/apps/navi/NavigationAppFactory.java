@@ -136,7 +136,7 @@ public final class NavigationAppFactory {
          */
         public final int preferenceKey;
 
-        /*
+        /**
          * display app name in array adapter
          *
          * @see java.lang.Enum#toString()
