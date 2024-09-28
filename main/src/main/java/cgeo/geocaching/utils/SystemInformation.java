@@ -163,10 +163,10 @@ public final class SystemInformation {
         if (memoryInfo == null) {
             body.append("null");
         } else {
-            body.append(" Available:" + Formatter.formatBytes(memoryInfo.availMem) +
-                    ", Total:" + Formatter.formatBytes(memoryInfo.totalMem) +
-                    ", Threshold: " + Formatter.formatBytes(memoryInfo.threshold) +
-                    ", low:" + memoryInfo.lowMemory);
+            body.append(" Available:").append(Formatter.formatBytes(memoryInfo.availMem))
+                .append(", Total:").append(Formatter.formatBytes(memoryInfo.totalMem))
+                .append(", Threshold: ").append(Formatter.formatBytes(memoryInfo.threshold))
+                .append(", low:").append(memoryInfo.lowMemory);
         }
     }
 

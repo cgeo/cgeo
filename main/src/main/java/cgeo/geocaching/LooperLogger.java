@@ -68,7 +68,7 @@ public class LooperLogger {
             if (duration > 500) {
                 final StringBuilder sb = new StringBuilder();
                 synchronized (collectedInfos) {
-                    sb.append("LooperLogger: long process time for " + currMsg + " (" + duration + "ms, " + getStats() + "), " + collectedInfos.size() + "traces:");
+                    sb.append("LooperLogger: long process time for ").append(currMsg).append(" (").append(duration).append("ms, ").append(getStats()).append("), ").append(collectedInfos.size()).append("traces:");
                     for (String info : collectedInfos) {
                         sb.append("\n   ").append(info);
                     }
