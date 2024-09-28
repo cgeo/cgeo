@@ -306,9 +306,6 @@
     <string name="menu_helpers">Βοηθητικά προγράμματα</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="menu_backup">Αντίγραφα ασφαλείας / επαναφορά</string>
-    <string name="menu_update">Ενημέρωση δεδομένων εκτός σύνδεσης</string>
-    <string name="menu_update_routingdata">Δεδομένα δρομολόγησης</string>
-    <string name="menu_update_mapdata">Δεδομένα χάρτη</string>
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_search_clipboard">Φόρτωση γεωκωδικού από το πρόχειρο</string>
     <string name="menu_history_longstring">Ιστορικό ευρέσεων</string>
@@ -781,8 +778,6 @@
     <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
     <string name="init_rot13_hint">Κρυπτογράφηση υπόδειξης</string>
     <string name="init_summary_rot13_hint">Εμφάνιση υπόδειξης κειμένου ROT-13 κρυπτογραφημένα μέχρι να πατηθεί</string>
-    <string name="init_save_log_img">Αποθήκευση εικόνων</string>
-    <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
     <string name="init_units">Αγγλοσαξονικές Μονάδες</string>
     <string name="init_summary_units">Χρησιμοποιείστε αγγλοσαξονικές μονάδες (μίλια) αντί για το μετρικό σύστημα</string>
     <string name="init_log_offline">Καταγραφή εκτός σύνδεσης</string>
@@ -923,10 +918,6 @@
     <string name="init_summary_plain_logs">Καταχωρήσεις των αρχείων καταγραφής χωρίς χρώματα</string>
     <string name="init_rendertheme_folder">Φακέλος θεμάτων Χαρτών</string>
     <string name="init_mapshading_folder">Φάκελος αρχείων σκίασης χάρτη</string>
-    <string name="init_mapShadingLinearity_title">Γραμμικότητα Σκίασης</string>
-    <string name="init_mapShadingLinearity_description">Μικρές τιμές τονίζουν την αντίθεση σε απότομες πλαγιές, αλλά κρύβουν τις αλλαγές στα επίπεδα, μεγάλες τιμές το καθιστούν πιο γραμμικό</string>
-    <string name="init_mapShadingScale_title">Διαφάνεια Σκιάς</string>
-    <string name="init_mapShadingScale_description">Αδιαφάνεια του στρώματος σκίασης, από αόρατες έως υψηλότερες τιμές που εντείνουν τη σκίαση, αλλά μπορεί να παράγει οπτικά λαθη</string>
     <string name="init_maintenance">Συντήρηση</string>
     <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
     <string name="init_maintenance_ongoing">Αυτό θα πάρει αρκετό χρόνο…</string>
@@ -1496,7 +1487,6 @@
     <string name="map_show_other_title">Εμφάνιση άλλων:</string>
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
-    <string name="map_theme_legend_info">Πατήστε στον τίτλο της κατηγορίας για να ανοίξετε/κλείσετε. Πατήστε παρατεταμένα ένα σύμβολο για μικρές πληροφορίες σχετικά με αυτό το σύμβολο. Πατήστε στο εικονίδιο πληροφοριών για να επισκεφθείτε ένα λεπτομερές υπόμνημα online.</string>
     <string name="google_maps_style_default">Προεπιλογή</string>
     <string name="google_maps_style_night">Νύχτα</string>
     <string name="google_maps_style_retro">Ρετρό</string>
@@ -2113,17 +2103,12 @@
     <string name="receivedownload_cancelled">Η μεταφορά των αρχείων ακυρώθηκε</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Λήψη χαρτών εκτός σύνδεσης</string>
-    <string name="delete_offlinemap_title">Διαγραφή offline χάρτη</string>
-    <string name="no_deletable_offlinemaps">Δεν υπάρχουν offline χάρτες για διαγραφη</string>
-    <string name="delete_file_confirmation">Διαγραφή %s;</string>
-    <string name="file_deleted_info">Το \'%s\' διαγράφηκε</string>
     <string name="download_title">Λήψη αρχείου</string>
     <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί, το αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου, ο διαχειριστής λήψεων δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
-    <string name="download_none_selected">Δεν επιλέχθηκαν χάρτες για κατέβασμα</string>
     <string name="downloadmap_target_not_writable">Ο επιλεγμένος στόχος \"%s\" δεν είναι εγγράψιμος - ο χάρτης αποθηκεύεται στο φάκελο λήψης του συστήματος και πρέπει να μετακινηθεί χειροκίνητα στο φάκελο χαρτών.</string>
     <string name="downloadmap_allow_metered_network">Να επιτρέπεται η λήψη σε εποπτευόμενα δίκτυα (π.χ.: δίκτυα κινητής)</string>
     <string name="download_confirmation">%1$sΛήψη αρχείου \"%2$s\"?%3$s</string>
@@ -2145,7 +2130,6 @@
     <string name="downloadmap_download">Λήψη</string>
     <string name="downloadmap_retrieving_directory_data">Ανάκτηση δεδομένων φακέλου…</string>
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
-    <string name="downloadtile_title">Λείπουν δεδομένα δρομολόγησης</string>
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
     <string name="check_tiles_menu">Έλεγχος για ελλείποντα δεδομένα δρομολόγησης</string>
     <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
@@ -2224,41 +2208,6 @@
     <string name="cancel">Ακύρωση</string>
     <string name="ok" tools:ignore="ButtonCase">Οκ</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Περιοχές</string>
-    <string name="rtl_fell_meadow">Λιβάδι</string>
-    <string name="rtl_heath">Ρείκια</string>
-    <string name="rtl_marsh">Βάλτος</string>
-    <string name="rtl_rock">Βράχος</string>
-    <string name="rtl_scree">scree</string>
-    <string name="rtl_scrub">scrub</string>
-    <string name="rtl_wood_mixed">ξύλο (ανάμεικτο)</string>
-    <string name="rtl_wood_coniferous">ξύλο (κωνοφόρων)</string>
-    <string name="rtl_wood_deciduous">ξύλο</string>
-    <string name="rtl_glacier">Παγετώνας</string>
-    <string name="rtl_grass">γρασίδι</string>
-    <string name="rtl_farmland">χωράφι</string>
-    <string name="rtl_orchard">Δενδρόκηπος</string>
-    <string name="rtl_vineyard">αμπελώνας</string>
-    <string name="rtl_water">νερό</string>
-    <string name="rtl_water_intermittent">χείμαρος</string>
-    <string name="rtl_military">Στρατιωτικός</string>
-    <string name="rtl_nature_reserve">Καταφύγιο Αγριας ζωής</string>
-    <string name="rtl_nature_reserve_strict">Καταφύγιο Αγριας Ζωής (αυστηρό)</string>
-    <string name="rtl_cliff">Γκρεμός</string>
-    <string name="rtl_ridge">Ακμή</string>
-    <string name="rtl_reef">Ύφαλος</string>
-    <string name="rtl_beach">παραλία</string>
-    <string name="rtl_beach_gravel">Παραλία με Χαλίκια</string>
-    <string name="rtl_spring">Πηγή</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_drinking_water">πόσιμο νερό</string>
-    <string name="rtl_peak">Κορυφή</string>
-    <string name="rtl_peak_cross">σταυρός κορυφής</string>
-    <string name="rtl_picnic_site">Μέρος για πικ νικ</string>
-    <string name="rtl_playground">Παιδική χαρά</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Smiley</string>
     <string name="smiley_big_smile">Μεγάλο Χαμόγελο</string>
