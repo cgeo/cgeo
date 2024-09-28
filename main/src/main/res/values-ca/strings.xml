@@ -1043,7 +1043,6 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nEls fitxers font que contenen la informació d\'elevació s\'han d\'obtenir manualment (feu clic a aquest element per a les fonts) i col·locar-los a la carpeta de fonts que es defineix a continuació.</string>
     <string name="settings_hillshading_enable">Activa l\'ombrejat</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
@@ -2503,7 +2502,6 @@
     <string name="check_tiles_menu">Comproveu si falten dades d\'encaminament</string>
     <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
     <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:</string>
-    <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
     <string name="tileupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de dades d\'encaminament descarregats. Toc llarg per ajornar.</string>
     <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
