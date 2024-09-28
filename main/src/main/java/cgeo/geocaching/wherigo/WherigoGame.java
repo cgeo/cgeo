@@ -5,15 +5,20 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AudioClip;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
+import android.net.Uri;
+import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +41,7 @@ import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import cz.matejcik.openwig.platform.UI;
+import org.apache.commons.lang3.StringUtils;
 import se.krka.kahlua.vm.LuaClosure;
 
 public class WherigoGame implements UI {
@@ -51,10 +57,15 @@ public class WherigoGame implements UI {
         REFRESH, START, END, LOCATION
     }
 
+    //filled on new/loadGame
     private CartridgeFile cartridgeFile;
+    private WherigoCartridgeInfo cartridgeInfo;
+    private File cartridgeCacheDir;
 
+    //filled on game start
     private boolean isPlaying = false;
     private Cartridge cartridge;
+
 
     private static final AtomicInteger LISTENER_ID_PROVIDER = new AtomicInteger(0);
     private final Map<Integer, Consumer<NotifyType>> listeners = new HashMap<>();
@@ -66,8 +77,9 @@ public class WherigoGame implements UI {
         return INSTANCE;
     }
 
+    //singleton
     private WherigoGame() {
-        //singleton
+        setCacheDir(null);
     }
 
     public boolean openOnlyInWherigo() {
@@ -102,6 +114,8 @@ public class WherigoGame implements UI {
                 WherigoSaveFileHandler.get().initLoad(saveGame);
             }
             this.cartridgeFile = WherigoUtils.readCartridge(cartridgeInfo.uri);
+            this.cartridgeInfo = WherigoCartridgeInfo.get(cartridgeInfo, false, false);
+            setCacheDir(this.cartridgeInfo.cguid);
 
             final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (saveGame != null) {
@@ -126,6 +140,15 @@ public class WherigoGame implements UI {
             return;
         }
         Engine.kill();
+    }
+
+    private void setCacheDir(final String name) {
+        this.cartridgeCacheDir = new File(LocalStorage.getWherigoCacheDirectory(), StringUtils.isBlank(name) ? "unknown" : name.trim());
+    }
+
+    @NonNull
+    public File getCacheDirectory() {
+        return this.cartridgeCacheDir;
     }
 
     @SuppressWarnings("unchecked")
@@ -224,6 +247,8 @@ public class WherigoGame implements UI {
         WherigoUtils.closeCartridgeQuietly(this.cartridgeFile);
         this.cartridgeFile = null;
         this.cartridge = null;
+        this.cartridgeInfo = null;
+        setCacheDir(null);
         WherigoGameService.stopService();
         WherigoLocationProvider.get().disconnect();
     }
@@ -286,10 +311,12 @@ public class WherigoGame implements UI {
     }
 
     @Override
-    public void playSound(final byte[] data, final String s) {
+    public void playSound(final byte[] data, final String mime) {
 
-        Log.iForce(LOG_PRAEFIX + "play sound (type = " + s + ", length=" + data.length + ")");
-        AudioClip.play(data);
+        Log.iForce(LOG_PRAEFIX + "play sound (type = " + mime + ", length=" + data.length + ")");
+        final String suffix = MimeTypeMap.getSingleton().getExtensionFromMimeType(mime);
+        final Uri clipUri = Uri.fromFile(FileUtils.getOrCreate(this.cartridgeCacheDir, "audio+" + mime, suffix, data));
+        AudioClip.play(clipUri);
     }
 
     @Override

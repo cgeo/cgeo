@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.SimpleitemlistViewBinding;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
@@ -207,6 +208,10 @@ public class SimpleItemListView extends LinearLayout {
         }
 
         private void handleClick(final int adapterPos) {
+            if (adapterPos < 0 || adapterPos >= getItems().size()) {
+                Log.e("adapterPos outside of list range: " + adapterPos + " >= " + getItems().size() + ": " + getItems());
+                return;
+            }
             final ListItem itemData = getItems().get(adapterPos);
             boolean selectionChanged = false;
             final Set<Object> newSelection = new HashSet<>(model.getSelectedItems());

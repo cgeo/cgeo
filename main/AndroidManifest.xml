@@ -197,7 +197,7 @@
         <activity
             android:name=".wherigo.WherigoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="Whereigo"
+            android:label="@string/wherigo"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

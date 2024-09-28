@@ -25,6 +25,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import okhttp3.Response;
@@ -562,6 +563,45 @@ public final class FileUtils {
 
     public static String getChangelogRelease(final Context context) {
         return getRawResourceAsString(context, R.raw.changelog_bugfix);
+    }
+
+    @NonNull
+    public static String replaceNonFilenameChars(@Nullable final String text) {
+        if (StringUtils.isBlank(text)) {
+            return "-";
+        }
+        return text.trim().replaceAll("[^a-zA-Z0-9_-]", "_");
+    }
+
+    @Nullable
+    public static File getOrCreate(@NonNull final File dir, @Nullable final String prefix, @Nullable final String suffix, @Nullable final byte[] data) {
+        if (data == null) {
+            return null;
+        }
+        mkdirs(dir);
+        final File file = new File(dir, createFilenameFor(prefix, suffix, data));
+        if (!file.isFile()) {
+            try {
+                org.apache.commons.io.FileUtils.writeByteArrayToFile(file, data);
+            } catch (Exception e) {
+                Log.e("Problem extracting/storing data (prefix='" + prefix + "', dir = '" + dir + "'", e);
+                return null;
+            }
+        }
+        return file;
+    }
+
+    private static String createFilenameFor(@Nullable final String prefix, @Nullable final String suffix, @Nullable final byte[] data) {
+        final StringBuilder sb = new StringBuilder();
+        if (data == null) {
+            sb.append("null");
+        } else if (data.length == 0 || data.length == 1) {
+            sb.append(data.length == 0 ? "empty" : data[0]);
+        } else {
+            sb.append(data.length).append("_").append(Arrays.hashCode(data))
+                .append("_").append(data[1]).append("_").append(data[data.length - 2]);
+        }
+        return (StringUtils.isBlank(prefix) ? "" : replaceNonFilenameChars(prefix) + "_") + sb + (StringUtils.isBlank(suffix) ? "" : "." + replaceNonFilenameChars(suffix));
     }
 
 }
