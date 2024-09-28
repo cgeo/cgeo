@@ -131,7 +131,7 @@ final class ALApi {
             this.themes = themes;
         }
 
-        class Origin {
+        static class Origin {
             @JsonProperty("Latitude")
             private Double latitude;
             @JsonProperty("Longitude")
