@@ -1578,7 +1578,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
 
     private void updateRouteTrackButtonVisibility() {
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute, tracks);
-    };
+    }
 
     private Boolean isTargetSet() {
         return /* StringUtils.isNotBlank(targetGeocode) && */ null != lastNavTarget;

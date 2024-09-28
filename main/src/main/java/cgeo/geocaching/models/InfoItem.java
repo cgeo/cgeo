@@ -23,11 +23,11 @@ public abstract class InfoItem {
 
     public int getId() {
         return id;
-    };
+    }
 
     public @StringRes int getTitleResId() {
         return titleResId;
-    };
+    }
 
     public static InfoItem getById(final int id, final ArrayList<InfoItem> items) {
         for (InfoItem item : items) {

@@ -24,8 +24,8 @@ public class ItemGroup<T, G> {
     private ItemGroup<T, G> parent;
 
     private final List<Object> itemsAndGroups = new ArrayList<>();
-    private final List<ItemGroup<T, G>> groups = new ArrayList<>();;
-    private final List<T> items = new ArrayList<>();;
+    private final List<ItemGroup<T, G>> groups = new ArrayList<>();
+    private final List<T> items = new ArrayList<>();
 
     private final List<Object> itemsAndGroupsReadOnly = Collections.unmodifiableList(itemsAndGroups);
     private final List<ItemGroup<T, G>> groupsReadOnly = Collections.unmodifiableList(groups);
