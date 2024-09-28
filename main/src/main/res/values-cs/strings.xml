@@ -1054,7 +1054,7 @@
     <string name="settings_info_themes_title">Info o motivech mapy</string>
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
-    <string name="settings_info_hillshading">Stínování kopců je technika pro tvorbu map topografického reliéfu, která do mapy přidává světelný efekt pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nZdrojové soubory obsahující informace o nadmořské výšce je třeba získat ručně - klikněte na tuto položku pro zdroje - a umístěte je do níže definované složky zdrojů.</string>
+    <string name="settings_info_hillshading">Stínování kopců je technika pro vytváření map topografického reliéfu přidáním světelného efektu do mapy pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nData pro stínování svahů lze stáhnout z nabídky map.</string>
     <string name="settings_hillshading_enable">Povolit stínování kopců</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
@@ -1572,6 +1572,7 @@
     <string name="context_map_star_show">Zobrazit čáry k trasovým bodům</string>
     <string name="context_map_star_hide">Skrýt čáry k trasovým bodům</string>
     <string name="edit">Upravit</string>
+    <string name="showElevationChart">Zobrazit výškový graf</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
@@ -2550,6 +2551,7 @@
     <string name="downloadmap_mapfile">Mapový soubor</string>
     <string name="downloadmap_themefile">soubor motivu</string>
     <string name="downloadmap_tilefile">soubor se směrovacími daty</string>
+    <string name="downloadmap_hillshadingfile">datový soubor stínování kopců</string>
     <string name="downloadmap_checking">Kontrola dostupných směrovacích dat…</string>
     <string name="downloadmap_othermapdownload">další mapa ke stažení</string>
     <string name="downloadmap_otherthemedownload">další motiv ke stažení</string>
@@ -2561,8 +2563,13 @@
     <string name="check_tiles_menu">Zkontrolovat chybějící směrovací data</string>
     <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
     <string name="check_tiles_missing">Nalezena chybějící směrovací data:</string>
-    <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
+    <string name="check_tiles_unsupported">Varování: Směrovací data nejsou pro vybranou oblast alespoň částečně k dispozici</string>
     <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
+    <string name="download_hillshading_title">Chybějící data stínování kopců</string>
+    <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
+    <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
+    <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
+    <string name="check_hillshading_tiles_menu">Zkontrolovat chybějící data stínování kopců</string>
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
@@ -2576,6 +2583,7 @@
     <string name="mapserver_hylly_info">Podrobné mapy Finska vyžadují jeden z motivů mapy „Hylly“</string>
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
+    <string name="hillshading_info">Offline stínování kopců</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
     <string name="maptheme_vtm_scaling_summary">Možnosti měřítka pro offline mapy (vyžaduje restart)</string>
     <string name="maptheme_scale_map_title">Měřítko mapy</string>
