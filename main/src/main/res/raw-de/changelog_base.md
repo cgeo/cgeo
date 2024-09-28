@@ -3,6 +3,10 @@
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
 - Neu: Trennlinie zwischen Offline-und Online-Kartenquellen
 - New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
