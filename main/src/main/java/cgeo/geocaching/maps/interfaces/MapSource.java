@@ -24,6 +24,6 @@ public interface MapSource {
 
     boolean supportsHillshading();
 
-    void setSupportsHillshading(final boolean supportsHillshading);
+    void setSupportsHillshading(boolean supportsHillshading);
 
 }
