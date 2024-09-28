@@ -164,7 +164,7 @@ public class LegacyFilterConfigParser<T extends IJsonConfigurable<T>> {
             if (idx < text.length() && text.charAt(idx) == KEYVALUE_SEPARATOR) {
                 currKey = nextToken.toString();
                 //special case: if = is right at the start, then this is the default list
-                if ("".equals(currKey) && idx == startIdx) {
+                if (currKey.isEmpty() && idx == startIdx) {
                     currKey = null;
                 }
             } else {
@@ -203,7 +203,7 @@ public class LegacyFilterConfigParser<T extends IJsonConfigurable<T>> {
         boolean first = true;
         final List<String> defaultConfig = config.get(null);
         if (defaultConfig != null && !defaultConfig.isEmpty() && defaultConfig.get(0) != null) {
-            if (defaultConfig.get(0).equals("")) {
+            if (defaultConfig.get(0).isEmpty()) {
                 sb.append(KEYVALUE_SEPARATOR);
             }
             for (String value : defaultConfig) {
