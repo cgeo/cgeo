@@ -3,6 +3,10 @@
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
 - Nou: afegiu un separador entre fonts de mapes fora de línia i en línia
 - Nou: Admet Mapsforge com a alternativa a VTM a UnifiedMap, vegeu [Configuració => Fonts del mapa => Mapa unificat](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
