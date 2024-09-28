@@ -3,6 +3,10 @@
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
 - New: Add separator between offline and online map sources
 - Nyhet: Stöd för Mapsforge som alternativ till VTM i UnifiedMap, se [Inställningar => Kartkällor => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
