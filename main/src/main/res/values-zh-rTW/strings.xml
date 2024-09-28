@@ -293,8 +293,6 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
-    <string name="menu_update_routingdata">路線規劃資料</string>
-    <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
@@ -610,8 +608,6 @@
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
-    <string name="init_save_log_img">儲存照片</string>
-    <string name="init_summary_save_log_img">從日誌儲存照片。</string>
     <string name="init_units">使用英制單位</string>
     <string name="init_summary_units">使用英制單位取代公制單位</string>
     <string name="init_log_offline">離線日誌</string>
@@ -1566,7 +1562,6 @@
     <string name="downloadmap_download">下載</string>
     <string name="downloadmap_retrieving_directory_data">正在檢索資料…</string>
     <string name="downloadmap_checking_for_updates">正在檢查更新…</string>
-    <string name="downloadtile_title">遺失路線資料</string>
     <string name="no_updates_found">未找到更新</string>
     <string name="updates_check">檢查更新</string>
     <string name="mapserver_mapsforge_info">基礎的地圖，沒有地圖主題。</string>
@@ -1610,10 +1605,6 @@
     <string name="back">後方</string>
     <string name="cancel">取消</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
