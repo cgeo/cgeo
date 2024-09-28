@@ -13,9 +13,13 @@
 - New: Allow large integers in formulas
 - New: Support more constellations for variables in formulas
 - Fix: Multiple images in personal note not added to images tab
+- Fix: Handling of projections in waypoints and personal notes
+- New: Long tap on date in logging retrieves previous log date
 
 ### 일반
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
 - New: Allow multiple hierarchy levels in cache lists
 - New: Dedicated icons for geocaching.com blockparty and HQ event types
 - New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Fix: "Open in browser" not working for trackable logs
+- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
