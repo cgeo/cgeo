@@ -180,7 +180,7 @@ public final class ConnectorFactory {
                 liveConns.add((ILogin) conn);
             }
         }
-        return liveConns.toArray(new ILogin[liveConns.size()]);
+        return liveConns.toArray(new ILogin[0]);
     }
 
     @NonNull
@@ -191,7 +191,7 @@ public final class ConnectorFactory {
                 credConns.add(conn);
             }
         }
-        return credConns.toArray(new IConnector[credConns.size()]);
+        return credConns.toArray(new IConnector[0]);
     }
 
     @NonNull

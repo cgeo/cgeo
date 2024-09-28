@@ -575,7 +575,7 @@ public final class MapMarkerUtils {
         final List<int[]> insets = new ArrayList<>(insetsInitialCapacity);
 
         insetsBuilder.build(layers, insets);
-        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+        final LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[0]));
 
         int index = 0;
         for (final int[] temp : insets) {

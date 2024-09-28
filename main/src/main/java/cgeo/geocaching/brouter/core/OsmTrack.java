@@ -530,9 +530,7 @@ public final class OsmTrack {
         final List<VoiceHint> results = vproc.process(inputs);
         final double minDistance = getMinDistance();
         final List<VoiceHint> resultsLast = vproc.postProcess(results, rc.turnInstructionCatchingRange, minDistance);
-        for (VoiceHint hint : resultsLast) {
-            voiceHints.list.add(hint);
-        }
+        voiceHints.list.addAll(resultsLast);
     }
 
     int getMinDistance() {
