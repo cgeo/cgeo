@@ -358,7 +358,7 @@
     <string name="menu_settings">Inställningar</string>
     <string name="menu_backup">Säkerhetskopiera/återställa</string>
     <string name="menu_update">Uppdatera offlinedata</string>
-    <string name="menu_update_routingdata">Ruttberäkningsdata</string>
+    <string name="menu_update_routingdata">Navigeringdata</string>
     <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_search_clipboard">Ladda geocode från urklipp</string>
