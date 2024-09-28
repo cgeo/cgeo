@@ -2035,7 +2035,6 @@ Nombre de archivo:%2$s</string>
     <string name="check_tiles_menu">Comprobar si faltan datos de ruta</string>
     <string name="check_tiles_found">Los datos de ruta ya están presentes</string>
     <string name="check_tiles_missing">Faltan datos de enrutamiento:</string>
-    <string name="check_tiles_unsupported">Advertencia: Los datos de ruta no están disponibles al menos en parte para la región elegida</string>
     <string name="tileupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de datos de ruta descargados. Mantenga pulsado para posponer.</string>
     <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
