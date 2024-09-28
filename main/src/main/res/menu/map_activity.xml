@@ -16,21 +16,81 @@
         app:showAsAction="ifRoom">
         <menu>
             <group
+                android:orderInCategory="1"
                 android:id="@+id/menu_group_map_sources_online"
-                android:checkableBehavior="single" >
+                android:checkableBehavior="single">
             </group>
             <group
+                android:orderInCategory="2"
                 android:id="@+id/menu_group_map_sources_offline"
                 android:checkableBehavior="single" >
             </group>
-            <group android:id="@+id/menu_group_offlinemaps">
-                <item
-                    android:id="@+id/menu_hillshading"
-                    android:visible="false" />
-                <item
-                    android:id="@+id/menu_download_offlinemap"
-                    android:visible="false" />
-            </group>
+            <item
+                android:orderInCategory="90"
+                android:id="@+id/menu_map_appearance"
+                android:icon="@drawable/downloader_theme"
+                app:iconTint="@color/colorText"
+                android:title="@string/map_appearance">
+                <menu>
+                    <item
+                        android:id="@+id/menu_theme_mode"
+                        android:icon="@drawable/downloader_theme"
+                        app:iconTint="@color/colorText"
+                        android:title="@string/map_theme_select">
+                    </item>
+                    <item
+                        android:id="@+id/menu_theme_options"
+                        android:icon="@drawable/ic_menu_preferences"
+                        app:iconTint="@color/colorText"
+                        android:title="@string/map_theme_options">
+                    </item>
+                    <item
+                        android:id="@+id/menu_hillshading"
+                        android:title="@string/settings_hillshading_enable"
+                        android:icon="@drawable/ic_menu_hills"
+                        app:iconTint="@color/colorText"
+                        android:checkable="true"
+                        android:visible="false" />
+                    <item
+                        android:id="@+id/menu_select_language"
+                        android:title="@string/map_language"
+                        android:icon="@drawable/ic_menu_translate"
+                        app:iconTint="@color/colorText"
+                        android:visible="false"
+                        app:showAsAction="ifRoom">
+                        <menu>
+                            <group
+                                android:id="@+id/menu_group_map_languages"
+                                android:checkableBehavior="single" >
+                            </group>
+                        </menu>
+                    </item>
+                </menu>
+            </item>
+            <item
+                android:orderInCategory="91"
+                android:id="@+id/menu_manage_offline_maps"
+                android:icon="@drawable/ic_menu_download"
+                app:iconTint="@color/colorText"
+                android:title="@string/map_manage_offline_data">
+                <menu>
+                    <item
+                        android:id="@+id/menu_download_offlinemap"
+                        android:title="@string/downloadmap_title"
+                        android:icon="@drawable/ic_menu_mapmode"
+                        app:iconTint="@color/colorText" />
+                    <item
+                        android:id="@+id/menu_check_routingdata"
+                        android:icon="@drawable/ic_menu_route"
+                        app:iconTint="@color/colorText"
+                        android:title="@string/check_tiles_menu" />
+                    <item
+                        android:id="@+id/menu_check_hillshadingdata"
+                        android:icon="@drawable/ic_menu_hills"
+                        android:title="@string/check_hillshading_tiles_menu"
+                        app:iconTint="@color/colorText" />
+                </menu>
+            </item>
         </menu>
     </item>
     <item
@@ -110,34 +170,6 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menu_theme_mode"
-        android:icon="@drawable/ic_menu_preferences"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/map_theme_select"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_theme_options"
-        android:icon="@drawable/ic_menu_preferences"
-        android:showAsAction="ifRoom|withText"
-        android:title="@string/map_theme_options"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
-    <item
-        android:id="@+id/menu_select_language"
-        android:title="@string/map_language"
-        android:visible="false"
-        app:showAsAction="ifRoom|withText">
-        <menu>
-            <group
-                android:id="@+id/menu_group_map_languages"
-                android:checkableBehavior="single" >
-            </group>
-        </menu>
-    </item>
-    <item
         android:id="@+id/menu_trailhistory"
         android:title="@string/trailhistory">
         <menu>
@@ -162,12 +194,6 @@
     <item
         android:id="@+id/menu_routetrack"
         android:title="@string/routes_tracks_menu" />
-    <item
-        android:id="@+id/menu_check_routingdata"
-        android:title="@string/check_tiles_menu" />
-    <item
-        android:id="@+id/menu_check_hillshadingdata"
-        android:title="@string/check_hillshading_tiles_menu" />
     <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"

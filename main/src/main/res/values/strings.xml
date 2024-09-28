@@ -1957,6 +1957,8 @@
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="map_theme_select">Select map theme</string>
     <string name="map_theme_options">Theme Options</string>
+    <string name="map_manage_offline_data">Manage offline data</string>
+    <string name="map_appearance">Map appearance</string>
     <string name="map_language">Map language</string>
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>

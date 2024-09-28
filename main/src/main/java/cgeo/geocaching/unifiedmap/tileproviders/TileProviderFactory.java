@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
 
 import java.util.Collections;
@@ -41,8 +40,7 @@ public class TileProviderFactory {
         // Singleton
     }
 
-    public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
-        final Menu parentMenu = menu.getMenu();
+    public static void addMapviewMenuItems(final Activity activity, final Menu parentMenu) {
         MenuCompat.setGroupDividerEnabled(parentMenu, true);
 
         final int currentTileProvider = Settings.getTileProvider().getNumericalId();
@@ -63,8 +61,7 @@ public class TileProviderFactory {
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, tileProviders.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()); // Hide HS for VTM unless pref_rapidapiKeyMapilion is set (required for online sourcing of HS layer)
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
+        parentMenu.findItem(R.id.menu_map_appearance).getSubMenu().findItem(R.id.menu_hillshading).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()); // Hide HS for VTM unless pref_rapidapiKeyMapilion is set (required for online sourcing of HS layer)
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
@@ -223,5 +220,4 @@ public class TileProviderFactory {
     public static void resetLanguages() {
         languages = new String[]{};
     }
-
 }
