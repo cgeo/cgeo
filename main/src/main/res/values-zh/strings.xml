@@ -489,8 +489,6 @@
     <string name="init_useInternalRouting">使用内部路线规划</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
-    <string name="init_save_log_img">保存图片</string>
-    <string name="init_summary_save_log_img">保存日志中的图片</string>
     <string name="init_units">使用英制单位</string>
     <string name="init_summary_units">使用英制单位而不是公式单位</string>
     <string name="init_log_offline">离线日志记录</string>
@@ -710,10 +708,6 @@
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <!-- GC image size conversion -->
