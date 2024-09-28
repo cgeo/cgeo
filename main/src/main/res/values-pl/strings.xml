@@ -790,6 +790,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
+    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
     <string name="settings_useMapsforgeInUnifiedMap_summary">Oferuj oba silniki (VTM + Mapsforge) na mapach Mapsforge (do celów testowych)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
@@ -1053,7 +1054,6 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie (hillshading) jest techniką tworzenia map pomocy topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nPliki źródłowe zawierające informacje o wysokości muszą być uzyskane ręcznie – kliknij ten element dla źródeł – i umieść w folderze źródłowym określonym poniżej.</string>
     <string name="settings_hillshading_enable">Włącz cieniowanie terenu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
@@ -1571,6 +1571,7 @@
     <string name="context_map_star_show">Pokaż linie do punktów nawigacji</string>
     <string name="context_map_star_hide">Ukryj linie do punktów nawigacji</string>
     <string name="edit">Edytuj</string>
+    <string name="showElevationChart">Pokaż wykres wysokości</string>
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -2560,7 +2561,6 @@
     <string name="check_tiles_menu">Sprawdź brakujące dane nawigowania</string>
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
     <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:</string>
-    <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
     <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
