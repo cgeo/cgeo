@@ -32,14 +32,11 @@ public class DirectionDataCalculator {
         SensorManager.getOrientation(rotationMatrix, orientation);
 
         //calculate/estimate current device orientation.
-        DirectionData.DeviceOrientation devOr = null;
-        switch (Settings.getDeviceOrientationMode()) {
-            case AUTO:
-                devOr = getDeviceOrientation(calculateDeviceOrientationFrom(orientation), true);
-                break;
-            default:
-                devOr = getDeviceOrientation(Settings.getDeviceOrientationMode(), false);
-                break;
+        final DirectionData.DeviceOrientation devOr;
+        if (Settings.getDeviceOrientationMode() == DirectionData.DeviceOrientation.AUTO) {
+            devOr = getDeviceOrientation(calculateDeviceOrientationFrom(orientation), true);
+        } else {
+            devOr = getDeviceOrientation(Settings.getDeviceOrientationMode(), false);
         }
 
 

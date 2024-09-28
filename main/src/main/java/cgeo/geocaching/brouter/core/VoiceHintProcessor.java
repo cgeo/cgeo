@@ -357,7 +357,7 @@ public final class VoiceHintProcessor {
                     if (input.cmd == VoiceHint.C && !input.goodWay.isLinktType()) {
                         if (input.goodWay.getPrio() < input.maxBadPrio) {
                             if (inputLastSaved != null && inputLastSaved.cmd != VoiceHint.C
-                                    && (inputLastSaved != null && inputLastSaved.distanceToNext > minRange)
+                                    && (inputLastSaved.distanceToNext > minRange)
                                     && transportMode != VoiceHintList.TRANS_MODE_CAR) {
                                 // add when straight and not linktype
                                 // and last vh not straight

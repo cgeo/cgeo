@@ -179,17 +179,9 @@ public final class NavigationAppFactory {
         for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                boolean add = false;
-                if (cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache)) {
-                    add = true;
-                }
-                if (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint)) {
-                    add = true;
-                }
-                if (destination != null && navApp.app instanceof GeopointNavigationApp) {
-                    add = true;
-                }
-                if (add) {
+                if ((cache != null && navApp.app instanceof CacheNavigationApp && navApp.app.isEnabled(cache))
+                    || (waypoint != null && navApp.app instanceof WaypointNavigationApp && ((WaypointNavigationApp) navApp.app).isEnabled(waypoint))
+                    || (destination != null && navApp.app instanceof GeopointNavigationApp)) {
                     items.add(navApp);
                 }
             }

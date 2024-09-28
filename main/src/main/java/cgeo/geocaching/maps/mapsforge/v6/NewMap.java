@@ -1091,16 +1091,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             if (map == null) {
                 return;
             }
-
-            final int what = msg.what;
-            switch (what) {
-                case UPDATE_TITLE:
-                    map.setTitle();
-                    map.setSubtitle();
-                    break;
-
-                default:
-                    break;
+            if (msg.what == UPDATE_TITLE) {
+                map.setTitle();
+                map.setSubtitle();
             }
         }
 

@@ -59,10 +59,6 @@ public class GeopointWrapper {
             return true;
         }
 
-        if (this.matcherStart == match.matcherStart && this.matcherLength > match.matcherLength) {
-            return true;
-        }
-
-        return false;
+        return this.matcherStart == match.matcherStart && this.matcherLength > match.matcherLength;
     }
 }
