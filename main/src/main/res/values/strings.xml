@@ -2495,7 +2495,6 @@
     <string name="tts_oclock">%s o\'clock</string>
 
     <!-- various -->
-    <string name="copy">Copy</string>
     <string name="clipboard_copy_ok">Copied to clipboard</string>
     <string name="clipboard_copy_failed">Copying to clipboard failed</string>
 
