@@ -494,7 +494,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
             ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_hillshading) {
-            Settings.putBoolean(R.string.pref_maphillshading, !Settings.getMapShadingShowLayer());
+            Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
             changeMapSource(mapSource);
         } else if (id == R.id.menu_hint) {
