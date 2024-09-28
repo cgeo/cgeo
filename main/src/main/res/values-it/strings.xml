@@ -1039,7 +1039,6 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
     <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
-    <string name="settings_info_hillshading">L\'Ombreggiatura è una tecnica per creare mappe topografiche di rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nI file sorgente contenenti le informazioni di elevazione devono essere ottenuti manualmente - fare clic su questo elemento per le sorgenti - e posizionati nella cartella sorgenti definita sotto.</string>
     <string name="settings_hillshading_enable">Abilita ombreggiamento</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_local_file_system">File System Locale</string>
@@ -2495,7 +2494,6 @@
     <string name="check_tiles_menu">Controlla i dati di routing mancanti</string>
     <string name="check_tiles_found">Dati di routing già presenti</string>
     <string name="check_tiles_missing">Dati di routing mancanti:</string>
-    <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
     <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>
