@@ -13,9 +13,13 @@
 - Nou: permeten nombres enters grans a les fórmules
 - Nou: Admet més constel·lacions per a variables en fórmules
 - Correcció: diverses imatges a la nota personal no s'afegeixen a la pestanya d'imatges
+- Fix: Handling of projections in waypoints and personal notes
+- New: Long tap on date in logging retrieves previous log date
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
 - Nou: permet múltiples nivells de jerarquia a les llistes de catxés
 - Novetat: icones dedicades per als tipus de trobada blockparty i HQ de geocaching.com
 - Nou: defineix la mida d'imatge preferida per a les imatges carregades des del catxé i els elements de seguiment de geocaching.com
+- Fix: "Open in browser" not working for trackable logs
+- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
