@@ -13,9 +13,13 @@
 - Nieuw: Sta grote getallen toe in formules
 - Nieuw: Ondersteun meer constellaties voor variabelen in formules
 - Fix: Meerdere afbeeldingen in persoonlijke notitie niet toegevoegd aan het tabblad afbeeldingen
+- Fix: Handling of projections in waypoints and personal notes
+- New: Long tap on date in logging retrieves previous log date
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
 - Nieuw: Meerdere hiërarchische levels in cache lijsten toestaan
 - Nieuw: Unieke pictogrammen voor geocaching.com blockparty en HQ gebeurtenistypes
 - Nieuw: Stel voorkeur in voor afbeeldingsgrootte voor afbeeldingen geladen vanuit geocaching.com caches en trackables
+- Fix: "Open in browser" not working for trackable logs
+- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
