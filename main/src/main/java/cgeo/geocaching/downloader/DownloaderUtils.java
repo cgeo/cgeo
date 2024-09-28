@@ -6,7 +6,7 @@ import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.DownloaderConfirmationBinding;
-import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
@@ -15,6 +15,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
+import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -25,6 +27,10 @@ import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_HILLSHADING_TILES;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_MAPS;
+import static cgeo.geocaching.models.Download.DownloadType.DOWNLOAD_TYPE_ALL_THEMES;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -46,6 +52,7 @@ import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.util.Consumer;
+import androidx.core.util.Pair;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -71,20 +78,13 @@ public class DownloaderUtils {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
-        } else if (id == R.id.menu_delete_offlinemap) {
-            if (inUnifiedMap) {
-                TileProviderFactory.showDeleteMenu(activity);
-            } else {
-                MapProviderFactory.showDeleteMenu(activity);
-            }
-            return true;
         }
         return false;
     }
 
     public static void checkForRoutingTileUpdates(final MainActivity activity) {
         if (Settings.useInternalRouting() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
         }
     }
 
@@ -205,7 +205,7 @@ public class DownloaderUtils {
                                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
                             }
                         }
-                        ActivityMixin.showShortToast(activity, numFiles > 0 ? R.string.download_started : R.string.download_none_selected);
+                        ActivityMixin.showShortToast(activity, numFiles > 0 ? R.string.download_started : R.string.no_files_selected);
                         if (downloadTriggered != null) {
                             downloadTriggered.call(true);
                         }
@@ -379,6 +379,80 @@ public class DownloaderUtils {
                 }
             }
         }
+    }
+
+    /**
+     * list offline data (only those types downloadable using the downloader)
+     * and offer to remove it
+     */
+    public static void deleteOfflineData(final Activity activity) {
+        // collect downloaded data
+        final List<Pair<Integer, CompanionFileUtils.DownloadedFileData>> offlineItems = new ArrayList<>();
+        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapTypes()) {
+            for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(type.type)) {
+                offlineItems.add(new Pair<>(Download.DownloadType.DOWNLOAD_TYPE_ALL_MAPS.id, offlineItem));
+            }
+        }
+        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapThemeTypes()) {
+            for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(type.type)) {
+                offlineItems.add(new Pair<>(Download.DownloadType.DOWNLOAD_TYPE_ALL_THEMES.id, offlineItem));
+            }
+        }
+        for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_BROUTER_TILES)) {
+            offlineItems.add(new Pair<>(DOWNLOADTYPE_BROUTER_TILES.id, offlineItem));
+        }
+        for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_HILLSHADING_TILES)) {
+            offlineItems.add(new Pair<>(DOWNLOADTYPE_HILLSHADING_TILES.id, offlineItem));
+        }
+
+        // confirmation dialog (grouped by type)
+        final SimpleDialog.ItemSelectModel<Pair<Integer, CompanionFileUtils.DownloadedFileData>> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setButtonSelectionIsMandatory(false)
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
+            .setItems(offlineItems)
+            .setDisplayMapper((item, itemGroup) -> TextParam.text(item.second.displayName), (item, itemGroup) -> String.valueOf(item.first), null)
+            .activateGrouping(item -> activity.getString(Download.DownloadType.getFromId(item.first).getTypeNameResId()))
+            .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
+            .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).first).getIconResId()))
+        ;
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.delete_items))
+            .setPositiveButton(TextParam.id(R.string.delete))
+            .selectMultiple(model, (selected) -> {
+                if (selected.isEmpty()) {
+                    ActivityMixin.showShortToast(activity, R.string.no_files_selected);
+                }
+                int filesDeleted = 0;
+                final ContentStorage cs = ContentStorage.get();
+                for (Pair<Integer, CompanionFileUtils.DownloadedFileData> offlineItem : selected) {
+                    PersistableFolder folder = null;
+                    if (offlineItem.first == DOWNLOAD_TYPE_ALL_MAPS.id) {
+                        folder = PersistableFolder.OFFLINE_MAPS;
+                    } else if (offlineItem.first == DOWNLOAD_TYPE_ALL_THEMES.id) {
+                        folder = PersistableFolder.OFFLINE_MAP_THEMES;
+                    } else if (offlineItem.first == DOWNLOADTYPE_BROUTER_TILES.id) {
+                        folder = PersistableFolder.ROUTING_TILES;
+                    } else if (offlineItem.first == DOWNLOADTYPE_HILLSHADING_TILES.id) {
+                        folder = PersistableFolder.OFFLINE_MAP_SHADING;
+                    }
+                    if (folder != null) {
+                        final List<ContentStorage.FileInformation> files = cs.list(folder);
+                        for (ContentStorage.FileInformation fi : files) {
+                            if (StringUtils.equals(fi.name, offlineItem.second.localFile)) {
+                                cs.delete(fi.uri);
+                            }
+                        }
+                        cs.delete(CompanionFileUtils.companionFileExists(files, offlineItem.second.localFile));
+                        filesDeleted++;
+                    }
+                }
+                ActivityMixin.showShortToast(activity, activity.getResources().getQuantityString(R.plurals.files_deleted, filesDeleted, filesDeleted));
+                // update map lists in case something has changed there
+                MapsforgeMapProvider.getInstance().updateOfflineMaps(); // update legacy NewMap/CGeoMap until they get removed
+                TileProviderFactory.buildTileProviderList(true);
+            })
+        ;
+
     }
 
     /**

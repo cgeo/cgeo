@@ -518,6 +518,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
         } else if (id == R.id.menu_update_mapdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else if (id == R.id.menu_delete_offline_data) {
+            DownloaderUtils.deleteOfflineData(this);
         } else if (id == R.id.menu_pending_downloads) {
             startActivity(new Intent(this, PendingDownloadsActivity.class));
         } else {
