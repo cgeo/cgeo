@@ -358,7 +358,7 @@
     <string name="menu_settings">Nastavení</string>
     <string name="menu_backup">Zálohovat / Obnovit</string>
     <string name="menu_update">Aktualizovat offline data</string>
-    <string name="menu_update_routingdata">Data pro směrování</string>
+    <string name="menu_update_routingdata">Směrovací data</string>
     <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_history">Historie</string>
     <string name="menu_search_clipboard">Načíst geokód ze schránky</string>
