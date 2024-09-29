@@ -104,6 +104,9 @@ public class UnifiedMapType implements Parcelable {
         fromActivity.startActivity(getLaunchMapIntent(fromActivity));
     }
 
+    public boolean enableLiveMap() {
+        return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
+    }
     // ========================================================================
     // parcelable methods
 
