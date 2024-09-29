@@ -1038,7 +1038,6 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_hillshading_enable">Activa l\'ombrejat</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
