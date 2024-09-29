@@ -26,7 +26,7 @@
                 android:checkableBehavior="single" >
             </group>
             <item
-                android:orderInCategory="90"
+                android:orderInCategory="0"
                 android:id="@+id/menu_map_appearance"
                 android:icon="@drawable/downloader_theme"
                 app:iconTint="@color/colorText"
