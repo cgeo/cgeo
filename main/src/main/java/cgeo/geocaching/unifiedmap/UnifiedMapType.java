@@ -105,7 +105,7 @@ public class UnifiedMapType implements Parcelable {
     }
 
     public boolean enableLiveMap() {
-        return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords;
+        return type == UnifiedMapTypeType.UMTT_PlainMap || type == UnifiedMapTypeType.UMTT_TargetCoords || type == UnifiedMapTypeType.UMTT_Viewport;
     }
     // ========================================================================
     // parcelable methods

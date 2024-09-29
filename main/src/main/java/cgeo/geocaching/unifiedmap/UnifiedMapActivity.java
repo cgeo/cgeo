@@ -485,7 +485,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
-        if (mapType.enableLiveMap() || mapType.type == UMTT_Viewport) {
+        if (mapType.enableLiveMap()) {
             refreshMapData(false, true);
             if (loadInBackgroundHandler == null) {
                 loadInBackgroundHandler = new LoadInBackgroundHandler(this);
@@ -778,7 +778,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
         if (id == R.id.menu_map_live) {
-            if (mapType.enableLiveMap() || mapType.type == UMTT_Viewport) {
+            if (mapType.enableLiveMap()) {
                 Settings.setLiveMap(!Settings.isLiveMap());
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
