@@ -105,23 +105,27 @@
             android:key="@string/pref_tileprovider"
             android:summary="%s"
             android:title="@string/init_mapsource_select"
+            android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
         <MultiSelectListPreference
             android:key="@string/pref_tileprovider_hidden"
             android:title="@string/settings_hide_tileproviders_title"
             android:summary="@string/settings_hide_tileproviders_summary"
+            android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:key="@string/pref_useMapsforgeInUnifiedMap"
             android:title="@string/settings_useMapsforgeInUnifiedMap_title"
             android:summary="@string/settings_useMapsforgeInUnifiedMap_summary"
             android:defaultValue="false"
+            android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.TextPreference
             android:defaultValue=""
             android:key="@string/pref_userDefinedTileProviderUri"
             android:title="@string/settings_userDefinedTileProvider"
             android:summary="@string/settings_userDefinedTileProviderUri"
+            android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
