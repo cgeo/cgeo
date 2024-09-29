@@ -357,6 +357,10 @@
     <string name="menu_helpers">Užitečné aplikace</string>
     <string name="menu_settings">Nastavení</string>
     <string name="menu_backup">Zálohovat / Obnovit</string>
+    <string name="menu_manage_offline_data">Správa offline dat</string>
+    <string name="menu_update_routingdata">Aktualizovat směrovací data</string>
+    <string name="menu_update_mapdata">Aktualizovat mapová data</string>
+    <string name="menu_delete_offline_data">Odstranit offline data</string>
     <string name="menu_history">Historie</string>
     <string name="menu_search_clipboard">Načíst geokód ze schránky</string>
     <string name="menu_history_longstring">Historie nálezů</string>
@@ -941,6 +945,8 @@
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_rot13_hint">Zašifrovat nápovědu</string>
     <string name="init_summary_rot13_hint">Zobrazit text nápovědy ROT-13 zašifrovaný až do klepnutí</string>
+    <string name="init_save_log_img">Uložit obrázky logů</string>
+    <string name="init_summary_save_log_img">Stahování a ukládání obrázků z logů kromě obrázků z kešek</string>
     <string name="init_units">Používat imperiální jednotky</string>
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_cachelists">Seznamy kešek</string>
@@ -1050,7 +1056,7 @@
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
     <string name="settings_info_hillshading">Stínování kopců je technika pro vytváření map topografického reliéfu přidáním světelného efektu do mapy pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nData pro stínování svahů lze stáhnout z nabídky map.</string>
-    <string name="settings_hillshading_enable">Povolit stínování kopců</string>
+    <string name="settings_hillshading_enable">Stínování kopců</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
@@ -2556,6 +2562,14 @@
     <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
+    <string name="delete_items">Odstranit položky</string>
+    <plurals name="files_deleted">
+        <item quantity="one">%1$d soubor odstraněn</item>
+        <item quantity="few">%1$d soubory odstraněny</item>
+        <item quantity="many">%1$d souborů odstraněno</item>
+        <item quantity="other">%1$d souborů odstraněno</item>
+    </plurals>
+    <string name="no_files_selected">Nebyly vybrány žádné soubory</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
     <string name="mapserver_openandromaps_info">Podrobné mapy, vyžadují mapový motiv \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Podrobný motiv mapy, vytvořený pro mapy „OpenAndroMaps“</string>
@@ -2636,6 +2650,7 @@
     <string name="optimize">Optimalizovat</string>
     <string name="expand">Rozbalit</string>
     <string name="close">Zavřít</string>
+    <string name="delete">Odstranit</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
