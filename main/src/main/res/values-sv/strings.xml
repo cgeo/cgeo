@@ -357,6 +357,10 @@
     <string name="menu_helpers">Tilläggsprogram</string>
     <string name="menu_settings">Inställningar</string>
     <string name="menu_backup">Säkerhetskopiera/återställa</string>
+    <string name="menu_manage_offline_data">Hantera offlinedata</string>
+    <string name="menu_update_routingdata">Uppdatera ruttdata</string>
+    <string name="menu_update_mapdata">Uppdatera kartdata</string>
+    <string name="menu_delete_offline_data">Ta bort offline-data</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_search_clipboard">Ladda geocode från urklipp</string>
     <string name="menu_history_longstring">\"Hittat\" historik</string>
@@ -928,6 +932,8 @@
     <string name="init_summary_customtabs_as_browser">Externa webbplatser kommer att visas utan att lämna c:geo (endast möjligt om Chrome är installerad)</string>
     <string name="init_rot13_hint">Kryptera ledtråd</string>
     <string name="init_summary_rot13_hint">Visa tipstext ROT-13 krypterad tills knackad</string>
+    <string name="init_save_log_img">Lagra loggbilder</string>
+    <string name="init_summary_save_log_img">Ladda ner och lagra bilder från loggar utöver dem från cachen</string>
     <string name="init_units">Enheter</string>
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_cachelists">Cache-listor</string>
@@ -1036,7 +1042,7 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
-    <string name="settings_hillshading_enable">Aktivera terrängskuggning</string>
+    <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
@@ -2491,6 +2497,12 @@
     <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
+    <string name="delete_items">Ta bort objekt</string>
+    <plurals name="files_deleted">
+        <item quantity="one">%1$d fil raderad</item>
+        <item quantity="other">%1$d filer raderade</item>
+    </plurals>
+    <string name="no_files_selected">Inga filer valda</string>
     <string name="mapserver_mapsforge_info">Grundläggande kartor, inga kartteman krävs</string>
     <string name="mapserver_openandromaps_info">Detaljerade kartor, kräver karttema \"Elevate\"</string>
     <string name="mapserver_openandromaps_themes_info">Detaljerat karttema, byggt för \"OpenAndroMaps\" kartor</string>
@@ -2571,6 +2583,7 @@
     <string name="optimize">Optimera</string>
     <string name="expand">Expandera</string>
     <string name="close">Stäng</string>
+    <string name="delete">Ta bort</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
