@@ -2,15 +2,9 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.downloader.CompanionFileUtils;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.ui.SimpleItemListModel;
-import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -25,10 +19,8 @@ import android.view.SubMenu;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.core.util.Pair;
 import androidx.core.view.MenuCompat;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;

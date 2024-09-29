@@ -454,7 +454,6 @@ public class FormulaUtils {
                     final int newPos = currentPos + functionPos;
 
                     formulaView.setText(newFormula);
-                    //changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
                     if (formulaView instanceof EditText) {
                         ((EditText) formulaView).setSelection(newPos);
                     }
