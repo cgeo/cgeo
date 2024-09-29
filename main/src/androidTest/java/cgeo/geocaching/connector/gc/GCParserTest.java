@@ -82,8 +82,8 @@ public class GCParserTest {
         assertThat(cache).isNotNull();
         assertThat(cache.getSpoilers()).as("spoilers").hasSize(2);
         final Image spoiler = cache.getSpoilers().get(1);
-        assertThat("http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg").as("First spoiler image url wrong").isEqualTo(spoiler.getUrl());
-        assertThat("SPOILER").as("First spoiler image text wrong").isEqualTo(spoiler.getTitle());
+        assertThat(spoiler.getUrl()).as("First spoiler image url wrong").isEqualTo("http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg");
+        assertThat(spoiler.getTitle()).as("First spoiler image text wrong").isEqualTo("SPOILER");
         assertThat(spoiler.getDescription()).as("First spoiler image description").isNull();
     }
 
@@ -370,35 +370,35 @@ public class GCParserTest {
     public void parseTrackableInventory() {
         // Before #15043 happened
         final String exampleOld = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
-            "    </h3>" +
-            "    <div class=\"WidgetBody\">" +
-            "                <ul>" +
-            "                <li>" +
-            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=e6aab619-9cc0-4060-91ee-dde3412bddc2\" class=\"lnk\">" +
-            "                        <img src=\"/images/WptTypes/sm/3069.gif\" width=\"16\" alt=\"\" /><span>Tuinkabouter</span></a>" +
-            "                </li>" +
-            "                <li>" +
-            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=758a8a62-5af9-4183-8386-3249befa075a\" class=\"lnk\">" +
-            "                        <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>Just Add Water Festival Geocoin</span></a>" +
-            "                </li>" +
-            "                </ul>" +
-            "            <div";
+                "    </h3>" +
+                "    <div class=\"WidgetBody\">" +
+                "                <ul>" +
+                "                <li>" +
+                "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=e6aab619-9cc0-4060-91ee-dde3412bddc2\" class=\"lnk\">" +
+                "                        <img src=\"/images/WptTypes/sm/3069.gif\" width=\"16\" alt=\"\" /><span>Tuinkabouter</span></a>" +
+                "                </li>" +
+                "                <li>" +
+                "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=758a8a62-5af9-4183-8386-3249befa075a\" class=\"lnk\">" +
+                "                        <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>Just Add Water Festival Geocoin</span></a>" +
+                "                </li>" +
+                "                </ul>" +
+                "            <div";
 
         //New with #15043
         final String exampleNew = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
-            " </h3> " +
-            "    <div class=\"WidgetBody\">" +
-            "     <ul>" +
-            "     <li>" +
-            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TB7ZAAK\" class=\"lnk\">" +
-            "               <img src=\"/images/WptTypes/sm/21.gif\" width=\"16\" alt=\"\" /><span>the gambler</span></a>" +
-            "     </li>" +
-            "     <li>" +
-            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TBABCD5\" class=\"lnk\">" +
-            "               <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>the test tb</span></a>" +
-            "     </li>" +
-            "     </ul>" +
-            "   <div";
+                " </h3> " +
+                "    <div class=\"WidgetBody\">" +
+                "     <ul>" +
+                "     <li>" +
+                "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TB7ZAAK\" class=\"lnk\">" +
+                "               <img src=\"/images/WptTypes/sm/21.gif\" width=\"16\" alt=\"\" /><span>the gambler</span></a>" +
+                "     </li>" +
+                "     <li>" +
+                "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TBABCD5\" class=\"lnk\">" +
+                "               <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>the test tb</span></a>" +
+                "     </li>" +
+                "     </ul>" +
+                "   <div";
 
         // -> Assert that we can parse both
 
