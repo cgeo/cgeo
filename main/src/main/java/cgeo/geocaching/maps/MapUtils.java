@@ -223,8 +223,9 @@ public class MapUtils {
                 while (curLat <= maxLat) {
                     int curLon = (int) Math.floor(minLongitude);
                     while (curLon <= maxLon) {
-                        final String filenameBase = (curLat < 0 ? "S" : "N") + String.format("%02d", Math.abs(curLat)) + (curLon < 0 ? "W" : "E") + String.format("%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION;
-                        final String dirName = (curLat < 0 ? "S" : "N") + String.format("%02d", Math.abs(curLat));
+                        final String curLat02d = String.format(Locale.US, "%02d", Math.abs(curLat));
+                        final String filenameBase = (curLat < 0 ? "S" : "N") + curLat02d + (curLon < 0 ? "W" : "E") + String.format(Locale.US, "%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION;
+                        final String dirName = (curLat < 0 ? "S" : "N") + curLat02d;
                         requiredTiles.put(filenameBase, dirName);
                         curLon += 1;
                     }
