@@ -371,35 +371,35 @@ public class GCParserTest {
     public void parseTrackableInventory() {
         // Before #15043 happened
         final String exampleOld = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
-            "    </h3>" +
-            "    <div class=\"WidgetBody\">" +
-            "                <ul>" +
-            "                <li>" +
-            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=e6aab619-9cc0-4060-91ee-dde3412bddc2\" class=\"lnk\">" +
-            "                        <img src=\"/images/WptTypes/sm/3069.gif\" width=\"16\" alt=\"\" /><span>Tuinkabouter</span></a>" +
-            "                </li>" +
-            "                <li>" +
-            "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=758a8a62-5af9-4183-8386-3249befa075a\" class=\"lnk\">" +
-            "                        <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>Just Add Water Festival Geocoin</span></a>" +
-            "                </li>" +
-            "                </ul>" +
-            "            <div";
+                "    </h3>" +
+                "    <div class=\"WidgetBody\">" +
+                "                <ul>" +
+                "                <li>" +
+                "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=e6aab619-9cc0-4060-91ee-dde3412bddc2\" class=\"lnk\">" +
+                "                        <img src=\"/images/WptTypes/sm/3069.gif\" width=\"16\" alt=\"\" /><span>Tuinkabouter</span></a>" +
+                "                </li>" +
+                "                <li>" +
+                "                    <a href=\"https://www.geocaching.com/track/details.aspx?guid=758a8a62-5af9-4183-8386-3249befa075a\" class=\"lnk\">" +
+                "                        <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>Just Add Water Festival Geocoin</span></a>" +
+                "                </li>" +
+                "                </ul>" +
+                "            <div";
 
         //New with #15043
         final String exampleNew = "ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">Inventory</span>" +
-            " </h3> " +
-            "    <div class=\"WidgetBody\">" +
-            "     <ul>" +
-            "     <li>" +
-            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TB7ZAAK\" class=\"lnk\">" +
-            "               <img src=\"/images/WptTypes/sm/21.gif\" width=\"16\" alt=\"\" /><span>the gambler</span></a>" +
-            "     </li>" +
-            "     <li>" +
-            "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TBABCD5\" class=\"lnk\">" +
-            "               <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>the test tb</span></a>" +
-            "     </li>" +
-            "     </ul>" +
-            "   <div";
+                " </h3> " +
+                "    <div class=\"WidgetBody\">" +
+                "     <ul>" +
+                "     <li>" +
+                "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TB7ZAAK\" class=\"lnk\">" +
+                "               <img src=\"/images/WptTypes/sm/21.gif\" width=\"16\" alt=\"\" /><span>the gambler</span></a>" +
+                "     </li>" +
+                "     <li>" +
+                "         <a href=\"https://www.geocaching.com/hide/details.aspx?TB=TBABCD5\" class=\"lnk\">" +
+                "               <img src=\"/images/WptTypes/sm/4367.gif\" width=\"16\" alt=\"\" /><span>the test tb</span></a>" +
+                "     </li>" +
+                "     </ul>" +
+                "   <div";
 
         // -> Assert that we can parse both
 
