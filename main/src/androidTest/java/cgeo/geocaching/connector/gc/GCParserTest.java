@@ -83,8 +83,8 @@ public class GCParserTest {
         assertThat(cache).isNotNull();
         assertThat(cache.getSpoilers()).as("spoilers").hasSize(2);
         final Image spoiler = cache.getSpoilers().get(1);
-        assertThat("http://imgcdn.geocaching.com/cache/large/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg").as("First spoiler image url wrong").isEqualTo(spoiler.getUrl());
-        assertThat("SPOILER").as("First spoiler image text wrong").isEqualTo(spoiler.getTitle());
+        assertThat(spoiler.getUrl()).as("First spoiler image url wrong").isEqualTo("https://img.geocaching.com/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg");
+        assertThat(spoiler.getTitle()).as("First spoiler image text wrong").isEqualTo("SPOILER");
         assertThat(spoiler.getDescription()).as("First spoiler image description").isNull();
     }
 
@@ -327,7 +327,7 @@ public class GCParserTest {
         final Image spoiler = spoilers.get(0);
         assertThat(spoiler.getTitle()).isEqualTo("");
         assertThat(spoiler.getDescription()).isEqualTo("FOTO SPOILER");
-        assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/cache/large/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
+        assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
     }
 
     @MediumTest
@@ -358,7 +358,7 @@ public class GCParserTest {
         assertThat(ImageUtils.getGCFullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
         assertThat(ImageUtils.getGCFullScaleImageUrl("http://imgcdn.geocaching.com/track/display/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg"))
-                .isEqualTo("http://imgcdn.geocaching.com/track/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
+                .isEqualTo("https://img.geocaching.com/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
     }
 
     @MediumTest

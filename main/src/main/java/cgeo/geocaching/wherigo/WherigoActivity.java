@@ -77,16 +77,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 WherigoUtils.createWherigoThingTypeView(item, WherigoUtils.getOrCreateItemView(this, view, parent)),
                 (item, itemGroup) -> item == null  ? "" : item.toUserDisplayableString());
 
-//            .setDisplayMapper(type -> {
-//                final List<EventTable> items = type.getThingsForUserDisplay();
-//                final CharSequence msg = TextUtils.join(items, i -> {
-//                    final String name = i.name;
-//                    return WherigoUtils.isVisibleToPlayer(i) ? name : TextUtils.setSpan(name, new ForegroundColorSpan(Color.GRAY));
-//                }, ", ");
-//                return TextParam.text(TextUtils.concat("(" + items.size() + ")", msg));
-//            })
-//            .setDisplayIconMapper(type -> ImageParam.id(type.getIconId()));
-
     public static void start(final Activity parent, final boolean hideNavigationBar, final int itemTypeOpen) {
         startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_SCREENID, itemTypeOpen), hideNavigationBar);
     }
