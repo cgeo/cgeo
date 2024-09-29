@@ -14,7 +14,7 @@
 - New: Support more constellations for variables in formulas
 - Fix: Multiple images in personal note not added to images tab
 - Fix: Handling of projections in waypoints and personal notes
-- New: Long tap on date in logging retrieves previous log date
+- Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
@@ -22,4 +22,4 @@
 - Nyhet: Dedikerade ikoner för geocaching.com blockparty och HQ-event-typer
 - New: Set preferred image size for images loaded from geocaching.com caches and trackables
 - Fix: "Open in browser" not working for trackable logs
-- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
+- Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
