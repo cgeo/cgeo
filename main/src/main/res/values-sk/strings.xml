@@ -921,7 +921,6 @@
     <string name="settings_info_themes_title">Info o témach mapy</string>
     <string name="settings_info_themes">Aplikácia c:geo podporuje vlastné t=my pre offline mapy. Tie sa dajú použiť na zmenu štýlu farieb mapy (napr. môžete mať nočnú mapu), prípadne na zvýraznenie určitých objektov, ako sú napríklad cyklotrasy alebo vrstevnice na mape.\n\nPráca s nezbalenými mapovými témami môže znížiť výkon otvárania prezerača. V takom prípade môže byť priečinok s témou voliteľne synchronizovaný do lokálneho súkromného priečinka aplikácie pre rýchlejší prístup (na úkor nejakého miesta v ukladacom priestore).</string>
     <string name="settings_info_hillshading_title">Informácie o tieňovaní kopcov</string>
-    <string name="settings_hillshading_enable">Povoliť tieňovanie kopcov</string>
     <string name="init_mapsource_select">Vyberte zdroj máp</string>
     <string name="init_local_file_system">Lokálne systémové súbory</string>
     <string name="init_base_directory_description">Základný priečinok na verejné lokálne údaje</string>
