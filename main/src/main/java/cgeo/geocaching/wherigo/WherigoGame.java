@@ -4,12 +4,15 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
+import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AudioClip;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -60,7 +63,9 @@ public class WherigoGame implements UI {
     //filled on new/loadGame
     private CartridgeFile cartridgeFile;
     private WherigoCartridgeInfo cartridgeInfo;
+    private String cguid;
     private File cartridgeCacheDir;
+    private HtmlImage htmlImageGetter;
 
     //filled on game start
     private boolean isPlaying = false;
@@ -79,7 +84,7 @@ public class WherigoGame implements UI {
 
     //singleton
     private WherigoGame() {
-        setCacheDir(null);
+        setCGuidAndDependentThings(null);
     }
 
     public boolean openOnlyInWherigo() {
@@ -104,24 +109,24 @@ public class WherigoGame implements UI {
         loadGame(cartridgeInfo, null);
     }
 
-    public void loadGame(@NonNull final ContentStorage.FileInformation cartridgeInfo, @Nullable final String saveGame) {
+    public void loadGame(@NonNull final ContentStorage.FileInformation cartridgeFileInfo, @Nullable final String saveGame) {
         if (isPlaying()) {
             return;
         }
         try {
-            WherigoSaveFileHandler.get().setCartridge(cartridgeInfo.parentFolder, cartridgeInfo.name);
+            WherigoSaveFileHandler.get().setCartridge(cartridgeFileInfo.parentFolder, cartridgeFileInfo.name);
             if (saveGame != null) {
                 WherigoSaveFileHandler.get().initLoad(saveGame);
             }
-            this.cartridgeFile = WherigoUtils.readCartridge(cartridgeInfo.uri);
-            this.cartridgeInfo = WherigoCartridgeInfo.get(cartridgeInfo, false, false);
-            setCacheDir(this.cartridgeInfo.cguid);
+            this.cartridgeFile = WherigoUtils.readCartridge(cartridgeFileInfo.uri);
+            this.cartridgeInfo = new WherigoCartridgeInfo(cartridgeFileInfo, true, false);
+            setCGuidAndDependentThings(this.cartridgeInfo.getCGuid());
 
             final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (saveGame != null) {
                 engine.restore();
             } else {
-                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(this.cartridgeFile, engine::start));
+                engine.start();
             }
         } catch (IOException ie) {
             Log.e(LOG_PRAEFIX + "Problem", ie);
@@ -142,13 +147,25 @@ public class WherigoGame implements UI {
         Engine.kill();
     }
 
-    private void setCacheDir(final String name) {
-        this.cartridgeCacheDir = new File(LocalStorage.getWherigoCacheDirectory(), StringUtils.isBlank(name) ? "unknown" : name.trim());
+    private void setCGuidAndDependentThings(@Nullable final String rawCguid) {
+        this.cguid = StringUtils.isBlank(rawCguid) ? "unknown" : rawCguid.trim();
+        this.cartridgeCacheDir = new File(LocalStorage.getWherigoCacheDirectory(), this.cguid);
+        this.htmlImageGetter = new HtmlImage(this.cguid, true, false, false);
     }
 
     @NonNull
     public File getCacheDirectory() {
         return this.cartridgeCacheDir;
+    }
+
+    @NonNull
+    public String getCGuid() {
+        return cguid;
+    }
+
+    @Nullable
+    public WherigoCartridgeInfo getCartridgeInfo() {
+        return cartridgeInfo;
     }
 
     @SuppressWarnings("unchecked")
@@ -248,7 +265,7 @@ public class WherigoGame implements UI {
         this.cartridgeFile = null;
         this.cartridge = null;
         this.cartridgeInfo = null;
-        setCacheDir(null);
+        setCGuidAndDependentThings(null);
         WherigoGameService.stopService();
         WherigoLocationProvider.get().disconnect();
     }
@@ -287,17 +304,19 @@ public class WherigoGame implements UI {
 
         switch (screenId) {
             case MAINSCREEN:
-            case INVENTORYSCREEN:
-            case ITEMSCREEN:
-            case LOCATIONSCREEN:
-            case TASKSCREEN:
                 final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
                 if (currentActivity instanceof WherigoActivity) {
                     return;
                 }
                 if (currentActivity != null && !openOnlyInWherigo()) {
-                    WherigoActivity.start(currentActivity, false, screenId);
+                    WherigoActivity.start(currentActivity, false);
                 }
+                break;
+            case INVENTORYSCREEN:
+            case ITEMSCREEN:
+            case LOCATIONSCREEN:
+            case TASKSCREEN:
+                WherigoDialogManager.get().display(new WherigoThingListDialogProvider(WherigoThingType.getByWherigoScreenId(screenId)));
                 break;
             case DETAILSCREEN:
                 WherigoDialogManager.get().display(new WherigoThingDialogProvider(eventTable));
@@ -340,6 +359,16 @@ public class WherigoGame implements UI {
         //}
     }
 
+    @NonNull
+    public CharSequence toDisplayText(final String text) {
+        if (text == null) {
+            return "";
+        }
+        return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable, false).first;
+    }
 
+    public boolean isDebugMode() {
+        return Settings.enableFeatureWherigoDebug();
+    }
 
 }

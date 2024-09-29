@@ -35,9 +35,7 @@ public class WherigoThingListDialogProvider implements IWherigoDialogProvider {
         dialog.setView(binding.getRoot());
 
         model
-            .setDisplayViewMapper((item, itemGroup, ctx, view, parent) ->
-                WherigoUtils.createWherigoThingView(activity, thingType, item, WherigoUtils.getOrCreateItemView(activity, view, parent)),
-                (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
+            .setDisplayViewMapper(WherigoUtils.getWherigoThingDisplayMapper(thingType), (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
             .setItemPadding(10, 0)
             .addSingleSelectListener(item -> {

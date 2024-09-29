@@ -5,7 +5,6 @@ import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.models.geoitem.GeoStyle;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.wherigo.WherigoGame;
 import cgeo.geocaching.wherigo.WherigoUtils;
@@ -84,7 +83,7 @@ public class WherigoLayer {
     }
 
     private GeoItem zoneToGeoItem(final Zone zone) {
-        if (zone == null || (!Settings.enableFeatureWherigoDebug() && !WherigoUtils.isVisibleToPlayer(zone))) {
+        if (zone == null || (!WherigoGame.get().isDebugMode() && !WherigoUtils.isVisibleToPlayer(zone))) {
             return null;
         }
 

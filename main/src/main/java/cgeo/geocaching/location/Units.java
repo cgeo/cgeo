@@ -75,6 +75,17 @@ public class Units {
         return getDistanceFromKilometers(meters / 1000f);
     }
 
+    public static String getDirectionFromBearing(final float bb) {
+        final float bearing = (bb + 360) % 360f;
+        final boolean north = bearing <= 67.5 || bearing >= 292.5;
+        final boolean south = bearing >= 112.5 && bearing <= 247.5;
+        final boolean east = bearing >= 22.5 && bearing <= 157.5;
+        final boolean west = bearing >= 202.5 && bearing <= 337.5;
+
+        return (north ? "N" : (south ? "S" : "")) + (east ? "E" : (west ? "W" : ""));
+
+    }
+
     public static String getSpeed(final float kilometersPerHour) {
         if (Settings.useImperialUnits()) {
             return String.format(Locale.US, "%.0f mph", kilometersPerHour / IConversion.MILES_TO_KILOMETER);
