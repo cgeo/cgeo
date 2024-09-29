@@ -13,13 +13,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="Wherigo" />
-        </RelativeLayout>
-
         <!--  buttons -->
         <LinearLayout
             android:id="@+id/action_buttons"
@@ -59,6 +52,36 @@
                 android:layout_gravity="left"
                 app:icon="@drawable/ic_menu_mapmode" />
 
+        </LinearLayout>
+
+        <!-- Info about current cartridge -->
+        <LinearLayout
+            android:id="@+id/wherigo_cartridge_infos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+                <View style="@style/separator_horizontal_heading" />
+                <TextView
+                    style="@style/separator_horizontal_heading_text"
+                    android:text="Currently playing" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/cartridge_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/textSize_headingSecondary"
+                />
+
+            <Button
+                android:id="@+id/cartridge_details"
+                style="@style/button_full"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Cartridge Details"/>
 
         </LinearLayout>
 
@@ -66,15 +89,6 @@
 
         <cgeo.geocaching.ui.SimpleItemListView
             android:id="@+id/wherigo_thing_type_list"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:nestedScrollingEnabled="true"
-            />
-
-        <!-- Item List -->
-
-        <cgeo.geocaching.ui.SimpleItemListView
-            android:id="@+id/wherigo_things_list"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent"
             android:nestedScrollingEnabled="true"

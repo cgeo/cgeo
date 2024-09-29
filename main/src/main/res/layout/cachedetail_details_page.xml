@@ -146,7 +146,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="left"
                     android:layout_marginLeft="6dip"
-                    android:layout_marginRight="60dip"
+                    android:layout_marginRight="100dip"
                     android:paddingRight="3dip"
                     android:textSize="@dimen/textSize_detailsSecondary"
                     android:textColor="@color/colorText"
@@ -157,7 +157,7 @@
                     android:id="@+id/play_in_cgeo"
                     style="@style/button_icon_colored"
                     android:layout_toLeftOf="@+id/send_to_whereyougo"
-                    app:icon="@drawable/cgeo_borderless"
+                    app:icon="@drawable/type_wherigo"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 

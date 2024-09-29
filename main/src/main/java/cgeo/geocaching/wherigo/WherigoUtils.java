@@ -1,27 +1,30 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.SimpleItemListView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -30,7 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,14 +42,11 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Container;
@@ -57,6 +57,7 @@ import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
 import org.apache.commons.lang3.reflect.FieldUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import se.krka.kahlua.vm.LuaTable;
 
 public final class WherigoUtils {
@@ -98,7 +99,7 @@ public final class WherigoUtils {
         final List<Action> result = new ArrayList<>();
         for (Object aObj : thing.actions) {
             final Action action = (Action) aObj;
-            if (Settings.enableFeatureWherigoDebug() || (action.isEnabled() && action.getActor().visibleToPlayer())) {
+            if (WherigoGame.get().isDebugMode() || (action.isEnabled() && action.getActor().visibleToPlayer())) {
                 result.add(action);
             }
         }
@@ -201,7 +202,7 @@ public final class WherigoUtils {
             if (longVersion) {
                 msg.append(sep + "Zone center:" + WherigoGame.GP_CONVERTER.from(z.bbCenter));
             }
-            msg.append(", dist:" + Units.getDistanceFromMeters((float) z.distance) + " (");
+            msg.append(", dist:" + getDisplayableDistanceTo(z) + " (");
             switch (z.contain) {
                 case Zone.DISTANT:
                     msg.append("distant");
@@ -249,21 +250,37 @@ public final class WherigoUtils {
         }
     }
 
-    public static List<WherigoCartridgeInfo> getAvailableCartridges(final Folder folder, final Predicate<WherigoCartridgeInfo> filter, final boolean loadCartridgeFile, final boolean loadIcon) {
-        final List<ContentStorage.FileInformation> candidates = ContentStorage.get().list(folder).stream()
-                .filter(fi -> fi.name.endsWith(".gwc")).collect(Collectors.toList());
-        final List<WherigoCartridgeInfo> result = new ArrayList<>(candidates.size());
-        for (ContentStorage.FileInformation candidate : candidates) {
-            final WherigoCartridgeInfo info = WherigoCartridgeInfo.get(candidate, loadCartridgeFile, loadIcon);
-            if (info != null && (filter == null || filter.test(info))) {
-                result.add(info);
-            }
-        }
-        return result;
+    public static Drawable getDrawableForImageData(@Nullable final Context ctx, final byte[] data) {
+        final Context realCtx = ctx == null ? CgeoApplication.getInstance() : ctx;
+        return new BitmapDrawable(realCtx.getResources(), BitmapFactory.decodeByteArray(data, 0, data.length));
     }
 
-    public static Map<String, Date> getAvailableSaveGames(@NonNull final ContentStorage.FileInformation cartridgeInfo) {
-        return WherigoSaveFileHandler.getAvailableSaveFiles(cartridgeInfo.parentFolder, cartridgeInfo.name);
+    public static String getDisplayableDistance(final Geopoint from, final Geopoint to) {
+        if (from == null || to == null) {
+            return "-";
+        }
+        final String distance = Units.getDistanceFromKilometers(from.distanceTo(to));
+        final String direction = Units.getDirectionFromBearing(from.bearingTo(to));
+        return distance + " " + direction;
+    }
+
+    public static String getDisplayableDistanceTo(final Zone zone) {
+        if (zone == null) {
+            return "?";
+        }
+        if (zone.contain == Zone.INSIDE) {
+            return "inside";
+        }
+        if (zone.nearestPoint != null) {
+            final Geopoint current = new Geopoint(WherigoLocationProvider.get().getLatitude(), WherigoLocationProvider.get().getLongitude());
+            return getDisplayableDistance(current, GP_CONVERTER.from(zone.nearestPoint)) + (zone.contain == Zone.PROXIMITY ? " (near)" : "");
+        }
+        final Geopoint center = getZoneCenter(zone);
+        final Geopoint current = LocationDataProvider.getInstance().currentGeo().getCoords();
+        if (center != Geopoint.ZERO && current != Geopoint.ZERO) {
+            return getDisplayableDistance(current, center);
+        }
+        return "?";
     }
 
     public static Comparator<EventTable> getThingsComparator() {
@@ -292,34 +309,62 @@ public final class WherigoUtils {
         }, true);
     }
 
-    public static View createWherigoThingView(final Context ctx, final WherigoThingType type, final EventTable table, final View view) {
-
-        final String name = table.name;
-        CharSequence description = WherigoUtils.eventTableToString(table, false);
-        if (WherigoUtils.isVisibleToPlayer(table)) {
-            description = TextUtils.setSpan(description, new ForegroundColorSpan(Color.BLUE));
-        }
-        final Bitmap bm = WherigoUtils.getEventTableIcon(table);
-        final ImageParam icon = bm == null ? ImageParam.id(type.getIconId()) : ImageParam.drawable(new BitmapDrawable(ctx.getResources(), bm));
-
-        setViewValues(view, TextParam.text(name), TextParam.text(description), icon);
-        return view;
+    public static Func5<WherigoCartridgeInfo, ItemGroup<WherigoCartridgeInfo, Object>, Context, View, ViewGroup, View> getCartridgeDisplayMapper() {
+        return getDisplayMapper(info -> {
+            final String name = info.getCartridgeFile().name;
+            final CharSequence description = "v" + info.getCartridgeFile().version + ", " + info.getCartridgeFile().author + ", " +
+                    getDisplayableDistance(LocationDataProvider.getInstance().currentGeo().getCoords(),
+                    new Geopoint(info.getCartridgeFile().latitude, info.getCartridgeFile().longitude));
+            final byte[] iconData = info.getIconData();
+            final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.type_wherigo) : ImageParam.drawable(getDrawableForImageData(null, iconData));
+            return new ImmutableTriple<>(name, description, icon);
+        });
     }
 
-    public static View createWherigoThingTypeView(final WherigoThingType type, final View view) {
-
-        final List<EventTable> things = type.getThingsForUserDisplay();
-        final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
-        final CharSequence description = TextUtils.join(things, i -> {
-            final String thingName = i.name;
-            return !WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan(thingName, new ForegroundColorSpan(Color.BLUE));
-        }, ", ");
-
-        setViewValues(view, TextParam.text(name), TextParam.text(description), ImageParam.id(type.getIconId()));
-        return view;
+    public static Func5<EventTable, ItemGroup<EventTable, Object>, Context, View, ViewGroup, View> getWherigoThingDisplayMapper(final WherigoThingType type) {
+        return getDisplayMapper(table -> {
+                final String name = table.name;
+                CharSequence description = WherigoUtils.eventTableToString(table, false);
+                if (WherigoUtils.isVisibleToPlayer(table)) {
+                    description = TextUtils.setSpan(description, new ForegroundColorSpan(Color.BLUE));
+                }
+                byte[] iconData = null;
+                try {
+                    iconData = table.getIcon();
+                } catch (Exception ex) {
+                    Log.w("Problem extracting icon", ex);
+                }
+                final ImageParam icon = iconData == null ? ImageParam.id(type.getIconId()) : ImageParam.drawable(getDrawableForImageData(null, iconData));
+                return new ImmutableTriple<>(name, description, icon);
+            });
     }
 
-    public static View getOrCreateItemView(final Context context, final View convertView, final ViewGroup parent) {
+    public static Func5<WherigoThingType, ItemGroup<WherigoThingType, Object>, Context, View, ViewGroup, View> getWherigoThingTypeDisplayMapper() {
+        return getDisplayMapper(type -> {
+            final List<EventTable> things = type.getThingsForUserDisplay();
+            final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
+            final CharSequence description = TextUtils.join(things, i -> {
+                final String thingName = i.name;
+                return !WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan(thingName, new ForegroundColorSpan(Color.BLUE));
+            }, ", ");
+            return new ImmutableTriple<>(name, description, ImageParam.id(type.getIconId()));
+        });
+    }
+
+    private static <T> Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> getDisplayMapper(final Function<T, ImmutableTriple<CharSequence, CharSequence, ImageParam>> mapper) {
+        return (item, itemGroup, ctx, view, parent) -> {
+            final View newView = getOrCreateItemView(ctx, view, parent);
+            try {
+                final ImmutableTriple<CharSequence, CharSequence, ImageParam> values = mapper.apply(item);
+                setViewValues(newView, TextParam.text(values.left), TextParam.text(values.middle), values.right);
+            } catch (Exception ex) {
+                Log.w("Exception", ex);
+                setViewValues(newView, TextParam.text("Exception"), TextParam.text(ex.getMessage()), ImageParam.id(R.drawable.dot_waypoint_waypoint));
+            }
+            return newView;
+        };
+    }
+    private static View getOrCreateItemView(final Context context, final View convertView, final ViewGroup parent) {
         final View view = convertView == null ? LayoutInflater.from(context).inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
         ((TextView) view.findViewById(R.id.text)).setText(new SpannableString(""));
         return view;

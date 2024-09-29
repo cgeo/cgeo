@@ -1,40 +1,97 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.Log;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
 
 public class WherigoCartridgeInfo {
-    public final ContentStorage.FileInformation fileInfo;
-    public final String cguid;
-    public final CartridgeFile closedCartridgeFile;
-    public final Bitmap icon;
+    private final ContentStorage.FileInformation fileInfo;
+    private final String cguid;
+    private final boolean readIcon;
+    private final boolean readSplash;
 
-    private WherigoCartridgeInfo(final ContentStorage.FileInformation fileInfo, final String cguid, final CartridgeFile closedCartridgeFile, final Bitmap icon) {
+    private CartridgeFile closedCartridgeFile;
+    private byte[] iconData;
+    private byte[] splashData;
+
+    public WherigoCartridgeInfo(final ContentStorage.FileInformation fileInfo, final boolean readIcon, final boolean readSplash) {
         this.fileInfo = fileInfo;
-        this.cguid = cguid;
-        this.closedCartridgeFile = closedCartridgeFile;
-        this.icon = icon;
+        this.cguid = getGuid(fileInfo);
+        this.readIcon = readIcon;
+        this.readSplash = readSplash;
     }
 
-    public static WherigoCartridgeInfo get(final ContentStorage.FileInformation file, final boolean loadCartridgeFile, final boolean loadIcon) {
-        if (file == null) {
-            return null;
+    public ContentStorage.FileInformation getFileInfo() {
+        return fileInfo;
+    }
+
+    public String getCGuid() {
+        return cguid;
+    }
+
+    public CartridgeFile getCartridgeFile() {
+        ensureCartridgeData(false, false);
+        return closedCartridgeFile;
+    }
+
+    public byte[] getIconData() {
+        ensureCartridgeData(true, false);
+        return iconData.length == 0 ? null : iconData;
+    }
+
+    public byte[] getSplashData() {
+        ensureCartridgeData(false, true);
+        return splashData.length == 0 ? null : splashData;
+    }
+
+    public Map<String, Date> getSaveGames() {
+        return WherigoSaveFileHandler.getAvailableSaveFiles(fileInfo.parentFolder, fileInfo.name);
+    }
+
+    private void ensureCartridgeData(final boolean forceIcon, final boolean forceSplash) {
+        if (closedCartridgeFile != null && (iconData != null || !forceIcon) && (splashData != null || !forceSplash)) {
+            return;
         }
-        final String guid = getGuid(file);
-        final CartridgeFile cf = loadCartridgeFile ? safeReadCartridge(file.uri) : null;
-        final Bitmap icon = cf != null && loadIcon ? getCartridgeIcon(cf) : null;
-        WherigoUtils.closeCartridgeQuietly(cf);
-        return new WherigoCartridgeInfo(file, guid, cf, icon);
+
+        closedCartridgeFile = safeReadCartridge(fileInfo.uri);
+        if (closedCartridgeFile == null) {
+            this.iconData = new byte[0];
+            this.splashData = new byte[0];
+            return;
+        }
+        try {
+            if (forceIcon || readIcon) {
+                this.iconData = closedCartridgeFile.getFile(closedCartridgeFile.iconId);
+            }
+            if (forceSplash || readSplash) {
+                this.splashData = closedCartridgeFile.getFile(closedCartridgeFile.splashId);
+            }
+        } catch (Exception e) {
+            Log.w("Problem reading data from cartridgeFile " + this, e);
+            if (this.iconData != null) {
+                this.iconData = new byte[0];
+            }
+            if (this.splashData != null) {
+                this.splashData = new byte[0];
+            }
+        }
+        WherigoUtils.closeCartridgeQuietly(closedCartridgeFile);
     }
 
     @Nullable
@@ -56,15 +113,32 @@ public class WherigoCartridgeInfo {
         }
     }
 
-    private static Bitmap getCartridgeIcon(final CartridgeFile file) {
-        if (file == null) {
-            return null;
-        }
-        try {
-            final byte[] iconData = file.getFile(file.iconId);
-            return BitmapFactory.decodeByteArray(iconData, 0, iconData.length);
-        } catch (Exception e) {
-            return null;
-        }
+    @NonNull
+    @Override
+    public String toString() {
+        return "CGuid:" + cguid + "/File:" + fileInfo;
     }
+
+    public static Folder getCartridgeFolder() {
+        return PersistableFolder.WHERIGO.getFolder();
+    }
+
+    public static WherigoCartridgeInfo getCartridgeForCGuid(final String cguid) {
+        final List<WherigoCartridgeInfo> cartridges = getAvailableCartridges(wci -> wci.getCGuid().equals(cguid));
+        return cartridges.isEmpty() ? null : cartridges.get(0);
+    }
+
+    public static List<WherigoCartridgeInfo> getAvailableCartridges(final Predicate<WherigoCartridgeInfo> filter) {
+        final List<ContentStorage.FileInformation> candidates = ContentStorage.get().list(getCartridgeFolder()).stream()
+                .filter(fi -> fi.name.endsWith(".gwc")).collect(Collectors.toList());
+        final List<WherigoCartridgeInfo> result = new ArrayList<>(candidates.size());
+        for (ContentStorage.FileInformation candidate : candidates) {
+            final WherigoCartridgeInfo info = new WherigoCartridgeInfo(candidate, true, false);
+            if (filter == null || filter.test(info)) {
+                result.add(info);
+            }
+        }
+        return result;
+    }
+
 }
