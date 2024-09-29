@@ -429,6 +429,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
             menu.findItem(R.id.menu_theme_options).setVisible(tileLayerHasThemes);
+            if (!tileLayerHasThemes && !menu.findItem(R.id.menu_hillshading).isVisible()) {
+                menu.findItem(R.id.menu_map_appearance).setVisible(false);
+            }
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
@@ -745,6 +748,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             return tileLayer.hasThemes();
         }
 
+        return false;
+    }
+
+    private boolean supportsHillshading() {
+        if (mapSource != null) {
+            return mapSource.supportsHillshading();
+        }
         return false;
     }
 

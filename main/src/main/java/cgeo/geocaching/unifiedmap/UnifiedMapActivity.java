@@ -97,14 +97,12 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
@@ -758,6 +756,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         // map and theming options
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
+        if (!tileProvider.supportsThemes() && !tileProvider.supportsThemeOptions() && !tileProvider.supportsHillshading()) {
+            menu.findItem(R.id.menu_map_appearance).setVisible(false);
+        }
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
         MapUtils.onPrepareOptionsMenu(menu);
@@ -770,6 +771,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
         followMyLocationItem = menu.findItem(R.id.menu_toggle_mypos);
+        TileProviderFactory.addMapviewMenuItems(this, menu.findItem(R.id.menu_select_mapview).getSubMenu());
         FilterUtils.initializeFilterMenu(this, this);
         return result;
     }
@@ -840,20 +842,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
-        } else if (id == R.id.menu_select_mapview) {
-            // dynamically create submenu to reflect possible changes in map sources
-            View v = findViewById(R.id.menu_select_mapview);
-            if (v == null) {
-                // if map selection is moved to overflow menu, use toggle menu item instead as anchor for popup
-                v = findViewById(R.id.menu_toggle_mypos);
-            }
-            if (v != null) {
-                final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
-                menu.inflate(R.menu.map_downloader);
-                TileProviderFactory.addMapviewMenuItems(this, menu);
-                menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
-                menu.show();
-            }
         } else if (id == R.id.menu_as_list) {
             final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
                 mapFragment.getViewport().filter(vmCaches));
