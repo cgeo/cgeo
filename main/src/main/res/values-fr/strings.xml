@@ -1031,7 +1031,6 @@
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
     <string name="settings_info_themes">c:geo prend en charge les thèmes personnalisés pour les cartes hors ligne. Ils peuvent être utilisés pour changer le style de couleur de la carte (par ex. pour avoir une carte en vue nocturne) ou pour mettre en évidence certains objets tels que des pistes cyclables ou des courbes de niveau dans la carte.\n\nTravailler avec des thèmes de cartes non zippés peut diminuer les performances à l\'ouverture de la visionneuse de carte. Dans ce cas, le dossier du thème peut éventuellement être synchronisé avec un dossier local privé pour un accès plus rapide (au prix d\'un certain espace de stockage).</string>
     <string name="settings_info_hillshading_title">Informations sur l\'ombrage du relief</string>
-    <string name="settings_hillshading_enable">Activer l’ombrage du relief</string>
     <string name="init_mapsource_select">Choisir la source des cartes</string>
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
