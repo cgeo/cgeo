@@ -239,7 +239,6 @@
     <string name="caches_sort_vote">Iboto (Ang Sariling Marka)</string>
     <string name="caches_sort_inventory">Ang bilang ng pag-iimbentaryo</string>
     <string name="caches_sort_date_hidden">Ang Petsa ay Nakatago</string>
-    <string name="caches_sort_date_logged">Ang Pagtatala sa Petsa</string>
     <string name="caches_sort_finds">Ang paghahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ng pag-iimbak sa aparato</string>
@@ -369,8 +368,6 @@
     <string name="init_address">Ang Adress ay Ipakita</string>
     <string name="init_summary_address">Ang adress ang ipakita sa halip na mga koordinado sa pangunahing iskrin</string>
     <string name="init_showwaypoint_description">Kung mas mababa ang ibinigay na halaga ng mga cache ito ay naka-display duon sa mapa, ang kanilang mga waypoint ay karagdagang ipapakita.</string>
-    <string name="init_save_log_img">Ang pag-save ng mga imahe</string>
-    <string name="init_summary_save_log_img">I-seyb ang mga Image mula sa mga Log</string>
     <string name="init_units">Ang paggamit ng Imperyal na mga Yunit</string>
     <string name="init_summary_units">Ang paggamit ng mga Yunit ng Imperyal imbis na ang mga Yunit ng Metriko</string>
     <string name="init_log_offline">Ang mga offline na log</string>
@@ -586,7 +583,6 @@
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
     <string name="cache_status_archived">Ang naka-archive</string>
@@ -1109,10 +1105,8 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahin</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

@@ -320,7 +320,6 @@
     <string name="caches_sort_vote">Saját értékelés</string>
     <string name="caches_sort_inventory">Utazók száma</string>
     <string name="caches_sort_date_hidden">Rejtés dátuma</string>
-    <string name="caches_sort_date_logged">Logolás dátuma</string>
     <string name="caches_sort_finds">Találatok száma</string>
     <string name="caches_sort_state">Állapot</string>
     <string name="caches_sort_storage">Mentés dátuma</string>
@@ -540,8 +539,6 @@
     <string name="init_brouterProfileWalk">\"Séta\" profil</string>
     <string name="init_brouterProfileBike">\"Bicikli\" profil</string>
     <string name="init_brouterProfileCar">\"Autó\" profil</string>
-    <string name="init_save_log_img">Logokban található képek mentése</string>
-    <string name="init_summary_save_log_img">Logokban található képek mentése</string>
     <string name="init_units">Mérföld/láb használata</string>
     <string name="init_summary_units">Mérföld/láb használata\n(angolszász mértékegységek)</string>
     <string name="init_log_offline">Offline logolás</string>
@@ -780,7 +777,6 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
-    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -889,7 +885,6 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
-    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -1330,10 +1325,8 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Mégsem</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

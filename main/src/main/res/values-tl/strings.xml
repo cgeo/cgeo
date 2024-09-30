@@ -248,7 +248,6 @@
     <string name="caches_sort_vote">Boto (sariling Marka)</string>
     <string name="caches_sort_inventory">Bilang ng imbentaryo</string>
     <string name="caches_sort_date_hidden">Nakatago ang petsa</string>
-    <string name="caches_sort_date_logged">Petsa ng Pag-log</string>
     <string name="caches_sort_finds">Hinahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ay itinago sa aparato</string>
@@ -375,8 +374,6 @@
     <string name="init_address">Ipakita ang address</string>
     <string name="init_summary_address">Ipakita ang address sa halip na mga koordinate sa pangunahing screen</string>
     <string name="init_showwaypoint_description">Kapang kulang sa nasabing halaga ng mga cache ay ipapakita sa mapa, ang kanilang waypoint ay idaragdag sa pagpapakita.</string>
-    <string name="init_save_log_img">I-save ang mga imahe</string>
-    <string name="init_summary_save_log_img">I-save ang mga imahe mula sa mga naka-log</string>
     <string name="init_units">Gumamit ng emperyal na mga yunit</string>
     <string name="init_summary_units">Gumamit ng mga imperyal na mga yunit sa halip na metriko na mga yunit</string>
     <string name="init_log_offline">Ang pag-log sa offline</string>
@@ -586,7 +583,6 @@
     <string name="ignore_confirm_message">Ang pag-ignore sa cache ay nangangahulugang ang cache na ito hindi na magaganap pa habang nagloload ng datos mula sa geocaching.com. Maaari mo lang makitang muli ang cache sa pag-unignore nito sa website.</string>
     <string name="cache_status">Katayuan</string>
     <string name="cache_status_offline_log">Naka-save na Log</string>
-    <string name="cache_status_attended">Dumalo</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
     <string name="cache_status_archived">Naka-archive</string>
@@ -1113,10 +1109,8 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahin</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

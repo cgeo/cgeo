@@ -289,7 +289,6 @@
     <string name="caches_sort_vote">Vot (propriul vot)</string>
     <string name="caches_sort_inventory">Total inventar</string>
     <string name="caches_sort_date_hidden">Data ascunderii</string>
-    <string name="caches_sort_date_logged">Însemnată în data</string>
     <string name="caches_sort_finds">Găsite</string>
     <string name="caches_sort_state">Stare</string>
     <string name="caches_sort_storage">Data salvării pe acest dispozitiv</string>
@@ -425,8 +424,6 @@
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
     <string name="init_showwaypoint_description">Dacă sunt afişate mai puţine cutii decât acest număr, afişează şi punctele adiţionale.</string>
-    <string name="init_save_log_img">Salvează imagini</string>
-    <string name="init_summary_save_log_img">Salvează imaginile din însemnări</string>
     <string name="init_units">Unităţi de măsură imperiale</string>
     <string name="init_summary_units">Foloseşte unităţi de măsură imperiale în loc de sistemul metric</string>
     <string name="init_log_offline">Însemnări salvate local</string>
@@ -642,7 +639,6 @@
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
-    <string name="cache_status_attended">A participat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_status_archived">Arhivată</string>
@@ -1180,10 +1176,8 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Anulează</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

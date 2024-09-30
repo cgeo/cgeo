@@ -288,7 +288,6 @@
     <string name="caches_sort_vote">Balsojums (paša vērtējums)</string>
     <string name="caches_sort_inventory">Pēc krājumu skaita</string>
     <string name="caches_sort_date_hidden">Pēc paslēpšanas datuma</string>
-    <string name="caches_sort_date_logged">Pēc pierakstīšanās datuma</string>
     <string name="caches_sort_finds">Pēc atradumu skaita</string>
     <string name="caches_sort_state">Pēc valsts</string>
     <string name="caches_sort_storage">Pēc datuma, kad saglabāts tavā ierīcē</string>
@@ -468,8 +467,6 @@
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
     <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
-    <string name="init_save_log_img">Saglabāt attēlus</string>
-    <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
     <string name="init_units">Izmantot imperiālo sistēmu</string>
     <string name="init_summary_units">Izmantot imperiālo sistēmu metriskās sistēmas vietā</string>
     <string name="init_log_offline">Bezsaistes apmeklējuma reģistrācija</string>
@@ -726,7 +723,6 @@
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
-    <string name="cache_status_attended">Piedalījos</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
     <string name="cache_status_archived">Arhivēts</string>
@@ -859,7 +855,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_live_disable">Deaktivizēt tiešsaistes darbību</string>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
-    <string name="google_maps_option_group_theme">Kartes motīva iestatījumi</string>
     <!-- search -->
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
@@ -1312,10 +1307,8 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

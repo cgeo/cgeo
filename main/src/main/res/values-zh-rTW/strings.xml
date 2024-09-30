@@ -293,8 +293,6 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
-    <string name="menu_update_routingdata">路線規劃資料</string>
-    <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
@@ -323,7 +321,6 @@
     <string name="caches_sort_vote">投票</string>
     <string name="caches_sort_inventory">存貨數量</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
-    <string name="caches_sort_date_logged">日誌的日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_storage">日期儲存在裝置上</string>
@@ -611,8 +608,6 @@
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
-    <string name="init_save_log_img">儲存照片</string>
-    <string name="init_summary_save_log_img">從日誌儲存照片。</string>
     <string name="init_units">使用英制單位</string>
     <string name="init_summary_units">使用英制單位取代公制單位</string>
     <string name="init_log_offline">離線日誌</string>
@@ -975,7 +970,6 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
-    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -1124,7 +1118,6 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
@@ -1136,7 +1129,6 @@
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
-    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_tb_hint">旅行蟲識別</string>
     <string name="search_tb_button">搜尋旅行蟲</string>
@@ -1570,7 +1562,6 @@
     <string name="downloadmap_download">下載</string>
     <string name="downloadmap_retrieving_directory_data">正在檢索資料…</string>
     <string name="downloadmap_checking_for_updates">正在檢查更新…</string>
-    <string name="downloadtile_title">遺失路線資料</string>
     <string name="no_updates_found">未找到更新</string>
     <string name="updates_check">檢查更新</string>
     <string name="mapserver_mapsforge_info">基礎的地圖，沒有地圖主題。</string>
@@ -1614,10 +1605,8 @@
     <string name="back">後方</string>
     <string name="cancel">取消</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>

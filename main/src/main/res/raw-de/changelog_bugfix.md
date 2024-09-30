@@ -1,6 +1,6 @@
 ##
-- New: Show warning for activated gc connector without credentials
-- Fix: Wrong elevation chart for tracks with multiple segments
+- Neu: Warnung bei aktiviertem geocaching.com-Dienst ohne Anmeldedaten
+- Korrektur: Falsches Höhendiagramm für Tracks mit mehreren Segmenten
 
 ##
 - Korrektur: Fehlende Parametrisierung für benutzerdefinierten Kartenanbieter
