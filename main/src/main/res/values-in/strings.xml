@@ -242,7 +242,6 @@
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
     <string name="caches_sort_inventory">Jumlah persedian</string>
     <string name="caches_sort_date_hidden">Tanggal Disembunyikan</string>
-    <string name="caches_sort_date_logged">Tanggal Masuk</string>
     <string name="caches_sort_finds">Menemukan</string>
     <string name="caches_sort_state">Keadaan</string>
     <string name="caches_sort_storage">Tanggal disimpan di perangkat</string>
@@ -371,8 +370,6 @@
     <string name="init_address">Tampilkan Alamat</string>
     <string name="init_summary_address">Tampilkan alamat alternatif dari koordinat pada layar utama</string>
     <string name="init_showwaypoint_description">Jika kurang dari jumlah cache yang diberikan ditampilkan di peta, titik arah mereka ditunjukkan juga.</string>
-    <string name="init_save_log_img">Simpan gambar</string>
-    <string name="init_summary_save_log_img">Simpan Gambar dari log</string>
     <string name="init_units">Gunakan Unit Imperial</string>
     <string name="init_summary_units">Gunakan satuan Imperial, bukan satuan Metrik</string>
     <string name="init_log_offline">Login Offline</string>
@@ -582,7 +579,6 @@
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
-    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -1100,10 +1096,8 @@
     <!-- default actions in dialogs -->
     <string name="cancel">Batal</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
