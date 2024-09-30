@@ -301,8 +301,6 @@
     <string name="menu_helpers">Hjælpeprogrammer</string>
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_backup">Backup/gendannelse</string>
-    <string name="menu_update">Opdater offline data</string>
-    <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
     <string name="menu_search_clipboard">Indlæs geokode fra udklipsholder</string>
     <string name="menu_history_longstring">Fund-historik</string>
@@ -345,7 +343,6 @@
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
     <string name="caches_sort_date_hidden">Dato for placering</string>
-    <string name="caches_sort_date_logged">Dato for logbesked</string>
     <string name="caches_sort_finds">Fund</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Dato for lagring på enhed</string>
@@ -650,8 +647,6 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Vis en markering for Sværhedsgrad (til venstre) og Terræn (til højre) på cachemarkører i øverste højre hjørne (\"gemt\" markør flyttes til midten).</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
-    <string name="init_save_log_img">Lagring af billeder</string>
-    <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
     <string name="init_units">Benyt britiske afstandsmål</string>
     <string name="init_summary_units">Benyt britiske afstandsmål</string>
     <string name="init_log_offline">Offline logning</string>
@@ -976,7 +971,6 @@
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log gemt</string>
-    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
     <string name="cache_status_archived">Arkiveret</string>
@@ -1117,7 +1111,6 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
-    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
@@ -1133,7 +1126,6 @@
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
@@ -1698,10 +1690,8 @@
     <string name="finish">Afslut</string>
     <string name="cancel">Annullér</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
