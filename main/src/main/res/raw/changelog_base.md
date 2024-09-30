@@ -7,6 +7,7 @@
 - Change: Use new hillshading algorithm for Mapsforge offline maps
 - New: Hillshading support for UnifiedMap Mapsforge offline maps
 - New: Hillshading support for UnifiedMap VTM maps (requires online connection)
+- Fix: Address search not considering live mode (UnifiedMap)
 
 ### Cache details
 - New: Not yet existing variables used in projection get created in variable list
