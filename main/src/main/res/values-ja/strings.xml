@@ -304,9 +304,6 @@
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
     <string name="menu_backup">バックアップ/復元</string>
-    <string name="menu_update">オフラインデータを更新</string>
-    <string name="menu_update_routingdata">ルート検索データ</string>
-    <string name="menu_update_mapdata">地図データ</string>
     <string name="menu_history">履歴</string>
     <string name="menu_search_clipboard">クリップボードからGCコードを読み込む</string>
     <string name="menu_history_longstring">履歴</string>
@@ -356,7 +353,6 @@
     <string name="caches_sort_vote">評価済み</string>
     <string name="caches_sort_inventory">目録の数</string>
     <string name="caches_sort_date_hidden">設置日</string>
-    <string name="caches_sort_date_logged">ログが書かれた日</string>
     <string name="caches_sort_finds">発見した数</string>
     <string name="caches_sort_state">状態</string>
     <string name="caches_sort_storage">オフライン用に保存した日時</string>
@@ -715,8 +711,6 @@
     <string name="init_summary_customtabs_as_browser">外部Webサイトがc:geo内で表示されます(Chromeのインストールが必要です)</string>
     <string name="init_rot13_hint">ヒントの暗号化</string>
     <string name="init_summary_rot13_hint">ヒントをROT-13で暗号化して表示します。タップすると解読します</string>
-    <string name="init_save_log_img">画像保存</string>
-    <string name="init_summary_save_log_img">オフライン用にログの添付画像を保存</string>
     <string name="init_units">マイル/フィート表示</string>
     <string name="init_summary_units">距離をメートルの代わりにマイル/フィートで表示</string>
     <string name="init_log_offline">オフラインログ</string>
@@ -1146,7 +1140,6 @@
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
-    <string name="cache_status_attended">参加した</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
     <string name="cache_status_archived">アーカイブ済み</string>
@@ -1386,13 +1379,11 @@
     <string name="map_show_other_title">他の表示:</string>
     <string name="map_settings_cache_filter_too_complex_title">キャッシュフィルタが複雑すぎます</string>
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
-    <string name="map_theme_legend_info">カテゴリをタップするとカテゴリを開いたり閉じたりできます。各凡例をロングタップすると短い情報が表示されます。 詳細な凡例をオンラインで見るには情報アイコンをタップしてください</string>
     <string name="google_maps_style_default">デフォルト</string>
     <string name="google_maps_style_night">ダークモード</string>
     <string name="google_maps_style_retro">レトロ</string>
     <string name="google_maps_style_contrast">高コントラスト</string>
     <string name="google_maps_style_auto">デバイスのテーマ (ライト/ダーク)</string>
-    <string name="google_maps_option_group_theme">テーマのオプション</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1412,7 +1403,6 @@
     <string name="search_finder">発見したユーザー名</string>
     <string name="search_finder_prefill">ユーザー名</string>
     <string name="search_finder_button">発見したユーザー名で検索</string>
-    <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1988,10 +1978,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="receivedownload_cancelled">ファイル転送がキャンセルされました</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">オフライン地図のダウンロード</string>
-    <string name="delete_offlinemap_title">オフライン地図の削除</string>
-    <string name="no_deletable_offlinemaps">削除可能なオフライン地図はありません</string>
-    <string name="delete_file_confirmation">%sを削除しますか?</string>
-    <string name="file_deleted_info">%sが削除されました</string>
     <string name="download_title">ファイルをダウンロード</string>
     <string name="downloadmap_info">お好みの地域の「保存アイコン」をタップするとダウンロードできます。\n\nダウンロードはバックグラウンドで実行されます。完了後に地図フォルダに保存され、表示する地図に設定されます。\n\n注意: 地図ファイルはサイズがとても大きいので、たくさんのデータ通信量が必要です!</string>
     <string name="downloadmap_filename">%sをダウンロード中</string>
@@ -2016,11 +2002,9 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_download">ダウンロード</string>
     <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
-    <string name="downloadtile_title">ルート検索データが不足しています</string>
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
     <string name="check_tiles_menu">ルート検索データの確認</string>
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
-    <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
     <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="no_updates_found">更新はありません。</string>
@@ -2089,13 +2073,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="cancel">キャンセル</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">地域</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_category_roads_paths">道路</string>
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <string name="rtl_category_walking_cycling_climbing">ウォーキング、サイクリング、登山</string>
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">笑顔</string>
     <string name="smiley_big_smile">満面の笑顔</string>
@@ -2108,4 +2085,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="smiley_8ball">8ボール</string>
     <string name="smiley_question">疑問</string>
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
