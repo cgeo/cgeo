@@ -8,6 +8,7 @@
 - Nyhet: Terrängskuggnings-stöd för UnifiedMap Mapsforge offline-kartor
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
 - Fix: Address search not considering live mode (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
