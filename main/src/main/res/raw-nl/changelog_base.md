@@ -8,6 +8,7 @@
 - Nieuw: Reliëfweergave ondersteuning voor UnifiedMap Mapsforge offline kaarten
 - Nieuw: Reliëfweergave ondersteuning voor UnifiedMap VTM kaarten (vereist online verbinding)
 - Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
+- Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
