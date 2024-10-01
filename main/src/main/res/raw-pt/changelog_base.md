@@ -8,6 +8,7 @@
 - New: Hillshading support for UnifiedMap Mapsforge offline maps
 - New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 - Fix: Address search not considering live mode (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
