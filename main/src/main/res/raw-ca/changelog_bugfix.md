@@ -1,6 +1,8 @@
 ##
 - Nou: Mostra l'avís per al connector gc activat sense credencials
 - Correcció: gràfic d'elevació incorrecte per a tracks amb diversos segments
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Correcció: falta la parametrització per al proveïdor de mosaics definit per l'usuari
