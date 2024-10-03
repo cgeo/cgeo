@@ -26,13 +26,15 @@
                 android:id="@+id/description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:autoLink="web" />
 
             <!-- Cartridge Infos -->
             <TextView
-                android:id="@+id/details"
+                android:id="@+id/debug_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:autoLink="web" />
 
             <!-- Save Games -->

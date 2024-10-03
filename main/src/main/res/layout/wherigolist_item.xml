@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/one_cache"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:layout_height="60sp"
+    android:background="@color/colorBackgroundDialog"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="36dip"
+        android:layout_height="50dip"
+        android:scaleType="fitCenter"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        tools:src="@drawable/ic_info_blue"
+        />
+
+    <!-- item name -->
+    <TextView
+        android:id="@+id/name"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginRight="3dip"
+        android:layout_marginLeft="3dip"
+        android:ellipsize="end"
+        android:lines="1"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
+        tools:text="name"
+        android:maxLines="1" />
+
+    <!-- item description -->
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/icon"
+        android:layout_below="@id/name"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left"
+        android:layout_marginRight="3dip"
+        android:layout_marginLeft="3dip"
+        android:ellipsize="end"
+        android:paddingBottom="3dip"
+        android:paddingRight="3dip"
+        android:scrollHorizontally="true"
+        android:textIsSelectable="false"
+        android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
+        tools:text="geocode"
+        android:maxLines="3" />
+
+</RelativeLayout>

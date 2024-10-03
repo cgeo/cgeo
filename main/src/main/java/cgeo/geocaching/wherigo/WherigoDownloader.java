@@ -46,19 +46,19 @@ public class WherigoDownloader {
 
     private static final Pattern REQUEST_VERIFICATIOn_TOKEN_PATTERN = Pattern.compile("<input name=\"__RequestVerificationToken\" type=\"hidden\" value=\"([^\"]+)\"");
 
-    private final WorkerTask<Pair<String, Function<String, Uri>>, String, StatusResult> wherigoDownloadTask;
+    private final WorkerTask<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>> wherigoDownloadTask;
 
 
-    public WherigoDownloader(@SuppressLint("RestrictedApi") final ComponentActivity activity, final Consumer<StatusResult> wherigoDownloadConsumer) {
+    public WherigoDownloader(@SuppressLint("RestrictedApi") final ComponentActivity activity, final BiConsumer<String, StatusResult> wherigoDownloadConsumer) {
 
-        wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, StatusResult>of(
+        wherigoDownloadTask = WorkerTask.<Pair<String, Function<String, Uri>>, String, Pair<String, StatusResult>>of(
                 "wherigo-download",
                 (input, progress, cancelFlag) -> downloadWherigoTask(input.first, input.second, progress, cancelFlag),
                 AndroidRxUtils.networkScheduler)
             .addFeature(ProgressDialogFeature.of(activity).setTitle("Downloading Wherigo").setAllowCancel(true))
             .observeResult(activity, result -> {
                 if (wherigoDownloadConsumer != null) {
-                    wherigoDownloadConsumer.accept(result);
+                    wherigoDownloadConsumer.accept(result.first, result.second);
                 }
             }, null);
     }
@@ -67,7 +67,7 @@ public class WherigoDownloader {
         wherigoDownloadTask.start(new Pair<>(cguid, targetUriSupplier));
     }
 
-    private static StatusResult downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
+    private static Pair<String, StatusResult> downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
         final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
         final String username = cred.getUsernameRaw();
         final String password = cred.getPasswordRaw();
@@ -82,7 +82,7 @@ public class WherigoDownloader {
             ActivityMixin.showApplicationToast("Wherigo: Deleting leftover file");
             ContentStorage.get().delete(uriStorage[0]);
         }
-        return result;
+        return new Pair<>(cguid, result);
     }
 
     public static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {

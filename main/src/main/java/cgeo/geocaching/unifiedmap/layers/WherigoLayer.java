@@ -83,7 +83,7 @@ public class WherigoLayer {
     }
 
     private GeoItem zoneToGeoItem(final Zone zone) {
-        if (zone == null || (!WherigoGame.get().isDebugMode() && !WherigoUtils.isVisibleToPlayer(zone))) {
+        if (zone == null || (!WherigoGame.get().isDebugModeForCartridge() && !WherigoUtils.isVisibleToPlayer(zone))) {
             return null;
         }
 

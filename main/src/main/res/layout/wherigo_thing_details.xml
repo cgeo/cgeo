@@ -16,22 +16,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/layoutDetailsTextViewName"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/layoutDetailsTextViewState"
+                android:id="@+id/distanceInformation"
+                android:textSize="@dimen/textSize_headingSecondary"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/layoutDetailsTextViewDistance"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
 
             <cgeo.geocaching.ui.WherigoMediaView
                 android:id="@+id/media"
@@ -39,10 +28,19 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/layoutDetailsTextViewDescription"
+                android:id="@+id/description"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textIsSelectable="true"
                 android:autoLink="web" />
+
+            <TextView
+                android:id="@+id/debug_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+
 
             <!-- Input field -->
             <com.google.android.material.textfield.TextInputLayout

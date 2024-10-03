@@ -5,13 +5,16 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.functions.Action3;
 import cgeo.geocaching.utils.functions.Func5;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -39,7 +42,7 @@ public class SimpleItemListModel<T> {
     private final List<T> items = new ArrayList<>();
     private final List<T> itemsReadOnly = Collections.unmodifiableList(items);
 
-    private Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> displayViewMapper = constructDisplayViewMapper(defaultDisplayMapper, null);
+    private Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> displayViewMapper = constructDisplayTextViewMapper(defaultDisplayMapper, null);
     private BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper = constructFilterTextExtractor(defaultDisplayMapper);
     private Function<T, ImageParam> displayIconMapper = (o) -> null;
 
@@ -282,19 +285,14 @@ public class SimpleItemListModel<T> {
 
     /** Sets a display providing the text visualization for an item */
     public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper) {
-        return setDisplayMapper(displayMapper, null, null);
-    }
-
-    public SimpleItemListModel<T> setDisplayMapper(final Function<T, TextParam> displayMapper, @Nullable final Function<T, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         if (displayMapper != null) {
-            setDisplayMapper((item, itemGroup) -> displayMapper.apply(item), textFilterMapper == null ? null : (item, itemGroup) -> textFilterMapper.apply(item), textViewCreator);
+            setDisplayMapper((item, itemGroup) -> displayMapper.apply(item), null, null);
         }
-        return this;
-    }
+        return this;    }
 
-    public SimpleItemListModel<T> setDisplayMapper(final BiFunction<T, ItemGroup<T, Object>, TextParam> displayMapper, @Nullable final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+   public SimpleItemListModel<T> setDisplayMapper(final BiFunction<T, ItemGroup<T, Object>, TextParam> displayMapper, @Nullable final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         if (displayMapper != null) {
-            setDisplayViewMapper(constructDisplayViewMapper(displayMapper, textViewCreator), textFilterMapper != null ? textFilterMapper : constructFilterTextExtractor(displayMapper));
+            setDisplayViewMapper(constructDisplayTextViewMapper(displayMapper, textViewCreator), textFilterMapper != null ? textFilterMapper : constructFilterTextExtractor(displayMapper));
         }
         return this;
     }
@@ -309,7 +307,7 @@ public class SimpleItemListModel<T> {
         return this;
     }
 
-    public static <TT> Func5<TT, ItemGroup<TT, Object>, Context, View, ViewGroup, View> constructDisplayViewMapper(final BiFunction<TT, ItemGroup<TT, Object>, TextParam> displayTextMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
+    public static <TT> Func5<TT, ItemGroup<TT, Object>, Context, View, ViewGroup, View> constructDisplayTextViewMapper(final BiFunction<TT, ItemGroup<TT, Object>, TextParam> displayTextMapper, @Nullable final BiFunction<Context, ViewGroup, TextView> textViewCreator) {
         final BiFunction<Context, ViewGroup, TextView> tvCreator = textViewCreator != null ? textViewCreator :
             (ctx, parent) -> ViewUtils.createTextItem(ctx, R.style.text_default, TextParam.text(""));
         return (item, itemGroup, context, view, parent) -> {
@@ -348,7 +346,15 @@ public class SimpleItemListModel<T> {
         };
     }
 
-    /** Sets a view provider for the items */
+    /**
+     * Sets a view provider for the items.
+     * <br>
+     * Use this method ONLY if you need full control over the view creation. In most cases this is not needed
+     *
+     * @param displayViewMapper needs to return a fully prepared view for a gien item, its group, the previous view (if any) and its viewgroup (for new view creation)
+     * @param textFilterMapper needs to return for a given item and its group the text string against text filtering will be done
+     * @return this
+     */
     public SimpleItemListModel<T> setDisplayViewMapper(final Func5<T, ItemGroup<T, Object>, Context, View, ViewGroup, View> displayViewMapper, final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper) {
         if (displayViewMapper != null) {
             this.displayViewMapper = displayViewMapper;
@@ -357,6 +363,23 @@ public class SimpleItemListModel<T> {
         }
         return this;
     }
+
+    /** Sets a view provider for items based on a layout */
+    public SimpleItemListModel<T> setDisplayViewMapper(@LayoutRes final int layoutResId, final Action3<T, ItemGroup<T, Object>, View> fillView, final BiFunction<T, ItemGroup<T, Object>, String> textFilterMapper) {
+        if (layoutResId != 0 && fillView != null) {
+            setDisplayViewMapper((item, itemGroup, ctx, view, viewGroup) -> {
+                //get or create view
+                final View realView = view == null ? LayoutInflater.from(ctx).inflate(layoutResId, viewGroup, false) : view;
+                //fill view
+                fillView.call(item, itemGroup, realView);
+                //return view
+                return realView;
+            }, textFilterMapper);
+        }
+
+        return this;
+    }
+
 
     public Function<T, ImageParam> getDisplayIconMapper() {
         return displayIconMapper;

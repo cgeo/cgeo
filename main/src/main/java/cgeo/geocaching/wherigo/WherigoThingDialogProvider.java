@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,8 +39,9 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
+        dialog.setTitle(eventTable.getClass().getSimpleName() + ": " + eventTable.name);
         dialog.setView(binding.getRoot());
-        binding.layoutDetailsTextViewDescription.setText(WherigoUtils.eventTableToString(eventTable, true));
+        refreshGui();
 
         binding.media.setMedia((Media) eventTable.table.rawget("Media"));
 
@@ -77,7 +79,17 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public void onGameNotification(final WherigoGame.NotifyType notifyType) {
-        binding.layoutDetailsTextViewDescription.setText(WherigoUtils.eventTableToString(eventTable, true));
+        refreshGui();
+    }
+
+    private void refreshGui() {
+        binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
+        TextParam.text("Debug Information:\n\n" + WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
+        binding.debugInfo.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
+        binding.distanceInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
+        if (eventTable instanceof Zone) {
+            binding.distanceInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
+        }
     }
 
 }

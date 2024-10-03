@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AudioClip;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.Activity;
@@ -364,7 +365,16 @@ public class WherigoGame implements UI {
         if (text == null) {
             return "";
         }
+        if (!TextUtils.containsHtml(text)) {
+            return text;
+        }
         return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable, false).first;
+    }
+
+    public boolean isDebugModeForCartridge() {
+        final String code = cartridgeInfo == null || cartridgeInfo.getCartridgeFile() == null ? null
+                : cartridgeInfo.getCartridgeFile().code;
+        return !StringUtils.isBlank(code) && Settings.enableFeatureWherigoDebugCartridge(code.trim());
     }
 
     public boolean isDebugMode() {
