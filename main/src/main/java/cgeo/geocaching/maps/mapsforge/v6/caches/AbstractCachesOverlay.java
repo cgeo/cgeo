@@ -355,10 +355,18 @@ public abstract class AbstractCachesOverlay {
                 final GeoitemLayer item = layerList.getItem(code);
                 if (item != null) {
                     geoEntries.remove(new GeoEntry(code, overlayId));
-                    layers.remove(item);
+                    try {
+                        layers.remove(item);
+                    } catch (IllegalStateException ignore) {
+                        // layer may be unassigned
+                    }
                     final Layer circle = item.getCircle();
                     if (circle != null) {
-                        layers.remove(circle);
+                        try {
+                            layers.remove(circle);
+                        } catch (IllegalStateException ignore) {
+                            // layer may be unassigned
+                        }
                     }
                     layerList.remove(item);
                 }
