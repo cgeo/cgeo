@@ -1,6 +1,8 @@
 ##
 - Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
 - Naprawiono: Niepoprawny wykres wysokości dla ścieżek z wieloma segmentami
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Naprawiono: Brak parametru dla dostawcy kafelków zdefiniowanego przez użytkownika
