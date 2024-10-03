@@ -100,12 +100,13 @@ public class UnifiedTargetAndDistancesHandler {
             final TextView distanceSupersizeView, final TextView targetView,
             final Action1<Boolean> updateBothViewNeeded
     ) {
-        final boolean showStraight = updateTextView(distanceStraight, showBothDistances || realDistance < MIN_DISTANCE, distance, RoutingMode.STRAIGHT.drawableId);
-        final boolean showRouted = updateTextView(distanceRouted, Settings.getRoutingMode() != RoutingMode.STRAIGHT, realDistance, Settings.getRoutingMode().drawableId);
+        final RoutingMode routingMode = Settings.getRoutingMode();
+        final boolean showStraight = updateTextView(distanceStraight, showBothDistances || realDistance < MIN_DISTANCE || routingMode == RoutingMode.STRAIGHT, distance, RoutingMode.STRAIGHT.drawableId);
+        final boolean showRouted = updateTextView(distanceRouted, routingMode != RoutingMode.STRAIGHT, realDistance, routingMode.drawableId);
         updateTextView(distanceIndividualRoute, true, routeDistance, R.drawable.map_quick_route);
 
         final int supersize = Settings.getSupersizeDistance();
-        if (updateTextView(distanceSupersizeView, supersize > 0, supersize == 1 ? realDistance : supersize == 2 ? distance : routeDistance, supersize == 1 ? Settings.getRoutingMode().drawableId : supersize == 2 ? RoutingMode.STRAIGHT.drawableId : R.drawable.map_quick_route)) {
+        if (updateTextView(distanceSupersizeView, supersize > 0, supersize == 1 ? realDistance : supersize == 2 ? distance : routeDistance, supersize == 1 ? routingMode.drawableId : supersize == 2 ? RoutingMode.STRAIGHT.drawableId : R.drawable.map_quick_route)) {
             targetView.setBackground(null);
         } else {
             targetView.setBackgroundResource(R.drawable.icon_bcg);
