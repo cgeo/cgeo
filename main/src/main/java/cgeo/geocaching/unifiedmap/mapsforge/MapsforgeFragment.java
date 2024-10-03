@@ -356,6 +356,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     }
 
     private void zoomToBoundsDirect(final BoundingBox bounds) {
+        setCenter(new Geopoint(bounds.getCenterPoint().getLatitude(), bounds.getCenterPoint().getLongitude()));
         final int tileSize = mMapView.getModel().displayModel.getTileSize();
         final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(mMapView.getWidth(), mMapView.getHeight()),
                 new org.mapsforge.core.model.BoundingBox(bounds.getMinLatitude(), bounds.getMinLongitude(), bounds.getMaxLatitude(), bounds.getMaxLongitude()), tileSize);
