@@ -78,7 +78,7 @@ public enum WherigoThingType {
 
     @SuppressWarnings("unchecked")
     public <T extends EventTable> List<T> getThingsForUserDisplay(final Class<T> clazz) {
-        final boolean debugMode = WherigoGame.get().isDebugMode();
+        final boolean debugMode = WherigoGame.get().isDebugModeForCartridge();
 
         final List<T> list = getAllThings().stream()
             .map(t -> (T) t)

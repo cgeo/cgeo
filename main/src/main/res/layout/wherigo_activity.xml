@@ -13,6 +13,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <!-- Experimental warning -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/textSize_headingSecondary"
+            android:textColor="@color/archived_cache_color"
+            android:background="@drawable/mark_gray"
+            android:autoLink="web"
+            android:textIsSelectable="true"
+            android:text="Experimental, not internationalized yet, go to https://github.com/cgeo/cgeo/wiki/Use-the-Draft-Wherigo-Player for usage instructions"/>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal_heading" />
+            <TextView
+                style="@style/separator_horizontal_heading_text"
+                android:text="Wherigo Controls" />
+        </RelativeLayout>
+
         <!--  buttons -->
         <LinearLayout
             android:id="@+id/action_buttons"
@@ -23,33 +43,38 @@
             >
 
             <Button
-                android:id="@+id/start_game"
+                android:id="@+id/view_cartridges"
                 style="@style/button_icon"
                 android:layout_gravity="left"
+                android:hint="View stored cartridges"
                 app:icon="@drawable/ic_menu_open_in_browser" />
 
             <Button
                 android:id="@+id/save_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
+                android:hint="Save current game"
                 app:icon="@drawable/ic_menu_save" />
 
             <Button
                 android:id="@+id/stop_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
+                android:hint="Stop current game"
                 app:icon="@drawable/ic_menu_cancel" />
 
             <Button
                 android:id="@+id/download"
                 style="@style/button_icon"
                 android:layout_gravity="left"
+                android:hint="Download cartridge"
                 app:icon="@drawable/downloader_folder" />
 
             <Button
                 android:id="@+id/map"
                 style="@style/button_icon"
                 android:layout_gravity="left"
+                android:hint="Map zones of current game"
                 app:icon="@drawable/ic_menu_mapmode" />
 
         </LinearLayout>

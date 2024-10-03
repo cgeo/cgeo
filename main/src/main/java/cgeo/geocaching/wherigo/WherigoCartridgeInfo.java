@@ -52,12 +52,12 @@ public class WherigoCartridgeInfo {
 
     public byte[] getIconData() {
         ensureCartridgeData(true, false);
-        return iconData.length == 0 ? null : iconData;
+        return iconData == null || iconData.length == 0 ? null : iconData;
     }
 
     public byte[] getSplashData() {
         ensureCartridgeData(false, true);
-        return splashData.length == 0 ? null : splashData;
+        return splashData == null || splashData.length == 0 ? null : splashData;
     }
 
     public Map<String, Date> getSaveGames() {

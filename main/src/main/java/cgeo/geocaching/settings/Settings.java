@@ -726,12 +726,18 @@ public class Settings {
     }
 
     public static boolean enableFeatureWherigo() {
-        return getBoolean(R.string.pref_feature_wherigo, false);
+        return getBoolean(R.string.pref_feature_wherigo, true);
     }
 
     public static boolean enableFeatureWherigoDebug() {
         return enableFeatureWherigo() && getBoolean(R.string.pref_feature_wherigo_debug, false);
     }
+
+    public static boolean enableFeatureWherigoDebugCartridge(final String code) {
+        return enableFeatureWherigo() &&
+                getBooleanDirect(getKey(R.string.pref_feature_wherigo_debug) + "_" + code, false);
+    }
+
 
     public static boolean isFeatureEnabledDefaultFalse(@StringRes final int featureKeyId) {
         return getBoolean(featureKeyId, false);

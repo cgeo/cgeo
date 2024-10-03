@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         final Map<String, Date> saveGames = cartridgeInfo.getSaveGames();
 
         binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
-        TextParam.text("#Details#\n" +
+        TextParam.text("Debug Information:\n" +
             "- **CGUID:** " + cartridgeInfo.getCGuid() + "\n" +
             "- **Author:** " + cartridgeFile.author + "\n" +
             "- **Location:** " + new Geopoint(cartridgeFile.latitude, cartridgeFile.longitude) + "\n" +
@@ -51,27 +52,41 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             "- **Type:** " + cartridgeFile.type + "\n" +
             "- **Member:** " + cartridgeFile.member + "\n" +
             "- **Version:** " + cartridgeFile.version + "\n" +
-            "- **Url:** " + cartridgeFile.url + "\n" +
             "- **Save Games** " + saveGames.size() + " (" + saveGames + ")\n" +
-            "- **Code:** " + cartridgeFile.code + "\n").setMarkdown(true).applyTo(binding.details);
+            "- **C:** " + cartridgeFile.code + "\n" +
+            "- **Url:** " + cartridgeFile.url + "\n").setMarkdown(true).applyTo(binding.debugInfo);
+            binding.debugInfo.setVisibility(WherigoGame.get().isDebugMode() ? View.VISIBLE : View.GONE);
 
         binding.media.setMediaData("jpg", cartridgeInfo.getSplashData(), null);
 
         final List<String> actions = new ArrayList<>();
-        if (!WherigoGame.get().isPlaying()) {
-            actions.add("New Game");
-            if (!saveGames.isEmpty()) {
-                actions.add("Load Game");
-            }
+        actions.add("New Game");
+        if (!saveGames.isEmpty()) {
+            actions.add("Load Game");
         }
         actions.add("Close");
 
         WherigoUtils.setViewActions(actions, binding.dialogActionlist, TextParam::text, item -> {
             WherigoDialogManager.get().clear();
-            if (item.equals("New Game")) {
-                WherigoGame.get().newGame(cartridgeInfo.getFileInfo());
-            } else if (item.equals("Load Game")) {
-                chooseSavefile(activity, saveGames);
+            if (item.equals("Close")) {
+                return;
+            }
+            //"New Game" or "Load Game" requires ending a running game
+            if (WherigoGame.get().isPlaying()) {
+                SimpleDialog.of(activity).setTitle(TextParam.text("Wherigo Game running"))
+                    .setMessage(TextParam.text("A Wherigo Game is currently running for cartridge '" + WherigoGame.get().getCartridgeInfo().getCartridgeFile().name +
+                        "'. Do you want to end this game?")).confirm(() -> {
+                            final int[] listenerId = new int[1];
+                            listenerId[0] = WherigoGame.get().addListener(notifyType -> {
+                                if (notifyType.equals(WherigoGame.NotifyType.END)) {
+                                    startAnotherGame(item.equals("Load Game"), activity, saveGames);
+                                    WherigoGame.get().removeListener(listenerId[0]);
+                                }
+                            });
+                            WherigoGame.get().stopGame();
+                    });
+        } else {
+                startAnotherGame(item.equals("Load Game"), activity, saveGames);
             }
         });
 
@@ -81,6 +96,14 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     @Override
     public void onGameNotification(final WherigoGame.NotifyType notifyType) {
         //do nothing
+    }
+
+    private void startAnotherGame(final boolean loadGame, final Activity activity, final Map<String, Date> saveGames) {
+        if (loadGame) {
+            chooseSavefile(activity, saveGames);
+        } else {
+            WherigoGame.get().newGame(cartridgeInfo.getFileInfo());
+        }
     }
 
     private void chooseSavefile(final Activity activity, final Map<String, Date> saveGames) {

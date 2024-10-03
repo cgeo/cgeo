@@ -35,13 +35,14 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity) {
+        final WherigoGame game = WherigoGame.get();
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
+        dialog.setTitle("Input Dialog");
         dialog.setView(binding.getRoot());
-        binding.layoutDetailsTextViewName.setText("Title");
-        binding.layoutDetailsTextViewDescription.setText((String) input.table.rawget("Text"));
+        binding.description.setText(game.toDisplayText((String) input.table.rawget("Text")));
 
         binding.media.setMedia((Media) input.table.rawget("Media"));
 
@@ -80,7 +81,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 final SimpleItemListModel<String> choiceModel = new SimpleItemListModel<>();
                 choiceModel
                     .setItems(choices)
-                    .setDisplayMapper(TextParam::text)
+                    .setDisplayMapper(s -> TextParam.text(game.toDisplayText(s)))
                     .setSelectedItems(Collections.singleton(choices.get(0)))
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
                 binding.dialogItemlistview.setModel(choiceModel);

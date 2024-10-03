@@ -40,16 +40,16 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity) {
+        final WherigoGame game = WherigoGame.get();
 
         final String msg = Arrays.stream(strings).collect(Collectors.joining("\n"));
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
+        dialog.setTitle(StringUtils.isBlank(s) ? "Dialog" : s.trim());
         dialog.setView(binding.getRoot());
-        binding.layoutDetailsTextViewName.setText(s);
-        binding.layoutDetailsTextViewDescription.setText(msg);
+        binding.description.setText(game.toDisplayText(msg));
 
         if (media != null && media.length > 0) {
             binding.media.setMedia(media[0]);

@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.Log;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -44,8 +45,9 @@ public class WherigoGameService extends Service {
         serviceDisposables.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
         startForeground(Notifications.ID_WHERIGO_SERVICE_NOTIFICATION_ID, Notifications.newBuilder(this, NotificationChannels.WHERIGO_NOTIFICATION)
             .setSmallIcon(R.drawable.type_marker_wherigo)
-            .setContentTitle("WherigoGameService is running")
-            .setContentText("WherigoGameService is running")
+            .setContentTitle("A Wherigo Game is running in c:geo")
+            .setContentText("A Wherigo Game is running  in c:geo")
+            .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, WherigoActivity.class), PendingIntent.FLAG_IMMUTABLE))
             .setOngoing(true).build());
     }
 

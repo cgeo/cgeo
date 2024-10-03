@@ -15,16 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout style="@style/separator_horizontal_layout">
-
-                <View style="@style/separator_horizontal_heading" />
-
-                <TextView
-                    android:id="@+id/wherigo_things_list_header"
-                    style="@style/separator_horizontal_heading_text"
-                    android:text="Wherigo List of Things" />
-            </RelativeLayout>
-
             <!-- Item List -->
             <cgeo.geocaching.ui.SimpleItemListView
                 android:id="@+id/wherigo_things_list"
