@@ -128,6 +128,16 @@ public class ViewUtils {
     }
 
     /**
+     * Sets visibility for given view (without crashing on null view)
+     */
+    public static void setVisibility(final View view, final int visibility) {
+        if (view == null) {
+            return;
+        }
+        view.setVisibility(visibility);
+    }
+
+    /**
      * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
      *
      * @param ctx           context to use for creating views

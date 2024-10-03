@@ -374,6 +374,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // refresh options menu and routes/tracks display
         invalidateOptionsMenu();
+        setMapRotation(null, Settings.getMapRotation());
     }
 
     private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
@@ -909,6 +910,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (item != null) {
             item.setChecked(true);
         }
+        ViewUtils.setVisibility(findViewById(R.id.container_compassrose), mapRotation == MAPROTATION_OFF ? View.GONE : View.VISIBLE);
         checkDrivingMode();
     }
 
