@@ -89,7 +89,7 @@ class LoadInBackgroundHandler {
 
                 // caches
 
-                // always retriever stored caches
+                // always retrieve stored caches
                 {
                     final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(viewport.resize(1.2)));
                     Log.d("load.searchResult: " + searchResult.getGeocodes());
@@ -97,6 +97,9 @@ class LoadInBackgroundHandler {
                     Log.d("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
                     MapUtils.filter(cachesFromSearchResult, activity.getFilterContext());
                     activity.addSearchResultByGeocaches(cachesFromSearchResult);
+                    if (lastSearchResult == null) {
+                        lastSearchResult = searchResult;
+                    }
                 }
 
                 if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
