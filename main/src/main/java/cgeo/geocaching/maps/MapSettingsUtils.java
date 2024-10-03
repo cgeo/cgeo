@@ -54,7 +54,7 @@ public class MapSettingsUtils {
     }
 
     public static void showRotationMenu(final Activity activity, final Action1<Integer> setRotationMode) {
-        final ToggleButtonWrapper<Integer> rotationChoiceWrapper = new ToggleButtonWrapper<>(Settings.getMapRotation(), setRotationMode, activity.findViewById(R.id.rotation_mode_tooglegroup));
+        final ToggleButtonWrapper<Integer> rotationChoiceWrapper = new ToggleButtonWrapper<>(Settings.getMapRotation(), setRotationMode, activity.findViewById(R.id.rotation_mode_tooglegroup), true);
         rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_off, Settings.MAPROTATION_OFF, activity.getString(R.string.switch_off)));
         rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_manual, Settings.MAPROTATION_MANUAL, activity.getString(R.string.switch_manual)));
         rotationChoiceWrapper.add(new ButtonChoiceModel<>(R.id.rotation_mode_energy_saving, Settings.MAPROTATION_AUTO_LOWPOWER, activity.getString(R.string.switch_auto_lowpower)));
@@ -110,12 +110,12 @@ public class MapSettingsUtils {
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         circlesCb.addToViewGroup(activity, rightColumn);
 
-        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup);
+        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup, false);
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
-        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
+        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup, false);
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
@@ -306,12 +306,14 @@ public class MapSettingsUtils {
         private final ArrayList<ButtonChoiceModel<T>> list;
         private final Action1<T> setValue;
         private final T originalValue;
+        private boolean setValueOnEachClick;
 
-        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup) {
+        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup, final boolean setValueOnEachClick) {
             this.originalValue = originalValue;
             this.toggleGroup = toggleGroup;
             this.setValue = setValue;
             this.list = new ArrayList<>();
+            this.setValueOnEachClick = setValueOnEachClick;
         }
 
         public void add(final ButtonChoiceModel<T> item) {
@@ -345,7 +347,7 @@ public class MapSettingsUtils {
 
         public void setValue() {
             final T currentValue = getByResId(toggleGroup.getCheckedButtonId()).assignedValue;
-            if (setValue != null && !originalValue.equals(currentValue)) {
+            if (setValue != null && (setValueOnEachClick || !originalValue.equals(currentValue))) {
                 this.setValue.call(currentValue);
             }
         }
