@@ -76,7 +76,11 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         setMapRotation(Settings.getMapRotation());
         mapAttribution = requireView().findViewById(R.id.map_attribution);
 
-        tileCache = AndroidUtil.createTileCache(getContext(), "mapcache", mMapView.getModel().displayModel.getTileSize(), 2f, mMapView.getModel().frameBufferModel.getOverdrawFactor());
+        // create tile cache (taking driving mode into account when calculating tile cache size)
+        setDrivingMode(true);
+        tileCache = AndroidUtil.createTileCache(requireContext(), "mapcache", mMapView.getModel().displayModel.getTileSize(), 2f, mMapView.getModel().frameBufferModel.getOverdrawFactor());
+        setDrivingMode(false);
+
         themeHelper = new MapsforgeThemeHelper(requireActivity());
 
         if (position != null) {
