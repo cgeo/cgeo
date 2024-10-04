@@ -7,7 +7,7 @@
 - Ändra: Använd ny terrängskuggnings-algoritm för Mapsforge offline-kartor
 - Nyhet: Terrängskuggnings-stöd för UnifiedMap Mapsforge offline-kartor
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
-- Fix: Address search not considering live mode (UnifiedMap)
+- Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
 - Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
 
 ### Cachedetaljer
