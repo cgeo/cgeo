@@ -48,6 +48,7 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.config.LegacyFilterConfig;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.wherigo.WherigoActivity;
 import static cgeo.geocaching.Intents.EXTRA_MESSAGE_CENTER_COUNTER;
 
 import android.annotation.SuppressLint;
@@ -488,6 +489,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
             DebugUtils.askUserToReportProblem(this, null);
         } else if (id == R.id.menu_helpers) {
             startActivity(new Intent(this, UsefulAppsActivity.class));
+        } else if (id == R.id.menu_wherigo) {
+            startActivity(new Intent(this, WherigoActivity.class));
         } else if (id == R.id.menu_wizard) {
             final Intent wizard = new Intent(this, InstallWizardActivity.class);
             wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);

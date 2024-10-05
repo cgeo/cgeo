@@ -273,8 +273,8 @@ public class WherigoGame implements UI {
 
     @Override
     public void showError(final String s) {
-        Log.w(LOG_PRAEFIX + "ERROR" + s);
-        setStatusText("ERROR:" + s);
+        Log.w(LOG_PRAEFIX + "ERROR: " + s);
+        setStatusText("ERROR: " + s);
     }
 
     @Override
@@ -284,7 +284,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void setStatusText(final String s) {
-        runOnUi(() -> ActivityMixin.showApplicationToast("WHERIGO:" + s));
+        runOnUi(() -> ActivityMixin.showApplicationToast("WHERIGO: " + s));
     }
 
     @Override
