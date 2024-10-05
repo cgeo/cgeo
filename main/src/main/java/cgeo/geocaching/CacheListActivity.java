@@ -641,8 +641,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
 
         try {
-
-
             // toplevel menu items
             MenuUtils.setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
@@ -664,15 +662,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisibleEnabled(menu, R.id.menu_copy_to_list, isHistory || isOffline, !isEmpty);
             MenuUtils.setEnabled(menu, R.id.menu_add_to_route, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_add_to_route, R.string.caches_append_to_route_selected, R.string.caches_append_to_route_all);
-            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, isHistory || containsStoredCaches(), !isEmpty);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_delete_events, isConcrete, !isEmpty && containsPastEvents());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_clear_offline_logs, isHistory || isOffline, !isEmpty && containsOfflineLogs());
             MenuUtils.setVisibleEnabled(menu, R.id.menu_remove_from_history, isHistory, !isEmpty);
             setMenuItemLabel(menu, R.id.menu_remove_from_history, R.string.cache_remove_from_history, R.string.cache_clear_history);
+
             final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
-            setMenuItemLabel(menu, R.id.menu_drop_caches,
-                    removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
-                    removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches, (isHistory || containsStoredCaches()) && !removeFromDevice, !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_drop_caches, R.string.caches_remove_selected, R.string.caches_remove_all);
+            MenuUtils.setVisibleEnabled(menu, R.id.menu_drop_caches_all_lists, isHistory || containsStoredCaches(), !isEmpty);
+            setMenuItemLabel(menu, R.id.menu_drop_caches_all_lists, R.string.caches_remove_selected_completely, R.string.caches_remove_all_completely);
+
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
@@ -798,7 +798,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             appendInBackground(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_caches) {
-            deleteCaches(adapter.getCheckedOrAllCaches());
+            deleteCaches(adapter.getCheckedOrAllCaches(), false);
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_drop_caches_all_lists) {
+            deleteCaches(adapter.getCheckedOrAllCaches(), true);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_pq) {
             startListSelection(REQUEST_CODE_IMPORT_PQ);
@@ -928,7 +931,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 deletion.add(cache);
             }
         }
-        deleteCaches(deletion);
+        deleteCaches(deletion, false);
     }
 
     private void clearOfflineLogs() {
@@ -1073,7 +1076,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (itemId == R.id.menu_cache_details) {
             CacheDetailActivity.startActivity(this, cache.getGeocode(), cache.getName());
         } else if (itemId == R.id.menu_drop_cache) {
-            deleteCaches(Collections.singletonList(cache));
+            deleteCaches(Collections.singletonList(cache), false);
         } else if (itemId == R.id.menu_move_to_list) {
             moveCachesToOtherList(Collections.singletonList(cache));
         } else if (itemId == R.id.menu_copy_to_list) {
@@ -1348,8 +1351,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         Send2CgeoDownloader.loadFromWeb(downloadFromWebHandler, listId);
     }
 
-    private void deleteCaches(@NonNull final Collection<Geocache> caches) {
-        new DeleteCachesFromListCommand(this, caches, listId).execute();
+    private void deleteCaches(@NonNull final Collection<Geocache> caches, final boolean removeFromAllLists) {
+        new DeleteCachesFromListCommand(this, caches, listId, removeFromAllLists).execute();
     }
 
     private static final class LastPositionHelper {
@@ -1399,11 +1402,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         private final LastPositionHelper lastPositionHelper;
         private final int listId;
         private final Map<String, Set<Integer>> oldCachesLists = new HashMap<>();
+        private final boolean removeFromAllLists;
 
-        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId) {
+        DeleteCachesFromListCommand(@NonNull final CacheListActivity context, final Collection<Geocache> caches, final int listId, final boolean removeFromAllLists) {
             super(context, caches, R.string.command_delete_caches_progress);
             this.lastPositionHelper = new LastPositionHelper(context);
             this.listId = listId;
+            this.removeFromAllLists = removeFromAllLists;
         }
 
         @Override
@@ -1421,7 +1426,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         public boolean appliesToAllLists() {
-            return removeWillDeleteFromDevice(listId);
+            return removeFromAllLists || removeWillDeleteFromDevice(listId);
         }
 
         @Override
