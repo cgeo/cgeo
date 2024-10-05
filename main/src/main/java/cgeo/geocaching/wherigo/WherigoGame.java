@@ -333,8 +333,11 @@ public class WherigoGame implements UI {
     @Override
     public void playSound(final byte[] data, final String mime) {
 
-        Log.iForce(LOG_PRAEFIX + "play sound (type = " + mime + ", length=" + data.length + ")");
-        final String suffix = MimeTypeMap.getSingleton().getExtensionFromMimeType(mime);
+        Log.iForce(LOG_PRAEFIX + "play sound (type = " + mime + ", length=" + (data == null ? "null" : data.length) + ")");
+        if (data == null || data.length == 0) {
+            return;
+        }
+        final String suffix = mime == null ? null : MimeTypeMap.getSingleton().getExtensionFromMimeType(mime);
         final Uri clipUri = Uri.fromFile(FileUtils.getOrCreate(this.cartridgeCacheDir, "audio+" + mime, suffix, data));
         AudioClip.play(clipUri);
     }
