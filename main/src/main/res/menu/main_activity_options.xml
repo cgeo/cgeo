@@ -47,6 +47,12 @@
         android:title="@string/menu_helpers">
     </item>
 
+    <item
+        android:id="@+id/menu_wherigo"
+        android:icon="@drawable/type_wherigo"
+        android:title="Wherigo Player (exp.)">
+    </item>
+
     <group android:id="@+id/menu_group_settings">
         <item
             android:id="@+id/menu_wizard"
