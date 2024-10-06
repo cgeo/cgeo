@@ -2655,8 +2655,8 @@ public class DataStore {
         final String geocode = cache.getGeocode();
 
         final List<Waypoint> waypoints = cache.getWaypoints();
+        final List<String> currentWaypointIds = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(waypoints)) {
-            final List<String> currentWaypointIds = new ArrayList<>();
             for (final Waypoint waypoint : waypoints) {
                 final ContentValues values = createWaypointValues(geocode, waypoint);
 
@@ -2669,8 +2669,8 @@ public class DataStore {
                 currentWaypointIds.add(Integer.toString(waypoint.getId()));
             }
 
-            removeOutdatedWaypointsOfCache(cache, currentWaypointIds);
         }
+        removeOutdatedWaypointsOfCache(cache, currentWaypointIds);
     }
 
     /**
