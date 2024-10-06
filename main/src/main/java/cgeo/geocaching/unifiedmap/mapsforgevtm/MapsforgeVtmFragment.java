@@ -8,7 +8,6 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
-import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
@@ -93,7 +92,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         setZoom(zoomLevel);
         mapUpdateListener = (event, mapPosition) -> {
             if (event == Map.ROTATE_EVENT || event == Map.POSITION_EVENT) {
-                ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(AngleUtils.normalize(360 - mapPosition.bearing));
+                repaintRotationIndicator(AngleUtils.normalize(360 - mapPosition.bearing));
             }
             if (event == Map.MOVE_EVENT || (lastEvent == Map.SCALE_EVENT && event == Map.POSITION_EVENT /* see #15590 */)) {
                 // SCALE event is sent only on manually scaling the map, not when using zoom controls

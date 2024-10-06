@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
-import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
@@ -125,7 +124,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
                 viewModel.followMyLocation.setValue(false);
             }
         });
-        mMap.setOnCameraMoveListener(() -> ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(getCurrentBearing()));
+        mMap.setOnCameraMoveListener(() -> repaintRotationIndicator(getCurrentBearing()));
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
             viewModel.mapCenter.setValue(getCenter());

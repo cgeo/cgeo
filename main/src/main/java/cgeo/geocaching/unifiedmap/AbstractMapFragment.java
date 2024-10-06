@@ -1,17 +1,23 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -161,12 +167,36 @@ public abstract class AbstractMapFragment extends Fragment {
         if (mapRotation == Settings.MAPROTATION_OFF) {
             setBearing(0);
         }
-        ((UnifiedMapActivity) requireActivity()).repaintRotationIndicator(getCurrentBearing());
+        repaintRotationIndicator(getCurrentBearing());
     }
 
     public abstract float getCurrentBearing();
 
     public abstract void setBearing(float bearing);
+
+    public void repaintRotationIndicator(final float bearing) {
+        if (getActivity() == null) {
+            return;
+        }
+        final ImageView compassrose = getActivity().findViewById(R.id.map_compassrose);
+        compassrose.setRotation(AngleUtils.normalize(360f - bearing));
+        compassrose.setOnClickListener(v -> {
+            final boolean isRotated = getCurrentBearing() != 0f;
+            setBearing(0.0f);
+            repaintRotationIndicator(0.0f);
+            if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
+                Dialogs.advancedOneTimeMessage(getActivity(), MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
+            }
+        });
+        compassrose.setOnLongClickListener(v -> {
+            getActivity().findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
+            MapSettingsUtils.showRotationMenu(getActivity(), newRotationMode -> {
+                setMapRotation(newRotationMode);
+                getActivity().findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
+            });
+            return true;
+        });
+    }
 
 
     // ========================================================================
