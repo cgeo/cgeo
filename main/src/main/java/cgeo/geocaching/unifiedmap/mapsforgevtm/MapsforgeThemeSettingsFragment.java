@@ -1,23 +1,16 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.SeekbarPreference;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.SeekbarUI;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
-import androidx.annotation.StringRes;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -163,27 +156,6 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
             this.renderthemeMenu.addPreference(checkbox);
         }
         return themePrefKey;
-    }
-
-    private void addScalePreference(final Context context, final PreferenceGroup cat, final String prefKey, @StringRes final int titleId, @StringRes final int summaryId) {
-
-        final Preference info = new Preference(context) {
-            public void onBindViewHolder(final PreferenceViewHolder holder) {
-                super.onBindViewHolder(holder);
-                holder.setDividerAllowedAbove(false);
-                holder.setDividerAllowedBelow(false);
-            }
-        };
-        info.setTitle(titleId);
-        info.setSummary(summaryId);
-        info.setIconSpaceReserved(false);
-        cat.addPreference(info);
-
-        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%",
-                new SeekbarUI.FactorizeValueMapper(10));
-        seek.setDefaultValue(100);
-        seek.setKey(prefKey);
-        cat.addPreference(seek);
     }
 
 }

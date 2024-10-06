@@ -17,7 +17,6 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
-import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -156,21 +155,9 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void addScalePreference(final Context context, final PreferenceGroup cat, final String prefKey, @StringRes final int titleId, @StringRes final int summaryId) {
-
-        final Preference info = new Preference(context) {
-            public void onBindViewHolder(final PreferenceViewHolder holder) {
-                super.onBindViewHolder(holder);
-                holder.setDividerAllowedAbove(false);
-                holder.setDividerAllowedBelow(false);
-            }
-        };
-        info.setTitle(titleId);
-        info.setSummary(summaryId);
-        info.setIconSpaceReserved(false);
-        cat.addPreference(info);
-
-        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%",
-                new SeekbarUI.FactorizeValueMapper(10));
+        final SeekbarPreference seek = new SeekbarPreference(context, 50, 200, "%", new SeekbarUI.FactorizeValueMapper(10));
+        seek.setTitle(titleId);
+        seek.setSummary(summaryId);
         seek.setDefaultValue(100);
         seek.setKey(prefKey);
         cat.addPreference(seek);
