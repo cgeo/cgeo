@@ -33,6 +33,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
     MapsforgeVTMMultiOfflineTileProvider(final List<ImmutablePair<String, Uri>> maps) {
         super(CgeoApplication.getInstance().getString(R.string.map_source_osm_offline_combined), Uri.parse(""), 999, 0);
         this.maps = maps;
+        supportsHillshading = true;
     }
 
     @Override

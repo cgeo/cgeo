@@ -29,6 +29,7 @@ public class UserDefinedMapsforgeVTMOnlineSource extends AbstractMapsforgeVTMOnl
             }
             setTilePath(tilePath);
         }
+        supportsHillshading = true;
     }
 
     public static boolean isConfigured() {

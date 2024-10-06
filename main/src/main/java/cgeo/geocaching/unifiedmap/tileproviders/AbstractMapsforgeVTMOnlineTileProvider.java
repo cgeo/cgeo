@@ -61,6 +61,7 @@ class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTilePro
                 return false;
             }
         };
+        supportsHillshading = true;
     }
 
     protected void setTilePath(final String tilePath) {

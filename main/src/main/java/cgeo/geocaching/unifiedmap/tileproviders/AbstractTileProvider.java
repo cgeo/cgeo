@@ -11,7 +11,7 @@ public abstract class AbstractTileProvider {
 
     protected boolean supportsLanguages;
     protected boolean supportsThemes;
-    protected boolean supportsHillshading = true;
+    protected boolean supportsHillshading = false;
     protected boolean supportsThemeOptions;
     protected String tileProviderName;
     private Integer numericId;
@@ -53,10 +53,6 @@ public abstract class AbstractTileProvider {
 
     public boolean supportsHillshading() {
         return supportsHillshading;
-    }
-
-    public void setSupportsHillshading(final boolean supportsHillshading) {
-        this.supportsHillshading = supportsHillshading;
     }
 
     public String getTileProviderName() {
