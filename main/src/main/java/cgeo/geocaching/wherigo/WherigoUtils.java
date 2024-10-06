@@ -161,62 +161,6 @@ public final class WherigoUtils {
         return builder.getViewport();
     }
 
-    public static String eventTableToString(final EventTable et, final boolean longVersion) {
-        if (et == null) {
-            return "null";
-        }
-        final String sep = longVersion ? "\n" : ",";
-
-        final StringBuilder msg = new StringBuilder();
-        if (longVersion) {
-            msg.append(et.getClass().getSimpleName() + ": ");
-        }
-        msg.append(et.name);
-        if (longVersion) {
-            msg.append(sep + et.description);
-        }
-        msg.append(sep + "vis:" + et.isVisible());
-        if (longVersion) {
-            msg.append(sep + "Has Media: " + (et.media != null));
-            msg.append(sep + "Located: " + et.isLocated() + " (" + WherigoUtils.GP_CONVERTER.from(et.position) + ")");
-        }
-
-        if (et instanceof Container && longVersion) {
-            final Container cnt = (Container) et;
-            msg.append(sep + "visToPlayer:" + cnt.visibleToPlayer());
-        }
-
-        if (et instanceof Thing && longVersion) {
-            final List<Action> actions = WherigoUtils.getActions((Thing) et);
-            msg.append(sep + "Actions (" + actions.size() + "):");
-            for (Action act : actions) {
-                msg.append(sep + "* " + act.name + "(" + act.text + ", univ=" + act.isUniversal() + ")");
-            }
-        }
-        if (et instanceof Zone) {
-            final Zone z = (Zone) et;
-            if (longVersion) {
-                msg.append(sep + "Zone center:" + WherigoGame.GP_CONVERTER.from(z.bbCenter));
-            }
-            msg.append(", dist:" + getDisplayableDistanceTo(z) + " (");
-            switch (z.contain) {
-                case Zone.DISTANT:
-                    msg.append("distant");
-                    break;
-                case Zone.PROXIMITY:
-                    msg.append("near");
-                    break;
-                case Zone.INSIDE:
-                    msg.append("inside");
-                    break;
-                default:
-                    msg.append("unknown(" + z.contain + ")");
-            }
-            msg.append(")");
-        }
-        return msg.toString();
-    }
-
     public static String eventTableDebugInfo(final EventTable et) {
         if (et == null) {
             return "null";

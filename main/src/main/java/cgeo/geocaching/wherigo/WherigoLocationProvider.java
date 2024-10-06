@@ -34,38 +34,41 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
 
     private Disposable disposable = null;
+
     private GeoData geoData;
-    private float direction;
+    private Float direction;
+
     private Geopoint fixedLocation;
 
-    private double lastSentLatitude = 0d;
-    private double lastSentLongitude = 0d;
-    private double lastSentAltitude = 0d;
-    private double lastSentDirection = 0d;
-
     private long lastNotifyTimestamp = 0;
+    private double lastNotifyLatitude = 0d;
+    private double lastNotifyLongitude = 0d;
+    private double lastNotifyDirection = 0d;
+
 
     public static WherigoLocationProvider get() {
         return INSTANCE;
     }
 
     private WherigoLocationProvider() {
-        //singleton
+        connect();
     }
 
     @Override
     public void updateGeoDir(@NonNull final GeoData geoData, final float direction) {
         this.geoData = geoData;
         this.direction = direction;
+        checkNotify(false);
     }
 
     @Override
     public void connect() {
-        disconnect();
-        this.geoData = LocationDataProvider.getInstance().currentGeo();
-        this.direction = LocationDataProvider.getInstance().currentDirection();
-        this.disposable = this.start(GeoDirHandler.UPDATE_GEODIR);
-        Log.w("STARTED: " + this);
+        if (disposable == null) {
+            this.geoData = LocationDataProvider.getInstance().currentGeo();
+            this.direction = LocationDataProvider.getInstance().currentDirection();
+            this.disposable = this.start(GeoDirHandler.UPDATE_GEODIR);
+            Log.w("STARTED: " + this);
+        }
     }
 
     @Override
@@ -73,7 +76,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
         if (disposable != null) {
             disposable.dispose();
             geoData = null;
-            direction = 0;
+            direction = null;
             disposable = null;
         }
         Log.w("STOPPED: " + this);
@@ -81,40 +84,61 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     public void setFixedLocation(final Geopoint fixedLocation) {
         this.fixedLocation = fixedLocation;
+        checkNotify(true);
+    }
+
+    public boolean hasFixedLocation() {
+        return this.fixedLocation != null;
+    }
+
+    public Geopoint getLocation() {
+        if (hasFixedLocation()) {
+            return this.fixedLocation;
+        }
+        return new Geopoint(getLatitude(), getLongitude());
     }
 
 
     @Override
     public double getAltitude() {
-        final double newAltitude = geoData == null ? 0 : geoData.getAltitude();
-        lastSentAltitude = checkNotify(lastSentAltitude, newAltitude);
-        return newAltitude <= 0 ? 1 : newAltitude; // important that altitute is over 0
+        return geoData == null ? 1 : Math.max(1, geoData.getAltitude()); // it is important that altitute is over 0
     }
 
     @Override
     public double getHeading() {
-        lastSentDirection = checkNotify(lastSentDirection, direction);
-        return direction;
+        return direction != null ? direction : LocationDataProvider.getInstance().currentDirection();
     }
 
     @Override
     public double getLatitude() {
+        checkNotify(false);
+        return getLatitudeInternal();
+    }
+
+    private double getLatitudeInternal() {
         if (fixedLocation != null) {
             return fixedLocation.getLatitude();
         }
-        final double newLatitude = geoData == null ? 0 : geoData.getLatitude();
-        lastSentLatitude = checkNotify(lastSentLatitude, newLatitude);
-        return newLatitude;
+        if (geoData != null) {
+            return geoData.getLatitude();
+        }
+        return LocationDataProvider.getInstance().currentGeo().getLatitude();
     }
 
     @Override
     public double getLongitude() {
+        checkNotify(false);
+        return getLongitudeInternal();
+    }
+
+    private double getLongitudeInternal() {
         if (fixedLocation != null) {
             return fixedLocation.getLongitude();
         }
-        final double newLongitude = geoData == null ? 0 : geoData.getLongitude();
-        lastSentLongitude = checkNotify(lastSentLongitude, newLongitude);
-        return newLongitude;
+        if (geoData != null) {
+            return geoData.getLongitude();
+        }
+        return LocationDataProvider.getInstance().currentGeo().getLongitude();
     }
 
     @Override
@@ -127,15 +151,27 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
         return fixedLocation == null && geoData == null ? LocationService.OFFLINE : LocationService.ONLINE;
     }
 
-    private double checkNotify(final double lastSentValue, final double newValue) {
-        final long timeMillis = System.currentTimeMillis();
-        if (lastSentValue != newValue && timeMillis - lastNotifyTimestamp > 3000) {
-            Log.d("WHERIGOGAME LOCATIOn DIFF: " + lastSentValue + " <-> " + newValue);
+    private void checkNotify(final boolean force) {
+        final long currentTime = System.currentTimeMillis();
+        final double currentLat = getLatitudeInternal();
+        final double currentLon = getLongitudeInternal();
+        final double currentDir = getHeading();
+
+        final long timePassed = currentTime - lastNotifyTimestamp;
+        final boolean differs = currentLat != lastNotifyLatitude || currentLon != lastNotifyLongitude || currentDir != lastNotifyDirection;
+        final boolean differsSignificant = Math.abs(currentLat - lastNotifyLatitude) > 0.00001d || Math.abs(currentLon - lastNotifyLongitude) > 0.00001d;
+
+        if (differsSignificant || force || (differs && timePassed > 3000)) {
+            lastNotifyLatitude = currentLat;
+            lastNotifyLongitude = currentLon;
+            lastNotifyDirection = currentDir;
+            lastNotifyTimestamp = currentTime;
             WherigoGame.get().notifyListeners(WherigoGame.NotifyType.LOCATION);
-            lastNotifyTimestamp = timeMillis;
-            return newValue;
         }
-        return lastSentValue;
+    }
+
+    public String toUserDisplayableString() {
+        return getLocation() + (hasFixedLocation() ? " (fixed)" : "");
     }
 
     @Override

@@ -43,6 +43,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
 
+    private static final List<WherigoThingType> THING_TYPE_LIST = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM);
+    private static final List<WherigoThingType> THING_TYPE_LIST_DEBUG = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM, WherigoThingType.THING);
+
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
     private WherigoActivityBinding binding;
@@ -100,7 +103,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.viewCartridges.setOnClickListener(v -> startGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
-        binding.download.setOnClickListener(v -> manualCartridgeDownload());
+        //binding.download.setOnClickListener(v -> manualCartridgeDownload());
+        binding.download.setOnClickListener(v -> {
+            WherigoDialogManager.get().display(new WherigoErrorDialogProvider("This is a test"));
+        });
+
         binding.map.setOnClickListener(v -> showOnMap());
 
         binding.cartridgeDetails.setOnClickListener(v -> {
@@ -108,6 +115,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             if (info != null) {
                 WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(info));
             }
+        });
+        binding.revokeFixedLocation.setOnClickListener(v -> {
+            WherigoLocationProvider.get().setFixedLocation(null);
         });
 
         final String guid = getIntent().getExtras() == null ? null : getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
@@ -221,11 +231,14 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         final WherigoGame game = WherigoGame.get();
         final WherigoCartridgeInfo info = game.getCartridgeInfo();
 
-        wherigoThingTypeModel.setItems(Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM, WherigoThingType.THING));
+        wherigoThingTypeModel.setItems(game.isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST);
 
         binding.wherigoThingTypeList.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
         binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
         binding.cartridgeTitle.setText(info == null || info.getCartridgeFile() == null ? "" : info.getCartridgeFile().name);
+
+        binding.gameLocation.setText("Location: " + WherigoLocationProvider.get().toUserDisplayableString());
+        binding.revokeFixedLocation.setVisibility(game.isDebugModeForCartridge() && WherigoLocationProvider.get().hasFixedLocation() ? View.VISIBLE : View.GONE);
 
         binding.viewCartridges.setEnabled(true);
         binding.saveGame.setEnabled(game.isPlaying());

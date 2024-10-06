@@ -274,7 +274,7 @@ public class WherigoGame implements UI {
     @Override
     public void showError(final String s) {
         Log.w(LOG_PRAEFIX + "ERROR: " + s);
-        setStatusText("ERROR: " + s);
+        WherigoDialogManager.get().display(new WherigoErrorDialogProvider(s));
     }
 
     @Override
@@ -384,4 +384,9 @@ public class WherigoGame implements UI {
         return Settings.enableFeatureWherigoDebug();
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Playing: " + cartridgeInfo;
+    }
 }

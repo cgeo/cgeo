@@ -1,17 +1,17 @@
 /*
  * This file is part of WhereYouGo.
- * 
+ *
  * WhereYouGo is free software: you can redistribute it and/or modify it under the terms of the GNU
  * General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
- * 
+ *
  * WhereYouGo is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
  * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with WhereYouGo. If not,
  * see <http://www.gnu.org/licenses/>.
- * 
+ *
  * Copyright (C) 2012 Menion <whereyougo@asamm.cz>
  */
 
@@ -30,10 +30,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Engine;
@@ -59,15 +59,18 @@ public class WherigoSaveFileHandler implements FileHandle {
         //singleton
     }
 
-    public static Map<String, Date> getAvailableSaveFiles(final Folder cartridgeFolder, final String cartridgeName) {
+    public static List<WherigoSavegameInfo> getAvailableSaveFiles(final Folder cartridgeFolder, final String cartridgeName) {
         if (cartridgeFolder == null || cartridgeName == null) {
-            return Collections.emptyMap();
+            return Collections.emptyList();
         }
         final String cartridgeNameBase = getCartridgeNameBase(cartridgeName);
         final List<ContentStorage.FileInformation> files = ContentStorage.get().list(cartridgeFolder);
-        return files.stream()
+        final List<WherigoSavegameInfo> saveGames = files.stream()
             .filter(fi -> fi.name.startsWith(cartridgeNameBase + "-") && fi.name.endsWith(".sav"))
-            .collect(Collectors.toMap(fi -> fi.name.substring(cartridgeNameBase.length() + 1, fi.name.length() - 4), fi -> new Date(fi.lastModified)));
+            .map(fi -> new WherigoSavegameInfo(fi, fi.name.substring(cartridgeNameBase.length() + 1, fi.name.length() - 4), new Date(fi.lastModified)))
+            .collect(Collectors.toCollection(ArrayList::new));
+        saveGames.sort((g1, g2) -> g1.name.compareTo(g2.name));
+        return saveGames;
     }
 
     private String getSavefileName(final String fileName) {

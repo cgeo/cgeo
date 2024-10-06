@@ -80,7 +80,7 @@ public class DebugUtils {
     }
 
 
-    private static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
+    public static void createLogcatHelper(@NonNull final Activity activity, final boolean fullInfo, final boolean forceEmail, final String additionalMessage) {
         final AtomicReference<Uri> result = new AtomicReference(null);
 
         final File file = ContentStorage.get().createTempFile();
@@ -94,7 +94,7 @@ public class DebugUtils {
                     if (fullInfo) {
                         builder.command("logcat", "-d", "*:V", "-f", file.getAbsolutePath());
                     } else {
-                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:V", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
+                        builder.command("logcat", "-d", "AndroidRuntime:E", "cgeo:D", "System.err:I", "System.out:I", "*:S", "-f", file.getAbsolutePath());
                     }
                 }
                 Log.iForce("[LogCat]Issuing command: " + builder.command());
