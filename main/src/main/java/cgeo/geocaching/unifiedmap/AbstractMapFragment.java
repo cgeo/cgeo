@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -23,6 +24,9 @@ import androidx.lifecycle.ViewModelProvider;
 import org.oscim.core.BoundingBox;
 
 public abstract class AbstractMapFragment extends Fragment {
+    protected static final String BUNDLE_ZOOMLEVEL = "zoomlevel";
+    protected static final String BUNDLE_POSITION = "position";
+
     protected int zoomLevel = -1;
     protected Geopoint position = null;
     protected Runnable onMapReadyTasks = null;
@@ -63,6 +67,21 @@ public abstract class AbstractMapFragment extends Fragment {
         forEveryLayer(GeoItemLayer::destroy);
     }
 
+    @Override
+    public void onSaveInstanceState(final @NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(BUNDLE_ZOOMLEVEL, zoomLevel);
+        outState.putParcelable(BUNDLE_POSITION, position);
+    }
+
+    @Override
+    public void onViewCreated(final @NonNull View view, final @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null) {
+            position = savedInstanceState.getParcelable(BUNDLE_POSITION);
+            zoomLevel = savedInstanceState.getInt(BUNDLE_ZOOMLEVEL);
+        }
+    }
 
     // ========================================================================
     // tilesource handling
