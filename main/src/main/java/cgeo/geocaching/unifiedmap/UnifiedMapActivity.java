@@ -45,7 +45,6 @@ import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
@@ -63,7 +62,6 @@ import cgeo.geocaching.unifiedmap.layers.WherigoLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.FilterUtils;
@@ -82,7 +80,6 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
-import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
@@ -104,7 +101,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -912,27 +908,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         ViewUtils.setVisibility(findViewById(R.id.container_compassrose), mapRotation == MAPROTATION_OFF ? View.GONE : View.VISIBLE);
         checkDrivingMode();
-    }
-
-    public void repaintRotationIndicator(final float bearing) {
-        final ImageView compassrose = findViewById(R.id.map_compassrose);
-        compassrose.setRotation(AngleUtils.normalize(360f - bearing));
-        compassrose.setOnClickListener(v -> {
-            final boolean isRotated = mapFragment.getCurrentBearing() != 0f;
-            mapFragment.setBearing(0.0f);
-            repaintRotationIndicator(0.0f);
-            if (isRotated && (Settings.getMapRotation() == Settings.MAPROTATION_AUTO_LOWPOWER || Settings.getMapRotation() == Settings.MAPROTATION_AUTO_PRECISE)) {
-                Dialogs.advancedOneTimeMessage(this, MAP_AUTOROTATION_DISABLE, getString(MAP_AUTOROTATION_DISABLE.messageTitle), getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> Settings.setMapRotation(Settings.MAPROTATION_MANUAL));
-            }
-        });
-        compassrose.setOnLongClickListener(v -> {
-            findViewById(R.id.container_rotationmenu).setVisibility(View.VISIBLE);
-            MapSettingsUtils.showRotationMenu(this, newRotationMode -> {
-                setMapRotation(null, newRotationMode);
-                findViewById(R.id.container_rotationmenu).setVisibility(View.GONE);
-            });
-            return true;
-        });
     }
 
     // ========================================================================
