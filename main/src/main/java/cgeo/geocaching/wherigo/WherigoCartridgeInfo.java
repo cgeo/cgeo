@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -12,9 +13,7 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -41,6 +40,11 @@ public class WherigoCartridgeInfo {
         return fileInfo;
     }
 
+    @NonNull
+    public Geopoint getCartridgeLocation() {
+        return closedCartridgeFile == null ? Geopoint.ZERO : new Geopoint(closedCartridgeFile.latitude, closedCartridgeFile.longitude);
+    }
+
     public String getCGuid() {
         return cguid;
     }
@@ -60,7 +64,7 @@ public class WherigoCartridgeInfo {
         return splashData == null || splashData.length == 0 ? null : splashData;
     }
 
-    public Map<String, Date> getSaveGames() {
+    public List<WherigoSavegameInfo> getSaveGames() {
         return WherigoSaveFileHandler.getAvailableSaveFiles(fileInfo.parentFolder, fileInfo.name);
     }
 

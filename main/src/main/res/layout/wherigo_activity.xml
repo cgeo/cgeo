@@ -101,12 +101,27 @@
                 android:textSize="@dimen/textSize_headingSecondary"
                 />
 
+
             <Button
                 android:id="@+id/cartridge_details"
                 style="@style/button_full"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="Cartridge Details"/>
+
+            <TextView
+                android:id="@+id/game_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                />
+
+            <Button
+                android:id="@+id/revoke_fixed_location"
+                style="@style/button_full"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Revoke fixed location"/>
 
         </LinearLayout>
 

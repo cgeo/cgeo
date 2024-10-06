@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.view.LayoutInflater;
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import java.util.ArrayList;
@@ -23,12 +24,36 @@ import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import se.krka.kahlua.vm.LuaTable;
 
+/** Handles Wherigo/OpenWIG input dialogs */
 public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable input;
     private WherigoThingDetailsBinding binding;
 
 
+    /**
+     * Handles Wherigo/OpenWIG Input Dialogs. The following is copied from OpenWIG code for reference
+     * <p>
+     * Request an input from the user.
+     * <p>
+     * If another dialog or input is open, it should be closed before displaying this input.
+     * <p>
+     * The <code>input</code> table must contain a "Type" field,
+     * which can be either "Text" (then the UI should offer an one-line text input),
+     * or "MultipleChoice". In that case, "Choices" field holds
+     * another Lua table with list of strings representing the individual choices.
+     * UI can then offer either a button for each choice, or some other
+     * method of choosing one answer (such as combo box, radio buttons).
+     * <p>
+     * "Text" field holds a text of this query - this should be displayed above the
+     * input field or the choices. "Media" field holds the associated <code>Media</code>.
+     * <p>
+     * This EventTable has an event "OnGetInput". When the input is processed, this
+     * event should be called with a string parameter - either text of the selected choice,
+     * or text from the input line. If the input is closed by another API call, the event
+     * should be called with null parameter.
+     * @param input Lua table describing the input parameters
+     */
     WherigoInputDialogProvider(final EventTable input) {
         this.input = input;
     }
@@ -40,11 +65,14 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
-        dialog.setTitle("Input Dialog");
         dialog.setView(binding.getRoot());
         binding.description.setText(game.toDisplayText((String) input.table.rawget("Text")));
 
         binding.media.setMedia((Media) input.table.rawget("Media"));
+        binding.debugInfo.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
+        if (game.isDebugModeForCartridge()) {
+            binding.debugInfo.setText("DebugInfo: Wherigo INput Dialog");
+        }
 
         final String type = (String) input.rawget("InputType");
         boolean handled = false;
