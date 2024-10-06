@@ -20,6 +20,7 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
         super(zoomMin, zoomMax, mapAttribution);
         this.tileProviderName = name;
         this.mapUri = uri;
+        this.supportsHillshading = true;
     }
 
     protected void setMapUri(final Uri mapUri) {
