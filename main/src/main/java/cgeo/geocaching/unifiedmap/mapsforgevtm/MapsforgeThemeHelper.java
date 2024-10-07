@@ -29,7 +29,6 @@ import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.util.Consumer;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
@@ -45,7 +44,6 @@ import java.util.zip.ZipInputStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.oscim.android.theme.ContentRenderTheme;
 import org.oscim.android.theme.ContentResolverResourceProvider;
 import org.oscim.map.Map;
@@ -560,57 +558,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     public static boolean isThemeSynchronizationActive() {
         return Settings.getSyncMapRenderThemeFolder();
-    }
-
-    /**
-     * Method is called after user has changed the sync state in Settings Activity
-     */
-    public static boolean changeSyncSetting(final Activity activity, final boolean doSync, final Consumer<Boolean> callback) {
-        if (doSync) {
-            //this means user just turned sync on. Ask user if he/she is really shure about this.-
-            final FolderUtils.FolderInfo themeFolderInfo = FolderUtils.get().getFolderInfo(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), -1);
-            final String folderName = MAP_THEMES_FOLDER.getFolder().toUserDisplayableString();
-            final ImmutableTriple<String, String, String> folderInfoStrings = themeFolderInfo.getUserDisplayableFolderInfoStrings();
-            Dialogs.newBuilder(activity)
-                    .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
-                    .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
-                    .setPositiveButton(android.R.string.ok, (d, c) -> {
-                        d.dismiss();
-                        //start sync
-                        resynchronizeOrDeleteMapThemeFolder();
-                        callback.accept(true);
-                    })
-                    .setNegativeButton(android.R.string.cancel, (d, c) -> {
-                        d.dismiss();
-                        callback.accept(false);
-                        //following method will DELETE any existing data in sync folder (because sync is set to off in settings)
-                        resynchronizeOrDeleteMapThemeFolder();
-                    })
-                    .create().show();
-        } else {
-            //this means user just turned sync OFF
-            Settings.setSyncMapRenderThemeFolder(false);
-            //start sync will delete any existing data in sync folder
-            resynchronizeOrDeleteMapThemeFolder();
-            callback.accept(false);
-        }
-        return true;
-    }
-
-    public XmlThemeResourceProvider getResourceProvider() {
-        return resourceProvider;
-    }
-
-    public static RenderThemeType getRenderThemeType() {
-        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme(Settings.getTileProvider());
-        for (MapsforgeThemeHelper.RenderThemeType rtt : MapsforgeThemeHelper.RenderThemeType.values()) {
-            for (String searchPath : rtt.searchPaths) {
-                if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
-                    return rtt;
-                }
-            }
-        }
-        return RenderThemeType.RTT_NONE;
     }
 
 }

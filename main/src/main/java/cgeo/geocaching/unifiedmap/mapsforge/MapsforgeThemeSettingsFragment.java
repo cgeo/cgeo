@@ -37,16 +37,16 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.theme_prefs, rootKey);
 
         // if the render theme has a style menu, its data is delivered via the intent
-        renderthemeOptions = (XmlRenderThemeStyleMenu) getActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
+        renderthemeOptions = (XmlRenderThemeStyleMenu) requireActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
         // the preference category serves as the hook to add a list preference to allow users to select a style
-        this.renderthemeMenu = (PreferenceCategory) findPreference(getString(R.string.pref_theme_menu));
+        this.renderthemeMenu = findPreference(getString(R.string.pref_theme_menu));
         createRenderthemeMenu();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_map_style);
+        requireActivity().setTitle(R.string.settings_title_map_style);
     }
 
     private void createRenderthemeMenu() {

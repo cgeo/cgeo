@@ -306,7 +306,7 @@ public class MapSettingsUtils {
         private final ArrayList<ButtonChoiceModel<T>> list;
         private final Action1<T> setValue;
         private final T originalValue;
-        private boolean setValueOnEachClick;
+        private final boolean setValueOnEachClick;
 
         ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup, final boolean setValueOnEachClick) {
             this.originalValue = originalValue;
