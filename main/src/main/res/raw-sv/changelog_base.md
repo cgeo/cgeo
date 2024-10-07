@@ -22,6 +22,6 @@
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
 - Nytt: Tillåt flera hierarkiska nivåer i cachelistor
 - Nyhet: Dedikerade ikoner för geocaching.com blockparty och HQ-event-typer
-- New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Nyhet: Ange önskad bildstorlek för bilder som laddas från geocaching.com cacher och spårbara objekt
 - Fix: "Open in browser" not working for trackable logs
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
