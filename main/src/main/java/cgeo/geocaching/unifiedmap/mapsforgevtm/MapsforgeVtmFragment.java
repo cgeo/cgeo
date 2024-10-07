@@ -151,7 +151,7 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(getContext())
-                .setTitle(getContext().getString(R.string.map_source_attribution_dialog_title))
+                .setTitle(requireContext().getString(R.string.map_source_attribution_dialog_title))
                 .setCancelable(true)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
