@@ -1,6 +1,8 @@
 ##
 - Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
 - Oplossing: Verkeerde hoogte grafiek voor tracks met meerdere segmenten
+- Oplossing: Kaart laad voortdurend caches opnieuw in offline-only modus (UnifiedMap)
+- Oplossing: Enkele crashes in Mapsforge kaart
 
 ##
 - Oplossing: Ontbrekende parametrisering voor gebruiker gedefinieerde tegelprovider

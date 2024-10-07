@@ -8,6 +8,7 @@
 - Novinka: Podpora stínování kopců pro offline mapy Sjednocená mapa Mapsforge
 - Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
 - Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
+- Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích

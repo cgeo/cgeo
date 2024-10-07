@@ -8,6 +8,7 @@
 - Nou: suport d'ombrejat per als mapes fora de línia UnifiedMap Mapsforge
 - Nou: suport d'ombrejat per als mapes UnifiedMap VTM (requereix connexió en línia)
 - Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
+- Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables

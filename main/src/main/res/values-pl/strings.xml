@@ -357,6 +357,10 @@
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
     <string name="menu_backup">Kopia zapasowa / przywracanie</string>
+    <string name="menu_manage_offline_data">Zarządzaj danymi offline</string>
+    <string name="menu_update_routingdata">Aktualizuj dane routingu</string>
+    <string name="menu_update_mapdata">Aktualizuj dane mapy</string>
+    <string name="menu_delete_offline_data">Usuń dane offline</string>
     <string name="menu_history">Historia</string>
     <string name="menu_search_clipboard">Wczytaj geokod ze schowka</string>
     <string name="menu_history_longstring">Historia znalezień</string>
@@ -941,6 +945,8 @@
     <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko wtedy, gdy jest zainstalowany Chrome)</string>
     <string name="init_rot13_hint">Szyfruj wskazówkę</string>
     <string name="init_summary_rot13_hint">Pokaż tekst wskazówek zaszyfrowany ROT-13 aż do naciśnięcia</string>
+    <string name="init_save_log_img">Przechowuj obrazy z dziennika znalezień</string>
+    <string name="init_summary_save_log_img">Pobieraj i przechowuj obrazy z wpisów oprócz tych z opisu skrytki</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_cachelists">Listy skrytek</string>
@@ -1050,6 +1056,7 @@
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
     <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
+    <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
@@ -2555,6 +2562,14 @@
     <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
+    <string name="delete_items">Usuń elementy</string>
+    <plurals name="files_deleted">
+        <item quantity="one">%1$d plik usunięty</item>
+        <item quantity="few">%1$d pliki usunięte</item>
+        <item quantity="many">%1$d plików usuniętych</item>
+        <item quantity="other">%1$d plików usuniętych</item>
+    </plurals>
+    <string name="no_files_selected">Nie wybrano plików</string>
     <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
     <string name="mapserver_openandromaps_info">Szczegółowe mapy, wymagają motywu mapy „Elevate”</string>
     <string name="mapserver_openandromaps_themes_info">Szczegółowy motyw mapy, przygotowany dla map „OpenAndroMaps”</string>
@@ -2635,6 +2650,7 @@
     <string name="optimize">Optymalizuj</string>
     <string name="expand">Rozszerz</string>
     <string name="close">Zamknij</string>
+    <string name="delete">Usuń</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>

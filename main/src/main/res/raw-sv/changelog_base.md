@@ -7,7 +7,8 @@
 - Ändra: Använd ny terrängskuggnings-algoritm för Mapsforge offline-kartor
 - Nyhet: Terrängskuggnings-stöd för UnifiedMap Mapsforge offline-kartor
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
-- Fix: Address search not considering live mode (UnifiedMap)
+- Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
+- Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -21,6 +22,6 @@
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
 - Nytt: Tillåt flera hierarkiska nivåer i cachelistor
 - Nyhet: Dedikerade ikoner för geocaching.com blockparty och HQ-event-typer
-- New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Nyhet: Ange önskad bildstorlek för bilder som laddas från geocaching.com cacher och spårbara objekt
 - Fix: "Open in browser" not working for trackable logs
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)

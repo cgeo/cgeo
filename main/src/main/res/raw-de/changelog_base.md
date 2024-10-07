@@ -8,6 +8,7 @@
 - Neu: Kartenschattierung für UnifiedMap Mapsforge Offline-Karten
 - Neu: Kartenschattierung für UnifiedMap VTM Karten (erfordert Online-Verbindung)
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
