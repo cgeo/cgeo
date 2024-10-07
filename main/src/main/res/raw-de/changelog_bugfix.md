@@ -1,6 +1,8 @@
 ##
-- New: Show warning for activated gc connector without credentials
-- Fix: Wrong elevation chart for tracks with multiple segments
+- Neu: Warnung bei aktiviertem geocaching.com-Dienst ohne Anmeldedaten
+- Korrektur: Falsches Höhendiagramm für Tracks mit mehreren Segmenten
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Korrektur: Fehlende Parametrisierung für benutzerdefinierten Kartenanbieter

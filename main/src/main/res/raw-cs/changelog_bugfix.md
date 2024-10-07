@@ -1,6 +1,8 @@
 ##
 - Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
 - Oprava: Chybný výškový graf pro tratě s více segmenty
+- Oprava: Neustále načítámí kešek v mapě v režimu pouze offline (Sjednocená mapa)
+- Oprava: Některé pády v mapách Mapsforge
 
 ##
 - Oprava: Chybějící parametrizace pro uživatelem definovaný dlaždicový zprostředkovatel

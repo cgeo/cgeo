@@ -1,6 +1,8 @@
 ##
 - New: Show warning for activated gc connector without credentials
 - Fix: Wrong elevation chart for tracks with multiple segments
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Fix: Missing parametrization for user-defined tileprovider
