@@ -500,6 +500,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 calcStateString = waypoint.getCalcStateConfig();
+                
+                final boolean resetFromOriginal = (WaypointType.ORIGINAL == waypoint.getWaypointType());
+                binding.modifyCacheCoordinatesLocal.setText(resetFromOriginal ? R.string.waypoint_localy_reset_cache_coords : R.string.waypoint_set_as_cache_coords);
+                binding.modifyCacheCoordinatesLocalAndRemote.setText(resetFromOriginal ? R.string.waypoint_reset_local_and_remote_cache_coords : R.string.waypoint_save_and_modify_on_website);
+
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
