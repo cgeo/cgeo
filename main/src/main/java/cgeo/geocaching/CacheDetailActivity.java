@@ -2461,10 +2461,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private void resetCoords(final Geocache cache, final Handler handler, final Waypoint wpt, final boolean local, final boolean remote) {
         AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
             if (local) {
-                cache.setCoords(wpt.getCoords());
-                cache.setUserModifiedCoords(false);
-                cache.deleteWaypointForce(wpt);
-                DataStore.saveUserModifiedCoords(cache);
+                cache.resetUserModifiedCoords(wpt);
                 handler.sendEmptyMessage(HandlerResetCoordinates.LOCAL);
             }
 

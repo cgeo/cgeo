@@ -500,6 +500,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 calcStateString = waypoint.getCalcStateConfig();
+                
+                final boolean resetFromOriginal = (WaypointType.ORIGINAL == waypoint.getWaypointType());
+                binding.modifyCacheCoordinatesLocal.setText(resetFromOriginal ? R.string.waypoint_localy_reset_cache_coords : R.string.waypoint_set_as_cache_coords);
+                binding.modifyCacheCoordinatesLocalAndRemote.setText(resetFromOriginal ? R.string.waypoint_reset_local_and_remote_cache_coords : R.string.waypoint_save_and_modify_on_website);
+
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
@@ -748,29 +753,33 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final String oldAllUserNotes = cache.getAllUserNotes();
         if (cache.addOrChangeWaypoint(waypoint, true)) {
             cache.addCacheArtefactsFromNotes(oldAllUserNotes);
-            if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
-                if (!cache.hasUserModifiedCoords()) {
-                    final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-                    origWaypoint.setCoords(cache.getCoords());
-                    cache.addOrChangeWaypoint(origWaypoint, false);
-                    cache.setUserModifiedCoords(true);
+                if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
+                    if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
+                        cache.resetUserModifiedCoords(waypoint);
+                    } else {
+                        if (!cache.hasUserModifiedCoords()) {
+                            final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+                            origWaypoint.setCoords(cache.getCoords());
+                            cache.addOrChangeWaypoint(origWaypoint, false);
+                            cache.setUserModifiedCoords(true);
+                        }
+                        cache.setCoords(waypoint.getCoords());
+                        DataStore.saveUserModifiedCoords(cache);
+                    }
                 }
-                cache.setCoords(waypoint.getCoords());
-                DataStore.saveUserModifiedCoords(cache);
-            }
-            if (waypoint.getCoords() != null && binding.modifyCacheCoordinatesLocalAndRemote.isChecked()) {
-                finishHandler.sendEmptyMessage(UPLOAD_START);
+                if (waypoint.getCoords() != null && binding.modifyCacheCoordinatesLocalAndRemote.isChecked()) {
+                    finishHandler.sendEmptyMessage(UPLOAD_START);
 
-                if (cache.supportsOwnCoordinates()) {
-                    final boolean result = uploadModifiedCoords(cache, waypoint.getCoords());
-                    finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
+                    if (cache.supportsOwnCoordinates()) {
+                        final boolean result = uploadModifiedCoords(cache, waypoint.getCoords());
+                        finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
+                    } else {
+                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                        finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
+                    }
                 } else {
-                    ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
-                    finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
+                    finishHandler.sendEmptyMessage(SUCCESS);
                 }
-            } else {
-                finishHandler.sendEmptyMessage(SUCCESS);
-            }
         } else {
             finishHandler.sendEmptyMessage(SAVE_ERROR);
         }
