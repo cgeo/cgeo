@@ -25,3 +25,4 @@
 - Novinka: Nastavení preferované velikosti obrázku pro obrázky načtené z kešek a trasovatelných předmětů na webu geocaching.com
 - Oprava: Volba „Otevřít v prohlížeči“ nefunguje pro sledovatelné protokoly
 - Novinka: Možnost spravovat stažené soubory (mapy, motivy, směrovací data a data stínování kopců)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
