@@ -25,3 +25,4 @@
 - Nou: defineix la mida d'imatge preferida per a les imatges carregades des del catxé i els elements de seguiment de geocaching.com
 - Correcció: "Obre al navegador" no funciona per als registres rastrejables
 - Novetat: opció per gestionar els fitxers descarregats (mapes, temes, dades d'itineraris i ombrejats)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
