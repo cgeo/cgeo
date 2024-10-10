@@ -25,3 +25,4 @@
 - Neu: Bevorzugte Bildgröße für Bilder festlegen, die von geocaching.com Caches und Trackables geladen werden
 - Korrektur: "Im Browser öffnen" funktioniert nicht für Trackable Logs
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
