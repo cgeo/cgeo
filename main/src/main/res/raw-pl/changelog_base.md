@@ -25,3 +25,4 @@
 - Nowość: Ustaw preferowany rozmiar obrazu dla obrazów ze skrytek i przedmiotów podróżnych z geocaching.com
 - Naprawiono: Opcja „Otwórz w przeglądarce” nie działała dla wpisów przedmiotów podróżnych
 - Nowość: Opcja zarządzania pobranymi plikami (mapy, motywy, routing i dane cieniowania)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
