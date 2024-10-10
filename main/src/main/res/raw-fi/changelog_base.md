@@ -25,3 +25,4 @@
 - New: Set preferred image size for images loaded from geocaching.com caches and trackables
 - Fix: "Open in browser" not working for trackable logs
 - New: Option to manage downloaded files (maps, themes, routing and hillshading data)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
