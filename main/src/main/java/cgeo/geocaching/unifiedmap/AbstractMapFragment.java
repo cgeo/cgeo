@@ -179,6 +179,9 @@ public abstract class AbstractMapFragment extends Fragment {
             return;
         }
         final ImageView compassrose = getActivity().findViewById(R.id.map_compassrose);
+        if (compassrose == null) { // can be null after screen rotation
+            return;
+        }
         compassrose.setRotation(AngleUtils.normalize(360f - bearing));
         compassrose.setOnClickListener(v -> {
             final boolean isRotated = getCurrentBearing() != 0f;
