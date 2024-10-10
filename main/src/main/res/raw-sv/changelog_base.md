@@ -25,3 +25,4 @@
 - Nyhet: Ange önskad bildstorlek för bilder som laddas från geocaching.com cacher och spårbara objekt
 - Fix: "Open in browser" not working for trackable logs
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
