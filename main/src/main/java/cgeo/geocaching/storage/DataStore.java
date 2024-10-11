@@ -2394,7 +2394,11 @@ public class DataStore {
                 for (final Geocache cache : caches) {
                     final String geocode = cache.getGeocode();
                     final Geocache existingCache = existingCaches.get(geocode);
-                    boolean dbUpdateRequired = !cache.gatherMissingFrom(existingCache) || cacheCache.getCacheFromCache(geocode) != null;
+                    final boolean isOffline = isOffline(geocode, cache.getGuid());
+                    boolean dbUpdateRequired = !isOffline || (cacheCache.getCacheFromCache(geocode) != null);
+                    if (isOffline) {
+                        dbUpdateRequired |= !cache.gatherMissingFrom(existingCache);
+                    }
                     // parse the note AFTER merging the local information in
                     dbUpdateRequired |= cache.addCacheArtefactsFromNotes();
                     cache.addStorageLocation(StorageLocation.CACHE);
