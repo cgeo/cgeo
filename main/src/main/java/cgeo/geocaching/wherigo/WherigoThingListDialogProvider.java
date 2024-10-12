@@ -6,16 +6,18 @@ import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +37,8 @@ public class WherigoThingListDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity, android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen); // R.style.cgeo_fullScreenDialog);
+        new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         final WherigoThingListBinding binding = WherigoThingListBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setTitle(thingType.toUserDisplayableString());

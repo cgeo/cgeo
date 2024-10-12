@@ -143,7 +143,7 @@ public class WherigoSaveFileHandler implements FileHandle {
         //this might be called for autosave
         String saveFileToUse = fileName;
         if (state != State.SAVING || saveFileToUse == null) {
-            saveFileToUse = "autosave";
+            saveFileToUse = WherigoSavegameInfo.AUTOSAVE_NAME;
         }
         final String saveFileName = getSavefileName(saveFileToUse);
         Uri uri = null;

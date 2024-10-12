@@ -55,6 +55,8 @@ public class SimpleDialog {
 
     private Runnable neutralAction;
 
+    private Runnable dismissAction;
+
     private AlertDialog alertDialog;
 
     /** Define common button text sets */
@@ -297,6 +299,12 @@ public class SimpleDialog {
         return this;
     }
 
+    /** Sets an action to execute when neutral button is clicked */
+    public SimpleDialog setDismissAction(final Runnable dismissAction) {
+        this.dismissAction = dismissAction;
+        return this;
+    }
+
     private SimpleDialog(final Context context) {
         this.context = context;
     }
@@ -347,6 +355,10 @@ public class SimpleDialog {
             this.message.applyTo(binding.dialogMessage);
         } else {
             binding.dialogMessage.setVisibility(View.GONE);
+        }
+
+        if (this.dismissAction != null) {
+            dialog.setOnDismissListener(d -> this.dismissAction.run());
         }
 
         return new Pair<>(dialog, binding);

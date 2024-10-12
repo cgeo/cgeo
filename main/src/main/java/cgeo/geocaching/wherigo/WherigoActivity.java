@@ -103,9 +103,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.viewCartridges.setOnClickListener(v -> startGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
-        //binding.download.setOnClickListener(v -> manualCartridgeDownload());
-        binding.download.setOnClickListener(v -> {
-            WherigoDialogManager.get().display(new WherigoErrorDialogProvider("This is a test"));
+        binding.download.setOnClickListener(v -> manualCartridgeDownload());
+        binding.reportProblem.setOnClickListener(v -> {
+            WherigoDialogManager.get().display(new WherigoErrorDialogProvider());
         });
 
         binding.map.setOnClickListener(v -> showOnMap());
@@ -163,11 +163,34 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void saveGame() {
+        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
+        if (cartridgeInfo == null) {
+            return;
+        }
+
+        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(cartridgeInfo.getSavegameSlots())
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+
+                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
+                itemBinding.name.setText(si.getUserDisplayableName());
+                itemBinding.description.setText(si.getUserDisplayableSaveDate());
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_save);
+                }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
         SimpleDialog.of(this)
-            .setTitle(TextParam.text("Save Game"))
-            .setMessage(TextParam.text("Enter Save Game Id"))
-            .input(null, saveName -> {
-                WherigoGame.get().saveGame(saveName);
+            .setTitle(TextParam.text("Choose a slot to save to"))
+            .selectSingle(model, s -> {
+                if (s.saveDate == null) {
+                    WherigoGame.get().saveGame(s.name);
+                } else {
+                    SimpleDialog.of(this)
+                        .setTitle(TextParam.text("Overwrite slot?"))
+                        .setTitle(TextParam.text("Really overwrite slot?"))
+                        .confirm(() -> WherigoGame.get().saveGame(s.name));
+                }
             });
     }
 
@@ -243,6 +266,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.viewCartridges.setEnabled(true);
         binding.saveGame.setEnabled(game.isPlaying());
         binding.stopGame.setEnabled(game.isPlaying());
+        binding.reportProblem.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
 
     }

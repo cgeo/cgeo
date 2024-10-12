@@ -37,7 +37,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setTitle(eventTable.name);
@@ -56,7 +56,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private void refreshGui() {
         TextParam.text("Debug Information:\n\n" + WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
-        binding.debugInfo.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
+        binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
         binding.headerInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
         if (eventTable instanceof Zone) {
             binding.headerInformation.setText(WherigoUtils.getDisplayableDistanceTo((Zone) eventTable));
@@ -74,7 +74,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         //get actions
         final List<Object> actions = new ArrayList<>();
         if (eventTable instanceof Thing) {
-            actions.addAll(WherigoUtils.getActions((Thing) eventTable));
+            actions.addAll(WherigoUtils.getActions((Thing) eventTable, false));
         }
         if (eventTable instanceof Zone) {
             actions.add("Display on Map");

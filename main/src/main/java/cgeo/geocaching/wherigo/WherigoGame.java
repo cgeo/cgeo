@@ -67,6 +67,7 @@ public class WherigoGame implements UI {
     private String cguid;
     private File cartridgeCacheDir;
     private HtmlImage htmlImageGetter;
+    private String lastError;
 
     //filled on game start
     private boolean isPlaying = false;
@@ -122,6 +123,7 @@ public class WherigoGame implements UI {
             this.cartridgeFile = WherigoUtils.readCartridge(cartridgeFileInfo.uri);
             this.cartridgeInfo = new WherigoCartridgeInfo(cartridgeFileInfo, true, false);
             setCGuidAndDependentThings(this.cartridgeInfo.getCGuid());
+            this.lastError = null;
 
             final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (saveGame != null) {
@@ -167,6 +169,11 @@ public class WherigoGame implements UI {
     @Nullable
     public WherigoCartridgeInfo getCartridgeInfo() {
         return cartridgeInfo;
+    }
+
+    @Nullable
+    public String getLastError() {
+        return lastError;
     }
 
     @SuppressWarnings("unchecked")
@@ -274,7 +281,8 @@ public class WherigoGame implements UI {
     @Override
     public void showError(final String s) {
         Log.w(LOG_PRAEFIX + "ERROR: " + s);
-        WherigoDialogManager.get().display(new WherigoErrorDialogProvider(s));
+        this.lastError = s;
+        WherigoDialogManager.get().display(new WherigoErrorDialogProvider());
     }
 
     @Override

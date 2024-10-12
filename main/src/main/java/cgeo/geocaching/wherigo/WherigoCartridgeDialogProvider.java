@@ -2,12 +2,12 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoCartridgeDetailsBinding;
+import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.Formatter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -39,7 +39,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         dialog.setTitle(cartridgeFile.name);
         dialog.setView(binding.getRoot());
 
-        final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getSaveGames();
+        final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getLoadableSavegames();
 
         binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
         TextParam.text("Debug Information:\n" +
@@ -116,22 +116,26 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
                         }
                     });
         } else if (action.startsWith("Load")) {
-            chooseSavefile(activity, saveGames);
+            chooseLoadfile(activity);
         } else {
             WherigoGame.get().newGame(cartridgeInfo.getFileInfo());
         }
     }
 
-    private void chooseSavefile(final Activity activity, final List<WherigoSavegameInfo> saveGames) {
+    private void chooseLoadfile(final Activity activity) {
 
-        final List<WherigoSavegameInfo> saveGameList = new ArrayList<>(saveGames);
-        saveGameList.add(0, null);
+        final List<WherigoSavegameInfo> loadGameList = this.cartridgeInfo.getLoadableSavegames();
 
         final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
         model
-                .setItems(saveGameList)
-                .setDisplayMapper(s ->  TextParam.text(s == null ? "<New Game>" : s.name + "(" + Formatter.formatDateForFilename(s.saveDate.getTime()) + ")"))
-                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+            .setItems(loadGameList)
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
+                itemBinding.name.setText(si.getUserDisplayableName());
+                itemBinding.description.setText(si.getUserDisplayableSaveDate());
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_upload);
+            }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(activity)
                 .setTitle(TextParam.text("Choose a Savegame to load"))
