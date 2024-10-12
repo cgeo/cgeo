@@ -25,4 +25,4 @@
 - Nieuw: Stel voorkeur in voor afbeeldingsgrootte voor afbeeldingen geladen vanuit geocaching.com caches en trackables
 - Oplossing: "Open in browser" werkt niet voor trackable logs
 - Nieuw: Optie om gedownloade bestanden te beheren (kaarten, thema's, routering en reliëfweergave gegevens)
-- New: Option to remove a cache from all lists (= mark it as to be deleted)
+- Nieuw: Optie om een cache uit alle lijsten te verwijderen (= markeer als te verwijderen)
