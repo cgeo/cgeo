@@ -12,9 +12,11 @@ import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
@@ -89,6 +91,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS);
+
         this.wherigoListenerId = WherigoGame.get().addListener(type -> refreshGui());
 
         binding = WherigoActivityBinding.inflate(getLayoutInflater());

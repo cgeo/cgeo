@@ -50,7 +50,7 @@
     <item
         android:id="@+id/menu_wherigo"
         android:icon="@drawable/type_wherigo"
-        android:title="Wherigo Player (exp.)">
+        android:title="@string/wherigo_player">
     </item>
 
     <group android:id="@+id/menu_group_settings">
