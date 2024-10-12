@@ -109,8 +109,7 @@ public class WherigoDialogManager {
                 return false;
             }
             final int dialogId = currentDialogId.addAndGet(1);
-            currentDialog = dialogProvider.createDialog(activity);
-            currentDialog.setOnDismissListener(d -> ensureRunOnUi(() -> {
+            currentDialog = dialogProvider.createAndShowDialog(activity, () -> ensureRunOnUi(() -> {
                 synchronized (mutex) {
                     //check whether the dialog for this dismiss-event still exists
                     if (currentDialog != null && dialogId == currentDialogId.get()) {
@@ -126,7 +125,6 @@ public class WherigoDialogManager {
                     }
                 }
             }));
-            currentDialog.show();
             //dismiss any wherigo dialog notification since the dialog would now be displayed
             Notifications.cancel(activity, Notifications.ID_WHERIGO_NEW_DIALOG_ID);
             return true;

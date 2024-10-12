@@ -5,7 +5,16 @@ import android.app.Dialog;
 
 public interface IWherigoDialogProvider {
 
-    Dialog createDialog(Activity activity);
+    default Dialog createDialog(Activity activity) {
+        throw new IllegalStateException("Either 'createDialog' or 'createAndShowDialog' must be overriddeen");
+    }
+
+    default Dialog createAndShowDialog(Activity activity, Runnable onDismiss) {
+        final Dialog dialog = createDialog(activity);
+        dialog.setOnDismissListener(d -> onDismiss.run());
+        dialog.show();
+        return dialog;
+    }
 
     default void onGameNotification(final WherigoGame.NotifyType notifyType) {
         //default: do nothing
@@ -14,6 +23,7 @@ public interface IWherigoDialogProvider {
     default void onDialogDismiss() {
         //default: do nothing
     }
+
 
 
 }

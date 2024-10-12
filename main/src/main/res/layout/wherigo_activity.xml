@@ -64,6 +64,13 @@
                 app:icon="@drawable/ic_menu_cancel" />
 
             <Button
+                android:id="@+id/map"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:hint="Map zones of current game"
+                app:icon="@drawable/ic_menu_mapmode" />
+
+            <Button
                 android:id="@+id/download"
                 style="@style/button_icon"
                 android:layout_gravity="left"
@@ -71,11 +78,11 @@
                 app:icon="@drawable/downloader_folder" />
 
             <Button
-                android:id="@+id/map"
+                android:id="@+id/report_problem"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="Map zones of current game"
-                app:icon="@drawable/ic_menu_mapmode" />
+                android:hint="Report Problem"
+                app:icon="@drawable/ic_menu_bug_report" />
 
         </LinearLayout>
 

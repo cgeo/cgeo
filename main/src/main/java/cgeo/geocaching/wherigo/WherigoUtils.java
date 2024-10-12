@@ -91,11 +91,11 @@ public final class WherigoUtils {
         return result;
     }
 
-    public static List<Action> getActions(final Thing thing) {
+    public static List<Action> getActions(final Thing thing, final boolean all) {
         final List<Action> result = new ArrayList<>();
         for (Object aObj : thing.actions) {
             final Action action = (Action) aObj;
-            if (WherigoGame.get().isDebugModeForCartridge() || (action.isEnabled() && action.getActor().visibleToPlayer())) {
+            if (all || (action.isEnabled() && action.getActor().visibleToPlayer())) {
                 result.add(action);
             }
         }
@@ -106,7 +106,7 @@ public final class WherigoUtils {
         if (action == null || action.text == null) {
             return "-";
         }
-        return action.isEnabled() && action.getActor().visibleToPlayer() ? action.text : action.text + " (disabled)";
+        return action.isEnabled()  ? action.text : action.text + " (disabled)";
     }
 
     public static void callAction(final Thing thing, final Action action) {
@@ -178,10 +178,10 @@ public final class WherigoUtils {
         }
 
         if (et instanceof Thing) {
-            final List<Action> actions = WherigoUtils.getActions((Thing) et);
+            final List<Action> actions = WherigoUtils.getActions((Thing) et, true);
             msg.append("\n- Actions (" + actions.size() + "):");
             for (Action act : actions) {
-                msg.append("\n  * " + act.name + "(" + act.text + ", univ=" + act.isUniversal() + ")");
+                msg.append("\n  * " + act.name + "(" + WherigoUtils.getActionText(act) + ", univ=" + act.isUniversal() + ")");
             }
         }
         if (et instanceof Zone) {

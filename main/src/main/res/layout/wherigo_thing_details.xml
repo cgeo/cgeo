@@ -35,12 +35,31 @@
                 android:textIsSelectable="true"
                 android:autoLink="web" />
 
+            <LinearLayout
+                android:id="@+id/debug_box"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
             <TextView
-                android:id="@+id/debug_info"
+                android:id="@+id/debug_info_title"
+                android:paddingTop="5dp"
+                android:text="Debug Information"
+                android:textSize="@dimen/textSize_listsSecondary"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
                 android:autoLink="web" />
+
+                <TextView
+                android:id="@+id/debug_info"
+                android:paddingTop="5dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textIsSelectable="true"
+                android:autoLink="web" />
+            </LinearLayout>
 
 
             <!-- Input field -->
