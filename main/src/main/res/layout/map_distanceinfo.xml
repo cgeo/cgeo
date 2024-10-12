@@ -76,4 +76,64 @@
             style="@style/map_distanceinfo"
             android:background="@drawable/icon_bcg" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/map_compassrose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/distancesFrame1"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/bearing_indicator" />
+
+    <LinearLayout
+        android:id="@+id/container_rotationmenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/map_compassrose"
+        android:layout_alignTop="@id/map_compassrose"
+        android:layout_marginLeft="5dp"
+        android:gravity="left"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/rotation_mode_tooglegroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundDialog"
+            android:paddingTop="3dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/rotation_mode_off"
+                style="@style/button_icon_accent"
+                android:layout_margin="0dp"
+                android:tooltipText="@string/switch_off"
+                app:icon="@drawable/rotation_mode_off" />
+
+            <Button
+                android:id="@+id/rotation_mode_manual"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_manual"
+                app:icon="@drawable/rotation_mode_manual" />
+
+            <Button
+                android:id="@+id/rotation_mode_energy_saving"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_auto_lowpower"
+                app:icon="@drawable/rotation_mode_energy_saving" />
+
+            <Button
+                android:id="@+id/rotation_mode_high_precision"
+                style="@style/button_icon_accent"
+                android:tooltipText="@string/switch_auto_precise"
+                app:icon="@drawable/rotation_mode_high_precision" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+    </LinearLayout>
 </RelativeLayout>
