@@ -34,6 +34,7 @@
         android:layout_below="@id/container_compassrose"
         android:layout_alignParentRight="true">
         <ImageButton
+            android:id="@+id/background_followmylocation"
             android:tooltipText="@string/menu_centerposition"
             android:src="@drawable/map_button_background"
             style="@style/map_quicksettingsbutton" />
