@@ -1596,6 +1596,7 @@
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">上一首</string>
     <string name="skip">略過</string>
