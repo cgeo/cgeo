@@ -1682,6 +1682,7 @@
     <string name="wizard_status_title">Konfigurations status</string>
     <string name="wizard_status_platform">Geocaching tjenester</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Spring over</string>
