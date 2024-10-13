@@ -13,9 +13,12 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.SimpleItemListView;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -53,8 +56,8 @@ import se.krka.kahlua.vm.LuaTable;
 
 public final class WherigoUtils {
 
-    public static final TextParam TP_OK_BUTTON = TextParam.text("ok").setImage(ImageParam.id(R.drawable.ic_menu_done));
-    public static final TextParam TP_CANCEL_BUTTON = TextParam.text("cancel").setImage(ImageParam.id(R.drawable.ic_menu_cancel));
+    public static final TextParam TP_OK_BUTTON = TextParam.id(R.string.ok).setImage(ImageParam.id(R.drawable.ic_menu_done));
+    public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.ic_menu_done));
 
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
@@ -262,11 +265,11 @@ public final class WherigoUtils {
             return "?";
         }
         if (zone.contain == Zone.INSIDE) {
-            return "inside";
+            return LocalizationUtils.getString(R.string.wherigo_zone_inside);
         }
         if (zone.nearestPoint != null) {
             final Geopoint current = new Geopoint(WherigoLocationProvider.get().getLatitude(), WherigoLocationProvider.get().getLongitude());
-            return getDisplayableDistance(current, GP_CONVERTER.from(zone.nearestPoint)) + (zone.contain == Zone.PROXIMITY ? " (near)" : "");
+            return getDisplayableDistance(current, GP_CONVERTER.from(zone.nearestPoint)) + (zone.contain == Zone.PROXIMITY ? " (" + LocalizationUtils.getString(R.string.wherigo_zone_near) + ")" : "");
         }
         final Geopoint center = getZoneCenter(zone);
         final Geopoint current = LocationDataProvider.getInstance().currentGeo().getCoords();
@@ -274,6 +277,31 @@ public final class WherigoUtils {
             return getDisplayableDistance(current, center);
         }
         return "?";
+    }
+
+    public static void ensureNoGameRunning(final Activity activity, final Runnable runOnClosedGameOnly) {
+        if (!WherigoGame.get().isPlaying()) {
+            if (runOnClosedGameOnly != null) {
+                runOnClosedGameOnly.run();
+            }
+            return;
+        }
+
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_stop_running_game_title))
+            .setMessage(TextParam.id(R.string.wherigo_confirm_stop_running_game_message, WherigoGame.get().getCartridgeName())).confirm(() -> {
+                if (runOnClosedGameOnly != null) {
+
+                    //ensure that action is performed after game is REALLY stopped! -> add a listener to OpenWIG END notification
+                    final int[] listenerId = new int[1];
+                    listenerId[0] = WherigoGame.get().addListener(notifyType -> {
+                        if (notifyType.equals(WherigoGame.NotifyType.END)) {
+                            runOnClosedGameOnly.run();
+                            WherigoGame.get().removeListener(listenerId[0]);
+                        }
+                    });
+                }
+                WherigoGame.get().stopGame();
+            });
     }
 
     public static Comparator<EventTable> getThingsComparator() {

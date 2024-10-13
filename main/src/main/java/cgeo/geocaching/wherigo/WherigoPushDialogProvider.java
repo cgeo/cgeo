@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoThingDetailsBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -60,11 +61,9 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
      * @param callback callback to call when closing the dialog, or null
      */
     WherigoPushDialogProvider(final String[] texts, final Media[] media, final String button1, final String button2, final LuaClosure callback) {
-        this.texts = texts == null || texts.length == 0 ? new String[]{"no text provided" } :
-                texts;
-                // (texts.length == 1 ? new String[]{texts[0], "Second page test" } : texts); //´this line can be commented in for testing purposes
+        this.texts = texts == null || texts.length == 0 ? new String[]{"---" } : texts;
         this.media = media == null ? new Media[0] : media;
-        this.button1 = StringUtils.isBlank(button1) ? "OK" : button1.trim();
+        this.button1 = StringUtils.isBlank(button1) ? LocalizationUtils.getString(R.string.ok) : button1.trim();
         this.button2 = StringUtils.isBlank(button2) ? null : button2.trim();
         this.callback = callback;
         this.page = 0;
@@ -116,11 +115,11 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         }
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? VISIBLE : GONE);
         if (WherigoGame.get().isDebugModeForCartridge()) {
-            binding.debugInfo.setText("DebugInfo: Wherigo Dialog");
+            binding.debugInfo.setText("Wherigo Dialog");
         }
 
         binding.headerInformation.setVisibility(texts.length > 1 ? View.VISIBLE : View.GONE);
-        binding.headerInformation.setText("Page " + (page + 1) + "/" + texts.length);
+        binding.headerInformation.setText(LocalizationUtils.getString(R.string.wherigo_dialog_push_page, String.valueOf(page + 1), String.valueOf(texts.length)));
     }
 
 }

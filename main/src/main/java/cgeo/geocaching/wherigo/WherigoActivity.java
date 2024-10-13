@@ -18,6 +18,7 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
@@ -161,7 +162,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this)
-            .setTitle(TextParam.text("Choose a Cartridge"))
+            .setTitle(TextParam.id(R.string.wherigo_choose_cartridge))
             .selectSingle(model, cartridgeInfo -> {
                 WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cartridgeInfo));
             });
@@ -186,25 +187,21 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this)
-            .setTitle(TextParam.text("Choose a slot to save to"))
+            .setTitle(TextParam.id(R.string.wherigo_choose_savegame_slot))
             .selectSingle(model, s -> {
                 if (s.saveDate == null) {
                     WherigoGame.get().saveGame(s.name);
                 } else {
                     SimpleDialog.of(this)
-                        .setTitle(TextParam.text("Overwrite slot?"))
-                        .setTitle(TextParam.text("Really overwrite slot?"))
+                        .setTitle(TextParam.id(R.string.wherigo_confirm_overwrite_savegame_slot_title))
+                        .setMessage(TextParam.id(R.string.wherigo_confirm_overwrite_savegame_slot_title, s.getUserDisplayableSaveDate()))
                         .confirm(() -> WherigoGame.get().saveGame(s.name));
                 }
             });
     }
 
     private void stopGame() {
-        SimpleDialog.of(this).setTitle(TextParam.text("Confirm game stop"))
-            .setMessage(TextParam.text("A Wherigo Game is currently running for cartridge '" + WherigoGame.get().getCartridgeInfo().getCartridgeFile().name +
-                    "'. Do you want to end this game?")).confirm(() -> {
-                WherigoGame.get().stopGame();
-            });
+        WherigoUtils.ensureNoGameRunning(this, null);
     }
 
     private void showOnMap() {
@@ -219,8 +216,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void manualCartridgeDownload() {
-        SimpleDialog.of(this).setTitle(TextParam.text("Download Cartridge"))
-            .input(new SimpleDialog.InputOptions().setLabel("Enter CGID").setInitialValue(""), input -> {
+        SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_manual_download_title))
+            .input(new SimpleDialog.InputOptions().setLabel(LocalizationUtils.getString(R.string.wherigo_manual_download_cguid_label)).setInitialValue(""), input -> {
                 wherigoDownloader.downloadWherigo(input, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
             });
     }
@@ -228,8 +225,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private void handleCGuidInput(final String cguid) {
         final WherigoCartridgeInfo cguidCartridge = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (cguidCartridge == null) {
-            SimpleDialog.of(this).setTitle(TextParam.text("Download Cartridge"))
-                .setMessage(TextParam.text("Cartridge '" + cguid + "' is not available on device, do you want to download it?"))
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_title))
+                .setMessage(TextParam.id(R.string.wherigo_download_message, cguid))
                 .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                 .confirm(() -> {
                     wherigoDownloader.downloadWherigo(cguid, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
@@ -242,30 +239,28 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private void handleDownloadResult(final String cguid, final StatusResult result) {
         final WherigoCartridgeInfo cartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (result.isOk() && cartridgeInfo != null) {
-            SimpleDialog.of(this).setTitle(TextParam.text("Download successful"))
-                    .setMessage(TextParam.text("Download of cartridge was successful"))
-                    .setNeutralButton(TextParam.text("Open cartridge"))
-                    .setNeutralAction(() -> {
-                        WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cartridgeInfo));
-                    })
-                    .show();
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_successful_title))
+                .setMessage(TextParam.id(R.string.wherigo_download_successful_message, cguid))
+                .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+                .confirm(() -> WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cartridgeInfo)));
         } else {
-            SimpleDialog.of(this).setTitle(TextParam.text("Download failed"))
-                    .setMessage(TextParam.text("Download of cartridgee failed with:" + result)).show();
+            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_failed_title))
+                .setMessage(TextParam.id(R.string.wherigo_download_failed_message, cguid, String.valueOf(result)))
+                .show();
         }
     }
 
     private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
-        final WherigoCartridgeInfo info = game.getCartridgeInfo();
 
         wherigoThingTypeModel.setItems(game.isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST);
 
         binding.wherigoThingTypeList.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
         binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
-        binding.cartridgeTitle.setText(info == null || info.getCartridgeFile() == null ? "" : info.getCartridgeFile().name);
+        binding.cartridgeTitle.setText(game.getCartridgeName());
 
-        binding.gameLocation.setText("Location: " + WherigoLocationProvider.get().toUserDisplayableString());
+        binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_location) + ": " +
+                WherigoLocationProvider.get().toUserDisplayableString());
         binding.revokeFixedLocation.setVisibility(game.isDebugModeForCartridge() && WherigoLocationProvider.get().hasFixedLocation() ? View.VISIBLE : View.GONE);
 
         binding.viewCartridges.setEnabled(true);

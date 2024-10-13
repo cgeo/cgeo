@@ -1,6 +1,7 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
@@ -11,6 +12,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AudioClip;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -171,6 +173,11 @@ public class WherigoGame implements UI {
         return cartridgeInfo;
     }
 
+    @NonNull
+    public String getCartridgeName() {
+        return cartridgeInfo == null ? "-" : cartridgeInfo.getName();
+    }
+
     @Nullable
     public String getLastError() {
         return lastError;
@@ -292,7 +299,7 @@ public class WherigoGame implements UI {
 
     @Override
     public void setStatusText(final String s) {
-        runOnUi(() -> ActivityMixin.showApplicationToast("WHERIGO: " + s));
+        runOnUi(() -> ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_short) + ": " + s));
     }
 
     @Override
@@ -395,6 +402,6 @@ public class WherigoGame implements UI {
     @NonNull
     @Override
     public String toString() {
-        return "Playing: " + cartridgeInfo;
+        return "Playing:" + isPlaying + " / name:" + getCartridgeName() + " / Details:" + cartridgeInfo;
     }
 }

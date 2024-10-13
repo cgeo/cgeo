@@ -50,6 +50,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
+                tools:ignore="HardcodedText"
                 android:autoLink="web" />
 
                 <TextView

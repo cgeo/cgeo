@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -12,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.workertask.ProgressDialogFeature;
 import cgeo.geocaching.utils.workertask.WorkerTask;
@@ -55,7 +57,7 @@ public class WherigoDownloader {
                 "wherigo-download",
                 (input, progress, cancelFlag) -> downloadWherigoTask(input.first, input.second, progress, cancelFlag),
                 AndroidRxUtils.networkScheduler)
-            .addFeature(ProgressDialogFeature.of(activity).setTitle("Downloading Wherigo").setAllowCancel(true))
+            .addFeature(ProgressDialogFeature.of(activity).setTitle(LocalizationUtils.getString(R.string.wherigo_download_title)).setAllowCancel(true))
             .observeResult(activity, result -> {
                 if (wherigoDownloadConsumer != null) {
                     wherigoDownloadConsumer.accept(result.first, result.second);
@@ -79,7 +81,7 @@ public class WherigoDownloader {
         };
         final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
         if (!result.isOk() && uriStorage[0] != null) {
-            ActivityMixin.showApplicationToast("Wherigo: Deleting leftover file");
+            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_download_delete_leftover_toast));
             ContentStorage.get().delete(uriStorage[0]);
         }
         return new Pair<>(cguid, result);
@@ -87,18 +89,20 @@ public class WherigoDownloader {
 
     public static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
 
-        progress.accept("Logging in");
+        progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_login));
 
         final StatusResult loginResult = login(username, password);
         if (!loginResult.isOk()) {
             return loginResult;
         }
 
-        progress.accept("Start Download");
+        progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_started));
+
         return download(cguid, outputSupplier, (c, t) -> {
             final int percent = Math.round(((float) c) / t * 100);
 
-            progress.accept("Downloaded " + Formatter.formatBytes(c) + "/" + Formatter.formatBytes(t) + " (" + percent + "%)");
+            progress.accept(LocalizationUtils.getString(R.string.wherigo_download_progress_download_status,
+                    Formatter.formatBytes(c), Formatter.formatBytes(t), String.valueOf(percent)));
         }, cancelFlag);
     }
 
@@ -168,10 +172,11 @@ public class WherigoDownloader {
             boolean success = false;
             String errorMsg = "";
             final byte[] buffer = new byte[1024];
-            final OutputStream outputStream = new BufferedOutputStream(outputSupplier.apply(filename));
-            if (outputStream == null) {
+            final OutputStream rawStream = outputSupplier.apply(filename);
+            if (rawStream == null) {
                 return new StatusResult(StatusCode.COMMUNICATION_ERROR, "Creating outputstream for: " + filename);
             }
+            final OutputStream outputStream = new BufferedOutputStream(rawStream);
 
             try (BufferedInputStream inputStream = new BufferedInputStream(stream)) {
                 progress.accept(completed, total);

@@ -9,9 +9,8 @@ public interface IWherigoDialogProvider {
         throw new IllegalStateException("Either 'createDialog' or 'createAndShowDialog' must be overriddeen");
     }
 
-    default Dialog createAndShowDialog(Activity activity, Runnable onDismiss) {
+    default Dialog createAndShowDialog(Activity activity) {
         final Dialog dialog = createDialog(activity);
-        dialog.setOnDismissListener(d -> onDismiss.run());
         dialog.show();
         return dialog;
     }

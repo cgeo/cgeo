@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -58,7 +59,7 @@ public class WherigoDialogManager {
     }
 
     private void createNotification(final IWherigoDialogProvider provider) {
-        final String content = "Wherigo is waiting: " + provider.getClass().getName();
+        final String content = LocalizationUtils.getString(R.string.wherigo_notification_waiting, WherigoGame.get().getCartridgeName());
         final Context context = CgeoApplication.getInstance();
         Notifications.send(context, Notifications.ID_WHERIGO_NEW_DIALOG_ID, NotificationChannels.WHERIGO_NOTIFICATION, builder -> builder
             .setSmallIcon(R.drawable.type_marker_wherigo)
@@ -109,7 +110,8 @@ public class WherigoDialogManager {
                 return false;
             }
             final int dialogId = currentDialogId.addAndGet(1);
-            currentDialog = dialogProvider.createAndShowDialog(activity, () -> ensureRunOnUi(() -> {
+            currentDialog = dialogProvider.createAndShowDialog(activity);
+            currentDialog.setOnDismissListener(d -> ensureRunOnUi(() -> {
                 synchronized (mutex) {
                     //check whether the dialog for this dismiss-event still exists
                     if (currentDialog != null && dialogId == currentDialogId.get()) {

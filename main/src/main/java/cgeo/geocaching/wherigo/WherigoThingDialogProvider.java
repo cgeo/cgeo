@@ -31,6 +31,23 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private WeakReference<Activity> weakActivity;
 
+    private enum ThingAction {
+        DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
+        LOCATE_ON_CENTER(TextParam.id(R.string.wherigo_locate_on_center).setImage(ImageParam.id(R.drawable.map_followmylocation_btn))),
+        CLOSE(WherigoUtils.TP_CLOSE_BUTTON);
+
+        private final TextParam tp;
+
+        ThingAction(final TextParam tp) {
+            this.tp = tp;
+        }
+
+        public TextParam getTextParam() {
+            return tp;
+        }
+    }
+
+
     public WherigoThingDialogProvider(final EventTable et) {
         this.eventTable = et;
     }
@@ -55,7 +72,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     }
 
     private void refreshGui() {
-        TextParam.text("Debug Information:\n\n" + WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
+        TextParam.text(WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
         binding.headerInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
         if (eventTable instanceof Zone) {
@@ -71,39 +88,46 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private void refreshActionList() {
 
-        //get actions
+        //"actions" will be filled with instance of both "Action" and "ThingAction"
         final List<Object> actions = new ArrayList<>();
         if (eventTable instanceof Thing) {
             actions.addAll(WherigoUtils.getActions((Thing) eventTable, false));
         }
         if (eventTable instanceof Zone) {
-            actions.add("Display on Map");
+            actions.add(ThingAction.DISPLAY_ON_MAP);
             if (WherigoGame.get().isDebugModeForCartridge()) {
-                actions.add("Locate on center");
+                actions.add(ThingAction.LOCATE_ON_CENTER);
             }
         }
-        actions.add("Close");
+        actions.add(ThingAction.CLOSE);
 
         WherigoUtils.setViewActions(actions, binding.dialogActionlist,
                 a -> a instanceof Action ?
                         TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
-                        TextParam.text(a.toString()).setImage(ImageParam.id(R.drawable.ic_menu_done)),
+                        ((ThingAction) a).getTextParam(),
                 item -> {
                     if (item instanceof Action) {
                         WherigoUtils.callAction((Thing) eventTable, (Action) item);
                         refreshGui();
-                    } else if (item.toString().startsWith("Display")) {
-                        WherigoDialogManager.get().clear();
-                        final Activity activity = weakActivity.get();
-                        if (activity != null) {
-                            DefaultMap.startActivityViewport(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)));
-                        }
-                    } else if (item.toString().startsWith("Locate")) {
-                        WherigoDialogManager.get().clear();
-                        final Geopoint center = WherigoUtils.getZoneCenter((Zone) eventTable);
-                        WherigoLocationProvider.get().setFixedLocation(center);
-                    } else if (item.toString().equals("Close")) {
-                        WherigoDialogManager.get().clear();
+                        return;
+                    }
+                    final ThingAction thingAction = (ThingAction) item;
+                    switch (thingAction) {
+                        case DISPLAY_ON_MAP:
+                            WherigoDialogManager.get().clear();
+                            final Activity activity = weakActivity.get();
+                            if (activity != null) {
+                                DefaultMap.startActivityViewport(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)));
+                            }
+                            break;
+                        case LOCATE_ON_CENTER:
+                            WherigoDialogManager.get().clear();
+                            final Geopoint center = WherigoUtils.getZoneCenter((Zone) eventTable);
+                            WherigoLocationProvider.get().setFixedLocation(center);
+                            break;
+                        case CLOSE:
+                        default:
+                            WherigoDialogManager.get().clear();
                     }
                 }
         );

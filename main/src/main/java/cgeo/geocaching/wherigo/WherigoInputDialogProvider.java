@@ -71,7 +71,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         binding.media.setMedia((Media) input.table.rawget("Media"));
         binding.debugBox.setVisibility(game.isDebugModeForCartridge() ? VISIBLE : GONE);
         if (game.isDebugModeForCartridge()) {
-            binding.debugInfo.setText("DebugInfo: Wherigo Input Dialog");
+            binding.debugInfo.setText("Wherigo Input Dialog");
         }
 
         final String type = (String) input.rawget("InputType");
@@ -81,11 +81,11 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             binding.dialogInputLayout.setVisibility(VISIBLE);
             WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
                 WherigoDialogManager.get().clear();
-                Engine.callEvent(input, "OnGetInput", binding.dialogInputEdittext.getText().toString());
+                Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
             });
             EditUtils.setActionListener(binding.dialogInputEdittext, () -> {
                 WherigoDialogManager.get().clear();
-                Engine.callEvent(input, "OnGetInput", binding.dialogInputEdittext.getText().toString());
+                Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
             });
             Keyboard.show(activity, binding.dialogInputEdittext);
 

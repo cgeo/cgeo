@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoCartridgeDetailsBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -27,18 +28,18 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     private WherigoCartridgeDetailsBinding binding;
 
     private enum CartridgeAction {
-        PLAY(R.string.play),
-        DELETE(R.string.delete),
-        CLOSE(R.string.close);
+        PLAY(TextParam.id(R.string.play).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
+        DELETE(TextParam.id(R.string.delete).setImage(ImageParam.id(R.drawable.ic_menu_delete))),
+        CLOSE(WherigoUtils.TP_CLOSE_BUTTON);
 
-        private final int resId;
+        private final TextParam tp;
 
-        CartridgeAction(final int resId) {
-            this.resId = resId;
+        CartridgeAction(final TextParam tp) {
+            this.tp = tp;
         }
 
-        public String toUserDisplayableString() {
-            return LocalizationUtils.getString(resId);
+        public TextParam getTextParam() {
+            return tp;
         }
     }
 
@@ -58,6 +59,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getLoadableSavegames();
 
         binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
+        //following info is debug -> no translation needed
         TextParam.text("- **CGUID:** " + cartridgeInfo.getCGuid() + "\n" +
             "- **Device:** " + cartridgeFile.device + "\n" +
             "- **Type:** " + cartridgeFile.type + "\n" +
@@ -68,33 +70,22 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             "- **Url:** " + cartridgeFile.url + "\n").setMarkdown(true).applyTo(binding.debugInfo);
             binding.debugInfo.setVisibility(WherigoGame.get().isDebugMode() ? View.VISIBLE : View.GONE);
 
-        binding.media.setMediaData("jpg", cartridgeInfo.getSplashData(), null);
+        byte[] mediaData = cartridgeInfo.getSplashData();
+        if (mediaData == null) {
+            mediaData = cartridgeInfo.getIconData();
+        }
+
+        binding.media.setMediaData("jpg", mediaData, null);
         refreshGui();
 
-        WherigoUtils.setViewActions(Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, a -> TextParam.text(a.toUserDisplayableString()), item -> {
+        WherigoUtils.setViewActions(Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, CartridgeAction::getTextParam, item -> {
             WherigoDialogManager.get().clear();
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
             //Other actions require ending a running game (if any)
-            if (WherigoGame.get().isPlaying()) {
-                SimpleDialog.of(activity).setTitle(TextParam.text("Wherigo Game running"))
-                    .setMessage(TextParam.text("A Wherigo Game is currently running for cartridge '" + WherigoGame.get().getCartridgeInfo().getCartridgeFile().name +
-                        "'. Do you want to end this game?")).confirm(() -> {
-                            final int[] listenerId = new int[1];
-                            listenerId[0] = WherigoGame.get().addListener(notifyType -> {
-                                if (notifyType.equals(WherigoGame.NotifyType.END)) {
-                                    performActionAfterGameEnded(item, activity, saveGames);
-                                    WherigoGame.get().removeListener(listenerId[0]);
-                                }
-                            });
-                            WherigoGame.get().stopGame();
-                    });
-        } else {
-                performActionAfterGameEnded(item, activity, saveGames);
-            }
+            WherigoUtils.ensureNoGameRunning(activity, () -> performActionAfterGameEnded(item, activity, saveGames));
         });
-
         return dialog;
     }
 
@@ -104,18 +95,18 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     private void refreshGui() {
-        TextParam.text("**Author:** " + cartridgeFile.author + "  \n" +
-            "**Location:** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
-            "**Distance:** " + WherigoUtils.getDisplayableDistance(WherigoLocationProvider.get().getLocation(), cartridgeInfo.getCartridgeLocation())
+        TextParam.text("**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
+            "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
+            "**" + LocalizationUtils.getString(R.string.distance) + ":** " + WherigoUtils.getDisplayableDistance(WherigoLocationProvider.get().getLocation(), cartridgeInfo.getCartridgeLocation())
             ).setMarkdown(true).applyTo(binding.headerInformation);
     }
 
     //Action is either "delete cartridge" or "Play Game"
     private void performActionAfterGameEnded(final CartridgeAction action, final Activity activity, final List<WherigoSavegameInfo> saveGames) {
         if (action == CartridgeAction.DELETE) {
-            SimpleDialog.of(activity).setTitle(TextParam.text("Delete cartridge"))
-                    .setMessage(TextParam.text("Do you want to delete cartridge '" + cartridgeInfo.getCartridgeFile().name +
-                            "' along with " + saveGames.size() + " Savegames from your device?")).setButtons(SimpleDialog.ButtonTextSet.YES_NO)
+            SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_delete_cartridge_title))
+                    .setMessage(TextParam.id(R.string.wherigo_confirm_delete_cartridge_message, WherigoGame.get().getCartridgeName(), "" + saveGames.size()))
+                    .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                     .confirm(() -> {
                         ContentStorage.get().delete(cartridgeInfo.getFileInfo().uri);
                         for (WherigoSavegameInfo savegame : saveGames) {
@@ -148,7 +139,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(activity)
-                .setTitle(TextParam.text("Choose <New Game> or a slot to load"))
+                .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
                 .selectSingle(model, s -> {
                     WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s.name);
                 });

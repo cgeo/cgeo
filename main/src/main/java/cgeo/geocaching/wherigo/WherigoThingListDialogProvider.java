@@ -5,7 +5,6 @@ import cgeo.geocaching.databinding.WherigoThingListBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
-import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -76,7 +75,7 @@ public class WherigoThingListDialogProvider implements IWherigoDialogProvider {
         binding.wherigoThingsList.setVisibility(View.VISIBLE);
 
         WherigoUtils.setViewActions(Collections.singletonList("Close"), binding.dialogActionlist,
-            a -> TextParam.text(a).setImage(ImageParam.id(R.drawable.ic_menu_done)),
+            a -> WherigoUtils.TP_CLOSE_BUTTON,
             i -> WherigoDialogManager.get().clear());
 
         refreshGui();
