@@ -2026,6 +2026,7 @@
     <string name="wizard_skip_wizard_warning">c:geo vil kanskje ikke fungere som forventet før konfigurasjonen er fullført. Avhengig av den manglende konfigurasjonen vil c:geo kanskje ikke kunne lese/lagre data som offline-kart, geocacher, loggfiler osv.\n\nNår du føler deg klar til å fullføre oppsettet, kan du enten velge \"Konfigurasjonsveiviser\" i hovedmenyen eller starte c:geo på nytt.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappesynkronisering fullført etter %2$s, %3$d av %4$s trengte synkronisering</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Hopp over</string>
