@@ -9,7 +9,7 @@ import androidx.core.util.Pair;
 
 class OpenTopoMapSource extends AbstractMapsforgeOnlineTileProvider {
     OpenTopoMapSource() {
-        super("OpenTopoMap", Uri.parse("https://c.tile.opentopomap.org"), "/{Z}/{X}/{Y}.png", 2, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_opentopomap_html), true));
+        super(CgeoApplication.getInstance().getString(R.string.map_source_osm_opentopomap), Uri.parse("https://c.tile.opentopomap.org"), "/{Z}/{X}/{Y}.png", 2, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_opentopomap_html), true));
     }
 
 }
