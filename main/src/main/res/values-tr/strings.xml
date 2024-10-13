@@ -2064,6 +2064,7 @@
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
