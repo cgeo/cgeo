@@ -2576,6 +2576,7 @@
     <string name="wizard_skip_wizard_warning">C:geo és possible que no funcioni tal com s’esperava fins que no es completi la configuració. Depenent de la configuració que falti, C:geo pot no ser capaç de llegir / emmagatzemar dades com mapes fora de línia, catxés, registre, etc.\n\nSi estàs preparat per finalitzar la configuració, trieu \"Assistent de configuració\" al menú principal o reinicieu C:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">La sincronització de carpetes %1$s s\'ha acabat després de %2$s, s\'ha necessitat la sincronització de %3$d de %4$s</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>
