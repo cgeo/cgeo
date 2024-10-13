@@ -2454,6 +2454,7 @@
     <string name="wizard_skip_wizard_warning">c:geo gali neveikti taip, kaip tikėtasi, kol nebus baigta konfigūracija. Atsižvelgiant į trūkstamą konfigūraciją, c:geo gali nesugebėti nuskaityti / saugoti duomenų, pvz., neprisijungus pasiekiamų žemėlapių, geoslėptuvių, žurnalo failų ir kt.\n\nKai būsite pasirengę užbaigti sąranką, pagrindiniame meniu pasirinkite „Konfigūracijos vedlys“ arba iš naujo paleiskite c: geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s aplanko sinchronizavimas baigtas po %2$s, %3$d iš %4$s reikia sinchronizuoti</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Ankstesnis</string>
     <string name="skip">Praleisti</string>
