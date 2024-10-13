@@ -1,34 +1,31 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class WherigoErrorDialogProvider implements IWherigoDialogProvider {
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final Runnable onDismiss) {
+    public Dialog createAndShowDialog(final Activity activity) {
 
         final String lastError = WherigoGame.get().getLastError();
-        final String errorMessage = lastError == null ? "No error reported" : "An error was reported: " + lastError;
-        final String emailMessage = "Problem playing a Wherigo" +
-            "\n\nError: " + (lastError == null ? "no error" : lastError) +
-            "\n\nWherigo Info: " + WherigoGame.get();
+        final String errorMessage = lastError == null ? LocalizationUtils.getString(R.string.wherigo_error_game_noerror) : LocalizationUtils.getString(R.string.wherigo_error_game_error, lastError);
 
         final SimpleDialog dialog = SimpleDialog.of(activity)
-                .setTitle(TextParam.text("Wherigo Error"))
+                .setTitle(TextParam.id(R.string.wherigo_error_title))
                 .setMessage(TextParam.text(errorMessage))
-                .setPositiveButton(TextParam.text("Send by Email"))
-                .setDismissAction(onDismiss);
+                .setPositiveButton(TextParam.id(R.string.about_system_info_send_button));
 
         dialog.input(null, text -> {
+            final String emailMessage = LocalizationUtils.getString(R.string.wherigo_error_email, errorMessage, String.valueOf(WherigoGame.get()), text);
             WherigoDialogManager.get().clear();
-            DebugUtils.createLogcatHelper(activity, false, true, emailMessage + (StringUtils.isBlank(text) ? "" : "\n\nAdditional Info: " + text));
+            DebugUtils.createLogcatHelper(activity, false, true, emailMessage);
         });
 
         return dialog.getDialog();

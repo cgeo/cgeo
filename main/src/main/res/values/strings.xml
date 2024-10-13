@@ -2904,6 +2904,66 @@
 
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls">Controls</string>
+    <string name="wherigo_controls_cartridgelist_hint">View cartridges and start game</string>
+    <string name="wherigo_controls_savegame_hint">Save progress of a running game</string>
+    <string name="wherigo_controls_stopgame_hint">Stop a runninggame</string>
+    <string name="wherigo_controls_mapzones_hint">Show zones of a running game on map</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Download a cartridge (cguid needed)</string>
+    <string name="wherigo_controls_reportproblem_hint">Report a problem with the wherigo player</string>
+    <string name="wherigo_currently_playing">Currently playing</string>
+    <string name="wherigo_cartridge_details">Cartridge details</string>
+    <string name="wherigo_locate_on_center">Locate on center</string>
+    <string name="wherigo_revoke_fixed_location">Revoke fixed location</string>
+
+    <string name="wherigo_thingtype_location">Location</string>
+    <string name="wherigo_thingtype_inventory">Inventory</string>
+    <string name="wherigo_thingtype_item">You see</string>
+    <string name="wherigo_thingtype_task">Task</string>
+    <string name="wherigo_thingtype_thing">Thing</string>
+
+    <string name="wherigo_author">Author</string>
+    <string name="wherigo_zone_inside">inside</string>
+    <string name="wherigo_zone_near">near</string>
+
+    <string name="wherigo_choose_cartridge">Choose cartridge</string>
+    <string name="wherigo_choose_new_loadgame">Choose new game or game to load</string>
+    <string name="wherigo_choose_savegame_slot">Choose a save slot</string>
+
+    <string name="wherigo_savegame_name_empty">&lt;New game&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Autosave</string>
+    <string name="wherigo_savegame_name_numeric">Slot %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Empty slot&gt;</string>
+
+    <string name="wherigo_download_title">Download cartridge</string>
+    <string name="wherigo_download_message">Cartridge with CGUID \"%s\" is not available on your device. Do you want to download it?</string>
+    <string name="wherigo_download_successful_title">Download successful</string>
+    <string name="wherigo_download_successful_message">Cartridge with CGUID \"%s\" was downloaded successfully. Do you want to open it?</string>
+    <string name="wherigo_download_failed_title">Download failed</string>
+    <string name="wherigo_download_failed_message">Download of cartridge with CGUID \"%1$s\" failed: %2$s</string>
+    <string name="wherigo_manual_download_title">Manually download cartridge</string>
+    <string name="wherigo_manual_download_cguid_label">Enter CGUID here</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: deleting leftover file</string>
+    <string name="wherigo_download_progress_login">Logging in…</string>
+    <string name="wherigo_download_progress_started">Download started</string>
+    <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %)</string>
+
+    <string name="wherigo_error_title">Wherigo Error</string>
+    <string name="wherigo_error_game_noerror">No error reported by game</string>
+    <string name="wherigo_error_game_error">Error reported by game: %1$s</string>
+    <string name="wherigo_error_email">Problem playing a Wherigo\n\nError: %1$s\n\nWherigo Info: %2$s\n\nAdditional Info: %3$s</string>
+
+    <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
+    <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
+    <string name="wherigo_confirm_overwrite_savegame_slot_title">Overwrite Savegame slot</string>
+    <string name="wherigo_confirm_overwrite_savegame_slot_message">Do you really want to override savegame slot saved at \"%s\"?</string>
+
+    <string name="wherigo_dialog_push_page">Page %1$s / %2$s</string>
+
+    <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
 
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>

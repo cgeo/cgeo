@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
+import org.apache.commons.lang3.StringUtils;
 
 public class WherigoCartridgeInfo {
     private final ContentStorage.FileInformation fileInfo;
@@ -146,6 +147,18 @@ public class WherigoCartridgeInfo {
             Log.d("Couldn't read Cartridge '" + uri + "'", ie);
             return null;
         }
+    }
+
+    @NonNull
+    public String getName() {
+        final CartridgeFile file = getCartridgeFile();
+        if (file != null && !StringUtils.isBlank(file.name)) {
+            return file.name;
+        }
+        if (fileInfo != null && !StringUtils.isBlank(fileInfo.name)) {
+            return fileInfo.name;
+        }
+        return "-";
     }
 
     @NonNull

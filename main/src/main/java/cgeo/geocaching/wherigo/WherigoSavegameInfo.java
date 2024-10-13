@@ -1,9 +1,11 @@
 package cgeo.geocaching.wherigo;
 
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 
@@ -62,15 +64,15 @@ public class WherigoSavegameInfo {
 
     public String getUserDisplayableName() {
         if (StringUtils.isBlank(name)) {
-            return "<New Game>";
+            return LocalizationUtils.getString(R.string.wherigo_savegame_name_empty);
         }
         if (AUTOSAVE_NAME.equals(name)) {
-            return "Autosave-File";
+            return LocalizationUtils.getString(R.string.wherigo_savegame_name_autosave);
         }
 
         final int number = getNameAsNumber();
         if (number > 0) {
-            return "Slot " + number;
+            return LocalizationUtils.getString(R.string.wherigo_savegame_name_numeric, String.valueOf(number));
         }
 
         return name;
@@ -78,7 +80,7 @@ public class WherigoSavegameInfo {
 
     public String getUserDisplayableSaveDate() {
         if (saveDate == null) {
-            return "<empty slot>";
+            return LocalizationUtils.getString(R.string.wherigo_savegame_date_empty);
         }
         return Formatter.formatDateTime(saveDate.getTime());
     }

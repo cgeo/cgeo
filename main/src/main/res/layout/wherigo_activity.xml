@@ -24,13 +24,14 @@
             android:background="@drawable/mark_gray"
             android:autoLink="web"
             android:textIsSelectable="true"
-            android:text="Experimental, not internationalized yet, go to https://github.com/cgeo/cgeo/wiki/Use-the-Draft-Wherigo-Player for usage instructions"/>
+            tools:ignore="HardcodedText"
+            android:text="Experimental! Go to https://github.com/cgeo/cgeo/wiki/Use-the-Draft-Wherigo-Player for usage instructions"/>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
             <View style="@style/separator_horizontal_heading" />
             <TextView
                 style="@style/separator_horizontal_heading_text"
-                android:text="Wherigo Controls" />
+                android:text="@string/wherigo_controls" />
         </RelativeLayout>
 
         <!--  buttons -->
@@ -46,42 +47,41 @@
                 android:id="@+id/view_cartridges"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="View stored cartridges"
-                app:icon="@drawable/ic_menu_open_in_browser" />
+                android:hint="@string/wherigo_controls_cartridgelist_hint"
+                app:icon="@drawable/ic_menu_select_play" />
 
             <Button
                 android:id="@+id/save_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="Save current game"
+                android:hint="@string/wherigo_controls_savegame_hint"
                 app:icon="@drawable/ic_menu_save" />
 
             <Button
                 android:id="@+id/stop_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="Stop current game"
+                android:hint="@string/wherigo_controls_stopgame_hint"
                 app:icon="@drawable/ic_menu_cancel" />
 
             <Button
                 android:id="@+id/map"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="Map zones of current game"
+                android:hint="@string/wherigo_controls_mapzones_hint"
                 app:icon="@drawable/ic_menu_mapmode" />
 
             <Button
                 android:id="@+id/download"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="Download cartridge"
+                android:hint="@string/wherigo_controls_downloadcartridge_hint"
                 app:icon="@drawable/downloader_folder" />
 
             <Button
                 android:id="@+id/report_problem"
                 style="@style/button_icon"
-                android:layout_gravity="left"
-                android:hint="Report Problem"
+                android:hint="@string/wherigo_controls_reportproblem_hint"
                 app:icon="@drawable/ic_menu_bug_report" />
 
         </LinearLayout>
@@ -97,7 +97,7 @@
                 <View style="@style/separator_horizontal_heading" />
                 <TextView
                     style="@style/separator_horizontal_heading_text"
-                    android:text="Currently playing" />
+                    android:text="@string/wherigo_currently_playing" />
             </RelativeLayout>
 
             <TextView
@@ -114,7 +114,7 @@
                 style="@style/button_full"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Cartridge Details"/>
+                android:text="@string/wherigo_cartridge_details"/>
 
             <TextView
                 android:id="@+id/game_location"
@@ -128,7 +128,7 @@
                 style="@style/button_full"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Revoke fixed location"/>
+                android:text="@string/wherigo_revoke_fixed_location"/>
 
         </LinearLayout>
 
