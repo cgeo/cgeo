@@ -2569,6 +2569,10 @@
     <string name="wizard_skip_wizard_warning">c:geo kanske inte fungerar som förväntat förrän konfigurationen är klar. Beroende på den saknade konfigurationen kanske c:geo inte kan läsa/lagra data som offline-kartor, geocacher, loggfiler etc.\n\nNär du känner dig redo att slutföra installationen, välj antingen \"Configuration wizard\" i huvudmenyn eller starta om c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappsynkronisering klar efter %2$s, %3$d av %4$s behövde synkronisering</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
+    <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
     <!-- default actions in dialogs -->
     <string name="previous">Föregående</string>
     <string name="skip">Hoppa över</string>
@@ -2584,6 +2588,7 @@
     <string name="expand">Expandera</string>
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
+    <string name="play">Spela</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
