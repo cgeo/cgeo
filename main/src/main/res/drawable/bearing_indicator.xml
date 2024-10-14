@@ -13,16 +13,8 @@
       android:strokeLineCap="round"/>
   <path
       android:pathData="M12.0005,3.5156 L8.9029,12H11.1997A0.8,0.8 0,0 1,12.0005 11.1992,0.8 0.8,0 0,1 12.8013,12h2.2969z"
-      android:strokeLineJoin="miter"
-      android:strokeWidth="1"
-      android:fillColor="#c62828"
-      android:strokeColor="#00000000"
-      android:strokeLineCap="butt"/>
+      android:fillColor="#ffd32f2f" />
   <path
       android:pathData="M8.9023,12L12,20.4844L15.0977,12L12.8008,12A0.8,0.8 0,0 1,12 12.8008A0.8,0.8 0,0 1,11.1992 12L8.9023,12z"
-      android:strokeLineJoin="miter"
-      android:strokeWidth="1"
-      android:fillColor="#666666"
-      android:strokeColor="#00000000"
-      android:strokeLineCap="butt"/>
+      android:fillColor="#ff999999" />
 </vector>
