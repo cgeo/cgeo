@@ -769,7 +769,7 @@
     <string name="settings_title_map_data">Kaartgegevens</string>
     <string name="settings_title_offline_maps">Offline kaarten</string>
     <string name="settings_title_map_themes">Offline kaart thema\'s</string>
-    <string name="settings_title_map_hillshading">Offline kaarten reliëf tonen</string>
+    <string name="settings_title_map_hillshading">Offline kaarten reliëfweergave</string>
     <string name="settings_title_offline_routing">Offline routeren</string>
     <string name="settings_summary_offline_routing">Offline routeren is beschikbaar als helper app \"BRouter\" is geïnstalleerd en geconfigureerd of als interne routering is ingeschakeld.</string>
     <string name="settings_title_waypoints">Waypoints</string>
@@ -1039,9 +1039,9 @@
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
-    <string name="settings_info_hillshading_title">Informatie over reliëf tonen</string>
-    <string name="settings_info_hillshading">Reliëf tonen is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
-    <string name="settings_hillshading_enable">Heuvelarcering inschakelen</string>
+    <string name="settings_info_hillshading_title">Informatie over Reliëfweergave</string>
+    <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
+    <string name="settings_hillshading_enable">Reliëfweergave inschakelen</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
