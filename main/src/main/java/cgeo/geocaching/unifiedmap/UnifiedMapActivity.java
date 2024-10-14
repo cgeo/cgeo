@@ -636,10 +636,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         Settings.setFollowMyLocation(followMyLocation);
 
+        final View followMyLocationButtonBackground = findViewById(R.id.background_followmylocation);
         final View followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
-        if (followMyLocationButton != null) { // can be null after screen rotation
+        if (followMyLocationButtonBackground != null && followMyLocationButton != null) { // can be null after screen rotation
             followMyLocationButton.setBackgroundResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
-            followMyLocationButton.setOnClickListener(v -> viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue())));
+            final View.OnClickListener listener = v -> viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
+            followMyLocationButton.setOnClickListener(listener);
+            followMyLocationButtonBackground.setOnClickListener(listener);
         }
 
         if (followMyLocation) {
