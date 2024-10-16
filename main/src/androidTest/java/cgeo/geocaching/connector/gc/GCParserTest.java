@@ -13,6 +13,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.test.CgeoTestUtils;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -118,6 +119,7 @@ public class GCParserTest {
         final String gcCustomDate = Settings.getGcCustomDate();
         try {
             for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
+                DataStore.removeCache(mockedCache.getGeocode(), LoadFlags.REMOVE_ALL);
                 // to get the same results we have to use the date format used when the mocked data was created
                 Settings.setGcCustomDate(MockedCache.getDateFormat());
                 final SearchResult searchResult = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), mockedCache.getData(), null);
