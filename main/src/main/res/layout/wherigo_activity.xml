@@ -47,41 +47,42 @@
                 android:id="@+id/view_cartridges"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="@string/wherigo_controls_cartridgelist_hint"
+                android:tooltipText="@string/wherigo_controls_cartridgelist_hint"
                 app:icon="@drawable/ic_menu_select_play" />
 
             <Button
                 android:id="@+id/save_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="@string/wherigo_controls_savegame_hint"
+                android:tooltipText="@string/wherigo_controls_savegame_hint"
                 app:icon="@drawable/ic_menu_save" />
 
             <Button
                 android:id="@+id/stop_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="@string/wherigo_controls_stopgame_hint"
+                android:tooltipText="@string/wherigo_controls_stopgame_hint"
                 app:icon="@drawable/ic_menu_cancel" />
 
             <Button
                 android:id="@+id/map"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="@string/wherigo_controls_mapzones_hint"
+                android:tooltipText="@string/wherigo_controls_mapzones_hint"
                 app:icon="@drawable/ic_menu_mapmode" />
 
             <Button
                 android:id="@+id/download"
                 style="@style/button_icon"
                 android:layout_gravity="left"
-                android:hint="@string/wherigo_controls_downloadcartridge_hint"
+                android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
                 app:icon="@drawable/downloader_folder" />
 
             <Button
                 android:id="@+id/report_problem"
                 style="@style/button_icon"
-                android:hint="@string/wherigo_controls_reportproblem_hint"
+                android:layout_gravity="left"
+                android:tooltipText="@string/wherigo_controls_reportproblem_hint"
                 app:icon="@drawable/ic_menu_bug_report" />
 
         </LinearLayout>
