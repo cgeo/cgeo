@@ -2587,11 +2587,8 @@
     <string name="wherigo_cartridge_details">Cartridge Details</string>
     <string name="wherigo_locate_on_center">Ins Zentrum positionieren</string>
     <string name="wherigo_revoke_fixed_location">Festen Standort widerrufen</string>
-    <string name="wherigo_thingtype_location">Orte</string>
     <string name="wherigo_thingtype_inventory">Inventar</string>
     <string name="wherigo_thingtype_item">Du siehst</string>
-    <string name="wherigo_thingtype_task">Aufgaben</string>
-    <string name="wherigo_thingtype_thing">Gegenstände</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">innerhalb</string>
     <string name="wherigo_zone_near">in der Nähe</string>
