@@ -31,7 +31,7 @@
             android:id="@+id/map_zoomin"
             android:src="@drawable/map_zoomin"
             android:contentDescription="@string/zoom_in"
-            style="@style/map_quicksettingsbutton" />
+            style="@style/map_zoombutton" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/container_zoomout"
@@ -46,6 +46,6 @@
             android:id="@+id/map_zoomout"
             android:src="@drawable/map_zoomout"
             android:contentDescription="@string/zoom_out"
-            style="@style/map_quicksettingsbutton" />
+            style="@style/map_zoombutton" />
     </LinearLayout>
 </RelativeLayout>
