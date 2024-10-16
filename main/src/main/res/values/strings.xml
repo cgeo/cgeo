@@ -2907,6 +2907,7 @@
     <string name="wherigo_controls">Controls</string>
     <string name="wherigo_controls_cartridgelist_hint">View cartridges and start game</string>
     <string name="wherigo_controls_savegame_hint">Save progress of a running game</string>
+    <string name="wherigo_controls_loadgame_hint">Load a stored savegame</string>
     <string name="wherigo_controls_stopgame_hint">Stop a runninggame</string>
     <string name="wherigo_controls_mapzones_hint">Show zones of a running game on map</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download a cartridge (cguid needed)</string>
