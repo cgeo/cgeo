@@ -40,7 +40,6 @@ import androidx.test.filters.SmallTest;
 import java.util.GregorianCalendar;
 
 import org.apache.commons.text.StringEscapeUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
@@ -347,7 +346,6 @@ public class CgeoApplicationTest {
      */
     @MediumTest
     @Test
-    @Ignore
     public void testSearchByGeocodeBasis() {
         for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
