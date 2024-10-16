@@ -2917,11 +2917,11 @@
     <string name="wherigo_locate_on_center">Locate on center</string>
     <string name="wherigo_revoke_fixed_location">Revoke fixed location</string>
 
-    <string name="wherigo_thingtype_location">Location</string>
+    <string name="wherigo_thingtype_location">Locations</string>
     <string name="wherigo_thingtype_inventory">Inventory</string>
     <string name="wherigo_thingtype_item">You see</string>
-    <string name="wherigo_thingtype_task">Task</string>
-    <string name="wherigo_thingtype_thing">Thing</string>
+    <string name="wherigo_thingtype_task">Tasks</string>
+    <string name="wherigo_thingtype_thing">Things</string>
 
     <string name="wherigo_author">Author</string>
     <string name="wherigo_zone_inside">inside</string>
