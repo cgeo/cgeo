@@ -101,6 +101,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -636,13 +637,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         Settings.setFollowMyLocation(followMyLocation);
 
-        final View followMyLocationButtonBackground = findViewById(R.id.background_followmylocation);
-        final View followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
-        if (followMyLocationButtonBackground != null && followMyLocationButton != null) { // can be null after screen rotation
-            followMyLocationButton.setBackgroundResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
-            final View.OnClickListener listener = v -> viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue()));
-            followMyLocationButton.setOnClickListener(listener);
-            followMyLocationButtonBackground.setOnClickListener(listener);
+        final ImageButton followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
+        if (followMyLocationButton != null) { // can be null after screen rotation
+            followMyLocationButton.setImageResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
+            followMyLocationButton.setOnClickListener(v -> viewModel.followMyLocation.setValue(Boolean.FALSE.equals(viewModel.followMyLocation.getValue())));
         }
 
         if (followMyLocation) {
