@@ -157,7 +157,7 @@
                     android:id="@+id/play_in_cgeo"
                     style="@style/button_icon_colored"
                     android:layout_toLeftOf="@+id/send_to_whereyougo"
-                    app:icon="@drawable/type_wherigo"
+                    app:icon="@drawable/ic_menu_select_play"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
