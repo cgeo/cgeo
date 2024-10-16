@@ -2587,11 +2587,8 @@
     <string name="wherigo_cartridge_details">Cartridge details</string>
     <string name="wherigo_locate_on_center">Lokaliseren in het midden</string>
     <string name="wherigo_revoke_fixed_location">Vastgezette locatie intrekken</string>
-    <string name="wherigo_thingtype_location">Locatie</string>
     <string name="wherigo_thingtype_inventory">Inventaris</string>
     <string name="wherigo_thingtype_item">Je ziet</string>
-    <string name="wherigo_thingtype_task">Taak</string>
-    <string name="wherigo_thingtype_thing">Ding</string>
     <string name="wherigo_author">Auteur</string>
     <string name="wherigo_zone_inside">in</string>
     <string name="wherigo_zone_near">nabij</string>
