@@ -55,7 +55,7 @@
                 style="@style/button_icon"
                 android:layout_gravity="left"
                 android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
-                app:icon="@drawable/ic_menu_download" />
+                app:icon="@drawable/wherigo_download" />
 
             <View
                 style="@style/separator_vertical" />
@@ -65,14 +65,21 @@
                 style="@style/button_icon"
                 android:layout_gravity="left"
                 android:tooltipText="@string/wherigo_controls_savegame_hint"
-                app:icon="@drawable/ic_menu_save" />
+                app:icon="@drawable/wherigo_save" />
+
+            <Button
+                android:id="@+id/load_game"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:tooltipText="@string/wherigo_controls_loadgame_hint"
+                app:icon="@drawable/wherigo_load" />
 
             <Button
                 android:id="@+id/stop_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
                 android:tooltipText="@string/wherigo_controls_stopgame_hint"
-                app:icon="@drawable/ic_menu_cancel" />
+                app:icon="@drawable/wherigo_close" />
 
             <Button
                 android:id="@+id/map"

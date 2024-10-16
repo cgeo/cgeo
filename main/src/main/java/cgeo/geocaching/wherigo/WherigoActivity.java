@@ -265,6 +265,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.viewCartridges.setEnabled(true);
         binding.saveGame.setEnabled(game.isPlaying());
+        binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo().getLoadableSavegames().size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
         binding.reportProblem.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
