@@ -51,6 +51,16 @@
                 app:icon="@drawable/ic_menu_select_play" />
 
             <Button
+                android:id="@+id/download"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
+                app:icon="@drawable/ic_menu_download" />
+
+            <View
+                style="@style/separator_vertical" />
+
+            <Button
                 android:id="@+id/save_game"
                 style="@style/button_icon"
                 android:layout_gravity="left"
@@ -71,12 +81,8 @@
                 android:tooltipText="@string/wherigo_controls_mapzones_hint"
                 app:icon="@drawable/ic_menu_mapmode" />
 
-            <Button
-                android:id="@+id/download"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
-                app:icon="@drawable/ic_menu_download" />
+            <View
+                style="@style/separator_vertical" />
 
             <Button
                 android:id="@+id/report_problem"
