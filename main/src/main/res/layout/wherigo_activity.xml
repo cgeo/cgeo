@@ -76,7 +76,7 @@
                 style="@style/button_icon"
                 android:layout_gravity="left"
                 android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
-                app:icon="@drawable/downloader_folder" />
+                app:icon="@drawable/ic_menu_download" />
 
             <Button
                 android:id="@+id/report_problem"
