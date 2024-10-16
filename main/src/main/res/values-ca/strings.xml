@@ -2589,11 +2589,8 @@
     <string name="wherigo_cartridge_details">Detalls del cartutx</string>
     <string name="wherigo_locate_on_center">Situar al centre</string>
     <string name="wherigo_revoke_fixed_location">Revoca la ubicació fixa</string>
-    <string name="wherigo_thingtype_location">Ubicació</string>
     <string name="wherigo_thingtype_inventory">Inventari</string>
     <string name="wherigo_thingtype_item">Podeu veure</string>
-    <string name="wherigo_thingtype_task">Tasca</string>
-    <string name="wherigo_thingtype_thing">Cosa</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">interior</string>
     <string name="wherigo_zone_near">prop</string>
