@@ -7,7 +7,7 @@
         android:id="@+id/container_followmylocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/container_zoomin"
+        android:layout_above="@id/container_zoom"
         android:layout_alignParentRight="true"
         android:layout_marginRight="13dp"
         android:layout_marginBottom="6dp">
@@ -20,21 +20,8 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/container_zoomin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_above="@id/container_zoomout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginRight="13dp">
-        <ImageButton
-            android:id="@+id/map_zoomin"
-            android:src="@drawable/map_zoomin"
-            android:contentDescription="@string/zoom_in"
-            style="@style/map_zoombutton" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/container_zoomout"
+        android:id="@+id/container_zoom"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -42,6 +29,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginRight="13dp"
         android:layout_marginBottom="18dp">
+        <ImageButton
+            android:id="@+id/map_zoomin"
+            android:src="@drawable/map_zoomin"
+            android:contentDescription="@string/zoom_in"
+            style="@style/map_zoombutton" />
+        <ImageButton
+            android:id="@+id/map_zoomdivider"
+            android:src="@drawable/map_zoom_divider"
+            android:layout_height="1dp"
+            style="@style/map_zoombutton" />
         <ImageButton
             android:id="@+id/map_zoomout"
             android:src="@drawable/map_zoomout"
