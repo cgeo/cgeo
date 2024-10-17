@@ -2088,6 +2088,7 @@ Nombre de archivo:%2$s</string>
     <string name="wizard_skip_wizard_warning">c:geo podría no funcionar como se esperaba hasta que la configuración se haya completado. Dependiendo de la configuración que falte c:geo podría no ser capaz de leer o almacenar datos como mapas sin conexión, geocaches, archivos de registro, etc.\n\nSi desea finalizar la configuración, elija \"Asistente de Configuración\" en el menú principal o reinicie c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Sincronización de carpetas %1$s terminada después de %2$s, %3$d de %4$s necesita sincronización</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Saltar</string>

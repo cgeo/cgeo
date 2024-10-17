@@ -8,6 +8,7 @@
 - Neu: Kartenschattierung für UnifiedMap Mapsforge Offline-Karten
 - Neu: Kartenschattierung für UnifiedMap VTM Karten (erfordert Online-Verbindung)
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
+- Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -24,3 +25,4 @@
 - Neu: Bevorzugte Bildgröße für Bilder festlegen, die von geocaching.com Caches und Trackables geladen werden
 - Korrektur: "Im Browser öffnen" funktioniert nicht für Trackable Logs
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)

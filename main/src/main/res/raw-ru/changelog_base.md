@@ -8,6 +8,7 @@
 - New: Hillshading support for UnifiedMap Mapsforge offline maps
 - New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 - Fix: Address search not considering live mode (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
 
 ### Детали тайника
 - New: Not yet existing variables used in projection get created in variable list
@@ -24,3 +25,4 @@
 - New: Set preferred image size for images loaded from geocaching.com caches and trackables
 - Fix: "Open in browser" not working for trackable logs
 - New: Option to manage downloaded files (maps, themes, routing and hillshading data)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)

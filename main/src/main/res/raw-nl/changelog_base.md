@@ -8,6 +8,7 @@
 - Nieuw: Reliëfweergave ondersteuning voor UnifiedMap Mapsforge offline kaarten
 - Nieuw: Reliëfweergave ondersteuning voor UnifiedMap VTM kaarten (vereist online verbinding)
 - Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
+- Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
@@ -24,3 +25,4 @@
 - Nieuw: Stel voorkeur in voor afbeeldingsgrootte voor afbeeldingen geladen vanuit geocaching.com caches en trackables
 - Oplossing: "Open in browser" werkt niet voor trackable logs
 - Nieuw: Optie om gedownloade bestanden te beheren (kaarten, thema's, routering en reliëfweergave gegevens)
+- Nieuw: Optie om een cache uit alle lijsten te verwijderen (= markeer als te verwijderen)
