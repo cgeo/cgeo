@@ -2579,6 +2579,7 @@
     <string name="wherigo_controls">Besturing</string>
     <string name="wherigo_controls_cartridgelist_hint">Bekijk de cartridges en start het spel</string>
     <string name="wherigo_controls_savegame_hint">Bewaar de voortgang van een lopend spel</string>
+    <string name="wherigo_controls_loadgame_hint">Laad een opgeslagen spel</string>
     <string name="wherigo_controls_stopgame_hint">Stop een lopend spel</string>
     <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
@@ -2587,8 +2588,11 @@
     <string name="wherigo_cartridge_details">Cartridge details</string>
     <string name="wherigo_locate_on_center">Lokaliseren in het midden</string>
     <string name="wherigo_revoke_fixed_location">Vastgezette locatie intrekken</string>
+    <string name="wherigo_thingtype_location">Locaties</string>
     <string name="wherigo_thingtype_inventory">Inventaris</string>
     <string name="wherigo_thingtype_item">Je ziet</string>
+    <string name="wherigo_thingtype_task">Taken</string>
+    <string name="wherigo_thingtype_thing">Dingen</string>
     <string name="wherigo_author">Auteur</string>
     <string name="wherigo_zone_inside">in</string>
     <string name="wherigo_zone_near">nabij</string>
