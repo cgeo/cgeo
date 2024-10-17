@@ -122,14 +122,6 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/cartridge_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="@dimen/textSize_headingSecondary"
-                />
-
-            <TextView
                 android:id="@+id/game_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

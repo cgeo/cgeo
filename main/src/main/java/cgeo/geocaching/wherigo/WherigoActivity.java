@@ -257,7 +257,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.wherigoThingTypeList.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
         binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
-        binding.cartridgeTitle.setText(game.getCartridgeName());
 
         binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_location) + ": " +
                 WherigoLocationProvider.get().toUserDisplayableString());
@@ -269,6 +268,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.stopGame.setEnabled(game.isPlaying());
         binding.reportProblem.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
+
+        this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 
     }
 
