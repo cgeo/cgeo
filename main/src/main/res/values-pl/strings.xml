@@ -2649,8 +2649,10 @@
     <string name="wherigo_cartridge_details">Szczegóły kartridża</string>
     <string name="wherigo_locate_on_center">Umieść na środku</string>
     <string name="wherigo_revoke_fixed_location">Unieważnij stałą lokalizację</string>
+    <string name="wherigo_thingtype_location">Lokalizacje</string>
     <string name="wherigo_thingtype_inventory">Inwentarz</string>
     <string name="wherigo_thingtype_item">Widzisz</string>
+    <string name="wherigo_thingtype_task">Zadania</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">wewnątrz</string>
     <string name="wherigo_zone_near">blisko</string>
