@@ -46,6 +46,7 @@ import androidx.core.text.HtmlCompat;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -376,7 +377,26 @@ public final class GCParser {
         cache.setPersonalNote(personalNoteWithLineBreaks, true);
 
         // cache short description
-        cache.setShortDescription(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
+        final StringBuilder sDesc = new StringBuilder();
+        if (cache.isEventCache()) {
+            // add event start / end info to beginning of listing
+            final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
+            if (eventTimesMatcher.find()) {
+                sDesc.append("<b>")
+                        .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
+                        .append(", ")
+                        .append(Integer.parseInt(eventTimesMatcher.group(1)) + (eventTimesMatcher.group(3).equals(" PM") ? 12 : 0))
+                        .append(":")
+                        .append(eventTimesMatcher.group(2))
+                        .append(" - ")
+                        .append(Integer.parseInt(eventTimesMatcher.group(4)) + (eventTimesMatcher.group(6).equals(" PM") ? 12 : 0))
+                        .append(":")
+                        .append(eventTimesMatcher.group(5))
+                        .append("</b>");
+            }
+        }
+        sDesc.append(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
+        cache.setShortDescription(sDesc.toString());
 
         // cache description
         final String longDescription = TextUtils.getMatch(page, GCConstants.PATTERN_DESC, true, "");
