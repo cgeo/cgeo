@@ -82,6 +82,13 @@
                 app:icon="@drawable/wherigo_close" />
 
             <Button
+                android:id="@+id/cartridge_details"
+                style="@style/button_icon"
+                android:layout_gravity="left"
+                android:tooltipText="@string/wherigo_cartridge_details"
+                app:icon="@drawable/settings_info" />
+
+            <Button
                 android:id="@+id/map"
                 style="@style/button_icon"
                 android:layout_gravity="left"
@@ -121,14 +128,6 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/textSize_headingSecondary"
                 />
-
-
-            <Button
-                android:id="@+id/cartridge_details"
-                style="@style/button_full"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/wherigo_cartridge_details"/>
 
             <TextView
                 android:id="@+id/game_location"
