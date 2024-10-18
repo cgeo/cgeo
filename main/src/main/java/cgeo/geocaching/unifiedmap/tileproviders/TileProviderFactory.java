@@ -117,9 +117,11 @@ public class TileProviderFactory {
             registerTileProvider(new CyclosmSource());
             registerTileProvider(new OpenTopoMapSource());
 
-            // @todo: combined, user-defined
-
             // OSM offline tile providers
+            if (offlineMaps.size() > 1) {
+                registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+            }
+            // @todo: user-defined
             for (ImmutablePair<String, Uri> data : offlineMaps) {
                 registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left + " (MF)", data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
             }
