@@ -15,6 +15,7 @@ import java.io.InputStream;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
+import org.mapsforge.map.datastore.MapDataStore;
 import org.mapsforge.map.layer.labels.LabelLayer;
 import org.mapsforge.map.layer.labels.MapDataStoreLabelStore;
 import org.mapsforge.map.layer.labels.ThreadedLabelLayer;
@@ -61,23 +62,26 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
                     setMapAttribution(new Pair<>(info.createdBy, true));
                 }
             }
-
-            // create layers for tiles and labels
-            tileLayer = new TileRendererLayer(fragment.getTileCache(), mapFile, map.getModel().mapViewPosition, false, false, false, AndroidGraphicFactory.INSTANCE, HillShadingLayerHelper.getHillsRenderConfig());
-
-            tileLayer.setCacheTileMargin(1);
-            tileLayer.setCacheZoomMinus(1);
-            tileLayer.setCacheZoomPlus(2);
-            map.getLayerManager().getLayers().add(tileLayer);
-
-            // theme must be applied before creating labelStore
-            fragment.applyTheme();
-
-            final MapDataStoreLabelStore labelStore = new MapDataStoreLabelStore(mapFile, ((TileRendererLayer) tileLayer).getRenderThemeFuture(),
-                    ((TileRendererLayer) tileLayer).getTextScale(), tileLayer.getDisplayModel(), AndroidGraphicFactory.INSTANCE);
-            final LabelLayer labelLayer = new ThreadedLabelLayer(AndroidGraphicFactory.INSTANCE, labelStore);
-            map.getLayerManager().getLayers().add(labelLayer);
+            createTileLayerAndLabelStore(fragment, map, mapFile);
         }
+    }
+
+    protected void createTileLayerAndLabelStore(final MapsforgeFragment fragment, final MapView map, final MapDataStore mapDataStore) {
+        // create layers for tiles and labels
+        tileLayer = new TileRendererLayer(fragment.getTileCache(), mapDataStore, map.getModel().mapViewPosition, false, false, false, AndroidGraphicFactory.INSTANCE, HillShadingLayerHelper.getHillsRenderConfig());
+
+        tileLayer.setCacheTileMargin(1);
+        tileLayer.setCacheZoomMinus(1);
+        tileLayer.setCacheZoomPlus(2);
+        map.getLayerManager().getLayers().add(tileLayer);
+
+        // theme must be applied before creating labelStore
+        fragment.applyTheme();
+
+        final MapDataStoreLabelStore labelStore = new MapDataStoreLabelStore(mapDataStore, ((TileRendererLayer) tileLayer).getRenderThemeFuture(),
+                ((TileRendererLayer) tileLayer).getTextScale(), tileLayer.getDisplayModel(), AndroidGraphicFactory.INSTANCE);
+        final LabelLayer labelLayer = new ThreadedLabelLayer(AndroidGraphicFactory.INSTANCE, labelStore);
+        map.getLayerManager().getLayers().add(labelLayer);
     }
 
     @Override
