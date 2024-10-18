@@ -1,3 +1,6 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
+(You may want to [configure a quick launch item](cgeo-setting://pref_quicklaunchitems) or [customize bottom navigation](cgeo-setting://pref_custombnitem) for easier access, need to enable extended settings first.)
+
 ### Map
 - New: Store map theme per tile provider (UnifiedMap)
 - New: Highlight selected cache/waypoint (UnifiedMap)
@@ -17,6 +20,7 @@
 - Fix: Multiple images in personal note not added to images tab
 - Fix: Handling of projections in waypoints and personal notes
 - New: Long tap on date in logging retrieves previous log date
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 
 ### General
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
@@ -26,3 +30,4 @@
 - Fix: "Open in browser" not working for trackable logs
 - New: Option to manage downloaded files (maps, themes, routing and hillshading data)
 - New: Option to remove a cache from all lists (= mark it as to be deleted)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches
