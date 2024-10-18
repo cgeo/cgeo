@@ -2641,6 +2641,7 @@
     <string name="wherigo_controls">Sterowanie</string>
     <string name="wherigo_controls_cartridgelist_hint">Zobacz kartridże i rozpocznij grę</string>
     <string name="wherigo_controls_savegame_hint">Zapisz postęp bieżącej gry</string>
+    <string name="wherigo_controls_loadgame_hint">Załaduj zapisany zapis gry</string>
     <string name="wherigo_controls_stopgame_hint">Zatrzymaj uruchomioną grę</string>
     <string name="wherigo_controls_mapzones_hint">Pokaż strefy uruchomionej gry na mapie</string>
     <string name="wherigo_controls_downloadcartridge_hint">Pobierz kartridż (potrzebny cguid)</string>
@@ -2653,6 +2654,7 @@
     <string name="wherigo_thingtype_inventory">Inwentarz</string>
     <string name="wherigo_thingtype_item">Widzisz</string>
     <string name="wherigo_thingtype_task">Zadania</string>
+    <string name="wherigo_thingtype_thing">Rzeczy</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">wewnątrz</string>
     <string name="wherigo_zone_near">blisko</string>
