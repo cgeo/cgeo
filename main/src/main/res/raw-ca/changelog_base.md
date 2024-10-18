@@ -1,3 +1,5 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://pref_quicklaunchitems) or [customize bottom navigation](cgeo-setting://pref_custombnitem) for easier access, need to enable extended settings first.)
+
 ### Mapa
 - Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
@@ -17,6 +19,7 @@
 - Correcció: diverses imatges a la nota personal no s'afegeixen a la pestanya d'imatges
 - Correcció: maneig de projeccions en waypoints i notes personals
 - Nou: un toc llarg a la data al registre recupera la data del registre anterior
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -26,3 +29,4 @@
 - Correcció: "Obre al navegador" no funciona per als registres rastrejables
 - Novetat: opció per gestionar els fitxers descarregats (mapes, temes, dades d'itineraris i ombrejats)
 - Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches
