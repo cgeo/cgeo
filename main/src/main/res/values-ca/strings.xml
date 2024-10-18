@@ -2581,6 +2581,7 @@
     <string name="wherigo_controls">Controls</string>
     <string name="wherigo_controls_cartridgelist_hint">Veure cartutxos i començar el joc</string>
     <string name="wherigo_controls_savegame_hint">Desa el progrés d\'un joc en curs</string>
+    <string name="wherigo_controls_loadgame_hint">Carregueu una partida desada emmagatzemada</string>
     <string name="wherigo_controls_stopgame_hint">Atura un joc en curs</string>
     <string name="wherigo_controls_mapzones_hint">Mostra les zones d\'un joc en curs al mapa</string>
     <string name="wherigo_controls_downloadcartridge_hint">Descarrega un cartutx (cal cguid)</string>
@@ -2589,8 +2590,11 @@
     <string name="wherigo_cartridge_details">Detalls del cartutx</string>
     <string name="wherigo_locate_on_center">Situar al centre</string>
     <string name="wherigo_revoke_fixed_location">Revoca la ubicació fixa</string>
+    <string name="wherigo_thingtype_location">Ubicacions</string>
     <string name="wherigo_thingtype_inventory">Inventari</string>
     <string name="wherigo_thingtype_item">Podeu veure</string>
+    <string name="wherigo_thingtype_task">Tasques</string>
+    <string name="wherigo_thingtype_thing">Objectes</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">interior</string>
     <string name="wherigo_zone_near">prop</string>
