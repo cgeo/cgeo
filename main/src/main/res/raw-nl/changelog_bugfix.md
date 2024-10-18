@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
 - Oplossing: Verkeerde hoogte grafiek voor tracks met meerdere segmenten
 - Oplossing: Kaart laad voortdurend caches opnieuw in offline-only modus (UnifiedMap)
