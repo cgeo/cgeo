@@ -11,6 +11,6 @@ import static org.oscim.map.Viewport.MIN_ZOOM_LEVEL;
 
 class OsmDeVTMSource extends AbstractMapsforgeVTMOnlineTileProvider {
     OsmDeVTMSource() {
-        super("OSM.de", Uri.parse("https://tile.openstreetmap.de"), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_openstreetmapde_html), true));
+        super("OSM.de (VTM)", Uri.parse("https://tile.openstreetmap.de"), "/{Z}/{X}/{Y}.png", MIN_ZOOM_LEVEL, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_openstreetmapde_html), true));
     }
 }
