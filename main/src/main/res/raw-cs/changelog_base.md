@@ -1,3 +1,5 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://pref_quicklaunchitems) or [customize bottom navigation](cgeo-setting://pref_custombnitem) for easier access, need to enable extended settings first.)
+
 ### Mapa
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
@@ -8,6 +10,7 @@
 - Novinka: Podpora stínování kopců pro offline mapy Sjednocená mapa Mapsforge
 - Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
 - Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
+- Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -16,6 +19,7 @@
 - Oprava: Více obrázků v osobní poznámce nebylo přidáno na kartu Obrázky
 - Oprava: Zpracování projekcí v trasových bodech a osobních poznámkách
 - Novinka: Dlouhým klepnutím na datum v logu se načte předchozí datum logu
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
@@ -24,3 +28,5 @@
 - Novinka: Nastavení preferované velikosti obrázku pro obrázky načtené z kešek a trasovatelných předmětů na webu geocaching.com
 - Oprava: Volba „Otevřít v prohlížeči“ nefunguje pro sledovatelné protokoly
 - Novinka: Možnost spravovat stažené soubory (mapy, motivy, směrovací data a data stínování kopců)
+- Novinka: Možnost odstranit kešku ze všech seznamů (= označit ji jako ke smazání)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches

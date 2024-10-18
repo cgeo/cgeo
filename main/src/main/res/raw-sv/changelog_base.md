@@ -1,3 +1,5 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://pref_quicklaunchitems) or [customize bottom navigation](cgeo-setting://pref_custombnitem) for easier access, need to enable extended settings first.)
+
 ### Karta
 - Nyhet: Spara kart-tema per leverantör (UnifiedMap)
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
@@ -7,7 +9,8 @@
 - Ändra: Använd ny terrängskuggnings-algoritm för Mapsforge offline-kartor
 - Nyhet: Terrängskuggnings-stöd för UnifiedMap Mapsforge offline-kartor
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
-- Fix: Address search not considering live mode (UnifiedMap)
+- Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
+- Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -16,11 +19,14 @@
 - Fix: Multiple images in personal note not added to images tab
 - Fix: Handling of projections in waypoints and personal notes
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
 - Nytt: Tillåt flera hierarkiska nivåer i cachelistor
 - Nyhet: Dedikerade ikoner för geocaching.com blockparty och HQ-event-typer
-- New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Nyhet: Ange önskad bildstorlek för bilder som laddas från geocaching.com cacher och spårbara objekt
 - Fix: "Open in browser" not working for trackable logs
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
+- Nyhet: Alternativ för att ta bort en cache från alla listor (= markera den att raderas)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches

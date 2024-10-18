@@ -1,6 +1,8 @@
 ##
 - Nyhet: Visa varning för aktiverad gc-anslutning utan inloggningsuppgifter
 - Fix: Wrong elevation chart for tracks with multiple segments
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Fix: Missing parametrization for user-defined tileprovider
