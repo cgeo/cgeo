@@ -63,7 +63,7 @@ public class TileProviderFactory {
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, tileProviders.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading() && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty()); // Hide HS for VTM unless pref_rapidapiKeyMapilion is set (required for online sourcing of HS layer)
+        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, tileProviders.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading());
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
     }
 

@@ -1,5 +1,7 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmFragment;
 
@@ -49,6 +51,12 @@ public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvi
     @NonNull
     public String getId() {
         return super.getId() + ":" + mapUri.getLastPathSegment();
+    }
+
+    // Hide HS for VTM unless pref_rapidapiKeyMapilion is set (required for online sourcing of HS layer)
+    @Override
+    public boolean supportsHillshading() {
+        return this.supportsHillshading && !Settings.getString(R.string.pref_rapidapiKey, "").isEmpty();
     }
 
 }

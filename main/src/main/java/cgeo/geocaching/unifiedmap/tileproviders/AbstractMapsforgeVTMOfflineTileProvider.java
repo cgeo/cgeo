@@ -30,6 +30,7 @@ public class AbstractMapsforgeVTMOfflineTileProvider extends AbstractMapsforgeVT
         super(name, uri, zoomMin, zoomMax, new Pair<>("", false));
         supportsThemes = true;
         supportsThemeOptions = true; // rule of thumb, not all themes support options
+        supportsHillshading = true;
     }
 
     @Override
