@@ -1265,8 +1265,8 @@ public class Settings {
     }
 
     /** use Mapsforge as additional map view for UnifiedMap */
-    public static boolean useMapsforgeInUnifiedMap() {
-        return getBoolean(R.string.pref_useMapsforgeInUnifiedMap, false);
+    public static boolean showVTMInUnifiedMap() {
+        return getBoolean(R.string.pref_showVTMInUnifiedMap, false);
     }
 
     public static void setMapDownloaderSource(final int source) {
