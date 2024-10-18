@@ -9,7 +9,7 @@ import androidx.core.util.Pair;
 
 class CyclosmVTMSource extends AbstractMapsforgeVTMOnlineTileProvider {
     CyclosmVTMSource() {
-        super("CyclOSM", Uri.parse("https://a.tile-cyclosm.openstreetmap.fr"), "/cyclosm/{Z}/{X}/{Y}.png", 0, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_cyclosm_html), true));
+        super("CyclOSM (VTM)", Uri.parse("https://a.tile-cyclosm.openstreetmap.fr"), "/cyclosm/{Z}/{X}/{Y}.png", 0, 18, new Pair<>(CgeoApplication.getInstance().getString(R.string.map_attribution_cyclosm_html), true));
         setSupportsHillshading(false);
     }
 }

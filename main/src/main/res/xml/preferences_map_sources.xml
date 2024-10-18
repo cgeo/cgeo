@@ -114,7 +114,7 @@
             android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
         <CheckBoxPreference
-            android:key="@string/pref_useMapsforgeInUnifiedMap"
+            android:key="@string/pref_showVTMInUnifiedMap"
             android:title="@string/settings_useMapsforgeInUnifiedMap_title"
             android:summary="@string/settings_useMapsforgeInUnifiedMap_summary"
             android:defaultValue="false"

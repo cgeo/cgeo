@@ -60,6 +60,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
             return true;
         });
 
+        setFlagForRestartRequired(R.string.pref_showVTMInUnifiedMap);
     }
 
     @Override
