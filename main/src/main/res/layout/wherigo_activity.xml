@@ -25,7 +25,7 @@
             android:autoLink="web"
             android:textIsSelectable="true"
             tools:ignore="HardcodedText"
-            android:text="Experimental! Go to https://github.com/cgeo/cgeo/wiki/Use-the-Draft-Wherigo-Player for usage instructions"/>
+            android:text="Beta version"/>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
             <View style="@style/separator_horizontal_heading" />

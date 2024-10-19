@@ -26,9 +26,9 @@ import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -62,7 +62,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
             final CharSequence description = TextUtils.join(things, i -> {
                 final String thingName = i.name;
-                return !WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan(thingName, new ForegroundColorSpan(Color.BLUE));
+                return WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan("(" + thingName + ")", new StyleSpan(Typeface.ITALIC));
             }, ", ");
 
             final WherigolistItemBinding typeBinding = WherigolistItemBinding.bind(view);
@@ -102,7 +102,15 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.wherigoThingTypeList.setModel(wherigoThingTypeModel);
         wherigoThingTypeModel.addSingleSelectListener(type -> {
-            WherigoDialogManager.get().display(new WherigoThingListDialogProvider(type));
+            final List<EventTable> things = type.getThingsForUserDisplay();
+            if (things.isEmpty()) {
+                return;
+            }
+            if (things.size() == 1) {
+                WherigoDialogManager.get().display(new WherigoThingDialogProvider(things.get(0)));
+            } else {
+                WherigoDialogManager.get().display(new WherigoThingListDialogProvider(type));
+            }
         });
 
         refreshGui();
