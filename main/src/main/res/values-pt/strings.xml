@@ -775,8 +775,6 @@
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Oferta de motores VTM + Mapsforge para mapas Mapsforge (para fins de teste)</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
     <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
