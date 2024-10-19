@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Nyhet: Visa varning för aktiverad gc-anslutning utan inloggningsuppgifter
 - Fix: Wrong elevation chart for tracks with multiple segments
 - Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
