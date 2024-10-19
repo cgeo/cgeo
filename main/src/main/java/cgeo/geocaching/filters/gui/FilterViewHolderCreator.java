@@ -65,6 +65,9 @@ public class FilterViewHolderCreator {
             case OFFLINE_LOG:
                 result = new StringFilterViewHolder<>();
                 break;
+            case INVENTORY_COUNT:
+                result = new NumberCountFilterViewHolder(0, 100);
+                break;
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()

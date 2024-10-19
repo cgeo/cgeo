@@ -513,6 +513,10 @@ public class Geocache implements INamedGeoCoordinate {
         return inventoryItems > 0;
     }
 
+    public int getTrackableCount() {
+        return inventoryItems;
+    }
+
     public boolean canBeAddedToCalendar() {
         // Is event type with event date set?
         return isEventCache() && hidden != null;
@@ -1032,8 +1036,7 @@ public class Geocache implements INamedGeoCoordinate {
     @NonNull
     public Map<LogType, Integer> getLogCounts() {
         if (logCounts.isEmpty() && inDatabase()) {
-            @Nullable
-            final Map<LogType, Integer> savedLogCounts = DataStore.loadLogCounts(getGeocode());
+            @Nullable final Map<LogType, Integer> savedLogCounts = DataStore.loadLogCounts(getGeocode());
             if (MapUtils.isNotEmpty(savedLogCounts)) {
                 logCounts = savedLogCounts;
             }
@@ -1825,10 +1828,10 @@ public class Geocache implements INamedGeoCoordinate {
      * Detect cache artefacts (waypoints+variables) in the given text and add them to user-defined waypoints
      * or updates existing ones with meta information.
      *
-     * @param text            text which might contain coordinates
-     * @param updateDb        if true the added waypoints are stored in DB right away
-     * @param namePrefix      prefix for default waypoint names (if names cannot be extracted from text)
-     * @param forceExtraction if extraction should be enforced, regardless of cache setting
+     * @param text                 text which might contain coordinates
+     * @param updateDb             if true the added waypoints are stored in DB right away
+     * @param namePrefix           prefix for default waypoint names (if names cannot be extracted from text)
+     * @param forceExtraction      if extraction should be enforced, regardless of cache setting
      * @param previousAllUserNotes if given, then a parse of previous notes is used to help in deciding which values potentially to overwrite
      */
     public boolean addCacheArtefactsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction, @Nullable final String previousAllUserNotes) {
@@ -2081,11 +2084,11 @@ public class Geocache implements INamedGeoCoordinate {
     /**
      * Download and store a cache synchronous
      *
-     * @param origCache the cache which should be refreshed, can be null
-     * @param geocode the geocode of the cache which should be downloaded
-     * @param lists to which lists the cache should be added
+     * @param origCache       the cache which should be refreshed, can be null
+     * @param geocode         the geocode of the cache which should be downloaded
+     * @param lists           to which lists the cache should be added
      * @param forceRedownload whether the cache should be re-downloaded, even if it's already stored offline
-     * @param handler a handler to receive status updates, can be null
+     * @param handler         a handler to receive status updates, can be null
      * @return true, if the cache was stored successfully
      */
     @WorkerThread
