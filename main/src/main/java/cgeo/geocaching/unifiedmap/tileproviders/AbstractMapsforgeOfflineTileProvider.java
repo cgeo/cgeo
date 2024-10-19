@@ -32,6 +32,7 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
         super(name, uri, zoomMin, zoomMax, new Pair<>("", false));
         supportsThemes = true;
         supportsThemeOptions = true; // rule of thumb, not all themes support options
+        supportsHillshading = true;
     }
 
     @Override
