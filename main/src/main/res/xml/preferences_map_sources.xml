@@ -113,11 +113,12 @@
             android:summary="@string/settings_hide_tileproviders_summary"
             android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
-        <CheckBoxPreference
-            android:key="@string/pref_useMapsforgeInUnifiedMap"
-            android:title="@string/settings_useMapsforgeInUnifiedMap_title"
-            android:summary="@string/settings_useMapsforgeInUnifiedMap_summary"
-            android:defaultValue="false"
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/settings_unifiedMapVariants_title"
+            android:key="@string/pref_unifiedMapVariants"
+            android:summary="%s"
+            android:title="@string/settings_unifiedMapVariants_title"
             android:dependency="@string/pref_useUnifiedMap"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.TextPreference

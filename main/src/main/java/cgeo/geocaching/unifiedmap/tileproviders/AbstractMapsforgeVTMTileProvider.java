@@ -19,7 +19,7 @@ public abstract class AbstractMapsforgeVTMTileProvider extends AbstractTileProvi
 
     public AbstractMapsforgeVTMTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         super(zoomMin, zoomMax, mapAttribution);
-        this.tileProviderName = name;
+        this.tileProviderName = name + (Settings.showMapsforgeInUnifiedMap() ? " (VTM)" : "");
         this.mapUri = uri;
     }
 

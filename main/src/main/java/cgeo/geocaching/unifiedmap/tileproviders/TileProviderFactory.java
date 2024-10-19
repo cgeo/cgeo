@@ -78,6 +78,10 @@ public class TileProviderFactory {
         }
         tileProviders.clear();
 
+        // --------------------------------------------------------------------
+        // online-based map providers
+        // --------------------------------------------------------------------
+
         // Google Map based tile providers
         if (isGoogleMapsInstalled()) {
             registerTileProvider(new GoogleMapSource());
@@ -85,43 +89,55 @@ public class TileProviderFactory {
             registerTileProvider(new GoogleTerrainSource());
         }
 
-        // OSM online tile providers (VTM)
-        registerTileProvider(new OsmOrgVTMSource());
-        registerTileProvider(new OsmDeVTMSource());
-        registerTileProvider(new CyclosmVTMSource());
-        registerTileProvider(new OpenTopoMapVTMSource());
+        // OSM online tile providers (Mapsforge)
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            registerTileProvider(new OsmOrgSource());
+            registerTileProvider(new OsmDeSource());
+            registerTileProvider(new CyclosmSource());
+            registerTileProvider(new OpenTopoMapSource());
+        }
 
-        // OSM offline tile providers (VTM)
+        // OSM online tile providers (VTM)
+        if (Settings.showVTMInUnifiedMap()) {
+            registerTileProvider(new OsmOrgVTMSource());
+            registerTileProvider(new OsmDeVTMSource());
+            registerTileProvider(new CyclosmVTMSource());
+            registerTileProvider(new OpenTopoMapVTMSource());
+        }
+
+        // --------------------------------------------------------------------
+        // offline-based map providers (Mapsforge first, VTM second (if enabled))
+        // --------------------------------------------------------------------
+
+        // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
                         .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
-        if (offlineMaps.size() > 1) {
-            registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
-        }
-        if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
-            registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
-        }
-        for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
-        }
 
-        // --------------------------------------------------------------------
-        // test: show Mapsforge-backed tile providers below the others
-        // --------------------------------------------------------------------
-        if (Settings.useMapsforgeInUnifiedMap()) {
-            // OSM online tile providers
-            registerTileProvider(new OsmOrgSource());
-            registerTileProvider(new OsmDeSource());
-            registerTileProvider(new CyclosmSource());
-            registerTileProvider(new OpenTopoMapSource());
-
-            // @todo: combined, user-defined
-
-            // OSM offline tile providers
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            if (offlineMaps.size() > 1) {
+                // registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
+            }
+            if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
+                // registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
+            }
             for (ImmutablePair<String, Uri> data : offlineMaps) {
-                registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left + " (MF)", data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+                registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+            }
+        }
+
+        if (Settings.showVTMInUnifiedMap()) {
+            // OSM offline tile providers (VTM)
+            if (offlineMaps.size() > 1) {
+                registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
+            }
+            if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
+                registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
+            }
+            for (ImmutablePair<String, Uri> data : offlineMaps) {
+                registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
             }
         }
         // --------------------------------------------------------------------
