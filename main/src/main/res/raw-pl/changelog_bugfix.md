@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
 - Naprawiono: Niepoprawny wykres wysokości dla ścieżek z wieloma segmentami
 - Naprawiono: Mapa stale przeładowuje skrytki w trybie offline (UnifiedMap)
