@@ -463,7 +463,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 lastSavedState = logEntry;
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
                     try (ContextLogger ccLog = new ContextLogger("LogCacheActivity.saveLog.doInBackground(gc=%s)", cache.getGeocode())) {
-                        cache.logOffline(LogCacheActivity.this, logEntry);
+                        cache.storeLogOffline(LogCacheActivity.this, logEntry);
                         ccLog.add("log=%s", logEntry.log);
                         imageListFragment.adjustImagePersistentState();
                         inventoryAdapter.saveActions();
@@ -870,7 +870,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
 
         @Override
         protected void undoCommand() {
-            cache.logOffline(getContext(), previousState);
+            cache.storeLogOffline(getContext(), previousState);
         }
 
         @Override
