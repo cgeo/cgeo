@@ -1,5 +1,5 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Correcció: falten hores de trobades a la baixada de catxés (canvi del lloc web)
 
 ##
 - Nou: Mostra l'avís per al connector gc activat sense credencials
