@@ -379,20 +379,24 @@ public final class GCParser {
         // cache short description
         final StringBuilder sDesc = new StringBuilder();
         if (cache.isEventCache()) {
-            // add event start / end info to beginning of listing
-            final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
-            if (eventTimesMatcher.find()) {
-                sDesc.append("<b>")
-                        .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
-                        .append(", ")
-                        .append(Integer.parseInt(eventTimesMatcher.group(1)) + (eventTimesMatcher.group(3).equals(" PM") ? 12 : 0))
-                        .append(":")
-                        .append(eventTimesMatcher.group(2))
-                        .append(" - ")
-                        .append(Integer.parseInt(eventTimesMatcher.group(4)) + (eventTimesMatcher.group(6).equals(" PM") ? 12 : 0))
-                        .append(":")
-                        .append(eventTimesMatcher.group(5))
-                        .append("</b>");
+            try {
+                // add event start / end info to beginning of listing
+                final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
+                if (eventTimesMatcher.find()) {
+                    sDesc.append("<b>")
+                            .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
+                            .append(", ")
+                            .append(Integer.parseInt(eventTimesMatcher.group(2)) + (null != eventTimesMatcher.group(1) && eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(4) && eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0))
+                            .append(":")
+                            .append(eventTimesMatcher.group(3))
+                            .append(" - ")
+                            .append(Integer.parseInt(eventTimesMatcher.group(6)) + (null != eventTimesMatcher.group(5) && eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(8) && eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0))
+                            .append(":")
+                            .append(eventTimesMatcher.group(7))
+                            .append("</b>");
+                }
+            } catch (Exception e) {
+                Log.w("GCParser.parseCache: Failed to parse event time", e);
             }
         }
         sDesc.append(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
