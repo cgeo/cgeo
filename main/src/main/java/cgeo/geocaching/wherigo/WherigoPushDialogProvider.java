@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -70,7 +71,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity) {
+    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
@@ -85,7 +86,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                 TextParam.text(button2).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
             item -> {
                 if (FALSE.equals(item)) {
-                    WherigoDialogManager.get().clear();
+                    WherigoDialogManager.dismissDialog(dialog);
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button2");
                     }
@@ -93,7 +94,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                     this.page ++;
                     refreshGui();
                 } else {
-                    WherigoDialogManager.get().clear();
+                    WherigoDialogManager.dismissDialog(dialog);
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button1");
                     }

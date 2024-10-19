@@ -1041,7 +1041,7 @@
     <string name="menu_elevation_info">Elevation (map):</string>
     <string name="elevation_selected">Elevation (map) at selected position</string>
     <string name="elevation_difference">Elevation difference</string>
-    <string name="distance">Distance:</string>
+    <string name="distance">Distance</string>
     <string name="copy_coordinates">Copy coordinates</string>
     <string name="selected_position">Selected position</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
@@ -2946,7 +2946,7 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: deleting leftover file</string>
     <string name="wherigo_download_progress_login">Logging in…</string>
     <string name="wherigo_download_progress_started">Download started</string>
-    <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %)</string>
+    <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
 
     <string name="wherigo_error_title">Wherigo Error</string>
     <string name="wherigo_error_game_noerror">No error reported by game</string>
@@ -2984,6 +2984,8 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>

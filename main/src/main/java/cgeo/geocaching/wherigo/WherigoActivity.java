@@ -2,6 +2,7 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.databinding.WherigoActivityBinding;
@@ -107,14 +108,16 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 return;
             }
             if (things.size() == 1) {
-                WherigoDialogManager.get().display(new WherigoThingDialogProvider(things.get(0)));
+                WherigoDialogManager.displayDirect(this, new WherigoThingDialogProvider(things.get(0)));
             } else {
-                WherigoDialogManager.get().display(new WherigoThingListDialogProvider(type));
+                WherigoDialogManager.displayDirect(this, new WherigoThingListDialogProvider(type));
             }
         });
 
         refreshGui();
+
         binding.viewCartridges.setOnClickListener(v -> startGame());
+        binding.resumeDialog.setOnClickListener(v -> WherigoDialogManager.get().unpause());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
@@ -172,7 +175,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         SimpleDialog.of(this)
             .setTitle(TextParam.id(R.string.wherigo_choose_cartridge))
             .selectSingle(model, cartridgeInfo -> {
-                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cartridgeInfo));
+                WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo));
             });
     }
 
@@ -247,10 +250,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private void handleDownloadResult(final String cguid, final StatusResult result) {
         final WherigoCartridgeInfo cartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (result.isOk() && cartridgeInfo != null) {
-            SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_successful_title))
-                .setMessage(TextParam.id(R.string.wherigo_download_successful_message, cguid))
-                .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
-                .confirm(() -> WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cartridgeInfo)));
+            ActivityMixin.showToast(this, R.string.wherigo_download_successful_title);
+            WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo));
         } else {
             SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_failed_title))
                 .setMessage(TextParam.id(R.string.wherigo_download_failed_message, cguid, String.valueOf(result)))
@@ -271,11 +272,15 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.revokeFixedLocation.setVisibility(game.isDebugModeForCartridge() && WherigoLocationProvider.get().hasFixedLocation() ? View.VISIBLE : View.GONE);
 
         binding.viewCartridges.setEnabled(true);
+        binding.download.setEnabled(true);
+        binding.reportProblem.setEnabled(true);
+
+        binding.resumeDialog.setVisibility(WherigoDialogManager.get().isPaused() ? View.VISIBLE : View.GONE);
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo().getLoadableSavegames().size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
-        binding.reportProblem.setEnabled(game.isPlaying());
-        binding.map.setEnabled(game.isPlaying() && !game.getZones().isEmpty());
+        binding.cartridgeDetails.setEnabled(game.isPlaying());
+        binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 

@@ -55,8 +55,6 @@ public class SimpleDialog {
 
     private Runnable neutralAction;
 
-    private Runnable dismissAction;
-
     private AlertDialog alertDialog;
 
     /** Define common button text sets */
@@ -299,12 +297,6 @@ public class SimpleDialog {
         return this;
     }
 
-    /** Sets an action to execute when neutral button is clicked */
-    public SimpleDialog setDismissAction(final Runnable dismissAction) {
-        this.dismissAction = dismissAction;
-        return this;
-    }
-
     private SimpleDialog(final Context context) {
         this.context = context;
     }
@@ -355,10 +347,6 @@ public class SimpleDialog {
             this.message.applyTo(binding.dialogMessage);
         } else {
             binding.dialogMessage.setVisibility(View.GONE);
-        }
-
-        if (this.dismissAction != null) {
-            dialog.setOnDismissListener(d -> this.dismissAction.run());
         }
 
         return new Pair<>(dialog, binding);
@@ -442,15 +430,15 @@ public class SimpleDialog {
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
                     if (positive != null) {
-                        dialog.dismiss();
                         positive.run();
+                        dialog.dismiss();
                         return true;
                     }
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     if (negative != null) {
-                        dialog.dismiss();
                         negative.run();
+                        dialog.dismiss();
                         return true;
                     }
                     break;
@@ -556,8 +544,8 @@ public class SimpleDialog {
                 case DialogInterface.BUTTON_POSITIVE:
                     if (selectionListener != null) {
                         //default action on OK button is to close and pass selection to listener
-                        dialog.dismiss();
                         selectionListener.accept(model.getSelectedItems());
+                        dialog.dismiss();
                         handled = true;
                     }
                     break;
@@ -586,10 +574,10 @@ public class SimpleDialog {
             }
             if (!selectionConfirmedViaButton  && ct == SimpleItemListModel.ChangeType.SELECTION) {
                 //special handling of "single immediate select" (on click)
-                dialog.dismiss();
                 if (selectionListener != null) {
                     selectionListener.accept(model.getSelectedItems());
                 }
+                dialog.dismiss();
             }
         });
         adjustButtonEnablement(model, dialog);
@@ -668,8 +656,8 @@ public class SimpleDialog {
             if (which == DialogInterface.BUTTON_POSITIVE && okayListener != null) {
                 // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
                 final String realText = textField.getText().toString().trim();
-                dialog.dismiss();
                 okayListener.accept(realText);
+                dialog.dismiss();
                 return true;
             }
             return false;

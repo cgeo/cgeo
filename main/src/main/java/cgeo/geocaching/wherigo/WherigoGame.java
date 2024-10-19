@@ -60,7 +60,7 @@ public class WherigoGame implements UI {
     );
 
     public enum NotifyType {
-        REFRESH, START, END, LOCATION
+        REFRESH, START, END, LOCATION, DIALOG_OPEN, DIALOG_CLOSE
     }
 
     //filled on new/loadGame

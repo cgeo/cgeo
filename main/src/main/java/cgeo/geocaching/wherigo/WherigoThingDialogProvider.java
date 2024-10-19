@@ -17,6 +17,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.EventTable;
@@ -30,6 +31,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     private WherigoThingDetailsBinding binding;
 
     private WeakReference<Activity> weakActivity;
+    private WeakReference<Dialog> weakDialog;
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -53,13 +55,14 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity) {
+    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
         dialog.setTitle(eventTable.name);
         dialog.setView(binding.getRoot());
         weakActivity = new WeakReference<>(activity);
+        weakDialog = new WeakReference<>(dialog);
 
         refreshGui();
 
@@ -114,23 +117,27 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                     final ThingAction thingAction = (ThingAction) item;
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
-                            WherigoDialogManager.get().clear();
+                            closeDialog();
                             final Activity activity = weakActivity.get();
                             if (activity != null) {
                                 DefaultMap.startActivityViewport(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)));
                             }
                             break;
                         case LOCATE_ON_CENTER:
-                            WherigoDialogManager.get().clear();
+                            closeDialog();
                             final Geopoint center = WherigoUtils.getZoneCenter((Zone) eventTable);
                             WherigoLocationProvider.get().setFixedLocation(center);
                             break;
                         case CLOSE:
                         default:
-                            WherigoDialogManager.get().clear();
+                            closeDialog();
                     }
                 }
         );
+    }
+
+    private void closeDialog() {
+        WherigoDialogManager.dismissDialog(weakDialog == null ? null : weakDialog.get());
     }
 
 }
