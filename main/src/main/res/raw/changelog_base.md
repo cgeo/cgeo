@@ -1,5 +1,5 @@
 New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
-(You may want to [configure a quick launch item](cgeo-setting://pref_quicklaunchitems) or [customize bottom navigation](cgeo-setting://pref_custombnitem) for easier access, need to enable extended settings first.)
+(You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
 
 ### Map
 - New: Store map theme per tile provider (UnifiedMap)
