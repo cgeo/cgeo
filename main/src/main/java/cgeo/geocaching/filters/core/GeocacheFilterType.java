@@ -25,6 +25,7 @@ public enum GeocacheFilterType {
     STATUS("status", R.string.cache_filter_status, R.string.cache_filtergroup_basic, StatusGeocacheFilter::new),
     INDIVIDUAL_ROUTE("individualroute", R.string.cache_filter_individualroute, R.string.cache_filtergroup_userspecific, IndividualRouteGeocacheFilter::new),
     ATTRIBUTES("attributes", R.string.cache_filter_attributes, R.string.cache_filtergroup_details, AttributesGeocacheFilter::new),
+    INVENTORY_COUNT("inventory", R.string.cache_filter_inventory_count, R.string.cache_filtergroup_details, InventoryCountFilter::new),
     OFFLINE_LOG("offlinelog", R.string.cache_filter_offlinelog, R.string.cache_filtergroup_userspecific, OfflineLogGeocacheFilter::new),
     FAVORITES("favorites", R.string.cache_filter_favorites, R.string.cache_filtergroup_details, FavoritesGeocacheFilter::new),
     DISTANCE("distance", R.string.cache_filter_distance, R.string.cache_filtergroup_userspecific, DistanceGeocacheFilter::new),
