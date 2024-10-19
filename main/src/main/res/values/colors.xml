@@ -21,7 +21,6 @@
 
     <color name="osm_zoomcontrol">#FF666666</color>
     <color name="osm_zoomcontrolbackground">#D9FFFFFF</color>
-    <color name="osm_zoomcontroldivider">#C0666666</color>
 
     <!-- default colors for map lines -->
 
