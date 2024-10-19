@@ -112,6 +112,10 @@ public class Settings {
     public static final int CUSTOMBNITEM_NONE = -1;
     public static final int CUSTOMBNITEM_NEARBY = 0;
 
+    public static final int UNIFIEDMAP_VARIANT_MAPSFORGE = 1;
+    public static final int UNIFIEDMAP_VARIANT_VTM = 2;
+    public static final int UNIFIEDMAP_VARIANT_BOTH = 3;
+
     public static final int HOURS_TO_SECONDS = 60 * 60;
     public static final int DAYS_TO_SECONDS = 24 * HOURS_TO_SECONDS;
 
@@ -1264,9 +1268,23 @@ public class Settings {
         return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
     }
 
-    /** use Mapsforge as additional map view for UnifiedMap */
+    /** use Mapsforge as map view for UnifiedMap */
+    public static boolean showMapsforgeInUnifiedMap() {
+        return (getUnifiedMapVariant() & UNIFIEDMAP_VARIANT_MAPSFORGE) > 0;
+    }
+
+    /** use VTM as map view for UnifiedMap */
     public static boolean showVTMInUnifiedMap() {
-        return getBoolean(R.string.pref_showVTMInUnifiedMap, false);
+        return (getUnifiedMapVariant() & UNIFIEDMAP_VARIANT_VTM) > 0;
+    }
+
+    /** which variants are enabled for UnifiedMap */
+    private static int getUnifiedMapVariant() {
+        try {
+            return Integer.parseInt(getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
+        } catch (NumberFormatException ignore) {
+            return UNIFIEDMAP_VARIANT_MAPSFORGE;
+        }
     }
 
     public static void setMapDownloaderSource(final int source) {

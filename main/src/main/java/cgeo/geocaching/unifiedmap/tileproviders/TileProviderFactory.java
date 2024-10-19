@@ -90,10 +90,12 @@ public class TileProviderFactory {
         }
 
         // OSM online tile providers (Mapsforge)
-        registerTileProvider(new OsmOrgSource());
-        registerTileProvider(new OsmDeSource());
-        registerTileProvider(new CyclosmSource());
-        registerTileProvider(new OpenTopoMapSource());
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            registerTileProvider(new OsmOrgSource());
+            registerTileProvider(new OsmDeSource());
+            registerTileProvider(new CyclosmSource());
+            registerTileProvider(new OpenTopoMapSource());
+        }
 
         // OSM online tile providers (VTM)
         if (Settings.showVTMInUnifiedMap()) {
@@ -114,14 +116,16 @@ public class TileProviderFactory {
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
 
-        if (offlineMaps.size() > 1) {
-            // registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
-        }
-        if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
-            // registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
-        }
-        for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+        if (Settings.showMapsforgeInUnifiedMap()) {
+            if (offlineMaps.size() > 1) {
+                // registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
+            }
+            if (UserDefinedMapsforgeVTMOnlineSource.isConfigured()) {
+                // registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
+            }
+            for (ImmutablePair<String, Uri> data : offlineMaps) {
+                registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+            }
         }
 
         if (Settings.showVTMInUnifiedMap()) {
@@ -133,7 +137,7 @@ public class TileProviderFactory {
                 registerTileProvider(new UserDefinedMapsforgeVTMOnlineSource());
             }
             for (ImmutablePair<String, Uri> data : offlineMaps) {
-                registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left + " (VTM)", data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
+                registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
             }
         }
         // --------------------------------------------------------------------
