@@ -18,6 +18,7 @@ import android.view.View;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
 
@@ -49,7 +50,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity) {
+    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
         binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
         final AlertDialog dialog = builder.create();
@@ -68,7 +69,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             "- **Save Games** " + saveGames.size() + " (" + saveGames + ")\n" +
             "- **C:** " + cartridgeFile.code + "\n" +
             "- **Url:** " + cartridgeFile.url + "\n").setMarkdown(true).applyTo(binding.debugInfo);
-            binding.debugInfo.setVisibility(WherigoGame.get().isDebugMode() ? View.VISIBLE : View.GONE);
+            binding.debugBox.setVisibility(WherigoGame.get().isDebugMode() ? View.VISIBLE : View.GONE);
 
         byte[] mediaData = cartridgeInfo.getSplashData();
         if (mediaData == null) {
@@ -79,7 +80,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         refreshGui();
 
         WherigoUtils.setViewActions(Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, CartridgeAction::getTextParam, item -> {
-            WherigoDialogManager.get().clear();
+            WherigoDialogManager.dismissDialog(dialog);
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
@@ -95,7 +96,8 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     private void refreshGui() {
-        TextParam.text("**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
+        TextParam.text("**CGUID:** " + cartridgeInfo.getCGuid() + "  \n" +
+            "**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
             "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +
             "**" + LocalizationUtils.getString(R.string.distance) + ":** " + WherigoUtils.getDisplayableDistance(WherigoLocationProvider.get().getLocation(), cartridgeInfo.getCartridgeLocation())
             ).setMarkdown(true).applyTo(binding.headerInformation);

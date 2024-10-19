@@ -58,6 +58,7 @@ public final class WherigoUtils {
 
     public static final TextParam TP_OK_BUTTON = TextParam.id(R.string.ok).setImage(ImageParam.id(R.drawable.ic_menu_done));
     public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.ic_menu_done));
+    public static final TextParam TP_PAUSE_BUTTON = TextParam.id(R.string.pause).setImage(ImageParam.id(R.drawable.ic_menu_done));
 
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(

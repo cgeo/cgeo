@@ -54,7 +54,14 @@ public final class LocalizationUtils {
             }
             return params != null && params.length > 0 ? APPLICATION_CONTEXT.getString(resId, params) : APPLICATION_CONTEXT.getString(resId);
         } catch (IllegalFormatException | Resources.NotFoundException e) {
-            Log.w("Problem trying to format '" + resId + "/" + fallback + "' with [" + StringUtils.join(params, ";") + "]", e);
+            String resStringWoFormat = null;
+            try {
+                resStringWoFormat = APPLICATION_CONTEXT == null ? null : APPLICATION_CONTEXT.getString(resId);
+            } catch (Exception ex) {
+                //ignore, this is for logging only!
+            }
+
+            Log.w("Problem trying to format '" + resId + "/'" + resStringWoFormat + "'/" + fallback + "' with [" + StringUtils.join(params, ";") + "] (appContext valid: " + (APPLICATION_CONTEXT != null) + ")", e);
             return (fallback == null ? "" : fallback) + ":" + StringUtils.join(params, ";");
         }
     }

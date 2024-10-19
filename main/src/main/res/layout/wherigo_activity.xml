@@ -37,23 +37,19 @@
         <!--  buttons -->
         <LinearLayout
             android:id="@+id/action_buttons"
-            android:visibility="visible"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/view_cartridges"
-                style="@style/button_icon"
-                android:layout_gravity="left"
+                style="@style/button_icon_accent"
                 android:tooltipText="@string/wherigo_controls_cartridgelist_hint"
                 app:icon="@drawable/ic_menu_select_play" />
 
             <Button
                 android:id="@+id/download"
-                style="@style/button_icon"
-                android:layout_gravity="left"
+                style="@style/button_icon_accent"
                 android:tooltipText="@string/wherigo_controls_downloadcartridge_hint"
                 app:icon="@drawable/wherigo_download" />
 
@@ -61,47 +57,8 @@
                 style="@style/separator_vertical" />
 
             <Button
-                android:id="@+id/save_game"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_controls_savegame_hint"
-                app:icon="@drawable/wherigo_save" />
-
-            <Button
-                android:id="@+id/load_game"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_controls_loadgame_hint"
-                app:icon="@drawable/wherigo_load" />
-
-            <Button
-                android:id="@+id/stop_game"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_controls_stopgame_hint"
-                app:icon="@drawable/wherigo_close" />
-
-            <Button
-                android:id="@+id/cartridge_details"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_cartridge_details"
-                app:icon="@drawable/settings_info" />
-
-            <Button
-                android:id="@+id/map"
-                style="@style/button_icon"
-                android:layout_gravity="left"
-                android:tooltipText="@string/wherigo_controls_mapzones_hint"
-                app:icon="@drawable/ic_menu_mapmode" />
-
-            <View
-                style="@style/separator_vertical" />
-
-            <Button
                 android:id="@+id/report_problem"
-                style="@style/button_icon"
-                android:layout_gravity="left"
+                style="@style/button_icon_accent"
                 android:tooltipText="@string/wherigo_controls_reportproblem_hint"
                 app:icon="@drawable/ic_menu_bug_report" />
 
@@ -120,6 +77,54 @@
                     style="@style/separator_horizontal_heading_text"
                     android:text="@string/wherigo_currently_playing" />
             </RelativeLayout>
+
+            <!--  game buttons -->
+            <LinearLayout
+                android:id="@+id/gmae_action_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/resume_dialog"
+                    style="@style/button"
+                    android:layout_margin="3dp"
+                    android:minWidth="2dp"
+                    android:text="@string/resume"
+                    app:icon="@drawable/ic_menu_owned" />
+
+                <Button
+                    android:id="@+id/load_game"
+                    style="@style/button_icon_accent"
+                    android:tooltipText="@string/wherigo_controls_loadgame_hint"
+                    app:icon="@drawable/wherigo_load" />
+
+                <Button
+                    android:id="@+id/save_game"
+                    style="@style/button_icon_accent"
+                    android:tooltipText="@string/wherigo_controls_savegame_hint"
+                    app:icon="@drawable/wherigo_save" />
+
+                <Button
+                    android:id="@+id/stop_game"
+                    style="@style/button_icon_accent"
+                    android:tooltipText="@string/wherigo_controls_stopgame_hint"
+                    app:icon="@drawable/wherigo_close" />
+
+                <Button
+                    android:id="@+id/cartridge_details"
+                    style="@style/button_icon_accent"
+                    android:tooltipText="@string/wherigo_cartridge_details"
+                    app:icon="@drawable/settings_info" />
+
+                <Button
+                    android:id="@+id/map"
+                    style="@style/button_icon_accent"
+                    android:tooltipText="@string/wherigo_controls_mapzones_hint"
+                    app:icon="@drawable/ic_menu_mapmode" />
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/game_location"

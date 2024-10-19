@@ -11,6 +11,7 @@ import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -26,7 +27,7 @@ public class WherigoThingListDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity) {
+    public Dialog createAndShowDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
 
         final SimpleDialog dialog = SimpleDialog.of(activity)
             .setTitle(TextParam.text(thingType.toUserDisplayableString()));
@@ -49,7 +50,7 @@ public class WherigoThingListDialogProvider implements IWherigoDialogProvider {
                 if (item.hasEvent("OnClick")) {
                     Engine.callEvent(item, "OnClick", null);
                 } else {
-                    WherigoDialogManager.get().display(new WherigoThingDialogProvider(item));
+                    WherigoDialogManager.displayDirect(activity, new WherigoThingDialogProvider(item));
                 }
             });
 
