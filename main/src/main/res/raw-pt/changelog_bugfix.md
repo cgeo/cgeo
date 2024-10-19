@@ -1,6 +1,8 @@
 ##
 - Novo: Mostrar aviso para activação de ligação gc sem credenciais
 - Correcção: Carta de elevação errada para percursos com vários segmentos
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Some crashes in Mapsforge map
 
 ##
 - Correcção: Ausência de parametrização para fornecedor de blocos definido pelo utilizador
