@@ -40,27 +40,25 @@ public class FilterUtils {
 
     public static <T extends Activity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
         final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
+        final boolean isFilterActive = filterContext.get().isFiltering();
 
-        if (filters.isEmpty()) {
+        if (filters.isEmpty() && !isFilterActive) {
             return false;
         } else {
-            final boolean isFilterActive = filterContext.get().isFiltering();
             final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
                 .setItems(filters)
                 .setDisplayMapper((f) -> TextParam.text(f.getName()));
 
-            if (isFilterActive) {
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
-                    .setNeutralButton(TextParam.id(R.string.cache_filter_storage_clear_button))
-                    .setNeutralAction(() ->
-                            filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+            SimpleDialog.of(filteredActivity).setTitle(filters.isEmpty() ? R.string.cache_filter_storage_clear_title : R.string.cache_filter_storage_select_clear_title)
+                    .setNeutralButton(isFilterActive ? TextParam.id(R.string.cache_filter_storage_clear_button) : null)
+                    .setNeutralAction(() -> {
+                                if (isFilterActive) {
+                                    filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()));
+                                }
+                            }
                     ).selectSingle(model, filteredActivity::refreshWithFilter);
-            } else {
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                        .selectSingle(model, filteredActivity::refreshWithFilter);
-            }
         }
         return true;
     }
