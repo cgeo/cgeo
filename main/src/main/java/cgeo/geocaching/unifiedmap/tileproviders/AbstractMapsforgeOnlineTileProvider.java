@@ -33,11 +33,11 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
             @Override
             public URL getTileUrl(final Tile tile) throws MalformedURLException {
                 // tilePath: "/cyclosm/{Z}/{X}/{Y}.png"
-                final String path = tilePath
+                final String path = AbstractMapsforgeOnlineTileProvider.this.tilePath
                         .replace("{Z}", String.valueOf(tile.zoomLevel))
                         .replace("{X}", String.valueOf(tile.tileX))
                         .replace("{Y}", String.valueOf(tile.tileY));
-                return new URL("https", getHostName(), this.port, path);
+                return new URL(AbstractMapsforgeOnlineTileProvider.this.mapUri + path);
             }
 
             @Override
