@@ -108,9 +108,13 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
                     .setMessage(TextParam.id(R.string.wherigo_confirm_delete_cartridge_message, WherigoGame.get().getCartridgeName(), "" + saveGames.size()))
                     .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                     .confirm(() -> {
-                        ContentStorage.get().delete(cartridgeInfo.getFileInfo().uri);
+                        if (cartridgeInfo.getFileInfo() != null && cartridgeInfo.getFileInfo().uri != null) {
+                            ContentStorage.get().delete(cartridgeInfo.getFileInfo().uri);
+                        }
                         for (WherigoSavegameInfo savegame : saveGames) {
-                            ContentStorage.get().delete(savegame.fileInfo.uri);
+                            if (savegame.fileInfo != null && savegame.fileInfo.uri != null) {
+                                ContentStorage.get().delete(savegame.fileInfo.uri);
+                            }
                         }
                     });
         } else {
