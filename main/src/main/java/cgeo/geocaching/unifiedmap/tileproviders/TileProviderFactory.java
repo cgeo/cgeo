@@ -127,7 +127,7 @@ public class TileProviderFactory {
         // OSM offline tile providers (Mapsforge)
         if (Settings.showMapsforgeInUnifiedMap()) {
             if (offlineMaps.size() > 1) {
-                // registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+                registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
             }
             for (ImmutablePair<String, Uri> data : offlineMaps) {
                 registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
