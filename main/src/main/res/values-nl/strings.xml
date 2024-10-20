@@ -779,6 +779,7 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -920,7 +921,7 @@
     <string name="menu_elevation_info">Hoogte (kaart):</string>
     <string name="elevation_selected">Hoogte (kaart) op de geselecteerde positie</string>
     <string name="elevation_difference">Hoogte verschil</string>
-    <string name="distance">Afstand:</string>
+    <string name="distance">Afstand</string>
     <string name="copy_coordinates">Coördinaten kopiëren</string>
     <string name="selected_position">Geselecteerde positie</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
@@ -2644,6 +2645,8 @@
     <string name="close">Sluiten</string>
     <string name="delete">Verwijderen</string>
     <string name="play">Spelen</string>
+    <string name="pause">Pauzeren</string>
+    <string name="resume">Hervatten</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
