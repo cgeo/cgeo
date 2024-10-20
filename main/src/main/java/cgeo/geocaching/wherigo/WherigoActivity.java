@@ -102,17 +102,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         setThemeAndContentView(binding);
 
         binding.wherigoThingTypeList.setModel(wherigoThingTypeModel);
-        wherigoThingTypeModel.addSingleSelectListener(type -> {
-            final List<EventTable> things = type.getThingsForUserDisplay();
-            if (things.isEmpty()) {
-                return;
-            }
-            if (things.size() == 1) {
-                WherigoDialogManager.displayDirect(this, new WherigoThingDialogProvider(things.get(0)));
-            } else {
-                WherigoDialogManager.displayDirect(this, new WherigoThingListDialogProvider(type));
-            }
-        });
+        wherigoThingTypeModel.addSingleSelectListener(type -> WherigoUtils.chooseAndDisplayThing(this, type));
 
         refreshGui();
 
@@ -121,9 +111,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
-        binding.reportProblem.setOnClickListener(v -> {
-            WherigoDialogManager.get().display(new WherigoErrorDialogProvider());
-        });
+        binding.reportProblem.setOnClickListener(v -> WherigoDialogManager.get().display(new WherigoErrorDialogProvider()));
 
         binding.map.setOnClickListener(v -> showOnMap());
 

@@ -51,10 +51,8 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
+        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, cartridgeFile.name);
         binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle(cartridgeFile.name);
         dialog.setView(binding.getRoot());
 
         final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getLoadableSavegames();

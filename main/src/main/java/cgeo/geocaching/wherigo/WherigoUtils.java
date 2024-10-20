@@ -2,6 +2,7 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Units;
@@ -17,13 +18,18 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.style.StyleSpan;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -51,6 +57,7 @@ import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import se.krka.kahlua.vm.LuaTable;
 
@@ -171,27 +178,27 @@ public final class WherigoUtils {
         }
 
         final StringBuilder msg = new StringBuilder(et.getClass().getSimpleName() + ": " + et.name + "\n");
-        msg.append("Description: " + et.description);
-        msg.append("\n- vis:" + et.isVisible());
-        msg.append("\n- Has Media: " + (et.media != null));
-        msg.append("\n- Located: " + et.isLocated() + " (" + WherigoUtils.GP_CONVERTER.from(et.position) + ")");
+        msg.append("Description: ").append(et.description);
+        msg.append("\n- vis:").append(et.isVisible());
+        msg.append("\n- Has Media: ").append(et.media != null);
+        msg.append("\n- Located: ").append(et.isLocated()).append(" (").append(WherigoUtils.GP_CONVERTER.from(et.position)).append(")");
 
         if (et instanceof Container) {
             final Container cnt = (Container) et;
-            msg.append("\n- visToPlayer:" + cnt.visibleToPlayer());
+            msg.append("\n- visToPlayer:").append(cnt.visibleToPlayer());
         }
 
         if (et instanceof Thing) {
             final List<Action> actions = WherigoUtils.getActions((Thing) et, true);
-            msg.append("\n- Actions (" + actions.size() + "):");
+            msg.append("\n- Actions (").append(actions.size()).append("):");
             for (Action act : actions) {
-                msg.append("\n  * " + act.name + "(" + WherigoUtils.getActionText(act) + ", univ=" + act.isUniversal() + ")");
+                msg.append("\n  * ").append(act.name).append("(").append(WherigoUtils.getActionText(act)).append(", univ=").append(act.isUniversal()).append(")");
             }
         }
         if (et instanceof Zone) {
             final Zone z = (Zone) et;
-                msg.append("\n- Zone center:" + WherigoGame.GP_CONVERTER.from(z.bbCenter));
-            msg.append(", dist:" + getDisplayableDistanceTo(z) + " (");
+            msg.append("\n- Zone center:").append(WherigoGame.GP_CONVERTER.from(z.bbCenter));
+            msg.append(", dist:").append(getDisplayableDistanceTo(z)).append(" (");
             switch (z.contain) {
                 case Zone.DISTANT:
                     msg.append("distant");
@@ -203,7 +210,7 @@ public final class WherigoUtils {
                     msg.append("inside");
                     break;
                 default:
-                    msg.append("unknown(" + z.contain + ")");
+                    msg.append("unknown(").append(z.contain).append(")");
             }
             msg.append(")");
         }
@@ -303,6 +310,65 @@ public final class WherigoUtils {
                 }
                 WherigoGame.get().stopGame();
             });
+    }
+
+    public static void chooseAndDisplayThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType) {
+        final List<EventTable> things = thingType.getThingsForUserDisplay();
+        if (things.isEmpty()) {
+            return;
+        }
+        if (things.size() == 1) {
+            displayThing(activity, things.get(0), false);
+            return;
+        }
+
+        final SimpleDialog.ItemSelectModel<EventTable> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(things)
+            .setDisplayMapper(item -> {
+                CharSequence name = WherigoGame.get().toDisplayText(item.name);
+                if (item instanceof Zone) {
+                    name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) item) + ")");
+                }
+                if (!isVisibleToPlayer(item)) {
+                    name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
+                }
+                return TextParam.text(name);
+            })
+            .setDisplayIconMapper(item -> {
+                final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
+                return iconDrawable == null ? ImageParam.id(thingType.getIconId()) : ImageParam.drawable(iconDrawable);
+            })
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+            .setItemPadding(10, 0);
+
+        SimpleDialog.of(activity)
+            .setTitle(TextParam.text(thingType.toUserDisplayableString()))
+            .selectSingle(model, item -> displayThing(activity, item, false));
+    }
+
+    public static void displayThing(@Nullable final Activity activity, @NonNull final EventTable thing, final boolean forceDisplay) {
+        if (!forceDisplay && thing.hasEvent("OnClick")) {
+            Log.iForce("Wherigo: discovered OnClick event on thing: " + thing);
+            //this logic was taken over from WhereYouGo. Assumption is that a click event handles triggering of display itself
+            Engine.callEvent(thing, "OnClick", null);
+        } else if (activity != null) {
+            WherigoDialogManager.displayDirect(activity, new WherigoThingDialogProvider(thing));
+        } else {
+            WherigoDialogManager.get().display(new WherigoThingDialogProvider(thing));
+        }
+    }
+
+    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final String title) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
+        final AlertDialog dialog = builder.create();
+        if (!StringUtils.isBlank(title)) {
+            final WherigoDialogTitleViewBinding titleBinding = WherigoDialogTitleViewBinding.inflate(LayoutInflater.from(activity));
+            titleBinding.dialogTitle.setText(title);
+            dialog.setCustomTitle(titleBinding.getRoot());
+        }
+        return dialog;
+
     }
 
     public static Comparator<EventTable> getThingsComparator() {
