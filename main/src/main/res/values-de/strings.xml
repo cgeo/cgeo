@@ -920,7 +920,6 @@
     <string name="menu_elevation_info">Höhe (Karte):</string>
     <string name="elevation_selected">Höhe (Karte) an ausgewählter Position</string>
     <string name="elevation_difference">Höhenunterschied</string>
-    <string name="distance">Entfernung:</string>
     <string name="copy_coordinates">Kopiere Koordinaten</string>
     <string name="selected_position">Ausgewählte Position</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
@@ -2608,7 +2607,6 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: Lösche übrige Datei</string>
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
-    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s%) heruntergeladen</string>
     <string name="wherigo_error_title">Wherigo-Fehler</string>
     <string name="wherigo_error_game_noerror">Kein Fehler vom Spiel gemeldet</string>
     <string name="wherigo_error_game_error">Fehler vom Spiel gemeldet: %1$s</string>
