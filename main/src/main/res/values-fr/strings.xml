@@ -912,7 +912,6 @@
     <string name="menu_elevation_info">Altitude (carte) :</string>
     <string name="elevation_selected">Altitude (carte) à la position sélectionnée</string>
     <string name="elevation_difference">Différence d\'altitude</string>
-    <string name="distance">Distance :</string>
     <string name="copy_coordinates">Copier les coordonnées</string>
     <string name="selected_position">Position sélectionnée</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
