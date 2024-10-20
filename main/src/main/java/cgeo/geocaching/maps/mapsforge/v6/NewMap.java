@@ -63,6 +63,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -138,7 +139,6 @@ import org.mapsforge.core.util.MercatorProjection;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
-import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.Layers;
@@ -293,12 +293,10 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         mapView.setBuiltInZoomControls(true);
 
         // style zoom controls
-        final MapZoomControls zoomControls = mapView.getMapZoomControls();
-        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
-        zoomControls.setZoomInResource(R.drawable.map_zoomin);
-        zoomControls.setZoomOutResource(R.drawable.map_zoomout);
-        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(13.0f), ViewUtils.dpToPixel(18.0f));
-        zoomControls.setAutoHide(false);
+        mapView.setBuiltInZoomControls(false);
+        findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomIn()));
+        findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomOut()));
+        ViewUtils.setVisibility(findViewById(R.id.container_followmylocation), View.GONE);
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
