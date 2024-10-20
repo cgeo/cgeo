@@ -1,4 +1,4 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na ekranie głównym.<br> (Możesz zechcieć [skonfigurować element szybkiego uruchamiania](cgeo-setting://quicklaunchitems_sorted) lub [dostosować dolną nawigację](cgeo-setting://custombnitem) dla łatwiejszego dostępu najpierw włącz rozszerzone ustawienia).
 
 ### Mapa
 - Nowość: Zapisuj motyw mapy osobno dla każdego dostawcy kafelków (UnifiedMap)
@@ -19,7 +19,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Naprawiono: Jeśli w notatce osobistej było wiele zdjęć to były dodawane do karty obrazów
 - Naprawiono: Obsługa projekcji w punktach nawigacji i notatkach osobistych
 - Nowość: Długie dotknięcie daty w logowaniu pobiera poprzednią datę dziennika
-- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- Naprawiono: Resetowanie skrytki do oryginalnych współrzędne nie usuwało flagi „zmienione współrzędne”
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
@@ -29,4 +29,4 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Naprawiono: Opcja „Otwórz w przeglądarce” nie działała dla wpisów przedmiotów podróżnych
 - Nowość: Opcja zarządzania pobranymi plikami (mapy, motywy, routing i dane cieniowania)
 - Nowość: Opcja usuwania skrytki ze wszystkich list (= oznacz jako do usunięcia)
-- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- Naprawiono: Resetowanie współrzędnych nie było wykrywane przez c:geo dla niezapisanych skrytek
