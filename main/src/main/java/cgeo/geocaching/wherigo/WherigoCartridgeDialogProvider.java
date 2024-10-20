@@ -2,10 +2,8 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoCartridgeDetailsBinding;
-import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.ImageParam;
-import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -131,22 +129,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
             return;
         }
 
-        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
-        model
-            .setItems(loadGameList)
-            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
-                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
-                itemBinding.name.setText(si.getUserDisplayableName());
-                itemBinding.description.setText(si.getUserDisplayableSaveDate());
-                itemBinding.icon.setImageResource(R.drawable.ic_menu_upload);
-            }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-
-        SimpleDialog.of(activity)
-                .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
-                .selectSingle(model, s -> {
-                    WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s.name);
-                });
+        WherigoUtils.loadGame(activity, this.cartridgeInfo);
     }
 
 }

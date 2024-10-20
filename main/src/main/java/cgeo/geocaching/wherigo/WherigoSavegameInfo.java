@@ -62,6 +62,14 @@ public class WherigoSavegameInfo {
         }
     }
 
+    public boolean isAutosave() {
+        return AUTOSAVE_NAME.equals(name);
+    }
+
+    public boolean isDeletableByUser() {
+        return saveDate != null && name != null && fileInfo != null && fileInfo.uri != null && !isAutosave();
+    }
+
     public String getUserDisplayableName() {
         if (StringUtils.isBlank(name)) {
             return LocalizationUtils.getString(R.string.wherigo_savegame_name_empty);

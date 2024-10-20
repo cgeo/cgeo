@@ -108,6 +108,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.viewCartridges.setOnClickListener(v -> startGame());
         binding.resumeDialog.setOnClickListener(v -> WherigoDialogManager.get().unpause());
+        binding.loadGame.setOnClickListener(v -> loadGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
@@ -167,6 +168,16 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             });
     }
 
+    private void loadGame() {
+        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
+        if (cartridgeInfo == null) {
+            return;
+        }
+        WherigoUtils.ensureNoGameRunning(this, () -> {
+            WherigoUtils.loadGame(this, cartridgeInfo);
+        });
+    }
+
     private void saveGame() {
         final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
         if (cartridgeInfo == null) {
@@ -184,6 +195,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 itemBinding.icon.setImageResource(R.drawable.ic_menu_save);
                 }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+        WherigoUtils.addDeleteOptions(this, model, cartridgeInfo::getSavegameSlots);
 
         SimpleDialog.of(this)
             .setTitle(TextParam.id(R.string.wherigo_choose_savegame_slot))

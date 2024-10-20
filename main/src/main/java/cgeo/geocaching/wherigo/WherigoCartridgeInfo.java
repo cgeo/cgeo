@@ -13,9 +13,7 @@ import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -75,27 +73,15 @@ public class WherigoCartridgeInfo {
     }
 
     public List<WherigoSavegameInfo> getSavegameSlots() {
-        final Set<Integer> existingSlots = new HashSet<>();
-        final int maxExistingSlot[] = new int[] {0};
+        final int[] maxExistingSlot = new int[] {0};
         final List<WherigoSavegameInfo> list = WherigoSaveFileHandler.getAvailableSaveFiles(fileInfo.parentFolder, fileInfo.name).stream()
                 .filter(si -> !WherigoSavegameInfo.AUTOSAVE_NAME.equals(si.name)) // remove autosave
                 .map(si -> {
-                    existingSlots.add(si.getNameAsNumber());
                     maxExistingSlot[0] = Math.max(maxExistingSlot[0], si.getNameAsNumber());
                     return si;
                 }).collect(Collectors.toCollection(ArrayList::new));
-        //ensure slots 1-5
-        boolean hasEmptySlot = false;
-        for (int i = 1; i < 5; i++) {
-            if (!existingSlots.contains(i)) {
-                hasEmptySlot = true;
-                list.add(new WherigoSavegameInfo(null, "" + i, null));
-            }
-        }
-        //ensure at least one empty slot
-        if (!hasEmptySlot) {
-            list.add(new WherigoSavegameInfo(null, "" + (maxExistingSlot[0] + 1), null));
-        }
+        //add one empty slot
+        list.add(new WherigoSavegameInfo(null, "" + (maxExistingSlot[0] + 1), null));
         list.sort(WherigoSavegameInfo.DEFAULT_COMPARATOR);
         return list;
     }
