@@ -72,9 +72,8 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
 
         refreshGui();

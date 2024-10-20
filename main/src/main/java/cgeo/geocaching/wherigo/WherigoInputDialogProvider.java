@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.EditUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -66,9 +67,9 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         final WherigoGame game = WherigoGame.get();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreenDialog);
+        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
+
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        final AlertDialog dialog = builder.create();
         dialog.setView(binding.getRoot());
         binding.description.setText(game.toDisplayText((String) input.table.rawget("Text")));
 
