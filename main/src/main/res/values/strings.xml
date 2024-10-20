@@ -2965,6 +2965,10 @@
     <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
 
+    <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
+    <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
+
+
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
 

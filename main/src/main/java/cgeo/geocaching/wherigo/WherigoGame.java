@@ -314,31 +314,44 @@ public class WherigoGame implements UI {
         WherigoDialogManager.get().display(new WherigoInputDialogProvider(input));
     }
 
+    /**
+     * From OpenWIG doku:
+     * Shows a specified screen
+     * <p>
+     * The screen specified by screenId should be made visible.
+     * If a dialog or an input is open, it must be closed before
+     * showing the screen.
+     * @param screenId the screen to be shown
+     * @param details if screenId is DETAILSCREEN, details of this object will be displayed
+     */
     @Override
-    public void showScreen(final int screenId, final EventTable eventTable) {
-        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + eventTable);
+    public void showScreen(final int screenId, final EventTable details) {
+        Log.iForce(LOG_PRAEFIX + "showScreen:" + screenId + ":" + details);
 
         switch (screenId) {
             case MAINSCREEN:
-                final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
-                if (currentActivity instanceof WherigoActivity) {
-                    return;
-                }
-                if (currentActivity != null && !openOnlyInWherigo()) {
-                    WherigoActivity.start(currentActivity, false);
-                }
-                break;
             case INVENTORYSCREEN:
             case ITEMSCREEN:
             case LOCATIONSCREEN:
             case TASKSCREEN:
-                WherigoDialogManager.get().display(new WherigoThingListDialogProvider(WherigoThingType.getByWherigoScreenId(screenId)));
+                WherigoDialogManager.get().clear();
+                final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
+                if (currentActivity instanceof WherigoActivity) {
+                    return;
+                }
+                //don't open the screens here, just issue a toast advising user to check
+                final WherigoThingType type = WherigoThingType.getByWherigoScreenId(screenId);
+                if (type == null) {
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_game));
+                } else {
+                    ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_toast_check_things, type.toUserDisplayableString()));
+                }
                 break;
             case DETAILSCREEN:
-                WherigoDialogManager.get().display(new WherigoThingDialogProvider(eventTable));
+                WherigoUtils.displayThing(null, details, true);
                 break;
             default:
-                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + eventTable + "]");
+                Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");
                 // do nothing
                 break;
         }
@@ -367,6 +380,12 @@ public class WherigoGame implements UI {
         WherigoSaveFileHandler.get().loadSaveFinished(); // Ends a running SAVE
     }
 
+    /**
+     * From OpenWIG Doku:
+     * Issues a command
+     * <p>
+     * This function should issue a command (SaveClose, DriveTo, StopSound, Alert).
+     */
     @Override
     public void command(final String cmd) {
         Log.iForce(LOG_PRAEFIX + "command:" + cmd);

@@ -60,7 +60,7 @@
         <item name="android:windowBackground">@color/colorBackgroundDialog</item>
         <item name="android:windowIsFloating">false</item>
     </style>
-    #
+
     <style name="cgeo.fullScreen" parent="ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:windowIsFloating">false</item>

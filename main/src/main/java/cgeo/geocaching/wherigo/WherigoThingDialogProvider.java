@@ -6,6 +6,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Action;
+import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Thing;
@@ -56,15 +58,19 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
+        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, eventTable.name);
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
-        final AlertDialog dialog = builder.create();
-        dialog.setTitle(eventTable.name);
         dialog.setView(binding.getRoot());
+
         weakActivity = new WeakReference<>(activity);
         weakDialog = new WeakReference<>(dialog);
 
         refreshGui();
+
+        if (eventTable.hasEvent("OnClick")) {
+            Log.iForce("Wherigo: item has 'OnClick': " + eventTable);
+            Engine.callEvent(eventTable, "OnClick", null);
+        }
 
         return dialog;
     }
