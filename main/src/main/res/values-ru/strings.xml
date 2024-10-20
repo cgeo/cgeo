@@ -925,7 +925,6 @@
     <string name="menu_elevation_info">Высота (карта):</string>
     <string name="elevation_selected">Высота (на карте) в выбранном месте</string>
     <string name="elevation_difference">Перепад высот</string>
-    <string name="distance">Расстояние:</string>
     <string name="copy_coordinates">Копировать координаты</string>
     <string name="selected_position">Выбранная позиция</string>
     <string name="init_global_wp_extraction_disable">Не создавать точки из текста заметки</string>
