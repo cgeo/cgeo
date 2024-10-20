@@ -921,7 +921,6 @@
     <string name="menu_elevation_info">Elevació (map):</string>
     <string name="elevation_selected">Elevació (mapa) a la posició seleccionada</string>
     <string name="elevation_difference">Diferència d\'alçada</string>
-    <string name="distance">Distància:</string>
     <string name="copy_coordinates">Copiar coordenades</string>
     <string name="selected_position">Posició seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
@@ -2614,7 +2613,6 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: eliminació del fitxer sobrant</string>
     <string name="wherigo_download_progress_login">Iniciant sessió…</string>
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
-    <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %)</string>
     <string name="wherigo_error_title">Error del Wherigo</string>
     <string name="wherigo_error_game_noerror">El joc no ha informat cap error</string>
     <string name="wherigo_error_game_error">Error informat pel joc: %1$s</string>
