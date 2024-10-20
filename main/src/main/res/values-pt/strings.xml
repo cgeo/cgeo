@@ -916,7 +916,6 @@
     <string name="menu_elevation_info">Elevação (mapa):</string>
     <string name="elevation_selected">Elevação (mapa) na posição seleccionada</string>
     <string name="elevation_difference">Diferença de elevação</string>
-    <string name="distance">Distância:</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="selected_position">Posição seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
