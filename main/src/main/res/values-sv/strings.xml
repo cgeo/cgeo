@@ -919,7 +919,6 @@
     <string name="menu_elevation_info">Höjd (karta):</string>
     <string name="elevation_selected">Höjd (karta) vid vald position</string>
     <string name="elevation_difference">Höjdskillnad</string>
-    <string name="distance">Avstånd:</string>
     <string name="copy_coordinates">Kopiera koordinater</string>
     <string name="selected_position">Vald position</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
