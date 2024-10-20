@@ -813,6 +813,7 @@
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
+    <string name="distance">Vzdialenosť</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
     <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>
@@ -2360,6 +2361,7 @@
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizácia priečinka %1$s dokončená po %2$s, %3$d z %4$s potrebná synchronizácia</string>
     <!-- Wherigo Player -->
+    <string name="wherigo_download_progress_download_status">Stiahnuté %1$s/%2$s (%3$s %)</string>
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>
@@ -2372,6 +2374,8 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
+    <string name="pause">Pozastaviť</string>
+    <string name="resume">Pokračovať</string>
     <!-- Multi-Selections -->
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Smajlík</string>
