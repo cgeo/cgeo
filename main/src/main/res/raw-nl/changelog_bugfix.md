@@ -1,5 +1,5 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Oplossing: Ontbrekende event tijden tijdens het downloaden van de cache (websitewijziging)
 
 ##
 - Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
