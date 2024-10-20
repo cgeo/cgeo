@@ -932,7 +932,7 @@
     <string name="menu_elevation_info">Wysokość (mapa):</string>
     <string name="elevation_selected">Wysokość (mapa) w wybranej pozycji</string>
     <string name="elevation_difference">Różnica wysokości</string>
-    <string name="distance">Odległość:</string>
+    <string name="distance">Odległość</string>
     <string name="copy_coordinates">Kopiuj współrzędne</string>
     <string name="selected_position">Wybrana pozycja</string>
     <string name="init_global_wp_extraction_disable">Wyłącz wyodrębnianie punktów nawigacji</string>
@@ -2674,7 +2674,7 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: usuwanie pozostałego pliku</string>
     <string name="wherigo_download_progress_login">Logowanie…</string>
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
-    <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s%)</string>
+    <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Błąd Wherigo</string>
     <string name="wherigo_error_game_noerror">Brak błędów zgłoszonych przez grę</string>
     <string name="wherigo_error_game_error">Błąd zgłoszony przez grę: %1$s</string>
@@ -2706,6 +2706,8 @@
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
+    <string name="pause">Wstrzymaj</string>
+    <string name="resume">Wznów</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>
