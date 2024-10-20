@@ -2957,6 +2957,8 @@
     <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Do you really want to delete savegame \"%1$s\"?</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_title">Overwrite Savegame slot</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_message">Do you really want to override savegame slot saved at \"%s\"?</string>
 
