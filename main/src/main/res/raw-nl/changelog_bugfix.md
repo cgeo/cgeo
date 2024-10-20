@@ -1,4 +1,7 @@
 ##
+- Oplossing: Ontbrekende event tijden tijdens het downloaden van de cache (websitewijziging)
+
+##
 - Nieuw: Waarschuwing tonen voor geactiveerde gc connector zonder inloggegevens
 - Oplossing: Verkeerde hoogte grafiek voor tracks met meerdere segmenten
 - Oplossing: Kaart laad voortdurend caches opnieuw in offline-only modus (UnifiedMap)

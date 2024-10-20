@@ -791,8 +791,6 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Nabídka obou enginů VTM + Mapsforge pro mapy Mapsforge (pro účely testování)</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
     <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
@@ -934,7 +932,6 @@
     <string name="menu_elevation_info">Nadmořská výška (mapa):</string>
     <string name="elevation_selected">Nadmořská výška (mapa) na vybraném místě</string>
     <string name="elevation_difference">Výškový rozdíl</string>
-    <string name="distance">Vzdálenost:</string>
     <string name="copy_coordinates">Kopírovat souřadnice</string>
     <string name="selected_position">Vybraná pozice</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
@@ -2636,6 +2633,10 @@
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizace %1$s složek byla dokončena po %2$s, %3$d z %4$s potřebuje synchronizaci</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_otm_shortcuts_title">Tlačítko rychlého spuštění Wherigo Playeru</string>
+    <string name="wherigo_otm_shortcuts_message">Pokud chcete c:geo Wherigo Player používat pravidelně, zvažte vytvoření tlačítka rychlého spuštění nebo vlastní položky v nabídce v části Nastavení -&gt; Vzhled</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
@@ -2651,6 +2652,7 @@
     <string name="expand">Rozbalit</string>
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
+    <string name="play">Hrát</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
