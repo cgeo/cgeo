@@ -1,5 +1,5 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Naprawiono: Brak czasu wydarzenia podczas pobierania skrytki (zmiany na stronie internetowej)
 
 ##
 - Nowość: Pokaż ostrzeżenie o aktywowanym konektorze gc bez poświadczeń
