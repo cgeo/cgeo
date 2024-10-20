@@ -902,7 +902,6 @@
     <string name="menu_elevation_info">고도 (지도):</string>
     <string name="elevation_selected">선택한 위치의 표고 (지도)</string>
     <string name="elevation_difference">표고차</string>
-    <string name="distance">거리:</string>
     <string name="copy_coordinates">좌표 복사</string>
     <string name="selected_position">선택한 위치</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
