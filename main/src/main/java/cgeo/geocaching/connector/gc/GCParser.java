@@ -516,10 +516,7 @@ public final class GCParser {
             final String originalCoords = TextUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (originalCoords != null) {
-                final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-                waypoint.setCoords(new Geopoint(originalCoords));
-                cache.addOrChangeWaypoint(waypoint, false);
-                cache.setUserModifiedCoords(true);
+                cache.createOriginalWaypoint(new Geopoint(originalCoords));
             }
         } catch (final Geopoint.GeopointException ignored) {
         }

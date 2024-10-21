@@ -758,10 +758,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                         cache.resetUserModifiedCoords(waypoint);
                     } else {
                         if (!cache.hasUserModifiedCoords()) {
-                            final Waypoint origWaypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
-                            origWaypoint.setCoords(cache.getCoords());
-                            cache.addOrChangeWaypoint(origWaypoint, false);
-                            cache.setUserModifiedCoords(true);
+                            cache.createOriginalWaypoint(cache.getCoords());
                         }
                         cache.setCoords(waypoint.getCoords());
                         DataStore.saveUserModifiedCoords(cache);

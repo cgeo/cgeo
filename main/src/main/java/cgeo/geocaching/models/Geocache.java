@@ -1656,6 +1656,15 @@ public class Geocache implements IWaypoint {
         DataStore.saveUserModifiedCoords(this);
     }
 
+    public void createOriginalWaypoint(final Geopoint originalCoords) {
+        if (originalCoords != null) {
+            final Waypoint waypoint = new Waypoint(CgeoApplication.getInstance().getString(R.string.cache_coordinates_original), WaypointType.ORIGINAL, false);
+            waypoint.setCoords(originalCoords);
+            addOrChangeWaypoint(waypoint, false);
+            setUserModifiedCoords(true);
+        }
+    }
+
     /**
      * Duplicate a waypoint.
      *
