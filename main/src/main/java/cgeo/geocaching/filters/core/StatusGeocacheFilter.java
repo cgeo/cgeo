@@ -128,7 +128,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                         (statusHasUserDefinedWaypoints == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoints) &&
                         (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
                                 (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery) &&
-                        (statusCorrectedCoordinates == null || (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusCorrectedCoordinates);
+                        (statusCorrectedCoordinates == null || cache.hasUserModifiedCoords() == statusCorrectedCoordinates);
     }
 
     public boolean isExcludeActive() {
@@ -449,24 +449,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 sqlBuilder.closeWhere();
             }
             if (statusCorrectedCoordinates != null) {
-                final String wptId = sqlBuilder.getNewTableId();
                 final String coordsChangedWhere = sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = " + (statusCorrectedCoordinates ? "1" : "0");
-                final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + "." + DataStore.dbField_Geocode + " from " + DataStore.dbTableWaypoints + " " + wptId + " WHERE " +
-                        wptId + "." + DataStore.dbField_Geocode + " = " + sqlBuilder.getMainTableId() + "." + DataStore.dbField_Geocode + " AND " + wptId + "." + DataStore.dbFieldWaypoints_type + " = '" + WaypointType.FINAL.id + "' AND " +
-                        wptId + "." + DataStore.dbField_latitude + " IS NOT NULL AND " + wptId + "." + DataStore.dbField_longitude + " IS NOT NULL)";
                 if (statusCorrectedCoordinates) {
-                    //solved mysteries have either changed coord OR a filled final waypoint
+                    //coorected coordinates have changed coords
                     sqlBuilder.addWhere(coordsChangedWhere);
-                    sqlBuilder.addWhere(existsFilledFinalWpWhere);
-
                 } else {
-                    //unsolved mysteries have NEITHER a changed coord NOR a filled final waypoint
-                    sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
+                    //coorected coordinates don't have changed coords
                     sqlBuilder.addWhere(sqlBuilder.getMainTableId() + "." + DataStore.dbFieldCaches_coordsChanged + " = 0");
-                    sqlBuilder.addWhere("NOT " + existsFilledFinalWpWhere);
-                    sqlBuilder.closeWhere();
                 }
-                sqlBuilder.closeWhere();
             }
             if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
