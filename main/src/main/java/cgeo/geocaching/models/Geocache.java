@@ -1349,15 +1349,12 @@ public class Geocache implements IWaypoint {
         if (waypoints != null) {
             this.waypoints.addAll(waypoints);
         }
-        finalDefined = false;
         if (waypoints != null) {
             for (final Waypoint waypoint : waypoints) {
                 waypoint.setGeocode(geocode);
-                if (waypoint.isFinalWithCoords()) {
-                    finalDefined = true;
-                }
             }
         }
+        resetFinalDefined();
         return saveToDatabase && DataStore.saveWaypoints(this);
     }
 
@@ -1868,10 +1865,25 @@ public class Geocache implements IWaypoint {
         for (Map.Entry<String, String> var : newVars.entrySet()) {
             getVariables().addVariable(var.getKey(), var.getValue());
             getVariables().saveState();
-            getVariables().recalculateWaypoints(this); //need to do this because new wps are not saved to DB yet
+            recalculateWaypoints(); //need to do this because new wps are not saved to DB yet
         }
     }
 
+    public boolean recalculateWaypoints() {
+        return recalculateWaypoints(getVariables());
+    }
+
+    public boolean recalculateWaypoints(final CacheVariableList variableList) {
+        boolean hasCalculatedWp = false;
+        for (Waypoint wp : getWaypoints()) {
+            hasCalculatedWp |= wp.recalculateVariableDependentValues(variableList);
+        }
+        if (hasCalculatedWp) {
+            resetFinalDefined();
+            DataStore.saveWaypoints(this);
+        }
+        return hasCalculatedWp;
+    }
 
     private boolean addOrMergeInfoToExistingWaypoint(final boolean updateDb, @NonNull final String namePrefix, final Waypoint wpCandidate) {
         boolean changed = false;
