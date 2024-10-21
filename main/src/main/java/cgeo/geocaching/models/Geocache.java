@@ -1355,7 +1355,13 @@ public class Geocache implements IWaypoint {
             }
         }
         resetFinalDefined();
-        return saveToDatabase && DataStore.saveWaypoints(this);
+
+        boolean savedToDatabase = false;
+        if (saveToDatabase) {
+            DataStore.saveFinalDefinedStatus(this);
+            savedToDatabase = DataStore.saveWaypoints(this);
+        }
+        return savedToDatabase;
     }
 
     /**
@@ -1588,7 +1594,13 @@ public class Geocache implements IWaypoint {
             // when waypoint was edited, finalDefined may have changed
             resetFinalDefined();
         }
-        return saveToDatabase && DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
+
+        boolean savedToDatabase = false;
+        if (saveToDatabase) {
+            DataStore.saveFinalDefinedStatus(this);
+            savedToDatabase = DataStore.saveWaypoint(waypoint.getId(), geocode, waypoint);
+        }
+        return savedToDatabase;
     }
 
     private void assignUniquePrefix(final Waypoint waypoint) {
@@ -1880,6 +1892,7 @@ public class Geocache implements IWaypoint {
         }
         if (hasCalculatedWp) {
             resetFinalDefined();
+            DataStore.saveFinalDefinedStatus(this);
             DataStore.saveWaypoints(this);
         }
         return hasCalculatedWp;

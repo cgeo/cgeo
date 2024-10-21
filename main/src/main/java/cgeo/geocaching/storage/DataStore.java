@@ -2339,6 +2339,31 @@ public class DataStore {
         });
     }
 
+    public static boolean saveFinalDefinedStatus(final Geocache cache) {
+        cache.addStorageLocation(StorageLocation.DATABASE);
+        cacheCache.putCacheInCache(cache);
+        Log.d("Updating finalDefined of " + cache + " in DB");
+
+        final ContentValues values = new ContentValues();
+        values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
+
+        init();
+        try {
+            database.beginTransaction();
+            final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
+            if (rows == 1) {
+                database.setTransactionSuccessful();
+                return true;
+            }
+        } catch (final Exception e) {
+            Log.e("finalDefined", e);
+        } finally {
+            database.endTransaction();
+        }
+
+        return false;
+    }
+
     /**
      * Save/store a cache to the CacheCache
      *
