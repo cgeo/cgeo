@@ -2688,6 +2688,8 @@
     <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo uruchamia Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" czeka na Ciebie!</string>
+    <string name="wherigo_toast_check_game">Wherigo: sprawdź swoją grę pod kątem zmian</string>
+    <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
     <string name="wherigo_otm_shortcuts_title">Skróty Wherigo Playera</string>
     <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać c:geo Wherigo Player rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
     <!-- default actions in dialogs -->
