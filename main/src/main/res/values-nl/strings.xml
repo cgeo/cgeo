@@ -2627,6 +2627,8 @@
     <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo draait een Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" wacht op jou!</string>
+    <string name="wherigo_toast_check_game">Wherigo: controleer je spel op veranderingen</string>
+    <string name="wherigo_toast_check_things">Wherigo: controleer je %s op veranderingen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Speler Sneltoetsen</string>
     <string name="wherigo_otm_shortcuts_message">Als je c:geo Wherigo Speler regelmatig wil gebruiken, overweeg om een knop voor snelle lancering of aangepast menu-item te maken onder Instellingen -&gt; Uiterlijk</string>
     <!-- default actions in dialogs -->
