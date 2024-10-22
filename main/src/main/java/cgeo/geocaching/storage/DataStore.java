@@ -5324,9 +5324,10 @@ public class DataStore {
     }
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
+        // parent could be lazy loaded, so not inside access lock
+        final Geocache cache = waypoint.getParentGeocache();
         return withAccessLock(() -> {
 
-            final Geocache cache = waypoint.getParentGeocache();
             if (cache != null) {
                 saveFinalDefinedStatusWithoutTransaction(cache);
             }
