@@ -2339,31 +2339,6 @@ public class DataStore {
         });
     }
 
-    public static boolean saveFinalDefinedStatus(final Geocache cache) {
-        cache.addStorageLocation(StorageLocation.DATABASE);
-        cacheCache.putCacheInCache(cache);
-        Log.d("Updating finalDefined of " + cache + " in DB");
-
-        final ContentValues values = new ContentValues();
-        values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
-
-        init();
-        try {
-            database.beginTransaction();
-            final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
-            if (rows == 1) {
-                database.setTransactionSuccessful();
-                return true;
-            }
-        } catch (final Exception e) {
-            Log.e("finalDefined", e);
-        } finally {
-            database.endTransaction();
-        }
-
-        return false;
-    }
-
     /**
      * Save/store a cache to the CacheCache
      *
@@ -2668,6 +2643,7 @@ public class DataStore {
             init();
             database.beginTransaction();
             try {
+                saveFinalDefinedStatusWithoutTransaction(cache);
                 saveWaypointsWithoutTransaction(cache);
                 database.setTransactionSuccessful();
                 return true;
@@ -2678,6 +2654,14 @@ public class DataStore {
             }
             return false;
         });
+    }
+
+    private static boolean saveFinalDefinedStatusWithoutTransaction(final Geocache cache) {
+        final ContentValues values = new ContentValues();
+        values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
+
+        final int rows = database.update(dbTableCaches, values, "geocode = ?", new String[]{cache.getGeocode()});
+        return rows == 1;
     }
 
     private static void saveWaypointsWithoutTransaction(final Geocache cache) {
@@ -5342,6 +5326,10 @@ public class DataStore {
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
         return withAccessLock(() -> {
 
+            final Geocache cache = waypoint.getParentGeocache();
+            if (cache != null) {
+                saveFinalDefinedStatusWithoutTransaction(cache);
+            }
             if (saveWaypointInternal(id, geocode, waypoint)) {
                 removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                 return true;
