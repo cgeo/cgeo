@@ -45,6 +45,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.CommonUtils;
@@ -579,7 +580,23 @@ public class Geocache implements IWaypoint {
         );
     }
 
+    /**
+     * If the cache already has an offline log with log text and the new offline log would overwrite that prompt for confirmation
+     */
     public void logOffline(@NonNull final Activity fromActivity, @NonNull final OfflineLogEntry logEntry) {
+        if (hasLogOffline() && !getOfflineLog().log.isEmpty() && !getOfflineLog().log.equals(logEntry.log)) {
+            SimpleDialog.of(fromActivity)
+                    .setTitle(R.string.caches_overwrite_offline_log)
+                    .setMessage(R.string.caches_overwrite_offline_log_question, getOfflineLog().logType.getL10n())
+                    .confirm(() -> {
+                        storeLogOffline(fromActivity, logEntry);
+                    });
+        } else {
+            storeLogOffline(fromActivity, logEntry);
+        }
+    }
+
+    public void storeLogOffline(@NonNull final Activity fromActivity, @NonNull final OfflineLogEntry logEntry) {
 
         if (logEntry.logType == LogType.UNKNOWN) {
             return;
