@@ -107,7 +107,7 @@ import android.text.util.Linkify;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -188,14 +188,14 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
      */
     private ProximityNotification proximityNotification;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
-    private CheckBox myLocSwitch;
     private MapOptions mapOptions;
     private TargetView targetView;
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
     private UnifiedMapViewModel.SheetInfo sheetInfo = null;
 
-    private static boolean followMyLocation = Settings.getFollowMyLocation();
+    private static boolean followMyLocationSwitch = Settings.getFollowMyLocation();
+    private final int[] inFollowMyLocation = { 0 };
 
     private static final String BUNDLE_MAP_STATE = "mapState";
     private static final String BUNDLE_PROXIMITY_NOTIFICATION = "proximityNotification";
@@ -249,13 +249,13 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
             mapOptions.filterContext = savedInstanceState.getParcelable(BUNDLE_FILTERCONTEXT);
             proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
-            followMyLocation = mapOptions.mapState.followsMyLocation();
+            followMyLocationSwitch = mapOptions.mapState.followsMyLocation();
             sheetInfo = savedInstanceState.getParcelable(BUNDLE_SHEETINFO);
         } else {
             if (mapOptions.mapState != null) {
-                followMyLocation = mapOptions.mapState.followsMyLocation();
+                followMyLocationSwitch = mapOptions.mapState.followsMyLocation();
             } else {
-                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+                followMyLocationSwitch = followMyLocationSwitch && mapOptions.mapMode == MapMode.LIVE;
             }
             configureProximityNotifications();
         }
@@ -296,7 +296,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         mapView.setBuiltInZoomControls(false);
         findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomIn()));
         findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.getModel().mapViewPosition.zoomOut()));
-        ViewUtils.setVisibility(findViewById(R.id.container_followmylocation), View.GONE);
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
@@ -344,7 +343,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                     coordsMarkerLayer.setCoordsMarker(coordsMarkerPosition);
                 }
                 mapOptions.coords = null;   // no direction line, even if enabled in settings
-                followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+                followMyLocationSwitch = false;   // do not center on GPS position, even if in LIVE mode
             }
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
@@ -394,7 +393,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         MapProviderFactory.addMapviewMenuItems(this, menu);
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
-        initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(this, menu));
+        initFollowMyLocation(followMyLocationSwitch);
         FilterUtils.initializeFilterMenu(this, this);
 
         return result;
@@ -590,8 +589,8 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
-        followMyLocation = false;
-        switchMyLocationButton();
+        followMyLocationSwitch = false;
+        initFollowMyLocation(false);
         mapView.getModel().mapViewPosition.setMapPosition(new MapPosition(new LatLong(latitude, longitude), (byte) mapView.getMapZoomLevel()));
         postZoomToViewport(viewport);
     }
@@ -665,7 +664,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             return null;
         }
         final Geopoint mapCenter = mapView.getViewport().getCenter();
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, Settings.isShowCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocationSwitch, Settings.isShowCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void configureProximityNotifications() {
@@ -985,7 +984,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     }
 
     private MapState prepareMapState() {
-        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getMapZoomLevel(), followMyLocation, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(MapsforgeUtils.toGeopoint(mapView.getModel().mapViewPosition.getCenter()), mapView.getMapZoomLevel(), followMyLocationSwitch, false, targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void centerMap(final Geopoint geopoint) {
@@ -1000,24 +999,28 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         return loc;
     }
 
-    private void initMyLocationSwitchButton(final CheckBox locSwitch) {
-        myLocSwitch = locSwitch;
-        /*
-         * TODO: Switch back to ImageSwitcher for animations?
-         * myLocSwitch.setFactory(this);
-         * myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
-         * myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out);
-         */
-        myLocSwitch.setOnClickListener(new MyLocationListener(this));
-        switchMyLocationButton();
-    }
-
-    // switch My Location button image
-    private void switchMyLocationButton() {
+    private void initFollowMyLocation(final boolean followMyLocation) {
+        synchronized (inFollowMyLocation) {
+            if (inFollowMyLocation[0] > 0) {
+                return;
+            }
+            inFollowMyLocation[0]++;
+        }
         Settings.setFollowMyLocation(followMyLocation);
-        myLocSwitch.setChecked(followMyLocation);
+        followMyLocationSwitch = followMyLocation;
+
+        final ImageButton followMyLocationButton = findViewById(R.id.map_followmylocation_btn);
+        if (followMyLocationButton != null) { // can be null after screen rotation
+            followMyLocationButton.setImageResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
+            followMyLocationButton.setOnClickListener(v -> initFollowMyLocation(!followMyLocationSwitch));
+        }
+
         if (followMyLocation) {
-            myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
+            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if none was delivered to the view-model yet
+            mapView.setCenter(new LatLong(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        }
+        synchronized (inFollowMyLocation) {
+            inFollowMyLocation[0]--;
         }
     }
 
@@ -1039,37 +1042,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             ViewUtils.showShortToast(this, R.string.map_disable_autotarget_individual_route);
         }
         setTarget(targetInfo.coords, targetInfo.geocode);
-    }
-
-    // set my location listener
-    private static class MyLocationListener implements View.OnClickListener {
-
-        @NonNull
-        private final WeakReference<NewMap> mapRef;
-
-        MyLocationListener(@NonNull final NewMap map) {
-            mapRef = new WeakReference<>(map);
-        }
-
-        private void onFollowMyLocationClicked() {
-            followMyLocation = !followMyLocation;
-            final NewMap map = mapRef.get();
-            if (map != null) {
-                map.switchMyLocationButton();
-            }
-        }
-
-        @Override
-        public void onClick(final View view) {
-            onFollowMyLocationClicked();
-        }
-    }
-
-    // Set center of map to my location if appropriate.
-    private void myLocationInMiddle(final cgeo.geocaching.sensors.GeoData geo) {
-        if (followMyLocation) {
-            centerMap(geo.getCoords());
-        }
     }
 
     private static final class DisplayHandler extends Handler {
@@ -1256,7 +1228,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
-                        if (needsRepaintForDistanceOrAccuracy && NewMap.followMyLocation) {
+                        if (needsRepaintForDistanceOrAccuracy && NewMap.followMyLocationSwitch) {
                             map.centerMap(new Geopoint(currentLocation));
                         }
 
@@ -1330,9 +1302,9 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         @Override
         public void onDrag() {
             final NewMap map = mapRef.get();
-            if (map != null && NewMap.followMyLocation) {
-                NewMap.followMyLocation = false;
-                map.switchMyLocationButton();
+            if (map != null && NewMap.followMyLocationSwitch) {
+                NewMap.followMyLocationSwitch = false;
+                map.initFollowMyLocation(false);
             }
         }
     }

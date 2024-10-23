@@ -778,7 +778,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-        menu.findItem(R.id.menu_toggle_mypos).setVisible(false);
         FilterUtils.initializeFilterMenu(this, this);
         return result;
     }
