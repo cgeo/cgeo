@@ -57,7 +57,9 @@ public class TileProviderFactory {
             }
             if (!hide) {
                 final int id = tileProvider.getNumericalId();
-                parentMenu.add(tileProvider instanceof AbstractMapsforgeOfflineTileProvider ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+                final boolean isOfflineMap = (tileProvider instanceof AbstractMapsforgeOfflineTileProvider)
+                        || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
+                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
         }
