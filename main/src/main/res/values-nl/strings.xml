@@ -2622,6 +2622,8 @@
     <string name="wherigo_confirm_stop_running_game_message">Er wordt momenteel een spel uitgevoerd voor \"%s\". Wil je dit spel stoppen?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Verwijder Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Wil je echt cartridge \"%1$s\" verwijderen inclusief %2$s opgeslagen spellen?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Verwijder Wherigo Opgeslagen spel</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Wil je echt opgeslagen spel \"%1$s \"verwijderen?</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_title">Savegame slot overschrijven</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_message">Wil je echt het opgeslagen slot overschrijven op \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
