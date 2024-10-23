@@ -58,8 +58,7 @@ public class TileProviderFactory {
             if (!hide) {
                 final int id = tileProvider.getNumericalId();
                 final boolean isOfflineMap = (tileProvider instanceof AbstractMapsforgeOfflineTileProvider)
-                        || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider)
-                        || (tileProvider instanceof MapsforgeVTMMultiOfflineTileProvider);
+                        || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
                 parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
