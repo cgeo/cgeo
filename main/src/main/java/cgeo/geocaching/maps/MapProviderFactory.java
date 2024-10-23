@@ -95,6 +95,7 @@ public class MapProviderFactory {
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
     }
 
+    // used by CGeoMap only
     public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
         final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
         final LocSwitchActionBinding binding = LocSwitchActionBinding.inflate(LayoutInflater.from(activity));

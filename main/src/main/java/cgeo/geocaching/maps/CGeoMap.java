@@ -724,6 +724,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         MapProviderFactory.addMapviewMenuItems(activity, menu);
 
         /* if we have an Actionbar find the my position toggle */
+        menu.findItem(R.id.menu_toggle_mypos).setVisible(true);
         initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(activity, menu));
         FilterUtils.initializeFilterMenu(activity, mapActivity);
 
