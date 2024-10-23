@@ -775,8 +775,6 @@
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Oferta de motores VTM + Mapsforge para mapas Mapsforge (para fins de teste)</string>
     <string name="settings_userDefinedTileProvider">Fornecedor de blocos de mapa definido pelo utilizador</string>
     <string name="settings_userDefinedTileProviderUri">Digite a Uri completa (sem barra à direita) para o fornecedor de blocos, ou insira o Uri completo com parâmetros (incluindo {X}, {Y} e {Z}). Certifique-se de ter verificado e aceite as suas condições de uso.</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
@@ -918,7 +916,6 @@
     <string name="menu_elevation_info">Elevação (mapa):</string>
     <string name="elevation_selected">Elevação (mapa) na posição seleccionada</string>
     <string name="elevation_difference">Diferença de elevação</string>
-    <string name="distance">Distância:</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="selected_position">Posição seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
@@ -2549,6 +2546,7 @@
     <string name="wizard_skip_wizard_warning">O c:geo pode não funcionar como esperado até que a configuração esteja concluída. Dependendo das configurações em falta, o c:geo pode não ser capaz de ler/armazenar dados como mapas offline, geocaches, ficheiros de registos, etc\n\nQuando achar que é o momento para finalizar a configuração, pode fazê-lo escolhendo a opção \"Assistente de configuração\" no menu principal ou reiniciando o c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">A sincronização de pasta %1$s terminada após %2$s, %3$d de %4$s a precisar de sincronização</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ignorar</string>

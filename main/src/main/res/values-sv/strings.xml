@@ -779,8 +779,6 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Erbjuder både VTM + Mapsforge-motorer för Mapsforge-kartor (för teständamål)</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
@@ -921,7 +919,6 @@
     <string name="menu_elevation_info">Höjd (karta):</string>
     <string name="elevation_selected">Höjd (karta) vid vald position</string>
     <string name="elevation_difference">Höjdskillnad</string>
-    <string name="distance">Avstånd:</string>
     <string name="copy_coordinates">Kopiera koordinater</string>
     <string name="selected_position">Vald position</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
@@ -2569,6 +2566,14 @@
     <string name="wizard_skip_wizard_warning">c:geo kanske inte fungerar som förväntat förrän konfigurationen är klar. Beroende på den saknade konfigurationen kanske c:geo inte kan läsa/lagra data som offline-kartor, geocacher, loggfiler etc.\n\nNär du känner dig redo att slutföra installationen, välj antingen \"Configuration wizard\" i huvudmenyn eller starta om c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappsynkronisering klar efter %2$s, %3$d av %4$s behövde synkronisering</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_thingtype_location">Platser</string>
+    <string name="wherigo_thingtype_task">Uppgifter</string>
+    <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
+    <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
     <!-- default actions in dialogs -->
     <string name="previous">Föregående</string>
     <string name="skip">Hoppa över</string>
@@ -2584,6 +2589,7 @@
     <string name="expand">Expandera</string>
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
+    <string name="play">Spela</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
@@ -2616,6 +2622,7 @@
         <item quantity="other">%d olästa meddelanden i meddelandecentret</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Önskad bildstorlek</string>
     <string name="settings_gc_imagesize_summary">Bilder från Geocaching.com i listningar, loggar och spårbara objekt finns i olika storlekar. Välj den storlek som ska laddas när du laddar och lagrar en cache.</string>
     <string-array name="settings_gc_imagesize_entries">
         <item>Original</item>

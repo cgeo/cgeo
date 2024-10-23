@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Neu: Warnung bei aktiviertem geocaching.com-Dienst ohne Anmeldedaten
 - Korrektur: Falsches Höhendiagramm für Tracks mit mehreren Segmenten
 - Korrektur: Karte lädt im Offline-Modus ständig Caches neu (UnifiedMap)

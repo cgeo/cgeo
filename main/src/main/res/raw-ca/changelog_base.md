@@ -1,3 +1,5 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+
 ### Mapa
 - Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
 - Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
@@ -8,6 +10,7 @@
 - Nou: suport d'ombrejat per als mapes fora de línia UnifiedMap Mapsforge
 - Nou: suport d'ombrejat per als mapes UnifiedMap VTM (requereix connexió en línia)
 - Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
+- Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -16,6 +19,7 @@
 - Correcció: diverses imatges a la nota personal no s'afegeixen a la pestanya d'imatges
 - Correcció: maneig de projeccions en waypoints i notes personals
 - Nou: un toc llarg a la data al registre recupera la data del registre anterior
+- Solució: el restabliment del catxé a les coordenades originals no elimina la marca "coordenades canviades"
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -24,3 +28,5 @@
 - Nou: defineix la mida d'imatge preferida per a les imatges carregades des del catxé i els elements de seguiment de geocaching.com
 - Correcció: "Obre al navegador" no funciona per als registres rastrejables
 - Novetat: opció per gestionar els fitxers descarregats (mapes, temes, dades d'itineraris i ombrejats)
+- Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
+- Correcció: restableix les coordenades no detectades per c:geo per a els catxés no desats
