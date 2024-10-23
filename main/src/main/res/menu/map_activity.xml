@@ -7,7 +7,8 @@
         android:icon="@drawable/ic_menu_myposition"
         android:showAsAction="always"
         android:title="@string/menu_centerposition"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:visible="false"/>
     <item
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_action_layers"
