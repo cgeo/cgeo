@@ -630,6 +630,7 @@
     <string name="cache_filter_storage_save_title">Save filter with name</string>
     <string name="cache_filter_storage_save_confirm_title">Save filter overwrite</string>
     <string name="cache_filter_storage_save_confirm_message">A filter with name \'%s\' and different configuration already exists. Overwrite it?</string>
+    <string name="cache_filter_storage_clear_message">Do you want to clear the current filter?</string>
 
     <string name="cache_filter_stringfilter_matchcase">Match Case</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Search Text</string>

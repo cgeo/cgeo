@@ -43,20 +43,23 @@ public class FilterUtils {
         final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
         final boolean isFilterActive = filterContext.get().isFiltering();
 
-        if (filters.isEmpty()) {
+        if (filters.isEmpty() && !isFilterActive) {
             filteredActivity.showToast(R.string.cache_filter_storage_load_delete_nofilter_message);
-
-            if (isFilterActive) {
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
-                        .setPositiveButton(null)
-                        .setNeutralButton(TextParam.id(R.string.cache_filter_storage_clear_button))
-                        .setNeutralAction(() ->
-                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
-                        ).show();
-                return true;
-            }
             return false;
         }
+
+        if (filters.isEmpty()) {
+            TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
+                    TextParam.text(System.getProperty("line.separator")),
+                    TextParam.id(R.string.cache_filter_storage_clear_message));
+                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
+                        .setPositiveButton(TextParam.id(R.string.cache_filter_storage_clear_button))
+                        .setMessage(message)
+                        .confirm(() ->
+                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+                        );
+                return true;
+            }
 
         final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
         model
