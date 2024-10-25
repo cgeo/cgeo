@@ -780,6 +780,7 @@
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
+    <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -919,6 +920,7 @@
     <string name="menu_elevation_info">Höjd (karta):</string>
     <string name="elevation_selected">Höjd (karta) vid vald position</string>
     <string name="elevation_difference">Höjdskillnad</string>
+    <string name="distance">Avstånd</string>
     <string name="copy_coordinates">Kopiera koordinater</string>
     <string name="selected_position">Vald position</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
@@ -1705,6 +1707,7 @@
     <string name="formula_error_missingvarvalue">Saknas: %1$s</string>
     <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
     <string name="formula_error_empty">Tom formel</string>
+    <string name="formula_error_numeric_overflow">Numeriskt spill</string>
     <string name="formula_error_other">Fel: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Namnlös</string>
@@ -2572,6 +2575,9 @@
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
+    <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
     <!-- default actions in dialogs -->
@@ -2590,6 +2596,8 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Återuppta</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
