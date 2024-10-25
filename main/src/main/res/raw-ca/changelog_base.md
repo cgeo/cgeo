@@ -1,4 +1,4 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'inici.<br> (És possible que vulgueu [configurar un element d'inici ràpid](cgeo-setting://quicklaunchitems_sorted) o [personalitzar la navegació inferior](cgeo-setting://custombnitem) per a un accés més fàcil, primer heu d'activar la configuració ampliada.)
 
 ### Mapa
 - Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
