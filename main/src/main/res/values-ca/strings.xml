@@ -780,6 +780,7 @@
     <string name="settings_title_map_style">Estil de mapa</string>
     <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
     <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
+    <string name="settings_unifiedMapVariants_title">Variants de UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Proveïdors definits per l\'usuari</string>
     <string name="settings_userDefinedTileProviderUri">Introduïu l\'Uri complet (sense barra inclinada) al proveïdor de mosaic o introduïu l\'Uri complet amb paràmetres (inclosos {X}, {Y} i {Z}). Assegureu-vos d\'haver comprovat i de complir les seves condicions d\'ús.</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
@@ -921,6 +922,7 @@
     <string name="menu_elevation_info">Elevació (map):</string>
     <string name="elevation_selected">Elevació (mapa) a la posició seleccionada</string>
     <string name="elevation_difference">Diferència d\'alçada</string>
+    <string name="distance">Distància</string>
     <string name="copy_coordinates">Copiar coordenades</string>
     <string name="selected_position">Posició seleccionada</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
@@ -2613,6 +2615,7 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: eliminació del fitxer sobrant</string>
     <string name="wherigo_download_progress_login">Iniciant sessió…</string>
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
+    <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Error del Wherigo</string>
     <string name="wherigo_error_game_noerror">El joc no ha informat cap error</string>
     <string name="wherigo_error_game_error">Error informat pel joc: %1$s</string>
@@ -2621,11 +2624,15 @@
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Realment voleu suprimir la partida desada \"%1$s\"?</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_title">Sobreescriu la partida desada</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_message">Realment voleu anul·lar la partida desada a \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Pàgina %1$s/%2$s</string>
     <string name="wherigo_notification_service">c:geo està executant un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" t\'està esperant!</string>
+    <string name="wherigo_toast_check_game">Wherigo: comproveu si hi ha canvis al vostre joc</string>
+    <string name="wherigo_toast_check_things">Wherigo: comproveu si hi ha canvis al vostre %s</string>
     <string name="wherigo_otm_shortcuts_title">Dreceres del Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Si voleu utilitzar c:geo Wherigo Player amb regularitat, penseu a crear un botó d\'inici ràpid o un element de menú personalitzat a Configuració -&gt; Aparença</string>
     <!-- default actions in dialogs -->
@@ -2644,6 +2651,8 @@
     <string name="close">Tanca</string>
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Currículum</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>
