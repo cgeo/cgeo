@@ -3,7 +3,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 ### Karta
 - Nyhet: Spara kart-tema per leverantör (UnifiedMap)
 - Nytt: Markera vald cache/vägpunkt (UnifiedMap)
-- New: Add separator between offline and online map sources
+- Nytt: Lägg till separator mellan kartkällor offline och online
 - Nyhet: Stöd för Mapsforge som alternativ till VTM i UnifiedMap, se [Inställningar => Kartkällor => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
 - Ändring: 'Visa höjddiagram' flyttat till långtrycksmenyn (UnifiedMap)
 - Ändra: Använd ny terrängskuggnings-algoritm för Mapsforge offline-kartor
@@ -14,8 +14,8 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
-- New: Allow large integers in formulas
-- New: Support more constellations for variables in formulas
+- New: Tillåt stora heltal i formler
+- Nytt: Stöd för fler konstellationer för variabler i formler
 - Fix: Multiple images in personal note not added to images tab
 - Fix: Handling of projections in waypoints and personal notes
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
