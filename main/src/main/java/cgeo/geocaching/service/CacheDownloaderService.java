@@ -13,11 +13,11 @@ import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioGroup;
@@ -162,7 +162,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         shouldStop = false;
         final PendingIntent actionCancelIntent = PendingIntent.getBroadcast(this, 0,
                 new Intent(this, StopCacheDownloadServiceReceiver.class),
-                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0) | PendingIntent.FLAG_UPDATE_CURRENT);
+                ProcessUtils.getFlagImmutable() | PendingIntent.FLAG_UPDATE_CURRENT);
 
         return Notifications.createNotification(this, NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION, R.string.caches_store_background_title)
                 .setProgress(100, 0, true)
