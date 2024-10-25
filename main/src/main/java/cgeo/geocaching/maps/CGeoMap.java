@@ -51,6 +51,7 @@ import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.service.GeocacheChangedBroadcastReceiver;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.RepeatOnHoldListener;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
@@ -83,7 +84,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -163,7 +164,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
     // map status data
-    private static boolean followMyLocation = Settings.getFollowMyLocation();
+    private static boolean followMyLocationSwitch = Settings.getFollowMyLocation();
+    private final int[] inFollowMyLocation = { 0 };
     // threads
     private Disposable loadTimer;
     /**
@@ -183,8 +185,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private final LeastRecentlyUsedSet<Waypoint> waypoints = new LeastRecentlyUsedSet<>(MAX_CACHES);
     private ProgressBar spinner;
 
-    // views
-    private CheckBox myLocSwitch = null;
     // other things
     private boolean markersInvalidated = false; // previous state for loadTimer
     private boolean centered = false; // if map is already centered
@@ -407,9 +407,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     protected void initializeMap(final ArrayList<TrailHistoryElement> trailHistory) {
 
         mapView.setMapSource();
-        mapView.setBuiltInZoomControls(true);
-        mapView.displayZoomControls(true);
         mapView.setOnDragListener(new MapDragListener(this));
+
+        // style zoom controls
+        mapView.setBuiltInZoomControls(false);
+        activity.findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.zoomInOut(true)));
+        activity.findViewById(R.id.map_zoomout).setOnTouchListener(new RepeatOnHoldListener(500, v -> mapView.zoomInOut(false)));
 
         // initialize overlays
         mapView.clearOverlays();
@@ -419,7 +422,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         final Geopoint savedCoords = mapOptions.coords;  // remember for centerMap
         if (mapOptions.mapMode == MapMode.LIVE && savedCoords != null) {
             mapOptions.coords = null;   // no direction line, even if enabled in settings
-            followMyLocation = false;   // do not center on GPS position, even if in LIVE mode
+            followMyLocationSwitch = false;   // do not center on GPS position, even if in LIVE mode
         }
 
         overlayPositionAndScale = mapView.createAddPositionAndScaleOverlay(activity.findViewById(R.id.distanceinfo), getIntentCoords(), mapOptions.geocode);
@@ -452,10 +455,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         if (mapOptions.mapState == null) {
-            followMyLocation = followMyLocation && (mapOptions.mapMode == MapMode.LIVE);
+            followMyLocationSwitch = followMyLocationSwitch && (mapOptions.mapMode == MapMode.LIVE);
             mapView.setCircles(Settings.isShowCircles());
         } else {
-            followMyLocation = mapOptions.mapState.followsMyLocation();
+            followMyLocationSwitch = mapOptions.mapState.followsMyLocation();
             if (mapView.getCircles() != mapOptions.mapState.showsCircles()) {
                 mapView.setCircles(mapOptions.mapState.showsCircles());
             }
@@ -629,16 +632,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
     }
 
-    private void initMyLocationSwitchButton(final CheckBox locSwitch) {
-        myLocSwitch = locSwitch;
-        /* TODO: Switch back to ImageSwitcher for animations?
-        myLocSwitch.setFactory(this);
-        myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
-        myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out); */
-        myLocSwitch.setOnClickListener(new MyLocationListener(this));
-        switchMyLocationButton();
-    }
-
     /**
      * Set the zoom of the map. The zoom is restricted to a certain minimum in case of live map.
      */
@@ -724,8 +717,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         MapProviderFactory.addMapviewMenuItems(activity, menu);
 
         /* if we have an Actionbar find the my position toggle */
-        menu.findItem(R.id.menu_toggle_mypos).setVisible(true);
-        initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(activity, menu));
+        initFollowMyLocation(followMyLocationSwitch);
         FilterUtils.initializeFilterMenu(activity, mapActivity);
 
         return true;
@@ -901,8 +893,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void centerOnPosition(final double latitude, final double longitude, final Viewport viewport) {
-        followMyLocation = false;
-        switchMyLocationButton();
+        initFollowMyLocation(false);
         mapView.zoomToBounds(viewport, new GoogleGeoPoint(new LatLng(latitude, longitude)));
     }
 
@@ -1046,19 +1037,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return null;
         }
 
-        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocation, mapView.getCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
+        return new MapState(mapCenter.getCoords(), mapView.getMapZoomLevel(), followMyLocationSwitch, mapView.getCircles(), targetGeocode, lastNavTarget, mapOptions.isLiveEnabled, mapOptions.isStoredEnabled);
     }
 
     private void savePrefs() {
         Settings.setMapZoom(mapOptions.mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(mapView.getMapViewCenter());
-    }
-
-    // Set center of map to my location if appropriate.
-    private void myLocationInMiddle(final GeoData geo) {
-        if (followMyLocation) {
-            centerMap(geo.getCoords());
-        }
     }
 
     // class: update location
@@ -1107,7 +1091,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy) {
-                            if (followMyLocation) {
+                            if (followMyLocationSwitch) {
                                 map.centerMap(new Geopoint(currentLocation));
                             }
 
@@ -1563,38 +1547,29 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     // switch My Location button image
-    private void switchMyLocationButton() {
-        Settings.setFollowMyLocation(followMyLocation);
-        // FIXME: temporary workaround for the absence of "follow my location" on Android 3.x (see issue #4289).
-        if (myLocSwitch != null) {
-            myLocSwitch.setChecked(followMyLocation);
-            if (followMyLocation) {
-                myLocationInMiddle(LocationDataProvider.getInstance().currentGeo());
+    private void initFollowMyLocation(final boolean followMyLocation) {
+        synchronized (inFollowMyLocation) {
+            if (inFollowMyLocation[0] > 0) {
+                return;
             }
+            inFollowMyLocation[0]++;
         }
-    }
+        Settings.setFollowMyLocation(followMyLocationSwitch);
+        followMyLocationSwitch = followMyLocation;
 
-    // set my location listener
-    private static class MyLocationListener implements View.OnClickListener {
-
-        private final WeakReference<CGeoMap> mapRef;
-
-        MyLocationListener(@NonNull final CGeoMap map) {
-            mapRef = new WeakReference<>(map);
+        final ImageButton followMyLocationButton = activity.findViewById(R.id.map_followmylocation_btn);
+        if (followMyLocationButton != null) { // can be null after screen rotation
+            followMyLocationButton.setImageResource(followMyLocation ? R.drawable.map_followmylocation_btn : R.drawable.map_followmylocation_off_btn);
+            followMyLocationButton.setOnClickListener(v -> initFollowMyLocation(!followMyLocationSwitch));
         }
 
-        @Override
-        public void onClick(final View view) {
-            final CGeoMap map = mapRef.get();
-            if (map != null) {
-                map.onFollowMyLocationClicked();
-            }
+        if (followMyLocation) {
+            final Location currentLocation = LocationDataProvider.getInstance().currentGeo(); // get location even if none was delivered to the view-model yet
+            centerMap(new Geopoint(currentLocation));
         }
-    }
-
-    private void onFollowMyLocationClicked() {
-        followMyLocation = !followMyLocation;
-        switchMyLocationButton();
+        synchronized (inFollowMyLocation) {
+            inFollowMyLocation[0]--;
+        }
     }
 
     public static class MapDragListener implements OnMapDragListener {
@@ -1616,9 +1591,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     private void onDrag() {
-        if (followMyLocation) {
-            followMyLocation = false;
-            switchMyLocationButton();
+        if (followMyLocationSwitch) {
+            initFollowMyLocation(false);
         }
     }
 
