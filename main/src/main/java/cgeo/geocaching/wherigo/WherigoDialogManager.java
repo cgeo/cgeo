@@ -7,6 +7,7 @@ import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -100,7 +101,7 @@ public class WherigoDialogManager {
             // show title first (and content is cut off)
             .setContentTitle(content)
             .setContentText(content)
-            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, WherigoActivity.class), PendingIntent.FLAG_IMMUTABLE))
+            .setContentIntent(PendingIntent.getActivity(context, 0, new Intent(context, WherigoActivity.class), ProcessUtils.getFlagImmutable()))
             .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
