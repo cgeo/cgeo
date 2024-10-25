@@ -588,6 +588,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         MapUtils.showMapOneTimeMessages(activity, mapOptions.mapMode);
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
+
+        ViewUtils.setVisibility(activity.findViewById(R.id.map_compassrose), View.GONE); // GMv2 still uses old compass rose
     }
 
     private void configureProximityNotifications() {
