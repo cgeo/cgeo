@@ -49,7 +49,7 @@ public class FilterUtils {
         }
 
         if (filters.isEmpty()) {
-            TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
+            final TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
                     TextParam.text(System.getProperty("line.separator")),
                     TextParam.id(R.string.cache_filter_storage_clear_message));
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
