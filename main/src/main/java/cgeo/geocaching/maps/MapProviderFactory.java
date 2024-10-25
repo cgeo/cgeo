@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.databinding.LocSwitchActionBinding;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -11,11 +10,9 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,16 +90,6 @@ public class MapProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, mapSources.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getMapSource().supportsHillshading());
         parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_download_offlinemap, mapSources.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
-    }
-
-    // used by CGeoMap only
-    public static CheckBox createLocSwitchMenuItem(final Activity activity, final Menu menu) {
-        final MenuItem item = menu.findItem(R.id.menu_toggle_mypos);
-        final LocSwitchActionBinding binding = LocSwitchActionBinding.inflate(LayoutInflater.from(activity));
-        binding.getRoot().setOnClickListener(v -> binding.locSwitch.performClick());
-        item.setActionView(binding.getRoot());
-
-        return binding.locSwitch;
     }
 
     @Nullable

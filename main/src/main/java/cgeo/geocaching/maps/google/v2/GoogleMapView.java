@@ -60,6 +60,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.annotation.Nullable;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -329,8 +330,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     @Override
-    public void displayZoomControls(final boolean takeFocus) {
-        // nothing to do here, TODO merge design with mapsforge zoom controls?
+    public void zoomInOut(final boolean zoomIn) {
+        googleMap.animateCamera(zoomIn ? CameraUpdateFactory.zoomIn() : CameraUpdateFactory.zoomOut());
     }
 
     @Override

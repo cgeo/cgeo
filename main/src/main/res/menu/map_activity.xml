@@ -3,18 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_toggle_mypos"
-        android:icon="@drawable/ic_menu_myposition"
-        android:showAsAction="always"
-        android:title="@string/menu_centerposition"
-        app:showAsAction="always"
-        android:visible="false"/>
-    <item
         android:id="@+id/menu_select_mapview"
         android:icon="@drawable/ic_action_layers"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/map_view_map"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
         <menu>
             <group
                 android:id="@+id/menu_group_map_sources_online"

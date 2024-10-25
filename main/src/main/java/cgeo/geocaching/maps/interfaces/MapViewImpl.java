@@ -23,7 +23,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
 
     void setBuiltInZoomControls(boolean b);
 
-    void displayZoomControls(boolean b);
+    void zoomInOut(boolean zoomIn);
 
     void clearOverlays();
 
