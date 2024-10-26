@@ -2576,6 +2576,8 @@
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Vill du verkligen ta bort savegame \"%1$s\"?</string>
     <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
