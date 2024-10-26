@@ -156,6 +156,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_PREVENTASKFORDELETION = "preventAskForDeletion";
     private static final String STATE_CONTENT_STORAGE_ACTIVITY_HELPER = "contentStorageActivityHelper";
     private static final String STATE_OFFLINELISTLOADLIMIT_ID = "offlineListLoadLimit";
+    private static final String STATE_CHECKFOREMPTYLIST = "checkForEmptyList";
 
     private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
@@ -164,6 +165,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Geopoint coords = null;
     private GeocacheSortContext sortContext;
     private SearchResult search = null;
+    private boolean checkForEmtpyList = true;
 
     private final CacheListActionBarChooser actionBarChooser =
         new CacheListActionBarChooser(this, this::getSupportActionBar, this::switchListById);
@@ -397,11 +399,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             markerId = savedInstanceState.getInt(STATE_MARKER_ID);
             preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
+            checkForEmtpyList = savedInstanceState.getBoolean(STATE_CHECKFOREMPTYLIST);
         } else {
             sortContext = GeocacheSortContext.getFor(type, "" + listId);
             sortContext.getSort().setTargetCoords(extraTargetCoords);
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
             currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
+            checkForEmtpyList = true;
         }
 
         initAdapter();
@@ -450,6 +454,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putBoolean(STATE_PREVENTASKFORDELETION, preventAskForDeletion);
         savedInstanceState.putInt(STATE_OFFLINELISTLOADLIMIT_ID, offlineListLoadLimit);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
+        savedInstanceState.putBoolean(STATE_CHECKFOREMPTYLIST, checkForEmtpyList);
     }
 
     private void refreshActionBarTitle() {
@@ -495,7 +500,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
-        lastPosition.refreshListAtLastPosition();
+        lastPosition.refreshListAtLastPosition(checkForEmtpyList);
+        checkForEmtpyList = true;
 
         if (search != null) {
             updateAdapter();
@@ -729,9 +735,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             deleteCaches(adapter.getCheckedOrAllCaches(), true);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_pq) {
+            checkForEmtpyList = false;
             startListSelection(REQUEST_CODE_IMPORT_PQ);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_bookmarklists) {
+            checkForEmtpyList = false;
             startListSelection(REQUEST_CODE_IMPORT_BOOKMARK);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_gpx) {
@@ -934,7 +942,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 @Override
                 protected void onFinished() {
-                    lastPositionHelper.refreshListAtLastPosition();
+                    lastPositionHelper.refreshListAtLastPosition(true);
                 }
 
             }.execute();
@@ -950,7 +958,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
                 @Override
                 protected void onFinished() {
-                    lastPositionHelper.refreshListAtLastPosition();
+                    lastPositionHelper.refreshListAtLastPosition(true);
                 }
 
             }.execute();
@@ -1297,12 +1305,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         }
 
-        public void refreshListAtLastPosition() {
+        public void refreshListAtLastPosition(final boolean triggerEmptyCheck) {
             final CacheListActivity activity = activityRef.get();
             if (activity != null) {
                 activity.adapter.setSelectMode(false);
                 if (activity.type.isStoredInDatabase) {
-                    activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+                    activity.refreshCurrentList(triggerEmptyCheck ? AfterLoadAction.CHECK_IF_EMPTY : AfterLoadAction.NO_ACTION);
                 } else {
                     activity.replaceCacheListFromSearch();
                 }
@@ -1340,7 +1348,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         @Override
         public void onFinished() {
-            lastPositionHelper.refreshListAtLastPosition();
+            lastPositionHelper.refreshListAtLastPosition(true);
         }
 
         @Override
