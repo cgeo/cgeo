@@ -1,11 +1,11 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Fix: Saknar händelsetidpunkter vid hämtning av cache (ändring av webbplatsen)
 
 ##
 - Nyhet: Visa varning för aktiverad gc-anslutning utan inloggningsuppgifter
 - Fix: Wrong elevation chart for tracks with multiple segments
-- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
-- Fix: Some crashes in Mapsforge map
+- Fix: Kartan laddar ständigt om cacher i offline-läge (UnifiedMap)
+- Fix: Vissa kraschar i Mapsforge karta
 
 ##
 - Fix: Saknad parametrisering för användardefinierad brick-leverantör
