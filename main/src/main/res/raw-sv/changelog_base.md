@@ -1,4 +1,4 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du kanske vill [konfigurera ett snabbstartobjekt](cgeo-setting://quicklaunchitems_sorted) eller [anpassa bottennavigationen](cgeo-setting://custombnitem) för enklare åtkomst, måste aktivera utökade inställningar först.)
 
 ### Karta
 - Nyhet: Spara kart-tema per leverantör (UnifiedMap)
@@ -19,7 +19,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Fix: Multiple images in personal note not added to images tab
 - Fix: Handling of projections in waypoints and personal notes
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
-- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
@@ -29,4 +29,4 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Fix: "Open in browser" not working for trackable logs
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
 - Nyhet: Alternativ för att ta bort en cache från alla listor (= markera den att raderas)
-- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- Fix: Återställda koordinater upptäcks inte av c:geo för osparade cacher
