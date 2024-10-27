@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
 - Oprava: Chybný výškový graf pro tratě s více segmenty
 - Oprava: Neustále načítámí kešek v mapě v režimu pouze offline (Sjednocená mapa)

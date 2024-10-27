@@ -1,4 +1,7 @@
 ##
+- Korrektur: Fehlende Event-Zeiten beim Download des Caches (Webseitenänderung)
+
+##
 - Neu: Warnung bei aktiviertem geocaching.com-Dienst ohne Anmeldedaten
 - Korrektur: Falsches Höhendiagramm für Tracks mit mehreren Segmenten
 - Korrektur: Karte lädt im Offline-Modus ständig Caches neu (UnifiedMap)
