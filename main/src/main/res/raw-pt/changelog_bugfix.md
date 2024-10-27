@@ -1,4 +1,7 @@
 ##
+- Fix: Missing event times on cache download (website change)
+
+##
 - Novo: Mostrar aviso para activação de ligação gc sem credenciais
 - Correcção: Carta de elevação errada para percursos com vários segmentos
 - Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
