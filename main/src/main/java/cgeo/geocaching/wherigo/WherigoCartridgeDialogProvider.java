@@ -16,7 +16,6 @@ import android.view.View;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
 
@@ -48,7 +47,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
         final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, cartridgeFile.name);
         binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
@@ -74,21 +73,19 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
         binding.media.setMediaData("jpg", mediaData, null);
         refreshGui();
+        control.setOnGameNotificationListener((d, nt) -> refreshGui());
 
         WherigoUtils.setViewActions(Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, CartridgeAction::getTextParam, item -> {
-            WherigoDialogManager.dismissDialog(dialog);
+            control.dismiss();
             if (item == CartridgeAction.CLOSE) {
                 return;
             }
             //Other actions require ending a running game (if any)
             WherigoUtils.ensureNoGameRunning(activity, () -> performActionAfterGameEnded(item, activity, saveGames));
         });
-        return dialog;
-    }
 
-    @Override
-    public void onGameNotification(final WherigoGame.NotifyType notifyType) {
-        refreshGui();
+        dialog.show();
+        return dialog;
     }
 
     private void refreshGui() {

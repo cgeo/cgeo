@@ -276,7 +276,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.download.setEnabled(true);
         binding.reportProblem.setEnabled(true);
 
-        binding.resumeDialog.setVisibility(WherigoDialogManager.get().isPaused() ? View.VISIBLE : View.GONE);
+        binding.resumeDialog.setVisibility(WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED ? View.VISIBLE : View.GONE);
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo().getLoadableSavegames().size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());

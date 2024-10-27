@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -39,9 +38,6 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
     @NonNull private final String button1;
     @Nullable private final String button2;
     @Nullable private final LuaClosure callback;
-
-    private WherigoThingDetailsBinding binding;
-    private int page;
 
 
     /**
@@ -67,16 +63,16 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         this.button1 = StringUtils.isBlank(button1) ? LocalizationUtils.getString(R.string.ok) : button1.trim();
         this.button2 = StringUtils.isBlank(button2) ? null : button2.trim();
         this.callback = callback;
-        this.page = 0;
     }
 
     @Override
-    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
         final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
-        binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
+        final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
+        final int[] page = new int[]{ 0 };
 
-        refreshGui();
+        refreshGui(binding, 0);
 
         final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(TRUE, FALSE);
 
@@ -85,15 +81,15 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                 TextParam.text(button2).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
             item -> {
                 if (FALSE.equals(item)) {
-                    WherigoDialogManager.dismissDialog(dialog);
+                    control.dismiss();
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button2");
                     }
-                } else if (this.page + 1 < texts.length) {
-                    this.page ++;
-                    refreshGui();
+                } else if (page[0] + 1 < texts.length) {
+                    page[0] ++;
+                    refreshGui(binding, page[0]);
                 } else {
-                    WherigoDialogManager.dismissDialog(dialog);
+                    control.dismiss();
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button1");
                     }
@@ -101,12 +97,13 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
             }
         );
 
+        dialog.show();
         return dialog;
     }
 
-    private void refreshGui() {
-        final int page = this.page < 0 || this.page >= texts.length ? 0 : this.page;
-        final String message = this.texts[this.page];
+    private void refreshGui(final WherigoThingDetailsBinding binding, final int pageToDisplay) {
+        final int page = pageToDisplay < 0 || pageToDisplay >= texts.length ? 0 : pageToDisplay;
+        final String message = this.texts[page];
         final Media media = this.media == null || this.media.length == 0 ? null : (page >= this.media.length ? this.media[0] : this.media[page]);
 
         binding.description.setText(WherigoGame.get().toDisplayText(message));

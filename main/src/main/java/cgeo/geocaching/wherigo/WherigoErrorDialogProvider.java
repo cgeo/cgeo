@@ -9,12 +9,10 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import android.app.Activity;
 import android.app.Dialog;
 
-import java.util.function.Consumer;
-
 public class WherigoErrorDialogProvider implements IWherigoDialogProvider {
 
     @Override
-    public Dialog createAndShowDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl dialogControl) {
 
         final String lastError = WherigoGame.get().getLastError();
         final String errorMessage = lastError == null ? LocalizationUtils.getString(R.string.wherigo_error_game_noerror) : LocalizationUtils.getString(R.string.wherigo_error_game_error, lastError);
