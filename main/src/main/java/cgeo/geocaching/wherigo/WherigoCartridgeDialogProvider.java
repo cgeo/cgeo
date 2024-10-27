@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import cz.matejcik.openwig.formats.CartridgeFile;
@@ -23,7 +24,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
     private final WherigoCartridgeInfo cartridgeInfo;
     private final CartridgeFile cartridgeFile;
-    private WherigoCartridgeDetailsBinding binding;
+    private final boolean infoOnly;
 
     private enum CartridgeAction {
         PLAY(TextParam.id(R.string.play).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
@@ -41,15 +42,16 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
     }
 
-    public WherigoCartridgeDialogProvider(final WherigoCartridgeInfo cartridgeInfo) {
+    public WherigoCartridgeDialogProvider(final WherigoCartridgeInfo cartridgeInfo, final boolean infoOnly) {
         this.cartridgeInfo = cartridgeInfo;
         this.cartridgeFile = cartridgeInfo.getCartridgeFile();
+        this.infoOnly = infoOnly;
     }
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, cartridgeFile.name);
-        binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, cartridgeFile.name);
+        final WherigoCartridgeDetailsBinding binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 
         final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getLoadableSavegames();
@@ -72,10 +74,10 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         }
 
         binding.media.setMediaData("jpg", mediaData, null);
-        refreshGui();
-        control.setOnGameNotificationListener((d, nt) -> refreshGui());
+        refreshGui(binding);
+        control.setOnGameNotificationListener((d, nt) -> refreshGui(binding));
 
-        WherigoUtils.setViewActions(Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, CartridgeAction::getTextParam, item -> {
+        WherigoViewUtils.setViewActions(infoOnly ? Collections.singleton(CartridgeAction.CLOSE) : Arrays.asList(CartridgeAction.values()), binding.dialogActionlist, 1, CartridgeAction::getTextParam, item -> {
             control.dismiss();
             if (item == CartridgeAction.CLOSE) {
                 return;
@@ -88,7 +90,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         return dialog;
     }
 
-    private void refreshGui() {
+    private void refreshGui(final WherigoCartridgeDetailsBinding binding) {
         TextParam.text("**CGUID:** " + cartridgeInfo.getCGuid() + "  \n" +
             "**" + LocalizationUtils.getString(R.string.wherigo_author) + ":** " + cartridgeFile.author + "  \n" +
             "**" + LocalizationUtils.getString(R.string.cache_location) + ":** " + cartridgeInfo.getCartridgeLocation() + "  \n" +

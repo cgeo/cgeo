@@ -2,7 +2,6 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
@@ -12,9 +11,7 @@ import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
-import cgeo.geocaching.ui.SimpleItemListView;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -22,7 +19,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -30,8 +26,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.style.StyleSpan;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,8 +39,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -59,7 +51,6 @@ import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import se.krka.kahlua.vm.LuaTable;
 
@@ -67,7 +58,7 @@ public final class WherigoUtils {
 
     public static final TextParam TP_OK_BUTTON = TextParam.id(R.string.ok).setImage(ImageParam.id(R.drawable.ic_menu_done));
     public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.ic_menu_done));
-    public static final TextParam TP_PAUSE_BUTTON = TextParam.id(R.string.pause).setImage(ImageParam.id(R.drawable.ic_menu_done));
+    public static final TextParam TP_CANCEL_BUTTON = TextParam.id(R.string.cancel).setImage(ImageParam.id(R.drawable.ic_menu_cancel));
 
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
@@ -134,18 +125,6 @@ public final class WherigoUtils {
         } else {
             Engine.callEvent(thing, eventName, null);
         }
-    }
-
-    public static <T> void setViewActions(final Iterable<T> actions, final SimpleItemListView view, final Function<T, TextParam> displayMapper, final Consumer<T> clickHandler) {
-        final SimpleItemListModel<T> model = new SimpleItemListModel<>();
-        model
-            .setItems(actions)
-            .setDisplayMapper((item, group) -> displayMapper.apply(item), null, (ctx, parent) -> ViewUtils.createButton(ctx, parent, TextParam.text(""), true))
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-            .setItemPadding(10, 0)
-            .addSingleSelectListener(clickHandler);
-        view.setModel(model);
-        view.setVisibility(View.VISIBLE);
     }
 
     public static boolean isVisibleToPlayer(final EventTable et) {
@@ -359,18 +338,6 @@ public final class WherigoUtils {
         } else {
             WherigoDialogManager.get().display(new WherigoThingDialogProvider(thing));
         }
-    }
-
-    public static AlertDialog createFullscreenDialog(@NonNull final Activity activity, @Nullable final String title) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(activity, R.style.cgeo_fullScreen);
-        final AlertDialog dialog = builder.create();
-        if (!StringUtils.isBlank(title)) {
-            final WherigoDialogTitleViewBinding titleBinding = WherigoDialogTitleViewBinding.inflate(LayoutInflater.from(activity));
-            titleBinding.dialogTitle.setText(title);
-            dialog.setCustomTitle(titleBinding.getRoot());
-        }
-        return dialog;
-
     }
 
     public static Comparator<EventTable> getThingsComparator() {

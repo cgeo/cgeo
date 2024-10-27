@@ -50,7 +50,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, eventTable.name);
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, eventTable.name);
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 
@@ -91,7 +91,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         }
         actions.add(ThingAction.CLOSE);
 
-        WherigoUtils.setViewActions(actions, binding.dialogActionlist,
+        WherigoViewUtils.setViewActions(actions, binding.dialogActionlist, 1,
                 a -> a instanceof Action ?
                         TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
                         ((ThingAction) a).getTextParam(),

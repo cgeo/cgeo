@@ -67,20 +67,22 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
 
     @Override
     public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
-        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
+        control.setPauseOnDismiss(true);
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
         final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
         final int[] page = new int[]{ 0 };
 
         refreshGui(binding, 0);
 
-        final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(TRUE, FALSE);
+        final List<Boolean> options = button2 == null ? Collections.singletonList(TRUE) : Arrays.asList(FALSE, TRUE);
 
-        WherigoUtils.setViewActions(options, binding.dialogActionlist, item -> TRUE.equals(item) ?
+        WherigoViewUtils.setViewActions(options, binding.dialogActionlist, button2 == null ? 1 : 2, item -> TRUE.equals(item) ?
                 TextParam.text(button1).setImage(ImageParam.id(R.drawable.ic_menu_done)) :
                 TextParam.text(button2).setImage(ImageParam.id(R.drawable.ic_menu_cancel)),
             item -> {
                 if (FALSE.equals(item)) {
+                    control.setPauseOnDismiss(false);
                     control.dismiss();
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button2");
@@ -89,6 +91,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
                     page[0] ++;
                     refreshGui(binding, page[0]);
                 } else {
+                    control.setPauseOnDismiss(false);
                     control.dismiss();
                     if (callback != null) {
                         Engine.invokeCallback(callback, "Button1");
