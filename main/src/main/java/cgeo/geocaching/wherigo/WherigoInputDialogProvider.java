@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -62,8 +61,8 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
-        resultSetter.accept(false);
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
+        control.setPauseOnDismiss(true);
 
         final WherigoGame game = WherigoGame.get();
 
@@ -87,14 +86,16 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
             WherigoUtils.setViewActions(Arrays.asList(Boolean.TRUE, Boolean.FALSE),
                     binding.dialogActionlist, item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_PAUSE_BUTTON, item -> {
                 if (item) {
-                    resultSetter.accept(true);
+                    control.setPauseOnDismiss(false);
+                    control.dismiss();
                     Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
+                } else {
+                    control.dismiss();
                 }
-                WherigoDialogManager.dismissDialog(dialog);
             });
             EditUtils.setActionListener(binding.dialogInputEdittext, () -> {
-                resultSetter.accept(true);
-                WherigoDialogManager.dismissDialog(dialog);
+                control.setPauseOnDismiss(false);
+                control.dismiss();
                 Engine.callEvent(input, "OnGetInput", String.valueOf(binding.dialogInputEdittext.getText()));
             });
             Keyboard.show(activity, binding.dialogInputEdittext);
@@ -127,10 +128,12 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                 WherigoUtils.setViewActions(Arrays.asList(Boolean.TRUE, Boolean.FALSE), binding.dialogActionlist,
                     item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_PAUSE_BUTTON, item -> {
                         if (item) {
-                            resultSetter.accept(true);
+                            control.setPauseOnDismiss(false);
+                            control.dismiss();
                             Engine.callEvent(input, "OnGetInput", CommonUtils.first(choiceModel.getSelectedItems()));
+                        } else {
+                            control.dismiss();
                         }
-                        WherigoDialogManager.dismissDialog(dialog);
                 });
                 handled = true;
             }
@@ -139,11 +142,12 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         if (!handled) {
             WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
-                resultSetter.accept(true);
-                WherigoDialogManager.dismissDialog(dialog);
+                control.setPauseOnDismiss(false);
+                control.dismiss();
                 Engine.callEvent(input, "OnGetInput", null);
             });
         }
+        dialog.show();
         return dialog;
 
     }

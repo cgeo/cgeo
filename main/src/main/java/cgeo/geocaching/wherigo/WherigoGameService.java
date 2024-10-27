@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import java.util.function.BiConsumer;
@@ -51,6 +52,8 @@ public class WherigoGameService extends Service {
             .setContentTitle(content)
             .setContentText(content)
             .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, WherigoActivity.class), ProcessUtils.getFlagImmutable()))
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+            .setSilent(true)
             .setOngoing(true).build());
     }
 

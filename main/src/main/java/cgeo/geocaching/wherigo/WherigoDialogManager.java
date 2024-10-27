@@ -4,9 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
-import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
 
 import android.app.Activity;
@@ -14,12 +12,13 @@ import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Looper;
 
 import androidx.core.app.NotificationCompat;
 
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * Starts and handles Wherigo-related dialogs
@@ -36,60 +35,191 @@ public class WherigoDialogManager {
         return INSTANCE;
     }
 
-    private final Object mutex = new Object();
+    private Predicate<Activity> displayAllowedChecker = activity -> {
+        return !WherigoGame.get().openOnlyInWherigo() || activity instanceof WherigoActivity;
+    };
 
-    private IWherigoDialogProvider dialogProvider;
-    private Dialog currentDialog;
-    private boolean currentDialogResult;
+    private State state = State.NO_DIALOG;
+    private boolean currentlyDisplayingNotification;
+    private IWherigoDialogProvider currentDialogProvider; //filled in states DIALOG_DISPLAYED, DIALOG_WAITING, DIALOG_PAUSED
+    private IWherigoDialogControl currentDialogControl; // filled in state DIALOG_DISPLAYED
+    private final AtomicInteger currentDialogId = new AtomicInteger(0); // if DIALOG_DISPLAYED, then holds id of this dialog
 
-    private boolean isPaused = false;
 
-    private final AtomicInteger currentDialogId = new AtomicInteger(0);
+    public enum State {
+        NO_DIALOG, // no dialog is displayed and none is waiting to be displayed
+        DIALOG_DISPLAYED, //a dialog is currently being displayed
+        DIALOG_WAITING, // a dialog is waiting for being displayed
+        DIALOG_PAUSED // current dialog was already displayed, then paused and is not waiting to be "unpaused" (=displayed again)
+    }
 
+    private static class WherigoDialogControl implements IWherigoDialogControl {
+
+        private Dialog dialog;
+        private int gameListenerId = 0;
+        private boolean pauseOnDismiss;
+        private BiConsumer<Dialog, WherigoGame.NotifyType> gameListener;
+        private Consumer<Dialog> dismissListener;
+        private boolean isDismissed = false;
+        private boolean flaggedForNoUserResult = false;
+
+        public static WherigoDialogControl createAndShowDialog(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onDismissAction) {
+            return new WherigoDialogControl(activity, dialogProvider, onDismissAction);
+        }
+
+        private WherigoDialogControl(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onUserResultAction) {
+            dialog = dialogProvider.createAndShowDialog(activity, this);
+            if (gameListener != null) {
+                gameListenerId = WherigoGame.get().addListener(nt -> WherigoViewUtils.ensureRunOnUi(() -> {
+                    if (!isDismissed) {
+                        gameListener.accept(dialog, nt);
+                    }
+                }));
+            }
+
+            dialog.setOnDismissListener(d -> WherigoViewUtils.ensureRunOnUi(() -> {
+                WherigoGame.get().removeListener(gameListenerId);
+                isDismissed = true;
+                if (dismissListener != null) {
+                    dismissListener.accept(dialog);
+                }
+                if (onUserResultAction != null && !flaggedForNoUserResult) {
+                    onUserResultAction.accept(pauseOnDismiss);
+                }
+                WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_CLOSE);
+                dialog = null;
+            }));
+            WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
+        }
+
+        @Override
+        public void setPauseOnDismiss(final boolean pauseOnDismiss) {
+            this.pauseOnDismiss = pauseOnDismiss;
+        }
+
+        @Override
+        public void setOnGameNotificationListener(final BiConsumer<Dialog, WherigoGame.NotifyType> listener) {
+            this.gameListener = listener;
+        }
+
+        @Override
+        public void setOnDismissListener(final Consumer<Dialog> listener) {
+            this.dismissListener = listener;
+        }
+
+        @Override
+        public void dismiss() {
+            WherigoViewUtils.safeDismissDialog(dialog);
+        }
+
+        @Override
+        public void dismissWithoutUserResult() {
+            flaggedForNoUserResult = true;
+            dismiss();
+        }
+    }
 
     private WherigoDialogManager() {
-        CgeoApplication.getInstance().addLifecycleListener(() -> ensureRunOnUi(() -> this.checkDialogDisplay(false)));
+        CgeoApplication.getInstance().addLifecycleListener(() -> executeAction(this::checkDialogDisplay));
     }
 
     /** displays a dialog directly on top of an activity. This will NOT close an existing displayed dialog */
     public static void displayDirect(final Activity activity, final IWherigoDialogProvider dialogProvider) {
-        displayDialog(activity, dialogProvider, result -> { }, () -> { });
+        WherigoViewUtils.ensureRunOnUi(() -> {
+            WherigoDialogControl.createAndShowDialog(activity, dialogProvider, null);
+        });
     }
 
-    public static void dismissDialog(final Dialog dialog) {
-        if (dialog == null) {
-            return;
-        }
-        try {
-            dialog.dismiss();
-        } catch (Exception ex) {
-            Log.w("Exception when dismissing dialog", ex);
-        }
-    }
-
-    public boolean isPaused() {
-        return isPaused;
+    public State getState() {
+        return state;
     }
 
     public void unpause() {
-        synchronized (mutex) {
-            this.isPaused = false;
-            checkDialogDisplay(true);
+        executeAction(() -> {
+            if (state == State.DIALOG_PAUSED) {
+                this.state = State.DIALOG_WAITING;
+                checkDialogDisplay();
+            }
+        });
+    }
+
+    /** sets a new Wherigo Dialog to display. Removes/closes any other waiting/opened dialog */
+    public void display(final IWherigoDialogProvider dialogProvider) {
+        executeAction(() -> {
+            clearInternal();
+            this.currentDialogProvider = dialogProvider;
+            state = State.DIALOG_WAITING;
+            checkDialogDisplay();
+        });
+    }
+
+    public void clear() {
+        executeAction(this::clearInternal);
+    }
+
+    /** called after a change in activities. Checks if a waiting dialog can now be displayed */
+    private void checkDialogDisplay() {
+        final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
+        if (state == State.DIALOG_WAITING && currentActivity != null && displayAllowedChecker.test(currentActivity)) {
+            closeCurrentDialog();
+            displayDialogForCurrentProvider(currentActivity);
+        }
+        if (state == State.DIALOG_DISPLAYED && currentActivity == null) {
+            //close dialog, but prepare to re-open when activity comes back
+            currentDialogControl.dismissWithoutUserResult();
+            state = State.DIALOG_WAITING;
         }
     }
 
-    /** sets a new Wherigo Dialog to display */
-    public void display(final IWherigoDialogProvider dialogProvider) {
-        ensureRunOnUi(() -> {
-            synchronized (mutex) {
-                clear();
-                this.dialogProvider = dialogProvider;
-                final boolean success = checkDialogDisplay(true);
-                if (!success) {
-                    createNotification();
+    private void closeCurrentDialog() {
+        if (currentDialogControl == null) {
+            return;
+        }
+        currentDialogControl.dismiss();
+        currentDialogControl = null;
+    }
+
+    /** opens currently waiting dialog in given activity */
+    private void displayDialogForCurrentProvider(final Activity activity) {
+
+        if (currentDialogControl != null || currentDialogProvider == null) {
+            return;
+        }
+
+        //create a unique dialog id to check in callbacks if this is still the right dialog
+        final int dialogId = currentDialogId.addAndGet(1);
+
+        currentDialogControl = WherigoDialogControl.createAndShowDialog(activity, currentDialogProvider, isPause -> {
+            executeAction(() -> {
+                if (currentDialogId.get() == dialogId) {
+                    closeCurrentDialog();
+                    if (isPause) {
+                        state = State.DIALOG_PAUSED;
+                    } else {
+                        this.currentDialogProvider = null;
+                        state = State.NO_DIALOG;
+                    }
                 }
-            }
+            });
         });
+        state = State.DIALOG_DISPLAYED;
+    }
+
+    private void clearInternal() {
+        closeCurrentDialog();
+        currentDialogProvider = null;
+        state = State.NO_DIALOG;
+
+    }
+
+    private void checkNotificationDisplay() {
+        final boolean currentHasNotificaton = this.state == State.DIALOG_WAITING || this.state == State.DIALOG_PAUSED;
+        if (this.currentlyDisplayingNotification && !currentHasNotificaton) {
+            Notifications.cancel(CgeoApplication.getInstance(), Notifications.ID_WHERIGO_NEW_DIALOG_ID);
+        } else if (!this.currentlyDisplayingNotification && currentHasNotificaton) {
+            createNotification();
+        }
+        this.currentlyDisplayingNotification = currentHasNotificaton;
     }
 
     private void createNotification() {
@@ -108,139 +238,11 @@ public class WherigoDialogManager {
         );
     }
 
-    private boolean checkDialogDisplay(final boolean force) {
-        synchronized (mutex) {
-            if (!force && isPaused) {
-                return false;
-            }
-            if (currentDialog != null && currentDialog.getOwnerActivity() != null && currentDialog.getOwnerActivity().isFinishing()) {
-                closeCurrentDialog();
-            }
-            final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
-            if (currentActivity != null && (!WherigoGame.get().openOnlyInWherigo() || currentActivity instanceof WherigoActivity)) {
-                return openCurrentDialog(currentActivity);
-            }
-            return false;
-        }
-    }
-
-    private void closeCurrentDialog() {
-        synchronized (mutex) {
-            if (currentDialog == null) {
-                return;
-            }
-
-            dismissDialog(currentDialog);
-
-            currentDialog = null;
-            isPaused = !currentDialogResult;
-            if (currentDialogResult) {
-                dialogProvider = null;
-            } else {
-                createNotification();
-            }
-        }
-    }
-
-    private boolean openCurrentDialog(final Activity activity) {
-        synchronized (mutex) {
-            if (currentDialog != null || dialogProvider == null) {
-                return false;
-            }
-
-            //create a unique dialog id to check in callbacks if this is still the right dialog
-            final int dialogId = currentDialogId.addAndGet(1);
-
-            isPaused = false;
-            currentDialogResult = true;
-            currentDialog = displayDialog(activity, dialogProvider, result -> {
-                synchronized (mutex) {
-                    if (currentDialogId.get() == dialogId) {
-                        currentDialogResult = result;
-                    }
-                }
-            }, () -> {
-                synchronized (mutex) {
-                    if (currentDialog != null && dialogId == currentDialogId.get()) {
-                        closeCurrentDialog();
-                    }
-                }
-            });
-
-            //dismiss any wherigo dialog notification since the dialog would now be displayed
-            Notifications.cancel(activity, Notifications.ID_WHERIGO_NEW_DIALOG_ID);
-            return true;
-        }
-    }
-
-//    private boolean openCurrentDialog(final Activity activity) {
-//        synchronized (mutex) {
-//            if (currentDialog != null || dialogProvider == null) {
-//                return false;
-//            }
-//            final int dialogId = currentDialogId.addAndGet(1);
-//            currentDialog = dialogProvider.createAndShowDialog(activity);
-//            currentDialog.setOnDismissListener(d -> ensureRunOnUi(() -> {
-//                synchronized (mutex) {
-//                    //check whether the dialog for this dismiss-event still exists
-//                    if (currentDialog != null && dialogId == currentDialogId.get()) {
-//                        closeCurrentDialog();
-//                    }
-//                }
-//            }));
-//            gameListenerId[0] = WherigoGame.get().addListener(nt -> ensureRunOnUi(() -> {
-//                synchronized (mutex) {
-//                    //check whether the dialog for this wherigo-event still exists
-//                    if (currentDialog != null && dialogId == currentDialogId.get()) {
-//                        dialogProvider.onGameNotification(nt);
-//                    }
-//                }
-//            }));
-//            //dismiss any wherigo dialog notification since the dialog would now be displayed
-//            Notifications.cancel(activity, Notifications.ID_WHERIGO_NEW_DIALOG_ID);
-//            return true;
-//        }
-//    }
-
-
-    private static Dialog displayDialog(final Activity activity, final IWherigoDialogProvider dialogProvider, final Consumer<Boolean> onResultSet, final Runnable onCloseAction) {
-
-        final Dialog[] dialog = new Dialog[]{ null };
-        final int[] gameListenerId = new int[]{ -1 };
-
-        dialog[0] = dialogProvider.createAndShowDialog(activity, onResultSet);
-        dialog[0].setOnDismissListener(d -> ensureRunOnUi(() -> {
-            WherigoGame.get().removeListener(gameListenerId[0]);
-            dialogProvider.onDialogDismiss();
-            WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_CLOSE);
-            onCloseAction.run();
-        }));
-
-        gameListenerId[0] = WherigoGame.get().addListener(nt -> ensureRunOnUi(() -> {
-            dialogProvider.onGameNotification(nt);
-        }));
-
-        WherigoGame.get().notifyListeners(WherigoGame.NotifyType.DIALOG_OPEN);
-
-        return dialog[0];
-    }
-
-
-    public void clear() {
-        ensureRunOnUi(() -> {
-            synchronized (mutex) {
-                closeCurrentDialog();
-                currentDialog = null;
-            }
-        });
-    }
-
-    private static void ensureRunOnUi(final Runnable r) {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
+    private void executeAction(final Runnable r) {
+        WherigoViewUtils.ensureRunOnUi(() -> {
             r.run();
-        } else {
-            AndroidRxUtils.runOnUi(r);
-        }
+            checkNotificationDisplay();
+        });
     }
 
 }

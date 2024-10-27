@@ -6,7 +6,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,14 +13,11 @@ import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Action;
-import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Media;
 import cz.matejcik.openwig.Thing;
@@ -30,10 +26,6 @@ import cz.matejcik.openwig.Zone;
 public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
     private final EventTable eventTable;
-    private WherigoThingDetailsBinding binding;
-
-    private WeakReference<Activity> weakActivity;
-    private WeakReference<Dialog> weakDialog;
 
     private enum ThingAction {
         DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
@@ -57,30 +49,19 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     }
 
     @Override
-    public Dialog createDialog(final Activity activity, final Consumer<Boolean> resultSetter) {
+    public Dialog createAndShowDialog(final Activity activity, final IWherigoDialogControl control) {
         final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, eventTable.name);
-        binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
+        final WherigoThingDetailsBinding binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 
-        weakActivity = new WeakReference<>(activity);
-        weakDialog = new WeakReference<>(dialog);
+        refreshGui(activity, control, binding);
+        control.setOnGameNotificationListener((d, nt) -> refreshGui(activity, control, binding));
 
-        refreshGui();
-
-        if (eventTable.hasEvent("OnClick")) {
-            Log.iForce("Wherigo: item has 'OnClick': " + eventTable);
-            Engine.callEvent(eventTable, "OnClick", null);
-        }
-
+        dialog.show();
         return dialog;
     }
 
-    @Override
-    public void onGameNotification(final WherigoGame.NotifyType notifyType) {
-        refreshGui();
-    }
-
-    private void refreshGui() {
+    private void refreshGui(final Activity activity, final IWherigoDialogControl control, final WherigoThingDetailsBinding binding) {
         TextParam.text(WherigoUtils.eventTableDebugInfo(eventTable)).setMarkdown(true).applyTo(binding.debugInfo);
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? View.VISIBLE : View.GONE);
         binding.headerInformation.setVisibility(eventTable instanceof Zone ? View.VISIBLE : View.GONE);
@@ -92,10 +73,10 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         binding.description.setText(WherigoGame.get().toDisplayText(eventTable.description));
 
         //actions
-        refreshActionList();
+        refreshActionList(activity, control, binding);
     }
 
-    private void refreshActionList() {
+    private void refreshActionList(final Activity activity, final IWherigoDialogControl control, final WherigoThingDetailsBinding binding) {
 
         //"actions" will be filled with instance of both "Action" and "ThingAction"
         final List<Object> actions = new ArrayList<>();
@@ -117,33 +98,26 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
                 item -> {
                     if (item instanceof Action) {
                         WherigoUtils.callAction((Thing) eventTable, (Action) item);
-                        refreshGui();
+                        refreshGui(activity, control, binding);
                         return;
                     }
                     final ThingAction thingAction = (ThingAction) item;
                     switch (thingAction) {
                         case DISPLAY_ON_MAP:
-                            closeDialog();
-                            final Activity activity = weakActivity.get();
-                            if (activity != null) {
-                                DefaultMap.startActivityViewport(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)));
-                            }
+                            control.dismiss();
+                            DefaultMap.startActivityViewport(activity, WherigoUtils.getZonesViewport(Collections.singleton((Zone) eventTable)));
                             break;
                         case LOCATE_ON_CENTER:
-                            closeDialog();
+                            control.dismiss();
                             final Geopoint center = WherigoUtils.getZoneCenter((Zone) eventTable);
                             WherigoLocationProvider.get().setFixedLocation(center);
                             break;
                         case CLOSE:
                         default:
-                            closeDialog();
+                            control.dismiss();
                     }
                 }
         );
-    }
-
-    private void closeDialog() {
-        WherigoDialogManager.dismissDialog(weakDialog == null ? null : weakDialog.get());
     }
 
 }
