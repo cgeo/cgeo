@@ -294,7 +294,7 @@ public class ViewSettingsActivity extends CustomMenuEntryActivity {
                 .setView(binding.getRoot())
                 .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
                 .setPositiveButton(android.R.string.ok, (d, which) -> {
-                    final String preferenceName = binding.preferenceName.getText().toString().trim();
+                    final String preferenceName = ViewUtils.getEditableText(binding.preferenceName.getText()).trim();
                     final int rbId = rg.getCheckedRadioButtonId();
                     if (rbId == -1) {
                         ViewUtils.showShortToast(this, R.string.add_setting_missing_type);

@@ -30,7 +30,6 @@ import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapItemFactory;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
@@ -217,7 +216,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CGeoMap map = getReference();
             if (map == null) {
                 return;
@@ -439,7 +438,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
         // prepare circular progress spinner
-        spinner = (ProgressBar) activity.findViewById(R.id.map_progressbar);
+        spinner = activity.findViewById(R.id.map_progressbar);
         if (null != spinner) {
             spinner.setVisibility(View.GONE);
         }
@@ -542,7 +541,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         setTitle();
 
         // initialize map
-        mapView = (MapViewImpl) activity.findViewById(mapProvider.getMapViewId());
+        mapView = activity.findViewById(mapProvider.getMapViewId());
 
         // only add cache if it is currently visible
         activity.getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(mapView.getContext()) {
@@ -818,7 +817,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 MapUtils.checkHillshadingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
             }
         } else if (HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-                || DownloaderUtils.onOptionsItemSelected(activity, id, false)) {
+                || DownloaderUtils.onOptionsItemSelected(activity, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
             mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget);

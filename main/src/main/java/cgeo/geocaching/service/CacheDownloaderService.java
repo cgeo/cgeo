@@ -75,7 +75,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         // some caches are already stored offline, thus show the advanced selection dialog
 
         final View content = LayoutInflater.from(context).inflate(R.layout.dialog_background_download_config, null);
-        final RadioGroup radioGroup = (RadioGroup) content.findViewById(R.id.radioGroup);
+        final RadioGroup radioGroup = content.findViewById(R.id.radioGroup);
 
         Dialogs.newBuilder(context)
                 .setView(content)
@@ -249,7 +249,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     @Override
     public void onDestroy() {
-        if (downloadQuery.size() > 0) {
+        if (!downloadQuery.isEmpty()) {
             showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
                     cachesDownloaded.get(), cachesDownloaded.get() + downloadQuery.size()));
         } else if (cachesDownloaded.get() != 1) { // see #15881

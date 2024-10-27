@@ -69,14 +69,6 @@ public class OsmNodePairSet {
         return npairs;
     }
 
-    public int tempSize() {
-        return tempNodes;
-    }
-
-    public int getMaxTmpNodes() {
-        return maxTempNodes;
-    }
-
     public int getFreezeCount() {
         return freezecount;
     }

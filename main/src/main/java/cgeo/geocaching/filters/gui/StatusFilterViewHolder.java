@@ -69,10 +69,6 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         }
     }
 
-    public boolean isSimpleView() {
-        return this.simpleView;
-    }
-
     @Override
     public View createView() {
         final LinearLayout ll = new LinearLayout(getActivity());

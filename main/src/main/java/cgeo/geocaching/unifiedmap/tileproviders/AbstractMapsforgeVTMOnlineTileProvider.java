@@ -24,13 +24,13 @@ import org.oscim.tiling.source.bitmap.BitmapTileSource;
 
 class AbstractMapsforgeVTMOnlineTileProvider extends AbstractMapsforgeVTMTileProvider {
 
-    private final AbstractTileSource mfTileSource;
     private String tilePath;
 
     AbstractMapsforgeVTMOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax, final Pair<String, Boolean> mapAttribution) {
         super(name, uri, zoomMin, zoomMax, mapAttribution);
         this.tilePath = tilePath;
-        mfTileSource = new AbstractTileSource(new String[]{ uri.getHost() }, 443) {
+        // tilePath: "/cyclosm/{Z}/{X}/{Y}.png"
+        new AbstractTileSource(new String[]{uri.getHost()}, 443) {
             @Override
             public int getParallelRequestsLimit() {
                 return 8;

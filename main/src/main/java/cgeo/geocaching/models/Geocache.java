@@ -204,7 +204,7 @@ public class Geocache implements IWaypoint {
     private Boolean hasLogOffline = null;
     private OfflineLogEntry offlineLog = null;
 
-    private EventTimesInMin eventTimesInMin = new EventTimesInMin();
+    private final EventTimesInMin eventTimesInMin = new EventTimesInMin();
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -588,9 +588,7 @@ public class Geocache implements IWaypoint {
             SimpleDialog.of(fromActivity)
                     .setTitle(R.string.caches_overwrite_offline_log)
                     .setMessage(R.string.caches_overwrite_offline_log_question, getOfflineLog().logType.getL10n())
-                    .confirm(() -> {
-                        storeLogOffline(fromActivity, logEntry);
-                    });
+                    .confirm(() -> storeLogOffline(fromActivity, logEntry));
         } else {
             storeLogOffline(fromActivity, logEntry);
         }
@@ -1552,14 +1550,6 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * @return the storageLocation
-     */
-    @NonNull
-    public EnumSet<StorageLocation> getStorageLocation() {
-        return storageLocation;
-    }
-
-    /**
      * @param storageLocation the storageLocation to set
      */
     public void addStorageLocation(final StorageLocation storageLocation) {
@@ -2321,7 +2311,7 @@ public class Geocache implements IWaypoint {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
             final Folder spoilerFolder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                    suffix.substring(1) + "/" + suffix.substring(0, 1) + "/" + geocode);
+                    suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
             for (ContentStorage.FileInformation imageFile : ContentStorage.get().list(spoilerFolder)) {
                 if (imageFile.isDirectory) {
                     continue;

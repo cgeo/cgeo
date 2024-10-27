@@ -50,7 +50,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void createRenderthemeMenu() {
-        final Activity activity = getActivity();
+        final Activity activity = requireActivity();
 
         this.renderthemeMenu.removeAll();
 

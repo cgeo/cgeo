@@ -782,4 +782,8 @@ public class ViewUtils {
         }
         return result;
     }
+
+    public static String getEditableText(@Nullable final Editable editable) {
+        return editable == null ? "" : editable.toString();
+    }
 }

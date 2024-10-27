@@ -104,7 +104,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CachePopupFragment popup = getReference();
             if (popup == null) {
                 return;
@@ -115,7 +115,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         binding = PopupBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }
@@ -147,8 +147,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             onCreatePopupOptionsMenu(toolbar, this, cache);
             toolbar.setOnMenuItemClickListener(this::onPopupOptionsItemSelected);
 
-            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, cache.getName()));
-            details = new CacheDetailsCreator(getActivity(), binding.detailsList);
+            binding.title.setText(TextUtils.coloredCacheText(getActivity(), cache, StringUtils.defaultIfBlank(cache.getName(), "")));
+            details = new CacheDetailsCreator(requireActivity(), binding.detailsList);
 
             addCacheDetails(false);
 
@@ -161,7 +161,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             // Wherigo
             if (WhereYouGoApp.isWherigo(cache)) {
                 binding.sendToWhereyougo.setVisibility(View.VISIBLE);
-                CacheUtils.setWherigoLink(getActivity(), cache, binding.sendToWhereyougo);
+                CacheUtils.setWherigoLink(requireActivity(), cache, binding.sendToWhereyougo);
             } else {
                 binding.sendToWhereyougo.setVisibility(View.GONE);
             }
@@ -169,7 +169,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             // ALC
             if (CacheUtils.isLabAdventure(cache)) {
                 binding.sendToAlc.setVisibility(View.VISIBLE);
-                CacheUtils.setLabLink(getActivity(), cache, binding.sendToAlc, cache.getUrl());
+                CacheUtils.setLabLink(requireActivity(), binding.sendToAlc, cache.getUrl());
             } else {
                 binding.sendToAlc.setVisibility(View.GONE);
             }
@@ -271,7 +271,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
         private void selectListsAndStore(final boolean fastStoreOnLastSelection) {
             if (cache.isOffline()) {
                 // just update list selection
-                new StoredList.UserInterface(getActivity()).promptForMultiListSelection(R.string.lists_title,
+                new StoredList.UserInterface(requireActivity()).promptForMultiListSelection(R.string.lists_title,
                         CachePopupFragment.this::doStoreCacheOnLists, true, cache.getLists(), fastStoreOnLastSelection);
             } else {
                 if (!Network.isConnected()) {
@@ -304,7 +304,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return false;
             }
 
-            new StoredList.UserInterface(getActivity()).promptForListSelection(R.string.cache_menu_move_list,
+            new StoredList.UserInterface(requireActivity()).promptForListSelection(R.string.cache_menu_move_list,
                     this::moveCacheToList, true, -1);
 
             return true;
@@ -354,7 +354,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
     @Override
     public void showNavigationMenu() {
-        ViewUtils.setEnabled(getActivity().findViewById(R.id.menu_navigate), false);
+        ViewUtils.setEnabled(requireView().findViewById(R.id.menu_navigate), false);
         NavigationAppFactory.showNavigationMenu(getActivity(), cache, null, null, true, true, R.id.menu_navigate);
     }
 

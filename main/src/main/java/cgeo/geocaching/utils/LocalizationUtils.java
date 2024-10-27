@@ -24,7 +24,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 /**
  * A set of static helper methods supporting localization/internationalization
  * especially in areas where Code has no activity available to get a context from.
- *
+ * <br>
  * All methods work also in unit-test environments (where there is no available context
  */
 public final class LocalizationUtils {
@@ -34,10 +34,6 @@ public final class LocalizationUtils {
 
     private LocalizationUtils() {
         //Util class, no instance
-    }
-
-    public static boolean hasContext() {
-        return APPLICATION_CONTEXT != null;
     }
 
     public static String getString(@StringRes final int resId, final Object... params) {

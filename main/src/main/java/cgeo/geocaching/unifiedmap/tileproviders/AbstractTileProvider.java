@@ -35,10 +35,6 @@ public abstract class AbstractTileProvider {
         return mapAttribution;
     }
 
-    public boolean supportsLanguages() {
-        return supportsLanguages;
-    }
-
     public void setPreferredLanguage(final String language) {
         // default: do nothing
     }

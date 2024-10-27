@@ -277,10 +277,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
         mMapLayers.addToGroup(layer, groupIndex);
     }
 
-    public synchronized void clearGroup(final int groupIndex) {
-        mMapLayers.removeGroup(groupIndex);
-    }
-
 
     // ========================================================================
     // position related methods

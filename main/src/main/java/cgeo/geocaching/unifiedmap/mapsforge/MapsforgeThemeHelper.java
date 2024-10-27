@@ -56,9 +56,9 @@ import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
 
 /**
  * Helper class for Map Theme selection and related tasks.
- *
+ * <br>
  * Works in conjunction with {@link MapsforgeThemeSettings} (for theme settings GUI).
- *
+ * <br>
  * Note: this class is an attempt to bundle all large parts of this code were simply moved from class
  * NewMap and might need refactoring.
  */
@@ -71,8 +71,6 @@ public class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final int ZIP_FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
     private static final int ZIP_RESOURCE_READ_LIMIT = 1024 * 1024; // 1 MB
-
-    private static final long FILESYNC_MAX_FILESIZE = 5 * 1024 * 1024; //5MB
 
     private static final int AVAILABLE_THEMES_SCAN_MAXDEPTH = 2;
 

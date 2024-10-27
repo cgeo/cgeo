@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Represents a dialog usable as a context menu for various elements.
- *
+ * <br>
  * Supports textual items with or without accompanying icon.
  */
 public class ContextMenuDialog {

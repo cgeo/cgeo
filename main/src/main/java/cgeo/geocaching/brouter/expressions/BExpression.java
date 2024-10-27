@@ -376,11 +376,11 @@ final class BExpression {
     }
 
     private float max(final float v1, final float v2) {
-        return v1 > v2 ? v1 : v2;
+        return Math.max(v1, v2);
     }
 
     private float min(final float v1, final float v2) {
-        return v1 < v2 ? v1 : v2;
+        return Math.min(v1, v2);
     }
 
     private float divide(float v1, float v2) {

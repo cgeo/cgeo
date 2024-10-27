@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Represent a Trackable Tracking code along with the brand.
- *
+ * <br>
  * This is useful in some cases, as not all Trackable connectors are activated to handle tracking code lookups.
  * However, coupled with the brand, such lookups are possible.
  */

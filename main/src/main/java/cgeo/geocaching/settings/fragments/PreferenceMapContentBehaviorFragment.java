@@ -5,6 +5,7 @@ import cgeo.geocaching.settings.ButtonPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,15 +31,15 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
         updateNotificationAudioInfo();
 
         // Clear icon cache when modifying settings that influence icon appearance
-        findPreference(getString(R.string.pref_dtMarkerOnCacheIcon)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_dtMarkerOnCacheIcon)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
-        findPreference(getString(R.string.pref_bigSmileysOnMap)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_bigSmileysOnMap)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
-        findPreference(getString(R.string.pref_visitedWaypointsSemiTransparent)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_visitedWaypointsSemiTransparent)), (preference, newValue) -> {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
@@ -52,6 +53,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
     private void setButton(final boolean first) {
         final @StringRes int keyId = first ? R.string.pref_persistableuri_proximity_notification_far : R.string.pref_persistableuri_proximity_notification_close;
         final ButtonPreference bp = findPreference(getString(keyId));
+        assert bp != null;
         final String current = Settings.getString(keyId, "");
 
         bp.setSummary(StringUtils.isNotBlank(current) ? Uri.parse(current).getLastPathSegment() : getString(R.string.proximitynotification_internal));
@@ -67,7 +69,7 @@ public class PreferenceMapContentBehaviorFragment extends BasePreferenceFragment
             bp.hideButton(true);
         }
         bp.setOnPreferenceClickListener(preference -> {
-            ((SettingsActivity) getActivity()).startProximityNotificationSelector(first);
+            ((SettingsActivity) requireActivity()).startProximityNotificationSelector(first);
             return false;
         });
     }

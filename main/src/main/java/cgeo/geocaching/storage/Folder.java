@@ -23,11 +23,11 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * This class represents a concrete definite folder / directory on disk.
- *
+ * <br>
  * Folders can have different types as defined by {@link FolderType}.
  * Depending on that type, different attributes are filled and different handling is necessary
  * to interact with actual data in that folder. Those different handlings are implemented by {@link ContentStorage}.
- *
+ * <br>
  * Instances of this class are immutable. They can be serialized/deserialized to/from a String using {@link #toConfig()} and {@link #fromConfig(String)}
  *
  * Instances support the usage in Maps ({@link #equals(Object)} and {@link #hashCode()}). Note however that

@@ -112,8 +112,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
     private final PermissionAction<Void> askLocationPermissionAction = PermissionAction.register(this, PermissionContext.LOCATION, b -> binding.locationStatus.updatePermissions());
 
-    private Long lastMCTime = 0L;
-
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
         UpdateUserInfoHandler(final MainActivity activity) {
@@ -121,7 +119,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.UpdateUserInfoHandler.handleMessage")) {
                 final MainActivity activity = getReference();
                 if (activity != null) {
@@ -130,6 +128,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
 
                     // Update UI
                     activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                        @NonNull
                         @Override
                         public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
                             // do NOT use convertView, as it gets filled asynchronously, which may lead to the wrong view being filled
@@ -137,7 +136,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             final ILogin connector = getItem(position);
                             fillView(view, connector);
                             return view;
-
                         }
 
                         private void fillView(final View connectorInfo, final ILogin conn) {
@@ -283,9 +281,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                     }
                 });
             }
-            binding.locationStatus.setPermissionRequestCallback(() -> {
-                this.askLocationPermissionAction.launch(null);
-            });
+            binding.locationStatus.setPermissionRequestCallback(() -> this.askLocationPermissionAction.launch(null));
 
             configureMessageCenterPolling();
 
@@ -366,7 +362,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
     private void checkPendingDownloads() {
         if (Settings.pendingDownloadsNeedCheck()) {
             final ArrayList<PendingDownload.PendingDownloadDescriptor> pendingDownloads = PendingDownload.getAllPendingDownloads();
-            if (pendingDownloads.size() == 0) {
+            if (pendingDownloads.isEmpty()) {
                 return;
             }
 

@@ -374,20 +374,6 @@ public class MapUtils {
         }
     }
 
-    public static boolean isPartOfRoute(final RouteItem routeItem, final IndividualRoute individualRoute) {
-        final RouteSegment[] segments = (individualRoute != null ? individualRoute.getSegments() : null);
-        if (segments == null || segments.length == 0) {
-            return false;
-        }
-        final String routeItemIdentifier = routeItem.getIdentifier();
-        for (RouteSegment segment : segments) {
-            if (StringUtils.equals(routeItemIdentifier, segment.getItem().getIdentifier())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static SimplePopupMenu createEmptyLongClickPopupMenu(final Activity activity, final int tapX, final int tapY) {
         return SimplePopupMenu.of(activity).setPosition(new Point(tapX, tapY), 0);
     }

@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Base class for caching objects. Don't mix up with a geocache !
- *
+ * <br>
  * The LeastRecentlyUsedMap is basically a LinkedHashMap which can be configured to have certain modes of operation:
  * <ul>
  * <li> LRU_CACHE means that the elements are updated in the LinkedList on every get() access,
@@ -59,10 +59,6 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     @Override
     protected boolean removeEldestEntry(final Map.Entry<K, V> eldest) {
         return size() > maxEntries;
-    }
-
-    public int getMaxEntries() {
-        return maxEntries;
     }
 
     @Override

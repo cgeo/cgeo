@@ -195,7 +195,7 @@ public final class SystemInformation {
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
         }
         final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
-        if (storedFilters.size() > 0) {
+        if (!storedFilters.isEmpty()) {
             body.append("\n- ").append("Additional stored filters: ").append(storedFilters.size());
         }
     }

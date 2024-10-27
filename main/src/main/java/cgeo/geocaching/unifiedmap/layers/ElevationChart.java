@@ -153,7 +153,7 @@ public class ElevationChart {
     /** format line chart (lines, axes etc.) */
     private void formatChart(final Resources res) {
         chart.setData(null);
-        if (entries.size() > 0) {
+        if (!entries.isEmpty()) {
             final LineDataSet dataSet = new LineDataSet(entries, null);
             dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
             dataSet.setLineWidth(2f);

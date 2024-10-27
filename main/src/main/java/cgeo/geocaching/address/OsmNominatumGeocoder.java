@@ -44,19 +44,17 @@ public class OsmNominatumGeocoder {
         final Parameters param = new Parameters("q", search, "t", method);
 
         return Network.requestJSONArray(PROXY_BASE, param)
-                .flatMapObservable((Function<ArrayNode, Observable<Address>>) response -> {
-                    return Observable.create(emitter -> {
-                        try {
-                            for (final JsonNode address : response) {
-                                emitter.onNext(osmToAddress(address));
-                            }
-                            emitter.onComplete();
-                        } catch (final Exception e) {
-                            Log.e("Error decoding OSM Nominatum address", e);
-                            emitter.onError(e);
+                .flatMapObservable((Function<ArrayNode, Observable<Address>>) response -> Observable.create(emitter -> {
+                    try {
+                        for (final JsonNode address : response) {
+                            emitter.onNext(osmToAddress(address));
                         }
-                    });
-                });
+                        emitter.onComplete();
+                    } catch (final Exception e) {
+                        Log.e("Error decoding OSM Nominatum address", e);
+                        emitter.onError(e);
+                    }
+                }));
     }
 
     /**
@@ -69,17 +67,15 @@ public class OsmNominatumGeocoder {
         final String method = getMethod("", coords.getLatitudeE6(), coords.getLongitudeE6());
         final Parameters param = new Parameters("lat", String.valueOf(coords.getLatitude()), "lon", String.valueOf(coords.getLongitude()), "t", method);
         return Network.requestJSON(PROXY_BASE, param)
-                .flatMapObservable((Function<ObjectNode, Observable<Address>>) response -> {
-                    return Observable.create(emitter -> {
-                        try {
-                            emitter.onNext(osmToAddress(response));
-                            emitter.onComplete();
-                        } catch (final Exception e) {
-                            Log.e("Error decoding OSM Nominatum address", e);
-                            emitter.onError(e);
-                        }
-                    });
-                }).firstOrError();
+                .flatMapObservable((Function<ObjectNode, Observable<Address>>) response -> Observable.create(emitter -> {
+                    try {
+                        emitter.onNext(osmToAddress(response));
+                        emitter.onComplete();
+                    } catch (final Exception e) {
+                        Log.e("Error decoding OSM Nominatum address", e);
+                        emitter.onError(e);
+                    }
+                })).firstOrError();
     }
 
     public static String getMethod(final String search, final int latE6, final int lonE6) {

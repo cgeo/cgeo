@@ -44,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
- *
+ * <br>
  * To create simple dialogs, consider using {@link SimpleDialog} instead.
  */
 public final class Dialogs {
@@ -181,8 +181,8 @@ public final class Dialogs {
      */
     public static void confirmWithCheckbox(final Context context, final String title, final String message, final CheckboxDialogConfig checkboxConfig, final Action1<Boolean> onConfirm, @Nullable final Action1<Boolean> onCancel) {
         final View content = LayoutInflater.from(context).inflate(R.layout.dialog_text_checkbox, null);
-        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-        final TextView textView = (TextView) content.findViewById(R.id.message);
+        final CheckBox checkbox = content.findViewById(R.id.check_box);
+        final TextView textView = content.findViewById(R.id.message);
         textView.setText(message);
         checkbox.setText(checkboxConfig.getTextRes());
         checkbox.setChecked(checkboxConfig.isCheckedOnInit());
@@ -307,7 +307,7 @@ public final class Dialogs {
 
     /**
      * displays an input dialog (one or multiple lines)
-     *
+     * <br>
      * short form of input(), with default parameters for {@link InputType}, minLines and maxLines
      */
     public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {

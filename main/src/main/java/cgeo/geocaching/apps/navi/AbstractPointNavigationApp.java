@@ -70,6 +70,7 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
             // show a selection of all parking places and the cache itself, when using the navigation for driving
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
+                @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position),

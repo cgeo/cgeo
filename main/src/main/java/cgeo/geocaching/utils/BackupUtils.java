@@ -141,9 +141,7 @@ public class BackupUtils {
                 SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
                     .setMessage(R.string.settings_file_changed, activityContext.getString(data.left.getNameKeyId()), displayName, activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                    .confirm(() -> {
-                        fileSelector.restorePersistableUri(data.left, uriToBeRestored);
-                    },
+                    .confirm(() -> fileSelector.restorePersistableUri(data.left, uriToBeRestored),
                     () -> {
                         regrantAccessUris.remove(0);
                         triggerNextRegrantStep(null, null);
@@ -289,7 +287,7 @@ public class BackupUtils {
             }
 
             // check if folder settings changed and request grants, if necessary
-            if (settings && (currentFolderValues.size() > 0 || currentUriValues.size() > 0)) {
+            if (settings && (!currentFolderValues.isEmpty() || !currentUriValues.isEmpty())) {
                 this.regrantAccessFolders.clear();
                 this.regrantAccessFolders.addAll(currentFolderValues);
                 this.regrantAccessUris.clear();
@@ -333,8 +331,8 @@ public class BackupUtils {
 
         if (dirs != null) {
             final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
-            final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
-            final TextView textView = (TextView) content.findViewById(R.id.message);
+            final CheckBox checkbox = content.findViewById(R.id.check_box);
+            final TextView textView = content.findViewById(R.id.message);
             textView.setText(R.string.init_backup_history_delete_warning);
             checkbox.setText(R.string.init_user_confirmation);
 
@@ -746,7 +744,7 @@ public class BackupUtils {
         final Folder folder = autobackup ? Folder.fromPersistableFolder(PersistableFolder.BACKUP, AUTO_BACKUP_FOLDER) : PersistableFolder.BACKUP.getFolder();
         final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(folder, true, false));
         CollectionUtils.filter(files, s -> s.isDirectory && s.name.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
-        return files.size() == 0 ? null : files;
+        return files.isEmpty() ? null : files;
     }
 
     @Nullable

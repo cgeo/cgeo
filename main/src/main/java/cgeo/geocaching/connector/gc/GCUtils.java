@@ -28,12 +28,12 @@ public final class GCUtils {
 
     /**
      * Convert GCCode (geocode) to (old) GCIds
-     *
+     * <br>
      * For invalid gccodes (including null), 0 will be returned
-     *
-     * Based on http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40
-     * see http://support.groundspeak.com/index.php?pg=kb.printer.friendly&id=1#p221 (checked on 13.9.20; seems to be outdated)
-     * see for algorithm e.g. http://kryptografie.de/kryptografie/chiffre/gc-code.htm (german)
+     * <br>
+     * Based on <a href="http://www.geoclub.de/viewtopic.php?f=111&t=54859&start=40">...</a>
+     * see <a href="http://support.groundspeak.com/index.php?pg=kb.printer.friendly&id=1#p221">...</a> (checked on 13.9.20; seems to be outdated)
+     * see for algorithm e.g. <a href="http://kryptografie.de/kryptografie/chiffre/gc-code.htm">...</a> (german)
      */
     public static long gcCodeToGcId(@Nullable final String gccode) {
         return codeToId("GC", gccode);

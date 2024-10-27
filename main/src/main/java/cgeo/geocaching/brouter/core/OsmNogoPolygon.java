@@ -168,7 +168,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
 
     /**
      * calcBoundingCircle is inspired by the algorithm described on
-     * http://geomalgorithms.com/a08-_containers.html
+     * <a href="http://geomalgorithms.com/a08-_containers.html">...</a>
      * (fast computation of bounding circly in c). It is not as fast (the original
      * algorithm runs in linear time), as it may do more iterations but it takes
      * into account the coslat-factor being used for the linear approximation that

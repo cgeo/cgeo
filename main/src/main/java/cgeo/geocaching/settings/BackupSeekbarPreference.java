@@ -8,6 +8,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 
 
@@ -30,7 +31,7 @@ public class BackupSeekbarPreference extends SeekbarPreference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);

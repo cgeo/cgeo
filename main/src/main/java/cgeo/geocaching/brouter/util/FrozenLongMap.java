@@ -112,10 +112,6 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
         return null;
     }
 
-    public List<V> getValueList() {
-        return flv;
-    }
-
     public long[] getKeyArray() {
         return faid;
     }

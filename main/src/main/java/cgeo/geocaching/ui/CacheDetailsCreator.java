@@ -355,7 +355,7 @@ public final class CacheDetailsCreator {
 
     public void addLatestLogs(final Geocache cache) {
         final List<LogEntry> logs = cache.getLogs();
-        if (logs.size() < 1) {
+        if (logs.isEmpty()) {
             return;
         }
 

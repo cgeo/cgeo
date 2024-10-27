@@ -36,7 +36,6 @@ public class Intents {
     public static final String EXTRA_LIST_ID = PREFIX + "list_id";
     public static final String EXTRA_PQ_LIST_IMPORT = PREFIX + "pq_list_import";
     public static final String EXTRA_COORD_DESCRIPTION = PREFIX + "coord_description";
-    public static final String EXTRA_WPT_PAGE_UPDATE = PREFIX + "wpt_page_update";
     public static final String EXTRA_FILTER_CONTEXT = "filter_context";
     public static final String EXTRA_MESSAGE_CENTER_COUNTER = "mccounter";
 
@@ -104,7 +103,7 @@ public class Intents {
      * The value is decide whether to show advance mode or not.
      * If the value is true, the local/device storage root must be
      * visible in DocumentsUI. Otherwise it depends on the users preference.
-     *
+     * <br>
      * This is a system internal Api, which is not officially supported and not accessible from outside. Therefore, we need to define it ourselves.
      * Anyway, the usage of it should be uncritical. The worst thing which could happen is that the EXTRA is simply ignored.
      */

@@ -177,7 +177,7 @@ public class HtmlImage implements Html.ImageGetter {
     /**
      * Create a new HtmlImage object with different behaviors depending on <tt>onlySave</tt> value. No view object
      * will be tied to this HtmlImage.
-     *
+     * <br>
      * For documentation, see {@link #HtmlImage(String, boolean, boolean, TextView, boolean)}.
      */
     public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final boolean onlySave,
@@ -394,7 +394,7 @@ public class HtmlImage implements Html.ImageGetter {
      * Make a fresh copy of the file to reset its timestamp. On some storage, it is impossible
      * to modify the modified time after the fact, in which case a brand new file must be
      * created if we want to be able to use the time as validity hint.
-     *
+     * <br>
      * See Android issue 1699.
      *
      * @param file the file to refresh
@@ -474,7 +474,7 @@ public class HtmlImage implements Html.ImageGetter {
         if (file.isFile()) {
             return loadCachedImage(Uri.fromFile(file), forceKeep, file.lastModified());
         }
-        return ImmutableTriple.of((Bitmap) null, null, false);
+        return ImmutableTriple.of(null, null, false);
     }
 
     @NonNull

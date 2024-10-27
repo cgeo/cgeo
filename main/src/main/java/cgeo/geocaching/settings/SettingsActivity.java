@@ -328,7 +328,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
 
     @Override
-    public boolean onPreferenceStartFragment(final PreferenceFragmentCompat caller, final Preference pref) {
+    public boolean onPreferenceStartFragment(@NonNull final PreferenceFragmentCompat caller, @NonNull final Preference pref) {
         // clear fragment backstack if new base category opened and in dualmode
         if (isInDualPaneMode() && caller instanceof PreferencesFragmentRoot) {
             while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -364,11 +364,8 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-        if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
-            return;
+        if (!contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
+            backupUtils.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -376,7 +373,7 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
 
     private void buildSearchIndex() {
         synchronized (searchIndex) {
-            if (searchIndex.size() > 0) {
+            if (!searchIndex.isEmpty()) {
                 return;
             }
         }

@@ -52,11 +52,6 @@ public class RoutingEngine extends Thread {
     private long maxRunningTime;
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
-    private String outfile;
-
-    public RoutingEngine(final List<OsmNodeNamed> waypoints, final RoutingContext rc) {
-        this(waypoints, rc, 0);
-    }
 
     public RoutingEngine(final List<OsmNodeNamed> waypoints, final RoutingContext rc, final int engineMode) {
         this.waypoints = waypoints;
@@ -97,7 +92,7 @@ public class RoutingEngine extends Thread {
             case BROUTER_ENGINEMODE_SEED: /* do nothing, handled the old way */
                 throw new IllegalArgumentException("not a valid engine mode");
             case BROUTER_ENGINEMODE_GETELEV:
-                if (waypoints.size() < 1) {
+                if (waypoints.isEmpty()) {
                     throw new IllegalArgumentException("we need one lat/lon point at least!");
                 }
                 doGetElev();
@@ -129,15 +124,6 @@ public class RoutingEngine extends Thread {
                 messageList.add(track.message);
                 track.messageList = messageList;
                 if (i == routingContext.getAlternativeIdx(0, 3)) {
-                    /*
-                    if ("CSV".equals(System.getProperty("reportFormat"))) {
-                        track.dumpMessages(null, routingContext); // old
-
-                        // new
-                        String filename = outfileBase + i + ".csv";
-                        new btools.router.FormatCsv(routingContext).write(filename, track);
-                    }
-                    */
                     foundTrack = track;
                 } else {
                     continue;
@@ -275,7 +261,7 @@ public class RoutingEngine extends Thread {
                                     s = s.substring(0, pos);
                                 }
 
-                                if (s.length() > 0) {
+                                if (!s.isEmpty()) {
                                     try {
                                         int ind = s.indexOf("%");
                                         if (ind != -1) {
@@ -512,7 +498,7 @@ public class RoutingEngine extends Thread {
             OsmPathElement tmpfore = null;
             int indexback = ourSize - 1;
             int indexfore = 0;
-            final int stop = (indexback - MAX_STEPS_CHECK > 1 ? indexback - MAX_STEPS_CHECK : 1);
+            final int stop = (Math.max(indexback - MAX_STEPS_CHECK, 1));
             double wayDistance = 0;
             double nextDist = 0;
             while (indexback >= 1 && indexback >= stop && indexfore < t.nodes.size()) {
@@ -531,13 +517,10 @@ public class RoutingEngine extends Thread {
                     return false;
                 }
                 final int dist = tmpback.calcDistance(tmpfore);
-                if (1 == 1) {
-                    final OsmTrack.OsmPathElementHolder detours = tt.getFromDetourMap(tmpback.getIdFromPos());
-                    OsmTrack.OsmPathElementHolder h = detours;
-                    while (h != null) {
-                        lastJunctions.put(h.node.getIdFromPos(), h);
-                        h = h.nextHolder;
-                    }
+                OsmTrack.OsmPathElementHolder h = tt.getFromDetourMap(tmpback.getIdFromPos());
+                while (h != null) {
+                    lastJunctions.put(h.node.getIdFromPos(), h);
+                    h = h.nextHolder;
                 }
                 if (dist == 1 && indexfore > 0) {
                     if (indexfore == 1) {
@@ -557,7 +540,7 @@ public class RoutingEngine extends Thread {
 
                 }
                 if (dist > 1 || indexback == 1) {
-                    if (removeBackList.size() != 0) {
+                    if (!removeBackList.isEmpty()) {
                         // recover last - should be the cross point
                         removeBackList.remove(removeBackList.get(removeBackList.size() - 1));
                         removeForeList.remove(removeForeList.get(removeForeList.size() - 1));
@@ -975,7 +958,7 @@ public class RoutingEngine extends Thread {
 
     private OsmTrack findTrack(final String operationName, final MatchedWaypoint startWp, final MatchedWaypoint endWp, final OsmTrack costCuttingTrack, final OsmTrack refTrack, final boolean fastPartialRecalc) {
         try {
-            final List<OsmNode> wpts2 = new ArrayList<OsmNode>();
+            final List<OsmNode> wpts2 = new ArrayList<>();
             if (startWp != null) {
                 wpts2.add(startWp.waypoint);
             }
@@ -1495,7 +1478,4 @@ public class RoutingEngine extends Thread {
         terminated = true;
     }
 
-    public String getOutfile() {
-        return outfile;
-    }
 }

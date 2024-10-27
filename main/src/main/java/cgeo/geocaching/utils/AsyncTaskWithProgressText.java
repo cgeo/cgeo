@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * AsyncTask which automatically shows a progress dialog. The progress is tracked with text messages.
- *
+ * <br>
  * Use it like the {@code AsyncTask} class, but leave away the middle template parameter. Override
  * {@link #doInBackgroundInternal(Object[])} and related methods.
  *

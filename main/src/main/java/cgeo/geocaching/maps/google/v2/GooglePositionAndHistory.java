@@ -424,7 +424,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         // draw individual route
         routeObjs.removeAll();
         final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
+        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && !individualRoute.track.isEmpty()) {
             for (List<LatLng> segment : individualRoute.track) {
                 routeObjs.addPolyline(new PolylineOptions()
                         .addAll(segment)
@@ -445,7 +445,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
-                if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
+                if (c != individualRoute && !c.isHidden && c.track != null && !c.track.isEmpty()) {
                     for (List<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                                 .addAll(segment)

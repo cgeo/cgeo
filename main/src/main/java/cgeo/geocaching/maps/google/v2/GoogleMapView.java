@@ -643,7 +643,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         // cannot be in draw(), would not work
         scaleDrawer.drawScale(canvas, this);
         if (distanceDrawer != null) {
-            distanceDrawer.drawDistance(canvas);
+            distanceDrawer.drawDistance();
         }
     }
 

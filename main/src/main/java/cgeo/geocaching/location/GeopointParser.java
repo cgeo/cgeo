@@ -467,7 +467,7 @@ public class GeopointParser {
 
     /**
      * Returns a set of parser inputs for a given text
-     *
+     * <br>
      * The generated inputs use different delimiters for fractional numbers.
      *
      * @param text the text to parse
@@ -542,7 +542,7 @@ public class GeopointParser {
 
     /**
      * Parses a pair of coordinates (latitude and longitude) out of the given string.
-     *
+     * <br>
      * Accepts following formats:
      * - X DD
      * - X DD°
@@ -551,7 +551,7 @@ public class GeopointParser {
      * - X DD° MM SS
      * - DD.DDDDDDD
      * - UTM
-     *
+     * <br>
      * Both . and , are accepted, also variable count of spaces (also 0)
      *
      * @param text the string to be parsed
@@ -625,7 +625,7 @@ public class GeopointParser {
 
     /**
      * Parses latitude out of the given string.
-     *
+     * <br>
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
      * @param text the string to be parsed
@@ -646,7 +646,7 @@ public class GeopointParser {
 
     /**
      * Parses longitude out of the given string.
-     *
+     * <br>
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
      * @param text the string to be parsed

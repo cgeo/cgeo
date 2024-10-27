@@ -37,7 +37,6 @@ import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -177,9 +176,9 @@ public final class TextUtils {
     /**
      * Replaces every \n, \r and \t with a single space. Afterwards multiple spaces
      * are merged into a single space. Finally leading spaces are deleted.
-     *
+     * <br>
      * This method must be fast, but may not lead to the shortest replacement String.
-     *
+     * <br>
      * You are only allowed to change this code if you can prove it became faster on a device.
      * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project.
      *
@@ -500,17 +499,6 @@ public final class TextUtils {
         final int charsAtEnd = maxLength - separator.length() - charsAtBegin;
 
         return text.substring(0, charsAtBegin) + separator + text.substring(text.length() - charsAtEnd);
-    }
-
-    public static boolean isLetterOrDigit(final char ch, final boolean useUpper) {
-        boolean returnValue = CharUtils.isAsciiAlphanumeric(ch);
-        if (useUpper) {
-            returnValue &= CharUtils.isAsciiAlphaUpper(ch);
-        } else {
-            returnValue &= CharUtils.isAsciiAlphaLower(ch);
-        }
-
-        return returnValue;
     }
 
     public static boolean isEqualIgnoreCaseAndSpecialChars(final String s1, final String s2) {

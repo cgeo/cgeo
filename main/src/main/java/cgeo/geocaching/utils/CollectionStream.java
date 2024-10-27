@@ -175,7 +175,7 @@ public class CollectionStream<T> {
 
     /**
      * convenient function to convert to array
-     *
+     * <br>
      * Implementation Note: explicit type parameter 'arrayClass' is necessary,
      * otherwise returned array might be of type Object[] instead ot T[].
      */

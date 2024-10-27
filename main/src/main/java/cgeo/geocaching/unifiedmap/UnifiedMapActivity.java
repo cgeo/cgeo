@@ -828,7 +828,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             }
             positionHistory.reset();
         })
-                || DownloaderUtils.onOptionsItemSelected(this, id, true)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_filter) {
             showFilterMenu();

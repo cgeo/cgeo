@@ -22,9 +22,9 @@ import com.google.android.material.button.MaterialButton;
 
 /**
  * Encapsulates an image object to be set to an ImageView.
- *
+ * <br>
  * Supports setting this text from id, drawable or emoji
- *
+ * <br>
  * Class is supposed to be used in parameters for View/Dialog helper methods dealing with images
  */
 public class ImageParam {

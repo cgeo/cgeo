@@ -282,11 +282,11 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
 
         // prepare circular progress spinner
-        spinner = (ProgressBar) findViewById(R.id.map_progressbar);
+        spinner = findViewById(R.id.map_progressbar);
         spinner.setVisibility(View.GONE);
 
         // initialize map
-        mapView = (MfMapView) findViewById(R.id.mfmapv5);
+        mapView = findViewById(R.id.mfmapv5);
 
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
@@ -505,7 +505,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkHillshadingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-                || DownloaderUtils.onOptionsItemSelected(this, id, false)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
@@ -1054,7 +1054,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final NewMap map = mapRef.get();
             if (map == null) {
                 return;
@@ -1124,10 +1124,6 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         return subtitle.toString();
-    }
-
-    private void switchCircles() {
-        caches.switchCircles();
     }
 
     private int countVisibleCaches() {
@@ -1334,7 +1330,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            final SimpleDialog.ItemSelectModel<GeoitemRef> model = new SimpleDialog.ItemSelectModel<GeoitemRef>();
+            final SimpleDialog.ItemSelectModel<GeoitemRef> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(sorted)
                 .setDisplayViewMapper((item, itemGroup, ctx, view, parent) ->

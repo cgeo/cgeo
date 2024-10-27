@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoiceHintList {
-    static final int TRANS_MODE_NONE = 0;
     static final int TRANS_MODE_FOOT = 1;
     static final int TRANS_MODE_BIKE = 2;
     static final int TRANS_MODE_CAR  = 3;
@@ -21,10 +20,6 @@ public class VoiceHintList {
 
     public void setTransportMode(boolean isCar, boolean isBike) {
         transportMode = isCar ? TRANS_MODE_CAR : (isBike ? TRANS_MODE_BIKE : TRANS_MODE_FOOT);
-    }
-
-    public void setTransportMode(int mode) {
-        transportMode = mode;
     }
 
     public String getTransportMode() {

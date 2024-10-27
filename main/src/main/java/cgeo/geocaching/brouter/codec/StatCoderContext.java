@@ -2,12 +2,8 @@ package cgeo.geocaching.brouter.codec;
 
 import cgeo.geocaching.brouter.util.BitCoderContext;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 public final class StatCoderContext extends BitCoderContext {
     private static final int[] noisy_bits = new int[1024];
-    private static Map<String, long[]> statsPerName;
 
     static {
         // noisybits lookup
@@ -22,50 +18,8 @@ public final class StatCoderContext extends BitCoderContext {
         }
     }
 
-    private long lastbitpos = 0;
-
-
     public StatCoderContext(final byte[] ab) {
         super(ab);
-    }
-
-    /**
-     * Get a textual report on the bit-statistics
-     *
-     * @see #assignBits
-     */
-    public static String getBitReport() {
-        if (statsPerName == null) {
-            return "<empty bit report>";
-        }
-        final StringBuilder sb = new StringBuilder();
-        for (String name : statsPerName.keySet()) {
-            final long[] stats = statsPerName.get(name);
-            sb.append(name).append(" count=").append(stats[1]).append(" bits=").append(stats[0]).append("\n");
-        }
-        statsPerName = null;
-        return sb.toString();
-    }
-
-    /**
-     * assign the de-/encoded bits since the last call assignBits to the given
-     * name. Used for encoding statistics
-     *
-     * @see #getBitReport
-     */
-    public void assignBits(final String name) {
-        final long bitpos = getWritingBitPosition();
-        if (statsPerName == null) {
-            statsPerName = new TreeMap<>();
-        }
-        long[] stats = statsPerName.get(name);
-        if (stats == null) {
-            stats = new long[2];
-            statsPerName.put(name, stats);
-        }
-        stats[0] += bitpos - lastbitpos;
-        stats[1] += 1;
-        lastbitpos = bitpos;
     }
 
     /**

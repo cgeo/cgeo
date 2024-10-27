@@ -457,7 +457,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         compasses.add(holder.binding.direction);
         holder.binding.direction.setTargetCoords(cache.getCoords());
-        holder.binding.text.setText(TextUtils.coloredCacheText(getContext(), cache, cache.getName()), TextView.BufferType.SPANNABLE);
+        holder.binding.text.setText(TextUtils.coloredCacheText(getContext(), cache, StringUtils.defaultIfBlank(cache.getName(), "")), TextView.BufferType.SPANNABLE);
         holder.cacheListType = cacheListType;
         updateViewHolder(holder, cache, res);
 
@@ -590,7 +590,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
 
         @Override
-        public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
+        public boolean onFling(final MotionEvent e1, @NonNull final MotionEvent e2, final float velocityX, final float velocityY) {
             try {
                 if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
                     return false;
@@ -648,14 +648,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return result;
         }
         return new ArrayList<>(list);
-    }
-
-    public int getCheckedOrAllCount() {
-        final int checked = getCheckedCount();
-        if (checked > 0) {
-            return checked;
-        }
-        return list.size();
     }
 
     public void checkSpecialSortOrder() {

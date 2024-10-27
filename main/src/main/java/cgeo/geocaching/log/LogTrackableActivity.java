@@ -513,7 +513,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
             final View layout = View.inflate(activity, R.layout.logtrackable_without_geocode, null);
             builder.setView(layout);
 
-            doNotAskAgain = (CheckBox) layout.findViewById(R.id.logtrackable_do_not_ask_me_again);
+            doNotAskAgain = layout.findViewById(R.id.logtrackable_do_not_ask_me_again);
 
             final int showCount = Settings.getLogTrackableWithoutGeocodeShowCount();
             Settings.setLogTrackableWithoutGeocodeShowCount(showCount + 1);

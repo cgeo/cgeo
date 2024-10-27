@@ -131,7 +131,6 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
-import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.Pair;
 import android.view.ContextMenu;
@@ -183,7 +182,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * Activity to handle all single-cache-stuff.
- *
+ * <br>
  * e.g. details, description, logs, waypoints, inventory, variables...
  */
 public class CacheDetailActivity extends TabbedViewPagerActivity
@@ -218,8 +217,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private GeoDirHandler locationUpdater;
 
-    private CharSequence clickedItemText = null;
-
     private MenuItem menuItemToggleWaypointsFromNote = null;
 
     /**
@@ -250,9 +247,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private final EnumSet<TrackableBrand> processedBrands = EnumSet.noneOf(TrackableBrand.class);
 
-    private final PermissionAction<String> openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, user -> {
-        new ContactsHelper(this).openContactCard(user);
-    });
+    private final PermissionAction<String> openContactCardAction = PermissionAction.register(this, PermissionContext.SEARCH_USER_IN_CONTACTS, user -> new ContactsHelper(this).openContactCard(user));
     private boolean activityIsStartedForEditNote = false;
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
@@ -1160,7 +1155,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     /**
      * Creator for details-view.
-     *
+     * <br>
      * TODO: Extract inner class to own file for a better overview. Same might apply to all other view creators.
      */
     public static class DetailsViewCreator extends TabbedViewPagerFragment<CachedetailDetailsPageBinding> {
@@ -1433,7 +1428,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             @Override
             public void onClick(final View arg0) {
                 button = (MaterialButton) arg0;
-                doExecute(handler -> DetailsViewCreator.this.watchListAdd(handler));
+                doExecute(DetailsViewCreator.this::watchListAdd);
             }
         }
 
@@ -1444,7 +1439,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             @Override
             public void onClick(final View arg0) {
                 button = (MaterialButton) arg0;
-                doExecute(handler -> DetailsViewCreator.this.watchListRemove(handler));
+                doExecute(DetailsViewCreator.this::watchListRemove);
             }
         }
 
@@ -1503,7 +1498,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             @Override
             public void onClick(final View arg0) {
                 button = (MaterialButton) arg0;
-                doExecute(handler -> DetailsViewCreator.this.favoriteAdd(handler));
+                doExecute(DetailsViewCreator.this::favoriteAdd);
             }
         }
 
@@ -1514,7 +1509,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             @Override
             public void onClick(final View arg0) {
                 button = (MaterialButton) arg0;
-                doExecute(handler -> DetailsViewCreator.this.favoriteRemove(handler));
+                doExecute(DetailsViewCreator.this::favoriteRemove);
             }
         }
 
@@ -1641,7 +1636,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.alcBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             binding.alcText.setText(CacheUtils.isLabPlayerInstalled(activity) ? (isLabListing ? R.string.cache_alc_start : R.string.cache_alc_related_start) : R.string.cache_alc_install);
             if (isEnabled) {
-                CacheUtils.setLabLink(activity, cache, binding.sendToAlc, isLabListing ? cache.getUrl() : CacheUtils.findAdvLabUrl(cache));
+                CacheUtils.setLabLink(activity, binding.sendToAlc, isLabListing ? cache.getUrl() : CacheUtils.findAdvLabUrl(cache));
             }
         }
     }
@@ -1726,17 +1721,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.ensureSaved();
                 activity.removeWaypointsFromPersonalNote(cache);
             });
-            binding.personalnoteVarsOutOfSync.setOnClickListener(v -> {
-                handleVariableOutOfSync();
-            });
+            binding.personalnoteVarsOutOfSync.setOnClickListener(v -> handleVariableOutOfSync());
             activity.adjustPersonalNoteVarsOutOfSyncButton(binding.personalnoteVarsOutOfSync);
             final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
             if (connector != null && connector.canAddPersonalNote(cache)) {
                 binding.uploadPersonalnote.setVisibility(View.VISIBLE);
                 TooltipCompat.setTooltipText(binding.uploadPersonalnote, getString(R.string.cache_personal_note_upload));
-                binding.uploadPersonalnote.setOnClickListener(v -> {
-                    activity.checkAndUploadPersonalNote(connector);
-                });
+                binding.uploadPersonalnote.setOnClickListener(v -> activity.checkAndUploadPersonalNote(connector));
             } else {
                 binding.uploadPersonalnote.setVisibility(View.GONE);
             }
@@ -1957,26 +1948,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
         }
 
-        private static void fixRelativeLinks(final Spannable spannable, final String baseUrl) {
-            final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
-            String baseScheme = Uri.parse(baseUrl).getScheme();
-            if (StringUtils.isBlank(baseScheme)) {
-                baseScheme = "https";
-            }
-            for (final URLSpan span : spans) {
-                final Uri uri = Uri.parse(span.getURL());
-                if (uri.getScheme() == null) {
-                    final int start = spannable.getSpanStart(span);
-                    final int end = spannable.getSpanEnd(span);
-                    final int flags = spannable.getSpanFlags(span);
-                    final Uri absoluteUri = uri.getHost() == null ? Uri.parse(baseUrl + uri) :
-                            uri.buildUpon().scheme(baseScheme).build();
-                    spannable.removeSpan(span);
-                    spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
-                }
-            }
-        }
-
         /**
          * Old GCParser logic inserted an HTML link to their geochecker (when applicable)
          * directly into the description text.
@@ -2084,6 +2055,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
+                @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                     View rowView = convertView;

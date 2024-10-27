@@ -80,7 +80,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private CoordinateInputData createFromDialog() {
         final CoordinateInputData cid = new CoordinateInputData();
         cid.setGeocode(geocode);
-        cid.setNotes(binding.notesText.getText().toString());
+        cid.setNotes(ViewUtils.getEditableText(binding.notesText.getText()));
         cid.setCalculatedCoordinate(calcCoord);
         cid.setGeopoint(calcCoord.calculateGeopoint(varList::getValue));
         return cid;
@@ -267,14 +267,14 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             final SimpleDialog.ItemSelectModel<Integer> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(options)
-                .setDisplayMapper((i) -> TextParam.id(i))
+                .setDisplayMapper(TextParam::id)
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
                     .selectSingle(model, (o) -> {
                         if (o == R.string.calccoord_remove_spaces) {
-                            binding.PlainLat.setText(DegreeFormula.removeSpaces(binding.PlainLat.getText().toString()));
-                            binding.PlainLon.setText(DegreeFormula.removeSpaces(binding.PlainLon.getText().toString()));
+                            binding.PlainLat.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLat.getText())));
+                            binding.PlainLon.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLon.getText())));
                         }
                     });
         });

@@ -96,7 +96,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     private String trackingCode = null;
     private TrackableBrand brand = null;
     private ProgressDialog waitDialog = null;
-    private CharSequence clickedItemText = null;
     private ImageGalleryView imageGallery = null;
     private String fallbackKeywordSearch = null;
     private final CompositeDisposable createDisposables = new CompositeDisposable();

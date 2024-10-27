@@ -34,7 +34,6 @@ import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
-import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -54,7 +53,6 @@ import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.network.DownloadProgress;
 import cgeo.geocaching.network.Send2CgeoDownloader;
 import cgeo.geocaching.sensors.GeoData;
@@ -91,7 +89,6 @@ import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.annotation.SuppressLint;
@@ -117,7 +114,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
@@ -210,7 +206,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private final ListNameMemento listNameMemento = new ListNameMemento();
 
-    private final Handler loadCachesHandler = new LoadCachesHandler(this);
     private final DisposableHandler clearOfflineLogsHandler = new ClearOfflineLogsHandler(this);
     private final Handler importGpxAttachementFinishedHandler = new ImportGpxAttachementFinishedHandler(this);
 
@@ -230,79 +225,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
-
-        protected LoadCachesHandler(final CacheListActivity activity) {
-            super(activity);
-        }
-
-        @Override
-        public void handleMessage(final Message msg) {
-            final CacheListActivity activity = getReference();
-            if (activity == null) {
-                return;
-            }
-            activity.handleCachesLoaded();
-        }
-    }
-
-    // FIXME: This method has mostly been replaced by the loaders. But it still contains a license agreement check.
-    public void handleCachesLoaded() {
-        try {
-            updateAdapter();
-
-            if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
-                showLicenseConfirmationDialog();
-            } else if (search != null && search.getError() != StatusCode.NO_ERROR) {
-                showToast(res.getString(R.string.err_download_fail) + ' ' + search.getError().getErrorString() + '.');
-
-                showProgress(false);
-
-                finish();
-                return;
-            }
-
-            setAdapterCurrentCoordinates(false);
-        } catch (final Exception e) {
-            showToast(res.getString(R.string.err_detail_cache_find_any));
-            Log.e("CacheListActivity.loadCachesHandler", e);
-
-            showProgress(false);
-
-            finish();
-            return;
-        }
-
-        try {
-            showProgress(false);
-        } catch (final Exception e2) {
-            Log.e("CacheListActivity.loadCachesHandler.2", e2);
-        }
-
-        adapter.setSelectMode(false);
-    }
-
-    private void showLicenseConfirmationDialog() {
-        final AlertDialog.Builder dialog = Dialogs.newBuilder(this);
-        dialog.setTitle(res.getString(R.string.license));
-        dialog.setMessage(res.getString(R.string.err_license));
-        dialog.setCancelable(true);
-        dialog.setNegativeButton(res.getString(R.string.license_dismiss), (dialog1, id) -> {
-            Cookies.clearCookies();
-            dialog1.cancel();
-        });
-        dialog.setPositiveButton(res.getString(R.string.license_show), (dialog12, id) -> {
-            Cookies.clearCookies();
-            ShareUtils.openUrl(this, "https://www.geocaching.com/software/agreement.aspx?ID=0");
-        });
-
-        final AlertDialog alert = dialog.create();
-        alert.show();
-    }
-
     /**
      * Loads the caches and fills the adapter according to {@link #search} content.
-     *
+     * <br>
      * If {@link #search} is {@code null}, this does nothing.
      */
 
@@ -420,7 +345,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final CacheListActivity activity = getReference();
             if (activity != null) {
                 activity.refreshCurrentList();
@@ -973,6 +898,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
         final Geocache cache = adapter.getItem(adapterInfo.position);
+        assert cache != null;
 
         menu.setHeaderTitle(StringUtils.defaultIfBlank(cache.getName(), cache.getShortGeocode()));
 
@@ -1109,6 +1035,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private Geocache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
         final Geocache cache = adapter.getItem(adapterInfo.position);
+        assert cache != null;
         if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
             return cache;
         }
@@ -1323,7 +1250,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void removeFromHistoryCheck() {
         final int message = (adapter != null && adapter.getCheckedCount() > 0) ? R.string.cache_remove_from_history
                 : R.string.cache_clear_history;
-        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(() -> removeFromHistory());
+        SimpleDialog.of(this).setTitle(R.string.caches_removing_from_history).setMessage(message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm(this::removeFromHistory);
     }
 
     private void removeFromHistory() {
@@ -1786,6 +1713,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     // Loaders
 
+    @NonNull
     @Override
     public Loader<SearchResult> onCreateLoader(final int type, final Bundle extras) {
         if (type != CACHE_LOADER_ID || extras == null) {
@@ -1969,26 +1897,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void onLoaderReset(@NonNull final Loader<SearchResult> arg0) {
         //Not interesting
-    }
-
-    /**
-     * Allow the title bar spinner to show the same subtitle like the activity itself would show.
-     */
-    public CharSequence getCacheListSubtitle(@NonNull final AbstractList list) {
-        // if this is the current list, be aware of filtering
-        if (list.id == listId) {
-            return getCurrentSubtitle();
-        }
-        // otherwise return the overall number
-        final int numberOfCaches = list.getNumberOfCaches();
-        if (numberOfCaches < 0) {
-            return StringUtils.EMPTY;
-        }
-        return getCacheNumberString(getResources(), numberOfCaches);
-    }
-
-    public int getCurrentlyShown() {
-        return adapter.getCount();
     }
 
     /**

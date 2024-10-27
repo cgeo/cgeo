@@ -82,9 +82,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public final class ImageUtils {
 
-    private static final String OFFLINE_LOG_IMAGE_PRAEFIX = "cgeo-image-";
-
-    private static final int MAX_DISPLAY_IMAGE_XY = 800;
+    private static final String OFFLINE_LOG_IMAGE_PREFIX = "cgeo-image-";
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
@@ -282,7 +280,7 @@ public final class ImageUtils {
     @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
-        final Bitmap image = readImage(imageUri, true);
+        final Bitmap image = readImage(imageUri);
         if (image == null) {
             return null;
         }
@@ -304,9 +302,7 @@ public final class ImageUtils {
     }
 
     @Nullable
-    private static Bitmap readImage(final Uri imageUri, final boolean adjustOrientation) {
-        final ViewOrientation orientation = adjustOrientation ? getImageOrientation(imageUri) : null;
-
+    private static Bitmap readImage(final Uri imageUri) {
         try (InputStream imageStream = openImageStreamIfLocal(imageUri)) {
             if (imageStream == null) {
                 return null;
@@ -331,26 +327,6 @@ public final class ImageUtils {
             Log.e("ImageUtils.getImageOrientation(ExifIf)", e);
         }
         return null;
-    }
-
-    /**
-     * stream will be consumed and closed by method
-     */
-    @NonNull
-    private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final InputStream imageStream) {
-        if (imageStream == null) {
-            return null;
-        }
-        BitmapFactory.Options sizeOnlyOptions = null;
-        try {
-            sizeOnlyOptions = new BitmapFactory.Options();
-            sizeOnlyOptions.inJustDecodeBounds = true;
-            BitmapFactory.decodeStream(imageStream, null, sizeOnlyOptions);
-        } finally {
-            IOUtils.closeQuietly(imageStream);
-        }
-
-        return sizeOnlyOptions;
     }
 
     @Nullable
@@ -755,14 +731,6 @@ public final class ImageUtils {
                 image));
     }
 
-    /**
-     * Create a new image Uri for an offline log image
-     */
-    public static ImmutablePair<String, Uri> createNewOfflineLogImageUri(final String geocode) {
-        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
-        return new ImmutablePair<>(imageFileName, Uri.fromFile(getFileForOfflineLogImage(imageFileName)));
-    }
-
     public static Image toLocalLogImage(final String geocode, final Uri imageUri) {
         //create new image
         final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
@@ -772,35 +740,24 @@ public final class ImageUtils {
         return new Image.Builder().setUrl(targetUri).build();
     }
 
-    public static Uri createLocalLogImageUri(final String geocode) {
-        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
-        final Folder folder = Folder.fromFile(getFileForOfflineLogImage(imageFileName).getParentFile());
-        return ContentStorage.get().create(folder, imageFileName);
-    }
-
     public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
         if (geocode == null) {
             return;
         }
         final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile() == null ? null : i.getFile().getName()).toSet();
-        final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
+        final String fileNamePraefix = OFFLINE_LOG_IMAGE_PREFIX + geocode;
         CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
                 .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
                 .forEach(File::delete);
     }
 
-    public static boolean deleteOfflineLogImageFile(final Image delete) {
-        final File imageFile = getFileForOfflineLogImage(delete.getFileName());
-        return imageFile.isFile() && imageFile.delete();
-    }
-
     public static File getFileForOfflineLogImage(final String imageFileName) {
         //extract geocode
         String geocode = null;
-        if (imageFileName.startsWith(OFFLINE_LOG_IMAGE_PRAEFIX)) {
-            final int idx = imageFileName.indexOf("-", OFFLINE_LOG_IMAGE_PRAEFIX.length());
+        if (imageFileName.startsWith(OFFLINE_LOG_IMAGE_PREFIX)) {
+            final int idx = imageFileName.indexOf("-", OFFLINE_LOG_IMAGE_PREFIX.length());
             if (idx >= 0) {
-                geocode = imageFileName.substring(OFFLINE_LOG_IMAGE_PRAEFIX.length(), idx);
+                geocode = imageFileName.substring(OFFLINE_LOG_IMAGE_PREFIX.length(), idx);
             }
         }
         return new File(LocalStorage.getOfflineLogImageDir(geocode), imageFileName);
@@ -885,14 +842,6 @@ public final class ImageUtils {
         return StringUtils.defaultString(UriUtils.getMimeType(Uri.parse(url)), "image/*");
     }
 
-    public static boolean isImageUrl(final String url) {
-        if (StringUtils.isBlank(url)) {
-            return false;
-        }
-        final String mimeType = UriUtils.getMimeType(Uri.parse(url));
-        return (mimeType != null && mimeType.startsWith("image/"));
-    }
-
     public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images, final boolean showOwnCategory) {
         imageGallery.clear();
         imageGallery.setup(geocode);
@@ -948,7 +897,7 @@ public final class ImageUtils {
             //Workaround START
             final GestureDetector singleTapDetector = new GestureDetector(activity, new GestureDetector.SimpleOnGestureListener() {
                 @Override
-                public boolean onSingleTapConfirmed(final MotionEvent e) {
+                public boolean onSingleTapConfirmed(@NonNull final MotionEvent e) {
                     //Logic to happen on single tap
                     onSingleTap.run();
                     return true;

@@ -56,7 +56,7 @@ public class FormatJson extends Formatter {
         }
         if (t.showSpeedProfile) { // set in profile
             final List<String> sp = t.aggregateSpeedProfile();
-            if (sp.size() > 0) {
+            if (!sp.isEmpty()) {
                 sb.append("        \"speedprofile\": [\n");
                 for (int i = sp.size() - 1; i >= 0; i--) {
                     sb.append("          [").append(sp.get(i)).append(i > 0 ? "],\n" : "]\n");

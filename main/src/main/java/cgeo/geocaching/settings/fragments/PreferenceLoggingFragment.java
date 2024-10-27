@@ -3,6 +3,7 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TemplateTextPreference;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
 import android.os.Bundle;
@@ -24,11 +25,11 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_logging);
+        requireActivity().setTitle(R.string.settings_title_logging);
 
         // Update "Signature" preview
         SettingsUtils.setPrefSummary(this, R.string.pref_signature, Settings.getSignature());
-        findPreference(getString(R.string.pref_signature)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_signature)), (preference, newValue) -> {
             SettingsUtils.setPrefSummary(this, R.string.pref_signature, Settings.getSignature());
             return true;
         });
@@ -38,7 +39,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
 
         // Update "Log Image Default Caption Prefix"
         SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefix());
-        findPreference(getString(R.string.pref_log_image_default_prefix)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_log_image_default_prefix)), (preference, newValue) -> {
             SettingsUtils.setPrefSummary(this, R.string.pref_log_image_default_prefix, Settings.getLogImageCaptionDefaultPraefixFor(String.valueOf(newValue)));
             return true;
         });

@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_al_website));
         final String urlOrHost = ALConnector.getInstance().getHost();
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -35,15 +36,14 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_lc);
+        requireActivity().setTitle(R.string.settings_title_lc);
     }
 
     private void initLCServicePreference(final boolean gcConnectorActive) {
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
-        findPreference(getString((R.string.preference_screen_al))).setSummary(
-                getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
+        PreferenceUtils.setSummary(findPreference(getString((R.string.preference_screen_al))), getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
         if (isActiveGCPM) {
-            findPreference(getString(R.string.pref_connectorALActive)).setEnabled(true);
+            PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_connectorALActive)), true);
         }
     }
 

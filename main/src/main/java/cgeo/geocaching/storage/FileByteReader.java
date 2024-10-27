@@ -12,7 +12,7 @@ import org.apache.commons.io.IOUtils;
 
 /**
  * Helper to read files when only a {@link java.nio.channels.FileChannel} is available.
- *
+ * <br>
  * Mimics the necessary parts of RandomAccessFile
  */
 public class FileByteReader implements Closeable {

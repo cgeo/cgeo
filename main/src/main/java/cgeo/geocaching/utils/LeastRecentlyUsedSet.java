@@ -11,11 +11,11 @@ import java.util.List;
 
 /**
  * Synchronized set wrapper for the LeastRecentlyUsedMap.
- *
+ * <br>
  * This code is heavily based on the HashSet code that represents Map as a Set.
  * Unfortunately HashSet does not allow to use a custom Map as its Storage.
  * Therefore overriding removeEldestEntry() is impossible for a normal LinkedHashSet.
- *
+ * <br>
  * Synchronization is added to guard against concurrent modification. Iterator
  * access has to be guarded externally or the synchronized getAsList method can be used
  * to get a clone for iteration.

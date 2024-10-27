@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.bettercacher.BetterCacherConnector;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -19,7 +20,7 @@ public class PreferenceServiceBetterCacherFragment extends PreferenceFragmentCom
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_bettercacher_website));
         final String urlOrHost = BetterCacherConnector.INSTANCE.getHostUrl();
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -29,6 +30,6 @@ public class PreferenceServiceBetterCacherFragment extends PreferenceFragmentCom
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.init_bettercacher);
+        requireActivity().setTitle(R.string.init_bettercacher);
     }
 }

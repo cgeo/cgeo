@@ -6,6 +6,7 @@ import cgeo.geocaching.databinding.ImageeditActivityBinding;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ImageLoader;
 import cgeo.geocaching.utils.ImageUtils;
@@ -205,9 +206,9 @@ public class ImageEditActivity extends AbstractActionBarActivity {
         image = new Image.Builder()
             .setServiceImageId(image.serviceImageId)
             .setUrl(image.uri)
-            .setTitle(binding.caption.getText().toString())
+            .setTitle(ViewUtils.getEditableText(binding.caption.getText()))
             .setTargetScale(imageScale.get())
-            .setDescription(binding.description.getText().toString())
+            .setDescription(ViewUtils.getEditableText(binding.description.getText()))
             .build();
     }
 

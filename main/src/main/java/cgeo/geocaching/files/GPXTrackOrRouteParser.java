@@ -59,7 +59,7 @@ public class GPXTrackOrRouteParser extends AbstractTrackOrRouteParser implements
         resetTempData();
         setNameAndLatLonParsers();
         endElementForListener.setEndElementListener(() -> {
-            if (temp.size() > 0) {
+            if (!temp.isEmpty()) {
                 result.add(new RouteSegment(new RouteItem(temp.get(temp.size() - 1)), temp, tempElevation, false));
                 resetTempData();
             }

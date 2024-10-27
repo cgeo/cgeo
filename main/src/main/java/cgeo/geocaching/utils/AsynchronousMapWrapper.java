@@ -21,10 +21,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Wraps and manages a Map of objects which is updated asynchronously.
- *
+ * <br>
  * This class provides methods to add, replace and remove objects of type T to the set. It manages under the hood
  * an asynchronous processes to perform those add/removals in the background and with minimal impact on the used thread.
- *
+ * <br>
  * Users of this class need to implement interface IMapchangeExecutor to provide implementations for actual add/remove
  * as well as settings for thread usage.
  */
@@ -112,7 +112,7 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     /**
      * Performs a multi-change
-     *
+     * <br>
      * The given action is supposed to execute the action. It gets passed two action parameter:
      * * the first one takes a key-value-pair and will PUT this pair to the map when called
      * * the second one takes a key and will REMOVE this key from the map when called
@@ -190,7 +190,7 @@ public class AsynchronousMapWrapper<K, V, C> {
 
     /**
      * replaces objects in this Map completely with given objects
-     *
+     * <br>
      * Same effect could be reached by calling removeAll() followed by add(newObjects),
      * but performance is better when calling replace() method instead
      */

@@ -70,7 +70,7 @@ class MapsforgeVTMMultiOfflineTileProvider extends AbstractMapsforgeVTMOfflineTi
             mapFileTileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(data.right));
             ((MultiMapFileTileSource) tileSource).add(mapFileTileSource);
         }
-        supportsLanguages = languages.size() > 0;
+        supportsLanguages = !languages.isEmpty();
         if (supportsLanguages) {
             TileProviderFactory.setLanguages(languages.toArray(new String[]{}));
         }

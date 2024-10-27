@@ -42,7 +42,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 /**
  * Fragment displays and maintains an image list where
  * user can select/delete/edit/sort images using various options
- *
+ * <br>
  * Activities using this fragment have to ensure to call {@link #onParentActivityResult(int, int, Intent)}
  * in their {@link android.app.Activity#onActivityResult(int, int, Intent)} method since
  * this fragment starts and works with results of intents.
@@ -97,7 +97,7 @@ public class ImageListFragment extends Fragment {
 
     /**
      * make sure to call this method in the activites {@link android.app.Activity#onActivityResult(int, int, Intent)} method.
-     *
+     * <br>
      * When this method returns true, this means that the result has been consumed. False otherwise.
      */
     public boolean onParentActivityResult(final int requestCode, final int resultCode, final Intent data) {
@@ -155,7 +155,7 @@ public class ImageListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         final View view = inflater.inflate(R.layout.imagelist_fragment, container, false);
         binding = ImagelistFragmentBinding.bind(view);
@@ -317,7 +317,7 @@ public class ImageListFragment extends Fragment {
         selectImageIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
         selectImageIntent.putExtra(Intents.EXTRA_MAX_IMAGE_UPLOAD_SIZE, maxImageUploadSize);
 
-        getActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
+        requireActivity().startActivityForResult(selectImageIntent, SELECT_IMAGE);
     }
 
     private int getFastImageAutoScale() {

@@ -78,7 +78,7 @@ public class FormatGpx extends Formatter {
             sb.append("  <name>").append(t.name).append("</name>\n");
             sb.append("  <extensions>\n");
             sb.append("   <brouter:info>").append(t.messageList.get(0)).append("</brouter:info>\n");
-            if (t.params != null && t.params.size() > 0) {
+            if (t.params != null && !t.params.isEmpty()) {
                 sb.append("   <brouter:params><![CDATA[");
                 int i = 0;
                 for (Map.Entry<String, String> e : t.params.entrySet()) {
@@ -496,10 +496,6 @@ public class FormatGpx extends Formatter {
             sb.append("<desc>").append(rc.expctxWay.getKeyValueDescription(false, n.nodeDescription)).append("</desc>");
         }
         sb.append("</wpt>\n");
-    }
-
-    public static String getWaypoint(int ilon, int ilat, String name, String desc) {
-        return "<wpt lon=\"" + formatILon(ilon) + "\" lat=\"" + formatILat(ilat) + "\"><name>" + name + "</name>" + (desc != null ? "<desc>" + desc + "</desc>" : "") + "</wpt>";
     }
 
     public OsmTrack read(String filename) throws Exception {

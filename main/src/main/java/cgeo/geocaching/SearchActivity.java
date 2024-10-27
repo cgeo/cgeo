@@ -109,7 +109,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
         if (geo != null) {
             String name = geo.getName();
-            if (name != null && name.trim().length() == 0) {
+            if (name != null && name.trim().isEmpty()) {
                 name = null;
             }
             Log.i("Received a geo intent: lat=" + geo.getLatitude() + ", lon=" + geo.getLongitude() + ", name=" + name
@@ -309,7 +309,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     /**
      * Detect geocodes in clipboard
-     *
+     * <br>
      * Needs to run async as clipboard access is blocked if activity is not yet created.
      */
     private void handlePotentialClipboardGeocode() {

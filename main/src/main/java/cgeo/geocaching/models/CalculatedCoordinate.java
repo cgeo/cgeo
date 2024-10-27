@@ -94,7 +94,7 @@ public class CalculatedCoordinate implements Parcelable {
         final TextParser tp = new TextParser(config);
         tp.parseUntil('|');
         final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
-        setLatitudePattern(tokens.size() > 0 ? tokens.get(0) : "");
+        setLatitudePattern(!tokens.isEmpty() ? tokens.get(0) : "");
         setLongitudePattern(tokens.size() > 1 ? tokens.get(1) : "");
         this.type = CalculatedCoordinateType.fromName(tokens.size() > 2 ? tokens.get(2) : PLAIN.shortName());
         return tp.pos();

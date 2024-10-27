@@ -234,7 +234,6 @@ final class OkapiClient {
         return result.isSuccess ? parseCache(result.data) : null;
     }
 
-    @Nullable
     @WorkerThread
     public static long getCacheFoundDate(final String geoCode) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
@@ -992,7 +991,7 @@ final class OkapiClient {
 
     @NonNull
     private static List<Trackable> parseTrackables(final ArrayNode trackablesJson) {
-        if (trackablesJson.size() == 0) {
+        if (trackablesJson.isEmpty()) {
             return Collections.emptyList();
         }
         final List<Trackable> result = new ArrayList<>();

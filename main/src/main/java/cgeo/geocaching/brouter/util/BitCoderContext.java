@@ -308,10 +308,4 @@ public class BitCoderContext {
         return (idx << 3) + 8 - bits;
     }
 
-    public final void setReadingBitPosition(final int pos) {
-        idx = pos >>> 3;
-        bits = (idx << 3) + 8 - pos;
-        b = ab[idx] & 0xff;
-        b >>>= 8 - bits;
-    }
 }

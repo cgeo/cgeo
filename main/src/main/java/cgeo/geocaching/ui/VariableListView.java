@@ -328,11 +328,7 @@ public class VariableListView extends LinearLayout {
             }
 
             if (viewHolder.viewButtonFunction != null) {
-                viewHolder.viewButtonFunction.setOnClickListener(d -> {
-                    FormulaUtils.showSelectFunctionDialog(parent.getContext(), viewHolder.viewVariableFormulaText, newFormula -> {
-                        changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
-                    });
-                });
+                viewHolder.viewButtonFunction.setOnClickListener(d -> FormulaUtils.showSelectFunctionDialog(parent.getContext(), viewHolder.viewVariableFormulaText, newFormula -> changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula)));
             }
 
             if (viewHolder.viewVariableName != null) {

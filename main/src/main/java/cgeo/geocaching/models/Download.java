@@ -219,7 +219,7 @@ public class Download {
         }
 
         private static void buildTypelist() {
-            if (offlineMapTypes.size() == 0) {
+            if (offlineMapTypes.isEmpty()) {
                 // put all bundled map theme file types here - they will not be shown in the maps download selector
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
                 offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));

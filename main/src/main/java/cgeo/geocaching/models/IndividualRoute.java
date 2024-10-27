@@ -193,7 +193,7 @@ public class IndividualRoute extends Route implements Parcelable {
     }
 
     private int pos(final RouteItem item) {
-        if (segments == null || segments.size() == 0) {
+        if (segments == null || segments.isEmpty()) {
             return -1;
         }
         final String identifier = item.getIdentifier();

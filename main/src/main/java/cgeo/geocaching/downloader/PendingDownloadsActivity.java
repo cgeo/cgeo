@@ -121,7 +121,7 @@ public class PendingDownloadsActivity extends AbstractActionBarActivity {
     private void fillAdapter() {
         // retrieve list of pending downloads
         pendingDownloads = PendingDownload.getAllPendingDownloads();
-        if (pendingDownloads.size() == 0) {
+        if (pendingDownloads.isEmpty()) {
             showShortToast(R.string.downloader_no_pending_downloads);
             finish();
         } else {

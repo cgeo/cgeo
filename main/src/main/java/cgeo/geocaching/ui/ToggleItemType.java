@@ -11,9 +11,9 @@ import androidx.annotation.StringRes;
 
 /**
  * Encapsulates the mechanism to toggle text and image.
- *
+ * <br>
  * Supports this for menu-item.
- *
+ * <br>
  * Class is supposed to be used in Activity to toggle ui-elements.
  */
 public enum ToggleItemType {

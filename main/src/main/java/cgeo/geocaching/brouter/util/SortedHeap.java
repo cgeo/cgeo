@@ -110,31 +110,6 @@ public final class SortedHeap<V> {
         return size;
     }
 
-    public int getPeakSize() {
-        return peaksize;
-    }
-
-    public int getExtract(final Object[] targetArray) {
-        final int tsize = targetArray.length;
-        final int div = size / tsize + 1;
-        int tp = 0;
-
-        int lpi = 0;
-        SortedBin bin = firstNonEmpty;
-        while (bin != null) {
-            lpi += bin.lp;
-            final Object[] vlai = bin.vla;
-            final int n = bin.binsize;
-            while (lpi < n) {
-                targetArray[tp++] = vlai[lpi];
-                lpi += div;
-            }
-            lpi -= n;
-            bin = bin.nextNonEmpty;
-        }
-        return tp;
-    }
-
     private static final class SortedBin {
         public SortedHeap parent;
         public SortedBin next;
@@ -185,21 +160,6 @@ public final class SortedHeap<V> {
                     return;
                 }
                 neBin = next;
-            }
-        }
-
-        public void add(final int key, final Object value) {
-            int p = lp;
-            for (; ; ) {
-                if (p == binsize || key < al[p]) {
-                    al[p - 1] = key;
-                    vla[p - 1] = value;
-                    lv = al[--lp];
-                    return;
-                }
-                al[p - 1] = al[p];
-                vla[p - 1] = vla[p];
-                p++;
             }
         }
 

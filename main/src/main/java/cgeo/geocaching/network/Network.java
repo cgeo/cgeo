@@ -597,7 +597,7 @@ public final class Network {
 
     /**
      * Get the body of a HTTP response.
-     *
+     * <br>
      * {@link TextUtils#replaceWhitespace(String)} will be called on the result
      *
      * @param response a HTTP response

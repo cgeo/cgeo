@@ -69,7 +69,7 @@ public class Notifications {
         return createTextContentNotification(context, channel, context.getString(title), text);
     }
 
-    public static void cancel(@Nullable final Context context, @NonNull final int id) {
+    public static void cancel(@Nullable final Context context, final int id) {
         getNotificationManager(context).cancel(id);
     }
 }

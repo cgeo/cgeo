@@ -513,7 +513,7 @@ public class ContentStorageActivityHelper {
     }
 
     private void callCallback(final SelectAction action, final Object parameter) {
-        final Consumer<Object> callback = (Consumer<Object>) this.selectActionCallbacks.get(action);
+        final Consumer<Object> callback = this.selectActionCallbacks.get(action);
         if (callback != null) {
             callback.accept(parameter);
         }

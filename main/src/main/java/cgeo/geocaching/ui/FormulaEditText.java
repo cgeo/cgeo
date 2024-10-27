@@ -54,20 +54,16 @@ public class FormulaEditText extends LinearLayout {
         inflate(ctw, R.layout.formula_edittext_view, this);
         binding = FormulaEdittextViewBinding.bind(this);
         binding.formulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(editable -> processFormulaChange()));
-        binding.formulaFunction.setOnClickListener(l -> {
-            FormulaUtils.showSelectFunctionDialog(getContext(), binding.formulaText, newFormula -> processFormulaChange());
-        });
+        binding.formulaFunction.setOnClickListener(l -> FormulaUtils.showSelectFunctionDialog(getContext(), binding.formulaText, newFormula -> processFormulaChange()));
 
-        ViewUtils.consumeAttributes(getContext(), attrs, R.styleable.FormulaEditText, defStyleAttr, defStyleRes, typedArray -> {
-            setHint(typedArray.getString(R.styleable.FormulaEditText_hint));
-        });
+        ViewUtils.consumeAttributes(getContext(), attrs, R.styleable.FormulaEditText, defStyleAttr, defStyleRes, typedArray -> setHint(typedArray.getString(R.styleable.FormulaEditText_hint)));
 
         processFormulaChange();
     }
 
     @SuppressLint("SetTextI18n")
     private void ensureFormula() {
-        final String formulaString = binding.formulaText.getText().toString();
+        final String formulaString = ViewUtils.getEditableText(binding.formulaText.getText());
         try {
             this.formula = Formula.compile(formulaString);
             final Value value = formula.evaluate(varList == null ? x -> null : varList::getValue);
@@ -81,7 +77,7 @@ public class FormulaEditText extends LinearLayout {
     private void processFormulaChange() {
         ensureFormula();
         if (this.formulaChangeListener != null) {
-            final String formulaString = binding.formulaText.getText().toString();
+            final String formulaString = ViewUtils.getEditableText(binding.formulaText.getText());
             this.formulaChangeListener.accept(formulaString, formula);
         }
     }
@@ -107,7 +103,7 @@ public class FormulaEditText extends LinearLayout {
     }
 
     public String getFormulaText() {
-        return binding.formulaText.getText().toString();
+        return ViewUtils.getEditableText(binding.formulaText.getText());
     }
 
     public Value getValue() {

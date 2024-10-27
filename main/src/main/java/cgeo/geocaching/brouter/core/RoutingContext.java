@@ -116,8 +116,6 @@ public final class RoutingContext {
     /**
      * clean the nogolist (previoulsy saved by saveFullNogolist())
      * by removing nogos with waypoints within
-     *
-     * @return true if all wayoints are all in the same (full-weigth) nogo area (triggering bee-line-mode)
      */
     public void cleanNogoList(final List<OsmNode> waypoints) {
         nogopointsAll = nogopoints;
@@ -207,35 +205,12 @@ public final class RoutingContext {
         }
     }
 
-    public boolean allInOneNogo(List<OsmNode> waypoints) {
-        if (nogopoints == null) {
-            return false;
-        }
-        boolean allInTotal = false;
-        for (OsmNodeNamed nogo : nogopoints) {
-            boolean allIn = Double.isNaN(nogo.nogoWeight);
-            for (OsmNode wp : waypoints) {
-                final int dist = wp.calcDistance(nogo);
-                if (dist < nogo.radius
-                        && (!(nogo instanceof OsmNogoPolygon)
-                        || (((OsmNogoPolygon) nogo).isClosed
-                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
-                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
-                    continue;
-                }
-                allIn = false;
-            }
-            allInTotal |= allIn;
-        }
-        return allInTotal;
-    }
-
     public void setAlternativeIdx(final int idx) {
         alternativeIdx = idx;
     }
 
     public int getAlternativeIdx(final int min, final int max) {
-        return alternativeIdx < min ? min : (alternativeIdx > max ? max : alternativeIdx);
+        return alternativeIdx < min ? min : (Math.min(alternativeIdx, max));
     }
 
     public String getProfileName() {
@@ -332,30 +307,6 @@ public final class RoutingContext {
         defaultCR = expctxGlobal.getVariableValue("C_r", 0.01f);
         // Constant power of the biker (in W)
         bikerPower = expctxGlobal.getVariableValue("bikerPower", 100.f);
-    }
-
-    public void cleanNogolist(final List<OsmNodeNamed> waypoints) {
-        if (nogopoints == null) {
-            return;
-        }
-        final List<OsmNodeNamed> nogos = new ArrayList<>();
-        for (OsmNodeNamed nogo : nogopoints) {
-            boolean goodGuy = true;
-            for (OsmNodeNamed wp : waypoints) {
-                if (wp.calcDistance(nogo) < nogo.radius
-                        && (!(nogo instanceof OsmNogoPolygon)
-                        || (((OsmNogoPolygon) nogo).isClosed
-                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
-                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
-                    goodGuy = false;
-                    break;
-                }
-            }
-            if (goodGuy) {
-                nogos.add(nogo);
-            }
-        }
-        nogopoints = nogos.isEmpty() ? null : nogos;
     }
 
     public long[] getNogoChecksums() {

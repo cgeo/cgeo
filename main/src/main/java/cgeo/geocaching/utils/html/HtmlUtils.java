@@ -117,7 +117,7 @@ public final class HtmlUtils {
                 }
 
                 @Override
-                public void updateDrawState(final TextPaint ds) {
+                public void updateDrawState(@NonNull final TextPaint ds) {
                     super.updateDrawState(ds);
                     ds.setUnderlineText(false);
                 }

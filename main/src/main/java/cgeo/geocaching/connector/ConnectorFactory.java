@@ -134,7 +134,6 @@ public final class ConnectorFactory {
     }
 
     @NonNull
-    @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
         return getMatchingConnectors(clazz, null);
     }
@@ -207,15 +206,6 @@ public final class ConnectorFactory {
 
     public static boolean anyConnectorActive() {
         for (final IConnector conn : CONNECTORS) {
-            if (conn.isActive()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean anyTrackableConnectorActive() {
-        for (final TrackableConnector conn : trackableConnectors) {
             if (conn.isActive()) {
                 return true;
             }
@@ -454,7 +444,7 @@ public final class ConnectorFactory {
 
     /**
      * Load a trackable.
-     *
+     * <br>
      * We query all the connectors that can handle the trackable in parallel as well as the local storage.
      * We return the first positive result coming from a connector, or, if none, the result of loading from
      * the local storage.

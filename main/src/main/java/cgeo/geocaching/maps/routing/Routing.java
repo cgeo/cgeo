@@ -113,10 +113,6 @@ public final class Routing {
         return CgeoApplication.getInstance();
     }
 
-    public static synchronized void disconnect() {
-        disconnect(null);
-    }
-
     public static synchronized void disconnect(final String callbackKey) {
 
         if (callbackKey != null) {
