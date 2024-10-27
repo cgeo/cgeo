@@ -33,4 +33,18 @@
             android:tooltipText="@string/routes_tracks_dialog_title"
             android:contentDescription="@string/routes_tracks_dialog_title"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/container_wherigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/container_individualroute"
+        android:layout_marginLeft="6dp"
+        android:visibility="gone">
+        <ImageButton
+            android:id="@+id/map_wherigo_popup"
+            style="@style/map_quicksettingsbutton"
+            android:src="@drawable/map_quick_wherigo"
+            android:tooltipText="@string/wherigo_player"
+            android:contentDescription="@string/wherigo_player"/>
+    </LinearLayout>
 </RelativeLayout>

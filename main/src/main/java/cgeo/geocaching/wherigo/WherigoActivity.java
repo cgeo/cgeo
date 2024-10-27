@@ -20,59 +20,36 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
-import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
-import cz.matejcik.openwig.EventTable;
 import cz.matejcik.openwig.Zone;
 
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
 
-    private static final List<WherigoThingType> THING_TYPE_LIST = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM);
-    private static final List<WherigoThingType> THING_TYPE_LIST_DEBUG = Arrays.asList(WherigoThingType.LOCATION, WherigoThingType.INVENTORY, WherigoThingType.TASK, WherigoThingType.ITEM, WherigoThingType.THING);
-
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
 
-    private final SimpleItemListModel<WherigoThingType> wherigoThingTypeModel = new SimpleItemListModel<WherigoThingType>()
-        .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-        .setDisplayViewMapper(R.layout.wherigolist_item, (type, group, view) -> {
-            view.setBackground(null);
-            final List<EventTable> things = type.getThingsForUserDisplay();
-            final String name = type.toUserDisplayableString() + " (" + things.size() + ")";
-            final CharSequence description = TextUtils.join(things, i -> {
-                final String thingName = i.name;
-                return WherigoUtils.isVisibleToPlayer(i) ? thingName : TextUtils.setSpan("(" + thingName + ")", new StyleSpan(Typeface.ITALIC));
-            }, ", ");
-
-            final WherigolistItemBinding typeBinding = WherigolistItemBinding.bind(view);
-            typeBinding.name.setText(name);
-            typeBinding.description.setText(description);
-            ImageParam.id(type.getIconId()).applyTo(typeBinding.icon);
-        }, (item, itemGroup) -> item == null  ? "" : item.toUserDisplayableString())      ;
+    private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
     public static void start(final Activity parent, final boolean hideNavigationBar) {
         startInternal(parent, null, hideNavigationBar);
@@ -103,8 +80,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
 
-        binding.wherigoThingTypeList.setModel(wherigoThingTypeModel);
-        wherigoThingTypeModel.addSingleSelectListener(type -> WherigoUtils.chooseAndDisplayThing(this, type));
+        wherigoThingTypeModel = WherigoViewUtils.createThingTypeTable(this, binding.wherigoThingTypeList, thing -> {
+            WherigoViewUtils.displayThing(this, thing, false);
+        });
 
         refreshGui();
 
@@ -280,9 +258,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
 
-        wherigoThingTypeModel.setItems(game.isDebugModeForCartridge() ? THING_TYPE_LIST_DEBUG : THING_TYPE_LIST);
+        WherigoViewUtils.updateThingTypeTable(wherigoThingTypeModel, binding.wherigoThingTypeList);
 
-        binding.wherigoThingTypeList.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
         binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
 
         binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_location) + ": " +

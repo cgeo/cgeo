@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="4dip"
+    tools:context=".wherigo.WherigoActivity" >
+
+    <Button
+        android:id="@+id/resume_dialog"
+        style="@style/button_full"
+        android:layout_margin="3dp"
+        android:minWidth="2dp"
+        android:text="@string/wherigo_controls_resume_paused_dialog"/>
+
+    <!-- Item Type List -->
+    <cgeo.geocaching.ui.SimpleItemListView
+        android:id="@+id/wherigo_thing_type_list"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:nestedScrollingEnabled="true"
+        />
+
+    <Button
+        android:id="@+id/go_to_wherigo"
+        style="@style/button_full"
+        android:layout_margin="3dp"
+        android:minWidth="2dp"
+        android:text="@string/wherigo_player"/>
+
+</LinearLayout>
