@@ -779,6 +779,7 @@
     <string name="settings_title_map_style">Kartenstil</string>
     <string name="settings_hide_tileproviders_title">Kartenquellen ausblenden</string>
     <string name="settings_hide_tileproviders_summary">Eine oder mehrere Kartenquellen aus der Kartenauswahl ausblenden</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap-Varianten</string>
     <string name="settings_userDefinedTileProvider">Benutzerdefinierter Kartenabieter</string>
     <string name="settings_userDefinedTileProviderUri">Adresse (ohne abschließenden Schrägstrich) zum Kartenserver eingeben oder vollständige Adresse mit Parametern {X}, {Y} und {Z}. Stelle sicher, dass Du die Nutzungsbedingungen geprüft hast und einhältst.</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
@@ -920,6 +921,7 @@
     <string name="menu_elevation_info">Höhe (Karte):</string>
     <string name="elevation_selected">Höhe (Karte) an ausgewählter Position</string>
     <string name="elevation_difference">Höhenunterschied</string>
+    <string name="distance">Entfernung</string>
     <string name="copy_coordinates">Kopiere Koordinaten</string>
     <string name="selected_position">Ausgewählte Position</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
@@ -2584,8 +2586,10 @@
     <string name="wherigo_cartridge_details">Cartridge Details</string>
     <string name="wherigo_locate_on_center">Ins Zentrum positionieren</string>
     <string name="wherigo_revoke_fixed_location">Festen Standort widerrufen</string>
+    <string name="wherigo_thingtype_location">Orte</string>
     <string name="wherigo_thingtype_inventory">Inventar</string>
     <string name="wherigo_thingtype_item">Du siehst</string>
+    <string name="wherigo_thingtype_task">Aufgaben</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">innerhalb</string>
     <string name="wherigo_zone_near">in der Nähe</string>
