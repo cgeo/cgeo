@@ -30,6 +30,8 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.style.StyleSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -116,12 +118,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.map.setOnClickListener(v -> showOnMap());
 
-        binding.cartridgeDetails.setOnClickListener(v -> {
-            final WherigoCartridgeInfo info = WherigoGame.get().getCartridgeInfo();
-            if (info != null) {
-                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(info));
-            }
-        });
         binding.revokeFixedLocation.setOnClickListener(v -> {
             WherigoLocationProvider.get().setFixedLocation(null);
         });
@@ -131,6 +127,27 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             handleCGuidInput(guid);
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.wherigo_options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        final int menuItem = item.getItemId();
+        if (menuItem == R.id.menu_show_cartridge) {
+            final WherigoCartridgeInfo info = WherigoGame.get().getCartridgeInfo();
+            if (info != null) {
+                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(info, true));
+            } else {
+                SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_player))
+                        .setMessage(TextParam.id(R.string.wherigo_no_game_running)).show();
+            }
+        }
+        return true;
     }
 
     private void startGame() {
@@ -164,7 +181,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         SimpleDialog.of(this)
             .setTitle(TextParam.id(R.string.wherigo_choose_cartridge))
             .selectSingle(model, cartridgeInfo -> {
-                WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo));
+                WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo, false));
             });
     }
 
@@ -244,7 +261,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                     wherigoDownloader.downloadWherigo(cguid, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
                 });
         } else {
-            WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cguidCartridge));
+            WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cguidCartridge, false));
         }
     }
 
@@ -252,7 +269,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         final WherigoCartridgeInfo cartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (result.isOk() && cartridgeInfo != null) {
             ActivityMixin.showToast(this, R.string.wherigo_download_successful_title);
-            WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo));
+            WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo, false));
         } else {
             SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_failed_title))
                 .setMessage(TextParam.id(R.string.wherigo_download_failed_message, cguid, String.valueOf(result)))
@@ -280,7 +297,6 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo().getLoadableSavegames().size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
-        binding.cartridgeDetails.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));

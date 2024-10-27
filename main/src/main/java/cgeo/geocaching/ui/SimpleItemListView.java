@@ -18,6 +18,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -348,6 +350,15 @@ public class SimpleItemListView extends LinearLayout {
         }
     }
 
+    public void setColumnCount(final int columnCount) {
+        if (columnCount <= 1) {
+            binding.list.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        } else {
+            binding.list.setLayoutManager(new GridLayoutManager(this.getContext(), columnCount));
+        }
+        handleModelChange(SimpleItemListModel.ChangeType.COMPLETE);
+    }
+
     public void scrollTo(final Object value) {
         if (value == null || binding.list.getLayoutManager() == null) {
             return;
@@ -483,6 +494,9 @@ public class SimpleItemListView extends LinearLayout {
 
     private void recreateList() {
 
+        //reset layout manager
+        recreateLayoutManager();
+
         final List<ListItem> list = new ArrayList<>();
         list.add(createForType(ListItemType.SELECT_ALL));
         list.add(createForType(ListItemType.SELECTED_VISIBLE));
@@ -514,4 +528,29 @@ public class SimpleItemListView extends LinearLayout {
         }
     }
 
+    private void recreateLayoutManager() {
+        final RecyclerView.LayoutManager currentLm = binding.list.getLayoutManager();
+        final int columnCount = model.getColumnCount();
+        if (columnCount <= 1) {
+            if (!(currentLm instanceof LinearLayoutManager)) {
+                binding.list.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
+        } else {
+            if (!(currentLm instanceof GridLayoutManager) || ((GridLayoutManager) currentLm).getSpanCount() != columnCount) {
+                binding.list.setLayoutManager(new GridLayoutManager(getContext(), model.getColumnCount()));
+            }
+            final GridLayoutManager glm = (GridLayoutManager) binding.list.getLayoutManager();
+            glm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+               @Override
+               public int getSpanSize(final int pos) {
+                   final ListItem item = listAdapter.getItem(pos);
+                   if (item.type == ListItemType.ITEM) {
+                       final int span = model.getColumnSpanMapper() == null ? 1 : model.getColumnSpanMapper().apply(item.value);
+                       return Math.max(1, Math.min(columnCount, span));
+                   }
+                   return columnCount;
+               }
+           });
+        }
+    }
 }

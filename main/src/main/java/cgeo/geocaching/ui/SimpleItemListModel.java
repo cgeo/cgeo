@@ -56,14 +56,14 @@ public class SimpleItemListModel<T> {
 
     private String filterTerm = null;
 
-    private T scrollAnchorOnOpen = null;
-
-
     private final Set<T> selectedItems = new HashSet<>();
 
     private final List<Consumer<ChangeType>> changeListeners = new ArrayList<>();
 
     private Consumer<T> actionListener = null;
+
+    private int columnCount = 1;
+    private Function<T, Integer> columnSpanMapper = null;
 
 
     /** Supported display modes for choosing items from a list */
@@ -502,6 +502,21 @@ public class SimpleItemListModel<T> {
     public SimpleItemListModel<T> setItemActionListener(final Consumer<T> actionListener) {
         this.actionListener = actionListener;
         return this;
+    }
+
+    public SimpleItemListModel<T> setColumns(final int columnCount, final Function<T, Integer> columnSpanMapper) {
+        this.columnCount = columnCount;
+        this.columnSpanMapper = columnSpanMapper;
+        triggerChange(ChangeType.COMPLETE);
+        return this;
+    }
+
+    public int getColumnCount() {
+        return this.columnCount;
+    }
+
+    public final Function<T, Integer> getColumnSpanMapper() {
+        return this.columnSpanMapper;
     }
 
     public Consumer<T> getActionListener() {

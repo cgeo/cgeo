@@ -86,14 +86,6 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/resume_dialog"
-                    style="@style/button"
-                    android:layout_margin="3dp"
-                    android:minWidth="2dp"
-                    android:text="@string/resume"
-                    app:icon="@drawable/ic_menu_owned" />
-
-                <Button
                     android:id="@+id/load_game"
                     style="@style/button_icon_accent"
                     android:tooltipText="@string/wherigo_controls_loadgame_hint"
@@ -112,19 +104,19 @@
                     app:icon="@drawable/wherigo_close" />
 
                 <Button
-                    android:id="@+id/cartridge_details"
-                    style="@style/button_icon_accent"
-                    android:tooltipText="@string/wherigo_cartridge_details"
-                    app:icon="@drawable/settings_info" />
-
-                <Button
                     android:id="@+id/map"
                     style="@style/button_icon_accent"
                     android:tooltipText="@string/wherigo_controls_mapzones_hint"
                     app:icon="@drawable/ic_menu_mapmode" />
 
-
             </LinearLayout>
+
+            <Button
+                android:id="@+id/resume_dialog"
+                style="@style/button_full"
+                android:layout_margin="3dp"
+                android:minWidth="2dp"
+                android:text="@string/wherigo_controls_resume_paused_dialog"/>
 
             <TextView
                 android:id="@+id/game_location"

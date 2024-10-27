@@ -66,7 +66,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         final WherigoGame game = WherigoGame.get();
 
-        final AlertDialog dialog = WherigoUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
+        final AlertDialog dialog = WherigoViewUtils.createFullscreenDialog(activity, LocalizationUtils.getString(R.string.wherigo_player));
 
         binding = WherigoThingDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
@@ -83,8 +83,8 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
 
         if ("Text".equals(type)) {
             binding.dialogInputLayout.setVisibility(VISIBLE);
-            WherigoUtils.setViewActions(Arrays.asList(Boolean.TRUE, Boolean.FALSE),
-                    binding.dialogActionlist, item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_PAUSE_BUTTON, item -> {
+            WherigoViewUtils.setViewActions(Arrays.asList(Boolean.FALSE, Boolean.TRUE),
+                    binding.dialogActionlist, 2, item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_CANCEL_BUTTON, item -> {
                 if (item) {
                     control.setPauseOnDismiss(false);
                     control.dismiss();
@@ -125,8 +125,8 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
                     .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_RADIO);
                 binding.dialogItemlistview.setModel(choiceModel);
 
-                WherigoUtils.setViewActions(Arrays.asList(Boolean.TRUE, Boolean.FALSE), binding.dialogActionlist,
-                    item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_PAUSE_BUTTON, item -> {
+                WherigoViewUtils.setViewActions(Arrays.asList(Boolean.FALSE, Boolean.TRUE), binding.dialogActionlist, 2,
+                    item -> item ? WherigoUtils.TP_OK_BUTTON : WherigoUtils.TP_CANCEL_BUTTON, item -> {
                         if (item) {
                             control.setPauseOnDismiss(false);
                             control.dismiss();
@@ -141,7 +141,7 @@ public class WherigoInputDialogProvider implements IWherigoDialogProvider {
         }
 
         if (!handled) {
-            WherigoUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, item -> WherigoUtils.TP_OK_BUTTON, item -> {
+            WherigoViewUtils.setViewActions(Collections.singleton("ok"), binding.dialogActionlist, 1, item -> WherigoUtils.TP_OK_BUTTON, item -> {
                 control.setPauseOnDismiss(false);
                 control.dismiss();
                 Engine.callEvent(input, "OnGetInput", null);
