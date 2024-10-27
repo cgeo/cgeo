@@ -1,5 +1,5 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Korrektur: Fehlende Event-Zeiten beim Download des Caches (Webseitenänderung)
 
 ##
 - Neu: Warnung bei aktiviertem geocaching.com-Dienst ohne Anmeldedaten
