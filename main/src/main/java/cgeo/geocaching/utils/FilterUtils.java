@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -38,29 +39,43 @@ public class FilterUtils {
                 filteredList, true);
     }
 
-    public static <T extends Activity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
+    public static <T extends AbstractActivity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
         final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
+        final boolean isFilterActive = filterContext.get().isFiltering();
+
+        if (filters.isEmpty() && !isFilterActive) {
+            filteredActivity.showToast(R.string.cache_filter_storage_load_delete_nofilter_message);
+            return false;
+        }
 
         if (filters.isEmpty()) {
-            return false;
-        } else {
-            final boolean isFilterActive = filterContext.get().isFiltering();
-            final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
-            model
+            final TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
+                    TextParam.text(System.getProperty("line.separator")),
+                    TextParam.id(R.string.cache_filter_storage_clear_message));
+                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
+                        .setPositiveButton(TextParam.id(R.string.cache_filter_storage_clear_button))
+                        .setMessage(message)
+                        .confirm(() ->
+                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+                        );
+                return true;
+            }
+
+        final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
+        model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
                 .setItems(filters)
                 .setDisplayMapper((f) -> TextParam.text(f.getName()));
 
-            if (isFilterActive) {
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
+        if (isFilterActive) {
+            SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
                     .setNeutralButton(TextParam.id(R.string.cache_filter_storage_clear_button))
                     .setNeutralAction(() ->
                             filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
                     ).selectSingle(model, filteredActivity::refreshWithFilter);
-            } else {
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                        .selectSingle(model, filteredActivity::refreshWithFilter);
-            }
+        } else {
+            SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
+                    .selectSingle(model, filteredActivity::refreshWithFilter);
         }
         return true;
     }
