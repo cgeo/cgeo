@@ -1,4 +1,4 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildschirm.<br> (Sie können für den einfacheren Zugriff ein [Schnellstart-Element](cgeo-setting://quicklaunchitems_sorted) oder einen [benutzerdefinierten Menüeintrag](cgeo-setting://custombnitem) konfigurieren, dazu zuerst erweiterte Einstellungen aktivieren.)
 
 ### Karte
 - Neu: Kartendesign pro Kartenanbieter merken (UnifiedMap)
@@ -19,7 +19,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Korrektur: Enthält eine persönliche Notiz mehrere Bilder, werden diese nicht zum Bilder-Tab hinzugefügt
 - Korrektur: Handhabung von Projektionen in Wegpunkten und persönlichen Notizen
 - Neu: Langes Tippen auf das Datum beim Loggen stellt das vorherige Logdatum ein
-- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- Korrektur: Zurücksetzen des Caches auf die ursprünglichen Koordinaten entfernt das "geänderte Koordinaten" Flag nicht
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
@@ -28,5 +28,5 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Neu: Bevorzugte Bildgröße für Bilder festlegen, die von geocaching.com Caches und Trackables geladen werden
 - Korrektur: "Im Browser öffnen" funktioniert nicht für Trackable Logs
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
-- New: Option to remove a cache from all lists (= mark it as to be deleted)
-- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- Neu: Option, um einen Cache von allen Listen zu entfernen (= ihn als gelöscht zu markieren)
+- Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
