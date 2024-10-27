@@ -79,7 +79,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
 
     /**
      * Handle a dispose message.
-     *
+     * <br>
      * This is called on the handler looper thread when the handler gets disposed.
      */
     protected void handleDispose() {

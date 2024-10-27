@@ -153,12 +153,6 @@ public final class Viewport implements Parcelable {
         return contains(vp.bottomLeft) && contains(vp.topRight);
     }
 
-    public boolean intersects(@NonNull final Viewport vp) {
-        return contains(vp.bottomLeft) || contains(vp.topRight) ||
-                contains(vp.bottomLeft.getLatitudeE6(), vp.topRight.getLongitudeE6()) ||
-                contains(vp.topRight.getLatitudeE6(), vp.bottomLeft.getLongitudeE6());
-    }
-
     /**
      * Return the "where" part of the string appropriate for a SQL query.
      *

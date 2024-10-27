@@ -168,8 +168,8 @@ public class CacheArtefactParser {
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) //splitting would not help readability
     private Waypoint parseSingleWaypoint(final GeopointWrapper match, final int counter) {
         final Geopoint point = match.getGeopoint();
-        final Integer start = match.getStart();
-        final Integer end = match.getEnd();
+        final int start = match.getStart();
+        final int end = match.getEnd();
         final String text = match.getText();
         final String matchedText = text.substring(start, end);
 

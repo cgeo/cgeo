@@ -48,7 +48,7 @@ public class CacheUtils {
         return null != ProcessUtils.getLaunchIntent(activity.getString(R.string.package_alc));
     }
 
-    public static void setLabLink(@NonNull final Activity activity, @NonNull final Geocache cache, @NonNull final View view, @Nullable final String url) {
+    public static void setLabLink(@NonNull final Activity activity, @NonNull final View view, @Nullable final String url) {
         view.setOnClickListener(v -> {
             // re-check installation state, might have changed since creating the view
             if (isLabPlayerInstalled(activity) && StringUtils.isNotBlank(url)) {

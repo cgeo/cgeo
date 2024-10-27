@@ -372,7 +372,7 @@ public class LegacyCalculatedCoordinateMigrator {
                     w.setCalcStateConfig(cc.toConfig());
                     cache.addOrChangeWaypoint(w, true);
                     actionAfterMigration.run();
-                }, () -> actionAfterMigration.run());
+                }, actionAfterMigration);
     }
 
     private static String createNewUniqueVar(final String oldVar, final Set<String> existingVars) {

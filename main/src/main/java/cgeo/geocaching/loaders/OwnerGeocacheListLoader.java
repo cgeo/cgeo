@@ -25,7 +25,7 @@ public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @Override
     public IGeocacheFilter getAdditionalFilterParameter() {
-        final OwnerGeocacheFilter ownerFilter = (OwnerGeocacheFilter) GeocacheFilterType.OWNER.create();
+        final OwnerGeocacheFilter ownerFilter = GeocacheFilterType.OWNER.create();
         ownerFilter.getStringFilter().setTextValue(username);
         return ownerFilter;
     }

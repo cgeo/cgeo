@@ -40,10 +40,6 @@ public final class DefaultMap {
         return getLiveMapIntent(fromActivity, getDefaultMapClass());
     }
 
-    public static Intent getLiveMapIntent(final Activity fromActivity, final Geopoint coords) {
-        return new MapOptions(coords).newIntent(fromActivity, getDefaultMapClass());
-    }
-
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
         if (Settings.useUnifiedMap()) {
             Log.e("Launching UnifiedMap in waypoint mode (1)");

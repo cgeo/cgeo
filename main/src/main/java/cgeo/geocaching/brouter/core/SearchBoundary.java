@@ -55,19 +55,4 @@ public final class SearchBoundary {
         return n.ilon > minlon && n.ilon < maxlon && n.ilat > minlat && n.ilat < maxlat;
     }
 
-    public int getBoundaryDistance(final OsmNode n) {
-        switch (direction) {
-            case 0:
-                return n.calcDistance(new OsmNode(n.ilon, minlat));
-            case 1:
-                return n.calcDistance(new OsmNode(minlon, n.ilat));
-            case 2:
-                return n.calcDistance(new OsmNode(n.ilon, maxlat));
-            case 3:
-                return n.calcDistance(new OsmNode(maxlon, n.ilat));
-            default:
-                throw new IllegalArgumentException("undefined direction: " + direction);
-        }
-    }
-
 }

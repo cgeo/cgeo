@@ -693,7 +693,7 @@ public class Waypoint implements IWaypoint {
         final TextParser tp = new TextParser(config);
         tp.parseUntil('|');
         final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
-        this.projectionType = tokens.size() > 0 ? EnumUtils.getEnum(ProjectionType.class, tokens.get(0), ProjectionType.NO_PROJECTION) : ProjectionType.NO_PROJECTION;
+        this.projectionType = !tokens.isEmpty() ? EnumUtils.getEnum(ProjectionType.class, tokens.get(0), ProjectionType.NO_PROJECTION) : ProjectionType.NO_PROJECTION;
         this.projectionFormula1 = tokens.size() > 1 ? tokens.get(1) : "";
         this.projectionFormula2 = tokens.size() > 2 ? tokens.get(2) : "";
         this.projectionDistanceUnit = tokens.size() > 3 ? EnumUtils.getEnum(DistanceUnit.class, tokens.get(3), DistanceUnit.getDefaultUnit(false)) : DistanceUnit.getDefaultUnit(false);

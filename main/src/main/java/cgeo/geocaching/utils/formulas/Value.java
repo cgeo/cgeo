@@ -25,7 +25,6 @@ public class Value implements Comparable<Value> {
 
     public static final Value EMPTY = Value.of(null);
 
-    private static final double DOUBLE_DELTA = 0.000000001d;
     private static final Format DOUBLE_TO_STRING_FORMAT = new DecimalFormat("#.######", DecimalFormatSymbols.getInstance(Locale.US));
 
     private static final BigInteger LONG_MAX = BigInteger.valueOf(Long.MAX_VALUE);

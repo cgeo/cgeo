@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
@@ -89,7 +90,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void initOfflineRoutingPreferences() {
         DefaultFilesUtils.checkDefaultFiles();
-        findPreference(getString(R.string.pref_useInternalRouting)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_useInternalRouting)), (preference, newValue) -> {
             updateRoutingPrefs(!Settings.useInternalRouting());
             return true;
         });
@@ -148,7 +149,7 @@ public class PreferenceNavigationFragment extends BasePreferenceFragment {
 
     private void updateRoutingPrefs(final boolean useInternalRouting) {
         final boolean anyRoutingAvailable = useInternalRouting || ProcessUtils.isInstalled(getString(R.string.package_brouter));
-        findPreference(getString(R.string.pref_brouterDistanceThreshold)).setEnabled(anyRoutingAvailable);
-        findPreference(getString(R.string.pref_brouterShowBothDistances)).setEnabled(anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterDistanceThreshold)), anyRoutingAvailable);
+        PreferenceUtils.setEnabled(findPreference(getString(R.string.pref_brouterShowBothDistances)), anyRoutingAvailable);
     }
 }

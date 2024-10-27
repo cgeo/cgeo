@@ -9,6 +9,7 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +57,7 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPreference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         // there is a UI bug in the material preference implementation, see #12338

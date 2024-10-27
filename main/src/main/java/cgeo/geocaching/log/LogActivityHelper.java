@@ -137,9 +137,7 @@ public class LogActivityHelper {
         if (entry.isOwn()) {
             dialog.confirm(() -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, null)));
         } else {
-            dialog.input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> {
-                logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText));
-            });
+            dialog.input(new SimpleDialog.InputOptions().setLabel("Reason"), reasonText -> logDeleteTask.start(new ImmutableTriple<>(cache, entry, reasonText)));
         }
     }
 

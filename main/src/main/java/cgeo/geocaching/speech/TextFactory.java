@@ -14,13 +14,13 @@ import java.util.Locale;
 
 /**
  * Creates the output to be read by TTS.
- *
+ * <br>
  * Note: some languages need to read "one hour" as "a hour" (indefinite article). Also, other languages
  * use the <tt>quantity="1"</tt> plurals rule for other values than 1, such as Slovenian, so it is not
  * possible to store the literal value to use for 1 in this rule. For this reason, we need to have one
  * string for the unit quantity ("one meter") and a plurals rule for everything else.
- *
- * See http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html for rules
+ * <br>
+ * See <a href="http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html">...</a> for rules
  * on unit expressions.
  */
 public class TextFactory {

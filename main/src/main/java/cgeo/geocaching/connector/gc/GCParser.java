@@ -1054,7 +1054,7 @@ public final class GCParser {
 
     /**
      * Adds the cache to the favorites of the user.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to add
@@ -1114,7 +1114,7 @@ public final class GCParser {
 
     /**
      * Removes the cache from the favorites.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to remove
@@ -1508,7 +1508,7 @@ public final class GCParser {
     }
 
     /**
-     * Javascript Object from the new Logpage: https://www.geocaching.com/play/geocache/gc.../log
+     * Javascript Object from the new Logpage: <a href="https://www.geocaching.com/play/geocache/gc.../log">...</a>
      * <pre>
      *     {"value":46}
      * </pre>
@@ -1752,10 +1752,5 @@ public final class GCParser {
             Log.e("getCachesCount: bad cache count", e);
         }
         return cachesCount;
-    }
-
-    @NonNull
-    private static String removeDotAndComma(@NonNull final String str) {
-        return StringUtils.replaceChars(str, ".,", null);
     }
 }

@@ -13,7 +13,7 @@ import android.view.View.OnTouchListener;
  * click is fired immediately, next one after the initialInterval, and subsequent
  * ones after the normalInterval.
  *
- * <p>Implementation from https://stackoverflow.com/questions/4284224/android-hold-button-to-repeat-action/12795551#12795551
+ * <p>Implementation from <a href="https://stackoverflow.com/questions/4284224/android-hold-button-to-repeat-action/12795551#12795551">...</a>
  */
 public class RepeatOnHoldListener implements OnTouchListener {
 

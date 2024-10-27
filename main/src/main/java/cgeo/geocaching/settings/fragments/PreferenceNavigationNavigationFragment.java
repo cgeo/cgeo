@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.os.Bundle;
 
@@ -20,16 +21,16 @@ public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCo
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_navigation_menu);
+        requireActivity().setTitle(R.string.settings_title_navigation_menu);
     }
 
     private void initNavigationMenuPreferences() {
         for (final NavigationAppFactory.NavigationAppsEnum appEnum : NavigationAppFactory.NavigationAppsEnum.values()) {
             final Preference preference = findPreference(getString(appEnum.preferenceKey));
             if (appEnum.app.isInstalled()) {
-                preference.setEnabled(true);
+                PreferenceUtils.setEnabled(preference, true);
             } else {
-                preference.setSummary(R.string.settings_navigation_disabled);
+                PreferenceUtils.setSummary(preference, getString(R.string.settings_navigation_disabled));
             }
         }
     }

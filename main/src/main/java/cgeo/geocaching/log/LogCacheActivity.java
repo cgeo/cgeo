@@ -315,7 +315,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
                 .setReportProblem(reportProblem.get())
                 .setRating(cacheVotingBar.getRating())
                 .setFavorite(binding.favoriteCheck.isChecked())
-                .setPassword(binding.logPassword.getText().toString());
+                .setPassword(ViewUtils.getEditableText(binding.logPassword.getText()));
         CollectionStream.of(imageListFragment.getImages()).forEach(builder::addLogImage);
         builder.addInventoryActions(inventoryAdapter.getActionLogs());
         //CollectionStream.of(inventory).forEach(t -> builder.addTrackableAction(t.geocode, t.action));
@@ -474,11 +474,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
     }
 
     private String currentLogText() {
-        return binding.log.getText().toString();
-    }
-
-    private String currentLogPassword() {
-        return binding.logPassword.getText().toString();
+        return ViewUtils.getEditableText(binding.log.getText());
     }
 
     @Override
@@ -497,7 +493,7 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         Log.v("LogCacheActivity.onOptionsItemSelected(" + item.getItemId() + "/" + item.getTitle() + ")");
         final int itemId = item.getItemId();
         if (itemId == R.id.menu_send) {
-            final int logLength = binding.log.getText().toString().trim().length();
+            final int logLength = ViewUtils.getEditableText(binding.log.getText()).trim().length();
             if (logLength > 0) {
                 sendLogAndConfirm();
             } else {

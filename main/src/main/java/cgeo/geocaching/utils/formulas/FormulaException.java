@@ -44,7 +44,7 @@ public class FormulaException extends IllegalArgumentException {
     private CharSequence expressionFormatted;
     private String expression;
     private String functionContext;
-    private Set<Integer> childrenInError;
+    private final Set<Integer> childrenInError;
     private int parsingPos = -1;
     private int parsingChar = 0;
     private String evaluationContext;
@@ -58,10 +58,6 @@ public class FormulaException extends IllegalArgumentException {
 
     public FormulaException(final ErrorType errorType, final Object... errorParams) {
         this(null, null, errorType, errorParams);
-    }
-
-    public ErrorType getErrorType() {
-        return errorType;
     }
 
     public Set<Integer> getChildrenInError() {

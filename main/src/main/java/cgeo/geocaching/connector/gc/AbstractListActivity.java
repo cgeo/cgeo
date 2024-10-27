@@ -35,7 +35,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
     @NonNull private final List<GCList> pocketQueries = new ArrayList<>();
 
     private boolean filteredList = false;
-    private boolean fixed = false;
+    private final boolean fixed = false;
     private boolean startDownload = false;
     private SwitchCompat switchCompat = null;
 
@@ -134,10 +134,6 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     public List<GCList> getQueries() {
         return pocketQueries;
-    }
-
-    public boolean onlyDownloadable() {
-        return filteredList;
     }
 
     public boolean getStartDownload() {

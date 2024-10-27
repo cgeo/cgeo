@@ -15,7 +15,7 @@ public class ColorUtils {
     /**
      * Calculates color luminance according to W3 standard
      * <p>
-     * https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
+     * <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef">...</a>
      */
     private static double getLuminance(final int r, final int g, final int b) {
         final double[] components = {r / 255.0, g / 255.0, b / 255.0};
@@ -32,7 +32,7 @@ public class ColorUtils {
     /**
      * Calculates contrast ratio between two {@link Color} int according to W3
      * <p>
-     * See https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef
+     * See <a href="https://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef">...</a>
      *
      * @param rgb1 first {@link Color} int
      * @param rgb2 second {@link Color} int

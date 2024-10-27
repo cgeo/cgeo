@@ -14,7 +14,6 @@ import java.util.List;
 
 public class ImageGalleryActivity extends AbstractActionBarActivity {
 
-    private List<Image> images;
     private ImageGalleryView imageGallery;
 
     @Override
@@ -33,7 +32,7 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
         setThemeAndContentView(R.layout.imagegallery_activity);
         setCacheTitleBar(geocode);
 
-        images = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
+        final List<Image> images = extras.getParcelableArrayList(Intents.EXTRA_IMAGES);
 
         imageGallery = findViewById(R.id.image_gallery);
         ImageUtils.initializeImageGallery(imageGallery, geocode, images, false);

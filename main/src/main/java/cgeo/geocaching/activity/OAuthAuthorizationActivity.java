@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -75,7 +76,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final OAuthAuthorizationActivity activity = getReference();
             if (activity != null) {
                 final ProgressDialog requestTokenDialog = activity.requestTokenDialog;
@@ -109,7 +110,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final OAuthAuthorizationActivity activity = getReference();
             if (activity != null) {
                 Dialogs.dismiss(activity.changeTokensDialog);
@@ -305,6 +306,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
             super(actitity);
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onClick(final View arg0) {
             final OAuthAuthorizationActivity actitity = getReference();

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.PreferenceTextAlwaysShow;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 
@@ -206,12 +207,12 @@ public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
     }
 
     protected void setFlagForRestartRequired() {
-        getActivity().setResult(SettingsActivity.RESTART_NEEDED);
+        requireActivity().setResult(SettingsActivity.RESTART_NEEDED);
     }
 
     protected void setFlagForRestartRequired(final @StringRes int... prefKeyIds) {
         for (int prefKeyId : prefKeyIds) {
-            findPreference(getString(prefKeyId)).setOnPreferenceChangeListener((preference, newValue) -> {
+            PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(prefKeyId)), (preference, newValue) -> {
                 setFlagForRestartRequired();
                 return true;
             });

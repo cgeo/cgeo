@@ -91,7 +91,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         avatarFrame = (LinearLayout) holder.findViewById(android.R.id.widget_frame);
     }

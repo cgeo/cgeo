@@ -268,7 +268,7 @@ public final class Formatter {
                 }
             } else if (item == CacheListInfoItem.VALUES.RECENT_LOGS.id) {
                 final List<LogEntry> logs = cache.getLogs();
-                if (logs.size() > 0) {
+                if (!logs.isEmpty()) {
                     int count = 0;
                     // mitigation to make displaying ImageSpans work even in wrapping lines, see #14163
                     // ImageSpans are separated by a zero-width space character (\u200b)
@@ -371,12 +371,6 @@ public final class Formatter {
     public static String formatDaysAgo(final long date) {
         final int days = CalendarUtils.daysSince(date);
         return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ago, days, days);
-    }
-
-    @NonNull
-    public static String formatDaysAhead(final long date) {
-        final int days = CalendarUtils.daysSince(date);
-        return CgeoApplication.getInstance().getResources().getQuantityString(R.plurals.days_ahead, days, days);
     }
 
     @NonNull

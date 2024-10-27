@@ -13,6 +13,6 @@ public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_cachedetails);
+        requireActivity().setTitle(R.string.settings_title_cachedetails);
     }
 }

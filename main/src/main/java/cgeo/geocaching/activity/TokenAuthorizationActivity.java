@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -58,7 +59,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final TokenAuthorizationActivity activity = getReference();
             if (activity != null) {
                 Dialogs.dismiss(activity.requestTokenDialog);
@@ -179,6 +180,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
             super(activity);
         }
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onClick(final View view) {
             final TokenAuthorizationActivity activity = getReference();
@@ -195,8 +197,8 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
                 startButton.setOnTouchListener(null);
                 startButton.setOnClickListener(null);
 
-                final String username = activity.binding.username.getText().toString();
-                final String password = activity.binding.password.getText().toString();
+                final String username = ViewUtils.getEditableText(activity.binding.username.getText());
+                final String password = ViewUtils.getEditableText(activity.binding.password.getText());
 
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> activity.requestToken(username, password));
             }

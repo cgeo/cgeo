@@ -60,21 +60,6 @@ public class GPXImporter {
     }
 
     /**
-     * Import GPX file. Currently supports *.gpx, *.zip (containing gpx files, e.g. PQ queries), *.ggz or *.loc files.
-     *
-     * @param file the file to import
-     */
-    public void importGPX(final File file) {
-        if (StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.GPX_FILE_EXTENSION)) {
-            new ImportGpxFileThread(file, listId, importStepHandler, progressHandler).start();
-        } else if (StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.ZIP_FILE_EXTENSION) || StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.COMPRESSED_GPX_FILE_EXTENSION)) {
-            new ImportGpxZipFileThread(file, listId, importStepHandler, progressHandler).start();
-        } else {
-            new ImportLocFileThread(file, listId, importStepHandler, progressHandler).start();
-        }
-    }
-
-    /**
      * Import GPX file from URI.
      *
      * @param uri URI of the file to import

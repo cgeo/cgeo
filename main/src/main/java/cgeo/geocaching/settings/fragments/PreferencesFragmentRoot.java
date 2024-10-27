@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.PreferenceUtils;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class PreferencesFragmentRoot extends BasePreferenceFragment {
         super.onResume();
         adjustScreen(Settings.extendedSettingsAreEnabled());
 
-        findPreference(getString(R.string.pref_extended_settings_enabled)).setOnPreferenceChangeListener((pref, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_extended_settings_enabled)), (pref, newValue) -> {
             adjustScreen((boolean) newValue);
             return true;
         });

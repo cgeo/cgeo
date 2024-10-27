@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui.dialog;
 
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.ProgressDialog;
@@ -26,7 +27,7 @@ public class CustomProgressDialog extends ProgressDialog {
             // Field is private, make it accessible through reflection before hiding it.
             final Field field = getClass().getSuperclass().getDeclaredField("mProgressNumber");
             field.setAccessible(true);
-            ((View) field.get(this)).setVisibility(View.GONE);
+            ViewUtils.setVisibility((View) field.get(this), View.GONE);
         } catch (final Exception e) { // no multi-catch below SDK 19
             Log.e("Failed to find the progressDialog field 'mProgressNumber'", e);
         }

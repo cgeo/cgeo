@@ -26,7 +26,7 @@ import static com.drew.metadata.exif.ExifDirectoryBase.TAG_ORIENTATION;
 
 /**
  * Utilitles to access an image's metadata.
- *
+ * <br>
  * This class evaloves around class {@link com.drew.metadata.Metadata}
  */
 public final class MetadataUtils {

@@ -328,9 +328,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));
         addFilter.setValues(filterTypes)
-                .setDisplayMapperPure(f -> {
-                    return f.getUserDisplayableName();
-                })
+                .setDisplayMapperPure(GeocacheFilterType::getUserDisplayableName)
                 .setTextHideSelectionMarker(true)
                 .setView(binding.filterAdditem, (v, t) -> {
                 })
@@ -544,10 +542,6 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             }
             insertPoint.addView(view);
 
-        }
-
-        public IFilterViewHolder<?> getFilterViewHolder() {
-            return this.filterViewHolder;
         }
 
         public void setAdvancedMode(final boolean isAdvanced) {

@@ -15,14 +15,12 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * encapsulates information from connector used in the context of writing a log entry.
- *
+ * <br>
  * This information is typically retrieved online via an {@link ILoggingManager}
  * when the user wishes to create or continue a new offline log
  */
 public class LogContextInfo {
 
-    //context info
-    private final String connectorId;
     private final String geocode;
     private final String serviceLogId;
 
@@ -37,13 +35,9 @@ public class LogContextInfo {
     private int availableFavoritePoints = -1; //-1 means "not supported"
 
     public LogContextInfo(final ILoggingManager logManager, final String serviceLogId) {
-        this.connectorId = logManager.getConnector().getHost();
+        //context info
         this.geocode = logManager.getCache().getGeocode();
         this.serviceLogId = serviceLogId;
-    }
-
-    public String getConnectorId() {
-        return connectorId;
     }
 
     public String getGeocode() {
@@ -110,13 +104,6 @@ public class LogContextInfo {
 
     public List<ReportProblemType> getAvailableReportProblemTypes() {
         return availableReportProblemTypes;
-    }
-
-    public void setAvailableReportProblemTypes(final Iterable<ReportProblemType> reportProblemTypes) {
-        availableReportProblemTypes.clear();
-        for (ReportProblemType lt : reportProblemTypes) {
-            availableReportProblemTypes.add(lt);
-        }
     }
 
     public int getAvailableFavoritePoints() {

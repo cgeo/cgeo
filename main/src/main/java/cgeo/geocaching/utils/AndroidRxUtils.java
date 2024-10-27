@@ -28,10 +28,10 @@ public class AndroidRxUtils {
 
     /**
      *  This Scheduler is intended for computational work.
-     *
+     * <br>
      *  This can be used for event-loops, processing callbacks and other computational work.
      *  It is not recommended to perform blocking, IO-bound work on this scheduler. Use {@link Schedulers#io()} instead.
-     *
+     * <br>
      *  The number of threads equals the number of available processors on the device.
      */
     public static final Scheduler computationScheduler = Schedulers.computation();
@@ -45,7 +45,7 @@ public class AndroidRxUtils {
 
     /**
      * This Scheduler is intended for queuing Geocache refreshes.
-     *
+     * <br>
      * Don't use it for anything else than that.
      * It shall SOLELY be used by {@link cgeo.geocaching.CacheDetailActivity} and {@link cgeo.geocaching.service.CacheDownloaderService}!
      */

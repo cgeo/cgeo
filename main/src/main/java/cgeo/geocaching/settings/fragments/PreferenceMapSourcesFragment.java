@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -54,7 +55,7 @@ public class PreferenceMapSourcesFragment extends BasePreferenceFragment {
         hideTileprovidersPref.setEntryValues(tpValues);
 
         setUserDefinedTileProviderUriSummary(Settings.getUserDefinedTileProviderUri());
-        findPreference(getString(R.string.pref_userDefinedTileProviderUri)).setOnPreferenceChangeListener((preference, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_userDefinedTileProviderUri)), (preference, newValue) -> {
             setUserDefinedTileProviderUriSummary(String.valueOf(newValue));
             setFlagForRestartRequired();
             return true;

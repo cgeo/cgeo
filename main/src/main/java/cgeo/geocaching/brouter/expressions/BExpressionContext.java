@@ -17,6 +17,7 @@ import android.net.Uri;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -170,14 +171,6 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     /**
-     * decode byte array to internal lookup data
-     */
-    public void decode(final byte[] ab) {
-        decode(lookupData, false, ab);
-        lookupDataValid = true;
-    }
-
-    /**
      * decode a byte-array into a lookup data array
      */
     // external code, do not refactor
@@ -224,7 +217,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             final BExpressionLookupValue[] va = lookupValues.get(inum);
             final int val = lookupData[inum];
             final String value = (val >= 1000) ? Float.toString((val - 1000) / 100f) : va[val].toString();
-            if (value != null && value.length() > 0) {
+            if (!value.isEmpty()) {
                 if (sb.length() > 0) {
                     sb.append(' ');
                 }
@@ -234,45 +227,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         return sb.toString();
     }
 
-    public List<String> getKeyValueList(final boolean inverseDirection, final byte[] ab) {
-        final List<String> res = new ArrayList<>();
-        decode(lookupData, inverseDirection, ab);
-        for (int inum = 0; inum < lookupValues.size(); inum++) { // loop over lookup names
-            final BExpressionLookupValue[] va = lookupValues.get(inum);
-            final int val = lookupData[inum];
-            // no negative values
-            final String value = (val >= 1000) ? Float.toString((val - 1000) / 100f) : va[val].toString();
-            if (value != null && value.length() > 0) {
-                res.add(lookupNames.get(inum));
-                res.add(value);
-            }
-        }
-        return res;
-    }
-
-    public int getLookupKey(String name) {
-        int res = -1;
-        try {
-            res = lookupNumbers.get(name);
-        } catch (Exception ignore) {
-            // ignore
-        }
-        return res;
-    }
-
     public float getLookupValue(int key) {
         float res = 0f;
-        final int val = lookupData[key];
-        if (val == 0) {
-            return Float.NaN;
-        }
-        res = (val - 1000) / 100f;
-        return res;
-    }
-
-    public float getLookupValue(boolean inverseDirection, byte[] ab, int key) {
-        float res = 0f;
-        decode(lookupData, inverseDirection, ab);
         final int val = lookupData[key];
         if (val == 0) {
             return Float.NaN;
@@ -746,13 +702,13 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if (expressionList.size() == 0) {
+        if (expressionList.isEmpty()) {
             throw new IllegalArgumentException("profile does not contain expressions for context " + context + " (old version?)");
         }
     }
 
     private List<BExpression> parseFileHelper(final InputStream is, Map<String, String> keyValues) throws Exception {
-        br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
         readerDone = false;
         final List<BExpression> result = new ArrayList<>();
 
@@ -778,7 +734,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
 
     public float getVariableValue(final String name, final float defaultValue) {
         final Integer num = variableNumbers.get(name);
-        return num == null ? defaultValue : getVariableValue(num.intValue());
+        return num == null ? defaultValue : getVariableValue(num);
     }
 
     public float getVariableValue(final int variableIdx) {
@@ -804,8 +760,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public float getLookupMatch(final int nameIdx, final int[] valueIdxArray) {
-        for (int i = 0; i < valueIdxArray.length; i++) {
-            if (lookupData[nameIdx] == valueIdxArray[i]) {
+        for (int j : valueIdxArray) {
+            if (lookupData[nameIdx] == j) {
                 return 1.0f;
             }
         }
@@ -814,7 +770,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
 
     public int getLookupNameIdx(final String name) {
         final Integer num = lookupNumbers.get(name);
-        return num == null ? -1 : num.intValue();
+        return num == null ? -1 : num;
     }
 
     public final void markLookupIdxUsed(final int idx) {
@@ -826,9 +782,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public final void setAllTagsUsed() {
-        for (int i = 0; i < lookupIdxUsed.length; i++) {
-            lookupIdxUsed[i] = true;
-        }
+        Arrays.fill(lookupIdxUsed, true);
     }
 
     public int getLookupValueIdx(final int nameIdx, final String value) {

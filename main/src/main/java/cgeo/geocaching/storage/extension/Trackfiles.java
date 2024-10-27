@@ -113,7 +113,7 @@ public class Trackfiles extends DataStore.DBExtension {
         for (DataStore.DBExtension item : getAll(type, null)) {
             result.add(new Trackfiles(item));
         }
-        if (result.size() > 0) {
+        if (!result.isEmpty()) {
             TextUtils.sortListLocaleAware(result, Trackfiles::getDisplayname);
         }
         return result;

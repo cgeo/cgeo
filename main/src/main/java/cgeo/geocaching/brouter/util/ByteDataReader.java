@@ -85,16 +85,6 @@ public class ByteDataReader {
         return data;
     }
 
-    public final byte[] readVarBytes() {
-        final int len = readVarLengthUnsigned();
-        if (len == 0) {
-            return null;
-        }
-        final byte[] bytes = new byte[len];
-        readFully(bytes);
-        return bytes;
-    }
-
     public final int readVarLengthSigned() {
         final int v = readVarLengthUnsigned();
         return (v & 1) == 0 ? v >> 1 : -(v >> 1);

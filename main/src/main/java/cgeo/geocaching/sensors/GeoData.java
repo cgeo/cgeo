@@ -57,7 +57,11 @@ public class GeoData extends Location {
     }
 
     public LocationProviderType getLocationProvider() {
-        switch (getProvider()) {
+        final String provider = getProvider();
+        if (provider == null) {
+            return LocationProviderType.LAST;
+        }
+        switch (provider) {
             case LocationManager.GPS_PROVIDER:
                 return LocationProviderType.GPS;
             case LocationManager.NETWORK_PROVIDER:

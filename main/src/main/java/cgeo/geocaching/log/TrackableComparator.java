@@ -7,12 +7,8 @@ import cgeo.geocaching.utils.TextUtils;
 import java.util.Comparator;
 
 public enum TrackableComparator {
-    TRACKABLE_COMPARATOR_NAME((lhs, rhs) -> {
-        return TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName());
-    }),
-    TRACKABLE_COMPARATOR_TRACKCODE((lhs, rhs) -> {
-        return TextUtils.COLLATOR.compare(lhs.getTrackingcode(), rhs.getTrackingcode());
-    });
+    TRACKABLE_COMPARATOR_NAME((lhs, rhs) -> TextUtils.COLLATOR.compare(lhs.getName(), rhs.getName())),
+    TRACKABLE_COMPARATOR_TRACKCODE((lhs, rhs) -> TextUtils.COLLATOR.compare(lhs.getTrackingcode(), rhs.getTrackingcode()));
 
     private final Comparator<Trackable> comparator;
 

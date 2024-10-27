@@ -69,10 +69,6 @@ public class AbstractMapsforgeVTMOfflineTileProvider extends AbstractMapsforgeVT
         }
     }
 
-    public boolean isBuildingLayerEnabled() {
-        return buildingLayer != null && buildingLayer.isEnabled();
-    }
-
     public void switchBuildingLayer(final boolean enabled) {
         if (buildingLayer == null) {
             return;

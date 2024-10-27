@@ -11,30 +11,17 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * These patterns have been optimized for speed. Improve them only if you can prove
  * that *YOUR* pattern is faster.
- *
+ * <br>
  * For further information about patterns have a look at
- * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
+ * <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html">...</a>
  */
 public final class GCConstants {
 
     static final String GC_URL = "https://www.geocaching.com/";
-    private static final String GC_TILE_URL = "https://tiles.geocaching.com/";
     /**
      * Live Map
      */
     @NonNull static final String URL_LIVE_MAP = GC_URL + "map/default.aspx";
-    /**
-     * Live Map pop-up
-     */
-    @NonNull static final String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
-    /**
-     * Caches in a tile
-     */
-    @NonNull static final String URL_MAP_INFO = GC_TILE_URL + "map.info";
-    /**
-     * Tile itself
-     */
-    @NonNull static final String URL_MAP_TILE = GC_TILE_URL + "map.png";
     /**
      * Format used by geocaching.com when user is not logged in.
      */
@@ -69,7 +56,6 @@ public final class GCConstants {
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
-    static final Pattern PATTERN_CSRF_TOKEN = Pattern.compile("\"csrfToken\":\"([^\"]+)\"");
     // matches: the inner JSON Code (w/o {}) of "currentGeocache":{"id":123,"referenceCode":"GCxyz","name":"somename"}
     static final Pattern PATTERN_TB_CURRENT_GEOCACHE_JSON = Pattern.compile("\"currentGeocache\":\\{([^}]+)\\}");
 
@@ -159,27 +145,6 @@ public final class GCConstants {
     static final Pattern PATTERN_TRACKABLE_LOG_IMAGES = Pattern.compile("<ul class=\"log_images\"><li><a href=\"([^\"]+)\".+?(?= alt) alt=\"([^\"]+)\"");
     static final Pattern PATTERN_TRACKABLE_IS_LOCKED = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\"[^(]*\\(locked\\)</a></td>");
 
-    // Patterns for parsing the result of a search (next)
-
-    static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/WptTypes/(.*?)\\.", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
-    /**
-     * Two groups
-     **/
-    static final Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
-    /**
-     * Second group used
-     */
-    static final Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*");
-    static final Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([0-9.,]+)\\s*?(m|km|ft|yd|mi|)?</span>");
-    static final Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
-    static final Pattern PATTERN_SEARCH_CONTAINER = Pattern.compile("<img src=\"/images/icons/container/([^\\.]+)\\.gif\"");
-    static final Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile(GEOCODE_PATTERN);
-    static final Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("favorite-rank\">([0-9,.]+)</span>");
-    static final Pattern PATTERN_SEARCH_TOTALCOUNT = Pattern.compile("PageBuilderWidget\"><span>[^<]*?<b>(\\d+)<");
-    static final Pattern PATTERN_SEARCH_HIDDEN_DATE = Pattern.compile("<td style=\"width:70px\" data-dateplaced=\"[^\"]+\">[^<]+<span class=\"small\">([^<]+)</span>");
-    static final Pattern PATTERN_SEARCH_POST_ACTION = Pattern.compile("<form method=\"post\" action=\"(.*)\" id=\"aspnetForm\"");
-
     // Patterns for waypoints
 
     static final Pattern PATTERN_WPTYPE = Pattern.compile("\\/WptTypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
@@ -193,14 +158,9 @@ public final class GCConstants {
      * replace line break and paragraph tags
      */
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
-    static final Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
-            + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_TYPE2 = Pattern.compile("<option( selected=\"selected\")? value=\"(\\d+)\">[^<]+</option>", Pattern.CASE_INSENSITIVE);
     // new logpage logtype pattern:         logSettings.logTypes.push({"Value":46,"Description":"Owner maintenance","IsRealtimeOnly":false});
-    static final Pattern PATTERN_TYPE3 = Pattern.compile("logSettings.logTypes.push\\(([^;]*)\\);");
     static final Pattern PATTERN_TYPE4 = Pattern.compile("\"logTypes\":\\[([^]]+)]");
     static final Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
-    static final Pattern PATTERN_OK2 = Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|'] class=", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
@@ -232,7 +192,6 @@ public final class GCConstants {
     static final String STRING_STATUS_ARCHIVED = "<div id=\"ctl00_ContentBody_archivedMessage\"";
     static final String STRING_STATUS_LOCKED = "<div id=\"ctl00_ContentBody_lockedMessage\"";
     static final String STRING_CACHEDETAILS = "id=\"cacheDetails\"";
-    static final String STRING_UNAPPROVED_LICENSE = "<span id=\"ctl00_ContentBody_lblAgreementText\"";
 
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";

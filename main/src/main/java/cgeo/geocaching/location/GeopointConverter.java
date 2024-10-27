@@ -1,7 +1,5 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.models.geoitem.GeoGroup;
-import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
@@ -14,8 +12,8 @@ import java.util.List;
 /** Converts geopoints into other classes (of other libaraies etc) also representing geopoint (lat/lon) information */
 public class GeopointConverter<T> {
 
-    private Func1<Geopoint, T> convertTo;
-    private Func1<T, Geopoint> convertFrom;
+    private final Func1<Geopoint, T> convertTo;
+    private final Func1<T, Geopoint> convertFrom;
 
     public GeopointConverter(@NonNull final Func1<Geopoint, T> convertTo, @NonNull final Func1<T, Geopoint> convertFrom) {
         this.convertFrom = convertFrom;
@@ -51,12 +49,6 @@ public class GeopointConverter<T> {
                 list.add(from(gp));
             }
         }
-        return list;
-    }
-
-    public List<List<T>> toListList(final IGeoItemSupplier gg) {
-        final List<List<T>> list = new ArrayList<>();
-        GeoGroup.forAllPrimitives(gg.getItem(), go -> list.add(toList(go.getPoints())));
         return list;
     }
 

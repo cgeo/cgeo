@@ -22,13 +22,13 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Encapsulates a text object to be set to a TextView.
- *
+ * <br>
  * Supports setting this text from id or raw texts (including i18n parametrization) as well as various text formattings:
  * * markdown
  * * HTML
  * * Linkify
  * * accompanying icon/image
- *
+ * <br>
  * Class is supposed to be used in parameters for View/Dialog helper methods dealing with text
  */
 public class TextParam {
@@ -72,7 +72,7 @@ public class TextParam {
 
     /**
      * create from concatenated texts.
-     *
+     * <br>
      * Texts are concatenated CharSequence-aware, so {@link android.text.Spanned} formattings (if present) get preserved
      */
     public static TextParam concat(final TextParam... texts) {

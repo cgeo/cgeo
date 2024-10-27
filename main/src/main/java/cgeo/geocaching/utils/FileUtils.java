@@ -1,11 +1,8 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.os.StatFs;
 
 import androidx.annotation.NonNull;
@@ -18,13 +15,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,10 +39,8 @@ public final class FileUtils {
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String LOC_FILE_EXTENSION = ".loc";
     public static final String ZIP_FILE_EXTENSION = ".zip";
-    public static final String COMPRESSED_GPX_FILE_EXTENSION = ".ggz";
     public static final String MAP_FILE_EXTENSION = ".map";
 
-    private static final int MAX_DIRECTORY_SCAN_DEPTH = 30;
     private static final String FILE_PROTOCOL = "file://";
 
     private static final String FORBIDDEN_FILENAME_CHARS_HEX = new String(new byte[]{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x7f});
@@ -55,51 +48,6 @@ public final class FileUtils {
 
     private FileUtils() {
         // utility class
-    }
-
-    public static void listDir(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler) {
-        listDirInternally(result, directory, chooser, feedBackHandler, 0);
-    }
-
-    private static void listDirInternally(final List<File> result, final File directory, final FileSelector chooser, final Handler feedBackHandler, final int depths) {
-        if (directory == null || !directory.isDirectory() || !directory.canRead()
-                || result == null
-                || chooser == null) {
-            return;
-        }
-
-        final File[] files = directory.listFiles();
-
-        if (ArrayUtils.isNotEmpty(files)) {
-            for (final File file : files) {
-                if (chooser.shouldEnd()) {
-                    return;
-                }
-                if (!file.canRead()) {
-                    continue;
-                }
-                String name = file.getName();
-                if (file.isFile()) {
-                    if (chooser.isSelected(file)) {
-                        result.add(file); // add file to list
-                    }
-                } else if (file.isDirectory()) {
-                    if (name.charAt(0) == '.') {
-                        continue; // skip hidden directories
-                    }
-                    if (name.length() > 16) {
-                        name = name.substring(0, 14) + CgeoApplication.getInstance().getString(R.string.ellipsis);
-                    }
-                    if (feedBackHandler != null) {
-                        feedBackHandler.sendMessage(Message.obtain(feedBackHandler, 0, name));
-                    }
-
-                    if (depths < MAX_DIRECTORY_SCAN_DEPTH) {
-                        listDirInternally(result, file, chooser, feedBackHandler, depths + 1); // go deeper
-                    }
-                }
-            }
-        }
     }
 
     public static boolean deleteDirectory(@NonNull final File dir) {
@@ -158,17 +106,6 @@ public final class FileUtils {
     }
 
     /**
-     * Copies a file/directory into the targetDirectory.
-     *
-     * @param source          source file or directory
-     * @param targetDirectory target directory
-     * @return success true or false
-     */
-    public static boolean copyTo(final File source, final File targetDirectory) {
-        return copy(source, new File(targetDirectory, source.getName()));
-    }
-
-    /**
      * Get the guessed file extension of an URL. A file extension can contain up-to 4 characters in addition to the dot.
      *
      * @param url the relative or absolute URL
@@ -184,7 +121,7 @@ public final class FileUtils {
             // "http://example.com/foo/bar.png" -> ".png"
             urlExt = StringUtils.substringAfterLast(url, ".");
         }
-        return urlExt.length() >= 1 && urlExt.length() <= 4 ? "." + urlExt : "";
+        return !urlExt.isEmpty() && urlExt.length() <= 4 ? "." + urlExt : "";
     }
 
     /**
@@ -217,38 +154,6 @@ public final class FileUtils {
         } catch (final IOException e) {
             Log.w("FileUtils.copy: could not copy file", e);
             return false;
-        }
-    }
-
-    /**
-     * Deletes all files from a directory with the given prefix.
-     *
-     * @param directory The directory to remove the files from
-     * @param prefix    The filename prefix
-     */
-    public static void deleteFilesWithPrefix(@NonNull final File directory, @NonNull final String prefix) {
-        deleteFilesWithFilter(directory, (dir, filename) -> filename.startsWith(prefix));
-    }
-
-    public static void deleteFilesWithFilter(@NonNull final File directory, @NonNull final FilenameFilter filter) {
-        if (!directory.isDirectory()) {
-            Log.d("FileUtils.deleteFilesWithFilter: trying to delete FilesWithFilter for non-directory: " + directory);
-            return;
-        }
-        final File[] filesToDelete = directory.listFiles(filter);
-        if (filesToDelete == null) {
-            Log.d("FileUtils.deleteFilesWithFilter: directory list returned null: " + directory);
-            return;
-        }
-        Log.d("Trying to delete " + filesToDelete.length + " files from dir: " + directory);
-        for (final File file : filesToDelete) {
-            try {
-                if (!delete(file)) {
-                    Log.w("FileUtils.deleteFilesWithPrefix: Can't delete file " + file.getName());
-                }
-            } catch (final Exception e) {
-                Log.w("FileUtils.deleteFilesWithPrefix", e);
-            }
         }
     }
 
@@ -357,12 +262,6 @@ public final class FileUtils {
         return null;
     }
 
-    public interface FileSelector {
-        boolean isSelected(File file);
-
-        boolean shouldEnd();
-    }
-
     /**
      * Create a unique non existing file named like the given file name. If a file with the given name already exists,
      * add a number as suffix to the file name.<br>
@@ -448,16 +347,6 @@ public final class FileUtils {
         return success;
     }
 
-    public static boolean writeFileUTF16(final File file, final String content) {
-        try {
-            org.apache.commons.io.FileUtils.write(file, content, StandardCharsets.UTF_16LE);
-        } catch (final IOException e) {
-            Log.e("FileUtils.writeFileUTF16", e);
-            return false;
-        }
-        return true;
-    }
-
     /**
      * Check if the URL represents a file on the local file system.
      *
@@ -522,27 +411,6 @@ public final class FileUtils {
             // thrown if the directory isn't pointing to an external storage
         }
         return 0;
-    }
-
-    /**
-     * searches a given directory for readable files ending with a certain string
-     *
-     * @param dir       - directory to look in
-     * @param extension - extension to be searched for
-     * @return List of found files, may be empty
-     */
-    @NonNull
-    public static List<File> listFiles(final String dir, final String extension) {
-        final List<File> result = new ArrayList<>();
-        final File[] files = new File(dir).listFiles();
-        if (files != null && files.length > 0) {
-            for (File file : files) {
-                if (file.isFile() && file.getPath().endsWith(extension) && file.canRead()) {
-                    result.add(file);
-                }
-            }
-        }
-        return result;
     }
 
     public static String getRawResourceAsString(final Context context, @RawRes final int resId) {

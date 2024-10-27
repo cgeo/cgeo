@@ -24,7 +24,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 /**
  * cgeo-specifc implementation for a date and time selector.
- *
+ * <br>
  * It is based on two text views (usually buttons) where selected date and time is displayed in a user-friendly way
  * and where on click a cgeo-specific pickup dialog appears. Time and reset is optional.
  */

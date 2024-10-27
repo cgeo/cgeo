@@ -30,8 +30,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheFilter implements Cloneable {
 
-    private static String savedDifferentlyMarkerPreFix = "(";
-    private static String savedDifferentlyMarkerPostFix = ")*";
+    private static final String savedDifferentlyMarkerPreFix = "(";
+    private static final String savedDifferentlyMarkerPostFix = ")*";
 
     public enum QuickFilter {
         FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_FOUND_LOG

@@ -14,6 +14,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
@@ -121,6 +122,7 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
 
     private class CheckListener implements View.OnClickListener {
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onClick(final View view) {
             hideKeyboard();

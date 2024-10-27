@@ -43,7 +43,7 @@ public final class MapStarUtils {
 
     /** Calculates for a cache whether it can have a star (e.g. it has waypoints and header coords) */
     public static boolean canHaveStar(final Geocache cache) {
-        return cache != null && cache.getWaypoints() != null && !cache.getWaypoints().isEmpty() && cache.getCoords() != null;
+        return cache != null && !cache.getWaypoints().isEmpty() && cache.getCoords() != null;
     }
 
     /** Creates a GeoItem representing the "star" of a geocache. If Geocache can't have a star, then null is returned */

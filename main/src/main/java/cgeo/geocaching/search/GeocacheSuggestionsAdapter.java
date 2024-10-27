@@ -48,7 +48,7 @@ public class GeocacheSuggestionsAdapter extends BaseSuggestionsAdapter {
     private static Cursor getLastOpenedCaches() {
         final GeocacheSearchSuggestionCursor resultCursor = new GeocacheSearchSuggestionCursor();
         for (final Geocache geocache : DataStore.getLastOpenedCaches()) {
-            resultCursor.addCache(geocache.getGeocode(), geocache.getName(), geocache.getType().id);
+            resultCursor.addCache(geocache.getGeocode(), StringUtils.defaultIfBlank(geocache.getName(), ""), geocache.getType().id);
         }
         return resultCursor;
     }

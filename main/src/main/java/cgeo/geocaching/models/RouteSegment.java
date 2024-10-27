@@ -29,7 +29,7 @@ public class RouteSegment implements Parcelable {
 
     public float calculateDistance() {
         distance = 0.0f;
-        if (points.size() > 0) {
+        if (!points.isEmpty()) {
             Geopoint last = points.get(0);
             for (Geopoint point : points) {
                 distance += last.distanceTo(point);
@@ -48,7 +48,7 @@ public class RouteSegment implements Parcelable {
     }
 
     public ArrayList<Geopoint> getPoints() {
-        if (null == points || points.size() == 0) {
+        if (null == points || points.isEmpty()) {
             this.points = new ArrayList<>();
             final Geopoint point = item.getPoint();
             if (null != point) {

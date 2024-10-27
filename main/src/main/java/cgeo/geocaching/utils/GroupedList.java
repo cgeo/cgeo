@@ -17,11 +17,11 @@ import java.util.TreeMap;
 
 /**
  * Provides a list collection which maintains a group (Integer) for each contained element.
- *
+ * <br>
  * At any time, each element in the list has a group value assigned. Multiple elements can have
  * the same group value. Elements with same group value are always behind each other, forming a
  * so-called "group area". Group Areas are sorted ascending.
- *
+ * <br>
  * The above is not achieved by active resorting of items but rather in the "add" functions as follows:
  * * If an element is added at a specific index via {@link #add(int, Object)}, then it gets the group value currently active
  *   for this indexes' group area. If the list is empty then a defaultGroup is assigned.

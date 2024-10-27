@@ -77,18 +77,13 @@ public class GeoItemsLayer {
 
         });
 
-        viewModel.cachesWithStarDrawn.observeForRead(activity, starCodes -> {
-            lastDisplayedCacheStars.executeDiff(starCodes, true, addStar -> {
-                final Geocache cache = DataStore.loadCache(addStar, LoadFlags.LOAD_CACHE_OR_DB);
-                final GeoItem star = MapStarUtils.createStar(cache);
-                if (star != null) {
-                    layer.put(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + addStar, star);
-                }
-            }, removeStar -> {
-                layer.remove(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + removeStar);
-            });
-
-        });
+        viewModel.cachesWithStarDrawn.observeForRead(activity, starCodes -> lastDisplayedCacheStars.executeDiff(starCodes, true, addStar -> {
+            final Geocache cache = DataStore.loadCache(addStar, LoadFlags.LOAD_CACHE_OR_DB);
+            final GeoItem star = MapStarUtils.createStar(cache);
+            if (star != null) {
+                layer.put(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + addStar, star);
+            }
+        }, removeStar -> layer.remove(UnifiedMapViewModel.CACHE_STAR_KEY_PREFIX + removeStar)));
 
 
         viewModel.waypoints.observeForRead(activity, waypoints -> { // this is always executed on UI thread, thus doesn't need to be thread save

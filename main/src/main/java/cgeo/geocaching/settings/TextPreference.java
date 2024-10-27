@@ -6,6 +6,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
@@ -24,7 +25,7 @@ public class TextPreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(final PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final Preference pref = findPreferenceInHierarchy(getKey());
 

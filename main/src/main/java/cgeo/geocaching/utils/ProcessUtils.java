@@ -58,7 +58,7 @@ public final class ProcessUtils {
 
     /**
      * This will find installed applications even without launch intent (e.g. the streetview plugin).
-     *
+     * <br>
      * Be aware:
      * Starting with Android 11 getInstalledPackages() will only return packages declared in AndroidManifest.xml
      * (Add a lint exception, as we have cross-checked our current usages for this method)

@@ -318,7 +318,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
                 .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
                     final boolean useGivenList = binding.givenList.isChecked();
                     Settings.setCreateUDCuseGivenList(useGivenList);
-                    final String geocode = createCache(context, binding.name.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
+                    final String geocode = createCache(context, ViewUtils.getEditableText(binding.name.getText()), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
                     CacheDetailActivity.startActivity(context, geocode);
                     GeocacheChangedBroadcastReceiver.sendBroadcast(context, geocode);
                 })

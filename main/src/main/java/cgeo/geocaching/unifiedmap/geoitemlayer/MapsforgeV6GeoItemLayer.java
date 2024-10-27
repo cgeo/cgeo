@@ -41,7 +41,7 @@ import org.mapsforge.map.util.MapViewProjection;
 public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLayer<Pair<Layer, Layer>> {
 
     private LayerManager layerManager;
-    private MapViewProjection projection;
+    private final MapViewProjection projection;
 
     public final List<Layer> layers = new ArrayList<>();
     public final Lock layerLock = new ReentrantLock();

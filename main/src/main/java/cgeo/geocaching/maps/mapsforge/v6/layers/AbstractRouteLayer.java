@@ -96,7 +96,7 @@ abstract class AbstractRouteLayer extends Layer {
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
-                if (!c.isHidden && c.track != null && c.track.size() > 0) {
+                if (!c.isHidden && c.track != null && !c.track.isEmpty()) {
                     final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
                     if (null == c.path || this.mapSize != mapSize || c.topLeftPoint != topLeftPoint) {
                         translateRouteToPath(mapSize, topLeftPoint, c);

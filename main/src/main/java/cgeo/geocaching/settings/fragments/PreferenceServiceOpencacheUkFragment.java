@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.OCPreferenceKeys;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
@@ -20,7 +21,7 @@ public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentComp
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ocuk_website));
         final String urlOrHost = OCPreferenceKeys.OC_UK.authParams.host;
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -30,7 +31,7 @@ public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentComp
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.init_oc_uk);
+        requireActivity().setTitle(R.string.init_oc_uk);
 
         // Update authentication preference
         SettingsUtils.updateOpenCachingAuthPreference(this, R.string.pref_fakekey_ocuk_authorization);

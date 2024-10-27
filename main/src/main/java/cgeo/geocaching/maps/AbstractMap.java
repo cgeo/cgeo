@@ -55,6 +55,7 @@ public abstract class AbstractMap {
         return mapActivity.getResources();
     }
 
+    @NonNull
     public MapActivityImpl getMapActivity() {
         return mapActivity;
     }

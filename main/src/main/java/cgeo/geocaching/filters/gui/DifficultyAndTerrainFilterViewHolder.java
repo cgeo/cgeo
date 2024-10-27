@@ -54,8 +54,8 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
     @Override
     public DifficultyAndTerrainGeocacheFilter createFilterFromView() {
         final DifficultyAndTerrainGeocacheFilter filter = createFilter();
-        filter.difficultyGeocacheFilter = (DifficultyGeocacheFilter) diffView.createFilterFromView();
-        filter.terrainGeocacheFilter = (TerrainGeocacheFilter) terrainView.createFilterFromView();
+        filter.difficultyGeocacheFilter = diffView.createFilterFromView();
+        filter.terrainGeocacheFilter = terrainView.createFilterFromView();
 
         final Boolean include = includeCheckbox.right.isChecked() ? true : null;
         filter.difficultyGeocacheFilter.setSpecialNumber(0f, include);

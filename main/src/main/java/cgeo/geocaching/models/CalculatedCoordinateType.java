@@ -30,7 +30,7 @@ public enum CalculatedCoordinateType {
     }
 
     private String shortName;
-    private String userDisplay;
+    private final String userDisplay;
 
     CalculatedCoordinateType(final String shortName, final int resId) {
         init(shortName);

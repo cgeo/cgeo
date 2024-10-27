@@ -37,7 +37,6 @@ class LoadInBackgroundHandler {
 
         @NonNull
         private final WeakReference<LoadInBackgroundHandler> handlerRef;
-        private int previousZoom = -100;
         private Viewport previousViewport;
         private SearchResult lastSearchResult = null;
 
@@ -62,13 +61,11 @@ class LoadInBackgroundHandler {
                 if (currentViewport.getLatitudeMin() == 0.0 && currentViewport.getLongitudeMin() == 0.0 && currentViewport.getLatitudeMax() == 0.0 && currentViewport.getLongitudeMax() == 0.0) {
                     return;
                 }
-                final int currentZoom = map.getCurrentZoom();
 
                 // check if map moved or zoomed
                 final boolean useLastSearchResult = null != lastSearchResult && null != previousViewport && (previousViewport.includes(currentViewport) || !mapMoved(previousViewport, currentViewport));
                 if (!useLastSearchResult) {
                     load(currentViewport);
-                    previousZoom = currentZoom;
                     previousViewport = currentViewport;
                 } else if (!previousViewport.equals(currentViewport)) {
                     // @todo: overlay.updateTitle();

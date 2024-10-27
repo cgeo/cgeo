@@ -28,7 +28,7 @@ public class StartWebviewActivity extends AppCompatActivity {
                 ShareUtils.openCustomTab(this, url);
             } else {
                 final List<ResolveInfo> browsers = ProcessUtils.getInstalledBrowsers(this);
-                if (browsers.size() > 0) {
+                if (!browsers.isEmpty()) {
                     final ResolveInfo resolveInfo = browsers.get(0);
 
                     final Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

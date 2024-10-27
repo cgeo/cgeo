@@ -11,13 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CancellationException;
@@ -47,24 +44,6 @@ abstract class FileParser {
             return parse(stream, progressHandler);
         } finally {
             IOUtils.closeQuietly(stream);
-        }
-    }
-
-    @NonNull
-    protected static StringBuilder readStream(@NonNull final InputStream is, @Nullable final DisposableHandler progressHandler) throws IOException {
-        final StringBuilder buffer = new StringBuilder();
-        final ProgressInputStream progressInputStream = new ProgressInputStream(is);
-        final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream, StandardCharsets.UTF_8));
-
-        try {
-            String line;
-            while ((line = input.readLine()) != null) {
-                buffer.append(line);
-                showProgressMessage(progressHandler, progressInputStream.getProgress());
-            }
-            return buffer;
-        } finally {
-            IOUtils.closeQuietly(input);
         }
     }
 

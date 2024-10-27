@@ -215,12 +215,6 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
         return OkapiClient.getCachesByNextPage(this, context);
     }
 
-
-    @Override
-    public boolean isSearchForMyCaches(final String username) {
-        return StringUtils.equalsIgnoreCase(username, getUserName());
-    }
-
     @Override
     public boolean canAddPersonalNote(@NonNull final Geocache cache) {
         return this.getApiSupport() == ApiSupport.current && isActive();

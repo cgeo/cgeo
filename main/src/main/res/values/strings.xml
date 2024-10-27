@@ -267,7 +267,6 @@
     <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>
     <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
     <string name="err_detail_cache_find_some">c:geo can\'t find that geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo can\'t find any geocaches.</string>
     <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
     <string name="err_detail_still_working">Still working on another task.</string>
     <string name="err_detail_premium_log_found">This cache is only available to premium members of geocaching.com. Therefore, the cache information cannot be displayed.\n\nHowever, if you have already found this cache, you can log it here.</string>
@@ -1954,8 +1953,6 @@
     <string name="map_showwp_visited">Visited</string>
     <string name="init_renderthemefolder_synctolocal">Synchronize themes</string>
     <string name="init_summary_renderthemefolder_synctolocal">This will synchronize your themes into an app-private folder to improve map viewer opening performance at the cost of some device storage space.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Turn on theme folder synchronization</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">This will continuously synchronize the content of the Map Theme folder into an app-private folder for faster file access. Make sure your theme folder only contains your themes but no additional (large) data before enabling this feature.\n\nYour map Theme Folder \'%1$s\' has currently %2$s, %3$s and a size of %4$s.\n\nDo you want to turn on folder synchronization?</string>
     <string name="onetime_mapthemefixslow_title">Fix slow map theme rendering</string>
     <string name="onetime_mapthemefixslow_message">Working with non-zipped map themes might decrease map viewer opening performance. You can zip or sync your themes to get faster performance and reduce the delay on starting the map.</string>
     <string name="map_theme_select">Select map theme</string>
@@ -2106,12 +2103,6 @@
     <string name="do_auto">Auto</string>
     <string name="do_flat">Flat</string>
     <string name="do_upright">Upright</string>
-
-
-    <!-- license -->
-    <string name="license">License</string>
-    <string name="license_show">Show license</string>
-    <string name="license_dismiss">Dismiss</string>
 
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Past event</string>
@@ -2815,7 +2806,6 @@
     <string name="check_tiles_missing">Found missing routing data:</string>
     <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the selected region</string>
     <string name="tileupdate_info">Tap here to check for updates of downloaded routing data files. Long-tap to postpone.</string>
-    <string name="download_hillshading_title">Missing hillshading data</string>
     <string name="check_hillshading_found">Hillshading data already present</string>
     <string name="check_hillshading_missing">Found missing hillshading data:</string>
     <string name="check_hillshading_unsupported">Warning: Hillshading data is at least partly not available for the selected region</string>

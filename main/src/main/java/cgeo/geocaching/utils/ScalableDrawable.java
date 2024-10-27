@@ -5,6 +5,8 @@ import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+
 // based on https://stackoverflow.com/questions/4609456/set-drawable-size-programmatically code by ceph3us
 // this class wraps a drawable and forwards drawn canvas on its wrapped instance by using its defined bounds
 
@@ -60,7 +62,7 @@ public class ScalableDrawable extends Drawable {
     }
 
     @Override
-    public void draw(final Canvas canvas) {
+    public void draw(@NonNull final Canvas canvas) {
         final Drawable drawable = getDrawable();
         if (drawable != null) {
             drawable.draw(canvas);

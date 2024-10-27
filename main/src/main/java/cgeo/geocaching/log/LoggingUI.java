@@ -101,7 +101,7 @@ public final class LoggingUI extends AbstractUIFactory {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
         }
         list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));
-        if (Settings.getLogTemplates().size() > 0 && logTypes.contains(LogType.FOUND_IT)) {
+        if (!Settings.getLogTemplates().isEmpty() && logTypes.contains(LogType.FOUND_IT)) {
             list.add(1, new LogTypeEntry(null, SpecialLogType.TEMPLATES, false));
         }
 

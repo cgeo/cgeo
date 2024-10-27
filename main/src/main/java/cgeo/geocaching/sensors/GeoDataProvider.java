@@ -10,6 +10,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -81,12 +83,12 @@ public class GeoDataProvider {
         }
 
         @Override
-        public void onProviderDisabled(final String provider) {
+        public void onProviderDisabled(@NonNull final String provider) {
             // nothing
         }
 
         @Override
-        public void onProviderEnabled(final String provider) {
+        public void onProviderEnabled(@NonNull final String provider) {
             // nothing
         }
 

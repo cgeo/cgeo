@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -20,7 +21,7 @@ public class PreferenceServiceExtremcachingComFragment extends PreferenceFragmen
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ec_website));
         final String urlOrHost = ECConnector.getInstance().getHost();
-        openWebsite.setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(openWebsite, preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
@@ -30,6 +31,6 @@ public class PreferenceServiceExtremcachingComFragment extends PreferenceFragmen
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_ec);
+        requireActivity().setTitle(R.string.settings_title_ec);
     }
 }

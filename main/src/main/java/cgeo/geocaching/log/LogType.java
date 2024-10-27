@@ -89,15 +89,6 @@ public enum LogType {
         this(id, iconName, type, ocType, stringId, markerId, onlineOverlayId, onlineOverlayId);
     }
 
-    LogType(final int id, final String iconName, final String type, final String ocType, final int stringId,
-            final int markerId) {
-        this(id, iconName, type, ocType, stringId, markerId, 0, 0);
-    }
-
-    LogType(final int id, final String iconName, final String type, final String ocType, final int stringId) {
-        this(id, iconName, type, ocType, stringId, R.drawable.mark_gray);
-    }
-
     static {
         for (final LogType lt : values()) {
             if (lt.iconName != null) {

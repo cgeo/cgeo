@@ -17,7 +17,6 @@ import com.google.android.gms.maps.GoogleMap;
 public final class GoogleMapProvider extends AbstractMapProvider {
 
     public static final String GOOGLE_MAP_ID = "GOOGLE_MAP";
-    public static final String GOOGLE_SATELLITE_ID = "GOOGLE_SATELLITE";
 
     private final MapItemFactory mapItemFactory;
 

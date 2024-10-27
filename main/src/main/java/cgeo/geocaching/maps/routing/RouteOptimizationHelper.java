@@ -128,9 +128,7 @@ public class RouteOptimizationHelper {
 
             dialog.setMessage(TextParam.id(R.string.generating_distance_matrix));
             dialog.setTypeDeterminate(routeSize * (routeSize - 1));
-            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
-                generateDistanceMatrix(dialog, executor);
-            }, () -> {
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> generateDistanceMatrix(dialog, executor), () -> {
                 final int[] best = new int[routeSize];
                 initBest(dialog, best, true);
                 dialog.foundNewRoute(best);
@@ -144,14 +142,10 @@ public class RouteOptimizationHelper {
     private void runTSPWrapper(final TSPDialog dialog, final ExecutorService executor) {
         dialog.setMessage(TextParam.id(R.string.running_route_optimizations));
         dialog.setProgressVisibility(View.VISIBLE);
-        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> {
-            runTSP(dialog, executor);
-        }, () -> {
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () -> runTSP(dialog, executor), () -> {
             dialog.setMessage(TextParam.id(R.string.route_optimization_finished));
             dialog.setProgressVisibility(View.GONE);
-            dialog.updateButton(BUTTON_NEUTRAL, view -> {
-                runTSPWrapper(dialog, executor);
-            });
+            dialog.updateButton(BUTTON_NEUTRAL, view -> runTSPWrapper(dialog, executor));
         });
     }
 

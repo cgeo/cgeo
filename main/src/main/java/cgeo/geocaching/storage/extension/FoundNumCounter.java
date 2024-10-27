@@ -51,7 +51,7 @@ public class FoundNumCounter extends DataStore.DBExtension {
 
     /**
      * Number of caches the user has found in this connector.
-     *
+     * <br>
      * This is the preferred way to retrieve the correct found number.
      * It checks the connector data first and uses the DB cache if no connection is possible.
      */

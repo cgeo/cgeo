@@ -520,9 +520,7 @@ public class SimpleDialog {
             this.title = TextParam.id(R.string.map_select_multiple_items);
         }
 
-        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons(r -> {
-            model.setFilterTerm(r == null ? null : r.toString());
-        });
+        final Pair<AlertDialog, SimpleDialogViewBinding> dialogBinding = constructCommons(r -> model.setFilterTerm(r == null ? null : r.toString()));
         final AlertDialog dialog = dialogBinding.first;
         final SimpleDialogViewBinding binding = dialogBinding.second;
 
@@ -655,7 +653,7 @@ public class SimpleDialog {
         finalizeCommons(dialog, which -> {
             if (which == DialogInterface.BUTTON_POSITIVE && okayListener != null) {
                 // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
-                final String realText = textField.getText().toString().trim();
+                final String realText = ViewUtils.getEditableText(textField.getText()).trim();
                 okayListener.accept(realText);
                 dialog.dismiss();
                 return true;

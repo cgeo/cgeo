@@ -2,8 +2,6 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextParser;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -43,7 +41,6 @@ public class IntegerRange {
     @SuppressWarnings("PMD.NPathComplexity")
     private static int parseConfig(final String pattern, final Map<Integer, Integer> targetMap) {
 
-        final List<Integer> result = new ArrayList<>();
         final TextParser tp = new TextParser(pattern);
         StringBuilder currentToken = new StringBuilder();
         String lastToken = null;
@@ -83,7 +80,7 @@ public class IntegerRange {
             }
             tp.next();
         }
-        return tp.eof()  ? pos : 0;
+        return tp.eof() ? pos : 0;
 
     }
 

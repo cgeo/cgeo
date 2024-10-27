@@ -98,7 +98,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         sources.addButtons(R.string.attribute_source_gc, R.string.attribute_source_oc);
         sources.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             // always check a button. IDs are 3 and 4
-            if (sources.getCheckedButtonIndexes().size() == 0) {
+            if (sources.getCheckedButtonIndexes().isEmpty()) {
                 sources.setCheckedButtonByIndex(1 - (checkedId - 3), true);
             }
             sourcesState = 0;

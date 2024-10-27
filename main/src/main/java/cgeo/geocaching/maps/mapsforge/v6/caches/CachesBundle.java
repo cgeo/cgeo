@@ -342,7 +342,7 @@ public class CachesBundle {
             final boolean showStored = storedOverlay != null;
 
             final boolean forceCompactIconMode = CompactIconModeUtils.forceCompactIconMode(cachesToDisplay);
-            wpOverlay.showWaypoints(baseGeocodes, showStored, !this.mapModeSingle, forceCompactIconMode);
+            wpOverlay.showWaypoints(baseGeocodes, showStored, forceCompactIconMode);
         } else {
             wpOverlay.hideWaypoints();
         }

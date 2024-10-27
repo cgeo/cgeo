@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -357,7 +356,7 @@ public class GCLogin extends AbstractLogin {
 
     /**
      * Ensure that the website is presented in the specified language.
-     *
+     * <br>
      * Used for unit tests.
      *
      * @param language the language code to be used at geocaching.com (e.g. "en-US")
@@ -455,10 +454,6 @@ public class GCLogin extends AbstractLogin {
         return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
-    static String formatGcCustomDate(final int year, final int month, final int day) {
-        return new SimpleDateFormat(Settings.getGcCustomDate(), Locale.ENGLISH).format(new GregorianCalendar(year, month - 1, day).getTime());
-    }
-
     /**
      * checks if an Array of Strings is empty or not. Empty means:
      * - Array is null
@@ -541,14 +536,6 @@ public class GCLogin extends AbstractLogin {
             }
             params.put("__VIEWSTATEFIELDCOUNT", String.valueOf(viewstates.length));
         }
-    }
-
-    /**
-     * transfers the viewstates variables from a page (response) to parameters
-     * (next request)
-     */
-    static void transferViewstates(final String page, final Parameters params) {
-        putViewstates(params, getViewstates(page));
     }
 
     /**
@@ -661,9 +648,7 @@ public class GCLogin extends AbstractLogin {
                     setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
                 }, callback);
             });
-            binding.cancelButton.setOnClickListener(bo -> {
-                dialog.dismiss();
-            });
+            binding.cancelButton.setOnClickListener(bo -> dialog.dismiss());
             dialog.show();
         });
     }

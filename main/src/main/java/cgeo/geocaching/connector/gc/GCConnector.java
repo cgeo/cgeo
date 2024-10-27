@@ -372,7 +372,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Add a cache to the favorites list.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to add
@@ -390,7 +390,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     /**
      * Remove a cache from the favorites list.
-     *
+     * <br>
      * This must not be called from the UI thread.
      *
      * @param cache the cache to add

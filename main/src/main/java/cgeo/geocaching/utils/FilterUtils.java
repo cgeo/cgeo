@@ -50,7 +50,7 @@ public class FilterUtils {
 
         if (filters.isEmpty()) {
             final TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
-                    TextParam.text(System.getProperty("line.separator")),
+                    TextParam.text(System.lineSeparator()),
                     TextParam.id(R.string.cache_filter_storage_clear_message));
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
                         .setPositiveButton(TextParam.id(R.string.cache_filter_storage_clear_button))

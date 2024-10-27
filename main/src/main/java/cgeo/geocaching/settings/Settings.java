@@ -624,10 +624,6 @@ public class Settings {
         edit.apply();
     }
 
-    private static boolean contains(final int prefKeyId) {
-        return sharedPrefs != null && sharedPrefs.contains(getKey(prefKeyId));
-    }
-
     public static boolean hasGCCredentials() {
         return getGcCredentials().isValid();
     }
@@ -1042,10 +1038,6 @@ public class Settings {
 
     public static boolean isDisplayOfflineLogsHomescreen() {
         return getBoolean(R.string.pref_offlinelogs_homescreen, true);
-    }
-
-    static void setUseImperialUnits(final boolean useImperialUnits) {
-        putBoolean(R.string.pref_units_imperial, useImperialUnits);
     }
 
     public static boolean useImperialUnits() {
@@ -1749,13 +1741,6 @@ public class Settings {
     }
 
     /**
-     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
-     */
-    public static void setSyncMapRenderThemeFolder(final boolean syncMapRenderThemeFolder) {
-        putBoolean(R.string.pref_renderthemefolder_synctolocal, syncMapRenderThemeFolder);
-    }
-
-    /**
      * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
      */
     public static String getMapRenderScalePreferenceKey(final String themeStyleId, final RenderThemeScaleType scaleType) {
@@ -2009,10 +1994,6 @@ public class Settings {
         putBoolean(R.string.pref_followMyLocation, activated);
     }
 
-    public static void setForceOrientationSensor(final boolean forceOrientationSensor) {
-        putBoolean(R.string.pref_force_orientation_sensor, forceOrientationSensor);
-    }
-
     public static boolean useOrientationSensor(final Context context) {
         return OrientationProvider.hasOrientationSensor(context) &&
                 (getBoolean(R.string.pref_force_orientation_sensor, false) ||
@@ -2064,7 +2045,7 @@ public class Settings {
 
     /**
      * get comma-delimited list of info items for given key
-     *
+     * <br>
      * defaultSource: 0=empty, 1=migrate quicklaunch buttons, 2=cachelist activity legacy values, 3=caches list
      */
     public static ArrayList<Integer> getInfoItems(final @StringRes int prefKey, final int defaultSource) {

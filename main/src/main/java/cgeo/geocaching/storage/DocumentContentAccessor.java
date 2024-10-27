@@ -35,19 +35,19 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
 
 /**
  * Implementation for SAF/Document-based folders
- *
+ * <br>
  * Implementation notes: simply implementing SAF Document access using DocumentFile and related classes
  * yields simply unacceptable performance, because underneath these classes issue queries on almost every
  * method (e.g. isDirectory(), getType() and the like...). Therefore the current implementation uses
  * direct querying against ContentResolver.
- *
+ * <br>
  * Document Framework does not efficiently (wrt performance) allow to work with subdirectories: Uris can't be build by a certain rule
  * and only querying of one folder content is possible. In order to efficiently deal with subfolder structures, an LRU
  * Uri cache was introduced (folderUriCache).
  * Unfortunately Document Framework does also not allow for efficient check whether a (cached) Uri
  * is still valid (it is not if e.g. the underlying doc was deleted externally of c:geo), so a two-pass algorithm was implemented
  * where the cache value is trusted in a first attempt and only refreshed if this triggered an exception.
- *
+ * <br>
  * It must be noted that despite all effort Document framework is simply very slow esp when compared to File framework.
  * Reading methods ( e.g. list()) take up to 5ms and writing methods (e.g. create(), delete()) up to 10ms! Found no way around this...
  */
@@ -292,7 +292,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     /**
      * Gets the Folder File; creates it if necessary and performs all possible error handlings.
      * This is used for locations of Type DOCUMENT and FILE
-     *
+     * <br
      * This method is in many respects the core method of this class
      *
      * @param folder folder to get file for

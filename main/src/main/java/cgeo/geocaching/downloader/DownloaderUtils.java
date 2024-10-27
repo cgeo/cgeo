@@ -74,7 +74,7 @@ public class DownloaderUtils {
         // utility class
     }
 
-    public static boolean onOptionsItemSelected(final Activity activity, final int id, final boolean inUnifiedMap) {
+    public static boolean onOptionsItemSelected(final Activity activity, final int id) {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
@@ -372,7 +372,7 @@ public class DownloaderUtils {
         protected void onPostExecuteInternal(final List<Download> result) {
             final Activity activity = activityRef.get();
             if (activity != null) {
-                if (result.size() == 0) {
+                if (result.isEmpty()) {
                     ViewUtils.showShortToast(activity, R.string.no_updates_found);
                 } else {
                     triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result, null);

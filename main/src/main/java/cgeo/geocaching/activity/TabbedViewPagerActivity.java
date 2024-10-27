@@ -213,10 +213,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         return currentPageId;
     }
 
-    protected boolean isCurrentPage(final int pageId) {
-        return currentPageId == pageId;
-    }
-
     @SuppressWarnings("rawtypes")
     public void registerFragment(final long pageId, final TabbedViewPagerFragment fragment) {
         fragmentMap.put(pageId, fragment);

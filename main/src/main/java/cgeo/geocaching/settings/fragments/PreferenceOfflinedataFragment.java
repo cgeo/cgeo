@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.PreferenceUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
 import android.app.Activity;
@@ -25,7 +26,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         initPreferences(R.xml.preferences_offlinedata, rootKey);
 
-        findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)).setOnPreferenceClickListener(preference -> {
+        PreferenceUtils.setOnPreferenceClickListener(findPreference(getString(R.string.pref_fakekey_preference_maintenance_directories)), preference -> {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
 
@@ -46,6 +47,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         });
 
         final Preference isDbOnSdCard = findPreference(getString(R.string.pref_dbonsdcard));
+        assert isDbOnSdCard != null;
         isDbOnSdCard.setPersistent(false);
         isDbOnSdCard.setOnPreferenceClickListener(preference -> {
             final boolean oldValue = Settings.isDbOnSDCard();
@@ -54,6 +56,7 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
         });
 
         final Preference dataDirPreference = findPreference(getString(R.string.pref_fakekey_dataDir));
+        assert dataDirPreference != null;
         dataDirPreference.setSummary(Settings.getExternalPrivateCgeoDirectory());
         if (LocalStorage.getAvailableExternalPrivateCgeoDirectories().size() < 2) {
             dataDirPreference.setEnabled(false);

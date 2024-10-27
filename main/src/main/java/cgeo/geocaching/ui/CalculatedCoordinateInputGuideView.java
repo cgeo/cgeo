@@ -493,7 +493,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                 this.butt.setText(" ");
                 this.image.setVisibility(VISIBLE);
             } else {
-                this.butt.setText(text == null || text.length() == 0 ? " " : "" + text.charAt(0));
+                this.butt.setText(text == null || text.isEmpty() ? " " : "" + text.charAt(0));
                 this.image.setVisibility(GONE);
             }
             callChangeListener();

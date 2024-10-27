@@ -138,7 +138,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final EditWaypointActivity activity = getReference();
             if (activity == null) {
                 return;
@@ -500,7 +500,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 calcStateString = waypoint.getCalcStateConfig();
-                
+
                 final boolean resetFromOriginal = (WaypointType.ORIGINAL == waypoint.getWaypointType());
                 binding.modifyCacheCoordinatesLocal.setText(resetFromOriginal ? R.string.waypoint_localy_reset_cache_coords : R.string.waypoint_set_as_cache_coords);
                 binding.modifyCacheCoordinatesLocalAndRemote.setText(resetFromOriginal ? R.string.waypoint_reset_local_and_remote_cache_coords : R.string.waypoint_save_and_modify_on_website);
@@ -653,7 +653,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         } else { // keep original note
             currentState.noteText = waypoint.getNote();
         }
-        currentState.userNoteText = binding.userNote.getText().toString().trim();
+        currentState.userNoteText = ViewUtils.getEditableText(binding.userNote.getText()).trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
         currentState.calcStateJson = calcStateString;
@@ -687,7 +687,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         @Override
-        public void handleMessage(final Message msg) {
+        public void handleMessage(@NonNull final Message msg) {
             final EditWaypointActivity activity = getReference();
             if (activity == null) {
                 return;

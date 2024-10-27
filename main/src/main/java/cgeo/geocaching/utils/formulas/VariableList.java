@@ -21,7 +21,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Encapsulates a {@link VariableMap} but adds semantic of a list to it
  * (e.g. it includes and maintains ordering).
- *
+ * <br>
  * It also maintains modification state and provides hooks for loading and saving a Variable Lists state e.g. for persistence (load-from/store-to DB)
  */
 public class VariableList {

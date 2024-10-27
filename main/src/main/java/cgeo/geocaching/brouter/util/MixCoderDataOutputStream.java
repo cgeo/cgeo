@@ -103,12 +103,4 @@ public final class MixCoderDataOutputStream extends DataOutputStream {
         }
     }
 
-    public static void stats() {
-        for (int i = 1; i < 100; i++) {
-            System.out.println("diff[" + i + "] = " + diffs[i]);
-        }
-        for (int i = 1; i < 100; i++) {
-            System.out.println("counts[" + i + "] = " + counts[i]);
-        }
-    }
 }

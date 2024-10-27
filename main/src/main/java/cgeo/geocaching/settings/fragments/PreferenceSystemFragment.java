@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.PreferenceUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
@@ -55,7 +56,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
             }
         }
 
-        findPreference(getString(R.string.pref_debug)).setOnPreferenceChangeListener((pref, newValue) -> {
+        PreferenceUtils.setOnPreferenceChangeListener(findPreference(getString(R.string.pref_debug)), (pref, newValue) -> {
             Log.setDebug((Boolean) newValue);
             return true;
         });
