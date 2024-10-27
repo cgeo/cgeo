@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/root"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true">
+
+    <LinearLayout
+        android:id="@+id/wherigo_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorBackgroundActionBar">
+
+    <ImageView
+        style="@style/image_small_prepend_text"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/type_marker_wherigo"
+        app:tint="@color/colorTextActionBar" />
+
+    <TextView
+        android:id="@+id/wherigo_info_text"
+        style="@style/text_label"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/colorTextActionBar"
+        android:text="@string/caches_sort_difficulty"
+        android:textSize="@dimen/textSize_detailsSecondary"
+        tools:text="current wherigo information" />
+
+    </LinearLayout>
+
+</merge>
