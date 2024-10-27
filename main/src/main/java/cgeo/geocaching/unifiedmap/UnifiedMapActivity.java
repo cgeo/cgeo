@@ -73,7 +73,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
-import cgeo.geocaching.wherigo.WherigoUtils;
+import cgeo.geocaching.wherigo.WherigoViewUtils;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
@@ -90,6 +90,7 @@ import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -156,6 +157,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private MapMode compatibilityMapMode = MapMode.LIVE;
     private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
 
+    private int wherigoListenerId;
+
     private final CacheListActionBarChooser listChooser = new CacheListActionBarChooser(this, this::getSupportActionBar, newListId -> {
         final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
         if (lNew.isPresent()) {
@@ -213,6 +216,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
         viewModel.followMyLocation.observe(this, this::initFollowMyLocation);
         viewModel.location.observe(this, this::handleLocUpdate);
+
+        //wherigo
+        final View view = findViewById(R.id.map_wherigo_popup);
+        if (view != null) {
+            view.setOnClickListener(v -> openWherigoPopup());
+        }
 
         geoDirUpdate = new LocUpdater(this);
 
@@ -1113,7 +1122,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 MapMarkerUtils.addHighlighting(routeItem.getWaypoint(), getResources(), nonClickableItemsLayer);
             }
         } else if (item.getData() instanceof Zone) {
-            WherigoUtils.displayThing(this, item.getData(), false);
+            WherigoViewUtils.displayThing(this, item.getData(), false);
         } else if (item.getData() instanceof String) {
             GeoItemTestLayer.handleTapTest(clickableItemsLayer, this, touchedPoint, item.getData().toString(), isLongTap);
         }
@@ -1229,6 +1238,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (!Settings.isFeatureEnabledDefaultTrue(R.string.pref_useDelayedMapFragment)) {
             destroyMapFragment();
         }
+        WherigoGame.get().removeListener(wherigoListenerId);
         super.onPause();
     }
 
@@ -1266,6 +1276,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (tileProvider != null) {
             tileProvider.onResume();
         }
+
+        wherigoListenerId = WherigoGame.get().addListener(nt -> {
+            final View view = findViewById(R.id.container_wherigo);
+            if (view != null) {
+                view.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    private void openWherigoPopup() {
+        final Dialog dialog = WherigoViewUtils.getQuickViewDialog(this);
+        dialog.show();
     }
 
     @Override

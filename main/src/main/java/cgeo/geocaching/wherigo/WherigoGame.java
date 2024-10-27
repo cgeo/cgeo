@@ -348,7 +348,7 @@ public class WherigoGame implements UI {
                 }
                 break;
             case DETAILSCREEN:
-                WherigoUtils.displayThing(null, details, true);
+                WherigoViewUtils.displayThing(null, details, true);
                 break;
             default:
                 Log.w(LOG_PRAEFIX + "showDialog called with unknown screenId: " + screenId + " [" + details + "]");

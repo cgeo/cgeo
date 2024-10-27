@@ -16,16 +16,13 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -291,53 +288,6 @@ public final class WherigoUtils {
                 }
                 WherigoGame.get().stopGame();
             });
-    }
-
-    public static void chooseAndDisplayThing(@NonNull final Activity activity, @NonNull final WherigoThingType thingType) {
-        final List<EventTable> things = thingType.getThingsForUserDisplay();
-        if (things.isEmpty()) {
-            return;
-        }
-        if (things.size() == 1) {
-            displayThing(activity, things.get(0), false);
-            return;
-        }
-
-        final SimpleDialog.ItemSelectModel<EventTable> model = new SimpleDialog.ItemSelectModel<>();
-        model
-            .setItems(things)
-            .setDisplayMapper(item -> {
-                CharSequence name = WherigoGame.get().toDisplayText(item.name);
-                if (item instanceof Zone) {
-                    name = TextUtils.concat(name, " (" + WherigoUtils.getDisplayableDistanceTo((Zone) item) + ")");
-                }
-                if (!isVisibleToPlayer(item)) {
-                    name = TextUtils.setSpan("(" + name + ")", new StyleSpan(Typeface.ITALIC));
-                }
-                return TextParam.text(name);
-            })
-            .setDisplayIconMapper(item -> {
-                final Drawable iconDrawable = WherigoUtils.getThingIconAsDrawable(activity, item);
-                return iconDrawable == null ? ImageParam.id(thingType.getIconId()) : ImageParam.drawable(iconDrawable);
-            })
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-            .setItemPadding(10, 0);
-
-        SimpleDialog.of(activity)
-            .setTitle(TextParam.text(thingType.toUserDisplayableString()))
-            .selectSingle(model, item -> displayThing(activity, item, false));
-    }
-
-    public static void displayThing(@Nullable final Activity activity, @NonNull final EventTable thing, final boolean forceDisplay) {
-        if (!forceDisplay && thing.hasEvent("OnClick")) {
-            Log.iForce("Wherigo: discovered OnClick event on thing: " + thing);
-            //this logic was taken over from WhereYouGo. Assumption is that a click event handles triggering of display itself
-            Engine.callEvent(thing, "OnClick", null);
-        } else if (activity != null) {
-            WherigoDialogManager.displayDirect(activity, new WherigoThingDialogProvider(thing));
-        } else {
-            WherigoDialogManager.get().display(new WherigoThingDialogProvider(thing));
-        }
     }
 
     public static Comparator<EventTable> getThingsComparator() {
