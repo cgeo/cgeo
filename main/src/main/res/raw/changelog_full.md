@@ -1,9 +1,20 @@
 # Full changelog
-This changelog contains all changes which are not intermediate developing steps. It is more detailed than the changelogs we publish in our releases.
+This changelog contains all changes which are not intermediate developing steps. It is sometimes more detailed than the changelogs we publish in our releases.
 
 <!-- --------------------------------------------------------------------------------- --->
 
-## Next release (branch `release`)
+## 2024.10.27 Bugfix Release
+
+- Fix: Missing event times on cache download (website change)
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.10.14 Bugfix Release
+
+- Fix: Map constantly reloading caches in offline-only mode (UnifiedMap)
+- Fix: Wrong elevation chart for tracks with multiple segments
+- Fix: Some crashes in Mapsforge map
+- New: Show warning for activated gc connector without credentials
 
 <!-- --------------------------------------------------------------------------------- --->
 
