@@ -21,6 +21,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - Fix: Handling of projections in waypoints and personal notes
 - New: Long tap on date in logging retrieves previous log date
 - Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- New: Confirm overwriting log on quick offline log
 
 ### General
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
@@ -31,3 +32,4 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - New: Option to manage downloaded files (maps, themes, routing and hillshading data)
 - New: Option to remove a cache from all lists (= mark it as to be deleted)
 - Fix: Reset coordinates not detected by c:geo for unsaved caches
+- New: Allow clearing filter if no named filter is stored
