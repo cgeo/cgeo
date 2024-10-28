@@ -1,5 +1,5 @@
 ##
-- Fix: Missing event times on cache download (website change)
+- Oprava: Chybějící časy eventů při stahování kešky (změna webových stránek)
 
 ##
 - Novinka: Zobrazení varování pro aktivovaný gc konektor bez pověření
