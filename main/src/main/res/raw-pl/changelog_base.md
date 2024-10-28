@@ -1,4 +1,4 @@
-Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na ekranie głównym.<br> (Możesz zechcieć [skonfigurować element szybkiego uruchamiania](cgeo-setting://quicklaunchitems_sorted) lub [dostosować dolną nawigację](cgeo-setting://custombnitem) dla łatwiejszego dostępu najpierw włącz rozszerzone ustawienia).
+Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na ekranie głównym.<br> (Możesz zechcieć [skonfigurować element szybkiego uruchamiania](cgeo-setting://quicklaunchitems_sorted) lub [dostosować dolną nawigację](cgeo-setting://custombnitem) dla łatwiejszego dostępu, co wymaga włączenia ustawień rozszerzonych).
 
 ### Mapa
 - Nowość: Zapisuj motyw mapy osobno dla każdego dostawcy kafelków (UnifiedMap)
@@ -20,6 +20,7 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Naprawiono: Obsługa projekcji w punktach nawigacji i notatkach osobistych
 - Nowość: Długie dotknięcie daty w logowaniu pobiera poprzednią datę dziennika
 - Naprawiono: Resetowanie skrytki do oryginalnych współrzędne nie usuwało flagi „zmienione współrzędne”
+- Nowość: Potwierdź nadpisanie dziennika w szybkim logu offline
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
@@ -30,3 +31,4 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Opcja zarządzania pobranymi plikami (mapy, motywy, routing i dane cieniowania)
 - Nowość: Opcja usuwania skrytki ze wszystkich list (= oznacz jako do usunięcia)
 - Naprawiono: Resetowanie współrzędnych nie było wykrywane przez c:geo dla niezapisanych skrytek
+- New: Allow clearing filter if no named filter is stored
