@@ -461,6 +461,8 @@
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
+    <string name="caches_overwrite_offline_log">Nadpisz dziennik offline</string>
+    <string name="caches_overwrite_offline_log_question">Skrytka ma istniejący dziennik offline typu \"%1$s\" z wpisem. Czy chcesz nadpisać ten wpis?</string>
     <string name="caches_show_attributes">Pokaż przegląd atrybutów</string>
     <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
@@ -575,10 +577,12 @@
     <string name="cache_filter_storage_delete_title">Usuń filtr</string>
     <string name="cache_filter_storage_delete_message">Czy na pewno chcesz usunąć tę konfigurację filtra?</string>
     <string name="cache_filter_storage_select_clear_title">Wybierz filtr lub wyczyść bieżący filtr</string>
+    <string name="cache_filter_storage_clear_title">Wyczyść bieżący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
     <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
     <string name="cache_filter_storage_save_confirm_title">Nadpisz zapisany filtr</string>
     <string name="cache_filter_storage_save_confirm_message">Filtr o nazwie \'%s\' i innej konfiguracji już istnieje. Nadpisać go?</string>
+    <string name="cache_filter_storage_clear_message">Czy chcesz wyczyścić bieżący filtr?</string>
     <string name="cache_filter_stringfilter_matchcase">Dopasuj wielkość liter</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Wyszukaj tekst</string>
     <string name="cache_filter_stringfilter_info">Z opcją \'Wzorzec\', użyj wieloznacznika * i ?. * reprezentuje brak, jeden lub wiele znaków, ? reprezentuje pojedynczy znak. Przykładowo: wzorzec \'H?mburg*\' będzie pasował do np. \'Homburg\' lub \'Hamburg w nocy\', ale nie \'Dzień w Hamburg\' lub \'Hahmburg\'</string>
@@ -2644,6 +2648,9 @@
     <string name="wherigo_controls_mapzones_hint">Pokaż strefy uruchomionej gry na mapie</string>
     <string name="wherigo_controls_downloadcartridge_hint">Pobierz kartridż (potrzebny cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Zgłoś problem z wherigo playerem</string>
+    <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
+    <string name="wherigo_dialog_pause_info">Anulowałeś okno dialogowe Wherigo. Możesz je wznowić w Wherigo Playerze poprzez naciśnięcie przycisku „Wznów wstrzymane okno dialogowe”</string>
+    <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
     <string name="wherigo_cartridge_details">Szczegóły kartridża</string>
     <string name="wherigo_locate_on_center">Umieść na środku</string>
@@ -2683,6 +2690,8 @@
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Czy na pewno chcesz usunąć kartridż \"%1$s\", w tym zapisane gry (%2$s)?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Usuń zapisany stan gry Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Czy na pewno chcesz usunąć stan gry \"%1$s\"?</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_title">Nadpisz slot dla zapisu gry</string>
     <string name="wherigo_confirm_overwrite_savegame_slot_message">Czy na pewno chcesz nadpisać slot zapisu gry w \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
