@@ -1013,6 +1013,19 @@
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_select_language">Select language</string>
     <string name="init_use_default_language">Use default language</string>
+    <string name="init_date_format">Date format</string>
+    <string name="init_date_format_description">Format to use for short dates, e.g. in log view</string>
+    <string-array name="init_date_format_values">
+        <item>System Default</item>
+        <item>DD.MM.YYYY</item>
+        <item>DD.MM.YY</item>
+        <item>MM/DD/YYYY</item>
+        <item>MM/DD/YY</item>
+        <item>DD/MM/YYYY</item>
+        <item>DD/MM/YY</item>
+        <item>YYYY-MM-DD</item>
+        <item>YY-MM-DD</item>
+    </string-array>
     <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>

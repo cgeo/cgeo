@@ -148,8 +148,11 @@ public final class Formatter {
      */
     @NonNull
     public static String formatShortDate(final long date) {
-        final DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getContext());
-        return dateFormat.format(date);
+        final String dateFormatString = Settings.getShortDateFormat();
+        if (!dateFormatString.isEmpty()) {
+            return new SimpleDateFormat(dateFormatString, Locale.getDefault()).format(date);
+        }
+        return android.text.format.DateFormat.getDateFormat(getContext()).format(date);
     }
 
     private static String formatShortDateIncludingWeekday(final long time) {

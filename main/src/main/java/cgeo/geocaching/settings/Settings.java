@@ -2522,4 +2522,8 @@ public class Settings {
         newDate.setTimeInMillis(getLong(R.string.pref_last_used_date, newDate.getTimeInMillis()));
         return newDate;
     }
+
+    public static String getShortDateFormat() {
+        return getString(R.string.pref_short_date_format, "");
+    }
 }
