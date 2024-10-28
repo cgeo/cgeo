@@ -20,6 +20,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Fix: Handling of projections in waypoints and personal notes
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
 - Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
+- New: Confirm overwriting log on quick offline log
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
@@ -30,3 +31,4 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
 - Nyhet: Alternativ för att ta bort en cache från alla listor (= markera den att raderas)
 - Fix: Återställda koordinater upptäcks inte av c:geo för osparade cacher
+- New: Allow clearing filter if no named filter is stored
