@@ -1,4 +1,4 @@
-New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovské obrazovce.<br> (Možná budete chtít [konfigurovat položku rychlého spuštění](cgeo-setting://quicklaunchitems_sorted) nebo [přizpůsobit spodní navigaci](cgeo-setting://custombnitem) pro snadnější přístup, je třeba nejprve povolit rozšířené nastavení.)
 
 ### Mapa
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
@@ -19,7 +19,8 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Oprava: Více obrázků v osobní poznámce nebylo přidáno na kartu Obrázky
 - Oprava: Zpracování projekcí v trasových bodech a osobních poznámkách
 - Novinka: Dlouhým klepnutím na datum v logu se načte předchozí datum logu
-- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- Oprava: Obnovení kešky na původní souřadnice neodstraní příznak “změněné souřadnice“
+- Novinka: Potvrzení přepsání logu v rychlém offline logu
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
@@ -29,4 +30,5 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Oprava: Volba „Otevřít v prohlížeči“ nefunguje pro sledovatelné protokoly
 - Novinka: Možnost spravovat stažené soubory (mapy, motivy, směrovací data a data stínování kopců)
 - Novinka: Možnost odstranit kešku ze všech seznamů (= označit ji jako ke smazání)
-- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- Oprava: Obnovení souřadnic nezjištěno pomocí c:geo pro neuložené kešky
+- Novinka: Povolit vymazání filtru, pokud není uložen žádný pojmenovaný filtr
