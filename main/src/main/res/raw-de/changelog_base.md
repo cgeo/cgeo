@@ -20,6 +20,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Handhabung von Projektionen in Wegpunkten und persönlichen Notizen
 - Neu: Langes Tippen auf das Datum beim Loggen stellt das vorherige Logdatum ein
 - Korrektur: Zurücksetzen des Caches auf die ursprünglichen Koordinaten entfernt das "geänderte Koordinaten" Flag nicht
+- New: Confirm overwriting log on quick offline log
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
@@ -30,3 +31,4 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
 - Neu: Option, um einen Cache von allen Listen zu entfernen (= ihn als gelöscht zu markieren)
 - Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
+- New: Allow clearing filter if no named filter is stored
