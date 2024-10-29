@@ -643,15 +643,15 @@
 
     <!-- appearance => short date format -->
     <string translatable="false" name="pref_short_date_format">short_date_format</string>
-    <string translatable="false" name="pref_value_short_date_format_default"></string>
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">DD.MM.YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">DD.MM.YY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/DD/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/DD/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">DD/MM/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">DD/MM/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-DD</string>
-    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-DD</string>
+    <string translatable="false" name="pref_value_short_date_format_default" />
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.YY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-dd</string>
+    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-dd</string>
     <string-array name="pref_values_short_date_format">
         <item>@string/pref_value_short_date_format_default</item>
         <item>@string/pref_value_short_date_format_DDdotMMdotYYYY</item>
