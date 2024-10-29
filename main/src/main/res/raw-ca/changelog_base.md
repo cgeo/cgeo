@@ -20,7 +20,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Correcció: maneig de projeccions en waypoints i notes personals
 - Nou: un toc llarg a la data al registre recupera la data del registre anterior
 - Solució: el restabliment del catxé a les coordenades originals no elimina la marca "coordenades canviades"
-- New: Confirm overwriting log on quick offline log
+- Nou: confirmeu la sobreescritura del registre al registre ràpid fora de línia
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -31,4 +31,4 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Novetat: opció per gestionar els fitxers descarregats (mapes, temes, dades d'itineraris i ombrejats)
 - Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
 - Correcció: restableix les coordenades no detectades per c:geo per a els catxés no desats
-- New: Allow clearing filter if no named filter is stored
+- Nou: permet esborrar el filtre si no s'emmagatzema cap filtre amb nom
