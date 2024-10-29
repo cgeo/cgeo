@@ -458,6 +458,8 @@
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
+    <string name="caches_overwrite_offline_log">Sobreescriu el registre fora de línia</string>
+    <string name="caches_overwrite_offline_log_question">El catxé té un registre fora de línia existent del tipus \"%1$s\" amb un text de registre. Voleu sobreescriure aquest registre?</string>
     <string name="caches_show_attributes">Mostra la visió general d\'atributs</string>
     <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
     <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
@@ -564,10 +566,12 @@
     <string name="cache_filter_storage_delete_title">Esborrar el filtre</string>
     <string name="cache_filter_storage_delete_message">Confirmes que vols suprimir aquesta configuració del filtre?</string>
     <string name="cache_filter_storage_select_clear_title">Seleccioneu el filtre o esborreu el filtre actual</string>
+    <string name="cache_filter_storage_clear_title">Esborra el filtre actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
     <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
     <string name="cache_filter_storage_save_confirm_title">Desa la sobreescriptura del filtre</string>
     <string name="cache_filter_storage_save_confirm_message">Ja existeix un filtre amb el nom \'%s\' i una configuració diferent. Voleu sobreescriure\'l?</string>
+    <string name="cache_filter_storage_clear_message">Voleu esborrar el filtre actual?</string>
     <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Cerca de Text</string>
     <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
@@ -2585,6 +2589,9 @@
     <string name="wherigo_controls_mapzones_hint">Mostra les zones d\'un joc en curs al mapa</string>
     <string name="wherigo_controls_downloadcartridge_hint">Descarrega un cartutx (cal cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Informa d\'un problema amb el Wherigo Player</string>
+    <string name="wherigo_controls_resume_paused_dialog">Reprèn el diàleg en pausa</string>
+    <string name="wherigo_dialog_pause_info">Has cancel·lat un diàleg de Wherigo. Podeu reprendre-ho a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
+    <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
     <string name="wherigo_currently_playing">Actualment jugant</string>
     <string name="wherigo_cartridge_details">Detalls del cartutx</string>
     <string name="wherigo_locate_on_center">Situar al centre</string>
