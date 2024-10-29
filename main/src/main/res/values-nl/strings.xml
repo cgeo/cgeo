@@ -457,6 +457,8 @@
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
+    <string name="caches_overwrite_offline_log">Offline log overschrijven</string>
+    <string name="caches_overwrite_offline_log_question">Cache heeft een offline log van type \"%1$s\" met een logtekst. Wil je deze log overschrijven?</string>
     <string name="caches_show_attributes">Toon attribuut overzicht</string>
     <string name="caches_set_cache_icon">Cache pictogram instellen</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
@@ -563,10 +565,12 @@
     <string name="cache_filter_storage_delete_title">Filter verwijderen</string>
     <string name="cache_filter_storage_delete_message">Weet je zeker dat je dit filtersjabloon wilt verwijderen?</string>
     <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
+    <string name="cache_filter_storage_clear_title">Wis huidige filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
     <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
     <string name="cache_filter_storage_save_confirm_message">Een filter met de naam \'%s\' en andere configuratie bestaat al. Overschrijven?</string>
+    <string name="cache_filter_storage_clear_message">Wil je het huidige filter wissen?</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Zoektekst</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
@@ -2583,6 +2587,9 @@
     <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
     <string name="wherigo_controls_reportproblem_hint">Meld een probleem met de wherigo speler</string>
+    <string name="wherigo_controls_resume_paused_dialog">Gespauzeerd dialoog hervatten</string>
+    <string name="wherigo_dialog_pause_info">Je hebt een Wherigo Dialoog geannuleerd. Je kunt het in Wherigo Player hervatten door op \"Hervat gepauzeerde dialoog\" te klikken</string>
+    <string name="wherigo_no_game_running">Er is momenteel geen wherigo spel actief</string>
     <string name="wherigo_currently_playing">Momenteel aan het spelen</string>
     <string name="wherigo_cartridge_details">Cartridge details</string>
     <string name="wherigo_locate_on_center">Lokaliseren in het midden</string>
