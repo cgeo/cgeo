@@ -20,7 +20,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: Behandeling van projecties in waypoints en persoonlijke notities
 - Nieuw: Lange tik op datum in het logboek haalt vorige log datum op
 - Oplossing: Het resetten van een cache naar oorspronkelijke coördinaten verwijderd niet de "aangepaste coördinaten" vlag
-- New: Confirm overwriting log on quick offline log
+- Nieuw: Bevestig het overschrijven van log op snelle offline log
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
@@ -31,4 +31,4 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Optie om gedownloade bestanden te beheren (kaarten, thema's, routering en reliëfweergave gegevens)
 - Nieuw: Optie om een cache uit alle lijsten te verwijderen (= markeer als te verwijderen)
 - Oplossing: Herstel coördinaten niet gedetecteerd door c:geo voor niet opgeslagen caches
-- New: Allow clearing filter if no named filter is stored
+- Nieuw: Sta het wissen van het filter toe als er geen benoemd filter is opgeslagen
