@@ -27,7 +27,7 @@
 - Novo: Diálogo de seleção de lista: Agrupamento automático de listas com ":" no seu nome
 - Alteração: Uso de Nominatum OSM como geocodificador padrão, substituindo o geocodificador MapQuest (que já não está funcional para nós)
 - Novo: Actualizado o BRouter integrado para v1.7.5
-- Novo: Ler informações de elevação da rota ao ser importada
+- Novo: Ler informações de altitude da rota ao ser importada
 - Novo: API para o Locus agora suporta o tamanho de cache "virtual"
 - Correcção: Resultados da pesquisa por local já não são classificados pela distância para o local de destino
 - Novo: Filtro "Coordenadas corrigidas"
