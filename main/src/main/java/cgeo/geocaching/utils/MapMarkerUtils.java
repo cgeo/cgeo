@@ -606,7 +606,7 @@ public final class MapMarkerUtils {
 
     @Nullable
     private static Integer getMarkerIdIfLogged(final Geocache cache) {
-        if (cache.isOwner()) {
+        if (cache.isOwner() && !cache.hasLogOffline()) {
             return R.drawable.marker_own;
         } else if (cache.isFound()) {
             return R.drawable.marker_found;
@@ -640,7 +640,7 @@ public final class MapMarkerUtils {
      * adds list markers to drawable given by insetsBuilder
      */
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers, final boolean forCaches, final boolean applyScaling) {
-        if (assignedMarkers.size() > 0) {
+        if (!assignedMarkers.isEmpty()) {
             insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(0), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
                 insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, assignedMarkers.get(1), forCaches ? "listMarkerForCache" : "listMarkerForWaypoint", applyScaling), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
