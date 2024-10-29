@@ -779,6 +779,7 @@
     <string name="settings_hide_tileproviders_title">Nascondi Sorgenti Mappa</string>
     <string name="settings_hide_tileproviders_summary">Escludi una o più fonti di mappa dalla selezione delle fonti di mappa</string>
     <string name="settings_userDefinedTileProvider">Provider tile definito dall\'utente</string>
+    <string name="settings_userDefinedTileProviderUri">Inserisci l\'Uri completo (senza barra finale) del provider dei tile o inserisci Uri completo con parametri (inclusi {X}, {Y} e {Z}). Assicurati di aver controllato e rispettare le loro condizioni di utilizzo.</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -1268,6 +1269,7 @@
     <string name="auth_register">Crea un account</string>
     <string name="auth_connected">Connesso</string>
     <string name="auth_unconnected">Non ancora connesso</string>
+    <string name="auth_unconnected_tap_here">Non ancora connesso - tocca qui per autorizzare</string>
     <string name="auth_connected_as">Collegato come %s.\nTocca qui per aggiornare o premi a lungo per rimuovere i dati di autorizzazione da c:geo.</string>
     <string name="auth_dialog_waiting">In attesa di %s…</string>
     <string name="auth_explain_short">Il processo seguente permetterà a <b>c:geo</b> di accedere a %s.</string>
