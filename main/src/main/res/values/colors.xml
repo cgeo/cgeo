@@ -71,6 +71,7 @@
     <color name="marker_rating_45">#ffe64a19</color>
     <color name="marker_rating_50">#ffd32f2f</color>
 
+    <color name="attribute_category_status">#ffC62828</color>
     <color name="attribute_category_tools">#ff7f0000</color>
     <color name="attribute_category_tools_negative">#ff000000</color>
     <color name="attribute_category_type">#ff4e342e</color>
