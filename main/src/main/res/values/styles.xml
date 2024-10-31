@@ -528,9 +528,17 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:padding">8dp</item>
+        <item name="android:elevation">1dp</item>
     </style>
     <style name="map_overlaybutton_bg" parent="map_overlaybutton">
         <item name="android:background">@drawable/map_button_background</item>
+    </style>
+
+    <style name="map_shadowcontainer">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <!-- authorization styles -->
