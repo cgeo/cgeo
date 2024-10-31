@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum CacheAttributeCategory {
+    CAT_STATUS(0, R.string.cat_status, R.color.attribute_category_status, R.color.attribute_category_status, R.color.attribute_category_status),
     CAT_TOOLS(10, R.string.cat_tools, R.color.attribute_category_tools, R.color.attribute_category_tools_disabled, R.color.attribute_category_tools_negative),
     CAT_TYPE(20, R.string.cat_type, R.color.attribute_category_type, R.color.attribute_category_type_disabled),
     CAT_LOCATION(30, R.string.cat_location, R.color.attribute_category_location, R.color.attribute_category_location_disabled),
@@ -61,7 +62,7 @@ public enum CacheAttributeCategory {
     }
 
     public static List<CacheAttributeCategory> getOrderedCategoryList() {
-        return new ArrayList<>(Arrays.asList(CAT_TOOLS, CAT_DURATION, CAT_LOCATION, CAT_TYPE, CAT_SURROUNDINGS, CAT_PERMISSIONS));
+        return new ArrayList<>(Arrays.asList(CAT_STATUS, CAT_TOOLS, CAT_DURATION, CAT_LOCATION, CAT_TYPE, CAT_SURROUNDINGS, CAT_PERMISSIONS));
     }
 
     public ColorStateList getCategoryColorStateList(final Boolean state) {

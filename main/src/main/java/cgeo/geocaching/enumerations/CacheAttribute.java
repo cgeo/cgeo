@@ -63,7 +63,7 @@ public enum CacheAttribute {
     THORN(CacheAttributeCategory.CAT_LOCATION, 39, 63, "thorn", R.drawable.attribute_thorn, R.string.attribute_thorn_yes, R.string.attribute_thorn_no),
     STEALTH(CacheAttributeCategory.CAT_LOCATION, 40, 74, "stealth", R.drawable.attribute_stealth, R.string.attribute_stealth_yes, R.string.attribute_stealth_no),
     STROLLER(CacheAttributeCategory.CAT_SURROUNDINGS, 41, -1, "stroller", R.drawable.attribute_stroller, R.string.attribute_stroller_yes, R.string.attribute_stroller_no),
-    FIRSTAID(CacheAttributeCategory.CAT_SURROUNDINGS, 42, -1, "firstaid", R.drawable.attribute_firstaid, R.string.attribute_firstaid_yes, R.string.attribute_firstaid_no),
+    FIRSTAID(CacheAttributeCategory.CAT_STATUS, 42, -1, "firstaid", R.drawable.attribute_firstaid, R.string.attribute_firstaid_yes, R.string.attribute_firstaid_no),
     COW(CacheAttributeCategory.CAT_SURROUNDINGS, 43, -1, "cow", R.drawable.attribute_cow, R.string.attribute_cow_yes, R.string.attribute_cow_no),
     FLASHLIGHT(CacheAttributeCategory.CAT_TOOLS, 44, 52, "flashlight", R.drawable.attribute_flashlight, R.string.attribute_flashlight_yes, R.string.attribute_flashlight_no),
     LANDF(CacheAttributeCategory.CAT_TYPE, 45, -1, "landf", R.drawable.attribute_landf, R.string.attribute_landf_yes, R.string.attribute_landf_no),
