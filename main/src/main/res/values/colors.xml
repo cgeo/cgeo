@@ -20,7 +20,7 @@
     <color name="colorTextActionBar">#FFE4E4E4</color>
 
     <color name="osm_zoomcontrol">#FF666666</color>
-    <color name="osm_zoomcontrolbackground">#D9FFFFFF</color>
+    <color name="osm_zoomcontrolbackground">#FFFFFFFF</color>
 
     <!-- default colors for map lines -->
 
