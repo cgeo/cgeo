@@ -303,27 +303,37 @@ public final class LogUtils {
         if (cacheConnector instanceof ILogin && oldIsFound != newIsFound) {
             ((ILogin) cacheConnector).increaseCachesFound(newIsFound ? 1 : -1);
         }
+        final List<String> attributes = cache.getAttributes();
 
-        //update cache state
-        for (LogEntry log : cache.getLogs()) {
-            if (log.logType == LogType.TEMP_DISABLE_LISTING) {
-                cache.setDisabled(true);
-                break;
-            } else if (log.logType == LogType.ENABLE_LISTING) {
-                cache.setDisabled(false);
-                break;
-            }
-        }
-
-        //update own found state
-        if (newLogEntry.date >= cache.getVisitedDate()) {
-            if (newLogEntry.logType.isFoundLog()) {
+        // update cache state
+        switch (newLogEntry.logType) {
+            case WEBCAM_PHOTO_TAKEN:
+            case ATTENDED:
+            case FOUND_IT:
                 cache.setFound(true);
                 cache.setVisitedDate(newLogEntry.date);
-            } else if (newLogEntry.logType == LogType.DIDNT_FIND_IT) {
+                break;
+            case DIDNT_FIND_IT:
                 cache.setDNF(true);
                 cache.setVisitedDate(newLogEntry.date);
-            }
+                break;
+            case ARCHIVE:
+                cache.setArchived(true);
+                break;
+            case TEMP_DISABLE_LISTING:
+                cache.setDisabled(true);
+                break;
+            case ENABLE_LISTING:
+                cache.setDisabled(false);
+                break;
+            case NEEDS_MAINTENANCE:
+                attributes.add("firstaid_yes");
+                cache.setAttributes(attributes);
+                break;
+            case OWNER_MAINTENANCE:
+                attributes.remove("firstaid_yes");
+                cache.setAttributes(attributes);
+                break;
         }
     }
 
