@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="0dp"
     android:id="@+id/distanceinfo"
     android:layout_below="@id/filterbar">
 
@@ -77,22 +78,29 @@
             android:background="@drawable/icon_bcg" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/map_compassrose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/map_compassrosecontainer"
         android:layout_below="@id/distancesFrame1"
-        android:layout_marginTop="13dp"
-        android:layout_marginLeft="13dp"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/bearing_indicator" />
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="11dp"
+        style="@style/map_shadowcontainer"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:id="@+id/map_compassrose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/map_bearing_background"
+            android:elevation="2dp"
+            android:src="@drawable/bearing_indicator" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/container_rotationmenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/map_compassrose"
-        android:layout_alignTop="@id/map_compassrose"
+        android:layout_toRightOf="@id/map_compassrosecontainer"
+        android:layout_alignTop="@id/map_compassrosecontainer"
         android:layout_marginLeft="5dp"
         android:gravity="left"
         android:visibility="gone"
