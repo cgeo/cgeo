@@ -232,7 +232,6 @@
     <string name="err_detail_cache">c:geo negali parodyti šios slėptuvės. Ar tai tikrai slėptuvė?</string>
     <string name="err_detail_cache_find">c:geo neranda slėptuvės</string>
     <string name="err_detail_cache_find_some">c:geo neranda šios slėptuvės.</string>
-    <string name="err_detail_cache_find_any">c:geo neranda jokių geoslėptuvių.</string>
     <string name="err_detail_no_spoiler">c:geo nerado jokių šios slėptuvės spoilerinių vaizdų.</string>
     <string name="err_detail_still_working">Vis dar dirba su kita užduotimi.</string>
     <string name="err_detail_premium_log_found">Slėptuvė prieinama tik geocaching.com premium nariams, todėl slėptuvės informacija neatvaizduojama.\n\nJei suradote šią slėptuvę, galite registruoti ją čia.</string>
@@ -1659,8 +1658,6 @@
     <string name="map_showwp_visited">Aplankytas</string>
     <string name="init_renderthemefolder_synctolocal">Sinchronizuoti temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tai sinchronizuos jūsų temos į privatų programos aplanką, kad pagerintumėte žemėlapių peržiūros priemonės atidarymo našumą, nes tai kainuoja šiek tiek įrenginio saugyklos vietos.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Įjunkite temos aplanko sinchronizavimą</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Taip bus nuolat sinchronizuojamas žemėlapio temos aplanko turinys į privatų programos aplanką, kad failai būtų greičiau pasiekti. Prieš įjungdami šią funkciją įsitikinkite, kad temos aplanke yra tik jūsų temos, bet nėra papildomų (didelių) duomenų.\n\nJūsų žemėlapio temos aplanke \'%1$s\' šiuo metu yra %2$s, %3$s ir dydis %4$s.\n\nAr norite įjungti aplankų sinchronizavimą?</string>
     <string name="onetime_mapthemefixslow_title">Pataisykite lėtą žemėlapio temos atvaizdavimą</string>
     <string name="onetime_mapthemefixslow_message">Dirbant su nesupakuotomis žemėlapių temomis, gali sumažėti žemėlapių peržiūros priemonės atidarymo našumas. Galite supakuoti arba sinchronizuoti savo temas, kad padidintumėte našumą ir sumažintumėte žemėlapio paleidimo delsą.</string>
     <string name="map_theme_select">Pasirinkite žemėlapio temą</string>
@@ -1785,10 +1782,6 @@
     <string name="do_auto">Automatiškai</string>
     <string name="do_flat">Horizontalus</string>
     <string name="do_upright">Vertikalus</string>
-    <!-- license -->
-    <string name="license">Licencija</string>
-    <string name="license_show">Rodyti licenciją</string>
-    <string name="license_dismiss">Atmesti</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Buvę įvykiai</string>
     <string name="helper_calendar_pastevent_question">Renginio data yra praeityje. Vis tiek pridėti?</string>
