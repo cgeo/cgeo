@@ -141,7 +141,6 @@
     <string name="err_detail_cache">c:geo لا يمكنه عرض المخبئ الذي تريده. هل هو حقاً مخبئ؟</string>
     <string name="err_detail_cache_find">c:geo لا يمكنه إيجاد المخبئ</string>
     <string name="err_detail_cache_find_some">c:geo لا يمكنه إيجاد ذالك المخبئ.</string>
-    <string name="err_detail_cache_find_any">c:geo لا يمكنه إيجاد و لا أي مخبآت.</string>
     <string name="err_detail_no_spoiler">c:geo لم يتمكن من العثور على صور مفسدة لهذا المخبئ.</string>
     <string name="err_detail_still_working">لا يزال يعمل في مهمة أخرى.</string>
     <string name="err_watchlist_failed">فشل في تغيير القائمة الخاصة بك لمشاهدة المخبآت.</string>
@@ -743,10 +742,6 @@
     <string name="destination_select">حدد الاتجاه</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">الترخيص</string>
-    <string name="license_show">عرض الترخيص</string>
-    <string name="license_dismiss">نسيان</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">الأحداث الماضية</string>
     <string name="helper_calendar_pastevent_question">تاريخ الحدث في الماضي. أضفه على أية حال؟</string>
