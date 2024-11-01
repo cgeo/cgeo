@@ -149,7 +149,6 @@
     <string name="err_detail_cache">c:geo אין אפשרות להציג את המטמון הרצוי. האם זה באמת מטמון?</string>
     <string name="err_detail_cache_find">ג: גיא לא יכול למצוא ג\'יוקש</string>
     <string name="err_detail_cache_find_some">ג: גיא לא יכול למצוא את הג\'יוקש</string>
-    <string name="err_detail_cache_find_any">ג: גיא לא יכול למצוא אף ג\'יוקשים</string>
     <string name="err_detail_no_spoiler">c:geo לא מצאה תמונות ספוילר עבור מטמון זה.</string>
     <string name="err_detail_still_working">עדיין עובד על משימה אחרת.</string>
     <string name="err_watchlist_failed">שינוי רשימת המעקב שלך נכשלה.</string>
@@ -426,7 +425,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
     <!-- helpers -->
     <!-- export -->
     <string name="export_fieldnotes_uploading">Uploading&#8230;</string>
