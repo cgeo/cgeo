@@ -1,4 +1,7 @@
 ##
+- Fix: Some issues with new event time detection
+
+##
 - Correcció: falten hores de trobades a la baixada de catxés (canvi del lloc web)
 
 ##
