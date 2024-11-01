@@ -147,7 +147,7 @@ public class VariableList {
      */
     public boolean changeVariable(final String var, final String formula) {
         if (!variablesSet.containsKey(var) ||
-                Objects.equals(Objects.requireNonNull(variableMap.get(var)).getFormulaString(), formula)) {
+                Objects.equals((variableMap.get(var) == null ? null : variableMap.get(var).getFormulaString()), formula)) {
             return false;
         }
         variableMap.put(var, formula);
