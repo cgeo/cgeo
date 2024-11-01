@@ -32,3 +32,6 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Opção para remover uma cache de todas as listas (= marcar para ser apagada)
 - Correcção: Redefinição de coordenadas não era detectada pelo c:geo para caches não gravadas
 - Novo: Permitir limpar filtros se nenhum filtro nomeado estiver armazenado
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
