@@ -249,7 +249,6 @@
     <string name="err_detail_cache">El c:geo no pot mostrar el catxé que voleu. És realment un catxé?</string>
     <string name="err_detail_cache_find">El c:geo no pot trobar el catxé</string>
     <string name="err_detail_cache_find_some">El c:geo no pot trobar aquest catxé.</string>
-    <string name="err_detail_cache_find_any">El c:geo no pot trobar cap catxé.</string>
     <string name="err_detail_no_spoiler">El c:geo no troba cap imatge d\'ajuda per aquest catxé.</string>
     <string name="err_detail_still_working">Encara hi ha una altra tasca en execució.</string>
     <string name="err_detail_premium_log_found">Aquesta catxé només està disponible per a membres premium de geocaching.com. Per tant, la seva informació no es pot mostrar. \n\n Tanmateix, si ja heu trobat aquest catxé, podeu registrar-ho aquí.</string>
@@ -1741,8 +1740,6 @@
     <string name="map_showwp_visited">Visitat</string>
     <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Això sincronitzarà contínuament el contingut de la carpeta del tema del mapa amb una carpeta privada de l’aplicació per accedir més ràpidament als fitxers. Assegureu-vos que la carpeta de temes només contingui els vostres temes, però no hi hagi dades addicionals (grans) abans d’activar aquesta funció.\n\nLa carpeta de temes del mapa \"%1$s\" té actualment %2$s, %3$s i té una mida de %4$s.\n\nVoleu activar la sincronització de carpetes?</string>
     <string name="onetime_mapthemefixslow_title">Corregiu la representació del tema del mapa lent</string>
     <string name="onetime_mapthemefixslow_message">Treballar amb temes de mapes no comprimits pot reduir el rendiment d\'obertura del visor de mapes. Podeu comprimir o sincronitzar els temes per obtenir un rendiment més ràpid i reduir el retard en iniciar el mapa.</string>
     <string name="map_theme_select">Trieu els detalls del mapa</string>
@@ -1887,10 +1884,6 @@
     <string name="do_auto">Auto</string>
     <string name="do_flat">Pla</string>
     <string name="do_upright">Vertical</string>
-    <!-- license -->
-    <string name="license">Llicència</string>
-    <string name="license_show">Mostra la llicència</string>
-    <string name="license_dismiss">Omet</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Trobada passada</string>
     <string name="helper_calendar_pastevent_question">La trobada ja ha passat. Voleu afegir-la de totes maneres?</string>
@@ -2499,7 +2492,6 @@
     <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:</string>
     <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per a la regió seleccionada</string>
     <string name="tileupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de dades d\'encaminament descarregats. Toc llarg per ajornar.</string>
-    <string name="download_hillshading_title">Falten dades d\'ombrejat</string>
     <string name="check_hillshading_found">Dades d\'ombrejat ja presents</string>
     <string name="check_hillshading_missing">S\'han trobat dades d\'ombrejats que falten:</string>
     <string name="check_hillshading_unsupported">Avís: les dades d\'ombrejats no estan disponibles almenys en part per a la regió seleccionada</string>
