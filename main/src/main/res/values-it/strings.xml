@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo non può visualizzare il cache richiesto. È veramente un geocache?</string>
     <string name="err_detail_cache_find">c:geo non trova il geocache</string>
     <string name="err_detail_cache_find_some">c:geo non trova quel geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo non trova nessun geocache.</string>
     <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questo cache.</string>
     <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
     <string name="err_detail_premium_log_found">Questo cache è disponibile solo per i membri premium di geocaching.com. Pertanto, le informazioni non possono essere visualizzate.\n\nTuttavia, se hai già trovato questo cache, puoi registrarlo qui.</string>
@@ -1740,8 +1739,6 @@
     <string name="map_showwp_visited">Visitato</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizza temi</string>
     <string name="init_summary_renderthemefolder_synctolocal">Questo sincronizzerà i tuoi temi in una cartella privata dell\'app per migliorare le prestazioni di apertura del visualizzatore di mappe occupando un po\' di spazio di archiviazione del dispositivo.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Questo sincronizzerà continuamente il contenuto del tema della mappa in una cartella privata dell\'app per un accesso più veloce ai file. Assicurati che la cartella del tema contenga solo i tuoi temi e che non ci siano dati aggiuntivi (di grosse dimensioni) prima di abilitare questa funzione.\n\nLa tua cartella del tema della mappa \'%1$s\' ha attualmente %2$s, %3$s e una dimensione di %4$s.\n\nVuoi attivare la sincronizzazione della cartella?</string>
     <string name="onetime_mapthemefixslow_title">Correggi il rendering lento del tema della mappa</string>
     <string name="onetime_mapthemefixslow_message">Lavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. È possibile comprimere o sincronizzare i temi per ottenere prestazioni più veloci e ridurre il ritardo all\'avvio della mappa.</string>
     <string name="map_theme_select">Scegli un tema mappa</string>
@@ -1886,10 +1883,6 @@
     <string name="do_auto">Automatico</string>
     <string name="do_flat">Piatto</string>
     <string name="do_upright">Verticale</string>
-    <!-- license -->
-    <string name="license">Licenza</string>
-    <string name="license_show">Mostra licenza</string>
-    <string name="license_dismiss">Chiudi</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Evento passato</string>
     <string name="helper_calendar_pastevent_question">La data dell\'evento è nel passato. Aggiungerlo comunque?</string>
@@ -2497,7 +2490,6 @@
     <string name="check_tiles_missing">Dati di routing mancanti:</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
-    <string name="download_hillshading_title">Dati di ombreggiatura mancanti</string>
     <string name="check_hillshading_found">Datisi ombreggiatura già presenti</string>
     <string name="check_hillshading_missing">Trovati dati di ombreggiatura mancanti:</string>
     <string name="check_hillshading_unsupported">Attenzione: i dati di ombreggiatura, o una parte di essi, non sono disponibili per la regione scelta</string>
