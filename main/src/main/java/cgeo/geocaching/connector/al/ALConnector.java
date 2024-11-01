@@ -46,6 +46,7 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     private ALConnector() {
         // singleton
         name = LocalizationUtils.getString(R.string.settings_title_lc);
+        prefKey = R.string.preference_screen_al;
     }
 
     /**

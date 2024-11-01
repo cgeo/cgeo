@@ -60,6 +60,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private SuConnector() {
         // singleton
+        prefKey = R.string.preference_screen_su;
     }
 
     public static SuConnector getInstance() {
