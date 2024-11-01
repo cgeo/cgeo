@@ -9,8 +9,7 @@
         style="@style/map_shadowcontainer"
         android:layout_above="@id/container_zoom"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="-4dp">
+        android:layout_marginRight="11dp">
         <ImageButton
             android:id="@+id/map_followmylocation_btn"
             android:src="@drawable/map_followmylocation_btn"
