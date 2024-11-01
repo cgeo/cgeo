@@ -248,7 +248,6 @@
     <string name="err_detail_cache">Sorry, c:geo kan de gezochte geocache niet weergeven. Is het wel een geocache?</string>
     <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
     <string name="err_detail_cache_find_some">Sorry, c:geo kan die geocache niet vinden.</string>
-    <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
     <string name="err_detail_no_spoiler">c:geo heeft geen spoiler images gevonden voor deze cache.</string>
     <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
     <string name="err_detail_premium_log_found">Deze cache is alleen beschikbaar voor premium leden van geocaching.com. Daarom kan de cache informatie niet worden weergegeven.\n\nAls je deze cache al hebt gevonden, kan je deze hier loggen.</string>
@@ -1740,8 +1739,6 @@
     <string name="map_showwp_visited">Bezocht</string>
     <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaartthema-map continu synchroniseren in een app-specifieke map voor snellere toegang tot het bestand. Zorg ervoor dat je thema map alleen je thema\'s bevat maar geen extra (grote) gegevens voordat u deze functie inschakelt.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
     <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="map_theme_select">Selecteer mapthema</string>
@@ -1886,10 +1883,6 @@
     <string name="do_auto">Automatisch</string>
     <string name="do_flat">Plat</string>
     <string name="do_upright">Rechtop</string>
-    <!-- license -->
-    <string name="license">Licentie</string>
-    <string name="license_show">Toon licentie</string>
-    <string name="license_dismiss">Afwijzen</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Event in het verleden</string>
     <string name="helper_calendar_pastevent_question">De Eventdatum is in het verleden. Toch toevoegen?</string>
@@ -2497,7 +2490,6 @@
     <string name="check_tiles_missing">Ontbrekende routeringsgegevens gevonden:</string>
     <string name="check_tiles_unsupported">Waarschuwing: Routeringsgegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
     <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
-    <string name="download_hillshading_title">Reliëfweergave gegevens ontbreken</string>
     <string name="check_hillshading_found">Reliëfweergave-gegevens reeds aanwezig</string>
     <string name="check_hillshading_missing">Ontbrekende reliëfweergave-gegevens gevonden:</string>
     <string name="check_hillshading_unsupported">Waarschuwing: Reliëfweergave gegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
