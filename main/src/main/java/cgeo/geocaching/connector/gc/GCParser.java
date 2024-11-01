@@ -386,11 +386,11 @@ public final class GCParser {
                     sDesc.append("<b>")
                             .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
                             .append(", ")
-                            .append(Integer.parseInt(eventTimesMatcher.group(2)) + (null != eventTimesMatcher.group(1) && eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(4) && eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0))
+                            .append(String.format(Locale.getDefault(), "%02d", Integer.parseInt(eventTimesMatcher.group(2)) + (null != eventTimesMatcher.group(1) && eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(4) && eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(2))) ? 12 : 0)))
                             .append(":")
                             .append(eventTimesMatcher.group(3))
                             .append(" - ")
-                            .append(Integer.parseInt(eventTimesMatcher.group(6)) + (null != eventTimesMatcher.group(5) && eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(8) && eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0))
+                            .append(String.format(Locale.getDefault(), "%02d", Integer.parseInt(eventTimesMatcher.group(6)) + (null != eventTimesMatcher.group(5) && eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(8) && eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(6))) ? 12 : 0)))
                             .append(":")
                             .append(eventTimesMatcher.group(7))
                             .append("</b>");
@@ -398,8 +398,9 @@ public final class GCParser {
             } catch (Exception e) {
                 Log.w("GCParser.parseCache: Failed to parse event time", e);
             }
+        } else {
+            sDesc.append(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
         }
-        sDesc.append(TextUtils.getMatch(page, GCConstants.PATTERN_SHORTDESC, true, ""));
         cache.setShortDescription(sDesc.toString());
 
         // cache description
