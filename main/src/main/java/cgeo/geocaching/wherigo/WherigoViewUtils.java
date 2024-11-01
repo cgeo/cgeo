@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding;
 import cgeo.geocaching.databinding.WherigoMapQuickinfosBinding;
@@ -176,6 +177,9 @@ public final class WherigoViewUtils {
             displayThing(activity, thing, false);
         });
         binding.resumeDialog.setOnClickListener(v -> WherigoDialogManager.get().unpause());
+        binding.cacheContextGotocache.setOnClickListener(v -> {
+            CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode());
+        });
         binding.goToWherigo.setOnClickListener(v -> {
             WherigoActivity.start(activity, false);
         });
@@ -183,6 +187,8 @@ public final class WherigoViewUtils {
         final Runnable refreshGui = () -> {
             updateThingTypeTable(model, binding.wherigoThingTypeList);
             binding.resumeDialog.setVisibility(WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED ? View.VISIBLE : View.GONE);
+            binding.cacheContextBox.setVisibility(WherigoGame.get().getContextGeocode() != null ? View.VISIBLE : View.GONE);
+            binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName());
         };
 
         final int wherigoListenerId = WherigoGame.get().addListener(nt -> {

@@ -2905,6 +2905,9 @@
     <string name="wherigo_controls_mapzones_hint">Show zones of a running game on map</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download a cartridge (cguid needed)</string>
     <string name="wherigo_controls_reportproblem_hint">Report a problem with the wherigo player</string>
+    <string name="wherigo_controls_cache_context">Cache Context</string>
+    <string name="wherigo_controls_cache_link">Go to cache details</string>
+
     <string name="wherigo_controls_resume_paused_dialog">Resume paused dialog</string>
     <string name="wherigo_dialog_pause_info">You cancelled a Wherigo Dialog. You can resume it in Wherigo Player by tapping \"Resume paused dialog\"</string>
     <string name="wherigo_no_game_running">No wherigo game is currently running</string>
@@ -2955,9 +2958,11 @@
     <string name="wherigo_confirm_delete_cartridge_title">Delete Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Do you really want to delete cartridge  \"%1$s\" including %2$s save games?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Delete Wherigo Savegame</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Do you really want to delete savegame \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Overwrite Savegame slot</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Do you really want to override savegame slot saved at \"%s\"?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Do you really want to delete savegame \"%2$s\" of cartridge \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Save Wherigo game progress</string>
+    <string name="wherigo_save_game_message">Save your game progress for cartridge \"%1$s\" into \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Enter name (optional)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Warning: by proceeding you will overwrite existing savegame from \"%1$s\"</string>
 
     <string name="wherigo_dialog_push_page">Page %1$s / %2$s</string>
 

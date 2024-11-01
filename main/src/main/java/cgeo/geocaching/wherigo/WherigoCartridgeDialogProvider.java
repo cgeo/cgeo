@@ -54,7 +54,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
         final WherigoCartridgeDetailsBinding binding = WherigoCartridgeDetailsBinding.inflate(LayoutInflater.from(activity));
         dialog.setView(binding.getRoot());
 
-        final List<WherigoSavegameInfo> saveGames = cartridgeInfo.getLoadableSavegames();
+        final List<WherigoSavegameInfo> saveGames = WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo());
 
         binding.description.setText(WherigoGame.get().toDisplayText(cartridgeFile.description));
         //following info is debug -> no translation needed
@@ -121,8 +121,8 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
 
     private void playGame(final Activity activity) {
 
-        final List<WherigoSavegameInfo> loadGameList = this.cartridgeInfo.getLoadableSavegames();
-        if (loadGameList.size() == 1 && loadGameList.get(0).name == null) {
+        final List<WherigoSavegameInfo> loadGameList = WherigoSavegameInfo.getLoadableSavegames(this.cartridgeInfo.getFileInfo());
+        if (loadGameList.size() == 1 && loadGameList.get(0).isNewGame()) {
             //no savegames present --> just start a new game
             WherigoGame.get().newGame(cartridgeInfo.getFileInfo());
             return;
