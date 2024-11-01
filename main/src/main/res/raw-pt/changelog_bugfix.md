@@ -1,4 +1,7 @@
 ##
+- Fix: Some issues with new event time detection
+
+##
 - Correcção: Horas dos eventos em falta ao transferir a cache (alterações na página web)
 
 ##
