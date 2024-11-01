@@ -65,27 +65,6 @@ public class WherigoCartridgeInfo {
         return splashData == null || splashData.length == 0 ? null : splashData;
     }
 
-    public List<WherigoSavegameInfo> getLoadableSavegames() {
-        final List<WherigoSavegameInfo> list = new ArrayList<>(WherigoSaveFileHandler.getAvailableSaveFiles(fileInfo.parentFolder, fileInfo.name));
-        list.add(new WherigoSavegameInfo(null, null, null)); // New Game
-        list.sort(WherigoSavegameInfo.DEFAULT_COMPARATOR);
-        return list;
-    }
-
-    public List<WherigoSavegameInfo> getSavegameSlots() {
-        final int[] maxExistingSlot = new int[] {0};
-        final List<WherigoSavegameInfo> list = WherigoSaveFileHandler.getAvailableSaveFiles(fileInfo.parentFolder, fileInfo.name).stream()
-                .filter(si -> !WherigoSavegameInfo.AUTOSAVE_NAME.equals(si.name)) // remove autosave
-                .map(si -> {
-                    maxExistingSlot[0] = Math.max(maxExistingSlot[0], si.getNameAsNumber());
-                    return si;
-                }).collect(Collectors.toCollection(ArrayList::new));
-        //add one empty slot
-        list.add(new WherigoSavegameInfo(null, "" + (maxExistingSlot[0] + 1), null));
-        list.sort(WherigoSavegameInfo.DEFAULT_COMPARATOR);
-        return list;
-    }
-
     private void ensureCartridgeData(final boolean forceIcon, final boolean forceSplash) {
         if (closedCartridgeFile != null && (iconData != null || !forceIcon) && (splashData != null || !forceSplash)) {
             return;

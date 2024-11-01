@@ -3,12 +3,15 @@ package cgeo.geocaching.wherigo;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointConverter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -16,13 +19,16 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,6 +40,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -48,6 +55,7 @@ import cz.matejcik.openwig.Thing;
 import cz.matejcik.openwig.Zone;
 import cz.matejcik.openwig.ZonePoint;
 import cz.matejcik.openwig.formats.CartridgeFile;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import se.krka.kahlua.vm.LuaTable;
 
@@ -316,7 +324,7 @@ public final class WherigoUtils {
         }, true);
     }
 
-    public static void addDeleteOptions(final Activity activity, final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model, final Supplier<List<WherigoSavegameInfo>> refresher) {
+    private static void addDeleteOptions(final Activity activity, final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model, final String cartridgeName, final Supplier<List<WherigoSavegameInfo>> refresher) {
         model.setItemActionIconMapper(item -> {
                     if (!item.isDeletableByUser()) {
                         return null;
@@ -329,9 +337,10 @@ public final class WherigoUtils {
                     }
                     SimpleDialog.of(activity)
                             .setTitle(TextParam.id(R.string.wherigo_confirm_delete_savegame_slot_title))
-                            .setMessage(TextParam.id(R.string.wherigo_confirm_delete_savegame_slot_message, item.name))
+                            .setMessage(TextParam.id(R.string.wherigo_confirm_delete_savegame_slot_message,
+                                    cartridgeName, item.getUserDisplayableName()))
                             .confirm(() -> {
-                                ContentStorage.get().delete(item.fileInfo.uri);
+                                item.delete();
                                 model.setItems(refresher.get());
                             });
                 });
@@ -340,23 +349,84 @@ public final class WherigoUtils {
     public static void loadGame(final Activity activity, final WherigoCartridgeInfo cartridgeInfo) {
         final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
         model
-                .setItems(cartridgeInfo.getLoadableSavegames())
-                .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
-                    final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
-                    itemBinding.name.setText(si.getUserDisplayableName());
-                    itemBinding.description.setText(si.getUserDisplayableSaveDate());
-                    itemBinding.icon.setImageResource(R.drawable.ic_menu_upload);
-                }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
-                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+            .setItems(WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo()))
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
+                itemBinding.name.setText(si.getUserDisplayableName());
+                itemBinding.description.setText(si.getUserDisplayableSaveDate());
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_upload);
+            }, (item, itemGroup) -> item == null ? "" : item.getSavefileName())
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-        WherigoUtils.addDeleteOptions(activity, model, cartridgeInfo::getLoadableSavegames);
+        WherigoUtils.addDeleteOptions(activity, model, cartridgeInfo.getName(), () -> WherigoSavegameInfo.getLoadableSavegames(cartridgeInfo.getFileInfo()));
 
         SimpleDialog.of(activity)
-                .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
-                .selectSingle(model, s -> {
-                    WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s.name);
-                });
+            .setTitle(TextParam.id(R.string.wherigo_choose_new_loadgame))
+            .selectSingle(model, s -> WherigoGame.get().loadGame(cartridgeInfo.getFileInfo(), s));
+    }
 
+    public static void saveGame(final Activity activity) {
+        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
+        if (cartridgeInfo == null) {
+            return;
+        }
+
+        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
+        model
+            .setItems(WherigoSavegameInfo.getSavegameSlots(cartridgeInfo.getFileInfo()))
+            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
+
+                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
+                itemBinding.name.setText(si.getUserDisplayableName());
+                itemBinding.description.setText(si.getUserDisplayableSaveDate());
+                itemBinding.icon.setImageResource(R.drawable.ic_menu_save);
+            }, (item, itemGroup) -> item == null ? "" : item.getSavefileName())
+            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+
+        WherigoUtils.addDeleteOptions(activity, model, cartridgeInfo.getName(), () -> WherigoSavegameInfo.getSavegameSlots(cartridgeInfo.getFileInfo()));
+
+        SimpleDialog.of(activity)
+            .setTitle(TextParam.id(R.string.wherigo_choose_savegame_slot))
+            .selectSingle(model, s -> {
+                //allow entering/editing a savegame name, warn in case of overwriting an existing game
+                CharSequence message = LocalizationUtils.getString(R.string.wherigo_save_game_message,
+                        cartridgeInfo.getName(), s.getUserDisplayableNameId());
+                if (s.isExistingSavefile()) {
+                    final String warningMessage = LocalizationUtils.getString(R.string.wherigo_save_game_warning_overwrite_slot, s.getUserDisplayableSaveDate());
+                    message = TextUtils.concat(message, "\n\n", TextUtils.setSpan(warningMessage, new StyleSpan(Typeface.BOLD)));
+                }
+                String initialValue = s.nameCustom;
+                final String geocode = WherigoGame.get().getContextGeocode();
+                if (geocode != null && (initialValue == null || !initialValue.contains(geocode))) {
+                    initialValue = geocode + (initialValue == null ? "" : " " + initialValue);
+                }
+                SimpleDialog.of(activity)
+                    .setTitle(TextParam.id(R.string.wherigo_save_game_title))
+                    .setMessage(TextParam.text(message))
+                    .input(new SimpleDialog.InputOptions()
+                        .setAllowedChars("[-a-zA-Z0-9 ]")
+                        .setLabel(LocalizationUtils.getString(R.string.wherigo_save_game_custom_name_label))
+                        .setInitialValue(initialValue), nameCustom -> {
+                        if (s.isExistingSavefile()) {
+                            s.delete();
+                        }
+                        final WherigoSavegameInfo newSaveFile = WherigoSavegameInfo.getNewSavefile(s.cartridgeFileInfo, s.nameId, nameCustom);
+                        WherigoGame.get().saveGame(newSaveFile);
+                    });
+        });
+    }
+
+
+    @Nullable
+    public static String findGeocacheNameForGeocode(@Nullable final String geocode) {
+        if (StringUtils.isBlank(geocode)) {
+            return null;
+        }
+        final Geocache cache = DataStore.loadCache(geocode.trim(), EnumSet.of(LoadFlags.LoadFlag.CACHE_BEFORE, LoadFlags.LoadFlag.DB_MINIMAL));
+        if (cache == null || StringUtils.isBlank(cache.getName())) {
+            return geocode.trim();
+        }
+        return geocode.trim() + ": " + cache.getName().trim();
     }
 
 

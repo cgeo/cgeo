@@ -1,5 +1,6 @@
 package cgeo.geocaching.wherigo;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -34,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -45,6 +47,7 @@ import cz.matejcik.openwig.Zone;
 public class WherigoActivity extends CustomMenuEntryActivity {
 
     private static final String PARAM_WHERIGO_GUID = "wherigo_guid";
+    private static final String PARAM_WHERIGO_GEOCODE = "wherigo_geocode";
 
     private final WherigoDownloader wherigoDownloader = new WherigoDownloader(this, this::handleDownloadResult);
 
@@ -57,8 +60,11 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         startInternal(parent, null, forceHideNavigationBar);
     }
 
-    public static void startForGuid(final Activity parent, final String guid, final boolean forceHideNavigationBar) {
-        startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_GUID, guid), forceHideNavigationBar);
+    public static void startForGuid(final Activity parent, final String guid, final String geocode, final boolean forceHideNavigationBar) {
+        startInternal(parent, intent -> {
+            intent.putExtra(PARAM_WHERIGO_GUID, guid);
+            intent.putExtra(PARAM_WHERIGO_GEOCODE, geocode);
+        }, forceHideNavigationBar);
     }
 
     private static void startInternal(final Activity parent, final Consumer<Intent> intentModifier, final boolean forceHideNavigationBar) {
@@ -104,17 +110,24 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
         binding.reportProblem.setOnClickListener(v -> WherigoDialogManager.get().display(new WherigoErrorDialogProvider()));
-
         binding.map.setOnClickListener(v -> showOnMap());
+        binding.cacheContextGotocache.setOnClickListener(v -> {
+            goToCache(WherigoGame.get().getContextGeocode());
+        });
+        binding.cacheContextRemove.setOnClickListener(v -> {
+            WherigoGame.get().setContextGeocode(null);
+        });
 
         binding.revokeFixedLocation.setOnClickListener(v -> {
             WherigoLocationProvider.get().setFixedLocation(null);
         });
 
-        final String guid = getIntent().getExtras() == null ? null : getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
-        if (guid != null) {
-            handleCGuidInput(guid);
-
+        if (getIntent().getExtras() != null) {
+            final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
+            final String geocode = getIntent().getExtras().getString(PARAM_WHERIGO_GEOCODE);
+            if (guid != null) {
+                handleCGuidInput(guid, geocode);
+            }
         }
     }
 
@@ -186,37 +199,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     }
 
     private void saveGame() {
-        final WherigoCartridgeInfo cartridgeInfo = WherigoGame.get().getCartridgeInfo();
-        if (cartridgeInfo == null) {
-            return;
-        }
-
-        final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model = new SimpleDialog.ItemSelectModel<>();
-        model
-            .setItems(cartridgeInfo.getSavegameSlots())
-            .setDisplayViewMapper(R.layout.wherigolist_item, (si, group, view) -> {
-
-                final WherigolistItemBinding itemBinding = WherigolistItemBinding.bind(view);
-                itemBinding.name.setText(si.getUserDisplayableName());
-                itemBinding.description.setText(si.getUserDisplayableSaveDate());
-                itemBinding.icon.setImageResource(R.drawable.ic_menu_save);
-                }, (item, itemGroup) -> item == null || item.name == null ? "" : item.name)
-            .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
-
-        WherigoUtils.addDeleteOptions(this, model, cartridgeInfo::getSavegameSlots);
-
-        SimpleDialog.of(this)
-            .setTitle(TextParam.id(R.string.wherigo_choose_savegame_slot))
-            .selectSingle(model, s -> {
-                if (s.saveDate == null) {
-                    WherigoGame.get().saveGame(s.name);
-                } else {
-                    SimpleDialog.of(this)
-                        .setTitle(TextParam.id(R.string.wherigo_confirm_overwrite_savegame_slot_title))
-                        .setMessage(TextParam.id(R.string.wherigo_confirm_overwrite_savegame_slot_title, s.getUserDisplayableSaveDate()))
-                        .confirm(() -> WherigoGame.get().saveGame(s.name));
-                }
-            });
+        WherigoUtils.saveGame(this);
     }
 
     private void stopGame() {
@@ -234,6 +217,10 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         }
     }
 
+    private void goToCache(final String geocode) {
+        CacheDetailActivity.startActivity(this, geocode);
+    }
+
     private void manualCartridgeDownload() {
         SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_manual_download_title))
             .input(new SimpleDialog.InputOptions().setLabel(LocalizationUtils.getString(R.string.wherigo_manual_download_cguid_label)).setInitialValue(""), input -> {
@@ -241,16 +228,22 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             });
     }
 
-    private void handleCGuidInput(final String cguid) {
+    private void handleCGuidInput(@NonNull final String cguid, @Nullable final String geocode) {
         final WherigoCartridgeInfo cguidCartridge = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (cguidCartridge == null) {
             SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_title))
                 .setMessage(TextParam.id(R.string.wherigo_download_message, cguid))
                 .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                 .confirm(() -> {
+                    if (geocode != null) {
+                        WherigoGame.get().setContextGeocode(geocode);
+                    }
                     wherigoDownloader.downloadWherigo(cguid, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
                 });
         } else {
+            if (geocode != null) {
+                WherigoGame.get().setContextGeocode(geocode);
+            }
             WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(cguidCartridge, false));
         }
     }
@@ -284,12 +277,14 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.resumeDialog.setVisibility(WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED ? View.VISIBLE : View.GONE);
         binding.saveGame.setEnabled(game.isPlaying());
-        binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo().getLoadableSavegames().size() > 1);
+        binding.loadGame.setEnabled(game.isPlaying() && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
 
         this.setTitle(game.isPlaying() ? game.getCartridgeName() : getString(R.string.wherigo_player));
 
+        binding.cacheContextBox.setVisibility(game.getContextGeocode() != null ? View.VISIBLE : View.GONE);
+        binding.cacheContextName.setText(game.getContextGeocacheName());
     }
 
     @Override

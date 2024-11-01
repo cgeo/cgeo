@@ -64,6 +64,45 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/cache_context_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:autoLink="web"
+                android:textIsSelectable="true"
+                android:text="@string/wherigo_controls_cache_context"/>
+            <TextView
+                android:id="@+id/cache_context_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:textIsSelectable="true"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/cache_context_gotocache"
+                    style="@style/button_full"
+                    android:layout_alignParentLeft="true"
+                    android:layout_toLeftOf="@id/cache_context_remove"
+                    android:layout_margin="3dp"
+                    android:minWidth="2dp"
+                    android:text="@string/wherigo_controls_cache_link"/>
+                <Button
+                    android:id="@+id/cache_context_remove"
+                    style="@style/button_icon_accent"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_delete" />
+            </RelativeLayout>
+        </LinearLayout>
+
         <!-- Info about current cartridge -->
         <LinearLayout
             android:id="@+id/wherigo_cartridge_infos"
