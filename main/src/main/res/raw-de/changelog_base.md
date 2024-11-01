@@ -32,3 +32,6 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Option, um einen Cache von allen Listen zu entfernen (= ihn als gelöscht zu markieren)
 - Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
 - New: Allow clearing filter if no named filter is stored
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
