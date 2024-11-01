@@ -429,6 +429,7 @@
     <!-- navigation -->
     <!-- device orientation types -->
     <!-- license -->
+    <string name="license">רישיון</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_fieldnotes_uploading">Uploading&#8230;</string>
