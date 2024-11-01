@@ -82,8 +82,8 @@
         android:id="@+id/map_compassrosecontainer"
         android:layout_below="@id/distancesFrame1"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="11dp"
-        android:layout_marginLeft="11dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="13dp"
         style="@style/map_shadowcontainer"
         android:layout_centerHorizontal="true">
         <ImageView

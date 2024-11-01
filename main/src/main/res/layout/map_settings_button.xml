@@ -22,7 +22,6 @@
         android:id="@+id/container_individualroute"
         style="@style/map_shadowcontainer"
         android:layout_toRightOf="@id/container_settings"
-        android:layout_marginLeft="-2dp"
         android:visibility="gone">
         <ImageButton
             android:id="@+id/map_individualroute_popup"
@@ -35,7 +34,6 @@
         android:id="@+id/container_wherigo"
         style="@style/map_shadowcontainer"
         android:layout_toRightOf="@id/container_individualroute"
-        android:layout_marginLeft="-2dp"
         android:visibility="gone">
         <ImageButton
             android:id="@+id/map_wherigo_popup"
