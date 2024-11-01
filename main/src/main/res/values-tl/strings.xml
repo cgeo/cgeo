@@ -140,7 +140,6 @@
     <string name="err_detail_cache">c: hindi maaaring ipakita ng geo ang geocache na gusto mo. Ito ba talagang geocache?</string>
     <string name="err_detail_cache_find">ang c:geo ay hindi makapaghanap ng geocahe</string>
     <string name="err_detail_cache_find_some">ang c:geo ay hindi makapaghanap ang geocahe.</string>
-    <string name="err_detail_cache_find_any">ang c:geo ay hindi makapaghanap ng kahit anong mga geocache.</string>
     <string name="err_detail_no_spoiler">ang c: geo natagpuan na walang mga imahe ng spoiler para sa cache na ito.</string>
     <string name="err_detail_still_working">Nananatiling gumagawa sa ibang gawain.</string>
     <string name="err_watchlist_failed">Ang pagbabago ng iyong listahan ay pumalya.</string>
@@ -747,10 +746,6 @@
     <string name="destination_select">Pumili ng destinasyon</string>
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Ang lisensya</string>
-    <string name="license_show">Ipakita ang lisensya</string>
-    <string name="license_dismiss">Pinaalis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Nakaraan na kaganapan</string>
     <string name="helper_calendar_pastevent_question">Ang petsa ng kaganapan ay sa nakaraan. Magdagdag pa rin?</string>
