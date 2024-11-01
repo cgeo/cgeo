@@ -1,4 +1,7 @@
 ##
+- Fix: Some issues with new event time detection
+
+##
 - Fix: Saknar händelsetidpunkter vid hämtning av cache (ändring av webbplatsen)
 
 ##
