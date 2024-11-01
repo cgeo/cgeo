@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo nie mógł pokazać skrytki. Czy to naprawdę jest skrytka?</string>
     <string name="err_detail_cache_find">c:geo nie mógł znaleźć skrytki</string>
     <string name="err_detail_cache_find_some">c:geo nie mógł znaleźć tej skrytki.</string>
-    <string name="err_detail_cache_find_any">c:geo nie mógł znaleźć żadnej skrytki.</string>
     <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęć ze spoilerami dla tej skrytki.</string>
     <string name="err_detail_still_working">Wciąż pracuję nad innym zadaniem.</string>
     <string name="err_detail_premium_log_found">Ta skrytka jest dostępna tylko dla członków premium geocaching.com. Dlatego nie można wyświetlić informacji o skrytce.\n\nJeśli jednak już znalazłeś tę skrytkę, możesz ją zalogować tutaj.</string>
@@ -1769,8 +1768,6 @@
     <string name="map_showwp_visited">Odwiedzone</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Spowoduje to synchronizację Twoich motywów w prywatnym folderze aplikacji, aby poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Spowoduje to ciągłą synchronizację zawartości folderu Map Theme w folderze prywatnym dla szybszego dostępu do plików. Upewnij się, że folder twojego motywu zawiera tylko pliki dotyczące motywu, ale nie zawiera dodatkowych (dużych) danych przed włączeniem tej funkcji.\n\nTwój folder z motywami map \'%1$s\' ma obecnie %2$s, %3$s i rozmiar %4$s.\n\nCzy chcesz włączyć synchronizację folderu?</string>
     <string name="onetime_mapthemefixslow_title">Napraw powolne renderowanie motywu mapy</string>
     <string name="onetime_mapthemefixslow_message">Praca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. Możesz spakować lub zsynchronizować swoje motywy, aby uzyskać lepszą wydajność i zmniejszyć opóźnienie przy uruchamianiu mapy.</string>
     <string name="map_theme_select">Wybierz motyw mapy</string>
@@ -1915,10 +1912,6 @@
     <string name="do_auto">Automatycznie</string>
     <string name="do_flat">Płaskie</string>
     <string name="do_upright">Pionowa</string>
-    <!-- license -->
-    <string name="license">Licencja</string>
-    <string name="license_show">Pokaż licencję</string>
-    <string name="license_dismiss">Odmów</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Przeszłe wydarzenie</string>
     <string name="helper_calendar_pastevent_question">Przeszłe wydarzenie. Dodać mimo wszystko?</string>
@@ -2556,7 +2549,6 @@
     <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
     <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
-    <string name="download_hillshading_title">Brakujące dane cieniowania szczytów</string>
     <string name="check_hillshading_found">Dane cieniowania szczytów już istnieją</string>
     <string name="check_hillshading_missing">Znaleziono brakujące dane cieniowania szczytów:</string>
     <string name="check_hillshading_unsupported">Ostrzeżenie: Dane cieniowania szczytów są przynajmniej częściowo niedostępne dla wybranego regionu</string>
