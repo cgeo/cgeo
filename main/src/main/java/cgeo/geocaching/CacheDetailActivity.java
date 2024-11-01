@@ -1606,7 +1606,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 CacheUtils.setWherigoLink(activity, cache, binding.sendToWhereyougo);
             }
             binding.playInCgeo.setVisibility(isEnabled && Settings.enableFeatureWherigo() ? View.VISIBLE : View.GONE);
-            binding.playInCgeo.setOnClickListener(v -> WherigoActivity.startForGuid(activity, WhereYouGoApp.getWhereIGoGuid(cache), false));
+            binding.playInCgeo.setOnClickListener(v -> WherigoActivity.startForGuid(activity, WhereYouGoApp.getWhereIGoGuid(cache), true));
         }
 
         private void updateChirpWolfBox(final CacheDetailActivity activity) {

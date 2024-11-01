@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -97,12 +98,16 @@ public class WherigoGame implements UI {
 
     public int addListener(final Consumer<NotifyType> listener) {
         final int listenerId = LISTENER_ID_PROVIDER.addAndGet(1);
-        this.listeners.put(listenerId, listener);
+        synchronized (listeners) {
+            this.listeners.put(listenerId, listener);
+        }
         return listenerId;
     }
 
     public void removeListener(final int listenerId) {
-        this.listeners.remove(listenerId);
+        synchronized (listeners) {
+            this.listeners.remove(listenerId);
+        }
     }
 
     public boolean isPlaying() {
@@ -235,9 +240,13 @@ public class WherigoGame implements UI {
     }
 
     public void notifyListeners(final NotifyType type) {
+        final Collection<Consumer<NotifyType>> listenerCopy;
+        synchronized (listeners) {
+            listenerCopy = new ArrayList<>(listeners.values());
+        }
         runOnUi(() -> {
             Log.d(LOG_PRAEFIX + "notify for " + type);
-            for (Consumer<NotifyType> listener : listeners.values()) {
+            for (Consumer<NotifyType> listener : listenerCopy) {
                 listener.accept(type);
             }
         });

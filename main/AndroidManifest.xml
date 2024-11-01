@@ -198,6 +198,8 @@
             android:name=".wherigo.WherigoActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/wherigo_player"
+            android:exported="true"
+            android:launchMode="singleTask"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

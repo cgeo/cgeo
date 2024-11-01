@@ -7,10 +7,12 @@ import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
@@ -51,21 +53,30 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
-    public static void start(final Activity parent, final boolean hideNavigationBar) {
-        startInternal(parent, null, hideNavigationBar);
+    public static void start(final Activity parent, final boolean forceHideNavigationBar) {
+        startInternal(parent, null, forceHideNavigationBar);
     }
 
-    public static void startForGuid(final Activity parent, final String guid, final boolean hideNavigationBar) {
-        startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_GUID, guid), hideNavigationBar);
+    public static void startForGuid(final Activity parent, final String guid, final boolean forceHideNavigationBar) {
+        startInternal(parent, intent -> intent.putExtra(PARAM_WHERIGO_GUID, guid), forceHideNavigationBar);
     }
 
-    private static void startInternal(final Activity parent, final Consumer<Intent> intentModifier, final boolean hideNavigationBar) {
+    private static void startInternal(final Activity parent, final Consumer<Intent> intentModifier, final boolean forceHideNavigationBar) {
         final Intent intent = new Intent(parent, WherigoActivity.class);
         if (intentModifier != null) {
             intentModifier.accept(intent);
         }
-        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavigationBar);
+        final boolean wherigoIsCustomItem = Settings.getCustomBNitem() == QuickLaunchItem.VALUES.WHERIGO.id;
+        final boolean hideNavBar = !wherigoIsCustomItem || forceHideNavigationBar;
+
+        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavBar);
         parent.startActivity(intent);
+    }
+
+    @Override
+    protected void checkIntentHideNavigationBar() {
+        //by default show nav bar if wherigo is custom select item
+        checkIntentHideNavigationBar(Settings.getCustomBNitem() != QuickLaunchItem.VALUES.WHERIGO.id);
     }
 
     @Override
@@ -110,7 +121,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.wherigo_options, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -124,8 +135,9 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_player))
                         .setMessage(TextParam.id(R.string.wherigo_no_game_running)).show();
             }
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void startGame() {
