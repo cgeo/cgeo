@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo не может отобразить запрашиваемый тайник. Это действительно тайник?</string>
     <string name="err_detail_cache_find">c:geo не может найти тайник</string>
     <string name="err_detail_cache_find_some">c:geo не может найти этот тайник.</string>
-    <string name="err_detail_cache_find_any">c:geo не может найти ни одного тайника.</string>
     <string name="err_detail_no_spoiler">c:geo не нашёл картинок-подсказок для этого тайника.</string>
     <string name="err_detail_still_working">Выполняется другое задание.</string>
     <string name="err_detail_premium_log_found">Этот тайник доступен только для премиум-пользователей geocaching.com. Поэтому информация о тайнике не отображается.\n\nОднако, если вы уже нашли этот тайник, вы можете отметить его здесь.</string>
@@ -1748,8 +1747,6 @@
     <string name="map_showwp_visited">Посещённые</string>
     <string name="init_renderthemefolder_synctolocal">Синхронизировать темы</string>
     <string name="init_summary_renderthemefolder_synctolocal">Загружать ваши темы во внутреннюю папку приложения — будет занято дополнительное место, но увеличится скорость открытия карты.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Это будет постоянно синхронизировать содержимое папки Map Theme в приватную папку приложения для ускорения доступа к файлам. Убедитесь, что папка темы содержит только ваши темы, но без дополнительных (больших) данных перед включением этой функции.\n\nПапка с картой \'%1$s\' имеет в настоящее время %2$s, %3$s и размер %4$s.\n\nВключить синхронизацию папок?</string>
     <string name="onetime_mapthemefixslow_title">Исправить медленную отрисовку карт</string>
     <string name="onetime_mapthemefixslow_message">Работа с не заархивированными картами может снизить производительность просмотра карт. Вы можете заархивировать или синхронизировать их, чтобы повысить производительность и уменьшить задержку при запуске карты.</string>
     <string name="map_theme_select">Выбрать тему карты</string>
@@ -1894,10 +1891,6 @@
     <string name="do_auto">Авто</string>
     <string name="do_flat">Ландшафтная</string>
     <string name="do_upright">Портретная</string>
-    <!-- license -->
-    <string name="license">Лицензия</string>
-    <string name="license_show">Показать лицензию</string>
-    <string name="license_dismiss">Отклонить</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Прошедшее событие</string>
     <string name="helper_calendar_pastevent_question">Вы собираетесь создать событие в прошлом. Продолжить?</string>
