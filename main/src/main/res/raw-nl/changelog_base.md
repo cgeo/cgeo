@@ -32,3 +32,6 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Optie om een cache uit alle lijsten te verwijderen (= markeer als te verwijderen)
 - Oplossing: Herstel coördinaten niet gedetecteerd door c:geo voor niet opgeslagen caches
 - Nieuw: Sta het wissen van het filter toe als er geen benoemd filter is opgeslagen
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
