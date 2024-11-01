@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache ?</string>
     <string name="err_detail_cache_find">c:geo ne trouve pas de cache</string>
     <string name="err_detail_cache_find_some">c:geo ne trouve pas cette cache.</string>
-    <string name="err_detail_cache_find_any">c:geo ne trouve aucune cache.</string>
     <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
     <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
     <string name="err_detail_premium_log_found">Cette géocache est uniquement disponible pour les membres premium de geocaching.com. Les informations de la géocache ne peuvent donc pas être affichées.\n\nCependant, si vous avez déjà trouvé cette géocache, vous pouvez enregistrer votre visite ici.</string>
@@ -1716,8 +1715,6 @@
     <string name="map_showwp_visited">Visitées</string>
     <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Cela synchronisera vos thèmes de cartes dans un dossier d\'une application privée pour améliorer les performances d\'ouverture de la carte au détriment de l\'espace de stockage du téléphone.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier Thèmes des cartes dans un dossier d\'application privée pour un accès plus rapide aux fichiers. Soyez certain que le dossier des thèmes contient seulement vos thèmes, mais pas de données supplémentaires (volumineuses, avant d\'activer cette fonctionnalité.\n\nVotre dossier de thème “%1$s” a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous vraiment activer la synchronisation ?</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
     <string name="map_theme_select">Sélectionner le thème</string>
@@ -1862,10 +1859,6 @@
     <string name="do_auto">Auto</string>
     <string name="do_flat">à plat</string>
     <string name="do_upright">droit</string>
-    <!-- license -->
-    <string name="license">Licence</string>
-    <string name="license_show">Afficher la licence</string>
-    <string name="license_dismiss">Rejeter</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Événement passé</string>
     <string name="helper_calendar_pastevent_question">La date de l\'événement est dans le passé. Ajouter quand même ?</string>
