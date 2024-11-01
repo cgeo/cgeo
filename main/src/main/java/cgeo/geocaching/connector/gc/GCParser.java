@@ -30,6 +30,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -381,18 +382,18 @@ public final class GCParser {
         if (cache.isEventCache()) {
             try {
                 // add event start / end info to beginning of listing
-                final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
+                final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, page);
                 if (eventTimesMatcher.find()) {
                     sDesc.append("<b>")
                             .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
                             .append(", ")
-                            .append(String.format(Locale.getDefault(), "%02d", Integer.parseInt(eventTimesMatcher.group(2)) + (null != eventTimesMatcher.group(1) && eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(4) && eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(2))) ? 12 : 0)))
+                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(1)))
                             .append(":")
-                            .append(eventTimesMatcher.group(3))
+                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(2)))
                             .append(" - ")
-                            .append(String.format(Locale.getDefault(), "%02d", Integer.parseInt(eventTimesMatcher.group(6)) + (null != eventTimesMatcher.group(5) && eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(8) && eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(6))) ? 12 : 0)))
+                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(3)))
                             .append(":")
-                            .append(eventTimesMatcher.group(7))
+                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(4)))
                             .append("</b>");
                 }
             } catch (Exception e) {

@@ -522,4 +522,11 @@ public final class Formatter {
         return (fullGeocode.length() <= SHORT_GEOCODE_MAX_LENGTH) ? fullGeocode : (fullGeocode.substring(0, SHORT_GEOCODE_MAX_LENGTH) + "…");
     }
 
+    /**
+     * Format a numeric string into a 2-digit number with leading zeros
+     */
+    public static String formatNumberTwoDigits(final String number) {
+        return String.format(Locale.getDefault(), "%02d", Integer.parseInt(number));
+    }
+
 }
