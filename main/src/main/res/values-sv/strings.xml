@@ -248,7 +248,6 @@
     <string name="err_detail_cache">Tyvärr kan c:geo inte visa den geocache du önskar. Är det verkligen en geocache?</string>
     <string name="err_detail_cache_find">Tyvärr kan c:geo inte hitta geocache</string>
     <string name="err_detail_cache_find_some">Tyvärr kan c:geo inte hitta geocachen.</string>
-    <string name="err_detail_cache_find_any">Tyvärr kan c:geo inte hitta någon geocache.</string>
     <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
     <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
     <string name="err_detail_premium_log_found">Den här cachen är endast tillgänglig för premium-medlemmar på geocaching.com. Därav kan inte cache-informationen visas.\n\nMen om du redan har hittat den här cachen så kan du logga den här.</string>
@@ -1734,8 +1733,6 @@
     <string name="map_showwp_visited">Besökt</string>
     <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
     <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
     <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
     <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
     <string name="map_theme_select">Välj karttema</string>
@@ -1880,10 +1877,6 @@
     <string name="do_auto">Automatiskt</string>
     <string name="do_flat">Platt</string>
     <string name="do_upright">Stående</string>
-    <!-- license -->
-    <string name="license">Licens</string>
-    <string name="license_show">Visa licens</string>
-    <string name="license_dismiss">Avbryt</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidigare event</string>
     <string name="helper_calendar_pastevent_question">Eventets datum har passerat. Vill du lägga till det ändå?</string>
@@ -2489,7 +2482,6 @@
     <string name="check_tiles_missing">Hittade saknad ruttdata:</string>
     <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
     <string name="tileupdate_info">Tryck här för att söka efter uppdateringar av hämtade routing-datafiler. Långtryck för att skjuta upp.</string>
-    <string name="download_hillshading_title">Saknar terrängskuggningsdata</string>
     <string name="check_hillshading_found">Terrängskuggningsdata finns redan</string>
     <string name="check_hillshading_missing">Saknar terrängskuggningsdata:</string>
     <string name="check_hillshading_unsupported">Varning: Terrängskuggningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
