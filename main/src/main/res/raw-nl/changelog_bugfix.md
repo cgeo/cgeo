@@ -1,4 +1,7 @@
 ##
+- Fix: Some issues with new event time detection
+
+##
 - Oplossing: Ontbrekende event tijden tijdens het downloaden van de cache (websitewijziging)
 
 ##
