@@ -48,6 +48,7 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private ECConnector() {
         // singleton
+        prefKey = R.string.preference_screen_ec;
     }
 
     /**

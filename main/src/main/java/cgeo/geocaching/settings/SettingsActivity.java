@@ -17,8 +17,17 @@ import cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment;
 import cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment;
 import cgeo.geocaching.settings.fragments.PreferenceNavigationFragment;
 import cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceExtremcachingComFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComAdventureLabsFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingSuFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeokretyOrgFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencacheUkFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingDeFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingNlFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingPlFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingRoFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingUsFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServicesFragment;
 import cgeo.geocaching.settings.fragments.PreferenceSystemFragment;
@@ -247,6 +256,8 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             return;
         }
         Fragment preferenceFragment = new PreferencesFragmentRoot();
+
+        // main configuration screens
         if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_appearance))) {
@@ -268,13 +279,33 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_backup))) {
             preferenceFragment = new PreferenceBackupFragment();
 
+        // service configuration screens
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_sendtocgeo))) {
             preferenceFragment = new PreferenceServiceSendToCgeoFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_geokrety))) {
             preferenceFragment = new PreferenceServiceGeokretyOrgFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_gc))) {
             preferenceFragment = new PreferenceServiceGeocachingComFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocde))) {
+            preferenceFragment = new PreferenceServiceOpencachingDeFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocuk))) {
+            preferenceFragment = new PreferenceServiceOpencacheUkFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocnl))) {
+            preferenceFragment = new PreferenceServiceOpencachingNlFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocpl))) {
+            preferenceFragment = new PreferenceServiceOpencachingPlFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocus))) {
+            preferenceFragment = new PreferenceServiceOpencachingUsFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ocro))) {
+            preferenceFragment = new PreferenceServiceOpencachingRoFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_al))) {
+            preferenceFragment = new PreferenceServiceGeocachingComAdventureLabsFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ec))) {
+            preferenceFragment = new PreferenceServiceExtremcachingComFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_su))) {
+            preferenceFragment = new PreferenceServiceGeocachingSuFragment();
         }
+
         if (StringUtils.isNotBlank(scrollToPrefKey)) {
             ((BasePreferenceFragment) preferenceFragment).setScrollToPrefCallback(this::scrollToCallback, baseKey, scrollToPrefKey);
         }

@@ -151,7 +151,8 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                 }
                             }
                             connectorStatus.setText(connInfo);
-                            connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+                            final View.OnClickListener connectorConfig = v -> SettingsActivity.openForScreen(conn.getServiceSpecificPreferenceScreenKey(), activity);
+                            connectorStatus.setOnClickListener(connectorConfig);
 
                             final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
                             manualLogin.setVisibility(!conn.isLoggedIn() && !isLoggingIn && !isLoggingOk && conn.supportsManualLogin() && Settings.getGcCredentials().isValid() ? View.VISIBLE : View.GONE);
@@ -205,6 +206,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             if (conn instanceof IAvatar) {
                                 // already reserve space, so that other content does not jump as soon as avatar is loaded
                                 userAvatar.setVisibility(View.INVISIBLE);
+                                userAvatar.setOnClickListener(null);
 
                                 AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                                         () -> AvatarUtils.getAvatar((IAvatar) conn),
@@ -215,6 +217,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             } else {
                                                 userAvatar.setImageDrawable(img);
                                             }
+                                            userAvatar.setOnClickListener(connectorConfig);
                                         });
                             } else {
                                 userAvatar.setVisibility(View.GONE);

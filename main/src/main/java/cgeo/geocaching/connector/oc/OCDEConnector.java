@@ -18,7 +18,7 @@ public final class OCDEConnector extends OCApiLiveConnector {
     public OCDEConnector() {
         super("opencaching.de", "www.opencaching.de", true, "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",
                 R.string.oc_de_okapi_consumer_key, R.string.oc_de_okapi_consumer_secret,
-                R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current, "OC.DE", ApiBranch.ocde);
+                R.string.pref_connectorOCActive, R.string.pref_ocde_tokenpublic, R.string.pref_ocde_tokensecret, ApiSupport.current, "OC.DE", ApiBranch.ocde, R.string.preference_screen_ocde);
     }
 
     @Override

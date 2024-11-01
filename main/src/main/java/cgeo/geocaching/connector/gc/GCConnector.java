@@ -97,6 +97,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private GCConnector() {
         // singleton
+        prefKey = R.string.preference_screen_gc;
     }
 
     @NonNull

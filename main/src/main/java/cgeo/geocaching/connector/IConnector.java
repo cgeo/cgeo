@@ -78,6 +78,7 @@ public interface IConnector {
     @Nullable
     String getServiceSpecificLogId(@Nullable String serviceLogId);
 
+    int getServiceSpecificPreferenceScreenKey();
 
     /**
      * enable/disable logging controls in cache details
