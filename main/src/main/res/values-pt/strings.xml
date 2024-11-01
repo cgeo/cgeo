@@ -248,7 +248,6 @@
     <string name="err_detail_cache">O c:geo não consegue mostrar a geocache pretendida. É mesmo uma geocache?</string>
     <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
     <string name="err_detail_cache_find_some">O c:geo não encontra essa geocache.</string>
-    <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
     <string name="err_detail_no_spoiler">O c:geo não encontrou imagens spoiler para esta cache.</string>
     <string name="err_detail_still_working">Ainda se encontra a trabalhar noutra tarefa.</string>
     <string name="err_detail_premium_log_found">Esta cache apenas está disponível para os membros premium do geocaching.com. Por conseguinte, a informação da cache não pode ser mostrada.\n\nNo entanto, se já tiver encontrado esta cache, pode registá-la aqui.</string>
@@ -1740,8 +1739,6 @@
     <string name="map_showwp_visited">Visitados</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Isto irá sincronizar continuamente o conteúdo da pasta Temas de Mapa numa pasta privada da aplicação para acesso mais rápido aos ficheiros. Certifique-se de que a pasta do tema apenas contém os seus temas, mas nenhum dado adicional (grande) antes de activar esta funcionalidade.\n\nA sua pasta do tema \'%1$s\' tem actualmente %2$s, %3$s e um tamanho de %4$s.\n\nDeseja activar a sincronização de pastas?</string>
     <string name="onetime_mapthemefixslow_title">Corrigir renderização lenta do tema de mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabalhar com temas de mapa não compactados pode diminuir o desempenho da abertura do visualizador de mapa. Pode compactar ou sincronizar os seus temas para obter um desempenho mais rápido e reduzir o atraso ao iniciar o mapa.</string>
     <string name="map_theme_select">Seleccionar o tema de mapa</string>
@@ -1886,10 +1883,6 @@
     <string name="do_auto">Automático</string>
     <string name="do_flat">Horizontal</string>
     <string name="do_upright">Vertical</string>
-    <!-- license -->
-    <string name="license">Licença</string>
-    <string name="license_show">Mostrar licença</string>
-    <string name="license_dismiss">Dispensar</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Eventos passados</string>
     <string name="helper_calendar_pastevent_question">A data do evento está no passado. Adicionar de qualquer maneira?</string>
@@ -2497,7 +2490,6 @@
     <string name="check_tiles_missing">Encontrados dados de encaminhamento em falta:</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
     <string name="tileupdate_info">Toque aqui para verificar por actualizações de ficheiros de encaminhamento transferidos. Toque longo para adiar.</string>
-    <string name="download_hillshading_title">Dados do sombreado da altitude em falta</string>
     <string name="check_hillshading_found">Já existem dados do sombreado da altitude</string>
     <string name="check_hillshading_missing">Encontrados dados do sombreado da altitude:</string>
     <string name="check_hillshading_unsupported">Aviso: Os dados do sombreado da altitude não estão disponíveis, pelo menos em parte, para a região seleccionada</string>
