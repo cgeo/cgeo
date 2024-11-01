@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo kann diesen Cache nicht darstellen. Ist es wirklich ein Cache?</string>
     <string name="err_detail_cache_find">c:geo konnte keinen Cache finden.</string>
     <string name="err_detail_cache_find_some">c:geo konnte diesen Cache nicht finden.</string>
-    <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
     <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
     <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
     <string name="err_detail_premium_log_found">Dieser Cache ist nur für Premium-Mitglieder von Geocaching.com sichtbar. Daher können die Cache-Informationen nicht angezeigt werden.\n\nFalls du diesen Cache aber bereits gefunden hast, kannst du ihn hier loggen.</string>
@@ -1736,8 +1735,6 @@
     <string name="map_showwp_visited">Besuchte</string>
     <string name="init_renderthemefolder_synctolocal">Designs synchronisieren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dies wird deine Designs in einen app-internen Ordner synchronisieren, um die Startgeschwindigkeit der Karte zu verbessern auf Kosten von etwas Gerätespeicher.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Dies wird den Inhalt des Kartendesign-Ordners kontinuierlich in einen app-internen Ordner synchronisieren, um den Dateizugriff zu beschleunigen. Stelle vor dem Aktivieren dieser Funktion sicher, dass dein Designordner nur deine Designs enthält, aber keine zusätzlichen (großen) Daten.\n\nDein Kartendesign-Ordner \'%1$s\' hat derzeit %2$s, %3$s und eine Größe von %4$s.\n\nMöchtest du die Ordnersynchronisierung aktivieren?</string>
     <string name="onetime_mapthemefixslow_title">Langsame Kartendarstellung beheben</string>
     <string name="onetime_mapthemefixslow_message">Die Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. Du kannst die Designs zippen oder synchronisieren, um schnellere Leistung zu erreichen und die Verzögerung beim Start der Karte zu reduzieren.</string>
     <string name="map_theme_select">Kartendesign wählen</string>
@@ -1882,10 +1879,6 @@
     <string name="do_auto">Auto</string>
     <string name="do_flat">Flach</string>
     <string name="do_upright">Aufrecht</string>
-    <!-- license -->
-    <string name="license">Lizenz</string>
-    <string name="license_show">Zeige Lizenz</string>
-    <string name="license_dismiss">Ablehnen</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Event in der Vergangenheit</string>
     <string name="helper_calendar_pastevent_question">Das Event-Datum liegt in der Vergangenheit. Trotzdem hinzufügen?</string>
@@ -2493,7 +2486,6 @@
     <string name="check_tiles_missing">Fehlende Routing-Daten gefunden:</string>
     <string name="check_tiles_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Routingdaten verfügbar</string>
     <string name="tileupdate_info">Tippe hier, um nach Updates für heruntergeladene Routingdaten zu suchen. Lange Tippen um später erinnert zu werden.</string>
-    <string name="download_hillshading_title">Fehlende Daten für Kartenschattierung</string>
     <string name="check_hillshading_found">Daten für Kartenschattierung bereits vorhanden</string>
     <string name="check_hillshading_missing">Fehlende Daten für Kartenschattierung:</string>
     <string name="check_hillshading_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Daten zur Kartenschattierung verfügbar</string>
