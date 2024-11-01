@@ -208,7 +208,6 @@
     <string name="err_detail_cache">c:geo no puede mostrar el caché que quieres. ¿Seguro que es un geocaché?</string>
     <string name="err_detail_cache_find">c:geo no puede encontrar ningún caché</string>
     <string name="err_detail_cache_find_some">c:geo no puede encontrar ese caché.</string>
-    <string name="err_detail_cache_find_any">c:geo no puede encontrar ningún caché.</string>
     <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este caché.</string>
     <string name="err_detail_still_working">Todavía hay otra tarea en ejecución.</string>
     <string name="err_detail_premium_log_found">Este caché sólo está disponible para miembros premium de geocaching.com. Por lo tanto, la información de caché no se puede mostrar.\n\nSin embargo, si ya has encontrado este caché, puedes registrarlo aquí.</string>
@@ -1370,8 +1369,6 @@
     <string name="map_showwp_visited">Visitado</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Esto sincronizará sus temas en una carpeta privada de la aplicación para mejorar el rendimiento del visor de mapas a costa de algún espacio de almacenamiento del dispositivo.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronización de la carpeta de temas</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Esto sincronizará continuamente el contenido de la carpeta Temas del Mapa en una carpeta de aplicación privada para un acceso más rápido a los archivos. Asegúrese de que la carpeta de temas sólo contiene sus temas y no hay datos adicionales (grandes) antes de activar esta función.\n\nLa carpeta de temas de tu mapa \'%1$s\' tiene actualmente %2$s, %3$s y un tamaño de %4$s.\n\n¿Desea activar la sincronización de carpetas?</string>
     <string name="onetime_mapthemefixslow_title">Corrige el procesamiento lento del tema del mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabajar con temas de mapas no comprimidos puede disminuir el rendimiento del visor de mapas. Puede comprimir o sincronizar sus temas para obtener un rendimiento más rápido y reducir el retraso al iniciar el mapa.</string>
     <string name="map_theme_select">Seleccionar tema del mapa</string>
@@ -1492,10 +1489,6 @@
     <string name="do_auto">Automático</string>
     <string name="do_flat">Plano</string>
     <string name="do_upright">Vertical</string>
-    <!-- license -->
-    <string name="license">Licencia</string>
-    <string name="license_show">Mostrar licencia</string>
-    <string name="license_dismiss">Descartar</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Evento pasado</string>
     <string name="helper_calendar_pastevent_question">La fecha del evento ya ha pasado. ¿Añadirlo de todos modos?</string>
