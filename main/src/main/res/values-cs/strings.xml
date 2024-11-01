@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo nemůže zobrazit požadovanou kešku. Jedná se skutečně o kešku?</string>
     <string name="err_detail_cache_find">c:geo nemůže najít kešku</string>
     <string name="err_detail_cache_find_some">c:geo nemůže najít tuto kešku.</string>
-    <string name="err_detail_cache_find_any">c:geo nemůže najít žádnou kešku.</string>
     <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto kešku.</string>
     <string name="err_detail_still_working">Stále probíhá zpracování jiné úlohy.</string>
     <string name="err_detail_premium_log_found">Tato keška je dostupná pouze pro prémiové členy geocaching.com. Informace o kešce proto nelze zobrazit.\n\nPokud jste však již tuto kešku nalezli, můžete ji zalogovat zde.</string>
@@ -1770,8 +1769,6 @@
     <string name="map_showwp_visited">Navštívené</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tím se synchronizují vaše motivy do soukromé složky aplikace, aby se zlepšil výkon otevírání prohlížeče map za cenu nějakého úložného prostoru zařízení.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tím se průběžně synchronizuje obsah složky s motivy do soukromé složky aplikace pro rychlejší přístup k souborům. Než povolíte tuto funkci, ujistěte se, že vaše složka s motivy obsahuje pouze vaše motivy, ale ne žádné další (velké) soubory.\n\nVaše složka s motivy \'%1$s\' má aktuálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
     <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
     <string name="map_theme_select">Vybrat motiv mapy</string>
@@ -1916,10 +1913,6 @@
     <string name="do_auto">Automaticky</string>
     <string name="do_flat">Plochý</string>
     <string name="do_upright">Vzpřímený</string>
-    <!-- license -->
-    <string name="license">Licence</string>
-    <string name="license_show">Zobrazit licenci</string>
-    <string name="license_dismiss">Zamítnout</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Uplynulá událost</string>
     <string name="helper_calendar_pastevent_question">Datum události již uplynulo. Chceš ji i přesto přidat?</string>
@@ -2557,7 +2550,6 @@
     <string name="check_tiles_missing">Nalezena chybějící směrovací data:</string>
     <string name="check_tiles_unsupported">Varování: Směrovací data nejsou pro vybranou oblast alespoň částečně k dispozici</string>
     <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
-    <string name="download_hillshading_title">Chybějící data stínování kopců</string>
     <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
     <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
     <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
