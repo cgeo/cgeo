@@ -1201,7 +1201,7 @@
     <string name="do_auto">自動</string>
     <string name="do_upright">右上</string>
     <!-- license -->
-    <string name="license">授權</string>
+    <string name="license">许可</string>
     <string name="license_show">顯示授權</string>
     <string name="license_dismiss">解散</string>
     <!-- helpers -->
