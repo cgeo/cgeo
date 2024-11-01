@@ -32,3 +32,6 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Opcja usuwania skrytki ze wszystkich list (= oznacz jako do usunięcia)
 - Naprawiono: Resetowanie współrzędnych nie było wykrywane przez c:geo dla niezapisanych skrytek
 - New: Allow clearing filter if no named filter is stored
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
