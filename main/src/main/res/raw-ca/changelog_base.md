@@ -32,3 +32,6 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
 - Correcció: restableix les coordenades no detectades per c:geo per a els catxés no desats
 - Nou: permet esborrar el filtre si no s'emmagatzema cap filtre amb nom
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
