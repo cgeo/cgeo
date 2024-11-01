@@ -1,4 +1,7 @@
 ##
+- Fix: Some issues with new event time detection
+
+##
 - Korrektur: Fehlende Event-Zeiten beim Download des Caches (Webseitenänderung)
 
 ##
