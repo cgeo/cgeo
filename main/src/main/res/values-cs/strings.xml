@@ -904,6 +904,19 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
+    <string name="init_date_format">Formát data</string>
+    <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
+    <string-array name="init_date_format_values">
+        <item>Podle systému</item>
+        <item>17.02.2024</item>
+        <item>17.02.24</item>
+        <item>02/17/2024</item>
+        <item>02/17/24</item>
+        <item>17/02/2024</item>
+        <item>17/02/24</item>
+        <item>2024-02-17</item>
+        <item>24-02-17</item>
+    </string-array>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
@@ -952,6 +965,7 @@
     <string name="init_units">Používat imperiální jednotky</string>
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_cachelists">Seznamy kešek</string>
+    <string name="init_localization">Lokalizace</string>
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
@@ -2641,6 +2655,8 @@
     <string name="wherigo_controls_mapzones_hint">Zobrazit zóny spuštěné hry na mapě</string>
     <string name="wherigo_controls_downloadcartridge_hint">Stáhnout cartridge (je potřebný cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Nahlásit problém s Wherigo Player</string>
+    <string name="wherigo_controls_cache_context">Kontext kešky</string>
+    <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
     <string name="wherigo_controls_resume_paused_dialog">Obnovit pozastavený dialog</string>
     <string name="wherigo_dialog_pause_info">Zrušili jste Wherigo dialog. Můžete jej obnovit v přehrávači Wherigo Player klepnutím na \"Obnovit pozastavený dialog\"</string>
     <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
@@ -2684,9 +2700,11 @@
     <string name="wherigo_confirm_delete_cartridge_title">Odstranit Wherigo cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Opravdu chcete odstranit cartridge  \"%1$s\" včetně %2$s uložených her?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Odstranit uloženou Wherigo hru</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Opravdu chcete smazat uloženou hru \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Přepsat slot s uloženou hru</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Opravdu chcete přepsat slot pro uložení hry uložený na \"%s\"?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Opravdu chcete odstranit uloženou hru \"%2$s\" z cartridge \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Uložení postupu ve hře Wherigo</string>
+    <string name="wherigo_save_game_message">Uložte svůj postup ve hře na cartridge \"%1$s\" do \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Zadejte název (volitelné)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Varování: pokračováním přepíšete existující uloženou hru z \"%1$s\"</string>
     <string name="wherigo_dialog_push_page">Strana %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo spouští Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" na vás čeká!</string>
