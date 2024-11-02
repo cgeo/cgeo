@@ -31,7 +31,7 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Opcja zarządzania pobranymi plikami (mapy, motywy, routing i dane cieniowania)
 - Nowość: Opcja usuwania skrytki ze wszystkich list (= oznacz jako do usunięcia)
 - Naprawiono: Resetowanie współrzędnych nie było wykrywane przez c:geo dla niezapisanych skrytek
-- New: Allow clearing filter if no named filter is stored
-- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
-- Change: Owned caches with offline logs show offline log marker
-- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- Nowość: Zezwalaj na czyszczenie filtra, jeśli żaden filtr nie jest zapisany
+- Naprawiono: Podczas rozpoczęcia pobierania pocket query do nowo utworzonej listy wyskokiwało okienko z informacją „Pusta lista”
+- Zmiana: Własne skrytki z logami offline pokazują znacznik logów offline
+- Nowość: Konfigurowalny format daty (np. dzienniki skrytek), zobacz [Ustawienia => Wygląd => Format daty](cgeo-settings://short_date_format)
