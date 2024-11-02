@@ -2611,8 +2611,6 @@
     <string name="wherigo_confirm_stop_running_game_message">Ein Spiel läuft derzeit für \"%s\". Möchtest du dieses Spiel beenden?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Wherigo-Cartridge löschen</string>
     <string name="wherigo_confirm_delete_cartridge_message">Willst du wirklich Cartridge \"%1$s\" inklusive %2$s Spielständen löschen?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Speicherplatz überschreiben</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Willst du wirklich den Speicherstand vom \"%s \" überschreiben?</string>
     <string name="wherigo_dialog_push_page">Seite %1$s / %2$s</string>
     <string name="wherigo_notification_service">Ein Wherigo-Spiel läuft in c:geo…</string>
     <string name="wherigo_notification_waiting">\"%s\" wartet auf dich!</string>
