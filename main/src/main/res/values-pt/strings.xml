@@ -2622,9 +2622,6 @@
     <string name="wherigo_confirm_delete_cartridge_title">Apagar Cartucho Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Quer realmente apagar o cartucho \"%1$s\" incluindo %2$s jogos guardados?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Apagar Jogo Guardado Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Deseja mesmo apagar o jogo guardado \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Sobrescrever espaço com jogo gravado</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Quer realmente substituir o jogo gravado no espaço em \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Página %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo está a executar um Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" está à sua espera!</string>
