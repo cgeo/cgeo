@@ -1,5 +1,5 @@
 ##
-- Fix: Some issues with new event time detection
+- Naprawiono: Niektóre problemy z wykrywaniem nowego czasu wydarzenia
 
 ##
 - Naprawiono: Brak czasu wydarzenia podczas pobierania skrytki (zmiany na stronie internetowej)
