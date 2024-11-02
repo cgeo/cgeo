@@ -2624,9 +2624,6 @@
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Realment voleu suprimir la partida desada \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Sobreescriu la partida desada</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Realment voleu anul·lar la partida desada a \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Pàgina %1$s/%2$s</string>
     <string name="wherigo_notification_service">c:geo està executant un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" t\'està esperant!</string>
