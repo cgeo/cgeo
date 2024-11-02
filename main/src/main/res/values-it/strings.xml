@@ -2622,9 +2622,6 @@
     <string name="wherigo_confirm_delete_cartridge_title">Elimina Cartuccia Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Vuoi davvero eliminare la cartuccia \"%1$s\" inclusi %2$s giochi salvati?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Elimina salvataggio Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Vuoi davvero eliminare il salvataggio \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Sovrascrivi slot di salvataggio</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Vuoi davvero sovrascrivere lo slot salvato in \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo sta eseguendo un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" ti sta aspettando!</string>
