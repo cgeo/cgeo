@@ -1,5 +1,5 @@
 ##
-- Fix: Some issues with new event time detection
+- Oprava: Některé problémy s detekcí času nového eventu
 
 ##
 - Oprava: Chybějící časy eventů při stahování kešky (změna webových stránek)
