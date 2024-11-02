@@ -892,6 +892,19 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
+    <string name="init_date_format">Datumnotatie</string>
+    <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
+    <string-array name="init_date_format_values">
+        <item>Systeemstandaard</item>
+        <item>17.02.2024</item>
+        <item>17.02.24</item>
+        <item>02/17/2024</item>
+        <item>02/17/24</item>
+        <item>17/02/2024</item>
+        <item>17/02/24</item>
+        <item>2024-02-17</item>
+        <item>24-02-17</item>
+    </string-array>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
@@ -940,6 +953,7 @@
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
     <string name="init_cachelists">Cache lijsten</string>
+    <string name="init_localization">Lokalisatie</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
@@ -2579,6 +2593,8 @@
     <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
     <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
     <string name="wherigo_controls_reportproblem_hint">Meld een probleem met de wherigo speler</string>
+    <string name="wherigo_controls_cache_context">Cache Context</string>
+    <string name="wherigo_controls_cache_link">Ga naar de cache details</string>
     <string name="wherigo_controls_resume_paused_dialog">Gespauzeerd dialoog hervatten</string>
     <string name="wherigo_dialog_pause_info">Je hebt een Wherigo Dialoog geannuleerd. Je kunt het in Wherigo Player hervatten door op \"Hervat gepauzeerde dialoog\" te klikken</string>
     <string name="wherigo_no_game_running">Er is momenteel geen wherigo spel actief</string>
@@ -2622,9 +2638,11 @@
     <string name="wherigo_confirm_delete_cartridge_title">Verwijder Wherigo Cartridge</string>
     <string name="wherigo_confirm_delete_cartridge_message">Wil je echt cartridge \"%1$s\" verwijderen inclusief %2$s opgeslagen spellen?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Verwijder Wherigo Opgeslagen spel</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Wil je echt opgeslagen spel \"%1$s \"verwijderen?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Savegame slot overschrijven</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Wil je echt het opgeslagen slot overschrijven op \"%s\"?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Wil je echt het opgeslagen spel \"%2$s\" van cartridge \"%1$s\" verwijderen?</string>
+    <string name="wherigo_save_game_title">Sla de voortgang van het Wherigo spel op</string>
+    <string name="wherigo_save_game_message">Sla je voortgang van het spel op voor cartridge \"%1$s\" in \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Voer naam in (optioneel)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Waarschuwing: door verder te gaan overschrijf je het bestaande opgeslagen spel van \"%1$s\"</string>
     <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo draait een Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" wacht op jou!</string>
