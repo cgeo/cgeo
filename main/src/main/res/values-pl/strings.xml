@@ -903,6 +903,19 @@
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
+    <string name="init_date_format">Format daty</string>
+    <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
+    <string-array name="init_date_format_values">
+        <item>Jak w systemie</item>
+        <item>17.02.2024</item>
+        <item>17.02.24</item>
+        <item>02/17/2024</item>
+        <item>02/17/24</item>
+        <item>17/02/2024</item>
+        <item>17/02/24</item>
+        <item>2024-02-17</item>
+        <item>24-02-17</item>
+    </string-array>
     <string name="init_showwaypoints">Pokaż punkty nawigacji</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
@@ -951,6 +964,7 @@
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_summary_units">Używaj angielskich jednostek miary\n(mile)</string>
     <string name="init_cachelists">Listy skrytek</string>
+    <string name="init_localization">Lokalizacja</string>
     <string name="init_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_summary_log_offline">Włącz logowanie offline\n(Nie pokazuj ekranu logowania online, nie wysyłaj logu online)</string>
     <string name="init_choose_list">Zapytaj o listę</string>
@@ -2683,9 +2697,6 @@
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Czy na pewno chcesz usunąć kartridż \"%1$s\", w tym zapisane gry (%2$s)?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Usuń zapisany stan gry Wherigo</string>
-    <string name="wherigo_confirm_delete_savegame_slot_message">Czy na pewno chcesz usunąć stan gry \"%1$s\"?</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_title">Nadpisz slot dla zapisu gry</string>
-    <string name="wherigo_confirm_overwrite_savegame_slot_message">Czy na pewno chcesz nadpisać slot zapisu gry w \"%s\"?</string>
     <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo uruchamia Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" czeka na Ciebie!</string>
