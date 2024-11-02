@@ -32,6 +32,6 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Možnost odstranit kešku ze všech seznamů (= označit ji jako ke smazání)
 - Oprava: Obnovení souřadnic nezjištěno pomocí c:geo pro neuložené kešky
 - Novinka: Povolit vymazání filtru, pokud není uložen žádný pojmenovaný filtr
-- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
-- Change: Owned caches with offline logs show offline log marker
-- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- Oprava: Vyskakující potvrzení "Prázdný seznam" při spuštění stahování v nově vytvořeném seznamu
+- Změna: Vlastní kešky s offline logy zobrazují značku offline logu
+- Novinka: Nastavitelný formát data (např. logy kešek), viz [Nastavení => Vzhled => Formát data](cgeo-settings://short_date_format)
