@@ -1,5 +1,7 @@
 ##
 - Oprava: Některé problémy s detekcí času nového eventu
+- Oprava: Pád při úpravě pole proměnné
+- Oprava: Chyba při importu GPX souboru (řešení)
 
 ##
 - Oprava: Chybějící časy eventů při stahování kešky (změna webových stránek)
