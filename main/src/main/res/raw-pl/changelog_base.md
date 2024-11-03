@@ -11,6 +11,7 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Wsparcie cieniowania dla map UnifiedMap VTM (wymaga połączenia online)
 - Naprawiono: Wyszukiwanie adresu nie uwzględniało trybu na żywo (UnifiedMap)
 - Zmiana: Funkcję „podążaj za moją lokalizacją” przeniesiono do mapy, dając więcej miejsca na przycisk „tryb na żywo”
+- Change: Make long-press pin more c:geo-like
 
 ### Szczegóły skrytki
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
@@ -21,6 +22,8 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Długie dotknięcie daty w logowaniu pobiera poprzednią datę dziennika
 - Naprawiono: Resetowanie skrytki do oryginalnych współrzędne nie usuwało flagi „zmienione współrzędne”
 - Nowość: Potwierdź nadpisanie dziennika w szybkim logu offline
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
@@ -35,3 +38,4 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Naprawiono: Podczas rozpoczęcia pobierania pocket query do nowo utworzonej listy wyskokiwało okienko z informacją „Pusta lista”
 - Zmiana: Własne skrytki z logami offline pokazują znacznik logów offline
 - Nowość: Konfigurowalny format daty (np. dzienniki skrytek), zobacz [Ustawienia => Wygląd => Format daty](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
