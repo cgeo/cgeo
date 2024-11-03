@@ -62,7 +62,11 @@ public class WherigoDownloader {
                 if (wherigoDownloadConsumer != null) {
                     wherigoDownloadConsumer.accept(result.first, result.second);
                 }
-            }, null);
+            }, error -> {
+                if (wherigoDownloadConsumer != null) {
+                    wherigoDownloadConsumer.accept("-", new StatusResult(StatusCode.COMMUNICATION_ERROR, "Error: " + error));
+                }
+            });
     }
 
     public void downloadWherigo(final String cguid, final Function<String, Uri> targetUriSupplier) {
@@ -70,21 +74,25 @@ public class WherigoDownloader {
     }
 
     private static Pair<String, StatusResult> downloadWherigoTask(final String cguid, final Function<String, Uri> targetUriSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
-        final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
-        final String username = cred.getUsernameRaw();
-        final String password = cred.getPasswordRaw();
+        try {
+            final Credentials cred = Settings.getCredentials(GCConnector.getInstance());
+            final String username = cred.getUsernameRaw();
+            final String password = cred.getPasswordRaw();
 
-        final Uri[] uriStorage = new Uri[1];
-        final Function<String, OutputStream> outputSupplier = name -> {
-            uriStorage[0] = targetUriSupplier.apply(name);
-            return ContentStorage.get().openForWrite(uriStorage[0]);
-        };
-        final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
-        if (!result.isOk() && uriStorage[0] != null) {
-            ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_download_delete_leftover_toast));
-            ContentStorage.get().delete(uriStorage[0]);
+            final Uri[] uriStorage = new Uri[1];
+            final Function<String, OutputStream> outputSupplier = name -> {
+                uriStorage[0] = targetUriSupplier.apply(name);
+                return ContentStorage.get().openForWrite(uriStorage[0]);
+            };
+            final StatusResult result = performDownload(username, password, cguid, outputSupplier, progress, cancelFlag);
+            if (!result.isOk() && uriStorage[0] != null) {
+                ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.wherigo_download_delete_leftover_toast));
+                ContentStorage.get().delete(uriStorage[0]);
+            }
+            return new Pair<>(cguid, result);
+        } catch (RuntimeException re) {
+            return new Pair<>(cguid, new StatusResult(StatusCode.COMMUNICATION_ERROR, "Unexpected problem: " + re));
         }
-        return new Pair<>(cguid, result);
     }
 
     public static StatusResult performDownload(final String username, final String password, final String cguid, final Function<String, OutputStream> outputSupplier, final Consumer<String> progress, final Supplier<Boolean> cancelFlag) {
