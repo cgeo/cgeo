@@ -103,6 +103,6 @@ public class CacheVariableList extends VariableList {
 
     private boolean recalculateWaypoints() {
         final Geocache cache = DataStore.loadCache(this.geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        return cache.recalculateWaypoints(this);
+        return cache != null && cache.recalculateWaypoints(this);
     }
 }
