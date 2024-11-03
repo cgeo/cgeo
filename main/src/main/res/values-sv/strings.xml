@@ -456,6 +456,8 @@
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
+    <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
+    <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
     <string name="caches_show_attributes">Visa attributöversikt</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
@@ -562,10 +564,12 @@
     <string name="cache_filter_storage_delete_title">Ta bort filter</string>
     <string name="cache_filter_storage_delete_message">Vill du verkligen ta bort den här filterkonfigurationen?</string>
     <string name="cache_filter_storage_select_clear_title">Välj filter eller rensa nuvarande filter</string>
+    <string name="cache_filter_storage_clear_title">Rensa aktuella filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Inga filter har sparats än.</string>
     <string name="cache_filter_storage_save_title">Spara filter med namn</string>
     <string name="cache_filter_storage_save_confirm_title">Överskrivning av filter</string>
     <string name="cache_filter_storage_save_confirm_message">Ett filter med namnet \'%s\' och annan konfiguration finns redan. Skriv över det?</string>
+    <string name="cache_filter_storage_clear_message">Vill du rensa det aktuella filtret?</string>
     <string name="cache_filter_stringfilter_matchcase">Matcha skiftläge</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Söktext</string>
     <string name="cache_filter_stringfilter_info">Med alternativet \"Pattern\", använd jokertecken * och ?. * representerar noll, ett eller flera tecken, ? representerar ett enda tecken. Till exempel matchar mönstret \"H?mburg*\" t.ex. \"Homburg\" eller \"Hamburg på natten\" men inte \"En dag i Hamburg\" eller \"Hahmburg\"</string>
@@ -2564,11 +2568,18 @@
     <!-- Wherigo Player -->
     <string name="wherigo_player">Wherigo Player</string>
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
+    <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
+    <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
+    <string name="wherigo_dialog_pause_info">Du avbröt en Wherigo-dialog. Du kan återuppta den i Wherigo Player genom att trycka på \"Återuppta pausad dialog\"</string>
+    <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
+    <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
     <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
