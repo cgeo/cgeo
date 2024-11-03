@@ -1,5 +1,7 @@
 ##
 - Naprawiono: Niektóre problemy z wykrywaniem nowego czasu wydarzenia
+- Fix: Crash when editing variable field
+- Fix: Crash on importing GPX file (workaround)
 
 ##
 - Naprawiono: Brak czasu wydarzenia podczas pobierania skrytki (zmiany na stronie internetowej)
