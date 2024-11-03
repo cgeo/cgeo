@@ -11,6 +11,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - New: Hillshading support for UnifiedMap VTM maps (requires online connection)
 - Fix: Address search not considering live mode (UnifiedMap)
 - Change: "follow my location" moved to the map, giving more space for "live mode" button
+- Change: Make long-press pin more c:geo-like
 
 ### 캐시 상세정보
 - New: Not yet existing variables used in projection get created in variable list
@@ -21,6 +22,8 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - New: Long tap on date in logging retrieves previous log date
 - Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 - New: Confirm overwriting log on quick offline log
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### 일반
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
@@ -35,3 +38,4 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
