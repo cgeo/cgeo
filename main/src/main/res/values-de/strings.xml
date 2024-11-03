@@ -2632,6 +2632,8 @@
     <string name="close">Schließen</string>
     <string name="delete">Löschen</string>
     <string name="play">Spielen</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Fortsetzen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
