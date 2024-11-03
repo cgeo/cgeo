@@ -11,6 +11,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: suport d'ombrejat per als mapes UnifiedMap VTM (requereix connexió en línia)
 - Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
 - Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
+- Change: Make long-press pin more c:geo-like
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -21,6 +22,8 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: un toc llarg a la data al registre recupera la data del registre anterior
 - Solució: el restabliment del catxé a les coordenades originals no elimina la marca "coordenades canviades"
 - Nou: confirmeu la sobreescritura del registre al registre ràpid fora de línia
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -35,3 +38,4 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
