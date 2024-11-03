@@ -906,17 +906,6 @@
     <string name="init_use_default_language">Použít výchozí jazyk</string>
     <string name="init_date_format">Formát data</string>
     <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
-    <string-array name="init_date_format_values">
-        <item>Podle systému</item>
-        <item>17.02.2024</item>
-        <item>17.02.24</item>
-        <item>02/17/2024</item>
-        <item>02/17/24</item>
-        <item>17/02/2024</item>
-        <item>17/02/24</item>
-        <item>2024-02-17</item>
-        <item>24-02-17</item>
-    </string-array>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
