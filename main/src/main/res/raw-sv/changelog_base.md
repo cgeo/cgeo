@@ -11,6 +11,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
 - Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
 - Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
+- Change: Make long-press pin more c:geo-like
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -21,6 +22,8 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
 - Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
 - New: Confirm overwriting log on quick offline log
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
@@ -35,3 +38,4 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
