@@ -10,6 +10,18 @@
         <item>DDD°MM\'SS.SSS\"</item>
     </string-array>
 
+    <string-array translatable="false" name="init_date_format_values">
+        <item>@string/system_default</item>
+        <item>17.02.2024</item>
+        <item>17.02.24</item>
+        <item>02/17/2024</item>
+        <item>02/17/24</item>
+        <item>17/02/2024</item>
+        <item>17/02/24</item>
+        <item>2024-02-17</item>
+        <item>24-02-17</item>
+    </string-array>
+
     <!-- distance units -->
     <string-array translatable="false" name="distance_units">
         <item>@string/unit_m</item>

@@ -1014,17 +1014,7 @@
     <string name="init_use_default_language">Use default language</string>
     <string name="init_date_format">Date format</string>
     <string name="init_date_format_description">Format to use for short dates, e.g. in log view</string>
-    <string-array name="init_date_format_values">
-        <item>System Default</item>
-        <item>17.02.2024</item>
-        <item>17.02.24</item>
-        <item>02/17/2024</item>
-        <item>02/17/24</item>
-        <item>17/02/2024</item>
-        <item>17/02/24</item>
-        <item>2024-02-17</item>
-        <item>24-02-17</item>
-    </string-array>
+    <string name="system_default">System Default</string>
     <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
