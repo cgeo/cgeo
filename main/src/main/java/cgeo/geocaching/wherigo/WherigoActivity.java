@@ -35,7 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -124,9 +123,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         if (getIntent().getExtras() != null) {
             final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
-            final String geocode = getIntent().getExtras().getString(PARAM_WHERIGO_GEOCODE);
             if (guid != null) {
-                handleCGuidInput(guid, geocode);
+                handleCGuidInput(guid);
             }
         }
     }
@@ -143,7 +141,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         if (menuItem == R.id.menu_show_cartridge) {
             final WherigoCartridgeInfo info = WherigoGame.get().getCartridgeInfo();
             if (info != null) {
-                WherigoDialogManager.get().display(new WherigoCartridgeDialogProvider(info, true));
+                WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(info, true));
             } else {
                 SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_player))
                         .setMessage(TextParam.id(R.string.wherigo_no_game_running)).show();
@@ -228,19 +226,17 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             });
     }
 
-    private void handleCGuidInput(@NonNull final String cguid, @Nullable final String geocode) {
+    private void handleCGuidInput(@NonNull final String cguid) {
         final WherigoCartridgeInfo cguidCartridge = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (cguidCartridge == null) {
             SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_title))
                 .setMessage(TextParam.id(R.string.wherigo_download_message, cguid))
                 .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                 .confirm(() -> {
-                    if (geocode != null) {
-                        WherigoGame.get().setContextGeocode(geocode);
-                    }
                     wherigoDownloader.downloadWherigo(cguid, name -> ContentStorage.get().create(PersistableFolder.WHERIGO, name));
                 });
         } else {
+            final String geocode = getStartingGeocode();
             if (geocode != null) {
                 WherigoGame.get().setContextGeocode(geocode);
             }
@@ -248,10 +244,19 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         }
     }
 
+    private String getStartingGeocode() {
+        final Intent intent = getIntent();
+        return intent == null || intent.getExtras() == null ? null : intent.getExtras().getString(PARAM_WHERIGO_GEOCODE);
+    }
+
     private void handleDownloadResult(final String cguid, final StatusResult result) {
         final WherigoCartridgeInfo cartridgeInfo = WherigoCartridgeInfo.getCartridgeForCGuid(cguid);
         if (result.isOk() && cartridgeInfo != null) {
             ActivityMixin.showToast(this, R.string.wherigo_download_successful_title);
+            final String geocode = getStartingGeocode();
+            if (geocode != null) {
+                WherigoGame.get().setContextGeocode(geocode);
+            }
             WherigoDialogManager.displayDirect(this, new WherigoCartridgeDialogProvider(cartridgeInfo, false));
         } else {
             SimpleDialog.of(this).setTitle(TextParam.id(R.string.wherigo_download_failed_title))
