@@ -19,6 +19,7 @@
                 android:id="@+id/headerInformation"
                 android:textSize="@dimen/textSize_headingSecondary"
                 android:visibility="gone"
+                android:textIsSelectable="true"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 

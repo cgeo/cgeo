@@ -18,6 +18,7 @@
             <!-- header infos -->
             <TextView
                 android:id="@+id/headerInformation"
+                android:textIsSelectable="true"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" />
 

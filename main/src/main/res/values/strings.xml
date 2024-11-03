@@ -2964,10 +2964,11 @@
     <string name="wherigo_download_progress_started">Download started</string>
     <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
 
-    <string name="wherigo_error_title">Wherigo Error</string>
-    <string name="wherigo_error_game_noerror">No error reported by game</string>
-    <string name="wherigo_error_game_error">Error reported by game: %1$s</string>
-    <string name="wherigo_error_email">Problem playing a Wherigo\n\nError: %1$s\n\nWherigo Info: %2$s\n\nAdditional Info: %3$s</string>
+    <string name="wherigo_error_title">Wherigo Problem report</string>
+    <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine</string>
+    <string name="wherigo_error_game_error">Error in Wherigo Engine: %1$s</string>
+    <string name="wherigo_error_game_error_addinfo">You may try to continue your running game despite of this error.\n\nIf possible, please report the error to our support team via e-mail.</string>
+    <string name="wherigo_error_email">Wherigo Problem report\n\nError: %1$s\n\nWherigo Info: %2$s</string>
 
     <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>
