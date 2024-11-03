@@ -905,17 +905,6 @@
     <string name="init_use_default_language">Użyj domyślnego języka</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
-    <string-array name="init_date_format_values">
-        <item>Jak w systemie</item>
-        <item>17.02.2024</item>
-        <item>17.02.24</item>
-        <item>02/17/2024</item>
-        <item>02/17/24</item>
-        <item>17/02/2024</item>
-        <item>17/02/24</item>
-        <item>2024-02-17</item>
-        <item>24-02-17</item>
-    </string-array>
     <string name="init_showwaypoints">Pokaż punkty nawigacji</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
