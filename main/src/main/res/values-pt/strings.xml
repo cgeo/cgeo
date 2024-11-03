@@ -892,17 +892,6 @@
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
-    <string-array name="init_date_format_values">
-        <item>System Default</item>
-        <item>17.02.2024</item>
-        <item>17.02.24</item>
-        <item>02/17/2024</item>
-        <item>02/17/24</item>
-        <item>17/02/2024</item>
-        <item>17/02/24</item>
-        <item>2024-02-17</item>
-        <item>24-02-17</item>
-    </string-array>
     <string name="init_showwaypoints">Mostrar pontos adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
