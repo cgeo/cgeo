@@ -1,5 +1,7 @@
 ##
-- Fix: Some issues with new event time detection
+- Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
+- Korrektur: Absturz bei der Bearbeitung des Variablenfeldes
+- Fix: Crash on importing GPX file (workaround)
 
 ##
 - Korrektur: Fehlende Event-Zeiten beim Download des Caches (Webseitenänderung)
