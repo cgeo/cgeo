@@ -1,6 +1,6 @@
 ##
-- Fix: Some issues with new event time detection
-- Fix: Crash when editing variable field
+- Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
+- Korrektur: Absturz bei der Bearbeitung des Variablenfeldes
 - Fix: Crash on importing GPX file (workaround)
 
 ##
