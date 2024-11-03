@@ -11,6 +11,7 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Suporte de sombreado da altitude para o Mapa Unificado dos mapas VTM (requer ligação online)
 - Correcção: Pesquisa por endereço não é tida em conta no mapa em tempo real (Mapa Unificado)
 - Alteração: "Seguir a minha localização" foi movido para o mapa, dando mais espaço para o botão "mapa em tempo real"
+- Change: Make long-press pin more c:geo-like
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
@@ -21,6 +22,8 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Toque longo na data do registo recupera a data do registo anterior
 - Correção: Redefinir cache para as coordenadas originais não removia a indicação "coordenadas alteradas"
 - Novo: Confirmar sobrescrever registo no registo rápido offline
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### Geral
 - Alteração: Usar altitude acima do nível médio do mar (se disponível, Android 14+ apenas)
@@ -35,3 +38,4 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
