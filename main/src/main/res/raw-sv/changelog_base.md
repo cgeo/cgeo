@@ -21,7 +21,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Fix: Handling of projections in waypoints and personal notes
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
 - Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
-- New: Confirm overwriting log on quick offline log
+- Nytt: Bekräfta att skriva över loggen på snabb offline-logg
 - New: Update cache status on sending a log
 - New: Colored HTML source view of cache details
 
@@ -34,7 +34,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
 - Nyhet: Alternativ för att ta bort en cache från alla listor (= markera den att raderas)
 - Fix: Återställda koordinater upptäcks inte av c:geo för osparade cacher
-- New: Allow clearing filter if no named filter is stored
+- Nytt: Tillåt rensning av filter om inget namngivet filter lagras
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
