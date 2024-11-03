@@ -1,5 +1,7 @@
 ##
 - Oplossing: Enkele problemen met nieuwe event tijd detectie
+- Fix: Crash when editing variable field
+- Fix: Crash on importing GPX file (workaround)
 
 ##
 - Oplossing: Ontbrekende event tijden tijdens het downloaden van de cache (websitewijziging)
