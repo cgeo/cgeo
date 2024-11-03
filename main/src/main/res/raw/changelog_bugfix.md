@@ -1,5 +1,6 @@
 ##
 - Fix: Some issues with new event time detection
+- Fix: Crash when editing variable field
 
 ##
 - Fix: Missing event times on cache download (website change)
