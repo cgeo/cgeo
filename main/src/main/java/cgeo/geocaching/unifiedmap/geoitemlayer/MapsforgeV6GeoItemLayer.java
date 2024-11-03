@@ -150,11 +150,13 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
             return null;
         }
 
-        return new Marker(
+        final Marker newMarker = new Marker(
                 latLong(point),
                 AndroidGraphicFactory.convertToBitmap(new BitmapDrawable(CgeoApplication.getInstance().getResources(), bitmap)),
                 (int) ((-icon.getXAnchor() + 0.5f) * bitmap.getWidth()),
                 (int) ((-icon.getYAnchor() + 0.5f) * bitmap.getHeight()));
+        newMarker.setBillboard(!icon.isFlat());
+        return newMarker;
     }
 
     private static Paint createPaint(@ColorInt final int color) {
