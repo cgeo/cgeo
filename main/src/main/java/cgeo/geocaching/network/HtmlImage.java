@@ -1,7 +1,6 @@
 package cgeo.geocaching.network;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
@@ -15,6 +14,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.RxUtils.ObservableCache;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -341,7 +341,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     public static BitmapDrawable getErrorImage(final Resources resources, final boolean nonTransparent) {
         if (nonTransparent) {
-            return new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded));
+            return HtmlUtils.IMAGE_NOT_LOADED;
         }
         return ImageUtils.getTransparent1x1Drawable(resources);
     }

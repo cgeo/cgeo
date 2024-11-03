@@ -92,6 +92,7 @@ import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -194,17 +195,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
     private static final String EXTRA_EDIT_PERSONALNOTE = "cgeo.geocaching.extra.cachedetail.editPersonalNote";
 
-    /**
-     * Minimal contrast ratio. If description:background contrast ratio is less than this value
-     * for some string, foreground color will be removed and gray background will be used
-     * in order to highlight the string
-     *
-     * @see <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">W3 Minimum Contrast</a>
-     **/
-    private static final float CONTRAST_THRESHOLD = 4.5f;
-
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
     public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
+    public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
+
 
     // Store Geocode here, as 'cache' is loaded Async.
     private String geocode;
@@ -355,6 +349,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 savedInstanceState != null ?
                         savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                         Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_DESCRIPTION_STYLE)) {
+            this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
+        }
 
         imageGalleryState = savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_IMAGE_GALLERY);
 
@@ -415,6 +412,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         super.onSaveInstanceState(outState);
         outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
         outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
+        outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -1909,7 +1907,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     handleImageClick(activity, cache, description);
                     //display various fixes
                     HtmlUtils.fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
-                    addColorContrast(activity, description);
                     fixOldGeocheckerLink(activity, cache, description);
                 }
 
@@ -1961,11 +1958,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
             HtmlUtils.replaceUrlClickAction(spannable, gcLinkInfo, span -> openGeochecker(activity, cache));
         }
-    }
-
-    private static void addColorContrast(final Context context, final Spannable spannable) {
-        final int bgColor = context.getResources().getColor(R.color.colorBackground);
-        HtmlUtils.addColorContrast(spannable, bgColor, CONTRAST_THRESHOLD);
     }
 
     protected void saveAndNotify() {
