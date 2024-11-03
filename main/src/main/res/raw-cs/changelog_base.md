@@ -23,7 +23,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Oprava: Obnovení kešky na původní souřadnice neodstraní příznak “změněné souřadnice“
 - Novinka: Potvrzení přepsání logu v rychlém offline logu
 - Novinka: Aktualizace stavu kešky při odeslání logu
-- New: Colored HTML source view of cache details
+- Novinka: Barevné zobrazení HTML zdroje s podrobnostmi o kešce
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
