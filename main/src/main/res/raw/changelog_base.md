@@ -24,6 +24,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
 - New: Confirm overwriting log on quick offline log
 - New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### General
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
