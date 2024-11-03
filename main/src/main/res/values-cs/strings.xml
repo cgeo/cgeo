@@ -1607,7 +1607,9 @@
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
     <!-- html styles -->
     <string name="html_style_default">Výchozí</string>
+    <string name="html_style_default_no_contrast_fix">Výchozí bez opravy kontrastu</string>
     <string name="html_style_monochrome">Monochromatický</string>
+    <string name="html_style_source_formatted">HTML zdroj formátován</string>
     <string name="html_style_source">Zdroj HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
