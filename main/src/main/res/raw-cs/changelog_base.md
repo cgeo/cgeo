@@ -11,6 +11,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
 - Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
 - Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
+- Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -21,6 +22,8 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Dlouhým klepnutím na datum v logu se načte předchozí datum logu
 - Oprava: Obnovení kešky na původní souřadnice neodstraní příznak “změněné souřadnice“
 - Novinka: Potvrzení přepsání logu v rychlém offline logu
+- Novinka: Aktualizace stavu kešky při odeslání logu
+- New: Colored HTML source view of cache details
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
@@ -35,3 +38,4 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Oprava: Vyskakující potvrzení "Prázdný seznam" při spuštění stahování v nově vytvořeném seznamu
 - Změna: Vlastní kešky s offline logy zobrazují značku offline logu
 - Novinka: Nastavitelný formát data (např. logy kešek), viz [Nastavení => Vzhled => Formát data](cgeo-settings://short_date_format)
+- Novinka: Přesměrování informací o konektorech na domovské obrazovce na obrazovku předvoleb konkrétního konektoru
