@@ -11,7 +11,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Kartenschattierung für UnifiedMap VTM Karten (erfordert Online-Verbindung)
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
 - Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
-- Change: Make long-press pin more c:geo-like
+- Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -21,8 +21,8 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Handhabung von Projektionen in Wegpunkten und persönlichen Notizen
 - Neu: Langes Tippen auf das Datum beim Loggen stellt das vorherige Logdatum ein
 - Korrektur: Zurücksetzen des Caches auf die ursprünglichen Koordinaten entfernt das "geänderte Koordinaten" Flag nicht
-- New: Confirm overwriting log on quick offline log
-- New: Update cache status on sending a log
+- Neu: Überschreiben des Logs beim Schnellen Offline-Log bestätigen
+- Neu: Aktualisieren des Cache-Status beim Senden eines Logs
 - New: Colored HTML source view of cache details
 
 ### Allgemein
@@ -36,6 +36,6 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
 - New: Allow clearing filter if no named filter is stored
 - Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
-- Change: Owned caches with offline logs show offline log marker
-- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- Änderung: Eigene Caches mit Offline-Logs zeigen Offline-Log-Marker
+- Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
 - New: Point connector info on home screen to connector-specific preference screen
