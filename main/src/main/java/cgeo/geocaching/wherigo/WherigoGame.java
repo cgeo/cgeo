@@ -435,7 +435,7 @@ public class WherigoGame implements UI {
         if (!TextUtils.containsHtml(text)) {
             return text;
         }
-        return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable, false).first;
+        return HtmlUtils.renderHtml(text, htmlImageGetter::getDrawable).first;
     }
 
     public boolean isDebugModeForCartridge() {

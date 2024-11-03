@@ -635,7 +635,7 @@ public final class TextUtils {
         return sp;
     }
 
-    public static String annotateSpans(final CharSequence cs, final Func1<Object, Pair<String, String>> annotator) {
+    public static String annotateSpans(final CharSequence cs, @Nullable final Func1<Object, Pair<String, String>> annotator) {
         if (!(cs instanceof Spanned) || cs.length() == 0) {
             return cs.toString();
         }
@@ -646,10 +646,11 @@ public final class TextUtils {
 
         final SortedMap<Integer, String> data = new TreeMap<>((i1, i2) -> -i1.compareTo(i2));
         for (Object span : spans) {
+            final Pair<String, String> markers = annotator == null ? null : annotator.call(span);
             final int start = ((Spanned) cs).getSpanStart(span);
-            data.put(start, (data.containsKey(start) ? data.get(start) : "") + annotator.call(span).first);
+            data.put(start, (data.containsKey(start) ? data.get(start) : "") + (markers == null || markers.first == null ? "" : markers.first));
             final int end = ((Spanned) cs).getSpanEnd(span);
-            data.put(end, annotator.call(span).second + (data.containsKey(end) ? data.get(end) : ""));
+            data.put(end, (markers == null || markers.second == null ? "" : markers.second) + (data.containsKey(end) ? data.get(end) : ""));
         }
 
         String result = cs.toString();

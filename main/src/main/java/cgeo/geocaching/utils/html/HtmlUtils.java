@@ -1,10 +1,18 @@
 package cgeo.geocaching.utils.html;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.ColorUtils;
+import cgeo.geocaching.utils.TextUtils;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -12,11 +20,15 @@ import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
+import android.text.style.StyleSpan;
+import android.text.style.TypefaceSpan;
 import android.text.style.URLSpan;
 import android.util.Pair;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -27,8 +39,21 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 public final class HtmlUtils {
+
+    public static final BitmapDrawable IMAGE_NOT_LOADED = CgeoApplication.getInstance() == null ? null :
+            new BitmapDrawable(CgeoApplication.getInstance().getResources(), BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.image_not_loaded));
+
+    public static final Function<String, Drawable> DUMMY_IMAGE_GETTER = url -> IMAGE_NOT_LOADED;
+
+    @ColorInt public static final int COLOR_PURPLE = 0xFF800080;
+    @ColorInt public static final int COLOR_BROWN = 0xFFA52A2A;
+    @ColorInt public static final int COLOR_LTBLUE = 0xFFADD8E6;
+    @ColorInt public static final int COLOR_REDDISH = 0xFFFF5733;
+
 
     private HtmlUtils() {
         // utility class
@@ -200,19 +225,207 @@ public final class HtmlUtils {
     }
 
     /** makes text in spannable of monochrome color (by removing all foreground and background colors) */
-    private static void makeMonochrome(final Spannable spannable) {
+    public static void makeMonochrome(final Spannable spannable) {
         replaceSpans(spannable, ForegroundColorSpan.class, null);
         replaceSpans(spannable, BackgroundColorSpan.class, null);
     }
 
-    public static Pair<Spannable, Boolean> renderHtml(final String html, final Function<String, Drawable> imageGetter, final boolean makeMonochrome) {
+    public static Pair<Spannable, Boolean> renderHtml(final String html, final Function<String, Drawable> imageGetter) {
         final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
         final SpannableStringBuilder description = new SpannableStringBuilder(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY, imageGetter::apply, unknownTagsHandler));
-        if (makeMonochrome) {
-            makeMonochrome(description);
-        }
         return new Pair<>(description, unknownTagsHandler.isProblematicDetected());
 
+    }
+
+    /** returns formatted HTML data (syntax-corrected as well as pretty-printed and colorized according to input parameters) */
+    public static Spannable getFormattedHtml(final String html, final boolean prettyPrint, final boolean colorize, final boolean isLightMode) {
+        final Document document = Jsoup.parse(html);
+        if (prettyPrint) {
+            document.outputSettings().prettyPrint(true).indentAmount(2).outline(true);
+        } else {
+            document.outputSettings().prettyPrint(false).outline(false);
+        }
+        if (!colorize) {
+            return new SpannableString(document.body().html());
+        }
+        final HtmlTokenAppender ca = new HtmlTokenAppender();
+        document.body().html(ca);
+        final SpannableStringBuilder ssb = new SpannableStringBuilder();
+        ssb.append(ca.textBuilder.toString());
+        for (TokenData sd : ca.foundTokens) {
+            sd.applyTo(ssb, isLightMode);
+        }
+        TextUtils.setSpan(ssb, new TypefaceSpan("monospace"));
+        return ssb;
+    }
+
+    /** Data for a found HTML token */
+    private static class TokenData {
+        public final int start;
+        public final int end;
+        public final Token token;
+
+        TokenData(final int start, final int end, final Token span) {
+            this.start = start;
+            this.end = end;
+            this.token = span;
+        }
+
+        public void applyTo(final Spannable span, final boolean isLightMode) {
+            this.token.setSpan(span, start, end, isLightMode);
+        }
+    }
+
+    /** HTML tokens relevant for formatting */
+    private enum Token {
+        TAG(Typeface.BOLD, Color.BLUE, COLOR_PURPLE),
+        TAG_END(Typeface.BOLD, Color.BLUE, COLOR_PURPLE),
+        COMMENT(Typeface.NORMAL, Color.GREEN, Color.GREEN),
+        ATTRIBUTE(Typeface.NORMAL, COLOR_LTBLUE, COLOR_BROWN),
+        ATTRIBUTE_END(Typeface.NORMAL, COLOR_LTBLUE, COLOR_BROWN),
+        ATTRIBUTE_VALUE(Typeface.NORMAL, COLOR_REDDISH, Color.BLUE);
+
+        private final int style;
+        private final int colorDark;
+        private final int colorLight;
+
+        Token(final int style, final int colorDark, final int colorLight) {
+            this.style = style;
+            this.colorDark = colorDark;
+            this.colorLight = colorLight;
+        }
+
+        void setSpan(final Spannable span, final int start, final int end, final boolean isLightMode) {
+            final int color = isLightMode ? this.colorLight : this.colorDark;
+            if (color != 0) {
+                span.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            if (this.style >= Typeface.NORMAL) {
+                span.setSpan(new StyleSpan(this.style), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+    }
+
+    /** Appender which scans and tokenizes certain HTML tokens (for later formatting) */
+    private static class HtmlTokenAppender implements Appendable {
+
+        public final StringBuilder textBuilder = new StringBuilder();
+        public final List<TokenData> foundTokens = new ArrayList<>();
+
+        private int tokenStart = -1;
+        private Token token = null;
+
+        private char previousChar = ' ';
+        private char previousPreviousChar = ' ';
+
+        @NonNull
+        @Override
+        public Appendable append(@Nullable final CharSequence csq) {
+            if (csq != null) {
+                final int len = textBuilder.length();
+                final int csqLen = csq.length();
+                for (int i = 0; i < csqLen; i++) {
+                    scan(csq.charAt(i), len + i);
+                }
+            }
+            textBuilder.append(csq);
+            return this;
+        }
+
+        @NonNull
+        @Override
+        public Appendable append(@Nullable final CharSequence csq, final int start, final int end) {
+            if (csq != null) {
+                final int len = textBuilder.length();
+                for (int i = start; i < end; i++) {
+                    scan(csq.charAt(i), len + i);
+                }
+            }
+            textBuilder.append(csq, start, end);
+            return this;
+        }
+
+        @NonNull
+        @Override
+        public Appendable append(final char c) {
+            scan(c, textBuilder.length());
+            textBuilder.append(c);
+            return this;
+        }
+
+        private void scan(final char c, final int pos) {
+            switch (c) {
+                case '<':
+                    //is considere normal char inside comments and attribute values
+                    if (!tokenOneOf(Token.ATTRIBUTE_VALUE, Token.COMMENT)) {
+                        startToken(Token.TAG, pos);
+                    }
+                    break;
+                case '!':
+                    if (token == Token.TAG && previousChar == '<') {
+                        token = Token.COMMENT;
+                    }
+                    break;
+                case '/':
+                    if (tokenOneOf(Token.ATTRIBUTE, Token.ATTRIBUTE_END)) {
+                        endToken(pos);
+                        startToken(Token.TAG_END, pos);
+                    }
+                    break;
+                case '>':
+                    final boolean commentEndCandidate = ("" + previousPreviousChar + previousChar).equals("--");
+                    if (token == Token.ATTRIBUTE) {
+                        endToken(pos);
+                        //add a one-char-TAG_END token
+                        startToken(Token.TAG_END, pos);
+                        endToken(pos + 1);
+                    } else if (tokenOneOf(Token.TAG, Token.TAG_END) || (token == Token.COMMENT) && commentEndCandidate) {
+                        endToken(pos + 1);
+                    }
+                    break;
+                case ' ':
+                    if (tokenOneOf(Token.TAG)) {
+                        endToken(pos);
+                        startToken(Token.ATTRIBUTE, pos + 1);
+                    }
+                    break;
+                case '\"':
+                    if (tokenOneOf(Token.ATTRIBUTE)) {
+                        endToken(pos + 1);
+                        startToken(Token.ATTRIBUTE_VALUE, pos + 1);
+                    } else if (tokenOneOf(Token.ATTRIBUTE_VALUE)) {
+                        endToken(pos);
+                        startToken(Token.ATTRIBUTE, pos);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            previousPreviousChar = previousChar;
+            previousChar = c;
+        }
+
+        private boolean tokenOneOf(final Token ... tokens) {
+            for (Token t : tokens) {
+                if (this.token == t) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void startToken(final Token token, final int tokenStart) {
+            this.token = token;
+            this.tokenStart = tokenStart;
+        }
+
+        private void endToken(final int tokenEnd) {
+            if (token != null && tokenStart >= 0 && tokenStart <= tokenEnd) {
+                foundTokens.add(new TokenData(tokenStart, tokenEnd, token));
+                token = null;
+                tokenStart = -1;
+            }
+        }
     }
 
 }
