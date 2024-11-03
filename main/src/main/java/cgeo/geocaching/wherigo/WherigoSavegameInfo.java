@@ -134,6 +134,12 @@ public class WherigoSavegameInfo {
         return list;
     }
 
+    public static List<WherigoSavegameInfo> getAllSaveFiles(final ContentStorage.FileInformation cartridgeFileInfo) {
+        final List<WherigoSavegameInfo> list = new ArrayList<>(getAvailableSaveFiles(cartridgeFileInfo));
+        list.sort(WherigoSavegameInfo.DEFAULT_COMPARATOR);
+        return list;
+    }
+
     public static List<WherigoSavegameInfo> getSavegameSlots(final ContentStorage.FileInformation cartridgeFileInfo) {
         final int[] maxExistingSlot = new int[] {0};
         final List<WherigoSavegameInfo> list = getAvailableSaveFiles(cartridgeFileInfo).stream()
@@ -238,10 +244,14 @@ public class WherigoSavegameInfo {
         return Formatter.formatDateTime(saveDate.getTime());
     }
 
+    public String toShortString() {
+        return nameId + "-" + nameCustom + ":" + (saveDate == null ? "-" : Formatter.formatShortDateTime(saveDate.getTime()));
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return "Savegame: " + nameId + "-" + nameCustom + "/File:" + fileInfo;
+        return "Savegame:" + nameId + "-" + nameCustom + "/File:" + fileInfo;
     }
 
 }

@@ -129,7 +129,7 @@ public class WherigoCartridgeInfo {
     @NonNull
     @Override
     public String toString() {
-        return "CGuid:" + cguid + "/File:" + fileInfo;
+        return "CGuid:" + cguid + ", File:[" + fileInfo + "]";
     }
 
     public static Folder getCartridgeFolder() {

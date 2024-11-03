@@ -13,6 +13,7 @@
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textIsSelectable="true"
         android:paddingHorizontal="24dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp" />

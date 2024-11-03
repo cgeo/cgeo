@@ -31,9 +31,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -55,6 +58,11 @@ public class WherigoGame implements UI {
 
     private static final String LOG_PRAEFIX = "WHERIGOGAME: ";
 
+    private static final Set<String> OPENWIG_ENGINE_ERROR_PREFIXES = new HashSet<>(Arrays.asList(
+        "You hit a bug! Please report this to whereyougo@cgeo.org with a screenshot of this message.".toLowerCase(Locale.ROOT),
+        "You hit a bug! please report at openwig.googlecode.com and i'll fix it for you!".toLowerCase(Locale.ROOT)
+    ));
+
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
         ll -> new Geopoint(ll.latitude, ll.longitude)
@@ -65,9 +73,8 @@ public class WherigoGame implements UI {
     }
 
     //filled overall (independent from current game)
-    private String contextGeocode;
-    private String contextGeocacheName;
     private String lastPlayedCGuid;
+    private String lastSetContextGeocode;
 
     //filled on new/loadGame
     private CartridgeFile cartridgeFile;
@@ -76,6 +83,8 @@ public class WherigoGame implements UI {
     private File cartridgeCacheDir;
     private HtmlImage htmlImageGetter;
     private String lastError;
+    private String contextGeocode;
+    private String contextGeocacheName;
 
     //filled on game start
     private boolean isPlaying = false;
@@ -131,16 +140,21 @@ public class WherigoGame implements UI {
             final boolean loadGame = saveGame != null && saveGame.isExistingSavefile();
             if (loadGame) {
                 WherigoSaveFileHandler.get().initLoad(saveGame);
-                if (saveGame.geocode != null) {
-                    setContextGeocode(saveGame.geocode);
-                }
             }
+
             this.cartridgeFile = WherigoUtils.readCartridge(cartridgeFileInfo.uri);
             this.cartridgeInfo = new WherigoCartridgeInfo(cartridgeFileInfo, true, false);
             setCGuidAndDependentThings(this.cartridgeInfo.getCGuid());
             this.lastError = null;
-            this.lastPlayedCGuid = getCGuid();
 
+            //try to restore context geocache
+            if (loadGame && saveGame.geocode != null) {
+                setContextGeocode(saveGame.geocode);
+            } else if (Objects.equals(lastPlayedCGuid, getCGuid()) && this.lastSetContextGeocode != null) {
+                setContextGeocode(this.lastSetContextGeocode);
+            }
+
+            this.lastPlayedCGuid = getCGuid();
 
             final Engine engine = Engine.newInstance(this.cartridgeFile, null, this, WherigoLocationProvider.get());
             if (loadGame) {
@@ -235,7 +249,11 @@ public class WherigoGame implements UI {
             WherigoUtils.getListFromContainer(cartridge.currentThings(), Thing.class, null);
     }
 
+    @Nullable
     public Player getPlayer() {
+        if (!isPlaying()) {
+            return null;
+        }
         return Engine.instance.player;
     }
 
@@ -254,6 +272,11 @@ public class WherigoGame implements UI {
         return lastPlayedCGuid;
     }
 
+    @Nullable
+    public String getLastSetContextGeocode() {
+        return lastSetContextGeocode;
+    }
+
     public void notifyListeners(final NotifyType type) {
         final Collection<Consumer<NotifyType>> listenerCopy;
         synchronized (listeners) {
@@ -268,9 +291,14 @@ public class WherigoGame implements UI {
     }
 
     public void setContextGeocode(final String geocode) {
+        setContextGeocodeInternal(geocode);
+        this.lastSetContextGeocode = geocode;
+        notifyListeners(NotifyType.REFRESH);
+    }
+
+    private void setContextGeocodeInternal(final String geocode) {
         this.contextGeocode = geocode;
         this.contextGeocacheName = WherigoUtils.findGeocacheNameForGeocode(geocode);
-        notifyListeners(NotifyType.REFRESH);
     }
 
     private void runOnUi(final Runnable r) {
@@ -313,12 +341,24 @@ public class WherigoGame implements UI {
         setCGuidAndDependentThings(null);
         WherigoGameService.stopService();
         WherigoLocationProvider.get().disconnect();
+        setContextGeocodeInternal(null);
     }
 
     @Override
-    public void showError(final String s) {
-        Log.w(LOG_PRAEFIX + "ERROR: " + s);
-        this.lastError = s;
+    public void showError(final String errorMessage) {
+        Log.w(LOG_PRAEFIX + "ERROR: " + errorMessage);
+
+        if (errorMessage != null) {
+            //Remove common prefixed
+            String errorMsg = errorMessage;
+            for (String commonPrefix : OPENWIG_ENGINE_ERROR_PREFIXES) {
+                if (errorMsg.toLowerCase(Locale.ROOT).startsWith(commonPrefix)) {
+                    errorMsg = "OpenWIG error: " + errorMsg.substring(commonPrefix.length());
+                    break;
+                }
+            }
+            this.lastError = errorMsg;
+        }
         WherigoDialogManager.get().display(new WherigoErrorDialogProvider());
     }
 
@@ -451,6 +491,6 @@ public class WherigoGame implements UI {
     @NonNull
     @Override
     public String toString() {
-        return "Playing:" + isPlaying + " / name:" + getCartridgeName() + " / Details:" + cartridgeInfo;
+        return "isPlaying:" + isPlaying + ", name:" + getCartridgeName() + ", cguid:" + getCGuid() + ", context: " + getContextGeocacheName();
     }
 }
