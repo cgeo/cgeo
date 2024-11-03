@@ -11,6 +11,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Reliëfweergave ondersteuning voor UnifiedMap VTM kaarten (vereist online verbinding)
 - Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
 - Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
+- Wijziging: Maak de lang drukken speld meer in de stijl van c:geo
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
@@ -21,6 +22,8 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Lange tik op datum in het logboek haalt vorige log datum op
 - Oplossing: Het resetten van een cache naar oorspronkelijke coördinaten verwijderd niet de "aangepaste coördinaten" vlag
 - Nieuw: Bevestig het overschrijven van log op snelle offline log
+- Nieuw: Update cache status bij het versturen van een log
+- New: Colored HTML source view of cache details
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
@@ -35,3 +38,4 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: "Lege lijst" bevestiging popt up bij het starten van een pocket query download in een nieuw gemaakte lijst
 - Wijziging: Eigen caches met offline logs tonen offline log indicator
 - Nieuw: Configureerbare datumnotatie (bijv: cache logs), zie [Instellingen => Uiterlijk => Datumformaat](cgeo-settings://short_date_format)
+- Nieuw: Leid informatie over connectoren op het startscherm om naar een connector specifiek voorkeurenscherm
