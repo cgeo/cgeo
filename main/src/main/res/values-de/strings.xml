@@ -2603,10 +2603,6 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: Lösche übrige Datei</string>
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
-    <string name="wherigo_error_title">Wherigo-Fehler</string>
-    <string name="wherigo_error_game_noerror">Kein Fehler vom Spiel gemeldet</string>
-    <string name="wherigo_error_game_error">Fehler vom Spiel gemeldet: %1$s</string>
-    <string name="wherigo_error_email">Problem beim Abspielen eines Wherigos\n\nFehler: %1$s\n\nWherigo Info: %2$s\n\nZusätzliche Info: %3$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
     <string name="wherigo_confirm_stop_running_game_message">Ein Spiel läuft derzeit für \"%s\". Möchtest du dieses Spiel beenden?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Wherigo-Cartridge löschen</string>
