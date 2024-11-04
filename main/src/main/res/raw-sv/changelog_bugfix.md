@@ -1,6 +1,6 @@
 ##
 - Fix: Some issues with new event time detection
-- Fix: Crash when editing variable field
+- Fix: Krasch vid redigering av variabelfält
 - Fix: Crash on importing GPX file (workaround)
 
 ##
