@@ -893,6 +893,9 @@
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_date_format">Format de data</string>
+    <string name="init_date_format_description">Format per utilitzar per a dates curtes, p. a la vista de registre</string>
+    <string name="system_default">Sistema per defecte</string>
     <string name="init_showwaypoints">Mostra punts de referència</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
@@ -941,6 +944,7 @@
     <string name="init_units">Utilitza les unitats imperials (milles/peus)</string>
     <string name="init_summary_units">Utilitza unitats imperials (milles/peus) en lloc d\'unitats mètriques (quilòmetres/metres)</string>
     <string name="init_cachelists">Llistes de catxés</string>
+    <string name="init_localization">Localització</string>
     <string name="init_log_offline">Registre fora de línia</string>
     <string name="init_summary_log_offline">Habilita el registre fora de línia (No es mostrarà la pantalla de registre en línia i no enviarà els registres)</string>
     <string name="init_choose_list">Demana una llista</string>
@@ -1566,7 +1570,9 @@
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
     <!-- html styles -->
     <string name="html_style_default">Per defecte</string>
+    <string name="html_style_default_no_contrast_fix">Per defecte sense correcció de contrast</string>
     <string name="html_style_monochrome">Monocrom</string>
+    <string name="html_style_source_formatted">Format HTML Font</string>
     <string name="html_style_source">Font HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graus</string>
@@ -2581,6 +2587,8 @@
     <string name="wherigo_controls_mapzones_hint">Mostra les zones d\'un joc en curs al mapa</string>
     <string name="wherigo_controls_downloadcartridge_hint">Descarrega un cartutx (cal cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Informa d\'un problema amb el Wherigo Player</string>
+    <string name="wherigo_controls_cache_context">Context del catxé</string>
+    <string name="wherigo_controls_cache_link">Vés als detalls del catxé</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprèn el diàleg en pausa</string>
     <string name="wherigo_dialog_pause_info">Has cancel·lat un diàleg de Wherigo. Podeu reprendre-ho a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
@@ -2615,15 +2623,21 @@
     <string name="wherigo_download_progress_login">Iniciant sessió…</string>
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
-    <string name="wherigo_error_title">Error del Wherigo</string>
-    <string name="wherigo_error_game_noerror">El joc no ha informat cap error</string>
-    <string name="wherigo_error_game_error">Error informat pel joc: %1$s</string>
-    <string name="wherigo_error_email">Problema en reproduir un Wherigo\n\nError: %1$s\n\nInformació de Wherigo: %2$s\n\nInformació addicional: %3$s</string>
+    <string name="wherigo_error_title">Informe del problema Wherigo</string>
+    <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error</string>
+    <string name="wherigo_error_game_error">Error al Wherigo Engine: %1$s</string>
+    <string name="wherigo_error_game_error_addinfo">Pots provar de continuar el teu joc en curs malgrat aquest error.\n\nSi és possible, informa l\'error al nostre equip d\'assistència per correu electrònic.</string>
+    <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError: %1$s\n\nInformació de Wherigo: %2$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Segur que voleu suprimir el cartutx \"%1$s\" incloses les partides desades de %2$s?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Suprimeix la partida desada de Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Realment voleu suprimir la partida desada \"%2$s\" del cartutx \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Desa el progrés del joc Wherigo</string>
+    <string name="wherigo_save_game_message">Desa el progrés del joc per al cartutx \"%1$s\" a \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Introduïu el nom (opcional)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Avís: en continuar, sobreescriureu la partida desada existent de \"%1$s\"</string>
     <string name="wherigo_dialog_push_page">Pàgina %1$s/%2$s</string>
     <string name="wherigo_notification_service">c:geo està executant un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" t\'està esperant!</string>
