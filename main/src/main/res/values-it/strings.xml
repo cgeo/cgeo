@@ -2613,10 +2613,6 @@
     <string name="wherigo_download_progress_login">Accesso in corso…</string>
     <string name="wherigo_download_progress_started">Scaricamento avviato</string>
     <string name="wherigo_download_progress_download_status">Scaricato %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_error_title">Errore Wherigo</string>
-    <string name="wherigo_error_game_noerror">Nessun errore segnalato dal gioco</string>
-    <string name="wherigo_error_game_error">Errore segnalato dal gioco: %1$s</string>
-    <string name="wherigo_error_email">Problema di riproduzione di un Wherigo\n\nErrore: %1$s\n\nWherigo Info: %2$s\n\nInformazioni aggiuntive: %3$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Interrompi l\'esecuzione della partita</string>
     <string name="wherigo_confirm_stop_running_game_message">Un gioco è attualmente in esecuzione per \"%s\". Vuoi interrompere questo gioco?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Elimina Cartuccia Wherigo</string>
