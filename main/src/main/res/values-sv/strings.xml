@@ -1563,7 +1563,9 @@
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
+    <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
     <string name="html_style_monochrome">Monokrom</string>
+    <string name="html_style_source_formatted">HTML-källa formaterad</string>
     <string name="html_style_source">HTML-källa</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
