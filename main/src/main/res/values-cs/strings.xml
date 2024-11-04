@@ -906,6 +906,7 @@
     <string name="init_use_default_language">Použít výchozí jazyk</string>
     <string name="init_date_format">Formát data</string>
     <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
+    <string name="system_default">Podle systému</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
@@ -2682,10 +2683,11 @@
     <string name="wherigo_download_progress_login">Přihlašování…</string>
     <string name="wherigo_download_progress_started">Stahování začalo</string>
     <string name="wherigo_download_progress_download_status">Staženo %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_error_title">Chyba Wherigo</string>
-    <string name="wherigo_error_game_noerror">Hra nenahlásila žádnou chybu</string>
-    <string name="wherigo_error_game_error">Chyba nahlášena hrou: %1$s</string>
-    <string name="wherigo_error_email">Problém při hraní Wherigo\n\nchyba: %1$s\n\nWherigo Info: %2$s\n\nDalší informace: %3$s</string>
+    <string name="wherigo_error_title">Wherigo zpráva o problému</string>
+    <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu</string>
+    <string name="wherigo_error_game_error">Chyba ve Wherigo Engine: %1$s</string>
+    <string name="wherigo_error_game_error_addinfo">I přes tuto chybu se můžete pokusit pokračovat ve hře.\n\nPokud je to možné, nahlaste chybu našemu týmu podpory e-mailem.</string>
+    <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Momentálně je spuštěná hra pro \"%s\". Chcete tuto hru zastavit?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Odstranit Wherigo cartridge</string>
