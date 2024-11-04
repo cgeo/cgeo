@@ -794,6 +794,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
+    <string name="settings_unifiedMapVariants_title">Warianty UnifiedMap</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -905,6 +906,7 @@
     <string name="init_use_default_language">Użyj domyślnego języka</string>
     <string name="init_date_format">Format daty</string>
     <string name="init_date_format_description">Format używany przy krótkim zapisie daty, np. w widoku dziennika</string>
+    <string name="system_default">Domyślne systemowe</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrytek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
@@ -1595,7 +1597,9 @@
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacji z wyjątkiem pięciu najnowszych</string>
     <!-- html styles -->
     <string name="html_style_default">Domyślny</string>
+    <string name="html_style_default_no_contrast_fix">Domyślne bez korekty kontrastu</string>
     <string name="html_style_monochrome">Monochromatyczny</string>
+    <string name="html_style_source_formatted">Sformatowane źródło HTML</string>
     <string name="html_style_source">Źródło HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stopni(e)</string>
@@ -2643,6 +2647,8 @@
     <string name="wherigo_controls_mapzones_hint">Pokaż strefy uruchomionej gry na mapie</string>
     <string name="wherigo_controls_downloadcartridge_hint">Pobierz kartridż (potrzebny cguid)</string>
     <string name="wherigo_controls_reportproblem_hint">Zgłoś problem z wherigo playerem</string>
+    <string name="wherigo_controls_cache_context">Kontekst skrytki</string>
+    <string name="wherigo_controls_cache_link">Przejdź do szczegółów skrytki</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
     <string name="wherigo_dialog_pause_info">Anulowałeś okno dialogowe Wherigo. Możesz je wznowić w Wherigo Playerze poprzez naciśnięcie przycisku „Wznów wstrzymane okno dialogowe”</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
@@ -2677,15 +2683,21 @@
     <string name="wherigo_download_progress_login">Logowanie…</string>
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_error_title">Błąd Wherigo</string>
-    <string name="wherigo_error_game_noerror">Brak błędów zgłoszonych przez grę</string>
-    <string name="wherigo_error_game_error">Błąd zgłoszony przez grę: %1$s</string>
-    <string name="wherigo_error_email">Problem z graniem w Wherigo\n\nBłąd: %1$s\n\nInformacje Wherigo: %2$s\n\nDodatkowe informacje: %3$s</string>
+    <string name="wherigo_error_title">Raport problemu Wherigo</string>
+    <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo</string>
+    <string name="wherigo_error_game_error">Błąd w silniku Wherigo: %1$s</string>
+    <string name="wherigo_error_game_error_addinfo">Możesz spróbować kontynuować swoją uruchomioną grę pomimo tego błędu.\n\nJeśli to możliwe, zgłoś błąd naszemu zespołowi pomocy technicznej pocztą elektroniczną.</string>
+    <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\nInformacje Wherigo: %2$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
     <string name="wherigo_confirm_delete_cartridge_message">Czy na pewno chcesz usunąć kartridż \"%1$s\", w tym zapisane gry (%2$s)?</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Usuń zapisany stan gry Wherigo</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Czy na pewno chcesz usunąć zapisaną grę \"%2$s\" z kartridża \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Zapisz postęp gry Wherigo</string>
+    <string name="wherigo_save_game_message">Zapisz swój postęp w grze dla kartridża \"%1$s\" w \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Wprowadź nazwę (opcjonalnie)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Ostrzeżenie: kontynuując nadpiszesz istniejący zapis gry z \"%1$s\"</string>
     <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo uruchamia Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" czeka na Ciebie!</string>
