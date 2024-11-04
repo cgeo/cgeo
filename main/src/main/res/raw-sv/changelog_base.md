@@ -11,7 +11,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
 - Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
 - Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
-- Change: Make long-press pin more c:geo-like
+- Ändra: Gör långtryckstift mer c:geo-liknande
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -22,7 +22,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
 - Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
 - Nytt: Bekräfta att skriva över loggen på snabb offline-logg
-- New: Update cache status on sending a log
+- Nytt: Uppdatera cache-status när du skickar en logg
 - New: Colored HTML source view of cache details
 
 ### Allmänt
