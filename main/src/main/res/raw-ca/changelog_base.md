@@ -11,7 +11,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: suport d'ombrejat per als mapes UnifiedMap VTM (requereix connexió en línia)
 - Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
 - Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
-- Change: Make long-press pin more c:geo-like
+- Canvi: feu que el pin de premsa llarga sigui més semblant a c:geo
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -22,8 +22,8 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: un toc llarg a la data al registre recupera la data del registre anterior
 - Solució: el restabliment del catxé a les coordenades originals no elimina la marca "coordenades canviades"
 - Nou: confirmeu la sobreescritura del registre al registre ràpid fora de línia
-- New: Update cache status on sending a log
-- New: Colored HTML source view of cache details
+- Nou: actualitzeu l'estat del catxé en enviar un registre
+- Nou: visualització de la font HTML amb colors dels detalls del catxé
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -35,7 +35,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
 - Correcció: restableix les coordenades no detectades per c:geo per a els catxés no desats
 - Nou: permet esborrar el filtre si no s'emmagatzema cap filtre amb nom
-- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
-- Change: Owned caches with offline logs show offline log marker
-- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
-- New: Point connector info on home screen to connector-specific preference screen
+- Correcció: la confirmació de la "Llista buida" apareix quan s'inicia una descàrrega de pocket query a la llista acabada de crear
+- Canvi: Als catxés de propietat amb registres fora de línia mostren el marcador de registre fora de línia
+- Nou: format de data configurable (p. ex.: registres de catxé), vegeu [Configuració => Aparença => Format de data](cgeo-settings://short_date_format)
+- Nou: apunta la informació del connector a la pantalla d'inici a la pantalla de preferències específiques del connector
