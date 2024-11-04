@@ -1,7 +1,7 @@
 ##
-- Fix: Some issues with new event time detection
-- Fix: Crash when editing variable field
-- Fix: Crash on importing GPX file (workaround)
+- Solució: alguns problemes amb la detecció d'hora d'esdeveniments nous
+- Correcció: bloqueig en editar el camp variable
+- Correcció: bloqueig en importar un fitxer GPX (solució alternativa)
 
 ##
 - Correcció: falten hores de trobades a la baixada de catxés (canvi del lloc web)
