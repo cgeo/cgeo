@@ -23,7 +23,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: Het resetten van een cache naar oorspronkelijke coördinaten verwijderd niet de "aangepaste coördinaten" vlag
 - Nieuw: Bevestig het overschrijven van log op snelle offline log
 - Nieuw: Update cache status bij het versturen van een log
-- New: Colored HTML source view of cache details
+- Nieuw: Gekleurde HTML-bronweergave van cache details
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
