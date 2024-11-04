@@ -894,6 +894,7 @@
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
     <string name="init_date_format">Datumnotatie</string>
     <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
+    <string name="system_default">Systeemstandaard</string>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
@@ -1568,7 +1569,9 @@
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
     <!-- html styles -->
     <string name="html_style_default">Standaard</string>
+    <string name="html_style_default_no_contrast_fix">Standaard zonder contrastcorrectie</string>
     <string name="html_style_monochrome">Monochroom</string>
+    <string name="html_style_source_formatted">Opgemaakte HTML bron</string>
     <string name="html_style_source">HTML Bron</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
@@ -2618,10 +2621,11 @@
     <string name="wherigo_download_progress_login">Bezig met inloggen…</string>
     <string name="wherigo_download_progress_started">Download gestart</string>
     <string name="wherigo_download_progress_download_status">Gedownload %1$s / %2$s (%3$s%)</string>
-    <string name="wherigo_error_title">Wherigo Fout</string>
-    <string name="wherigo_error_game_noerror">Er is geen fout gemeld door het spel</string>
-    <string name="wherigo_error_game_error">Fout gemeld door het spel: %1$s</string>
-    <string name="wherigo_error_email">Probleem bij het spelen van een Wherigo\n\nFout: %1$s\n\nWherigo Info: %2$s\n\nExtra Info: %3$s</string>
+    <string name="wherigo_error_title">Wherigo Probleem rapport</string>
+    <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo besturing</string>
+    <string name="wherigo_error_game_error">Fout in Wherigo Besturing: %1$s</string>
+    <string name="wherigo_error_game_error_addinfo">Je kunt proberen je actieve spel voort te zetten ondanks deze fout.\n\nIndien mogelijk, rapporteer de fout aan ons ondersteuningsteam via e-mail.</string>
+    <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
     <string name="wherigo_confirm_stop_running_game_message">Er wordt momenteel een spel uitgevoerd voor \"%s\". Wil je dit spel stoppen?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Verwijder Wherigo Cartridge</string>
