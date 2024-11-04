@@ -2614,10 +2614,6 @@
     <string name="wherigo_download_progress_login">A iniciar sessão…</string>
     <string name="wherigo_download_progress_started">Transferência iniciada</string>
     <string name="wherigo_download_progress_download_status">Transferido %1$s / %2$s (%3$s %%)</string>
-    <string name="wherigo_error_title">Erro Wherigo</string>
-    <string name="wherigo_error_game_noerror">Nenhum erro reportado pelo jogo</string>
-    <string name="wherigo_error_game_error">Erro reportado pelo jogo: %1$s</string>
-    <string name="wherigo_error_email">Problema ao correr um jogo Wherigo\n\nErro: %1$s\n\nWherigo Info: %2$s\n\nInformações Adicionais: %3$s</string>
     <string name="wherigo_confirm_stop_running_game_title">Parar de executar o Jogo Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Um jogo está actualmente em execução para \"%s\". Deseja parar este jogo?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Apagar Cartucho Wherigo</string>
