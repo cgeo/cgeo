@@ -1,7 +1,7 @@
 ##
-- Fix: Some issues with new event time detection
-- Fix: Crash when editing variable field
-- Fix: Crash on importing GPX file (workaround)
+- Correcção: Alguns problemas com a nova detecção da hora do evento
+- Correcção: Falha ao editar campo de variável
+- Correcção: Falha ao importar ficheiro GPX (solução alternativa)
 
 ##
 - Correcção: Horas dos eventos em falta ao transferir a cache (alterações na página web)
