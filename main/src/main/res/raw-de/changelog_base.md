@@ -34,8 +34,8 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
 - Neu: Option, um einen Cache von allen Listen zu entfernen (= ihn als gelöscht zu markieren)
 - Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
-- New: Allow clearing filter if no named filter is stored
-- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Neu: Filter zurücksetzen möglich, auch wenn kein benannter Filter gespeichert ist
+- Korrektur: "Leere Liste" Bestätigung erscheint beim Starten eines Pocket Query-Downloads in einer neu erstellten Liste
 - Änderung: Eigene Caches mit Offline-Logs zeigen Offline-Log-Marker
 - Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
-- New: Point connector info on home screen to connector-specific preference screen
+- Neu: Konnektor-Informationen auf dem Startbildschirm verweisen auf jeweilige Konfigurationsseite
