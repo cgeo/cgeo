@@ -919,7 +919,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="osmand_marker_cgeo">Kartes atzīme no c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
-    <string name="license">Licence</string>
+    <string name="license">Licences</string>
     <string name="license_show">Rādīt licenci</string>
     <string name="license_dismiss">Izlaist</string>
     <!-- helpers -->

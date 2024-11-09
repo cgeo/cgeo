@@ -1,4 +1,9 @@
 ##
+- Naprawiono: Niektóre problemy z wykrywaniem nowego czasu wydarzenia
+- Naprawiono: Awaria podczas edycji pola zmiennej
+- Naprawiono: Awaria podczas importowania pliku GPX (obejście)
+
+##
 - Naprawiono: Brak czasu wydarzenia podczas pobierania skrytki (zmiany na stronie internetowej)
 
 ##

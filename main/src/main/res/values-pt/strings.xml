@@ -766,7 +766,7 @@
     <string name="settings_title_map_data">Dados do Mapa</string>
     <string name="settings_title_offline_maps">Mapas offline</string>
     <string name="settings_title_map_themes">Temas de mapas offline</string>
-    <string name="settings_title_map_hillshading">Sombreado de elevações nos mapas offline</string>
+    <string name="settings_title_map_hillshading">Sombreado da altitude nos mapas offline</string>
     <string name="settings_title_offline_routing">Encaminhamento offline</string>
     <string name="settings_summary_offline_routing">O encaminhamento offline está disponível se a aplicação de ajuda \"BRouter\" estiver instalada e configurada ou o encaminhamento interno estiver activado.</string>
     <string name="settings_title_waypoints">Pontos adicionais</string>
@@ -912,12 +912,12 @@
     <string name="init_summary_bigSmileysOnMap">Se activado, os símbolos como o \'sorriso encontrado\' ou o marcador \'coordenadas corrigidas\' aparecerão ampliados no mapa em vez do ícone do tipo de cache.</string>
     <string name="init_dtMarkerOnCacheIcon">Classificação D/T nos ícones de cache</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Mostrar um marcador para as classificações Dificuldade (esquerda) e Terreno (direita) nos marcadores das caches no canto superior direito (marcador \"armazenado\" é movido para o meio).</string>
-    <string name="init_showElevation">Mostrar Relevo</string>
-    <string name="init_summary_showElevation">Mostrar informações de relevo da posição actual, tirada de dados de encaminhamento ou GNSS (se disponível)</string>
+    <string name="init_showElevation">Mostrar Relevo de Altitude</string>
+    <string name="init_summary_showElevation">Mostrar informações de relevo da altitude para a posição actual, obtida de dados de encaminhamento ou GNSS (se disponível)</string>
     <string name="init_elevation_notAvailable">"Sem dados de altitude disponíveis"</string>
-    <string name="menu_elevation_info">Elevação (mapa):</string>
-    <string name="elevation_selected">Elevação (mapa) na posição seleccionada</string>
-    <string name="elevation_difference">Diferença de elevação</string>
+    <string name="menu_elevation_info">Altitude (mapa):</string>
+    <string name="elevation_selected">Altitude (mapa) na posição seleccionada</string>
+    <string name="elevation_difference">Diferença de altitude</string>
     <string name="distance">Distância:</string>
     <string name="copy_coordinates">Copiar coordenadas</string>
     <string name="selected_position">Posição seleccionada</string>

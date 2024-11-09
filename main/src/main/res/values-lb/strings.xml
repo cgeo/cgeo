@@ -517,6 +517,7 @@
     <!-- navigation -->
     <!-- device orientation types -->
     <!-- license -->
+    <string name="license">Lizenz</string>
     <!-- helpers -->
     <!-- export -->
     <!-- GC attributes -->

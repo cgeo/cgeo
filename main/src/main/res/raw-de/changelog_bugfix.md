@@ -1,4 +1,9 @@
 ##
+- Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
+- Korrektur: Absturz bei der Bearbeitung des Variablenfeldes
+- Korrektur: Absturz beim Importieren einer GPX-Datei (Workaround)
+
+##
 - Korrektur: Fehlende Event-Zeiten beim Download des Caches (Webseitenänderung)
 
 ##

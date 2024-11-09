@@ -713,7 +713,7 @@
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
-    <string name="license">Lisensya</string>
+    <string name="license">Ang Lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
     <string name="license_dismiss">Wagtangon</string>
     <!-- helpers -->
