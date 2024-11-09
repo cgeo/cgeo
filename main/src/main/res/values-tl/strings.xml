@@ -752,7 +752,7 @@
     <string name="osmand_marker_cgeo">Taga-marka mula sa c:geo</string>
     <!-- device orientation types -->
     <!-- license -->
-    <string name="license">Ang lisensya</string>
+    <string name="license">Lisensya</string>
     <string name="license_show">Ipakita ang lisensya</string>
     <string name="license_dismiss">Pinaalis</string>
     <!-- helpers -->

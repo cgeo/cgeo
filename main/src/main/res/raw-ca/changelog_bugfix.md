@@ -1,4 +1,9 @@
 ##
+- Solució: alguns problemes amb la detecció d'hora d'esdeveniments nous
+- Correcció: bloqueig en editar el camp variable
+- Correcció: bloqueig en importar un fitxer GPX (solució alternativa)
+
+##
 - Correcció: falten hores de trobades a la baixada de catxés (canvi del lloc web)
 
 ##

@@ -664,6 +664,7 @@
     <!-- navigation -->
     <!-- device orientation types -->
     <!-- license -->
+    <string name="license">许可</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>

@@ -1,4 +1,9 @@
 ##
+- Fix: Some issues with new event time detection
+- Fix: Krasch vid redigering av variabelfält
+- Fix: Crash on importing GPX file (workaround)
+
+##
 - Fix: Saknar händelsetidpunkter vid hämtning av cache (ändring av webbplatsen)
 
 ##
