@@ -456,6 +456,8 @@
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
+    <string name="caches_overwrite_offline_log">Offline-Log überschreiben</string>
+    <string name="caches_overwrite_offline_log_question">Vorhandenes Offline-Log vom Typ \"%1$s\" mit seinem Logtext überschreiben?</string>
     <string name="caches_show_attributes">Attributübersicht anzeigen</string>
     <string name="caches_set_cache_icon">Cache-Symbol wählen</string>
     <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
@@ -562,10 +564,12 @@
     <string name="cache_filter_storage_delete_title">Filter löschen</string>
     <string name="cache_filter_storage_delete_message">Möchtest du diese Filterkonfiguration wirklich löschen?</string>
     <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
+    <string name="cache_filter_storage_clear_title">Aktuellen Filter löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
     <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
     <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>
     <string name="cache_filter_storage_save_confirm_message">Ein Filter mit dem Namen \'%s\' und einer anderen Konfiguration existiert bereits. Überschreiben?</string>
+    <string name="cache_filter_storage_clear_message">Möchtest du den aktuellen Filter löschen?</string>
     <string name="cache_filter_stringfilter_matchcase">Groß-/Kleinschreibung beachten</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Suchtext</string>
     <string name="cache_filter_stringfilter_info">Bei Option \'Muster\' können die Platzhalter * und ? Verwendet werden. * steht für 0, 1 oder mehrere Zeichen, ? steht für ein einzelnes Zeichen. Das Muster \"H?mburg*\" würde zum Beispiel \"Homburg\" oder \"Hamburg bei Nacht\" entsprechen, aber nicht \"Ein Tag in Hamburg\" oder \"Hahmburg\"</string>
@@ -888,6 +892,9 @@
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
     <string name="init_use_default_language">Systemsprache verwenden</string>
+    <string name="init_date_format">Datumsformat</string>
+    <string name="init_date_format_description">Format für kurze Datumsangaben, z.B. in der Log-Ansicht</string>
+    <string name="system_default">Systemstandard</string>
     <string name="init_showwaypoints">Wegpunkte anzeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
@@ -936,6 +943,7 @@
     <string name="init_units">Imperiale Einheiten</string>
     <string name="init_summary_units">Imperiale Einheiten (Meilen/Fuß)</string>
     <string name="init_cachelists">Cachelisten</string>
+    <string name="init_localization">Lokalisierung</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Offline loggen aktivieren (Dialog für Online-Log wird beim Loggen nicht angezeigt, Logs werden nicht hochgeladen)</string>
     <string name="init_choose_list">Nach Liste fragen</string>
