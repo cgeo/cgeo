@@ -155,7 +155,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
                             final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
-                            manualLogin.setVisibility(connInfo.toString().contains("Failed to log in to geocaching.com due to captcha required") ? View.VISIBLE : View.GONE);
+                            manualLogin.setVisibility(connInfo.toString().contains(activity.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
                             manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
                                 if (!activity.isDestroyed() && !activity.isFinishing()) {
                                     activity.updateUserInfoHandler.sendEmptyMessage(-1);
