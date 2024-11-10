@@ -248,7 +248,6 @@
     <string name="err_detail_cache">Tyvärr kan c:geo inte visa den geocache du önskar. Är det verkligen en geocache?</string>
     <string name="err_detail_cache_find">Tyvärr kan c:geo inte hitta geocache</string>
     <string name="err_detail_cache_find_some">Tyvärr kan c:geo inte hitta geocachen.</string>
-    <string name="err_detail_cache_find_any">Tyvärr kan c:geo inte hitta någon geocache.</string>
     <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
     <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
     <string name="err_detail_premium_log_found">Den här cachen är endast tillgänglig för premium-medlemmar på geocaching.com. Därav kan inte cache-informationen visas.\n\nMen om du redan har hittat den här cachen så kan du logga den här.</string>
@@ -457,6 +456,8 @@
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
+    <string name="caches_overwrite_offline_log">Skriv över offline-logg</string>
+    <string name="caches_overwrite_offline_log_question">Cachen har befintlig offline-logg av typen \"%1$s\" med en loggtext. Vill du skriva över denna logg?</string>
     <string name="caches_show_attributes">Visa attributöversikt</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
@@ -563,10 +564,12 @@
     <string name="cache_filter_storage_delete_title">Ta bort filter</string>
     <string name="cache_filter_storage_delete_message">Vill du verkligen ta bort den här filterkonfigurationen?</string>
     <string name="cache_filter_storage_select_clear_title">Välj filter eller rensa nuvarande filter</string>
+    <string name="cache_filter_storage_clear_title">Rensa aktuella filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Inga filter har sparats än.</string>
     <string name="cache_filter_storage_save_title">Spara filter med namn</string>
     <string name="cache_filter_storage_save_confirm_title">Överskrivning av filter</string>
     <string name="cache_filter_storage_save_confirm_message">Ett filter med namnet \'%s\' och annan konfiguration finns redan. Skriv över det?</string>
+    <string name="cache_filter_storage_clear_message">Vill du rensa det aktuella filtret?</string>
     <string name="cache_filter_stringfilter_matchcase">Matcha skiftläge</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Söktext</string>
     <string name="cache_filter_stringfilter_info">Med alternativet \"Pattern\", använd jokertecken * och ?. * representerar noll, ett eller flera tecken, ? representerar ett enda tecken. Till exempel matchar mönstret \"H?mburg*\" t.ex. \"Homburg\" eller \"Hamburg på natten\" men inte \"En dag i Hamburg\" eller \"Hahmburg\"</string>
@@ -779,8 +782,6 @@
     <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_hide_tileproviders_title">Dölj kartkällor</string>
     <string name="settings_hide_tileproviders_summary">Exkludera en eller flera kartkällor från kartans källval</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Erbjuder både VTM + Mapsforge-motorer för Mapsforge-kartor (för teständamål)</string>
     <string name="settings_userDefinedTileProvider">Användardefinierad leverantör av panel</string>
     <string name="settings_userDefinedTileProviderUri">Ange full Uri (utan avslutande snedstreck) till brick-leverantör, eller ange full Uri med parametrar (inklusive {X}, {Y} och {Z}). Se till att du har kontrollerat och uppfyller deras användningsvillkor.</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
@@ -922,7 +923,7 @@
     <string name="menu_elevation_info">Höjd (karta):</string>
     <string name="elevation_selected">Höjd (karta) vid vald position</string>
     <string name="elevation_difference">Höjdskillnad</string>
-    <string name="distance">Avstånd:</string>
+    <string name="distance">Avstånd</string>
     <string name="copy_coordinates">Kopiera koordinater</string>
     <string name="selected_position">Vald position</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
@@ -1562,7 +1563,9 @@
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
+    <string name="html_style_default_no_contrast_fix">Standard utan kontrast-fix</string>
     <string name="html_style_monochrome">Monokrom</string>
+    <string name="html_style_source_formatted">HTML-källa formaterad</string>
     <string name="html_style_source">HTML-källa</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">grader</string>
@@ -1709,6 +1712,7 @@
     <string name="formula_error_missingvarvalue">Saknas: %1$s</string>
     <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
     <string name="formula_error_empty">Tom formel</string>
+    <string name="formula_error_numeric_overflow">Numeriskt spill</string>
     <string name="formula_error_other">Fel: \'%1$s\'</string>
     <!-- ImageView -->
     <string name="imageview_notitle">Namnlös</string>
@@ -1735,8 +1739,6 @@
     <string name="map_showwp_visited">Besökt</string>
     <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
     <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Detta synkroniserar kontinuerligt innehållet i mapptemamappen till en privat mapp för apen för snabbare filåtkomst. Se till att din temamapp bara innehåller dina teman men inga ytterligare (stora) data innan du aktiverar den här funktionen.\n\nDin karttemamapp \'%1$s\' har för närvarande %2$s, %3$s och en storlek på %4$s.\n\nVill du aktivera synkronisering av mappar?</string>
     <string name="onetime_mapthemefixslow_title">Fixa rendering av långsamt karttema</string>
     <string name="onetime_mapthemefixslow_message">Arbeta med icke-zippade kartteman kan sänka prestanda när kartvisaren öppnas. Du kan zippa eller synkronisera dina teman för att få snabbare prestanda och minska fördröjningen vid start av kartan.</string>
     <string name="map_theme_select">Välj karttema</string>
@@ -1881,10 +1883,6 @@
     <string name="do_auto">Automatiskt</string>
     <string name="do_flat">Platt</string>
     <string name="do_upright">Stående</string>
-    <!-- license -->
-    <string name="license">Licens</string>
-    <string name="license_show">Visa licens</string>
-    <string name="license_dismiss">Avbryt</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidigare event</string>
     <string name="helper_calendar_pastevent_question">Eventets datum har passerat. Vill du lägga till det ändå?</string>
@@ -2490,7 +2488,6 @@
     <string name="check_tiles_missing">Hittade saknad ruttdata:</string>
     <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
     <string name="tileupdate_info">Tryck här för att söka efter uppdateringar av hämtade routing-datafiler. Långtryck för att skjuta upp.</string>
-    <string name="download_hillshading_title">Saknar terrängskuggningsdata</string>
     <string name="check_hillshading_found">Terrängskuggningsdata finns redan</string>
     <string name="check_hillshading_missing">Saknar terrängskuggningsdata:</string>
     <string name="check_hillshading_unsupported">Varning: Terrängskuggningsdata är åtminstone delvis inte tillgängligt för den valda regionen</string>
@@ -2570,6 +2567,24 @@
     <string name="wizard_skip_wizard_warning">c:geo kanske inte fungerar som förväntat förrän konfigurationen är klar. Beroende på den saknade konfigurationen kanske c:geo inte kan läsa/lagra data som offline-kartor, geocacher, loggfiler etc.\n\nNär du känner dig redo att slutföra installationen, välj antingen \"Configuration wizard\" i huvudmenyn eller starta om c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappsynkronisering klar efter %2$s, %3$d av %4$s behövde synkronisering</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
+    <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
+    <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
+    <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
+    <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
+    <string name="wherigo_thingtype_location">Platser</string>
+    <string name="wherigo_thingtype_task">Uppgifter</string>
+    <string name="wherigo_thingtype_thing">Saker</string>
+    <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
+    <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
+    <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
+    <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
+    <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
+    <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
     <!-- default actions in dialogs -->
     <string name="previous">Föregående</string>
     <string name="skip">Hoppa över</string>
@@ -2585,6 +2600,9 @@
     <string name="expand">Expandera</string>
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
+    <string name="play">Spela</string>
+    <string name="pause">Pausa</string>
+    <string name="resume">Återuppta</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
@@ -2617,6 +2635,7 @@
         <item quantity="other">%d olästa meddelanden i meddelandecentret</item>
     </plurals>
     <!-- GC image size conversion -->
+    <string name="settings_gc_imagesize_title">Önskad bildstorlek</string>
     <string name="settings_gc_imagesize_summary">Bilder från Geocaching.com i listningar, loggar och spårbara objekt finns i olika storlekar. Välj den storlek som ska laddas när du laddar och lagrar en cache.</string>
     <string-array name="settings_gc_imagesize_entries">
         <item>Original</item>
