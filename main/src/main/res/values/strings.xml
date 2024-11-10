@@ -1707,6 +1707,7 @@
     <string name="cachedetails_progress_favorite">Added to favorites</string>
     <string name="cachedetails_progress_unfavorite">Removed from favorites</string>
 
+    <string name="cache_wherigo_start">Download and play this WherIGo using c:geo\'s internal player</string>
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
     <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
