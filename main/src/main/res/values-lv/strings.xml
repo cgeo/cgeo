@@ -168,7 +168,6 @@
     <string name="err_detail_cache">c:geo nevar parādīt izvēlēto slēpni. Vai tāds slēpnis tiešām eksistē?</string>
     <string name="err_detail_cache_find">c:geo nevar atrast ģeoslēpni</string>
     <string name="err_detail_cache_find_some">c:geo nevar atrast šo ģeoslēpni.</string>
-    <string name="err_detail_cache_find_any">c:geo nevar atrast nevienu ģeoslēpni.</string>
     <string name="err_detail_no_spoiler">c:geo neatrada spoilerbildi šim slēpnim.</string>
     <string name="err_detail_still_working">Joprojām strādā pie citas darbības.</string>
     <string name="err_detail_premium_log_found">Šis slēpnis ir pieejams tikai geocaching.com premium lietotājiem. Tādēļ slēpņa informācija nevar tikt attēlota. \n\nTomēr, ja tu jau esi atradis šo slēpni, tad vari to piereģistrēt šeit.</string>
@@ -918,10 +917,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="destination_select">Izvēlieties galamērķi</string>
     <string name="osmand_marker_cgeo">Kartes atzīme no c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licences</string>
-    <string name="license_show">Rādīt licenci</string>
-    <string name="license_dismiss">Izlaist</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Pagājušie notikumi (events)</string>
     <string name="helper_calendar_pastevent_question">Pasākuma (Eventa) datums ir pagājis. Vai tomēr pievienot?</string>
@@ -1304,6 +1299,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Atcelt</string>
     <!-- Multi-Selections -->
