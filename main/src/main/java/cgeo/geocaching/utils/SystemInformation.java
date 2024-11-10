@@ -73,6 +73,7 @@ public final class SystemInformation {
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("## System information").append("\n")
                 .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
+                .append("\nDatetime: ").append(Formatter.formatDateTime(System.currentTimeMillis())).append("\n")
 
                 .append("\nDevice:")
                 .append("\n-------")

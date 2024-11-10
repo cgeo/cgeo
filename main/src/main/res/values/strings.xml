@@ -2915,7 +2915,7 @@
     <string name="wherigo_controls_cache_link">Go to cache details</string>
 
     <string name="wherigo_controls_resume_paused_dialog">Resume paused dialog</string>
-    <string name="wherigo_dialog_pause_info">You cancelled a Wherigo Dialog. You can resume it in Wherigo Player by tapping \"Resume paused dialog\"</string>
+    <string name="wherigo_dialog_pause_info">Resume dialog in Wherigo Player by tapping \"Resume paused dialog\"</string>
     <string name="wherigo_no_game_running">No wherigo game is currently running</string>
     <string name="wherigo_currently_playing">Currently playing</string>
     <string name="wherigo_cartridge_details">Cartridge details</string>
@@ -2955,10 +2955,11 @@
     <string name="wherigo_download_progress_download_status">Downloaded %1$s / %2$s (%3$s %%)</string>
 
     <string name="wherigo_error_title">Wherigo Problem report</string>
-    <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine</string>
-    <string name="wherigo_error_game_error">Error in Wherigo Engine: %1$s</string>
-    <string name="wherigo_error_game_error_addinfo">You may try to continue your running game despite of this error.\n\nIf possible, please report the error to our support team via e-mail.</string>
-    <string name="wherigo_error_email">Wherigo Problem report\n\nError: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_game_noerror">No error reported by Wherigo Engine.</string>
+    <string name="wherigo_error_game_error">Error reported by Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Use \'Send by email\' to report a wherigo related problem to our support team.</string>
+    <string name="wherigo_error_email">Wherigo Problem report\n\nEngine Error: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine reported an error. Open bug dialog for details.</string>
 
     <string name="wherigo_confirm_stop_running_game_title">Stop running Wherigo Game</string>
     <string name="wherigo_confirm_stop_running_game_message">A game is currently running for \"%s\". Do you want to stop this game?</string>

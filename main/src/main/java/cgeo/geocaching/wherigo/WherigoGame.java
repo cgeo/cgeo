@@ -9,9 +9,11 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AudioClip;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -31,12 +33,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -57,11 +56,6 @@ import se.krka.kahlua.vm.LuaClosure;
 public class WherigoGame implements UI {
 
     private static final String LOG_PRAEFIX = "WHERIGOGAME: ";
-
-    private static final Set<String> OPENWIG_ENGINE_ERROR_PREFIXES = new HashSet<>(Arrays.asList(
-        "You hit a bug! Please report this to whereyougo@cgeo.org with a screenshot of this message.".toLowerCase(Locale.ROOT),
-        "You hit a bug! please report at openwig.googlecode.com and i'll fix it for you!".toLowerCase(Locale.ROOT)
-    ));
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
@@ -125,6 +119,14 @@ public class WherigoGame implements UI {
 
     public boolean isPlaying() {
         return isPlaying;
+    }
+
+    public boolean dialogIsPaused() {
+        return WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED;
+    }
+
+    public void unpauseDialog() {
+        WherigoDialogManager.get().unpause();
     }
 
     public void newGame(@NonNull final ContentStorage.FileInformation cartridgeInfo) {
@@ -210,6 +212,10 @@ public class WherigoGame implements UI {
     @Nullable
     public String getLastError() {
         return lastError;
+    }
+
+    public void clearLastError() {
+        lastError = null;
     }
 
     @SuppressWarnings("unchecked")
@@ -349,17 +355,11 @@ public class WherigoGame implements UI {
         Log.w(LOG_PRAEFIX + "ERROR: " + errorMessage);
 
         if (errorMessage != null) {
-            //Remove common prefixed
-            String errorMsg = errorMessage;
-            for (String commonPrefix : OPENWIG_ENGINE_ERROR_PREFIXES) {
-                if (errorMsg.toLowerCase(Locale.ROOT).startsWith(commonPrefix)) {
-                    errorMsg = "OpenWIG error: " + errorMsg.substring(commonPrefix.length());
-                    break;
-                }
-            }
-            this.lastError = errorMsg;
+            this.lastError = errorMessage +
+                " (Cartridge: " + getCartridgeName() + ", cguid: " + getCGuid() +
+                ", timestamp: " + Formatter.formatDateTime(System.currentTimeMillis()) + ")";
         }
-        WherigoDialogManager.get().display(new WherigoErrorDialogProvider());
+        ViewUtils.showToast(null, R.string.wherigo_error_toast);
     }
 
     @Override

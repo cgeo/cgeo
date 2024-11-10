@@ -66,7 +66,7 @@ public class WherigoInfoBarView extends LinearLayout {
             return;
         }
 
-        if (WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED) {
+        if (WherigoGame.get().dialogIsPaused()) {
             TextParam.id(R.string.wherigo_notification_waiting, WherigoGame.get().getCartridgeName()).applyTo(binding.wherigoInfoText);
         } else {
             binding.wherigoInfoText.setText(WherigoGame.get().getCartridgeName());
@@ -74,7 +74,7 @@ public class WherigoInfoBarView extends LinearLayout {
     }
 
     private void onBarClick() {
-        if (WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED) {
+        if (WherigoGame.get().dialogIsPaused()) {
             WherigoDialogManager.get().unpause();
         } else if (this.activity != null) {
             WherigoActivity.start(this.activity, false);

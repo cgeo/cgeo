@@ -2,8 +2,7 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -199,8 +198,7 @@ public class WherigoDialogManager {
                         state = State.DIALOG_PAUSED;
                         final Activity currentActivity = CgeoApplication.getInstance().getCurrentForegroundActivity();
                         if (currentActivity != null) {
-                            SimpleDialog.of(currentActivity).setTitle(TextParam.id(R.string.wherigo_player))
-                                .setMessage(TextParam.id(R.string.wherigo_dialog_pause_info)).show();
+                            ViewUtils.showToast(null, R.string.wherigo_dialog_pause_info);
                         }
                     } else {
                         this.currentDialogProvider = null;
