@@ -168,7 +168,6 @@
     <string name="err_detail_cache">c:geo не може відображати бажану вами схованку. Вона дійсно схованка?</string>
     <string name="err_detail_cache_find">c:geo не вдається знайти схованку</string>
     <string name="err_detail_cache_find_some">c:geo не може знайти цей геокеш.</string>
-    <string name="err_detail_cache_find_any">c:geo не може знайти цей геокеш.</string>
     <string name="err_detail_no_spoiler">c:geo не знайдено зображень спойлера для цього кешу.</string>
     <string name="err_detail_still_working">Продовжуйте працювати над іншим завданням.</string>
     <string name="err_detail_premium_log_found">Цей кеш доступний лише для преміум членів geocaching.com. Таким чином, інформація з кешу не може бути відображена.\n\n, Однак, якщо ви вже знайшли цей кеш, увійдіть сюди.</string>
@@ -961,10 +960,6 @@
     <string name="do_auto">Авто</string>
     <string name="do_flat">Плоский</string>
     <string name="do_upright">вертикальний</string>
-    <!-- license -->
-    <string name="license">Ліцензія</string>
-    <string name="license_show">Показати ліцензію</string>
-    <string name="license_dismiss">звільнити</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Минула подія</string>
     <string name="helper_calendar_pastevent_question">Дата події минула. Додати все-таки?</string>
@@ -1403,6 +1398,7 @@
     <string name="status_not_ok">Помилка</string>
     <string name="wizard_status_title">Налаштування статусу</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Попередній</string>
     <string name="skip">Пропустити</string>
