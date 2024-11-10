@@ -171,7 +171,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                         getDisplayableDistance(LocationDataProvider.getInstance().currentGeo().getCoords(),
                                 new Geopoint(info.getCartridgeFile().latitude, info.getCartridgeFile().longitude));
                 final byte[] iconData = info.getIconData();
-                final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.type_marker_wherigo) :
+                final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.ic_menu_wherigo) :
                         ImageParam.drawable(getDrawableForImageData(null, iconData));
 
                 final WherigolistItemBinding binding = WherigolistItemBinding.bind(view);

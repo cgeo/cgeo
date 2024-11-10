@@ -231,7 +231,7 @@ public class WherigoDialogManager {
         final String content = LocalizationUtils.getString(R.string.wherigo_notification_waiting, WherigoGame.get().getCartridgeName());
         final Context context = CgeoApplication.getInstance();
         Notifications.send(context, Notifications.ID_WHERIGO_NEW_DIALOG_ID, NotificationChannels.WHERIGO_NOTIFICATION, builder -> builder
-            .setSmallIcon(R.drawable.type_marker_wherigo)
+            .setSmallIcon(R.drawable.ic_menu_wherigo)
             // deliberately set notification info to both title and content, as some devices
             // show title first (and content is cut off)
             .setContentTitle(content)

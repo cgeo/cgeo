@@ -67,7 +67,7 @@ public class QuickLaunchItem extends InfoItem {
 
     static {
         if (Settings.enableFeatureWherigo()) {
-            ITEMS.add(new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.type_marker_wherigo, false));
+            ITEMS.add(new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, false));
         }
     }
 
