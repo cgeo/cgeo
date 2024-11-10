@@ -20,6 +20,7 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -108,7 +109,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
         binding.download.setOnClickListener(v -> manualCartridgeDownload());
-        binding.reportProblem.setOnClickListener(v -> WherigoDialogManager.get().display(new WherigoErrorDialogProvider()));
+        binding.reportProblem.setOnClickListener(v -> WherigoViewUtils.showErrorDialog(this));
         binding.map.setOnClickListener(v -> showOnMap());
         binding.cacheContextGotocache.setOnClickListener(v -> {
             goToCache(WherigoGame.get().getContextGeocode());
@@ -127,6 +128,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 handleCGuidInput(guid);
             }
         }
+        ViewUtils.addBadge(binding.resumeDialog, false, -1);
     }
 
     @Override
@@ -280,7 +282,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         binding.download.setEnabled(true);
         binding.reportProblem.setEnabled(true);
 
-        binding.resumeDialog.setVisibility(WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED ? View.VISIBLE : View.GONE);
+        binding.resumeDialog.setVisibility(game.dialogIsPaused() ? View.VISIBLE : View.GONE);
         binding.saveGame.setEnabled(game.isPlaying());
         binding.loadGame.setEnabled(game.isPlaying() && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());

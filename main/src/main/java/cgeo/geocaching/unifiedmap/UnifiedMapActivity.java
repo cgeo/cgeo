@@ -73,6 +73,7 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
+import cgeo.geocaching.wherigo.WherigoThingType;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
@@ -1029,11 +1030,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 result.add(new MapSelectableItem((Route) viewModel.getTracks().getTrack(key.substring(TracksLayer.TRACK_KEY_PREFIX.length())).getRoute()));
             }
             if (key.startsWith(WherigoLayer.WHERIGO_KEY_PRAEFIX)) {
-                result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())), "Zone:" + key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), null));
+                result.add(new MapSelectableItem(WherigoGame.get().getZone(key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length())),
+                        key.substring(WherigoLayer.WHERIGO_KEY_PRAEFIX.length()), // Zone name
+                        WherigoGame.get().getCartridgeName(), // Wherigo
+                        WherigoThingType.LOCATION.getIconId()));
             }
 
             if (key.startsWith(GeoItemTestLayer.TESTLAYER_KEY_PREFIX)) {
-                result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString()));
+                result.add(new MapSelectableItem(key, "Test item: " + key.substring(GeoItemTestLayer.TESTLAYER_KEY_PREFIX.length()), clickableItemsLayer.get(key).getType().toString(), -1));
             }
 
 

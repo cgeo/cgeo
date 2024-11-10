@@ -13,6 +13,8 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 
@@ -186,7 +188,7 @@ public final class WherigoViewUtils {
 
         final Runnable refreshGui = () -> {
             updateThingTypeTable(model, binding.wherigoThingTypeList);
-            binding.resumeDialog.setVisibility(WherigoDialogManager.get().getState() == WherigoDialogManager.State.DIALOG_PAUSED ? View.VISIBLE : View.GONE);
+            binding.resumeDialog.setVisibility(WherigoGame.get().dialogIsPaused() ? View.VISIBLE : View.GONE);
             binding.cacheContextBox.setVisibility(WherigoGame.get().getContextGeocode() != null ? View.VISIBLE : View.GONE);
             binding.cacheContextName.setText(WherigoGame.get().getContextGeocacheName());
         };
@@ -202,5 +204,32 @@ public final class WherigoViewUtils {
         });
 
         return dialog;
+    }
+
+    public static void showErrorDialog(final Activity activity) {
+        final String lastError = WherigoGame.get().getLastError();
+        final String dialogErrorMessage = (lastError == null ? LocalizationUtils.getString(R.string.wherigo_error_game_noerror) :
+                LocalizationUtils.getString(R.string.wherigo_error_game_error, lastError)) +
+                        "\n\n" + LocalizationUtils.getString(R.string.wherigo_error_game_error_addinfo);
+        final String errorMessageEmail = lastError == null ? "-" : lastError;
+
+        final SimpleDialog dialog = SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.wherigo_error_title))
+                .setMessage(TextParam.text(dialogErrorMessage).setMarkdown(true))
+                .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
+                .setNegativeButton(TextParam.id(R.string.close));
+
+        if (lastError != null) {
+            dialog
+                .setNeutralButton(TextParam.id(R.string.log_clear))
+                .setNeutralAction(() -> WherigoGame.get().clearLastError());
+        }
+
+        dialog.confirm(() -> {
+            final String emailMessage = LocalizationUtils.getString(R.string.wherigo_error_email,
+                    errorMessageEmail,
+                    WherigoGame.get().getCartridgeName() + " (" + WherigoGame.get().getCGuid() + ")´");
+            DebugUtils.createLogcatHelper(activity, false, true, emailMessage);
+        });
     }
 }
