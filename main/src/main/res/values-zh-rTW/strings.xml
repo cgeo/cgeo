@@ -197,7 +197,6 @@
     <string name="err_detail_cache">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
     <string name="err_detail_cache_find">無法找到geocache</string>
     <string name="err_detail_cache_find_some">無法找到那個geocache</string>
-    <string name="err_detail_cache_find_any">無法找到任何geocache</string>
     <string name="err_detail_no_spoiler">c:geo未找到相關的spoiler照片</string>
     <string name="err_detail_still_working">仍然在處理另一個工作</string>
     <string name="err_detail_premium_log_found">這個是geocaching.com付費會員專屬的地理藏寶。雖然無法顯示這個地理藏寶的詳細資訊，但您仍可以發佈您的日誌。</string>
@@ -1192,10 +1191,6 @@
     <string name="do_unknown">未知</string>
     <string name="do_auto">自動</string>
     <string name="do_upright">右上</string>
-    <!-- license -->
-    <string name="license">许可</string>
-    <string name="license_show">顯示授權</string>
-    <string name="license_dismiss">解散</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">過去的聚會活動</string>
     <string name="helper_calendar_pastevent_question">現在已經超過聚會活動的日期。還是要加入?</string>
@@ -1596,6 +1591,7 @@
     <string name="wizard_status_platform">地理藏寶服務</string>
     <string name="wizard_not_now">先不要</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">上一首</string>
     <string name="skip">略過</string>
