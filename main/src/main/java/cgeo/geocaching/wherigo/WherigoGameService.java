@@ -48,7 +48,7 @@ public class WherigoGameService extends Service {
         final String content = LocalizationUtils.getString(R.string.wherigo_notification_service);
         serviceDisposables.add(geoDirHandler.start(GeoDirHandler.UPDATE_GEODIR));
         startForeground(Notifications.ID_WHERIGO_SERVICE_NOTIFICATION_ID, Notifications.newBuilder(this, NotificationChannels.WHERIGO_NOTIFICATION)
-            .setSmallIcon(R.drawable.type_marker_wherigo)
+            .setSmallIcon(R.drawable.ic_menu_wherigo)
             .setContentTitle(content)
             .setContentText(content)
             .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, WherigoActivity.class), ProcessUtils.getFlagImmutable()))
