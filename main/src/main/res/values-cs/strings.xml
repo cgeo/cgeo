@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo nemůže zobrazit požadovanou kešku. Jedná se skutečně o kešku?</string>
     <string name="err_detail_cache_find">c:geo nemůže najít kešku</string>
     <string name="err_detail_cache_find_some">c:geo nemůže najít tuto kešku.</string>
-    <string name="err_detail_cache_find_any">c:geo nemůže najít žádnou kešku.</string>
     <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto kešku.</string>
     <string name="err_detail_still_working">Stále probíhá zpracování jiné úlohy.</string>
     <string name="err_detail_premium_log_found">Tato keška je dostupná pouze pro prémiové členy geocaching.com. Informace o kešce proto nelze zobrazit.\n\nPokud jste však již tuto kešku nalezli, můžete ji zalogovat zde.</string>
@@ -461,6 +460,8 @@
     <string name="caches_clear_offlinelogs">Vymazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
+    <string name="caches_overwrite_offline_log">Přepsat offline log</string>
+    <string name="caches_overwrite_offline_log_question">Keška má existující offline log typu „%1$s“ s textem logu. Chcete tento log přepsat?</string>
     <string name="caches_show_attributes">Zobrazit přehled atributů</string>
     <string name="caches_set_cache_icon">Natavit ikonu kešky</string>
     <string name="caches_reset_cache_icons_title">Obnovit ikonu kešky</string>
@@ -575,10 +576,12 @@
     <string name="cache_filter_storage_delete_title">Odstranit filtr</string>
     <string name="cache_filter_storage_delete_message">Opravdu chcete odstranit tuto konfiguraci filtru?</string>
     <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
+    <string name="cache_filter_storage_clear_title">Vymazat aktuální filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
     <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>
     <string name="cache_filter_storage_save_confirm_message">Filtr s názvem \'%s\' a jinou konfigurací již existuje. Chcete jej přepsat?</string>
+    <string name="cache_filter_storage_clear_message">Chcete vymazat aktuální filtr?</string>
     <string name="cache_filter_stringfilter_matchcase">Rozlišovat velikost písmen</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Hledaný text</string>
     <string name="cache_filter_stringfilter_info">S možností \'Vzor\' použijte zástupné znaky * a ?. * představuje nulu, jeden nebo více znaků, ? představuje jeden jediný znak. Například vzor \'H?mburg*\' bude odpovídat např. \'Homburg\' nebo \'Hamburg v noci\', ale ne \'Den v Hamburgu\' nebo \'Hahmburg\'</string>
@@ -791,8 +794,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
     <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Nabídka obou enginů VTM + Mapsforge pro mapy Mapsforge (pro účely testování)</string>
+    <string name="settings_unifiedMapVariants_title">Varianty Sjednocené mapy</string>
     <string name="settings_userDefinedTileProvider">Uživatelsky definovaný poskytovatel dlaždic</string>
     <string name="settings_userDefinedTileProviderUri">Zadejte celé Uri (bez koncového lomítka) poskytovatele dlaždic nebo zadejte celé Uri s parametry (včetně {X}, {Y} a {Z}). Ujistěte se, že jste zkontrolovali a dodržujete jejich podmínky použití.</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
@@ -902,6 +904,9 @@
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
+    <string name="init_date_format">Formát data</string>
+    <string name="init_date_format_description">Formát, který má být použitý v krátkém tvaru, např. v zobrazení logu</string>
+    <string name="system_default">Podle systému</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
@@ -934,7 +939,7 @@
     <string name="menu_elevation_info">Nadmořská výška (mapa):</string>
     <string name="elevation_selected">Nadmořská výška (mapa) na vybraném místě</string>
     <string name="elevation_difference">Výškový rozdíl</string>
-    <string name="distance">Vzdálenost:</string>
+    <string name="distance">Vzdálenost</string>
     <string name="copy_coordinates">Kopírovat souřadnice</string>
     <string name="selected_position">Vybraná pozice</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
@@ -950,6 +955,7 @@
     <string name="init_units">Používat imperiální jednotky</string>
     <string name="init_summary_units">Používat imperiální jednotky vzdálenosti</string>
     <string name="init_cachelists">Seznamy kešek</string>
+    <string name="init_localization">Lokalizace</string>
     <string name="init_log_offline">Povolit offline logování</string>
     <string name="init_summary_log_offline">Povolit offline logování\n(Při logování nezobrazovat online logovací obrazovku a neodesílat logy na server)</string>
     <string name="init_choose_list">Ptát se na seznam</string>
@@ -1591,7 +1597,9 @@
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
     <!-- html styles -->
     <string name="html_style_default">Výchozí</string>
+    <string name="html_style_default_no_contrast_fix">Výchozí bez opravy kontrastu</string>
     <string name="html_style_monochrome">Monochromatický</string>
+    <string name="html_style_source_formatted">HTML zdroj formátován</string>
     <string name="html_style_source">Zdroj HTML</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">stupně</string>
@@ -1767,8 +1775,6 @@
     <string name="map_showwp_visited">Navštívené</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tím se synchronizují vaše motivy do soukromé složky aplikace, aby se zlepšil výkon otevírání prohlížeče map za cenu nějakého úložného prostoru zařízení.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tím se průběžně synchronizuje obsah složky s motivy do soukromé složky aplikace pro rychlejší přístup k souborům. Než povolíte tuto funkci, ujistěte se, že vaše složka s motivy obsahuje pouze vaše motivy, ale ne žádné další (velké) soubory.\n\nVaše složka s motivy \'%1$s\' má aktuálně %2$s, %3$s a velikost %4$s.\n\nChcete zapnout synchronizaci složek?</string>
     <string name="onetime_mapthemefixslow_title">Opravit pomalé vykreslování motivů mapy</string>
     <string name="onetime_mapthemefixslow_message">Práce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče map. Motivy můžete zkomprimovat nebo synchronizovat, abyste získali lepší výkon a zkrátili dobu pro spouštění mapy.</string>
     <string name="map_theme_select">Vybrat motiv mapy</string>
@@ -1913,10 +1919,6 @@
     <string name="do_auto">Automaticky</string>
     <string name="do_flat">Plochý</string>
     <string name="do_upright">Vzpřímený</string>
-    <!-- license -->
-    <string name="license">Licence</string>
-    <string name="license_show">Zobrazit licenci</string>
-    <string name="license_dismiss">Zamítnout</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Uplynulá událost</string>
     <string name="helper_calendar_pastevent_question">Datum události již uplynulo. Chceš ji i přesto přidat?</string>
@@ -2554,7 +2556,6 @@
     <string name="check_tiles_missing">Nalezena chybějící směrovací data:</string>
     <string name="check_tiles_unsupported">Varování: Směrovací data nejsou pro vybranou oblast alespoň částečně k dispozici</string>
     <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
-    <string name="download_hillshading_title">Chybějící data stínování kopců</string>
     <string name="check_hillshading_found">Data stínování kopců jsou již k dispozici</string>
     <string name="check_hillshading_missing">Nalezena chybějící data stínování kopců:</string>
     <string name="check_hillshading_unsupported">Varování: Data stínování kopců nejsou pro vybranou oblast alespoň částečně k dispozici</string>
@@ -2636,6 +2637,69 @@
     <string name="wizard_skip_wizard_warning">c:geo nemusí fungovat podle očekávání, dokud nebude dokončena konfigurace. V závislosti na chybějící konfiguraci nemusí být c:geo schopen číst/ukládat data jako jsou offline mapy, kešky, poznámky atd.\n\nKdykoli se budete cítit připraveni dokončit nastavení, zvolte v hlavní nabídce „Průvodce konfigurací“ nebo c:geo restartujte.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizace %1$s složek byla dokončena po %2$s, %3$d z %4$s potřebuje synchronizaci</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Player</string>
+    <string name="wherigo_controls">Ovládací prvky</string>
+    <string name="wherigo_controls_cartridgelist_hint">Zobrazit cartridge a začít hru</string>
+    <string name="wherigo_controls_savegame_hint">Uložit průběh spuštěné hry</string>
+    <string name="wherigo_controls_loadgame_hint">Načíst uloženou hru</string>
+    <string name="wherigo_controls_stopgame_hint">Zastavit spuštěnou hru</string>
+    <string name="wherigo_controls_mapzones_hint">Zobrazit zóny spuštěné hry na mapě</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Stáhnout cartridge (je potřebný cguid)</string>
+    <string name="wherigo_controls_reportproblem_hint">Nahlásit problém s Wherigo Player</string>
+    <string name="wherigo_controls_cache_context">Kontext kešky</string>
+    <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
+    <string name="wherigo_controls_resume_paused_dialog">Obnovit pozastavený dialog</string>
+    <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
+    <string name="wherigo_currently_playing">Právě se hraje</string>
+    <string name="wherigo_cartridge_details">Podrobnosti cartridge</string>
+    <string name="wherigo_locate_on_center">Vycentrovat</string>
+    <string name="wherigo_revoke_fixed_location">Zrušit zafixovanou polohu</string>
+    <string name="wherigo_thingtype_location">Místa</string>
+    <string name="wherigo_thingtype_inventory">Inventář</string>
+    <string name="wherigo_thingtype_item">Vidíte</string>
+    <string name="wherigo_thingtype_task">Úkoly</string>
+    <string name="wherigo_thingtype_thing">Věci</string>
+    <string name="wherigo_author">Autor</string>
+    <string name="wherigo_zone_inside">uvnitř</string>
+    <string name="wherigo_zone_near">blízko</string>
+    <string name="wherigo_choose_cartridge">Vybrat cartridge</string>
+    <string name="wherigo_choose_new_loadgame">Vybrat novou hru nebo načíst hru</string>
+    <string name="wherigo_choose_savegame_slot">Vybrat slot na uložení</string>
+    <string name="wherigo_savegame_name_empty">&lt;Nová hra&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Automatické uložení</string>
+    <string name="wherigo_savegame_name_numeric">Slot %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Prázdný slot&gt;</string>
+    <string name="wherigo_download_title">Stáhnout cartridge</string>
+    <string name="wherigo_download_message">Cartridge s CGUID \"%s\" není ve vašem zařízení k dispozici. Chcete ji stáhnout?</string>
+    <string name="wherigo_download_successful_title">Úspěšně staženo</string>
+    <string name="wherigo_download_successful_message">Cartridge s CGUID \"%s\" byla úspěšně stažena. Chcete ji otevřít?</string>
+    <string name="wherigo_download_failed_title">Stahování selhalo</string>
+    <string name="wherigo_download_failed_message">Stahování cartridge s CGUID \"%1$s\" selhalo: %2$s</string>
+    <string name="wherigo_manual_download_title">Stáhnout cartridge ručně</string>
+    <string name="wherigo_manual_download_cguid_label">Zde zadejte CGUID</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: odstranění zbytkového souboru</string>
+    <string name="wherigo_download_progress_login">Přihlašování…</string>
+    <string name="wherigo_download_progress_started">Stahování začalo</string>
+    <string name="wherigo_download_progress_download_status">Staženo %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_error_title">Wherigo zpráva o problému</string>
+    <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
+    <string name="wherigo_confirm_stop_running_game_message">Momentálně je spuštěná hra pro \"%s\". Chcete tuto hru zastavit?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Odstranit Wherigo cartridge</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Opravdu chcete odstranit cartridge  \"%1$s\" včetně %2$s uložených her?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Odstranit uloženou Wherigo hru</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Opravdu chcete odstranit uloženou hru \"%2$s\" z cartridge \"%1$s\"?</string>
+    <string name="wherigo_save_game_title">Uložení postupu ve hře Wherigo</string>
+    <string name="wherigo_save_game_message">Uložte svůj postup ve hře na cartridge \"%1$s\" do \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Zadejte název (volitelné)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Varování: pokračováním přepíšete existující uloženou hru z \"%1$s\"</string>
+    <string name="wherigo_dialog_push_page">Strana %1$s / %2$s</string>
+    <string name="wherigo_notification_service">c:geo spouští Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" na vás čeká!</string>
+    <string name="wherigo_toast_check_game">Wherigo: zkontrolujte, zda ve hře nedošlo ke změnám</string>
+    <string name="wherigo_toast_check_things">Wherigo: zkontrolujte si změny v %s</string>
+    <string name="wherigo_otm_shortcuts_title">Tlačítko rychlého spuštění Wherigo Playeru</string>
+    <string name="wherigo_otm_shortcuts_message">Pokud chcete c:geo Wherigo Player používat pravidelně, zvažte vytvoření tlačítka rychlého spuštění nebo vlastní položky v nabídce v části Nastavení -&gt; Vzhled</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
@@ -2651,6 +2715,9 @@
     <string name="expand">Rozbalit</string>
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
+    <string name="play">Hrát</string>
+    <string name="pause">Pozastavit</string>
+    <string name="resume">Pokračovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
