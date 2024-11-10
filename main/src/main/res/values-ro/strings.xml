@@ -179,7 +179,6 @@
     <string name="err_detail_cache">c:geo nu poate afişa cutia solicitată. Este într-adevăr o geocutie?</string>
     <string name="err_detail_cache_find">c:geo nu găseşte cutia</string>
     <string name="err_detail_cache_find_some">c:geo nu găseşte acea cutie.</string>
-    <string name="err_detail_cache_find_any">c:geo nu poate găsi nici o cutie.</string>
     <string name="err_detail_no_spoiler">c:geo nu a găsit imagini pentru această geocutie.</string>
     <string name="err_detail_still_working">Încă se procesează o altă comandă.</string>
     <string name="err_detail_premium_log_found">Acest cache este disponibil doar membrilor premium ai geocaching.com. Prin urmare, informațiile despre cache nu pot fi afișate.\n\nCu toate acestea, dacă ați găsit deja acest cache, puteți scrie un jurnal aici.</string>
@@ -801,10 +800,6 @@
     <string name="destination_select">Alege destinaţia</string>
     <string name="osmand_marker_cgeo">Marcaj din c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenţă</string>
-    <string name="license_show">Afişează licenţa</string>
-    <string name="license_dismiss">Renunță</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Eveniment trecut</string>
     <string name="helper_calendar_pastevent_question">Data evenimentului este în trecut. Adaugă-l oricum?</string>
@@ -1173,6 +1168,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Anulează</string>
     <!-- Multi-Selections -->
