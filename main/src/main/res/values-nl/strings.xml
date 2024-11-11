@@ -1525,6 +1525,7 @@
     <string name="cachedetails_progress_unwatch">Verwijderd van watchlist</string>
     <string name="cachedetails_progress_favorite">Toegevoegd aan favorieten</string>
     <string name="cachedetails_progress_unfavorite">Verwijderd uit favorieten</string>
+    <string name="cache_wherigo_start">Download en speel deze Wherigo met c:geo\'s interne speler</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
@@ -2183,6 +2184,7 @@
     <string name="attribute_blind_people_no">Geen handicap: Blind</string>
     <string name="attribute_unknown">Onbekend attribuut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Cache Status</string>
     <string name="cat_tools">Uitrusting</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cachelocatie</string>
@@ -2588,6 +2590,7 @@
     <string name="wherigo_controls_cache_context">Cache Context</string>
     <string name="wherigo_controls_cache_link">Ga naar de cache details</string>
     <string name="wherigo_controls_resume_paused_dialog">Gespauzeerd dialoog hervatten</string>
+    <string name="wherigo_dialog_pause_info">Hervat dialoogvenster in Wherigo Player door op \"Hervat gepauzeerd dialoog\" te klikken</string>
     <string name="wherigo_no_game_running">Er is momenteel geen wherigo spel actief</string>
     <string name="wherigo_currently_playing">Momenteel aan het spelen</string>
     <string name="wherigo_cartridge_details">Cartridge details</string>
@@ -2621,6 +2624,11 @@
     <string name="wherigo_download_progress_started">Download gestart</string>
     <string name="wherigo_download_progress_download_status">Gedownload %1$s / %2$s (%3$s%)</string>
     <string name="wherigo_error_title">Wherigo Probleem rapport</string>
+    <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
+    <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Gebruik \'Per e-mail verzenden\' om een probleem met betrekking tot de wherigo te melden aan ons supportteam.</string>
+    <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
     <string name="wherigo_confirm_stop_running_game_message">Er wordt momenteel een spel uitgevoerd voor \"%s\". Wil je dit spel stoppen?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Verwijder Wherigo Cartridge</string>
