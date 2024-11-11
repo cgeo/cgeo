@@ -1005,6 +1005,7 @@
     <string name="auth_dialog_completed_geokrety">c:geoは%sと連携するための認証を受けました</string>
     <string name="err_auth_geokrety_bad_password">ユーザー名/パスワードが正しくないようです</string>
     <string name="err_auth_geokrety_unknown">%1$sの戻り値: %2$s</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d キャッシュ</item>
