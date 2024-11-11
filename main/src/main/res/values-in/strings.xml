@@ -494,6 +494,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo sekarang resmi untuk berinteraksi dengan %s.</string>
     <string name="err_auth_geokrety_bad_password">Nama pengguna/Kata sandi anda sepertinya tidak cocok.</string>
     <string name="err_auth_geokrety_unknown">%1$s dikembalikan: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d cache</item>
