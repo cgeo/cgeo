@@ -376,6 +376,7 @@
     <!-- auth token -->
     <!-- auth opencaching -->
     <!-- auth geokrety -->
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">היום האחרון הזמין</string>
