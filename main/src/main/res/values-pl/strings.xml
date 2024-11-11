@@ -1305,6 +1305,7 @@
     <string name="auth_dialog_completed_geokrety">Aplikacja c:geo jest teraz upoważniona do interakcji z %s.</string>
     <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
     <string name="err_auth_geokrety_unknown">%1$s zwrócił: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d skrytka</item>
