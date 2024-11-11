@@ -1519,6 +1519,7 @@
     <string name="cachedetails_progress_unwatch">Borttagen från bevakningslistan</string>
     <string name="cachedetails_progress_favorite">Lades till i favoriter</string>
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
+    <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
@@ -2177,6 +2178,7 @@
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
     <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Cache-status</string>
     <string name="cat_tools">Utrustning</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Cache-plats</string>
@@ -2573,11 +2575,17 @@
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
+    <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
     <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
     <string name="wherigo_thingtype_location">Platser</string>
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
+    <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo-motorn:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Använd \"Skicka via e-post\" för att rapportera ett wherigo-relaterat problem till vårt supportteam.</string>
+    <string name="wherigo_error_email">Wherigo Problemrapport\n\nFel: %1$s\n\nWherigo-info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo-motorn rapporterade ett fel. Öppna feldialogen för detaljer.</string>
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
     <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
     <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
