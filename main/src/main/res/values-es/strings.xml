@@ -1034,6 +1034,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo está autorizado a interactuar con %s.</string>
     <string name="err_auth_geokrety_bad_password">Tu usuario/contraseña no es correcto.</string>
     <string name="err_auth_geokrety_unknown">%1$s ha devuelto: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">Un caché</item>
