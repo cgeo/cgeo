@@ -1306,6 +1306,17 @@
     <string name="err_auth_geokrety_bad_password">Nazwa użytkownika lub hasło wygląda na nieprawidłowe.</string>
     <string name="err_auth_geokrety_unknown">%1$s zwrócił: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Brak danych do logowania</string>
+    <string name="err_auth_gc_loginpage1">Nie udało się pobrać strony logowania (1)</string>
+    <string name="err_auth_gc_loginpage2">Nie udało się pobrać strony logowania (2)</string>
+    <string name="err_auth_gc_verification_token">Nie udało się znaleźć tokenu weryfikacji żądania</string>
+    <string name="err_auth_gc_captcha">Nie udało się zalogować do geocaching.com ze względu na wymagane captcha</string>
+    <string name="err_auth_gc_bad_login">Nie udało się zalogować do geocaching.com jako %s z powodu złej nazwy użytkownika/hasła</string>
+    <string name="err_auth_gc_not_validated">Nie udało się zalogować do Geocaching.com jako %s, ponieważ konto musi zostać najpierw zweryfikowane</string>
+    <string name="err_auth_gc_unknown_error">Nie udało się zalogować do Geocaching.com jako %s z nieznanego powodu</string>
+    <string name="err_auth_gc_unknown_error_generic">Nieznany błąd</string>
+    <string name="err_auth_gc_communication_error">Błąd komunikacji</string>
+    <string name="err_auth_gc_manual_error">Błąd ręcznego logowania: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d skrytka</item>
