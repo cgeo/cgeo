@@ -1526,6 +1526,7 @@
     <string name="cachedetails_progress_unwatch">S\'ha eliminat de la llista de seguiment</string>
     <string name="cachedetails_progress_favorite">S\'ha afegit als preferits</string>
     <string name="cachedetails_progress_unfavorite">S\'ha esborrat de preferits</string>
+    <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
@@ -2185,6 +2186,7 @@
     <string name="attribute_blind_people_no">No adequat a persones invidents</string>
     <string name="attribute_unknown">Atribut desconegut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Estat del catxé</string>
     <string name="cat_tools">Equipament</string>
     <string name="cat_type">Tipus</string>
     <string name="cat_location">Ubicació del catxé</string>
@@ -2590,6 +2592,7 @@
     <string name="wherigo_controls_cache_context">Context del catxé</string>
     <string name="wherigo_controls_cache_link">Vés als detalls del catxé</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprèn el diàleg en pausa</string>
+    <string name="wherigo_dialog_pause_info">Reprèn el diàleg a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
     <string name="wherigo_currently_playing">Actualment jugant</string>
     <string name="wherigo_cartridge_details">Detalls del cartutx</string>
@@ -2623,6 +2626,11 @@
     <string name="wherigo_download_progress_started">Descàrrega iniciada</string>
     <string name="wherigo_download_progress_download_status">S\'ha baixat %1$s/%2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Informe del problema Wherigo</string>
+    <string name="wherigo_error_game_noerror">Wherigo Engine no ha informat cap error.</string>
+    <string name="wherigo_error_game_error">Error notificat per Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Utilitzeu \"Envia per correu electrònic\" per informar d\'un problema relacionat amb Wherigo al nostre equip d\'assistència.</string>
+    <string name="wherigo_error_email">Informe de problemes de Wherigo\n\nError del motor: %1$s\n\nInformació de Wherigo: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine ha informat d\'un error. Obriu el diàleg d\'errors per obtenir més informació.</string>
     <string name="wherigo_confirm_stop_running_game_title">Deixa d\'executar el joc Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">S\'està executant un joc per a \"%s\". Vols aturar aquest joc?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Suprimeix el cartutx Wherigo</string>
