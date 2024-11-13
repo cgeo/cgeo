@@ -891,6 +891,7 @@
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
     <string name="init_use_default_language">Använd standardspråk</string>
+    <string name="system_default">Systemstandard</string>
     <string name="init_showwaypoints">Visa vägpunkter</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
@@ -2581,6 +2582,7 @@
     <string name="wherigo_thingtype_task">Uppgifter</string>
     <string name="wherigo_thingtype_thing">Saker</string>
     <string name="wherigo_download_progress_download_status">Hämtat %1$s / %2$s (%3$s %%)</string>
+    <string name="wherigo_error_title">Wherigo Problemrapport</string>
     <string name="wherigo_error_game_noerror">Inga fel rapporterades av Wherigo-motorn.</string>
     <string name="wherigo_error_game_error">Fel som rapporterats av Wherigo-motorn:\n\n```\n%1$s\n```</string>
     <string name="wherigo_error_game_error_addinfo">Använd \"Skicka via e-post\" för att rapportera ett wherigo-relaterat problem till vårt supportteam.</string>
