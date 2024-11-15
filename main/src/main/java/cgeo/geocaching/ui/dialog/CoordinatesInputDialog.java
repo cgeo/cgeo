@@ -257,7 +257,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             binding.cache.setVisibility(View.GONE);
         }
 
-        if (inputData.getGeocode() != null) {
+        if (inputData.getGeocode() != null && ((CoordinateUpdate) requireActivity()).supportsCalculatedCoordinates()) {
             binding.calculateGlobal.setVisibility(View.VISIBLE);
             binding.calculateGlobal.setOnClickListener(vv -> {
                 inputData.setGeopoint(gp);
@@ -707,6 +707,10 @@ public class CoordinatesInputDialog extends DialogFragment {
         void updateCoordinates(Geopoint gp);
 
         boolean supportsNullCoordinates();
+
+        default boolean supportsCalculatedCoordinates() {
+            return true;
+        }
 
         default void updateCoordinates(CoordinateInputData coordinateInputData) {
             updateCoordinates(coordinateInputData.getGeopoint());

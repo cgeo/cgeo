@@ -94,6 +94,11 @@
         android:visible="false">
     </item>
     <item
+        android:id="@+id/menu_set_coordinates"
+        android:icon="@drawable/ic_menu_save"
+        android:title="@string/cache_set_coordinates"
+        android:visible="false"/>
+    <item
         android:id="@+id/menu_waypoints"
         android:title="@string/cache_waypoints"
         app:showAsAction="never"
