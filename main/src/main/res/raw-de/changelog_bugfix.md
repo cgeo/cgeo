@@ -1,4 +1,7 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+##
 - Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
 - Korrektur: Absturz bei der Bearbeitung des Variablenfeldes
 - Korrektur: Absturz beim Importieren einer GPX-Datei (Workaround)
