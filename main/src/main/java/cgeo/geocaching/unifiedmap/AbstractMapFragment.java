@@ -154,7 +154,7 @@ public abstract class AbstractMapFragment extends Fragment {
     }
 
     public int getZoomMax() {
-        return currentTileProvider == null ? 0 : currentTileProvider.getZoomMax();
+        return currentTileProvider == null ? 18 : currentTileProvider.getZoomMax();
     }
 
     public abstract int getCurrentZoom();
