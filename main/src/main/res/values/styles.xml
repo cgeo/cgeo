@@ -121,6 +121,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_buttonsPrimary</item>
         <item name="strokeColor">@color/button_strokecolor_selector</item>
+        <item name="iconTint">@color/colorText</item>
     </style>
 
     <style name="button_full" parent="button">
