@@ -363,7 +363,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         final int tileSize = mMapView.getModel().displayModel.getTileSize();
         final byte newZoom = LatLongUtils.zoomForBounds(new Dimension(mMapView.getWidth(), mMapView.getHeight()),
                 new org.mapsforge.core.model.BoundingBox(bounds.getMinLatitude(), bounds.getMinLongitude(), bounds.getMaxLatitude(), bounds.getMaxLongitude()), tileSize);
-        mMapView.setZoomLevel(newZoom);
+        setZoom(newZoom);
     }
 
     @Override
@@ -373,7 +373,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
 
     @Override
     public void setZoom(final int zoomLevel) {
-        mMapView.setZoomLevel((byte) zoomLevel);
+        mMapView.setZoomLevel((byte) Math.max(Math.min(zoomLevel, getZoomMax()), getZoomMin()));
     }
 
     @Override
