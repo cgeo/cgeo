@@ -1,4 +1,7 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+##
 - Fix: Some issues with new event time detection
 - Fix: Krasch vid redigering av variabelfält
 - Fix: Crash on importing GPX file (workaround)
