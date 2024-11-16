@@ -155,7 +155,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
                             connectorStatus.setOnClickListener(connectorConfig);
 
                             final Button manualLogin = connectorInfo.findViewById(R.id.manual_login);
-                            manualLogin.setVisibility(!conn.isLoggedIn() && !isLoggingIn && !isLoggingOk && conn.supportsManualLogin() && Settings.getGcCredentials().isValid() ? View.VISIBLE : View.GONE);
+                            manualLogin.setVisibility(connInfo.toString().contains(activity.getString(R.string.err_auth_gc_captcha)) ? View.VISIBLE : View.GONE);
                             manualLogin.setOnClickListener(b -> conn.performManualLogin(activity, () -> {
                                 if (!activity.isDestroyed() && !activity.isFinishing()) {
                                     activity.updateUserInfoHandler.sendEmptyMessage(-1);

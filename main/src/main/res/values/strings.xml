@@ -1448,6 +1448,19 @@
     <string name="err_auth_geokrety_bad_password">Your username/password seems invalid.</string>
     <string name="err_auth_geokrety_unknown">%1$s returned: %2$s.</string>
 
+    <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">No login information stored</string>
+    <string name="err_auth_gc_loginpage1">Failed to retrieve login page (1st)</string>
+    <string name="err_auth_gc_loginpage2">Failed to retrieve login page (2nd)</string>
+    <string name="err_auth_gc_verification_token">Failed to find request verification token</string>
+    <string name="err_auth_gc_captcha">Failed to log in to geocaching.com due to captcha required</string>
+    <string name="err_auth_gc_bad_login">Failed to log in to geocaching.com as %s because of wrong username/password</string>
+    <string name="err_auth_gc_not_validated">Failed to log in Geocaching.com as %s because account needs to be validated first</string>
+    <string name="err_auth_gc_unknown_error">Failed to log in Geocaching.com as %s for some unknown reason</string>
+    <string name="err_auth_gc_unknown_error_generic">Unknown error</string>
+    <string name="err_auth_gc_communication_error">Communication error</string>
+    <string name="err_auth_gc_manual_error">Manual login error: %s</string>
+
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="zero">%1$d caches</item>

@@ -189,9 +189,11 @@ public class GCLogin extends AbstractLogin {
 
     @WorkerThread
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
+        final Context ctx = CgeoApplication.getInstance();
+
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            logLastLoginError("No login information stored", retry);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_missing_login), retry);
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
@@ -202,7 +204,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                logLastLoginError("Failed to retrieve login page (1st)", retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage1), retry);
                 return StatusCode.CONNECTION_FAILED_GC; // no login page
             }
 
@@ -213,13 +215,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                logLastLoginError("failed to find request verification token", retry, tryLoggedInData);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_verification_token), retry, tryLoggedInData);
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                logLastLoginError("Failed to retrieve login page (2nd)", retry, requestVerificationToken);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_loginpage2), retry, requestVerificationToken);
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -230,32 +232,32 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (loginData.contains("<div class=\"g-recaptcha\" data-sitekey=\"")) {
-                logLastLoginError("Failed to log in to geocaching.com due to captcha required", retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_captcha), retry);
                 return resetGcCustomDate(StatusCode.LOGIN_CAPTCHA_ERROR);
             }
 
             if (loginData.contains("id=\"signup-validation-error\"")) {
-                logLastLoginError("Failed to log in to geocaching.com as " + username + " because of wrong username/password", retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_bad_login, username), retry);
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("content=\"account/join/success\"")) {
-                logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first", retry);
+                logLastLoginError(ctx.getString(R.string.err_auth_gc_not_validated, username), retry);
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason", retry, loginData);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error, username), retry, loginData);
             if (retry) {
                 getLoginStatus(loginData);
                 return login(false, credentials);
             }
 
-            logLastLoginError("Unknown error", retry, loginData);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_unknown_error_generic), retry, loginData);
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
-            logLastLoginError("communication error", retry);
+            logLastLoginError(ctx.getString(R.string.err_auth_gc_communication_error), retry);
             return StatusCode.CONNECTION_FAILED_GC;
         }
     }
@@ -642,7 +644,7 @@ public class GCLogin extends AbstractLogin {
                             return;
                         }
                     } catch (final Exception ex) {
-                        logLastLoginError("manual login error: " + ex.getMessage(), true);
+                        logLastLoginError(CgeoApplication.getInstance().getString(R.string.err_auth_gc_manual_error, ex.getMessage()), true);
                         Log.w("GCLogin: Exception on manual login", ex);
                     }
                     setActualStatus(CgeoApplication.getInstance().getString(R.string.init_login_popup_failed));
