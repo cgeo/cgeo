@@ -62,7 +62,6 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.OptIn;
 import androidx.annotation.StyleRes;
 import androidx.annotation.StyleableRes;
 import androidx.appcompat.widget.TooltipCompat;
@@ -75,13 +74,8 @@ import androidx.core.util.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.badge.BadgeUtils;
-import com.google.android.material.badge.ExperimentalBadgeUtils;
-import io.reactivex.rxjava3.disposables.Disposable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -362,43 +356,28 @@ public class ViewUtils {
         return view;
     }
 
-    /** adds a badge to a view. Returns a disposable, dispose the disposable to remove the badge from the view */
-    @OptIn(markerClass = ExperimentalBadgeUtils.class)
-    public static Disposable addBadge(final View view, final boolean isHighPrio, final int count) {
+    public static void addDetachListener(final View view, final Consumer<View> action) {
+        view.getViewTreeObserver().addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
+            @Override
+            public void onWindowAttached() {
+                //do nothing
+            }
 
-        final BadgeDrawable badge = BadgeDrawable.create(view.getContext());
-        if (count > 0) {
-            badge.setNumber(3);
-        } else {
-            badge.clearNumber();
-        }
-        badge.setBackgroundColor(isHighPrio ? 0xffff0000 : 0xff0a67e2);
-        badge.setBadgeGravity(BadgeDrawable.TOP_END);
-        badge.setHorizontalOffset(ViewUtils.dpToPixel(10));
-        badge.setVerticalOffset(ViewUtils.dpToPixel(10));
-        badge.setVisible(true);
-
-        view.getOverlay().add(badge);
-
-        final AtomicBoolean stopper = new AtomicBoolean(false);
-        runOnViewMeasured(view, stopper::get, v -> BadgeUtils.setBadgeDrawableBounds(badge, view, null));
-
-        return Disposable.fromRunnable(() -> {
-           stopper.set(true);
-           view.getOverlay().remove(badge);
+            @Override
+            public void onWindowDetached() {
+                action.accept(view);
+            }
         });
     }
 
-
-
     /** requests a layout change on given view and runs the given consumer once the view has been measured */
-    public static void runOnViewMeasured(final View view, final Supplier<Boolean> stopper, final Consumer<View> action) {
+    public static void runOnViewMeasured(final View view, final Function<View, Boolean> action) {
         final ViewTreeObserver.OnGlobalLayoutListener observer = new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (view.getMeasuredWidth() > 0 && view.getMeasuredHeight() > 0) {
-                    action.accept(view);
-                    if (stopper.get()) {
+                    final Boolean continueAction = action.apply(view);
+                    if (continueAction == null || !continueAction) {
                         view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     }
                 }

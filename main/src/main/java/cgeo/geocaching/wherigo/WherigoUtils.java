@@ -429,5 +429,4 @@ public final class WherigoUtils {
         return geocode.trim() + ": " + cache.getName().trim();
     }
 
-
 }

@@ -285,6 +285,10 @@ public abstract class AbstractNavigationBarActivity extends AbstractActionBarAct
             if (iitem != null) {
                 menu.setIcon(iitem.iconRes);
                 menu.setTitle(iitem.getTitleResId());
+                final View customView = findViewById(MENU_CUSTOM);
+                if (iitem.viewInitializer != null && customView != null) {
+                    iitem.viewInitializer.accept(customView);
+                }
             }
         }
 

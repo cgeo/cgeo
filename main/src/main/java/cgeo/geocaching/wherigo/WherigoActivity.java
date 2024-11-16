@@ -2,7 +2,6 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.CustomMenuEntryActivity;
 import cgeo.geocaching.connector.StatusResult;
@@ -13,14 +12,13 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.sensors.LocationDataProvider;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
+import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -72,17 +70,12 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         if (intentModifier != null) {
             intentModifier.accept(intent);
         }
-        final boolean wherigoIsCustomItem = Settings.getCustomBNitem() == QuickLaunchItem.VALUES.WHERIGO.id;
-        final boolean hideNavBar = !wherigoIsCustomItem || forceHideNavigationBar;
-
-        AbstractNavigationBarActivity.setIntentHideBottomNavigation(intent, hideNavBar);
-        parent.startActivity(intent);
+        startActivityHelper(parent, intent, QuickLaunchItem.VALUES.WHERIGO, forceHideNavigationBar);
     }
 
     @Override
-    protected void checkIntentHideNavigationBar() {
-        //by default show nav bar if wherigo is custom select item
-        checkIntentHideNavigationBar(Settings.getCustomBNitem() != QuickLaunchItem.VALUES.WHERIGO.id);
+    public QuickLaunchItem.VALUES getRelatedQuickLaunchItem() {
+        return QuickLaunchItem.VALUES.WHERIGO;
     }
 
     @Override
@@ -128,7 +121,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
                 handleCGuidInput(guid);
             }
         }
-        ViewUtils.addBadge(binding.resumeDialog, false, -1);
+        BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
     }
 
     @Override
@@ -292,6 +285,12 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.cacheContextBox.setVisibility(game.getContextGeocode() != null ? View.VISIBLE : View.GONE);
         binding.cacheContextName.setText(game.getContextGeocacheName());
+
+        if (game.isLastErrorNotSeen()) {
+            BadgeManager.get().setBadge(binding.reportProblem, false, -1);
+        } else {
+            BadgeManager.get().removeBadge(binding.reportProblem);
+        }
     }
 
     @Override
