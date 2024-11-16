@@ -205,6 +205,11 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="button_icon_search" parent="button_icon">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
     <style name="quicklaunch_button" parent="button_icon_accent">
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
         <item name="backgroundTint">#38808080</item>
@@ -427,6 +432,34 @@
         <item name="android:textSize">@dimen/textSize_headingPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/colorBackground</item>
+    </style>
+
+    <!-- new section style -->
+    <style name="flat_separator_horizontal_heading_text" parent="@style/TextAppearance.Material3.TitleMedium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <style name="flat_separator_horizontal_heading_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@color/colorSeparator</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
+
+    <style name="search_content_group">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
     </style>
 
     <!-- images -->

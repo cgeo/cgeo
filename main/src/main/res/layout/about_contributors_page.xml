@@ -3,22 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="4dip"
-    tools:context=".AboutActivity$ContributorsViewCreator" >
+    tools:context=".AboutActivity$ContributorsViewCreator">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/contributors_carnero"
-                android:textSize="@dimen/textSize_headingPrimary" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/contributors_carnero" />
 
         <TextView
             style="@style/about_contributors"
@@ -27,13 +26,11 @@
             android:layout_height="wrap_content"
             android:text="@string/about_contributors_carnerodetails" />
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/about_contributors_recent"
-                android:textSize="@dimen/textSize_headingPrimary" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_contributors_recent" />
 
         <TextView
             style="@style/about_contributors"
@@ -42,13 +39,11 @@
             android:layout_height="wrap_content"
             android:text="@string/contributors_recent" />
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/about_contributors_specialthanks"
-                android:textSize="@dimen/textSize_headingPrimary" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_contributors_specialthanks" />
 
         <TextView
             style="@style/about_contributors"
@@ -57,13 +52,11 @@
             android:layout_height="wrap_content"
             android:text="@string/about_contributors_specialthanksdetails" />
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/about_contributors_other"
-                android:textSize="@dimen/textSize_headingPrimary" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_contributors_other" />
 
         <TextView
             style="@style/about_contributors"
@@ -72,13 +65,11 @@
             android:layout_height="wrap_content"
             android:text="@string/contributors_other" />
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/about_components"
-                android:textSize="@dimen/textSize_headingPrimary" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/about_components" />
 
         <TextView
             style="@style/about_contributors"

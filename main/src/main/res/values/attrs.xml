@@ -58,4 +58,11 @@
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />
 
+
+    <declare-styleable name="SectionHeader">
+        <attr name="android:text"/>
+        <attr name="android:id"/>
+        <attr name="dividerAbove" format="boolean" />
+    </declare-styleable>
+
 </resources>
