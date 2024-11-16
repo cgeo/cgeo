@@ -1008,6 +1008,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo şimdi %s ile etkileşim kurmaya yetkili.</string>
     <string name="err_auth_geokrety_bad_password">Kullanıcı adınız/şifreniz geçersiz görünüyor.</string>
     <string name="err_auth_geokrety_unknown">%1$s iade edildi: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
