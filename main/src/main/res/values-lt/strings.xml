@@ -1209,6 +1209,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo dabar registruota ir leidžiama naudotis %s.</string>
     <string name="err_auth_geokrety_bad_password">Netinkamas Jūsų vartotojo vardas/slaptažodis.</string>
     <string name="err_auth_geokrety_unknown">%1$s gražinta: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d slėptuvė</item>
