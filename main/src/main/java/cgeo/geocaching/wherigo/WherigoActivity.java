@@ -21,10 +21,12 @@ import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -51,6 +53,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
     private WherigoActivityBinding binding;
     private int wherigoListenerId;
+    private int wherigoAudioManagerListenerId;
 
     private SimpleItemListModel<WherigoThingType> wherigoThingTypeModel;
 
@@ -86,6 +89,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         Dialogs.basicOneTimeMessage(this, OneTimeDialogs.DialogType.WHERIGO_PLAYER_SHORTCUTS);
 
         this.wherigoListenerId = WherigoGame.get().addListener(type -> refreshGui());
+        this.wherigoAudioManagerListenerId = WherigoGame.get().getAudioManager().addListener(type -> refreshMusicGui());
 
         binding = WherigoActivityBinding.inflate(getLayoutInflater());
         setThemeAndContentView(binding);
@@ -95,9 +99,10 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         });
 
         refreshGui();
+        refreshMusicGui();
 
         binding.viewCartridges.setOnClickListener(v -> startGame());
-        binding.resumeDialog.setOnClickListener(v -> WherigoDialogManager.get().unpause());
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
         binding.loadGame.setOnClickListener(v -> loadGame());
         binding.saveGame.setOnClickListener(v -> saveGame());
         binding.stopGame.setOnClickListener(v -> stopGame());
@@ -122,6 +127,13 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             }
         }
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
+
+        final AudioManager audio = WherigoGame.get().getAudioManager();
+        binding.soundContinue.setOnClickListener(v -> audio.resume());
+        binding.soundPause.setOnClickListener(v -> audio.pause());
+        binding.soundRestart.setOnClickListener(v -> audio.reset());
+        binding.soundMute.setOnClickListener(v -> audio.setMute(true));
+        binding.soundUnmute.setOnClickListener(v -> audio.setMute(false));
     }
 
     @Override
@@ -260,6 +272,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void refreshGui() {
         final WherigoGame game = WherigoGame.get();
 
@@ -267,7 +280,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.wherigoCartridgeInfos.setVisibility(game.isPlaying() ? View.VISIBLE : View.GONE);
 
-        binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_location) + ": " +
+        binding.gameLocation.setText(LocalizationUtils.getString(R.string.cache_filter_location) + ": " +
                 WherigoLocationProvider.get().toUserDisplayableString());
         binding.revokeFixedLocation.setVisibility(game.isDebugModeForCartridge() && WherigoLocationProvider.get().hasFixedLocation() ? View.VISIBLE : View.GONE);
 
@@ -277,7 +290,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
 
         binding.resumeDialog.setVisibility(game.dialogIsPaused() ? View.VISIBLE : View.GONE);
         binding.saveGame.setEnabled(game.isPlaying());
-        binding.loadGame.setEnabled(game.isPlaying() && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
+        binding.loadGame.setEnabled(game.isPlaying() && game.getCartridgeInfo() != null && WherigoSavegameInfo.getLoadableSavegames(game.getCartridgeInfo().getFileInfo()).size() > 1);
         binding.stopGame.setEnabled(game.isPlaying());
         binding.map.setEnabled(game.isPlaying() && !WherigoThingType.LOCATION.getThingsForUserDisplay().isEmpty());
 
@@ -291,6 +304,22 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         } else {
             BadgeManager.get().removeBadge(binding.reportProblem);
         }
+    }
+
+    private void refreshMusicGui() {
+        final AudioManager audio = WherigoGame.get().getAudioManager();
+        final AudioManager.State state = audio.getState();
+
+        final boolean songInProgress = state == AudioManager.State.STOPPED || state == AudioManager.State.PLAYING;
+        binding.soundBox.setVisibility(state != AudioManager.State.NO_SONG ? View.VISIBLE : View.GONE);
+        binding.soundRestart.setEnabled(songInProgress || state == AudioManager.State.COMPLETED);
+        binding.soundPause.setVisibility(state == AudioManager.State.PLAYING ? View.VISIBLE : View.GONE);
+        binding.soundContinue.setVisibility(state == AudioManager.State.STOPPED || state == AudioManager.State.COMPLETED ? View.VISIBLE : View.GONE);
+        binding.soundContinue.setEnabled(state == AudioManager.State.STOPPED);
+        binding.soundMute.setVisibility(!audio.isMute() ? View.VISIBLE : View.GONE);
+        binding.soundUnmute.setVisibility(audio.isMute() ? View.VISIBLE : View.GONE);
+
+        binding.soundInfo.setText(audio.getUserDisplayableShortState());
     }
 
     @Override
@@ -307,6 +336,7 @@ public class WherigoActivity extends CustomMenuEntryActivity {
     public final void onDestroy() {
         super.onDestroy();
         WherigoGame.get().removeListener(wherigoListenerId);
+        WherigoGame.get().getAudioManager().removeListener(wherigoAudioManagerListenerId);
     }
 
 }

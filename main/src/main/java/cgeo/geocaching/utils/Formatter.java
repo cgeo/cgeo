@@ -492,6 +492,15 @@ public final class Formatter {
         return milliseconds + "ms";
     }
 
+    public static String formatDurationInMinutesAndSeconds(final long milliseconds) {
+        if (milliseconds < 0) {
+            return "?:??";
+        }
+        final long minutes = ((milliseconds + 500) / 60000);
+        final long seconds = ((milliseconds + 500) / 1000) - minutes * 60;
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+
     public static List<CharSequence> truncateCommonSubdir(@NonNull final List<CharSequence> directories) {
         if (directories.size() < 2) {
             return directories;

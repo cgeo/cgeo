@@ -1277,7 +1277,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             updateWatchlistBox(activity);
 
             // internal WIG player, WhereYouGo, ChirpWolf, Adventure Lab
-            updateWherIGoBox(activity);
+            updateWherigoBox(activity);
             updateWhereYouGoBox(activity);
             updateChirpWolfBox(activity);
             updateALCBox(activity);
@@ -1601,9 +1601,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        private void updateWherIGoBox(final CacheDetailActivity activity) {
+        private void updateWherigoBox(final CacheDetailActivity activity) {
             final boolean isEnabled = WhereYouGoApp.isWherigo(cache);
-            binding.wherigoBox.setVisibility(isEnabled && Settings.enableFeatureWherigo() ? View.VISIBLE : View.GONE);
+            binding.wherigoBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
             binding.playInCgeo.setOnClickListener(v -> WherigoActivity.startForGuid(activity, WhereYouGoApp.getWhereIGoGuid(cache), cache.getGeocode(), true));
         }
 

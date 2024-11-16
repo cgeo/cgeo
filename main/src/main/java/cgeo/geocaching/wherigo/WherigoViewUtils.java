@@ -179,7 +179,8 @@ public final class WherigoViewUtils {
         final SimpleItemListModel<WherigoThingType> model = createThingTypeTable(activity, binding.wherigoThingTypeList, thing -> {
             displayThing(activity, thing, false);
         });
-        binding.resumeDialog.setOnClickListener(v -> WherigoDialogManager.get().unpause());
+        binding.resumeDialog.setOnClickListener(v -> WherigoGame.get().unpauseDialog());
+        BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
         binding.cacheContextGotocache.setOnClickListener(v -> {
             CacheDetailActivity.startActivity(activity, WherigoGame.get().getContextGeocode());
         });
