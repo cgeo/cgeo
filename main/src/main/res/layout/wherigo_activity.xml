@@ -28,12 +28,11 @@
             tools:ignore="HardcodedText"
             android:text="Beta version"/>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/wherigo_controls" />
-        </RelativeLayout>
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerAbove="true"
+            android:text="@string/wherigo_controls" />
 
         <!--  buttons -->
         <LinearLayout
@@ -111,12 +110,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal_heading" />
-                <TextView
-                    style="@style/separator_horizontal_heading_text"
-                    android:text="@string/wherigo_currently_playing" />
-            </RelativeLayout>
+            <cgeo.geocaching.ui.SectionHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dividerAbove="true"
+                android:text="@string/wherigo_currently_playing" />
 
             <!--  game buttons -->
             <LinearLayout

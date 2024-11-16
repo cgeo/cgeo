@@ -17,7 +17,7 @@
     <color name="colorBackgroundSelected">#FF444444</color>
     <color name="colorBackgroundActionBar">#FF2A2A2A</color>
 
-    <color name="colorSeparator">#44FFFFFF</color>
+    <color name="colorSeparator">#ff1f1f1f</color>
 
     <color name="attribute_filter_disabled">#ffa6a6a6</color>
     <color name="attribute_category_tools_disabled">#ff340e0e</color>

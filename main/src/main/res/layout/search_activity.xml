@@ -5,7 +5,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="4dip"
     tools:context=".SearchActivity" >
 
     <LinearLayout
@@ -13,16 +12,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_filter" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Filter -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_filter" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <Button
                 android:id="@+id/search_filter"
@@ -46,16 +42,13 @@
                 android:contentDescription="@string/tap_icon_more_info"/>
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_geo" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Geocode -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_geo" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/geocode_input_layout"
@@ -73,22 +66,17 @@
 
             <Button
                 android:id="@+id/display_geocode"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_coordinates" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Coordinates -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_coordinates" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <Button
                 android:id="@+id/buttonLatLongitude"
@@ -99,22 +87,17 @@
             <Button
                 android:id="@+id/search_coordinates"
                 android:tooltipText="@string/search_coordinates_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_address" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Address -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_address" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
                 android:layout_toLeftOf="@+id/search_address"
@@ -127,22 +110,17 @@
             <Button
                 android:id="@+id/search_address"
                 android:tooltipText="@string/search_address_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_kw" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Keyword -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_kw" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
                 android:layout_toLeftOf="@+id/search_keyword"
@@ -155,10 +133,8 @@
             <Button
                 android:id="@+id/search_keyword"
                 android:tooltipText="@string/search_kw_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
 
             <TextView
                 android:id="@+id/search_keyword_disabled_hint"
@@ -170,16 +146,13 @@
                 android:visibility="gone" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_hbu" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Hidden by -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_hbu" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
                 android:layout_toLeftOf="@+id/search_owner"
@@ -192,22 +165,17 @@
             <Button
                 android:id="@+id/search_owner"
                 android:tooltipText="@string/search_hbu_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_finder" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- Found by -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_finder" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
                 android:layout_toLeftOf="@+id/search_finder"
@@ -220,23 +188,17 @@
             <Button
                 android:id="@+id/search_finder"
                 android:tooltipText="@string/search_finder_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal_heading" />
-            <TextView
-                style="@style/separator_horizontal_heading_text"
-                android:text="@string/search_tb" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <!-- TB -->
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:text="@string/search_tb" />
+
+        <RelativeLayout style="@style/search_content_group">
 
             <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
                 android:layout_toLeftOf="@+id/display_trackable"
@@ -251,10 +213,8 @@
             <Button
                 android:id="@+id/display_trackable"
                 android:tooltipText="@string/search_tb_button"
-                style="@style/button_icon"
-                android:layout_centerVertical="true"
-                app:icon="@drawable/ic_menu_search"
-                android:layout_alignParentRight="true" />
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
     </LinearLayout>
 

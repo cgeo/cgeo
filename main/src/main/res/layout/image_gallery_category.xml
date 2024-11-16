@@ -8,17 +8,13 @@
     tools:context=".ImageGalleryActivity">
 
     <!-- category header -->
-    <RelativeLayout
-        android:id="@+id/img_gallery_category"
-        style="@style/separator_horizontal_layout"
-        android:layout_marginTop="5dp">
 
-        <View style="@style/separator_horizontal_heading" />
-        <TextView
-            android:id="@+id/img_gallery_category_title"
-            style="@style/separator_horizontal_heading_text"
-            tools:text="category title"/>
-    </RelativeLayout>
+    <cgeo.geocaching.ui.SectionHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:dividerAbove="true"
+        android:id="@+id/img_gallery_category_title"
+        tools:text="category title" />
 
     <!-- Image add buttons -->
     <RelativeLayout
