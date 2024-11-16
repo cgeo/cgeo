@@ -1,4 +1,7 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+##
 - Solució: alguns problemes amb la detecció d'hora d'esdeveniments nous
 - Correcció: bloqueig en editar el camp variable
 - Correcció: bloqueig en importar un fitxer GPX (solució alternativa)
