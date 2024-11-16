@@ -651,6 +651,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo тепер авторизований для публікації у Twitter %s.</string>
     <string name="err_auth_geokrety_bad_password">Ваше ім’я користувача / пароль здається недійсним.</string>
     <string name="err_auth_geokrety_unknown">%1$s повернений: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">доступний останній день</string>
