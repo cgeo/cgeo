@@ -1295,6 +1295,18 @@
     <string name="auth_dialog_completed_geokrety">El c:geo ara està autoritzat a interactuar amb %s.</string>
     <string name="err_auth_geokrety_bad_password">El seu nom d\'usuari/contrasenya no és correcte.</string>
     <string name="err_auth_geokrety_unknown">%1$s torna a: %2$s.</string>
+    <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">No s\'emmagatzema cap informació d\'inici de sessió</string>
+    <string name="err_auth_gc_loginpage1">No s\'ha pogut recuperar la pàgina d\'inici de sessió (1r)</string>
+    <string name="err_auth_gc_loginpage2">No s\'ha pogut recuperar la pàgina d\'inici de sessió (2n)</string>
+    <string name="err_auth_gc_verification_token">No s\'ha pogut trobar el testimoni de verificació de la sol·licitud</string>
+    <string name="err_auth_gc_captcha">No s\'ha pogut iniciar la sessió a geocaching.com perquè cal captcha</string>
+    <string name="err_auth_gc_bad_login">No s\'ha pogut iniciar la sessió a geocaching.com com a %s a causa d\'un nom d\'usuari/contrasenya incorrecte</string>
+    <string name="err_auth_gc_not_validated">No s\'ha pogut iniciar la sessió a Geocaching.com com a %s perquè primer cal validar el compte</string>
+    <string name="err_auth_gc_unknown_error">No s\'ha pogut iniciar la sessió a Geocaching.com com a %s per algun motiu desconegut</string>
+    <string name="err_auth_gc_unknown_error_generic">Error desconegut</string>
+    <string name="err_auth_gc_communication_error">Error de comunicació</string>
+    <string name="err_auth_gc_manual_error">Error d\'inici de sessió manual: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d catxé</item>
