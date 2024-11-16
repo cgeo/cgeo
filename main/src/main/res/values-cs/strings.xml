@@ -1310,6 +1310,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo je nyní autorizováno pro interakce s %s.</string>
     <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
     <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d keška</item>
