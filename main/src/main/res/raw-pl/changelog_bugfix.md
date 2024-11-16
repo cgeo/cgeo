@@ -1,4 +1,7 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+##
 - Naprawiono: Niektóre problemy z wykrywaniem nowego czasu wydarzenia
 - Naprawiono: Awaria podczas edycji pola zmiennej
 - Naprawiono: Awaria podczas importowania pliku GPX (obejście)
