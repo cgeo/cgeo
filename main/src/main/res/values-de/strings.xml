@@ -1294,6 +1294,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo ist nun autorisiert mit %s zu kommunizieren.</string>
     <string name="err_auth_geokrety_bad_password">Dein Benutzername/Passwort scheint ungültig zu sein.</string>
     <string name="err_auth_geokrety_unknown">%1$s antwortet: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d Cache</item>
@@ -1570,6 +1571,7 @@
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
     <string name="html_style_monochrome">Monochrom</string>
+    <string name="html_style_source_formatted">HTML-Quelltext formatiert</string>
     <string name="html_style_source">HTML-Quelltext</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">Grad</string>
