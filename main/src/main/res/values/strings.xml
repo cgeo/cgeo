@@ -2929,6 +2929,14 @@
     <string name="wherigo_controls_cache_context">Cache Context</string>
     <string name="wherigo_controls_cache_link">Go to cache details</string>
 
+    <string name="wherigo_sound_title">Sound controls</string>
+    <string name="wherigo_sound_continue">Continue</string>
+    <string name="wherigo_sound_restart">Restart from beginning</string>
+    <string name="wherigo_sound_pause">Pause</string>
+    <string name="wherigo_sound_mute">Mute</string>
+    <string name="wherigo_sound_unmute">Unmute</string>
+
+
     <string name="wherigo_controls_resume_paused_dialog">Resume paused dialog</string>
     <string name="wherigo_dialog_pause_info">Resume dialog in Wherigo Player by tapping \"Resume paused dialog\"</string>
     <string name="wherigo_no_game_running">No wherigo game is currently running</string>
@@ -2991,7 +2999,7 @@
 
     <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
-    <string name="wherigo_bar_resume_dialog">Resume dialog</string>
+    <string name="wherigo_bar_resume_dialog">Resume</string>
 
     <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
     <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>

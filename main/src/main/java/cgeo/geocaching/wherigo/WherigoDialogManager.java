@@ -36,9 +36,7 @@ public class WherigoDialogManager {
         return INSTANCE;
     }
 
-    private Predicate<Activity> displayAllowedChecker = activity -> {
-        return !WherigoGame.get().openOnlyInWherigo() || activity instanceof WherigoActivity;
-    };
+    private Predicate<Activity> displayAllowedChecker = activity -> true;
 
     private State state = State.NO_DIALOG;
     private boolean currentlyDisplayingNotification;

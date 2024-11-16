@@ -725,17 +725,12 @@ public class Settings {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
 
-    public static boolean enableFeatureWherigo() {
-        return getBoolean(R.string.pref_feature_wherigo, true);
-    }
-
     public static boolean enableFeatureWherigoDebug() {
-        return enableFeatureWherigo() && getBoolean(R.string.pref_feature_wherigo_debug, false);
+        return getBoolean(R.string.pref_feature_wherigo_debug, false);
     }
 
     public static boolean enableFeatureWherigoDebugCartridge(final String code) {
-        return enableFeatureWherigo() &&
-                getBooleanDirect(getKey(R.string.pref_feature_wherigo_debug) + "_" + code, false);
+        return getBooleanDirect(getKey(R.string.pref_feature_wherigo_debug) + "_" + code, false);
     }
 
 

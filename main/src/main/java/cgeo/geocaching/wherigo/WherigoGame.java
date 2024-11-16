@@ -11,9 +11,10 @@ import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.AudioClip;
+import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.ListenerHelper;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -28,15 +29,10 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 import cz.matejcik.openwig.Cartridge;
@@ -66,6 +62,8 @@ public class WherigoGame implements UI {
         REFRESH, START, END, LOCATION, DIALOG_OPEN, DIALOG_CLOSE
     }
 
+    private final AudioManager audioManager = new AudioManager();
+
     //filled overall (independent from current game)
     private String lastPlayedCGuid;
     private String lastSetContextGeocode;
@@ -85,9 +83,7 @@ public class WherigoGame implements UI {
     private boolean isPlaying = false;
     private Cartridge cartridge;
 
-    private static final AtomicInteger LISTENER_ID_PROVIDER = new AtomicInteger(0);
-    private final Map<Integer, Consumer<NotifyType>> listeners = new HashMap<>();
-
+    private final ListenerHelper<Consumer<NotifyType>> listeners = new ListenerHelper<>();
 
     private static final WherigoGame INSTANCE = new WherigoGame();
 
@@ -100,22 +96,12 @@ public class WherigoGame implements UI {
         setCGuidAndDependentThings(null);
     }
 
-    public boolean openOnlyInWherigo() {
-        return false; //TODO: replace with a setting later
-    }
-
     public int addListener(final Consumer<NotifyType> listener) {
-        final int listenerId = LISTENER_ID_PROVIDER.addAndGet(1);
-        synchronized (listeners) {
-            this.listeners.put(listenerId, listener);
-        }
-        return listenerId;
+        return listeners.addListener(listener);
     }
 
     public void removeListener(final int listenerId) {
-        synchronized (listeners) {
-            this.listeners.remove(listenerId);
-        }
+        listeners.removeListener(listenerId);
     }
 
     public boolean isPlaying() {
@@ -218,6 +204,7 @@ public class WherigoGame implements UI {
 
     public void clearLastError() {
         lastError = null;
+        notifyListeners(NotifyType.REFRESH);
     }
 
     public boolean isLastErrorNotSeen() {
@@ -226,6 +213,7 @@ public class WherigoGame implements UI {
 
     public void clearLastErrorNotSeen() {
         lastErrorNotSeen = false;
+        notifyListeners(NotifyType.REFRESH);
     }
 
     @SuppressWarnings("unchecked")
@@ -294,15 +282,9 @@ public class WherigoGame implements UI {
     }
 
     public void notifyListeners(final NotifyType type) {
-        final Collection<Consumer<NotifyType>> listenerCopy;
-        synchronized (listeners) {
-            listenerCopy = new ArrayList<>(listeners.values());
-        }
-        runOnUi(() -> {
-            Log.d(LOG_PRAEFIX + "notify for " + type);
-            for (Consumer<NotifyType> listener : listenerCopy) {
-                listener.accept(type);
-            }
+        Log.d(LOG_PRAEFIX + "notify for " + type);
+        listeners.executeOnMain(ntConsumer -> {
+            ntConsumer.accept(type);
         });
     }
 
@@ -359,6 +341,7 @@ public class WherigoGame implements UI {
         WherigoLocationProvider.get().disconnect();
         setContextGeocodeInternal(null);
         WherigoDialogManager.get().clear();
+        audioManager.release();
     }
 
     @Override
@@ -440,6 +423,11 @@ public class WherigoGame implements UI {
 
     }
 
+    @NonNull
+    public AudioManager getAudioManager() {
+        return audioManager;
+    }
+
     @Override
     public void playSound(final byte[] data, final String mime) {
 
@@ -449,7 +437,8 @@ public class WherigoGame implements UI {
         }
         final String suffix = mime == null ? null : MimeTypeMap.getSingleton().getExtensionFromMimeType(mime);
         final Uri clipUri = Uri.fromFile(FileUtils.getOrCreate(this.cartridgeCacheDir, "audio+" + mime, suffix, data));
-        AudioClip.play(clipUri);
+        //AudioClip.play(clipUri);
+        audioManager.play(clipUri);
     }
 
     @Override

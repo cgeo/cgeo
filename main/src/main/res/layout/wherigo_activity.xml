@@ -162,8 +162,8 @@
                 android:id="@+id/game_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                />
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:layout_gravity="center" />
 
             <Button
                 android:id="@+id/revoke_fixed_location"
@@ -182,6 +182,75 @@
             android:layout_width="fill_parent"
             android:nestedScrollingEnabled="true"
             />
+
+        <!-- Sound box -->
+        <LinearLayout
+            android:id="@+id/sound_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+                <View style="@style/separator_horizontal_heading" />
+                <TextView
+                    style="@style/separator_horizontal_heading_text"
+                    android:text="Sound controls" />
+            </RelativeLayout>
+
+            <!--  Music buttons -->
+            <LinearLayout
+                android:id="@+id/music_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/sound_restart"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_restart"
+                    app:icon="@drawable/ic_menu_replay" />
+
+                <Button
+                    android:id="@+id/sound_pause"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_pause"
+                    app:icon="@drawable/ic_menu_pause" />
+
+                <Button
+                    android:id="@+id/sound_continue"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_continue"
+                    app:icon="@drawable/ic_menu_play_arrow" />
+
+                <Button
+                    android:id="@+id/sound_mute"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_mute"
+                    app:icon="@drawable/ic_menu_volume_off" />
+
+                <Button
+                    android:id="@+id/sound_unmute"
+                    style="@style/button_icon"
+                    android:tooltipText="@string/wherigo_sound_unmute"
+                    app:icon="@drawable/ic_menu_volume_up" />
+
+                <TextView
+                    android:id="@+id/sound_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/textSize_headingSecondary"
+                    android:paddingLeft="10dp"
+                    android:layout_gravity="center"
+                    />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

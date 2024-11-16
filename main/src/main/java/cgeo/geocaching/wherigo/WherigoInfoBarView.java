@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoInfoBarViewBinding;
 import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.AudioManager;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +21,7 @@ public class WherigoInfoBarView extends RelativeLayout {
     private Activity activity;
     private WherigoInfoBarViewBinding binding;
     private int wherigoListenerId;
+    private int wherigoAudioListenerId;
 
     public WherigoInfoBarView(final Context context) {
         super(context);
@@ -46,14 +48,17 @@ public class WherigoInfoBarView extends RelativeLayout {
         this.activity = ViewUtils.toActivity(this.context);
         inflate(this.context, R.layout.wherigo_info_bar_view, this);
         binding = WherigoInfoBarViewBinding.bind(this);
-        binding.wherigoBar.setOnClickListener(v -> onBarClick());
+        binding.wherigoInfoBox.setOnClickListener(v -> onBarClick());
         binding.wherigoInfoText.setOnClickListener(v -> onBarClick());
-        binding.wherigoResumeDialog.setOnClickListener(v -> onResumeDialogClick());
+        binding.wherigoResumeDialogIcon.setOnClickListener(v -> onResumeDialogClick());
         binding.wherigoResumeDialogText.setOnClickListener(v -> onResumeDialogClick());
+        binding.wherigoSongInfoIcon.setOnClickListener(v -> onSongInfoClick());
+        binding.wherigoSongInfoText.setOnClickListener(v -> onSongInfoClick());
 
-        BadgeManager.get().setBadge(binding.wherigoResumeDialog, false, -1);
+        BadgeManager.get().setBadge(binding.wherigoResumeDialogText, false, -1);
 
         wherigoListenerId = WherigoGame.get().addListener(nt -> refreshBar());
+        wherigoAudioListenerId = WherigoGame.get().getAudioManager().addListener(st -> refreshBar());
         refreshBar();
     }
 
@@ -61,17 +66,28 @@ public class WherigoInfoBarView extends RelativeLayout {
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         WherigoGame.get().removeListener(wherigoListenerId);
+        WherigoGame.get().getAudioManager().removeListener(wherigoAudioListenerId);
     }
 
     private void refreshBar() {
         final boolean isVisible = WherigoGame.get().isPlaying() && !(activity instanceof WherigoActivity);
-        binding.wherigoBar.setVisibility(isVisible ? VISIBLE : GONE);
-        binding.wherigoResumeDialog.setVisibility(isVisible && WherigoGame.get().dialogIsPaused() ? VISIBLE : GONE);
+        final boolean showResume = WherigoGame.get().dialogIsPaused();
+        final boolean showSong = WherigoGame.get().getAudioManager().getState() != AudioManager.State.NO_SONG;
+        binding.wherigoInfoBox.setVisibility(isVisible ? VISIBLE : GONE);
+        binding.wherigoAdditionalInfoBox.setVisibility(isVisible && (showResume || showSong) ? VISIBLE : GONE);
         if (!isVisible) {
             return;
         }
         binding.wherigoInfoText.setText(WherigoGame.get().getCartridgeName());
 
+        binding.wherigoResumeDialogIcon.setVisibility(showResume ? VISIBLE : GONE);
+        binding.wherigoResumeDialogText.setVisibility(showResume ? VISIBLE : GONE);
+        binding.wherigoSongInfoIcon.setVisibility(showSong ? VISIBLE : GONE);
+        binding.wherigoSongInfoText.setVisibility(showSong ? VISIBLE : GONE);
+
+        if (showSong) {
+            binding.wherigoSongInfoText.setText(WherigoGame.get().getAudioManager().getUserDisplayableShortState());
+        }
     }
 
     private void onBarClick() {
@@ -79,7 +95,25 @@ public class WherigoInfoBarView extends RelativeLayout {
     }
 
     private void onResumeDialogClick() {
-        WherigoDialogManager.get().unpause();
+        WherigoGame.get().unpauseDialog();
     }
 
+    private void onSongInfoClick() {
+        final AudioManager audio = WherigoGame.get().getAudioManager();
+        switch (audio.getState()) {
+            case PLAYING:
+                audio.pause();
+                break;
+            case STOPPED:
+                audio.resume();
+                break;
+            case COMPLETED:
+                audio.reset();
+                audio.resume();
+                break;
+            default:
+                //do nothing
+                break;
+        }
+    }
 }
