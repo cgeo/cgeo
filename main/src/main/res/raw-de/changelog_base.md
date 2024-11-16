@@ -1,3 +1,5 @@
+Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildschirm.<br> (Sie können für den einfacheren Zugriff ein [Schnellstart-Element](cgeo-setting://quicklaunchitems_sorted) oder einen [benutzerdefinierten Menüeintrag](cgeo-setting://custombnitem) konfigurieren, dazu zuerst erweiterte Einstellungen aktivieren.)
+
 ### Karte
 - Neu: Kartendesign pro Kartenanbieter merken (UnifiedMap)
 - Neu: Ausgewählten Cache/Wegpunkt hervorheben (UnifiedMap)
@@ -8,6 +10,8 @@
 - Neu: Kartenschattierung für UnifiedMap Mapsforge Offline-Karten
 - Neu: Kartenschattierung für UnifiedMap VTM Karten (erfordert Online-Verbindung)
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
+- Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
+- Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -16,6 +20,10 @@
 - Korrektur: Enthält eine persönliche Notiz mehrere Bilder, werden diese nicht zum Bilder-Tab hinzugefügt
 - Korrektur: Handhabung von Projektionen in Wegpunkten und persönlichen Notizen
 - Neu: Langes Tippen auf das Datum beim Loggen stellt das vorherige Logdatum ein
+- Korrektur: Zurücksetzen des Caches auf die ursprünglichen Koordinaten entfernt das "geänderte Koordinaten" Flag nicht
+- Neu: Überschreiben des Logs beim Schnellen Offline-Log bestätigen
+- Neu: Aktualisieren des Cache-Status beim Senden eines Logs
+- Neu: Farbige HTML-Quellansicht der Cache-Details
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
@@ -24,3 +32,10 @@
 - Neu: Bevorzugte Bildgröße für Bilder festlegen, die von geocaching.com Caches und Trackables geladen werden
 - Korrektur: "Im Browser öffnen" funktioniert nicht für Trackable Logs
 - Neu: Option zum Verwalten von heruntergeladenen Dateien (Karten, Designs, Routing und Kartenschattierung)
+- Neu: Option, um einen Cache von allen Listen zu entfernen (= ihn als gelöscht zu markieren)
+- Korrektur: Zurücksetzen der Koordinaten bei ungespeicherten Caches nicht erkannt
+- Neu: Filter zurücksetzen möglich, auch wenn kein benannter Filter gespeichert ist
+- Korrektur: "Leere Liste" Bestätigung erscheint beim Starten eines Pocket Query-Downloads in einer neu erstellten Liste
+- Änderung: Eigene Caches mit Offline-Logs zeigen Offline-Log-Marker
+- Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
+- Neu: Konnektor-Informationen auf dem Startbildschirm verweisen auf jeweilige Konfigurationsseite
