@@ -18,15 +18,18 @@ import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.wherigo.WherigoActivity;
+import cgeo.geocaching.wherigo.WherigoViewUtils;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.function.Consumer;
 
 public class QuickLaunchItem extends InfoItem {
 
@@ -62,22 +65,23 @@ public class QuickLaunchItem extends InfoItem {
         new QuickLaunchItem(VALUES.BACKUPRESTORE, R.string.menu_backup, R.drawable.settings_backup, false),
         new QuickLaunchItem(VALUES.MESSAGECENTER, R.string.mcpolling_title, R.drawable.ic_menu_email, false),
         new QuickLaunchItem(VALUES.MANUAL, R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, false),
-        new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false)
+        new QuickLaunchItem(VALUES.FAQ, R.string.faq_title, R.drawable.ic_menu_hint, false),
+        new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, false, WherigoViewUtils::addWherigoBadgeNotifications)
     ));
-
-    static {
-        if (Settings.enableFeatureWherigo()) {
-            ITEMS.add(new QuickLaunchItem(VALUES.WHERIGO, R.string.wherigo_short, R.drawable.ic_menu_wherigo, false));
-        }
-    }
 
     @DrawableRes public int iconRes;
     public boolean gcPremiumOnly;
+    public Consumer<View> viewInitializer;
 
     QuickLaunchItem(final VALUES item, final @StringRes int titleResId, final @DrawableRes int iconRes, final boolean gcPremiumOnly) {
+        this(item, titleResId, iconRes, gcPremiumOnly, null);
+    }
+
+    QuickLaunchItem(final VALUES item, final @StringRes int titleResId, final @DrawableRes int iconRes, final boolean gcPremiumOnly, final Consumer<View> viewInitializer) {
         super(item.id, titleResId);
         this.iconRes = iconRes;
         this.gcPremiumOnly = gcPremiumOnly;
+        this.viewInitializer = viewInitializer;
     }
 
     public static void startActivity(final Activity caller, final @StringRes int title, @StringRes final int prefKey) {

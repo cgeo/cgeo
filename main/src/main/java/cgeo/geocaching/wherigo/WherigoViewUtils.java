@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding;
 import cgeo.geocaching.databinding.WherigoMapQuickinfosBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
+import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.SimpleItemListView;
@@ -231,5 +232,24 @@ public final class WherigoViewUtils {
                     WherigoGame.get().getCartridgeName() + " (" + WherigoGame.get().getCGuid() + ")´");
             DebugUtils.createLogcatHelper(activity, false, true, emailMessage);
         });
+        WherigoGame.get().clearLastErrorNotSeen();
+    }
+
+    /** adds badge logic to the given view to display current wherigo information as badges */
+    public static void addWherigoBadgeNotifications(final View view) {
+        if (view == null) {
+            return;
+        }
+        final Runnable refreshRoutine = () -> {
+            if (WherigoGame.get().isLastErrorNotSeen() || WherigoGame.get().dialogIsPaused()) {
+                BadgeManager.get().setBadge(view, false, -1);
+            } else {
+                BadgeManager.get().removeBadge(view);
+            }
+        };
+
+        final int listenerId = WherigoGame.get().addListener(nt -> refreshRoutine.run());
+        ViewUtils.addDetachListener(view, v -> WherigoGame.get().removeListener(listenerId));
+        refreshRoutine.run();
     }
 }

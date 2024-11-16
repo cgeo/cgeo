@@ -2,19 +2,19 @@ package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoInfoBarViewBinding;
-import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
 /** shows info about currently running wherigo (if any) */
-public class WherigoInfoBarView extends LinearLayout {
+public class WherigoInfoBarView extends RelativeLayout {
 
     private Context context;
     private Activity activity;
@@ -42,12 +42,16 @@ public class WherigoInfoBarView extends LinearLayout {
     }
 
     private void init(final AttributeSet attrs, final int defStyleAttr, final int defStyleRes) {
-        setOrientation(HORIZONTAL);
         this.context = new ContextThemeWrapper(getContext(), R.style.cgeo);
         this.activity = ViewUtils.toActivity(this.context);
         inflate(this.context, R.layout.wherigo_info_bar_view, this);
         binding = WherigoInfoBarViewBinding.bind(this);
         binding.wherigoBar.setOnClickListener(v -> onBarClick());
+        binding.wherigoInfoText.setOnClickListener(v -> onBarClick());
+        binding.wherigoResumeDialog.setOnClickListener(v -> onResumeDialogClick());
+        binding.wherigoResumeDialogText.setOnClickListener(v -> onResumeDialogClick());
+
+        BadgeManager.get().setBadge(binding.wherigoResumeDialog, false, -1);
 
         wherigoListenerId = WherigoGame.get().addListener(nt -> refreshBar());
         refreshBar();
@@ -62,23 +66,20 @@ public class WherigoInfoBarView extends LinearLayout {
     private void refreshBar() {
         final boolean isVisible = WherigoGame.get().isPlaying() && !(activity instanceof WherigoActivity);
         binding.wherigoBar.setVisibility(isVisible ? VISIBLE : GONE);
+        binding.wherigoResumeDialog.setVisibility(isVisible && WherigoGame.get().dialogIsPaused() ? VISIBLE : GONE);
         if (!isVisible) {
             return;
         }
+        binding.wherigoInfoText.setText(WherigoGame.get().getCartridgeName());
 
-        if (WherigoGame.get().dialogIsPaused()) {
-            TextParam.id(R.string.wherigo_notification_waiting, WherigoGame.get().getCartridgeName()).applyTo(binding.wherigoInfoText);
-        } else {
-            binding.wherigoInfoText.setText(WherigoGame.get().getCartridgeName());
-        }
     }
 
     private void onBarClick() {
-        if (WherigoGame.get().dialogIsPaused()) {
-            WherigoDialogManager.get().unpause();
-        } else if (this.activity != null) {
-            WherigoActivity.start(this.activity, false);
-        }
+        WherigoActivity.start(this.activity, false);
+    }
+
+    private void onResumeDialogClick() {
+        WherigoDialogManager.get().unpause();
     }
 
 }

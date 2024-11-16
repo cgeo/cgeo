@@ -102,7 +102,7 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     private void performActionAfterGameEnded(final CartridgeAction action, final Activity activity, final List<WherigoSavegameInfo> saveGames) {
         if (action == CartridgeAction.DELETE) {
             SimpleDialog.of(activity).setTitle(TextParam.id(R.string.wherigo_confirm_delete_cartridge_title))
-                    .setMessage(TextParam.id(R.string.wherigo_confirm_delete_cartridge_message, WherigoGame.get().getCartridgeName(), "" + saveGames.size()))
+                    .setMessage(TextParam.id(R.string.wherigo_confirm_delete_cartridge_message, cartridgeInfo.getName(), "" + saveGames.size()))
                     .setButtons(SimpleDialog.ButtonTextSet.YES_NO)
                     .confirm(() -> {
                         if (cartridgeInfo.getFileInfo() != null && cartridgeInfo.getFileInfo().uri != null) {

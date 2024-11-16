@@ -327,22 +327,25 @@ public class MainActivity extends AbstractNavigationBarActivity {
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
             if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()));
+                addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
             }
         }
 
         // temporarily add button for unified map, if enabled in settings
         if (Settings.showUnifiedMap()) {
-            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map");
+            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map", null);
         }
     }
 
-    private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip) {
+    private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip, final java.util.function.Consumer<View> viewInitializer) {
         final MaterialButton b = new MaterialButton(this, null, R.attr.quickLaunchButtonStyle);
         b.setIconResource(iconRes);
         b.setLayoutParams(lp);
         b.setVisibility(View.VISIBLE);
         b.setOnClickListener(view -> action.run());
+        if (viewInitializer != null) {
+            viewInitializer.accept(b);
+        }
         TooltipCompat.setTooltipText(b, tooltip);
         binding.quicklaunchitems.addView(b);
         binding.quicklaunchitems.setVisibility(View.VISIBLE);

@@ -2978,6 +2978,7 @@
 
     <string name="wherigo_notification_service">c:geo is running a Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" is waiting for you!</string>
+    <string name="wherigo_bar_resume_dialog">Resume dialog</string>
 
     <string name="wherigo_toast_check_game">Wherigo: check your game for changes</string>
     <string name="wherigo_toast_check_things">Wherigo: check your %s for changes</string>
