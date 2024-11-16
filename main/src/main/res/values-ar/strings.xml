@@ -500,6 +500,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo الآن مرخص له بالتفاعل مع %s.</string>
     <string name="err_auth_geokrety_bad_password">يبدو أن اسم المستخدم أو كلمة مرورك غير صحيحين.</string>
     <string name="err_auth_geokrety_unknown">%1$s أجاب: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">آخر يوم متاح</string>
