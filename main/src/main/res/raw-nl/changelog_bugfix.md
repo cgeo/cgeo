@@ -1,4 +1,7 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+##
 - Oplossing: Enkele problemen met nieuwe event tijd detectie
 - Oplossing: Crash bij het bewerken van het variabele veld
 - Oplossing: Fout bij het importeren van GPX-bestand (tijdelijke oplossing)
