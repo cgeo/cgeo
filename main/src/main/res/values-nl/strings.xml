@@ -1294,6 +1294,18 @@
     <string name="auth_dialog_completed_geokrety">c:geo is nu geautoriseerd om met %s te communiceren.</string>
     <string name="err_auth_geokrety_bad_password">Je gebruikersnaam/wachtwoord lijkt ongeldig.</string>
     <string name="err_auth_geokrety_unknown">%1$s antwoord: %2$s.</string>
+    <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Geen login informatie opgeslagen</string>
+    <string name="err_auth_gc_loginpage1">Fout bij ophalen van login pagina (1e)</string>
+    <string name="err_auth_gc_loginpage2">Fout bij ophalen van de login pagina (2e)</string>
+    <string name="err_auth_gc_verification_token">Fout bij het vinden van aanvraag verificatie token</string>
+    <string name="err_auth_gc_captcha">Inloggen op geocaching.com mislukt door de vereiste captcha</string>
+    <string name="err_auth_gc_bad_login">Kan niet inloggen op geocaching.com als %s vanwege verkeerde gebruikersnaam/wachtwoord</string>
+    <string name="err_auth_gc_not_validated">Kan niet inloggen in Geocaching.com als %s, omdat het account eerst gevalideerd moet worden</string>
+    <string name="err_auth_gc_unknown_error">Kan niet inloggen in Geocaching.com als %s om onbekende reden</string>
+    <string name="err_auth_gc_unknown_error_generic">Onbekende fout</string>
+    <string name="err_auth_gc_communication_error">Communicatiefout</string>
+    <string name="err_auth_gc_manual_error">Handmatige inlogfout: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
