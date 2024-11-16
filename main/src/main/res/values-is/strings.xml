@@ -356,6 +356,7 @@
     <string name="auth_dialog_completed_oc">c:geo má núna eiga samskipti við %s.</string>
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo má núna eiga samskipti við %s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d kassi</item>
