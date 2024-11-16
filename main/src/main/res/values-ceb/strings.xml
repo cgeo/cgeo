@@ -473,6 +473,7 @@
     <string name="auth_dialog_completed_geokrety">ang c:geo kay ge awtorisar nga makig-interact kauban ang %s.</string>
     <string name="err_auth_geokrety_bad_password">Ang imohang username/password kay murag dili balido.</string>
     <string name="err_auth_geokrety_unknown">%1$s nibalik: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
