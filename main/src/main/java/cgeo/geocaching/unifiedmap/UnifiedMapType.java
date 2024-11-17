@@ -55,6 +55,13 @@ public class UnifiedMapType implements Parcelable {
         this.viewport = viewport;
     }
 
+    /** open map and scale to a given viewport */
+    public UnifiedMapType(final Viewport viewport, final String title) {
+        type = UnifiedMapTypeType.UMTT_Viewport;
+        this.viewport = viewport;
+        this.title = title;
+    }
+
     /** set geocode as target */
     public UnifiedMapType(final String geocode) {
         type = UnifiedMapTypeType.UMTT_TargetGeocode;
