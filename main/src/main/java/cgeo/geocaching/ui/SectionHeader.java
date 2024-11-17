@@ -15,6 +15,7 @@ import cgeo.geocaching.R;
 public class SectionHeader extends LinearLayout {
 
     private TextView titleView;
+    private View lineView;
 
     public SectionHeader(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -37,7 +38,7 @@ public class SectionHeader extends LinearLayout {
 
         final View view = LayoutInflater.from(context).inflate(R.layout.section_header, this, false);
 
-        final View lineView = view.findViewById(R.id.line);
+        lineView = view.findViewById(R.id.line);
         lineView.setVisibility(showLine ? VISIBLE : GONE);
 
         titleView = view.findViewById(R.id.title);
@@ -55,5 +56,9 @@ public class SectionHeader extends LinearLayout {
 
     public void setText(final int text) {
         titleView.setText(text);
+    }
+
+    public void setSeparatorAboveVisible(final boolean showLine) {
+        lineView.setVisibility(showLine ? VISIBLE : GONE);
     }
 }
