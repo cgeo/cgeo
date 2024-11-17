@@ -348,6 +348,9 @@ public class ImageGalleryView extends LinearLayout {
             binding.imgGalleryCategoryTitle.setVisibility(View.VISIBLE);
             binding.imgGalleryCategoryTitle.setText(category);
         }
+        if (entry.getLayoutPosition() == 0) {
+            binding.imgGalleryCategoryTitle.setSeparatorAboveVisible(false);
+        }
 
         final boolean isEditableCat = this.editableCategoryHandlerMap.containsKey(category);
         binding.imgGalleryAddButtons.setVisibility(isEditableCat ? View.VISIBLE : View.GONE);
