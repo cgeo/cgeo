@@ -146,4 +146,12 @@ public final class DefaultMap {
             mapType.launchMap(fromActivity);
         }
     }
+
+    public static void startActivityWherigoMap(final Activity fromActivity, final Viewport viewport, final String mapTitle) {
+        if (Settings.useUnifiedMap()) { // only supported for UnifiedMap
+            Log.e("Launching UnifiedMap in viewport mode, viewport=" + viewport + ")");
+            final UnifiedMapType mapType = viewport == null ? new UnifiedMapType() : new UnifiedMapType(viewport, mapTitle);
+            mapType.launchMap(fromActivity);
+        }
+    }
 }
