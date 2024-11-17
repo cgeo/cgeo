@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
@@ -10,24 +12,22 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import cgeo.geocaching.R;
-
 public class SectionHeader extends LinearLayout {
 
     private TextView titleView;
     private View lineView;
 
-    public SectionHeader(Context context, @Nullable AttributeSet attrs) {
+    public SectionHeader(final Context context, @Nullable final AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
 
-    private void init(Context context, @Nullable AttributeSet attrs) {
+    private void init(final Context context, @Nullable final AttributeSet attrs) {
         final TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.SectionHeader, 0, 0);
-        String title;
-        int titleId;
-        boolean showLine;
+        final String title;
+        final int titleId;
+        final boolean showLine;
         try {
             title = a.getString(R.styleable.SectionHeader_android_text);
             titleId = a.getResourceId(R.styleable.SectionHeader_android_id, 0);
