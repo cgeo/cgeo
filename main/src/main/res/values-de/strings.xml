@@ -1295,6 +1295,17 @@
     <string name="err_auth_geokrety_bad_password">Dein Benutzername/Passwort scheint ungültig zu sein.</string>
     <string name="err_auth_geokrety_unknown">%1$s antwortet: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Keine Anmeldedaten gespeichert</string>
+    <string name="err_auth_gc_loginpage1">Fehler beim Abrufen der Login-Seite (1)</string>
+    <string name="err_auth_gc_loginpage2">Fehler beim Abrufen der Login-Seite (2)</string>
+    <string name="err_auth_gc_verification_token">Verifizierungs-Token nicht gefunden</string>
+    <string name="err_auth_gc_captcha">Anmeldung bei geocaching.com fehlgeschlagen, da Captcha angefordert</string>
+    <string name="err_auth_gc_bad_login">Anmeldung bei geocaching.com als %s fehlgeschlagen wegen falschem Benutzername/Passwort</string>
+    <string name="err_auth_gc_not_validated">Anmeldung bei Geocaching.com als %s fehlgeschlagen, da das Konto erst bestätigt werden muss</string>
+    <string name="err_auth_gc_unknown_error">Anmeldung bei geocaching.com als %s aus unbekannten Gründen fehlgeschlagen</string>
+    <string name="err_auth_gc_unknown_error_generic">Unbekannter Fehler</string>
+    <string name="err_auth_gc_communication_error">Kommunikationsfehler</string>
+    <string name="err_auth_gc_manual_error">Fehler bei manuellem Login: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d Cache</item>
@@ -1526,6 +1537,7 @@
     <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
     <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
     <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
+    <string name="cache_wherigo_start">Wherigo mit c:geo-internem Player herunterladen und spielen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
@@ -1570,6 +1582,7 @@
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
     <!-- html styles -->
     <string name="html_style_default">Standard</string>
+    <string name="html_style_default_no_contrast_fix">Standard ohne Kontrastkorrektur</string>
     <string name="html_style_monochrome">Monochrom</string>
     <string name="html_style_source_formatted">HTML-Quelltext formatiert</string>
     <string name="html_style_source">HTML-Quelltext</string>
@@ -2183,6 +2196,7 @@
     <string name="attribute_blind_people_no">Kein Handicap: Blind</string>
     <string name="attribute_unknown">Unbekanntes Attribut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Cachestatus</string>
     <string name="cat_tools">Ausrüstung</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Cache-Ort</string>
@@ -2580,10 +2594,22 @@
     <string name="wherigo_controls">Steuerung</string>
     <string name="wherigo_controls_cartridgelist_hint">Cartridges auswählen und Spiel starten</string>
     <string name="wherigo_controls_savegame_hint">Fortschritt eines laufenden Spiels speichern</string>
+    <string name="wherigo_controls_loadgame_hint">Lade ein gespeichertes Spiel</string>
     <string name="wherigo_controls_stopgame_hint">Laufendes Spiel stoppen</string>
     <string name="wherigo_controls_mapzones_hint">Zonen eines laufenden Spiels auf der Karte anzeigen</string>
     <string name="wherigo_controls_downloadcartridge_hint">Manuelles Herunterladen einer Cartridge (cguid erforderlich)</string>
     <string name="wherigo_controls_reportproblem_hint">Melde ein Problem mit dem Wherigo Player</string>
+    <string name="wherigo_controls_cache_context">Geocache Kontext</string>
+    <string name="wherigo_controls_cache_link">Gehe zu Cache-Details</string>
+    <string name="wherigo_sound_title">Sound-Steuerung</string>
+    <string name="wherigo_sound_continue">Fortsetzen</string>
+    <string name="wherigo_sound_restart">Neu starten</string>
+    <string name="wherigo_sound_pause">Pause</string>
+    <string name="wherigo_sound_mute">Stumm schalten</string>
+    <string name="wherigo_sound_unmute">Stummschaltung aufheben</string>
+    <string name="wherigo_controls_resume_paused_dialog">Pausierten Dialog fortsetzen</string>
+    <string name="wherigo_dialog_pause_info">Dialog in Wherigo Player fortsetzen, indem Sie auf \"Fortsetzen\" tippen</string>
+    <string name="wherigo_no_game_running">Es läuft momentan kein Wherigo Spiel</string>
     <string name="wherigo_currently_playing">Aktuelles Spiel</string>
     <string name="wherigo_cartridge_details">Cartridge Details</string>
     <string name="wherigo_locate_on_center">Ins Zentrum positionieren</string>
@@ -2592,6 +2618,7 @@
     <string name="wherigo_thingtype_inventory">Inventar</string>
     <string name="wherigo_thingtype_item">Du siehst</string>
     <string name="wherigo_thingtype_task">Aufgaben</string>
+    <string name="wherigo_thingtype_thing">Dinge</string>
     <string name="wherigo_author">Autor</string>
     <string name="wherigo_zone_inside">innerhalb</string>
     <string name="wherigo_zone_near">in der Nähe</string>
@@ -2613,13 +2640,29 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: Lösche übrige Datei</string>
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
+    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s%) heruntergeladen</string>
+    <string name="wherigo_error_title">Wherigo Problembericht</string>
+    <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
+    <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Benutzen Sie \'Per E-Mail senden\', um ein Problem für ein Wherigo Spiel an unser Support-Team zu melden.</string>
+    <string name="wherigo_error_email">Wherigo Problembericht\n\nEnginefehler: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Die Wherigo Engine hat einen Fehler gemeldet. Öffnen Sie den Fehlerdialog für Details.</string>
     <string name="wherigo_confirm_stop_running_game_title">Wherigo-Spiel stoppen</string>
     <string name="wherigo_confirm_stop_running_game_message">Ein Spiel läuft derzeit für \"%s\". Möchtest du dieses Spiel beenden?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Wherigo-Cartridge löschen</string>
     <string name="wherigo_confirm_delete_cartridge_message">Willst du wirklich Cartridge \"%1$s\" inklusive %2$s Spielständen löschen?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Wherigo Speicherstand löschen</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Willst du wirklich den Speicherstand \"%2$s\" der Cartridge \"%1$s \"löschen?</string>
+    <string name="wherigo_save_game_title">Wherigo Spielfortschritt speichern</string>
+    <string name="wherigo_save_game_message">Speichere deinen Spielfortschritt für Cartridge \"%1$s\" in \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Namen eingeben (optional)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Warnung: Wenn Sie fortfahren, werden Sie den vorhandenen Spielstand \"%1$s \" überschreiben</string>
     <string name="wherigo_dialog_push_page">Seite %1$s / %2$s</string>
     <string name="wherigo_notification_service">Ein Wherigo-Spiel läuft in c:geo…</string>
     <string name="wherigo_notification_waiting">\"%s\" wartet auf dich!</string>
+    <string name="wherigo_bar_resume_dialog">Fortsetzen</string>
+    <string name="wherigo_toast_check_game">Wherigo: Überprüfe dein Spiel auf Änderungen</string>
+    <string name="wherigo_toast_check_things">Wherigo: Überprüfe deine %s auf Änderungen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Schnellstart</string>
     <string name="wherigo_otm_shortcuts_message">Wenn du den c:geo Wherigo Player regelmäßig verwenden möchtest, erwägen Sie eine Schnellstart-Schaltfläche oder einen benutzerdefinierten Menüpunkt dafür unter Einstellungen -&gt; Erscheinungsbild</string>
     <!-- default actions in dialogs -->
