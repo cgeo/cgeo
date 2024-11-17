@@ -42,6 +42,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         this.adapter = varList.getAdapter();
         adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
         adapter.setChangeCallback(v -> {
+            binding.variablesAddnextchar.setText(getAddNextCharText());
             if (activity != null && (previousVarSize < 0 || previousVarSize != v.size())) {
                 activity.reinitializePage(-1); //this just reinits the title bar, not the variable tab content
                 previousVarSize = v.size();
@@ -69,6 +70,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         });
 
+        binding.variablesAddnextchar.setText(getAddNextCharText());
         binding.variablesAddnextchar.setOnClickListener(d -> {
             final Character lmc = adapter.getVariables().getLowestMissingChar();
             if (lmc != null) {
