@@ -1868,6 +1868,8 @@
     <string name="variables_scanlisting_nopatternfound">No pattern found</string>
     <string name="variables_tidyup">Tidy Up</string>
     <string name="variables_deleteall">Delete All</string>
+    <string name="variables_add">Add variable</string>
+    <string name="variables_add_next">Add next variable</string>
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variable Name</string>
