@@ -24,6 +24,7 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.ActivityManager;
@@ -263,16 +264,21 @@ public final class SystemInformation {
 
     private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {
         body.append("\n- Map: ");
-        final MapSource source = Settings.getMapSource();
-        if (source == null) {
-            body.append("none");
-            return;
+        if (Settings.useUnifiedMap()) {
+            final AbstractTileProvider tileProvider = Settings.getTileProvider();
+            final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
+            body.append(tileProvider.getTileProviderName())
+                    .append("\n  - Id: ").append(tileProvider.getId())
+                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
+                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
+        } else {
+            final MapSource source = Settings.getMapSource();
+            final ImmutablePair<String, Boolean> mapAttrs = source.calculateMapAttribution(ctx);
+            body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
+                    .append("\n  - Id: ").append(source.getId())
+                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.left).replace("\n", " / "))
+                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
         }
-        final ImmutablePair<String, Boolean> mapAtts = source.calculateMapAttribution(ctx);
-        body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
-                .append("\n  - Id: ").append(source.getId())
-                .append("\n  - Atts: ").append(mapAtts == null ? "none" : HtmlUtils.extractText(mapAtts.left).replace("\n", " / "))
-                .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
     }
 
 
