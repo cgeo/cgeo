@@ -37,7 +37,7 @@
                 style="@style/button"
                 android:layout_margin="3dp"
                 android:minWidth="2dp"
-                app:icon="@drawable/ic_menu_add" />
+                app:icon="@drawable/ic_menu_add_input" />
             <Button
                 android:id="@+id/variables_addnextchar"
                 style="@style/button"
@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:layout_margin="3dp"
                 android:text="@string/variables_scanlisting"
-                app:icon="@drawable/ic_menu_add" />
+                app:icon="@drawable/ic_menu_scan" />
 
             <Button
                 android:id="@+id/variables_tidyup"
@@ -74,7 +74,7 @@
                 android:gravity="center"
                 android:layout_margin="3dp"
                 android:text="@string/variables_deleteall"
-                app:icon="@drawable/ic_menu_delete"/>
+                app:icon="@drawable/ic_menu_delete_all"/>
 
             <Button
                 android:id="@+id/variables_info"
@@ -82,7 +82,7 @@
                 android:text="@string/variables_info"
                 android:layout_margin="3dp"
                 android:layout_gravity="center_horizontal"
-                app:icon="@drawable/settings_info" />
+                app:icon="@drawable/ic_menu_help" />
         </com.google.android.material.chip.ChipGroup>
 
         <View
