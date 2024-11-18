@@ -2576,6 +2576,12 @@
     <string name="wherigo_controls_loadgame_hint">Ladda ett sparat spel</string>
     <string name="wherigo_controls_cache_context">Cache-sammanhang</string>
     <string name="wherigo_controls_cache_link">Gå till cache-detaljer</string>
+    <string name="wherigo_sound_title">Ljudkontroller</string>
+    <string name="wherigo_sound_continue">Fortsätt</string>
+    <string name="wherigo_sound_restart">Börja om från början</string>
+    <string name="wherigo_sound_pause">Paus</string>
+    <string name="wherigo_sound_mute">Tysta</string>
+    <string name="wherigo_sound_unmute">Sätt på ljud</string>
     <string name="wherigo_controls_resume_paused_dialog">Återuppta pausad dialog</string>
     <string name="wherigo_dialog_pause_info">Återuppta dialogrutan i Wherigo-spelaren genom att trycka på \"Återuppta pausad dialog\"</string>
     <string name="wherigo_no_game_running">Inget wherigo-spel körs för närvarande</string>
@@ -2592,6 +2598,7 @@
     <string name="wherigo_confirm_delete_savegame_slot_title">Ta bort Wherigo Savegame</string>
     <string name="wherigo_save_game_custom_name_label">Ange namn (valfritt)</string>
     <string name="wherigo_save_game_warning_overwrite_slot">Varning: genom att fortsätta kommer du att skriva över existerande savegame från \"%1$s\"</string>
+    <string name="wherigo_bar_resume_dialog">Återuppta</string>
     <string name="wherigo_toast_check_game">Wherigo: kolla ditt spel för ändringar</string>
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
