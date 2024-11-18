@@ -9,6 +9,7 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
@@ -107,9 +108,9 @@ public class FilterUtils {
      * filterView must exist
      */
     public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
-        final View filterView = activity.findViewById(R.id.filter_bar);
-        filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());
-        filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
+        ViewUtils.setForParentAndChildren(activity.findViewById(R.id.filter_bar),
+                v -> filteredActivity.showFilterMenu(),
+                v -> filteredActivity.showSavedFilterList());
     }
 
     public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {

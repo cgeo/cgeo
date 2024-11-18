@@ -75,6 +75,7 @@ import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -522,13 +523,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         super.onPause();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        final View sortView = this.findViewById(R.id.sort_bar);
-        sortView.setOnClickListener(v -> openSortDialog());
-        sortView.setOnLongClickListener(v -> refreshWithSortType(sortContext.getSort().getType()));
+        ViewUtils.setForParentAndChildren(this.findViewById(R.id.sort_bar),
+                v -> openSortDialog(),
+                v -> refreshWithSortType(sortContext.getSort().getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
@@ -1164,15 +1166,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         view.setOnClickListener(clickListener);
     }
 
+    private void setView(final TextView view, final String text, final View.OnClickListener clickListener, final View.OnLongClickListener longClickListener) {
+        setView(view, text, clickListener);
+    }
+
     private void updateSortBar() {
         final View sortView = this.findViewById(R.id.sort_bar);
         final GeocacheSort.SortType st = sortContext.getSort().getType();
         if (st == null || GeocacheSort.SortType.AUTO.equals(st) || CacheListType.HISTORY.equals(type)) {
             sortView.setVisibility(View.GONE);
         } else {
-            final TextView filterTextView = findViewById(R.id.sort_text);
-            filterTextView.setText(sortContext.getSort().getDisplayName());
             sortView.setVisibility(View.VISIBLE);
+            final TextView sortTextView = findViewById(R.id.sort_text);
+            sortTextView.setText(sortContext.getSort().getDisplayName());
         }
     }
 

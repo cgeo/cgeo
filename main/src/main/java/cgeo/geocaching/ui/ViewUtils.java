@@ -610,6 +610,25 @@ public class ViewUtils {
         return ((ViewGroup) v.getParent()).indexOfChild(v);
     }
 
+    public static void setForParentAndChildren(final View view, final View.OnClickListener clickListener, final View.OnLongClickListener onLongClickListener) {
+        if (view == null) {
+            return;
+        }
+
+        view.setOnClickListener(clickListener);
+        view.setOnLongClickListener(onLongClickListener);
+
+        if (view instanceof ViewGroup) {
+            final ViewGroup viewGroup = (ViewGroup) view;
+            if (viewGroup != null) {
+                for (int index = 0; index < viewGroup.getChildCount(); index++) {
+                    final View childView = viewGroup.getChildAt(index);
+                    childView.setOnClickListener(clickListener);
+                    childView.setOnLongClickListener(onLongClickListener);
+                }
+            }
+        }
+    }
 
     public static Bitmap drawableToBitmap(final Drawable drawable) {
         final Bitmap bitmap;
