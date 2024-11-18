@@ -78,6 +78,9 @@ public class DownloaderUtils {
         if (id == R.id.menu_download_offlinemap) {
             activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
+        } else if (id == R.id.menu_delete_offline_data) {
+            deleteOfflineData(activity);
+            return true;
         }
         return false;
     }
