@@ -1,5 +1,5 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
+- Correcció: el botó "Inici de sessió manual" es mostra fins i tot sense error d'inici de sessió "captcha required"
 
 ##
 - Solució: alguns problemes amb la detecció d'hora d'esdeveniments nous
