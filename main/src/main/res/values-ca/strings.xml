@@ -1676,6 +1676,8 @@
     <string name="variables_scanlisting_nopatternfound">No s\'ha trobat cap patró</string>
     <string name="variables_tidyup">Endreçar</string>
     <string name="variables_deleteall">Eliminar tots</string>
+    <string name="variables_add">Afegeix variable</string>
+    <string name="variables_add_next">Afegeix la següent variable</string>
     <string name="variables_deleteall_confirm_text">Realment voleu suprimir totes les variables d\'aquest catxé?</string>
     <string name="variables_info">Ajuda</string>
     <string name="variables_varname_dialog_title">Nom de la variable</string>
@@ -2603,6 +2605,12 @@
     <string name="wherigo_controls_reportproblem_hint">Informa d\'un problema amb el Wherigo Player</string>
     <string name="wherigo_controls_cache_context">Context del catxé</string>
     <string name="wherigo_controls_cache_link">Vés als detalls del catxé</string>
+    <string name="wherigo_sound_title">Controls de so</string>
+    <string name="wherigo_sound_continue">Continua</string>
+    <string name="wherigo_sound_restart">Reinicieu des del principi</string>
+    <string name="wherigo_sound_pause">Pausa</string>
+    <string name="wherigo_sound_mute">Silencia</string>
+    <string name="wherigo_sound_unmute">Activa el so</string>
     <string name="wherigo_controls_resume_paused_dialog">Reprèn el diàleg en pausa</string>
     <string name="wherigo_dialog_pause_info">Reprèn el diàleg a Wherigo Player tocant \"Reprèn el diàleg en pausa\"</string>
     <string name="wherigo_no_game_running">No s\'està executant cap joc de whirigo actualment</string>
@@ -2656,6 +2664,7 @@
     <string name="wherigo_dialog_push_page">Pàgina %1$s/%2$s</string>
     <string name="wherigo_notification_service">c:geo està executant un Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" t\'està esperant!</string>
+    <string name="wherigo_bar_resume_dialog">Reprendre</string>
     <string name="wherigo_toast_check_game">Wherigo: comproveu si hi ha canvis al vostre joc</string>
     <string name="wherigo_toast_check_things">Wherigo: comproveu si hi ha canvis al vostre %s</string>
     <string name="wherigo_otm_shortcuts_title">Dreceres del Wherigo Player</string>
