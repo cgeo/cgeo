@@ -1379,6 +1379,7 @@
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inwentarz</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
+    <string name="cache_set_coordinates">Ustaw współrzędne</string>
     <string name="cache_personal_note">Notatka osobista</string>
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
@@ -1704,6 +1705,8 @@
     <string name="variables_scanlisting_nopatternfound">Nie znaleziono wzoru</string>
     <string name="variables_tidyup">Uporządkuj zmienne</string>
     <string name="variables_deleteall">Usuń wszystko</string>
+    <string name="variables_add">Dodaj zmienną</string>
+    <string name="variables_add_next">Dodaj następną zmienną</string>
     <string name="variables_deleteall_confirm_text">Czy na pewno chcesz usunąć wszystkie zmienne dla tej skrytki?</string>
     <string name="variables_info">Pomoc</string>
     <string name="variables_varname_dialog_title">Nazwa zmiennej</string>
@@ -2661,6 +2664,12 @@
     <string name="wherigo_controls_reportproblem_hint">Zgłoś problem z wherigo playerem</string>
     <string name="wherigo_controls_cache_context">Kontekst skrytki</string>
     <string name="wherigo_controls_cache_link">Przejdź do szczegółów skrytki</string>
+    <string name="wherigo_sound_title">Kontrola dźwięku</string>
+    <string name="wherigo_sound_continue">Kontynuuj</string>
+    <string name="wherigo_sound_restart">Uruchom ponownie od początku</string>
+    <string name="wherigo_sound_pause">Wstrzymaj</string>
+    <string name="wherigo_sound_mute">Wycisz</string>
+    <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
@@ -2708,6 +2717,7 @@
     <string name="wherigo_dialog_push_page">Strona %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo uruchamia Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" czeka na Ciebie!</string>
+    <string name="wherigo_bar_resume_dialog">Wznów</string>
     <string name="wherigo_toast_check_game">Wherigo: sprawdź swoją grę pod kątem zmian</string>
     <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
     <string name="wherigo_otm_shortcuts_title">Skróty Wherigo Playera</string>
