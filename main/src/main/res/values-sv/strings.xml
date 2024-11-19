@@ -1335,6 +1335,7 @@
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Innehåll</string>
     <string name="cache_log_image_default_title">Foto</string>
+    <string name="cache_set_coordinates">Ange koordinater</string>
     <string name="cache_personal_note">Personlig anteckning</string>
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
     <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
