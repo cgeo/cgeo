@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractNavigationBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.address.AddressListActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
@@ -42,10 +43,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 import de.k3b.geo.api.GeoPointDto;
@@ -58,6 +62,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
     public static final String ACTION_CLIPBOARD = "clipboard";
+    public boolean ACTIVITY_USED = false;
 
     @Override
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
@@ -151,6 +156,17 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     @Override
     public int getSelectedBottomItemId() {
         return MENU_SEARCH;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (ACTIVITY_USED) {
+            ACTIVITY_USED = false;
+            setTitle(res.getString(R.string.search));
+            init();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     /**
@@ -271,6 +287,15 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void init() {
+        final LinearLayout sa = findViewById(R.id.search_activity);
+        for (int i = 0; i < sa.getChildCount(); i++) {
+            sa.getChildAt(i).setVisibility(View.GONE);
+        }
+
+        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.recyclerView.setVisibility(View.VISIBLE);
+        binding.recyclerView.setAdapter(new CardAdapter(this, Arrays.asList(SearchActivityCard.values())));
+
         binding.buttonLatLongitude.setOnClickListener(v -> updateCoordinates());
 
         binding.searchCoordinates.setOnClickListener(arg0 -> findByCoordsFn());

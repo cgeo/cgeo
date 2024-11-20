@@ -525,6 +525,8 @@ dependencies {
     // ani gif support
     // minSdk=17 from version 1.2.16
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
 
 // define objects for files/folders outside tasks
