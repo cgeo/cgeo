@@ -1,3 +1,5 @@
+Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovské obrazovce.<br> (Možná budete chtít [konfigurovat položku rychlého spuštění](cgeo-setting://quicklaunchitems_sorted) nebo [přizpůsobit spodní navigaci](cgeo-setting://custombnitem) pro snadnější přístup, je třeba nejprve povolit rozšířené nastavení.)
+
 ### Mapa
 - Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
@@ -8,6 +10,8 @@
 - Novinka: Podpora stínování kopců pro offline mapy Sjednocená mapa Mapsforge
 - Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
 - Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
+- Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
+- Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -16,6 +20,10 @@
 - Oprava: Více obrázků v osobní poznámce nebylo přidáno na kartu Obrázky
 - Oprava: Zpracování projekcí v trasových bodech a osobních poznámkách
 - Novinka: Dlouhým klepnutím na datum v logu se načte předchozí datum logu
+- Oprava: Obnovení kešky na původní souřadnice neodstraní příznak “změněné souřadnice“
+- Novinka: Potvrzení přepsání logu v rychlém offline logu
+- Novinka: Aktualizace stavu kešky při odeslání logu
+- Novinka: Barevné zobrazení HTML zdroje s podrobnostmi o kešce
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
@@ -24,3 +32,10 @@
 - Novinka: Nastavení preferované velikosti obrázku pro obrázky načtené z kešek a trasovatelných předmětů na webu geocaching.com
 - Oprava: Volba „Otevřít v prohlížeči“ nefunguje pro sledovatelné protokoly
 - Novinka: Možnost spravovat stažené soubory (mapy, motivy, směrovací data a data stínování kopců)
+- Novinka: Možnost odstranit kešku ze všech seznamů (= označit ji jako ke smazání)
+- Oprava: Obnovení souřadnic nezjištěno pomocí c:geo pro neuložené kešky
+- Novinka: Povolit vymazání filtru, pokud není uložen žádný pojmenovaný filtr
+- Oprava: Vyskakující potvrzení "Prázdný seznam" při spuštění stahování v nově vytvořeném seznamu
+- Změna: Vlastní kešky s offline logy zobrazují značku offline logu
+- Novinka: Nastavitelný formát data (např. logy kešek), viz [Nastavení => Vzhled => Formát data](cgeo-settings://short_date_format)
+- Novinka: Přesměrování informací o konektorech na domovské obrazovce na obrazovku předvoleb konkrétního konektoru
