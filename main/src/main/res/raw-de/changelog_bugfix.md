@@ -1,5 +1,6 @@
 ##
-- Korrektur: "Manueller Login" Button wird auch ohne "captcha required" Login-Fehler angezeigt
+- Fix: "Manual login" button shown even without "captcha required" login error
+- Fix: Time zone issues with new event time detection
 
 ##
 - Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
