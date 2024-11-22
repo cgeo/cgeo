@@ -852,6 +852,7 @@
     <!-- auth geokrety -->
     <string name="auth_dialog_completed_geokrety">c:geo正被授權與%s互動。</string>
     <string name="err_auth_geokrety_bad_password">你的帳號或密碼不正確</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d寶藏</item>

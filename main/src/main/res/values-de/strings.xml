@@ -1289,6 +1289,18 @@
     <string name="auth_dialog_completed_geokrety">c:geo ist nun autorisiert mit %s zu kommunizieren.</string>
     <string name="err_auth_geokrety_bad_password">Dein Benutzername/Passwort scheint ungültig zu sein.</string>
     <string name="err_auth_geokrety_unknown">%1$s antwortet: %2$s.</string>
+    <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Keine Anmeldedaten gespeichert</string>
+    <string name="err_auth_gc_loginpage1">Fehler beim Abrufen der Login-Seite (1)</string>
+    <string name="err_auth_gc_loginpage2">Fehler beim Abrufen der Login-Seite (2)</string>
+    <string name="err_auth_gc_verification_token">Verifizierungs-Token nicht gefunden</string>
+    <string name="err_auth_gc_captcha">Anmeldung bei geocaching.com fehlgeschlagen, da Captcha angefordert</string>
+    <string name="err_auth_gc_bad_login">Anmeldung bei geocaching.com als %s fehlgeschlagen wegen falschem Benutzername/Passwort</string>
+    <string name="err_auth_gc_not_validated">Anmeldung bei Geocaching.com als %s fehlgeschlagen, da das Konto erst bestätigt werden muss</string>
+    <string name="err_auth_gc_unknown_error">Anmeldung bei geocaching.com als %s aus unbekannten Gründen fehlgeschlagen</string>
+    <string name="err_auth_gc_unknown_error_generic">Unbekannter Fehler</string>
+    <string name="err_auth_gc_communication_error">Kommunikationsfehler</string>
+    <string name="err_auth_gc_manual_error">Fehler bei manuellem Login: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d Cache</item>

@@ -1,4 +1,8 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+- Fix: Time zone issues with new event time detection
+
+##
 - Correcção: Alguns problemas com a nova detecção da hora do evento
 - Correcção: Falha ao editar campo de variável
 - Correcção: Falha ao importar ficheiro GPX (solução alternativa)

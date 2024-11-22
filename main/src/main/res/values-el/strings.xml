@@ -1084,6 +1084,7 @@
     <string name="auth_dialog_completed_geokrety">Το c:geo τώρα είναι τώρα εξουσιοδοτημένο να αλληλεπιδρά με το %s.</string>
     <string name="err_auth_geokrety_bad_password">Το όνομα χρήστη ή ο κωδικός πρόσβασης δεν είναι έγκυρα.</string>
     <string name="err_auth_geokrety_unknown">%1$s επέστρεψε: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d κρύπτη</item>

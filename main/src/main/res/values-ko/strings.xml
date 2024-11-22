@@ -1268,6 +1268,7 @@
     <string name="auth_dialog_completed_geokrety">이제 c:geo에서 %s 에 상호작용하도록 허용되었습니다.</string>
     <string name="err_auth_geokrety_bad_password">사용자명/비밀번호가 맞지 않는 것 같습니다.</string>
     <string name="err_auth_geokrety_unknown">%1$s 반환됨 : %2$s</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="other">%1$d 개 캐시</item>

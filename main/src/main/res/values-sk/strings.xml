@@ -1157,6 +1157,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo  je teraz autorizované pre prístup k %s.</string>
     <string name="err_auth_geokrety_bad_password">Tvoje používateľské meno/heslo je pravdepodobne nesprávne.</string>
     <string name="err_auth_geokrety_unknown">%1$s vrátil: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d keška</item>

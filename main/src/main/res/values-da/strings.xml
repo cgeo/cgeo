@@ -851,6 +851,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo er nu autoriseret til at interagere med %s.</string>
     <string name="err_auth_geokrety_bad_password">Brugernavn og adgangskode er muligvis ikke korrekte.</string>
     <string name="err_auth_geokrety_unknown">%1$s svarede: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">En cache</item>
