@@ -38,6 +38,8 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">User defined cache</string>
     <string name="unknown">Unknown Type</string>
+    <string name="other">Others</string>
+    <string name="event_special">Specials</string>
 
     <string name="all_types_short">All</string>
     <string name="traditional_short">Trad</string>

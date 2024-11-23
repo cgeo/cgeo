@@ -69,7 +69,7 @@ public class FilterViewHolderCreator {
                 result = new CheckboxFilterViewHolder<>(
                         ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
                                 .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
-                                        CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
+                                        CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.SPECIALEVENT, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.OTHER, CacheType.USER_DEFINED))
                                 .setValueDisplayTextGetter(CacheType::getShortL10n)
                                 .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
                         2, null);

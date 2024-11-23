@@ -9,14 +9,13 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
 
     public TypeGeocacheFilter() {
         //gc.com groups in their search their cache types as follows:
-        //* "Tradi" also includes: GCHQ, PROJECT_APE
-        //* "Event" also includes:CITO,mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
+        //* "Unknown" also includes: Unknown, GCHQ, PROJECT_APE
+        //* "Celebration Event" also includes: mega,giga, gps_exhibit,commun_celeb, gchq_celeb, block_party
         //-> unlike gc.com, currently CITO is an OWN search box below (to make number even)
-        addDisplayValues(CacheType.TRADITIONAL, CacheType.TRADITIONAL, CacheType.GCHQ, CacheType.PROJECT_APE);
-        addDisplayValues(CacheType.EVENT, CacheType.EVENT, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
+        addDisplayValues(CacheType.OTHER, CacheType.UNKNOWN, CacheType.GCHQ, CacheType.PROJECT_APE);
+        addDisplayValues(CacheType.SPECIALEVENT, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
                 CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
         addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
-        addDisplayValues(CacheType.USER_DEFINED, CacheType.USER_DEFINED, CacheType.UNKNOWN);
     }
 
     @Override
