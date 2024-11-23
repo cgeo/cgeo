@@ -39,3 +39,5 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Änderung: Eigene Caches mit Offline-Logs zeigen Offline-Log-Marker
 - Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
 - Neu: Konnektor-Informationen auf dem Startbildschirm verweisen auf jeweilige Konfigurationsseite
+- New: Additional emojis for cache icons
+
