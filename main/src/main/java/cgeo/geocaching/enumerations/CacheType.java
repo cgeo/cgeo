@@ -42,8 +42,6 @@ public enum CacheType {
     // insert other official cache types before USER_DEFINED and UNKNOWN
     USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.string.userdefined_short, R.drawable.type_cgeo, R.drawable.type_marker_cgeo, "", R.color.cacheType_cgeo),
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.string.unknown_short, R.drawable.type_unknown, R.drawable.type_marker_unknown, "", R.color.cacheType_unknown),
-    SPECIALEVENT("event_special", "event_special", "", R.string.event_special, R.string.event_special, R.drawable.type_specialevent, R.drawable.type_marker_specialevent, "", R.color.cacheType_event),
-    OTHER("other", "other", "", R.string.other, R.string.other, R.drawable.type_unknown, R.drawable.type_marker_unknown, "", R.color.cacheType_unknown),
     /**
      * No real cache type -> filter
      */
