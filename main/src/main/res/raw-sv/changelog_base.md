@@ -39,3 +39,5 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
 - New: Point connector info on home screen to connector-specific preference screen
+- New: Additional emojis for cache icons
+
