@@ -39,3 +39,5 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Canvi: Als catxés de propietat amb registres fora de línia mostren el marcador de registre fora de línia
 - Nou: format de data configurable (p. ex.: registres de catxé), vegeu [Configuració => Aparença => Format de data](cgeo-settings://short_date_format)
 - Nou: apunta la informació del connector a la pantalla d'inici a la pantalla de preferències específiques del connector
+- New: Additional emojis for cache icons
+
