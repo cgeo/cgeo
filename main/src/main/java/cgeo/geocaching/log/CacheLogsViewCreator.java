@@ -152,7 +152,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         if (canShareLog) {
             ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> ShareUtils.shareLink(activity, getCache().getShareSubject(), logUrl));
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_browser),
-                    R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(activity, logUrl, true));
+                    R.drawable.ic_menu_open_in_browser, it -> ShareUtils.openUrl(activity, logUrl, true));
         }
         if (isOfflineLog(log)) {
             ctxMenu.setTitle(LocalizationUtils.getString(R.string.log_your_saved_log));

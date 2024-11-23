@@ -143,7 +143,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity).setTitle(title);
 
             //Decrypt/encrypt
-            ctxMenu.addItem(R.string.cache_log_menu_decrypt, 0, new DecryptTextClickListener(holder.binding.log));
+            ctxMenu.addItem(R.string.cache_log_menu_decrypt, R.drawable.ic_menu_rot13, new DecryptTextClickListener(holder.binding.log));
 
             //Edit/Delete Log Entry
             if (!StringUtils.isBlank(getGeocode())) {
