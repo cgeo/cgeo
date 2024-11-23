@@ -1,11 +1,10 @@
-<!-- taken from "open in browser" / material.io -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
-    android:viewportWidth="48"
-    android:viewportHeight="48"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
     android:tint="?android:textColorPrimary">
   <path
-      android:fillColor="@android:color/white"
-      android:pathData="M22.5,42V27.8L18.35,31.95L16.2,29.8L24,22L31.8,29.8L29.65,31.95L25.5,27.8V42ZM28.5,39H39Q39,39 39,39Q39,39 39,39V12H9V39Q9,39 9,39Q9,39 9,39H19.5V42H9Q7.8,42 6.9,41.1Q6,40.2 6,39V9Q6,7.8 6.9,6.9Q7.8,6 9,6H39Q40.2,6 41.1,6.9Q42,7.8 42,9V39Q42,40.2 41.1,41.1Q40.2,42 39,42H28.5Z"/>
+      android:pathData="M200,840q-33,0 -56.5,-23.5T120,760v-560q0,-33 23.5,-56.5T200,120h560q33,0 56.5,23.5T840,200v560q0,33 -23.5,56.5T760,840L600,840v-80h160v-480L200,280v480h160v80L200,840ZM440,840v-246l-64,64 -56,-58 160,-160 160,160 -56,58 -64,-64v246h-80Z"
+      android:fillColor="#e8eaed"/>
 </vector>
