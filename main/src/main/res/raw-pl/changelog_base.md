@@ -39,3 +39,5 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Zmiana: Własne skrytki z logami offline pokazują znacznik logów offline
 - Nowość: Konfigurowalny format daty (np. dzienniki skrytek), zobacz [Ustawienia => Wygląd => Format daty](cgeo-settings://short_date_format)
 - Nowość: Dotknięcie nazwy serwisu geocachingowego na ekranie głównym prowadzi do odpowiednich ustawień konfiguracyjnych
+- Nowość: Dodatkowe emotikony dla ikon skrytek
+
