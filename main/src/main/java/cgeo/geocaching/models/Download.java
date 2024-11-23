@@ -155,7 +155,7 @@ public class Download {
         DOWNLOADTYPE_THEME_JUSTDOWNLOAD(51, R.string.downloadmap_otherthemedownload, R.drawable.downloader_theme),
 
         DOWNLOADTYPE_BROUTER_TILES(90, R.string.downloadmap_tilefile, R.drawable.map_quick_route),
-        DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile, R.drawable.elevation);
+        DOWNLOADTYPE_HILLSHADING_TILES(91, R.string.downloadmap_hillshadingfile, R.drawable.ic_menu_hills);
 
         public final int id;
         @StringRes final int typeNameResId;

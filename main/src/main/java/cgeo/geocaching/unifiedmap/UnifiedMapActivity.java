@@ -98,7 +98,6 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -106,7 +105,6 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
@@ -788,6 +786,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
+        TileProviderFactory.addMapviewMenuItems(this, menu.findItem(R.id.menu_select_mapview).getSubMenu());
         FilterUtils.initializeFilterMenu(this, this);
         return result;
     }
@@ -856,16 +855,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
-        } else if (id == R.id.menu_select_mapview) {
-            // dynamically create submenu to reflect possible changes in map sources
-            final View v = findViewById(R.id.menu_select_mapview);
-            if (v != null) {
-                final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
-                menu.inflate(R.menu.map_downloader);
-                TileProviderFactory.addMapviewMenuItems(this, menu);
-                menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
-                menu.show();
-            }
         } else if (id == R.id.menu_as_list) {
             final Collection<Geocache> caches = viewModel.caches.readWithResult(vmCaches ->
                     mapFragment.getViewport().filter(vmCaches));
