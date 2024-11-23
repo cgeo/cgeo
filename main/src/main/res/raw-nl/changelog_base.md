@@ -39,3 +39,5 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Wijziging: Eigen caches met offline logs tonen offline log indicator
 - Nieuw: Configureerbare datumnotatie (bijv: cache logs), zie [Instellingen => Uiterlijk => Datumformaat](cgeo-settings://short_date_format)
 - Nieuw: Leid informatie over connectoren op het startscherm om naar een connector specifiek voorkeurenscherm
+- New: Additional emojis for cache icons
+
