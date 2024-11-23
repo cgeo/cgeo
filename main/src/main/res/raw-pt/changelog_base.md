@@ -39,3 +39,5 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Alteração: É mostrado o marcado de registo offline nas caches que lhe pertençam (quando tenham registos offline)
 - Novo: Formato de data configurável (por ex.: registos de cache), consulte [Configurações => Aparência => Formato de data](cgeo-settings://short_date_format)
 - Novo: Direccionamento do conector de informação do ecrã principal para o conector específico do ecrã de preferências
+- New: Additional emojis for cache icons
+
