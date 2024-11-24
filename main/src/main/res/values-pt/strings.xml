@@ -1280,6 +1280,7 @@
     <string name="auth_dialog_completed_geokrety">O c:geo agora está autorizado a interagir com %s.</string>
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>

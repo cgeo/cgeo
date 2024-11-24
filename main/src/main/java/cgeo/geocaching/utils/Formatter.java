@@ -535,4 +535,8 @@ public final class Formatter {
         return String.format(Locale.getDefault(), "%02d", Integer.parseInt(number));
     }
 
+    public static String formatNumberTwoDigits(final int number) {
+        return String.format(Locale.getDefault(), "%02d", number);
+    }
+
 }

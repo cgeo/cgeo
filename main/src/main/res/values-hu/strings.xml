@@ -673,6 +673,7 @@
     <string name="auth_dialog_completed_geokrety">%s: A c:geo engedélyt kapott az együttműködésre.</string>
     <string name="err_auth_geokrety_bad_password">A felhasználóneved/jelszavad helytelennek tűnik.</string>
     <string name="err_auth_geokrety_unknown">%1$s visszatérési értéke: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d láda</item>

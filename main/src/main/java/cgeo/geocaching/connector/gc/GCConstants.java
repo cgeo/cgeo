@@ -51,7 +51,7 @@ public final class GCConstants {
     static final Pattern PATTERN_TYPE = Pattern.compile("<use xlink:href=\"/app/ui-icons/sprites/cache-types.svg#icon-([0-9a-f]+)");
     static final Pattern PATTERN_HIDDEN = Pattern.compile("ctl00_ContentBody_mcd2[^:]+:\\s*([^<]+?)<");
     static final Pattern PATTERN_HIDDENEVENT = Pattern.compile(":\\s*([0-9-/]+)\\s*<div id=\"calLinks\">", Pattern.DOTALL);
-    static final Pattern PATTERN_EVENTTIMES = Pattern.compile("start: new Date\\([0-9]+, [0-9]+-1, [0-9]+, ([0-9]+), ([0-9]+)\\) , end: new Date\\([0-9]+, [0-9]+-1, [0-9]+, ([0-9]+), ([0-9]+)\\)");
+    static final Pattern PATTERN_EVENTTIMES = Pattern.compile("<div id=\"mcd3\">\\s*[^<]*?\\s+([APM ]*)([0-9]+)[\\.:]([0-9]+)([APM ]*)\\s*</div>\\s*<div id=\"mcd4\">\\s*[^<]*?\\s+([APM ]*)([0-9]+)[\\.:]([0-9]+)([APM ]*)\\s*</div>");
     static final Pattern PATTERN_IS_FAVORITE = Pattern.compile("<div id=\"pnlFavoriteCache\">"); // without 'class="hideMe"' inside the tag !
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");

@@ -1,4 +1,8 @@
 ##
+- Fix: "Manual login" button shown even without "captcha required" login error
+- Fix: Time zone issues with new event time detection
+
+##
 - Oprava: Některé problémy s detekcí času nového eventu
 - Oprava: Pád při úpravě pole proměnné
 - Oprava: Chyba při importu GPX souboru (řešení)

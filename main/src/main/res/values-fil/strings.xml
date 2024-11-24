@@ -489,6 +489,7 @@
     <string name="auth_dialog_completed_geokrety">inawtorisahang makipag-ugnayan ngayon ang c;geo sa %s.</string>
     <string name="err_auth_geokrety_bad_password">Parehong imbalido ang iyong username/password.</string>
     <string name="err_auth_geokrety_unknown">Ang %1$s na naibalik: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d isang cache</item>

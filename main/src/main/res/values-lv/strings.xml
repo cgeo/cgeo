@@ -609,6 +609,7 @@
     <string name="auth_dialog_completed_geokrety">c:geo tagad ir atļauja sazināties ar %s.</string>
     <string name="err_auth_geokrety_bad_password">Tavs lietotājvārds/parole, šķiet nederīgs.</string>
     <string name="err_auth_geokrety_unknown">%1$s atgriezts: %2$s.</string>
+    <!-- auth GC -->
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="zero">%1$d slēpnis</item>
