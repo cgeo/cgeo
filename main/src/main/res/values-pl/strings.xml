@@ -2724,6 +2724,7 @@
     <string name="wherigo_toast_check_things">Wherigo: sprawdź %s pod kątem zmian</string>
     <string name="wherigo_otm_shortcuts_title">Skróty Wherigo Playera</string>
     <string name="wherigo_otm_shortcuts_message">Jeśli chcesz regularnie używać c:geo Wherigo Player rozważ utworzenie przycisku szybkiego uruchamiania lub niestandardowej pozycji menu dla niego w Ustawienia -&gt; Wygląd</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Wyświetlanie lokalizacji Wherigo na mapie nie jest obsługiwane dla twoich ustawień mapy. Proszę przełączyć się na ujednoliconą mapę w Ustawieniach -&gt; Źródła map -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Poprzedni</string>
     <string name="skip">Pomiń</string>
