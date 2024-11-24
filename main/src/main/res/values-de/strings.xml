@@ -1676,6 +1676,8 @@
     <string name="variables_scanlisting_nopatternfound">Kein Muster gefunden</string>
     <string name="variables_tidyup">Säubern</string>
     <string name="variables_deleteall">Löschen</string>
+    <string name="variables_add">Variable hinzufügen</string>
+    <string name="variables_add_next">Nächste Variable hinzufügen</string>
     <string name="variables_deleteall_confirm_text">Möchtest du wirklich alle Variablen für diesen Cache löschen?</string>
     <string name="variables_info">Hilfe</string>
     <string name="variables_varname_dialog_title">Variablenname</string>
