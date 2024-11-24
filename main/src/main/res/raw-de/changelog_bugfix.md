@@ -1,5 +1,6 @@
 ##
 - Korrektur: "Manueller Login" Button wird auch ohne "captcha required" Login-Fehler angezeigt
+- Korrektur: Zeitzonen-Probleme bei der neuen Eventzeiterkennung
 
 ##
 - Korrektur: Einige Probleme bei der neuen Erkennung von Eventzeiten
