@@ -88,7 +88,8 @@ public class MapProviderFactory {
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
-        parentMenu.add(R.id.menu_group_offlinemaps, R.id.menu_hillshading, mapSources.size(), activity.getString(R.string.settings_hillshading_enable)).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getMapSource().supportsHillshading());
+        parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getMapSource().supportsHillshading()).setIcon(R.drawable.ic_menu_hills);
+        parentMenu.findItem(R.id.menu_manage_offline_maps).setVisible(true);
     }
 
     @Nullable

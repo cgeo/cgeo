@@ -8,6 +8,7 @@
         android:showAsAction="always"
         android:title="@string/map_view_map"
         app:showAsAction="always">
+        <!-- only used for legacy map, overwritten by map_mapview for Unified map -->
         <menu>
             <group
                 android:id="@+id/menu_group_map_sources_online"
@@ -31,7 +32,8 @@
                     android:id="@+id/menu_manage_offline_maps"
                     android:icon="@drawable/wherigo_download"
                     app:iconTint="@color/colorText"
-                    android:title="@string/map_manage_offline_data">
+                    android:title="@string/menu_manage_offline_data"
+                    android:visible="false">
                     <menu>
                         <item
                             android:id="@+id/menu_download_offlinemap"

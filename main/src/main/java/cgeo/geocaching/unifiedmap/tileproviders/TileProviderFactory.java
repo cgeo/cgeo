@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
 
 import java.util.Collections;
@@ -40,7 +41,8 @@ public class TileProviderFactory {
         // Singleton
     }
 
-    public static void addMapviewMenuItems(final Activity activity, final Menu parentMenu) {
+    public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
+        final Menu parentMenu = menu.getMenu();
         MenuCompat.setGroupDividerEnabled(parentMenu, true);
 
         final int currentTileProvider = Settings.getTileProvider().getNumericalId();
