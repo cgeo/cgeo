@@ -1,5 +1,6 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
+- Fix: "Manuell inloggningsknapp" visas även utan "captcha krävs" inloggningsfel
+- Fix: Tidszonsproblem med ny händelsetidsdetektering
 
 ##
 - Fix: Some issues with new event time detection
