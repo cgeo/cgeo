@@ -12,6 +12,7 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Naprawiono: Wyszukiwanie adresu nie uwzględniało trybu na żywo (UnifiedMap)
 - Zmiana: Funkcję „podążaj za moją lokalizacją” przeniesiono do mapy, dając więcej miejsca na przycisk „tryb na żywo”
 - Zmiana: Długie przytrzymanie jest teraz bardziej w stylu c:geo
+- Zmiana: Funkcje zarządzania danymi offline (pobieranie map, sprawdzanie brakujących danych prowadzenia i cieniowania wzniesień) przeniesione do menu wyboru mapy => „Zarządzaj danymi offline”
 
 ### Szczegóły skrytki
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
@@ -40,4 +41,5 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Konfigurowalny format daty (np. dzienniki skrytek), zobacz [Ustawienia => Wygląd => Format daty](cgeo-settings://short_date_format)
 - Nowość: Dotknięcie nazwy serwisu geocachingowego na ekranie głównym prowadzi do odpowiednich ustawień konfiguracyjnych
 - Nowość: Dodatkowe emotikony dla ikon skrytek
-
+- Zmiana: Filtrowanie skrytek „Specjalne” obejmuje wydarzenia typu mega, giga, uroczystości społeczności, uroczystości sztabu, block party i labirynty
+- Zmiana: Filtrowanie skrytek „Inne” zawiera GCHQ, APE i nieznane typy
