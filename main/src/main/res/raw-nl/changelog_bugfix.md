@@ -1,5 +1,6 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
+- Oplossing: "Handmatige login" knop wordt weergegeven zelfs zonder "captcha vereist" login fout
+- Oplossing: Tijdzonde problemen met nieuwe event tijd detectie
 
 ##
 - Oplossing: Enkele problemen met nieuwe event tijd detectie
