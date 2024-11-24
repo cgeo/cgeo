@@ -12,6 +12,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
 - Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
 - Canvi: feu que el pin de premsa llarga sigui més semblant a c:geo
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -40,4 +41,5 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: format de data configurable (p. ex.: registres de catxé), vegeu [Configuració => Aparença => Format de data](cgeo-settings://short_date_format)
 - Nou: apunta la informació del connector a la pantalla d'inici a la pantalla de preferències específiques del connector
 - New: Additional emojis for cache icons
-
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
