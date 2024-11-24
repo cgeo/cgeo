@@ -3013,6 +3013,8 @@
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Shortcuts</string>
     <string name="wherigo_otm_shortcuts_message">If you want to use c:geo Wherigo Player regularly, consider creating a quick launch button or custom menu item for it under Settings -> Appearance</string>
 
+    <string name="wherigo_map_supported_for_unified_map_only">Displaying of Wherigo locations on map is not supported for your map settings. Please switch to unified map under Settings -> Map Sources -> %s</string>
+
     <!-- default actions in dialogs -->
     <string name="previous">Previous</string>
     <string name="skip">Skip</string>

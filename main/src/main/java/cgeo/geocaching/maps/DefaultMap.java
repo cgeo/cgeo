@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -8,7 +9,10 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.unifiedmap.UnifiedMapType;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -152,6 +156,12 @@ public final class DefaultMap {
             Log.e("Launching UnifiedMap in viewport mode, viewport=" + viewport + ")");
             final UnifiedMapType mapType = viewport == null ? new UnifiedMapType() : new UnifiedMapType(viewport, mapTitle);
             mapType.launchMap(fromActivity);
+        } else {
+            final String unifiedMapCategory = LocalizationUtils.getString(R.string.category_unifiedMap);
+            SimpleDialog.of(fromActivity)
+                .setTitle(TextParam.id(R.string.wherigo_player))
+                .setMessage(TextParam.id(R.string.wherigo_map_supported_for_unified_map_only, unifiedMapCategory))
+                .show();
         }
     }
 }
