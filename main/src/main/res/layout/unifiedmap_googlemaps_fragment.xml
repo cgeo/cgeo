@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cgeo.geocaching.ui.TouchableWrapper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mapViewGMWrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -21,6 +22,23 @@
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="10dp"/>
+
+        <!--TODO remove as soon as Unified map is default-->
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/unifiedmap"/>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:textAlignment="center"
+            android:text="GMap"
+            android:textSize="8dp"
+            android:rotation="-45"
+            android:textColor="@color/just_white"
+            tools:ignore="HardcodedText,SpUsage" />
+        <!--End of TODO-->
 
     </RelativeLayout>
 </cgeo.geocaching.ui.TouchableWrapper>
