@@ -35,6 +35,8 @@
     <string name="advlab">ALC</string>
     <string name="userdefined">Användardefinierad cache</string>
     <string name="unknown">Okänd typ</string>
+    <string name="other">Övriga</string>
+    <string name="event_special">Specialare</string>
     <string name="all_types_short">Alla</string>
     <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
@@ -1290,6 +1292,17 @@
     <string name="err_auth_geokrety_bad_password">Ditt användarnamn/lösenord verkar felaktigt.</string>
     <string name="err_auth_geokrety_unknown">%1$s meddelande: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Inga inloggningsuppgifter sparade</string>
+    <string name="err_auth_gc_loginpage1">Det gick inte att hämta inloggningssidan (1:a)</string>
+    <string name="err_auth_gc_loginpage2">Det gick inte att hämta inloggningssidan (2:a)</string>
+    <string name="err_auth_gc_verification_token">Det gick inte att hitta verifieringstoken för begäran</string>
+    <string name="err_auth_gc_captcha">Det gick inte att logga in på geocaching.com på grund av att captcha krävs</string>
+    <string name="err_auth_gc_bad_login">Det gick inte att logga in på geocaching.com som %s på grund av fel användarnamn/lösenord</string>
+    <string name="err_auth_gc_not_validated">Det gick inte att logga in på Geocaching.com som %s eftersom kontot måste valideras först</string>
+    <string name="err_auth_gc_unknown_error">Det gick inte att logga in på Geocaching.com som %s av okänd anledning</string>
+    <string name="err_auth_gc_unknown_error_generic">Okänt fel</string>
+    <string name="err_auth_gc_communication_error">Kommunikationsfel</string>
+    <string name="err_auth_gc_manual_error">Manuellt inloggningsfel: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
