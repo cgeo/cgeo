@@ -12,6 +12,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
 - Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
 - Ändra: Gör långtryckstift mer c:geo-liknande
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -39,5 +40,6 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Change: Owned caches with offline logs show offline log marker
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
 - New: Point connector info on home screen to connector-specific preference screen
-- New: Additional emojis for cache icons
-
+- Nytt: Ytterligare emojis för cache-ikoner
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
