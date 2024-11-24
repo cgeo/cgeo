@@ -41,4 +41,5 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
 - New: Point connector info on home screen to connector-specific preference screen
 - New: Additional emojis for cache icons
-
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
