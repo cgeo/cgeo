@@ -861,9 +861,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final View v = findViewById(R.id.menu_select_mapview);
             if (v != null) {
                 final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
-                menu.inflate(R.menu.map_downloader);
+                menu.inflate(R.menu.map_mapview);
                 TileProviderFactory.addMapviewMenuItems(this, menu);
                 menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+                menu.setForceShowIcon(true);
                 menu.show();
             }
         } else if (id == R.id.menu_as_list) {
