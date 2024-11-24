@@ -12,6 +12,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
 - Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
 - Wijziging: Maak de lang drukken speld meer in de stijl van c:geo
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
@@ -39,5 +40,6 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Wijziging: Eigen caches met offline logs tonen offline log indicator
 - Nieuw: Configureerbare datumnotatie (bijv: cache logs), zie [Instellingen => Uiterlijk => Datumformaat](cgeo-settings://short_date_format)
 - Nieuw: Leid informatie over connectoren op het startscherm om naar een connector specifiek voorkeurenscherm
-- New: Additional emojis for cache icons
-
+- Nieuw: Extra emojis voor cachepictogrammen
+- Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebratie, blok party en doolhof
+- Wijziging: Cache type filter "Anders" bevat GCHQ, APE en onbekende types
