@@ -13,6 +13,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - Fix: Address search not considering live mode (UnifiedMap)
 - Change: "follow my location" moved to the map, giving more space for "live mode" button
 - Change: Make long-press pin more c:geo-like
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Cache details
 - New: Not yet existing variables used in projection get created in variable list
