@@ -12,6 +12,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
 - Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
 - Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -40,4 +41,5 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Nastavitelný formát data (např. logy kešek), viz [Nastavení => Vzhled => Formát data](cgeo-settings://short_date_format)
 - Novinka: Přesměrování informací o konektorech na domovské obrazovce na obrazovku předvoleb konkrétního konektoru
 - New: Additional emojis for cache icons
-
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
