@@ -3,6 +3,21 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2024.11.22 Bugfix Release
+
+- Fix: Time zone issues with new event time detection
+- Fix: "Manual login" button shown even without "captcha required" login error
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2024.11.09 Bugfix Release
+
+- Fix: Some issues with new event time detection
+- Fix: Crash when editing variable field
+- Fix: Crash on importing GPX file (workaround)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2024.10.27 Bugfix Release
 
 - Fix: Missing event times on cache download (website change)
