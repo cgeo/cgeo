@@ -12,6 +12,7 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Correcção: Pesquisa por endereço não é tida em conta no mapa em tempo real (Mapa Unificado)
 - Alteração: "Seguir a minha localização" foi movido para o mapa, dando mais espaço para o botão "mapa em tempo real"
 - Alteração: Pin de pressão longa com aparência do estilo do c:geo
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
@@ -40,4 +41,5 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Formato de data configurável (por ex.: registos de cache), consulte [Configurações => Aparência => Formato de data](cgeo-settings://short_date_format)
 - Novo: Direccionamento do conector de informação do ecrã principal para o conector específico do ecrã de preferências
 - New: Additional emojis for cache icons
-
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
