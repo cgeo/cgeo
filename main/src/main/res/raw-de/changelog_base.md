@@ -12,6 +12,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
 - Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
 - Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -40,4 +41,5 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
 - Neu: Konnektor-Informationen auf dem Startbildschirm verweisen auf jeweilige Konfigurationsseite
 - New: Additional emojis for cache icons
-
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
