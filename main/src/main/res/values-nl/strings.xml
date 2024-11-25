@@ -2670,6 +2670,7 @@
     <string name="wherigo_toast_check_things">Wherigo: controleer je %s op veranderingen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Speler Sneltoetsen</string>
     <string name="wherigo_otm_shortcuts_message">Als je c:geo Wherigo Speler regelmatig wil gebruiken, overweeg om een knop voor snelle lancering of aangepast menu-item te maken onder Instellingen -&gt; Uiterlijk</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Weergave van Wherigo locaties op de kaart wordt niet ondersteund voor jouw kaart instellingen. Gelieve over te schakelen naar een uniforme kaart onder Instellingen -&gt; Kaartbronnen -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
