@@ -12,7 +12,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: Zoeken naar adres overweegt geen live modus (UnifiedMap)
 - Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
 - Wijziging: Maak de lang drukken speld meer in de stijl van c:geo
-- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
+- Wijziging: Offline data management functies (download kaarten, controleer op ontbrekende routering / hoogte gegevens) verplaatst naar map selectie menu => "Beheer offline gegevens"
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
