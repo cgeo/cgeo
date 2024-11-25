@@ -35,6 +35,8 @@
     <string name="advlab">Adventure Lab Catxé</string>
     <string name="userdefined">Catxé definit per l’usuari</string>
     <string name="unknown">Desconegut</string>
+    <string name="other">Altres</string>
+    <string name="event_special">Especial</string>
     <string name="all_types_short">Tots</string>
     <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
@@ -2670,6 +2672,7 @@
     <string name="wherigo_toast_check_things">Wherigo: comproveu si hi ha canvis al vostre %s</string>
     <string name="wherigo_otm_shortcuts_title">Dreceres del Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Si voleu utilitzar c:geo Wherigo Player amb regularitat, penseu a crear un botó d\'inici ràpid o un element de menú personalitzat a Configuració -&gt; Aparença</string>
+    <string name="wherigo_map_supported_for_unified_map_only">La visualització de les ubicacions de Wherigo al mapa no és compatible amb la configuració del vostre mapa. Si us plau, canvieu al mapa unificat a Configuració -&gt; Fonts del mapa -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Ometre</string>
