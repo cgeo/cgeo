@@ -1290,6 +1290,17 @@
     <string name="err_auth_geokrety_bad_password">O seu nome de utilizador/palavra-passe parecem inválidos.</string>
     <string name="err_auth_geokrety_unknown">%1$s retornou: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Não está guardada informação de início de sessão</string>
+    <string name="err_auth_gc_loginpage1">Falha ao obter a página de início de sessão (1º)</string>
+    <string name="err_auth_gc_loginpage2">Falha ao obter a página de início de sessão (2º)</string>
+    <string name="err_auth_gc_verification_token">Não foi possível encontrar o token de verificação do pedido</string>
+    <string name="err_auth_gc_captcha">Falha ao iniciar sessão em geocaching.com devido a captcha necessário</string>
+    <string name="err_auth_gc_bad_login">Não foi possível iniciar sessão em geocaching.com como %s devido a nome de utilizador/palavra-passe errado</string>
+    <string name="err_auth_gc_not_validated">Falha ao iniciar sessão em Geocaching.com como %s porque a conta precisa ser validada primeiro</string>
+    <string name="err_auth_gc_unknown_error">Não foi possível iniciar sessão em Geocaching.com como %s por algum motivo desconhecido</string>
+    <string name="err_auth_gc_unknown_error_generic">Erro desconhecido</string>
+    <string name="err_auth_gc_communication_error">Erro de comunicação</string>
+    <string name="err_auth_gc_manual_error">Erro de início de sessão manual: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
