@@ -84,6 +84,14 @@ runs:
   using: "composite"
   steps:
 
+    - name: Check secrets
+      shell: bash
+      run: |
+        if [ -z "${{ inputs.KEY_STORE }}" ]; then
+          echo "::error::Secrets seems missing from this repo."
+          exit 1
+        fi
+
     - name: Set the emulator preferences
       shell: bash
       run: |
