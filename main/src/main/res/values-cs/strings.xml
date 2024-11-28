@@ -35,6 +35,8 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
+    <string name="other">Ostatní</string>
+    <string name="event_special">Speciální</string>
     <string name="all_types_short">Vše</string>
     <string name="traditional_short">Tradička</string>
     <string name="multi_short">Multina</string>
@@ -1311,6 +1313,17 @@
     <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
     <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Nejsou uloženy žádné přihlašovací údaje</string>
+    <string name="err_auth_gc_loginpage1">Nepodařilo se načíst přihlašovací stránku (1.)</string>
+    <string name="err_auth_gc_loginpage2">Nepodařilo se načíst přihlašovací stránku (2.)</string>
+    <string name="err_auth_gc_verification_token">Nepodařilo se najít ověřovací token požadavku</string>
+    <string name="err_auth_gc_captcha">Nepodařilo se přihlásit na geocaching.com kvůli vyžadovanému kódu captcha</string>
+    <string name="err_auth_gc_bad_login">Nepodařilo se přihlásit na geocaching.com jako %s z důvodu nesprávného uživatelského jména/hesla</string>
+    <string name="err_auth_gc_not_validated">Nepodařilo se přihlásit na Geocaching.com jako %s, protože účet musí být nejprve ověřen</string>
+    <string name="err_auth_gc_unknown_error">Z neznámého důvodu se nepodařilo přihlásit na Geocaching.com jako %s</string>
+    <string name="err_auth_gc_unknown_error_generic">Neznámá chyba</string>
+    <string name="err_auth_gc_communication_error">Chyba komunikace</string>
+    <string name="err_auth_gc_manual_error">Chyba manuálního přihlášení: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d keška</item>
@@ -1368,6 +1381,7 @@
     <string name="cache_premium">Prémiový účet</string>
     <string name="cache_inventory">Inventář</string>
     <string name="cache_log_image_default_title">Fotografie</string>
+    <string name="cache_set_coordinates">Nastavit souřadnice</string>
     <string name="cache_personal_note">Osobní poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Blokovat trasové body z poznámky</string>
     <string name="cache_menu_allowWaypointExtraction">Povolit trasové body z poznámky</string>
@@ -1554,6 +1568,7 @@
     <string name="cachedetails_progress_unwatch">Odebráno ze seznamu sledovaných</string>
     <string name="cachedetails_progress_favorite">Přidáno do oblíbených</string>
     <string name="cachedetails_progress_unfavorite">Odebráno z oblíbených</string>
+    <string name="cache_wherigo_start">Stáhnout a hrát toto Wherigo pomocí vestavěného přehrávače v c:geo</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1693,6 +1708,8 @@
     <string name="variables_scanlisting_nopatternfound">Nebyl nalezen žádný vzor</string>
     <string name="variables_tidyup">Uklidit</string>
     <string name="variables_deleteall">Smazat vše</string>
+    <string name="variables_add">Přidat proměnnou</string>
+    <string name="variables_add_next">Přidat další proměnnou</string>
     <string name="variables_deleteall_confirm_text">Opravdu chcete smazat všechny proměnné pro tuto kešku?</string>
     <string name="variables_info">Nápověda</string>
     <string name="variables_varname_dialog_title">Název proměnné</string>
@@ -2216,6 +2233,7 @@
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
     <string name="attribute_unknown">Neznámý atribut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Stav kešky</string>
     <string name="cat_tools">Výbava</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Umístění kešky</string>
@@ -2650,7 +2668,14 @@
     <string name="wherigo_controls_reportproblem_hint">Nahlásit problém s Wherigo Player</string>
     <string name="wherigo_controls_cache_context">Kontext kešky</string>
     <string name="wherigo_controls_cache_link">Přejít na detaily kešky</string>
+    <string name="wherigo_sound_title">Ovládání zvuku</string>
+    <string name="wherigo_sound_continue">Pokračovat</string>
+    <string name="wherigo_sound_restart">Restartovat od začátku</string>
+    <string name="wherigo_sound_pause">Pozastavit</string>
+    <string name="wherigo_sound_mute">Ztlumit</string>
+    <string name="wherigo_sound_unmute">Zrušit ztlumení</string>
     <string name="wherigo_controls_resume_paused_dialog">Obnovit pozastavený dialog</string>
+    <string name="wherigo_dialog_pause_info">Pokračovat v dialogovém okně Wherigo přehrávače klepnutím na \"Pokračovat v pozastaveném dialogu\"</string>
     <string name="wherigo_no_game_running">Aktuálně není spuštěna žádná Wherigo hra</string>
     <string name="wherigo_currently_playing">Právě se hraje</string>
     <string name="wherigo_cartridge_details">Podrobnosti cartridge</string>
@@ -2684,6 +2709,11 @@
     <string name="wherigo_download_progress_started">Stahování začalo</string>
     <string name="wherigo_download_progress_download_status">Staženo %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Wherigo zpráva o problému</string>
+    <string name="wherigo_error_game_noerror">Wherigo Engine nehlásí žádnou chybu.</string>
+    <string name="wherigo_error_game_error">Chyba nahlášená Wherigo Enginem:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Chcete-li našemu týmu podpory nahlásit problém související s Wherigo, použijte možnost „Odeslat e-mailem“.</string>
+    <string name="wherigo_error_email">Wherigo zpráva o problému\n\nChyba: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine ohlásil chybu. Pro podrobnosti otevřete dialogové okno s chybou.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zastavit spuštěnou hru Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Momentálně je spuštěná hra pro \"%s\". Chcete tuto hru zastavit?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Odstranit Wherigo cartridge</string>
@@ -2697,10 +2727,12 @@
     <string name="wherigo_dialog_push_page">Strana %1$s / %2$s</string>
     <string name="wherigo_notification_service">c:geo spouští Wherigo…</string>
     <string name="wherigo_notification_waiting">\"%s\" na vás čeká!</string>
+    <string name="wherigo_bar_resume_dialog">Pokračovat</string>
     <string name="wherigo_toast_check_game">Wherigo: zkontrolujte, zda ve hře nedošlo ke změnám</string>
     <string name="wherigo_toast_check_things">Wherigo: zkontrolujte si změny v %s</string>
     <string name="wherigo_otm_shortcuts_title">Tlačítko rychlého spuštění Wherigo Playeru</string>
     <string name="wherigo_otm_shortcuts_message">Pokud chcete c:geo Wherigo Player používat pravidelně, zvažte vytvoření tlačítka rychlého spuštění nebo vlastní položky v nabídce v části Nastavení -&gt; Vzhled</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Zobrazení míst Wherigo na mapě není pro vaše nastavení mapy podporováno. Přepněte prosím na sjednocenou mapu v Nastavení -&gt; Zdroje map -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Předchozí</string>
     <string name="skip">Přeskočit</string>
