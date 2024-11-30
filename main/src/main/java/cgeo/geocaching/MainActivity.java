@@ -335,11 +335,6 @@ public class MainActivity extends AbstractNavigationBarActivity {
                 addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
             }
         }
-
-        // temporarily add button for unified map, if enabled in settings
-        if (Settings.showUnifiedMap()) {
-            addButton(R.drawable.sc_icon_map, lp, () -> new UnifiedMapType().launchMap(this), "Start unified map", null);
-        }
     }
 
     private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip, final java.util.function.Consumer<View> viewInitializer) {
