@@ -197,6 +197,7 @@
 
 
     <cgeo.geocaching.settings.PreferenceCategory
+        android:key="@string/pref_fakekey_vtmScaling"
         android:title="@string/category_unifiedMap"
         android:summary="@string/maptheme_vtm_scaling_summary"
         app:iconSpaceReserved="false">
