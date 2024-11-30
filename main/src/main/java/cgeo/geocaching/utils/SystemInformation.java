@@ -109,10 +109,7 @@ public final class SystemInformation {
                 .append("\n- Last manual backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(false)) ? BackupUtils.getNewestBackupDateTime(false) : "never")
                 .append("\n- Last auto backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder(true)) ? BackupUtils.getNewestBackupDateTime(true) : "never");
         appendRoutingModes(body, context);
-        body
-                .append("\n- Live map mode: ").append(Settings.isLiveMap())
-                .append("\n- Use unified map: ").append(Settings.useUnifiedMap())
-                .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
+        appendMapModeSettings(body);
         appendMapSourceInformation(body, context);
         body
                 .append("\n")
@@ -269,21 +266,29 @@ public final class SystemInformation {
         body.append(")");
     }
 
+    private static void appendMapModeSettings(@NonNull final StringBuilder body) {
+        body
+            .append("\n- Map mode: ")
+            .append(Settings.useLegacyMaps() ? "legacy" : "UnifiedMap")
+            .append(Settings.isLiveMap() ? " / live" : "")
+            .append(" / OSM multi-threading: ").append(Settings.hasOSMMultiThreading() ? Settings.getMapOsmThreads() : "off");
+    }
+
     private static void appendMapSourceInformation(@NonNull final StringBuilder body, @NonNull final Context ctx) {
         body.append("\n- Map: ");
-        if (Settings.useUnifiedMap()) {
-            final AbstractTileProvider tileProvider = Settings.getTileProvider();
-            final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
-            body.append(tileProvider.getTileProviderName())
-                    .append("\n  - Id: ").append(tileProvider.getId())
-                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
-                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
-        } else {
+        if (Settings.useLegacyMaps()) {
             final MapSource source = Settings.getMapSource();
             final ImmutablePair<String, Boolean> mapAttrs = source.calculateMapAttribution(ctx);
             body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
                     .append("\n  - Id: ").append(source.getId())
                     .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.left).replace("\n", " / "))
+                    .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
+        } else {
+            final AbstractTileProvider tileProvider = Settings.getTileProvider();
+            final Pair<String, Boolean> mapAttrs = tileProvider.getMapAttribution();
+            body.append(tileProvider.getTileProviderName())
+                    .append("\n  - Id: ").append(tileProvider.getId())
+                    .append("\n  - Attrs: ").append(mapAttrs == null ? "none" : HtmlUtils.extractText(mapAttrs.first).replace("\n", " / "))
                     .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
         }
     }
