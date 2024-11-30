@@ -1182,6 +1182,7 @@
     <string name="settings_info_hillshading">Hillshading is a technique for creating topographic relief maps by adding a lighting effect to the map to indicate changes in elevation. Slopes will be darkened/lightened to generate a 3D-effect.\nHillshading data can be downloaded from maps overflow menu.</string>
     <string name="settings_hillshading_enable">Hillshading</string>
     <string name="init_mapsource_select">Select Map Source</string>
+    <string name="init_mapsource_select_legacy">Select Map Source (Legacy)</string>
     <string name="init_local_file_system">Local File System</string>
     <string name="init_base_directory_description">Base folder for public local data</string>
     <string name="init_map_directory_description">Folder with offline maps</string>
@@ -1303,9 +1304,9 @@
     <string name="init_map_other">Other</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
+    <string name="init_title_useLegacyMap">Use legacy map</string>
+    <string name="init_summary_useLegacyMap">Use legacy versions of Google Map / Mapsforge (OSM) maps instead of UnifiedMap</string>
     <string name="category_unifiedMap">Unified Map (beta)</string>
-    <string name="init_title_useUnifiedMap">Use unified map</string>
-    <string name="init_summary_useUnifiedMap">Use new unified map instead of built-in Google Map / Mapsforge (OSM) maps</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
 

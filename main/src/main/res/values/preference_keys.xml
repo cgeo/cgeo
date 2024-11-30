@@ -202,7 +202,13 @@
     <string translatable="false" name="preference_screen_map_sources">preference_screen_map_sources</string>
     <!-- ============================================================================================================================================================================== -->
 
-    <!-- category map data -->
+    <!-- category map data: UnifiedMap -->
+    <string translatable="false" name="pref_tileprovider">tileprovider</string>
+    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
+    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
+
+    <!-- category map data: legacy maps -->
+    <string translatable="false" name="pref_useLegacyMap">useLegacyMap</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
 
     <!-- category offline maps -->
@@ -224,13 +230,6 @@
     <string translatable="false" name="pref_maphillshading_show_layer">maphillshading_show_layer</string>
     <string translatable="false" name="pref_persistablefolder_offlinemapshading">persistablefolder_offlinemapshading</string>
     <string translatable="false" name="pref_rapidapiKey">rapidapiKey</string>
-
-    <!-- category unified map -->
-    <string translatable="false" name="pref_tileprovider">tileprovider</string>
-    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
-    <string translatable="false" name="pref_useUnifiedMap">featureSwitch_useUnifiedMap</string>
-    <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
-    <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 
     <!-- category other -->
     <string translatable="false" name="pref_map_osm_multithreaded">map_osm_multithreaded</string>
@@ -553,6 +552,7 @@
 
 
     <!-- additional map settings -->
+    <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
     <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
