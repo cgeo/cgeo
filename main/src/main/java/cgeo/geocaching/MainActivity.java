@@ -35,7 +35,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.unifiedmap.UnifiedMapType;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;

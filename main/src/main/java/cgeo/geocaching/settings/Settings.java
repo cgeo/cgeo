@@ -45,7 +45,6 @@ import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
