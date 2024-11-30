@@ -1257,11 +1257,6 @@ public class Settings {
         return getBoolean(R.string.pref_showUnifiedMap, false);
     }
 
-    /** use UnifiedMap as default map in certain places */
-    public static boolean useUnifiedMap() {
-        return !useLegacyMaps();
-    }
-
     /** use legacy maps **/
     public static boolean useLegacyMaps() {
         return getBoolean(R.string.pref_useLegacyMap, false);
