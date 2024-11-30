@@ -553,7 +553,6 @@
 
     <!-- additional map settings -->
     <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
-    <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_mapLanguage">mapLanguage</string>

@@ -1245,11 +1245,6 @@ public class Settings {
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
-    /** display UnifiedMap icon on home screen? */
-    public static boolean showUnifiedMap() {
-        return getBoolean(R.string.pref_showUnifiedMap, false);
-    }
-
     /** use legacy maps **/
     public static boolean useLegacyMaps() {
         return getBoolean(R.string.pref_useLegacyMap, false);
