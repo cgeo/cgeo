@@ -1306,7 +1306,7 @@
     <string name="init_summary_map_osm_multithreaded">Use multiple threads to render OpenStreetMap maps</string>
     <string name="init_title_useLegacyMap">Use legacy map</string>
     <string name="init_summary_useLegacyMap">Use legacy versions of Google Map / Mapsforge (OSM) maps instead of UnifiedMap</string>
-    <string name="category_unifiedMap">Unified Map (beta)</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migration of local files</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
 
@@ -2862,7 +2862,7 @@
     <string name="brouter_info">Offline routing service</string>
     <string name="hillshading_info">Offline hillshading</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
-    <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (require restart)</string>
+    <string name="maptheme_vtm_scaling_summary">Scaling options for offline maps (VTM only, require restart)</string>
     <string name="maptheme_scale_map_title">Map Scale Factor</string>
     <string name="maptheme_scale_map_summary">Scales map; 100% = no scaling</string>
     <string name="maptheme_scale_text_title">Text Scale factor</string>
