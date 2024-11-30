@@ -18,10 +18,12 @@ import cgeo.geocaching.utils.ListenerHelper;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.os.Build;
 import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
@@ -92,8 +94,20 @@ public class WherigoGame implements UI {
     }
 
     //singleton
+    @SuppressWarnings("unchecked")
     private WherigoGame() {
         setCGuidAndDependentThings(null);
+
+        //core Wherigo settings: set DeviceID and platform for OpenWig
+        try {
+            final String name = String.format("c:geo %s", Version.getVersionName(CgeoApplication.getInstance()));
+            final String platform = String.format("Android %s", android.os.Build.VERSION.RELEASE + "/" + Build.DISPLAY);
+            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.DEVICE_ID, name);
+            cz.matejcik.openwig.WherigoLib.env.put(cz.matejcik.openwig.WherigoLib.PLATFORM, platform);
+        } catch (Exception e) {
+            // not really important
+            Log.d(LOG_PRAEFIX + "unable to set name/platform for OpenWIG", e);
+        }
     }
 
     public int addListener(final Consumer<NotifyType> listener) {
@@ -283,9 +297,7 @@ public class WherigoGame implements UI {
 
     public void notifyListeners(final NotifyType type) {
         Log.d(LOG_PRAEFIX + "notify for " + type);
-        listeners.executeOnMain(ntConsumer -> {
-            ntConsumer.accept(type);
-        });
+        listeners.executeOnMain(ntConsumer -> ntConsumer.accept(type));
     }
 
     public void setContextGeocode(final String geocode) {
@@ -460,12 +472,11 @@ public class WherigoGame implements UI {
     @Override
     public void command(final String cmd) {
         Log.iForce(LOG_PRAEFIX + "command:" + cmd);
-        //From WhereYouGo
-        //if ("StopSound".equals(cmd)) {
-         //   UtilsAudio.stopSound();
-        //} else if ("Alert".equals(cmd)) {
-         //   UtilsAudio.playBeep(1);
-        //}
+        if ("StopSound".equals(cmd)) {
+            this.audioManager.pause();
+        } else if ("Alert".equals(cmd)) {
+            ActivityMixin.showApplicationToast("Wherigo-Alert");
+        }
     }
 
     @NonNull

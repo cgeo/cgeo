@@ -101,7 +101,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getAltitude() {
-        return geoData == null ? 1 : Math.max(1, geoData.getAltitude()); // it is important that altitute is over 0
+        return geoData == null ? 1 : Math.min(1, geoData.getAltitude()); // it is important that altitute is over 0
     }
 
     @Override
