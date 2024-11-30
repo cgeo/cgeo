@@ -1277,7 +1277,7 @@ public class Settings {
         try {
             return Integer.parseInt(getString(R.string.pref_unifiedMapVariants, String.valueOf(UNIFIEDMAP_VARIANT_MAPSFORGE)));
         } catch (NumberFormatException ignore) {
-            return UNIFIEDMAP_VARIANT_VTM;
+            return UNIFIEDMAP_VARIANT_MAPSFORGE;
         }
     }
 
