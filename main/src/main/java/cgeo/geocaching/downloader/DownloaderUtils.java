@@ -25,6 +25,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import static cgeo.geocaching.models.Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES;
@@ -390,31 +391,32 @@ public class DownloaderUtils {
      */
     public static void deleteOfflineData(final Activity activity) {
         // collect downloaded data
-        final List<Pair<Integer, CompanionFileUtils.DownloadedFileData>> offlineItems = new ArrayList<>();
-        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapTypes()) {
-            for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(type.type)) {
-                offlineItems.add(new Pair<>(Download.DownloadType.DOWNLOAD_TYPE_ALL_MAPS.id, offlineItem));
+        final List<Pair<Integer, String>> offlineItems = new ArrayList<>();
+
+        for (ContentStorage.FileInformation fi : ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS)) {
+            if (!fi.isDirectory && StringUtils.endsWithIgnoreCase(fi.name, FileUtils.MAP_FILE_EXTENSION)) {
+                offlineItems.add(new Pair<>(DOWNLOAD_TYPE_ALL_MAPS.id, fi.name));
             }
         }
         for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapThemeTypes()) {
             for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(type.type)) {
-                offlineItems.add(new Pair<>(Download.DownloadType.DOWNLOAD_TYPE_ALL_THEMES.id, offlineItem));
+                offlineItems.add(new Pair<>(DOWNLOAD_TYPE_ALL_THEMES.id, offlineItem.localFile));
             }
         }
         for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_BROUTER_TILES)) {
-            offlineItems.add(new Pair<>(DOWNLOADTYPE_BROUTER_TILES.id, offlineItem));
+            offlineItems.add(new Pair<>(DOWNLOADTYPE_BROUTER_TILES.id, offlineItem.localFile));
         }
         for (CompanionFileUtils.DownloadedFileData offlineItem : CompanionFileUtils.availableOfflineMaps(DOWNLOADTYPE_HILLSHADING_TILES)) {
-            offlineItems.add(new Pair<>(DOWNLOADTYPE_HILLSHADING_TILES.id, offlineItem));
+            offlineItems.add(new Pair<>(DOWNLOADTYPE_HILLSHADING_TILES.id, offlineItem.localFile));
         }
 
         // confirmation dialog (grouped by type)
-        final SimpleDialog.ItemSelectModel<Pair<Integer, CompanionFileUtils.DownloadedFileData>> model = new SimpleDialog.ItemSelectModel<>();
+        final SimpleDialog.ItemSelectModel<Pair<Integer, String>> model = new SimpleDialog.ItemSelectModel<>();
         model
             .setButtonSelectionIsMandatory(false)
             .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX)
             .setItems(offlineItems)
-            .setDisplayMapper((item, itemGroup) -> TextParam.text(item.second.displayName), (item, itemGroup) -> String.valueOf(item.first), null)
+            .setDisplayMapper((item, itemGroup) -> TextParam.text(item.second), (item, itemGroup) -> String.valueOf(item.first), null)
             .activateGrouping(item -> activity.getString(Download.DownloadType.getFromId(item.first).getTypeNameResId()))
             .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true))
             .setGroupDisplayIconMapper(gi -> ImageParam.id(gi.getItems().isEmpty() ? 0 : Download.DownloadType.getFromId(gi.getItems().get(0).first).getIconResId()))
@@ -427,7 +429,7 @@ public class DownloaderUtils {
                 }
                 int filesDeleted = 0;
                 final ContentStorage cs = ContentStorage.get();
-                for (Pair<Integer, CompanionFileUtils.DownloadedFileData> offlineItem : selected) {
+                for (Pair<Integer, String> offlineItem : selected) {
                     PersistableFolder folder = null;
                     if (offlineItem.first == DOWNLOAD_TYPE_ALL_MAPS.id) {
                         folder = PersistableFolder.OFFLINE_MAPS;
@@ -441,11 +443,11 @@ public class DownloaderUtils {
                     if (folder != null) {
                         final List<ContentStorage.FileInformation> files = cs.list(folder);
                         for (ContentStorage.FileInformation fi : files) {
-                            if (StringUtils.equals(fi.name, offlineItem.second.localFile)) {
+                            if (StringUtils.equals(fi.name, offlineItem.second)) {
                                 cs.delete(fi.uri);
                             }
                         }
-                        cs.delete(CompanionFileUtils.companionFileExists(files, offlineItem.second.localFile));
+                        cs.delete(CompanionFileUtils.companionFileExists(files, offlineItem.second));
                         filesDeleted++;
                     }
                 }
