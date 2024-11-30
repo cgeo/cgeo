@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheListInfoItem;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -537,6 +538,32 @@ public final class Formatter {
 
     public static String formatNumberTwoDigits(final int number) {
         return String.format(Locale.getDefault(), "%02d", number);
+    }
+
+    public static String formatGCEventTime(final String tableInside) {
+        final MatcherWrapper eventTimesMatcher = new MatcherWrapper(GCConstants.PATTERN_EVENTTIMES, tableInside);
+        final StringBuilder sDesc = new StringBuilder();
+        if (eventTimesMatcher.find()) {
+            final boolean hour12mode = eventTimesMatcher.group(1).trim().equals("PM") || eventTimesMatcher.group(4).trim().equals("PM") || eventTimesMatcher.group(1).trim().equals("AM") || eventTimesMatcher.group(4).trim().equals("AM");
+            sDesc.append(formatNumberTwoDigits(
+                        Integer.parseInt(
+                            eventTimesMatcher.group(2))
+                            + (eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0)
+                            + (eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0)
+                            - ((hour12mode && "12".equals(eventTimesMatcher.group(2))) ? 12 : 0)))
+                    .append(":")
+                    .append(formatNumberTwoDigits(eventTimesMatcher.group(3)))
+                    .append(" - ")
+                    .append(formatNumberTwoDigits(
+                            Integer.parseInt(
+                                    eventTimesMatcher.group(6))
+                                    + (eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0)
+                                    + (eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0)
+                                    - (hour12mode && ("12".equals(eventTimesMatcher.group(6))) ? 12 : 0)))
+                    .append(":")
+                    .append(formatNumberTwoDigits(eventTimesMatcher.group(7)));
+        }
+        return sDesc.toString();
     }
 
 }

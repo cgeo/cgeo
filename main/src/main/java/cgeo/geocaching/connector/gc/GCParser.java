@@ -387,13 +387,7 @@ public final class GCParser {
                     sDesc.append("<b>")
                             .append(new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(cache.getHiddenDate()))
                             .append(", ")
-                            .append(Formatter.formatNumberTwoDigits(Integer.parseInt(eventTimesMatcher.group(2)) + (null != eventTimesMatcher.group(1) && eventTimesMatcher.group(1).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(4) && eventTimesMatcher.group(4).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(2))) ? 12 : 0)))
-                            .append(":")
-                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(3)))
-                            .append(" - ")
-                            .append(Formatter.formatNumberTwoDigits(Integer.parseInt(eventTimesMatcher.group(6)) + (null != eventTimesMatcher.group(5) && eventTimesMatcher.group(5).trim().equals("PM") ? 12 : 0) + (null != eventTimesMatcher.group(8) && eventTimesMatcher.group(8).trim().equals("PM") ? 12 : 0) - (("12".equals(eventTimesMatcher.group(6))) ? 12 : 0)))
-                            .append(":")
-                            .append(Formatter.formatNumberTwoDigits(eventTimesMatcher.group(7)))
+                            .append(Formatter.formatGCEventTime(tableInside))
                             .append("</b>");
                 }
             } catch (Exception e) {
