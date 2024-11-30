@@ -196,7 +196,7 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory
+    <cgeo.geocaching.settings.PreferenceCategory
         android:title="@string/category_unifiedMap"
         android:summary="@string/maptheme_vtm_scaling_summary"
         app:iconSpaceReserved="false">
@@ -224,5 +224,5 @@
             app:max="200"
             app:defaultValue="100"
             app:iconSpaceReserved="false" />
-    </PreferenceCategory>
+    </cgeo.geocaching.settings.PreferenceCategory>
 </PreferenceScreen>
