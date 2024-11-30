@@ -179,6 +179,11 @@ public class MainActivity extends AbstractNavigationBarActivity {
                                             }
                                         }
                                         final String userNameText = FoundNumCounter.getNotBlankUserName(conn);
+                                        if (conn instanceof GCConnector && StringUtils.contains(Settings.getUserName(), '@') && StringUtils.isNotBlank(userNameText)) {
+                                            // auto-fix email address used as login instead of username for GC connector (#16397)
+                                            Settings.setGCUserName(userNameText);
+                                            Log.d("Auto-fixed GC login settings from email to username");
+                                        }
                                         return new Pair<>(userFoundCount, userNameText);
                                     },
                                     p -> {
