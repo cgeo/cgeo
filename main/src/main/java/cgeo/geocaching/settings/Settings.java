@@ -677,6 +677,13 @@ public class Settings {
         return StringUtils.trim(getString(R.string.pref_username, StringUtils.EMPTY));
     }
 
+    /** this method is to be solely used for auto-fixing GC username, see MainActivity.UpdateUserInfoHandler */
+    public static void setGCUserName(final String username) {
+        if (StringUtils.isNotBlank(username)) {
+            putString(R.string.pref_username, username);
+        }
+    }
+
     public static boolean isGCConnectorActive() {
         return getBoolean(R.string.pref_connectorGCActive, false);
     }
