@@ -1252,7 +1252,12 @@ public class Settings {
 
     /** use UnifiedMap as default map in certain places */
     public static boolean useUnifiedMap() {
-        return getBoolean(R.string.pref_useUnifiedMap, !BranchDetectionHelper.isProductionBuild());
+        return !useLegacyMaps();
+    }
+
+    /** use legacy maps **/
+    public static boolean useLegacyMaps() {
+        return getBoolean(R.string.pref_useLegacyMap, false);
     }
 
     /** use Mapsforge as map view for UnifiedMap */
