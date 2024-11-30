@@ -1,10 +1,20 @@
-package cgeo.geocaching.utils;
+package cgeo.geocaching.utils.xml;
+
+import cgeo.geocaching.utils.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.IOException;
+import java.io.Reader;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 public final class XmlUtils {
+
+    private static final XmlPullParserFactory XPP_FACTORY = safeCreateFactory();
 
     private XmlUtils() {
         // Do not instantiate
@@ -38,5 +48,27 @@ public final class XmlUtils {
         for (int i = 0; i < tagAndText.length; i += 2) {
             simpleText(serializer, prefix, tagAndText[i], tagAndText[i + 1]);
         }
+    }
+
+    public static XmlPullParser createParser(@NonNull final Reader xml, final boolean namespaceAware) throws XmlPullParserException {
+        if (XPP_FACTORY == null) {
+            throw new XmlPullParserException("XmlUtils: can't create XML Parser, no factory available");
+        }
+
+        synchronized (XPP_FACTORY) {
+            final XmlPullParser parser = XPP_FACTORY.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, namespaceAware);
+            parser.setInput(xml);
+            return parser;
+        }
+    }
+
+    private static XmlPullParserFactory safeCreateFactory() {
+        try {
+            return XmlPullParserFactory.newInstance();
+        } catch (XmlPullParserException e) {
+            Log.e("XmlUtils: could not create a XmlPullParserFactory, e");
+        }
+        return null;
     }
 }

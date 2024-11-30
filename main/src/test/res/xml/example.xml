@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<websites xmlns:test="http://cgeo.org/test">
+    <website url="https://cgeo.org">
+        <name>cgeo</name>
+        <category>Fun</category>
+        <category>Geocaching</category>
+        <address>
+            <street>Somewherestreet 5</street>
+            <town>Downtown</town>
+            <country>Worldwide</country>
+        </address>
+        <test:status>green</test:status>
+    </website>
+    <website url="https://geocaching.com">
+        <name>Groundspeak</name>
+        <category>Commercial</category>
+        <address>
+            <street>WhoKnows 6</street>
+            <town>Seattle</town>
+            <country>US</country>
+        </address>
+        <category>Geocaching</category>
+        <test:status>red</test:status>
+    </website>
+    <website url="https://google.com">
+        <category>Different</category>
+        <name>Android Creators</name>
+        <test:status>yellow</test:status>
+    </website>
+</websites>
