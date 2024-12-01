@@ -1,4 +1,7 @@
 ##
+- Oprava: Další problémy s časovým pásmem u eventů začínajících kolem půlnoci nebo poledne
+
+##
 - Oprava: Tlačítko „Ruční přihlášení“ se zobrazuje i bez chyby přihlášení „captcha vyžadována“
 - Oprava: Problémy s časovým pásmem při zjištění nového času eventu
 
