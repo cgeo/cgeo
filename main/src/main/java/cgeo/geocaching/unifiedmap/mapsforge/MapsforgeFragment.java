@@ -174,7 +174,11 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     public void onResume() {
         super.onResume();
         // mMapView.onResume();
-
+        try {
+            mMapView.getModel().mapViewPosition.addObserver(this);
+        } catch (IllegalArgumentException ex) {
+            //
+        }
     }
 
     @Override
@@ -182,12 +186,23 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         // mMapView.onPause();
         super.onPause();
 
-        mMapView.getModel().mapViewPosition.removeObserver(this);
+        try {
+            mMapView.getModel().mapViewPosition.removeObserver(this);
+        } catch (IllegalArgumentException ex) {
+            //
+        }
     }
 
     @Override
     public void onDestroyView() {
 //        themeHelper.disposeTheme();
+
+        try {
+            mMapView.getModel().mapViewPosition.removeObserver(this);
+        } catch (IllegalArgumentException ex) {
+            //
+        }
+
         mMapView.destroyAll();
         AndroidGraphicFactory.clearResourceMemoryCache();
         super.onDestroyView();
