@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Correcció: el botó "Inici de sessió manual" es mostra fins i tot sense error d'inici de sessió "captcha required"
 - Solució: problemes de zona horària amb la detecció d'hora d'esdeveniments nous
 
