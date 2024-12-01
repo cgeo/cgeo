@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Oplossing: "Handmatige login" knop wordt weergegeven zelfs zonder "captcha vereist" login fout
 - Oplossing: Tijdzonde problemen met nieuwe event tijd detectie
 
