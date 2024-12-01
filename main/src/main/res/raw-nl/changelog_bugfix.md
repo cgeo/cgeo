@@ -1,5 +1,5 @@
 ##
-- Fix: More time zone issues for events starting around midnight or noon
+- Oplossing: Meer tijdzone problemen voor events die om middernacht of middag beginnen
 
 ##
 - Oplossing: "Handmatige login" knop wordt weergegeven zelfs zonder "captcha vereist" login fout
