@@ -23,6 +23,18 @@
         <include layout="@layout/map_zoom_control" />
         <include layout="@layout/map_progressbar" />
         <include layout="@layout/map_detailsfragment" />
+
+        <ImageView
+            android:id="@+id/http429warning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="17dp"
+            android:padding="5dp"
+            android:layout_below="@+id/distanceinfo"
+            android:src="@drawable/warning"
+            android:background="@drawable/icon_bcg"
+            android:visibility="visible"/>
     </RelativeLayout>
 
     <RelativeLayout

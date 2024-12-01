@@ -287,6 +287,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 lastElevationChartRoute = null;
             }
         });
+        add429observer();
 
         findViewById(R.id.map_zoomin).setOnTouchListener(new RepeatOnHoldListener(500, v -> {
             if (mapFragment != null) {
