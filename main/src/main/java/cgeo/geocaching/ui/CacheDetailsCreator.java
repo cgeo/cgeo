@@ -7,7 +7,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.bettercacher.Category;
 import cgeo.geocaching.models.bettercacher.Tier;
@@ -187,7 +187,7 @@ public final class CacheDetailsCreator {
         return visited != 0 ? " (" + Formatter.formatShortDate(visited) + ")" : "";
     }
 
-    private static Float distanceNonBlocking(final ICoordinates target) {
+    private static Float distanceNonBlocking(final ICoordinate target) {
         if (target.getCoords() == null) {
             return null;
         }

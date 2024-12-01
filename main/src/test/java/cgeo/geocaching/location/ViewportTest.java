@@ -1,6 +1,6 @@
 package cgeo.geocaching.location;
 
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import static cgeo.geocaching.location.Viewport.containing;
 
 import android.annotation.SuppressLint;
@@ -106,7 +106,7 @@ public class ViewportTest {
 
     @Test
     public void testContaining() {
-        assertThat(containing(singleton((ICoordinates) null))).isNull();
+        assertThat(containing(singleton((ICoordinate) null))).isNull();
         final Set<Geopoint> points = new HashSet<>();
         points.add(vpRef.bottomLeft);
         assertThat(containing(points)).isEqualTo(new Viewport(vpRef.bottomLeft, vpRef.bottomLeft));

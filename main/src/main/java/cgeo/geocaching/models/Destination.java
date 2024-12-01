@@ -2,7 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.location.Geopoint;
 
-public final class Destination implements ICoordinates {
+public final class Destination implements ICoordinate {
 
     private final long id;
     private final long date;

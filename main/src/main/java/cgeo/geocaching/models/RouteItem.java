@@ -35,7 +35,7 @@ public class RouteItem implements Parcelable {
     private int waypointId;
     private String sortFilterString;
 
-    public RouteItem(final IWaypoint item) {
+    public RouteItem(final INamedGeoCoordinate item) {
         setDetails(item);
     }
 
@@ -186,11 +186,11 @@ public class RouteItem implements Parcelable {
         return point;
     }
 
-    private void setDetails(final IWaypoint item) {
-        if (item instanceof Geocache) {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getName());
+    private void setDetails(final INamedGeoCoordinate item) {
+        if (item instanceof Waypoint) {
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), ((Waypoint) item).getId(), item.getName());
         } else {
-            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.WAYPOINT, item.getGeocode(), item.getId(), item.getName());
+            setDetails(buildIdentifier(item), item.getCoords(), RouteItemType.GEOCACHE, item.getGeocode(), 0, item.getName());
         }
     }
 
@@ -225,7 +225,7 @@ public class RouteItem implements Parcelable {
         }
     }
 
-    private String buildIdentifier(final IWaypoint item) {
+    private String buildIdentifier(final INamedGeoCoordinate item) {
         String name = item.getGeocode();
         if (item instanceof Waypoint) {
             name += "-" + ((Waypoint) item).getPrefix();

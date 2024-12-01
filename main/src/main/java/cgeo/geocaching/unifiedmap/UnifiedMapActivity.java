@@ -29,7 +29,7 @@ import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -1174,14 +1174,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         WaypointDistanceInfo result;
         // work on a copy to avoid race conditions
         result = getClosestDistanceInM(coord, viewModel.caches.getListCopy(), Integer.MAX_VALUE, item -> ((Geocache) item).getShortGeocode() + " " + item.getName());
-        result = getClosestDistanceInM(coord, viewModel.waypoints.getListCopy(), result.meters, item -> item.getName() + " (" + item.getWaypointType().gpx + ")");
+        result = getClosestDistanceInM(coord, viewModel.waypoints.getListCopy(), result.meters, item -> item.getName() + " (" + ((Waypoint) item).getWaypointType().gpx + ")");
         return result;
     }
 
-    private static WaypointDistanceInfo getClosestDistanceInM(final Geopoint center, final List<? extends IWaypoint> items, final int minDistanceOld, final Func1<IWaypoint, String> getName) {
+    private static WaypointDistanceInfo getClosestDistanceInM(final Geopoint center, final List<? extends INamedGeoCoordinate> items, final int minDistanceOld, final Func1<INamedGeoCoordinate, String> getName) {
         int minDistance = minDistanceOld;
         String name = "";
-        for (IWaypoint item : items) {
+        for (INamedGeoCoordinate item : items) {
             final Geopoint coords = item.getCoords();
             if (coords != null) {
                 final int distance = (int) (1000f * coords.distanceTo(center));

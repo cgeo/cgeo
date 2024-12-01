@@ -19,7 +19,7 @@ import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -107,7 +107,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Internal representation of a "cache"
  */
-public class Geocache implements IWaypoint {
+public class Geocache implements INamedGeoCoordinate {
 
     private long updated = 0;
     private long detailedUpdate = 0;
@@ -2015,20 +2015,9 @@ public class Geocache implements IWaypoint {
     }
 
     @Override
-    public int getId() {
-        return 0;
-    }
-
-    @Override
-    @Nullable
-    public WaypointType getWaypointType() {
-        return null;
-    }
-
-    @Override
     @NonNull
-    public CoordinatesType getCoordType() {
-        return CoordinatesType.CACHE;
+    public CoordinateType getCoordType() {
+        return CoordinateType.CACHE;
     }
 
     @NonNull

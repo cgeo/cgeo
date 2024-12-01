@@ -2,7 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 
 import android.location.Location;
 import android.os.Parcel;
@@ -179,7 +179,7 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
      * @return distance in km
      * @throws GeopointException if there is an error in distance calculation
      */
-    public float distanceTo(final ICoordinates point) {
+    public float distanceTo(final ICoordinate point) {
         if (point == null) {
             return 0.0f;
         }
@@ -195,7 +195,7 @@ public final class Geopoint implements GeoPointImpl, Parcelable {
      * @param point target
      * @return bearing in degree, in the [0,360[ range
      */
-    public float bearingTo(final ICoordinates point) {
+    public float bearingTo(final ICoordinate point) {
         final Geopoint otherCoords = point.getCoords();
         final GeodesicData g = Geodesic.WGS84.Inverse(getLatitude(), getLongitude(), otherCoords.getLatitude(), otherCoords.getLongitude(),
                 GeodesicMask.AZIMUTH);
