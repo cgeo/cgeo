@@ -12,7 +12,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
@@ -894,7 +894,7 @@ public final class MapMarkerUtils {
     // ------------------------------------------------------------------------
     // methods for highlighting selected cache on map (UnifiedMap)
 
-    public static void addHighlighting(final IWaypoint geoitem, final Resources res, final GeoItemLayer<String> nonClickableItemsLayer) {
+    public static void addHighlighting(final INamedGeoCoordinate geoitem, final Resources res, final GeoItemLayer<String> nonClickableItemsLayer) {
         Bitmap b1 = null;
         float scalingFactor = 100f;
         if (geoitem instanceof Geocache) {

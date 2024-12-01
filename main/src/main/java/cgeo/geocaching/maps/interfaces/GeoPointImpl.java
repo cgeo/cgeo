@@ -1,12 +1,12 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 
 /**
  * Defines the common functions of the provider-specific
  * GeoPoint implementations
  */
-public interface GeoPointImpl extends ICoordinates {
+public interface GeoPointImpl extends ICoordinate {
 
     int getLatitudeE6();
 

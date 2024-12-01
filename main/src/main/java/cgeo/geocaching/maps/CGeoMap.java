@@ -9,7 +9,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.MapGoogleBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -36,7 +36,7 @@ import cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -595,7 +595,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         proximityNotification = Settings.isGeneralProximityNotificationActive() ? proximityNotification != null ? proximityNotification : new ProximityNotification(true, false) : null;
     }
 
-    public void toggleRouteItem(final IWaypoint item) {
+    public void toggleRouteItem(final INamedGeoCoordinate item) {
         if (item == null || StringUtils.isEmpty(item.getGeocode())) {
             return;
         }
@@ -607,7 +607,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         overlayPositionAndScale.repaintRequired();
     }
 
-    public void handleCacheWaypointLongTap(final IWaypoint item, final int tapX, final int tapY) {
+    public void handleCacheWaypointLongTap(final INamedGeoCoordinate item, final int tapX, final int tapY) {
         final RouteItem routeItem = new RouteItem(item);
         if (Settings.isShowRouteMenu()) {
             MapUtils.createCacheWaypointLongClickPopupMenu(activity, routeItem, tapX, tapY, individualRoute, overlayPositionAndScale, this::updateRouteTrackButtonVisibility)
@@ -1638,14 +1638,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
 
     @Override
-    public void onCacheTap(final IWaypoint waypoint) {
+    public void onCacheTap(final INamedGeoCoordinate waypoint) {
         if (waypoint == null) {
             return;
         }
 
-        final CoordinatesType coordType = waypoint.getCoordType();
+        final CoordinateType coordType = waypoint.getCoordType();
 
-        if (coordType == CoordinatesType.CACHE && StringUtils.isNotBlank(waypoint.getGeocode())) {
+        if (coordType == CoordinateType.CACHE && StringUtils.isNotBlank(waypoint.getGeocode())) {
             final Geocache cache = DataStore.loadCache(waypoint.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null) {
                 CGeoMap.markCacheAsDirty(cache.getGeocode());
@@ -1655,9 +1655,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return;
         }
 
-        if (coordType == CoordinatesType.WAYPOINT && !((Waypoint) waypoint).isNewWaypoint()) {
+        if (coordType == CoordinateType.WAYPOINT && !((Waypoint) waypoint).isNewWaypoint()) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
-            sheetInfo = new UnifiedMapViewModel.SheetInfo(waypoint.getGeocode(), waypoint.getId());
+            sheetInfo = new UnifiedMapViewModel.SheetInfo(waypoint.getGeocode(), ((Waypoint) waypoint).getId());
             activity.sheetShowDetails(sheetInfo);
         }
     }

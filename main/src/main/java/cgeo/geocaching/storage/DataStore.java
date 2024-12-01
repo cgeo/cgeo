@@ -29,7 +29,7 @@ import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -3649,7 +3649,7 @@ public class DataStore {
         });
     }
 
-    public static void appendToIndividualRoute(@NonNull final Collection<? extends IWaypoint> items) {
+    public static void appendToIndividualRoute(@NonNull final Collection<? extends INamedGeoCoordinate> items) {
         withAccessLock(() -> {
 
             init();
@@ -3663,7 +3663,7 @@ public class DataStore {
                 }
                 // append new items
                 final SQLiteStatement insertRouteItem = PreparedStatement.INSERT_ROUTEITEM.getStatement();
-                for (IWaypoint item : items) {
+                for (INamedGeoCoordinate item : items) {
                     insertRouteItemHelper(insertRouteItem, new RouteItem(item), ++maxPrecedence);
                 }
                 database.setTransactionSuccessful();

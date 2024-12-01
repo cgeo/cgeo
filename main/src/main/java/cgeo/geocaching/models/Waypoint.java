@@ -2,7 +2,7 @@ package cgeo.geocaching.models;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class Waypoint implements IWaypoint {
+public class Waypoint implements INamedGeoCoordinate {
 
     public static final String PREFIX_OWN = "OWN";
     public static final String CLIPBOARD_PREFIX = "c:geo:WAYPOINT:";
@@ -230,7 +230,11 @@ public class Waypoint implements IWaypoint {
         return "https://www.geocaching.com/seek/cache_details.aspx?wp=" + geocode;
     }
 
-    @Override
+    /**
+     * Return an unique waypoint id.
+     *
+     * @return a non-negative id if set, -1 if unset
+     */
     public int getId() {
         return id;
     }
@@ -269,7 +273,6 @@ public class Waypoint implements IWaypoint {
         this.parentCache = null;
     }
 
-    @Override
     public WaypointType getWaypointType() {
         return waypointType;
     }
@@ -395,8 +398,8 @@ public class Waypoint implements IWaypoint {
     }
 
     @Override
-    public CoordinatesType getCoordType() {
-        return CoordinatesType.WAYPOINT;
+    public CoordinateType getCoordType() {
+        return CoordinateType.WAYPOINT;
     }
 
     public void setVisited(final boolean visited) {

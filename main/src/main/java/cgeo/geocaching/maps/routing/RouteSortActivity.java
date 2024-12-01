@@ -8,7 +8,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
@@ -68,7 +68,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         @SuppressLint("SetTextI18n")
         private void fillViewHolder(final RouteItemViewHolder holder, final RouteItem routeItem) {
             final boolean cacheOrWaypointType = routeItem.getType() == RouteItem.RouteItemType.GEOCACHE || routeItem.getType() == RouteItem.RouteItemType.WAYPOINT;
-            final IWaypoint data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
+            final INamedGeoCoordinate data = cacheOrWaypointType ? routeItem.getType() == RouteItem.RouteItemType.GEOCACHE ? DataStore.loadCache(routeItem.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB) : DataStore.loadWaypoint(routeItem.getWaypointId()) : null;
 
             if (null == data && cacheOrWaypointType) {
                 holder.binding.title.setText(routeItem.getShortGeocode());

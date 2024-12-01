@@ -2,13 +2,13 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.MapSelectableItem;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
@@ -84,7 +84,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createIWaypointItemView(final Context context, final IWaypoint geoObject, final View view) {
+    public static View createIWaypointItemView(final Context context, final INamedGeoCoordinate geoObject, final View view) {
         if (geoObject instanceof Geocache) {
             return createGeocacheItemView(context, (Geocache) geoObject, view);
         }
@@ -96,12 +96,12 @@ public class GeoItemSelectorUtils {
 
     public static View createGeoItemView(final Context context, final GeoitemRef geoitemRef, final View view) {
         if (StringUtils.isNotEmpty(geoitemRef.getGeocode())) {
-            if (geoitemRef.getType() == CoordinatesType.CACHE) {
+            if (geoitemRef.getType() == CoordinateType.CACHE) {
                 final Geocache cache = DataStore.loadCache(geoitemRef.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     return createGeocacheItemView(context, cache, view);
                 }
-            } else if (geoitemRef.getType() == CoordinatesType.WAYPOINT) {
+            } else if (geoitemRef.getType() == CoordinateType.WAYPOINT) {
                 final Waypoint waypoint = DataStore.loadWaypoint(geoitemRef.getId());
                 if (waypoint != null) {
                     return createWaypointItemView(context, waypoint, view);

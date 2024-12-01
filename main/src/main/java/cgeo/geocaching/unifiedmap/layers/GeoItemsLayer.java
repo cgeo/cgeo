@@ -4,7 +4,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
@@ -31,7 +31,7 @@ public class GeoItemsLayer {
     private boolean lastForceCompactIconMode = false;
 
 
-    private static String getKeyFor(final ICoordinates coords, final CacheMarker marker) {
+    private static String getKeyFor(final ICoordinate coords, final CacheMarker marker) {
         return coords.getCoords() + "-" + marker.hashCode();
     }
 

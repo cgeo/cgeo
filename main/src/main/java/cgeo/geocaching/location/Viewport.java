@@ -2,7 +2,7 @@ package cgeo.geocaching.location;
 
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.ICoordinates;
+import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 
@@ -22,7 +22,7 @@ public final class Viewport implements Parcelable {
     @NonNull public final Geopoint bottomLeft;
     @NonNull public final Geopoint topRight;
 
-    public Viewport(@NonNull final ICoordinates point1, @NonNull final ICoordinates point2) {
+    public Viewport(@NonNull final ICoordinate point1, @NonNull final ICoordinate point2) {
         final Geopoint gp1 = point1.getCoords();
         final Geopoint gp2 = point2.getCoords();
         this.bottomLeft = new Geopoint(Math.min(gp1.getLatitude(), gp2.getLatitude()),
@@ -33,7 +33,7 @@ public final class Viewport implements Parcelable {
                 (gp1.getLongitude() + gp2.getLongitude()) / 2);
     }
 
-    public Viewport(@NonNull final ICoordinates center, final double latSpan, final double lonSpan) {
+    public Viewport(@NonNull final ICoordinate center, final double latSpan, final double lonSpan) {
         this.center = center.getCoords();
         final double centerLat = this.center.getLatitude();
         final double centerLon = this.center.getLongitude();
@@ -43,7 +43,7 @@ public final class Viewport implements Parcelable {
         topRight = new Geopoint(centerLat + latHalfSpan, centerLon + lonHalfSpan);
     }
 
-    public Viewport(@NonNull final ICoordinates point) {
+    public Viewport(@NonNull final ICoordinate point) {
         center = point.getCoords();
         bottomLeft = point.getCoords();
         topRight = point.getCoords();
@@ -52,7 +52,7 @@ public final class Viewport implements Parcelable {
     /**
      * Creates a Viewport with given center which covers the area around it with given radius
      */
-    public Viewport(@NonNull final ICoordinates center, final float radiusInKilometers) {
+    public Viewport(@NonNull final ICoordinate center, final float radiusInKilometers) {
         this.center = center.getCoords();
         this.topRight = this.center.project(0, radiusInKilometers).project(90, radiusInKilometers);
         this.bottomLeft = this.center.project(180, radiusInKilometers).project(270, radiusInKilometers);
@@ -93,7 +93,7 @@ public final class Viewport implements Parcelable {
      * @param point the coordinates to check
      * @return true if the point is contained in this viewport, false otherwise or if the point contains no coordinates
      */
-    public boolean contains(@NonNull final ICoordinates point) {
+    public boolean contains(@NonNull final ICoordinate point) {
         final Geopoint coords = point.getCoords();
         return coords != null && contains(coords.getLatitudeE6(), coords.getLongitudeE6());
     }
@@ -111,9 +111,9 @@ public final class Viewport implements Parcelable {
      * @param points a collection of (possibly null) points
      * @return the number of non-null points in the viewport
      */
-    public int count(@NonNull final Collection<? extends ICoordinates> points) {
+    public int count(@NonNull final Collection<? extends ICoordinate> points) {
         int total = 0;
-        for (final ICoordinates point : points) {
+        for (final ICoordinate point : points) {
             if (point != null && contains(point)) {
                 total += 1;
             }
@@ -127,7 +127,7 @@ public final class Viewport implements Parcelable {
      * @param points a collection of (possibly null) points
      * @return a new collection containing the points in the viewport
      */
-    public <T extends ICoordinates> Collection<T> filter(@NonNull final Collection<T> points) {
+    public <T extends ICoordinate> Collection<T> filter(@NonNull final Collection<T> points) {
         final Collection<T> result = new ArrayList<>();
         for (final T point : points) {
             if (point != null && contains(point)) {
@@ -193,7 +193,7 @@ public final class Viewport implements Parcelable {
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
     @Nullable
-    public static Viewport containing(final Collection<? extends ICoordinates> points) {
+    public static Viewport containing(final Collection<? extends ICoordinate> points) {
         return containing(points, false, false);
     }
 
@@ -227,10 +227,10 @@ public final class Viewport implements Parcelable {
      * - containingCachesAndWaypoints(Geocaches)
      */
     @Nullable
-    private static Viewport containing(final Collection<? extends ICoordinates> points, final boolean withWaypoints, final boolean gcLiveOnly) {
+    private static Viewport containing(final Collection<? extends ICoordinate> points, final boolean withWaypoints, final boolean gcLiveOnly) {
         final ContainingViewportBuilder cb = new ContainingViewportBuilder();
         final GCConnector conn = GCConnector.getInstance();
-        for (final ICoordinates point : points) {
+        for (final ICoordinate point : points) {
             if (point != null && (!gcLiveOnly || (conn.canHandle(((Geocache) point).getGeocode()) && !((Geocache) point).inDatabase()))) {
                 cb.add(point);
                 if (withWaypoints && ((Geocache) point).hasWaypoints()) {
@@ -254,18 +254,18 @@ public final class Viewport implements Parcelable {
         private double lonMax = -Double.MAX_VALUE;
         private Viewport viewport = null;
 
-        public ContainingViewportBuilder add(final ICoordinates ... points) {
+        public ContainingViewportBuilder add(final ICoordinate... points) {
             if (points != null) {
-                for (ICoordinates p : points) {
+                for (ICoordinate p : points) {
                     add(p);
                 }
             }
             return this;
         }
 
-        public ContainingViewportBuilder add(final Collection<? extends ICoordinates> coll) {
+        public ContainingViewportBuilder add(final Collection<? extends ICoordinate> coll) {
             if (coll != null) {
-                for (ICoordinates p : coll) {
+                for (ICoordinate p : coll) {
                     add(p);
                 }
             }
@@ -280,7 +280,7 @@ public final class Viewport implements Parcelable {
             return this;
         }
 
-        private ContainingViewportBuilder add(final ICoordinates point) {
+        private ContainingViewportBuilder add(final ICoordinate point) {
             if (point == null) {
                 return this;
             }

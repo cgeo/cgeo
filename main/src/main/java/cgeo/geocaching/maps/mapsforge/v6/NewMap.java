@@ -12,7 +12,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CoordinatesType;
+import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
@@ -1356,7 +1356,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
     private void triggerCacheWaypointLongTapContextMenu(final GeoitemRef item) {
         final long mapSize = MercatorProjection.getMapSize(mapView.getModel().mapViewPosition.getZoomLevel(), mapView.getModel().displayModel.getTileSize());
         Geopoint geopoint = null;
-        if (item.getType() == CoordinatesType.CACHE) {
+        if (item.getType() == CoordinateType.CACHE) {
             final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null) {
                 geopoint = cache.getCoords();
@@ -1389,7 +1389,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         }
 
         try {
-            if (item.getType() == CoordinatesType.CACHE) {
+            if (item.getType() == CoordinateType.CACHE) {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     popupGeocodes.add(cache.getGeocode());
@@ -1400,7 +1400,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 return;
             }
 
-            if (item.getType() == CoordinatesType.WAYPOINT && item.getId() >= 0) {
+            if (item.getType() == CoordinateType.WAYPOINT && item.getId() >= 0) {
                 popupGeocodes.add(item.getGeocode());
                 sheetInfo = new UnifiedMapViewModel.SheetInfo(item.getGeocode(), item.getId());
                 sheetShowDetails(sheetInfo);

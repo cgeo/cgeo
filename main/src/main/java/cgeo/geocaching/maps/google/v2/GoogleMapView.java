@@ -20,7 +20,7 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
-import cgeo.geocaching.models.IWaypoint;
+import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
@@ -196,7 +196,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
                 private void restorePosition(final @NonNull Marker marker) {
                     // keep original position
-                    final IWaypoint oldPosition = (IWaypoint) marker.getTag();
+                    final INamedGeoCoordinate oldPosition = (INamedGeoCoordinate) marker.getTag();
                     if (oldPosition != null) {
                         marker.setPosition(new LatLng(oldPosition.getCoords().getLatitude(), oldPosition.getCoords().getLongitude()));
                     }
