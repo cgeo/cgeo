@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Fix: "Manuell inloggningsknapp" visas även utan "captcha krävs" inloggningsfel
 - Fix: Tidszonsproblem med ny händelsetidsdetektering
 
