@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Correcção: Botão "Início de sessão manual" mostrado mesmo sem erro de "captcha necessário"
 - Correcção: Alguns problemas com a nova detecção da hora do evento
 
