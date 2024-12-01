@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Naprawiono: Przycisk „Ręczne logowanie” był pokazywany nawet bez błędu logowania „wymagana captcha”
 - Naprawiono: Problemy ze strefą czasową przy nowym wykrywaniu czasu wydarzenia
 
