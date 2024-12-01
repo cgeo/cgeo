@@ -35,6 +35,8 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Benutzerdefinierter Cache</string>
     <string name="unknown">Unbekannter Typ</string>
+    <string name="other">Andere</string>
+    <string name="event_special">Besondere</string>
     <string name="all_types_short">Alle</string>
     <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
@@ -2668,6 +2670,7 @@
     <string name="wherigo_toast_check_things">Wherigo: Überprüfe deine %s auf Änderungen</string>
     <string name="wherigo_otm_shortcuts_title">Wherigo Player Schnellstart</string>
     <string name="wherigo_otm_shortcuts_message">Wenn du den c:geo Wherigo Player regelmäßig verwenden möchtest, erwägen Sie eine Schnellstart-Schaltfläche oder einen benutzerdefinierten Menüpunkt dafür unter Einstellungen -&gt; Erscheinungsbild</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Die Anzeige von Wherigo-Standorten auf der Karte wird mit deinen Karteneinstellungen nicht unterstützt. Bitte wechsele zur Vereinheitlichten Karte unter Einstellungen -&gt; Kartenquellen -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Zurück</string>
     <string name="skip">Überspringen</string>
