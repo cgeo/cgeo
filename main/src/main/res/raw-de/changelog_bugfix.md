@@ -1,4 +1,7 @@
 ##
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
 - Korrektur: "Manueller Login" Button wird auch ohne "captcha required" Login-Fehler angezeigt
 - Korrektur: Zeitzonen-Probleme bei der neuen Eventzeiterkennung
 
