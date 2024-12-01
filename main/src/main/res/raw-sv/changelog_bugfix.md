@@ -1,6 +1,9 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
-- Fix: Time zone issues with new event time detection
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
+- Fix: "Manuell inloggningsknapp" visas även utan "captcha krävs" inloggningsfel
+- Fix: Tidszonsproblem med ny händelsetidsdetektering
 
 ##
 - Fix: Some issues with new event time detection

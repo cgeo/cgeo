@@ -1,6 +1,9 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
-- Fix: Time zone issues with new event time detection
+- Oprava: Další problémy s časovým pásmem u eventů začínajících kolem půlnoci nebo poledne
+
+##
+- Oprava: Tlačítko „Ruční přihlášení“ se zobrazuje i bez chyby přihlášení „captcha vyžadována“
+- Oprava: Problémy s časovým pásmem při zjištění nového času eventu
 
 ##
 - Oprava: Některé problémy s detekcí času nového eventu
