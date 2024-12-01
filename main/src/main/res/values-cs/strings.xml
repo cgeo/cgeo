@@ -1305,6 +1305,17 @@
     <string name="err_auth_geokrety_bad_password">Zdá se, že tvé uživatelské jméno nebo heslo není správné.</string>
     <string name="err_auth_geokrety_unknown">%1$s hlásí: %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_missing_login">Nejsou uloženy žádné přihlašovací údaje</string>
+    <string name="err_auth_gc_loginpage1">Nepodařilo se načíst přihlašovací stránku (1.)</string>
+    <string name="err_auth_gc_loginpage2">Nepodařilo se načíst přihlašovací stránku (2.)</string>
+    <string name="err_auth_gc_verification_token">Nepodařilo se najít ověřovací token požadavku</string>
+    <string name="err_auth_gc_captcha">Nepodařilo se přihlásit na geocaching.com kvůli vyžadovanému kódu captcha</string>
+    <string name="err_auth_gc_bad_login">Nepodařilo se přihlásit na geocaching.com jako %s z důvodu nesprávného uživatelského jména/hesla</string>
+    <string name="err_auth_gc_not_validated">Nepodařilo se přihlásit na Geocaching.com jako %s, protože účet musí být nejprve ověřen</string>
+    <string name="err_auth_gc_unknown_error">Z neznámého důvodu se nepodařilo přihlásit na Geocaching.com jako %s</string>
+    <string name="err_auth_gc_unknown_error_generic">Neznámá chyba</string>
+    <string name="err_auth_gc_communication_error">Chyba komunikace</string>
+    <string name="err_auth_gc_manual_error">Chyba manuálního přihlášení: %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d keška</item>

@@ -1,6 +1,9 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
-- Fix: Time zone issues with new event time detection
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
+- Correcção: Botão "Início de sessão manual" mostrado mesmo sem erro de "captcha necessário"
+- Correcção: Alguns problemas com a nova detecção da hora do evento
 
 ##
 - Correcção: Alguns problemas com a nova detecção da hora do evento

@@ -1,6 +1,9 @@
 ##
-- Fix: "Manual login" button shown even without "captcha required" login error
-- Fix: Time zone issues with new event time detection
+- Fix: More time zone issues for events starting around midnight or noon
+
+##
+- Naprawiono: Przycisk „Ręczne logowanie” był pokazywany nawet bez błędu logowania „wymagana captcha”
+- Naprawiono: Problemy ze strefą czasową przy nowym wykrywaniu czasu wydarzenia
 
 ##
 - Naprawiono: Niektóre problemy z wykrywaniem nowego czasu wydarzenia
