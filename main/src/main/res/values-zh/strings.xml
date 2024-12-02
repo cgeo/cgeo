@@ -172,7 +172,6 @@
     <string name="err_detail_cache">c:geo无法显示你想要的藏点。它真的是一个藏点吗？</string>
     <string name="err_detail_cache_find">c:geo找不到藏点</string>
     <string name="err_detail_cache_find_some">c:geo找不到那个藏点。</string>
-    <string name="err_detail_cache_find_any">c:geo找不到任何藏点。</string>
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
@@ -293,7 +292,6 @@
     <string name="caches_sort_vote">投票 (个人评级)</string>
     <string name="caches_sort_inventory">库存计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
-    <string name="caches_sort_date_logged">记录日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
     <string name="caches_sort_storage">存储在设备上的日期</string>
@@ -490,8 +488,6 @@
     <string name="init_useInternalRouting">使用内部路线规划</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
-    <string name="init_save_log_img">保存图片</string>
-    <string name="init_summary_save_log_img">保存日志中的图片</string>
     <string name="init_units">使用英制单位</string>
     <string name="init_summary_units">使用英制单位而不是公式单位</string>
     <string name="init_log_offline">离线日志记录</string>
@@ -664,8 +660,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">许可</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
@@ -712,12 +706,11 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
