@@ -1,43 +1,45 @@
+Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du kanske vill [konfigurera ett snabbstartobjekt](cgeo-setting://quicklaunchitems_sorted) eller [anpassa bottennavigationen](cgeo-setting://custombnitem) för enklare åtkomst, måste aktivera utökade inställningar först.)
+
 ### Karta
-- Nytt: "Redigera personlig anteckning" från cacheinformationsbladet
-- Fix: Vägpunkter som inte filtreras vid kartläggning av en enstaka cache (UnifiedMap)
-- Nytt: Stöd användardefinierade panelleverantörer
-- Fix: Uppdatera kartdata efter att du öppnat / stängt inställningsdialogen (UnifiedMap)
-- Nyhet: Växla visning av byggnader 2D/3D (UnifiedMap OSM-kartor)
-- Nyhet: Cache spara/uppdatera från popup flyttad till bakgrunden
-- Ändring: Sök efter koordinater: Visa riktning och avstånd till mål och inte till aktuell position
-- Nytt: Grafisk D/T-indikator i cache-infoblad
-- Fix: Kompassros dold när filter-baren är synlig (UnifiedMap)
-- Förändring: Tagit bort kart-temaförklaringar
-- Fix: Flera navigationsval-popup'er vid långtryck
+- Nyhet: Spara kart-tema per leverantör (UnifiedMap)
+- Nytt: Markera vald cache/vägpunkt (UnifiedMap)
+- Nytt: Lägg till separator mellan kartkällor offline och online
+- Nyhet: Stöd för Mapsforge som alternativ till VTM i UnifiedMap, se [Inställningar => Kartkällor => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Ändring: 'Visa höjddiagram' flyttat till långtrycksmenyn (UnifiedMap)
+- Ändra: Använd ny terrängskuggnings-algoritm för Mapsforge offline-kartor
+- Nyhet: Terrängskuggnings-stöd för UnifiedMap Mapsforge offline-kartor
+- Nyhet: Terrängskuggings-stöd för UnifiedMap VTM-kartor (kräver online-anslutning)
+- Fix: Adresssökning tar inte hänsyn till live-läge (UnifiedMap)
+- Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
+- Ändra: Gör långtryckstift mer c:geo-liknande
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Cachedetaljer
-- Nyhet: Visa bilder länkade i "personlig anteckning" i fliken Bilder
-- Förändring: Förenkla långtrycksåtgärd i cachedetaljer och detaljer för spårbara
-- Nytt: Jämnare skalning av loggbilder
-- Ändra: Ändra ikonen "redigera listor" från penna till lista + penna
-- Fix: fåfänga-funktionen misslyckas på långa strängar
-- Fix: Fel-tolkning av prioritet i säkerhetskopia av formel
-- Förändring: Tillåt större heltalsintervall i formler (inte tillåta användning av negation)
-- Nytt: Tillåt användarsparade cachebilder när du skapar/redigerar loggen
-- Fix: Spoilerbilder laddas inte längre (webbplatsändring)
+- Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
+- New: Tillåt stora heltal i formler
+- Nytt: Stöd för fler konstellationer för variabler i formler
+- Fix: Multiple images in personal note not added to images tab
+- Fix: Handling of projections in waypoints and personal notes
+- Nyhet: Långtryck på datum för inloggning hämtar tidigare loggdatum
+- Fix: Att återställa cachen till ursprungliga koordinater tar inte bort "ändrade koordinater"-flaggan
+- Nytt: Bekräfta att skriva över loggen på snabb offline-logg
+- Nytt: Uppdatera cache-status när du skickar en logg
+- New: Colored HTML source view of cache details
 
 ### Allmänt
-- Nytt: Växla för att ställa in tillståndet för Lab Adventures antingen manuellt eller automatiskt
-- Nyhet: Lista urvalsdialog: Auto-gruppera cache-listor med en ":" i deras namn
-- Förändring: Använd OSM Nominatum som reserv-geocoder, ersätter MapQuest-geocoder (som inte längre fungerar för oss)
-- Förändring: Uppdaterad integrerad BRouter till v1.7.5
-- Nytt: Läs höjdinformation från spår vid import
-- Nyhet: API till Locus stöder nu cachestorleken "virtuell"
-- Fix: Sökresultat för en plats sorteras inte längre efter avstånd till målplats
-- Nytt: filter för "Korrigerade koordinater"
-- Förändring: Uppdaterade targetSDK till 34 för att uppfylla kommande Play Store-krav
-- Nytt: Lade till "ingen"-post till val av routing-profiler
-- Ändring: Förbättra beskrivningen för "underhåll"-funktionen (ta bort övergivna data)
-- Nytt: Visa varningar när HTTP-fel 429 inträffar (För många förfrågningar)
-- Fix: Flimmer när cachelistan uppdateras
-- Nytt: Tillåt visning av lösenord i anslutnings-konfigurationen
-- Fix: Sök efter geokretys fungerar inte längre när du använder spårningskoder
-- Fix: Saknar alternativet "kopiera till urklipp" på vissa enheter (se inställningar => system)
-- Nyhet: Erbjud manuell inloggning vid Captcha-fel
-
+- Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
+- Nytt: Tillåt flera hierarkiska nivåer i cachelistor
+- Nyhet: Dedikerade ikoner för geocaching.com blockparty och HQ-event-typer
+- Nyhet: Ange önskad bildstorlek för bilder som laddas från geocaching.com cacher och spårbara objekt
+- Fix: "Open in browser" not working for trackable logs
+- Nyhet: Alternativ för att hantera nedladdade filer (kartor, teman, routing och terrängskuggningsdata)
+- Nyhet: Alternativ för att ta bort en cache från alla listor (= markera den att raderas)
+- Fix: Återställda koordinater upptäcks inte av c:geo för osparade cacher
+- Nytt: Tillåt rensning av filter om inget namngivet filter lagras
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
+- Nytt: Ytterligare emojis för cache-ikoner
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
