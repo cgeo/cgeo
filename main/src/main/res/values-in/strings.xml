@@ -135,7 +135,6 @@
     <string name="err_detail_cache">c: geo tidak bisa menampilkan geocache yang anda inginkan. Apakah itu geocache?</string>
     <string name="err_detail_cache_find">c: geo tidak bisa menemukan geocache</string>
     <string name="err_detail_cache_find_some">c: geo tidak dapat menemukan geocache itu.</string>
-    <string name="err_detail_cache_find_any">c: geo tidak dapat menemukan geocaches.</string>
     <string name="err_detail_no_spoiler">c: geo tidak menemukan gambar spoiler untuk cache ini.</string>
     <string name="err_detail_still_working">Masih mengerjakan tugas lain.</string>
     <string name="err_watchlist_failed">Mengubah daftar tontonan anda telah gagal.</string>
@@ -580,6 +579,7 @@
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
+    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -744,10 +744,6 @@
     <string name="destination_select">Pilih tujuan</string>
     <string name="osmand_marker_cgeo">Penanda dari c: geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Lisensi</string>
-    <string name="license_show">Menunjukkan lisensi</string>
-    <string name="license_dismiss">Abaikan</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Peristiwa yang lalu</string>
     <string name="helper_calendar_pastevent_question">Tanggal acara adalah di masa lalu. Tambahkan saja?</string>
@@ -1094,6 +1090,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Batal</string>
     <!-- Multi-Selections -->
