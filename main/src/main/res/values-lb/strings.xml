@@ -168,7 +168,6 @@
     <string name="err_detail_cache">c:geo kann de Cache net uweisen deen dir wëllt. Ass et wierklech ee Geocache?</string>
     <string name="err_detail_cache_find">c:geo ka keng Cachen fannen</string>
     <string name="err_detail_cache_find_some">c:geo kann dëse Cache net fannen.</string>
-    <string name="err_detail_cache_find_any">c:geo ka keng Cachen fannen.</string>
     <string name="err_detail_no_spoiler">c:geo huet keng Hiweisbiller fonnt fir dëse Cache.</string>
     <string name="err_detail_still_working">Schafft nach ëmmer un enger anerer Aufgab.</string>
     <string name="err_detail_premium_log_found">Dëse Cache ass just zougänglech fir Premium Membere vu Geocaching.com. Dowéinst kënne keng Informatiounen ugewisen ginn.\n\nWa dir de Cache awer scho fonnt hutt, da kënnt dir en hei loggen.</string>
@@ -288,7 +287,6 @@
     <string name="caches_sort_vote">Eege Bewäertung</string>
     <string name="caches_sort_inventory">Zieler vum Inventaire</string>
     <string name="caches_sort_date_hidden">Datum Verstoppt</string>
-    <string name="caches_sort_date_logged">Datum Geloggt</string>
     <string name="caches_sort_finds">Fonnt</string>
     <string name="caches_sort_state">Zoustand</string>
     <string name="caches_sort_storage">Speicherdatum</string>
@@ -462,8 +460,6 @@
     <string name="init_brouterShowBothDistances">Entfernung an der Loftlinn uweisen</string>
     <string name="brouter_recalculating">Wee gëtt am Hannergrond nei berechent…</string>
     <string name="init_summary_brouterShowBothDistances">Wann d\'Navigatioun aktiv ass: D\'Entfernung an der Loftlinn gëtt nieft der Längt vum berechenten Wee ugewisen.</string>
-    <string name="init_save_log_img">Biller späicheren</string>
-    <string name="init_summary_save_log_img">Biller vun de Logs späicheren</string>
     <string name="init_units">Imperial Eenheeten</string>
     <string name="init_summary_units">Imperial Eenheeten amplaz vu metreschen Eenheeten benotzen</string>
     <string name="init_log_offline">Offline loggen</string>
@@ -521,8 +517,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Lizenz</string>
     <!-- helpers -->
     <!-- export -->
     <!-- GC attributes -->
@@ -591,12 +585,11 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
