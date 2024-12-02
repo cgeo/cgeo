@@ -1,43 +1,45 @@
+Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovské obrazovce.<br> (Možná budete chtít [konfigurovat položku rychlého spuštění](cgeo-setting://quicklaunchitems_sorted) nebo [přizpůsobit spodní navigaci](cgeo-setting://custombnitem) pro snadnější přístup, je třeba nejprve povolit rozšířené nastavení.)
+
 ### Mapa
-- Novinka: "Úprava osobní poznámky" z informačního listu kešky
-- Oprava: Terasové body nejsou filtrovány při mapování jedné kešky (Sjednocená mapa)
-- Novinka: Podpora uživatelsky definovaných poskytovatelů dlaždic
-- Oprava: Obnovení dat mapy po otevření / zavření dialogu nastavení (Sjednocená mapa)
-- Novinka: Přepínání zobrazení budov 2D/3D (Sjednocená mapa OSM maps)
-- Novinka: Ukládání/obnovení kešky z vyskakovacího okna přesunuto na pozadí
-- Změna: Hledat souřadnice: Zobrazit směr a vzdálenost k cíli a ne k aktuální pozici
-- Novinka: Grafický indikátor D/T v informačním listu kešky
-- Oprava: Kompasová růžice skrytá, když je viditelný panel filtrů (Sjednocená mapa)
-- Změna: Odstraněny legendy k tématu mapy
-- Oprava: Více vyskakovacích oken pro výběr navigace při dlouhém stisknutí tlačítka
+- Novinka: Ukládání motivu mapy podle poskytovatele dlaždic (Sjednocená mapa)
+- Novinka: Zvýraznění vybrané kešky/trasového bodu (Sjednocená mapa)
+- Novinka: Přidán oddělovač mezi offline a online zdroje map
+- Novinka: Podpora Mapsforge jako alternativy k VTM ve Sjednocené mapě, viz [Nastavení => Zdroje map => Sjednocená mapa](cgeo-setting://useMapsforgeInUnifiedMap)
+- Změna: Volba "Zobrazit výškový graf" přesunuto do nabídky dlouhého klepnutí (Sjednocená mapa)
+- Změna: Použití nového algoritmu stínování kopců pro offline mapy Mapsforge
+- Novinka: Podpora stínování kopců pro offline mapy Sjednocená mapa Mapsforge
+- Novinka: Podpora stínování kopců pro mapy Sjednocená mapa VTM (vyžaduje online připojení)
+- Oprava: Vyhledávání adres nezohledňuje živý režim (Sjednocená mapa)
+- Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
+- Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
+- Změna: Funkce pro správu offline dat (stahování map, kontrola chybějících dat o trasování / stínování kopců) přesunuty do nabídky výběru map => „Správa offline dat“
 
 ### Detaily kešky
-- Novinka: Zobrazení obrázků propojených v "osobní poznámce" na kartě Obrázky
-- Změna: Zjednodušení akce dlouhého klepnutí v detailech kešky a detailech sledovatelných předmětů
-- Novinka: Lepší vyhlazování obrázků v logu
-- Změna: Změňte ikonu "upravit seznamy" z tužky na seznam + tužka
-- Oprava: Selhání funkce vanity na dlouhých řetězcích
-- Oprava: Chybná priorita parsování v záloze vzorce
-- Změna: Povolit větší rozsahy celých čísel ve vzorcích (zakázat použití negace)
-- Novinka: Povolení uživatelsky uložených obrázků kešky při vytváření/úpravě logu
-- Oprava: Obrázky spoilerů se již nenačítají (změna webových stránek)
+- Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
+- Novinka: Povolení velkých celých čísel ve vzorcích
+- Novinka: Podpora více konstelací pro proměnné ve vzorcích
+- Oprava: Více obrázků v osobní poznámce nebylo přidáno na kartu Obrázky
+- Oprava: Zpracování projekcí v trasových bodech a osobních poznámkách
+- Novinka: Dlouhým klepnutím na datum v logu se načte předchozí datum logu
+- Oprava: Obnovení kešky na původní souřadnice neodstraní příznak “změněné souřadnice“
+- Novinka: Potvrzení přepsání logu v rychlém offline logu
+- Novinka: Aktualizace stavu kešky při odeslání logu
+- Novinka: Barevné zobrazení HTML zdroje s podrobnostmi o kešce
 
 ### Obecné
-- Novinka: Přepínač pro ruční nebo automatické nastavení stavu nálezu u kešek Lab Adventures
-- Novinka: Dialogové okno pro výběr seznamu: Automatické seskupování seznamů kešek s ":" v názvu
-- Změna: Použijte OSM Nominatum jako záložní geokodér, který nahradí geokodér MapQuest (který nám již nefunguje)
-- Změna: Aktualizace doplňku BRouter na verzi 1.7.5
-- Novinka: Čtení informací o nadmořské výšce ze stopy při importu
-- Novinka: API pro Locus nyní podporuje "virtuální" velikost kešky
-- Oprava: Výsledky vyhledání místa již nejsou řazeny podle vzdálenosti od cílového místa
-- Novinka: filtr "Upravené souřadnice"
-- Změna: Aktualizováno cílové SDK na verzi 34, aby bylo v souladu s nadcházejícími požadavky Obchodu Play
-- Novinka: Do výběru profilů směrování byla přidána položka "žádný"
-- Změna: Zlepšen popis funkce „údržba“ (odstranit zbytková data)
-- Novinka: Zobrazení varování při výskytu chyby HTTP 429 (Příliš mnoho požadavků)
-- Oprava: Blikání při obnovení seznamu kešek
-- Novinka: Povolení zobrazení hesel v konfiguraci konektoru
-- Oprava: Vyhledávání geokretů již nefunguje při použití sledovacích kódů
-- Oprava: Na některých zařízeních chybí možnost "kopírovat do schránky" (viz nastavení => systém)
-- Novinka: Nabídka manuálního přihlášení při chybě Captcha
-
+- Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
+- Novinka: Povolení více úrovní hierarchie v seznamech kešek
+- Novinka: Vyhrazené ikony pro typy eventů na geocaching.com blockparty a HQ
+- Novinka: Nastavení preferované velikosti obrázku pro obrázky načtené z kešek a trasovatelných předmětů na webu geocaching.com
+- Oprava: Volba „Otevřít v prohlížeči“ nefunguje pro sledovatelné protokoly
+- Novinka: Možnost spravovat stažené soubory (mapy, motivy, směrovací data a data stínování kopců)
+- Novinka: Možnost odstranit kešku ze všech seznamů (= označit ji jako ke smazání)
+- Oprava: Obnovení souřadnic nezjištěno pomocí c:geo pro neuložené kešky
+- Novinka: Povolit vymazání filtru, pokud není uložen žádný pojmenovaný filtr
+- Oprava: Vyskakující potvrzení "Prázdný seznam" při spuštění stahování v nově vytvořeném seznamu
+- Změna: Vlastní kešky s offline logy zobrazují značku offline logu
+- Novinka: Nastavitelný formát data (např. logy kešek), viz [Nastavení => Vzhled => Formát data](cgeo-settings://short_date_format)
+- Novinka: Přesměrování informací o konektorech na domovské obrazovce na obrazovku předvoleb konkrétního konektoru
+- Novinka: Další emotikony pro ikony kešek
+- Změna: Filtr typu kešky „Speciální“ zahrnuje události typu mega, giga, community celebration, HQ celebtration, block party a maze
+- Změna: Filtr typu kešky „Ostatní“ zahrnuje typy GCHQ, APE a neznámé typy
