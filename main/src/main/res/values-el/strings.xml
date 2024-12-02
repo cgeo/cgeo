@@ -208,7 +208,6 @@
     <string name="err_detail_cache">Το c:geo δεν μπορεί να εμφανίσει την κρύπτη που θέλετε. Μα είναι πράγματι κρύπτη;</string>
     <string name="err_detail_cache_find">Το c:geo δεν βρίσκει καμία κρύπτη</string>
     <string name="err_detail_cache_find_some">Το c:geo δεν βρίσκει αυτήν την κρύπτη.</string>
-    <string name="err_detail_cache_find_any">Το c:geo δεν βρίσκει καμία κρύπτη.</string>
     <string name="err_detail_no_spoiler">Το c:geo δεν βρήκε spoiler εικόνες για αυτή την κρύπτη.</string>
     <string name="err_detail_still_working">Δεν έχει ολοκληρωθεί η προηγούμενη λειτουργία.</string>
     <string name="err_detail_premium_log_found">Αυτή η κρύπτη είναι διαθέσιμη μόνο σε premium μέλη του geocaching.com. Επομένως, δεν είναι δυνατή η εμφάνιση των πληροφοριών της κρύπτη.\n\n Ωστόσο, εάν έχετε ήδη βρει αυτήν την κρύπτη, μπορείτε να την καταγράψετε εδώ.</string>
@@ -1464,8 +1463,6 @@
     <string name="map_showwp_visited">Επίσκεψη</string>
     <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων</string>
     <string name="init_summary_renderthemefolder_synctolocal">Αυτό θα συγχρονίσει τα θέματα σας σε έναν ιδιωτικό φάκελο εφαρμογών για να βελτιώσει την απόδοση ανοίγματος των χαρτών με κόστος κάποιο χώρο αποθήκευσης ατην συσκευή.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Αυτό θα συγχρονίζει συνεχώς το περιεχόμενο του φακέλου ΄΄θέμα χάρτη΄΄ σε αποκλειστικό φάκελο για ταχύτερη πρόσβαση. Σιγουρευτείτε ότι ο φάκελος θεμάτων σας περιέχει μόνο τα θέματα και όχι πρόσθετα (μεγάλα) αρχεία πριν ενεργοποιήσετε αυτή τη δυνατότητα.\n\nΟ φάκελος χάρτη \'%1$s\' έχει προς το παρόν %2$s, %3$s και μέγεθος %4$s.\n\nΘέλετε να ενεργοποιήσετε το συγχρονισμό φακέλων;</string>
     <string name="onetime_mapthemefixslow_title">Διόρθωση αποτύπωσης αργού θέματος χάρτη</string>
     <string name="onetime_mapthemefixslow_message">Εργασία με μη-συμπιεσμένα θέματα χάρτη μπορεί να μειώσει την απόδοση ανοίγματος του προβολέα χάρτη. Μπορείτε να συμπιεσετε ή να συγχρονίσετε τα θέματα σας για να πάρετε ταχύτερη απόδοση και να μειώσετε την καθυστέρηση στην προβολή του χάρτη.</string>
     <string name="map_theme_select">Επιλογή θέματος χάρτη</string>
@@ -1590,10 +1587,6 @@
     <string name="do_auto">Αυτόματα</string>
     <string name="do_flat">Επίπεδο</string>
     <string name="do_upright">Κατακόρυφος</string>
-    <!-- license -->
-    <string name="license">Άδεια χρήσης</string>
-    <string name="license_show">Εμφάνιση άδειας χρήσης</string>
-    <string name="license_dismiss">Απόρριψη</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Προηγούμενη εκδήλωση</string>
     <string name="helper_calendar_pastevent_question">Η ημερομηνία της εκδήλωσης έχει περάσει. Να προστεθεί ούτως ή άλλως;</string>
@@ -2198,6 +2191,7 @@
     <string name="wizard_skip_wizard_warning">το c:geo μπορεί να μην λειτουργήσει όπως αναμένεται μέχρι να ολοκληρωθούν οι ρυθμίσεις. Ανάλογα με τη ρύθμιση c:geo που λείπει μπορεί να μην είναι σε θέση να διαβάσει/αποθηκεύσει δεδομένα όπως χάρτες εκτός σύνδεσης, geocaches, αρχεία καταγραφής κλπ.\n\nΌποτε αισθάνεστε έτοιμοι να ολοκληρώσετε τις ρυθμίσεις, είτε επιλέξτε \"Οδηγός διαμόρφωσης\" στο κύριο μενού είτε επανεκκινήστε το c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s ο συγχρονισμός φακέλου ολοκληρώθηκε μετά από %2$s, %3$d από %4$s χρειάζεται συγχρονισμό</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Προηγούμενο</string>
     <string name="skip">Παράλειψη</string>
