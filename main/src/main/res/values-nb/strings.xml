@@ -229,7 +229,6 @@
     <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
     <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne cachen</string>
     <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
-    <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher.</string>
     <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
     <string name="err_detail_still_working">Er fremdeles opptatt med en annen oppgave.</string>
     <string name="err_detail_premium_log_found">Denne cachen er kun tilgjengelig for premium-medlemmer på geocaching.com. Derfor kan ikke cacheinformasjonen vises.\n\nHvis du allerede har funnet denne cachen, kan du imidlertid logge den her.</string>
@@ -1142,6 +1141,7 @@
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
+    <string name="cache_status_attended">Deltok</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
     <string name="cache_status_archived">Arkivert</string>
@@ -1342,7 +1342,6 @@
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besøkt</string>
     <string name="init_renderthemefolder_synctolocal">Synkroniser temaer</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av temamappe</string>
     <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="map_theme_select">Velg karttema</string>
     <string name="map_theme_options">Valg for karttemaer</string>
@@ -1366,6 +1365,7 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
+    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1385,6 +1385,7 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
@@ -1462,10 +1463,6 @@
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flat</string>
     <string name="do_upright">Stående</string>
-    <!-- license -->
-    <string name="license">Lisens</string>
-    <string name="license_show">Vis lisens</string>
-    <string name="license_dismiss">Avvis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
     <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
@@ -2027,6 +2024,7 @@
     <string name="wizard_skip_wizard_warning">c:geo vil kanskje ikke fungere som forventet før konfigurasjonen er fullført. Avhengig av den manglende konfigurasjonen vil c:geo kanskje ikke kunne lese/lagre data som offline-kart, geocacher, loggfiler osv.\n\nNår du føler deg klar til å fullføre oppsettet, kan du enten velge \"Konfigurasjonsveiviser\" i hovedmenyen eller starte c:geo på nytt.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappesynkronisering fullført etter %2$s, %3$d av %4$s trengte synkronisering</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Hopp over</string>

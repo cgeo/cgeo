@@ -245,7 +245,6 @@
     <string name="err_detail_cache">원하시는 지오캐시를 표시할 수 없습니다. 진짜 지오캐시가 맞나요?</string>
     <string name="err_detail_cache_find">c:geo가 지오캐시를 찾을 수 없습니다.</string>
     <string name="err_detail_cache_find_some">이 지오캐시를 찾을 수 없습니다.</string>
-    <string name="err_detail_cache_find_any">아무런 지오캐시가 없습니다.</string>
     <string name="err_detail_no_spoiler">이 캐시의 스포일러 사진을 찾을 수 없습니다.</string>
     <string name="err_detail_still_working">현재 다른 작업중입니다.</string>
     <string name="err_detail_premium_log_found">이 캐시는 geocaching.com의 프리미엄 회원만 사용할 수 있습니다. 따라서 캐시 정보를 표시 할 수 없습니다.\n\n그렇지만 이 캐시를 이미 찾은 경우 여기에 로그할 수 있습니다.</string>
@@ -902,7 +901,6 @@
     <string name="menu_elevation_info">고도 (지도):</string>
     <string name="elevation_selected">선택한 위치의 표고 (지도)</string>
     <string name="elevation_difference">표고차</string>
-    <string name="distance">거리:</string>
     <string name="copy_coordinates">좌표 복사</string>
     <string name="selected_position">선택한 위치</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
@@ -1420,6 +1418,7 @@
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
     <string name="cache_status_offline_log">저장된 로그</string>
+    <string name="cache_status_attended">참가했음</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
     <string name="cache_status_archived">영구보관됨</string>
@@ -1695,8 +1694,6 @@
     <string name="map_showwp_visited">방문했음</string>
     <string name="init_renderthemefolder_synctolocal">테마 동기화</string>
     <string name="init_summary_renderthemefolder_synctolocal">이렇게하면 테마를 앱 전용 폴더에 동기화하여 일부 장치 저장 공간을 희생하면서 지도 보기 열기 성능을 향상시킵니다.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">테마 폴더 동기화 켜기</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">이렇게하면 더 빠른 파일 액세스를 위해지도 테마 폴더의 콘텐츠가 앱 전용 폴더에 지속적으로 동기화됩니다. 이 기능을 활성화하기 전에 테마 폴더에 테마 만 포함되고 추가 (대용량) 데이터가 없는지 확인하십시오.\n\n지도 테마 폴더 \'%1$s\'의 현재 크기는 %2$s, %3$s이며 크기는 %4$s입니다.\n\n폴더 동기화를 켜시겠습니까?</string>
     <string name="onetime_mapthemefixslow_title">느린 지도 테마 렌더링 수정</string>
     <string name="onetime_mapthemefixslow_message">압축되지 않은 지도 테마로 작업하면 지도 보기 열기 성능이 저하 될 수 있습니다. 테마를 압축하거나 동기화하여 더 빠른 성능을 얻고 지도 시작 지연을 줄일 수 있습니다.</string>
     <string name="map_theme_select">지도 테마 선택</string>
@@ -1838,10 +1835,6 @@
     <string name="do_auto">자동</string>
     <string name="do_flat">평평한</string>
     <string name="do_upright">수직으로 세워 둔</string>
-    <!-- license -->
-    <string name="license">라이센스</string>
-    <string name="license_show">라이선스 보기</string>
-    <string name="license_dismiss">무시</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">지난 이벤트</string>
     <string name="helper_calendar_pastevent_question">이벤트 날짜가 과거입니다. 그래도 추가할까요?</string>
@@ -2494,6 +2487,7 @@
     <string name="wizard_skip_wizard_warning">c:geo는 구성이 완료 될 때까지 예상대로 작동하지 않을 수 있습니다. 누락 된 구성에 따라 c:geo는 오프라인지도, 지오캐시, 로그 파일 등과 같은 데이터를 읽고 저장하지 못할 수 있습니다.\n\n설정을 완료 할 준비가되면 주 메뉴에서 \"구성 마법사\"를 선택하거나 c:geo를 다시 시작하십시오.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%2$s 후 %1$s 폴더 동기화 완료, %4$s 중 %3$d 동기화 필요합니다</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">이전</string>
     <string name="skip">건너뛰기</string>

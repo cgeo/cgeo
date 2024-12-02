@@ -245,7 +245,6 @@
     <string name="err_detail_cache">c:geo ei voi näyttää haluamaasi geokätköä. Onko se varmasti geokätkö?</string>
     <string name="err_detail_cache_find">c:geo ei löydä geokätköä</string>
     <string name="err_detail_cache_find_some">c:geo ei löydä kyseistä geokätköä.</string>
-    <string name="err_detail_cache_find_any">c:geo ei löydä yhtään geokätköä.</string>
     <string name="err_detail_no_spoiler">c:geo ei löytänyt kätkön spoilerikuvia.</string>
     <string name="err_detail_still_working">Työstetään vielä toista tehtävää.</string>
     <string name="err_detail_premium_log_found">Tämä kätkö on saatavilla vain geocaching.com premium-jäsenille. Tällöin kätkön tietoja ei voida näyttää.\n\n Mutta jos olet kuitenkin löytänyt tämän kätkön, voit kirjata löytösi täällä.</string>
@@ -1401,6 +1400,7 @@
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
+    <string name="cache_status_attended">Osallistui</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
     <string name="cache_status_archived">Arkistoitu</string>
@@ -1658,8 +1658,6 @@
     <string name="map_showwp_visited">Vierailtu</string>
     <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tämä synkronoi säännöllisesti karttateematiedostokansion sisällön sovelluksen yksityiseen kansioon nopeamman pääsyn takaamiseksi. Varmista, että teemakansiosi sisältää vain teematiedostot, mutta ei muita (isoja) tiedostoja ennen tämän toiminnon päälle kytkemistä.\n\nKarttateematiedostokansiossasi \'%1$s\' on tällä hetkellä %2$s, %3$s ja on %4$s:n kokoinen\n\nHaluatko ottaa kansion synkronoinnin käyttöön?</string>
     <string name="onetime_mapthemefixslow_title">Korjaa hidas kartan teeman renderöinti</string>
     <string name="onetime_mapthemefixslow_message">Ei-pakattujen teemojen käyttäminen voi hidastaa karttanäkymän avaamisen suorituskykyä. Voit pakata tai synkronisoida teemasi nopeuttaaksesi kartan käynnistymistä ja pienentää viivettä.</string>
     <string name="map_theme_select">Valitse kartan teema</string>
@@ -1690,6 +1688,7 @@
     <string name="google_maps_option_group_map">Karttavalinnat</string>
     <string name="google_maps_option_show_traffic">Näytä liikenne</string>
     <string name="google_maps_option_show_buildings">Näytä 3D-rakennukset</string>
+    <string name="google_maps_option_group_theme">Teeman asetukset</string>
     <string name="google_maps_option_show_feature_theme">Näytä teeman ominaisuudet</string>
     <string name="google_maps_option_show_feature_administrative_all">Näytä hallinoiva</string>
     <string name="google_maps_option_show_feature_landscape_all">Näytä vaakataso</string>
@@ -1718,6 +1717,7 @@
     <string name="search_finder">Löytänyt</string>
     <string name="search_finder_prefill">Löytäjä</string>
     <string name="search_finder_button">Etsi löytäjän mukaan</string>
+    <string name="search_filter">Suodatin</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_tb">Reissaaja</string>
@@ -1797,10 +1797,6 @@
     <string name="do_auto">Automaattinen</string>
     <string name="do_flat">Vaaka</string>
     <string name="do_upright">Pysty</string>
-    <!-- license -->
-    <string name="license">Lisenssi</string>
-    <string name="license_show">Näytä lisenssi</string>
-    <string name="license_dismiss">Hylkää</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Mennyt tapahtuma</string>
     <string name="helper_calendar_pastevent_question">Päivämäärä on menneisyydessä. Lisätäänkö tästä huolimatta?</string>
@@ -2454,6 +2450,7 @@
     <string name="wizard_skip_wizard_warning">c:geo ei ehkä toimi odotetusti ennen kuin määritys on valmis. Riippuen puuttuvista asetuksista c:geo ei ehkä pysty lukemaan tai tallentamaan tietoja, kuten offline-karttoja, geokätköjä, lokitiedostoja jne.\n\nKun olet valmis viimeistelemään määrityksen, valitse \"Configuration wizard\" päävalikosta tai käynnistä c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s kansion synkronointi päättyi %2$s jälkeen, %3$d %4$s :sta tarvitusta synkronoinnista</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Edellinen</string>
     <string name="skip">Ohita</string>

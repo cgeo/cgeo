@@ -168,7 +168,6 @@
     <string name="err_detail_cache">c:geo kann de Cache net uweisen deen dir wëllt. Ass et wierklech ee Geocache?</string>
     <string name="err_detail_cache_find">c:geo ka keng Cachen fannen</string>
     <string name="err_detail_cache_find_some">c:geo kann dëse Cache net fannen.</string>
-    <string name="err_detail_cache_find_any">c:geo ka keng Cachen fannen.</string>
     <string name="err_detail_no_spoiler">c:geo huet keng Hiweisbiller fonnt fir dëse Cache.</string>
     <string name="err_detail_still_working">Schafft nach ëmmer un enger anerer Aufgab.</string>
     <string name="err_detail_premium_log_found">Dëse Cache ass just zougänglech fir Premium Membere vu Geocaching.com. Dowéinst kënne keng Informatiounen ugewisen ginn.\n\nWa dir de Cache awer scho fonnt hutt, da kënnt dir en hei loggen.</string>
@@ -500,6 +499,7 @@
     <!-- auth GC -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_status_attended">Deelgeholl</string>
     <!-- html styles -->
     <!-- coordinate calculator hints -->
     <!-- gpx -->
@@ -517,8 +517,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Lizenz</string>
     <!-- helpers -->
     <!-- export -->
     <!-- GC attributes -->
@@ -587,6 +585,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
     <!-- Smileys GC / OC -->

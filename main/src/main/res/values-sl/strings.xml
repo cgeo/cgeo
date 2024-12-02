@@ -161,7 +161,6 @@
     <string name="err_detail_cache">c:geo ne more prikazati željenega zaklada. Ali je res zaklad?</string>
     <string name="err_detail_cache_find">c:geo ni našel zaklada</string>
     <string name="err_detail_cache_find_some">c:geo ni našel tega zaklada.</string>
-    <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
     <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
     <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
     <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
@@ -556,6 +555,7 @@
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
+    <string name="cache_status_attended">Udeležba</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
     <string name="cache_status_archived">Arhiviran</string>
@@ -712,10 +712,6 @@
     <string name="destination_select">Izbira destinacije</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenca</string>
-    <string name="license_show">Pokaži licenco</string>
-    <string name="license_dismiss">Zapri</string>
     <!-- helpers -->
     <string name="helper_sendtocgeo_title">Pošlji v c:geo</string>
     <string name="helper_sendtocgeo_description">Send to c:geo je razširitev za vaš brskalnik <strong>na vašem računalniku</strong>. Ko brskate na geocaching.com, lahko iz spletne strani pošljete zaklad direktno na vašo napravo s klikom na gumb znotraj brskalnika.</string>
@@ -1034,6 +1030,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Razveljavi</string>
     <!-- Multi-Selections -->

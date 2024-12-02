@@ -205,7 +205,6 @@
     <string name="err_detail_cache">Sajnáljuk, a c:geo nem tudja megmutatni a kért ládát. Biztos, hogy ez egy láda?</string>
     <string name="err_detail_cache_find">Sajnos a c:geo nem találja a ládát.</string>
     <string name="err_detail_cache_find_some">Sajnos a c:geo nem találja azt a ládát.</string>
-    <string name="err_detail_cache_find_any">Sajnos a c:geo nem talál ládákat.</string>
     <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
     <string name="err_detail_still_working">Egy másik feladat még folyamatban van.</string>
     <string name="err_detail_premium_log_found">Ez a láda csak a geocaching.com prémium tagjai számára érhető el. Ezért a láda információi nem jeleníthetők meg.\n\nHa azonban már megtaláltad ezt a ládát, itt logolhatod.</string>
@@ -778,6 +777,7 @@
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
     <string name="cache_status_offline_log">Offline log</string>
+    <string name="cache_status_attended">Részt vettem</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
     <string name="cache_status_archived">Archiválva</string>
@@ -886,6 +886,7 @@
     <string name="map_live_disable">Élő mód vége</string>
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
+    <string name="google_maps_option_group_theme">Térképstílus beállítások</string>
     <!-- search -->
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
@@ -944,10 +945,6 @@
     <string name="destination_select">Cél kiválasztása</string>
     <string name="osmand_marker_cgeo">c:geo jelölő</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenc</string>
-    <string name="license_show">Licenc mutatása</string>
-    <string name="license_dismiss">Elutasítás</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Múltbéli esemény</string>
     <string name="helper_calendar_pastevent_question">Az esemény időpontja már elmúlt. Mégis hozzáadod?</string>
@@ -1323,6 +1320,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Mégsem</string>
     <!-- Multi-Selections -->

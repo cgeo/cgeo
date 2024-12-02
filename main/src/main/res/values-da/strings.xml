@@ -204,7 +204,6 @@
     <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
     <string name="err_detail_cache_find">c:geo kan ikke finde geocachen</string>
     <string name="err_detail_cache_find_some">c:geo kan ikke finde denne denne geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo kan ikke finde nogen geocacher.</string>
     <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
     <string name="err_detail_still_working">Arbejder stadig på en anden opgave.</string>
     <string name="err_detail_premium_log_found">Denne cache er kun tilgængelig for premium-medlemmer af geocaching.com. Derfor kan cacheinformationen ikke vises.\n\nMen hvis du allerede har fundet denne cache, kan du logge den her.</string>
@@ -972,6 +971,7 @@
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log gemt</string>
+    <string name="cache_status_attended">Deltog</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
     <string name="cache_status_archived">Arkiveret</string>
@@ -1112,6 +1112,7 @@
     <string name="map_as_list">Vis som liste</string>
     <string name="map_select_multiple_items">Vælg element</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
+    <string name="google_maps_option_group_theme">Indstillinger for tema</string>
     <!-- search -->
     <string name="search_bar_hint">Søg caches/trackables</string>
     <string name="search_bar_hint_settings">Søgeindstillinger</string>
@@ -1127,6 +1128,7 @@
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
     <string name="search_finder">Fundet af</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
@@ -1190,10 +1192,6 @@
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flad</string>
     <string name="do_upright">Opretstående</string>
-    <!-- license -->
-    <string name="license">Licens</string>
-    <string name="license_show">Vis licens</string>
-    <string name="license_dismiss">Afvis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
     <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
@@ -1683,6 +1681,7 @@
     <string name="wizard_status_title">Konfigurations status</string>
     <string name="wizard_status_platform">Geocaching tjenester</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Spring over</string>
