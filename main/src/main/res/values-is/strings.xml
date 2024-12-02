@@ -127,7 +127,6 @@
     <string name="err_detail_cache">c:geo getur ekki sýnt geokassann sem þú vilt. Er þetta í alvörunni geokassi?</string>
     <string name="err_detail_cache_find">c:geo finnur ekki geocatch</string>
     <string name="err_detail_cache_find_some">c:geo finnur ekki þetta geocatch.</string>
-    <string name="err_detail_cache_find_any">c:geo finnur ekki nein geocatch.</string>
     <string name="err_detail_still_working">Er enn að vinna í öðru verki.</string>
     <string name="err_application_no">c:geo finnur ekki forrit við hæfi.</string>
     <string name="err_auth_initialize">c:geo gat ekki upphafsstillt heimildarveitingarferlið.</string>
@@ -423,6 +422,7 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
+    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -532,10 +532,6 @@
     <string name="use_gps">Aðeins nota GPS</string>
     <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Leyfi</string>
-    <string name="license_show">Sýna leyfi</string>
-    <string name="license_dismiss">Loka</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_question">Dagsetning viðburðar er í fortíðinni. Viltu samt bæta honum við?</string>
     <string name="helper_sendtocgeo_title">Senda í c:geo</string>
@@ -693,6 +689,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
     <!-- Multi-Selections -->
