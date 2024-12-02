@@ -208,7 +208,6 @@
     <string name="err_detail_cache">c:geo no puede mostrar el caché que quieres. ¿Seguro que es un geocaché?</string>
     <string name="err_detail_cache_find">c:geo no puede encontrar ningún caché</string>
     <string name="err_detail_cache_find_some">c:geo no puede encontrar ese caché.</string>
-    <string name="err_detail_cache_find_any">c:geo no puede encontrar ningún caché.</string>
     <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este caché.</string>
     <string name="err_detail_still_working">Todavía hay otra tarea en ejecución.</string>
     <string name="err_detail_premium_log_found">Este caché sólo está disponible para miembros premium de geocaching.com. Por lo tanto, la información de caché no se puede mostrar.\n\nSin embargo, si ya has encontrado este caché, puedes registrarlo aquí.</string>
@@ -308,9 +307,6 @@
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_backup">Copia de seguridad / Restauración</string>
-    <string name="menu_update">Actualizar datos sin conexión</string>
-    <string name="menu_update_routingdata">Datos de ruta</string>
-    <string name="menu_update_mapdata">Datos del mapa</string>
     <string name="menu_history">Historial</string>
     <string name="menu_search_clipboard">Cargar geocódigo desde el portapapeles</string>
     <string name="menu_history_longstring">Historial de búsqueda</string>
@@ -361,7 +357,6 @@
     <string name="caches_sort_vote">Votos (valoración propia)</string>
     <string name="caches_sort_inventory">Número de rastreables</string>
     <string name="caches_sort_date_hidden">Fecha escondido</string>
-    <string name="caches_sort_date_logged">Fecha de registro</string>
     <string name="caches_sort_finds">Encontrados</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Fecha de guardado en dispositivo</string>
@@ -748,8 +743,6 @@
     <string name="init_summary_prevent_cache_note_merge">Si esta opción está activada, c:geo eliminará permanentemente la nota almacenada localmente y la reemplazará por la nota personal en el servidor. No se hará ninguna fusión.</string>
     <string name="init_customtabs_as_browser">Usar Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Los sitios web externos se mostrarán sin salir de c:geo (sólo es posible si Chrome está instalado)</string>
-    <string name="init_save_log_img">Guardar imágenes</string>
-    <string name="init_summary_save_log_img">Guardar imágenes de los registros</string>
     <string name="init_units">Usar millas/pies</string>
     <string name="init_summary_units">Usar millas/pies (unidades imperiales)</string>
     <string name="init_log_offline">Registro sin conexión</string>
@@ -1378,8 +1371,6 @@
     <string name="map_showwp_visited">Visitado</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Esto sincronizará sus temas en una carpeta privada de la aplicación para mejorar el rendimiento del visor de mapas a costa de algún espacio de almacenamiento del dispositivo.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronización de la carpeta de temas</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Esto sincronizará continuamente el contenido de la carpeta Temas del Mapa en una carpeta de aplicación privada para un acceso más rápido a los archivos. Asegúrese de que la carpeta de temas sólo contiene sus temas y no hay datos adicionales (grandes) antes de activar esta función.\n\nLa carpeta de temas de tu mapa \'%1$s\' tiene actualmente %2$s, %3$s y un tamaño de %4$s.\n\n¿Desea activar la sincronización de carpetas?</string>
     <string name="onetime_mapthemefixslow_title">Corrige el procesamiento lento del tema del mapa</string>
     <string name="onetime_mapthemefixslow_message">Trabajar con temas de mapas no comprimidos puede disminuir el rendimiento del visor de mapas. Puede comprimir o sincronizar sus temas para obtener un rendimiento más rápido y reducir el retraso al iniciar el mapa.</string>
     <string name="map_theme_select">Seleccionar tema del mapa</string>
@@ -1401,7 +1392,6 @@
     <string name="map_show_other_title">Mostrar otros:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtro de caché demasiado complejo</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtro actual de caché es demasiado complejo para aplicar opciones adicionales aquí. Normalmente esto significa que el filtro de caché contiene expresiones NOT o OR en lugar de un simple AND.</string>
-    <string name="map_theme_legend">Leyenda del Tema</string>
     <string name="google_maps_option_group_theme">Opciones de Temas</string>
     <!-- search -->
     <string name="geo_search_label">Buscar cachés cercanos</string>
@@ -1503,10 +1493,6 @@
     <string name="do_auto">Automático</string>
     <string name="do_flat">Plano</string>
     <string name="do_upright">Vertical</string>
-    <!-- license -->
-    <string name="license">Licencia</string>
-    <string name="license_show">Mostrar licencia</string>
-    <string name="license_dismiss">Descartar</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Evento pasado</string>
     <string name="helper_calendar_pastevent_question">La fecha del evento ya ha pasado. ¿Añadirlo de todos modos?</string>
@@ -2015,7 +2001,6 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_filename">Descargando %s</string>
     <string name="downloadmanager_not_available">No se puede descargar el archivo, el gestor de descargas del sistema no está disponible</string>
     <string name="download_started">Descarga iniciada en segundo plano</string>
-    <string name="download_none_selected">Ningún archivo seleccionado para descargar</string>
     <string name="downloadmap_target_not_writable">El objetivo seleccionado \"%s\" no tiene permisos de escritura - el archivo de mapa descargado se guarda en la carpeta de descarga del sistema y debe moverse manualmente a la carpeta del mapa.</string>
     <string name="downloadmap_allow_metered_network">Permitir descargar a través de red (por ejemplo: conexión móvil)</string>
     <string name="download_confirmation">%1$s¿Descargar archivo \"%2$s\"?%3$s</string>
@@ -2035,12 +2020,10 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_download">descargar</string>
     <string name="downloadmap_retrieving_directory_data">Recuperando datos de la carpeta…</string>
     <string name="downloadmap_checking_for_updates">Comprobando actualizaciones…</string>
-    <string name="downloadtile_title">Faltan datos de enrutaniento</string>
     <string name="downloadtile_info">c:geo no puede calcular la ruta solicitada ya que falta algún archivo de datos de enrutamiento. ¿Desea descargar los datos de enrutamiento que faltan?</string>
     <string name="check_tiles_menu">Comprobar si faltan datos de ruta</string>
     <string name="check_tiles_found">Los datos de ruta ya están presentes</string>
     <string name="check_tiles_missing">Faltan datos de enrutamiento:</string>
-    <string name="check_tiles_unsupported">Advertencia: Los datos de ruta no están disponibles al menos en parte para la región elegida</string>
     <string name="tileupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de datos de ruta descargados. Mantenga pulsado para posponer.</string>
     <string name="mapupdate_info">Pulse aquí para comprobar si hay actualizaciones de los archivos de mapa y tema. Mantenga pulsado para posponer.</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
@@ -2102,6 +2085,7 @@ Nombre de archivo:%2$s</string>
     <string name="wizard_skip_wizard_warning">c:geo podría no funcionar como se esperaba hasta que la configuración se haya completado. Dependiendo de la configuración que falte c:geo podría no ser capaz de leer o almacenar datos como mapas sin conexión, geocaches, archivos de registro, etc.\n\nSi desea finalizar la configuración, elija \"Asistente de Configuración\" en el menú principal o reinicie c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Sincronización de carpetas %1$s terminada después de %2$s, %3$d de %4$s necesita sincronización</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Anterior</string>
     <string name="skip">Saltar</string>
@@ -2112,150 +2096,6 @@ Nombre de archivo:%2$s</string>
     <string name="cancel">Cancelar</string>
     <string name="ok" tools:ignore="ButtonCase">Aceptar</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Áreas</string>
-    <string name="rtl_fell_meadow">estiva / pradera</string>
-    <string name="rtl_heath">páramo</string>
-    <string name="rtl_marsh">pantano</string>
-    <string name="rtl_rock">roca</string>
-    <string name="rtl_scree">talud</string>
-    <string name="rtl_scrub">arbustal</string>
-    <string name="rtl_wood_mixed">bosque (mixto)</string>
-    <string name="rtl_wood_coniferous">bosque (coníferas)</string>
-    <string name="rtl_wood_deciduous">bosque (deciduo)</string>
-    <string name="rtl_glacier">glaciar</string>
-    <string name="rtl_grass">césped</string>
-    <string name="rtl_farmland">tierras agrícolas</string>
-    <string name="rtl_orchard">huerta</string>
-    <string name="rtl_vineyard">viñedo</string>
-    <string name="rtl_water">agua</string>
-    <string name="rtl_water_intermittent">agua (intermitente)</string>
-    <string name="rtl_military">militar</string>
-    <string name="rtl_nature_reserve">reserva natural</string>
-    <string name="rtl_nature_reserve_strict">reserva natural (estricta)</string>
-    <string name="rtl_cliff">acantilado</string>
-    <string name="rtl_ridge">cresta</string>
-    <string name="rtl_reef">arrecife</string>
-    <string name="rtl_dyke">dique</string>
-    <string name="rtl_embankment">embotellamiento</string>
-    <string name="rtl_beach">playa</string>
-    <string name="rtl_beach_gravel">playa de gravilla</string>
-    <string name="rtl_spring">manantial</string>
-    <string name="rtl_powerline">tendido eléctrico</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_category_roads_paths">Carretas &amp; Rutas</string>
-    <string name="rtl_paved_path">ruta pavimentada</string>
-    <string name="rtl_paved_path_gravel">ruta pavimentada (gravilla)</string>
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_cairn">montículo de piedra</string>
-    <string name="rtl_drinking_water">agua potable</string>
-    <string name="rtl_guidepost">poste indicador</string>
-    <string name="rtl_info_board">tablón de información</string>
-    <string name="rtl_info_office">oficina de información</string>
-    <string name="rtl_info_terminal">terminal de información</string>
-    <string name="rtl_peak">pico</string>
-    <string name="rtl_peak_cross">cruz de pico</string>
-    <string name="rtl_picnic_site">sitio de picnic</string>
-    <string name="rtl_playground">zona de juegos</string>
-    <string name="rtl_playground_private">parque privado</string>
-    <string name="rtl_recycling">reciclaje</string>
-    <string name="rtl_shelter">refugio</string>
-    <string name="rtl_shelter_picnic">refugio de pícnic</string>
-    <string name="rtl_shelter_rock">refugio de rocas</string>
-    <string name="rtl_telephone">teléfono</string>
-    <string name="rtl_toilets">retretes</string>
-    <string name="rtl_volcano">volcán</string>
-    <string name="rtl_adit_disused">entrada de mina abandonada</string>
-    <string name="rtl_archaeological">arqueológico</string>
-    <string name="rtl_artwork">obra de arte</string>
-    <string name="rtl_attraction">lugar de interés</string>
-    <string name="rtl_boundary_stone">límite (piedra)</string>
-    <string name="rtl_bunker_disused">búnker (abandonado)</string>
-    <string name="rtl_castle">castillo</string>
-    <string name="rtl_cinema">cine</string>
-    <string name="rtl_cross">cruz</string>
-    <string name="rtl_fountain">fuente</string>
-    <string name="rtl_memorial">memorial</string>
-    <string name="rtl_memorial_plaque">placa conmemorativa</string>
-    <string name="rtl_memorial_statue">estatua conmemorativa</string>
-    <string name="rtl_memorial_stolperstein">stolperstein conmemorativo</string>
-    <string name="rtl_memorial_stone">piedra conmemorativa</string>
-    <string name="rtl_memorial_war">memorial de guerra</string>
-    <string name="rtl_monument">monumento</string>
-    <string name="rtl_museum">museo</string>
-    <string name="rtl_ruins">ruinas</string>
-    <string name="rtl_stone_historic">piedra histórica</string>
-    <string name="rtl_theatre">teatro</string>
-    <string name="rtl_water_well">pozo de agua</string>
-    <string name="rtl_wayside_cross">cruce de caminos</string>
-    <string name="rtl_wayside_shrine">santuario de camino</string>
-    <string name="rtl_zoo">zoológico</string>
-    <string name="rtl_library">biblioteca</string>
-    <string name="rtl_arts_centre">centro de artes</string>
-    <string name="rtl_casino">casino</string>
-    <string name="rtl_nightclub">club nocturno</string>
-    <string name="rtl_community_centre">centro comunitario</string>
-    <string name="rtl_social_facility">instalación social</string>
-    <string name="rtl_townhall">ayuntamiento</string>
-    <string name="rtl_wilderness_hut">Cabaña de campo</string>
-    <string name="rtl_wilderness_hut_private">cabaña privada</string>
-    <string name="rtl_bar">bar</string>
-    <string name="rtl_biergarten">Jardín</string>
-    <string name="rtl_cafe">cafetería</string>
-    <string name="rtl_fastfood">comida rápida</string>
-    <string name="rtl_ice_cream">helado</string>
-    <string name="rtl_pub">pub</string>
-    <string name="rtl_restaurant">restaurante</string>
-    <string name="rtl_bbq">Barbacoa</string>
-    <string name="rtl_water_point">fuente de agua</string>
-    <string name="rtl_atm">cajero automático</string>
-    <string name="rtl_bakery">panadería</string>
-    <string name="rtl_bank">banco</string>
-    <string name="rtl_beverages">bebidas</string>
-    <string name="rtl_books">libros</string>
-    <string name="rtl_butcher">carnicería</string>
-    <string name="rtl_chemist">Farmacia</string>
-    <string name="rtl_convenience">tienda variada</string>
-    <string name="rtl_doityourself">Manualidades</string>
-    <string name="rtl_farm_shop">tienda de implementos de granja</string>
-    <string name="rtl_laundry">lavandería</string>
-    <string name="rtl_mall">centro comercial</string>
-    <string name="rtl_marketplace">mercado</string>
-    <string name="rtl_organic">orgánico</string>
-    <string name="rtl_postbox">buzón</string>
-    <string name="rtl_postoffice">oficina de correos</string>
-    <string name="rtl_sports_shop">tienda deportiva</string>
-    <string name="rtl_supermarket">supermercado</string>
-    <string name="rtl_travel_agency">agencia de viajes</string>
-    <string name="rtl_defibrillator">defibrillator</string>
-    <string name="rtl_doctors">médico</string>
-    <string name="rtl_embassy">embajada</string>
-    <string name="rtl_emergency_phone">teléfono de emergencia</string>
-    <string name="rtl_firebrigade">bomberos</string>
-    <string name="rtl_emergency_access_point">punto de acceso de emergencia</string>
-    <string name="rtl_hospital">hospital</string>
-    <string name="rtl_clinic">clínica</string>
-    <string name="rtl_pharmacy">Farmacia</string>
-    <string name="rtl_police">policía</string>
-    <string name="rtl_emergency_fire_hydrant">boca de incendio</string>
-    <string name="rtl_emergency_suction_point">punto de aspiración de emergencia (bomberos)</string>
-    <string name="rtl_adit">adit</string>
-    <string name="rtl_petroleum_well">Pozo de petróleo</string>
-    <string name="rtl_power_coal">Central térmica (carbón)</string>
-    <string name="rtl_power_gas">Central térmica (gas)</string>
-    <string name="rtl_power_nuclear">Central nuclear</string>
-    <string name="rtl_power_water">Central hidráulica</string>
-    <string name="rtl_power_wind">Molinos de viento</string>
-    <string name="rtl_wastewater_plant">planta de aguas residuales</string>
-    <string name="rtl_safety_rope">cuerda de seguridad</string>
-    <string name="rtl_stone">piedra</string>
-    <string name="rtl_traffic_signal">señal de tráfico</string>
-    <string name="rtl_turnstile">torniquete</string>
-    <string name="rtl_viewpoint">mirador</string>
-    <string name="rtl_waterfall">cascada</string>
-    <string name="rtl_alp">alpes</string>
-    <string name="rtl_wetland">humedal</string>
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
     <string name="mcpolling_title">Centro de Mensajes</string>
@@ -2263,4 +2103,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">%d mensaje no leído en el centro de mensajes</item>
         <item quantity="other">%d mensajes no leídos en el centro de mensajes</item>
     </plurals>
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
