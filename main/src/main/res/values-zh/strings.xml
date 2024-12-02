@@ -172,7 +172,6 @@
     <string name="err_detail_cache">c:geo无法显示你想要的藏点。它真的是一个藏点吗？</string>
     <string name="err_detail_cache_find">c:geo找不到藏点</string>
     <string name="err_detail_cache_find_some">c:geo找不到那个藏点。</string>
-    <string name="err_detail_cache_find_any">c:geo找不到任何藏点。</string>
     <string name="err_detail_no_spoiler">c:geo没有找到任何与这个藏点有关的图片。</string>
     <string name="err_detail_still_working">仍在执行另一项任务。</string>
     <string name="err_detail_premium_log_found">这个藏点只对geocaching.com的高级会员开发。因此，c:geo无法展示藏点信息。\n\n然而，如果你已经找到了这个藏点，你可以在此记录。</string>
@@ -660,8 +659,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">许可</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
@@ -708,6 +705,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
     <!-- Smileys GC / OC -->
