@@ -208,7 +208,6 @@
     <string name="err_detail_cache">c: geo istediğiniz Geocache\'yi görüntüleyemiyor. Bu gerçekten bir Geocache mi?</string>
     <string name="err_detail_cache_find">c:geo Geocache bulamıyor</string>
     <string name="err_detail_cache_find_some">c:geo bu Geocache\'yi bulamıyor.</string>
-    <string name="err_detail_cache_find_any">c:geo herhangi bir Geocache\'i bulamıyor.</string>
     <string name="err_detail_no_spoiler">c: geo, bu Geocache için hiçbir ipucu görseli bulamadı.</string>
     <string name="err_detail_still_working">Hala başka bir görev üzerinde çalışıyor.</string>
     <string name="err_detail_premium_log_found">Bu Geocache yalnızca geocaching.com\'un premium üyeleri tarafından kullanılabilir. Bu nedenle, Geocache bilgileri görüntülenemiyor. \n \n Ancak, bu Geocache\'i zaten bulduysanız, buradan kayıt girebilirsiniz.</string>
@@ -1348,8 +1347,6 @@
     <string name="map_showwp_visited">Ziyaret edildi</string>
     <string name="init_renderthemefolder_synctolocal">Temaları senkronize et</string>
     <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek, harita görüntüleyicisinin açılış performansını arttırmak için temalarınızı uygulamaya özel bir klasöre, depolama alanınızın birazını kullanarak, senkronize eder.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Bu seçenek Harita Temaları klasöründeki dosyaları, dosyalara daha hızlı ulaşabilmek için uygulamaya özel bir klasöre senkronize eder. Bu seçeneği etkinleştirmeden önce tema klasörünüzün sadece temalarınızı içerdiğini, fazladan (büyük) dosya içermediğine emin olun.\n\nSizin harita dosyanız \'%1$s\' %4$s boyutunda %2$s, %3$s dosyaya sahip.\n\nKlasör senkronizasyonunu etkinleştirmek istediğinize emin misiniz?</string>
     <string name="onetime_mapthemefixslow_title">Yavaş harita teması görselleştirmesini düzelt</string>
     <string name="onetime_mapthemefixslow_message">Sıkıştırılmamış harita temalarıyla çalışmak, harita görüntüleyicisinin açılış performansını düşürebilir. Daha hızlı performans almak ve haritanın açılışındaki gecikmeyi azaltmak için temalarınızı sıkıştırabilir veya senkronize edebilirsiniz.</string>
     <string name="map_theme_select">Harita temasını seçin</string>
@@ -1473,10 +1470,6 @@
     <string name="do_auto">Otomatik</string>
     <string name="do_flat">Düz</string>
     <string name="do_upright">Dik</string>
-    <!-- license -->
-    <string name="license">Lisans</string>
-    <string name="license_show">Lisansı göster</string>
-    <string name="license_dismiss">Reddet</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Geçmiş etkinlikler</string>
     <string name="helper_calendar_pastevent_question">Etkinlik tarihi geçmişte kaldı. Yine de eklensin mi?</string>
@@ -2065,6 +2058,7 @@
     <string name="wizard_skip_wizard_warning">c:geo, yapılandırma tamamlanana kadar beklendiği gibi çalışmayabilir. Hangi ayarın yapılandırılmamış olduğuna bağlı olarak, c:geo çevrim dışı haritalar, geocache\'ler, kayıt dosyaları vb. verilerinizi okuyamayabilir/depolayamayabilir.\n\nKurulumu bitirmeye hazır olduğunuzda, ana menüdeki \"Yapılandırma sihirbazı\"na girebilir veya c:geo\'yu yeniden başlatabilirsiniz.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
