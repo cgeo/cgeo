@@ -204,7 +204,6 @@
     <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
     <string name="err_detail_cache_find">c:geo kan ikke finde geocachen</string>
     <string name="err_detail_cache_find_some">c:geo kan ikke finde denne denne geocache.</string>
-    <string name="err_detail_cache_find_any">c:geo kan ikke finde nogen geocacher.</string>
     <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
     <string name="err_detail_still_working">Arbejder stadig på en anden opgave.</string>
     <string name="err_detail_premium_log_found">Denne cache er kun tilgængelig for premium-medlemmer af geocaching.com. Derfor kan cacheinformationen ikke vises.\n\nMen hvis du allerede har fundet denne cache, kan du logge den her.</string>
@@ -301,8 +300,6 @@
     <string name="menu_helpers">Hjælpeprogrammer</string>
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_backup">Backup/gendannelse</string>
-    <string name="menu_update">Opdater offline data</string>
-    <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
     <string name="menu_search_clipboard">Indlæs geokode fra udklipsholder</string>
     <string name="menu_history_longstring">Fund-historik</string>
@@ -345,7 +342,6 @@
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
     <string name="caches_sort_date_hidden">Dato for placering</string>
-    <string name="caches_sort_date_logged">Dato for logbesked</string>
     <string name="caches_sort_finds">Fund</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Dato for lagring på enhed</string>
@@ -650,8 +646,6 @@
     <string name="init_summary_dtMarkerOnCacheIcon">Vis en markering for Sværhedsgrad (til venstre) og Terræn (til højre) på cachemarkører i øverste højre hjørne (\"gemt\" markør flyttes til midten).</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
-    <string name="init_save_log_img">Lagring af billeder</string>
-    <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
     <string name="init_units">Benyt britiske afstandsmål</string>
     <string name="init_summary_units">Benyt britiske afstandsmål</string>
     <string name="init_log_offline">Offline logning</string>
@@ -1198,10 +1192,6 @@
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flad</string>
     <string name="do_upright">Opretstående</string>
-    <!-- license -->
-    <string name="license">Licens</string>
-    <string name="license_show">Vis licens</string>
-    <string name="license_dismiss">Afvis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidligere arrangement</string>
     <string name="helper_calendar_pastevent_question">Arrangementsdato er i fortiden. Tilføj den alligevel?</string>
@@ -1691,6 +1681,7 @@
     <string name="wizard_status_title">Konfigurations status</string>
     <string name="wizard_status_platform">Geocaching tjenester</string>
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Spring over</string>
@@ -1699,10 +1690,8 @@
     <string name="finish">Afslut</string>
     <string name="cancel">Annullér</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
