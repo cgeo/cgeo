@@ -1,43 +1,45 @@
+New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You may want to [configure a quick launch item](cgeo-setting://quicklaunchitems_sorted) or [customize bottom navigation](cgeo-setting://custombnitem) for easier access, need to enable extended settings first.)
+
 ### Mappa
-- Nuovo: "Modifica nota personale" dalla pagina info del cache
-- Corretto: Waypoint non filtrati sulla mappatura di una singola cache (UnifiedMap)
-- Nuovo: Supporto a fornitore di tasselli definiti dall'utente
-- Corretto: aggiorna i dati della mappa dopo l'apertura / chiusura della finestra di dialogo delle impostazioni (UnifiedMap)
-- Nuovo: Mostra/nascondi edifici 2D/3D (UnifiedMap OSM)
-- Nuovo: Cache store/refresh dal popup spostato in background
-- Modifica: cerca le coordinate: mostra la direzione e la distanza dall'obiettivo e non dalla posizione corrente
-- Nuovo: Indicatore grafico D/T nel foglio informazioni cache
-- Corretto: Bussola nascosta quando la barra dei filtri è visibile (UnifiedMap)
-- Cambiato: legende del tema della mappa rimosse
-- Correzione: popup di selezione di navigazione multiple su pressione prolungata
+- New: Store map theme per tile provider (UnifiedMap)
+- Nuovo: Evidenzia cache/waypoint selezionato (UnifiedMap)
+- New: Add separator between offline and online map sources
+- New: Support Mapsforge as alternative to VTM in UnifiedMap, see [Settings => Map Sources => Unified Map](cgeo-setting://useMapsforgeInUnifiedMap)
+- Change: 'Show elevation chart' moved to long tap menu (UnifiedMap)
+- Change: Use new hillshading algorithm for Mapsforge offline maps
+- New: Hillshading support for UnifiedMap Mapsforge offline maps
+- New: Hillshading support for UnifiedMap VTM maps (requires online connection)
+- Fix: Address search not considering live mode (UnifiedMap)
+- Change: "follow my location" moved to the map, giving more space for "live mode" button
+- Change: Make long-press pin more c:geo-like
+- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
 
 ### Dettagli del cache
-- Nuovo: Mostra le immagini collegate in "note personali" nella scheda Immagini
-- Cambio: semplificato il tocco lungo nei dettagli dei cache e dei tracciabili
-- Novità: ridimensionamento delle immagini del log
-- Cambia: Cambio dell1'icona "modifica liste" da matita a lista + matita
-- Fix: vanity function failing on long strings
-- Corretto: errata priorità nel parsing della formula backup
-- Change: Allow larger integer ranges in formulas (disallow usage of negation)
-- New: Allow user-stored cache images on creating/editing log
-- Correzione: le immagini Spoiler non vengono più caricate (modifica del sito)
+- New: Not yet existing variables used in projection get created in variable list
+- New: Allow large integers in formulas
+- New: Support more constellations for variables in formulas
+- Fix: Multiple images in personal note not added to images tab
+- Fix: Handling of projections in waypoints and personal notes
+- New: Long tap on date in logging retrieves previous log date
+- Fix: Resetting cache to original coordinates does not remove "changed coordinates" flag
+- Nuovo: Conferma della sovrascrittura del log rapido offline
+- New: Update cache status on sending a log
+- New: Colored HTML source view of cache details
 
 ### Generale
-- Nuovo: Impostazione manuale o automatica per lo stato 'trovato' di Lab Adventures
-- Nuovo: Finestra di selezione elenchi: Gruppi automatici di elenchi di cache con un ":" nel loro nome
-- Cambiamento: utilizzo di OSM Nominatum come geocoder fallback, in sostituzione di MapQuest geocoder (che non funziona più per noi)
-- Cambiamento: aggiornato BRouter intergrato alla versione 1.7.4
-- Nuovo: Lettura delle informazioni di elevazione dalla traccia durante l'importazione
-- Nuovo: API a Locus che supporta ora la dimensione del cache "virtuale"
-- Corretto: risultati della ricerca per una posizione non più ordinata per distanza dalla posizione di destinazione
-- Nuovo: filtro "Coordinate corrette"
-- Modifica: Aggiornato targetSDK a 34 per soddisfare i requisiti imminenti del Play Store
-- New: Added "none"-entry to selection of routing profiles
-- Modifica: Migliorata la descrizione della funzione "manutenzione" (rimuove i dati orfani)
-- Nuovo: Mostra avvisi quando si verifica l'errore HTTP 429 (troppe richieste)
-- Corretto: Flickering in aggiornamento della lista cache
-- New: Allow display of passwords in connector configuration
-- Fix: Search for geokretys no longer working when using trackingcodes
-- Fix: Missing "copy to clipboard" option on some devices (see settings => system)
-- Nuovo: possibilità di effettuare il login manuale su errore del Captcha
-
+- Cambio: utilizzare l'elevazione sopra il livello medio del mare (se disponibile, solo Android 14+)
+- New: Allow multiple hierarchy levels in cache lists
+- New: Dedicated icons for geocaching.com blockparty and HQ event types
+- New: Set preferred image size for images loaded from geocaching.com caches and trackables
+- Fix: "Open in browser" not working for trackable logs
+- New: Option to manage downloaded files (maps, themes, routing and hillshading data)
+- New: Option to remove a cache from all lists (= mark it as to be deleted)
+- Fix: Reset coordinates not detected by c:geo for unsaved caches
+- Nuovo: Consente la cancellazione del filtro se non viene memorizzato alcun filtro con nome
+- Fix: "Empty list" confirmation popping up when starting a pocket query download in newly created list
+- Change: Owned caches with offline logs show offline log marker
+- New: Configurable date format (eg.: cache logs), see [Settings => Appearance => Date format](cgeo-settings://short_date_format)
+- New: Point connector info on home screen to connector-specific preference screen
+- New: Additional emojis for cache icons
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebtration, block party and maze
+- Change: Cache type filter "Other" includes GCHQ, APE and unknown types
