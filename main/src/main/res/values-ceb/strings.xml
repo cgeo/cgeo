@@ -129,7 +129,6 @@
     <string name="err_detail_cache">ang c:geo dili maka pakita sa geocache na imong gusto. Kani ba nga geocache gyud?</string>
     <string name="err_detail_cache_find">ang c:geo dili maka kita sa geocache</string>
     <string name="err_detail_cache_find_some">ang c:geo dili maka kita ni anang geocache.</string>
-    <string name="err_detail_cache_find_any">ang c:geo dili maka pangita bisan unsa na mga geocache.</string>
     <string name="err_detail_no_spoiler">ang c:geo kay walay nakit an na mga spoiler na imahe para sa ka ni nga cache.</string>
     <string name="err_detail_still_working">Nagahimo pa og lain nga bulohaton.</string>
     <string name="err_watchlist_failed">Ang pag-usab sa imong watchlist kay nakapyas.</string>
@@ -713,10 +712,6 @@
     <string name="destination_select">Pili ug destinasyon</string>
     <string name="osmand_marker_cgeo">Minarkahan gikan sa c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Ang Lisensya</string>
-    <string name="license_show">Ipakita ang lisensya</string>
-    <string name="license_dismiss">Wagtangon</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Niaging hitabo</string>
     <string name="helper_calendar_pastevent_question">Ang petsa sa hitabi ay nasa kaniadto. Ipuno ba ni bisan inaana?</string>
@@ -1069,6 +1064,7 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahon</string>
     <!-- Multi-Selections -->
