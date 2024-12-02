@@ -12,7 +12,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Adresssuche berücksichtigt Live-Modus nicht (UnifiedMap)
 - Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
 - Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
-- Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
+- Änderung: Funktionen zum Verwalten von Offline-Daten (Karten-Download, Überprüfung auf fehlende Routing- / Kartenschattierungs-Daten) in das Karten-Auswahlmenü verschoben => "Offline-Daten verwalten"
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
