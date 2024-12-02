@@ -133,7 +133,6 @@
     <string name="err_detail_cache">ang c:geo ay hindi nakakapag-pakita ng geocache sa pamamaraang iyong nagustuhan. Ito ba talaga ay isang geocache?</string>
     <string name="err_detail_cache_find">ang c:geo ay hindi makapaghanap ng geocache</string>
     <string name="err_detail_cache_find_some">ang geocache ay hindi nakita ng c:geo.</string>
-    <string name="err_detail_cache_find_any">ang anumang mga geocache ay hindi nakita ng c:geo.</string>
     <string name="err_detail_no_spoiler">c:geo nakita ang walang taga salita ng larawan para sa cache.</string>
     <string name="err_detail_still_working">Gumagawa pa ng trabaho sa ibang gawain.</string>
     <string name="err_watchlist_failed">Binago ang watchlist na nabigo.</string>
@@ -239,7 +238,6 @@
     <string name="caches_sort_vote">Iboto (Ang Sariling Marka)</string>
     <string name="caches_sort_inventory">Ang bilang ng pag-iimbentaryo</string>
     <string name="caches_sort_date_hidden">Ang Petsa ay Nakatago</string>
-    <string name="caches_sort_date_logged">Ang Pagtatala sa Petsa</string>
     <string name="caches_sort_finds">Ang paghahanap</string>
     <string name="caches_sort_state">Estado</string>
     <string name="caches_sort_storage">Ang petsa ng pag-iimbak sa aparato</string>
@@ -369,8 +367,6 @@
     <string name="init_address">Ang Adress ay Ipakita</string>
     <string name="init_summary_address">Ang adress ang ipakita sa halip na mga koordinado sa pangunahing iskrin</string>
     <string name="init_showwaypoint_description">Kung mas mababa ang ibinigay na halaga ng mga cache ito ay naka-display duon sa mapa, ang kanilang mga waypoint ay karagdagang ipapakita.</string>
-    <string name="init_save_log_img">Ang pag-save ng mga imahe</string>
-    <string name="init_summary_save_log_img">I-seyb ang mga Image mula sa mga Log</string>
     <string name="init_units">Ang paggamit ng Imperyal na mga Yunit</string>
     <string name="init_summary_units">Ang paggamit ng mga Yunit ng Imperyal imbis na ang mga Yunit ng Metriko</string>
     <string name="init_log_offline">Ang mga offline na log</string>
@@ -752,10 +748,6 @@
     <string name="destination_select">Mamili ng destinasyon</string>
     <string name="osmand_marker_cgeo">Tanda mula sa c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Ang Lisensya</string>
-    <string name="license_show">Ang lisensya ay ipakita</string>
-    <string name="license_dismiss">Ang I-despatsa</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Lipas na pangyayari</string>
     <string name="helper_calendar_pastevent_question">Nasa nakaraan ang petsa ng pangyayari. Anumang mangyari idagdag ito?</string>
@@ -1107,13 +1099,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Kanselahin</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
