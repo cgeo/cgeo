@@ -141,7 +141,6 @@
     <string name="err_detail_cache">c:geo لا يمكنه عرض المخبئ الذي تريده. هل هو حقاً مخبئ؟</string>
     <string name="err_detail_cache_find">c:geo لا يمكنه إيجاد المخبئ</string>
     <string name="err_detail_cache_find_some">c:geo لا يمكنه إيجاد ذالك المخبئ.</string>
-    <string name="err_detail_cache_find_any">c:geo لا يمكنه إيجاد و لا أي مخبآت.</string>
     <string name="err_detail_no_spoiler">c:geo لم يتمكن من العثور على صور مفسدة لهذا المخبئ.</string>
     <string name="err_detail_still_working">لا يزال يعمل في مهمة أخرى.</string>
     <string name="err_watchlist_failed">فشل في تغيير القائمة الخاصة بك لمشاهدة المخبآت.</string>
@@ -249,7 +248,6 @@
     <string name="caches_sort_vote">التصويت (التقييم الخاص)</string>
     <string name="caches_sort_inventory">حساب المخزون</string>
     <string name="caches_sort_date_hidden">تاريخ مخفي</string>
-    <string name="caches_sort_date_logged">تاريخ التسجيل</string>
     <string name="caches_sort_finds">إيجاد</string>
     <string name="caches_sort_state">الوضع</string>
     <string name="caches_sort_storage">تاريخ المخبآت المخزنة على الجهاز</string>
@@ -379,8 +377,6 @@
     <string name="init_address">عرض العنوان</string>
     <string name="init_summary_address">عرض العنوان بدلاً من الإحدثيات على الشاشة الرئسية</string>
     <string name="init_showwaypoint_description">إذا تم عرض كمية أقل من المخبآت على الخريطة، يتم عرض إحدثيات الطريق الخاصة بهم إضافة إلى ذلك.</string>
-    <string name="init_save_log_img">حفظ الصور</string>
-    <string name="init_summary_save_log_img">حفظ الصور من تسجيل الزيارات</string>
     <string name="init_units">استخدم وحدات القياس الإمبراطورية</string>
     <string name="init_summary_units">استخدام وحدات القياس الإمبراطورية بدلاً من الوحدات المترية</string>
     <string name="init_log_offline">تسجيل الزيارات في وضع عدم الاتصال</string>
@@ -748,10 +744,6 @@
     <string name="destination_select">حدد الاتجاه</string>
     <string name="osmand_marker_cgeo">علامة من c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">الترخيص</string>
-    <string name="license_show">عرض الترخيص</string>
-    <string name="license_dismiss">نسيان</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">الأحداث الماضية</string>
     <string name="helper_calendar_pastevent_question">تاريخ الحدث في الماضي. أضفه على أية حال؟</string>
@@ -1076,13 +1068,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">إلغاء</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
