@@ -149,7 +149,6 @@
     <string name="err_detail_cache">c:geo אין אפשרות להציג את המטמון הרצוי. האם זה באמת מטמון?</string>
     <string name="err_detail_cache_find">ג: גיא לא יכול למצוא ג\'יוקש</string>
     <string name="err_detail_cache_find_some">ג: גיא לא יכול למצוא את הג\'יוקש</string>
-    <string name="err_detail_cache_find_any">ג: גיא לא יכול למצוא אף ג\'יוקשים</string>
     <string name="err_detail_no_spoiler">c:geo לא מצאה תמונות ספוילר עבור מטמון זה.</string>
     <string name="err_detail_still_working">עדיין עובד על משימה אחרת.</string>
     <string name="err_watchlist_failed">שינוי רשימת המעקב שלך נכשלה.</string>
@@ -258,7 +257,6 @@
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
     <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
-    <string name="caches_sort_date_logged">תאריך מציאה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
     <string name="caches_sort_storage">תאריך בו נשמר במכשיר</string>
@@ -429,8 +427,6 @@
     <!-- user -->
     <!-- navigation -->
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">רישיון</string>
     <!-- helpers -->
     <!-- export -->
     <string name="export_fieldnotes_uploading">Uploading&#8230;</string>
@@ -468,12 +464,11 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
