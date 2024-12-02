@@ -35,6 +35,8 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
+    <string name="other">Overige</string>
+    <string name="event_special">Specials</string>
     <string name="all_types_short">Alle</string>
     <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
@@ -248,7 +250,6 @@
     <string name="err_detail_cache">Sorry, c:geo kan de gezochte geocache niet weergeven. Is het wel een geocache?</string>
     <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
     <string name="err_detail_cache_find_some">Sorry, c:geo kan die geocache niet vinden.</string>
-    <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
     <string name="err_detail_no_spoiler">c:geo heeft geen spoiler images gevonden voor deze cache.</string>
     <string name="err_detail_still_working">Nog bezig met een andere (achtergrond)taak.</string>
     <string name="err_detail_premium_log_found">Deze cache is alleen beschikbaar voor premium leden van geocaching.com. Daarom kan de cache informatie niet worden weergegeven.\n\nAls je deze cache al hebt gevonden, kan je deze hier loggen.</string>
@@ -457,6 +458,8 @@
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
+    <string name="caches_overwrite_offline_log">Offline log overschrijven</string>
+    <string name="caches_overwrite_offline_log_question">Cache heeft een offline log van type \"%1$s\" met een logtekst. Wil je deze log overschrijven?</string>
     <string name="caches_show_attributes">Toon attribuut overzicht</string>
     <string name="caches_set_cache_icon">Cache pictogram instellen</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
@@ -563,10 +566,12 @@
     <string name="cache_filter_storage_delete_title">Filter verwijderen</string>
     <string name="cache_filter_storage_delete_message">Weet je zeker dat je dit filtersjabloon wilt verwijderen?</string>
     <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
+    <string name="cache_filter_storage_clear_title">Wis huidige filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
     <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
     <string name="cache_filter_storage_save_confirm_message">Een filter met de naam \'%s\' en andere configuratie bestaat al. Overschrijven?</string>
+    <string name="cache_filter_storage_clear_message">Wil je het huidige filter wissen?</string>
     <string name="cache_filter_stringfilter_matchcase">Hoofdlettergevoelig</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Zoektekst</string>
     <string name="cache_filter_stringfilter_info">Met de optie \'Patroon\', gebruik joker-tekens * en ?. * vertegenwoordigt nul, één of meerdere tekens, ? vertegenwoordigt één enkel teken. Bijvoorbeeld, het patroon \'H?mburg*\' zal overeenkomen met bijvoorbeeld \'Homburg\' of \'Hamburg \'s nachts\' maar niet met \'A day in Hamburg\' of \'Hahmburg\'</string>
@@ -779,8 +784,7 @@
     <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_hide_tileproviders_title">Kaartbronnen verbergen</string>
     <string name="settings_hide_tileproviders_summary">Een of meer kaartbronnen uit kaartbron selectie uitsluiten</string>
-    <string name="settings_useMapsforgeInUnifiedMap_title">Mapsforge + VTM</string>
-    <string name="settings_useMapsforgeInUnifiedMap_summary">Bied zowel VTM als Mapsforge bronnen aan voor Mapsforge kaarten (voor testdoeleinden)</string>
+    <string name="settings_unifiedMapVariants_title">UnifiedMap varianten</string>
     <string name="settings_userDefinedTileProvider">Provider gebruikersgedefinieerde tegels</string>
     <string name="settings_userDefinedTileProviderUri">Voer volledige Uri in (zonder slash aan het eind) naar de tegel provider, of voer de volledige Uri in met parameters (inclusief {X}, {Y} en {Z}). Controleer of je aan de gebruiksvoorwaarden hebt voldaan.</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
@@ -890,6 +894,9 @@
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
+    <string name="init_date_format">Datumnotatie</string>
+    <string name="init_date_format_description">Notatie om te gebruiken voor korte datums, bijvoorbeeld in logweergave</string>
+    <string name="system_default">Systeemstandaard</string>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
@@ -922,7 +929,7 @@
     <string name="menu_elevation_info">Hoogte (kaart):</string>
     <string name="elevation_selected">Hoogte (kaart) op de geselecteerde positie</string>
     <string name="elevation_difference">Hoogte verschil</string>
-    <string name="distance">Afstand:</string>
+    <string name="distance">Afstand</string>
     <string name="copy_coordinates">Coördinaten kopiëren</string>
     <string name="selected_position">Geselecteerde positie</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
@@ -938,6 +945,7 @@
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
     <string name="init_summary_units">Gebruik imperiale stelsel i.p.v. metrische stelsel</string>
     <string name="init_cachelists">Cache lijsten</string>
+    <string name="init_localization">Lokalisatie</string>
     <string name="init_log_offline">Offline loggen</string>
     <string name="init_summary_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
     <string name="init_choose_list">Vraag naar lijst</string>
@@ -1044,7 +1052,7 @@
     <string name="settings_info_themes">c:geo ondersteunt aangepaste thema\'s voor offline kaarten. Deze kunnen worden gebruikt om de kleurstijl van de kaart te wijzigen (bijv. om een nachtzicht-kaart te hebben) of om bepaalde objecten te markeren, zoals fietspaden of hoogte-lijnen op de kaart.\n\nWerken met niet-ge-zipte kaartthema\'s kan de openingsprestaties van de kaart verminderen. In dit geval kan de themamap optioneel worden gesynchroniseerd met een app-private lokale map voor snellere toegang (ten koste van enige opslagruimte).</string>
     <string name="settings_info_hillshading_title">Informatie over Reliëfweergave</string>
     <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
-    <string name="settings_hillshading_enable">Reliëfweergave inschakelen</string>
+    <string name="settings_hillshading_enable">Reliëfweergave</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
@@ -1345,6 +1353,7 @@
     <string name="cache_premium">Premium</string>
     <string name="cache_inventory">Inventaris</string>
     <string name="cache_log_image_default_title">Foto</string>
+    <string name="cache_set_coordinates">Stel coördinaten in</string>
     <string name="cache_personal_note">Persoonlijke notitie</string>
     <string name="cache_menu_preventWaypointsFromNote">Waypoints uit notitie voorkomen</string>
     <string name="cache_menu_allowWaypointExtraction">Waypoints uit notitie toestaan</string>
@@ -1531,6 +1540,7 @@
     <string name="cachedetails_progress_unwatch">Verwijderd van watchlist</string>
     <string name="cachedetails_progress_favorite">Toegevoegd aan favorieten</string>
     <string name="cachedetails_progress_unfavorite">Verwijderd uit favorieten</string>
+    <string name="cache_wherigo_start">Download en speel deze Wherigo met c:geo\'s interne speler</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
@@ -1575,7 +1585,9 @@
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
     <!-- html styles -->
     <string name="html_style_default">Standaard</string>
+    <string name="html_style_default_no_contrast_fix">Standaard zonder contrastcorrectie</string>
     <string name="html_style_monochrome">Monochroom</string>
+    <string name="html_style_source_formatted">Opgemaakte HTML bron</string>
     <string name="html_style_source">HTML Bron</string>
     <!-- coordinate calculator hints -->
     <string name="cc_hint_degrees">graden</string>
@@ -1666,6 +1678,8 @@
     <string name="variables_scanlisting_nopatternfound">Geen patroon gevonden</string>
     <string name="variables_tidyup">Opschonen</string>
     <string name="variables_deleteall">Alles Verwijderen</string>
+    <string name="variables_add">Voeg variabele toe</string>
+    <string name="variables_add_next">Voeg volgende variabele toe</string>
     <string name="variables_deleteall_confirm_text">Weet je zeker dat je alle variabelen voor deze cache wilt verwijderen?</string>
     <string name="variables_info">Help</string>
     <string name="variables_varname_dialog_title">Variabele naam</string>
@@ -1749,8 +1763,6 @@
     <string name="map_showwp_visited">Bezocht</string>
     <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Dit zal de inhoud van de kaartthema-map continu synchroniseren in een app-specifieke map voor snellere toegang tot het bestand. Zorg ervoor dat je thema map alleen je thema\'s bevat maar geen extra (grote) gegevens voordat u deze functie inschakelt.\n\nDe thema map \'%1$s\' heeft op dit moment %2$s, %3$s en een grootte van %4$s.\n\nWil je de synchronisatie van mappen inschakelen?</string>
     <string name="onetime_mapthemefixslow_title">Repareer langzame kaartthema weergave</string>
     <string name="onetime_mapthemefixslow_message">Werken met niet ge-zipte kaart thema\'s kan de kaartviewer openingsprestatie verminderen. Je kunt je thema\'s zippen of synchroniseren om snellere prestaties te krijgen en de vertraging te verminderen bij het starten van de kaart.</string>
     <string name="map_theme_select">Selecteer mapthema</string>
@@ -1895,10 +1907,6 @@
     <string name="do_auto">Automatisch</string>
     <string name="do_flat">Plat</string>
     <string name="do_upright">Rechtop</string>
-    <!-- license -->
-    <string name="license">Licentie</string>
-    <string name="license_show">Toon licentie</string>
-    <string name="license_dismiss">Afwijzen</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Event in het verleden</string>
     <string name="helper_calendar_pastevent_question">De Eventdatum is in het verleden. Toch toevoegen?</string>
@@ -2193,6 +2201,7 @@
     <string name="attribute_blind_people_no">Geen handicap: Blind</string>
     <string name="attribute_unknown">Onbekend attribuut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Cache Status</string>
     <string name="cat_tools">Uitrusting</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cachelocatie</string>
@@ -2506,7 +2515,6 @@
     <string name="check_tiles_missing">Ontbrekende routeringsgegevens gevonden:</string>
     <string name="check_tiles_unsupported">Waarschuwing: Routeringsgegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
     <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
-    <string name="download_hillshading_title">Reliëfweergave gegevens ontbreken</string>
     <string name="check_hillshading_found">Reliëfweergave-gegevens reeds aanwezig</string>
     <string name="check_hillshading_missing">Ontbrekende reliëfweergave-gegevens gevonden:</string>
     <string name="check_hillshading_unsupported">Waarschuwing: Reliëfweergave gegevens zijn ten minste gedeeltelijk niet beschikbaar voor de geselecteerde regio</string>
@@ -2586,6 +2594,83 @@
     <string name="wizard_skip_wizard_warning">c:geo werkt mogelijk niet zoals verwacht totdat de configuratie is voltooid. Afhankelijk van de ontbrekende configuratie kan c:geo mogelijk niet in staat zijn om gegevens te lezen/opslaan zoals offline kaarten, geocaches, logbestanden etc.\n\nWanneer je de installatie wilt voltooien, kies dan \"Configuratiewizard\" in het hoofdmenu of herstart c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mapsynchronisatie voltooid na %2$s, %3$d van de %4$s behoefden synchronisatie</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_player">Wherigo Speler</string>
+    <string name="wherigo_controls">Besturing</string>
+    <string name="wherigo_controls_cartridgelist_hint">Bekijk de cartridges en start het spel</string>
+    <string name="wherigo_controls_savegame_hint">Bewaar de voortgang van een lopend spel</string>
+    <string name="wherigo_controls_loadgame_hint">Laad een opgeslagen spel</string>
+    <string name="wherigo_controls_stopgame_hint">Stop een lopend spel</string>
+    <string name="wherigo_controls_mapzones_hint">Toon zones van een lopend spel op de kaart</string>
+    <string name="wherigo_controls_downloadcartridge_hint">Download een cartridge (cguid nodig)</string>
+    <string name="wherigo_controls_reportproblem_hint">Meld een probleem met de wherigo speler</string>
+    <string name="wherigo_controls_cache_context">Cache Context</string>
+    <string name="wherigo_controls_cache_link">Ga naar de cache details</string>
+    <string name="wherigo_sound_title">Volumeregeling</string>
+    <string name="wherigo_sound_continue">Doorgaan</string>
+    <string name="wherigo_sound_restart">Herstarten vanaf het begin</string>
+    <string name="wherigo_sound_pause">Pauzeren</string>
+    <string name="wherigo_sound_mute">Dempen</string>
+    <string name="wherigo_sound_unmute">Niet meer dempen</string>
+    <string name="wherigo_controls_resume_paused_dialog">Gespauzeerd dialoog hervatten</string>
+    <string name="wherigo_dialog_pause_info">Hervat dialoogvenster in Wherigo Player door op \"Hervat gepauzeerd dialoog\" te klikken</string>
+    <string name="wherigo_no_game_running">Er is momenteel geen wherigo spel actief</string>
+    <string name="wherigo_currently_playing">Momenteel aan het spelen</string>
+    <string name="wherigo_cartridge_details">Cartridge details</string>
+    <string name="wherigo_locate_on_center">Lokaliseren in het midden</string>
+    <string name="wherigo_revoke_fixed_location">Vastgezette locatie intrekken</string>
+    <string name="wherigo_thingtype_location">Locaties</string>
+    <string name="wherigo_thingtype_inventory">Inventaris</string>
+    <string name="wherigo_thingtype_item">Je ziet</string>
+    <string name="wherigo_thingtype_task">Taken</string>
+    <string name="wherigo_thingtype_thing">Dingen</string>
+    <string name="wherigo_author">Auteur</string>
+    <string name="wherigo_zone_inside">in</string>
+    <string name="wherigo_zone_near">nabij</string>
+    <string name="wherigo_choose_cartridge">Kies Cartridge</string>
+    <string name="wherigo_choose_new_loadgame">Kies nieuw spel of spel om te laden</string>
+    <string name="wherigo_choose_savegame_slot">Kies een bewaar slot</string>
+    <string name="wherigo_savegame_name_empty">&lt;New game&gt;</string>
+    <string name="wherigo_savegame_name_autosave">Automatisch opslaan</string>
+    <string name="wherigo_savegame_name_numeric">Slot %s</string>
+    <string name="wherigo_savegame_date_empty">&lt;Leeg slot&gt;</string>
+    <string name="wherigo_download_title">Cartridge downloaden</string>
+    <string name="wherigo_download_message">Cartridge met CGUID \"%s\" is niet beschikbaar op je apparaat. Wil je deze downloaden?</string>
+    <string name="wherigo_download_successful_title">Download geslaagd</string>
+    <string name="wherigo_download_successful_message">Cartridge met CGUID \"%s\" is succesvol gedownload. Wil je deze openen?</string>
+    <string name="wherigo_download_failed_title">Downloaden mislukt</string>
+    <string name="wherigo_download_failed_message">Download van cartridge met CGUID \"%1$s\" mislukt: %2$s</string>
+    <string name="wherigo_manual_download_title">Handmatig cartridge downloaden</string>
+    <string name="wherigo_manual_download_cguid_label">Voer CGUID hier in</string>
+    <string name="wherigo_download_delete_leftover_toast">Wherigo: verweesd bestand verwijderen</string>
+    <string name="wherigo_download_progress_login">Bezig met inloggen…</string>
+    <string name="wherigo_download_progress_started">Download gestart</string>
+    <string name="wherigo_download_progress_download_status">Gedownload %1$s / %2$s (%3$s%)</string>
+    <string name="wherigo_error_title">Wherigo Probleem rapport</string>
+    <string name="wherigo_error_game_noerror">Geen fout gemeld door Wherigo Engine.</string>
+    <string name="wherigo_error_game_error">Fout gemeld door Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Gebruik \'Per e-mail verzenden\' om een probleem met betrekking tot de wherigo te melden aan ons supportteam.</string>
+    <string name="wherigo_error_email">Wherigo Probleem rapport\n\nFout: %1$s\n\nWherigo Info: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine meldt een fout. Open bug-dialoog voor details.</string>
+    <string name="wherigo_confirm_stop_running_game_title">Stop met draaiende Wherigo Spel</string>
+    <string name="wherigo_confirm_stop_running_game_message">Er wordt momenteel een spel uitgevoerd voor \"%s\". Wil je dit spel stoppen?</string>
+    <string name="wherigo_confirm_delete_cartridge_title">Verwijder Wherigo Cartridge</string>
+    <string name="wherigo_confirm_delete_cartridge_message">Wil je echt cartridge \"%1$s\" verwijderen inclusief %2$s opgeslagen spellen?</string>
+    <string name="wherigo_confirm_delete_savegame_slot_title">Verwijder Wherigo Opgeslagen spel</string>
+    <string name="wherigo_confirm_delete_savegame_slot_message">Wil je echt het opgeslagen spel \"%2$s\" van cartridge \"%1$s\" verwijderen?</string>
+    <string name="wherigo_save_game_title">Sla de voortgang van het Wherigo spel op</string>
+    <string name="wherigo_save_game_message">Sla je voortgang van het spel op voor cartridge \"%1$s\" in \"%2$s\".</string>
+    <string name="wherigo_save_game_custom_name_label">Voer naam in (optioneel)</string>
+    <string name="wherigo_save_game_warning_overwrite_slot">Waarschuwing: door verder te gaan overschrijf je het bestaande opgeslagen spel van \"%1$s\"</string>
+    <string name="wherigo_dialog_push_page">Pagina %1$s / %2$s</string>
+    <string name="wherigo_notification_service">c:geo draait een Wherigo…</string>
+    <string name="wherigo_notification_waiting">\"%s\" wacht op jou!</string>
+    <string name="wherigo_bar_resume_dialog">Hervatten</string>
+    <string name="wherigo_toast_check_game">Wherigo: controleer je spel op veranderingen</string>
+    <string name="wherigo_toast_check_things">Wherigo: controleer je %s op veranderingen</string>
+    <string name="wherigo_otm_shortcuts_title">Wherigo Speler Sneltoetsen</string>
+    <string name="wherigo_otm_shortcuts_message">Als je c:geo Wherigo Speler regelmatig wil gebruiken, overweeg om een knop voor snelle lancering of aangepast menu-item te maken onder Instellingen -&gt; Uiterlijk</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Weergave van Wherigo locaties op de kaart wordt niet ondersteund voor jouw kaart instellingen. Gelieve over te schakelen naar een uniforme kaart onder Instellingen -&gt; Kaartbronnen -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Vorige</string>
     <string name="skip">Overslaan</string>
@@ -2601,6 +2686,9 @@
     <string name="expand">Uitklappen</string>
     <string name="close">Sluiten</string>
     <string name="delete">Verwijderen</string>
+    <string name="play">Spelen</string>
+    <string name="pause">Pauzeren</string>
+    <string name="resume">Hervatten</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alles selecteren</string>
     <string name="multiselect_selectvisible">Selecteer Zichtbare</string>
