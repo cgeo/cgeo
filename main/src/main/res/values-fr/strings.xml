@@ -248,7 +248,6 @@
     <string name="err_detail_cache">c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache ?</string>
     <string name="err_detail_cache_find">c:geo ne trouve pas de cache</string>
     <string name="err_detail_cache_find_some">c:geo ne trouve pas cette cache.</string>
-    <string name="err_detail_cache_find_any">c:geo ne trouve aucune cache.</string>
     <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
     <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
     <string name="err_detail_premium_log_found">Cette géocache est uniquement disponible pour les membres premium de geocaching.com. Les informations de la géocache ne peuvent donc pas être affichées.\n\nCependant, si vous avez déjà trouvé cette géocache, vous pouvez enregistrer votre visite ici.</string>
@@ -912,7 +911,6 @@
     <string name="menu_elevation_info">Altitude (carte) :</string>
     <string name="elevation_selected">Altitude (carte) à la position sélectionnée</string>
     <string name="elevation_difference">Différence d\'altitude</string>
-    <string name="distance">Distance :</string>
     <string name="copy_coordinates">Copier les coordonnées</string>
     <string name="selected_position">Position sélectionnée</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
@@ -1718,8 +1716,6 @@
     <string name="map_showwp_visited">Visitées</string>
     <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Cela synchronisera vos thèmes de cartes dans un dossier d\'une application privée pour améliorer les performances d\'ouverture de la carte au détriment de l\'espace de stockage du téléphone.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Cela synchronisera en permanence le contenu du dossier Thèmes des cartes dans un dossier d\'application privée pour un accès plus rapide aux fichiers. Soyez certain que le dossier des thèmes contient seulement vos thèmes, mais pas de données supplémentaires (volumineuses, avant d\'activer cette fonctionnalité.\n\nVotre dossier de thème “%1$s” a actuellement %2$s, %3$s et une taille de %4$s.\n\nVoulez-vous vraiment activer la synchronisation ?</string>
     <string name="onetime_mapthemefixslow_title">Corrige le problème de lenteur d\'affichage du thème de carte</string>
     <string name="onetime_mapthemefixslow_message">Utiliser les thèmes de cartes non zippés peut diminuer les performances d\'affichage de la carte. Vous pouvez zipper ou synchroniser vos thèmes et ainsi réduire le délai d’ouverture de la carte.</string>
     <string name="map_theme_select">Sélectionner le thème</string>
@@ -1864,10 +1860,6 @@
     <string name="do_auto">Auto</string>
     <string name="do_flat">à plat</string>
     <string name="do_upright">droit</string>
-    <!-- license -->
-    <string name="license">Licence</string>
-    <string name="license_show">Afficher la licence</string>
-    <string name="license_dismiss">Rejeter</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Événement passé</string>
     <string name="helper_calendar_pastevent_question">La date de l\'événement est dans le passé. Ajouter quand même ?</string>
@@ -2539,6 +2531,7 @@
     <string name="wizard_skip_wizard_warning">c:geo peut ne pas fonctionner comme prévu tant que la configuration n\'est pas terminée. En fonction de la configuration manquante, c:geo peut ne pas être en mesure de lire/stocker des données telles que des cartes hors ligne, des géocaches, des fichiers journaux, etc.\n\nLorsque vous vous sentez prêt à finaliser la configuration, choisissez \"Assistant de configuration\" dans le menu principal ou redémarrez c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronisation du dossier %1$s terminée après %2$s, %3$d sur %4$s nécessitaient une synchro</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Précédent</string>
     <string name="skip">Passer</string>
