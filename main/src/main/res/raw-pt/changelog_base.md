@@ -1,43 +1,45 @@
+Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br> (Talvez queira [configurar um botão de início rápido](cgeo-setting://quicklaunchitems_sorted) ou [personalizar a navegação na parte inferior](cgeo-setting://custombnitem) para facilitar o acesso, para isso precisa primeiro de activar as definições adicionais.)
+
 ### Mapa
-- Novo: "Editar Nota Pessoal" a partir da página de informações da cache
-- Correcção: Pontos adicionais não são filtrados ao mapear uma única cache (Mapa Unificado)
-- Novo: Suporte para novos fornecedores de blocos de mapa definidos pelo utilizador
-- Correcção: Actualizar dados do mapa após abrir / fechar o diálogo de configurações (Mapa Unificado)
-- Novo: Alternar exibição de edifícios 2D/3D (mapas OSM, Mapa Unificado)
-- Novo: Armazenamento/actualização de cache a partir de popup movido para segundo plano
-- Alteração: Pesquisar coordenadas: Mostrar direcção e distância para o alvo e não para a posição actual
-- Novo: Indicador gráfico de D/T no separador de informações da geocache
-- Correcção: Bússola oculta quando a barra de filtros está visível (Mapa Unificado)
-- Alteração: Removidas as legendas do tema do mapa
-- Correcção: Vários popups de seleção de navegação num toque longo
+- Novo: Armazenar tema do mapa por provedor de blocos (Mapa Unificado)
+- Novo: Destacar cache/ponto adicional selecionado (Mapa Unificado)
+- Novo: Adicionado um separador entre fontes de mapas offline e online
+- Novo: Suporte para Mapsforge como alternativa à VTM no Mapa Unificado, consulte [Definições => Fontes do Mapa => Mapa Unificado](cgeo-setting://useMapsforgeInUnifiedMap)
+- Alteração: 'Mostrar gráfico de altitude' movido para o menu de toque longo (Mapa Unificado)
+- Alteração: Utilização do novo algoritmo de sombreado da altitude para os mapas offline Mapsforge
+- Novo: Suporte de sombreado da altitude para os mapas offline do Mapa Unificado Mapsforge
+- Novo: Suporte de sombreado da altitude para o Mapa Unificado dos mapas VTM (requer ligação online)
+- Correcção: Pesquisa por endereço não é tida em conta no mapa em tempo real (Mapa Unificado)
+- Alteração: "Seguir a minha localização" foi movido para o mapa, dando mais espaço para o botão "mapa em tempo real"
+- Alteração: Pin de pressão longa com aparência do estilo do c:geo
+- Alteração: Funções de gestão de dados offline (descarregar mapas, verificar rotas em falta, dados de sombreado de altitude) movidas para o menu de selecção do mapa => "Gerir dados offline"
 
 ### Detalhes da cache
-- Novo: Visualização das imagens ligadas em "nota pessoal", no separador Imagens
-- Alteração: Simplificar acção de toque longo nos detalhes da cache e detalhes do TB
-- Novo: Dimensionamento mais suave das imagens de registo
-- Alteração: Alterado o ícone "editar listas" do lápis para lista + lápis
-- Correcção: função vanity falhava em linhas de texto longas
-- Correcção: prioridade de análise errada na cópia de segurança de fórmulas
-- Alteração: Permitir intervalos maiores de números inteiros em fórmulas (não permitir o uso de negação)
-- Novo: Permitir imagens armazenadas do utilizador na criação/edição de registo
-- Correcção: Imagens de spoiler não estão a ser carregadas (mudanças do site)
+- Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
+- Novo: Permitir números grandes em fórmulas
+- Novo: Suporte para mais constelações para variáveis em fórmulas
+- Correcção: Múltiplas imagens numa nota pessoal não eram adicionadas ao separador de imagens
+- Correcção: manipulação de projeções em pontos adicionais e notas pessoais
+- Novo: Toque longo na data do registo recupera a data do registo anterior
+- Correção: Redefinir cache para as coordenadas originais não removia a indicação "coordenadas alteradas"
+- Novo: Confirmar sobrescrever registo no registo rápido offline
+- Novo: Actualização do estado da geocache ao enviar um registo
+- Novo: Visualização dos detalhes das geocaches em HTML colorido
 
 ### Geral
-- Novo: Opção para definir o estado de "encontrado" das Adventure Lab manualmente ou automaticamente
-- Novo: Diálogo de seleção de lista: Agrupamento automático de listas com ":" no seu nome
-- Alteração: Uso de Nominatum OSM como geocodificador padrão, substituindo o geocodificador MapQuest (que já não está funcional para nós)
-- Novo: Actualizado o BRouter integrado para v1.7.5
-- Novo: Ler informações de altitude da rota ao ser importada
-- Novo: API para o Locus agora suporta o tamanho de cache "virtual"
-- Correcção: Resultados da pesquisa por local já não são classificados pela distância para o local de destino
-- Novo: Filtro "Coordenadas corrigidas"
-- Alteração: Actualizado "targetSDK" para 34 para cumprir os próximos requisitos da Play Store
-- Novo: Adicionado opção "nenhum" à selecção de perfis de encaminhamento
-- Alteração: Melhorar a descrição da função "manutenção" (remover dados soltos)
-- Novo: Mostrar avisos quando ocorrer o erro HTTP 429 (Muitas solicitações)
-- Correcção: Cintilação ao actualizar a lista de caches
-- Novo: Permitir a exibição de palavra-passe na configuração do conector
-- Correcção: Pesquisar por geokretys deixou de funcionar ao usar códigos de rastreamento
-- Correcção: Opção "copiar para área de transferência" em falta em alguns dispositivos (ver configurações => system)
-- Novo: Possibilidade de início de sessão manual em caso de erro de Captcha
-
+- Alteração: Usar altitude acima do nível médio do mar (se disponível, Android 14+ apenas)
+- Novo: Permitir vários níveis de hierarquia nas listas de caches
+- Novo: Ícones específicos para os tipos de eventos blockparty e HQ, de geocaching.com
+- Novo: Defina o tamanho de imagem preferido para imagens de caches e TBs descarregadas de geocaching.com
+- Correcção: "Abrir no navegador" não funcionava para registos de TBs
+- Novo: Opção para gerir ficheiros descarregados (mapas, temas e dados de encaminhamento e sombreado da altitude)
+- Novo: Opção para remover uma cache de todas as listas (= marcar para ser apagada)
+- Correcção: Redefinição de coordenadas não era detectada pelo c:geo para caches não gravadas
+- Novo: Permitir limpar filtros se nenhum filtro nomeado estiver armazenado
+- Correcção: Uma confirmação de "Lista vazia" era mostrada quando iniciada a transferência de uma pocket query numa lista recém-criada
+- Alteração: É mostrado o marcado de registo offline nas caches que lhe pertençam (quando tenham registos offline)
+- Novo: Formato de data configurável (por ex.: registos de cache), consulte [Configurações => Aparência => Formato de data](cgeo-settings://short_date_format)
+- Novo: Direccionamento do conector de informação do ecrã principal para o conector específico do ecrã de preferências
+- Novo: Emojis adicionais para os ícones das caches
+- Alteração: Tipo de filtro de cache "Especiais" inclui eventos dos tipos Mega, Giga, Community Celebration, Celebration HQ, Block Party e Maze
+- Alteração: Tipo de filtro de cache "Outro" inclui GCHQ, APE e tipos desconhecidos
