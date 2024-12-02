@@ -127,7 +127,6 @@
     <string name="err_detail_cache">c:geo getur ekki sýnt geokassann sem þú vilt. Er þetta í alvörunni geokassi?</string>
     <string name="err_detail_cache_find">c:geo finnur ekki geocatch</string>
     <string name="err_detail_cache_find_some">c:geo finnur ekki þetta geocatch.</string>
-    <string name="err_detail_cache_find_any">c:geo finnur ekki nein geocatch.</string>
     <string name="err_detail_still_working">Er enn að vinna í öðru verki.</string>
     <string name="err_application_no">c:geo finnur ekki forrit við hæfi.</string>
     <string name="err_auth_initialize">c:geo gat ekki upphafsstillt heimildarveitingarferlið.</string>
@@ -198,7 +197,6 @@
     <string name="caches_sort_rating">Einkunnagjöf</string>
     <string name="caches_sort_vote">Gefa einkunn</string>
     <string name="caches_sort_date_hidden">Hvenær komið fyrir</string>
-    <string name="caches_sort_date_logged">Hvenær skráð</string>
     <string name="caches_sort_finds">Fundir</string>
     <string name="caches_sort_state">Staða</string>
     <string name="caches_sort_storage">Hvenær vistað í tæki</string>
@@ -296,8 +294,6 @@
     <string name="init_ratingwanted">GCvote mat</string>
     <string name="init_summary_ratingwanted">Sjá dóma um cache frá GCvote.com</string>
     <string name="init_address">Sýna heimilisfang</string>
-    <string name="init_save_log_img">Vista myndir</string>
-    <string name="init_summary_save_log_img">Vista myndir úr færslum</string>
     <string name="init_units">Nota breskar mælieiningar</string>
     <string name="init_summary_units">Nota breskar mælieiningar í staðinn fyrir metrakerfið</string>
     <string name="init_log_offline">Skráning án netsambands</string>
@@ -536,10 +532,6 @@
     <string name="use_gps">Aðeins nota GPS</string>
     <string name="destination_select">Velja áfangastað</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Leyfi</string>
-    <string name="license_show">Sýna leyfi</string>
-    <string name="license_dismiss">Loka</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_question">Dagsetning viðburðar er í fortíðinni. Viltu samt bæta honum við?</string>
     <string name="helper_sendtocgeo_title">Senda í c:geo</string>
@@ -697,13 +689,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Hætta við</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
