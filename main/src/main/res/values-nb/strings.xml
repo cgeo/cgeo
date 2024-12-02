@@ -229,7 +229,6 @@
     <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
     <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne cachen</string>
     <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
-    <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher.</string>
     <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
     <string name="err_detail_still_working">Er fremdeles opptatt med en annen oppgave.</string>
     <string name="err_detail_premium_log_found">Denne cachen er kun tilgjengelig for premium-medlemmer på geocaching.com. Derfor kan ikke cacheinformasjonen vises.\n\nHvis du allerede har funnet denne cachen, kan du imidlertid logge den her.</string>
@@ -329,9 +328,6 @@
     <string name="menu_helpers">Verktøyprogrammer</string>
     <string name="menu_settings">Innstillinger</string>
     <string name="menu_backup">Sikkerhetskopiering/gjenoppretting</string>
-    <string name="menu_update">Oppdater lagrede data</string>
-    <string name="menu_update_routingdata">Ruting data</string>
-    <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Historikk</string>
     <string name="menu_search_clipboard">Last GC-kode fra utklippstavlen</string>
     <string name="menu_history_longstring">Finner historikk</string>
@@ -370,7 +366,6 @@
     <string name="caches_sort_vote">Avstemming (egen rangering)</string>
     <string name="caches_sort_inventory">Antall sporbare</string>
     <string name="caches_sort_date_hidden">Dato gjemt</string>
-    <string name="caches_sort_date_logged">Dato logget</string>
     <string name="caches_sort_finds">Antall funn</string>
     <string name="caches_sort_state">Status</string>
     <string name="caches_sort_storage">Dato lagret i c:geo</string>
@@ -719,8 +714,6 @@
     <string name="init_prevent_cache_note_merge">Overskriv personlig cachenotat</string>
     <string name="init_customtabs_as_browser">Bruk Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Eksterne nettsider vil vises uten at du forlater c:geo (kun hvis Chrome er installert)</string>
-    <string name="init_save_log_img">Lagre bilder</string>
-    <string name="init_summary_save_log_img">Lagre bilder fra loggene</string>
     <string name="init_units">Bruk britiske måleenheter (fot og engelsk mil)</string>
     <string name="init_summary_units">Bruk imperialistiske måleenheter</string>
     <string name="init_log_offline">Offline logging</string>
@@ -1349,7 +1342,6 @@
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besøkt</string>
     <string name="init_renderthemefolder_synctolocal">Synkroniser temaer</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av temamappe</string>
     <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="map_theme_select">Velg karttema</string>
     <string name="map_theme_options">Valg for karttemaer</string>
@@ -1471,10 +1463,6 @@
     <string name="do_auto">Automatisk</string>
     <string name="do_flat">Flat</string>
     <string name="do_upright">Stående</string>
-    <!-- license -->
-    <string name="license">Lisens</string>
-    <string name="license_show">Vis lisens</string>
-    <string name="license_dismiss">Avvis</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Tidligere eventer</string>
     <string name="helper_calendar_pastevent_question">Eventdatoen har allerede vært. Legge til likevel?</string>
@@ -1993,7 +1981,6 @@
     <string name="downloadmap_download">nedlasting</string>
     <string name="downloadmap_retrieving_directory_data">Henter mappedata…</string>
     <string name="downloadmap_checking_for_updates">Ser etter oppdateringer…</string>
-    <string name="downloadtile_title">Mangler rutedata</string>
     <string name="downloadtile_info">c:geo kan ikke beregne den ønskede ruten fordi det mangler noen datafiler. Vil du laste ned de manglende dataene for ruting?</string>
     <string name="no_updates_found">Fant ingen oppdateringer</string>
     <string name="updates_check">Oppdateringssjekk</string>
@@ -2037,6 +2024,7 @@
     <string name="wizard_skip_wizard_warning">c:geo vil kanskje ikke fungere som forventet før konfigurasjonen er fullført. Avhengig av den manglende konfigurasjonen vil c:geo kanskje ikke kunne lese/lagre data som offline-kart, geocacher, loggfiler osv.\n\nNår du føler deg klar til å fullføre oppsettet, kan du enten velge \"Konfigurasjonsveiviser\" i hovedmenyen eller starte c:geo på nytt.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s mappesynkronisering fullført etter %2$s, %3$d av %4$s trengte synkronisering</string>
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
     <string name="skip">Hopp over</string>
@@ -2047,167 +2035,8 @@
     <string name="cancel">Avbryt</string>
     <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <string name="rtl_category_areas">Områder</string>
-    <string name="rtl_heath">varme</string>
-    <string name="rtl_marsh">myr</string>
-    <string name="rtl_rock">stein</string>
-    <string name="rtl_glacier">isbre</string>
-    <string name="rtl_grass">gress</string>
-    <string name="rtl_farmland">dyrket mark</string>
-    <string name="rtl_vineyard">vingård</string>
-    <string name="rtl_water">vann</string>
-    <string name="rtl_military">militært</string>
-    <string name="rtl_nature_reserve">naurreservat</string>
-    <string name="rtl_nature_reserve_strict">naturreservat (strengt)</string>
-    <string name="rtl_cliff">klippe</string>
-    <string name="rtl_ridge">rygg</string>
-    <string name="rtl_reef">rev</string>
-    <string name="rtl_beach">strand</string>
-    <string name="rtl_beach_gravel">grusstrand</string>
-    <string name="rtl_spring">kilde</string>
-    <string name="rtl_powerline">kraftlinje</string>
-    <!-- render theme legend: category "Roads & Paths" -->
-    <string name="rtl_surface_unknown">ukjent overflate</string>
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
-    <string name="rtl_bench">benk</string>
-    <string name="rtl_cairn">varde</string>
-    <string name="rtl_drinking_water">drikkevann</string>
-    <string name="rtl_info_board">infotavle</string>
-    <string name="rtl_playground">lekeplass</string>
-    <string name="rtl_playground_private">privat lekeplass</string>
-    <string name="rtl_recycling">gjenvinning</string>
-    <string name="rtl_telephone">telefon</string>
-    <string name="rtl_toilets">toaletter</string>
-    <string name="rtl_volcano">vulkan</string>
-    <string name="rtl_attraction">attraksjon</string>
-    <string name="rtl_castle">borg</string>
-    <string name="rtl_cinema">kino</string>
-    <string name="rtl_cross">kryss</string>
-    <string name="rtl_fountain">fontene</string>
-    <string name="rtl_memorial">minnesmerke</string>
-    <string name="rtl_memorial_plaque">minnesmerketavle</string>
-    <string name="rtl_memorial_war">krigsminne</string>
-    <string name="rtl_monument">monument</string>
-    <string name="rtl_museum">museum</string>
-    <string name="rtl_ruins">ruiner</string>
-    <string name="rtl_stone_historic">historisk stein</string>
-    <string name="rtl_theatre">teater</string>
-    <string name="rtl_water_well">brønn</string>
-    <string name="rtl_wayside_cross">kors ved veien</string>
-    <string name="rtl_zoo">dyrehage</string>
-    <string name="rtl_library">bibliotek</string>
-    <string name="rtl_arts_centre">kunstsenter</string>
-    <string name="rtl_casino">kasino</string>
-    <string name="rtl_nightclub">nattklubb</string>
-    <string name="rtl_community_centre">samfunnshus</string>
-    <string name="rtl_townhall">rådhus</string>
-    <string name="rtl_courthouse">tinghus</string>
-    <string name="rtl_cliff_diving">klippedykking</string>
-    <string name="rtl_climbing">klatring</string>
-    <string name="rtl_golf">golf</string>
-    <string name="rtl_gym">treningsstudio</string>
-    <string name="rtl_miniature_golf">minigolf</string>
-    <string name="rtl_soccer">fotball</string>
-    <string name="rtl_stadium">stadion</string>
-    <string name="rtl_tennis">tennis</string>
-    <string name="rtl_via_ferrata">via ferrata</string>
-    <string name="rtl_water_park">vannpark</string>
-    <string name="rtl_airport">flyplass</string>
-    <string name="rtl_cable_car">kabelbane</string>
-    <string name="rtl_chair_lift">stolheis</string>
-    <string name="rtl_gondola">gondol</string>
-    <string name="rtl_goods_lift">vareheis</string>
-    <string name="rtl_helipad">helipad</string>
-    <string name="rtl_parking">parkering</string>
-    <string name="rtl_parking_private">privat parkering</string>
-    <string name="rtl_bicycle_parking">sykkelparkering</string>
-    <string name="rtl_bicycle_rental">sykkelutleie</string>
-    <string name="rtl_bicycle_shop">sykkelbutikk</string>
-    <string name="rtl_car_rental">bilutleie</string>
-    <string name="rtl_car_sharing">bildeling</string>
-    <string name="rtl_car_wash">bilvask</string>
-    <string name="rtl_car_shop">bilbutikk</string>
-    <string name="rtl_fuel">drivstoff</string>
-    <string name="rtl_ferry_terminal">fergeterminal</string>
-    <string name="rtl_alpine_hut">fjellhytte</string>
-    <string name="rtl_alpine_hut_private">privat fjellhytte</string>
-    <string name="rtl_alpine_hut_winter">vinterfjellhytte</string>
-    <string name="rtl_apartment">leilighet</string>
-    <string name="rtl_camp_site">campingplass</string>
-    <string name="rtl_caravan_site">bobilplass</string>
-    <string name="rtl_hostel">hostel</string>
-    <string name="rtl_hotel">hotell</string>
-    <string name="rtl_shelter_basic_hut">nødbu</string>
-    <string name="rtl_wilderness_hut">villmarkshytte</string>
-    <string name="rtl_wilderness_hut_private">privat hytte</string>
-    <string name="rtl_bar">bar</string>
-    <string name="rtl_biergarten">ølhage</string>
-    <string name="rtl_cafe">cafe</string>
-    <string name="rtl_fastfood">hurtigmat</string>
-    <string name="rtl_ice_cream">iskrem</string>
-    <string name="rtl_pub">pub</string>
-    <string name="rtl_restaurant">restaurant</string>
-    <string name="rtl_bbq">grill</string>
-    <string name="rtl_water_point">vannpunkt</string>
-    <string name="rtl_atm">minibank</string>
-    <string name="rtl_bakery">bakeri</string>
-    <string name="rtl_bank">bank</string>
-    <string name="rtl_beverages">drikkevarer</string>
-    <string name="rtl_books">bøker</string>
-    <string name="rtl_butcher">slakter</string>
-    <string name="rtl_chemist">farmasøyt</string>
-    <string name="rtl_convenience">nærbutikk</string>
-    <string name="rtl_farm_shop">gårdsbutikk</string>
-    <string name="rtl_mall">kjøpesenter</string>
-    <string name="rtl_marketplace">marked</string>
-    <string name="rtl_organic">økologisk</string>
-    <string name="rtl_postbox">postkasse</string>
-    <string name="rtl_postoffice">postkontor</string>
-    <string name="rtl_sports_shop">sportsbutikk</string>
-    <string name="rtl_supermarket">supermarked</string>
-    <string name="rtl_travel_agency">reisebyrå</string>
-    <string name="rtl_defibrillator">hjertestarter</string>
-    <string name="rtl_doctors">legekontor</string>
-    <string name="rtl_embassy">ambassade</string>
-    <string name="rtl_emergency_phone">nødtelefon</string>
-    <string name="rtl_firebrigade">brannstasjon</string>
-    <string name="rtl_hospital">sykehus</string>
-    <string name="rtl_clinic">klinikk</string>
-    <string name="rtl_pharmacy">apotek</string>
-    <string name="rtl_police">politi</string>
-    <string name="rtl_emergency_fire_hydrant">brannhydrant</string>
-    <string name="rtl_emergency_suction_point">nødsugepunkt</string>
-    <string name="rtl_border_control">grensekontroll</string>
-    <string name="rtl_bridge_movable">bevegelig bro</string>
-    <string name="rtl_cave_entrance">huleinngang</string>
-    <string name="rtl_elevator">heis</string>
-    <string name="rtl_ford">vadested</string>
-    <string name="rtl_ford_small">lite vadested</string>
-    <string name="rtl_gate">port</string>
-    <string name="rtl_gate_private">privat port</string>
-    <string name="rtl_geyser">geysir</string>
-    <string name="rtl_hot_spring">varm kilde</string>
-    <string name="rtl_ladder">stige</string>
-    <string name="rtl_lift_gate">port</string>
-    <string name="rtl_peak_small">liten topp</string>
-    <string name="rtl_rapids">stryk</string>
-    <string name="rtl_stone">stein</string>
-    <string name="rtl_traffic_signal">trafikklys</string>
-    <string name="rtl_viewpoint">utsiktspunkt</string>
-    <string name="rtl_waterfall">foss</string>
-    <string name="rtl_wetland">våtland</string>
-    <string name="rtl_mud">gjørme</string>
-    <string name="rtl_cemetery">gravplass</string>
-    <string name="rtl_cemetery_christian">kristen gravplass</string>
-    <string name="rtl_cemetery_jewish">jødisk gravplass</string>
-    <string name="rtl_cemetery_muslim">muslimsk gravplass</string>
-    <string name="rtl_pedestrian_area">fotgjengerområde</string>
-    <string name="rtl_trading">handel</string>
-    <string name="rtl_parking_restricted">begrenset parkering</string>
-    <string name="rtl_prison">fengsel</string>
-    <string name="rtl_ruin">ruin</string>
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
