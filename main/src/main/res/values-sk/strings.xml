@@ -212,7 +212,6 @@
     <string name="err_detail_cache">Prepáčte, c:geo nedokáže načítať detaily skrýše. Je to naozaj skrýša?</string>
     <string name="err_detail_cache_find">Prepáčte, c:geo nemôže nájsť skrýšu.</string>
     <string name="err_detail_cache_find_some">Prepáčte, c:geo nemôže nájsť požadovanú skrýšu.</string>
-    <string name="err_detail_cache_find_any">Prepáčte, c:geo nemôže nájsť žiadnu skrýšu.</string>
     <string name="err_detail_no_spoiler">c:geo nenašlo pre túto skrýšu žiaden obrázok s nápovedou.</string>
     <string name="err_detail_still_working">Stále prebieha práca na inej úlohe.</string>
     <string name="err_detail_premium_log_found">Táto keška je dostupná len pre prémiových členov geocaching.com. Z tohto dôvodu informácie o keške nemôžu byť zobrazené.\n\nNapriek tomu, pokiaľ už si túto kešku našiel, môžeš ju odtiaľto zalogovať.</string>
@@ -813,6 +812,7 @@
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
+    <string name="distance">Vzdialenosť</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
     <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>
@@ -1565,8 +1565,6 @@
     <string name="map_showwp_visited">Navštívené</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovať motívy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tým synchronizujete svoje motívy do súkromného priečinka aplikácie a vylepšíte tak výkon otvárania prezerača mapy na úkor určitého ukladacieho miesta v zariadení.</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnúť synchronizáciu priečinka s témou</string>
-    <string name="init_renderthemefolder_synctolocal_dialog_message">Tým sa bude nepretržite synchronizovať obsah priečinka s mapovými motívmi do súkromného priečinka aplikácie pre rýchlejší prístup k súborom. Pred aktivovaním tejto funkcie zaistite, aby priečinok s motívmi obsahoval len vaše motívy a žiadne ďalšie (veľké) dáta.\n\nVáš priečinok s mapovými motívmi \'%1$s\' má momentálne %2$s, %3$s a veľkosť %4$s.\n\nChcete povoliť synchronizáciu priečinka?</string>
     <string name="onetime_mapthemefixslow_title">Oprava pomalého vykresľovania mapového motívu</string>
     <string name="onetime_mapthemefixslow_message">Práca s nezbalenými mapovými motívmi môže znižovať výkon otvárania zobrazovača mapy. Motívy môžete zbaliť alebo synchronizovať a dosiahnuť tak rýchlejší výkon a skrátiť oneskorenie pri spúšťaní mapy.</string>
     <string name="map_theme_select">Vybrať tému mapy</string>
@@ -1691,10 +1689,6 @@
     <string name="do_auto">Automaticky</string>
     <string name="do_flat">Ploché</string>
     <string name="do_upright">Vzpriamené</string>
-    <!-- license -->
-    <string name="license">Licencia</string>
-    <string name="license_show">Zobraziť licenciu</string>
-    <string name="license_dismiss">Zamietnutie</string>
     <!-- helpers -->
     <string name="helper_calendar_pastevent_title">Minulá udalosť</string>
     <string name="helper_calendar_pastevent_question">Dátum udalosti je v minulosti. Pridať napriek tomu?</string>
@@ -2360,6 +2354,8 @@
     <string name="wizard_skip_wizard_warning">Aplikácia c:geo nemusí fungovať podľa očakávania, kým nebude konfigurácia dokončená. V závislosti od chýbajúcej konfigurácie nemusí byť aplikácia c:geo schopná čítať/ukladať údaje, ako sú napríklad offline mapy, kešky, súbory denníka atď.\n\nKeď budete mať pocit, že ste pripravení na dokončenie nastavenia, vyberte v ponuke položku \"Sprievodca konfiguráciou\", prípadne reštartujte aplikáciu c:geo.</string>
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizácia priečinka %1$s dokončená po %2$s, %3$d z %4$s potrebná synchronizácia</string>
+    <!-- Wherigo Player -->
+    <string name="wherigo_download_progress_download_status">Stiahnuté %1$s/%2$s (%3$s %)</string>
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>
@@ -2372,6 +2368,8 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
+    <string name="pause">Pozastaviť</string>
+    <string name="resume">Pokračovať</string>
     <!-- Multi-Selections -->
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Smajlík</string>
