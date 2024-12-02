@@ -161,7 +161,6 @@
     <string name="err_detail_cache">c:geo ne more prikazati željenega zaklada. Ali je res zaklad?</string>
     <string name="err_detail_cache_find">c:geo ni našel zaklada</string>
     <string name="err_detail_cache_find_some">c:geo ni našel tega zaklada.</string>
-    <string name="err_detail_cache_find_any">c:geo ni našel nobenega zaklada.</string>
     <string name="err_detail_no_spoiler">c:geo ni našel spoiler slik za ta zaklad.</string>
     <string name="err_detail_still_working">Še opravljam drugo nalogo.</string>
     <string name="err_watchlist_failed">Spreminjanje spiska nadzorov ni uspelo.</string>
@@ -264,7 +263,6 @@
     <string name="caches_sort_vote">Mojih glasovih</string>
     <string name="caches_sort_inventory">Številu sledljivčkov</string>
     <string name="caches_sort_date_hidden">Datum objave</string>
-    <string name="caches_sort_date_logged">Datum zapisa</string>
     <string name="caches_sort_finds">Število najdb</string>
     <string name="caches_sort_state">Država</string>
     <string name="caches_sort_storage">Datum shranjevanja na napravo</string>
@@ -389,8 +387,6 @@
     <string name="init_address">Pokaži naslov</string>
     <string name="init_summary_address">Na glavnem zaslonu pokaži naslov namesto koordinat</string>
     <string name="init_showwaypoint_description">Če je manj kot določeno število zakladov na zemljevidu, se pokažejo tudi dodatne točke.</string>
-    <string name="init_save_log_img">Slike iz zapisov</string>
-    <string name="init_summary_save_log_img">Za delo brez povezave shrani tudi slike iz zapisov</string>
     <string name="init_units">Anglosaške merske enote</string>
     <string name="init_summary_units">Uporabi anglosaške merske enote namesto metričnih</string>
     <string name="init_log_offline">Zapisovanje brez povezave</string>
@@ -660,7 +656,6 @@
     <string name="map_live_disable">Izklopi podatke v živo</string>
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
-    <string name="map_theme_legend">Tema Legenda</string>
     <!-- search -->
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
@@ -717,10 +712,6 @@
     <string name="destination_select">Izbira destinacije</string>
     <string name="osmand_marker_cgeo">Oznaka iz c:geo</string>
     <!-- device orientation types -->
-    <!-- license -->
-    <string name="license">Licenca</string>
-    <string name="license_show">Pokaži licenco</string>
-    <string name="license_dismiss">Zapri</string>
     <!-- helpers -->
     <string name="helper_sendtocgeo_title">Pošlji v c:geo</string>
     <string name="helper_sendtocgeo_description">Send to c:geo je razširitev za vaš brskalnik <strong>na vašem računalniku</strong>. Ko brskate na geocaching.com, lahko iz spletne strani pošljete zaklad direktno na vašo napravo s klikom na gumb znotraj brskalnika.</string>
@@ -1039,13 +1030,12 @@
     <!-- individual route export -->
     <!-- install wizard -->
     <!-- Map Theme helper -->
+    <!-- Wherigo Player -->
     <!-- default actions in dialogs -->
     <string name="cancel">Razveljavi</string>
     <!-- Multi-Selections -->
-    <!-- render theme legend: category "areas" -->
-    <!-- render theme legend: category "Roads & Paths" -->
-    <!-- render theme legend: category "Walking, Cycling, Climbing -->
-    <!-- render theme legend: category "POI / Symbols" -->
     <!-- Smileys GC / OC -->
     <!-- message center notifications -->
+    <!-- GC image size conversion -->
+    <!-- db inspection -->
 </resources>
