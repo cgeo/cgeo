@@ -62,7 +62,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
     public static final String ACTION_CLIPBOARD = "clipboard";
-    public boolean ACTIVITY_USED = false;
 
     @Override
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
@@ -150,6 +149,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     @Override
     public final void onResume() {
         super.onResume();
+        setTitle(res.getString(R.string.search));
         init();
     }
 
@@ -160,8 +160,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     @Override
     public void onBackPressed() {
-        if (ACTIVITY_USED) {
-            ACTIVITY_USED = false;
+        if (!getTitle().equals(res.getString(R.string.search))) {
             setTitle(res.getString(R.string.search));
             init();
         } else {

@@ -44,7 +44,6 @@ class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         holder.imageView.setImageDrawable(AppCompatResources.getDrawable(activity, card.getIcon()));
         holder.cardView.setOnClickListener(v -> {
             activity.setTitle(activity.getString(R.string.search) + ": " + activity.getString(card.getTitle()));
-            activity.ACTIVITY_USED = true;
 
             View searchActivity = (((View)((View)v.getParent()).getParent()));
 
