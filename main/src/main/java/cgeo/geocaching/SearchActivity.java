@@ -38,15 +38,21 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import java.util.Arrays;
@@ -136,7 +142,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
-        init();
+        //init();
     }
 
     @Override
@@ -285,15 +291,77 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         return false;
     }
 
+    private CardView initCardView(final GridLayout gridLayout, final SearchActivityCard c) {
+        return initCardView(gridLayout, c.getId(), c.getTitle(), c.getIcon(), c.getSearchFieldId(), null, null);
+    }
+
+    private CardView initCardView(final GridLayout gridLayout, final int id, final int title, final int icon, final int searchFieldId, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction) {
+        final CardView cardView = (CardView) getLayoutInflater().inflate(R.layout.search_card, gridLayout, false);
+        cardView.setId(id);
+
+        final TextView text = cardView.findViewById(R.id.text);
+        text.setText(title);
+
+        final ImageView img = cardView.findViewById(R.id.icon);
+        img.setImageDrawable(getDrawable(icon));
+
+        cardView.setOnClickListener(v -> {
+            setTitle(getString(R.string.search) + ": " + getString(title));
+
+            View searchActivity = (View) gridLayout.getParent();
+
+            if (runnable == null) {
+                View ll = searchActivity.findViewById(searchFieldId);
+
+                Button searchButton = ll.findViewWithTag("searchButton");
+                if (searchButton != null) {
+                    searchButton.performClick();
+                    if (searchButton.getId() == R.id.search_filter) {
+                        return;
+                    }
+                }
+
+                View cards = searchActivity.findViewById(R.id.grid_layout);
+                cards.setVisibility(View.GONE);
+                ll.setVisibility(View.VISIBLE);
+                searchActivity.requestLayout();
+
+                AutoCompleteTextView searchField = ll.findViewWithTag("searchField");
+                if (searchField != null) {
+                    searchField.setSelection(searchField.getText().length());
+                    Keyboard.show(this, searchField);
+                }
+            } else {
+                AutoCompleteTextView editText = searchActivity.findViewById(R.id.generic);
+                EditUtils.setActionListener(editText, runnable);
+                editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
+                Button button = searchActivity.findViewById(R.id.search_generic);
+                button.setOnClickListener(arg0 -> runnable.run());
+            }
+        });
+
+        return cardView;
+    }
+
     private void init() {
+        // hide classic search fields
         final LinearLayout sa = findViewById(R.id.search_activity);
-        for (int i = 0; i < sa.getChildCount(); i++) {
+        for (int i = 1; i < sa.getChildCount(); i++) {
             sa.getChildAt(i).setVisibility(View.GONE);
         }
 
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        binding.recyclerView.setVisibility(View.VISIBLE);
-        binding.recyclerView.setAdapter(new CardAdapter(this, Arrays.asList(SearchActivityCard.values())));
+        final GridLayout gridLayout = findViewById(R.id.grid_layout);
+        if (gridLayout.getChildCount() == 0) {
+            for (SearchActivityCard c : SearchActivityCard.values()) {
+                gridLayout.addView(initCardView(gridLayout, c));
+            }
+        }
+        gridLayout.setVisibility(View.VISIBLE);
+
+        gridLayout.addView(initCardView(gridLayout, R.id.card_gccode, R.string.search_geo, R.drawable.search_identifier, R.id.searchg_geocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode));
+
+
+        //binding.recyclerView.setAdapter(new CardAdapter(this, Arrays.asList(SearchActivityCard.values())));
 
         binding.buttonLatLongitude.setOnClickListener(v -> updateCoordinates());
 

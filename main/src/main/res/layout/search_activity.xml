@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:id="@+id/search_activity"
     tools:context=".SearchActivity" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_activity"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            style="@style/search_content_group"
+            android:id="@+id/searchg_generic"
+            android:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+                android:layout_toLeftOf="@+id/search_generic"
+                android:labelFor="@id/generic">
+                <AutoCompleteTextView
+                    android:id="@+id/generic"
+                    android:tag="searchField"
+                    style="@style/textinput_embedded_singleline_go" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/search_generic"
+                style="@style/button_icon_search"
+                app:icon="@drawable/ic_menu_search" />
+        </RelativeLayout>
 
         <RelativeLayout
             style="@style/search_content_group"
@@ -198,10 +223,12 @@
                 app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <GridLayout
+        android:id="@+id/grid_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp" />
-
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:padding="8dp" />
+    </LinearLayout>
+</ScrollView>
