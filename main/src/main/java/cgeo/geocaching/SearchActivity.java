@@ -288,33 +288,25 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     @SuppressLint("SetTextI18n")
     private SearchCardView initCardView(final GridLayout gridLayout, final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
-        final SearchCardView cardView = initCardViewButton(gridLayout, title, icon);
+        return initCardViewButton(gridLayout, title, icon).addOnClickListener(() -> {
+            binding.searchGroup.setVisibility(View.VISIBLE);
 
-        cardView.setOnClickListener(v -> {
-            View searchGroup = findViewById(R.id.search_group);
-            searchGroup.setVisibility(View.VISIBLE);
-
-            final AutoCompleteTextView editText = findViewById(R.id.search_field);
-            final TextInputLayout label = findViewById(R.id.search_label);
-            label.setHint(title);
-            EditUtils.setActionListener(editText, runnable);
+            binding.searchLabel.setHint(title);
+            EditUtils.setActionListener(binding.searchField, runnable);
             if (suggestionFunction != null) {
-                editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
+                binding.searchField.setAdapter(new GeocacheAutoCompleteAdapter(binding.searchField.getContext(), suggestionFunction));
             }
-            final Button button = findViewById(R.id.search_button);
-            button.setOnClickListener(arg0 -> runnable.run());
+            binding.searchButton.setOnClickListener(arg0 -> runnable.run());
 
             // Todo: Temp hack for geocode field
             if (title == R.string.search_geo) {
-                editText.setText("GC");
-                handlePotentialClipboardGeocode(editText, label);
+                binding.searchField.setText("GC");
+                handlePotentialClipboardGeocode(binding.searchField, binding.searchLabel);
             }
 
-            editText.setSelection(editText.getText().length());
-            Keyboard.show(this, editText);
+            binding.searchField.setSelection(binding.searchField.getText().length());
+            Keyboard.show(this, binding.searchField);
         });
-
-        return cardView;
     }
 
     private SearchCardView initCardViewButton(final GridLayout gridLayout, final int title, final int icon) {
@@ -351,7 +343,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         gridLayout.addView(geocodecard);
 
         gridLayout.addView(
-                initCardViewButton(gridLayout, R.string.search_filter_button, R.drawable.ic_menu_filter)
+                initCardViewButton(gridLayout, R.string.search_filter, R.drawable.ic_menu_filter)
                 .addOnClickListener(this::findByFilterFn)
                 .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show())
         );
