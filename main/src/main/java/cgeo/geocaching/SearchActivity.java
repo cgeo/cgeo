@@ -287,8 +287,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     @SuppressLint("SetTextI18n")
-    private SearchCardView initCardView(final GridLayout gridLayout, final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
-        return initCardViewButton(gridLayout, title, icon).addOnClickListener(() -> {
+    private SearchCardView initCardView(final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
+        return initCardViewButton(title, icon).addOnClickListener(() -> {
             binding.searchGroup.setVisibility(View.VISIBLE);
 
             binding.searchLabel.setHint(title);
@@ -309,22 +309,21 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         });
     }
 
-    private SearchCardView initCardViewButton(final GridLayout gridLayout, final int title, final int icon) {
-        final SearchCardView cardView = (SearchCardView) getLayoutInflater().inflate(R.layout.search_card, gridLayout, false);
+    private SearchCardView initCardViewButton(final int title, final int icon) {
+        final SearchCardView cardView = (SearchCardView) getLayoutInflater().inflate(R.layout.search_card, binding.gridLayout, false);
         cardView.setIcon(icon);
         cardView.setTitle(title);
         return cardView;
     }
 
     private void init() {
-        final GridLayout gridLayout = findViewById(R.id.grid_layout);
 
         // don't populate if already populated
-        if (gridLayout.getChildCount() > 0) {
+        if (binding.gridLayout.getChildCount() > 0) {
             return;
         }
 
-        final CardView geocodecard = initCardView(gridLayout, R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(binding.searchField.getText().toString()), DataStore::getSuggestionsGeocode);
+        final CardView geocodecard = initCardView(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(binding.searchField.getText().toString()), DataStore::getSuggestionsGeocode);
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
@@ -340,24 +339,24 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             }
             return true;
         });
-        gridLayout.addView(geocodecard);
+        binding.gridLayout.addView(geocodecard);
 
-        gridLayout.addView(
-                initCardViewButton(gridLayout, R.string.search_filter, R.drawable.ic_menu_filter)
+        binding.gridLayout.addView(
+                initCardViewButton(R.string.search_filter, R.drawable.ic_menu_filter)
                 .addOnClickListener(this::findByFilterFn)
                 .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show())
         );
 
         // Todo: Change CoordinateInputDialog to support a callback
-        gridLayout.addView(
-            initCardViewButton(gridLayout, R.string.search_coordinates, R.drawable.ic_menu_mylocation)
+        binding.gridLayout.addView(
+            initCardViewButton(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
             .addOnClickListener(this::findByCoordsFn)
         );
 
-        gridLayout.addView(initCardView(gridLayout, R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null));
+        binding.gridLayout.addView(initCardView(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null));
 
-        final SearchCardView kwcard = initCardView(gridLayout, R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
-        gridLayout.addView(kwcard);
+        final SearchCardView kwcard = initCardView(R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        binding.gridLayout.addView(kwcard);
         // mitigation for #13312
         if (!Settings.isGCPremiumMember()) {
             final int activeCount = ConnectorFactory.getActiveConnectors().size();
@@ -368,11 +367,11 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             }
         }
 
-        gridLayout.addView(initCardView(gridLayout, R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName));
+        binding.gridLayout.addView(initCardView(R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName));
 
-        gridLayout.addView(initCardView(gridLayout, R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName));
+        binding.gridLayout.addView(initCardView(R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName));
 
-        gridLayout.addView(initCardView(gridLayout, R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode));
+        binding.gridLayout.addView(initCardView(R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode));
     }
 
     /**
