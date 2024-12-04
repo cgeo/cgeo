@@ -159,16 +159,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         return MENU_SEARCH;
     }
 
-    @Override
-    public void onBackPressed() {
-        if (!getTitle().equals(res.getString(R.string.search))) {
-            setTitle(res.getString(R.string.search));
-            init();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
