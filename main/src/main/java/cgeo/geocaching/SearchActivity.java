@@ -15,13 +15,12 @@ import cgeo.geocaching.databinding.SearchActivityBinding;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.SearchCardView;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -29,16 +28,16 @@ import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,16 +45,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import java.util.Arrays;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.Locale;
 
 import de.k3b.geo.api.GeoPointDto;
@@ -155,7 +151,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     @Override
     public final void onResume() {
         super.onResume();
-        setTitle(res.getString(R.string.search));
         init();
     }
 
@@ -291,112 +286,101 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         return false;
     }
 
-    private CardView initCardView(final GridLayout gridLayout, final SearchActivityCard c) {
-        return initCardView(gridLayout, c.getId(), c.getTitle(), c.getIcon(), c.getSearchFieldId(), null, null);
-    }
-
-    private CardView initCardView(final GridLayout gridLayout, final int id, final int title, final int icon, final int searchFieldId, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction) {
-        final CardView cardView = (CardView) getLayoutInflater().inflate(R.layout.search_card, gridLayout, false);
-        cardView.setId(id);
-
-        final TextView text = cardView.findViewById(R.id.text);
-        text.setText(title);
-
-        final ImageView img = cardView.findViewById(R.id.icon);
-        img.setImageDrawable(getDrawable(icon));
+    @SuppressLint("SetTextI18n")
+    private SearchCardView initCardView(final GridLayout gridLayout, final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
+        final SearchCardView cardView = initCardViewButton(gridLayout, title, icon);
 
         cardView.setOnClickListener(v -> {
-            setTitle(getString(R.string.search) + ": " + getString(title));
+            View searchGroup = findViewById(R.id.search_group);
+            searchGroup.setVisibility(View.VISIBLE);
 
-            View searchActivity = (View) gridLayout.getParent();
-
-            if (runnable == null) {
-                View ll = searchActivity.findViewById(searchFieldId);
-
-                Button searchButton = ll.findViewWithTag("searchButton");
-                if (searchButton != null) {
-                    searchButton.performClick();
-                    if (searchButton.getId() == R.id.search_filter) {
-                        return;
-                    }
-                }
-
-                View cards = searchActivity.findViewById(R.id.grid_layout);
-                cards.setVisibility(View.GONE);
-                ll.setVisibility(View.VISIBLE);
-                searchActivity.requestLayout();
-
-                AutoCompleteTextView searchField = ll.findViewWithTag("searchField");
-                if (searchField != null) {
-                    searchField.setSelection(searchField.getText().length());
-                    Keyboard.show(this, searchField);
-                }
-            } else {
-                AutoCompleteTextView editText = searchActivity.findViewById(R.id.generic);
-                EditUtils.setActionListener(editText, runnable);
+            final AutoCompleteTextView editText = findViewById(R.id.search_field);
+            final TextInputLayout label = findViewById(R.id.search_label);
+            label.setHint(title);
+            EditUtils.setActionListener(editText, runnable);
+            if (suggestionFunction != null) {
                 editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
-                Button button = searchActivity.findViewById(R.id.search_generic);
-                button.setOnClickListener(arg0 -> runnable.run());
             }
+            final Button button = findViewById(R.id.search_button);
+            button.setOnClickListener(arg0 -> runnable.run());
+
+            // Todo: Temp hack for geocode field
+            if (title == R.string.search_geo) {
+                editText.setText("GC");
+                handlePotentialClipboardGeocode(editText, label);
+            }
+
+            editText.setSelection(editText.getText().length());
+            Keyboard.show(this, editText);
         });
 
         return cardView;
     }
 
+    private SearchCardView initCardViewButton(final GridLayout gridLayout, final int title, final int icon) {
+        final SearchCardView cardView = (SearchCardView) getLayoutInflater().inflate(R.layout.search_card, gridLayout, false);
+        cardView.setIcon(icon);
+        cardView.setTitle(title);
+        return cardView;
+    }
+
     private void init() {
-        // hide classic search fields
-        final LinearLayout sa = findViewById(R.id.search_activity);
-        for (int i = 1; i < sa.getChildCount(); i++) {
-            sa.getChildAt(i).setVisibility(View.GONE);
-        }
-
         final GridLayout gridLayout = findViewById(R.id.grid_layout);
-        if (gridLayout.getChildCount() == 0) {
-            for (SearchActivityCard c : SearchActivityCard.values()) {
-                gridLayout.addView(initCardView(gridLayout, c));
-            }
+
+        // don't populate if already populated
+        if (gridLayout.getChildCount() > 0) {
+            return;
         }
-        gridLayout.setVisibility(View.VISIBLE);
 
-        gridLayout.addView(initCardView(gridLayout, R.id.card_gccode, R.string.search_geo, R.drawable.search_identifier, R.id.searchg_geocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode));
+        final CardView geocodecard = initCardView(gridLayout, R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(binding.searchField.getText().toString()), DataStore::getSuggestionsGeocode);
+        geocodecard.setOnLongClickListener(v -> {
+            final String clipboardText = ClipboardUtils.getText();
+            final String geocode;
+            if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
+                geocode = clipboardText;
+            } else {
+                geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
+            }
+            if (!StringUtils.isEmpty(geocode)) {
+                findByGeocodeFn(geocode);
+            } else {
+                geocodecard.callOnClick();
+            }
+            return true;
+        });
+        gridLayout.addView(geocodecard);
 
+        gridLayout.addView(
+                initCardViewButton(gridLayout, R.string.search_filter_button, R.drawable.ic_menu_filter)
+                .addOnClickListener(this::findByFilterFn)
+                .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show())
+        );
 
-        //binding.recyclerView.setAdapter(new CardAdapter(this, Arrays.asList(SearchActivityCard.values())));
+        // Todo: Change CoordinateInputDialog to support a callback
+        gridLayout.addView(
+            initCardViewButton(gridLayout, R.string.search_coordinates, R.drawable.ic_menu_mylocation)
+            .addOnClickListener(this::findByCoordsFn)
+        );
 
-        binding.buttonLatLongitude.setOnClickListener(v -> updateCoordinates());
+        gridLayout.addView(initCardView(gridLayout, R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null));
 
-        binding.searchCoordinates.setOnClickListener(arg0 -> findByCoordsFn());
-
-        // standard searches
-        setBasicSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
-        setBasicSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
-        setBasicSearchAction(binding.finder, binding.searchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
-        setBasicSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
-        setBasicSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
-
-        // geocache searches
-        setGeocacheSearchAction(binding.geocode, binding.displayGeocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode, false);
-        setGeocacheSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword, true);
-
-        binding.geocode.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-        binding.trackable.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
-
-        binding.searchFilterInfo.setOnClickListener(v -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
-
-        handlePotentialClipboardGeocode();
-
+        final SearchCardView kwcard = initCardView(gridLayout, R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        gridLayout.addView(kwcard);
         // mitigation for #13312
-        boolean disableKeywordSearch = false;
         if (!Settings.isGCPremiumMember()) {
             final int activeCount = ConnectorFactory.getActiveConnectors().size();
             if (GCConnector.getInstance().isActive() && (activeCount == 1 || (activeCount == 2 && ALConnector.getInstance().isActive()))) {
                 // only gc.com connectors active, and user has basic member status => disable keyword search
-                disableKeywordSearch = true;
+                kwcard.addOnClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_kw_disabled_hint)).show());
+                ((ImageView) kwcard.findViewById(R.id.icon)).setColorFilter(R.color.colorTextHint, PorterDuff.Mode.SRC_IN);
             }
         }
-        binding.keyword.setEnabled(!disableKeywordSearch);
-        binding.searchKeyword.setEnabled(!disableKeywordSearch);
-        binding.searchKeywordDisabledHint.setVisibility(disableKeywordSearch ? View.VISIBLE : View.GONE);
+
+        gridLayout.addView(initCardView(gridLayout, R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName));
+
+        gridLayout.addView(initCardView(gridLayout, R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName));
+
+        gridLayout.addView(initCardView(gridLayout, R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode));
     }
 
     /**
@@ -404,74 +388,44 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
      * <br>
      * Needs to run async as clipboard access is blocked if activity is not yet created.
      */
-    private void handlePotentialClipboardGeocode() {
-        binding.geocodeInputLayout.postDelayed(() -> {
-            final String clipboardText = ClipboardUtils.getText();
+    private void handlePotentialClipboardGeocode(AutoCompleteTextView geocodeField, TextInputLayout geocodeInputLayout) {
+        final String clipboardText = ClipboardUtils.getText();
 
-            String geocode = "";
+        String geocode = "";
 
-            if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
-                geocode = clipboardText;
-            } else {
-                geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
-            }
-            if (!StringUtils.isEmpty(geocode)) {
-                binding.geocode.setText(geocode);
-                binding.geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
-
-                // clear hint if text input get changed
-                binding.geocode.addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                        // nothing
-                    }
-
-                    @Override
-                    public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                        // nothing
-                    }
-
-                    @Override
-                    public void afterTextChanged(final Editable s) {
-                        binding.geocodeInputLayout.setHelperText(null);
-                        binding.geocode.removeTextChangedListener(this);
-                    }
-                });
-            }
-        }, 500);
-    }
-
-    private void setBasicSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
-        if (editText != null) {
-            EditUtils.setActionListener(editText, runnable);
-            if (suggestionFunction != null) {
-                editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
-            }
+        if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
+            geocode = clipboardText;
+        } else {
+            geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
         }
-        button.setOnClickListener(arg0 -> runnable.run());
-    }
+        if (!StringUtils.isEmpty(geocode)) {
+            geocodeField.setText(geocode);
+            geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
 
-    private void setGeocacheSearchAction(@NonNull final AutoCompleteTextView editText, @NonNull final Button button, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction, final boolean resetToBlank) {
-        EditUtils.setActionListener(editText, runnable);
-        editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
-        editText.setOnItemClickListener((parent, view, position, id) -> {
-            final String geocode = (String) parent.getItemAtPosition(position);
-            // as we directly start the cache details activity on item selection,
-            // reset the edit text to not confuse the user and to provide a better workflow.
-            // use the current cache's prefix as new prefix
-            editText.setText(resetToBlank ? "" : geocode.substring(0, 2));
-            findByGeocodeFn(geocode);
-        });
-        button.setOnClickListener(arg0 -> runnable.run());
-    }
+            // clear hint if text input get changed
+            geocodeField.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                    // nothing
+                }
 
-    private void updateCoordinates() {
-        CoordinatesInputDialog.show(getSupportFragmentManager(), null, null);
+                @Override
+                public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                    // nothing
+                }
+
+                @Override
+                public void afterTextChanged(final Editable s) {
+                    geocodeInputLayout.setHelperText(null);
+                    geocodeField.removeTextChangedListener(this);
+                }
+            });
+        }
     }
 
     @Override
     public void updateCoordinates(@NonNull final Geopoint gp) {
-        ViewUtils.setCoordinates(gp, binding.buttonLatLongitude);
+        //ViewUtils.setCoordinates(gp, binding.buttonLatLongitude);
     }
 
     @Override
@@ -480,7 +434,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByCoordsFn() {
-        Geopoint geopoint = ViewUtils.getCoordinates(binding.buttonLatLongitude);
+        //Geopoint geopoint = ViewUtils.getCoordinates(binding.buttonLatLongitude);
+        Geopoint geopoint = null;
         if (geopoint == null || !geopoint.isValid()) {
             geopoint = LocationDataProvider.getInstance().currentGeo().getCoords();
             if (geopoint.isValid()) {
@@ -500,7 +455,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private void findByKeywordFn() {
         // find caches by keyword
-        final String keyText = StringUtils.trim(binding.keyword.getText().toString());
+        final String keyText = StringUtils.trim(binding.searchField.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show();
@@ -512,7 +467,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByAddressFn() {
-        final String addressSearchText = StringUtils.trim(binding.address.getText().toString());
+        final String addressSearchText = StringUtils.trim(binding.searchField.getText().toString());
 
         if (StringUtils.isBlank(addressSearchText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show();
@@ -530,7 +485,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByOwnerFn() {
-        findByOwnerFn(binding.owner.getText().toString());
+        findByOwnerFn(binding.searchField.getText().toString());
     }
 
     private void findByOwnerFn(final String userName) {
@@ -546,7 +501,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByFinderFn() {
-        findByFinderFn(binding.finder.getText().toString());
+        findByFinderFn(binding.searchField.getText().toString());
     }
 
     private void findByFinderFn(final String userName) {
@@ -592,7 +547,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trimToEmpty(binding.trackable.getText().toString());
+        final String trackableText = StringUtils.trimToEmpty(binding.searchField.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_tb).show();
