@@ -1169,9 +1169,6 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
-    <string name="category_unifiedMap">Unified Map (beta)</string>
-    <string name="init_title_useUnifiedMap">Använd enhetlig karta</string>
-    <string name="init_summary_useUnifiedMap">Använd ny unified map istället för inbyggda kartor från Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -2531,7 +2528,6 @@
     <string name="brouter_info">Offline rutt-tjänst</string>
     <string name="hillshading_info">Offline terrängskuggning</string>
     <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
-    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offline-kartor (kräver omstart)</string>
     <string name="maptheme_scale_map_title">Skalfaktor karta</string>
     <string name="maptheme_scale_map_summary">Skalar karta; 100% = ingen skalning</string>
     <string name="maptheme_scale_text_title">Skalfaktor text</string>
