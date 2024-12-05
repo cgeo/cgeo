@@ -7,11 +7,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 
 import cgeo.geocaching.R;
 
-public class SearchCardView extends CardView {
+public class SearchCardView extends com.google.android.material.card.MaterialCardView {
 
     public SearchCardView(@NonNull Context context) {
         super(context);

@@ -40,6 +40,7 @@
         android:layout_height="match_parent"
         android:columnCount="2"
         android:orientation="horizontal"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:elevation="0dp"/>
     </LinearLayout>
 </ScrollView>
