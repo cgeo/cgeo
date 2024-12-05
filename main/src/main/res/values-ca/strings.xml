@@ -1175,9 +1175,6 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
-    <string name="category_unifiedMap">Mapa unificat (beta)</string>
-    <string name="init_title_useUnifiedMap">Utilitzeu un mapa unificat</string>
-    <string name="init_summary_useUnifiedMap">Utilitzeu un mapa unificat nou en lloc dels mapes integrats de Google Map/Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -2542,7 +2539,6 @@
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <string name="hillshading_info">Ombreig fora de línia</string>
     <string name="maptheme_elevate_categoryinfo">Rellevant per a: [A] Àrees, [P] POI, [R] Rutes, [W] Camins</string>
-    <string name="maptheme_vtm_scaling_summary">Opcions d\'escalada per a mapes fora de línia (cal reiniciar)</string>
     <string name="maptheme_scale_map_title">Factor d\'escala del mapa</string>
     <string name="maptheme_scale_map_summary">Mapa d\'escales; 100% = sense escala</string>
     <string name="maptheme_scale_text_title">Factor d\'escala del text</string>
