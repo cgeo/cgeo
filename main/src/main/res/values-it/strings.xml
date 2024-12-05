@@ -1168,9 +1168,6 @@
     <string name="init_map_other">Altro</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usa threads multipli (multi processore o multi core) per disegnare le mappe di OpenStreetMap</string>
-    <string name="category_unifiedMap">Mappa Unificata (beta)</string>
-    <string name="init_title_useUnifiedMap">Usa mappa unificata</string>
-    <string name="init_summary_useUnifiedMap">Usa la nuova mappa unificata invece delle mappe integrate di Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migrazione dei file locali</string>
     <string name="localstorage_migrate_status_major">Versione %1$d</string>
     <!-- proximity notification -->
@@ -2516,7 +2513,6 @@
     <string name="brouter_info">Servizio di navigazione offline</string>
     <string name="hillshading_info">Ombreggiatura delle Mappe offline</string>
     <string name="maptheme_elevate_categoryinfo">Rilevante per: [A] Aree, [P] POI, [R] Percorsi, [W] Vie</string>
-    <string name="maptheme_vtm_scaling_summary">Opzioni di scala per le mappe offline (richiede riavvio)</string>
     <string name="maptheme_scale_map_title">Fattore di scala della mappa</string>
     <string name="maptheme_scale_map_summary">Scala della mappa; 100% = nessuna scala</string>
     <string name="maptheme_scale_text_title">Fattore di Scala del testo</string>
