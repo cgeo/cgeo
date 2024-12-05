@@ -1,46 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    tools:context=".SearchActivity" >
+    tools:context=".SearchActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_activity"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            style="@style/search_content_group"
-            android:id="@+id/search_group"
-            android:visibility="gone">
-
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
-                android:layout_toLeftOf="@+id/search_button"
-                android:id="@+id/search_label"
-                android:labelFor="@id/search_field">
-                <AutoCompleteTextView
-                    android:id="@+id/search_field"
-                    android:tag="searchField"
-                    style="@style/textinput_embedded_singleline_go" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/search_button"
-                style="@style/button_icon_search"
-                app:icon="@drawable/ic_menu_search" />
-        </RelativeLayout>
-
-    <GridLayout
-        android:id="@+id/grid_layout"
+    <!-- NestedScrollingChild goes here (NestedScrollView, RecyclerView, etc.). -->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:elevation="0dp"/>
-    </LinearLayout>
-</ScrollView>
+        app:layout_behavior="@string/searchbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_activity"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                style="@style/search_content_group"
+                android:id="@+id/search_group"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+                    android:layout_toLeftOf="@+id/search_button"
+                    android:id="@+id/search_label"
+                    android:labelFor="@id/search_field">
+                    <AutoCompleteTextView
+                        android:id="@+id/search_field"
+                        android:tag="searchField"
+                        style="@style/textinput_embedded_singleline_go" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/search_button"
+                    style="@style/button_icon_search"
+                    app:icon="@drawable/ic_menu_search" />
+            </RelativeLayout>
+
+            <GridLayout
+                android:id="@+id/grid_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:columnCount="2"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:elevation="0dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_appbar">
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/search_bar"
+            android:theme="@style/Theme.Material3.DayNight"
+            app:navigationIcon="@drawable/search_keyword"
+            app:hideNavigationIcon="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.search.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.Material3.DayNight"
+        app:layout_anchor="@id/search_bar">
+
+        <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
+
+    </com.google.android.material.search.SearchView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

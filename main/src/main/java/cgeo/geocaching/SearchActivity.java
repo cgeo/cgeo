@@ -41,11 +41,14 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -66,7 +69,9 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     @Override
     @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public final void onCreate(final Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         final Intent intent = getIntent();
 
         if (Intents.ACTION_GEOCACHE.equals(intent.getAction())) {
@@ -137,6 +142,18 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
         //init();
+
+        //Toolbar tb = binding.searchBar;
+        //tb.inflateMenu(R.menu.search_activity_options);
+        //setSupportActionBar(tb);
+
+        Toolbar tb = binding.searchBar;
+        tb.inflateMenu(R.menu.search_activity_options);
+        invalidateOptionsMenu();
+        //final ActionBar actionBar = getSupportActionBar();
+        //actionBar.
+        //setSupportActionBar(tb);
+
     }
 
     @Override
