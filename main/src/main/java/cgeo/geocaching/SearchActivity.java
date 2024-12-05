@@ -143,16 +143,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         setTitle(res.getString(R.string.search));
         //init();
 
-        //Toolbar tb = binding.searchBar;
-        //tb.inflateMenu(R.menu.search_activity_options);
-        //setSupportActionBar(tb);
-
-        Toolbar tb = binding.searchBar;
-        tb.inflateMenu(R.menu.search_activity_options);
-        invalidateOptionsMenu();
-        //final ActionBar actionBar = getSupportActionBar();
-        //actionBar.
-        //setSupportActionBar(tb);
 
     }
 
@@ -372,6 +362,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         addSearchCardWithField(R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName);
 
         addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+
+        addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned).addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
     }
 
     /**
@@ -565,10 +557,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     @Override
     public final boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.menu_search_own_caches) {
-            findByOwnerFn(Settings.getUserName());
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

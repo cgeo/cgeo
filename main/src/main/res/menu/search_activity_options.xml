@@ -8,12 +8,7 @@
         android:title="@string/search_bar_hint"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
+        android:visible="false"
         app:showAsAction="collapseActionView|always" />
-    <item
-        android:id="@+id/menu_search_own_caches"
-        android:icon="@drawable/ic_menu_owned"
-        android:title="@string/search_own_caches"
-        app:showAsAction="ifRoom|withText">
-    </item>
 
 </menu>
