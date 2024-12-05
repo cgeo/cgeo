@@ -1148,9 +1148,6 @@
     <string name="init_map_other">Autre</string>
     <string name="init_map_osm_multithreaded">Multi-tâches (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utiliser plusieurs processus pour le rendu des cartes OpenStreetMap</string>
-    <string name="category_unifiedMap">Carte unifiée (bêta)</string>
-    <string name="init_title_useUnifiedMap">Utiliser la carte unifiée</string>
-    <string name="init_summary_useUnifiedMap">Utiliser une nouvelle carte unifiée au lieu des cartes Google Map / Mapsforge (OSM) intégrées</string>
     <string name="localstorage_migrate_title">Déplacement des fichiers locaux</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -2477,7 +2474,6 @@
     <string name="mapserver_hylly_themes_info">Thème de carte détaillé et optimisé pour les cartes \"Hylly\"</string>
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <string name="maptheme_elevate_categoryinfo">Pertinent pour : [A] Zones, [P] POI, [R] Itinéraires, [W] Voies</string>
-    <string name="maptheme_vtm_scaling_summary">Options de mise à l\'échelle pour les cartes hors ligne (redémarrage nécessaire)</string>
     <string name="maptheme_scale_map_title">Facteur d\'échelle pour la carte</string>
     <string name="maptheme_scale_map_summary">Met la carte à l\'échelle ; 100% = sans mise à l\'échelle</string>
     <string name="maptheme_scale_text_title">Facteur de mise à l\'échelle du texte</string>
