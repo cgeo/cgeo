@@ -1174,9 +1174,6 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
-    <string name="category_unifiedMap">Unified Map (bèta)</string>
-    <string name="init_title_useUnifiedMap">Gebruik uniforme kaart</string>
-    <string name="init_summary_useUnifiedMap">Gebruik nieuwe uniforme kaart in plaats van ingebouwde Google Map / Mapsforge (OSM) kaarten</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -2540,7 +2537,6 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
-    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (herstart vereist)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>

@@ -1174,9 +1174,6 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
-    <string name="category_unifiedMap">Vereinheitlichte Karte (Beta)</string>
-    <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
-    <string name="init_summary_useUnifiedMap">Verwende die neue Vereinheitlichte Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -2540,7 +2537,6 @@
     <string name="brouter_info">Offline Routing-Dienst</string>
     <string name="hillshading_info">Offline Kartenschattierung</string>
     <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
-    <string name="maptheme_vtm_scaling_summary">Skalierungsoptionen für Offline-Karten (Neustart erforderlich)</string>
     <string name="maptheme_scale_map_title">Kartenskalierungsfaktor</string>
     <string name="maptheme_scale_map_summary">Skaliert die Karte; 100% = keine Skalierung</string>
     <string name="maptheme_scale_text_title">Textskalierungsfaktor</string>

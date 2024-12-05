@@ -1186,9 +1186,6 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="category_unifiedMap">Zunifikowana mapa (beta)</string>
-    <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -2600,7 +2597,6 @@
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="hillshading_info">Cieniowanie szczytów offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
-    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>

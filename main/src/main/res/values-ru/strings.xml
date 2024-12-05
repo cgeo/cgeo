@@ -1162,9 +1162,6 @@
     <string name="init_map_other">Прочее</string>
     <string name="init_map_osm_multithreaded">Многопоточный режим OSM</string>
     <string name="init_summary_map_osm_multithreaded">Использовать несколько потоков для рендеринга карт OpenStreetMap</string>
-    <string name="category_unifiedMap">Единая Карта (бета)</string>
-    <string name="init_title_useUnifiedMap">Использовать единую карту</string>
-    <string name="init_summary_useUnifiedMap">Использовать новую единую карту вместо встроенных карт Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Миграция локальных файлов</string>
     <string name="localstorage_migrate_status_major">Версия %1$d</string>
     <!-- proximity notification -->
@@ -2540,7 +2537,6 @@
     <string name="mapserver_hylly_themes_info">Подробная тема карты, созданная для карт «Hylly»</string>
     <string name="brouter_info">Офлайн-маршрутизация</string>
     <string name="maptheme_elevate_categoryinfo">Актуально для: [A] Областей, [P] Точек интереса, [R] Маршрутов, [W] Путей</string>
-    <string name="maptheme_vtm_scaling_summary">Параметры масштабирования для оффлайн карт (требуется перезагрузка)</string>
     <string name="maptheme_scale_map_title">Масштаб карты</string>
     <string name="maptheme_scale_map_summary">Карта масштаба; 100% = нет масштабирования</string>
     <string name="maptheme_scale_text_title">Масштаб текста</string>
