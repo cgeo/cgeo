@@ -15,7 +15,7 @@ import cgeo.geocaching.databinding.SearchActivityBinding;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
+import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -35,13 +35,16 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 
 import java.util.Locale;
@@ -57,7 +60,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
     public static final String ACTION_CLIPBOARD = "clipboard";
-    private SearchView searchView;
+    private AutoCompleteTextView searchView;
     private MenuItem searchMenuItem;
 
     @Override
@@ -278,36 +281,31 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     @SuppressLint("SetTextI18n")
     private SearchCardView addSearchCardWithField(final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
         return addSearchCard(title, icon).addOnClickListener(() -> {
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(final String query) {
-                    runnable.run();
-                    return false;
-                }
-                @Override
-                public boolean onQueryTextChange(final String s) {
-                    return false;
-                }
-            });
-
-            if (suggestionFunction != null) {
-                //searchView.setSuggestionsAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
-            }
-
-            searchView.setQueryHint(getString(title));
             searchMenuItem.expandActionView();
+            searchView.setMinWidth(((View) searchView.getParent()).getWidth());
+
+            searchView.setHint(title);
+
+            searchView.setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    runnable.run();
+                    return true;
+                }
+                return false;
+            });
+            if (suggestionFunction != null) {
+                searchView.setAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
+            }
 
             // Todo: Temp hack for geocode field
             if (title == R.string.search_geo) {
-                searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
-                searchView.postDelayed(() -> {
-                    searchView.setQuery("GC", false);
-                    handlePotentialClipboardGeocode(searchView, binding.searchLabel);
-                }, 0);
+                searchView.setText("GC");
+                handlePotentialClipboardGeocode(searchView, binding.searchLabel);
             } else {
-                searchView.setQuery("", false);
+                searchView.setText("");
             }
 
+            searchView.setSelection(searchView.getText().length());
             Keyboard.show(this, searchView);
         });
     }
@@ -327,7 +325,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return;
         }
 
-        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(searchView.getQuery().toString()), DataStore::getSuggestionsGeocode);
+        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(searchView.getText().toString()), DataStore::getSuggestionsGeocode);
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
@@ -379,7 +377,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
      * <br>
      * Needs to run async as clipboard access is blocked if activity is not yet created.
      */
-    private void handlePotentialClipboardGeocode(SearchView geocodeField, TextInputLayout geocodeInputLayout) {
+    private void handlePotentialClipboardGeocode(AutoCompleteTextView geocodeField, TextInputLayout geocodeInputLayout) {
         final String clipboardText = ClipboardUtils.getText();
 
         String geocode = "";
@@ -390,8 +388,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
         }
         if (!StringUtils.isEmpty(geocode)) {
-            geocodeField.setQuery(geocode, false);
-            //geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
+            geocodeField.setText(geocode);
         }
     }
 
@@ -427,7 +424,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private void findByKeywordFn() {
         // find caches by keyword
-        final String keyText = StringUtils.trim(searchView.getQuery().toString());
+        final String keyText = StringUtils.trim(searchView.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show();
@@ -439,7 +436,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByAddressFn() {
-        final String addressSearchText = StringUtils.trim(searchView.getQuery().toString());
+        final String addressSearchText = StringUtils.trim(searchView.getText().toString());
 
         if (StringUtils.isBlank(addressSearchText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show();
@@ -457,7 +454,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByOwnerFn() {
-        findByOwnerFn(searchView.getQuery().toString());
+        findByOwnerFn(searchView.getText().toString());
     }
 
     private void findByOwnerFn(final String userName) {
@@ -473,7 +470,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByFinderFn() {
-        findByFinderFn(searchView.getQuery().toString());
+        findByFinderFn(searchView.getText().toString());
     }
 
     private void findByFinderFn(final String userName) {
@@ -519,7 +516,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trimToEmpty(searchView.getQuery().toString());
+        final String trackableText = StringUtils.trimToEmpty(searchView.getText().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_tb).show();
@@ -542,7 +539,9 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     public final boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.search_activity_options, menu);
         searchMenuItem = menu.findItem(R.id.menu_gosearch);
-        searchView = (SearchView) searchMenuItem.getActionView();
+        searchView = (AutoCompleteTextView) searchMenuItem.getActionView();
+        searchView.setInputType(InputType.TYPE_CLASS_TEXT);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         return true;
     }
 
