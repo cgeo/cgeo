@@ -1477,7 +1477,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">Vaig assistir</string>
+    <string name="cache_status_attended">He assistit</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1796,7 +1796,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
+    <string name="google_maps_option_group_theme">Opcions del Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
