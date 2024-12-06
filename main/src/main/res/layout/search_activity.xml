@@ -34,16 +34,6 @@
                 app:icon="@drawable/ic_menu_search" />
         </RelativeLayout>
 
-        <com.google.android.material.search.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:theme="@style/Theme.Material3.DayNight"
-            android:id="@+id/search_fieldm">
-
-            <!-- Search suggestions/results go here (ScrollView, RecyclerView, etc.). -->
-
-        </com.google.android.material.search.SearchView>
-
     <GridLayout
         android:id="@+id/grid_layout"
         android:layout_width="match_parent"

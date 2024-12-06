@@ -34,8 +34,6 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -137,6 +135,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
         //init();
+
 
     }
 
@@ -300,27 +299,14 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // Todo: Temp hack for geocode field
             if (title == R.string.search_geo) {
                 searchView.postDelayed(() -> {
-                    //searchView.setQuery("GC", false);
+                    searchView.setQuery("GC", false);
                     handlePotentialClipboardGeocode(searchView, binding.searchLabel);
-                    binding.searchFieldm.setText("GC");
                 }, 0);
             } else {
-                //searchView.setQuery("", false);
-                binding.searchFieldm.setText("");
+                searchView.setQuery("", false);
             }
 
-            binding.searchFieldm.setHint(title);
-            binding.searchFieldm.setVisible(true);
-            binding.searchFieldm
-                    .getEditText()
-                    .setOnEditorActionListener(
-                            (v, actionId, event) -> {
-                                runnable.run();
-                                //binding.searchFieldm.hide();
-                                return false;
-                            });
-
-            Keyboard.show(this, binding.searchFieldm.getEditText());
+            Keyboard.show(this, searchView);
         });
     }
 
@@ -339,7 +325,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return;
         }
 
-        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(binding.searchFieldm.getText().toString()), DataStore::getSuggestionsGeocode);
+        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(searchView.getQuery().toString()), DataStore::getSuggestionsGeocode);
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
@@ -439,7 +425,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private void findByKeywordFn() {
         // find caches by keyword
-        final String keyText = StringUtils.trim(binding.searchFieldm.getText().toString());
+        final String keyText = StringUtils.trim(searchView.getQuery().toString());
 
         if (StringUtils.isBlank(keyText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_keyword).show();
@@ -451,7 +437,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByAddressFn() {
-        final String addressSearchText = StringUtils.trim(binding.searchFieldm.getText().toString());
+        final String addressSearchText = StringUtils.trim(searchView.getQuery().toString());
 
         if (StringUtils.isBlank(addressSearchText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show();
@@ -469,7 +455,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByOwnerFn() {
-        findByOwnerFn(binding.searchFieldm.getText().toString());
+        findByOwnerFn(searchView.getQuery().toString());
     }
 
     private void findByOwnerFn(final String userName) {
@@ -485,7 +471,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findByFinderFn() {
-        findByFinderFn(binding.searchFieldm.getText().toString());
+        findByFinderFn(searchView.getQuery().toString());
     }
 
     private void findByFinderFn(final String userName) {
@@ -531,7 +517,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     private void findTrackableFn() {
-        final String trackableText = StringUtils.trimToEmpty(binding.searchFieldm.getText().toString());
+        final String trackableText = StringUtils.trimToEmpty(searchView.getQuery().toString());
 
         if (StringUtils.isBlank(trackableText) || trackableText.equalsIgnoreCase("TB")) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_tb).show();
