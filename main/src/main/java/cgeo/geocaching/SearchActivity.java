@@ -15,6 +15,7 @@ import cgeo.geocaching.databinding.SearchActivityBinding;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -298,6 +299,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
             // Todo: Temp hack for geocode field
             if (title == R.string.search_geo) {
+                searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
                 searchView.postDelayed(() -> {
                     searchView.setQuery("GC", false);
                     handlePotentialClipboardGeocode(searchView, binding.searchLabel);
