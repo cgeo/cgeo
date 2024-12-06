@@ -796,7 +796,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
-    <string name="settings_unifiedMapVariants_title">Warianty UnifiedMap</string>
+    <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -1066,6 +1066,7 @@
     <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
+    <string name="init_mapsource_select_legacy">Wybierz źródło mapy (Legacy)</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
     <string name="init_map_directory_description">Folder z mapami offline</string>
@@ -1186,6 +1187,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
+    <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
+    <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1504,7 +1508,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -2370,6 +2374,7 @@
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
+    <string name="http429_warning">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
@@ -2597,6 +2602,7 @@
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="hillshading_info">Cieniowanie szczytów offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
+    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (tylko VTM, wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>
