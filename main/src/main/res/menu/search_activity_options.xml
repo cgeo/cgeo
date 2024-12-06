@@ -8,7 +8,7 @@
         android:title="@string/search_bar_hint"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="collapseActionView|always" />
 
 </menu>
