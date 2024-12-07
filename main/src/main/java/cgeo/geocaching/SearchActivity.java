@@ -36,6 +36,7 @@ import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -321,6 +322,10 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
                     searchView.setAdapter(new AutoCompleteAdapter(searchView.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
                 }
             }
+            // caps keyboard
+            if (title == R.string.search_tb || title == R.string.search_geo) {
+                searchView.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+            }
 
             // show keyboard and place cursor
             searchView.setSelection(searchView.getText().length());
@@ -343,7 +348,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return;
         }
 
-        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode);
+        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.ic_menu_cache, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode);
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
@@ -559,6 +564,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         searchViewItem = menu.findItem(R.id.menu_gosearch);
         searchButtonItem = menu.findItem(R.id.menu_gosearch_icon);
         searchView = (AutoCompleteTextView) searchViewItem.getActionView();
+        // configure keyboard
         searchView.setInputType(InputType.TYPE_CLASS_TEXT);
         searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         return true;
