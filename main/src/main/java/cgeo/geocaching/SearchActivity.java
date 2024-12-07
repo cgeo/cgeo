@@ -360,16 +360,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return true;
         });
 
-        addSearchCard(R.string.search_filter, R.drawable.ic_menu_filter)
-                .addOnClickListener(this::findByFilterFn)
-                .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
-
-        // Todo: Change CoordinateInputDialog to support a callback
-        addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
-                .addOnClickListener(this::findByCoordsFn);
-
-        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null);
-
         final SearchCardView kwcard = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
         // mitigation for #13312
         if (!Settings.isGCPremiumMember()) {
@@ -381,9 +371,19 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             }
         }
 
+        // Todo: Change CoordinateInputDialog to support a callback
+        addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
+                .addOnClickListener(this::findByCoordsFn);
+
+        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null);
+
         addSearchCardWithField(R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
 
         addSearchCardWithField(R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName);
+
+        addSearchCard(R.string.search_filter, R.drawable.ic_menu_filter)
+                .addOnClickListener(this::findByFilterFn)
+                .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
         addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
 
