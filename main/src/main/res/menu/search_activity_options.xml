@@ -8,7 +8,14 @@
         android:title="@string/search_bar_hint"
         app:actionViewClass="android.widget.AutoCompleteTextView"
         app:iconifiedByDefault="true"
-        android:visible="true"
+        android:visible="false"
         app:showAsAction="collapseActionView|always" />
+
+    <item
+        android:id="@+id/menu_gosearch_icon"
+        android:icon="@drawable/ic_menu_search"
+        android:title="@string/search_bar_hint"
+        android:visible="false"
+        app:showAsAction="always" />
 
 </menu>
