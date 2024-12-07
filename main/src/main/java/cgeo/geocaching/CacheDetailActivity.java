@@ -115,6 +115,8 @@ import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 import cgeo.geocaching.wherigo.WherigoActivity;
+import cgeo.geocaching.wherigo.WherigoUtils;
+import cgeo.geocaching.wherigo.WherigoViewUtils;
 import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.annotation.SuppressLint;
@@ -1607,18 +1609,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void updateWhereYouGoBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = WhereYouGoApp.isWherigo(cache);
-            binding.whereyougoBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
+            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
+            binding.whereyougoBox.setVisibility(!wherigoGuis.isEmpty() ? View.VISIBLE : View.GONE);
             binding.whereyougoText.setText(isWhereYouGoInstalled() ? R.string.cache_whereyougo_start : R.string.cache_whereyougo_install);
-            if (isEnabled) {
-                CacheUtils.setWherigoLink(activity, cache, binding.sendToWhereyougo);
-            }
+            binding.sendToWhereyougo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
+                WhereYouGoApp.openWherigo(activity, guid)));
         }
 
         private void updateWherigoBox(final CacheDetailActivity activity) {
-            final boolean isEnabled = WhereYouGoApp.isWherigo(cache);
-            binding.wherigoBox.setVisibility(isEnabled ? View.VISIBLE : View.GONE);
-            binding.playInCgeo.setOnClickListener(v -> WherigoActivity.startForGuid(activity, WhereYouGoApp.getWhereIGoGuid(cache), cache.getGeocode(), true));
+            final List<String> wherigoGuis = WherigoUtils.getWherigoGuids(cache);
+            binding.wherigoBox.setVisibility(!wherigoGuis.isEmpty() ? View.VISIBLE : View.GONE);
+            binding.playInCgeo.setOnClickListener(v -> WherigoViewUtils.executeForOneCartridge(activity, wherigoGuis, guid ->
+                WherigoActivity.startForGuid(activity, guid, cache.getGeocode(), true)));
         }
 
         private void updateChirpWolfBox(final CacheDetailActivity activity) {

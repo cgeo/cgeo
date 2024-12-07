@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.WherigoDialogTitleViewBinding;
 import cgeo.geocaching.databinding.WherigoMapQuickinfosBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.ui.BadgeManager;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
@@ -18,6 +20,8 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
+import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,6 +30,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.text.style.StyleSpan;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -33,9 +38,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import cz.matejcik.openwig.Engine;
 import cz.matejcik.openwig.EventTable;
@@ -253,4 +261,65 @@ public final class WherigoViewUtils {
         ViewUtils.addDetachListener(view, v -> WherigoGame.get().removeListener(listenerId));
         refreshRoutine.run();
     }
+
+    public static void executeForOneCartridge(final Activity activity, final List<String> wherigoGuids, final Consumer<String> guidAction) {
+        if (wherigoGuids.isEmpty()) {
+            return;
+        }
+        if (wherigoGuids.size() == 1) {
+            guidAction.accept(wherigoGuids.get(0));
+        } else {
+            // prepare some data for display
+            final int[] pos = {1};
+            final Map<String, WherigoCartridgeInfo> cartridgeInfoMap = new HashMap<>();
+            for (String guid : wherigoGuids) {
+                cartridgeInfoMap.put(guid, null);
+            }
+            for (WherigoCartridgeInfo info : WherigoCartridgeInfo.getAvailableCartridges(cartridgeInfoMap::containsKey)) {
+                cartridgeInfoMap.put(info.getCGuid(), info);
+            }
+
+            final List<Pair<String, Integer>> wherigoGuidPosList = wherigoGuids.stream().map(guid -> new Pair<>(guid, pos[0]++)).collect(Collectors.toList());
+            final SimpleDialog.ItemSelectModel<Pair<String, Integer>> model = new SimpleDialog.ItemSelectModel<>();
+            model
+                .setItems(wherigoGuidPosList)
+                .setDisplayMapper((l) -> TextParam.text(LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded) + " " + l.second))
+                .setDisplayViewMapper(R.layout.wherigolist_item, (p, group, view) -> {
+                    final WherigolistItemBinding binding = WherigolistItemBinding.bind(view);
+                    final WherigoCartridgeInfo info = cartridgeInfoMap.get(p.first);
+                    if (info != null) {
+                        WherigoViewUtils.fillCartridgeSelectItem(binding, info);
+                    } else {
+                        //Cartridge not (yet) downloaded
+                        binding.name.setText(LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded, "" + p.second));
+                        binding.description.setText(p.first);
+                        ImageParam.id(R.drawable.ic_menu_wherigo).applyTo(binding.icon);
+                    }
+                }, (p, group) -> {
+                    final WherigoCartridgeInfo info = cartridgeInfoMap.get(p.first);
+                    return info != null ? info.getName() : LocalizationUtils.getString(R.string.cache_wherigo_cartridge_not_downloaded, "" + p.second);
+                })
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+            SimpleDialog.of(activity)
+                .setTitle(TextParam.id(R.string.cache_multiple_wherigo_cartridges_title))
+                .setMessage(TextParam.id(R.string.cache_multiple_wherigo_cartridges_message))
+                .selectSingle(model, s -> guidAction.accept(s.first));
+        }
+    }
+
+    /** fills an instance of Wherigo-List-Item-layout with info from a given cartridge */
+    public static void fillCartridgeSelectItem(final WherigolistItemBinding binding, final WherigoCartridgeInfo info) {
+        final String name = info.getCartridgeFile().name;
+        final CharSequence description = "v" + info.getCartridgeFile().version + ", " + info.getCartridgeFile().author + ", " +
+                getDisplayableDistance(LocationDataProvider.getInstance().currentGeo().getCoords(),
+                        new Geopoint(info.getCartridgeFile().latitude, info.getCartridgeFile().longitude));
+        final byte[] iconData = info.getIconData();
+        final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.ic_menu_wherigo) :
+                ImageParam.drawable(getDrawableForImageData(null, iconData));
+
+        binding.name.setText(name);
+        binding.description.setText(description);
+        icon.applyTo(binding.icon);
+    }
+
 }
