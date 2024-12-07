@@ -3,8 +3,6 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
-import static cgeo.geocaching.apps.cache.WhereYouGoApp.getWhereIGoUrl;
-import static cgeo.geocaching.apps.cache.WhereYouGoApp.isWhereYouGoInstalled;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -25,19 +23,6 @@ public class CacheUtils {
 
     private CacheUtils() {
         // utility class
-    }
-
-    public static void setWherigoLink(@NonNull final Activity activity, @NonNull final Geocache cache, @NonNull final View view) {
-        view.setOnClickListener(v -> {
-            // re-check installation state, might have changed since creating the view
-            if (isWhereYouGoInstalled()) {
-                final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getWhereIGoUrl(cache)));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                activity.startActivity(intent);
-            } else {
-                ProcessUtils.openMarket(activity, activity.getString(R.string.package_whereyougo));
-            }
-        });
     }
 
     public static boolean isLabAdventure(@NonNull final Geocache cache) {
