@@ -8,23 +8,18 @@ import cgeo.geocaching.connector.StatusResult;
 import cgeo.geocaching.databinding.WherigoActivityBinding;
 import cgeo.geocaching.databinding.WherigolistItemBinding;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.BadgeManager;
-import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AudioManager;
 import cgeo.geocaching.utils.LocalizationUtils;
-import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
-import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -170,20 +165,8 @@ public class WherigoActivity extends CustomMenuEntryActivity {
         model
             .setItems(cartridges)
             .setDisplayViewMapper(R.layout.wherigolist_item, (info, group, view) -> {
-
-                final String name = info.getCartridgeFile().name;
-                final CharSequence description = "v" + info.getCartridgeFile().version + ", " + info.getCartridgeFile().author + ", " +
-                        getDisplayableDistance(LocationDataProvider.getInstance().currentGeo().getCoords(),
-                                new Geopoint(info.getCartridgeFile().latitude, info.getCartridgeFile().longitude));
-                final byte[] iconData = info.getIconData();
-                final ImageParam icon = iconData == null ? ImageParam.id(R.drawable.ic_menu_wherigo) :
-                        ImageParam.drawable(getDrawableForImageData(null, iconData));
-
-                final WherigolistItemBinding binding = WherigolistItemBinding.bind(view);
-                binding.name.setText(name);
-                binding.description.setText(description);
-                icon.applyTo(binding.icon);
-            }, (item, itemGroup) -> item == null || item.getCartridgeFile() == null ? "" : item.getCartridgeFile().name)
+                WherigoViewUtils.fillCartridgeSelectItem(WherigolistItemBinding.bind(view), info);
+            }, (item, itemGroup) -> item == null  ? "" : item.getName())
             .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
         SimpleDialog.of(this)

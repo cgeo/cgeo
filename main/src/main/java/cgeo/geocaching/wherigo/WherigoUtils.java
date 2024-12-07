@@ -41,10 +41,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cz.matejcik.openwig.Action;
 import cz.matejcik.openwig.Container;
@@ -65,6 +69,8 @@ public final class WherigoUtils {
     public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.ic_menu_done));
     public static final TextParam TP_CANCEL_BUTTON = TextParam.id(R.string.cancel).setImage(ImageParam.id(R.drawable.ic_menu_cancel));
 
+    private static final Pattern PATTERN_CARTRIDGE_LINK = Pattern.compile("https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(?:details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
+    private static final String WHERIGO_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
 
     public static final GeopointConverter<ZonePoint> GP_CONVERTER = new GeopointConverter<>(
         gc -> new ZonePoint(gc.getLatitude(), gc.getLongitude(), 0),
@@ -322,6 +328,39 @@ public final class WherigoUtils {
             final String name2 = t2.name == null ? "-" : t2.name.trim().toLowerCase(Locale.ROOT);
             return name1.compareTo(name2);
         }, true);
+    }
+
+    @NonNull
+    public static List<String> getWherigoGuids(@Nullable final Geocache cache) {
+        if (cache == null) {
+            return Collections.emptyList();
+        }
+        return scanWherigoGuids(cache.getShortDescription() + " " + cache.getDescription());
+    }
+
+    @Nullable
+    public static String getWherigoUrl(@Nullable final String guid) {
+        return guid == null ? null : WHERIGO_URL_BASE + guid;
+    }
+
+    @NonNull
+    public static List<String> scanWherigoGuids(@Nullable final String textToScan) {
+
+        if (textToScan == null) {
+            return Collections.emptyList();
+        }
+
+        final Matcher matcher = PATTERN_CARTRIDGE_LINK.matcher(textToScan);
+        final List<String> cartridgeGuidsList = new ArrayList<>();
+        final Set<String> cartridgeGuidsSet = new HashSet<>();
+        while (matcher.find()) {
+            final String guid = matcher.group(1);
+            if (guid != null && !cartridgeGuidsSet.contains(guid)) {
+                cartridgeGuidsSet.add(guid);
+                cartridgeGuidsList.add(guid);
+            }
+        }
+        return cartridgeGuidsList;
     }
 
     private static void addDeleteOptions(final Activity activity, final SimpleDialog.ItemSelectModel<WherigoSavegameInfo> model, final String cartridgeName, final Supplier<List<WherigoSavegameInfo>> refresher) {

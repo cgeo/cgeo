@@ -93,9 +93,9 @@
                     android:visibility="gone"
                     tools:visibility="visible"/>
                 <Button
-                    android:id="@+id/send_to_whereyougo"
+                    android:id="@+id/send_to_wherigo"
                     style="@style/button_icon_colored"
-                    app:icon="@drawable/icon_whereyougo"
+                    app:icon="@drawable/ic_menu_wherigo"
                     android:visibility="gone"
                     tools:visibility="visible"/>
                 <Button
