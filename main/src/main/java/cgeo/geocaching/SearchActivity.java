@@ -32,6 +32,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
@@ -273,9 +274,14 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             searchButtonItem.setVisible(true);
             searchView.setMinWidth(((View) searchView.getParent()).getWidth());
 
-            // set title icon
+            // icon in search field
+            final Drawable drw = getDrawable(icon);
+            drw.setBounds(0, 0, (int) searchView.getTextSize(), (int) searchView.getTextSize());
+            searchView.setCompoundDrawables(drw, null, null, null);
+            searchView.setCompoundDrawablePadding(16);
+
+            // set title
             searchView.setHint(title);
-            searchButtonItem.setIcon(icon);
 
             // Submit function
             searchView.setOnEditorActionListener((v, actionId, event) -> {
@@ -551,6 +557,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         });
         searchButtonItem = menu.findItem(R.id.menu_gosearch_icon);
         searchView = (AutoCompleteTextView) searchViewItem.getActionView();
+        searchView.setBackground(getDrawable(R.drawable.mark_transparent));
         // configure keyboard
         searchView.setInputType(InputType.TYPE_CLASS_TEXT);
         searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
