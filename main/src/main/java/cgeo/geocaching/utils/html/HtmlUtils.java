@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Func4;
 
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -172,15 +173,20 @@ public final class HtmlUtils {
         }
     }
 
-    /** replaces found URLSpans with given text with a new action
-     */
+    /** replaces found URLSpans with given text with a new action */
     public static void replaceUrlClickAction(final Spannable spannable, final String urlText, final Consumer<URLSpan> newAction) {
+        replaceUrlClickAction(spannable, (span, spn, start, end) -> StringUtils.equals(spn.subSequence(start, end), urlText), newAction);
+    }
+
+    /** replaces found URLSpans with given condition with a new action */
+    public static void replaceUrlClickAction(final Spannable spannable, final Func4<URLSpan, Spannable, Integer, Integer, Boolean> filter, final Consumer<URLSpan> newAction) {
 
         final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
         for (final URLSpan span : spans) {
             final int start = spannable.getSpanStart(span);
             final int end = spannable.getSpanEnd(span);
-            if (StringUtils.equals(spannable.subSequence(start, end), urlText)) {
+            final Boolean result = filter == null ? Boolean.TRUE : filter.call(span, spannable, start, end);
+            if (result == null || Boolean.TRUE.equals(result)) {
                 final int flags = spannable.getSpanFlags(span);
                 spannable.removeSpan(span);
                 spannable.setSpan(new ClickableSpan() {

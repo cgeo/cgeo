@@ -201,6 +201,23 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden" >
+
+            <!-- wherigo.com -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="www.wherigo.com" />
+                <data android:host="wherigo.com" />
+                <data android:pathPrefix="/cartridge/details.aspx" />
+                <data android:pathPrefix="/cartridge/downloads.aspx" />
+            </intent-filter>
+
         </activity>
         <activity
             android:name=".AboutActivity"
