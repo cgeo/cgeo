@@ -2645,7 +2645,7 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: Lösche übrige Datei</string>
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
-    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s%) heruntergeladen</string>
+    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
     <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```</string>
