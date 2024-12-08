@@ -310,6 +310,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // caps keyboard
             if (title == R.string.search_tb || title == R.string.search_geo) {
                 searchView.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+            } else {
+                searchView.setFilters(new InputFilter[] { });
             }
 
             // show keyboard and place cursor
