@@ -17,7 +17,6 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
-import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.SearchCardView;
@@ -32,7 +31,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
@@ -368,7 +366,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             }
         }
 
-        // Todo: Change CoordinateInputDialog to support a callback
         addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
                 .addOnClickListener(() -> CoordinatesInputDialog.show(getSupportFragmentManager(), null, null)); // callback method is updateCoordinates
 
@@ -541,12 +538,12 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         searchViewItem = menu.findItem(R.id.menu_gosearch);
         searchViewItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onMenuItemActionExpand(final MenuItem item) {
+            public boolean onMenuItemActionExpand(@NonNull final MenuItem item) {
                 return true;
             }
 
             @Override
-            public boolean onMenuItemActionCollapse(final MenuItem item) {
+            public boolean onMenuItemActionCollapse(@NonNull final MenuItem item) {
                 searchViewItem.setVisible(false);
                 searchButtonItem.setVisible(false);
                 return true;
