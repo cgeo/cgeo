@@ -1926,6 +1926,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
                 if (StringUtils.isNotBlank(description)) {
                     handleImageClick(activity, cache, description);
+                    WherigoViewUtils.htmlReplaceWherigoClickAction(activity, cache.getGeocode(), description);
                     //display various fixes
                     HtmlUtils.fixRelativeLinks(description, ConnectorFactory.getConnector(cache).getHostUrl() + "/");
                     fixOldGeocheckerLink(activity, cache, description);

@@ -20,6 +20,7 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.html.HtmlUtils;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDisplayableDistance;
 import static cgeo.geocaching.wherigo.WherigoUtils.getDrawableForImageData;
 
@@ -29,6 +30,7 @@ import android.app.Dialog;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
+import android.text.Spannable;
 import android.text.style.StyleSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -320,6 +322,15 @@ public final class WherigoViewUtils {
         binding.name.setText(name);
         binding.description.setText(description);
         icon.applyTo(binding.icon);
+    }
+
+    /** replaces found WherigoURLs with link to own wherigo player */
+    public static void htmlReplaceWherigoClickAction(final Activity activity, final String geocode, final Spannable spannable) {
+
+        HtmlUtils.replaceUrlClickAction(spannable, (span, spn, start, end) -> !WherigoUtils.scanWherigoGuids(span.getURL()).isEmpty(), span -> {
+            final String guid = WherigoUtils.scanWherigoGuids(span.getURL()).get(0);
+            WherigoActivity.startForGuid(activity, guid, geocode, false);
+        });
     }
 
 }
