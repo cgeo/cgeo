@@ -267,7 +267,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     @SuppressLint("SetTextI18n")
-    private SearchCardView addSearchCardWithField(final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction) {
+    private SearchCardView addSearchCardWithField(final int title, final int icon, @NonNull final Runnable runnable, final Func1<String, String[]> suggestionFunction, final boolean geocacheSuggestionAdapter, final InputFilter inputFilter) {
         return addSearchCard(title, icon).addOnClickListener(() -> {
             // show search field
             searchViewItem.setVisible(true);
@@ -292,24 +292,29 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
                 return true;
             });
 
-            // Geocode search requires some different parameters than the others
+            // Default value
             if (title == R.string.search_geo) {
                 searchView.setText("GC");
                 handlePotentialClipboardGeocode(searchView, binding.searchLabel);
-                searchView.setAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
-                searchView.setOnItemClickListener((parent, view, position, id) -> {
-                    final String geocode = (String) parent.getItemAtPosition(position);
-                    findByGeocodeFn(geocode);
-                });
             } else {
                 searchView.setText("");
-                if (suggestionFunction != null) {
-                    searchView.setAdapter(new AutoCompleteAdapter(searchView.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
-                }
             }
+
+            // suggestion provider
+            if (geocacheSuggestionAdapter) {
+                searchView.setAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
+            } else if (suggestionFunction != null) {
+                searchView.setAdapter(new AutoCompleteAdapter(searchView.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+            }
+            searchView.setOnItemClickListener((parent, view, position, id) -> {
+                final String searchTerm = (String) parent.getItemAtPosition(position);
+                searchView.setText(searchTerm);
+                runnable.run();
+            });
+
             // caps keyboard
-            if (title == R.string.search_tb || title == R.string.search_geo) {
-                searchView.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+            if (inputFilter != null) {
+                searchView.setFilters(new InputFilter[] { inputFilter });
             } else {
                 searchView.setFilters(new InputFilter[] { });
             }
@@ -335,7 +340,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return;
         }
 
-        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.ic_menu_cache, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode);
+        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.ic_menu_cache, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode, true, new InputFilter.AllCaps());
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
@@ -352,7 +357,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return true;
         });
 
-        final SearchCardView kwcard = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
+        final SearchCardView kwcard = addSearchCardWithField(R.string.search_kw, R.drawable.search_keyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword, true, null);
         // mitigation for #13312
         if (!Settings.isGCPremiumMember()) {
             final int activeCount = ConnectorFactory.getActiveConnectors().size();
@@ -367,17 +372,17 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
                 .addOnClickListener(() -> CoordinatesInputDialog.show(getSupportFragmentManager(), null, null)); // callback method is updateCoordinates
 
-        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null);
+        addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null, false, null);
 
-        addSearchCardWithField(R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        addSearchCardWithField(R.string.search_hbu, R.drawable.ic_menu_owned, this::findByOwnerFn, DataStore::getSuggestionsOwnerName, false, null);
 
-        addSearchCardWithField(R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName);
+        addSearchCardWithField(R.string.search_finder, R.drawable.ic_menu_emoticons, this::findByFinderFn, DataStore::getSuggestionsFinderName, false, null);
 
         addSearchCard(R.string.search_filter, R.drawable.ic_menu_filter)
                 .addOnClickListener(this::findByFilterFn)
                 .addOnLongClickListener(() -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
-        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+        addSearchCardWithField(R.string.search_tb, R.drawable.trackable_all, this::findTrackableFn, DataStore::getSuggestionsTrackableCode, false, new InputFilter.AllCaps());
 
         addSearchCard(R.string.search_own_caches, R.drawable.ic_menu_owned).addOnClickListener(() -> findByOwnerFn(Settings.getUserName()));
     }
