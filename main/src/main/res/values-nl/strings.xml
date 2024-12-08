@@ -1054,6 +1054,7 @@
     <string name="settings_info_hillshading">Reliëfweergave is een techniek voor het maken van topografische kaarten door een verlichtingseffect op de kaart toe te voegen om veranderingen in hoogte aan te geven. Hellingen zullen verduisterd/licht worden om een 3D-effect te genereren.\nDe bronbestanden die de hoogte informatie bevatten, moeten handmatig worden verkregen - klik op dit item voor bronnen - en geplaatst in de bron-map zoals hieronder gedefinieerd.</string>
     <string name="settings_hillshading_enable">Reliëfweergave</string>
     <string name="init_mapsource_select">Selecteer kaartbron</string>
+    <string name="init_mapsource_select_legacy">Selecteer Kaart Bron (Verouderd)</string>
     <string name="init_local_file_system">Lokaal bestandssysteem</string>
     <string name="init_base_directory_description">Basismap voor publieke lokale gegevens</string>
     <string name="init_map_directory_description">Map met offline kaarten</string>
@@ -1174,6 +1175,9 @@
     <string name="init_map_other">Anders</string>
     <string name="init_map_osm_multithreaded">Multi-threaded (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Meerdere threads gebruiken om OpenStreetMap kaarten te renderen</string>
+    <string name="init_title_useLegacyMap">Oudere kaart gebruiken</string>
+    <string name="init_summary_useLegacyMap">Gebruik oude versies van Google Map / Mapsforge (OSM) kaarten in plaats van UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migratie van lokale bestanden</string>
     <string name="localstorage_migrate_status_major">Versie %1$d</string>
     <!-- proximity notification -->
@@ -1476,7 +1480,7 @@
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
-    <string name="cache_status_attended">Was aanwezig</string>
+    <string name="cache_status_attended">Bijgewoond</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
     <string name="cache_status_archived">Gearchiveerd</string>
@@ -1795,7 +1799,7 @@
     <string name="google_maps_option_group_map">Kaart Opties</string>
     <string name="google_maps_option_show_traffic">Toon Verkeer</string>
     <string name="google_maps_option_show_buildings">Toon 3D gebouwen</string>
-    <string name="google_maps_option_group_theme">Thema opties</string>
+    <string name="google_maps_option_group_theme">Thema Opties</string>
     <string name="google_maps_option_show_feature_theme">Toon Thema functies</string>
     <string name="google_maps_option_show_feature_administrative_all">Toon Administratieve</string>
     <string name="google_maps_option_show_feature_landscape_all">Toon Landschap</string>
@@ -2316,6 +2320,7 @@
         <item quantity="other">Cache pictogrammen %d instellen</item>
     </plurals>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
+    <string name="http429_warning">Niet zo snel, te veel aanvragen naar %s</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint geëxtraheerd</item>
@@ -2537,6 +2542,7 @@
     <string name="brouter_info">Offline routering service</string>
     <string name="hillshading_info">Offline reliëfweergave</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
+    <string name="maptheme_vtm_scaling_summary">Schaalopties voor offline kaarten (VTM alleen, herstart nodig)</string>
     <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
     <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
     <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
