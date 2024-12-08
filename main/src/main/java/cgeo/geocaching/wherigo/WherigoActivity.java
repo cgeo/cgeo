@@ -25,6 +25,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -115,11 +116,24 @@ public class WherigoActivity extends CustomMenuEntryActivity {
             WherigoLocationProvider.get().setFixedLocation(null);
         });
 
+        //see if we have a guid from intent parameter
+        String guid = null;
         if (getIntent().getExtras() != null) {
-            final String guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
-            if (guid != null) {
-                handleCGuidInput(guid);
+            guid = getIntent().getExtras().getString(PARAM_WHERIGO_GUID);
+        }
+        //see if we have a guid from url
+        final Uri uri = getIntent().getData();
+        if (uri != null) {
+            String guidCandidate = uri.getQueryParameter("CGUID");
+            if (guidCandidate == null) {
+                guidCandidate = uri.getQueryParameter("cguid");
             }
+            if (guidCandidate != null) {
+                guid = guidCandidate;
+            }
+        }
+        if (guid != null) {
+            handleCGuidInput(guid);
         }
         BadgeManager.get().setBadge(binding.resumeDialog, false, -1);
 
