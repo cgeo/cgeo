@@ -395,10 +395,10 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
      * <br>
      * Needs to run async as clipboard access is blocked if activity is not yet created.
      */
-    private void handlePotentialClipboardGeocode(AutoCompleteTextView geocodeField, TextInputLayout geocodeInputLayout) {
+    private void handlePotentialClipboardGeocode(final AutoCompleteTextView geocodeField, final TextInputLayout geocodeInputLayout) {
         final String clipboardText = ClipboardUtils.getText();
 
-        String geocode;
+        final String geocode;
 
         if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
             geocode = clipboardText;

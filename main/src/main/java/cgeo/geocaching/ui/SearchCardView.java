@@ -1,5 +1,7 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -8,19 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import cgeo.geocaching.R;
-
 public class SearchCardView extends com.google.android.material.card.MaterialCardView {
 
-    public SearchCardView(@NonNull Context context) {
+    public SearchCardView(final @NonNull Context context) {
         super(context);
     }
 
-    public SearchCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public SearchCardView(final @NonNull Context context, final @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SearchCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public SearchCardView(final @NonNull Context context, final @Nullable AttributeSet attrs, final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
