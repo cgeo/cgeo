@@ -141,21 +141,6 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
-        //init();
-
-
-    }
-
-    @Override
-    public final void onConfigurationChanged(@NonNull final Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        init();
-    }
-
-    @Override
-    public final void onResume() {
-        super.onResume();
         init();
     }
 
@@ -378,7 +363,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
         // Todo: Change CoordinateInputDialog to support a callback
         addSearchCard(R.string.search_coordinates, R.drawable.ic_menu_mylocation)
-                .addOnClickListener(this::findByCoordsFn);
+                .addOnClickListener(() -> CoordinatesInputDialog.show(getSupportFragmentManager(), null, null)); // callback method is updateCoordinates
 
         addSearchCardWithField(R.string.search_address, R.drawable.ic_menu_home, this::findByAddressFn, null);
 
@@ -416,33 +401,18 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     }
 
     @Override
-    public void updateCoordinates(@NonNull final Geopoint gp) {
-        //ViewUtils.setCoordinates(gp, binding.buttonLatLongitude);
-    }
-
-    @Override
-    public boolean supportsNullCoordinates() {
-        return false;
-    }
-
-    private void findByCoordsFn() {
-        //Geopoint geopoint = ViewUtils.getCoordinates(binding.buttonLatLongitude);
-        Geopoint geopoint = null;
-        if (geopoint == null || !geopoint.isValid()) {
-            geopoint = LocationDataProvider.getInstance().currentGeo().getCoords();
-            if (geopoint.isValid()) {
-                updateCoordinates(geopoint);
-            } else {
-                return;
-            }
-        }
-
+    public void updateCoordinates(@NonNull final Geopoint geopoint) {
         try {
             CacheListActivity.startActivityCoordinates(this, geopoint, null);
             ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
+    }
+
+    @Override
+    public boolean supportsNullCoordinates() {
+        return false;
     }
 
     private void findByKeywordFn() {
@@ -562,6 +532,19 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     public final boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.search_activity_options, menu);
         searchViewItem = menu.findItem(R.id.menu_gosearch);
+        searchViewItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(final MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(final MenuItem item) {
+                searchViewItem.setVisible(false);
+                searchButtonItem.setVisible(false);
+                return true;
+            }
+        });
         searchButtonItem = menu.findItem(R.id.menu_gosearch_icon);
         searchView = (AutoCompleteTextView) searchViewItem.getActionView();
         // configure keyboard
@@ -569,10 +552,4 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
         return true;
     }
-
-    @Override
-    public final boolean onOptionsItemSelected(final MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
 }
