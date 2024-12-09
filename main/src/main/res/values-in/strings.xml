@@ -696,7 +696,6 @@
     <string name="search_tb_button">Cari untuk dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
-    <string name="search_own_caches">Pencarian cache saya</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
     <!-- trackable -->
     <string name="trackable">Bisa dilacak</string>
