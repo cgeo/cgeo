@@ -1049,6 +1049,7 @@
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
+    <string name="init_mapsource_select_legacy">Välj kartkälla (Äldre)</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
@@ -1169,6 +1170,9 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
+    <string name="init_title_useLegacyMap">Använd äldre karta</string>
+    <string name="init_summary_useLegacyMap">Använd äldre versioner av kartor från Google Map / Mapsforge (OSM) istället för UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1827,7 +1831,6 @@
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
     <string name="search_address_result">Hittade platser</string>
-    <string name="search_own_caches">Sök egna cacher</string>
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_bookmark_list">Bokmärkeslista</string>
     <string name="search_pocket_is_new">ny</string>
@@ -2309,6 +2312,7 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="http429_warning">Var snäll och sakta ner, för många förfrågningar till %s</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
@@ -2528,6 +2532,7 @@
     <string name="brouter_info">Offline rutt-tjänst</string>
     <string name="hillshading_info">Offline terrängskuggning</string>
     <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
+    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offlinekartor (endast VTM, kräver omstart)</string>
     <string name="maptheme_scale_map_title">Skalfaktor karta</string>
     <string name="maptheme_scale_map_summary">Skalar karta; 100% = ingen skalning</string>
     <string name="maptheme_scale_text_title">Skalfaktor text</string>
