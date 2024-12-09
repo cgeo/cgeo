@@ -1517,7 +1517,6 @@
     <string name="add_target_to">Προσθήκη στόχου σε</string>
     <string name="search_address_started">Αναζήτηση τοποθεσιών</string>
     <string name="search_address_result">Τοποθεσίες που βρέθηκαν</string>
-    <string name="search_own_caches">Αναζήτηση των κρυπτών μου</string>
     <string name="search_pocket_title">Προσωπική Αναζήτηση</string>
     <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
     <string name="search_pocket_is_new">νέο</string>
