@@ -1835,7 +1835,6 @@
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
     <string name="search_address_result">Llocs trobats</string>
-    <string name="search_own_caches">Cerca els meus catxés</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Llista de marcadors</string>
     <string name="search_pocket_is_new">nou</string>
