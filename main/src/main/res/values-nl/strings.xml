@@ -1541,6 +1541,9 @@
     <string name="cachedetails_progress_unwatch">Verwijderd van watchlist</string>
     <string name="cachedetails_progress_favorite">Toegevoegd aan favorieten</string>
     <string name="cachedetails_progress_unfavorite">Verwijderd uit favorieten</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Meerdere Wherigo cartridges</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Raadpleeg de cache lijst voor meer informatie over de cartridges.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - niet gedownload</string>
     <string name="cache_wherigo_start">Download en speel deze Wherigo met c:geo\'s interne speler</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
@@ -1838,7 +1841,7 @@
     <string name="add_target_to">Doel toevoegen aan</string>
     <string name="search_address_started">Zoeken naar plaatsen</string>
     <string name="search_address_result">Gevonden plaatsen</string>
-    <string name="search_own_caches">Zoek mijn eigen caches</string>
+    <string name="search_own_caches">Mijn caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
