@@ -1568,6 +1568,9 @@
     <string name="cachedetails_progress_unwatch">Usunięto z obserwowanych</string>
     <string name="cachedetails_progress_favorite">Dodano do ulubionych</string>
     <string name="cachedetails_progress_unfavorite">Usunięto z ulubionych</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Wiele kartridży Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Aby uzyskać więcej informacji na temat kartridży, należy zapoznać się z opisem skrytki.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
