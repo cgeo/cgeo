@@ -902,7 +902,6 @@
     <string name="add_target_to">додати метy до</string>
     <string name="search_address_started">пошук місць</string>
     <string name="search_address_result">Знайдені місця</string>
-    <string name="search_own_caches">Пошук моїх кешів</string>
     <string name="search_pocket_title">кишеньковий запит</string>
     <!-- trackable -->
     <string name="trackable">відстежуваний</string>
