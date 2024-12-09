@@ -1761,7 +1761,6 @@
     <string name="add_target_to">대상 추가</string>
     <string name="search_address_started">장소 검색 중</string>
     <string name="search_address_result">장소 찾기</string>
-    <string name="search_own_caches">내 캐시 검색</string>
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
