@@ -1834,7 +1834,6 @@
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
-    <string name="search_own_caches">Meine Caches suchen</string>
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
