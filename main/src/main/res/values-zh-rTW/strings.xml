@@ -1136,7 +1136,6 @@
     <string name="add_target_to">新增目標到</string>
     <string name="search_address_started">搜尋位置</string>
     <string name="search_address_result">找到的地點</string>
-    <string name="search_own_caches">搜尋我的cache</string>
     <string name="search_bookmark_list">書籤列表</string>
     <string name="search_pocket_is_new">新的</string>
     <!-- trackable -->
