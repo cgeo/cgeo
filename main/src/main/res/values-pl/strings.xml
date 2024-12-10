@@ -796,7 +796,7 @@
     <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
     <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
-    <string name="settings_unifiedMapVariants_title">Warianty UnifiedMap</string>
+    <string name="settings_unifiedMapVariants_title">Warianty mapy ujednoliconej (UnifiedMap)</string>
     <string name="settings_userDefinedTileProvider">Dostawca kafelków zdefiniowany przez użytkownika</string>
     <string name="settings_userDefinedTileProviderUri">Wprowadź pełny Uri (bez ukośnika) do dostawcy kafelków, lub wprowadź pełny Uri z parametrami (w tym {X}, {Y} i {Z}). Upewnij się, że sprawdzono i spełniono warunki ich użytkowania.</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
@@ -1186,9 +1186,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="category_unifiedMap">Zunifikowana mapa (beta)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa (beta)</string>
     <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej zunifikowanej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
+    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1568,6 +1568,9 @@
     <string name="cachedetails_progress_unwatch">Usunięto z obserwowanych</string>
     <string name="cachedetails_progress_favorite">Dodano do ulubionych</string>
     <string name="cachedetails_progress_unfavorite">Usunięto z ulubionych</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Wiele kartridży Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Aby uzyskać więcej informacji na temat kartridży, należy zapoznać się z opisem skrytki.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>

@@ -1568,6 +1568,9 @@
     <string name="cachedetails_progress_unwatch">Odebráno ze seznamu sledovaných</string>
     <string name="cachedetails_progress_favorite">Přidáno do oblíbených</string>
     <string name="cachedetails_progress_unfavorite">Odebráno z oblíbených</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Vícenásobné cratridge Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Další informace o cartridgích naleznete v listingu kešek.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - není stažené</string>
     <string name="cache_wherigo_start">Stáhnout a hrát toto Wherigo pomocí vestavěného přehrávače v c:geo</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
