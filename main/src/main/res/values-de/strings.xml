@@ -1476,7 +1476,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Habe teilgenommen</string>
+    <string name="cache_status_attended">Teilgenomen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1834,7 +1834,6 @@
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
-    <string name="search_own_caches">Meine Caches suchen</string>
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
@@ -2641,7 +2640,7 @@
     <string name="wherigo_download_delete_leftover_toast">Wherigo: Lösche übrige Datei</string>
     <string name="wherigo_download_progress_login">Anmeldung…</string>
     <string name="wherigo_download_progress_started">Herunterladen gestartet</string>
-    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s%) heruntergeladen</string>
+    <string name="wherigo_download_progress_download_status">%1$s / %2$s (%3$s %%) heruntergeladen</string>
     <string name="wherigo_error_title">Wherigo Problembericht</string>
     <string name="wherigo_error_game_noerror">Kein Fehler von Wherigo Engine gemeldet.</string>
     <string name="wherigo_error_game_error">Fehler gemeldet von Wherigo Engine:\n\n```\n%1$s\n```</string>
