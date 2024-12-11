@@ -167,14 +167,13 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
             doReapplyTheme = false;
         }
         mMapView.getLayerManager().getLayers().add(new MapEventsReceiver());
-        mMapView.getModel().mapViewPosition.addObserver(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
         // mMapView.onResume();
-
+        mMapView.getModel().mapViewPosition.addObserver(this);
     }
 
     @Override
