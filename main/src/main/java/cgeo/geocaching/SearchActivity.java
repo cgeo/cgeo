@@ -307,14 +307,18 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // suggestion provider
             if (geocacheSuggestionAdapter) {
                 searchView.setAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
+                searchView.setOnItemClickListener((parent, view, position, id) -> {
+                    final String searchTerm = (String) parent.getItemAtPosition(position);
+                    findByGeocodeFn(searchTerm);
+                });
             } else if (suggestionFunction != null) {
                 searchView.setAdapter(new AutoCompleteAdapter(searchView.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+                searchView.setOnItemClickListener((parent, view, position, id) -> {
+                    final String searchTerm = (String) parent.getItemAtPosition(position);
+                    searchView.setText(searchTerm);
+                    runnable.run();
+                });
             }
-            searchView.setOnItemClickListener((parent, view, position, id) -> {
-                final String searchTerm = (String) parent.getItemAtPosition(position);
-                searchView.setText(searchTerm);
-                runnable.run();
-            });
 
             // caps keyboard
             if (inputFilter != null) {
