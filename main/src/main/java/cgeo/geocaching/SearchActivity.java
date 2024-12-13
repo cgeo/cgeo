@@ -276,6 +276,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
             // icon in search field
             final Drawable drw = getDrawable(icon);
+            drw.setTint(getResources().getColor(R.color.colorTextActionBar));
             drw.setBounds(0, 0, (int) searchView.getTextSize(), (int) searchView.getTextSize());
             searchView.setCompoundDrawables(drw, null, null, null);
             searchView.setCompoundDrawablePadding(16);
