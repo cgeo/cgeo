@@ -41,7 +41,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
         TextView textView = v.findViewById(R.id.text);
         ImageView iconView = v.findViewById(R.id.icon);
         textView.setText(geocode);
-        setHighLightedText(textView, getSearchTerm());
+        setHighLightedText(textView, getSearchTerm().toLowerCase());
         iconView.setImageResource(icon);
         return v;
     }
@@ -61,7 +61,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
      * @param textToHighlight Text to highlight
      */
     public void setHighLightedText(TextView tv, String textToHighlight) {
-        String tvt = tv.getText().toString();
+        String tvt = tv.getText().toString().toLowerCase();
         int ofe = tvt.indexOf(textToHighlight, 0);
         Spannable wordToSpan = new SpannableString(tv.getText());
         for (int ofs = 0; ofs < tvt.length() && ofe != -1; ofs = ofe + 1) {
