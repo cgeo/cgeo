@@ -21,6 +21,12 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
     private String[] suggestions = EMPTY;
     private final Func1<String, String[]> suggestionFunction;
 
+    public String getSearchTerm() {
+        return searchTerm;
+    }
+
+    private String searchTerm;
+
     public AutoCompleteAdapter(final Context context, @LayoutRes final int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
         super(context, textViewResourceId);
         this.suggestionFunction = suggestionFunction;
@@ -62,6 +68,7 @@ public class AutoCompleteAdapter extends ArrayAdapter<String> {
             @Override
             protected void publishResults(final CharSequence constraint, final FilterResults filterResults) {
                 if (filterResults != null && filterResults.count > 0) {
+                    searchTerm = constraint.toString();
                     suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
                 } else {
