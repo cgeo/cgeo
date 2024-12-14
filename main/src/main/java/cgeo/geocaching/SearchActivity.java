@@ -17,6 +17,7 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.search.AutoCompleteAdapter;
 import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
+import cgeo.geocaching.search.SearchAutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.SearchCardView;
@@ -316,7 +317,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
                     findByGeocodeFn(searchTerm);
                 });
             } else if (suggestionFunction != null) {
-                binding.suggestionList.setAdapter(new AutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction));
+                binding.suggestionList.setAdapter(new SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, icon, suggestionFunction));
                 binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
                     final String searchTerm = (String) parent.getItemAtPosition(position);
                     searchView.setText(searchTerm);
