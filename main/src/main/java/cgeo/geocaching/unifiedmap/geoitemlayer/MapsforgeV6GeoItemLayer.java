@@ -74,11 +74,11 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     @Override
     public void destroy(final Collection<Pair<GeoPrimitive, Pair<Integer, Integer>>> values) {
         Log.iForce("Destroy Layer");
+        if (this.layerManager != null) {
+            this.layerManager.getLayers().remove(this);
+        }
         layerLock.lock();
         try {
-            if (this.layerManager != null) {
-                this.layerManager.getLayers().remove(this);
-            }
             this.layerManager = null;
             this.layerItemMap.clear();
             this.statMarkerCount = 0;
