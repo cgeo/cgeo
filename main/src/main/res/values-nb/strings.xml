@@ -1141,7 +1141,6 @@
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Logg lagret</string>
-    <string name="cache_status_attended">Deltok</string>
     <string name="cache_status_found">Funnet</string>
     <string name="cache_not_status_found">Ikke funnet</string>
     <string name="cache_status_archived">Arkivert</string>
@@ -1365,7 +1364,6 @@
     <string name="google_maps_style_retro">Retro</string>
     <string name="google_maps_style_contrast">Høy kontrast</string>
     <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
-    <string name="google_maps_option_group_theme">Valg for karttemaer</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_bar_hint_settings">Søkeinnstillinger</string>
@@ -1385,7 +1383,6 @@
     <string name="search_finder">Funnet av</string>
     <string name="search_finder_prefill">Finner</string>
     <string name="search_finder_button">Søk med finnernavn</string>
-    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Søk med filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
@@ -1394,7 +1391,6 @@
     <string name="add_target_to">Legg til mål til</string>
     <string name="search_address_started">Søker etter steder</string>
     <string name="search_address_result">Fant plasser</string>
-    <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_bookmark_list">Bokmerk liste</string>
     <string name="search_pocket_is_new">ny</string>

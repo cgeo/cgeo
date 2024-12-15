@@ -970,7 +970,6 @@
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
-    <string name="cache_status_attended">出席</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
     <string name="cache_status_archived">封存、歸檔</string>
@@ -1119,7 +1118,6 @@
     <string name="quick_settings">快速設定</string>
     <string name="map_show_caches_title">顯示寶藏:</string>
     <string name="map_show_other_title">顯示其他</string>
-    <string name="google_maps_option_group_theme">主題選項</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
@@ -1131,7 +1129,6 @@
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
-    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_tb_hint">旅行蟲識別</string>
     <string name="search_tb_button">搜尋旅行蟲</string>
@@ -1139,7 +1136,6 @@
     <string name="add_target_to">新增目標到</string>
     <string name="search_address_started">搜尋位置</string>
     <string name="search_address_result">找到的地點</string>
-    <string name="search_own_caches">搜尋我的cache</string>
     <string name="search_bookmark_list">書籤列表</string>
     <string name="search_pocket_is_new">新的</string>
     <!-- trackable -->
