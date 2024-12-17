@@ -1538,6 +1538,9 @@
     <string name="cachedetails_progress_unwatch">S\'ha eliminat de la llista de seguiment</string>
     <string name="cachedetails_progress_favorite">S\'ha afegit als preferits</string>
     <string name="cachedetails_progress_unfavorite">S\'ha esborrat de preferits</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Múltiples cartutxos Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consulteu la llista de catxés per obtenir més informació sobre els cartutxos.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - no descarregat</string>
     <string name="cache_wherigo_start">Baixeu i reproduïu aquest Wherigo mitjançant el reproductor intern de c:geo</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
