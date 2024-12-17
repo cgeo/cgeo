@@ -1540,6 +1540,9 @@
     <string name="cachedetails_progress_unwatch">Verwijderd van watchlist</string>
     <string name="cachedetails_progress_favorite">Toegevoegd aan favorieten</string>
     <string name="cachedetails_progress_unfavorite">Verwijderd uit favorieten</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Meerdere Wherigo cartridges</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Raadpleeg de cache lijst voor meer informatie over de cartridges.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - niet gedownload</string>
     <string name="cache_wherigo_start">Download en speel deze Wherigo met c:geo\'s interne speler</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>

@@ -1535,6 +1535,7 @@
     <string name="cachedetails_progress_unwatch">Borttagen från bevakningslistan</string>
     <string name="cachedetails_progress_favorite">Lades till i favoriter</string>
     <string name="cachedetails_progress_unfavorite">Borttagen från favoriter</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - inte nerladdad</string>
     <string name="cache_wherigo_start">Ladda ner och spela denna Wherigo med c:geo\'s interna spelare</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
