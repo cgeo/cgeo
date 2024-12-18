@@ -276,6 +276,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
             // icon in search field
             final Drawable drw = getDrawable(icon);
+            drw.setTint(getResources().getColor(R.color.colorTextActionBar));
             drw.setBounds(0, 0, (int) searchView.getTextSize(), (int) searchView.getTextSize());
             searchView.setCompoundDrawables(drw, null, null, null);
             searchView.setCompoundDrawablePadding(16);
@@ -307,14 +308,20 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // suggestion provider
             if (geocacheSuggestionAdapter) {
                 searchView.setAdapter(new GeocacheAutoCompleteAdapter(searchView.getContext(), suggestionFunction));
+                searchView.setOnItemClickListener((parent, view, position, id) -> {
+                    final String searchTerm = (String) parent.getItemAtPosition(position);
+                    findByGeocodeFn(searchTerm);
+                });
             } else if (suggestionFunction != null) {
                 searchView.setAdapter(new AutoCompleteAdapter(searchView.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+                searchView.setOnItemClickListener((parent, view, position, id) -> {
+                    final String searchTerm = (String) parent.getItemAtPosition(position);
+                    searchView.setText(searchTerm);
+                    runnable.run();
+                });
+            } else {
+                searchView.setAdapter(null);
             }
-            searchView.setOnItemClickListener((parent, view, position, id) -> {
-                final String searchTerm = (String) parent.getItemAtPosition(position);
-                searchView.setText(searchTerm);
-                runnable.run();
-            });
 
             // caps keyboard
             if (inputFilter != null) {
@@ -344,7 +351,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             return;
         }
 
-        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.ic_menu_cache, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode, true, new InputFilter.AllCaps());
+        final CardView geocodecard = addSearchCardWithField(R.string.search_geo, R.drawable.search_identifier, () -> findByGeocodeFn(getSearchFieldInput()), DataStore::getSuggestionsGeocode, true, new InputFilter.AllCaps());
         geocodecard.setOnLongClickListener(v -> {
             final String clipboardText = ClipboardUtils.getText();
             final String geocode;
