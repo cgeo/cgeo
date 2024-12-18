@@ -41,5 +41,5 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Configureerbare datumnotatie (bijv: cache logs), zie [Instellingen => Uiterlijk => Datumformaat](cgeo-settings://short_date_format)
 - Nieuw: Leid informatie over connectoren op het startscherm om naar een connector specifiek voorkeurenscherm
 - Nieuw: Extra emojis voor cachepictogrammen
-- Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebratie, blok party en doolhof
+- Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebration, block party en maze
 - Wijziging: Cache type filter "Anders" bevat GCHQ, APE en onbekende types
