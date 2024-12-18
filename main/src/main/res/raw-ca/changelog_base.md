@@ -41,5 +41,5 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: format de data configurable (p. ex.: registres de catxé), vegeu [Configuració => Aparença => Format de data](cgeo-settings://short_date_format)
 - Nou: apunta la informació del connector a la pantalla d'inici a la pantalla de preferències específiques del connector
 - Nou: emojis addicionals per a les icones del catxé
-- Canvi: el filtre de tipus de catxés "Especials" inclou esdeveniments de tipus mega, giga, community celebration, HQ celebtration, block party i maze
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
 - Canvi: el filtre de tipus de catxé "Altres" inclou GCHQ, APE i tipus desconeguts
