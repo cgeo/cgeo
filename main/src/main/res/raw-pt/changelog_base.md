@@ -41,5 +41,5 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Formato de data configurável (por ex.: registos de cache), consulte [Configurações => Aparência => Formato de data](cgeo-settings://short_date_format)
 - Novo: Direccionamento do conector de informação do ecrã principal para o conector específico do ecrã de preferências
 - Novo: Emojis adicionais para os ícones das caches
-- Alteração: Tipo de filtro de cache "Especiais" inclui eventos dos tipos Mega, Giga, Community Celebration, Celebration HQ, Block Party e Maze
+- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
 - Alteração: Tipo de filtro de cache "Outro" inclui GCHQ, APE e tipos desconhecidos
