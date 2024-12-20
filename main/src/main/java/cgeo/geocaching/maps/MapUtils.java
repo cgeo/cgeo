@@ -39,7 +39,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
@@ -56,7 +55,6 @@ import android.graphics.Point;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextPaint;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -208,42 +206,40 @@ public class MapUtils {
     // check whether hillshading tile data is available for the whole viewport given
     // and offer to download missing hillshading data
     public static void checkHillshadingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
-        if (Settings.getMapShadingEnabled()) {
-            ActivityMixin.showToast(activity, R.string.downloadmap_checking);
+        ActivityMixin.showToast(activity, R.string.downloadmap_checking);
 
-            final HashMap<String, String> requiredTiles = new HashMap<>();
-            final ArrayList<Download> missingDownloads = new ArrayList<>();
-            final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
+        final HashMap<String, String> requiredTiles = new HashMap<>();
+        final ArrayList<Download> missingDownloads = new ArrayList<>();
+        final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
 
-            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
-                // calculate affected routing tiles
-                int curLat = (int) Math.floor(minLatitude);
-                final int maxLat = (int) Math.floor(maxLatitude);
-                final int maxLon = (int) Math.floor(maxLongitude);
-                while (curLat <= maxLat) {
-                    int curLon = (int) Math.floor(minLongitude);
-                    while (curLon <= maxLon) {
-                        final String curLat02d = String.format(Locale.US, "%02d", Math.abs(curLat));
-                        final String filenameBase = (curLat < 0 ? "S" : "N") + curLat02d + (curLon < 0 ? "W" : "E") + String.format(Locale.US, "%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION;
-                        final String dirName = (curLat < 0 ? "S" : "N") + curLat02d;
-                        requiredTiles.put(filenameBase, dirName);
-                        curLon += 1;
-                    }
-                    curLat += 1;
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+            // calculate affected routing tiles
+            int curLat = (int) Math.floor(minLatitude);
+            final int maxLat = (int) Math.floor(maxLatitude);
+            final int maxLon = (int) Math.floor(maxLongitude);
+            while (curLat <= maxLat) {
+                int curLon = (int) Math.floor(minLongitude);
+                while (curLon <= maxLon) {
+                    final String curLat02d = String.format(Locale.US, "%02d", Math.abs(curLat));
+                    final String filenameBase = (curLat < 0 ? "S" : "N") + curLat02d + (curLon < 0 ? "W" : "E") + String.format(Locale.US, "%03d", Math.abs(curLon)) + HILLSHADING_TILE_FILEEXTENSION;
+                    final String dirName = (curLat < 0 ? "S" : "N") + curLat02d;
+                    requiredTiles.put(filenameBase, dirName);
+                    curLon += 1;
                 }
-                checkHillshadingTiles(requiredTiles, missingDownloads, hasUnsupportedTiles);
-            }, () -> {
-                // give feedback to the user + offer to download missing tiles (if available)
-                if (missingDownloads.isEmpty()) {
-                    ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_hillshading_unsupported : R.string.check_hillshading_found);
-                } else {
-                    if (hasUnsupportedTiles.get()) {
-                        ActivityMixin.showShortToast(activity, R.string.check_hillshading_unsupported);
-                    }
-                    DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_hillshading_missing, missingDownloads, null);
+                curLat += 1;
+            }
+            checkHillshadingTiles(requiredTiles, missingDownloads, hasUnsupportedTiles);
+        }, () -> {
+            // give feedback to the user + offer to download missing tiles (if available)
+            if (missingDownloads.isEmpty()) {
+                ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_hillshading_unsupported : R.string.check_hillshading_found);
+            } else {
+                if (hasUnsupportedTiles.get()) {
+                    ActivityMixin.showShortToast(activity, R.string.check_hillshading_unsupported);
                 }
-            });
-        }
+                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_hillshading_missing, missingDownloads, null);
+            }
+        });
     }
 
     @WorkerThread
@@ -295,6 +291,16 @@ public class MapUtils {
                 }
             }
         }
+    }
+
+    public static boolean hasHillshadingTiles() {
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.OFFLINE_MAP_SHADING.getFolder());
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.endsWith(HILLSHADING_TILE_FILEEXTENSION)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
