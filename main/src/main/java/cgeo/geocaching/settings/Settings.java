@@ -2460,10 +2460,6 @@ public class Settings {
         return !getBoolean(R.string.pref_mapScaleOnly, true);
     }
 
-    public static boolean getMapShadingEnabled() {
-        return getBoolean(R.string.pref_maphillshading, false);
-    }
-
     public static boolean getMapShadingShowLayer() {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }

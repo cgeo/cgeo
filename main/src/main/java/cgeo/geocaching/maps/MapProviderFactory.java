@@ -89,8 +89,8 @@ public class MapProviderFactory {
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
-        parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getMapSource().supportsHillshading()).setIcon(R.drawable.ic_menu_hills);
-        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getMapShadingEnabled() && Settings.getMapSource().supportsHillshading());
+        parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(MapUtils.hasHillshadingTiles() && Settings.getMapSource().supportsHillshading()).setIcon(R.drawable.ic_menu_hills);
+        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getMapSource().supportsHillshading());
         parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
         parentMenu.findItem(R.id.menu_manage_offline_maps).setVisible(true);
     }
