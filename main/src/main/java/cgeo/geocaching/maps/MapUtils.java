@@ -246,13 +246,6 @@ public class MapUtils {
         }
     }
 
-    public static void onPrepareOptionsMenu(final Menu menu) {
-        // use same condition as in checkRoutingData() above
-        MenuUtils.setVisible(menu.findItem(R.id.menu_check_routingdata), Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
-        // use same condition as in checkHillshadingData() above
-        MenuUtils.setVisible(menu.findItem(R.id.menu_check_hillshadingdata), Settings.getMapShadingEnabled());
-    }
-
     @WorkerThread
     private static void checkTiles(final HashMap<String, String> requiredTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
         // read tiles already stored
