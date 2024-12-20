@@ -8,6 +8,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 
@@ -66,6 +67,8 @@ public class TileProviderFactory {
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_offline, true, true);
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources_online, true, true);
         parentMenu.findItem(R.id.menu_hillshading).setCheckable(true).setChecked(Settings.getMapShadingShowLayer()).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading());
+        parentMenu.findItem(R.id.menu_check_hillshadingdata).setVisible(Settings.getMapShadingEnabled() && Settings.getTileProvider().supportsHillshading());
+        parentMenu.findItem(R.id.menu_check_routingdata).setVisible(Settings.useInternalRouting() || ProcessUtils.isInstalled(CgeoApplication.getInstance().getString(R.string.package_brouter)));
     }
 
     public static HashMap<String, AbstractTileProvider> getTileProviders() {
