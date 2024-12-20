@@ -7,7 +7,7 @@ import org.mapsforge.map.datastore.MultiMapDataStore;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
-import org.mapsforge.map.model.IMapViewPosition;
+import org.mapsforge.map.model.MapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileInfo;
 
@@ -18,7 +18,7 @@ public class MultiRendererLayer implements ITileLayer {
     private byte zoomLevelMax = 0;
 
 
-    public MultiRendererLayer(final TileCache tileCache, final List<MapFile> mapFiles, final IMapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
+    public MultiRendererLayer(final TileCache tileCache, final List<MapFile> mapFiles, final MapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
         final MultiMapDataStore mapDataStore = new MultiMapDataStore(MultiMapDataStore.DataPolicy.RETURN_ALL);
 
         for (MapFile f : mapFiles) {
