@@ -20,7 +20,7 @@ public class HillShadingLayerHelper {
     }
 
     public static HillsRenderConfig getHillsRenderConfig() {
-        if (!Settings.getMapShadingEnabled() || !Settings.getMapShadingShowLayer()) {
+        if (!Settings.getMapShadingShowLayer()) {
             return null;
         }
 
