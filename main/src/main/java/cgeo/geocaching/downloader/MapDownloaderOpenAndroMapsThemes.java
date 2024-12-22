@@ -5,6 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.CalendarUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.net.Uri;
@@ -24,7 +26,9 @@ import org.apache.commons.lang3.StringUtils;
 public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
     protected static final String FILENAME_VOLUNTARY = "Voluntary MF5.zip";
+    protected static final String FILENAME_WINTER = "Elevate_Winter.zip";
     private static final Pattern PATTERN_LAST_UPDATED_DATE_ELEVATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9](\\.[0-9])?<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
+    private static final Pattern PATTERN_LAST_UPDATED_DATE_WINTER = Pattern.compile("Elevate_Winter\\.zip<\\/a>\\s*([0-9]{1,2}-[A-za-z]{3}-20[0-9]{2}) [0-9]{1,2}:[0-9]{1,2}\\s*([0-9]*)");
     private static final Pattern PATTERN_LAST_UPDATED_DATE_VOLUNTARY = Pattern.compile(FILENAME_VOLUNTARY + "<\\/a>\\s*([0-9]{1,2})-([A-Za-z]{3})-([0-9]{4})");
     private static final MapDownloaderOpenAndroMapsThemes INSTANCE = new MapDownloaderOpenAndroMapsThemes();
 
@@ -37,6 +41,22 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
         final Download file = checkUpdateFor(page, CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl), "Elevate.zip");
         if (file != null) {
             list.add(file);
+        }
+
+        // small hack to support Elevate Winter theme
+        final String urlWinter = CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_winter_downloadurl);
+        String pageWinter = null;
+        try {
+            final Response response = Network.getRequest(urlWinter, new Parameters()).blockingGet();
+            pageWinter = Network.getResponseData(response, true);
+        } catch (final Exception ignore) {
+            // ignore
+        }
+        if (StringUtils.isNotBlank(pageWinter)) {
+            final Download fileWinter = checkUpdateFor(pageWinter, urlWinter, FILENAME_WINTER);
+            if (fileWinter != null) {
+                list.add(fileWinter);
+            }
         }
 
         // small hack to support a second theme from a different location
@@ -65,6 +85,14 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
             final String date = "20" + matchDate.group(4) + "-" + matchDate.group(3) + "-" + matchDate.group(2);
             return new Download("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType, iconRes);
         }
+
+        // check for elevate winter
+        final MatcherWrapper matchDateWinter = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE_WINTER, page);
+        if (matchDateWinter.find()) {
+            final long date = CalendarUtils.parseDayMonthYearUS(matchDateWinter.group(1));
+            return new Download("Elevate Winter", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_winter_downloadurl) + FILENAME_WINTER), false, CalendarUtils.yearMonthDay(date), Formatter.formatBytes(Long.parseLong(matchDateWinter.group(2))), offlineMapType, iconRes);
+        }
+
         // check for voluntary
         final MatcherWrapper matchDateVoluntary = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE_VOLUNTARY, page);
         if (matchDateVoluntary.find()) {
