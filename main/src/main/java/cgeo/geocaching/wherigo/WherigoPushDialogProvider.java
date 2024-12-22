@@ -115,6 +115,7 @@ public class WherigoPushDialogProvider implements IWherigoDialogProvider {
         }
         binding.debugBox.setVisibility(WherigoGame.get().isDebugModeForCartridge() ? VISIBLE : GONE);
         if (WherigoGame.get().isDebugModeForCartridge()) {
+            //noinspection SetTextI18n (debug info only)
             binding.debugInfo.setText("Wherigo Dialog");
         }
 
