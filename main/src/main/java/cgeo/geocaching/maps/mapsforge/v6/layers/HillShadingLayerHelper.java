@@ -8,7 +8,6 @@ import android.content.Context;
 
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.hills.DemFolderAndroidContent;
-import org.mapsforge.map.layer.hills.AdaptiveClasyHillShading;
 import org.mapsforge.map.layer.hills.DemFolder;
 import org.mapsforge.map.layer.hills.HillsRenderConfig;
 import org.mapsforge.map.layer.hills.MemoryCachingHgtReaderTileSource;
@@ -20,15 +19,14 @@ public class HillShadingLayerHelper {
     }
 
     public static HillsRenderConfig getHillsRenderConfig() {
-        if (!Settings.getMapShadingEnabled() || !Settings.getMapShadingShowLayer()) {
+        if (!Settings.getMapShadingShowLayer()) {
             return null;
         }
 
         final Context context = CgeoApplication.getInstance();
         final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
 
-        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new AdaptiveClasyHillShading(false), AndroidGraphicFactory.INSTANCE);
-        // avoid lines at between tiles
+        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new CgeoAdaptiveClasyHillShading(), AndroidGraphicFactory.INSTANCE);
         final HillsRenderConfig hillsConfig = new HillsRenderConfig(hillTileSource);
         hillsConfig.indexOnThread();
         return hillsConfig;
