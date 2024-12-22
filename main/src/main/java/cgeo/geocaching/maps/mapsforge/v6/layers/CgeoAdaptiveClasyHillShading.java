@@ -7,8 +7,8 @@ import org.mapsforge.map.layer.hills.HiResClasyHillShading;
 
 public class CgeoAdaptiveClasyHillShading extends AdaptiveClasyHillShading {
 
-    public CgeoAdaptiveClasyHillShading() {
-        super(false);
+    public CgeoAdaptiveClasyHillShading(final boolean isHqEnabled) {
+        super(isHqEnabled);
     }
 
     @Override

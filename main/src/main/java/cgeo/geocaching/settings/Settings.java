@@ -2468,6 +2468,10 @@ public class Settings {
         return getBoolean(R.string.pref_maphillshading_show_layer, true);
     }
 
+    public static boolean getMapShadingHq() {
+        return getBoolean(R.string.pref_maphillshading_hq, false);
+    }
+
     public static void setMapShadingShowLayer(final boolean show) {
         putBoolean(R.string.pref_maphillshading_show_layer, show);
     }

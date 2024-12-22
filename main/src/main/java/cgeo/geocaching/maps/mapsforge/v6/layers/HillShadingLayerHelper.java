@@ -26,7 +26,7 @@ public class HillShadingLayerHelper {
         final Context context = CgeoApplication.getInstance();
         final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
 
-        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new CgeoAdaptiveClasyHillShading(), AndroidGraphicFactory.INSTANCE);
+        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new CgeoAdaptiveClasyHillShading(Settings.getMapShadingHq()), AndroidGraphicFactory.INSTANCE);
         final HillsRenderConfig hillsConfig = new HillsRenderConfig(hillTileSource);
         hillsConfig.indexOnThread();
         return hillsConfig;
