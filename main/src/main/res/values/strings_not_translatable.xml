@@ -88,7 +88,7 @@
     <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2023-07 to 2024-07 -->
+    <!-- currently listed: contributions 2024-01 to 2024-12 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     bekuno|https://github.com/bekuno|ci|
@@ -96,11 +96,9 @@
     fm-sys|https://github.com/fm-sys|cg|
     kumy|https://github.com/kumy|ci|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
-    mortenbruhn|https://github.com/mortenbruhn|c|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
-    UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
 
@@ -142,6 +140,7 @@
     Mathieu Alorent||c|
     Matze2||c|
     MichielK||c|
+    mortenbruhn|https://github.com/mortenbruhn|c|
     msperkowski|||
     mzylowski|https://github.com/mzylowski|c|
     ncorreia||c|
@@ -166,6 +165,7 @@
     TakoTheDank|https://github.com/TacoTheDank|c|
     technetium|https://github.com/technetium|c|
     thiasB||c|
+    UniQP|https://github.com/UniQP|c|
     Volthai7us||c
     YraFyra||c|
     zenobios||c|
