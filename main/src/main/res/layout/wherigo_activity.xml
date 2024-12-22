@@ -193,7 +193,7 @@
                 <View style="@style/separator_horizontal_heading" />
                 <TextView
                     style="@style/separator_horizontal_heading_text"
-                    android:text="Sound controls" />
+                    android:text="@string/wherigo_sound_title" />
             </RelativeLayout>
 
             <!--  Music buttons -->

@@ -2975,7 +2975,6 @@
     <string name="wherigo_download_title">Download cartridge</string>
     <string name="wherigo_download_message">Cartridge with CGUID \"%s\" is not available on your device. Do you want to download it?</string>
     <string name="wherigo_download_successful_title">Download successful</string>
-    <string name="wherigo_download_successful_message">Cartridge with CGUID \"%s\" was downloaded successfully. Do you want to open it?</string>
     <string name="wherigo_download_failed_title">Download failed</string>
     <string name="wherigo_download_failed_message">Download of cartridge with CGUID \"%1$s\" failed: %2$s</string>
     <string name="wherigo_manual_download_title">Manually download cartridge</string>
@@ -3034,8 +3033,6 @@
     <string name="close">Close</string>
     <string name="delete">Delete</string>
     <string name="play">Play</string>
-    <string name="pause">Pause</string>
-    <string name="resume">Resume</string>
 
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Select All</string>
