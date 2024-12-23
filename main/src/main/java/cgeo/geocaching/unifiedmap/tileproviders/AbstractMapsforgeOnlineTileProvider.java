@@ -81,12 +81,16 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
     @Override
     public void onResume() {
         super.onResume();
-        ((TileDownloadLayer) tileLayer).onResume();
+        if (tileLayer != null) {
+            ((TileDownloadLayer) tileLayer).onResume();
+        }
     }
 
     @Override
     public void onDestroy() {
-        tileLayer.onDestroy();
+        if (tileLayer != null) {
+            tileLayer.onDestroy();
+        }
         super.onDestroy();
     }
 }
