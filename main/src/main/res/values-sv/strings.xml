@@ -2636,8 +2636,6 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
-    <string name="pause">Pausa</string>
-    <string name="resume">Återuppta</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
