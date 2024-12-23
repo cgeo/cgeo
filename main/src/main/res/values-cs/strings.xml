@@ -2704,7 +2704,6 @@
     <string name="wherigo_download_title">Stáhnout cartridge</string>
     <string name="wherigo_download_message">Cartridge s CGUID \"%s\" není ve vašem zařízení k dispozici. Chcete ji stáhnout?</string>
     <string name="wherigo_download_successful_title">Úspěšně staženo</string>
-    <string name="wherigo_download_successful_message">Cartridge s CGUID \"%s\" byla úspěšně stažena. Chcete ji otevřít?</string>
     <string name="wherigo_download_failed_title">Stahování selhalo</string>
     <string name="wherigo_download_failed_message">Stahování cartridge s CGUID \"%1$s\" selhalo: %2$s</string>
     <string name="wherigo_manual_download_title">Stáhnout cartridge ručně</string>
@@ -2754,8 +2753,6 @@
     <string name="close">Zavřít</string>
     <string name="delete">Odstranit</string>
     <string name="play">Hrát</string>
-    <string name="pause">Pozastavit</string>
-    <string name="resume">Pokračovat</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Vybrat vše</string>
     <string name="multiselect_selectvisible">Vybrat viditelné</string>
