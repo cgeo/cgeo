@@ -2366,8 +2366,6 @@
     <string name="redo">Znova</string>
     <string name="ok" tools:ignore="ButtonCase">OK</string>
     <string name="optimize">Optimalizovať</string>
-    <string name="pause">Pozastaviť</string>
-    <string name="resume">Pokračovať</string>
     <!-- Multi-Selections -->
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Smajlík</string>
