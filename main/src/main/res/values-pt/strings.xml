@@ -2632,7 +2632,6 @@
     <string name="wherigo_download_title">Transferir cartucho</string>
     <string name="wherigo_download_message">Cartucho com CGUID \"%s não está disponível no seu dispositivo. Quer transferi-lo?</string>
     <string name="wherigo_download_successful_title">Transferência bem sucedida</string>
-    <string name="wherigo_download_successful_message">Cartucho com CGUID \"%s\" foi transferido com sucesso. Deseja abri-lo?</string>
     <string name="wherigo_download_failed_title">A transferência falhou</string>
     <string name="wherigo_download_failed_message">A transferência do cartucho com CGUID \"%1$s\" falhou: %2$s</string>
     <string name="wherigo_manual_download_title">Transferir cartucho manualmente</string>
@@ -2682,8 +2681,6 @@
     <string name="close">Fechar</string>
     <string name="delete">Eliminar</string>
     <string name="play">Jogar</string>
-    <string name="pause">Pausar</string>
-    <string name="resume">Retomar</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Selecionar Tudo</string>
     <string name="multiselect_selectvisible">Selecionar Visíveis</string>
