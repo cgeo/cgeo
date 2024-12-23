@@ -2632,7 +2632,6 @@
     <string name="wherigo_download_title">Cartridge herunterladen</string>
     <string name="wherigo_download_message">Cartridge mit CGUID \"%s\" ist auf Deinem Gerät nicht verfügbar. Möchtest du sie herunterladen?</string>
     <string name="wherigo_download_successful_title">Herunterladen erfolgreich</string>
-    <string name="wherigo_download_successful_message">Cartridge mit CGUID \"%s\" wurde erfolgreich heruntergeladen. Möchtest Du sie öffnen?</string>
     <string name="wherigo_download_failed_title">Herunterladen fehlgeschlagen</string>
     <string name="wherigo_download_failed_message">Herunterladen der Cartridge mit CGUID \"%1$s\" fehlgeschlagen: %2$s</string>
     <string name="wherigo_manual_download_title">Cartridge manuell herunterladen</string>
@@ -2682,8 +2681,6 @@
     <string name="close">Schließen</string>
     <string name="delete">Löschen</string>
     <string name="play">Spielen</string>
-    <string name="pause">Pause</string>
-    <string name="resume">Fortsetzen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
