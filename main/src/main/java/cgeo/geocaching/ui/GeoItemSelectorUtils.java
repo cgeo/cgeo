@@ -43,7 +43,6 @@ public class GeoItemSelectorUtils {
     }
 
     public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
-
         final TextParam cacheName = TextParam.text(TextUtils.coloredCacheText(context, cache, StringUtils.defaultIfBlank(cache.getName(), "")));
         final ImageParam cacheIcon = ImageParam.drawable(MapMarkerUtils.getCacheMarker(context.getResources(), cache, CacheListType.MAP, Settings.getIconScaleEverywhere()).getDrawable());
 

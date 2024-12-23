@@ -17,9 +17,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AutoCompleteAdapter extends ArrayAdapter<String> {
 
-    private static final String[] EMPTY = new String[0];
-    private String[] suggestions = EMPTY;
-    private final Func1<String, String[]> suggestionFunction;
+    static final String[] EMPTY = new String[0];
+    String[] suggestions = EMPTY;
+    Func1<String, String[]> suggestionFunction;
 
     public AutoCompleteAdapter(final Context context, @LayoutRes final int textViewResourceId, final Func1<String, String[]> suggestionFunction) {
         super(context, textViewResourceId);
