@@ -1,5 +1,9 @@
 package cgeo.geocaching.search;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.utils.functions.Func0;
+import cgeo.geocaching.utils.functions.Func1;
+
 import android.content.Context;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,10 +20,6 @@ import androidx.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.utils.functions.Func0;
-import cgeo.geocaching.utils.functions.Func1;
-
 public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
 
     int suggestionIcon;
@@ -28,7 +28,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     final Func0<String[]> historyFunction;
     String searchTerm;
 
-    public SearchAutoCompleteAdapter(Context context, int textViewResourceId, Func1<String, String[]> suggestionFunction, int suggestionIcon, Func0<String[]> historyFunction) {
+    public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction) {
         super(context, textViewResourceId, suggestionFunction);
         this.suggestionIcon = suggestionIcon;
         this.context = context;
@@ -109,7 +109,8 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                     suggestions = (String[]) filterResults.values;
                     notifyDataSetChanged();
                 } else {
-                    notifyDataSetInvalidated(); // TODO: This is broken, search keeps showing the last result
+                    suggestions = new String[0];
+                    notifyDataSetInvalidated();
                 }
             }
         };

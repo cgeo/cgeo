@@ -1,12 +1,12 @@
 package cgeo.geocaching.search;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
-import cgeo.geocaching.R;
 
 import android.content.Context;
 import android.view.View;
