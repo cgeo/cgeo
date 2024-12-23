@@ -2699,7 +2699,6 @@
     <string name="wherigo_download_title">Pobierz kartridż</string>
     <string name="wherigo_download_message">Kartridż z CGUID \"%s\" nie jest dostępny na Twoim urządzeniu. Czy chcesz go pobrać?</string>
     <string name="wherigo_download_successful_title">Pobrano pomyślnie</string>
-    <string name="wherigo_download_successful_message">Kartridż z CGUID \"%s\" został pobrany pomyślnie. Czy chcesz go otworzyć?</string>
     <string name="wherigo_download_failed_title">Pobieranie nie powiodło się</string>
     <string name="wherigo_download_failed_message">Pobieranie wkładu z CGUID \"%1$s\" nie powiodło się: %2$s</string>
     <string name="wherigo_manual_download_title">Ręczne pobieranie wkładu</string>
@@ -2744,8 +2743,6 @@
     <string name="close">Zamknij</string>
     <string name="delete">Usuń</string>
     <string name="play">Graj</string>
-    <string name="pause">Wstrzymaj</string>
-    <string name="resume">Wznów</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Zaznacz wszystko</string>
     <string name="multiselect_selectvisible">Zaznacz widoczne</string>

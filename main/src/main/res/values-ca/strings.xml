@@ -2642,7 +2642,6 @@
     <string name="wherigo_download_title">Descarrega el cartutx</string>
     <string name="wherigo_download_message">El cartutx amb CGUID \"%s\" no està disponible al vostre dispositiu. El vols descarregar?</string>
     <string name="wherigo_download_successful_title">Descàrrega correcta</string>
-    <string name="wherigo_download_successful_message">El cartutx amb CGUID \"%s\" s\'ha baixat correctament. Vols obrir-lo?</string>
     <string name="wherigo_download_failed_title">La descàrrega ha fallat</string>
     <string name="wherigo_download_failed_message">La baixada del cartutx amb el CGUID \"%1$s\" ha fallat: %2$s</string>
     <string name="wherigo_manual_download_title">Descarrega manualment el cartutx</string>
@@ -2692,8 +2691,6 @@
     <string name="close">Tanca</string>
     <string name="delete">Suprimeix</string>
     <string name="play">Juga</string>
-    <string name="pause">Pausa</string>
-    <string name="resume">Currículum</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleccionar tot</string>
     <string name="multiselect_selectvisible">Seleccioneu Visible</string>
