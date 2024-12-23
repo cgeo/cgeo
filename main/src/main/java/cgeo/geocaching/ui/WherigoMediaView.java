@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 import cz.matejcik.openwig.Engine;
@@ -86,7 +87,7 @@ public class WherigoMediaView extends LinearLayout {
         binding.mediaVideoView.setVisibility(GONE);
         binding.mediaGifView.setVisibility(GONE);
 
-        switch (type.toLowerCase()) {
+        switch (type.toLowerCase(Locale.US)) {
             case "mp4":
                 //Video
                 binding.mediaVideoView.setVideoURI(Uri.fromFile(mediaFile));
