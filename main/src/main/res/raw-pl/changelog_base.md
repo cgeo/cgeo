@@ -1,8 +1,8 @@
 ### Mapa
-- New: Support Elevate Winter theme in map downloader
+- Nowość: Wsparcie dla motywu Elevate Winter przy pobieraniu map
 
 ### Szczegóły skrytki
 -
 
 ### Ogólne
-- New: Redesigned search page
+- Nowość: Przeprojektowana strona wyszukiwania
