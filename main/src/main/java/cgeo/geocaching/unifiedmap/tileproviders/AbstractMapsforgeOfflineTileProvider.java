@@ -17,8 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.datastore.MapDataStore;
 import org.mapsforge.map.layer.labels.LabelLayer;
-import org.mapsforge.map.layer.labels.MapDataStoreLabelStore;
-import org.mapsforge.map.layer.labels.ThreadedLabelLayer;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.reader.MapFile;
 import org.mapsforge.map.reader.header.MapFileException;
@@ -68,19 +66,16 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
 
     protected void createTileLayerAndLabelStore(final MapsforgeFragment fragment, final MapView map, final MapDataStore mapDataStore) {
         // create layers for tiles and labels
-        tileLayer = new TileRendererLayer(fragment.getTileCache(), mapDataStore, map.getModel().mapViewPosition, false, false, false, AndroidGraphicFactory.INSTANCE, HillShadingLayerHelper.getHillsRenderConfig());
+        tileLayer = new TileRendererLayer(fragment.getTileCache(), mapDataStore, map.getModel().mapViewPosition, false, false, true, AndroidGraphicFactory.INSTANCE, HillShadingLayerHelper.getHillsRenderConfig());
 
         tileLayer.setCacheTileMargin(1);
         tileLayer.setCacheZoomMinus(1);
         tileLayer.setCacheZoomPlus(2);
         map.getLayerManager().getLayers().add(tileLayer);
 
-        // theme must be applied before creating labelStore
         fragment.applyTheme();
 
-        final MapDataStoreLabelStore labelStore = new MapDataStoreLabelStore(mapDataStore, ((TileRendererLayer) tileLayer).getRenderThemeFuture(),
-                ((TileRendererLayer) tileLayer).getTextScale(), tileLayer.getDisplayModel(), AndroidGraphicFactory.INSTANCE);
-        final LabelLayer labelLayer = new ThreadedLabelLayer(AndroidGraphicFactory.INSTANCE, labelStore);
+        final LabelLayer labelLayer = new LabelLayer(AndroidGraphicFactory.INSTANCE, ((TileRendererLayer) tileLayer).getLabelStore());
         map.getLayerManager().getLayers().add(labelLayer);
     }
 
