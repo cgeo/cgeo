@@ -1051,7 +1051,6 @@
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Podem ser utilizados para alterar o estilo de cor do mapa (ex: ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo no mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="settings_info_hillshading_title">Informação sobre o Sombreado de altitude</string>
-    <string name="settings_info_hillshading">O Sombreado de altitude é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de altitude. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nAs informações de sombreado de altitude podem ser descarregadas no menu de mapas.</string>
     <string name="settings_hillshading_enable">Sombreado de altitude</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
