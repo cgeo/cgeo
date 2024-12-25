@@ -1045,7 +1045,6 @@
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
     <string name="settings_info_themes">c:geo supporta temi personalizzati per mappe offline. Questi possono essere usati per cambiare lo stile di colore della mappa (es. per avere una mappa notturna) o per evidenziare alcuni oggetti come percorsi ciclabili o linee di altezza all\'interno della mappa.\n\nLavorare con temi di mappa non zippati potrebbe diminuire le prestazioni di apertura del visualizzatore di mappe. In questo caso, la cartella del tema può opzionalmente essere sincronizzata con una cartella locale dell\'app per un accesso più veloce (al costo di qualche spazio di archiviazione).</string>
     <string name="settings_info_hillshading_title">Informazioni su Ombreggiatura</string>
-    <string name="settings_info_hillshading">L\'Ombreggiatura è una tecnica per creare mappe topografiche in rilievo aggiungendo un effetto di illuminazione per indicare i cambiamenti di quota. Le pendenze saranno oscurate/illuminate per generare un effetto 3D.\nLe informazioni di ombreggiatura possono esser scaricati dal menu in sovraimpressione sulle mappe.</string>
     <string name="settings_hillshading_enable">Ombreggiatura</string>
     <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
     <string name="init_local_file_system">File System Locale</string>
