@@ -232,8 +232,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         clickableItemsLayer = new GeoItemLayer<>("clickableItems");
         nonClickableItemsLayer = new GeoItemLayer<>("nonClickableItems"); // default layer for all map items not worth an own layer
 
-        layers.add(clickableItemsLayer);
         layers.add(nonClickableItemsLayer);
+        layers.add(clickableItemsLayer);
 
         new GeoItemTestLayer().initforUnifiedMap(clickableItemsLayer);
 
