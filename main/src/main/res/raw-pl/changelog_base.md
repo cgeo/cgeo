@@ -1,6 +1,6 @@
 ### Mapa
 - Nowość: Wsparcie dla motywu Elevate Winter przy pobieraniu map
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- Nowość: Adaptacyjne cieniowanie wzgórz, opcjonalny tryb wysokiej jakości (UnifiedMap Mapsforge)
 
 ### Szczegóły skrytki
 -
