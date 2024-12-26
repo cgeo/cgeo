@@ -15,26 +15,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.Pair;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-import org.mapsforge.core.graphics.Canvas;
 import org.mapsforge.core.graphics.Paint;
 import org.mapsforge.core.graphics.Style;
-import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.Point;
-import org.mapsforge.core.model.Rotation;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.LayerManager;
@@ -44,21 +32,13 @@ import org.mapsforge.map.layer.overlay.Polygon;
 import org.mapsforge.map.layer.overlay.Polyline;
 import org.mapsforge.map.util.MapViewProjection;
 
-public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLayer<Pair<Integer, Integer>> {
+public class MapsforgeV6GeoItemLayer implements IProviderGeoItemLayer<int[]> {
 
     private LayerManager layerManager;
     private final MapViewProjection projection;
+    private int defaultZLevel;
 
-    private final Lock layerLock = new ReentrantLock();
-
-    //SORTED map of zLevels -> used to paint objects in right z-order
-    private final SortedMap<Integer, Map<Integer, Pair<Layer, Layer>>> layerItemMap = new TreeMap<>();
-    private final AtomicInteger idProvider = new AtomicInteger(0);
-
-    //statistic values for logging + info
-    private int statGeoObjectCount = 0;
-    private int statMarkerCount = 0;
-    private int statZLevelCount = 0;
+    private MapsforgeV6ZLevelGroupLayer groupLayer;
 
     public MapsforgeV6GeoItemLayer(final LayerManager layerManager, final MapViewProjection projection) {
         this.layerManager = layerManager;
@@ -66,32 +46,39 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
     }
 
     @Override
-    public void init(final int zLevel) {
+    public void init(final int defaultZLevel) {
         Log.iForce("AsyncMapWrapper: Init Layer");
-        this.layerManager.getLayers().add(this);
+        this.defaultZLevel = defaultZLevel;
+
+        //find or create zLeve-aware group layer
+        synchronized (this.layerManager.getLayers()) {
+            for (Layer layer : this.layerManager.getLayers()) {
+                if (layer instanceof MapsforgeV6ZLevelGroupLayer) {
+                    groupLayer = (MapsforgeV6ZLevelGroupLayer) layer;
+                    break;
+                }
+            }
+            if (groupLayer == null) {
+                groupLayer = new MapsforgeV6ZLevelGroupLayer();
+                this.layerManager.getLayers().add(groupLayer);
+            }
+        }
     }
 
     @Override
-    public void destroy(final Collection<Pair<GeoPrimitive, Pair<Integer, Integer>>> values) {
+    public void destroy(final Collection<Pair<GeoPrimitive, int[]>> values) {
         Log.iForce("Destroy Layer");
-        if (this.layerManager != null) {
-            this.layerManager.getLayers().remove(this);
+        this.layerManager = null;
+        if (groupLayer != null) {
+            for (Pair<GeoPrimitive, int[]> entry : values) {
+                groupLayer.remove(false, entry.second);
+            }
+            groupLayer.requestRedraw();
         }
-        layerLock.lock();
-        try {
-            this.layerManager = null;
-            this.layerItemMap.clear();
-            this.statMarkerCount = 0;
-            this.statGeoObjectCount = 0;
-            this.statZLevelCount = 0;
-        } finally {
-                layerLock.unlock();
-        }
-
     }
 
     @Override
-    public Pair<Integer, Integer> add(final GeoPrimitive item) {
+    public int[] add(final GeoPrimitive item) {
 
         final Paint strokePaint = createPaint(GeoStyle.getStrokeColor(item.getStyle()));
         strokePaint.setStrokeWidth(ViewUtils.dpToPixelFloat(GeoStyle.getStrokeWidth(item.getStyle())));
@@ -128,66 +115,22 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
                 break;
         }
         if (goLayer != null) {
-            goLayer.setDisplayModel(getDisplayModel());
+            goLayer.setDisplayModel(groupLayer.getDisplayModel());
         }
 
         final Marker marker = createMarker(item.getCenter(), item.getIcon());
         if (marker != null) {
-            marker.setDisplayModel(getDisplayModel());
+            marker.setDisplayModel(groupLayer.getDisplayModel());
         }
 
-        final int zlevel = Math.max(0, item.getZLevel());
+        final int zlevel = item.getZLevel() <= 0 ? defaultZLevel : item.getZLevel();
 
-        return addToMap(zlevel, goLayer, marker);
-    }
-
-    private Pair<Integer, Integer> addToMap(final int zLevel, @Nullable final Layer goLayer, @Nullable final Layer marker) {
-        layerLock.lock();
-        try {
-            final int itemId = idProvider.addAndGet(1);
-            Map<Integer, Pair<Layer, Layer>> zLevelMap = this.layerItemMap.get(zLevel);
-            if (zLevelMap == null) {
-                zLevelMap = new HashMap<>();
-                this.layerItemMap.put(zLevel, zLevelMap);
-                statZLevelCount++;
-            }
-            zLevelMap.put(itemId, new Pair<>(goLayer, marker));
-            if (goLayer != null) {
-                statGeoObjectCount++;
-            }
-            if (marker != null) {
-                statMarkerCount++;
-            }
-            return new Pair<>(zLevel, itemId);
-        } finally {
-            layerLock.unlock();
-        }
-    }
-
-    private void removeFromMap(@NonNull final Pair<Integer, Integer> context) {
-        layerLock.lock();
-        try {
-            final Map<Integer, Pair<Layer, Layer>> zLevelMap = this.layerItemMap.get(context.first);
-            if (zLevelMap == null) {
-                return;
-            }
-            final Pair<Layer, Layer> removedObject = zLevelMap.remove(context.second);
-            if (removedObject != null) {
-                if (removedObject.first != null) {
-                    statGeoObjectCount--;
-                }
-                if (removedObject.second != null) {
-                    statMarkerCount--;
-                }
-            }
-        } finally {
-            layerLock.unlock();
-        }
+        return groupLayer.add(zlevel, false, goLayer, marker);
     }
 
     @Override
-    public void remove(final GeoPrimitive item, final Pair<Integer, Integer> context) {
-        removeFromMap(context);
+    public void remove(final GeoPrimitive item, final int[] context) {
+        groupLayer.remove(false, context);
     }
 
     @Override
@@ -195,8 +138,8 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
         if (layerManager == null || processedCount == 0) {
             return null;
         }
-        requestRedraw();
-        return "go:" + statGeoObjectCount + ",marker:" + statMarkerCount + ",zLevel:" + statZLevelCount;
+        groupLayer.requestRedraw();
+        return null;
     }
 
     private static Marker createMarker(final Geopoint point, final GeoIcon icon) {
@@ -225,26 +168,6 @@ public class MapsforgeV6GeoItemLayer extends Layer implements IProviderGeoItemLa
 
     private static LatLong latLong(final Geopoint gp) {
         return new LatLong(gp.getLatitude(), gp.getLongitude());
-    }
-
-
-    @Override
-    public void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint, final Rotation rotation) {
-        layerLock.lock();
-        try {
-            for (Map<Integer, Pair<Layer, Layer>> zLevelMap : this.layerItemMap.values()) {
-                for (Pair<Layer, Layer> entry : zLevelMap.values()) {
-                    if (entry.first != null) {
-                        entry.first.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
-                    }
-                    if (entry.second != null) {
-                        entry.second.draw(boundingBox, zoomLevel, canvas, topLeftPoint, rotation);
-                    }
-                }
-            }
-        } finally {
-            layerLock.unlock();
-        }
     }
 
     @Override
