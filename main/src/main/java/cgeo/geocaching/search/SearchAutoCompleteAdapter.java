@@ -98,7 +98,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                     final String[] newResults = suggestionFunction.call(trimmed);
                     filterResults.values = newResults;
                     filterResults.count = newResults.length;
-                } else if (null == suggestionFunction || (trimmed.isEmpty() && null != historyFunction)) {
+                } else if (null != historyFunction) {
                     final String[] newResults = historyFunction.call();
                     filterResults.values = newResults;
                     filterResults.count = newResults.length;
