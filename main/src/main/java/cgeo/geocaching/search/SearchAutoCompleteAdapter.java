@@ -30,7 +30,11 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
 
     public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction) {
         super(context, textViewResourceId, suggestionFunction);
-        this.suggestionIcon = suggestionIcon;
+        if (null != suggestionFunction) {
+            this.suggestionIcon = suggestionIcon;
+        } else {
+            this.suggestionIcon = historyIcon;
+        }
         this.context = context;
         this.historyFunction = historyFunction;
     }
@@ -90,11 +94,11 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                     return filterResults;
                 }
                 final String trimmed = StringUtils.trim(constraint.toString());
-                if (adapter.queryTriggersSearch(trimmed)) {
+                if (adapter.queryTriggersSearch(trimmed) && null != suggestionFunction) {
                     final String[] newResults = suggestionFunction.call(trimmed);
                     filterResults.values = newResults;
                     filterResults.count = newResults.length;
-                } else if (null != historyFunction) {
+                } else if (null == suggestionFunction || (trimmed.isEmpty() && null != historyFunction)) {
                     final String[] newResults = historyFunction.call();
                     filterResults.values = newResults;
                     filterResults.count = newResults.length;
@@ -114,15 +118,5 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                 }
             }
         };
-    }
-
-    // TODO: Replace this wherever it's used
-    public static String[] getDummyHistoryValues() {
-        return new String[] { "test", "testABC" };
-    }
-
-    // TODO: Replace this wherever it's used
-    public static String[] getDummyGCHistoryValues() {
-        return new String[] { "GC40", "GCK25B" };
     }
 }

@@ -40,6 +40,11 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         final String geocode = getItem(position);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        // in case of keyword suggestions geocode might be an arbitrary string, in that case show history line
+        if (null == cache) {
+            return super.getView(position, convertView, parent);
+        }
+
         final View geoView = GeoItemSelectorUtils.createGeocacheItemView(context, cache, GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
         if (isKeywordSearch) {
             setHighLightedText(geoView.findViewById(R.id.text), searchTerm);
