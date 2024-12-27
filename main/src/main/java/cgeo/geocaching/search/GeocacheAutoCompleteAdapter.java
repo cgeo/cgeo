@@ -37,17 +37,17 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
 
     @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull final ViewGroup parent) {
+    public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         final String geocode = getItem(position);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         // in case of keyword suggestions geocode might be an arbitrary string, in that case show history line
-        convertView = nullConvertViewIfNeeded(convertView, null != cache);
+        final View cv = (null == convertView || (null == convertView.findViewById(R.id.info) ^ null == cache)) ? null : convertView;
         if (null == cache) {
-            return super.getView(position, convertView, parent);
+            return super.getView(position, cv, parent);
         }
 
-        final View geoView = GeoItemSelectorUtils.createGeocacheItemView(context, cache, GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
+        final View geoView = GeoItemSelectorUtils.createGeocacheItemView(context, cache, GeoItemSelectorUtils.getOrCreateView(context, cv, parent));
         if (isKeywordSearch) {
             setHighLightedText(geoView.findViewById(R.id.text), searchTerm);
         }
@@ -55,12 +55,7 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     }
 
     private static View nullConvertViewIfNeeded(@Nullable final View convertView, final boolean requireInfoView) {
-        if (null == convertView) {
-            return null;
-        }
-        if (null == convertView.findViewById(R.id.info) && requireInfoView) {
-            return null;
-        } else if (null != convertView.findViewById(R.id.info) && !requireInfoView) {
+        if (null == convertView || (null == convertView.findViewById(R.id.info) ^ !requireInfoView)) {
             return null;
         }
         return convertView;
