@@ -40,7 +40,7 @@ public enum FormulaFunction {
     LENGTH(new String[]{"length", "len"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_length, "String Length", "''", 1,
             singleValueStringFunction(String::length)),
     SUBSTRING(new String[]{"substring", "substr", "sub"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_substring, "Substring", "'';0;1", 1,
-            FormulaUtils::substring),
+            vl -> FormulaUtils.substring(false, vl)),
     CHARS(new String[]{"chars", "ch"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_chars, "Select Chars", "'';1;2", 1,
         FormulaUtils::selectChars),
 
