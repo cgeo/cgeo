@@ -1,5 +1,8 @@
 package cgeo.geocaching.utils.formulas;
 
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_PARAMETER_COUNT;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
+
 import android.util.Pair;
 
 import java.util.Arrays;
@@ -8,14 +11,53 @@ import java.util.List;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Java6Assertions.fail;
 
 public class FormulaUtilsTest {
 
     @Test
     public void substring() {
-        assertThat(FormulaUtils.substring(ValueList.ofPlain("test", 2, 3))).isEqualTo(Value.of("est"));
-        assertThat(FormulaUtils.substring(ValueList.ofPlain("te", 2, 1))).isEqualTo(Value.of("e"));
-        assertThat(FormulaUtils.substring(ValueList.ofPlain("test", -3, 2))).isEqualTo(Value.of("es"));
+        //Test cases independent from "zero-based" or "one-based" index decision
+        assertSubString(WRONG_PARAMETER_COUNT.name(), true, false);
+        assertSubString(WRONG_PARAMETER_COUNT.name(), true, false, "test", 1, 2, 3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", "text", 2);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 1, "text");
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 1, -5);
+
+        //Test cases for one-based indexes
+        assertSubString("est", false, false, "test", 2, 3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 2, 4);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", 0);
+        assertSubString("test", false, false, "test", 1);
+        assertSubString("e", false, false, "test", 2, 1);
+        assertSubString("te", false, false, "test", -4, 2);
+        assertSubString("est", false, false, "test", -3);
+        assertSubString(WRONG_TYPE.name(), true, false, "test", -5);
+
+        //Test cases for zero-based indexes
+        assertSubString("est", false, true, "test", 1, 3);
+        assertSubString(WRONG_TYPE.name(), true, true, "test", 1, 4);
+        assertSubString("test", false, true, "test", 0);
+        assertSubString("e", false, true, "test", 1, 1);
+        assertSubString("te", false, true, "test", -4, 2);
+        assertSubString("est", false, true, "test", -3);
+        assertSubString(WRONG_TYPE.name(), true, true, "test", -5);
+    }
+
+    private void assertSubString(final String expectedResult, final boolean expectException, final boolean indexStartsWithZero, final Object ... values) {
+        try {
+            final Value result = FormulaUtils.substring(indexStartsWithZero, ValueList.ofPlain(values));
+            if (expectException) {
+                fail("Expected FormulaException containing '" + expectedResult + "', got Result '" + result + "'");
+            }
+            assertThat(result.toString()).isEqualTo(expectedResult);
+        } catch (FormulaException fe) {
+            if (expectException) {
+                assertThat(fe.getMessage()).contains(expectedResult);
+            } else {
+                fail("Expected result '" + expectedResult + "', got Exception", fe);
+            }
+        }
     }
 
     @Test

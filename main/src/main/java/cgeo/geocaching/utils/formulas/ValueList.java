@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Encapsulates a list of {@link cgeo.geocaching.utils.formulas.Value}'s for handling as parameter lists in {@link Formula}
@@ -69,6 +70,15 @@ public class ValueList implements Iterable<Value> {
 
     public int size() {
         return list.size();
+    }
+
+    public boolean assertCheckType(final int index, final Predicate<Value> test, final String wantedType, final boolean checkOnly) {
+        return assertCheckTypes((v, i) -> {
+            if (index == i) {
+                return test.test(v);
+            }
+            return true;
+        }, i -> wantedType, checkOnly);
     }
 
     public boolean assertCheckTypes(final BiPredicate<Value, Integer> test, final Function<Integer, String> wantedType, final boolean checkOnly) {

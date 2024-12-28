@@ -161,7 +161,7 @@ public class Value implements Comparable<Value> {
             if (isNumericZero()) {
                 return "Zero";
             }
-            final StringBuilder str = new StringBuilder(isNumericPositive() ? "+ " : "- ");
+            final StringBuilder str = new StringBuilder(isNumericPositive() ? "+" : "-");
             if (isInteger()) {
                 str.append("Integer");
             } else {

@@ -83,20 +83,35 @@ public class FormulaUtils {
         //no instance
     }
 
-    public static Value substring(@NonNull final ValueList valueList) {
+    public static Value substring(final boolean indexStartsWithZero, @NonNull final ValueList valueList) {
         valueList.assertCheckCount(1, 3, false);
         final String value = valueList.getAsString(0, "");
-        valueList.assertCheckTypes((v, i) -> {
-            if (i == 1) {
-                return v.isLongBetween(-value.length(), value.length()) && !v.isNumericZero();
-            } else if (i == 2) {
-                return v.isLongBetween(0, value.length() + 1 - Math.abs(valueList.get(1).getAsLong()));
+        final int valueLength = value.length();
+
+        //start value
+        int start = 0;
+        if (valueList.size() > 1) {
+            final Value startValue = valueList.get(1);
+            final int startValueInt = (int) startValue.getAsLong();
+            if (indexStartsWithZero) {
+                valueList.assertCheckType(1, v -> v.isLongBetween(-valueLength, valueLength),
+                    "start must be between -" + valueLength + " and " + valueLength, false);
+                start = startValueInt < 0 ? valueLength + startValueInt : startValueInt;
+            } else {
+                valueList.assertCheckType(1, v -> v.isLongBetween(-valueLength, valueLength + 1) && !v.isNumericZero(),
+                    "start must be between -" + valueLength + " and " + (valueLength + 1) + " and not zero", false);
+                start = startValueInt < 0 ? valueLength + startValueInt : startValueInt - 1;
             }
-            return true;
-        }, i -> "start/length must be valid indices", false);
-        final int start = valueList.size() <= 1 ? 0 : (
-            (int) (valueList.get(1).getAsLong() > 0 ? valueList.get(1).getAsLong() - 1 : value.length() + valueList.get(1).getAsLong()));
-        final int length = valueList.size() >= 3 ? (int) valueList.get(2).getAsLong() : value.length() - start;
+        }
+
+        //length
+        final int maxLength = valueLength - start;
+        int length = maxLength;
+        if (valueList.size() > 2) {
+            valueList.assertCheckType(2, v -> v.isLongBetween(0, maxLength), "length must be between 0 and " + maxLength, false);
+            length = (int) valueList.get(2).getAsLong();
+        }
+
         return Value.of(value.substring(start, start + length));
     }
 
