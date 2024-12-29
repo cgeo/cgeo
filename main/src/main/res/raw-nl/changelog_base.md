@@ -1,9 +1,9 @@
 ### Kaart
-- New: Support Elevate Winter theme in map downloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- Nieuw: Ondersteun verhoging Winter thema in kaart download
+- Nieuw: Adaptieve Hoogtelijnen, optionele hoge kwaliteit modus (UnifiedMap Mapsforge)
 
 ### Cache details
 -
 
 ### Algemeen
-- New: Redesigned search page
+- Nieuw: opnieuw ontworpen zoekpagina
