@@ -41,5 +41,5 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Konfigurierbares Datumsformat (z.B.: Cache-Logs), siehe [Einstellungen => Erscheinungsbild => Datumsformat](cgeo-settings://short_date_format)
 - Neu: Konnektor-Informationen auf dem Startbildschirm verweisen auf jeweilige Konfigurationsseite
 - Neu: Zusätzliche Emojis für Cache-Symbole
-- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
+- Änderung: Cache-Filter "Besondere" umfasst Events der Typen Mega, Giga, Community Celebration, HQ Celebration, HQ Blockparty und Labyrinth
 - Änderung: Cache-Filter "Andere" enthält GC HQ, APE und unbekannte Typen
