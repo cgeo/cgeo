@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -24,17 +23,24 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/clipboardGeocode"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/hint_geocode_from_clipboard"
-            android:textColor="@color/colorText"
-            android:textSize="@dimen/textSize_listsSecondary"
-            android:padding="10dp"
-            android:visibility="gone"
-            android:drawablePadding="6dp"
-            android:text="@string/search_geocode_from_clipboard"
-            app:drawableStartCompat="@drawable/ic_menu_paste_search" />
+            android:orientation="vertical">
+
+            <include
+                android:layout_height="48dp"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="5dp"
+                layout="@layout/cacheslist_item_select"
+                />
+
+            <View
+                android:id="@+id/line"
+                style="@style/separator_horizontal" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/suggestion_list"

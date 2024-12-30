@@ -73,7 +73,7 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
             // Keyword search shows geocache layout for results and single-line layout for history, thus need to invalidate views on updates
             final View cv = (null == convertView || (null == convertView.findViewById(R.id.info) ^ isShowingResultsFromHistory)) ? null : convertView;
             if (isShowingResultsFromHistory) {

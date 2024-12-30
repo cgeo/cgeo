@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="24dip"
+        android:layout_width="48dip"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         app:tint="@color/colorText"
@@ -18,11 +18,9 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="@color/colorText"
+        android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
         android:gravity="center_vertical"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
         android:minHeight="?android:attr/listPreferredItemHeightSmall" />
 
 

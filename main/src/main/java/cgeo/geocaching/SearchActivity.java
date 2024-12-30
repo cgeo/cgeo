@@ -46,6 +46,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -322,14 +323,16 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             });
 
             if (title == R.string.search_geo) {
+                searchView.setText("GC");
                 final String clipboardGeocode = getGeocodeFromClipboard();
                 if (null != clipboardGeocode) {
-                    searchView.setText(clipboardGeocode);
-                    binding.hintGeocodeFromClipboard.postDelayed(() -> {
-                        binding.hintGeocodeFromClipboard.setVisibility(View.VISIBLE);
-                    }, 100);
-                } else {
-                    searchView.setText("GC");
+                    binding.suggestionList.postDelayed(() -> {
+                        binding.clipboardGeocode.setVisibility(View.VISIBLE);
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.text)).setText(clipboardGeocode);
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.info)).setText(R.string.search_geocode_from_clipboard);
+                        ((ImageView) binding.clipboardGeocode.findViewById(R.id.icon)).setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.search_clipboard));
+                        binding.clipboardGeocode.setOnClickListener(v -> findByGeocodeFn(clipboardGeocode));
+                    }, 0);
                 }
                 binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
             } else if (title == R.string.search_kw) {
@@ -359,7 +362,8 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         if (adapter instanceof ArrayAdapter) {
             ((ArrayAdapter<?>) adapter).getFilter().filter(searchView.getText());
         }
-        binding.hintGeocodeFromClipboard.setVisibility(View.GONE);
+
+        binding.clipboardGeocode.setVisibility(View.GONE);
     }
 
     private SearchCardView addSearchCard(final int title, final int icon) {
