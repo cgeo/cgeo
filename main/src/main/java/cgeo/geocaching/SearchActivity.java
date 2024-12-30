@@ -151,12 +151,16 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
     protected void onResume() {
         super.onResume();
         if (null != searchView) {
-            // On returning to the search activity from a result show the full results list (hide the keyboard)
-            searchView.clearFocus();
+            if (searchViewItem.isActionViewExpanded()) {
+                // On returning to the search activity from a result show the full results list (hide the keyboard)
+                searchView.clearFocus();
 
-            // if there was no input in search field return straight to the tile view
-            if (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo)))) {
-                searchViewItem.collapseActionView();
+                // if there was no input in search field return straight to the tile view
+                if (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo)))) {
+                    searchViewItem.collapseActionView();
+                }
+            } else {
+                init();
             }
         }
     }
