@@ -2600,7 +2600,6 @@
     <string name="wherigo_download_title">Scarica cartuccia</string>
     <string name="wherigo_download_message">La cartuccia con CGUID \"%s\" non è disponibile sul tuo dispositivo. Vuoi scaricarla?</string>
     <string name="wherigo_download_successful_title">Download completato</string>
-    <string name="wherigo_download_successful_message">Cartuccia con CGUID \"%s\" scaricata con successo. Vuoi aprirla?</string>
     <string name="wherigo_download_failed_title">Scaricamento fallito</string>
     <string name="wherigo_download_failed_message">Download della cartuccia con CGUID \"%1$s\" non riuscito: %2$s</string>
     <string name="wherigo_manual_download_title">Scarica manualmente la cartuccia</string>
@@ -2637,8 +2636,6 @@
     <string name="close">Chiudi</string>
     <string name="delete">Cancella</string>
     <string name="play">Gioca</string>
-    <string name="pause">Pausa</string>
-    <string name="resume">Riprendi</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Seleziona Tutto</string>
     <string name="multiselect_selectvisible">Seleziona visibili</string>

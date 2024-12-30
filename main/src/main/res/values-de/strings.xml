@@ -1537,6 +1537,9 @@
     <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
     <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
     <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Mehrere Wherigo-Cartridges</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Weitere Informationen über die Cartridges findest du im Cachelisting.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - nicht heruntergeladen</string>
     <string name="cache_wherigo_start">Wherigo mit c:geo-internem Player herunterladen und spielen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
@@ -2633,7 +2636,6 @@
     <string name="wherigo_download_title">Cartridge herunterladen</string>
     <string name="wherigo_download_message">Cartridge mit CGUID \"%s\" ist auf Deinem Gerät nicht verfügbar. Möchtest du sie herunterladen?</string>
     <string name="wherigo_download_successful_title">Herunterladen erfolgreich</string>
-    <string name="wherigo_download_successful_message">Cartridge mit CGUID \"%s\" wurde erfolgreich heruntergeladen. Möchtest Du sie öffnen?</string>
     <string name="wherigo_download_failed_title">Herunterladen fehlgeschlagen</string>
     <string name="wherigo_download_failed_message">Herunterladen der Cartridge mit CGUID \"%1$s\" fehlgeschlagen: %2$s</string>
     <string name="wherigo_manual_download_title">Cartridge manuell herunterladen</string>
@@ -2683,8 +2685,6 @@
     <string name="close">Schließen</string>
     <string name="delete">Löschen</string>
     <string name="play">Spielen</string>
-    <string name="pause">Pause</string>
-    <string name="resume">Fortsetzen</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Alle auswählen</string>
     <string name="multiselect_selectvisible">Sichtbare auswählen</string>
