@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flipper"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,14 +32,15 @@
             android:textSize="@dimen/textSize_listsSecondary"
             android:padding="10dp"
             android:visibility="gone"
+            android:drawablePadding="6dp"
             android:text="@string/search_geocode_from_clipboard"
-            />
+            app:drawableStartCompat="@drawable/ic_menu_paste_search" />
 
-    <ListView
-        android:id="@+id/suggestion_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="5dp" />
+        <ListView
+            android:id="@+id/suggestion_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp" />
     </LinearLayout>
 
 </ViewFlipper>
