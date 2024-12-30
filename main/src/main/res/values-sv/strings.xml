@@ -2618,6 +2618,7 @@
     <string name="wherigo_toast_check_things">Var: kontrollera din %s för ändringar</string>
     <string name="wherigo_otm_shortcuts_title">Genvägar för Wherigo Player</string>
     <string name="wherigo_otm_shortcuts_message">Om du vill använda c:geo Wherigo Player regelbundet, överväg att skapa en snabbstartsknapp eller anpassad menypost för det under Inställningar -&gt; Utseende</string>
+    <string name="wherigo_map_supported_for_unified_map_only">Att visa platsen för Wherigo på kartan är inte supportat för dina kartinställningar. Ändra till unified map under inställningar -&gt; Kartkällor -&gt; %s</string>
     <!-- default actions in dialogs -->
     <string name="previous">Föregående</string>
     <string name="skip">Hoppa över</string>
@@ -2634,8 +2635,6 @@
     <string name="close">Stäng</string>
     <string name="delete">Ta bort</string>
     <string name="play">Spela</string>
-    <string name="pause">Pausa</string>
-    <string name="resume">Återuppta</string>
     <!-- Multi-Selections -->
     <string name="multiselect_selectall">Markera alla</string>
     <string name="multiselect_selectvisible">Markera synliga</string>
