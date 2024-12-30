@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Arrays;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
@@ -27,6 +29,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
     Context context;
     final Func0<String[]> historyFunction;
     String searchTerm;
+    boolean isShowingResultsFromHistory;
 
     public SearchAutoCompleteAdapter(final Context context, final int textViewResourceId, final Func1<String, String[]> suggestionFunction, final int suggestionIcon, final Func0<String[]> historyFunction) {
         super(context, textViewResourceId, suggestionFunction);
@@ -48,7 +51,7 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
 
         textView.setText(getItem(position));
         setHighLightedText(textView, searchTerm);
-        iconView.setImageResource(queryTriggersSearch(searchTerm) ? suggestionIcon : historyIcon);
+        iconView.setImageResource(isShowingResultsFromHistory ? historyIcon : suggestionIcon);
 
         return v;
     }
@@ -93,16 +96,18 @@ public class SearchAutoCompleteAdapter extends AutoCompleteAdapter {
                 if (constraint == null) {
                     return filterResults;
                 }
-                final String trimmed = StringUtils.trim(constraint.toString());
-                if (adapter.queryTriggersSearch(trimmed) && null != suggestionFunction) {
-                    final String[] newResults = suggestionFunction.call(trimmed);
-                    filterResults.values = newResults;
-                    filterResults.count = newResults.length;
-                } else if (null != historyFunction) {
-                    final String[] newResults = historyFunction.call();
-                    filterResults.values = newResults;
-                    filterResults.count = newResults.length;
+                String[] newResults = new String[0];
+                final String trimmed = StringUtils.trimToEmpty(constraint.toString());
+                if (null != suggestionFunction && adapter.queryTriggersSearch(trimmed)) {
+                    newResults = suggestionFunction.call(trimmed);
+                    adapter.isShowingResultsFromHistory = false;
                 }
+                if (newResults.length == 0 && null != historyFunction) {
+                    newResults = Arrays.stream(historyFunction.call()).filter(s -> s.contains(trimmed)).toArray(String[]::new);
+                    adapter.isShowingResultsFromHistory = true;
+                }
+                filterResults.values = newResults;
+                filterResults.count = newResults.length;
                 return filterResults;
             }
 

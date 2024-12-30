@@ -18,10 +18,27 @@
             android:padding="8dp" />
     </ScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hint_geocode_from_clipboard"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/textSize_listsSecondary"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:text="@string/search_geocode_from_clipboard"
+            />
+
     <ListView
         android:id="@+id/suggestion_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp" />
+    </LinearLayout>
 
 </ViewFlipper>
