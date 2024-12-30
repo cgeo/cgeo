@@ -1540,6 +1540,9 @@
     <string name="cachedetails_progress_unwatch">Von Watchlist entfernt</string>
     <string name="cachedetails_progress_favorite">Zu Favoriten hinzugefügt</string>
     <string name="cachedetails_progress_unfavorite">Von Favoriten entfernt</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Mehrere Wherigo-Cartridges</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Weitere Informationen über die Cartridges findest du im Cachelisting.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - nicht heruntergeladen</string>
     <string name="cache_wherigo_start">Wherigo mit c:geo-internem Player herunterladen und spielen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
