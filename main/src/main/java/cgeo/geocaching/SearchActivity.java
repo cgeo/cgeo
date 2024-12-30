@@ -30,7 +30,6 @@ import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -49,7 +48,6 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 
@@ -146,6 +144,20 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
         // set title in code, as the activity needs a hard coded title due to the intent filters
         setTitle(res.getString(R.string.search));
         init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (null != searchView) {
+            // On returning to the search activity from a result show the full results list (hide the keyboard)
+            searchView.clearFocus();
+
+            // if there was no input in search field return straight to the tile view
+            if (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo)))) {
+                searchViewItem.collapseActionView();
+            }
+        }
     }
 
     @Override
