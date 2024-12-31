@@ -188,7 +188,6 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     public void onDestroyView() {
 //        themeHelper.disposeTheme();
         mMapView.destroyAll();
-        AndroidGraphicFactory.clearResourceMemoryCache();
         super.onDestroyView();
     }
 
