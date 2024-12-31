@@ -5,7 +5,7 @@ import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.TileDownloadLayer;
 import org.mapsforge.map.layer.download.tilesource.TileSource;
-import org.mapsforge.map.model.IMapViewPosition;
+import org.mapsforge.map.model.MapViewPosition;
 
 public class DownloadLayer implements ITileLayer {
 
@@ -13,7 +13,7 @@ public class DownloadLayer implements ITileLayer {
 
     private final TileSource tileSource;
 
-    public DownloadLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition, final TileSource tileSource, final GraphicFactory graphicFactory) {
+    public DownloadLayer(final TileCache tileCache, final MapViewPosition mapViewPosition, final TileSource tileSource, final GraphicFactory graphicFactory) {
         this.tileSource = tileSource;
         tileLayer = new TileDownloadLayer(tileCache, mapViewPosition, tileSource, graphicFactory);
     }

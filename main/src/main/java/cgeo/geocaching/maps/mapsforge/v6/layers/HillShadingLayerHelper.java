@@ -27,9 +27,7 @@ public class HillShadingLayerHelper {
         final Context context = CgeoApplication.getInstance();
         final DemFolder shadingFolder = new DemFolderAndroidContent(PersistableFolder.OFFLINE_MAP_SHADING.getUri(), context, context.getContentResolver());
 
-        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new StandardClasyHillShading(), AndroidGraphicFactory.INSTANCE);
-        // avoid lines at between tiles
-        hillTileSource.setEnableInterpolationOverlap(true);
+        final MemoryCachingHgtReaderTileSource hillTileSource = new MemoryCachingHgtReaderTileSource(shadingFolder, new StandardClasyHillShading(), AndroidGraphicFactory.INSTANCE, true);
         final HillsRenderConfig hillsConfig = new HillsRenderConfig(hillTileSource);
         hillsConfig.indexOnThread();
         return hillsConfig;
