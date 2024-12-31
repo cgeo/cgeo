@@ -320,7 +320,7 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             // Default value
             searchView.setText("");
 
-            // suggestion provider
+            // suggestion handler
             binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
                 final String searchTerm = (String) parent.getItemAtPosition(position);
                 searchFunction.accept(searchTerm);
@@ -328,19 +328,28 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
             if (title == R.string.search_geo) {
                 searchView.setText("GC");
+                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
                 final String clipboardGeocode = getGeocodeFromClipboard();
                 if (null != clipboardGeocode) {
                     binding.suggestionList.postDelayed(() -> {
                         binding.clipboardGeocode.setVisibility(View.VISIBLE);
                         ((TextView) binding.clipboardGeocode.findViewById(R.id.text)).setText(clipboardGeocode);
-                        ((TextView) binding.clipboardGeocode.findViewById(R.id.info)).setText(R.string.search_geocode_from_clipboard);
+                        ((TextView) binding.clipboardGeocode.findViewById(R.id.info)).setText(R.string.from_clipboard);
                         ((ImageView) binding.clipboardGeocode.findViewById(R.id.icon)).setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.search_clipboard));
                         binding.clipboardGeocode.setOnClickListener(v -> findByGeocodeFn(clipboardGeocode));
                     }, 0);
                 }
-                binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.GeocodeAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
             } else if (title == R.string.search_kw) {
                 binding.suggestionList.setAdapter(new GeocacheAutoCompleteAdapter.KeywordAutoCompleteAdapter(searchView.getContext(), suggestionFunction, historyFunction));
+                binding.suggestionList.setOnItemClickListener((parent, view, position, id) -> {
+                    final String searchTerm = (String) parent.getItemAtPosition(position);
+                    // suggestions are a mix of geocodes and keywords, differentiate them by layout used
+                    if (null == view.findViewById(R.id.info)) {
+                        findByKeywordFn(searchTerm);
+                    } else {
+                        findByGeocodeFn(searchTerm);
+                    }
+                });
             } else {
                 binding.suggestionList.setAdapter(new SearchAutoCompleteAdapter(searchView.getContext(), R.layout.search_suggestion, suggestionFunction, suggestionIcon, historyFunction));
             }

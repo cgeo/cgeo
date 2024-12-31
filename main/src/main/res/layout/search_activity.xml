@@ -33,7 +33,6 @@
             <include
                 android:layout_height="48dp"
                 android:layout_width="match_parent"
-                android:layout_marginLeft="5dp"
                 layout="@layout/cacheslist_item_select"
                 />
 
@@ -45,8 +44,8 @@
         <ListView
             android:id="@+id/suggestion_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </ViewFlipper>
