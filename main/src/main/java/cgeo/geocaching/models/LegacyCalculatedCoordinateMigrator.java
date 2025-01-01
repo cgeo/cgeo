@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -335,8 +336,8 @@ public class LegacyCalculatedCoordinateMigrator {
         return newCacheVariables;
     }
 
-    public static boolean needsMigration(final Waypoint w) {
-        return WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
+    public static boolean needsMigration(@Nullable final Waypoint w) {
+        return w != null && WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
     }
 
     public static void performMigration(final Context ctx, final Geocache cache, final Waypoint w, final Runnable actionAfterMigration) {
