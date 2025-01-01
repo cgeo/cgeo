@@ -25,6 +25,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.gcvote.GCVote;
@@ -320,8 +321,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return GCMap.searchByViewport(this, viewport);
+        return searchByViewport(viewport, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
     }
+
+    @Override
+    @NonNull
+    public SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
+        return GCMap.searchByViewport(this, viewport, filter);
+    }
+
 
     @NonNull
     @Override

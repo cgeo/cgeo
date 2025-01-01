@@ -102,7 +102,6 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                 if (Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
                     viewModel.followMyLocation.setValue(false);
                 }
-                viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
             }
             lastEvent = event; // remember to detect scaling combined with panning
         };
@@ -295,9 +294,13 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
-        return mMap == null ? new BoundingBox(0, 0, 0, 0) : mMap.getBoundingBox(0);
+    @Nullable
+    public Viewport getViewport() {
+        final BoundingBox bb = mMap == null ? null : mMap.getBoundingBox(0);
+        if (bb == null) {
+            return null;
+        }
+        return Viewport.forE6(bb.minLatitudeE6, bb.minLongitudeE6, bb.maxLatitudeE6, bb.maxLongitudeE6);
     }
 
     @Override

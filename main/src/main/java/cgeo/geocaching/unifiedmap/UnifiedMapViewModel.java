@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
@@ -50,8 +51,15 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Target> target = new MutableLiveData<>();
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
+    //Viewport will be refreshed as the map moves. Only valid viewports are used.
+    public final MutableLiveData<Viewport> viewport = new MutableLiveData<>();
+    //Viewport will be refreshed ONLY if the map was not moved for 500ms. Only valid viewports are used.
+    public final MutableLiveData<Viewport> viewportIdle = new MutableLiveData<>();
+
     public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
+    public final MutableLiveData<LiveMapGeocacheLoader.State> liveLoadStatus = new MutableLiveData<>(LiveMapGeocacheLoader.State.STOPPED_OK);
+    public final LiveMapDataHandler liveMapHandler = new LiveMapDataHandler(this);
 
     public final CollectionLiveData<String, Set<String>> cachesWithStarDrawn = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));
 
@@ -63,7 +71,6 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
      */
     public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(new PositionHistory());
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
-    public final MutableLiveData<Geopoint> mapCenter = new MutableLiveData<>();
     public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
@@ -107,6 +114,12 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     public void configureProximityNotification() {
         proximityNotification = new MutableLiveData<>(Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        this.liveMapHandler.destroy();
     }
 
     // ========================================================================
@@ -162,5 +175,9 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
             dest.writeString(geocode);
             dest.writeInt(waypointId);
         }
+
+
     }
+
+
 }

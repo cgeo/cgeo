@@ -84,7 +84,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(getViewport().resize(1.2)));
+            final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(getViewport().resize(1.2), getFilterContext().get()));
 
             final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
 

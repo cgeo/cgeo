@@ -49,7 +49,7 @@ public class GeoItemsLayer {
                 viewModel.waypoints.notifyDataChanged();
             }
 
-            for (Geocache cache : caches) { // Creates a clone to avoid ConcurrentModificationExceptions
+            for (Geocache cache : caches) {
                 final CacheMarker cm = forceCompactIconMode ? MapMarkerUtils.getCacheDotMarker(activity.getResources(), cache) : MapMarkerUtils.getCacheMarker(activity.getResources(), cache, null, true);
                 final String contentKey = getKeyFor(cache, cm);
                 currentlyDisplayedGeocaches.put(cache.getGeocode(), contentKey);

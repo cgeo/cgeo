@@ -17,6 +17,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.ProjectionType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.ListIdGeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
@@ -3986,26 +3987,34 @@ public class DataStore {
         });
     }
 
+
+
     /**
-     * Return a batch of stored geocodes.
-     *
-     * @param coords the current coordinates to sort by distance, or null to sort by geocode
-     * @return a non-null set of geocodes
+     * Loads a batch of stored geocodes from database.
+     * <br>
+     * @param filter optional: filter to apply to search result
+     * @param filterListId optional: if >0, then result is filtered by list id. Supports StoredLists and PseudoLists
+     * @param filterViewport optional: filter by given viewport
+     * @param sort optional: sort result by given comparator
+     * @param sortInverse accompanies "sort"
+     * @param sortCenter optional: the current coordinates to sort by distance to (ascending and in addition to "sort")
+     * @param limit returned search size is limited by this optional parameter (pass -1 for unlimited)
+     * @return a non-null, writeable set of found geocodes
      */
     @NonNull
-    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+    private static Set<String> loadBatchOfStoredGeocodes(final GeocacheFilter filter, final int filterListId, final Viewport filterViewport, final CacheComparator sort, final boolean sortInverse, final Geopoint sortCenter, final int limit) {
 
+        SqlBuilder sqlBuilder = null;
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, list=%d)",
-                String.valueOf(coords), listId)) {
+                String.valueOf(sortCenter), filterListId)) {
 
-            final SqlBuilder sqlBuilder = new SqlBuilder(dbTableCaches, new String[]{"geocode"});
+            sqlBuilder = new SqlBuilder(dbTableCaches, new String[]{"geocode"});
 
-            if (listId == PseudoList.HISTORY_LIST.id) {
-                sqlBuilder.addWhere(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
-            } else if (listId > 0) {
-                final String clId = sqlBuilder.getNewTableId();
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM " + dbTableCachesLists + " " + clId + " WHERE list_id " +
-                        (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
+            if (filterListId > 0) {
+                ListIdGeocacheFilter.addToSqlWhere(sqlBuilder, filterListId);
+            }
+            if (filterViewport != null) {
+                sqlBuilder.addWhere(filterViewport.sqlWhere(sqlBuilder.getMainTableId()).toString());
             }
             if (filter != null && filter.getTree() != null) {
                 filter.getTree().addToSql(sqlBuilder);
@@ -4017,8 +4026,8 @@ public class DataStore {
             if (sort != null) {
                 sort.addSortToSql(sqlBuilder, sortInverse);
             }
-            if (coords != null) {
-                sqlBuilder.addOrder(getCoordDiffExpression(coords, null));
+            if (sortCenter != null) {
+                sqlBuilder.addOrder(getCoordDiffExpression(sortCenter, null));
             }
             if (limit > 0) {
                 sqlBuilder.setLimit(limit);
@@ -4029,7 +4038,7 @@ public class DataStore {
 
             return cursorToColl(database.rawQuery(sqlBuilder.getSql(), sqlBuilder.getSqlWhereArgsArray()), new HashSet<>(), GET_STRING_0);
         } catch (final Exception e) {
-            Log.e("DataStore.loadBatchOfStoredGeocodes", e);
+            Log.e("DataStore.loadBatchOfStoredGeocodes[SQL:" + (sqlBuilder == null ? "-" : sqlBuilder.getSql()) + "]", e);
             return Collections.emptySet();
         }
     }
@@ -4076,8 +4085,8 @@ public class DataStore {
      * Retrieve all stored caches from DB
      */
     @NonNull
-    public static SearchResult loadCachedInViewport(final Viewport viewport) {
-        return withAccessLock(() -> loadInViewport(false, viewport));
+    public static SearchResult loadCachedInViewport(final Viewport viewport, final GeocacheFilter filter) {
+        return withAccessLock(() -> loadInViewport(false, viewport, filter));
     }
 
     /**
@@ -4085,7 +4094,7 @@ public class DataStore {
      */
     @NonNull
     public static SearchResult loadStoredInViewport(final Viewport viewport) {
-        return withAccessLock(() -> loadInViewport(true, viewport));
+        return withAccessLock(() -> loadInViewport(true, viewport, null));
     }
 
     /**
@@ -4096,7 +4105,7 @@ public class DataStore {
      * @return the matching caches
      */
     @NonNull
-    private static SearchResult loadInViewport(final boolean stored, final Viewport viewport) {
+    private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final GeocacheFilter filter) {
 
         try (ContextLogger cLog = new ContextLogger("DataStore.loadInViewport()")) {
             cLog.add("stored=%b,vp=%s", stored, viewport);
@@ -4108,33 +4117,14 @@ public class DataStore {
                 geocodes.addAll(cacheCache.getInViewport(viewport));
             }
 
-            // viewport limitation
-            final StringBuilder selection = buildCoordinateWhere(dbTableCaches, viewport);
-
-            // offline caches only
-            if (stored) {
-                selection.append(" AND geocode IN (SELECT geocode FROM " + dbTableCachesLists + " WHERE list_id >= " + StoredList.STANDARD_LIST_ID + ")");
-            }
+            geocodes.addAll(
+                loadBatchOfStoredGeocodes(filter, stored ? PseudoList.ALL_LIST.id : -1, viewport, null, false, null, 500));
 
             cLog.add("gc" + cLog.toStringLimited(geocodes, 10));
 
-            try {
-                final SearchResult sr = new SearchResult(queryToColl(dbTableCaches,
-                        new String[]{"geocode"},
-                        selection.toString(),
-                        null,
-                        null,
-                        "500",
-                        geocodes,
-                        GET_STRING_0));
-                cLog.addReturnValue(sr.getCount());
-                return sr;
-
-            } catch (final Exception e) {
-                Log.e("DataStore.loadInViewport", e);
-            }
-
-            return new SearchResult();
+            final SearchResult sr = new SearchResult(geocodes);
+            cLog.addReturnValue(sr.getCount());
+            return sr;
         }
     }
 
@@ -5212,10 +5202,10 @@ public class DataStore {
     }
 
     @NonNull
-    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+    public static SearchResult getBatchOfStoredCaches(final Geopoint sortCenter, final int filterListId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         return withAccessLock(() -> {
-            final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, listId, filter, sort, sortInverse, limit);
-            return new SearchResult(null, geocodes, getAllStoredCachesCount(listId));
+            final Set<String> geocodes = loadBatchOfStoredGeocodes(filter, filterListId, null, sort, sortInverse, sortCenter, limit);
+            return new SearchResult(null, geocodes, getAllStoredCachesCount(filterListId));
         });
     }
 

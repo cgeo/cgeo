@@ -36,6 +36,8 @@ public enum GeocacheFilterType {
     LOG_ENTRY("log_entry", R.string.cache_filter_log_entry, R.string.cache_filtergroup_details, LogEntryGeocacheFilter::new),
     LOCATION("location", R.string.cache_filter_location, R.string.cache_filtergroup_details, LocationGeocacheFilter::new),
     STORED_LISTS("stored_list", R.string.cache_filter_stored_lists, R.string.cache_filtergroup_userspecific, StoredListGeocacheFilter::new),
+    LIST_ID("list_id", 0, 0, ListIdGeocacheFilter::new),
+    VIEWPORT("viewport", 0, 0, ViewportGeocacheFilter::new),
     ORIGIN("origin", R.string.cache_filter_origin, R.string.cache_filtergroup_details, OriginGeocacheFilter::new),
     STORED_SINCE("stored_since", R.string.cache_filter_stored_since, R.string.cache_filtergroup_userspecific, StoredSinceGeocacheFilter::new),
     CATEGORY("category", R.string.cache_filter_category, R.string.cache_filtergroup_details, CategoryGeocacheFilter::new),

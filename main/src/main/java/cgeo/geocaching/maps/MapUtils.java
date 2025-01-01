@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -16,6 +17,7 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
@@ -38,6 +40,7 @@ import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
@@ -67,6 +70,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -86,10 +90,36 @@ public class MapUtils {
     private static TextPaint elevationTextPaint = null;
     private static Paint elevationPaint = null;
 
+    public static Set<Geocache> getGeocachesFromDatabase(final Viewport viewport, final GeocacheFilter filter) {
+        if (viewport == null || viewport.isJustADot()) {
+            return Collections.emptySet();
+        }
+        final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(viewport.resize(1.2), filter));
+        Log.d("load.searchResult: " + searchResult.getGeocodes());
+        final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+        Log.d("load.cachesFromSearchResult: " + cachesFromSearchResult.size());
+        if (filter != null) {
+            filter.filterList(cachesFromSearchResult);
+        }
+        return cachesFromSearchResult;
+    }
+
+    public static boolean mapHasMoved(final Viewport oldViewport, final Viewport newViewport) {
+        if (oldViewport == newViewport) {
+            return false;
+        }
+        if (oldViewport == null || newViewport == null) {
+            return true;
+        }
+        return Math.abs(newViewport.getLatitudeSpan() - oldViewport.getLatitudeSpan()) > 50e-6 || Math.abs(newViewport.getLongitudeSpan() - oldViewport.getLongitudeSpan()) > 50e-6 || Math.abs(newViewport.center.getLatitude() - oldViewport.center.getLatitude()) > oldViewport.getLatitudeSpan() / 4 || Math.abs(newViewport.center.getLongitude() - oldViewport.center.getLongitude()) > oldViewport.getLongitudeSpan() / 4;
+    }
+
     // filter waypoints from owned caches or certain wp types if requested.
     public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext) {
+        filter(waypoints, filterContext.get());
+    }
 
-        final GeocacheFilter filter = filterContext.get();
+    public static void filter(final Set<Waypoint> waypoints, @Nullable final GeocacheFilter filter) {
 
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
@@ -100,7 +130,7 @@ public class MapUtils {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
             if (cache == null ||
-                    !filter.filter(cache) ||
+                    (filter != null && !filter.filter(cache)) ||
                     (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
                     (excludeWpParking && wpt == WaypointType.PARKING) ||
                     (excludeWpVisited && wp.isVisited())) {

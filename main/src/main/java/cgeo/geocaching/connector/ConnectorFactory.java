@@ -346,17 +346,9 @@ public final class ConnectorFactory {
         return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 
-    /**
-     * @see ISearchByViewPort#searchByViewport
-     */
-    @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return searchByViewport(viewport, null);
-    }
-
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport, @Nullable final GeocacheFilter filter) {
-        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
+        final SearchResult result = SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport, filter));
         AmendmentUtils.amendCachesForViewport(result, viewport, filter);
         return result;
     }

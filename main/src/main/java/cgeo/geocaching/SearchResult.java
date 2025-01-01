@@ -30,6 +30,7 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import static java.lang.Boolean.TRUE;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
@@ -42,6 +43,7 @@ public class SearchResult implements Parcelable {
     public static final String CON_LEFT_TO_FETCH = "con_lefttofetch";
     public static final String CON_URL = "con_url";
     public static final String CON_ERROR = "con_error";
+    public static final String CON_PARTIAL = "con_partial";
 
     private final Set<String> geocodes = Collections.synchronizedSet(new HashSet<>());
     private final Set<String> filteredGeocodes = Collections.synchronizedSet(new HashSet<>());
@@ -50,7 +52,6 @@ public class SearchResult implements Parcelable {
 
     //A bundle of bundles where connectors can store specific context values
     private final Bundle connectorContext = new Bundle();
-
 
     public static final Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         @Override
@@ -183,6 +184,15 @@ public class SearchResult implements Parcelable {
 
     public void setError(final IConnector con, @NonNull final StatusCode error) {
         setToContext(con, b -> b.putInt(CON_ERROR, error.ordinal()));
+    }
+
+    public boolean isPartialResult() {
+        final boolean isPartialSet = reduceToContext(b -> b.getBoolean(CON_PARTIAL), false, (p1, p2) -> TRUE.equals(p1) || TRUE.equals(p2));
+        return isPartialSet || (getTotalCount() > getCount());
+    }
+
+    public void setPartialResult(final IConnector con, final boolean isPartial) {
+        setToContext(con, b -> b.putBoolean(CON_PARTIAL, isPartial));
     }
 
     public String getUrl() {
@@ -328,19 +338,12 @@ public class SearchResult implements Parcelable {
         return geocodes.isEmpty();
     }
 
-    public boolean hasUnsavedCaches() {
-        for (final String geocode : getGeocodes()) {
-            if (!DataStore.isOffline(geocode, null)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    @Deprecated // do not use any more
     public void addFilteredGeocodes(final Set<String> cachedMissingFromSearch) {
         filteredGeocodes.addAll(cachedMissingFromSearch);
     }
 
+    @Deprecated // do not use any more
     public Set<String> getFilteredGeocodes() {
         return Collections.unmodifiableSet(filteredGeocodes);
     }
@@ -355,7 +358,6 @@ public class SearchResult implements Parcelable {
         for (Geocache cache : DataStore.loadCaches(other.geocodes, LoadFlags.LOAD_CACHE_ONLY)) {
             cache.setSearchData(this.searchCacheData);
         }
-
 
         synchronized (this.connectorContext) {
             for (String keyOther : other.connectorContext.keySet()) {
@@ -379,6 +381,7 @@ public class SearchResult implements Parcelable {
     @WorkerThread
     public static <C extends IConnector> SearchResult parallelCombineActive(
             @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
+
         return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
             if (!connector.isActive()) {
                 return Maybe.empty();
@@ -387,8 +390,10 @@ public class SearchResult implements Parcelable {
                 try {
                     return func.apply(connector);
                 } catch (final Throwable t) {
-                    Log.w("parallelCombineActive: swallowing error from connector " + connector, t);
-                    return null;
+                    Log.w("SearchResult.parallelCombineActive: swallowing error from connector " + connector, t);
+                    final SearchResult errorResult = new SearchResult();
+                    errorResult.setError(connector, StatusCode.UNKNOWN_ERROR);
+                    return errorResult;
                 }
             }).subscribeOn(AndroidRxUtils.networkScheduler);
         }).reduce(initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {

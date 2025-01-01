@@ -95,6 +95,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
@@ -103,6 +104,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -121,11 +123,11 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 import cz.matejcik.openwig.Zone;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.lang3.StringUtils;
-import org.oscim.core.BoundingBox;
 
 public class UnifiedMapActivity extends AbstractNavigationBarMapActivity implements FilteredActivity, AbstractDialogFragment.TargetUpdateReceiver {
 
@@ -144,7 +146,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
     NavigationTargetLayer navigationTargetLayer = null;
-    private LoadInBackgroundHandler loadInBackgroundHandler = null;
+    //private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -205,6 +207,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         viewModel.followMyLocation.setValue(mapType.followMyLocation);
 
+        viewModel.transientIsLiveEnabled.observe(this, live -> viewModel.liveMapHandler.setLiveEnabled(live));
+
         viewModel.transientIsLiveEnabled.setValue(mapType.enableLiveMap() && Settings.isLiveMap());
 
         routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerMap, viewModel::clearIndividualRoute, viewModel::reloadIndividualRoute, viewModel::setTrack, this::isTargetSet);
@@ -212,6 +216,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (viewModel.proximityNotification.getValue() != null) {
             viewModel.proximityNotification.getValue().setTextNotifications(this);
         }
+
+        viewModel.viewportIdle.observe(this, viewport -> {
+            viewModel.liveMapHandler.setViewport(viewport);
+        });
+        viewModel.liveLoadStatus.observe(this, this::setProgressSpinner);
 
         viewModel.trackUpdater.observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue()));
         viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
@@ -262,8 +271,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        viewModel.mapCenter.observe(this, center -> refreshListChooser());
         viewModel.caches.observeForNotification(this, this::refreshListChooser);
+        viewModel.viewportIdle.observe(this, vp -> {
+            refreshListChooser();
+            refreshWaypoints(viewModel, getFilterContext(), vp);
+        });
+
 
         MapUtils.showMapOneTimeMessages(this, compatibilityMapMode);
 
@@ -368,8 +381,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.coordsIndicator.setValue(null);
         reloadCachesAndWaypoints(setDefaultCenterAndZoom);
 
-        hideProgressSpinner();
-
         // override some settings, if given
         if (mapState != null) {
             mapFragment.setCenter(mapState.center);
@@ -453,7 +464,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(searchResult);
                     if (viewport3.get() != null) {
-                        loadWaypoints(this, viewModel, viewport3.get());
+                        refreshWaypoints(viewModel, getFilterContext(), viewport3.get());
+                        //loadWaypoints(this, viewModel, viewport3.get());
                     }
                 }, () -> {
                     if (viewport3.get() != null) {
@@ -471,7 +483,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewport2.set(DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(mapType.searchResult);
                     if (viewport2.get() != null) {
-                        loadWaypoints(this, viewModel, viewport2.get());
+                        refreshWaypoints(viewModel, getFilterContext(), viewport2.get());
                     }
                 }, () -> {
                     if (viewport2.get() != null) {
@@ -494,11 +506,12 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
+        viewModel.liveMapHandler.setEnabled(mapType.enableLiveMap());
         if (mapType.enableLiveMap()) {
             refreshMapData(true);
-            if (loadInBackgroundHandler == null) {
-                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-            }
+//            if (loadInBackgroundHandler == null) {
+//                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
+//            }
         }
     }
 
@@ -508,16 +521,20 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (changedCache == null || changedCache.getCoords() == null) {
             return;
         }
-        viewModel.caches.write(caches -> caches.add(changedCache));
-        final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
-        if (cacheWaypoints != null) {
-            for (Waypoint wp : cacheWaypoints) {
-                wp.recalculateVariableDependentValues(changedCache.getVariables());
+        if (mapType.enableLiveMap()) {
+            viewModel.liveMapHandler.addChangedCache(changedCache);
+        } else {
+            viewModel.caches.write(caches -> {
+                caches.remove(changedCache);
+                caches.add(changedCache);
+            });
+            final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
+            if (cacheWaypoints != null) {
+                viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
             }
-            viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
+            //call reload logic -> this will reapply filters and such
+            reloadCachesAndWaypoints(false);
         }
-        //call reload logic -> this will reapply filters and such
-        reloadCachesAndWaypoints(false);
     }
 
     private void compactIconModeChanged(final int newValue) {
@@ -525,46 +542,79 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.notifyDataChanged(true); // TODO: necessary?
     }
 
-    public void showProgressSpinner() {
-        final View spinner = findViewById(R.id.map_progressbar);
-        spinner.setVisibility(View.VISIBLE);
-    }
-
-    public void hideProgressSpinner() {
-        final View spinner = findViewById(R.id.map_progressbar);
-        spinner.setVisibility(View.GONE);
-    }
-
-    public void loadWaypoints(final UnifiedMapActivity activity, final UnifiedMapViewModel viewModel, final Viewport viewport) {
-        if (mapFragment == null) {
+    public void setProgressSpinner(final LiveMapGeocacheLoader.State status) {
+        final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
+        final LinearProgressIndicator spinnerError = findViewById(R.id.map_progressbar_error);
+        if (spinner == null || spinnerError == null) {
             return;
         }
-        final Viewport currentlyVisible = mapFragment.getViewport();
-        if (viewModel.caches.readWithResult(currentlyVisible::count) < Settings.getWayPointsThreshold()) {
-            final Set<Waypoint> waypoints;
-            if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
-                //All waypoints in given viewport
-                waypoints = DataStore.loadWaypoints(viewport);
-            } else {
-                waypoints = new HashSet<>();
-                //All waypoints from the viewed caches
-                viewModel.caches.read(caches -> {
-                    for (final Geocache c : caches) {
-                        waypoints.addAll(c.getWaypoints());
-                    }
-                });
+        Log.iForce("UnifiedMap:set progress to " + status);
 
-            }
-            Log.d("load.waypoints: " + waypoints.size());
-            MapUtils.filter(waypoints, activity.getFilterContext());
-            viewModel.waypoints.write(wps -> {
-                wps.clear();
-                wps.addAll(waypoints);
-            });
-        } else {
-            viewModel.waypoints.notifyDataChanged();
+        spinner.setVisibility(View.GONE);
+        spinnerError.setVisibility(View.GONE);
+        switch (status) {
+            case RUNNING:
+                spinner.setIndicatorColor(getResources().getColor(R.color.colorAccent));
+                spinner.setVisibility(View.VISIBLE);
+                break;
+            case STOPPED_ERROR:
+                spinnerError.setIndicatorColor(Color.RED);
+                spinnerError.setVisibility(View.VISIBLE);
+                break;
+            case STOPPED_PARTIAL_RESULT:
+                spinnerError.setIndicatorColor(Color.GRAY);
+                spinnerError.setVisibility(View.VISIBLE);
+                break;
+            case REQUESTED:
+                spinner.setIndicatorColor(Color.BLUE);
+                spinner.setVisibility(View.VISIBLE);
+                break;
+            case STOPPED_OK:
+            default:
+                break;
         }
     }
+
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport) {
+        refreshWaypoints(viewModel, filterContext.get(), viewport);
+    }
+
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport) {
+
+        if (viewport == null || viewport.isJustADot()) {
+            viewModel.waypoints.write(Set::clear);
+            return;
+        }
+        //should waypoints be displayed at all?
+        final boolean waypointsAreVisible = viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold();
+        if (!waypointsAreVisible) {
+            viewModel.waypoints.write(Set::clear);
+            return;
+        }
+
+        final Set<Waypoint> waypoints;
+
+        //show all waypoints be displayed or just the ones from visible caches?
+        final boolean showAll = Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
+        if (showAll) {
+            waypoints = DataStore.loadWaypoints(viewport);
+        } else {
+            waypoints = viewModel.caches.readWithResult(caches -> {
+                final Set<Waypoint> wpSet = new HashSet<>();
+                for (final Geocache c : caches) {
+                    wpSet.addAll(c.getWaypoints());
+                }
+                return wpSet;
+            });
+        }
+        //filter waypoints
+        MapUtils.filter(waypoints, filter);
+        viewModel.waypoints.write(wps -> {
+                wps.clear();
+                wps.addAll(waypoints);
+        });
+    }
+
 
     public void addSearchResultByGeocaches(final SearchResult searchResult) {
         Log.d("add " + searchResult.getGeocodes());
@@ -826,11 +876,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_map_rotation_auto_precise) {
             setMapRotation(item, MAPROTATION_AUTO_PRECISE);
         } else if (id == R.id.menu_check_routingdata) {
-            final BoundingBox bb = mapFragment.getBoundingBox();
-            MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
+            final Viewport vp = mapFragment.getViewportNonNull();
+            MapUtils.checkRoutingData(this, vp.getLatitudeMin(), vp.getLongitudeMin(), vp.getLatitudeMax(), vp.getLongitudeMax());
         } else if (id == R.id.menu_check_hillshadingdata) {
-            final BoundingBox bb = mapFragment.getBoundingBox();
-            MapUtils.checkHillshadingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
+            final Viewport vp = mapFragment.getViewportNonNull();
+            MapUtils.checkHillshadingData(this, vp.getLatitudeMin(), vp.getLongitudeMin(), vp.getLatitudeMax(), vp.getLongitudeMax());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> viewModel.positionHistory.setValue(viewModel.positionHistory.getValue()), () -> {
             PositionHistory positionHistory = viewModel.positionHistory.getValue();
             if (positionHistory == null) {
@@ -911,7 +961,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (item != null) {
             item.setChecked(true);
         }
-        ViewUtils.setVisibility(findViewById(R.id.map_compassrose), mapRotation == MAPROTATION_OFF ? View.GONE : View.VISIBLE);
+        ViewUtils.setVisibility(findViewById(R.id.map_compassrose), mapRotation == MAPROTATION_OFF ? GONE : View.VISIBLE);
         checkDrivingMode();
     }
 
@@ -962,9 +1012,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched, final boolean filterChanged) {
         // parameter "circlesSwitched" is required for being called by showSettingsPopup only; can be removed after removing old map implementations
-        if (loadInBackgroundHandler == null && filterChanged) {
-            reloadCachesAndWaypoints(false);
-        }
         refreshMapData(filterChanged);
     }
 
@@ -972,10 +1019,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.write(false, caches -> MapUtils.filter(caches, mapType.filterContext));
         viewModel.waypoints.notifyDataChanged();
         if (filterChanged) {
-            if (loadInBackgroundHandler != null) {
-                loadInBackgroundHandler.onDestroy();
-                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-            }
+            viewModel.liveMapHandler.setFilter(mapType.filterContext.get());
             MapUtils.updateFilterBar(this, mapType.filterContext);
         }
     }
@@ -1285,7 +1329,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         wherigoListenerId = WherigoGame.get().addListener(nt -> {
             final View view = findViewById(R.id.container_wherigo);
             if (view != null) {
-                view.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : View.GONE);
+                view.setVisibility(WherigoGame.get().isPlaying() ? View.VISIBLE : GONE);
             }
         });
     }
@@ -1297,9 +1341,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @Override
     protected void onDestroy() {
-        if (loadInBackgroundHandler != null) {
-            loadInBackgroundHandler.onDestroy();
-        }
         if (tileProvider != null) {
             tileProvider.onDestroy();
         }
