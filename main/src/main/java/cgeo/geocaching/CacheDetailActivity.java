@@ -203,11 +203,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
     public static final String STATE_IMAGE_GALLERY = "cgeo.geocaching.imageGallery";
     public static final String STATE_DESCRIPTION_STYLE = "cgeo.geocaching.descriptionStyle";
+    public static final String STATE_SPEECHSERVICE_RUNNING = "cgeo.geocachig.speechServiceRunning";
 
 
     // Store Geocode here, as 'cache' is loaded Async.
     private String geocode;
     private Geocache cache;
+    private boolean restartSpeechService = false;
     @NonNull
     private final List<Trackable> genericTrackables = new ArrayList<>();
     private final Progress progress = new Progress();
@@ -354,8 +356,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 savedInstanceState != null ?
                         savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
                         Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
-        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_DESCRIPTION_STYLE)) {
-            this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(STATE_DESCRIPTION_STYLE)) {
+                this.descriptionStyle = CommonUtils.intToEnum(HtmlStyle.class, savedInstanceState.getInt(STATE_DESCRIPTION_STYLE), this.descriptionStyle);
+            }
+            restartSpeechService = (savedInstanceState.getInt(STATE_SPEECHSERVICE_RUNNING, 0) > 0);
         }
 
         imageGalleryState = savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_IMAGE_GALLERY);
@@ -418,6 +423,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         outState.putLong(STATE_PAGE_INDEX, getCurrentPageId());
         outState.putBundle(STATE_IMAGE_GALLERY, imageGallery == null ? null : imageGallery.getState());
         outState.putInt(STATE_DESCRIPTION_STYLE, CommonUtils.enumToInt(this.descriptionStyle));
+        outState.putInt(STATE_SPEECHSERVICE_RUNNING, SpeechService.isRunning() ? 1 : 0);
     }
 
     private void startOrStopGeoDataListener(final boolean initial) {
@@ -939,6 +945,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         progress.dismiss();
 
         Settings.addCacheToHistory(cache.getGeocode());
+
+        if (CacheDetailActivity.this.restartSpeechService) {
+            SpeechService.toggleService(this, cache.getCoords());
+            CacheDetailActivity.this.restartSpeechService = false;
+        }
     }
 
     /**
