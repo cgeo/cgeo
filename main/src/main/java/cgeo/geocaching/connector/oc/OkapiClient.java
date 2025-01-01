@@ -386,6 +386,7 @@ final class OkapiClient {
 
         //store metainfo needed for later for paging
         result.setLeftToFetch(connector, rawResult.second ? 1 : 0);
+        result.setPartialResult(connector, rawResult.second);
         result.setToContext(connector, b -> b.putString(SEARCH_CONTEXT_FILTER, filter.toConfig()));
         result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
 

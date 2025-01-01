@@ -5,6 +5,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.JsonUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -16,11 +17,32 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public final class Viewport implements Parcelable {
+
+    public static final Viewport EMPTY = new Viewport(0, 0, 0, 0);
 
     @NonNull public final Geopoint center;
     @NonNull public final Geopoint bottomLeft;
     @NonNull public final Geopoint topRight;
+
+    public Viewport(final double lat1, final double lon1, final double lat2, final double lon2) {
+        this.bottomLeft = new Geopoint(Math.min(lat1, lat2), Math.min(lon1, lon2));
+        this.topRight = new Geopoint(Math.max(lat1, lat2), Math.max(lon1, lon2));
+        this.center = new Geopoint((lat1 + lat2) / 2, (lon1 + lon2) / 2);
+    }
+
+    private Viewport(final int lat1E6, final int lon1E6, final int lat2E6, final int lon2E6, final Object dummy) {
+        this.bottomLeft = Geopoint.forE6(Math.min(lat1E6, lat2E6), Math.min(lon1E6, lon2E6));
+        this.topRight = Geopoint.forE6(Math.max(lat1E6, lat2E6), Math.max(lon1E6, lon2E6));
+        this.center = Geopoint.forE6(((lat1E6 + lat2E6) / 2), ((lon1E6 + lon2E6) / 2));
+    }
+
+    public static Viewport forE6(final int lat1E6, final int lon1E6, final int lat2E6, final int lon2E6) {
+        return new Viewport(lat1E6, lon1E6, lat2E6, lon2E6, null);
+    }
 
     public Viewport(@NonNull final ICoordinate point1, @NonNull final ICoordinate point2) {
         final Geopoint gp1 = point1.getCoords();
@@ -56,6 +78,23 @@ public final class Viewport implements Parcelable {
         this.center = center.getCoords();
         this.topRight = this.center.project(0, radiusInKilometers).project(90, radiusInKilometers);
         this.bottomLeft = this.center.project(180, radiusInKilometers).project(270, radiusInKilometers);
+    }
+
+    @Nullable
+    public static Viewport forJson(final JsonNode node) {
+        final Geopoint bottomLeft = Geopoint.forJson(JsonUtils.get(node, "bottomLeft"));
+        final Geopoint topRight = Geopoint.forJson(JsonUtils.get(node, "topRight"));
+        if (bottomLeft == null || topRight == null) {
+            return null;
+        }
+        return new Viewport(bottomLeft, topRight);
+    }
+
+    public ObjectNode toJson() {
+        final ObjectNode node = JsonUtils.createObjectNode();
+        JsonUtils.set(node, "bottomLeft", bottomLeft.toJson());
+        JsonUtils.set(node, "topRight", topRight.toJson());
+        return node;
     }
 
     public double getLatitudeMin() {
@@ -322,6 +361,10 @@ public final class Viewport implements Parcelable {
 
     public boolean isJustADot() {
         return bottomLeft.equals(topRight);
+    }
+
+    public static boolean isValid(final Viewport viewport) {
+        return viewport != null && !viewport.isJustADot();
     }
 
     @Override

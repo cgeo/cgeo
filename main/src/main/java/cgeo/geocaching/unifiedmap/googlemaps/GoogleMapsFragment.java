@@ -35,7 +35,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import org.oscim.core.BoundingBox;
 
 public class GoogleMapsFragment extends AbstractMapFragment implements OnMapReadyCallback {
     private GoogleMap mMap;
@@ -127,7 +126,6 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
         mMap.setOnCameraMoveListener(() -> repaintRotationIndicator(getCurrentBearing()));
         mMap.setOnCameraIdleListener(() -> {
             mapIsCurrentlyMoving = false;
-            viewModel.mapCenter.setValue(getCenter());
             lastBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
             scaleDrawer.drawScale(lastBounds);
         });
@@ -198,13 +196,13 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     }
 
     @Override
-    @NonNull
-    public BoundingBox getBoundingBox() {
+    @Nullable
+    public Viewport getViewport() {
         if (lastBounds == null) {
-            return new BoundingBox(0, 0, 0, 0);
+            return null;
         }
         // mMap.getProjection() needs to be called on UI thread
-        return new BoundingBox(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
+        return new Viewport(lastBounds.southwest.latitude, lastBounds.southwest.longitude, lastBounds.northeast.latitude, lastBounds.northeast.longitude);
     }
 
 

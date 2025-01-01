@@ -113,7 +113,7 @@ public class Geocache implements INamedGeoCoordinate {
     private long detailedUpdate = 0;
     private long visitedDate = 0;
     @NonNull
-    private Set<Integer> lists = new HashSet<>();
+    private final Set<Integer> lists = new HashSet<>();
     private boolean detailed = false;
 
     @NonNull
@@ -1102,10 +1102,10 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setLists(final Set<Integer> lists) {
-        // Create a new set to allow immutable structures such as SingletonSet to be
-        // given by the caller. We want the value returned by getLists() to be mutable
-        // since remove or add operations may be done on it.
-        this.lists = new HashSet<>(lists);
+        this.lists.clear();
+        if (lists != null) {
+            this.lists.addAll(lists);
+        }
     }
 
     public boolean isDetailed() {

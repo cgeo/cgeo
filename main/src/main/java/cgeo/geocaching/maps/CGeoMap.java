@@ -1264,7 +1264,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             // live mode search result
             if (mapOptions.isLiveEnabled) {
-                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport()));
+                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(), null));
             }
 
             downloaded = true;

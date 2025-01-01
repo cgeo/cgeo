@@ -126,6 +126,10 @@ public class JsonUtils {
         return result instanceof NullNode ? null : result;
     }
 
+    public static boolean has(final JsonNode node, final String fieldName) {
+        return node != null && node.has(fieldName);
+    }
+
     /** constructs a boolean node from a boolean value. Returns null on null value */
     public static JsonNode fromBoolean(final Boolean value) {
         return value == null ? null : BooleanNode.valueOf(value);
