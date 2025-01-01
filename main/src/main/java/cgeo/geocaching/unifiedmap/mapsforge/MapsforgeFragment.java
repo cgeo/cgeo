@@ -117,6 +117,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
         mMapView.getMapScaleBar().setVisible(true);
         mMapView.getMapScaleBar().setDistanceUnitAdapter(mMapView.getMapScaleBar().getDistanceUnitAdapter());
         mMapView.setBuiltInZoomControls(false);
+        mMapView.setZoomLevelMax((byte) currentTileProvider.getZoomMax());
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
