@@ -809,6 +809,19 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
+        final View liveButton = findViewById(R.id.menu_map_live);
+        if (liveButton != null) {
+            liveButton.setOnLongClickListener(v -> {
+                if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                    v.callOnClick();
+                    v.postDelayed(v::callOnClick, 100);
+                } else {
+                    v.callOnClick();
+                }
+                return true;
+            });
+        }
+
         // map rotation state
         menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always (xml definition) when CGeoMap/NewMap is removed
         final int mapRotation = Settings.getMapRotation();
