@@ -13,16 +13,16 @@ public class BookmarkListActivity extends AbstractListActivity {
         title = R.string.menu_lists_bookmarklists;
         progressInfo = R.string.search_bookmark_list;
         errorReadingList = R.string.err_read_bookmark_list;
+        fixed = true;
     }
 
     @Override
-    protected boolean getFiltersetting() {
-        return Settings.getBookmarklistsShowNewOnly();
+    boolean getFiltersetting() {
+        return false;
     }
 
     @Override
-    protected void setFiltersetting(final boolean value) {
-        Settings.setBookmarklistsShowNewOnly(value);
+    void setFiltersetting(boolean value) {
     }
 
     @Override
