@@ -2759,6 +2759,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="show_all">Show all</string>
+    <string name="lists_only_new">New only</string>
+    <string name="pq_only_dl">Downloadable</string>
 
     <string name="routingmode_straight">Straight</string>
     <string name="routingmode_walk">Walk</string>
