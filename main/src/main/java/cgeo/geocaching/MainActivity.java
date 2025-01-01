@@ -330,7 +330,7 @@ public class MainActivity extends AbstractNavigationBarActivity {
         binding.quicklaunchitems.setVisibility(View.GONE);
         for (int i : quicklaunchitems) {
             final QuickLaunchItem item = (QuickLaunchItem) QuickLaunchItem.getById(i, QuickLaunchItem.ITEMS);
-            if (item != null && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
+            if (QuickLaunchItem.conditionsFulfilled(item)) {
                 addButton(item.iconRes, lp, () -> QuickLaunchItem.launchQuickLaunchItem(this, item.getId(), true), getString(item.getTitleResId()), item.viewInitializer);
             }
         }
