@@ -12,6 +12,7 @@ public class PocketQueryListActivity extends AbstractListActivity {
         title = R.string.menu_lists_pocket_queries;
         progressInfo = R.string.search_pocket_loading;
         errorReadingList = R.string.err_read_pocket_query_list;
+        switchLabel = R.string.pq_only_dl;
     }
 
     @Override

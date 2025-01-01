@@ -43,6 +43,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
     @StringRes protected int title;
     @StringRes protected int progressInfo;
     @StringRes protected int errorReadingList;
+    @StringRes protected int switchLabel;
 
     abstract boolean getFiltersetting();
 
@@ -79,6 +80,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
                 bar.setDisplayShowCustomEnabled(true);
 
                 switchCompat = customView.findViewById(R.id.switchAB);
+                switchCompat.setText(switchLabel);
                 switchCompat.setVisibility(View.INVISIBLE);
                 switchCompat.setChecked(!getFiltersetting());
                 switchCompat.setOnCheckedChangeListener((a, b) -> checkSwitchState(adapter));
@@ -114,7 +116,7 @@ public abstract class AbstractListActivity extends CustomMenuEntryActivity {
 
     private void fillAdapter(final AbstractListAdapter adapter) {
         pocketQueries.clear();
-        if (filteredList) {
+        if (!filteredList) {
             for (final GCList pq : allPocketQueries) {
                 if (alwaysShow(pq)) {
                     pocketQueries.add(pq);
