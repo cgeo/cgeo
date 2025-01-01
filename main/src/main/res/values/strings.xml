@@ -1646,6 +1646,7 @@
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Refresh</string>
     <string name="cache_menu_share">Share cache</string>
+    <string name="cache_menu_share_with_data">Share incl. user data</string>
     <string name="cache_menu_move_list">Move to different list</string>
     <string name="cache_menu_copy_list">Copy to different list</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
