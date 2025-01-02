@@ -22,8 +22,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     private final Context context;
-    boolean isGeoCodeSearch = false;
-    boolean isKeywordSearch = false;
 
     public GeocacheAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction) {
         super(context, R.layout.cacheslist_item_select, geocodeSuggestionFunction, 0, null);
@@ -40,11 +38,11 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         final String geocode = getItem(position);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        final View geoView = GeoItemSelectorUtils.createGeocacheItemView(context, cache, GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
-        if (isKeywordSearch) {
-            setHighLightedText(geoView.findViewById(R.id.text), searchTerm);
-        }
-        return geoView;
+        return GeoItemSelectorUtils.createGeocacheItemView(context, cache, GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
+    }
+
+    private View superGetView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
+        return super.getView(position, convertView, parent);
     }
 
     public static String[] getLastOpenedCachesArray() {
@@ -58,7 +56,6 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     public static class GeocodeAutoCompleteAdapter extends GeocacheAutoCompleteAdapter {
         public GeocodeAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
             super(context, geocodeSuggestionFunction, historyFunction);
-            isGeoCodeSearch = true;
         }
 
         /**
@@ -72,7 +69,20 @@ public class GeocacheAutoCompleteAdapter extends SearchAutoCompleteAdapter {
     public static class KeywordAutoCompleteAdapter extends GeocacheAutoCompleteAdapter {
         public KeywordAutoCompleteAdapter(final Context context, final Func1<String, String[]> geocodeSuggestionFunction, final Func0<String[]> historyFunction) {
             super(context, geocodeSuggestionFunction, historyFunction);
-            isKeywordSearch = true;
+        }
+
+        @NonNull
+        @Override
+        public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
+            // Keyword search shows geocache layout for results and single-line layout for history, thus need to invalidate views on updates
+            final View cv = (null == convertView || (null == convertView.findViewById(R.id.info) ^ isShowingResultsFromHistory)) ? null : convertView;
+            if (isShowingResultsFromHistory) {
+                return super.superGetView(position, cv, parent);
+            }
+            final View geoView = super.getView(position, cv, parent);
+            // Highlight search term in geocache title
+            setHighLightedText(geoView.findViewById(R.id.text), searchTerm);
+            return geoView;
         }
     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="36dip"
+        android:height="36dip"
+        android:drawable="@drawable/mark_transparent" />
+    <item
+        android:drawable="@drawable/ic_menu_paste_search"
+        android:gravity="center|bottom" />
+</layer-list>
