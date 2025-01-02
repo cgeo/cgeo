@@ -56,4 +56,12 @@ public class GeoPointFormatterTest {
         assertThat(GeopointFormatter.reformatForClipboard("10,123456 -0,123456")).isEqualTo("10.123456 -0.123456");
     }
 
+    @Test
+    public void testAdaptFormatFromClipboardAdaptGoogleFormat() {
+        assertThat(GeopointFormatter.adaptFormatFromClipboard("10,123456, -0,123456")).isEqualTo("10,123456 -0,123456");
+
+        // no adaption
+        assertThat(GeopointFormatter.adaptFormatFromClipboard("10,123456°, -0,123456°")).isEqualTo("10,123456°, -0,123456°");
+        assertThat(GeopointFormatter.adaptFormatFromClipboard("Coordinate 10,123456, -0,123456")).isEqualTo("Coordinate 10,123456, -0,123456");
+    }
 }

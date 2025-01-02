@@ -145,22 +145,42 @@ public class GeoPointParserTest {
     @Test
     public void testFloatingPointLatitude() {
         assertThat(GeopointParser.parseLatitude("47.648883")).isEqualTo(GeopointParser.parseLatitude("N 47° 38.933"), offset(1e-6));
+        assertThat(GeopointParser.parseLatitude("47,648883")).isEqualTo(GeopointParser.parseLatitude("N 47° 38.933"), offset(1e-6));
     }
 
     @Test
     public void testFloatingPointNegativeLatitudeMeansSouth() {
         assertThat(GeopointParser.parseLatitude("-47.648883")).isEqualTo(GeopointParser.parseLatitude("S 47° 38.933"), offset(1e-6));
+        assertThat(GeopointParser.parseLatitude("-47,648883")).isEqualTo(GeopointParser.parseLatitude("S 47° 38.933"), offset(1e-6));
     }
 
     @Test
     public void testFloatingPointBoth() {
         assertGeopointEquals(GeopointParser.parse("47.648883  122.348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47.648883  -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883  122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883  -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
+    @Test
+    public void testFloatingPointBothWithSeparator() {
+        assertGeopointEquals(GeopointParser.parse("47.648883, 122.348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47.648883, -122.348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883. 122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883. -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+    }
+
+
+    @Test
+    public void testAdaptFormatFromClipboard() {
+        assertGeopointEquals(GeopointParser.parse(GeopointFormatter.adaptFormatFromClipboard("47,648883, 122,348067")), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse(GeopointFormatter.adaptFormatFromClipboard("47,648883, -122,348067")), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
     }
 
     @Test
     public void testFloatingPointNbsp() {
         assertGeopointEquals(GeopointParser.parse("47.648883  122.348067\u00a0"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47,648883  122,348067\u00a0"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
     }
 
     @Test
@@ -179,6 +199,7 @@ public class GeoPointParserTest {
         assertGeopointEquals(GeopointParser.parse("47. 648883 122.348067"), referencePoint, 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47.648883   122. 348067"), referencePoint, 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47. 648883   122. 348067"), referencePoint, 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("47, 648883   122, 348067"), referencePoint, 1e-4f);
         assertGeopointEquals(GeopointParser.parse("N 47° 38. 933   E 122° 20. 884"), referencePoint, 1e-4f);
         assertGeopointEquals(GeopointParser.parse("N  47 38. 933  E  122 20. 884"), referencePoint, 1e-4f);
         assertParsingFails("N  47 38.   933  E  122 20.   884");

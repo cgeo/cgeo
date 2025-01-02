@@ -307,15 +307,26 @@ public class CoordinatesInputDialog extends DialogFragment {
         super.onAttach(activity);
     }
 
-    @SuppressWarnings("unused")
     private static boolean hasClipboardCoordinates() {
         try {
-            new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+            getGeopointFromClipboard();
         } catch (final ParseException ignored) {
             return false;
         }
         return true;
     }
+
+
+    @Nullable
+    private static Geopoint getGeopointFromClipboard() {
+        try {
+            final String fromClipboard = GeopointFormatter.adaptFormatFromClipboard(ClipboardUtils.getText());
+            return new Geopoint(StringUtils.defaultString(fromClipboard));
+        } catch (final ParseException ignored) {
+            return null;
+        }
+    }
+
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
@@ -681,7 +692,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         @Override
         public void onClick(final View v) {
             try {
-                gp = new Geopoint(StringUtils.defaultString(ClipboardUtils.getText()));
+                gp = getGeopointFromClipboard();
                 updateGUI();
             } catch (final ParseException ignored) {
             }
