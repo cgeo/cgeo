@@ -25,7 +25,7 @@ public class GeopointParser {
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (\\d{2,})");
 
-    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser());
+    private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
     private GeopointParser() {
         // utility class
@@ -404,6 +404,35 @@ public class GeopointParser {
         @Nullable
         public Double parse(@NonNull final List<String> groups) {
             final String group1 = groups.get(0);
+            return createCoordinate("", group1, "", "");
+        }
+    }
+
+    /**
+     * Parser for DegDec format: DD,DDDDDDD°.
+     */
+    private static final class DegDecCommaParser extends AbstractLatLonParser {
+        //                                        (       1       )
+        private static final String STRING_LAT = "(-?(\\d++),(\\d++))°?";
+
+        //                                        (       1       )
+        private static final String STRING_LON = "(-?(\\d++),(\\d++))\\b°?";
+        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.=-]*";
+        private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
+        private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);
+
+        DegDecCommaParser() {
+            super(PATTERN_LAT, PATTERN_LON, PATTERN_LATLON);
+        }
+
+        /**
+         * @see AbstractLatLonParser#parse(List)
+         */
+        @Override
+        @Nullable
+        public Double parse(@NonNull final List<String> groups) {
+            final String group1 = groups.get(1) + "." + groups.get(2);
             return createCoordinate("", group1, "", "");
         }
     }
