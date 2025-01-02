@@ -43,3 +43,6 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Extra emojis voor cachepictogrammen
 - Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebration, block party en maze
 - Wijziging: Cache type filter "Anders" bevat GCHQ, APE en onbekende types
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
