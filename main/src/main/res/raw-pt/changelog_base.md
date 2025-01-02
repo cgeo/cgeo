@@ -43,3 +43,6 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Emojis adicionais para os ícones das caches
 - Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
 - Alteração: Tipo de filtro de cache "Outro" inclui GCHQ, APE e tipos desconhecidos
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
