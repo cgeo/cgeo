@@ -44,3 +44,6 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br>
 - New: Additional emojis for cache icons
 - Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
 - Change: Cache type filter "Other" includes GCHQ, APE and unknown types
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
