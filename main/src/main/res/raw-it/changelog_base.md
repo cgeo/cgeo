@@ -3,7 +3,8 @@
 - New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
 
 ### Dettagli del cache
--
+- New: Option to share cache with user data (coordinates, personal note)
+- Fix: Speech service interrupted on screen rotation
 
 ### Generale
 - New: Redesigned search page
