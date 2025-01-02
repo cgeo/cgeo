@@ -281,7 +281,7 @@ public class MapUtils {
         if (!requiredTiles.isEmpty()) {
             final Set<String> missingTileFolders = new HashSet<>(requiredTiles.values());
             final HashMap<String, Download> tiles = HillshadingTileDownloader.getInstance().getAvailableTiles(missingTileFolders);
-            final Set<String> filenames = requiredTiles.keySet(); // work on copy to avoid concurrent modification
+            final Set<String> filenames = new HashSet<>(requiredTiles.keySet()); // work on copy to avoid concurrent modification
             for (String filename : filenames) {
                 if (tiles.containsKey(filename)) {
                     missingDownloads.add(tiles.get(filename));
