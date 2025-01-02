@@ -1,14 +1,20 @@
 package cgeo.geocaching.location;
 
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.MatcherWrapper;
+
+import androidx.annotation.Nullable;
 
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Formatting of Geopoint.
  */
 public class GeopointFormatter {
+
+    private static final Pattern PATTERN_GOOGLE_COMMA = Pattern.compile("(-?\\d+,\\d+)\\s*,\\s*(-?\\d+,\\d+)");
 
     private GeopointFormatter() {
         // utility class
@@ -221,5 +227,20 @@ public class GeopointFormatter {
      */
     public static CharSequence reformatForClipboard(final CharSequence coordinatesToCopy) {
         return coordinatesToCopy.toString().replace(Formatter.SEPARATOR, " ").replaceAll(",", ".");
+    }
+
+    /**
+     * Prepare string from clipboard to parse coordinates
+     * remove additional comma from google maps format, if it only contains coordinates in google-format-
+     */
+    @Nullable
+    public static String adaptFormatFromClipboard(@Nullable final String clipboardText) {
+        // remove additional comma from google maps
+        final MatcherWrapper googleFormatMatcher = new MatcherWrapper(PATTERN_GOOGLE_COMMA, clipboardText);
+        if (!googleFormatMatcher.matches()) {
+            return clipboardText;
+        }
+
+        return googleFormatMatcher.replaceAll("$1 $2");
     }
 }
