@@ -43,3 +43,6 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Zusätzliche Emojis für Cache-Symbole
 - Änderung: Cache-Filter "Besondere" umfasst Events der Typen Mega, Giga, Community Celebration, HQ Celebration, HQ Blockparty und Labyrinth
 - Änderung: Cache-Filter "Andere" enthält GC HQ, APE und unbekannte Typen
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
