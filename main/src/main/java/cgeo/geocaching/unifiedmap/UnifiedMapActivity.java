@@ -490,6 +490,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         if (setDefaultCenterAndZoom) {
                             mapFragment.zoomToBounds(viewport2.get());
                         }
+
+                        if (mapType.coords != null) {
+                            if (setDefaultCenterAndZoom) {
+                                mapFragment.setCenter(mapType.coords);
+                            }
+                            viewModel.coordsIndicator.setValue(mapType.coords);
+                        }
                         refreshMapData(true);
                     }
                 });

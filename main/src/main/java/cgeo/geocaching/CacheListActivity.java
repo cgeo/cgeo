@@ -555,6 +555,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         ToggleItemType.SELECT_MODE.toggleMenuItem(item, adapter.isSelectMode());
     }
 
+    public Geopoint getReferencePoint() {
+        return this.coords;
+    }
+
 
     /**
      * Menu items which are not at all usable with the current list type should be hidden.

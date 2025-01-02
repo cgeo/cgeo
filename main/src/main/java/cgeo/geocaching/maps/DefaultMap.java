@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -127,7 +128,8 @@ public final class DefaultMap {
             mo.startIntent(fromActivity, getDefaultMapClass());
         } else {
             if (fromList == 0) {
-                new UnifiedMapType(search, title).launchMap(fromActivity); // same as above
+                final Geopoint referencePoint = fromActivity instanceof CacheListActivity ? ((CacheListActivity) fromActivity).getReferencePoint() : null;
+                new UnifiedMapType(search, title, referencePoint).launchMap(fromActivity); // same as above
             } else {
                 // no longer allowed / CacheListActivity directly launches into startActivityList in this case
                 startActivityList(fromActivity, fromList, null);
