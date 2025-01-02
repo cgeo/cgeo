@@ -355,8 +355,8 @@ public class FormulaTest {
     public void advancedFunctions() {
         assertThat(eval("checksum(888)")).isEqualTo(24);
         assertThat(eval("ichecksum(888)")).isEqualTo(6);
-        assertThat(eval("ichecksum(-888)")).isEqualTo(6);
-        assertThat(eval("ichecksum(-888.234)")).isEqualTo(6);
+        assertThat(eval("ichecksum(-888)")).isEqualTo(-6);
+        assertThat(eval("ichecksum(-888.235)")).isEqualTo(-7);
         assertThat(eval("lettervalue('Test123')")).isEqualTo(20 + 5 + 19 + 20 + 1 + 2 + 3);
         assertThat(eval("lettervalue(-888.123)")).isEqualTo(30);
     }
