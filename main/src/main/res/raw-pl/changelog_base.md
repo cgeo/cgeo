@@ -43,3 +43,6 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Dodatkowe emotikony dla ikon skrytek
 - Zmiana: Filtrowanie skrytek „Specjalne” obejmuje wydarzenia typu mega, giga, uroczystości społeczności, uroczystości sztabu, block party i labirynty
 - Zmiana: Filtrowanie skrytek „Inne” zawiera GCHQ, APE i nieznane typy
+- Naprawiono: Długość historii i ustawienia zbliżeniowe współdzieliły wartości suwaka
+- Naprawiono: Strona z wpisami przedmiotów podróżnych pokazywała pola czas/współrzędne dla przedmiotów podróżnych, które tego nie obsługują
+- Naprawiono: Kilka awarii
