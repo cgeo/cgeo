@@ -167,11 +167,13 @@ public class FormulaUtils {
 
     public static long checksum(final Value value, final boolean iterative) {
         final long cs = letterValue(value.getAsString());
-        if (!iterative) {
-            return cs;
+        final boolean negate = value.getAsString().trim().startsWith("-");
+        if (!iterative || cs == 0) {
+            return negate ? -cs : cs;
         }
+        //iterative
         final long itCs = cs % 9;
-        return itCs == 0 ? 9 : itCs;
+        return itCs == 0 ? (negate ? -9 : 9) : (negate ? -itCs : itCs);
     }
 
     public static long letterValue(final String value) {

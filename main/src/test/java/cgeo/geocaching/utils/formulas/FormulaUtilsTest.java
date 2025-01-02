@@ -62,10 +62,38 @@ public class FormulaUtilsTest {
 
     @Test
     public void checksum() {
+        //normal
         assertThat(FormulaUtils.checksum(Value.of(255), false)).isEqualTo(12);
         assertThat(FormulaUtils.checksum(Value.of(255), true)).isEqualTo(3);
-        assertThat(FormulaUtils.checksum(Value.of(-255), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of("2-55"), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of("2-55"), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of("2 -55"), false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(Value.of("2 -55"), true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(Value.of("2a-55"), false)).isEqualTo(13);
+        assertThat(FormulaUtils.checksum(Value.of("2a-55"), true)).isEqualTo(4);
+        //negative
+        assertThat(FormulaUtils.checksum(Value.of(-255), false)).isEqualTo(-12);
+        assertThat(FormulaUtils.checksum(Value.of(-255), true)).isEqualTo(-3);
+        assertThat(FormulaUtils.checksum(Value.of("-255"), false)).isEqualTo(-12);
+        assertThat(FormulaUtils.checksum(Value.of("-255"), true)).isEqualTo(-3);
+        assertThat(FormulaUtils.checksum(Value.of(" - 2 55a"), false)).isEqualTo(-13);
+        assertThat(FormulaUtils.checksum(Value.of(" - 2 55a"), true)).isEqualTo(-4);
+        //zero
         assertThat(FormulaUtils.checksum(Value.of(0), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of(0), true)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("0000"), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("0000"), true)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("000 0 "), false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(Value.of("000 0 "), true)).isEqualTo(0);
+        //big numbers
+        final String zeroToNine = "1234567890"; //cs = 45
+        final String bigNumberBase = zeroToNine + zeroToNine + zeroToNine + zeroToNine; // cs = 180, ics = 9
+        assertThat(FormulaUtils.checksum(Value.of(bigNumberBase), false)).isEqualTo(180);
+        assertThat(FormulaUtils.checksum(Value.of(bigNumberBase), true)).isEqualTo(9);
+        assertThat(FormulaUtils.checksum(Value.of("1-" + bigNumberBase), false)).isEqualTo(181);
+        assertThat(FormulaUtils.checksum(Value.of("1-" + bigNumberBase), true)).isEqualTo(1);
+        assertThat(FormulaUtils.checksum(Value.of("-" + bigNumberBase), false)).isEqualTo(-180);
+        assertThat(FormulaUtils.checksum(Value.of("-" + bigNumberBase), true)).isEqualTo(-9);
     }
 
     @Test
@@ -74,6 +102,8 @@ public class FormulaUtilsTest {
         assertThat(FormulaUtils.letterValue("ABC")).isEqualTo(6);
         assertThat(FormulaUtils.letterValue("")).isEqualTo(0);
         assertThat(FormulaUtils.letterValue("1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("-1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("123-4")).isEqualTo(10);
         assertThat(FormulaUtils.letterValue("äöüß")).isEqualTo(27 + 28 + 29 + 30);
         assertThat(FormulaUtils.letterValue("ÄÖÜß")).isEqualTo(27 + 28 + 29 + 30);
         assertThat(FormulaUtils.letterValue("--")).isEqualTo(0);
