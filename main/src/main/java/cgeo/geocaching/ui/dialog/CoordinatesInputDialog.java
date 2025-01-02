@@ -308,12 +308,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     }
 
     private static boolean hasClipboardCoordinates() {
-        try {
-            getGeopointFromClipboard();
-        } catch (final ParseException ignored) {
-            return false;
-        }
-        return true;
+        return null != getGeopointFromClipboard();
     }
 
 
