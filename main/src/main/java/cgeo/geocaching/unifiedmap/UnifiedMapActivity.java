@@ -507,12 +507,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (changedCache == null || changedCache.getCoords() == null) {
             return;
         }
-        viewModel.caches.write(caches -> caches.add(changedCache));
+        viewModel.caches.write(caches -> {
+            //need to remove first to ensure cache is really swapped ("Geocache" uses an id-only "equals()" function)
+            caches.remove(changedCache);
+            caches.add(changedCache);
+        });
         final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
         if (cacheWaypoints != null) {
-            for (Waypoint wp : cacheWaypoints) {
-                wp.recalculateVariableDependentValues(changedCache.getVariables());
-            }
             viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
         }
         //call reload logic -> this will reapply filters and such
