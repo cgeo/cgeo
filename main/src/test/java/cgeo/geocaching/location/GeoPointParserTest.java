@@ -175,6 +175,10 @@ public class GeoPointParserTest {
     public void testAdaptFormatFromClipboard() {
         assertGeopointEquals(GeopointParser.parse(GeopointFormatter.adaptFormatFromClipboard("47,648883, 122,348067")), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
         assertGeopointEquals(GeopointParser.parse(GeopointFormatter.adaptFormatFromClipboard("47,648883, -122,348067")), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+
+        // assert - without adaption no Geopoint is parsed
+        assertParsingFails("47,648883, 122,348067");
+        assertParsingFails("47,648883, -122,348067");
     }
 
     @Test
