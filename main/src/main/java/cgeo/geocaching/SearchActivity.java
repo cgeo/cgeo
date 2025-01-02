@@ -155,12 +155,15 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
             if (searchPerformed) {
                 // search triggered from search field -> return to main screen
                 searchViewItem.collapseActionView();
-            } else if (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo)))) {
+            } else if (searchViewItem.isActionViewExpanded() && (getSearchFieldInput().isEmpty() || (getSearchFieldInput().equals("GC") && searchView.getHint().equals(getString(R.string.search_geo))))) {
                 // search triggered from suggestion without any input in search field -> return to main screen
                 searchViewItem.collapseActionView();
             } else if (searchViewItem.isActionViewExpanded()) {
                 // search triggered from suggestion -> hide keyboard
                 searchView.clearFocus();
+            } else {
+                binding.gridLayout.removeAllViews();
+                init();
             }
         }
         searchPerformed = false;
