@@ -43,3 +43,6 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Další emotikony pro ikony kešek
 - Změna: Filtr typu kešky „Speciální“ zahrnuje události typu mega, giga, community celebration, HQ celebtration, block party a maze
 - Změna: Filtr typu kešky „Ostatní“ zahrnuje typy GCHQ, APE a neznámé typy
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
