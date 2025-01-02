@@ -43,3 +43,6 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: emojis addicionals per a les icones del catxé
 - Canvi: el filtre de tipus de catxés "Especials" inclou trobades de tipus mega, giga, community celebration, HQ celebration, block party i maze
 - Canvi: el filtre de tipus de catxé "Altres" inclou GCHQ, APE i tipus desconeguts
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
