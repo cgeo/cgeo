@@ -417,7 +417,7 @@ public class GeopointParser {
 
         //                                        (       1       )
         private static final String STRING_LON = "(-?(\\d++),(\\d++))\\b°?";
-        private static final String STRING_SEPARATOR = "[^\\w'′\"″°.=-]*";
+        private static final String STRING_SEPARATOR = ", ";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LATLON = Pattern.compile(STRING_LAT + STRING_SEPARATOR + STRING_LON, Pattern.CASE_INSENSITIVE);

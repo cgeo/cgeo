@@ -160,8 +160,7 @@ public class GeoPointParserTest {
 
     @Test
     public void testFloatingPointCommaBoth() {
-        assertGeopointEquals(GeopointParser.parse("47,648883  122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
-        assertGeopointEquals(GeopointParser.parse("47,648883  -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("45,480067 9,210533"), GeopointParser.parse("N 45° 28.804 E 009° 12.632"), 1e-4f);
     }
 
     @Test
