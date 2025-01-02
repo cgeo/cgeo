@@ -105,6 +105,14 @@ public class UnifiedMapType implements Parcelable {
         this.title = title;
     }
 
+    /** show and scale to search result with marked coordinates */
+    public UnifiedMapType(final SearchResult searchResult, final String title, final Geopoint coords) {
+        type = UnifiedMapTypeType.UMTT_SearchResult;
+        this.searchResult = searchResult;
+        this.title = title;
+        this.coords = coords;
+    }
+
     /** get launch intent */
     public Intent getLaunchMapIntent(final Context fromActivity) {
         final Intent intent = new Intent(fromActivity, UnifiedMapActivity.class);
