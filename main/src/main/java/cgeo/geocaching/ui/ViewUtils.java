@@ -615,19 +615,11 @@ public class ViewUtils {
             return;
         }
 
-        view.setOnClickListener(clickListener);
-        view.setOnLongClickListener(onLongClickListener);
-
-        if (view instanceof ViewGroup) {
-            final ViewGroup viewGroup = (ViewGroup) view;
-            if (viewGroup != null) {
-                for (int index = 0; index < viewGroup.getChildCount(); index++) {
-                    final View childView = viewGroup.getChildAt(index);
-                    childView.setOnClickListener(clickListener);
-                    childView.setOnLongClickListener(onLongClickListener);
-                }
-            }
-        }
+        walkViewTree(view, viewItem -> {
+            viewItem.setOnClickListener(clickListener);
+            viewItem.setOnLongClickListener(onLongClickListener);
+            return true;
+        }, null);
     }
 
     public static Bitmap drawableToBitmap(final Drawable drawable) {
