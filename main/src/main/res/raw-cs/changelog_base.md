@@ -8,3 +8,4 @@
 
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
+- New: Inventory count filter
