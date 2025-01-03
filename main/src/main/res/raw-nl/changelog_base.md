@@ -8,3 +8,4 @@
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
+- New: Inventory count filter
