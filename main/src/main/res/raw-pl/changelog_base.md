@@ -8,3 +8,4 @@
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
+- Nowość: Filtr stanu inwentarza
