@@ -8,3 +8,4 @@
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
+- New: Inventory count filter
