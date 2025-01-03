@@ -1461,6 +1461,7 @@
     <string name="cache_menu_details">Detaljer</string>
     <string name="cache_menu_refresh">Uppdatera</string>
     <string name="cache_menu_share">Skicka länk</string>
+    <string name="cache_menu_share_with_data">Dela inkl. användardata</string>
     <string name="cache_menu_move_list">Flytta till annan lista</string>
     <string name="cache_menu_copy_list">Kopiera till annan lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -2439,6 +2440,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="show_all">Visa alla</string>
+    <string name="lists_only_new">Endast ny</string>
+    <string name="pq_only_dl">Nedladdningsbara</string>
     <string name="routingmode_straight">Rakt</string>
     <string name="routingmode_walk">Promenera</string>
     <string name="routingmode_bike">Cykel</string>
