@@ -17,7 +17,7 @@ public class NumberCountFilterViewHolder<F extends NumberRangeGeocacheFilter<Int
     private Integer minValue = 0;
     private Integer maxValue = 1000;
 
-    NumberCountFilterViewHolder(Integer minValue, Integer maxValue) {
+    NumberCountFilterViewHolder(final Integer minValue, final Integer maxValue) {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
