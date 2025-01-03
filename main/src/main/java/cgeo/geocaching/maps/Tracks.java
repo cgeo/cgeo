@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.geoitem.IGeoItemSupplier;
 import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -90,6 +91,14 @@ public class Tracks {
     public void traverse(final Action2<String, IGeoItemSupplier> action) {
         for (Track track : data) {
             action.call(track.trackfile.getKey(), track.route);
+        }
+    }
+
+    public void find(final Route route, final Action2<String, IGeoItemSupplier> action) {
+        for (Track track : data) {
+            if (track.getRoute().equals(route)) {
+                action.call(track.trackfile.getKey(), track.route);
+            }
         }
     }
 

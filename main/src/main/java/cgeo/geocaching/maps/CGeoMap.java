@@ -526,7 +526,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
-                mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget));
+                mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget, null));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -819,7 +819,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 || DownloaderUtils.onOptionsItemSelected(activity, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget);
+            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget, null);
         } else {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {

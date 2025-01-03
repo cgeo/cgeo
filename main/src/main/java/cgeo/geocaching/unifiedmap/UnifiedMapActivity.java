@@ -360,7 +360,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapDataAfterSettingsChanged, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), mapType.filterContext));
 
         // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget));
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::handleLongTapOnRoutesOrTracks));
         routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue());
 
         // react to mapType
@@ -855,7 +855,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_theme_options) {
             mapFragment.selectThemeOptions(this);
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget);
+            routeTrackUtils.showPopup(viewModel.individualRoute.getValue(), viewModel::setTarget, this::handleLongTapOnRoutesOrTracks);
         } else if (id == R.id.menu_select_mapview) {
             // dynamically create submenu to reflect possible changes in map sources
             final View v = findViewById(R.id.menu_select_mapview);
@@ -1133,10 +1133,14 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    private void handleLongTapOnRoutesOrTracks(final Route item) {
+    private void handleLongTapOnRoutesOrTracks(final Route item, final boolean forceShowElevationChart) {
         // elevation charts for individual route and/or routes/tracks
         if (elevationChartUtils == null) {
             elevationChartUtils = new ElevationChart(this, nonClickableItemsLayer);
+        }
+        if (forceShowElevationChart && lastElevationChartRoute != null) {
+            elevationChartUtils.removeElevationChart();
+            lastElevationChartRoute = null;
         }
         if (lastElevationChartRoute != null && StringUtils.equals(item.getName(), lastElevationChartRoute)) {
             elevationChartUtils.removeElevationChart();

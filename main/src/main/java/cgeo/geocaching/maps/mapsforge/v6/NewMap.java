@@ -279,7 +279,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, this::configureProximityNotifications, mapOptions.filterContext));
 
         // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget, null));
 
         // prepare circular progress spinner
         spinner = findViewById(R.id.map_progressbar);
@@ -507,7 +507,7 @@ public class NewMap extends AbstractNavigationBarMapActivity implements Observer
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(individualRoute, this::setTarget);
+            routeTrackUtils.showPopup(individualRoute, this::setTarget, null);
         } else {
             final String language = MapProviderFactory.getLanguage(id);
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
