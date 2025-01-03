@@ -8,3 +8,4 @@
 
 ### Generale
 - New: Redesigned search page
+- New: Inventory count filter
