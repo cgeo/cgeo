@@ -269,6 +269,8 @@ public class GeocacheFilterTest {
             case INDIVIDUAL_ROUTE:
             case NAMED_FILTER:
             case LOGICAL_FILTER_GROUP:
+            case LIST_ID:
+            case VIEWPORT:
                 // nothing to do
                 break;
             default:
