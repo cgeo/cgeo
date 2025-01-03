@@ -13,6 +13,7 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Zmiana: Funkcję „podążaj za moją lokalizacją” przeniesiono do mapy, dając więcej miejsca na przycisk „tryb na żywo”
 - Zmiana: Długie przytrzymanie jest teraz bardziej w stylu c:geo
 - Zmiana: Funkcje zarządzania danymi offline (pobieranie map, sprawdzanie brakujących danych prowadzenia i cieniowania wzniesień) przeniesione do menu wyboru mapy => „Zarządzaj danymi offline”
+- Naprawiono: Mapa nie aktualizuje zmienionych skrzynek
 
 ### Szczegóły skrytki
 - Nowość: Jeszcze nie istniejące zmienne używane w projekcji zostaną utworzone na liście zmiennych
@@ -25,6 +26,8 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Potwierdź nadpisanie dziennika w szybkim logu offline
 - Nowość: Aktualizacja status skrytki przy wysyłaniu logu
 - Nowość: Kolorowany widok źródła HTML szczegółów skrytki
+- Naprawiono: checksum(0) zwraca nieprawidłową wartość
+- Naprawiono: Edycja logów usuwa status „znajomych”
 
 ### Ogólne
 - Zmiana: Użyj wysokości nad średnim poziomem morza (jeśli to możliwe, tylko Android 14+)
@@ -43,3 +46,6 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Nowość: Dodatkowe emotikony dla ikon skrytek
 - Zmiana: Filtrowanie skrytek „Specjalne” obejmuje wydarzenia typu mega, giga, uroczystości społeczności, uroczystości sztabu, block party i labirynty
 - Zmiana: Filtrowanie skrytek „Inne” zawiera GCHQ, APE i nieznane typy
+- Naprawiono: Długość historii i ustawienia zbliżeniowe współdzieliły wartości suwaka
+- Naprawiono: Strona z wpisami przedmiotów podróżnych pokazywała pola czas/współrzędne dla przedmiotów podróżnych, które tego nie obsługują
+- Naprawiono: Kilka awarii

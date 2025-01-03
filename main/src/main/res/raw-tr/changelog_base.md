@@ -13,6 +13,7 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Change: "follow my location" moved to the map, giving more space for "live mode" button
 - Change: Make long-press pin more c:geo-like
 - Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
+- Fix: Map not updating changed caches
 
 ### Geocache ayrıntıları
 - New: Not yet existing variables used in projection get created in variable list
@@ -25,6 +26,8 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - Yeni: Çevrimdışı kayıtlar için üzerine yazma kaydını onayla
 - Yeni: Cache durumunu bir kayıt göndererek güncelle
 - Yeni: Cache detayları için renkli HTML kaynağı görüntüleme
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
 
 ### Genel
 - Change: Use elevation above mean sea level (if available, Android 14+ only)
@@ -43,3 +46,6 @@ New: Integrated Wherigo player (beta) - see menu entry on home screen.<br> (You 
 - New: Additional emojis for cache icons
 - Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
 - Change: Cache type filter "Other" includes GCHQ, APE and unknown types
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes
