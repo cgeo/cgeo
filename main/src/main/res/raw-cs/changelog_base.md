@@ -13,6 +13,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
 - Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
 - Změna: Funkce pro správu offline dat (stahování map, kontrola chybějících dat o trasování / stínování kopců) přesunuty do nabídky výběru map => „Správa offline dat“
+- Fix: Map not updating changed caches
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -25,6 +26,8 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Potvrzení přepsání logu v rychlém offline logu
 - Novinka: Aktualizace stavu kešky při odeslání logu
 - Novinka: Barevné zobrazení HTML zdroje s podrobnostmi o kešce
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
