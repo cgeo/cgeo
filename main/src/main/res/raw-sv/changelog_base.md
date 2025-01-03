@@ -3,8 +3,9 @@
 - Nyhet: Adaptiv terrängskuggning, valfritt högkvalitetsläge (UnifiedMap Mapsforge)
 
 ### Cachedetaljer
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
+- Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
+- Fix: Talservice avbryts vid skärmrotation
 
 ### Allmänt
 - New: Redesigned search page
+- New: Inventory count filter
