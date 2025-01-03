@@ -239,6 +239,8 @@ public final class LogUtils {
     @WorkerThread
     static LogResult editLogTaskLogic(final Geocache cache, final LogEntry oldEntry, final LogEntry newEntry, final Consumer<String> progress) {
         final ILoggingManager loggingManager = cache.getLoggingManager();
+        final IConnector cacheConnector = loggingManager.getConnector();
+
         //Upload changed log entry itself
         progress.accept(LocalizationUtils.getString(R.string.log_posting_log));
         final LogResult result = cache.getLoggingManager().editLog(newEntry);
@@ -255,7 +257,7 @@ public final class LogUtils {
         progress.accept(LocalizationUtils.getString(R.string.log_posting_save_internal));
 
         //adapt logs in database
-        final LogEntry adaptedNewLogEntry = newEntry.buildUpon()
+        final LogEntry adaptedNewLogEntry = applyCommonsToOwnLog(newEntry.buildUpon(), cacheConnector)
             .setLogImages(imgResult.middle)
             .build();
         changeLogsInDatabase(cache, logs -> {

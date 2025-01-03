@@ -525,6 +525,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.liveMapHandler.addChangedCache(changedCache);
         } else {
             viewModel.caches.write(caches -> {
+                //need to remove first to ensure cache is really swapped ("Geocache" uses an id-only "equals()" function)
                 caches.remove(changedCache);
                 caches.add(changedCache);
             });
