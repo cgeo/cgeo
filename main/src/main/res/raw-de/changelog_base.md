@@ -13,6 +13,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
 - Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
 - Änderung: Funktionen zum Verwalten von Offline-Daten (Karten-Download, Überprüfung auf fehlende Routing- / Kartenschattierungs-Daten) in das Karten-Auswahlmenü verschoben => "Offline-Daten verwalten"
+- Fix: Map not updating changed caches
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -25,6 +26,8 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Überschreiben des Logs beim Schnellen Offline-Log bestätigen
 - Neu: Aktualisieren des Cache-Status beim Senden eines Logs
 - Neu: Farbige HTML-Quellansicht der Cache-Details
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
