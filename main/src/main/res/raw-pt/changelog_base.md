@@ -13,6 +13,7 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Alteração: "Seguir a minha localização" foi movido para o mapa, dando mais espaço para o botão "mapa em tempo real"
 - Alteração: Pin de pressão longa com aparência do estilo do c:geo
 - Alteração: Funções de gestão de dados offline (descarregar mapas, verificar rotas em falta, dados de sombreado de altitude) movidas para o menu de selecção do mapa => "Gerir dados offline"
+- Fix: Map not updating changed caches
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
@@ -25,6 +26,8 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Confirmar sobrescrever registo no registo rápido offline
 - Novo: Actualização do estado da geocache ao enviar um registo
 - Novo: Visualização dos detalhes das geocaches em HTML colorido
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
 
 ### Geral
 - Alteração: Usar altitude acima do nível médio do mar (se disponível, Android 14+ apenas)
