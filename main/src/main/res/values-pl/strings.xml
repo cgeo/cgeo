@@ -2383,7 +2383,6 @@
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
-    <string name="http429_warning">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
