@@ -2324,7 +2324,6 @@
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
-    <string name="http429_warning">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
     <string name="list_list_headline">Llistes:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
