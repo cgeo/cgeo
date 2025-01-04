@@ -562,7 +562,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 liveMapStatus.setImageResource(R.drawable.ic_menu_error);
                 liveMapStatus.getBackground().setTint(getResources().getColor(R.color.cacheMarker_archived));
                 liveMapStatus.setVisibility(View.VISIBLE);
-                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_error), "error not available"))).show());
+                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(getString(R.string.live_map_status_error))).show());
                 break;
             case STOPPED_PARTIAL_RESULT:
                 liveMapStatus.setImageResource(R.drawable.ic_menu_partial);
@@ -589,7 +589,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }
                 break;
             case STOPPED_OK:
-            // TODO: Add 429 as a case here instead of having it in AbstractNavigationBarMapActivity
             default:
                 break;
         }
