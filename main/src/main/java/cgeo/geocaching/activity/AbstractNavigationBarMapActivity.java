@@ -213,7 +213,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             public void onReceive(final Context context, final Intent intent) {
                 synchronized (this) {
                     if (close429warning == 0) {
-                        final ImageView v = findViewById(R.id.liveMapStatus);
+                        final ImageView v = findViewById(R.id.live_map_status);
                         if (v != null) {
                             v.setImageResource(R.drawable.warning);
                             v.getBackground().setTint(getResources().getColor(R.color.colorAccent));
@@ -225,7 +225,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         synchronized (this) {
                             if (System.currentTimeMillis() > close429warning) {
-                                final View v = findViewById(R.id.liveMapStatus);
+                                final View v = findViewById(R.id.live_map_status);
                                 if (v != null) {
                                     v.setVisibility(View.GONE);
                                 }

@@ -181,6 +181,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         acquireUnifiedMap(this);
 
         HideActionBarUtils.setContentView(this, R.layout.unifiedmap_activity, true);
+        if (null != findViewById(R.id.live_map_status)) {
+            findViewById(R.id.live_map_status).getBackground().mutate();
+        }
 
         viewModel = new ViewModelProvider(this).get(UnifiedMapViewModel.class);
 
@@ -545,7 +548,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     public void setProgressSpinner(final LiveMapGeocacheLoader.State status) {
         final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
-        final ImageView liveMapStatus = findViewById(R.id.liveMapStatus);
+        final ImageView liveMapStatus = findViewById(R.id.live_map_status);
         if (spinner == null || liveMapStatus == null) {
             return;
         }
