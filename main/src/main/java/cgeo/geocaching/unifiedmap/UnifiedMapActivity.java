@@ -274,7 +274,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.observeForNotification(this, this::refreshListChooser);
         viewModel.viewportIdle.observe(this, vp -> {
             refreshListChooser();
-            refreshWaypoints(viewModel, getFilterContext(), vp);
+            refreshWaypoints(viewModel, getFilterContext(), vp, mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_TargetGeocode);
         });
 
 
@@ -576,18 +576,27 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport) {
-        refreshWaypoints(viewModel, filterContext.get(), viewport);
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport) {
+        refreshWaypoints(viewModel, filter, viewport, false);
     }
 
-    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport) {
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport) {
+        refreshWaypoints(viewModel, filterContext.get(), viewport, false);
+    }
+
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport, final boolean isMapForSingleCache) {
+        refreshWaypoints(viewModel, filterContext.get(), viewport, isMapForSingleCache);
+    }
+
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport, final boolean isMapForSingleCache) {
 
         if (viewport == null || viewport.isJustADot()) {
             viewModel.waypoints.write(Set::clear);
             return;
         }
+
         //should waypoints be displayed at all?
-        final boolean waypointsAreVisible = viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold();
+        final boolean waypointsAreVisible = isMapForSingleCache || viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold();
         if (!waypointsAreVisible) {
             viewModel.waypoints.write(Set::clear);
             return;
@@ -599,6 +608,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final boolean showAll = Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
         if (showAll) {
             waypoints = DataStore.loadWaypoints(viewport);
+        } else if (isMapForSingleCache) {
+            waypoints = new HashSet<>(viewModel.waypoints.getListCopy());
         } else {
             waypoints = viewModel.caches.readWithResult(caches -> {
                 final Set<Waypoint> wpSet = new HashSet<>();
