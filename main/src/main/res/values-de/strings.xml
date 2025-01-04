@@ -2322,7 +2322,6 @@
         <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
-    <string name="http429_warning">Bitte langsamer, zu viele Anfragen an %s</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
