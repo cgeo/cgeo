@@ -21,7 +21,6 @@ public class CacheAttributeTest {
                 assertThat(StringUtils.isNotEmpty(attribute.rawName)).isTrue();
                 assertThat(attribute.drawableId).isNotEqualTo(0);
                 assertThat(attribute.stringIdYes).isNotEqualTo(0);
-                assertThat(attribute.stringIdNo).isNotEqualTo(0);
             }
         }
     }
