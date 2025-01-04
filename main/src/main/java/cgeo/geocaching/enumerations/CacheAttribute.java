@@ -38,6 +38,7 @@ public enum CacheAttribute {
     AVAILABLE(CacheAttributeCategory.CAT_LOCATION, 13, 39, "available", R.drawable.attribute_available, R.string.attribute_available_yes, R.string.attribute_available_no),
     NIGHT(CacheAttributeCategory.CAT_LOCATION, 14, 42, "night", R.drawable.attribute_night, R.string.attribute_night_yes, R.string.attribute_night_no),
     WINTER(CacheAttributeCategory.CAT_LOCATION, 15, 84, "winter", R.drawable.attribute_winter, R.string.attribute_winter_yes, R.string.attribute_winter_no),
+    CACTI(CacheAttributeCategory.CAT_LOCATION, 16, -1, "cacti", R.drawable.attribute_cacti, R.string.attribute_cacti_yes, 0),
     POISONOAK(CacheAttributeCategory.CAT_LOCATION, 17, 66, "poisonoak", R.drawable.attribute_poisonoak, R.string.attribute_poisonoak_yes, R.string.attribute_poisonoak_no),
     DANGEROUSANIMALS(CacheAttributeCategory.CAT_LOCATION, 18, 67, "dangerousanimals", R.drawable.attribute_dangerousanimals, R.string.attribute_dangerousanimals_yes, 0),
     TICKS(CacheAttributeCategory.CAT_LOCATION, 19, 64, "ticks", R.drawable.attribute_ticks, R.string.attribute_ticks_yes, 0),
