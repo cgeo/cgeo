@@ -205,6 +205,7 @@
 
     <!-- category map data: UnifiedMap -->
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
+    <string translatable="false" name="pref_previous_tileprovider">previous_tileprovider</string>
     <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_userDefinedTileProviderUri">userDefinedTileProviderUri</string>
 

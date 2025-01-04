@@ -1227,6 +1227,21 @@ public class Settings {
         }
     }
 
+    public static void setPreviousTileProvider(final AbstractTileProvider tileProvider) {
+        if (tileProvider != null) {
+            putString(R.string.pref_previous_tileprovider, tileProvider.getId());
+        }
+    }
+
+    public static AbstractTileProvider getPreviousTileProvider() {
+        final String tileProviderId = getString(R.string.pref_previous_tileprovider, null);
+        tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
+        if (tileProvider == null) {
+            tileProvider = TileProviderFactory.getAnyTileProvider();
+        }
+        return tileProvider;
+    }
+
     public static Set<String> getHideTileproviders() {
         final Set<String> empty = Collections.emptySet();
         if (sharedPrefs == null) {
