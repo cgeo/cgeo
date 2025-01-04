@@ -100,6 +100,7 @@ import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -859,6 +860,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         FilterUtils.initializeFilterMenu(this, this);
         MenuUtils.enableIconsInOverflowMenu(menu);
         this.toolbarMenu = menu;
+        initializeMapViewLongClick();
         return result;
     }
 
@@ -955,6 +957,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 mapFragment.setPreferredLanguage(language);
             } else if (tileProviderLocal != null) {
                 item.setChecked(true);
+                Settings.setPreviousTileProvider(tileProvider);
                 changeMapSource(tileProviderLocal);
             }
             if (mapFragment.onOptionsItemSelected(item)) {
@@ -1362,4 +1365,17 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         super.onDestroy();
     }
 
+    private void initializeMapViewLongClick() {
+        new Handler().post(() -> {
+            final View mapViewSelect = findViewById(R.id.menu_select_mapview);
+            if (mapViewSelect != null) {
+                mapViewSelect.setOnLongClickListener(v -> {
+                    final AbstractTileProvider localTileProvider = Settings.getPreviousTileProvider();
+                    Settings.setPreviousTileProvider(tileProvider);
+                    changeMapSource(localTileProvider);
+                    return true;
+                });
+            }
+        });
+    }
 }
