@@ -2381,7 +2381,6 @@
         <item quantity="other">Nastavit %d ikon kešek</item>
     </plurals>
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech kešek?</string>
-    <string name="http429_warning">Prosím, zpomalte, příliš mnoho požadavků na %s</string>
     <string name="list_list_headline">Seznamy:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d trasový bod extrahován</item>
