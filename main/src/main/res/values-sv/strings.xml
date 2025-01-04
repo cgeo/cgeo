@@ -2318,7 +2318,6 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
-    <string name="http429_warning">Var snäll och sakta ner, för många förfrågningar till %s</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
