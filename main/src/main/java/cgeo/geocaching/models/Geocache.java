@@ -1105,6 +1105,10 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public void setLists(final Set<Integer> lists) {
+        //special case: own list is passed. Ignore that. See #16505
+        if (lists == this.lists || this.lists.equals(lists)) {
+            return;
+        }
         this.lists.clear();
         if (lists != null) {
             this.lists.addAll(lists);
