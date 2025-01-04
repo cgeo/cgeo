@@ -2222,6 +2222,8 @@
     <string name="attribute_night_yes">Recommended at night</string>
     <string name="attribute_night_no">Not recommended at night</string>
     <string name="attribute_winter_yes">Available during winter</string>
+    <string name="attribute_cacti_yes">Cacti nearby</string>
+    <string name="attribute_cacti_no">No Cacti nearby</string>
     <string name="attribute_winter_no">Not available during winter</string>
     <string name="attribute_stealth_yes">Stealth required</string>
     <string name="attribute_stealth_no">Stealth not required</string>
