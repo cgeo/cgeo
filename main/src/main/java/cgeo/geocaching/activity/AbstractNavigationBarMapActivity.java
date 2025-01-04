@@ -232,7 +232,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                                 close429warning = 0;
                             }
                         }
-                    }, 1100);
+                    }, 5000);
                 }
             }
         });
