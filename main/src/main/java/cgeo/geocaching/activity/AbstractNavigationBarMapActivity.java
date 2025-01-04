@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -212,9 +213,11 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
             public void onReceive(final Context context, final Intent intent) {
                 synchronized (this) {
                     if (close429warning == 0) {
-                        final View v = findViewById(R.id.http429warning);
+                        final ImageView v = findViewById(R.id.liveMapStatus);
                         if (v != null) {
-                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(String.format(getString(R.string.http429_warning), intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
+                            v.setImageResource(R.drawable.warning);
+                            v.getBackground().setTint(getResources().getColor(R.color.colorAccent));
+                            v.setOnClickListener(v1 -> SimpleDialog.ofContext(AbstractNavigationBarMapActivity.this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_http429), intent.getStringExtra(HttpRequest.HTTP429_ADDRESS)))).show());
                             new Handler(Looper.getMainLooper()).post(() -> v.setVisibility(View.VISIBLE));
                         }
                     }
@@ -222,7 +225,7 @@ public abstract class AbstractNavigationBarMapActivity extends AbstractNavigatio
                     new Handler(Looper.getMainLooper()).postDelayed(() -> {
                         synchronized (this) {
                             if (System.currentTimeMillis() > close429warning) {
-                                final View v = findViewById(R.id.http429warning);
+                                final View v = findViewById(R.id.liveMapStatus);
                                 if (v != null) {
                                     v.setVisibility(View.GONE);
                                 }
