@@ -43,6 +43,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheListActionBarChooser;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.RepeatOnHoldListener;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ToggleItemType;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -95,15 +96,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
@@ -539,37 +541,59 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.notifyDataChanged(true); // TODO: necessary?
     }
 
+    private LiveMapGeocacheLoader.State oldStatus;
+
     public void setProgressSpinner(final LiveMapGeocacheLoader.State status) {
         final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
-        final LinearProgressIndicator spinnerError = findViewById(R.id.map_progressbar_error);
-        if (spinner == null || spinnerError == null) {
+        final ImageView liveMapStatus = findViewById(R.id.liveMapStatus);
+        if (spinner == null || liveMapStatus == null) {
             return;
         }
         Log.iForce("UnifiedMap:set progress to " + status);
 
         spinner.setVisibility(View.GONE);
-        spinnerError.setVisibility(View.GONE);
+        liveMapStatus.setVisibility(View.GONE);
         switch (status) {
             case RUNNING:
-                spinner.setIndicatorColor(getResources().getColor(R.color.colorAccent));
                 spinner.setVisibility(View.VISIBLE);
+                spinner.setIndeterminate(true);
                 break;
             case STOPPED_ERROR:
-                spinnerError.setIndicatorColor(Color.RED);
-                spinnerError.setVisibility(View.VISIBLE);
+                liveMapStatus.setImageResource(R.drawable.ic_menu_error);
+                liveMapStatus.getBackground().setTint(getResources().getColor(R.color.cacheMarker_archived));
+                liveMapStatus.setVisibility(View.VISIBLE);
+                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(String.format(getString(R.string.live_map_status_error), "error not available"))).show());
                 break;
             case STOPPED_PARTIAL_RESULT:
-                spinnerError.setIndicatorColor(Color.GRAY);
-                spinnerError.setVisibility(View.VISIBLE);
+                liveMapStatus.setImageResource(R.drawable.ic_menu_partial);
+                liveMapStatus.getBackground().setTint(getResources().getColor(R.color.osm_zoomcontrol));
+                liveMapStatus.setVisibility(View.VISIBLE);
+                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(getString(R.string.live_map_status_partial))).show());
                 break;
             case REQUESTED:
-                spinner.setIndicatorColor(Color.BLUE);
                 spinner.setVisibility(View.VISIBLE);
+                spinner.setIndeterminate(false);
+                if (oldStatus != status) {
+                    final CountDownTimer timer = new CountDownTimer(LiveMapGeocacheLoader.PROCESS_DELAY, 20) {
+                        @Override
+                        public void onTick(final long millisUntilFinished) {
+                            spinner.setProgress((int) ((LiveMapGeocacheLoader.PROCESS_DELAY - millisUntilFinished) * 100 / LiveMapGeocacheLoader.PROCESS_DELAY));
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            spinner.setProgress(100);
+                        }
+                    };
+                    timer.start();
+                }
                 break;
             case STOPPED_OK:
+            // TODO: Add 429 as a case here instead of having it in AbstractNavigationBarMapActivity
             default:
                 break;
         }
+        oldStatus = status;
     }
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport, final boolean forceWaypoints) {
