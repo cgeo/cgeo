@@ -274,7 +274,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.observeForNotification(this, this::refreshListChooser);
         viewModel.viewportIdle.observe(this, vp -> {
             refreshListChooser();
-            refreshWaypoints(viewModel, getFilterContext(), vp);
+            refreshWaypoints(viewModel, getFilterContext(), vp, mapType.isSingleCacheView());
         });
 
 
@@ -464,8 +464,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(searchResult);
                     if (viewport3.get() != null) {
-                        refreshWaypoints(viewModel, getFilterContext(), viewport3.get());
-                        //loadWaypoints(this, viewModel, viewport3.get());
+                        refreshWaypoints(viewModel, getFilterContext(), viewport3.get(), mapType.isSingleCacheView());
                     }
                 }, () -> {
                     if (viewport3.get() != null) {
@@ -483,7 +482,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     viewport2.set(DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(mapType.searchResult);
                     if (viewport2.get() != null) {
-                        refreshWaypoints(viewModel, getFilterContext(), viewport2.get());
+                        refreshWaypoints(viewModel, getFilterContext(), viewport2.get(), mapType.isSingleCacheView());
                     }
                 }, () -> {
                     if (viewport2.get() != null) {
@@ -509,9 +508,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.liveMapHandler.setEnabled(mapType.enableLiveMap());
         if (mapType.enableLiveMap()) {
             refreshMapData(true);
-//            if (loadInBackgroundHandler == null) {
-//                loadInBackgroundHandler = new LoadInBackgroundHandler(this);
-//            }
         }
     }
 
@@ -576,18 +572,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     }
 
-    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport) {
-        refreshWaypoints(viewModel, filterContext.get(), viewport);
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilterContext filterContext, final Viewport viewport, final boolean forceWaypoints) {
+        refreshWaypoints(viewModel, filterContext.get(), viewport, forceWaypoints);
     }
 
-    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport) {
+    public static void refreshWaypoints(final UnifiedMapViewModel viewModel, final GeocacheFilter filter, final Viewport viewport, final boolean forceWaypoints) {
 
-        if (viewport == null || viewport.isJustADot()) {
-            viewModel.waypoints.write(Set::clear);
+        if (!Viewport.isValid(viewport)) {
             return;
         }
+
         //should waypoints be displayed at all?
-        final boolean waypointsAreVisible = viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold();
+        final boolean waypointsAreVisible = forceWaypoints || (viewModel.caches.readWithResult(viewport::count) < Settings.getWayPointsThreshold());
         if (!waypointsAreVisible) {
             viewModel.waypoints.write(Set::clear);
             return;
@@ -1013,6 +1009,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched, final boolean filterChanged) {
         // parameter "circlesSwitched" is required for being called by showSettingsPopup only; can be removed after removing old map implementations
+        if (!viewModel.liveMapHandler.isEnabled() && filterChanged) {
+            reloadCachesAndWaypoints(false);
+        }
         refreshMapData(filterChanged);
     }
 

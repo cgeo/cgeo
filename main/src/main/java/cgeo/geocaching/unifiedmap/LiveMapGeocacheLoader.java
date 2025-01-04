@@ -22,9 +22,9 @@ public class LiveMapGeocacheLoader {
 
     private static final String LOGPRAEFIX = "LiveMapGeocacheLoader:";
 
-    private static final long MIN_AGE_BETWEEN_ONLINE_REQUESTS = 3000; // 3 seconds
-    private static final long PROCESS_DELAY = 2000; // 2 seconds
-    private static final long CACHE_EXPIRY = 10 * 60000; // 10 minutes
+    private static final long MIN_AGE_BETWEEN_ONLINE_REQUESTS = 2000; // value is in milliseconds
+    public static final long PROCESS_DELAY = 1000; // value is in milliseconds
+    private static final long CACHE_EXPIRY = 10 * 60000; // value is in milliseconds
 
     private final Disposable actionDisposable;
 
@@ -45,7 +45,7 @@ public class LiveMapGeocacheLoader {
         private Set<Geocache> lastResult;
         private GeocacheFilter lastFilter;
         private Viewport lastViewport;
-        private boolean lastResultOverflown;
+        private boolean lastResultIsPartial;
 
         Action(final LiveMapGeocacheLoader loader, final Consumer<State> onStateChange, final Consumer<Set<Geocache>> onResult) {
             this.onStateChange = onStateChange;
@@ -86,7 +86,7 @@ public class LiveMapGeocacheLoader {
                 setState(State.RUNNING);
                 final Set<Geocache> result;
                 boolean resultIsError = false;
-                boolean resultIsOverflown = false;
+                boolean resultIsPartial = false;
                 if (!Viewport.isValid(viewport)) {
                     // -> invalid viewport
                     logResult = "invalidViewport";
@@ -94,7 +94,7 @@ public class LiveMapGeocacheLoader {
                 } else if (ageOfLastRequest < CACHE_EXPIRY && lastViewport != null && lastViewport.includes(viewport) && GeocacheFilter.filtersSame(lastFilter, filter)) {
                     // -> serve from cache
                     result = lastResult;
-                    resultIsOverflown = lastResultOverflown;
+                    resultIsPartial = lastResultIsPartial;
                     logResult = "cache hit";
                 } else if (!Viewport.isValid(viewport)) {
                     logResult = "invalidViewport";
@@ -116,19 +116,20 @@ public class LiveMapGeocacheLoader {
                     lastRequest = System.currentTimeMillis();
 
                     //store in cache
-                    lastResult = resultIsError ? null : result;
-                    lastViewport = resultIsError ? null : viewport;
-                    lastFilter = resultIsError ? null : filter;
-                    lastResultOverflown = isPartial;
-                    resultIsOverflown = isPartial;
-                    if (resultIsOverflown) {
+                    final boolean keepInCache = !resultIsError || !result.isEmpty();
+                    lastResult = keepInCache ? result : null;
+                    lastViewport = keepInCache ? viewport : null;
+                    lastFilter = keepInCache ? filter : null;
+                    lastResultIsPartial = isPartial || (keepInCache && resultIsError);
+                    resultIsPartial = lastResultIsPartial;
+                    if (resultIsPartial) {
                         //hack for GC.com: reduce the caches' "lastViewport" to the smallest viewport containing all GC.com.caches
                         lastViewport = Viewport.containingGCliveCaches(result);
                     }
                 }
 
                 //cleanup and send result
-                setState(resultIsError ? State.STOPPED_ERROR : (resultIsOverflown ? State.STOPPED_PARTIAL_RESULT : State.STOPPED_OK));
+                setState(resultIsError ? State.STOPPED_ERROR : (resultIsPartial ? State.STOPPED_PARTIAL_RESULT : State.STOPPED_OK));
                 if (!resultIsError) {
                     onResult.accept(result);
                 }

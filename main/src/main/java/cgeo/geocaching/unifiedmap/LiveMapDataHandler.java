@@ -59,7 +59,7 @@ public class LiveMapDataHandler {
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
             this.model = model;
-            this.liveLoader = new LiveMapGeocacheLoader(state -> model.liveLoadStatus.postValue(state), this::updateLiveLoad);
+            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, this::updateLiveLoad);
         }
 
         private void updateLiveLoad(final Set<Geocache> result) {
@@ -69,14 +69,10 @@ public class LiveMapDataHandler {
                 filter.filterList(result);
             }
             model.caches.write(caches -> {
-                //only add caches.
-                // This will effectively leave caches untouched which are already in cache list (eg from database)
-                // Also, the data displayed for those caches (e.g. archive/disabled state) remains at state of the values stored in database
-                // -> THIS would be the place in code to implement other "merging" logics
-                // (eg displaying "archive/disabled" state from online if available
+                caches.removeAll(result);
                 caches.addAll(result);
             });
-            UnifiedMapActivity.refreshWaypoints(model, filter, viewport);
+            UnifiedMapActivity.refreshWaypoints(model, filter, viewport, false);
         }
 
         @Override
@@ -128,7 +124,7 @@ public class LiveMapDataHandler {
                 }
                 //waypoints
                 if (filterChanged || mapMoved || params.waypointFilterChanged) {
-                    UnifiedMapActivity.refreshWaypoints(model, params.filter, params.viewport);
+                    UnifiedMapActivity.refreshWaypoints(model, params.filter, params.viewport, false);
                 }
                 lastViewport = params.viewport;
                 lastFilter = params.filter;
@@ -168,6 +164,10 @@ public class LiveMapDataHandler {
     public synchronized void setEnabled(final boolean enabled) {
         this.params.enabled = enabled;
         this.dirty = true;
+    }
+
+    public synchronized  boolean isEnabled() {
+        return this.params.enabled;
     }
 
     public synchronized void setWaypointFilter(final boolean changed) {
