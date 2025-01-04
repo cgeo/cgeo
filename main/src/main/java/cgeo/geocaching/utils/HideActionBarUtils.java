@@ -43,6 +43,7 @@ public class HideActionBarUtils {
         ViewUtils.applyToView(activity.findViewById(R.id.filterbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
         ViewUtils.applyToView(activity.findViewById(R.id.distanceinfo), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
         ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
+        ViewUtils.applyToView(activity.findViewById(R.id.map_progressbar_error), view -> view.animate().translationY(actionBarShowing ? 0 : -spacer.getHeight()).start());
         return actionBarShowing;
     }
 
