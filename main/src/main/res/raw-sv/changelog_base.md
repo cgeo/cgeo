@@ -13,7 +13,7 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Förändring: "Följ min plats" flyttad till kartan, vilket ger mer utrymme för "live-läge" knappen
 - Ändra: Gör långtryckstift mer c:geo-liknande
 - Change: Offline data management functions (download maps, check for missing routing / hillshading data) moved to map selection menu => "Manage offline data"
-- Fix: Map not updating changed caches
+- Fix: Karta uppdaterar inte ändrade cacher
 
 ### Cachedetaljer
 - Ny: Ännu inte existerande variabler som används i projektionen skapas i variabellistan
@@ -26,8 +26,8 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Nytt: Bekräfta att skriva över loggen på snabb offline-logg
 - Nytt: Uppdatera cache-status när du skickar en logg
 - New: Colored HTML source view of cache details
-- Fix: checksum(0) returning wrong value
-- Fix: Editing logs removes "friends" status
+- Fix: checksum(0) returnerar fel värde
+- Fix: Redigering av loggar tar bort "vänner"-status
 
 ### Allmänt
 - Förändring: Använd höjd över havsytan (om tillgängligt, endast för Android 14+)
