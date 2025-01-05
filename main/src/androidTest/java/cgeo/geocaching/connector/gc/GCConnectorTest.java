@@ -26,7 +26,7 @@ public class GCConnectorTest  {
             final SearchResult searchResult = ConnectorFactory.searchByViewport(viewport, null);
             assertThat(searchResult).isNotNull();
             assertThat(searchResult.isEmpty()).isFalse();
-            assertThat(searchResult.getGeocodes()).contains("GC1J1CT");
+            assertThat(searchResult.getGeocodes()).contains("GC58BD1");
             assertThat(searchResult.getGeocodes()).doesNotContain("GC4ER5H");
         }
 
