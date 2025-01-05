@@ -8,4 +8,4 @@
 
 ### Allmänt
 - New: Redesigned search page
-- New: Inventory count filter
+- Nytt: Filter för antal i inventariet
