@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
@@ -21,17 +22,22 @@ public class UnifiedMapType implements Parcelable {
     public static final String BUNDLE_MAPTYPE = "maptype";
 
     public enum UnifiedMapTypeType {
-        UMTT_Undefined,         // invalid state
-        UMTT_PlainMap,          // open map (from bottom navigation)
-        UMTT_Viewport,          // open map, shows and scales to a given Viewport
-        UMTT_TargetGeocode,     // set cache or waypoint as target
-        UMTT_TargetCoords,      // set coords as target
-        UMTT_List,              // display list contents
-        UMTT_SearchResult       // show and scale to searchresult
+        UMTT_PlainMap(MapMode.LIVE),          // open map (from bottom navigation)
+        UMTT_Viewport(MapMode.LIVE),          // open map, shows and scales to a given Viewport
+        UMTT_TargetGeocode(MapMode.SINGLE),     // set cache or waypoint as target
+        UMTT_TargetCoords(MapMode.COORDS),      // set coords as target
+        UMTT_List(MapMode.LIST),              // display list contents
+        UMTT_SearchResult(MapMode.LIST);       // show and scale to searchresult
         // to be extended
+
+        public final MapMode compatibilityMapMode;
+
+        UnifiedMapTypeType(final MapMode compatibilityMapMode) {
+            this.compatibilityMapMode = compatibilityMapMode;
+        }
     }
 
-    public UnifiedMapTypeType type = UnifiedMapTypeType.UMTT_Undefined;
+    public UnifiedMapTypeType type;
     public String target = null;
     public Geopoint coords = null;
     public SearchResult searchResult = null;

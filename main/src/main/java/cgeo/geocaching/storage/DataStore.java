@@ -4444,6 +4444,11 @@ public class DataStore {
 
     @NonNull
     public static List<StoredList> getLists() {
+        return getStoredLists(null);
+    }
+
+    private static List<StoredList> getStoredLists(@Nullable final Integer listId) {
+
         return withAccessLock(() -> {
 
             if (!init(false)) {
@@ -4452,12 +4457,15 @@ public class DataStore {
 
             final Resources res = CgeoApplication.getInstance().getResources();
             final List<StoredList> lists = new ArrayList<>();
-            lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+            if (listId == null) {
+                lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+            }
 
             try {
                 final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji, COUNT(c.geocode) AS count" +
                         " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                         " ON l._id + " + customListIdOffset + " = c.list_id" +
+                        (listId == null ? "" : " WHERE l._id = " + String.valueOf(listId - customListIdOffset)) +
                         " GROUP BY l._id" +
                         " ORDER BY l.title COLLATE NOCASE ASC";
 
@@ -4488,15 +4496,7 @@ public class DataStore {
 
             init();
             if (id >= customListIdOffset) {
-                final Cursor cursor = database.query(
-                        dbTableLists,
-                        new String[]{"_id", "title", "emoji", FIELD_LISTS_PREVENTASKFORDELETION},
-                        "_id = ? ",
-                        new String[]{String.valueOf(id - customListIdOffset)},
-                        null,
-                        null,
-                        null);
-                final List<StoredList> lists = getListsFromCursor(cursor);
+                final List<StoredList> lists = getStoredLists(id);
                 if (!lists.isEmpty()) {
                     return lists.get(0);
                 }

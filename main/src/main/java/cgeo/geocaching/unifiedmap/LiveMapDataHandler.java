@@ -72,7 +72,7 @@ public class LiveMapDataHandler {
                 caches.removeAll(result);
                 caches.addAll(result);
             });
-            UnifiedMapActivity.refreshWaypoints(model, filter, viewport, false);
+            UnifiedMapActivity.refreshWaypoints(model); //, filter, viewport, false);
         }
 
         @Override
@@ -124,7 +124,7 @@ public class LiveMapDataHandler {
                 }
                 //waypoints
                 if (filterChanged || mapMoved || params.waypointFilterChanged) {
-                    UnifiedMapActivity.refreshWaypoints(model, params.filter, params.viewport, false);
+                    UnifiedMapActivity.refreshWaypoints(model); //, params.filter, params.viewport, false);
                 }
                 if (mapMoved) {
                     lastViewport = params.viewport;
