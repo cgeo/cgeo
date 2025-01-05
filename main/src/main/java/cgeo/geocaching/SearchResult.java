@@ -383,19 +383,24 @@ public class SearchResult implements Parcelable {
             @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
 
         return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
-            if (!connector.isActive()) {
+            try {
+                if (connector == null || !connector.isActive()) {
+                    return Maybe.empty();
+                }
+                return Maybe.fromCallable(() -> {
+                    try {
+                        return func.apply(connector);
+                    } catch (final Throwable t) {
+                        Log.w("SearchResult.parallelCombineActive: swallowing error from connector " + connector, t);
+                        final SearchResult errorResult = new SearchResult();
+                        errorResult.setError(connector, StatusCode.UNKNOWN_ERROR);
+                        return errorResult;
+                    }
+                }).subscribeOn(AndroidRxUtils.networkScheduler);
+            } catch (Throwable t) {
+                Log.w("SearchResult.parallelCombineActive.maybe-creation: swallowing error from connector " + connector, t);
                 return Maybe.empty();
             }
-            return Maybe.fromCallable(() -> {
-                try {
-                    return func.apply(connector);
-                } catch (final Throwable t) {
-                    Log.w("SearchResult.parallelCombineActive: swallowing error from connector " + connector, t);
-                    final SearchResult errorResult = new SearchResult();
-                    errorResult.setError(connector, StatusCode.UNKNOWN_ERROR);
-                    return errorResult;
-                }
-            }).subscribeOn(AndroidRxUtils.networkScheduler);
         }).reduce(initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {
             try {
                 searchResult.addSearchResult(searchResult2);

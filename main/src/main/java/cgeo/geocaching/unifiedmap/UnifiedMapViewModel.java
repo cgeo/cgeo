@@ -22,6 +22,7 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -51,10 +52,12 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     public final MutableLiveData<Target> target = new MutableLiveData<>();
     public final MutableLiveData<SheetInfo> sheetInfo = new MutableLiveData<>();
 
+    @NonNull public UnifiedMapType mapType = new UnifiedMapType();
+
     //Viewport will be refreshed as the map moves. Only valid viewports are used.
-    public final MutableLiveData<Viewport> viewport = new MutableLiveData<>();
+    public final MutableLiveData<Viewport> viewport = new MutableLiveData<>(Viewport.EMPTY);
     //Viewport will be refreshed ONLY if the map was not moved for 500ms. Only valid viewports are used.
-    public final MutableLiveData<Viewport> viewportIdle = new MutableLiveData<>();
+    public final MutableLiveData<Viewport> viewportIdle = new MutableLiveData<>(Viewport.EMPTY);
 
     public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
