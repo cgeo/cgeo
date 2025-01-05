@@ -532,6 +532,7 @@
     <string name="cache_filter_hidden">Gömd datum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Antal loggar</string>
+    <string name="cache_filter_inventory_count">Antal inventarier</string>
     <string name="cache_filter_last_found">Senast hittad</string>
     <string name="cache_filter_log_entry">Loggpost</string>
     <string name="cache_filter_location">Plats</string>
@@ -2318,6 +2319,7 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_error">Fel vid inläsning av kartdata</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
