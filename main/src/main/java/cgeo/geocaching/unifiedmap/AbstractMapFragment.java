@@ -47,12 +47,14 @@ public abstract class AbstractMapFragment extends Fragment {
     private final class ViewportUpdater implements Runnable {
 
         private static final int CHECK_RATE_MS = 250;
-        private static final int STABLE_RATE_MS = 500;
+        private static final int IDLE_STABLE_RATE_MS = 500;
+        private static final int IDLE_MOVING_RATE_MS = 5000;
 
         private final Disposable disposable;
         private Viewport lastViewport;
-        private Viewport lastStableViewport;
+        private Viewport lastIdleViewport;
         private long viewportStableSince = -1;
+        private long lastIdleViewportTime;
 
         @Override
         public void run() {
@@ -60,16 +62,19 @@ public abstract class AbstractMapFragment extends Fragment {
             if (!Viewport.isValid(viewport)) {
                 return;
             }
+            final long currentTime = System.currentTimeMillis();
             //if viewport changed, then set it
             if (!viewport.equals(lastViewport)) {
                 viewModel.viewport.postValue(viewport);
                 lastViewport = viewport;
-                viewportStableSince = System.currentTimeMillis();
+                viewportStableSince = currentTime;
             }
-            //if viewport remained stable for some time then change it
-            if (!viewport.equals(lastStableViewport) && (System.currentTimeMillis() - viewportStableSince > STABLE_RATE_MS)) {
+            //if viewport remained stable for some time OR a long time has passed then change it
+
+            if (!viewport.equals(lastIdleViewport) && ((currentTime - viewportStableSince > IDLE_STABLE_RATE_MS) || (currentTime - lastIdleViewportTime > IDLE_MOVING_RATE_MS))) {
                 viewModel.viewportIdle.postValue(viewport);
-                lastStableViewport = viewport;
+                lastIdleViewport = viewport;
+                lastIdleViewportTime = currentTime;
             }
         }
 

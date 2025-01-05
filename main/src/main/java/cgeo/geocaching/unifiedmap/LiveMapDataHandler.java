@@ -126,7 +126,9 @@ public class LiveMapDataHandler {
                 if (filterChanged || mapMoved || params.waypointFilterChanged) {
                     UnifiedMapActivity.refreshWaypoints(model, params.filter, params.viewport, false);
                 }
-                lastViewport = params.viewport;
+                if (mapMoved) {
+                    lastViewport = params.viewport;
+                }
                 lastFilter = params.filter;
                 lastLiveEnabled = params.liveEnabled;
             } catch (final Exception e) {
