@@ -35,6 +35,7 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
+    <string name="other">Autres</string>
     <string name="all_types_short">Toutes</string>
     <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
@@ -834,6 +835,7 @@
     <string name="init_login_popup_failed_reason">La connexion a échoué : %s</string>
     <string name="init_login_popup_not_authorized">Non autorisé</string>
     <string name="init_login_popup_not_logged_in">Non connecté</string>
+    <string name="init_login_manual">Connexion manuelle</string>
     <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
     <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
     <string name="init_authorization_credential_username">Nom d\'utilisateur</string>
@@ -1267,6 +1269,9 @@
     <string name="err_auth_geokrety_bad_password">Votre nom d\'utilisateur ou votre mot de passe semble invalide.</string>
     <string name="err_auth_geokrety_unknown">%1$s a retourné : %2$s.</string>
     <!-- auth GC -->
+    <string name="err_auth_gc_unknown_error_generic">Erreur inconnue</string>
+    <string name="err_auth_gc_communication_error">Erreur de communication</string>
+    <string name="err_auth_gc_manual_error">Erreur de connexion manuelle : %s</string>
     <!-- cache -->
     <plurals name="cache_counts">
         <item quantity="one">%1$d cache</item>
