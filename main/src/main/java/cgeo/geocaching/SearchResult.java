@@ -397,8 +397,13 @@ public class SearchResult implements Parcelable {
                 }
             }).subscribeOn(AndroidRxUtils.networkScheduler);
         }).reduce(initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {
-            searchResult.addSearchResult(searchResult2);
-            return searchResult;
+            try {
+                searchResult.addSearchResult(searchResult2);
+                return searchResult;
+            } catch (final Throwable t) {
+                Log.w("SearchResult.parallelCombineActive-reduce: swallowing error", t);
+                return searchResult;
+            }
         }).blockingGet();
     }
 

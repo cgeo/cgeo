@@ -20,6 +20,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.LocationDataProvider;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
@@ -84,20 +85,26 @@ final class ECApi {
     @WorkerThread
     static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
-        if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
-            return Collections.emptyList();
-        }
-
-        final Parameters params = new Parameters("fnc", "bbox");
-        params.add("lat1", String.valueOf(viewport.getLatitudeMin()));
-        params.add("lat2", String.valueOf(viewport.getLatitudeMax()));
-        params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
-        params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
+        final ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "ECApi.searchByBBox[vp=" + viewport + "]");
         try {
+            if (viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+                return Collections.emptyList();
+            }
+
+            final Parameters params = new Parameters("fnc", "bbox");
+            params.add("lat1", String.valueOf(viewport.getLatitudeMin()));
+            params.add("lat2", String.valueOf(viewport.getLatitudeMax()));
+            params.add("lon1", String.valueOf(viewport.getLongitudeMin()));
+            params.add("lon2", String.valueOf(viewport.getLongitudeMax()));
+
             final Response response = apiRequest(params).blockingGet();
             return importCachesFromJSON(response);
-        } catch (final Exception ignored) {
+        } catch (final RuntimeException ex) {
+            cLog.setException(ex);
+            Log.w("ECApi: exception getting bbox:" + viewport, ex);
             return Collections.emptyList();
+        } finally {
+            cLog.close();
         }
     }
 
