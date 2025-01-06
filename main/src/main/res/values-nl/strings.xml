@@ -532,6 +532,7 @@
     <string name="cache_filter_hidden">Verstopt op</string>
     <string name="cache_filter_eventdate">Evenement datum</string>
     <string name="cache_filter_logs_count">Aantal logs</string>
+    <string name="cache_filter_inventory_count">Inhoud Aantal</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
     <string name="cache_filter_location">Locatie</string>
@@ -1465,6 +1466,7 @@
     <string name="cache_menu_details">Details</string>
     <string name="cache_menu_refresh">Verversen</string>
     <string name="cache_menu_share">Deel cache</string>
+    <string name="cache_menu_share_with_data">Delen incl. gebruikersgegevens</string>
     <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
     <string name="cache_menu_copy_list">Naar een andere lijst kopiëren</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -2325,6 +2327,9 @@
         <item quantity="other">Cache pictogrammen %d instellen</item>
     </plurals>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
+    <string name="live_map_status_http429">Niet zo snel, te veel aanvragen naar %s</string>
+    <string name="live_map_status_error">Fout bij het laden van kaartgegevens</string>
+    <string name="live_map_status_partial">Gedeeltelijk resultaat, zoom in om het aantal te laden caches te verminderen.</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint geëxtraheerd</item>
@@ -2446,6 +2451,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nee</string>
     <string name="show_all">Alles weergeven</string>
+    <string name="lists_only_new">Alleen nieuwe</string>
+    <string name="pq_only_dl">Downloadbaar</string>
     <string name="routingmode_straight">Recht</string>
     <string name="routingmode_walk">Lopen</string>
     <string name="routingmode_bike">Fiets</string>
