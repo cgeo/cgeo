@@ -3,9 +3,9 @@
 - Nieuw: Adaptieve Hoogtelijnen, optionele hoge kwaliteit modus (UnifiedMap Mapsforge)
 
 ### Cache details
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
+- Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
+- Oplossing: Spraakservice onderbroken bij scherm rotatie
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
-- New: Inventory count filter
+- Nieuw: Inhoud telling filter
