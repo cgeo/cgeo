@@ -2617,8 +2617,8 @@
 
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
     <string name="live_map_status_http429">Please slow down, too many requests to %s</string>
-    <string name="live_map_status_error">Error loading map data</string>
-    <string name="live_map_status_partial">Partial result, zoom in to reduce the number of caches to load.</string>
+    <string name="live_map_status_error">Error loading map data: %s</string>
+    <string name="live_map_status_partial">Partial result for: %s. Zoom in to reduce the number of caches to load.</string>
 
     <string name="list_list_headline">Lists:</string>
     <plurals name="extract_waypoints_result">

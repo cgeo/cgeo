@@ -80,7 +80,6 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_LOWPOWER;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO_PRECISE;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
-import static cgeo.geocaching.unifiedmap.UnifiedMapState.BUNDLE_MAPSTATE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_List;
 import static cgeo.geocaching.unifiedmap.UnifiedMapType.UnifiedMapTypeType.UMTT_PlainMap;
@@ -98,6 +97,7 @@ import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -122,6 +122,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import cz.matejcik.openwig.Zone;
@@ -134,8 +135,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // Activity should only contain display logic, everything else goes into the ViewModel
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
-    private static final String BUNDLE_OVERRIDEPOSITIONANDZOOM = "overridePositionAndZoom";
-
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
     private UnifiedMapViewModel viewModel = null;
@@ -145,7 +144,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     GeoItemLayer<String> clickableItemsLayer;
     GeoItemLayer<String> nonClickableItemsLayer;
     NavigationTargetLayer navigationTargetLayer = null;
-    //private LoadInBackgroundHandler loadInBackgroundHandler = null;
 
     private LocUpdater geoDirUpdate;
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -155,7 +153,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private ElevationChart elevationChartUtils = null;
     private String lastElevationChartRoute = null; // null=none, empty=individual route, other=track
 
-    private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
+    //private boolean overridePositionAndZoom = false; // to preserve those on config changes in favour to mapType defaults
+    private enum CacheReloadState { REFRESH, INITIALIZE, RESUME }
+    private CacheReloadState cacheReloadState = CacheReloadState.REFRESH;
 
     private int wherigoListenerId;
 
@@ -167,7 +167,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
     });
 
-    private UnifiedMapState lastMapStateFromOnPause = null;
     private static WeakReference<UnifiedMapActivity> unifiedMapActivity = new WeakReference<>(null);
 
     @Override
@@ -189,10 +188,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.mapType = extraMapType;
         }
 
-        // Get fresh map information from the bundle if any
-        if (savedInstanceState != null) {
-            overridePositionAndZoom = savedInstanceState.getBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, false);
-        }
+        // set cache reload state according to whether this is a first map initialization or a resumte
+        this.cacheReloadState = savedInstanceState == null ? CacheReloadState.INITIALIZE : CacheReloadState.RESUME;
 
         viewModel.followMyLocation.setValue(viewModel.mapType.followMyLocation);
 
@@ -207,7 +204,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
 
         viewModel.viewportIdle.observe(this, viewport -> viewModel.liveMapHandler.setViewport(viewport));
-        viewModel.liveLoadStatus.observe(this, this::setProgressSpinner);
+        viewModel.liveLoadStatus.observe(this, this::setLiveLoadStatus);
 
         viewModel.trackUpdater.observe(this, event -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), viewModel.individualRoute.getValue()));
         viewModel.individualRoute.observe(this, individualRoute -> routeTrackUtils.updateRouteTrackButtonVisibility(findViewById(R.id.container_individualroute), individualRoute));
@@ -247,8 +244,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         viewModel.init(routeTrackUtils);
 
-        final UnifiedMapState mapState = savedInstanceState != null ? savedInstanceState.getParcelable(BUNDLE_MAPSTATE) : null;
-        changeMapSource(Settings.getTileProvider(), mapState);
+        changeMapSource(Settings.getTileProvider());
 
         FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
@@ -311,7 +307,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         return layers;
     }
 
-    private void changeMapSource(final AbstractTileProvider newSource, @Nullable final UnifiedMapState mapState) {
+    private void changeMapSource(final AbstractTileProvider newSource) {
         final AbstractTileProvider oldProvider = tileProvider;
         final AbstractMapFragment oldFragment = mapFragment;
 
@@ -323,9 +319,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         Settings.setTileProvider(newSource); // store new tileProvider, so that next getRenderTheme retrieves correct tileProvider-specific theme
 
         if (oldFragment != null) {
-            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource, mapState));
+            mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource));
         } else {
-            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode), null, () -> onMapReadyTasks(newSource, mapState));
+            mapFragment.init(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode), null, () -> onMapReadyTasks(newSource));
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -333,12 +329,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 .commit();
     }
 
-    private void onMapReadyTasks(final AbstractTileProvider newSource, @Nullable final UnifiedMapState mapState) {
+    private void onMapReadyTasks(final AbstractTileProvider newSource) {
         TileProviderFactory.resetLanguages();
         mapFragment.setTileSource(newSource, false);
         Settings.setTileProvider(newSource);
-
-        final boolean setDefaultCenterAndZoom = !overridePositionAndZoom && mapState == null;
         // map settings popup
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, viewModel.individualRoute.getValue(), this::refreshMapDataAfterSettingsChanged, this::routingModeChanged, this::compactIconModeChanged, () -> viewModel.configureProximityNotification(), viewModel.mapType.filterContext));
 
@@ -348,13 +342,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         // react to mapType
         viewModel.coordsIndicator.setValue(null);
-        reloadCachesAndWaypoints(setDefaultCenterAndZoom);
+        reloadCachesAndWaypoints();
 
-        // override some settings, if given
-        if (mapState != null) {
-            mapFragment.setCenter(mapState.center);
-            mapFragment.setZoom(mapState.zoomLevel);
-        }
         // both maps have invalid values for bounding box in the beginning, so need to delay counting a bit
         ActivityMixin.postDelayed(this::refreshListChooser, 2000);
 
@@ -363,7 +352,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         setMapRotation(null, Settings.getMapRotation());
     }
 
-    private void reloadCachesAndWaypoints(final boolean setDefaultCenterAndZoom) {
+    private void reloadCachesAndWaypoints() {
+        final boolean setDefaultCenterAndZoom = this.cacheReloadState == CacheReloadState.INITIALIZE;
+
         final UnifiedMapType mapType = viewModel.mapType;
         switch (mapType.type) {
             case UMTT_PlainMap:
@@ -467,11 +458,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 // nothing to do
                 break;
         }
-        if (overridePositionAndZoom) {
+
+
+        if (this.cacheReloadState == CacheReloadState.RESUME) {
             mapFragment.setZoom(Settings.getMapZoom(viewModel.mapType.type.compatibilityMapMode));
             mapFragment.setCenter(Settings.getUMMapCenter());
-            overridePositionAndZoom = false;
         }
+        //reset cacheReloadState
+        this.cacheReloadState = CacheReloadState.REFRESH;
+
         refreshListChooser();
 
         // only initialize loadInBackgroundHandler if caches should actually be loaded
@@ -489,7 +484,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         if (viewModel.mapType.enableLiveMap()) {
             viewModel.liveMapHandler.addChangedCache(changedCache);
-        } else {
+        } else if (!viewModel.mapType.isSingleCacheView()) {
             viewModel.caches.write(caches -> {
                 //need to remove first to ensure cache is really swapped ("Geocache" uses an id-only "equals()" function)
                 caches.remove(changedCache);
@@ -500,7 +495,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
             }
             //call reload logic -> this will reapply filters and such
-            reloadCachesAndWaypoints(false);
+            reloadCachesAndWaypoints();
         }
     }
 
@@ -511,7 +506,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private LiveMapGeocacheLoader.State oldStatus;
 
-    public void setProgressSpinner(final LiveMapGeocacheLoader.State status) {
+    public void setLiveLoadStatus(final Pair<LiveMapGeocacheLoader.State, String> observedStatus) {
+        final Pair<LiveMapGeocacheLoader.State, String> status = observedStatus == null ? viewModel.liveLoadStatus.getValue() : observedStatus;
         final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
         final ImageView liveMapStatus = findViewById(R.id.live_map_status);
         if (spinner == null || liveMapStatus == null) {
@@ -521,7 +517,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         spinner.setVisibility(View.GONE);
         liveMapStatus.setVisibility(View.GONE);
-        switch (status) {
+        //only set status if we are live
+        if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+            return;
+        }
+        switch (status.first) {
             case RUNNING:
                 spinner.setVisibility(View.VISIBLE);
                 spinner.setIndeterminate(true);
@@ -530,18 +530,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 liveMapStatus.setImageResource(R.drawable.ic_menu_error);
                 liveMapStatus.getBackground().setTint(getResources().getColor(R.color.cacheMarker_archived));
                 liveMapStatus.setVisibility(View.VISIBLE);
-                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(getString(R.string.live_map_status_error))).show());
+                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.id(R.string.live_map_status_error, status.second)).show());
                 break;
             case STOPPED_PARTIAL_RESULT:
                 liveMapStatus.setImageResource(R.drawable.ic_menu_partial);
                 liveMapStatus.getBackground().setTint(getResources().getColor(R.color.osm_zoomcontrol));
                 liveMapStatus.setVisibility(View.VISIBLE);
-                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(getString(R.string.live_map_status_partial))).show());
+                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.id(R.string.live_map_status_partial, status.second)).show());
                 break;
             case REQUESTED:
                 spinner.setVisibility(View.VISIBLE);
                 spinner.setIndeterminate(false);
-                if (oldStatus != status) {
+                if (oldStatus != status.first) {
                     final CountDownTimer timer = new CountDownTimer(LiveMapGeocacheLoader.PROCESS_DELAY, 20) {
                         @Override
                         public void onTick(final long millisUntilFinished) {
@@ -560,7 +560,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             default:
                 break;
         }
-        oldStatus = status;
+        oldStatus = status.first;
     }
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {
@@ -581,7 +581,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final Set<Waypoint> waypoints;
 
         //show all waypoints be displayed or just the ones from visible caches?
-        final boolean showAll = Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
+        final boolean showAll = TRUE.equals(viewModel.transientIsLiveEnabled.getValue());
         if (showAll) {
             waypoints = DataStore.loadWaypoints(viewport);
         } else {
@@ -616,7 +616,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     @NonNull
     private String calculateTitle() {
-        if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+        if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
             return getString(R.string.map_live);
         }
         if (viewModel.mapType.type == UMTT_TargetGeocode) {
@@ -698,7 +698,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             mapFragment.setBearing(locationWrapper.heading);
         }
 
-        if (locationWrapper.needsRepaintForDistanceOrAccuracy && Boolean.TRUE.equals(viewModel.followMyLocation.getValue())) {
+        if (locationWrapper.needsRepaintForDistanceOrAccuracy && TRUE.equals(viewModel.followMyLocation.getValue())) {
             mapFragment.setCenter(new Geopoint(locationWrapper.location));
 
             if (viewModel.proximityNotification.getValue() != null) {
@@ -709,7 +709,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
     private void checkDrivingMode() {
         final int mapRotation = Settings.getMapRotation();
-        final boolean shouldBeInDrivingMode = Boolean.TRUE.equals(viewModel.followMyLocation.getValue()) && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE);
+        final boolean shouldBeInDrivingMode = TRUE.equals(viewModel.followMyLocation.getValue()) && (mapRotation == MAPROTATION_AUTO_LOWPOWER || mapRotation == MAPROTATION_AUTO_PRECISE);
         mapFragment.setDrivingMode(shouldBeInDrivingMode);
     }
 
@@ -772,11 +772,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         HistoryTrackUtils.onPrepareOptionsMenu(menu);
 
         // init followMyLocation
-        initFollowMyLocation(Boolean.TRUE.equals(viewModel.followMyLocation.getValue()));
+        initFollowMyLocation(TRUE.equals(viewModel.followMyLocation.getValue()));
 
         // live map mode
         final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
+        ToggleItemType.LIVE_MODE.toggleMenuItem(itemMapLive, TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
         itemMapLive.setVisible(true);
 
         // map rotation state
@@ -826,8 +826,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.transientIsLiveEnabled.setValue(Settings.isLiveMap());
                 ActivityMixin.invalidateOptionsMenu(this);
                 refreshListChooser();
-                if (Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
-                    reloadCachesAndWaypoints(false);
+                if (TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+                    reloadCachesAndWaypoints();
                 }
             } else {
                 viewModel.mapType = new UnifiedMapType();
@@ -837,9 +837,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 updateSelectedBottomNavItemId();
                 saveCenterAndZoom();
                 final Geopoint coordsIndicator = viewModel.coordsIndicator.getValue();
-                onMapReadyTasks(tileProvider, getCurrentMapState());
+                onMapReadyTasks(tileProvider);
                 viewModel.coordsIndicator.setValue(coordsIndicator);
             }
+            //refresh live status view
+            setLiveLoadStatus(null);
         } else if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
@@ -897,7 +899,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         } else if (id == R.id.menu_hillshading) {
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
-            changeMapSource(mapFragment.currentTileProvider, getCurrentMapState());
+            changeMapSource(mapFragment.currentTileProvider);
         } else {
             final String language = TileProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
@@ -909,7 +911,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
             if (tileProviderLocal != null) {
                 item.setChecked(true);
-                changeMapSource(tileProviderLocal, getCurrentMapState());
+                changeMapSource(tileProviderLocal);
                 return true;
             }
             if (mapFragment.onOptionsItemSelected(item)) {
@@ -986,7 +988,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private void refreshMapDataAfterSettingsChanged(final boolean circlesSwitched, final boolean filterChanged) {
         // parameter "circlesSwitched" is required for being called by showSettingsPopup only; can be removed after removing old map implementations
         if (!viewModel.liveMapHandler.isEnabled() && filterChanged) {
-            reloadCachesAndWaypoints(false);
+            reloadCachesAndWaypoints();
         }
         refreshMapData(filterChanged);
     }
@@ -1217,17 +1219,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     // ========================================================================
     // Lifecycle methods
 
-    private UnifiedMapState getCurrentMapState() {
-        return new UnifiedMapState(mapFragment.getCenter(), mapFragment.getCurrentZoom(), Boolean.TRUE.equals(viewModel.transientIsLiveEnabled.getValue()));
-    }
-
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
-
-        outState.putParcelable(BUNDLE_MAPSTATE, lastMapStateFromOnPause);
-        outState.putBoolean(BUNDLE_OVERRIDEPOSITIONANDZOOM, true);
     }
 
     @Override
@@ -1251,7 +1246,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     public void onPause() {
         if (mapFragment != null) {
             saveCenterAndZoom();
-            lastMapStateFromOnPause = getCurrentMapState();
         }
         if (tileProvider != null) {
             tileProvider.onPause();
@@ -1292,7 +1286,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             viewModel.reloadIndividualRoute();
         }
         super.onResume();
-        reloadCachesAndWaypoints(false);
+        reloadCachesAndWaypoints();
         MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
         if (tileProvider != null) {
             tileProvider.onResume();
