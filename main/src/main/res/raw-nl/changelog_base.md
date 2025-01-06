@@ -13,6 +13,7 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Wijziging: "volg mijn locatie" verplaatst naar de kaart, geeft meer ruimte voor de "live modus" knop
 - Wijziging: Maak de lang drukken speld meer in de stijl van c:geo
 - Wijziging: Offline data management functies (download kaarten, controleer op ontbrekende routering / hoogte gegevens) verplaatst naar map selectie menu => "Beheer offline gegevens"
+- Oplossing: Kaart wordt niet bijgewerkt met gewijzigde caches
 
 ### Cache details
 - Nieuw: Nog niet bestaande variabelen die gebruikt worden in projectie worden gemaakt in de variabele lijst
@@ -25,6 +26,8 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Bevestig het overschrijven van log op snelle offline log
 - Nieuw: Update cache status bij het versturen van een log
 - Nieuw: Gekleurde HTML-bronweergave van cache details
+- Oplossing: checksum(0) retourneert foutieve waarde
+- Oplossing: Log wijzigen verwijderd "vrienden" status
 
 ### Algemeen
 - Wijziging: Gebruik hoogte boven het gemiddelde zeeniveau (indien beschikbaar, alleen Android 14+)
@@ -43,3 +46,6 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Nieuw: Extra emojis voor cachepictogrammen
 - Wijziging: Cache type filter "Specials" bevat gebeurtenissen van type mega, giga, community celebration, HQ celebration, block party en maze
 - Wijziging: Cache type filter "Anders" bevat GCHQ, APE en onbekende types
+- Oplossing: Geschiedenis lengte en nabijheidsinstellingen delen schuifregelaar waarden
+- Oplossing: Trackable logpagina toont tijd/coördinaat invoervelden voor trackables die dit niet ondersteunen
+- Oplossing: Enkele crashes

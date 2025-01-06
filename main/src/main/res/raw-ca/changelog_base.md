@@ -13,6 +13,7 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
 - Canvi: feu que el pin de premsa llarga sigui més semblant a c:geo
 - Canvi: les funcions de gestió de dades fora de línia (descàrrega de mapes, comproveu si no hi ha dades d'itineraris o d'ombra) s'han mogut al menú de selecció de mapes => "Gestiona les dades fora de línia"
+- Fix: Map not updating changed caches
 
 ### Detalls del catxé
 - Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
@@ -25,6 +26,8 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: confirmeu la sobreescritura del registre al registre ràpid fora de línia
 - Nou: actualitzeu l'estat del catxé en enviar un registre
 - Nou: visualització de la font HTML amb colors dels detalls del catxé
+- Fix: checksum(0) returning wrong value
+- Fix: Editing logs removes "friends" status
 
 ### General
 - Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
@@ -43,3 +46,6 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Nou: emojis addicionals per a les icones del catxé
 - Canvi: el filtre de tipus de catxés "Especials" inclou trobades de tipus mega, giga, community celebration, HQ celebration, block party i maze
 - Canvi: el filtre de tipus de catxé "Altres" inclou GCHQ, APE i tipus desconeguts
+- Fix: History length and proximity settings sharing slider values
+- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
+- Fix: Some crashes

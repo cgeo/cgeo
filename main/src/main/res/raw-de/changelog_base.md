@@ -13,6 +13,7 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Änderung: "Meinem Standort folgen" auf die Karte verschoben (mehr Platz für den "Live-Modus"-Button)
 - Änderung: Karten-Marker bei langem Tippen mehr an den c:geo-Stil angepasst
 - Änderung: Funktionen zum Verwalten von Offline-Daten (Karten-Download, Überprüfung auf fehlende Routing- / Kartenschattierungs-Daten) in das Karten-Auswahlmenü verschoben => "Offline-Daten verwalten"
+- Fix: Karte aktualisiert nicht geänderte Caches
 
 ### Cache-Details
 - Neu: Noch nicht vorhandene Variablen in der Projektion werden in der Variablenliste erstellt
@@ -25,6 +26,8 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Überschreiben des Logs beim Schnellen Offline-Log bestätigen
 - Neu: Aktualisieren des Cache-Status beim Senden eines Logs
 - Neu: Farbige HTML-Quellansicht der Cache-Details
+- Korrektur: checksum (0) gibt falschen Wert zurück
+- Korrektur: Logs bearbeiten entfernt den Status "Freunde"
 
 ### Allgemein
 - Änderung: Höhe über mittlerem Meeresspiegel verwenden (falls verfügbar, nur Android 14+)
@@ -43,3 +46,6 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Neu: Zusätzliche Emojis für Cache-Symbole
 - Änderung: Cache-Filter "Besondere" umfasst Events der Typen Mega, Giga, Community Celebration, HQ Celebration, HQ Blockparty und Labyrinth
 - Änderung: Cache-Filter "Andere" enthält GC HQ, APE und unbekannte Typen
+- Korrektur: Schieberegler "Länge des Positionsverlaufs" und "Weite Entfernung" verwenden identischen Wert
+- Korrektur: Trackable Log-Seite zeigt Zeit-/Koordinaten-Eingabefelder für Trackables an, die dies nicht unterstützen
+- Korrektur: Mehrere Abstürze
