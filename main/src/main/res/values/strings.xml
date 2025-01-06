@@ -1762,7 +1762,7 @@
     <string name="create_internal_cache">Create user-defined cache</string>
     <string name="create_internal_cache_short">New cache</string>
     <string name="create_internal_cache_currentlist">Use current list</string>
-    <string name="internal_cache_default_name">User defined cache #%1$d</string>
+    <string name="internal_cache_default_names">User defined cache #%1$s</string>
     <string name="internal_cache_default_description">This is a user-defined cache</string>
     <string name="internal_cache_default_owner">You</string>
     <string name="internal_goto_targets_title">\'Go to\' targets</string>
