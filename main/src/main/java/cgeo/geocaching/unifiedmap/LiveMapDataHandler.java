@@ -6,6 +6,8 @@ import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
+import android.util.Pair;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -59,7 +61,7 @@ public class LiveMapDataHandler {
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
             this.model = model;
-            this.liveLoader = new LiveMapGeocacheLoader(model.liveLoadStatus::postValue, this::updateLiveLoad);
+            this.liveLoader = new LiveMapGeocacheLoader((s, msg) -> model.liveLoadStatus.postValue(new Pair<>(s, msg)), this::updateLiveLoad);
         }
 
         private void updateLiveLoad(final Set<Geocache> result) {

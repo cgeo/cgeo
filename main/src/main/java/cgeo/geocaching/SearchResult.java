@@ -27,8 +27,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import static java.lang.Boolean.TRUE;
 
@@ -173,7 +176,7 @@ public class SearchResult implements Parcelable {
 
     @NonNull
     public StatusCode getError() {
-        final List<StatusCode> l = getAllFromContext(b -> StatusCode.values()[b.getInt(CON_ERROR)]);
+        final Collection<StatusCode> l = getAllFromContext(b -> StatusCode.values()[b.getInt(CON_ERROR)]).values();
         for (StatusCode sc : l) {
             if (!StatusCode.NO_ERROR.equals(sc)) {
                 return sc;
@@ -182,13 +185,33 @@ public class SearchResult implements Parcelable {
         return StatusCode.NO_ERROR;
     }
 
+    @NonNull
+    public Map<String, StatusCode> getConnectorErrors() {
+        final Map<String, StatusCode> result = getAllFromContext(b -> StatusCode.values()[b.getInt(CON_ERROR)]);
+        final Iterator<Map.Entry<String, StatusCode>> it = result.entrySet().iterator();
+        while (it.hasNext()) {
+            final Map.Entry<String, StatusCode> entry = it.next();
+            if (entry.getValue() == null || entry.getValue() == StatusCode.NO_ERROR) {
+                it.remove();
+            }
+        }
+        return result;
+    }
+
     public void setError(final IConnector con, @NonNull final StatusCode error) {
         setToContext(con, b -> b.putInt(CON_ERROR, error.ordinal()));
     }
 
-    public boolean isPartialResult() {
-        final boolean isPartialSet = reduceToContext(b -> b.getBoolean(CON_PARTIAL), false, (p1, p2) -> TRUE.equals(p1) || TRUE.equals(p2));
-        return isPartialSet || (getTotalCount() > getCount());
+    @NonNull
+    public List<String> getPartialConnectors() {
+        final Map<String, Boolean> map = getAllFromContext(b -> b.getBoolean(CON_PARTIAL));
+        final List<String> result = new ArrayList<>();
+        for (Map.Entry<String, Boolean> entry : map.entrySet()) {
+            if (TRUE.equals(entry.getValue())) {
+                result.add(entry.getKey());
+            }
+        }
+        return result;
     }
 
     public void setPartialResult(final IConnector con, final boolean isPartial) {
@@ -237,20 +260,20 @@ public class SearchResult implements Parcelable {
 
     private <T> T reduceToContext(final Func1<Bundle, T> getter, final T initial, final Func2<T, T, T> reducer) {
         T result = initial;
-        for (T v : getAllFromContext(getter)) {
+        for (T v : getAllFromContext(getter).values()) {
             result = reducer.call(result, v);
         }
         return result;
     }
 
-    private <T> List<T> getAllFromContext(final Func1<Bundle, T> getter) {
-        final List<T> result = new ArrayList<>();
+    private <T> Map<String, T> getAllFromContext(final Func1<Bundle, T> getter) {
+        final Map<String, T> result = new HashMap<>();
         synchronized (this.connectorContext) {
             for (String key : this.connectorContext.keySet()) {
                 final Bundle b = this.connectorContext.getBundle(key);
                 final T value = getter.call(b);
                 if (value != null) {
-                    result.add(value);
+                    result.put(key, value);
                 }
             }
         }
