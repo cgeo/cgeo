@@ -2322,6 +2322,8 @@
         <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
+    <string name="live_map_status_http429">Bitte langsamer, zu viele Anfragen an %s</string>
+    <string name="live_map_status_error">Fehler beim Laden der Kartendaten</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
@@ -2443,6 +2445,7 @@
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="show_all">Alle zeigen</string>
+    <string name="lists_only_new">Nur neue</string>
     <string name="routingmode_straight">Direkt</string>
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
