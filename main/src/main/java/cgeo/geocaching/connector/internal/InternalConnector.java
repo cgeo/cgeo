@@ -34,6 +34,7 @@ import androidx.annotation.Nullable;
 
 import java.util.EnumSet;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -45,10 +46,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     // prefix - must not contain regexp characters
     public static final String PREFIX = "ZZ";
+    private static final String GEOCODE_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final int GEOCODE_LENGTH = 4;
 
     // predefined id (without prefix) and geocode (with prefix) for certain special caches:
-    public static final int ID_HISTORY_CACHE = 0;
-    public static final String GEOCODE_HISTORY_CACHE = geocodeFromId(ID_HISTORY_CACHE);
+    public static final String GEOCODE_HISTORY_CACHE = "ZZ0";
 
     // store into UDC list
     public static final int UDC_LIST = -1;
@@ -211,15 +213,14 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * creates a new cache with the given id, if it does not exist yet
      *
      * @param context       context in which this function gets called
-     * @param id            internal (numeric) id of the cache
+     * @param geocode       internal id of the cache
      * @param name          cache's name (or null for default name)
      * @param description   cache's description (or null for default description)
      * @param assignedEmoji cache's assigned emoji (or 0 for default cache type icon)
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id, may be NEW_LIST
      */
-    protected static void assertCacheExists(final Context context, final long id, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
-        final String geocode = geocodeFromId(id);
+    protected static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
             int newListId = listId;
@@ -230,7 +231,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // create new cache
             final Geocache cache = new Geocache();
             cache.setGeocode(geocode);
-            cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_name), id) : name);
+            cache.setName(name == null ? String.format(context.getString(R.string.internal_cache_default_names), geocode) : name);
             cache.setOwnerDisplayName(context.getString(R.string.internal_cache_default_owner));
             cache.setDescription(description == null ? context.getString(R.string.internal_cache_default_description) : description);
             cache.setAssignedEmoji(assignedEmoji);
@@ -245,12 +246,6 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             // add more fields if needed
 
             DataStore.saveCache(cache, EnumSet.of(LoadFlags.SaveFlag.DB));
-
-            // temporary workaround for on demand migration of the old "go to" history
-            // should be removed after some grace period (maybe summer 2020?)
-            if (id == ID_HISTORY_CACHE) {
-                DataStore.migrateGotoHistory(context);
-            }
         }
     }
 
@@ -260,7 +255,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param context context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
-        assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
+        assertCacheExists(context, GEOCODE_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
     }
 
     /**
@@ -275,9 +270,22 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @return geocode      geocode of the newly created cache
      */
     public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
-        final long newId = DataStore.getNextAvailableInternalCacheId();
-        assertCacheExists(context, newId, name, description, assignedEmoji, geopoint, listId);
-        return geocodeFromId(newId);
+        String geocode;
+        do {
+            geocode = PREFIX + generateRandomId();
+        } while (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) != null);
+        assertCacheExists(context, geocode, name, description, assignedEmoji, geopoint, listId);
+        return geocode;
+    }
+
+    private static String generateRandomId() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(GEOCODE_LENGTH);
+        for (int i = 0; i < GEOCODE_LENGTH; i++) {
+            int index = random.nextInt(GEOCODE_CHARS.length());
+            sb.append(GEOCODE_CHARS.charAt(index));
+        }
+        return sb.toString();
     }
 
     /**
