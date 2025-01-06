@@ -2358,7 +2358,7 @@
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">Synchronizácia priečinka %1$s dokončená po %2$s, %3$d z %4$s potrebná synchronizácia</string>
     <!-- Wherigo Player -->
-    <string name="wherigo_download_progress_download_status">Stiahnuté %1$s/%2$s (%3$s %)</string>
+    <string name="wherigo_download_progress_download_status">Stiahnuté %1$s/%2$s (%3$s %%)</string>
     <!-- default actions in dialogs -->
     <string name="previous">Späť</string>
     <string name="skip">Preskočiť</string>
