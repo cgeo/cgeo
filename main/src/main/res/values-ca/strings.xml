@@ -1052,9 +1052,9 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
-    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els vessants s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
+    <string name="init_mapsource_select_legacy">Seleccioneu la font del mapa (heretat)</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
     <string name="init_base_directory_description">Carpeta base per a dades locals públiques</string>
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
@@ -1175,6 +1175,9 @@
     <string name="init_map_other">Altres</string>
     <string name="init_map_osm_multithreaded">Multi-Capa (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Utilitzeu diverses capes per dibuixar un mapa d’OpenStreetMap</string>
+    <string name="init_title_useLegacyMap">Utilitzeu el mapa heretat</string>
+    <string name="init_summary_useLegacyMap">Utilitzeu versions heretades dels mapes de Google Map/Mapsforge (OSM) en comptes d\'UnifiedMap</string>
+    <string name="category_unifiedMap">Mapa unificat</string>
     <string name="localstorage_migrate_title">Migració de fitxers locals</string>
     <string name="localstorage_migrate_status_major">Versió %1$d</string>
     <!-- proximity notification -->
@@ -1477,7 +1480,7 @@
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
     <string name="cache_status_offline_log">Registre desat</string>
-    <string name="cache_status_attended">Vaig assistir</string>
+    <string name="cache_status_attended">He assistit</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
     <string name="cache_status_archived">Arxivat</string>
@@ -1799,7 +1802,7 @@
     <string name="google_maps_option_group_map">Opcions del mapa</string>
     <string name="google_maps_option_show_traffic">Mostra el trànsit</string>
     <string name="google_maps_option_show_buildings">Mostra edificis en 3D</string>
-    <string name="google_maps_option_group_theme">Opcions del tema</string>
+    <string name="google_maps_option_group_theme">Opcions del Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostra les funcions del tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostra Administratiu</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostra Paisatge</string>
@@ -1838,7 +1841,7 @@
     <string name="add_target_to">Afegiu un objectiu a</string>
     <string name="search_address_started">S\'està cercant per adreça</string>
     <string name="search_address_result">Llocs trobats</string>
-    <string name="search_own_caches">Cerca els meus catxés</string>
+    <string name="search_own_caches">Els meus catxés</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Llista de marcadors</string>
     <string name="search_pocket_is_new">nou</string>
@@ -2542,6 +2545,7 @@
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <string name="hillshading_info">Ombreig fora de línia</string>
     <string name="maptheme_elevate_categoryinfo">Rellevant per a: [A] Àrees, [P] POI, [R] Rutes, [W] Camins</string>
+    <string name="maptheme_vtm_scaling_summary">Opcions d\'escala per a mapes fora de línia (només VTM, requereix reinici)</string>
     <string name="maptheme_scale_map_title">Factor d\'escala del mapa</string>
     <string name="maptheme_scale_map_summary">Mapa d\'escales; 100% = sense escala</string>
     <string name="maptheme_scale_text_title">Factor d\'escala del text</string>
