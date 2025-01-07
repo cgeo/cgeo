@@ -1051,7 +1051,6 @@
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
     <string name="settings_info_themes">O c:geo suporta temas personalizados para mapas offline. Podem ser utilizados para alterar o estilo de cor do mapa (ex: ter um mapa de visão nocturna) ou para destacar certos objectos, como caminhos de bicicleta ou linhas de relevo no mapa.\n\nTrabalhar com temas de mapa não-comprimidos pode diminuir o desempenho da abertura do mapa. Neste caso, a pasta de temas pode opcionalmente ser sincronizada com uma pasta local da aplicação privada, para acesso mais rápido (à custa de algum espaço de armazenamento).</string>
     <string name="settings_info_hillshading_title">Informação sobre o Sombreado de altitude</string>
-    <string name="settings_info_hillshading">O Sombreado de altitude é uma técnica para criar mapas de relevo topográficos adicionando um efeito de iluminação ao mapa para indicar mudanças de altitude. As inclinações serão escurecidas/iluminadas para gerar um efeito de 3D.\nAs informações de sombreado de altitude podem ser descarregadas no menu de mapas.</string>
     <string name="settings_hillshading_enable">Sombreado de altitude</string>
     <string name="init_mapsource_select">Seleccionar a cartografia do mapa</string>
     <string name="init_local_file_system">Sistema de Ficheiros Local</string>
@@ -1795,7 +1794,7 @@
     <string name="google_maps_option_group_map">Opções do Mapa</string>
     <string name="google_maps_option_show_traffic">Mostrar tráfego</string>
     <string name="google_maps_option_show_buildings">Mostrar edifícios 3D</string>
-    <string name="google_maps_option_group_theme">Opções do Tema</string>
+    <string name="google_maps_option_group_theme">Opções de Tema</string>
     <string name="google_maps_option_show_feature_theme">Mostrar características do tema</string>
     <string name="google_maps_option_show_feature_administrative_all">Mostrar funções administrativas</string>
     <string name="google_maps_option_show_feature_landscape_all">Mostrar em modo de paisagem</string>
@@ -1824,7 +1823,7 @@
     <string name="search_finder">Encontrada por</string>
     <string name="search_finder_prefill">Quem encontrou</string>
     <string name="search_finder_button">Pesquisa por quem encontrou</string>
-    <string name="search_filter">Filtrar</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
     <string name="search_tb">Trackable</string>
@@ -1834,7 +1833,6 @@
     <string name="add_target_to">Adicionar destino a</string>
     <string name="search_address_started">Pesquisar por lugares</string>
     <string name="search_address_result">Encontrar lugares</string>
-    <string name="search_own_caches">Pesquisar as minhas caches</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">novo</string>
