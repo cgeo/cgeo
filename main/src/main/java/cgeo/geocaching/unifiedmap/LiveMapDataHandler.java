@@ -8,7 +8,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.util.Pair;
 
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -26,9 +26,7 @@ public class LiveMapDataHandler {
     private static class Parameters {
         private Viewport viewport;
         private GeocacheFilter filter;
-        private boolean waypointFilterChanged;
         private boolean enabled;
-        private final Set<Geocache> updatedCaches = new HashSet<>();
         private boolean liveEnabled;
 
         Parameters copy() {
@@ -36,15 +34,8 @@ public class LiveMapDataHandler {
             p.viewport = viewport;
             p.filter = filter;
             p.liveEnabled = liveEnabled;
-            p.waypointFilterChanged = waypointFilterChanged;
             p.enabled = enabled;
-            p.updatedCaches.addAll(updatedCaches);
             return p;
-        }
-
-        void reset() {
-            updatedCaches.clear();
-            waypointFilterChanged = false;
         }
     }
 
@@ -56,7 +47,6 @@ public class LiveMapDataHandler {
 
         private GeocacheFilter lastFilter;
         private Viewport lastViewport;
-        private boolean lastLiveEnabled;
 
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
@@ -66,7 +56,6 @@ public class LiveMapDataHandler {
 
         private void updateLiveLoad(final Set<Geocache> result) {
             final GeocacheFilter filter = lastFilter;
-            final Viewport viewport = lastViewport;
             if (filter != null) {
                 filter.filterList(result);
             }
@@ -74,7 +63,6 @@ public class LiveMapDataHandler {
                 caches.removeAll(result);
                 caches.addAll(result);
             });
-            UnifiedMapActivity.refreshWaypoints(model); //, filter, viewport, false);
         }
 
         @Override
@@ -90,49 +78,28 @@ public class LiveMapDataHandler {
                 synchronized (this.handler) {
                     handler.dirty = false;
                     params = handler.params.copy();
-                    handler.params.reset();
                 }
 
                 if (!params.enabled) {
                     return;
                 }
 
-                //updates caches
-                if (!params.updatedCaches.isEmpty()) {
-                    Log.iForce("Adding caches: " + params.updatedCaches);
-                    model.caches.write(caches -> {
-                        //first removes all, then add again. This prevents non-adding of Geocache-instances of same cache with newer data
-                        caches.removeAll(params.updatedCaches);
-                        caches.addAll(params.updatedCaches);
-                        if (params.filter != null) {
-                            params.filter.filterList(caches);
-                        }
-                    });
-                }
-
                 final boolean filterChanged = !GeocacheFilter.filtersSame(params.filter, lastFilter);
-                final boolean mapMoved = MapUtils.mapHasMoved(params.viewport, lastViewport);
                 final boolean lastViewportContainsCurrent = lastViewport != null && lastViewport.includes(params.viewport);
-                final boolean liveWasTurnedOn = !lastLiveEnabled && params.liveEnabled;
 
                 //database refresh
-                if (filterChanged || (mapMoved && !lastViewportContainsCurrent)) {
-                    final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(params.viewport, params.filter);
+                if (filterChanged || !lastViewportContainsCurrent) {
+                    //get a bit more than just the current viewport. This prevents immediate necessity for a db call on next (small) map move
+                    final Viewport refreshedViewport = params.viewport.resize(1.5);
+                    final Set<Geocache> dbCaches = MapUtils.getGeocachesFromDatabase(refreshedViewport, params.filter);
                     model.caches.write(caches -> caches.addAll(dbCaches));
+                    lastViewport = refreshedViewport;
                 }
                 //live refresh
-                if (params.liveEnabled && (liveWasTurnedOn || filterChanged || mapMoved)) {
+                if (params.liveEnabled) {
                     liveLoader.requestUpdate(params.viewport, params.filter);
                 }
-                //waypoints
-                if (filterChanged || mapMoved || params.waypointFilterChanged) {
-                    UnifiedMapActivity.refreshWaypoints(model); //, params.filter, params.viewport, false);
-                }
-                if (mapMoved) {
-                    lastViewport = params.viewport;
-                }
                 lastFilter = params.filter;
-                lastLiveEnabled = params.liveEnabled;
             } catch (final Exception e) {
                 Log.w("LiveMapDataHandler.run", e);
             }
@@ -146,17 +113,18 @@ public class LiveMapDataHandler {
     }
 
     public synchronized void setViewport(final Viewport viewport) {
+        if (Objects.equals(viewport, this.params.viewport)) {
+            return;
+        }
         this.params.viewport = viewport;
         this.dirty = true;
     }
 
     public synchronized void setFilter(final GeocacheFilter filter) {
+        if (GeocacheFilter.filtersSame(this.params.filter, filter)) {
+            return;
+        }
         this.params.filter = filter;
-        this.dirty = true;
-    }
-
-    public synchronized void addChangedCache(final Geocache cache) {
-        this.params.updatedCaches.add(cache);
         this.dirty = true;
     }
 
@@ -172,11 +140,6 @@ public class LiveMapDataHandler {
 
     public synchronized  boolean isEnabled() {
         return this.params.enabled;
-    }
-
-    public synchronized void setWaypointFilter(final boolean changed) {
-        this.params.waypointFilterChanged = changed;
-        this.dirty = true;
     }
 
     public void destroy() {

@@ -184,7 +184,7 @@ public class GeocacheFilter implements Cloneable {
     /** returns true if this filter and other filter would filter same results */
     public boolean filtersSame(@Nullable final GeocacheFilter other) {
         if (other == null || !other.isFiltering()) {
-            return isFiltering();
+            return !isFiltering();
         }
         return isIncludeInconclusive() == other.isIncludeInconclusive() &&
             JsonConfigurationUtils.equals(getTree(), other.getTree());
