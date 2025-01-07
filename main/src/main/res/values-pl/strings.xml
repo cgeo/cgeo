@@ -542,6 +542,7 @@
     <string name="cache_filter_hidden">Data ukrycia</string>
     <string name="cache_filter_eventdate">Data wydarzenia</string>
     <string name="cache_filter_logs_count">Liczba wpisów</string>
+    <string name="cache_filter_inventory_count">Stan inwentarza</string>
     <string name="cache_filter_last_found">Data ostatniego znalezienia</string>
     <string name="cache_filter_log_entry">Wpis w dzienniku</string>
     <string name="cache_filter_location">Lokalizacja</string>
@@ -1063,9 +1064,12 @@
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
     <string name="settings_info_themes">c:geo obsługuje niestandardowe motywy dla map offline. Mogą być one używane do zmiany koloru mapy (np. aby mieć mapę nocną) lub podświetlić niektóre obiekty, takie jak ścieżki rowerowe lub linie wysokości na mapie.\n\nPraca z niespakowanymi motywami mapy może zmniejszyć wydajność przeglądarki map. W tym przypadku folder z motywami może być opcjonalnie zsynchronizowany z lokalnym folderem aplikacji, aby uzyskać szybszy dostęp (kosztem przestrzeni dyskowej).</string>
     <string name="settings_info_hillshading_title">Informacje o cieniowaniu</string>
-    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.</string>
+    <string name="settings_info_hillshading">Cieniowanie szczytów (hillshading) jest techniką tworzenia map rzeźby topograficznej poprzez dodanie efektu oświetlenia na mapie w celu wskazania zmian wysokości. Nachylenia zostaną przyciemnione/oświetlone, aby wygenerować efekt 3D.\nDane cieniowania szczytów mogą być pobierane z menu mapy.\nNiekompatybilne z wariantem VTM UnifiedMap.</string>
     <string name="settings_hillshading_enable">Cieniowanie (hillshading)</string>
+    <string name="init_hillshading_hq">Cieniowanie szczytów wysokiej jakości</string>
+    <string name="init_summary_hillshading_hq">Bardziej szczegółowa nakładka cieniowania wzgórz, ale ~50%% wolniejsze renderowanie po powiększeniu</string>
     <string name="init_mapsource_select">Wybierz źródło mapy</string>
+    <string name="init_mapsource_select_legacy">Wybierz źródło mapy (Legacy)</string>
     <string name="init_local_file_system">Lokalny system plików</string>
     <string name="init_base_directory_description">Folder podstawowy dla lokalnych danych publicznych</string>
     <string name="init_map_directory_description">Folder z mapami offline</string>
@@ -1186,9 +1190,9 @@
     <string name="init_map_other">Inne</string>
     <string name="init_map_osm_multithreaded">Wielowątkowe (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Użyj wielu wątków do renderowania map OpenStreetMap</string>
-    <string name="category_unifiedMap">Ujednolicona mapa (beta)</string>
-    <string name="init_title_useUnifiedMap">Użyj ujednoliconej mapy</string>
-    <string name="init_summary_useUnifiedMap">Użyj nowej ujednoliconej mapy zamiast wbudowanych map Google Map / Mapsforge (OSM)</string>
+    <string name="init_title_useLegacyMap">Użyj starszej mapy (Legacy)</string>
+    <string name="init_summary_useLegacyMap">Użyj starszych wersji map Google / Mapsforge (OSM) zamiast mapy ujednoliconej (UnifiedMap)</string>
+    <string name="category_unifiedMap">Ujednolicona mapa</string>
     <string name="localstorage_migrate_title">Migracja plików lokalnych</string>
     <string name="localstorage_migrate_status_major">Wersja %1$d</string>
     <!-- proximity notification -->
@@ -1490,6 +1494,7 @@
     <string name="cache_menu_details">Szczegóły</string>
     <string name="cache_menu_refresh">Odśwież</string>
     <string name="cache_menu_share">Udostępnij skrytkę</string>
+    <string name="cache_menu_share_with_data">Udostępnij, łącznie z danymi użytkownika</string>
     <string name="cache_menu_move_list">Przenieś do innej listy</string>
     <string name="cache_menu_copy_list">Skopiuj do innej listy</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1507,7 +1512,7 @@
     <string name="ignore_confirm_message">Zignorowanie skrytki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrytkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
-    <string name="cache_status_attended">Uczestniczyłem</string>
+    <string name="cache_status_attended">Uczestniczył/a</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
@@ -1571,6 +1576,7 @@
     <string name="cache_multiple_wherigo_cartridges_title">Wiele kartridży Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Aby uzyskać więcej informacji na temat kartridży, należy zapoznać się z opisem skrytki.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
+    <string name="cache_wherigo_start">Pobierz i zagraj w Wherigo za pomocą wewnętrznego odtwarzacza c:geo</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -1869,7 +1875,7 @@
     <string name="add_target_to">Dodaj cel do</string>
     <string name="search_address_started">Wyszukiwanie miejsc</string>
     <string name="search_address_result">Znalezione miejsca</string>
-    <string name="search_own_caches">Szukaj moich skrytek</string>
+    <string name="search_own_caches">Moje skrytki</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
@@ -2235,6 +2241,7 @@
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
     <string name="attribute_unknown">Nieznany atrybut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Status skrytki</string>
     <string name="cat_tools">Ekwipunek</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Lokalizacja skrytki</string>
@@ -2376,6 +2383,9 @@
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
+    <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
+    <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
+    <string name="live_map_status_partial">Częściowy wynik dla: %s. Przybliż, aby zmniejszyć liczbę skrytek do załadowania.</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
@@ -2501,6 +2511,8 @@
     <string name="yes">Tak</string>
     <string name="no">Nie</string>
     <string name="show_all">Pokaż wszystko</string>
+    <string name="lists_only_new">Tylko nowe</string>
+    <string name="pq_only_dl">Do pobrania</string>
     <string name="routingmode_straight">Prosto</string>
     <string name="routingmode_walk">Pieszo</string>
     <string name="routingmode_bike">Rower</string>
@@ -2603,6 +2615,7 @@
     <string name="brouter_info">Usługa wyznaczania trasy offline</string>
     <string name="hillshading_info">Cieniowanie szczytów offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
+    <string name="maptheme_vtm_scaling_summary">Opcje skalowania map offline (tylko VTM, wymaga ponownego uruchomienia)</string>
     <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
     <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
     <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>
@@ -2675,6 +2688,7 @@
     <string name="wherigo_sound_mute">Wycisz</string>
     <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
+    <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie \"Wznów wstrzymane okno dialogowe\"</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
     <string name="wherigo_cartridge_details">Szczegóły kartridża</string>
@@ -2707,6 +2721,11 @@
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
+    <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
+    <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Użyj \'Wyślij przez e-mail\', aby zgłosić problem związany z wherigo naszemu zespołowi pomocy technicznej.</string>
+    <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>
