@@ -532,6 +532,7 @@
     <string name="cache_filter_hidden">Gömd datum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Antal loggar</string>
+    <string name="cache_filter_inventory_count">Antal inventarier</string>
     <string name="cache_filter_last_found">Senast hittad</string>
     <string name="cache_filter_log_entry">Loggpost</string>
     <string name="cache_filter_location">Plats</string>
@@ -1047,8 +1048,12 @@
     <string name="settings_info_themes_title">Info om kartteman</string>
     <string name="settings_info_themes">c:geo stöder anpassade teman för offline-kartor. Dessa kan användas för att ändra färgstilen på kartan (t.ex. att ha en nattvy) eller att markera vissa objekt som cykelvägar eller höjdlinjer.\n\nAtt arbeta med ej zippade kartteman kan minska kartans öppningsprestanda. I detta fall kan temamappen eventuellt synkroniseras till en app-privat lokal mapp för snabbare åtkomst (på bekostnad av visst lagringsutrymme).</string>
     <string name="settings_info_hillshading_title">Info om terrängskuggning</string>
+    <string name="settings_info_hillshading">Terrängskuggning är en teknik för att skapa topografiska reliefkartor genom att lägga till en ljuseffekt på kartan för att indikera förändringar i höjd. Sluttningarna kommer att mörknas/ljusas för att generera en 3D-effekt.\nData för terrängskuggning kan laddas ner från kart-menyn.\nInte kompatibelt med UnifiedMap VTM-varianten.</string>
     <string name="settings_hillshading_enable">Terrängskuggning</string>
+    <string name="init_hillshading_hq">Högkvalitativ backskuggning</string>
+    <string name="init_summary_hillshading_hq">Mer detaljerad terrängskuggning men ~50%% långsammare rendering när ut-zoomat</string>
     <string name="init_mapsource_select">Välj kartkälla</string>
+    <string name="init_mapsource_select_legacy">Välj kartkälla (Äldre)</string>
     <string name="init_local_file_system">Lokalt filsystem</string>
     <string name="init_base_directory_description">Basmapp för offentlig lokal data</string>
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
@@ -1169,6 +1174,9 @@
     <string name="init_map_other">Annat</string>
     <string name="init_map_osm_multithreaded">Flertrådad (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Använd flera trådar för att rendera OpenStreetMap-kartor</string>
+    <string name="init_title_useLegacyMap">Använd äldre karta</string>
+    <string name="init_summary_useLegacyMap">Använd äldre versioner av kartor från Google Map / Mapsforge (OSM) istället för UnifiedMap</string>
+    <string name="category_unifiedMap">Unified Map</string>
     <string name="localstorage_migrate_title">Migrering av lokala filer</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1454,6 +1462,7 @@
     <string name="cache_menu_details">Detaljer</string>
     <string name="cache_menu_refresh">Uppdatera</string>
     <string name="cache_menu_share">Skicka länk</string>
+    <string name="cache_menu_share_with_data">Dela inkl. användardata</string>
     <string name="cache_menu_move_list">Flytta till annan lista</string>
     <string name="cache_menu_copy_list">Kopiera till annan lista</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
@@ -1818,7 +1827,7 @@
     <string name="search_finder">Hittad av</string>
     <string name="search_finder_prefill">Vem som hittat</string>
     <string name="search_finder_button">Sök baserat på hittare</string>
-    <string name="search_filter">Filtrera</string>
+    <string name="search_filter">Filter</string>
     <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_tb">Trackables</string>
@@ -1828,7 +1837,7 @@
     <string name="add_target_to">Lägg till mål till</string>
     <string name="search_address_started">Söker efter platser</string>
     <string name="search_address_result">Hittade platser</string>
-    <string name="search_own_caches">Sök egna cacher</string>
+    <string name="search_own_caches">Mina cacher</string>
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_bookmark_list">Bokmärkeslista</string>
     <string name="search_pocket_is_new">ny</string>
@@ -2431,6 +2440,8 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="show_all">Visa alla</string>
+    <string name="lists_only_new">Endast ny</string>
+    <string name="pq_only_dl">Nedladdningsbara</string>
     <string name="routingmode_straight">Rakt</string>
     <string name="routingmode_walk">Promenera</string>
     <string name="routingmode_bike">Cykel</string>
@@ -2529,6 +2540,7 @@
     <string name="brouter_info">Offline rutt-tjänst</string>
     <string name="hillshading_info">Offline terrängskuggning</string>
     <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
+    <string name="maptheme_vtm_scaling_summary">Skalningsalternativ för offlinekartor (endast VTM, kräver omstart)</string>
     <string name="maptheme_scale_map_title">Skalfaktor karta</string>
     <string name="maptheme_scale_map_summary">Skalar karta; 100% = ingen skalning</string>
     <string name="maptheme_scale_text_title">Skalfaktor text</string>
