@@ -1467,7 +1467,6 @@
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
-    <string name="cache_status_attended">Участвовал</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
     <string name="cache_status_archived">В архиве</string>
@@ -1820,7 +1819,6 @@
     <string name="add_target_to">Добавить цель в</string>
     <string name="search_address_started">Поиск мест</string>
     <string name="search_address_result">Найденные места</string>
-    <string name="search_own_caches">Искать мои тайники</string>
     <string name="search_pocket_title">Выборка</string>
     <string name="search_bookmark_list">Список закладок</string>
     <string name="search_pocket_is_new">новые</string>
