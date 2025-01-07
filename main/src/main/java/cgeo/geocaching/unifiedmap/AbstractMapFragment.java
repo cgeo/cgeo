@@ -48,7 +48,7 @@ public abstract class AbstractMapFragment extends Fragment {
 
         private static final int CHECK_RATE_MS = 250;
         private static final int IDLE_STABLE_RATE_MS = 500;
-        private static final int IDLE_MOVING_RATE_MS = 5000;
+        private static final int IDLE_MOVING_RATE_MS = 1000;
 
         private final Disposable disposable;
         private Viewport lastViewport;

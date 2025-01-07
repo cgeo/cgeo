@@ -254,10 +254,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
-        viewModel.caches.observeForNotification(this, this::refreshListChooser);
+        viewModel.caches.observeForNotification(this, () -> {
+            refreshListChooser();
+            refreshWaypoints(viewModel);
+        });
         viewModel.viewportIdle.observe(this, vp -> {
             refreshListChooser();
-            refreshWaypoints(viewModel); //, getFilterContext(), vp, viewModel.mapType.isSingleCacheView());
+            refreshWaypoints(viewModel);
         });
 
 
@@ -379,6 +382,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                         mapFragment.zoomToBounds(DataStore.getBounds(mapType.target, Settings.getZoomIncludingWaypoints()));
                     }
                     if (mapType.waypointId > 0) { // single waypoint mode: display waypoint only
+                        viewModel.caches.write(false, Set::clear);
                         final Waypoint waypoint = cache.getWaypointById(mapType.waypointId);
                         if (waypoint != null) {
                             if (setDefaultCenterAndZoom) {
@@ -392,8 +396,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                                 onReceiveTargetUpdate(new AbstractDialogFragment.TargetInfo(waypoint.getCoords(), waypoint.getName()));
                             }
                         }
-                    } else if (cache.getCoords() != null) { // geocache mode: display geocache and its waypoints
-                        viewModel.caches.write(false, c -> c.add(cache));
+                    } else if (cache.getCoords() != null) { // geocache mode: display ONLY geocache and its waypoints
+                        viewModel.caches.write(false, c -> {
+                            c.clear();
+                            c.add(cache);
+                        });
                         if (setDefaultCenterAndZoom) {
                             mapFragment.setCenter(cache.getCoords());
                         }
@@ -424,9 +431,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, mapType.filterContext.get(), null, false, -1);
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(searchResult);
-                    if (viewport3.get() != null) {
-                        refreshWaypoints(viewModel); //, getFilterContext(), viewport3.get(), mapType.isSingleCacheView());
-                    }
                 }, () -> {
                     if (viewport3.get() != null) {
                         if (setDefaultCenterAndZoom) {
@@ -442,9 +446,6 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
                     viewport2.set(DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
                     addSearchResultByGeocaches(mapType.searchResult);
-                    if (viewport2.get() != null) {
-                        refreshWaypoints(viewModel); //, getFilterContext(), viewport2.get(), mapType.isSingleCacheView());
-                    }
                 }, () -> {
                     if (viewport2.get() != null) {
                         if (setDefaultCenterAndZoom) {
@@ -482,21 +483,18 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (changedCache == null || changedCache.getCoords() == null) {
             return;
         }
-        if (viewModel.mapType.enableLiveMap()) {
-            viewModel.liveMapHandler.addChangedCache(changedCache);
-        } else if (!viewModel.mapType.isSingleCacheView()) {
-            viewModel.caches.write(caches -> {
-                //need to remove first to ensure cache is really swapped ("Geocache" uses an id-only "equals()" function)
-                caches.remove(changedCache);
-                caches.add(changedCache);
-            });
-            final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
-            if (cacheWaypoints != null) {
-                viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
-            }
-            //call reload logic -> this will reapply filters and such
-            reloadCachesAndWaypoints();
+
+        viewModel.caches.write(caches -> {
+            //need to remove first to ensure cache is really swapped ("Geocache" uses an id-only "equals()" function)
+            caches.remove(changedCache);
+            caches.add(changedCache);
+        });
+        final List<Waypoint> cacheWaypoints = DataStore.loadWaypoints(geocode);
+        if (cacheWaypoints != null) {
+            viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
         }
+        //call reload logic -> this will reapply filters and such
+        reloadCachesAndWaypoints();
     }
 
     private void compactIconModeChanged(final int newValue) {
