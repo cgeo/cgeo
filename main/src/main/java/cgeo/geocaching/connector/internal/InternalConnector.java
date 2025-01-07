@@ -50,13 +50,13 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     private static final int GEOCODE_LENGTH = 4;
 
     // predefined id (without prefix) and geocode (with prefix) for certain special caches:
-    public static final String GEOCODE_HISTORY_CACHE = "ZZ0";
+    public static final String GEOCODE_HISTORY_CACHE = PREFIX + "0";
 
     // store into UDC list
     public static final int UDC_LIST = -1;
 
     // pattern for internal caches id
-    @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(" + PREFIX + ")[0-9A-Z]{1,4}", Pattern.CASE_INSENSITIVE);
+    @NonNull private static final Pattern PATTERN_GEOCODE = Pattern.compile("(" + PREFIX + ")[0-9A-Z]{1,10}", Pattern.CASE_INSENSITIVE);
 
     private InternalConnector() {
         // singleton
@@ -72,11 +72,6 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     @NonNull
     public static InternalConnector getInstance() {
         return Holder.INSTANCE;
-    }
-
-
-    public static String geocodeFromId(final long id) {
-        return PREFIX + id;
     }
 
     @Override
@@ -220,7 +215,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @param geopoint      cache's current location (or null if none)
      * @param listId        cache list's id, may be NEW_LIST
      */
-    protected static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
+    private static void assertCacheExists(final Context context, final String geocode, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
         if (DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB) == null) {
 
             int newListId = listId;
@@ -279,11 +274,10 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     private static String generateRandomId() {
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder(GEOCODE_LENGTH);
+        final Random random = new Random();
+        final StringBuilder sb = new StringBuilder(GEOCODE_LENGTH);
         for (int i = 0; i < GEOCODE_LENGTH; i++) {
-            int index = random.nextInt(GEOCODE_CHARS.length());
-            sb.append(GEOCODE_CHARS.charAt(index));
+            sb.append(GEOCODE_CHARS.charAt(random.nextInt(GEOCODE_CHARS.length())));
         }
         return sb.toString();
     }
