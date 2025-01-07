@@ -579,7 +579,6 @@
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
     <string name="cache_status_offline_log">Log disimpan</string>
-    <string name="cache_status_attended">Dihadiri</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
     <string name="cache_status_archived">Diarsipkan</string>
@@ -697,7 +696,6 @@
     <string name="search_tb_button">Cari untuk dilacak</string>
     <string name="search_address_started">Mencari tempat</string>
     <string name="search_address_result">Tempat ditemukan</string>
-    <string name="search_own_caches">Pencarian cache saya</string>
     <string name="search_pocket_title">Kantong Pertanyaan</string>
     <!-- trackable -->
     <string name="trackable">Bisa dilacak</string>
