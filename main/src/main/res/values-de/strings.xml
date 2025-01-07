@@ -1051,9 +1051,9 @@
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
-    <string name="settings_info_hillshading">Kartenschattierung ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie erforderlichen Daten können über das Kartenmenü heruntergeladen werden.</string>
     <string name="settings_hillshading_enable">Kartenschattierung</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
+    <string name="init_mapsource_select_legacy">Kartenquelle auswählen (Legacy)</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
     <string name="init_base_directory_description">Basisordner für öffentliche lokale Daten</string>
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
@@ -1174,6 +1174,9 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="init_title_useLegacyMap">Alte Karte verwenden</string>
+    <string name="init_summary_useLegacyMap">Verwenden Sie alte Versionen von Google Map / Mapsforge (OSM) anstelle der Vereinheitlichten Karte (UnifiedMap)</string>
+    <string name="category_unifiedMap">Vereinheitlichte Karte</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1476,7 +1479,7 @@
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
-    <string name="cache_status_attended">Habe teilgenommen</string>
+    <string name="cache_status_attended">Teilgenomen</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
     <string name="cache_status_archived">Archiviert</string>
@@ -1837,7 +1840,7 @@
     <string name="add_target_to">Ziel hinzufügen zu</string>
     <string name="search_address_started">Suche nach Orten</string>
     <string name="search_address_result">Gefundene Orte</string>
-    <string name="search_own_caches">Meine Caches suchen</string>
+    <string name="search_own_caches">Meine Caches</string>
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
@@ -2319,6 +2322,7 @@
         <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
+    <string name="live_map_status_http429">Bitte langsamer, zu viele Anfragen an %s</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
@@ -2440,6 +2444,7 @@
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="show_all">Alle zeigen</string>
+    <string name="lists_only_new">Nur neue</string>
     <string name="routingmode_straight">Direkt</string>
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
@@ -2540,6 +2545,7 @@
     <string name="brouter_info">Offline Routing-Dienst</string>
     <string name="hillshading_info">Offline Kartenschattierung</string>
     <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
+    <string name="maptheme_vtm_scaling_summary">Skalierungsoptionen für Offline-Karten (Nur VTM, Neustart erforderlich)</string>
     <string name="maptheme_scale_map_title">Kartenskalierungsfaktor</string>
     <string name="maptheme_scale_map_summary">Skaliert die Karte; 100% = keine Skalierung</string>
     <string name="maptheme_scale_text_title">Textskalierungsfaktor</string>
