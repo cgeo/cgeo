@@ -66,7 +66,9 @@ public class FilterUtils {
         model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
                 .setItems(filters)
-                .setDisplayMapper((f) -> TextParam.text(f.getName()));
+                .setDisplayMapper((f) -> TextParam.text(f.getName()))
+                .activateGrouping(f -> getGroupFromFilterName(f.getName()))
+                .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true));
 
         if (isFilterActive) {
             SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
@@ -79,6 +81,14 @@ public class FilterUtils {
                     .selectSingle(model, filteredActivity::refreshWithFilter);
         }
         return true;
+    }
+
+    public static String getGroupFromFilterName(final String group) {
+        if (group == null) {
+            return null;
+        }
+        final int idx = group.lastIndexOf(":");
+        return idx <= 0 ? null : group.substring(0, idx);
     }
 
     public static void setFilterText(@NonNull final TextView viewField, @Nullable final String filterName, @Nullable final Boolean filterChanged) {
