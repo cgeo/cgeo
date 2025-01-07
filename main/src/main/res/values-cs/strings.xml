@@ -1063,9 +1063,12 @@
     <string name="settings_info_themes_title">Info o motivech mapy</string>
     <string name="settings_info_themes">c: geo podporuje vlastní motivy pro offline mapy. Lze je použít ke změně barevného stylu mapy (např. můžete mít k dispozici noční mapu) nebo ke zvýraznění určitých objektů, jako jsou cyklostezky nebo vrstevnice na mapě.\n\nPráce s nezabalenými mapovými motivy může snížit výkon otevírání prohlížeče. V takovém případě může být složka s motivy volitelně synchronizována do místního soukromého úložiště aplikace pro rychlejší přístup (na úkor nějakého místa v úložném prostoru).</string>
     <string name="settings_info_hillshading_title">Informace o stínování kopců</string>
-    <string name="settings_info_hillshading">Stínování kopců je technika pro vytváření map topografického reliéfu přidáním světelného efektu do mapy pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nData pro stínování svahů lze stáhnout z nabídky map.</string>
+    <string name="settings_info_hillshading">Stínování kopců je technika pro tvorbu map topografického reliéfu, která do mapy přidává světelný efekt pro vyznačení změn nadmořské výšky. Svahy budou ztmaveny/zesvětleny, aby se vytvořil 3D efekt.\nData pro stínování svahů lze stáhnout přes nabídku mapy.\nNení kompatibilní s variantou UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Stínování kopců</string>
+    <string name="init_hillshading_hq">Stínování kopců ve vysoké kvalitě</string>
+    <string name="init_summary_hillshading_hq">Detailnější překrytí stínování kopců, ale asi o 50 % pomalejší vykreslování při oddálení</string>
     <string name="init_mapsource_select">Vyber mapový zdroj</string>
+    <string name="init_mapsource_select_legacy">Vybrat zdroj mapy (Starší)</string>
     <string name="init_local_file_system">Místní souborový systém</string>
     <string name="init_base_directory_description">Základní složka pro veřejná místní data</string>
     <string name="init_map_directory_description">Složka s offline mapami</string>
@@ -1186,6 +1189,9 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="init_title_useLegacyMap">Použít starší mapu</string>
+    <string name="init_summary_useLegacyMap">Použít starší verze Google Map / Mapsforge (OSM) map namísto Sjednocené mapy</string>
+    <string name="category_unifiedMap">Sjednocená mapa</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -1504,7 +1510,7 @@
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
-    <string name="cache_status_attended">Účastnil se</string>
+    <string name="cache_status_attended">Zúčastnil jsem se</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
@@ -1867,7 +1873,7 @@
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
     <string name="search_address_result">Nalezená místa</string>
-    <string name="search_own_caches">Hledat moje kešky</string>
+    <string name="search_own_caches">Moje kešky</string>
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
@@ -2602,6 +2608,7 @@
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="hillshading_info">Offline stínování kopců</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
+    <string name="maptheme_vtm_scaling_summary">Možnosti měřítka pro offline mapy (pouze VTM, vyžaduje restart)</string>
     <string name="maptheme_scale_map_title">Měřítko mapy</string>
     <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
     <string name="maptheme_scale_text_title">Měřítko textu</string>
