@@ -2018,21 +2018,6 @@ public class DataStore {
         }
     }
 
-    public static synchronized long getNextAvailableInternalCacheId() {
-        return withAccessLock(() -> {
-
-            final int minimum = 1000;
-
-            init();
-            final Cursor c = database.rawQuery("SELECT MAX(CAST(SUBSTR(geocode," + (1 + InternalConnector.PREFIX.length()) + ") AS INTEGER)) FROM " + dbTableCaches + " WHERE substr(geocode,1," + InternalConnector.PREFIX.length() + ") = \"" + InternalConnector.PREFIX + "\"", new String[]{});
-            final Set<Integer> nextId = cursorToColl(c, new HashSet<>(), GET_INTEGER_0);
-            for (Integer i : nextId) {
-                return Math.max(i + 1, minimum);
-            }
-            return minimum;
-        });
-    }
-
     /**
      * Remove obsolete cache directories in c:geo private storage.
      * Also removes caches marked as "to be deleted" immediately (ignoring 72h grace period!)
