@@ -32,6 +32,8 @@ public class FilterUtils {
         // should not be instantiated
     }
 
+    private static final String GROUP_SEPARATOR = ":";
+
     public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
 
         GeocacheFilterActivity.selectFilter(
@@ -82,10 +84,25 @@ public class FilterUtils {
         model
                 .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
                 .setItems(filters)
-                .setDisplayMapper((f) -> TextParam.text(f.getName()))
+                .setDisplayMapper((f, gi) -> {
+                    String name = f.getName();
+                    final String parentGroup = gi == null || gi.getGroup() == null ? "" : gi.getGroup().toString();
+                    if (name.startsWith(parentGroup + GROUP_SEPARATOR)) {
+                        name = name.substring(parentGroup.length() + 1);
+                    }
+                    return TextParam.text(name);
+                }, (f, gi) -> f.getName(), null)
                 .activateGrouping(f -> getGroupFromFilterName(f.getName()))
+                .setGroupPruner(gi -> gi.getSize() >= 2)
                 .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)
-                .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true));
+                .setGroupDisplayMapper(gi -> {
+                    final String parentGroup = gi.getParent() == null || gi.getParent().getGroup() == null ? "" : gi.getParent().getGroup();
+                    String name = gi.getGroup();
+                    if (name.startsWith(parentGroup + GROUP_SEPARATOR)) {
+                        name = name.substring(parentGroup.length() + 1);
+                    }
+                    return TextParam.text("**" + name + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true);
+                });
         return model;
     }
 
@@ -93,7 +110,7 @@ public class FilterUtils {
         if (group == null) {
             return null;
         }
-        final int idx = group.lastIndexOf(":");
+        final int idx = group.lastIndexOf(GROUP_SEPARATOR);
         return idx <= 0 ? null : group.substring(0, idx);
     }
 
