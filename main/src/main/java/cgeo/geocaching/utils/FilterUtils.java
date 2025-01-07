@@ -102,7 +102,8 @@ public class FilterUtils {
                         name = name.substring(parentGroup.length() + 1);
                     }
                     return TextParam.text("**" + name + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true);
-                });
+                })
+                .setReducedGroupSaver("filters", g -> g, g -> g);
         return model;
     }
 
