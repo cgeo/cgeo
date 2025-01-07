@@ -639,7 +639,6 @@
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
-    <string name="cache_status_attended">A participat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
     <string name="cache_status_archived">Arhivată</string>
@@ -757,7 +756,6 @@
     <string name="search_tb_button">Caută obiect călător</string>
     <string name="search_address_started">Caută adrese</string>
     <string name="search_address_result">Adrese găsite</string>
-    <string name="search_own_caches">Caută cutiile mele</string>
     <!-- trackable -->
     <string name="trackable">Obiecte călătoare</string>
     <string name="trackable_details_loading">Încărcare detalii obiect călător…</string>
