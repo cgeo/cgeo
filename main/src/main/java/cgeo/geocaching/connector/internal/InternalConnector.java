@@ -46,7 +46,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     // prefix - must not contain regexp characters
     public static final String PREFIX = "ZZ";
-    private static final String GEOCODE_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String GEOCODE_CHARS = "0123456789ABCDEFGHJKLMNPQRTUVWXYZ";
     private static final int GEOCODE_LENGTH = 4;
 
     // predefined id (without prefix) and geocode (with prefix) for certain special caches:
