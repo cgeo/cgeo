@@ -202,7 +202,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                                     }
                                 });
                     })
-                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+                    .activateGrouping(f -> FilterUtils.getGroupFromFilterName(f.getName()))
+                    .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true));;
 
                 SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title)
                                 .selectSingle(model, (f) -> fillViewFromFilter(f.toConfig(), isAdvancedView()));
