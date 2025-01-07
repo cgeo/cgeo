@@ -62,13 +62,7 @@ public class FilterUtils {
                 return true;
             }
 
-        final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
-        model
-                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
-                .setItems(filters)
-                .setDisplayMapper((f) -> TextParam.text(f.getName()))
-                .activateGrouping(f -> getGroupFromFilterName(f.getName()))
-                .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true));
+        final SimpleDialog.ItemSelectModel<GeocacheFilter> model = getGroupedFilterList(filters);
 
         if (isFilterActive) {
             SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
@@ -81,6 +75,18 @@ public class FilterUtils {
                     .selectSingle(model, filteredActivity::refreshWithFilter);
         }
         return true;
+    }
+
+    public static SimpleDialog.ItemSelectModel<GeocacheFilter> getGroupedFilterList(final List<GeocacheFilter> filters) {
+        final SimpleDialog.ItemSelectModel<GeocacheFilter> model = new SimpleDialog.ItemSelectModel<>();
+        model
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN)
+                .setItems(filters)
+                .setDisplayMapper((f) -> TextParam.text(f.getName()))
+                .activateGrouping(f -> getGroupFromFilterName(f.getName()))
+                .setGroupGroupMapper(FilterUtils::getGroupFromFilterName)
+                .setGroupDisplayMapper(gi -> TextParam.text("**" + gi.getGroup() + "** *(" + gi.getContainedItemCount() + ")*").setMarkdown(true));
+        return model;
     }
 
     public static String getGroupFromFilterName(final String group) {
