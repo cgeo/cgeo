@@ -1601,7 +1601,6 @@
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
-    <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
