@@ -1218,7 +1218,6 @@
     <string name="create_internal_cache">Kullanıcı tanımlı Geocache oluşturun</string>
     <string name="create_internal_cache_short">Yeni Geocache</string>
     <string name="create_internal_cache_currentlist">Mevcut listeyi kullan</string>
-    <string name="internal_cache_default_name">Kullanıcı tanımlı cache #%1$d</string>
     <string name="internal_cache_default_description">Bu, kullanıcı tanımlı bir Geocache\'dir</string>
     <string name="internal_cache_default_owner">Siz</string>
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
