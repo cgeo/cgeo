@@ -1575,7 +1575,7 @@
     <string name="create_internal_cache">Gebruiker gedefinieerde cache maken</string>
     <string name="create_internal_cache_short">Nieuwe cache</string>
     <string name="create_internal_cache_currentlist">Huidige lijst gebruiken</string>
-    <string name="internal_cache_default_name">Door gebruiker gedefinieerde cache #%1$d</string>
+    <string name="internal_cache_default_names">Door gebruiker gedefinieerde cache #%1$s</string>
     <string name="internal_cache_default_description">Dit is een gebruiker gedefinieerde cache</string>
     <string name="internal_cache_default_owner">Jij</string>
     <string name="internal_goto_targets_title">\'Ga naar\' doelen</string>
