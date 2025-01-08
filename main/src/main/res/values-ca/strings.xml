@@ -1571,7 +1571,6 @@
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
     <string name="create_internal_cache_short">Nou catxé</string>
     <string name="create_internal_cache_currentlist">Utilitzeu la llista actual</string>
-    <string name="internal_cache_default_name">Catxé definit per l’usuari #%1$d</string>
     <string name="internal_cache_default_description">Es tracta d’un catxé definit per l’usuari</string>
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Objectius \"Vés a\"</string>
