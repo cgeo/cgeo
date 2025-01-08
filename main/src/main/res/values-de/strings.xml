@@ -1570,7 +1570,6 @@
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
-    <string name="internal_cache_default_name">Benutzerdefinierter Cache #%1$d</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
