@@ -1014,7 +1014,6 @@
     <string name="create_internal_cache">建立玩家自訂cache</string>
     <string name="create_internal_cache_short">新的cache</string>
     <string name="create_internal_cache_currentlist">使用目前的列表</string>
-    <string name="internal_cache_default_name">玩家自訂的寶藏 #%1$d</string>
     <string name="internal_cache_default_description">這是玩家自訂cache</string>
     <string name="internal_cache_default_owner">您</string>
     <string name="internal_goto_targets_title">來去目標</string>
