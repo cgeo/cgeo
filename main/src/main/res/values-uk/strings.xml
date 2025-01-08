@@ -793,7 +793,6 @@
     <string name="context_share_as_link">Поділитись посиланням</string>
     <string name="create_internal_cache">Створіть кешований користувачем кеш</string>
     <string name="create_internal_cache_short">Новий кеш</string>
-    <string name="internal_cache_default_name">Визначений користувачем кеш #%1$d</string>
     <string name="internal_cache_default_description">Це користувацький кеш</string>
     <string name="internal_cache_default_owner">Ви</string>
     <string name="internal_goto_targets_title">перейти до мети</string>
