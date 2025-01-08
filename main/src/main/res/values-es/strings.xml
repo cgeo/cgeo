@@ -1225,7 +1225,6 @@
     <string name="create_internal_cache">Crear caché definido por el usuario</string>
     <string name="create_internal_cache_short">Nuevo caché</string>
     <string name="create_internal_cache_currentlist">Utilizar lista actual</string>
-    <string name="internal_cache_default_name">Caché definido por el usuario #%1$d</string>
     <string name="internal_cache_default_description">Este es un caché definido por el usuario</string>
     <string name="internal_cache_default_owner">Tú</string>
     <string name="internal_goto_targets_title">Objetivos \"Ir a\"</string>
