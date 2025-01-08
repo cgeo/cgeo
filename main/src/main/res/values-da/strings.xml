@@ -1014,7 +1014,6 @@
     <string name="context_share_as_link">Del link</string>
     <string name="create_internal_cache">Opret brugerdefineret cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
-    <string name="internal_cache_default_name">Brugerdefineret cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brugerdefineret cache</string>
     <string name="internal_cache_default_owner">Dig</string>
     <string name="internal_goto_targets_title">\'Gå til\' mål</string>
