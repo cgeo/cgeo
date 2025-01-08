@@ -760,7 +760,6 @@
     <string name="cache_whereyougo_start">Atvērt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="cache_whereyougo_install">Instalēt WhereYouGo aplikāciju, lai lejupielādētu un atvērtu šo kasetni</string>
     <string name="create_internal_cache">Izveidot lietotāja definētu slēpni</string>
-    <string name="internal_cache_default_name">Lietotāja definēts slēpnis #%1$d</string>
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\"Iet uz\" (\'Go to\') mērķi</string>
     <string name="goto_targets_list">Lietotāja definēti slēpņi</string>
