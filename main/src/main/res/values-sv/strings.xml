@@ -1569,7 +1569,6 @@
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Använd aktuell lista</string>
-    <string name="internal_cache_default_name">Användardefinierad cache #%1$d</string>
     <string name="internal_cache_default_description">Detta är en egen-definierad cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
