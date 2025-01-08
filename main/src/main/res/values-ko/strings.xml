@@ -1500,7 +1500,6 @@
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
-    <string name="internal_cache_default_name">사용자 정의 캐시 #%1$d</string>
     <string name="internal_cache_default_description">이것은 사용자 정의 캐시입니다</string>
     <string name="internal_cache_default_owner">당신</string>
     <string name="internal_goto_targets_title">\'이동으로\' 목표</string>
