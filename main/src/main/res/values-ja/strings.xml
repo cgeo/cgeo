@@ -1205,7 +1205,6 @@
     <string name="create_internal_cache">ユーザー定義のキャッシュを作成</string>
     <string name="create_internal_cache_short">新しいキャッシュ</string>
     <string name="create_internal_cache_currentlist">現在のリストを使用</string>
-    <string name="internal_cache_default_name">ユーザー定義キャッシュ #%1$d</string>
     <string name="internal_cache_default_description">これはユーザー定義キャッシュです</string>
     <string name="internal_cache_default_owner">あなた</string>
     <string name="internal_goto_targets_title">「移動」の行先</string>
