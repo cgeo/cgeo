@@ -1391,7 +1391,6 @@
     <string name="create_internal_cache">Vytvoriť používateľom definovanú kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použiť aktuálny zoznam</string>
-    <string name="internal_cache_default_name">Používateľom definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je používateľom definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
