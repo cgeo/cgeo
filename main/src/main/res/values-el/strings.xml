@@ -1294,7 +1294,6 @@
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
     <string name="create_internal_cache_short">Νέα κρύπτη</string>
     <string name="create_internal_cache_currentlist">Χρήση τρέχουσας λίστας</string>
-    <string name="internal_cache_default_name">Κρύπτη ορισμένη από τον χρήστη #%1$d</string>
     <string name="internal_cache_default_description">Αυτή είναι μια user-defined κρύπτη</string>
     <string name="internal_cache_default_owner">Εσείς</string>
     <string name="internal_goto_targets_title">\'Πήγαινε σε\' σημεία</string>
