@@ -1194,7 +1194,6 @@
     <string name="create_internal_cache">Opprett en brukerdefinert cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Bruk gjeldende liste</string>
-    <string name="internal_cache_default_name">Brukerdefinert cache #%1$d</string>
     <string name="internal_cache_default_description">Dette er en brukerdefinert cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå til\'-mål</string>
