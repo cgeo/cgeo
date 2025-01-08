@@ -1479,7 +1479,6 @@
     <string name="create_internal_cache">Luo käyttäjän määrittämä kätkö</string>
     <string name="create_internal_cache_short">Uusi kätkö</string>
     <string name="create_internal_cache_currentlist">Käytä nykyistä listaa</string>
-    <string name="internal_cache_default_name">Käyttäjän määrittämä kätkö #%1$d</string>
     <string name="internal_cache_default_description">Tämä on käyttäjän määrittämä kätkö</string>
     <string name="internal_cache_default_owner">Sinä</string>
     <string name="internal_goto_targets_title">Kohteet joihin siirrytään</string>
