@@ -1603,7 +1603,6 @@
     <string name="create_internal_cache">Utwórz skrytkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrytka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
-    <string name="internal_cache_default_name">Skrytka zdefiniowana przez użytkownika #%1$d</string>
     <string name="internal_cache_default_description">To jest skrytka zdefiniowana przez użytkownika</string>
     <string name="internal_cache_default_owner">Ty</string>
     <string name="internal_goto_targets_title">Cele „Idź do”</string>
