@@ -1563,7 +1563,6 @@
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
-    <string name="internal_cache_default_name">Cache definida pelo utilizador #%1$d</string>
     <string name="internal_cache_default_description">Esta é uma cache definida pelo utilizador</string>
     <string name="internal_cache_default_owner">Você</string>
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
