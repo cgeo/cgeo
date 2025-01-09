@@ -104,7 +104,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
                 if (cache.hasUserModifiedCoords()) {
                     shareCoordText = R.string.export_modifiedcoords;
                     shareCoords = cache.getCoords();
-                } else if (cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords) != null) {
+                } else if (cache.hasFinalDefined()) {
                     shareCoordText = R.string.wp_final;
                     shareCoords = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
                 } else {
@@ -177,6 +177,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords);
         menu.findItem(R.id.menu_upload_bookmarklist).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember() && ConnectorFactory.getConnector(cache) instanceof GCConnector);
+        menu.findItem(R.id.menu_share_with_data).setVisible(cache.hasUserModifiedCoords() || cache.hasFinalDefined() || null != cache.getPersonalNote());
     }
 
     public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache, final boolean fromPopup) {
