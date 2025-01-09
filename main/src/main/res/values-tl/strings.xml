@@ -517,7 +517,6 @@
         <item quantity="one">tungkol sa %d araw na nakalipas</item>
         <item quantity="other">tungkol sa %d araw na nakalipas</item>
     </plurals>
-    <string name="cache_inventory">Imbentaryo</string>
     <string name="cache_log_image_default_title">Larawan</string>
     <string name="cache_personal_note">Ang pansariling tala</string>
     <string name="cache_personal_note_edit">Baguhin</string>
