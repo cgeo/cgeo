@@ -317,9 +317,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (oldProvider != null && oldFragment != null) {
             oldFragment.prepareForTileSourceChange();
         }
+        if (this.cacheReloadState == CacheReloadState.REFRESH) {
+            //for refresh of already initialized map, save current zoom/center and restore in new map source
+            saveCenterAndZoom();
+            this.cacheReloadState = CacheReloadState.RESUME;
+        }
         tileProvider = newSource;
         mapFragment = tileProvider.createMapFragment();
         Settings.setTileProvider(newSource); // store new tileProvider, so that next getRenderTheme retrieves correct tileProvider-specific theme
+
 
         if (oldFragment != null) {
             mapFragment.init(oldFragment.getCurrentZoom(), oldFragment.getCenter(), () -> onMapReadyTasks(newSource));
