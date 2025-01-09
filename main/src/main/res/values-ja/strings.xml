@@ -1031,7 +1031,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">一年以上前</string>
     <string name="cache_premium">プレミアム会員</string>
-    <string name="cache_inventory">目録</string>
     <string name="cache_log_image_default_title">写真</string>
     <string name="cache_personal_note">パーソナルノート</string>
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
