@@ -255,7 +255,6 @@
     <string name="caches_sort_name">שם</string>
     <string name="caches_sort_rating">דירוג</string>
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
-    <string name="caches_sort_inventory">ספירת מלאי</string>
     <string name="caches_sort_date_hidden">תאריך הטמנה</string>
     <string name="caches_sort_finds">מציאות</string>
     <string name="caches_sort_state">מצב</string>
