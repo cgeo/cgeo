@@ -152,22 +152,26 @@
             <item
                 android:id="@+id/menu_share"
                 android:title="@string/cache_menu_share"
-                android:icon="@drawable/ic_menu_share">
+                android:icon="@drawable/ic_menu_share"
+                app:iconTint="@color/colorText">
             </item>
             <item
                 android:id="@+id/menu_share_with_data"
                 android:title="@string/cache_menu_share_with_data"
-                android:icon="@drawable/ic_menu_variable">
+                android:icon="@drawable/ic_menu_variable"
+                app:iconTint="@color/colorText">
             </item>
             <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx"
-                android:icon="@drawable/ic_menu_gpx">
+                android:icon="@drawable/ic_menu_gpx"
+                app:iconTint="@color/colorText">
             </item>
             <item
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes"
-                android:icon="@drawable/ic_menu_note">
+                android:icon="@drawable/ic_menu_note"
+                app:iconTint="@color/colorText">
             </item>
         </menu>
     </item>
