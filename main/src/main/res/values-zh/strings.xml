@@ -290,7 +290,6 @@
     <string name="caches_sort_name">应用名</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
-    <string name="caches_sort_inventory">库存计数</string>
     <string name="caches_sort_date_hidden">隐藏日期</string>
     <string name="caches_sort_finds">查找</string>
     <string name="caches_sort_state">省份</string>
