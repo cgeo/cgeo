@@ -513,7 +513,6 @@
         <item quantity="other">ang tungkol sa %d sa nakalipas na mga araw</item>
     </plurals>
     <string name="cache_premium">Ang Premyum</string>
-    <string name="cache_inventory">Ang Imbentaryo</string>
     <string name="cache_log_image_default_title">Ang Larawan</string>
     <string name="cache_personal_note">Pansariling tala</string>
     <string name="cache_personal_note_edit">I-edit</string>
