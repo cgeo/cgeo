@@ -1199,7 +1199,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">pred viac ako rokom</string>
     <string name="cache_premium">Platený účet</string>
-    <string name="cache_inventory">Obsah</string>
     <string name="cache_log_image_default_title">Fotografia</string>
     <string name="cache_personal_note">Osobná poznámka</string>
     <string name="cache_menu_preventWaypointsFromNote">Neurčovať body trasy z poznámky</string>
