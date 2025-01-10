@@ -1,7 +1,12 @@
 package cgeo.geocaching.utils;
 
+import android.annotation.SuppressLint;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.view.menu.MenuBuilder;
+
+import javax.annotation.Nullable;
 
 public class MenuUtils {
 
@@ -41,5 +46,12 @@ public class MenuUtils {
         final MenuItem item = menu.findItem(itemId);
         setVisible(item, visible);
         setEnabled(item, enabled);
+    }
+
+    @SuppressLint("RestrictedApi") // workaround to make icons visible in overflow menu of toolbar
+    public static void enableIconsInOverflowMenu(@Nullable final Menu menu) {
+        if (menu instanceof MenuBuilder) {
+            ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
     }
 }
