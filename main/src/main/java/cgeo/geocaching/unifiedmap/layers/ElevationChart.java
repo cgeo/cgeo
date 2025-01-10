@@ -14,16 +14,15 @@ import cgeo.geocaching.models.geoitem.GeoPrimitive;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.MenuUtils;
 import static cgeo.geocaching.unifiedmap.LayerHelper.ZINDEX_ELEVATIONCHARTMARKERPOSITION;
 import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 
-import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -68,7 +67,6 @@ public class ElevationChart {
         }
     }
 
-    @SuppressLint("RestrictedApi") // required for workaround to make icons visible in overflow menu
     public void showElevationChart(final Route route, final RouteTrackUtils routeTrackUtils) {
         if (chart == null) {
             return;
@@ -107,10 +105,7 @@ public class ElevationChart {
             toolbar.inflateMenu(R.menu.map_routetrack_context);
             RouteTrackUtils.configureContextMenu(toolbar.getMenu(), false, route, true);
             toolbar.setOnMenuItemClickListener(item -> routeTrackUtils.handleContextMenuClick(item, null, route, null));
-            // workaround to display icons in overflow menu of toolbar
-            if (toolbar.getMenu() instanceof MenuBuilder) {
-                ((MenuBuilder) toolbar.getMenu()).setOptionalIconsVisible(true);
-            }
+            MenuUtils.enableIconsInOverflowMenu(toolbar.getMenu());
         }
 
         // set/update data

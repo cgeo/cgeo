@@ -29,11 +29,11 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.dialog.SimplePopupMenu;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
@@ -50,7 +50,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -147,11 +146,8 @@ public class RouteTrackUtils {
         menu.show();
     }
 
-    @SuppressLint("RestrictedApi") // required for workaround to make icons visible in overflow menu
     public static void configureContextMenu(final Menu menu, final boolean showElevationChart, final IGeoItemSupplier route, final boolean hidePerDefault) {
-        if (menu instanceof MenuBuilder) {
-            ((MenuBuilder) menu).setOptionalIconsVisible(true);
-        }
+        MenuUtils.enableIconsInOverflowMenu(menu);
 
         final boolean isIndividualRoute = isIndividualRoute(route);
         final MenuItem elevationChart = menu.findItem(R.id.menu_showElevationChart);
