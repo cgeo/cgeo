@@ -7,6 +7,7 @@ import cgeo.geocaching.export.IndividualRouteExport;
 import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.routing.RouteOptimizationHelper;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
@@ -147,13 +148,15 @@ public class RouteTrackUtils {
     }
 
     @SuppressLint("RestrictedApi") // required for workaround to make icons visible in overflow menu
-    public static void configureContextMenu(final Menu menu, final boolean showElevationChart, final Route route, final boolean hidePerDefault) {
+    public static void configureContextMenu(final Menu menu, final boolean showElevationChart, final IGeoItemSupplier route, final boolean hidePerDefault) {
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
         }
 
         final boolean isIndividualRoute = isIndividualRoute(route);
-        configureMenuItem(menu.findItem(R.id.menu_showElevationChart), showElevationChart, null);
+        final MenuItem elevationChart = menu.findItem(R.id.menu_showElevationChart);
+        configureMenuItem(elevationChart, showElevationChart, null);
+        elevationChart.setEnabled(route instanceof Route);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_center), true, hidePerDefault);
@@ -177,10 +180,10 @@ public class RouteTrackUtils {
         item.setTitle(CgeoApplication.getInstance().getString(isHidden ? R.string.make_visible : R.string.hide));
     }
 
-    public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final Route route, @Nullable final Runnable onDelete) {
+    public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
         final int id = item.getItemId();
-        if (id == R.id.menu_showElevationChart && showElevationChart != null) {
-            showElevationChart.call(route, true);
+        if (id == R.id.menu_showElevationChart && showElevationChart != null && route instanceof Route) {
+            showElevationChart.call((Route) route, true);
         } else if (id == R.id.menu_edit && isIndividualRoute(route)) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
         } else if (id == R.id.menu_optimize && isIndividualRoute(route)) {
@@ -205,7 +208,12 @@ public class RouteTrackUtils {
             }
             configureVisibility(item, willBeHidden);
         } else if (id == R.id.menu_center) {
-            route.setCenter(centerOnPosition);
+            if (route instanceof Route) {
+                ((Route) route).setCenter(centerOnPosition);
+            } else {
+                final Viewport vp = route.getViewport();
+                centerOnPosition.centerOnPosition(vp.getCenter().getLatitude(), vp.getCenter().getLongitude(), vp);
+            }
         } else if (id == R.id.menu_delete) {
             if (isIndividualRoute(route)) {
                 SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm(() -> {
@@ -226,7 +234,7 @@ public class RouteTrackUtils {
         } else if (id == R.id.menu_refresh && isIndividualRoute(route)) {
             // create list of geocodes contained in individual route (including geocodes for contained waypoints)
             final Set<String> geocodes = new HashSet<>();
-            final RouteSegment[] segments = route.getSegments();
+            final RouteSegment[] segments = ((Route) route).getSegments();
             for (RouteSegment segment : segments) {
                 if (segment != null) {
                     final RouteItem routeItem = segment.getItem();
@@ -302,8 +310,8 @@ public class RouteTrackUtils {
         tracks.traverse((key, geoData) -> {
             final Toolbar tb = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null).findViewById(R.id.routes_track_item);
             tb.inflateMenu(R.menu.map_routetrack_context);
-            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, (Route) geoData, () -> updateDialogTracks(dialog, tracks, showElevationChart)));
-            configureContextMenu(tb.getMenu(), true, (Route) geoData, false);
+            tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, geoData, () -> updateDialogTracks(dialog, tracks, showElevationChart)));
+            configureContextMenu(tb.getMenu(), true, geoData, false);
 
             final TextView displayName = tb.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
@@ -414,7 +422,7 @@ public class RouteTrackUtils {
         ActivityMixin.invalidateOptionsMenu(activity);
     }
 
-    public static boolean isIndividualRoute(final Route route) {
-        return (route != null && route.getName().isEmpty());
+    public static boolean isIndividualRoute(final IGeoItemSupplier route) {
+        return (route instanceof Route && ((Route) route).getName().isEmpty());
     }
 }
