@@ -9,13 +9,13 @@ import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,8 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import static java.lang.Boolean.TRUE;
 
-import io.reactivex.rxjava3.core.Maybe;
-import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.BiConsumer;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -405,34 +404,22 @@ public class SearchResult implements Parcelable {
     public static <C extends IConnector> SearchResult parallelCombineActive(
             @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
 
-        return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
-            try {
-                if (connector == null || !connector.isActive()) {
-                    return Maybe.empty();
-                }
-                return Maybe.fromCallable(() -> {
-                    try {
-                        return func.apply(connector);
-                    } catch (final Throwable t) {
-                        Log.w("SearchResult.parallelCombineActive: swallowing error from connector " + connector, t);
-                        final SearchResult errorResult = new SearchResult();
-                        errorResult.setError(connector, StatusCode.UNKNOWN_ERROR);
-                        return errorResult;
-                    }
-                }).subscribeOn(AndroidRxUtils.networkScheduler);
-            } catch (Throwable t) {
-                Log.w("SearchResult.parallelCombineActive.maybe-creation: swallowing error from connector " + connector, t);
-                return Maybe.empty();
-            }
-        }).reduce(initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {
-            try {
+        return AndroidRxUtils.executeParallelThenCombine(connectors, conn -> conn.isActive() ? func.apply(conn) : null,
+            initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {
                 searchResult.addSearchResult(searchResult2);
                 return searchResult;
-            } catch (final Throwable t) {
-                Log.w("SearchResult.parallelCombineActive-reduce: swallowing error", t);
-                return searchResult;
-            }
-        }).blockingGet();
+            });
+    }
+
+    @WorkerThread
+    public static <C extends IConnector> void parallelCombineActive(
+            final Collection<C> connectors, final Function<C, SearchResult> func, final BiConsumer<C, SearchResult> callback) {
+
+        AndroidRxUtils.executeParallelThenCombine(connectors, conn -> conn.isActive() ? new Pair<>(conn, func.apply(conn)) : null,
+            new Pair<>(null, null), (initial, srPair) -> {
+                callback.accept(srPair.first, srPair.second);
+                return initial;
+            });
     }
 
 }

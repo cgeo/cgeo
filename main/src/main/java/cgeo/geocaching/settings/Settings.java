@@ -727,6 +727,10 @@ public class Settings {
         return getBoolean(R.string.pref_vtm_marker_atlas_usage, false);
     }
 
+    public static boolean enableFeatureUnifiedDebug() {
+        return getBoolean(R.string.pref_feature_unified_debug, false);
+    }
+
     public static boolean enableFeatureUnifiedGeoItemLayer() {
         return getBoolean(R.string.pref_feature_unified_geoitem_layer, false);
     }
