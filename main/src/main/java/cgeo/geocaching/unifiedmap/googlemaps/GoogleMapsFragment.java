@@ -7,6 +7,7 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.TouchableWrapper;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GoogleV2GeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
@@ -106,7 +107,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
     private void onMapAndActivityReady() {
         applyTheme();
         if (position != null) {
-            setCenter(position);
+            ViewUtils.runOnUiThread(true, () -> setCenter(position));
         }
         setZoom(zoomLevel);
         mMap.setOnMarkerClickListener(marker -> true); // suppress default behavior (too slow & unwanted popup)
@@ -181,6 +182,7 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setCenter(final Geopoint geopoint) {
+        this.position = geopoint;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(geopoint.getLatitude(), geopoint.getLongitude())));
         }
@@ -228,10 +230,9 @@ public class GoogleMapsFragment extends AbstractMapFragment implements OnMapRead
 
     @Override
     public void setZoom(final int zoomLevel) {
+        this.zoomLevel = zoomLevel;
         if (mMap != null) {
             mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
-        } else {
-            this.zoomLevel = zoomLevel;
         }
     }
 
