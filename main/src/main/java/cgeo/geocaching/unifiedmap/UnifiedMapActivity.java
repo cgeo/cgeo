@@ -69,8 +69,10 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HideActionBarUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
 import cgeo.geocaching.wherigo.WherigoThingType;
@@ -97,7 +99,6 @@ import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -113,6 +114,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -515,13 +517,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.caches.notifyDataChanged(true); // TODO: necessary?
     }
 
-    private LiveMapGeocacheLoader.State oldStatus;
+    private LiveMapGeocacheLoader.LoadState oldStatus;
 
-    public void setLiveLoadStatus(final Pair<LiveMapGeocacheLoader.State, String> observedStatus) {
-        final Pair<LiveMapGeocacheLoader.State, String> status = observedStatus == null ? viewModel.liveLoadStatus.getValue() : observedStatus;
+    public void setLiveLoadStatus(final LiveMapGeocacheLoader.LiveDataState observedStatus) {
+        final LiveMapGeocacheLoader.LiveDataState status = observedStatus == null ? viewModel.liveLoadStatus.getValue() : observedStatus;
         final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
         final ImageView liveMapStatus = findViewById(R.id.live_map_status);
-        if (spinner == null || liveMapStatus == null) {
+        if (spinner == null || liveMapStatus == null || status == null) {
             return;
         }
         Log.iForce("UnifiedMap:set progress to " + status);
@@ -532,27 +534,45 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
             return;
         }
-        switch (status.first) {
+        switch (status.loadState) {
             case RUNNING:
                 spinner.setVisibility(View.VISIBLE);
                 spinner.setIndeterminate(true);
                 break;
-            case STOPPED_ERROR:
-                liveMapStatus.setImageResource(R.drawable.ic_menu_error);
-                liveMapStatus.getBackground().setTint(getResources().getColor(R.color.cacheMarker_archived));
-                liveMapStatus.setVisibility(View.VISIBLE);
-                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.id(R.string.live_map_status_error, status.second)).show());
-                break;
-            case STOPPED_PARTIAL_RESULT:
-                liveMapStatus.setImageResource(R.drawable.ic_menu_partial);
-                liveMapStatus.getBackground().setTint(getResources().getColor(R.color.osm_zoomcontrol));
-                liveMapStatus.setVisibility(View.VISIBLE);
-                liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.id(R.string.live_map_status_partial, status.second)).show());
+            case STOPPED:
+                //find out whether it is error or partial or none of it; construct error/partial messages
+                boolean isError = false;
+                boolean isPartial = false;
+                final StringBuilder errors = new StringBuilder();
+                final StringBuilder partials = new StringBuilder();
+                final StringBuilder normals = new StringBuilder();
+                for (LiveMapGeocacheLoader.ConnectorState data : status.connectors) {
+                    isError |= data.isError();
+                    isPartial |= data.isPartial;
+                    if (data.isError()) {
+                        errors.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                    } else if (data.isPartial) {
+                        partials.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                    } else {
+                        normals.append("\n- " + data.toUserDisplayableStringWithMarkup());
+                    }
+                }
+                final String errorMsg = errors.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_error, errors);
+                final String partialMsg = partials.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_partial, partials);
+                final String normalMsg = normals.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_normal, normals);
+                final String msgWithMarkup = TextUtils.join(Arrays.asList(errorMsg, partialMsg, normalMsg), s -> s, "\n\n").toString();
+                final CharSequence msg = TextParam.text(msgWithMarkup).setMarkdown(true).getText(null);
+                if (isError || isPartial) {
+                    liveMapStatus.setImageResource(isError ? R.drawable.ic_menu_error : R.drawable.ic_menu_partial);
+                    liveMapStatus.getBackground().setTint(getResources().getColor(isError ? R.color.cacheMarker_archived : R.color.osm_zoomcontrol));
+                    liveMapStatus.setVisibility(View.VISIBLE);
+                    liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(msg)).show());
+                }
                 break;
             case REQUESTED:
                 spinner.setVisibility(View.VISIBLE);
                 spinner.setIndeterminate(false);
-                if (oldStatus != status.first) {
+                if (oldStatus != status.loadState) {
                     final CountDownTimer timer = new CountDownTimer(LiveMapGeocacheLoader.PROCESS_DELAY, 20) {
                         @Override
                         public void onTick(final long millisUntilFinished) {
@@ -567,11 +587,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                     timer.start();
                 }
                 break;
-            case STOPPED_OK:
             default:
                 break;
         }
-        oldStatus = status.first;
+        oldStatus = status.loadState;
     }
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {

@@ -1,6 +1,8 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.MapStarUtils;
 import cgeo.geocaching.models.Geocache;
@@ -9,6 +11,8 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.geoitem.GeoIcon;
 import cgeo.geocaching.models.geoitem.GeoItem;
 import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
@@ -17,10 +21,14 @@ import cgeo.geocaching.utils.CollectionDiff;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
+import android.graphics.Color;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GeoItemsLayer {
@@ -115,6 +123,21 @@ public class GeoItemsLayer {
             }
 
             lastDisplayedWaypoints = currentlyDisplayedWaypoints;
+        });
+
+        viewModel.liveLoadStatus.observe(activity, lv -> {
+            if (Settings.enableFeatureUnifiedDebug() && lv != null && lv.cachedViewport != null) {
+                final Viewport vp = lv.cachedViewport;
+                final int color = Color.BLUE;
+                final List<Geopoint> points = Arrays.asList(vp.getBottomRight(), vp.bottomLeft, vp.getTopLeft(), vp.topRight);
+                final GeoItem poly = GeoPrimitive.createPolygon(points, GeoStyle.builder()
+                        .setStrokeColor(color)
+                        .setFillColor(Color.argb(128, Color.red(color), Color.green(color), Color.blue(color)))
+                        .setStrokeWidth(5f).build()).buildUpon().setZLevel(50).build();
+                layer.put("CACHED_LAYER", poly);
+            } else {
+                layer.remove("CACHED_LAYER");
+            }
         });
 
     }
