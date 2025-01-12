@@ -92,6 +92,12 @@
             android:summary="@string/init_summary_ActionbarAutohide"
             android:title="@string/init_ActionbarAutohide"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_autozoom_consider_lastcenter"
+            android:summary="@string/init_summary_autozoom_consider_lastcenter_on"
+            android:title="@string/init_autozoom_consider_lastcenter"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -440,7 +440,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }, () -> {
                     if (viewport3.get() != null) {
                         if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(viewport3.get());
+                            restoreOrSetViewport(viewport3.get());
                         }
                         refreshMapData(true);
                     }
@@ -455,7 +455,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 }, () -> {
                     if (viewport2.get() != null) {
                         if (setDefaultCenterAndZoom) {
-                            mapFragment.zoomToBounds(viewport2.get());
+                            restoreOrSetViewport(viewport2.get());
                         }
 
                         if (mapType.coords != null) {
@@ -487,6 +487,15 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.liveMapHandler.setEnabled(mapType.enableLiveMap());
         if (mapType.enableLiveMap()) {
             refreshMapData(true);
+        }
+    }
+
+    private void restoreOrSetViewport(final Viewport vp) {
+        final Geopoint storedMapCenter = Settings.getUMMapCenter();
+        if (Settings.getBoolean(R.string.pref_autozoom_consider_lastcenter, false) && vp.contains(storedMapCenter)) {
+            mapFragment.setCenter(storedMapCenter);
+        } else {
+            mapFragment.zoomToBounds(vp);
         }
     }
 
