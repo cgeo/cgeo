@@ -220,7 +220,8 @@ public final class MapMarkerUtils {
 
         // bottom-right: user modified coords / final waypoint defined
         if (cache.hasUserModifiedCoords() && mainMarkerId != R.drawable.marker_usermodifiedcoords) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
+            final boolean coordsIsOriginal = null != cache.getOriginalWaypoint() && cache.getCoords().equals(cache.getOriginalWaypoint().getCoords());
+            insetsBuilder.withInset(new InsetBuilder(coordsIsOriginal ? R.drawable.marker_usermodifiedcoords_original : R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         } else if (cache.hasFinalDefined() && !cache.hasUserModifiedCoords()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         }
