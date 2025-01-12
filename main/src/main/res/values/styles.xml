@@ -82,6 +82,10 @@
         <item name="tint">@color/colorTextActionBar</item>
     </style>
 
+    <style name="actionBarActionOverflow2" parent="actionBarActionOverflow">
+        <item name="tint">@color/colorText</item>
+    </style>
+
     <style name="tool_bar" parent="actionBarStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>

@@ -37,6 +37,10 @@
 
     </style>
 
+    <style name="cgeo.coloredToolbar" parent="cgeo">
+        <item name="android:actionOverflowButtonStyle">@style/actionBarActionOverflow2</item>
+    </style>
+
     <style name="AppTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar">
         <item name="contentInsetStartWithNavigation">0dp</item>
     </style>
