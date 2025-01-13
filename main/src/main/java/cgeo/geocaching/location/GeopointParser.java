@@ -22,8 +22,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class GeopointParser {
 
-    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), (-?\\d{2,})");
-    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. (-?\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), ([-+]?\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
 
     private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
@@ -413,10 +413,10 @@ public class GeopointParser {
      */
     private static final class DegDecCommaParser extends AbstractLatLonParser {
         //                                        (     1     ) , (    2   )
-        private static final String STRING_LAT = "(-?\\d{1,2}+),(\\d{5,}+)°?";
+        private static final String STRING_LAT = "([-+]?\\d{1,2}+),(\\d{5,}+)°?";
 
         //                                        (     1     ) , (    2   )
-        private static final String STRING_LON = "(-?\\d{1,3}+),(\\d{5,}+)\\b°?";
+        private static final String STRING_LON = "([-+]?\\d{1,3}+),(\\d{5,}+)\\b°?";
         private static final String STRING_SEPARATOR = ",";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
