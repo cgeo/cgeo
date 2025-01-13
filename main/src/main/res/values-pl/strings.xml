@@ -2364,7 +2364,6 @@
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrytek?</string>
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
-    <string name="live_map_status_partial">Częściowy wynik dla: %s. Przybliż, aby zmniejszyć liczbę skrytek do załadowania.</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
