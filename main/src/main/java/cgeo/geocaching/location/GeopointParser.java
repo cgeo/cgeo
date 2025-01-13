@@ -384,10 +384,10 @@ public class GeopointParser {
      */
     private static final class DegDecParser extends AbstractLatLonParser {
         //                                        (       1       )
-        private static final String STRING_LAT = "(-?\\d++\\.\\d++)°?";
+        private static final String STRING_LAT = "(-?\\d{1,2}+\\.\\d{5,}+)°?";
 
         //                                        (       1       )
-        private static final String STRING_LON = "(-?\\d++\\.\\d++)\\b°?";
+        private static final String STRING_LON = "(-?\\d{1,3}+\\.\\d{5,}+)\\b°?";
         private static final String STRING_SEPARATOR = "[^\\w'′\"″°.=-]*";
         private static final Pattern PATTERN_LAT = Pattern.compile(STRING_LAT, Pattern.CASE_INSENSITIVE);
         private static final Pattern PATTERN_LON = Pattern.compile(STRING_LON, Pattern.CASE_INSENSITIVE);
