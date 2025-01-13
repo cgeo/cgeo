@@ -64,11 +64,14 @@ public class CacheArtefactParserTest {
         final String note = "1. 0815\n2. 4711\nn 45° 3.565 e 27° 7.578";
         final CacheArtefactParser cacheArtefactParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = cacheArtefactParser.parse(note).getWaypoints();
-        assertThat(waypoints).hasSize(1);
+        assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp1 = iterator.next();
-        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 01° 4.890 E 2°28.266"));
         assertThat(wp1.getUserNote()).isEmpty();
+        final Waypoint wp2 = iterator.next();
+        assertWaypoint(wp2, "Prefix 2", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertThat(wp2.getUserNote()).isEmpty();
     }
 
     @Test
@@ -76,11 +79,14 @@ public class CacheArtefactParserTest {
         final String note = "1. 0815  2. 4711. 0815 2.4711 \n n 45° 3.565 e 27° 7.578";
         final CacheArtefactParser cacheArtefactParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = cacheArtefactParser.parse(note).getWaypoints();
-        assertThat(waypoints).hasSize(1);
+        assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp1 = iterator.next();
-        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 45°3.565 E 27°7.578"));
-        assertThat(wp1.getUserNote()).isEmpty();
+        assertWaypoint(wp1, "Prefix 1", new Geopoint("N 01° 4.890 E 2°28.266"));
+        assertThat(wp1.getUserNote()).isEqualTo(". 0815 2.4711");
+        final Waypoint wp2 = iterator.next();
+        assertWaypoint(wp2, "Prefix 2", new Geopoint("N 45°3.565 E 27°7.578"));
+        assertThat(wp2.getUserNote()).isEmpty();
     }
 
     private static void parseAndAssertFirstWaypoint(final String text, final String name, final WaypointType wpType, final String userNote) {
@@ -605,18 +611,18 @@ public class CacheArtefactParserTest {
     @Test
     public void testParseFormulaContainingPlainCoords() {
         final CacheArtefactParser parser = createParser("Praefix");
-        assertWaypoint(parser.parse("37.00000 +0.12345").getWaypoints().iterator().next(), "Praefix 1", new Geopoint(37d, 0.12345d));
-        assertWaypoint(parser.parse("16.00000 -0.54321").getWaypoints().iterator().next(), "Praefix 1", new Geopoint(16d, -0.54321d));
+        assertWaypoint(parser.parse("37.000 +0.123").getWaypoints().iterator().next(), "Praefix 1", new Geopoint(37d, 0.123d));
+        assertWaypoint(parser.parse("16.000 -0.321").getWaypoints().iterator().next(), "Praefix 1", new Geopoint(16d, -0.321d));
 
         //Formulas may contain text which would be parseable as standalone coord.
         //In this case however, such standalone coord should NOT be parsed
         final Collection<Waypoint> wps =
-                parser.parse("@Finale (F) {CC|N47° (37.00000 +0.12345)|E012° (16.00000 -0.54321)}").getWaypoints();
+                parser.parse("@Finale (F) {CC|N47° (37.000 +0.123)|E012° (16.000 -0.321)}").getWaypoints();
         assertThat(wps).hasSize(1);
         final Waypoint wp = wps.iterator().next();
-        assertThat(wp.getCalcStateConfig()).isEqualTo("{CC|N47° (37.00000 +0.12345)|E012° (16.00000 -0.54321)}");
+        assertThat(wp.getCalcStateConfig()).isEqualTo("{CC|N47° (37.000 +0.123)|E012° (16.000 -0.321)}");
 
-        final Collection<Waypoint> wps2 = parser.parse("{CC|N48|E11} 13.50000 8.30000 {CC|N34|E09}").getWaypoints();
+        final Collection<Waypoint> wps2 = parser.parse("{CC|N48|E11} 13.5 8.3 {CC|N34|E09}").getWaypoints();
         assertThat(wps2).hasSize(3);
         Waypoint nonCalc = null;
         int nonCalcCnt = 0;
