@@ -2364,7 +2364,8 @@
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech kešek?</string>
     <string name="live_map_status_http429">Prosím, zpomalte, příliš mnoho požadavků na %s</string>
     <string name="live_map_status_error">Chyba při načítání mapových dat: %s</string>
-    <string name="live_map_status_partial">Částečný výsledek pro: %s. Přibližte pro snížení počtu kešek k načtení.</string>
+    <string name="live_map_status_partial">Částečné výsledky (přiblížte pro snížení počtu kešek k načtení): %s</string>
+    <string name="live_map_status_normal">Načítání dat bez problémů: %s</string>
     <string name="list_list_headline">Seznamy:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d trasový bod extrahován</item>
