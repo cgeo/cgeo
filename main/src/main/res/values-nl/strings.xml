@@ -2302,7 +2302,6 @@
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
     <string name="live_map_status_http429">Niet zo snel, te veel aanvragen naar %s</string>
     <string name="live_map_status_error">Fout bij het laden van kaartgegevens: %s</string>
-    <string name="live_map_status_partial">Gedeeltelijke resultaat voor: %s. Zoom in om het aantal te laden caches te verminderen.</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint geëxtraheerd</item>
