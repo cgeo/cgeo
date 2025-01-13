@@ -19,6 +19,7 @@ public class ProximityPreferenceUI extends SeekbarUI {
     // init() gets called by super constructor, therefore before class constructor / class variable assignments!
     @Override
     public void init() {
+        super.init();
         minProgress = 1;
     }
 

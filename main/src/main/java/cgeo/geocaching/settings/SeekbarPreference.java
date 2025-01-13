@@ -137,23 +137,6 @@ public class SeekbarPreference extends Preference {
     public void onBindViewHolder(@NonNull final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        if (StringUtils.isBlank(tempTemplate)) {
-            tempTemplate = SeekbarUI.class.getCanonicalName();
-        }
-        tempTemplate = SeekbarUI.class.getCanonicalName(); // @test
-        try {
-            final Class c = Class.forName(tempTemplate);
-            final Class[] types = { Context.class };
-            final Constructor constructor = c.getConstructor(types);
-            final Object[] parameters = { getContext() };
-            seekbarUI = (SeekbarUI) constructor.newInstance(parameters);
-        } catch (IllegalAccessException | InstantiationException | ClassNotFoundException |
-                 NoSuchMethodException |
-                 InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
-        setExtraView(holder);
-
         final boolean hasTitle = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.title)).getText());
         final boolean hasSummary = StringUtils.isNotBlank(((TextView) holder.findViewById(android.R.id.summary)).getText());
         if (!hasTitle) {
@@ -162,26 +145,45 @@ public class SeekbarPreference extends Preference {
         if (!hasSummary) {
             holder.findViewById(android.R.id.summary).setVisibility(View.GONE);
         }
-        if (tempAttributes != null) {
-            seekbarUI.loadAdditionalAttributes(getContext(), tempAttributes, android.R.attr.preferenceStyle);
-            tempAttributes.recycle();
-            tempAttributes = null;
-        }
 
-        seekbarUI.setMinValue(tempMinValue);
-        seekbarUI.setMaxValue(tempMaxValue);
-        seekbarUI.setMinProgress(seekbarUI.valueToProgress(tempMinValue));
-        seekbarUI.setMaxProgress(seekbarUI.valueToProgress(tempMaxValue));
-        seekbarUI.setMinValueDescription(tempMinValueDescription);
-        seekbarUI.setMaxValueDescription(tempMaxValueDescription);
-        seekbarUI.setStepSize(tempStepSize);
-        seekbarUI.setHasDecimals(tempHasDecimals);
-        seekbarUI.setUseLogScaling(tempUseLogScaling);
-        seekbarUI.setUnitValue(tempUnitValue);
-        seekbarUI.setValueProgressMapper(tempValueProgressMapper);
-        seekbarUI.setSaveProgressListener(this::saveSetting);
-        setInitialValue(restoreStoredValue, tempDefaultValue);
-        seekbarUI.init();
+        if (seekbarUI == null) {
+            if (StringUtils.isBlank(tempTemplate)) {
+                tempTemplate = SeekbarUI.class.getCanonicalName();
+            }
+            try {
+                final Class c = Class.forName(tempTemplate);
+                final Class[] types = {Context.class};
+                final Constructor constructor = c.getConstructor(types);
+                final Object[] parameters = {getContext()};
+                seekbarUI = (SeekbarUI) constructor.newInstance(parameters);
+            } catch (IllegalAccessException | InstantiationException | ClassNotFoundException |
+                     NoSuchMethodException |
+                     InvocationTargetException e) {
+                throw new RuntimeException(e);
+            }
+
+            if (tempAttributes != null) {
+                seekbarUI.loadAdditionalAttributes(getContext(), tempAttributes, android.R.attr.preferenceStyle);
+                tempAttributes.recycle();
+                tempAttributes = null;
+            }
+
+            seekbarUI.setMinValue(tempMinValue);
+            seekbarUI.setMaxValue(tempMaxValue);
+            seekbarUI.setMinProgress(seekbarUI.valueToProgress(tempMinValue));
+            seekbarUI.setMaxProgress(seekbarUI.valueToProgress(tempMaxValue));
+            seekbarUI.setMinValueDescription(tempMinValueDescription);
+            seekbarUI.setMaxValueDescription(tempMaxValueDescription);
+            seekbarUI.setStepSize(tempStepSize);
+            seekbarUI.setHasDecimals(tempHasDecimals);
+            seekbarUI.setUseLogScaling(tempUseLogScaling);
+            seekbarUI.setUnitValue(tempUnitValue);
+            seekbarUI.setValueProgressMapper(tempValueProgressMapper);
+            seekbarUI.setSaveProgressListener(this::saveSetting);
+            setInitialValue(restoreStoredValue, tempDefaultValue);
+            seekbarUI.init();
+        }
+        setExtraView(holder);
     }
 
     private void setExtraView(final PreferenceViewHolder holder) {
