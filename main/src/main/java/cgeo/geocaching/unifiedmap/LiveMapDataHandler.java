@@ -45,6 +45,7 @@ public class LiveMapDataHandler {
 
         private GeocacheFilter lastFilter;
         private Viewport lastViewport;
+        private boolean lastLiveEnabled = true;
 
         Action(final LiveMapDataHandler handler, final UnifiedMapViewModel model) {
             this.handler = handler;
@@ -95,9 +96,12 @@ public class LiveMapDataHandler {
                 }
                 //live refresh
                 if (params.liveEnabled) {
-                    liveLoader.requestUpdate(params.viewport, params.filter);
+                    liveLoader.requestUpdate(params.viewport, params.filter, !lastLiveEnabled);
+                } else {
+                    liveLoader.cancelRequest();
                 }
                 lastFilter = params.filter;
+                lastLiveEnabled = params.liveEnabled;
             } catch (final Exception e) {
                 Log.w("LiveMapDataHandler.run", e);
             }
