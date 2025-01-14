@@ -862,6 +862,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             } else {
                 viewModel.mapType = new UnifiedMapType();
                 viewModel.transientIsLiveEnabled.setValue(true);
+                Settings.setLiveMap(true);
                 refreshListChooser();
                 MapUtils.updateFilterBar(this, viewModel.mapType.filterContext);
                 updateSelectedBottomNavItemId();

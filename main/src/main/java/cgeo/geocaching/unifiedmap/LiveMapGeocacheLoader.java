@@ -243,10 +243,15 @@ public class LiveMapGeocacheLoader {
         this.actionDisposable = Schedulers.newThread().schedulePeriodicallyDirect(new Action(this, onStateChanged, onResult), 0, 250, TimeUnit.MILLISECONDS);
     }
 
-    public synchronized void requestUpdate(final Viewport viewport, final GeocacheFilter filter) {
+    public synchronized void requestUpdate(final Viewport viewport, final GeocacheFilter filter, final boolean skipDelay) {
         this.viewport = viewport;
         this.filter = filter;
-        this.dirtyTime = this.dirtyTime <= -1 ? System.currentTimeMillis() : this.dirtyTime;
+        final long timeMod = skipDelay ? PROCESS_DELAY : 0;
+        this.dirtyTime = this.dirtyTime <= -1 ? System.currentTimeMillis() - timeMod : this.dirtyTime - timeMod;
+    }
+
+    public synchronized void cancelRequest() {
+        this.dirtyTime = -1;
     }
 
     public void destroy() {
