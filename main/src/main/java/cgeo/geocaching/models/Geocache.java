@@ -1651,6 +1651,10 @@ public class Geocache implements INamedGeoCoordinate {
         return BooleanUtils.isTrue(userModifiedCoords);
     }
 
+    public boolean hasUserModifiedCoordsAtOriginalCoordinates() {
+        return BooleanUtils.isTrue(userModifiedCoords) && null != getOriginalWaypoint() && getCoords().equals(getOriginalWaypoint().getCoords());
+    }
+
     @Nullable
     public Boolean getUserModifiedCoordsRaw() {
         return userModifiedCoords;
