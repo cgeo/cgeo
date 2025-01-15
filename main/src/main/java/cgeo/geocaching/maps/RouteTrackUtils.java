@@ -244,6 +244,16 @@ public class RouteTrackUtils {
             }
             // refresh those caches
             CacheDownloaderService.downloadCaches(activity, geocodes, true, true, null);
+        } else if (id == R.id.indivroute_export_route && isIndividualRoute(route)) {
+            new IndividualRouteExport(activity, (Route) route, false);
+        } else if (id == R.id.indivroute_export_track && isIndividualRoute(route)) {
+            new IndividualRouteExport(activity, (Route) route, true);
+        } else if (id == R.id.indivroute_load && isIndividualRoute(route)) {
+                if (((Route) route).getNumSegments() == 0) {
+                    startFileSelectorIndividualRoute();
+                } else {
+                    SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
+                }
         } else {
             return false;
         }
@@ -265,14 +275,6 @@ public class RouteTrackUtils {
         if (dialog == null) {
             return;
         }
-        dialog.findViewById(R.id.indivroute_load).setOnClickListener(v1 -> {
-            if (null == individualRoute || individualRoute.getNumSegments() == 0) {
-                startFileSelectorIndividualRoute();
-            } else {
-                SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
-            }
-        });
-
         if (isRouteNonEmpty(individualRoute)) {
             dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
             final Toolbar tb = dialog.findViewById(R.id.routes_track_item);
@@ -280,9 +282,6 @@ public class RouteTrackUtils {
             tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, individualRoute, () -> updateDialogIndividualRoute(dialog, individualRoute, setTarget, showElevationChart)));
             final Menu menu = tb.getMenu();
             configureContextMenu(menu, true, individualRoute, false);
-
-            dialog.findViewById(R.id.indivroute_export_route).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, false));
-            dialog.findViewById(R.id.indivroute_export_track).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, true));
 
             final CheckBox vAutoTarget = dialog.findViewById(R.id.auto_target);
             vAutoTarget.setChecked(Settings.isAutotargetIndividualRoute());
