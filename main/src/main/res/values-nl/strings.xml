@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Selecteer afbeeldingen uit opslag</string>
     <string name="log_image_camera_tooltip">Foto maken met camera</string>
     <string name="log_image_selectfromown_tooltip">Afbeeldingen selecteren uit eigen afbeeldingen</string>
+    <string name="log_inventory">Inventaris</string>
     <string name="log_problem_none">Geen Probleem</string>
     <string name="log_problem_needs_maintenance_label">Heeft onderhoud nodig</string>
     <string name="log_problem_needs_maintenance_text">Deze geocacher meldt dat er een probleem is met deze cache.</string>
@@ -416,6 +417,7 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Waardering</string>
     <string name="caches_sort_vote">Stemmen (eigen waardering)</string>
+    <string name="caches_sort_inventory">Aantal trackables</string>
     <string name="caches_sort_date_hidden">Datum geplaatst</string>
     <string name="caches_sort_date_logged">Datum gelogd (eigen log)</string>
     <string name="caches_sort_finds">Aantal keer gevonden</string>
@@ -531,6 +533,7 @@
     <string name="cache_filter_hidden">Verstopt op</string>
     <string name="cache_filter_eventdate">Evenement datum</string>
     <string name="cache_filter_logs_count">Aantal logs</string>
+    <string name="cache_filter_inventory_count">Aantal trackables</string>
     <string name="cache_filter_last_found">Laatst Gevonden Datum</string>
     <string name="cache_filter_log_entry">Log Invoer</string>
     <string name="cache_filter_location">Locatie</string>
@@ -1353,6 +1356,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Stel coördinaten in</string>
     <string name="cache_personal_note">Persoonlijke notitie</string>
@@ -1585,6 +1589,9 @@
     <string name="init_summary_show_routing_menu">Lange tik op een cache toont een menu met geavanceerde opties om de cache naar/van een route toe te voegen/te verwijderen. Indien uitgeschakeld wordt de cache enkel toegevoegd/verwijderd aan/van de route.</string>
     <string name="init_ActionbarAutohide">Werkbalk verbergen bij tik</string>
     <string name="init_summary_ActionbarAutohide">Tik op vrije kaart ruimte om de werkbalk te verbergen/tonen</string>
+    <string name="init_autozoom_consider_lastcenter">Herstel kaartpositie bij het in kaart brengen van een lijst</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Wanneer een lijst van caches in kaart is gebracht en de kaart was eerder in de lijstgrenzen verlaten in de previewpositie, anders zoomen om alle caches te laten passen.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Wanneer een lijst van caches in kaart is gebracht, stel kaart zoomniveau en grenzen in om alle caches te laten passen.</string>
     <string name="goto_targets_list">Gebruiker gedefinieerde caches</string>
     <string name="clear_goto_history_title">Spoor geschiedenis wissen</string>
     <string name="clear_goto_history">Dit zal alle historische waypoints verwijderen behalve de vijf meest recente</string>
@@ -1991,6 +1998,8 @@
     <string name="attribute_night_yes">\'s nachts aanbevolen</string>
     <string name="attribute_night_no">Niet \'s nachts aanbevolen</string>
     <string name="attribute_winter_yes">Beschikbaar in de winter</string>
+    <string name="attribute_cacti_yes">Cactussen in de buurt</string>
+    <string name="attribute_cacti_no">Geen Cactussen in de buurt</string>
     <string name="attribute_winter_no">Niet beschikbaar in de winter</string>
     <string name="attribute_stealth_yes">Stealth noodzakelijk</string>
     <string name="attribute_stealth_no">Stealth niet noodzakelijk</string>
@@ -2302,6 +2311,8 @@
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
     <string name="live_map_status_http429">Niet zo snel, te veel aanvragen naar %s</string>
     <string name="live_map_status_error">Fout bij het laden van kaartgegevens: %s</string>
+    <string name="live_map_status_partial">Gedeeltelijke resultaten (zoom in om het aantal te laden caches te verminderen): %s</string>
+    <string name="live_map_status_normal">Gegevens laden zonder problemen: %s</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d waypoint geëxtraheerd</item>
