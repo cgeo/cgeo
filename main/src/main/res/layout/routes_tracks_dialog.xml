@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- Individual routes -->
@@ -26,10 +26,26 @@
 
     <!-- GPX routes/tracks -->
 
-    <Button
-        android:id="@+id/trackroute_load"
-        android:text="@string/map_load_track"
-        style="@style/button_full" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/routes_tracks_header"
+            app:dividerAbove="true"
+            android:text="@string/routes_tracks_menu" />
+
+        <Button
+            android:id="@+id/trackroute_load"
+            app:icon="@drawable/ic_menu_gpx"
+            android:tooltipText="@string/map_load_track"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            style="@style/button_icon" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/tracklist"

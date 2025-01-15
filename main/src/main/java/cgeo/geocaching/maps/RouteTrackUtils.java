@@ -347,7 +347,7 @@ public class RouteTrackUtils {
 
     private void updateDialogClearTargets(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget, final Action2<Route, Boolean> showElevationChart) {
         final View vClearTargets = dialog.findViewById(R.id.clear_targets);
-        vClearTargets.setEnabled(isTargetSet.call() || Settings.isAutotargetIndividualRoute());
+        vClearTargets.setVisibility(isTargetSet.call() || Settings.isAutotargetIndividualRoute() ? View.VISIBLE : View.GONE);
         vClearTargets.setOnClickListener(v1 -> {
             if (setTarget != null) {
                 setTarget.call(null, null);
