@@ -129,7 +129,6 @@ public class RouteTrackUtils {
         popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
         updateDialogIndividualRoute(popup, individualRoute, setTarget, showElevationChart);
         updateDialogTracks(popup, tracks, showElevationChart);
-        updateDialogClearTargets(popup, individualRoute, setTarget, showElevationChart);
         final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
         dialog.setOnDismissListener(dialog1 -> popup = null);
         dialog.show();
@@ -278,7 +277,9 @@ public class RouteTrackUtils {
         if (isRouteNonEmpty(individualRoute)) {
             dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
             final Toolbar tb = dialog.findViewById(R.id.routes_track_item);
-            tb.inflateMenu(R.menu.map_routetrack_context);
+            if (tb.getMenu() == null || tb.getMenu().size() == 0) {
+                tb.inflateMenu(R.menu.map_routetrack_context);
+            }
             tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, individualRoute, () -> updateDialogIndividualRoute(dialog, individualRoute, setTarget, showElevationChart)));
             final Menu menu = tb.getMenu();
             configureContextMenu(menu, true, individualRoute, false);
@@ -292,6 +293,7 @@ public class RouteTrackUtils {
         } else {
             dialog.findViewById(R.id.indivroute).setVisibility(View.GONE);
         }
+        updateDialogClearTargets(dialog, individualRoute, setTarget, showElevationChart);
     }
 
     private void updateDialogTracks(final View dialog, final Tracks tracks, final Action2<Route, Boolean> showElevationChart) {

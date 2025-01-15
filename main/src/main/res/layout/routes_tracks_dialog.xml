@@ -24,6 +24,12 @@
             android:paddingRight="6dp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/clear_targets"
+        android:text="@string/map_clear_manual_targets"
+        app:icon="@drawable/ic_menu_clear_target"
+        style="@style/button_full" />
+
     <!-- GPX routes/tracks -->
 
     <RelativeLayout
@@ -43,8 +49,7 @@
             android:tooltipText="@string/map_load_track"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            style="@style/button_icon" />
-
+            style="@style/button_icon_accent" />
     </RelativeLayout>
 
     <LinearLayout
@@ -52,12 +57,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>
-
-    <!-- Common -->
-
-    <Button
-        android:id="@+id/clear_targets"
-        android:text="@string/map_clear_manual_targets"
-        style="@style/button_full" />
-
 </LinearLayout>
