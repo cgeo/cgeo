@@ -72,6 +72,7 @@ public class RouteTrackUtils {
     private final ContentStorageActivityHelper csah;
     private View popup = null;
     private Tracks tracks = null;
+    private BottomSheetDialog dialog = null;
 
     private final Runnable reloadIndividualRoute;
     private final Runnable clearIndividualRoute;
@@ -129,7 +130,7 @@ public class RouteTrackUtils {
         popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
         updateDialogIndividualRoute(popup, individualRoute, setTarget, showElevationChart);
         updateDialogTracks(popup, tracks, showElevationChart);
-        final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
+        dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
         dialog.setOnDismissListener(dialog1 -> popup = null);
         dialog.show();
     }
@@ -181,6 +182,7 @@ public class RouteTrackUtils {
     public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
         final int id = item.getItemId();
         if (id == R.id.menu_showElevationChart && showElevationChart != null && route instanceof Route) {
+            dialog.dismiss();
             showElevationChart.call((Route) route, true);
         } else if (id == R.id.menu_edit && isIndividualRoute(route)) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
