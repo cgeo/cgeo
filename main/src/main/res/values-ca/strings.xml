@@ -195,6 +195,7 @@
     <string name="log_image_selectfromstorage_tooltip">Seleccioneu imatges de l\'emmagatzematge</string>
     <string name="log_image_camera_tooltip">Feu una foto amb la càmera</string>
     <string name="log_image_selectfromown_tooltip">Seleccioneu imatges de les pròpies imatges</string>
+    <string name="log_inventory">Inventari</string>
     <string name="log_problem_none">Cap problema</string>
     <string name="log_problem_needs_maintenance_label">Necessita manteniment</string>
     <string name="log_problem_needs_maintenance_text">Aquest geocatxer va informar que hi ha un problema amb aquest catxé.</string>
@@ -417,6 +418,7 @@
     <string name="caches_sort_geocode">Geocodi</string>
     <string name="caches_sort_rating">Puntuació</string>
     <string name="caches_sort_vote">Vota (valoració pròpia)</string>
+    <string name="caches_sort_inventory">Recompte de rastrejables</string>
     <string name="caches_sort_date_hidden">Data d\'amagat</string>
     <string name="caches_sort_date_logged">Data de registre (Registre propi)</string>
     <string name="caches_sort_finds">Trobats</string>
@@ -532,6 +534,7 @@
     <string name="cache_filter_hidden">Data d\'Amagat</string>
     <string name="cache_filter_eventdate">Data de la trobada</string>
     <string name="cache_filter_logs_count">Recompte de registres</string>
+    <string name="cache_filter_inventory_count">Recompte de rastrejables</string>
     <string name="cache_filter_last_found">Darrera trobada</string>
     <string name="cache_filter_log_entry">Entrada de registre</string>
     <string name="cache_filter_location">Ubicació</string>
@@ -1051,7 +1054,10 @@
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
     <string name="settings_info_themes">C:geo admet temes personalitzats per a mapes fora de línia. Es poden utilitzar per canviar l\'estil de color del mapa (per exemple, per tenir un mapa de visió nocturna) o per ressaltar determinats objectes, com ara carrils bici o línies d\'alçada, al mapa.\n\nEl treball amb temes de mapes no comprimits pot reduir l\'obertura del visor de mapes rendiment. En aquest cas, la carpeta de temes es pot sincronitzar opcionalment a una carpeta local privada de l’aplicació per accedir-hi més ràpidament (a costa d’espai d’emmagatzematge).</string>
     <string name="settings_info_hillshading_title">Informació sobre l\' ombrejat</string>
+    <string name="settings_info_hillshading">L\'ombrejat és una tècnica per crear mapes de relleu topogràfic afegint un efecte d\'il·luminació al mapa per indicar els canvis d\'elevació. Els pendents s\'enfosquiran/il·luminaran per generar un efecte 3D.\nLes dades d\'ombrejats es poden baixar des del menú de desbordament dels mapes.\nNo és compatible amb la variant UnifiedMap VTM.</string>
     <string name="settings_hillshading_enable">Ombrejat</string>
+    <string name="init_hillshading_hq">Ombra de muntanya d\'alta qualitat</string>
+    <string name="init_summary_hillshading_hq">Superposició d\'ombrejats més detallada, però una renderització d\'un ~50%% més lenta quan s\'allunya</string>
     <string name="init_mapsource_select">Selecciona l\'origen del mapa</string>
     <string name="init_mapsource_select_legacy">Seleccioneu la font del mapa (heretat)</string>
     <string name="init_local_file_system">Sistema de fitxers local</string>
@@ -1351,6 +1357,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Traçable</string>
     <string name="cache_log_image_default_title">Foto</string>
     <string name="cache_set_coordinates">Establir coordenades</string>
     <string name="cache_personal_note">Nota personal</string>
@@ -1461,6 +1468,7 @@
     <string name="cache_menu_details">Detalls</string>
     <string name="cache_menu_refresh">Actualitza</string>
     <string name="cache_menu_share">Comparteix el catxé</string>
+    <string name="cache_menu_share_with_data">Comparteix incl. dades de l\'usuari</string>
     <string name="cache_menu_move_list">Mou a una llista diferent</string>
     <string name="cache_menu_copy_list">Copia a una llista diferent</string>
     <string name="cache_menu_oruxmaps_online">OruxMaps (En línia)</string>
@@ -1569,6 +1577,7 @@
     <string name="create_internal_cache">Creeu catxé definit per l\'usuari</string>
     <string name="create_internal_cache_short">Nou catxé</string>
     <string name="create_internal_cache_currentlist">Utilitzeu la llista actual</string>
+    <string name="internal_cache_default_names">Catxé definit per l\'usuari #%1$s</string>
     <string name="internal_cache_default_description">Es tracta d’un catxé definit per l’usuari</string>
     <string name="internal_cache_default_owner">Tu</string>
     <string name="internal_goto_targets_title">Objectius \"Vés a\"</string>
@@ -1581,6 +1590,9 @@
     <string name="init_summary_show_routing_menu">Un toc llarg sobre un catxé mostra un menú amb opcions avançades per afegir/eliminar el catxé a/des d\'una ruta. Si està desactivat, el catxé només s\'afegeix/elimina a/des de la ruta.</string>
     <string name="init_ActionbarAutohide">Amaga la barra d\'eines al toc</string>
     <string name="init_summary_ActionbarAutohide">Toqueu l\'espai lliure del mapa per ocultar/mostrar la barra d\'eines</string>
+    <string name="init_autozoom_consider_lastcenter">Restaura la posició del mapa en mapejar una llista</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Quan es mapeja una llista de catxés i el mapa s\'ha deixat prèviament dins dels límits de la llista, restaureu la posició de vista prèvia, en cas contrari, feu zoom per adaptar-se a tots els catxés.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Quan es mapeja una llista de catxés, configureu el zoom i els límits del mapa perquè s\'adaptin a tots els catxés.</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -1987,6 +1999,8 @@
     <string name="attribute_night_yes">Recomanat de nit</string>
     <string name="attribute_night_no">No es recomana de nit</string>
     <string name="attribute_winter_yes">Disponible durant l\'hivern</string>
+    <string name="attribute_cacti_yes">Cactus a prop</string>
+    <string name="attribute_cacti_no">No hi ha cactus a prop</string>
     <string name="attribute_winter_no">No disponible durant l\'hivern</string>
     <string name="attribute_stealth_yes">Exigeix sigil</string>
     <string name="attribute_stealth_no">No requereix sigil</string>
@@ -2297,6 +2311,10 @@
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
+    <string name="live_map_status_http429">Si us plau, alentiu, hi ha massa sol·licituds a %s</string>
+    <string name="live_map_status_error">Error en carregar les dades del mapa: %s</string>
+    <string name="live_map_status_partial">Resultats parcials (apropa per reduir el nombre de catxés per carregar): %s</string>
+    <string name="live_map_status_normal">S\'estan carregant dades sense problemes: %s</string>
     <string name="list_list_headline">Llistes:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punt de ruta extret</item>
@@ -2418,6 +2436,8 @@
     <string name="yes">Si</string>
     <string name="no">No</string>
     <string name="show_all">Mostrar tots</string>
+    <string name="lists_only_new">Només nou</string>
+    <string name="pq_only_dl">Descarregable</string>
     <string name="routingmode_straight">Recte</string>
     <string name="routingmode_walk">A peu</string>
     <string name="routingmode_bike">En Bicicleta</string>
