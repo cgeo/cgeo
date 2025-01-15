@@ -155,6 +155,7 @@ public class RouteTrackUtils {
         elevationChart.setEnabled(route instanceof Route);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_center), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_optimize), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_refresh), isIndividualRoute, null);
@@ -195,6 +196,15 @@ public class RouteTrackUtils {
             storeAndReloadIndividualRoute(newRouteItems);
         } else if (id == R.id.menu_color && !isIndividualRoute(route)) {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
+        } else if (id == R.id.menu_rename) {
+            tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
+                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
+                    .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
+                        if (StringUtils.isNotBlank(newName)) {
+                            tracks.setDisplayname(key, newName);
+                            updateDialogTracks(popup, tracks, null);
+                        }
+                    }));
         } else if (id == R.id.menu_visibility) {
             final boolean willBeHidden = !route.isHidden();
             route.setHidden(willBeHidden);
@@ -317,14 +327,6 @@ public class RouteTrackUtils {
 
             final TextView displayName = tb.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
-            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext())
-                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
-                    .input(new SimpleDialog.InputOptions().setInitialValue(displayName.getText().toString()), newName -> {
-                        if (StringUtils.isNotBlank(newName)) {
-                            tracks.setDisplayname(key, newName);
-                            displayName.setText(newName);
-                        }
-                    }));
 
             final MenuItem vColor = tb.getMenu().findItem(R.id.menu_color);
             setColorIcon(vColor, tracks.getColor(key));
