@@ -118,6 +118,7 @@ public final class MapMarkerUtils {
                 .append(cache.isFound())
                 .append(cache.isDNF())
                 .append(cache.hasWillAttendForFutureEvent())
+                .append(cache.hasUserModifiedCoordsAtOriginalCoordinates())
                 .append(cache.hasUserModifiedCoords())
                 .append(cache.hasFinalDefined())
                 .append(cache.getPersonalNote())
@@ -219,9 +220,10 @@ public final class MapMarkerUtils {
         }
 
         // bottom-right: user modified coords / final waypoint defined
-        if (cache.hasUserModifiedCoords() && mainMarkerId != R.drawable.marker_usermodifiedcoords) {
-            final boolean coordsIsOriginal = null != cache.getOriginalWaypoint() && cache.getCoords().equals(cache.getOriginalWaypoint().getCoords());
-            insetsBuilder.withInset(new InsetBuilder(coordsIsOriginal ? R.drawable.marker_usermodifiedcoords_original : R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
+        if (cache.hasUserModifiedCoordsAtOriginalCoordinates() && mainMarkerId != R.drawable.marker_usermodifiedcoords_original) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords_original, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
+        } else if (cache.hasUserModifiedCoords() && mainMarkerId != R.drawable.marker_usermodifiedcoords) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         } else if (cache.hasFinalDefined() && !cache.hasUserModifiedCoords()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         }
@@ -598,6 +600,8 @@ public final class MapMarkerUtils {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
             if (offlineLogType != null) {
                 return offlineLogType;
+            } else if (cache.hasUserModifiedCoordsAtOriginalCoordinates()) {
+                return R.drawable.marker_usermodifiedcoords_original;
             } else if (cache.hasUserModifiedCoords()) {
                 return R.drawable.marker_usermodifiedcoords;
             }
