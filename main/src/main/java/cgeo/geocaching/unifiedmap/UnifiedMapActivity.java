@@ -790,7 +790,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
     private boolean isTargetSet() {
-        return viewModel.target.getValue() != null;
+        return viewModel.target.getValue() != null && (viewModel.target.getValue().geopoint != null || !StringUtils.isEmpty(viewModel.target.getValue().geocode));
     }
 
     // ========================================================================
