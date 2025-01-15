@@ -160,6 +160,9 @@ public class RouteTrackUtils {
         configureMenuItem(menu.findItem(R.id.menu_invert_order), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_visibility), route != null, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_delete), true, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.indivroute_export_route), isIndividualRoute, null);
+        configureMenuItem(menu.findItem(R.id.indivroute_export_track), isIndividualRoute, null);
+        configureMenuItem(menu.findItem(R.id.indivroute_load), isIndividualRoute, null);
         configureVisibility(menu.findItem(R.id.menu_visibility), route.isHidden());
     }
 
