@@ -1,12 +1,17 @@
 package cgeo.geocaching.utils;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuItemImpl;
 
 import javax.annotation.Nullable;
+
+import cgeo.geocaching.CgeoApplication;
 
 public class MenuUtils {
 
@@ -52,6 +57,21 @@ public class MenuUtils {
     public static void enableIconsInOverflowMenu(@Nullable final Menu menu) {
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu, final int toolbarIconTint, final int overflowIconTint) {
+        if (null == menu) {
+            return;
+        }
+        final Context context = CgeoApplication.getInstance();
+        for (int i = 0; i < menu.size(); i++) {
+            final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
+            final Drawable icon = item.getIcon();
+            if (icon != null) {
+                icon.setTint(context.getResources().getColor((item).isActionButton() ? toolbarIconTint : overflowIconTint));
+            }
         }
     }
 }

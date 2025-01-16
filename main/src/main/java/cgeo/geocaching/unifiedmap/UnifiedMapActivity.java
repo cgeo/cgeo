@@ -72,6 +72,7 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -844,6 +845,9 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemeOptions());
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
+
+        MenuUtils.enableIconsInOverflowMenu(menu);
+        MenuUtils.tintToolbarAndOverflowIcons(menu, R.color.just_white, R.color.colorText);
 
         return result;
     }
