@@ -1582,6 +1582,9 @@
     <string name="init_summary_show_routing_menu">Långtryck på en cache visar en meny med avancerade alternativ för att lägga till/ta bort cachen till/från en rutt. Om inaktiverad läggs cachen till / tas bort till/från rutten.</string>
     <string name="init_ActionbarAutohide">Dölj verktygsfältet vid tryck</string>
     <string name="init_summary_ActionbarAutohide">Tryck på tomt kartutrymme för att dölja/visa verktygsfältet</string>
+    <string name="init_autozoom_consider_lastcenter">Återställ kartpositionen vid kartläggning av en lista</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">När en lista med cacher visas på karta, och kartan har tidigare lämnats inom listans gränser återställ förhandsgranskningsposition, annars zooma för att passa alla cacher.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">När en lista med cacher visas på karta, sätt zoom och gränser för att passa alla cacher.</string>
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
@@ -2297,6 +2300,8 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
+    <string name="live_map_status_normal">Laddar data utan problem: %s</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt har extraherats</item>
