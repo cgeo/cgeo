@@ -49,3 +49,4 @@ Neu: Integrierter Wherigo Player (Beta) - siehe Menüeintrag auf dem Startbildsc
 - Korrektur: Schieberegler "Länge des Positionsverlaufs" und "Weite Entfernung" verwenden identischen Wert
 - Korrektur: Trackable Log-Seite zeigt Zeit-/Koordinaten-Eingabefelder für Trackables an, die dies nicht unterstützen
 - Korrektur: Mehrere Abstürze
+- Fix: Some sliders in settings having problems with uninitialized values
