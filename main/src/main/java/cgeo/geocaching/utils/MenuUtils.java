@@ -1,5 +1,8 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,9 +13,6 @@ import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuItemImpl;
 
 import javax.annotation.Nullable;
-
-import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.R;
 
 public class MenuUtils {
 
@@ -80,7 +80,7 @@ public class MenuUtils {
             final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
             final Drawable icon = item.getIcon();
             if (icon != null) {
-                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorTextActionBar : R.color.colorText));
+                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorIconActionBar : R.color.colorIconOverflow));
             }
         }
     }
