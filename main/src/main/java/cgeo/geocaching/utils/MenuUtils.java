@@ -65,12 +65,21 @@ public class MenuUtils {
         if (null == menu) {
             return;
         }
+        // Menu might not yet have been initialized due to timing issues, only run if there's at least 1 toolbar item
+        boolean anyMenuItemVisible = false;
+        for (int i = 0; i < menu.size(); i++) {
+            final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
+            anyMenuItemVisible = anyMenuItemVisible || item.isActionButton();
+        }
+        if (!anyMenuItemVisible) {
+            return;
+        }
         final Context context = CgeoApplication.getInstance();
         for (int i = 0; i < menu.size(); i++) {
             final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
             final Drawable icon = item.getIcon();
             if (icon != null) {
-                icon.setTint(context.getResources().getColor((item).isActionButton() ? toolbarIconTint : overflowIconTint));
+                icon.setTint(context.getResources().getColor(item.isActionButton() ? toolbarIconTint : overflowIconTint));
             }
         }
     }
