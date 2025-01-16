@@ -49,3 +49,4 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Oprava: Nastavení délky historie a blízkosti sdílí hodnoty posuvníku
 - Oprava: Stránka trasovatelného logu zobrazující pole pro zadávání času/souřadnic u trasovatelných předmětů, které to nepodporují
 - Oprava: Několik pádů
+- Fix: Some sliders in settings having problems with uninitialized values
