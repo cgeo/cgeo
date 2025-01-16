@@ -12,6 +12,7 @@ import androidx.appcompat.view.menu.MenuItemImpl;
 import javax.annotation.Nullable;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 
 public class MenuUtils {
 
@@ -61,7 +62,7 @@ public class MenuUtils {
     }
 
     @SuppressLint("RestrictedApi")
-    public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu, final int toolbarIconTint, final int overflowIconTint) {
+    public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu) {
         if (null == menu) {
             return;
         }
@@ -79,7 +80,7 @@ public class MenuUtils {
             final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
             final Drawable icon = item.getIcon();
             if (icon != null) {
-                icon.setTint(context.getResources().getColor(item.isActionButton() ? toolbarIconTint : overflowIconTint));
+                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorTextActionBar : R.color.colorText));
             }
         }
     }
