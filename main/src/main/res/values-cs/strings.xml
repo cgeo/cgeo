@@ -1617,6 +1617,9 @@
     <string name="init_summary_show_routing_menu">Dlouhým klepnutím na kešku se zobrazí nabídka s pokročilými možnostmi přidání/odebrání kešky do/z trasy. Pokud je vypnuto, kešla se pouze přidá/odebere do/z trasy.</string>
     <string name="init_ActionbarAutohide">Klepnutím skrýt panel nástrojů</string>
     <string name="init_summary_ActionbarAutohide">Klepnutím na volné místo na mapě skryjete/zobrazíte panel nástrojů</string>
+    <string name="init_autozoom_consider_lastcenter">Obnovení pozice mapy při mapování seznamu</string>
+    <string name="init_summary_autozoom_consider_lastcenter_on">Pokud je mapován seznam kešek a mapa byla dříve ponechána uvnitř hranic seznamu, obnoví pozici náhledu, jinak zvětší všechny kešky.</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Při mapování seznamu kešek nastavte zvětšení a hranice mapy tak, aby se do ní vešly všechny kešky.</string>
     <string name="goto_targets_list">Uživatelem definované kešky</string>
     <string name="clear_goto_history_title">Vymazat historii Jít na</string>
     <string name="clear_goto_history">Tímto se odstraní všechny historické trasové body kromě pěti posledních</string>
