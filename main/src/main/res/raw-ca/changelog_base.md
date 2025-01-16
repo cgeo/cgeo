@@ -49,3 +49,4 @@ Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'i
 - Correcció: la longitud de l'historial i la configuració de proximitat comparteixen els valors del control lliscant
 - Correcció: pàgina de registre rastrejable que mostra camps d'entrada de temps/coordenades per als rastrejables que no ho admeten
 - Solució: alguns bloquejos
+- Fix: Some sliders in settings having problems with uninitialized values
