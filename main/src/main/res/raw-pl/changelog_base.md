@@ -49,3 +49,4 @@ Nowość: Zintegrowany odtwarzacz Wherigo (beta) – zobacz pozycję w menu na e
 - Naprawiono: Długość historii i ustawienia zbliżeniowe współdzieliły wartości suwaka
 - Naprawiono: Strona z wpisami przedmiotów podróżnych pokazywała pola czas/współrzędne dla przedmiotów podróżnych, które tego nie obsługują
 - Naprawiono: Kilka awarii
+- Fix: Some sliders in settings having problems with uninitialized values
