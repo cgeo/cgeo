@@ -1,6 +1,8 @@
 ### Mapa
 - Nou: admet el tema Elevate Winter al descarregador de mapes
 - Nou: ombrejat adaptatiu, mode d'alta qualitat opcional (UnifiedMap Mapsforge)
+- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
+- New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
