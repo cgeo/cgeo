@@ -49,3 +49,4 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Fix: History length and proximity settings sharing slider values
 - Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
 - Fix: Some crashes
+- Fix: Some sliders in settings having problems with uninitialized values
