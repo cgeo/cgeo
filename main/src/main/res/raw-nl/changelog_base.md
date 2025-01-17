@@ -49,4 +49,4 @@ Nieuw: Geïntegreerde Wherigo speler (beta) - zie menu optie op het home screen.
 - Oplossing: Geschiedenis lengte en nabijheidsinstellingen delen schuifregelaar waarden
 - Oplossing: Trackable logpagina toont tijd/coördinaat invoervelden voor trackables die dit niet ondersteunen
 - Oplossing: Enkele crashes
-- Fix: Some sliders in settings having problems with uninitialized values
+- Oplossing: Sommige schuifregelaars in instellingen hebben problemen met niet-geïnitialiseerde waarden
