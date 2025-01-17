@@ -45,7 +45,7 @@
 
         <Button
             android:id="@+id/trackroute_load"
-            app:icon="@drawable/ic_menu_gpx"
+            app:icon="@drawable/ic_menu_import"
             android:tooltipText="@string/map_load_track"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"

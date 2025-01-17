@@ -80,7 +80,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/indivroute_load"
-        android:icon="@drawable/wherigo_load"
+        android:icon="@drawable/ic_menu_import"
         android:title="@string/map_load_individual_route"
         app:showAsAction="never" />
 </menu>

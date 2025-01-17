@@ -151,7 +151,7 @@
     </item>
     <item
         android:id="@+id/menu_import"
-        android:icon="@drawable/wherigo_load"
+        android:icon="@drawable/ic_menu_import"
         android:title="@string/list_menu_import"
         app:showAsAction="never|withText">
         <menu>
