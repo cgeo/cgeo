@@ -72,6 +72,7 @@ import cgeo.geocaching.utils.LifecycleAwareBroadcastReceiver;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.MenuUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.wherigo.WherigoGame;
@@ -160,6 +161,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private CacheReloadState cacheReloadState = CacheReloadState.REFRESH;
 
     private int wherigoListenerId;
+    private Menu toolbarMenu;
 
     private final CacheListActionBarChooser listChooser = new CacheListActionBarChooser(this, this::getSupportActionBar, newListId -> {
         final Optional<AbstractList> lNew = StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id).stream().filter(l2 -> l2.id == newListId).findFirst();
@@ -845,6 +847,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
 
         menu.findItem(R.id.menu_as_list).setVisible(true);
 
+        MenuUtils.tintToolbarAndOverflowIcons(menu);
+
         return result;
     }
 
@@ -853,6 +857,8 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
         FilterUtils.initializeFilterMenu(this, this);
+        MenuUtils.enableIconsInOverflowMenu(menu);
+        this.toolbarMenu = menu;
         return result;
     }
 
@@ -940,25 +946,24 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             Settings.setMapShadingShowLayer(!Settings.getMapShadingShowLayer());
             item.setChecked(Settings.getMapShadingShowLayer());
             changeMapSource(mapFragment.currentTileProvider);
-        } else {
+        } else { // dynamic submenus: Map language, Map source
             final String language = TileProviderFactory.getLanguage(id);
+            final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
                 Settings.setMapLanguage(language);
                 mapFragment.setPreferredLanguage(language);
-                return true;
-            }
-            final AbstractTileProvider tileProviderLocal = TileProviderFactory.getTileProvider(id);
-            if (tileProviderLocal != null) {
+            } else if (tileProviderLocal != null) {
                 item.setChecked(true);
                 changeMapSource(tileProviderLocal);
-                return true;
             }
             if (mapFragment.onOptionsItemSelected(item)) {
                 return true;
+            } else {
+                return super.onOptionsItemSelected(item);
             }
-            return super.onOptionsItemSelected(item);
         }
+        MenuUtils.tintToolbarAndOverflowIcons(toolbarMenu);
         return true;
     }
 

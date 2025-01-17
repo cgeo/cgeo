@@ -1,10 +1,16 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuItemImpl;
 
 import javax.annotation.Nullable;
 
@@ -52,6 +58,30 @@ public class MenuUtils {
     public static void enableIconsInOverflowMenu(@Nullable final Menu menu) {
         if (menu instanceof MenuBuilder) {
             ((MenuBuilder) menu).setOptionalIconsVisible(true);
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu) {
+        if (null == menu) {
+            return;
+        }
+        // Menu might not yet have been initialized due to timing issues, only run if there's at least 1 toolbar item
+        boolean anyMenuItemVisible = false;
+        for (int i = 0; i < menu.size(); i++) {
+            final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
+            anyMenuItemVisible = anyMenuItemVisible || item.isActionButton();
+        }
+        if (!anyMenuItemVisible) {
+            return;
+        }
+        final Context context = CgeoApplication.getInstance();
+        for (int i = 0; i < menu.size(); i++) {
+            final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
+            final Drawable icon = item.getIcon();
+            if (icon != null) {
+                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorIconActionBar : R.color.colorIconOverflow));
+            }
         }
     }
 }
