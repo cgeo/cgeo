@@ -509,7 +509,6 @@
     <string name="cache_offline_not_ready">غير متاح في وضع عدم الاتصال</string>
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
-    <string name="cache_inventory">المخزون</string>
     <string name="cache_log_image_default_title">صورة</string>
     <string name="cache_personal_note">ملاحضة شخصية</string>
     <string name="cache_personal_note_edit">تعديل</string>

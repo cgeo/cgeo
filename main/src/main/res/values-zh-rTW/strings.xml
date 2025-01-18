@@ -878,7 +878,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
-    <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
     <string name="cache_log_image_default_title">照片</string>
     <string name="cache_personal_note">個人筆記</string>
     <string name="cache_menu_preventWaypointsFromNote">不允許註解裡加上航點</string>
