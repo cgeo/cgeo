@@ -6,21 +6,18 @@
         android:id="@+id/menu_hint"
         android:icon="@drawable/ic_menu_hint"
         android:title="@string/cache_hint"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_map"
         android:icon="@drawable/ic_menu_mapmode"
         android:title="@string/caches_on_map"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_tts_toggle"
         android:icon="@drawable/ic_menu_text_to_speech_off"
         android:title="@string/cache_menu_speechActivate"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_select_destination"
         android:icon="@drawable/ic_menu_myplaces"
@@ -28,7 +25,5 @@
         android:title="@string/destination_select"
         android:visible="false"
         app:actionProviderClass="cgeo.geocaching.ui.WaypointSelectionActionProvider"
-        app:showAsAction="ifRoom|withText">
-    </item>
-
+        app:showAsAction="ifRoom|withText"/>
 </menu>

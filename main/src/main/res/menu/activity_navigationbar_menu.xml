@@ -5,25 +5,25 @@
         android:id="@+id/page_home"
         android:enabled="true"
         android:icon="@drawable/ic_menu_home"
-        android:title="@string/home_button" />
+        android:title="@string/home_button"/>
     <item
         android:id="@+id/page_list"
         android:enabled="true"
         android:icon="@drawable/ic_menu_list"
-        android:title="@string/stored_caches_button" />
+        android:title="@string/stored_caches_button"/>
     <item
         android:id="@+id/page_map"
         android:enabled="true"
         android:icon="@drawable/ic_menu_mapmode"
-        android:title="@string/map_map" />
+        android:title="@string/map_map"/>
     <item
         android:id="@+id/page_search"
         android:enabled="true"
         android:icon="@drawable/ic_menu_search"
-        android:title="@string/advanced_search_button" />
+        android:title="@string/advanced_search_button"/>
     <item
         android:id="@+id/page_custom"
         android:enabled="true"
         android:icon="@drawable/ic_menu_nearby"
-        android:title="@string/caches_nearby_button" />
+        android:title="@string/caches_nearby_button"/>
 </menu>

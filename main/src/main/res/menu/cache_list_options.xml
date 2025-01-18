@@ -101,11 +101,11 @@
                 android:id="@+id/menu_show_attributes"
                 android:title="@string/caches_show_attributes"
                 app:showAsAction="never"/>
-            <item android:id="@+id/menu_set_cache_icon"
+            <item
+                android:id="@+id/menu_set_cache_icon"
                 android:title="@string/caches_set_cache_icon"
                 android:enabled="false"
-                app:showAsAction="never">
-            </item>
+                app:showAsAction="never"/>
             <item
                 android:id="@+id/menu_create_internal_cache"
                 android:title="@string/create_internal_cache"
@@ -139,14 +139,12 @@
             <item
                 android:id="@+id/menu_set_listmarker"
                 android:title="@string/caches_set_listmarker"
-                app:showAsAction="never|withText">
-            </item>
+                app:showAsAction="never|withText"/>
             <item
                 android:id="@+id/menu_set_askfordeletion"
                 android:title="@string/caches_askdeletion"
                 app:showAsAction="never"
-                android:visible="false">
-            </item>
+                android:visible="false"/>
         </menu>
     </item>
     <item
@@ -158,19 +156,23 @@
             <item
                 android:id="@+id/menu_import_pq"
                 android:title="@string/menu_lists_pocket_queries"
-                android:icon="@drawable/ic_menu_pocket_query" />
+                android:icon="@drawable/ic_menu_pocket_query"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_bookmarklists"
                 android:title="@string/menu_lists_bookmarklists"
-                android:icon="@drawable/ic_menu_bookmarks" />
+                android:icon="@drawable/ic_menu_bookmarks"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_import_gpx"
                 android:title="@string/gpx_import_title"
-                android:icon="@drawable/ic_menu_gpx" />
+                android:icon="@drawable/ic_menu_gpx"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_import_web"
                 android:title="@string/web_import_title"
-                android:icon="@drawable/wherigo_download" />
+                android:icon="@drawable/wherigo_download"
+                app:iconTint="@color/colorIconMenu"/>
         </menu>
     </item>
     <item
@@ -182,15 +184,18 @@
             <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx"
-                android:icon="@drawable/ic_menu_gpx" />
+                android:icon="@drawable/ic_menu_gpx"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes"
-                android:icon="@drawable/ic_menu_note_edit" />
+                android:icon="@drawable/ic_menu_note_edit"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_export_persnotes"
                 android:title="@string/export_persnotes"
-                android:icon="@drawable/ic_menu_note" />
+                android:icon="@drawable/ic_menu_note"
+                app:iconTint="@color/colorIconMenu"/>
         </menu>
     </item>
     <item

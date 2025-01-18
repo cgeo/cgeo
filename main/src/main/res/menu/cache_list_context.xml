@@ -5,58 +5,47 @@
     <item
         android:id="@+id/menu_default_navigation"
         android:icon="@drawable/ic_menu_compass"
-        android:title="@string/cache_menu_navigate"> <!-- will be replaced -->
-    </item>
+        android:title="@string/cache_menu_navigate"/> <!-- will be replaced -->
     <item
         android:id="@+id/menu_navigate"
         android:icon="@drawable/ic_menu_navigate"
         android:title="@string/cache_menu_navigate"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_cache_details"
         android:title="@string/cache_menu_details"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_log_visit_offline"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_drop_cache"
         android:icon="@drawable/ic_menu_delete"
         android:title="@string/cache_offline_drop"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_move_to_list"
         android:title="@string/cache_menu_move_list"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_copy_to_list"
         android:title="@string/cache_menu_copy_list"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_refresh"
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/cache_menu_refresh"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_store_cache"
         android:icon="@drawable/ic_menu_save"
         android:title="@string/cache_offline_store"
-        app:showAsAction="ifRoom|withText">
-    </item>
-
+        app:showAsAction="ifRoom|withText"/>
 </menu>
