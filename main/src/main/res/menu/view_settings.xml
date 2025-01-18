@@ -9,15 +9,14 @@
         android:title="@string/search_bar_hint_settings"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
-        app:showAsAction="collapseActionView|always" />
+        app:showAsAction="collapseActionView|always"/>
 
     <item
         android:id="@+id/view_settings_edit"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/activate_editmode_title"
         app:showAsAction="always"
-        tools:ignore="AlwaysShowAction">
-    </item>
+        tools:ignore="AlwaysShowAction"/>
 
     <item
         android:id="@+id/view_settings_add"
@@ -25,7 +24,6 @@
         android:title="@string/add_setting"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction"
-        android:visible="false">
-    </item>
+        android:visible="false"/>
 
 </menu>

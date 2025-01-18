@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
@@ -9,6 +8,6 @@
         android:title="@string/search_bar_hint_settings"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
-        app:showAsAction="collapseActionView|always" />
+        app:showAsAction="collapseActionView|always"/>
 
 </menu>

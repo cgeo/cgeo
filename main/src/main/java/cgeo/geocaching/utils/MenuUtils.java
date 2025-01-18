@@ -80,7 +80,7 @@ public class MenuUtils {
             final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
             final Drawable icon = item.getIcon();
             if (icon != null) {
-                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorIconActionBar : R.color.colorIconOverflow));
+                icon.setTint(context.getResources().getColor(item.isActionButton() ? R.color.colorIconActionBar : R.color.colorIconMenu));
             }
         }
     }

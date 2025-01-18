@@ -7,14 +7,11 @@
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
+        app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_log_visit"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit"
         android:visible="false"
-        app:showAsAction="ifRoom|withText">
-    </item>
-
+        app:showAsAction="ifRoom|withText"/>
 </menu>
