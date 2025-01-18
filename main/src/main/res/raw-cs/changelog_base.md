@@ -11,3 +11,4 @@
 ### Obecné
 - Novinka: Přepracovaná stránka vyhledávání
 - Novinka: Filtr počtu inventáře
+- New: Support for coordinates in DD,DDDDDDD format
