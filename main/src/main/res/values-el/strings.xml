@@ -1112,7 +1112,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Απόθεμα</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
     <string name="cache_personal_note">Προσωπική Σημείωση</string>
     <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>

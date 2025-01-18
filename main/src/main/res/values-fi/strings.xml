@@ -1278,7 +1278,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Tavaraluettelo</string>
     <string name="cache_log_image_default_title">Kuva</string>
     <string name="cache_personal_note">Omat merkinnät</string>
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>

@@ -1288,7 +1288,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">1년 이상 이전</string>
     <string name="cache_premium">프리미엄</string>
-    <string name="cache_inventory">보관함</string>
     <string name="cache_log_image_default_title">사진</string>
     <string name="cache_personal_note">개인 메모</string>
     <string name="cache_menu_preventWaypointsFromNote">지점이 메모에서 방지하기</string>

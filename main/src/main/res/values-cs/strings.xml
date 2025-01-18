@@ -140,7 +140,7 @@
     <string name="log_tb_nothing">Beze změny</string>
     <string name="log_tb_visit">Navštíveno</string>
     <string name="log_tb_drop">Nechat zde</string>
-    <string name="log_tb_sortby">Seřadit sledovatelné předměty</string>
+    <string name="log_tb_sortby">Seřadit trasovatelné předměty</string>
     <string name="log_tb_changeall">Změnit vše</string>
     <string name="log_tb_grabbed">Převzat</string>
     <string name="log_tb_note">Poznámka</string>
@@ -267,11 +267,11 @@
     <string name="err_select_logimage_failed">Výběr obrázku pro zápis selhal.</string>
     <string name="err_acquire_image_failed">Získání obrázku selhalo.</string>
     <string name="err_acquire_image_unsupported_format">Formát obrázku musí být JPEG/JPG, PNG nebo GIF</string>
-    <string name="err_tb_display">c:geo nemůže zobrazit sledovatelný předmět. Je to opravdu sledovatelný předmět?</string>
+    <string name="err_tb_display">c:geo nemůže zobrazit trasovatelná předmět. Je to opravdu trasovatelný předmět?</string>
     <string name="err_tb_details_open">c:geo nemůže otevřít podrobnosti ke sledovatelnému předmětu.</string>
-    <string name="err_tb_not_loggable">Tento sledovatelný předmět není zalogovatelný.</string>
-    <string name="err_tb_not_found">c:geo nemůže najít sledovatelný %s.</string>
-    <string name="err_tb_find_that">c:geo nemůže najít tento sledovatelný předmět.</string>
+    <string name="err_tb_not_loggable">Tento trasovatelný předmět není zalogovatelný.</string>
+    <string name="err_tb_not_found">c:geo nemůže najít trasovatelný %s.</string>
+    <string name="err_tb_find_that">c:geo nemůže najít tento trasovatelný předmět.</string>
     <string name="err_waypoint_cache_unknown">c:geo neví, k jaké kešce chceš přidat trasový bod.</string>
     <string name="err_waypoint_add_failed">c:geo nemůže přidat tvůj trasový bod.</string>
     <string name="err_log_load_data">c:geo nemůže načíst data požadovaná k zalogování návštěvy.</string>
@@ -299,7 +299,7 @@
     <string name="warn_search_help_gccode">Zadej kód kešky. Například „GC1VCAZ“.</string>
     <string name="warn_search_help_keyword">Zadej slovo, které je použito v názvu kešky, kterou se pokoušíš najít.</string>
     <string name="warn_search_help_user">Zadej jméno uživatele z Geocaching.com.</string>
-    <string name="warn_search_help_tb">Zadej kód sledovatelného předmětu. Například „TB29QMZ“.</string>
+    <string name="warn_search_help_tb">Zadej kód trasovatelného předmětu. Například „TB29QMZ“.</string>
     <string name="warn_log_text_fill">Prosím, napiš nějaký text do logu.</string>
     <string name="warn_pocket_query_select">Nevybrána žádná Pocket Query.</string>
     <string name="warn_no_pocket_query_found">Na webu nebyla nalezena žádná Pocket Query.</string>
@@ -321,14 +321,14 @@
     <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
     <string name="info_cache_saved">Keška uložena pro lokální použití</string>
     <string name="warn_calculator_state_save">Nezapomeň si uložit trasový bod, chceš-li zachovat stav kalkulačky.</string>
-    <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
+    <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geo nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
     <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
     <string name="confirm_discard_changes">Zahodit neuložené změny?</string>
     <string name="confirm_unsent_changes_title">Neodeslané změny</string>
     <string name="confirm_unsent_changes">Zahodit neodeslané změny?</string>
     <string name="confirm_discard_wp_changes">Zahodit neuložené změny trasových bodů?</string>
-    <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
+    <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trasovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
     <string name="undo">Zpět</string>
     <string name="dont_show_again">Znovu nezobrazovat</string>
@@ -616,7 +616,7 @@
     <string name="cache_filter_status_select_label_favorite">Vlastní oblíbené</string>
     <string name="cache_filter_status_select_label_watchlist">V seznamu sledovaných</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
-    <string name="cache_filter_status_select_label_has_trackable">Má trackovatelný předmět</string>
+    <string name="cache_filter_status_select_label_has_trackable">Má trasovatelný předmět</string>
     <string name="cache_filter_status_select_label_has_own_vote">Má vlastní hlas</string>
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
@@ -1097,7 +1097,7 @@
     <string name="init_accuracycirclefillcolor_summary">Vyberte barvu a neprůhlednost pro vyplnění kruhů přesnosti</string>
     <string name="init_include_found_status">Zahrnout stav „Nalezené“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
-    <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
+    <string name="init_summary_trackautovisit">Nastavit trasovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
     <string name="init_offlinelogs_homescreen">Zobrazit offline logy</string>
     <string name="init_log_image_default_prefix_title">Výchozí název obrázků v logu</string>
@@ -1838,7 +1838,7 @@
     <string name="google_maps_option_show_feature_water_all">Zobrazit vodní plochy</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
-    <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
+    <string name="search_bar_hint">Hledat kešky/trasovatelné předměty</string>
     <string name="search_bar_hint_settings">Nastavení vyhledávání</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
@@ -1860,9 +1860,9 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
-    <string name="search_tb">Sledovatelný předmět</string>
-    <string name="search_tb_hint">ID sledovatelného předmětu</string>
-    <string name="search_tb_button">Hledat sledovatelné</string>
+    <string name="search_tb">Trasovatelný předmět</string>
+    <string name="search_tb_hint">ID trasovatelného předmětu</string>
+    <string name="search_tb_button">Hledat trasovatelné předměty</string>
     <string name="search_destination">Otevřít cíl v c:geo</string>
     <string name="add_target_to">Přidat cíl do</string>
     <string name="search_address_started">Vyhledávání míst</string>
@@ -1879,15 +1879,15 @@
     <string name="search_bookmark_adding_caches_failed">Přidání kešek do seznamu záložek se nezdařilo</string>
     <string name="search_bookmark_create_new_failed">Nový seznam záložek se nepodařilo vytvořit</string>
     <!-- trackable -->
-    <string name="trackable">Sledovatelný předmět</string>
-    <string name="trackable_details_loading">Načítání detailů…</string>
+    <string name="trackable">Trasovatelný předmět</string>
+    <string name="trackable_details_loading">Načítání detailů trasovatelných předmětů…</string>
     <string name="trackable_log_touch">Hlášení zahlédnutí</string>
     <string name="trackable_browser_open">Otevřít v prohlížeči</string>
     <string name="trackable_refresh">Aktualizovat</string>
     <string name="trackable_goal">Cíl</string>
     <string name="trackable_details">Detaily</string>
     <string name="trackable_image">Obrázek</string>
-    <string name="trackable_code">Identifikační kód</string>
+    <string name="trackable_code">Kód trasovatelného předmětu</string>
     <string name="trackable_name">Název</string>
     <string name="trackable_brand">Značka</string>
     <string name="trackable_type">Typ</string>
@@ -1903,7 +1903,7 @@
     <string name="trackable_released">Vypuštění</string>
     <string name="trackable_distance">Nacestoval</string>
     <string name="trackable_touch">Dotyk</string>
-    <string name="trackable_not_activated">Sledovatelný předmět není aktivován</string>
+    <string name="trackable_not_activated">Trasovatelný předmět není aktivován</string>
     <string name="trackable_travelbug">Travelbug</string>
     <string name="trackable_status">Stav</string>
     <string name="trackable_found">%1$s (%2$s)</string>
@@ -2225,8 +2225,8 @@
     <string name="attribute_military_area_no">Není vojenským výcvikovým prostorem</string>
     <string name="attribute_video_surveil_yes">Prostor pod kamerovým dohledem</string>
     <string name="attribute_video_surveil_no">Prostor není pod kamerovým dohledem</string>
-    <string name="attribute_trackables_yes">Vhodné pro trackovací předměty</string>
-    <string name="attribute_trackables_no">Nevhodné pro trackovací předměty</string>
+    <string name="attribute_trackables_yes">Vhodné pro trasovatelné předměty</string>
+    <string name="attribute_trackables_no">Nevhodné pro trasovatelné předměty</string>
     <string name="attribute_historic_yes">Opuštěná budova / Zřícenina</string>
     <string name="attribute_historic_no">Není opuštěnou budovou / Zříceninou</string>
     <string name="attribute_blind_people_yes">Postižení: Zrakové</string>
@@ -2324,8 +2324,8 @@
     <string name="confirm_report_problem_title">Nahlásit problém</string>
     <string name="confirm_report_problem_message">Opravdu chceš nahlásit „%s“?</string>
     <!-- Geokrety -->
-    <string name="init_summary_geokrety">Povolit sledovatelné předměty z GeoKrety.org</string>
-    <string name="init_geokrety_description">Autorizovat c:geo pro logování sledovatelných předmětů služby Geokrety.org.</string>
+    <string name="init_summary_geokrety">Povolit trasovatelné předměty z GeoKrety.org</string>
+    <string name="init_geokrety_description">Autorizovat c:geo pro logování trasovatelných předmětů služby Geokrety.org.</string>
     <string name="init_geokrety_userid">ID uživatele: %s</string>
     <string name="trackable_title_log_without_geocode">Geokód nenastaven</string>
     <string name="trackable_log_without_geocode">Chystáš se odeslat log bez geokódu. Je doporučeno alespoň jeden nastavit, chceš ho nyní přidat?</string>
@@ -2782,7 +2782,7 @@
     </plurals>
     <!-- GC image size conversion -->
     <string name="settings_gc_imagesize_title">Upřednostňovaná velikost obrázku</string>
-    <string name="settings_gc_imagesize_summary">Obrázky z webu Geocaching.com, které jsou v listingu, lozích a sledovatelných předmětech jsou jsou k dispozici v různých velikostech. Při načítání a ukládání kešky vyberte velikost, která se má načíst.</string>
+    <string name="settings_gc_imagesize_summary">Obrázky z webu Geocaching.com, které jsou v listingu, lozích a trasovatelných předmětech jsou k dispozici v různých velikostech. Při načítání a ukládání kešky vyberte velikost, která se má načíst.</string>
     <string-array name="settings_gc_imagesize_entries">
         <item>Původní</item>
         <item>640px</item>

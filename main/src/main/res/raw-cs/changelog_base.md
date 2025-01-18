@@ -13,6 +13,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Změna: Funkce "sledovat mou polohu" se přesunula na mapu, čímž se uvolnilo více místa pro tlačítko "Živý režim"
 - Změna: Dlouhé stisknutí špendlíku více připomíná c:geo
 - Změna: Funkce pro správu offline dat (stahování map, kontrola chybějících dat o trasování / stínování kopců) přesunuty do nabídky výběru map => „Správa offline dat“
+- Oprava: Mapa neaktualizuje změněné kešky
 
 ### Detaily kešky
 - Novinka: V seznamu proměnných zatím neexistují proměnné použité v projekcích
@@ -25,6 +26,8 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Potvrzení přepsání logu v rychlém offline logu
 - Novinka: Aktualizace stavu kešky při odeslání logu
 - Novinka: Barevné zobrazení HTML zdroje s podrobnostmi o kešce
+- Oprava: checksum(0) vrací nesprávnou hodnotu
+- Oprava: Úprava logů odstraňuje stav "přátelé"
 
 ### Obecné
 - Změna: Použije nadmořskou výšku nad střední hladinou moře (pokud je k dispozici, pouze Android 14+)
@@ -43,3 +46,7 @@ Novinka: Integrovaný přehrávač Wherigo (beta verze) - viz nabídka na domovs
 - Novinka: Další emotikony pro ikony kešek
 - Změna: Filtr typu kešky „Speciální“ zahrnuje události typu mega, giga, community celebration, HQ celebtration, block party a maze
 - Změna: Filtr typu kešky „Ostatní“ zahrnuje typy GCHQ, APE a neznámé typy
+- Oprava: Nastavení délky historie a blízkosti sdílí hodnoty posuvníku
+- Oprava: Stránka trasovatelného logu zobrazující pole pro zadávání času/souřadnic u trasovatelných předmětů, které to nepodporují
+- Oprava: Několik pádů
+- Fix: Some sliders in settings having problems with uninitialized values

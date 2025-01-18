@@ -1571,6 +1571,7 @@
     <string name="cache_multiple_wherigo_cartridges_title">Wiele kartridży Wherigo</string>
     <string name="cache_multiple_wherigo_cartridges_message">Aby uzyskać więcej informacji na temat kartridży, należy zapoznać się z opisem skrytki.</string>
     <string name="cache_wherigo_cartridge_not_downloaded">%s - nie pobrano</string>
+    <string name="cache_wherigo_start">Pobierz i zagraj w Wherigo za pomocą wewnętrznego odtwarzacza c:geo</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
@@ -2235,6 +2236,7 @@
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
     <string name="attribute_unknown">Nieznany atrybut</string>
     <!-- cache attribute categories -->
+    <string name="cat_status">Status skrytki</string>
     <string name="cat_tools">Ekwipunek</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Lokalizacja skrytki</string>
@@ -2675,6 +2677,7 @@
     <string name="wherigo_sound_mute">Wycisz</string>
     <string name="wherigo_sound_unmute">Wyłącz wyciszenie</string>
     <string name="wherigo_controls_resume_paused_dialog">Wznów wstrzymane okno dialogowe</string>
+    <string name="wherigo_dialog_pause_info">Wznów okno dialogowe w odtwarzaczu Wherigo poprzez naciśnięcie \"Wznów wstrzymane okno dialogowe\"</string>
     <string name="wherigo_no_game_running">Obecnie nie ma uruchomionej gry wherigo</string>
     <string name="wherigo_currently_playing">Aktualna gra</string>
     <string name="wherigo_cartridge_details">Szczegóły kartridża</string>
@@ -2707,6 +2710,11 @@
     <string name="wherigo_download_progress_started">Rozpoczęto pobieranie</string>
     <string name="wherigo_download_progress_download_status">Pobrano %1$s / %2$s (%3$s %%)</string>
     <string name="wherigo_error_title">Raport problemu Wherigo</string>
+    <string name="wherigo_error_game_noerror">Nie zgłoszono błędu przez silnik Wherigo.</string>
+    <string name="wherigo_error_game_error">Błąd zgłoszony przez Wherigo Engine:\n\n```\n%1$s\n```</string>
+    <string name="wherigo_error_game_error_addinfo">Użyj \'Wyślij przez e-mail\', aby zgłosić problem związany z wherigo naszemu zespołowi pomocy technicznej.</string>
+    <string name="wherigo_error_email">Raport problemu Wherigo\n\nBłąd: %1$s\n\n Informacje Wherigo: %2$s</string>
+    <string name="wherigo_error_toast">Wherigo Engine zgłosił błąd. Otwórz okno błędów, aby uzyskać szczegóły.</string>
     <string name="wherigo_confirm_stop_running_game_title">Zatrzymaj uruchamianie gry Wherigo</string>
     <string name="wherigo_confirm_stop_running_game_message">Gra jest aktualnie uruchomiona dla \"%s\". Czy chcesz zatrzymać tę grę?</string>
     <string name="wherigo_confirm_delete_cartridge_title">Usuń kartridż Wherigo</string>

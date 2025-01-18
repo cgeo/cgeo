@@ -1047,7 +1047,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_inventory">Envanter</string>
     <string name="cache_log_image_default_title">Görsel</string>
     <string name="cache_personal_note">Kişisel not</string>
     <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
