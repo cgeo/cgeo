@@ -11,3 +11,4 @@
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
 - Nowość: Filtr stanu inwentarza
+- New: Support for coordinates in DD,DDDDDDD format
