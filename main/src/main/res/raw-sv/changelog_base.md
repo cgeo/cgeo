@@ -11,3 +11,4 @@
 ### Allmänt
 - New: Redesigned search page
 - Nytt: Filter för antal i inventariet
+- New: Support for coordinates in DD,DDDDDDD format
