@@ -718,6 +718,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
         }
 
+        MenuUtils.enableIconsInOverflowMenu(menu);
+        MenuUtils.tintToolbarAndOverflowIcons(menu);
+
         return super.onPrepareOptionsMenu(menu);
     }
 

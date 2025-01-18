@@ -4,78 +4,85 @@
 
     <item
         android:id="@+id/menu_default_navigation"
-        android:icon="@drawable/ic_menu_compass"
         android:title="@string/cache_menu_navigate"
+        android:icon="@drawable/ic_menu_compass"
         app:actionProviderClass="cgeo.geocaching.ui.NavigationActionProvider"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_target"
-        android:icon="@drawable/ic_menu_near_me"
         android:title="@string/cache_menu_target"
+        android:icon="@drawable/ic_menu_near_me"
         android:visible="false"
         app:showAsAction="always"/>
     <item
         android:id="@+id/menu_navigate"
-        android:icon="@drawable/ic_menu_navigate"
         android:title="@string/cache_menu_navigate"
+        android:icon="@drawable/ic_menu_navigate"
         app:actionProviderClass="cgeo.geocaching.apps.navi.NavigationSelectionActionProvider"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_log_visit_offline"
-        android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit_offline"
+        android:icon="@drawable/ic_menu_edit"
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_log_visit"
-        android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_menu_visit"
+        android:icon="@drawable/ic_menu_edit"
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_set_found"
         android:title="@string/cache_menu_set_found"
+        android:icon="@drawable/ic_menu_emoticons"
         android:visible="false"/>
     <item
         android:id="@+id/menu_set_DNF"
         android:title="@string/cache_menu_set_DNF"
+        android:icon="@drawable/ic_menu_dnf"
         android:visible="false"/>
     <item
         android:id="@+id/menu_reset_foundstate"
         android:title="@string/cache_menu_reset_foundstate"
+        android:icon="@drawable/ic_menu_reset_found"
         android:visible="false"/>
     <item
         android:id="@+id/menu_tts_toggle"
-        android:icon="@drawable/ic_menu_text_to_speech_off"
         android:title="@string/cache_menu_speechActivate"
+        android:icon="@drawable/ic_menu_text_to_speech_off"
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_caches_around_from_popup"
         android:title="@string/cache_menu_around"
+        android:icon="@drawable/ic_menu_nearby"
         android:visible="false"/>
     <item
         android:id="@+id/menu_show_in_browser"
-        android:icon="@drawable/ic_menu_open_in_browser"
         android:title="@string/cache_menu_browser"
+        android:icon="@drawable/ic_menu_open_in_browser"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_share_from_popup"
         android:title="@string/cache_menu_share"
+        android:icon="@drawable/ic_menu_share"
         android:visible="false"/>
     <item
         android:id="@+id/menu_challenge_checker"
         android:title="@string/cache_menu_challenge_checker"
+        android:icon="@drawable/geochecker_available"
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_log_in_browser"
         android:title="@string/cache_menu_log_in_browser"
+        android:icon="@drawable/ic_external_link"
         android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_edit_fieldnote"
-        android:icon="@drawable/ic_menu_edit"
+        android:icon="@drawable/ic_menu_note"
         android:title="@string/cache_personal_note"
         android:visible="false"/>
     <item
@@ -86,6 +93,7 @@
     <item
         android:id="@+id/menu_waypoints"
         android:title="@string/cache_waypoints"
+        android:icon="@drawable/settings_map_content"
         app:showAsAction="never"
         android:visible="false">
         <menu>
@@ -125,6 +133,7 @@
     <item
         android:id="@+id/menu_export"
         android:title="@string/share_export"
+        android:icon="@drawable/ic_menu_share"
         app:showAsAction="never"
         android:visible="false">
         <menu>
@@ -153,35 +162,50 @@
     <item
         android:id="@+id/menu_advanced"
         android:title="@string/cache_advanced"
+        android:icon="@drawable/settings_advanced"
         app:showAsAction="never"
         android:visible="false">
         <menu>
             <item
                 android:id="@+id/menu_calendar"
                 android:title="@string/cache_menu_event"
+                android:icon="@drawable/ic_menu_calendar"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_caches_around"
-                android:title="@string/cache_menu_around"/>
+                android:title="@string/cache_menu_around"
+                android:icon="@drawable/ic_menu_nearby"
+                app:iconTint="@color/colorIconMenu"/>
             <item
                 android:id="@+id/menu_gcvote"
                 android:title="@string/cache_menu_vote"
+                android:icon="@drawable/ic_menu_vote"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_ignore"
                 android:title="@string/cache_menu_ignore"
+                android:icon="@drawable/ic_menu_cancel"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_upload_bookmarklist"
                 android:title="@string/caches_upload_bookmarklist"
+                android:icon="@drawable/ic_menu_bookmarks"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_set_cache_icon"
                 android:title="@string/cache_menu_set_cache_icon"
+                android:icon="@drawable/downloader_theme"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_change_description_style"
                 android:title="@string/cache_menu_change_description_style"
+                android:icon="@drawable/ic_menu_textstyle"
+                app:iconTint="@color/colorIconMenu"
                 android:visible="true"/>
         </menu>
     </item>

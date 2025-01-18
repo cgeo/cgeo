@@ -21,7 +21,7 @@ public enum ToggleItemType {
     LIVE_MODE(R.drawable.ic_menu_sync_enabled, R.drawable.ic_menu_sync_disabled, R.string.map_live_disable, R.string.map_live_enable),
     SELECT_MODE(R.drawable.ic_menu_select_end, R.drawable.ic_menu_select_start,
             R.string.caches_select_mode_exit, R.string.caches_select_mode),
-    TOGGLE_SPEECH(R.drawable.ic_menu_text_to_speech_on, R.drawable.ic_menu_text_to_speech_off,
+    TOGGLE_SPEECH(R.drawable.ic_menu_text_to_speech_off, R.drawable.ic_menu_text_to_speech_on,
             R.string.cache_menu_speechDeactivate, R.string.cache_menu_speechActivate),
     WAYPOINTS_FROM_NOTE(-1, -1, R.string.cache_menu_allowWaypointExtraction, R.string.cache_menu_preventWaypointsFromNote);
 
