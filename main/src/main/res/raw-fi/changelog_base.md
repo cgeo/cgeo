@@ -11,3 +11,4 @@
 ### Yleinen
 - New: Redesigned search page
 - New: Inventory count filter
+- New: Support for coordinates in DD,DDDDDDD format
