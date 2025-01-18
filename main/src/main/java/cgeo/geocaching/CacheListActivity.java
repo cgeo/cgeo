@@ -629,6 +629,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } catch (final RuntimeException e) {
             Log.e("CacheListActivity.onPrepareOptionsMenu", e);
         }
+        MenuUtils.tintToolbarAndOverflowIcons(menu);
 
         return true;
     }
