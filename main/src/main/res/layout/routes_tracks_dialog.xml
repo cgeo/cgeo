@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <!-- Individual routes -->
-
-    <Button
-        android:id="@+id/indivroute_load"
-        android:text="@string/map_load_individual_route"
-        style="@style/button_full" />
 
     <LinearLayout
         android:id="@+id/indivroute"
@@ -19,39 +14,6 @@
         android:orientation="vertical">
 
         <include layout="@layout/routes_tracks_item" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp">
-
-            <TextView
-                android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@id/indivroute_export_route"
-                android:text="@string/map_export_individual_route"
-                style="@style/text_default"
-                android:layout_centerVertical="true"/>
-
-            <Button
-                android:id="@+id/indivroute_export_route"
-                android:text="@string/route"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/indivroute_export_track"
-                style="@style/button"
-                android:layout_centerVertical="true"/>
-
-            <Button
-                android:id="@+id/indivroute_export_track"
-                android:text="@string/track"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                style="@style/button"
-                android:layout_centerVertical="true"/>
-
-        </RelativeLayout>
 
         <CheckBox
             android:id="@+id/auto_target"
@@ -62,24 +24,37 @@
             android:paddingRight="6dp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/clear_targets"
+        android:text="@string/map_clear_manual_targets"
+        app:icon="@drawable/ic_menu_clear_target"
+        style="@style/button_full" />
+
     <!-- GPX routes/tracks -->
 
-    <Button
-        android:id="@+id/trackroute_load"
-        android:text="@string/map_load_track"
-        style="@style/button_full" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <cgeo.geocaching.ui.SectionHeader
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/routes_tracks_header"
+            app:dividerAbove="true"
+            android:text="@string/routes_tracks_menu" />
+
+        <Button
+            android:id="@+id/trackroute_load"
+            app:icon="@drawable/ic_menu_import"
+            android:tooltipText="@string/map_load_track"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            style="@style/button_icon_accent" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/tracklist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"/>
-
-    <!-- Common -->
-
-    <Button
-        android:id="@+id/clear_targets"
-        android:text="@string/map_clear_manual_targets"
-        style="@style/button_full" />
-
 </LinearLayout>

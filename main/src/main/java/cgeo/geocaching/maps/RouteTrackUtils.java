@@ -72,6 +72,7 @@ public class RouteTrackUtils {
     private final ContentStorageActivityHelper csah;
     private View popup = null;
     private Tracks tracks = null;
+    private BottomSheetDialog dialog = null;
 
     private final Runnable reloadIndividualRoute;
     private final Runnable clearIndividualRoute;
@@ -129,8 +130,7 @@ public class RouteTrackUtils {
         popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
         updateDialogIndividualRoute(popup, individualRoute, setTarget, showElevationChart);
         updateDialogTracks(popup, tracks, showElevationChart);
-        updateDialogClearTargets(popup, individualRoute, setTarget, showElevationChart);
-        final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
+        dialog = Dialogs.bottomSheetDialogWithActionbar(activity, popup, R.string.routes_tracks_dialog_title);
         dialog.setOnDismissListener(dialog1 -> popup = null);
         dialog.show();
     }
@@ -155,12 +155,16 @@ public class RouteTrackUtils {
         elevationChart.setEnabled(route instanceof Route);
         configureMenuItem(menu.findItem(R.id.menu_edit), isIndividualRoute, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_color), !isIndividualRoute, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.menu_rename), !isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_center), true, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_optimize), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_refresh), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_invert_order), isIndividualRoute, null);
         configureMenuItem(menu.findItem(R.id.menu_visibility), route != null, hidePerDefault);
         configureMenuItem(menu.findItem(R.id.menu_delete), true, hidePerDefault);
+        configureMenuItem(menu.findItem(R.id.indivroute_export_route), isIndividualRoute, null);
+        configureMenuItem(menu.findItem(R.id.indivroute_export_track), isIndividualRoute, null);
+        configureMenuItem(menu.findItem(R.id.indivroute_load), isIndividualRoute, null);
         configureVisibility(menu.findItem(R.id.menu_visibility), route.isHidden());
     }
 
@@ -179,6 +183,7 @@ public class RouteTrackUtils {
     public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
         final int id = item.getItemId();
         if (id == R.id.menu_showElevationChart && showElevationChart != null && route instanceof Route) {
+            dialog.dismiss();
             showElevationChart.call((Route) route, true);
         } else if (id == R.id.menu_edit && isIndividualRoute(route)) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
@@ -191,6 +196,15 @@ public class RouteTrackUtils {
             storeAndReloadIndividualRoute(newRouteItems);
         } else if (id == R.id.menu_color && !isIndividualRoute(route)) {
             tracks.find(route, (key, routeForThisKey) -> setTrackColor(activity, tracks, key, item, updateTrack));
+        } else if (id == R.id.menu_rename) {
+            tracks.find(route, (key, routeForThisKey) -> SimpleDialog.ofContext(dialog.getContext())
+                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
+                    .input(new SimpleDialog.InputOptions().setInitialValue(tracks.getDisplayname(key)), newName -> {
+                        if (StringUtils.isNotBlank(newName)) {
+                            tracks.setDisplayname(key, newName);
+                            updateDialogTracks(popup, tracks, null);
+                        }
+                    }));
         } else if (id == R.id.menu_visibility) {
             final boolean willBeHidden = !route.isHidden();
             route.setHidden(willBeHidden);
@@ -244,6 +258,16 @@ public class RouteTrackUtils {
             }
             // refresh those caches
             CacheDownloaderService.downloadCaches(activity, geocodes, true, true, null);
+        } else if (id == R.id.indivroute_export_route && isIndividualRoute(route)) {
+            new IndividualRouteExport(activity, (Route) route, false);
+        } else if (id == R.id.indivroute_export_track && isIndividualRoute(route)) {
+            new IndividualRouteExport(activity, (Route) route, true);
+        } else if (id == R.id.indivroute_load && isIndividualRoute(route)) {
+                if (((Route) route).getNumSegments() == 0) {
+                    startFileSelectorIndividualRoute();
+                } else {
+                    SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
+                }
         } else {
             return false;
         }
@@ -265,24 +289,15 @@ public class RouteTrackUtils {
         if (dialog == null) {
             return;
         }
-        dialog.findViewById(R.id.indivroute_load).setOnClickListener(v1 -> {
-            if (null == individualRoute || individualRoute.getNumSegments() == 0) {
-                startFileSelectorIndividualRoute();
-            } else {
-                SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(this::startFileSelectorIndividualRoute);
-            }
-        });
-
         if (isRouteNonEmpty(individualRoute)) {
             dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
             final Toolbar tb = dialog.findViewById(R.id.routes_track_item);
-            tb.inflateMenu(R.menu.map_routetrack_context);
+            if (tb.getMenu() == null || tb.getMenu().size() == 0) {
+                tb.inflateMenu(R.menu.map_routetrack_context);
+            }
             tb.setOnMenuItemClickListener(item -> handleContextMenuClick(item, showElevationChart, individualRoute, () -> updateDialogIndividualRoute(dialog, individualRoute, setTarget, showElevationChart)));
             final Menu menu = tb.getMenu();
             configureContextMenu(menu, true, individualRoute, false);
-
-            dialog.findViewById(R.id.indivroute_export_route).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, false));
-            dialog.findViewById(R.id.indivroute_export_track).setOnClickListener(v1 -> new IndividualRouteExport(activity, individualRoute, true));
 
             final CheckBox vAutoTarget = dialog.findViewById(R.id.auto_target);
             vAutoTarget.setChecked(Settings.isAutotargetIndividualRoute());
@@ -293,6 +308,7 @@ public class RouteTrackUtils {
         } else {
             dialog.findViewById(R.id.indivroute).setVisibility(View.GONE);
         }
+        updateDialogClearTargets(dialog, individualRoute, setTarget, showElevationChart);
     }
 
     private void updateDialogTracks(final View dialog, final Tracks tracks, final Action2<Route, Boolean> showElevationChart) {
@@ -311,14 +327,6 @@ public class RouteTrackUtils {
 
             final TextView displayName = tb.findViewById(R.id.item_title);
             displayName.setText(tracks.getDisplayname(key));
-            displayName.setOnClickListener(v -> SimpleDialog.ofContext(dialog.getContext())
-                    .setTitle(TextParam.text(activity.getString(R.string.routes_tracks_change_name)))
-                    .input(new SimpleDialog.InputOptions().setInitialValue(displayName.getText().toString()), newName -> {
-                        if (StringUtils.isNotBlank(newName)) {
-                            tracks.setDisplayname(key, newName);
-                            displayName.setText(newName);
-                        }
-                    }));
 
             final MenuItem vColor = tb.getMenu().findItem(R.id.menu_color);
             setColorIcon(vColor, tracks.getColor(key));
@@ -348,7 +356,7 @@ public class RouteTrackUtils {
 
     private void updateDialogClearTargets(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget, final Action2<Route, Boolean> showElevationChart) {
         final View vClearTargets = dialog.findViewById(R.id.clear_targets);
-        vClearTargets.setEnabled(isTargetSet.call() || Settings.isAutotargetIndividualRoute());
+        vClearTargets.setVisibility(isTargetSet.call() || Settings.isAutotargetIndividualRoute() ? View.VISIBLE : View.GONE);
         vClearTargets.setOnClickListener(v1 -> {
             if (setTarget != null) {
                 setTarget.call(null, null);

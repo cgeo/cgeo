@@ -15,6 +15,12 @@
         android:visibility="gone"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/menu_rename"
+        android:title="@string/list_dialog_rename"
+        android:icon="@drawable/ic_menu_edit"
+        app:iconTint="@color/colorText"
+        android:visibility="gone"/>
+    <item
         android:id="@+id/menu_optimize"
         android:icon="@drawable/ic_menu_auto_fix_high"
         android:title="@string/optimize"
@@ -61,5 +67,20 @@
         android:icon="@drawable/ic_menu_refresh"
         android:title="@string/map_refresh_individual_route"
         android:visibility="gone"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/indivroute_export_route"
+        android:icon="@drawable/ic_menu_gpx"
+        android:title="@string/map_export_route"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/indivroute_export_track"
+        android:icon="@drawable/ic_menu_gpx"
+        android:title="@string/map_export_track"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/indivroute_load"
+        android:icon="@drawable/ic_menu_import"
+        android:title="@string/map_load_individual_route"
         app:showAsAction="never" />
 </menu>
