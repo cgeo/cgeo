@@ -1,6 +1,6 @@
 ### Karte
 - Neu: Unterstützung für Elevate Winter Design im Kartendownloader
-- New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
+- Neu: Adaptive Kartenschattierung, optionaler Modus mit hoher Qualität (UnifiedMap Mapsforge)
 - Change: Keep current viewport on mapping a list, if all caches fit into current viewport
 - New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
 
@@ -11,3 +11,4 @@
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
 - New: Inventory count filter
+- New: Support for coordinates in DD,DDDDDDD format
