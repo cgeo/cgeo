@@ -4,6 +4,7 @@
 - Change: Keep current viewport on mapping a list, if all caches fit into current viewport
 - New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
 - New: Redesigned routes/tracks quick settings dialog
+- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
 
 ### Cache details
 - New: Option to share cache with user data (coordinates, personal note)
