@@ -57,6 +57,6 @@ public class ProximityPreferenceUI extends SeekbarUI {
 
     @Override
     public void loadAdditionalAttributes(final Context context, final TypedArray attrs, final int defStyle) {
-        highRes = attrs.getBoolean(R.styleable.ProximityPreference_highRes, false);
+        highRes = attrs.getBoolean(R.styleable.SeekbarPreference_highRes, false);
     }
 }
