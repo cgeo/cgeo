@@ -11,3 +11,4 @@
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
 - Nieuw: Inhoud telling filter
+- New: Support for coordinates in DD,DDDDDDD format
