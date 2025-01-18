@@ -416,6 +416,7 @@
     <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Bewertung</string>
     <string name="caches_sort_vote">Eigene Bewertung</string>
+    <string name="caches_sort_inventory">Anzahl Trackables</string>
     <string name="caches_sort_date_hidden">Versteckdatum</string>
     <string name="caches_sort_date_logged">Logdatum (Eigener Log)</string>
     <string name="caches_sort_finds">Funde</string>
@@ -531,6 +532,7 @@
     <string name="cache_filter_hidden">Versteckdatum</string>
     <string name="cache_filter_eventdate">Eventdatum</string>
     <string name="cache_filter_logs_count">Anzahl Logs</string>
+    <string name="cache_filter_inventory_count">Anzahl Trackables</string>
     <string name="cache_filter_last_found">Letztes Funddatum</string>
     <string name="cache_filter_log_entry">Logeintrag</string>
     <string name="cache_filter_location">Ort</string>
@@ -1050,7 +1052,10 @@
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
     <string name="settings_info_themes">c:geo unterstützt benutzerdefinierte Designs für Offline-Karten. Diese können verwendet werden, um den Farbstil der Karte zu ändern (z. B. um eine Nachtsicht zu haben) oder um bestimmte Objekte wie Radwege oder Höhenlinien innerhalb der Karte hervorzuheben.\n\nDie Verwendung von nicht gezippten Kartendesigns könnte die Startgeschwindigkeit der Karte verringern. In diesem Fall kann der Designordner optional mit einem app-internen lokalen Ordner synchronisiert werden, um einen schnelleren Zugriff zu ermöglichen (auf Kosten von etwas Speicherplatz).</string>
     <string name="settings_info_hillshading_title">Informationen zur Kartenschattierung</string>
+    <string name="settings_info_hillshading">Kartenschattierung ist eine Technik, um topografische Reliefkarten zu erstellen, indem man der Karte einen Schatteneffekt hinzufügt, um Höhenänderungen anzuzeigen. Hänge werden schattiert, um einen 3D-Effekt zu erzeugen.\nDie erforderlichen Daten können über das Kartenmenü heruntergeladen werden.\nNicht kompatibel mit der Vereinheitlichten Karte in der VTM-Variante.</string>
     <string name="settings_hillshading_enable">Kartenschattierung</string>
+    <string name="init_hillshading_hq">Kartenschattierung in hoher Qualität</string>
+    <string name="init_summary_hillshading_hq">Detailliertere Kartenschattierung, aber ~50%% langsamere Darstellung beim Vergrößern</string>
     <string name="init_mapsource_select">Kartenquelle wählen</string>
     <string name="init_mapsource_select_legacy">Kartenquelle auswählen (Legacy)</string>
     <string name="init_local_file_system">Lokales Dateisystem</string>
@@ -1350,6 +1355,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">vor über einem Jahr</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Trackables</string>
     <string name="cache_log_image_default_title">Bild</string>
     <string name="cache_set_coordinates">Koordinaten festlegen</string>
     <string name="cache_personal_note">Persönliche Notiz</string>
@@ -1568,6 +1574,7 @@
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
+    <string name="internal_cache_default_names">Benutzerdefinierter Cache #%1$s</string>
     <string name="internal_cache_default_description">Dies ist ein benutzerdefinierter Cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gehe zu\' Ziele</string>
@@ -1986,6 +1993,8 @@
     <string name="attribute_night_yes">Nachts empfohlen</string>
     <string name="attribute_night_no">Nachts nicht empfohlen</string>
     <string name="attribute_winter_yes">Im Winter zugänglich</string>
+    <string name="attribute_cacti_yes">Kakteen in der Nähe</string>
+    <string name="attribute_cacti_no">Keine Kakteen in der Nähe</string>
     <string name="attribute_winter_no">Im Winter nicht zugänglich</string>
     <string name="attribute_stealth_yes">Heimlich vorgehen</string>
     <string name="attribute_stealth_no">Heimlichkeit nicht notwendig</string>
@@ -2296,6 +2305,7 @@
     </plurals>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
     <string name="live_map_status_http429">Bitte langsamer, zu viele Anfragen an %s</string>
+    <string name="live_map_status_error">Fehler beim Laden der Kartendaten: %s</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
@@ -2418,6 +2428,7 @@
     <string name="no">Nein</string>
     <string name="show_all">Alle zeigen</string>
     <string name="lists_only_new">Nur neue</string>
+    <string name="pq_only_dl">Verfügbare</string>
     <string name="routingmode_straight">Direkt</string>
     <string name="routingmode_walk">Gehen</string>
     <string name="routingmode_bike">Fahrrad</string>
