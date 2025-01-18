@@ -11,3 +11,4 @@
 ### General
 - Nou: pàgina de cerca redissenyada
 - Nou: filtre de recompte d'inventari
+- New: Support for coordinates in DD,DDDDDDD format
