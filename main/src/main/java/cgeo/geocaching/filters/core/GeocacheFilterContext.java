@@ -27,6 +27,7 @@ public class GeocacheFilterContext implements Parcelable {
 
     private FilterType type;
     private GeocacheFilter filter;
+    private GeocacheFilter previousFilter = null;
 
     public GeocacheFilterContext(final FilterType type) {
         setType(type);
@@ -56,11 +57,23 @@ public class GeocacheFilterContext implements Parcelable {
     }
 
     public void set(final GeocacheFilter filter) {
+        if (filter != null) {
+            final GeocacheFilter currentFilter = get();
+            final boolean sameFilter = currentFilter.filtersSame(filter) && currentFilter.getName().equals(filter.getName());
+            if (currentFilter.isFiltering() && !sameFilter) {
+                previousFilter = currentFilter;
+            }
+        }
+
         if (type == FilterType.TRANSIENT) {
             this.filter = filter == null ? GeocacheFilter.createEmpty() : filter;
-        } else {
+        } else if (filter != null) {
             Settings.setCacheFilterConfig(type.name(), filter.toConfig());
         }
+    }
+
+    public GeocacheFilter getPreviousFilter() {
+        return previousFilter;
     }
 
     @NonNull
@@ -76,10 +89,14 @@ public class GeocacheFilterContext implements Parcelable {
         public GeocacheFilterContext createFromParcel(final Parcel in) {
             final FilterType type = (FilterType) in.readSerializable();
             final String filterConfig = in.readString();
+            final String previousFilterConfig = in.readString();
 
             final GeocacheFilterContext ctx = new GeocacheFilterContext(type);
             if (filterConfig != null) {
                 ctx.set(GeocacheFilter.createFromConfig(filterConfig));
+            }
+            if (previousFilterConfig != null) {
+                ctx.previousFilter = GeocacheFilter.createFromConfig(previousFilterConfig);
             }
             return ctx;
         }
@@ -99,5 +116,6 @@ public class GeocacheFilterContext implements Parcelable {
     public void writeToParcel(final Parcel dest, final int flags) {
         dest.writeSerializable(type);
         dest.writeString(filter == null ? null : filter.toConfig());
+        dest.writeString(previousFilter == null ? null : previousFilter.toConfig());
     }
 }

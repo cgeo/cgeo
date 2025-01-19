@@ -13,9 +13,11 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.text.style.StyleSpan;
+import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
 
@@ -42,6 +44,17 @@ public class FilterUtils {
                 filteredList, true);
     }
 
+    @NonNull
+    private static Pair<TextParam, GeocacheFilter> getLastFilterActionForContext(@NonNull final GeocacheFilterContext filterContext) {
+        final GeocacheFilter previousFilter = filterContext.getPreviousFilter();
+        final boolean hasValidLastFilter = null != previousFilter && previousFilter.isFiltering();
+
+        if (hasValidLastFilter) {
+            return new Pair(TextParam.id(R.string.caches_filter_select_last), previousFilter);
+        }
+        return new Pair(null, null);
+    }
+
     public static <T extends AbstractActivity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
         final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
         final boolean isFilterActive = filterContext.get().isFiltering();
@@ -55,27 +68,33 @@ public class FilterUtils {
             final TextParam message = TextParam.concat(TextParam.id(R.string.cache_filter_storage_load_delete_nofilter_message),
                     TextParam.text(System.lineSeparator()),
                     TextParam.id(R.string.cache_filter_storage_clear_message));
-                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
-                        .setPositiveButton(TextParam.id(R.string.cache_filter_storage_clear_button))
-                        .setMessage(message)
-                        .confirm(() ->
-                                filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
-                        );
-                return true;
-            }
+
+            SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_clear_title)
+                    .setPositiveButton(TextParam.id(R.string.cache_filter_storage_clear_button))
+                    .setMessage(message)
+                    .confirm(() ->
+                            filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+                    );
+            return true;
+        }
 
         final SimpleDialog.ItemSelectModel<GeocacheFilter> model = getGroupedFilterList(filters);
 
-        if (isFilterActive) {
-            SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
-                    .setNeutralButton(TextParam.id(R.string.cache_filter_storage_clear_button))
-                    .setNeutralAction(() ->
-                            filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
-                    ).selectSingle(model, filteredActivity::refreshWithFilter);
-        } else {
-            SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                    .selectSingle(model, filteredActivity::refreshWithFilter);
-        }
+        final Pair<TextParam, GeocacheFilter> lastFilterButton = getLastFilterActionForContext(filterContext);
+        SimpleDialog.of(filteredActivity)
+                .setTitle(isFilterActive ? TextParam.id(R.string.cache_filter_storage_select_clear_title) : TextParam.id(R.string.cache_filter_storage_select_title))
+                .setPositiveButton(null)
+                .setNeutralButton(isFilterActive ? TextParam.id(R.string.cache_filter_storage_clear_button) : null)
+                .setNegativeButton(lastFilterButton.first)
+                .setButtonClickAction((which) -> {
+                    if (which == DialogInterface.BUTTON_NEUTRAL) {
+                        filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()));
+                    } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                        filteredActivity.refreshWithFilter(lastFilterButton.second);
+                    }
+                    return false;
+                })
+                .selectSingle(model, filteredActivity::refreshWithFilter);
         return true;
     }
 
