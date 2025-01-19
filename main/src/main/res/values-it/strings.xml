@@ -2351,7 +2351,7 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
     <string name="map_refresh_individual_route">Aggiorna</string>
-    <string name="map_export_individual_route">Esporta percorso personalizzato</string>
+    <string name="map_export_individual_route">Esporta percorso individuale</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
