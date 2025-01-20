@@ -3,8 +3,8 @@
 - Nowość: Adaptacyjne cieniowanie wzgórz, opcjonalny tryb wysokiej jakości (UnifiedMap Mapsforge)
 - Zmiana: Zachowaj bieżący widok na mapowaniu listy, jeśli wszystkie skrytki mieszczą się w bieżącym widoku
 - Nowość: Osobna ikona znacznika dla skrytek z ręcznie ustawionymi współrzędnymi, które są identyczne do współrzędnych oryginalnych
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
+- Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
