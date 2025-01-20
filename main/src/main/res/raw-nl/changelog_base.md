@@ -3,8 +3,8 @@
 - Nieuw: Adaptieve Hoogtelijnen, optionele hoge kwaliteit modus (UnifiedMap Mapsforge)
 - Wijziging: Houd de huidige viewport op de kaart van een lijst, als alle caches passen in de huidige viewport
 - Nieuw: Scheid icoon marker voor caches met handmatig identieke coördinaten aan de lijst van coördinaten
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- Nieuw: Herontworpen routes/track van het dialoogvenster snelle instellingen
+- Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
@@ -13,4 +13,4 @@
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
 - Nieuw: Inhoud telling filter
-- New: Support for coordinates in DD,DDDDDDD format
+- Nieuw: Ondersteuning voor coördinaten in DD,DDDDDDD formaat
