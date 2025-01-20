@@ -1,10 +1,10 @@
 ### Mapa
 - Novinka: Podpora motivu Elevate Winter ve stahovači map
 - Novinka: Adaptivní stínování kopců, volitelný režim vysoké kvality (Sjednocená mapa Mapsforge)
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- Změna: Ponechat aktuální zobrazení při mapování seznamu, pokud se všechny kešky vejdou do aktuálního zobrazení
+- Novinka: Samostatná značka ikony pro kešky s ručně nastavenými souřadnicemi shodnými se souřadnicemi v listingu
+- Novinka: Přepracované dialogové okno rychlého nastavení tras/stop
+- Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
 
 ### Detaily kešky
 - Novinka: Možnost sdílení kešky s uživatelskými daty (souřadnice, osobní poznámka)
