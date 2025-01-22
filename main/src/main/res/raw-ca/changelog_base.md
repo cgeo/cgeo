@@ -1,10 +1,10 @@
 ### Mapa
 - Nou: admet el tema Elevate Winter al descarregador de mapes
 - Nou: ombrejat adaptatiu, mode d'alta qualitat opcional (UnifiedMap Mapsforge)
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- Canviar: manteniu la finestra gràfica actual en el mapa d'una llista, si tots els catxés encaixen a la finestra gràfica actual
+- Novetat: marcador d'icones separat per a catxés amb coordenades establertes manualment idèntiques a les coordenades de llista
+- Novetat: diàleg de configuració ràpida de rutes/tracks redissenyades
+- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor anterior (UnifiedMap)
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
@@ -13,4 +13,4 @@
 ### General
 - Nou: pàgina de cerca redissenyada
 - Nou: filtre de recompte d'inventari
-- New: Support for coordinates in DD,DDDDDDD format
+- Nou: suport per a coordenades en format DD, DDDDDDD
