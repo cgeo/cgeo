@@ -89,12 +89,26 @@ public class WherigoLayer {
 
         final int color = WherigoUtils.isVisibleToPlayer(zone) ? Color.RED : Color.GRAY;
         final List<Geopoint> geopoints = WherigoUtils.GP_CONVERTER.fromList(Arrays.asList(zone.points));
-        return GeoPrimitive.createPolygon(geopoints, GeoStyle.builder()
+        if (geopoints.isEmpty()) {
+            return null;
+        }
+
+        GeoPrimitive.Builder builder = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYGON).addPoints(geopoints);
+        if (!builder.build().isValid()) {
+            //try to make it a polyline
+            builder = GeoPrimitive.builder().setType(GeoItem.GeoType.POLYLINE).addPoints(geopoints);
+            if (!builder.build().isValid()) {
+                //if this is also invalid then just paint a circle around first coord instead
+                builder = GeoPrimitive.builder().setType(GeoItem.GeoType.CIRCLE).addPoints(geopoints.get(0)).setRadius(0.005f);
+            }
+        }
+
+        return builder.setStyle(GeoStyle.builder()
             .setStrokeColor(color)
             .setFillColor(Color.argb(128, Color.red(color), Color.green(color), Color.blue(color)))
             .setStrokeWidth(5f)
             .build()
-        ).buildUpon().setIcon(GeoIcon.builder().setText(zone.name).build()).build();
+        ).setIcon(GeoIcon.builder().setText(zone.name).build()).build();
     }
 
 
