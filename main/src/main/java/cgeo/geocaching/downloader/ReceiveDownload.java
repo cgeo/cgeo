@@ -248,8 +248,8 @@ class ReceiveDownload {
                     if (!keepTemporaryFile) {
                         context.getContentResolver().delete(uri, null, null);
                     }
-                } catch (IllegalArgumentException iae) {
-                    Log.w("Deleting Uri '" + uri + "' failed, will be ignored", iae);
+                } catch (IllegalArgumentException | UnsupportedOperationException e) {
+                    Log.w("Deleting Uri '" + uri + "' failed, will be ignored", e);
                 }
                 // finalization AFTER deleting source file. This handles the very special case when target folder = Download folder
                 downloader.onSuccessfulReceive(outputUri);
