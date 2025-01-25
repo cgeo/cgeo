@@ -621,6 +621,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             MenuUtils.setVisible(menu, R.id.menu_lists, isOffline);
             MenuUtils.setVisible(menu, R.id.menu_drop_list, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
+            MenuUtils.setVisible(menu, R.id.menu_rename_list_prefix, isNonDefaultList && DataStore.getListHierarchy().size() > 1);
             MenuUtils.setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             MenuUtils.setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
             MenuUtils.setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
@@ -754,6 +755,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_rename_list) {
             renameList();
+        } else if (menuItem == R.id.menu_rename_list_prefix) {
+            new StoredList.UserInterface(this).promptForListPrefixRename(() -> {
+                refreshCurrentList();
+                invalidateOptionsMenuCompatible();
+            });
         } else if (menuItem == R.id.menu_invert_selection) {
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();

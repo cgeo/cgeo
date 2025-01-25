@@ -533,6 +533,9 @@
     <string name="list_menu_create">Create new list</string>
     <string name="list_menu_drop">Remove current list</string>
     <string name="list_menu_rename">Rename current list</string>
+    <string name="list_menu_rename_list_prefix">Rename list prefix</string>
+    <string name="rename_from">Rename from</string>
+    <string name="rename_to">Rename to</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Pick a list</string>
     <string name="lists_title">Pick the lists</string>
@@ -552,6 +555,8 @@
     <string name="list_not_available">List no longer available, switching to standard list</string>
     <string name="list_parent_list">Parent list</string>
     <string name="list_name">List name</string>
+    <string name="list_confirm_rename">Renaming from \"%1$s\" to \"%2$s\"\n%3$s\nThis action cannot be undone!</string>
+    <string name="list_confirm_no_hierarchy">\nNo \":\" found - all matching lists will be transformed to top-level lists\n</string>
 
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Advanced</string>
