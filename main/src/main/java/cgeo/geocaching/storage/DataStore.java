@@ -2926,6 +2926,15 @@ public class DataStore {
         }
     }
 
+    public static List<String> getListHierarchy() {
+        return withAccessLock(() -> {
+            final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists, new String[]{});
+            final List<String> result = cursorToColl(c, new ArrayList<>(), GET_STRING_0);
+            Collections.sort(result);
+            return result;
+        });
+    }
+
     @Nullable
     public static Viewport getBounds(final Set<String> geocodes, final boolean withWaypoints) {
         if (CollectionUtils.isEmpty(geocodes)) {
