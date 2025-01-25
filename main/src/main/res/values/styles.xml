@@ -286,6 +286,11 @@
         <item name="endIconMode">clear_text</item>
     </style>
 
+    <style name="textinput_dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:padding">6dip</item>
+        <item name="android:textAppearance">@style/text_default</item>
+    </style>
+
     <!-- for AutoCompleteTextView or EditText embedded in material TextInputLayout -->
 
     <style name="textinput_embedded">
