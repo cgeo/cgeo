@@ -2912,6 +2912,7 @@ public class DataStore {
         }
     }
 
+    @NonNull
     public static List<String> getListHierarchy() {
         return withAccessLock(() -> {
             final Cursor c = database.rawQuery("SELECT DISTINCT RTRIM(title, REPLACE(title, ':', '')) FROM " + dbTableLists, new String[]{});
@@ -2919,6 +2920,15 @@ public class DataStore {
             Collections.sort(result);
             return result;
         });
+    }
+
+    public static void renameListPrefix(final String from, final String to) {
+        if (StringUtils.isEmpty(from)) {
+            return;
+        }
+        withAccessLock(() -> database.execSQL("UPDATE " + dbTableLists
+            + " SET title=? || SUBSTR(title," + (from.length() + 1) + ")"
+            + " WHERE SUBSTR(title,1," + from.length() + ") = ?", new String[]{ to, from }));
     }
 
     @Nullable

@@ -9,6 +9,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.CommonUtils;
@@ -17,6 +18,7 @@ import cgeo.geocaching.utils.ItemGroup;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
 
@@ -378,7 +381,7 @@ public final class StoredList extends AbstractList {
             final String current = defaultValue.substring(defaultValue.lastIndexOf(":") + 1).trim();
 
             final List<String> hierarchies = DataStore.getListHierarchy();
-            final boolean hasHierarchies = hierarchies != null && hierarchies.size() > 1;
+            final boolean hasHierarchies = hierarchies.size() > 1;
             if (hasHierarchies) {
                 if (StringUtils.isEmpty(hierarchies.get(0))) {
                     hierarchies.set(0, activity.getString(R.string.init_custombnitem_none));
@@ -415,6 +418,59 @@ public final class StoredList extends AbstractList {
                 DataStore.renameList(listId, listName);
                 runAfterRename.run();
             });
+        }
+
+        public void promptForListPrefixRename(final Runnable runAfterRename) {
+            final Activity activity = activityRef.get();
+            if (activity == null) {
+                return;
+            }
+
+            final List<String> hierarchies = DataStore.getListHierarchy();
+            if (hierarchies.size() == 1) {
+                return;
+            }
+
+            if (StringUtils.isEmpty(hierarchies.get(0))) {
+                hierarchies.remove(0);
+            }
+
+            final View menu = LayoutInflater.from(activity).inflate(R.layout.createlist, null);
+            final TextInputLayout listprefix = menu.findViewById(R.id.listprefix);
+            final AutoCompleteTextView listprefixView = menu.findViewById(R.id.listprefixView);
+            final TextInputEditText title = menu.findViewById(R.id.title);
+
+            listprefix.setVisibility(View.VISIBLE);
+            listprefix.setHint(R.string.rename_from);
+            listprefixView.setText(hierarchies.get(0));
+            listprefixView.setAdapter(new ArrayAdapter<>(activity, R.layout.createlist_item , hierarchies));
+
+            ((TextInputLayout) menu.findViewById(R.id.titleWrapper)).setHint(R.string.rename_to);
+            title.setText(hierarchies.get(0));
+
+            final AlertDialog.Builder builder = Dialogs.newBuilder(activity)
+                    .setTitle(R.string.list_menu_rename_list_prefix)
+                    .setPositiveButton(android.R.string.ok, ((d, which) -> {
+                        final String from = listprefixView.getText().toString();
+                        final String to = title.getText().toString();
+                        if (!StringUtils.equals(from, to)) {
+                            SimpleDialog.of(activity).setTitle(R.string.list_menu_rename_list_prefix).setMessage(TextParam.text(
+                                    String.format(activity.getString(R.string.list_confirm_rename), from, to, to.lastIndexOf(":") < 0 ? activity.getString(R.string.list_confirm_no_hierarchy) : ""))
+                                ).confirm(() -> {
+                                    DataStore.renameListPrefix(from, to);
+                                    runAfterRename.run();
+                                });
+                            }
+                        }))
+                    .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                    .setView(menu);
+            Keyboard.show(activity, title);
+            final AlertDialog dialog = builder.show();
+
+            listprefixView.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+                ((EditText) menu.findViewById(R.id.title)).setText(s);
+                dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(s.length() > 0);
+            }));
         }
 
     }
