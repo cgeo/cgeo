@@ -1,16 +1,17 @@
 ### Karte
 - Neu: Unterstützung für Elevate Winter Design im Kartendownloader
 - Neu: Adaptive Kartenschattierung, optionaler Modus mit hoher Qualität (UnifiedMap Mapsforge)
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
-- New: Redesigned routes/tracks quick settings dialog
-- New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
+- Neu: Separate Symbolmarker für Caches mit manuellen Koordinaten identisch zu Listing-Koordinaten
+- Neu: Neues Design für die Schnelleinstellungen für Routen/Tracks
+- Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
 
 ### Cache-Details
-- New: Option to share cache with user data (coordinates, personal note)
-- Fix: Speech service interrupted on screen rotation
+- Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
+- Korrektur: Sprachdienst wurde bei der Bildschirmrotation unterbrochen
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
-- New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
+- Neu: Filter: Inventarzähler
+- Neu: Unterstützung für Koordinaten im DD,DDDDDDD Format
+- New: Show last used filter name in filter dialog
