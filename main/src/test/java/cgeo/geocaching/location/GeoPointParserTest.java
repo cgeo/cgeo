@@ -179,7 +179,7 @@ public class GeoPointParserTest {
         assertGeopointEquals(GeopointParser.parse("47,648883, 122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47,648883, +122,348067"), GeopointParser.parse("N 47° 38.933 E 122° 20.884"), 1e-4f);
         assertGeopointEquals(GeopointParser.parse("47,648883, -122,348067"), GeopointParser.parse("N 47° 38.933 W 122° 20.884"), 1e-4f);
-        assertGeopointEquals(GeopointParser.parse("47,648883, 9,348067"), GeopointParser.parse("N 47° 38.933 E 9° 20.884"), 1e-4f);
+        assertGeopointEquals(GeopointParser.parse("-47,648883, 9,348067"), GeopointParser.parse("S 47° 38.933 E 9° 20.884"), 1e-4f);
 
         // blanks after decimal comma
         assertParsingFails("47, 648883, -122, 348067");
