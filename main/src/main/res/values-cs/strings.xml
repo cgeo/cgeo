@@ -459,6 +459,7 @@
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
     <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtrovat podle</string>
+    <string name="caches_filter_select_last">Předchozí filtr</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
     <string name="caches_clear_offlinelogs">Vymazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
