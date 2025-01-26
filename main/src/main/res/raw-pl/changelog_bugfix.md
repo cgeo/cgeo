@@ -1,3 +1,3 @@
 #
-- Fix: Wherigo: Handle zones with invalid/too-close coordinates
-- Fix: c:geo tries to import local ".map" files as GPX
+- Naprawiono: Wherigo: Obsługa stref z nieważnymi/zbyt bliskimi współrzędnymi
+- Naprawiono: c:geo próbował importować lokalne pliki „.map” jako GPX
