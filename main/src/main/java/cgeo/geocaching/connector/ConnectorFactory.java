@@ -7,7 +7,6 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
-import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
@@ -60,7 +59,6 @@ public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector>asList(
             GCConnector.getInstance(),
-            ECConnector.getInstance(),
             ALConnector.getInstance(),
             new OCDEConnector(),
             new OCCZConnector(),
