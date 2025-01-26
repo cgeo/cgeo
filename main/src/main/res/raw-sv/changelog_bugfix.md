@@ -1,3 +1,3 @@
 #
-- Fix: Wherigo: Handle zones with invalid/too-close coordinates
-- Fix: c:geo tries to import local ".map" files as GPX
+- Fix: Wherigo: Hantera zoner med ogiltiga/alltför nära koordinater
+- Fix: c:geo försöker importera lokala ".map"-filer som GPX
