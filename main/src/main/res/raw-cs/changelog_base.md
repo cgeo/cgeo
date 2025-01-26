@@ -14,3 +14,4 @@
 - Novinka: Přepracovaná stránka vyhledávání
 - Novinka: Filtr počtu inventáře
 - Novinka: Podpora pro souřadnice ve formátu DD,DDDDDDD
+- Novinka: Zobrazení názvu naposledy použitého filtru v dialogovém okně filtru
