@@ -293,9 +293,7 @@ abstract class GPXParser extends FileParser {
 
                 if (cache.getName().length() > 2 || StringUtils.isNotBlank(parentCacheCode)) {
                     if (StringUtils.isBlank(parentCacheCode)) {
-                        if (StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
-                            parentCacheCode = cache.getName().substring(2);
-                        } else if (terraChildWaypoint) {
+                        if (terraChildWaypoint) {
                             parentCacheCode = StringUtils.left(cache.getGeocode(), cache.getGeocode().length() - 1);
                         } else {
                             parentCacheCode = "GC" + cache.getName().substring(2).toUpperCase(Locale.US);
@@ -371,14 +369,7 @@ abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "name").setEndTextElementListener(body -> {
             name = body;
 
-            String content = body.trim();
-
-            // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
-            if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
-                content = content.substring(2);
-            }
-
-            cache.setName(content);
+            cache.setName(body.trim());
 
             findGeoCode(cache.getName(), true);
         });

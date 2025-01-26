@@ -3,7 +3,6 @@ package cgeo.watchdog;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCLogAPITest;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector;
@@ -122,13 +121,9 @@ public class WatchdogTest {
     @Test
     public void testGeocachingWebsites() {
         for (final IConnector connector : ConnectorFactory.getConnectors()) {
-            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector) && !(connector instanceof ECConnector)) {
+            if (!connector.equals(ConnectorFactory.UNKNOWN_CONNECTOR) && !(connector instanceof InternalConnector)) {
                 checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
             }
         }
-
-        // move website check for EC to the end to not block checking the other websites if EC is failing
-        final IConnector connector = ECConnector.getInstance();
-        checkWebsite("geocaching website " + connector.getName(), connector.getTestUrl());
     }
 }

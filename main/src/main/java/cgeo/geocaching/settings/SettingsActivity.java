@@ -17,7 +17,6 @@ import cgeo.geocaching.settings.fragments.PreferenceMapContentBehaviorFragment;
 import cgeo.geocaching.settings.fragments.PreferenceMapSourcesFragment;
 import cgeo.geocaching.settings.fragments.PreferenceNavigationFragment;
 import cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment;
-import cgeo.geocaching.settings.fragments.PreferenceServiceExtremcachingComFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComAdventureLabsFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingSuFragment;
@@ -300,8 +299,6 @@ public class SettingsActivity extends CustomMenuEntryActivity implements Prefere
             preferenceFragment = new PreferenceServiceOpencachingRoFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_al))) {
             preferenceFragment = new PreferenceServiceGeocachingComAdventureLabsFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_ec))) {
-            preferenceFragment = new PreferenceServiceExtremcachingComFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_su))) {
             preferenceFragment = new PreferenceServiceGeocachingSuFragment();
         }

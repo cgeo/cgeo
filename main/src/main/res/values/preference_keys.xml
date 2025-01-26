@@ -110,12 +110,6 @@
     <string translatable="false" name="pref_fakekey_ocuk_authorization">fakekey_ocuk_authorization</string>
     <string translatable="false" name="pref_fakekey_ocuk_website">fakekey_ocuk_website</string>
 
-    <!-- settings for extremcaching.com screen -->
-    <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
-    <string translatable="false" name="pref_connectorECActive">connectorECActive</string>
-    <string translatable="false" name="preference_screen_ec">preference_screen_ec</string>
-    <string translatable="false" name="pref_fakekey_ec_website">fakekey_ec_website</string>
-
     <!-- settings for geocaching.su screen -->
     <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
     <string translatable="false" name="pref_connectorSUActive">connectorSUActive</string>
