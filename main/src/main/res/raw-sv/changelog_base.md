@@ -14,3 +14,4 @@
 - New: Redesigned search page
 - Nytt: Filter för antal i inventariet
 - Nytt: Stöd för koordinater i DD,DDDDDDD-format
+- Nytt: Visa senast använda filternamn i filterdialogen
