@@ -459,6 +459,7 @@
     <string name="caches_map_locus_export">Eksportuj do Locus</string>
     <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtruj według</string>
+    <string name="caches_filter_select_last">Poprzedni filtr</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -2368,6 +2369,7 @@
     <string name="live_map_status_http429">Zwolnij, zbyt wiele żądań do %s</string>
     <string name="live_map_status_error">Błąd ładowania danych mapy: %s</string>
     <string name="live_map_status_partial">Częściowe wyniki (przybliż, aby zmniejszyć liczbę skrytek do wczytania): %s</string>
+    <string name="live_map_status_normal">Wczytywanie danych bez problemów: %s</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">%d punkt nawigacji został wyciągnięty</item>
