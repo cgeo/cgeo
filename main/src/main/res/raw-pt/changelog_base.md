@@ -14,3 +14,4 @@
 - Novo: Página de pesquisa redesenhada
 - Novo: Filtro de contagem de inventário
 - Novo: Suporte para formato de coordenadas DD,DDDDDDD
+- New: Show last used filter name in filter dialog
