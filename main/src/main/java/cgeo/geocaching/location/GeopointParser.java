@@ -24,6 +24,7 @@ public class GeopointParser {
 
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), ([-+]?\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
+    private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("(\\d+[\\.,]\\d+), ([-+]?\\d+[\\.,]\\d+)");
 
     private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
@@ -504,7 +505,8 @@ public class GeopointParser {
      */
     @NonNull
     private static Set<String> getParseInputs(@NonNull final String text) {
-        final String inputDot = removeSpaceAfterSeparators(text);
+        final String preparedInput = prepareForDegCommaCommaFormat(text);
+        final String inputDot = removeSpaceAfterSeparators(preparedInput);
         final String inputComma = swapDotAndComma(inputDot);
         return CollectionStream.of(new String[]{inputDot, inputComma}).toSet();
     }
@@ -519,6 +521,11 @@ public class GeopointParser {
     private static String removeSpaceAfterSeparators(@NonNull final String text) {
         final String replacedComma = new MatcherWrapper(PATTERN_BAD_BLANK_COMMA, text).replaceAll("$1,$2");
         return new MatcherWrapper(PATTERN_BAD_BLANK_DOT, replacedComma).replaceAll("$1.$2");
+    }
+
+    @NonNull
+    private static String prepareForDegCommaCommaFormat(@NonNull final String text) {
+        return new MatcherWrapper(PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER, text).replaceAll("$1,$2");
     }
 
     private static String swapDotAndComma(@NonNull final String text) {
