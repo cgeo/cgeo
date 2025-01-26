@@ -455,6 +455,7 @@
     <string name="caches_map_locus_export">Exportera till Locus</string>
     <string name="caches_filter_menuitem">Filtrera</string>
     <string name="caches_filter_title">Filtrera efter</string>
+    <string name="caches_filter_select_last">Föregående filter</string>
     <string name="caches_removing_from_history">Tar bort från historik…</string>
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
