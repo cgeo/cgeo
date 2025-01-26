@@ -1,5 +1,5 @@
 ### Карта
-- New: Support Elevate Winter theme in map downloader
+- Новое: Поддержка высот в Зимней теме (Winter theme) при скачивании карт
 - New: Adaptive hillshading, optional high quality mode (UnifiedMap Mapsforge)
 - Change: Keep current viewport on mapping a list, if all caches fit into current viewport
 - New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
@@ -11,6 +11,7 @@
 - Fix: Speech service interrupted on screen rotation
 
 ### Общее
-- New: Redesigned search page
+- Новое: Переработана страница поиска
 - New: Inventory count filter
-- New: Support for coordinates in DD,DDDDDDD format
+- Новое: Поддержка координат в формате DD,DDDDDDD
+- New: Show last used filter name in filter dialog
