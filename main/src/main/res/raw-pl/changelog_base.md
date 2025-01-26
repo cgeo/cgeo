@@ -14,3 +14,4 @@
 - Nowość: Przeprojektowana strona wyszukiwania
 - Nowość: Filtr stanu inwentarza
 - Nowość: Obsługa współrzędnych w formacie DD,DDDDDDD
+- Nowość: Pokaż ostatnio użytą nazwę filtra w oknie dialogowym
