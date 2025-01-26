@@ -24,7 +24,7 @@ public class GeopointParser {
 
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(\\d), ([-+]?\\d{2,})");
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(\\d)\\. ([-+]?\\d{2,})");
-    private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("(\\d{1,3}[\\.,]\\d+), ([-+]?\\d{1,3}[\\.,]\\d+)");
+    private static final Pattern PATTERN_BAD_BLANK_FOR_DEG_COMMA_COMMA_PARSER = Pattern.compile("(\\d{1,3},\\d+), ([-+]?\\d{1,3},\\d+)");
 
     private static final List<AbstractParser> parsers = Arrays.asList(new MinDecParser(), new MinParser(), new DegParser(), new DMSParser(), new ShortDMSParser(), new DegDecParser(), new ShortDegDecParser(), new UTMParser(), new DegDecCommaParser());
 
