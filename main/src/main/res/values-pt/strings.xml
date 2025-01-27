@@ -1540,6 +1540,9 @@
     <string name="cachedetails_progress_unwatch">Removida da lista de observação</string>
     <string name="cachedetails_progress_favorite">Adicionada aos favoritos</string>
     <string name="cachedetails_progress_unfavorite">Removida dos favoritos</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Múltiplos cartuchos Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consulte a descrição da cache para mais informações sobre os cartuchos.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - não descarregado</string>
     <string name="cache_wherigo_start">Descarregue e jogue esta Wherigo utilizando o reprodutor interno do c:geo</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
