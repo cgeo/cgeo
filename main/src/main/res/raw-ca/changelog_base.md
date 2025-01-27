@@ -14,4 +14,4 @@
 - Nou: pàgina de cerca redissenyada
 - Nou: filtre de recompte d'inventari
 - Nou: suport per a coordenades en format DD, DDDDDDD
-- New: Show last used filter name in filter dialog
+- Nou: mostra el nom del darrer filtre utilitzat al quadre de diàleg del filtre
