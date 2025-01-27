@@ -14,4 +14,4 @@
 - Nieuw: opnieuw ontworpen zoekpagina
 - Nieuw: Inhoud telling filter
 - Nieuw: Ondersteuning voor coördinaten in DD,DDDDDDD formaat
-- New: Show last used filter name in filter dialog
+- Nieuw: Toon laatst gebruikte filternaam in filter dialoogvenster
