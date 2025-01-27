@@ -743,7 +743,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
         waypoint.setCalcStateConfig(currentState.calcStateJson);
         waypoint.setProjection(currentState.projectionType, currentState.projectionUnits,
-            currentState.projectionFormula1, currentState.projectionFormula2);
+                currentState.projectionFormula1, currentState.projectionFormula2);
 
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
         if (cache == null) {
@@ -753,30 +753,32 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         final String oldAllUserNotes = cache.getAllUserNotes();
         if (cache.addOrChangeWaypoint(waypoint, true)) {
             cache.addCacheArtefactsFromNotes(oldAllUserNotes);
-                if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
-                    if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
-                        cache.resetUserModifiedCoords(waypoint);
-                    } else {
-                        if (!cache.hasUserModifiedCoords()) {
-                            cache.createOriginalWaypoint(cache.getCoords());
-                        }
-                        cache.setCoords(waypoint.getCoords());
-                        DataStore.saveUserModifiedCoords(cache);
-                    }
-                }
-                if (waypoint.getCoords() != null && binding.modifyCacheCoordinatesLocalAndRemote.isChecked()) {
-                    finishHandler.sendEmptyMessage(UPLOAD_START);
-
-                    if (cache.supportsOwnCoordinates()) {
-                        final boolean result = uploadModifiedCoords(cache, waypoint.getCoords());
-                        finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
-                    } else {
-                        ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
-                        finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
-                    }
+            boolean deleteModifiedOnline = false;
+            if (waypoint.getCoords() != null && (binding.modifyCacheCoordinatesLocal.isChecked() || binding.modifyCacheCoordinatesLocalAndRemote.isChecked())) {
+                if (waypoint.getWaypointType() == WaypointType.ORIGINAL) {
+                    deleteModifiedOnline = true;
+                    cache.resetUserModifiedCoords(waypoint);
                 } else {
-                    finishHandler.sendEmptyMessage(SUCCESS);
+                    if (!cache.hasUserModifiedCoords()) {
+                        cache.createOriginalWaypoint(cache.getCoords());
+                    }
+                    cache.setCoords(waypoint.getCoords());
+                    DataStore.saveUserModifiedCoords(cache);
                 }
+            }
+            if (waypoint.getCoords() != null && binding.modifyCacheCoordinatesLocalAndRemote.isChecked()) {
+                finishHandler.sendEmptyMessage(UPLOAD_START);
+
+                if (cache.supportsOwnCoordinates()) {
+                    final boolean result = deleteModifiedOnline ? deleteModifiedCoords(cache) : uploadModifiedCoords(cache, waypoint.getCoords());
+                    finishHandler.sendEmptyMessage(result ? UPLOAD_SUCCESS : UPLOAD_ERROR);
+                } else {
+                    ActivityMixin.showApplicationToast(getString(R.string.waypoint_coordinates_couldnt_be_modified_on_website));
+                    finishHandler.sendEmptyMessage(UPLOAD_NOT_POSSIBLE);
+                }
+            } else {
+                finishHandler.sendEmptyMessage(SUCCESS);
+            }
         } else {
             finishHandler.sendEmptyMessage(SAVE_ERROR);
         }
@@ -802,6 +804,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private static boolean uploadModifiedCoords(final Geocache cache, final Geopoint waypointUploaded) {
         final IConnector con = ConnectorFactory.getConnector(cache);
         return con.supportsOwnCoordinates() && con.uploadModifiedCoordinates(cache, waypointUploaded);
+    }
+
+    private static boolean deleteModifiedCoords(final Geocache cache) {
+        final IConnector con = ConnectorFactory.getConnector(cache);
+        return con.supportsOwnCoordinates() && con.deleteModifiedCoordinates(cache);
     }
 
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
