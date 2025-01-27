@@ -455,6 +455,7 @@
     <string name="caches_map_locus_export">Exporteer naar Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter op</string>
+    <string name="caches_filter_select_last">Vorige filter</string>
     <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
