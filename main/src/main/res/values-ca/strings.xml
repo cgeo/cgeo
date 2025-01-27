@@ -456,6 +456,7 @@
     <string name="caches_map_locus_export">Exporta al Locus</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtra per</string>
+    <string name="caches_filter_select_last">Filtre anterior</string>
     <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
