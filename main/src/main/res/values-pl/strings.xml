@@ -497,6 +497,9 @@
     <string name="list_menu_create">Utwórz nową listę</string>
     <string name="list_menu_drop">Usuń aktualną listę</string>
     <string name="list_menu_rename">Zmień nazwę aktualnej listy</string>
+    <string name="list_menu_rename_list_prefix">Zmień nazwę prefiksu listy</string>
+    <string name="rename_from">Zmień nazwę z</string>
+    <string name="rename_to">Zmień nazwę na</string>
     <string name="list_menu_import">Import</string>
     <string name="list_title">Wybierz listę</string>
     <string name="lists_title">Wybierz listy</string>
@@ -514,6 +517,10 @@
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
     <string name="list_not_available">Lista nie jest już dostępna, przechodzę do standardowej listy</string>
+    <string name="list_parent_list">Lista nadrzędna</string>
+    <string name="list_name">Nazwa listy</string>
+    <string name="list_confirm_rename">Zmiana nazwy z „%1$s” na „%2$s”\n%3$s\nTej akcji nie można cofnąć!</string>
+    <string name="list_confirm_no_hierarchy">\nNie znaleziono „:” - wszystkie pasujące listy zostaną przekształcone w listy najwyższego poziomu\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Zaawansowany</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Przełącz na tryb podstawowy</string>
