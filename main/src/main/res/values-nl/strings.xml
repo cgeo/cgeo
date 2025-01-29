@@ -487,6 +487,9 @@
     <string name="list_menu_create">Maak nieuwe lijst</string>
     <string name="list_menu_drop">Verwijder huidige lijst</string>
     <string name="list_menu_rename">Hernoem huidige lijst</string>
+    <string name="list_menu_rename_list_prefix">Lijst voorvoegsel hernoemen</string>
+    <string name="rename_from">Hernoemen van</string>
+    <string name="rename_to">Hernoem naar</string>
     <string name="list_menu_import">Importeer</string>
     <string name="list_title">Selecteer een lijst</string>
     <string name="lists_title">Kies de lijsten</string>
@@ -504,6 +507,10 @@
     <string name="list_dialog_rename_title">Hernoem lijst</string>
     <string name="list_dialog_rename">Hernoem</string>
     <string name="list_not_available">Lijst is niet langer beschikbaar, wissel naar standaard lijst</string>
+    <string name="list_parent_list">Bovenliggende lijst</string>
+    <string name="list_name">Lijstnaam</string>
+    <string name="list_confirm_rename">Hernoemen van \"%1$s\" naar \"%2$s\"\n%3$s\nDeze actie kan niet ongedaan worden gemaakt!</string>
+    <string name="list_confirm_no_hierarchy">\nGeen \":\" gevonden - alle overeenkomende lijsten zullen worden omgezet naar top-niveau lijsten\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Geavanceerd</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Overschakelen naar Basis</string>
