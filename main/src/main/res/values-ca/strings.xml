@@ -488,6 +488,9 @@
     <string name="list_menu_create">Crea una llista nova</string>
     <string name="list_menu_drop">Esborra la llista actual</string>
     <string name="list_menu_rename">Reanomena la llista actual</string>
+    <string name="list_menu_rename_list_prefix">Canvia el nom del prefix de la llista</string>
+    <string name="rename_from">Canvia el nom de</string>
+    <string name="rename_to">Canvia el nom a</string>
     <string name="list_menu_import">Importa</string>
     <string name="list_title">Trieu una llista</string>
     <string name="lists_title">Trieu les llistes</string>
@@ -505,6 +508,10 @@
     <string name="list_dialog_rename_title">Canvia el nom de la llista</string>
     <string name="list_dialog_rename">Canvia el nom</string>
     <string name="list_not_available">La llista ja no està disponible, s\'està canviant a la llista estàndard</string>
+    <string name="list_parent_list">Llista parental</string>
+    <string name="list_name">Nom de la llista</string>
+    <string name="list_confirm_rename">S\'està canviant el nom de \"%1$s\" a \"%2$s\"\n%3$s\n Aquesta acció no es pot desfer!</string>
+    <string name="list_confirm_no_hierarchy">\nNo s\'ha trobat cap \":\" totes les llistes coincidents es transformaran en llistes de nivell superior\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avançat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Canvieu a Bàsic</string>
