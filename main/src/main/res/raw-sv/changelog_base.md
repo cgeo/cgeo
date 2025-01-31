@@ -1,8 +1,8 @@
 ### Karta
 - New: Support Elevate Winter theme in map downloader
 - Nyhet: Adaptiv terrängskuggning, valfritt högkvalitetsläge (UnifiedMap Mapsforge)
-- Change: Keep current viewport on mapping a list, if all caches fit into current viewport
-- New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
+- Ändra: Behåll nuvarande vy för att visa en lista på karta, om alla cacher passar in i nuvarande vy
+- Nytt: Separat ikonmarkör för cacher med manuellt inställda koordinater som är identiska med ursprungskoordinater
 - Nyhet: Omgjorda rutter/spår snabbinställningsdialog
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 
