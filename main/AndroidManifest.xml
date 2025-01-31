@@ -330,6 +330,12 @@
                 <data android:pathPattern=".*\\..*\\..*\\.zip" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.zip" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.zip" />
+
+                <data android:pathPattern=".*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gwc" />
             </intent-filter>
         </activity>
         <activity
