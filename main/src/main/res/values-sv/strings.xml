@@ -487,6 +487,9 @@
     <string name="list_menu_create">Skapa en ny lista</string>
     <string name="list_menu_drop">Ta bort aktuell lista</string>
     <string name="list_menu_rename">Byt namn på den här listan</string>
+    <string name="list_menu_rename_list_prefix">Byt namn på listprefix</string>
+    <string name="rename_from">Byt namn från</string>
+    <string name="rename_to">Byt namn till</string>
     <string name="list_menu_import">Importera</string>
     <string name="list_title">Välj en lista</string>
     <string name="lists_title">Välj listorna</string>
@@ -504,6 +507,10 @@
     <string name="list_dialog_rename_title">Byt namn på listan</string>
     <string name="list_dialog_rename">Byt namn</string>
     <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
+    <string name="list_parent_list">Överordnad lista</string>
+    <string name="list_name">Listnamn</string>
+    <string name="list_confirm_rename">Byter namn från \"%1$s\" till \"%2$s\"\n%3$s\nDenna åtgärd kan inte ångras!</string>
+    <string name="list_confirm_no_hierarchy">\nIngen \":\" hittad - alla matchande listor kommer att omvandlas till topplistor\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avancerat</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Ändra till Basic</string>
