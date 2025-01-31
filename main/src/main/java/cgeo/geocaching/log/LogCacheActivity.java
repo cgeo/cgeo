@@ -150,10 +150,10 @@ public class LogCacheActivity extends AbstractLoggingActivity implements LoaderM
         }
         reportProblem.setValues(possibleReportProblemTypes);
 
-        if (logEditMode != LogEditMode.CREATE_NEW && possibleReportProblemTypes.size() == 1) {
-            binding.reportProblemBox.setVisibility(View.GONE);
-        } else {
+        if (logEditMode == LogEditMode.CREATE_NEW && possibleReportProblemTypes.size() > 1) {
             binding.reportProblemBox.setVisibility(View.VISIBLE);
+        } else {
+            binding.reportProblemBox.setVisibility(View.GONE);
         }
     }
 
