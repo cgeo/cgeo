@@ -4,13 +4,18 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
+import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
@@ -36,6 +41,14 @@ public class HandleLocalFilesActivity extends AbstractActivity {
             case MAP:
                 continueWithForegroundService(ReceiveDownloadService.class, intent);
                 finished = true;
+                break;
+            case WHERIGO:
+                final String guid = copyToWherigoFolder(uri);
+                if (guid != null) {
+                    WherigoActivity.startForGuid(this, guid, null, false);
+                    finish();
+                    finished = true;
+                }
                 break;
             default:
                 break;
@@ -69,4 +82,14 @@ public class HandleLocalFilesActivity extends AbstractActivity {
     }
     */
 
+    /** copy uri to wherigo folder; returns filename on success, null otherwise */
+    @Nullable
+    private String copyToWherigoFolder(final Uri uri) {
+        String filename = uri.getLastPathSegment();
+        if (filename.contains(":")) {
+            filename = filename.substring(filename.lastIndexOf(":") + 1);
+        }
+        ContentStorage.get().copy(uri, PersistableFolder.WHERIGO.getFolder(), FileNameCreator.forName(filename + ".gwc"), false).getLastPathSegment();
+        return filename;
+    }
 }
