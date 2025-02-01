@@ -18,6 +18,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class HandleLocalFilesActivity extends AbstractActivity {
 
     @Override
@@ -82,14 +84,25 @@ public class HandleLocalFilesActivity extends AbstractActivity {
     }
     */
 
-    /** copy uri to wherigo folder; returns filename on success, null otherwise */
+    /**
+     * copy uri to wherigo folder
+     * <br />
+     * For "guid calculation" of WherigoActivity,
+     * - capitalization of suffix ".gwc" will be normalized to ".gwc"
+     * - all "_" will be replaced by "-"
+     * <br />
+     * returns "guid" (= filename without suffix ".gwc") on success, null otherwise
+     */
     @Nullable
     private String copyToWherigoFolder(final Uri uri) {
-        String filename = uri.getLastPathSegment();
-        if (filename.contains(":")) {
-            filename = filename.substring(filename.lastIndexOf(":") + 1);
+        String filename = ContentStorage.get().getName(uri).replace("_", "-");
+        if (StringUtils.isBlank(filename)) {
+            return null;
         }
-        ContentStorage.get().copy(uri, PersistableFolder.WHERIGO.getFolder(), FileNameCreator.forName(filename + ".gwc"), false).getLastPathSegment();
+        if (StringUtils.equalsAnyIgnoreCase(filename.substring(filename.length() - 4), ".gwc")) {
+            filename = filename.substring(0, filename.length() - 4);
+        }
+        ContentStorage.get().copy(uri, PersistableFolder.WHERIGO.getFolder(), FileNameCreator.forName(filename + ".gwc"), false);
         return filename;
     }
 }
