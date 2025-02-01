@@ -1435,6 +1435,8 @@
     <string name="cache_dialog_offline_drop_message">Verwijder cache uit geheugen…</string>
     <string name="cache_menu_speechDeactivate">Stop met praten</string>
     <string name="cache_menu_speechActivate">Begin met praten</string>
+    <string name="talking_disabled">Praten uitgeschakeld</string>
+    <string name="talking_enabled">Praten ingeschakeld</string>
     <string name="cache_menu_navigate">Navigeer</string>
     <string name="cache_menu_target">Instellen als doel</string>
     <string name="cache_menu_navigation_drive">Navigeer (rijden)</string>
