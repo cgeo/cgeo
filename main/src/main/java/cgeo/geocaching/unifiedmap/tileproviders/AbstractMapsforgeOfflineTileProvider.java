@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.downloader.CompanionFileUtils;
 import cgeo.geocaching.maps.mapsforge.v6.layers.HillShadingLayerHelper;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -8,6 +9,7 @@ import cgeo.geocaching.utils.Log;
 
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import java.io.FileInputStream;
@@ -26,12 +28,14 @@ import org.mapsforge.map.view.MapView;
 public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
     private MapFile mapFile = null;
+    private final String displayName;
 
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
         super(name, uri, zoomMin, zoomMax, new Pair<>("", false));
         supportsThemes = true;
         supportsThemeOptions = true; // rule of thumb, not all themes support options
         supportsHillshading = true;
+        displayName = CompanionFileUtils.getDisplaynameForMap(uri);
     }
 
     @Override
@@ -86,6 +90,11 @@ public class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileP
         } else {
             Log.w("AbstractMapsforgeOfflineTileProvider.setPreferredLanguage: tilesource is null");
         }
+    }
+
+    @Override
+    public String getDisplayName(@Nullable final String defaultDisplayName) {
+        return StringUtils.isNotBlank(displayName) ? displayName : defaultDisplayName;
     }
 
 }

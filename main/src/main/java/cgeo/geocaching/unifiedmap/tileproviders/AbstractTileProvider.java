@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import java.util.HashMap;
@@ -53,6 +54,11 @@ public abstract class AbstractTileProvider {
 
     public String getTileProviderName() {
         return tileProviderName;
+    }
+
+    @Nullable
+    public String getDisplayName(@Nullable final String defaultDisplayName) {
+        return defaultDisplayName;
     }
 
     public String getId() {

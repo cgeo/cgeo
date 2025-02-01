@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.MenuCompat;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -61,7 +62,8 @@ public class TileProviderFactory {
                 final int id = tileProvider.getNumericalId();
                 final boolean isOfflineMap = (tileProvider instanceof AbstractMapsforgeOfflineTileProvider)
                         || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
-                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+                final String displayName = tileProvider.getDisplayName(null);
+                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, displayName != null ? displayName : tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
         }
@@ -123,29 +125,44 @@ public class TileProviderFactory {
         // --------------------------------------------------------------------
 
         // collect available offline map files
-        final List<ImmutablePair<String, Uri>> offlineMaps =
+        final List<ImmutablePair<String, Uri>> temp =
                 CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
                         .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
                         .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
-        Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
 
         // OSM offline tile providers (Mapsforge)
         if (Settings.showMapsforgeInUnifiedMap()) {
-            if (offlineMaps.size() > 1) {
-                registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
+            if (temp.size() > 1) {
+                registerTileProvider(new MapsforgeMultiOfflineTileProvider(temp));
             }
-            for (ImmutablePair<String, Uri> data : offlineMaps) {
-                registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+
+            // sort according to displayName and register
+            final List<ImmutablePair<String, AbstractMapsforgeOfflineTileProvider>> offlineMaps = new ArrayList<>();
+            for (ImmutablePair<String, Uri> data : temp) {
+                final AbstractMapsforgeOfflineTileProvider tp = new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 2, 18); // @todo: get actual values for zoomMin/zoomMax
+                offlineMaps.add(new ImmutablePair<>(tp.getDisplayName(data.left), tp));
+            }
+            Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
+            for (ImmutablePair<String, AbstractMapsforgeOfflineTileProvider> data : offlineMaps) {
+                registerTileProvider(data.right);
             }
         }
 
         // OSM offline tile providers (VTM)
         if (Settings.showVTMInUnifiedMap()) {
-            if (offlineMaps.size() > 1) {
-                registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(offlineMaps));
+            if (temp.size() > 1) {
+                registerTileProvider(new MapsforgeVTMMultiOfflineTileProvider(temp));
             }
-            for (ImmutablePair<String, Uri> data : offlineMaps) {
-                registerTileProvider(new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 2, 18));   // @todo: get actual values for zoomMin/zoomMax
+
+            // sort according to displayName and register
+            final List<ImmutablePair<String, AbstractMapsforgeVTMOfflineTileProvider>> offlineMaps = new ArrayList<>();
+            for (ImmutablePair<String, Uri> data : temp) {
+                final AbstractMapsforgeVTMOfflineTileProvider tp = new AbstractMapsforgeVTMOfflineTileProvider(data.left, data.right, 2, 18); // @todo: get actual values for zoomMin/zoomMax
+                offlineMaps.add(new ImmutablePair<>(tp.getDisplayName(data.left), tp));
+            }
+            Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
+            for (ImmutablePair<String, AbstractMapsforgeVTMOfflineTileProvider> data : offlineMaps) {
+                registerTileProvider(data.right);
             }
         }
         // --------------------------------------------------------------------
