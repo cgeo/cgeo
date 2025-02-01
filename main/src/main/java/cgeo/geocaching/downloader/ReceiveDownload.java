@@ -103,7 +103,8 @@ class ReceiveDownload {
     }
 
     // try to guess a filename, otherwise chose randomized filename
-    private boolean guessFilename(final String preset) {
+    private boolean guessFilename(final String preset1) {
+        final String preset = StringUtils.isNotBlank(preset1) ? preset1 : ContentStorage.get().getName(uri);
         filename = StringUtils.isNotBlank(preset) ? preset : uri.getPath();    // uri.getLastPathSegment doesn't help here, if path is encoded
         if (filename != null) {
             filename = FileUtils.getFilenameFromPath(filename);
