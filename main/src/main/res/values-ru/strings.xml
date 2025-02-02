@@ -1065,12 +1065,8 @@
     <string name="init_trackappearance_summary">Выберите цвет, степень прозрачность и толщину линии для трека/муршрута. Трек/маршрут состоит из нескольких путевых точек и может быть загружен через файл GPX.</string>
     <string name="init_circlecolor">Цвет линии круга</string>
     <string name="init_circlecolor_summary">Выберите цвет и степень прозрачности для линии круга. Круги используются в качестве визуального представления минимального радиуса вокруг тайника или физической точки пути, где не разрешается ни кэшировать, ни физическая путевая точка. (Применяется к geocaching.com)</string>
-    <string name="init_circlefillcolor">Цвет заливки круга</string>
-    <string name="init_circlefillcolor_summary">Выберите цвет и степень прозрачность для заполняемых кругов</string>
     <string name="init_accuracycirclecolor">Цвет линии круга точности</string>
     <string name="init_accuracycirclecolor_summary">Выберите цвет и прозрачность границы круга точности. «Круг точности» используется для визуального представления степени точности сигнала геолокации.</string>
-    <string name="init_accuracycirclefillcolor">Цвет заливки круга точности</string>
-    <string name="init_accuracycirclefillcolor_summary">Выберите цвет, которым заполнять круги точности</string>
     <string name="init_include_found_status">Включить \"Найденные\" тайники</string>
     <string name="init_trackautovisit">Отмечать трекаблы</string>
     <string name="init_summary_trackautovisit">Выставлять \"Посетил\" для трекаблов по умолчанию</string>
