@@ -1090,12 +1090,10 @@
     <string name="init_trackappearance_summary">Selecteer kleur en ondoorzichtigheid voor spoor/route lijn. Een spoor/route bestaat uit verschillende waypoints en kan worden geladen via een GPX spoor/route bestand.</string>
     <string name="init_circlecolor">Cirkel lijnkleur</string>
     <string name="init_circlecolor_summary">Selecteer kleur en doorzichtigheid voor de cirkellijn. Cirkels worden gebruikt als visuele weergave voor de minimale radius rond een cache of fysiek waypoint waar geen andere cache of fysiek waypoint is toegestaan. (Heeft betrekking op geocaching.com)</string>
-    <string name="init_circlefillcolor">Cirkel opvulkleur</string>
-    <string name="init_circlefillcolor_summary">Selecteer kleur en doorzichtigheid voor de cirkels die ingevuld moeten worden</string>
+    <string name="init_geofencecolor">Geofence cirkel kleur</string>
+    <string name="init_geofencecolor_summary">Selecteer kleur en doorzichtigheid voor geofence cirkel. Cirkels worden gebruikt als een visuele representatie voor de geofence voor waypoints (meestal van toepassing op geocaching.com lab avontuurlijke stadia)</string>
     <string name="init_accuracycirclecolor">Nauwkeurigheidscirkel lijnkleur</string>
     <string name="init_accuracycirclecolor_summary">Selecteer kleur en doorzichtigheid voor nauwkeurigheidscirkellijn. Nauwkeurigheidscirkel wordt gebruikt als visuele representatie voor de nauwkeurigheid van locatiesignaal.</string>
-    <string name="init_accuracycirclefillcolor">Nauwkeurigheidscirkel opvulkleur</string>
-    <string name="init_accuracycirclefillcolor_summary">Selecteer kleur en doorzichtigheid voor de nauwkeurigheidscirkels opvulkleur</string>
     <string name="init_include_found_status">Neem status \"Gevonden\" mee</string>
     <string name="init_trackautovisit">Trackables bezoeken</string>
     <string name="init_summary_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
