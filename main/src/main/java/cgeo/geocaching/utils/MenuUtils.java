@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
@@ -62,7 +63,7 @@ public class MenuUtils {
 
     @SuppressLint("RestrictedApi")
     public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu) {
-        if (null == menu) {
+        if (null == menu || Settings.getBoolean(R.string.pref_debug_tinticons, false)) {
             return;
         }
         // Menu might not yet have been initialized due to timing issues, only run if there's at least 1 toolbar item
