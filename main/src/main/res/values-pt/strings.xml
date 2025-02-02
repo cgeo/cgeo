@@ -1082,12 +1082,8 @@
     <string name="init_trackappearance_summary">Seleccionar a cor, a opacidade e largura para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
     <string name="init_circlecolor_summary">Seleccionar a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
-    <string name="init_circlefillcolor">Cor de preenchimento do círculo</string>
-    <string name="init_circlefillcolor_summary">Seleccionar a cor e opacidade para o preenchimento dos círculos</string>
     <string name="init_accuracycirclecolor">Cor da linha do círculo de precisão</string>
     <string name="init_accuracycirclecolor_summary">Seleccionar a cor e a opacidade para o círculo da precisão. Este círculo é utilizado para representar a precisão do sinal de localização.</string>
-    <string name="init_accuracycirclefillcolor">Cor do círculo de precisão (preenchimento)</string>
-    <string name="init_accuracycirclefillcolor_summary">Seleccionar a cor e a opacidade com que os círculos são preenchidos</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Visitar TBs</string>
     <string name="init_summary_trackautovisit">Predefine a acção \"Visitar\" a todos os seus trackables</string>
