@@ -1082,12 +1082,8 @@
     <string name="init_trackappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Track-Linie. Ein Track besteht aus mehreren Wegpunkten und kann aus einer GPX-Datei geladen werden.</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
-    <string name="init_circlefillcolor">Füllfarbe der Kreislinie</string>
-    <string name="init_circlefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
     <string name="init_accuracycirclecolor">Genauigkeitskreis: Farbe der Linie</string>
     <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
-    <string name="init_accuracycirclefillcolor">Genauigkeitskreis: Füllfarbe</string>
-    <string name="init_accuracycirclefillcolor_summary">Farbe und Deckkraft der Kreisfüllung einstellen</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
     <string name="init_trackautovisit">TBs besuchen</string>
     <string name="init_summary_trackautovisit">Trackables automatisch auf „besucht“ setzen</string>
