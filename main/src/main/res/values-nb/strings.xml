@@ -807,12 +807,8 @@
     <string name="init_summary_maptrail">Vis spor på kart</string>
     <string name="init_circlecolor">Farge på sirkellinje</string>
     <string name="init_circlecolor_summary">Velg farge og gjennomsiktighet for sirkler. Sirkler er en visuell presentasjon av minimumsradius rundt en cache eller et fysisk veipunkt. Andre cacher eller fysiske veipunkter kan ikke plasseres innenfor denne radiusen. (Gjelder geocaching.com)</string>
-    <string name="init_circlefillcolor">Fyllfarge på sirkel</string>
-    <string name="init_circlefillcolor_summary">Velg fyllfarge og gjennomsiktighet for sirklene</string>
     <string name="init_accuracycirclecolor">Farge på presisjonssirkellinje</string>
     <string name="init_accuracycirclecolor_summary">Velg farge og gjennomsiktighet for presisjonssirkel. Presisjonssirkel brukes for å vise hvor nøyaktig posisjonssignalene er.</string>
-    <string name="init_accuracycirclefillcolor">Farge i presisjonssirkel</string>
-    <string name="init_accuracycirclefillcolor_summary">Velg farge og gjennomsiktighet for sirklene</string>
     <string name="init_include_found_status">Inkluder \"Funnet\"-status</string>
     <string name="init_trackautovisit">Besøkt av reisevenner</string>
     <string name="init_summary_trackautovisit">Sett sporbare automatisk til \"Besøkt\" ved logging av en cache</string>
