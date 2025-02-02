@@ -1,6 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CoordinateType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -312,6 +313,11 @@ public class Waypoint implements INamedGeoCoordinate {
     @Nullable
     public Float getGeofence() {
         return geofence;
+    }
+
+    public boolean canChangeGeofence() {
+        // currently geofence value is used by AL connector only, so you may set it manually for every other connector
+        return !ALConnector.getInstance().canHandle(geocode);
     }
 
     public void setGeofence(@Nullable final Float geofence) {
