@@ -893,12 +893,8 @@
     <string name="init_summary_maptrail">Etkinleştirildiğinde (ve GPS açıkken) c:geo hareketlerinizin geçmişini bir iz olarak kaydeder ve haritada görüntüler.</string>
     <string name="init_circlecolor">Çember kenar rengi</string>
     <string name="init_circlecolor_summary">Daire çizgisi için renk ve opaklığı seçin. Daireler, bir Geocache veya fiziksel yol noktası etrafındaki minimum yarıçap için görsel bir temsil olarak kullanılır; burada başka hiçbir Geocache veya fiziksel yol noktası oluşturulamaz. (Geocaching.com için geçerlidir)</string>
-    <string name="init_circlefillcolor">Daire dolgu rengi</string>
-    <string name="init_circlefillcolor_summary">Doldurulacak dairelerin rengini ve opaklığını seçin</string>
     <string name="init_accuracycirclecolor">Sinyal çemberi çizgisi rengi</string>
     <string name="init_accuracycirclecolor_summary">Sinyal doğruluk çemberi çizgisi için renk ve opaklığı seçin. Doğruluk çemberi, konum sinyalinin doğruluğunun görsel gösterimidir.</string>
-    <string name="init_accuracycirclefillcolor">Sinyal çemberi dolgusu rengi</string>
-    <string name="init_accuracycirclefillcolor_summary">Sinyal doğruluk çemberinin doldurulacağı rengi ve opaklığını seçin</string>
     <string name="init_include_found_status">Bulunmuşlar dahil</string>
     <string name="init_trackautovisit">TB\'leri Ziyaret Ettir</string>
     <string name="init_summary_trackautovisit">Trackable\'ları varsayılan olarak \'\'Ziyaret Edildi\'\' şeklinde ayarla</string>
