@@ -5,6 +5,8 @@
 - Nieuw: Scheid icoon marker voor caches met handmatig identieke coördinaten aan de lijst van coördinaten
 - Nieuw: Herontworpen routes/track van het dialoogvenster snelle instellingen
 - Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
+- Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
+- Nieuw: Toon geofences voor lab stadia (UnifiedMap) - "Circles" inschakelen in kaart snelle instellingen om ze te tonen
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
@@ -15,3 +17,5 @@
 - Nieuw: Inhoud telling filter
 - Nieuw: Ondersteuning voor coördinaten in DD,DDDDDDD formaat
 - Nieuw: Toon laatst gebruikte filternaam in filter dialoogvenster
+- Nieuw: Ondersteuning voor het openen van lokale Wherigo-bestanden
+- Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
