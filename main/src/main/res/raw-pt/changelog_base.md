@@ -5,6 +5,8 @@
 - Novo: Separar marcador de ícone para caches com coordenadas definidas manualmente idênticas às coordenadas iniciais
 - Novo: Redesenhado menu de definições rápidas de percursos/rotas
 - Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
@@ -15,3 +17,5 @@
 - Novo: Filtro de contagem de inventário
 - Novo: Suporte para formato de coordenadas DD,DDDDDDD
 - New: Show last used filter name in filter dialog
+- New: Support opening local Wherigo files
+- Fix: Importing local map file gets random map name
