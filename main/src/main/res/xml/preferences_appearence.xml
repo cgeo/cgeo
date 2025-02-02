@@ -180,6 +180,14 @@
             app:iconSpaceReserved="false" />
 
         <cgeo.geocaching.settings.ColorpickerPreference
+            android:key="@string/pref_mapline_geofencecolor"
+            android:title="@string/init_geofencecolor"
+            android:summary="@string/init_geofencecolor_summary"
+            app:defaultColor="@color/default_geofencecolor"
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
+
+        <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_accuracycirclecolor"
             android:title="@string/init_accuracycirclecolor"
             android:summary="@string/init_accuracycirclecolor_summary"
