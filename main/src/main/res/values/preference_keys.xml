@@ -157,6 +157,7 @@
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_selected_language">selectedLanguage</string>
     <string translatable="false" name="pref_units_imperial">units</string>
+    <string translatable="false" name="pref_short_date_format">short_date_format</string>
     <string translatable="false" name="pref_quicklaunchitems">quicklaunchitems_sorted</string>
     <string translatable="false" name="pref_startscreen">startscreen</string>
     <string translatable="false" name="pref_custombnitem">custombnitem</string>
@@ -460,6 +461,28 @@
         <item>@string/pref_value_startscreen_nearby</item>
     </string-array>
 
+    <!-- appearance => short date format -->
+    <string translatable="false" name="pref_value_short_date_format_default" />
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.YY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/YYYY</string>
+    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/YY</string>
+    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-dd</string>
+    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-dd</string>
+    <string-array name="pref_values_short_date_format">
+        <item>@string/pref_value_short_date_format_default</item>
+        <item>@string/pref_value_short_date_format_DDdotMMdotYYYY</item>
+        <item>@string/pref_value_short_date_format_DDdotMMdotYY</item>
+        <item>@string/pref_value_short_date_format_MMslashDDslashYYYY</item>
+        <item>@string/pref_value_short_date_format_MMslashDDslashYY</item>
+        <item>@string/pref_value_short_date_format_DDslashMMslashYYYY</item>
+        <item>@string/pref_value_short_date_format_DDslashMMslashYY</item>
+        <item>@string/pref_value_short_date_format_YYYYdashMMdashDD</item>
+        <item>@string/pref_value_short_date_format_YYdashMMdashDD</item>
+    </string-array>
+
     <!-- Geocaching.com => image size -->
     <string translatable="false" name="pref_value_gc_imagesize_original">ORIGINAL</string>
     <string translatable="false" name="pref_value_gc_imagesize_large">LARGE</string>
@@ -555,7 +578,6 @@
     <!-- additional map settings -->
     <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
-    <string translatable="false" name="pref_showGeofences">showGeofences</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_mapLanguage">mapLanguage</string>
     <string translatable="false" name="pref_map_osm_threads">map_osm_threads</string>
@@ -648,28 +670,5 @@
 
     <string translatable="false" name="pref_legacy_filter_config_migrated">legacy_filter_config_migrated</string>
     <string translatable="false" name="pref_last_used_date">last_used_logdate</string>
-
-    <!-- appearance => short date format -->
-    <string translatable="false" name="pref_short_date_format">short_date_format</string>
-    <string translatable="false" name="pref_value_short_date_format_default" />
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYYYY">dd.MM.YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDdotMMdotYY">dd.MM.YY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYYYY">MM/dd/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_MMslashDDslashYY">MM/dd/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYYYY">dd/MM/YYYY</string>
-    <string translatable="false" name="pref_value_short_date_format_DDslashMMslashYY">dd/MM/YY</string>
-    <string translatable="false" name="pref_value_short_date_format_YYYYdashMMdashDD">YYYY-MM-dd</string>
-    <string translatable="false" name="pref_value_short_date_format_YYdashMMdashDD">YY-MM-dd</string>
-    <string-array name="pref_values_short_date_format">
-        <item>@string/pref_value_short_date_format_default</item>
-        <item>@string/pref_value_short_date_format_DDdotMMdotYYYY</item>
-        <item>@string/pref_value_short_date_format_DDdotMMdotYY</item>
-        <item>@string/pref_value_short_date_format_MMslashDDslashYYYY</item>
-        <item>@string/pref_value_short_date_format_MMslashDDslashYY</item>
-        <item>@string/pref_value_short_date_format_DDslashMMslashYYYY</item>
-        <item>@string/pref_value_short_date_format_DDslashMMslashYY</item>
-        <item>@string/pref_value_short_date_format_YYYYdashMMdashDD</item>
-        <item>@string/pref_value_short_date_format_YYdashMMdashDD</item>
-    </string-array>
 
 </resources>
