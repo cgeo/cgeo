@@ -1069,12 +1069,8 @@
     <string name="init_trackappearance_summary">Seleziona il colore e l\'opacità per la linea traccia/percorso. Una traccia/percorso è costituita da diversi waypoint e può essere caricato tramite un file traccia/percorso GPX.</string>
     <string name="init_circlecolor">Colore del cerchio</string>
     <string name="init_circlecolor_summary">Seleziona colore e opacità per la linea del cerchio. I cerchi sono usati come rappresentazione visiva del raggio minimo, attorno a un cache o waypoint fisico, in cui non è consentita nessun\'altro cache o waypoint fisico. (Si applica a geocaching.com)</string>
-    <string name="init_circlefillcolor">Colore di riempimento del cerchio</string>
-    <string name="init_circlefillcolor_summary">Seleziona colore e opacità per il riempimento dei cerchi</string>
     <string name="init_accuracycirclecolor">Colore del cerchio di precisione</string>
     <string name="init_accuracycirclecolor_summary">Seleziona il colore e l\'opacità per la linea del cerchio di precisione. Il cerchio di precisione è usato come rappresentazione visiva per l\'accuratezza del segnale di posizione.</string>
-    <string name="init_accuracycirclefillcolor">Colore di riempimento del cerchio di precisione</string>
-    <string name="init_accuracycirclefillcolor_summary">Seleziona colore e opacità di riempimento per i cerchi di precisione</string>
     <string name="init_include_found_status">Includi lo stato \"Trovato\"</string>
     <string name="init_trackautovisit">Visita TB</string>
     <string name="init_summary_trackautovisit">Setta i miei oggetti Trackables automaticamente su \"visit\" quando invio log</string>
