@@ -1035,12 +1035,8 @@
     <string name="init_trackappearance_summary">Valitse jälki/reittiviivan väri, läpinäkyvyys ja viivan leveys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
-    <string name="init_circlefillcolor">Ympyräviivan leveys</string>
-    <string name="init_circlefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla ympyräviiva täytetään</string>
     <string name="init_accuracycirclecolor">Tarkkuusympyrän viivan väri</string>
     <string name="init_accuracycirclecolor_summary">Valitse tarkkuusympyrän viivan väri ja läpinäkyvyys. Tarkkuusympyrää käytetään sijaintisi signaalin tarkkuuden näyttämiseksi.</string>
-    <string name="init_accuracycirclefillcolor">Tarkkuusympyrän täyttöväri</string>
-    <string name="init_accuracycirclefillcolor_summary">Valitse väri ja läpinäkyvyys, jolla tarkkuusympyrä täytetään</string>
     <string name="init_include_found_status">Sisällytä \"Löydetty\" status</string>
     <string name="init_trackautovisit">Reissaajien vierailu</string>
     <string name="init_summary_trackautovisit">Reissaajat vierailevat automaattisesti</string>
