@@ -558,12 +558,8 @@
     <string name="init_summary_maptrail">当激活的 c:geo (GPS 开启) 将您的移动历史保存为轨迹并在地图上显示。</string>
     <string name="init_circlecolor">圆环线颜色</string>
     <string name="init_circlecolor_summary">选择圆环线的颜色和不透明度。圆环是被用作藏点或实际航点周围最小半径的视觉表现形式。圆环里不允许其它藏点或实际航点存在。(适用于 geocaching.com)</string>
-    <string name="init_circlefillcolor">圆环填充颜色</string>
-    <string name="init_circlefillcolor_summary">选择要填充的圆环的颜色和不透明度</string>
     <string name="init_accuracycirclecolor">精度圆环线条的颜色</string>
     <string name="init_accuracycirclecolor_summary">选择精度圆环线条的颜色和不透明度。精度圆环是定位信号精度的视觉表现形式。</string>
-    <string name="init_accuracycirclefillcolor">精度圆环填充颜色</string>
-    <string name="init_accuracycirclefillcolor_summary">选择填充精度圆环的颜色和不透明度</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">访问可追踪物</string>
     <string name="init_summary_trackautovisit">默认情况下将可追踪物设置为 “已访问”</string>
