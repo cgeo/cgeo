@@ -1003,12 +1003,8 @@
     <string name="init_trackappearance_summary">Pasirinkite pėdsako/maršruto linijos spalvą, skaidrumą ir linijos plotį. Pėdsakas/maršrutas susideda iš kelių tarpinių taškų ir gali būti įkeliamas naudojant GPX pėdsako/maršruto failą.</string>
     <string name="init_circlecolor">Apskritimo linijos spalva</string>
     <string name="init_circlecolor_summary">Pasirinkite apskritimo linijos spalvą ir skaidrumą. Apskritimai naudojami kaip vaizdinis minimalaus spindulio aplink slėptuvę arba kelio tarpinį tašką atvaizdavimas, kai neleidžiama jokia kita slėptuvė arba fizinis kelio taškas. (Galioja geocaching.com)</string>
-    <string name="init_circlefillcolor">Apskritimo užpildymo spalva</string>
-    <string name="init_circlefillcolor_summary">Pasirinkite užpildomų apskritimų spalvą ir skaidrumą</string>
     <string name="init_accuracycirclecolor">Tikslumo apskritimo linijos spalva</string>
     <string name="init_accuracycirclecolor_summary">Pasirinkite tikslumo apskritimo linijos spalvą ir skaidrumą. Tikslumo apskritimas naudojamas kaip vaizdinis vietos signalo tikslumo vaizdas.</string>
-    <string name="init_accuracycirclefillcolor">Tikslumo apskritimo užpildymo spalva</string>
-    <string name="init_accuracycirclefillcolor_summary">Pasirinkite spalvą ir skaidrumą, kad būtų užpildyti tikslumo apskritimai</string>
     <string name="init_include_found_status">Įtraukti \"Surasta\" būseną</string>
     <string name="init_trackautovisit">Apsilankyti su keliauninkais</string>
     <string name="init_summary_trackautovisit">Automatiškai nustatyti keliauninkus kaip \"Apsilankė\"</string>
