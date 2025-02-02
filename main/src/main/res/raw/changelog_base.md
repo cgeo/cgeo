@@ -6,6 +6,7 @@
 - New: Redesigned routes/tracks quick settings dialog
 - New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 
 ### Cache details
 - New: Option to share cache with user data (coordinates, personal note)
