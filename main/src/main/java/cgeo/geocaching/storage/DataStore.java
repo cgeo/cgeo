@@ -243,7 +243,7 @@ public class DataStore {
     /**
      * The list of fields needed for mapping.
      */
-    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude"};
+    private static final String[] WAYPOINT_COLUMNS = {"_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latitude", "longitude", "note", "own", "visited", "user_note", "org_coords_empty", "calc_state", "projection_type", "projection_unit", "projection_formula_1", "projection_formula_2", "preprojected_latitude", "preprojected_longitude", "geofence"};
 
     /**
      * Number of days (as ms) after temporarily saved caches are deleted
@@ -256,7 +256,7 @@ public class DataStore {
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
     private static final ReentrantReadWriteLock databaseLock = new ReentrantReadWriteLock();
-    private static final int dbVersion = 103;
+    private static final int dbVersion = 104;
     public static final int customListIdOffset = 10;
 
     /**
@@ -294,8 +294,9 @@ public class DataStore {
             99,  // add alcMode to differentiate Linear vs Random
             100, // add column "tier" and table for cache categories. Initially used for bettercacher.org data
             101, // add service_image_id to saved log images
-            102,  // add projection attributes to waypoints
-            103   // add more projection attributes to waypoints
+            102, // add projection attributes to waypoints
+            103, // add more projection attributes to waypoints
+            104  // add geofence radius for lab stages
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -456,7 +457,8 @@ public class DataStore {
             + "projection_formula_2 TEXT, "
             + "projection_formula_1 TEXT, "
             + "preprojected_latitude DOUBLE, "
-            + "preprojected_longitude DOUBLE "
+            + "preprojected_longitude DOUBLE, "
+            + "geofence DOUBLE"
             + "); ";
 
     private static final String dbCreateVariables = ""
@@ -1888,6 +1890,15 @@ public class DataStore {
                         }
                     }
 
+                    // Adds radius for lab stages to caches
+                    if (oldVersion < 104) {
+                        try {
+                            createColumnIfNotExists(db, dbTableWaypoints, "geofence DOUBLE");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 104);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -2705,6 +2716,7 @@ public class DataStore {
         values.put("projection_formula_1", waypoint.getProjectionFormula1() == null ? null : waypoint.getProjectionFormula1());
         values.put("projection_formula_2", waypoint.getProjectionFormula2() == null ? null : waypoint.getProjectionFormula2());
         putCoords(values, "preprojected_", waypoint.getPreprojectedCoords());
+        values.put("geofence", waypoint.getGeofence());
         return values;
     }
 
@@ -3401,6 +3413,7 @@ public class DataStore {
                 cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_1")),
                 cursor.getString(cursor.getColumnIndexOrThrow("projection_formula_2"))
             );
+            waypoint.setGeofence(cursor.getFloat(cursor.getColumnIndexOrThrow("geofence")));
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

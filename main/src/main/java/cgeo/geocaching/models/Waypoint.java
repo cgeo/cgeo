@@ -61,6 +61,8 @@ public class Waypoint implements INamedGeoCoordinate {
 
     @Nullable
     private Geopoint preprojectedCoords = null;
+    @Nullable
+    private Float geofence; // radius in meters
     @NonNull
     private String note = "";
     private String userNote = "";
@@ -132,6 +134,9 @@ public class Waypoint implements INamedGeoCoordinate {
         }
         if (preprojectedCoords == null) {
             preprojectedCoords = old.preprojectedCoords;
+        }
+        if (geofence == null) {
+            geofence = old.geofence;
         }
 
         // keep note only for user-defined waypoints
@@ -302,6 +307,15 @@ public class Waypoint implements INamedGeoCoordinate {
 
     public Geopoint getPreprojectedCoords() {
         return preprojectedCoords;
+    }
+
+    @Nullable
+    public Float getGeofence() {
+        return geofence;
+    }
+
+    public void setGeofence(@Nullable final Float geofence) {
+        this.geofence = geofence;
     }
 
     public void setCoords(final Geopoint coords) {

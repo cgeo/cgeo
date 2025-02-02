@@ -53,6 +53,7 @@ import cgeo.geocaching.unifiedmap.layers.CacheCirclesLayer;
 import cgeo.geocaching.unifiedmap.layers.CoordsIndicatorLayer;
 import cgeo.geocaching.unifiedmap.layers.ElevationChart;
 import cgeo.geocaching.unifiedmap.layers.GeoItemsLayer;
+import cgeo.geocaching.unifiedmap.layers.GeofenceCirclesLayer;
 import cgeo.geocaching.unifiedmap.layers.IndividualRouteLayer;
 import cgeo.geocaching.unifiedmap.layers.NavigationTargetLayer;
 import cgeo.geocaching.unifiedmap.layers.PositionHistoryLayer;
@@ -241,6 +242,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         new TracksLayer(this, clickableItemsLayer);
         navigationTargetLayer = new NavigationTargetLayer(this, nonClickableItemsLayer);
         new CacheCirclesLayer(this, nonClickableItemsLayer);
+        new GeofenceCirclesLayer(this, nonClickableItemsLayer);
 
         new IndividualRouteLayer(this, clickableItemsLayer);
         new GeoItemsLayer(this, clickableItemsLayer);

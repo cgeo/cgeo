@@ -411,6 +411,7 @@ final class ALApi {
 
                 wpt.setGeocode(geocode);
                 wpt.setPrefix(String.valueOf(stageCounter));
+                wpt.setGeofence((float) wptResponse.get("GeofencingRadius").asDouble());
 
                 final StringBuilder note = new StringBuilder("<img src=\"" + ilink + "\"></img><p><p>" + desc);
                 if (Settings.isALCAdvanced()) {
