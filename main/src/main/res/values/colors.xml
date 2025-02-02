@@ -29,10 +29,8 @@
     <color name="default_trackcolor">#80008000</color>
     <color name="default_directioncolor">#80FF3333</color>
     <color name="default_circlecolor">#44BB0000</color>
-    <color name="default_circlefillcolor">#66BB0000</color>
     <color name="default_geofencecolor">@color/cacheType_lab</color>
     <color name="default_accuracycirclecolor">#66000000</color>
-    <color name="default_accuracycirclefillcolor">#08000000</color>
 
     <color name="cacheMarker_icon">#ffffffff</color>
     <color name="cacheMarker_background">#ffffffff</color>

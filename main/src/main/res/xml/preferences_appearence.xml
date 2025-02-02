@@ -171,13 +171,6 @@
             app:defaultColor="@color/default_circlecolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_circlefillcolor"
-            android:summary="@string/init_circlefillcolor_summary"
-            android:title="@string/init_circlefillcolor"
-            app:defaultColor="@color/default_circlefillcolor"
-            app:showOpaquenessSlider="true"
-            app:iconSpaceReserved="false" />
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_geofencecolor"
@@ -192,13 +185,6 @@
             android:title="@string/init_accuracycirclecolor"
             android:summary="@string/init_accuracycirclecolor_summary"
             app:defaultColor="@color/default_accuracycirclecolor"
-            app:showOpaquenessSlider="true"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.ColorpickerPreference
-            android:key="@string/pref_mapline_accuracycirclefillcolor"
-            android:summary="@string/init_accuracycirclefillcolor_summary"
-            android:title="@string/init_accuracycirclefillcolor"
-            app:defaultColor="@color/default_accuracycirclefillcolor"
             app:showOpaquenessSlider="true"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>

@@ -73,7 +73,7 @@ public class MapLineUtils {
     }
 
     public static int getCircleFillColor() {
-        return Settings.getMapLineValue(R.string.pref_mapline_circlefillcolor, R.color.default_circlefillcolor);
+        return restrictAlpha(getCircleColor());
     }
 
     // geofence line
@@ -93,7 +93,7 @@ public class MapLineUtils {
     }
 
     public static int getAccuracyCircleFillColor() {
-        return Settings.getMapLineValue(R.string.pref_mapline_accuracycirclefillcolor, R.color.default_accuracycirclefillcolor);
+        return restrictAlpha(getAccuracyCircleColor());
     }
 
     // other lines
