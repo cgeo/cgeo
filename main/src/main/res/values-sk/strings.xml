@@ -944,12 +944,8 @@
     <string name="init_trackappearance_summary">Vyberte farbu., nepriehľadnosť a šírku čiary stopy/trasy. Stopa/trasa pozostáva z viacerých bodov a možno ju načítať cez súbor GPX pre stopu/trasu.</string>
     <string name="init_circlecolor">Farba linky kruhu</string>
     <string name="init_circlecolor_summary">Vyberte farbu a priehľadnosť čiary kruhu. Kruhy sa používajú ako vizuálna reprezentácia pre minimálny okruh okolo kešky alebo fyzického bodu trasy, v ktorom nie je povolená žiadna ďalšia keška ani fyzický bod trasy. (Platí pre geocaching.com)</string>
-    <string name="init_circlefillcolor">Farba výplne kruhu</string>
-    <string name="init_circlefillcolor_summary">Vyberte farbu a priehľadnosť vyplnenia kruhu</string>
     <string name="init_accuracycirclecolor">Farba čiary kruhu presnosti</string>
     <string name="init_accuracycirclecolor_summary">Vyberte farbu a priehľadnosť pre čiaru kruhu presnosti. Kruh presnosti sa používa ako vizuálna reprezentácia presnosti signálu polohy.</string>
-    <string name="init_accuracycirclefillcolor">Farba výplne kruhu presnosti</string>
-    <string name="init_accuracycirclefillcolor_summary">Vyberte farbu a priehľadnosť výplne kruhov presnosti</string>
     <string name="init_include_found_status">Zahrnúť stav \"Nájdené\"</string>
     <string name="init_trackautovisit">Návšteva TB</string>
     <string name="init_summary_trackautovisit">Nastaviť trasovateľné predmety (trackables) automaticky na „navštívené“</string>
