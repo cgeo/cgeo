@@ -728,8 +728,6 @@
     <string name="init_summary_maptrail">Vis dit spor på kortet</string>
     <string name="init_circlecolor">Cirkel linjefarve</string>
     <string name="init_circlecolor_summary">Vælg farve og uigennemsigtighed for cirklen. Cirkler bruges som en visuel repræsentation for den mindste radius omkring en cache eller fysisk rutepunkt, hvor andre cacher eller fysiske rutepunkter ikke er tilladt. (Gælder for geocaching.com)</string>
-    <string name="init_circlefillcolor">Cirkel fyldfarve</string>
-    <string name="init_circlefillcolor_summary">Vælg farve og uigennemsigtighed for cirklers fyldfarve</string>
     <string name="init_include_found_status">Inkludér \"Fundet\"-status</string>
     <string name="init_trackautovisit">Besøg automatisk Trackable</string>
     <string name="init_summary_trackautovisit">Markér Trackables som \"Besøgt\" som standard</string>
