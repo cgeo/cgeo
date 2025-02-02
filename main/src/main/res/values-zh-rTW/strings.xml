@@ -693,7 +693,6 @@
     <string name="init_maptrail_length_summary">設定歷史軌跡的最大長度。預設為700點，將根據記憶體容量大小而變動。</string>
     <string name="init_summary_maptrail">當GPS開啟時，c:geo將會儲存您的移動並在地圖上顯示。</string>
     <string name="init_circlecolor">圓邊框顏色</string>
-    <string name="init_circlefillcolor">圓圈內顏色</string>
     <string name="init_include_found_status">包括 \"已找到\" 状态</string>
     <string name="init_trackautovisit">造訪TBs</string>
     <string name="init_summary_trackautovisit">預設是把旅行蟲設定成已拜訪</string>
