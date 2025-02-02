@@ -1988,7 +1988,6 @@
     <string name="map_rotation">Map rotation</string>
     <string name="map_dot_mode">Use compact icons</string>
     <string name="map_show_circles">Circles</string>
-    <string name="map_show_geofences">Geofences</string>
     <string name="map_showc_own">Own</string>
     <string name="map_showc_found">Found</string>
     <string name="map_showc_disabled">Disabled</string>
