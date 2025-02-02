@@ -1054,12 +1054,8 @@
     <string name="init_trackappearance_summary">Sélectionnez la couleur, l\'opacité et la largeur du trait pour la trace ou la route. Une trace ou une route est composée de plusieurs points de passage et peut être chargée via un fichier de trace GPX.</string>
     <string name="init_circlecolor">Couleur du trait de cercle</string>
     <string name="init_circlecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne de cercle. Les cercles sont utilisés comme représentation visuelle pour le rayon minimum autour d\'une cache ou d\'un point de passage physique, où aucune autre cache ou point de passage physique n\'est autorisée. (S\'applique à geocaching.com)</string>
-    <string name="init_circlefillcolor">Couleur de l\'intérieur du cercle</string>
-    <string name="init_circlefillcolor_summary">Sélectionnez la couleur et l\'opacité de l\'intérieur des cercles</string>
     <string name="init_accuracycirclecolor">Couleur de la ligne du cercle de précision</string>
     <string name="init_accuracycirclecolor_summary">Sélectionnez la couleur et l\'opacité de la ligne du cercle de précision. Le cercle de précision est une représentation visuelle de la précision du signal de positionnement GPS.</string>
-    <string name="init_accuracycirclefillcolor">Couleur de la ligne du cercle de précision</string>
-    <string name="init_accuracycirclefillcolor_summary">Sélectionnez la couleur et l\'opacité à utiliser pour la ligne du cercle de précision</string>
     <string name="init_include_found_status">Inclure le statut \"Trouvé\"</string>
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
