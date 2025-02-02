@@ -1091,12 +1091,8 @@
     <string name="init_trackappearance_summary">Seleccioneu el color, l\'opacitat i l\'amplada de línia per a la línia de track/ruta. Un track/ruta consta de diversos waypoints i es pot carregar mitjançant un fitxer GPX.</string>
     <string name="init_circlecolor">Color de la línia del cercle</string>
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
-    <string name="init_circlefillcolor">Color de dins del cercle</string>
-    <string name="init_circlefillcolor_summary">Seleccioneu el color i l\'opacitat del interior dels cercles</string>
     <string name="init_accuracycirclecolor">Color línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
-    <string name="init_accuracycirclefillcolor">Color interior cercle de precisió</string>
-    <string name="init_accuracycirclefillcolor_summary">Seleccioneu el color i l\'opacitat per als cercles de precisió que voleu omplir</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
     <string name="init_trackautovisit">Visita TBs</string>
     <string name="init_summary_trackautovisit">Posa per defecte un \"Visitat\" als traçables </string>
