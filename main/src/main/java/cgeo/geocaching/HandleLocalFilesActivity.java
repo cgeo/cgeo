@@ -4,10 +4,13 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
+import cgeo.geocaching.files.GPXMultiParser;
+import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.FileNameCreator;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.wherigo.WherigoActivity;
 
 import android.content.ContentResolver;
@@ -17,6 +20,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -37,7 +45,27 @@ public class HandleLocalFilesActivity extends AbstractActivity {
             case GPX:
             case ZIP:
             case LOC:
-                continueWith(CacheListActivity.class, intent);
+                // was: continueWith(CacheListActivity.class, intent);
+
+                // sample code for GPXMultiParser, which parses geocaches, tracks and routes in parallel
+                try (InputStream in = new BufferedInputStream(ContentStorage.get().openForRead(uri))) {
+                    final GPXMultiParser parser = new GPXMultiParser();
+                    Collection<Object> result;
+                    try {
+                        result = parser.doParsing(in, true);
+                    } catch (ParserException ignore) {
+                        result = parser.doParsing(in, false);
+                    }
+                    Log.e("returned from parsing, size=" + result.size());
+                } catch (IOException | ParserException e) {
+                    Log.e("parsing exception: " + e.getMessage());
+                }
+                // depending on result different actions can be done
+                // (either automatically or after asking the user):
+                // - single cache: import to list + open cache
+                // - multiple caches: import to list + open list
+                // - track: add to viewed tracks on map
+                // - route: overwrite individual route (after confirmation)
                 finished = true;
                 break;
             case MAP:
