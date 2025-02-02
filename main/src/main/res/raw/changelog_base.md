@@ -5,6 +5,7 @@
 - New: Separate icon marker for caches with manually set coordinates identical to listing coordinates
 - New: Redesigned routes/tracks quick settings dialog
 - New: Long tap on map selection icon to select previous tile provider (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
 
 ### Cache details
 - New: Option to share cache with user data (coordinates, personal note)
