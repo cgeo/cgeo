@@ -1086,12 +1086,10 @@
     <string name="init_trackappearance_summary">Välj färg, ogenomskinlighet och linjebredd för spår/ruttlinje. En spår/rutt består av flera waypoints och kan laddas via en GPX-spår/ruttfil.</string>
     <string name="init_circlecolor">Färg på linje runt cirklar</string>
     <string name="init_circlecolor_summary">Välj färg och ogenomskinlighet för cirkellinje. Cirklar används som en visuell representation för den minsta radien runt en cache eller fysisk waypoint, där ingen annan cache eller fysisk waypoint är tillåten. (Applicerbar till geocaching.com)</string>
-    <string name="init_circlefillcolor">Färg inuti cirklar</string>
-    <string name="init_circlefillcolor_summary">Välj färg och ogenomskinlighet för fyllningen av cirklar</string>
+    <string name="init_geofencecolor">Geofence cirkelfärg</string>
+    <string name="init_geofencecolor_summary">Välj färg och genomskinlighet för geofence-cirkel. Cirklar används som en visuell representation för geofence definierad för vägpunkter (vanligtvis gäller geocaching.com lab äventyr-steg)</string>
     <string name="init_accuracycirclecolor">Färg på cirkel för noggrannhet</string>
     <string name="init_accuracycirclecolor_summary">Välj färg och genomskinlighet för cirkeln för noggrannhet. Cirkeln används som en visuell representation för GPS-signalens noggrannhet.</string>
-    <string name="init_accuracycirclefillcolor">Färg på fyllning av cirkel för noggrannhet</string>
-    <string name="init_accuracycirclefillcolor_summary">Välj färg och ogenomskinlighet för fyllningen av cirklar för noggrannhet</string>
     <string name="init_include_found_status">Inkludera \"Hittad\"-status</string>
     <string name="init_trackautovisit">Trackable</string>
     <string name="init_summary_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
@@ -1578,6 +1576,7 @@
     <string name="create_internal_cache">Skapa egen-definierad cache</string>
     <string name="create_internal_cache_short">Ny cache</string>
     <string name="create_internal_cache_currentlist">Använd aktuell lista</string>
+    <string name="internal_cache_default_names">Användardefinierad cache #%1$s</string>
     <string name="internal_cache_default_description">Detta är en egen-definierad cache</string>
     <string name="internal_cache_default_owner">Du</string>
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
@@ -2308,6 +2307,7 @@
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
+    <string name="live_map_status_error">Fel vid inläsning av kartdata: %s</string>
     <string name="live_map_status_partial">Partiellt resultat (zooma in för att minska antalet cacher att ladda): %s</string>
     <string name="live_map_status_normal">Laddar data utan problem: %s</string>
     <string name="list_list_headline">Listor:</string>
