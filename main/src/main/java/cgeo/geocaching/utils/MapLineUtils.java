@@ -3,12 +3,19 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
+import android.graphics.Color;
+
 public class MapLineUtils {
 
     private static final float THIN_LINE = 4f;
 
     private MapLineUtils() {
         // utility class
+    }
+
+    public static int restrictAlpha(final int color) {
+        final int alpha = Math.min(Color.alpha(color), 48);
+        return (color & 0xffffff) + (alpha << 24);
     }
 
     // history trail line
@@ -67,6 +74,16 @@ public class MapLineUtils {
 
     public static int getCircleFillColor() {
         return Settings.getMapLineValue(R.string.pref_mapline_circlefillcolor, R.color.default_circlefillcolor);
+    }
+
+    // geofence line
+
+    public static int getGeofenceColor() {
+        return Settings.getMapLineValue(R.string.pref_mapline_geofencecolor, R.color.default_geofencecolor);
+    }
+
+    public static int getGeofenceFillColor() {
+        return restrictAlpha(getGeofenceColor());
     }
 
     // accuracy circle line

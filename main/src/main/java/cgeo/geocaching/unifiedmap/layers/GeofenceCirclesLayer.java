@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.LayerHelper;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
+import cgeo.geocaching.utils.MapLineUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -20,7 +21,7 @@ public class GeofenceCirclesLayer {
 
         viewModel.waypoints.observeForRead(activity, waypoints -> {
 
-            if (Settings.isShowGeofences()) {
+            if (Settings.isShowCircles()) {
                 final GeoGroup.Builder geoGroup = GeoGroup.builder();
 
                 for (Waypoint waypoint : waypoints) {
@@ -29,8 +30,8 @@ public class GeofenceCirclesLayer {
                         geoGroup.addItems(
                                 GeoPrimitive.createCircle(waypoint.getCoords(), geofenceInMeters / 1000f, GeoStyle.builder()
                                         .setStrokeWidth(2.0f)
-                                        .setStrokeColor(0x80008000)
-                                        .setFillColor(0x20008000)
+                                        .setStrokeColor(MapLineUtils.getGeofenceColor())
+                                        .setFillColor(MapLineUtils.getGeofenceFillColor())
                                         .build()
                                 ).buildUpon().setZLevel(LayerHelper.ZINDEX_CIRCLE).build());
                     }

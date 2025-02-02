@@ -87,7 +87,6 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.PARKING)), Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
         final SettingsCheckboxModel wpVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
         final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, Settings.isShowCircles(), Settings::setShowCircles, false);
-        final SettingsCheckboxModel geofencesCb = createCb(allCbs, R.string.map_show_geofences, R.drawable.map_circle, Settings.isShowGeofences(), Settings::setShowGeofences, false);
 
         final MapSettingsDialogBinding dialogView = MapSettingsDialogBinding.inflate(LayoutInflater.from(Dialogs.newContextThemeWrapper(activity)));
 
@@ -110,7 +109,6 @@ public class MapSettingsUtils {
         wpVisitedCb.addToViewGroup(activity, rightColumn);
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         circlesCb.addToViewGroup(activity, rightColumn);
-        geofencesCb.addToViewGroup(activity, rightColumn);
 
         final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup, false);
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
