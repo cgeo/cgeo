@@ -877,12 +877,8 @@
     <string name="init_summary_maptrail">Όταν είναι ενεργοποιημένο (και το GPS είναι ενεργό) το c:geo αποθηκεύει το ιστορικό των κινήσεων σας ως ίχνος και το προβάλει στον χάρτη.</string>
     <string name="init_circlecolor">Χρώμα περιφέρειας κύκλου</string>
     <string name="init_circlecolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια της κυκλικής γραμμής. Οι κυκλοι χρησιμοποιούνται ως οπτική απεικόνιση της ελάχιστης ακτίνας γύρω από μια κρύπτη ή φυσικό ενδιάμεσο σημείο, οπου μέσα τους δεν επιτρέπεται άλλη κρύπτη ή φυσικό ενδιάμεσο σημείο. (Εφαρμόζεται στο geocaching.com)</string>
-    <string name="init_circlefillcolor">Χρώμα γεμίσματος κύκλου</string>
-    <string name="init_circlefillcolor_summary">Επιλέξτε το χρώμα και την αδιαφάνεια των κύκλων</string>
     <string name="init_accuracycirclecolor">Χρώμα γραμμής κύκλου ακριβείας</string>
     <string name="init_accuracycirclecolor_summary">Επιλέξτε χρώμα και αδιαφάνεια για την ακρίβεια γραμμή κύκλου. Ο κύκλος ακρίβειας χρησιμοποιείται ως οπτική αναπαράσταση για την ακρίβεια του σήματος τοποθεσίας.</string>
-    <string name="init_accuracycirclefillcolor">Χρώμα γεμίσματος κύκλου ακρίβειας</string>
-    <string name="init_accuracycirclefillcolor_summary">Επιλέξτε αδιαφάνεια και χρώμα γεμίσματος, των κύκλων ακρίβειας</string>
     <string name="init_include_found_status">Περιλαμβάνει όσες δηλώσατε ότι βρήκατε</string>
     <string name="init_trackautovisit">Επίσκεψη ανιχνεύσιμων</string>
     <string name="init_summary_trackautovisit">Ορίστε προεπιλογή \"επίσκεψη\" στα ανιχνεύσιμα</string>
