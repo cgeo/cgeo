@@ -1042,12 +1042,8 @@
     <string name="init_trackappearance_summary">트랙/경로선의 색상, 불투명도 및 선폭을 선택합니다. 경로는 여러 지점으로 구성되며 GPX 경로 파일을 통해 로딩할 수 있습니다.</string>
     <string name="init_circlecolor">원형선 색상</string>
     <string name="init_circlecolor_summary">원형선의 색상과 불투명도를 선택합니다. 원형은 캐시 또는 물리적 지점 주변의 최소 반경에 대한 시각적 표현으로 사용되며 다른 캐시 또는 물리적 지점은 허용되지 않습니다. (geocaching.com에 적용)</string>
-    <string name="init_circlefillcolor">원형 내부 색상</string>
-    <string name="init_circlefillcolor_summary">채울 원형의 색상 및 불투명도를 선택하십시오.</string>
     <string name="init_accuracycirclecolor">정확도 원 선 색상</string>
     <string name="init_accuracycirclecolor_summary">정확한 원 선을 위해 색상과 불투명도를 선택합니다. 정확도 원은 위치 신호 정확도에 대한 시각적 표현으로 사용됩니다.</string>
-    <string name="init_accuracycirclefillcolor">정확도 원 내부 색상</string>
-    <string name="init_accuracycirclefillcolor_summary">채울 정확도 원의 색상 및 불투명도를 선택하십시오.</string>
     <string name="init_include_found_status">\"찾음\" 상태 포함</string>
     <string name="init_trackautovisit">TB 방문하기</string>
     <string name="init_summary_trackautovisit">추적아이템을 항상 \"방문\"하도록 합니다.</string>
