@@ -5,6 +5,8 @@
 - Nowość: Osobna ikona znacznika dla skrytek z ręcznie ustawionymi współrzędnymi, które są identyczne do współrzędnych oryginalnych
 - Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
 - Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
+- New: Allow setting display name for offline maps in companion file (UnifiedMap)
+- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
@@ -15,3 +17,5 @@
 - Nowość: Filtr stanu inwentarza
 - Nowość: Obsługa współrzędnych w formacie DD,DDDDDDD
 - Nowość: Pokaż ostatnio użytą nazwę filtra w oknie dialogowym
+- Nowość: Obsługa otwierania lokalnych plików Wherigo
+- Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
