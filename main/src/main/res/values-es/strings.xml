@@ -837,12 +837,8 @@
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
     <string name="init_circlecolor">Color de línea de círculo</string>
     <string name="init_circlecolor_summary">Seleccione el color y la opacidad de la línea circular. Los circuitos se utilizan como una representación visual para el radio mínimo alrededor de un cache o waypoint físico, en cuyo interior no se permite ningún otro caché o waypoint físico. (Aplica a geocaching.com)</string>
-    <string name="init_circlefillcolor">Color de relleno de círculo</string>
-    <string name="init_circlefillcolor_summary">Seleccione el color y la opacidad de los círculos a rellenar</string>
     <string name="init_accuracycirclecolor">Color de línea de círculo de precisión</string>
     <string name="init_accuracycirclecolor_summary">Seleccione color y opacidad para la línea del círculo de precisión. El círculo de precisión se utiliza como una representación visual para la precisión de la señal de ubicación.</string>
-    <string name="init_accuracycirclefillcolor">Color de relleno de círculo de precisión</string>
-    <string name="init_accuracycirclefillcolor_summary">Selecciona color y opacidad con la que se rellenan los círculos de precisión</string>
     <string name="init_include_found_status">Incluir estado \"Encontrado\"</string>
     <string name="init_trackautovisit">Convertir TBs a Visitado</string>
     <string name="init_summary_trackautovisit">Convertir rastreables automáticamente a \"Visitado\"</string>
