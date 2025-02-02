@@ -505,7 +505,6 @@
     <string name="init_maptrail">Parādīt pārvietojumu</string>
     <string name="init_summary_maptrail">Parādīt pārvietojumu kartē</string>
     <string name="init_circlecolor">Apļa līnijas krāsa</string>
-    <string name="init_circlefillcolor">Apļa aizpildījuma krāsa</string>
     <string name="init_include_found_status">Pievienot \"Atrasts\" statusu</string>
     <string name="init_trackautovisit">Ceļotāju automātiska atzīmēšana</string>
     <string name="init_summary_trackautovisit">Pēc noklusējuma uzlikt ceļotājam statusu \"Apmeklējis\" (\"VIsited\")</string>
