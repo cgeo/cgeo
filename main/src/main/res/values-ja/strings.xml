@@ -810,12 +810,8 @@
     <string name="init_summary_maptrail">c:geo使用中(GPSが有効時)にGPSログを保存して軌跡を地図に表示</string>
     <string name="init_circlecolor">0.1マイル円の線色</string>
     <string name="init_circlecolor_summary">0.1マイル円の線色と不透明度を選択。 キャッシュまたはウェイポイントに半径0.1マイルの円を表示します。geocaching.comでは0.1マイル以内にキャッシュまたは物理的なウェイポイントを設置することを禁止しています</string>
-    <string name="init_circlefillcolor">0.1マイル円の内側の色</string>
-    <string name="init_circlefillcolor_summary">0.1マイル円の内側の色と不透明度を選択</string>
     <string name="init_accuracycirclecolor">精度円の線色</string>
     <string name="init_accuracycirclecolor_summary">精度円の線色と不透明度を選択。精度円は位置測位の精度を表しています</string>
-    <string name="init_accuracycirclefillcolor">精度円の内側の色</string>
-    <string name="init_accuracycirclefillcolor_summary">精度円の内側の色と不透明度を選択</string>
     <string name="init_include_found_status">「発見した」ステータスを含める</string>
     <string name="init_trackautovisit">トラッカブルの「訪れた」設定</string>
     <string name="init_summary_trackautovisit">「発見」したログを書く時にトラッカブルを自動的に「訪れた」にする</string>
