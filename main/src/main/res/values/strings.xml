@@ -1851,6 +1851,8 @@
     <string name="waypoint_my_coordinates_accuracy">My coordinates (±%s)</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Edit</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Set radius for geofence (in meters)</string>
     <string name="waypoint_copy_coordinates">Copy coordinates</string>
     <string name="waypoint_clear_coordinates">Clear coordinates</string>
     <string name="waypoint_delete">Delete</string>
