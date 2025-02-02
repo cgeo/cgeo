@@ -1816,6 +1816,14 @@ public class Settings {
         return getBoolean(R.string.pref_showCircles, false);
     }
 
+    public static void setShowGeofences(final boolean showGeofences) {
+        putBoolean(R.string.pref_showGeofences, showGeofences);
+    }
+
+    public static boolean isShowGeofences() {
+        return getBoolean(R.string.pref_showGeofences, false);
+    }
+
     public static void setSupersizeDistance(final int supersizeDistance) {
         putInt(R.string.pref_supersizeDistance, supersizeDistance);
     }

@@ -556,6 +556,7 @@
     <!-- additional map settings -->
     <string translatable="false" name="pref_useDelayedMapFragment">feature_delayedMapFragment</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
+    <string translatable="false" name="pref_showGeofences">showGeofences</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_mapLanguage">mapLanguage</string>
     <string translatable="false" name="pref_map_osm_threads">map_osm_threads</string>
