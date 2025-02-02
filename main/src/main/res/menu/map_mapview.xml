@@ -12,36 +12,30 @@
             android:id="@+id/menu_hillshading"
             android:title="@string/settings_hillshading_enable"
             android:icon="@drawable/ic_menu_hills"
-            app:iconTint="@color/colorIconMenu"
             android:checkable="true"
             android:visible="false"/>
         <item
             android:orderInCategory="91"
             android:id="@+id/menu_manage_offline_maps"
             android:icon="@drawable/wherigo_download"
-            app:iconTint="@color/colorIconMenu"
             android:title="@string/menu_manage_offline_data">
             <menu>
                 <item
                     android:id="@+id/menu_download_offlinemap"
                     android:title="@string/downloadmap_title"
-                    android:icon="@drawable/ic_menu_mapmode"
-                    app:iconTint="@color/colorIconMenu"/>
+                    android:icon="@drawable/ic_menu_mapmode"/>
                 <item
                     android:id="@+id/menu_check_routingdata"
                     android:title="@string/check_tiles_menu"
-                    android:icon="@drawable/ic_menu_route"
-                    app:iconTint="@color/colorIconMenu"/>
+                    android:icon="@drawable/ic_menu_route"/>
                 <item
                     android:id="@+id/menu_check_hillshadingdata"
                     android:title="@string/check_hillshading_tiles_menu"
-                    android:icon="@drawable/ic_menu_hills"
-                    app:iconTint="@color/colorIconMenu"/>
+                    android:icon="@drawable/ic_menu_hills"/>
                 <item
                     android:id="@+id/menu_delete_offline_data"
                     android:title="@string/menu_delete_offline_data"
-                    android:icon="@drawable/ic_menu_delete"
-                    app:iconTint="@color/colorIconMenu"/>
+                    android:icon="@drawable/ic_menu_delete"/>
             </menu>
         </item>
     </group>

@@ -140,23 +140,19 @@
             <item
                 android:id="@+id/menu_share"
                 android:title="@string/cache_menu_share"
-                android:icon="@drawable/ic_menu_share"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_share"/>
             <item
                 android:id="@+id/menu_share_with_data"
                 android:title="@string/cache_menu_share_with_data"
-                android:icon="@drawable/ic_menu_variable"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_variable"/>
             <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx"
-                android:icon="@drawable/ic_menu_gpx"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_gpx"/>
             <item
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes"
-                android:icon="@drawable/ic_menu_note"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_note"/>
         </menu>
     </item>
     <item
@@ -170,42 +166,35 @@
                 android:id="@+id/menu_calendar"
                 android:title="@string/cache_menu_event"
                 android:icon="@drawable/ic_menu_calendar"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_caches_around"
                 android:title="@string/cache_menu_around"
-                android:icon="@drawable/ic_menu_nearby"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_nearby"/>
             <item
                 android:id="@+id/menu_gcvote"
                 android:title="@string/cache_menu_vote"
                 android:icon="@drawable/ic_menu_vote"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_ignore"
                 android:title="@string/cache_menu_ignore"
                 android:icon="@drawable/ic_menu_cancel"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_upload_bookmarklist"
                 android:title="@string/caches_upload_bookmarklist"
                 android:icon="@drawable/ic_menu_bookmarks"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_set_cache_icon"
                 android:title="@string/cache_menu_set_cache_icon"
                 android:icon="@drawable/downloader_theme"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="false"/>
             <item
                 android:id="@+id/menu_change_description_style"
                 android:title="@string/cache_menu_change_description_style"
                 android:icon="@drawable/ic_menu_textstyle"
-                app:iconTint="@color/colorIconMenu"
                 android:visible="true"/>
         </menu>
     </item>

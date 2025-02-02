@@ -160,23 +160,19 @@
             <item
                 android:id="@+id/menu_import_pq"
                 android:title="@string/menu_lists_pocket_queries"
-                android:icon="@drawable/ic_menu_pocket_query"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_pocket_query"/>
             <item
                 android:id="@+id/menu_bookmarklists"
                 android:title="@string/menu_lists_bookmarklists"
-                android:icon="@drawable/ic_menu_bookmarks"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_bookmarks"/>
             <item
                 android:id="@+id/menu_import_gpx"
                 android:title="@string/gpx_import_title"
-                android:icon="@drawable/ic_menu_gpx"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_gpx"/>
             <item
                 android:id="@+id/menu_import_web"
                 android:title="@string/web_import_title"
-                android:icon="@drawable/wherigo_download"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/wherigo_download"/>
         </menu>
     </item>
     <item
@@ -188,18 +184,15 @@
             <item
                 android:id="@+id/menu_export_gpx"
                 android:title="@string/export_gpx"
-                android:icon="@drawable/ic_menu_gpx"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_gpx"/>
             <item
                 android:id="@+id/menu_export_fieldnotes"
                 android:title="@string/export_fieldnotes"
-                android:icon="@drawable/ic_menu_note_edit"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_note_edit"/>
             <item
                 android:id="@+id/menu_export_persnotes"
                 android:title="@string/export_persnotes"
-                android:icon="@drawable/ic_menu_note"
-                app:iconTint="@color/colorIconMenu"/>
+                android:icon="@drawable/ic_menu_note"/>
         </menu>
     </item>
     <item
