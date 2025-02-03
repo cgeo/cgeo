@@ -1102,6 +1102,8 @@
     <string name="init_trackappearance_summary">Wybierz kolor, nieprzezroczystość i szerokość linii dla śladu/trasy. Ślad/trasa składa się z kilku punktów nawigacji i może być załadowana przez plik śladu/trasy GPX.</string>
     <string name="init_circlecolor">Kolor obrysu koła</string>
     <string name="init_circlecolor_summary">Wybierz kolor i nieprzezroczystość dla linii okręgu. Okręgi są używane jako wizualne przedstawienie minimalnego promienia wokół skrytki lub fizycznego punktu nawigacji, gdzie nie jest dozwolona żadna inna skrytka lub fizyczny punkt nawigacji. (Dotyczy geocaching.com)</string>
+    <string name="init_geofencecolor">Kolor okręgu geofence (udzielania odpowiedzi)</string>
+    <string name="init_geofencecolor_summary">Wybierz kolor i nieprzezroczystość dla okręgu geofence. Okręgi są używane jako wizualna reprezentacja geofence zdefiniowana dla punktów nawigacji (dotyczy zwykle etapów skrytek przygodowych geocaching.com)</string>
     <string name="init_accuracycirclecolor">Kolor linii okręgu dokładności</string>
     <string name="init_accuracycirclecolor_summary">Wybierz kolor i poziom przezroczystości dla linii okręgu dokładności. Okręg dokładności jest używany jako wizualna reprezentacja dokładności sygnału lokalizacji.</string>
     <string name="init_include_found_status">Uwzględnij status „Znalezione”</string>
