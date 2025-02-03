@@ -1091,6 +1091,8 @@
     <string name="init_trackappearance_summary">Seleccioneu el color, l\'opacitat i l\'amplada de línia per a la línia de track/ruta. Un track/ruta consta de diversos waypoints i es pot carregar mitjançant un fitxer GPX.</string>
     <string name="init_circlecolor">Color de la línia del cercle</string>
     <string name="init_circlecolor_summary">Seleccioneu el color i l\'opacitat per a la línia del cercle. Els cercles s\'utilitzen com a representació visual del radi mínim al voltant d\'un catxé o d\'un punt de ruta físic.. (S\'aplica a geocaching.com)</string>
+    <string name="init_geofencecolor">Color del cercle geotanca</string>
+    <string name="init_geofencecolor_summary">Seleccioneu el color i l\'opacitat per al cercle geotanca. Els cercles s\'utilitzen com a representació visual de la tanca geogràfica definida per als punts d\'interès (normalment s\'aplica a les etapes d\'aventura de laboratori de geocaching.com)</string>
     <string name="init_accuracycirclecolor">Color línia del cercle de precisió</string>
     <string name="init_accuracycirclecolor_summary">Seleccioneu el color i l\'opacitat de la línia de cercle de precisió. El cercle de precisió s\'utilitza com a representació visual de la precisió del senyal d\'ubicació.</string>
     <string name="init_include_found_status">Inlcou l\'estat \"Trobat\"</string>
@@ -1432,6 +1434,8 @@
     <string name="cache_dialog_offline_drop_message">S\'estan eliminant el catxé de la memòria del dispositiu…</string>
     <string name="cache_menu_speechDeactivate">Deixa de parlar</string>
     <string name="cache_menu_speechActivate">Comença a parlar</string>
+    <string name="talking_disabled">Parlar deshabilitat</string>
+    <string name="talking_enabled">Parlar activat</string>
     <string name="cache_menu_navigate">Navega</string>
     <string name="cache_menu_target">Definiu com objectiu</string>
     <string name="cache_menu_navigation_drive">Navegació (conduint)</string>
