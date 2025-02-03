@@ -5,8 +5,8 @@
 - Nowość: Osobna ikona znacznika dla skrytek z ręcznie ustawionymi współrzędnymi, które są identyczne do współrzędnych oryginalnych
 - Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
 - Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
+- Nowość: Pokaż granice udzialania odpowiedzi (geofence) dla etapów skrytek lab (UnifiedMap) - włącz „Okręgi” w szybkich ustawieniach mapy, aby je pokazać
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
