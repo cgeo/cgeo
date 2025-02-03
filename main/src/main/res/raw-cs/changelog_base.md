@@ -5,8 +5,8 @@
 - Novinka: Samostatná značka ikony pro kešky s ručně nastavenými souřadnicemi shodnými se souřadnicemi v listingu
 - Novinka: Přepracované dialogové okno rychlého nastavení tras/stop
 - Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
+- Novinka: Zobrazí geofence u zastávek labek (Sjednocená mapa) - povolte "Kruhy" v rychlém nastavení na mapě pro jejich zobrazení
 
 ### Detaily kešky
 - Novinka: Možnost sdílení kešky s uživatelskými daty (souřadnice, osobní poznámka)
@@ -17,5 +17,5 @@
 - Novinka: Filtr počtu inventáře
 - Novinka: Podpora pro souřadnice ve formátu DD,DDDDDDD
 - Novinka: Zobrazení názvu naposledy použitého filtru v dialogovém okně filtru
-- New: Support opening local Wherigo files
-- Fix: Importing local map file gets random map name
+- Novinka: Podpora otevírání místních Wherigo souborů
+- Oprava: Importování místního mapového souboru získá náhodný název mapy
