@@ -2,10 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -63,7 +63,7 @@ public class MenuUtils {
 
     @SuppressLint("RestrictedApi")
     public static void tintToolbarAndOverflowIcons(@Nullable final Menu menu) {
-        if (null == menu || Settings.getBoolean(R.string.pref_debug_tinticons, false)) {
+        if (null == menu) {
             return;
         }
         // Menu might not yet have been initialized due to timing issues, only run if there's at least 1 toolbar item
@@ -83,8 +83,10 @@ public class MenuUtils {
     private static void tintMenuIcons(final Menu menu, final int actionBarColor, final int menuColor) {
         for (int i = 0; i < menu.size(); i++) {
             final MenuItemImpl item = (MenuItemImpl) menu.getItem(i);
-            if (null != item.getIcon()) {
-                item.getIcon().setTint(item.isActionButton() ? actionBarColor :  menuColor);
+            final Drawable drw = item.getIcon();
+            if (null != drw) {
+                drw.mutate().setTint(item.isActionButton() ? actionBarColor :  menuColor);
+                item.setIcon(drw);
             }
             if (null != item.getSubMenu()) {
                 tintMenuIcons(item.getSubMenu(), actionBarColor, menuColor);
