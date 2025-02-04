@@ -141,7 +141,7 @@ public class GCMap {
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
                 break;
             case NAME:
-                if (((NameGeocacheFilter) basicFilter).getStringFilter().getFilterType() != StringFilter.StringFilterType.DOES_NOT_CONTAIN){
+                if (((NameGeocacheFilter) basicFilter).getStringFilter().getFilterType() != StringFilter.StringFilterType.DOES_NOT_CONTAIN) {
                     search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
                 }
                 break;
