@@ -5,8 +5,8 @@
 - Novo: Separar marcador de ícone para caches com coordenadas definidas manualmente idênticas às coordenadas iniciais
 - Novo: Redesenhado menu de definições rápidas de percursos/rotas
 - Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
+- Novo: Mostrar perímetro de resposta para os pontos de AdventureLab (Mapa Unificado) — active "círculos" nas configurações rápidas do mapa para mostrá-los
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
@@ -16,6 +16,6 @@
 - Novo: Página de pesquisa redesenhada
 - Novo: Filtro de contagem de inventário
 - Novo: Suporte para formato de coordenadas DD,DDDDDDD
-- New: Show last used filter name in filter dialog
-- New: Support opening local Wherigo files
-- Fix: Importing local map file gets random map name
+- Novo: Mostrar o último nome de filtro usado na caixa de diálogo do filtro
+- Novo: Suporte para abrir ficheiros Wherigo locais
+- Correcção: Ao importar o ficheiro de mapa local é atribuído um nome aleatório ao mapa
