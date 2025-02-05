@@ -455,6 +455,7 @@
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter_menuitem">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
+    <string name="caches_filter_select_last">Filtro anterior</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
@@ -486,6 +487,9 @@
     <string name="list_menu_create">Criar nova lista</string>
     <string name="list_menu_drop">Remover a lista actual</string>
     <string name="list_menu_rename">Mudar o nome da lista actual</string>
+    <string name="list_menu_rename_list_prefix">Renomear prefixo da lista</string>
+    <string name="rename_from">Renomear de</string>
+    <string name="rename_to">Renomear para</string>
     <string name="list_menu_import">Importar</string>
     <string name="list_title">Escolha uma lista</string>
     <string name="lists_title">Escolha as listas</string>
@@ -503,6 +507,10 @@
     <string name="list_dialog_rename_title">Mudar o nome da lista</string>
     <string name="list_dialog_rename">Mudar o nome</string>
     <string name="list_not_available">A lista já não está disponível, a alterar para a lista geral</string>
+    <string name="list_parent_list">Lista principal</string>
+    <string name="list_name">Nome da lista</string>
+    <string name="list_confirm_rename">Renomear de \"%1$s\" para \"%2$s\"\n%3$s\nEsta acção não pode ser anulada!</string>
+    <string name="list_confirm_no_hierarchy">\n Nenhuma \":\" encontrada — todas as listas correspondentes serão transformadas em listas de nível superior, ou principais\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avançado</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Mudar para básico</string>
@@ -1082,6 +1090,8 @@
     <string name="init_trackappearance_summary">Seleccionar a cor, a opacidade e largura para a linha de percurso/rota. Um(a) percurso/rota é constituído(a) por vários pontos adicionais e pode ser carregado(a) através de um ficheiro GPX de percurso/rota.</string>
     <string name="init_circlecolor">Cor da linha do círculo</string>
     <string name="init_circlecolor_summary">Seleccionar a cor e opacidade para a linha do círculo. Os círculos são usados como uma representação visual para o raio mínimo em torno de uma cache ou um ponto adicional, onde nenhuma outra cache ou ponto adicional são permitidos. (Aplica-se a geocaching.com)</string>
+    <string name="init_geofencecolor">Cor do círculo do perímetro de resposta</string>
+    <string name="init_geofencecolor_summary">Seleccione a cor e a opacidade para o círculo de perímetro. Os círculos são usados como uma representação visual para os perímetros definidos para pontos de passagem (geralmente aplica-se aos pontos de AdventureLab do geocaching.com)</string>
     <string name="init_accuracycirclecolor">Cor da linha do círculo de precisão</string>
     <string name="init_accuracycirclecolor_summary">Seleccionar a cor e a opacidade para o círculo da precisão. Este círculo é utilizado para representar a precisão do sinal de localização.</string>
     <string name="init_include_found_status">Incluir o estado \"Encontrado\"</string>
@@ -1423,6 +1433,8 @@
     <string name="cache_dialog_offline_drop_message">A remover cache do armazenamento do dispositivo…</string>
     <string name="cache_menu_speechDeactivate">Parar de falar</string>
     <string name="cache_menu_speechActivate">Começar a falar</string>
+    <string name="talking_disabled">Fala desactivada</string>
+    <string name="talking_enabled">Fala activada</string>
     <string name="cache_menu_navigate">Navegar</string>
     <string name="cache_menu_target">Definir como destino</string>
     <string name="cache_menu_navigation_drive">Navegação (Conduzir)</string>
