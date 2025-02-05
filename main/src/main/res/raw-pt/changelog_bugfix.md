@@ -1,4 +1,4 @@
 #
-- Fix: Wherigo: Handle zones with invalid/too-close coordinates
-- Fix: c:geo tries to import local ".map" files as GPX
-- Fix: Edited user notes from popup sometimes get lost
+- Correcção: Wherigo: Suporte de zonas com coordenadas inválidas/muito próximas
+- Correção: c:geo tenta importar ficheiros locais ".map" como GPX
+- Correcção: Notas de utilizador editadas do popup, às vezes são perdidas
