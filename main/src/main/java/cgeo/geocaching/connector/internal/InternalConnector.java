@@ -273,7 +273,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         return geocode;
     }
 
-    private static String generateRandomId() {
+    public static String generateRandomId() {
         final Random random = new Random();
         final StringBuilder sb = new StringBuilder(GEOCODE_LENGTH);
         for (int i = 0; i < GEOCODE_LENGTH; i++) {
