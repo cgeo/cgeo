@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.files.InvalidXMLCharacterFilterReader;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 
@@ -95,8 +96,11 @@ public class MapDownloaderOSMPaws extends AbstractMapDownloader {
 
     @Override
     protected String toVisibleFilename(final String filename) {
-        final int posInfix = filename.indexOf(".map");
-        return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix), "");
+        if (Settings.getMapDownloaderAutoRename()) {
+            final int posInfix = filename.indexOf(".map");
+            return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix), "");
+        }
+        return filename;
     }
 
     @Override

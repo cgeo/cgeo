@@ -1318,6 +1318,10 @@ public class Settings {
         return getBoolean(R.string.pref_mapDownloadsKeepTemporaryFiles, false);
     }
 
+    public static boolean getMapDownloaderAutoRename() {
+        return getBoolean(R.string.pref_autorenameDownloads, true);
+    }
+
     public static boolean dbNeedsCleanup() {
         return needsIntervalAction(R.string.pref_dbCleanupLastCheck, 24, () -> setDbCleanupLastCheck(false));
     }
