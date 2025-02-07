@@ -70,7 +70,7 @@ public class CompanionFileUtils {
                 prop.setProperty(PROP_LOCALFILE, localFilename);
                 prop.setProperty(PROP_DISPLAYNAME, displayName);
 
-                prop.store(output, null);
+                prop.store(output, "set displayname property to a name of your choice to change name in list. Charset is ISO-8859-1, use \\u#### for Unicode characters");
             } catch (IOException io) {
                 // ignore
             }

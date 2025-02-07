@@ -2,6 +2,7 @@ package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
@@ -63,8 +64,11 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
 
     @Override
     protected String toVisibleFilename(final String filename) {
-        final int posInfix = filename.indexOf("_oam.osm.");
-        return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix) + filename.substring(posInfix + 8), " (OAM)");
+        if (Settings.getMapDownloaderAutoRename()) {
+            final int posInfix = filename.indexOf("_oam.osm.");
+            return toInfixedString(posInfix == -1 ? filename : filename.substring(0, posInfix) + filename.substring(posInfix + 8), " (OAM)");
+        }
+        return filename;
     }
 
     @Override
