@@ -7,6 +7,7 @@
 - Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
 - Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
 - Nowość: Pokaż granice udzialania odpowiedzi (geofence) dla etapów skrytek lab (UnifiedMap) - włącz „Okręgi” w szybkich ustawieniach mapy, aby je pokazać
+- Nowość: Opcja ustawiania okręgów z indywidualnym promieniem do punktów orientacyjnych („Geofence” w menu kontekstowym)
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
@@ -19,3 +20,5 @@
 - Nowość: Pokaż ostatnio użytą nazwę filtra w oknie dialogowym
 - Nowość: Obsługa otwierania lokalnych plików Wherigo
 - Naprawiono: Importowanie lokalnego pliku mapy przydzielało losową nazwę mapy
+- Naprawiono: Problemy z kolorami ikon menu w trybie jasnym
+- Naprawiono: Ustawienie limitu szukania w pobliżu nie działało poprawnie dla małych wartości
