@@ -7,6 +7,7 @@
 - Novinka: Dlouhým klepnutím na ikonu výběru mapy vyberete předchozího poskytovatele dlaždic (Sjednocená mapa)
 - Novinka: Povolit zobrazení názvu offline mapy v doprovodném souboru (Sjednocená mapa)
 - Novinka: Zobrazí geofence u zastávek labek (Sjednocená mapa) - povolte "Kruhy" v rychlém nastavení na mapě pro jejich zobrazení
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 
 ### Detaily kešky
 - Novinka: Možnost sdílení kešky s uživatelskými daty (souřadnice, osobní poznámka)
@@ -19,3 +20,5 @@
 - Novinka: Zobrazení názvu naposledy použitého filtru v dialogovém okně filtru
 - Novinka: Podpora otevírání místních Wherigo souborů
 - Oprava: Importování místního mapového souboru získá náhodný název mapy
+- Fix: Color issues with menu icons in light mode
+- Fix: Nearby distance limit setting not working properly for small values
