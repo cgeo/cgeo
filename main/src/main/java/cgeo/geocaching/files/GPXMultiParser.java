@@ -40,8 +40,11 @@ public class GPXMultiParser {
         parser.add(new GPXMultiParserTRK());
 
         for (GPXMultiParserBase p : parser) {
-            for (XmlNode node : gpx.getAsList(p.getNodeName())) {
-                p.addNode(node);
+            final List<XmlNode> nodes = gpx.getAsList(p.getNodeName());
+            if (nodes != null) {
+                for (XmlNode node : nodes) {
+                    p.addNode(node);
+                }
             }
         }
 

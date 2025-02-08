@@ -167,7 +167,17 @@ public class GPXMultiParserWPT extends GPXMultiParserBase {
             cache.setDNF(false);
         }
 
-
+        // waypoint.url and waypoint.urlname (name for waymarks)
+        XmlNode.forEach(node.getAsList("url"), this::setUrl);
+        XmlNode.forEach(node.getAsList("urlname"), this::setUrlName);
+        try {
+            setUrl(node.get("link").getAttribute("href"));
+        } catch (NullPointerException ignore) {
+            // ignore
+        }
+        // only to support other formats, standard is href as attribute
+        XmlNode.forEach(node.getAsList("href"), this::setUrl);
+        XmlNode.forEach(node.getAsList("text"), this::setUrlName);
 
 
 
@@ -180,6 +190,34 @@ public class GPXMultiParserWPT extends GPXMultiParserBase {
 
 
 
+
+    protected void setUrl(final String url) {
+        // try to find guid somewhere else
+        if (StringUtils.isBlank(cache.getGuid()) && url != null) {
+            final MatcherWrapper matcherGuid = new MatcherWrapper(PATTERN_GUID, url);
+            if (matcherGuid.matches()) {
+                final String guid = matcherGuid.group(1);
+                if (StringUtils.isNotBlank(guid)) {
+                    cache.setGuid(guid);
+                }
+            }
+        }
+
+        // try to find geocode somewhere else
+        if (StringUtils.isBlank(cache.getGeocode()) && url != null) {
+            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
+            if (matcherCode.matches()) {
+                final String geocode = matcherCode.group(1);
+                cache.setGeocode(geocode);
+            }
+        }
+    }
+
+    protected void setUrlName(final String urlName) {
+        if (StringUtils.isNotBlank(urlName) && StringUtils.startsWith(cache.getGeocode(), "WM") && cache.getName().equals(cache.getGeocode())) {
+            cache.setName(StringUtils.trim(urlName));
+        }
+    }
 
     /**
      * reset all fields that are used to store cache fields over the duration of parsing a single cache

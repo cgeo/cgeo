@@ -161,6 +161,18 @@ public class XmlNode {
         }
     }
 
+    public static void forEach(@Nullable final List<XmlNode> nodes, final Consumer<String> action) {
+        if (nodes == null || nodes.isEmpty()) {
+            return;
+        }
+        for (XmlNode node : nodes) {
+            final String temp = node.getValue();
+            if (temp != null) {
+                action.accept(temp);
+            }
+        }
+    }
+
     @NonNull
     @Override
     public String toString() {

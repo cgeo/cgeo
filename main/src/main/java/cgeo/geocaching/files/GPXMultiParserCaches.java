@@ -24,7 +24,6 @@ import cgeo.geocaching.models.WaypointUserNoteCombiner;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
@@ -44,7 +43,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,10 +55,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
     private static final SynchronizedDateFormat formatSimpleNoTime = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US); // 2010-04-20
     private static final SynchronizedDateFormat formatSimpleZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
     private static final SynchronizedDateFormat formatTimezone = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US); // 2010-04-20T01:01:03-04:00
-    private static final Pattern PATTERN_GEOCODE = Pattern.compile("[0-9A-Z]{5,}");
-    private static final Pattern PATTERN_GUID = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
-    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
     private Geocache cache;
     private String name = null;
     private String type = null;
@@ -80,23 +74,10 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
     private int cacheAssignedEmoji = 0;
     private List<LogEntry> logs = new ArrayList<>();
 
-    /**
-     * original longitude in case of modified coordinates
-     */
     @Nullable protected String originalLon;
-    /**
-     * original latitude in case of modified coordinates
-     */
     @Nullable protected String originalLat;
-    /**
-     * Unfortunately we can only detect terracaching child waypoints by remembering the state of the parent
-     */
     private boolean terraChildWaypoint = false;
     private boolean logPasswordRequired = false;
-
-    /**
-     * prefix of the long description. used for adding alternative geocodes.
-     */
     private String descriptionPrefix = "";
     // ---------------------------------------------------------------------------------------------
 
@@ -297,9 +278,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
 
         // waypoint.name
         // (done)
-
-        // waypoint.url and waypoint.urlname (name for waymarks)
-        registerUrlAndUrlName(waypoint);
 
         // for GPX 1.0, cache info comes from waypoint node (so called private children)
         // for GPX 1.1 from extensions node
@@ -791,28 +769,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
         return version11 ? waypoint.getChild(namespace, "extensions") : waypoint;
     };
 
-    protected void registerUrlAndUrlName(@NonNull final Element element) {
-        if (version11) {
-            final Element linkElement = element.getChild(namespace, "link");
-            linkElement.setStartElementListener(attrs -> {
-                try {
-                    if (attrs.getIndex("href") > -1) {
-                        setUrl(attrs.getValue("href"));
-                    }
-
-                } catch (final RuntimeException e) {
-                    Log.w("Failed to parse link attributes", e);
-                }
-            });
-            // only to support other formats, standard is href as attribute
-            linkElement.getChild(namespace, "href").setEndTextElementListener(this::setUrl);
-            linkElement.getChild(namespace, "text").setEndTextElementListener(this::setUrlName);
-        } else {
-            element.getChild(namespace, "url").setEndTextElementListener(this::setUrl);
-            element.getChild(namespace, "urlname").setEndTextElementListener(this::setUrlName);
-        }
-    };
-
     /**
      * create a cache note from the UserData1 to UserData4 fields supported by GSAK
      */
@@ -869,34 +825,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
         return cacheForWaypoint;
     }
 
-    protected void setUrl(final String url) {
-        // try to find guid somewhere else
-        if (StringUtils.isBlank(cache.getGuid()) && url != null) {
-            final MatcherWrapper matcherGuid = new MatcherWrapper(PATTERN_GUID, url);
-            if (matcherGuid.matches()) {
-                final String guid = matcherGuid.group(1);
-                if (StringUtils.isNotBlank(guid)) {
-                    cache.setGuid(guid);
-                }
-            }
-        }
-
-        // try to find geocode somewhere else
-        if (StringUtils.isBlank(cache.getGeocode()) && url != null) {
-            final MatcherWrapper matcherCode = new MatcherWrapper(PATTERN_URL_GEOCODE, url);
-            if (matcherCode.matches()) {
-                final String geocode = matcherCode.group(1);
-                cache.setGeocode(geocode);
-            }
-        }
-    }
-
-    protected void setUrlName(final String urlName) {
-        if (StringUtils.isNotBlank(urlName) && StringUtils.startsWith(cache.getGeocode(), "WM") && cache.getName().equals(cache.getGeocode())) {
-            cache.setName(StringUtils.trim(urlName));
-        }
-    }
-
     //@Override
     public void onParsingDone(@NonNull final Collection<Object> result) {
         result.addAll(DataStore.loadCaches(this.result, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL)));
@@ -921,4 +849,9 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
         return "";
     }
 
+    protected void setUrl(final String url) {
+    }
+
+    protected void setUrlName(final String urlName) {
+    }
 }
