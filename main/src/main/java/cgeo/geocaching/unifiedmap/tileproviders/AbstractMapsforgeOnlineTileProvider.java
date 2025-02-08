@@ -74,7 +74,9 @@ public class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTilePr
 
     @Override
     public void onPause() {
-        ((TileDownloadLayer) tileLayer).onPause();
+        if (tileLayer != null) {
+            ((TileDownloadLayer) tileLayer).onPause();
+        }
         super.onPause();
     }
 
