@@ -1649,6 +1649,8 @@
     <string name="waypoint_my_coordinates_accuracy">Mijn coördinaten (±%s)</string>
     <string name="waypoint_name">Naam</string>
     <string name="waypoint_edit">Bewerken</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Stel de straal in voor geofence (in meters)</string>
     <string name="waypoint_copy_coordinates">Coördinaten kopiëren</string>
     <string name="waypoint_clear_coordinates">Coördinaten wissen</string>
     <string name="waypoint_delete">Verwijderen</string>
