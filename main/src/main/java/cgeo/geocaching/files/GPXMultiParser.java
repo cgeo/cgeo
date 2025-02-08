@@ -30,7 +30,7 @@ public class GPXMultiParser {
         final List<GPXMultiParserBase> parser = new ArrayList<>();
         // parser.add(new GPXMultiParserCaches(root, namespace, version11, StoredList.STANDARD_LIST_ID, null)); // @todo: listId
         parser.add(new GPXMultiParserRoutes());
-        // parser.add(new GPXMultiParserTracks(root, namespace));
+        parser.add(new GPXMultiParserTracks());
 
         final XmlPullParser xpp = XmlUtils.createParser(new InputStreamReader(stream, StandardCharsets.UTF_8), true);
         while (xpp.next() != XmlPullParser.END_DOCUMENT) {
