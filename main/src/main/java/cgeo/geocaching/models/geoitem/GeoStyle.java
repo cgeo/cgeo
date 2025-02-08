@@ -117,6 +117,23 @@ public class GeoStyle implements Parcelable {
         return new Builder();
     }
 
+    //helpers
+
+    public static GeoStyle solid(final int color, final float width) {
+        return GeoStyle.builder()
+            .setStrokeColor(color)
+            .setFillColor(color)
+            .setStrokeWidth(width).build();
+    }
+
+    /** creates a style where fill color is a transparent version of stroke color */
+    public static GeoStyle transparentFill(final int strokeColor, final int fillTransparency, final float width) {
+        return GeoStyle.builder()
+            .setStrokeColor(strokeColor)
+            .setFillColor(Color.argb(fillTransparency, Color.red(strokeColor), Color.green(strokeColor), Color.blue(strokeColor)))
+            .setStrokeWidth(width).build();
+    }
+
     //equals/hashCode
 
     @Override

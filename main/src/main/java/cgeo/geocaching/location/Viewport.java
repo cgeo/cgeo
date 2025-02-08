@@ -4,6 +4,9 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.ICoordinate;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.models.geoitem.GeoItem;
+import cgeo.geocaching.models.geoitem.GeoPrimitive;
+import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 
@@ -16,7 +19,9 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -97,6 +102,15 @@ public final class Viewport implements Parcelable {
         JsonUtils.set(node, "bottomLeft", bottomLeft.toJson());
         JsonUtils.set(node, "topRight", topRight.toJson());
         return node;
+    }
+
+    @Nullable
+    public GeoItem toGeoItem(final GeoStyle style, final int zLevel) {
+        if (!isValid(this)) {
+            return null;
+        }
+        final List<Geopoint> points = Arrays.asList(getBottomRight(), bottomLeft, getTopLeft(), topRight);
+        return GeoPrimitive.createPolygon(points, style).buildUpon().setZLevel(zLevel).build();
     }
 
     public double getLatitudeMin() {
@@ -300,14 +314,22 @@ public final class Viewport implements Parcelable {
     }
 
     public static Viewport intersect(final Iterable<Viewport> vps) {
-        if (vps == null) {
+        return intersect(vps, vp -> vp);
+    }
+
+    public static <T> Viewport intersect(final Iterable<T> source, final Function<T, Viewport> mapper) {
+        if (source == null) {
             return null;
         }
         int maxLowerLon = Integer.MIN_VALUE;
         int maxLowerLat = Integer.MIN_VALUE;
         int minHigherLon = Integer.MAX_VALUE;
         int minHigherLat = Integer.MAX_VALUE;
-        for (Viewport vp : vps) {
+        for (T src : source) {
+            if (src == null) {
+                return null;
+            }
+            final Viewport vp = mapper.apply(src);
             if (vp == null) {
                 return null;
             }

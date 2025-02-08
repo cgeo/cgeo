@@ -4,21 +4,20 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -43,35 +42,43 @@ public class LiveMapGeocacheLoader {
     public static final class LiveDataState {
         public final LoadState loadState;
         public final Viewport cachedViewport;
+        public final Map<String, ConnectorState> connectorStates;
+        public final Set<String> connectorInError;
 
-        public final List<ConnectorState> connectors = new ArrayList<>();
-
-        LiveDataState(final LoadState state, final Viewport cachedViewport) {
+        LiveDataState(final LoadState state, final Viewport cachedViewport, final Map<String, ConnectorState> connectorStates) {
             this.loadState = state;
             this.cachedViewport = cachedViewport;
+            this.connectorStates = Collections.unmodifiableMap(connectorStates == null ? Collections.emptyMap() : connectorStates);
+            this.connectorInError = this.connectorStates.entrySet().stream()
+                .filter(e -> e.getValue().isError()).map(Map.Entry::getKey).collect(Collectors.toSet());
         }
 
-        void addAll(final Collection<ConnectorState> connectorStates) {
-            this.connectors.addAll(connectorStates);
+        public boolean isError() {
+            return !this.connectorInError.isEmpty();
         }
+
+        public boolean isPartial(final Viewport viewport) {
+            return this.cachedViewport != null && !cachedViewport.includes(viewport);
+        }
+
     }
 
 
     public static final class ConnectorState {
         public final String connectorName;
         public final StatusCode statusCode;
-        public final boolean isPartial;
+        public final Viewport viewport;
         public final int countOriginal;
         public final int countInDb;
         public final int countFiltered;
         public final long duration;
         public final String message;
 
-        ConnectorState(final String connectorName, final StatusCode statusCode, final boolean isPartial,
+        ConnectorState(final String connectorName, final StatusCode statusCode, final Viewport viewport,
                        final int countOriginal, final int countInDb, final int countFiltered, final long duration, final String message) {
             this.connectorName = connectorName;
             this.statusCode = statusCode;
-            this.isPartial = isPartial;
+            this.viewport = viewport;
             this.countOriginal = countOriginal;
             this.countInDb = countInDb;
             this.countFiltered = countFiltered;
@@ -83,10 +90,14 @@ public class LiveMapGeocacheLoader {
             return statusCode != StatusCode.NO_ERROR;
         }
 
+        public boolean isPartialFor(final Viewport vp) {
+            return vp != null && (viewport == null || !viewport.includes(vp));
+        }
+
         @NonNull
         @Override
         public String toString() {
-            return "[" + connectorName + ":" + statusCode + ",p=" + isPartial + ", #:" + countOriginal + "," + countInDb + "," + countFiltered + ";" + duration + "ms;msg=" + message + "]";
+            return "[" + connectorName + ":" + statusCode + ",v=" + viewport + ", #:" + countOriginal + "," + countInDb + "," + countFiltered + ";" + duration + "ms;msg=" + message + "]";
         }
 
         @NonNull
@@ -110,6 +121,10 @@ public class LiveMapGeocacheLoader {
         private long cachedResultTs;
         private GeocacheFilter cachedResultFilter;
         private Viewport cachedResultAvailableViewport;
+        private boolean cachedResultWasComplete = true;
+        private Geopoint cachedResultCenter;
+
+        private Map<String, ConnectorState> lastConnectorStates = Collections.emptyMap();
 
         Action(final LiveMapGeocacheLoader loader, final Consumer<LiveDataState> onStateChange, final Consumer<Set<Geocache>> onResult) {
             this.onStateChange = onStateChange;
@@ -142,15 +157,28 @@ public class LiveMapGeocacheLoader {
                         return;
                     }
 
-                    final boolean cacheIsValidForFilter = cachedResultAvailableViewport != null && GeocacheFilter.filtersSame(cachedResultFilter, filter) && (System.currentTimeMillis() - cachedResultTs) < CACHE_EXPIRY;
+                    final boolean cacheIsValidForFilter = GeocacheFilter.filtersSame(cachedResultFilter, filter) && (System.currentTimeMillis() - cachedResultTs) < CACHE_EXPIRY;
 
                     //quick exit on unconditional cache hit
-                    if (cacheIsValidForFilter && cachedResultAvailableViewport.includes(viewport)) {
+                    if (cacheIsValidForFilter && cachedResultAvailableViewport != null && cachedResultAvailableViewport.includes(viewport)) {
                         Log.iForce(LOGPRAEFIX + "CACHE HIT " + logParams);
                         setState(LoadState.STOPPED);
                         this.loader.dirtyTime = -1;
                         return;
                     }
+
+                    //quick exit on previous PARTIAL or ERROR result if viewport hasn't moved much
+                    if (cacheIsValidForFilter && !cachedResultWasComplete && cachedResultCenter != null) {
+                        final float distanceCachedCall = viewport.getCenter().distanceTo(cachedResultCenter);
+                        final float distanceCenterCorner = viewport.getCenter().distanceTo(viewport.bottomLeft);
+                        if (distanceCachedCall <= distanceCenterCorner * 0.3) {
+                            Log.iForce(LOGPRAEFIX + "NO RELOAD AFTER NONCOMPLETE RESULT AND TOO CLOSE TO PREVIOUS " + logParams);
+                            setState(LoadState.STOPPED);
+                            this.loader.dirtyTime = -1;
+                            return;
+                        }
+                    }
+
 
                     //if request is real check if its time to really request
                     final long requestAge = System.currentTimeMillis() - this.loader.dirtyTime;
@@ -167,11 +195,11 @@ public class LiveMapGeocacheLoader {
                 setState(LoadState.RUNNING);
 
 
-                final List<ConnectorState> stateData = new ArrayList<>();
-                final Map<String, Viewport> cachedResultViewportsPerConnector = new HashMap<>();
+                final Map<String, ConnectorState> stateData = Collections.synchronizedMap(new HashMap<>());
                 // DO ONLINE REQUEST retrieving live caches for x times the requested size (to fill up cache)
                 final Viewport retrievalViewport = viewport.resize(3.0);
                 final long startTs = System.currentTimeMillis();
+                final boolean[] isOverallComplete = new boolean[] { true };
                 ConnectorFactory.searchByViewport(retrievalViewport, filter, (c, sr) -> {
                     final long duration = System.currentTimeMillis() - startTs;
                     //handle and send cache results for one connector
@@ -190,22 +218,23 @@ public class LiveMapGeocacheLoader {
                     final Viewport connectorViewport;
                     if (errorCode != StatusCode.NO_ERROR) { // || isPartial && !connector supports centered-results!!!
                         connectorViewport = null;
+                        isOverallComplete[0] = false;
                     } else if (isPartial) {
                        connectorViewport = Viewport.containing(result);
+                        isOverallComplete[0] = false;
                     } else {
                         connectorViewport = retrievalViewport;
                     }
-                    cachedResultViewportsPerConnector.put(c.getName(), connectorViewport);
-                    final boolean isPartialForUser = connectorViewport == null || !connectorViewport.includes(viewport);
                     //set state data
-                    stateData.add(new ConnectorState(c.getName(), errorCode, isPartialForUser, countOriginal, countInDb, countFiltered, duration, null));
+                    stateData.put(c.getName(), new ConnectorState(c.getName(), errorCode, connectorViewport, countOriginal, countInDb, countFiltered, duration, null));
                 });
 
                 //adjust result cache. cachedResultViewportOverall will be null on intersect if one connector failed
-                this.cachedResultAvailableViewport = Viewport.intersect(cachedResultViewportsPerConnector.values());
-                final boolean keepCache = this.cachedResultAvailableViewport != null;
-                this.cachedResultFilter = keepCache ? filter : null;
-                this.cachedResultTs = keepCache ? System.currentTimeMillis() : 0;
+                this.cachedResultAvailableViewport = Viewport.intersect(stateData.values(), sd -> sd.viewport);
+                this.cachedResultFilter = filter;
+                this.cachedResultTs = System.currentTimeMillis();
+                this.cachedResultCenter = viewport.getCenter();
+                this.cachedResultWasComplete = isOverallComplete[0];
 
                 //do status update
                 setState(LoadState.STOPPED, stateData);
@@ -214,8 +243,8 @@ public class LiveMapGeocacheLoader {
 
             } catch (Exception e) {
                 Log.e(LOGPRAEFIX + "UNEXPECTED ERROR" + logParams, e);
-                setState(LoadState.STOPPED, Collections.singletonList(
-                    new ConnectorState("Overall", StatusCode.UNKNOWN_ERROR, false, 0, 0, 0, -1, "Exception: " + e.getMessage())));
+                setState(LoadState.STOPPED, Collections.singletonMap("Overall",
+                    new ConnectorState("Overall", StatusCode.UNKNOWN_ERROR, null, 0, 0, 0, -1, "Exception: " + e.getMessage())));
             }
             //if we have just done an online request, ensure that there's a grace period for the next
             synchronized (loader) {
@@ -229,11 +258,11 @@ public class LiveMapGeocacheLoader {
             setState(newState, null);
         }
 
-        private void setState(final LoadState newState, final List<ConnectorState> connStates) {
-            final LiveDataState ldState = new LiveDataState(newState, this.cachedResultAvailableViewport);
+        private void setState(final LoadState newState, final Map<String, ConnectorState> connStates) {
             if (connStates != null) {
-                ldState.addAll(connStates);
+                this.lastConnectorStates = connStates;
             }
+            final LiveDataState ldState = new LiveDataState(newState, this.cachedResultAvailableViewport, this.lastConnectorStates);
             Log.iForce(LOGPRAEFIX + "set state to " + ldState);
             onStateChange.accept(ldState);
         }
