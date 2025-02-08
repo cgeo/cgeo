@@ -7,6 +7,7 @@
 - Novo: Toque longo no ícone de seleção de mapa para selecionar o provedor de blocos anterior (Mapa Unificado)
 - Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
 - Novo: Mostrar perímetro de resposta para os pontos de AdventureLab (Mapa Unificado) — active "círculos" nas configurações rápidas do mapa para mostrá-los
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
@@ -19,3 +20,5 @@
 - Novo: Mostrar o último nome de filtro usado na caixa de diálogo do filtro
 - Novo: Suporte para abrir ficheiros Wherigo locais
 - Correcção: Ao importar o ficheiro de mapa local é atribuído um nome aleatório ao mapa
+- Fix: Color issues with menu icons in light mode
+- Fix: Nearby distance limit setting not working properly for small values
