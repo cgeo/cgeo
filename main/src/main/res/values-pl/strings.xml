@@ -1679,6 +1679,8 @@
     <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
     <string name="waypoint_name">Nazwa</string>
     <string name="waypoint_edit">Edytuj</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Ustaw promień dla geofence (w metrach)</string>
     <string name="waypoint_copy_coordinates">Kopiuj współrzędne</string>
     <string name="waypoint_clear_coordinates">Wyczyść współrzędne</string>
     <string name="waypoint_delete">Usuń</string>
