@@ -5,7 +5,6 @@ import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
 import cgeo.geocaching.files.GPXMultiParser;
-import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -24,9 +23,12 @@ import androidx.core.content.ContextCompat;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
+import org.xmlpull.v1.XmlPullParserException;
 
 public class HandleLocalFilesActivity extends AbstractActivity {
 
@@ -53,12 +55,14 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                     Collection<Object> result;
                     try {
                         result = parser.doParsing(in, true);
-                    } catch (ParserException ignore) {
+                    } catch (XmlPullParserException ignore) {
                         result = parser.doParsing(in, false);
                     }
                     Log.e("returned from parsing, size=" + result.size());
-                } catch (IOException | ParserException e) {
-                    Log.e("parsing exception: " + e.getMessage());
+                } catch (IOException | XmlPullParserException e) {
+                    final StringWriter sw = new StringWriter();
+                    e.printStackTrace(new PrintWriter(sw));
+                    Log.e("parsing exception: " + e.getMessage() + "\n" + sw);
                 }
                 // depending on result different actions can be done
                 // (either automatically or after asking the user):

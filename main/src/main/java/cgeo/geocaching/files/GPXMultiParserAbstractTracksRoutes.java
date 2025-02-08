@@ -12,7 +12,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 
-public abstract class GPXMultiParserAbstractTracksRoutes implements IGPXMultiParser {
+public abstract class GPXMultiParserAbstractTracksRoutes extends GPXMultiParserBase {
 
     // temporary variables
     protected ArrayList<Geopoint> temp;
@@ -28,6 +28,7 @@ public abstract class GPXMultiParserAbstractTracksRoutes implements IGPXMultiPar
     }
 
     protected void setNameAndLatLonParsers() {
+/*
         points.getChild(namespace, "name").setEndTextElementListener(result::setName);
 
         point.setStartElementListener(attrs -> {
@@ -40,6 +41,7 @@ public abstract class GPXMultiParserAbstractTracksRoutes implements IGPXMultiPar
             }
         });
         point.getChild(namespace, "ele").setEndTextElementListener(el -> tempElevation.add(Float.parseFloat(el)));
+*/
     }
 
     @Override

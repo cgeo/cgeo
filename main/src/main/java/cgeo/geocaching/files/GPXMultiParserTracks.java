@@ -8,9 +8,10 @@ import android.sax.Element;
 
 import androidx.annotation.NonNull;
 
-public class GPXMultiParserTracks extends GPXMultiParserAbstractTracksRoutes implements IGPXMultiParser {
+public class GPXMultiParserTracks extends GPXMultiParser {
 
     GPXMultiParserTracks(@NonNull final Element root, @NonNull final String namespace) {
+/*
         result = new Route(false);
         this.namespace = namespace;
 
@@ -27,6 +28,7 @@ public class GPXMultiParserTracks extends GPXMultiParserAbstractTracksRoutes imp
                 }
             });
         });
+*/
     }
 
 }

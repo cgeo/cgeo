@@ -50,7 +50,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles implements IGPXMultiParser {
+public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implements GPXMultiParserBase */ {
 
     private static final SynchronizedDateFormat formatSimple = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US); // 2010-04-20T07:00:00
     private static final SynchronizedDateFormat formatSimpleNoTime = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US); // 2010-04-20
@@ -1086,7 +1086,7 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles implements
         }
     }
 
-    @Override
+    //@Override
     public void onParsingDone(@NonNull final Collection<Object> result) {
         result.addAll(DataStore.loadCaches(this.result, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL)));
     }

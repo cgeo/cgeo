@@ -1,14 +1,20 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
-
-import android.sax.Element;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.xml.XmlNode;
 
 import androidx.annotation.NonNull;
 
-public class GPXMultiParserRoutes extends GPXMultiParserAbstractTracksRoutes implements IGPXMultiParser {
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.apache.commons.lang3.StringUtils;
+
+public class GPXMultiParserRoutes extends GPXMultiParserBase {
 
     /*
         @todo: IndividualRoute parser is slightly different:
@@ -17,7 +23,10 @@ public class GPXMultiParserRoutes extends GPXMultiParserAbstractTracksRoutes imp
         - does not use setNameAndLatLonParsers() (and does not recognize elevation)
      */
 
-    GPXMultiParserRoutes(@NonNull final Element root, @NonNull final String namespace) {
+    private final ArrayList<Route> result = new ArrayList<>();
+
+    GPXMultiParserRoutes(@NonNull final String namespace) {
+        /*
         result = new Route(true);
         this.namespace = namespace;
 
@@ -33,6 +42,34 @@ public class GPXMultiParserRoutes extends GPXMultiParserAbstractTracksRoutes imp
                 }
             });
         });
+        */
     }
 
+    @Override
+    public boolean handlesNode(final String node) {
+        return StringUtils.equalsIgnoreCase(node, "rte");
+    }
+
+    @Override
+    void addNode(@NonNull final XmlNode node) {
+        final Route route = new Route(true);
+        final ArrayList<Geopoint> points = new ArrayList<>();
+        for (XmlNode routePoint : node.getAsList("rtept")) {
+            final Double lat = routePoint.getAttributeAsDouble("lat");
+            final Double lon = routePoint.getAttributeAsDouble("lon");
+            Log.e("rtept (lat=" + lat + ", lon=" + lon + ")");
+            if (lat != null && lon != null) {
+                points.add(new Geopoint(lat, lon));
+            }
+        }
+        if (!points.isEmpty()) {
+            route.add(new RouteSegment(new RouteItem(points.get(0)), points, true));
+        }
+        result.add(route);
+    }
+
+    @Override
+    void onParsingDone(@NonNull final Collection<Object> result) {
+        result.addAll(this.result);
+    }
 }

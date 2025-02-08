@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.xml;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,6 +114,22 @@ public class XmlNode {
 
     public String getValue() {
         return value;
+    }
+
+    @Nullable
+    public String getAttribute(final String name) {
+        final XmlNode temp = get(ATTRIBUTE_PRAEFIX + name);
+        return temp == null ? null : temp.getValue();
+    }
+
+    @Nullable
+    public Double getAttributeAsDouble(final String name) {
+        final String temp = getAttribute(name);
+        try {
+            return temp == null ? null : Double.parseDouble(temp);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     @SuppressWarnings("unchecked")
