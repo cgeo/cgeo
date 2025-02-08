@@ -1641,6 +1641,8 @@
     <string name="waypoint_my_coordinates_accuracy">Mina koordinater (±%s)</string>
     <string name="waypoint_name">Namn</string>
     <string name="waypoint_edit">Redigera</string>
+    <string name="waypoint_geofence">Geofence</string>
+    <string name="waypoint_geofence_summary">Ange radie för geofence (i meter)</string>
     <string name="waypoint_copy_coordinates">Kopiera koordinater</string>
     <string name="waypoint_clear_coordinates">Rensa koordinater</string>
     <string name="waypoint_delete">Ta bort</string>
