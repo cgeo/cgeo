@@ -7,6 +7,7 @@
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
 - Nyhet: Visa geofences för labsteg (UnifiedMap) - aktivera "Cirklar" i snabbinställningar på kartan för att visa dem
+- Ny: Alternativ för att ställa in cirklar med individuell radie till vägpunkter ("geofence" alternativ i sammanhangsmeny)
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
@@ -19,3 +20,5 @@
 - Nytt: Visa senast använda filternamn i filterdialogen
 - Nyhet: Stöd för att öppna lokala Wherigo-filer
 - Fix: Import av lokal kartfil får slumpmässigt kartnamn
+- Fix: Färg-problem med menyikoner i ljust läge
+- Fix: Avståndsgränsen i närheten fungerar inte korrekt för små värden
