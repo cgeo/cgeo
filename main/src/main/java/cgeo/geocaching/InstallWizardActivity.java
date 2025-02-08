@@ -439,7 +439,13 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (!ContentStorageActivityHelper.baseFolderIsSet()) {
             prepareFolderDefaultValues();
-            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.BASE);
+            reportOnMissingHandler(this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.BASE));
+        }
+    }
+
+    private void reportOnMissingHandler(final boolean success) {
+        if (!success) {
+            contentStorageActivityHelper.reportMissingHandler();
         }
     }
 
@@ -461,7 +467,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (mapFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAPS);
+            reportOnMissingHandler(this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAPS));
         }
     }
 
@@ -473,7 +479,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (mapThemeFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES);
+            reportOnMissingHandler(this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.OFFLINE_MAP_THEMES));
         }
     }
 
@@ -485,7 +491,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (gpxFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.GPX);
+            reportOnMissingHandler(this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.GPX));
         }
     }
 
@@ -497,7 +503,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         forceSkipButton = false;
         if (broutertilesFolderNeedsMigration()) {
             prepareFolderDefaultValues();
-            this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.ROUTING_TILES);
+            reportOnMissingHandler(this.contentStorageActivityHelper.migratePersistableFolder(PersistableFolder.ROUTING_TILES));
         }
     }
 

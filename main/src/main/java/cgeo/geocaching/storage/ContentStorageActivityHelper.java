@@ -3,12 +3,15 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -166,8 +169,8 @@ public class ContentStorageActivityHelper {
      * Asks user to select a folder for single-time-usage (location and permission is not persisted)
      * if a callback for action {@link SelectAction#SELECT_FOLDER} is registered, it will be called after selection has finished
      */
-    public void selectFolder(@Nullable final Uri startUri) {
-        selectFolderInternal(SelectAction.SELECT_FOLDER, null, startUri, null);
+    public boolean selectFolder(@Nullable final Uri startUri) {
+        return selectFolderInternal(SelectAction.SELECT_FOLDER, null, startUri, null);
     }
 
     /**
@@ -192,7 +195,9 @@ public class ContentStorageActivityHelper {
                 .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
                 .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                     d.dismiss();
-                    selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
+                    if (!selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT)) {
+                        reportMissingHandler();
+                    }
                 })
                 .setNegativeButton(android.R.string.cancel, (d, p) -> {
                     d.dismiss();
@@ -213,15 +218,15 @@ public class ContentStorageActivityHelper {
     /**
      * Simplified form of selectPersistableFolder without initial dialog
      */
-    public void migratePersistableFolder(final PersistableFolder folder) {
-        selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
+    public boolean migratePersistableFolder(final PersistableFolder folder) {
+        return selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
     }
 
     /**
      * Simplified form of selectPersistableFolder used on settings' restore
      */
-    public void restorePersistableFolder(final PersistableFolder folder, final Uri newUri) {
-        selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, newUri, CopyChoice.ASK_IF_DIFFERENT);
+    public boolean restorePersistableFolder(final PersistableFolder folder, final Uri newUri) {
+        return selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, newUri, CopyChoice.ASK_IF_DIFFERENT);
     }
 
     /**
@@ -318,7 +323,8 @@ public class ContentStorageActivityHelper {
         this.activity.startActivityForResult(intent, action.requestCode);
     }
 
-    private void selectFolderInternal(final SelectAction action, final PersistableFolder folder, final Uri startUri, final CopyChoice copyChoice) {
+    /** returns false, if no activity could be found for file selection */
+    private boolean selectFolderInternal(final SelectAction action, final PersistableFolder folder, final Uri startUri, final CopyChoice copyChoice) {
 
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
@@ -338,9 +344,15 @@ public class ContentStorageActivityHelper {
             intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, realStartUri);
         }
 
-        runningIntentData = new IntentData(folder, copyChoice, action);
-
-        this.activity.startActivityForResult(intent, action.requestCode);
+        // check if there's an activity available to handle this intent
+        try {
+            runningIntentData = new IntentData(folder, copyChoice, action);
+            this.activity.startActivityForResult(intent, action.requestCode);
+            return true;
+        } catch (ActivityNotFoundException ignore) {
+            runningIntentData = null; // was not able to trigger intent
+            return false;
+        }
     }
 
 
@@ -502,6 +514,11 @@ public class ContentStorageActivityHelper {
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "CSActivityHelper", params);
         Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
         ActivityMixin.showToast(activity, messages.left);
+    }
+
+    // show dialog box about "no activity found that can handle this action, missing rights?"
+    public void reportMissingHandler() {
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.saf_missing_activity_title)).setMessage(TextParam.id(R.string.saf_missing_activity_message)).show(null);
     }
 
     /**
