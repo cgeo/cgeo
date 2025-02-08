@@ -4,3 +4,4 @@
 - Fix: Edited user notes from popup sometimes get lost
 - Fix: Editing log shows "report problem" option
 - Fix: Live Filter 'Does not contain' fails to return any caches
+- Fix: Crashes on pausing a UnifiedMap online map
