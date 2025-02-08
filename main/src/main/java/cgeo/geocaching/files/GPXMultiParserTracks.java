@@ -4,7 +4,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.RouteSegment;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.xml.XmlNode;
 
 import androidx.annotation.NonNull;
@@ -26,6 +25,7 @@ public class GPXMultiParserTracks extends GPXMultiParserBase {
     @Override
     void addNode(@NonNull final XmlNode node) {
         final Route route = new Route(false);
+        route.setName(node.getValueAsString("name"));
         for (XmlNode trackSegment : node.getAsList("trkseg")) {
             final ArrayList<Geopoint> points = new ArrayList<>();
             final ArrayList<Float> elevation = new ArrayList<>();

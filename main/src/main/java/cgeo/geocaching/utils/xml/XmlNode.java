@@ -125,6 +125,15 @@ public class XmlNode {
         }
     }
 
+    @NonNull
+    public String getValueAsString(final String name) {
+        try {
+            return get(name).getValue();
+        } catch (NullPointerException e) {
+            return "";
+        }
+    }
+
     @Nullable
     public String getAttribute(final String name) {
         final XmlNode temp = get(ATTRIBUTE_PRAEFIX + name);

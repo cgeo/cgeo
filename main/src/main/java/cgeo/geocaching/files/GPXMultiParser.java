@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.xml.XmlNode;
 import cgeo.geocaching.utils.xml.XmlUtils;
@@ -54,7 +55,9 @@ public class GPXMultiParser {
             p.onParsingDone(result);
         }
         for (Object o : result) {
-            Log.e("result: " + o);
+            Log.e("result: " + o +
+                        (o instanceof Route ? "name='" + ((Route) o).getName() + "', segments=" + ((Route) o).getNumSegments() : "")
+                    );
         }
         return result;
     }
