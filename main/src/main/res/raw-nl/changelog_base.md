@@ -7,6 +7,7 @@
 - Nieuw: Lange tik op kaart selectie pictogram om vorige tegel provider te selecteren (UnifiedMap)
 - Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
 - Nieuw: Toon geofences voor lab stadia (UnifiedMap) - "Circles" inschakelen in kaart snelle instellingen om ze te tonen
+- Nieuw: Optie om cirkels met individuele straal in te stellen op waypoints ("geofence" contextoptie)
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
@@ -19,3 +20,5 @@
 - Nieuw: Toon laatst gebruikte filternaam in filter dialoogvenster
 - Nieuw: Ondersteuning voor het openen van lokale Wherigo-bestanden
 - Oplossing: Importeren van lokale map krijgt willekeurige mapnaam
+- Oplossing: Kleurproblemen met menupictogrammen in lichte modus
+- Oplossing: Nabijgelegen afstandslimiet instelling werkt niet goed voor kleine waarden
