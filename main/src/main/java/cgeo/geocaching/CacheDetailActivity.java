@@ -768,7 +768,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_export_persnotes) {
             new PersonalNoteExport().export(Collections.singletonList(cache), this);
         } else if (menuItem == R.id.menu_edit_fieldnote) {
-            ensureSaved();
             editPersonalNote(cache, this);
         } else if (menuItem == R.id.menu_navigate) {
             NavigationAppFactory.onMenuItemSelected(item, this, cache);
@@ -1737,11 +1736,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             activity.addShareAction(binding.personalnote);
             TooltipCompat.setTooltipText(binding.editPersonalnote, getString(R.string.cache_personal_note_edit));
             binding.editPersonalnote.setOnClickListener(v -> {
-                activity.ensureSaved();
                 editPersonalNote(cache, activity);
             });
             binding.personalnote.setOnClickListener(v -> {
-                activity.ensureSaved();
                 editPersonalNote(cache, activity);
             });
             TooltipCompat.setTooltipText(binding.storewaypointsPersonalnote, getString(R.string.cache_personal_note_storewaypoints));
@@ -2726,6 +2723,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache == null) {
             return;
         }
+        activity.ensureSaved();
         final FragmentManager fm = activity.getSupportFragmentManager();
         final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);
         final EditNoteDialog dialog = EditNoteDialog.newInstance(cache.getPersonalNote(), cache.isPreventWaypointsFromNote(), (connector != null && connector.canAddPersonalNote(cache)));

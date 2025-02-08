@@ -18,6 +18,7 @@ import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
+import cgeo.geocaching.filters.core.StringFilter;
 import cgeo.geocaching.filters.core.TerrainGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
@@ -141,7 +142,9 @@ public class GCMap {
                 search.addCacheTypes(((TypeGeocacheFilter) basicFilter).getRawValues());
                 break;
             case NAME:
-                search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                if (((NameGeocacheFilter) basicFilter).getStringFilter().getFilterType() != StringFilter.StringFilterType.DOES_NOT_CONTAIN) {
+                    search.setKeywords(((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue());
+                }
                 break;
             case ATTRIBUTES:
                 final AttributesGeocacheFilter attFilter = (AttributesGeocacheFilter) basicFilter;
