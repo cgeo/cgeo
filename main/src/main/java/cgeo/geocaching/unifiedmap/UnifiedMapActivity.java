@@ -268,6 +268,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         viewModel.viewportIdle.observe(this, vp -> {
             refreshListChooser();
             refreshWaypoints(viewModel);
+            refreshLiveStatusView();
         });
 
 
@@ -534,54 +535,44 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     private LiveMapGeocacheLoader.LoadState oldStatus;
 
     public void setLiveLoadStatus(final LiveMapGeocacheLoader.LiveDataState observedStatus) {
-        final LiveMapGeocacheLoader.LiveDataState status = observedStatus == null ? viewModel.liveLoadStatus.getValue() : observedStatus;
+        Log.iForce("UnifiedMap:set progress to " + observedStatus);
+        refreshLiveStatusView();
+    }
+
+    private void refreshLiveStatusView() {
+
+        final LiveMapGeocacheLoader.LiveDataState status = viewModel.liveLoadStatus.getValue();
+        final Viewport viewport = viewModel.viewport.getValue();
         final LinearProgressIndicator spinner = findViewById(R.id.map_progressbar);
         final ImageView liveMapStatus = findViewById(R.id.live_map_status);
-        if (spinner == null || liveMapStatus == null || status == null) {
-            return;
-        }
-        Log.iForce("UnifiedMap:set progress to " + status);
 
-        spinner.setVisibility(View.GONE);
-        liveMapStatus.setVisibility(View.GONE);
-        //only set status if we are live
-        if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+        if (spinner == null || liveMapStatus == null || status == null || !Viewport.isValid(viewport)) {
             return;
         }
+        liveMapStatus.setOnClickListener(v -> showLiveStatusDialog());
+
+        //hide status if we are live
+        if (!TRUE.equals(viewModel.transientIsLiveEnabled.getValue())) {
+            spinner.setVisibility(View.GONE);
+            liveMapStatus.setVisibility(View.GONE);
+            return;
+        }
+        //set live map status
+        if (status.isError() || status.isPartial(viewport)) {
+            liveMapStatus.setImageResource(status.isError() ? R.drawable.ic_menu_error : R.drawable.ic_menu_partial);
+            liveMapStatus.getBackground().setTint(getResources().getColor(status.isError() ? R.color.cacheMarker_archived : R.color.osm_zoomcontrol));
+            liveMapStatus.setVisibility(View.VISIBLE);
+        } else {
+            liveMapStatus.setVisibility(View.GONE);
+        }
+        //set spinner
         switch (status.loadState) {
             case RUNNING:
                 spinner.setVisibility(View.VISIBLE);
                 spinner.setIndeterminate(true);
                 break;
             case STOPPED:
-                //find out whether it is error or partial or none of it; construct error/partial messages
-                boolean isError = false;
-                boolean isPartial = false;
-                final StringBuilder errors = new StringBuilder();
-                final StringBuilder partials = new StringBuilder();
-                final StringBuilder normals = new StringBuilder();
-                for (LiveMapGeocacheLoader.ConnectorState data : status.connectors) {
-                    isError |= data.isError();
-                    isPartial |= data.isPartial;
-                    if (data.isError()) {
-                        errors.append("\n- " + data.toUserDisplayableStringWithMarkup());
-                    } else if (data.isPartial) {
-                        partials.append("\n- " + data.toUserDisplayableStringWithMarkup());
-                    } else {
-                        normals.append("\n- " + data.toUserDisplayableStringWithMarkup());
-                    }
-                }
-                final String errorMsg = errors.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_error, errors);
-                final String partialMsg = partials.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_partial, partials);
-                final String normalMsg = normals.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_normal, normals);
-                final String msgWithMarkup = TextUtils.join(Arrays.asList(errorMsg, partialMsg, normalMsg), s -> s, "\n\n").toString();
-                final CharSequence msg = TextParam.text(msgWithMarkup).setMarkdown(true).getText(null);
-                if (isError || isPartial) {
-                    liveMapStatus.setImageResource(isError ? R.drawable.ic_menu_error : R.drawable.ic_menu_partial);
-                    liveMapStatus.getBackground().setTint(getResources().getColor(isError ? R.color.cacheMarker_archived : R.color.osm_zoomcontrol));
-                    liveMapStatus.setVisibility(View.VISIBLE);
-                    liveMapStatus.setOnClickListener(v1 -> SimpleDialog.ofContext(this).setMessage(TextParam.text(msg)).show());
-                }
+                spinner.setVisibility(View.GONE);
                 break;
             case REQUESTED:
                 spinner.setVisibility(View.VISIBLE);
@@ -606,6 +597,37 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         oldStatus = status.loadState;
     }
+
+    private void showLiveStatusDialog() {
+
+        final Viewport viewport = viewModel.viewport.getValue();
+        final LiveMapGeocacheLoader.LiveDataState status = viewModel.liveLoadStatus.getValue();
+        if (viewport == null || status == null) {
+            return;
+        }
+
+        //build message
+        final StringBuilder errors = new StringBuilder();
+        final StringBuilder partials = new StringBuilder();
+        final StringBuilder normals = new StringBuilder();
+        for (LiveMapGeocacheLoader.ConnectorState data : status.connectorStates.values()) {
+            if (data.isError()) {
+                errors.append("\n- " + data.toUserDisplayableStringWithMarkup());
+            } else if (data.isPartialFor(viewport)) {
+                partials.append("\n- " + data.toUserDisplayableStringWithMarkup());
+            } else {
+                normals.append("\n- " + data.toUserDisplayableStringWithMarkup());
+            }
+        }
+        final String errorMsg = errors.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_error, errors);
+        final String partialMsg = partials.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_partial, partials);
+        final String normalMsg = normals.length() == 0 ? null : LocalizationUtils.getString(R.string.live_map_status_normal, normals);
+        final String msgWithMarkup = TextUtils.join(Arrays.asList(errorMsg, partialMsg, normalMsg), s -> s, "\n\n").toString();
+        final CharSequence msg = TextParam.text(msgWithMarkup).setMarkdown(true).getText(null);
+
+        SimpleDialog.ofContext(this).setMessage(TextParam.text(msg)).show();
+    }
+
 
     public static void refreshWaypoints(final UnifiedMapViewModel viewModel) {
 
@@ -891,7 +913,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.coordsIndicator.setValue(coordsIndicator);
             }
             //refresh live status view
-            setLiveLoadStatus(null);
+            refreshLiveStatusView();
         } else if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {

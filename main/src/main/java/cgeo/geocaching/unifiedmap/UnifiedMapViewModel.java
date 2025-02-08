@@ -61,7 +61,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
 
     public final CollectionLiveData<Geocache, Set<Geocache>> caches = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount()));
     public final CollectionLiveData<Waypoint, Set<Waypoint>> waypoints = CollectionLiveData.set();
-    public final MutableLiveData<LiveMapGeocacheLoader.LiveDataState> liveLoadStatus = new MutableLiveData<>(new LiveMapGeocacheLoader.LiveDataState(LiveMapGeocacheLoader.LoadState.STOPPED, null));
+    public final MutableLiveData<LiveMapGeocacheLoader.LiveDataState> liveLoadStatus = new MutableLiveData<>(new LiveMapGeocacheLoader.LiveDataState(LiveMapGeocacheLoader.LoadState.STOPPED, null, null));
     public final LiveMapDataHandler liveMapHandler = new LiveMapDataHandler(this);
 
     public final CollectionLiveData<String, Set<String>> cachesWithStarDrawn = CollectionLiveData.set(() -> new LeastRecentlyUsedSet<>(MAX_CACHES));

@@ -1,7 +1,6 @@
 package cgeo.geocaching.unifiedmap.layers;
 
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.maps.MapStarUtils;
@@ -15,6 +14,7 @@ import cgeo.geocaching.models.geoitem.GeoStyle;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.LiveMapGeocacheLoader;
 import cgeo.geocaching.unifiedmap.UnifiedMapViewModel;
 import cgeo.geocaching.unifiedmap.geoitemlayer.GeoItemLayer;
 import cgeo.geocaching.utils.CollectionDiff;
@@ -26,9 +26,7 @@ import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class GeoItemsLayer {
@@ -126,17 +124,25 @@ public class GeoItemsLayer {
         });
 
         viewModel.liveLoadStatus.observe(activity, lv -> {
-            if (Settings.enableFeatureUnifiedDebug() && lv != null && lv.cachedViewport != null) {
-                final Viewport vp = lv.cachedViewport;
-                final int color = Color.BLUE;
-                final List<Geopoint> points = Arrays.asList(vp.getBottomRight(), vp.bottomLeft, vp.getTopLeft(), vp.topRight);
-                final GeoItem poly = GeoPrimitive.createPolygon(points, GeoStyle.builder()
-                        .setStrokeColor(color)
-                        .setFillColor(Color.argb(128, Color.red(color), Color.green(color), Color.blue(color)))
-                        .setStrokeWidth(5f).build()).buildUpon().setZLevel(50).build();
-                layer.put("CACHED_LAYER", poly);
+            if (Settings.enableFeatureUnifiedDebug() && lv != null) {
+                if (Viewport.isValid(lv.cachedViewport)) {
+                    layer.put("CACHED_LAYER", lv.cachedViewport.toGeoItem(GeoStyle.transparentFill(Color.GRAY, 128, 5), 50));
+                    layer.put("CACHED_LAYER_CENTER", GeoPrimitive.createCircle(lv.cachedViewport.center, 0.5f, GeoStyle.solid(Color.RED, 4f)).buildUpon().setZLevel(55).build());
+                }
+                for (LiveMapGeocacheLoader.ConnectorState state : lv.connectorStates.values()) {
+                    if (Viewport.isValid(state.viewport)) {
+                        layer.put("CACHED_LAYER_" + state.connectorName, state.viewport.toGeoItem(GeoStyle.transparentFill(Color.BLUE, 128, 3), 51));
+
+                    }
+                }
             } else {
                 layer.remove("CACHED_LAYER");
+                layer.remove("CACHED_LAYER_CENTER");
+                if (lv != null) {
+                    for (String key : lv.connectorStates.keySet()) {
+                        layer.remove("CACHED_LAYER_" + key);
+                    }
+                }
             }
         });
 
