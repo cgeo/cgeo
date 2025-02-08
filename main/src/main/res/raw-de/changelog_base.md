@@ -7,6 +7,7 @@
 - Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 
 ### Cache-Details
 - Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
@@ -19,3 +20,5 @@
 - New: Show last used filter name in filter dialog
 - New: Support opening local Wherigo files
 - Fix: Importing local map file gets random map name
+- Fix: Color issues with menu icons in light mode
+- Fix: Nearby distance limit setting not working properly for small values
