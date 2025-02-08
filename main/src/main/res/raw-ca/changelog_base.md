@@ -7,6 +7,7 @@
 - Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor anterior (UnifiedMap)
 - Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
 - Novetat: Mostra les tanques geogràfiques per a les etapes de laboratori (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
+- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
@@ -19,3 +20,5 @@
 - Nou: mostra el nom del darrer filtre utilitzat al quadre de diàleg del filtre
 - Nou: Admet l'obertura de fitxers Wherigo locals
 - Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
+- Fix: Color issues with menu icons in light mode
+- Fix: Nearby distance limit setting not working properly for small values
