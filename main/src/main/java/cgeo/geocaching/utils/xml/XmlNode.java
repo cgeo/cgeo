@@ -117,6 +117,15 @@ public class XmlNode {
     }
 
     @Nullable
+    public Float getValueAsFloat(final String name) {
+        try {
+            return Float.parseFloat(get(name).getValue());
+        } catch (NullPointerException | NumberFormatException e) {
+            return null;
+        }
+    }
+
+    @Nullable
     public String getAttribute(final String name) {
         final XmlNode temp = get(ATTRIBUTE_PRAEFIX + name);
         return temp == null ? null : temp.getValue();
