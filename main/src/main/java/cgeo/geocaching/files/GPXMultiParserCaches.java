@@ -37,9 +37,7 @@ import androidx.annotation.Nullable;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -52,17 +50,56 @@ import org.apache.commons.lang3.StringUtils;
 
 public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implements GPXMultiParserBase */ {
 
+    // ---------------------------------------------------------------------------------------------
+    // dummy declarations for already migrated ones
+    // ---------------------------------------------------------------------------------------------
     private static final SynchronizedDateFormat formatSimple = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US); // 2010-04-20T07:00:00
     private static final SynchronizedDateFormat formatSimpleNoTime = new SynchronizedDateFormat("yyyy-MM-dd", Locale.US); // 2010-04-20
     private static final SynchronizedDateFormat formatSimpleZ = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US); // 2010-04-20T07:00:00Z
     private static final SynchronizedDateFormat formatTimezone = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US); // 2010-04-20T01:01:03-04:00
-
-    /**
-     * Attention: case sensitive geocode pattern to avoid matching normal words in the name or description of the cache.
-     */
     private static final Pattern PATTERN_GEOCODE = Pattern.compile("[0-9A-Z]{5,}");
     private static final Pattern PATTERN_GUID = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern PATTERN_URL_GEOCODE = Pattern.compile(".*" + Pattern.quote("wp=") + "([A-Z][0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
+    private Geocache cache;
+    private String name = null;
+    private String type = null;
+    private String subtype = null;
+    private String sym = null;
+    private String cmt = null;
+    private String desc = null;
+    private String scriptUrl; // URL contained in the header of the GPX file. Used to guess where the file is coming from.
+    private Trackable trackable = new Trackable();
+    private LogEntry.Builder logBuilder = null;
+
+    protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+    private String parentCacheCode = null;
+    private boolean wptVisited = false;
+    private boolean wptUserDefined = false;
+    private boolean wptEmptyCoordinates = false;
+    private int cacheAssignedEmoji = 0;
+    private List<LogEntry> logs = new ArrayList<>();
+
+    /**
+     * original longitude in case of modified coordinates
+     */
+    @Nullable protected String originalLon;
+    /**
+     * original latitude in case of modified coordinates
+     */
+    @Nullable protected String originalLat;
+    /**
+     * Unfortunately we can only detect terracaching child waypoints by remembering the state of the parent
+     */
+    private boolean terraChildWaypoint = false;
+    private boolean logPasswordRequired = false;
+
+    /**
+     * prefix of the long description. used for adding alternative geocodes.
+     */
+    private String descriptionPrefix = "";
+    // ---------------------------------------------------------------------------------------------
+
 
     /**
      * supported groundspeak extensions of the GPX format
@@ -99,57 +136,16 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
             "https://github.com/opencaching/gpx-extension-v1"
     };
 
-    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
-
     private int listId = StoredList.STANDARD_LIST_ID;
     protected final String namespace;
     protected final boolean version11;
 
-    private Geocache cache;
-    private Trackable trackable = new Trackable();
-    private LogEntry.Builder logBuilder = null;
-
-    private String type = null;
-    private String subtype = null;
-    private String sym = null;
-    private String name = null;
-    private String cmt = null;
-    private String desc = null;
-    protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
-    private String parentCacheCode = null;
-    private boolean wptVisited = false;
-    private boolean wptUserDefined = false;
-    private boolean wptEmptyCoordinates = false;
-    private int cacheAssignedEmoji = 0;
-    private List<LogEntry> logs = new ArrayList<>();
 
     /**
      * Parser result. Maps geocode to cache.
      */
     private final Set<String> result = new HashSet<>(100);
     private ProgressInputStream progressStream;
-    /**
-     * URL contained in the header of the GPX file. Used to guess where the file is coming from.
-     */
-    protected String scriptUrl;
-    /**
-     * original longitude in case of modified coordinates
-     */
-    @Nullable protected String originalLon;
-    /**
-     * original latitude in case of modified coordinates
-     */
-    @Nullable protected String originalLat;
-    /**
-     * Unfortunately we can only detect terracaching child waypoints by remembering the state of the parent
-     */
-    private boolean terraChildWaypoint = false;
-    private boolean logPasswordRequired = false;
-
-    /**
-     * prefix of the long description. used for adding alternative geocodes.
-     */
-    private String descriptionPrefix = "";
 
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
@@ -169,35 +165,10 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
         this.version11 = version11;
         this.listId = listId;
 
-        // when importing a ZIP, reset the child waypoint state
-        terraChildWaypoint = false;
-
-        resetCache();
         final Element waypoint = root.getChild(namespace, "wpt");
 
-        registerScriptUrl(root);
-
-        root.getChild(namespace, "creator").setEndTextElementListener(body -> scriptUrl = body);
-
         // waypoint - attributes
-        waypoint.setStartElementListener(attrs -> {
-            try {
-                if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
-                    final String latitude = attrs.getValue("lat");
-                    final String longitude = attrs.getValue("lon");
-                    // latitude and longitude are required attributes, but we export them (0/0) for waypoints without coordinates
-                    if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
-                        final Geopoint latLon = new Geopoint(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                        final Geopoint pt0 = new Geopoint(0, 0);
-                        if (!latLon.equals(pt0)) {
-                            cache.setCoords(latLon);
-                        }
-                    }
-                }
-            } catch (final NumberFormatException e) {
-                Log.w("Failed to parse waypoint's latitude and/or longitude", e);
-            }
-        });
+        // (done)
 
         // waypoint
         waypoint.setEndElementListener(new EndElementListener() {
@@ -324,62 +295,8 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
 
         });
 
-        // waypoint.time
-        waypoint.getChild(namespace, "time").setEndTextElementListener(body -> {
-            try {
-                cache.setHidden(parseDate(body));
-            } catch (final Exception e) {
-                Log.w("Failed to parse cache date", e);
-            }
-        });
-
         // waypoint.name
-        waypoint.getChild(namespace, "name").setEndTextElementListener(body -> {
-            name = body;
-
-            String content = body.trim();
-
-            // extremcaching.com manipulates the GC code by adding GC in front of ECxxx
-            if (StringUtils.startsWithIgnoreCase(content, "GCEC") && StringUtils.containsIgnoreCase(scriptUrl, "extremcaching")) {
-                content = content.substring(2);
-            }
-
-            cache.setName(content);
-
-            findGeoCode(cache.getName(), true);
-        });
-
-        // waypoint.desc
-        waypoint.getChild(namespace, "desc").setEndTextElementListener(body -> {
-            desc = body;
-            cache.setShortDescription(validate(body));
-        });
-
-        // waypoint.cmt
-        waypoint.getChild(namespace, "cmt").setEndTextElementListener(body -> {
-            cmt = body;
-            cache.setDescription(validate(body));
-        });
-
-        // waypoint.getType()
-        waypoint.getChild(namespace, "type").setEndTextElementListener(body -> {
-            final String[] content = StringUtils.split(body, '|');
-            if (content.length > 0) {
-                type = content[0].toLowerCase(Locale.US).trim();
-                if (content.length > 1) {
-                    subtype = content[1].toLowerCase(Locale.US).trim();
-                }
-            }
-        });
-
-        // waypoint.sym
-        waypoint.getChild(namespace, "sym").setEndTextElementListener(body -> {
-            sym = body.toLowerCase(Locale.US);
-            if (sym.contains("geocache") && sym.contains("found")) {
-                cache.setFound(true);
-                cache.setDNF(false);
-            }
-        });
+        // (done)
 
         // waypoint.url and waypoint.urlname (name for waymarks)
         registerUrlAndUrlName(waypoint);
@@ -394,23 +311,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
             registerExtensions(waypoint);
         }
 
-    }
-
-    static Date parseDate(final String inputUntrimmed) throws ParseException {
-        // remove milliseconds to reduce number of needed patterns
-        final MatcherWrapper matcher = new MatcherWrapper(PATTERN_MILLISECONDS, inputUntrimmed.trim());
-        final String input = matcher.replaceFirst("");
-        if (input.contains("Z")) {
-            return formatSimpleZ.parse(input);
-        }
-        if (StringUtils.countMatches(input, ":") == 3) {
-            final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
-            return formatTimezone.parse(removeColon);
-        }
-        if (input.contains("T")) {
-            return formatSimple.parse(input);
-        }
-        return formatSimpleNoTime.parse(input);
     }
 
     private void registerExtensions(@NonNull final Element cacheParent) {
@@ -913,95 +813,6 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
         }
     };
 
-    protected void registerScriptUrl(@NonNull final Element element) {
-        if (version11) {
-            element.getChild(namespace, "metadata").getChild(namespace, "link").setStartElementListener(attrs -> {
-                try {
-                    if (attrs.getIndex("href") > -1) {
-                        scriptUrl = attrs.getValue("href");
-                    }
-
-                } catch (final RuntimeException e) {
-                    Log.w("Failed to parse link attributes", e);
-                }
-            });
-        } else {
-            element.getChild(namespace, "url").setEndTextElementListener(body -> scriptUrl = body);
-        }
-    };
-
-    protected static String validate(final String input) {
-        if ("nil".equalsIgnoreCase(input)) {
-            return "";
-        }
-        return input.trim();
-    }
-
-    private void findGeoCode(final String input, final Boolean useUnknownConnector) {
-        if (input == null || StringUtils.isNotBlank(cache.getGeocode())) {
-            return;
-        }
-        final String trimmed = input.trim();
-        final MatcherWrapper matcherGeocode = new MatcherWrapper(PATTERN_GEOCODE, trimmed);
-        if (matcherGeocode.find()) {
-            final String geocode = matcherGeocode.group();
-            // a geocode should not be part of a word
-            if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
-                final IConnector foundConnector = ConnectorFactory.getConnector(geocode);
-                if (!foundConnector.equals(ConnectorFactory.UNKNOWN_CONNECTOR)) {
-                    cache.setGeocode(geocode);
-                } else if (useUnknownConnector) {
-                    cache.setGeocode(trimmed);
-                }
-            }
-        }
-    }
-
-    /**
-     * reset all fields that are used to store cache fields over the duration of parsing a single cache
-     */
-    private void resetCache() {
-        type = null;
-        subtype = null;
-        sym = null;
-        name = null;
-        desc = null;
-        cmt = null;
-        parentCacheCode = null;
-        wptVisited = false;
-        wptUserDefined = false;
-        wptEmptyCoordinates = false;
-        cacheAssignedEmoji = 0;
-        logs = new ArrayList<>();
-
-        cache = createCache();
-
-        // explicitly set all properties which could lead to database access, if left as null value
-        cache.setLocation("");
-        cache.setDescription("");
-        cache.setShortDescription("");
-        cache.setHint("");
-
-        Arrays.fill(userData, null);
-        originalLon = null;
-        originalLat = null;
-        logPasswordRequired = false;
-        descriptionPrefix = "";
-    }
-
-    /**
-     * Geocache factory method. This explicitly sets several members to empty lists, which does not happen with the
-     * default constructor.
-     */
-    private static Geocache createCache() {
-        final Geocache newCache = new Geocache();
-
-        newCache.setAttributes(Collections.emptyList()); // override the lazy initialized list
-        newCache.setWaypoints(Collections.emptyList(), false); // override the lazy initialized list
-
-        return newCache;
-    }
-
     /**
      * create a cache note from the UserData1 to UserData4 fields supported by GSAK
      */
@@ -1090,4 +901,24 @@ public class GPXMultiParserCaches extends GPXMultiParserAbstractFiles /*implemen
     public void onParsingDone(@NonNull final Collection<Object> result) {
         result.addAll(DataStore.loadCaches(this.result, EnumSet.of(LoadFlags.LoadFlag.DB_MINIMAL)));
     }
+
+    // ---------------------------------------------------------------------------------------------
+    // placeholders for already migrated methods
+    // ---------------------------------------------------------------------------------------------
+
+    private void resetCache() {
+    }
+
+    static Date parseDate(final String inputUntrimmed) throws ParseException {
+        return new Date();
+    }
+
+    private void findGeoCode(final String input, final Boolean useUnknownConnector) {
+
+    }
+
+    protected static String validate(final String input) {
+        return "";
+    }
+
 }

@@ -5,6 +5,7 @@ import cgeo.geocaching.downloader.ReceiveDownloadService;
 import cgeo.geocaching.files.FileType;
 import cgeo.geocaching.files.FileTypeDetector;
 import cgeo.geocaching.files.GPXMultiParser;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -45,19 +46,9 @@ public class HandleLocalFilesActivity extends AbstractActivity {
         final FileType fileType = new FileTypeDetector(uri, contentResolver).getFileType();
         switch (fileType) {
             case GPX:
-            case ZIP:
-            case LOC:
-                // was: continueWith(CacheListActivity.class, intent);
-
                 // sample code for GPXMultiParser, which parses geocaches, tracks and routes in parallel
                 try (InputStream in = new BufferedInputStream(ContentStorage.get().openForRead(uri))) {
-                    final GPXMultiParser parser = new GPXMultiParser();
-                    Collection<Object> result;
-                    try {
-                        result = parser.doParsing(in, true);
-                    } catch (XmlPullParserException ignore) {
-                        result = parser.doParsing(in, false);
-                    }
+                    final Collection<Object> result = new GPXMultiParser().doParsing(in, StoredList.STANDARD_LIST_ID); // todo: listId depends on context
                     Log.e("returned from parsing, size=" + result.size());
                 } catch (IOException | XmlPullParserException e) {
                     final StringWriter sw = new StringWriter();
@@ -70,6 +61,11 @@ public class HandleLocalFilesActivity extends AbstractActivity {
                 // - multiple caches: import to list + open list
                 // - track: add to viewed tracks on map
                 // - route: overwrite individual route (after confirmation)
+                finished = true;
+                break;
+            case ZIP:
+            case LOC:
+                continueWith(CacheListActivity.class, intent);
                 finished = true;
                 break;
             case MAP:

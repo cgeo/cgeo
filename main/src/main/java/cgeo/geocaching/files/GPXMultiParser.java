@@ -25,40 +25,45 @@ public class GPXMultiParser {
     // @todo: return type needs to be changed to a super type of Geocache and Route (the latter being a super type for tracks and routes already)
     private final Collection<Object> result = new ArrayList<>();
 
-    public Collection<Object> doParsing(@NonNull final InputStream stream, final boolean version11) throws IOException, XmlPullParserException {
-        final String namespace = "http://www.topografix.com/GPX/1/" + (version11 ? "1" : "0");
+    public Collection<Object> doParsing(@NonNull final InputStream stream, final int listId) throws IOException, XmlPullParserException {
+        final XmlNode gpx = getGPX(stream);
+        if (gpx == null) {
+            return result;
+        }
+
+        // make sense of parsed content
+        final XmlNode metadata = gpx.get("metadata");
 
         final List<GPXMultiParserBase> parser = new ArrayList<>();
-        // parser.add(new GPXMultiParserCaches(root, namespace, version11, StoredList.STANDARD_LIST_ID, null)); // @todo: listId
-        parser.add(new GPXMultiParserRoutes());
-        parser.add(new GPXMultiParserTracks());
+        parser.add(new GPXMultiParserWPT(gpx, listId));
+        parser.add(new GPXMultiParserRTE());
+        parser.add(new GPXMultiParserTRK());
 
-        final XmlPullParser xpp = XmlUtils.createParser(new InputStreamReader(stream, StandardCharsets.UTF_8), true);
-        while (xpp.next() != XmlPullParser.END_DOCUMENT) {
-            if (xpp.getEventType() == START_TAG) {
-                if (!StringUtils.equals(xpp.getName(), "gpx")) {
-                    boolean tagHandled = false;
-                    for (GPXMultiParserBase p : parser) {
-                        if (p.handlesNode(xpp.getName())) {
-                            p.addNode(XmlNode.scanNode(xpp));
-                            tagHandled = true;
-                        }
-                    }
-                    if (!tagHandled) {
-                        // skip data
-                        XmlNode.scanNode(xpp);
-                    }
-                }
+        for (GPXMultiParserBase p : parser) {
+            for (XmlNode node : gpx.getAsList(p.getNodeName())) {
+                p.addNode(node);
             }
         }
+
         for (GPXMultiParserBase p : parser) {
             p.onParsingDone(result);
         }
         for (Object o : result) {
             Log.e("result: " + o +
-                        (o instanceof Route ? "name='" + ((Route) o).getName() + "', segments=" + ((Route) o).getNumSegments() : "")
-                    );
+                    (o instanceof Route ? "name='" + ((Route) o).getName() + "', segments=" + ((Route) o).getNumSegments() : "")
+            );
         }
         return result;
+    }
+
+    final XmlNode getGPX(@NonNull final InputStream stream) throws IOException, XmlPullParserException {
+        // parse XML file
+        final XmlPullParser xpp = XmlUtils.createParser(new InputStreamReader(stream, StandardCharsets.UTF_8), false);
+        while (xpp.next() != XmlPullParser.END_DOCUMENT) {
+            if (xpp.getEventType() == START_TAG && StringUtils.equals(xpp.getName(), "gpx")) {
+                return XmlNode.scanNode(xpp);
+            }
+        }
+        return null;
     }
 }

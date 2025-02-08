@@ -11,9 +11,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.commons.lang3.StringUtils;
-
-public class GPXMultiParserRoutes extends GPXMultiParserBase {
+public class GPXMultiParserRTE extends GPXMultiParserBase {
 
     /*
         @todo: IndividualRoute parser is slightly different:
@@ -25,8 +23,8 @@ public class GPXMultiParserRoutes extends GPXMultiParserBase {
     private final ArrayList<Route> result = new ArrayList<>();
 
     @Override
-    public boolean handlesNode(final String node) {
-        return StringUtils.equalsIgnoreCase(node, "rte");
+    public String getNodeName() {
+        return "rte";
     }
 
     @Override
