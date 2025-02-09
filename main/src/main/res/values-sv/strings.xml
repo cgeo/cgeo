@@ -1926,7 +1926,6 @@
     <string name="helper_sendtocgeo_description">Skicka till c:geo är ett tillägg till webbläsaren <strong>för din PC</strong>. När du bläddrar geocaching.com, kan du skicka cacher till din telefon med en knapptryckning i webbläsaren.</string>
     <string name="helper_locus_description">App för navigering utomhus med telefon eller tablet. Visa topo-kartor offline, spåra din rutt, leta geocacher, använd guideröst och mycket mer.</string>
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
-    <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
     <string name="helper_gps_locker_description">GPS Locker håller GPS-signalen aktiv när du växlar mellan applikationer och när enhetens skärm är avstängd.</string>
     <string name="helper_google_translate_title">Google Översätt</string>
     <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
