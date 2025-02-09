@@ -1360,6 +1360,8 @@
     <string name="contentstorage_err_list_failed">Files in Folder \'%s\' could not be listed</string>
     <string name="contentstorage_err_folder_access_failed">Folder \'%s\' could not be accessed</string>
     <string name="contentstorage_err_copy_failed">File \'%1$s\' could not be copied/moved to \'%2$s\' (move=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Error selecting file/folder</string>
+    <string name="contentstorage_err_activity_not_found_message">Your system doesn\'t provide a component to select files/folders: %s</string>
 
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">User-defined</string>
