@@ -67,13 +67,6 @@
             app:title="@string/init_oc_uk"
             app:iconSpaceReserved="false" />
 
-        <!-- Extremcaching.com -->
-        <Preference
-            android:key="@string/pref_fakekey_ec_authorization"
-            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceExtremcachingComFragment"
-            app:title="@string/settings_title_ec"
-            app:iconSpaceReserved="false" />
-
         <!-- Geocaching.su -->
         <Preference
             android:key="@string/pref_fakekey_su_authorization"

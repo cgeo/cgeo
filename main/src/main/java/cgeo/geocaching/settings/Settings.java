@@ -691,10 +691,6 @@ public class Settings {
         putBoolean(R.string.pref_connectorGCActive, value);
     }
 
-    public static boolean isECConnectorActive() {
-        return getBoolean(R.string.pref_connectorECActive, false);
-    }
-
     public static boolean isALConnectorActive() {
         return getBoolean(R.string.pref_connectorALActive, true);
     }
