@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -61,7 +59,7 @@ public class GPXMultiParser {
 
     final XmlNode getGPX(@NonNull final InputStream stream) throws IOException, XmlPullParserException {
         // parse XML file
-        final XmlPullParser xpp = XmlUtils.createParser(new InputStreamReader(stream, StandardCharsets.UTF_8), false);
+        final XmlPullParser xpp = XmlUtils.createParser(stream, false);
         while (xpp.next() != XmlPullParser.END_DOCUMENT) {
             if (xpp.getEventType() == START_TAG && StringUtils.equals(xpp.getName(), "gpx")) {
                 return XmlNode.scanNode(xpp);
