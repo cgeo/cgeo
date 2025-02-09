@@ -4,3 +4,11 @@
 - Naprawiono: Edycja notatek użytkownika z wyskakującego okienka czasami była tracona
 - Naprawiono: Edycja dziennika pokazywała opcję „zgłoś problem”
 - Naprawiono: Filtr na żywo „Nie zawiera” nie zwraca żadnych skrytek
+- Naprawiono: Awarie przy wstrzymaniu mapy sieciowej UnifiedMap
+- Fix: Outdated app "GPS Bluethooth" in useful apps list
+- Fix: Variables and/or values are deleted erroneously when editing personal note
+- Fix: Wherigo: Wrong altitude info
+- Fix: Wherigo: All button texts are capitalized
+- Fix: Crash in settings
+- Fix: c:geo not listed in Play Store for GPS-less devices
+- Fix: c:geo crashing silently on folder selection in certain configurations
