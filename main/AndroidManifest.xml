@@ -304,7 +304,50 @@
 
                 <data android:mimeType="*/*" />
                 <data android:host="*" />
-                <!-- <data android:scheme="xxx" /> neither "file" nor "content" means: both -->
+                <data android:scheme="file" />
+
+                <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
+                <data android:pathPattern=".*\\.map" />
+                <data android:pathPattern=".*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.map" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.map" />
+
+                <data android:pathPattern=".*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+
+                <data android:pathPattern=".*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.ggz" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.ggz" />
+
+                <data android:pathPattern=".*\\.zip" />
+                <data android:pathPattern=".*\\..*\\.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.zip" />
+
+                <data android:pathPattern=".*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.gwc" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gwc" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.ALTERNATIVE" />
+                <category android:name="android.intent.category.SELECTED_ALTERNATIVE" />
+
+                <data android:mimeType="*/*" />
+                <data android:host="*" />
+                <data android:scheme="content" />
 
                 <!-- path pattern does not match dots correctly: http://stackoverflow.com/q/3400072/44089 -->
                 <data android:pathPattern=".*\\.map" />
