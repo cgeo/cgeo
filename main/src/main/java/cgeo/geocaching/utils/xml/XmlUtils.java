@@ -5,7 +5,7 @@ import cgeo.geocaching.utils.Log;
 import androidx.annotation.NonNull;
 
 import java.io.IOException;
-import java.io.Reader;
+import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -50,7 +50,11 @@ public final class XmlUtils {
         }
     }
 
-    public static XmlPullParser createParser(@NonNull final Reader xml, final boolean namespaceAware) throws XmlPullParserException {
+    public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware) throws XmlPullParserException {
+        return createParser(input, namespaceAware, "UTF-8");
+    }
+
+    public static XmlPullParser createParser(@NonNull final InputStream input, final boolean namespaceAware, final String inputEncoding) throws XmlPullParserException {
         if (XPP_FACTORY == null) {
             throw new XmlPullParserException("XmlUtils: can't create XML Parser, no factory available");
         }
@@ -58,7 +62,7 @@ public final class XmlUtils {
         synchronized (XPP_FACTORY) {
             final XmlPullParser parser = XPP_FACTORY.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, namespaceAware);
-            parser.setInput(xml);
+            parser.setInput(input, inputEncoding);
             return parser;
         }
     }
