@@ -21,6 +21,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
+import cgeo.geocaching.utils.GeoHeightUtils;
 import cgeo.geocaching.utils.Log;
 
 import androidx.annotation.NonNull;
@@ -101,7 +102,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
 
     @Override
     public double getAltitude() {
-        return geoData == null ? 1 : Math.min(1, geoData.getAltitude()); // it is important that altitute is over 0
+        return geoData == null ? 1 : Math.max(1, GeoHeightUtils.getAltitude(geoData)); // it is important that altitute is over 0
     }
 
     @Override
@@ -171,7 +172,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     }
 
     public String toUserDisplayableString() {
-        return getLocation() + (hasFixedLocation() ? " (fixed)" : "");
+        return getLocation() + " · " + getAltitude() + " m" + (hasFixedLocation() ? " (fixed)" : "");
     }
 
     @Override
