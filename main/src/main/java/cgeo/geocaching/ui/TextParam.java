@@ -17,6 +17,8 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 
+import java.util.Locale;
+
 import io.noties.markwon.Markwon;
 import org.apache.commons.lang3.StringUtils;
 
@@ -43,6 +45,7 @@ public class TextParam {
     private final CharSequence text;
     private final TextParam[] concatTexts;
 
+    private boolean allCaps = false;
     private boolean useHtml = false;
     private boolean useMarkdown = false;
     private int linkifyMask = 0;
@@ -77,6 +80,12 @@ public class TextParam {
      */
     public static TextParam concat(final TextParam... texts) {
         return new TextParam(0, null, texts);
+    }
+
+    /** convert text to all-caps */
+    public TextParam setAllCaps(final boolean allCaps) {
+        this.allCaps = allCaps;
+        return this;
     }
 
     /**
@@ -224,6 +233,11 @@ public class TextParam {
         //parameters
         if (this.textParams != null && this.textParams.length > 0) {
             text = LocalizationUtils.getStringWithFallback(0, text.toString(), this.textParams);
+        }
+
+        //capitalize
+        if (this.allCaps) {
+            text = text.toString().toUpperCase(Locale.ROOT);
         }
 
         //markdown

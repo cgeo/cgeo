@@ -111,12 +111,8 @@
 
     <!-- buttons -->
 
-    <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="button_base" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:padding">6dip</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_buttonsPrimary</item>
@@ -124,13 +120,29 @@
         <item name="iconTint">@color/colorText</item>
     </style>
 
-    <style name="button_full" parent="button">
+    <style name="button_full_base" parent="button_base">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:layout_marginLeft">6dip</item>
         <item name="android:layout_marginRight">6dip</item>
         <item name="android:layout_marginBottom">5dip</item>
+    </style>
+
+    <style name="button" parent="button_base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="button_full" parent="button_full_base">
+        <item name="android:lines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="button_wherigo" parent="button_full_base">
+        <item name="android:maxLines">10</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="button_full_double" parent="button_full">

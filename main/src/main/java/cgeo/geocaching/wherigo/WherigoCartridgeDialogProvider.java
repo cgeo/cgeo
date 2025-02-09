@@ -27,9 +27,9 @@ public class WherigoCartridgeDialogProvider implements IWherigoDialogProvider {
     private final boolean infoOnly;
 
     private enum CartridgeAction {
-        PLAY(TextParam.id(R.string.play).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
-        DELETE(TextParam.id(R.string.delete).setImage(ImageParam.id(R.drawable.ic_menu_delete))),
-        CLOSE(TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.wherigo_close)));
+        PLAY(TextParam.id(R.string.play).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_select_play))),
+        DELETE(TextParam.id(R.string.delete).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_delete))),
+        CLOSE(TextParam.id(R.string.close).setAllCaps(true).setImage(ImageParam.id(R.drawable.wherigo_close)));
 
         private final TextParam tp;
 
