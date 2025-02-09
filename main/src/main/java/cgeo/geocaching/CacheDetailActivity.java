@@ -2745,6 +2745,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache == null) {
             return;
         }
+        if (cache.getVariables().wasModified()) {
+            // make sure variables state gets updated before saving cache
+            cache.getVariables().saveState();
+        }
         activity.ensureSaved();
         final FragmentManager fm = activity.getSupportFragmentManager();
         final PersonalNoteCapability connector = ConnectorFactory.getConnectorAs(cache, PersonalNoteCapability.class);

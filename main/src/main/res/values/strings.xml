@@ -1371,6 +1371,8 @@
     <string name="contentstorage_err_list_failed">Files in Folder \'%s\' could not be listed</string>
     <string name="contentstorage_err_folder_access_failed">Folder \'%s\' could not be accessed</string>
     <string name="contentstorage_err_copy_failed">File \'%1$s\' could not be copied/moved to \'%2$s\' (move=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Error selecting file/folder</string>
+    <string name="contentstorage_err_activity_not_found_message">Your system doesn\'t provide a component to select files/folders: %s</string>
 
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">User-defined</string>
@@ -2158,7 +2160,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo is a browser extension <strong>for your PC</strong>. When browsing geocaching.com, you can send caches to your smartphone with the click of a button directly inside the browser.</string>
     <string name="helper_locus_description">Outdoor navigation app for your phone or tablet. View topo maps offline, track your route, hunt geocaches, use a voice guide and do even more.</string>
     <string name="helper_gpsstatus_description">You can use the radar in this application in conjunction with c:geo. It also offers a lot of other GPS-related information.</string>
-    <string name="helper_bluetoothgps_description">Allows you to use an external GPS receiver to get more precise location data, and can spare battery of your device.</string>
     <string name="helper_gps_locker_description">GPS Locker keeps GPS signal active when switching between applications and when your device\'s screen is off.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>

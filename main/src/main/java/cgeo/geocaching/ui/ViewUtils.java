@@ -60,6 +60,7 @@ import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -270,11 +271,11 @@ public class ViewUtils {
     }
 
     public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text) {
-        return createButton(context, root, text, false);
+        return createButton(context, root, text, R.layout.button_view);
     }
 
-    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text, final boolean fillParent) {
-        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(fillParent ? R.layout.button_fillparent_view : R.layout.button_view, root, false);
+    public static Button createButton(final Context context, @Nullable final ViewGroup root, final TextParam text, @LayoutRes final int buttonLayout) {
+        final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(buttonLayout, root, false);
         text.applyTo(button);
         return button;
     }
