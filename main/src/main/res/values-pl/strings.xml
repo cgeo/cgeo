@@ -1966,7 +1966,6 @@
     <string name="helper_sendtocgeo_description">Wyślij do c:geo (Send2cgeo) jest rozszerzeniem do przeglądarki <strong>na komputerze</strong>. Podczas przeglądania strony Geocaching.com pozwala na wysłanie skrytek bezpośrednio do telefonu, za pomocą jednego przycisku w przeglądarce.</string>
     <string name="helper_locus_description">Program do nawigacji w terenie na Twój telefon lub tablet. Przeglądaj mapy topograficzne offline, śledź swoją trasę, poluj na skrytki geocache, używaj nawigacji głosowej i wiele więcej.</string>
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
-    <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
     <string name="helper_google_translate_title">Tłumacz Google</string>
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrytek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
