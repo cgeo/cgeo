@@ -920,7 +920,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_sendtocgeo_description">Send2cgeo ir interneta pārlūka spraudnis <strong>tavam datoram</strong>. No geocaching.com varēsi viegli pārsūtīt slēpņu informāciju uz šo ierīci.</string>
     <string name="helper_locus_description">Āra navigācijas aplikācija tālrunim vai planšetei. Ļauj skatīt bezsaistes topogrāfiskās kartes, izsekot maršrutu, meklēt slēpņus, lietot balss ceļvedi un darīt vēl daudz ko citu.</string>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
-    <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
