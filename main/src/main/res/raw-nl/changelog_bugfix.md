@@ -4,3 +4,11 @@
 - Oplossing: Aangepaste gebruikersaantekeningen uit pop-up gaan soms verloren
 - Oplossing: Bewerken van logboek toont de optie "rapportageprobleem"
 - Oplossing: Live Filter 'Bevat niet' retourneert geen caches
+- Oplossing: Crashes op pauzeren van een UnifiedMap online kaart
+- Fix: Outdated app "GPS Bluethooth" in useful apps list
+- Fix: Variables and/or values are deleted erroneously when editing personal note
+- Fix: Wherigo: Wrong altitude info
+- Fix: Wherigo: All button texts are capitalized
+- Fix: Crash in settings
+- Fix: c:geo not listed in Play Store for GPS-less devices
+- Fix: c:geo crashing silently on folder selection in certain configurations
