@@ -719,7 +719,6 @@
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay usa ka browser na ekstenyon <strong>para sa imung PC</strong>.Kung kag-browse ug geocaching.com, pwede ka magpadala ug mga cache sa imong cellphone kauban sa pagpislit sa pislitanan diretso sa sulod na browser.</string>
     <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
-    <string name="helper_bluetoothgps_description">Gisugtan ka na mugamit ug external GPS receiver para makuha paglaing nindot na lokasyong data, ug pwedeng makahabilin ug baterya sa imung device.</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
     <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
