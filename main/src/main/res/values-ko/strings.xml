@@ -1830,7 +1830,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo는 <strong>PC를 위한</strong> 브라우저 확장프로그램입니다. geocaching.com을 보실 때 브라우저 내에 있는 버튼을 클릭하면 캐시를 스마트폰으로 보낼 수 있습니다.</string>
     <string name="helper_locus_description">폰이나 태블릿용 길찾기 앱. 오프라인 지형지도 보기, 경로찾기, 지오캐시 찾기, 음성 안내 등의 기능이 지원됩니다.</string>
     <string name="helper_gpsstatus_description">c:geo와 함께 이 어플에서 레이다를 사용할 수있습니다. GPS 와 관련된 다양한 정보를 볼 수 있습니다.</string>
-    <string name="helper_bluetoothgps_description">외부 GPS 수신기를 이용하여 좀더 정확한 위치 데이터를 잡을 수 있고, 기기의 배터리를 절약할 수 있습니다.</string>
     <string name="helper_gps_locker_description">GPS Locker는 다른 응용으로 전환하거나, 화면을 끈 상태에서도 GPS 신호를 활성으로 유지합니다.</string>
     <string name="helper_google_translate_title">구글 번역</string>
     <string name="helper_google_translate_description">구글 번역(Google Translate)앱을 다운로드 받으면 c:geo에서 캐시 설명을 쉽게 번역할 수 있습니다. 캐시 설명문을 길게 누르시면 됩니다.(인터넷 연결 필요없음)</string>
