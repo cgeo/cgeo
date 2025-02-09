@@ -2,10 +2,9 @@ package cgeo.geocaching.utils.xml;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,8 @@ public class XmlNodeTest {
 
     private List<XmlNode> parseTestXml(final String resourceName, final boolean namespaceAware, final Predicate<XmlPullParser> nodeMarker) throws XmlPullParserException, IOException {
         final InputStream is = XmlNodeTest.class.getResourceAsStream(resourceName);
-        final XmlPullParser xpp = XmlUtils.createParser(new InputStreamReader(is, StandardCharsets.UTF_8), namespaceAware);
+        Objects.requireNonNull(is);
+        final XmlPullParser xpp = XmlUtils.createParser(is, namespaceAware);
         final List<XmlNode> nodes = new ArrayList<>();
         while (xpp.next() != XmlPullParser.END_DOCUMENT) {
             if (xpp.getEventType() == START_TAG && nodeMarker.test(xpp)) {
@@ -87,6 +87,21 @@ public class XmlNodeTest {
         gpxNode.get("extensions").forEach(gpxNode::add);
         gpxNode.remove("extensions");
         assertThat(gpxNode.get("wptExtension").get("SmartName").getValue()).isEqualTo("Abus");
+    }
+
+    @Test
+    public void testReadComplexUTF8BOMGpx() throws Exception {
+        //this file is UTF-8-BOM-encoded!
+        final List<XmlNode> nodes = parseTestXml("/xml/ZUG.IN.ZWEI.TEILEN.gpx", true, xpp -> xpp.getName().equals("trkpt"));
+        assertThat(nodes).hasSize(648);
+        // first element:
+        // <trkpt lat="47.464799880981445" lon="11.045894622802734">
+        //        <ele>782.54296875</ele>
+        //      </trkpt>
+        assertThat(nodes.get(0).get("@lat").getValue()).isEqualTo("47.464799880981445");
+        assertThat(nodes.get(0).get("@lon").getValue()).isEqualTo("11.045894622802734");
+        assertThat(nodes.get(0).get("ele").getValue()).isEqualTo("782.54296875");
+
     }
 
 
