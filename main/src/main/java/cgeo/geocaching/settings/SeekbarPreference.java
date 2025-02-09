@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -187,6 +188,11 @@ public class SeekbarPreference extends Preference {
     }
 
     private void setExtraView(final PreferenceViewHolder holder) {
+        //if seekbar is still assigned to another group/viewholder, remove it from there. See #16635
+        if (seekbarUI.getParent() instanceof ViewGroup) {
+            ((ViewGroup) seekbarUI.getParent()).removeView(seekbarUI);
+        }
+
         final FrameLayout widget = (FrameLayout) holder.findViewById(R.id.widget_extra);
         widget.removeAllViews();
         widget.addView(seekbarUI);
