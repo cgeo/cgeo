@@ -1687,7 +1687,6 @@
     <string name="helper_sendtocgeo_description">Poslať do c:geo je rozšírenie prehliadača <strong>pre vaše PC</strong>. Pri browsovaní geocaching.com, môžete poslať cache do vášho smartphone kliknutím na tlačidlo priamo v prehliadači.</string>
     <string name="helper_locus_description">Navigačná aplikácia pre tvoj mobil alebo tablet. Zmapuj okolie cez offline topografické mapy, zaznamenávaj svoju cestu, hľadaj geocache, používaj hlasovú navigáciu a rob ešte oveľa viac.</string>
     <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
-    <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
     <string name="helper_gps_locker_description">Zámok GPS udržiava signál GPS aktívny pri prechádzaní medzi aplikáciami a pri zhasnutej obrazovke zariadenia.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
