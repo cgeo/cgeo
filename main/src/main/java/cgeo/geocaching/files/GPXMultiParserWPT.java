@@ -2,14 +2,24 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.connector.gc.GCUtils;
+import cgeo.geocaching.connector.tc.TerraCachingLogType;
+import cgeo.geocaching.connector.tc.TerraCachingType;
+import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.INamedGeoCoordinate;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.xml.XmlNode;
 
 import androidx.annotation.NonNull;
@@ -179,9 +189,341 @@ public class GPXMultiParserWPT extends GPXMultiParserBase {
         XmlNode.forEach(node.getAsList("href"), this::setUrl);
         XmlNode.forEach(node.getAsList("text"), this::setUrlName);
 
-
+        // waypoint extensions
+        // for GPX 1.0, cache info comes from waypoint node (so called private children)
+        // for GPX 1.1 from extensions node
+        registerExtensions(node.get("extensions"));
+        registerExtensions(node);
 
     }
+
+    private void registerExtensions(@Nullable final XmlNode cacheParent) {
+        if (cacheParent == null) {
+            return;
+        }
+        registerGsakExtensions(cacheParent);
+        registerTerraCachingExtensions(cacheParent);
+        registerCgeoExtensions(cacheParent);
+        registerOpenCachingExtensions(cacheParent);
+        registerGroundspeakExtensions(cacheParent);
+    }
+
+    /** Add listeners for groundspeak extensions */
+    private void registerGroundspeakExtensions(final XmlNode cacheParent) {
+        // waypoints.cache
+        final XmlNode gcCache = cacheParent.get("cache");
+        registerGsakExtensionsCache(gcCache);
+        registerGsakExtensionsAttribute(gcCache);
+        registerGsakExtensionsTb(gcCache);
+        registerGsakExtensionsLog(gcCache);
+    }
+
+    /** Add listeners for Groundspeak cache */
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    private void registerGsakExtensionsCache(final XmlNode gcCache) {
+        try {
+            gcCache.onNonBlankAttribute("id", value -> cache.setCacheId(value));
+            gcCache.onNonBlankAttribute("archived", value -> cache.setArchived(StringUtils.equalsIgnoreCase(value, "true")));
+            gcCache.onNonBlankAttribute("available", value -> cache.setDisabled(!StringUtils.equalsIgnoreCase(value, "true")));
+        } catch (final RuntimeException e) {
+            Log.w("Failed to parse cache attributes", e);
+        }
+
+        // waypoint.cache.getName()
+        gcCache.onNonBlankValue("name", value -> cache.setName(validate(value)));
+
+        // waypoint.cache.getOwner()
+        gcCache.onNonBlankValue("owner", value -> cache.setOwnerUserId(validate(value)));
+
+        // waypoint.cache.getOwner()
+        gcCache.onNonBlankValue("placed_by", value -> cache.setOwnerDisplayName(validate(value)));
+
+        // waypoint.cache.getType()
+        String tempType = validate(gcCache.getValueAsString("type"));
+        // lab caches wrongly contain a prefix in the type
+        if (tempType.startsWith("Geocache|")) {
+            tempType = StringUtils.substringAfter(tempType, "Geocache|").trim();
+        }
+        cache.setType(CacheType.getByPattern(tempType));
+
+        // waypoint.cache.container
+        gcCache.onNonBlankValue("container", value -> cache.setSize(CacheSize.getById(validate(value))));
+
+        // waypoint.cache.getDifficulty()
+        final Float tempDifficulty = gcCache.getValueAsFloat("difficulty");
+        if (tempDifficulty != null) {
+            cache.setDifficulty(tempDifficulty);
+        }
+
+        // waypoint.cache.getTerrain()
+        final Float tempTerrain = gcCache.getValueAsFloat("terrain");
+        if (tempTerrain != null) {
+            cache.setTerrain(tempTerrain);
+        }
+
+        // waypoint.cache.country
+        gcCache.onNonBlankValue("country", value -> cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(value) : cache.getLocation() + ", " + value.trim()));
+
+        // waypoint.cache.state
+        gcCache.onNonBlankValue("state", value -> cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(value) : value + ", " + cache.getLocation()));
+
+        // waypoint.cache.encoded_hints
+        gcCache.onNonBlankValue("encoded_hints", value -> cache.setHint(validate(value)));
+
+        gcCache.onNonBlankValue("short_description", value -> cache.setShortDescription(validate(value)));
+        gcCache.onNonBlankValue("long_description", value -> cache.setDescription(validate(value)));
+    }
+
+    /** Add listeners for Groundspeak attributes */
+    private void registerGsakExtensionsAttribute(final XmlNode gcCache) {
+        // waypoint.cache.attribute
+        // <groundspeak:attributes>
+        //   <groundspeak:attribute id="32" inc="1">Bicycles</groundspeak:attribute>
+        //   <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
+        // where inc = 0 => _no, inc = 1 => _yes
+        // IDs see array CACHE_ATTRIBUTES
+        final XmlNode gcAttributes = gcCache.get("attributes");
+        if (gcAttributes != null) {
+            for (XmlNode attribute : gcAttributes.getAsList("attribute")) {
+                try {
+                    final Integer id = attribute.getAttributeAsInteger("id");
+                    final Integer inc = attribute.getAttributeAsInteger("inc");
+                    if (id != null && inc != null) {
+                        final CacheAttribute attr = CacheAttribute.getById(id);
+                        if (attr != null) {
+                            cache.getAttributes().add(attr.getValue(inc != 0));
+                        }
+                    }
+                } catch (final NumberFormatException ignore) {
+                    // ignored
+                }
+            }
+        }
+    }
+
+    /** Add listeners for Groundspeak TBs */
+    private void registerGsakExtensionsTb(final XmlNode gcCache) {
+        // waypoint.cache.travelbugs
+        final XmlNode gcTBs = gcCache.get("travelbugs");
+        if (gcTBs == null) {
+            return;
+        }
+
+        // waypoint.cache.travelbugs.travelbug
+        for (XmlNode gcTB : gcTBs.getAsList("travelbug")) {
+            trackable = new Trackable();
+            gcTB.onNonBlankValue("ref", value -> trackable.setGeocode(value));
+            gcTB.onNonBlankValue("name", value -> trackable.setName(validate(value)));
+            if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
+                cache.addInventoryItem(trackable);
+            }
+        }
+    }
+
+    /** Add listeners for Groundspeak logs */
+    private void registerGsakExtensionsLog(final XmlNode gcCache) {
+        // waypoint.cache.logs
+        final XmlNode gcLogs = gcCache.get("logs");
+        if (gcLogs == null) {
+            return;
+        }
+
+        // waypoint.cache.log
+        for (XmlNode gcLog : gcLogs.getAsList("log")) {
+            logBuilder = new LogEntry.Builder();
+            gcLog.onDefinedIntegerAttribute("id", value -> {
+                logBuilder.setId(value);
+                final IConnector connector = ConnectorFactory.getConnector(cache);
+                if (connector instanceof GCConnector) {
+                    logBuilder.setServiceLogId(GCUtils.logIdToLogCode(logBuilder.getId()));
+                }
+            });
+
+            // waypoint.cache.logs.log.date
+            gcLog.onNonBlankValue("date", value -> {
+                try {
+                    logBuilder.setDate(parseDate(value).getTime());
+                } catch (final Exception e) {
+                    Log.w("Failed to parse log date", e);
+                }
+            });
+
+            // waypoint.cache.logs.log.getType()
+            gcLog.onNonBlankValue("type", value -> logBuilder.setLogType(LogType.getByType(validate(value))));
+
+            // waypoint.cache.logs.log.finder
+            gcLog.onNonBlankValue("finder", value -> logBuilder.setAuthor(validate(value)));
+
+            // waypoint.cache.logs.log.text
+            gcLog.onNonBlankValue("text", value -> logBuilder.setLog(validate(value)));
+
+            final LogEntry log = logBuilder.build();
+            if (log.logType != LogType.UNKNOWN) {
+                if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                    final IConnector connector = ConnectorFactory.getConnector(cache);
+                    if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                        cache.setFound(true);
+                        cache.setVisitedDate(log.date);
+                    }
+                }
+                logs.add(log);
+            }
+        }
+    }
+
+    /** Add listeners for GSAK extensions */
+    private void registerGsakExtensions(final XmlNode cacheParent) {
+        final XmlNode gsak = cacheParent.get("wptExtension");
+        if (gsak == null) {
+            return;
+        }
+
+        gsak.onNonBlankValue("Watch", value -> cache.setOnWatchlist(Boolean.parseBoolean(value.trim())));
+/* todo
+        gsak.getChild(gsakNamespace, "UserData").setEndTextElementListener(new GPXMultiParserCaches.UserDataListener(1));
+
+        for (int i = 2; i <= 4; i++) {
+            gsak.getChild(gsakNamespace, "User" + i).setEndTextElementListener(new GPXMultiParserCaches.UserDataListener(i));
+        }
+*/
+        gsak.onNonBlankValue("Parent", value -> parentCacheCode = value);
+        gsak.onDefinedIntegerValue("FavPoints", value -> cache.setFavoritePoints(value));
+        gsak.onNonBlankValue("GcNote", value -> cache.setPersonalNote(StringUtils.trim(value), true));
+        gsak.onNonBlankValue("IsPremium", value -> cache.setPremiumMembersOnly(Boolean.parseBoolean(value)));
+        gsak.onNonBlankValue("LatBeforeCorrect", value -> {
+            originalLat = value;
+            addOriginalCoordinates();
+        });
+        gsak.onNonBlankValue("LonBeforeCorrect", value -> {
+            originalLon = value;
+            addOriginalCoordinates();
+        });
+        gsak.onNonBlankValue("Code", value -> cache.setGeocode(value));
+        gsak.onNonBlankValue("DNF", value -> {
+            if (!cache.isFound()) {
+                cache.setDNF(Boolean.parseBoolean(value));
+            }
+        });
+        gsak.onNonBlankValue("DNFDate", value -> {
+            if (0 == cache.getVisitedDate()) {
+                try {
+                    cache.setVisitedDate(parseDate(value).getTime());
+                } catch (final Exception e) {
+                    Log.w("Failed to parse visited date 'gsak:DNFDate'", e);
+                }
+            }
+        });
+        gsak.onNonBlankValue("UserFound", value -> {
+            if (0 == cache.getVisitedDate()) {
+                try {
+                    cache.setVisitedDate(parseDate(value).getTime());
+                } catch (final Exception e) {
+                    Log.w("Failed to parse visited date 'gsak:UserFound'", e);
+                }
+            }
+        });
+        gsak.onNonBlankValue("Child_ByGSAK", value -> wptUserDefined |= Boolean.parseBoolean(value));
+    }
+
+    /** Add listeners for TerraCaching extensions */
+    private void registerTerraCachingExtensions(final XmlNode cacheParent) {
+        final XmlNode terraCache = cacheParent.get("terracache");
+        if (terraCache == null) {
+            return;
+        }
+
+        cache.setName(terraCache.getValueAsString("name").trim());
+        cache.setOwnerDisplayName(validate(terraCache.getValueAsString("owner")));
+        cache.setType(TerraCachingType.getCacheType(terraCache.getValueAsString("style")));
+        cache.setSize(CacheSize.getById(terraCache.getValueAsString("size")));
+        terraCache.onNonBlankValue("country", value -> cache.setLocation(value));
+        terraCache.onNonBlankValue("state", value -> cache.setLocation(StringUtils.isBlank(cache.getLocation()) ? validate(value) : value + ", " + cache.getLocation()));
+        terraCache.onNonBlankValue("description", value -> cache.setDescription(trimHtml(value)));
+        terraCache.onNonBlankValue("hint", value -> cache.setHint(HtmlUtils.extractText(value)));
+
+        final XmlNode terraLogs = terraCache.get("logs");
+        if (terraLogs != null) {
+            for (XmlNode terraLog : terraLogs.getAsList("log")) {
+                logBuilder = new LogEntry.Builder();
+                terraLog.onDefinedIntegerAttribute("id", value -> logBuilder.setId(value));
+
+                // waypoint.cache.logs.log.date
+                terraLog.onNonBlankValue("date", value -> {
+                    try {
+                        logBuilder.setDate(parseDate(value).getTime());
+                    } catch (final Exception e) {
+                        Log.w("Failed to parse log date", e);
+                    }
+                });
+
+                // waypoint.cache.logs.log.type
+                terraLog.onNonBlankValue("type", value -> logBuilder.setLogType(TerraCachingLogType.getLogType(validate(value))));
+
+                // waypoint.cache.logs.log.finder
+                terraLog.onNonBlankValue("user", value -> logBuilder.setAuthor(validate(value)));
+
+                // waypoint.cache.logs.log.text
+                terraLog.onNonBlankValue("entry", value -> logBuilder.setLog(trimHtml(validate(value))));
+
+                final LogEntry log = logBuilder.build();
+                if (log.logType != LogType.UNKNOWN) {
+                    if (log.logType.isFoundLog() && StringUtils.isNotBlank(log.author)) {
+                        final IConnector connector = ConnectorFactory.getConnector(cache);
+                        if (connector instanceof ILogin && StringUtils.equals(log.author, ((ILogin) connector).getUserName())) {
+                            cache.setFound(true);
+                            cache.setVisitedDate(log.date);
+                        }
+                    }
+                    logs.add(log);
+                }
+            }
+        }
+    }
+
+    private static String trimHtml(final String html) {
+        return StringUtils.trim(StringUtils.removeEnd(StringUtils.removeStart(html, "<br>"), "<br>"));
+    }
+
+    protected void addOriginalCoordinates() {
+        if (StringUtils.isNotEmpty(originalLat) && StringUtils.isNotEmpty(originalLon)) {
+            cache.createOriginalWaypoint(new Geopoint(Double.parseDouble(originalLat), Double.parseDouble(originalLon)));
+        }
+    }
+
+    /** Add listeners for c:geo extensions */
+    private void registerCgeoExtensions(final XmlNode cacheParent) {
+        cacheParent.onNonBlankValue("visited", value -> wptVisited = Boolean.parseBoolean(value));
+        cacheParent.onNonBlankValue("userdefined", value -> wptUserDefined = Boolean.parseBoolean(value));
+        cacheParent.onNonBlankValue("originalCoordsEmpty", value -> wptEmptyCoordinates = Boolean.parseBoolean(value));
+
+        final XmlNode extension = cacheParent.get("cacheExtension");
+        if (extension != null) {
+            extension.onDefinedIntegerValue("assignedEmoji", value -> cacheAssignedEmoji = value);
+        }
+    }
+
+    /** Add listeners for opencaching extensions */
+    private void registerOpenCachingExtensions(final XmlNode cacheParent) {
+        // waypoints.oc:cache
+        final XmlNode ocCache = cacheParent.get("cache");
+        if (ocCache == null) {
+            return;
+        }
+
+        ocCache.onNonBlankValue("requires_password", value -> logPasswordRequired = Boolean.parseBoolean(value));
+        ocCache.onNonBlankValue("other_code", value -> descriptionPrefix = Geocache.getAlternativeListingText(value));
+        ocCache.onNonBlankValue("size", value -> {
+            final CacheSize size = CacheSize.getById(value);
+            if (size != CacheSize.UNKNOWN) {
+                cache.setSize(size);
+            }
+        });
+    }
+
+
+
+
 
     @Override
     void onParsingDone(@NonNull final Collection<Object> result) {
@@ -301,7 +643,7 @@ public class GPXMultiParserWPT extends GPXMultiParserBase {
         }
     }
 
-    protected static String validate(final String input) {
+    protected static String validate(@NonNull final String input) {
         if ("nil".equalsIgnoreCase(input)) {
             return "";
         }

@@ -116,6 +116,14 @@ public class XmlNode {
         return value;
     }
 
+    public void onDefinedIntegerValue (final String name, final Consumer<Integer> action) {
+        try {
+            action.accept(Integer.parseInt(get(name).getValue()));
+        } catch (NullPointerException | NumberFormatException ignore) {
+            // ignore
+        }
+    }
+
     @Nullable
     public Float getValueAsFloat(final String name) {
         try {
@@ -134,10 +142,41 @@ public class XmlNode {
         }
     }
 
+    public void onNonBlankValue(final String name, final Consumer<String> action) {
+        final String temp = getValueAsString(name);
+        if (StringUtils.isNotBlank(temp)) {
+            action.accept(temp.trim());
+        }
+    }
+
+    public void onNonBlankAttribute(final String name, final Consumer<String> action) {
+        final String temp = getAttribute(name);
+        if (StringUtils.isNotBlank(temp)) {
+            action.accept(temp);
+        }
+    }
+
+    public void onDefinedIntegerAttribute(final String name, final Consumer<Integer> action) {
+        final Integer temp = getAttributeAsInteger(name);
+        if (temp != null) {
+            action.accept(temp);
+        }
+    }
+
     @Nullable
     public String getAttribute(final String name) {
         final XmlNode temp = get(ATTRIBUTE_PRAEFIX + name);
         return temp == null ? null : temp.getValue();
+    }
+
+    @Nullable
+    public Integer getAttributeAsInteger(final String name) {
+        final String temp = getAttribute(name);
+        try {
+            return temp == null ? null : Integer.parseInt(temp);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
     @Nullable
