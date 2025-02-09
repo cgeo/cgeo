@@ -1917,7 +1917,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
     <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
     <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
-    <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
     <string name="helper_gps_locker_description">GPS Locker hält dein GPS aktiv, wenn du zwischen Anwendungen wechselt oder den Bildschirm deines Gerätes ausschaltest.</string>
     <string name="helper_google_translate_title">Google Übersetzer</string>
     <string name="helper_google_translate_description">Wenn du Übersetzungspakete mit der Google Übersetzer-App herunterlädst, kannst du Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
