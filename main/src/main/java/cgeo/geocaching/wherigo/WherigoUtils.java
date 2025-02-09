@@ -65,9 +65,9 @@ import se.krka.kahlua.vm.LuaTable;
 
 public final class WherigoUtils {
 
-    public static final TextParam TP_OK_BUTTON = TextParam.id(R.string.ok).setImage(ImageParam.id(R.drawable.ic_menu_done));
-    public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setImage(ImageParam.id(R.drawable.ic_menu_done));
-    public static final TextParam TP_CANCEL_BUTTON = TextParam.id(R.string.cancel).setImage(ImageParam.id(R.drawable.ic_menu_cancel));
+    public static final TextParam TP_OK_BUTTON = TextParam.id(R.string.ok).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_done));
+    public static final TextParam TP_CLOSE_BUTTON = TextParam.id(R.string.close).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_done));
+    public static final TextParam TP_CANCEL_BUTTON = TextParam.id(R.string.cancel).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_cancel));
 
     private static final Pattern PATTERN_CARTRIDGE_LINK = Pattern.compile("https?" + Pattern.quote("://www.wherigo.com/cartridge/") + "(?:details|download)" + Pattern.quote(".aspx?") + "[Cc][Gg][Uu][Ii][Dd]=([-0-9a-zA-Z]*)");
     private static final String WHERIGO_URL_BASE = "https://www.wherigo.com/cartridge/download.aspx?CGUID=";
@@ -121,7 +121,7 @@ public final class WherigoUtils {
         if (action == null || action.text == null) {
             return "-";
         }
-        return action.isEnabled()  ? action.text : action.text + " (disabled)";
+        return (action.isEnabled() && action.getActor().visibleToPlayer()) ? action.text : action.text + " (debug)";
     }
 
     public static void callAction(final Thing thing, final Action action) {

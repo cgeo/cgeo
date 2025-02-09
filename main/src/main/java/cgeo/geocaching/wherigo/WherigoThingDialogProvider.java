@@ -28,8 +28,8 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
     private final EventTable eventTable;
 
     private enum ThingAction {
-        DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
-        LOCATE_ON_CENTER(TextParam.id(R.string.wherigo_locate_on_center).setImage(ImageParam.id(R.drawable.map_followmylocation_btn))),
+        DISPLAY_ON_MAP(TextParam.id(R.string.caches_on_map).setAllCaps(true).setImage(ImageParam.id(R.drawable.ic_menu_mapmode))),
+        LOCATE_ON_CENTER(TextParam.id(R.string.wherigo_locate_on_center).setAllCaps(true).setImage(ImageParam.id(R.drawable.map_followmylocation_btn))),
         CLOSE(WherigoUtils.TP_CLOSE_BUTTON);
 
         private final TextParam tp;
@@ -81,7 +81,7 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
         //"actions" will be filled with instance of both "Action" and "ThingAction"
         final List<Object> actions = new ArrayList<>();
         if (eventTable instanceof Thing) {
-            actions.addAll(WherigoUtils.getActions((Thing) eventTable, false));
+            actions.addAll(WherigoUtils.getActions((Thing) eventTable, WherigoGame.get().isDebugModeForCartridge()));
         }
         if (eventTable instanceof Zone) {
             actions.add(ThingAction.DISPLAY_ON_MAP);
@@ -93,8 +93,8 @@ public class WherigoThingDialogProvider implements IWherigoDialogProvider {
 
         WherigoViewUtils.setViewActions(actions, binding.dialogActionlist, 1,
                 a -> a instanceof Action ?
-                        TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
-                        ((ThingAction) a).getTextParam(),
+                    TextParam.text(WherigoUtils.getActionText((Action) a)).setImage(ImageParam.id(R.drawable.settings_nut)) :
+                    ((ThingAction) a).getTextParam(),
                 item -> {
                     if (item instanceof Action) {
                         WherigoUtils.callAction((Thing) eventTable, (Action) item);
