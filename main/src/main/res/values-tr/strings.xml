@@ -1546,7 +1546,6 @@
     <string name="helper_sendtocgeo_description">c:geo\'ya gönder <strong>bilgisayarınız</strong> için bir tarayıcı eklentisidir. Geocaching.com\'u açtığınızda, tarayıcı içindeki tuşa tıklayarak direkt olarak Geocache\'leri akıllı telefonlarınıza gönderebilirsiniz.</string>
     <string name="helper_locus_description">Telefonunuz veya tabletiniz için kullanıma uygun navigasyon uygulaması. Topo haritaları çevrim dışı görüntüleme, rotanızı takip etme, Geocache bulma, sesli rehber kullanma ve daha fazlasını gerçekleştirebilirsiniz.</string>
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
-    <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
