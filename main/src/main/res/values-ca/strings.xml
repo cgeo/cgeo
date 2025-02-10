@@ -1229,6 +1229,8 @@
     <string name="contentstorage_err_list_failed">No s\'han pogut llistar els fitxers de la carpeta \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">No s\'ha pogut accedir a la carpeta \'%s\'</string>
     <string name="contentstorage_err_copy_failed">No s\'ha pogut copiar / moure el fitxer \'%1$s\' a \'%2$s\' (moure =%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">S\'ha produït un error en seleccionar un fitxer/carpeta</string>
+    <string name="contentstorage_err_activity_not_found_message">El vostre sistema no proporciona cap component per seleccionar fitxers/carpetes: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Usuari definit</string>
     <string name="persistablefolder_usertype_default">Per defecte</string>
