@@ -1145,7 +1145,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, res);
+                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, res, null);
             }
         }.execute();
     }
@@ -1298,7 +1298,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     new StoreCacheClickListener(), null, new MoveCacheClickListener(), new StoreCacheClickListener());
 
             // list
-            updateCacheLists(binding.getRoot(), cache, activity.res);
+            updateCacheLists(binding.getRoot(), cache, activity.res, activity);
 
             // watchlist
 
@@ -2633,13 +2633,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    static void updateCacheLists(final View view, final Geocache cache, final Resources res) {
+    static void updateCacheLists(final View view, final Geocache cache, final Resources res, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final SpannableStringBuilder builder = new SpannableStringBuilder();
         for (final Integer listId : cache.getLists()) {
             if (builder.length() > 0) {
                 builder.append(", ");
             }
-            appendClickableList(builder, view, listId);
+            appendClickableList(builder, view, listId, cacheDetailActivity);
         }
         builder.insert(0, res.getString(R.string.list_list_headline) + " ");
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
@@ -2647,13 +2647,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId) {
+    static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final int start = builder.length();
         builder.append(DataStore.getList(listId).getTitle());
         builder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull final View widget) {
                 Settings.setLastDisplayedList(listId);
+                if (cacheDetailActivity != null) {
+                    cacheDetailActivity.setNeedsRefresh();
+                }
                 CacheListActivity.startActivityOffline(view.getContext());
             }
         }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
