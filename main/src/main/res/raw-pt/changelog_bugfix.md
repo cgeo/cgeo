@@ -1,1 +1,14 @@
 #
+- Correcção: Wherigo: Suporte de zonas com coordenadas inválidas/muito próximas
+- Correção: c:geo tenta importar ficheiros locais ".map" como GPX
+- Correcção: Notas de utilizador editadas do popup, às vezes são perdidas
+- Fix: Editing log shows "report problem" option
+- Fix: Live Filter 'Does not contain' fails to return any caches
+- Fix: Crashes on pausing a UnifiedMap online map
+- Fix: Outdated app "GPS Bluethooth" in useful apps list
+- Fix: Variables and/or values are deleted erroneously when editing personal note
+- Fix: Wherigo: Wrong altitude info
+- Fix: Wherigo: All button texts are capitalized
+- Fix: Crash in settings
+- Fix: c:geo not listed in Play Store for GPS-less devices
+- Fix: c:geo crashing silently on folder selection in certain configurations
