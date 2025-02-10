@@ -750,7 +750,6 @@
     <string name="helper_sendtocgeo_description">الإرسال إلى c:geo هو ملحق في المتصفح <strong>لحاسوبك</strong>. أثناء تصفح geocaching.com، يمكنك إرسال المخبآت إلى هاتفك الذكي من خلال النقر على الزر مباشرة داخل المتصفح.</string>
     <string name="helper_locus_description">تطبيق الملاحة في الهواء الطلق لهاتفك أو الكمبيوتر اللوحي. و عرض خرائط topo في وضع عدم اتصال، و تعقب مسارك و مطارة على الأخرين و الدليل الصوتي و أكثر من ذالك.</string>
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
-    <string name="helper_bluetoothgps_description">يتيح لك استخدام مستقبل GPS خارجي للحصول على بيانات مواقع أكثر دقة، و يمكنك من توفير استهلاك بطاريتك.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
     <string name="helper_where_you_go_description">WhereYouGo تتيج تشغيل و البحث عن المخبىت من نوع Wherigo. و c:geo يمكنه أن يقوم إلى التحميل التلقائي للخراطيش داخل هذا التطبيق.</string>

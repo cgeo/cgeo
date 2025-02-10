@@ -1803,7 +1803,6 @@
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
     <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, jäljitä reittisi, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
-    <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
