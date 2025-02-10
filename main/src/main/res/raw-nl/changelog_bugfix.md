@@ -5,10 +5,10 @@
 - Oplossing: Bewerken van logboek toont de optie "rapportageprobleem"
 - Oplossing: Live Filter 'Bevat niet' retourneert geen caches
 - Oplossing: Crashes op pauzeren van een UnifiedMap online kaart
-- Fix: Outdated app "GPS Bluethooth" in useful apps list
-- Fix: Variables and/or values are deleted erroneously when editing personal note
-- Fix: Wherigo: Wrong altitude info
-- Fix: Wherigo: All button texts are capitalized
-- Fix: Crash in settings
-- Fix: c:geo not listed in Play Store for GPS-less devices
-- Fix: c:geo crashing silently on folder selection in certain configurations
+- Oplossing: verouderde app "GPS Bluethooth" in handige apps lijst
+- Oplossing: Variabelen en/of waarden worden per ongeluk verwijderd bij het bewerken van persoonlijke notitie
+- Oplossing: Wherigo: Verkeerde hoogte info
+- Oplossing: Wherigo: Alle knopteksten worden gekapitaliseerd
+- Oplossing: Crash in instellingen
+- Oplossing: c:geo niet vermeld in de Play Store voor GPS-loze apparaten
+- Oplossing: c:geo crashed stil bij mapselectie in bepaalde configuraties
