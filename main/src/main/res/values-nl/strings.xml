@@ -1239,6 +1239,8 @@
     <string name="contentstorage_err_list_failed">Bestanden in de map \'%s\' konden niet worden weergegeven</string>
     <string name="contentstorage_err_folder_access_failed">Map \'%s\' kon niet worden benaderd</string>
     <string name="contentstorage_err_copy_failed">Bestand \'%1$s\' kon niet worden gekopieerd/verplaatst naar \'%2$s\' (verplaats=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fout bij selecteren van bestand/map</string>
+    <string name="contentstorage_err_activity_not_found_message">Je systeem biedt geen component aan om bestanden/mappen te selecteren: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Gebruiker gedefinieerd</string>
     <string name="persistablefolder_usertype_default">Standaard</string>
