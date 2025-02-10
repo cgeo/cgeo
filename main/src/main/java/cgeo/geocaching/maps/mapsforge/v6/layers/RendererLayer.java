@@ -4,7 +4,7 @@ import org.mapsforge.core.graphics.GraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
-import org.mapsforge.map.model.IMapViewPosition;
+import org.mapsforge.map.model.MapViewPosition;
 import org.mapsforge.map.reader.MapFile;
 
 public class RendererLayer implements ITileLayer {
@@ -13,7 +13,7 @@ public class RendererLayer implements ITileLayer {
 
     private final MapFile mapDataStore;
 
-    public RendererLayer(final TileCache tileCache, final MapFile mapDataStore, final IMapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
+    public RendererLayer(final TileCache tileCache, final MapFile mapDataStore, final MapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
         this.mapDataStore = mapDataStore;
         tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory, HillShadingLayerHelper.getHillsRenderConfig());
     }

@@ -12,7 +12,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
-import org.mapsforge.map.model.IMapViewPosition;
+import org.mapsforge.map.model.MapViewPosition;
 
 public abstract class AbstractMapsforgeMapSource extends AbstractMapSource {
 
@@ -30,7 +30,7 @@ public abstract class AbstractMapsforgeMapSource extends AbstractMapSource {
     }
 
 
-    public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
+    public ITileLayer createTileLayer(final TileCache tileCache, final MapViewPosition mapViewPosition) {
         source.setUserAgent(MAPNIK_TILE_DOWNLOAD_UA);
         return new DownloadLayer(tileCache, mapViewPosition, source, AndroidGraphicFactory.INSTANCE);
     }
