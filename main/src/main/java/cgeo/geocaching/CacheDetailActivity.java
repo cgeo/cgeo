@@ -501,7 +501,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (selectedWaypoint != null) {
                 ensureSaved();
                 EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
-                refreshOnResume = true;
+                setNeedsRefresh();
             }
         } else if (itemId == R.id.menu_waypoint_visited) {
             if (selectedWaypoint != null) {
@@ -780,7 +780,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_change_description_style) {
             changeDescriptionStyle();
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
-            refreshOnResume = true;
+            setNeedsRefresh();
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -2126,7 +2126,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     if (sortedWaypoints != null && !sortedWaypoints.isEmpty()) {
                         activity.selectedWaypoint = sortedWaypoints.get(sortedWaypoints.size() - 1); // move to bottom where new waypoint will be created
                     }
-                    activity.refreshOnResume = true;
+                    activity.setNeedsRefresh();
                 });
 
                 headerBinding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
@@ -2274,7 +2274,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.selectedWaypoint = wpt;
                 activity.ensureSaved();
                 EditWaypointActivity.startActivityEditWaypoint(activity, cache, wpt.getId());
-                activity.refreshOnResume = true;
+                activity.setNeedsRefresh();
             });
 
             rowView.setOnLongClickListener(v -> {
