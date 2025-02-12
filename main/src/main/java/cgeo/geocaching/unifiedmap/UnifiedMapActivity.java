@@ -522,6 +522,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         if (cacheWaypoints != null) {
             viewModel.waypoints.write(waypoints -> waypoints.addAll(cacheWaypoints));
         }
+
+        if (viewModel.mapType.fromList != 0) {
+            if (changedCache.getLists().contains(viewModel.mapType.fromList)) {
+                AbstractList.getListById(viewModel.mapType.fromList).updateNumberOfCaches();
+            }
+        }
+
         //call reload logic -> this will reapply filters and such
         reloadCachesAndWaypoints();
     }
