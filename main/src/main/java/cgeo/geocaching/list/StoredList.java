@@ -52,7 +52,7 @@ public final class StoredList extends AbstractList {
     public static final int STANDARD_LIST_ID = 1;
     public final int markerId;
     public final boolean preventAskForDeletion;
-    private final int count; // this value is only valid as long as the list is not changed by other database operations
+    private int count; // this value is only valid as long as the list is not changed by other database operations
 
     public StoredList(final int id, final String title, final int markerId, final boolean preventAskForDeletion, final int count) {
         super(id, title);
@@ -487,6 +487,11 @@ public final class StoredList extends AbstractList {
     @Override
     public int getNumberOfCaches() {
         return count;
+    }
+
+    @Override
+    public void updateNumberOfCaches() {
+        count = DataStore.getList(id).count;
     }
 
     /**
