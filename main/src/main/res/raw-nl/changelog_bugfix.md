@@ -1,1 +1,14 @@
 #
+- Oplossing: Wherigo: Behandeling zones met ongeldig/te-nabije coördinaten
+- Oplossing: c:geo probeert de lokale ".map" bestanden te importeren als GPX
+- Oplossing: Aangepaste gebruikersaantekeningen uit pop-up gaan soms verloren
+- Oplossing: Bewerken van logboek toont de optie "rapportageprobleem"
+- Oplossing: Live Filter 'Bevat niet' retourneert geen caches
+- Oplossing: Crashes op pauzeren van een UnifiedMap online kaart
+- Oplossing: verouderde app "GPS Bluethooth" in handige apps lijst
+- Oplossing: Variabelen en/of waarden worden per ongeluk verwijderd bij het bewerken van persoonlijke notitie
+- Oplossing: Wherigo: Verkeerde hoogte info
+- Oplossing: Wherigo: Alle knopteksten worden gekapitaliseerd
+- Oplossing: Crash in instellingen
+- Oplossing: c:geo niet vermeld in de Play Store voor GPS-loze apparaten
+- Oplossing: c:geo crashed stil bij mapselectie in bepaalde configuraties
