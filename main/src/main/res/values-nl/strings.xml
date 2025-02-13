@@ -1941,7 +1941,6 @@
     <string name="helper_gps_locker_description">GPS Locker houdt het GPS signaal actief bij het schakelen tussen apps en wanneer het scherm van je apparaat is uitgeschakeld.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
-    <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
