@@ -806,7 +806,6 @@
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <!-- export -->
     <string name="export">Exportă</string>
     <string name="export_exportedto">exportat către</string>
