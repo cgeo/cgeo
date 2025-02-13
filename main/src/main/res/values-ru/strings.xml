@@ -1891,7 +1891,6 @@
     <string name="helper_gps_locker_description">GPS Locker сохраняет GPS активным при переключении между приложениями и при выключении экрана устройства.</string>
     <string name="helper_google_translate_title">Переводчик Google</string>
     <string name="helper_google_translate_description">Если вы загрузите языковые пакеты в используемом вами приложении для перевода (например, Переводчик Google или Яндекс.Переводчик), тогда вы сможете переводить описания тайников в c:geo офлайн. Для этого сделайте длинный тап на тексте описания и выберите Перевести.</string>
-    <string name="helper_where_you_go_description">WhereYouGo позволяет играть и искать тайники типа Wherigo. c:geo будет автоматически загружать картриджи с помощью этого приложения.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf позволяет вам читать данные из ANT+/Garmin chirp тегов, что необходимо для ANT+/chirp тайников.</string>
     <string name="helper_alc_description">Приложение \"Adventure Lab\" для вашего телефона или планшета.</string>
     <string name="helper_gcwizard_description">GC Wizard содержит множество инструментов для базовой криптографии, геодезических и научных расчетов, а также сотни наборов различных символов.</string>
