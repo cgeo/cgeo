@@ -718,7 +718,6 @@
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
-    <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
     <!-- export -->
     <string name="export">I-export</string>
     <string name="export_progress">I-export: %1$s</string>
