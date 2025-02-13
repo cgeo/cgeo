@@ -1967,7 +1967,6 @@
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
     <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy kešek v c:geo dlouhým podržením textu (a to bez připojení k Internetu).</string>
-    <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání kešek typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
     <string name="helper_alc_description">Aplikace Adventure Lab pro váš telefon nebo tablet.</string>
     <string name="helper_gcwizard_description">Průvodce GC Wizard obsahuje řadu nástrojů pro jednoduché kryptografické, geodetické a vědecké výpočty a stovky sad různých symbolů.</string>
