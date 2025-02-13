@@ -1937,7 +1937,6 @@
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar as geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <string name="helper_alc_description">A aplicação Adventure Lab para o seu telemóvel ou tablet.</string>
     <string name="helper_gcwizard_description">O Assistente de GC contém inúmeras ferramentas para cálculos criptográficos, geodésicos e científicos simples, bem como centenas de conjuntos de vários símbolos.</string>
