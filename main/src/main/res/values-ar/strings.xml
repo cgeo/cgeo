@@ -749,7 +749,6 @@
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
-    <string name="helper_where_you_go_description">WhereYouGo تتيج تشغيل و البحث عن المخبىت من نوع Wherigo. و c:geo يمكنه أن يقوم إلى التحميل التلقائي للخراطيش داخل هذا التطبيق.</string>
     <!-- export -->
     <string name="export">تصدير</string>
     <string name="export_progress">تصدير: %1$s</string>
