@@ -1462,7 +1462,6 @@
     <string name="helper_gps_locker_description">GPS Locker holder GPS-signalet aktivt når du skifter mellom apper og når skjermen er av.</string>
     <string name="helper_google_translate_title">Google Oversetter</string>
     <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
-    <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Wherigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lar deg lese av data fra ANT+/Garmin chirp-tagger, som er nødvendig for ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="share_export">Del / Eksporter</string>
