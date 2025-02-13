@@ -965,7 +965,6 @@
     <string name="helper_gps_locker_description">GPS Locker підтримує активний сигнал GPS під час перемикання між програмами та коли екран вашого пристрою вимкнений.</string>
     <string name="helper_google_translate_title">Перекладач Google</string>
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
-    <string name="helper_where_you_go_description">Тут Ви можете грати та шукати схованки типу Wherigo. c:geo може автоматично запустити завантаження картриджів у цьому додатку.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf дозволяє вам читати дані від тегів чітких даних ANT+/Garmin chirp тегів, які потрібні для ANT+/chirp geocaches.</string>
     <!-- export -->
     <string name="export">Експорт</string>
