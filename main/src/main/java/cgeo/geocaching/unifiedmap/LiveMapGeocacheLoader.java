@@ -171,7 +171,7 @@ public class LiveMapGeocacheLoader {
                     if (cacheIsValidForFilter && !cachedResultWasComplete && cachedResultCenter != null) {
                         final float distanceCachedCall = viewport.getCenter().distanceTo(cachedResultCenter);
                         final float distanceCenterCorner = viewport.getCenter().distanceTo(viewport.bottomLeft);
-                        if (distanceCachedCall <= distanceCenterCorner * 0.3) {
+                        if (distanceCachedCall <= distanceCenterCorner * 0.2) {
                             Log.iForce(LOGPRAEFIX + "NO RELOAD AFTER NONCOMPLETE RESULT AND TOO CLOSE TO PREVIOUS " + logParams);
                             setState(LoadState.STOPPED);
                             this.loader.dirtyTime = -1;
