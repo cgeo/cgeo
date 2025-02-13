@@ -1492,7 +1492,6 @@
     <string name="helper_gps_locker_description">GPS Locker mantiene activa la señal GPS al cambiar entre aplicaciones y cuando la pantalla de tu dispositivo está apagada.</string>
     <string name="helper_google_translate_title">Traductor de Google</string>
     <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
-    <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Wherigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf te permite leer los datos de las etiquetas de chirp ANT+/Garmin, que son necesarias para los cachés ANT+/chirp.</string>
     <string name="helper_alc_description">Aplicación Adventure Lab Player para tu teléfono o tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard contiene numerosas herramientas para cifrado simple, cálculo geográfico y científico, así como cientos de conjuntos de diversos símbolos.</string>
