@@ -502,7 +502,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (selectedWaypoint != null) {
                 ensureSaved();
                 EditWaypointActivity.startActivityEditWaypoint(this, cache, selectedWaypoint.getId());
-                refreshOnResume = true;
+                setNeedsRefresh();
             }
         } else if (itemId == R.id.menu_waypoint_geofence) {
             if (selectedWaypoint != null) {
@@ -801,7 +801,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_change_description_style) {
             changeDescriptionStyle();
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
-            refreshOnResume = true;
+            setNeedsRefresh();
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -1166,7 +1166,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             protected void onFinished() {
-                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, res);
+                updateCacheLists(CacheDetailActivity.this.findViewById(R.id.offline_lists), cache, res, null);
             }
         }.execute();
     }
@@ -1319,7 +1319,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     new StoreCacheClickListener(), null, new MoveCacheClickListener(), new StoreCacheClickListener());
 
             // list
-            updateCacheLists(binding.getRoot(), cache, activity.res);
+            updateCacheLists(binding.getRoot(), cache, activity.res, activity);
 
             // watchlist
 
@@ -2145,7 +2145,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     if (sortedWaypoints != null && !sortedWaypoints.isEmpty()) {
                         activity.selectedWaypoint = sortedWaypoints.get(sortedWaypoints.size() - 1); // move to bottom where new waypoint will be created
                     }
-                    activity.refreshOnResume = true;
+                    activity.setNeedsRefresh();
                 });
 
                 headerBinding.addWaypointCurrentlocation.setOnClickListener(v2 -> {
@@ -2293,7 +2293,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.selectedWaypoint = wpt;
                 activity.ensureSaved();
                 EditWaypointActivity.startActivityEditWaypoint(activity, cache, wpt.getId());
-                activity.refreshOnResume = true;
+                activity.setNeedsRefresh();
             });
 
             rowView.setOnLongClickListener(v -> {
@@ -2652,13 +2652,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    static void updateCacheLists(final View view, final Geocache cache, final Resources res) {
+    static void updateCacheLists(final View view, final Geocache cache, final Resources res, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final SpannableStringBuilder builder = new SpannableStringBuilder();
         for (final Integer listId : cache.getLists()) {
             if (builder.length() > 0) {
                 builder.append(", ");
             }
-            appendClickableList(builder, view, listId);
+            appendClickableList(builder, view, listId, cacheDetailActivity);
         }
         builder.insert(0, res.getString(R.string.list_list_headline) + " ");
         final TextView offlineLists = view.findViewById(R.id.offline_lists);
@@ -2666,13 +2666,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         offlineLists.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId) {
+    static void appendClickableList(final SpannableStringBuilder builder, final View view, final Integer listId, @Nullable final CacheDetailActivity cacheDetailActivity) {
         final int start = builder.length();
         builder.append(DataStore.getList(listId).getTitle());
         builder.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull final View widget) {
                 Settings.setLastDisplayedList(listId);
+                if (cacheDetailActivity != null) {
+                    cacheDetailActivity.setNeedsRefresh();
+                }
                 CacheListActivity.startActivityOffline(view.getContext());
             }
         }, start, builder.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

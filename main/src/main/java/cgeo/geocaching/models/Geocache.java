@@ -2019,6 +2019,7 @@ public class Geocache implements INamedGeoCoordinate {
         lists.clear();
         lists.addAll(listIds);
         storeCache(this, null, lists, false, handler);
+        notifyChange();
     }
 
     @Override
@@ -2175,6 +2176,7 @@ public class Geocache implements INamedGeoCoordinate {
             imgGetter.waitForEndCompletable(null).blockingAwait();
 
             cache.setLists(lists);
+
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
 
             if (DisposableHandler.isDisposed(handler)) {
