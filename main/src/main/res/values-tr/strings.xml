@@ -1549,7 +1549,6 @@
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
-    <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <string name="helper_alc_description">Telefonunuz ve tabletiniz için Adventure Lab uygulaması.</string>
     <!-- export -->
