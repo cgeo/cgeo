@@ -391,9 +391,9 @@ public class FormulaUtils {
 
     public static int digitalRoot(final String value) {
         // Adds individual digits together until reaching a single digit
-        BigInteger result = BigInteger.valueOf(999);
+        BigInteger result;
         do {
-            result = 0;
+            result = BigInteger.valueOf(0);
             for (char c : value.toCharArray()) {
                 result += BigInteger.valueOf(c - '0');
             }
