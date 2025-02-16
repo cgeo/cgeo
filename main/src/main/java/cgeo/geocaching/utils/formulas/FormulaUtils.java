@@ -389,6 +389,18 @@ public class FormulaUtils {
         }
     }
 
+    public static int digitalRoot(final String value) {
+        // Adds individual digits together until reaching a single digit
+        BigInteger result;
+        do {
+            result = BigInteger.valueOf(0);
+            for (char c : value.toCharArray()) {
+                result += BigInteger.valueOf(c - '0');
+            }
+            value = result.toString();
+        } while (result > 9);
+    }
+
     public static BigInteger vanity(final String value) {
         BigInteger result = BigInteger.valueOf(0);
         for (char c : value.toUpperCase(Locale.US).toCharArray()) {

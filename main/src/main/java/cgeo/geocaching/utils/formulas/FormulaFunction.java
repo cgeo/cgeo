@@ -57,7 +57,9 @@ public enum FormulaFunction {
     ROMAN(new String[]{"roman"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_roman, "Roman", "''", 1,
             singleValueStringFunction(FormulaUtils::roman)),
     VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
-            singleValueStringFunction(FormulaUtils::vanity));
+            singleValueStringFunction(FormulaUtils::vanity)),
+    DIGITALROOT(new String[]{"digitalroot", "droot", "dr"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_digitalroot, "Digital Root", null, 0,
+            valueList -> FormulaUtils.digitalroot(valuelist, true));
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),
