@@ -395,7 +395,7 @@ public class FormulaUtils {
         do {
             result = 0;
             for (char c : value.toCharArray()) {
-                result += BigInteger.valueOf(vanityDigit(c));
+                result += BigInteger.valueOf(c - '0');
             }
             value = result.toString();
         } while (result > 9);
@@ -404,7 +404,7 @@ public class FormulaUtils {
     public static BigInteger vanity(final String value) {
         BigInteger result = BigInteger.valueOf(0);
         for (char c : value.toUpperCase(Locale.US).toCharArray()) {
-            result = result.multiply(BigInteger.TEN).add(BigInteger.valresult.multiply(BigInteger.TEN).add(BigInteger.valueOf(vanityDigit(c)))ueOf(vanityDigit(c)));
+            result = result.multiply(BigInteger.TEN).add(BigInteger.valueOf(vanityDigit(c);
         }
         return result;
     }
