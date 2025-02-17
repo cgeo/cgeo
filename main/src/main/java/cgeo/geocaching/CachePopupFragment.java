@@ -67,7 +67,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
         return f;
     }
-
+ 
     private static class StoreCacheHandler extends DisposableHandler {
         private final int progressMessage;
         private final WeakReference<CachePopupFragment> popupRef;
@@ -182,7 +182,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             // offline use
             CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
 
-            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res);
+            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res, null);
 
             updateStoreRefreshButtons(true);
             getLifecycle().addObserver(new GeocacheChangedBroadcastReceiver(getContext()) {
@@ -233,7 +233,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             CacheDetailActivity.updateOfflineBox(getView(), cache, res,
                     new RefreshCacheClickListener(), new DropCacheClickListener(),
                     new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-            CacheDetailActivity.updateCacheLists(getView(), cache, res);
+            CacheDetailActivity.updateCacheLists(getView(), cache, res, null);
         } else {
             final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
             final FragmentActivity activity = requireActivity();
@@ -245,7 +245,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                     CacheDetailActivity.updateOfflineBox(view, cache, res,
                             new RefreshCacheClickListener(), new DropCacheClickListener(),
                             new StoreCacheClickListener(), new ShowHintClickListener(binding), new MoveCacheClickListener(), new StoreCacheClickListener());
-                    CacheDetailActivity.updateCacheLists(view, cache, res);
+                    CacheDetailActivity.updateCacheLists(view, cache, res, null);
                 }
             });
         }
