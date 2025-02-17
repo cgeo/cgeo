@@ -1223,6 +1223,8 @@
     <string name="contentstorage_err_list_failed">Filer i mappen \'%s\' kunde inte listas</string>
     <string name="contentstorage_err_folder_access_failed">Mappen \'%s\' kunde inte öppnas</string>
     <string name="contentstorage_err_copy_failed">Filen \'%1$s\' kunde inte kopieras/flyttas till \'%2$s\' (move=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fel vid val av fil/folder</string>
+    <string name="contentstorage_err_activity_not_found_message">Ditt system tillhandahåller inte en komponent för att välja filer/foldrar: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Användardefinierad</string>
     <string name="persistablefolder_usertype_default">Standard</string>
