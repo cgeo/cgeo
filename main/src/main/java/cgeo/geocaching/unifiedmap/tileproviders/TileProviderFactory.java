@@ -63,7 +63,10 @@ public class TileProviderFactory {
                 final boolean isOfflineMap = (tileProvider instanceof AbstractMapsforgeOfflineTileProvider)
                         || (tileProvider instanceof AbstractMapsforgeVTMOfflineTileProvider);
                 final String displayName = tileProvider.getDisplayName(null);
-                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, displayName != null ? displayName : tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+                parentMenu.add(isOfflineMap ? R.id.menu_group_map_sources_offline : R.id.menu_group_map_sources_online, id, i, (displayName != null
+                        ? displayName + (tileProvider instanceof AbstractMapsforgeVTMTileProvider && Settings.showMapsforgeInUnifiedMap() ? " (VTM)" : "")
+                        : tileProvider.getTileProviderName()
+                )).setCheckable(true).setChecked(id == currentTileProvider);
             }
             i++;
         }
