@@ -444,7 +444,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
                     final SearchResult searchResult = DataStore.getBatchOfStoredCaches(null, mapType.fromList, mapType.filterContext.get(), null, false, -1);
                     viewport3.set(DataStore.getBounds(searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
-                    addSearchResultByGeocaches(searchResult);
+                    replaceSearchResultByGeocaches(searchResult);
                 }, () -> {
                     if (viewport3.get() != null) {
                         if (setDefaultCenterAndZoom) {
@@ -459,7 +459,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 final AtomicReference<Viewport> viewport2 = new AtomicReference<>();
                 AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
                     viewport2.set(DataStore.getBounds(mapType.searchResult.getGeocodes(), Settings.getZoomIncludingWaypoints()));
-                    addSearchResultByGeocaches(mapType.searchResult);
+                    replaceSearchResultByGeocaches(mapType.searchResult);
                 }, () -> {
                     if (viewport2.get() != null) {
                         if (setDefaultCenterAndZoom) {
@@ -668,13 +668,13 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
     }
 
 
-    public void addSearchResultByGeocaches(final SearchResult searchResult) {
-        Log.d("add " + searchResult.getGeocodes());
+    public void replaceSearchResultByGeocaches(final SearchResult searchResult) {
+        Log.d("replace " + searchResult.getGeocodes());
+        viewModel.caches.write(true, Set::clear);
         final Set<Geocache> geocaches = DataStore.loadCaches(searchResult.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
         CommonUtils.filterCollection(geocaches, cache -> cache != null && cache.getCoords() != null);
         if (!geocaches.isEmpty()) {
             viewModel.caches.write(true, caches -> { // use post to make it background capable
-                caches.removeAll(geocaches);
                 caches.addAll(geocaches);
             });
         }
