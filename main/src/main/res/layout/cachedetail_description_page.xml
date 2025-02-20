@@ -51,6 +51,46 @@
                 android:indeterminateOnly="true" />
         </RelativeLayout>
 
+        <!-- translation box -->
+        <LinearLayout
+            android:id="@+id/description_translate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/description_translate_note"
+                    android:tooltipText="@string/translator_tooltip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="60dip"
+                    android:paddingRight="3dip"
+                    android:textSize="@dimen/textSize_detailsSecondary"
+                    android:textColor="@color/colorText"
+                    android:textIsSelectable="false" />
+
+                <Button
+                    android:id="@+id/description_translate_button"
+                    style="@style/button_icon"
+                    android:layout_alignParentRight="true"
+                    app:icon="@drawable/ic_menu_translate" />
+            </RelativeLayout>
+        </LinearLayout>
+
         <!-- geochecker box -->
         <LinearLayout
             android:id="@+id/description_checker"
@@ -97,12 +137,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dip"
             android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <cgeo.geocaching.ui.SectionHeader
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:dividerAbove="true"
                 android:id="@+id/extra_description_title" />
 
             <TextView

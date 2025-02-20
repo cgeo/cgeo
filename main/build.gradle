@@ -290,6 +290,9 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.mlkit:translate:17.0.3'
+    implementation 'com.google.android.gms:play-services-mlkit-language-id:17.0.0'
+
     // desugaring of Java 8 APIs
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 

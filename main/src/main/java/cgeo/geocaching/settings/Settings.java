@@ -2539,4 +2539,18 @@ public class Settings {
     public static String getShortDateFormat() {
         return getString(R.string.pref_short_date_format, "");
     }
+
+    public static String getTranslationTargetLanguage() {
+        return getString(R.string.pref_translation_language, "");
+    }
+
+    public static Set<String> getLanguagesToNotTranslate() {
+        Set<String> lngs = new HashSet<>();
+        if (sharedPrefs == null) {
+            return lngs;
+        }
+        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), lngs));
+        lngs.add(getTranslationTargetLanguage());
+        return lngs;
+    }
 }
