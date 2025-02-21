@@ -947,7 +947,6 @@
     <string name="settings_authorize">Authorize c:geo</string>
     <string name="settings_reauthorize">Update or remove authorization</string>
     <string name="settings_gc_description">Authorize c:geo with geocaching.com to search for caches.</string>
-    <string name="settings_ec_description">Authorize c:geo with extremcaching.com to search for caches and access/filter your found caches.</string>
     <string name="settings_su_description">Authorize c:geo with geocaching.su to search for caches.</string>
     <string name="settings_lc_description">Include Adventure Lab caches on the map.\n\n(Available to \"Geocaching.com\" premium members only. Requires an activated \"Geocaching.com\" service.)\n\nChanging this setting requires a restart.</string>
     <string name="settings_lc_found_state_title">Manual found state</string>
