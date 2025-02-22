@@ -801,7 +801,6 @@
     <string name="settings_authorize">Valtuuta c:geo</string>
     <string name="settings_reauthorize">Päivitä tai poista valtuutus</string>
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
-    <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
     <string name="settings_lc_found_state_title">Manuaalinen löydetty tila</string>
