@@ -817,7 +817,6 @@
     <string name="settings_authorize">c:geo autorisieren</string>
     <string name="settings_reauthorize">Autorisierung aktualisieren oder entfernen</string>
     <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
-    <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
     <string name="settings_lc_description">Zeige Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)\n\nDas Ändern dieser Einstellung erfordert einen Neustart.</string>
     <string name="settings_lc_found_state_title">Manueller Gefunden-Status</string>
