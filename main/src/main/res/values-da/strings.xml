@@ -578,7 +578,6 @@
     <string name="settings_authorize">Godkend c:geo</string>
     <string name="settings_reauthorize">Opdatér eller fjern autorisation</string>
     <string name="settings_gc_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.com.</string>
-    <string name="settings_ec_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på extremcaching.com.</string>
     <string name="settings_su_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.su.</string>
     <string name="init_summary_oc_de">Indlæs cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.de.</string>
