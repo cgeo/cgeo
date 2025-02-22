@@ -720,7 +720,6 @@
     <string name="settings_authorize">Autorizovať c:geo</string>
     <string name="settings_reauthorize">Aktualizovať alebo odobrať poverenie</string>
     <string name="settings_gc_description">Autorizovať c:geo pre hľadanie skrýš geocaching.com.</string>
-    <string name="settings_ec_description">Autorizovať c:geo pre hľadanie skrýš a prístup/filtrovanie vašich nájdených skrýš s extremcaching.com.</string>
     <string name="settings_su_description">Autorizovať c:geo pre hľadanie skrýš s geocaching.su.</string>
     <string name="settings_lc_description">Zahrnúť do mapy Adventure Lab kešky.\n\n(K dispozícii len prémiovým členom \"Geocaching.com\". Vyžaduje aktivovanú službu \"Geocaching.com\".)\n\nZmena tohto nastavenia vyžaduje reštart aplikácie.</string>
     <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Adventúry možno hrať len s aplikáciou Adventure Lab od spoločnosti Groundspeak. Ťuknutím na ikonu Adventure Lab na stránke \"Podrobnosti\" otvoríte/nainštalujete aplikáciu Adventure Lab App pre túto adventúru odtiaľto.\nAk nechcete vidieť a vyhľadávať kešky Adenture Lab na svojej mape, môžete to deaktivovať cez ponuku \"Nastavenie\" menu – Služby – Geocaching.com Adventure Lab.</string>
