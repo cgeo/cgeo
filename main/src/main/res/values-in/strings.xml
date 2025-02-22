@@ -323,7 +323,6 @@
     <string name="settings_gc_legal_note">Dengan menggunakan layanan dari geocaching.com, anda menerima Syarat Penggunaan Groundspeak.</string>
     <string name="settings_authorize">Mengizinkan c:geo</string>
     <string name="settings_gc_description">Otorisasi c:geo dengan geocaching.com untuk mencari cache.</string>
-    <string name="settings_ec_description">Otorisasi c:geo dengan extremcaching.com untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="settings_su_description">Otorisasi c:geo dengan geocaching.su untuk mencari cache.</string>
     <string name="init_summary_oc_de">Muat cache dari opencaching.de</string>
     <string name="init_oc_de_description">Mengizinkan c:geo dengan opencaching.de untuk mencari cache dan akses/filter cache yang anda temukan.</string>
