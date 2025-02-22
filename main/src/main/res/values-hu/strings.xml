@@ -480,7 +480,6 @@
     <string name="settings_authorize">A c:geo hitelesítése</string>
     <string name="settings_reauthorize">Engedély frissítése vagy törlése</string>
     <string name="settings_gc_description">A c:geo hitelesítése a geocaching.com-on ládák kereséséhez.</string>
-    <string name="settings_ec_description">A c:geo hitelesítése az extremcaching.com-on ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
     <string name="settings_su_description">A c:geo hitelesítése a geocaching.su-n ládák kereséséhez.</string>
     <string name="init_summary_oc_de">Ládák letöltése az opencaching.de-ről</string>
     <string name="init_oc_de_description">A c:geo hitelesítése az opencaching.de-n ládák kereséséhez és találataid lekéréséhez, szűréséhez.</string>
