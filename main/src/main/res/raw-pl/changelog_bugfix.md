@@ -5,10 +5,11 @@
 - Naprawiono: Edycja dziennika pokazywała opcję „zgłoś problem”
 - Naprawiono: Filtr na żywo „Nie zawiera” nie zwraca żadnych skrytek
 - Naprawiono: Awarie przy wstrzymaniu mapy sieciowej UnifiedMap
-- Fix: Outdated app "GPS Bluethooth" in useful apps list
-- Fix: Variables and/or values are deleted erroneously when editing personal note
-- Fix: Wherigo: Wrong altitude info
-- Fix: Wherigo: All button texts are capitalized
-- Fix: Crash in settings
-- Fix: c:geo not listed in Play Store for GPS-less devices
-- Fix: c:geo crashing silently on folder selection in certain configurations
+- Naprawiono: Nieaktualna aplikacja „GPS Bluethooth” na liście przydatnych aplikacji
+- Naprawiono: Zmienne i/lub wartości są błędnie usuwane podczas edycji osobistej notatki
+- Naprawiono: Wherigo: Nieprawidłowe informacje o wysokości
+- Naprawiono: Wherigo: Wszystkie teksty przycisków są pisane wielkimi literami
+- Naprawiono: Awaria w ustawieniach
+- Naprawiono: Aplikacja c:geo nie była wymieniona w Sklepie Play dla urządzeń bez GPS
+- Naprawiono: Awaria c:geo przy wyborze folderu w niektórych konfiguracjach
+- Zmiana: ekstremcaching.com został konektorem offline (serwis zakończył działanie)
