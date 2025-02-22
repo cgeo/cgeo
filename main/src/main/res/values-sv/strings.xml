@@ -816,7 +816,6 @@
     <string name="settings_authorize">Tillåt c:geo</string>
     <string name="settings_reauthorize">Uppdatera eller ta bort auktorisering</string>
     <string name="settings_gc_description">Tillåt c:geo att söka efter cacher på geocaching.com.</string>
-    <string name="settings_ec_description">Tillåt c:geo att söka efter cacher och få tillgång till/filtrera dina hittade cacher på extremcaching.com.</string>
     <string name="settings_su_description">Tillåt c:geo att söka efter cacher på geocaching.su.</string>
     <string name="settings_lc_description">Inkludera Adventure Lab cacher på kartan.\n\n(Endast tillgängliga för premiummedlemmar på \"Geocaching.com\". Kräver en aktiverad \"Geocaching.com\" service.)\n\nFör att ändra denna inställning krävs en omstart.</string>
     <string name="settings_lc_found_state_title">Manuellt hittad status</string>
