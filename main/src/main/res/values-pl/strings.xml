@@ -839,7 +839,6 @@
     <string name="settings_authorize">Autoryzuj c:geo</string>
     <string name="settings_reauthorize">Aktualizacja lub usunięcie autoryzacji</string>
     <string name="settings_gc_description">Upoważnia c:geo przy użyciu geocaching.com do szukania skrytek.</string>
-    <string name="settings_ec_description">Upoważnia c:geo przy użyciu extremcaching.com do szukania skrytek i dostępu/filtrowania znalezionych.</string>
     <string name="settings_su_description">Autoryzuj c:geo z geocaching.su aby wyszukać skrytki.</string>
     <string name="settings_lc_description">Wyświetlaj Skrytki Lab na mapie.\n\n(Dostępne tylko dla użytkowników premium Geocaching.com. Wymaga aktywowanej usługi Geocaching.com.)\n\nZmiana tego ustawienia wymaga ponownego uruchomienia.</string>
     <string name="settings_lc_found_state_title">Ręcznie podawany stan znalezienia</string>
@@ -1251,6 +1250,8 @@
     <string name="contentstorage_err_list_failed">Nie można wyświetlić plików w folderze \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">Nie można uzyskać dostępu do folderu \'%s\'</string>
     <string name="contentstorage_err_copy_failed">Plik \'%1$s\' nie mógł zostać skopiowany/przeniesiony do \'%2$s\' (przeniesienie=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Błąd wyboru pliku/folderu</string>
+    <string name="contentstorage_err_activity_not_found_message">Twój system nie dostarcza komponentu do wyboru plików/folderów: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Zdefiniowany przez użytkownika</string>
     <string name="persistablefolder_usertype_default">Domyślny</string>
