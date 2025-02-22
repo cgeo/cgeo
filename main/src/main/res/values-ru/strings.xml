@@ -817,7 +817,6 @@
     <string name="settings_authorize">Авторизовать c:geo</string>
     <string name="settings_reauthorize">Обновить или удалить авторизацию</string>
     <string name="settings_gc_description">Авторизовать c:geo для поиска тайников geocaching.com.</string>
-    <string name="settings_ec_description">Авторизовать c:geo для extremcaching.com, чтобы искать тайники и иметь доступ к найденным вами тайникам.</string>
     <string name="settings_su_description">Авторизовать c:geo для поиска тайников geocaching.su.</string>
     <string name="settings_lc_description">Включить тайники Лаборатории Приключений на карте.\n\n(Доступно только для премиум-пользователей \"Geocaching.com\". Требуется активный сервис \"Geocaching.com\".)\n\nИзменение этой настройки требует перезапуска c:geo.</string>
     <string name="settings_lc_found_state_title">Ручной выбор состояния нахождения тайника</string>
