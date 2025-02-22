@@ -829,7 +829,6 @@
     <string name="settings_authorize">Autorizovat c:geo</string>
     <string name="settings_reauthorize">Aktualizovat nebo odebrat ověření</string>
     <string name="settings_gc_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.com.</string>
-    <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
     <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
     <string name="settings_lc_found_state_title">Ručně zadaný stav nálezu</string>
