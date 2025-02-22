@@ -376,7 +376,6 @@
     <string name="settings_gc_legal_note">Folosind serviciul Geocaching.com declari că ai accepţi condiţiile de utilizare ale Groundspeak Inc.</string>
     <string name="settings_authorize">Autorizează c:geo</string>
     <string name="settings_gc_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
-    <string name="settings_ec_description">Autorizează c:geo la extremcaching.com pentru a putea căuta şi filtra selectiv geocutii şi pentru a-ţi vedea propriile geocutii găste.</string>
     <string name="settings_su_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
     <string name="init_summary_oc_de">Încarcă geocutii de la opencaching.de</string>
     <string name="init_oc_de_description">Autorizează c:geo pe opencaching.de pentru a putea căuta cutii şi a vedea/filtra cutiile găsite de tine.</string>
