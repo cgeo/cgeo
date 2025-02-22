@@ -817,7 +817,6 @@
     <string name="settings_authorize">Autoriseer c:geo</string>
     <string name="settings_reauthorize">Autorisatie bijwerken of verwijderen</string>
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
-    <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
     <string name="settings_lc_description">Adventure Lab caches op de kaart tonen.\n\n(Alleen beschikbaar voor \"Geocaching.com\" premium leden. Vereist een geactiveerde \"Geocaching.com\" service.)\n\nWijzigen van deze instelling vereist een herstart.</string>
     <string name="settings_lc_found_state_title">Handmatige gevonden status</string>
