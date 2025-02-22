@@ -624,7 +624,6 @@
     <string name="settings_authorize">Godkjenn c:geo</string>
     <string name="settings_reauthorize">Oppdater eller fjern tillatelse</string>
     <string name="settings_gc_description">Autoriser c:geo med geocaching.com for å søke etter cacher.</string>
-    <string name="settings_ec_description">Autoriser c:geo med extremecaching.com for å søke etter cacher og vise/filtrere de cachene du har funnet.</string>
     <string name="settings_su_description">Autoriser c:geo med geocaching.su for å søke etter cacher.</string>
     <string name="init_summary_oc_de">Last cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Gi c:geo tilgang til å bruke opencaching.de for å søke etter cacher og vise/filtrere dine funnede cacher.</string>
