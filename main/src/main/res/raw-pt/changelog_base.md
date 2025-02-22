@@ -8,10 +8,13 @@
 - Novo: Permitir a configuração do nome para mapas offline no ficheiro complementar (Mapa Unificado)
 - Novo: Mostrar perímetro de resposta para os pontos de AdventureLab (Mapa Unificado) — active "círculos" nas configurações rápidas do mapa para mostrá-los
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
+- Fix: Number of cache in list chooser not updated on chaning list contents
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
 - Correcção: Serviço de fala interrompido na rotação do ecrã
+- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 
 ### Geral
 - Novo: Página de pesquisa redesenhada
