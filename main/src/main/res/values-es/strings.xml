@@ -647,7 +647,6 @@
     <string name="settings_authorize">Autorizar c:geo</string>
     <string name="settings_reauthorize">Actualizar o eliminar la autorización</string>
     <string name="settings_gc_description">Autorizar a c:geo en geocaching.com para buscar cachés.</string>
-    <string name="settings_ec_description">Autorizar que c:geo pueda usar extremcaching.com para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
     <string name="settings_su_description">Autorizar a c:geo en geocaching.su para buscar cachés.</string>
     <string name="settings_lc_description">Incluye cachés de Adventure Lab en el mapa.\n\n(Disponible solo para miembros premium \"Geocaching.com\". Requiere un servicio \"Geocaching.com\" activado.)\n\nPara cambiar esta configuración es necesario reiniciar.</string>
     <string name="lc_default_description">Este es un caché Adventure Lab de geocaching.com. Las aventuras sólo se pueden jugar con la aplicación de Adventure Lab de Groundspeake. Pulsa en el icono de Adventure Lab en la página \"Detalles\" para abrir/instalar la aplicación de Adventure Lab para esta aventura desde allí.\nSi no quieres ver cachés de Adventure Lab en el mapa y buscar, puedes desactivar usando el menú \"Configuración\" - Servicios - Geocaching. Laboratorio de Aventuras</string>
