@@ -8,10 +8,13 @@
 - Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
 - Novetat: Mostra les tanques geogràfiques per a les etapes de laboratori (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
 - Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geotanca")
+- Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
+- Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
 - Correcció: el servei de veu s'ha interromput en la rotació de la pantalla
+- Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
 
 ### General
 - Nou: pàgina de cerca redissenyada
