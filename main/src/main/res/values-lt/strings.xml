@@ -779,7 +779,6 @@
     <string name="settings_authorize">Leisti c:geo prisijungti</string>
     <string name="settings_reauthorize">Atnaujinti ar pašalinti prisijungimą</string>
     <string name="settings_gc_description">Leiskite c:geo prisijungti prie geocaching.com tam, kad galėtumėt ieškoti slėptuvių.</string>
-    <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="settings_su_description">Leiskite c:geo prisijungti prie geocaching.su tam, kad galėtumėt ieškoti slėptuvių.</string>
     <string name="settings_lc_description">Į žemėlapį įtraukite Adventure Lab slėptuves.\n\n(Galima tik \"Geocaching.com\" Premium nariams. Reikia suaktyvinti \"Geocaching.com\" paslaugą.)\n\nNorint pakeisti šį nustatymą, reikia paleisti iš naujo.</string>
     <string name="lc_default_description">Tai geocaching.com Adventure Lab slėptuvė. Nuotykius galima žaisti tik naudojant Groundspeak Adventure Lab programą. Puslapyje \'\'Išsami informacija\'\' bakstelėkite Adventure Lab piktogramą, kad iš ten atidarytumėte/įdiegtumėte Adventure Lab programą, skirtą šiam nuotykiui.\nJei nenorite matyti Adventure Lab slėptuvių savo žemėlapyje ir ieškoti, galite išjungti naudodami \'\'nustatymai\'\' meniu - Paslaugos - Geocaching.com Adventure Lab</string>
