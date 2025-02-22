@@ -8,10 +8,13 @@
 - Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
 - Nowość: Pokaż granice udzialania odpowiedzi (geofence) dla etapów skrytek lab (UnifiedMap) - włącz „Okręgi” w szybkich ustawieniach mapy, aby je pokazać
 - Nowość: Opcja ustawiania okręgów z indywidualnym promieniem do punktów orientacyjnych („Geofence” w menu kontekstowym)
+- Fix: Map view not updated when removing cache from currently shown list
+- Fix: Number of cache in list chooser not updated on chaning list contents
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
 - Naprawiono: Usługa mowy była przerywana po obrócaniu ekranu
+- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
