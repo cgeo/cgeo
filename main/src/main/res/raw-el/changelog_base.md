@@ -8,10 +8,13 @@
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
 - New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
+- Fix: Map view not updated when removing cache from currently shown list
+- Fix: Number of cache in list chooser not updated on chaning list contents
 
 ### Λεπτομέρειες κρύπτης
 - New: Option to share cache with user data (coordinates, personal note)
 - Fix: Speech service interrupted on screen rotation
+- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
 
 ### Γενικά
 - New: Redesigned search page
