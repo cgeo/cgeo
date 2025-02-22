@@ -815,7 +815,6 @@
     <string name="settings_authorize">Autorizza c:geo</string>
     <string name="settings_reauthorize">Aggiorna o rimuovi autorizzazione</string>
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
-    <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
     <string name="settings_lc_description">Includi i cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
     <string name="settings_lc_found_state_title">Stato \'trovato\' manuale</string>
