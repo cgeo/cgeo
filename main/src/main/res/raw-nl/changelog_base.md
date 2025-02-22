@@ -8,10 +8,13 @@
 - Nieuw: Instellen van naam toestaan voor offline kaarten in een begeleidend bestand (UnifiedMap)
 - Nieuw: Toon geofences voor lab stadia (UnifiedMap) - "Circles" inschakelen in kaart snelle instellingen om ze te tonen
 - Nieuw: Optie om cirkels met individuele straal in te stellen op waypoints ("geofence" contextoptie)
+- Oplossing: Kaartweergave niet bijgewerkt bij het verwijderen van cache van de huidig getoonde lijst
+- Oplossing: Aantal caches in lijst kiezer niet bijgewerkt bij wijziging lijst inhoud
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
 - Oplossing: Spraakservice onderbroken bij scherm rotatie
+- Oplossing: Cache details: Lijsten voor cache niet bijgewerkt na het tikken op de lijstnaam en verwijderen uit die lijst
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
