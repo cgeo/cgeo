@@ -320,7 +320,6 @@
     <string name="settings_gc_legal_note">Sa paggamit ng serbisyo ng geocaching.com, tinanggap mo ang mga termino sa paggamit ng Groundspeak.</string>
     <string name="settings_authorize">Mag-autorisa c;geo</string>
     <string name="settings_gc_description">Ang pagpahintulot c:geo sa geocaching.com para mag hanap ng caches.</string>
-    <string name="settings_ec_description">Ang pagpahintulot c:geo may extremcaching.com na humanap para sa caches at maka access/filter na nakita sa caches.</string>
     <string name="settings_su_description">Ang pagpahintulot c:geo may geocaching.su para humanap ng caches.</string>
     <string name="init_summary_oc_de">Mag-load ng caches mula sa opencaching.de</string>
     <string name="init_oc_de_description">Mag-autorisa sa c;geo kasama ang opencaching.de upang mag hanap sa mga cache at pag-akses/salain ang iyong natagpuan na mga cache.</string>
