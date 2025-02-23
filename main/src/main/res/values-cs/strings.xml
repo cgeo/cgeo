@@ -1239,6 +1239,8 @@
     <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
     <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
     <string name="contentstorage_err_copy_failed">Soubor \'%1$s\' nelze zkopírovat/přesunout do \'%2$s\' (přesunout =%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Chyba při výběru souboru/složky</string>
+    <string name="contentstorage_err_activity_not_found_message">Váš systém neposkytuje komponentu pro výběr souborů/složek: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
     <string name="persistablefolder_usertype_default">Výchozí</string>
