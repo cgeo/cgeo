@@ -2,7 +2,6 @@
 - New: Support Elevate Winter theme in map downloader
 - Nyhet: Adaptiv terrängskuggning, valfritt högkvalitetsläge (UnifiedMap Mapsforge)
 - Ändra: Behåll nuvarande vy för att visa en lista på karta, om alla cacher passar in i nuvarande vy
-- Nytt: Separat ikonmarkör för cacher med manuellt inställda koordinater som är identiska med ursprungskoordinater
 - Nyhet: Omgjorda rutter/spår snabbinställningsdialog
 - Nyhet: Långtryck på ikonen för kartval för att välja tidigare leverantör (UnifiedMap)
 - Nytt: Tillåt inställning av visningsnamn för offline-kartor i följeslagarfil (UnifiedMap)
