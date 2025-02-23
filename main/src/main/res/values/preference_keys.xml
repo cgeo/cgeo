@@ -190,6 +190,8 @@
     <!-- ============================================================================================================================================================================== -->
     <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
     <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
+    <string translatable="false" name="pref_translation_language">translation_language</string>
+    <string translatable="false" name="pref_translation_notranslate">translation_notranslate</string>
     <string translatable="false" name="pref_livelist">livelist</string>
     <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
     <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
