@@ -2,7 +2,6 @@
 - Nowość: Wsparcie dla motywu Elevate Winter przy pobieraniu map
 - Nowość: Adaptacyjne cieniowanie wzgórz, opcjonalny tryb wysokiej jakości (UnifiedMap Mapsforge)
 - Zmiana: Zachowaj bieżący widok na mapowaniu listy, jeśli wszystkie skrytki mieszczą się w bieżącym widoku
-- Nowość: Osobna ikona znacznika dla skrytek z ręcznie ustawionymi współrzędnymi, które są identyczne do współrzędnych oryginalnych
 - Nowość: Przeprojektowane okno dialogowe szybkich ustawień tras/śladów
 - Nowość: Przytrzymaj dłużej ikonę wyboru mapy, aby wybrać poprzedniego dostawcę kafelków (UnifiedMap)
 - Nowość: Zezwalaj na ustawianie nazwy wyświetlanej mapy offline w pliku towarzyszącym (UnifiedMap)
