@@ -1250,6 +1250,8 @@
     <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
     <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
     <string name="contentstorage_err_copy_failed">Soubor \'%1$s\' nelze zkopírovat/přesunout do \'%2$s\' (přesunout =%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Chyba při výběru souboru/složky</string>
+    <string name="contentstorage_err_activity_not_found_message">Váš systém neposkytuje komponentu pro výběr souborů/složek: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
     <string name="persistablefolder_usertype_default">Výchozí</string>
@@ -1678,6 +1680,8 @@
     <string name="waypoint_my_coordinates_accuracy">Moje souřadnice (±%s)</string>
     <string name="waypoint_name">Název</string>
     <string name="waypoint_edit">Upravit</string>
+    <string name="waypoint_geofence">Sledovaná oblast</string>
+    <string name="waypoint_geofence_summary">Nastavit poloměr pro sledovanou oblast (v metrech)</string>
     <string name="waypoint_copy_coordinates">Kopírovat souřadnice</string>
     <string name="waypoint_clear_coordinates">Vymazat souřadnice</string>
     <string name="waypoint_delete">Odstranit</string>
