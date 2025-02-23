@@ -2,7 +2,6 @@
 - Neu: Unterstützung für Elevate Winter Design im Kartendownloader
 - Neu: Adaptive Kartenschattierung, optionaler Modus mit hoher Qualität (UnifiedMap Mapsforge)
 - Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
-- Neu: Separate Symbolmarker für Caches mit manuellen Koordinaten identisch zu Listing-Koordinaten
 - Neu: Neues Design für die Schnelleinstellungen für Routen/Tracks
 - Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
 - New: Allow setting display name for offline maps in companion file (UnifiedMap)
