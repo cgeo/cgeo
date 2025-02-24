@@ -902,6 +902,8 @@
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
     <string name="init_use_default_language">Använd standardspråk</string>
+    <string name="init_date_format">Datumformat</string>
+    <string name="init_date_format_description">Format att använda för korta datum, t.ex. i loggvy</string>
     <string name="system_default">Systemstandard</string>
     <string name="init_showwaypoints">Visa vägpunkter</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
@@ -951,6 +953,7 @@
     <string name="init_units">Enheter</string>
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_cachelists">Cache-listor</string>
+    <string name="init_localization">Lokalisering</string>
     <string name="init_log_offline">Snabbloggning</string>
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
@@ -1430,6 +1433,8 @@
     <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
     <string name="cache_menu_speechDeactivate">Sluta prata</string>
     <string name="cache_menu_speechActivate">Börja prata</string>
+    <string name="talking_disabled">Talande inaktiverat</string>
+    <string name="talking_enabled">Talande aktiverad</string>
     <string name="cache_menu_navigate">Navigera</string>
     <string name="cache_menu_target">Ange som mål</string>
     <string name="cache_menu_navigation_drive">Navigering (med bil)</string>
