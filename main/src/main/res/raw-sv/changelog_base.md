@@ -49,4 +49,4 @@ Nytt: Integrerad Wherigo-spelare (beta) - se menypost på startskärmen.<br> (Du
 - Fix: History length and proximity settings sharing slider values
 - Fix: Logg-sida för spårbara objekt visar tid/koordinat inmatningsfält för spårbara objekt som inte stöder detta
 - Fix: Vissa krascher
-- Fix: Some sliders in settings having problems with uninitialized values
+- Fix: Vissa reglage i inställningar har problem med oinitierade värden

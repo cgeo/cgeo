@@ -578,7 +578,6 @@
     <string name="settings_authorize">Godkend c:geo</string>
     <string name="settings_reauthorize">Opdatér eller fjern autorisation</string>
     <string name="settings_gc_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.com.</string>
-    <string name="settings_ec_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på extremcaching.com.</string>
     <string name="settings_su_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.su.</string>
     <string name="init_summary_oc_de">Indlæs cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.de.</string>
@@ -1198,7 +1197,6 @@
     <string name="helper_sendtocgeo_description">Send2c:geo (send til c:geo) er en browserudvidelse <strong>til din PC</strong>. Med send2c:geo kan du sende cacher direkte fra din browser til c:geo på din Android-enhed ved blot at klikke på en knap i din browser.</string>
     <string name="helper_locus_description">Udendørs navigationsapp til din telefon eller tablet. Vis topografiske kort offline, track din rute, find geocacher, brug stemmeguide og meget mere.</string>
     <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
-    <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS modtageren aktiv, når du skifter mellem applikationer og når enhedens skærm er slukket.</string>
     <string name="helper_google_translate_title">Google Oversæt</string>
     <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
@@ -1583,6 +1581,7 @@
     <string name="individual_route_error_toggling_waypoint">fejl ved valg af rutepunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgængelig i enkelt rutepunkt-tilstand</string>
     <string name="map_sort_individual_route">Sorter individuel rute</string>
+    <string name="map_export_individual_route">Eksportér individuel rute</string>
     <string name="map_load_individual_route">Indlæs individuel rute</string>
     <string name="map_load_individual_route_confirm">Overskriv individuel rute?</string>
     <string name="map_clear_individual_route">Ryd individuel rute</string>
