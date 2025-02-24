@@ -1920,7 +1920,8 @@
     <string name="calccoord_guided_value">Value</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
     <string name="calccoord_plain_tools_title">Plain Tools</string>
-    <string name="calccoord_remove_spaces">Remove Spaces</string>
+    <string name="calccoord_remove_spaces">Remove spaces</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Replace \'x\' with \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Paste from clipboard</string>
 
     <string name="calccoord_generate_title">Generate Waypoints</string>

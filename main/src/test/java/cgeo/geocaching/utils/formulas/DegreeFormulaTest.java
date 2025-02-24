@@ -168,4 +168,11 @@ public class DegreeFormulaTest {
         assertThat(DegreeFormula.removeSpaces("E10° 0 ( c\t ). (\ne*3\r+ d )"))
                 .isEqualTo("E10°0(c).(e*3+d)");
     }
+
+    @Test
+    public void replaceXWithMultiplicationSign() {
+        //formula includes x as multiplicator-symbol
+        assertThat(DegreeFormula.replaceXWithMultiplicationSign("E10° 09.(X x Y x Z)"))
+                .isEqualTo("E10° 09.(X * Y * Z)");
+    }
 }

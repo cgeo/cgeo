@@ -402,8 +402,12 @@ public class DegreeFormula {
         }
     }
 
+
+    public static String replaceXWithMultiplicationSign(final String formula) {
+        return formula == null ? "" : formula.replaceAll("x", "*");
+    }
+
     public static String removeSpaces(final String formula) {
         return formula == null ? "" : formula.replaceAll("\\s", "");
     }
-
 }
