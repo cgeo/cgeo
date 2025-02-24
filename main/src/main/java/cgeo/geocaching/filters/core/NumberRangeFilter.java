@@ -35,8 +35,13 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public boolean isInRange(final T value) {
-        if (includeSpecialNumber != null && specialNumber != null && isEqualValue(value, specialNumber)) {
-            return includeSpecialNumber;
+        if (includeSpecialNumber != null && specialNumber != null) {
+            if (isEqualValue(value, specialNumber)) {
+                return includeSpecialNumber;
+            }
+            if (specialNumber.compareTo(value) > 0) { // Special case for lab caches
+                return includeSpecialNumber;
+            }
         }
 
         if (minRangeValue != null && minRangeValue.compareTo(value) > 0) {
