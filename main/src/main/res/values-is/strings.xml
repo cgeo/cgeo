@@ -264,7 +264,6 @@
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
     <string name="settings_authorize">Veita c:geo umboð</string>
     <string name="settings_gc_description">Veita c:geo aðgang að geocaching.com til að leita að kössum.</string>
-    <string name="settings_ec_description">Veita c:geo aðgang að extremcaching.com til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
     <string name="settings_su_description">Veita c:geo aðgang að geocaching.su til að leita að kössum.</string>
     <string name="init_summary_oc_de">Hlaða niður kössum frá opencaching.de</string>
     <string name="init_summary_oc_pl">Hlaða niður kössum frá opencaching.pl</string>
@@ -422,7 +421,6 @@
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
-    <string name="cache_status_attended">Tók þátt</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
     <string name="cache_status_archived">Vistað</string>
@@ -537,7 +535,6 @@
     <string name="helper_sendtocgeo_title">Senda í c:geo</string>
     <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
     <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
-    <string name="helper_bluetoothgps_description">Leyfir þér að nota utanáliggjandi GPS móttakara til þess að fá nákvæmari staðsetningarupplýsingar, og getur sparað rafhlöðuna í tækinu þínu.</string>
     <!-- export -->
     <string name="export">Flytja út</string>
     <string name="export_failed">Útflutningur tókst ekki</string>
@@ -566,7 +563,6 @@
     <string name="attribute_winter_yes">Í boði yfir veturinn</string>
     <string name="attribute_winter_no">Ekki í boði yfir veturinn</string>
     <string name="attribute_firstaid_yes">Þarfnast viðhalds</string>
-    <string name="attribute_firstaid_no">Þarfnast ekki viðhalds</string>
     <string name="attribute_cow_yes">Fylgist með búfé</string>
     <string name="attribute_cow_no">Ekkert búfé</string>
     <string name="attribute_nightcache_yes">Næturkassi</string>
@@ -587,17 +583,12 @@
     <string name="attribute_teamwork_yes">Krefst teymisvinnu</string>
     <string name="attribute_teamwork_no">Krefst ekki teymisvinnu</string>
     <string name="attribute_fee_yes">Aðgangs- eða bílastæðagjald</string>
-    <string name="attribute_fee_no">Aðgangs- eða bílastæðagjalds ekki krafist</string>
     <string name="attribute_rappelling_yes">Krefst klifurbúnaðar</string>
-    <string name="attribute_rappelling_no">Krefst ekki klifurbúnaðar</string>
     <string name="attribute_boat_yes">Krefst báts</string>
-    <string name="attribute_boat_no">Báts ekki krafist</string>
     <string name="attribute_flashlight_yes">Krefst vasaljóss</string>
-    <string name="attribute_flashlight_no">Krefst ekki vasaljóss</string>
     <string name="attribute_uv_yes">Krefst útfjólublás ljóss</string>
     <string name="attribute_uv_no">Krefst ekki útfjólublás ljóss</string>
     <string name="attribute_ticks_yes">Mítlar</string>
-    <string name="attribute_ticks_no">Engir mítlar</string>
     <string name="attribute_danger_yes">Hættulegt svæði</string>
     <string name="attribute_stroller_yes">Aðgengilegt barnavögnum</string>
     <string name="attribute_stroller_no">Ekki aðgengilegt barnavögnum</string>
