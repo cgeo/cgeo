@@ -263,7 +263,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         });
 
         binding.ccPlainTools.setOnClickListener(v -> {
-            final List<Integer> options = Collections.singletonList(R.string.calccoord_remove_spaces);
+            final List<Integer> options = List.of(R.string.calccoord_remove_spaces, R.string.calccoord_replace_x_with_multiplication_symbol);
             final SimpleDialog.ItemSelectModel<Integer> model = new SimpleDialog.ItemSelectModel<>();
             model
                 .setItems(options)
@@ -275,6 +275,9 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                         if (o == R.string.calccoord_remove_spaces) {
                             binding.PlainLat.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLat.getText())));
                             binding.PlainLon.setText(DegreeFormula.removeSpaces(ViewUtils.getEditableText(binding.PlainLon.getText())));
+                        } else if (o == R.string.calccoord_replace_x_with_multiplication_symbol) {
+                            binding.PlainLat.setText(DegreeFormula.replaceXWithMultiplicationSign(ViewUtils.getEditableText(binding.PlainLat.getText())));
+                            binding.PlainLon.setText(DegreeFormula.replaceXWithMultiplicationSign(ViewUtils.getEditableText(binding.PlainLon.getText())));
                         }
                     });
         });
