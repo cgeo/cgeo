@@ -892,6 +892,8 @@
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
     <string name="init_use_default_language">Använd standardspråk</string>
+    <string name="init_date_format">Datumformat</string>
+    <string name="init_date_format_description">Format att använda för korta datum, t.ex. i loggvy</string>
     <string name="system_default">Systemstandard</string>
     <string name="init_showwaypoints">Visa vägpunkter</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
@@ -941,6 +943,7 @@
     <string name="init_units">Enheter</string>
     <string name="init_summary_units">Använd amerikanska enheter för avstånd</string>
     <string name="init_cachelists">Cache-listor</string>
+    <string name="init_localization">Lokalisering</string>
     <string name="init_log_offline">Snabbloggning</string>
     <string name="init_summary_log_offline">Spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
     <string name="init_choose_list">Listhantering</string>
