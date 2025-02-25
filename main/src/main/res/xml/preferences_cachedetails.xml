@@ -21,7 +21,7 @@
     <ListPreference
         android:key="@string/pref_translation_language"
         android:title="@string/translator_preference_target_lng"
-        android:summary="%s"
+        android:summary="@string/translator_preference_target_lng_summary"
         app:iconSpaceReserved="false" />
     <MultiSelectListPreference
         android:key="@string/pref_translation_notranslate"

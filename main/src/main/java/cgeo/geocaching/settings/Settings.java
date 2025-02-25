@@ -2544,7 +2544,7 @@ public class Settings {
         return getString(R.string.pref_translation_language, "");
     }
 
-    public static Set<String> getLanguagesToNotTranslate() {
+    public static @NonNull Set<String> getLanguagesToNotTranslate() {
         Set<String> lngs = new HashSet<>();
         if (sharedPrefs == null) {
             return lngs;

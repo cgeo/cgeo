@@ -363,18 +363,20 @@
     <string name="gc_basic">Basic</string>
 
     <string name="translator_preference_target_lng">Listing translation language</string>
-    <string name="translator_preference_target_lng_summary">Target language for translating a listing</string>
-    <string name="translator_preference_nottranslate_lng">No translate lng</string>
-    <string name="translator_preference_nottranslate_lng_summary">Listing languages to not translate</string>
+    <string name="translator_preference_target_lng_summary">Target language for translating cache listing</string>
+    <string name="translator_preference_nottranslate_lng">Ignored languages</string>
+    <string name="translator_preference_nottranslate_lng_summary">Listing languages to not offer translation for</string>
     <string name="translator_model_download_confirm_title">Confirm language download</string>
     <string name="translator_model_download_confirm_txt">Translation model for language "%s" needs to be downloaded. Model size is roughly 20-40 MB.</string>
-    <string name="translator_model_download_error">Failed to download translation model.</string>
     <string name="translator_tooltip">Translate listing</string>
+    <string name="translator_language_select">Select source language</string>
     <string name="translator_language_unsupported">Listing language (%s) not supported for translation.</string>
+    <string name="translator_language_missing">Missing language pack %s</string>
     <string name="translator_language_unknown">Unable to identify listing language</string>
-    <string name="translator_language_detected">Listing translation from "%s" available</string>
+    <string name="translator_language_detected">Translate listing from "%s"</string>
     <string name="translator_language_detection_error">Failed to initialize language detection</string>
     <string name="translator_translation_error">Failed to translate text: %s</string>
+    <string name="translator_translation_initerror">Failed to initialize translator</string>
 
     <!-- location service -->
     <string name="loc_last">Last known</string>
