@@ -815,7 +815,6 @@
     <string name="settings_authorize">Autorizza c:geo</string>
     <string name="settings_reauthorize">Aggiorna o rimuovi autorizzazione</string>
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
-    <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
     <string name="settings_lc_description">Includi i cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
     <string name="settings_lc_found_state_title">Stato \'trovato\' manuale</string>
@@ -1891,7 +1890,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo è un\'estensione del browser <strong>per il tuo PC</strong>. Durante la navigazione su geocaching.com, è possibile inviare i cache al vostro smartphone con il clic di un pulsante direttamente all\'interno del browser.</string>
     <string name="helper_locus_description">App per la navigazione in esterni per cellulare o tablet. Mostra mappe offline, traccia il tuo percorso, cerca geocache, usa una voce guida e molto altro.</string>
     <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
-    <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
     <string name="helper_gps_locker_description">Il blocco GPS mantiene attivo il segnale GPS quando si passa tra le applicazioni e quando lo schermo del dispositivo è spento.</string>
     <string name="helper_google_translate_title">Google Traduttore</string>
     <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
@@ -2351,7 +2349,7 @@
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
     <string name="map_refresh_individual_route">Aggiorna</string>
-    <string name="map_export_individual_route">Esporta percorso personalizzato</string>
+    <string name="map_export_individual_route">Esporta percorso individuale</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>

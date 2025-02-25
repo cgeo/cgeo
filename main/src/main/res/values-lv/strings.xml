@@ -404,7 +404,6 @@
     <string name="settings_authorize">Atļaut c:geo</string>
     <string name="settings_reauthorize">Atjaunot vai noņemt autorizāciju</string>
     <string name="settings_gc_description">Autorizējies c:geo ar geocaching.com profilu, lai meklētu slēpņus.</string>
-    <string name="settings_ec_description">Atļaut c:geo un extremcaching.com meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
     <string name="settings_su_description">Autorizējies c:geo ar geocaching.com profilu lai meklētu slēpņus.</string>
     <string name="init_summary_oc_de">Ielādēt slēpņus no opencaching.de</string>
     <string name="init_oc_de_description">Atļaut c:geo un opencaching.de meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
@@ -926,7 +925,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_sendtocgeo_description">Send2cgeo ir interneta pārlūka spraudnis <strong>tavam datoram</strong>. No geocaching.com varēsi viegli pārsūtīt slēpņu informāciju uz šo ierīci.</string>
     <string name="helper_locus_description">Āra navigācijas aplikācija tālrunim vai planšetei. Ļauj skatīt bezsaistes topogrāfiskās kartes, izsekot maršrutu, meklēt slēpņus, lietot balss ceļvedi un darīt vēl daudz ko citu.</string>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
-    <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
