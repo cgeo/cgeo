@@ -1,26 +1,5 @@
 package cgeo.geocaching.utils;
 
-import android.app.Activity;
-import android.content.Context;
-import android.widget.ArrayAdapter;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-
-import com.google.mlkit.common.model.DownloadConditions;
-import com.google.mlkit.nl.translate.TranslateLanguage;
-import com.google.mlkit.nl.translate.TranslateRemoteModel;
-import com.google.mlkit.common.model.RemoteModelManager;
-import com.google.mlkit.nl.translate.Translation;
-import com.google.mlkit.nl.translate.Translator;
-import com.google.mlkit.nl.translate.TranslatorOptions;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
@@ -28,7 +7,32 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
+import android.app.Activity;
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
+import com.google.mlkit.common.model.DownloadConditions;
+import com.google.mlkit.common.model.RemoteModelManager;
+import com.google.mlkit.nl.translate.TranslateLanguage;
+import com.google.mlkit.nl.translate.TranslateRemoteModel;
+import com.google.mlkit.nl.translate.Translation;
+import com.google.mlkit.nl.translate.Translator;
+import com.google.mlkit.nl.translate.TranslatorOptions;
+
 public class MlKitTranslateUtil {
+
+    private MlKitTranslateUtil() {
+        // utility class
+    }
 
     private static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
@@ -73,7 +77,7 @@ public class MlKitTranslateUtil {
      */
     private static void findMissingLanguageModels(final String lngCode, final Consumer<List<Language>> consumer) {
         getDownloadedLanguageModels(availableLanguages -> {
-            List<Language> missingLanguages = new ArrayList<>();
+            final List<Language> missingLanguages = new ArrayList<>();
             if (!availableLanguages.contains(lngCode)) {
                 missingLanguages.add(new Language(lngCode));
             }
@@ -148,7 +152,7 @@ public class MlKitTranslateUtil {
     public static class Language implements Comparable<Language> {
         private final String code;
 
-        public Language(String code) {
+        public Language(final String code) {
             this.code = code;
         }
 
@@ -167,7 +171,7 @@ public class MlKitTranslateUtil {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (!(o instanceof Language)) {
                 return false;
             }
@@ -180,7 +184,7 @@ public class MlKitTranslateUtil {
         }
 
         @Override
-        public int compareTo(@NonNull Language lng) {
+        public int compareTo(@NonNull final Language lng) {
             return this.toString().compareTo(lng.toString());
         }
     }

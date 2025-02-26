@@ -104,6 +104,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.MlKitTranslateUtil;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
@@ -114,7 +115,6 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.html.HtmlStyle;
 import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
-import cgeo.geocaching.utils.MlKitTranslateUtil;
 import cgeo.geocaching.wherigo.WherigoActivity;
 import cgeo.geocaching.wherigo.WherigoUtils;
 import cgeo.geocaching.wherigo.WherigoViewUtils;
@@ -256,11 +256,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
 
-    public void setListingTranslationLanguage(MlKitTranslateUtil.Language listingTranslationLanguage) {
-        this.listingTranslationLanguage.setValue(listingTranslationLanguage);
-    }
-
-    public MutableLiveData<MlKitTranslateUtil.Language> listingTranslationLanguage = new MutableLiveData<>();
+    final public MutableLiveData<MlKitTranslateUtil.Language> listingTranslationLanguage = new MutableLiveData<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -1880,7 +1876,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             });
             binding.descriptionTranslateButton.setOnClickListener(v -> translateListing());
-            binding.descriptionTranslateNote.setOnClickListener(v -> MlKitTranslateUtil.showLanguageSelection(getActivity(), cda::setListingTranslationLanguage));
+            binding.descriptionTranslateNote.setOnClickListener(v -> MlKitTranslateUtil.showLanguageSelection(getActivity(), cda.listingTranslationLanguage::setValue));
             binding.descriptionTranslate.setVisibility(View.VISIBLE);
 
             // identify listing language
@@ -1908,7 +1904,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
 
-            MlKitTranslateUtil.Language sourceLng = cda.listingTranslationLanguage.getValue();
+            final MlKitTranslateUtil.Language sourceLng = cda.listingTranslationLanguage.getValue();
 
             MlKitTranslateUtil.translateText(cda, sourceLng,
                 unsupportedLng -> {
