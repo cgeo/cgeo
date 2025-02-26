@@ -519,6 +519,24 @@ public final class TextUtils {
         return PATTERN_REMOVE_SPECIAL.matcher(value.toLowerCase(Locale.US)).replaceAll("");
     }
 
+
+    public static boolean isEqualStripHtmlIgnoreSpaces(final @Nullable String s1, final String s2) {
+        if (Objects.equals(s1, s2)) {
+            return true;
+        }
+        if (s1 == null || s2 == null) {
+            return false;
+        }
+
+        final String s1Stripped = TextUtils.stripHtml(s1);
+        final String s2Stripped = TextUtils.stripHtml(s2);
+        if (s1Stripped == null || s2Stripped == null) {
+            return false;
+        }
+
+        return StringUtils.compare(TextUtils.replaceWhitespace(s1Stripped), TextUtils.replaceWhitespace(s2Stripped)) == 0;
+    }
+
     public static <E extends Enum<E>> E getEnumIgnoreCaseAndSpecialChars(final Class<E> enumClass, final String enumName, final E defaultEnum) {
         if (enumName == null || !enumClass.isEnum()) {
             return defaultEnum;
