@@ -183,7 +183,9 @@ public class RouteTrackUtils {
     public boolean handleContextMenuClick(final MenuItem item, final Action2<Route, Boolean> showElevationChart, final IGeoItemSupplier route, @Nullable final Runnable onDelete) {
         final int id = item.getItemId();
         if (id == R.id.menu_showElevationChart && showElevationChart != null && route instanceof Route) {
-            dialog.dismiss();
+            if (dialog != null) {
+                dialog.dismiss();
+            }
             showElevationChart.call((Route) route, true);
         } else if (id == R.id.menu_edit && isIndividualRoute(route)) {
             activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE);
