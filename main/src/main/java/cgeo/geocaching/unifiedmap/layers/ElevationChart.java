@@ -21,7 +21,6 @@ import static cgeo.geocaching.utils.DisplayUtils.getDimensionInDp;
 import android.content.res.Resources;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
@@ -82,7 +81,7 @@ public class ElevationChart {
             chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
                 @Override
                 public void onValueSelected(final Entry e, final Highlight h) {
-                    final Geopoint center = findClosestByDistance(route, e.getX());
+                    final Geopoint center = (Geopoint) e.getData();
                     // update marker if position found
                     if (center != null) {
                         final GeoItem marker = GeoPrimitive.createMarker(center, GeoIcon.builder().setBitmap(ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.circle, null))).build()).buildUpon().setZLevel(ZINDEX_ELEVATIONCHARTMARKERPOSITION).build();
@@ -139,7 +138,7 @@ public class ElevationChart {
                 lastPoint = point;
                 final float elev = it.hasNext() ? it.next() : Float.NaN;
                 if (!Float.isNaN(elev)) {
-                    entries.add(new Entry(distance, elev));
+                    entries.add(new Entry(distance, elev, point));
                 }
             }
         }
@@ -194,24 +193,5 @@ public class ElevationChart {
         chartBlock.setVisibility(View.GONE);
         geoItemLayer.remove(ELEVATIONCHART_MARKER);
         LifecycleAwareBroadcastReceiver.sendBroadcast(chart.getContext(), Intents.ACTION_ELEVATIONCHART_CLOSED);
-    }
-
-    /** find position in route corresponding to distance from start */
-    @Nullable
-    private static Geopoint findClosestByDistance(final Route route, final float distance) {
-        float done = 0.0f;
-        Geopoint lastPoint = null;
-        for (RouteSegment segment : route.getSegments()) {
-            for (Geopoint point : segment.getPoints()) {
-                if (lastPoint != null) {
-                    done += lastPoint.distanceTo(point);
-                }
-                if (done >= distance) {
-                    return point;
-                }
-                lastPoint = point;
-            }
-        }
-        return null;
     }
 }
