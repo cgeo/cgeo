@@ -455,6 +455,18 @@ public class LogEntry implements Parcelable {
                 log.compareTo(otherLog.log) == 0;
     }
 
+    public boolean hasSameLogId(final LogEntry obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (serviceLogId != null && obj.serviceLogId != null) {
+            return StringUtils.equals(serviceLogId, obj.serviceLogId);
+        }
+
+        return false;
+    }
+
     @NonNull
     @Override
     public String toString() {
