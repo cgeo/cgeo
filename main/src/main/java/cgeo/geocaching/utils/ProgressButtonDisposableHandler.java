@@ -51,7 +51,7 @@ public class ProgressButtonDisposableHandler extends SimpleDisposableHandler {
         }
     }
 
-    private static IndeterminateDrawable<CircularProgressIndicatorSpec> getCircularProgressIndicatorDrawable(final Context context) {
+    public static IndeterminateDrawable<CircularProgressIndicatorSpec> getCircularProgressIndicatorDrawable(final Context context) {
         final CircularProgressIndicatorSpec spec = new CircularProgressIndicatorSpec(context, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_CircularProgressIndicator_Small);
         spec.indicatorSize = ViewUtils.dpToPixel(context.getResources().getDimension(R.dimen.buttonSize_iconButton) / context.getResources().getDisplayMetrics().density / 1.8f);
         return IndeterminateDrawable.createCircularDrawable(context, spec);

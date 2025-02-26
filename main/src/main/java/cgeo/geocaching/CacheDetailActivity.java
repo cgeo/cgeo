@@ -104,6 +104,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
+import cgeo.geocaching.utils.MlKitTranslateUtil;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
@@ -161,6 +162,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.MutableLiveData;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -176,6 +178,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.mlkit.nl.languageid.LanguageIdentification;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -252,6 +255,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private boolean activityIsStartedForEditNote = false;
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
+
+    final public MutableLiveData<MlKitTranslateUtil.Language> listingTranslationLanguage = new MutableLiveData<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -1700,6 +1705,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private static final int DESCRIPTION_MAX_SAFE_LENGTH = 50000;
 
         private Geocache cache;
+        private boolean descriptionTranslated = false;
 
 
         @Override
@@ -1847,6 +1853,101 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         }
 
+        MlKitTranslateUtil.LanguagePackDownloadHandler languagePackDownloadHandler = null;
+
+        private void initializeListingTranslator() {
+            if (Settings.getTranslationTargetLanguage().isEmpty()) {
+                binding.descriptionTranslate.setVisibility(View.GONE);
+                return;
+            }
+
+            final CacheDetailActivity cda = (CacheDetailActivity) getActivity();
+
+            // add observer to listing language
+            cda.listingTranslationLanguage.observe(this, lng -> {
+                if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
+                    binding.descriptionTranslate.setVisibility(View.GONE);
+                } else if ("und".equals(lng.getCode())) {
+                    binding.descriptionTranslateButton.setEnabled(false);
+                    binding.descriptionTranslateNote.setText(R.string.translator_language_unknown);
+                } else {
+                    binding.descriptionTranslateButton.setEnabled(true);
+                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_detected, lng.toString()));
+                }
+            });
+            binding.descriptionTranslateButton.setOnClickListener(v -> translateListing());
+            binding.descriptionTranslateNote.setOnClickListener(v -> MlKitTranslateUtil.showLanguageSelection(getActivity(), cda.listingTranslationLanguage::setValue));
+            binding.descriptionTranslate.setVisibility(View.VISIBLE);
+
+            // identify listing language
+            LanguageIdentification.getClient().identifyLanguage(binding.description.getText().toString())
+                    .addOnSuccessListener(lngCode -> {
+                        cda.listingTranslationLanguage.setValue(new MlKitTranslateUtil.Language(lngCode));
+                    })
+                    .addOnFailureListener(e -> {
+                        binding.descriptionTranslateButton.setEnabled(false);
+                        binding.descriptionTranslateNote.setText(e.getMessage());
+                    });
+
+        }
+
+        private void translateListing() {
+            final CacheDetailActivity cda = (CacheDetailActivity) getActivity();
+
+            if (descriptionTranslated) {
+                reloadDescription(cda, cache, true, 0, cda.descriptionStyle);
+                if (TextUtils.containsHtml(cache.getHint())) {
+                    binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
+                } else {
+                    binding.hint.setText(cache.getHint());
+                }
+                return;
+            }
+
+            final MlKitTranslateUtil.Language sourceLng = cda.listingTranslationLanguage.getValue();
+
+            MlKitTranslateUtil.translateText(cda, sourceLng,
+                unsupportedLng -> {
+                    binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
+                }, downloadingModel -> {
+                    languagePackDownloadHandler = new MlKitTranslateUtil.LanguagePackDownloadHandler(cda);
+                    languagePackDownloadHandler.showProgress(cda.findViewById(R.id.description_translate_button));
+                }, translator -> {
+                    if (null != languagePackDownloadHandler) {
+                        languagePackDownloadHandler.sendEmptyMessage(DisposableHandler.DONE);
+                    }
+                    if (null == translator) {
+                        binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
+                        return;
+                    }
+                    final List<String> descText = Arrays.asList(binding.description.getText().toString().split("\n"));
+                    final List<String> descTranslated = new ArrayList<>();
+                    for (String p : descText) {
+                        translator.translate(p)
+                                .addOnSuccessListener(translation -> {
+                                    descTranslated.add(translation);
+                                    if (descText.size() == descTranslated.size()) {
+                                        displayDescription(getActivity(), cache, String.join("\n", descTranslated), binding.description);
+                                        descriptionTranslated = true;
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+                                    binding.descriptionTranslateNote.setText(getResources().getText(R.string.translator_translation_error, e.getMessage()));
+                                    binding.descriptionTranslateButton.setEnabled(false);
+                                });
+                    }
+
+                    translator.translate(binding.hint.getText().toString())
+                            .addOnSuccessListener(translation -> {
+                                binding.hint.setText(translation);
+                            })
+                            .addOnFailureListener(e -> {
+                                binding.descriptionTranslateNote.setText(e.getMessage());
+                                binding.descriptionTranslateButton.setEnabled(false);
+                            });
+                });
+        }
+
         @Override
         public void onDestroy() {
             super.onDestroy();
@@ -1887,6 +1988,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             AndroidRxUtils.andThenOnUi(AndroidRxUtils.computationScheduler, () ->
                 createDescriptionContent(activity, cache, restrictLength, binding.description, descriptionStyle), p -> {
                     displayDescription(activity, cache, p.first, binding.description);
+
+                    descriptionTranslated = false;
+                    initializeListingTranslator();
+
                     // we need to use post, so that the textview is layouted before scrolling gets called
                     if (((CacheDetailActivity) activity).lastActionWasEditNote) {
                         ((CacheDetailActivity) activity).scrollToBottom();
