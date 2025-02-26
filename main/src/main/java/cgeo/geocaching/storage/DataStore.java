@@ -3751,15 +3751,26 @@ public class DataStore {
         });
     }
 
+    @NonNull
+    public static List<LogEntry> loadLogs(final String geocode) {
+        return loadLogs(geocode, null, null);
+    }
+
+    @NonNull
+    public static List<LogEntry> loadLogsOfAuthor(final String geocode, final @Nullable String authorName, final @Nullable Boolean whereFriend) {
+        return loadLogs(geocode, authorName, whereFriend);
+    }
 
     /**
      * @return an immutable, non null list of logs
      */
     @NonNull
-    public static List<LogEntry> loadLogs(final String geocode) {
+    private static List<LogEntry> loadLogs(final String geocode, final @Nullable String authorName, final @Nullable Boolean whereFriend) {
         return withAccessLock(() -> {
 
-            try (ContextLogger cLog = new ContextLogger("DataStore.loadLogs(%s)", geocode)) {
+            try (ContextLogger cLog = new ContextLogger("DataStore.loadLogs(geocode: %s, author: %s, friend: %s)", geocode,
+                    StringUtils.isEmpty(authorName) ? "%" : authorName,
+                    whereFriend == null ? "all" : (whereFriend ? "true" : "false"))) {
                 final List<LogEntry> logs = new ArrayList<>();
 
                 if (StringUtils.isBlank(geocode)) {
@@ -3768,11 +3779,17 @@ public class DataStore {
 
                 init();
 
+                String whereFriendSql = "";
+                if (whereFriend != null) {
+                    whereFriendSql = "AND friend = ";
+                    whereFriendSql += whereFriend ? "1" : "0";
+                }
+
                 final Cursor cursor = database.rawQuery(
                         //                     0           1               2     3       4            5    6     7      8                                       9                10      11     12   13           14
                         "SELECT cg_logs._id AS cg_logs_id, service_log_id, type, author, author_guid, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url, description, service_image_id"
                                 + " FROM " + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
-                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode});
+                                + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  " + " AND author LIKE ? " + whereFriendSql + " ORDER BY date DESC, cg_logs._id ASC", new String[]{geocode, StringUtils.isEmpty(authorName) ? "%" : authorName});
 
                 LogEntry.Builder log = null;
                 int cnt = 0;

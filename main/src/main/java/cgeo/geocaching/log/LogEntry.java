@@ -7,6 +7,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CommonUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
 
 import android.os.Parcel;
@@ -26,6 +27,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.time.DateUtils;
 
 /**
  * Entry in a log book.
@@ -57,7 +59,7 @@ public class LogEntry implements Parcelable {
     /** The log message */
     @NonNull public final String log;
     /** The log date */
-    public final long date;
+    public long date;
     /** Is a found log */
     public final int found;
     /** Own's or Friend's log entry indicator. */
@@ -76,6 +78,10 @@ public class LogEntry implements Parcelable {
     @NonNull
     public Date getDate() {
         return new Date(date);
+    }
+
+    public void setDate(final long date) {
+        this.date = date;
     }
 
     @NonNull
@@ -511,5 +517,16 @@ public class LogEntry implements Parcelable {
      */
     public boolean isOwn() {
         return author.equalsIgnoreCase(Settings.getUserName());
+    }
+
+    /**
+     * Checks, if the logs are representing the same log-entry.
+     * Log-text can be empty (to deal with field-notes)
+     */
+    public boolean isMatchingLog(final LogEntry log) {
+        return this.logType == log.logType &&
+                this.author.compareTo(log.author) == 0 &&
+                DateUtils.isSameDay(new Date(this.date), new Date(log.date)) &&
+                (this.log.isEmpty() || log.log.isEmpty() || TextUtils.isEqualStripHtmlIgnoreSpaces(this.log, log.log));
     }
 }
