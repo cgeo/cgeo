@@ -779,6 +779,10 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
                 viewModel.proximityNotification.getValue().checkDistance(getClosestDistanceInM(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()), viewModel));
             }
         }
+
+        if (elevationChartUtils != null) {
+            elevationChartUtils.showPositionOnTrack(new Geopoint(locationWrapper.location.getLatitude(), locationWrapper.location.getLongitude()));
+        }
     }
 
     private void checkDrivingMode() {

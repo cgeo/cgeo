@@ -60,9 +60,9 @@ public class Units {
 
         final ImmutablePair<Double, String> scaled = scaleDistance(distanceKilometers);
         final String formatString;
-        if (scaled.left >= 100) {
+        if (Math.abs(scaled.left) >= 100) {
             formatString = "%.0f %s";
-        } else if (scaled.left >= 10) {
+        } else if (Math.abs(scaled.left) >= 10) {
             formatString = "%.1f %s";
         } else {
             formatString = "%.2f %s";

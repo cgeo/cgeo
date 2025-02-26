@@ -48,6 +48,8 @@ public class ElevationChart {
     private final GeoItemLayer<String> geoItemLayer;
     final Toolbar toolbar;
     private final List<Entry> entries = new ArrayList<>();
+    private float offset = 0f;
+    private Geopoint lastShownPosition = null;
 
     public ElevationChart(final AppCompatActivity activity, final GeoItemLayer<String> geoItemLayer) {
         chartBlock = activity.findViewById(R.id.elevation_block);
@@ -153,7 +155,8 @@ public class ElevationChart {
             dataSet.setLineWidth(2f);
             final int color = res.getColor(R.color.colorAccent);
             dataSet.setColor(color);
-            dataSet.setHighLightColor(color);
+            dataSet.setHighLightColor(res.getColor(R.color.colorTextHint));
+            dataSet.setHighlightLineWidth(2.5f);
             dataSet.setValueTextColor(res.getColor(R.color.colorText));
             dataSet.setDrawValues(false);
             dataSet.setDrawFilled(true);
@@ -177,7 +180,7 @@ public class ElevationChart {
         xAxis.setTextSize(getDimensionInDp(res, R.dimen.textSize_detailsSecondary));
         xAxis.setTextColor(res.getColor(R.color.colorText));
         xAxis.setAxisMinimum(0.0f);
-        xAxis.setValueFormatter((value, axis) -> Units.getDistanceFromKilometers(value));
+        xAxis.setValueFormatter((value, axis) -> Units.getDistanceFromKilometers(value - offset));
 
         final YAxis yAxis = chart.getAxisLeft();
         yAxis.setDrawAxisLine(true);
@@ -186,6 +189,31 @@ public class ElevationChart {
 
         final YAxis yAxis2 = chart.getAxisRight();
         yAxis2.setEnabled(false);
+    }
+
+    /** find position on track closest to given coords (max 100m) and highlight it */
+    public void showPositionOnTrack(final Geopoint coords) {
+        // calculate new position on track only if minimum distance reached
+        if (lastShownPosition != null && coords.distanceTo(lastShownPosition) < 0.05f) {
+            return;
+        }
+        lastShownPosition = coords;
+        // find position
+        float minDistance = 0.1f;
+        int x = -1;
+        int index = 0;
+        for (Entry entry : entries) {
+            final float distance = ((Geopoint) entry.getData()).distanceTo(coords);
+            if (distance < minDistance) {
+                x = index;
+                minDistance = distance;
+            }
+            index++;
+        }
+        // display hairpin line for found position + adapt x axis labelling
+        offset = x < 0 ? 0f : entries.get(x).getX();
+        chart.highlightValue(offset, x < 0 ? -1 : 0);
+        chart.invalidate();
     }
 
     /** hides chart and map marker */
