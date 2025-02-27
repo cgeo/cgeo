@@ -137,21 +137,21 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatFullDate(System.currentTimeMillis());
+                return Formatter.formatFullDate(context.logEntry.date);
             }
         });
         templates.add(new LogTemplate("TIME", R.string.init_signature_template_time) {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatTime(System.currentTimeMillis());
+                return Formatter.formatTime(context.logEntry.date);
             }
         });
         templates.add(new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
             @Override
             public String getValue(final LogContext context) {
-                final long currentTime = System.currentTimeMillis();
+                final long currentTime = context.logEntry.date;
                 return Formatter.formatFullDate(currentTime) + " " + Formatter.formatTime(currentTime);
             }
         });
@@ -159,7 +159,7 @@ public final class LogTemplateProvider {
 
             @Override
             public String getValue(final LogContext context) {
-                return Formatter.formatDayOfWeek(System.currentTimeMillis());
+                return Formatter.formatDayOfWeek(context.logEntry.date);
             }
         });
         templates.add(new LogTemplate("USER", R.string.init_signature_template_user) {
