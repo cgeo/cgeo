@@ -2542,7 +2542,7 @@ public class Settings {
     }
 
     public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
-        final String lngCode = getString(R.string.pref_translation_language, "");
+        final String lngCode = getString(R.string.pref_translation_language, getApplicationLocale().getLanguage());
         if (!lngCode.isEmpty()) {
             final OfflineTranslateUtils.Language lng = new OfflineTranslateUtils.Language(lngCode);
             if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
