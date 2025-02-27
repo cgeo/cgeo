@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
 import cgeo.geocaching.unifiedmap.LayerHelper;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeVtmGeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeVTMTileProvider;
@@ -103,6 +104,9 @@ public class MapsforgeVtmFragment extends AbstractMapFragment {
                     viewModel.followMyLocation.setValue(false);
                 }
                 viewModel.mapCenter.setValue(new Geopoint(mapPosition.getLatitude(), mapPosition.getLongitude()));
+            }
+            if (event == Map.SCALE_EVENT || event == Map.POSITION_EVENT) {
+                ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(mMap.getMapPosition().zoomLevel);
             }
             lastEvent = event; // remember to detect scaling combined with panning
         };
