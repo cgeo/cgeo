@@ -161,6 +161,28 @@ public class OfflineTranslateUtils {
         });
     }
 
+    public static void downloadLanguageModels(final Context context) {
+        final List<Language> languages = getSupportedLanguages();
+        getDownloadedLanguageModels(availableLanguages -> {
+            languages.removeAll(availableLanguages.stream().map(Language::new).collect(Collectors.toList()));
+
+            final SimpleDialog.ItemSelectModel<Language> model = new SimpleDialog.ItemSelectModel<>();
+            model.setItems(languages)
+                    .setDisplayMapper((l) -> TextParam.text(l.toString()))
+                    .setChoiceMode(SimpleItemListModel.ChoiceMode.MULTI_CHECKBOX);
+
+            SimpleDialog.ofContext(context).setTitle(R.string.translator_model_download_select)
+                    .selectMultiple(model, lngs -> {
+                        for (Language lng : lngs) {
+                            RemoteModelManager.getInstance()
+                                    .download(new TranslateRemoteModel.Builder(lng.getCode()).build(), new DownloadConditions.Builder().build())
+                                    .addOnSuccessListener(s -> Toast.makeText(context, context.getString(R.string.translator_model_download_success, lng.toString()), Toast.LENGTH_SHORT).show())
+                                    .addOnFailureListener(e -> Toast.makeText(context, context.getString(R.string.translator_model_download_error, lng.toString(), e.getMessage()), Toast.LENGTH_LONG).show());
+                        }
+                    });
+        });
+    }
+
     public static class LanguagePackDownloadHandler extends ProgressButtonDisposableHandler {
         public LanguagePackDownloadHandler(final AbstractActivity activity) {
             super(activity);
