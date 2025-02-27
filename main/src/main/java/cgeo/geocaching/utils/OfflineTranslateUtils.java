@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.common.model.RemoteModelManager;
 import com.google.mlkit.nl.languageid.LanguageIdentification;
-import com.google.mlkit.nl.languageid.LanguageIdentifier;
 import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.TranslateRemoteModel;
 import com.google.mlkit.nl.translate.Translation;
@@ -34,7 +33,8 @@ public class OfflineTranslateUtils {
         // utility class
     }
 
-    public static String LANGUAGE_UNKNOWN = LanguageIdentifier.UNDETERMINED_LANGUAGE_TAG;
+    public static String LANGUAGE_UNKNOWN = "und";
+    public static String LANGUAGE_UNDELETABLE = "en";
 
     public static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
@@ -69,8 +69,8 @@ public class OfflineTranslateUtils {
             if (!availableLanguages.contains(lngCode)) {
                 missingLanguages.add(new Language(lngCode));
             }
-            if (!availableLanguages.contains(Settings.getTranslationTargetLanguage())) {
-                missingLanguages.add(new Language(Settings.getTranslationTargetLanguage()));
+            if (!availableLanguages.contains(Settings.getTranslationTargetLanguage().getCode())) {
+                missingLanguages.add(Settings.getTranslationTargetLanguage());
             }
             consumer.accept(missingLanguages);
         });
@@ -123,9 +123,13 @@ public class OfflineTranslateUtils {
     }
 
     private static void getTranslator(final String lng, final Consumer<Translator> consumer) {
+        final String targetLng = TranslateLanguage.fromLanguageTag(Settings.getTranslationTargetLanguage().getCode());
+        if (null == targetLng) {
+            return;
+        }
         final TranslatorOptions options = new TranslatorOptions.Builder()
                 .setSourceLanguage(lng)
-                .setTargetLanguage(TranslateLanguage.fromLanguageTag(Settings.getTranslationTargetLanguage()))
+                .setTargetLanguage(targetLng)
                 .build();
 
         final Translator translator = Translation.getClient(options);
@@ -150,6 +154,13 @@ public class OfflineTranslateUtils {
         });
     }
 
+    public static void deleteLanguageModel(final String lngCode) {
+        final TranslateRemoteModel model = new TranslateRemoteModel.Builder(lngCode).build();
+        RemoteModelManager.getInstance().deleteDownloadedModel(model).addOnFailureListener(e -> {
+            Log.e("Failed to delete TranslateRemoteModel", e);
+        });
+    }
+
     public static class LanguagePackDownloadHandler extends ProgressButtonDisposableHandler {
         public LanguagePackDownloadHandler(final AbstractActivity activity) {
             super(activity);
@@ -165,6 +176,10 @@ public class OfflineTranslateUtils {
 
         public String getCode() {
             return code;
+        }
+
+        public boolean isValid() {
+            return !code.isEmpty();
         }
 
         public String getDisplayName() {

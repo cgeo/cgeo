@@ -370,6 +370,7 @@
     <string name="translator_model_download_confirm_title">Confirm language download</string>
     <string name="translator_model_download_confirm_txt">Translation model for language %s needs to be downloaded. Model size is roughly 20-40 MB.</string>
     <string name="translator_model_download_notification">Translation model download started</string>
+    <string name="translator_model">Translation model</string>
     <string name="translator_tooltip">Offline translate</string>
     <string name="translator_language_select">Select source language</string>
     <string name="translator_language_unsupported">Language (%s) not supported for translation.</string>

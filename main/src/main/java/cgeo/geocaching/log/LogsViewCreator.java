@@ -191,7 +191,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                             TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
                 }
             }
-            if (!Settings.getTranslationTargetLanguage().isEmpty()) {
+            if (Settings.getTranslationTargetLanguage().isValid()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
                     final String logText = HtmlUtils.extractText(log.log);
                     OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), logText,

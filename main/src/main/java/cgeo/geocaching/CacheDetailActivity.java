@@ -255,7 +255,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
 
-    final public MutableLiveData<OfflineTranslateUtils.Language> translationSourceLanguage = new MutableLiveData<>();
+    final private MutableLiveData<OfflineTranslateUtils.Language> translationSourceLanguage = new MutableLiveData<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -1855,7 +1855,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         OfflineTranslateUtils.LanguagePackDownloadHandler languagePackDownloadHandler = null;
 
         private void initializeListingTranslator() {
-            if (Settings.getTranslationTargetLanguage().isEmpty()) {
+            if (!Settings.getTranslationTargetLanguage().isValid()) {
                 binding.descriptionTranslate.setVisibility(View.GONE);
                 return;
             }
