@@ -8,6 +8,7 @@ import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.SmileyImage;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -18,6 +19,7 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
@@ -30,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.text.HtmlCompat;
@@ -187,6 +190,15 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
                     ctxMenu.addItem(R.string.translate_to_english, R.drawable.ic_menu_translate, it ->
                             TranslationUtils.startActivityTranslate(activity, Locale.ENGLISH.getLanguage(), HtmlUtils.extractText(log.log)));
                 }
+            }
+            if (!Settings.getTranslationTargetLanguage().isEmpty()) {
+                ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
+                    final String logText = HtmlUtils.extractText(log.log);
+                    OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), logText,
+                            unsupportedLng -> Toast.makeText(getContext(), getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
+                            downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
+                            translator -> translator.translate(logText).addOnSuccessListener(holder.binding.log::setText));
+                });
             }
 
             // share

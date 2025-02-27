@@ -3,16 +3,14 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.content.Context;
-import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,33 +20,29 @@ import java.util.stream.Collectors;
 
 import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.common.model.RemoteModelManager;
+import com.google.mlkit.nl.languageid.LanguageIdentification;
+import com.google.mlkit.nl.languageid.LanguageIdentifier;
 import com.google.mlkit.nl.translate.TranslateLanguage;
 import com.google.mlkit.nl.translate.TranslateRemoteModel;
 import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
-public class MlKitTranslateUtil {
+public class OfflineTranslateUtils {
 
-    private MlKitTranslateUtil() {
+    private OfflineTranslateUtils() {
         // utility class
     }
 
-    private static List<Language> getSupportedLanguages() {
+    public static String LANGUAGE_UNKNOWN = LanguageIdentifier.UNDETERMINED_LANGUAGE_TAG;
+
+    public static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
         final List<String> languageIds = TranslateLanguage.getAllLanguages();
         for (String languageId : languageIds) {
             languages.add(new Language(TranslateLanguage.fromLanguageTag(languageId)));
         }
-        return languages;
-    }
-
-    public static CharSequence[] getSupportedLanguageDisplaynames() {
-        return getSupportedLanguages().stream().map(Language::toString).toArray(CharSequence[]::new);
-    }
-
-    public static CharSequence[] getSupportedLanguageCodes() {
-        return getSupportedLanguages().stream().map(Language::getCode).toArray(CharSequence[]::new);
+        return languages.stream().sorted().collect(Collectors.toList());
     }
 
     /**
@@ -57,19 +51,13 @@ public class MlKitTranslateUtil {
      * @param consumer  selected language
      */
     public static void showLanguageSelection(final Context context, final Consumer<Language> consumer) {
-        final AlertDialog.Builder builder = Dialogs.newBuilder(context);
-        builder.setTitle(R.string.translator_language_select);
+        final SimpleDialog.ItemSelectModel<Language> model = new SimpleDialog.ItemSelectModel<>();
+        model.setItems(getSupportedLanguages())
+                .setDisplayMapper((l) -> TextParam.text(l.toString()))
+                .setChoiceMode(SimpleItemListModel.ChoiceMode.SINGLE_PLAIN);
 
-        final ArrayAdapter<Language> adapter = new ArrayAdapter<>(context, R.layout.select_dialog_item, getSupportedLanguages());
-
-        builder.setAdapter(adapter, (dialog, item) -> {
-            final Language language = adapter.getItem(item);
-            consumer.accept(language);
-            dialog.dismiss();
-        });
-
-        final AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        SimpleDialog.ofContext(context).setTitle(R.string.translator_language_select)
+                .selectSingle(model, consumer::accept);
     }
 
     /**
@@ -88,6 +76,25 @@ public class MlKitTranslateUtil {
         });
     }
 
+    public static void detectLanguage(final String text, final Consumer<Language> successConsumer, final Consumer<String> errorConsumer) {
+        // identify listing language
+        LanguageIdentification.getClient().identifyLanguage(text)
+                .addOnSuccessListener(lngCode -> {
+                    successConsumer.accept(new Language(lngCode));
+                })
+                .addOnFailureListener(e -> {
+                    errorConsumer.accept(e.getMessage());
+                });
+    }
+
+    public static void translateTextAutoDetectLng(final Activity activity, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<?> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+        detectLanguage(text, lng -> {
+            translateText(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
+        }, e -> {
+
+        });
+    }
+
     /**
      * Utility method to get a Translator object that can be used to perform offline translation
      * @param activity      the calling activity
@@ -96,20 +103,20 @@ public class MlKitTranslateUtil {
      * @param downloadingModelConsumer  returned if language models need to be downloaded, should be used to show a progress UI to the user
      * @param translatorConsumer        returns the translator object
      */
-    public static void translateText(final Activity activity, final Language sourceLng, final Consumer<?> unsupportedLngConsumer, final Consumer<?> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void translateText(final Activity activity, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<?> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
         final String lng = TranslateLanguage.fromLanguageTag(sourceLng.getCode());
         if (null == lng) {
-            unsupportedLngConsumer.accept(null);
+            unsupportedLngConsumer.accept(sourceLng);
             return;
         }
 
         findMissingLanguageModels(lng, missingLanguageModels -> {
             if (missingLanguageModels.isEmpty()) {
-                MlKitTranslateUtil.getTranslator(lng, translatorConsumer);
+                OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
             } else {
-                SimpleDialog.of(activity).setTitle(R.string.translator_model_download_confirm_title).setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, String.join(", ", missingLanguageModels.stream().map(MlKitTranslateUtil.Language::toString).collect(Collectors.toList())))).confirm(() -> {
+                SimpleDialog.of(activity).setTitle(R.string.translator_model_download_confirm_title).setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, String.join(", ", missingLanguageModels.stream().map(OfflineTranslateUtils.Language::toString).collect(Collectors.toList())))).confirm(() -> {
                     downloadingModelConsumer.accept(null);
-                    MlKitTranslateUtil.getTranslator(lng, translatorConsumer);
+                    OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
                 });
             }
         });

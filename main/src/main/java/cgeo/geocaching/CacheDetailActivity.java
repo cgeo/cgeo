@@ -104,7 +104,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MenuUtils;
-import cgeo.geocaching.utils.MlKitTranslateUtil;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ProgressBarDisposableHandler;
 import cgeo.geocaching.utils.ProgressButtonDisposableHandler;
@@ -178,7 +178,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.mlkit.nl.languageid.LanguageIdentification;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
@@ -256,7 +255,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private HtmlStyle descriptionStyle = HtmlStyle.DEFAULT;
 
-    final public MutableLiveData<MlKitTranslateUtil.Language> listingTranslationLanguage = new MutableLiveData<>();
+    final public MutableLiveData<OfflineTranslateUtils.Language> translationSourceLanguage = new MutableLiveData<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -1853,7 +1852,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         }
 
-        MlKitTranslateUtil.LanguagePackDownloadHandler languagePackDownloadHandler = null;
+        OfflineTranslateUtils.LanguagePackDownloadHandler languagePackDownloadHandler = null;
 
         private void initializeListingTranslator() {
             if (Settings.getTranslationTargetLanguage().isEmpty()) {
@@ -1864,10 +1863,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final CacheDetailActivity cda = (CacheDetailActivity) getActivity();
 
             // add observer to listing language
-            cda.listingTranslationLanguage.observe(this, lng -> {
+            cda.translationSourceLanguage.observe(this, lng -> {
                 if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
                     binding.descriptionTranslate.setVisibility(View.GONE);
-                } else if ("und".equals(lng.getCode())) {
+                } else if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
                     binding.descriptionTranslateButton.setEnabled(false);
                     binding.descriptionTranslateNote.setText(R.string.translator_language_unknown);
                 } else {
@@ -1876,19 +1875,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             });
             binding.descriptionTranslateButton.setOnClickListener(v -> translateListing());
-            binding.descriptionTranslateNote.setOnClickListener(v -> MlKitTranslateUtil.showLanguageSelection(getActivity(), cda.listingTranslationLanguage::setValue));
+            binding.descriptionTranslateNote.setOnClickListener(v -> OfflineTranslateUtils.showLanguageSelection(cda, cda.translationSourceLanguage::setValue));
             binding.descriptionTranslate.setVisibility(View.VISIBLE);
 
             // identify listing language
-            LanguageIdentification.getClient().identifyLanguage(binding.description.getText().toString())
-                    .addOnSuccessListener(lngCode -> {
-                        cda.listingTranslationLanguage.setValue(new MlKitTranslateUtil.Language(lngCode));
-                    })
-                    .addOnFailureListener(e -> {
+            OfflineTranslateUtils.detectLanguage(binding.description.getText().toString(),
+                    cda.translationSourceLanguage::setValue,
+                    error -> {
                         binding.descriptionTranslateButton.setEnabled(false);
-                        binding.descriptionTranslateNote.setText(e.getMessage());
+                        binding.descriptionTranslateNote.setText(error);
                     });
-
         }
 
         private void translateListing() {
@@ -1904,13 +1900,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 return;
             }
 
-            final MlKitTranslateUtil.Language sourceLng = cda.listingTranslationLanguage.getValue();
+            final OfflineTranslateUtils.Language sourceLng = cda.translationSourceLanguage.getValue();
 
-            MlKitTranslateUtil.translateText(cda, sourceLng,
+            OfflineTranslateUtils.translateText(cda, sourceLng,
                 unsupportedLng -> {
                     binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
                 }, downloadingModel -> {
-                    languagePackDownloadHandler = new MlKitTranslateUtil.LanguagePackDownloadHandler(cda);
+                    languagePackDownloadHandler = new OfflineTranslateUtils.LanguagePackDownloadHandler(cda);
                     languagePackDownloadHandler.showProgress(cda.findViewById(R.id.description_translate_button));
                 }, translator -> {
                     if (null != languagePackDownloadHandler) {
