@@ -60,15 +60,12 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.google.android.gms.tasks.Tasks;
 import com.google.mlkit.common.model.RemoteModelManager;
 import com.google.mlkit.nl.translate.TranslateRemoteModel;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutionException;
 
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
@@ -427,7 +424,7 @@ public class DownloaderUtils {
         }).addOnFailureListener(e -> showDialog(activity, offlineItems));
     }
 
-    private static void showDialog(Activity activity, List<Pair<Integer, String>> offlineItems) {
+    private static void showDialog(final Activity activity, final List<Pair<Integer, String>> offlineItems) {
         // confirmation dialog (grouped by type)
         final SimpleDialog.ItemSelectModel<Pair<Integer, String>> model = new SimpleDialog.ItemSelectModel<>();
         model
