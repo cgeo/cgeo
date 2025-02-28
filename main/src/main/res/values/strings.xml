@@ -240,8 +240,8 @@
 
     <!-- translation -->
     <string name="translate">Translate in Google Translate App</string>
-    <string name="translate_to_sys_lang">Translate to %s</string>
-    <string name="translate_to_english">Translate2 to English</string>
+    <string name="translate_to_sys_lang">Translate to %s (Web)</string>
+    <string name="translate_to_english">Translate to English (Web)</string>
     <string name="translate_length_warning">Translation may fail with a large amount of text.</string>
 
     <!-- errors, warnings, info toasts -->

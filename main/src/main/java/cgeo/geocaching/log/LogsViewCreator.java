@@ -27,6 +27,7 @@ import cgeo.geocaching.utils.html.HtmlUtils;
 import cgeo.geocaching.utils.html.UnknownTagsHandler;
 
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
+    public OfflineTranslateUtils.Status translationStatus = new OfflineTranslateUtils.Status();
 
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -193,11 +196,17 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
             }
             if (Settings.getTranslationTargetLanguage().isValid()) {
                 ctxMenu.addItem(R.string.translator_tooltip, R.drawable.ic_menu_translate, it -> {
-                    final String logText = HtmlUtils.extractText(log.log);
-                    OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), logText,
-                            unsupportedLng -> Toast.makeText(getContext(), getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
-                            downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
-                            translator -> translator.translate(logText).addOnSuccessListener(holder.binding.log::setText));
+                    if (translationStatus.isTranslated()) {
+                        translationStatus.setNotTranslated();
+                        fillViewHolder(null, holder, log);
+                    } else {
+                        final String logText = HtmlUtils.extractText(log.log);
+                        translationStatus.startTranslation(1, null, null);
+                        OfflineTranslateUtils.translateTextAutoDetectLng(getActivity(), logText,
+                                unsupportedLng -> Toast.makeText(getContext(), getString(R.string.translator_language_unsupported, unsupportedLng), Toast.LENGTH_LONG).show(),
+                                downloadingModel -> Toast.makeText(getContext(), R.string.translator_model_download_notification, Toast.LENGTH_SHORT).show(),
+                                translator -> OfflineTranslateUtils.translateParagraph(translator, translationStatus, logText, holder.binding.log::setText, e -> Toast.makeText(getContext(), getString(R.string.translator_translation_error, e.getMessage()), Toast.LENGTH_LONG).show()));
+                        }
                 });
             }
 

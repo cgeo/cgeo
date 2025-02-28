@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.TabbedViewPagerActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.SimpleItemListModel;
 import cgeo.geocaching.ui.TextParam;
@@ -9,15 +10,26 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.mlkit.common.model.DownloadConditions;
 import com.google.mlkit.common.model.RemoteModelManager;
 import com.google.mlkit.nl.languageid.LanguageIdentification;
@@ -87,9 +99,9 @@ public class OfflineTranslateUtils {
                 });
     }
 
-    public static void translateTextAutoDetectLng(final Activity activity, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<?> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void translateTextAutoDetectLng(final Activity activity, final String text, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
         detectLanguage(text, lng -> {
-            translateText(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
+            getTranslator(activity, lng, unsupportedLngConsumer, downloadingModelConsumer, translatorConsumer);
         }, e -> {
 
         });
@@ -103,7 +115,7 @@ public class OfflineTranslateUtils {
      * @param downloadingModelConsumer  returned if language models need to be downloaded, should be used to show a progress UI to the user
      * @param translatorConsumer        returns the translator object
      */
-    public static void translateText(final Activity activity, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<?> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
+    public static void getTranslator(final Activity activity, final Language sourceLng, final Consumer<Language> unsupportedLngConsumer, final Consumer<List<OfflineTranslateUtils. Language>> downloadingModelConsumer, final Consumer<Translator> translatorConsumer) {
         final String lng = TranslateLanguage.fromLanguageTag(sourceLng.getCode());
         if (null == lng) {
             unsupportedLngConsumer.accept(sourceLng);
@@ -115,11 +127,30 @@ public class OfflineTranslateUtils {
                 OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.translator_model_download_confirm_title).setMessage(TextParam.id(R.string.translator_model_download_confirm_txt, String.join(", ", missingLanguageModels.stream().map(OfflineTranslateUtils.Language::toString).collect(Collectors.toList())))).confirm(() -> {
-                    downloadingModelConsumer.accept(null);
+                    downloadingModelConsumer.accept(missingLanguageModels);
                     OfflineTranslateUtils.getTranslator(lng, translatorConsumer);
                 });
             }
         });
+    }
+
+    public static void translateParagraph(final Translator translator, final OfflineTranslateUtils.Status status, final String text, final Consumer<String> consumer, final Consumer<Exception> errorConsumer) {
+        final List<String> origText = Arrays.asList(text.split("\n"));
+        final List<String> translatedText = new ArrayList<>();
+        for (String p : origText) {
+            translator.translate(p)
+                    .addOnSuccessListener(translation -> {
+                        translatedText.add(translation);
+                        if (origText.size() == translatedText.size()) {
+                            consumer.accept(String.join("\n", translatedText));
+                            status.updateProgress();
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        status.abortTranslation();
+                        errorConsumer.accept(e);
+                    });
+        }
     }
 
     private static void getTranslator(final String lng, final Consumer<Translator> consumer) {
@@ -183,8 +214,42 @@ public class OfflineTranslateUtils {
         });
     }
 
-    public static class LanguagePackDownloadHandler extends ProgressButtonDisposableHandler {
-        public LanguagePackDownloadHandler(final AbstractActivity activity) {
+    public static void initializeListingTranslatorInTabbedViewPagerActivity(final TabbedViewPagerActivity cda, final LinearLayout translationBox, final String translateText, final Runnable callback) {
+        if (!Settings.getTranslationTargetLanguage().isValid()) {
+            translationBox.setVisibility(View.GONE);
+            return;
+        }
+        final TextView note = translationBox.findViewById(R.id.description_translate_note);
+        final Button button = translationBox.findViewById(R.id.description_translate_button);
+
+        // add observer to listing language
+        cda.translationStatus.setSourceLanguageChangeConsumer(lng -> {
+            if (null == lng || Settings.getLanguagesToNotTranslate().contains(lng.getCode())) {
+                translationBox.setVisibility(View.GONE);
+            } else if (OfflineTranslateUtils.LANGUAGE_UNKNOWN.equals(lng.getCode())) {
+                button.setEnabled(false);
+                note.setText(R.string.translator_language_unknown);
+            } else {
+                button.setEnabled(true);
+                note.setText(cda.getResources().getString(R.string.translator_language_detected, lng.toString()));
+            }
+        });
+
+        button.setOnClickListener(v -> callback.run());
+        note.setOnClickListener(v -> OfflineTranslateUtils.showLanguageSelection(cda, cda.translationStatus::setSourceLanguage));
+        translationBox.setVisibility(View.VISIBLE);
+
+        // identify listing language
+        OfflineTranslateUtils.detectLanguage(translateText,
+                cda.translationStatus::setSourceLanguage,
+                error -> {
+                    button.setEnabled(false);
+                    note.setText(error);
+                });
+    }
+
+    public static class TranslationProgressHandler extends ProgressButtonDisposableHandler {
+        public TranslationProgressHandler(final AbstractActivity activity) {
             super(activity);
         }
     }
@@ -230,6 +295,74 @@ public class OfflineTranslateUtils {
         @Override
         public int compareTo(@NonNull final Language lng) {
             return this.toString().compareTo(lng.toString());
+        }
+    }
+
+    public static class Status {
+        private final MutableLiveData<Language> sourceLanguage = new MutableLiveData<>();
+        private OfflineTranslateUtils.TranslationProgressHandler progressHandler;
+        private boolean isTranslated = false;
+        private int textsToTranslate;
+        private int translatedTexts = 0;
+        private Consumer<Language> languageChangeConsumer;
+
+        public OfflineTranslateUtils.Language getSourceLanguage() {
+            return sourceLanguage.getValue();
+        }
+
+        public void setSourceLanguage(final OfflineTranslateUtils.Language lng) {
+            sourceLanguage.setValue(lng);
+            this.languageChangeConsumer.accept(lng);
+        }
+
+        public void setSourceLanguageChangeConsumer(final Consumer<Language> consumer) {
+            this.languageChangeConsumer = consumer;
+        }
+
+        public void addSourceLanguageObserver(final LifecycleOwner owner, final Observer<Language> observer) {
+            sourceLanguage.observe(owner, observer);
+        }
+
+        public OfflineTranslateUtils.TranslationProgressHandler getProgressHandler() {
+            return progressHandler;
+        }
+
+        public void setProgressHandler(OfflineTranslateUtils.TranslationProgressHandler progressHandler) {
+            this.progressHandler = progressHandler;
+        }
+
+        public synchronized void startTranslation(final int textsToTranslate, @Nullable final AbstractActivity activity, @Nullable final MaterialButton button) {
+            this.isTranslated = false;
+            this.textsToTranslate = textsToTranslate;
+            this.translatedTexts = 0;
+            if (null != activity) {
+                this.progressHandler = new OfflineTranslateUtils.TranslationProgressHandler(activity);
+                this.progressHandler.showProgress(button);
+            }
+        }
+
+        public synchronized void abortTranslation() {
+            if (null != this.progressHandler) {
+                this.progressHandler.sendEmptyMessage(DisposableHandler.DONE);
+            }
+            isTranslated = false;
+        }
+
+        public synchronized void updateProgress() {
+            if (this.textsToTranslate == ++this.translatedTexts) {
+                isTranslated = true;
+                if (null != this.progressHandler) {
+                    this.progressHandler.sendEmptyMessage(DisposableHandler.DONE);
+                }
+            }
+        }
+
+        public boolean isTranslated() {
+            return isTranslated;
+        }
+
+        public void setNotTranslated() {
+            this.isTranslated = false;
         }
     }
 }
