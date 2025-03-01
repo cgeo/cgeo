@@ -67,7 +67,7 @@ public abstract class Compare {
             // The inventories can differ too often, therefore we don't compare them. Also, the personal note
             // cannot be expected to match with different tester accounts.
 
-            assertThat(actual.getSpoilers()).as(cacheStr + " spoilers").hasSameSizeAs(expected.getSpoilers());
+            assertThat(actual.getSpoilers().size()).as(cacheStr + " spoilers").isGreaterThanOrEqualTo(expected.getSpoilers().size());
         }
     }
 

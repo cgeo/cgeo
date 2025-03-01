@@ -331,7 +331,7 @@ public class ImageGalleryView extends LinearLayout {
         }
     }
 
-    private void createCategory(final String category, final boolean atStart) {
+    public void createCategory(final String category, final boolean atStart) {
 
         if (!categorizedImageListHelper.containsCategory(category)) {
             categorizedImageListHelper.addOrMoveCategory(category, atStart);

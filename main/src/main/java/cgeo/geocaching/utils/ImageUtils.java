@@ -47,6 +47,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.core.graphics.BitmapCompat;
+import androidx.core.util.Predicate;
 import androidx.core.util.Supplier;
 import androidx.exifinterface.media.ExifInterface;
 
@@ -61,14 +62,17 @@ import java.lang.ref.WeakReference;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import com.caverock.androidsvg.SVG;
 import com.igreenwood.loupe.Loupe;
@@ -415,19 +419,21 @@ public final class ImageUtils {
         return StringUtils.defaultString(Uri.parse(url).getLastPathSegment());
     }
 
+    public static Predicate<String> getImageContainsPredicate(final Collection<Image> images) {
+        final Set<String> urls = images == null ? Collections.emptySet() :
+            images.stream().map(img -> img == null ? "" : imageUrlForSpoilerCompare(img.getUrl())).collect(Collectors.toSet());
+        return url -> urls.contains(imageUrlForSpoilerCompare(url));
+    }
+
     /**
      * Add images present in plain text to the existing collection.
      *
-     * @param images   a collection of images
      * @param texts    plain texts to be searched for image URLs
      */
-    public static void addImagesFromText(final Collection<Image> images, final String... texts) {
-        final Set<String> urls = new LinkedHashSet<>();
-        for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
-        }
+    public static List<Image> getImagesFromText(final BiConsumer<String, Image.Builder> modifier, final String ... texts) {
+        final List<Image> result = new ArrayList<>();
         if (null == texts) {
-            return;
+            return result;
         }
         for (final String text : texts) {
             //skip null or empty texts
@@ -439,40 +445,52 @@ public final class ImageUtils {
             while (m.find()) {
                 if (m.groupCount() >= 1) {
                     final String imgUrl = m.group(1);
-                    if (!urls.contains(imgUrl)) {
-                        urls.add(imgUrl);
-                        images.add(new Image.Builder()
-                                .setUrl(imgUrl, "https")
-                                .setCategory(Image.ImageCategory.NOTE)
-                                .build());
+                    if (StringUtils.isBlank(imgUrl)) {
+                        continue;
                     }
+                    final Image.Builder builder = new Image.Builder().setUrl(imgUrl, "https");
+                    if (modifier != null) {
+                        modifier.accept(imgUrl, builder);
+                    }
+                    result.add(builder.build());
                 }
             }
+
         }
+        return result;
     }
 
     /**
      * Add images present in the HTML description to the existing collection.
      *
-     * @param images   a collection of images
-     * @param geocode  the common title for images in the description
      * @param htmlText the HTML description to be parsed, can be repeated
      */
-    public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
-        final Set<String> urls = new LinkedHashSet<>();
-        for (final Image image : images) {
-            urls.add(imageUrlForSpoilerCompare(image.getUrl()));
-        }
+    public static List<Image> getImagesFromHtml(final BiConsumer<String, Image.Builder> modifier, final String... htmlText) {
+        final List<Image> result = new ArrayList<>();
         forEachImageUrlInHtml(source -> {
-                if (!urls.contains(imageUrlForSpoilerCompare(source)) && canBeOpenedExternally(source)) {
-                    images.add(new Image.Builder()
-                            .setUrl(source, "https")
-                            .setTitle(StringUtils.defaultString(geocode))
-                            .setCategory(Image.ImageCategory.LISTING)
-                            .build());
-                    urls.add(source);
+                if (canBeOpenedExternally(source)) {
+                    final Image.Builder builder = new Image.Builder()
+                            .setUrl(source, "https");
+                    if (modifier != null) {
+                        modifier.accept(source, builder);
+                    }
+                    result.add(builder.build());
                 }
             }, htmlText);
+        return result;
+    }
+
+    public static void deduplicateImageList(final Collection<Image> list) {
+        final Set<String> urls = new HashSet<>();
+        final Iterator<Image> it = list.iterator();
+        while (it.hasNext()) {
+            final Image img = it.next();
+            final String url = ImageUtils.imageUrlForSpoilerCompare(img.getUrl());
+            if (urls.contains(url)) {
+                it.remove();
+            }
+            urls.add(url);
+        }
     }
 
     public static void forEachImageUrlInHtml(@Nullable final androidx.core.util.Consumer<String> callback, @Nullable final String ... htmlText) {
@@ -850,6 +868,11 @@ public final class ImageUtils {
             imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
         }
         if (images != null) {
+            //pre-create all contained categories to be in control of their sort order
+            images.stream().map(img -> img.category)
+                    .distinct().sorted().forEach(cat -> imageGallery.createCategory(
+                            cat == Image.ImageCategory.UNCATEGORIZED ? null : cat.getI18n(), false));
+            //add the images
             imageGallery.addImages(images);
         }
     }

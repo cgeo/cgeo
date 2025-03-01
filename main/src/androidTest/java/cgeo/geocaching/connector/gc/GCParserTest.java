@@ -48,7 +48,7 @@ public class GCParserTest {
 
     private void assertUnpublished(final int cache) {
         final String page = CgeoTestUtils.getFileContent(cache);
-        final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
+        final SearchResult result = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isTrue();
         assertThat(result.getError()).isEqualTo(StatusCode.UNPUBLISHED_CACHE);
@@ -68,7 +68,7 @@ public class GCParserTest {
 
     private void assertPublishedCache(final int cachePage, final String cacheName) {
         final String page = CgeoTestUtils.getFileContent(cachePage);
-        final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
+        final SearchResult result = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.getCount()).isEqualTo(1);
         final Geocache cache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -85,7 +85,7 @@ public class GCParserTest {
         final Image spoiler = cache.getSpoilers().get(1);
         assertThat(spoiler.getUrl()).as("First spoiler image url wrong").isEqualTo("https://img.geocaching.com/6ddbbe82-8762-46ad-8f4c-57d03f4b0564.jpeg");
         assertThat(spoiler.getTitle()).as("First spoiler image text wrong").isEqualTo("SPOILER");
-        assertThat(spoiler.getDescription()).as("First spoiler image description").isNull();
+        assertThat(spoiler.getDescription()).as("First spoiler image description").isEqualTo("Spoiler");
     }
 
     private static Geocache createCache(final int index) {
@@ -96,7 +96,7 @@ public class GCParserTest {
         final SearchResult searchResult;
         try {
             Settings.setGcCustomDate(MockedCache.getDateFormat());
-            searchResult = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), mockedCache.getData(), null);
+            searchResult = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), mockedCache.getData(), null);
         } finally {
             Settings.setGcCustomDate(oldCustomDate);
         }
@@ -110,7 +110,7 @@ public class GCParserTest {
     }
 
     /**
-     * Test {@link GCParser#parseAndSaveCacheFromText(IConnector, String, DisposableHandler)} with "mocked" data
+     * Test {@link GCParser#testParseAndSaveCacheFromText(IConnector, String, DisposableHandler)} with "mocked" data
      */
     @MediumTest
     @Test
@@ -120,7 +120,7 @@ public class GCParserTest {
             for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
                 // to get the same results we have to use the date format used when the mocked data was created
                 Settings.setGcCustomDate(MockedCache.getDateFormat());
-                final SearchResult searchResult = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), mockedCache.getData(), null);
+                final SearchResult searchResult = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), mockedCache.getData(), null);
                 final Geocache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 assertThat(parsedCache).isNotNull();
                 assertThat(StringUtils.isNotBlank(mockedCache.getMockedDataUser())).isTrue();
@@ -193,7 +193,7 @@ public class GCParserTest {
         editModifiedCoordinates(cache, new Geopoint("N51 21.544", "E07 02.566")).blockingSubscribe();
         cache.dropSynchronous();
         final String page = requestHtmlPage(cache.getGeocode(), null, "n");
-        final Geocache cache2 = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
+        final Geocache cache2 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache2).isNotNull();
         assertThat(cache2.hasUserModifiedCoords()).isTrue();
         assertThat(cache2.getCoords()).isEqualTo(new Geopoint("N51 21.544", "E07 02.566"));
@@ -201,7 +201,7 @@ public class GCParserTest {
         deleteModifiedCoordinates(cache2).blockingSubscribe();
         cache2.dropSynchronous();
         final String page2 = requestHtmlPage(cache.getGeocode(), null, "n");
-        final Geocache cache3 = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
+        final Geocache cache3 = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page2, null).getFirstCacheFromResult(LOAD_CACHE_ONLY);
         assertThat(cache3).isNotNull();
         assertThat(cache3.hasUserModifiedCoords()).isFalse();
     }
@@ -263,7 +263,7 @@ public class GCParserTest {
     @Nullable
     private Geocache parseCache(@RawRes final int resourceId) {
         final String page = CgeoTestUtils.getFileContent(resourceId);
-        final SearchResult result = GCParser.parseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
+        final SearchResult result = GCParser.testParseAndSaveCacheFromText(GCConnector.getInstance(), page, null);
         assertThat(result).isNotNull();
         assertThat(result.isEmpty()).isFalse();
         return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
@@ -283,7 +283,7 @@ public class GCParserTest {
     @MediumTest
     @Test
     public void testOnlineCacheUrl() {
-        assertThat(StringUtils.right(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC5EF16")).getDescription(), 150)).as("related web page appended to description").contains("http://eventimgruenen.de/");
+        assertThat(StringUtils.right(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC5EF16")).getDescription(), 300)).as("related web page appended to description").contains("http://eventimgruenen.de/");
     }
 
     @MediumTest
@@ -312,7 +312,7 @@ public class GCParserTest {
 
         spoiler = spoilers.get(1);
         assertThat(spoiler.getTitle()).isEqualTo("SPOILER");
-        assertThat(spoiler.getDescription()).isEqualTo("Suche diese Schraube");
+        assertThat(spoiler.getDescription()).isEqualTo("Spoiler: Suche diese Schraube");
     }
 
     @MediumTest
@@ -326,7 +326,7 @@ public class GCParserTest {
 
         final Image spoiler = spoilers.get(0);
         assertThat(spoiler.getTitle()).isEqualTo("");
-        assertThat(spoiler.getDescription()).isEqualTo("FOTO SPOILER");
+        assertThat(spoiler.getDescription()).isEqualTo("Spoiler: FOTO SPOILER");
         assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
     }
 
@@ -347,10 +347,53 @@ public class GCParserTest {
         final String html = "<ul class=\"CachePageImages NoPrint\">\n" +
                 "            <li><a href=\"https://img.geocaching.com/cache/large/baf98e07-b431-4fbf-920d-0df4346c2847.JPG\" class=\"owner-image\" rel=\"owner_image_group\" data-title=\"<strong>Blick vom Weg</strong>\">Blick vom Weg</a></li><li><a href=\"https://img.geocaching.com/cache/large/a6772043-021c-4b6f-91c9-da4a92829f95.JPG\" class=\"owner-image\" rel=\"owner_image_group\" data-title=\"<strong>Da zeige ich auf den Cache</strong>\">Da zeige ich auf den Cache</a></li>\n" +
                 "        </ul>";
+
         final List<Image> images = GCParser.parseSpoiler(html);
         assertThat(images).hasSize(2);
-
+        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/baf98e07-b431-4fbf-920d-0df4346c2847.JPG");
+        assertThat(images.get(0).getTitle()).isEqualTo("Blick vom Weg");
+        assertThat(images.get(0).getDescription()).isEqualTo("Spoiler");
     }
+
+    @Test
+    public void testGalleryImages() {
+        //from GCB29Z6
+        final String html = "    <h2>\n" +
+                "        <span id=\"ctl00_ContentBody_lbHeading\">Gallery Images</span>\n" +
+                "    </h2>\n" +
+                "    \n" +
+                "    \n" +
+                "\n" +
+                "    <p>\n" +
+                "        For&nbsp;<a id=\"ctl00_ContentBody_GalleryItems_LinkVisit\" href=\"https://www.geocaching.com/geocache/GCB29Z6\">11 randonnée avec vue</a></p>\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "<table id=\"ctl00_ContentBody_GalleryItems_DataListGallery\" class=\"Table&#32;GalleryTable\" cellspacing=\"0\" style=\"border-collapse:collapse;\">\n" +
+                "\t\t<tr>\n" +
+                "\t\t\t<td>\n" +
+                "        <span class=\"date-stamp\">09.02.2025</span>\n" +
+                "        <a href='https://img.geocaching.com/cache/log/large/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg' data-title='&lt;span class=&quot;LogImgTitle&quot;&gt;Bild&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;https://www.geocaching.com/seek/log.aspx?LUID=73f7e6b6-11c3-4812-a1d5-fd0efd9e3c1a&IID=93cc7be4-0515-4364-9d9a-be9336f279c7&quot;>View Log&lt;/a&gt; &lt;a href=&quot;https://img.geocaching.com/cache/large/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;' class=\"imageLink\" rel=\"gallery\">\n" +
+                "            <img src='https://img.geocaching.com/cache/log/thumb/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg' alt='View Image' /></a>        \n" +
+                "            <span>Bild </span>\n" +
+                "    </td><td>\n" +
+                "        <span class=\"date-stamp\">15.01.2025</span>\n" +
+                "        <a href='https://img.geocaching.com/cache/log/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' data-title='&lt;span class=&quot;LogImgTitle&quot;&gt;Image 2&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;https://www.geocaching.com/seek/log.aspx?LUID=7f9ba457-022d-4269-a6f9-e15721fdf0c2&IID=3b8ffe04-f32e-4ec8-833e-f8ffd647187c&quot;>View Log&lt;/a&gt; &lt;a href=&quot;https://img.geocaching.com/cache/large/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;' class=\"imageLink\" rel=\"gallery\">\n" +
+                "            <img src='https://img.geocaching.com/cache/log/thumb/3b8ffe04-f32e-4ec8-833e-f8ffd647187c.jpg' alt='View Image' /></a>        \n" +
+                "            <span>Image 2 </span>\n" +
+                "    </td><td>\n" +
+                "        <span class=\"date-stamp\">13.01.2025</span>\n" +
+                "        <a href='https://img.geocaching.com/cache/large/8879d1bc-8b10-4c18-9dc4-7b0ec9045fca.jpg' data-title='&lt;span class=&quot;LogImgTitle&quot;&gt;&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt; &lt;a href=&quot;https://img.geocaching.com/cache/large/8879d1bc-8b10-4c18-9dc4-7b0ec9045fca.jpg&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;' class=\"imageLink\" rel=\"gallery\">\n" +
+                "            <img src='https://img.geocaching.com/cache/thumb/8879d1bc-8b10-4c18-9dc4-7b0ec9045fca.jpg' alt='View Image' /></a>        \n" +
+                "            <span> </span>\n" +
+                "    </td><td></td>\n" +
+                "\t\t</tr>\n" +
+                "\t</table>\n";
+        final List<Image> images = GCParser.parseGalleryImages(html, url -> true);
+        assertThat(images).hasSize(3);
+        assertThat(images.get(0).getUrl()).isEqualTo("https://img.geocaching.com/93cc7be4-0515-4364-9d9a-be9336f279c7.jpg");
+        assertThat(images.get(0).getTitle()).isEqualTo("Bild ");
+        assertThat(images.get(0).getDescription()).isEqualTo("Gallery: 09.02.2025");    }
 
     @MediumTest
     @Test
