@@ -236,7 +236,8 @@ public class GCLogAPI {
                 .requestJson(GCWebLogResponse.class).blockingGet()) {
 
             if (response.logReferenceCode == null) {
-                return generateLogError("Problem pasting log, response is: " + response);
+                return generateLogError("CreateLog: Problem with server, request JSON=[" + HttpRequest.getJsonBody(logEntryRequest) +
+                        "], response=[" + response + "]");
             }
 
             return LogResult.ok(response.logReferenceCode);
@@ -268,7 +269,8 @@ public class GCLogAPI {
             .requestJson(GCWebLogResponse.class).blockingGet()) {
 
             if (response.logReferenceCode == null) {
-                return generateLogError("Problem pasting log, response is: " + response);
+                return generateLogError("EditLog: problem with server, request JSON=[" + HttpRequest.getJsonBody(logEntryRequest) +
+                    "], response=[" + response + "]");
             }
 
             return LogResult.ok(response.logReferenceCode);
@@ -485,7 +487,8 @@ public class GCLogAPI {
                 tLog.trackableLogTypeId = entry.getValue().gcApiId;
                 return tLog;
         }).toArray(GCWebLogTrackable.class);
-        logEntryRequest.usedFavoritePoint = offlineLogEntry != null && offlineLogEntry.favorite; //not used by web page, but seems to work
+        logEntryRequest.usedFavoritePoint = !Settings.isGCPremiumMember() ? null :
+                (offlineLogEntry != null && offlineLogEntry.favorite); //not used by web page, but seems to work
 
         return logEntryRequest;
     }
