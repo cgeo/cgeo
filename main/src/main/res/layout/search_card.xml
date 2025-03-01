@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/textSize_buttonsDouble"
             android:textColor="@color/colorText"
+            android:textAlignment="center"
             android:layout_marginTop="8dp" />
 
     </LinearLayout>

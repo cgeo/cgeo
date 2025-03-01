@@ -30,6 +30,7 @@ import cgeo.geocaching.utils.functions.Func0;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -49,6 +50,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
 
@@ -546,6 +548,16 @@ public class SearchActivity extends AbstractNavigationBarActivity implements Coo
 
     private String getSearchFieldInput() {
         return StringUtils.trimToEmpty(searchView.getText().toString());
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            CacheListActivity.startActivityFilter(this);
+            ActivityMixin.overrideTransitionToFade(this);
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
