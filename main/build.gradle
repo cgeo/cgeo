@@ -66,6 +66,8 @@ android {
 
     buildFeatures {
         viewBinding true
+        // Enable aidl, some modules in this project appear to be using AIDL
+        aidl true
     }
 
     buildTypes {
@@ -79,7 +81,10 @@ android {
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt', '../tests/proguard-project.txt'
 
             // code coverage
-            testCoverageEnabled isContinuousIntegrationServer()
+            if (isContinuousIntegrationServer()) {
+                enableAndroidTestCoverage true
+                enableUnitTestCoverage true
+            }
 
             // replace in AndroidManifest.xml
             manifestPlaceholders = [
