@@ -87,6 +87,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
+    public boolean isActive() {
+        return true;
+    }
+
+    @Override
     @Nullable
     public String getCacheUrl(@NonNull final Geocache cache) {
         return null;
