@@ -4499,7 +4499,9 @@ public class DataStore {
             }
 
             try {
-                final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji, COUNT(c.geocode) AS count" +
+                final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji," +
+                        " l." + FIELD_LISTS_PREVENTASKFORDELETION + " AS " + FIELD_LISTS_PREVENTASKFORDELETION + "," +
+                        " COUNT(c.geocode) AS count" +
                         " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCachesLists + " c" +
                         " ON l._id + " + customListIdOffset + " = c.list_id" +
                         (listId == null ? "" : " WHERE l._id = " + String.valueOf(listId - customListIdOffset)) +
