@@ -4,11 +4,14 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuItemImpl;
 
@@ -75,8 +78,23 @@ public class MenuUtils {
         if (!anyMenuItemVisible) {
             return;
         }
-        final Resources res = CgeoApplication.getInstance().getResources();
+        final Resources res = getThemedContext().getResources();
         tintMenuIcons(menu, res.getColor(R.color.colorIconActionBar), res.getColor(R.color.colorIconMenu));
+    }
+
+    private static Context getThemedContext() {
+        final Context ctx = CgeoApplication.getInstance();
+        final Resources res = ctx.getResources();
+        final Configuration configuration = new Configuration(ctx.getResources().getConfiguration());
+        final int nightNode = AppCompatDelegate.getDefaultNightMode();
+        if (nightNode == AppCompatDelegate.MODE_NIGHT_NO) {
+            configuration.uiMode = Configuration.UI_MODE_NIGHT_NO | (res.getConfiguration().uiMode & ~Configuration.UI_MODE_NIGHT_MASK);
+        } else if (nightNode == AppCompatDelegate.MODE_NIGHT_YES) {
+            configuration.uiMode = Configuration.UI_MODE_NIGHT_YES | (res.getConfiguration().uiMode & ~Configuration.UI_MODE_NIGHT_MASK);
+        } else {
+            configuration.uiMode = res.getConfiguration().uiMode;
+        }
+        return ctx.createConfigurationContext(configuration);
     }
 
     @SuppressLint("RestrictedApi")
