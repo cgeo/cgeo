@@ -48,6 +48,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.app.Activity;
@@ -2537,5 +2538,26 @@ public class Settings {
 
     public static String getShortDateFormat() {
         return getString(R.string.pref_short_date_format, "");
+    }
+
+    public static OfflineTranslateUtils.Language getTranslationTargetLanguage() {
+        final String lngCode = getString(R.string.pref_translation_language, getApplicationLocale().getLanguage());
+        if (!lngCode.isEmpty()) {
+            final OfflineTranslateUtils.Language lng = new OfflineTranslateUtils.Language(lngCode);
+            if (OfflineTranslateUtils.getSupportedLanguages().contains(lng)) {
+                return lng;
+            }
+        }
+        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
+    }
+
+    public static @NonNull Set<String> getLanguagesToNotTranslate() {
+        final Set<String> lngs = new HashSet<>();
+        if (sharedPrefs == null) {
+            return lngs;
+        }
+        lngs.addAll(sharedPrefs.getStringSet(getKey(R.string.pref_translation_notranslate), lngs));
+        lngs.add(getTranslationTargetLanguage().getCode());
+        return lngs;
     }
 }
