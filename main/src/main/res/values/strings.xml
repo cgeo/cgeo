@@ -1759,6 +1759,10 @@
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
 
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Background</string>
+    <string name="image_listing_gallery">Gallery</string>
+
     <string name="context_map_add_to_route">Append to route</string>
     <string name="context_map_add_to_route_start">Prepend to route</string>
     <string name="context_map_remove_from_route_start">Remove from start</string>
@@ -2622,6 +2626,7 @@
         <item quantity="other">%d waypoints extracted</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+    <string name="link_gallery">Images available in gallery (%d)</string>
     <string name="geochecker_available">Geochecker available via browser</string>
 
     <!-- calendar adder -->

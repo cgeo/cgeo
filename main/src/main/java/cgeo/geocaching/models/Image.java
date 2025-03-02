@@ -30,9 +30,9 @@ public class Image implements Parcelable {
 
     public enum ImageCategory {
         UNCATEGORIZED(R.string.image_category_uncategorized),
+        OWN(R.string.image_category_own),
         LISTING(R.string.image_category_listing),
         LOG(R.string.image_category_log),
-        OWN(R.string.image_category_own),
         NOTE(R.string.cache_personal_note);
 
         @StringRes

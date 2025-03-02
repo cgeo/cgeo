@@ -2261,24 +2261,24 @@ public class Geocache implements INamedGeoCoordinate {
 
     @NonNull
     public Collection<Image> getImages() {
-        final List<Image> result = new LinkedList<>(getSpoilers());
-        ImageUtils.addImagesFromText(result, getPersonalNote());
-        ImageUtils.addImagesFromHtml(result, geocode, getShortDescription(), getDescription());
+        final List<Image> images = new LinkedList<>();
+        //the order of adding imgaes will determine which duplicates will be removed. prio is to images further up
         for (final LogEntry log : getLogs()) {
-            result.addAll(log.logImages);
+            images.addAll(log.logImages);
         }
-        addLocalSpoilersTo(result);
+        images.addAll(ImageUtils.getImagesFromText(
+                (url, imgBuilder) -> imgBuilder.setCategory(Image.ImageCategory.NOTE),
+                getPersonalNote()));
+        images.addAll(ImageUtils.getImagesFromHtml(
+                (url, imgBuilder) -> imgBuilder.setCategory(Image.ImageCategory.LISTING),
+                getShortDescription(), getDescription()));
+        images.addAll(getSpoilers()); //for gc.com this includes gallery images, spoilers and background
+        addLocalSpoilersTo(images);
 
         // Deduplicate images and return them in requested size
-        final List<Image> uniqueImages = new LinkedList<>();
-        final List<String> uniqueUrls = new ArrayList<>();
-        for (final Image img : result) {
-            if (!uniqueUrls.contains(img.getUrl())) {
-                uniqueUrls.add(img.getUrl());
-                uniqueImages.add(img.buildUpon().setUrl(img.getUrl()).build());
-            }
-        }
-        return uniqueImages;
+        ImageUtils.deduplicateImageList(images);
+
+        return images;
     }
 
     @NonNull
