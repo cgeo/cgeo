@@ -18,9 +18,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,8 +42,9 @@ public class OfflineTranslateUtils {
         // utility class
     }
 
-    public static String LANGUAGE_UNKNOWN = "und";
-    public static String LANGUAGE_UNDELETABLE = "en";
+    public static final String LANGUAGE_UNKNOWN = "und";
+    public static final String LANGUAGE_UNDELETABLE = "en";
+    public static final String LANGUAGE_INVALID = "";
 
     public static List<Language> getSupportedLanguages() {
         final List<Language> languages = new ArrayList<>();
@@ -266,7 +264,7 @@ public class OfflineTranslateUtils {
         }
 
         public boolean isValid() {
-            return !code.isEmpty();
+            return !LANGUAGE_INVALID.equals(code);
         }
 
         public String getDisplayName() {
@@ -299,19 +297,19 @@ public class OfflineTranslateUtils {
     }
 
     public static class Status {
-        private final MutableLiveData<Language> sourceLanguage = new MutableLiveData<>();
-        private OfflineTranslateUtils.TranslationProgressHandler progressHandler;
+        private Language sourceLanguage = new Language(LANGUAGE_INVALID);
+        private TranslationProgressHandler progressHandler;
         private boolean isTranslated = false;
         private int textsToTranslate;
         private int translatedTexts = 0;
         private Consumer<Language> languageChangeConsumer;
 
-        public OfflineTranslateUtils.Language getSourceLanguage() {
-            return sourceLanguage.getValue();
+        public Language getSourceLanguage() {
+            return sourceLanguage;
         }
 
-        public void setSourceLanguage(final OfflineTranslateUtils.Language lng) {
-            sourceLanguage.setValue(lng);
+        public synchronized void setSourceLanguage(final OfflineTranslateUtils.Language lng) {
+            sourceLanguage = lng;
             this.languageChangeConsumer.accept(lng);
         }
 
@@ -319,15 +317,11 @@ public class OfflineTranslateUtils {
             this.languageChangeConsumer = consumer;
         }
 
-        public void addSourceLanguageObserver(final LifecycleOwner owner, final Observer<Language> observer) {
-            sourceLanguage.observe(owner, observer);
-        }
-
         public OfflineTranslateUtils.TranslationProgressHandler getProgressHandler() {
             return progressHandler;
         }
 
-        public void setProgressHandler(OfflineTranslateUtils.TranslationProgressHandler progressHandler) {
+        public void setProgressHandler(final OfflineTranslateUtils.TranslationProgressHandler progressHandler) {
             this.progressHandler = progressHandler;
         }
 

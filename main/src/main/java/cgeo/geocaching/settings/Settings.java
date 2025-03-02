@@ -2549,7 +2549,7 @@ public class Settings {
                 return lng;
             }
         }
-        return new OfflineTranslateUtils.Language("");
+        return new OfflineTranslateUtils.Language(OfflineTranslateUtils.LANGUAGE_INVALID);
     }
 
     public static @NonNull Set<String> getLanguagesToNotTranslate() {

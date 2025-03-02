@@ -50,7 +50,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.text.HtmlCompat;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -109,7 +108,6 @@ public class TrackableActivity extends TabbedViewPagerActivity {
             // Do not do anything, as we just want to maintain the GPS on
         }
     };
-    final public MutableLiveData<OfflineTranslateUtils.Language> translationSourceLanguage = new MutableLiveData<>();
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
