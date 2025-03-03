@@ -2,14 +2,14 @@
 - Correcção: Wherigo: Suporte de zonas com coordenadas inválidas/muito próximas
 - Correção: c:geo tenta importar ficheiros locais ".map" como GPX
 - Correcção: Notas de utilizador editadas do popup, às vezes são perdidas
-- Fix: Editing log shows "report problem" option
-- Fix: Live Filter 'Does not contain' fails to return any caches
-- Fix: Crashes on pausing a UnifiedMap online map
-- Fix: Outdated app "GPS Bluethooth" in useful apps list
-- Fix: Variables and/or values are deleted erroneously when editing personal note
-- Fix: Wherigo: Wrong altitude info
-- Fix: Wherigo: All button texts are capitalized
-- Fix: Crash in settings
-- Fix: c:geo not listed in Play Store for GPS-less devices
-- Fix: c:geo crashing silently on folder selection in certain configurations
-- Change: Make extremcaching.com an offline connector (their service has ceised)
+- Correcção: Ao editar registo mostrava a opção "relatório de problemas"
+- Correcção: Filtro ao vivo 'Não contém' não retornava nenhuma cache
+- Correcção: Bloqueios ao pausar um mapa Mapa Unificado online
+- Correcção: aplicação desactualizada "GPS Bluethooth" na lista de aplicações úteis
+- Correcção: Variáveis e/ou valores são excluídos erroneamente ao editar nota pessoal
+- Correcção: Wherigo: Informação de altitude errada
+- Correcção: Wherigo: Todos os textos nos botões em maiúsculas
+- Correcção: Falha nas definições
+- Correcção: c:geo não listado na Play Store para dispositivos sem GPS
+- Correção: c:geo falha silenciosamente na seleção da pasta em certas configurações
+- Alteração: O extremcaching.com passa a funcionar em modo offline (o serviço foi encerrado)
