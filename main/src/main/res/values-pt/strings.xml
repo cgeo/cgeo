@@ -1238,6 +1238,8 @@
     <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
     <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
     <string name="contentstorage_err_copy_failed">O ficheiro \'%1$s\' não pôde ser copiado/movido para \'%2$s\' (mover=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Erro ao seleccionar ficheiro/pasta</string>
+    <string name="contentstorage_err_activity_not_found_message">O seu sistema não fornece um componente para seleccionar ficheiros/pastas: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
     <string name="persistablefolder_usertype_default">Padrão</string>
@@ -1648,6 +1650,8 @@
     <string name="waypoint_my_coordinates_accuracy">As minhas coordenadas (±%s)</string>
     <string name="waypoint_name">Nome</string>
     <string name="waypoint_edit">Editar</string>
+    <string name="waypoint_geofence">Perímetro de resposta</string>
+    <string name="waypoint_geofence_summary">Definir raio de perímetro de resposta (em metros)</string>
     <string name="waypoint_copy_coordinates">Copiar coordenadas</string>
     <string name="waypoint_clear_coordinates">Limpar coordenadas</string>
     <string name="waypoint_delete">Apagar</string>
