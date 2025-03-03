@@ -1227,6 +1227,8 @@
     <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
     <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
     <string name="contentstorage_err_copy_failed">O ficheiro \'%1$s\' não pôde ser copiado/movido para \'%2$s\' (mover=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Erro ao seleccionar ficheiro/pasta</string>
+    <string name="contentstorage_err_activity_not_found_message">O seu sistema não fornece um componente para seleccionar ficheiros/pastas: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
     <string name="persistablefolder_usertype_default">Padrão</string>
