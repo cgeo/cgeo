@@ -270,6 +270,7 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
             refreshWaypoints(viewModel);
             refreshLiveStatusView();
         });
+        viewModel.zoomLevel.observe(this, zoomLevel -> refreshListChooser());
 
 
         MapUtils.showMapOneTimeMessages(this, viewModel.mapType.type.compatibilityMapMode);
@@ -1017,6 +1018,11 @@ public class UnifiedMapActivity extends AbstractNavigationBarMapActivity impleme
         }
         ViewUtils.setVisibility(findViewById(R.id.map_compassrose), mapRotation == MAPROTATION_OFF ? GONE : View.VISIBLE);
         checkDrivingMode();
+    }
+
+    /** to be called by map fragments' observers for zoom level change */
+    public void notifyZoomLevel(final float zoomLevel) {
+        AndroidRxUtils.runOnUi(() -> viewModel.notifyZoomLevel(zoomLevel));
     }
 
     // ========================================================================

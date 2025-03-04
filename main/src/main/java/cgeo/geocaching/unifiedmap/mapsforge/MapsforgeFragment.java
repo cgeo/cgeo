@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.unifiedmap.AbstractMapFragment;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.unifiedmap.geoitemlayer.IProviderGeoItemLayer;
 import cgeo.geocaching.unifiedmap.geoitemlayer.MapsforgeV6GeoItemLayer;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
@@ -109,6 +110,7 @@ public class MapsforgeFragment extends AbstractMapFragment implements Observer {
     @Override
     public void onChange() {
         repaintRotationIndicator(getCurrentBearing());
+        ((UnifiedMapActivity) requireActivity()).notifyZoomLevel(getCurrentZoom());
     }
 
     private void startMap() {

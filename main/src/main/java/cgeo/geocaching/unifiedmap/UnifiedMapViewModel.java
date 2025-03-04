@@ -74,6 +74,7 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
      */
     public final MutableLiveData<PositionHistory> positionHistory = new MutableLiveData<>(new PositionHistory());
     public final MutableLiveData<Boolean> followMyLocation = new MutableLiveData<>(Settings.getFollowMyLocation());
+    public final MutableLiveData<Float> zoomLevel = new MutableLiveData<>();
     public final MutableLiveData<Boolean> transientIsLiveEnabled = new MutableLiveData<>(false);
 
     public void setTrack(final String key, final IGeoItemSupplier route, final int unused1, final int unused2) {
@@ -123,6 +124,12 @@ public class UnifiedMapViewModel extends ViewModel implements IndividualRoute.Up
     protected void onCleared() {
         super.onCleared();
         this.liveMapHandler.destroy();
+    }
+
+    public void notifyZoomLevel(final float zoomLevel) {
+        if (this.zoomLevel.getValue() == null || Math.abs(zoomLevel - this.zoomLevel.getValue()) > 0.001f) {
+            this.zoomLevel.setValue(zoomLevel);
+        }
     }
 
     // ========================================================================
