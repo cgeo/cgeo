@@ -13,3 +13,4 @@
 - Fix: c:geo not listed in Play Store for GPS-less devices
 - Fix: c:geo crashing silently on folder selection in certain configurations
 - Change: Make extremcaching.com an offline connector (their service has ceised)
+- Fix: Update status info in map on zoom level changes
