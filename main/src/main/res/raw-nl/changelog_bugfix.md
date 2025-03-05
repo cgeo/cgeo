@@ -13,3 +13,4 @@
 - Oplossing: c:geo niet vermeld in de Play Store voor GPS-loze apparaten
 - Oplossing: c:geo crashed stil bij mapselectie in bepaalde configuraties
 - Wijziging: Maak extremcaching.com een offline connector (hun service is gestopt)
+- Oplossing: Statusinfo op kaart bijwerken als zoomniveau wijzigt
