@@ -4,23 +4,23 @@
 - Änderung: Aktuellen Viewport auf der Zuordnung einer Liste behalten, wenn alle Caches in den aktuellen Viewport passen
 - Neu: Neues Design für die Schnelleinstellungen für Routen/Tracks
 - Neu: Lange auf das Kartenauswahlsymbol tippen, um den vorherigen Karten-Anbieter auszuwählen (UnifiedMap)
-- New: Allow setting display name for offline maps in companion file (UnifiedMap)
-- New: Show geofences for lab stages (UnifiedMap) - enable "Circles" in map quick settings to show them
-- New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
-- Fix: Map view not updated when removing cache from currently shown list
-- Fix: Number of cache in list chooser not updated on chaning list contents
+- Neu: Erlaubt die Einstellung des Anzeigennamens für Offline-Karten in der Begleitdatei (UnifiedMap)
+- Neu: Geo-Begrenzung für Labstationen anzeigen (UnifiedMap) - Aktiviere "Kreise" in den Kartenschnelleinstellungen, um sie anzuzeigen
+- Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
+- Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
+- Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
 
 ### Cache-Details
 - Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
 - Korrektur: Sprachdienst wurde bei der Bildschirmrotation unterbrochen
-- Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
+- Korrektur: Cache-Details: Listen für den Cache nicht aktualisiert, nachdem auf den Listennamen getippt und der Cache von dieser Liste entfernt wurde
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
 - Neu: Filter: Inventarzähler
 - Neu: Unterstützung für Koordinaten im DD,DDDDDDD Format
-- New: Show last used filter name in filter dialog
-- New: Support opening local Wherigo files
-- Fix: Importing local map file gets random map name
-- Fix: Color issues with menu icons in light mode
-- Fix: Nearby distance limit setting not working properly for small values
+- Neu: Zeige den letzten Filter im Filterdialog
+- Neu: Unterstützt das Öffnen lokaler Wherigo-Dateien
+- Korrektur: Beim Importieren einer lokalen Kartendatei wird ein zufälliger Kartenname vergeben
+- Korrektur: Farbprobleme bei Menü-Symbolen im hellen Design
+- Korrektur: Einstellung der Annäherungswerte funktioniert nicht bei kleinen Entfernungen
