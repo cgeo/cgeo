@@ -13,3 +13,4 @@
 - Correcção: c:geo não listado na Play Store para dispositivos sem GPS
 - Correção: c:geo falha silenciosamente na seleção da pasta em certas configurações
 - Alteração: O extremcaching.com passa a funcionar em modo offline (o serviço foi encerrado)
+- Fix: Update status info in map on zoom level changes
