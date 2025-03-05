@@ -13,3 +13,4 @@
 - Naprawiono: Aplikacja c:geo nie była wymieniona w Sklepie Play dla urządzeń bez GPS
 - Naprawiono: Awaria c:geo przy wyborze folderu w niektórych konfiguracjach
 - Zmiana: ekstremcaching.com został konektorem offline (serwis zakończył działanie)
+- Naprawiono: Aktualizowanie informacji o statusie na mapie po zmianach poziomu powiększenia
