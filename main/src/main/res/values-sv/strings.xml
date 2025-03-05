@@ -1570,6 +1570,9 @@
     <string name="image_category_own">Egen</string>
     <string name="image_category_listing">Listning</string>
     <string name="image_category_log">Logg</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Bakgrund</string>
+    <string name="image_listing_gallery">Galleri</string>
     <string name="context_map_add_to_route">Lägg till rutt</string>
     <string name="context_map_add_to_route_start">Lägg till i början av rutt</string>
     <string name="context_map_remove_from_route_start">Ta bort från start</string>
@@ -2322,6 +2325,7 @@
         <item quantity="other">%d punkter har extraherats</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com koordinat kontroll är tillgänglig via webbläsare</string>
+    <string name="link_gallery">Bilder som finns i galleriet (%d)</string>
     <string name="geochecker_available">Geochecker tillgänglig via webbläsare</string>
     <!-- calendar adder -->
     <string name="event_fail">Det gick inte att lägga till event cache i kalender</string>
