@@ -1227,6 +1227,8 @@
     <string name="contentstorage_err_list_failed">Dateien im Ordner \'%s\' konnten nicht angezeigt werden</string>
     <string name="contentstorage_err_folder_access_failed">Auf Ordner \'%s\' konnte nicht zugegriffen werden</string>
     <string name="contentstorage_err_copy_failed">Datei \'%1$s\' konnte nicht nach \'%2$s\' kopiert/verschoben werden (Verschieben=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fehler beim Auswählen der Datei/des Ordners</string>
+    <string name="contentstorage_err_activity_not_found_message">Dein System stellt keine Komponente bereit, um Dateien/Ordner auszuwählen: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Benutzerdefiniert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
