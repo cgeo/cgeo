@@ -256,7 +256,7 @@ public final class CacheDetailsCreator {
         final LinearLayout linearLayout = layout.findViewById(R.id.linearlayout);
 
         final ImageView catIcon = new ImageView(context);
-        catIcon.setBackground(createDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain(), 1.47f)); // 1.47 = scaling factor required to make D/T marker the same size as log smileys
+        catIcon.setBackground(createDTRatingMarker(res, cache.supportsDifficultyTerrain(), cache.getDifficulty(), cache.getTerrain(), 1.47f)); // 1.47 = scaling factor required to make D/T marker the same size as log smileys
         linearLayout.addView(catIcon);
     }
 
