@@ -13,3 +13,4 @@
 - Oprava: c:geo není uvedeno v Play Store pro zařízení bez GPS
 - Oprava: c:geo pád při výběru složky v určitých konfiguracích
 - Změna: Udělejte z extremcaching.com offline konektor (jejich služba byla ukončena)
+- Oprava: Aktualizace informací o stavu v mapě při změnách úrovně přiblížení
