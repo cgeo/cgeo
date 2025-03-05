@@ -13,3 +13,4 @@
 - Correcció: c:geo no apareix a Play Store per a dispositius sense GPS
 - Correcció: c:geo fallava silenciosament a la selecció de carpetes en determinades configuracions
 - Canvi: convertiu extremcaching.com en un connector fora de línia (el seu servei ha cessat)
+- Fix: Update status info in map on zoom level changes
