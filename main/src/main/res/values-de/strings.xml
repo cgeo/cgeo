@@ -455,6 +455,7 @@
     <string name="caches_map_locus_export">Exportieren nach Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filtern nach</string>
+    <string name="caches_filter_select_last">Vorheriger Filter</string>
     <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -486,6 +487,9 @@
     <string name="list_menu_create">Neue Liste</string>
     <string name="list_menu_drop">Aktuelle Liste löschen</string>
     <string name="list_menu_rename">Aktuelle Liste umbenennen</string>
+    <string name="list_menu_rename_list_prefix">Listenpräfix umbenennen</string>
+    <string name="rename_from">Umbenennen von</string>
+    <string name="rename_to">Umbenennen nach</string>
     <string name="list_menu_import">Importieren</string>
     <string name="list_title">Liste wählen</string>
     <string name="lists_title">Listen wählen</string>
@@ -503,6 +507,10 @@
     <string name="list_dialog_rename_title">Liste umbenennen</string>
     <string name="list_dialog_rename">Umbenennen</string>
     <string name="list_not_available">Liste nicht mehr vorhanden, wechsele zur Standardliste</string>
+    <string name="list_parent_list">Übergeordnete Liste</string>
+    <string name="list_name">Listenname</string>
+    <string name="list_confirm_rename">Umbenennen von \"%1$s\" zu \"%2$s\"\n%3$s\nDiese Aktion kann nicht rückgängig gemacht werden!</string>
+    <string name="list_confirm_no_hierarchy">\nKein \":\" gefunden - alle übereinstimmenden Listen werden top-level Listen\n</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Erweitert</string>
     <string name="cache_filter_mode_basic_change_confirm_loss_title">Wechsel zu einfacher Ansicht</string>
@@ -1081,6 +1089,7 @@
     <string name="init_trackappearance_summary">Wähle Farbe, Deckkraft und Linienbreite für die Track-Linie. Ein Track besteht aus mehreren Wegpunkten und kann aus einer GPX-Datei geladen werden.</string>
     <string name="init_circlecolor">Farbe der Kreislinie</string>
     <string name="init_circlecolor_summary">Farbe und Deckkraft der Kreislinien einstellen. Kreise werden zur Visualisierung des minimalen Radius um Caches oder physische Wegpunkte verwendet, innerhalb dessen kein anderer Cache oder physischer Wegpunkt erlaubt ist. (Betrifft nur geocaching.com)</string>
+    <string name="init_geofencecolor">Farbe für Geo-Begrenzung</string>
     <string name="init_accuracycirclecolor">Genauigkeitskreis: Farbe der Linie</string>
     <string name="init_accuracycirclecolor_summary">Farbe und Deckkraft der Kreislinie einstellen. Ein Genauigkeitskreis visualisiert auf der Karte, wie genau die aktuelle Position ermittelt werden konnte.</string>
     <string name="init_include_found_status">Fundstatus einbeziehen</string>
@@ -1228,6 +1237,8 @@
     <string name="contentstorage_err_list_failed">Dateien im Ordner \'%s\' konnten nicht angezeigt werden</string>
     <string name="contentstorage_err_folder_access_failed">Auf Ordner \'%s\' konnte nicht zugegriffen werden</string>
     <string name="contentstorage_err_copy_failed">Datei \'%1$s\' konnte nicht nach \'%2$s\' kopiert/verschoben werden (Verschieben=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fehler beim Auswählen der Datei/des Ordners</string>
+    <string name="contentstorage_err_activity_not_found_message">Dein System stellt keine Komponente bereit, um Dateien/Ordner auszuwählen: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Benutzerdefiniert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
@@ -1585,6 +1596,7 @@
     <string name="init_ActionbarAutohide">Toolbar beim Tippen ausblenden</string>
     <string name="init_summary_ActionbarAutohide">Auf freien Kartenplatz tippen, um die Symbolleiste auszublenden/anzuzeigen</string>
     <string name="init_autozoom_consider_lastcenter">Kartenposition bei Anzeige einer Liste wiederherstellen</string>
+    <string name="init_summary_autozoom_consider_lastcenter_off">Wenn eine Liste von Caches auf der Karte angezeigt wird, setze Zoom und Ausschnitt so, dass alle Caches gezeigt werden.</string>
     <string name="goto_targets_list">Benutzerdefinierte Caches</string>
     <string name="clear_goto_history_title">\"Gehe Zu\"-Verlauf löschen</string>
     <string name="clear_goto_history">Lösche alle historischen Wegpunkte außer den fünf neuesten</string>
@@ -1634,6 +1646,8 @@
     <string name="waypoint_my_coordinates_accuracy">Meine Koordinaten (±%s)</string>
     <string name="waypoint_name">Name</string>
     <string name="waypoint_edit">Bearbeiten</string>
+    <string name="waypoint_geofence">Geo-Begrenzung</string>
+    <string name="waypoint_geofence_summary">Radius für Geo-Begrenzung (in Metern)</string>
     <string name="waypoint_copy_coordinates">Kopiere Koordinaten</string>
     <string name="waypoint_clear_coordinates">Koordinaten löschen</string>
     <string name="waypoint_delete">Löschen</string>
@@ -2302,6 +2316,8 @@
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
     <string name="live_map_status_http429">Bitte langsamer, zu viele Anfragen an %s</string>
     <string name="live_map_status_error">Fehler beim Laden der Kartendaten: %s</string>
+    <string name="live_map_status_partial">Teilergebnisse (Reinzoomen, um die Anzahl der zu ladenden Caches zu reduzieren): %s</string>
+    <string name="live_map_status_normal">Lade Daten ohne Probleme: %s</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
         <item quantity="one">Einen Wegpunkt extrahiert</item>
