@@ -194,7 +194,7 @@ public final class MapMarkerUtils {
         }
         // top-right: DT marker / sync / stored
         if (Settings.isDTMarkerEnabled()) {
-            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.supportsDifficultyTerrain(), cache.getDifficulty(), cache.getTerrain(), applyScaling), Gravity.TOP | Gravity.RIGHT));
         } else if (CacheDownloaderService.isDownloadPending(cache)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT, getCacheScalingFactor(applyScaling)));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
@@ -699,13 +699,13 @@ public final class MapMarkerUtils {
         return result;
     }
 
-    private static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
+    private static Drawable getDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        final int hashcode = new HashCodeBuilder().append(difficulty + "" + terrain).append(applyScaling).append(supportsRating).toHashCode(); // due to -1*-1 being the same as 1*1 this needs to be a string
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain, applyScaling));
+                marker = new CacheMarker(hashcode, createDTRatingMarker(res, supportsRating, difficulty, terrain, applyScaling));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -719,20 +719,20 @@ public final class MapMarkerUtils {
      * @param terrain       Terrain rating
      * @return              LayerDrawable composed of round background and foreground showing the ratings
      */
-    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final boolean applyScaling) {
-        return createDTRatingMarker(res, difficulty, terrain, getCacheScalingFactor(applyScaling));
+    private static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final boolean applyScaling) {
+        return createDTRatingMarker(res, supportsRating, difficulty, terrain, getCacheScalingFactor(applyScaling));
     }
 
-    public static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain, final float scaling) {
+    public static LayerDrawable createDTRatingMarker(final Resources res, final boolean supportsRating, final float difficulty, final float terrain, final float scaling) {
         final Drawable background = new ScalableDrawable(ViewUtils.getDrawable(R.drawable.marker_empty, true), scaling);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight(), true);
         insetsBuilder.withInset(new InsetBuilder(background));
         int layers = 4;
 
-        if (difficulty == -1 && terrain == -1) {
+        if (!supportsRating) {
             layers = 2;
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notsupported, scaling));
-        } else if (difficulty == 0 && terrain == 0) {
+        } else if (difficulty < 0.5 && terrain < 0.5) {
             layers = 2;
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_notavailable, scaling));
         } else {

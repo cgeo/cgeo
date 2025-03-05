@@ -724,8 +724,12 @@ public class Geocache implements INamedGeoCoordinate {
         return getConnector().getLoggingManager(this);
     }
 
+    public boolean supportsDifficultyTerrain() {
+        return getConnector().supportsDifficultyTerrain();
+    }
+
     public float getDifficulty() {
-        return getConnector().supportsDifficultyTerrain() ? difficulty : -1;
+        return difficulty;
     }
 
     @Override
@@ -756,7 +760,7 @@ public class Geocache implements INamedGeoCoordinate {
     }
 
     public float getTerrain() {
-        return getConnector().supportsDifficultyTerrain() ? terrain : -1;
+        return terrain;
     }
 
     public boolean isArchived() {
