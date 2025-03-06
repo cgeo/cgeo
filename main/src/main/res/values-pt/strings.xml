@@ -817,7 +817,6 @@
     <string name="settings_authorize">Autorizar c:geo</string>
     <string name="settings_reauthorize">Actualizar ou remover autorização</string>
     <string name="settings_gc_description">Autoriza o c:geo a pesquisar caches em \'geocaching.com\'.</string>
-    <string name="settings_ec_description">Autorize o c:geo a pesquisar caches em extremecaching.com.</string>
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
     <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
     <string name="settings_lc_found_state_title">Estado \"Encontrada\" manual</string>
@@ -1228,6 +1227,8 @@
     <string name="contentstorage_err_list_failed">Os ficheiros na Pasta \'%s\' não puderam ser listados</string>
     <string name="contentstorage_err_folder_access_failed">A pasta \'%s\' não pôde ser acedida</string>
     <string name="contentstorage_err_copy_failed">O ficheiro \'%1$s\' não pôde ser copiado/movido para \'%2$s\' (mover=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Erro ao seleccionar ficheiro/pasta</string>
+    <string name="contentstorage_err_activity_not_found_message">O seu sistema não fornece um componente para seleccionar ficheiros/pastas: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Definida pelo utilizador</string>
     <string name="persistablefolder_usertype_default">Padrão</string>
@@ -1540,6 +1541,9 @@
     <string name="cachedetails_progress_unwatch">Removida da lista de observação</string>
     <string name="cachedetails_progress_favorite">Adicionada aos favoritos</string>
     <string name="cachedetails_progress_unfavorite">Removida dos favoritos</string>
+    <string name="cache_multiple_wherigo_cartridges_title">Múltiplos cartuchos Wherigo</string>
+    <string name="cache_multiple_wherigo_cartridges_message">Consulte a descrição da cache para mais informações sobre os cartuchos.</string>
+    <string name="cache_wherigo_cartridge_not_downloaded">%s - não descarregado</string>
     <string name="cache_wherigo_start">Descarregue e jogue esta Wherigo utilizando o reprodutor interno do c:geo</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
@@ -1914,7 +1918,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo é uma extensão do navegador <strong>para o seu PC</strong>. Quando aceder a \'geocaching.com\' poderá, com o clique de um botão, enviar geocaches directamente para o seu smartphone.</string>
     <string name="helper_locus_description">Aplicação de navegação ao ar livre para o seu telefone ou tablet. Veja mapas topográficos offline, registe a sua rota, procure geocaches, use um guia de voz e muito mais.</string>
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
-    <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>

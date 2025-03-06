@@ -324,7 +324,6 @@
     <string name="settings_gc_legal_note">Dengan menggunakan layanan dari geocaching.com, anda menerima Syarat Penggunaan Groundspeak.</string>
     <string name="settings_authorize">Mengizinkan c:geo</string>
     <string name="settings_gc_description">Otorisasi c:geo dengan geocaching.com untuk mencari cache.</string>
-    <string name="settings_ec_description">Otorisasi c:geo dengan extremcaching.com untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="settings_su_description">Otorisasi c:geo dengan geocaching.su untuk mencari cache.</string>
     <string name="init_summary_oc_de">Muat cache dari opencaching.de</string>
     <string name="init_oc_de_description">Mengizinkan c:geo dengan opencaching.de untuk mencari cache dan akses/filter cache yang anda temukan.</string>
@@ -750,7 +749,6 @@
     <string name="helper_sendtocgeo_description">Kirim ke c:geo adalah ekstensi browser <strong>untuk PC Anda</strong>. Saat browsing geocaching.com, Anda bisa mengirim cache ke smartphone Anda dengan satu klik tombol langsung di dalam browser.</string>
     <string name="helper_locus_description">Aplikasi navigasi luar ruang untuk ponsel anda atau tablet. Lihat peta topo offline, melacak rute anda, geocaches, menggunakan panduan suara dan melakukan bahkan lebih.</string>
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
-    <string name="helper_bluetoothgps_description">Memungkinkan Anda untuk menggunakan penerima GPS eksternal untuk mendapatkan data lokasi yang lebih tepat, dan dapat menghemat baterai perangkat Anda.</string>
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo memungkinkan bermain dan mencari geocaches dari tipe Wherigo. c:geo secara otomatis dapat memicu download kartrid dalam aplikasi ini.</string>
