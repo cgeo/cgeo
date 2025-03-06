@@ -13,7 +13,7 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Alteração: "Seguir a minha localização" foi movido para o mapa, dando mais espaço para o botão "mapa em tempo real"
 - Alteração: Pin de pressão longa com aparência do estilo do c:geo
 - Alteração: Funções de gestão de dados offline (descarregar mapas, verificar rotas em falta, dados de sombreado de altitude) movidas para o menu de selecção do mapa => "Gerir dados offline"
-- Fix: Map not updating changed caches
+- Correcção: Mapa não actualiza geocaches alteradas
 
 ### Detalhes da cache
 - Novo: Variáveis usadas no gerador de projeções, ainda não existentes, são criadas na lista de variáveis
@@ -26,8 +26,8 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Confirmar sobrescrever registo no registo rápido offline
 - Novo: Actualização do estado da geocache ao enviar um registo
 - Novo: Visualização dos detalhes das geocaches em HTML colorido
-- Fix: checksum(0) returning wrong value
-- Fix: Editing logs removes "friends" status
+- Correcção: Soma de controlo (0) devolve valor errado
+- Correcção: Edição de registo remove estado "Amigos"
 
 ### Geral
 - Alteração: Usar altitude acima do nível médio do mar (se disponível, Android 14+ apenas)
@@ -44,9 +44,9 @@ Novo: Integrado o Wherigo (beta) — veja a entrada de menu no ecrã inicial.<br
 - Novo: Formato de data configurável (por ex.: registos de cache), consulte [Configurações => Aparência => Formato de data](cgeo-settings://short_date_format)
 - Novo: Direccionamento do conector de informação do ecrã principal para o conector específico do ecrã de preferências
 - Novo: Emojis adicionais para os ícones das caches
-- Change: Cache type filter "Specials" includes events of types mega, giga, community celebration, HQ celebration, block party and maze
+- Alteração: Tipo de filtro de cache "Especiais" inclui eventos dos tipos Mega, Giga, Community Celebration, Celebration HQ, Block Party e Maze
 - Alteração: Tipo de filtro de cache "Outro" inclui GCHQ, APE e tipos desconhecidos
-- Fix: History length and proximity settings sharing slider values
-- Fix: Trackable log page showing time/coordinate input fields for trackables not supporting this
-- Fix: Some crashes
-- Fix: Some sliders in settings having problems with uninitialized values
+- Correcção: Tamanho do histórico e configurações de proximidade partilham valores de selector
+- Correcção: Página de registo de travelbug mostra campos de introdução de tempo/coordenadas para travelbugs que não suportam isso
+- Correcção: Vários encerramentos abruptos
+- Correcção: Alguns ajustes em configurações tinham problemas com valores não inicializados
