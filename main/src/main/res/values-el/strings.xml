@@ -677,7 +677,6 @@
     <string name="settings_authorize">Πιστοποίηση του c:geo</string>
     <string name="settings_reauthorize">Ενημέρωση ή κατάργηση εξουσιοδότησης</string>
     <string name="settings_gc_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.com.</string>
-    <string name="settings_ec_description">Επιτρέψτε στο c:geo με extremcaching.com να αναζητήσει τις κρύπτες που έχετε βρει.</string>
     <string name="settings_su_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.su.</string>
     <string name="settings_lc_description">Συμπεριλάβετε κρύπτες Adventure Lab στο χάρτη.\n\n(Διαθέσιμο μόνο στα premium μέλη του \"Geocaching.com\". Απαιτεί μια ενεργοποιημένη υπηρεσία \"Geocaching.com\".)\n\nΗ αλλαγή αυτής της ρύθμισης απαιτεί επανεκκίνηση.</string>
     <string name="lc_default_description">Αυτή είναι μία Adventure Lab Cache. Αυτές μπορούν να παιχτούν μόνο με το Groundspeak Adventure Lab App. Πατήστε στο εικονίδιο του Adventure Lab στη σελίδα \"Λεπτομέρειες\" για να ανοίξετε/εγκαταστήσετε την εφαρμογή αυτή.\nΑν δεν θέλετε να βλέπετε κρύπτες Adenture Lab στο χάρτη και την αναζήτησή σας, μπορείτε να τις απενεργοποιήσετε, χρησιμοποιώντας το μενού \"Ρυθμίσεις\" - Υπηρεσίες - Geocaching - Adventure Lab</string>
@@ -1596,7 +1595,6 @@
     <string name="helper_sendtocgeo_description">Αποστολή σε c:geo είναι μια επέκταση του προγράμματος περιήγησης <strong>για τον υπολογιστή σας</strong>. Κατά την περιήγηση στο geocaching.com, μπορείτε να στείλετε κρύπτες στο smartphone σας άμεσα μέσα στο πρόγραμμα περιήγησης με το πάτημα ενός κουμπιού.</string>
     <string name="helper_locus_description">Εφαρμογή πλοήγησης σε εξωτερικούς χώρους για το τηλέφωνο ή το tablet σας. Δείτε τοπογραφικούς χάρτες χωρίς σύνδεση, ακολουθείστε τη διαδρομή σας, βρείτε κρύπτες, χρησιμοποιήστε φωνητικό οδηγό και κάνετε ακόμη περισσότερα.</string>
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>
-    <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
@@ -2028,6 +2026,7 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
+    <string name="map_export_individual_route">Εξαγωγή μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
