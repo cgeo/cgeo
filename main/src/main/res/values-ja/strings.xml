@@ -613,7 +613,6 @@
     <string name="settings_authorize">c:geoを認証</string>
     <string name="settings_reauthorize">認証を更新または削除</string>
     <string name="settings_gc_description">geocaching.comでc:geoを認証してキャッシュを検索できるようにします</string>
-    <string name="settings_ec_description">c:geoをextremcaching.comで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="settings_su_description">c:geoをgeocaching.suで認証してキャッシュを検索できるようにします</string>
     <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図に含めます\n\n(Geocaching.comのプレミアム会員である必要があります。Geocaching.comサービスを有効化してください)\n\nc:geoの再起動が必要です</string>
     <string name="lc_default_description">これはgeocaching.comのアドベンチャー・ラボ・キャッシュです。アドベンチャーはGroundspeakの Adventure Labアプリでのみプレイできます。 「詳細」ページのアドベンチャー・ラボ アイコンをタップすると、Adventure Labアプリを開いたりインストールしたりできます。\nアドベンチャー・ラボ・キャッシュを地図や検索に表示したくない場合は「設定」&gt;「サービス 」&gt;「ジオキャッシングサイト」&gt;「Geocaching.com Adventure Lab」で無効化できます。</string>
@@ -1486,7 +1485,6 @@
     <string name="helper_sendtocgeo_description">Send2cgeoは<strong>PC用</strong>ブラウザのスクリプトです。PCのブラウザで表示してるキャッシュ情報をAndroid端末に直接送ることができます</string>
     <string name="helper_locus_description">スマホやタブレット用のアウトドアナビゲーションアプリ。地形図をオフラインで表示、ルートを追跡、ジオキャッシュを探索、音声ガイドを使用、などが行えます</string>
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>
-    <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりデバイスのバッテリ消費が少なくなるかもしれません</string>
     <string name="helper_gps_locker_description">GPS Lockerはアプリケーションを切り替えるときやデバイスの画面がオフのときにGPS信号をアクティブのままにします</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
