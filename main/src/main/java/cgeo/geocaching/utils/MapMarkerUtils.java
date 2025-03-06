@@ -26,7 +26,6 @@ import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
-import static cgeo.geocaching.utils.EmojiUtils.NUMBER_START;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -299,16 +298,11 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         if (cache != null && cache.isLinearAlc()) {
-            int stageCounter = 0;
             try {
-                stageCounter = Integer.parseInt(waypoint.getPrefix());
+                insetsBuilder.withInset(new InsetBuilder(getStageNumberMarker(res, Integer.parseInt(waypoint.getPrefix()), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             } catch (NumberFormatException ignore) {
-                // ignored, value defaults to 0
+                insetsBuilder.withInset(new InsetBuilder(new ScalableDrawable(ViewUtils.getDrawable(waypointType.markerId, true), getWaypointScalingFactor(applyScaling)), Gravity.CENTER));
             }
-            while (stageCounter > 9) {
-                stageCounter = stageCounter - 10;
-            }
-            insetsBuilder.withInset(new InsetBuilder(getScaledEmojiDrawable(res, NUMBER_START + stageCounter, "mainIconForWaypoint", applyScaling), Gravity.CENTER));
         } else {
             // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
             final Drawable waypointTypeIcon = ViewUtils.getDrawable(waypointType.markerId, true);
@@ -751,6 +745,16 @@ public final class MapMarkerUtils {
         // ensure that rating is an integer between 0 and 50 in steps of 5
         final int r = Math.max(0, Math.min(Math.round(rating * 2) * 5, 50));
         return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null), scaling);
+    }
+
+    @SuppressWarnings("DiscouragedApi")
+    private static Drawable getStageNumberMarker(final Resources res, final int stageNum, final float scaling) {
+        int counter = stageNum;
+        while (counter > 10) {
+            counter = counter - 10;
+        }
+        final String packageName = CgeoApplication.getInstance().getPackageName();
+        return new ScalableDrawable(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_stagenum_" + counter, "drawable", packageName), null), scaling);
     }
 
     private static BitmapDrawable getScaledEmojiDrawable(final Resources res, final int emoji, final String wantedSize, final boolean applyScaling) {
