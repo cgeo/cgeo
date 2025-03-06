@@ -13,4 +13,4 @@
 - Korrektur: c:geo wird im Play Store Geräten ohne GPS nicht angeboten
 - Korrektur: c:geo stürzt bei der Ordnerauswahl in bestimmten Konfigurationen ab
 - Änderung: extremcaching.com in Offline-Konnektor umgewandelt (Dienst wurde eingestellt)
-- Fix: Update status info in map on zoom level changes
+- Korrektur: Statusinformationen auf Karte werden bei Änderungen des Zoomstufe nicht aktualisiert
