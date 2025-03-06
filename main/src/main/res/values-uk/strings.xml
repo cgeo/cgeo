@@ -402,7 +402,6 @@
     <string name="settings_authorize">Авторизувати c:geo</string>
     <string name="settings_reauthorize">Оновити або видалити авторизацію</string>
     <string name="settings_gc_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
-    <string name="settings_ec_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="settings_su_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
     <string name="init_summary_oc_de">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_de_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
@@ -969,7 +968,6 @@
     <string name="helper_sendtocgeo_description">Надсилається на c:geo розширення для браузера <strong>для вашого ПК</strong>. Під час перегляду геокешингу. коммм, ви можете надіслати кеші на свій смартфон за допомогою кнопки безпосередньо всередині браузера.</string>
     <string name="helper_locus_description">Програма навігації поза межами телефону або планшета. Переглядайте топографічні карти в режимі офлайн, відстежуйте ваш маршрут, схованки за допомогою голосового посібника і зробіть ще більше.</string>
     <string name="helper_gpsstatus_description">Ви можете використовувати радар у цьому додатку спільно з c: geo. Він також пропонує багато іншої інформації, пов\'язаної з GPS.</string>
-    <string name="helper_bluetoothgps_description">Дозволяє використовувати зовнішній приймач GPS для отримання більш точних даних про місцезнаходження та може заощадити акумулятор вашого пристрою.</string>
     <string name="helper_gps_locker_description">GPS Locker підтримує активний сигнал GPS під час перемикання між програмами та коли екран вашого пристрою вимкнений.</string>
     <string name="helper_google_translate_title">Перекладач Google</string>
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
@@ -1325,6 +1323,7 @@
     <string name="individual_route_error_toggling_waypoint">помилка перемикання точки</string>
     <string name="individual_route_error_single_waypoint_mode">Не доступно в режимі однієї точки</string>
     <string name="map_sort_individual_route">Сортувати за окремим маршрутом</string>
+    <string name="map_export_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_load_individual_route_confirm">Перезаписувати існуючі файли?</string>
     <string name="map_clear_manual_targets">Очистити ручні ярлики</string>
