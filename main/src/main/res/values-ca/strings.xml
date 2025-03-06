@@ -1574,6 +1574,9 @@
     <string name="image_category_own">Propi</string>
     <string name="image_category_listing">Descripció</string>
     <string name="image_category_log">Registre</string>
+    <string name="image_listing_spoiler">Ajuda</string>
+    <string name="image_listing_background">Fons</string>
+    <string name="image_listing_gallery">Galeria</string>
     <string name="context_map_add_to_route">Adjuntar a la ruta</string>
     <string name="context_map_add_to_route_start">Afegiu a la ruta</string>
     <string name="context_map_remove_from_route_start">Eliminar des de l\'inici</string>
@@ -2330,6 +2333,7 @@
         <item quantity="other">%d punts de ruta extrets</item>
     </plurals>
     <string name="link_gc_checker">El comprovador de coordenades de geocaching.com està disponible des del navegador</string>
+    <string name="link_gallery">Imatges disponibles a la galeria (%d)</string>
     <string name="geochecker_available">Geochecker disponible a través del navegador</string>
     <!-- calendar adder -->
     <string name="event_fail">S\'ha produït un error en afegir la trobada al calendari</string>
