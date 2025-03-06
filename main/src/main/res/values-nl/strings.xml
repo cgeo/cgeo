@@ -1573,6 +1573,9 @@
     <string name="image_category_own">Eigen</string>
     <string name="image_category_listing">Lijst</string>
     <string name="image_category_log">Log</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Achtergrond</string>
+    <string name="image_listing_gallery">Galerij</string>
     <string name="context_map_add_to_route">Toevoegen aan route</string>
     <string name="context_map_add_to_route_start">Toevoegen aan route (vooraan)</string>
     <string name="context_map_remove_from_route_start">Verwijder vanaf begin</string>
@@ -2328,6 +2331,7 @@
         <item quantity="other">%d waypoints geëxtraheerd</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coördinaat checker beschikbaar via browser</string>
+    <string name="link_gallery">Afbeeldingen beschikbaar in de galerij (%d)</string>
     <string name="geochecker_available">Geochecker beschikbaar via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
