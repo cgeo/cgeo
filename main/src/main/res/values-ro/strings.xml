@@ -377,7 +377,6 @@
     <string name="settings_gc_legal_note">Folosind serviciul Geocaching.com declari că ai accepţi condiţiile de utilizare ale Groundspeak Inc.</string>
     <string name="settings_authorize">Autorizează c:geo</string>
     <string name="settings_gc_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
-    <string name="settings_ec_description">Autorizează c:geo la extremcaching.com pentru a putea căuta şi filtra selectiv geocutii şi pentru a-ţi vedea propriile geocutii găste.</string>
     <string name="settings_su_description">Autorizează c:geo la geocaching.com pentru a putea căuta geocutii.</string>
     <string name="init_summary_oc_de">Încarcă geocutii de la opencaching.de</string>
     <string name="init_oc_de_description">Autorizează c:geo pe opencaching.de pentru a putea căuta cutii şi a vedea/filtra cutiile găsite de tine.</string>
@@ -808,7 +807,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo este o extensie pentru browser-ul <strong>de pe PC</strong>. Când vizitezi geocaching.com, poţi trimite geocutii direct către dispozitivul tău apăsând un simplu buton.</string>
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
-    <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
     <!-- export -->
