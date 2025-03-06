@@ -1570,6 +1570,9 @@
     <string name="image_category_own">Eigene</string>
     <string name="image_category_listing">Listing</string>
     <string name="image_category_log">Log</string>
+    <string name="image_listing_spoiler">Spoiler</string>
+    <string name="image_listing_background">Hintergrund</string>
+    <string name="image_listing_gallery">Galerie</string>
     <string name="context_map_add_to_route">An Route anhängen</string>
     <string name="context_map_add_to_route_start">Vor Route einfügen</string>
     <string name="context_map_remove_from_route_start">Vom Start entfernen</string>
@@ -2324,6 +2327,7 @@
         <item quantity="other">%d Wegpunkte extrahiert</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com Koordinatenchecker im Browser verfügbar</string>
+    <string name="link_gallery">Bilder in Galerie verfügbar (%d)</string>
     <string name="geochecker_available">Geochecker im Browser verfügbar</string>
     <!-- calendar adder -->
     <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
