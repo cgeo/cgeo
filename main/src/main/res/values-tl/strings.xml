@@ -329,7 +329,6 @@
     <string name="settings_gc_legal_note">Para magamit ang serbisyo ng geocaching.com, tanggapin mo ang tuntuning ng pagamit ng Groundspeak.</string>
     <string name="settings_authorize">Pahintulutan ang c:geo</string>
     <string name="settings_gc_description">Ang autorisado ay c:geo namay geocaching.com para magsaliksik sa mga caches.</string>
-    <string name="settings_ec_description">Ang awtorisado ay c:geo na may extremecaching.com para magsaliksik sa mga caches at mag-akses/salain ang iyong natagpuang mga caches.</string>
     <string name="settings_su_description">Ang awtorisadong c:geo na may geocaching.su para magsaliksik para sa mga caches.</string>
     <string name="init_summary_oc_de">Mag-load ng mga caches mula sa opencaching.de</string>
     <string name="init_oc_de_description">Pahintulutan ang c:geo kasama ang pencaching.de para sa paghahanap ng mga cache at ang pag-access/filter ng iyong mga nahanap na mga cache.</string>
@@ -754,7 +753,6 @@
     <string name="helper_sendtocgeo_description">Ipadala sa c:geo ay ang ekstensyon ng brawser <strong>para sa iyong PC </strong>. Kapag ang geocahing.com na brawsing, ay maaari kang magpadala ng mga cache sa iyong smartphone sa pag-klik ng buton sa loob na brawser.</string>
     <string name="helper_locus_description">Ang panlabas na nabigasyon na app para sa iyong smartphone at tablet. Tingnan ang topo na mapa sa offline, hanapin ang iyong ruta, hanapin ang geocache, gumamit ng boses na marka at ng marami pang iba.</string>
     <string name="helper_gpsstatus_description">Maaari mong gamitin ang radar sa aplikasyong ito kasabay ng c:geo. Ito rin ay mga nag-aalok ng maraming uri ng GPS kaugnay sa impormasyon.</string>
-    <string name="helper_bluetoothgps_description">Pinapayagan kang gumamit ng panlabas na GPS na tagatanggap para makakuha ng madaming wastong lokasyon ng datos, at itoy pwedeng pamalit sa baterya ng iyong aparato.</string>
     <string name="helper_google_translate_title">Ang pagsasalin ng google</string>
     <string name="helper_google_translate_description">Kung ikaw ay nag-download ng pakite ng pagsasalin ng google na aplikasyon,magiging madali na ang iyong pagsasalin ng cache na paglalarawan sa c:geo sa pamamagitan ng mahabang paghanap ng paglalarawan na teksto ( ng walang koneksiyon sa internet).</string>
     <string name="helper_where_you_go_description">Saankapupunta ay payagan mong maglaro at magsaliksik ng geocache sa uri na Wherigo. c:geo awtomatikong maghuhudyat ang di-nownload na cartridges sa aplikasyon na ito.</string>

@@ -35,6 +35,7 @@
     <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
+    <string name="other">Diğer</string>
     <string name="all_types_short">Tümü</string>
     <string name="traditional_short">Gelenek</string>
     <string name="multi_short">Çoklu</string>
@@ -87,7 +88,19 @@
     <string name="wpnew_original">Orijinal</string>
     <string name="wpnew_generated">Oluşturuldu</string>
     <!-- Cache Categories -->
+    <string name="cache_cat_bc_unknown">Bilinmeyen</string>
+    <string name="cache_cat_bc_nature">Doğa</string>
+    <string name="cache_cat_bc_location">Konum</string>
+    <string name="cache_cat_bc_recommended">Önerilen</string>
+    <string name="cache_cat_bc_gadget">Alet</string>
+    <string name="cache_cat_bc_mystery">Gizemli</string>
+    <string name="cache_cat_bc_hiking">Yürüyüş</string>
+    <string name="cache_cat_bc_other">Diğer</string>
     <!-- cache Tier -->
+    <string name="cache_tier_bc_none">Hiçbiri</string>
+    <string name="cache_tier_bc_blue">Mavi</string>
+    <string name="cache_tier_bc_silver">Gümüş</string>
+    <string name="cache_tier_bc_gold">Altın</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
     <string name="log_dnf">Bulamadım</string>
@@ -152,6 +165,7 @@
     <string name="log_smilies">İfadeler</string>
     <string name="log_image">Resim</string>
     <string name="log_images">Resimler</string>
+    <string name="log_edit_image">Gorseli duzenle</string>
     <string name="log_image_caption">Başlık</string>
     <string name="log_image_description">Açıklama</string>
     <string name="log_image_scale">Ölçekleme</string>
@@ -198,6 +212,7 @@
     <string name="err_unknown_address">c: geo bu adresi mevcut bir yere eşleyemedi</string>
     <string name="err_comm">Bilinmeyen bağlantı hatası. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
     <string name="err_missing_auth">Kullanıcı adı ve/veya parola belirlenmedi</string>
+    <string name="err_wrong">Yanlış kullanıcı adı ve / veya şifre.</string>
     <string name="err_maintenance">Geocaching.com bakım sebebiyle çalışmıyor. c:geo, kaydedilen Geocache\'ler ile çevrimdışı çalışıyor.</string>
     <string name="err_license">Geocaching.com lisans sözleşmesini kabul etmediniz, bu nedenle c:geo Geocache koordinatlarını yükleyemiyor.</string>
     <string name="err_unvalidated_account">Öncelikle hesabınızı Geocaching.com web sitesinde doğrulamanız gerekir.</string>
@@ -457,6 +472,7 @@
     <string name="cache_filter_favorites">Favoriler</string>
     <string name="cache_filter_distance">Mesafe</string>
     <string name="cache_filter_hidden">Saklanma Tarihi</string>
+    <string name="cache_filter_eventdate">Etkinlik Tarihi</string>
     <string name="cache_filter_logs_count">Kayıt Sayısı</string>
     <string name="cache_filter_last_found">Son Bulunma Tarihi</string>
     <string name="cache_filter_log_entry">Kayıt Gir</string>
@@ -514,6 +530,7 @@
     <string name="cache_filter_status_select_yes">Evet</string>
     <string name="cache_filter_status_select_no">Hayır</string>
     <string name="cache_filter_status_select_label_found">Buldum</string>
+    <string name="cache_filter_status_select_label_dnf">Bulamadım</string>
     <string name="cache_filter_status_select_label_owned">Sahip olunan</string>
     <string name="cache_filter_status_select_label_stored">Kaydedilmiş</string>
     <string name="cache_filter_status_select_label_favorite">Alınan Favoriler</string>
@@ -534,6 +551,55 @@
     <string name="cache_filter_nested_filter_modify">düzenle</string>
     <string name="cache_filter_log_entry_foundby">Bulan</string>
     <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>more than a year ago</item>
+        <item>bir yıl önce</item>
+        <item>30 gün önce</item>
+        <item>bir hafta önce</item>
+        <item>1 gün önce</item>
+        <item>bir günden daha yakın</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>&gt;1y</item>
+        <item>1y</item>
+        <item>30g</item>
+        <item>1h</item>
+        <item>1g</item>
+        <item>&lt;1g</item>
+    </string-array>
+    <string-array name="cache_filter_hidden_since_stored_values_label">
+        <item>1 yıldan fazla önce</item>
+        <item>bir yıl önce</item>
+        <item>180 gün önce</item>
+        <item>90 days ago</item>
+        <item>30 days ago</item>
+        <item>2 weeks ago</item>
+        <item>a week ago</item>
+        <item>3 days ago</item>
+        <item>less than 3 days ago</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label">
+        <item>past</item>
+        <item>bugün</item>
+        <item>yarın</item>
+        <item>2 days from now</item>
+        <item>3 days from now</item>
+        <item>1 week from now</item>
+        <item>2 weeks from now</item>
+        <item>1 month from now</item>
+        <item>all future</item>
+    </string-array>
+    <string-array name="cache_filter_event_date_stored_values_label_short">
+        <item>geçmiş</item>
+        <item>0g</item>
+        <item>1g</item>
+        <item>2g</item>
+        <item>3g</item>
+        <item>1h</item>
+        <item>2h</item>
+        <item>1ay</item>
+        <item>&gt;1m</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versiyon</string>
     <string name="about_changelog">Changelog</string>
@@ -630,7 +696,6 @@
     <string name="settings_authorize">c:geo\'yu yetkilendir</string>
     <string name="settings_reauthorize">Yetkilendirmeyi güncelle veya kaldır</string>
     <string name="settings_gc_description">c:geo\'yu geocaching.com\'da Geocache arama yapmak için yetkilendir.</string>
-    <string name="settings_ec_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için extremcaching.com ile yetkilendirin.</string>
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
     <string name="settings_lc_description">Adventure Lab cache\'leri de haritaya dahil et.\n\n(\"Geocaching.com\" ücretli üyeliği sahiplerine özeldir. \"Geocaching.com\" hizmeti c:geo\'da yetkilendirilmelidir.)\n\nBu ayarın değiştirilmesi yeniden başlatma gerektirir.</string>
     <string name="lc_default_description">Bu bir geocaching.com Adventure Lab Cache\'dir. Adventure\'lar sadece Groundspeak Adventure Lab uygulamasıyla oynanabilir. Adventure Lab uygulamasını açmak/kurmak için \'\'Detaylar\'\' sayfasındaki Adventure Lab ikonuna tıklayın.\nEğer haritanızda ve aramalarınızda Adventure Lab cache\'leri görmek istemiyorsanız \'\'Ayarlar\'\' üzerinden bu özelliği kapatabilirsiniz. Ayarlar-Servisler-Geocaching.com Adventure Lab</string>
@@ -716,6 +781,7 @@
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Büyük simgeler</string>
     <string name="init_dtMarkerOnCacheIcon">Geocache simgelerinde Z/A</string>
+    <string name="distance">Mesafe</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_prevent_cache_note_merge">Kişisel Cache Notu Üzerine Yaz</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
@@ -734,6 +800,12 @@
     <string name="init_quicklaunchitems">Hızlı başlatma düğmeleri</string>
     <string name="init_summary_quicklaunchitems">Ana ekranda hızlı başlatma düğmeleri olarak bir veya daha fazla öğe seçin</string>
     <!-- names for CacheListInfoItem -->
+    <string name="cacheListInfoItem_Geocode">Geokod</string>
+    <string name="cacheListInfoItem_Difficulty">Zorluk</string>
+    <string name="cacheListInfoItem_Terrain">Arazi</string>
+    <string name="cacheListInfoItem_MemberState">Premium durumu</string>
+    <string name="cacheListInfoItem_Size">Boyut</string>
+    <string name="cacheListInfoItem_EventDate">Etkinlik tarihi</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -1022,6 +1094,7 @@
     <string name="last_day_available">mevcut olan son gün</string>
     <string name="cache_offline_refresh">Yenile</string>
     <string name="cache_offline_drop">Listeden kaldır</string>
+    <string name="cache_offline_delete">Sil</string>
     <string name="cache_delete_userdefined_waypoints">Kullanıcı tanımlı ara noktaları kaldır</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Bu kutunun tüm kullanıcı tanımlı yol noktalarını kaldırmak istiyor musunuz?\\n\nYol noktaları hemen silinecek, geri alınamayacak.</string>
     <string name="cache_delete_userdefined_waypoints_note">Not: \"Nottan ara noktalar\" etkinleştirildi. Kişisel notunuzda c:geo tarafından tanınan koordinatlarınız varsa, ara noktalar onlar için otomatik olarak yeniden oluşturulacaktır. Kişisel not düzenleme iletişim kutusunda bunu devre dışı bırakabilirsiniz.</string>
@@ -1047,6 +1120,7 @@
     </plurals>
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
+    <string name="cache_inventory">Envanter</string>
     <string name="cache_log_image_default_title">Görsel</string>
     <string name="cache_personal_note">Kişisel not</string>
     <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
@@ -1175,6 +1249,7 @@
     <string name="cache_distance">Mesafe</string>
     <string name="cache_difficulty">Zorluk</string>
     <string name="cache_terrain">Arazi</string>
+    <string name="cache_difficulty_terrain">Z/A</string>
     <string name="cache_rating">Puanlama</string>
     <string name="cache_own_rating">Puanlamanız</string>
     <string name="cache_rating_of_new">%1$.1f/%2$d</string>
@@ -1300,6 +1375,7 @@
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <!-- Projection -->
+    <string name="projection_type_bearing_hint_distance">Mesafe</string>
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
     <string name="variables_deleteall">Tümünü Sil</string>
@@ -1479,7 +1555,6 @@
     <string name="helper_sendtocgeo_description">c:geo\'ya gönder <strong>bilgisayarınız</strong> için bir tarayıcı eklentisidir. Geocaching.com\'u açtığınızda, tarayıcı içindeki tuşa tıklayarak direkt olarak Geocache\'leri akıllı telefonlarınıza gönderebilirsiniz.</string>
     <string name="helper_locus_description">Telefonunuz veya tabletiniz için kullanıma uygun navigasyon uygulaması. Topo haritaları çevrim dışı görüntüleme, rotanızı takip etme, Geocache bulma, sesli rehber kullanma ve daha fazlasını gerçekleştirebilirsiniz.</string>
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
-    <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
@@ -1907,6 +1982,7 @@
     <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
+    <string name="map_export_individual_route">Özel rotayı dışa aktar</string>
     <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
@@ -1931,8 +2007,11 @@
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
     <!-- route/track commons -->
     <string name="routes_tracks_menu">Rotalar / Yollar</string>
+    <string name="routes_tracks_change_name">Adı değiştir</string>
     <string name="route">Rota</string>
     <string name="track">İz</string>
+    <string name="make_visible">Görünür yap</string>
+    <string name="hide">Sakla</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2061,6 +2140,13 @@
     <!-- Map Theme helper -->
     <string name="mapthemes_foldersync_finished_toast">%1$s klasörü senkronizasyonu %2$s sonrasında tamamlandı, %3$d/%4$s kadarı senkronizasyon gerektiriyor</string>
     <!-- Wherigo Player -->
+    <string name="wherigo_sound_mute">Sessiz</string>
+    <string name="wherigo_sound_unmute">Sesi aç</string>
+    <string name="wherigo_thingtype_location">Konumlar</string>
+    <string name="wherigo_thingtype_inventory">Envanter</string>
+    <string name="wherigo_thingtype_item">Gördünüz</string>
+    <string name="wherigo_thingtype_task">Görevler</string>
+    <string name="wherigo_author">Sahibi</string>
     <!-- default actions in dialogs -->
     <string name="previous">Önceki</string>
     <string name="skip">Geç</string>
@@ -2069,8 +2155,17 @@
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
     <string name="cancel">İptal</string>
+    <string name="use">Kullan</string>
+    <string name="redo">Yinele</string>
     <string name="ok" tools:ignore="ButtonCase">Tamam</string>
+    <string name="optimize">Optimize et</string>
+    <string name="expand">Genişlet</string>
+    <string name="close">Kapat</string>
+    <string name="delete">Sil</string>
+    <string name="play">Oynat</string>
     <!-- Multi-Selections -->
+    <string name="multiselect_selectall">Tümünü Seç</string>
+    <string name="multiselect_selectvisible">Görünenleri Seç</string>
     <!-- Smileys GC / OC -->
     <string name="smiley_smile">Gülen Yüz</string>
     <string name="smiley_cool">Tarz</string>
@@ -2085,6 +2180,13 @@
     <string name="smiley_approve">Onaylandı</string>
     <string name="smiley_question">Soru</string>
     <!-- message center notifications -->
+    <string name="mcpolling_title">Mesaj merkezi</string>
     <!-- GC image size conversion -->
+    <string-array name="settings_gc_imagesize_entries">
+        <item>Orijinal</item>
+        <item>640px</item>
+        <item>320px</item>
+        <item>120px</item>
+    </string-array>
     <!-- db inspection -->
 </resources>

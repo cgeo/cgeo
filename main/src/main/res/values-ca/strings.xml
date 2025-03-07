@@ -818,7 +818,6 @@
     <string name="settings_authorize">Autoritza al c:geo</string>
     <string name="settings_reauthorize">Actualitzeu o suprimiu l’autorització</string>
     <string name="settings_gc_description">Autoritza c:geo a geocaching.com per buscar catxés.</string>
-    <string name="settings_ec_description">Autoritza al c:geo a extremcaching.com per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
     <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
     <string name="settings_lc_found_state_title">Estat trobat manualment</string>
@@ -1226,6 +1225,8 @@
     <string name="contentstorage_err_list_failed">No s\'han pogut llistar els fitxers de la carpeta \'%s\'</string>
     <string name="contentstorage_err_folder_access_failed">No s\'ha pogut accedir a la carpeta \'%s\'</string>
     <string name="contentstorage_err_copy_failed">No s\'ha pogut copiar / moure el fitxer \'%1$s\' a \'%2$s\' (moure =%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">S\'ha produït un error en seleccionar un fitxer/carpeta</string>
+    <string name="contentstorage_err_activity_not_found_message">El vostre sistema no proporciona cap component per seleccionar fitxers/carpetes: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Usuari definit</string>
     <string name="persistablefolder_usertype_default">Per defecte</string>
@@ -1915,7 +1916,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo és una extensió del navegador <strong>per al vostre ordinador</strong>. Quan navegueu per geocaching.com podreu enviar catxés des del navegador directament al vostre telèfon amb un clic de botó.</string>
     <string name="helper_locus_description">Aplicació de navegació a l\'aire lliure per al vostre telèfon o tauleta. Podeu veure mapes topogràfics fora de línia, seguir una ruta, trobar geocatxés, utilitzar una guia de veu i molt més.</string>
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
-    <string name="helper_bluetoothgps_description">Permet utilitzar un receptor GPS extern per obtenir dades de localització més precises i estalviar bateria del dispositiu.</string>
     <string name="helper_gps_locker_description">GPS Locker manté el senyal GPS actiu quan canvieu d’aplicació i quan la pantalla del dispositiu està apagada.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>

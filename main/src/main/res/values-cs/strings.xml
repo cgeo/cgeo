@@ -829,7 +829,6 @@
     <string name="settings_authorize">Autorizovat c:geo</string>
     <string name="settings_reauthorize">Aktualizovat nebo odebrat ověření</string>
     <string name="settings_gc_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.com.</string>
-    <string name="settings_ec_description">Autorizovat c:geo pro hledání kešek a přístup/filtrování tvých nalezených kešek služby extremcaching.com.</string>
     <string name="settings_su_description">Autorizovat c:geo pro hledání kešek prostřednictvím geocaching.su.</string>
     <string name="settings_lc_description">Zahrňte na mapu Adventure Lab kešky.\n\n(K dispozici pouze prémiovým členům „Geocaching.com“. Vyžaduje aktivovanou službu „Geocaching.com“.)\n\nZměna tohoto nastavení vyžaduje restart aplikace.</string>
     <string name="settings_lc_found_state_title">Ručně zadaný stav nálezu</string>
@@ -1237,6 +1236,8 @@
     <string name="contentstorage_err_list_failed">Soubory ve složce \'%s\' nelze vypsat</string>
     <string name="contentstorage_err_folder_access_failed">Složka \'%s\' není přístupná</string>
     <string name="contentstorage_err_copy_failed">Soubor \'%1$s\' nelze zkopírovat/přesunout do \'%2$s\' (přesunout =%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Chyba při výběru souboru/složky</string>
+    <string name="contentstorage_err_activity_not_found_message">Váš systém neposkytuje komponentu pro výběr souborů/složek: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Uživatelem definované</string>
     <string name="persistablefolder_usertype_default">Výchozí</string>
@@ -1944,7 +1945,6 @@
     <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání kešky do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
     <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov kešek, hlasová navigace a mnohem více.</string>
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
-    <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
     <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy kešek v c:geo dlouhým podržením textu (a to bez připojení k Internetu).</string>

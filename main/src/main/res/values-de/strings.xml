@@ -817,7 +817,6 @@
     <string name="settings_authorize">c:geo autorisieren</string>
     <string name="settings_reauthorize">Autorisierung aktualisieren oder entfernen</string>
     <string name="settings_gc_description">Autorisiere c:geo auf Geocaching.com zuzugreifen, um Caches zu suchen.</string>
-    <string name="settings_ec_description">Autorisiere c:geo auf Extremcaching.com zuzugreifen, um Caches zu suchen und nach deinen Funden zu filtern.</string>
     <string name="settings_su_description">Autorisiere c:geo auf geocaching.su zuzugreifen, um Caches zu suchen.</string>
     <string name="settings_lc_description">Zeige Adventure Lab Caches auf der Karte.\n\n(Nur verfügbar für \"Geocaching.com\" Premium-Mitglieder. Erfordert einen aktivierten \"Geocaching.com\"-Dienst.)\n\nDas Ändern dieser Einstellung erfordert einen Neustart.</string>
     <string name="settings_lc_found_state_title">Manueller Gefunden-Status</string>
@@ -1225,6 +1224,8 @@
     <string name="contentstorage_err_list_failed">Dateien im Ordner \'%s\' konnten nicht angezeigt werden</string>
     <string name="contentstorage_err_folder_access_failed">Auf Ordner \'%s\' konnte nicht zugegriffen werden</string>
     <string name="contentstorage_err_copy_failed">Datei \'%1$s\' konnte nicht nach \'%2$s\' kopiert/verschoben werden (Verschieben=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fehler beim Auswählen der Datei/des Ordners</string>
+    <string name="contentstorage_err_activity_not_found_message">Dein System stellt keine Komponente bereit, um Dateien/Ordner auszuwählen: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Benutzerdefiniert</string>
     <string name="persistablefolder_usertype_default">Standard</string>
@@ -1914,7 +1915,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo ist eine Browsererweiterung <strong>für deinen PC</strong>. Beim Durchsuchen von Geocaching.com kannst du Caches mit einem Klick im Browser direkt an dein Smartphone übermitteln.</string>
     <string name="helper_locus_description">Outdoor Navigations-App für dein Handy oder Tablet. Verwende topografische Karten offline, zeichne Tracks von deinen Touren auf, suche Geocaches, benutze Sprachführung und vieles mehr.</string>
     <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
-    <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
     <string name="helper_gps_locker_description">GPS Locker hält dein GPS aktiv, wenn du zwischen Anwendungen wechselt oder den Bildschirm deines Gerätes ausschaltest.</string>
     <string name="helper_google_translate_title">Google Übersetzer</string>
     <string name="helper_google_translate_description">Wenn du Übersetzungspakete mit der Google Übersetzer-App herunterlädst, kannst du Cache-Beschreibungen in c:geo durch langes Drücken auf den Cache-Beschreibungstext übersetzen (ohne Internetverbindung) .</string>
@@ -2375,7 +2375,7 @@
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
     <string name="map_refresh_individual_route">Aktualisieren</string>
-    <string name="map_export_individual_route">Exportiere individuelle Route</string>
+    <string name="map_export_individual_route">Individuelle Route exportieren</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>

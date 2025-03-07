@@ -780,7 +780,6 @@
     <string name="settings_authorize">Leisti c:geo prisijungti</string>
     <string name="settings_reauthorize">Atnaujinti ar pašalinti prisijungimą</string>
     <string name="settings_gc_description">Leiskite c:geo prisijungti prie geocaching.com tam, kad galėtumėt ieškoti slėptuvių.</string>
-    <string name="settings_ec_description">Leiskite c:geo prisijungti prie extremcaching.com tam, kad galėtumėt ieškoti slėptuvių ir pasiekti/filtruoti rastas slėptuves.</string>
     <string name="settings_su_description">Leiskite c:geo prisijungti prie geocaching.su tam, kad galėtumėt ieškoti slėptuvių.</string>
     <string name="settings_lc_description">Į žemėlapį įtraukite Adventure Lab slėptuves.\n\n(Galima tik \"Geocaching.com\" Premium nariams. Reikia suaktyvinti \"Geocaching.com\" paslaugą.)\n\nNorint pakeisti šį nustatymą, reikia paleisti iš naujo.</string>
     <string name="lc_default_description">Tai geocaching.com Adventure Lab slėptuvė. Nuotykius galima žaisti tik naudojant Groundspeak Adventure Lab programą. Puslapyje \'\'Išsami informacija\'\' bakstelėkite Adventure Lab piktogramą, kad iš ten atidarytumėte/įdiegtumėte Adventure Lab programą, skirtą šiam nuotykiui.\nJei nenorite matyti Adventure Lab slėptuvių savo žemėlapyje ir ieškoti, galite išjungti naudodami \'\'nustatymai\'\' meniu - Paslaugos - Geocaching.com Adventure Lab</string>
@@ -1790,7 +1789,6 @@
     <string name="helper_sendtocgeo_description">Send to c:geo yra <strong>jūsų kompiuterio</strong> naršyklės priedas . Kai naršote geocaching.com, jūs galite siųsti slėptuves į savo išmanųjį telefoną tiesiog naršyklės viduje paspausdami mygtuką.</string>
     <string name="helper_locus_description">Lauko navigacijos programėlė jūsų telefonui ar planšetiniam kompiuteriui. Peržiūrėkite topo žemėlapius neprisijungę, stebėkite maršrutą, ieškokite geoslėptuves, naudokite balso vadovą ir dar daugiau.</string>
     <string name="helper_gpsstatus_description">Kartu su c:geo galite naudoti šioje programoje esantį radarą. Ji taip pat siūlo daug kitos su GPS susijusios informacijos.</string>
-    <string name="helper_bluetoothgps_description">Leidžia naudoti išorinį GPS imtuvą tikslesnėms koordinatėms gauti ir taupyti jūsų įrenginio bateriją.</string>
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paliete ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>

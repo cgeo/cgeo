@@ -801,7 +801,6 @@
     <string name="settings_authorize">Valtuuta c:geo</string>
     <string name="settings_reauthorize">Päivitä tai poista valtuutus</string>
     <string name="settings_gc_description">Anna c:geolle lupa geocaching.com-palvelun käyttöön etsiäksesi kätköjä.</string>
-    <string name="settings_ec_description">Anna c:geolle lupa extremcaching.com-palvelun käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
     <string name="settings_lc_found_state_title">Manuaalinen löydetty tila</string>
@@ -1802,7 +1801,6 @@
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
     <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, jäljitä reittisi, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
-    <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>

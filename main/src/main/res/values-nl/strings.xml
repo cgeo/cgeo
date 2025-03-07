@@ -817,7 +817,6 @@
     <string name="settings_authorize">Autoriseer c:geo</string>
     <string name="settings_reauthorize">Autorisatie bijwerken of verwijderen</string>
     <string name="settings_gc_description">Autoriseer c:geo met geocaching.com om caches te zoeken.</string>
-    <string name="settings_ec_description">Autoriseer c:geo met extremcaching.com om caches te zoeken en toegang te hebben tot jouw gevonden caches.</string>
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
     <string name="settings_lc_description">Adventure Lab caches op de kaart tonen.\n\n(Alleen beschikbaar voor \"Geocaching.com\" premium leden. Vereist een geactiveerde \"Geocaching.com\" service.)\n\nWijzigen van deze instelling vereist een herstart.</string>
     <string name="settings_lc_found_state_title">Handmatige gevonden status</string>
@@ -1225,6 +1224,8 @@
     <string name="contentstorage_err_list_failed">Bestanden in de map \'%s\' konden niet worden weergegeven</string>
     <string name="contentstorage_err_folder_access_failed">Map \'%s\' kon niet worden benaderd</string>
     <string name="contentstorage_err_copy_failed">Bestand \'%1$s\' kon niet worden gekopieerd/verplaatst naar \'%2$s\' (verplaats=%3$s)</string>
+    <string name="contentstorage_err_activity_not_found_title">Fout bij selecteren van bestand/map</string>
+    <string name="contentstorage_err_activity_not_found_message">Je systeem biedt geen component aan om bestanden/mappen te selecteren: %s</string>
     <!-- Persistable Folders and Uris -->
     <string name="persistablefolder_usertype_userdefined">Gebruiker gedefinieerd</string>
     <string name="persistablefolder_usertype_default">Standaard</string>
@@ -1914,7 +1915,6 @@
     <string name="helper_sendtocgeo_description">Verzenden naar c:geo is een browserextensie <strong>voor uw PC</strong>. Tijdens het browsen op geocaching.com, kunt u caches verzenden naar uw smartphone met een klik direct in de browser.</string>
     <string name="helper_locus_description">Outdoor navigatie app voor uw telefoon of Tablet. Topo kaarten offline bekijken, uw route vastleggen, geocaches zoeken, gebruik een stem gids en meer.</string>
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
-    <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
     <string name="helper_gps_locker_description">GPS Locker houdt het GPS signaal actief bij het schakelen tussen apps en wanneer het scherm van je apparaat is uitgeschakeld.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
@@ -2375,7 +2375,7 @@
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
     <string name="map_refresh_individual_route">Verversen</string>
-    <string name="map_export_individual_route">Exporteer individuele route</string>
+    <string name="map_export_individual_route">Individuele route exporteren</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
