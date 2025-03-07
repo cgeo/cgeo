@@ -9,11 +9,13 @@
 - New: Option to set circles with individual radius to waypoints ("geofence" context menu option)
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Cache details
 - New: Option to share cache with user data (coordinates, personal note)
 - Fix: Speech service interrupted on screen rotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### General
 - New: Redesigned search page
