@@ -9,11 +9,13 @@
 - Ny: Alternativ för att ställa in cirklar med individuell radie till vägpunkter ("geofence" alternativ i sammanhangsmeny)
 - Fix: Map view not updated when removing cache from currently shown list
 - Fix: Number of cache in list chooser not updated on chaning list contents
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Cachedetaljer
 - Nyhet: Alternativ för att dela cache med användardata (koordinater, personlig anteckning)
 - Fix: Talservice avbryts vid skärmrotation
 - Fix: Cache details: Lists for cache not updated after tapping on list name an removing that cache from that list
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Allmänt
 - New: Redesigned search page
