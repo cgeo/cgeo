@@ -9,11 +9,13 @@
 - Novo: Opção para definir círculos com raio individual para pontos adicionais (opção de menu "perímetro de resposta")
 - Correcção: Visualização do mapa não era actualizada ao remover a cache da lista actualmente mostrada
 - Correcção: Número de caches no selector de lista não era actualizado ao alterar o conteúdo da lista
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Detalhes da cache
 - Novo: Opção para partilhar geocache com os dados do utilizador (coordenadas, nota pessoal)
 - Correcção: Serviço de fala interrompido na rotação do ecrã
 - Correcção: Detalhes da cache: Listas para a cache não eram actualizadas depois de tocar no nome da lista e remover essa cache dessa lista
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Geral
 - Novo: Página de pesquisa redesenhada
