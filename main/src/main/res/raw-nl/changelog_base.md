@@ -9,11 +9,13 @@
 - Nieuw: Optie om cirkels met individuele straal in te stellen op waypoints ("geofence" contextoptie)
 - Oplossing: Kaartweergave niet bijgewerkt bij het verwijderen van cache van de huidig getoonde lijst
 - Oplossing: Aantal caches in lijst kiezer niet bijgewerkt bij wijziging lijst inhoud
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Cache details
 - Nieuw: Optie om de cache te delen met gebruikersgegevens (coördinaten, persoonlijke notitie)
 - Oplossing: Spraakservice onderbroken bij scherm rotatie
 - Oplossing: Cache details: Lijsten voor cache niet bijgewerkt na het tikken op de lijstnaam en verwijderen uit die lijst
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Algemeen
 - Nieuw: opnieuw ontworpen zoekpagina
