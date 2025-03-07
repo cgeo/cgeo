@@ -9,11 +9,13 @@
 - Neu: Option zum Anzeigen von Kreisen mit individuellem Radius für Wegpunkte ("Geo-Begrenzung"-Kontextmenü-Option)
 - Korrektur: Kartenansicht nicht aktualisiert beim Entfernen des Caches von der aktuell angezeigten Liste
 - Korrektur: Anzahl des Caches in der Listenauswahl wird beim Ändern der Listeninhalte nicht aktualisiert
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Cache-Details
 - Neu: Option zum Teilen des Caches mit Benutzerdaten (Koordinaten, persönliche Notiz)
 - Korrektur: Sprachdienst wurde bei der Bildschirmrotation unterbrochen
 - Korrektur: Cache-Details: Listen für den Cache nicht aktualisiert, nachdem auf den Listennamen getippt und der Cache von dieser Liste entfernt wurde
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Allgemein
 - Neu: Neu gestaltete Suchseite
