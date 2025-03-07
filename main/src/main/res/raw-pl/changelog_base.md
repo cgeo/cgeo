@@ -9,11 +9,13 @@
 - Nowość: Opcja ustawiania okręgów z indywidualnym promieniem do punktów orientacyjnych („Geofence” w menu kontekstowym)
 - Naprawiono: Widok mapy nie zaktualizował się podczas usuwania skrytki z aktualnie wyświetlanej listy
 - Naprawiono: Liczba skrytek w wyborze listy nie była aktualizowana po zmianie zawartości listy
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Szczegóły skrytki
 - Nowość: Opcja udostępniania skrytki z danymi użytkownika (współrzędne, notatka osobista)
 - Naprawiono: Usługa mowy była przerywana po obrócaniu ekranu
 - Naprawiono: Szczegóły skrytki: Listy skrytek nie aktualizowały się po dotknięciu na nazwę listy przy usuwaniu tej skrytki z listy
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### Ogólne
 - Nowość: Przeprojektowana strona wyszukiwania
