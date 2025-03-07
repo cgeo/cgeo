@@ -9,11 +9,13 @@
 - Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geotanca")
 - Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
 - Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
+- New: Follow my location in elevation chart (UnifiedMap)
 
 ### Detalls del catxé
 - Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
 - Correcció: el servei de veu s'ha interromput en la rotació de la pantalla
 - Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
+- Fix: User note gets lost on refreshing a lab adventure
 
 ### General
 - Nou: pàgina de cerca redissenyada
