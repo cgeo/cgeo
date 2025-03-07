@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
@@ -344,6 +345,9 @@ final class ALApi {
             if (!Settings.isALCfoundStateManual()) {
                 cache.setFound(response.get("IsComplete").asBoolean());
             }
+            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
+            cache.setPersonalNote(personalNote, false);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
@@ -387,6 +391,9 @@ final class ALApi {
                 cache.setAlcMode(0);
             }
             Log.d("_AL mode from JSON: IsLinear: " + cache.isLinearAlc());
+            final Geocache oldCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            final String personalNote = (oldCache != null && oldCache.getPersonalNote() != null) ? oldCache.getPersonalNote() : "";
+            cache.setPersonalNote(personalNote, false);
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
