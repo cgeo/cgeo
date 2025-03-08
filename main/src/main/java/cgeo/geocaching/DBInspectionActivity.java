@@ -19,6 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.AppCompatSpinner;
 
+import java.util.Arrays;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import net.movingbits.dbinspection.DBInspectionBaseActivity;
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,9 +61,18 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
         binding.tableButtonBack.setOnLongClickListener(v -> pagination(offset - 10 * itemsPerPage));
         final View.OnClickListener editSearch = v -> Dialogs.input(DBInspectionActivity.this, getString(R.string.dbi_search_title), getSearchTerm(), "", n -> {
             final String newSearchTerm = n.trim();
-            if (!StringUtils.equals(newSearchTerm, getSearchTerm())) {
-                setSearchTerm(newSearchTerm);
-                updateTableData(null);
+            final boolean[] currentSelection = getSearchColumnSelection();
+            if (StringUtils.isBlank(newSearchTerm)) {
+                // skip column selection for empty search term
+                onSearchConfirmed(newSearchTerm, currentSelection);
+            } else {
+                final CharSequence[] items = getAvailableSearchColumns();
+                final boolean[] newSelection = Arrays.copyOf(currentSelection, items.length);
+                new MaterialAlertDialogBuilder(DBInspectionActivity.this)
+                        .setTitle(R.string.dbi_search_columnSelection)
+                        .setMultiChoiceItems(items, currentSelection, (dialog1, which, isChecked) -> newSelection[which] = isChecked)
+                        .setPositiveButton(android.R.string.ok, (d2, w2) -> onSearchConfirmed(newSearchTerm, newSelection))
+                        .show();
             }
         });
         binding.tableButtonSearch.setEnabled(false);
@@ -69,6 +81,14 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
         binding.tableButtonForward.setEnabled(false);
         binding.tableButtonForward.setOnClickListener(v -> pagination(offset + itemsPerPage));
         binding.tableButtonForward.setOnLongClickListener(v -> pagination(offset + 10 * itemsPerPage));
+    }
+
+    private void onSearchConfirmed(final String newSearchTerm, final boolean[] newSearchColumnSelection) {
+        if (!StringUtils.equals(newSearchTerm, getSearchTerm()) || (!Arrays.equals(getSearchColumnSelection(), newSearchColumnSelection))) {
+            setSearchTerm(newSearchTerm, newSearchColumnSelection);
+            updateTableData(null);
+        }
+        binding.searchTerm.setText(newSearchTerm);
     }
 
     private boolean pagination(final int newOffset) {
@@ -97,6 +117,7 @@ public class DBInspectionActivity extends DBInspectionBaseActivity implements Ad
         binding.tableButtonBack.setEnabled(offset > 0);
         binding.tableButtonSearch.setEnabled(true);
         binding.tableButtonForward.setEnabled(moreDataAvailable);
+        binding.searchTerm.setText(getSearchTerm());
         return moreDataAvailable;
     }
 
