@@ -18,6 +18,7 @@
 package cgeo.geocaching.wherigo;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.LocationDataProvider;
@@ -172,7 +173,7 @@ public class WherigoLocationProvider extends GeoDirHandler implements LocationSe
     }
 
     public String toUserDisplayableString() {
-        return getLocation() + " · " + getAltitude() + " m" + (hasFixedLocation() ? " (fixed)" : "");
+        return getLocation() + " · " + Units.formatElevation((float) getAltitude()) + (hasFixedLocation() ? " (fixed)" : "");
     }
 
     @Override
