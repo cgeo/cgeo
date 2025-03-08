@@ -341,7 +341,7 @@ dependencies {
 
     // DB inspection
     implementation 'com.github.moving-bits:datatables:v0.1.0'
-    implementation 'com.github.moving-bits:dbinspection:v0.1.0'
+    implementation 'com.github.moving-bits:dbinspection:v0.1.1'
 
     // Jackson XML processing
     // Jackson 2.14++ needs minSdk 26

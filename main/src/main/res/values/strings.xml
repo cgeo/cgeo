@@ -3101,6 +3101,7 @@
     <string name="dbi_edit_error">Error while updating field</string>
     <string name="dbi_edit_error_pkfield">"%s" is part of primary key, cannot be edited"</string>
     <string name="dbi_search_title">Search for</string>
+    <string name="dbi_search_columnSelection">Restrict to</string>
 
 
 </resources>
