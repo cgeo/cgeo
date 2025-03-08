@@ -1,52 +1,29 @@
-Nou: Wherigo player integrat (beta): vegeu l'entrada del menú a la pantalla d'inici.<br> (És possible que vulgueu [configurar un element d'inici ràpid](cgeo-setting://quicklaunchitems_sorted) o [personalitzar la navegació inferior](cgeo-setting://custombnitem) per a un accés més fàcil, primer heu d'activar la configuració ampliada.)
-
 ### Mapa
-- Nou: emmagatzema el tema del mapa per proveïdor de mosaic (UnifiedMap)
-- Nou: ressalteu el catxé/punt d'interés seleccionat (UnifiedMap)
-- Nou: afegiu un separador entre fonts de mapes fora de línia i en línia
-- Nou: Admet Mapsforge com a alternativa a VTM a UnifiedMap, vegeu [Configuració => Fonts del mapa => Mapa unificat](cgeo-setting://useMapsforgeInUnifiedMap)
-- Canvi: "Mostra el gràfic d'elevació" s'ha mogut al menú de toc llarg (UnifiedMap)
-- Canvi: utilitzeu el nou algorisme d'ombrejat per als mapes fora de línia de Mapsforge
-- Nou: suport d'ombrejat per als mapes fora de línia UnifiedMap Mapsforge
-- Nou: suport d'ombrejat per als mapes UnifiedMap VTM (requereix connexió en línia)
-- Solució: la cerca d'adreces no té en compte el mode en directe (UnifiedMap)
-- Canvi: "seguiu la meva ubicació" s'ha mogut al mapa, donant més espai al botó "mode en directe"
-- Canvi: feu que el pin de premsa llarga sigui més semblant a c:geo
-- Canvi: les funcions de gestió de dades fora de línia (descàrrega de mapes, comproveu si no hi ha dades d'itineraris o d'ombra) s'han mogut al menú de selecció de mapes => "Gestiona les dades fora de línia"
-- Correcció: el mapa no actualitza el catxé modificat
+- Nou: admet el tema Elevate Winter al descarregador de mapes
+- Nou: ombrejat adaptatiu, mode d'alta qualitat opcional (UnifiedMap Mapsforge)
+- Canviar: manteniu la finestra gràfica actual en el mapa d'una llista, si tots els catxés encaixen a la finestra gràfica actual
+- Novetat: diàleg de configuració ràpida de rutes/tracks redissenyades
+- Nou: toqueu llargament la icona de selecció de mapa per seleccionar el proveïdor anterior (UnifiedMap)
+- Nou: permet configurar el nom de visualització per als mapes fora de línia al fitxer complementari (UnifiedMap)
+- Novetat: Mostra les tanques geogràfiques per a les etapes de laboratori (UnifiedMap): activeu "Cercles" a la configuració ràpida del mapa per mostrar-los
+- Novetat: opció per establir cercles amb radi individual als punts de referència (opció del menú contextual "geotanca")
+- Correcció: la vista del mapa no s'actualitza quan s'elimina el catxé de la llista mostrada actualment
+- Correcció: el nombre de catxé al selector de llista no s'ha actualitzat en canviar el contingut de la llista
+- Nou: segueix la meva ubicació al gràfic d'elevació (UnifiedMap)
 
 ### Detalls del catxé
-- Nou: les variables encara no existents utilitzades a la projecció es creen a la llista de variables
-- Nou: permeten nombres enters grans a les fórmules
-- Nou: Admet més constel·lacions per a variables en fórmules
-- Correcció: diverses imatges a la nota personal no s'afegeixen a la pestanya d'imatges
-- Correcció: maneig de projeccions en waypoints i notes personals
-- Nou: un toc llarg a la data al registre recupera la data del registre anterior
-- Solució: el restabliment del catxé a les coordenades originals no elimina la marca "coordenades canviades"
-- Nou: confirmeu la sobreescritura del registre al registre ràpid fora de línia
-- Nou: actualitzeu l'estat del catxé en enviar un registre
-- Nou: visualització de la font HTML amb colors dels detalls del catxé
-- Correcció: suma de comprovació (0) que retorna un valor incorrecte
-- Correcció: l'edició de registres elimina l'estat d'"amics"
+- Nou: opció per compartir els catxés amb les dades de l'usuari (coordenades, nota personal)
+- Correcció: el servei de veu s'ha interromput en la rotació de la pantalla
+- Correcció: detalls del catxé: les llistes de catxés no s'actualitzen després de tocar el nom de la llista i eliminar aquest catxé d'aquesta llista
+- Correcció: la nota de l'usuari es perd en actualitzar una lab adventure
 
 ### General
-- Canvi: utilitzeu l'elevació sobre el nivell mitjà del mar (si està disponible, només Android 14+)
-- Nou: permet múltiples nivells de jerarquia a les llistes de catxés
-- Novetat: icones dedicades per als tipus de trobada blockparty i HQ de geocaching.com
-- Nou: defineix la mida d'imatge preferida per a les imatges carregades des del catxé i els elements de seguiment de geocaching.com
-- Correcció: "Obre al navegador" no funciona per als registres rastrejables
-- Novetat: opció per gestionar els fitxers descarregats (mapes, temes, dades d'itineraris i ombrejats)
-- Nou: opció per eliminar un catxé de totes les llistes (= marcar-la com a suprimir)
-- Correcció: restableix les coordenades no detectades per c:geo per a els catxés no desats
-- Nou: permet esborrar el filtre si no s'emmagatzema cap filtre amb nom
-- Correcció: la confirmació de la "Llista buida" apareix quan s'inicia una descàrrega de pocket query a la llista acabada de crear
-- Canvi: Als catxés de propietat amb registres fora de línia mostren el marcador de registre fora de línia
-- Nou: format de data configurable (p. ex.: registres de catxé), vegeu [Configuració => Aparença => Format de data](cgeo-settings://short_date_format)
-- Nou: apunta la informació del connector a la pantalla d'inici a la pantalla de preferències específiques del connector
-- Nou: emojis addicionals per a les icones del catxé
-- Canvi: el filtre de tipus de catxés "Especials" inclou trobades de tipus mega, giga, community celebration, HQ celebration, block party i maze
-- Canvi: el filtre de tipus de catxé "Altres" inclou GCHQ, APE i tipus desconeguts
-- Correcció: la longitud de l'historial i la configuració de proximitat comparteixen els valors del control lliscant
-- Correcció: pàgina de registre rastrejable que mostra camps d'entrada de temps/coordenades per als rastrejables que no ho admeten
-- Solució: alguns bloquejos
-- Correcció: alguns controls lliscants de la configuració tenen problemes amb els valors no inicialitzats
+- Nou: pàgina de cerca redissenyada
+- Nou: filtre de recompte d'inventari
+- Nou: suport per a coordenades en format DD, DDDDDDD
+- Nou: mostra el nom del darrer filtre utilitzat al quadre de diàleg del filtre
+- Nou: Admet l'obertura de fitxers Wherigo locals
+- Correcció: la importació del fitxer de mapa local obté un nom de mapa aleatori
+- Solució: problemes de color amb les icones del menú en mode de llum
+- Correcció: la configuració del límit de distància propera no funciona correctament per a valors petits
+- New: Coordinate calculator: Function to replace "x" with multiplication symbol
