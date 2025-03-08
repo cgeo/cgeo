@@ -26,3 +26,4 @@
 - Fix: Importing local map file gets random map name
 - Fix: Color issues with menu icons in light mode
 - Fix: Nearby distance limit setting not working properly for small values
+- New: Coordinate calculator: Function to replace "x" with multiplication symbol
