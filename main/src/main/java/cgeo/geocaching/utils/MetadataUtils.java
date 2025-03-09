@@ -55,7 +55,7 @@ public final class MetadataUtils {
         }
         try {
             return ImageMetadataReader.readMetadata(imageStream);
-        } catch (IOException | ImageProcessingException ie) {
+        } catch (IOException | ImageProcessingException | RuntimeException ie) {
             Log.w("[MetadataUtils] Problem reading metadata from " + description, ie);
         } finally {
             if (closeAfter) {
