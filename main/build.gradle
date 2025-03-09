@@ -527,6 +527,10 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.28'
 
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    // Offline translation - language detection and translator
+    implementation 'com.google.mlkit:language-id:17.0.6'
+    implementation 'com.google.mlkit:translate:17.0.3'
 }
 
 // define objects for files/folders outside tasks

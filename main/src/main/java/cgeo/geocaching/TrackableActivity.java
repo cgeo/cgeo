@@ -26,6 +26,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.OfflineTranslateUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.html.HtmlUtils;
@@ -413,6 +414,7 @@ public class TrackableActivity extends TabbedViewPagerActivity {
     }
 
     public static class DetailsViewCreator extends TabbedViewPagerFragment<TrackableDetailsViewBinding> {
+        private boolean descriptionTranslated = false;
 
         @Override
         public TrackableDetailsViewBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -599,6 +601,41 @@ public class TrackableActivity extends TabbedViewPagerActivity {
                 binding.image.removeAllViews();
                 binding.image.addView(trackableImage);
             }
+
+            OfflineTranslateUtils.initializeListingTranslatorInTabbedViewPagerActivity((TrackableActivity) getActivity(), binding.descriptionTranslate, binding.goal.getText().toString() + binding.details.getText().toString(), this::translateListing);
+        }
+
+        private void translateListing() {
+            final TrackableActivity cda = (TrackableActivity) getActivity();
+
+            if (cda.translationStatus.isTranslated()) {
+                cda.translationStatus.setNotTranslated();
+                setContent();
+                return;
+            }
+
+            final OfflineTranslateUtils.Language sourceLng = cda.translationStatus.getSourceLanguage();
+            cda.translationStatus.startTranslation(2, cda, cda.findViewById(R.id.description_translate_button));
+
+            OfflineTranslateUtils.getTranslator(cda, sourceLng,
+                    unsupportedLng -> {
+                        cda.translationStatus.abortTranslation();
+                        binding.descriptionTranslateNote.setText(getResources().getString(R.string.translator_language_unsupported, sourceLng));
+                    }, modelDownloading -> {
+                        binding.descriptionTranslateNote.setText(R.string.translator_model_download_notification);
+                    }, translator -> {
+                        if (null == translator) {
+                            binding.descriptionTranslateNote.setText(R.string.translator_translation_initerror);
+                            return;
+                        }
+
+                        for (TextView tv : new TextView[] { binding.details, binding.goal }) {
+                            OfflineTranslateUtils.translateParagraph(translator, cda.translationStatus, tv.getText().toString(), tv::setText, error -> {
+                                binding.descriptionTranslateNote.setText(getResources().getText(R.string.translator_translation_error, error.getMessage()));
+                                binding.descriptionTranslateButton.setEnabled(false);
+                            });
+                        }
+                    });
         }
 
     }
