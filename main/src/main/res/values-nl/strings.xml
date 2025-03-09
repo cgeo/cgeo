@@ -1716,6 +1716,8 @@
     <string name="calccoord_guided_value">Waarde</string>
     <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
     <string name="calccoord_plain_tools_title">Eenvoudig gereedschap</string>
+    <string name="calccoord_remove_spaces">Verwijder spaties</string>
+    <string name="calccoord_replace_x_with_multiplication_symbol">Vervang \'x\' door \'*\'</string>
     <string name="calccoord_paste_from_clipboard">Plakken vanaf klembord</string>
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
@@ -2745,4 +2747,5 @@
     <string name="dbi_edit_error">Fout bij het bijwerken van veld</string>
     <string name="dbi_edit_error_pkfield">"%s\" is onderdeel van de primaire sleutel, kan niet worden bewerkt"</string>
     <string name="dbi_search_title">Zoek naar</string>
+    <string name="dbi_search_columnSelection">Beperken tot</string>
 </resources>
